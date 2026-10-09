@@ -9,6 +9,7 @@ For the October 9 question “did we miss these lessons, or are they integrated?
 | [Main report](report.md) | Findings, priorities, tradeoffs, additions, pruning and proof requirements |
 | [Learning coverage check](learning-coverage-check.md) | Captured versus encoded versus verified; gaps, source examples and how to write skills |
 | [Concept trees](concept-trees.md) | Pond-rooted and unified concept → grouping → entry trees, plus separately counted supplements |
+| [Role and acceptance agreement](role-and-acceptance-agreement.md) | Living record of the settled Lead/Sidekick split, handback checks and remaining setup questions |
 | [Individual local assessments](local-skill-analysis.md) | All 31 active local skill packages |
 | [Trio correlations and gaps](trio-correlation.md) | All 136 pinned pstack, Matt Pocock and Addy Osmani entries |
 | [Correlation matrix](correlation-matrix.csv) | The same upstream-to-local mapping as CSV |

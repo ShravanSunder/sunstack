@@ -2,6 +2,8 @@
 
 **The owner's clarified model:** the Lead plans, verifies, and accepts; the implementation Sidekick writes the implementation and proves it. The concern is a Lead or engineer becoming a relay that advances work without checking it. No recommendation here asks the Lead to take over product implementation.
 
+The [working agreement](role-and-acceptance-agreement.md) records the October 9 discussion as setup proceeds, separating settled responsibilities from the four-tier reference and remaining proof/design questions. This investigation retains its original historical evidence scope.
+
 ## What Lauren's example actually establishes
 
 The primary source is [Peter Yang's interview with Peng Zheng and Lauren Tan](https://www.youtube.com/watch?v=xZ5TEaleUdg). Public YouTube auto-captions were obtained without login or cookies, and the relevant windows were read. Auto-caption wording can contain recognition errors. The full source/access ledger is [here](evidence-access.md#local-evidence-004).
