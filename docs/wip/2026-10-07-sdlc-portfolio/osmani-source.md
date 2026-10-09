@@ -4,9 +4,11 @@
 
 The primary source is `addyosmani/agent-skills` at pinned commit [`2686b620fc1fed2e8f60c704839c766b8594c6b6`](https://github.com/addyosmani/agent-skills/tree/2686b620fc1fed2e8f60c704839c766b8594c6b6). The meta-repo index says this pin was last reviewed on 2026-09-26. The local Addy checkout is detached and clean at that exact SHA. `git ls-remote origin HEAD` observed current remote HEAD `1401c8b8030e023baeebb31781a6653fe8e93026`.
 
-I read the meta-repo `AGENTS.md` and `docs/repo-index/addyosmani-agent-skills.md`, all 25 primary `skills/*/SKILL.md` files in full (7,494 lines), all named command definitions relevant to the claims, and the four `/ship` personas' names via `agents/`. The current local comparison reads the nine ai-tools skill homes named in the assignment; their exact current source anchors appear below. The ai-tools checkout is at `10ebacfb4ce72893196c87d51bc2271f72fe8922`, on `main` behind one commit, with two pre-existing untracked `docs/wip/skills-authoring/` directories. No files there were changed.
+I read the meta-repo `AGENTS.md` and `docs/repo-index/addyosmani-agent-skills.md`, all 25 primary `skills/*/SKILL.md` files in full (7,494 lines), all named command definitions relevant to the claims, and the four agent-definition names via `agents/`. Only three of those agents participate in `/ship`; web performance is separate. The current local comparison reads the nine ai-tools skill homes named in the assignment; their exact current source anchors appear below. The AI Tools source snapshot is `10ebacfb4ce72893196c87d51bc2271f72fe8922`. No local skill source was changed.
 
-For freshness, I downloaded only the selected current-head raw files to `/tmp` and compared them with the pin. These eight files were byte-for-byte equal (`diff -u` exit 0): `.claude/commands/review.md`, `.claude/commands/ship.md`, `commands/review.toml`, `commands/ship.toml`, and the `code-simplification`, `test-driven-development`, `doubt-driven-development`, and `constraint-driven-development` skill files. The checkout was not fetched or updated. The full 25-skill inventory and `/build` and `/constraints` command files remain pinned-checkout evidence; their current-head forms were not fetched.
+October 9 follow-up: [the learning coverage check](learning-coverage-check.md) expands constraint/floor-guard reference depth, changed-code simplification scope, targeted persona contracts, and the six skills in the separate `web-quality-skills` repository. Those supplements were not part of the original 25-skill census, and they do not expand the 136-entry denominator.
+
+For freshness, I downloaded only the selected current-head raw files to local scratch and compared them with the pin. These eight files were byte-for-byte equal (`diff -u` exit 0): `.claude/commands/review.md`, `.claude/commands/ship.md`, `commands/review.toml`, `commands/ship.toml`, and the `code-simplification`, `test-driven-development`, `doubt-driven-development`, and `constraint-driven-development` skill files. The checkout was not fetched or updated. The full 25-skill inventory and `/build` and `/constraints` command files remain pinned-checkout evidence; their current-head forms were not fetched.
 
 Source classes used, in order: pinned local source and meta-repo index; current public remote identity via `git ls-remote`; current public raw GitHub files for the selected freshness check. The Lead supplied DeepWiki pointers; I did not make a separate DeepWiki call. I searched the memory registry for `agent-skills`, `osmani`, and the summary claim phrases; there were no hits. Web synthesis and other admired-source repositories were not needed to answer this Addy-only comparison. No tests were run because this assignment is source research only.
 
@@ -25,7 +27,7 @@ Source classes used, in order: pinned local source and meta-repo index; current 
 
 ## Current local coverage of the named nine skills
 
-“Covered” means the main mechanism has a direct current local owner. “Partial” means related mechanics exist under a different scope or contract. “No clear owner” means the inspected local homes do not own that capability. The row-level inventory and exact related candidates are machine-readable in [`osmani-correlation.json`](/Users/shravansunder/dev/ai-tools/tmp/practices-research/2026-10-07-sdlc-portfolio/osmani-correlation.json).
+“Covered” means the main mechanism has a direct current local owner. “Partial” means related mechanics exist under a different scope or contract. “No clear owner” means the inspected local homes do not own that capability. The row-level inventory and exact related candidates are machine-readable in [`osmani-correlation.json`](evidence-access.md#local-evidence-012).
 
 | Current local skill | Current evidence and closest Addy source | Coverage / distinction |
 |---|---|---|
@@ -106,4 +108,4 @@ Preserve the lifecycle taxonomy and the selected interview, idea-refinement, spe
 
 ## Return
 
-Research complete for the assigned Addy comparison. Exact row-level current-local candidates and dispositions are in [`osmani-correlation.json`](/Users/shravansunder/dev/ai-tools/tmp/practices-research/2026-10-07-sdlc-portfolio/osmani-correlation.json); parent verification and synthesis remain with the Lead.
+Research complete for the assigned Addy comparison. Exact row-level current-local candidates and dispositions are in [`osmani-correlation.json`](evidence-access.md#local-evidence-012); parent verification and synthesis remain with the Lead.

@@ -650,7 +650,7 @@ Corpus size: 1,578 core words; 1,376 local reference words; 17 active scenario f
 Decisive references inspected:
 
 - [goal-contract-and-routing.md](https://github.com/ShravanSunder/ai-tools/blob/10ebacfb4ce72893196c87d51bc2271f72fe8922/plugins/shravan-dev-workflow/skills/orchestrator-implementation-goal/references/goal-contract-and-routing.md#L1)
-- [local-design-quality.md](local-design-quality.md:1)
+- [local-design-quality.md](local-design-quality.md#L1)
 
 ## scaffold-project
 

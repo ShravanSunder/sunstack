@@ -8,16 +8,18 @@ Non-goals: no design or implementation decision, no skill edits, no source check
 
 ## Source identity and freshness
 
-- Matt source checkout: /Users/shravansunder/code/opensource/agent-skills/ai-dev-skills/mattpocock-skills
+- Matt source checkout: mattpocock/skills
 - Checkout HEAD: c55ee46073ed923f86ce59a5eb3b6d895095d1b7, detached HEAD, clean working tree. Commit date: 2026-09-18.
-- Meta-repo: /Users/shravansunder/code/opensource/agent-skills/ai-dev-skills, HEAD a7f89f76797f7dbe5f91423e192e154ebad414fc. The meta-repo has pre-existing staged and unstaged work. Its staged docs/repo-index/mattpocock-skills.md points to c55ee46 as of 2026-09-26, matching the inspected source checkout; the committed index at the meta-repo HEAD still points to 6654f6b as of 2026-08-30. I did not alter either.
-- Current local consumer checkout: /Users/shravansunder/dev/ai-tools, HEAD 10ebacfb4ce72893196c87d51bc2271f72fe8922, main behind origin by one commit, with two pre-existing untracked docs/wip/skills-authoring directories. No named local skill file appeared modified in the status output.
+- The inspected source checkout supplies the pin. Meta-repo index metadata was used for discovery and was not modified.
+- Local consumer source snapshot: AI Tools `10ebacfb4ce72893196c87d51bc2271f72fe8922`. No named local skill source was changed.
 - Freshness check: git ls-remote https://github.com/mattpocock/skills.git HEAD returned f3fc5632f401156837ee3872f14fe33ccf1024ea. I then read targeted public raw files at that exact SHA and the v1.3.0 tag commit; no checkout update or fetch occurred.
 - Pinned package version is 1.2.3 at package.json:3. The public pinned source URL pattern is https://github.com/mattpocock/skills/blob/c55ee46073ed923f86ce59a5eb3b6d895095d1b7/.
 - Matt AGENTS.md:1-9 says in-progress is beta, public for feedback, and not shipped in the plugin. The three focal skills implement-spec, pr, and retro are all under skills/in-progress/. Their presence proves source content at this pin, not that these flows shipped as stable plugin behavior.
 - The pinned pr/SKILL.md:4-9 credits the PR body material to Dex Horthy / Humanlayer’s show-me skill. It is present in Matt’s checkout, but that file attributes the origin to Humanlayer.
 
 ## Source-class coverage
+
+October 9 follow-up: the original inspection receipt below covers the named main files and extra files, not every supporting reference recursively. The follow-up read `tdd/tests.md` and `tdd/mocking.md` and expands testing/mocking depth and environment-versus-cache guidance in the [learning coverage check](learning-coverage-check.md#2-matts-testing-references-needed-their-own-read). Those two TDD files are references, not additional skills. The pinned inventory remains 38.
 
 - Primary repository source: read all 38 SKILL.md files under skills/ at the pinned HEAD; each is marked full in the inventory below. The eight DeepWiki-pointer skills named in the assignment were read whole. Also read Matt AGENTS.md, .agents/invocation.md, skills/productivity/writing-for-agents/SKILL-MECHANICS.md, and the domain-modeling format file.
 - Local source: read the current named planning, orchestration, implementation, PR, discussion, research, and skill-audit owners and the narrow plan/proof/PR references used below. Read the provided current local inventory at tmp/practices-research/2026-10-07-sdlc-portfolio/inventory.json: it lists 31 active skills. Local-quality workers own the broader local assessment.

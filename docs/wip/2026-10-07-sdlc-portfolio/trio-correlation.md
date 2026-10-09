@@ -1073,6 +1073,8 @@ Configures an issue tracker, triage labels, and CONTEXT/ADR layout after reposit
 
 Defines red-green testing through public interfaces, with pre-agreed seams, vertical slices, and test-quality rules.
 
+**October 9 supporting-source read:** `tdd/tests.md` and `tdd/mocking.md` add public-interface assertions, independent expected values, and boundary-mocking/interface guidance. They are references within this skill, not two extra skill entries. The [coverage addendum](learning-coverage-check.md#2-matts-testing-references-needed-their-own-read) records the original reference-depth limit and the newly inspected detail.
+
 **Related local skills:** `implement-plan`.
 
 **Exact difference or gap:** Local implementation plan and repository testing rules govern red/green proof; no active standalone TDD skill owns this exact source procedure.
