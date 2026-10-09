@@ -32,6 +32,10 @@ Not a queue. Steal sheets and talk notes until someone promotes or deletes them.
 - `2026-09-26-poteto-trust-talk-and-admired-skills.md`: Lauren's trust talk + Matt's three-point cut.
 - `2026-09-26-admired-talks-like-poteto.md`: what / why / real-skill steal sheet.
 
+## Audit reports
+
+- [2026-10-07 SDLC skill portfolio](2026-10-07-sdlc-portfolio/README.md): 31 local skill assessments, 136 trio correlations, hierarchy findings and source comparisons. Historical audit; recommendations are not implementation authority.
+
 ## Landed or historical (delete or archive)
 
 - `2026-09-27-router-first-agent-comms.md`: implementation landed on main.
