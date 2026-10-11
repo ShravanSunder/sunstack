@@ -1,4 +1,4 @@
 interface:
   display_name: "Manage: Agents"
-  short_description: "Coordinate persistent agents and bounded subagents"
-  default_prompt: "Use manage-agents to choose and coordinate native workers or operators, persistent sidekicks or review sidekicks, and owner-requested advisors through supported agent-router, native, or legacy ACPX routes."
+  short_description: "Pick roles, models and charters for delegated agents"
+  default_prompt: "Use manage-agents to choose the role, model and charter for a delegated job: an Implementer and Verifier pair per workstream, a Reviewer, an owner-requested Advisor, or native Workers and Operators, launched through native, agent-router, or legacy ACPX routes."

@@ -2,7 +2,7 @@
 
 Owns Codex native v2 `spawn_agent` model, effort, conversation-history, and workspace-access encoding. Return the exact `model`, `reasoning_effort`, `fork_turns`, and workspace-access encoding.
 
-This reference applies after `SKILL.md` selects a native 🛠️ Worker or Operator assignment. Persistent Sidekick, Advisor, and Review Sidekick relationships use their separate top-level route.
+This reference applies after `SKILL.md` selects a native 🛠️ Worker or Operator assignment. Implementer, Verifier, Reviewer, and Advisor sessions use their separate top-level route.
 
 ## Models
 
@@ -19,7 +19,7 @@ Resolve the exact id with the exact-id rule in `SKILL.md` Launch. If the host re
 
 ## Conversation History
 
-- A 🔧 Operator running prescribed review proof receives the exact execution grant and command procedure. Use `fork_turns="none"` when its packet must exclude the 🔎 Review Sidekick's history; a positive integer inherits parent history, as does `all`.
+- A 🔧 Operator running prescribed review proof receives the exact execution grant and command procedure. Use `fork_turns="none"` when its packet must exclude the 🔎 Reviewer's history; a positive integer inherits parent history, as does `all`.
 - No inherited parent history: set `fork_turns="none"`.
 - Full parent history (non-reviewers only): set `fork_turns="all"`.
 - Full-history inheritance uses the parent model and reasoning effort; omit `model` and `reasoning_effort`.

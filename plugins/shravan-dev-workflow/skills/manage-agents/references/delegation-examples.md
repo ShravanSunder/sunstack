@@ -1,34 +1,36 @@
 # Delegation Examples
 
-### Orchestration: a breakdown with three PRs
+Each example applies the Work levels and role table in `SKILL.md`; when they disagree, `SKILL.md` wins.
 
-Main point: one 🐒 Sidekick per PR, and a dependent PR waits for its prerequisite.
+### Orchestration: a workstream that is a stack of PRs
 
-The Lead's plan for saved searches has three PRs. PR 1 adds storage and an API in the search module; PR 2 adds a settings screen that calls that API; PR 3 adds sharing. PR 2 needs PR 1 merged first, and PR 3 needs neither.
+Main point: one Implementer–Verifier pair per workstream, kept through every PR in its stack; independent workstreams get their own pairs.
 
-Job to hand off: "Implement PR 1: its four slices, in order, from the plan."
+The Lead's plan for saved searches has three PRs. PR 1 adds storage and an API in the search module; PR 2 adds a settings screen that calls that API; PR 3 adds sharing. PR 2 builds on PR 1, so the two form one stacked workstream. PR 3 needs neither, so it is a second workstream.
 
-1. Direction: the plan names each slice. Complete.
-2. Span: the search module and the storage it owns. Local.
-3. Horizon: four slices make one PR, checked against the plan's proof. Milestone.
-4. Cut: name where the milestone ends: "run the full suite, push, open the PR, then report".
-5. Role: only a 🐒 Sidekick closes a Milestone, and each slice builds on the last. PR 3 gets its own Sidekick now; PR 2's starts once PR 1 lands.
-6. Model: in the 🐒 Sidekick table, Complete · Local matches the Workhorse row.
+Job to hand off: "Implement workstream A, PRs 1 and 2, from the plan, and prove each PR."
 
-### Orchestration: a slice blocked by a missing seam
+1. Direction: the plan names each PR's changes, and Test Design names the tests. Complete.
+2. Span: the search module, its storage, and the screen that calls its API, whose shared contract the plan writes down. Local once the contract is written.
+3. Horizon: two PRs make one workstream, checked against the Verifier's report and the plan's proof. Workstream.
+4. Cut: name where it ends: "both PRs pass their checks and the Verifier's report covers the stack's head; then report".
+5. Role: a 🐒 Implementer carries the workstream, and a 🔬 Verifier is paired with it. Workstream B (PR 3) gets its own pair now, because nothing ties it to A.
+6. Model: in the 🐒 Implementer table, Complete · Local matches the Workhorse row. The 🔬 Verifier takes the row whose lineage differs from the Implementer's: OpenAI Luna for the Implementer, so Claude Opus for the Verifier.
+
+### Orchestration: a step blocked by a missing seam
 
 Main point: cut before escalating; the Lead makes the design choice, and other agents bring evidence.
 
-The PR 1 Sidekick stops at slice 4. The plan says the test waits for shutdown, but the service has no signal that shutdown finished, so the test could only sleep. It returns the gap to the Lead.
+The workstream A Implementer stops partway through PR 1. Test Design says a test waits for shutdown, but the service has no signal that shutdown finished, so the test could only sleep. It returns the gap to the Lead.
 
-Job the Lead is tempted to hand off: "Make slice 4's test prove shutdown without sleeping."
+Job the Lead is tempted to hand off: "Make the test prove shutdown without sleeping."
 
 1. Direction: the brief gives only the outcome, and how shutdown gets signalled is a choice other code will build on. Partial.
 2. Span: the service's shutdown code and its test. Local.
-3. Horizon: one slice, checked against its acceptance check. Task.
-4. Cut: the Lead makes that choice and writes it into the plan: the service emits a shutdown-finished event, and the test waits on it. Slice 4a adds the event; slice 4 waits on it. Both are Complete · Local, one Task each. If the Lead lacks the facts to choose, it first hands off "trace the service's shutdown sequence and report, with file:line, where it could signal completion", then decides.
-5. Role: more slices of the same PR go to the same 🐒 Sidekick; the evidence job is one Task that stands alone, so one 🛠️ Worker.
-6. Model: Partial · Local matches no 🛠️ Worker or 🐒 Sidekick row, so the tempting job is not ready to hand off. After the cut, the remaining slices are Complete · Local and stay on the 🐒 Sidekick Workhorse row. The evidence 🛠️ Worker is Complete · Local, which matches no Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain). The design choice itself goes to no other agent, at any tier.
+3. Horizon: one part of PR 1. Inside the Task.
+4. Cut: the Lead makes the choice and writes it into Program Design and Test Design: the service emits a shutdown-finished event, and the test waits on it. If the Lead lacks the facts to choose, it first hands off "trace the service's shutdown sequence and report, with file:line, where it could signal completion".
+5. Role: the design change goes back to the same 🐒 Implementer as part of PR 1. The evidence job stands alone and has one result, so a 🛠️ Worker.
+6. Model: the tempting job is Partial and not ready to hand off. The evidence Worker is Complete · Local, which matches no 🛠️ Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain), so the Lead either writes the trace as an Exact procedure for the Workhorse row or records why it needs the Daily-driver row. The design choice itself goes to no other agent, at any tier.
 
 ### Orchestration: PR wrap-up
 
@@ -47,7 +49,7 @@ Job to hand off: "Push, watch CI until it finishes, publish the description file
 
 ### Research: how other libraries handle retries
 
-Main point: independent units fan out; the choice stays with the Lead.
+Main point: independent units fan out to Workers; the choice stays with the Lead.
 
 The Lead is designing the sync client's retry policy with the owner and wants evidence from three libraries before proposing one.
 
@@ -55,29 +57,29 @@ Job the Lead is tempted to hand off: "Find how libraries A, B, and C handle retr
 
 1. Direction: "which to follow" gives the outcome and leaves the design choice open. Partial.
 2. Span: each library's retry code, read, not changed. Local.
-3. Horizon: three findings and a recommendation, checked only at the end. Milestone.
-4. Cut: the Lead keeps the choice and names the method. Three jobs: "in library A, trace the retry entry point through retryable-error classification, attempt limits, delay calculation, and the tests that cover them; report each with file:line", and the same for B and C. Each is Complete · Local, one Task checked against its report.
-5. Role: three Tasks that stand alone. Three 🛠️ Workers, fanned out.
-6. Model: Partial · Local matches no 🛠️ Worker row, so the tempting job is not ready to hand off. After the cut, each job is Complete · Local, which matches no Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain). The Lead compares the reports and proposes the policy.
+3. Horizon: three findings and a recommendation, checked only at the end.
+4. Cut: the Lead keeps the choice and names the method. Three jobs: "in library A, trace the retry entry point through retryable-error classification, attempt limits, delay calculation, and the tests that cover them; report each with file:line", and the same for B and C. Each is one bounded result.
+5. Role: three results that stand alone. Three 🛠️ Workers, fanned out as native subagents.
+6. Model: each job is Exact once the method is written as steps, which matches the 🛠️ Worker Workhorse row. The Lead compares the reports and proposes the policy.
 
 ### Research: questions that keep coming
 
-Main point: horizon allows a Worker, and continuity picks a 🐒 Sidekick.
+Main point: a Worker is one job; continuity comes from the brief, not from keeping a Worker session.
 
 The Lead and the owner are redesigning how the sync engine stores state. Questions about the current storage code come up every few minutes: where a field is written, what reads it, what breaks if it moves.
 
-Job to hand off: "For each question, trace the field's writes, reads, and serialization boundary, and answer with file:line; report uncertainty instead of choosing."
+Job to hand off: "For this question, trace the field's writes, reads, and serialization boundary, and answer with file:line; report uncertainty instead of choosing."
 
-1. Direction: the method is named for every question. Complete.
+1. Direction: the method is named for every question. Complete, or Exact when written as steps.
 2. Span: the sync engine's storage module and the contracts it uses. Local.
-3. Horizon: each answer is checked by the Lead before the next question. Task.
+3. Horizon: each answer is one bounded result, checked by the Lead before the next question.
 4. Cut: none; the design choices stay with the Lead and the owner.
-5. Role: a Task allows a 🛠️ Worker or a 🐒 Sidekick. Each question goes faster with what the last answer found, so a research Sidekick.
-6. Model: in the 🐒 Sidekick table, Complete · Local matches the Workhorse row. Continuity changed the role, not the tier.
+5. Role: a 🛠️ Worker per question, as a native subagent. The next Worker's brief carries the earlier answers it needs, so nothing depends on a Worker remembering.
+6. Model: written as steps, each question matches the 🛠️ Worker Workhorse row.
 
 ### Cross-system: split at the system boundary
 
-Main point: split a cross-system change at the boundary; work that cannot be split goes to the owner.
+Main point: split a cross-system change at the boundary into workstreams; work that cannot be split goes to the owner.
 
 The server returns prices as floats, and the mobile app rounds them wrong. The plan moves prices to integer cents and fixes the new response shape. Old app versions would break, so the server and the app release together.
 
@@ -85,7 +87,7 @@ Job the Lead is tempted to hand off: "Move the server and the app to integer cen
 
 1. Direction: the plan names the new shape. Complete.
 2. Span: the app is another system that consumes the server's contract. Cross-system.
-3. Horizon: both sides, checked together at release. Milestone.
-4. Cut: the contract is settled, so each side can be built against it. Two jobs: "change the server to return integer cents per the plan" and "change the app to read integer cents per the plan", each Complete · Local, one Task. Releasing together is a gate the Lead holds after both land, not a reason to keep one executor.
-5. Role: two Tasks that stand alone. Two 🛠️ Workers.
-6. Model: in the 🛠️ Worker table, each job's Complete · Local matches no row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain). The tempting job's Complete · Cross-system matches no row. If neither side can be built or tested without the other changing at the same time, the Lead brings it to the owner, who can name a model for one 🐒 Sidekick to hold both sides.
+3. Horizon: both sides, checked together at release.
+4. Cut: the contract is settled, so each side can be built against it. Two workstreams: "change the server to return integer cents per the plan" and "change the app to read integer cents per the plan", each one PR. Releasing together is a gate the Lead holds after both land, not a reason to keep one pair.
+5. Role: two workstreams, so two Implementer–Verifier pairs.
+6. Model: each side is Complete · Local, which matches the 🐒 Implementer Workhorse row; each Verifier takes the other lineage. If neither side can be built or tested without the other changing at the same time, the Lead brings it to the owner, who can name a model for one Implementer to hold both sides.

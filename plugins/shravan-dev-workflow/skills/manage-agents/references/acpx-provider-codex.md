@@ -14,14 +14,14 @@ The Codex adapter's effort key is `reasoning_effort`: use `acpx codex set reason
 
 ## Sessions And Identity
 
-Creation example for a new relationship only; for an existing 🐒 Sidekick, inspect and reuse its recorded session through `acpx-legacy.md` rather than running creation again.
+Creation example for a new relationship only; for an existing 🐒 Implementer, inspect and reuse its recorded session through `acpx-legacy.md` rather than running creation again.
 
 ```bash
 acpx --cwd /absolute/repo --model <resolved Sol id> --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex sessions ensure --name "🐒 Sidekick · <purpose>"
+  --non-interactive-permissions deny codex sessions ensure --name "🐒 Implementer · <purpose>"
 acpx --cwd /absolute/repo --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex -s "🐒 Sidekick · <purpose>" \
-  --file tmp/sidekick-packet.md
+  --non-interactive-permissions deny codex -s "🐒 Implementer · <purpose>" \
+  --file tmp/implementer-packet.md
 ```
 
 Keep cwd, resolved `codex` command, model id, effort, and permission boundary stable for ledgered relationships. Record the accepted model id in the ledger; exit code 0 alone does not prove the intended model launched.
