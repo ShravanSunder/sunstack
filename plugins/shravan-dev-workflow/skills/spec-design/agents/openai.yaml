@@ -1,4 +1,4 @@
 interface:
   display_name: "Spec: Design"
-  short_description: "Define Requirements and observable Specification"
-  default_prompt: "Use $spec-design to define or revise durable Requirements—authorized Why, for whom, and boundaries—or a separate Specification's observable What, without inventing Program Design's internal How."
+  short_description: "Write owner-confirmed Requirements and a checkable Specification"
+  default_prompt: "Use $spec-design to write or revise a Requirements card the owner can read and confirm, each line showing where it came from, and a separate Specification of checkable rules traced to those lines."
