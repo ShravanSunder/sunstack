@@ -2,7 +2,7 @@
 
 This reference owns current-source orientation, planning and implementation admission, meaningful result verification, the missing-history baseline, and finish decisions for one implementation delivery goal. Phase skills retain their own input and return contracts.
 
-Expected inputs: the user's objective and requested terminal, repository instructions, current source and diff, governing artifacts, admitted-improvement evidence when applicable, the Lead-authored canonical plan and PR assignments, implementation proof, Lead-assessment evidence, review evidence, supplied authority, coordination and execution work references or unshared checkpoint path and whole-work responsibility, the orchestrator, persistent implementation 🐒 Sidekicks, persistent Review Sidekick when commissioned, executors when assigned, and known blockers.
+Expected inputs: the user's objective and requested terminal, repository instructions, current source and diff, governing artifacts, admitted-improvement evidence when applicable, the Lead-authored canonical plan and PR assignments, implementation proof, Lead-assessment evidence, review evidence, supplied authority, coordination and execution work references or unshared checkpoint path and whole-work responsibility, the orchestrator, each workstream's 🐒 Implementer and 🔬 Verifier, the 🔎 Reviewer when commissioned, executors when assigned, and known blockers.
 
 Return: a concise orientation containing the objective, scope, current basis, requested terminal, evidence freshness, next owner or exact stop, and the continuation checkpoint and whole-work completion decision.
 
@@ -19,7 +19,7 @@ current plan, proof, and review evidence:
 prior review findings or missing-history baseline:
 authority and blockers:
 trail: <coordination root plus execution roots, or unshared checkpoint path> / whole-work responsibility | contribution
-responsibility: orchestrator and coordination/integration / planned PR assignment -> persistent implementer and execution root / 🔎 Review Sidekick: <persistent session or not yet commissioned> / executor: <assigned or implementer direct>
+responsibility: orchestrator and coordination/integration / workstream (one PR assignment or a dependent stack) -> 🐒 Implementer, 🔬 Verifier, and one execution root / 🔎 Reviewer: <persistent session or not yet commissioned> / executor: <assigned or implementer direct>
 next owner or stop:
 ```
 
@@ -39,9 +39,9 @@ The work trail is a navigation and continuity aid. Reopen its evidence before re
 
 ## Select the Current Owner
 
-The orchestrator routes the smallest owner that can resolve the current delivery decision, verifies decisive evidence, and continues the goal. The current goal context or applicable handoff and the next phase's existing input/result contract remain authoritative. The orchestrator authors design and planning and remains the default user conversation throughout delivery. After a ready plan, persistent implementation 🐒 Sidekicks execute implementation, associated proof, and corrections directly by default in their planned PR assignments. The user may explicitly choose direct contact with an assigned Sidekick inside its scope; a ready plan alone does not choose that branch. Material design/plan decisions, cross-assignment integration conflicts, permission boundaries, and concise completion receipts return to the orchestrator. The Lead does not relay every internal progress turn or poll merely to keep the conversation active, and returning to the Lead for conversation does not pause authorized implementation or transfer execution ownership.
+The orchestrator routes the smallest owner that can resolve the current delivery decision, verifies decisive evidence, and continues the goal. The current goal context or applicable handoff and the next phase's existing input/result contract remain authoritative. The orchestrator authors design and planning and remains the default user conversation throughout delivery. After a ready plan, each workstream's 🐒 Implementer executes implementation, associated proof, and corrections directly by default, and its 🔬 Verifier proves the delivered behavior independently. The user may explicitly choose direct contact with an Implementer inside its scope; a ready plan alone does not choose that branch. Material design/plan decisions, cross-assignment integration conflicts, permission boundaries, and concise completion receipts return to the orchestrator. The Lead does not relay every internal progress turn or poll merely to keep the conversation active, and returning to the Lead for conversation does not pause authorized implementation or transfer execution ownership.
 
-A 🐒 Sidekick delegates only through `manage-agents`. The orchestrator keeps the coordination and execution roots as `orchestrator`; each implementation Sidekick contributes as `implementer` only on its execution root and the Review Sidekick contributes where commissioned. Those seats describe thread participation, not authority.
+An Implementer or Verifier delegates only through `manage-agents`. The orchestrator keeps the coordination and execution roots as `orchestrator`; on its workstream's one execution root, the Implementer contributes as `implementer` and the Verifier as `participant`, and the Reviewer contributes where commissioned. Those seats describe thread participation, not authority.
 
 The source-phase workflow follows this order:
 
@@ -65,22 +65,25 @@ ready plan; terminal is plan-only
   -> finish at plan-only
 
 ready delivery plan; implementation or proof incomplete
-  -> commission/resume the planned PR implementation 🐒 Sidekick(s) while the Lead remains the default user conversation; use direct 🐒 Sidekick contact only when the user explicitly chooses it; then implement-plan per assignment after real prerequisites
+  -> commission/resume each workstream's 🐒 Implementer and 🔬 Verifier while the Lead remains the default user conversation; use direct Implementer contact only when the user explicitly chooses it; the Verifier's challenge and the Implementer's Test Design check before building; then implement-plan per workstream after real prerequisites
 
 development and fitting proof complete
-  -> orchestrator assessment against the original need, design, plan, current diff, actual proof, complexity, PR boundaries, and integration
+  -> the Verifier proves the current head and returns a VerifierReport
+
+current-head VerifierReport returned
+  -> orchestrator assessment against the original need, design, plan, current diff, actual proof, the report, complexity, PR boundaries, and integration
 
 orchestrator assessment complete
   -> implementation-review
 
 accepted implementation finding; review has not returned not-converging
-  -> implement-plan by the same implementer, fresh affected proof, then the same 🔎 Review Sidekick
+  -> implement-plan by the same Implementer, fresh affected proof, the same Verifier's report on the new head, then the same 🔎 Reviewer
 
 accepted specification, design, or plan finding
   -> exact semantic owner, then resume the open implementation goal
 
 review ready; PR gates not current
-  -> assigned implementation 🐒 Sidekick or 🔧 Operator runs implementation-pr-wrapup and returns current PR gate evidence to the Lead
+  -> the workstream's Implementer or a 🔧 Operator runs implementation-pr-wrapup and returns current PR gate evidence to the Lead
 
 PR ready and unmerged
   -> default terminal; merge only under separately supplied authority
@@ -92,9 +95,9 @@ A request for one direct phase bypasses this orchestrator. Optional `ops-*` trac
 
 ## Verify, Correct, and Recover
 
-After every owner returns, the orchestrator inspects the source anchors that control the next decision. The 🔎 Review Sidekick supplies its review result after detailed source reading and lane reduction. The orchestrator checks findings against cited evidence, records why rejected findings are invalid, and routes accepted findings to their actual owner. Contextual design feedback does not replace independent review.
+After every owner returns, the orchestrator inspects the source anchors that control the next decision. The 🔎 Reviewer supplies its review result after detailed source reading and lane reduction. A `VerifierReport` is input to the decision, never acceptance. The orchestrator checks findings against cited evidence, records why rejected findings are invalid, and routes accepted findings to their actual owner. Contextual design feedback does not replace independent review.
 
-Implementation review continues under the convergence rule in `implementation-review`'s `references/finding-and-reduction.md`. After each accepted implementation correction, require fresh affected proof and fresh review coverage. Design or planning corrections follow their owners' review boundaries and do not become implementation-remediation passes.
+Implementation review continues under the convergence rule in `implementation-review`'s `references/finding-and-reduction.md`. After each accepted implementation correction, require fresh affected proof, the same Verifier's `VerifierReport` on the corrected head, and fresh review coverage. A report for an earlier head never covers a corrected one; inspect the current-head report before readiness. Design or planning corrections follow their owners' review boundaries and do not become implementation-remediation passes.
 
 If current evidence establishes that no review has run, use the ordinary first-review route. When prior review history should exist but its evidence cannot be inspected, inspect the current source, diff, proof, and governing basis, record what is missing, and route an ordinary review; the current review sets the convergence baseline. Missing history never excuses stale proof.
 
@@ -103,7 +106,7 @@ If current evidence establishes that no review has run, use the ordinary first-r
 Before finishing, verify the material gates implied by the requested terminal, explicit proof expectations, unresolved findings and decisions, affected review coverage, and the current terminal owner's evidence.
 
 - `plan-only`: current ready plan and governing basis are inspectable; later delivery gates are outside the requested terminal.
-- `pr-ready-unmerged`: implementation proof, current bounded independent review, and current PR checks, comments, threads, head and mergeability are ready under `implementation-pr-wrapup`.
+- `pr-ready-unmerged`: implementation proof, a `VerifierReport` for the current head, current bounded independent review, and current PR checks, comments, threads, head and mergeability are ready under `implementation-pr-wrapup`.
 - `blocked | partial | stopped`: name the exact completed boundary, missing evidence or authority, and next owner or user decision.
 
 Record the truthful outcome and continuation context through `practices-show-me-your-work`. Contributors leave the outer thread unresolved. The orchestrator follows the tracker to inspect current activity and completion before resolving. Readable views are conditional on a request or substantial synthesis need. For pending standalone Git, PR, or watch work, wait on the 🔧 Operator's completion notification or an authorized wake through `manage-agents`; never consume delivery turns polling a model.
