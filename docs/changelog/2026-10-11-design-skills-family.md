@@ -10,6 +10,6 @@
 - `manage-agents` defines roles by job with charters: Implementer, Verifier, Reviewer, Advisor, Worker, Operator. Delivery runs one Implementer–Verifier pair per workstream; the Lead decides from current-head Verifier reports.
 - Design returns are Zod 4 schemas in `schemas/` (`PhaseReturn`, `DesignReviewResult`, `CycleReturn`, `VerifierChallenge`, `VerifierReport`), checked by `tests/skills` typecheck.
 - Consumers updated: `orchestrator-implementation-goal`, `implement-plan`, `implementation-review`, `practices-collaboration`, `spec-handoff`, name sweeps, READMEs, manifests.
-- Not yet: `plan-implementation` still admits a three-document review; the release waits for the planner work. Behavior is drafted from owner intent and not pressure-tested.
+- Not yet: `plan-implementation` still admits a three-document review and still chooses regression strategy itself; the release waits for the planner work. The release smoke procedure (`docs/changelog/references/shravan-dev-workflow-smoke.md`) still walks the old review steps. Behavior is drafted from owner intent and not pressure-tested.
 
 Validation: `claude plugin validate .`; `pnpm --dir tests/skills run typecheck`; `pnpm --dir tests/skills run test` (18 files, 131 tests). Codex and Claude caches not refreshed.

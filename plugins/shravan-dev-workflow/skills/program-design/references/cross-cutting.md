@@ -18,7 +18,7 @@ platform compatibility
 
 For security and trust, trace assets, actors, entry points, the owner of each authentication and authorization decision, parsing and validation, secrets, least privilege, misuse containment, auditability, and where each is observed.
 
-Use a trust-boundary view when untrusted actors, inputs, secrets, privilege changes, process boundaries, or external services cross enforcement points. Label the policy owner, enforcement point, assets, and containment boundary rather than drawing a generic network map.
+When a trust boundary is drawn, `views.md` says what it shows: the policy owner, enforcement point, assets, and containment, not a generic network map.
 
 For privacy, data lifecycle, and compliance, trace collection and minimization, retention and deletion, residency and export, policy enforcement, audit, failure, and where each is observed.
 

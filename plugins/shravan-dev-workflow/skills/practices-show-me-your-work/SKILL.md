@@ -17,8 +17,8 @@ At the start of a qualifying task, before other work, MUST load `practices-colla
 | --- | --- |
 | 🦁 Lead, work thread found | Read its history and verify load-bearing claims against current sources before acting. For a new thread, open it with the goal, scope, orchestrator, repository and worktree, and relevant artifact links. |
 | 🦁 Lead, `no-home` | In the same turn, create `docs/wip/work-trails/<yyyy-mm-dd-work-label>/main.md` in the Lead's worktree, marked **unshared**, with the goal, scope, worktree, the `no-home` gap, and the known destination context. Keep working. |
-| 🐒 Sidekick, execution root supplied | Record on that root; checkpoint the assignment there. |
-| 🐒 Sidekick commissioned before a board exists | The commission carries the absolute path of the Lead's wip trace folder and grants write access to one file. Write only `<assignment-label>.md` there, marked **unshared**. Without that grant, return state to the Lead instead. |
+| 🐒 Implementer or 🔬 Verifier, execution root supplied | Record on that root; checkpoint the assignment there. |
+| 🐒 Implementer or 🔬 Verifier commissioned before a board exists | The commission carries the absolute path of the Lead's wip trace folder and grants write access to one file. Write only `<assignment-label>.md` there, marked **unshared**. Without that grant, return state to the Lead instead. |
 | Routine small edit | No trace. If a work thread is already in context and the edit changes its state, post the outcome there. |
 
 Retain the service, project, board, topic, and root ids (or the wip folder path) in task context, handoffs, and checkpoints so another session can reopen the work without guessing. A new session resumes the existing trace; it does not start another.
@@ -48,7 +48,7 @@ IF the user requests a readable view or the trace needs substantial synthesis, l
 
 ## Wip trace folder and transfer
 
-The wip trace folder holds the trace while no board home is reachable. Each file has one writer: the Lead writes `main.md`; each pre-board 🐒 Sidekick writes only its own `<assignment-label>.md`. Every file is marked **unshared** and carries timestamps, decisions and reasons, evidence, outcome, pending updates, and the exact thread reference when one is known. When no thread exists, record that gap and the known destination context; never invent ids. In a public repository the files must be public-safe.
+The wip trace folder holds the trace while no board home is reachable. Each file has one writer: the Lead writes `main.md`; each pre-board 🐒 Implementer or 🔬 Verifier writes only its own `<assignment-label>.md`. Every file is marked **unshared** and carries timestamps, decisions and reasons, evidence, outcome, pending updates, and the exact thread reference when one is known. When no thread exists, record that gap and the known destination context; never invent ids. In a public repository the files must be public-safe.
 
 The same folder serves an outage after a thread existed: report the sharing gap, keep independent work going, and hold only work that depends on another agent's reply. Respect access boundaries; do not restart services or probe alternate profiles.
 
@@ -56,7 +56,7 @@ When a board home becomes reachable, the Lead transfers the folder:
 
 1. Create the coordination root from `main.md` and one execution root per commissioned workstream. An Implementer's file and a Verifier's file from the same workstream share that root, and both record the same root reference. Or use the existing thread after reading its current state and history, including any possibly saved uncertain post.
 2. Post each file's concise current state under the Lead's own verified session identity, quoting the file and naming its author session and file path. Post what is missing; do not replay stale updates.
-3. Record the returned message ids at the top of each file and mark it **transferred**. The folder stops receiving updates. A still-live 🐒 Sidekick continues on its execution root as itself.
+3. Record the returned message ids at the top of each file and mark it **transferred**. The folder stops receiving updates. A still-live Implementer or Verifier continues on its execution root as itself.
 
 Keep any unresolved submission outcome explicit. The folder is a pre-board trace, not a parallel permanent log.
 

@@ -7,14 +7,21 @@ Expected inputs: candidate findings from the document checks, the tie table, and
 ## Verify Each Candidate
 
 1. Open the target at its anchor.
-2. Name the line it puts at risk (a `U`, an `R`, or a confirmed boundary), quote it, and say in plain words what fails if the concern stays.
+2. Name the line it puts at risk (a `U`, an `R`, or a goal-boundary line on the Requirements card), quote it, and say in plain words what fails if the concern stays.
 3. Reproduce the contradiction or the failure path.
-4. When reading cannot settle one factual question, make one bounded source lookup and record its anchors.
+4. When reading cannot settle one factual question, make one bounded source lookup in this session, record its anchors, and open them yourself before disposing of the candidate.
 5. Merge duplicates by root cause, and keep conflicting evidence side by side.
 
-Re-anchor before accepting a finding: name the line it serves, whether the existing design already satisfies it, the concrete failure, the smallest correction, and whether that correction stays inside the confirmed boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status.
+Re-anchor before accepting a finding: name the line it serves, whether the existing design already satisfies it, the concrete failure, the smallest correction, and whether that correction stays inside the goal boundary on the Requirements card. Then give it one disposition, and act on it:
 
-Missing evidence makes a finding `unverified`, not `rejected`. A category name ("the reliability requirement") is not an anchor until the exact line is opened and quoted. A style preference with no reader or behavior effect is rejected.
+```text
+accepted     fills a Finding (below)
+unverified   makes the result evidence-gap, naming the evidence it needs
+contested    becomes a Finding routed to lead, so the result is owner-decision
+rejected     stays out of findings; list it, with its evidence, in the written report
+```
+
+Missing evidence makes a candidate `unverified`, not `rejected`. A category name ("the reliability requirement") is not an anchor until the exact line is opened and quoted. A style preference with no reader or behavior effect is rejected.
 
 ## The Finding
 
@@ -53,7 +60,11 @@ A candidate whose correction cannot be written inside the current design, becaus
 
 Fill one `DesignReviewResult`:
 
-- `result`: the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`. `ready` only when every reviewed document is `checked`, no finding is open, no tie is unchecked, no source or confirmation is missing, and no owner decision is pending. A `partial` or `blocked` document makes the result `evidence-gap`, with the exact unfinished boundary, unless an earlier result applies.
+```ts
+// import type { DesignReviewResult } from '../../../schemas/design-returns.ts'
+```
+
+- `result`: the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`. `ready` only when every reviewed document is `checked`, no finding is open, no candidate is `unverified` or `contested`, no tie is a gap or unchecked, no source or confirmation is missing, and no owner decision is pending. A `partial` or `blocked` document, or an `unverified` candidate, makes the result `evidence-gap`, with the exact unfinished boundary or missing evidence, unless an earlier result applies.
 - `reviewed`: every target with `checked`, `partial`, or `blocked`, and what was not checked.
 - `unavailableSources`: every governing source that could not be read.
 - `ties`: the tie table.

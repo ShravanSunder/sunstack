@@ -21,8 +21,8 @@ Good:
 ```text
 U3   A real installed agent's hook events show up in the right pane.      you, Oct 5 message
 U4   Existing pane layouts keep working after the change.                  existing contract: pane API v2
-P1   Check each provider version before accepting its events.              agent-written design #352 — not yours yet
-Q1   Which agent versions must be supported?
+Proposed: Check each provider version before accepting its events.    agent-written design #352 — not yours yet
+Open:     Which agent versions must be supported?
 ```
 
 Bad: a 2,900-word table whose rows are detailed rules with the owner's outcome squeezed into one short column. That is the IPC Requirements doc, where an agent's version check (`N3`) sat among real needs and nobody could check which lines were the owner's.
@@ -51,7 +51,7 @@ A `discuss-pathfinding` record tags each row with an authority state. Only `auth
 A Requirements line says what the owner wants and why. A rule a tester could check directly (exact counts, order, field names, timeouts, version checks) is Specification detail.
 
 - If the owner said the detail, keep their line as a Requirements line and put the checkable rules beneath it in the Specification. The line keeps its `U` identity so the rules can trace to it.
-- If an agent supplied the detail, it is a proposal: list it under Proposed or leave it to the Specification as a rule that traces to an owner line.
+- If an agent supplied the detail, it is a proposal. It becomes a Specification rule only when a stranger reading the owner's line would derive the same rule from it; otherwise it stays under Proposed until the owner adopts it.
 
 ## The Goal Boundary
 
@@ -59,7 +59,7 @@ Before writing lines, the restatement confirmed by the owner fixes the boundary.
 
 - who is affected, and the outcome each needs;
 - what already works and must keep working;
-- what is actually missing;
+- what is actually missing, with the symptom, its cause when known, and any mechanism the request names kept apart;
 - which systems or packages may change and which are protected;
 - what is out of scope, and the machinery that would reopen scope;
 - what evidence the owner will accept.

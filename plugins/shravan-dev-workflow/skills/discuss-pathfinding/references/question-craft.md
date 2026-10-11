@@ -1,6 +1,6 @@
 # Question Craft
 
-This reference owns question craft for interactive pathfinding sessions. A blocking authoritative Why/What decision during specification convergence belongs to `spec-design` step 4, not this reference. Its bounded decision rule does not apply here: pathfinding groups related questions according to what the user can answer from one current context and refuses non-interactive contexts outright.
+This reference owns question craft for interactive pathfinding sessions. A blocking authoritative Why/What decision during specification convergence belongs to `spec-design`'s Requirements card step, not this reference. Its bounded decision rule does not apply here: pathfinding groups related questions according to what the user can answer from one current context and refuses non-interactive contexts outright.
 
 ```text
 this reference owns: the question forms, material-ambiguity procedure, probes, and counters for one session

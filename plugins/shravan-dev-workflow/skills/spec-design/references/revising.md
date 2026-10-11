@@ -34,7 +34,7 @@ A wording-only fix that changes no meaning goes to `docs-maintain`.
 
 - A confirmed line stays unless the owner removes it. A removal records the owner's decision beside it.
 - A changed line keeps its `U` or `R` identity; a new line gets a new one.
-- Update the ties for every changed line: the rules beneath a changed `U`, and the Program Design rows, T scenarios, and V checks beneath a changed `R`. Each changed document returns `designReview: owed`.
+- Update the rules beneath a changed `U`. List each Program Design row, `T`, and `V` tied to a changed `R` as an open item for its owner; this skill does not edit those documents. A changed Requirements line or rule returns `designReview: owed`.
 
 A shorter document that lost confirmed lines has lost scope; it is not simpler.
 

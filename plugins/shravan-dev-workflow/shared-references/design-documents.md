@@ -4,10 +4,10 @@ A design has up to five documents. Each has one job, one writer, named readers, 
 
 | Document | Its job | Written by | Read by | Made with |
 | --- | --- | --- | --- | --- |
-| Requirements | What the owner wants, in their words: one line per need, each showing where it came from. Agent ideas sit apart until the owner adopts them. | Lead, with the owner | the owner; every later document | `spec-design` |
-| Specification | What must be observably true: checkable rules over defined entities, each traced to a requirement, naming the reference whenever one defines correct. | Lead | Program, Test, and Verification Design; Reviewer | `spec-design` |
-| Program Design | How it is built: parts, owners, interfaces, state, failure handling, and the seam and observation point for each rule. | Lead | Implementer; Test and Verification Design; Reviewer | `program-design` |
-| Test Design | The Implementer's regression tests: for each scenario, its layer, what is real and what is replaced, and an assertion that goes red when the behavior is wrong. | Lead | Implementer; Reviewer | `test-design` |
+| Requirements | What the owner wants, in their words: one line per need, each showing where it came from. Agent ideas sit apart until the owner adopts them. | Lead, with the owner | the owner; every later document; Verifier | `spec-design` |
+| Specification | What must be observably true: checkable rules over defined entities, each traced to a requirement, naming the reference whenever one defines correct. | Lead | Program, Test, and Verification Design; Implementer; Verifier; Reviewer | `spec-design` |
+| Program Design | How it is built: parts, owners, interfaces, state, failure handling, and the seam and observation point for each rule. | Lead | Implementer; Test and Verification Design; Verifier, to find where to observe; Reviewer | `program-design` |
+| Test Design | The Implementer's regression tests: for each scenario, its layer, what is real and what is replaced, and an assertion that goes red when the behavior is wrong. | Lead | Implementer; Verifier, to find where to observe; Reviewer | `test-design` |
 | Verification Design | How each requirement is proven independently on the real thing: the declared reference, the core outcome first, observation points, what passes, and what stays unverified. | Lead | Verifier; the Lead when it decides; Reviewer; the owner, through one "proven by" line per requirement | `verification-design` |
 
 ## How Every Document Ties Back to the Owner

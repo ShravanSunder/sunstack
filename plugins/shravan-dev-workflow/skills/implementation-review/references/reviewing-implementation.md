@@ -23,7 +23,7 @@ weaker-substitute risk:
 candidate semantic owner:
 ```
 
-A plan matching itself is not sufficient. Compare Requirements and observable Specification meaning, structural Program Design ownership and proof seams, plan translation, actual implementation, and proof as one chain. For admitted improvement plans, use their admitted authority and current evidence instead of inventing a reviewed-design set.
+A plan matching itself is not sufficient. Compare Requirements and observable Specification meaning, structural Program Design ownership and seams, Test Design scenarios, Verification Design checks, plan translation, actual implementation, and proof as one chain. For admitted improvement plans, use their admitted authority and current evidence instead of inventing a reviewed-design set.
 
 ## Trace Normal and Failure Paths
 

@@ -28,7 +28,7 @@ When a control is missing for a surface a check needs, keep the check and record
 
 ## Reuse What Already Proves the Real Path
 
-An automated test that already exercises the real path for a check counts as proof: name it in the "reuses test" cell and check its scope covers the case. Do not repeat it by hand. A test that replaces the surface does not count for the real-surface check, though it may still protect a mechanism.
+An automated test that already exercises the real path for a check counts as proof: name it in the "reuses test" cell (an existing test, or a `T` from Test Design that drives the real surface) and check its scope covers the case. Do not repeat it by hand. A test that replaces the surface does not count for the real-surface check, though it may still protect a mechanism.
 
 ## Complete When
 

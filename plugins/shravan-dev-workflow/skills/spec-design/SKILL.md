@@ -9,17 +9,17 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 Two documents, two readers. Requirements are *the owner's words*: the owner reads and confirms them, and every line shows *where it came from*. The Specification turns each confirmed line into *checkable* rules for whoever builds, tests, or verifies. An idea that did not come from the owner is a proposal until the owner adopts it.
 
-MUST load `../../shared-references/design-documents.md` and return the document boundaries the two documents must respect.
+MUST load `../../shared-references/design-documents.md` and return the document boundaries the two documents must respect and where new documents go.
 
 The Lead loads this skill and writes both documents itself, with the owner. Helpers may bring evidence; they never write a requirement, a rule, or a view.
 
 ## Workflow
 
-1. **Restate.** Say back what the owner asked for in your own words, including what is out of scope, and ask for a reply. Done when: the owner's reply confirms or corrects the restatement. When revising an already-confirmed Requirements document, its confirmation stands in.
+1. **Restate.** Say back what the owner asked for in your own words: who is affected, what already works, what is missing, what may change, and including what is out of scope. Ask for a reply and end the turn. Done when: the owner's reply confirms or corrects the restatement. When revising an already-confirmed Requirements document, its confirmation stands in.
 
-2. **Write the Requirements card.** MUST load `references/requirements-card.md` and return the card. Done when: every line is in plain words and names a source the owner can check; every agent idea sits under Proposed; every undecided choice sits under Open; and the owner has confirmed the card in a reply of its own.
+2. **Write the Requirements card.** MUST load `references/requirements-card.md` and return the card. Done when: every line is in plain words and names a source the owner can check; every agent idea sits under Proposed; every undecided choice sits under Open; and the owner has confirmed the card in a reply of its own (show the card, then end the turn).
 
-3. **Write the Specification.** MUST load `references/writing-rules.md` and return the rules, entities, and references. Done when: every rule names the confirmed line it serves; every confirmed line has a rule or a stated reason why not; every noun a rule uses is defined; and a tester could write a pass/fail check for each rule without asking.
+3. **Write the Specification.** MUST load `references/writing-rules.md` and return the rules, entities, and references. Then MUST load `references/views.md` and return each view whose condition holds, or none. Done when: every rule names the confirmed line it serves; every confirmed line has a rule or a stated reason why not; every noun a rule uses is defined; a tester could write a pass/fail check for each rule without asking; and each view whose condition holds is drawn.
 
 4. **Hand on.** Return a `PhaseReturn` of kind `phase-complete` with both document pointers, every open item, and its `designReview` value, naming no next skill. Done when: the return carries both pointers, every open item, and `designReview`.
 
@@ -29,13 +29,12 @@ The Lead loads this skill and writes both documents itself, with the owner. Help
 
 ## Branches
 
-- IF the owner's meaning for a line is not written anywhere and only the owner can give it, return a `PhaseReturn` of kind `requirements-gap`. The caller resolves it (`discuss-pathfinding`) and re-enters at step 2 with the confirmed record.
-- IF a choice only the owner can make blocks a line or a rule, return kind `owner-decision` with the options and a recommendation, as an owner brief.
+- IF the owner's meaning for a line is not written anywhere, or not yet decided, and only the owner can give it, return a `PhaseReturn` of kind `requirements-gap`. The caller resolves it (`discuss-pathfinding`) and re-enters at step 2 with the confirmed record.
+- IF a choice only the owner can make blocks a line or a rule, return kind `owner-decision` with the options and a recommendation; the caller brings it to the owner as a brief.
 - IF evidence a rule depends on is missing or inaccessible, return kind `evidence-gap` with what would let the work continue.
-- IF the request asks for Requirements only, stop after step 2. Return `phase-complete` with the Requirements pointer and its `scope`: what was done, what remains (the Specification), and when to come back. Write no Specification and make no claim that structure can start.
-- IF revising existing documents, load `references/revising.md` and return the correction's class (Requirements, Specification, or Program Design) and the confirmed lines it keeps, checked against the complete confirmed set.
-- IF a requirement changes a screen someone sees, or the change has two or more outside consumers, load `references/views.md` and return the picture or view and its check result.
-- IF this call added, removed, or changed Specification rules, set `designReview: owed`. Inside a design cycle, the cycle's review step discharges it; outside one, `design-review` runs before planning or delivery uses the rules.
+- IF the request asks for Requirements only, stop after step 2, loading `references/views.md` for the views whose condition holds. Return `phase-complete` with the Requirements pointer and its `scope`: what was done, what remains (the Specification), and when to come back. Write no Specification and make no claim that structure can start.
+- IF revising existing documents, load `references/revising.md` and return the correction's class (Requirements, Specification, or Program Design) and the confirmed lines it keeps, checked against the complete confirmed set. A Program Design correction or a wording-only fix changes nothing here: return `phase-complete` with the unchanged documents and an open item naming `program-design` or `docs-maintain` as its owner.
+- IF this call changed a confirmed Requirements line or added, removed, or changed Specification rules, set `designReview: owed`. Inside a design cycle, the cycle's review step discharges it; outside one, `design-review` runs before planning or delivery uses the rules.
 
 ## Rules
 

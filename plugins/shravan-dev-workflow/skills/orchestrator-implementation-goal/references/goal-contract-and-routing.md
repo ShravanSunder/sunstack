@@ -19,7 +19,7 @@ current plan, proof, and review evidence:
 prior review findings or missing-history baseline:
 authority and blockers:
 trail: <coordination root plus execution roots, or unshared checkpoint path> / whole-work responsibility | contribution
-responsibility: orchestrator and coordination/integration / workstream (one PR assignment or a dependent stack) -> 🐒 Implementer, 🔬 Verifier, and one execution root / 🔎 Reviewer: <persistent session or not yet commissioned> / executor: <assigned or implementer direct>
+responsibility: orchestrator and coordination/integration / workstream (one PR assignment or a dependent stack) -> 🐒 Implementer, 🔬 Verifier, and one execution root / 🔎 Reviewer per workstream delivery: <persistent session or not yet commissioned> / executor: <assigned or implementer direct>
 next owner or stop:
 ```
 

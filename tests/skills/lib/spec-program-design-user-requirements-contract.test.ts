@@ -40,10 +40,9 @@ describe("user requirements and design-view contracts", () => {
       "Return `owner-decision` for that added complexity",
     );
     expect(review).toContain("Re-anchor before accepting a finding");
-    expect(review).toContain(
-      "existing `accepted | rejected | contested | unverified` disposition",
-    );
-    expect(review).toContain("do not create a second checkpoint status");
+    expect(review).toContain("Then give it one disposition, and act on it:");
+    expect(review).toContain("unverified   makes the result evidence-gap");
+    expect(review).toContain("contested    becomes a Finding routed to lead");
   });
 
   test("keeps shared rendering reachable and ordered before artifact consumers", () => {
@@ -75,7 +74,9 @@ describe("user requirements and design-view contracts", () => {
     ).toBeLessThan(
       discussPathfinding.indexOf("MUST load `references/decisions-and-docs.md`"),
     );
-    expect(specDesign).toContain("load `references/views.md`");
+    expect(specDesign).toContain(
+      "Then MUST load `references/views.md` and return each view whose condition holds, or none.",
+    );
     expect(programDesign).toContain("MUST load `references/views.md`");
     expect(programDesign.indexOf("MUST load `references/views.md`")).toBeLessThan(
       programDesign.indexOf("return a `PhaseReturn` of kind `phase-complete`"),
@@ -152,6 +153,16 @@ describe("user requirements and design-view contracts", () => {
     expect(requirementsCard).toContain("Never promote a row past its state.");
     expect(requirementsCard).toContain(
       "Adoption means the owner said yes to that line.",
+    );
+    expect(requirementsCard).toContain(
+      "It becomes a Specification rule only when a stranger reading the owner's line would derive the same rule from it",
+    );
+    expect(requirementsCard).not.toContain("or leave it to the Specification");
+    expect(writingRules).toContain(
+      "An R that adds meaning the line leaves open (a version check, a limit, an ordering) is a proposal, not a rule",
+    );
+    expect(writingRules).toContain(
+      "unless a confirmed requirement or governing contract imposes it",
     );
     expect(writingRules).toContain(
       "Every confirmed U line has at least one R, or a stated reason why not.",
@@ -284,7 +295,9 @@ describe("user requirements and design-view contracts", () => {
       "Never answer with a weaker observation and call it the one asked for.",
     );
     expect(seamsAndTrace).toContain("It never names a test file, a command, or a test layer.");
-    expect(programDesign).toContain("returned a `seam-request`, re-enter at step 5 for that rule only");
+    expect(programDesign).toContain(
+      "returned a `seam-request`, or listed an open item waiting on `program-design`, re-enter at step 5 for that rule only",
+    );
     expect(programDesign).toContain("It does not choose test layers (`test-design`)");
   });
 
@@ -341,9 +354,11 @@ describe("user requirements and design-view contracts", () => {
     );
     expect(documentChecks).toContain("if it disappeared, which understanding");
     expect(findings).toContain(
-      "Name the line it puts at risk (a `U`, an `R`, or a confirmed boundary), quote it, and say in plain words what fails",
+      "Name the line it puts at risk (a `U`, an `R`, or a goal-boundary line on the Requirements card), quote it, and say in plain words what fails",
     );
-    expect(findings).toContain("make one bounded source lookup and record its anchors");
+    expect(findings).toContain(
+      "make one bounded source lookup in this session, record its anchors, and open them yourself before disposing of the candidate",
+    );
     expect(findings).toContain(
       "if removing the mechanism keeps every rule, deletion is the correction",
     );
@@ -383,10 +398,10 @@ describe("user requirements and design-view contracts", () => {
 
     expect(reviewSkill).toContain("the documents in front of you, from one to all five");
     expect(reviewSkill).toContain(
-      "`ready` needs every reviewed document `checked`, no open finding, no unchecked tie",
+      "`ready` needs every reviewed document `checked`, no open finding, no unverified or contested candidate, no gap or unchecked tie",
     );
     expect(findings).toContain(
-      "A `partial` or `blocked` document makes the result `evidence-gap`",
+      "A `partial` or `blocked` document, or an `unverified` candidate, makes the result `evidence-gap`",
     );
     expect(ties).toContain("Walk down only into documents that are review targets.");
     for (const heading of [
@@ -506,6 +521,7 @@ describe("user requirements and design-view contracts", () => {
     }
     for (const viewToken of [
       "component view",
+      "call path",
       "entity → home map",
       "state machine or table",
       "data or event flow",

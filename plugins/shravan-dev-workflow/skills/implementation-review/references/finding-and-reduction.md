@@ -71,6 +71,8 @@ Route by cause, not severity:
 
 - Requirements or observable-contract meaning -> `spec-design`.
 - Structural ownership, interface, state, failure, concurrency, trust, compatibility, or proof seam -> `program-design`.
+- A Test Design scenario that is missing, misplaced, or plans a false green -> `test-design`.
+- A Verification Design check with the wrong reference, surface, or observation -> `verification-design`.
 - Slice, sequence, dependency, collision, write scope, or plan-proof mapping -> the plan record's `plan-implementation` or `plan-improve-repo` origin.
 - Code, test, fixture, or implementation-proof evidence -> `implement-plan`.
 - Missing authority or unresolved owner choice -> caller.

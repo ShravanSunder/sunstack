@@ -33,4 +33,4 @@ Use when the design set is hard to navigate or its rules are spread out. Read fr
 
 ## Complete When
 
-Each check run has its named risk, its status, what it inspected, and its findings; each risk is resolved, unsupported, outside the confirmed boundary, or routed to the Lead; and no check ran without a named risk.
+Each check run has its named risk, its status, what it inspected, and its findings; each risk is resolved, unsupported, outside the Requirements' goal boundary, or routed to the Lead; and no check ran without a named risk.

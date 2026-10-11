@@ -33,7 +33,7 @@ backpressure/capacity boundary
 
 Construct a concrete failure or interleaving. "Use retries", "add a lock", or "eventual consistency" is not a design until the owner, eligibility, invariant, failure consequence, and seam and observation point are known.
 
-Use a failure/recovery flow when detection, containment, retry, cleanup, compensation, or degraded behavior branches; use a sequence view when actor ordering or interleaving is the risk; use a state machine when retry/recovery lifecycle and illegal transitions are the risk.
+Which view shows a failure or an interleaving is `views.md`'s call.
 
 Do not invent product failure policy. Missing failure behavior that someone outside the system would see is a `specification-gap`.
 

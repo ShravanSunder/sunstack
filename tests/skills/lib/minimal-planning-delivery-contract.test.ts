@@ -122,7 +122,7 @@ describe("goal delivery intent hard cutover", () => {
     expect(orchestrator).toContain("Merge is a separately authorized extension");
     expect(routing).toContain("## Select the Current Owner");
     expect(routing).toContain("verifies decisive evidence, and continues the goal");
-    expect(orchestrator).toContain("A milestone, completed slice, or phase return is a checkpoint");
+    expect(orchestrator).toContain("A finished Task, completed slice, or phase return is a checkpoint");
     expect(readme).not.toContain("Plan awaits approval");
   });
 

@@ -6,7 +6,7 @@ Expected inputs: the bug report, the Requirements line or rule the bug breaks, a
 
 ## Reproduce Before Fixing
 
-1. Write the reproduction from the report and the rule, without knowing the fix, so it tests the symptom and not the patch.
+1. Write the reproduction from the report and the rule, not from the planned fix, so it tests the symptom and not the patch.
 2. Run it on the unfixed code and see the symptom. Run it again and see it again. A symptom seen once may be noise.
 3. Record the exact command, the input, and what was observed both times.
 

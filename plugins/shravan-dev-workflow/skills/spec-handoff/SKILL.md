@@ -57,7 +57,7 @@ Package spec/design context so another agent can continue without reconstructing
 - Tradeoffs and who pays their cost
 - Security context or reason it is not security-sensitive
 - Proof expectations: validation strategy, proof assumptions, explicit planning deferrals, or open proof gaps
-- Planning-admission evidence: the five design document paths, the current review result (its `result`, the `reviewed` documents with their status, and its coverage) or a pointer to it, evidence that it covers all five documents' current meaning, or the exact missing or stale prerequisite
+- Planning-admission evidence: the five design document paths, the current review result (its `result`, the `reviewed` documents with their status, and its `ties`) or a pointer to it, evidence that it covers all five documents' current meaning, or the exact missing or stale prerequisite
 - Source evidence inspected
 - Open questions and why they matter
 - Exact next task for the receiving agent

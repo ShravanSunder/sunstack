@@ -8,7 +8,7 @@ This reference owns how the Verifier's two returns are filled. Their shapes live
 
 Expected inputs: the Verification Design, and for the report the build at a known head commit with the evidence gathered. Return: a filled `VerifierChallenge` before building, or a filled `VerifierReport` after proving.
 
-Three readers use these: the Verifier writes them (its `manage-agents` charter), the Lead decides from them together with its own inspection (`orchestrator-implementation-goal`), and a later merge check reads the report.
+Three readers use these: the Verifier writes them (its `manage-agents` charter), the Lead decides from them together with its own inspection, and a later merge check reads the report.
 
 ## The Challenge
 

@@ -5,7 +5,7 @@ import {
   DesignReviewResult,
   PhaseReturn,
 } from "../../../plugins/shravan-dev-workflow/schemas/design-returns.ts";
-import { VerifierReport } from "../../../plugins/shravan-dev-workflow/schemas/verifier-report.ts";
+import { VerifierChallenge, VerifierReport } from "../../../plugins/shravan-dev-workflow/schemas/verifier-report.ts";
 
 const documentRef = (kind: "requirements" | "specification" | "program-design" | "test-design" | "verification-design", path: string) => ({ kind, path });
 
@@ -21,10 +21,7 @@ const readyReview = {
   result: "ready",
   reviewed: allFiveDocuments.map((document) => ({ document, status: "checked" })),
   unavailableSources: [],
-  ties: [
-    { kind: "down", from: "U1", to: ["R1", "T1", "V1"], status: "tied" },
-    { kind: "orphan", item: "T9", document: "test-design", missingParent: "no rule above it" },
-  ],
+  ties: [{ kind: "down", from: "U1", to: ["R1", "T1", "V1"], status: "tied" }],
   findings: [],
 };
 
@@ -56,6 +53,23 @@ describe("design phase returns", () => {
     expect(PhaseReturn.safeParse(fromSpecDesign).success).toBe(false);
   });
 
+  test("every return kind parses", () => {
+    // Arrange
+    const returns = [
+      { kind: "phase-complete", phase: "spec-design", documents: [documentRef("requirements", "docs/specs/x/requirements.md")], openItems: [], designReview: "not-needed" },
+      { kind: "requirements-gap", phase: "spec-design", missingMeaning: "which agent versions must work", evidence: [] },
+      { kind: "specification-gap", phase: "program-design", missingRule: "what a cancelled reminder does", evidence: [] },
+      { kind: "seam-request", phase: "verification-design", rule: "R2", observationNeeded: "the lock holder, across processes" },
+      { kind: "owner-decision", phase: "program-design", question: "how much downtime is acceptable", options: [{ choice: "none", gain: "no outage", cost: "dual writes" }, { choice: "five minutes", gain: "simple cutover", cost: "a short outage" }], recommendation: "five minutes" },
+      { kind: "evidence-gap", phase: "verification-design", missing: "the installed agent version", neededToContinue: "access to the test machine" },
+    ];
+
+    // Act / Assert
+    for (const phaseReturn of returns) {
+      expect(PhaseReturn.safeParse(phaseReturn).success).toBe(true);
+    }
+  });
+
   test("phase-complete without the designReview field is rejected", () => {
     // Arrange
     const missingReviewObligation = {
@@ -73,6 +87,14 @@ describe("design phase returns", () => {
 describe("design review result", () => {
   test("carries orphan ties and per-document status", () => {
     // Arrange
+    const withOrphan = {
+      ...readyReview,
+      result: "corrections-routed",
+      ties: [
+        ...readyReview.ties,
+        { kind: "orphan", item: "T9", document: "test-design", missingParent: "no rule above it" },
+      ],
+    };
     const blockedByMissingSource = {
       ...readyReview,
       result: "evidence-gap",
@@ -80,11 +102,11 @@ describe("design review result", () => {
     };
 
     // Act
-    const ready = DesignReviewResult.parse(readyReview);
+    const routed = DesignReviewResult.parse(withOrphan);
     const blocked = DesignReviewResult.parse(blockedByMissingSource);
 
     // Assert
-    expect(ready.ties[1]?.kind).toBe("orphan");
+    expect(routed.ties[1]?.kind).toBe("orphan");
     expect(blocked.reviewed[0]?.status).toBe("blocked");
   });
 });
@@ -142,5 +164,20 @@ describe("verifier report", () => {
 
     // Assert
     expect(parsed.checks[0]?.rules).toEqual(["R1", "R2"]);
+  });
+});
+
+describe("verifier challenge", () => {
+  test("each challenge carries one of the three kinds", () => {
+    // Arrange
+    const challenge = {
+      verificationDesign: allFiveDocuments[4],
+      challenges: [{ about: ["U4"], kind: "missing-scenario", detail: "no core-outcome check for U4" }],
+    };
+    const unknownKind = { ...challenge, challenges: [{ ...challenge.challenges[0], kind: "nitpick" }] };
+
+    // Act / Assert
+    expect(VerifierChallenge.safeParse(challenge).success).toBe(true);
+    expect(VerifierChallenge.safeParse(unknownKind).success).toBe(false);
   });
 });

@@ -2,7 +2,7 @@
 
 This reference owns what each check is checked against, how that reference is disclosed, the kinds of case that find real defects, and the kind of evidence that can observe each outcome.
 
-Expected inputs: the Requirements lines, the Specification rules and any reference they name, and known limits of the environment. Return: a declared reference for each check, its case kinds, and its evidence type.
+Expected inputs: the Requirements lines, the Specification rules and any reference they name, and known limits of the environment. Return: a declared reference for each rule, the case kinds (recorded in each check's "risk it targets" cell), and the evidence type (recorded with its observation point).
 
 ## Declare the Reference
 

@@ -13,7 +13,7 @@ Rebuild the model without following the author's section order: what the owner w
 ## Requirements
 
 - The card opens the document: one plain line per need, readable by the owner.
-- Each line's source says it. Open the source. An owner message, an existing contract, a hard constraint, or a proposal the owner adopted can carry an owner line; an agent's analysis, an earlier design, or current code cannot.
+- Each line's source says it. Open the source. An owner message, an existing contract, a hard constraint, or a proposal the owner adopted can carry an owner line; an agent's analysis or an earlier design cannot. Current code is not a source of an owner line; it can only show that a constraint holds for a line the owner or a contract states.
 - For each load-bearing line, sort its basis: code-compelled (open the code and show it constrains), owner-chosen (find the durable choice), an agent's recommendation labeled as authority, or a contradiction of a stated non-goal.
 - When the Requirements were revised, compare them with the last owner-confirmed card, or else the last owner-accepted source you can inspect. A line missing or narrowed without the owner removing it is a finding. Mutually narrowed current files still trace cleanly to each other, so they are never the baseline.
 - Proposals and open decisions are labeled and kept apart from the owner's lines.
@@ -45,13 +45,13 @@ Rebuild the model without following the author's section order: what the owner w
 - Every rule has scenarios, or "not regression-tested: <why>".
 - Expected outcomes come from the Specification as literals or observable effects, never recomputed the way the code computes them.
 - No replacement removes the interaction the scenario claims to prove, and each replacement names its assumption.
-- Each scenario names the behavior change that turns it red, and its timing control or "n/a"; none matches the false-green shapes `test-design` names.
+- Each scenario names the behavior change that turns it red, and its timing control or "n/a"; MUST load `../../../shared-references/false-green-test-shapes.md` when Test Design is a target, and no scenario matches a shape there.
 - Each scenario uses a seam Program Design names, and says why a cheaper layer cannot observe it.
 
 ## Verification Design
 
 - Each Requirements line has a "proven by" line and a core-outcome check on the real surface, or a named limit. A happy path that misses the core outcome is a finding.
-- Each check declares its reference with version and entry point; recorded traces and the code's own output are not references unless the Specification says so.
+- Each check declares its reference from `verification-design`'s reference table, with version and entry point where one exists; recorded traces and the code's own output are not references unless the Specification says so.
 - Every rule has a check, and every limit is written as unverified with its reason.
 - Expected outcomes come from the Specification, not from Program Design or Test Design.
 - Each observation point exists in Program Design, and each reused test's scope covers the case on the real surface.

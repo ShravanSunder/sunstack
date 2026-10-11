@@ -64,7 +64,7 @@ If the user declines extraction, return:
 - the rows or evidence established so far;
 - the remaining owner and evidence gaps.
 
-Do not select a specification readiness label; `spec-design` owns that decision after it classifies the complete source inventory.
+Do not select a specification readiness label; `spec-design` owns that decision after it checks each line's source.
 
 Stop this stage when every row has an evidenced authority state and any missing authority is an exact owner decision rather than an inferred answer.
 

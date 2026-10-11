@@ -2,7 +2,11 @@
 
 This reference owns the Verifier's challenge at delivery start, before anything is built: finding what the Verification Design misses or cannot do, and classifying each challenge so it reaches the right owner.
 
-Expected inputs: the Requirements, the Specification, the Verification Design, Program Design's observation points, Test Design, and the project's verification controls. Return: classified challenges, ready to fill a `VerifierChallenge`.
+Expected inputs: the Requirements, the Specification, the Verification Design, Program Design's observation points, Test Design, and the project's verification controls. Return: classified challenges, filled into a `VerifierChallenge` as `verifier-report.md` teaches.
+
+```ts
+// import type { VerifierChallenge } from '../../../schemas/verifier-report.ts'
+```
 
 ## What to Check
 

@@ -60,7 +60,7 @@ Cell rules:
 - `gap: <why>` marks design that is missing. "Not applicable" is `none: <why>` or a plain value such as `stateless guard`.
 - No cell is blank, and no cell says "see above" or "see interfaces".
 
-Each row's disposition follows from its cells: `covered` when every cell names a concrete element or a reasoned `none:`; `gap` when any cell reads `gap: <why>`; `superseded` when the `R` cell carries `superseded: <owner decision>`.
+Each row's disposition follows from its cells: `covered` when every cell names a concrete element or a reasoned `none:`; `gap` when any cell reads `gap: <why>`. A row goes only when the Specification removes its rule.
 
 Good: a reader can walk each row from owner line to observation point without opening the prose; the `E` cell matches the Specification's identifiers; the seam cell says what stays real.
 
@@ -68,10 +68,10 @@ Bad: a paragraph tagged with identifiers instead of a table; a trace kept in scr
 
 ## Answering a Seam Request
 
-A `seam-request` from `test-design` or `verification-design` names one rule and the observation it needs. Work on that rule only:
+A `seam-request`, or an open item waiting on `program-design`, from `test-design` or `verification-design` names one rule and the observation it needs. Work on that rule only:
 
 1. Check whether an existing seam or observation point already gives that observation. If one does, point to it.
-2. Otherwise design the smallest addition that does: a boundary where the test can drive the behavior, an emitted event, a readable state, or a log or trace point, each with its owner. Update the rule's row, and every other part of the design the addition touches.
+2. Otherwise design the smallest addition that does: a boundary where the test can drive the behavior, an emitted event, a readable state, or a log or trace point, each with its owner. Update the rule's row, and every other part of the design the addition touches. If the addition changes the structure the owner confirmed, show it again at step 6.
 3. If it cannot exist (the platform does not expose it, or adding it would break an invariant), say why as an open item on that rule. If it needs a tolerance only the owner can set, return `owner-decision`.
 
 Never answer with a weaker observation and call it the one asked for.

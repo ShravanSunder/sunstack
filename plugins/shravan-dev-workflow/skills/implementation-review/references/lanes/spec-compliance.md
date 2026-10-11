@@ -11,7 +11,7 @@ Check boundary: read-only review. Read-only discovery commands and a tmp scratch
 Procedure: read the governing basis and the diff completely, then compare in both directions:
 
 ```text
-asked -> delivered   every requirement, obligation, and plan slice in scope has
+asked -> delivered   every requirement, obligation, Test Design scenario, and plan slice in scope has
                      an implementation anchor or an explicit, authorized deferral
 delivered -> asked   every delivered behavior, file, and subsystem traces to a
                      requirement, obligation, plan slice, or authorized constraint

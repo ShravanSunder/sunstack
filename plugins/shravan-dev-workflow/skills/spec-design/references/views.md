@@ -10,7 +10,7 @@ Draw a view only when it makes a relationship easier for the owner to confirm or
 
 | View | Draw it when | It shows |
 |---|---|---|
-| screen picture | a requirement changes a screen, page, or other UI someone sees | that moment, grounded in the current app, or the exact words `no current UI` |
+| screen picture | a requirement changes a screen, page, or other UI someone sees | that moment, in the Requirements document, grounded in the current app, or the exact words `no current UI` |
 | journey map | an affected group's job has an order or pain worth confirming | that group's steps in their words, the pain and its evidence (or "unknown"), and the U lines it re-draws; one map per group, never chained |
 | context view | two or more outside consumers or surfaces exist | the consumers, the surfaces they rely on, nearby things that are out of scope, and the system as one closed box |
 | entity map | the Specification defines entities | each `E` with its identity rule, relationships with cardinality, and states; no package, schema, type, or store |

@@ -18,7 +18,7 @@ Draw another view only when it makes a relationship easier for the owner to conf
 | View | Draw it when | It shows |
 |---|---|---|
 | entity → home map | the design adds or changes a contract | each `E`, its owning component, its package or module home marked `new`, `modified`, or `existing`, and its schema home |
-| more call paths | another material path is added, removed, or changed, or control crosses owners or async boundaries | the same fields as the entry-to-effect path above, plus any unchanged edge whose preservation is critical or contested |
+| call path | another material path is added, removed, or changed, or control crosses owners or async boundaries | the same fields as the entry-to-effect path above, plus any unchanged edge whose preservation is critical or contested |
 | state machine or table | timing or order changes correctness | the owner, states, transitions, guards, and illegal paths |
 | data or event flow | data crosses a storage, process, or service boundary | authority, transformations, persistence and privacy, and the shape on each boundary-crossing edge (name, discriminant, fields with nullability, schema home) |
 | failure and recovery flow | partial failure, retry, or compensation exists | detection, containment, retry, cleanup, and the recovery owner |

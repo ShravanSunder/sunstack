@@ -2,7 +2,7 @@
 
 This reference owns how the Reviewer splits a design set too large to hold whole into chunk passes, without cutting any requirement's chain.
 
-Expected inputs: the Reviewer's own whole read of every target and governing source, and the tie table so far. Return: the chunk plan, with each chunk's seam, its sections, and its overlap with its neighbors; or the decision that one whole pass covers the set.
+Expected inputs: the Reviewer's own whole read of every target and governing source. Return: the chunk plan, with each chunk's seam, its sections, and its overlap with its neighbors; or the decision that one whole pass covers the set.
 
 ## When Not to Chunk
 

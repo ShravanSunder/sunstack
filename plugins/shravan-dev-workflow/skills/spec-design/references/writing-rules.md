@@ -52,7 +52,7 @@ failure      If <fault>, then the <system> <response>.
 
 Write faults as if/then. Split a rule when its parts can pass or fail independently.
 
-Repair vague words with the behavior that tells pass from fail:
+Repair vague words (support, handle, robust, seamless, fast, user-friendly) with the behavior that tells pass from fail:
 
 ```text
 weak:    The system must support retries.
@@ -60,7 +60,7 @@ repair:  If the provider times out before confirming acceptance, the system retr
          without creating more than one externally visible operation.
 ```
 
-The technology-name test: if a different implementation could satisfy the same observable rule, the technology name is structure, not a requirement, unless a governing contract makes it one. "Use Redis for idempotency" becomes "repeated requests with the same key return the original outcome without repeating the side effect."
+The technology-name test: if a different implementation could satisfy the same observable rule, the technology name is structure, not a requirement, unless a confirmed requirement or governing contract imposes it. "Use Redis for idempotency" becomes "repeated requests with the same key return the original outcome without repeating the side effect."
 
 ## 3. State the Reference When One Defines Correct
 
@@ -87,6 +87,7 @@ U line  ->  E entities  ->  R rule  ->  (later) Program Design row, T scenario, 
 
 - Every confirmed U line has at least one R, or a stated reason why not.
 - Every R names the U lines it serves; an R with nothing above it is an invented rule. Remove it, or bring it to the owner as a proposal.
+- An R must follow from its U line: a stranger reading only that line would derive the same rule. An R that adds meaning the line leaves open (a version check, a limit, an ordering) is a proposal, not a rule, until the owner adopts it.
 - Every noun a rule uses is an `E`; every `E` is used by some rule.
 
 The stranger test: someone with no session history can read a rule and say what passes, what fails, and which owner line it serves.

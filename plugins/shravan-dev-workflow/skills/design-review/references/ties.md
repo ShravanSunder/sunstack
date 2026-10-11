@@ -21,6 +21,9 @@ Walk down only into documents that are review targets. A document below the targ
 
 ## Walk Down
 
+Each row of the tie table fills the `Tie` shape in `DesignReviewResult`: a `down` tie names its `from` line, the items `to` below it, and its `status` (`tied`, `gap`, or `unchecked`); an `orphan` names the `item`, its `document`, and its `missingParent`. A `gap` tie is also a finding.
+
+
 For each `U`, then each `R`, list what sits below it and say `tied`, `gap`, or `unchecked`. A tie is more than a link: open the downstream item and confirm it does the job. A trace row whose cells are filled, a scenario whose expected outcome comes from that rule, a check that observes the core outcome on the real surface.
 
 ```text
@@ -34,7 +37,7 @@ Walk every row and every cell of Program Design's trace table; do not sample.
 
 - A blank cell is a finding, and so is "see above" or "see interfaces".
 - `gap: <why>` is an honest marking of missing design. Report it only when it leaves a rule unrealized that the design should have settled.
-- `none: <why>` is valid in the `U` and `E` cells and for values that do not apply.
+- `none: <why>` is valid in the `E` cell and for values that do not apply. The `U` cell always names a Requirements line: a rule with nothing above it was invented.
 - There is one row per rule; two rules sharing a contract keep separate rows.
 - Each cell agrees with the section it summarizes, and a cross-cutting row names the mechanism's owner.
 

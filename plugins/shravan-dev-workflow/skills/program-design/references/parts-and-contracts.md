@@ -115,7 +115,7 @@ target system
 
 Components are semantic owners, not directories, and each has one home. For UI work, show state-owning containers, pure views, derived state, and integration/effect boundaries.
 
-Use a component tree when hierarchy/composition matters and a topology view when peer boundaries or dependency direction matter more than nesting. Label owners and consumers on the view; do not infer ownership from box position alone.
+`views.md` owns which views to draw. Whatever the view, label owners and consumers on it; do not infer ownership from box position alone.
 
 ## Depth and Ownership
 
@@ -168,11 +168,11 @@ reset/cancel/dispose/recovery
 illegal transitions and handling
 ```
 
-Use a state machine when timing/order changes correctness; use a state table when compact. In UI, prefer render-derived values over synchronized copies when ownership permits.
+In UI, prefer render-derived values over synchronized copies when ownership permits.
 
 ## End-to-End Flow
 
-Use a sequence view when participants and call order matter, a state machine when lifecycle and legal transitions matter, and a data/event flow when authority or transformation crosses storage, process, or service boundaries. Combine them only when one view stays readable and preserves each relationship.
+Separate control flow from data authority, and keep each view to one reader question (`views.md`).
 
 Trace each requirement:
 

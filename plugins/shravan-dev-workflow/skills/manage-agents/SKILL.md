@@ -32,7 +32,7 @@ A Sidekick session is how a role runs when it needs its own continuing context; 
 ## Workflow
 
 1. **Classify the job** (below). Done when: direction, span, and horizon are named, and so is the check that ends the job.
-2. **Pick the role by its job.** The result the job must produce picks the role, and the role table then gives its runtime. Done when: one role is named and its job matches what is being asked.
+2. **Pick the role by its job.** The result the job must produce picks the role, and the role table then gives its runtime. Done when: one role is named, or the workstream's Implementer–Verifier pair, and its job matches what is being asked.
 3. **Pick the model** from that role's catalog. Done when: the runtime the role table gives and the catalog row are named, with the recorded reason when a Daily-driver row is used.
 4. **Launch and hand off with the charter.** MUST load `references/role-charters.md` and return the charter text for the role. MUST load `references/agent-job-packet.md` and return the packet with that charter at the top, plus the session row when the role runs in its own session. Done when: the packet has its charter, outcome, sources, limits, stop, and return. The same charter opens every correction and resume of that role.
 5. **Check the result against its evidence.** Open the files, exit codes, and diff scope the result claims. Done when: each claim is matched to evidence you opened, or sent back with the gap. For the Lead, a report is input to its decision, never the decision.
@@ -125,6 +125,8 @@ A Daily-driver row needs one recorded reason: the owner recommends it, the Lead 
 | Daily driver | OpenAI Sol | medium | Complete | Cross-domain |
 | Daily driver | Claude Opus | medium | Complete | Cross-domain |
 
+No Worker row covers Complete · Local work, the usual shape of code-reading research. Until the owner adds one, the Lead reads it itself or the owner names a model.
+
 ### 🐒 Implementer
 
 | Tier | Model | Thinking Effort | Direction | Span |
@@ -143,7 +145,7 @@ A Daily-driver row needs one recorded reason: the owner recommends it, the Lead 
 
 ### 🔎 Reviewer
 
-Implementation review comes after the 🦁 Lead has checked the work against the plan and its proof, asking the 🦉 Advisor to check it too when one exists. Reviewers then review a workstream's delivery, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers.
+Implementation review comes after the 🦁 Lead has checked the work against the plan and its proof, asking the 🦉 Advisor to check it too when one exists. Reviewers then review a workstream's delivery, never a lone Task or Subtask outside it; a one-PR workstream is reviewed as that workstream. Design and proposal reviews happen where their owning phase says and use the same reviewers.
 
 | Tier | Model | Thinking Effort | Use |
 |---|---|---|---|
@@ -169,7 +171,7 @@ Workers and Operators run as native subagents. Implementers, Verifiers, Reviewer
 
 Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
 
-- IF the role runs in its own session, load `agent-collaboration` and return the session address.
+- IF the role runs in its own session, load `agent-collaboration` and return the session address, whichever route below started it.
 - IF Codex spawns it, load `references/native-providers-codex.md` and return the spawn encoding.
 - IF Claude spawns it, load `references/native-providers-claude.md` and return the spawn encoding.
 - IF Cursor spawns it, load `references/native-providers-cursor.md` and return the spawn encoding.
