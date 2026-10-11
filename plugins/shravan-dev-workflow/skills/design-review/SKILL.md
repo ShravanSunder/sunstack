@@ -17,7 +17,7 @@ The 🔎 Reviewer runs this skill. The Lead commissions it through `manage-agent
 
 2. **Read everything whole.** Done when: every available target, every governing source named at admission, and the owner sources the Requirements cite have been read in full. Unavailable sources stay named gaps.
 
-3. **Check each document on its own.** MUST load `references/document-checks.md` and return each document's check status (`checked`, `partial`, or `blocked`, with what was not checked) and its findings. Done when: each document has a status and its findings.
+3. **Check each document on its own.** MUST load `references/document-checks.md` and return each document's check status (`checked`, `partial`, or `blocked`, with what was not checked) and its findings. Done when: each document has `checked`, `partial`, or `blocked` with what was not checked, every section of it is covered or excluded with a reason, and its findings are listed.
 
 4. **Walk the ties both ways.** MUST load `references/ties.md` and return the tie table. Done when: every Requirements line and Specification rule shows its downstream items among the targets, or a gap; every downstream item shows the line above it or is listed as an orphan with its missing parent; and every tie that depends on an unavailable source is marked "unchecked: <source> unavailable", never counted as complete or as invented.
 

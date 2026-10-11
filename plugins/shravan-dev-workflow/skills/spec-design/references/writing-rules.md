@@ -55,10 +55,13 @@ Write faults as if/then. Split a rule when its parts can pass or fail independen
 Repair vague words (support, handle, robust, seamless, fast, user-friendly) with the behavior that tells pass from fail:
 
 ```text
+owner:   U2  "A retried payment never charges the customer twice."
 weak:    The system must support retries.
 repair:  If the provider times out before confirming acceptance, the system retries
-         without creating more than one externally visible operation.
+         without creating more than one charge.                      (traces to U2)
 ```
+
+The repair takes its limit from the owner's line. A limit no owner line states is a proposal.
 
 The technology-name test: if a different implementation could satisfy the same observable rule, the technology name is structure, not a requirement, unless a confirmed requirement or governing contract imposes it. "Use Redis for idempotency" becomes "repeated requests with the same key return the original outcome without repeating the side effect."
 

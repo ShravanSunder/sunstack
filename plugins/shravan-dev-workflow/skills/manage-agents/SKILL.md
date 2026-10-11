@@ -171,11 +171,11 @@ Workers and Operators run as native subagents. Implementers, Verifiers, Reviewer
 
 Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
 
-- IF the role runs in its own session, load `agent-collaboration` and return the session address, whichever route below started it.
+- IF the role runs in its own session (Implementer, Verifier, Reviewer, Advisor), start it through `agent-collaboration` (agent-router) and return the session address.
 - IF Codex spawns it, load `references/native-providers-codex.md` and return the spawn encoding.
 - IF Claude spawns it, load `references/native-providers-claude.md` and return the spawn encoding.
 - IF Cursor spawns it, load `references/native-providers-cursor.md` and return the spawn encoding.
-- IF the host has no native model for a session role's row, run it through agent-router instead. This fallback never applies to Workers or Operators.
+- IF the host has no native model for a Worker or Operator row, pick another native row or return the capability gap; Workers and Operators never fall back to agent-router.
 - IF agent-router cannot meet a session role's model, effort, access, or title, load `references/acpx-legacy.md` and return the route. An access denial needs the grant, not a route switch.
 - IF building or wrapping an ACP adapter, load `references/building-acp-adapters.md` and return its checklist.
 

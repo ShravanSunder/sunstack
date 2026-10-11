@@ -50,7 +50,7 @@ export const PhaseReturn = z.discriminatedUnion('kind', [
     documents: z.array(DocumentRef).min(1).describe('The documents this phase wrote or revised'),
     openItems: z.array(OpenItem).describe('Everything still open; empty when nothing is'),
     designReview: z.enum(['not-needed', 'owed'])
-      .describe('owed: this call changed rules, structure, tests or the proof plan and no current design review covers it. Inside a design cycle, later design documents may build on it and the cycle reviews before handing the set on; outside a cycle, the caller runs design-review before planning, delivery or another cycle uses it'),
+      .describe('owed: this call changed a Requirements line, rules, structure, tests or the proof plan and no current design review covers it. Inside a design cycle, later design documents may build on it and the cycle reviews before handing the set on; outside a cycle, the caller runs design-review before planning, delivery or another cycle uses it'),
     scope: z.object({
       done: z.string().describe('What this call covered, e.g. "Requirements only"'),
       remaining: z.string().describe('What the request left for later'),

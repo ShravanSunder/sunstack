@@ -16,7 +16,7 @@ Re-anchor before accepting a finding: name the line it serves, whether the exist
 
 ```text
 accepted     fills a Finding (below)
-unverified   makes the result evidence-gap, naming the evidence it needs
+unverified   makes the result evidence-gap; record the evidence to supply in the affected document's `incomplete`
 contested    becomes a Finding routed to lead, so the result is owner-decision
 rejected     stays out of findings; list it, with its evidence, in the written report
 ```

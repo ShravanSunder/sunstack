@@ -165,6 +165,9 @@ describe("user requirements and design-view contracts", () => {
       "unless a confirmed requirement or governing contract imposes it",
     );
     expect(writingRules).toContain(
+      "The repair takes its limit from the owner's line. A limit no owner line states is a proposal.",
+    );
+    expect(writingRules).toContain(
       "Every confirmed U line has at least one R, or a stated reason why not.",
     );
     expect(writingRules).toContain("Every R names the U lines it serves");
@@ -323,7 +326,9 @@ describe("user requirements and design-view contracts", () => {
     ].join("\n");
 
     expect(documentChecks).toContain("## The Reader's View");
-    expect(reviewSkill).toContain("each document has a status");
+    expect(reviewSkill).toContain(
+      "each document has `checked`, `partial`, or `blocked` with what was not checked, every section of it is covered or excluded with a reason",
+    );
     expect(chunking).toContain("Run the passes one after another.");
     expect(reviewSkill).toContain("one check per named risk");
     expect(focusedChecks).toContain("only when a named risk remains");
