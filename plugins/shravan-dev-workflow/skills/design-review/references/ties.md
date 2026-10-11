@@ -15,6 +15,10 @@ up     every R, Program Design element, T, and V names the line above it
        anything with nothing above it was invented
 ```
 
+## Scope
+
+Walk down only into documents that are review targets. A document below the targets that is not under review is outside this review: it is neither a gap nor unchecked. A Requirements-only review stops at whether each line is sound; a Requirements and Specification review checks `U` to `R`; and so on. The full rules above apply when all five documents are targets, as in the design cycle. "Unchecked" is only for a governing source above a target that cannot be read.
+
 ## Walk Down
 
 For each `U`, then each `R`, list what sits below it and say `tied`, `gap`, or `unchecked`. A tie is more than a link: open the downstream item and confirm it does the job. A trace row whose cells are filled, a scenario whose expected outcome comes from that rule, a check that observes the core outcome on the real surface.

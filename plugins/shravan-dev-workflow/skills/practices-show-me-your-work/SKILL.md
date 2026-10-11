@@ -50,7 +50,7 @@ The same folder serves an outage after a thread existed: report the sharing gap,
 
 When a board home becomes reachable, the Lead transfers the folder:
 
-1. Create the coordination root from `main.md` and one execution root per assignment file, or use the existing thread after reading its current state and history, including any possibly saved uncertain post.
+1. Create the coordination root from `main.md` and one execution root per commissioned workstream. An Implementer's file and a Verifier's file from the same workstream share that root, and both record the same root reference. Or use the existing thread after reading its current state and history, including any possibly saved uncertain post.
 2. Post each file's concise current state under the Lead's own verified session identity, quoting the file and naming its author session and file path. Post what is missing; do not replay stale updates.
 3. Record the returned message ids at the top of each file and mark it **transferred**. The folder stops receiving updates. A still-live 🐒 Sidekick continues on its execution root as itself.
 

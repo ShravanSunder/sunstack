@@ -42,7 +42,7 @@ The Lead loads this skill and writes both documents itself, with the owner. Help
 - A document an agent wrote supplies proposals, not requirements, even an earlier spec or design. It becomes a requirement line only when the owner adopts that line. The rationalization to name: "it's in the existing design, so it's authoritative."
 - Detailed rules a tester could check (counts, order, fields, timing) belong in the Specification. The confirmed need or constraint they come from stays a Requirements line with its identity, and its detailed rules sit beneath it in the Specification. Never move a confirmed line out of Requirements.
 - Requirements and Specification are separate documents with separate homes.
-- The Specification names no component, store, package, schema, or call path; that is `program-design`'s work.
+- The Specification names no component, store, package, schema, or call path of the agent's choosing; that is `program-design`'s work. A technology that a confirmed requirement or governing contract imposes is a rule: name it and trace it to that line.
 
 **Completion boundary.** Done when the owner has confirmed the card, every rule traces to a confirmed line, and every noun is defined. A stop returns the matching `PhaseReturn` kind with exactly what it needs.
 

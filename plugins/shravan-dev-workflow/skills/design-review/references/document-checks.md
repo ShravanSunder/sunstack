@@ -25,7 +25,7 @@ Rebuild the model without following the author's section order: what the owner w
 - Every noun a rule uses is defined, with its identity rule, relationships, and states.
 - When something outside the system defines correct, the rule names it with its version.
 - Each outside surface states its edge behavior: invalid and boundary input, failure, partial success, compatibility, and what is deliberately undefined. Probe an invalid input, a boundary value, and a nearby behavior the document does not forbid; missing detail is a finding only when two competent implementers would build different observable behavior.
-- It names no component, store, package, schema, or call path.
+- It names no component, store, package, schema, or call path, except a technology a confirmed requirement or governing contract imposes, traced to that line.
 - Requirements and Specification are separate documents. A combined one is a blocker routed to `spec-design`; never split or repair it during review.
 
 ## Program Design
@@ -37,7 +37,7 @@ Rebuild the model without following the author's section order: what the owner w
 - Each material behavior has today's and the proposed entry-to-effect path (or proposed only, marked new), with added, removed, and changed edges and any unchanged edge whose preservation is critical or contested.
 - Failure, concurrency, and cross-cutting obligations each have an owner and a seam.
 - Nothing no rule needs. An architecture noun with no rule above it is a finding however well drawn.
-- Terms match the Specification. A synonym for an existing entity routes to `program-design`; a design noun that behaves like an entity (its own identity, lifecycle, or relationships) with no entity behind it routes to `spec-design`.
+- Terms match the Specification. A synonym for an existing entity routes to `program-design`. A design noun that carries domain meaning someone outside the system could see or rely on, with no entity behind it, routes to `spec-design`. An internal concept (a wait handle, an idempotency key, a cache entry) stays in Program Design when it names the `E` or `R` it serves and adds no product meaning, even when it has its own lifecycle.
 - The owner confirmed the structure, or explicitly waived that check.
 
 ## Test Design

@@ -93,4 +93,4 @@ The stranger test: someone with no session history can read a rule and say what 
 
 ## Complete When
 
-Every rule is checkable, traces to a confirmed U line, and uses only defined entities; every reference that defines correctness is named; every outside surface states its edge behavior; and the Specification names no component, store, package, schema, or call path.
+Every rule is checkable, traces to a confirmed U line, and uses only defined entities; every reference that defines correctness is named; every outside surface states its edge behavior; and the Specification names no component, store, package, schema, or call path except one a confirmed requirement or governing contract imposes, traced to that line.

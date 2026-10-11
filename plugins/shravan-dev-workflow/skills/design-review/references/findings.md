@@ -53,7 +53,7 @@ A candidate whose correction cannot be written inside the current design, becaus
 
 Fill one `DesignReviewResult`:
 
-- `result`: the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`. `ready` only when no finding is open, no tie is unchecked, no source or confirmation is missing, and no owner decision is pending.
+- `result`: the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`. `ready` only when every reviewed document is `checked`, no finding is open, no tie is unchecked, no source or confirmation is missing, and no owner decision is pending. A `partial` or `blocked` document makes the result `evidence-gap`, with the exact unfinished boundary, unless an earlier result applies.
 - `reviewed`: every target with `checked`, `partial`, or `blocked`, and what was not checked.
 - `unavailableSources`: every governing source that could not be read.
 - `ties`: the tie table.

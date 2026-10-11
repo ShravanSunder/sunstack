@@ -30,7 +30,7 @@ Job the Lead is tempted to hand off: "Make the test prove shutdown without sleep
 3. Horizon: one part of PR 1. Inside the Task.
 4. Cut: the Lead makes the choice and writes it into Program Design and Test Design: the service emits a shutdown-finished event, and the test waits on it. If the Lead lacks the facts to choose, it first hands off "trace the service's shutdown sequence and report, with file:line, where it could signal completion".
 5. Role: the design change goes back to the same 🐒 Implementer as part of PR 1. The evidence job stands alone and has one result, so a 🛠️ Worker.
-6. Model: the tempting job is Partial and not ready to hand off. The evidence Worker is Complete · Local, which matches no 🛠️ Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain), so the Lead either writes the trace as an Exact procedure for the Workhorse row or records why it needs the Daily-driver row. The design choice itself goes to no other agent, at any tier.
+6. Model: the tempting job is Partial and not ready to hand off. The evidence job is Complete · Local: tracing the shutdown sequence means reading code, so it is not Exact however its steps are written. That matches no 🛠️ Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain), so it is not ready as a Worker job. One trace costs less to read than to hand off, so the Lead reads it itself; otherwise the Lead brings the owner the gap, and the owner names a model. The design choice itself goes to no other agent, at any tier.
 
 ### Orchestration: PR wrap-up
 
@@ -60,7 +60,7 @@ Job the Lead is tempted to hand off: "Find how libraries A, B, and C handle retr
 3. Horizon: three findings and a recommendation, checked only at the end.
 4. Cut: the Lead keeps the choice and names the method. Three jobs: "in library A, trace the retry entry point through retryable-error classification, attempt limits, delay calculation, and the tests that cover them; report each with file:line", and the same for B and C. Each is one bounded result.
 5. Role: three results that stand alone. Three 🛠️ Workers, fanned out as native subagents.
-6. Model: each job is Exact once the method is written as steps, which matches the 🛠️ Worker Workhorse row. The Lead compares the reports and proposes the policy.
+6. Model: each job is Complete · Local. Reading retry code is judgment, so numbering the method's steps does not make it Exact. That matches no 🛠️ Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain), so the jobs are not ready to hand off as written: the Lead brings the owner the gap with a recommended model, and the owner names one, or the Lead reads the three libraries itself. Either way, the Lead compares the findings and proposes the policy.
 
 ### Research: questions that keep coming
 
@@ -70,12 +70,12 @@ The Lead and the owner are redesigning how the sync engine stores state. Questio
 
 Job to hand off: "For this question, trace the field's writes, reads, and serialization boundary, and answer with file:line; report uncertainty instead of choosing."
 
-1. Direction: the method is named for every question. Complete, or Exact when written as steps.
+1. Direction: the method is named for every question, and following it means reading code. Complete.
 2. Span: the sync engine's storage module and the contracts it uses. Local.
 3. Horizon: each answer is one bounded result, checked by the Lead before the next question.
 4. Cut: none; the design choices stay with the Lead and the owner.
 5. Role: a 🛠️ Worker per question, as a native subagent. The next Worker's brief carries the earlier answers it needs, so nothing depends on a Worker remembering.
-6. Model: written as steps, each question matches the 🛠️ Worker Workhorse row.
+6. Model: Complete · Local matches no 🛠️ Worker row, so each question needs a model the owner names; until then the Lead answers it itself. Numbering the steps does not make reading code Exact.
 
 ### Cross-system: split at the system boundary
 

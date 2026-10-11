@@ -1,6 +1,6 @@
 # Phase return tokens
 
-When a phase, practice, or shared reference must send work elsewhere, it returns one token with its payload instead of naming the next skill. The caller resolves the token.
+When a phase, practice, or shared reference must send work elsewhere, it returns one token with its payload instead of naming the next skill. The caller resolves the token. Design skills return the typed results in `../schemas/design-returns.ts` instead; this table keeps the planning and delivery tokens and the gaps other skills raise.
 
 | Token | Payload |
 | --- | --- |

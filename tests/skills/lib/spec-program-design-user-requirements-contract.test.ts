@@ -381,7 +381,14 @@ describe("user requirements and design-view contracts", () => {
     const ties = readPluginFile("skills/design-review/references/ties.md");
     const findings = readPluginFile("skills/design-review/references/findings.md");
 
-    expect(reviewSkill).toContain("whichever of the five documents exist");
+    expect(reviewSkill).toContain("the documents in front of you, from one to all five");
+    expect(reviewSkill).toContain(
+      "`ready` needs every reviewed document `checked`, no open finding, no unchecked tie",
+    );
+    expect(findings).toContain(
+      "A `partial` or `blocked` document makes the result `evidence-gap`",
+    );
+    expect(ties).toContain("Walk down only into documents that are review targets.");
     for (const heading of [
       "## Requirements",
       "## Specification",
