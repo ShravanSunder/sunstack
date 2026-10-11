@@ -159,7 +159,7 @@ describe("goal delivery intent hard cutover", () => {
     );
     expect(designOrchestrator).toContain("Prefer one review-and-correction round");
     expect(designOrchestrator).toContain(
-      "Further rounds follow `spec-program-review`'s convergence rule",
+      "Further rounds follow `design-review`'s convergence rule in its `references/findings.md`",
     );
     expect(designOrchestrator).toContain(
       "IF the review returns `not-converging`, load `../../shared-references/owner-decision-brief.md` and return a brief of what keeps failing.",
@@ -215,7 +215,7 @@ describe("goal delivery intent hard cutover", () => {
       "`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`",
     );
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");
-    expect(designOrchestrator).toContain("central trail");
+    expect(designOrchestrator).toContain("The trace is the central trail");
     expect(goalOrchestrator).toContain("practices-show-me-your-work");
     expect(documents).toContain(
       "the artifact home the caller supplies (`orchestrator-design` supplies `<project-root>/docs/specs/`)",
