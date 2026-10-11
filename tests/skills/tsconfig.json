@@ -10,6 +10,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "zod@4.6.5": ["./node_modules/zod"]
+    },
     "types": ["node", "vitest/globals"]
   },
   "include": [
@@ -17,6 +22,7 @@
     "evals/**/*.ts",
     "fixtures/**/cases.ts",
     "pressure-scenarios/**/cases.ts",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    "../../plugins/shravan-dev-workflow/schemas/**/*.ts"
   ]
 }

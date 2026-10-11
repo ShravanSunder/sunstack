@@ -1,6 +1,10 @@
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    // Plugin schemas pin Zod in the import; resolve it to the one shared install.
+    alias: { "zod@4.6.5": "zod" },
+  },
   test: {
     chaiConfig: {
       truncateThreshold: 0,
