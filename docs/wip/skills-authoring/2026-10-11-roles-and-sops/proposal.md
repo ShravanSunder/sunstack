@@ -1,6 +1,7 @@
-# Next step: role skills composed from SOPs, and "experiment before asking"
+# Next step: role skills composed from practices, and "experiment before asking"
 
 - **Status:** proposal for discussion, not adopted. The Lead's review (§7) places it in a later, separate architecture chunk. The owner parked it on 2026-10-11 ("we can work on that separately, we will think") and asked for it to be written down and passed by the 🦁 Lead (codex-local 01a118ee).
+- **Owner terminology correction, 2026-10-11:** reuse the existing `practices-*` family; do not introduce `sop-*`. The later role-composition proposal uses practices. This settles the name, not adoption of a role layer or relocation of existing instructions.
 - **Author:** 🦉 Advisor a6321a2f.
 - **Related work:**
   - the Lead's working design, [`2026-10-11-delivery-topology-and-verification-design.md`](../../2026-10-07-sdlc-portfolio/2026-10-11-delivery-topology-and-verification-design.md) (§4a role instructions; §12 chunk S0);
@@ -46,9 +47,9 @@ Checked at source: the checkout `ecc249f` and the snapshot `978ca6e`.
 ```
 PSTACK                                  PROPOSED FOR US
 poteto-mode (always on, main agent)  ►  role-lead · role-verifier · role-implementer ·
-  index: principles + triggers            role-chief-of-staff · … (each composes SOPs)
+  index: principles + triggers            role-chief-of-staff · … (each composes practices)
   routing rules (ask classification)
-principle-* (small skills)           ►  sop-* (principles and procedures)
+principle-* (small skills)           ►  practices-* (shared guidance and procedures)
 playbooks (prototype, orchestrate…)  ►  phases / orchestrators (spec-design, …)
 (Cursor spawns subagents)            ►  manage-agents = only how to call things:
                                           launch, models, job packets
@@ -56,9 +57,9 @@ playbooks (prototype, orchestrate…)  ►  phases / orchestrators (spec-design,
 
 ## 4. Design points to settle
 
-1. **A role indexes its SOPs; it doesn't paste them in.** Use one line per SOP with its trigger, and load the body when the trigger fires, as pstack does. Only a few rules stay inline all the time, for example "sort the question before asking" for the Lead.
-2. **Principle versus procedure.** pstack separates judgment rules (principles) from step-by-step procedures (playbooks). Our `practices-*` skills are already procedures. The options are one `sop-*` prefix for both, or `principle-*` alongside `sop-*`.
-3. **Layering.** Roles sit on top and call orchestrators and phases. SOPs sit at the bottom, usable by any role or phase. `manage-agents` stops owning roles, which changes the owner's global instruction "`manage-agents` owns every other role".
+1. **A role indexes its practices; it doesn't paste them in.** Use one line per relevant practice with its trigger, and load the body when the trigger fires, as pstack does. Only a few rules stay inline all the time, for example "sort the question before asking" for the Lead.
+2. **Principle versus procedure.** pstack separates judgment rules (principles) from step-by-step procedures (playbooks). We reuse `practices-*` for shared guidance and procedures. Improve the relevant existing practice before adding another; no separate SOP namespace is needed. This correction does not itself create a `principle-*` family.
+3. **Layering.** Roles sit on top and call orchestrators and phases. Practices remain available to roles and phases under the existing layering rules. The proposed change in which `manage-agents` stops owning roles still conflicts with the owner's global instruction "`manage-agents` owns every other role" and remains unsettled.
 4. **How a role stays loaded is unknown and must be tested before design (E1).** pstack relies on a Cursor Custom Mode. We don't know what keeps `role-lead` in effect across compaction and resume in Claude Code or Codex.
 5. **Copy or adapt.** The repo rule is to adapt upstream ideas, not copy prose. pstack is MIT-licensed. Her text names her own playbooks, so adaptation fits better.
 6. **Avoid duplicates.** Many of her principles already exist in the owner's global instructions (see §6).
@@ -71,7 +72,7 @@ These are proposals only; none has been run.
 |---|---|---|---|
 | E1 | Does a role skill stay in effect after compaction and resume? | Start a Claude Code Lead and a Codex Lead with `role-lead` loaded. Run each past one compaction, or resume it. Then present a fork that running something can answer. | The Lead still sorts the question and runs or commissions the experiment instead of asking. Record which loading method held on each host. |
 | E2 | Does the ask-classification rule change behaviour? | Replay the workers-rs fork ("reflection workaround or official `transaction()`?") with the rule and without it. Use fresh sessions, same model and same sources. | With the rule: both are tested side by side and one recommendation comes back with evidence. Without it: the owner is asked, or the first path is recommended. |
-| E3 | Index or inline? | The same role run two ways: an index of SOPs that load on trigger, versus all SOPs inlined. | Compare tokens per spawn and whether the rules are followed on 3–5 pressure scenarios. |
+| E3 | Index or inline? | The same role run two ways: an index of practices that load on trigger, versus all practices inlined. | Compare tokens per spawn and whether the rules are followed on 3–5 pressure scenarios. |
 
 ## 6. Her principles against the owner's current instructions
 
@@ -83,9 +84,9 @@ This is a first pass, based on the principle names and the owner's global instru
 
 ## 7. Lead review, 2026-10-11 (01a118ee): preliminary, accepted by the Advisor
 
-Every point below was checked at source by the Advisor.
+The original review points were checked at source by the 🦉 Advisor. Their terminology is updated here under the later owner correction above; this is not a fresh review or architecture admission.
 
-- **Placement:** a **later, separate architecture chunk**, not S0. S0 keeps clear role charters and the settled role boundaries. No `role-*` or `sop-*` library is recommended yet.
+- **Placement:** a **later, separate architecture chunk**, not S0. S0 keeps clear role charters and the settled role boundaries. No `role-*` library or practice relocation is recommended yet. The later owner terminology correction uses the existing `practices-*` namespace.
 - **Conflicts with current owner-sourced requirements:**
   - First-tranche U23 (`../2026-10-11-design-skills-first-tranche/requirements.md:183`): "`manage-agents` defines each role clearly: what it is and how it is used".
   - Family-design D3 (`family-design.md:62`): role charters live in `manage-agents` and open every assignment, correction and resume.
@@ -93,7 +94,7 @@ Every point below was checked at source by the Advisor.
   Call syntax already belongs to `agent-collaboration`. The owner's later idea that `manage-agents` is "just how to call things" therefore conflicts with U23. **When this is un-parked, the owner has to decide between them.**
 - **Layering:** AGENTS.md forbids practices and shared references from naming higher layers. Before adopting a role layer, define the invocation direction and how an assignment reaches its role instructions. Role packets and role skills are different implementation choices.
 - **Chief of Staff:** U32 keeps the Chief of Staff's policy and procedures in its own repo. A `role-chief-of-staff` may hold only a pointer or interface, never duplicated policy.
-- **"Real gap" needs a qualifier.** The draft `orchestrator-design` skill spec (`../2026-10-11-design-skills-first-tranche/skill-specs/orchestrator-design.md`, Branches) already says: "IF a question for you is a factual one that running something could answer… run a bounded experiment… bring the answer with its evidence and limits". A separate prototype SOP now would duplicate that, unless relocation is chosen explicitly. The principle table in §6 is name-only and can't establish coverage.
+- **"Real gap" needs a qualifier.** The draft `orchestrator-design` skill spec (`../2026-10-11-design-skills-first-tranche/skill-specs/orchestrator-design.md`, Branches) already says: "IF a question for you is a factual one that running something could answer… run a bounded experiment… bring the answer with its evidence and limits". A separate prototype practice now would duplicate that, unless relocation is chosen explicitly. The principle table in §6 is name-only and can't establish coverage.
 - **Near-miss evidence:** the receipts are in codex-router `tmp/practices-research/2026-10-11-turso-async-io/` (findings, latest-upstream, evidence) and `tmp/practices-research/2026-10-08-workers-rs-production/` (atomicity probe and transaction-API work). The figures in §1 come from that session's reports. Neither the Advisor nor the Lead reproduced them. They need exact versions, config, workload and proof limits before they become design evidence.
 - **Experiment order, if ever admitted** (U33 and D12 exclude pressure testing now):
   1. **E2 first.** Compare the current packet against the same packet with exactly one added ask-classification rule, keeping the same model, sources, permissions and case. Predeclare outcomes from real evidence. Include a genuine product or preference case, where asking is correct, and an evidence-sufficient read-only case. Grade whether the recommendation is correct and supported. A baseline that already succeeds is a valid null result.
