@@ -6,7 +6,7 @@ export const skillPressureCaseDefinitions = [
     requiredSourceReads: [
       "plugins/shravan-dev-workflow/skills/discuss-pathfinding/SKILL.md",
       "plugins/shravan-dev-workflow/skills/discuss-pathfinding/references/question-craft.md",
-      "plugins/shravan-dev-workflow/shared-references/requirements-specification-program-design.md",
+      "plugins/shravan-dev-workflow/shared-references/design-documents.md",
     ],
     maximumToolCalls: 40,
     semanticCriteria: [

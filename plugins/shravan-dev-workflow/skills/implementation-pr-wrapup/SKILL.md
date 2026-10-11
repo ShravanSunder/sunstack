@@ -25,7 +25,7 @@ Do not use this for fresh code-review discovery. If the user asks to review a PR
 
 ## Execution Ownership
 
-The assigned implementation 🐒 Sidekick may carry its delivery assignment through this workflow, or an Operator may run the authorized prescribed wrap-up procedure. Either executor returns current PR gate evidence to the Lead, which retains final acceptance and whole-goal disposition; merge still requires explicit user authority. Description drafting remains 🛠️ Worker work. An Operator that lacks the required draft or encounters a semantic decision returns that need to its assigning agent instead of authoring the draft, deciding the issue, or acquiring delegation authority.
+The workstream's 🐒 Implementer may carry its delivery assignment through this workflow, or an Operator may run the authorized prescribed wrap-up procedure. Either executor returns current PR gate evidence to the Lead, which retains final acceptance and whole-goal disposition; merge still requires explicit user authority. Description drafting remains 🛠️ Worker work. An Operator that lacks the required draft or encounters a semantic decision returns that need to its assigning agent instead of authoring the draft, deciding the issue, or acquiring delegation authority.
 
 ## Core Flow
 

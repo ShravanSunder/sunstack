@@ -60,12 +60,14 @@ troubleshooting and headless mode.
 
 Shravan's Codex-first development workflow plugin. Provides:
 
-- **spec-design** skill -- defines authoritative Why/What, observable obligations, and proof obligations before program design
-- **program-design** skill -- turns settled obligations into source-grounded structural How, including ownership, interfaces, calls, state, failure, and proof seams
-- **spec-program-review** skill -- independently reviews current specification/program-design meaning and reuses coverage only for parent-verified non-semantic edits
+- **spec-design** skill -- writes a Requirements card the owner confirms and a separate Specification of checkable rules over defined entities
+- **program-design** skill -- turns settled rules into source-grounded structural How, including ownership, interfaces, calls, state, failure, and a seam and observation point for every rule
+- **test-design** skill -- plans the Implementer's regression tests so each rule is protected at the cheapest layer by a test that goes red when the behavior is wrong
+- **verification-design** skill -- plans independent proof for each requirement on the real surface against a declared reference, with the Verifier's challenge and report
+- **design-review** skill -- independently reviews the design documents and the ties between them, flags anything invented, and routes each finding to its owning skill
 - **discuss-clarify-mental-models** skill -- reconverges unstable shared mental models before artifact work without the old one-question grill shape
 - **discuss-pathfinding** skill -- Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/process/glossary records as they crystallize.
-- **manage-agents** skill -- coordinates advisors, sidekicks, delegates, operators, subagents, and swarms across model categories and native or ACPX runtimes, with ACP adapter implementation kept separate
+- **manage-agents** skill -- defines the roles (Lead, Implementer, Verifier, Reviewer, Advisor, Worker, Operator) with their charters, and coordinates them across model categories and native, agent-router, or ACPX runtimes, with ACP adapter implementation kept separate
 - **docs-maintain** skill -- reconciles docs, AGENTS.md, README.md, specs, plans, changelogs, and architecture docs against code and current decisions
 - **spec-handoff** skill -- packages spec/design context for another agent before an implementation plan exists
 - **plan-handoff** skill -- packages an existing implementation plan for another agent without pretending design context is a plan

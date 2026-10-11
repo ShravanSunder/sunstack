@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-11 Design skills family and delivery roles](2026-10-11-design-skills-family.md)
 - [2026-10-09 manage-agents Haiku Workhorse](2026-10-09-manage-agents-haiku-workhorse.md)
 - [2026-10-09 Remove pressure scenarios](2026-10-09-remove-pressure-scenarios.md)
 - [2026-10-06 skill-authoring plugin](2026-10-06-skill-authoring-plugin.md)

@@ -166,7 +166,7 @@ describe("user requirements and design-view contracts", () => {
     );
     const revising = readPluginFile("skills/spec-design/references/revising.md");
     const documents = readPluginFile(
-      "shared-references/requirements-specification-program-design.md",
+      "shared-references/design-documents.md",
     );
 
     for (const boundaryField of [
@@ -232,7 +232,7 @@ describe("user requirements and design-view contracts", () => {
       "skills/program-design/references/seams-and-trace.md",
     );
     const documents = readPluginFile(
-      "shared-references/requirements-specification-program-design.md",
+      "shared-references/design-documents.md",
     );
 
     for (const marker of [
@@ -439,32 +439,46 @@ describe("user requirements and design-view contracts", () => {
     );
   });
 
-  test("keeps the current three-artifact design-review contract aligned across direct consumers", () => {
-    const currentDesignReviewConsumers = [
-      readPluginFile("skills/spec-handoff/SKILL.md"),
+  test("keeps the design-review contract aligned across direct consumers", () => {
+    const specHandoff = readPluginFile("skills/spec-handoff/SKILL.md");
+    const plannerContractConsumers = [
       readPluginFile("skills/plan-improve-repo/SKILL.md"),
       readPluginFile(
         "skills/plan-improve-repo/references/improvement-plan-template.md",
       ),
-      readPluginFile("shared-references/requirements-specification-program-design.md"),
+    ];
+    const currentDesignReviewConsumers = [
+      specHandoff,
+      ...plannerContractConsumers,
       readPluginFile("README.md"),
       readPluginFile("skills/discuss-clarify-mental-models/SKILL.md"),
       readPluginFile("skills/practices-research/SKILL.md"),
     ];
+    const allConsumers = [
+      ...currentDesignReviewConsumers,
+      readPluginFile("shared-references/design-documents.md"),
+    ];
 
     for (const consumer of currentDesignReviewConsumers) {
       expect(consumer).toContain("current");
-      expect(consumer.toLowerCase()).not.toContain("digest");
-      expect(consumer).not.toMatch(/\bpairs?(?:-mode|-review| review)?\b/i);
     }
-
-    for (const consumer of currentDesignReviewConsumers) {
+    for (const consumer of allConsumers) {
+      expect(consumer.toLowerCase()).not.toContain("digest");
+      // The old pair review mode; "pair" alone now names an Implementer–Verifier pair.
+      expect(consumer).not.toMatch(/\bpairs?(?:-mode|-review| review)\b/i);
       expect(consumer).not.toContain("review invocation identity");
       expect(consumer).not.toContain("review result identity");
     }
-    for (const consumer of currentDesignReviewConsumers.slice(0, 3)) {
+    // The planner's plan-record basis stays three-artifact until the deferred planner work.
+    for (const consumer of plannerContractConsumers) {
       expect(consumer).toContain("three-artifact design review result");
     }
+    expect(specHandoff).toContain(
+      "a `ready` `DesignReviewResult` from `design-review` covering the current meaning of all five design documents, or a `ready-for-planning` `CycleReturn`",
+    );
+    expect(specHandoff).toContain("missing Test Design -> `test-design`");
+    expect(specHandoff).toContain("missing Verification Design -> `verification-design`");
+    expect(specHandoff).not.toContain("three-artifact");
   });
 
   test("indexes every view owner and rendering consumer", () => {

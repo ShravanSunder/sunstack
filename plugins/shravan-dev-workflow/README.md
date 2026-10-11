@@ -9,20 +9,22 @@ The plugin is built around one idea: each workflow phase should have a clear own
 ```text
 shared understanding
   -> orchestrator-implementation-goal: implementation planning, execution/proof, review, and delivery
-       -> orchestrator-design: coordinate and verify the design cycle
+       -> orchestrator-design: one design cycle with the owner's three checkpoints
        -> spec-design: separate Requirements and Specification
-       -> program-design: structural How
-       -> spec-program-review: proportional independent three-artifact design review
-       -> stop at reviewed three-artifact design or explicit gap; never enter planning automatically
+       -> program-design: structural How, with a seam and observation point per rule
+       -> test-design: the Implementer's regression tests
+       -> verification-design: independent proof on the real surface
+       -> design-review: independent review of the documents and their ties
+       -> stop at a reviewed design or explicit gap; never enter planning automatically
   -> plan-implementation: one canonical plan + proof mapping
   -> implement-plan: approved immutable plan + implementation proof
-  -> implementation-review: ordered checks in one independent 🔎 Review Sidekick session + rails reduction
+  -> implementation-review: ordered checks in one independent 🔎 Reviewer session + rails reduction
        -> stop before corrections and PR work
 ```
 
 `handoff` means portability. It does not mean the phase is approved, complete, or ready for the next phase. A handoff packet makes context transferable so a future agent, another CLI, or another machine can continue without guessing.
 
-Design-bearing planning is admitted only from a `three-artifact-design` mode `spec-program-review` result that is `ready` and semantically current for the Requirements, Specification, and Program Design. A handoff preserves that evidence; it does not create it. The only direct planning bypass is work positively classified as implementation-mechanics-only with no new design-bearing decision.
+Design-bearing planning is admitted only from a `ready` design review that is current for the design documents. Until the planner work lands, `plan-implementation` admits the Requirements, Specification, and Program Design under its existing three-artifact plan basis, and Test Design and Verification Design reach delivery through the Implementer and the Verifier. A handoff preserves that evidence; it does not create it. The only direct planning bypass is work positively classified as implementation-mechanics-only with no new design-bearing decision.
 
 ## Namespace Map
 
@@ -37,9 +39,11 @@ practices-*          always-on practices           practices-collaboration
                                                   practices-research
 orchestrator-*       bounded workflow routing      orchestrator-implementation-goal
                                                   orchestrator-design
-spec-*               design/spec boundary          spec-design
+spec-* / *-design    design documents and review   spec-design
                                                   program-design
-                                                  spec-program-review
+                                                  test-design
+                                                  verification-design
+                                                  design-review
                                                   spec-handoff
 plan-*               planning and portability     plan-implementation
                                                   plan-handoff
@@ -67,7 +71,9 @@ flowchart LR
 
     specDesign["spec-design<br/>separate Requirements and Specification"]
     programDesign["program-design<br/>structural How"]
-    specReview["spec-program-review<br/>independent review"]
+    testDesign["test-design<br/>regression tests that go red"]
+    verificationDesign["verification-design<br/>independent proof on the real surface"]
+    designReview["design-review<br/>independent review of all five"]
     specHandoff["spec-handoff<br/>portable spec context"]
 
     planImplementation["plan-implementation<br/>reviewed design to canonical plan"]
@@ -87,17 +93,20 @@ flowchart LR
     deliveryGoal -.-> implWrap
     designCycle -.->|"first phase"| specDesign
     designCycle -.->|"follows phase-selected routes"| programDesign
-    designCycle -.->|"one three-artifact design review"| specReview
+    designCycle -.->|"one design review"| designReview
     designCycle -.->|"only for unmade owner meaning"| pathfinding
 
     specDesign --> programDesign
-    programDesign --> specReview
+    programDesign --> testDesign
+    programDesign --> verificationDesign
+    testDesign --> designReview
+    verificationDesign --> designReview
     specDesign --> specHandoff
     programDesign --> specHandoff
-    specReview --> specHandoff
-    specReview --> specDesign
-    specReview --> programDesign
-    specReview --> planImplementation
+    designReview --> specHandoff
+    designReview --> specDesign
+    designReview --> programDesign
+    designReview --> planImplementation
     planImplementation --> planHandoff
     planImplementation -.->|"ready delivery context"| implementPlan
     planHandoff -.->|"when exact approval is preserved"| implementPlan
@@ -123,11 +132,11 @@ Use `practices-research` when the next step is to gather evidence: local code/do
 
 Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
 
-Use `manage-agents` when subordinate AI-agent mechanics are the work: spawning, calling, resuming, steering, queueing, monitoring, or reducing advisors, sidekicks, workers, operators, subagents, and swarms. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent implementation Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned implementation Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `manage-agents` owns roles, classification, the catalog tables, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
+Use `manage-agents` when subordinate AI-agent mechanics are the work: spawning, calling, resuming, steering, queueing, monitoring, or reducing advisors, sidekicks, workers, operators, subagents, and swarms. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, each workstream's 🐒 Implementer executes its work and associated proof directly by default, and its 🔬 Verifier proves the delivered behavior independently; the owner may start direct contact with an Implementer without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the Implementer or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `manage-agents` owns roles and their charters, classification, the catalog tables, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
 
-Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design` and `program-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial Requirements, Specification, and Program Design artifact, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one three-artifact design review, then stops before planning. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
+Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design`, `program-design`, `test-design`, and `verification-design` in its own session and writes every document; helpers bring evidence, and an explicitly requested Advisor may advise. The owner confirms the Requirements card, the structure, and the final reviewed set, and before asking the owner a factual question the Lead runs a bounded experiment. An independent Reviewer runs `design-review`, and the cycle returns a `CycleReturn` and stops before planning. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
 
-Use `orchestrator-implementation-goal` to carry implementation goals through Lead-authored planning, planned-PR implementation and proof, Lead assessment, independent review, accepted corrections, and the requested delivery boundary. Design stays with its own workflow when missing or contradicted. The default terminal is PR-ready and unmerged; merge requires explicit authority. Both orchestrators use `practices-show-me-your-work` for meaningful decision and evidence history, while checking current sources rather than replaying stored status. Direct one-phase requests bypass orchestration.
+Use `orchestrator-implementation-goal` to carry implementation goals through Lead-authored planning, workstream implementation by an Implementer and Verifier pair, Lead assessment from the current-head Verifier report, independent review, accepted corrections, and the requested delivery boundary. Design stays with its own workflow when missing or contradicted. The default terminal is PR-ready and unmerged; merge requires explicit authority. Both orchestrators use `practices-show-me-your-work` for meaningful decision and evidence history, while checking current sources rather than replaying stored status. Direct one-phase requests bypass orchestration.
 
 Use `practices-collaboration` at the start of a qualifying task to find the repository's board project and work thread, and whenever agents coordinate: seats, messages versus posts, waiting on another agent, and resolution. With no board project, helpers return `no-home` to their parent, the Lead names the gap once under Waiting on owner, and work continues.
 
@@ -135,15 +144,19 @@ Use `practices-show-me-your-work` at the start of a qualifying task to open or r
 
 ### Spec boundary
 
-Use `spec-design` to preserve two separate upstream concepts before program design or planning. Requirements owns WHY, for whom, and within what authorized boundary. Specification owns WHAT must be observably true and traces its normative obligations to Requirements. Each newly authored or substantively revised substantial document receives its own meaningful visual treatment at the correct altitude. A changed screen is an Image Gen picture grounded in the current app. Ownership, calls, state, flow, failure, and trust are Mermaid. Normative meaning remains in prose and tables. For substantial file-backed work, the skill reuses or creates a separately identifiable Requirements home and creates a different Specification home; it never substitutes one combined `Requirements/spec` artifact. It keeps unresolved owner meaning visible and leaves internal component structure downstream.
+Use `spec-design` to preserve two separate upstream concepts before program design or planning. Requirements owns WHY, for whom, and within what authorized boundary. Specification owns WHAT must be observably true and traces its normative obligations to Requirements. Requirements open with a card the owner confirms, one plain line per need with its source; agent ideas stay proposals until adopted. The Specification is checkable rules over defined entities, naming the reference when one defines correct. A changed screen is an Image Gen picture grounded in the current app. Ownership, calls, state, flow, failure, and trust are Mermaid. Normative meaning remains in prose and tables. For substantial file-backed work, the skill reuses or creates a separately identifiable Requirements home and creates a different Specification home; it never substitutes one combined `Requirements/spec` artifact. It keeps unresolved owner meaning visible and leaves internal component structure downstream.
 
-Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and proof seams. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It turns stack/trace evidence into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
+Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and a trace table giving every rule its owner, seam, and observation point. It answers seam requests from Test Design and Verification Design. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It turns stack/trace evidence into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
 
-Use `spec-program-review` to classify and independently review a Specification, Program Design, or complete Requirements, Specification, and Program Design set. A 🔎 Review Sidekick, commissioned through `manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, and walks mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Review Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Why/What findings route to `spec-design`; structural How findings route to `program-design`.
+Use `test-design` to plan the Implementer's regression tests: for each Specification rule, the scenarios worth protecting, the cheapest layer that observes them at a seam Program Design names, what stays real, and an assertion with an expected outcome from the Specification that goes red when the behavior is wrong.
+
+Use `verification-design` to plan independent proof: for each requirement, one "proven by" line for the owner, a declared reference with version and entry point, the core outcome first on the real surface, where it is observed, what passes, and what stays unverified. The 🔬 Verifier challenges it before building and reports for the head commit it tested.
+
+Use `design-review` to independently review whichever design documents exist. A 🔎 Reviewer, commissioned through `manage-agents`, reads everything whole, checks each document on its own, walks the ties both ways (missing, invented, unchecked), and returns findings routed to the owning skill with one `DesignReviewResult`. Prescribed proof commands go to a 🔧 Operator under an exact grant. It never edits or accepts the design; a wording-only edit keeps the existing coverage.
 
 The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` source trees are preserved under [`retired-skills/`](retired-skills/) for provenance and are not runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of those retired trees; they do not restore swarms, controller briefs, worker protocols, transition ledgers, or a separate plan-review layer.
 
-Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, complete but unreviewed or semantically stale three-artifact designs to `spec-program-review`, and current ready three-artifact designs to `plan-implementation`.
+Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, the five design document paths, the current review result or a pointer to it, and review freshness without creating an implementation plan. It names the next owner for a missing document (`spec-design`, `program-design`, `test-design`, or `verification-design`), routes an unreviewed or stale set to `design-review`, and routes a current `ready` review of all five to `plan-implementation`.
 
 ### Plan boundary
 
@@ -157,7 +170,7 @@ Use `plan-handoff` to package an existing implementation plan for another agent,
 
 Use `implement-plan` to validate and execute one immutable-path canonical `draft` plan only after separate later owner approval names that exact path and current meaning. It re-anchors before edits, works inline by default, advances through the smallest ready proof-bearing slice, preserves proof gates, and stops with an exact semantic route when current reality breaks the plan or design. It stops before independent review and PR work.
 
-Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Review Sidekick, commissioned through `manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
+Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer, commissioned through `manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It checks changed tests against Test Design, treats Test Design and Verification Design as rails alongside Requirements, Specification, and Program Design, and routes corrections by semantic cause without editing.
 
 Use `implementation-pr-wrapup` to finish the GitHub PR lifecycle after implementation, typically after independent review on a delivery goal: push/open/update the PR, write a why-and-shape description, monitor checks and comments, process existing review threads, prove mergeability with current GitHub state, and merge only when user authorization exists. Fresh code-review discovery routes to `implementation-review`; PR wrap-up does not substitute for it. Independent-review coverage is not a wrap-up ready gate.
 
@@ -174,12 +187,12 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## External Counsel
 
-Review workflows do not use broad multi-model counsel by default. The persistent 🔎 Review Sidekick, its ordered checks, and its model, runtime, history isolation, and authority are resolved through `manage-agents`.
+Review workflows do not use broad multi-model counsel by default. The persistent 🔎 Reviewer, its ordered checks, and its model, runtime, history isolation, and authority are resolved through `manage-agents`.
 
 ```text
 normal review path
-  spec-program-review
-      -> bounded independent specification/program review
+  design-review
+      -> independent review of the design documents and their ties
   implementation-review
       -> one complete independent implementation/proof review
 ```
@@ -193,7 +206,9 @@ Use discuss-clarify-mental-models to reconverge before writing a spec or plan.
 Use discuss-pathfinding to grill me on tacit requirements or unmade decisions.
 Use spec-design to preserve separate Requirements and Specification identities: authorized Why and observable What.
 Use program-design to turn this specification into structural How.
-Use spec-program-review to independently review these Requirements, Specification, and Program Design artifacts.
+Use test-design to plan the regression tests for this Specification.
+Use verification-design to plan independent proof for these requirements on the real surface.
+Use design-review to independently review these design documents and their ties.
 Use spec-handoff to package this design for another agent without creating a plan.
 Use orchestrator-implementation-goal to carry this goal through planning, implementation, proof, review, and PR readiness.
 Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.

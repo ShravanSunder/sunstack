@@ -1,6 +1,6 @@
 # Research Countercheck
 
-The assignment owner gives one independent 🔎 Review Sidekick the load-bearing claims, their primary anchors, exact questions, freshness requirement, and source coverage. Leave out the researcher's conclusion and reasoning. The 🔎 Review Sidekick keeps its own review session and returns evidence, not a design or research verdict for the whole assignment.
+The assignment owner gives one independent 🔎 Reviewer the load-bearing claims, their primary anchors, exact questions, freshness requirement, and source coverage. Leave out the researcher's conclusion and reasoning. The 🔎 Reviewer keeps its own review session and returns evidence, not a design or research verdict for the whole assignment.
 
 For each claim:
 

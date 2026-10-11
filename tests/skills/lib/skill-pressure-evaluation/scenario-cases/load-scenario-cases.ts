@@ -14,7 +14,7 @@ const REQUIRED_EVALUATOR_SKILLS = new Set([
   "shravan-dev-workflow:discuss-pathfinding",
   "shravan-dev-workflow:spec-design",
   "shravan-dev-workflow:program-design",
-  "shravan-dev-workflow:spec-program-review",
+  "shravan-dev-workflow:design-review",
 ]);
 
 export async function validateNoOrphanCaseDefinitions(props: {

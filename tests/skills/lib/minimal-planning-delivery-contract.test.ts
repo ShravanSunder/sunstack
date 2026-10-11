@@ -9,7 +9,7 @@ const readPluginFile = (relativePath: string): string =>
   readFileSync(path.join(pluginRoot, relativePath), "utf8");
 
 const convergenceRecurrenceText =
-  "A finding the Review Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.";
+  "A finding the Reviewer verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.";
 const convergenceNoProgressText =
   "The count of open accepted findings did not drop in two adjacent comparisons in a row";
 const convergenceBaselineText =
@@ -44,7 +44,7 @@ describe("goal delivery intent hard cutover", () => {
       "pick one and record the choice, the alternatives, and the reason in the plan",
     );
     expect(planner).toContain(
-      "with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule",
+      "with a current, complete design review and parent-verified correction evidence under `design-review`'s convergence rule",
     );
     expect(contract).toContain(
       "picks one, records the choice, the alternatives, and the reason in the plan, and returns `ready`",
@@ -148,9 +148,7 @@ describe("goal delivery intent hard cutover", () => {
     expect(designReview).toContain(
       "until the review is `ready` or `not-converging` (see `references/findings.md`)",
     );
-    expect(designReviewResults).toContain(
-      "A finding the Reviewer verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.",
-    );
+    expect(designReviewResults).toContain(convergenceRecurrenceText);
     expect(designReviewResults).toContain(convergenceNoProgressText);
     expect(designReviewResults).toContain(convergenceBaselineText);
     expect(designReviewResults).toContain(acceptedBoundaryText);
@@ -207,7 +205,7 @@ describe("goal delivery intent hard cutover", () => {
     const goalOrchestrator = readPluginFile("skills/orchestrator-implementation-goal/SKILL.md");
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
-    const documentsReference = "shared-references/requirements-specification-program-design.md";
+    const documentsReference = "shared-references/design-documents.md";
     const documents = readPluginFile(documentsReference);
 
     expect(planner).toContain("project-root `.gitignore`");

@@ -12,7 +12,7 @@ An implementation plan is a proof route through current authority and repository
 ## Admit Planning
 
 1. Admit either:
-   - current distinct Requirements, Specification, and Program Design with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule; or
+   - current distinct Requirements, Specification, and Program Design with a current, complete design review and parent-verified correction evidence under `design-review`'s convergence rule; or
    - for an orchestrated improvement goal or owner-requested delivery of a direct improvement result, the unchanged `plan-improve-repo` return containing an admitted finding pointer, `current-three-artifact-design-ready | implementation-mechanics-only` classification, required evidence pointers, and current applicability anchors.
 2. Reject missing, combined, conflicting, stale, `design-required`, or malformed authority with `revision-requested | blocked`, exact evidence, and semantic owner. Do not upgrade an improvement basis.
 3. Establish `requested terminal: plan-only | pr-ready-unmerged` before substantive planning. Use explicit user or orchestrator intent. If a direct request is ambiguous, ask once at entry.
@@ -35,7 +35,7 @@ Completion: the governing basis, requested terminal, tracking disposition, and p
 
 - A direct caller stops with a `plan-only` ready plan.
 - A direct Lead or an orchestrating caller validates a `pr-ready-unmerged` ready record and invokes `implement-plan` without another generic approval question, only then commissioning or resuming implementation.
-- An implementation 🐒 Sidekick that encounters a missing governing plan returns the evidence and exact gap to the current Lead. It may choose local mechanics inside a ready plan but does not author or repair the plan.
+- A 🐒 Implementer that encounters a missing governing plan returns the evidence and exact gap to the current Lead. It may choose local mechanics inside a ready plan but does not author or repair the plan.
 - `revision-requested` returns to the named semantic or planning owner; `blocked` returns to the named unblock owner.
 - Planning never edits product code, invokes tracking providers, reviews implementation, manages PR state, or infers merge authority.
 
