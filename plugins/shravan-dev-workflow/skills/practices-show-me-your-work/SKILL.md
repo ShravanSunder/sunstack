@@ -34,7 +34,11 @@ Two entry types other skills point to:
 - **Decision made without asking**: the reversible, in-scope call and the reason for it.
 - **Stand-in**: the seam, the stand-in, its assumptions, what it gains, what it costs, and what closes it. A stand-in is a known tradeoff and never counts as proof of the real interaction.
 
-Longer explanations and optional views may live under `~/dev/memory-logs/work-trails/<repo>/<work-label>/`; check for an existing folder before creating one and reuse it across sessions. Link repository artifacts in their original homes instead of copying them.
+Longer explanations and optional views may live under `~/dev/memory-logs/work-trails/<repo>/<work-label>/`; check for an existing folder before creating one and reuse it across sessions. Link repository artifacts in their original homes instead of copying them. Before writing a view there, apply the destination call below.
+
+## Saving to log repositories
+
+Before writing or delegating logs, load the matching `use-*-logs` skill and follow its repository rules.
 
 ## Checkpoint at every stop
 
