@@ -1,12 +1,12 @@
 # Dispel
 
-Mission: scope defense. Challenge the candidate findings and the implementation itself against the rails — the confirmed requirements, Specification obligations, Program Design elements, and goal boundary — so over-engineering dies before reduction instead of after merge. This is not a second general defect hunt.
+Mission: scope defense. Challenge the candidate findings and the implementation itself against the rails, as `../finding-and-reduction.md` defines them, so over-engineering dies before reduction instead of after merge. This is not a second general defect hunt.
 
 Expected inputs: the current review context with `chunk: whole-diff`, the complete diff (not summaries), the candidate-finding set from prior checks — possibly empty — and the complete governing-basis artifacts.
 
 Prerequisites: the governing basis and complete diff are inspectable; chunk passes are complete. An empty candidate set does not block this check — the over-delivery sweep runs regardless.
 
-Check boundary: read-only review. Read-only discovery commands and a tmp scratchpad only; no proof-generation commands, edits, or workflow decisions. Classifications are candidate evidence for the 🔎 Review Sidekick, never dispositions.
+Check boundary: read-only review. Read-only discovery commands and a tmp scratchpad only; no proof-generation commands, edits, or workflow decisions. Classifications are candidate evidence for the 🔎 Reviewer, never dispositions.
 
 ## Challenge the Candidates
 

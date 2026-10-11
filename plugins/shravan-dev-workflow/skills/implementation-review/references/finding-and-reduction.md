@@ -1,6 +1,6 @@
 # Finding And Reduction
 
-This reference owns parent verification, the rails re-anchor, finding semantics, cause-based routing, affected coverage, and the final review result. `parent` means the immediate 🔎 Review Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
+This reference owns parent verification, the rails re-anchor, finding semantics, cause-based routing, affected coverage, and the final review result. `parent` means the immediate 🔎 Reviewer for the ordered checks; the orchestrator later owns final disposition and delivery routing.
 
 Expected inputs: the current review context, per-check results including the dispel classification, current governing sources and diff, proof evidence, and any prior coverage record.
 
@@ -12,7 +12,8 @@ Before any disposition, anchor each candidate to the rails:
 
 ```text
 rails anchor: confirmed requirement | Specification obligation |
-              Program Design element | confirmed goal-boundary field
+              Program Design element | Test Design scenario |
+              Verification Design check | confirmed goal-boundary field
 governing source identity and exact section/field:
 quoted or faithful obligation text:
 plain-language meaning of that anchor:
@@ -103,7 +104,7 @@ not-converging
 Convergence (this reference is its home for implementation review):
 
 > After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
-> 1. **Recurrence.** A finding the Review Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
+> 1. **Recurrence.** A finding the Reviewer verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
 > 2. **No progress.** The count of open accepted findings did not drop in two adjacent comparisons in a row: it stayed equal or rose from review N−1 to N, and again from N to N+1.
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
