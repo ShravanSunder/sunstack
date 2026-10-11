@@ -7,13 +7,14 @@ Expected inputs: one planned or written check, with the rule it protects, its la
 ## The Check
 
 ```text
-expected outcome   a literal value or observable effect, taken from the Specification line
+expected outcome   a literal value or observable effect, taken from the Specification line, or, for a
+                   written test no Specification governs, from the governing clause the caller supplies
 assertion          on what a caller or user observes: a returned value, state read back through
                    the interface, an emitted event, a file, an output
 goes red when      the specific behavior change that fails it
 ```
 
-Write the expected outcome from the Specification, before the code exists when planning. Then ask: would this check still pass if every function the test calls returned `undefined` or did nothing? If yes, it observes no behavior and cannot catch a defect.
+Write the expected outcome from its governing line, before the code exists when planning. Then ask: would this check still pass if every function the test calls returned `undefined` or did nothing? If yes, it observes no behavior and cannot catch a defect.
 
 ## Shapes That Stay Green While the Behavior Is Wrong
 
@@ -62,4 +63,4 @@ Every other check marks timing "n/a".
 
 ## Complete When
 
-Every check has an expected outcome tied to its Specification line, an assertion on an observable outcome, a named behavior change that turns it red, and a timing control or "n/a", and each check matching a shape above is named with that shape.
+Every check has an expected outcome tied to its governing line, an assertion on an observable outcome, a named behavior change that turns it red, and a timing control or "n/a", and each check matching a shape above is named with that shape.

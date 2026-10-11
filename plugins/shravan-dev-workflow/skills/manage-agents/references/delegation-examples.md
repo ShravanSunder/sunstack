@@ -57,7 +57,7 @@ Job the Lead is tempted to hand off: "Find how libraries A, B, and C handle retr
 
 1. Direction: "which to follow" gives the outcome and leaves the design choice open. Partial.
 2. Span: each library's retry code, read, not changed. Local.
-3. Horizon: three findings and a recommendation, checked at the end. Task.
+3. Horizon: each library's finding is one bounded lookup, checked when it returns. Subtask.
 4. Cut: the Lead keeps the choice and names the method. Three jobs: "in library A, trace the retry entry point through retryable-error classification, attempt limits, delay calculation, and the tests that cover them; report each with file:line", and the same for B and C. Each is one bounded result.
 5. Role: three results that stand alone. Three 🛠️ Workers, fanned out as native subagents.
 6. Model: each job is Complete · Local. Reading retry code is judgment, so numbering the method's steps does not make it Exact. That matches no 🛠️ Worker row (Workhorse is Exact · Local; Daily driver is Complete · Cross-domain), so the jobs are not ready to hand off as written: the Lead brings the owner the gap with a recommended model, and the owner names one, or the Lead reads the three libraries itself. Either way, the Lead compares the findings and proposes the policy.
@@ -72,7 +72,7 @@ Job to hand off: "For this question, trace the field's writes, reads, and serial
 
 1. Direction: the method is named for every question, and following it means reading code. Complete.
 2. Span: the sync engine's storage module and the contracts it uses. Local.
-3. Horizon: each answer is one bounded result, checked by the Lead before the next question. Task.
+3. Horizon: each answer is one bounded lookup, checked by the Lead before the next question. Subtask.
 4. Cut: none; the design choices stay with the Lead and the owner.
 5. Role: a 🛠️ Worker per question, as a native subagent. The next Worker's brief carries the earlier answers it needs, so nothing depends on a Worker remembering.
 6. Model: Complete · Local matches no 🛠️ Worker row, so each question needs a model the owner names; until then the Lead answers it itself. Numbering the steps does not make reading code Exact.
