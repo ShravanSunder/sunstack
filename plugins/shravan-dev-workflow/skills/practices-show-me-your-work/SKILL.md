@@ -38,8 +38,7 @@ Longer explanations and optional views may live under `~/dev/memory-logs/work-tr
 
 ## Saving to log repositories
 
-- IF directing a write into `~/dev/session-logs/`, load its `AGENTS.md` and `.agents/skills/use-session-logs/SKILL.md` and return the allowed path and writer before proceeding.
-- IF directing a write into `~/dev/memory-logs/`, load its `AGENTS.md` and `.agents/skills/use-memory-logs/SKILL.md` and return the allowed path and writer before proceeding.
+Before writing or delegating logs, load the matching `use-*-logs` skill and follow its repository rules.
 
 ## Checkpoint at every stop
 
