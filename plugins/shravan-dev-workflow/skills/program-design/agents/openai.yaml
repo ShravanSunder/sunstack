@@ -1,4 +1,4 @@
 interface:
   display_name: "Program: Design"
-  short_description: "Design structural How"
-  default_prompt: "Use $program-design to turn settled observable obligations into structural How: components, ownership, interfaces, state, call and data flows, recovery, concurrency, trust boundaries, proof seams, and required structural views."
+  short_description: "Design how a change is built, with a seam for every rule"
+  default_prompt: "Use $program-design to design how a change is built: one owner for each truth, interfaces, state, call paths and failure handling, and a trace table that gives every Specification rule its owner, seam and observation point."

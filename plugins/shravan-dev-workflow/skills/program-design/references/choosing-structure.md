@@ -1,10 +1,8 @@
-# Alternatives and Crux
+# Choosing the Structure
 
-This reference owns the structural crux, forces, credible alternatives, selection tradeoff, and revisit signals.
+This reference owns the structural choice: the crux, alternatives when a real choice exists, the smallest structure that satisfies the rules, what it costs and who pays, what would reopen it, and deleting what no rule needs.
 
-Expected inputs: authoritative requirements, current-system model, constraint degree, and open feasibility evidence.
-
-Return in workflow order: first the crux, forces, and evidence gaps that block credible alternatives; after the caller generates and compares alternatives, return the alternatives, comparison, selected direction, tradeoffs, debt/payer, falsifiers, and unresolved decision/evidence gaps.
+Expected inputs: the rules, today's paths, the degree of constraint, and open feasibility evidence. Return: the chosen structure, its cost and payer, what would reopen it, the mechanisms deleted, and any owner tolerance the choice still needs.
 
 ## Find the Crux
 
@@ -14,29 +12,45 @@ Ask which few structural decisions determine most of the design:
 - which component owns coordination or policy;
 - whether a boundary is local, process, network, trust, or lifecycle;
 - whether consistency, latency, compatibility, or failure isolation dominates;
-- which seam must be real for proof.
+- which seam must be real for a rule to be observable.
 
 For each preferred claim, invert it: what evidence or scenario would make the opposite boundary correct?
 
-## Build Credible Alternatives
+## Start From What Exists
 
-Use minimal-change, clean-boundary, pragmatic, and risk lenses only when they produce materially different structures. For each viable option:
+Start with the existing foundation and the smallest change that satisfies the rules. Compare alternatives only when a real choice exists; do not manufacture an architecture to fill a comparison. Use clean-boundary, pragmatic, and risk perspectives only when they produce a materially different structure.
+
+For each credible option:
 
 ```text
 component/owner shape
 interfaces and state placement
-requirements served well/poorly
+rules served well/poorly
 complexity introduced and removed
-failure/security/proof consequences
+failure, security, and observability consequences
 migration/cutover implications
 accepted debt and payer
-falsifier or revisit signal
+what would reopen the choice
 ```
 
-Do not pad a non-choice into two labels. A first design has no predecessor-improvement burden. A redesign must name what materially improves and where cost moves.
+Do not pad a non-choice into two labels. A first design has nothing to improve on. A redesign names what materially improves and where cost moves.
 
-Good: options differ on an actual owner, boundary, consistency, lifecycle, or proof decision.
+Good: options differ on an actual owner, boundary, consistency, lifecycle, or seam decision.
 
-Bad: “simple vs scalable,” the preferred design plus a strawman, or alternatives that share the same load-bearing structure.
+Bad: "simple vs scalable", the preferred design beside a strawman, or alternatives that share the same load-bearing structure.
 
-Complete when: selection follows from named forces, rejected options remain credible, debt has a payer/revisit signal, and missing product meaning routes back rather than being decided here.
+## Delete What No Rule Needs
+
+For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or seam, name the rule it serves, what breaks if it is removed, and why the existing foundation cannot supply it. When nothing breaks, delete it; do not finish the contracts of a mechanism nobody needs.
+
+New durable identity or history, persistence, governance, a control plane, an external service, cross-run state, or a broad migration widens scope when the Requirements boundary did not authorize it. Return `owner-decision` for that added complexity instead of making it inevitable in design prose.
+
+Deleting a mechanism never deletes a rule: after any simplification, every rule still has its trace row.
+
+## Say It in Plain Words
+
+Explain the choice the way you would at a whiteboard: what changes, what stays the same, why the smaller structure is enough, what it costs, who bears that cost, and what evidence would justify a larger design. Labels such as "minimal delta" or "clean boundary" may summarize the explanation; they cannot carry it.
+
+## Complete When
+
+The choice follows from named forces; rejected options were credible; debt has a payer and a reopening signal; every new part names the rule it serves; unneeded mechanisms are deleted; scope expansion went to the owner; and the choice is explained in plain words. Missing product meaning went back as `specification-gap` rather than being decided here.

@@ -1,59 +1,17 @@
-# Proof Architecture and Traceability
+# Seams and the Trace Table
 
-This reference owns requirement realization, structural proof seams, real/fake boundaries, enforcement classes, and construction of the requirement/design/proof trace table. It is the table's only builder: `artifact-and-self-review.md` verifies it, and the returned coverage disposition is derived from its rows.
+This reference owns the seam and observation point for each rule, what must be real and what may be replaced, keeping invalid states out, the trace table, and answering a seam request. It is the trace table's only builder.
 
-Expected inputs: the Requirements rows (`U`), the Specification's obligations (`R`) with their scenarios or observable contracts, the entity binding table, behavioral interface contracts, state model, failure/recovery decisions, proof-modality inventory, and complete target structure/flows.
+Expected inputs: the rules (`R`) with the `U` lines they serve and the entities (`E`) they use, the binding table, the interface contracts, the state model, the failure decisions, and today's observation points. Return: the trace table, one illegality decision per material invalid state with its enforcement class, and the gaps.
 
-Return: the trace table, seam sufficiency, dependency proof classes, enforcement decisions, and gaps.
+## Seam and Observation Point
 
-## The Chain
+Two different things, for two different readers:
 
-Every requirement is realized along this chain. The trace table carries it from `U` through proof. The proof cell names the observable boundary and seam; the required observations and the enforcement decisions below are recorded outside the table:
+- A **seam** is a boundary in the design where a test can drive the behavior and replace what lies outside it without replacing the interaction the rule is about. Test Design picks its layer at a seam.
+- An **observation point** is where the rule's outcome can be seen on the real system: a state, output, event, log line, trace, metric, or file that a check can read. Verification Design observes there.
 
-```text
-authorized need U
-  -> obligation R and its scenario or observable contract
-  -> entity E it is written over
-  -> semantic owner (component)
-  -> interface/contract that realizes it
-  -> shape and its schema/type home
-  -> state transition it drives or reads
-  -> failure handling it depends on
-  -> observable boundary
-  -> unit/integration/smoke/e2e/manual/operational seam
-  -> required state/log/trace/metric/artifact
-  -> structural invariant and enforcement class
-```
-
-## The Trace Table
-
-Before writing a row, open the binding table (owner, home, shape per `E`), the interface contracts (which variant realizes this obligation), the state model (which transition), the failure decisions (which handling), and the proof seams (where the behavior is observed).
-
-```text
-| U | R | E | owner | interface | shape and home | state | failure | proof |
-```
-
-Write one row per Specification obligation (`R`), into the artifact, or into the response in a chat-only run. Two obligations that share a contract still each keep their own row, so a deleted obligation shows as a deleted row.
-
-Cell rules:
-
-- The `R` cell names the obligation and its scenario or observable contract, not only an identifier.
-- The `U` cell names every Requirements row the obligation traces to, or reads `none: <why>`. `U` and `E` may each list several ids. `E` reads `none: <why>` when the obligation is written over no entity, such as a platform constraint or a pure quality obligation.
-- For a cross-cutting row (tenant isolation, audit, rate limiting), the owner and interface cells cite the mechanism owner, such as the guard component and its check, never "all components".
-- `gap: <why>` marks design that is missing. It is not a placeholder for "not applicable"; that is `none: <why>` or a plain value such as `stateless guard`.
-- No cell is blank, and no cell says "see above" or "see interfaces". The owner cell names a component, never a package. The proof cell names a seam a planner can pick a test layer for, never a test file or command.
-
-Derive each obligation's returned disposition from its row: `covered` when every cell names a concrete element or a reasoned `none:`; `gap` when any cell reads `gap: <why>`; `owner-authorized supersession` when the `R` cell carries `superseded: <owner decision anchor>`. Accepted identities that are not obligation rows (entities, constraints, variants, defaults, proof obligations) are reported beside the table with their own anchors, never inferred from it.
-
-Good: a reviewer can walk each row from need to proof without opening prose; the `E` cell matches the Specification's identifiers; the shape cell names both the shape and the module it lives in.
-
-Bad: a paragraph tagged with identifiers instead of a table; a trace kept in working state or scratch; a row whose shape cell says "see interfaces"; an obligation with no row, or two obligations merged into one row; a blank cell; a package in the owner column; a bare "coverage intact".
-
-Stop when every obligation has one row, no cell is blank, and each disposition follows from its row by the rule above.
-
-## Dependencies and Seams
-
-Classify each dependency:
+For each rule, name both, and say what must be real and what may be replaced. Classify each dependency the rule crosses:
 
 ```text
 in-process
@@ -62,11 +20,13 @@ remote but owned
 true external
 ```
 
-State what must be real, what may be replaced through the designed seam, and what observation proves the behavior. A mockable signature without a production-realistic observation path is not proof architecture.
+A mockable signature with no realistic way to observe the outcome is not a seam. When the test harness follows materially different owners or boundaries than production, draw the test path (see `views.md`) so the difference is visible.
 
-Use a proof call graph when the test or operational harness follows materially different owners or boundaries than production. Show the driver/fixture, real versus replaced boundaries, observation point, and evidence returned; otherwise keep proof on the trace table.
+Name seams and observation points; stop there. Which test layer uses a seam belongs to `test-design`, and how each rule is proven belongs to `verification-design`. No test file, command, or test-order step belongs in this document.
 
-Choose enforcement class where appropriate:
+## Keep Invalid States Out
+
+For each material invalid state, decide how it is kept out: the illegal combination cannot be represented, or the trusted entry rejects it. Name the enforcement class beside the decision:
 
 ```text
 type or interface
@@ -79,8 +39,43 @@ health check
 operational alarm
 ```
 
-For each material invalid state, decide how it is kept out: the illegal combination is unrepresentable, or the trusted entry rejects it. Name the enforcement class beside that decision. Good: a negative total cannot be constructed, or the charge entry refuses it. Bad: the design is "add a negative test."
+Good: a negative total cannot be constructed, or the charge entry refuses it. Bad: "add a negative test."
 
-Do not choose exact files, commands, TDD order, or evidence-capture mechanics. Planning owns which test proves the decision.
+## The Trace Table
 
-Complete when: every Specification obligation has one trace row whose cells name a concrete element, a reasoned `none:`, or a `gap: <why>`; every material invalid state has an illegality decision with its enforcement class; every material design element traces back to a legitimate need; and unprovable claims remain explicit.
+Before writing a row, open the binding table (owner, home, and shape for each `E`), the interface contracts (which variant realizes the rule), the state model (which transition), and the failure decisions (which handling).
+
+```text
+| R | U | E | owner | interface | state or failure | seam and observation point |
+```
+
+Write one row per rule into the document, or into the response in a chat-only run. Two rules that share a contract still keep their own rows, so a deleted rule shows as a deleted row. Test Design and Verification Design name the `R` they cover in their own documents, so this table does not list `T` or `V`.
+
+Cell rules:
+
+- The `R` cell names the rule and what it requires, not only an identifier.
+- The `U` cell names every Requirements line the rule serves. `E` reads `none: <why>` when the rule uses no entity, such as a platform limit or a pure quality rule. `U` and `E` may each list several identifiers.
+- The owner cell names a component, never a package. A cross-cutting row (tenant isolation, audit, rate limiting) names the mechanism's owner, such as the guard and its check, never "all components".
+- The seam and observation point cell names the seam, what is real and what may be replaced there, and the observation point. It never names a test file, a command, or a test layer.
+- `gap: <why>` marks design that is missing. "Not applicable" is `none: <why>` or a plain value such as `stateless guard`.
+- No cell is blank, and no cell says "see above" or "see interfaces".
+
+Each row's disposition follows from its cells: `covered` when every cell names a concrete element or a reasoned `none:`; `gap` when any cell reads `gap: <why>`; `superseded` when the `R` cell carries `superseded: <owner decision>`.
+
+Good: a reader can walk each row from owner line to observation point without opening the prose; the `E` cell matches the Specification's identifiers; the seam cell says what stays real.
+
+Bad: a paragraph tagged with identifiers instead of a table; a trace kept in scratch notes; a rule with no row, or two rules merged into one row; a package in the owner column; a seam cell that names a mock but no observation point.
+
+## Answering a Seam Request
+
+A `seam-request` from `test-design` or `verification-design` names one rule and the observation it needs. Work on that rule only:
+
+1. Check whether an existing seam or observation point already gives that observation. If one does, point to it.
+2. Otherwise design the smallest addition that does: a boundary where the test can drive the behavior, an emitted event, a readable state, or a log or trace point, each with its owner. Update the rule's row, and every other part of the design the addition touches.
+3. If it cannot exist (the platform does not expose it, or adding it would break an invariant), say why as an open item on that rule. If it needs a tolerance only the owner can set, return `owner-decision`.
+
+Never answer with a weaker observation and call it the one asked for.
+
+## Complete When
+
+Every rule has one row whose cells name a concrete element, a reasoned `none:`, or a `gap: <why>`; every row's seam cell says what is real and names an observation point; every material invalid state has an illegality decision with its enforcement class; and every element in the design traces to a rule.

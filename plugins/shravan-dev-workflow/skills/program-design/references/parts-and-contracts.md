@@ -1,10 +1,10 @@
-# Components, Ownership, and Interfaces
+# Parts and Contracts
 
-This reference owns entity binding, target composition, component depth, singular ownership, dependency direction, and behavioral interfaces.
+This reference owns how the parts are defined: binding each entity to an owner, a home, and a shape; one job per part; single ownership and dependency direction; interfaces as behavior with closed result variants; state and lifecycle; call paths from today to proposed; and migration phases.
 
-Expected inputs: selected direction, requirements, the Specification's entity table (`E` identifiers with identity rules, relationships, invariants, and states), current-system model, constraints, and design crux.
+Expected inputs: the chosen structure, the rules, the Specification's entities (`E`, with identity rules, relationships, invariants, and states), today's paths, and the constraints. Return, in order: the binding table with its code shapes and the type conventions found (or `none found`); the parts with their owners and dependency rules; the interface contracts; the state model; the call-path deltas and flows with the shape on each boundary-crossing edge; migration phases; and gaps.
 
-Return in workflow order: first the entity binding table, its code shapes, the found type conventions or `none found`, and each design-only concept with the `E` or `R` it serves; then the integrated overview and component tree; after the caller assigns ownership/dependency direction and defines interfaces, return the component tree, ownership/dependency maps, interface contracts, forbidden edges, and gaps.
+Package detail stops at the binding table. Exact files and task order belong to planning.
 
 ## Entity Binding
 
@@ -32,7 +32,7 @@ Record each rule or pattern with its source. When nothing is written and the tou
 ### Bind against existing code
 
 - An existing type that carries an entity under a different name is a binding. Put the code name in the home or shape cell, mark it `existing`, and keep the Specification's term in design prose. Declaring a second schema for the same facts, or renaming the entity after the code type, breaks the one-owner rule.
-- An identity or cardinality mismatch with existing code, such as a key that omits the account the Specification's identity rule includes, is a structural choice. Name the options and their cost. Return `decision-needed` when resolving it exceeds the confirmed goal boundary.
+- An identity or cardinality mismatch with existing code, such as a key that omits the account the Specification's identity rule includes, is a structural choice. Name the options and their cost. Return `owner-decision` when resolving it goes beyond the Requirements boundary.
 - Only a noun the Specification never defined, or a meaning that conflicts with it, returns `specification-gap`.
 - A design-only concept (a wait handle, an idempotency key, a cache entry) names the `E` or `R` it serves. A concept that serves none is deleted, not kept as scaffolding.
 
@@ -148,10 +148,95 @@ type SettlementDecision =
   | { readonly kind: "reject"; readonly reason: "amount-mismatch" | "already-settled" | "invoice-voided" };
 ```
 
-Write one representative caller interaction before finalizing. Add a seam for real variation, trust/process boundary, lifecycle owner, proof boundary, external/fallible dependency, or multiple consumers—not for abstraction aesthetics.
+Write one representative caller interaction before finalizing. Add a boundary for real variation, a trust or process boundary, a lifecycle owner, an observation boundary, an external or fallible dependency, or multiple consumers, not for abstraction aesthetics.
 
 Good: interface hides owner policy and makes caller assumptions explicit; every variant a caller must branch on is a named member of the union.
 
 Bad: signatures without semantics, “shared ownership,” one interface per current file, open strings for a result or reason, or variants that exist only in prose.
 
-Complete when: every entity is bound, every component earns its boundary and names its home, ownership is singular, dependency direction is enforceable, every result and decision contract is a closed variant, and caller behavior is predictable.
+## State and Lifecycle
+
+For each material state:
+
+```text
+owner and lifetime/storage
+valid states
+initiator and transition guard
+before/after invariant
+persisted vs derived vs cached
+reset/cancel/dispose/recovery
+illegal transitions and handling
+```
+
+Use a state machine when timing/order changes correctness; use a state table when compact. In UI, prefer render-derived values over synchronized copies when ownership permits.
+
+## End-to-End Flow
+
+Use a sequence view when participants and call order matter, a state machine when lifecycle and legal transitions matter, and a data/event flow when authority or transformation crosses storage, process, or service boundaries. Combine them only when one view stays readable and preserves each relationship.
+
+Trace each requirement:
+
+```text
+consumer -> entry -> coordinator -> owner -> external boundary
+            result / event / state change returns on named path
+```
+
+Include async callbacks, jobs, events, storage, caches, and test paths when they alter semantics. Separate control flow from data authority.
+
+Every edge that crosses a process, service, storage, or queue boundary carries its shape from the binding table. In Mermaid, label the edge with the event or message name and put the fields in a note or an adjacent table; the reader should not have to leave the flow to learn what crosses it:
+
+```text
+edge: <producer> -> <consumer>
+  name: <event or message name>
+  discriminant: <field and value>
+  fields: <name: type, nullable?> ...
+  schema home: <module from the binding table>
+  new | existing
+```
+
+An edge whose shape the design has not settled reads `gap: <why>`. A label such as "sends the payload" is not a shape.
+
+## Compare Today's and Proposed Call Paths
+
+For every material runtime-behavior group, pair the source-anchored current entrypoint-to-effect chain from `current-system.md` with the proposed chain. A first design records proposed-only and explicitly states that no predecessor exists. Requirements sharing one path may cite the same delta.
+
+Compare by owner and caller/callee edge. Mark every added, removed, or changed owner, call, state read/write or external effect, and result/error edge. Also mark an unchanged edge when its preservation is requirement-critical, safety-critical, or contested:
+
+```text
+added
+removed
+changed
+intentionally unchanged
+```
+
+Ordinary unaffected edges need no ceremony.
+
+For each edge, keep the owning component, operation or event with its shape, sync/async/event semantics, input authority, state read/write or side effect, result/error propagation, and the requirement or failure obligation it realizes. Preserve current-source anchors and explain the consequence of every removed or changed edge.
+
+Do not make a human mentally diff two separate prose sections or raw stack traces. Render the comparison as the smallest readable call graph, sequence, compact call tree, or delta table that keeps each applicable edge status visible.
+
+Runtime call stacks and traces validate current execution; they are not copied as the target design. Normalize the target into a source-anchored call graph or sequence view that an implementer can follow from entrypoint to effect and back to the observable outcome. Branches, callbacks, retries, queue/event hops, cancellation, and partial failure stay visible when they change behavior.
+
+Good: the current/proposed view makes ownership, boundary crossings, state authority, result/error propagation, and every changed edge unambiguous.
+
+Bad: only boxes and arrows, separate current/target descriptions with no delta markers, a raw stack trace, signatures without call order, a removed edge hidden by omission, a boundary-crossing edge with no shape, or a happy path that hides async and failure returns.
+
+## Migration and Cutover
+
+For each coexistence phase, name:
+
+```text
+authoritative state
+permitted readers/writers
+compatibility/version skew
+transition/reconciliation owner
+cutover and rollback conditions
+failure/recovery behavior
+seam and observation point
+```
+
+A temporary dual path is one coordination boundary with an authority rule per phase, not two sources of truth.
+
+## Complete When
+
+Every entity is bound, with every cell filled or marked `gap: <why>`; every part earns its boundary, names its home, and has one job; ownership is singular and dependency direction enforceable; every result and decision contract is a closed variant; every material runtime-behavior group has a source-anchored today-to-proposed call-path delta, or is marked new with no predecessor, with added, removed, and changed edges explicit; every boundary-crossing edge names its shape or a `gap: <why>`; state writes cannot bypass their owner; and each migration phase has its authority, transition, rollback, failure handling, and seam.

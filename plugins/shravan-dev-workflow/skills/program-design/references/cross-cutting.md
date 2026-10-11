@@ -1,10 +1,8 @@
-# Cross-Cutting Realization
+# Cross-Cutting Obligations
 
-This reference owns structural realization of applicable quality obligations.
+This reference owns how quality obligations are built: security, privacy, reliability, performance, accessibility, observability, and platform compatibility.
 
-Expected inputs: specification obligations/non-goals, component/flow/failure models, platform constraints, and proof modalities.
-
-Return: per-obligation owner, mechanism/boundary, normal behavior, failure/degradation behavior, proof seam, or reasoned not-applicable result.
+Expected inputs: the Specification's rules and non-goals, the parts, flows, and failure decisions, and platform limits. Return: for each obligation, its owner, mechanism or boundary, normal behavior, failure or degradation behavior, and seam and observation point; or a reasoned not-applicable.
 
 Inspect when applicable:
 
@@ -18,20 +16,22 @@ observability
 platform compatibility
 ```
 
-For security/trust, trace assets, actors, entry points, authentication/authorization decision owner, parsing/validation, secrets, least privilege, misuse containment, auditability, and proof.
+For security and trust, trace assets, actors, entry points, the owner of each authentication and authorization decision, parsing and validation, secrets, least privilege, misuse containment, auditability, and where each is observed.
 
 Use a trust-boundary view when untrusted actors, inputs, secrets, privilege changes, process boundaries, or external services cross enforcement points. Label the policy owner, enforcement point, assets, and containment boundary rather than drawing a generic network map.
 
-For privacy/data lifecycle/compliance, trace collection/minimization, retention/deletion, residency/export, policy enforcement, audit, failure, and proof.
+For privacy, data lifecycle, and compliance, trace collection and minimization, retention and deletion, residency and export, policy enforcement, audit, failure, and where each is observed.
 
-For reliability/operability, trace isolation, fallback/degradation, health, logs/traces/metrics, operator recovery, and proof.
+For reliability and operability, trace isolation, fallback and degradation, health, logs, traces and metrics, and operator recovery.
 
 For performance/capacity, trace budgeted boundary, queue/load/backpressure owner, overload degradation, measurement seam, and failure.
 
-For accessibility/platform compatibility, name the structural enforcement point and real supported boundary rather than leaving a planner-owned test note.
+For accessibility and platform compatibility, name the structural enforcement point and the real supported boundary, not a note for planning to test later.
 
-Good: complete obligation → owner → control → failure/degradation → proof chain.
+Good: a complete chain from obligation to owner to control to failure or degradation to observation point.
 
-Bad: concern checklist, “secure by design,” or naming a tool/control without the policy owner and failure behavior.
+Bad: a concern checklist, "secure by design", or a tool or control named without its policy owner and failure behavior.
 
-Complete when: every applicable obligation has structural How and proof; omitted concerns have an inspectable not-applicable reason.
+## Complete When
+
+Every applicable obligation has an owner, a mechanism, failure behavior, and a seam and observation point; every omitted concern has a not-applicable reason someone can check.

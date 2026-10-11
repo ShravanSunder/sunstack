@@ -1,10 +1,8 @@
-# Failure, Concurrency, and Recovery
+# Failure and Concurrency
 
-This reference owns failure realization, partial success, recovery, and material interleavings.
+This reference owns how failure, partial success, recovery, and overlapping actors are handled.
 
-Expected inputs: interface/state/flow models, externally required failure behavior, fallible boundaries, and overlap risks.
-
-Return in workflow order: first the failure/recovery and partial-success map; after the caller models material interleavings, return retry/idempotency decisions, the concurrency/consistency model, operator visibility, and gaps.
+Expected inputs: the interfaces, state, and flows; the failure behavior the Specification requires; the fallible boundaries; and where actors can overlap. Return: for each case, detection, containment, and the recovery owner; retry and idempotency decisions; the concurrency and consistency model; what the operator sees; and gaps.
 
 For each fallible boundary, model:
 
@@ -33,14 +31,16 @@ locking/versioning/serialization mechanism class
 backpressure/capacity boundary
 ```
 
-Construct a concrete failure or interleaving. “Use retries,” “add a lock,” or “eventual consistency” is not a design until owner, eligibility, invariant, failure consequence, and proof seam are known.
+Construct a concrete failure or interleaving. "Use retries", "add a lock", or "eventual consistency" is not a design until the owner, eligibility, invariant, failure consequence, and seam and observation point are known.
 
 Use a failure/recovery flow when detection, containment, retry, cleanup, compensation, or degraded behavior branches; use a sequence view when actor ordering or interleaving is the risk; use a state machine when retry/recovery lifecycle and illegal transitions are the risk.
 
-Do not invent product failure policy. Route missing externally visible behavior to `spec-design`.
+Do not invent product failure policy. Missing failure behavior that someone outside the system would see is a `specification-gap`.
 
-Good: exact timeout-after-side-effect path with duplicate prevention, recovery truth, user-visible outcome, and proof seam.
+Good: the exact timeout-after-side-effect path, with duplicate prevention, the recovery source of truth, the outcome the user sees, and where it is observed.
 
 Bad: happy path plus a generic error handler.
 
-Complete when: every material failure/interleaving preserves invariants or has explicit containment, recovery/conflict behavior, owner, and proof.
+## Complete When
+
+Every material failure or interleaving preserves its invariants, or has explicit containment, recovery or conflict behavior, an owner, and a seam and observation point.
