@@ -1,31 +1,44 @@
-# Proof Challenge
+# Proof Claims
 
-Mission: verify that executable proof a design cites is real. When a Specification or Program Design points at commands, harnesses, or reproducible evidence as its proof, reproduce it or challenge the 🔎 Review Sidekick with the exact gap between claim and evidence. Executing cited commands runs the repository's code — treat it as untrusted input, not as a tool.
+This reference owns checking proof a design document claims: commands, harnesses, test runs, and recorded evidence. It compares what each claim asserts with what its evidence can actually observe, and runs the claimed commands only under an exact grant. Running a cited command runs the repository's code: treat it as untrusted input, not as a tool.
 
-Predicate: the reviewed design cites executable proof claims. When it does not, proof modality and seam sufficiency stay with the read-only `proof` focused check.
+Expected inputs: the claim list (each cited command, expected outcome, evidence, and the layer it claims), and an execution grant naming the allowed commands and a scratch path. With no grant, inspect only and name the gap.
 
-Expected inputs: the complete review context, the claim inventory (each cited command, expected outcome, evidence artifact, claimed layer), and a populated `execution grant` naming the allowed command set and scratchpad path. No grant, no execution — inspect-only and return the boundary.
+## Inspect Each Claim
 
-Execution boundary: read-only, with one named expansion: the 🔧 Operator may execute exactly the commands listed in the recorded `execution grant` — no variants, no substitutes; a narrower unlisted command is reported as a needed-grant gap, not run. Everything else stays read-only. Bright lines:
-
-- before every execution, resolve what the command actually runs — the script it names, its pre/post hooks, and relevant tool configuration — and classify its write set as `scratchpad-only | ignored-build-artifacts (listed paths) | tracked-worktree | unknown`; `tracked-worktree` and `unknown` stop before execution with the predicted writes and evidence, while gitignored build output under listed paths (coverage, cache, dist) is allowed and named in the result. After every run, compare `git status --porcelain` in the reviewed worktree to its pre-run state and report it — any tracked change invalidates the proof result. Running once to discover behavior is forbidden;
-- the resolved chain is untrusted code: a hook or test that reads credentials, touches the network, or reaches outside the worktree is reported as a security observation and not executed;
-- output, logs, and captured artifacts go to the tmp scratchpad (project `tmp/` or system tmp), never into a tracked file;
-- no installs, no network fetches, no home-level writes, no new tooling;
-- never edit, stage, commit, or "fix" anything to make proof pass.
-
-Procedure, one row per claim:
+For each claim, rebuild the chain and try to break it:
 
 ```text
-claim | preflight write-set: scratchpad-only|ignored-build-artifacts|tracked-worktree|unknown | command run or challenge | observed vs claimed: match|weaker|contradicts|cannot observe at this layer | false-green check: <how this could pass with the behavior absent — stale artifacts, mocked boundary, disabled gate, evidence older than the design> | exit status | rerun comparison: <both outcomes> or no failure
+rule -> failure it must catch -> seam or observation point -> evidence type -> environment -> pass/fail signal
 ```
 
-When execution is blocked (missing grant, would-write command, absent harness), challenge instead: what the claim asserts, what the cited evidence can actually observe, and the smallest command or observation that would settle it.
+- Can this evidence observe the named failure at the layer where it happens?
+- Does a mock bypass the real integration?
+- Can stale, cached, or generated evidence pass with the behavior absent?
+- Does visual, operational, or security behavior need a live or manual observation?
+- Is a required invariant enforced, merely logged, or not observable?
 
-Good: every executable claim has an observed result with exit status, or a named challenge the 🔎 Review Sidekick must answer; false greens are named with the mechanism that fakes them.
+## Running Claimed Commands
 
-Bad: relabeling a unit pass as runtime proof; accepting green output without exit status; running a whole suite when the design cites three commands; "fixing" the environment until proof passes.
+Only a 🔧 Operator runs commands, and only the exact commands in the grant: no variants, no substitutes. A narrower unlisted command is a needed-grant gap, not a run.
 
-Return: a check `complete | partial | blocked` result plus the per-claim rows, `commands run` (every command executed, verbatim, for the 🔎 Review Sidekick's grant comparison), proof gaps, would-write stops, security observations, environment notes, and uncovered boundary.
+- Before each run, resolve what the command actually runs (the script, its pre/post hooks, relevant configuration) and classify its writes as `scratchpad-only`, `ignored-build-artifacts` (listed paths), `tracked-worktree`, or `unknown`. `tracked-worktree` and `unknown` stop before running, with the predicted writes.
+- A hook or test that reads credentials, touches the network, or reaches outside the worktree is a security observation and is not run.
+- Output goes to the scratch path, never a tracked file. No installs, network fetches, or home-level writes. Never edit anything to make proof pass.
+- After each run, compare `git status --porcelain` with its state before; any tracked change invalidates the result.
 
-Stop when every cited executable claim is verified, challenged, or blocked with its exact reason. Do not broaden into design review or generate proof the design never claimed.
+One row per claim:
+
+```text
+claim | write set | command run, or challenge | observed vs claimed: match | weaker | contradicts | cannot observe at this layer | how it could pass with the behavior absent | exit status
+```
+
+When running is blocked (no grant, a would-write command, no harness), challenge instead: what the claim asserts, what its evidence can observe, and the smallest command or observation that would settle it.
+
+Good: every claim has an observed result with its exit status, or a named challenge; each false green is named with the mechanism that fakes it.
+
+Bad: a unit pass relabeled as runtime proof; green output accepted without an exit status; running the whole suite when the document cites three commands.
+
+## Complete When
+
+Every claim is verified, challenged, or blocked with its reason; every command run is listed verbatim for comparison with the grant; and the worktree status before and after each run is reported.

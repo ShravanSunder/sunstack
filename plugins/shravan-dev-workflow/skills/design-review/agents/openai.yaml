@@ -1,4 +1,4 @@
 interface:
-  display_name: "Spec: Program Review"
-  short_description: "Classify or review Why, What, and structural How"
-  default_prompt: "Use spec-program-review to classify whether a specification-only or program-only change semantically requires independent review, or to independently review a Specification, Program Design, or complete Requirements, Specification, and Program Design set for correctness, scope fidelity, reader understanding, current/proposed call paths, and planning readiness without editing or accepting them. Route standalone security audits or threat models to ops-security-review."
+  display_name: "Design: Review"
+  short_description: "Independently review a design and its ties, top to bottom"
+  default_prompt: "Use $design-review to independently review Requirements, Specification, Program Design, Test Design or Verification Design, alone or together: check each document on its own, follow every requirement down to its rules, structure, tests and proof and every piece back up, flag anything invented, and route each finding to the skill that owns the fix, without editing or accepting. Route standalone security audits or threat models to ops-security-review."

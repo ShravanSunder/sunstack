@@ -1,87 +1,71 @@
-# Common Review Method
+# Checking Each Document
 
-This reference owns the baseline every mode-complete and focused reviewer follows before its mission.
+This reference owns how the Reviewer judges each design document on its own: reading it whole, the checks for each of the five documents, the probes that expose a weak design, and the reader's view.
 
-Expected inputs: exact mode, complete targets, governing sources, confirmed goal boundary, accepted requirements set, applicable structural-realization confirmation, constraints, risk predicates, and selected mission.
+Expected inputs: the review targets and their governing sources, all read whole. Return: for each document, `checked`, `partial`, or `blocked` with what was not checked, and its candidate findings.
 
-Return: coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary.
+## Read Whole, Then Judge
 
-## Establish Authority and Read Completely
+Read every target top to bottom before any finding; sampling sections or trusting a summary is a skipped read. Account for every section: covered by a check below, or excluded with its reason. Open the sources that load-bearing claims cite.
 
-Verify the complete target set, governing specification, and source authority. Read every target file or separately labeled in-chat record completely — the whole artifact, top to bottom — before substantive findings; sampling sections or trusting a summary is a skipped read. Account for the read in the coverage rows: every section of every target artifact appears as covered by a dimension or judgment, or as an anchored exclusion with its reason, and completion binds to that accounting. Coverage rows are the accounting, not a reading receipt: add no digests, hashes, line counts, or read attestations beside them. Open load-bearing sources cited by claims.
+Rebuild the model without following the author's section order: what the owner wants, the rules and nouns, the structure, the tests, the proof. Judge in dependency order (Requirements, Specification, Program Design, then Test and Verification Design); a fatal defect upstream bounds what downstream judgment can mean. Partial coverage never supports a clean result.
 
-For file-backed design documents, inventory every required visual asset and Markdown embed. Resolve relative links, open the actual image when access exists, and compare labels, edges, grouping, boundaries, order, alt text and caption with the governing prose and exact semantic views. Require actual image-inspection evidence and the supported destination-preview result claimed by the author. A cache-only path, missing asset, broken embed, unreadable image, invented relationship or decorative visual is a concrete finding. A picture-type view passed as a text fence while the destination renders Mermaid is a finding, even when image access is missing. A UI image that adds a control the requirement does not change, or that skips a changed screen, is a finding. When image or preview access is unavailable, return exact partial visual coverage; do not infer a pass from Markdown syntax, a prompt or an author's summary.
+## Requirements
 
-Verify the accepted requirements set against the current owner-confirmed requirements record and confirmed goal boundary. Otherwise use the last inspectable owner-accepted governing source. If neither source exists or they conflict, return the authority gap. Never recover accepted meaning from mutually narrowed current files alone. Any removed or superseded requirement needs explicit owner authority. For simplification, recovery of the accepted starting point, or requirement subtraction, return one compact disposition row per stable identity (`covered | owner-authorized supersession | gap` plus anchor). Identities may share a row only when every member identity is enumerated and all share the same disposition and anchor; a bare "coverage intact" assertion is not a result in those cases.
+- The card opens the document: one plain line per need, readable by the owner.
+- Each line's source says it. Open the source. An owner message, an existing contract, a hard constraint, or a proposal the owner adopted can carry an owner line; an agent's analysis, an earlier design, or current code cannot.
+- For each load-bearing line, sort its basis: code-compelled (open the code and show it constrains), owner-chosen (find the durable choice), an agent's recommendation labeled as authority, or a contradiction of a stated non-goal.
+- When the Requirements were revised, compare them with the last owner-confirmed card, or else the last owner-accepted source you can inspect. A line missing or narrowed without the owner removing it is a finding. Mutually narrowed current files still trace cleanly to each other, so they are never the baseline.
+- Proposals and open decisions are labeled and kept apart from the owner's lines.
+- Lines sit at the owner's altitude: what is wanted and why, not checkable detail.
 
-For `program-only` and `three-artifact-design`, inspect the complete structural-realization confirmation or return its exact missing owner decision. Treat design dimensions as `required | satisfied by the existing system | not applicable | unresolved`; a general review category is not a reason to invent a subsystem.
+## Specification
 
-Partial coverage cannot return a clean recommendation.
+- Each rule is checkable: a tester can say what passes and what fails, and which owner line it serves.
+- Every noun a rule uses is defined, with its identity rule, relationships, and states.
+- When something outside the system defines correct, the rule names it with its version.
+- Each outside surface states its edge behavior: invalid and boundary input, failure, partial success, compatibility, and what is deliberately undefined. Probe an invalid input, a boundary value, and a nearby behavior the document does not forbid; missing detail is a finding only when two competent implementers would build different observable behavior.
+- It names no component, store, package, schema, or call path.
+- Requirements and Specification are separate documents. A combined one is a blocker routed to `spec-design`; never split or repair it during review.
 
-## Reconstruct Independently
+## Program Design
 
-Extract the model without preserving author section order:
+- One owner per truth. Remove each owner in your head: if another part still owns the truth implicitly, ownership is duplicated or incomplete. Trace a normal and a failure call across each cross-owner edge.
+- Every Specification entity has a binding row: its owning component (never a package), its home marked `new`, `modified`, or `existing` (with the code name on existing rows), its schema home, `persisted`, `derived`, or `cached`, and the type convention followed. Check the table against the entity list one entity at a time; prose that mentions an entity is not a binding.
+- Every shape that crosses a process, service, storage, or queue boundary is written in the found convention, or as a field list with discriminant, nullability, and schema home.
+- Interfaces state behavior; result and decision contracts are closed variants with bounded reasons.
+- Each material behavior has today's and the proposed entry-to-effect path (or proposed only, marked new), with added, removed, and changed edges and any unchanged edge whose preservation is critical or contested.
+- Failure, concurrency, and cross-cutting obligations each have an owner and a seam.
+- Nothing no rule needs. An architecture noun with no rule above it is a finding however well drawn.
+- Terms match the Specification. A synonym for an existing entity routes to `program-design`; a design noun that behaves like an entity (its own identity, lifecycle, or relationships) with no entity behind it routes to `spec-design`.
+- The owner confirmed the structure, or explicitly waived that check.
 
-```text
-authority, problem, consumers, outcomes
-requirements, contracts, constraints
-components, owners, interfaces, state, flows
-failure/concurrency/security behavior
-proof modalities and seams
-decisions, non-goals, debt, assumptions, gaps
-```
+## Test Design
 
-Mode-complete review reconstructs the full selected mode. Focused review reconstructs only the necessary slice after still reading the complete target file or in-chat record set.
+- Every rule has scenarios, or "not regression-tested: <why>".
+- Expected outcomes come from the Specification as literals or observable effects, never recomputed the way the code computes them.
+- No replacement removes the interaction the scenario claims to prove, and each replacement names its assumption.
+- Each scenario names the behavior change that turns it red, and its timing control or "n/a"; none matches the false-green shapes `test-design` names.
+- Each scenario uses a seam Program Design names, and says why a cheaper layer cannot observe it.
 
-Judge in dependency order: authority/problem, then outcomes/requirements, then contracts, then structural realization/proof. An upstream fatal defect bounds downstream review.
+## Verification Design
 
-## Audit Authority
+- Each Requirements line has a "proven by" line and a core-outcome check on the real surface, or a named limit. A happy path that misses the core outcome is a finding.
+- Each check declares its reference with version and entry point; recorded traces and the code's own output are not references unless the Specification says so.
+- Every rule has a check, and every limit is written as unverified with its reason.
+- Expected outcomes come from the Specification, not from Program Design or Test Design.
+- Each observation point exists in Program Design, and each reused test's scope covers the case on the real surface.
 
-For every load-bearing basis, distinguish:
+## Probes
 
-```text
-code-compelled
-user-chosen
-author recommendation mislabeled as authority
-contradiction of authoritative non-goal/constraint
-```
+Attack the riskiest part of each document with the probes that apply: invert a key claim; imagine two competent implementers building from it; interleave a failure; remove an owner; widen the negative space; break the proof; and play the next consumer (a program designer for a Specification alone, a planner for the whole set). The consumer may decide only its own work. If it would have to invent meaning the reviewed document owns, that is a finding.
 
-Open code sources before claiming they compel behavior. Verify user choices through durable evidence rather than author paraphrase.
+## The Reader's View
 
-## Attack the Crux
+After the full pass, restate the model in a few lines and point to where the owner would correct it. Each document should open with its smallest useful model and reveal detail afterward. For each section or view, ask: if it disappeared, which understanding, decision, trace, failure walk-through, proof path, or lookup would become unclear? Flag process narration, review or planning notes in a design document, decorative views, and duplicated claims, each with its reader consequence. Style alone is not a finding.
 
-Use applicable probes:
+For each diagram or generated image, name the question it answers and compare what it shows with the text. A picture-type view passed as a text fence where Mermaid renders is a finding; so is a UI image that invents a control or skips a changed screen. When image or preview access is missing, return partial coverage instead of a pass.
 
-- inversion;
-- divergent implementers;
-- failure interleaving;
-- owner removal;
-- negative-space expansion;
-- proof break;
-- pretend planner.
+## Complete When
 
-Use the downstream consumer for the selected mode: a pretend program designer for `specification-only`, and a pretend planner for `program-only` or `three-artifact-design`. The consumer may decide only its downstream-owned work; a required invention of meaning owned by the reviewed artifact is a readiness failure.
-
-## Reconstruct for the Human Reader
-
-After the full pass, restate the selected model compactly and point to where a human would correct it. Check progressive disclosure and apply this deletion question at section/view level and obvious process-residue or duplication sites:
-
-```text
-If this element disappeared, which first understanding, decision, trace,
-failure simulation, proof path, or authoritative lookup would become
-underdetermined?
-```
-
-For `specification-only`, reconstruct Requirements -> Specification observable contract -> proof obligation. For `program-only`, reconstruct governing obligation -> scenario/contract -> current/proposed call-path delta -> owner/state/failure behavior -> proof seam. For `three-artifact-design`, reconstruct Requirements -> Specification -> scenario/contract -> Program Design call path and other internal How -> proof.
-
-Flag a concrete comprehension failure, process narration, obscure heading, decorative view, or deletion candidate only when its reader consequence is named. Inability to restate the model is evidence of incoherence, not automatically a prose finding. A material unresolved comprehension risk may route to `reader-understanding` after parent reduction.
-
-## Finding Calibration
-
-Report only source-backed reader, behavior, or design effects. Each candidate names the exact anchor and explains in ordinary language what is wrong, the observable consequence, what the next agent would otherwise have to guess, the smallest correction, the semantic owner, and how the correction is confirmed.
-
-Test removal before completing a questioned mechanism. A finding may repair the confirmed design; it may not expand the goal, accepted requirements, or agreed acceptable complexity without an owner decision.
-
-Stop at the mission boundary. Do not edit, redesign beyond the smallest target, or issue the parent verdict.
-
-Complete when: coverage and model reconstruction are explicit, the highest-risk crux was attacked, and findings are executable rather than topical.
+Every target was read whole; every section is covered or excluded with a reason; each document has `checked`, `partial`, or `blocked` with what was not checked; the riskiest part of each was probed; and every candidate finding names its anchor, what fails, and its owner.

@@ -1,49 +1,27 @@
-# Coordination and Chunking for Design Review
+# Chunking a Large Review
 
-This reference owns how the 🔎 Review Sidekick splits a large design review into chunks and which checks it runs.
+This reference owns how the Reviewer splits a design set too large to hold whole into chunk passes, without cutting any requirement's chain.
 
-Expected inputs: the 🔎 Review Sidekick's own whole-artifact read of the complete target set and governing sources, the selected mode, the confirmed goal boundary and accepted requirements set, and any proof claims the design cites.
-
-Return: the chunk plan — each chunk's seam, its listed sections, mapped dimensions, and overlap seams, or the decision that the mode-complete check alone covers the artifacts — and the checks to run with the reason for each.
-
-## What a Design Chunk Pass Is
-
-A design chunk is a bounded review responsibility over one artifact seam, carried with the seam's complete text on both sides: every section that names the seam's obligation, realizing element, owners, edges, and proof seam, plus all governing sources whole. The 🔎 Review Sidekick reopens each complete artifact involved in the pass and records the seam sections judged. A heading list or a paraphrase is never a seam. The seams are the ones the modes already judge:
-
-```text
-three-artifact-design   Requirements -> Specification traceability
-                        Specification -> Program Design realization
-                        each material call-path group with its owners, edges,
-                          state or effect, and proof seam
-specification-only      one chunk per material public contract or obligation cluster
-program-only            one chunk per component cluster or call-path group
-```
-
-Never split these across chunks without a seam carrying their full text: one requirement's trace to its obligation and its realization; one call-path delta with its owners, edges, and proof seam; one contract with its consumers and failure behavior.
-
-## Overlap Seams
-
-A seam is the complete text both adjacent chunks receive — the obligation and the design element realizing it, the contract and the component owning it, the call path and the proof seam observing it — not a shared requirement label. If a chunk pass needs unseen artifact text to judge its seam, the plan is wrong. Reopen complete governing sources for every pass.
-
-Signs the plan is wrong — fix the plan rather than push the review through: a chunk pass cannot judge without text outside its assignment; a candidate finding's evidence sits outside the reporting chunk; adjacent passes reach opposite conclusions about one seam neither fully holds.
+Expected inputs: the Reviewer's own whole read of every target and governing source, and the tie table so far. Return: the chunk plan, with each chunk's seam, its sections, and its overlap with its neighbors; or the decision that one whole pass covers the set.
 
 ## When Not to Chunk
 
-Most design reviews are small enough that the mode-complete check alone covers the artifacts: the 🔎 Review Sidekick reads every target whole with room to judge the full mode. Compose chunks only when one reviewer cannot hold every material seam — as a working default, several material call-path groups or many public contracts. Either way dispel still runs, and proof-challenge and focused checks keep their reasons.
+Most design reviews fit one whole pass. Chunk only when one reader cannot hold every material chain at once: as a working default, several material call-path groups or many outside contracts. A chunk pass adds depth on its seam; it never replaces the whole read, and the ties and findings still cover the whole set.
 
-## Which Checks, in What Order
+## Keep Each Chain Together
 
-```text
-mode-complete check   always; whole-mode judgment
-chunk passes          when composed; sequentially after mode-complete
-proof-challenge          when the design cites executable proof claims;
-                         after chunk passes
-dispel                   after mode-complete and chunk passes finish;
-                         candidate set may be empty
-focused checks            only after reduction names a concrete unresolved
-                         risk, one per risk, from the roster in SKILL.md
-```
+A chunk carries the complete text on both sides of its seam: the requirement and the rules beneath it, the Program Design rows, scenarios, and checks that realize them, and the governing sources whole. Never split across chunks, unless an overlap carries the full text:
 
-The mode-complete check and dispel always run; chunk passes run when the plan composes chunks. Proof-challenge and focused checks run because a named reason selects them; write that reason beside the check and stop when no named unresolved risk selects another. `SKILL.md` §6 (Proof-Challenge, Dispel, and Focused Checks) owns what counts as a reason.
+- one requirement's chain from `U` to `R` to its trace row, `T`, and `V`;
+- one call path with its owners, edges, and seam;
+- one contract with its consumers and failure behavior.
 
-Complete when: every material seam of the target set is covered by the mode-complete check or exactly one chunk with its units unsplit or seamed, every optional check you run has its reason beside it, and any optional check the caller, the author, or reduction proposed that you did not run has the reason it was not needed.
+## Each Pass
+
+Reopen each complete document the chunk touches. Judge only the checks mapped to this chunk, and list what it deliberately did not judge. If judging the seam needs text outside the chunk and its overlap, stop and return `partial`: that is a chunking defect to fix in the plan, not a gap to fill with inference. Run the passes one after another.
+
+Signs the plan is wrong: a pass cannot judge without outside text; a finding's evidence sits outside the chunk that reports it; two adjacent passes reach opposite conclusions about a seam neither fully holds.
+
+## Complete When
+
+Every material chain is covered by the whole pass or by exactly one chunk with its chain unsplit or carried by an overlap, every pass lists what it did not judge, and no chunk pass is counted as whole-set coverage.

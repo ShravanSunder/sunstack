@@ -127,9 +127,9 @@ describe("goal delivery intent hard cutover", () => {
   });
 
   test("review loops converge under one owner each", () => {
-    const designReview = readPluginFile("skills/spec-program-review/SKILL.md");
+    const designReview = readPluginFile("skills/design-review/SKILL.md");
     const designReviewResults = readPluginFile(
-      "skills/spec-program-review/references/finding-and-reduction-schema.md",
+      "skills/design-review/references/findings.md",
     );
     const designOrchestrator = readPluginFile("skills/orchestrator-design/SKILL.md");
     const implementationReview = readPluginFile(
@@ -143,17 +143,19 @@ describe("goal delivery intent hard cutover", () => {
       "Prefer one independent review-and-correction round",
     );
     expect(designReview).toContain(
-      "each affected artifact corrected at most once in that round",
+      "each affected document corrected at most once in that round",
     );
     expect(designReview).toContain(
-      "until the review is ready or not-converging (see `references/finding-and-reduction-schema.md`)",
+      "until the review is `ready` or `not-converging` (see `references/findings.md`)",
     );
-    expect(designReviewResults).toContain(convergenceRecurrenceText);
+    expect(designReviewResults).toContain(
+      "A finding the Reviewer verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.",
+    );
     expect(designReviewResults).toContain(convergenceNoProgressText);
     expect(designReviewResults).toContain(convergenceBaselineText);
     expect(designReviewResults).toContain(acceptedBoundaryText);
     expect(designReviewResults).toContain(
-      "precedence `not-converging -> blocked -> needs-revision",
+      "the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`",
     );
     expect(designOrchestrator).toContain("Prefer one review-and-correction round");
     expect(designOrchestrator).toContain(

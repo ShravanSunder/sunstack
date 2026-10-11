@@ -1,127 +1,74 @@
-# Finding and Parent Reduction
+# Findings and the Review Result
 
-This reference owns parent verification, candidate disposition, duplicate/conflict reduction, coverage accounting, and the final review result. `parent` means the immediate 🔎 Review Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
+This reference owns how candidate findings become verified findings: checking each one, its shape and route, scope defense, mental-model breaks, filling the `DesignReviewResult`, verifying corrections, and the convergence rule.
 
-## Finding
+Expected inputs: candidate findings from the document checks, the tie table, and any proof-claim or focused check; the unavailable sources; and on later rounds, the earlier review's findings. Return: every finding with its disposition and route, one `DesignReviewResult`, and after corrections, each finding marked closed or open.
 
-```text
-finding identity
-review mode / check
-severity: blocker | important | minor | observation
-artifact and source anchor
-claim or rule
-failure and downstream ambiguity: contradiction or failure path, observable consequence, and what the next author/planner would otherwise have to guess
-smallest semantic correction target
-affected concept: Requirements | Specification | Program Design | named combination
-semantic correction route: spec-design | program-design | caller | spec-design -> program-design
-validation note
-semantic coverage to rerun
-contested evidence
-accepted requirement identity or confirmed goal-boundary field
-governing source identity and exact section or field
-quoted or faithful obligation text
-plain-language requirement meaning
-evidence checked or bounded evidence-lookup result
-whether the confirmed obligations still hold without the questioned mechanism
-mechanism necessity: smallest change that serves the quoted clause | one of several ways
-scope effect: inside confirmed goal boundary | requires owner expansion decision
-```
+## Verify Each Candidate
 
-Severity follows consequence, not tone:
+1. Open the target at its anchor.
+2. Name the line it puts at risk (a `U`, an `R`, or a confirmed boundary), quote it, and say in plain words what fails if the concern stays.
+3. Reproduce the contradiction or the failure path.
+4. When reading cannot settle one factual question, make one bounded source lookup and record its anchors.
+5. Merge duplicates by root cause, and keep conflicting evidence side by side.
 
-- blocker: wrong behavior/design can result or next phase cannot proceed;
-- important: correctness depends on guessing or inconsistent interpretation;
-- minor: intended model lands with avoidable ambiguity/cost;
-- observation: no proven behavior effect.
+Re-anchor before accepting a finding: name the line it serves, whether the existing design already satisfies it, the concrete failure, the smallest correction, and whether that correction stays inside the confirmed boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status.
 
-## Review Sidekick verification
+Missing evidence makes a finding `unverified`, not `rejected`. A category name ("the reliability requirement") is not an anchor until the exact line is opened and quoted. A style preference with no reader or behavior effect is rejected.
 
-For each candidate:
+## The Finding
 
-1. open the target and source anchor;
-2. before accepting, cite the accepted requirement identity, restate its meaning in plain language, and name the observable outcome that fails if the concern is unresolved;
-3. reproduce the contradiction or failure path;
-4. when direct source reading cannot answer one factual question, perform one bounded source lookup in this session using the exact requirement identity, one factual question, and named sources; record anchors and uncertainty;
-5. accept, reject, mark contested, or mark unverified;
-6. record one-line evidence rationale;
-7. merge duplicates by root cause;
-8. preserve conflicting evidence.
+Each accepted finding fills the `Finding` shape: its `id`, the `document`, the `anchor` (path and line), the `problem` in plain words, the `U` or `R` it `affects`, the smallest `correction`, its `route`, and its `state`. Write it so the owner of the fix can act without the review's history.
 
-Missing evidence is `unverified`, not rejection. A category name is not an anchor: "the reliability requirement" fails the anchor fields until the exact governing clause is opened and quoted; a candidate whose anchor fields cannot be filled from an inspectable source is `unverified` or routes to an owner decision, never `accepted`. A candidate is a mental-model break — not an ordinary design finding — when its correction cannot be expressed inside the current governing basis because an assumption the basis itself relies on is false (the design assumes an interface, ordering, ownership, or guarantee the current system does not provide); a defect the basis already forbids and can name the fix for routes to its semantic owner as usual, while a break returns `decision-needed` or `blocked` to the owner instead of consuming a correction round. Weigh the dispel check's classifications and over-delivery map as candidate evidence like any other check result, and quote the rail text when overriding its class. A reviewer candidate that adds unrequested scope is `rejected: scope expansion` (an observation for the owner, not a decision the owner owes); an `absent`-mapped design element already in the artifacts is never rejected as harmless — it returns `decision-needed` (deletion recommended) or an accepted removal routed to `program-design`. An accepted finding names the unrealized obligation and its failure, never the reviewer's proposed mechanism. Style preference without reader or behavior effect is rejected. Before accepting missing contracts on a proposed mechanism, test whether deleting the mechanism preserves every confirmed requirement. Prefer deletion when it does. The 🔎 Review Sidekick opens the source anchors from its bounded lookup before disposition. A reviewer concern that cannot be tied to an accepted requirement and observable failure is advice awaiting investigation, not implementation authority.
+Good: "F3 · verification-design · vd.md:41 · U4's only check is the version handshake; nothing observes the event reaching the pane · affects U4, R6 · add a core-outcome check on the installed agent · route: verification-design · open"
 
-## Coverage-Bound Result
+Bad: "F3 · verification seems thin · consider more tests"; a correction that offers three alternatives; a route left for the reader to infer.
+
+## Routes
 
 ```text
-mode and covered targets
-semantic coverage statement and any later semantic-change records
-governing-source coverage
-accepted-requirements and confirmed-goal-boundary coverage
-check statuses
-coverage gaps
-accepted/rejected/contested/unverified findings
-what held
-result: ready | needs-revision | blocked | decision-needed | not-converging
-first required revision
-correction verification and parent-verified remediation anchors
-planning-readiness boundary
-owner decision when correction would expand or subtract confirmed scope
-non-edit / non-acceptance statement
+Requirements or Specification      -> spec-design
+structure                          -> program-design
+tests                              -> test-design
+proof                              -> verification-design
+missing owner meaning, or a break  -> lead (owner brief)
 ```
 
-## Phase-Guided Route And Handoff
+A correction that spans the Specification and a document below it routes to `spec-design` first; the lower document is corrected after the rule is settled.
 
-Only the parent-reduced result may select what happens next. Return exactly one of these shapes:
+## Scope Defense
 
-```text
-stop
-  result and exact reason
-  exact caller action, missing evidence, unanswered owner choice,
-  or deferral condition when applicable
+Two cases, two outcomes:
 
-continue
-  recommended next skill: discuss-pathfinding | spec-design | program-design
-  phase-owned reason
-  compact handoff:
-    relevant governing-source and artifact pointers
-    review mode, result, and current boundary status
-    one exact accepted correction or one unmade owner decision
-    accepted findings needed by the destination
-    rejected, contested, and unverified findings only when needed to prevent
-      the destination from treating them as work
-    pathfinding return owner when pathfinding is recommended
-```
+- **A candidate that adds something no line asks for** (retries no rule demands, a hardening layer, an abstraction for imagined future callers) is `rejected: scope expansion` and listed as an observation for the owner, never as an owner decision. When several mechanisms could serve a rule, the finding names the unmet rule, never the reviewer's preferred mechanism.
+- **An element already in the design with nothing above it** (an orphan from the tie table) is an accepted finding. Its default correction is deletion, routed to the document's owner. If the owner may want it kept, route it to the Lead for a brief.
 
-Before returning `continue`, inspect the destination skill's declared inputs and include only what that destination needs. State the current boundary status and select one smallest evidence-backed correction; do not hand the destination alternatives to choose between. When deletion preserves the accepted meaning and removes the verified defect, deletion is the correction. Use pointers instead of copied artifacts. Exclude full conversation history, repeated background, unrelated evidence, and unreduced reviewer candidates.
+Before accepting a finding that asks the design to complete a questioned mechanism, test deletion first: if removing the mechanism keeps every rule, deletion is the correction.
 
-Select one route from the reduced result:
+## When the Model Breaks
 
-- accepted Requirements or Specification correction only -> `spec-design`;
-- accepted Program Design correction only -> `program-design`;
-- accepted Requirements or Specification correction plus Program Design correction -> `spec-design` first, carrying the complete accepted set;
-- accepted caller-owned correction -> stop with `needs-revision` and the exact caller action;
-- complete review evidence proves the current model fails and replacement owner meaning is unmade -> `discuss-pathfinding`, with return owner `spec-design` for Requirements or Specification meaning, `program-design` for an owner-controlled tolerance that blocks structural How, or `spec-design` first when the gap spans observable meaning and Program Design;
-- unresolved owner choice that is not the unmade-replacement case -> stop `decision-needed`;
-- invalid input or missing evidence -> stop `blocked`;
-- no required correction -> stop `ready`.
+A candidate whose correction cannot be written inside the current design, because an assumption the design relies on is false (an interface, ordering, ownership, or guarantee the current system does not provide), is a break, not an ordinary finding. Route it to the Lead with the failed assumption, the evidence, and its consequence. It does not consume a correction round.
 
-An authoritative correction is not pathfinding work. A reviewer suggestion is not a route until the 🔎 Review Sidekick verifies and accepts it. `discuss-pathfinding` resolves only the named unmade meaning and returns to the supplied owner; it does not choose another phase.
+## The Result
 
-`ready` requires complete semantically current mode coverage, no required coverage gap, no open blocker/important accepted finding, no unapproved scope expansion or requirement subtraction, and no remaining planner-owned semantic invention.
+Fill one `DesignReviewResult`:
 
-Produce exactly one result:
+- `result`: the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`. `ready` only when no finding is open, no tie is unchecked, no source or confirmation is missing, and no owner decision is pending.
+- `reviewed`: every target with `checked`, `partial`, or `blocked`, and what was not checked.
+- `unavailableSources`: every governing source that could not be read.
+- `ties`: the tie table.
+- `findings`: every finding, open and closed.
 
-- `not-converging`: the correction loop meets the convergence rule below; the orchestrator brings the owner a brief of what keeps failing.
-- `blocked`: a required artifact/source/access input is missing or stale, or required mode/check coverage is partial, blocked, or missing status, so the review cannot truthfully judge the mode.
-- `decision-needed`: required coverage is complete enough to isolate an unresolved user/authority-owned choice, including a proposed scope expansion or requirement subtraction, and that choice—not missing evidence or author correction—is the first action needed.
-- `needs-revision`: coverage is sufficient to judge the artifact and at least one accepted blocker/important finding requires `spec-design`, `program-design`, or caller correction; this takes precedence over `decision-needed` when revision is independently required.
-- `ready`: the complete condition above holds.
+The result states findings and limits. It is not acceptance and carries no edit or plan.
 
-When states mix, apply precedence `not-converging -> blocked -> needs-revision -> decision-needed -> ready`.
+## After Corrections
 
-Convergence (this reference is its home for design review):
+The same Reviewer reopens each accepted finding at its current anchor and marks it `closed` or `open`, citing the anchor. It does not rerun the whole review: the changed documents and everything tied below them are checked again. A concrete, source-backed finding that remains or was introduced inside the accepted boundary admits another round; pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not.
+
+## Convergence
 
 > After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
-> 1. **Recurrence.** A finding the Review Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
+> 1. **Recurrence.** A finding the Reviewer verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
 > 2. **No progress.** The count of open accepted findings did not drop in two adjacent comparisons in a row: it stayed equal or rose from review N−1 to N, and again from N to N+1.
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
@@ -130,6 +77,6 @@ Accepted boundary:
 
 > A correction is inside the accepted boundary when it changes no design meaning, scope, contract, or owner decision. Only those corrections get further review rounds automatically. A correction that changes, or might change, any of those returns to the Lead, which brings the owner a brief. Once the owner settles it, review continues under the convergence rule without a permission prompt.
 
-After each correction round, the 🔎 Review Sidekick records whether each accepted finding was corrected and cites the current anchors. Do not rerun affected coverage automatically. A concrete source-backed substantive residual inside the accepted boundary admits another round under the convergence rule above; pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify.
+## Complete When
 
-Complete when: every candidate and check status is accounted for; every accepted candidate names the requirement or boundary, plain-language meaning, failure and downstream ambiguity, and verified evidence; accepted requirements and goal relevance are preserved; deletion was tested before addition; the result cannot exceed semantically current coverage; any later semantic-change records are explicit; and the result contains one parent-selected compact continuation handoff or an exact stop.
+Every candidate has a disposition with its evidence; every accepted finding fills the `Finding` shape with a single route; scope expansion is rejected and orphans carry a deletion default; breaks went to the Lead; the `DesignReviewResult` lists every target's status, every unavailable source, the tie table, and every finding; and after corrections, each finding is marked closed or open at its current anchor.

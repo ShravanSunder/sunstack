@@ -18,7 +18,7 @@ describe("user requirements and design-view contracts", () => {
     const choosingStructure = readPluginFile(
       "skills/program-design/references/choosing-structure.md",
     );
-    const review = readPluginFile("skills/spec-program-review/SKILL.md");
+    const review = readPluginFile("skills/design-review/references/findings.md");
 
     expect(clarification).toContain(
       "reflect back, or re-anchor.",
@@ -191,7 +191,7 @@ describe("user requirements and design-view contracts", () => {
     expect(revising).toContain("settle Requirements and Specification first");
     expect(documents).toContain("tmp/design-workflows/<date>-<slug>/");
     expect(specDesign).toContain("set `designReview: owed`");
-    expect(readPluginFile("skills/spec-program-review/SKILL.md")).toContain("carry the existing semantic coverage forward without another review");
+    expect(readPluginFile("skills/design-review/SKILL.md")).toContain("a wording-only edit keeps the existing coverage");
     expect(specDesign).not.toContain("Any later artifact edit makes");
     expect(specDesign).not.toContain("artifact identity/digest");
   });
@@ -265,7 +265,7 @@ describe("user requirements and design-view contracts", () => {
     );
     expect(documents).toContain("tmp/design-workflows/<date>-<slug>/");
     expect(programDesign).toContain("set `designReview: owed`");
-    expect(readPluginFile("skills/spec-program-review/SKILL.md")).toContain("carry the existing semantic coverage forward without another review");
+    expect(readPluginFile("skills/design-review/SKILL.md")).toContain("a wording-only edit keeps the existing coverage");
     expect(programDesign).not.toContain("Any later edit to either artifact makes");
     expect(programDesign).not.toContain("program-design identity/digest");
   });
@@ -288,179 +288,127 @@ describe("user requirements and design-view contracts", () => {
     expect(programDesign).toContain("It does not choose test layers (`test-design`)");
   });
 
-  test("keeps spec-program review proportional and reader-focused", () => {
-    const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
+  test("keeps design review proportional and reader-focused", () => {
+    const reviewSkill = readPluginFile("skills/design-review/SKILL.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
     const revising = readPluginFile("skills/spec-design/references/revising.md");
-    const commonMethod = readPluginFile(
-      "skills/spec-program-review/references/reviewing-common-method.md",
+    const documentChecks = readPluginFile(
+      "skills/design-review/references/document-checks.md",
     );
-    const modeComplete = readPluginFile(
-      "skills/spec-program-review/references/lanes/mode-complete-reviewer.md",
+    const findings = readPluginFile("skills/design-review/references/findings.md");
+    const focusedChecks = readPluginFile(
+      "skills/design-review/references/focused-checks.md",
     );
-    const readerUnderstanding = readPluginFile(
-      "skills/spec-program-review/references/lanes/reader-understanding.md",
-    );
-    const laneSchema = readPluginFile(
-      "skills/spec-program-review/references/lanes/lane-schema.md",
-    );
-    const reduction = readPluginFile(
-      "skills/spec-program-review/references/finding-and-reduction-schema.md",
-    );
+    const chunking = readPluginFile("skills/design-review/references/chunking.md");
     const hardCutoverSources = [
       programDesign,
       reviewSkill,
-      commonMethod,
-      modeComplete,
-      readerUnderstanding,
-      laneSchema,
-      reduction,
+      documentChecks,
+      findings,
+      focusedChecks,
+      chunking,
     ].join("\n");
 
-    expect(reviewSkill).toContain("reader understanding or readability");
-    expect(reviewSkill).toContain("mode-complete check and every selected chunk pass have statuses");
-    expect(reviewSkill).toContain("walk the chunk passes sequentially");
+    expect(documentChecks).toContain("## The Reader's View");
+    expect(reviewSkill).toContain("each document has a status");
+    expect(chunking).toContain("Run the passes one after another.");
     expect(reviewSkill).toContain("one check per named risk");
-    expect(reviewSkill).toContain("Select a focused check only for a concrete unresolved risk");
+    expect(focusedChecks).toContain("only when a named risk remains");
     expect(reviewSkill).not.toContain("stop record");
+    expect(documentChecks).toContain("Partial coverage never supports a clean result.");
     expect(reviewSkill).toContain(
-      "A missing, partial, or blocked check cannot support `ready`",
-    );
-    expect(reviewSkill).toContain(
-      "Assign prescribed proof commands",
+      "Commands run only through a 🔧 Operator under an exact grant.",
     );
     expect(reviewSkill).not.toContain("at most one focused reviewer by default");
-    expect(reviewSkill).toContain(
-      "`Requirements`, `Specification`, `Program Design`, or a named combination",
-    );
-    expect(reviewSkill).toContain(
-      "any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled",
+    expect(findings).toContain("Requirements or Specification      -> spec-design");
+    expect(findings).toContain(
+      "A correction that spans the Specification and a document below it routes to `spec-design` first",
     );
     expect(revising).toContain(
       "When both Requirements or Specification and Program Design change, settle Requirements and Specification first.",
     );
-    expect(reviewSkill).toContain(
-      "`caller` returns the exact owner/caller decision; review does not resume until that decision is resolved",
-    );
+    expect(findings).toContain("missing owner meaning, or a break  -> lead (owner brief)");
     expect(hardCutoverSources).not.toContain("boundary check 2");
     expect(hardCutoverSources).not.toContain("boundary-check-2");
-    expect(laneSchema).toContain("reader-understanding");
-    expect(commonMethod).toContain("mutually narrowed current files");
-    expect(commonMethod).toContain("satisfied by the existing system");
-    expect(modeComplete).toContain("compact human-reader reconstruction");
-    expect(modeComplete).toContain("confirmed goal boundary");
-    expect(modeComplete).toContain("structural-realization confirmation");
-    expect(readerUnderstanding).toContain("Apply the Human Deletion Test");
-    expect(readerUnderstanding).toContain("confirmed goal boundary");
-    expect(readerUnderstanding).toContain(
-      "structural-realization confirmation",
+    expect(documentChecks).toContain(
+      "Mutually narrowed current files still trace cleanly to each other, so they are never the baseline.",
     );
-    expect(readerUnderstanding).toContain(
-      "Only a caller-authorized full-artifact audit",
+    expect(documentChecks).toContain(
+      "restate the model in a few lines and point to where the owner would correct it",
     );
-    expect(reduction).toContain(
-      "accepted requirement identity or confirmed goal-boundary field",
+    expect(documentChecks).toContain(
+      "The owner confirmed the structure, or explicitly waived that check.",
     );
-    expect(reduction).toContain("semantic correction route");
-    expect(reduction).toContain("spec-design -> program-design");
-    expect(reduction).toContain(
-      "accepted-requirements and confirmed-goal-boundary coverage",
+    expect(documentChecks).toContain("if it disappeared, which understanding");
+    expect(findings).toContain(
+      "Name the line it puts at risk (a `U`, an `R`, or a confirmed boundary), quote it, and say in plain words what fails",
     );
-    expect(reduction).toContain("plain-language requirement meaning");
-    expect(reduction).toContain("observable outcome that fails");
-    expect(reduction).toContain("bounded evidence-lookup result");
-    expect(reduction).toContain("one bounded source lookup in this session");
-    expect(reduction).toContain("opens the source anchors from its bounded lookup");
-    expect(laneSchema).toContain("one compact row per stable identity");
-    expect(laneSchema).toContain("every member identity is enumerated");
-    expect(commonMethod).toContain("every member identity is enumerated");
-    expect(reduction).toContain(
-      "whether the confirmed obligations still hold without the questioned mechanism",
+    expect(findings).toContain("make one bounded source lookup and record its anchors");
+    expect(findings).toContain(
+      "if removing the mechanism keeps every rule, deletion is the correction",
     );
-    expect(reduction).toContain("requires owner expansion decision");
+    expect(findings).toContain("returns to the Lead, which brings the owner a brief");
   });
 
-  test("reviews accepted requirements and call-path deltas without digest ceremony", () => {
-    const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
-    const programReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-program-design.md",
+  test("reviews call-path deltas and narrowed requirements without digest ceremony", () => {
+    const reviewSkill = readPluginFile("skills/design-review/SKILL.md");
+    const documentChecks = readPluginFile(
+      "skills/design-review/references/document-checks.md",
     );
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
-    );
-    const classification = readPluginFile(
-      "skills/spec-program-review/references/classifying-review-requirement.md",
-    );
+    const ties = readPluginFile("skills/design-review/references/ties.md");
+    const findings = readPluginFile("skills/design-review/references/findings.md");
 
     for (const marker of ["added", "removed", "changed"]) {
-      expect(programReview).toContain(marker);
-      expect(threeArtifactDesignReview).toContain(marker);
+      expect(documentChecks).toContain(marker);
     }
-    expect(programReview).toContain("preservation-critical or contested unchanged");
-    expect(threeArtifactDesignReview).toContain(
-      "preservation-critical or contested unchanged",
+    expect(documentChecks).toContain(
+      "any unchanged edge whose preservation is critical or contested",
     );
-    expect(reviewSkill).toContain("last inspectable owner-accepted governing source");
-    expect(reviewSkill).toContain("Mutually narrowed current files");
-    expect(programReview).toContain("explicit no-predecessor case");
-    expect(threeArtifactDesignReview).toContain(
-      "accepted requirements remain covered",
+    expect(documentChecks).toContain("(or proposed only, marked new)");
+    expect(documentChecks).toContain(
+      "the last owner-confirmed card, or else the last owner-accepted source you can inspect",
     );
-    expect(reviewSkill).not.toContain("digest");
-    expect(programReview).not.toContain("digest");
-    expect(threeArtifactDesignReview).not.toContain("digest");
-    expect(classification).not.toContain("digest");
+    for (const source of [reviewSkill, documentChecks, ties, findings]) {
+      expect(source).not.toContain("digest");
+    }
   });
 
-  test("keeps three-artifact design review responsible for complete local judgments", () => {
-    const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
+  test("reviews whichever design documents exist, each alone and then the ties", () => {
+    const reviewSkill = readPluginFile("skills/design-review/SKILL.md");
+    const documentChecks = readPluginFile(
+      "skills/design-review/references/document-checks.md",
     );
-    const reduction = readPluginFile(
-      "skills/spec-program-review/references/finding-and-reduction-schema.md",
-    );
+    const ties = readPluginFile("skills/design-review/references/ties.md");
+    const findings = readPluginFile("skills/design-review/references/findings.md");
 
-    expect(threeArtifactDesignReview).toContain(
-      "MUST load `reviewing-specification.md`",
-    );
-    expect(threeArtifactDesignReview).toContain(
-      "MUST load `reviewing-program-design.md`",
-    );
-    expect(threeArtifactDesignReview).toContain(
-      "Requirements, Specification, and Program Design identity status",
-    );
-    expect(threeArtifactDesignReview).toContain(
-      "This reference owns `three-artifact-design` mode judgment.",
-    );
-    expect(reviewSkill).toContain(
-      "mode: specification-only | program-only | three-artifact-design",
-    );
-    for (const identity of [
-      "Requirements identity",
-      "Specification identity",
-      "Program Design identity",
+    expect(reviewSkill).toContain("whichever of the five documents exist");
+    for (const heading of [
+      "## Requirements",
+      "## Specification",
+      "## Program Design",
+      "## Test Design",
+      "## Verification Design",
     ]) {
-      expect(reviewSkill).toContain(identity);
+      expect(documentChecks).toContain(heading);
     }
+    expect(ties).toContain(
+      "Walk every row and every cell of Program Design's trace table; do not sample.",
+    );
+    expect(ties).toContain('"unchecked: <source> unavailable"');
+    expect(ties).toContain("A clean trace below does not rescue it");
     expect(reviewSkill).toContain(
-      "result: ready | needs-revision | blocked | decision-needed",
+      "// import type { DesignReviewResult } from '../../schemas/design-returns.ts'",
+    );
+    expect(findings).toContain(
+      "the first that applies, in this order: `not-converging`, `owner-decision`, `evidence-gap`, `corrections-routed`",
     );
     expect(reviewSkill).not.toContain("exact review invocation identity");
-    expect(reviewSkill).not.toContain("exact review invocation/result identity");
-    expect(reduction).not.toContain("exact review invocation identity");
-    expect(reduction).toContain(
-      "result: ready | needs-revision | blocked | decision-needed",
-    );
-    expect(reduction).not.toContain(
-      "verdict: ready | needs-revision | blocked | decision-needed",
-    );
+    expect(findings).not.toContain("exact review invocation identity");
+    expect(reviewSkill).not.toContain("three-artifact");
+    expect(existsSync(path.join(pluginRoot, "skills/spec-program-review"))).toBe(false);
     expect(
       existsSync(
-        path.join(
-          pluginRoot,
-          "skills/spec-program-review/references/reviewing-pair.md",
-        ),
+        path.join(pluginRoot, "skills/design-review/references/classifying-review-requirement.md"),
       ),
     ).toBe(false);
   });
@@ -479,15 +427,16 @@ describe("user requirements and design-view contracts", () => {
     );
   });
 
-  test("supports file-backed and chat-only artifact navigation review", () => {
-    const artifactNavigation = readPluginFile(
-      "skills/spec-program-review/references/lanes/artifact-navigation.md",
+  test("supports file-backed and chat-only navigation review", () => {
+    const focusedChecks = readPluginFile(
+      "skills/design-review/references/focused-checks.md",
     );
 
-    expect(artifactNavigation).toContain("one complete navigation medium");
-    expect(artifactNavigation).toContain("File-backed work has enumerable artifact files");
-    expect(artifactNavigation).toContain("Chat-only work has complete separately labeled records");
-    expect(artifactNavigation).toContain("entry artifact or labeled record");
+    expect(focusedChecks).toContain("## Navigation");
+    expect(focusedChecks).toContain("follow every link and confirm its target exists");
+    expect(focusedChecks).toContain(
+      "For a chat-only design, the same walk runs over its separately labeled records in their entry order.",
+    );
   });
 
   test("keeps the current three-artifact design-review contract aligned across direct consumers", () => {
