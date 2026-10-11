@@ -11,7 +11,7 @@ One design *cycle*, run with the owner. Each document is built on a *completed* 
 
 The Lead writes every design document in this session by loading each phase skill. Helpers bring evidence; the Reviewer brings findings.
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the document boundaries and where new documents go. For a new file-backed document, pass `<project-root>/docs/specs/` as its artifact home.
+MUST load `../../shared-references/design-documents.md` and return the document boundaries and where new documents go. For a new file-backed document, pass `<project-root>/docs/specs/` as its artifact home.
 
 ## Workflow
 

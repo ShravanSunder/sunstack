@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 Two documents, two readers. Requirements are *the owner's words*: the owner reads and confirms them, and every line shows *where it came from*. The Specification turns each confirmed line into *checkable* rules for whoever builds, tests, or verifies. An idea that did not come from the owner is a proposal until the owner adopts it.
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the document boundaries the two documents must respect.
+MUST load `../../shared-references/design-documents.md` and return the document boundaries the two documents must respect.
 
 The Lead loads this skill and writes both documents itself, with the owner. Helpers may bring evidence; they never write a requirement, a rule, or a view.
 

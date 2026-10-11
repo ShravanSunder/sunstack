@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 Program Design is the map of how it is built. Every rule has *one owner* and a *seam* where it can be tested and watched. A reader can walk the *call path* from entry to effect, find where each truth lives, and follow a failure to the part that recovers it. Delete anything no rule needs.
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the document boundaries this design must respect.
+MUST load `../../shared-references/design-documents.md` and return the document boundaries this design must respect.
 
 The Lead loads this skill and writes the design itself, with the owner. Helpers may bring evidence; they never choose structure or write the design. When bounded evidence help is worth delegating (tracing today's call paths, answering one platform question), use `manage-agents` to commission a 🛠️ Worker, and open its anchors yourself before relying on them.
 
