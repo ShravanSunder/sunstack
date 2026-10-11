@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verification: Design"
+  short_description: "Plan independent proof on the real surface against a declared reference"
+  default_prompt: "Use $verification-design to plan how each requirement is proven independently: a declared reference with its version and entry point, the core outcome first on the real surface, where it is observed, what counts as passing, and what stays unverified."
