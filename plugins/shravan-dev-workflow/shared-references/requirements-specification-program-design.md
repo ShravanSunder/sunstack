@@ -40,6 +40,8 @@ For chat-only work, Requirements and Specification may remain in chat, but they 
 
 The accepted requirements set is returned coverage state. It is not a fourth artifact, a ledger, or an alias for the Requirements identity.
 
+Where a new document goes, in order: the artifact home the caller supplies (`orchestrator-design` supplies `<project-root>/docs/specs/`); otherwise the repository's documented spec location; otherwise `docs/specs/<yyyy-mm-dd-name>/`. An existing authoritative document stays where it is. Scratch for substantial work (source notes, alternatives, prototype views) goes in the repository's ignored scratch convention or `tmp/design-workflows/<date>-<slug>/`; scratch never holds meaning and never becomes required reading.
+
 Valid:
 
 ```text

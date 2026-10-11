@@ -8,12 +8,16 @@ const readPluginFile = (relativePath: string): string =>
   readFileSync(path.join(pluginRoot, relativePath), "utf8");
 
 describe("user requirements and design-view contracts", () => {
-  test("keeps Re-anchor local to the four scope-drift junctions", () => {
+  test("keeps a scope-drift check at each design junction", () => {
     const clarification = readPluginFile(
       "skills/discuss-clarify-mental-models/SKILL.md",
     );
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
+    const revising = readPluginFile("skills/spec-design/references/revising.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const choosingStructure = readPluginFile(
+      "skills/program-design/references/choosing-structure.md",
+    );
     const review = readPluginFile("skills/spec-program-review/SKILL.md");
 
     expect(clarification).toContain(
@@ -25,19 +29,16 @@ describe("user requirements and design-view contracts", () => {
     expect(clarification).toContain(
       "Re-anchor: compare the confirmed goal and governing boundaries",
     );
-    expect(specDesign).toContain(
-      "Re-anchor before deriving or revising normative requirements",
+    expect(specDesign).toContain("including what is out of scope");
+    expect(revising).toContain("Find the Complete Confirmed Set First");
+    expect(revising).toContain(
+      "treating the current files as the baseline after both have been narrowed",
     );
-    expect(specDesign).toContain(
-      "returned workflow state, not durable specification prose",
+    expect(programDesign).toContain("A mechanism no rule needs is deleted.");
+    expect(choosingStructure).toContain("When nothing breaks, delete it");
+    expect(choosingStructure).toContain(
+      "Return `owner-decision` for that added complexity",
     );
-    expect(programDesign).toContain(
-      "Re-anchor before selecting target composition",
-    );
-    expect(programDesign).toContain(
-      "Delete a mechanism when no confirmed obligation needs it",
-    );
-    expect(programDesign).toContain("owner expansion decision");
     expect(review).toContain("Re-anchor before accepting a finding");
     expect(review).toContain(
       "existing `accepted | rejected | contested | unverified` disposition",
@@ -58,37 +59,33 @@ describe("user requirements and design-view contracts", () => {
       "skills/discuss-pathfinding/SKILL.md",
     );
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
+    const specViews = readPluginFile("skills/spec-design/references/views.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const programViews = readPluginFile("skills/program-design/references/views.md");
     const sharedReference = readFileSync(sharedPath, "utf8");
     const generatedVisualsReference = readFileSync(generatedVisualsPath, "utf8");
 
     expect(existsSync(sharedPath)).toBe(true);
     expect(existsSync(generatedVisualsPath)).toBe(true);
-    for (const skill of [discussPathfinding, specDesign, programDesign]) {
-      expect(skill).toContain(
-        "../../shared-references/diagram-rendering-and-fallbacks.md",
-      );
-    }
-
+    expect(discussPathfinding).toContain(
+      "../../shared-references/diagram-rendering-and-fallbacks.md",
+    );
     expect(
       discussPathfinding.indexOf("diagram-rendering-and-fallbacks.md"),
     ).toBeLessThan(
       discussPathfinding.indexOf("MUST load `references/decisions-and-docs.md`"),
     );
-    expect(specDesign.indexOf("diagram-rendering-and-fallbacks.md")).toBeLessThan(
-      specDesign.indexOf("MUST load `references/artifact-and-self-review.md`"),
+    expect(specDesign).toContain("load `references/views.md`");
+    expect(programDesign).toContain("MUST load `references/views.md`");
+    expect(programDesign.indexOf("MUST load `references/views.md`")).toBeLessThan(
+      programDesign.indexOf("return a `PhaseReturn` of kind `phase-complete`"),
     );
-    expect(
-      programDesign.indexOf("diagram-rendering-and-fallbacks.md"),
-    ).toBeLessThan(
-      programDesign.indexOf("MUST load `references/artifact-and-self-review.md`"),
-    );
-    for (const designSkill of [specDesign, programDesign]) {
-      expect(designSkill).toContain(
-        "or the substantial per-document visual obligation applies even when no precise-view predicate fires",
+    for (const views of [specViews, programViews]) {
+      expect(views).toContain(
+        "MUST load `../../../shared-references/diagram-rendering-and-fallbacks.md`",
       );
-      expect(designSkill).toContain("no current UI");
-      expect(designSkill).toContain("text fence is not a pass");
+      expect(views).toContain("no current UI");
+      expect(views).toContain("text fence is not a pass");
     }
     expect(sharedReference).toContain(
       "selected medium: generated-image | mermaid | markdown-table | presentation-tui | fenced-plain-text",
@@ -117,9 +114,11 @@ describe("user requirements and design-view contracts", () => {
     const extraction = readPluginFile(
       "skills/discuss-pathfinding/references/user-requirements-extraction.md",
     );
-    const specDesign = readPluginFile("skills/spec-design/SKILL.md");
-    const traceability = readPluginFile(
-      "skills/spec-design/references/requirements-and-traceability.md",
+    const requirementsCard = readPluginFile(
+      "skills/spec-design/references/requirements-card.md",
+    );
+    const writingRules = readPluginFile(
+      "skills/spec-design/references/writing-rules.md",
     );
 
     for (const field of [
@@ -148,61 +147,56 @@ describe("user requirements and design-view contracts", () => {
     expect(extraction).toContain("confirmed goal boundary");
     expect(extraction).toContain("Silence, generic assent");
     expect(extraction).toContain("file-permission boundary");
-    expect(specDesign).toContain("stable U identifiers");
-    expect(specDesign).toContain(
-      "normative-eligible only when its producer-owned authority state is `authorized`",
+    expect(requirementsCard).toContain("stable `U` identifier");
+    expect(requirementsCard).toContain("Only `authorized` rows become Your lines.");
+    expect(requirementsCard).toContain("Never promote a row past its state.");
+    expect(requirementsCard).toContain(
+      "Adoption means the owner said yes to that line.",
     );
-    expect(traceability).toContain("user or stakeholder need U1");
-    expect(traceability).toContain("traceable in both directions through U when present");
+    expect(writingRules).toContain(
+      "Every confirmed U line has at least one R, or a stated reason why not.",
+    );
+    expect(writingRules).toContain("Every R names the U lines it serves");
   });
 
   test("keeps specification scope, correction, and artifact-state boundaries explicit", () => {
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
-    const authority = readPluginFile(
-      "skills/spec-design/references/authority-and-problem-framing.md",
+    const requirementsCard = readPluginFile(
+      "skills/spec-design/references/requirements-card.md",
     );
-    const artifact = readPluginFile(
-      "skills/spec-design/references/artifact-and-self-review.md",
+    const revising = readPluginFile("skills/spec-design/references/revising.md");
+    const documents = readPluginFile(
+      "shared-references/requirements-specification-program-design.md",
     );
 
     for (const boundaryField of [
-      "existing behavior or foundation to reuse",
-      "actual missing capabilities or observable differences",
-      "explicit non-goals",
-      "acceptable complexity and the machinery that reopens scope",
+      "what already works and must keep working",
+      "what is actually missing",
+      "which systems or packages may change and which are protected",
+      "what is out of scope, and the machinery that would reopen scope",
     ]) {
-      expect(authority).toContain(boundaryField);
+      expect(requirementsCard).toContain(boundaryField);
     }
-    expect(authority).toContain("Mutually narrowed current requirements");
     expect(specDesign).toContain(
-      "Requirements, Specification, Program Design, or a named combination",
+      "the correction's class (Requirements, Specification, or Program Design)",
     );
     expect(specDesign).not.toContain("requirements/Why/What");
     expect(specDesign).not.toContain("governing Why/What");
-    expect(specDesign).toContain("inspectable per-item coverage");
-    expect(specDesign).toContain(
-      "accepted identity, authoritative meaning, and specification destination",
+    expect(revising).toContain(
+      "every baseline line is accounted for as kept, changed with authority, or removed by the owner",
     );
-    expect(specDesign).toContain(
-      "A count or an assertion that coverage is intact is not coverage evidence",
+    expect(revising).toContain(
+      "A shorter document that lost confirmed lines has lost scope; it is not simpler.",
     );
-    expect(specDesign).toContain("tmp/design-workflows/<date>-<slug>/");
-    expect(specDesign).toContain("returned workflow state");
-    expect(specDesign).toContain("spec-program-review`'s bounded review-and-correction-round policy");
+    expect(revising).toContain("settle Requirements and Specification first");
+    expect(documents).toContain("tmp/design-workflows/<date>-<slug>/");
+    expect(specDesign).toContain("set `designReview: owed`");
     expect(readPluginFile("skills/spec-program-review/SKILL.md")).toContain("carry the existing semantic coverage forward without another review");
     expect(specDesign).not.toContain("Any later artifact edit makes");
-    expect(artifact).toContain("Human Deletion Test");
-    expect(artifact).toContain("smallest Why/What model");
-    expect(artifact).toContain("one compact row per stable identity");
-    expect(artifact).toContain("every member identity is enumerated");
-    expect(artifact.toLowerCase()).toContain(
-      'a bare "coverage intact" assertion is not a report',
-    );
     expect(specDesign).not.toContain("artifact identity/digest");
-    expect(artifact).not.toContain("digest-bound");
   });
 
-  test("keeps view predicates in target SKILL files only", () => {
+  test("keeps view predicates in each design skill's views reference only", () => {
     const discussPathfinding = readPluginFile(
       "skills/discuss-pathfinding/SKILL.md",
     );
@@ -210,13 +204,9 @@ describe("user requirements and design-view contracts", () => {
       "skills/discuss-pathfinding/references/user-requirements-extraction.md",
     );
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
-    const specArtifact = readPluginFile(
-      "skills/spec-design/references/artifact-and-self-review.md",
-    );
+    const specViews = readPluginFile("skills/spec-design/references/views.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
-    const programArtifact = readPluginFile(
-      "skills/program-design/references/artifact-and-self-review.md",
-    );
+    const programViews = readPluginFile("skills/program-design/references/views.md");
 
     expect(discussPathfinding).not.toContain(
       "per direct-user class carrying at least one must-priority need",
@@ -224,25 +214,25 @@ describe("user requirements and design-view contracts", () => {
     expect(extraction).not.toContain(
       "per direct-user class carrying at least one must-priority need",
     );
-    expect(specDesign).toContain(
-      "two or more external consumers or observable surfaces exist",
-    );
-    expect(specArtifact).not.toContain(
-      "two or more external consumers or observable surfaces exist",
-    );
-    expect(programDesign).toContain("control crosses owners or async boundaries");
-    expect(programArtifact).not.toContain(
-      "control crosses owners or async boundaries",
-    );
+    expect(specViews).toContain("two or more outside consumers or surfaces exist");
+    expect(specDesign).not.toContain("two or more outside consumers or surfaces exist");
+    expect(programViews).toContain("control crosses owners or async boundaries");
+    expect(programDesign).not.toContain("control crosses owners or async boundaries");
   });
 
   test("keeps program design proportional and makes call-path deltas visible", () => {
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
-    const stateCalls = readPluginFile(
-      "skills/program-design/references/state-calls-and-flows.md",
+    const choosingStructure = readPluginFile(
+      "skills/program-design/references/choosing-structure.md",
     );
-    const artifact = readPluginFile(
-      "skills/program-design/references/artifact-and-self-review.md",
+    const partsAndContracts = readPluginFile(
+      "skills/program-design/references/parts-and-contracts.md",
+    );
+    const seamsAndTrace = readPluginFile(
+      "skills/program-design/references/seams-and-trace.md",
+    );
+    const documents = readPluginFile(
+      "shared-references/requirements-specification-program-design.md",
     );
 
     for (const marker of [
@@ -251,39 +241,57 @@ describe("user requirements and design-view contracts", () => {
       "changed",
       "intentionally unchanged",
     ]) {
-      expect(stateCalls).toContain(marker);
+      expect(partsAndContracts).toContain(marker);
     }
-    expect(programDesign).toContain("satisfied by the existing system");
-    expect(programDesign).toContain("agreed acceptable complexity");
-    expect(programDesign).toContain(
-      "confirm the current structural realization",
+    expect(choosingStructure).toContain(
+      "why the existing foundation cannot supply it",
     );
-    expect(programDesign).toContain(
-      "affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations",
+    expect(choosingStructure).toContain(
+      "widens scope when the Requirements boundary did not authorize it",
     );
-    expect(artifact).toContain("one compact row per stable identity");
-    expect(artifact).toContain("every member identity is enumerated");
-    expect(programDesign).toContain("every member identity is enumerated");
+    expect(choosingStructure).toContain(
+      "Deleting a mechanism never deletes a rule",
+    );
+    expect(programDesign).toContain("ask the owner to confirm the structure");
+    expect(programDesign).toContain("silence is not a waiver");
+    expect(programDesign).toContain(
+      "A revision keeps every trace row. A row goes only when the Specification removes its rule.",
+    );
+    expect(seamsAndTrace).toContain(
+      "Two rules that share a contract still keep their own rows",
+    );
     expect(programDesign).not.toContain(
       "accepted-requirements coverage is intact",
     );
-    expect(programDesign).toContain("tmp/design-workflows/<date>-<slug>/");
-    expect(programDesign).toContain("spec-program-review`'s bounded review-and-correction-round policy");
+    expect(documents).toContain("tmp/design-workflows/<date>-<slug>/");
+    expect(programDesign).toContain("set `designReview: owed`");
     expect(readPluginFile("skills/spec-program-review/SKILL.md")).toContain("carry the existing semantic coverage forward without another review");
     expect(programDesign).not.toContain("Any later edit to either artifact makes");
-    expect(artifact).toContain("human deletion test");
-    expect(artifact).toContain("Architecture documentation impact");
-    expect(artifact).toContain("Design completion boundary");
     expect(programDesign).not.toContain("program-design identity/digest");
-    expect(artifact).not.toContain("digest-bound");
+  });
+
+  test("gives every rule a seam and an observation point without choosing tests", () => {
+    const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const seamsAndTrace = readPluginFile(
+      "skills/program-design/references/seams-and-trace.md",
+    );
+
+    expect(seamsAndTrace).toContain(
+      "| R | U | E | owner | interface | state or failure | seam and observation point |",
+    );
+    expect(seamsAndTrace).toContain("## Answering a Seam Request");
+    expect(seamsAndTrace).toContain(
+      "Never answer with a weaker observation and call it the one asked for.",
+    );
+    expect(seamsAndTrace).toContain("It never names a test file, a command, or a test layer.");
+    expect(programDesign).toContain("returned a `seam-request`, re-enter at step 5 for that rule only");
+    expect(programDesign).toContain("It does not choose test layers (`test-design`)");
   });
 
   test("keeps spec-program review proportional and reader-focused", () => {
     const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
-    const programArtifact = readPluginFile(
-      "skills/program-design/references/artifact-and-self-review.md",
-    );
+    const revising = readPluginFile("skills/spec-design/references/revising.md");
     const commonMethod = readPluginFile(
       "skills/spec-program-review/references/reviewing-common-method.md",
     );
@@ -301,7 +309,6 @@ describe("user requirements and design-view contracts", () => {
     );
     const hardCutoverSources = [
       programDesign,
-      programArtifact,
       reviewSkill,
       commonMethod,
       modeComplete,
@@ -329,14 +336,11 @@ describe("user requirements and design-view contracts", () => {
     expect(reviewSkill).toContain(
       "any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled",
     );
-    expect(programDesign).toContain(
-      "`both` returns to `spec-design` first and resumes here only after the observable contract is settled",
+    expect(revising).toContain(
+      "When both Requirements or Specification and Program Design change, settle Requirements and Specification first.",
     );
     expect(reviewSkill).toContain(
       "`caller` returns the exact owner/caller decision; review does not resume until that decision is resolved",
-    );
-    expect(programDesign).toContain(
-      "caller-owned decisions return to the caller and this design does not resume until they are resolved",
     );
     expect(hardCutoverSources).not.toContain("boundary check 2");
     expect(hardCutoverSources).not.toContain("boundary-check-2");
@@ -461,14 +465,17 @@ describe("user requirements and design-view contracts", () => {
     ).toBe(false);
   });
 
-  test("preserves both design identities across spec-design review calls", () => {
+  test("keeps Requirements and Specification as separate documents in every hand-on", () => {
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
 
     expect(specDesign).toContain(
-      "requested future mode `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect",
+      "Requirements and Specification are separate documents with separate homes.",
     );
     expect(specDesign).toContain(
-      "carrying the distinct Requirements and Specification identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps",
+      "Return a `PhaseReturn` of kind `phase-complete` with both document pointers",
+    );
+    expect(specDesign).toContain(
+      "// import type { PhaseReturn } from '../../schemas/design-returns.ts'",
     );
   });
 
@@ -514,27 +521,38 @@ describe("user requirements and design-view contracts", () => {
   test("indexes every view owner and rendering consumer", () => {
     const vocabulary = readPluginFile("docs/diagram-vocabulary.md");
 
+    const specViews = readPluginFile("skills/spec-design/references/views.md");
+    const programViews = readPluginFile("skills/program-design/references/views.md");
+
     for (const viewToken of [
-      "journey map — specification",
+      "screen picture",
+      "journey map",
+      "context view",
       "entity map",
-      "context diagram",
-      "requirement coverage table",
-      "entity -> home map",
-      "component tree",
-      "call graph/sequence",
-      "proof call graph",
-      "state machine/table",
-      "data/event flow",
-      "failure/recovery flow",
-      "trust-boundary view",
-      "requirement/design/proof trace",
+      "coverage table",
     ]) {
-      expect(vocabulary).toContain(viewToken);
+      expect(vocabulary).toContain(`| ${viewToken} |`);
+      expect(specViews).toContain(`| ${viewToken} |`);
     }
+    for (const viewToken of [
+      "component view",
+      "entity → home map",
+      "state machine or table",
+      "data or event flow",
+      "failure and recovery flow",
+      "trust boundary",
+      "test path",
+    ]) {
+      expect(vocabulary).toContain(`| ${viewToken} |`);
+      expect(programViews).toContain(`| ${viewToken} |`);
+    }
+    expect(vocabulary).toContain("| entry-to-effect path |");
+    expect(programViews).toContain("| one entry-to-effect path |");
 
     for (const consumer of [
-      "skills/spec-design/SKILL.md",
-      "skills/program-design/SKILL.md",
+      "skills/spec-design/references/views.md",
+      "skills/program-design/references/views.md",
+      "skills/program-design/references/seams-and-trace.md",
       "shared-references/diagram-rendering-and-fallbacks.md",
     ]) {
       expect(vocabulary).toContain(consumer);
