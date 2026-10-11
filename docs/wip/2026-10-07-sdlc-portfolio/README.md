@@ -4,8 +4,12 @@ Start with the [report](report.md). This is the completed source/session audit f
 
 For the October 9 question “did we miss these lessons, or are they integrated?”, start with the [learning coverage check](learning-coverage-check.md). It includes the rubric crosswalk, real supporting-source gaps, newer names, the separate web-quality companion, and a practical skill-writing guide. The [concept trees](concept-trees.md) give both requested hierarchy views of the original 136-entry census.
 
+For the current topology discussion, start with the [October 11 working design](2026-10-11-delivery-topology-and-verification-design.md): separate Test Design and Verification Design, role instructions, Lead assessment and the Chief of Staff boundary. The [October 10 mental-model sync](2026-10-10-topology-mental-model.md) records the preceding direction; its Verifier-verdict wording is superseded by report-to-Lead acceptance.
+
 | Document | What it covers |
 | --- | --- |
+| [October 11 delivery topology and verification design](2026-10-11-delivery-topology-and-verification-design.md) | Lead-owned working model, owner choices, proposed Test/Verification Design split, role instructions and open decisions; no implementation admission |
+| [October 10 topology mental model](2026-10-10-topology-mental-model.md) | Owner-confirmed starting direction; implementation–verification pair, later review and possible outer intake |
 | [Main report](report.md) | Findings, priorities, tradeoffs, additions, pruning and proof requirements |
 | [Learning coverage check](learning-coverage-check.md) | Captured versus encoded versus verified; gaps, source examples and how to write skills |
 | [Concept trees](concept-trees.md) | Pond-rooted and unified concept → grouping → entry trees, plus separately counted supplements |

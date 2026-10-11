@@ -2,6 +2,8 @@
 
 Recorded October 9, 2026 from the owner's clarification and the hierarchy discussion. This is the living record for setup: owner-confirmed intent, existing contracts, Lead-authored operational guidance and open choices have different authority. It does not replace active repository instructions or constitute a runtime skill-change specification or implementation plan.
 
+**October 10 continuation:** the [topology mental-model sync](2026-10-10-topology-mental-model.md) records the newer owner-selected Sidekick–Verifier pair and later independent review. Start there for that direction; this document retains the earlier setup context and runtime contracts.
+
 ## The problem we are solving
 
 A Lead or engineer can become a relay: delegate the task, receive a plausible “done” message, forward it to review, and never inspect whether the requested behavior exists. The owner expects the Lead to do substantial engineering work through understanding, design, planning, inspection, integration and acceptance. The implementation Sidekick owns writing the implementation and proving it.
