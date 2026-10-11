@@ -106,3 +106,22 @@ The original review points were checked at source by the 🦉 Advisor. Their ter
 - Review for mistakes and for conflicts with your working design (§4a, §12).
 - Say whether this belongs in chunk S0 or in a later, separate chunk. The owner has parked it, so no change is admitted.
 - Propose which experiment, if any, should run first under the owner's experiment-first rule.
+
+## 9. Later: the role-based system, collected ideas (written down 2026-10-11; not sorted now)
+
+**Owner:** "role based systems will be for later, we won't sort it now but we need to write it down." This section only records the ideas for that later step. None of them is adopted.
+
+| Idea | What it is | Source | Status |
+|---|---|---|---|
+| **Role skills compose `practices-*`** | `role-lead`, `role-implementer`, `role-verifier`, `role-reviewer`, `role-researcher`… each indexes the practices it uses, one line per practice with its trigger (pstack's `poteto-mode` pattern) | §3 here | parked step 2; conflicts with first-tranche U23 and D3 (`manage-agents` defines roles), which the owner must settle |
+| **Role list as of now** | 🦁 Lead; Implementer 🐒 and 🔬 Verifier, paired per PR; 🔎 Reviewer (fresh); 📚 Researcher; 🦉 Advisor (optional); 🛠️ Worker and 🔧 Operator; the Chief of Staff (its policy stays in its own repo, so a pointer only); the watchdog (process, not acceptance) | delivery-topology design; the design-skills Lead's emoji | roles agreed; the packaging is open |
+| **📚 Researcher = Sol reducer plus Luna fan-out** | one Sol researcher splits bulk work across about a dozen 🔧 Luna Operators running a scripted extraction, then reduces; it never reads raw bulk with a judgment model | owner rule, 2026-10-11; proven on the WIP triage (12 digests, 85 rows) and the admired-skills research | rule in use; catalog row via OP16 option A |
+| **Read-back at commission: align on the question, not the answer** | the receiving agent restates five fields in its own words before starting: the question; the governing U/R; what correct means plus the reference; a falsifier; out of scope. The sender checks for divergence. No read-back for Exact Operator jobs | `../../../../tmp/design-skills-lead/reviews/advisor-agent-mental-models.md` (owner idea, Advisor view) | to spike first on three historical failures |
+| **Settling a split between agents** | two pictures side by side (from `discuss-clarify-mental-models`), each point citing its governing line; split settled by evidence, by a spike, or by the owner when it's owner meaning | same | a `practices-*` skill, later |
+| **Drift trigger** | "the same correction twice" or a surprising return: write the shared premise down. One trigger shared with pstack `principle-attack-the-premise` | proposal `../2026-10-11-practices-from-admired-sources/proposal.md` §6 | later |
+| **Charters re-applied on every spawn, correction and resume** | the role's charter opens each one ("directives decay across resumes") | first-tranche D3; pstack `orchestrate` | **in step 1 already**, via `manage-agents` |
+| **Experiment before asking: habit plus practice** | the rule sits in every charter; the procedure is the "run it" class in `practices-research`; spikes use throwaway code in scratch, expected results declared first, timeboxed, never promoted as-is | practices proposal §1; owner: "with throw away code" | for now, the `orchestrator-design` spike branch; later the practice |
+| **Never-block audit** | inventory every instruction that stops for the owner and classify it (owner call / reversible, so proceed / runnable, so experiment / waiting on an agent, so listener or wake) | practices proposal §2 | research only |
+| **How a role stays loaded** | unknown for Claude Code and Codex after compaction or resume; pstack relies on a Cursor Custom Mode | §4 and §5 (E1) here | must be tested before any design |
+
+When this is un-parked, start from §4 (design points), §5 (experiments: E2 → E1 → E3) and §7 (Lead review). Then decide the U23/D3 question with the owner before anything else.
