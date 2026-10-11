@@ -15,11 +15,15 @@ Package spec/design context so another agent can continue without reconstructing
 - Package decisions, non-goals, open questions, source evidence, contracts, tradeoffs, security context, and proof expectations.
 - Always name proof expectations in the handoff response: validation strategy, proof assumptions, explicit planning deferral, or open proof gaps.
 - Preserve uncertainty. Do not hide open questions to make the packet feel done.
-- Do not create an implementation plan here. When the packet proves a `three-artifact-design` mode `spec-program-review` result is `ready` and semantically current for the current Requirements, Specification, and Program Design, recommend exactly `plan-implementation`. Missing structural How routes to `program-design`; a complete but unreviewed or stale three-artifact design routes to `spec-program-review`; missing Why/What routes to `spec-design`.
-- Do not review the specification or program design here. Use `spec-program-review`.
+- Do not create an implementation plan here. Recommend exactly `plan-implementation` only when the packet carries a `ready` `DesignReviewResult` from `design-review` covering the current meaning of all five design documents, or a `ready-for-planning` `CycleReturn`. Otherwise the packet carries the exact gap, the current Lead stays the author, nothing routes to planning, and the gap names its next owner: missing Why/What -> `spec-design`; missing structural How -> `program-design`; missing Test Design -> `test-design`; missing Verification Design -> `verification-design`; all five present but unreviewed, or reviewed before their current meaning -> `design-review`. When several are missing, the earliest in that order comes first, since each later document is built on the ones before it.
+
+  ```ts
+  // import type { DesignReviewResult, CycleReturn } from '../../schemas/design-returns.ts'
+  ```
+- Do not review the design documents here. Use `design-review`.
 - Do not package code, branch, diff, commits, or test state. Use `implementation-handoff` when implementation state exists.
 - Always write a file artifact and also print the copy-paste prompt in the response unless the user explicitly asks for chat-only output.
-- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, 🐒 Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
+- Preserve governing authorship by default. A receiving researcher, Implementer, Verifier, Reviewer, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred design-document scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
 
 ## Workflow
 
@@ -41,7 +45,7 @@ Package spec/design context so another agent can continue without reconstructing
    - decisions and non-goals
    - open questions
    - proof expectations or proof gaps
-   - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `spec-program-review` for a complete but unreviewed/stale three-artifact design, `plan-implementation` for current ready three-artifact design, or `docs-maintain` for artifact lifecycle work
+   - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `test-design` for missing Test Design, `verification-design` for missing Verification Design, `design-review` for five documents that are unreviewed or reviewed before their current meaning, `plan-implementation` for a current `ready` review of all five, or `docs-maintain` for artifact lifecycle work
    - full clickable artifact links (absolute path + line) for handoff artifacts the human is expected to open
 
 ## Packet Contents
@@ -53,7 +57,7 @@ Package spec/design context so another agent can continue without reconstructing
 - Tradeoffs and who pays their cost
 - Security context or reason it is not security-sensitive
 - Proof expectations: validation strategy, proof assumptions, explicit planning deferrals, or open proof gaps
-- Planning-admission evidence: current Requirements, Specification, and Program Design paths, the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, evidence that it covers all three artifacts' current meaning, or the exact missing/stale prerequisite
+- Planning-admission evidence: the five design document paths, the current review result (its `result`, the `reviewed` documents with their status, and its coverage) or a pointer to it, evidence that it covers all five documents' current meaning, or the exact missing or stale prerequisite
 - Source evidence inspected
 - Open questions and why they matter
 - Exact next task for the receiving agent
@@ -62,7 +66,7 @@ Package spec/design context so another agent can continue without reconstructing
 ## Common Mistakes
 
 - Treating handoff as spec approval or phase completion.
-- Routing a handoff to planning without a `three-artifact-design` mode `ready` review result whose semantic coverage includes the current Requirements, Specification, and Program Design.
+- Routing a handoff to planning without a `ready` review covering all five current design documents.
 - Turning design context into an implementation plan inside the handoff.
 - Hiding open questions.
 - Asking the next agent to infer source files from chat history.
