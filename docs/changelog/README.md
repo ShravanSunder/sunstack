@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-11 Log destination rules](2026-10-11-log-destination-rules.md)
 - [2026-10-09 manage-agents Haiku Workhorse](2026-10-09-manage-agents-haiku-workhorse.md)
 - [2026-10-09 Remove pressure scenarios](2026-10-09-remove-pressure-scenarios.md)
 - [2026-10-06 skill-authoring plugin](2026-10-06-skill-authoring-plugin.md)
