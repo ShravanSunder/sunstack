@@ -1,6 +1,6 @@
 # Next step: role skills composed from SOPs, and "experiment before asking"
 
-- **Status:** proposal for discussion, not adopted. The owner parked it on 2026-10-11 ("we can work on that separately, we will think") and asked for it to be written down and passed by the 🦁 Lead (codex-local 01a118ee).
+- **Status:** proposal for discussion, not adopted. The Lead's review (§7) places it in a later, separate architecture chunk. The owner parked it on 2026-10-11 ("we can work on that separately, we will think") and asked for it to be written down and passed by the 🦁 Lead (codex-local 01a118ee).
 - **Author:** 🦉 Advisor a6321a2f.
 - **Related work:**
   - the Lead's working design, [`2026-10-11-delivery-topology-and-verification-design.md`](../../2026-10-07-sdlc-portfolio/2026-10-11-delivery-topology-and-verification-design.md) (§4a role instructions; §12 chunk S0);
@@ -21,14 +21,19 @@ Two technical decisions in the board-design session (codex-router, `design/board
 - presenting untested options as recommendations;
 - asking the owner to choose where a cheap experiment would decide.
 
-**The owner's standing rule since then:** experiment and validate every change before proposing it, and don't make up solutions.
+**The owner's standing guidance since then:** validate before proposing, and don't make up solutions. Read as a runtime rule, that means:
+- classify each question as either an observable technical uncertainty or an owner decision (product, preference, authority);
+- use current decisive evidence when it's enough;
+- otherwise, run a bounded, authorized experiment that tells the alternatives apart.
+
+Read-only deliverables, host permissions and the current no-pressure-testing boundary (U33) still apply.
 
 ## 2. What pstack does
 
 Checked at source: the checkout `ecc249f` and the snapshot `978ca6e`.
 
 - **The main agent runs an always-on mode.** `/poteto-mode` is "the front door", and a Cursor Custom Mode keeps it in context on every turn. In Lauren Tan's practice, the main agent is the **Cursor Project coordinator**. Asked why she gives `poteto-mode` to Grok Bot, she answered "the project will use it". Our counterpart is the **Lead**, not the Chief of Staff.
-- **Ask classification** (`poteto-mode/SKILL.md:20`): "If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf…), it is not the human's to answer. Sketch it via the Prototype playbook and let the result decide… Reserve the question for a genuine product or preference call no experiment can settle."
+- **Ask classification** (`poteto-mode/SKILL.md:20`): "If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf…), it is not the human's to answer. Sketch it via the Prototype playbook and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle."
 - **The prototype playbook** (`playbooks/prototype.md`): "You own the design decision, not the code. The prototype is a throwaway instrument." It replies with "the variants explored, the evidence…, tradeoffs, your recommendation".
 - **Principles are separate skills, indexed by the mode.**
   - There are 23 `principle-*` skills, about 39 KB in total, and every one is marked `disable-model-invocation: true`.
@@ -76,7 +81,26 @@ This is a first pass, based on the principle names and the owner's global instru
 |---|---|---|
 | prove-it-works · test-behavior-not-implementation · never-block-on-the-human (in act mode) · type-system-discipline · model-the-domain · fix-root-causes · migrate-callers-then-delete-legacy-apis (hard cutover) · minimize-reader-load · boundary-discipline · sequence-verifiable-units (planner) · outcome-oriented-execution | laziness-protocol · subtract-before-you-add · foundational-thinking · redesign-from-first-principles · attack-the-premise · guard-the-context-window | **ask classification plus a prototype procedure** (not a principle in pstack: a routing rule plus a playbook) · exhaust-the-design-space · encode-lessons-in-structure (plus `/correct` at `978ca6e`) · build-the-lever · explain-the-number (`978ca6e`) · make-operations-idempotent · separate-before-serializing-shared-state · experience-first |
 
-## 7. Asked of the Lead
+## 7. Lead review, 2026-10-11 (01a118ee): preliminary, accepted by the Advisor
+
+Every point below was checked at source by the Advisor.
+
+- **Placement:** a **later, separate architecture chunk**, not S0. S0 keeps clear role charters and the settled role boundaries. No `role-*` or `sop-*` library is recommended yet.
+- **Conflicts with current owner-sourced requirements:**
+  - First-tranche U23 (`../2026-10-11-design-skills-first-tranche/requirements.md:183`): "`manage-agents` defines each role clearly: what it is and how it is used".
+  - Family-design D3 (`family-design.md:62`): role charters live in `manage-agents` and open every assignment, correction and resume.
+
+  Call syntax already belongs to `agent-collaboration`. The owner's later idea that `manage-agents` is "just how to call things" therefore conflicts with U23. **When this is un-parked, the owner has to decide between them.**
+- **Layering:** AGENTS.md forbids practices and shared references from naming higher layers. Before adopting a role layer, define the invocation direction and how an assignment reaches its role instructions. Role packets and role skills are different implementation choices.
+- **Chief of Staff:** U32 keeps the Chief of Staff's policy and procedures in its own repo. A `role-chief-of-staff` may hold only a pointer or interface, never duplicated policy.
+- **"Real gap" needs a qualifier.** The draft `orchestrator-design` skill spec (`../2026-10-11-design-skills-first-tranche/skill-specs/orchestrator-design.md`, Branches) already says: "IF a question for you is a factual one that running something could answer… run a bounded experiment… bring the answer with its evidence and limits". A separate prototype SOP now would duplicate that, unless relocation is chosen explicitly. The principle table in §6 is name-only and can't establish coverage.
+- **Near-miss evidence:** the receipts are in codex-router `tmp/practices-research/2026-10-11-turso-async-io/` (findings, latest-upstream, evidence) and `tmp/practices-research/2026-10-08-workers-rs-production/` (atomicity probe and transaction-API work). The figures in §1 come from that session's reports. Neither the Advisor nor the Lead reproduced them. They need exact versions, config, workload and proof limits before they become design evidence.
+- **Experiment order, if ever admitted** (U33 and D12 exclude pressure testing now):
+  1. **E2 first.** Compare the current packet against the same packet with exactly one added ask-classification rule, keeping the same model, sources, permissions and case. Predeclare outcomes from real evidence. Include a genuine product or preference case, where asking is correct, and an evidence-sufficient read-only case. Grade whether the recommendation is correct and supported. A baseline that already succeeds is a valid null result.
+  2. **Then E1:** fresh versus compacted or resumed runs, using a rule E2 showed useful, and separating whether the instruction was available from how the agent behaved.
+  3. **E3 last:** total loaded context against correct outcomes.
+
+## 8. Asked of the Lead
 
 - Review for mistakes and for conflicts with your working design (§4a, §12).
 - Say whether this belongs in chunk S0 or in a later, separate chunk. The owner has parked it, so no change is admitted.
