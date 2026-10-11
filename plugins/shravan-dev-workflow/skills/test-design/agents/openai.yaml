@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test: Design"
+  short_description: "Plan regression tests that go red when behavior is wrong"
+  default_prompt: "Use $test-design to plan the regression tests for a behavior change: for each Specification rule, the scenarios worth protecting, the cheapest layer that observes them, what stays real, and an assertion with an expected outcome from the Specification that turns red when the behavior is wrong."
