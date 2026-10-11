@@ -38,12 +38,8 @@ Longer explanations and optional views may live under `~/dev/memory-logs/work-tr
 
 ## Saving to log repositories
 
-The trace remains in its board/worktree home. An optional conversation export or curated view follows the destination's own rules; it does not authorize a bulk artifact archive.
-
-- IF saving, exporting, configuring output, or commissioning a conversation/export/summary write into `~/dev/session-logs/`, load `~/dev/session-logs/AGENTS.md` and `~/dev/session-logs/.agents/skills/use-session-logs/SKILL.md` and return the eligible content, allowed destination, and designated file writer before writing or granting the path.
-- IF saving, configuring output, or commissioning a curated view into `~/dev/memory-logs/`, load `~/dev/memory-logs/AGENTS.md` and `~/dev/memory-logs/.agents/skills/use-memory-logs/SKILL.md` and return the eligible contribution, allowed destination, and designated file writer before writing or granting the path.
-
-Point directly to destination policy; it owns content, folders, concurrent writing, and Git integration. Standalone timing files, build dumps, caches, binaries, runtime state, and copied worktrees belong in task-scoped system tmp. Record useful results and links in the trace; temporary paths may expire and are not durable proof. Conversation formats and quoted technical evidence remain governed by session-logs' rules.
+- IF directing a write into `~/dev/session-logs/`, load its `AGENTS.md` and `.agents/skills/use-session-logs/SKILL.md` and return the allowed path and writer before proceeding.
+- IF directing a write into `~/dev/memory-logs/`, load its `AGENTS.md` and `.agents/skills/use-memory-logs/SKILL.md` and return the allowed path and writer before proceeding.
 
 ## Checkpoint at every stop
 
