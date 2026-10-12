@@ -16,13 +16,13 @@ Tests are executable claims about behavior. A passing test claims the behavior i
 
 **Name a concrete wrong implementation,** not "it works": the rate is applied twice, the loader never reads the variable, Escape leaves the preview open, malformed input is accepted. If you can't name one, the test is decoration. Then ask whether your assertion would fail for it. A quick probe catches the weakest tests: would this still pass if every function it calls returned `undefined`? Passing that probe doesn't mean the test catches the wrong behavior you named, so ask about that one directly.
 
-**Take the expected value from somewhere independent:** the contract, a worked example, a literal, a reviewed table of cases, or a property the rule implies. The oracle is circular when the expected value is computed by the same production code the test exercises, or when the subject never touches the value being asserted. A rate test that computes its expected tax with the production tax helper moves with the bug: a wrong rate changes both sides, and the test stays green. A literal from the tax table catches it. A reviewed fixture that encodes the contract is a fine oracle. A wrong oracle is its own bug: it fails correct behavior, and someone "fixes" the code to match.
+**Take the expected value from somewhere independent:** the contract, a worked example, a literal, a reviewed table of cases, or a property the rule implies. The oracle is circular when the expected value is computed by the same production code the test exercises, or when the subject never touches the value being asserted. A rate test that computes its expected tax with the production tax helper moves with the bug: a wrong rate changes both sides, and the test stays green. A literal from the tax table catches it. A reviewed fixture that encodes the contract is a fine oracle. A wrong oracle is its own bug: it fails correct behavior, and someone "fixes" the code to match. A snapshot is the code's own output: it becomes an oracle only once someone has checked it against the contract, and updating it to turn a red green is the circular oracle again.
 
 **Make the fixture reach the case, and test the rejections.** A branch-label test whose fixture has no commit can't show a label. When the claim includes rejecting bad input, each rejection is a scenario of its own.
 
 ### The second hard call: where does it have to run?
 
-**The wrong behavior sets the floor: what must stay real.** "The pricing rule rounds wrong" needs only the rule. "The serialized event drops a field," "the transaction doesn't commit," and "the worker doesn't stop" can't fail a test that replaces the transport, the database, or the worker, so those must stay real. A double that replaces the interaction you are claiming leaves it unproven, however green the test.
+**The wrong behavior sets the floor: what must stay real.** "The pricing rule rounds wrong" needs only the rule. "The serialized event drops a field," "the transaction doesn't commit," and "the worker doesn't stop" can't fail a test that replaces the transport, the database, or the worker, so those must stay real. A double that replaces the interaction you are claiming leaves it unproven, however green the test. When the wrong behavior is a race, the interleaving must be real too: force the bad order (hold one request between its check and its write) instead of running the steps one after another, which passes even with the race; see `principle-design-for-concurrency`.
 
 **Above the floor, choose the cheapest honest layer.** Several layers can keep the same thing real; choose among them by speed, determinism, and how clearly a failure points at the cause. Many focused tests take the detailed cases at the fastest boundary that still keeps them honest. Fewer integration tests cross real boundaries (serialization, storage, processes, protocols, components working together). A small number of end-to-end journeys cover what only the whole stack shows: startup wiring, cross-language composition, the WebView. Don't repeat every edge case at the top; when a journey finds a defect, add the cheaper regression below it. Cheapest never outranks honest, and the pyramid is a distribution, not a checklist every change must fill.
 
@@ -32,11 +32,11 @@ Take a scheduler that should enqueue a reminder when an event comes due. The due
 
 ### Then prove the test can fail
 
-**See it fail for the intended reason before you trust it.** Run it against the old code, or with the fix removed, and read the failure. It must be the target assertion failing, not a typo, an empty test discovery, a broken fixture, or an unrelated error. When there's no old bug (a refactor, or behavior that already works), break the behavior on purpose at the part that owns it, watch the test catch the break, and restore it. That shows the test is sensitive, not that a bug existed. This is the red step of red-green; the loop itself runs where implementation runs.
+**See it fail for the intended reason before you trust it.** Run it against the old code, or with the fix removed, and read the failure. It must be the target assertion failing, not a typo, an empty test discovery, a broken fixture, or an unrelated error. When there's no old bug (a refactor, or behavior that already works), break the behavior on purpose at the part that owns it, watch the test catch the break, and restore it. That shows the test is sensitive, not that a bug existed. This is the red step of red-green.
 
 **Test the API you own,** not a workaround around it; reaching into internals while the real API stays untested proves only the workaround. **When no honest seam exists,** use the closest executable check, or improve the seam; a mocked test that can't fail is worse than none, because it looks like coverage.
 
-**Count and coverage are not value.** Remove a test that adds no confidence, but only with a replacement, proof it's redundant, or proof its contract is dead. While you are still trying options against each other, don't lock either in with tests; write them once one is chosen.
+**Count and coverage are not value.** Remove a test that adds no confidence, but only with a replacement, proof it's redundant, or proof its contract is dead.
 
 ## Example: the Ctrl-C the mock ate
 
@@ -46,7 +46,7 @@ IF the case in front of you doesn't match the Ctrl-C example, or you are reviewi
 
 ## When it doesn't apply
 
-A renamed constant or a formatting change needs no new scenario. A behavior already pinned by an honest test at the right seam doesn't need a second one. Throwaway exploration before an option is chosen doesn't need tests yet.
+A renamed constant or a formatting change needs no new scenario. A behavior already pinned by an honest test at the right seam doesn't need a second one. Throwaway exploration before an option is chosen doesn't need tests yet. And when a type or a lint rule can make the wrong behavior impossible, that beats a test that catches it; see `principle-types-are-communication`.
 
 ## Signs you skipped it
 
