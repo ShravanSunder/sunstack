@@ -19,7 +19,7 @@ Many design arguments are really questions about behavior: is this faster, does 
 **Fit the form to the question:**
 - **A spike** answers one concrete unknown. Timebox it and throw the code away.
 - **Competing prototypes** settle a design that isn't obvious. Build two or three that are genuinely different and compare them side by side; a second flavor of the first shape doesn't count.
-- **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), enough repetitions to see past noise, and the conditions it ran under (warm or cold, machine load), so rows are compared rather than absolute numbers trusted.
+- **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), enough repetitions to see past noise, and the conditions it ran under (warm and cold where startup matters, machine load), so rows are compared rather than absolute numbers trusted.
 - **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, blind scoring wherever judgment is involved, and inputs that can't leak the answer.
 
 **Measure the real artifact through the real path:** the actual data, the actual entry point, the actual surface. A micro-benchmark, a mock, or a probe can answer a different question from the one you have. Include a negative control where you can: something the instrument should show as unchanged (a static background, an untouched path). If the control moves too, the instrument is measuring noise.

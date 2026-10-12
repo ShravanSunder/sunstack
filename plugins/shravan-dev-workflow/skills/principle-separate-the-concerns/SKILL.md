@@ -37,7 +37,7 @@ Not everything should be injected. A dependency with one implementation, no vari
 
 A plugin imports one VM provider directly. Switching providers means editing the plugin, and its tests need the provider running. Better: the plugin defines the small VM-runtime interface it needs, the provider package implements it, and the host injects it at startup. The plugin no longer changes when the provider does, and its tests use a stand-in.
 
-IF the case in front of you doesn't match the provider example, or you are reviewing someone else's structure against this principle, load `references/example_scenarios.md` (scenarios, simplest first: the page that fetched, reshaped, and rendered; Parse once at the boundary; Injection everywhere; the CLI that became the client; Startup that broke a neighbour) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the provider example, or you are reviewing someone else's structure against this principle, load `references/example_scenarios.md` (scenarios, simplest first: the page that fetched, reshaped, and rendered; parse once at the boundary; injection everywhere; the CLI that became the client; startup that broke a neighbour) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

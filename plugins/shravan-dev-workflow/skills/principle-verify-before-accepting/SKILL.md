@@ -34,7 +34,7 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 A helper reported "all tests pass, ready for review" with a CI link. The run was green, but it ran on the commit before the helper's last change, and the suite never touched the changed module. Accepting it would have sent unproven behavior to review. Better: match the run to the head, check that the suite exercises the change, and read the diff. The claim narrows to "the earlier commit is green; the current change is unproven".
 
-IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios, simplest first: the review finding that was wrong; Summaries without logs; Fixed in CI?; a second harness; Proof from the wrong checkout; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios, simplest first: the review finding that was wrong; summaries without logs; fixed in CI?; a second harness; proof from the wrong checkout; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

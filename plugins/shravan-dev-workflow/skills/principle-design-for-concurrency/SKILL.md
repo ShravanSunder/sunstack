@@ -32,7 +32,7 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 A worker handles a request, releases its hold on the session, then posts the response. Between the release and the post, a second request takes the session, and its response arrives first. The client matches responses by arrival order and shows the wrong one. Better: correlate responses by request id, and post before releasing. The test holds the worker between the two steps to force the bad order, instead of sleeping and hoping.
 
-IF the case in front of you doesn't match the response example, or you are reviewing someone else's concurrent design, load `references/example_scenarios.md` (scenarios, simplest first: two workers, one state file; Refresh once per worktree; Search results out of order; the background write nobody waited for; the test that could only sleep; the blocking lump; the reservation the scan ignored) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the response example, or you are reviewing someone else's concurrent design, load `references/example_scenarios.md` (scenarios, simplest first: two workers, one state file; refresh once per worktree; search results out of order; the background write nobody waited for; the test that could only sleep; the blocking lump; the reservation the scan ignored) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

@@ -18,6 +18,14 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** The order service owns the status. Payments and fulfillment send events ("payment captured", "parcel shipped"), and the order service applies them in its own state machine, which refuses to move backwards.
 
+## Two contracts in conflict
+
+**What happened.** A change made the development server work by altering how the production bridge loaded the front end. The owner set the priority: the production bridge wins, and the dev server adapts to it, not the other way round.
+
+**The move.** When contracts conflict, decide explicitly which one wins.
+
+**Better.** Keep the production bridge's contract as it is, and adapt the development server to it, so a developer convenience can't break the shipped path.
+
 ## Whose identity?
 
 **What happened.** A gateway assigned an identity to each incoming connection. When an agent reconnected, it got a new identity and lost its history.
@@ -49,14 +57,6 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Put the behavior in the owner that can actually perform it.
 
 **Better.** The native host takes ownership of secondary-click routing and presents the menu. Focused tests and a live check confirmed the menu appears and normal tab selection still works.
-
-## Two contracts in conflict
-
-**What happened.** A change made the development server work by altering how the production bridge loaded the front end. The owner set the priority: the production bridge wins, and the dev server adapts to it, not the other way round.
-
-**The move.** When contracts conflict, decide explicitly which one wins.
-
-**Better.** Keep the production bridge's contract as it is, and adapt the development server to it, so a developer convenience can't break the shipped path.
 
 ## The delete that skipped the owner
 

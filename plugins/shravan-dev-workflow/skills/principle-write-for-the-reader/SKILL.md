@@ -36,7 +36,7 @@ Code is communication, and so are designs, instructions, and explanations. They 
 
 A design came back marked "ready" at 1,700 lines across five files, with no diagram. The reviewer couldn't find the component boundaries without reading all of it. Better: a one-paragraph summary of what changes and why, a component diagram showing who owns what, then one section per decision, with detail moved into references. The reviewer found the first real flaw in minutes instead of an afternoon.
 
-IF the case in front of you doesn't match the design example, or you are reviewing someone else's writing for its reader, load `references/example_scenarios.md` (scenarios, simplest first: `processData`; "Adapter seam"; the rule in five places; the command written from memory; the instruction that said what not to do; Six layers to find a value; the explanation that didn't help choose) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the design example, or you are reviewing someone else's writing for its reader, load `references/example_scenarios.md` (scenarios, simplest first: `processData`; "Adapter seam"; the rule in five places; the command written from memory; the instruction that said what not to do; six layers to find a value; the explanation that didn't help choose) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 
