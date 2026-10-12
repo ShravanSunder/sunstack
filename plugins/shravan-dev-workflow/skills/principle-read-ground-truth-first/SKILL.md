@@ -32,7 +32,7 @@ Don't start from assumptions; read ground truth first, in proportion to the task
 
 An agent told the owner the storage library can't read byte ranges, and designed a workaround that downloads whole objects and slices them in memory. The library has a range-read call. One look at its interface before making the claim would have removed a whole component and its memory cost. Better: read the library's interface first, then claim, and say "I checked the API" or "I'm assuming this, unchecked".
 
-IF the case in front of you doesn't match the range-read example, or you are checking the evidence behind someone else's claim about the system, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the range-read example, or you are checking the evidence behind someone else's claim about the system, load `references/example_scenarios.md` (scenarios: the cache that wasn't invalidated; the plugin that was never wired; counts passed, meaning wrong; the wrapper that dropped the filter; "Who decided this?"; it failed after restart; the fix that wasn't deployed; the outage that was a sandbox) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

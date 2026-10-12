@@ -55,7 +55,7 @@ Build the outcome where the reply arrives: map transport and provider errors int
 
 Checkout calls the payment provider, the call times out, the code retries with backoff, and the customer is charged twice: the first charge had landed. "Retry on failure" treated an unknown ending as a failure. Better: the charge carries an idempotency key tied to the order, the provider is the truth for "did it charge?", the customer sees "payment pending" on a timeout, and any retry reuses the same key, so the provider can't charge twice.
 
-IF the case in front of you doesn't match the double charge, or you are reviewing someone else's design against this principle, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the double charge, or you are reviewing someone else's design against this principle, load `references/example_scenarios.md` (scenarios: the server that arrived late; the job that runs twice; the welcome email; the deploy that can't rerun; the request that stalled; the health check that stayed green) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

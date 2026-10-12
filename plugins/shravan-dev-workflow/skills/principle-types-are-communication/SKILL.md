@@ -48,7 +48,7 @@ type JobStatus =
 
 The contradiction can't be written, a `failed` job always carries its error, and the screen's exhaustive `switch` has to decide what `failed` looks like.
 
-IF the case in front of you doesn't match the job status, or you are reviewing someone else's types against this principle, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the job status, or you are reviewing someone else's types against this principle, load `references/example_scenarios.md` (scenarios: the id that meant two things; config from the environment; two shapes for one quota; commands that should not compile; a Python tagged union) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

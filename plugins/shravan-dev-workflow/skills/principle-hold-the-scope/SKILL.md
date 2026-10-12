@@ -28,7 +28,7 @@ Sit in the problem before you reach for answers. Scope is the promise of what yo
 
 While drafting a spec for a protocol feature, an agent added a requirement that clients refuse servers older than a certain provider version, "for safety". The next agent treated the gate as authority and built machinery around it. When the owner asked where it came from, the answer was nowhere. Tracing each requirement to an owner line or a forcing constraint catches this before anything is built: a gate with no source becomes a question for the owner ("should old servers be refused?"), not a requirement.
 
-IF the case in front of you doesn't match the gate example, or you are reviewing someone else's spec, plan, or delivery for scope, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the gate example, or you are reviewing someone else's spec, plan, or delivery for scope, load `references/example_scenarios.md` (scenarios: the machine-wide lock; the quiet softening; the plan that grew a rewrite; the split for the builder's convenience; the fix that broke scrolling; the design that got smaller) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

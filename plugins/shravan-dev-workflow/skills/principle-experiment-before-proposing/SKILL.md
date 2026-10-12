@@ -36,7 +36,7 @@ Many design arguments are really questions about behavior: is this faster, does 
 
 A change claimed to make startup faster by loading modules lazily, and was about to merge on that claim. Measured on the real app (cold start, ten runs, main against the branch), startup was 40 ms slower: the first request now loaded modules one after another. Naming the workload and comparator took a minute, the run took five, and the result reversed the decision.
 
-IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` (scenarios: the hook runtime, warm and cold; the probe that looked in the wrong place; the oracle stricter than the contract; the card that seemed to teach; two layouts, side by side; the score that fell when the answer was hidden) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

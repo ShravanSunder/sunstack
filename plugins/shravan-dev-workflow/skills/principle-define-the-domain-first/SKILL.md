@@ -31,7 +31,7 @@ Before structure, decide what the things are. Every system has a handful of noun
 
 Tickets on hold get a reminder on their due date. The owner said two things in passing: "when a ticket goes back on hold, it's a fresh reminder, not the old one" and "moving the date moves it, not a second one". Read as evidence, those settle the identity: a reminder is one ticket plus the hold that created it. Changing the due date updates the same reminder; a new hold creates a new one. The states follow: pending, then moved, cancelled, or completed. With that written down, "at most one pending reminder per ticket" is testable, and the key for the table is obvious.
 
-IF the case in front of you doesn't match the reminder example, or you are checking someone else's terms and identities, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the reminder example, or you are checking someone else's terms and identities, load `references/example_scenarios.md` (scenarios: reused run ids; cache keys that never hit; two paths to the same folder; one "account", two meanings; done or just waiting?; comments or annotations?) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

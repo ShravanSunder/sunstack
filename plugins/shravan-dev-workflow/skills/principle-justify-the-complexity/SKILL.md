@@ -32,7 +32,7 @@ Every abstraction justifies the complexity it introduces. Each layer, option, me
 
 A plan runs a gateway inside its own virtual machine "for isolation". Asking what outcome the VM provides that a container doesn't, at the current trust boundary, finds none: the gateway runs no untrusted code. The container ships, and the VM is written down as the move to make if the trust boundary changes. That leaves one runtime, one deployment path, and a stated condition for revisiting.
 
-IF the case in front of you doesn't match the gateway example, or you are reviewing someone else's design or diff for over-building, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the gateway example, or you are reviewing someone else's design or diff for over-building, load `references/example_scenarios.md` (scenarios: the lease nobody asked for; the flag kept "in case"; the cutover that missed a consumer; the removal that took shared tests with it; the engine rewrite that wasn't needed; the home-grown container) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

@@ -28,7 +28,7 @@ Every piece of work runs on a mental model: a picture of how the system works an
 
 The approved design put fuzzy search on SQLite's trigram index. Review found trigram candidates can't include typo-only matches, so the core feature couldn't work. A full-scan prototype off the main thread met the latency target. That made it a break, not drift: the storage assumption failed at the real query boundary, and it was an approved design decision. The right move was to stop and bring the owner the decision (keep SQLite with a different matcher, or change the storage contract), not to swap storage quietly because a prototype was fast.
 
-IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios: the fourth refresh; the backend that wasn't broken; the two sleeps; the cards that taught nothing; the same review comment, again) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

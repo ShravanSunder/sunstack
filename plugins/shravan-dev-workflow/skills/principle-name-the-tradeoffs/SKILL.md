@@ -34,7 +34,7 @@ Every design decision is a tradeoff: you gain something, you pay for it, and som
 
 A design adds a message queue between an order service and a fulfillment service, "for decoupling". Shown as a change to the current direct call: the queue gains buffering through fulfillment outages and independent deploys; it costs a broker to run, eventual consistency the order screen must show ("processing"), and a new failure mode (poisoned or stuck messages) that the on-call person pays for. The load-bearing assumption is that fulfillment outages are frequent or long enough to matter, and last quarter's incident log shows two five-minute outages. The direct call with a bounded retry meets the need today. Recommend it, and name the revisit signal: outages longer than the retry window, or a second consumer of order events.
 
-IF the case in front of you doesn't match the queue example, or you are judging how someone else presented a decision, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the queue example, or you are judging how someone else presented a decision, load `references/example_scenarios.md` (scenarios: the search assumption, named up front; the new process nobody asked about; the faster build that slowed startup; "Too handwavy"; try A and B; the workaround that became permanent) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 
