@@ -56,6 +56,7 @@ A renamed constant or a formatting change needs no new scenario. A behavior alre
 - A mock standing in for the very interaction the test is named after.
 - A cross-boundary claim proven only by unit tests, or every edge case repeated end to end.
 - A red reported when discovery found no target test, or setup failed before the scenario reached the subject.
+- A test that fails on the bug but can't pass on a correct fix, because it deadlocks or waits on a step the fix removes.
 - Only positive cases for a feature that is supposed to reject things.
 - A test that sleeps before checking a background result instead of waiting for its completion signal.
 
