@@ -139,6 +139,7 @@ Citation rules: P atoms are evidence of what the owner pushed on, not stated rul
 - Base: `main` at `f1c78679`. Branch `skills/principles-layer`, worktree `/Users/shravansunder/dev/ai-tools.skills-principles-layer`.
 - Pending edits elsewhere: draft PR #122 (`skills/design-family-redesign`, head `e2adb45a`) also edits `AGENTS.md`'s skill table, the plugin README, and the version. Whichever merges second resolves those conflicts and re-bumps (D10).
 - Version 2.74.0 (D10). Changelog `docs/changelog/2026-10-12-principles-layer.md` (20 lines or fewer) plus its `docs/changelog/README.md` entry, written in run 1 and updated at wave 2.
+- **Existing owners of the same judgments** (skill-creation step 1 search, recorded after implementation): `program-design/references/failure-concurrency-recovery.md` owns failure realization, partial success, recovery, and interleavings (principles 11 and 12); `implement-plan` owns drift versus break (17); `plan-implementation/references/slice-and-proof-design.md`, `implement-plan/references/execution-and-proof.md`, and `implementation-review/references/reviewing-implementation.md` teach test design and proof (13, 14, 15); `discuss-clarify-mental-models` is the practice twin of 2 and 17. Step 1 leaves them unchanged by owner scope, so each judgment has two homes until step 2 makes those skills load the principle and cuts their duplicate text over.
 - Admired-source provenance: the `ai-dev-skills` mapping for the pstack-inspired principles is updated at PR wrap-up, not in these runs.
 
 ## Non-goals
@@ -160,3 +161,13 @@ Citation rules: P atoms are evidence of what the owner pushed on, not stated rul
 Spec review, 🦉 Advisor as review lead: teaching checks complete (T1 and T2 fixed at `d9c7fa53` and verified; P1 closed by D19). Structure checks skipped by the owner (D20); their candidates go to the implementation review. Implementation decision: skipped-by-user. Highest risk named by the review: no behavior evidence, and the load and no-load check at release readback is still owed.
 
 Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex Lead as the cross-lineage reviewer.
+
+### Process record (skill-creation audit, 2026-10-12, at the owner's request)
+
+- **Security gate, recorded late.** Sensitive surface in scope: third-party skill adoption (pstack, MIT license, Copyright 2026 Lauren Tan). Copy-vs-adapt: adapt; card shape and some principle ideas are adapted, no upstream prose copied. Decision: allowed. No scripts, hooks, assets, network, auth material, or home writes. This decision was due before the cards were written and was recorded after.
+- **References loaded late.** `reference-design.md` and `worked-examples.md` were loaded after implementation; both confirm D5 (cards inline, no references). `reference-design.md` also confirms the index finding below.
+- **Index has no caller.** `shared-references/principles-index.md` is called by no skill in step 1, against the caller-owns-routing rule and the repo rule that shared references serve two or more active skills. Owner decision pending: keep it (agreed scope v2) until step 2 adds callers, or move it to plugin docs until then.
+- **One pass, not one skill per run.** All 17 runs were implemented in one generated pass after D20, instead of one skill per run.
+- **PR before review.** Draft PR #123 was opened before the implementation review (repo SOP order is review, then PR wrap-up); it stays draft until review closes.
+- **Commits** are SSH-signed (GitHub reports `4271faf1` verified).
+
