@@ -64,4 +64,4 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** Read the whole artifact. Counts matching is not the content being right.
 
-**Better.** Check each substantive hunk against what the source actually does, and keep inventory counts separate from semantic classification.
+**Better.** Check each substantive hunk against what the source does, and keep inventory counts separate from semantic classification.

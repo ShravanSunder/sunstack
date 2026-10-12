@@ -4,7 +4,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## "Too handwavy"
 
-**What happened.** An agent compared two designs as "A is cleaner, B is simpler". The owner asked what each one actually costs in complexity; the comparison was too vague to decide on.
+**What happened.** An agent compared two designs as "A is cleaner, B is simpler". The owner asked what each one costs in complexity; the comparison was too vague to decide on.
 
 **The move.** Concrete gains and costs, and who pays.
 

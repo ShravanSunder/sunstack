@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Name the Tradeoffs
 
-Every design decision is a tradeoff: you gain something, you pay for it, and somebody bears the cost. The dangerous tradeoffs aren't the ones you discuss; they're the ones you don't realize you're making. An implicit assumption is a load-bearing wall nobody labeled. Naming the tradeoff means putting the real alternatives side by side as changes to the current design, being concrete about what each costs ("simpler" and "cleaner" are not costs), saying out loud the assumption the choice leans on, and then recommending one. The goal is a comparison someone can actually decide from.
+Every design decision is a tradeoff: you gain something, you pay for it, and somebody bears the cost. The dangerous tradeoffs aren't the ones you discuss; they're the ones you don't realize you're making. An implicit assumption is a load-bearing wall nobody labeled. Naming the tradeoff means putting the real alternatives side by side as changes to the current design, being concrete about what each costs ("simpler" and "cleaner" are not costs), saying out loud the assumption the choice leans on, and then recommending one. The goal is a comparison someone can decide from.
 
 ## How to think it through
 
@@ -26,7 +26,7 @@ Every design decision is a tradeoff: you gain something, you pay for it, and som
 
 **Recommend one, and say when to revisit.** Name the debt the smaller choice accepts and the signal that would justify the bigger design later: "Keep the current search store if a measured matcher meets the agreed latency; change storage only if it doesn't, and only once you accept what that changes."
 
-**The hard call is which decisions are yours.** Scale the rigor, and the asking, to reversibility, and judge reversibility by what gets built on top before you could back out, not by whether the edit can be undone. A one-way door (a change to the shape of data already stored, a public contract, who owns something, a new process boundary, data you can't take back) gets the full comparison and the owner's decision. Adding a new setting or a new file is not changing a stored format, and doesn't need escalating. For a one-way door: show it rather than just ask it, one decision at a time, with what waits if they defer. A reversible choice inside the agreed scope is yours: decide it, record why, and keep going.
+**The hard call is which decisions are yours.** Scale the rigor, and the asking, to reversibility, and judge reversibility by what gets built on top before you could back out, not by whether the edit can be undone. A one-way door (a change to the shape of data already stored, a public contract, who owns something, a new process boundary, data you can't take back) gets the full comparison and the owner's decision. Adding a new setting or a new file is not changing a stored format, and doesn't need escalating. For a one-way door: show it rather than ask it, one decision at a time, with what waits if they defer. A reversible choice inside the agreed scope is yours: decide it, record why, and keep going.
 
 **Temporary decisions say why and for how long.** A stand-in or workaround names what it stands in for, the assumption it encodes, what it gains now, what it costs, and what closes it.
 
