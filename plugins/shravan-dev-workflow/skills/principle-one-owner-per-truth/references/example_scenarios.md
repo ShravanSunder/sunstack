@@ -54,9 +54,9 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **What happened.** A Swift producer added a field to a message. The TypeScript consumer's strict schema didn't declare it, rejected the frame, and broke the recovered stream for everything behind it.
 
-**The move.** One schema across a language boundary, tested over the real transport.
+**The move.** One schema across a language boundary, tested with the real producer's output against the real consumer.
 
-**Better.** Keep one authoritative definition and generate or validate both sides from it. A test sends the serialized message across the actual transport, so a producer change can't silently break the consumer.
+**Better.** Keep one authoritative definition and generate or validate both sides from it. A test feeds the real producer's serialized message to the real consumer's validation, so a producer change can't silently break the consumer. Because this failure also broke stream recovery, a transport test that covers recovery stays as well.
 
 ## The delete that skipped the owner
 

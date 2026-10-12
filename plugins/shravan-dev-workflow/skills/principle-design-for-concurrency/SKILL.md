@@ -12,13 +12,13 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Name the invariant first.** "One active session per user." "A held reservation keeps the item hidden." "The latest write wins." Without a stated invariant there is nothing to check an interleaving against, and "add a lock" is just a guess.
 
-**Walk the interleavings that could break it.** What if B runs between A's read and A's write? What if the response to request 1 arrives after the response to request 2? What if a retry overlaps a slow original? What if a release happens before the response is posted? What if a wait wakes up after the condition it waited for has already changed again? After waiting, recheck the condition before acting. And what if a result arrives for a request that has already been superseded? Carry a request id or a revision with every async read, and drop any answer captured from state that has since moved on, or cancel the superseded request.
+**Walk the interleavings that could break it.** What if B runs between A's read and A's write? What if the response to request 1 arrives after the response to request 2? What if a retry overlaps a slow original? What if a release happens before the response is posted? What if a wait wakes up after the condition it waited for has already changed again? After waiting, recheck the condition before acting. And what if a result arrives for a request that has already been superseded? Carry a request id or a revision with every async read, and drop any answer captured from state that has since moved on. Cancelling the superseded request saves work, but it replaces that check only when cancellation guarantees no late result can still be applied; a callback already queued can still land.
 
 **Remove the sharing before you serialize it.** Ask whether the actors need one shared mutable thing, or are each publishing their own facts. Give each actor its own key, file, record, or task, and merge when reading. Two workers writing their own field into one shared state file is still shared mutation; two files merged on read is not.
 
 **Serialize only for a real single-writer invariant, and do it structurally.** One owner (a single task or actor that holds the state), a transaction, or a compare-and-swap on a version. Conventions and comments are not concurrency control, and "we need a lock" is a smell to check, not a default.
 
-**Order by causal signals, never by time.** Wait on an event, a task handle, or a version, not a sleep or a polling loop. In tests, hold a step open or drive a controllable clock to force the bad order; no wall-clock waits. Before choosing a debounce or throttle, find out the current state and when events actually arrive.
+**Order by causal signals, never by time.** Wait on an event, a task handle, or a version, and never infer readiness from elapsed time. When an external system offers only reads (a status endpoint, no callback), poll its authoritative state with a deadline, backoff, cancellation, and a check that it is still the thing you started. In tests, hold a step open or drive a controllable clock to force the bad order; no wall-clock waits. Before choosing a debounce or throttle, find out the current state and when events actually arrive.
 
 **Every task has an owner.** Whoever starts background work tracks it, can cancel it cooperatively, and drains it on shutdown; close or await it before claiming the work is done. A fire-and-forget task that must finish is a lost write waiting to happen.
 
@@ -40,7 +40,7 @@ When one actor owns the state and every completion order gives the same result, 
 
 ## Signs you skipped it
 
-- A sleep or a polling loop used to wait for something, in code or in a test.
+- A sleep used to wait for something, in code or in a test; or a polling loop where a signal exists, with no deadline, or that guesses readiness from time.
 - A read-modify-write with no version check.
 - Responses matched by arrival order.
 - A lock or mutex with no named invariant, or a synchronous lock held across an `await`.

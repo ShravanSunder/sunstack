@@ -16,7 +16,7 @@ Every truth in a system (a status, a balance, a setting, an identity, a lifecycl
 
 **Derive instead of syncing.** A value computed from the owner's truth can't drift; a copy kept in step can. When a copy is worth having (a cache, a denormalized field, local state for responsiveness), name its refresh rule and what a stale read means for the reader.
 
-**Give each shape one schema, even across languages.** A common shape lives in one place, and the others derive from it (a derived schema, generated types). The same shape written twice drifts apart. When the shape crosses a language or process boundary (a Swift producer and a TypeScript consumer), keep one authoritative definition, generate or validate the other side from it, and test the serialized message across the real transport.
+**Give each shape one schema, even across languages.** A common shape lives in one place, and the others derive from it (a derived schema, generated types). The same shape written twice drifts apart. When the shape crosses a language or process boundary (a Swift producer and a TypeScript consumer), keep one authoritative definition, generate or validate the other side from it, and test the real producer's serialized message against the real consumer's validation. Run it over the actual transport only when delivery, ordering, or recovery is part of the claim.
 
 **Write the contract down, and treat it as the boundary.** State what callers may rely on: inputs, outputs, errors, and guarantees like ordering or cardinality (one active connection or many?). An established contract is the edge implementation works within; changing it is a deliberate act with its consumers in view. When two contracts conflict, decide which takes precedence instead of letting the code pick.
 

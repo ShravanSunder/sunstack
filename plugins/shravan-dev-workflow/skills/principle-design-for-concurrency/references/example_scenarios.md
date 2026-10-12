@@ -56,4 +56,4 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** When a result arrives for a request that has been superseded, drop it.
 
-**Better.** Carry a revision with each async read, and apply an answer only if its revision is still current. Or cancel the superseded request. Keep the requests parallel; serializing them would fix the ordering but make the search slow.
+**Better.** Carry a revision with each async read, and apply an answer only if its revision is still current. Cancel the superseded request too, to save work, but keep the revision check where results are applied: a response already in flight can still arrive. Keep the requests parallel; serializing them would fix the ordering but make the search slow.
