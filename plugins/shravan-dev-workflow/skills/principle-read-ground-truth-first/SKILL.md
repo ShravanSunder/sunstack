@@ -1,6 +1,6 @@
 ---
 name: principle-read-ground-truth-first
-description: "Use before any claim about what current code, a system, a document, or a source does, or before explaining an unexpected behavior. Read the current source and the whole artifact, trace the real path, and keep what you saw apart from what you infer."
+description: "Use when about to claim what current code, a system, a document, or a source does, or to explain an unexpected behavior. Read the current source and the whole artifact, trace the real path, and keep what you saw apart from what you infer."
 disable-model-invocation: true
 ---
 

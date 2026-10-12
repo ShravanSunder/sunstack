@@ -1,6 +1,6 @@
 # Principles Index
 
-A principle is one engineering judgment, written as a short card: when it applies, the rule, why, a test of two or three questions, the nearest principle it is easily confused with, and what applying it means. Each card is a skill named `principle-*` that the owner calls by name; none load on their own.
+A principle is one engineering judgment, written as a short card: when it applies, the rule, why, a test of two or three questions, the nearest principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Each card is a skill named `principle-*` that the owner calls by name; none load on their own.
 
 ## Using a principle
 

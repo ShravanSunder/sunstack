@@ -3,7 +3,7 @@
 `shravan-dev-workflow` 2.72.1 → 2.74.0 (2.73.0 is held by the design-family branch, draft PR #122).
 
 - New bottom skill layer: 17 `principle-*` skills, one engineering judgment each, written as a short card (apply when, rule, why, the test, distinct from, applied means, a worked case, and when it is overkill). Names come from the owner's own phrases, for example `principle-what-happens-when-it-fails`, `principle-tests-are-executable-claims`, `principle-fix-the-understanding-first`.
-- Callable by name only: `disable-model-invocation: true` (Claude) and `policy.allow_implicit_invocation: false` in each `agents/openai.yaml` (Codex). No principle loads on its own, and no existing skill loads one yet.
+- Callable by name only: `disable-model-invocation: true` (Claude) and `policy.allow_implicit_invocation: false` in each `agents/openai.yaml` (Codex). No existing skill loads one yet.
 - A principle names only sibling principles. New shared reference `shared-references/principles-index.md` maps the family.
 - README: `principle-*` namespace row and a Principles section. Repo `AGENTS.md`: principles added to "Skill layers" and the skill table. No existing skill changed.
 - Behavior: drafted from owner intent and not evaluated. By owner decision this change adds no automated, pressure, or trigger tests; the card shape follows an earlier one-fixture ablation of a pilot card.

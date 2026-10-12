@@ -21,7 +21,7 @@ disable-model-invocation: true
 **Distinct from.**
 
 - `principle-what-happens-when-it-fails` is one operation's endings; this card is two actors at once. If a retry can overlap a late original, use both.
-- Unfinished old work alone doesn't prove unsafe sharing: inspect the actual resource before adding coordination.
+- `principle-one-owner-per-truth` decides who owns and writes a truth; this card asks what happens when two actors reach it at once.
 
 **Applied means** you name the invariant, the interleaving you found, and the separation or ordering you chose.
 
@@ -31,4 +31,4 @@ A worker handles a request, releases its hold on the session, and then posts the
 
 ## Overkill
 
-When one actor owns the state and every completion order gives the same result, interleaving analysis adds nothing. Don't lock state that only one actor touches.
+When one actor owns the state and every completion order gives the same result, interleaving analysis adds nothing. Don't lock state that only one actor touches. Unfinished old work alone doesn't prove unsafe sharing: inspect the actual resource before adding coordination.

@@ -1,6 +1,6 @@
 ---
 name: principle-prove-it-through-the-real-path
-description: "Use before saying a feature, fix, or UI change works. Drive the real entry point with the real configuration, observe the result where the user would see it, and name anything still unverified."
+description: "Use when about to say a feature, fix, or UI change works. Drive the real entry point with the real configuration, observe the result where the user would see it, and name anything still unverified."
 disable-model-invocation: true
 ---
 
