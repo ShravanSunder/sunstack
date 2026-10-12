@@ -194,7 +194,7 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 | 14 | `principle-prove-it-works` | batch 5 (Advisor) | reviewed (r2, `639c7918`) |
 | 13 | `principle-write-tests-that-can-fail` | double-check, then a teaching read (Advisor and Codex Lead, each independent) | reviewed (r2, `639c7918`) |
 
-All 17 runs are `reviewed` (implementation review r2, verdict great at `639c7918`); none is `shipped`. The D33 layered-detail pass (after `c92a4c91`) changed all 17 cards and is under review by both advisors.
+All 17 runs are `reviewed` (implementation review r2, verdict great at `639c7918`); none is `shipped`. Two later passes changed all 17 cards: D33 layered detail (`c92a4c91..bb369a75`) and D34 leading examples and signs (`06022fc6..19d33473`). Each was reviewed independently by the 🦉 Advisor and the Codex Lead, with sealed reports and then a comparison (`tmp/design-skills-lead/reviews/{cake-pass,d34-pass}-*.md` in the design-skills worktree). All findings are closed and verified at `b3796ae6`.
 
 ## Review record
 
