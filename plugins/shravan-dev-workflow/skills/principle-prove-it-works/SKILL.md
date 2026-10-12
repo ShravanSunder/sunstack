@@ -1,12 +1,12 @@
 ---
 name: principle-prove-it-works
-description: "Use when about to say a feature, fix, or UI change works. A passing test is evidence, not proof: proof is the feature working through the real entry point, observed where the user would see it, with anything unverified named."
+description: "Use when about to say a feature, fix, or UI change works. A passing test proves only what it observes: proof is the feature working through the real entry point, observed where the user would see it, with anything unverified named."
 disable-model-invocation: true
 ---
 
 # Prove It Works
 
-A passing test is evidence about the parts it reaches. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider actually selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
+A passing test proves only what it observes. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider actually selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
 
 ## How to think it through
 
@@ -16,7 +16,7 @@ A passing test is evidence about the parts it reaches. Proof is the feature work
 
 **Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. For an API or a library, the user is the calling program: look at the response it gets and the state it can read back. Record what you did and what you saw.
 
-**Drive one failure through the real path, too.** Proving the happy path leaves the error handling unproven. Make one realistic failure happen through the same entry point (a rejected input, an unreachable dependency) and observe what the user sees.
+**Drive the failures the claim covers, too.** When the change touches how errors are handled or shown, the happy path leaves that unproven. Make each failure the claim covers happen through the same entry point (a rejected input, an unreachable dependency) and observe what the user sees. A change that doesn't touch failure handling doesn't need an unrelated failure staged.
 
 **A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back, not by seeing a success response.
 
@@ -51,4 +51,4 @@ Pure domain logic with no entry point, viewport, or journey is proven by a focus
 - A focused result reported as the whole suite.
 - A required check weakened, skipped, or disabled to get green.
 
-Designing the scenario that can expose a defect is `principle-tests-are-executable-claims`; one automated real-path test can serve both. Judging whether an observation supports the claim made from it is `principle-verify-before-accepting`.
+Designing a test that fails when the behavior is wrong is `principle-write-tests-that-can-fail`; one automated real-path test can serve both. Judging whether an observation supports the claim made from it is `principle-verify-before-accepting`.

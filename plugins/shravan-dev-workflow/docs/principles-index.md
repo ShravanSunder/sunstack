@@ -37,8 +37,8 @@ A principle is one engineering judgment, written to teach: the idea behind it, h
 
 ## Prove
 
-- `principle-tests-are-executable-claims`. Behavior changes (a fix, a feature, a refactor) or a claim rests on tests passing. Design the scenario that fails if the behavior is wrong, at the cheapest layer that still exercises the real interaction, and see it go red before green.
-- `principle-prove-it-works`. About to say a feature, fix, or UI change works. A passing test is evidence, not proof: proof is the feature working through the real entry point, observed where the user would see it, with anything unverified named.
+- `principle-write-tests-that-can-fail`. Writing, changing, or keeping a test for a fix, a feature, or a refactor, or when a claim rests on tests passing. Name the wrong behavior the test must catch, take the expected value from somewhere independent, run it at the cheapest layer where that wrong behavior can make it fail, and see it fail for the right reason.
+- `principle-prove-it-works`. About to say a feature, fix, or UI change works. A passing test proves only what it observes: proof is the feature working through the real entry point, observed where the user would see it, with anything unverified named.
 - `principle-verify-before-accepting`. Accepting any result: a helper's handback, a review finding, a passing run, 'done', an agreement, or your own conclusion. Check that this evidence establishes this exact claim, at this version, observed rather than reported, and name what it doesn't cover.
 
 ## Explain

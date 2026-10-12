@@ -11,7 +11,7 @@ Owner plugin: `shravan-dev-workflow`. Classification: `create`, behavior-changin
 | 1 | 1 | `principle-design-for-failure` | the family surfaces: the index (a plugin doc, D22), README namespace row, repo AGENTS.md lines (D9), version, manifests, changelog |
 | 2 | 1 | `principle-build-the-shared-model-first` | |
 | 3 | 1 | `principle-separate-the-concerns` | |
-| 4 | 1 | `principle-tests-are-executable-claims` | |
+| 4 | 1 | `principle-write-tests-that-can-fail` (D29) | |
 | 5–17 | 2 | the other 13, named in the index draft | |
 
 Wave 2 was to start after the wave-1 behavior check. With that check deferred (D19), all 17 runs are implemented in one pass and the family ships as one PR (D13); the waves remain only as the spec-review grouping (wave-1 text reviewed here, wave-2 text at implementation review).
@@ -69,6 +69,7 @@ The owner may strike any row. Rows marked *owner* are the owner's decisions; the
 | D26 | 2026-10-12, supersedes D5's card shape: each card teaches. Body: the idea, how to think it through (including the hard call and how to choose between moves), one anchor example, when it doesn't apply, signs you skipped it, and a cross-reference only where it changes what the reader does next. Further scenarios live in `references/example_scenarios.md`, loaded by one `IF` call when the case doesn't match the anchor or when reviewing. The accountability rule lives once, in the index. Cards are hand-written from scraped sources, one at a time. *owner* | Owner: the first cards were "mostly pedantic stuff" and "this is not how you write skills, skills are supposed to teach the principle"; approved this shape and named the reference file `example_scenarios.md`. Pointer phrasing may change after the reference-loading research. |
 | D27 | 2026-10-12: each card's pointer to `references/example_scenarios.md` names its scenarios inline, so the content is visible before the file is opened. The conditional grammar stays. | Reference-loading research (`tmp/design-skills-lead/research/reference-loading.md`, Sol reducer with Luna operators): no measured comparison favors our grammar over plain pointers; vendor guidance and practice agree on exact path, a condition visible before opening, a short content cue, and an instruction to apply. Ours lacked only the content cue. Confidence moderate as guidance, low for any retrieval-rate gain. Owner: an `IF` call and "when X, load Y" are the same paradigm; the only value of the `IF` form is standardization in our repo. *owner* |
 | D28 | 2026-10-12: cards keep the owner's own phrasing from their private agent instructions, verbatim where it appears (14 near-verbatim sentences, mostly the philosophy voice, plus paraphrases). The private file itself stays private. *owner* | Shown side by side with source lines; owner chose to keep as-is. It is engineering philosophy, not secrets or personal data. |
+| D29 | 2026-10-12, supersedes card 13's D23 name: card 13 stays one card, renamed `principle-write-tests-that-can-fail`, opening with the owner's "Tests are executable claims about behavior." It teaches two hard calls, each with a reasoning walk and an example: what wrong behavior the test must catch (independent oracle, red for the right reason), and where it must run (the wrong behavior sets what stays real; the cheapest honest layer above that floor; the pyramid as distribution). TDD's loop stays in `implement-plan`; a TDD practice later only by moving that loop, not copying it. Card 14 takes three corrections from the same double-check: failures driven only where the claim covers them, the live recheck only when the automated run misses the original observation, and "a passing test proves only what it observes"; plus the caller as the user of an API or library. *owner* | Advisor recommended one card, Codex Lead a split; after one exchange both called either packaging acceptable on one shared condition (each decision gets its own walk and example). Owner chose one card and the name. Records: `tmp/design-skills-lead/reviews/double-check-13-14-{advisor,codex-lead,comparison}.md` in the design-skills worktree. |
 
 ### D18 names and their sources
 
@@ -186,7 +187,7 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 | 15 | `principle-verify-before-accepting` | batch 5 (Advisor) | implemented |
 | 16 | `principle-write-for-the-reader` | batch 5 (Advisor) | implemented |
 | 14 | `principle-prove-it-works` | batch 5 (Advisor) | implemented |
-| 13 | `principle-tests-are-executable-claims` | waiting for the owner's split decision (testing research: two principles plus a TDD practice) | old shape; not rewritten |
+| 13 | `principle-write-tests-that-can-fail` | double-check (Advisor and Codex Lead, independent, then compared) | implemented |
 
 No run is `reviewed` or `shipped`.
 

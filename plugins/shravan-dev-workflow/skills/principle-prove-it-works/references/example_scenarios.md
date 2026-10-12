@@ -48,7 +48,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** Prove the complete transition at the real boundary.
 
-**Better.** A test at the real window boundary drives the whole Escape transition and asserts both the focus and the preview state. Then check the owner's original observation once in the live app.
+**Better.** A test at the real window boundary drives the whole Escape transition and asserts both the focus and the preview state. If that run doesn't reproduce the owner's original observation, check it once in the live app; if it does, the run is the proof.
 
 ## Saved, across a restart
 

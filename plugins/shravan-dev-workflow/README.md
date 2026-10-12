@@ -66,7 +66,7 @@ principle-*          engineering judgment cards    principle-hold-the-scope
                                                   principle-justify-the-complexity
                                                   principle-design-for-failure
                                                   principle-design-for-concurrency
-                                                  principle-tests-are-executable-claims
+                                                  principle-write-tests-that-can-fail
                                                   principle-prove-it-works
                                                   principle-verify-before-accepting
                                                   principle-write-for-the-reader
