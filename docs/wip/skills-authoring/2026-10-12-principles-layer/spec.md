@@ -1,6 +1,6 @@
 # Skill spec: the principles layer (step 1)
 
-Multi-run skill spec, written by the 🦁 design-skills Lead (claude-local `67681626…`), 2026-10-12. Each run names one `principle-*` skill. The cards are now the skills under `plugins/shravan-dev-workflow/skills/principle-*/`, and the index is `plugins/shravan-dev-workflow/shared-references/principles-index.md`; the draft files they came from were removed once implemented.
+Multi-run skill spec, written by the 🦁 design-skills Lead (claude-local `67681626…`), 2026-10-12. Each run names one `principle-*` skill. The cards are now the skills under `plugins/shravan-dev-workflow/skills/principle-*/`, and the index is `plugins/shravan-dev-workflow/docs/principles-index.md` (D22); the draft files they came from were removed once implemented.
 
 ## Targets and owner plugin
 
@@ -57,6 +57,7 @@ The owner may strike any row. Rows marked *owner* are the owner's decisions; the
 | D19 | 2026-10-12, supersedes the wave-1 behavior check in the proof plan: no behavior runs in step 1. Proof posture: drafted from user intent; behavior not yet evaluated. *owner* | Owner direction: no pressure tests for now, and move toward a PR. The planned protocol and the Codex Lead's prepared fixtures (`/private/tmp/2026-10-principles-wave1-prep-codex-01a118ee/`, unfrozen) stay available for when the owner resumes behavior testing. The PR and changelog name the behavior as unverified. This is the explicit deferred-proof disposition for all 17 runs (spec-review candidate P1). |
 | D20 | 2026-10-12: the remaining spec review (the structure checks) is skipped; all 17 runs are implemented now. *owner* | Owner direction: start writing the principles now, skipping the structure half rather than waiting. The teaching checks had run and their findings were fixed (T1, T2) or closed by D19 (P1). The structure reviewer's candidates carry into the implementation review. |
 | D21 | 2026-10-12, supersedes D17 and the test lines of the proof plan: this change adds and runs no automated tests and no pressure tests. *owner* | Owner direction: no automated tests or pressure tests. The D17 rules (invocation encodings, sibling-only naming, index matches the skills) were checked once by a throwaway script at implementation; no test file was added. |
+| D22 | 2026-10-12, supersedes D7's home: the index lives at `plugins/shravan-dev-workflow/docs/principles-index.md` until a skill loads it; step 2 moves it to `shared-references/` with its first callers. *owner* | Owner direction after the skill-creation audit: follow the shared-reference rule (a shared reference serves two or more active skills; every reference has a caller). The README, AGENTS.md, and changelog link the doc. |
 
 ### D18 names and their sources
 
@@ -152,9 +153,29 @@ Citation rules: P atoms are evidence of what the owner pushed on, not stated rul
 
 ## Run status
 
-| Run | Status | Evidence |
-| --- | --- | --- |
-| 1–17 | implemented | the commit that adds `plugins/shravan-dev-workflow/skills/principle-*/`, the index, README, AGENTS.md, versions, and changelog; implementation review pending |
+Implemented in one pass after D20 rather than one skill per run; each run is accounted for separately below. Lead verification was the Lead's own check at the owner's request, not the independent review.
+
+| Run | Skill | Content basis | Lead verification (2026-10-12) | Status |
+| --- | --- | --- | --- | --- |
+| 1 | `principle-what-happens-when-it-fails` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 2 | `principle-shared-mental-model-first` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 3 | `principle-separation-of-concerns` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 4 | `principle-tests-are-executable-claims` | wave-1 draft (teaching review; T2 fix) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 5 | `principle-focus-and-scope` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 6 | `principle-domain-meaning-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 7 | `principle-read-ground-truth-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
+| 8 | `principle-experiment-before-proposing` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 9 | `principle-tradeoffs-are-the-work` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 10 | `principle-one-owner-per-truth` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 11 | `principle-types-and-trust-boundaries` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 12 | `principle-dont-over-engineer` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 13 | `principle-concurrency-and-ordering` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: distinct-from corrected; caution moved to Overkill | implemented |
+| 14 | `principle-prove-it-through-the-real-path` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
+| 15 | `principle-verify-before-accepting` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 16 | `principle-write-for-the-reader` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 17 | `principle-fix-the-understanding-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+
+Family surfaces (index, README, AGENTS.md, versions, changelog) landed with run 1. Implementation review is pending for all runs; no run is `reviewed` or `shipped`.
 
 ## Review record
 
@@ -164,10 +185,25 @@ Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex 
 
 ### Process record (skill-creation audit, 2026-10-12, at the owner's request)
 
-- **Security gate, recorded late.** Sensitive surface in scope: third-party skill adoption (pstack, MIT license, Copyright 2026 Lauren Tan). Copy-vs-adapt: adapt; card shape and some principle ideas are adapted, no upstream prose copied. Decision: allowed. No scripts, hooks, assets, network, auth material, or home writes. This decision was due before the cards were written and was recorded after.
+- **Security gate** (`skill-creation` `security-gate.md` labels; due before the cards were written, recorded after):
+
+  ```text
+  sensitive surfaces: third-party skill adoption (pstack principle leaves and poteto-mode index)
+  entry points: none (Markdown cards and openai.yaml metadata; no scripts, hooks, assets, package scripts)
+  untrusted inputs: none at runtime
+  privileged actions: none
+  third-party source: cursor-plugins submodule, pstack/skills, pin ecc249f
+  license / permission state: MIT (Copyright 2026 Lauren Tan)
+  copy-vs-adapt decision: adapt; card shape and some principle ideas adapted, no upstream prose copied; names from the owner's phrases
+  decision: allowed
+  required proof: none beyond static validation (no executable surface)
+  public-safe constraints: no private owner quotes in public files (sources in memory-logs)
+  review route: implementation review (sensitive-surface check)
+  ```
 - **References loaded late.** `reference-design.md` and `worked-examples.md` were loaded after implementation; both confirm D5 (cards inline, no references). `reference-design.md` also confirms the index finding below.
-- **Index has no caller.** `shared-references/principles-index.md` is called by no skill in step 1, against the caller-owns-routing rule and the repo rule that shared references serve two or more active skills. Owner decision pending: keep it (agreed scope v2) until step 2 adds callers, or move it to plugin docs until then.
-- **One pass, not one skill per run.** All 17 runs were implemented in one generated pass after D20, instead of one skill per run.
-- **PR before review.** Draft PR #123 was opened before the implementation review (repo SOP order is review, then PR wrap-up); it stays draft until review closes.
+- **Index had no caller.** As a shared reference it was called by no skill in step 1, against the caller-owns-routing rule and the repo rule that shared references serve two or more active skills. Fixed by D22: it is a plugin doc until step 2 gives it callers.
+- **One pass, not one skill per run.** All 17 runs were implemented in one generated pass after D20, instead of one skill per run. Repaired as far as it can be after the fact: each run now has its own row under Run status with its basis and verification.
+- **PR before review.** Draft PR #123 was opened before the implementation review (repo SOP order is review, then PR wrap-up). It stays draft, and `implementation-pr-wrapup` starts only after the review closes.
+- **Admired-source provenance** (repo AGENTS.md, maintain both): the lite catalog gains a pstack `principle-*` note and an Engineering principles row; `ai-dev-skills` gains `docs/my-ai-tools/shravan-dev-workflow/principle-family.md` and a README row. The reverse-link rows for `docs/repo-index/cursor-plugins.md` are recorded in that file as proposed edits, because another session has that file staged.
 - **Commits** are SSH-signed (GitHub reports `4271faf1` verified).
 
