@@ -6,29 +6,43 @@ disable-model-invocation: true
 
 # Prove It Works
 
-**Apply when** you are about to say a feature, fix, or UI change works.
+A passing test is evidence about the parts it reaches. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider actually selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
 
-**Rule.** A passing test is evidence; proof is the feature working through the real entry point. Drive that entry point (the app, command, endpoint, or page a user would use) with the real configuration, and observe the result where the user would see it: the rendered screen at the target viewport, the response body, the file on disk. A planned journey is not a run journey, and a passing unit test is not a run of the feature. Record what you did and what you saw, and name anything still stubbed as unverified. When an automated test already drives that real path, it is the proof; don't repeat it by hand.
+## How to think it through
 
-**Why.** Most "done but broken" comes from the gap between the parts that were tested and the thing that runs: the configuration, the wiring, the layout at a real size, the installed package. Only the real path crosses all of it.
+**State the claim the way the user would see it.** Not "the handler is fixed" but "pressing Enter once submits the search, in the app, with real results". That tells you what to run and where to look.
 
-**The test.**
+**Find the real path.** The app, command, endpoint, or page a user actually uses, with the real configuration and the provider production selects, run on representative data: current data, a large diff, the slow case.
 
-1. Did you run what a user runs, or a stand-in for it?
-2. Did you observe the outcome where the user would?
-3. Is anything still stubbed, and is it named as unverified?
+**Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. Record what you did and what you saw.
 
-**Distinct from.**
+**Script it when you can.** A rerunnable check whose output is kept is stronger than a one-time look, because a reviewer can run it again instead of trusting your word.
 
-- `principle-tests-are-executable-claims` designs the scenario that can expose a defect; this card runs the real thing. One automated real-path run can serve both.
-- `principle-verify-before-accepting` judges whether the observation supports the claim made from it.
+**Match the proof to the claim, without repeating yourself.** An automated test that drives the real path (an integration test, one of a few end-to-end journeys) can be the proof. Use a manual check for what the suite doesn't establish. A docs or config change needs only the smallest real check. Don't repeat an equivalent validation unless something changed.
 
-**Applied means** you name the entry point you drove, what you observed, and what is left unverified.
+**Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both. A focused green is not "the build is green".
 
-## Worked case
+**Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried. And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
 
-A share panel passes its component tests. Opened in the real app at a laptop viewport, it overflows the window, and closing it leaves keyboard focus on the page body. Fixing both took minutes; finding them took opening the app. The focus return is now covered by a test, and the layout was checked at two viewports with screenshots.
+**The hard call is what counts as the real path.** A dev server with a mocked backend isn't the real path for a backend change. A component test isn't the full window transition. The dev server isn't the shipped bridge. When in doubt, ask what the user's click actually goes through, and make the proof go through that.
 
-## Overkill
+## Example: five green fixes
+
+Fast scrolling through a review left some files showing as placeholders. Five fixes went in, each with passing unit tests, and the symptom was still there; clicking a single file loaded it, which made it look fixed. The tests measured what happens when one item is selected, not what happens to every visible item during a fast scroll. Better: drive the real review surface with real fast scrolling and observe each visible item's loading state. That journey shows whether the contract holds, and it is the check that should have gone first.
+
+IF the case in front of you doesn't match the scrolling example, or you are judging someone else's claim that something works, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+
+## When it doesn't apply
 
 Pure domain logic with no entry point, viewport, or journey is proven by a focused test. Don't repeat a manual check that an automated real-path test already covers.
+
+## Signs you skipped it
+
+- "Tests pass, done."
+- A planned journey reported as if it ran.
+- Screenshots from a different viewport, build, or environment than the claim.
+- Stubs and stand-ins not named as unverified.
+- A focused result reported as the whole suite.
+- A required check weakened, skipped, or disabled to get green.
+
+Designing the scenario that can expose a defect is `principle-tests-are-executable-claims`; one automated real-path test can serve both. Judging whether an observation supports the claim made from it is `principle-verify-before-accepting`.
