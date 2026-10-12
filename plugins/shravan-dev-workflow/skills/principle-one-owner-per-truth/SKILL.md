@@ -28,7 +28,7 @@ Every truth in a system (a status, a balance, a setting, an identity, a lifecycl
 
 An editor saved comment drafts locally and also synced posted replies from the server, and both wrote the same comment list. Typing a reply made saved comments flicker as each writer overwrote the other. Better: the server owns posted comments; the draft store owns only unposted drafts, kept apart; the view merges the two when it reads. One writer per truth, and the flicker is gone by construction.
 
-IF the case in front of you doesn't match the comment example, or you are reviewing who owns what in someone else's design, load `references/example_scenarios.md` (scenarios: two services, one status; whose identity?; the menu nobody owned; the schema written twice; a required field with no version bump; two contracts in conflict; the field one side didn't know; the delete that skipped the owner) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the comment example, or you are reviewing who owns what in someone else's design, load `references/example_scenarios.md` (scenarios, simplest first: the schema written twice; two services, one status; Whose identity?; a required field with no version bump; the field one side didn't know; the menu nobody owned; two contracts in conflict; the delete that skipped the owner) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

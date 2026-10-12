@@ -193,7 +193,7 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 | 14 | `principle-prove-it-works` | batch 5 (Advisor) | reviewed (r2, `639c7918`) |
 | 13 | `principle-write-tests-that-can-fail` | double-check, then a teaching read (Advisor and Codex Lead, each independent) | reviewed (r2, `639c7918`) |
 
-All 17 runs are `reviewed` (implementation review r2, verdict great at `639c7918`); none is `shipped`.
+All 17 runs are `reviewed` (implementation review r2, verdict great at `639c7918`); none is `shipped`. The D33 layered-detail pass (after `c92a4c91`) changed all 17 cards and is under review by both advisors.
 
 ## Review record
 

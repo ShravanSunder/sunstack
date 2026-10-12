@@ -36,7 +36,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 Fast scrolling through a review left some files showing as placeholders. Five fixes went in, each with passing unit tests, and the symptom was still there; clicking a single file loaded it, which made it look fixed. The tests measured what happens when one item is selected, not what happens to every visible item during a fast scroll. Better: drive the real review surface with real fast scrolling and observe each visible item's loading state. That journey shows whether the contract holds, and it is the check that should have gone first.
 
-IF the case in front of you doesn't match the scrolling example, or you are judging someone else's claim that something works, load `references/example_scenarios.md` (scenarios: enter, twice; the share panel at a real size; the flag the installed binary didn't know; seven focused passes, one failing suite; tests on the wrong provider; the transition that left something behind; saved, across a restart) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the scrolling example, or you are judging someone else's claim that something works, load `references/example_scenarios.md` (scenarios, simplest first: Enter, twice; the share panel at a real size; Seven focused passes, one failing suite; the flag the installed binary didn't know; Tests on the wrong provider; the transition that left something behind; Saved, across a restart) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

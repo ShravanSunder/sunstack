@@ -1,6 +1,6 @@
 # Prove It Works: example scenarios
 
-Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. Find the one closest to your case and apply its move.
+Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. They run from the simplest to the hardest. Find the one closest to your case and apply its move.
 
 ## Enter, twice
 
@@ -18,14 +18,6 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** Fixing both took minutes; finding them took opening the app. The focus return is now covered by a test, and the layout was checked at two viewports with screenshots.
 
-## The flag the installed binary didn't know
-
-**What happened.** A new command-line flag passed tests that constructed the argument parser directly. The installed binary's entry point never registered it, and running the real command printed "unknown flag".
-
-**The move.** The real path is what the user runs.
-
-**Better.** Run the built or installed command with the new flag as part of the proof, because the parser test skipped the registration step that broke.
-
 ## Seven focused passes, one failing suite
 
 **What happened.** A fix passed seven focused tests and several lanes. The full suite still failed four launch-restore tests.
@@ -33,6 +25,14 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Keep the scoped result apart from the whole.
 
 **Better.** Report it as "focused tests pass; the full suite fails four restore tests (listed)". The pull request isn't ready until the whole suite is green, or the remaining failures are explicitly out of scope.
+
+## The flag the installed binary didn't know
+
+**What happened.** A new command-line flag passed tests that constructed the argument parser directly. The installed binary's entry point never registered it, and running the real command printed "unknown flag".
+
+**The move.** The real path is what the user runs.
+
+**Better.** Run the built or installed command with the new flag as part of the proof, because the parser test skipped the registration step that broke.
 
 ## Tests on the wrong provider
 

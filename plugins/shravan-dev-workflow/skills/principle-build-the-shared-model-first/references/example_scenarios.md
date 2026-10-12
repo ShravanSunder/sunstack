@@ -1,6 +1,14 @@
 # Build the Shared Model First: example scenarios
 
-Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. Find the one closest to your case and apply its move.
+Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. They run from the simplest to the hardest. Find the one closest to your case and apply its move.
+
+## "Sounds good"
+
+**What happened.** An agent presented a complex migration plan and the owner replied "sounds good". The agent took that as confirmation of every decision in it.
+
+**The move.** Confirmation has to be explicit.
+
+**Better.** Name the one or two decisions the plan leans on, for example "this assumes we can take the old API offline for an hour; is that true?", and get a specific answer before building.
 
 ## Two meanings of "sync"
 
@@ -25,14 +33,6 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** The gap is the information.
 
 **Better.** Put both pictures side by side and ask what each would get wrong. Here the answer was both: entities with an explicit lifecycle, moved by stages that each own one transition.
-
-## "Sounds good"
-
-**What happened.** An agent presented a complex migration plan and the owner replied "sounds good". The agent took that as confirmation of every decision in it.
-
-**The move.** Confirmation has to be explicit.
-
-**Better.** Name the one or two decisions the plan leans on, for example "this assumes we can take the old API offline for an hour; is that true?", and get a specific answer before building.
 
 ## Research that wandered
 

@@ -1,6 +1,6 @@
 # Justify the Complexity: example scenarios
 
-Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. Find the one closest to your case and apply its move.
+Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. They run from the simplest to the hardest. Find the one closest to your case and apply its move.
 
 ## The lease nobody asked for
 
@@ -17,6 +17,14 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** "We might need it" is not an outcome.
 
 **Better.** Delete the flag and the dead path. When a second backend is actually needed, add it then, with its own tests.
+
+## The home-grown container
+
+**What happened.** To wire a handful of services, a design proposed building its own dependency-injection container and service locator.
+
+**The move.** Prefer the boring shape.
+
+**Better.** Pass the few real dependencies as constructor arguments at one composition point. The container would have been a framework to maintain with no outcome asking for it.
 
 ## The cutover that missed a consumer
 
@@ -41,11 +49,3 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Look for the smallest fix at the owning boundary before building something new.
 
 **Better.** Turn off the spin and retry with a timer at the driver boundary. That cost about 18 ms of CPU and left the engine untouched.
-
-## The home-grown container
-
-**What happened.** To wire a handful of services, a design proposed building its own dependency-injection container and service locator.
-
-**The move.** Prefer the boring shape.
-
-**Better.** Pass the few real dependencies as constructor arguments at one composition point. The container would have been a framework to maintain with no outcome asking for it.

@@ -34,7 +34,7 @@ Before there is a plan, before there is code, there is a mental model: a shared 
 
 An agent resumes a long task from a written spec and plan. Since they were written, the owner corrected two decisions in conversation. The agent treats the documents as the authority and builds a day of code and tests against the old contract. Better: before resuming, restate the goal and the governing decisions in a few lines, list the corrections made since the documents were written, and ask the owner to confirm or correct that list. One short read-back catches both corrections.
 
-IF the case in front of you doesn't match the stale-plan example, or you are checking whether two parties really share a picture, load `references/example_scenarios.md` (scenarios: two meanings of "sync"; the confusing sidebar; pipeline or state machine; "Sounds good"; research that wandered) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the stale-plan example, or you are checking whether two parties really share a picture, load `references/example_scenarios.md` (scenarios, simplest first: "Sounds good"; two meanings of "sync"; the confusing sidebar; Pipeline or state machine; Research that wandered) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

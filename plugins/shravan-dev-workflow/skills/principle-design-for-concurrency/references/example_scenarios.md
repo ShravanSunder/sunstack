@@ -1,6 +1,6 @@
 # Design for Concurrency: example scenarios
 
-Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. Find the one closest to your case and apply its move.
+Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. They run from the simplest to the hardest. Find the one closest to your case and apply its move.
 
 ## Two workers, one state file
 
@@ -10,14 +10,6 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** Give each its own file (`indexer-state.json`, `metrics-state.json`) and merge them only when a report reads both. No lock is needed, because nothing is shared anymore.
 
-## The reservation the scan ignored
-
-**What happened.** A scan waited for a slot, then published results that restored a hidden location, even though another task still held a reservation on it.
-
-**The move.** After waiting, recheck the condition before acting.
-
-**Better.** The scan rechecks the reservation after its wait and publishes only if nothing still holds it. A permanent regression test reproduces the overlap by holding the reservation during the scan.
-
 ## Refresh once per worktree
 
 **What happened.** Each open tab started its own refresh of the same worktree's file list, so five tabs meant five identical refreshes racing to write the same cache.
@@ -25,6 +17,22 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Deduplicate identical work, and give it one owner.
 
 **Better.** One refresh per worktree, owned by the worktree's model. Tabs subscribe to its result instead of starting their own.
+
+## Search results out of order
+
+**What happened.** A search box sent a request on each keystroke. The response for "a" arrived after the response for "ab", and the screen showed results for "a" while the box said "ab". Each response was correctly matched to its own request; it was simply stale.
+
+**The move.** When a result arrives for a request that has been superseded, drop it.
+
+**Better.** Carry a revision with each async read, and apply an answer only if its revision is still current. Cancel the superseded request too, to save work, but keep the revision check where results are applied: a response already in flight can still arrive. Keep the requests parallel; serializing them would fix the ordering but make the search slow.
+
+## The background write nobody waited for
+
+**What happened.** A request handler spawned a task to record an audit row and returned. On shutdown, the process exited before the task ran, and in tests the runtime ended with the write still pending.
+
+**The move.** Every task has an owner that tracks it and drains it.
+
+**Better.** Spawn audit writes through a tracker owned by the service. Shutdown drains the tracker before exiting, and tests await it before asserting.
 
 ## The test that could only sleep
 
@@ -42,18 +50,10 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** Load the account through the async store on the runtime, and send only the secret read itself to the blocking pool.
 
-## The background write nobody waited for
+## The reservation the scan ignored
 
-**What happened.** A request handler spawned a task to record an audit row and returned. On shutdown, the process exited before the task ran, and in tests the runtime ended with the write still pending.
+**What happened.** A scan waited for a slot, then published results that restored a hidden location, even though another task still held a reservation on it.
 
-**The move.** Every task has an owner that tracks it and drains it.
+**The move.** After waiting, recheck the condition before acting.
 
-**Better.** Spawn audit writes through a tracker owned by the service. Shutdown drains the tracker before exiting, and tests await it before asserting.
-
-## Search results out of order
-
-**What happened.** A search box sent a request on each keystroke. The response for "a" arrived after the response for "ab", and the screen showed results for "a" while the box said "ab". Each response was correctly matched to its own request; it was simply stale.
-
-**The move.** When a result arrives for a request that has been superseded, drop it.
-
-**Better.** Carry a revision with each async read, and apply an answer only if its revision is still current. Cancel the superseded request too, to save work, but keep the revision check where results are applied: a response already in flight can still arrive. Keep the requests parallel; serializing them would fix the ordering but make the search slow.
+**Better.** The scan rechecks the reservation after its wait and publishes only if nothing still holds it. A permanent regression test reproduces the overlap by holding the reservation during the scan.

@@ -10,11 +10,16 @@ Every piece of work runs on a mental model: a picture of how the system works an
 
 ## How to think it through
 
-**Stop writing code and say three things plainly:** what we assumed, what we found, and what it means for the design. Read the code and the logs to fill them in; guessing here is the failure. The three lines also sort the problem: if the assumption still holds and only the work wandered, it is drift; if the assumption itself failed, it is a break.
+**Stop writing code and say three things plainly:** what we assumed, what we found, and what it means for the design. Read the code and the logs to fill them in; guessing here is the failure.
+
+**The hard call is drift versus break.** Ask whether the original assumption still holds given the evidence. If it does and only the work wandered, it is drift: the work changes. If the assumption itself failed, it is a break: the model changes first.
 
 **For drift, correct the work and say that you did.** Drift fixed silently looks exactly like drift nobody noticed. If the correction can't be cleanly backed out once others build on it (it moves ownership, changes a contract or a stored format, or weakens a proof), stop before it lands and get it agreed.
 
-**For a break, stop building on it.** Don't invent a new seam or shim to push through. Find out whose assumption failed: it belongs to the owner only if it traces to an explicit owner decision, an existing contract, or a demonstrated technical constraint. A spec or plan an agent wrote is not, on its own, evidence of what the owner wants. If it was an inference you added, drop it and keep what was actually agreed. If the owner's assumption failed, the question is what the repair touches: when the fix keeps every agreed outcome and contract and stays inside the scope, make it and record what failed and why; when it would change an agreed outcome or needs a tradeoff only the owner can make, stop the dependent work and rebuild the model with them, bringing the evidence.
+**For a break, stop building on it.** Don't invent a new seam or shim to push through. Find out whose assumption failed. It is the owner's only if it traces to an explicit owner decision, an existing contract, or a demonstrated technical constraint; a spec or plan an agent wrote is not, on its own, evidence of what the owner wants. Then:
+- an inference you added: drop it and keep what was actually agreed;
+- the owner's assumption, with a repair that keeps every agreed outcome and contract inside the scope: make it, and record what failed and why;
+- the owner's assumption, with a repair that changes an agreed outcome or needs a tradeoff only the owner can make: stop the dependent work and rebuild the model with them, bringing the evidence.
 
 **When fixes keep failing, suspect the premise, not the fixes.** Two or more fixes for one symptom that each failed probably share an assumption. Write that premise down as one sentence every failed fix assumed. Inventory all the observed failures before narrowing to one cause, then challenge the premise against what was actually observed instead of writing another fix that assumes it.
 
@@ -22,13 +27,11 @@ Every piece of work runs on a mental model: a picture of how the system works an
 
 **When the same correction keeps coming back, turn it into structure.** Pick the strongest mechanism the situation allows: a state the types can't represent, then a lint or banned API that fails the build, then a shared helper, then a runtime check. Another paragraph of instructions is the weakest guard, because the next reader copies whatever the code already does.
 
-**The hard call is drift versus break.** Ask whether the original assumption still holds given the evidence. If it does, the work changes; if it doesn't, the model changes first.
-
 ## Example: the search assumption that broke
 
 The approved design put fuzzy search on SQLite's trigram index. Review found trigram candidates can't include typo-only matches, so the core feature couldn't work. A full-scan prototype off the main thread met the latency target. That made it a break, not drift: the storage assumption failed at the real query boundary, and it was an approved design decision. The right move was to stop and bring the owner the decision (keep SQLite with a different matcher, or change the storage contract), not to swap storage quietly because a prototype was fast.
 
-IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios: the fourth refresh; the backend that wasn't broken; the two sleeps; the cards that taught nothing; the same review comment, again) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios, simplest first: the same review comment, again; the backend that wasn't broken; the two sleeps; the fourth refresh; the cards that taught nothing) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

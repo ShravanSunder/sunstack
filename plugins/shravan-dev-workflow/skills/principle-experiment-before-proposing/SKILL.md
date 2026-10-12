@@ -19,8 +19,8 @@ Many design arguments are really questions about behavior: is this faster, does 
 **Fit the form to the question:**
 - **A spike** answers one concrete unknown. Timebox it and throw the code away.
 - **Competing prototypes** settle a design that isn't obvious. Build two or three that are genuinely different and compare them side by side; a second flavor of the first shape doesn't count.
-- **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), and enough repetitions to see past noise. Measure warm and cold where startup matters, note the machine load, and compare rows rather than trusting absolute numbers.
-- **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, and blind scoring wherever judgment is involved. Make sure the answer can't leak into the input: mask it, and check that the score holds.
+- **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), enough repetitions to see past noise, and the conditions it ran under (warm or cold, machine load), so rows are compared rather than absolute numbers trusted.
+- **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, blind scoring wherever judgment is involved, and inputs that can't leak the answer.
 
 **Measure the real artifact through the real path:** the actual data, the actual entry point, the actual surface. A micro-benchmark, a mock, or a probe can answer a different question from the one you have. Include a negative control where you can: something the instrument should show as unchanged (a static background, an untouched path). If the control moves too, the instrument is measuring noise.
 
@@ -36,7 +36,7 @@ Many design arguments are really questions about behavior: is this faster, does 
 
 A change claimed to make startup faster by loading modules lazily, and was about to merge on that claim. Measured on the real app (cold start, ten runs, main against the branch), startup was 40 ms slower: the first request now loaded modules one after another. Naming the workload and comparator took a minute, the run took five, and the result reversed the decision.
 
-IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` (scenarios: the hook runtime, warm and cold; the probe that looked in the wrong place; the oracle stricter than the contract; the card that seemed to teach; two layouts, side by side; the score that fell when the answer was hidden) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` (scenarios, simplest first: two layouts, side by side; the probe that looked in the wrong place; the hook runtime, warm and cold; the oracle stricter than the contract; the score that fell when the answer was hidden; the card that seemed to teach) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

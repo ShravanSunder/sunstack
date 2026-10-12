@@ -1,6 +1,30 @@
 # Define the Domain First: example scenarios
 
-Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. Find the one closest to your case and apply its move.
+Each scenario is a real or realistic case: what happened, the move it teaches, and the better design. They run from the simplest to the hardest. Find the one closest to your case and apply its move.
+
+## Comments or annotations?
+
+**What happened.** One view called them comments and another called them annotations, and the two had drifted into slightly different behavior.
+
+**The move.** One word, one meaning, everywhere.
+
+**Better.** Call it annotation in the code, the specification, and the interface, and give both views the same annotation model. That turns two half-similar features into one.
+
+## One "account", two meanings
+
+**What happened.** "Account" meant both the billing entity and a person's login. When a family shared one billing plan, permissions leaked between members.
+
+**The move.** Split a word that covers two meanings.
+
+**Better.** A user (who logs in) and a billing account (who pays), with a relationship between them. Permissions attach to users, so the code follows the corrected model.
+
+## Done or just waiting?
+
+**What happened.** A terminal status showed "done" both when a process the system started had finished and when the terminal was simply waiting at a prompt.
+
+**The move.** Two meanings get two states.
+
+**Better.** Separate "the task we started has finished" from "idle at a prompt", each with what moves it there. The interface stops telling users that work is complete when it isn't.
 
 ## Reused run ids
 
@@ -25,27 +49,3 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Compare identities in one canonical form at the boundary where producers and consumers meet.
 
 **Better.** Compare exact canonical path strings. After a restart and rescan: 91 families, 92 checkouts, no duplicates, and the original family ids kept.
-
-## One "account", two meanings
-
-**What happened.** "Account" meant both the billing entity and a person's login. When a family shared one billing plan, permissions leaked between members.
-
-**The move.** Split a word that covers two meanings.
-
-**Better.** A user (who logs in) and a billing account (who pays), with a relationship between them. Permissions attach to users, so the code follows the corrected model.
-
-## Done or just waiting?
-
-**What happened.** A terminal status showed "done" both when a process the system started had finished and when the terminal was simply waiting at a prompt.
-
-**The move.** Two meanings get two states.
-
-**Better.** Separate "the task we started has finished" from "idle at a prompt", each with what moves it there. The interface stops telling users that work is complete when it isn't.
-
-## Comments or annotations?
-
-**What happened.** One view called them comments and another called them annotations, and the two had drifted into slightly different behavior.
-
-**The move.** One word, one meaning, everywhere.
-
-**Better.** Call it annotation in the code, the specification, and the interface, and give both views the same annotation model. That turns two half-similar features into one.
