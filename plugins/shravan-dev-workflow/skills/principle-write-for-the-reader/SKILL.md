@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Write for the Reader
 
-Code is communication, and so are designs, instructions, and explanations. They are read far more often than they are written, mostly by someone without your context: a reviewer, the next engineer, another agent, the owner tomorrow. Writing for the reader means they can answer the question they came with (what is this for, where does this value come from, what can change it, what do I need to decide) quickly, and find the place to disagree. Every line, layer, and piece of state costs the reader something. Jargon, process narration, and repetition don't just waste their time; they hide mistakes from the people best placed to catch them.
+Code is communication, and so are designs, instructions, and explanations. They are read far more often than they are written, mostly by someone without your context: a reviewer, the next engineer, another agent, the owner tomorrow. Writing for the reader means they can answer the question they came with (what is this for, where does this value come from, what can change it, what do I need to decide) quickly, and find the place to disagree. Every line, layer, and piece of state costs the reader something. Jargon, process narration, and repetition waste that reader's time and hide mistakes from the people best placed to catch them.
 
 ## How to think it through
 
@@ -45,7 +45,7 @@ When a simple module already makes its flow and ownership clear, rearranging it 
 ## Signs you skipped it
 
 - Commands or implementation detail before the decision, why it matters, or what the reader needs to do.
-- A name that hides an effect or a responsibility, so a comment has to say what the call actually does.
+- A name that hides an effect or a responsibility, so a comment has to say what the call does.
 - Terms the reader doesn't use, left undefined.
 - Prose the reader has to turn back into ownership, flow, or state, where a small labeled view would show it directly.
 - The same rule restated in two places that can disagree, or narration of how the work was done.

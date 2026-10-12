@@ -16,7 +16,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** "We might need it" is not an outcome.
 
-**Better.** Delete the flag and the dead path. When a second backend is actually needed, add it then, with its own tests.
+**Better.** Delete the flag and the dead path. When a second backend is needed, add it then, with its own tests.
 
 ## The home-grown container
 

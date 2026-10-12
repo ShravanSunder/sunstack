@@ -12,7 +12,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Summaries without logs
 
-**What happened.** Two proof assignments came back with commands, counts, and "success", but no log paths. A follow-up found that no persistent logs had been written, so nobody could inspect what actually ran.
+**What happened.** Two proof assignments came back with commands, counts, and "success", but no log paths. A follow-up found that no persistent logs had been written, so nobody could inspect what ran.
 
 **The move.** Read it; don't count it.
 

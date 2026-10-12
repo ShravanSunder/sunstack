@@ -6,13 +6,13 @@ disable-model-invocation: true
 
 # Read Ground Truth First
 
-Don't start from assumptions; read ground truth first, in proportion to the task. A claim about what code or a system does is only as good as the reading behind it. Memory, function names, summaries, and other agents' reports are claims about the source, not the source, and a stale assumption is just a hidden guess. A design built on "I assume it works like X" carries that guess into the code, where it surfaces later as rework or an outage. Reading first is cheap; un-building is not. So every claim should carry its evidence, or say plainly that it is inferred or a guess.
+Don't start from assumptions; read ground truth first, in proportion to the task. A claim about what code or a system does is only as good as the reading behind it. Memory, function names, summaries, and other agents' reports are claims about the source, not the source, and a stale assumption is a hidden guess. A design built on "I assume it works like X" carries that guess into the code, where it surfaces later as rework or an outage. Reading first is cheap; un-building is not. So every claim should carry its evidence, or say plainly that it is inferred or a guess.
 
 ## How to think it through
 
 **Find the decisive source for the claim.** That means the code the change touches, the whole spec, the library's actual interface, the reference implementation, the logs and traces of the real run. For an open-source library, use its docs or an index to learn where to look, then read the code there. Don't guess a library's API from its name.
 
-**Follow the real path, from entry to effect.** Trace a request or a click from where it enters (the handler, the command, the event) to where the effect happens (the write, the response, the message), through the logs and spans if it's running. Which server handles this? Where is that connection actually made? Don't stop at a function whose name suggests the answer; names describe intent, not behavior.
+**Follow the real path, from entry to effect.** Trace a request or a click from where it enters (the handler, the command, the event) to where the effect happens (the write, the response, the message), through the logs and spans if it's running. Which server handles this? Where is that connection made? Don't stop at a function whose name suggests the answer; names describe intent, not behavior.
 
 **Read the whole artifact, not the search hit.** The condition three lines up, the early return, the flag read at startup: these change what the line you found means. Read past the first match, too: "Two other callers discard panes without going through the method we found, so the fix belongs where every discard meets."
 
@@ -20,7 +20,7 @@ Don't start from assumptions; read ground truth first, in proportion to the task
 
 **For a surprising behavior, reproduce it before you fix it.** Then ask why until you reach the root cause, and add logging rather than guessing when you're stuck. When you find the cause, look for the same pattern elsewhere. Don't add a guard that only silences the symptom. When something "fails after a restart", suspect stale persistent state (a cache, a lock file, saved state) before the code. And "works after a restart" hides a cause too; find out what changed.
 
-**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call: "The telemetry package is installed; show me the startup call that registers it before calling it integrated." For a claim about running behavior, check what is actually deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
+**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call: "The telemetry package is installed; show me the startup call that registers it before calling it integrated." For a claim about running behavior, check what is deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
 
 **A failed read is about your access until you've checked the instrument.** A request that fails from inside a sandbox, without credentials, or from the wrong network tells you that you couldn't reach the thing, not that the thing is down. Check your access and permissions before reporting an outage or rerunning work.
 

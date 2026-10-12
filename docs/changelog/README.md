@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-12 Principles humanizer pass](2026-10-12-principles-humanizer-pass.md)
 - [2026-10-12 Principles layer](2026-10-12-principles-layer.md)
 - [2026-10-11 Log destination rules](2026-10-11-log-destination-rules.md)
 - [2026-10-09 manage-agents Haiku Workhorse](2026-10-09-manage-agents-haiku-workhorse.md)

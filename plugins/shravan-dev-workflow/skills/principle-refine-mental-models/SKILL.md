@@ -17,11 +17,11 @@ Every piece of work runs on a mental model: a picture of how the system works an
 **For drift, correct the work and say that you did.** Drift fixed silently looks exactly like drift nobody noticed. If the correction can't be cleanly backed out once others build on it (it moves ownership, changes a contract or a stored format, or weakens a proof), stop before it lands and get it agreed.
 
 **For a break, stop building on it.** Don't invent a new seam or shim to push through. Find out whose assumption failed. It is the owner's only if it traces to an explicit owner decision, an existing contract, or a demonstrated technical constraint; a spec or plan an agent wrote is not, on its own, evidence of what the owner wants. Then:
-- an inference you added: drop it and keep what was actually agreed;
+- an inference you added: drop it and keep what was agreed;
 - the owner's assumption, with a repair that keeps every agreed outcome and contract inside the scope: make it, and record what failed and why;
 - the owner's assumption, with a repair that changes an agreed outcome or needs a tradeoff only the owner can make: stop the dependent work and rebuild the model with them, bringing the evidence.
 
-**When fixes keep failing, suspect the premise, not the fixes.** Two or more fixes for one symptom that each failed probably share an assumption. Write that premise down as one sentence every failed fix assumed. Inventory all the observed failures before narrowing to one cause, then challenge the premise against what was actually observed instead of writing another fix that assumes it: "The idle-connection close and the early empty read are two failure paths; fixing the socket close doesn't explain the stream ending early, so list both before changing another timeout."
+**When fixes keep failing, suspect the premise, not the fixes.** Two or more fixes for one symptom that each failed probably share an assumption. Write that premise down as one sentence every failed fix assumed. Inventory all the observed failures before narrowing to one cause, then challenge the premise against what was observed instead of writing another fix that assumes it: "The idle-connection close and the early empty read are two failure paths; fixing the socket close doesn't explain the stream ending early, so list both before changing another timeout."
 
 **Before you reset, find out what changed.** "I restarted it and it's fine now" is a clue, not a resolution. A restart that clears the problem usually means stale state (a cache, a lock file, a long-lived session); a reset without an explanation hides the cause until it returns. "A stale browser made a healthy backend look broken; a fresh, isolated launch showed that, so the startup code didn't need changing."
 
@@ -29,7 +29,7 @@ Every piece of work runs on a mental model: a picture of how the system works an
 
 ## Example: the search assumption that broke
 
-The approved design put fuzzy search on SQLite's trigram index. Review found trigram candidates can't include typo-only matches, so the core feature couldn't work. A full-scan prototype off the main thread met the latency target. That made it a break, not drift: the storage assumption failed at the real query boundary, and it was an approved design decision. The right move was to stop and bring the owner the decision (keep SQLite with a different matcher, or change the storage contract), not to swap storage quietly because a prototype was fast.
+The approved design put fuzzy search on SQLite's trigram index. Review found trigram candidates can't include typo-only matches, so the core feature couldn't work. A full-scan prototype off the main thread met the latency target. That made it a break, not drift: the storage assumption failed at the real query boundary, and it was an approved design decision. The right move was to stop and bring the owner the decision (keep SQLite with a different matcher, or change the storage contract), not to swap storage on its own because a prototype was fast.
 
 IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios, simplest first: the same review comment, again; the backend that wasn't broken; the two sleeps; the fourth refresh; the cards that taught nothing) and return the closest scenario and how its move applies to your case.
 
