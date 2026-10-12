@@ -16,13 +16,13 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is actually deployed? A result from the wrong commit or the wrong directory is evidence about something else.
 
-**Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist. Prefer "run this" to "trust me".
+**Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist: "The helper reports the commands succeeded, but the raw logs it was asked for don't exist, so those receipts can't close the runtime proof." Prefer "run this" to "trust me".
 
 **An intermittent failure needs stronger evidence than a few green reruns.** A test that fails one time in twenty passes three reruns in a row 86% of the time. Force the failing condition to reproduce it on demand, or compare failure rates before and after over enough runs to tell them apart.
 
 **Name what the evidence doesn't cover.** Narrow the claim to what was shown, and list the rest as unverified, with where you looked. Don't round up.
 
-**Treat review findings as claims too.** Open the cited anchor; accept the finding, reject it with evidence, or mark it unverified. Apply only what survives. A comment that sounds diligent can still be wrong or out of scope.
+**Treat review findings as claims too.** Open the cited anchor; accept the finding, reject it with evidence, or mark it unverified. Apply only what survives. A comment that sounds diligent can still be wrong or out of scope: "The reviewer warns of database corruption, but this working-directory fix doesn't touch that contract, so the blocker is rejected after reading the change."
 
 **When a check fails, suspect your observation before the system.** A failed request from a sandbox, a test run in the wrong checkout, or a stale browser tab can make a healthy system look broken.
 
@@ -42,11 +42,11 @@ When there is no result or claim to accept, there is nothing to check. Don't re-
 
 ## Signs you skipped it
 
-- "Should be fine", or "verified" with no observation behind it.
-- Receipts and links counted instead of read; a CI link with no commit.
-- "Done" taken from a summary.
+- "Verified" claimed from a helper's success summary, with no run output anyone can inspect.
+- Receipts and links counted instead of read, or a CI result from another commit or checkout offered as proof for this one.
+- A helper's "done" passed on to review without opening the diff and the proof it was asked for.
 - Review findings applied without opening their anchors.
-- "Ready" with no statement of risk.
+- A pull request called merge-ready with no word on the worst thing it could break.
 - A structural or static check reported as proof of behavior.
 
 Gathering the evidence in the first place is `principle-read-ground-truth-first`. Producing evidence that the feature works end to end is `principle-prove-it-works`.

@@ -24,7 +24,7 @@ Code is communication, and so are designs, instructions, and explanations. They 
 
 **Draw it where structure matters.** Ownership, flow, and state are clearer in a small diagram than in paragraphs. Use one view per question; a diagram that tries to show everything shows nothing.
 
-**Say each thing once.** Give a rule or a decision one home and link to it elsewhere. Cut narration of how the work went and summaries that repeat the section above. Point the next contributor to the existing code that already does the thing, so they don't build a second one.
+**Say each thing once.** Give a rule or a decision one home and link to it elsewhere: "The README says reviewers run in parallel and the skill says one at a time; keep the rule in the skill and make the README point to it." Cut narration of how the work went and summaries that repeat the section above. Point the next contributor to the existing code that already does the thing, so they don't build a second one.
 
 **The hard call is what to leave out.** Completeness is cheap to write and expensive to read. Keep what the reader needs to understand and decide; move detail to references they can open when they need it. Three things never get cut for brevity: the assumption the work leans on, the risk, and what is still unverified. Put them near the top, where a skimming reader will see them.
 
@@ -44,11 +44,12 @@ When a simple module already makes its flow and ownership clear, rearranging it 
 
 ## Signs you skipped it
 
-- The main point arrives in the last paragraph.
-- Names that need a comment to explain what they are.
+- Commands or implementation detail before the decision, why it matters, or what the reader needs to do.
+- A name that hides an effect or a responsibility, so a comment has to say what the call actually does.
 - Terms the reader doesn't use, left undefined.
-- Walls of text where a small diagram or table would do.
-- The same rule restated in several places, or narration of how the work was done.
+- Prose the reader has to turn back into ownership, flow, or state, where a small labeled view would show it directly.
+- The same rule restated in two places that can disagree, or narration of how the work was done.
+- A copy-paste command that fails because its options were never checked against the tool.
 - A reviewer asking "what is this for?"
 
 A clear write-up can still describe the wrong model; checking that the picture is shared is `principle-build-the-shared-model-first`. When the difficulty comes from one module doing several jobs, fix the structure with `principle-separate-the-concerns`, not the prose.

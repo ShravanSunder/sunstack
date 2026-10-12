@@ -16,13 +16,13 @@ Sit in the problem before you reach for answers. Scope is the promise of what yo
 
 **Carry what must stay true.** Scope includes the things the owner already cares about that the change must not break: smooth scrolling while you fix a rendering bug, streaming behavior while you change a transport. List them with the outcome.
 
-**Trace every line to its source.** For each requirement or design element, ask where it came from. There are three answers: the owner asked for it; a constraint forces it (a contract, a law, behavior that must not break, a demonstrated technical limit); or it seemed like a good idea. The third kind is a question for the owner, not a requirement. A spec or plan an agent wrote is not, on its own, evidence of what the owner wants, so a line being in a document doesn't make it authorized. This applies to outcomes, behavior, exclusions, and obligations: the things the owner will judge. A build choice that changes none of those (a function name, an internal structure, how pull requests are grouped) is yours to make; decide it, record why, and keep moving.
+**Trace every line to its source.** For each requirement or design element, ask where it came from. There are three answers: the owner asked for it; a constraint forces it (a contract, a law, behavior that must not break, a demonstrated technical limit); or it seemed like a good idea. The third kind is a question for the owner, not a requirement: "This version gate came from our draft, not from you or a protocol, so it can't be required behavior." A spec or plan an agent wrote is not, on its own, evidence of what the owner wants, so a line being in a document doesn't make it authorized. This applies to outcomes, behavior, exclusions, and obligations: the things the owner will judge. A build choice that changes none of those (a function name, an internal structure, how pull requests are grouped) is yours to make; decide it, record why, and keep moving.
 
 **The hard call is the addition that really does seem necessary**, like a security check, a compatibility guard, or a recovery path. Don't build it silently and don't drop it silently. If a real constraint forces it, cite the constraint. If not, raise it with its cost and let the owner choose. "This doesn't earn its place" is an acceptable answer.
 
 **While doing the work, keep the boundary.** Diagnosis, and the smallest repair needed to deliver the agreed outcome, are in scope even outside the feature's own code. Unrelated cleanup, speculative hardening, and new mechanisms are not: write them down for later and keep going. If a necessary repair needs one of them, bring the evidence and ask. A smallest repair also never crosses these lines without asking: changing agreed behavior, a public contract, who owns something, a stored data format, a security boundary, shared infrastructure, or a required proof. Fixing a shared serializer for one export can silently change another export's output; fix the path you were asked about, and raise the shared change with its other consumers named.
 
-**On every handback, and before calling work done, compare against the owner's lines.** Is each one carried? Was anything invented? Was anything weakened? Weakening is the subtle one: "must" turned into "should", an outcome narrowed to the part that was easy, an exclusion lost.
+**On every handback, and before calling work done, compare against the owner's lines.** Is each one carried? Was anything invented? Was anything weakened? Weakening is the subtle one: "must" turned into "should", an outcome narrowed to the part that was easy, an exclusion lost. Say the comparison out loud: "The request allowed one build and one test per worktree; this design locks the whole machine, which changes the agreed scope."
 
 ## Example: the gate nobody asked for
 
@@ -37,10 +37,10 @@ A small, bounded fix with a clear consumer, outcome, and exclusion needs no rest
 ## Signs you skipped it
 
 - A requirement nobody can point to an owner line or constraint for.
-- "While we're here", "for safety", "for later".
-- Softer verbs between drafts: should, try, attempt, best effort.
+- A new gate or guard justified only "for safety", with no owner decision or contract behind it.
+- An outcome the owner required that becomes "should" or "best effort" in a later draft, with no decision changing it.
 - An exclusion that was in the first draft and isn't in the last.
-- A structure chosen for the builder's convenience rather than the owner's outcome.
+- A delivery split into many pull requests for the builders' convenience, with no dependency or proof reason given.
 - A fix that regresses something the owner already cared about.
 
 Whether two people mean the same thing is `principle-build-the-shared-model-first`. Whether a mechanism earns its place is `principle-justify-the-complexity`.

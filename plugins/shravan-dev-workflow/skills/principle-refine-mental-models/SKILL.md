@@ -21,9 +21,9 @@ Every piece of work runs on a mental model: a picture of how the system works an
 - the owner's assumption, with a repair that keeps every agreed outcome and contract inside the scope: make it, and record what failed and why;
 - the owner's assumption, with a repair that changes an agreed outcome or needs a tradeoff only the owner can make: stop the dependent work and rebuild the model with them, bringing the evidence.
 
-**When fixes keep failing, suspect the premise, not the fixes.** Two or more fixes for one symptom that each failed probably share an assumption. Write that premise down as one sentence every failed fix assumed. Inventory all the observed failures before narrowing to one cause, then challenge the premise against what was actually observed instead of writing another fix that assumes it.
+**When fixes keep failing, suspect the premise, not the fixes.** Two or more fixes for one symptom that each failed probably share an assumption. Write that premise down as one sentence every failed fix assumed. Inventory all the observed failures before narrowing to one cause, then challenge the premise against what was actually observed instead of writing another fix that assumes it: "The idle-connection close and the early empty read are two failure paths; fixing the socket close doesn't explain the stream ending early, so list both before changing another timeout."
 
-**Before you reset, find out what changed.** "I restarted it and it's fine now" is a clue, not a resolution. A restart that clears the problem usually means stale state (a cache, a lock file, a long-lived session); a reset without an explanation hides the cause until it returns.
+**Before you reset, find out what changed.** "I restarted it and it's fine now" is a clue, not a resolution. A restart that clears the problem usually means stale state (a cache, a lock file, a long-lived session); a reset without an explanation hides the cause until it returns. "A stale browser made a healthy backend look broken; a fresh, isolated launch showed that, so the startup code didn't need changing."
 
 **When the same correction keeps coming back, turn it into structure.** Pick the strongest mechanism the situation allows: a state the types can't represent, then a lint or banned API that fails the build, then a shared helper, then a runtime check. Another paragraph of instructions is the weakest guard, because the next reader copies whatever the code already does.
 
@@ -39,10 +39,10 @@ When the evidence confirms the premise and only a local symptom needs fixing, a 
 
 ## Signs you skipped it
 
-- A third fix for the same symptom.
-- "This should have worked."
+- Another fix built on the same premise after earlier fixes failed, without accounting for every observed failure.
+- "This should have worked" still said after the evidence came in, without naming the assumption it contradicts.
 - "It's fine after a restart", with no explanation of what changed.
-- A new shim, flag, or seam added so a surprising behavior fits the plan.
+- A shim or new seam that keeps the old plan alive against contradicting evidence, with the failed assumption never revisited.
 - The same review comment on every pull request.
 - Code bending around something nobody ever discussed.
 

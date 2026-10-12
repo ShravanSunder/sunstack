@@ -16,13 +16,13 @@ Before there is a plan, before there is code, there is a mental model: a shared 
 
 **Put the strongest other reading next to yours.** When a term or a requirement could mean two things, show both and what each would lead to. "You see a pipeline, I see a state machine" tells you something: maybe the design needs entities with a lifecycle that move through stages.
 
-**Separate what you can find out from what only the owner can decide.** Settle discoverable questions yourself from the code, the docs, and the history. Bring the owner only the decisions the evidence can't settle, with your current read attached.
+**Separate what you can find out from what only the owner can decide.** Settle discoverable questions yourself from the code, the docs, and the history. Bring the owner only the decisions the evidence can't settle, with your current read attached: "I'll check how the sidebar stores sessions myself; whether picking a workspace should filter that shared sidebar is your call."
 
 **Say your assumptions about what nobody discussed.** The gaps that hurt most are the ones neither side mentioned. Name the assumption you are making to fill one and ask: "We haven't discussed what happens when this fails. I'm assuming it retries with backoff; same assumption?"
 
 **Test the pictures on one concrete case.** Pick a specific situation where the two pictures might disagree (what happens when someone edits on two devices at once? when the import has a row with no email?) and walk it through both. A concrete case exposes a split that agreeing on general statements hides.
 
-**Check it against the newest word of intent.** A later correction outranks an earlier spec or plan. When resuming work from documents, list what has been corrected since they were written.
+**Check it against the newest word of intent.** A later correction outranks an earlier spec or plan. When resuming work from documents, list what has been corrected since they were written: "The saved plan has the client pull state, but you later decided changes are pushed, so I'm planning from push."
 
 **Confirmation has to be explicit.** Silence, "sounds good", or your own restatement repeated back don't confirm a picture; a specific answer to a specific question does. When several gaps are open, settle first the one whose answer changes the most.
 
@@ -42,10 +42,10 @@ When the model and the question are already agreed and nothing has been correcte
 
 ## Signs you skipped it
 
-- A restatement in the other person's exact words.
-- "Sounds good" on a complex design, with no question asked.
-- Building from a document older than the latest conversation.
+- A restatement that repeats the brief's nouns but never says who owns the state or what happens at the disputed step.
+- Agreement on a complex design while the two pictures still give the same piece of state to different owners.
+- A resumed plan that still carries a decision the owner has since changed.
 - The same correction arriving twice.
-- Being surprised by how someone reacts to your plan.
+- The owner calling a model confusing after you reported it as agreed and ready to build.
 
 Whether the writing conveys the picture is `principle-write-for-the-reader`. What the code actually does is `principle-read-ground-truth-first`, which shared intent can't answer. When reality, not another person, contradicts the picture, use `principle-refine-mental-models`.

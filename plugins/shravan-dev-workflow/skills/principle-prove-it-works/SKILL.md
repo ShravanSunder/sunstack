@@ -18,7 +18,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **Drive the failures the claim covers, too.** When the change touches how errors are handled or shown, the happy path leaves that unproven. Make the failures the claim covers happen through the same entry point (a rejected input, an unreachable dependency), enough to see each distinct error the user can meet arrive and be shown correctly; the detailed cases behind each rule stay in cheaper tests. A change that doesn't touch failure handling doesn't need an unrelated failure staged.
 
-**A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back, not by seeing a success response.
+**A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back (the same message ids, order, and bodies, not the same row count), not by seeing a success response.
 
 **Script it when you can.** A rerunnable check whose output is kept is stronger than a one-time look, because a reviewer can run it again instead of trusting your word.
 
@@ -26,7 +26,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both. A focused green is not "the build is green".
 
-**Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried. And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
+**Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried: "The reconnect fix goes red to green in focused tests; the deployed beta path hasn't been exercised, so that claim stays open." And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
 
 **When the real path isn't reachable from where you are** (it needs a device, a login, production access), use the closest thing through the same entry point, such as a test mode or a staging account. Name exactly what that leaves unverified, and give the owner the exact steps to check the rest themselves.
 
@@ -44,7 +44,7 @@ Pure domain logic with no entry point, viewport, or journey is proven by a focus
 
 ## Signs you skipped it
 
-- "Tests pass, done."
+- A fix called done from unit tests while the symptom the user saw is still there, like placeholders left on screen during fast scrolling.
 - A planned journey reported as if it ran.
 - Screenshots from a different viewport, build, or environment than the claim.
 - Stubs and stand-ins not named as unverified.

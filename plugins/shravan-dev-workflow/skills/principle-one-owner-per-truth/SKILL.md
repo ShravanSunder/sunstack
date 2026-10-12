@@ -10,7 +10,7 @@ Every truth in a system (a status, a balance, a setting, an identity, a lifecycl
 
 ## How to think it through
 
-**For each truth the change touches, ask "who decides this?"** If the answer is two components, pick one owner. The other becomes a reader, or a requester that asks the owner through an operation the owner exposes. Count every path that changes the truth, including discard, delete, undo, and cleanup; a direct delete that skips the owner is a second writer.
+**For each truth the change touches, ask "who decides this?"** If the answer is two components, pick one owner. The other becomes a reader, or a requester that asks the owner through an operation the owner exposes. Count every path that changes the truth, including discard, delete, undo, and cleanup; a direct delete that skips the owner is a second writer: "Undo goes through the coordinator, but two discard paths delete around it, so every committed delete has to retire state at the same owner."
 
 **Put behavior in its owner, not in the convenient module.** Ask where a responsibility belongs before placing its control. A plugin that only needs to start a service shouldn't absorb the service's behavior; the library that owns the service does. An identity belongs to the thing it identifies, not to whichever connection happened to carry it.
 
@@ -36,11 +36,11 @@ When one owner and one caller contract are already explicit and no second writer
 
 ## Signs you skipped it
 
-- Two code paths writing the same field.
-- Sync logic that copies data back and forth between two places.
+- A path that changes the truth around its owner, like a direct delete that skips the coordinator's cleanup and leaves the deleted item still accepting input.
+- Two places that each overwrite the same record, with no rule for which one wins.
 - A cache or copy with no refresh rule.
-- The same schema defined in two files.
+- One message schema maintained by hand on both sides, so a field one side sends the other rejects.
 - Stored values whose meaning changed with no migration or version.
-- "It reverted itself", or behavior placed where it was convenient rather than where it belongs.
+- Behavior placed in a component that can't perform it, like a context menu attached to a view whose native host swallows the click.
 
 For how the parts are cut, see `principle-separate-the-concerns`. For the contract's shape as types, see `principle-types-are-communication`. When two actors must share one truth at the same time, also use `principle-design-for-concurrency`.

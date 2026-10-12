@@ -20,9 +20,9 @@ Every abstraction justifies the complexity it introduces. Each layer, option, me
 
 **Prefer the boring shape.** Three similar statements beat a premature abstraction. A plain function beats a framework, and a constructor argument beats a home-grown dependency-injection container. Keep the call hierarchy flat: if answering "what does this do?" means tracing more than about three layers, flatten it. Before threading a new signal through every type and layer, look for a more direct path.
 
-**Cut over completely.** When you replace an interface, a data format, or a behavioral contract, migrate every caller and delete the old path in the same change: no compatibility shims, no deprecation layers, no feature flags for a gradual migration. Two paths double the bugs, and every later change becomes a choice between them. The way a cutover fails is a consumer nobody counted, so inventory every caller and implementation first, and prove the result compiles and runs, not just that it lints. When a consumer is outside what you can change in one step (stored data, another system, a deployed client), the cutover plan is the owner's decision: don't quietly add a shim, and don't quietly break the consumer.
+**Cut over completely.** When you replace an interface, a data format, or a behavioral contract, migrate every caller and delete the old path in the same change: no compatibility shims, no deprecation layers, no feature flags for a gradual migration. Two paths double the bugs, and every later change becomes a choice between them. The way a cutover fails is a consumer nobody counted ("the old matcher is still called by highlighting and history ranking"), so inventory every caller and implementation first, and prove the result compiles and runs, not just that it lints. When a consumer is outside what you can change in one step (stored data, another system, a deployed client), the cutover plan is the owner's decision: don't quietly add a shim, and don't quietly break the consumer.
 
-**Subtraction has its own failure.** Before deleting something, find out what still uses it. A test, helper, or doc that looks like it belongs to the removed feature may also serve something that stays.
+**Subtraction has its own failure.** Before deleting something, find out what still uses it. A test, helper, or doc that looks like it belongs to the removed feature may also serve something that stays: "This product's tests also exercise the shared backup and gateway code, so remove its own cases and keep the proof that covers what stays."
 
 **The hard call is the layer that looks like overhead but hides something real:** an external protocol, a lifecycle, a policy, a trust boundary. Deleting it moves that complexity into every caller. Ask what a layer hides before you cut it. And sequence the work: prove the core behavior first, then do the discretionary restructuring.
 
@@ -40,11 +40,12 @@ When a layer owns a policy or a lifecycle, hides substantial behavior, or provid
 
 ## Signs you skipped it
 
-- "In case", "for flexibility", "we might need it later".
+- A mechanism no current requirement needs, added or kept "in case", like steering and spooling machinery a protocol no longer uses.
 - An old path still running next to the new one, a compatibility shim, or a flag for a gradual migration.
 - An option nobody sets, or an abstraction with one implementation that removes nothing and serves no seam.
-- A home-grown framework, container, or locator where a function would do.
+- A rewrite or a home-grown framework proposed before anyone measured where the cost is, like a storage-engine rewrite for CPU a driver's lock wait was burning.
 - The same decision repeated across several files.
-- A question that takes more than three layers of tracing to answer.
+- A wrapper with one caller that forwards data unchanged and adds no rule, lifecycle, or check, yet has to be traced to understand the call.
+- A cleanup that also deletes tests or helpers a remaining feature still needs.
 
 When the question is where a boundary belongs, use `principle-separate-the-concerns`. When several options each meet the need and the question is which cost to accept, use `principle-name-the-tradeoffs`. To check the requirements themselves rather than the mechanisms, use `principle-hold-the-scope`.

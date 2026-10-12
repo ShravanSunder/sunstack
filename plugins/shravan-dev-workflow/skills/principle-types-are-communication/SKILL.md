@@ -14,9 +14,9 @@ Types tell the reader what is possible, and the compiler enforces the promise. H
 
 **Narrow by the tag, never by casting.** Checking `kind` (or `state`, or matching the enum) tells the compiler which variant you hold, and that variant's fields become available. No `as`, no `isinstance` ladders, no "I know it's there" assertions.
 
-**Make every consumer handle every state.** A union protects you only if each `switch` or `match` over it is exhaustive: `assertNever` in the default branch in TypeScript, a `match` without a catch-all in Rust. Adding a variant next month then breaks the build exactly where it isn't handled yet.
+**Make every consumer handle every state.** A union protects you only if each `switch` or `match` over it is exhaustive: `assertNever` in the default branch in TypeScript, a `match` without a catch-all in Rust. Adding a variant next month then breaks the build exactly where it isn't handled yet: "We're adding `unknown`, so this switch should stop compiling until each caller decides what unknown means; a catch-all default would hide that decision."
 
-**Build valid shapes instead of checking loose ones.** An id is a newtype whose constructor rejects the empty string; a non-empty list is a first item plus the rest; a time range is a start plus a duration. Validity checked in the constructor is checked once, and every value of the type is valid after that. Give semantic ids their own types: `UserId` and `OrderId` may both be strings underneath, but passing one where the other belongs becomes a compile error.
+**Build valid shapes instead of checking loose ones.** An id is a newtype whose constructor rejects the empty string; a non-empty list is a first item plus the rest; a time range is a start plus a duration. Validity checked in the constructor is checked once, and every value of the type is valid after that. Give semantic ids their own types: `UserId` and `OrderId` may both be strings underneath, but passing one where the other belongs becomes a compile error. A heartbeat destination is a `UserTarget` or a `ChannelTarget`, not a bare number whose meaning the parser has to guess.
 
 **Parse untrusted data once, at the boundary.** Network payloads, files, environment variables, database rows, CLI arguments, and model output are unknown until parsed. Parse them into domain types where they enter, then trust the types inside; don't re-validate deep in business logic. Deserializing checks shape, not meaning, so constructors still reject invalid combinations. A stored value that doesn't parse fails closed with an error naming the field; it never defaults to an enabled or finished state. Keep a separate wire or storage shape only when its job really differs from the domain type.
 
@@ -58,7 +58,7 @@ If a value has one valid representation, comes from inside the system, and no op
 
 - Optional fields that are only valid when another field has a certain value, or `status: string`.
 - Checks like `isDone && !isFailed`, or `isinstance` chains to work out which variant you have.
-- `any`, `as`, `!`, `.unwrap()`, or bare `type: ignore` in production code.
+- `any`, a cast, `!`, `.unwrap()`, or a bare `type: ignore` standing in for a check that never happened, like reading a field of external data before parsing it.
 - Validation repeated deep inside business logic, or a stored value that silently defaults when it doesn't parse.
 - A `switch` over a union with no exhaustive check.
 - Two hand-written types for the same shape.

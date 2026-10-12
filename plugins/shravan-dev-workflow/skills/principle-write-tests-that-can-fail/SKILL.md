@@ -32,9 +32,9 @@ Take a scheduler that should enqueue a reminder when an event comes due. The due
 
 ### Then prove the test can fail
 
-**See it fail for the intended reason before you trust it.** Run it against the old code, or with the fix removed, and read the failure. It must fail because of the wrong behavior you named (a wrong value, or the subject throwing or hanging), not a typo, an empty test discovery, a broken fixture, or an unrelated error. Judge the red by its cause, not by which line reported it. When there's no old bug (a refactor, or behavior that already works), break the behavior on purpose at the part that owns it, watch the test catch the break, and restore it. That shows the test is sensitive, not that a bug existed. This is the red step of red-green.
+**See it fail for the intended reason before you trust it.** Run it against the old code, or with the fix removed, and read the failure. It must fail because of the wrong behavior you named (a wrong value, or the subject throwing or hanging), not a typo, an empty test discovery, a broken fixture, or an unrelated error. Judge the red by its cause, not by which line reported it: "The old reconnect code still resumes after repeated refusals, and that is what turns this test red; a missing test file would have proven nothing about reconnects." When there's no old bug (a refactor, or behavior that already works), break the behavior on purpose at the part that owns it, watch the test catch the break, and restore it. That shows the test is sensitive, not that a bug existed. This is the red step of red-green.
 
-**Test the API you own,** not a workaround around it; reaching into internals while the real API stays untested proves only the workaround. **When no honest seam exists,** use the closest executable check, or improve the seam; a mocked test that can't fail is worse than none, because it looks like coverage.
+**Test the API you own,** not a workaround around it; reaching into internals (reflection around the official transaction API) while the real API stays untested proves only the workaround. **When no honest seam exists,** use the closest executable check, or improve the seam; a mocked test that can't fail is worse than none, because it looks like coverage.
 
 **Count and coverage are not value.** Remove a test that adds no confidence, but only with a replacement, proof it's redundant, or proof its contract is dead.
 
@@ -50,13 +50,13 @@ A renamed constant or a formatting change needs no new scenario. A behavior alre
 
 ## Signs you skipped it
 
-- A new test that passed on its first run, before the fix.
+- A regression test that is green while the known defect is still present, because the harness handles the input before the subject sees it.
 - Assertions only on `toHaveBeenCalled`, `toBeDefined`, or call order, with no observed result.
 - An expected value computed by the code under test.
 - A mock standing in for the very interaction the test is named after.
 - A cross-boundary claim proven only by unit tests, or every edge case repeated end to end.
-- A red caused by a missing file or an unrelated error, reported as red.
+- A red reported when discovery found no target test, or setup failed before the scenario reached the subject.
 - Only positive cases for a feature that is supposed to reject things.
-- A `sleep` waiting for something to happen.
+- A test that sleeps before checking a background result instead of waiting for its completion signal.
 
 Whether the feature works through its real entry point is `principle-prove-it-works`; one automated real-path test can serve both. Whether a passing run supports the conclusion drawn from it is `principle-verify-before-accepting`.

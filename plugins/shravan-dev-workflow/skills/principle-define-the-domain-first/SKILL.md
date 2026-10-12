@@ -17,9 +17,9 @@ Before structure, decide what the things are. Every system has a handful of noun
 - a condition that marks a state boundary ("nothing comes back after close" names a final state);
 - a rule across nouns ("never touch another tenant's ticket").
 
-**For each noun that matters, answer four things:** what it is, in words a user would recognize; its identity rule; its states and what moves it between them (and who can); and how it relates to the other nouns.
+**For each noun that matters, answer four things:** what it is, in words a user would recognize; its identity rule; its states and what moves it between them (and who can); and how it relates to the other nouns. States are where the meaning hides: "Waiting means the process is still alive; completed means the process we started has exited. A quiet terminal is not completion."
 
-**The hard call is identity.** It decides deduplication, joins, primary keys, cache hits, and what "update" means. Test it both ways. If two of these were merged by mistake, would the user call it a bug? Then they are different things, and the identity has to include whatever tells them apart. If one were split into two by mistake (a second reminder for a moved date, a duplicate folder for the same path), would the user call that a bug? Then the identity must leave out whatever changed.
+**The hard call is identity.** It decides deduplication, joins, primary keys, cache hits, and what "update" means. Test it both ways. If two of these were merged by mistake, would the user call it a bug? Then they are different things, and the identity has to include whatever tells them apart. If one were split into two by mistake (a second reminder for a moved date, a duplicate folder for the same path), would the user call that a bug? Then the identity must leave out whatever changed. For a folder cache that sounds like: "A new revision changes the bytes but not which folder this is; a different path is a different folder. So the key holds the path and leaves out the revision."
 
 **One word, one meaning, everywhere:** in the conversation, the spec, the code, and the screen. When a word covers two meanings, split it. When two words name one thing, pick one and use it everywhere. When an authoritative contract or earlier decision already fixes a term, reuse it rather than renaming it for taste.
 
@@ -41,8 +41,8 @@ When an authoritative glossary or contract already fixes a term and nobody uses 
 
 - The same word with two meanings in one document or one codebase.
 - Ids that can be reused for a different thing, or one `id` type for several kinds.
-- A status field that mixes two dimensions ("paid", "shipped", "disputed").
-- A name that needs a comment to say what it is, or a function whose name hides an effect.
-- A cache, join, or dedup that keys on something that isn't the real identity.
+- One status answering two questions, like "done" shown for a terminal that is only idle while the process it started still runs.
+- A function whose name hides its effect: `read_stored_thread` that starts a subscription, `open` that also migrates.
+- A cache that never hits, or a dedup that never matches, because its key includes something that changes while the thing itself doesn't (a revision number on unchanged content).
 
 To make these states and identities into types the compiler checks, use `principle-types-are-communication`. To decide which part owns and writes each one, use `principle-one-owner-per-truth`.

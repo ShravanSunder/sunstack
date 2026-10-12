@@ -26,7 +26,7 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Keep the hot path clear.** The request path forwards first; audit, metrics, and other side effects run in the background. Blocking work (sync file I/O, CPU-heavy steps) goes to a blocking pool or thread, kept to the smallest blocking unit, never onto the async executor. Use one async runtime per process, because a second runtime means rewriting every I/O boundary. Never nest a `block_on`: inside an async runtime it panics or stalls a worker thread. Don't hold a synchronous lock across an `await`: another task on the same thread can need that lock, and the two deadlock.
 
-**The hard call is whether the overlap is real.** Unfinished old work alone doesn't prove unsafe sharing; inspect the actual resource and who touches it. A transiently odd ordering deserves evidence before a change; it may be a symptom of something else. And removing concurrency the work needs is a regression too: serializing requests or tests "to be safe" trades a correctness worry for a slow system. Keep the parallelism and make the shared state safe.
+**The hard call is whether the overlap is real.** Unfinished old work alone doesn't prove unsafe sharing; inspect the actual resource and who touches it: "Old jobs left in the queue don't show unordered writes; check the owner and the post-then-release sequence before adding another lock." A transiently odd ordering deserves evidence before a change; it may be a symptom of something else. And removing concurrency the work needs is a regression too: serializing requests or tests "to be safe" trades a correctness worry for a slow system. Keep the parallelism and make the shared state safe.
 
 ## Example: the response that arrived first
 
@@ -40,8 +40,8 @@ When one actor owns the state and every completion order gives the same result, 
 
 ## Signs you skipped it
 
-- A sleep used to wait for something, in code or in a test; or a polling loop where a signal exists, with no deadline, or that guesses readiness from time.
-- A read-modify-write with no version check.
+- A sleep or a delay treated as "ready", in code or in a test, when a completion signal exists; or polling with no deadline.
+- Two writers that read the same state and overwrite each other, with no transaction, single owner, or version check between them.
 - Responses matched by arrival order.
 - A lock or mutex with no named invariant, or a synchronous lock held across an `await`.
 - A background task nobody tracks, cancels, or drains.

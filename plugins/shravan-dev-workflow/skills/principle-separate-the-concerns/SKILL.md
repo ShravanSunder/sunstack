@@ -16,7 +16,7 @@ Code structure is a reflection of understanding. Every module exists because you
 
 **Keep the core pure and the shell thin.** Business logic is a function from domain values to domain values. Effects (network calls, writes, the current time) live at the edge and are passed in, so the rule can be tested in milliseconds with literal inputs.
 
-**Translate at the boundary, both ways.** Coming in, parse raw data into domain types once and trust them inside. Going out, map storage and transport errors into domain errors, so `sqlx::Error` or a wire type never leaks into callers. Callers should see domain concepts, not the boundary's private representation.
+**Translate at the boundary, both ways.** Coming in, parse raw data into domain types once and trust them inside: parse incoming updates once and hand typed updates to the merge, rather than letting the merge decode the same payload for every item. Going out, map storage and transport errors into domain errors, so `sqlx::Error` or a wire type never leaks into callers. Callers should see domain concepts, not the boundary's private representation.
 
 **The hard call is where to inject.** Dependency injection earns its place at a real seam:
 - an external system or protocol that could change, or that you want to stand in for;
@@ -31,7 +31,7 @@ Not everything should be injected. A dependency with one implementation, no vari
 
 **Before finalizing an interface, write one representative caller.** If the call reads awkwardly, the boundary is in the wrong place. And when a capability belongs to an existing adapter, extend that adapter rather than starting a parallel one.
 
-**Watch shared state.** A part that changes something process-wide (globals, environment, a singleton) that another part relies on has reached outside its job, whatever its file boundary says.
+**Watch shared state.** A part that changes something process-wide (globals, environment, a singleton) that another part relies on has reached outside its job, whatever its file boundary says. Starting the web server must not replace the process-wide `Request` and `Response` that another SDK already relies on.
 
 ## Example: the provider baked into the consumer
 
@@ -45,9 +45,9 @@ A small module with one stable job, no I/O, and one caller needs no interface an
 
 ## Signs you skipped it
 
-- A business rule that can't be tested without the network, the clock, or the framework.
+- A business rule that only runs with the network or the framework attached, or that decodes raw transport data itself instead of receiving typed values.
 - A module edited for two unrelated reasons in recent history.
-- `utils`, `common`, `helpers`, or a 900-line file.
+- A `helpers` or `common` module that mixes provider calls, decoding, and domain rules, so testing one rule needs the whole stack.
 - Storage, transport, or wire types in a domain function's signature.
 - Interfaces with one implementation that hide nothing, a dependency threaded through layers that never use it, or a whole config object passed to a part that reads one field.
 - A component that changes globals or environment at startup.

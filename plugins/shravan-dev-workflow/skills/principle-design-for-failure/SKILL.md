@@ -47,7 +47,7 @@ Build the outcome where the reply arrives: map transport and provider errors int
 
 **Contain a failure where it enters, and surface it.** The failed part is isolated so it can't take the whole app down, and it shows an error state the caller or user can see. Containing never means logging quietly and carrying on as if it worked.
 
-**Assume the last run crashed at any point.** A rerun or restart should converge to the correct end state from whatever was left: look for what already exists, adopt it or clean it up, and only then create.
+**Assume the last run crashed at any point.** A rerun or restart should converge to the correct end state from whatever was left: look for what already exists, adopt it or clean it up, and only then create: "The open request timed out and a lease arrived later, so reconcile by that request's identity before creating another environment."
 
 **Make sure someone notices.** A health check that only pings the process can stay green while every real operation fails. And when the failure behavior is something a user will see, say your assumption out loud ("I'm assuming a timed-out payment shows as pending and retries with the same key; same assumption?") instead of deciding it silently in code.
 
@@ -65,7 +65,7 @@ A pure calculation, or a read that is safe to repeat, cannot half-happen; its fa
 
 - "Add retries", with no answer to "can a retry repeat the effect?"
 - A timeout, a rejection, and a partial result all handled by one catch, or a result type with no way to say "unknown".
-- A catch block that logs and carries on.
+- A failure of a promised effect that is logged while the caller still gets success, with no unresolved outcome shown.
 - Success reported before the durable write, or a reply that made no sense treated as success.
 - A call or retry loop with no deadline.
 - Half-done work nobody owns, a rerun that assumes a clean start, or a health check that stays green while real operations fail.

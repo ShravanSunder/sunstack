@@ -14,13 +14,13 @@ Don't start from assumptions; read ground truth first, in proportion to the task
 
 **Follow the real path, from entry to effect.** Trace a request or a click from where it enters (the handler, the command, the event) to where the effect happens (the write, the response, the message), through the logs and spans if it's running. Which server handles this? Where is that connection actually made? Don't stop at a function whose name suggests the answer; names describe intent, not behavior.
 
-**Read the whole artifact, not the search hit.** The condition three lines up, the early return, the flag read at startup: these change what the line you found means.
+**Read the whole artifact, not the search hit.** The condition three lines up, the early return, the flag read at startup: these change what the line you found means. Read past the first match, too: "Two other callers discard panes without going through the method we found, so the fix belongs where every discard meets."
 
 **Keep what you saw apart from what you infer.** Seen means a file and line, a log entry, an output you ran. Everything else is inferred or guessed, and you say which when you report. A cause you haven't observed is a guess, however likely it seems.
 
 **For a surprising behavior, reproduce it before you fix it.** Then ask why until you reach the root cause, and add logging rather than guessing when you're stuck. When you find the cause, look for the same pattern elsewhere. Don't add a guard that only silences the symptom. When something "fails after a restart", suspect stale persistent state (a cache, a lock file, saved state) before the code. And "works after a restart" hides a cause too; find out what changed.
 
-**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call. For a claim about running behavior, check what is actually deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
+**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call: "The telemetry package is installed; show me the startup call that registers it before calling it integrated." For a claim about running behavior, check what is actually deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
 
 **A failed read is about your access until you've checked the instrument.** A request that fails from inside a sandbox, without credentials, or from the wrong network tells you that you couldn't reach the thing, not that the thing is down. Check your access and permissions before reporting an outage or rerunning work.
 
@@ -40,10 +40,10 @@ If no claim depends on current behavior, such as formatting text you were given,
 
 ## Signs you skipped it
 
-- "It should", "I believe", "presumably" about current behavior.
+- A cause stated as fact from one failed read, like "the service is down" from a request the sandbox blocked, with no check of access.
 - A claim with no file, line, log, or output behind it.
-- A doc cited that is older than the code it describes.
-- A fix applied before the bug was reproduced, or a guard that silences a crash.
+- A diagnosis that credits fixes on the main branch while production runs an older pinned version.
+- A new guard or a restart called "the fix" without showing the failing behavior and the state that caused it.
 - "It's integrated" with no look at where it's called.
 
 Judging whether gathered evidence supports a conclusion is `principle-verify-before-accepting`. Creating new evidence by running something is `principle-experiment-before-proposing`. When what you read contradicts the design's premise, not just a detail, use `principle-refine-mental-models`.
