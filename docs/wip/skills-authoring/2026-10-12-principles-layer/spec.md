@@ -172,31 +172,31 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 
 | Card | Skill | Teaching read | Status |
 | --- | --- | --- | --- |
-| 11 | `principle-design-for-failure` | batch 1 (Advisor, Codex Lead) | implemented |
-| 9 | `principle-separate-the-concerns` | batch 1 (Advisor, Codex Lead) | implemented |
-| 17 | `principle-refine-mental-models` | batch 1 (Advisor, Codex Lead) | implemented |
-| 8 | `principle-types-are-communication` | batch 1 (Advisor, Codex Lead) | implemented |
-| 12 | `principle-design-for-concurrency` | batch 2 (Advisor) | implemented |
-| 10 | `principle-justify-the-complexity` | batch 2 (Advisor) | implemented |
-| 1 | `principle-hold-the-scope` | batch 2 (Advisor) | implemented |
-| 2 | `principle-build-the-shared-model-first` | batch 3 (Advisor) | implemented |
-| 3 | `principle-define-the-domain-first` | batch 3 (Advisor) | implemented |
-| 4 | `principle-read-ground-truth-first` | batch 3 (Advisor) | implemented |
-| 5 | `principle-experiment-before-proposing` | batch 4 (Advisor) | implemented |
-| 6 | `principle-name-the-tradeoffs` | batch 4 (Advisor) | implemented |
-| 7 | `principle-one-owner-per-truth` | batch 4 (Advisor) | implemented |
-| 15 | `principle-verify-before-accepting` | batch 5 (Advisor) | implemented |
-| 16 | `principle-write-for-the-reader` | batch 5 (Advisor) | implemented |
-| 14 | `principle-prove-it-works` | batch 5 (Advisor) | implemented |
-| 13 | `principle-write-tests-that-can-fail` | double-check, then a teaching read (Advisor and Codex Lead, each independent) | implemented |
+| 11 | `principle-design-for-failure` | batch 1 (Advisor, Codex Lead) | reviewed (r2, `639c7918`) |
+| 9 | `principle-separate-the-concerns` | batch 1 (Advisor, Codex Lead) | reviewed (r2, `639c7918`) |
+| 17 | `principle-refine-mental-models` | batch 1 (Advisor, Codex Lead) | reviewed (r2, `639c7918`) |
+| 8 | `principle-types-are-communication` | batch 1 (Advisor, Codex Lead) | reviewed (r2, `639c7918`) |
+| 12 | `principle-design-for-concurrency` | batch 2 (Advisor) | reviewed (r2, `639c7918`) |
+| 10 | `principle-justify-the-complexity` | batch 2 (Advisor) | reviewed (r2, `639c7918`) |
+| 1 | `principle-hold-the-scope` | batch 2 (Advisor) | reviewed (r2, `639c7918`) |
+| 2 | `principle-build-the-shared-model-first` | batch 3 (Advisor) | reviewed (r2, `639c7918`) |
+| 3 | `principle-define-the-domain-first` | batch 3 (Advisor) | reviewed (r2, `639c7918`) |
+| 4 | `principle-read-ground-truth-first` | batch 3 (Advisor) | reviewed (r2, `639c7918`) |
+| 5 | `principle-experiment-before-proposing` | batch 4 (Advisor) | reviewed (r2, `639c7918`) |
+| 6 | `principle-name-the-tradeoffs` | batch 4 (Advisor) | reviewed (r2, `639c7918`) |
+| 7 | `principle-one-owner-per-truth` | batch 4 (Advisor) | reviewed (r2, `639c7918`) |
+| 15 | `principle-verify-before-accepting` | batch 5 (Advisor) | reviewed (r2, `639c7918`) |
+| 16 | `principle-write-for-the-reader` | batch 5 (Advisor) | reviewed (r2, `639c7918`) |
+| 14 | `principle-prove-it-works` | batch 5 (Advisor) | reviewed (r2, `639c7918`) |
+| 13 | `principle-write-tests-that-can-fail` | double-check, then a teaching read (Advisor and Codex Lead, each independent) | reviewed (r2, `639c7918`) |
 
-No run is `reviewed` or `shipped`.
+All 17 runs are `reviewed` (implementation review r2, verdict great at `639c7918`); none is `shipped`.
 
 ## Review record
 
 Spec review, 🦉 Advisor as review lead: teaching checks complete (T1 and T2 fixed at `d9c7fa53` and verified; P1 closed by D19). Structure checks skipped by the owner (D20); their candidates go to the implementation review. Implementation decision: skipped-by-user. Highest risk named by the review: no behavior evidence, and the load and no-load check at release readback is still owed.
 
-Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex Lead as the cross-lineage reviewer.
+Implementation review, round 2 (closed 2026-10-12), 🦉 Advisor as review lead; two fresh Sol xhigh reviewers with no history on the cards (teaching with a transfer read per card; structure, proof and safety), a different lineage from the Claude author. All ten checks complete at `9ba08c85`. Accepted and closed: R1 (stale card-shape text) and R2 (no-quote claims vs D28/D30) at `45c0d959`; T1 (cancellation needs the revision check), T2 (bounded polling of an external status), T3 (transport only when delivery is claimed) at `639c7918`, verified by diff and the teaching reviewer's re-walk. O1 rejected as cosmetic. S1 (security gate recorded after writing) kept as a disclosed note. Verdict: great. Ship decision: source-only; behavior unverified (D19, D21); merge by squash at the owner's call (D30) after PR wrap-up. Report: `tmp/design-skills-lead/reviews/impl-review-principles-step1.md` in the design-skills worktree. Round 1 (pre-rewrite cards, `e48fca95`) is the history below.
 
 ### Review candidates applied by the author (pending the review lead's verification)
 
