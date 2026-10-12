@@ -12,7 +12,7 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Name the invariant first.** "One active session per user." "A held reservation keeps the item hidden." "The latest write wins." Without a stated invariant there is nothing to check an interleaving against, and "add a lock" is just a guess.
 
-**Walk the interleavings that could break it.** What if B runs between A's read and A's write? What if the response to request 1 arrives after the response to request 2? What if a retry overlaps a slow original? What if a release happens before the response is posted? What if a wait wakes up after the condition it waited for has already changed again? That last one means: after waiting, recheck the condition before acting.
+**Walk the interleavings that could break it.** What if B runs between A's read and A's write? What if the response to request 1 arrives after the response to request 2? What if a retry overlaps a slow original? What if a release happens before the response is posted? What if a wait wakes up after the condition it waited for has already changed again? After waiting, recheck the condition before acting. And what if a result arrives for a request that has already been superseded? Carry a request id or a revision with every async read, and drop any answer captured from state that has since moved on, or cancel the superseded request.
 
 **Remove the sharing before you serialize it.** Ask whether the actors need one shared mutable thing, or are each publishing their own facts. Give each actor its own key, file, record, or task, and merge when reading. Two workers writing their own field into one shared state file is still shared mutation; two files merged on read is not.
 
@@ -22,11 +22,11 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Every task has an owner.** Whoever starts background work tracks it, can cancel it cooperatively, and drains it on shutdown; close or await it before claiming the work is done. A fire-and-forget task that must finish is a lost write waiting to happen.
 
-**Bound it.** Fan-out gets a maximum concurrency. Identical work is deduplicated (refresh once per worktree, not once per open tab). Every wait on the hot path has a timeout and a cancellation path.
+**Bound it.** Fan-out gets a maximum concurrency. Identical work is deduplicated (refresh once per worktree, not once per open tab). Every wait on the hot path has a timeout and a cancellation path. When a producer is faster than its consumer (title updates during generation, a stream of test output), coalesce, batch, or chunk it.
 
-**Keep the hot path clear.** The request path forwards first; audit, metrics, and other side effects run in the background. Blocking work (sync file I/O, CPU-heavy steps) goes to a blocking pool or thread, kept to the smallest blocking unit, never onto the async executor. Use one async runtime per process, never a nested `block_on`, and don't hold a synchronous lock across an `await`.
+**Keep the hot path clear.** The request path forwards first; audit, metrics, and other side effects run in the background. Blocking work (sync file I/O, CPU-heavy steps) goes to a blocking pool or thread, kept to the smallest blocking unit, never onto the async executor. Use one async runtime per process, because a second runtime means rewriting every I/O boundary. Never nest a `block_on`: inside an async runtime it panics or stalls a worker thread. Don't hold a synchronous lock across an `await`: another task on the same thread can need that lock, and the two deadlock.
 
-**The hard call is whether the overlap is real.** Unfinished old work alone doesn't prove unsafe sharing; inspect the actual resource and who touches it. And a transiently odd ordering deserves evidence before a change; it may be a symptom of something else.
+**The hard call is whether the overlap is real.** Unfinished old work alone doesn't prove unsafe sharing; inspect the actual resource and who touches it. A transiently odd ordering deserves evidence before a change; it may be a symptom of something else. And removing concurrency the work needs is a regression too: serializing requests or tests "to be safe" trades a correctness worry for a slow system. Keep the parallelism and make the shared state safe.
 
 ## Example: the response that arrived first
 

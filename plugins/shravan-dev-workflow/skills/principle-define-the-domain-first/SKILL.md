@@ -1,40 +1,48 @@
 ---
 name: principle-define-the-domain-first
-description: "Use when a new noun, state, or stored field appears, one word is doing two jobs, or two sources use different words for what may be one thing. Define what each term means, what makes two of them the same, and what changes its state."
+description: "Use when a new noun, state, or stored field appears, one word is doing two jobs, or two sources use different words for what may be one thing. Define what each term means, what makes two of them the same, and what changes its state, before choosing structure."
 disable-model-invocation: true
 ---
 
 # Define the Domain First
 
-**Apply when** a new noun, state, or stored field appears; one word is doing two jobs; or two sources use different words for what may be one thing.
+Before structure, decide what the things are. Every system has a handful of nouns that carry its meaning (an order, a run, a reminder, a session), and each one needs three answers: what it refers to, what makes two of them the same thing, and what states it moves through. Get these right and the types, tables, keys, and APIs mostly follow. Get them wrong and the structure faithfully encodes the confusion: duplicates that should have merged, merges that should have stayed apart, a status that means two things. Names are promises. `processData` is a lie; `classifyBillsByVendorCategory` is a promise. Fixing a meaning early is a rename; fixing it after it is in stored data is a migration.
 
-**Rule.** Define each important term by what it means to the people who use it:
+## How to think it through
 
-- what it refers to;
-- what makes two of them the same thing (its identity);
-- what changes its state.
+**Read what people say as evidence about the nouns.** The owner's sentences already decide most of the meaning if you read them that way:
+- two words used for one thing, or one word for two ("account" as the company and as a person's login);
+- behavior that only makes sense if two instances are different ("a fresh reminder, not the old one");
+- behavior that only makes sense if they are the same ("moving the date moves it, not a second one");
+- a condition that marks a state boundary ("nothing comes back after close" names a final state);
+- a rule across nouns ("never touch another tenant's ticket").
 
-Use one word for one meaning everywhere: the conversation, the spec, the code, the screen. When a word covers two meanings, split it. When two words name one thing, pick one. Names are promises: a name says what the thing does and where it belongs.
+**For each noun that matters, answer four things:** what it is, in words a user would recognize; its identity rule; its states and what moves it between them (and who can); and how it relates to the other nouns.
 
-**Why.** A word with two meanings lets two people agree and build different things. A stored field whose meaning shifts silently corrupts everything stored before. Fixing a meaning early is a rename; fixing it after it is in schemas, APIs, and stored data is a migration.
+**The hard call is identity.** It decides deduplication, joins, primary keys, cache hits, and what "update" means. Ask: if two of these were merged by mistake, would the user call it a bug? If yes, they are different things, and the identity has to include whatever tells them apart.
 
-**The test.**
+**One word, one meaning, everywhere:** in the conversation, the spec, the code, and the screen. When a word covers two meanings, split it. When two words name one thing, pick one and use it everywhere. When an authoritative contract or earlier decision already fixes a term, reuse it rather than renaming it for taste.
 
-1. Can you say what makes two of these the same thing?
-2. Is any word used for two different things, or two words for one?
-3. Would a reader guess what this name does without reading its body?
+**Let names carry the meaning.** Important things get names of two or more words that say what they do and where they belong. Name the effect, not the mechanism: a function called `read_stored_thread` must not subscribe, and an `open` that also migrates is lying. Distinct kinds of identity get distinct type names (`AccountId`, `ReservationId`), never one `id: string` reused across kinds.
 
-**Distinct from.**
+**Know when it's defined enough:** when a stranger reading only your definitions could answer every "is this the same one?" and "what state is it in?" question the work depends on. "The words are obvious" and "the team knows what it means" are the reasons nouns go undefined; neither passes that test.
 
-- `principle-types-are-communication` picks a representation that keeps a meaning; this card fixes the meaning first.
-- `principle-one-owner-per-truth` decides who writes a truth; this card decides what the truth is.
+## Example: the reminder
 
-**Applied means** you name the term you defined, split, or merged, and what it changed downstream: a type, a field, an identifier, a label; or the existing definition you confirmed covers the new use, and where it lives.
+Tickets on hold get a reminder on their due date. The owner said two things in passing: "when a ticket goes back on hold, it's a fresh reminder, not the old one" and "moving the date moves it, not a second one". Read as evidence, those settle the identity: a reminder is one ticket plus the hold that created it. Changing the due date updates the same reminder; a new hold creates a new one. The states follow: pending, then moved, cancelled, or completed. With that written down, "at most one pending reminder per ticket" is testable, and the key for the table is obvious.
 
-## Worked case
+IF the case in front of you doesn't match the reminder example, or you are checking someone else's terms and identities, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
 
-An experiment log reuses the ids X8 and X9 for different runs on different days. A later comparison joins results from two runs under one id and draws a conclusion from mixed data. Better: define what a run is and what makes two runs the same (configuration, date, attempt), and make the id carry that identity, so an id never names a different run. The same move applies to a status like "done" that means both "the process exited" and "the terminal is waiting for input": two meanings, two states.
+## When it doesn't apply
 
-## Overkill
+When an authoritative glossary or contract already fixes a term and nobody uses it differently, reopening its meaning adds nothing. Don't define every noun in a document, only the ones a decision or an obligation depends on.
 
-When an authoritative glossary or contract already fixes a term and nobody uses it differently, reopening its meaning adds nothing. Don't rename a stable public API for taste.
+## Signs you skipped it
+
+- The same word with two meanings in one document or one codebase.
+- Ids that can be reused for a different thing, or one `id` type for several kinds.
+- A status field that mixes two dimensions ("paid", "shipped", "disputed").
+- A name that needs a comment to say what it is, or a function whose name hides an effect.
+- A cache, join, or dedup that keys on something that isn't the real identity.
+
+To make these states and identities into types the compiler checks, use `principle-types-are-communication`. To decide which part owns and writes each one, use `principle-one-owner-per-truth`.

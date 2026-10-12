@@ -49,3 +49,11 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Every task has an owner that tracks it and drains it.
 
 **Better.** Spawn audit writes through a tracker owned by the service. Shutdown drains the tracker before exiting, and tests await it before asserting.
+
+## Search results out of order
+
+**What happened.** A search box sent a request on each keystroke. The response for "a" arrived after the response for "ab", and the screen showed results for "a" while the box said "ab". Each response was correctly matched to its own request; it was simply stale.
+
+**The move.** When a result arrives for a request that has been superseded, drop it.
+
+**Better.** Carry a revision with each async read, and apply an answer only if its revision is still current. Or cancel the superseded request. Keep the requests parallel; serializing them would fix the ordering but make the search slow.

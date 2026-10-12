@@ -16,9 +16,11 @@ Every abstraction justifies the complexity it introduces. Each layer, option, me
 
 **Subtract before you add.** Remove dead code, redundant paths, and decisions repeated in several places, then build on the simpler base. Put a repeated decision in one place and pass its result along.
 
+**Know what an abstraction has to give.** It earns its place when it removes something (branches, duplicated rules, states that shouldn't exist, lifecycle risk) or provides a real seam (an external dependency to replace in a test, a process or trust boundary). An abstraction that adds indirection and gives none of those is the one to cut.
+
 **Prefer the boring shape.** Three similar statements beat a premature abstraction. A plain function beats a framework, and a constructor argument beats a home-grown dependency-injection container. Keep the call hierarchy flat: if answering "what does this do?" means tracing more than about three layers, flatten it. Before threading a new signal through every type and layer, look for a more direct path.
 
-**Cut over completely.** When you replace an interface, a data format, or a behavioral contract, migrate every caller and delete the old path in the same change: no compatibility shims, no deprecation layers, no feature flags for a gradual migration. Two paths double the bugs, and every later change becomes a choice between them. The way a cutover fails is a consumer nobody counted, so inventory every caller and implementation first, and prove the result compiles and runs, not just that it lints.
+**Cut over completely.** When you replace an interface, a data format, or a behavioral contract, migrate every caller and delete the old path in the same change: no compatibility shims, no deprecation layers, no feature flags for a gradual migration. Two paths double the bugs, and every later change becomes a choice between them. The way a cutover fails is a consumer nobody counted, so inventory every caller and implementation first, and prove the result compiles and runs, not just that it lints. When a consumer is outside what you can change in one step (stored data, another system, a deployed client), the cutover plan is the owner's decision: don't quietly add a shim, and don't quietly break the consumer.
 
 **Subtraction has its own failure.** Before deleting something, find out what still uses it. A test, helper, or doc that looks like it belongs to the removed feature may also serve something that stays.
 
@@ -40,7 +42,7 @@ When a layer owns a policy or a lifecycle, hides substantial behavior, or provid
 
 - "In case", "for flexibility", "we might need it later".
 - An old path still running next to the new one, a compatibility shim, or a flag for a gradual migration.
-- An option nobody sets, or an abstraction with one use.
+- An option nobody sets, or an abstraction with one implementation that removes nothing and serves no seam.
 - A home-grown framework, container, or locator where a function would do.
 - The same decision repeated across several files.
 - A question that takes more than three layers of tracing to answer.

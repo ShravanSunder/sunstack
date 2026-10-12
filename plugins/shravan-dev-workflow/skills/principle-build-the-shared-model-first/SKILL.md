@@ -1,40 +1,47 @@
 ---
 name: principle-build-the-shared-model-first
-description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast. Restate the picture and what would prove it wrong before building."
+description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast. Form your own picture, restate it specifically enough to be corrected, and settle the gaps before building."
 disable-model-invocation: true
 ---
 
 # Build the Shared Model First
 
-**Apply when** you are about to build on someone else's picture: a request, a spec, a resumed plan, another agent's handback. Also when agreement on something complex arrives too fast.
+Before there is a plan, before there is code, there is a mental model: a shared picture of how the thing works and why. Two people can agree on the same words and hold different pictures. You see a data pipeline; they see a state machine. That difference surfaces later as rework, at the most expensive moment. Building the shared model means each side forms its own understanding and then compares notes. The value isn't in agreement; it's in the gap between the two pictures, because the gap is exactly what neither side has thought through yet. If you are always in sync, one of you isn't thinking hard enough.
 
-**Rule.** Before building, restate the picture in your own words:
+## How to think it through
 
-- the parts, how they connect, and what is in and out;
-- the one assumption everything leans on, and what would prove it wrong;
-- the strongest other reading, if there is one.
+**Form your own picture first,** from the request and the code, before echoing anyone's: the parts, how they connect, what is in and out, and the one assumption everything leans on.
 
-Check the restatement against the newest word of intent: a later correction outranks an earlier spec or plan. Align on the question (what problem, for whom, what success looks like) before the answer.
+**Restate it in your own words, specific enough to be wrong.** "The importer runs nightly and owns deduplication" can be corrected; "we'll handle imports robustly" can only be nodded at. Echoing the other person's words hides the difference, because the same words can carry both pictures. Say where to correct you: which line, if wrong, changes the design.
 
-**Why.** Two people can agree on the same words and hold different pictures. A restatement exposes the gap while it is cheap; code exposes it after work is built on the wrong picture. Agreement is not the goal. The gap is the information.
+**Put the strongest other reading next to yours.** When a term or a requirement could mean two things, show both and what each would lead to. "You see a pipeline, I see a state machine" tells you something: maybe the design needs entities with a lifecycle that move through stages.
 
-**The test.**
+**Separate what you can find out from what only the owner can decide.** Settle discoverable questions yourself from the code, the docs, and the history. Bring the owner only the decisions the evidence can't settle, with your current read attached.
 
-1. Could the other side correct a specific line of your restatement, or is it so general they can only nod?
-2. Did you name the load-bearing assumption and what would break it?
-3. Is there a later correction, message, or decision that your picture leaves out?
+**Check it against the newest word of intent.** A later correction outranks an earlier spec or plan. When resuming work from documents, list what has been corrected since they were written.
 
-**Distinct from.**
+**Confirmation has to be explicit.** Silence, "sounds good", or your own restatement repeated back don't confirm a picture; a specific answer to a specific question does. When several gaps are open, settle first the one whose answer changes the most.
 
-- `principle-write-for-the-reader` asks whether the writing conveys the picture; this card asks whether you both hold the same picture. When a reader is lost, a read-back tells you which one failed.
-- `principle-read-ground-truth-first` settles what the code actually does. Shared intent can't answer that; read the source.
+**Know the signals to stop and restate:** agreement that arrives instantly on something complex; the same correction twice; "that would be confusing" or "that's not what I meant"; your surprise at someone's reaction; a spec that keeps growing; research chasing a question nobody asked.
 
-**Applied means** you name what the restatement changed: the split you found and how it was settled, or the assumption you confirmed before building.
+**The hard call is when to stop.** Restate where a wrong picture would cost real work: before a design, before a long build, when resuming. Once the picture is confirmed and nothing has changed, build.
 
-## Worked case
+## Example: the stale plan
 
 An agent resumes a long task from a written spec and plan. Since they were written, the owner corrected two decisions in conversation. The agent treats the documents as the authority and builds a day of code and tests against the old contract. Better: before resuming, restate the goal and the governing decisions in a few lines, list the corrections made since the documents were written, and ask the owner to confirm or correct that list. One short read-back catches both corrections.
 
-## Overkill
+IF the case in front of you doesn't match the stale-plan example, or you are checking whether two parties really share a picture, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
 
-When the model and the question are already agreed and nothing has been corrected or left ambiguous, another restatement adds nothing. A small, bounded fix with a clear outcome needs none. Restate where a wrong picture would cost real work, not as a ritual before every step.
+## When it doesn't apply
+
+When the model and the question are already agreed and nothing has been corrected or left ambiguous, another restatement adds nothing. A small, bounded fix with a clear outcome needs none.
+
+## Signs you skipped it
+
+- A restatement in the other person's exact words.
+- "Sounds good" on a complex design, with no question asked.
+- Building from a document older than the latest conversation.
+- The same correction arriving twice.
+- Being surprised by how someone reacts to your plan.
+
+Whether the writing conveys the picture is `principle-write-for-the-reader`. What the code actually does is `principle-read-ground-truth-first`, which shared intent can't answer. When reality, not another person, contradicts the picture, use `principle-refine-mental-models`.
