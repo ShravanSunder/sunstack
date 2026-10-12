@@ -7,7 +7,7 @@ import { createRecordedEvaluator } from "./recorded-evaluator.js";
 
 const input = {
   scenarioId: "recorded-evaluator-test",
-  skillUnderTest: "shravan-dev-workflow:test-skill",
+  skillUnderTest: "sunstack-dev:test-skill",
   mode: "fast",
   prompt: "Use the skill.",
 } satisfies SkillPressureInput;

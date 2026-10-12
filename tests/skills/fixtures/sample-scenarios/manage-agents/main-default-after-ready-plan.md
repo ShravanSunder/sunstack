@@ -1,7 +1,7 @@
 # manage-agents Main-default contact after a ready plan
 
 scenario_id: manage-agents-main-default-after-ready-plan
-skill_under_test: shravan-dev-workflow:manage-agents
+skill_under_test: sunstack-dev:manage-agents
 mode: fast
 expect_read_only: true
 expect_artifact: false
@@ -24,7 +24,7 @@ The plan is ready. One shortcut automatically moves the user's conversation to t
 
 ## Prompt
 
-$shravan-dev-workflow:manage-agents
+$sunstack-dev:manage-agents
 
 Chat only. Main has written and accepted a ready implementation plan for one PR assignment and commissioned a persistent implementation Sidekick. First explain how conversation and execution proceed while I stay in this Main conversation. Then explain what changes if I explicitly ask to talk directly with that assigned Sidekick. Include what happens when implementation reveals a material Specification decision. Do not execute or create files.
 

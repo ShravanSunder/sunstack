@@ -7,7 +7,7 @@ import { executeEvaluatorSequence } from "./execute-evaluator-sequence.js";
 const context = createEvaluatorTestContext({
   input: {
     scenarioId: "sequence-case",
-    skillUnderTest: "shravan-dev-workflow:program-design",
+    skillUnderTest: "sunstack-dev:program-design",
     mode: "fast",
     prompt: "Design the bounded system.",
   },
@@ -17,7 +17,7 @@ const context = createEvaluatorTestContext({
     earlierConversationTurns: [],
     finalResult: {
       scenario_id: "sequence-case",
-      skill_under_test: "shravan-dev-workflow:program-design",
+      skill_under_test: "sunstack-dev:program-design",
       skill_invoked: true,
       mode: "fast",
       read_only: true,

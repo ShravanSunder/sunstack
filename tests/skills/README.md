@@ -3,7 +3,7 @@
 > **Status 2026-10-09:** the scenarios were removed while pressure testing is redesigned; this harness, its evaluator library, and its unit tests stay. `pressure-scenarios/` does not exist until a new scenario is added, so `test:evals` exits 1 with nothing to run. The unit tests read sample copies under `fixtures/sample-scenarios/`.
 
 This harness pressure-tests Codex skills through Codex. Most scenarios cover
-`shravan-dev-workflow`; plugin-specific skill scenarios may live here when they
+`sunstack-dev`; plugin-specific skill scenarios may live here when they
 need the same shortcut-resistance harness.
 
 Default model transport: ACPX with the `codex` adapter

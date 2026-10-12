@@ -46,7 +46,7 @@ DEFAULT_MODEL: str = "jev-latest"
 DEFAULT_YES: float = 0.8
 DEFAULT_TIMEOUT_S: float = 40.0
 OPENROUTER_HEADERS: dict[str, str] = {
-    "HTTP-Referer": "https://github.com/ShravanSunder/ai-tools",
+    "HTTP-Referer": "https://github.com/ShravanSunder/sunstack",
     "X-Title": "ai-tools stop-review jev",
 }
 

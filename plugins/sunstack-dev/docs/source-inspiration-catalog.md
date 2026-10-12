@@ -1,6 +1,6 @@
 # Source Inspiration Catalog
 
-Lite maintainer map for `shravan-dev-workflow` design. **Not** a runtime skill reference — do not load during normal spec, plan, review, or implementation.
+Lite maintainer map for `sunstack-dev` design. **Not** a runtime skill reference — do not load during normal spec, plan, review, or implementation.
 
 ## Full admired-source index (canonical)
 
@@ -54,7 +54,7 @@ Inspected 2026-09-26 at local `cursor-plugins` revision `ecc249f`. Preserve/avoi
 | Security review | Codex curated security skills | Route to `ops-security-review`; keep normal review lanes lightweight |
 | Engineering principles | Pstack `principle-*` leaves and `poteto-mode` index, the owner's own engineering instructions and corrections | `principle-*` cards named from the owner's own phrases; callable by name, not auto-invoked; card shape adapted, no upstream prose copied |
 
-For per-skill borrowed/do-not-copy detail, open the matching file under `ai-dev-skills/docs/my-ai-tools/shravan-dev-workflow/`.
+For per-skill borrowed/do-not-copy detail, open the matching file under `ai-dev-skills/docs/my-ai-tools/sunstack-dev/`.
 
 ## Maintenance Rules
 

@@ -47,7 +47,7 @@ Use `yyyy-mm-dd-name-that-means-something.md`.
 
 Examples:
 
-- `2026-06-09-shravan-dev-workflow-skill-system.md`
+- `2026-06-09-sunstack-dev-skill-system.md`
 - `2026-06-09-devfiles-meta-docs-memory.md`
 
 ## AGENTS.md Pointer

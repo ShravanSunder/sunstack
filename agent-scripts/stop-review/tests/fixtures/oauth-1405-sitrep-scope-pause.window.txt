@@ -26,7 +26,7 @@ I’m pausing at this scope question under discuss-clarify-mental-models: may I 
 
 Earlier turns follow for context.
 USER TURN 127
-$shravan-dev-workflow:discuss-pathfinding $shravan-dev-workflow:discuss-clarify-mental-models
+$sunstack-dev:discuss-pathfinding $sunstack-dev:discuss-clarify-mental-models
 
 ASSISTANT TURN 127 (6 messages, last privileged)
 [earlier] I’ll use both discussion skills to check the shared model before editing: first clarify what we’ve agreed, then ask only if a real choice is still missing.

@@ -5,12 +5,12 @@ A cross-client plugin for scaffolding new projects or retrofitting existing ones
 ## Installation
 
 ```bash
-/plugin marketplace add ShravanSunder/ai-tools
-/plugin install scaffold-project@ai-tools
+/plugin marketplace add ShravanSunder/sunstack
+/plugin install scaffold-project@sunstack
 
 # Codex
 codex plugin marketplace add ~/dev/ai-tools
-codex plugin add scaffold-project@ai-tools
+codex plugin add scaffold-project@sunstack
 ```
 
 ### Managing Plugins

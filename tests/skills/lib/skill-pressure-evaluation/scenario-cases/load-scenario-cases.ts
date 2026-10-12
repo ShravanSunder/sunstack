@@ -11,10 +11,10 @@ import type {
 } from "./scenario-case-types.js";
 
 const REQUIRED_EVALUATOR_SKILLS = new Set([
-  "shravan-dev-workflow:discuss-pathfinding",
-  "shravan-dev-workflow:spec-design",
-  "shravan-dev-workflow:program-design",
-  "shravan-dev-workflow:spec-program-review",
+  "sunstack-dev:discuss-pathfinding",
+  "sunstack-dev:spec-design",
+  "sunstack-dev:program-design",
+  "sunstack-dev:spec-program-review",
 ]);
 
 export async function validateNoOrphanCaseDefinitions(props: {

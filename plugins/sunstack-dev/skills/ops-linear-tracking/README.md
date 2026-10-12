@@ -25,7 +25,7 @@ ops-linear-tracking/
 
 ## Relationship to Other Skills
 
-This skill is owned by the `shravan-dev-workflow` plugin. Codex loads it through the ai-tools Codex marketplace, and Claude Code loads the same skill tree through the ai-tools Claude marketplace.
+This skill is owned by the `sunstack-dev` plugin. Codex loads it through the ai-tools Codex marketplace, and Claude Code loads the same skill tree through the ai-tools Claude marketplace.
 
 ## Prerequisites
 

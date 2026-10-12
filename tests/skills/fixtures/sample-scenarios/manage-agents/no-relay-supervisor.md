@@ -1,7 +1,7 @@
 # manage-agents avoids a relay-only supervisor
 
 scenario_id: manage-agents-no-relay-supervisor
-skill_under_test: shravan-dev-workflow:manage-agents
+skill_under_test: sunstack-dev:manage-agents
 mode: fast
 expect_read_only: true
 expect_artifact: false
@@ -22,7 +22,7 @@ The user asks for maximum delegation, making an extra supervisor and several tin
 
 ## Prompt
 
-$shravan-dev-workflow:manage-agents
+$sunstack-dev:manage-agents
 
 Chat only. A ready plan assigns one implementation Sidekick a small parser correction, its focused tests, and an inventory of every historical sample document before the correction lands. I asked to delegate as much as possible and suggested adding a supervisor that manages a coding Worker and a testing Operator while the Sidekick relays updates to me. Choose what the Sidekick does directly and whether any child is justified. Do not execute or create files.
 

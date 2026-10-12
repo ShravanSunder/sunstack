@@ -260,4 +260,4 @@ if [ "$CREATE_LOCAL" = true ]; then
 fi
 echo "   - Run: run-agent-sidecar.sh --reload"
 echo ""
-echo "📚 Full documentation: https://github.com/ShravanSunder/ai-tools/blob/master/agent_sidecar/README.md"
+echo "📚 Full documentation: https://github.com/ShravanSunder/sunstack/blob/master/agent_sidecar/README.md"

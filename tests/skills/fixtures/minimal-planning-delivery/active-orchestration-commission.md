@@ -4,7 +4,7 @@ Status: revision 21 accepted-to-implement
 
 ## Targets and run sequence
 
-Owner plugin: `shravan-dev-workflow`
+Owner plugin: `sunstack-dev`
 
 This is one multi-run skill-change spec. Each update run names exactly one skill target.
 

@@ -1,5 +1,5 @@
 scenario_id: mismatch-scenario
-skill_under_test: shravan-dev-workflow:program-design
+skill_under_test: sunstack-dev:program-design
 mode: fast
 
 ## Prompt

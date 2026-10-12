@@ -234,6 +234,6 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 - Shared runtime references: [`shared-references/`](shared-references/)
 - Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
 - Source inspiration catalog: [`docs/source-inspiration-catalog.md`](docs/source-inspiration-catalog.md)
-- Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
+- Release smoke and behavioral checks: [`../../docs/changelog/references/sunstack-dev-smoke.md`](../../docs/changelog/references/sunstack-dev-smoke.md)
 - Release notes: [`../../docs/changelog/`](../../docs/changelog/)
 - Maintainer guidance: [`../../AGENTS.md`](../../AGENTS.md)

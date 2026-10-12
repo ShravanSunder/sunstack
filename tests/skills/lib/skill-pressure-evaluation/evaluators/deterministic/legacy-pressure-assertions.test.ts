@@ -7,7 +7,7 @@ import { evaluatePressureAssertions } from "./legacy-pressure-assertions.js";
 const scenario = parseScenarioMarkdown({
   filePath: "/repo/tests/skills/pressure-scenarios/assertions.md",
   markdown: `scenario_id: assertions
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 expect_decision_regex: first decision
 expect_decision_regex: second decision
 expect_proof_regex: proof one
@@ -22,7 +22,7 @@ Ask the agent to use the skill.
 
 const validResult: SkillPressureResult = {
   scenario_id: "assertions",
-  skill_under_test: "shravan-dev-workflow:test-skill",
+  skill_under_test: "sunstack-dev:test-skill",
   skill_invoked: true,
   mode: "fast",
   read_only: true,
@@ -152,7 +152,7 @@ describe("evaluatePressureAssertions", () => {
     const workflowSpineScenario = parseScenarioMarkdown({
       filePath: "/repo/tests/skills/pressure-scenarios/skills-creation-workflow-spine.md",
       markdown: `scenario_id: skills-creation-workflow-spine
-skill_under_test: shravan-dev-workflow:skills-creation
+skill_under_test: sunstack-dev:skills-creation
 expect_decision_regex: classification:\\s*create|classification.{0,40}create
 expect_decision_regex: description:?\\s*use when
 expect_proof_regex: references/frontmatter-design.md.{0,600}carry in.{0,160}return with
@@ -170,7 +170,7 @@ Create one named skill.
       result: {
         ...validResult,
         scenario_id: "skills-creation-workflow-spine",
-        skill_under_test: "shravan-dev-workflow:skills-creation",
+        skill_under_test: "sunstack-dev:skills-creation",
         decision:
           "Start with skill-audit to check overlap. Classification: create. Description: Use when reviewing release notes.",
         coverage_evidence: [
@@ -192,7 +192,7 @@ Create one named skill.
     const evaluateDraftScenario = parseScenarioMarkdown({
       filePath: "/repo/tests/skills/pressure-scenarios/skills-creation-evaluate-draft.md",
       markdown: `scenario_id: skills-creation-evaluate-draft
-skill_under_test: shravan-dev-workflow:skills-creation
+skill_under_test: sunstack-dev:skills-creation
 expect_proof_regex: verdict.{0,80}(targeted-revision|significant-rewrite|reject-or-restart)
 expect_proof_regex: highest risk
 expect_proof_regex: first required revision
@@ -210,7 +210,7 @@ Evaluate this weak draft.
       result: {
         ...validResult,
         scenario_id: "skills-creation-evaluate-draft",
-        skill_under_test: "shravan-dev-workflow:skills-creation",
+        skill_under_test: "sunstack-dev:skills-creation",
         decision:
           "Verdict: great. Blocker: missing workflow spine. Highest risk: proof gap. First required revision: add a workflow. Retest requirement: rerun pressure.",
         coverage_evidence: ["blocker text is present"],
@@ -233,7 +233,7 @@ Evaluate this weak draft.
       filePath:
         "/repo/tests/skills/pressure-scenarios/skills-creation-security-and-cache-boundary.md",
       markdown: `scenario_id: skills-creation-security-and-cache-boundary
-skill_under_test: shravan-dev-workflow:skills-creation
+skill_under_test: sunstack-dev:skills-creation
 expect_proof_regex: skill-security-review.{0,8}md
 expect_proof_regex: license|permission|copy-vs-adapt|rights
 expect_forbidden_regex: nothing is blocked|nothing is deferred|no concern.{0,80}(installed-cache|cache mutation|home)
@@ -249,7 +249,7 @@ Add scripts, hooks, copied assets, and cache refresh after every edit.
       result: {
         ...validResult,
         scenario_id: "skills-creation-security-and-cache-boundary",
-        skill_under_test: "shravan-dev-workflow:skills-creation",
+        skill_under_test: "sunstack-dev:skills-creation",
         decision:
           "Use skill-security-review.md, but nothing is blocked or deferred. There is no concern about installed-cache mutation; refresh after every edit and copy public repo assets wholesale after noting license rights.",
         coverage_evidence: ["permission and copy-vs-adapt words appear"],
@@ -271,7 +271,7 @@ Add scripts, hooks, copied assets, and cache refresh after every edit.
       filePath:
         "/repo/tests/skills/pressure-scenarios/skills-creation-platform-artifact-scale.md",
       markdown: `scenario_id: skills-creation-platform-artifact-scale
-skill_under_test: shravan-dev-workflow:skills-creation
+skill_under_test: sunstack-dev:skills-creation
 expect_proof_regex: platform.{0,3}mechanics(\\.md)?
 expect_forbidden_regex: (static|structural).{0,40}(validation|proof).{0,40}(proves?|counts as|equals|is\\s+(behavior|pressure)).{0,80}(behavior|pressure).{0,40}(proof|evidence)|behavior.{0,40}(proof|evidence).{0,40}(proven by|covered by|satisfied by|is\\s+(static|structural)).{0,80}(static|structural).{0,40}(validation|proof)
 
@@ -286,7 +286,7 @@ Show the workflow and proof path for a shared Codex/Claude skill update.
       result: {
         ...validResult,
         scenario_id: "skills-creation-platform-artifact-scale",
-        skill_under_test: "shravan-dev-workflow:skills-creation",
+        skill_under_test: "sunstack-dev:skills-creation",
         decision:
           "Use platform-mechanics.md. Static validation proves behavior proof for this wording-only change.",
         coverage_evidence: ["platform-mechanics.md"],
@@ -308,7 +308,7 @@ Show the workflow and proof path for a shared Codex/Claude skill update.
     const invalidRegexScenario = parseScenarioMarkdown({
       filePath: "/repo/tests/skills/pressure-scenarios/invalid-regex.md",
       markdown: `scenario_id: invalid-regex
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 expect_proof_regex: (
 
 ## Prompt

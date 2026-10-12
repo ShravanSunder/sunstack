@@ -31,7 +31,7 @@ ASSISTANT TURN 1 (1 messages, last privileged)
 [earlier] Yes—the output-path question is resolved. No clarification needed. I’ll make the contract explicit, then continue wiring and testing the delivery flow.
 
 USER TURN 2
-$shravan-dev-workflow:discuss-pathfinding $shravan-dev-workflow:discuss-clarify-mental-models
+$sunstack-dev:discuss-pathfinding $sunstack-dev:discuss-clarify-mental-models
 
 ASSISTANT TURN 2 (2 messages, last privileged)
 [earlier] I’ll use both discussion skills to check the shared model before editing.
