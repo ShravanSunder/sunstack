@@ -44,7 +44,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Two contracts in conflict
 
-**What happened.** A change made the development server work by altering how the production bridge loaded the front end. The owner: "the bridge takes precedence; don't break the bridge to satisfy the dev server."
+**What happened.** A change made the development server work by altering how the production bridge loaded the front end. The owner set the priority: the production bridge wins, and the dev server adapts to it, not the other way round.
 
 **The move.** When contracts conflict, decide explicitly which one wins.
 

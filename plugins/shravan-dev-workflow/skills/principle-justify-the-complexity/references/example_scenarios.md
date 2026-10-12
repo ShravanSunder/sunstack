@@ -4,7 +4,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The lease nobody asked for
 
-**What happened.** A pull request for a small UI fix also added cross-tab Web Locks and a database lease "to be safe". The owner: "why do I need a database lease in this PR? I did not want Web Locks in this project."
+**What happened.** A pull request for a small UI fix also added cross-tab Web Locks and a database lease "to be safe". The owner asked why the fix needed a lease at all, and had never wanted Web Locks in the project.
 
 **The move.** Map every piece to the outcome that needs it.
 

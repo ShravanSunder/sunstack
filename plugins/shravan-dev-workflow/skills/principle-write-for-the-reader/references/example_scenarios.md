@@ -4,7 +4,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The explanation that didn't help choose
 
-**What happened.** An agent explained two options at length, covering features and caveats, and asked the owner to pick. The owner: "your explanation does not help me make any choices; you didn't explain the architecture or what changes."
+**What happened.** An agent explained two options at length, covering features and caveats, and asked the owner to pick. The owner couldn't choose from it: it never showed the architecture or what each option would change.
 
 **The move.** Start from the reader's decision.
 
@@ -12,7 +12,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## "Adapter seam"
 
-**What happened.** A design doc described a boundary as an "adapter seam". The owner: "I don't know what the hell adapter seam is."
+**What happened.** A design doc described a boundary as an "adapter seam". The owner had no idea what that meant.
 
 **The move.** Use words the reader already uses.
 
@@ -36,7 +36,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The instruction that said what not to do
 
-**What happened.** A prompt for a model listed eight things not to do. The model kept drifting toward exactly those things and never found the intended path. The owner: "keep telling the model what to do, not what not to do."
+**What happened.** A prompt for a model listed eight things not to do. The model kept drifting toward exactly those things and never found the intended path. The owner's correction: tell the model what to do, not what to avoid.
 
 **The move.** Say what to do.
 

@@ -52,7 +52,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The test that slept
 
-**What happened.** A test started a background job, slept two seconds, then checked the result. It passed locally and flaked in CI whenever the machine was busy. The owner: "I don't want more clock-based tests; I want proper tests."
+**What happened.** A test started a background job, slept two seconds, then checked the result. It passed locally and flaked in CI whenever the machine was busy. The owner wanted no more tests that depend on the clock.
 
 **The move.** Wait on a signal, not the clock.
 

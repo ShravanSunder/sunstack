@@ -36,7 +36,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## "Who decided this?"
 
-**What happened.** A plan carried a decision that shaped the whole design. When the owner asked "why? who decided this?", nobody could point to where it came from.
+**What happened.** A plan carried a decision that shaped the whole design. When the owner asked why, and who had decided it, nobody could point to where it came from.
 
 **The move.** Trace a consequential decision to its source the same way you trace code.
 

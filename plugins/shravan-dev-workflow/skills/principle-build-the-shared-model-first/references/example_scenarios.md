@@ -12,7 +12,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The confusing sidebar
 
-**What happened.** A proposal put a workspace list to the left of the repositories, while sessions were filtered by workspace in one place and not in another. The owner: "that would be confusing… let's go over it."
+**What happened.** A proposal put a workspace list to the left of the repositories, while sessions were filtered by workspace in one place and not in another. The owner found it confusing and asked to walk through it before anything was built.
 
 **The move.** When the proposed behavior confuses, revisit the shared model before adjusting the layout.
 

@@ -12,7 +12,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The new process nobody asked about
 
-**What happened.** To speed up one step, an agent rewrote it as a separate helper process in a different language. The owner: "for a big change like the zig one you needed to ask me."
+**What happened.** To speed up one step, an agent rewrote it as a separate helper process in a different language. The owner pointed out that a change that big should have been brought to them first.
 
 **The move.** A new process boundary is a one-way door, so it's the owner's decision.
 
@@ -20,7 +20,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The faster build that slowed startup
 
-**What happened.** A build-time optimization moved work from build to launch. Builds got faster and the app started slower. The owner: "startup time is not something I want longer compared to build time."
+**What happened.** A build-time optimization moved work from build to launch. Builds got faster and the app started slower. The owner cared more about startup time than build time, so the trade went the wrong way.
 
 **The move.** Put what you're trading away on the table, especially what the owner already cares about.
 
@@ -28,7 +28,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## "Too handwavy"
 
-**What happened.** An agent compared two designs as "A is cleaner, B is simpler". The owner: "what's the true cost of complexity between A and B? you're being too handwavy."
+**What happened.** An agent compared two designs as "A is cleaner, B is simpler". The owner asked what each one actually costs in complexity; the comparison was too vague to decide on.
 
 **The move.** Concrete gains and costs, and who pays.
 
@@ -36,7 +36,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Try A and B
 
-**What happened.** For an interaction where feel mattered, the owner said: "I'd like to try A and B, see how it feels; you can ignore tests while we try."
+**What happened.** For an interaction where feel mattered, the owner wanted to try both options and see how each felt, without writing tests until one was chosen.
 
 **The move.** When the question is how something feels or performs, try both instead of arguing.
 
