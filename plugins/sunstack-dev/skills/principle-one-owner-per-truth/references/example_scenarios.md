@@ -54,7 +54,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **What happened.** Right-clicking tab pills in a native toolbar showed no menu, even after the menu was moved between UI components twice. The event was being dropped at the boundary between the native toolbar and the UI framework's scroll view.
 
-**The move.** Put the behavior in the owner that can actually perform it.
+**The move.** Put the behavior in the owner that can perform it.
 
 **Better.** The native host takes ownership of secondary-click routing and presents the menu. Focused tests and a live check confirmed the menu appears and normal tab selection still works.
 

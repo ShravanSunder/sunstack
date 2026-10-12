@@ -6,19 +6,19 @@ disable-model-invocation: true
 
 # Prove It Works
 
-A passing test proves only what it observes. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider actually selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
+A passing test proves only what it observes. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider production selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
 
 ## How to think it through
 
 **State the claim the way the user would see it.** Not "the handler is fixed" but "pressing Enter once submits the search, in the app, with real results". That tells you what to run and where to look.
 
-**Find the real path.** The app, command, endpoint, or page a user actually uses, with the real configuration and the provider production selects, run on representative data: current data, a large diff, the slow case.
+**Find the real path.** The app, command, endpoint, or page a user uses, with the real configuration and the provider production selects, run on representative data: current data, a large diff, the slow case.
 
 **Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. For an API or a library, the user is the calling program: look at the response it gets and the state it can read back. Record what you did and what you saw.
 
 **Drive the failures the claim covers, too.** When the change touches how errors are handled or shown, the happy path leaves that unproven. Make the failures the claim covers happen through the same entry point (a rejected input, an unreachable dependency), enough to see each distinct error the user can meet arrive and be shown correctly; the detailed cases behind each rule stay in cheaper tests. A change that doesn't touch failure handling doesn't need an unrelated failure staged.
 
-**A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back (the same message ids, order, and bodies, not the same row count), not by seeing a success response.
+**A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back: the same message ids, order, and bodies. A success response or a matching row count proves nothing about durability.
 
 **Script it when you can.** A rerunnable check whose output is kept is stronger than a one-time look, because a reviewer can run it again instead of trusting your word.
 
@@ -30,7 +30,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **When the real path isn't reachable from where you are** (it needs a device, a login, production access), use the closest thing through the same entry point, such as a test mode or a staging account. Name exactly what that leaves unverified, and give the owner the exact steps to check the rest themselves.
 
-**The hard call is what counts as the real path.** A dev server with a mocked backend isn't the real path for a backend change. A component test isn't the full window transition. The dev server isn't the shipped bridge. When in doubt, ask what the user's click actually goes through, and make the proof go through that.
+**The hard call is what counts as the real path.** A dev server with a mocked backend isn't the real path for a backend change. A component test isn't the full window transition. The dev server isn't the shipped bridge. When in doubt, ask what the user's click goes through, and make the proof go through that.
 
 ## Example: five green fixes
 

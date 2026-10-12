@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Separate the Concerns
 
-Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation is not about more files. It is about putting a boundary where something really differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
+Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation is not about more files. It is about putting a boundary where something differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
 
 ## How to think it through
 
@@ -16,7 +16,7 @@ Code structure is a reflection of understanding. Every module exists because you
 
 **Keep the core pure and the shell thin.** Business logic is a function from domain values to domain values. Effects (network calls, writes, the current time) live at the edge and are passed in, so the rule can be tested in milliseconds with literal inputs.
 
-**Translate at the boundary, both ways.** Coming in, parse raw data into domain types once and trust them inside: parse incoming updates once and hand typed updates to the merge, rather than letting the merge decode the same payload for every item. Going out, map storage and transport errors into domain errors, so `sqlx::Error` or a wire type never leaks into callers. Callers should see domain concepts, not the boundary's private representation.
+**Translate at the boundary, both ways.** Coming in, parse raw data into domain types once and trust them inside: parse incoming updates once and hand typed updates to the merge, rather than letting the merge decode the same payload for every item. Going out, map storage and transport errors into domain errors, so `sqlx::Error` or a wire type never leaks into callers.
 
 **The hard call is where to inject.** Dependency injection earns its place at a real seam:
 - an external system or protocol that could change, or that you want to stand in for;
@@ -25,7 +25,7 @@ Code structure is a reflection of understanding. Every module exists because you
 - a test that needs to replace the dependency *without changing production behavior* (a seam that changes production mode needs its own review);
 - a stand-in for a piece that isn't ready yet.
 
-Not everything should be injected. A dependency with one implementation, no variation, and no test need is just a function call. Define the interface from the consumer's side (what it needs, not everything the provider can do), and wire the concrete implementation at the composition point for its lifetime: at startup for process-wide things like a provider client, per request for request-scoped things like a session or a database transaction. Don't thread it through layers that never use it.
+Not everything should be injected. A dependency with one implementation, no variation, and no test need is a function call. Define the interface from the consumer's side (what it needs, not everything the provider can do), and wire the concrete implementation at the composition point for its lifetime: at startup for process-wide things like a provider client, per request for request-scoped things like a session or a database transaction. Don't thread it through layers that never use it.
 
 **Hand each part only what it uses.** A module that needs the database URL gets the database URL, not the whole config with the admin key in it; a component that reads one field of the session gets that field. What a part never received, it can't misuse or come to depend on.
 

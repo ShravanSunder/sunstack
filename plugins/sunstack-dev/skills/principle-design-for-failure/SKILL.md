@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 When your code reaches outside itself (a payment provider, another service, a queue, a database someone else reads), a call does not end two ways. It worked; it was rejected; it failed in a way worth retrying; it got partway; or **you don't know**. A timeout, a dropped connection, or a crash puts you in that last ending: the effect may have happened on the other side, may still be happening, or may never happen. "Unknown" is its own outcome. It is not a failure, and it is never a guessed success.
 
-Most expensive production bugs live in the unknown ending. Code written for "worked or failed" quietly treats "don't know" as "failed" and does the thing again: a second charge, a duplicate email, a server created after the caller already gave up. Designing for failure means deciding what each ending looks like, and how the system gets back to a correct state, before you write the happy path. Retries, locks, and idempotency keys are answers; the endings are the question.
+Most expensive production bugs live in the unknown ending. Code written for "worked or failed" treats "don't know" as "failed" and does the thing again: a second charge, a duplicate email, a server created after the caller already gave up. Designing for failure means deciding what each ending looks like, and how the system gets back to a correct state, before you write the happy path. Retries, locks, and idempotency keys are answers; the endings are the question.
 
 ## How to think it through
 
@@ -45,7 +45,7 @@ Build the outcome where the reply arrives: map transport and provider errors int
 
 **Bound every wait.** Every call gets a deadline and can be cancelled; every retry loop has a limit and backoff. A retry the caller is waiting on stops when the caller is gone; work that has already been durably accepted (an intent record, a queued job) keeps going under its own owner, limit, and deadline, because nobody else will finish it. An unbounded wait turns one slow dependency into a stalled system.
 
-**Contain a failure where it enters, and surface it.** The failed part is isolated so it can't take the whole app down, and it shows an error state the caller or user can see. Containing never means logging quietly and carrying on as if it worked.
+**Contain a failure where it enters, and surface it.** The failed part is isolated so it can't take the whole app down, and it shows an error state the caller or user can see. Containing never means logging and carrying on as if it worked.
 
 **Assume the last run crashed at any point.** A rerun or restart should converge to the correct end state from whatever was left: look for what already exists, adopt it or clean it up, and only then create: "The open request timed out and a lease arrived later, so reconcile by that request's identity before creating another environment."
 

@@ -20,7 +20,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Search results out of order
 
-**What happened.** A search box sent a request on each keystroke. The response for "a" arrived after the response for "ab", and the screen showed results for "a" while the box said "ab". Each response was correctly matched to its own request; it was simply stale.
+**What happened.** A search box sent a request on each keystroke. The response for "a" arrived after the response for "ab", and the screen showed results for "a" while the box said "ab". Each response was correctly matched to its own request; it was stale.
 
 **The move.** When a result arrives for a request that has been superseded, drop it.
 

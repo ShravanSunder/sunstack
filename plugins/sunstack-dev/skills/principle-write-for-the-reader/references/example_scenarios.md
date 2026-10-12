@@ -40,7 +40,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** Say what to do.
 
-**Better.** Lead with the action and the result wanted. Keep one prohibition, for the failure that actually happens, and pair it with the positive target.
+**Better.** Lead with the action and the result wanted. Keep one prohibition, for the failure that happens, and pair it with the positive target.
 
 ## Six layers to find a value
 

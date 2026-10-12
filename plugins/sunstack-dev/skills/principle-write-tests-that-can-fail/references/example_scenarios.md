@@ -48,7 +48,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** A wrong oracle is its own bug.
 
-**Better.** Assert what the platform actually does: the text field's current editor holds focus. Check an expected value against the real boundary's documented behavior before "fixing" code to match it.
+**Better.** Assert what the platform does: the text field's current editor holds focus. Check an expected value against the real boundary's documented behavior before "fixing" code to match it.
 
 ## The field the schema didn't know
 

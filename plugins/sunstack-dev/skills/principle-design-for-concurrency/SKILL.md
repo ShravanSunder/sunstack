@@ -18,7 +18,7 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Serialize only for a real single-writer invariant, and do it structurally.** One owner (a single task or actor that holds the state), a transaction, or a compare-and-swap on a version. Conventions and comments are not concurrency control, and "we need a lock" is a smell to check, not a default.
 
-**Order by causal signals, never by time.** Wait on an event, a task handle, or a version, and never infer readiness from elapsed time. When an external system offers only reads (a status endpoint, no callback), poll its authoritative state with a deadline, backoff, cancellation, and a check that it is still the thing you started. In tests, hold a step open or drive a controllable clock to force the bad order; no wall-clock waits. Before choosing a debounce or throttle, find out the current state and when events actually arrive.
+**Order by causal signals, never by time.** Wait on an event, a task handle, or a version, and never infer readiness from elapsed time. When an external system offers only reads (a status endpoint, no callback), poll its authoritative state with a deadline, backoff, cancellation, and a check that it is still the thing you started. In tests, hold a step open or drive a controllable clock to force the bad order; no wall-clock waits. Before choosing a debounce or throttle, find out the current state and when events arrive.
 
 **Every task has an owner.** Whoever starts background work tracks it, can cancel it cooperatively, and drains it on shutdown; close or await it before claiming the work is done. A fire-and-forget task that must finish is a lost write waiting to happen.
 

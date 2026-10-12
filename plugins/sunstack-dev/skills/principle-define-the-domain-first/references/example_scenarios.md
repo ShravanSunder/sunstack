@@ -20,7 +20,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Done or just waiting?
 
-**What happened.** A terminal status showed "done" both when a process the system started had finished and when the terminal was simply waiting at a prompt.
+**What happened.** A terminal status showed "done" both when a process the system started had finished and when the terminal was waiting at a prompt.
 
 **The move.** Two meanings get two states.
 

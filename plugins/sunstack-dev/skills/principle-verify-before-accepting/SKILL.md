@@ -14,7 +14,7 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Check that the evidence observes the claimed thing.** A unit pass doesn't prove runtime behavior; a clean lint doesn't prove it compiles; valid frontmatter doesn't prove a skill teaches; a green suite that never touches the changed module proves nothing about the change. Ask what the evidence could have caught, and whether that includes the failure you care about.
 
-**Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is actually deployed? A result from the wrong commit or the wrong directory is evidence about something else.
+**Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is deployed? A result from the wrong commit or the wrong directory is evidence about something else.
 
 **Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist: "The helper reports the commands succeeded, but the raw logs it was asked for don't exist, so those receipts can't close the runtime proof." Prefer "run this" to "trust me".
 
@@ -28,7 +28,7 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Before calling something ready, say the risk.** What could go wrong if this merged today, and what is the worst thing that could break?
 
-**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that actually proves the claim, not ceremonial gates that prove nothing extra.
+**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that proves the claim, not ceremonial gates that prove nothing extra.
 
 ## Example: the green run on the wrong commit
 
