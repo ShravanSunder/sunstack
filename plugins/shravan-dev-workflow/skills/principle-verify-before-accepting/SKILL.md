@@ -10,13 +10,15 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 ## How to think it through
 
-**State the claim precisely.** Not "it works", but "importing a file with a duplicate email leaves one contact, in the real app, at commit `abc123`". A vague claim can't be checked, so it gets accepted by default.
+**State the claim precisely, and decide what you'd need to see before you read the report.** Not "it works", but "importing a file with a duplicate email leaves one contact, in the real app, at commit `abc123`". A vague claim can't be checked, so it gets accepted by default; and deciding the evidence first keeps the report from setting the bar.
 
 **Check that the evidence observes the claimed thing.** A unit pass doesn't prove runtime behavior; a clean lint doesn't prove it compiles; valid frontmatter doesn't prove a skill teaches; a green suite that never touches the changed module proves nothing about the change. Ask what the evidence could have caught, and whether that includes the failure you care about.
 
 **Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is actually deployed? A result from the wrong commit or the wrong directory is evidence about something else.
 
 **Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist. Prefer "run this" to "trust me".
+
+**An intermittent failure needs stronger evidence than a few green reruns.** A test that fails one time in twenty passes three reruns in a row 86% of the time. Force the failing condition to reproduce it on demand, or compare failure rates before and after over enough runs to tell them apart.
 
 **Name what the evidence doesn't cover.** Narrow the claim to what was shown, and list the rest as unverified, with where you looked. Don't round up.
 

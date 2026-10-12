@@ -49,3 +49,11 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Prove the complete transition at the real boundary.
 
 **Better.** A test at the real window boundary drives the whole Escape transition and asserts both the focus and the preview state. Then check the owner's original observation once in the live app.
+
+## Saved, across a restart
+
+**What happened.** A reply feature claimed messages were saved. The proof drove 18 real HTTP commands (one root annotation and five replies), restarted the backend, and read everything back from SQLite.
+
+**The move.** A durability claim crosses the restart and compares exact identities.
+
+**Better.** That was the right proof. All six messages came back with the same ids, order, and bodies, and no drafts were left behind. A "saved" response before the restart would have proven nothing about durability.

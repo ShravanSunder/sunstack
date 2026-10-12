@@ -49,3 +49,11 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Say each thing once.
 
 **Better.** Give the rule one home and link to it from the other four places. The next change touches one file.
+
+## The command written from memory
+
+**What happened.** A reference documented `acpx codex set effort high` and placed `--format quiet` after the agent name. The tool rejected both: the key is `reasoning_effort`, and `--format` is a global option that comes first.
+
+**The move.** Write only commands you have run or read at their source.
+
+**Better.** Check the tool's help or an accepted run, and write the command exactly as the tool accepted it. Every reader who copies it then gets a working command.

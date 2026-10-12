@@ -16,6 +16,10 @@ A passing test is evidence about the parts it reaches. Proof is the feature work
 
 **Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. Record what you did and what you saw.
 
+**Drive one failure through the real path, too.** Proving the happy path leaves the error handling unproven. Make one realistic failure happen through the same entry point (a rejected input, an unreachable dependency) and observe what the user sees.
+
+**A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back, not by seeing a success response.
+
 **Script it when you can.** A rerunnable check whose output is kept is stronger than a one-time look, because a reviewer can run it again instead of trusting your word.
 
 **Match the proof to the claim, without repeating yourself.** An automated test that drives the real path (an integration test, one of a few end-to-end journeys) can be the proof. Use a manual check for what the suite doesn't establish. A docs or config change needs only the smallest real check. Don't repeat an equivalent validation unless something changed.
@@ -23,6 +27,8 @@ A passing test is evidence about the parts it reaches. Proof is the feature work
 **Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both. A focused green is not "the build is green".
 
 **Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried. And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
+
+**When the real path isn't reachable from where you are** (it needs a device, a login, production access), use the closest thing through the same entry point, such as a test mode or a staging account. Name exactly what that leaves unverified, and give the owner the exact steps to check the rest themselves.
 
 **The hard call is what counts as the real path.** A dev server with a mocked backend isn't the real path for a backend change. A component test isn't the full window transition. The dev server isn't the shipped bridge. When in doubt, ask what the user's click actually goes through, and make the proof go through that.
 
