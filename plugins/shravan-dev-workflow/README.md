@@ -54,6 +54,23 @@ debug-*              root-cause investigation      debug-investigation
 docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
+principle-*          engineering judgment cards    principle-focus-and-scope
+                                                  principle-shared-mental-model-first
+                                                  principle-domain-meaning-first
+                                                  principle-read-ground-truth-first
+                                                  principle-experiment-before-proposing
+                                                  principle-tradeoffs-are-the-work
+                                                  principle-one-owner-per-truth
+                                                  principle-types-and-trust-boundaries
+                                                  principle-separation-of-concerns
+                                                  principle-dont-over-engineer
+                                                  principle-what-happens-when-it-fails
+                                                  principle-concurrency-and-ordering
+                                                  principle-tests-are-executable-claims
+                                                  principle-prove-it-through-the-real-path
+                                                  principle-verify-before-accepting
+                                                  principle-write-for-the-reader
+                                                  principle-fix-the-understanding-first
 ```
 
 ## Workflow Flow
@@ -121,7 +138,7 @@ Codex display titles use the `Category: Action` form (for example, `Discuss: Pat
 
 Use `practices-research` when the next step is to gather evidence: local code/docs, sibling repos, DeepWiki-style repository research, current web/docs, Reader sources, memory, or session logs. It frames bounded research questions, walks source classes in order, labels claim quality, and writes tmp research ledgers for substantial runs. Substantial runs use source-class coverage, primary anchors, and a verified research ledger. It ends with a phase return token for the next owner instead of naming a phase.
 
-Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
+Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals, with principles at the bottom. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
 
 Use `manage-agents` when subordinate AI-agent mechanics are the work: spawning, calling, resuming, steering, queueing, monitoring, or reducing advisors, sidekicks, workers, operators, subagents, and swarms. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent implementation Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned implementation Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `manage-agents` owns roles, classification, the catalog tables, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
 
@@ -163,6 +180,10 @@ Use `implementation-pr-wrapup` to finish the GitHub PR lifecycle after implement
 
 Use `implementation-handoff` when real implementation state exists: branch, diff, changed files, commits, validation output, failed commands, blockers, or risk. It is for continuation, audit, or manual review of work already in motion.
 
+## Principles
+
+Each `principle-*` skill is one engineering judgment, written as a short card: when it applies, the rule, why, a two- or three-question test, the neighbouring principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Call one by name on the work in front of you, for example `principle-what-happens-when-it-fails` on a design with retries. None loads on its own, and no other skill loads one yet. A principle names only sibling principles. The family map is [`shared-references/principles-index.md`](shared-references/principles-index.md).
+
 ## Supporting Skills
 
 - `debug-investigation`: diagnosis-first debugging before fixes. Use it for failing tests, flaky behavior, crashes, regressions, build failures, or unexpected behavior. For long-running infra or batch monitoring, it loads a background-monitoring reference for redacted JSONL/state watchers that are cheap, cancellable, and visible through the agent harness when available.
@@ -190,6 +211,7 @@ Examples:
 
 ```text
 Use discuss-clarify-mental-models to reconverge before writing a spec or plan.
+Use principle-what-happens-when-it-fails on this design and name the decision it changed.
 Use discuss-pathfinding to grill me on tacit requirements or unmade decisions.
 Use spec-design to preserve separate Requirements and Specification identities: authorized Why and observable What.
 Use program-design to turn this specification into structural How.

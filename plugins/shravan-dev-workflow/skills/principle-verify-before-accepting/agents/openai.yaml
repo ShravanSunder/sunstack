@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Verify Before Accepting"
+  short_description: "Check the evidence proves this exact claim"
+  default_prompt: "Use $principle-verify-before-accepting on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

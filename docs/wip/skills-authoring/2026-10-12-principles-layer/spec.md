@@ -1,0 +1,162 @@
+# Skill spec: the principles layer (step 1)
+
+Multi-run skill spec, written by the 🦁 design-skills Lead (claude-local `67681626…`), 2026-10-12. Each run names one `principle-*` skill. The cards are now the skills under `plugins/shravan-dev-workflow/skills/principle-*/`, and the index is `plugins/shravan-dev-workflow/shared-references/principles-index.md`; the draft files they came from were removed once implemented.
+
+## Targets and owner plugin
+
+Owner plugin: `shravan-dev-workflow`. Classification: `create`, behavior-changing, `user-directed intent`.
+
+| Run | Wave | Skill | Also lands in this run |
+| --- | --- | --- | --- |
+| 1 | 1 | `principle-what-happens-when-it-fails` | the family surfaces: the index shared reference, README namespace row, repo AGENTS.md lines (D9), version, manifests, changelog, layer contract test (D17) |
+| 2 | 1 | `principle-shared-mental-model-first` | |
+| 3 | 1 | `principle-separation-of-concerns` | |
+| 4 | 1 | `principle-tests-are-executable-claims` | |
+| 5–17 | 2 | the other 13, named in the index draft | |
+
+Wave 2 was to start after the wave-1 behavior check. With that check deferred (D19), all 17 runs are implemented in one pass and the family ships as one PR (D13); the waves remain only as the spec-review grouping (wave-1 text reviewed here, wave-2 text at implementation review).
+
+## Problem and evidence
+
+- **The owner's goal** (2026-10-11, recorded in the design record): skills should teach how a good engineer thinks, with bookkeeping a small share of the text. Today, engineering judgment lives inside long phase skills and their references, mixed with process bookkeeping, and the owner cannot call one judgment on its own.
+- **The agreed model** (owner, 2026-10-12): three layers. L1 `principle-*` composed how-to-build blocks; L2 phase skills use them at their own altitude; L3 orchestrators force them at named points. `practices-*` and `discuss-*` stay what the owner runs. Step 1 builds only L1.
+- **Grounding.** The 17 principles come from a find, group, and map process over 1,966 atoms from three tiers (the owner's skills and instructions, admired skills, session-log extractions), snapshot `atoms-all.jsonl` sha `8e5a2561f24b`. The full map test placed 1,934 of 1,966 atoms (98.37%); the 32 residuals are 27 domain practices (UI/UX, performance: later domain packs), 2 working practices, and 3 noise. Every one of the owner's 15 strongest habits lands in a principle. Design record: `docs/wip/skills-authoring/2026-10-11-design-skills-first-tranche/redesign/practices-tree.md` in the `docs/sdlc-learning-coverage` worktree (uncommitted, local); private corpus under `~/dev/memory-logs/skills/lessons/2026-10-11-owner-engineering-practices-tree/`.
+- **Card shape evidence.** A written-design ablation of card 11 (no card vs short TOP vs TOP plus depth; VM-provisioning fixture; Luna high ×3 and Sol medium ×2; blind scorers): TOP lifted author scores by +2.0 (Luna) and +2.5 (Sol) of 7; the long depth added +1.33 (Luna) and 0 (Sol), under the +1.5 threshold; critic scores were at ceiling. One fixture; it supports a compact top on that fixture, not the shape for every card. Results: `tmp/design-skills-lead/experiments/ablation-card-11-results.md` in the same worktree.
+- **Prior art.** pstack (`cursor-plugins/pstack`, read in the admired-source checkout): 23 `principle-*` leaves averaging about 256 words, `disable-model-invocation: true`, "Apply when … <rule>" descriptions, an index skill, playbooks that name a principle at a step, and the accountability rule "name each principle and the decision it changed". Adapted, not copied.
+
+## Success definition
+
+When the owner (and, after step 2, a phase or orchestrator) calls a principle by name, the agent applies that one judgment to the work in front of it: it makes, changes, rules out, or confirms a concrete decision it would otherwise get wrong or leave implicit, names that decision, and does not add the principle's machinery where the card's overkill line says it isn't needed. No principle loads on its own.
+
+Observable in the wave-1 check: with the card, authors satisfy more of the card's obligations than without it, by the predeclared threshold, and the good-design controls get no more flags or machinery than without it.
+
+## Decisions
+
+The owner may strike any row. Rows marked *owner* are the owner's decisions; the rest are the Lead's defaults.
+
+| ID | Decision | Rationale |
+| --- | --- | --- |
+| D1 | `principle-*` is the bottom layer. A principle names only sibling principles, never a practice, phase, orchestrator, or tool manual. *owner* | Owner, 2026-10-12. Keeps principles composable by every layer above without cycles. |
+| D2 | User-invocable only. Claude: `disable-model-invocation: true` in `SKILL.md`. Codex: `policy.allow_implicit_invocation: false` in `agents/openai.yaml`. *owner (callable, not auto); encoding: Lead* | Owner-callable, not auto-triggered. Avoids 17 descriptions in every context. pstack ships the same key in shared `SKILL.md`. Known exception: the Codex `skill-creator` quick validator allows only `name`, `description`, `license`, `allowed-tools`, `metadata`, so it will flag the key. The Codex runtime parser ignores unknown keys: confirmed by the Codex Lead in a local `openai/codex` checkout at `7f01a84e` (`codex-rs/skills/src/parser.rs` ignores unmodeled keys, covered by `parser_tests.rs`; the loader reads `policy` from `agents/openai.yaml` separately, and a host test asserts the loaded field is `false`). The behavior that `false` hides the skill from implicit invocation while explicit invocation still works comes from Codex's official docs, not from those tests. Release readback confirms the skills load and stay out of the implicit list on both clients. |
+| D3 | `agents/openai.yaml`: `interface.display_name` "Principle: <Title>", a short description, `default_prompt` "Use $<name> to …", and `policy.allow_implicit_invocation: false`. | Matches the plugin's existing yaml shape plus the Codex policy field. |
+| D4 | Description: "Use when <observable trigger>. <the rule in one clause>." | Repo convention starts with "Use when". For a user-invocable skill the human is the index, so the rule clause helps them pick the right card (pstack lesson). It names a judgment, not a workflow. |
+| D5 | One `SKILL.md`, no references. TOP: Apply when, Rule, Why, The test (2–3 questions), Distinct from, Applied means (about 250–300 words). Then Worked case and Overkill (about 150 words). | Ablation: the short top carries the gain; depth stays short and inline because 150 words do not justify a reference. "Applied means" carries the accountability rule. |
+| D6 | No provenance or source ids in `SKILL.md`. Sources live in this spec. | Deletion test: source lists change no behavior. Keeps private evidence out of the public runtime text. |
+| D7 | The index is a shared reference, `shared-references/principles-index.md`, linked from the README. *agreed scope v2* | It is the family map that step 2's phases and step 3's orchestrators will load. In step 1 its only reader is the owner via the README; the alternative is a maintainer doc until step 2, then a move. |
+| D8 | No stored pressure scenarios; `test:evals` is not run. | Owner decision 2026-10-09 (`docs/changelog/2026-10-09-remove-pressure-scenarios.md`): stored scenarios were removed while pressure testing is redesigned. The repo AGENTS.md line asking for scenarios predates it. Each card's discriminating scenario and control live in the behavior check instead. |
+| D9 | Repo `AGENTS.md`: one sentence in "Skill layers" adding the principle layer, and one family row in "Current Plugin Skills". *owner (one line); second line: Lead* | The owner approved one line. The table says it enumerates "exactly" the runtime surface, so a family row keeps that claim true. No change to the owner's global instructions. |
+| D10 | Version 2.72.1 → 2.74.0 across the three plugin manifests and the Claude and Cursor marketplace entries. | Draft PR #122 already claims 2.73.0 on its branch; distinct content gets a distinct cache key. Whichever PR merges second re-bumps. |
+| D11 | Card 3 stays `principle-say-what-it-means`. *owner* | "Names as proposed." The Advisor's rename default (`principle-model-the-domain`) is put to the owner once, when card 3 is written. |
+| D12 | Worked cases are public-safe, generic cases modeled on private source cases. | The repository is public; source case ids stay in this spec. |
+| D13 | Branch `skills/principles-layer` from main; one PR after wave 2. | The principles do not depend on PR #122. Wave 1 is a proof checkpoint, not a release. |
+| D14 | Wave-2 content basis: each card's index row (when, rule, distinct from) plus its chunk-card trigger, overkill, countercase, and case, in the wave-1 shape. | Their text gets implementation review; the shape is settled by wave 1. |
+| D15 | Each behavior fixture uses a different domain from its card's worked case. | Near-transfer guard from the card-11 amendment (payment case vs VM-provisioning fixture). |
+| D16 | pstack's "build the lever / encode lessons in structure" goes into card 17's depth, not an 18th principle. | Advisor default, revisit after wave 1. |
+| D17 | A static contract test, `tests/skills/lib/principle-layer-contract.test.ts`: every `principle-*` skill has `disable-model-invocation: true`, an `agents/openai.yaml` with `allow_implicit_invocation: false`, names no non-principle skill, appears in the index, and the index names no missing skill. | D1 and D2 are deterministic rules, so code checks them (gate kind: deterministic). Fits the repo's existing contract tests. |
+| D18 | 2026-10-12, supersedes D11 and the v4 names: every principle is named from the owner's own phrases (table below). *owner* | Owner direction: name the principles from the owner's own way of working and thinking. Names the owner already says are names the owner can call without a lookup. Card 3 is `principle-domain-meaning-first` (P-0014: define the domain meaning before choosing structure); pstack's `model-the-domain` is about structures, which card 8 owns. |
+| D19 | 2026-10-12, supersedes the wave-1 behavior check in the proof plan: no behavior runs in step 1. Proof posture: drafted from user intent; behavior not yet evaluated. *owner* | Owner direction: no pressure tests for now, and move toward a PR. The planned protocol and the Codex Lead's prepared fixtures (`/private/tmp/2026-10-principles-wave1-prep-codex-01a118ee/`, unfrozen) stay available for when the owner resumes behavior testing. The PR and changelog name the behavior as unverified. This is the explicit deferred-proof disposition for all 17 runs (spec-review candidate P1). |
+| D20 | 2026-10-12: the remaining spec review (the structure checks) is skipped; all 17 runs are implemented now. *owner* | Owner direction: start writing the principles now, skipping the structure half rather than waiting. The teaching checks had run and their findings were fixed (T1, T2) or closed by D19 (P1). The structure reviewer's candidates carry into the implementation review. |
+| D21 | 2026-10-12, supersedes D17 and the test lines of the proof plan: this change adds and runs no automated tests and no pressure tests. *owner* | Owner direction: no automated tests or pressure tests. The D17 rules (invocation encodings, sibling-only naming, index matches the skills) were checked once by a throwaway script at implementation; no test file was added. |
+
+### D18 names and their sources
+
+Each name is a phrase the owner already uses: a heading or line in the owner's private global instructions, or a correction the owner repeats (P atoms, snapshot `8e5a2561f24b`). The quoted sources are private and live in memory-logs at `skills/authoring/2026-10-12-principles-layer/name-and-card-sources.md`.
+
+| # | Name | Source |
+| --- | --- | --- |
+| 1 | `principle-focus-and-scope` | owner instructions, Curiosity before solutions; P-0002 (the top habit) |
+| 2 | `principle-shared-mental-model-first` | owner instructions, Our Values |
+| 3 | `principle-domain-meaning-first` | P-0014; "names are promises" stays in the rule |
+| 4 | `principle-read-ground-truth-first` | owner instructions, Our Values; W-0084 |
+| 5 | `principle-experiment-before-proposing` | owner direction, 2026-10-11, to experiment and validate every change |
+| 6 | `principle-tradeoffs-are-the-work` | owner instructions heading of the same name |
+| 7 | `principle-one-owner-per-truth` | unchanged; W-0032 |
+| 8 | `principle-types-and-trust-boundaries` | owner instructions, Types are communication; trust boundaries |
+| 9 | `principle-separation-of-concerns` | owner instructions heading, Structure and separation of concerns |
+| 10 | `principle-dont-over-engineer` | P-0044 |
+| 11 | `principle-what-happens-when-it-fails` | owner instructions, Tradeoffs are the work |
+| 12 | `principle-concurrency-and-ordering` | owner instructions, Rust async; P-0058 |
+| 13 | `principle-tests-are-executable-claims` | owner instructions, Testing |
+| 14 | `principle-prove-it-through-the-real-path` | owner instructions, Proof of completion |
+| 15 | `principle-verify-before-accepting` | owner instructions, Our Values; P-0032 |
+| 16 | `principle-write-for-the-reader` | owner instructions, Structure and separation of concerns |
+| 17 | `principle-fix-the-understanding-first` | owner instructions, Reality informs the mental model |
+
+## Per-run surface allocation
+
+| Surface | Every run |
+| --- | --- |
+| Trigger | description (D4), `disable-model-invocation: true`, `agents/openai.yaml` policy (D2, D3) |
+| Main path | the card: Apply when, Rule, Why, The test, Distinct from, Applied means |
+| Depth | inline Worked case and Overkill; no references (D5) |
+| Proof | static checks for all runs; the comparative behavior check for runs 1–4 |
+
+Run 1 also adds the family surfaces listed in the targets table.
+
+## Authoring basis
+
+User-directed intent: owner GO on step 1, 2026-10-12. Each card was written from the owner's private global instructions, owner atoms (P = prompts, W = owner-written skills; snapshot `8e5a2561f24b`), admired-source atoms (B, R), session-log cases (CASE), and pstack principle leaves. The cards quote none of them. Quoted sources: memory-logs `skills/authoring/2026-10-12-principles-layer/name-and-card-sources.md`.
+
+| Card | Sources |
+| --- | --- |
+| 11 what happens when it fails | pilot card (`redesign/pilot-card-11.md` in the design record) and its ablation; chunk card 11 (trigger B-0045; CASE-07-007); owner instructions, Tradeoffs are the work; pstack `principle-make-operations-idempotent`. |
+| 2 shared mental model first | owner instructions, Our Values and Curiosity before solutions; W-0028, W-0030, W-0047; P-0001, P-0003, P-0037, P-0160; chunk card 2 (CASE-05-030, the model for the worked case). |
+| 9 separation of concerns | owner instructions, Structure and separation of concerns, Structure follows responsibility, and the stand-in seam in Execution; chunk card 9 (trigger B-0129; CASE-09-003, behind test question 3); P-0061, P-0066, P-0237, P-0343, P-0348, P-S-0002; pstack `principle-boundary-discipline`. The billing worked case is synthetic. |
+| 13 tests are executable claims | owner instructions, Testing; chunk card 13 (trigger R-0242; CASE-06-051, the model for the worked case); P-0035, P-0050, P-0062, P-0074, P-0329, P-0330; pstack `principle-test-behavior-not-implementation`. |
+| Wave 2 | the index row and chunk card for each principle (D14), the owner atoms mapped to it, and the matching pstack leaf where one exists. |
+
+Citation rules: P atoms are evidence of what the owner pushed on, not stated rules; P-0011 is not used.
+
+## Proof plan
+
+**Proof posture:** drafted from user intent; behavior not yet evaluated (D19). The card-11 shape rests on the earlier one-fixture ablation of the pilot text, not on these cards.
+
+**Static:** `claude plugin validate .` and `codex plugin list --marketplace ai-tools --available --json`; the Codex quick validator per new skill (expected: only the D2 key flag; not run if PyYAML is missing). No test suite runs (D21). Static checks are structural only.
+
+**Behavior, wave 1: deferred by the owner (D19).** Kept as the plan for when behavior testing resumes (to be run by the 🦁 Codex Lead `01a118ee…`, on the card-11 protocol):
+
+- Conditions: a = no card; b = the shipped card text from the branch head, given in the prompt as the skill body.
+- Per card, two tasks: an author task (write the design or plan) and a critic task (review an excerpt with seeded defects and one good-design control).
+- Subjects: fresh Luna high ×3 per condition and task (12 runs per card, 48 in total). Sol medium ×2 on the author task is optional.
+- Scoring: three blind Luna scorers per card on shuffled, unlabeled outputs, against a rubric frozen before any run. The Codex Lead freezes each fixture and rubric from the obligations below.
+- Per model × task cell: the card passes when the author gain is at least 1.5 on a seven-point author rubric, the critic gain is at least 1 of 4 (unless at ceiling, reported as such), and the control is no worse: b adds no flag or machinery to the good-design control more often than a. (Codex Lead pre-freeze correction 2: every author rubric has seven points, so the fixed +1.5 applies.)
+- A failing card gets one revision to its top on the missed obligation, then one rerun. If it still fails, the evidence goes to the owner (keep, cut, or reshape). No card is removed automatically.
+- Card 11 reruns the frozen VM-provisioning fixture with the shipped text (a and b), to check the trimmed depth kept the gain.
+
+**Obligations per card** (rubric seeds; fixtures in a different domain from the worked case, D15):
+
+- **2 shared mental model first.** Fixture: an agent takes over work from a written spec and plan plus a later conversation that corrects two points and uses one ambiguous term; one complex decision was agreed quickly. Author obligations: a restatement specific enough to be corrected line by line; the load-bearing assumption and what would break it; both later corrections override the documents; the ambiguous term or the strongest other reading is surfaced; a specific confirmation question rather than proceeding or a generic "look right?". Control: a settled, small item gets no ritual read-back.
+- **9 separation of concerns.** Fixture: a feature whose current code tangles a core rule with the clock, a database, an external provider, and framework wiring, and where framework startup changes a process-global another part relies on. Author obligations: the core rule is a pure part testable without network, clock, or framework; the provider sits behind one adapter that hides its protocol; time is passed in at the edge; each part's job and reason to change is stated; the global mutation is named and contained. Controls: no interface for single-implementation pure logic; no speculative package split.
+- **13 tests are executable claims.** Fixture: a bug, a proposed fix, and a test harness whose fixture or fake handles the input before the code under test. Author obligations: the scenario is input or event to observable outcome; assertions check outcomes, not calls; a concrete red-then-green procedure that names the expected failure (a written task cannot show that red was observed, so a claimed run scores zero and actual red execution stays unproved by this check); the harness interception is spotted and the input is injected at the real boundary; the cheapest honest layer is chosen; mocks cover only out-of-scope dependencies with realistic contracts. Control: no duplicate test where an existing test at the seam already turns red.
+- **11 what happens when it fails.** The frozen card-11 rubric: author A1–A7; critic D1–D3 plus control C1.
+
+**What the check does not prove:** routing, installed-skill loading, the invocation encodings, or that a phase or orchestrator picks the right principle (steps 2 and 3). Those stay unverified in step 1; release readback covers loading and invocation.
+
+**Review:** spec review now (this document); implementation review of all 17 runs and the family surfaces after static proof, by the 🦉 Advisor (`a6321a2f…`) as review lead with two reviewer agents, at least one of another lineage.
+
+## Coordination
+
+- Base: `main` at `f1c78679`. Branch `skills/principles-layer`, worktree `/Users/shravansunder/dev/ai-tools.skills-principles-layer`.
+- Pending edits elsewhere: draft PR #122 (`skills/design-family-redesign`, head `e2adb45a`) also edits `AGENTS.md`'s skill table, the plugin README, and the version. Whichever merges second resolves those conflicts and re-bumps (D10).
+- Version 2.74.0 (D10). Changelog `docs/changelog/2026-10-12-principles-layer.md` (20 lines or fewer) plus its `docs/changelog/README.md` entry, written in run 1 and updated at wave 2.
+- Admired-source provenance: the `ai-dev-skills` mapping for the pstack-inspired principles is updated at PR wrap-up, not in these runs.
+
+## Non-goals
+
+- No change to any existing skill (practices, discuss, manage-agents, presentation, ops, phases, orchestrators, tool manuals) or shared reference other than the new index.
+- No change to the owner's global instructions.
+- No domain packs (UI/UX with accessibility, performance).
+- No wiring: phases loading principles (step 2), orchestrators forcing them (step 3), practice-to-principle pointers (step 4).
+- No index skill or router; no stored pressure scenarios.
+
+## Run status
+
+| Run | Status | Evidence |
+| --- | --- | --- |
+| 1–17 | implemented | the commit that adds `plugins/shravan-dev-workflow/skills/principle-*/`, the index, README, AGENTS.md, versions, and changelog; implementation review pending |
+
+## Review record
+
+Spec review, 🦉 Advisor as review lead: teaching checks complete (T1 and T2 fixed at `d9c7fa53` and verified; P1 closed by D19). Structure checks skipped by the owner (D20); their candidates go to the implementation review. Implementation decision: skipped-by-user. Highest risk named by the review: no behavior evidence, and the load and no-load check at release readback is still owed.
+
+Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex Lead as the cross-lineage reviewer.

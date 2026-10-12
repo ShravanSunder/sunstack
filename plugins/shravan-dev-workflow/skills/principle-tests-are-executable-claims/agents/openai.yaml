@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Tests Are Executable Claims"
+  short_description: "Scenarios that go red when behavior is wrong"
+  default_prompt: "Use $principle-tests-are-executable-claims on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

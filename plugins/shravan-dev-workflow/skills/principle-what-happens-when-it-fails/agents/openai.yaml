@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: What Happens When It Fails"
+  short_description: "Decide every ending before retries or locks"
+  default_prompt: "Use $principle-what-happens-when-it-fails on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

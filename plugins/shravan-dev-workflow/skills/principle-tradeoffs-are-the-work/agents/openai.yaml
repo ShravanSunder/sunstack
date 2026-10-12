@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Tradeoffs Are the Work"
+  short_description: "Lay out alternatives, costs, and assumptions"
+  default_prompt: "Use $principle-tradeoffs-are-the-work on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

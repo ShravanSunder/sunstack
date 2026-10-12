@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: One Owner per Truth"
+  short_description: "One authoritative owner for each truth and effect"
+  default_prompt: "Use $principle-one-owner-per-truth on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false
