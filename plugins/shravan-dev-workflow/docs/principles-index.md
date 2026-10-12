@@ -10,9 +10,9 @@ A principle is one engineering judgment, written as a short card: when it applie
 
 ## Understand
 
-- `principle-focus-and-scope`. A new request or a design handback. State who it's for, the outcome, and what stays out; then check that every owner line is carried, nothing is invented, and nothing is weakened.
-- `principle-shared-mental-model-first`. About to build on someone else's picture, or agreement came too fast. Restate the model in your own words with what would prove it wrong; align on the question before the answer.
-- `principle-domain-meaning-first`. A new noun, state, or stored field, or a word doing two jobs. Define what each term means, what counts as the same thing, and what changes its state.
+- `principle-hold-the-scope`. A new request or a design handback. State who it's for, the outcome, and what stays out; then check that every owner line is carried, nothing is invented, and nothing is weakened.
+- `principle-build-the-shared-model-first`. About to build on someone else's picture, or agreement came too fast. Restate the model in your own words with what would prove it wrong; align on the question before the answer.
+- `principle-define-the-domain-first`. A new noun, state, or stored field, or a word doing two jobs. Define what each term means, what counts as the same thing, and what changes its state.
 
 ## Find out
 
@@ -21,24 +21,24 @@ A principle is one engineering judgment, written as a short card: when it applie
 
 ## Decide
 
-- `principle-tradeoffs-are-the-work`. A real choice changes complexity, risk, cost, or reversibility. Lay out the real alternatives, what each gains and costs, who pays, and the unstated assumption; one-way doors get more rigor.
+- `principle-name-the-tradeoffs`. A real choice changes complexity, risk, cost, or reversibility. Lay out the real alternatives, what each gains and costs, who pays, and the unstated assumption; one-way doors get more rigor.
 
 ## Shape
 
 - `principle-one-owner-per-truth`. Truth, effects, or guarantees cross a boundary, or stored data changes meaning. Give each truth and effect one authoritative owner, and state what callers may rely on.
-- `principle-types-and-trust-boundaries`. Variants, external input, or authority cross a boundary. Make invalid states unrepresentable, validate once at the edge, and give each crossing the least authority it needs.
-- `principle-separation-of-concerns`. Adding a module, layer, interface, or dependency, or a part changes for two reasons. One job and one reason to change per part; inject dependencies only at real seams.
-- `principle-dont-over-engineer`. Sequencing an addition, refactor, or rewrite, or keeping a mechanism. Remove what no outcome needs, then build on the simpler base; no speculative generality, no dual paths.
+- `principle-constrain-states-and-authority`. Variants, external input, or authority cross a boundary. Make invalid states unrepresentable, validate once at the edge, and give each crossing the least authority it needs.
+- `principle-separate-the-concerns`. Adding a module, layer, interface, or dependency, or a part changes for two reasons. One job and one reason to change per part; inject dependencies only at real seams.
+- `principle-justify-the-complexity`. Adding or keeping a layer, option, mechanism, or second path. Each piece of complexity is justified by an outcome that needs it now; remove the rest, no dual paths.
 
 ## Stress
 
-- `principle-what-happens-when-it-fails`. An effect someone else can see can time out, be retried, partly succeed, or end unseen. Decide every ending, the truth for "did it happen?", and who cleans up, before choosing retries or locks.
-- `principle-concurrency-and-ordering`. Actors, retries, or late results can touch the same resource. Name the invariant, find the interleaving that breaks it, separate the shared thing before serializing it, and order by causal signals, not sleeps.
+- `principle-design-for-failure`. An effect someone else can see can time out, be retried, partly succeed, or end unseen. Decide every ending, the truth for "did it happen?", and who cleans up, before choosing retries or locks.
+- `principle-design-for-concurrency`. Actors already overlap: retries, callbacks, or late results can touch the same resource. Name the invariant, find the interleaving that breaks it, separate the shared thing before serializing it, and order by causal signals, not sleeps.
 
 ## Prove
 
 - `principle-tests-are-executable-claims`. Behavior changes, or a claim rests on tests. Design the scenario that fails if the behavior is wrong, at the cheapest layer that exercises the real interaction, and see it go red first.
-- `principle-prove-it-through-the-real-path`. Before saying it works. Drive the real entry point, artifact, and viewport, and observe the result where the user would.
+- `principle-prove-it-works`. Before saying it works. A passing test is evidence, not proof: drive the real entry point and observe the result where the user would.
 - `principle-verify-before-accepting`. Accepting any result, including your own conclusion. Ask whether this evidence establishes this conclusion, not just whether a receipt exists.
 
 ## Explain
@@ -47,4 +47,4 @@ A principle is one engineering judgment, written as a short card: when it applie
 
 ## Recover
 
-- `principle-fix-the-understanding-first`. Reality surprises you, a fix fails twice on one premise, or the same correction comes twice. Ask what was wrong with the understanding before touching the code; when several fixes share a premise, write the premise down and attack it.
+- `principle-refine-mental-models`. Reality surprises you, a fix fails twice on one premise, or the same correction comes twice. Ask what was wrong with the understanding before touching the code; when several fixes share a premise, write the premise down and attack it.

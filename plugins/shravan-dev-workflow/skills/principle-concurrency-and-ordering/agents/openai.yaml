@@ -1,6 +1,0 @@
-interface:
-  display_name: "Principle: Concurrency and Ordering"
-  short_description: "Find the interleaving that breaks the invariant"
-  default_prompt: "Use $principle-concurrency-and-ordering on the current work and name the decision it made, changed, ruled out, or confirmed."
-policy:
-  allow_implicit_invocation: false

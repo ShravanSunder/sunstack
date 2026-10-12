@@ -8,9 +8,9 @@ Owner plugin: `shravan-dev-workflow`. Classification: `create`, behavior-changin
 
 | Run | Wave | Skill | Also lands in this run |
 | --- | --- | --- | --- |
-| 1 | 1 | `principle-what-happens-when-it-fails` | the family surfaces: the index shared reference, README namespace row, repo AGENTS.md lines (D9), version, manifests, changelog, layer contract test (D17) |
-| 2 | 1 | `principle-shared-mental-model-first` | |
-| 3 | 1 | `principle-separation-of-concerns` | |
+| 1 | 1 | `principle-design-for-failure` | the family surfaces: the index shared reference, README namespace row, repo AGENTS.md lines (D9), version, manifests, changelog, layer contract test (D17) |
+| 2 | 1 | `principle-build-the-shared-model-first` | |
+| 3 | 1 | `principle-separate-the-concerns` | |
 | 4 | 1 | `principle-tests-are-executable-claims` | |
 | 5–17 | 2 | the other 13, named in the index draft | |
 
@@ -32,7 +32,7 @@ Observable in the wave-1 check: with the card, authors satisfy more of the card'
 
 ## Numbering and terms
 
-- **Card N** (1–17) is the principle's number in the index order and the D18 table: 1 focus and scope … 17 fix the understanding first. **Run N** is implementation order (Run status table). They differ: run 3 is card 9. Decisions that say "card 3" or "card 17" mean the card number.
+- **Card N** (1–17) is the principle's number in the index order and the D18 table: 1 hold the scope … 17 refine mental models. **Run N** is implementation order (Run status table). They differ: run 3 is card 9. Decisions that say "card 3" or "card 17" mean the card number.
 - In D14, the chunk-card terms map to card sections: trigger → Apply when; countercase → Distinct from; case → Worked case; overkill → Overkill. No other sections are added.
 
 ## Decisions
@@ -63,6 +63,7 @@ The owner may strike any row. Rows marked *owner* are the owner's decisions; the
 | D20 | 2026-10-12: the remaining spec review (the structure checks) is skipped; all 17 runs are implemented now. *owner* | Owner direction: start writing the principles now, skipping the structure half rather than waiting. The teaching checks had run and their findings were fixed (T1, T2) or closed by D19 (P1). The structure reviewer's candidates carry into the implementation review. |
 | D21 | 2026-10-12, supersedes D17 and the test lines of the proof plan: this change adds and runs no automated tests and no pressure tests. *owner* | Owner direction: no automated tests or pressure tests. The D17 rules (invocation encodings, sibling-only naming, index matches the skills) were checked once by a throwaway script at implementation; no test file was added. |
 | D22 | 2026-10-12, supersedes D7's home: the index lives at `plugins/shravan-dev-workflow/docs/principles-index.md` until a skill loads it; step 2 moves it to `shared-references/` with its first callers. *owner* | Owner direction after the skill-creation audit: follow the shared-reference rule (a shared reference serves two or more active skills; every reference has a caller). The README, AGENTS.md, and changelog link the doc. |
+| D23 | 2026-10-12, supersedes the D18 names (D18's table stays as history): final names, verb-led, chosen by the owner with the Advisor and aligned with the Codex Lead: 1 `principle-hold-the-scope`, 2 `principle-build-the-shared-model-first`, 3 `principle-define-the-domain-first`, 4 `principle-read-ground-truth-first`, 5 `principle-experiment-before-proposing`, 6 `principle-name-the-tradeoffs`, 7 `principle-one-owner-per-truth`, 8 `principle-constrain-states-and-authority`, 9 `principle-separate-the-concerns`, 10 `principle-justify-the-complexity`, 11 `principle-design-for-failure`, 12 `principle-design-for-concurrency`, 13 open (pending testing research; ships as `principle-tests-are-executable-claims` until settled), 14 `principle-prove-it-works`, 15 `principle-verify-before-accepting`, 16 `principle-write-for-the-reader`, 17 `principle-refine-mental-models`. *owner* | Owner direction: verb-led names. Content follows three names: 10 opens with the justification double-check; 12 opens with actors that already overlap (coping, not adding concurrency); 14 opens with a passing test being evidence and proof being the feature working through the real entry point. |
 
 ### D18 names and their sources
 
@@ -164,23 +165,23 @@ Implemented in one pass after D20 rather than one skill per run; each run is acc
 
 | Run | Skill | Content basis | Lead verification (2026-10-12) | Status |
 | --- | --- | --- | --- | --- |
-| 1 | `principle-what-happens-when-it-fails` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 2 | `principle-shared-mental-model-first` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 3 | `principle-separation-of-concerns` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 1 | `principle-design-for-failure` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 2 | `principle-build-the-shared-model-first` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 3 | `principle-separate-the-concerns` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
 | 4 | `principle-tests-are-executable-claims` | wave-1 draft (teaching review; T2 fix) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 5 | `principle-focus-and-scope` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 6 | `principle-domain-meaning-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 5 | `principle-hold-the-scope` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 6 | `principle-define-the-domain-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
 | 7 | `principle-read-ground-truth-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
 | 8 | `principle-experiment-before-proposing` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 9 | `principle-tradeoffs-are-the-work` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 9 | `principle-name-the-tradeoffs` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
 | 10 | `principle-one-owner-per-truth` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 11 | `principle-types-and-trust-boundaries` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 12 | `principle-dont-over-engineer` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 13 | `principle-concurrency-and-ordering` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: distinct-from corrected; caution moved to Overkill | implemented |
-| 14 | `principle-prove-it-through-the-real-path` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
+| 11 | `principle-constrain-states-and-authority` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 12 | `principle-justify-the-complexity` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 13 | `principle-design-for-concurrency` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: distinct-from corrected; caution moved to Overkill | implemented |
+| 14 | `principle-prove-it-works` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
 | 15 | `principle-verify-before-accepting` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
 | 16 | `principle-write-for-the-reader` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 17 | `principle-fix-the-understanding-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| 17 | `principle-refine-mental-models` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
 
 Family surfaces (index, README, AGENTS.md, versions, changelog) landed with run 1. Implementation review is pending for all runs; no run is `reviewed` or `shipped`.
 

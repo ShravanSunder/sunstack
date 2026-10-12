@@ -54,23 +54,23 @@ debug-*              root-cause investigation      debug-investigation
 docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
-principle-*          engineering judgment cards    principle-focus-and-scope
-                                                  principle-shared-mental-model-first
-                                                  principle-domain-meaning-first
+principle-*          engineering judgment cards    principle-hold-the-scope
+                                                  principle-build-the-shared-model-first
+                                                  principle-define-the-domain-first
                                                   principle-read-ground-truth-first
                                                   principle-experiment-before-proposing
-                                                  principle-tradeoffs-are-the-work
+                                                  principle-name-the-tradeoffs
                                                   principle-one-owner-per-truth
-                                                  principle-types-and-trust-boundaries
-                                                  principle-separation-of-concerns
-                                                  principle-dont-over-engineer
-                                                  principle-what-happens-when-it-fails
-                                                  principle-concurrency-and-ordering
+                                                  principle-constrain-states-and-authority
+                                                  principle-separate-the-concerns
+                                                  principle-justify-the-complexity
+                                                  principle-design-for-failure
+                                                  principle-design-for-concurrency
                                                   principle-tests-are-executable-claims
-                                                  principle-prove-it-through-the-real-path
+                                                  principle-prove-it-works
                                                   principle-verify-before-accepting
                                                   principle-write-for-the-reader
-                                                  principle-fix-the-understanding-first
+                                                  principle-refine-mental-models
 ```
 
 ## Workflow Flow
@@ -182,7 +182,7 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## Principles
 
-Each `principle-*` skill is one engineering judgment, written as a short card: when it applies, the rule, why, a two- or three-question test, the neighbouring principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Call one by name on the work in front of you, for example `principle-what-happens-when-it-fails` on a design with retries. None loads on its own, and no other skill loads one yet. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
+Each `principle-*` skill is one engineering judgment, written as a short card: when it applies, the rule, why, a two- or three-question test, the neighbouring principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. None loads on its own, and no other skill loads one yet. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
 
 ## Supporting Skills
 
@@ -211,7 +211,7 @@ Examples:
 
 ```text
 Use discuss-clarify-mental-models to reconverge before writing a spec or plan.
-Use principle-what-happens-when-it-fails on this design and name the decision it changed.
+Use principle-design-for-failure on this design and name the decision it changed.
 Use discuss-pathfinding to grill me on tacit requirements or unmade decisions.
 Use spec-design to preserve separate Requirements and Specification identities: authorized Why and observable What.
 Use program-design to turn this specification into structural How.

@@ -20,8 +20,8 @@ disable-model-invocation: true
 
 **Distinct from.**
 
-- `principle-separation-of-concerns` decides how the parts are cut; this card decides who decides and writes. Either can be right while the other is wrong.
-- `principle-types-and-trust-boundaries` decides whether an untrusted caller may cause an effect at all.
+- `principle-separate-the-concerns` decides how the parts are cut; this card decides who decides and writes. Either can be right while the other is wrong.
+- `principle-constrain-states-and-authority` decides whether an untrusted caller may cause an effect at all.
 
 **Applied means** you name the owner you assigned or the second writer you removed, and the contract callers can now rely on; or the existing owner you confirmed is the only writer, and how you checked.
 

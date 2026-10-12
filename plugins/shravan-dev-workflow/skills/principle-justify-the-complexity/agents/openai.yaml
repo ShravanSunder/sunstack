@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Justify the Complexity"
+  short_description: "Each piece of complexity earns its place"
+  default_prompt: "Use $principle-justify-the-complexity on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

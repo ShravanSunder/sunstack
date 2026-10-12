@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Hold the Scope"
+  short_description: "Frame who it's for and hold the scope"
+  default_prompt: "Use $principle-hold-the-scope on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

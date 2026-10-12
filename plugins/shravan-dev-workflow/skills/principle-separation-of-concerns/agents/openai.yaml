@@ -1,6 +1,0 @@
-interface:
-  display_name: "Principle: Separation of Concerns"
-  short_description: "One job per part; inject at real seams"
-  default_prompt: "Use $principle-separation-of-concerns on the current work and name the decision it made, changed, ruled out, or confirmed."
-policy:
-  allow_implicit_invocation: false

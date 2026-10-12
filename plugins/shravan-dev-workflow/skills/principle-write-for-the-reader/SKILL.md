@@ -20,8 +20,8 @@ disable-model-invocation: true
 
 **Distinct from.**
 
-- `principle-shared-mental-model-first`: a clear write-up can still describe the wrong model; a read-back with the owner checks the picture.
-- `principle-separation-of-concerns`: when the difficulty comes from one module doing several jobs, fix the structure, not the prose.
+- `principle-build-the-shared-model-first`: a clear write-up can still describe the wrong model; a read-back with the owner checks the picture.
+- `principle-separate-the-concerns`: when the difficulty comes from one module doing several jobs, fix the structure, not the prose.
 
 **Applied means** you name what you cut, reordered, or drew, and the reader question it answers.
 

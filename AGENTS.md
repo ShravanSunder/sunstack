@@ -145,7 +145,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | skill-audit | `plugins/skill-authoring/skills/skill-audit/` | Evidence-backed portfolio audits using current plugin inventory, session patterns, and upstream inspirations |
 | presentation-tui | `plugins/shravan-dev-workflow/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
 | presentation-webui | `plugins/shravan-dev-workflow/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
-| principle-* (17) | `plugins/shravan-dev-workflow/skills/principle-*/` | Callable engineering judgment cards, one judgment each (for example `principle-what-happens-when-it-fails`); not auto-invoked; family map in `plugins/shravan-dev-workflow/docs/principles-index.md` |
+| principle-* (17) | `plugins/shravan-dev-workflow/skills/principle-*/` | Callable engineering judgment cards, one judgment each (for example `principle-design-for-failure`); not auto-invoked; family map in `plugins/shravan-dev-workflow/docs/principles-index.md` |
 | ops-linear-tracking | `plugins/shravan-dev-workflow/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |
 | peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common — works in both Claude and Codex) |
 | scaffold-project | `plugins/ai-scaffold/skills/scaffold-project/` | Project scaffolding (common) |

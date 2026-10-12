@@ -27,7 +27,7 @@ A true quote, a real receipt, or a green run can still support the wrong claim. 
 **Distinct from.**
 
 - `principle-read-ground-truth-first` gathers the evidence; this card judges it.
-- `principle-prove-it-through-the-real-path` produces runtime evidence; this card checks the claim made from it.
+- `principle-prove-it-works` produces runtime evidence; this card checks the claim made from it.
 
 **Applied means** you name the claim you accepted, narrowed, or rejected, and the evidence that decided it.
 

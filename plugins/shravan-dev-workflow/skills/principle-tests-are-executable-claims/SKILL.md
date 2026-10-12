@@ -20,7 +20,7 @@ disable-model-invocation: true
 
 **Distinct from.**
 
-- `principle-prove-it-through-the-real-path` drives the real entry point and journey; this card asks whether a scenario can expose the defect. Choose by the claim, not by "unit vs end-to-end". One automated real-path test can serve both.
+- `principle-prove-it-works` drives the real entry point and journey; this card asks whether a scenario can expose the defect. Choose by the claim, not by "unit vs end-to-end". One automated real-path test can serve both.
 - `principle-verify-before-accepting` judges whether passing evidence supports the conclusion drawn from it.
 
 **Applied means** you name the scenario, the layer you chose and why it is the cheapest honest one, and the red you saw before the green, or the deliberate break it caught.

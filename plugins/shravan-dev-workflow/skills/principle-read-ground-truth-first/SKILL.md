@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 - `principle-verify-before-accepting` judges whether gathered evidence supports a conclusion; this card gathers the evidence.
 - `principle-experiment-before-proposing` creates new evidence by running something; this card reads what exists.
-- `principle-fix-the-understanding-first` takes over when what you read contradicts the design's premise, not just a detail.
+- `principle-refine-mental-models` takes over when what you read contradicts the design's premise, not just a detail.
 
 **Applied means** you name the source you read and the claim it changed or confirmed.
 

@@ -27,7 +27,7 @@ Make the smallest change that tests the hypothesis.
 **Distinct from.**
 
 - `principle-read-ground-truth-first` reads evidence that already exists; this card creates new evidence.
-- `principle-tradeoffs-are-the-work` takes over when both options already satisfy the evidence and the question is which cost to accept; a run won't settle that.
+- `principle-name-the-tradeoffs` takes over when both options already satisfy the evidence and the question is which cost to accept; a run won't settle that.
 
 **Applied means** you name the hypothesis, the run and its result, and the decision the result changed or confirmed, with the reason.
 
