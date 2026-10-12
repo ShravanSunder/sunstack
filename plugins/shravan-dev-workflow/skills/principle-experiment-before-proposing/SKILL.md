@@ -29,7 +29,7 @@ Make the smallest change that tests the hypothesis.
 - `principle-read-ground-truth-first` reads evidence that already exists; this card creates new evidence.
 - `principle-tradeoffs-are-the-work` takes over when both options already satisfy the evidence and the question is which cost to accept; a run won't settle that.
 
-**Applied means** you name the hypothesis, the run, and the decision its result changed.
+**Applied means** you name the hypothesis, the run and its result, and the decision the result changed or confirmed, with the reason.
 
 ## Worked case
 
@@ -37,4 +37,4 @@ A change claims to make startup faster by loading modules lazily, and is about t
 
 ## Overkill
 
-When no uncertain claim or measurable outcome is being decided, a spike, benchmark, or evaluation adds nothing. Don't benchmark code that isn't on any hot path.
+When no uncertain claim or measurable outcome is being decided, a spike, benchmark, or evaluation adds nothing. Don't measure a cost that could not change the decision.

@@ -30,6 +30,11 @@ When the owner (and, after step 2, a phase or orchestrator) calls a principle by
 
 Observable in the wave-1 check: with the card, authors satisfy more of the card's obligations than without it, by the predeclared threshold, and the good-design controls get no more flags or machinery than without it.
 
+## Numbering and terms
+
+- **Card N** (1–17) is the principle's number in the index order and the D18 table: 1 focus and scope … 17 fix the understanding first. **Run N** is implementation order (Run status table). They differ: run 3 is card 9. Decisions that say "card 3" or "card 17" mean the card number.
+- In D14, the chunk-card terms map to card sections: trigger → Apply when; countercase → Distinct from; case → Worked case; overkill → Overkill. No other sections are added.
+
 ## Decisions
 
 The owner may strike any row. Rows marked *owner* are the owner's decisions; the rest are the Lead's defaults.
@@ -131,6 +136,8 @@ Citation rules: P atoms are evidence of what the owner pushed on, not stated rul
 - **13 tests are executable claims.** Fixture: a bug, a proposed fix, and a test harness whose fixture or fake handles the input before the code under test. Author obligations: the scenario is input or event to observable outcome; assertions check outcomes, not calls; a concrete red-then-green procedure that names the expected failure (a written task cannot show that red was observed, so a claimed run scores zero and actual red execution stays unproved by this check); the harness interception is spotted and the input is injected at the real boundary; the cheapest honest layer is chosen; mocks cover only out-of-scope dependencies with realistic contracts. Control: no duplicate test where an existing test at the seam already turns red.
 - **11 what happens when it fails.** The frozen card-11 rubric: author A1–A7; critic D1–D3 plus control C1.
 
+**When behavior testing resumes:** the prepared card-2 and card-13 fixtures must use domains clearly different from those cards' worked cases (a resumed spec and plan; a terminal key event), per D15 and structure review R1; recheck every fixture brief against every worked case before freezing.
+
 **What the check does not prove:** routing, installed-skill loading, the invocation encodings, or that a phase or orchestrator picks the right principle (steps 2 and 3). Those stay unverified in step 1; release readback covers loading and invocation.
 
 **Review:** spec review now (this document); implementation review of all 17 runs and the family surfaces after static proof, by the 🦉 Advisor (`a6321a2f…`) as review lead with two reviewer agents, at least one of another lineage.
@@ -182,6 +189,11 @@ Family surfaces (index, README, AGENTS.md, versions, changelog) landed with run 
 Spec review, 🦉 Advisor as review lead: teaching checks complete (T1 and T2 fixed at `d9c7fa53` and verified; P1 closed by D19). Structure checks skipped by the owner (D20); their candidates go to the implementation review. Implementation decision: skipped-by-user. Highest risk named by the review: no behavior evidence, and the load and no-load check at release readback is still owed.
 
 Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex Lead as the cross-lineage reviewer.
+
+### Review candidates applied by the author (pending the review lead's verification)
+
+- Spec-stage structure report (`38915f2e`): T2 applied (card 2's trigger no longer claims the recurring-correction symptom, which belongs to card 17; the layer rule forbids naming the practice neighbour). R1 recorded for when behavior testing resumes. R2 and R3 applied as the Numbering and terms section. T1 superseded: all 17 descriptions now exist and are in the implementation structure reviewer's scope.
+- Implementation-stage teaching report (`e48fca95`): I1 (card 17 completion covers drift and break), I2 (card 5 completion accepts a confirmed decision), I3 (card 5 overkill no longer excludes measuring infrequent but consequential work) applied.
 
 ### Process record (skill-creation audit, 2026-10-12, at the owner's request)
 

@@ -1,12 +1,12 @@
 ---
 name: principle-shared-mental-model-first
-description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast or the same correction comes twice. Restate the picture and what would prove it wrong before building."
+description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast. Restate the picture and what would prove it wrong before building."
 disable-model-invocation: true
 ---
 
 # Shared Mental Model First
 
-**Apply when** you are about to build on someone else's picture: a request, a spec, a resumed plan, another agent's handback. Also when agreement on something complex arrives too fast, or the same correction comes twice.
+**Apply when** you are about to build on someone else's picture: a request, a spec, a resumed plan, another agent's handback. Also when agreement on something complex arrives too fast.
 
 **Rule.** Before building, restate the picture in your own words:
 

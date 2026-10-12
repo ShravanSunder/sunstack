@@ -27,7 +27,7 @@ When several fixes have failed, list them and the premise they share, write that
 
 - `principle-read-ground-truth-first` covers ordinary root-cause diagnosis while the design holds; this card fires when the premise itself is contradicted.
 
-**Applied means** you name the premise that failed and the design or plan change it forced.
+**Applied means** you name whether it was drift or a break. For drift: the work you realigned to the design that still holds. For a break: the premise that failed and the design or plan change it forced.
 
 ## Worked case
 
