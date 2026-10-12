@@ -16,7 +16,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** The wrong behavior sets what must stay real.
 
-**Better.** "The consumer rejects what the producer sends" can only fail a test that serializes a real event and sends it across the transport. Update both schemas together, and keep one test that crosses the boundary.
+**Better.** "The consumer rejects what the producer sends" can only fail a test that feeds the real producer's serialized event to the real consumer's schema. Update both schemas together and keep that test. Because recovering the stream was also part of this feature, its transport and recovery tests stayed as well; a field change alone wouldn't need them.
 
 ## The wrong first responder
 
@@ -48,7 +48,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** Read the failure before counting it.
 
-**Better.** A valid red is the intended assertion failing under the intended wrong behavior: the old code, the fix removed, or a deliberate break at the owner. Anything else is a broken test run, and says nothing about the test.
+**Better.** A valid red fails because of the intended wrong behavior (the old code, the fix removed, or a deliberate break at the owner), whether that shows as a failed assertion or the subject throwing. A red caused by anything else is a broken test run, and says nothing about the test.
 
 ## The test that slept
 

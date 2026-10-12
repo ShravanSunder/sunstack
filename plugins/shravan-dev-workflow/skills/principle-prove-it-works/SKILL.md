@@ -16,7 +16,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. For an API or a library, the user is the calling program: look at the response it gets and the state it can read back. Record what you did and what you saw.
 
-**Drive the failures the claim covers, too.** When the change touches how errors are handled or shown, the happy path leaves that unproven. Make each failure the claim covers happen through the same entry point (a rejected input, an unreachable dependency) and observe what the user sees. A change that doesn't touch failure handling doesn't need an unrelated failure staged.
+**Drive the failures the claim covers, too.** When the change touches how errors are handled or shown, the happy path leaves that unproven. Make the failures the claim covers happen through the same entry point (a rejected input, an unreachable dependency), enough to see each distinct error the user can meet arrive and be shown correctly; the detailed cases behind each rule stay in cheaper tests. A change that doesn't touch failure handling doesn't need an unrelated failure staged.
 
 **A durability claim crosses the restart.** "It's saved" is proven by restarting the process, or doing the round trip, and comparing the exact identities and contents that come back, not by seeing a success response.
 
