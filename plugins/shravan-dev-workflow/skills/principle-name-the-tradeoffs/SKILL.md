@@ -1,34 +1,50 @@
 ---
 name: principle-name-the-tradeoffs
-description: "Use when a real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others. Lay out the credible alternatives, what each gains and costs, who pays, and the assumption that must hold."
+description: "Use when a real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one."
 disable-model-invocation: true
 ---
 
 # Name the Tradeoffs
 
-**Apply when** a real choice changes complexity, risk, cost, or reversibility, or when only one option is being presented for a decision that has others.
+Every design decision is a tradeoff: you gain something, you pay for it, and somebody bears the cost. The dangerous tradeoffs aren't the ones you discuss; they're the ones you don't realize you're making. An implicit assumption is a load-bearing wall nobody labeled. Naming the tradeoff means putting the real alternatives side by side as changes to the current design, being concrete about what each costs ("simpler" and "cleaner" are not costs), saying out loud the assumption the choice leans on, and then recommending one. The goal is a comparison someone can actually decide from.
 
-**Rule.** Lay out the credible alternatives as changes to the current design. For each, say what we gain, what we pay, and who pays: the user, the operator, the next developer. Name the load-bearing assumption out loud, with the signal that would prove it wrong. Recommend one. Scale the rigor to reversibility: a one-way door (a stored format, a public contract, a new process boundary) gets more; a reversible, low-stakes step gets a sentence.
+## How to think it through
 
-**Why.** Every design decision is a tradeoff, and the dangerous ones are those nobody noticed making. An unstated assumption is a load-bearing wall nobody labeled.
+**Draw the current design, then each option as a change to it.** Options are worth comparing only when they differ on something that matters: who owns what, where a boundary sits, how consistent the data is, a lifecycle, how it will be proven. Two options that differ only in style don't help anyone decide.
 
-**The test.**
+**Be concrete about gains and costs.** Code to write and maintain, latency, startup time, operational burden, migration work, reader load, the owner's attention. "What's the true cost of complexity between A and B?" deserves an answer in those terms, not adjectives.
 
-1. Is there a credible option you didn't show?
-2. Who bears the cost of the chosen option?
-3. Which assumption, if wrong, flips the choice, and what would tell you?
+**Say who pays.** The user, the operator on call, the next developer, the owner. A cost nobody is named for is a cost nobody agreed to.
 
-**Distinct from.**
+**Find the load-bearing assumption and its cheapest falsifier.** Which assumption, if wrong, flips the choice? What five-minute check would show it? Say it out loud: "I'm assuming the database can rank typo-tolerant matches fast enough at our size; same assumption?" Then invert your preference: what evidence would make the other option right?
 
-- `principle-justify-the-complexity` removes what no outcome needs; this card weighs options that each meet the outcome.
-- `principle-one-owner-per-truth` takes over when a boundary is settled and only needs a named owner; there is no tradeoff to weigh.
+**Include the option you'd rather not.** The boring one, or doing nothing, is often credible. Leaving it out turns the comparison into a justification.
 
-**Applied means** you name the alternatives you weighed, the assumption you made explicit, and the choice it changed or confirmed.
+**Watch what you're trading away that the owner already cares about.** A faster build that makes startup slower, or a correctness fix that blocks the main thread, is a trade the owner may not accept. Put it on the table.
 
-## Worked case
+**Recommend one, and say when to revisit.** Name the debt the smaller choice accepts and the signal that would justify the bigger design later.
 
-A design adds fuzzy search by putting the index in the app's existing database, "because it's already there". The unstated assumption is that the database's text matching can rank typo-tolerant results fast enough at the expected size. It can't, and the feature is rebuilt. Better: show the options (the database's full-text search, an in-memory index, a search service) with their gains and costs, and name the assumption, "typo-tolerant ranking over 100,000 rows in under 50 ms", with the five-minute check that would refute it.
+**The hard call is which decisions are yours.** Scale the rigor, and the asking, to reversibility. A one-way door (a stored format, a public contract, a new process boundary, data you can't take back) gets the full comparison and the owner's decision: show it rather than just ask it, one decision at a time, with what waits if they defer. A reversible choice inside the agreed scope is yours: decide it, record why, and keep going. When the question is how something feels or performs, try both quickly instead of arguing.
 
-## Overkill
+**Temporary decisions say why and for how long.** A stand-in or workaround names what it stands in for, the assumption it encodes, what it gains now, what it costs, and what closes it.
 
-When one feasible option meets the settled requirements and no assumption would change the conclusion, a comparison table is ceremony. A reversible, local choice needs one sentence.
+## Example: the queue between two services
+
+A design adds a message queue between an order service and a fulfillment service, "for decoupling". Shown as a change to the current direct call: the queue gains buffering through fulfillment outages and independent deploys; it costs a broker to run, eventual consistency the order screen must show ("processing"), and a new failure mode (poisoned or stuck messages) that the on-call person pays for. The load-bearing assumption is that fulfillment outages are frequent or long enough to matter, and last quarter's incident log shows two five-minute outages. The direct call with a bounded retry meets the need today. Recommend it, and name the revisit signal: outages longer than the retry window, or a second consumer of order events.
+
+IF the case in front of you doesn't match the queue example, or you are judging how someone else presented a decision, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+
+## When it doesn't apply
+
+When one feasible option meets the settled requirements and no assumption would change the conclusion, a comparison table is ceremony. A reversible, local choice needs one sentence and a recorded reason.
+
+## Signs you skipped it
+
+- One option presented as the only one, or "obviously".
+- Costs stated as adjectives: simpler, cleaner, more robust.
+- No one named as paying the cost.
+- An assumption discovered after shipping.
+- A one-way door decided in passing, or a reversible choice escalated to the owner for no reason.
+- A workaround with no stated reason or end.
+
+When the question is whether a mechanism is needed at all, use `principle-justify-the-complexity`. When running something would settle the question faster than comparing, use `principle-experiment-before-proposing`.

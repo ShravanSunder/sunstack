@@ -1,40 +1,51 @@
 ---
 name: principle-experiment-before-proposing
-description: "Use when running something would settle a question faster than arguing about it: an unknown API behavior, a performance claim, whether an approach works, how a prompt or classifier performs. Fit the rigor to the question and measure the real artifact."
+description: "Use when running something would settle a question faster than arguing about it: an unknown API behavior, a performance claim, which of two designs works better, how a prompt or classifier performs. Capture a baseline, fit the rigor to the stakes, and measure the real artifact."
 disable-model-invocation: true
 ---
 
 # Experiment Before Proposing
 
-**Apply when** running something would settle a question faster than arguing about it: an unknown API behavior, a performance claim, whether an approach works at all, how a prompt or classifier performs.
+Many design arguments are really questions about behavior: is this faster, does the API do what we think, does the model handle this case, which of two layouts reads better? When the answer is a fact you could observe by running something, it isn't a question to argue about, and it isn't the owner's to answer. Run it and let the result decide. The skill is fitting the rigor to the question and the stakes, and writing down what result would change your mind before you look. Otherwise you will read the result to fit the plan you already had.
 
-**Rule.** Write the hypothesis, and the result that would change your mind, before running. Then fit the rigor to the question:
+## How to think it through
 
-- a spike answers one concrete unknown, timeboxed and thrown away;
-- a measurement names its workload and its comparator (before vs after, A vs B), and measures the real artifact;
-- an evaluation of a prompt or classifier needs labeled cases and a baseline.
+**Classify the question first.** "Is it faster? Does it work? Which reads better?" are observable, so run them. "Which matters more to our users? What should we promise?" are value calls, so bring those to the owner with whatever evidence you have.
 
-Make the smallest change that tests the hypothesis.
+**Write the hypothesis and the deciding result before you run.** For example: "lazy loading makes cold start faster; if it's not at least 10% faster across ten runs, we don't merge it." A result you interpret after seeing it isn't a test.
 
-**Why.** Arguments about how something behaves are cheap to start and expensive to finish; a ten-minute run ends them. An unmeasured speed claim, or an evaluation with no baseline, decides by impression and is often wrong.
+**Capture the baseline before changing anything.** Measure the current behavior first, so the check reads as old value against new value. Don't optimize something you haven't measured: "why does this take nine minutes?" has an answer, and it comes before the fix.
 
-**The test.**
+**Fit the form to the question:**
+- **A spike** answers one concrete unknown. Timebox it and throw the code away.
+- **Competing prototypes** settle a design that isn't obvious. Build two or three that are genuinely different and compare them side by side; a second flavor of the first shape doesn't count.
+- **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), and enough repetitions to see past noise. Measure warm and cold where startup matters, note the machine load, and compare rows rather than trusting absolute numbers.
+- **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, and blind scoring wherever judgment is involved.
 
-1. What result would change the decision, written down before running?
-2. For a measurement: what workload, compared with what?
-3. Are you measuring the real artifact, or a proxy such as a micro-benchmark or a mock?
+**Measure the real artifact through the real path:** the actual data, the actual entry point, the actual surface. A micro-benchmark, a mock, or a probe can answer a different question from the one you have.
 
-**Distinct from.**
+**Change one thing per run, and keep a loop.** Make the smallest change that tests the hypothesis, check it, keep it if it advanced and revert it if it didn't, then go again. A result you can't attribute to one change settles nothing.
 
-- `principle-read-ground-truth-first` reads evidence that already exists; this card creates new evidence.
-- `principle-name-the-tradeoffs` takes over when both options already satisfy the evidence and the question is which cost to accept; a run won't settle that.
+**Read the result honestly.** Variance across runs is a gap, not a pass. A control that comes out the same means no difference was shown, not that the idea is wrong. Check the result against what the contract actually requires; a test oracle stricter than the contract will flag valid behavior as a failure.
 
-**Applied means** you name the hypothesis, the run and its result, and the decision the result changed or confirmed, with the reason.
+**The hard call is how much rigor.** Scale it to the stakes. A one-way door or a big blast radius gets a pinned benchmark, more runs, and blind scoring. A reversible, low-stakes choice gets a quick spike.
 
-## Worked case
+## Example: the lazy-loading claim
 
-A change claims to make startup faster by loading modules lazily, and is about to merge on that claim. Measured on the real app (cold start, ten runs, main against the branch), startup is 40 ms slower: the first request now loads modules one after another. Naming the workload and comparator took a minute, the run took five, and the result reversed the decision.
+A change claimed to make startup faster by loading modules lazily, and was about to merge on that claim. Measured on the real app (cold start, ten runs, main against the branch), startup was 40 ms slower: the first request now loaded modules one after another. Naming the workload and comparator took a minute, the run took five, and the result reversed the decision.
 
-## Overkill
+IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
 
-When no uncertain claim or measurable outcome is being decided, a spike, benchmark, or evaluation adds nothing. Don't measure a cost that could not change the decision.
+## When it doesn't apply
+
+When no uncertain claim or measurable outcome is being decided, a spike, benchmark, or evaluation adds nothing. Don't measure a cost that could not change the decision. And a question about what the owner values isn't settled by running anything.
+
+## Signs you skipped it
+
+- "This should be faster", merged unmeasured.
+- A benchmark of a different workload than users run, or a single run reported as a result.
+- An evaluation with no baseline, or a threshold chosen after seeing the numbers.
+- Asking the owner a question a ten-minute run could answer.
+- A result reinterpreted after it came back.
+
+Reading evidence that already exists is `principle-read-ground-truth-first`. When both options already satisfy the evidence and the question is which cost to accept, use `principle-name-the-tradeoffs`.

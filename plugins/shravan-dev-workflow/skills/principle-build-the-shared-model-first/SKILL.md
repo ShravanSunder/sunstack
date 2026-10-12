@@ -18,11 +18,15 @@ Before there is a plan, before there is code, there is a mental model: a shared 
 
 **Separate what you can find out from what only the owner can decide.** Settle discoverable questions yourself from the code, the docs, and the history. Bring the owner only the decisions the evidence can't settle, with your current read attached.
 
+**Say your assumptions about what nobody discussed.** The gaps that hurt most are the ones neither side mentioned. Name the assumption you are making to fill one and ask: "We haven't discussed what happens when this fails. I'm assuming it retries with backoff; same assumption?"
+
+**Test the pictures on one concrete case.** Pick a specific situation where the two pictures might disagree (what happens when someone edits on two devices at once? when the import has a row with no email?) and walk it through both. A concrete case exposes a split that agreeing on general statements hides.
+
 **Check it against the newest word of intent.** A later correction outranks an earlier spec or plan. When resuming work from documents, list what has been corrected since they were written.
 
 **Confirmation has to be explicit.** Silence, "sounds good", or your own restatement repeated back don't confirm a picture; a specific answer to a specific question does. When several gaps are open, settle first the one whose answer changes the most.
 
-**Know the signals to stop and restate:** agreement that arrives instantly on something complex; the same correction twice; "that would be confusing" or "that's not what I meant"; your surprise at someone's reaction; a spec that keeps growing; research chasing a question nobody asked.
+**Know the signals to stop and restate:** agreement that arrives instantly on something complex; the same correction twice; "that would be confusing" or "that's not what I meant"; your surprise at someone's reaction; a spec that keeps growing; research chasing a question nobody asked. Drift goes the other way too: don't quietly narrow the problem to fit an answer you already have.
 
 **The hard call is when to stop.** Restate where a wrong picture would cost real work: before a design, before a long build, when resuming. Once the picture is confirmed and nothing has changed, build.
 

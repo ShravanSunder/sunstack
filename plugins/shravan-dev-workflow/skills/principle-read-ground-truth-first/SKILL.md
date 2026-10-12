@@ -18,13 +18,15 @@ Don't start from assumptions; read ground truth first, in proportion to the task
 
 **Keep what you saw apart from what you infer.** Seen means a file and line, a log entry, an output you ran. Everything else is inferred or guessed, and you say which when you report. A cause you haven't observed is a guess, however likely it seems.
 
-**For a surprising behavior, reproduce it before you fix it.** Then ask why until you reach the root cause, and add logging rather than guessing when you're stuck. When you find the cause, look for the same pattern elsewhere. Don't add a guard that only silences the symptom. When something "fails after a restart", suspect stale persistent state (a cache, a lock file, saved state) before the code.
+**For a surprising behavior, reproduce it before you fix it.** Then ask why until you reach the root cause, and add logging rather than guessing when you're stuck. When you find the cause, look for the same pattern elsewhere. Don't add a guard that only silences the symptom. When something "fails after a restart", suspect stale persistent state (a cache, a lock file, saved state) before the code. And "works after a restart" hides a cause too; find out what changed.
 
-**Check that "it's there" means "it's wired".** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it. Look for the call.
+**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call. For a claim about running behavior, check what is actually deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
+
+**A failed read is about your access until you've checked the instrument.** A request that fails from inside a sandbox, without credentials, or from the wrong network tells you that you couldn't reach the thing, not that the thing is down. Check your access and permissions before reporting an outage or rerunning work.
 
 **Read in proportion.** Read what the claim depends on: the touched code, its callers, the contract it relies on. Not the whole repository.
 
-**The hard call is when a summary is good enough.** A doc, a helper's report, or your own memory is good enough only when someone checked it against the current version. Otherwise it is a lead that tells you where to read, not evidence. And when you couldn't verify something, say so and say where you looked.
+**The hard call is when a summary is good enough.** For a claim that matters, it isn't: the agent making the claim inspects the decisive source itself, at its current version. A doc, a helper's report, or your own memory is a lead that tells you where to read, not evidence. When you couldn't verify something, say so and say where you looked.
 
 ## Example: the missing range read
 

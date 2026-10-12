@@ -49,3 +49,19 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** Suspect stale persistent state before the code.
 
 **Better.** Check the config files, caches, lock files, and saved state the service reads at startup. If clearing one restores the behavior, the fix is validating that state when it's loaded.
+
+## The fix that wasn't deployed
+
+**What happened.** An incident review credited newer resilience fixes on the main branch. A version inventory showed production still pinned three releases behind, with none of those fixes installed.
+
+**The move.** For a claim about running behavior, check what is deployed and loaded.
+
+**Better.** Read the running package version and the deployment pin first. Source changes are evidence about the source, not about production.
+
+## The outage that was a sandbox
+
+**What happened.** A helper's request from inside a sandbox failed, and it reported the observability collector as down and the logs as unrecoverable. A call from the host with proper authorization succeeded and recovered all 3,444 existing records, with no restart.
+
+**The move.** A failed read is about your access until you've checked the instrument.
+
+**Better.** Separate "I was denied" from "the service is unhealthy". Check reachability with the right access before declaring an outage or rerunning any work.

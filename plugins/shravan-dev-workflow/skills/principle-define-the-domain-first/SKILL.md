@@ -19,7 +19,7 @@ Before structure, decide what the things are. Every system has a handful of noun
 
 **For each noun that matters, answer four things:** what it is, in words a user would recognize; its identity rule; its states and what moves it between them (and who can); and how it relates to the other nouns.
 
-**The hard call is identity.** It decides deduplication, joins, primary keys, cache hits, and what "update" means. Ask: if two of these were merged by mistake, would the user call it a bug? If yes, they are different things, and the identity has to include whatever tells them apart.
+**The hard call is identity.** It decides deduplication, joins, primary keys, cache hits, and what "update" means. Test it both ways. If two of these were merged by mistake, would the user call it a bug? Then they are different things, and the identity has to include whatever tells them apart. If one were split into two by mistake (a second reminder for a moved date, a duplicate folder for the same path), would the user call that a bug? Then the identity must leave out whatever changed.
 
 **One word, one meaning, everywhere:** in the conversation, the spec, the code, and the screen. When a word covers two meanings, split it. When two words name one thing, pick one and use it everywhere. When an authoritative contract or earlier decision already fixes a term, reuse it rather than renaming it for taste.
 
