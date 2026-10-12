@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Types Are Communication"
+  short_description: "Model states as types the compiler checks"
+  default_prompt: "Use $principle-types-are-communication on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

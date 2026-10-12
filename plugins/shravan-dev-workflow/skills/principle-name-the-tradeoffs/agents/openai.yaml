@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Name the Tradeoffs"
+  short_description: "Lay out alternatives, costs, and assumptions"
+  default_prompt: "Use $principle-name-the-tradeoffs on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

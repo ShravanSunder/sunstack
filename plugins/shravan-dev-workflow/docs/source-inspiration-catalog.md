@@ -21,7 +21,7 @@ Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog 
 
 | Source tree | Preserve | Narrow / avoid |
 | --- | --- | --- |
-| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
+| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents; `principle-*` leaves for callable judgment cards (one judgment each, user-invoked, name the decision a principle changed) | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
 | Matt Pocock skills | `grill-me`, `grill-with-docs`, domain modeling, codebase design, debugging/TDD, handoff patterns | Do not treat discussion prompts as a substitute for source-backed spec creation |
 | Addy Osmani agent skills | lifecycle taxonomy, interview/idea/spec/doubt/source-driven development, ADR/docs and observability ideas | Use as taxonomy and selected source, not a wholesale workflow |
 | Dimillian skills | review swarms, bug-hunt swarms, skill audit, batch refactor orchestration | Narrow Apple/UI-specific skills to macOS/iOS workflow contexts |
@@ -52,6 +52,7 @@ Inspected 2026-09-26 at local `cursor-plugins` revision `ecc249f`. Preserve/avoi
 | Implementation execution | Pstack `poteto-mode`, Obra `subagent-driven-development`, existing controller packets | Parent-owned subagent lifecycle, evidence verification, integration, and proof claims |
 | Review transport | OpenClaw ACPX / ACP, local review swarms, Claude/Gemini structured feedback | ACPX is external review transport; parent reducer verifies all candidate findings |
 | Security review | Codex curated security skills | Route to `ops-security-review`; keep normal review lanes lightweight |
+| Engineering principles | Pstack `principle-*` leaves and `poteto-mode` index, the owner's own engineering instructions and corrections | `principle-*` cards named from the owner's own phrases; callable by name, not auto-invoked; card shape adapted, no upstream prose copied |
 
 For per-skill borrowed/do-not-copy detail, open the matching file under `ai-dev-skills/docs/my-ai-tools/shravan-dev-workflow/`.
 

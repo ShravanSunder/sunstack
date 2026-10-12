@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Prove It Works"
+  short_description: "Proof is the feature working, not tests passing"
+  default_prompt: "Use $principle-prove-it-works on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

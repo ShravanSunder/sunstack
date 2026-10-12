@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Write Tests That Can Fail"
+  short_description: "Tests that fail when the behavior is wrong"
+  default_prompt: "Use $principle-write-tests-that-can-fail on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false

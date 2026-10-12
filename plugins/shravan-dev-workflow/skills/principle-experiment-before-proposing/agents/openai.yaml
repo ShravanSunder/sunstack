@@ -1,0 +1,6 @@
+interface:
+  display_name: "Principle: Experiment Before Proposing"
+  short_description: "Settle a question by running it, with fitting rigor"
+  default_prompt: "Use $principle-experiment-before-proposing on the current work and name the decision it made, changed, ruled out, or confirmed."
+policy:
+  allow_implicit_invocation: false
