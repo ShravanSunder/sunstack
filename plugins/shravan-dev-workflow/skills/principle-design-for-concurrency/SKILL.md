@@ -40,7 +40,7 @@ When one actor owns the state and every completion order gives the same result, 
 
 ## Signs you skipped it
 
-- A sleep or a delay treated as "ready", in code or in a test, when a completion signal exists; or polling with no deadline.
+- A sleep or a delay treated as "ready", in code or in a test; or polling with no deadline, or polling where a completion signal exists.
 - Two writers that read the same state and overwrite each other, with no transaction, single owner, or version check between them.
 - Responses matched by arrival order.
 - A lock or mutex with no named invariant, or a synchronous lock held across an `await`.

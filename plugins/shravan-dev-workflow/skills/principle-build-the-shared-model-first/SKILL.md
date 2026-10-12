@@ -43,6 +43,7 @@ When the model and the question are already agreed and nothing has been correcte
 ## Signs you skipped it
 
 - A restatement that repeats the brief's nouns but never says who owns the state or what happens at the disputed step.
+- A complex design marked agreed on generic assent ("sounds good"), with no specific decision confirmed.
 - Agreement on a complex design while the two pictures still give the same piece of state to different owners.
 - A resumed plan that still carries a decision the owner has since changed.
 - The same correction arriving twice.

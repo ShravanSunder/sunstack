@@ -45,9 +45,10 @@ When no uncertain claim or measurable outcome is being decided, a spike, benchma
 ## Signs you skipped it
 
 - "This should be faster", merged unmeasured.
-- A warm, synthetic probe used to claim faster cold startup in the real app, with machine load not recorded.
+- A performance claim from a workload users don't run or from too few runs, like a warm, synthetic probe used to claim faster cold startup in the real app.
 - An evaluation with no baseline, a threshold chosen after seeing the numbers, or a score that falls when the answer is hidden from the input.
 - Asking the owner whether an API supports something before reading its interface or running a bounded, safe probe.
 - A result judged against a condition the contract never set, like valid extra receipts called "amplification" because the harness expected an exact count.
+- A deciding result changed after the run came back, to fit what it showed.
 
 Reading evidence that already exists is `principle-read-ground-truth-first`. When both options already satisfy the evidence and the question is which cost to accept, use `principle-name-the-tradeoffs`.

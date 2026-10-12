@@ -43,7 +43,8 @@ When a layer owns a policy or a lifecycle, hides substantial behavior, or provid
 - A mechanism no current requirement needs, added or kept "in case", like steering and spooling machinery a protocol no longer uses.
 - An old path still running next to the new one, a compatibility shim, or a flag for a gradual migration.
 - An option nobody sets, or an abstraction with one implementation that removes nothing and serves no seam.
-- A rewrite or a home-grown framework proposed before anyone measured where the cost is, like a storage-engine rewrite for CPU a driver's lock wait was burning.
+- A rewrite proposed before anyone measured where the cost is, like a storage-engine rewrite for CPU a driver's lock wait was burning.
+- A home-grown container or service locator where passing dependencies as arguments would do.
 - The same decision repeated across several files.
 - A wrapper with one caller that forwards data unchanged and adds no rule, lifecycle, or check, yet has to be traced to understand the call.
 - A cleanup that also deletes tests or helpers a remaining feature still needs.

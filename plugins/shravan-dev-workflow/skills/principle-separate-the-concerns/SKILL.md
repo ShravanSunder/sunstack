@@ -48,6 +48,7 @@ A small module with one stable job, no I/O, and one caller needs no interface an
 - A business rule that only runs with the network or the framework attached, or that decodes raw transport data itself instead of receiving typed values.
 - A module edited for two unrelated reasons in recent history.
 - A `helpers` or `common` module that mixes provider calls, decoding, and domain rules, so testing one rule needs the whole stack.
+- A file past 600 lines that nobody has checked for more than one job.
 - Storage, transport, or wire types in a domain function's signature.
 - Interfaces with one implementation that hide nothing, a dependency threaded through layers that never use it, or a whole config object passed to a part that reads one field.
 - A component that changes globals or environment at startup.
