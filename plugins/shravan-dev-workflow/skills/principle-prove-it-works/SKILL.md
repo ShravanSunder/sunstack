@@ -14,7 +14,7 @@ A passing test is evidence about the parts it reaches. Proof is the feature work
 
 **Find the real path.** The app, command, endpoint, or page a user actually uses, with the real configuration and the provider production selects, run on representative data: current data, a large diff, the slow case.
 
-**Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. Record what you did and what you saw.
+**Drive it and look where the user would.** The rendered screen at the target viewport, the response body, the file on disk, the message that arrived. For a backend effect behind a click, follow the click through the logs and traces. For an API or a library, the user is the calling program: look at the response it gets and the state it can read back. Record what you did and what you saw.
 
 **Drive one failure through the real path, too.** Proving the happy path leaves the error handling unproven. Make one realistic failure happen through the same entry point (a rejected input, an unreachable dependency) and observe what the user sees.
 
