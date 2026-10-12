@@ -43,7 +43,7 @@ Build the outcome where the reply arrives: map transport and provider errors int
 
 **When one change must cause an external effect, record the intent with the change.** Write "send the welcome email" in the same transaction as the new user row, then send from that record and mark it done. A crash between the two can no longer lose the email, and the record says what still needs doing.
 
-**Bound every wait.** Every call gets a deadline and can be cancelled; every retry loop has a limit and backoff, and stops when the caller is gone. An unbounded wait turns one slow dependency into a stalled system.
+**Bound every wait.** Every call gets a deadline and can be cancelled; every retry loop has a limit and backoff. A retry the caller is waiting on stops when the caller is gone; work that has already been durably accepted (an intent record, a queued job) keeps going under its own owner, limit, and deadline, because nobody else will finish it. An unbounded wait turns one slow dependency into a stalled system.
 
 **Contain a failure where it enters, and surface it.** The failed part is isolated so it can't take the whole app down, and it shows an error state the caller or user can see. Containing never means logging quietly and carrying on as if it worked.
 
