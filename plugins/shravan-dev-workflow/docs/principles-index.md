@@ -1,6 +1,6 @@
 # Principles Index
 
-A principle is one engineering judgment, written as a short card: when it applies, the rule, why, a test of two or three questions, the nearest principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Each card is a skill named `principle-*` that the owner calls by name; none load on their own.
+A principle is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it. More scenarios sit in each skill's `references/example_scenarios.md`. Each is a skill named `principle-*` that the owner calls by name; none load on their own.
 
 ## Using a principle
 
@@ -26,7 +26,7 @@ A principle is one engineering judgment, written as a short card: when it applie
 ## Shape
 
 - `principle-one-owner-per-truth`. Truth, effects, or guarantees cross a boundary, or stored data changes meaning. Give each truth and effect one authoritative owner, and state what callers may rely on.
-- `principle-constrain-states-and-authority`. Variants, external input, or authority cross a boundary. Make invalid states unrepresentable, validate once at the edge, and give each crossing the least authority it needs.
+- `principle-types-are-communication`. Designing or reviewing types, signatures, or data crossing a boundary. Model states as sum types with required payloads, build valid shapes, parse once at the boundary, handle every variant, and derive types from one authority.
 - `principle-separate-the-concerns`. Adding a module, layer, interface, or dependency, or a part changes for two reasons. One job and one reason to change per part; inject dependencies only at real seams.
 - `principle-justify-the-complexity`. Adding or keeping a layer, option, mechanism, or second path. Each piece of complexity is justified by an outcome that needs it now; remove the rest, no dual paths.
 

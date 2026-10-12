@@ -6,29 +6,50 @@ disable-model-invocation: true
 
 # Separate the Concerns
 
-**Apply when** you add a module, layer, interface, or dependency; when one part changes for two unrelated reasons; or when testing one rule needs half the system.
+Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation is not about more files. It is about putting a boundary where something really differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
 
-**Rule.** Give each part one job and one reason to change, and hide one decision behind each interface. Keep core logic apart from what reaches outside or varies: I/O, the clock, randomness, external services, framework wiring. Where the core needs one of those, depend on a boundary and pass the concrete thing in (dependency injection), but only at a real seam: an external system, a nondeterministic input, a process or trust boundary, or a stand-in for a piece that isn't ready. The module structure should read as the design.
+## How to think it through
 
-**Why.** Tangled concerns make every change touch everything, and drag the network and the clock into a test of one rule. A seam in the right place lets you swap a provider, test a rule in milliseconds, or build against a stand-in. A seam in the wrong place is only indirection.
+**Name the jobs before drawing boundaries.** Most features have a few that differ: transport (how requests arrive), parsing and validation (turning raw input into domain values), domain rules, persistence, and presentation. Where a real boundary exists between them, give each its own module, named for its responsibility (`stored_thread_catalog`, `query-builder`), never `utils` or `common`.
 
-**The test.**
+**Use the reason-to-change test.** If a part would change for two unrelated reasons (the pricing rules change; the payment provider changes), split it along that line. If every change touches the same few parts together, they may be one concern pretending to be two.
 
-1. Can you state each part's job, and the one reason it would change?
-2. Can the core rule be tested without the network, the clock, or the framework?
-3. Does any part change shared state that another part relies on (globals, environment, a singleton) without owning it?
+**Keep the core pure and the shell thin.** Business logic is a function from domain values to domain values. Effects (network calls, writes, the current time) live at the edge and are passed in, so the rule can be tested in milliseconds with literal inputs.
 
-**Distinct from.**
+**Translate at the boundary, both ways.** Coming in, parse raw data into domain types once and trust them inside. Going out, map storage and transport errors into domain errors, so `sqlx::Error` or a wire type never leaks into callers. Callers should see domain concepts, not the boundary's private representation.
 
-- `principle-justify-the-complexity` removes what no outcome needs. Before deleting a layer under that card, ask what the layer hides: a thin adapter over an external protocol earns its seam.
-- `principle-one-owner-per-truth` decides who decides and writes a truth. The parts can be cut cleanly while the wrong one owns the data, and the reverse.
+**The hard call is where to inject.** Dependency injection earns its place at a real seam:
+- an external system or protocol that could change, or that you want to stand in for;
+- a nondeterministic input such as time or randomness;
+- a process or trust boundary;
+- a test that needs to replace the dependency *without changing production behavior* (a seam that changes production mode needs its own review);
+- a stand-in for a piece that isn't ready yet.
 
-**Applied means** you name the seam you placed or refused, and the change or test it made cheap.
+Not everything should be injected. A dependency with one implementation, no variation, and no test need is just a function call. Define the interface from the consumer's side (what it needs, not everything the provider can do), and wire the concrete implementation at the composition point for its lifetime: at startup for process-wide things like a provider client, per request for request-scoped things like a session or a database transaction. Don't thread it through layers that never use it.
 
-## Worked case
+**Hand each part only what it uses.** A module that needs the database URL gets the database URL, not the whole config with the admin key in it; a component that reads one field of the session gets that field. What a part never received, it can't misuse or come to depend on.
 
-A billing module computes proration, reads the system clock, and calls the payment provider's SDK inline. Testing month-end proration needs a faked system date and five SDK mocks, and switching providers touches every function. Better: a pure proration function (plan and dates in, amounts out), one payment-gateway interface whose adapter hides the provider's protocol, and the current time passed in at the edge. Proration tests run in milliseconds with literal dates, and a provider change touches one adapter. The proration function gets no interface of its own: it has one implementation and nothing about it varies.
+**Before finalizing an interface, write one representative caller.** If the call reads awkwardly, the boundary is in the wrong place. And when a capability belongs to an existing adapter, extend that adapter rather than starting a parallel one.
 
-## Overkill
+**Watch shared state.** A part that changes something process-wide (globals, environment, a singleton) that another part relies on has reached outside its job, whatever its file boundary says.
 
-A small module with one stable job, no I/O, and one caller needs no interface. An interface with one implementation that hides no decision and serves no test or stand-in is indirection, not separation; remove it. Split files and packages when a part owns a real responsibility, not to make the tree look organized.
+## Example: the provider baked into the consumer
+
+A plugin imports one VM provider directly. Switching providers means editing the plugin, and its tests need the provider running. Better: the plugin defines the small VM-runtime interface it needs, the provider package implements it, and the host injects it at startup. The plugin no longer changes when the provider does, and its tests use a stand-in.
+
+IF the case in front of you doesn't match the provider example, or you are reviewing someone else's structure against this principle, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+
+## When it doesn't apply
+
+A small module with one stable job, no I/O, and one caller needs no interface and no extra file. Split by responsibility, not by line count, though a file past 600 lines is usually holding more than one job.
+
+## Signs you skipped it
+
+- A business rule that can't be tested without the network, the clock, or the framework.
+- A module edited for two unrelated reasons in recent history.
+- `utils`, `common`, `helpers`, or a 900-line file.
+- Storage, transport, or wire types in a domain function's signature.
+- Interfaces with one implementation that hide nothing, a dependency threaded through layers that never use it, or a whole config object passed to a part that reads one field.
+- A component that changes globals or environment at startup.
+
+For how values cross a boundary as types, see `principle-types-are-communication`. When the question is who owns and writes a piece of data, use `principle-one-owner-per-truth`; when a layer may not be needed at all, use `principle-justify-the-complexity`.

@@ -6,35 +6,68 @@ disable-model-invocation: true
 
 # Design for Failure
 
-**Apply when** a call, job, or state change has an effect someone else can see, and it can time out, be retried, partly succeed, or end without you knowing.
+When your code reaches outside itself (a payment provider, another service, a queue, a database someone else reads), a call does not end two ways. It worked; it was rejected; it failed in a way worth retrying; it got partway; or **you don't know**. A timeout, a dropped connection, or a crash puts you in that last ending: the effect may have happened on the other side, may still be happening, or may never happen. "Unknown" is its own outcome. It is not a failure, and it is never a guessed success.
 
-**Rule.** Before choosing retries, locks, or idempotency, decide how each ending looks. Write these down explicitly:
+Most expensive production bugs live in the unknown ending. Code written for "worked or failed" quietly treats "don't know" as "failed" and does the thing again: a second charge, a duplicate email, a server created after the caller already gave up. Designing for failure means deciding what each ending looks like, and how the system gets back to a correct state, before you write the happy path. Retries, locks, and idempotency keys are answers; the endings are the question.
 
-- which system is the truth for "did it happen?" (often the other system, not your own record);
-- what the caller sees while the outcome is unknown;
-- who cleans up what is left behind, and what triggers them.
+## How to think it through
 
-Then pick the smallest mechanism that keeps those endings: an idempotency key, a lookup before retrying, a compensating step, or an honest "pending".
+**Start from the effect someone else can see:** a charge, a sent message, a reserved seat, a created server, a row another system reads. Walk its timeline and stop at three points: before the effect, while it is happening, and after it landed but before you heard back. At each, ask what the caller sees, what is left behind, and who notices and cleans it up.
 
-**Why.** A timeout is not a failure. The effect may have landed and the answer got lost, or it may still be running. An ending nobody chose gets chosen by accident: a double charge, a stuck reservation, a cached "success" that never happened.
+**Keep the endings apart.** Each one gets its own handling; collapsing them into one error branch is where the bugs come from:
 
-**The test.**
+- **Rejected** (bad input, not allowed): nothing happened; tell the caller why.
+- **Transient** (overloaded, refused before sending): safe to retry, with a bound and backoff.
+- **Partial** (some effects landed): finish it or undo it, decided from the invariant that must hold afterwards. Undoing is itself an effect that can fail.
+- **Unknown** (timed out after sending, or the reply made no sense): don't guess. Resolve it with the truth below, or keep it visibly pending.
 
-1. If it times out after the effect, what does the caller see, and does a retry repeat the effect?
-2. If it crashes halfway, what is left behind, and who notices and cleans it up?
-3. Which system answers "did it happen?"
+**Make the endings a type, so the compiler holds you to them.** A boolean, a thrown exception, or a nullable result lets a caller forget "unknown" exists. A sum type with one variant per ending, each carrying what that ending needs, makes every caller decide what it does with each one:
 
-**Distinct from.**
+```ts
+type ChargeOutcome =
+  | { kind: "charged"; chargeId: ChargeId }
+  | { kind: "rejected"; reason: DeclineReason }
+  | { kind: "retryable"; retryAfterMs: number }
+  | { kind: "unknown"; idempotencyKey: IdempotencyKey }; // sent, but no usable reply
+```
 
-- `principle-design-for-concurrency` is two actors at once; this card is one operation's endings. If a retry can overlap a late original, use both.
-- `principle-one-owner-per-truth` decides who owns a truth in general; this card asks which record settles one operation's outcome.
+Build the outcome where the reply arrives: map transport and provider errors into these variants there, and a reply that doesn't parse after you sent the charge becomes `unknown`, never `charged`. In Rust the same shape is an enum with an `OutcomeUnknown` variant and a `match`.
 
-**Applied means** you name the ending you chose for the timeout-after-effect case, and the mechanism it led to or ruled out. "Added retries" is not an ending.
+**Weigh a duplicate against a miss.** This picks how hard to work. For a charge, a duplicate is expensive and a delay is tolerable, so prevent the duplicate even if that means "pending". For a welcome email, a duplicate is mildly annoying and a miss is mildly sad, so one bounded retry is enough. Ask which hurts more before choosing machinery.
 
-## Worked case
+**The hard call is who is the truth for "did it happen?"** It is rarely your own record; it is the system that performed the effect. Choose the mechanism by what that truth can promise:
 
-Checkout calls a payment provider. The call times out, the code retries with backoff, and the customer is charged twice. "Retry on failure" treated a timeout as a failure, but the first charge had landed. Better: the charge carries an idempotency key tied to the order, and the provider is the truth for "did it charge?". On a timeout the customer sees "payment pending", and checkout, which owns the reconcile, looks the charge up before any retry and again in a follow-up check. The customer sees pending, never a second charge.
+- **It honors a stable key for this intent:** retry with the same key, tied to the intent (the order id, not a fresh random id), and the truth deduplicates.
+- **You can ask it for the outcome, including "still in flight":** reconcile before doing anything again. A "not found" right after a timeout does not prove the original won't still land.
+- **Neither:** keep the outcome pending, show it, and escalate. Don't promise an automatic retry you cannot make safe.
 
-## Overkill
+**When one change must cause an external effect, record the intent with the change.** Write "send the welcome email" in the same transaction as the new user row, then send from that record and mark it done. A crash between the two can no longer lose the email, and the record says what still needs doing.
 
-A pure calculation has no ending to design; its failure is an exception the caller already handles. A read-only lookup that is safe to repeat needs no idempotency key. When the only bad ending is a failure before any effect, and the caller sees that error, one sentence covers it.
+**Bound every wait.** Every call gets a deadline and can be cancelled; every retry loop has a limit and backoff, and stops when the caller is gone. An unbounded wait turns one slow dependency into a stalled system.
+
+**Contain a failure where it enters, and surface it.** The failed part is isolated so it can't take the whole app down, and it shows an error state the caller or user can see. Containing never means logging quietly and carrying on as if it worked.
+
+**Assume the last run crashed at any point.** A rerun or restart should converge to the correct end state from whatever was left: look for what already exists, adopt it or clean it up, and only then create.
+
+**Make sure someone notices.** A health check that only pings the process can stay green while every real operation fails. And when the failure behavior is something a user will see, say your assumption out loud ("I'm assuming a timed-out payment shows as pending and retries with the same key; same assumption?") instead of deciding it silently in code.
+
+## Example: the double charge
+
+Checkout calls the payment provider, the call times out, the code retries with backoff, and the customer is charged twice: the first charge had landed. "Retry on failure" treated an unknown ending as a failure. Better: the charge carries an idempotency key tied to the order, the provider is the truth for "did it charge?", the customer sees "payment pending" on a timeout, and any retry reuses the same key, so the provider can't charge twice.
+
+IF the case in front of you doesn't match the double charge, or you are reviewing someone else's design against this principle, load `references/example_scenarios.md` and return the closest scenario and how its move applies to your case.
+
+## When it doesn't apply
+
+A pure calculation, or a read that is safe to repeat, cannot half-happen; its failure is an error the caller already sees. One bounded retry with backoff covers a flaky read. Don't add keys, compensations, or a reconcile job to code that leaves nothing behind.
+
+## Signs you skipped it
+
+- "Add retries", with no answer to "can a retry repeat the effect?"
+- A timeout, a rejection, and a partial result all handled by one catch, or a result type with no way to say "unknown".
+- A catch block that logs and carries on.
+- Success reported before the durable write, or a reply that made no sense treated as success.
+- A call or retry loop with no deadline.
+- Half-done work nobody owns, a rerun that assumes a clean start, or a health check that stays green while real operations fail.
+
+For modeling the endings as types the compiler checks, see `principle-types-are-communication`. When two actors can touch the same thing at once, also use `principle-design-for-concurrency`.

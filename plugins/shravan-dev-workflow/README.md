@@ -61,7 +61,7 @@ principle-*          engineering judgment cards    principle-hold-the-scope
                                                   principle-experiment-before-proposing
                                                   principle-name-the-tradeoffs
                                                   principle-one-owner-per-truth
-                                                  principle-constrain-states-and-authority
+                                                  principle-types-are-communication
                                                   principle-separate-the-concerns
                                                   principle-justify-the-complexity
                                                   principle-design-for-failure
@@ -182,7 +182,7 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## Principles
 
-Each `principle-*` skill is one engineering judgment, written as a short card: when it applies, the rule, why, a two- or three-question test, the neighbouring principle it is easily confused with, what applying it means, one worked case, and when it is overkill. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. None loads on its own, and no other skill loads one yet. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
+Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. None loads on its own, and no other skill loads one yet. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
 
 ## Supporting Skills
 
