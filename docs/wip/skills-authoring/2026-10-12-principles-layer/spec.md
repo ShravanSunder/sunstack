@@ -164,29 +164,29 @@ Citation rules: P atoms are evidence of what the owner pushed on, not stated rul
 
 ## Run status
 
-Implemented in one pass after D20 rather than one skill per run; each run is accounted for separately below. Lead verification was the Lead's own check at the owner's request, not the independent review.
+Each card was rewritten by hand in the D26 teaching shape, from its own scraped sources (owner instructions, language rules, pstack leaves, existing skills, owner atoms, real cases; `tmp/design-skills-lead/sources/` in the design-skills worktree), one at a time, with a teaching read per batch: an unseen case walked by a reader of only the card, plus a source comparison. Every addition from those reads was applied. These are the Lead's records, not the independent implementation review.
 
-| Run | Skill | Content basis | Lead verification (2026-10-12) | Status |
-| --- | --- | --- | --- | --- |
-| 1 | `principle-design-for-failure` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 2 | `principle-build-the-shared-model-first` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 3 | `principle-separate-the-concerns` | wave-1 draft (teaching review) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 4 | `principle-tests-are-executable-claims` | wave-1 draft (teaching review; T2 fix) | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 5 | `principle-hold-the-scope` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 6 | `principle-define-the-domain-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 7 | `principle-read-ground-truth-first` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
-| 8 | `principle-experiment-before-proposing` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 9 | `principle-name-the-tradeoffs` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 10 | `principle-one-owner-per-truth` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 11 | `principle-constrain-states-and-authority` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 12 | `principle-justify-the-complexity` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 13 | `principle-design-for-concurrency` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: distinct-from corrected; caution moved to Overkill | implemented |
-| 14 | `principle-prove-it-works` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked; fixed: description to "Use when" | implemented |
-| 15 | `principle-verify-before-accepting` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 16 | `principle-write-for-the-reader` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
-| 17 | `principle-refine-mental-models` | D14 basis | read in full; frontmatter and openai.yaml parsed; sibling-only naming checked | implemented |
+| Card | Skill | Teaching read | Status |
+| --- | --- | --- | --- |
+| 11 | `principle-design-for-failure` | batch 1 (Advisor, Codex Lead) | implemented |
+| 9 | `principle-separate-the-concerns` | batch 1 (Advisor, Codex Lead) | implemented |
+| 17 | `principle-refine-mental-models` | batch 1 (Advisor, Codex Lead) | implemented |
+| 8 | `principle-types-are-communication` | batch 1 (Advisor, Codex Lead) | implemented |
+| 12 | `principle-design-for-concurrency` | batch 2 (Advisor) | implemented |
+| 10 | `principle-justify-the-complexity` | batch 2 (Advisor) | implemented |
+| 1 | `principle-hold-the-scope` | batch 2 (Advisor) | implemented |
+| 2 | `principle-build-the-shared-model-first` | batch 3 (Advisor) | implemented |
+| 3 | `principle-define-the-domain-first` | batch 3 (Advisor) | implemented |
+| 4 | `principle-read-ground-truth-first` | batch 3 (Advisor) | implemented |
+| 5 | `principle-experiment-before-proposing` | batch 4 (Advisor) | implemented |
+| 6 | `principle-name-the-tradeoffs` | batch 4 (Advisor) | implemented |
+| 7 | `principle-one-owner-per-truth` | batch 4 (Advisor) | implemented |
+| 15 | `principle-verify-before-accepting` | batch 5 pending | implemented |
+| 16 | `principle-write-for-the-reader` | batch 5 pending | implemented |
+| 14 | `principle-prove-it-works` | batch 5 pending | implemented |
+| 13 | `principle-tests-are-executable-claims` | waiting for the owner's split decision (testing research: two principles plus a TDD practice) | old shape; not rewritten |
 
-Family surfaces (index, README, AGENTS.md, versions, changelog) landed with run 1. Implementation review is pending for all runs; no run is `reviewed` or `shipped`.
+No run is `reviewed` or `shipped`.
 
 ## Review record
 
