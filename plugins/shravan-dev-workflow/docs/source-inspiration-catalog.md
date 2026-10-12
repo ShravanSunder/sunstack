@@ -21,7 +21,7 @@ Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog 
 
 | Source tree | Preserve | Narrow / avoid |
 | --- | --- | --- |
-| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents; `principle-*` leaves for short callable judgment cards (one judgment each, "Apply when" triggers, name the decision a principle changed) | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
+| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents; `principle-*` leaves for callable judgment cards (one judgment each, user-invoked, name the decision a principle changed) | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
 | Matt Pocock skills | `grill-me`, `grill-with-docs`, domain modeling, codebase design, debugging/TDD, handoff patterns | Do not treat discussion prompts as a substitute for source-backed spec creation |
 | Addy Osmani agent skills | lifecycle taxonomy, interview/idea/spec/doubt/source-driven development, ADR/docs and observability ideas | Use as taxonomy and selected source, not a wholesale workflow |
 | Dimillian skills | review swarms, bug-hunt swarms, skill audit, batch refactor orchestration | Narrow Apple/UI-specific skills to macOS/iOS workflow contexts |
