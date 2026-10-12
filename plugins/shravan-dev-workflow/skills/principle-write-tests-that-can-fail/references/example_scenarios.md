@@ -44,7 +44,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## The red that wasn't
 
-**What happened.** Several "red before green" runs were red because the test file wasn't discovered, a test was skipped, or setup threw an unrelated error. None of them failed on the target assertion.
+**What happened.** Several "red before green" runs were red because the test file wasn't discovered, a test was skipped, or setup threw an unrelated error. None of them failed because of the behavior under test.
 
 **The move.** Read the failure before counting it.
 

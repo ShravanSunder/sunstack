@@ -187,7 +187,7 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 | 15 | `principle-verify-before-accepting` | batch 5 (Advisor) | implemented |
 | 16 | `principle-write-for-the-reader` | batch 5 (Advisor) | implemented |
 | 14 | `principle-prove-it-works` | batch 5 (Advisor) | implemented |
-| 13 | `principle-write-tests-that-can-fail` | double-check (Advisor and Codex Lead, independent, then compared) | implemented |
+| 13 | `principle-write-tests-that-can-fail` | double-check, then a teaching read (Advisor and Codex Lead, each independent) | implemented |
 
 No run is `reviewed` or `shipped`.
 
