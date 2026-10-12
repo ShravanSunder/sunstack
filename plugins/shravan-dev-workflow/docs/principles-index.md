@@ -6,7 +6,7 @@ A principle is one engineering judgment, written to teach: the idea behind it, h
 
 - Read the card in full before applying it. This index chooses the card; it does not replace it.
 - When a principle shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied.
-- Principles compose. One task often needs two, and each card's "Distinct from" line says where its neighbour takes over. A principle owns a question, not a file, tool, or test type.
+- Principles compose. One task often needs two, and each card's closing lines say where a neighbour takes over. A principle owns a question, not a file, tool, or test type.
 
 ## Understand
 

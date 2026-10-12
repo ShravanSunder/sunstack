@@ -12,7 +12,7 @@ Owner plugin: `shravan-dev-workflow`. Classification: `create`, behavior-changin
 | 2 | 1 | `principle-build-the-shared-model-first` | |
 | 3 | 1 | `principle-separate-the-concerns` | |
 | 4 | 1 | `principle-write-tests-that-can-fail` (D29) | |
-| 5–17 | 2 | the other 13, named in the index draft | |
+| 5–17 | 2 | the other 13, named in `plugins/shravan-dev-workflow/docs/principles-index.md` | |
 
 Wave 2 was to start after the wave-1 behavior check. With that check deferred (D19), all 17 runs are implemented in one pass and the family ships as one PR (D13); the waves remain only as the spec-review grouping (wave-1 text reviewed here, wave-2 text at implementation review).
 
@@ -33,7 +33,7 @@ Observable in the wave-1 check: with the card, authors satisfy more of the card'
 ## Numbering and terms
 
 - **Card N** (1–17) is the principle's number in the index order and the D18 table: 1 hold the scope … 17 refine mental models. **Run N** is implementation order (Run status table). They differ: run 3 is card 9. Decisions that say "card 3" or "card 17" mean the card number.
-- In D14, the chunk-card terms map to card sections: trigger → Apply when; countercase → Distinct from; case → Worked case; overkill → Overkill. No other sections are added.
+- In D14, the chunk-card terms map to card sections: trigger → Apply when; countercase → Distinct from; case → Worked case; overkill → Overkill. No other sections are added. *Superseded by D26:* the trigger lives in the description, the countercase in "When it doesn't apply" and the closing cross-references, the case in the anchor example and `references/example_scenarios.md`.
 
 ## Decisions
 
@@ -70,6 +70,7 @@ The owner may strike any row. Rows marked *owner* are the owner's decisions; the
 | D27 | 2026-10-12: each card's pointer to `references/example_scenarios.md` names its scenarios inline, so the content is visible before the file is opened. The conditional grammar stays. | Reference-loading research (`tmp/design-skills-lead/research/reference-loading.md`, Sol reducer with Luna operators): no measured comparison favors our grammar over plain pointers; vendor guidance and practice agree on exact path, a condition visible before opening, a short content cue, and an instruction to apply. Ours lacked only the content cue. Confidence moderate as guidance, low for any retrieval-rate gain. Owner: an `IF` call and "when X, load Y" are the same paradigm; the only value of the `IF` form is standardization in our repo. *owner* |
 | D28 | 2026-10-12: cards keep the owner's own phrasing from their private agent instructions, verbatim where it appears (14 near-verbatim sentences, mostly the philosophy voice, plus paraphrases). The private file itself stays private. *owner* | Shown side by side with source lines; owner chose to keep as-is. It is engineering philosophy, not secrets or personal data. |
 | D29 | 2026-10-12, supersedes card 13's D23 name: card 13 stays one card, renamed `principle-write-tests-that-can-fail`, opening with the owner's "Tests are executable claims about behavior." It teaches two hard calls, each with a reasoning walk and an example: what wrong behavior the test must catch (independent oracle, red for the right reason), and where it must run (the wrong behavior sets what stays real; the cheapest honest layer above that floor; the pyramid as distribution). TDD's loop stays in `implement-plan`; a TDD practice later only by moving that loop, not copying it. Card 14 takes three corrections from the same double-check: failures driven only where the claim covers them, the live recheck only when the automated run misses the original observation, and "a passing test proves only what it observes"; plus the caller as the user of an API or library. *owner* | Advisor recommended one card, Codex Lead a split; after one exchange both called either packaging acceptable on one shared condition (each decision gets its own walk and example). Owner chose one card and the name. Records: `tmp/design-skills-lead/reviews/double-check-13-14-{advisor,codex-lead,comparison}.md` in the design-skills worktree. |
+| D30 | 2026-10-12: quotes of the owner's engineering opinions are fine in public files; they are not private. Personal data, private context, and credentials stay out. The PR merges by squash; no history rewrite. The scenario paraphrases made at `9ba08c85` stay. *owner* | Owner, relayed by the Advisor ("quotes are fine there, not private stuff") and confirmed directly to the Lead ("no history rewrite, squash is fine"). |
 
 ### D18 names and their sources
 
@@ -100,15 +101,15 @@ Each name is a phrase the owner already uses: a heading or line in the owner's p
 | Surface | Every run |
 | --- | --- |
 | Trigger | description (D4), `disable-model-invocation: true`, `agents/openai.yaml` policy (D2, D3) |
-| Main path | the card: Apply when, Rule, Why, The test, Distinct from, Applied means |
-| Depth | inline Worked case and Overkill; no references (D5) |
-| Proof | static checks for all runs; the comparative behavior check for runs 1–4 |
+| Main path | the card (D26): the idea, how to think it through (with the hard call), one anchor example, when it doesn't apply, signs you skipped it, cross-references where they change the next move |
+| Depth | `references/example_scenarios.md`, loaded by one `IF` call that names its scenarios (D26, D27) |
+| Proof | static checks for all runs; no behavior check in step 1 (D19, D21) |
 
 Run 1 also adds the family surfaces listed in the targets table.
 
 ## Authoring basis
 
-User-directed intent: owner GO on step 1, 2026-10-12. Each card was written from the owner's private global instructions, owner atoms (P = prompts, W = owner-written skills; snapshot `8e5a2561f24b`), admired-source atoms (B, R), session-log cases (CASE), and pstack principle leaves. The cards quote none of them. Quoted sources: memory-logs `skills/authoring/2026-10-12-principles-layer/name-and-card-sources.md`.
+User-directed intent: owner GO on step 1, 2026-10-12. Each card was written from the owner's private global instructions, owner atoms (P = prompts, W = owner-written skills; snapshot `8e5a2561f24b`), admired-source atoms (B, R), session-log cases (CASE), and pstack principle leaves. The cards keep the owner's engineering wording from the private instructions, per D28; the instruction file itself stays private. Quoted sources: memory-logs `skills/authoring/2026-10-12-principles-layer/name-and-card-sources.md`.
 
 | Card | Sources |
 | --- | --- |
@@ -217,7 +218,7 @@ Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex 
   copy-vs-adapt decision: adapt; card shape and some principle ideas adapted, no upstream prose copied; names from the owner's phrases
   decision: allowed
   required proof: none beyond static validation (no executable surface)
-  public-safe constraints: no private owner quotes in public files (sources in memory-logs)
+  public-safe constraints: no personal data, private context, or credentials in public files; quotes of the owner's engineering opinions are allowed (D28, D30)
   review route: implementation review (sensitive-surface check)
   ```
 - **References loaded late.** `reference-design.md` and `worked-examples.md` were loaded after implementation; both confirm D5 (cards inline, no references). `reference-design.md` also confirms the index finding below.
