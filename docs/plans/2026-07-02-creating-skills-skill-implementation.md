@@ -1,13 +1,13 @@
 # Creating Skills Skill Implementation Plan
 
 goal_id: `2026-07-02-creating-skills`
-status: revised after `shravan-dev-workflow:plan-review-swarm`; ready for
-`shravan-dev-workflow:implementation-execute-plan`
+status: revised after `sunstack-dev:plan-review-swarm`; ready for
+`sunstack-dev:implementation-execute-plan`
 source spec: `docs/specs/2026-07-02-creating-skills-skill-spec.md`
 
 ## Goal
 
-Ship `shravan-dev-workflow:creating-skills` as the owned workflow for creating,
+Ship `sunstack-dev:creating-skills` as the owned workflow for creating,
 updating, and evaluating one named skill or accepted draft. The implementation
 must make `SKILL.md` a compact operational workflow spine, put branch-specific
 depth in `references/`, prove behavior through repo-local pressure scenarios,
@@ -68,17 +68,17 @@ evidence; this plan is the accepted planning artifact.
 
 Skill core:
 
-- `plugins/shravan-dev-workflow/skills/creating-skills/SKILL.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/authoring-intake.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/great-skill-evaluation.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/invocation-and-description.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/structure-and-progressive-disclosure.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/steering-and-wording.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/pressure-testing.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/platform-mechanics.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/pruning-and-maintenance.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/source-inspirations.md`
-- `plugins/shravan-dev-workflow/skills/creating-skills/references/skill-security-review.md`
+- `plugins/sunstack-dev/skills/creating-skills/SKILL.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/authoring-intake.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/great-skill-evaluation.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/invocation-and-description.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/structure-and-progressive-disclosure.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/steering-and-wording.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/pressure-testing.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/platform-mechanics.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/pruning-and-maintenance.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/source-inspirations.md`
+- `plugins/sunstack-dev/skills/creating-skills/references/skill-security-review.md`
 
 Proof:
 
@@ -90,14 +90,14 @@ Proof:
 Routing and docs:
 
 - `AGENTS.md`
-- `plugins/shravan-dev-workflow/README.md`
+- `plugins/sunstack-dev/README.md`
 - `plugins/README.md`
 
 Metadata and release memory:
 
-- `plugins/shravan-dev-workflow/skills/creating-skills/agents/openai.yaml`
-- `plugins/shravan-dev-workflow/.codex-plugin/plugin.json`
-- `plugins/shravan-dev-workflow/.claude-plugin/plugin.json`
+- `plugins/sunstack-dev/skills/creating-skills/agents/openai.yaml`
+- `plugins/sunstack-dev/.codex-plugin/plugin.json`
+- `plugins/sunstack-dev/.claude-plugin/plugin.json`
 - `.claude-plugin/marketplace.json` for version sync when the Claude plugin
   manifest version changes
 - `.agents/plugins/marketplace.json` only if the Codex marketplace source/path,
@@ -205,9 +205,9 @@ Behavior/capability:
 
 Likely touched files:
 
-- `plugins/shravan-dev-workflow/skills/creating-skills/SKILL.md`
+- `plugins/sunstack-dev/skills/creating-skills/SKILL.md`
 - all required files under
-  `plugins/shravan-dev-workflow/skills/creating-skills/references/`
+  `plugins/sunstack-dev/skills/creating-skills/references/`
 
 Checkpoint:
 
@@ -304,7 +304,7 @@ Behavior/capability:
 
 - Add `agents/openai.yaml` for `creating-skills`.
 - Update plugin manifest descriptions, keywords, default prompts, and version so
-  `creating-skills` is visible as part of `shravan-dev-workflow`.
+  `creating-skills` is visible as part of `sunstack-dev`.
 - Keep platform mechanics in `platform-mechanics.md`, not in `SKILL.md`.
 - Update `.claude-plugin/marketplace.json` when the Claude plugin version
   changes. Do not edit `.agents/plugins/marketplace.json` for version sync
@@ -314,9 +314,9 @@ Behavior/capability:
 
 Likely touched files:
 
-- `plugins/shravan-dev-workflow/skills/creating-skills/agents/openai.yaml`
-- `plugins/shravan-dev-workflow/.codex-plugin/plugin.json`
-- `plugins/shravan-dev-workflow/.claude-plugin/plugin.json`
+- `plugins/sunstack-dev/skills/creating-skills/agents/openai.yaml`
+- `plugins/sunstack-dev/.codex-plugin/plugin.json`
+- `plugins/sunstack-dev/.claude-plugin/plugin.json`
 - marketplace manifests if their plugin version metadata must be kept current
 
 Checkpoint:
@@ -328,9 +328,9 @@ Checkpoint:
 Proof:
 
 - Run the Codex `skill-creator` quick validator for
-  `plugins/shravan-dev-workflow/skills/creating-skills` with PyYAML available.
+  `plugins/sunstack-dev/skills/creating-skills` with PyYAML available.
 - `claude plugin validate .`
-- `codex plugin list --marketplace ai-tools --available --json`
+- `codex plugin list --marketplace sunstack --available --json`
 
 Dependencies:
 
@@ -350,7 +350,7 @@ Source anchors:
 Behavior/capability:
 
 - Update `AGENTS.md` Skill Work SOP so named skill create/update/evaluate routes
-  to `shravan-dev-workflow:creating-skills`.
+  to `sunstack-dev:creating-skills`.
 - Audit all `AGENTS.md` skill-authoring surfaces, not only Skill Work SOP.
   Demote `superpowers:writing-skills` and `skill-creator` from normal primary
   owner to source/reference/platform support where appropriate, while preserving
@@ -363,7 +363,7 @@ Behavior/capability:
 Likely touched files:
 
 - `AGENTS.md`
-- `plugins/shravan-dev-workflow/README.md`
+- `plugins/sunstack-dev/README.md`
 - `plugins/README.md`
 - `docs/changelog/2026-07-02-creating-skills.md`
 - `docs/changelog/README.md`
@@ -525,7 +525,7 @@ Minimum source/static gate:
 
 ```bash
 Run the Codex `skill-creator` quick validator for
-`plugins/shravan-dev-workflow/skills/creating-skills` with PyYAML available.
+`plugins/sunstack-dev/skills/creating-skills` with PyYAML available.
 ```
 
 Pressure gates:
@@ -549,7 +549,7 @@ Plugin/static gates:
 
 ```bash
 claude plugin validate .
-codex plugin list --marketplace ai-tools --available --json
+codex plugin list --marketplace sunstack --available --json
 ```
 
 Public-safe provenance gate:
@@ -558,10 +558,10 @@ Public-safe provenance gate:
 Run the public-safe shipped-file scan for temporary source paths, local absolute
 paths, installed-cache paths, rollout ids, secret references, cache hashes,
 work-fork markers, private-machine markers, and credential terms across:
-  plugins/shravan-dev-workflow/skills/creating-skills \
-  plugins/shravan-dev-workflow/.codex-plugin/plugin.json \
-  plugins/shravan-dev-workflow/.claude-plugin/plugin.json \
-  plugins/shravan-dev-workflow/README.md \
+  plugins/sunstack-dev/skills/creating-skills \
+  plugins/sunstack-dev/.codex-plugin/plugin.json \
+  plugins/sunstack-dev/.claude-plugin/plugin.json \
+  plugins/sunstack-dev/README.md \
   plugins/README.md \
   docs/changelog/2026-07-02-creating-skills.md \
   docs/changelog/README.md \
@@ -590,8 +590,8 @@ pstack, Codex creator, or Claude creator sources.
 
 Review/PR gates:
 
-- `shravan-dev-workflow:implementation-review-swarm`
-- `shravan-dev-workflow:implementation-pr-wrapup`
+- `sunstack-dev:implementation-review-swarm`
+- `sunstack-dev:implementation-pr-wrapup`
 
 ## Security Context
 
@@ -659,13 +659,13 @@ Replan before continuing if:
 
 ## Recommended Next Workflow
 
-Run `shravan-dev-workflow:implementation-execute-plan`. Adversarial
+Run `sunstack-dev:implementation-execute-plan`. Adversarial
 `plan-review-swarm` has completed and the accepted findings have been folded
 into this revised plan.
 
 ```text
 phase_result: complete
 evidence: docs/plans/2026-07-02-creating-skills-skill-implementation.md; tmp/plan-review-swarm/2026-07-02-creating-skills/review-packet.md; tmp/plan-review-swarm/2026-07-02-creating-skills/review-report.md
-recommended_next_workflow: shravan-dev-workflow:implementation-execute-plan
+recommended_next_workflow: sunstack-dev:implementation-execute-plan
 recommended_transition_reason: Plan-review findings were accepted, applied, and rechecked; the revised plan is ready for implementation execution.
 ```

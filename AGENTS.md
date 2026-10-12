@@ -16,7 +16,7 @@ ai-tools/
 ├── plugins/                          # Plugin sources
 │   ├── ai-scaffold/                  # Project scaffolding (biome, ruff, vitest, pytest)
 │   ├── dev-workflow-tools/           # Common tool skills, including Peekaboo UI testing
-│   ├── shravan-dev-workflow/         # Spec, review, docs, TUI, and Linear workflow skills
+│   ├── sunstack-dev/                  # Spec, review, docs, TUI, and Linear workflow skills
 │   └── skill-authoring/              # Skill creation, review, and audit
 ├── observability/                    # Shared local OpenTelemetry and Victoria stack
 ├── agent-scripts/                    # Host agent scripts (not plugin skills)
@@ -69,7 +69,7 @@ When doing skill work in this repo:
 4. Keep `SKILL.md` compact and progressive. Put depth in `references/` and deterministic mechanics in `scripts/`.
 5. `skill-creation`'s `references/proof-and-claims.md` owns what a behavior-proof claim may say and how a fresh run must be read to count.
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
-7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `shravan-dev-workflow:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
+7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
 For execution ownership, load `manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent implementation Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned implementation Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
 
@@ -84,7 +84,7 @@ Other sources:
 Upstream skill collections are tracked in a separate meta-repo so this plugin can keep a **lite** inspiration map while durable provenance lives next to the actual upstream checkouts.
 
 - **Meta-repo:** `/Users/shravansunder/Documents/dev/open-source/ai-dev-skills/`
-- **Lite in-plugin map:** `plugins/shravan-dev-workflow/docs/source-inspiration-catalog.md` (preserve/avoid + workflow-area overview; not a runtime skill reference)
+- **Lite in-plugin map:** `plugins/sunstack-dev/docs/source-inspiration-catalog.md` (preserve/avoid + workflow-area overview; not a runtime skill reference)
 
 | Need | Open |
 |------|------|
@@ -98,60 +98,60 @@ Upstream skill collections are tracked in a separate meta-repo so this plugin ca
 
 ## Shared Runtime References
 
-`plugins/shravan-dev-workflow/shared-references/` contains model-readable runtime procedures loaded by two or more active skills for the same cross-skill behavior. Name each file for the specific domain and action it owns, such as `code-review-feedback-handling.md`; do not use generic names such as `common.md`, `workflow.md`, or `shared-rules.md`.
+`plugins/sunstack-dev/shared-references/` contains model-readable runtime procedures loaded by two or more active skills for the same cross-skill behavior. Name each file for the specific domain and action it owns, such as `code-review-feedback-handling.md`; do not use generic names such as `common.md`, `workflow.md`, or `shared-rules.md`.
 
-Keep this directory small. Skill-specific stages, lane contracts, packet shapes, schemas, route-backs, proof rules, and examples remain under the owning skill's `references/`. Maintainer documentation belongs in `plugins/shravan-dev-workflow/docs/`; repository tests and evals belong under `tests/`. Do not preserve forwarding stubs when moving a runtime reference: update every active caller in the same hard cutover and let historical artifacts retain their original paths.
+Keep this directory small. Skill-specific stages, lane contracts, packet shapes, schemas, route-backs, proof rules, and examples remain under the owning skill's `references/`. Maintainer documentation belongs in `plugins/sunstack-dev/docs/`; repository tests and evals belong under `tests/`. Do not preserve forwarding stubs when moving a runtime reference: update every active caller in the same hard cutover and let historical artifacts retain their original paths.
 
 Design-view ownership follows the same split: `shared-references/diagram-rendering-and-fallbacks.md` owns runtime medium selection, fallback, semantic preservation, and visual checks; `shared-references/generated-document-visuals.md` owns conditional Image Gen capability, durable asset/embed and pixel/preview procedure; each design skill's `SKILL.md` owns its view predicates, required semantic fields and Lead-authored visual meaning; `docs/diagram-vocabulary.md` is the maintainer index of tokens, altitude, owners, and consumers.
 
 ## System Observability Ownership
 
-`observability/` owns the shared local OpenTelemetry and Victoria stack. `shravan-dev-workflow:ops-observability-stack` owns agent-facing query and debugging guidance. Do not move this stack into `devfiles`, and do not duplicate Docker Compose, collector, or generic Victoria query docs into app repos.
+`observability/` owns the shared local OpenTelemetry and Victoria stack. `sunstack-dev:ops-observability-stack` owns agent-facing query and debugging guidance. Do not move this stack into `devfiles`, and do not duplicate Docker Compose, collector, or generic Victoria query docs into app repos.
 
 ### Skill layers
 
-Skills are layered by the role they play: orchestrators run a whole job; phases are its steps; practices (`practices-collaboration` < `practices-show-me-your-work` < `manage-agents` < `practices-research`) are always on, with `ops-*` and `presentation-*` at the same level; tool manuals such as `agent-collaboration` cover only how to call a tool. Within a layer, skills may name each other freely, cycles included. No skill names a skill in a higher layer: phases never name an orchestrator, and practices, tool manuals, and shared references never name phases or orchestrators except as consumer declarations or data values. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which orchestrators map to the next owner; mapping never widens the requested task. Phase skills open or resume the trace through `practices-show-me-your-work` at entry and checkpoint at completion. Principles (`principle-*`) are the bottom layer: callable judgment cards, not auto-invoked, that name only sibling principles; `plugins/shravan-dev-workflow/docs/principles-index.md` maps them. Devfiles is the session root outside the layers. The governing spec is `docs/wip/skills-authoring/2026-09-25-capability-revamp/proposal.md`.
+Skills are layered by the role they play: orchestrators run a whole job; phases are its steps; practices (`practices-collaboration` < `practices-show-me-your-work` < `manage-agents` < `practices-research`) are always on, with `ops-*` and `presentation-*` at the same level; tool manuals such as `agent-collaboration` cover only how to call a tool. Within a layer, skills may name each other freely, cycles included. No skill names a skill in a higher layer: phases never name an orchestrator, and practices, tool manuals, and shared references never name phases or orchestrators except as consumer declarations or data values. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which orchestrators map to the next owner; mapping never widens the requested task. Phase skills open or resume the trace through `practices-show-me-your-work` at entry and checkpoint at completion. Principles (`principle-*`) are the bottom layer: callable judgment cards, not auto-invoked, that name only sibling principles; `plugins/sunstack-dev/docs/principles-index.md` maps them. Devfiles is the session root outside the layers. The governing spec is `docs/wip/skills-authoring/2026-09-25-capability-revamp/proposal.md`.
 
 ### Current Plugin Skills
 
 | Skill | Location | Purpose |
 |-------|----------|---------|
-| spec-design | `plugins/shravan-dev-workflow/skills/spec-design/` | Authoritative Why/What: problem, consumers, outcomes, requirements, observable contracts, constraints, failure obligations, and proof obligations |
-| program-design | `plugins/shravan-dev-workflow/skills/program-design/` | Structural How: components, ownership, interfaces, state, flows, failure/recovery, concurrency, trust boundaries, and proof seams |
-| spec-program-review | `plugins/shravan-dev-workflow/skills/spec-program-review/` | Independent 🔎 Review Sidekick walks mode-complete, sequential seam passes, dispel, proof challenge, and predicate-selected focused checks; rails-anchored reduction, no editing or acceptance, bounded review rounds |
-| discuss-clarify-mental-models | `plugins/shravan-dev-workflow/skills/discuss-clarify-mental-models/` | Read-only reconvergence for unstable shared mental models before specs, plans, docs, or code: terms, boundaries, assumptions, source-of-truth questions, tradeoffs, branches, and countercase |
-| discuss-pathfinding | `plugins/shravan-dev-workflow/skills/discuss-pathfinding/` | Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
-| practices-research | `plugins/shravan-dev-workflow/skills/practices-research/` | Practice: evidence gathering for local code/docs, prior art, current web/docs, Reader, memory, and session-log research with ordered source classes, `tmp/practices-research/` ledgers, and a return token for the next owner |
-| manage-agents | `plugins/shravan-dev-workflow/skills/manage-agents/` | Practice: classify (direction, span, horizon), roles, models by role, launch (native, agent-router, legacy ACPX), handoff, and verification for advisors, sidekicks, workers, operators, and subagents |
-| orchestrator-implementation-goal | `plugins/shravan-dev-workflow/skills/orchestrator-implementation-goal/` | Coordinate Lead-authored planning, planned-PR implementation/proof, Lead assessment, independent review, corrections, and the requested delivery boundary |
-| practices-collaboration | `plugins/shravan-dev-workflow/skills/practices-collaboration/` | Practice: find the repository's board project and work thread at entry (ask once and return `no-home` when none), seats by role, message vs post, waiting on another agent, and deliberate resolution |
-| practices-show-me-your-work | `plugins/shravan-dev-workflow/skills/practices-show-me-your-work/` | Practice: open or resume the work trace at the start of a qualifying task, record decisions, evidence, and outcomes, checkpoint at every stop; unshared `docs/wip/work-trails/` folder until a board exists, then the Lead transfers it |
-| orchestrator-design | `plugins/shravan-dev-workflow/skills/orchestrator-design/` | Coordinate Requirements, Specification, Program Design, and independent review to a coherent reviewed design; record meaningful decisions through the work trail |
-| docs-maintain | `plugins/shravan-dev-workflow/skills/docs-maintain/` | Maintain durable docs and classify existing specs/plans/debug artifacts for cleanup, archival, or promotion after phase skills create them |
-| spec-handoff | `plugins/shravan-dev-workflow/skills/spec-handoff/` | Portable spec/design context packets before an implementation plan exists |
-| plan-implementation | `plugins/shravan-dev-workflow/skills/plan-implementation/` | Lead-authored translation of one current ready Requirements/Specification/Program Design set into a repo-grounded proof-bearing plan |
-| plan-improve-repo | `plugins/shravan-dev-workflow/skills/plan-improve-repo/` | Audit a repository for high-leverage improvements; the Lead writes or validates canonical plans only after planning admission |
-| implement-plan | `plugins/shravan-dev-workflow/skills/implement-plan/` | Validate and execute one immutable-path approved canonical plan with slice-local proof and explicit replan stops |
-| implementation-review | `plugins/shravan-dev-workflow/skills/implementation-review/` | Independent 🔎 Review Sidekick reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and focused checks; rails-anchored reduction and cause-based routing without editing |
-| ops-security-review | `plugins/shravan-dev-workflow/skills/ops-security-review/` | Routes authorized security scans to the official Codex Security workflows |
-| implementation-pr-wrapup | `plugins/shravan-dev-workflow/skills/implementation-pr-wrapup/` | Finish GitHub PR lifecycle work after implementation: push/open/update, monitor checks/comments, handle existing review threads, prove merge readiness, and merge only when authorized |
-| plan-handoff | `plugins/shravan-dev-workflow/skills/plan-handoff/` | Copy-pasteable existing implementation-plan packets for other agents, CLIs, machines, or future sessions |
-| implementation-handoff | `plugins/shravan-dev-workflow/skills/implementation-handoff/` | Implementation-state packets for manual reviewers or continuation agents |
-| ops-observability-stack | `plugins/shravan-dev-workflow/skills/ops-observability-stack/` | Shared local OTel and Victoria stack operations, producer boundaries, resource naming, and debug/beta query loops |
-| debug-investigation | `plugins/shravan-dev-workflow/skills/debug-investigation/` | Diagnosis-first debugging with repo-local debug artifacts for clear real debugging work before fixes |
+| spec-design | `plugins/sunstack-dev/skills/spec-design/` | Authoritative Why/What: problem, consumers, outcomes, requirements, observable contracts, constraints, failure obligations, and proof obligations |
+| program-design | `plugins/sunstack-dev/skills/program-design/` | Structural How: components, ownership, interfaces, state, flows, failure/recovery, concurrency, trust boundaries, and proof seams |
+| spec-program-review | `plugins/sunstack-dev/skills/spec-program-review/` | Independent 🔎 Review Sidekick walks mode-complete, sequential seam passes, dispel, proof challenge, and predicate-selected focused checks; rails-anchored reduction, no editing or acceptance, bounded review rounds |
+| discuss-clarify-mental-models | `plugins/sunstack-dev/skills/discuss-clarify-mental-models/` | Read-only reconvergence for unstable shared mental models before specs, plans, docs, or code: terms, boundaries, assumptions, source-of-truth questions, tradeoffs, branches, and countercase |
+| discuss-pathfinding | `plugins/sunstack-dev/skills/discuss-pathfinding/` | Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
+| practices-research | `plugins/sunstack-dev/skills/practices-research/` | Practice: evidence gathering for local code/docs, prior art, current web/docs, Reader, memory, and session-log research with ordered source classes, `tmp/practices-research/` ledgers, and a return token for the next owner |
+| manage-agents | `plugins/sunstack-dev/skills/manage-agents/` | Practice: classify (direction, span, horizon), roles, models by role, launch (native, agent-router, legacy ACPX), handoff, and verification for advisors, sidekicks, workers, operators, and subagents |
+| orchestrator-implementation-goal | `plugins/sunstack-dev/skills/orchestrator-implementation-goal/` | Coordinate Lead-authored planning, planned-PR implementation/proof, Lead assessment, independent review, corrections, and the requested delivery boundary |
+| practices-collaboration | `plugins/sunstack-dev/skills/practices-collaboration/` | Practice: find the repository's board project and work thread at entry (ask once and return `no-home` when none), seats by role, message vs post, waiting on another agent, and deliberate resolution |
+| practices-show-me-your-work | `plugins/sunstack-dev/skills/practices-show-me-your-work/` | Practice: open or resume the work trace at the start of a qualifying task, record decisions, evidence, and outcomes, checkpoint at every stop; unshared `docs/wip/work-trails/` folder until a board exists, then the Lead transfers it |
+| orchestrator-design | `plugins/sunstack-dev/skills/orchestrator-design/` | Coordinate Requirements, Specification, Program Design, and independent review to a coherent reviewed design; record meaningful decisions through the work trail |
+| docs-maintain | `plugins/sunstack-dev/skills/docs-maintain/` | Maintain durable docs and classify existing specs/plans/debug artifacts for cleanup, archival, or promotion after phase skills create them |
+| spec-handoff | `plugins/sunstack-dev/skills/spec-handoff/` | Portable spec/design context packets before an implementation plan exists |
+| plan-implementation | `plugins/sunstack-dev/skills/plan-implementation/` | Lead-authored translation of one current ready Requirements/Specification/Program Design set into a repo-grounded proof-bearing plan |
+| plan-improve-repo | `plugins/sunstack-dev/skills/plan-improve-repo/` | Audit a repository for high-leverage improvements; the Lead writes or validates canonical plans only after planning admission |
+| implement-plan | `plugins/sunstack-dev/skills/implement-plan/` | Validate and execute one immutable-path approved canonical plan with slice-local proof and explicit replan stops |
+| implementation-review | `plugins/sunstack-dev/skills/implementation-review/` | Independent 🔎 Review Sidekick reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and focused checks; rails-anchored reduction and cause-based routing without editing |
+| ops-security-review | `plugins/sunstack-dev/skills/ops-security-review/` | Routes authorized security scans to the official Codex Security workflows |
+| implementation-pr-wrapup | `plugins/sunstack-dev/skills/implementation-pr-wrapup/` | Finish GitHub PR lifecycle work after implementation: push/open/update, monitor checks/comments, handle existing review threads, prove merge readiness, and merge only when authorized |
+| plan-handoff | `plugins/sunstack-dev/skills/plan-handoff/` | Copy-pasteable existing implementation-plan packets for other agents, CLIs, machines, or future sessions |
+| implementation-handoff | `plugins/sunstack-dev/skills/implementation-handoff/` | Implementation-state packets for manual reviewers or continuation agents |
+| ops-observability-stack | `plugins/sunstack-dev/skills/ops-observability-stack/` | Shared local OTel and Victoria stack operations, producer boundaries, resource naming, and debug/beta query loops |
+| debug-investigation | `plugins/sunstack-dev/skills/debug-investigation/` | Diagnosis-first debugging with repo-local debug artifacts for clear real debugging work before fixes |
 | skill-orchestrator | `plugins/skill-authoring/skills/skill-orchestrator/` | Carry one skill change from spec through review, implementation, proof, assessment, and release |
 | skill-creation | `plugins/skill-authoring/skills/skill-creation/` | The skill craft and the skill spec: design and write one named skill |
 | skill-review | `plugins/skill-authoring/skills/skill-review/` | Independent review of a skill spec or skill files by several reviewer agents |
 | skill-audit | `plugins/skill-authoring/skills/skill-audit/` | Evidence-backed portfolio audits using current plugin inventory, session patterns, and upstream inspirations |
-| presentation-tui | `plugins/shravan-dev-workflow/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
-| presentation-webui | `plugins/shravan-dev-workflow/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
-| principle-* (17) | `plugins/shravan-dev-workflow/skills/principle-*/` | Callable engineering judgment cards, one judgment each (for example `principle-design-for-failure`); not auto-invoked; family map in `plugins/shravan-dev-workflow/docs/principles-index.md` |
-| ops-linear-tracking | `plugins/shravan-dev-workflow/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |
+| presentation-tui | `plugins/sunstack-dev/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
+| presentation-webui | `plugins/sunstack-dev/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
+| principle-* (17) | `plugins/sunstack-dev/skills/principle-*/` | Callable engineering judgment cards, one judgment each (for example `principle-design-for-failure`); not auto-invoked; family map in `plugins/sunstack-dev/docs/principles-index.md` |
+| ops-linear-tracking | `plugins/sunstack-dev/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |
 | peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common — works in both Claude and Codex) |
 | scaffold-project | `plugins/ai-scaffold/skills/scaffold-project/` | Project scaffolding (common) |
 | agent-collaboration | `plugins/agent-router/skills/agent-collaboration/` | Tool manual for the agent-collaboration CLI and agent-router MCP: identity, sessions, boards, messages, listen/wait, wakes, schedules, uncertain-mutation recovery (Codex, Claude Code, and Cursor via `agent-router`) |
 
-Retired skill source is preserved under `plugins/shravan-dev-workflow/retired-skills/` and is not runtime-discoverable. The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` trees remain there as provenance and never become runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of the retired goal controller, planning swarm, execution controller, or review swarm. The current runtime surface is exactly the active skills enumerated above.
+Retired skill source is preserved under `plugins/sunstack-dev/retired-skills/` and is not runtime-discoverable. The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` trees remain there as provenance and never become runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of the retired goal controller, planning swarm, execution controller, or review swarm. The current runtime surface is exactly the active skills enumerated above.
 
 ### Changelog Expectations
 
@@ -189,7 +189,7 @@ Skills encode judgment, house style, and repeatable failure prevention. Prefer i
 
 - Treat this section as repo-local guardrails. Use `Skill Work SOP` above and the `skill-authoring` skills before relying on these bullets.
 - When creating, editing, evaluating, or pressure-testing one named skill, use the `skill-authoring` skills. `skill-creation`'s references adapt Matt-style great-skill vocabulary, pressure-proof lessons from `superpowers:writing-skills`, and platform mechanics from `skill-creator`. For broad portfolio questions, use `skill-audit` instead.
-- Name skills namespace-first in hyphen-case: lead with the domain family, then the searchable action or role (`implementation-review`, `spec-design`, `plan-handoff`). The namespace table in `plugins/shravan-dev-workflow/README.md` owns the family list.
+- Name skills namespace-first in hyphen-case: lead with the domain family, then the searchable action or role (`implementation-review`, `spec-design`, `plan-handoff`). The namespace table in `plugins/sunstack-dev/README.md` owns the family list.
 - Write the frontmatter `description` as a trigger: start with `Use when...`, name concrete situations and symptoms, and do not summarize the workflow.
 - Keep `SKILL.md` concise and progressive. Move heavy examples, rubrics, templates, and long prompt packets into `references/`; use `scripts/` for deterministic mechanics.
 - Human-facing workflow README files may live inside skill folders when the user explicitly requests them. Keep them concise and non-authoritative: link to `SKILL.md` and its references instead of duplicating the runtime contract.
@@ -219,7 +219,7 @@ Plugins are distributed through both marketplace manifests when they support bot
 claude plugin validate .
 
 # Inspect Codex marketplace state
-codex plugin list --marketplace ai-tools --available --json
+codex plugin list --marketplace sunstack --available --json
 ```
 
 ### Plugin Structure
@@ -247,7 +247,7 @@ plugins/<plugin-name>/
 - `${CLAUDE_PLUGIN_ROOT}` resolves to the cached install path at runtime -- use it in hooks and scripts
 - Path traversal (`..`) is NOT allowed in source paths
 - Plugin `name` is the cache key for consumers -- changing it breaks existing installs
-- Run `claude plugin validate .` after Claude marketplace changes and `codex plugin list --marketplace ai-tools --available --json` after Codex marketplace changes
+- Run `claude plugin validate .` after Claude marketplace changes and `codex plugin list --marketplace sunstack --available --json` after Codex marketplace changes
 
 ### Hook Development Gotchas
 

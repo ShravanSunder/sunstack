@@ -5,11 +5,11 @@ import { describe, expect, test } from "vitest";
 const repoRoot = path.resolve(import.meta.dirname, "../../..");
 const activeSkillRoot = path.join(
   repoRoot,
-  "plugins/shravan-dev-workflow/skills",
+  "plugins/sunstack-dev/skills",
 );
 const retiredSkillRoot = path.join(
   repoRoot,
-  "plugins/shravan-dev-workflow/retired-skills",
+  "plugins/sunstack-dev/retired-skills",
 );
 const provenanceSkillNames = [
   "orchestrator-goal",
@@ -49,8 +49,8 @@ describe("retired skill runtime discoverability", () => {
 
   test("does not register retired skills in either plugin manifest", () => {
     const manifests = [
-      path.join(repoRoot, "plugins/shravan-dev-workflow/.codex-plugin/plugin.json"),
-      path.join(repoRoot, "plugins/shravan-dev-workflow/.claude-plugin/plugin.json"),
+      path.join(repoRoot, "plugins/sunstack-dev/.codex-plugin/plugin.json"),
+      path.join(repoRoot, "plugins/sunstack-dev/.claude-plugin/plugin.json"),
     ];
 
     for (const manifestPath of manifests) {

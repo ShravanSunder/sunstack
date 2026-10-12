@@ -4,7 +4,7 @@
 
 **Goal:** Add the shared local OpenTelemetry and Victoria stack plus the reusable `ops-observability-stack` skill to `ai-tools`, making this repo the source of truth for common observability operations.
 
-**Architecture:** `ai-tools/observability` owns runnable shared infrastructure: Docker Compose, collector config, stack control commands, smoke tests, and data/port conventions. `shravan-dev-workflow:ops-observability-stack` owns agent-facing understanding: when to start the stack, how strict observability launchers differ from ordinary fail-open app startup, how to query Victoria, and how to avoid leaking sensitive data. App repos remain thin producers and should not duplicate query recipes.
+**Architecture:** `ai-tools/observability` owns runnable shared infrastructure: Docker Compose, collector config, stack control commands, smoke tests, and data/port conventions. `sunstack-dev:ops-observability-stack` owns agent-facing understanding: when to start the stack, how strict observability launchers differ from ordinary fail-open app startup, how to query Victoria, and how to avoid leaking sensitive data. App repos remain thin producers and should not duplicate query recipes.
 
 **Tech Stack:** Bash, Docker Compose, OpenTelemetry Collector Contrib, VictoriaMetrics, VictoriaLogs, VictoriaTraces, markdown skills, Codex/Claude plugin manifests, shell pressure tests.
 
@@ -136,12 +136,12 @@ Create:
 - `observability/otel-collector.yaml` - OTLP receive/process/export config and scrub policy.
 - `observability/README.md` - concise human/operator docs.
 - `tests/observability/test-observability-stack.sh` - static command/config test.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/SKILL.md` - skill entrypoint.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/resource-naming.md` - shared service names, resource attributes, and state-file keys.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/producer-contract.md` - producer rules.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/agentstudio-loop.md` - AgentStudio start and state-file loop.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/agent-vm-loop.md` - Agent VM / `shravan-claw-beta` external-stack loop.
-- `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/victoria-queries.md` - reusable Victoria query recipes.
+- `plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md` - skill entrypoint.
+- `plugins/sunstack-dev/skills/ops-observability-stack/references/resource-naming.md` - shared service names, resource attributes, and state-file keys.
+- `plugins/sunstack-dev/skills/ops-observability-stack/references/producer-contract.md` - producer rules.
+- `plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md` - AgentStudio start and state-file loop.
+- `plugins/sunstack-dev/skills/ops-observability-stack/references/agent-vm-loop.md` - Agent VM / `shravan-claw-beta` external-stack loop.
+- `plugins/sunstack-dev/skills/ops-observability-stack/references/victoria-queries.md` - reusable Victoria query recipes.
 - `tests/skills/pressure-scenarios/ops-observability-stack-boundary.md` - shortcut-pressure scenario.
 - `tests/skills/pressure-scenarios/ops-observability-agent-vm-boundary.md` - managed-vs-external shortcut-pressure scenario.
 - `docs/changelog/2026-06-12-shared-observability-stack.md` - public-safe changelog.
@@ -151,9 +151,9 @@ Modify:
 - `README.md`
 - `agents.md`
 - `docs/changelog/README.md`
-- `plugins/shravan-dev-workflow/README.md`
-- `plugins/shravan-dev-workflow/.codex-plugin/plugin.json`
-- `plugins/shravan-dev-workflow/.claude-plugin/plugin.json`
+- `plugins/sunstack-dev/README.md`
+- `plugins/sunstack-dev/.codex-plugin/plugin.json`
+- `plugins/sunstack-dev/.claude-plugin/plugin.json`
 
 ## Task 1: Define The Stack Contract
 
@@ -335,7 +335,7 @@ eval "$("$HOME/dev/ai-tools/observability/observability-stack" env)"
 ```
 
 For query recipes and app-specific loops, load
-`shravan-dev-workflow:ops-observability-stack`.
+`sunstack-dev:ops-observability-stack`.
 ```
 
 - [ ] **Step 5: Run green**
@@ -364,17 +364,17 @@ resource attributes.
 ## Task 3: Add The Skill
 
 **Files:**
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/SKILL.md`
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/resource-naming.md`
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/producer-contract.md`
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/agentstudio-loop.md`
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/agent-vm-loop.md`
-- Create: `plugins/shravan-dev-workflow/skills/ops-observability-stack/references/victoria-queries.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/references/resource-naming.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/references/producer-contract.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/references/agent-vm-loop.md`
+- Create: `plugins/sunstack-dev/skills/ops-observability-stack/references/victoria-queries.md`
 - Create: `tests/skills/pressure-scenarios/ops-observability-stack-boundary.md`
 - Create: `tests/skills/pressure-scenarios/ops-observability-agent-vm-boundary.md`
-- Modify: `plugins/shravan-dev-workflow/README.md`
-- Modify: `plugins/shravan-dev-workflow/.codex-plugin/plugin.json`
-- Modify: `plugins/shravan-dev-workflow/.claude-plugin/plugin.json`
+- Modify: `plugins/sunstack-dev/README.md`
+- Modify: `plugins/sunstack-dev/.codex-plugin/plugin.json`
+- Modify: `plugins/sunstack-dev/.claude-plugin/plugin.json`
 
 - [ ] **Step 1: Create skill entrypoint**
 
@@ -435,7 +435,7 @@ external-mode guidance. Expected behavior:
 
 - [ ] **Step 4: Update plugin metadata**
 
-Update skill list docs and bump `shravan-dev-workflow` patch version in both plugin manifests. Do not change unrelated plugin metadata.
+Update skill list docs and bump `sunstack-dev` patch version in both plugin manifests. Do not change unrelated plugin metadata.
 
 - [ ] **Step 5: Validate skill**
 

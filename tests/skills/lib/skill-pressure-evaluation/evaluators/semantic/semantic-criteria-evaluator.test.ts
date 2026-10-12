@@ -185,7 +185,7 @@ describe("buildSemanticSubjectResponse", () => {
   test("keeps same-request response parts ordered and marks the latest", () => {
     const baseResult = {
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast" as const,
       read_only: true,
@@ -221,7 +221,7 @@ describe("buildSemanticSubjectResponse", () => {
     const earlierDecision = "named countercase ".repeat(220);
     const baseResult = {
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast" as const,
       read_only: true,
@@ -245,7 +245,7 @@ describe("buildSemanticSubjectResponse", () => {
   test("keeps oversized response-part evidence valid and retains the latest correction", () => {
     const baseResult = {
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast" as const,
       read_only: true,
@@ -282,7 +282,7 @@ describe("buildSemanticSubjectResponse", () => {
   test("collapses an extreme older-part count with explicit omission evidence", () => {
     const baseResult = {
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast" as const,
       read_only: true,
@@ -313,7 +313,7 @@ describe("buildSemanticSubjectResponse", () => {
   test("projects every behavior-bearing subject field into bounded judge evidence", () => {
     const response = buildSemanticSubjectResponse({
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast",
       read_only: true,
@@ -340,7 +340,7 @@ describe("buildSemanticSubjectResponse", () => {
   test("keeps every field visible when earlier evidence exceeds the prompt budget", () => {
     const response = buildSemanticSubjectResponse({
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast",
       read_only: true,
@@ -367,7 +367,7 @@ describe("buildSemanticSubjectResponse", () => {
     const escapeHeavyEvidence = "\u0000".repeat(10_000);
     const response = buildSemanticSubjectResponse({
       scenario_id: "semantic-case",
-      skill_under_test: "shravan-dev-workflow:implement-plan",
+      skill_under_test: "sunstack-dev:implement-plan",
       skill_invoked: true,
       mode: "fast",
       read_only: true,
@@ -475,7 +475,7 @@ describe("createSemanticCriteriaEvaluator", () => {
     const artifactPath = join(artifactDirectory, "semantic-judge.json");
     const input: SkillPressureInput = {
       scenarioId: definition.scenarioId,
-      skillUnderTest: "shravan-dev-workflow:discuss-pathfinding",
+      skillUnderTest: "sunstack-dev:discuss-pathfinding",
       mode: "fast",
       prompt: "Help establish the boundary.",
     };

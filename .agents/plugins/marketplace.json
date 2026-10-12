@@ -1,9 +1,9 @@
 {
-  "name": "ai-tools",
+  "name": "sunstack",
   "interface": {
-    "displayName": "AI Tools",
+    "displayName": "Sunstack",
     "shortDescription": "Personal Codex plugins and skills for review, scaffolding, UI testing, and agent workflows",
-    "longDescription": "AI Tools is Shravan Sunder's personal Codex marketplace for reusable agent workflows, including long-horizon delivery routing, canonical planning, plan execution, independent implementation review, project scaffolding, native UI testing, design workflows, handoffs, PR wrap-up, operations, and TUI presentation guidance."
+    "longDescription": "Sunstack is Shravan Sunder's personal Codex marketplace for reusable agent workflows, including long-horizon delivery routing, canonical planning, plan execution, independent implementation review, project scaffolding, native UI testing, design workflows, handoffs, PR wrap-up, operations, and TUI presentation guidance."
   },
   "plugins": [
     {
@@ -31,16 +31,17 @@
       "category": "Coding"
     },
     {
-      "name": "shravan-dev-workflow",
+      "name": "sunstack-dev",
       "source": {
         "source": "local",
-        "path": "./plugins/shravan-dev-workflow"
+        "path": "./plugins/sunstack-dev"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_USE"
       },
-      "category": "Coding"
+      "category": "Coding",
+      "version": "2.75.0"
     },
     {
       "name": "skill-authoring",

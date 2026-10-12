@@ -12,7 +12,7 @@ import { createEvaluatorTestContext } from "../evaluator-test-context.js";
 
 const input: SkillPressureInput = {
   scenarioId: "test",
-  skillUnderTest: "shravan-dev-workflow:test-skill",
+  skillUnderTest: "sunstack-dev:test-skill",
   mode: "fast",
   prompt: "Use the skill.",
 };
@@ -23,7 +23,7 @@ const baseOutput: SkillPressureHarnessOutput = {
   earlierConversationTurns: [],
   finalResult: {
     scenario_id: "test",
-    skill_under_test: "shravan-dev-workflow:test-skill",
+    skill_under_test: "sunstack-dev:test-skill",
     skill_invoked: true,
     mode: "fast",
     read_only: true,

@@ -7,7 +7,7 @@ import {
 } from "./parse-scenario-fixture.js";
 
 const repeatedMetadataScenario = `scenario_id: repeated-fields
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 mode: fast
 expect_decision_regex: first decision
 expect_decision_regex: second decision
@@ -35,7 +35,7 @@ describe("parseScenarioMarkdown", () => {
     });
 
     expect(scenario.scenarioId).toBe("repeated-fields");
-    expect(scenario.skillUnderTest).toBe("shravan-dev-workflow:test-skill");
+    expect(scenario.skillUnderTest).toBe("sunstack-dev:test-skill");
     expect(scenario.expectDecisionRegexes).toEqual([
       "first decision",
       "second decision",
@@ -50,7 +50,7 @@ describe("parseScenarioMarkdown", () => {
     const scenario = parseScenarioMarkdown({
       filePath: "/repo/tests/skills/pressure-scenarios/defaults.md",
       markdown: `scenario_id: defaults
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 
 ## Prompt
 
@@ -84,7 +84,7 @@ Stay read-only.
     const scenario = parseScenarioMarkdown({
       filePath: "/repo/tests/skills/pressure-scenarios/trimmed.md",
       markdown: `scenario_id : trimmed-scenario
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 mode: fast
 expect_decision_regex: ${"trimmed decision  "}
 
@@ -102,7 +102,7 @@ Use the skill.
     expect(() =>
       parseScenarioMarkdown({
         filePath: "/repo/tests/skills/pressure-scenarios/bad.md",
-        markdown: `skill_under_test: shravan-dev-workflow:test-skill
+        markdown: `skill_under_test: sunstack-dev:test-skill
 
 ## Prompt
 
@@ -117,7 +117,7 @@ No id.
       parseScenarioMarkdown({
         filePath: "/repo/tests/skills/pressure-scenarios/bad.md",
         markdown: `scenario_id: bad
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 `,
       }),
     ).toThrow(/Prompt/);
@@ -163,9 +163,9 @@ describe("validateScenarioFilePlacement", () => {
   test("accepts plugin and skill folders matching skill_under_test", () => {
     const scenarioDirectory = "/repo/tests/skills/pressure-scenarios";
     const scenario = parseScenarioMarkdown({
-      filePath: `${scenarioDirectory}/shravan-dev-workflow/spec-design/boundary.md`,
+      filePath: `${scenarioDirectory}/sunstack-dev/spec-design/boundary.md`,
       markdown: `scenario_id: spec-design-boundary
-skill_under_test: shravan-dev-workflow:spec-design
+skill_under_test: sunstack-dev:spec-design
 
 ## Prompt
 
@@ -183,7 +183,7 @@ Use the skill.
     const scenario = parseScenarioMarkdown({
       filePath: `${scenarioDirectory}/spec-design-boundary.md`,
       markdown: `scenario_id: spec-design-boundary
-skill_under_test: shravan-dev-workflow:spec-design
+skill_under_test: sunstack-dev:spec-design
 
 ## Prompt
 

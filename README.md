@@ -4,31 +4,31 @@ Local Codex and Claude Code plugins for AI-assisted development workflows.
 
 ## Core Plugins
 
-Install through the local ai-tools marketplaces.
+Install through the local sunstack marketplaces.
 
 ```bash
 codex plugin marketplace add ~/dev/ai-tools
-/plugin marketplace add ShravanSunder/ai-tools
+/plugin marketplace add ShravanSunder/sunstack
 ```
 
 The plugin IDs below are shared across Codex and Claude Code.
 
 | Client | Scaffolding | Dev workflow | Dev tools |
 |--------|-------------|--------------|-----------|
-| Codex | `scaffold-project@ai-tools` | `shravan-dev-workflow@ai-tools` | `dev-workflow-tools@ai-tools` |
-| Claude Code | `scaffold-project@ai-tools` | `shravan-dev-workflow@ai-tools` | `dev-workflow-tools@ai-tools` |
+| Codex | `scaffold-project@sunstack` | `sunstack-dev@sunstack` | `dev-workflow-tools@sunstack` |
+| Claude Code | `scaffold-project@sunstack` | `sunstack-dev@sunstack` | `dev-workflow-tools@sunstack` |
 
 ```bash
-codex plugin add <name>@ai-tools
-/plugin install <name>@ai-tools
+codex plugin add <name>@sunstack
+/plugin install <name>@sunstack
 ```
 
 | Plugin | Description |
 |--------|-------------|
-| [`shravan-dev-workflow`](plugins/shravan-dev-workflow/) | Codex-first spec, program design, pathfinding, plan, implementation, PR wrap-up, review, handoff, debugging, TUI presentation, and ops workflows |
+| [`sunstack-dev`](plugins/sunstack-dev/) | Codex-first spec, program design, pathfinding, plan, implementation, PR wrap-up, review, handoff, debugging, TUI presentation, and ops workflows |
 | [`dev-workflow-tools`](plugins/dev-workflow-tools/) | Common development tool skills, including native macOS UI testing with Peekaboo CLI |
 | [`scaffold-project`](plugins/ai-scaffold/) | AI Scaffold project scaffolding with standard dev configs (biome, ruff, vitest, pytest, cursor rules, claude hooks) |
-| [`agent-router`](plugins/agent-router/) | Agent collaboration, shared message boards, wake-ups, and schedules; install as `agent-router@ai-tools` (Cursor Personal marketplace too) |
+| [`agent-router`](plugins/agent-router/) | Agent collaboration, shared message boards, wake-ups, and schedules; install as `agent-router@sunstack` (Cursor Personal marketplace too) |
 
 See [`plugins/`](plugins/) for full details.
 
@@ -58,10 +58,10 @@ outside the main phase path.
 
 `observability/` owns the shared local OpenTelemetry collector plus the
 VictoriaMetrics, VictoriaLogs, and VictoriaTraces stack. Use
-`shravan-dev-workflow:ops-observability-stack` for producer boundaries,
+`sunstack-dev:ops-observability-stack` for producer boundaries,
 AgentStudio and Agent VM loops, resource naming, and Victoria query recipes.
 
-Start with [`plugins/shravan-dev-workflow/README.md`](plugins/shravan-dev-workflow/)
+Start with [`plugins/sunstack-dev/README.md`](plugins/sunstack-dev/)
 for the full workflow map, phase diagrams, and skill boundaries.
 
 ---
@@ -77,7 +77,7 @@ Sandboxed Docker environments for coding agents. Docs live in [`agent_sidecar/`]
 ```
 ai-tools/
 ├── plugins/                     # Codex and Claude Code plugins
-│   ├── shravan-dev-workflow/    # Spec, plan, implementation, review, handoff workflows
+│   ├── sunstack-dev/             # Spec, plan, implementation, review, handoff workflows
 │   ├── dev-workflow-tools/      # Common tool skills, including Peekaboo UI testing
 │   └── ai-scaffold/             # Project scaffolding
 ├── agent_sidecar/               # Docker sidecar system

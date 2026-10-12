@@ -9,7 +9,7 @@ import {
 const scenario = parseScenarioMarkdown({
   filePath: "/repo/tests/skills/pressure-scenarios/render.md",
   markdown: `scenario_id: render
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 mode: fast
 expect_artifact: false
 expect_proof_regex: hidden proof phrase
@@ -33,7 +33,7 @@ const input = {
   mode: scenario.mode,
   prompt: scenario.prompt,
   requiredSourceReads: [
-    "plugins/shravan-dev-workflow/skills/test-skill/SKILL.md",
+    "plugins/sunstack-dev/skills/test-skill/SKILL.md",
     "tests/skills/fixtures/example.md",
   ],
 };
@@ -48,12 +48,12 @@ describe("renderCodexPressurePrompt", () => {
     expect(prompt).toContain("You are running a Codex skill pressure test.");
     expect(prompt).toContain("- Stay read-only unless the scenario explicitly permits edits.");
     expect(prompt).toContain("- scenario_id: render");
-    expect(prompt).toContain("- skill_under_test: shravan-dev-workflow:test-skill");
+    expect(prompt).toContain("- skill_under_test: sunstack-dev:test-skill");
     expect(prompt).toContain(
       "from the compliant behavior required in this run",
     );
     expect(prompt).toContain(
-      "plugins/shravan-dev-workflow/skills/test-skill/SKILL.md",
+      "plugins/sunstack-dev/skills/test-skill/SKILL.md",
     );
     expect(prompt).toContain("repo-local skill source is authoritative");
     expect(prompt).toContain("Required source evidence:");

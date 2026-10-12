@@ -11,17 +11,17 @@ AI tools distributed through the local marketplaces in this repository.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add ShravanSunder/ai-tools
+/plugin marketplace add ShravanSunder/sunstack
 
 # Install a plugin (use the IDs in the client table below)
-/plugin install <plugin-name>@ai-tools
+/plugin install <plugin-name>@sunstack
 ```
 
 Client install IDs:
 
 ```text
-Codex       scaffold-project@ai-tools   dev-workflow-tools@ai-tools   shravan-dev-workflow@ai-tools   skill-authoring@ai-tools   agent-router@ai-tools
-Claude Code scaffold-project@ai-tools   dev-workflow-tools@ai-tools   shravan-dev-workflow@ai-tools   skill-authoring@ai-tools   agent-router@ai-tools
+Codex       scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack
+Claude Code scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack
 Cursor      local plugins via `.cursor-plugin/` manifests, including agent-router
 ```
 
@@ -43,7 +43,7 @@ plugin's `.cursor-plugin/plugin.json`, or via an explicit `--plugin-dir` path.
 
 AI Scaffold (`scaffold-project`) provides project scaffolding with standard dev configs. Supports TypeScript (biome, vitest, Playwright), Python (ruff, basedpyright, pytest), and Swift (swiftlint, swiftformat). Includes cursor rules and Claude hooks.
 
-Install it as `scaffold-project@ai-tools` in both Codex and Claude Code. The directory remains `ai-scaffold` for source organization.
+Install it as `scaffold-project@sunstack` in both Codex and Claude Code. The directory remains `ai-scaffold` for source organization.
 
 - `/scaffold-project` -- scaffold a new project or retrofit an existing one
 - `/scaffold-project-update-templates` -- update templates with latest standards
@@ -56,7 +56,7 @@ app automation via the Accessibility API. The Peekaboo skill uses live CLI
 discovery, snapshot-scoped interaction, and progressive references for
 troubleshooting and headless mode.
 
-### [shravan-dev-workflow](shravan-dev-workflow/)
+### [sunstack-dev](sunstack-dev/)
 
 Shravan's Codex-first development workflow plugin. Provides:
 

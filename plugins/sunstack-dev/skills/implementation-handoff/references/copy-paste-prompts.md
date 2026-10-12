@@ -7,7 +7,7 @@ For meaningful review, `plan identity: none` intentionally returns `blocked-inpu
 ## Reviewer Prompt
 
 ```text
-Use $shravan-dev-workflow:implementation-review to independently review this completed or partial implementation. Review only; do not edit files.
+Use $sunstack-dev:implementation-review to independently review this completed or partial implementation. Review only; do not edit files.
 
 Repo: <absolute repo path>
 Branch/worktree: <branch>

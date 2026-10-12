@@ -6,7 +6,7 @@
 
 **Architecture:** AgentStudio owns launch helpers, `mise` commands, and state files that let another agent continue the session. `ai-tools` owns the stack and `ops-observability-stack` owns all query/debug interpretation. AgentStudio remains producer-only: ordinary app startup must not crash if OTLP is unavailable, while explicit observability launchers are strict and fail fast when the collector is down.
 
-**Tech Stack:** SwiftPM, Swift `Testing`, Bash launch helpers, `mise`, AgentStudio JSONL/OTLP diagnostics, `shravan-dev-workflow:ops-observability-stack`.
+**Tech Stack:** SwiftPM, Swift `Testing`, Bash launch helpers, `mise`, AgentStudio JSONL/OTLP diagnostics, `sunstack-dev:ops-observability-stack`.
 
 ---
 
@@ -322,7 +322,7 @@ then `mise run run-debug-observability -- --detach` or
 `mise run run-beta-observability -- --detach` to launch with shared local
 observability. Use `mise run verify-debug-observability` or
 `mise run verify-beta-observability` for AgentStudio-specific marker proof.
-Load `shravan-dev-workflow:ops-observability-stack` for generic Victoria
+Load `sunstack-dev:ops-observability-stack` for generic Victoria
 queries, sensitive-field checks, and debugging recipes.
 ```
 

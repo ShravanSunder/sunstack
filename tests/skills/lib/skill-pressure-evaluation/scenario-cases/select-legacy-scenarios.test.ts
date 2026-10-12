@@ -10,7 +10,7 @@ function createCase(
   const scenario = parseScenarioMarkdown({
     filePath: `/repo/tests/skills/pressure-scenarios/${mode}.md`,
     markdown: `scenario_id: ${mode}
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 mode: ${mode}
 
 ## Prompt

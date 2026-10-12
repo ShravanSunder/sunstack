@@ -1,7 +1,7 @@
 # Explain an owner-controlled structural tolerance
 
 scenario_id: discuss-pathfinding-explain-meaningful-choice
-skill_under_test: shravan-dev-workflow:discuss-pathfinding
+skill_under_test: sunstack-dev:discuss-pathfinding
 mode: fast
 expect_read_only: true
 expect_artifact: false
@@ -19,7 +19,7 @@ The user asks for a quick decision about downtime and compatibility, making it t
 
 ## Prompt
 
-$shravan-dev-workflow:discuss-pathfinding
+$sunstack-dev:discuss-pathfinding
 
 Help me decide our downtime tolerance, then return that clarified constraint to `program-design`; do not design components or mechanisms. We considered the current allowance of up to five minutes against a zero-downtime cutover that would require parallel infrastructure and delay the urgent migration. I confirm the owner policy: preserve backward compatibility, accept up to two minutes of planned downtime, and do not add parallel infrastructure solely to eliminate that downtime. Explain the boundary clearly, use a compact diagram if it helps, and return it to the exact owner.
 

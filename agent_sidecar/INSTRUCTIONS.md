@@ -1,4 +1,4 @@
-<!-- AUTO-GENERATED - DO NOT EDIT. Source: https://github.com/ShravanSunder/ai-tools/blob/master/agent_sidecar/INSTRUCTIONS.md -->
+<!-- AUTO-GENERATED - DO NOT EDIT. Source: https://github.com/ShravanSunder/sunstack/blob/master/agent_sidecar/INSTRUCTIONS.md -->
 
 # Agent Sidecar
 
@@ -197,4 +197,4 @@ Container naming: `agent-sidecar-{repo-name}-{dir-hash}`
 
 ---
 
-Full documentation: <https://github.com/ShravanSunder/ai-tools/blob/master/agent_sidecar/README.md>
+Full documentation: <https://github.com/ShravanSunder/sunstack/blob/master/agent_sidecar/README.md>

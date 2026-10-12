@@ -6,4 +6,4 @@ The manual covers how to call the tool. When and why agents coordinate, where wo
 
 The canonical skill lives in the codex-router repository at `agent-skills/agent-collaboration/`. This plugin contains a committed copy. Edit upstream, copy the skill into `plugins/agent-router/skills/agent-collaboration/`, record the pin in `plugin-sources.json`, and bump plugin/marketplace versions.
 
-Install through the ai-tools marketplace as `agent-router@ai-tools`. Installation and cache refresh are separate explicit operations.
+Install through the sunstack marketplace as `agent-router@sunstack`. Installation and cache refresh are separate explicit operations.

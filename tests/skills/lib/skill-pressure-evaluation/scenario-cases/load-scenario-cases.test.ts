@@ -29,9 +29,9 @@ describe("loadSkillPressureCase", () => {
       mode: scenario.mode,
       prompt: scenario.prompt,
       requiredSourceReads: [
-        "plugins/shravan-dev-workflow/skills/discuss-pathfinding/SKILL.md",
-        "plugins/shravan-dev-workflow/skills/discuss-pathfinding/references/question-craft.md",
-        "plugins/shravan-dev-workflow/shared-references/requirements-specification-program-design.md",
+        "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
+        "plugins/sunstack-dev/skills/discuss-pathfinding/references/question-craft.md",
+        "plugins/sunstack-dev/shared-references/requirements-specification-program-design.md",
       ],
       followUpUserTurns: [],
     });
@@ -43,7 +43,7 @@ describe("loadSkillPressureCase", () => {
     const scenario = parseScenarioMarkdown({
       filePath: "/missing/discuss-pathfinding/missing.md",
       markdown: `scenario_id: missing
-skill_under_test: shravan-dev-workflow:discuss-pathfinding
+skill_under_test: sunstack-dev:discuss-pathfinding
 
 ## Prompt
 
@@ -77,7 +77,7 @@ Use the skill.
     const scenario = parseScenarioMarkdown({
       filePath: "/missing/other-skill/legacy.md",
       markdown: `scenario_id: legacy
-skill_under_test: shravan-dev-workflow:other-skill
+skill_under_test: sunstack-dev:other-skill
 
 ## Prompt
 

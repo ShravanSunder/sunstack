@@ -4,9 +4,9 @@ export const skillPressureCaseDefinitions = [
   {
     scenarioId: "discuss-pathfinding-explain-meaningful-choice",
     requiredSourceReads: [
-      "plugins/shravan-dev-workflow/skills/discuss-pathfinding/SKILL.md",
-      "plugins/shravan-dev-workflow/skills/discuss-pathfinding/references/question-craft.md",
-      "plugins/shravan-dev-workflow/shared-references/requirements-specification-program-design.md",
+      "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
+      "plugins/sunstack-dev/skills/discuss-pathfinding/references/question-craft.md",
+      "plugins/sunstack-dev/shared-references/requirements-specification-program-design.md",
     ],
     maximumToolCalls: 40,
     semanticCriteria: [

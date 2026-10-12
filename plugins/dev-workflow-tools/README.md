@@ -6,8 +6,8 @@ Common development tool skills that are useful across Codex and Claude Code. Cur
 ## Installation
 
 ```bash
-/plugin marketplace add ShravanSunder/ai-tools
-/plugin install dev-workflow-tools@ai-tools
+/plugin marketplace add ShravanSunder/sunstack
+/plugin install dev-workflow-tools@sunstack
 ```
 
 ## What It Does

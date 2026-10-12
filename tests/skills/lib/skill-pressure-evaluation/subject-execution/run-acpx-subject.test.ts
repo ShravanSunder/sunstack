@@ -11,7 +11,7 @@ import { validateAcpxTurnResults } from "./create-skill-pressure-subject-harness
 const scenario = parseScenarioMarkdown({
   filePath: "/repo/tests/skills/pressure-scenarios/backend.md",
   markdown: `scenario_id: backend
-skill_under_test: shravan-dev-workflow:test-skill
+skill_under_test: sunstack-dev:test-skill
 
 ## Prompt
 
@@ -53,7 +53,7 @@ describe("runAcpxPressureCase", () => {
   test("strictly rejects an invalid earlier final message from the same request", () => {
     const validLastResponse = JSON.stringify({
       scenario_id: "backend",
-      skill_under_test: "shravan-dev-workflow:test-skill",
+      skill_under_test: "sunstack-dev:test-skill",
       skill_invoked: true,
       mode: "fast",
       read_only: true,

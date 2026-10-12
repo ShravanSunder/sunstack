@@ -20,7 +20,7 @@ eval "$("$HOME/dev/ai-tools/observability/observability-stack" env)"
 ```
 
 For query recipes and app-specific loops, load
-`shravan-dev-workflow:ops-observability-stack`.
+`sunstack-dev:ops-observability-stack`.
 
 ## Data And Retention
 

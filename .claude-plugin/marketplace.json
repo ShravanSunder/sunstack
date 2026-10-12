@@ -1,5 +1,5 @@
 {
-  "name": "ai-tools",
+  "name": "sunstack",
   "owner": {
     "name": "Shravan Sunder"
   },
@@ -20,10 +20,10 @@
       "version": "0.1.1"
     },
     {
-      "name": "shravan-dev-workflow",
-      "source": "./plugins/shravan-dev-workflow",
+      "name": "sunstack-dev",
+      "source": "./plugins/sunstack-dev",
       "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI and rendered web/chat)",
-      "version": "2.74.0"
+      "version": "2.75.0"
     },
     {
       "name": "skill-authoring",

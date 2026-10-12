@@ -1,7 +1,7 @@
 Read first:
 
 LATEST USER TURN
-› ok $shravan-dev-workflow:orchestrator-design tell me when docs are ready and are reviwed
+› ok $sunstack-dev:orchestrator-design tell me when docs are ready and are reviwed
 
 pr1 is merged fyi
 
@@ -65,10 +65,10 @@ dont stop until done and ready
 
 ASSISTANT TURN 245 (2 messages, last privileged)
 [earlier] The current code confirms two important boundaries: Host composes the services, while the communication service owns native submission; and its effect tracking is request-local, so it cannot recover a delivery obligation after a restart. The automation design must add persistence without treating a recorded intent as proof that Codex accepted it.
-[earlier] The design now records 35 requirements and 13 observable contracts, including your Rust/type standards, agent-readable errors, and `--wait-until-first-fire`. Three pending choices affect the remaining design: ▸ Pause: hold pending messages, skip paused ticks on resume? ▸ Cron: five fields with explicit timezone and defined DST handling? ▸ Operator completion: track our workflow runs, including one-off runs, or also arbitrary native threads/subagents? My recommendations are in the pending questions. The Program Design and independent review are not complete yet. Updated [Requirements](/Users/shravansunder/Documents/dev/project-dev/codex-router.feat-agent-messaging-v2/docs/specs/2026-09-07-scheduled-agent-workflows/2026-09-07-scheduled-agent-workflows-requirements.md:1) and [Specification](/Users/shravansunder/Documents/dev/project-dev/codex-router.feat-agent-messaging-v2/docs/specs/2026-09-07-scheduled-agent-workflows/2026-09-07-scheduled-agent-workflows-specification.md:1). The invoked [Program Design skill](/Users/shravansunder/.codex/plugins/cache/ai-tools/shravan-dev-workflow/2.8.0/skills/program-design/SKILL.md:1) requires: “Missing or conflicting meaning returns `specification-gap`; do not patch it locally.” These choices change behavior, so I need your selections rather than silently declaring my recommendations settled.
+[earlier] The design now records 35 requirements and 13 observable contracts, including your Rust/type standards, agent-readable errors, and `--wait-until-first-fire`. Three pending choices affect the remaining design: ▸ Pause: hold pending messages, skip paused ticks on resume? ▸ Cron: five fields with explicit timezone and defined DST handling? ▸ Operator completion: track our workflow runs, including one-off runs, or also arbitrary native threads/subagents? My recommendations are in the pending questions. The Program Design and independent review are not complete yet. Updated [Requirements](/Users/shravansunder/Documents/dev/project-dev/codex-router.feat-agent-messaging-v2/docs/specs/2026-09-07-scheduled-agent-workflows/2026-09-07-scheduled-agent-workflows-requirements.md:1) and [Specification](/Users/shravansunder/Documents/dev/project-dev/codex-router.feat-agent-messaging-v2/docs/specs/2026-09-07-scheduled-agent-workflows/2026-09-07-scheduled-agent-workflows-specification.md:1). The invoked [Program Design skill](/Users/shravansunder/.codex/plugins/cache/sunstack/sunstack-dev/2.8.0/skills/program-design/SKILL.md:1) requires: “Missing or conflicting meaning returns `specification-gap`; do not patch it locally.” These choices change behavior, so I need your selections rather than silently declaring my recommendations settled.
 
 USER TURN 246
-› ok $shravan-dev-workflow:orchestrator-design tell me when docs are ready and are reviwed
+› ok $sunstack-dev:orchestrator-design tell me when docs are ready and are reviwed
 
 pr1 is merged fyi
 
