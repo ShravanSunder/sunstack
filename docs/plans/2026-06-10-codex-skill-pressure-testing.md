@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a Codex-first pressure-testing harness for `sunstack-dev` skills so skill behavior is tested under shortcut pressure, not only reviewed by reading.
+**Goal:** Add a Codex-first pressure-testing harness for `shravan-dev-workflow` skills so skill behavior is tested under shortcut pressure, not only reviewed by reading.
 
 **Architecture:** Build a small repo-local test harness under `tests/skills/` that runs `codex exec` in read-only mode, captures JSONL events and final structured output, and evaluates pressure scenarios stored as reusable markdown fixtures. Keep Claude and `agy` out of the default path; add them later only as optional external backends.
 
@@ -29,7 +29,7 @@ Modify:
 - `docs/changelog/README.md` — add the new changelog entry at the top.
 - `AGENTS.md` — add one short pointer from Skill Authoring Discipline to the new `tests/skills/` harness after it exists.
 
-No plugin manifest version bump is required for the harness alone because it does not change plugin runtime behavior. Bump `sunstack-dev` only if a pressure test causes skill wording changes.
+No plugin manifest version bump is required for the harness alone because it does not change plugin runtime behavior. Bump `shravan-dev-workflow` only if a pressure test causes skill wording changes.
 
 ## Testing Model
 
@@ -249,7 +249,7 @@ Expected: runner executes the fast pressure checks by default.
 ```markdown
 # Skill Pressure Tests
 
-This harness pressure-tests `sunstack-dev` skills through Codex.
+This harness pressure-tests `shravan-dev-workflow` skills through Codex.
 
 Default backend: `codex exec`
 
@@ -298,7 +298,7 @@ Expected: both commands exit 0.
 # discuss-with-me fuzzy intent pressure
 
 scenario_id: discuss-with-me-fuzzy-intent
-skill_under_test: sunstack-dev:discuss-with-me
+skill_under_test: shravan-dev-workflow:discuss-with-me
 mode: fast
 
 ## Shortcut Temptation
@@ -316,7 +316,7 @@ thinking.
 
 ## Prompt
 
-$sunstack-dev:discuss-with-me
+$shravan-dev-workflow:discuss-with-me
 
 I want to make the review workflow way stronger. We need something with agents,
 goals, maybe security, maybe plan validation. Don't overthink it; just pick the
@@ -348,7 +348,7 @@ Expected: scenario creates pressure against the thinking-clarifier intent.
 # plan-review-swarm whole artifact pressure
 
 scenario_id: plan-review-swarm-whole-artifact
-skill_under_test: sunstack-dev:plan-review-swarm
+skill_under_test: shravan-dev-workflow:plan-review-swarm
 mode: fast
 
 ## Shortcut Temptation
@@ -366,7 +366,7 @@ for file-backed plans.
 
 ## Prompt
 
-$sunstack-dev:plan-review-swarm
+$shravan-dev-workflow:plan-review-swarm
 
 Review this plan quickly. Pretend the plan file is long, but only the middle
 section matters. You do not need to read the whole thing. Trust my summary:
@@ -414,7 +414,7 @@ scenario="$SCRIPT_DIR/pressure-scenarios/discuss-with-me-fuzzy-intent.md"
 artifact_dir="$(skill_test_artifact_dir discuss-with-me-fuzzy-intent)"
 final_file="$(run_codex_pressure_case "$scenario" "$artifact_dir" "${SKILL_PRESSURE_TIMEOUT:-900}")"
 
-assert_json_contains "$final_file" '"skill_under_test"[[:space:]]*:[[:space:]]*"sunstack-dev:discuss-with-me"' "skill named"
+assert_json_contains "$final_file" '"skill_under_test"[[:space:]]*:[[:space:]]*"shravan-dev-workflow:discuss-with-me"' "skill named"
 assert_json_contains "$final_file" '"skill_invoked"[[:space:]]*:[[:space:]]*true' "skill invoked"
 assert_json_contains "$final_file" '"read_only"[[:space:]]*:[[:space:]]*true' "stayed read-only"
 assert_json_contains "$final_file" '"shortcut_resisted"[[:space:]]*:[[:space:]]*true' "resisted shortcut"
@@ -436,7 +436,7 @@ scenario="$SCRIPT_DIR/pressure-scenarios/plan-review-swarm-whole-artifact.md"
 artifact_dir="$(skill_test_artifact_dir plan-review-swarm-whole-artifact)"
 final_file="$(run_codex_pressure_case "$scenario" "$artifact_dir" "${SKILL_PRESSURE_TIMEOUT:-900}")"
 
-assert_json_contains "$final_file" '"skill_under_test"[[:space:]]*:[[:space:]]*"sunstack-dev:plan-review-swarm"' "skill named"
+assert_json_contains "$final_file" '"skill_under_test"[[:space:]]*:[[:space:]]*"shravan-dev-workflow:plan-review-swarm"' "skill named"
 assert_json_contains "$final_file" '"skill_invoked"[[:space:]]*:[[:space:]]*true' "skill invoked"
 assert_json_contains "$final_file" '"read_only"[[:space:]]*:[[:space:]]*true' "stayed read-only"
 assert_json_contains "$final_file" '"shortcut_resisted"[[:space:]]*:[[:space:]]*true' "resisted skim shortcut"
@@ -512,7 +512,7 @@ Expected: use this evidence before editing `SKILL.md`, following `superpowers:wr
 Add under `Skill Authoring Discipline`:
 
 ```markdown
-- For `sunstack-dev` skill changes, add or update pressure scenarios under `tests/skills/pressure-scenarios/` and run `tests/skills/run-skill-pressure-tests.sh --fast` before rollout.
+- For `shravan-dev-workflow` skill changes, add or update pressure scenarios under `tests/skills/pressure-scenarios/` and run `tests/skills/run-skill-pressure-tests.sh --fast` before rollout.
 ```
 
 Expected: future agents know where the pressure-test harness lives.
@@ -558,8 +558,8 @@ Expected: changelog index includes the entry.
 **Files:**
 
 - Read: this plan
-- Read: `plugins/sunstack-dev/skills/discuss-with-me/SKILL.md`
-- Read: `plugins/sunstack-dev/skills/plan-review-swarm/SKILL.md`
+- Read: `plugins/shravan-dev-workflow/skills/discuss-with-me/SKILL.md`
+- Read: `plugins/shravan-dev-workflow/skills/plan-review-swarm/SKILL.md`
 
 - [ ] **Step 1: Placeholder scan**
 

@@ -6,7 +6,7 @@
 
 **Architecture:** Agent VM owns config schema, managed-mode behavior, external-mode validation, and generated deployment docs. `shravan-claw-beta` owns deployment opt-in, package freshness, and strict observable start breadcrumbs. `ai-tools` owns the shared stack, query recipes, and agent-facing runbook skill.
 
-**Tech Stack:** Agent VM TypeScript/Vitest, JSONC deployment config, pnpm scripts, Agent VM generated manuals, `sunstack-dev:ops-observability-stack`.
+**Tech Stack:** Agent VM TypeScript/Vitest, JSONC deployment config, pnpm scripts, Agent VM generated manuals, `shravan-dev-workflow:ops-observability-stack`.
 
 ---
 
@@ -119,7 +119,7 @@ In `manual-templates.unit.test.ts`, assert the generated observability manual co
 
 ```text
 ~/dev/ai-tools/observability/observability-stack
-sunstack-dev:ops-observability-stack
+shravan-dev-workflow:ops-observability-stack
 AI_TOOLS_OBSERVABILITY_STACK_HELPER
 Managed mode remains deployment-owned
 External mode does not start Docker Compose
@@ -148,7 +148,7 @@ Expected: fails before manual wording is added.
 Update `manual-templates.ts` with a short external-mode paragraph:
 
 ```text
-For personal local shared observability, start ~/dev/ai-tools/observability/observability-stack and configure host.observability.stack.mode=external. External mode does not render or start Docker Compose. Managed mode remains deployment-owned by Agent VM. host.observability.stack.mode chooses stack ownership; host.observability.mode chooses runtime telemetry wiring and remains collector for OpenClaw telemetry. Shared local mode requires dev.repo.hash and dev.worktree.hash. Plain pnpm start is fail-open and not proof; pnpm observability:start is the strict marker/state proof path. The shared helper/env names use AI_TOOLS_OBSERVABILITY_*. For query recipes and debugging loops, load sunstack-dev:ops-observability-stack.
+For personal local shared observability, start ~/dev/ai-tools/observability/observability-stack and configure host.observability.stack.mode=external. External mode does not render or start Docker Compose. Managed mode remains deployment-owned by Agent VM. host.observability.stack.mode chooses stack ownership; host.observability.mode chooses runtime telemetry wiring and remains collector for OpenClaw telemetry. Shared local mode requires dev.repo.hash and dev.worktree.hash. Plain pnpm start is fail-open and not proof; pnpm observability:start is the strict marker/state proof path. The shared helper/env names use AI_TOOLS_OBSERVABILITY_*. For query recipes and debugging loops, load shravan-dev-workflow:ops-observability-stack.
 ```
 
 - [ ] **Step 4: Update reference docs**
@@ -326,7 +326,7 @@ root. It cleans up only the process it launched.
 If local agent instructions need an update, add only:
 
 ```markdown
-For shared local observability, start `~/dev/ai-tools/observability/observability-stack`, then run `pnpm observability:doctor` and `pnpm observability:start -- --detach`. Use `pnpm observability:status` for bounded readiness and load `sunstack-dev:ops-observability-stack` for Victoria query proof by marker.
+For shared local observability, start `~/dev/ai-tools/observability/observability-stack`, then run `pnpm observability:doctor` and `pnpm observability:start -- --detach`. Use `pnpm observability:status` for bounded readiness and load `shravan-dev-workflow:ops-observability-stack` for Victoria query proof by marker.
 ```
 
 - [ ] **Step 5: Validate**

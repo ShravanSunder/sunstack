@@ -2,7 +2,7 @@
 
 ## Goal
 
-Rewrite `sunstack-dev:skills-creation` so it teaches the craft model
+Rewrite `shravan-dev-workflow:skills-creation` so it teaches the craft model
 for making great skills, not just the proof protocol around skill edits.
 
 The intended model:
@@ -30,9 +30,9 @@ The intended model:
 - Chat decision from 2026-07-09: refocus `skills-creation` around "what makes a
   great skill" and keep testing as proof, not the spine.
 - Current target skill:
-  `plugins/sunstack-dev/skills/skills-creation/SKILL.md`.
+  `plugins/shravan-dev-workflow/skills/skills-creation/SKILL.md`.
 - Current references:
-  `plugins/sunstack-dev/skills/skills-creation/references/*.md`.
+  `plugins/shravan-dev-workflow/skills/skills-creation/references/*.md`.
 - Focused pressure scenarios:
   `tests/skills/pressure-scenarios/skills-creation-*.md`.
 - Prior research source:
@@ -46,7 +46,7 @@ The intended model:
 
 Write surfaces:
 
-- `plugins/sunstack-dev/skills/skills-creation/SKILL.md`
+- `plugins/shravan-dev-workflow/skills/skills-creation/SKILL.md`
 
 Changes:
 
@@ -75,10 +75,10 @@ Checkpoint:
 
 Write surfaces:
 
-- `plugins/sunstack-dev/skills/skills-creation/references/glossary.md`
-- `plugins/sunstack-dev/skills/skills-creation/references/reference-design.md`
-- `plugins/sunstack-dev/skills/skills-creation/references/skill-spec-review.md`
-- `plugins/sunstack-dev/skills/skills-creation/references/pressure-testing.md`
+- `plugins/shravan-dev-workflow/skills/skills-creation/references/glossary.md`
+- `plugins/shravan-dev-workflow/skills/skills-creation/references/reference-design.md`
+- `plugins/shravan-dev-workflow/skills/skills-creation/references/skill-spec-review.md`
+- `plugins/shravan-dev-workflow/skills/skills-creation/references/pressure-testing.md`
 
 Changes:
 
@@ -130,7 +130,7 @@ Write surfaces:
 Validation:
 
 - Codex skill quick validator for
-  `plugins/sunstack-dev/skills/skills-creation`.
+  `plugins/shravan-dev-workflow/skills/skills-creation`.
 - Focused pressure scenarios for `skills-creation-*`.
 - `pnpm --dir tests/skills exec tsc --noEmit` if pressure assertions change.
 - `pnpm --dir tests/skills exec vitest run lib/pressure-assertions.test.ts --config vitest.config.ts`
