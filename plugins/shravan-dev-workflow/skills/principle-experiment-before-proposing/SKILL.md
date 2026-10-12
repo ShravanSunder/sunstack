@@ -20,9 +20,11 @@ Many design arguments are really questions about behavior: is this faster, does 
 - **A spike** answers one concrete unknown. Timebox it and throw the code away.
 - **Competing prototypes** settle a design that isn't obvious. Build two or three that are genuinely different and compare them side by side; a second flavor of the first shape doesn't count.
 - **A measurement** names its workload (real data at a representative size), its comparator (before against after, A against B), and enough repetitions to see past noise. Measure warm and cold where startup matters, note the machine load, and compare rows rather than trusting absolute numbers.
-- **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, and blind scoring wherever judgment is involved.
+- **An evaluation** of a prompt, classifier, or skill needs labeled cases including the hard ones, a baseline to beat, a threshold set before running, and blind scoring wherever judgment is involved. Make sure the answer can't leak into the input: mask it, and check that the score holds.
 
-**Measure the real artifact through the real path:** the actual data, the actual entry point, the actual surface. A micro-benchmark, a mock, or a probe can answer a different question from the one you have.
+**Measure the real artifact through the real path:** the actual data, the actual entry point, the actual surface. A micro-benchmark, a mock, or a probe can answer a different question from the one you have. Include a negative control where you can: something the instrument should show as unchanged (a static background, an untouched path). If the control moves too, the instrument is measuring noise.
+
+**An experiment is an action, so run it safely.** Use a place where it can't hurt anything: a branch, a sandbox, a test account. If you rely on a dry-run mode, confirm by observation that it really skips the effect. Before a costly or paid run, check that it selects exactly the cases you meant.
 
 **Change one thing per run, and keep a loop.** Make the smallest change that tests the hypothesis, check it, keep it if it advanced and revert it if it didn't, then go again. A result you can't attribute to one change settles nothing.
 

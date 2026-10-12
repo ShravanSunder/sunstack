@@ -22,9 +22,11 @@ Every design decision is a tradeoff: you gain something, you pay for it, and som
 
 **Watch what you're trading away that the owner already cares about.** A faster build that makes startup slower, or a correctness fix that blocks the main thread, is a trade the owner may not accept. Put it on the table.
 
+**Weigh structure and code differently.** For a structural choice (a boundary, an owner, a contract), prefer the clearer ownership and the option that keeps future choices open, even when it costs more than the smallest path. For a code-level choice inside a settled structure, prefer the simplest thing.
+
 **Recommend one, and say when to revisit.** Name the debt the smaller choice accepts and the signal that would justify the bigger design later.
 
-**The hard call is which decisions are yours.** Scale the rigor, and the asking, to reversibility. A one-way door (a stored format, a public contract, a new process boundary, data you can't take back) gets the full comparison and the owner's decision: show it rather than just ask it, one decision at a time, with what waits if they defer. A reversible choice inside the agreed scope is yours: decide it, record why, and keep going. When the question is how something feels or performs, try both quickly instead of arguing.
+**The hard call is which decisions are yours.** Scale the rigor, and the asking, to reversibility, and judge reversibility by what gets built on top before you could back out, not by whether the edit can be undone. A one-way door (a change to the shape of data already stored, a public contract, who owns something, a new process boundary, data you can't take back) gets the full comparison and the owner's decision. Adding a new setting or a new file is not changing a stored format, and doesn't need escalating. For a one-way door: show it rather than just ask it, one decision at a time, with what waits if they defer. A reversible choice inside the agreed scope is yours: decide it, record why, and keep going. When the question is how something feels or performs, try both quickly instead of arguing.
 
 **Temporary decisions say why and for how long.** A stand-in or workaround names what it stands in for, the assumption it encodes, what it gains now, what it costs, and what closes it.
 

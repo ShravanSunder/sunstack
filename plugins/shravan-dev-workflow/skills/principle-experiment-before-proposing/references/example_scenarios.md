@@ -41,3 +41,11 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** If you can observe the answer, prototype it instead of asking.
 
 **Better.** Build both quickly with real content and look at them at the target viewport. Bring the owner the comparison, with screenshots, only if it is still a matter of taste.
+
+## The score that fell when the answer was hidden
+
+**What happened.** A classifier's role score was 0.84. When the answer was masked from the input, it fell to 0.48: the label had been leaking into what the classifier saw.
+
+**The move.** Make sure the answer can't leak into the evaluation.
+
+**Better.** Mask the answer before scoring, and keep the masked score as the real one. The unmasked number measured leakage, not classification.

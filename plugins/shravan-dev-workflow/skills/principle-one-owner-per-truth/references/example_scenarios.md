@@ -49,3 +49,19 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 **The move.** When contracts conflict, decide explicitly which one wins.
 
 **Better.** Keep the production bridge's contract as it is, and adapt the development server to it, so a developer convenience can't break the shipped path.
+
+## The field one side didn't know
+
+**What happened.** A Swift producer added a field to a message. The TypeScript consumer's strict schema didn't declare it, rejected the frame, and broke the recovered stream for everything behind it.
+
+**The move.** One schema across a language boundary, tested over the real transport.
+
+**Better.** Keep one authoritative definition and generate or validate both sides from it. A test sends the serialized message across the actual transport, so a producer change can't silently break the consumer.
+
+## The delete that skipped the owner
+
+**What happened.** A plan retired pane state through one shared method. Two other code paths discarded panes directly, so those panes kept accepting late input after they were gone.
+
+**The move.** Every path that changes the truth is a writer.
+
+**Better.** Inventory every discard and delete route first. Retire the state at the one shared boundary every route passes through, before assigning the change.

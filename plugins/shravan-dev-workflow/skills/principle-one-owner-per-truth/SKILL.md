@@ -10,13 +10,13 @@ Every truth in a system (a status, a balance, a setting, an identity, a lifecycl
 
 ## How to think it through
 
-**For each truth the change touches, ask "who decides this?"** If the answer is two components, pick one owner. The other becomes a reader, or a requester that asks the owner through an operation the owner exposes.
+**For each truth the change touches, ask "who decides this?"** If the answer is two components, pick one owner. The other becomes a reader, or a requester that asks the owner through an operation the owner exposes. Count every path that changes the truth, including discard, delete, undo, and cleanup; a direct delete that skips the owner is a second writer.
 
 **Put behavior in its owner, not in the convenient module.** Ask where a responsibility belongs before placing its control. A plugin that only needs to start a service shouldn't absorb the service's behavior; the library that owns the service does. An identity belongs to the thing it identifies, not to whichever connection happened to carry it.
 
 **Derive instead of syncing.** A value computed from the owner's truth can't drift; a copy kept in step can. When a copy is worth having (a cache, a denormalized field, local state for responsiveness), name its refresh rule and what a stale read means for the reader.
 
-**Give each shape one schema.** A common shape lives in one place, and the others derive from it (a derived schema, generated types). The same shape written twice drifts apart.
+**Give each shape one schema, even across languages.** A common shape lives in one place, and the others derive from it (a derived schema, generated types). The same shape written twice drifts apart. When the shape crosses a language or process boundary (a Swift producer and a TypeScript consumer), keep one authoritative definition, generate or validate the other side from it, and test the serialized message across the real transport.
 
 **Write the contract down, and treat it as the boundary.** State what callers may rely on: inputs, outputs, errors, and guarantees like ordering or cardinality (one active connection or many?). An established contract is the edge implementation works within; changing it is a deliberate act with its consumers in view. When two contracts conflict, decide which takes precedence instead of letting the code pick.
 
