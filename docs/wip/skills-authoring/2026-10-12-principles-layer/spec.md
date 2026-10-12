@@ -181,9 +181,9 @@ Each card was rewritten by hand in the D26 teaching shape, from its own scraped 
 | 5 | `principle-experiment-before-proposing` | batch 4 (Advisor) | implemented |
 | 6 | `principle-name-the-tradeoffs` | batch 4 (Advisor) | implemented |
 | 7 | `principle-one-owner-per-truth` | batch 4 (Advisor) | implemented |
-| 15 | `principle-verify-before-accepting` | batch 5 pending | implemented |
-| 16 | `principle-write-for-the-reader` | batch 5 pending | implemented |
-| 14 | `principle-prove-it-works` | batch 5 pending | implemented |
+| 15 | `principle-verify-before-accepting` | batch 5 (Advisor) | implemented |
+| 16 | `principle-write-for-the-reader` | batch 5 (Advisor) | implemented |
+| 14 | `principle-prove-it-works` | batch 5 (Advisor) | implemented |
 | 13 | `principle-tests-are-executable-claims` | waiting for the owner's split decision (testing research: two principles plus a TDD practice) | old shape; not rewritten |
 
 No run is `reviewed` or `shipped`.
