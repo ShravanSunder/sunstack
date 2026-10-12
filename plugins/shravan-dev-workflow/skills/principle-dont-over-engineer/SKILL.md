@@ -24,7 +24,7 @@ disable-model-invocation: true
 - `principle-tradeoffs-are-the-work` weighs options that each meet the outcome; this card removes what no outcome needs.
 - `principle-focus-and-scope` guards the requirements; this card guards the mechanisms.
 
-**Applied means** you name what you removed or declined to add, and the outcome you checked still holds.
+**Applied means** you name what you removed or declined to add, and the outcome you checked still holds; or the complexity you kept and the outcome that justifies it.
 
 ## Worked case
 

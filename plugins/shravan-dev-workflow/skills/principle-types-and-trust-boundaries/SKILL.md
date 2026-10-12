@@ -26,7 +26,7 @@ disable-model-invocation: true
 - `principle-domain-meaning-first` fixes the meaning first; this card picks the representation that keeps it.
 - `principle-one-owner-per-truth` decides who owns and writes a truth, not which states it can take.
 
-**Applied means** you name the state you made unrepresentable or the authority you narrowed, and the class of bug it removed.
+**Applied means** you name the state you made unrepresentable or the authority you narrowed, and the class of bug it removed; or the existing types and authority you confirmed already rule it out, and how you checked.
 
 ## Worked case
 

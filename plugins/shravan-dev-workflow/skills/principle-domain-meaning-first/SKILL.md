@@ -29,7 +29,7 @@ Use one word for one meaning everywhere: the conversation, the spec, the code, t
 - `principle-types-and-trust-boundaries` picks a representation that keeps a meaning; this card fixes the meaning first.
 - `principle-one-owner-per-truth` decides who writes a truth; this card decides what the truth is.
 
-**Applied means** you name the term you defined, split, or merged, and what it changed downstream: a type, a field, an identifier, a label.
+**Applied means** you name the term you defined, split, or merged, and what it changed downstream: a type, a field, an identifier, a label; or the existing definition you confirmed covers the new use, and where it lives.
 
 ## Worked case
 

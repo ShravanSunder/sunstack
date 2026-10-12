@@ -27,7 +27,7 @@ disable-model-invocation: true
 - `principle-shared-mental-model-first` asks whether we mean the same thing; this card asks whether we are building the asked thing.
 - `principle-dont-over-engineer` removes mechanisms no outcome needs; this card guards the outcomes and requirements themselves.
 
-**Applied means** you name the line you restored, cut, or raised as a question, and the owner line it traces to (or doesn't).
+**Applied means** you name the line you restored, cut, or raised as a question, and the owner line it traces to (or doesn't); or that every line traces to an owner line, and which handback you checked.
 
 ## Worked case
 

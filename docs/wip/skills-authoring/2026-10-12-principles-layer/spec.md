@@ -194,6 +194,7 @@ Implementation review: pending, 🦉 Advisor as review lead with the 🦁 Codex 
 
 - Spec-stage structure report (`38915f2e`): T2 applied (card 2's trigger no longer claims the recurring-correction symptom, which belongs to card 17; the layer rule forbids naming the practice neighbour). R1 recorded for when behavior testing resumes. R2 and R3 applied as the Numbering and terms section. T1 superseded: all 17 descriptions now exist and are in the implementation structure reviewer's scope.
 - Implementation-stage teaching report (`e48fca95`): I1 (card 17 completion covers drift and break), I2 (card 5 completion accepts a confirmed decision), I3 (card 5 overkill no longer excludes measuring infrequent but consequential work) applied.
+- Review lead finding A1 (verified at `e48fca95`): five more cards' Applied means accepted only a change; each now also accepts a confirmed decision with its evidence (focus and scope, domain meaning, one owner per truth, types and trust boundaries, don't over-engineer).
 
 ### Process record (skill-creation audit, 2026-10-12, at the owner's request)
 
