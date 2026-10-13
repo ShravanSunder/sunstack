@@ -1,6 +1,6 @@
 # Design family: teaching the engineering decisions
 
-Draft v1, 2026-10-13. Owner-directed rebuild to replace closed PR #122, delivered as a fresh `gh stack` layer above draft #127. Lead author: Codex 01a118ee. Existing Main Implementer: Claude 67681626; paired Verifier and independent reviewers retain their responsibilities. This is the new governing proposal for review, not an execution GO.
+Draft v2, 2026-10-13. Owner-directed rebuild to replace closed PR #122, delivered as a fresh `gh stack` layer above draft #127. Lead author: Codex 01a118ee. Existing Main Implementer: Claude 67681626; paired Verifier and independent reviewers retain their responsibilities. This is the new governing proposal for review, not an execution GO. v2 adds explicit Verifier test-adequacy and apparatus methods plus an owned narrow planner-convergence follow-on after the Advisor's source challenge.
 
 ## Problem, evidence and success
 
@@ -16,7 +16,7 @@ Authoring basis for every run: user-directed intent. Reference/method allocation
 |---|---|
 | Fresh stack above #127; #122 closed, history preserved | Latest direct owner instruction. Consumes current roles, types and names while avoiding a replay of obsolete competing ownership. |
 | Six skill targets: spec-design, program-design, new test-design, new verification-design, spec-program-review, orchestrator-design | First-tranche Requirements U1/U2/U10/U13/U17/U20; current owner asks redo the family. Keep the adopted review name. |
-| Five distinct design documents and card/structure/final-set confirmations | Later coverage decision in layer-tree Part5, checked against the current baseline. No silent short-path exception or extra confirmation at every seam. |
+| Five distinct design documents and card/structure/final-set confirmations | Owner coverage words on 2026-10-13: "i think i choose for now and most of my projects are big and i make the spec by that or chunkier workstreams", recorded in layer-tree Part5 alongside the retained checkpoints. No silent short-path exception or extra confirmation at every seam. |
 | Lead authors governing design and plan; Main implements skill source | Global instructions, Requirements U21/U26/U31 and current #127. Model and roster are not selected by the phase. |
 | #127 owns role charters, forms, model rules, packet fields and helper handbacks | Current accepted source authority; the design layer consumes it and never restores #122's competing role system. |
 | Types are phase-scoped and progressively disclosed | Requirements U45/U47 and today's packet-split direction. Zod4.6.5 descriptions/inferred types and one shared check setup; no separate node_modules or duplicated interfaces. |
@@ -79,7 +79,11 @@ Main path: name the adopted core outcome/reference; inspect the existing driver 
 
 Depth: reference/cases; real surface/readiness versus preparation; symptom-oriented before/after proof; prebuild challenge; delivered report. Use prove-it-works/verify-before-accepting and existing route methods. A second path earns its cost only when it detects something the first cannot. Driver work stays within #127's explicitly assigned apparatus paths; product tests/repairs stay Implementer-owned.
 
-Proof: source walks for a real user outcome versus IPC acknowledgement, offline doctor versus live readiness, wrong binary/reference, and an adequate permanent journey reused at a later applicable source. Typed reports preserve observed target/reference/results/limits and truthful reuse; no current-head timestamp alone establishes applicability.
+Delivery-time branch: when evaluating the delivered work, the Verifier compares actual tests and evidence with the adopted Test Design and testing principles: fitting pyramid placement, the intended behavioral RED before GREEN, assertions that discriminate the forbidden behavior, and real interactions versus substituted assumptions. Missing chronology stays a gap. A setup failure or diagnostic-order mismatch is not the intended RED. Report required product-test corrections to the Implementer and missing governing expectations to the Lead; do not write product-suite repairs or infer mutation permission.
+
+Apparatus branch: when the granted verification driver is missing, broken or cannot reach the claimed outcome, load one owned conditional apparatus reference and return the repaired/built driver's demonstrated capability and limits. Inspect the project's existing launch/health/drive/evidence/cleanup owners first; choose the actual surface's stable handles and completion signal; preserve evidence and clean up only resources this run created. Stay within the explicit script paths and approved tool/execution grant. Prove that driver end to end against its declared reference before trusting it; the script is not delivered merely because it exists. This is a method for future admitted app jobs, not a new app run in the present skill-authoring commission. If a verification-route practice is admitted later, move this method to that owner in one hard cutover rather than duplicating it.
+
+Proof: source walks for a real user outcome versus IPC acknowledgement, offline doctor versus live readiness, wrong binary/reference, and an adequate permanent journey reused at a later applicable source. Include the malformed-packet case: a setup/diagnostic RED while the behavior was already rejected, followed by post-GREEN sensitivity observations, cannot establish tests-first chronology. Include an assigned driver that cannot reach the required observable outcome. Typed reports preserve observed target/reference/results/limits and truthful reuse; no current-head timestamp alone establishes applicability. No actual app/driver experiment runs under this source-only skill change.
 
 ### Run 5 — spec-program-review
 
@@ -104,6 +108,8 @@ Proof: static walks for an unchanged sound model, a wrong ownership assumption u
 ## Planner, consumers and delivery
 
 First-tranche U43 excluded planner redesign from this family. Treat the five-document planner input mismatch (F6) as a separate narrow convergence prerequisite; preserve the owner's `docs/specs/<spec>/plans/` home and no tmp-ticket links there. Workstream sequencing and paired Linear ticket creation are separate adopted directions whose mechanisms need their own plan commission. Do not hide a planner/DAG/Router redesign in these six runs.
+
+F6 delivery slot: the next dependent `gh stack` layer after the design family, targeting only `plan-implementation` input convergence and the decided plan home. The Codex Lead authors its bounded spec/commission and accepts; the existing Main Implementer executes, paired Verifier checks actual proof, and independent review closes the consumer repair. The design layer can be shown as a draft first, but cannot be described as delivery-ready while this consumer remains on three documents. Create that layer only after its narrow spec is admitted; no new planner sequencing or ticket mechanism is included. Track this prerequisite on the existing work root, not a new task ledger.
 
 Update actual consuming inputs and references together where their contracts change: delivery goal, implement-plan, implementation-review, spec-handoff, document/rendering indexes, discovery manifests/READMEs and applicable permanent tests. Preserve #127 role/schema/dependency ownership. Avoid renaming spec-program-review to design-review. Only edit unchanged phase procedures when a current consumer contract requires a bounded correction.
 
