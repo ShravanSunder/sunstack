@@ -1,6 +1,6 @@
 # Execution forms
 
-This reference owns how a helper's conversation is created, reused, continued and recovered. Inputs: the chosen role, form and catalog row. Return the supported route, the lifecycle and the history boundary for that form. Complete when the route is chosen, an existing session has been looked for before any new one, and the identities you'll keep are named.
+This reference owns how a helper's conversation is created, reused, continued and recovered. Inputs: the chosen role, form and catalog row. Return the supported route, the lifecycle and the history boundary for that form. Complete when the route, lifecycle and history boundary are chosen and the identities you'll keep are named. For a Sidekick, that means a suitable existing session was looked for and reused if found; only when none exists is a new one created, and a failed lookup is not proof that none exists. A native Worker is spawned through its host's tool, with no existing session to look for.
 
 The role decides what the helper owns. The form decides only who manages its conversation and how long it lives; neither form grants design, acceptance or wider work.
 

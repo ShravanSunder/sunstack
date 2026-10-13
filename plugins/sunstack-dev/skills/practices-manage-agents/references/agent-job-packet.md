@@ -31,4 +31,4 @@ The phase or method that owns a result keeps its fields and labels; the packet o
 
 Each kind is either completed, carrying its result and evidence, or blocked, carrying the missing input, permission or decision and whatever was observed before stopping. Neither means delivery is accepted.
 
-Count as evidence only output that matches this assignment and the current source. A live session proves only that it's alive, and output produced before the assignment, scope or source head changed is stale.
+Count as evidence only output whose coverage applies to this assignment, its scope, its target and the source the claim depends on. A live session proves only that it's alive. When any of those change, reassess earlier evidence: keep it only where you can show it still covers the claim, such as an executable check whose source is unchanged, and treat changed behavior, a changed target or an obligation the earlier run never covered as unverified until a fitting observation covers it. A newer head alone doesn't make evidence stale.

@@ -183,10 +183,10 @@ describe("agent job packet schema", () => {
     // Assert
     expect(reviewerIssues).toEqual([]);
     expect(charterIssues).toEqual(["requiredReads.charter"]);
-    expect(implementerGrantIssues).toEqual([
+    expect([...implementerGrantIssues].sort()).toEqual([
       "limits.access",
-      "limits.writePaths",
       "limits.allowedCommands",
+      "limits.writePaths",
     ]);
     expect(reviewerGrantIssues).toEqual(["limits.access"]);
   });
