@@ -1,10 +1,10 @@
 # Proof Challenge
 
-Mission: verify that claimed proof is real. Reproduce the proof the implementation claims, or challenge the 🔎 Review Sidekick with the exact gap between what is claimed and what the evidence can show. Running tests executes the reviewed code — treat the worktree's code as untrusted input, not as a tool.
+Mission: verify that claimed proof is real. Reproduce the proof the implementation claims, or challenge the 🔎 Reviewer Sidekick with the exact gap between what is claimed and what the evidence can show. Running tests executes the reviewed code — treat the worktree's code as untrusted input, not as a tool.
 
 Expected inputs: the current review context, the complete proof-claim inventory (commands, expected outcomes, evidence artifacts, claimed layers), and a populated `execution grant` naming the allowed command set and scratchpad path.
 
-Prerequisites: proof claims exist; the execution grant is recorded by the 🔎 Review Sidekick. No grant, no execution — inspect-only and return the boundary.
+Prerequisites: proof claims exist; the execution grant is recorded by the 🔎 Reviewer Sidekick. No grant, no execution — inspect-only and return the boundary.
 
 Execution boundary: read-only review with one named expansion: the 🔧 Operator may execute exactly the commands listed in the recorded `execution grant` — no variants, no substitutes; a narrower command the grant does not list is still outside the grant and is reported as a needed-grant gap instead of run. Everything else stays read-only. Bright lines:
 
@@ -14,7 +14,7 @@ Execution boundary: read-only review with one named expansion: the 🔧 Operator
 - no installs, no network fetches, no home-level writes, no new tooling;
 - never edit, stage, commit, or "fix" anything to make proof pass.
 
-Procedure: the 🔎 Review Sidekick challenges each material claim, and the 🔧 Operator performs granted commands:
+Procedure: the 🔎 Reviewer Sidekick challenges each material claim, and the 🔧 Operator performs granted commands:
 
 ```text
 claim -> preflight: resolve the command chain; write-set class and evidence
@@ -31,7 +31,7 @@ environment check: distinguish a real failure from flake/environment — rerun
 
 When execution is blocked (missing grant, would-write command, absent harness), challenge instead: state what the claim asserts, what the supplied evidence can actually observe, and the smallest command or observation that would settle it.
 
-Good: every material claim has an observed result with exit status, or a named challenge the 🔎 Review Sidekick must answer; false greens are named with the mechanism that fakes them.
+Good: every material claim has an observed result with exit status, or a named challenge the 🔎 Reviewer Sidekick must answer; false greens are named with the mechanism that fakes them.
 
 Bad: relabeling a unit pass as runtime proof; accepting green output without exit status; running the whole suite when the claims name three tests; "fixing" the environment until proof passes.
 
@@ -40,7 +40,7 @@ Return `complete | partial | blocked` status plus:
 ```text
 per-claim results: <claim, preflight write-set class, command run | challenge,
   observed vs claimed, false-green check, exit status, scratchpad evidence path>
-commands run: <every command executed, verbatim, for the Review Sidekick's
+commands run: <every command executed, verbatim, for the Reviewer Sidekick's
   grant comparison>
 proof gaps:
 would-write stops:

@@ -1,6 +1,10 @@
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    // Skill schemas pin Zod in the import so Bun can run them with no install; tests resolve that pin to this package's one zod.
+    alias: { "zod@4.6.5": "zod" },
+  },
   test: {
     chaiConfig: {
       truncateThreshold: 0,

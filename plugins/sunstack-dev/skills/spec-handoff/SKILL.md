@@ -19,7 +19,7 @@ Package spec/design context so another agent can continue without reconstructing
 - Do not review the specification or program design here. Use `spec-program-review`.
 - Do not package code, branch, diff, commits, or test state. Use `implementation-handoff` when implementation state exists.
 - Always write a file artifact and also print the copy-paste prompt in the response unless the user explicitly asks for chat-only output.
-- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, 🐒 Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
+- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, other Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
 
 ## Workflow
 

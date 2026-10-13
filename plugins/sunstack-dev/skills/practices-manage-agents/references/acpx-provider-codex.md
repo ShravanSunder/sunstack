@@ -4,23 +4,23 @@ Agent token: `codex`. Legacy route: agent-router carries persistent Codex relati
 
 ## Models
 
-Examples: GPT-6 Luna, Sol, and Astra ids. Resolve the exact id with the exact-id rule in `SKILL.md` Launch.
+Examples: GPT-6 Luna, Sol, and Astra ids. Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
 Pass the provider-advertised id with `--model` at session creation or `acpx codex set model <id> -s <name>` afterward. Unknown ids are rejected. Prefer the short form unless the adapter requires an `openai.` prefix.
 
 ## Effort
 
-The Codex adapter's effort key is `reasoning_effort`: use `acpx codex set reasoning_effort <level> -s <name>`. A 2026-09-25 check against `@agentclientprotocol/codex-acp@1.6.2` accepted `reasoning_effort=high` and rejected both `effort` and an unadvertised value with ACP `-32602` (Invalid params). Select the model-and-effort pair from the `SKILL.md` Model Catalog & Roles tables, then use its advertised level; do not duplicate role-tier mappings here.
+The Codex adapter's effort key is `reasoning_effort`: use `acpx codex set reasoning_effort <level> -s <name>`. A 2026-09-25 check against `@agentclientprotocol/codex-acp@1.6.2` accepted `reasoning_effort=high` and rejected both `effort` and an unadvertised value with ACP `-32602` (Invalid params). Select the model-and-effort pair from the `SKILL.md` Model catalog, then use its advertised level; do not duplicate role-tier mappings here.
 
 ## Sessions And Identity
 
-Creation example for a new relationship only; for an existing 🐒 Sidekick, inspect and reuse its recorded session through `acpx-legacy.md` rather than running creation again.
+Creation example for a new relationship only; for an existing Sidekick, inspect and reuse its recorded session through `acpx-legacy.md` rather than running creation again.
 
 ```bash
 acpx --cwd /absolute/repo --model <resolved Sol id> --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex sessions ensure --name "🐒 Sidekick · <purpose>"
+  --non-interactive-permissions deny codex sessions ensure --name "🐒 Implementer Sidekick · <purpose>"
 acpx --cwd /absolute/repo --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex -s "🐒 Sidekick · <purpose>" \
+  --non-interactive-permissions deny codex -s "🐒 Implementer Sidekick · <purpose>" \
   --file tmp/sidekick-packet.md
 ```
 

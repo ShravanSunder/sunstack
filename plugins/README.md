@@ -65,7 +65,7 @@ Shravan's Codex-first development workflow plugin. Provides:
 - **spec-program-review** skill -- independently reviews current specification/program-design meaning and reuses coverage only for parent-verified non-semantic edits
 - **discuss-clarify-mental-models** skill -- reconverges unstable shared mental models before artifact work without the old one-question grill shape
 - **discuss-pathfinding** skill -- Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/process/glossary records as they crystallize.
-- **manage-agents** skill -- coordinates advisors, sidekicks, delegates, operators, subagents, and swarms across model categories and native or ACPX runtimes, with ACP adapter implementation kept separate
+- **practices-manage-agents** skill -- chooses each helper's role, Worker or Sidekick form and model, commissions it with a typed job packet, and assesses its handback across native, agent-router, or ACPX runtimes, with ACP adapter implementation kept separate
 - **docs-maintain** skill -- reconciles docs, AGENTS.md, README.md, specs, plans, changelogs, and architecture docs against code and current decisions
 - **spec-handoff** skill -- packages spec/design context for another agent before an implementation plan exists
 - **plan-handoff** skill -- packages an existing implementation plan for another agent without pretending design context is a plan

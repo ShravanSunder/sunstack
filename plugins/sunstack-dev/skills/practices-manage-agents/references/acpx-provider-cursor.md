@@ -12,9 +12,9 @@ Cursor is a multi-model ACPX provider. It owns a catalog mapping, not a single m
 
 Pass the exact advertised ACP id from `session/new` / `configOptions.model` with `--model` at session creation or `acpx cursor set model <id> -s <name>` afterward.
 
-Examples: Grok 4.6, Claude Opus 5.5, and Claude Fable 5.x ACP ids; catalogs change. Resolve the exact id with the exact-id rule in `SKILL.md` Launch.
+Examples: Grok 4.6, Claude Opus 5.5, and Claude Fable 5.x ACP ids; catalogs change. Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
-- Select the model and effort from the `SKILL.md` Model Catalog & Roles tables, then use the exact live-advertised ACP id. If the selected effort is unavailable, report that gap; do not silently change effort.
+- Select the model and effort from the `SKILL.md` Model catalog, then use the exact live-advertised ACP id. If the selected effort is unavailable, report that gap; do not silently change effort.
 
 Treat the short names from `agent --list-models` as Cursor CLI labels. Use and record the ACP-advertised id for ACPX calls.
 
@@ -36,8 +36,8 @@ Set `$SELECTED_MODEL_ID` to the exact ACP id verified from the live catalog for 
 
 ```bash
 acpx --cwd /absolute/repo --model "$SELECTED_MODEL_ID" --approve-reads --no-terminal \
-  --non-interactive-permissions deny cursor sessions ensure --name "🐒 Sidekick · <purpose>"
-acpx cursor set-mode plan -s "🐒 Sidekick · <purpose>"
+  --non-interactive-permissions deny cursor sessions ensure --name "🐒 Implementer Sidekick · <purpose>"
+acpx cursor set-mode plan -s "🐒 Implementer Sidekick · <purpose>"
 ```
 
 Keep cwd, resolved `cursor` command, exact model id, mode, and permission boundary stable for ledgered relationships. Exit code 0 alone does not prove the intended model launched; confirm the accepted id from status/config evidence.

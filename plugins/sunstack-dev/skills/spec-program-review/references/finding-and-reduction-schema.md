@@ -1,6 +1,6 @@
 # Finding and Parent Reduction
 
-This reference owns parent verification, candidate disposition, duplicate/conflict reduction, coverage accounting, and the final review result. `parent` means the immediate 🔎 Review Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
+This reference owns parent verification, candidate disposition, duplicate/conflict reduction, coverage accounting, and the final review result. `parent` means the immediate 🔎 Reviewer Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
 
 ## Finding
 
@@ -34,7 +34,7 @@ Severity follows consequence, not tone:
 - minor: intended model lands with avoidable ambiguity/cost;
 - observation: no proven behavior effect.
 
-## Review Sidekick verification
+## Reviewer Sidekick verification
 
 For each candidate:
 
@@ -47,7 +47,7 @@ For each candidate:
 7. merge duplicates by root cause;
 8. preserve conflicting evidence.
 
-Missing evidence is `unverified`, not rejection. A category name is not an anchor: "the reliability requirement" fails the anchor fields until the exact governing clause is opened and quoted; a candidate whose anchor fields cannot be filled from an inspectable source is `unverified` or routes to an owner decision, never `accepted`. A candidate is a mental-model break — not an ordinary design finding — when its correction cannot be expressed inside the current governing basis because an assumption the basis itself relies on is false (the design assumes an interface, ordering, ownership, or guarantee the current system does not provide); a defect the basis already forbids and can name the fix for routes to its semantic owner as usual, while a break returns `decision-needed` or `blocked` to the owner instead of consuming a correction round. Weigh the dispel check's classifications and over-delivery map as candidate evidence like any other check result, and quote the rail text when overriding its class. A reviewer candidate that adds unrequested scope is `rejected: scope expansion` (an observation for the owner, not a decision the owner owes); an `absent`-mapped design element already in the artifacts is never rejected as harmless — it returns `decision-needed` (deletion recommended) or an accepted removal routed to `program-design`. An accepted finding names the unrealized obligation and its failure, never the reviewer's proposed mechanism. Style preference without reader or behavior effect is rejected. Before accepting missing contracts on a proposed mechanism, test whether deleting the mechanism preserves every confirmed requirement. Prefer deletion when it does. The 🔎 Review Sidekick opens the source anchors from its bounded lookup before disposition. A reviewer concern that cannot be tied to an accepted requirement and observable failure is advice awaiting investigation, not implementation authority.
+Missing evidence is `unverified`, not rejection. A category name is not an anchor: "the reliability requirement" fails the anchor fields until the exact governing clause is opened and quoted; a candidate whose anchor fields cannot be filled from an inspectable source is `unverified` or routes to an owner decision, never `accepted`. A candidate is a mental-model break — not an ordinary design finding — when its correction cannot be expressed inside the current governing basis because an assumption the basis itself relies on is false (the design assumes an interface, ordering, ownership, or guarantee the current system does not provide); a defect the basis already forbids and can name the fix for routes to its semantic owner as usual, while a break returns `decision-needed` or `blocked` to the owner instead of consuming a correction round. Weigh the dispel check's classifications and over-delivery map as candidate evidence like any other check result, and quote the rail text when overriding its class. A reviewer candidate that adds unrequested scope is `rejected: scope expansion` (an observation for the owner, not a decision the owner owes); an `absent`-mapped design element already in the artifacts is never rejected as harmless — it returns `decision-needed` (deletion recommended) or an accepted removal routed to `program-design`. An accepted finding names the unrealized obligation and its failure, never the reviewer's proposed mechanism. Style preference without reader or behavior effect is rejected. Before accepting missing contracts on a proposed mechanism, test whether deleting the mechanism preserves every confirmed requirement. Prefer deletion when it does. The 🔎 Reviewer Sidekick opens the source anchors from its bounded lookup before disposition. A reviewer concern that cannot be tied to an accepted requirement and observable failure is advice awaiting investigation, not implementation authority.
 
 ## Coverage-Bound Result
 
@@ -104,7 +104,7 @@ Select one route from the reduced result:
 - invalid input or missing evidence -> stop `blocked`;
 - no required correction -> stop `ready`.
 
-An authoritative correction is not pathfinding work. A reviewer suggestion is not a route until the 🔎 Review Sidekick verifies and accepts it. `discuss-pathfinding` resolves only the named unmade meaning and returns to the supplied owner; it does not choose another phase.
+An authoritative correction is not pathfinding work. A reviewer suggestion is not a route until the 🔎 Reviewer Sidekick verifies and accepts it. `discuss-pathfinding` resolves only the named unmade meaning and returns to the supplied owner; it does not choose another phase.
 
 `ready` requires complete semantically current mode coverage, no required coverage gap, no open blocker/important accepted finding, no unapproved scope expansion or requirement subtraction, and no remaining planner-owned semantic invention.
 
@@ -121,7 +121,7 @@ When states mix, apply precedence `not-converging -> blocked -> needs-revision -
 Convergence (this reference is its home for design review):
 
 > After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
-> 1. **Recurrence.** A finding the Review Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
+> 1. **Recurrence.** A finding the Reviewer Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
 > 2. **No progress.** The count of open accepted findings did not drop in two adjacent comparisons in a row: it stayed equal or rose from review N−1 to N, and again from N to N+1.
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
@@ -130,6 +130,6 @@ Accepted boundary:
 
 > A correction is inside the accepted boundary when it changes no design meaning, scope, contract, or owner decision. Only those corrections get further review rounds automatically. A correction that changes, or might change, any of those returns to the Lead, which brings the owner a brief. Once the owner settles it, review continues under the convergence rule without a permission prompt.
 
-After each correction round, the 🔎 Review Sidekick records whether each accepted finding was corrected and cites the current anchors. Do not rerun affected coverage automatically. A concrete source-backed substantive residual inside the accepted boundary admits another round under the convergence rule above; pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify.
+After each correction round, the 🔎 Reviewer Sidekick records whether each accepted finding was corrected and cites the current anchors. Do not rerun affected coverage automatically. A concrete source-backed substantive residual inside the accepted boundary admits another round under the convergence rule above; pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify.
 
 Complete when: every candidate and check status is accounted for; every accepted candidate names the requirement or boundary, plain-language meaning, failure and downstream ambiguity, and verified evidence; accepted requirements and goal relevance are preserved; deletion was tested before addition; the result cannot exceed semantically current coverage; any later semantic-change records are explicit; and the result contains one parent-selected compact continuation handoff or an exact stop.

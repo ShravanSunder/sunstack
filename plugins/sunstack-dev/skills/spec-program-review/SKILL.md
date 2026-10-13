@@ -22,9 +22,9 @@ Requirements: WHY, for whom, and within what boundary?
 
 Requirements, Specification, and Program Design are separate authoritative concepts. Review reconstructs each one independently before judging their agreement; agreement inside a combined `Requirements/spec` document cannot substitute for a separately identifiable Requirements source and Specification.
 
-A persistent 🔎 Review Sidekick, commissioned through `manage-agents`, reads the complete target set and governing sources, then walks the ordered checks in its own session. The Review Sidekick verifies candidates against accepted requirements, Specification obligations, and the confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The orchestrator disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
+A persistent 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the complete target set and governing sources, then walks the ordered checks in its own session. The Reviewer Sidekick verifies candidates against accepted requirements, Specification obligations, and the confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The orchestrator disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
 
-Prefer one independent review-and-correction round. After 🔎 Review Sidekick verification, run further rounds only for a concrete source-backed substantive issue that remains or was introduced inside the accepted boundary, until the review is `ready` or `not-converging` (see `references/finding-and-reduction-schema.md`); pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify. Each round may span both semantic owners through the ordered `spec-design -> program-design` route, with each affected artifact corrected at most once in that round and every corrected anchor verified by the Review Sidekick.
+Prefer one independent review-and-correction round. After 🔎 Reviewer Sidekick verification, run further rounds only for a concrete source-backed substantive issue that remains or was introduced inside the accepted boundary, until the review is `ready` or `not-converging` (see `references/finding-and-reduction-schema.md`); pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify. Each round may span both semantic owners through the ordered `spec-design -> program-design` route, with each affected artifact corrected at most once in that round and every corrected anchor verified by the Reviewer Sidekick.
 
 Disposition comes before remediation. Reject pedantic, stylistic, already-satisfied, or otherwise non-semantic findings with source evidence and continue. Route each valid correction set inside the settled mental model to its semantic owner. If a finding disproves a load-bearing assumption or exposes unmade owner meaning, return the failed assumption, evidence, consequence, and exact owner as `decision-needed` or `blocked`; do not push a mental-model break through correction. The break stops current continuation and goes to the Lead for an owner brief. When the same result also contains an accepted bounded correction, preserve it explicitly as one `spec-design -> program-design` round after the owner decision, with each affected artifact corrected at most once and one parent verification against the original findings. Once the owner settles the break, review continues under the convergence rule in `references/finding-and-reduction-schema.md`.
 
@@ -112,13 +112,13 @@ Completion: exactly one mode and its complete required artifact set are selected
 
 ## 4. Resolve Reviewer Runtime and Authority
 
-The caller completes classification and admission. For an admitted substantive review, MUST use `manage-agents` to commission or resume one persistent 🔎 Review Sidekick with read-only workspace access. Resume that exact Review Sidekick through corrections. Candidate findings never become final disposition without its verification.
+The caller completes classification and admission. For an admitted substantive review, MUST use `practices-manage-agents` to commission or resume one persistent 🔎 Reviewer Sidekick with read-only workspace access. Resume that exact Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
 
 A later semantic change outside an accepted correction invalidates affected check coverage. Further rounds follow the convergence rule in `references/finding-and-reduction-schema.md`.
 
 ## 5. Walk the Mode and Chunk Checks
 
-The 🔎 Review Sidekick reads the complete target set and governing sources first, every artifact whole. MUST load `references/coordination-and-chunking.md` and return a sequential chunk-pass plan with complete seam text and overlap, or one mode-complete pass when the whole target fits.
+The 🔎 Reviewer Sidekick reads the complete target set and governing sources first, every artifact whole. MUST load `references/coordination-and-chunking.md` and return a sequential chunk-pass plan with complete seam text and overlap, or one mode-complete pass when the whole target fits.
 
 MUST load `references/lanes/lane-schema.md` and record `complete | partial | blocked` for every check. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
 
@@ -129,7 +129,7 @@ Completion: the mode-complete check and every selected chunk pass have statuses,
 
 ## 6. Proof-Challenge, Dispel, and Focused Checks
 
-IF the design cites executable proof claims, load `references/lanes/proof-challenge.md` and challenge each claim. Assign prescribed proof commands to a 🔧 Operator under an exact execution grant. The 🔧 Operator performs the reference's write-set preflight, executes only granted commands with scratchpad output, compares `git status --porcelain` before and after, and returns commands, observations, and exit codes. The 🔎 Review Sidekick judges claimed against observed. Without a grant, inspect only and record the proof gap.
+IF the design cites executable proof claims, load `references/lanes/proof-challenge.md` and challenge each claim. Assign prescribed proof commands to a 🔧 Operator under an exact execution grant. The 🔧 Operator performs the reference's write-set preflight, executes only granted commands with scratchpad output, compares `git status --porcelain` before and after, and returns commands, observations, and exit codes. The 🔎 Reviewer Sidekick judges claimed against observed. Without a grant, inspect only and record the proof gap.
 
 MUST load `references/lanes/dispel.md` after mode-complete and chunk checks. Classify every candidate and map delivered design elements to a rail or `absent`, even when the candidate set is empty.
 
@@ -165,13 +165,13 @@ Completion: dispel is complete, executable proof claims have challenge results o
 
 ## 7. Verify Check Coverage
 
-Compare each check's covered target text with the current target. Confirm the 🔧 Operator ran only granted commands, wrote no tracked file, and returned an unchanged `git status --porcelain` result. A permitted correction is verified by the same 🔎 Review Sidekick against accepted findings without automatically starting another review round.
+Compare each check's covered target text with the current target. Confirm the 🔧 Operator ran only granted commands, wrote no tracked file, and returned an unchanged `git status --porcelain` result. A permitted correction is verified by the same 🔎 Reviewer Sidekick against accepted findings without automatically starting another review round.
 
 Completion: each check supplies current coverage for its selected target, and proof execution stayed inside the recorded grant.
 
 ## 8. Verify and Reduce Findings
 
-MUST load `references/finding-and-reduction-schema.md` and return its dispositions, merged duplicates/conflicts, coverage gaps, goal-relevance record, deletion-first decision, scope effect, and final coverage-bound result. In that reference, `parent` means the 🔎 Review Sidekick, never the author or orchestrator.
+MUST load `references/finding-and-reduction-schema.md` and return its dispositions, merged duplicates/conflicts, coverage gaps, goal-relevance record, deletion-first decision, scope effect, and final coverage-bound result. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
 
 Re-anchor before accepting a finding: identify the confirmed requirement or goal-boundary field it serves, whether the existing foundation already satisfies it or can supply the correction, the concrete failure if unresolved, the smallest correction, whether the confirmed obligations still hold without the questioned mechanism, whether the proposed mechanism is the smallest change that serves the quoted clause or one of several, and whether the correction stays inside the confirmed goal boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status. When evidence is missing, follow that reference's evidence-lookup branch before accepting. Question whether a proposed mechanism is needed before accepting findings that merely complete its missing contracts.
 
@@ -230,7 +230,7 @@ Do not return `ready` while any of these hold:
 - a picture-type view is accepted as a text fence while Mermaid can render, or a UI image is accepted that invents a control or skips a changed screen;
 - required file-backed visuals or relative embeds are missing or broken, generated labels/edges/boundaries disagree with governing meaning, or unavailable image/preview access was treated as complete visual coverage;
 - three-artifact-design mode trusts author or local checks without independent reinspection;
-- the Review Sidekick did not read the complete target set and governing sources before planning checks, or an optional check lacks a selection reason;
+- the Reviewer Sidekick did not read the complete target set and governing sources before planning checks, or an optional check lacks a selection reason;
 - a chunk plan split one requirement's trace to its obligation and realization, or one call-path delta with its owners and proof seam, across chunks with no overlap seam; or a chunk pass was treated as mode-complete coverage;
 - any reviewer judged an artifact it did not read completely, or the common method's coverage rows leave a target section neither covered nor excluded with a reason;
 - the dispel check is missing, or a design element dispel mapped `absent` lacks either a `decision-needed` return or an accepted removal routed to `program-design` — "well drawn" is not a disposition;

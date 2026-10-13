@@ -4,7 +4,7 @@ Legacy route. agent-router carries persistent Claude relationships over ACP by d
 
 ## Models
 
-Examples: Claude Fable 5.x and Claude Opus 5.5 ACP selection ids. Resolve the exact id with the exact-id rule in `SKILL.md` Launch. A custom Fable id may differ from bare `fable`, and user settings must expose that custom catalog. API model names are not guaranteed ACP selection IDs; the live catalog is authoritative. For Fable, define one relationship wrapper so every lifecycle call keeps the same model environment, cwd, and permission boundary:
+Examples: Claude Fable 5.x and Claude Opus 5.5 ACP selection ids. Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. A custom Fable id may differ from bare `fable`, and user settings must expose that custom catalog. API model names are not guaranteed ACP selection IDs; the live catalog is authoritative. For Fable, define one relationship wrapper so every lifecycle call keeps the same model environment, cwd, and permission boundary:
 
 ```bash
 REPO=/absolute/repo
@@ -22,7 +22,7 @@ The adapter observed `default`, `low`, `medium`, `high`, `xhigh`, and `max`. Use
 
 ## Settings And Permissions
 
-`ACPX_CLAUDE_INCLUDE_USER_SETTINGS=1` also loads user plugins, commands, hooks, and external resources. Keep `--approve-reads --no-terminal --non-interactive-permissions deny` for source-grounded advice and review (writes and exec are denied, never approved; `deny` keeps the turn alive where `fail` would abort it) and record `workspace read-only` on the review packet's `access:` line. The parent authorizes write access for non-review assignments; via ACPX a write scope is always `(declared)`. When path-scoped write enforcement matters, load `native-providers-claude.md` and dispatch native Claude Code.
+`ACPX_CLAUDE_INCLUDE_USER_SETTINGS=1` also loads user plugins, commands, hooks, and external resources. Keep `--approve-reads --no-terminal --non-interactive-permissions deny` for source-grounded advice and review (writes and exec are denied, never approved; `deny` keeps the turn alive where `fail` would abort it) and record `inspect` as the review packet's access. The parent authorizes write access for non-review assignments; via ACPX a write scope is always `(declared)`. When path-scoped write enforcement matters, load `native-providers-claude.md` and dispatch native Claude Code.
 
 A friendly alias or exit code 0 does not prove Fable launched; verify capability evidence and record the accepted id in the ledger.
 

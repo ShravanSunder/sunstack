@@ -1,6 +1,6 @@
 # Audit Categories
 
-Use these categories to structure broad repo audits. `manage-agents` decides which categories go to 🛠️ Workers. A delegated category stays read-only and returns candidate evidence; the Lead keeps synthesis and verifies every accepted candidate against current source.
+Use these categories to structure broad repo audits. `practices-manage-agents` decides which categories go to 📚 Researcher Workers. A delegated category stays read-only and returns candidate evidence; the Lead keeps synthesis and verifies every accepted candidate against current source.
 
 ## Delegate One Bounded Question
 

@@ -24,12 +24,12 @@ Take the seat for your role on the thread you were given:
 | Role | Seat | Where |
 | --- | --- | --- |
 | 🦁 Lead | `orchestrator` | the coordination root and each execution root it commissions |
-| Implementation 🐒 Sidekick | `implementer` | its assigned execution root only |
-| 🔎 Review Sidekick | `reviewer` | the supplied root, only when posting is authorized |
+| 🐒 Implementer Sidekick | `implementer` | its assigned execution root only |
+| 🔎 Reviewer Sidekick | `reviewer` | the supplied root, only when posting is authorized |
 | Owner-requested 🦉 Advisor | `advisor` | the supplied root |
-| Research 🐒 Sidekick, 🛠️ Worker, 🔧 Operator, other contributors | `participant` | only with explicit posting authority |
+| 📚 Researcher, 🔬 Verifier, 🔧 Operator, other contributors | `participant` | only with explicit posting authority |
 
-A 🐒 Sidekick uses the execution root it was given and never opens a coordination root. A 🔎 Review Sidekick without posting authority returns its result to the commissioner. A 🛠️ Worker or 🔧 Operator keeps no trace, returns evidence to its owner, and posts only when the assignment grants it. When the seat you need is held by a predecessor session, report that to the orchestrator and join as `participant` if you must post; never post under another session's identity.
+A Sidekick uses the execution root it was given and never opens a coordination root. A 🔎 Reviewer Sidekick without posting authority returns its result to the commissioner. A Worker, or an Operator in either form, keeps no trace, returns evidence to its owner, and posts only when the assignment grants it. When the seat you need is held by a predecessor session, report that to the orchestrator and join as `participant` if you must post; never post under another session's identity.
 
 When the commissioner supplies a visible title for a conversation you create or fork, apply exactly that title through the tool and verify the saved result. Do not compose titles yourself.
 

@@ -48,7 +48,7 @@ Completion: every written plan carries one current admissible planning basis, th
 - Write plan artifacts only for admitted findings unless the user explicitly asks for chat-only output; preserve design-required findings in the shortlist/backlog and route them to their semantic owner.
 - Use the repository home and proportional Markdown form returned by `../../shared-references/canonical-implementation-plan.md`.
 - Read repo instructions, README/docs, package/tooling files, tests, CI, and recent git history before recommending work.
-- Before inspecting audit categories, load `manage-agents` to decide which go to 🛠️ Workers and which the Lead inspects; the Lead keeps synthesis, verification, admission, and plan authorship.
+- Before inspecting audit categories, load `practices-manage-agents` to decide which go to 📚 Researcher Workers and which the Lead inspects; the Lead keeps synthesis, verification, admission, and plan authorship.
 - Treat subagent findings as candidates, not truth. Re-open cited files before accepting a finding.
 - Delegated audit work returns evidence and candidate findings only. Bounded mechanical validation or proof checks may also return observed results. The Lead performs admission, prioritization, all plan structure and prose, and the governing validation/acceptance judgment; no helper authors or accepts the plan.
 - Never quote or copy secret values. Report secret classes and file locations only when relevant.

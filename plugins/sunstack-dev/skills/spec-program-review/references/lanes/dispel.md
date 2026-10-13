@@ -6,7 +6,7 @@ Predicate: mandatory for every review invocation; runs after the mode-complete a
 
 Expected inputs: the complete review context with the complete target set (not summaries), the candidate-finding set from prior checks — possibly empty — and the complete governing-source set with the confirmed goal boundary and accepted requirements set.
 
-Check boundary: read-only. A tmp scratchpad may hold working notes. Classifications are candidate evidence for the 🔎 Review Sidekick, never dispositions.
+Check boundary: read-only. A tmp scratchpad may hold working notes. Classifications are candidate evidence for the 🔎 Reviewer Sidekick, never dispositions.
 
 ## Challenge the Candidates
 

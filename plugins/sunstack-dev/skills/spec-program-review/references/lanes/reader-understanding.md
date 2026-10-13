@@ -6,7 +6,7 @@ Predicate: the mode-complete result leaves a concrete material reader-comprehens
 
 Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for `program-only` or `three-artifact-design`, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
 
-Prerequisites: the complete target and source set, confirmed goal boundary, accepted requirements set, and applicable structural-realization confirmation exist in the review context; the 🔎 Review Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
+Prerequisites: the complete target and source set, confirmed goal boundary, accepted requirements set, and applicable structural-realization confirmation exist in the review context; the 🔎 Reviewer Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
 
 Check boundary: read-only.
 

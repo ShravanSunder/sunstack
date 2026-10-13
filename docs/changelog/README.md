@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-13 practices-manage-agents: roles, forms and typed packets](2026-10-13-practices-manage-agents.md)
 - [2026-10-12 Work-trail log homes](2026-10-12-work-trail-log-homes.md)
 - [2026-10-12 Rename to sunstack](2026-10-12-rename-sunstack.md)
 - [2026-10-12 Principles humanizer pass](2026-10-12-principles-humanizer-pass.md)

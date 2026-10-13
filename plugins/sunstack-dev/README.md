@@ -16,7 +16,7 @@ shared understanding
        -> stop at reviewed three-artifact design or explicit gap; never enter planning automatically
   -> plan-implementation: one canonical plan + proof mapping
   -> implement-plan: approved immutable plan + implementation proof
-  -> implementation-review: ordered checks in one independent 🔎 Review Sidekick session + rails reduction
+  -> implementation-review: ordered checks in one independent 🔎 Reviewer Sidekick session + rails reduction
        -> stop before corrections and PR work
 ```
 
@@ -31,9 +31,9 @@ Namespace            Concern                      Skills
 -------------------  ---------------------------  ----------------------------
 discuss-*            shared understanding          discuss-clarify-mental-models
                                                   discuss-pathfinding
-manage-*             subordinate agents            manage-agents
 practices-*          always-on practices           practices-collaboration
                                                   practices-show-me-your-work
+                                                  practices-manage-agents
                                                   practices-research
 orchestrator-*       bounded workflow routing      orchestrator-implementation-goal
                                                   orchestrator-design
@@ -140,7 +140,7 @@ Use `practices-research` when the next step is to gather evidence: local code/do
 
 Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals, with principles at the bottom. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
 
-Use `manage-agents` when subordinate AI-agent mechanics are the work: spawning, calling, resuming, steering, queueing, monitoring, or reducing advisors, sidekicks, workers, operators, subagents, and swarms. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent implementation Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned implementation Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `manage-agents` owns roles, classification, the catalog tables, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
+Use `practices-manage-agents` when delegation is the work: choosing a helper's role (Advisor, Implementer, Verifier, Reviewer, Researcher or Operator), its Worker or Sidekick form and its model, then commissioning, steering, monitoring and assessing it, including fan-outs. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent Implementer Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `practices-manage-agents` owns the role charters, execution forms, classification, the catalog tables, the typed job packet, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
 
 Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design` and `program-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial Requirements, Specification, and Program Design artifact, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one three-artifact design review, then stops before planning. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
 
@@ -156,7 +156,7 @@ Use `spec-design` to preserve two separate upstream concepts before program desi
 
 Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and proof seams. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It turns stack/trace evidence into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
 
-Use `spec-program-review` to classify and independently review a Specification, Program Design, or complete Requirements, Specification, and Program Design set. A 🔎 Review Sidekick, commissioned through `manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, and walks mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Review Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Why/What findings route to `spec-design`; structural How findings route to `program-design`.
+Use `spec-program-review` to classify and independently review a Specification, Program Design, or complete Requirements, Specification, and Program Design set. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, and walks mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Reviewer Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Why/What findings route to `spec-design`; structural How findings route to `program-design`.
 
 The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` source trees are preserved under [`retired-skills/`](retired-skills/) for provenance and are not runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of those retired trees; they do not restore swarms, controller briefs, worker protocols, transition ledgers, or a separate plan-review layer.
 
@@ -174,7 +174,7 @@ Use `plan-handoff` to package an existing implementation plan for another agent,
 
 Use `implement-plan` to validate and execute one immutable-path canonical `draft` plan only after separate later owner approval names that exact path and current meaning. It re-anchors before edits, works inline by default, advances through the smallest ready proof-bearing slice, preserves proof gates, and stops with an exact semantic route when current reality breaks the plan or design. It stops before independent review and PR work.
 
-Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Review Sidekick, commissioned through `manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
+Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
 
 Use `implementation-pr-wrapup` to finish the GitHub PR lifecycle after implementation, typically after independent review on a delivery goal: push/open/update the PR, write a why-and-shape description, monitor checks and comments, process existing review threads, prove mergeability with current GitHub state, and merge only when user authorization exists. Fresh code-review discovery routes to `implementation-review`; PR wrap-up does not substitute for it. Independent-review coverage is not a wrap-up ready gate.
 
@@ -195,7 +195,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 ## External Counsel
 
-Review workflows do not use broad multi-model counsel by default. The persistent 🔎 Review Sidekick, its ordered checks, and its model, runtime, history isolation, and authority are resolved through `manage-agents`.
+Review workflows do not use broad multi-model counsel by default. The persistent 🔎 Reviewer Sidekick, its ordered checks, and its model, runtime, history isolation, and authority are resolved through `practices-manage-agents`.
 
 ```text
 normal review path

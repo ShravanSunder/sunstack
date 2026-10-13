@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 A program design is the structural realization of a fixed observable contract.
 
-The Lead loads this skill and authors the complete structural How: alternatives, selections, components, ownership, interfaces, state/failure policy, target views and diagrams, final prose and visual briefs. Bounded helpers may return current-system or external evidence. A 🦉 Advisor may challenge and advise through `manage-agents`; advice is neither authorship nor acceptance. A rendering tool may realize pixels, typography, spacing and style from an unchanged Lead-authored brief, while semantic grouping, order, boundaries, labels, edges, invariants and candidate acceptance remain with the Lead.
+The Lead loads this skill and authors the complete structural How: alternatives, selections, components, ownership, interfaces, state/failure policy, target views and diagrams, final prose and visual briefs. Bounded helpers may return current-system or external evidence. A 🦉 Advisor may challenge and advise through `practices-manage-agents`; advice is neither authorship nor acceptance. A rendering tool may realize pixels, typography, spacing and style from an unchanged Lead-authored brief, while semantic grouping, order, boundaries, labels, edges, invariants and candidate acceptance remain with the Lead.
 
 It explains how authoritative obligations become owned runtime behavior:
 
@@ -323,7 +323,7 @@ one bounded external question could change feasibility/structure/proof
   -> references/lanes/external-prior-art-platform.md
 ```
 
-Before any optional dispatch, MUST use `manage-agents` to pick the role and launch and hand off the lane.
+Before any optional dispatch, MUST use `practices-manage-agents` to pick the role and launch and hand off the lane.
 
 IF a predicate holds and delegation is useful, MUST load `references/lanes/lane-schema.md` and return its shared evidence packet and receipt contract. Dispatch the selected lane with the exact assignment, governing source pointers, observed predicate and prerequisites, bounded evidence question and source scope, and any instance constraint that narrows the selected lane reference. The lane reference owns the invariant mission, maximum authority, return, and stop boundary.
 
