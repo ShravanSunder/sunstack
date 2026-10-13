@@ -113,9 +113,9 @@ Exact provider IDs still come from the active model map/advertised host contract
 
 ## Typed packet and prompt ownership
 
-Choose **one owned TypeScript schema file**, `schemas/agent-job-packet.ts`, using Zod v4 and `.describe()` on fields. This local placement choice follows the owner's “yes schema,” types-as-communication standard and preference for one checkable source. It is not a new SDK, parser framework or orchestration store.
+The owner superseded the one-physical-file placement on 2026-10-13. Use **one modular TypeScript schema authority**: shared `schemas/assignment-fields.ts`, seven `schemas/role-contracts/*-contract.ts` leaves, and thin packet/handback union files. The accepted [progressive-disclosure amendment](progressive-schema-disclosure.md) owns the exact allocation, conditional reading route and raw-role versus frozen-family contract. Zod v4 and `.describe()` field meanings remain. This is not a new SDK, parser framework or orchestration store.
 
-`agent-job-packet.md` teaches how to commission and points to that file. Each role file owns its ready opening/read defaults and refers to the same schema with a comment import line. No duplicate Markdown schema or seven parallel interfaces.
+`agent-job-packet.md` teaches how to commission, selecting shared fields and the role's contract. Each role file owns its ready opening/read defaults and points to its own exact contract/type under the amendment's load condition. Mixed-role validation uses the thin family unions. No duplicate Markdown field definitions or seven parallel interfaces.
 
 The schema exports inferred types and:
 - one shared job base (outcome, sources, limits, closing condition, return-contract reference);
@@ -152,7 +152,11 @@ plugins/sunstack-dev/skills/practices-manage-agents/
 │   ├── agent-job-packet.md          # commissioning judgment; schema pointer
 │   ├── delegation-examples.md       # meaningful contrasts
 │   └── existing provider/ACP manuals
-└── schemas/agent-job-packet.ts       # one described Zod v4 authority
+└── schemas/
+    ├── assignment-fields.ts        # shared job fields and blocked result
+    ├── role-contracts/             # seven role-local described contracts
+    ├── agent-job-packet.ts         # complete packet union
+    └── role-handback.ts            # complete helper-handback union
 ```
 
 Invocation remains both user and model. Trigger to author:
