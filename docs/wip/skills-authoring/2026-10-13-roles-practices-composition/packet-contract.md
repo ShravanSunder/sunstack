@@ -1,6 +1,6 @@
 # Typed packet contract
 
-Part of spec v5, 2026-10-13. This describes the single runtime schema to implement at `schemas/agent-job-packet.ts`; it is not a second runtime schema or a claim that code already validates packets. The future role prompts reference inferred types from that file. Zod v4 field descriptions carry the meanings below.
+Part of spec v5, 2026-10-13, with the owner's accepted [progressive-disclosure amendment](progressive-schema-disclosure.md). Field meanings below stay; their runtime authority is now shared assignment fields plus role-contract leaves, composed by thin `agent-job-packet.ts` and `role-handback.ts` unions. Role prompts point to their own inferred types and load conditions. This document is not a second runtime schema. Zod v4 field descriptions carry these meanings once.
 
 ## Commission
 
@@ -20,7 +20,8 @@ An empty practice list is legal when no practice applies to the prescribed opera
 `role` and `executionForm` have these valid pairings:
 
 ```ts
-// AgentJobPacket schema/type lives once in schemas/agent-job-packet.ts.
+// Complete AgentJobPacket union lives in schemas/agent-job-packet.ts.
+// Role-specific schema/type definitions live once in schemas/role-contracts/.
 // Every exported type is inferred from its Zod v4 schema.
 type RoleFormPair =
   | { role: "lead"; executionForm: "main" }
