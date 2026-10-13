@@ -36,8 +36,8 @@ Set `$SELECTED_MODEL_ID` to the exact ACP id verified from the live catalog for 
 
 ```bash
 acpx --cwd /absolute/repo --model "$SELECTED_MODEL_ID" --approve-reads --no-terminal \
-  --non-interactive-permissions deny cursor sessions ensure --name "🐒 Implementer Sidekick · <purpose>"
-acpx cursor set-mode plan -s "🐒 Implementer Sidekick · <purpose>"
+  --non-interactive-permissions deny cursor sessions ensure --name "🦉 Advisor Sidekick · <purpose>"
+acpx cursor set-mode plan -s "🦉 Advisor Sidekick · <purpose>"
 ```
 
 Keep cwd, resolved `cursor` command, exact model id, mode, and permission boundary stable for ledgered relationships. Exit code 0 alone does not prove the intended model launched; confirm the accepted id from status/config evidence.

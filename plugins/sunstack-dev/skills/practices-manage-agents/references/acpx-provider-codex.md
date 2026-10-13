@@ -18,9 +18,9 @@ Creation example for a new relationship only; for an existing Sidekick, inspect 
 
 ```bash
 acpx --cwd /absolute/repo --model <resolved Sol id> --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex sessions ensure --name "🐒 Implementer Sidekick · <purpose>"
+  --non-interactive-permissions deny codex sessions ensure --name "🦉 Advisor Sidekick · <purpose>"
 acpx --cwd /absolute/repo --approve-reads --no-terminal \
-  --non-interactive-permissions deny codex -s "🐒 Implementer Sidekick · <purpose>" \
+  --non-interactive-permissions deny codex -s "🦉 Advisor Sidekick · <purpose>" \
   --file tmp/sidekick-packet.md
 ```
 
