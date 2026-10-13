@@ -37,7 +37,11 @@ const sessionAddress = (sessionId: string): PacketFields => ({
 const commonFields = (charter: string): PacketFields => ({
   outcome: "Return the result the plan names for this slice.",
   sources: [
-    { kind: "pointer", location: "docs/specs/saved-search/plan.md", relevance: "The governing plan" },
+    {
+      kind: "pointer",
+      location: "docs/specs/saved-search/plan.md",
+      relevance: "The governing plan",
+    },
   ],
   requiredReads: {
     charter,
@@ -56,7 +60,9 @@ const operatorPacket = (): PacketFields => ({
   returnContract: { kind: "helper-handback" },
   procedure: {
     kind: "prescribed-steps",
-    steps: [{ action: "pnpm --dir tests/skills run test", expectedObservation: "Every test file passes" }],
+    steps: [
+      { action: "pnpm --dir tests/skills run test", expectedObservation: "Every test file passes" },
+    ],
   },
 });
 
@@ -125,7 +131,8 @@ describe("agent job packet schema", () => {
       ...operatorPacket(),
       procedure: {
         kind: "guided-collection",
-        criteria: "Lines that mention review rounds; label each owner line, agent proposal or unclear.",
+        criteria:
+          "Lines that mention review rounds; label each owner line, agent proposal or unclear.",
         expectedObservations: "File, line and surrounding paragraph for each match",
       },
     };
@@ -176,7 +183,11 @@ describe("agent job packet schema", () => {
     // Assert
     expect(reviewerIssues).toEqual([]);
     expect(charterIssues).toEqual(["requiredReads.charter"]);
-    expect(implementerGrantIssues).toEqual(["limits.access", "limits.writePaths", "limits.allowedCommands"]);
+    expect(implementerGrantIssues).toEqual([
+      "limits.access",
+      "limits.writePaths",
+      "limits.allowedCommands",
+    ]);
     expect(reviewerGrantIssues).toEqual(["limits.access"]);
   });
 
@@ -274,7 +285,13 @@ describe("role handback schema", () => {
     const withSteps = {
       role: "operator",
       status: "completed",
-      steps: [{ action: "pnpm --dir tests/skills run test", observedOutput: "tmp/proof/unit.log", exitCode: 0 }],
+      steps: [
+        {
+          action: "pnpm --dir tests/skills run test",
+          observedOutput: "tmp/proof/unit.log",
+          exitCode: 0,
+        },
+      ],
       candidateMaterial: [],
       exceptions: [],
     };
