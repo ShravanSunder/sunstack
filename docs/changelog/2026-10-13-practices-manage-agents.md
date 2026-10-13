@@ -8,5 +8,5 @@
 - Catalog: Claude Haiku rows removed; Operator gains guided Complete · Local collection on Luna high; Researcher rows added; the Implementer Sidekick keeps the Complete · Cross-domain Sol/Opus medium rows.
 - Live callers now say Reviewer Sidekick, Implementer Sidekick, Researcher Worker and the like. `agent-collaboration`'s example title follows the new display convention.
 - `tests/skills` pins `zod` 4.6.5; normal pnpm resolution also moves the eval runner's in-range Zod from 4.4.3 to 4.6.5.
-- Validation: typecheck exit 0; `pnpm --dir tests/skills run test` 18 files, 149 tests passed; Bun schema import smoke exit 0; `claude plugin validate .` passed; `git diff --check` clean; no live old-name callers, 33 pointers resolve. Codex `quick_validate.py` not run: PyYAML unavailable, nothing installed.
+- Validation: typecheck exit 0; `pnpm --dir tests/skills run test` 18 files, 149 tests passed; Bun schema import smoke exit 0; `claude plugin validate .` passed; `git diff --check` clean; no live old-name callers; 50 Markdown pointers resolve; 10 schema modules and 27 imports checked. Codex `quick_validate.py` not run: PyYAML unavailable, nothing installed.
 - Behavior proof: drafted from approved user intent; role behavior is not yet evaluated. Behavior prompts are prepared and unrun. No cache refresh was performed.

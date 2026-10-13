@@ -1,5 +1,5 @@
 // The complete helper-handback union, for validating a handback whose role isn't known in advance.
-// Returning one role's handback needs only that role's contract and ../assignment-fields.ts:
+// Returning one role's handback needs only that role's contract and ./assignment-fields.ts:
 // ./role-contracts/{advisor,researcher,operator}-contract.ts. Other roles return their phase's own result.
 // This file only composes them. Its parsed output is frozen at the top level; a role contract returns the same values unfrozen.
 import * as z from "zod@4.6.5";
