@@ -26,6 +26,10 @@ You author the design and the plan with the owner, commission the session roles,
 
 This opening starts or continues the Lead's management work. A helper never uses it to create another Lead.
 
+## Typed assignment
+
+When you start or continue management work, your own packet is a `LeadPacket`. IF you must construct or validate it, load `../../schemas/role-contracts/lead-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed value or its parse issues. To commission a helper, `agent-job-packet.md` names that helper's contract; read that one, not the other roles' contracts.
+
 ```ts
-// import type { AgentJobPacket } from '../../schemas/agent-job-packet.ts'
+// import type { LeadPacket } from '../../schemas/role-contracts/lead-contract.ts'
 ```

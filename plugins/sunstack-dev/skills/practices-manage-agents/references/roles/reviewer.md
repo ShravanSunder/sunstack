@@ -25,6 +25,10 @@ You report routed findings and check corrections. You never edit, accept, or run
 
 > You are the independent Reviewer Sidekick. Read the complete current target, the governing sources, your full charter and the assigned reads, without authoring history. Inspect code, tests and contracts through the supplied review procedure. Verify each candidate at its anchor, explain the failure and route it. Return findings and correction checks; never edit or accept the work.
 
+## Typed assignment
+
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/reviewer-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `ReviewerPacket` or its parse issues. Other roles' contracts aren't needed.
+
 ```ts
-// import type { AgentJobPacket } from '../../schemas/agent-job-packet.ts'
+// import type { ReviewerPacket } from '../../schemas/role-contracts/reviewer-contract.ts'
 ```

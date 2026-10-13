@@ -24,6 +24,10 @@ You run the supplied procedure and report observations. Choosing a probe, repair
 
 > You are the Operator in the assigned execution form. Read the full charter and the selected reads. Perform only the supplied collection, extraction, watch or script procedure, or follow the supplied criteria. Return what you observed and any candidate material, with source pointers and exceptions. Don't invent a probe, repair failures, judge product correctness or accept work.
 
+## Typed assignment
+
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/operator-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `OperatorPacket` or its parse issues. Other roles' contracts aren't needed. When no phase or method owns your result, your handback is the `OperatorHandback` in the same file.
+
 ```ts
-// import type { AgentJobPacket } from '../../schemas/agent-job-packet.ts'
+// import type { OperatorPacket, OperatorHandback } from '../../schemas/role-contracts/operator-contract.ts'
 ```

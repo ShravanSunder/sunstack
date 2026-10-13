@@ -1,6 +1,6 @@
 # Role teaching and ready prompts
 
-Part of spec v5, 2026-10-13. These are the semantic prototypes for seven role files. They are not installed skills or proof of observed behavior. The Implementer preserves their engineering meaning, keeps the main teaching visible, and puts each ready opening beside its charter. Job-specific data uses the single described Zod packet schema.
+Part of spec v5, 2026-10-13. These are the semantic prototypes for seven role files. They are not installed skills or proof of observed behavior. The Implementer preserves their engineering meaning, keeps the main teaching visible, and puts each ready opening beside its charter. Job-specific data uses the described Zod packet schema: shared assignment fields plus the role's own contract, per the [progressive-disclosure amendment](progressive-schema-disclosure.md).
 
 Each opening is quoted prose kept beside its charter. The typed packet carries the assignment. The Lead combines the opening with that packet and selected full reads. The supplied phase/procedure remains caller-selected. No role chooses a lifecycle or acquires authority by its title.
 

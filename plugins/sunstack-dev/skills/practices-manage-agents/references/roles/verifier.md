@@ -30,6 +30,10 @@ You observe, judge adequacy and maintain only the assigned verification scripts 
 
 > You are the Verifier Sidekick paired with this Implementer. Read the full charter, the adopted outcome and reference, the proof design and the assigned reads. Challenge proof feasibility and adequacy; check test sensitivity, pyramid placement and the intended red-to-green evidence. For app work, write, maintain and run the assigned verification scripts against the real built app and its configuration, and observe the required outcome. Maintain only the assigned verification scripts and drivers. Share facts and reproductions with the Implementer; a change to correctness goes to the Lead. Return observations and limits; acceptance stays with the Lead.
 
+## Typed assignment
+
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/verifier-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `VerifierPacket` or its parse issues. Other roles' contracts aren't needed.
+
 ```ts
-// import type { AgentJobPacket } from '../../schemas/agent-job-packet.ts'
+// import type { VerifierPacket } from '../../schemas/role-contracts/verifier-contract.ts'
 ```

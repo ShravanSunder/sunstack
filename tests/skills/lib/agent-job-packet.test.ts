@@ -1,9 +1,17 @@
 import type { ZodType } from "zod";
 import { describe, expect, test } from "vitest";
+import { AgentJobPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/agent-job-packet.ts";
+import { RoleHandback } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-handback.ts";
+import { AdvisorPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/advisor-contract.ts";
+import { ImplementerPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/implementer-contract.ts";
+import { LeadPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/lead-contract.ts";
+import { OperatorPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/operator-contract.ts";
 import {
-  AgentJobPacket,
-  RoleHandback,
-} from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/agent-job-packet.ts";
+  ResearcherHandback,
+  ResearcherPacket,
+} from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/researcher-contract.ts";
+import { ReviewerPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/reviewer-contract.ts";
+import { VerifierPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/verifier-contract.ts";
 
 type PacketFields = Record<string, unknown>;
 
@@ -105,6 +113,29 @@ const researcherPacket = (executionForm: string, investigation: string): PacketF
   question: "Which code writes lastSyncedAt?",
   approach: "Trace writes from the storage module's public API; report file:line.",
   investigation,
+});
+
+const leadPacket = (): PacketFields => ({
+  ...commonFields("references/roles/lead.md"),
+  role: "lead",
+  executionForm: "main",
+  ownerIntent: "Split the packet schema so each agent reads only its own role.",
+  governingContext: "docs/wip/skills-authoring/2026-10-13-roles-practices-composition/spec.md",
+});
+
+const advisorPacket = (): PacketFields => ({
+  ...commonFields("references/roles/advisor.md"),
+  role: "advisor",
+  executionForm: "sidekick",
+  returnContract: { kind: "helper-handback" },
+  question: "Does a per-role schema split cost more than it saves?",
+  challengedPicture: "One shared fields file plus seven role contracts",
+});
+
+const deliveryObservationWork = (): PacketFields => ({
+  mode: "delivery-observation",
+  target: { locator: "skills/practices-manage-agents at commit 4a9e6383" },
+  observationProcedure: "pnpm --dir tests/skills run test",
 });
 
 const withoutField = (fields: PacketFields, fieldName: string): PacketFields =>
@@ -315,5 +346,158 @@ describe("role handback schema", () => {
 
     // Assert
     expect(issues).toEqual([{ path: "", code: "unrecognized_keys", keys: ["deliveryAccepted"] }]);
+  });
+});
+
+interface RoleContractCase {
+  readonly role: string;
+  readonly contract: ZodType;
+  readonly valid: PacketFields;
+  readonly invalid: PacketFields;
+  readonly invalidPath: string;
+  readonly foreignCharter: string;
+}
+
+const roleContractCases: readonly RoleContractCase[] = [
+  {
+    role: "lead",
+    contract: LeadPacket,
+    valid: leadPacket(),
+    invalid: withoutField(leadPacket(), "ownerIntent"),
+    invalidPath: "ownerIntent",
+    foreignCharter: "references/roles/advisor.md",
+  },
+  {
+    role: "advisor",
+    contract: AdvisorPacket,
+    valid: advisorPacket(),
+    invalid: withoutField(advisorPacket(), "question"),
+    invalidPath: "question",
+    foreignCharter: "references/roles/lead.md",
+  },
+  {
+    role: "implementer",
+    contract: ImplementerPacket,
+    valid: implementerPacket(),
+    invalid: { ...implementerPacket(), executionForm: "worker" },
+    invalidPath: "executionForm",
+    foreignCharter: "references/roles/verifier.md",
+  },
+  {
+    role: "verifier",
+    contract: VerifierPacket,
+    valid: verifierPacket(deliveryObservationWork()),
+    invalid: verifierPacket(withoutField(deliveryObservationWork(), "target")),
+    invalidPath: "work.target",
+    foreignCharter: "references/roles/implementer.md",
+  },
+  {
+    role: "reviewer",
+    contract: ReviewerPacket,
+    valid: reviewerPacket(),
+    invalid: { ...reviewerPacket(), authorHistory: "inherited" },
+    invalidPath: "authorHistory",
+    foreignCharter: "references/roles/advisor.md",
+  },
+  {
+    role: "researcher",
+    contract: ResearcherPacket,
+    valid: researcherPacket("sidekick", "continuing-investigation"),
+    invalid: researcherPacket("worker", "continuing-investigation"),
+    invalidPath: "investigation",
+    foreignCharter: "references/roles/operator.md",
+  },
+  {
+    role: "operator",
+    contract: OperatorPacket,
+    valid: operatorPacket(),
+    invalid: withoutField(operatorPacket(), "procedure"),
+    invalidPath: "procedure",
+    foreignCharter: "references/roles/researcher.md",
+  },
+];
+
+describe("role contracts", () => {
+  test.each(roleContractCases)(
+    "the $role contract accepts and rejects what the complete union does, with the same values",
+    ({ contract, valid, invalid, invalidPath }) => {
+      // Arrange
+      const contractResult = contract.safeParse(valid);
+      const unionResult = AgentJobPacket.safeParse(valid);
+
+      // Act
+      const contractInvalidIssues = issuePaths(contract, invalid);
+      const unionInvalidIssues = issuePaths(AgentJobPacket, invalid);
+
+      // Assert
+      expect(contractResult.success).toBe(true);
+      expect(unionResult.success).toBe(true);
+      expect(contractResult.data).toEqual(unionResult.data);
+      expect(contractInvalidIssues).toEqual([invalidPath]);
+      expect(unionInvalidIssues).toEqual([invalidPath]);
+    },
+  );
+
+  test.each(roleContractCases)(
+    "the $role contract rejects another role's charter",
+    ({ contract, valid, foreignCharter }) => {
+      // Arrange
+      const withForeignCharter = {
+        ...valid,
+        requiredReads: { charter: foreignCharter, practices: [], principles: [] },
+      };
+
+      // Act
+      const issues = issuePaths(contract, withForeignCharter);
+
+      // Assert
+      expect(issues).toEqual(["requiredReads.charter"]);
+    },
+  );
+
+  test("the complete packet union freezes its parsed packet; a role contract returns the same values unfrozen", () => {
+    // Arrange
+    const packet = operatorPacket();
+
+    // Act
+    const unionPacket = AgentJobPacket.parse(packet);
+    const contractPacket = OperatorPacket.parse(packet);
+
+    // Assert
+    expect(Object.isFrozen(unionPacket)).toBe(true);
+    expect(Object.isFrozen(contractPacket)).toBe(false);
+    expect(Object.isFrozen(unionPacket.sources)).toBe(true);
+    expect(Object.isFrozen(contractPacket.sources)).toBe(true);
+    expect(contractPacket).toEqual(unionPacket);
+  });
+
+  test("the complete handback union freezes its parsed handback; a role contract returns the same values unfrozen", () => {
+    // Arrange
+    const handback = {
+      role: "researcher",
+      status: "completed",
+      answer: "Only SyncStore.commit writes lastSyncedAt.",
+      decisiveSources: ["src/sync/sync-store.ts:88"],
+      claims: [{ statement: "SyncStore.commit is the only writer", basis: "source" }],
+      gaps: [],
+    };
+
+    // Act
+    const unionHandback = RoleHandback.parse(handback);
+    const contractHandback = ResearcherHandback.parse(handback);
+
+    // Assert
+    expect(Object.isFrozen(unionHandback)).toBe(true);
+    expect(Object.isFrozen(contractHandback)).toBe(false);
+    expect(contractHandback).toEqual(unionHandback);
+    if (
+      unionHandback.role !== "researcher" ||
+      unionHandback.status !== "completed" ||
+      contractHandback.status !== "completed"
+    ) {
+      throw new Error("expected a completed Researcher handback from both parsers");
+    }
+    expect(Object.isFrozen(unionHandback.decisiveSources)).toBe(true);
+    expect(Object.isFrozen(contractHandback.decisiveSources)).toBe(true);
   });
 });
