@@ -46,6 +46,8 @@ Cut over the packet reference, all seven charter schema pointers, permanent aggr
 
 Use permanent fitting schema tests to preserve existing valid/invalid controls. Add direct role-contract consumer/import coverage where it proves the new independent entrypoints, including representative valid and invalid inputs and equivalence with the complete union. Do not add tests mirroring file text or an arbitrary line-count gate. Run the existing offline lib suite and typecheck once after the change, scoped lint/format on every changed TS file, direct Bun import of the real modules through the pinned shared-cache route, diff whitespace, and actual pointer/import reachability. No installs or temporary test files. Record real logs and which current source was exercised; reported deleted feasibility probes are not final proof.
 
+The planned permanent valid packet and helper-handback controls must also assert that parsed `AgentJobPacket` and `RoleHandback` family outputs are top-level frozen, while preserving the existing nested readonly behavior and the explicitly raw role-leaf distinction. This observes the promised output contract; it needs no separate harness, source-break probe, mutation/property strategy or new wrapped role API.
+
 Static source walks check the Implementer, Verifier, Researcher handback and mixed-role validation paths. They establish the progressive source route; live model loading and token savings remain unverified. The old missing tests-first chronology and unauthorized post-GREEN probes stay disclosed.
 
 ## Delivery and admission
