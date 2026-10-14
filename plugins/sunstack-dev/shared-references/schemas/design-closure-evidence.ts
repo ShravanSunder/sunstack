@@ -4,6 +4,7 @@ import * as z from "zod@4.6.5";
 import {
   type DesignDocumentKind,
   type DesignDocumentReference,
+  type DesignDocumentReferenceShape,
   DesignDocumentReferenceSchema,
   RequiredText,
   designDocumentReferenceOf,
@@ -25,7 +26,18 @@ export const LocalReviewClosureSchema = z
   .describe("A ready independent local review of one design document");
 export type LocalReviewClosure = z.infer<typeof LocalReviewClosureSchema>;
 
-export const localReviewClosureOf = <TKind extends DesignDocumentKind>(kind: TKind) =>
+export type LocalReviewClosureShape<TDocumentKind extends DesignDocumentKind> = {
+  readonly reviewStatus: z.ZodLiteral<"ready">;
+  readonly reviewResultReference: z.ZodString;
+  readonly coveredDocument: z.ZodObject<
+    DesignDocumentReferenceShape<TDocumentKind>,
+    z.core.$strict
+  >;
+};
+
+export const localReviewClosureOf = <TDocumentKind extends DesignDocumentKind>(
+  kind: TDocumentKind,
+): z.ZodObject<LocalReviewClosureShape<TDocumentKind>, z.core.$strict> =>
   z
     .strictObject({
       ...readyReviewFields,

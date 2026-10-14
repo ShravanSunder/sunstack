@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { ZodType } from "zod";
-import { describe, expect, test } from "vitest";
+import { describe, expect, expectTypeOf, test } from "vitest";
 import { FiveDocumentSetSchema } from "../../../plugins/sunstack-dev/shared-references/schemas/design-document-references.ts";
 import {
+  type RequirementsResult,
   RequirementsResultSchema,
   SpecDesignResultSchema,
   SpecificationResultSchema,
@@ -147,18 +148,34 @@ describe("design document references", () => {
     ).toEqual(["programDesign.location"]);
   });
 
-  test("rejects two chat records with the same record reference", () => {
-    const sameRecord = (kind: string): Payload => ({
+  test("accepts separately labeled records that share one message", () => {
+    const labeledRecord = (kind: string, label: string): Payload => ({
       kind,
-      location: { medium: "chat", recordReference: "thread-message-1", label: kind },
+      location: { medium: "chat", recordReference: "thread-message-1", label },
     });
     expect(
-      accepts(FiveDocumentSetSchema, {
+      issuePaths(FiveDocumentSetSchema, {
+        requirements: labeledRecord("requirements", "Requirements"),
+        specification: labeledRecord("specification", "Specification"),
+        programDesign: labeledRecord("program-design", "Program Design"),
+        testDesign: labeledRecord("test-design", "Test Design"),
+        verificationDesign: labeledRecord("verification-design", "Verification Design"),
+      }),
+    ).toEqual([]);
+  });
+
+  test("rejects two chat records with the same reference and the same label", () => {
+    const sameRecord = (kind: string): Payload => ({
+      kind,
+      location: { medium: "chat", recordReference: "thread-message-1", label: "Design" },
+    });
+    expect(
+      issuePaths(FiveDocumentSetSchema, {
         ...fiveDocuments,
         requirements: sameRecord("requirements"),
         specification: sameRecord("specification"),
       }),
-    ).toBe(false);
+    ).toEqual(["specification.location"]);
   });
 });
 
@@ -228,6 +245,27 @@ describe("spec-design Requirements result", () => {
       issuePaths(RequirementsResultSchema, {
         ...readyRequirements,
         localReview: readyLocalReview(fileReference("requirements", "older-requirements.md")),
+      }),
+    ).toEqual(["localReview.coveredDocument"]);
+  });
+
+  test("rejects a local review of another labeled record in the same message", () => {
+    const requirementsRecord: Payload = {
+      kind: "requirements",
+      location: { medium: "chat", recordReference: "thread-message-7", label: "Requirements" },
+    };
+    expect(
+      issuePaths(RequirementsResultSchema, {
+        ...readyRequirements,
+        document: requirementsRecord,
+        localReview: readyLocalReview({
+          kind: "requirements",
+          location: {
+            medium: "chat",
+            recordReference: "thread-message-7",
+            label: "Requirements, earlier draft",
+          },
+        }),
       }),
     ).toEqual(["localReview.coveredDocument"]);
   });
@@ -337,6 +375,17 @@ describe("spec-design result union", () => {
     expect(
       accepts(SpecDesignResultSchema, { ...readySpecification, phase: "program-design" }),
     ).toBe(false);
+  });
+
+  test("keeps phase, status and document-kind literals in the inferred type", () => {
+    type BlockedRequirements = Extract<RequirementsResult, { status: "blocked" }>;
+    expectTypeOf<RequirementsResult["phase"]>().toEqualTypeOf<"requirements">();
+    expectTypeOf<RequirementsResult["status"]>().toEqualTypeOf<
+      "locally-ready" | "blocked" | "decision-needed"
+    >();
+    expectTypeOf<
+      BlockedRequirements["draftDocuments"][number]["kind"]
+    >().toEqualTypeOf<"requirements">();
   });
 
   test("returns a frozen result", () => {

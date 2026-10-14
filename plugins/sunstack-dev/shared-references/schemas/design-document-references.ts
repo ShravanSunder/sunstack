@@ -22,19 +22,32 @@ export const DocumentLocationSchema = z
     z.strictObject({
       medium: z.literal("chat").describe("The document is a separately labeled chat record"),
       recordReference: RequiredText.describe(
-        "The message or record a reader opens to find this document",
+        "The message or record a reader opens to find this document; companions may share it",
       ),
-      label: RequiredText.describe("The label that separates this record from its companions"),
+      label: RequiredText.describe(
+        "The label that separates this record from its companions in the same message or record",
+      ),
     }),
   ])
   .describe("Where a reader opens the document");
 export type DocumentLocation = z.infer<typeof DocumentLocationSchema>;
 
-// Two references at the same key point at the same document. Different keys can still be aliases; callers check content.
+// Two references with the same key point at the same document: a file by its path, a chat record by its reference and label.
+// Different keys can still be aliases; callers check content.
 export const documentLocationKey = (location: DocumentLocation): string =>
-  location.medium === "file" ? `file:${location.path}` : `chat:${location.recordReference}`;
+  location.medium === "file"
+    ? JSON.stringify(["file", location.path])
+    : JSON.stringify(["chat", location.recordReference, location.label]);
 
-export const designDocumentReferenceOf = <TKind extends DesignDocumentKind>(kind: TKind) =>
+// Zod object shapes need an index-signature-compatible type, so the shapes below are type aliases rather than interfaces.
+export type DesignDocumentReferenceShape<TDocumentKind extends DesignDocumentKind> = {
+  readonly kind: z.ZodLiteral<TDocumentKind>;
+  readonly location: typeof DocumentLocationSchema;
+};
+
+export const designDocumentReferenceOf = <TDocumentKind extends DesignDocumentKind>(
+  kind: TDocumentKind,
+): z.ZodObject<DesignDocumentReferenceShape<TDocumentKind>, z.core.$strict> =>
   z
     .strictObject({
       kind: z.literal(kind).describe("The responsibility this document owns"),

@@ -3,6 +3,7 @@
 import * as z from "zod@4.6.5";
 import {
   type DesignDocumentKind,
+  type DesignDocumentReferenceShape,
   RequiredText,
   designDocumentReferenceOf,
 } from "./design-document-references.ts";
@@ -34,7 +35,29 @@ export const DesignGapSchema = z
   .describe("One exact design gap");
 export type DesignGap = z.infer<typeof DesignGapSchema>;
 
-const stoppedPhaseFields = <TKind extends DesignDocumentKind>(kind: TKind) => ({
+type StoppedPhaseShape<TDocumentKind extends DesignDocumentKind> = {
+  readonly phase: z.ZodLiteral<TDocumentKind>;
+  readonly gap: typeof DesignGapSchema;
+  readonly evidenceSummary: z.ZodString;
+  readonly draftDocuments: z.ZodReadonly<
+    z.ZodArray<z.ZodObject<DesignDocumentReferenceShape<TDocumentKind>, z.core.$strict>>
+  >;
+};
+
+export type BlockedPhaseShape<TDocumentKind extends DesignDocumentKind> =
+  StoppedPhaseShape<TDocumentKind> & {
+    readonly status: z.ZodLiteral<"blocked">;
+  };
+
+export type DecisionNeededPhaseShape<TDocumentKind extends DesignDocumentKind> =
+  StoppedPhaseShape<TDocumentKind> & {
+    readonly status: z.ZodLiteral<"decision-needed">;
+    readonly ownerDecisionReference: z.ZodString;
+  };
+
+const stoppedPhaseFields = <TDocumentKind extends DesignDocumentKind>(
+  kind: TDocumentKind,
+): StoppedPhaseShape<TDocumentKind> => ({
   phase: z.literal(kind).describe("The design phase that stopped"),
   gap: DesignGapSchema,
   evidenceSummary: RequiredText.describe(
@@ -46,7 +69,9 @@ const stoppedPhaseFields = <TKind extends DesignDocumentKind>(kind: TKind) => ({
     .describe("Drafts this phase produced before it stopped; empty means no draft exists"),
 });
 
-export const blockedPhaseResultOf = <TKind extends DesignDocumentKind>(kind: TKind) =>
+export const blockedPhaseResultOf = <TDocumentKind extends DesignDocumentKind>(
+  kind: TDocumentKind,
+): z.ZodObject<BlockedPhaseShape<TDocumentKind>, z.core.$strict> =>
   z
     .strictObject({
       ...stoppedPhaseFields(kind),
@@ -54,7 +79,9 @@ export const blockedPhaseResultOf = <TKind extends DesignDocumentKind>(kind: TKi
     })
     .describe("A phase stopped on an exact gap; it carries no ready payload");
 
-export const decisionNeededPhaseResultOf = <TKind extends DesignDocumentKind>(kind: TKind) =>
+export const decisionNeededPhaseResultOf = <TDocumentKind extends DesignDocumentKind>(
+  kind: TDocumentKind,
+): z.ZodObject<DecisionNeededPhaseShape<TDocumentKind>, z.core.$strict> =>
   z
     .strictObject({
       ...stoppedPhaseFields(kind),

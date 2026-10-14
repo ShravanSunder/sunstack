@@ -467,7 +467,7 @@ describe("user requirements and design-view contracts", () => {
     expect(specDesign).toContain(
       "`requirements-only` reviews the Requirements alone. It carries the Requirements identity",
     );
-    expect(specDesign).toContain("No Specification exists yet, and none is required.");
+    expect(specDesign).toContain("It does not require a Specification");
     expect(specDesign).toContain(
       "`specification-only` reviews the Specification against its governing Requirements. It carries the distinct Requirements and Specification identities.",
     );

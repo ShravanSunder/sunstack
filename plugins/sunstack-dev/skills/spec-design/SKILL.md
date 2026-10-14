@@ -137,7 +137,7 @@ Completion: a stranger can navigate from user need through entity, obligation, o
 
 Each document gets its own independent local review before its result is locally ready, and the inputs follow the mode:
 
-- `requirements-only` reviews the Requirements alone. It carries the Requirements identity, the governing owner records and sources, and the confirmed goal boundary. No Specification exists yet, and none is required.
+- `requirements-only` reviews the Requirements alone. It carries the Requirements identity, the governing owner records and sources, and the confirmed goal boundary. It does not require a Specification: on a first cycle none exists yet, and when revising Requirements an existing Specification is not part of this review.
 - `specification-only` reviews the Specification against its governing Requirements. It carries the distinct Requirements and Specification identities.
 
 Call `spec-program-review` using its `classify-review-requirement` operation with: the requested mode and that mode's identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive. A later purely nonsemantic edit may pass `none` and reuse current coverage under that skill's semantic-change rules.
