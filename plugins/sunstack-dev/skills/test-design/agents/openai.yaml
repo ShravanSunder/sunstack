@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test: Design"
+  short_description: "Design the regression strategy before tests are written"
+  default_prompt: "Use $test-design to turn the Specification's forbidden behavior and Program Design's seams into scenarios with independent oracles, honest layers, real interactions, correlated completion, planned red runs, and keep/repair/remove decisions on existing tests."

@@ -9,6 +9,7 @@ import {
   SpecificationResultSchema,
 } from "../../../plugins/sunstack-dev/skills/spec-design/schemas/spec-design-result.ts";
 import { ProgramDesignResultSchema } from "../../../plugins/sunstack-dev/skills/program-design/schemas/program-design-result.ts";
+import { TestDesignResultSchema } from "../../../plugins/sunstack-dev/skills/test-design/schemas/test-design-result.ts";
 
 type Payload = Record<string, unknown>;
 
@@ -456,6 +457,105 @@ describe("program-design result", () => {
   });
 });
 
+describe("test-design result", () => {
+  const readyTestDesign: Payload = {
+    phase: "test-design",
+    status: "locally-ready",
+    inputs: {
+      requirements: requirementsDocument,
+      specification: specificationDocument,
+      programDesign: programDesignDocument,
+    },
+    document: testDesignDocument,
+    summary: {
+      decisiveChoice:
+        "Routing is proven in an integration test with the real router-to-pane write and two real panes; payload rules stay at the serializer.",
+      tradeoff:
+        "The routing test needs two live pane buffers and an event wait, which is slower than a unit test with a mocked write that could not fail for focus-based routing.",
+    },
+    localReview: readyLocalReview(testDesignDocument),
+    plannedEvidence: ["The executor's red run for focus-based routing against the current router"],
+  };
+
+  test("accepts a locally-ready result whose red evidence is still planned", () => {
+    expect(issuePaths(TestDesignResultSchema, readyTestDesign)).toEqual([]);
+  });
+
+  test("rejects a ready result that claims an observed red run", () => {
+    expect(
+      accepts(TestDesignResultSchema, {
+        ...readyTestDesign,
+        observedRed: "The routing test failed against the current router",
+      }),
+    ).toBe(false);
+  });
+
+  test("rejects a ready result that repeats each case as a JSON inventory", () => {
+    expect(
+      accepts(TestDesignResultSchema, {
+        ...readyTestDesign,
+        caseCoverage: [{ obligation: "R1", layer: "integration" }],
+      }),
+    ).toBe(false);
+  });
+
+  test("rejects a ready result missing its Program Design input", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        inputs: { requirements: requirementsDocument, specification: specificationDocument },
+      }),
+    ).toEqual(["inputs.programDesign"]);
+  });
+
+  test("rejects a decisive choice with no stated tradeoff", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        summary: { ...(readyTestDesign.summary as Payload), tradeoff: "" },
+      }),
+    ).toEqual(["summary.tradeoff"]);
+  });
+
+  test("rejects a local review that covers a different Test Design document", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        localReview: readyLocalReview(fileReference("test-design", "test-design-draft.md")),
+      }),
+    ).toEqual(["localReview.coveredDocument"]);
+  });
+
+  test("rejects a Test Design stored at its Program Design's location", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        document: fileReference("test-design", "program-design.md"),
+        localReview: readyLocalReview(fileReference("test-design", "program-design.md")),
+      }),
+    ).toEqual(["document.location"]);
+  });
+
+  test("lets a blocked result return a missing seam to Program Design", () => {
+    expect(
+      accepts(TestDesignResultSchema, {
+        phase: "test-design",
+        status: "blocked",
+        gap: {
+          token: "program-design-gap",
+          reason:
+            "No seam exposes pane B's input buffer, so no test can see where the text arrived.",
+          affectedSources: ["docs/specs/2026-10-13-pane-routing/program-design.md"],
+          requiredResolution:
+            "Program Design names an observation point for each pane's received input.",
+        },
+        evidenceSummary: "The pane component keeps its buffer private and emits no input event.",
+        draftDocuments: [testDesignDocument],
+      }),
+    ).toBe(true);
+  });
+});
+
 describe("phase schema imports", () => {
   const relativeImportsOf = (file: string): readonly string[] =>
     [...readFileSync(file, "utf8").matchAll(/from "(\.[^"]+)"/g)].map((match) =>
@@ -480,6 +580,7 @@ describe("phase schema imports", () => {
     for (const phaseSchema of [
       "skills/spec-design/schemas/spec-design-result.ts",
       "skills/program-design/schemas/program-design-result.ts",
+      "skills/test-design/schemas/test-design-result.ts",
     ]) {
       const entry = path.join(pluginRoot, phaseSchema);
       const outsideShared = [...reachableFiles(entry)].filter(
