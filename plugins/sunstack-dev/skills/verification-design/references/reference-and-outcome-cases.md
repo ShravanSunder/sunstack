@@ -2,7 +2,7 @@
 
 This reference owns what a verification is judged against and which cases it must contain: the declared reference, the core outcome as observed, and the cases that tell that outcome apart from its look-alikes.
 
-Expected inputs: the Specification's obligations and worked examples, the Program Design's observation points, the Test Design's scenarios, and the delivery target as far as it is known.
+Expected inputs: when authoring, the Specification's obligations and worked examples, the Program Design's observation points, the Test Design's scenarios, and the delivery target as far as it is known; for a prebuild challenge or delivered judgment, the governing basis the Verifier commission supplies, including the adopted design set when it names one.
 
 Return: the case coverage tied to the declared reference and the observable outcome, including the wrong-target and acknowledgement-without-outcome cases, and any reference that cannot be declared.
 
@@ -47,7 +47,8 @@ Each case observes the left column. A proxy may help diagnose a failure; it neve
 For each case, write:
 
 ```text
-case:          what risk it covers that tests do not
+case:          the risk it covers; a new run covers what cheaper tests do not,
+               while an existing applicable real-path observation may supply it
 drive:         the entry point and input, on the declared target
 observe:       where the outcome is seen
 passes when:   the observation matches the reference

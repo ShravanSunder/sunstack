@@ -23,7 +23,7 @@ Finding:     the case observes an acknowledgement. Observe pane B's and pane A's
 - the core outcome is stated where the user or calling program meets it;
 - the declared reference is independent of the implementation and named exactly (version, data set, worked example); a model's judgment of the output is not a reference;
 - the existing route was inspected from its source: launch, health, drive, evidence and cleanup, with what each exercises; offline preparation is not presented as live readiness;
-- each case covers a risk cheaper tests cannot reach, or names the existing real-path observation that already covers it: the delivered build and configuration, startup wiring, the real transport, layout at a real size, durability across a restart, failures driven through the same entry point;
+- each new real-system run covers a risk cheaper tests cannot reach, and a case may instead name an existing applicable real-path observation on the declared target that already covers it; the risks in view: the delivered build and configuration, startup wiring, the real transport, layout at a real size, durability across a restart, failures driven through the same entry point;
 - each passing condition names what is seen, where, against which reference, on which target identity, and would fail for a wrong implementation;
 - feasibility gaps are named with their owner: a missing observation point to `program-design`, a missing grant or route to the Lead;
 - reuse of a permanent journey names its actual applicable run on the declared target, configuration and client, what it depends on, and what would require running it again; without such a run the observation stays owed;

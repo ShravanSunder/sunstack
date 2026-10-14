@@ -2,7 +2,7 @@
 
 This reference owns inspecting the route a project already has for exercising its real system, and judging whether a proposed proof can reach the outcome on it.
 
-Expected inputs: the cases and their outcomes, the declared target, and the repository's existing launch, health, drive, evidence and cleanup code, scripts and documentation.
+Expected inputs: the cases and their outcomes (from the Verification Design when authoring, or from the commission's governing basis otherwise), the declared target, and the repository's existing launch, health, drive, evidence and cleanup code, scripts and documentation.
 
 Return: the inspected route (target, configuration, readiness, drive and observation) and its feasibility gaps.
 

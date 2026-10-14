@@ -2,7 +2,7 @@
 
 This reference owns judging delivered work against the adopted design: whether each piece of evidence applies to what was delivered, whether the delivered tests carry out the Test Design, what the red-to-green record shows, and who corrects each gap.
 
-Expected inputs: the adopted Verification Design and Test Design, the delivered head and target, the delivered tests read in full, and the executor's actual logs and observations.
+Expected inputs: the governing basis the Verifier commission supplies, including the adopted Verification Design and Test Design when it names them, the delivered head and target, the delivered tests read in full, and the executor's actual logs and observations.
 
 Return: the observed applicability of each piece of evidence, the adequacy of the delivered tests, the actual red limits, and the precise correction owner for each gap.
 

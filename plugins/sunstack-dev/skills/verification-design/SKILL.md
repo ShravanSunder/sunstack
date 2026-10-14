@@ -15,7 +15,7 @@ Every verification follows one spine:
 adopted outcome and declared reference   what correct means, independent of the implementation
   -> existing route                      how this project launches, readies, drives, captures and cleans up
   -> reachable observation               where the outcome itself is seen, on the declared target
-  -> cases and limits                    the risks tests cannot reach, and what stays unverified
+  -> cases and limits                    real-system risks, applicable observations reused, what stays unverified
   -> judgment                            does this observation support this claim, at this target
 ```
 
@@ -59,7 +59,7 @@ Open the project's own launch, health, drive, evidence and cleanup owners before
 
 Completion: the route's real target and boundary are known from its source, and every gap between it and the outcome is named.
 
-### 3. Choose the cases tests cannot reach
+### 3. Choose the real-system cases
 
 Read `principle-prove-it-works` in full at this choice. Read the adopted Test Design first: it already catches the wrong behavior that a cheaper layer can show. Verification takes what only the real system shows: the delivered build and its configuration, startup wiring, the real transport, layout at a real size, durability across a restart, and the failures the claim covers driven through the same entry point. A second path earns its cost only when it can detect something the first cannot. An existing real-path test or journey that already observes the outcome on the declared target, configuration and client can supply a case (step 5); what adds nothing is a new real-system run that repeats a case a cheaper test already settles, only to look independent.
 
