@@ -87,7 +87,13 @@ When prior results are unavailable, inspect the current documents and governing 
 
 Completion: the mode, every target, the governing sources, accepted requirements, boundaries, open authority decisions and any reused-coverage record are unambiguous.
 
-## 3. Reconstruct and Walk
+## 3. Commission the Reviewer
+
+The caller completes classification and admission. For an admitted substantive review, load `practices-manage-agents` and return the commissioned or resumed persistent 🔎 Reviewer Sidekick with read-only access; its role charter governs its authority. A local review (`requirements-only`, `specification-only`, `program-only`, `test-only` or `verification-only`) runs on OpenAI Sol 6.1, the model adopted for every document's own cycle; `practices-manage-agents` resolves its exact id, effort and launch. The integrated `five-artifact-design` reader takes its model from the ordinary Reviewer catalog. Resume that same Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
+
+Completion: one independent Reviewer Sidekick with no authoring history owns this review relationship.
+
+## 4. Reconstruct and Walk
 
 The 🔎 Reviewer Sidekick reads every target and governing source whole before any finding. IF operation is review, load `references/reviewing-common-method.md` and return the reconstructed intent, the source-backed case and countercase walk, and the exact semantic gaps. Then load the selected mode's lens:
 
@@ -101,12 +107,6 @@ The 🔎 Reviewer Sidekick reads every target and governing source whole before 
 Each mode judges in dependency order, and an upstream fatal defect bounds what downstream judgment can mean. Calibrate severity by consequence, and keep the clean control: when the walk and countercase hold, say what held.
 
 Completion: the selected mode is reconstructed from complete documents, at least one concrete case and its most dangerous countercase were walked, and every gap is anchored.
-
-## 4. Commission the Reviewer
-
-The caller completes classification and admission. For an admitted substantive review, load `practices-manage-agents` and return the commissioned or resumed persistent 🔎 Reviewer Sidekick with read-only access; its role charter governs its authority. A local review (`requirements-only`, `specification-only`, `program-only`, `test-only` or `verification-only`) runs on OpenAI Sol 6.1, the model adopted for every document's own cycle; `practices-manage-agents` resolves its exact id, effort and launch. The integrated `five-artifact-design` reader takes its model from the ordinary Reviewer catalog. Resume that same Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
-
-Completion: one independent Reviewer Sidekick with no authoring history owns this review relationship.
 
 ## 5. Walk the Mode and Chunk Checks
 

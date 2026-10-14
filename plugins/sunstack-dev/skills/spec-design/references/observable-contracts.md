@@ -64,7 +64,7 @@ Rewrite:  For a repeated request with the same idempotency key and equivalent pa
           A different payload under the same key is rejected.
 ```
 
-A clean case needs no rewrite: "The export file contains one row per invoice in the selected period" already fails a cheap implementation that drops or duplicates rows, because a row count against the source invoices tells pass from fail.
+A clean case needs no rewrite: "The export file contains one row per invoice in the selected period" already fails a cheap implementation that drops or duplicates rows, because its check compares the exported invoice identities, each with how many times it appears, against the selected invoices. A row count alone is not that check: source invoices A and B exported as A, A have the right count and still fail, while B, A passes because the obligation sets no row order.
 
 Stop when no cheap implementation you can name satisfies the words while missing the outcome. An obligation you could not break because you never tried is unfinished.
 
