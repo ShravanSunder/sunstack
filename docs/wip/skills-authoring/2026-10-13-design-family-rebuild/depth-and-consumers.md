@@ -43,7 +43,7 @@ Keep forbidden behavior → real interaction → cheapest honest layer → indep
 - MUST load `references/scenarios-oracles-and-layers.md` and return case coverage with an independent oracle, honest layer and the interactions that must remain real. Include a clean pure-rule case and an interaction whose mock would erase the failure; reject assertions that exclude permitted outcomes.
 - IF assessing existing tests affected by the change, load `references/existing-test-quality.md` and return keep/repair/remove decisions grounded in protection, determinism and diagnosis, with proposed repairs routed to the Implementer.
 - IF completion is asynchronous or fixtures can fail before behavior is exercised, load `references/fixtures-and-completion.md` and return a fixture that reaches the intended assertion plus correlated completion; setup failure is not behavioral RED.
-- MUST load `schemas/test-design-result.ts` and return TestDesignResult after local review, including planned scenario/RED gaps honestly.
+- MUST load `schemas/test-design-result.ts` and return TestDesignResult after local review, with its document, decisive strategy summary and planned-evidence limits; keep full scenarios/oracles in the design rather than a duplicate JSON case inventory.
 
 Read principle-write-tests-that-can-fail at the scenario/oracle/layer choice; use full types/read-ground-truth/reader principles when those decisions arise. No mock-count rule, required mutation tool, sleep or all-layers quota.
 
@@ -77,7 +77,7 @@ Keep review/classify entry, target authority, independent whole reading, case/co
 - IF operation is review, load retained `references/lanes/dispel.md` and return candidate classifications and unsupported-delivery findings after source checks.
 - IF a named unresolved risk matches a retained focused-lane predicate, load that exact existing lane and return its source-backed risk findings; preserve current predicate→lane mapping, not a new all-lanes default.
 - IF operation is review, load `references/finding-and-reduction-schema.md` and return the coverage-bound result, verified dispositions, cause-based owner and retained remediation. Extend its concept/route labels for Test Design and Verification Design; keep its complete narrative Finding as the single owner.
-- IF returning classification, load `schemas/review-classification.ts` and return ReviewClassification. IF returning a review, load `schemas/design-review-result.ts` and return DesignReviewResult.
+- IF returning classification, load `schemas/review-classification.ts` and return ReviewClassification. IF returning a review, load `schemas/design-review-result.ts` and return DesignReviewResult with its report pointer; check statuses, findings, coverage and correction evidence stay in that actual report.
 
 All five new/local modes follow the same independent semantic method, calibrated severity and valid clean controls. A role charter governs Reviewer authority; this phase teaches design judgment, not a copied staffing catalog. The existing convergence rule remains.
 
