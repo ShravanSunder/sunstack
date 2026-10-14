@@ -40,7 +40,9 @@ const ReadyRequirementsSchema = z
         ),
         adoptedOutcomes: RequiredText.describe("The outcomes the owner adopted, in plain words"),
       })
-      .describe("What a caller needs to continue without reopening the document"),
+      .describe(
+        "Helps the caller interpret the choice; the caller still reads the decisive document sections and the review",
+      ),
     confirmation: OwnerConfirmationSchema.describe(
       "The owner's confirmation of these Requirements, or an explicit waiver",
     ),
@@ -79,7 +81,9 @@ const ReadySpecificationSchema = z
           .readonly()
           .describe("Obligation-to-requirement references, such as R1 -> U1"),
       })
-      .describe("What a caller needs to continue without reopening the document"),
+      .describe(
+        "Helps the caller interpret the choice; the caller still reads the decisive document sections and the review",
+      ),
     localReview: localReviewClosureOf("specification"),
     plannedEvidence: PlannedEvidenceSchema,
   })

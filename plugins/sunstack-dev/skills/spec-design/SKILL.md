@@ -135,9 +135,14 @@ Completion: a stranger can navigate from user need through entity, obligation, o
 
 ### 8. Review each document, then return
 
-Each document gets its own independent local review before its result is locally ready. Call `spec-program-review` using its `classify-review-requirement` operation with: requested mode `requirements-only` or `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive. A later purely nonsemantic edit may pass `none` and reuse current coverage under that skill's semantic-change rules.
+Each document gets its own independent local review before its result is locally ready, and the inputs follow the mode:
 
-When review is required, invoke `spec-program-review` separately in that mode with fresh context and read-only authority, carrying the document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps. Correct accepted findings here; the same review relationship checks the corrected anchors under `spec-program-review`'s bounded review-and-correction-round policy.
+- `requirements-only` reviews the Requirements alone. It carries the Requirements identity, the governing owner records and sources, and the confirmed goal boundary. No Specification exists yet, and none is required.
+- `specification-only` reviews the Specification against its governing Requirements. It carries the distinct Requirements and Specification identities.
+
+Call `spec-program-review` using its `classify-review-requirement` operation with: the requested mode and that mode's identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive. A later purely nonsemantic edit may pass `none` and reuse current coverage under that skill's semantic-change rules.
+
+When review is required, invoke `spec-program-review` separately in that mode with fresh context and read-only authority, carrying the mode's document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps. Correct accepted findings here; the same review relationship checks the corrected anchors under `spec-program-review`'s bounded review-and-correction-round policy.
 
 MUST load `schemas/spec-design-result.ts` and return the RequirementsResult, plus the SpecificationResult when the request covered it, each after its own local review closed. A result is `locally-ready` (the document, its summary, its ready review, and for Requirements the owner's confirmation or waiver), `blocked` (an exact gap with its evidence), or `decision-needed` (the same plus the owner decision brief). Locally ready means the caller can use the document; it never means the five-document design is ready. Program Design consumes the Specification result.
 
@@ -178,7 +183,7 @@ There is no default swarm. IF one bounded evidence, observable-surface, product-
 
 Do not return `locally-ready` while any of these hold:
 
-- Requirements and Specification lack separate, resolvable identities, or one artifact plays both roles;
+- the Requirements lacks a resolvable identity; or, for Specification work, the Specification lacks its own resolvable identity apart from the Requirements, or one artifact plays both roles;
 - a normative claim lacks an authorizing source, or rests on a row whose authority state is not `authorized`;
 - an obligation names an undefined entity, an entity's identity rule cannot decide the hardest case the sources raise, or an entity is defined in implementation terms;
 - a material obligation still passes the cheapest literal implementation that misses the outcome;

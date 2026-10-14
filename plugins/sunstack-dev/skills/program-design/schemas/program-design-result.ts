@@ -41,7 +41,9 @@ const ReadyProgramDesignSchema = z
           "Where behavior is observed and which interactions must stay real; Test Design works inside these",
         ),
       })
-      .describe("What a caller needs to continue without reopening the document"),
+      .describe(
+        "Helps the caller interpret the choice; the caller still reads the decisive document sections and the review",
+      ),
     confirmation: OwnerConfirmationSchema.describe(
       "The owner's structural-realization confirmation, or an explicit waiver",
     ),

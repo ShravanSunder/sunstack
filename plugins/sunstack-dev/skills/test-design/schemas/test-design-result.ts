@@ -39,7 +39,9 @@ const ReadyTestDesignSchema = z
           "What that choice costs and what the cheaper choice would miss",
         ),
       })
-      .describe("What a caller needs to continue; the cases themselves stay in the document"),
+      .describe(
+        "Helps the caller interpret the strategy; the cases stay in the document, which the caller still reads",
+      ),
     localReview: localReviewClosureOf("test-design"),
     plannedEvidence: z
       .array(RequiredText)

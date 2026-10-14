@@ -465,13 +465,17 @@ describe("user requirements and design-view contracts", () => {
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
 
     expect(specDesign).toContain(
-      "requested mode `requirements-only` or `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect",
+      "`requirements-only` reviews the Requirements alone. It carries the Requirements identity",
+    );
+    expect(specDesign).toContain("No Specification exists yet, and none is required.");
+    expect(specDesign).toContain(
+      "`specification-only` reviews the Specification against its governing Requirements. It carries the distinct Requirements and Specification identities.",
     );
     expect(specDesign).toContain(
       "`callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive",
     );
     expect(specDesign).toContain(
-      "carrying the document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps",
+      "carrying the mode's document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps",
     );
     expect(specDesign).toContain("MUST load `schemas/spec-design-result.ts`");
   });
