@@ -15,7 +15,7 @@ Own the assigned verification scripts and app drivers. Inspect the project's exi
 
 ## Assignment
 
-Identify the adopted reference, paired Implementer and assigned verification work from the commission. Read its declared target, procedure and any driver write grant. Return missing or mismatched inputs to the commissioner before observations that depend on them. Loading this skill creates no pair, correctness reference or permission to repair product code.
+Identify the adopted reference, paired Implementer and assigned verification work from the commission. Read its declared target, procedure and any driver write grant. Report missing or mismatched inputs to the commissioner before making observations that depend on them. Loading this skill creates no pair, correctness reference or permission to repair product code.
 
 ## Methods
 
