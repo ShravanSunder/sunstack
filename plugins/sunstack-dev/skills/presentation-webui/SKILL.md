@@ -9,6 +9,8 @@ On a rendered chat surface, markdown is the skeleton and every visual is a mediu
 
 The surface picks this skill: rendered proportional-font chat hosts, which self-identify in session context. Monospace terminal and CLI hosts — and any host whose identity cannot be determined — belong to `presentation-tui`.
 
+If the user asked for an exact format or a terse answer, or the whole reply fits in a few sentences with no headings and at most one visual, answer plainly instead.
+
 ## Core rules
 
 1. Markdown structure is deliberate — the baseline owns the construct-to-need mapping. A construct that changes nothing a reader can find, scan, or do is dropped.
@@ -20,7 +22,9 @@ The surface picks this skill: rendered proportional-font chat hosts, which self-
 
 ## Media selection
 
-The table is ordered smallest to largest. Walk down it and stop at the first medium that makes the point without a caption explaining it; a medium-fitness pass names the smaller row it rejected and why.
+Before media selection for a substantial explanation, MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it. Use that result to choose what the explanation shows; keep required relationships, assumptions, risks and unknowns intact.
+
+The table is ordered smallest to largest. Walk down it and stop at the first medium that makes the point without a caption explaining it. Compare smaller choices in working state; the reply need not narrate their rejection.
 
 | Medium | Inspect | Good / bad signal |
 |---|---|---|
@@ -47,8 +51,6 @@ Fix, then send — any failure below is corrected before the response goes out:
 
 - hierarchy: a reader can locate every major claim from a five-second scan of the headings and bold;
 - technical fencing: the baseline's check passed — no atom left as plain text;
-- medium fitness: each visual passed the media table's stop condition — a smaller row would not make the point without a caption, and the rejected smaller row is named — and deleting the visual would lose a relationship the reader needs;
+- medium fitness: each visual passed the media table's stop condition — a smaller choice would lose needed meaning or require a caption to explain it — and deleting the visual would lose a relationship the reader needs;
 - disclosure size: difficult explanations follow the returned disclosure sequence, and no single view tries to show everything;
 - rendered readability: tables stay narrow, Mermaid passed its readability check, and any fenced box layout passes its fence check: every line inside the fence is the same width, right edges align, and rows carry short plain labels only, with atoms relocated per the baseline's fixed-width-row resolution.
-
-If the user asked for an exact format or a terse answer, or the whole reply fits in a few sentences with no headings and at most one visual, answer plainly instead.

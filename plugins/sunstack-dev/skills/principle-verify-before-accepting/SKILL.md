@@ -14,7 +14,9 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Check that the evidence observes the claimed thing.** A unit pass doesn't prove runtime behavior; a clean lint doesn't prove it compiles; valid frontmatter doesn't prove a skill teaches; a green suite that never touches the changed module proves nothing about the change. Ask what the evidence could have caught, and whether that includes the failure you care about.
 
-**Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is deployed? A result from the wrong commit or the wrong directory is evidence about something else.
+**Check the version, the place and the dependencies of the claim.** Identify the observed build or source, configuration, client and exercised path. Inspect what changed in those dependencies before reusing the observation. A newer commit alone invalidates nothing: an unrelated prose edit need not repeat an app journey. Equal source alone proves no delivery: an installed binary, route or provider configuration may differ even when the checkout does not. Reuse only the coverage whose relevant dependencies and actual target still match; name changed or unknown coverage and the observation still owed.
+
+Apply the same judgment to semantic review: a process-only edit can preserve review of unchanged meaning, while a changed obligation needs the affected review. Reviewed meaning is not executable coverage, and inspected source is not observed runtime behavior.
 
 **Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist: "The helper reports the commands succeeded, but the raw logs it was asked for don't exist, so those receipts can't close the runtime proof." Prefer "run this" to "trust me".
 
@@ -34,7 +36,7 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 A helper reported "all tests pass, ready for review" with a CI link. The run was green, but it ran on the commit before the helper's last change, and the suite never touched the changed module. Accepting it would have sent unproven behavior to review. Better: match the run to the head, check that the suite exercises the change, and read the diff. The claim narrows to "the earlier commit is green; the current change is unproven".
 
-IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios, simplest first: the review finding that was wrong; summaries without logs; fixed in CI?; a second harness; proof from the wrong checkout; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios: the review finding that was wrong; summaries without logs; fixed in CI?; a second harness; proof from the wrong checkout; reuse after prose, recheck after routing; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

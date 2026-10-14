@@ -67,7 +67,7 @@ Each state diagram should identify:
   ▸ terminal states
   ▸ recovery path, if one exists
 
-Do not use a state diagram for a simple call order; use sequence.
+For call order, use sequence when communicating actors and their messages matter; otherwise use flow for the ordered work. A linear lifecycle with real states and labeled transitions still uses state.
 
 
 ─── Decision tree ───────────────────────────────────────────────────

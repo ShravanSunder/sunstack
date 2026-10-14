@@ -7,6 +7,8 @@ description: "Use when composing a substantial architecture, comparison, tradeof
 
 On a monospace surface, the box-drawing skeleton is the default layout and markdown owns the atoms inside it. The skeleton is the top-level section framing, nothing more; every other box or glyph construct is used only where it beats its markdown equivalent at its job (a GFM table, a fence, a bullet list). Markdown atoms are governed by rules 5-7.
 
+If the response is short, or the user asked for a normal markdown document or another exact format, skip the TUI treatment.
+
 ## Core rules
 
 1. Pick one shape by content type before writing (picker below).
@@ -22,6 +24,8 @@ On a monospace surface, the box-drawing skeleton is the default layout and markd
 11. Verify the rendered shape before sending: alignment, overflow, row rhythm, right edges.
 
 ## Shape picker
+
+Before picking a shape for a substantial explanation, MUST load `principle-write-for-the-reader` and return the reader's question, essential relationship and smallest readable view under the host geometry. Use shared diagram semantics to choose what the view means; then select its terminal realization. A branch does not become a lifecycle state because the state drawing fits better.
 
 | Shape | Use when | Signal |
 |---|---|---|
@@ -63,5 +67,3 @@ Before sending, in addition to the baseline's before-send check:
 - row labels stay short (baseline's labels-versus-atoms boundary); ordinary prose shortens or wraps without breaking tokens; no identifier is truncated mid-token;
 - markdown inside the skeleton is deliberate (rule 5), and nothing markup-bearing sits inside a fixed-width row;
 - if deleting a frame or glyph construct would lose no relationship the reader needs, delete it and keep the markdown.
-
-If the response is short, or the user asked for a normal markdown document or another exact format, skip the TUI treatment.

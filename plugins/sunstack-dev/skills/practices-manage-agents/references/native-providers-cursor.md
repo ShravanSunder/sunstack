@@ -14,11 +14,11 @@ Task may omit a sandbox or `workspace_readonly` flag. Do not hop to Cursor CLI t
 
 | Role | Model | Route |
 | --- | --- | --- |
-| 📚 Researcher Worker, 🔧 Operator Worker | the model of the catalog row in `SKILL.md` | native Task when Task can select that model; otherwise agent-router as a Sidekick, or report the exact gap |
+| 📚 Researcher Worker, 🔧 Operator Worker | the model of the catalog row in `model-catalog.md` | native Task when Task can select that model; otherwise agent-router as a Sidekick, or report the exact gap |
 
 A model off the catalog, such as xAI Grok in place of the Sol medium Researcher row, needs the owner's explicit, named override; this manual is not one.
 
-Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. Treat `agent --list-models` short names as CLI labels, not native Task ids, unless the host requires them.
+Resolve the exact id with the exact-id rule in `model-catalog.md`. Treat `agent --list-models` short names as CLI labels, not native Task ids, unless the host requires them.
 
 ## Workspace Access
 

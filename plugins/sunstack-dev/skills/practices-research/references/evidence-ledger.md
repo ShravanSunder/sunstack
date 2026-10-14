@@ -1,55 +1,11 @@
 # Evidence Ledger
 
-Use this structure for substantial research artifacts under `tmp/practices-research/<date>-<slug>/research-ledger.md`. Its immediate consumer is the researcher synthesizing this run; its downstream consumer is the recommended next workflow or continuation agent named at the bottom.
+Keep the inspectable support for a substantial research answer under `tmp/practices-research/<date>-<slug>/research-ledger.md`. The researcher uses it to synthesize; the commissioner or a successor uses it to check the answer and continue the walk. Record what matters to those decisions, without filling a report template.
 
-```text
-Research Ledger
-═══════════════
+Start with the bounded question, what it will inform and what the assignment will not decide. Link opened sources near the claims they support, with their version, freshness and limitations when consequential. Keep direct observation, source summary, user-memory evidence and inference distinguishable. A load-bearing conclusion needs a primary anchor or a named gap; an authentic quote is not necessarily evidence for the conclusion drawn from it.
 
-Question:
-<the bounded question or thesis>
+Preserve verbatim queries and meaningful null results. Distinguish searched-and-empty from not searched and unavailable routes, with the coverage limits that affect the answer. Track whether a finding remains a lead, has been investigated, or is accepted, refuted or unresolved; zero accepted findings is useful when the evidence warrants it. Where sources split, keep the competing explanations and the evidence for and against each. Keep raw notes beside the ledger only when another reader needs them to inspect a claim.
 
-Mode:
-research-only | design-input | plan-input | review-input
+For example: “Does the owner require global arrival order? The session search for `global ordering` found a quoted agent proposal; surrounding messages do not adopt it. The current contract promises order per pane. The proposal is source evidence, while owner adoption remains unresolved. No code claim was investigated. This answers the provenance question; the caller decides whether a design decision is still needed.”
 
-Non-goals:
-<what this research will not decide or implement>
-
-Sources:
-- <source>: <why used, freshness, limitations>
-
-Source-Class Summary:
-- <class>: <question, coverage, confidence>
-
-Coverage:
-- searched: <source or route>: <verbatim query> — <hits | null result>
-- not searched: <source or route>: <reason — no route available, out of scope, time-boxed out>
-
-Evidence:
-1. <finding>
-   state: lead | investigated | accepted | refuted | unresolved
-   class: direct observation | cited source summary | user-memory evidence | inference | unresolved
-   supports/refutes/complicates: <question>
-   source: <path/url/line/citation — at the claim, primary anchor for load-bearing conclusions>
-   confidence: high | medium | low
-
-Competing Hypotheses (when evidence splits):
-- <hypothesis A> | evidence for: <anchors> | evidence against: <anchors>
-- <hypothesis B> | evidence for: <anchors> | evidence against: <anchors>
-
-Researcher Disposition:
-- accepted / contested / rejected / left open, per source-class observation
-- contradictions and stale assumptions affecting the next phase
-- completion receipt: source anchors, artifact paths, named exceptions, remaining uncertainty
-
-Synthesis:
-- supported: <accepted findings only — each with a primary anchor or a labeled gap>
-- refuted:
-- complicated:
-- unresolved:
-
-Return Token:
-<requirements-gap | specification-gap | program-design-gap | ready-for-planning | ready-for-implementation | ready-for-review | none: evidence complete, the caller decides | blocked: gap>
-```
-
-Keep raw source notes in the same tmp folder when another reader needs them to inspect a claim.
+Finish with the supported answer, consequential uncertainty and any source walk still owed. A bounded completed answer returns to its commissioner as evidence complete; it does not manufacture a phase transition. The ledger is sufficient when a reader can trace each material conclusion to its support and see where that support stops.

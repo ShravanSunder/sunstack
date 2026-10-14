@@ -6,6 +6,14 @@ Expected inputs: the concept to explain, the reader's current question, and the 
 
 Return: the selected primary family with its reason, the disclosure sequence chosen, and the stop/simplify result.
 
+## From the question to the view
+
+Start with the answer the reader needs, then retain the facts and uncertainty that answer depends on. Select a focal target or path: the changed boundary, failed journey or disputed ownership. Choose the semantic family and disclosure from those relationships, then let the consuming surface select the medium. Presentation takes meaning from its owning source; it cannot remove a required edge, risk or unknown to fit a tidy drawing.
+
+For “what changed?”, a small before/after table may answer better than the entire network. For “who owns retries?”, keep the relevant owners and labeled retry edges in a topology view. For “what happens after approval is refused?”, follow that branch as a flow unless the source actually defines lifecycle states. Keep enough context to locate the slice and its limitations.
+
+Check the view as a cold reader: can they find the intended answer, see its material limits and point to the place they would correct? If not, change the focus or disclosure before adding drawing detail. Keep medium comparisons internal unless they explain a decision the reader needs.
+
 ## Visual Family Selection
 
 Pick one primary family from the concept being explained. Compose a second family only when it clarifies a local subproblem.

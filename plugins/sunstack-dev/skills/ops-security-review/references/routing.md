@@ -30,7 +30,7 @@ Repo: <absolute repo path>
 Scope: <PR/diff/range/path/repo/finding>
 Authorization: <user-confirmed authorization>
 Threat model or security guidance:
-<provided or "missing; create repository-scoped threat model first">
+<provided context or the exact missing context; report prerequisites that block the selected workflow>
 
 Constraints:
 - Keep the first scan read-only.
@@ -38,6 +38,7 @@ Constraints:
 - Preserve report paths.
 - Validate plausible findings before remediation.
 - Do not fix anything unless this prompt explicitly asks for one finding fix.
+- Create, update or persist a threat model only when explicitly requested; preserve the selected workflow's actual prerequisites and report what remains missing.
 
 Return:
 - scan route used
@@ -51,7 +52,7 @@ Return:
 
 When not running the official scanner, still borrow:
 
-- threat model before findings
+- use supplied threat-model context and report missing prerequisites
 - discovery before validation
 - validation before attack-path severity
 - explicit deferred proof gaps

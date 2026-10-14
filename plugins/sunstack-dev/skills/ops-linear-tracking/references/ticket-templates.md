@@ -122,19 +122,19 @@ between Swift and React.
 
 ## Project Setup Ticket (bootstrapping)
 
-When a project needs initial setup:
+When a project needs initial setup from an adopted design and plan:
 
 ```markdown
-## Title: Project setup and architecture doc
+## Title: Project setup and tracking
 
 ## Description:
 
-Create the project structure, architecture document, and initial
-milestone/ticket breakdown.
+Create the tracking project and initial milestone/ticket breakdown from the
+adopted repository design and plan. Link the governing sections.
 
 ## Scope
 
-* [ ] Create `docs/architecture/project-name.md` with design
+* [ ] Read the adopted design and plan; name missing input before deriving tickets
 * [ ] Create Linear project
 * [ ] Create milestones for each phase
 * [ ] Create initial tickets with dependencies
@@ -142,8 +142,9 @@ milestone/ticket breakdown.
 
 ## Notes
 
-This ticket is the bootstrap — it creates the work plan that all
-other tickets reference.
+The governing design and plan own outcomes and dependencies. This ticket
+projects them into tracking. If either input is absent or contradictory,
+return that gap to its owner before creating a competing work plan.
 ```
 
 ## Anti-patterns

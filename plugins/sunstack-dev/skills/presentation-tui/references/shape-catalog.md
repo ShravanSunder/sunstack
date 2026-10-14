@@ -2,7 +2,7 @@ Shape Catalog — TUI Presentation Reference
 ══════════════════════════════════════════════════════════════════════
 
 This reference owns: worked examples, geometry choices, and anti-patterns for the framed TUI shapes and six compositional applications.
-Expected inputs: the shape selected by the SKILL.md picker and the content it must carry.
+Expected inputs: the shape selected by the SKILL.md picker, the semantic family selected through shared diagram semantics, and the content it must carry.
 Return: the shape's geometry choices and its don't-use conditions, applied to the current block.
 Complete when: the composed block matches the worked geometry, none of the shape's don't-use conditions hold, and every copyable atom follows the baseline's labels-versus-atoms boundary — where an example shows a full identifier or path inside a row, your real response keeps a short label in the row and the formatted atom outside it.
 
@@ -125,7 +125,7 @@ Use when:
 
 Don't use when:
 
-  ▸ Concepts have sequential relationship (use pipeline or state)
+  ▸ Concepts have sequential relationship (use flow for work steps, state for lifecycle transitions, or sequence for actor messages)
   ▸ One concept much bigger than others (use separate framed cards)
   ▸ Readability suffers at canvas 70 — consider stacking vertically
 
@@ -268,11 +268,11 @@ Use when:
 
   ▸ Numbered sequential steps in a process
   ▸ Each step is 1-2 lines; a few steps can expand with sub-items
-  ▸ 3-8 steps total — 10+ becomes too tall; use state diagram
+  ▸ 3-8 steps total; for a longer flow, select a path or split it into readable flow views
 
 Don't use when:
 
-  ▸ Steps have branches or loops (use state diagram)
+  ▸ Branches or loops overwhelm this stacked layout (use the branched-flow layout in architecture.md or select one path; keep the flow family)
   ▸ Steps are independent, not sequential (use ruled cards)
   ▸ Individual step content is large — pipeline forces thin strips
 
@@ -321,9 +321,9 @@ Use when:
 
 Don't use when:
 
-  ▸ Linear flow with no branching (use pipeline box)
+  ▸ Boxes are work steps rather than lifecycle states (use flow); a linear lifecycle still uses state
   ▸ States are just labels with no real transitions (use a list)
-  ▸ Transitions more important than states (use sequence diagram)
+  ▸ The question concerns messages between actors (use sequence); important lifecycle transitions still use state
 
 ─── Shape 7 — No-frame list ─────────────────────────────────────────
 

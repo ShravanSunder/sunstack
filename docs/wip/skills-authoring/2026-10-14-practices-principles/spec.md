@@ -1,6 +1,6 @@
 # Useful practice and principle composition — project 1 specification
 
-Specification v2, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all runtime runs remain proposed, with implementation and behavior proof unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
+Specification v2, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all eleven runtime runs are now implemented as authored source, with tests/evaluations explicitly deferred by the owner. Implementation review, behavior proof and release remain unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
 
 ## Purpose and success
 
@@ -60,17 +60,17 @@ All target homes below are under `plugins/sunstack-dev/skills/`. Trigger surface
 
 | Run | Target | Main path | Depth | Proof posture | State |
 |---|---|---|---|---|---|
-| R1 | principle-write-tests-that-can-fail | Two-sided assertion and honest chronology | Existing example_scenarios | Pattern/technique exercise | proposed |
-| R2 | principle-verify-before-accepting | Evidence dependency/applicability judgment | Existing example_scenarios | Pattern/discipline exercise | proposed |
-| R3 | practices-research | Trace → judge claim → synthesize | Existing ledger/countercheck only where needed | Technique + clean control | proposed |
-| R4 | practices-manage-agents | Cut/classify → dispatch → assess | New model-catalog; existing examples | Technique/discipline/reference exercise | proposed |
-| R5 | practices-collaboration | Action wording and authorized closure | Existing discovery/waiting retained | Discipline/technique exercise | proposed |
-| R6 | practices-show-me-your-work | Material checkpoint and Lead resume | Existing markdown-view; fallback retained | Technique/discipline exercise | proposed |
-| R7 | presentation-webui | Reader question before medium | Existing shared diagram-semantics, edited here once | Technique exercise | proposed |
-| R8 | presentation-tui | Reader question before shape | Existing craft refs: conflicting family rules only | Technique/reference exercise | proposed |
-| R9 | ops-linear-tracking | Truth conflict, dependencies, surprise | Existing ticket-templates | Discipline/technique exercise | proposed |
-| R10 | ops-observability-stack | Ownership dispute and claim scope | Existing producer/query refs retained | Pattern/discipline exercise | proposed |
-| R11 | ops-security-review | Inherited scope and adopted finding | Existing routing prompt corrected | Discipline/reference exercise | proposed |
+| R1 | principle-write-tests-that-can-fail | Two-sided assertion and honest chronology | Existing example_scenarios | Pattern/technique exercise | implemented |
+| R2 | principle-verify-before-accepting | Evidence dependency/applicability judgment | Existing example_scenarios | Pattern/discipline exercise | implemented |
+| R3 | practices-research | Trace → judge claim → synthesize | Existing ledger/countercheck only where needed | Technique + clean control | implemented |
+| R4 | practices-manage-agents | Cut/classify → dispatch → assess | New model-catalog; existing examples | Technique/discipline/reference exercise | implemented |
+| R5 | practices-collaboration | Action wording and authorized closure | Existing discovery/waiting retained | Discipline/technique exercise | implemented |
+| R6 | practices-show-me-your-work | Material checkpoint and Lead resume | Existing markdown-view; fallback retained | Technique/discipline exercise | implemented |
+| R7 | presentation-webui | Reader question before medium | Existing shared diagram-semantics, edited here once | Technique exercise | implemented |
+| R8 | presentation-tui | Reader question before shape | Existing craft refs: conflicting family rules only | Technique/reference exercise | implemented |
+| R9 | ops-linear-tracking | Truth conflict, dependencies, surprise | Existing ticket-templates | Discipline/technique exercise | implemented |
+| R10 | ops-observability-stack | Ownership dispute and claim scope | Existing producer/query refs retained | Pattern/discipline exercise | implemented |
+| R11 | ops-security-review | Inherited scope and adopted finding | Existing routing prompt corrected | Discipline/reference exercise | implemented |
 
 R1/R2 land first; remaining runs consume their current teaching. R7 alone edits shared `diagram-semantics.md`; R8 consumes it and corrects its own competing instructions. Implement sequentially within the same worktree; no parallel writers to those shared homes. Runs change text only; proof fixtures remain permanent repository fixtures, not temporary test scripts.
 
@@ -241,4 +241,13 @@ A reviewed spec may authorize implementation but does not prove behavior or PR r
 
 Highest design risk is adding plausible principle links that merely increase reading and leave the agent's decisions unchanged. The failure/clean pairs, retained cases, internal working-state returns and sentence-level pruning are intended to expose that. A different risk is cutting local teaching so far that callers must guess its application; short applied result clauses stay.
 
-Detailed spec completion requires all 11 promises, call predicates/results, owned depths, retained responsibilities and proof cases to be reviewable; no run may be accepted with a missing method or an unspecified proof route. Project 2 remains saved analysis scope. No runtime change is reported implemented, shipped or behaviorally improved by these documents.
+Detailed spec completion requires all 11 promises, call predicates/results, owned depths, retained responsibilities and proof cases to be reviewable; no run may be accepted with a missing method or an unspecified proof route. Project 2 remains saved analysis scope. Implemented states record authored source only; these documents establish no shipped or behaviorally improved result.
+
+
+## Implementation state, 2026-10-14
+
+R1–R11 were authored sequentially from the accepted v2 meaning under implementation-plan slices 1–2, starting at `16e0bd8a` with runtime equal to #127 `0bad422c`. Evidence for each implemented row is the current working diff of its named body and depth above: R1/R2 add their worked teaching cases; R3 replaces the ledger field template; R4 moves the complete catalog and retargets all eight named policy consumers; R5/R6 add local composition; R7 owns the shared semantic edit; R8 aligns its three craft references; R9/R11 correct their existing prompts/examples; R10 retains operational references. Frontmatter and `agents/openai.yaml` are unchanged. Role charters, typed contracts, fixtures and project 2 are unchanged.
+
+The owner explicitly deferred tests and evaluations. Validators, formatters and runtime exercises were not run in this authoring draft per the plan's dated boundary. The proof design above remains owed for later verification, not waived or reported passing. All eleven runs are drafted from approved intent; behavior has not been evaluated and independent implementation review has not run. Source comparison is author assessment, not an independent verdict. The sole requested scratch handback carries the complete current diff and per-run comparison for Lead inspection before commit/PR.
+
+Source metadata inspected at this stage used 2.76.0 across all three clients and marketplace entries, with no 2.77.0 live-source release entry. The authoring changeset selects 2.77.0 consistently and records the deferred proof and unrefreshed clients in its dated changelog. Closed #128's unmerged version is not adoption authority. No commit, push, PR, merge, release or installed-cache refresh is performed by this authoring commission.

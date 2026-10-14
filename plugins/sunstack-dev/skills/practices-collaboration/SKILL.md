@@ -35,6 +35,8 @@ When the commissioner supplies a visible title for a conversation you create or 
 
 ## Message or post
 
+IF shaping an assignment or consequential decision another session must use, load `principle-write-for-the-reader` and return the requested result, governing source and relevant limits in actionable wording. “Continue” is enough for an unchanged assignment; after a changed obligation, say which result now governs and what stays bounded. Use this result directly in the assignment message.
+
 A message to a separate session (another conversation or terminal on Codex, Claude Code, or Cursor) goes through Router: use the supplied exact SessionRef, discover it through Router when missing or ambiguous, then `message send`. Do not use host-native cross-session channels for that. Native messaging to your own in-session subagents and teammates is unchanged. An empty active-session list does not prove a session is gone.
 
 Send a direct message when one session needs to act: an assignment, a request for attention, or an explicit reply to its sender. Post to the work thread when the content should outlive the conversation: decisions and reasons, evidence, proof outcomes, blockers, corrections, and checkpoints. A message that asks for work does not replace the thread post that records it. Contributors post as themselves and only within their assignment's communication authority; otherwise they return findings to the orchestrator. Correct a mistaken post with a new post that references it.
@@ -46,5 +48,7 @@ IF waiting on another agent's reply, result, or board activity, load `references
 ## Finish a discussion, resolve deliberately
 
 Finishing an assignment means posting its outcome, evidence, and remaining work on its root. It does not resolve anything. Only a root's `orchestrator`, or an explicit successor, resolves it: after reading current activity and the linked execution outcomes, and checking that the whole integrated scope is finished. An implementer reports completion or handback on its execution root and never resolves the coordination root. A session ending, a blocked assignment, or one finished contribution leaves the work unresolved. If authorized work belongs in a resolved thread, read why it was resolved and unresolve it explicitly before posting; do not open a duplicate thread.
+
+IF the root's authorized closer is about to resolve it, load `principle-verify-before-accepting` and return the whole integrated claim, decisive outcomes and remaining obligation. Two green slices do not establish that their shared contract works together. Inspect the combined evidence the scope requires; when adequate current evidence already covers it, close without another equivalent run. Any remaining obligation leaves the work unresolved.
 
 Complete when the work thread or `no-home: <gap>` is known and returned, every post and message went to the right root under your own identity and seat, any wait has a named listener, wake, or gap, and no thread was resolved by a session that does not hold its `orchestrator` seat.

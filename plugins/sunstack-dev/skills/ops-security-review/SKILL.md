@@ -47,7 +47,7 @@ If Codex Security is not installed or not available, produce a copy-paste prompt
    - deep scan
    - threat model
    - fix one finding
-2. Confirm authorization and scope.
+2. Confirm authorization and scope. IF an inherited packet or route changes scope, exclusions or repair authority, load `principle-hold-the-scope` and return the consequential difference and owner or contract anchor. Preserve the requested boundary in the invocation; a copied prompt cannot grant a broader scan, persistent model or repair.
 3. Gather context:
    - repo path and branch
    - PR/commit/range/path
@@ -60,6 +60,7 @@ If Codex Security is not installed or not available, produce a copy-paste prompt
    - preserve report paths
    - summarize report status, not all findings
    - route fixes through `$codex-security:fix-finding` or a bounded implementation plan
+   IF adopting coverage or a finding for repair, load `principle-verify-before-accepting` and return the current source, actual coverage and validated failure. A severe old report is not a current finding. Forwarding attributed status alone does not adopt its findings or require another scan.
 
 ## Progressive Disclosure
 
@@ -77,3 +78,5 @@ Return:
 - Expected reports or handoff paths.
 - Full clickable artifact links (absolute path + line) for reports or handoffs the human is expected to open.
 - What not to broaden.
+
+Complete when the selected official route, preserved grant, supplied context or exact missing prerequisite, and supported handoff are clear. Missing context is reported before work that depends on it; creating or persisting a threat model still needs the explicit request above. Preserve the selected official workflow's actual prerequisites without inventing or waiving them.

@@ -7,6 +7,8 @@ description: Use when the user asks to create, organize, update, delete, or insp
 
 Manage Linear projects, milestones, and issues following the **docs-are-truth, tickets-are-tracking** paradigm. Architecture documents in the repo are the source of truth for design and plans. Linear tickets track progress, dependencies, and what's blocked.
 
+IF a ticket becomes competing design authority, load `principle-one-owner-per-truth` and return the established owner and conflict. Project the adopted design into tracking; return disputed meaning to its owner through the commissioner. A routine checklist update under unchanged meaning needs no ownership audit.
+
 ## The Paradigm
 
 **Why this split exists:**
@@ -85,6 +87,8 @@ linear issue relation add LUNA-336 blocked-by LUNA-335
 
 **Reading dependencies — use MCP.** `get_issue` with `includeRelations: true` returns the full relation graph.
 
+IF dependency or source records disagree, load `principle-read-ground-truth-first` and return the governing versus current relation comparison. Read the adopted dependency and the actual relation list before changing it. For example, a completed ticket does not unblock its consumer if the required artifact has not reached the delivery boundary the plan names. Apply the resolved relation surgically through the existing tool route.
+
 ## Common Workflows
 
 ### Set up a new project
@@ -110,7 +114,9 @@ linear issue relation add LUNA-336 blocked-by LUNA-335
 
 ### Update ticket after implementation
 
-Update description checklists, mark completed items, adjust scope. If implementation revealed the model was wrong, update the architecture doc first, then align the ticket.
+Update description checklists and mark observed completed items within the adopted scope. IF implementation contradicts the adopted model, load `principle-refine-mental-models` and return what was assumed, what was found, what it changes and the owning correction destination. Bring changed meaning to its design owner through the commissioner before projecting the resolution into tickets. If code omitted approved recovery, keep that obligation open; rewriting the ticket cannot make the implementation complete. Once the owner settles a correction, align tracking with the governing document.
+
+Complete when the supplied tracking operation reflects adopted meaning, observed progress and actual dependencies; any unsettled design conflict stays with its existing owner.
 
 ## Reference Files (read on demand)
 

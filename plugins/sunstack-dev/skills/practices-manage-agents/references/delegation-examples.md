@@ -115,3 +115,9 @@ Job the Lead is tempted to hand off: "Move the server and the app to integer cen
 4. Cut: the contract is settled, so each side can be built against it. Two slices: "change the server to return integer cents per the plan" and "change the app to read integer cents per the plan", each Complete · Local. The Lead holds the release until both land.
 5. Role and form: one workstream, so one 🐒 Implementer Sidekick builds both slices in order, paired with a 🔬 Verifier Sidekick that observes both sides against the contract.
 6. Catalog row: each slice's Complete · Local matches an Implementer Luna Workhorse row. The tempting job's Complete · Cross-system matches no row. If neither side can be built or tested without the other changing at the same time, the Lead brings it to the owner, who can name a model for the pair.
+
+### Independent topics, shared fixture
+
+Two assigned probes ask different questions, but both reset the same database fixture and write `result.log`. Probe A can reset while B is observing, then B can overwrite A's output. Each may report green against state the other changed. The invariant is that each observation belongs to its declared fixture and survives for inspection; topic independence does not preserve it.
+
+Give independently checkable probes separate fixture instances and output paths through the existing setup. They can then run in parallel without adding locks or a scheduler. If B instead consumes the actual artifact A is still producing, isolation cannot remove that dependency: B waits for A's owning completion, checks the finished artifact, then proceeds. A prompt delivered to A is not that completion.

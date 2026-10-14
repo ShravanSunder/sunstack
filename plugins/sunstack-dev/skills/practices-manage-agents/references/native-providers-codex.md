@@ -8,14 +8,14 @@ This reference applies after `references/execution-forms.md` selects the Worker 
 
 | Role | Model | Route |
 | --- | --- | --- |
-| 📚 Researcher Worker | OpenAI Luna or Sol, effort from the `SKILL.md` Model catalog | native `spawn_agent` |
-| 🔧 Operator Worker | OpenAI Luna, effort from the `SKILL.md` Model catalog | native `spawn_agent` |
+| 📚 Researcher Worker | OpenAI Luna or Sol, effort from `model-catalog.md` | native `spawn_agent` |
+| 🔧 Operator Worker | OpenAI Luna, effort from `model-catalog.md` | native `spawn_agent` |
 
-Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. If the host requires a provider prefix, it takes the form `openai.<resolved id>` (example format only).
+Resolve the exact id with the exact-id rule in `model-catalog.md`. If the host requires a provider prefix, it takes the form `openai.<resolved id>` (example format only).
 
 ## Effort
 
-`none` | `minimal` | `low` | `medium` (default) | `high` | `xhigh` | `max` | `ultra` | custom string. The model-and-effort pairs in the `SKILL.md` Model catalog still apply.
+`none` | `minimal` | `low` | `medium` (default) | `high` | `xhigh` | `max` | `ultra` | custom string. The model-and-effort pairs in `model-catalog.md` still apply.
 
 ## Conversation History
 

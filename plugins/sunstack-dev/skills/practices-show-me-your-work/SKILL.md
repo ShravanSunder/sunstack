@@ -15,7 +15,7 @@ At the start of a qualifying task, before other work, MUST load `practices-colla
 
 | Situation | Do this now |
 | --- | --- |
-| 🦁 Lead, work thread found | Read its history and verify load-bearing claims against current sources before acting. For a new thread, open it with the goal, scope, orchestrator, repository and worktree, and relevant artifact links. |
+| 🦁 Lead, work thread found | Read its history and verify load-bearing claims against current sources before acting. IF an old completion claim or newly accepted result will guide continuation and its evidence-to-claim step is unchecked, load `principle-verify-before-accepting` and return the supported claim or narrower fact and gap. For a new thread, open it with the goal, scope, orchestrator, repository and worktree, and relevant artifact links. |
 | 🦁 Lead, `no-home` | Use session-logs for the running account and choose an eligible home by content. If access or write authority is missing, report the exact gap and continue independent work where possible. |
 | Sidekick, execution root supplied | Record on that root; checkpoint the assignment there. |
 | Sidekick commissioned before a board exists | The commission identifies the session-logs destination, grants write authority for one dated file, and includes the required destination-instruction paths. Write only that file. Without destination access or write authority, return current state and the exact gap to the commissioner instead. |
@@ -24,6 +24,8 @@ At the start of a qualifying task, before other work, MUST load `practices-colla
 Retain the service, project, board, topic, and root ids (or the exact session-logs file path when there is no thread) in task context, handoffs, and checkpoints so another session can reopen the work without guessing. A new session resumes the existing trace; it does not start another.
 
 ## Record meaningful updates
+
+At a meaningful update or checkpoint, MUST load `principle-write-for-the-reader` and return a concise decision, reason, evidence and open-action account appropriate to its reader. Put that account in the existing trace. A cold successor needs the reasons and evidence that govern the next action. Keep assumptions, risks and unverified interactions visible: “The adapter stand-in passes; the actual provider remains unobserved” cannot become “provider complete” on resume.
 
 Record consequential findings, decisions and reasons, accepted or rejected findings, proof outcomes, blockers, material user corrections, and deferred improvements. Each entry should make sense without opening its links. Link detailed evidence; skip routine commands and effort narration. Describe uncertainty honestly and sanitize private content before sharing.
 
@@ -52,6 +54,8 @@ Each concurrent writer owns a separate dated file. Before delegating a log write
 ## Checkpoint at every stop
 
 Before a terminal response, record the actual outcome, established facts, remaining work or blockers, open stand-ins, and the next useful action, and include the trace reference in the handoff. The final outcome lists every open stand-in as unverified. A contributing agent checkpoints its assignment and leaves the outer work unresolved. Resolve a thread only as `practices-collaboration` allows: the root's orchestrator, after reading current activity and linked outcomes and confirming the whole integrated scope is finished.
+
+Reuse a current adequate checkpoint and its applicable evidence. An attributed historical claim remains the original author's claim until inspected; transcribing it does not make the trace writer a Verifier or require another proof run.
 
 IF the user requests a readable view or the trace needs substantial synthesis, load `references/markdown-view.md` and return the view path, source cutoff, and coverage gaps. The view is a replaceable reading aid, not another authority.
 

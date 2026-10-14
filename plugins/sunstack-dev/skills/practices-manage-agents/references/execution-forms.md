@@ -27,7 +27,7 @@ Keep one current row per Sidekick before any prompt that relies on its history: 
 
 ## Choose the route
 
-The exact model id follows the exact-id rule in `SKILL.md` under Model catalog.
+The exact model id follows the exact-id rule in `model-catalog.md`.
 
 - IF the form is Sidekick, load `agent-collaboration` and return the session address.
 - IF Codex spawns a Worker, load `references/native-providers-codex.md` and return the spawn encoding.
