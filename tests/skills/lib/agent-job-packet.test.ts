@@ -62,7 +62,7 @@ const commonFields = (charter: string): PacketFields => ({
 });
 
 const operatorPacket = (): PacketFields => ({
-  ...commonFields("references/roles/operator.md"),
+  ...commonFields("role-operator"),
   role: "operator",
   executionForm: "worker",
   returnContract: { kind: "helper-handback" },
@@ -75,7 +75,7 @@ const operatorPacket = (): PacketFields => ({
 });
 
 const implementerPacket = (): PacketFields => ({
-  ...commonFields("references/roles/implementer.md"),
+  ...commonFields("role-implementer"),
   role: "implementer",
   executionForm: "sidekick",
   limits: {
@@ -88,7 +88,7 @@ const implementerPacket = (): PacketFields => ({
 });
 
 const reviewerPacket = (): PacketFields => ({
-  ...commonFields("references/roles/reviewer.md"),
+  ...commonFields("role-reviewer"),
   role: "reviewer",
   executionForm: "sidekick",
   reviewTarget: "skills/practices-manage-agents at its head commit",
@@ -97,7 +97,7 @@ const reviewerPacket = (): PacketFields => ({
 });
 
 const verifierPacket = (work: PacketFields): PacketFields => ({
-  ...commonFields("references/roles/verifier.md"),
+  ...commonFields("role-verifier"),
   role: "verifier",
   executionForm: "sidekick",
   adoptedReference: "docs/specs/saved-search/spec.md",
@@ -106,7 +106,7 @@ const verifierPacket = (work: PacketFields): PacketFields => ({
 });
 
 const researcherPacket = (executionForm: string, investigation: string): PacketFields => ({
-  ...commonFields("references/roles/researcher.md"),
+  ...commonFields("role-researcher"),
   role: "researcher",
   executionForm,
   returnContract: { kind: "helper-handback" },
@@ -116,7 +116,7 @@ const researcherPacket = (executionForm: string, investigation: string): PacketF
 });
 
 const leadPacket = (): PacketFields => ({
-  ...commonFields("references/roles/lead.md"),
+  ...commonFields("role-lead"),
   role: "lead",
   executionForm: "main",
   ownerIntent: "Split the packet schema so each agent reads only its own role.",
@@ -124,7 +124,7 @@ const leadPacket = (): PacketFields => ({
 });
 
 const advisorPacket = (): PacketFields => ({
-  ...commonFields("references/roles/advisor.md"),
+  ...commonFields("role-advisor"),
   role: "advisor",
   executionForm: "sidekick",
   returnContract: { kind: "helper-handback" },
@@ -194,7 +194,7 @@ describe("agent job packet schema", () => {
     const implementerWithVerifierCharter = {
       ...implementerPacket(),
       requiredReads: {
-        charter: "references/roles/verifier.md",
+        charter: "role-verifier",
         practices: [],
         principles: [],
       },
@@ -365,7 +365,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: leadPacket(),
     invalid: withoutField(leadPacket(), "ownerIntent"),
     invalidPath: "ownerIntent",
-    foreignCharter: "references/roles/advisor.md",
+    foreignCharter: "role-advisor",
   },
   {
     role: "advisor",
@@ -373,7 +373,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: advisorPacket(),
     invalid: withoutField(advisorPacket(), "question"),
     invalidPath: "question",
-    foreignCharter: "references/roles/lead.md",
+    foreignCharter: "role-lead",
   },
   {
     role: "implementer",
@@ -381,7 +381,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: implementerPacket(),
     invalid: { ...implementerPacket(), executionForm: "worker" },
     invalidPath: "executionForm",
-    foreignCharter: "references/roles/verifier.md",
+    foreignCharter: "role-verifier",
   },
   {
     role: "verifier",
@@ -389,7 +389,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: verifierPacket(deliveryObservationWork()),
     invalid: verifierPacket(withoutField(deliveryObservationWork(), "target")),
     invalidPath: "work.target",
-    foreignCharter: "references/roles/implementer.md",
+    foreignCharter: "role-implementer",
   },
   {
     role: "reviewer",
@@ -397,7 +397,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: reviewerPacket(),
     invalid: { ...reviewerPacket(), authorHistory: "inherited" },
     invalidPath: "authorHistory",
-    foreignCharter: "references/roles/advisor.md",
+    foreignCharter: "role-advisor",
   },
   {
     role: "researcher",
@@ -405,7 +405,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: researcherPacket("sidekick", "continuing-investigation"),
     invalid: researcherPacket("worker", "continuing-investigation"),
     invalidPath: "investigation",
-    foreignCharter: "references/roles/operator.md",
+    foreignCharter: "role-operator",
   },
   {
     role: "operator",
@@ -413,7 +413,7 @@ const roleContractCases: readonly RoleContractCase[] = [
     valid: operatorPacket(),
     invalid: withoutField(operatorPacket(), "procedure"),
     invalidPath: "procedure",
-    foreignCharter: "references/roles/researcher.md",
+    foreignCharter: "role-researcher",
   },
 ];
 
@@ -452,6 +452,29 @@ describe("role contracts", () => {
 
       // Assert
       expect(issues).toEqual(["requiredReads.charter"]);
+    },
+  );
+
+  test.each(roleContractCases)(
+    "the $role contract and packet union reject its superseded charter path",
+    ({ role, contract, valid }) => {
+      // Arrange
+      const withOldCharter = {
+        ...valid,
+        requiredReads: {
+          charter: `references/roles/${role}.md`,
+          practices: [],
+          principles: [],
+        },
+      };
+
+      // Act
+      const contractIssues = issuePaths(contract, withOldCharter);
+      const unionIssues = issuePaths(AgentJobPacket, withOldCharter);
+
+      // Assert
+      expect(contractIssues).toEqual(["requiredReads.charter"]);
+      expect(unionIssues).toEqual(["requiredReads.charter"]);
     },
   );
 

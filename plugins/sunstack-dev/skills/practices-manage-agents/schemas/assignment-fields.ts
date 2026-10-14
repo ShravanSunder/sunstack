@@ -8,9 +8,9 @@ export const RequiredText = z.string().min(1);
 export const RepositoryPaths = z.array(RequiredText).min(1).readonly();
 
 export const roleCharterDescription =
-  "The charter for this role, relative to the skill folder; it must match the role";
+  "The exact selected role skill name, such as role-implementer; it must match the role";
 export const roleRequiredReadsDescription =
-  "Full reads: this role's own charter plus the practices and principles to read";
+  "Full reads: this role's own skill plus the relevant practices and principles";
 
 export const SessionAddress = z
   .strictObject({
@@ -48,7 +48,7 @@ export const SourceEntry = z
 export const RequiredReads = z
   .strictObject({
     charter: RequiredText.describe(
-      "The role's charter, read in full by commissioner and recipient",
+      "The exact selected role skill name, read in full by commissioner and recipient",
     ),
     practices: z
       .array(z.string().regex(/^practices-[a-z]+(-[a-z]+)*$/))
@@ -59,7 +59,7 @@ export const RequiredReads = z
     principles: z
       .array(z.string().regex(/^principle-[a-z]+(-[a-z]+)*$/))
       .readonly()
-      .describe("Principles to read in full: the charter's defaults plus what this job touches"),
+      .describe("Principles to read in full: the role skill's defaults plus what this job touches"),
   })
   .describe(
     "Full reads the recipient performs; a name in this list is a direction, not proof the read happened",

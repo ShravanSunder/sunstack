@@ -13,7 +13,7 @@ import {
 const ResearcherFields = {
   role: z.literal("researcher").describe("The Researcher: a checked answer to a supplied question"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/researcher.md").describe(roleCharterDescription),
+    charter: z.literal("role-researcher").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   returnContract: HelperReturnContract,
   question: RequiredText.describe("The question to answer"),

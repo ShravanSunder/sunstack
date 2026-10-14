@@ -16,7 +16,7 @@ export const ImplementerPacket = JobBase.extend({
     .describe("The Implementer: assigned changes, product tests and their proof"),
   executionForm: z.literal("sidekick").describe("An Implementer always runs as a Sidekick"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/implementer.md").describe(roleCharterDescription),
+    charter: z.literal("role-implementer").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   limits: WriteAndExecuteAccess.describe("An Implementer always holds a named write grant"),
   planSlice: RequiredText.describe("The plan, and the slice or workstream this commission covers"),

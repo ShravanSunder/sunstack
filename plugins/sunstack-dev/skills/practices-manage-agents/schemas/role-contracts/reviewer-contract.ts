@@ -14,7 +14,7 @@ export const ReviewerPacket = JobBase.extend({
   role: z.literal("reviewer").describe("The Reviewer: independent findings on a declared artifact"),
   executionForm: z.literal("sidekick").describe("A Reviewer always runs as a Sidekick"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/reviewer.md").describe(roleCharterDescription),
+    charter: z.literal("role-reviewer").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   limits: z
     .discriminatedUnion("access", [InspectAccess, InspectAndExecuteAccess])

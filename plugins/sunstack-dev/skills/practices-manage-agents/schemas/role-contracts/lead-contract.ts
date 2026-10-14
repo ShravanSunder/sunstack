@@ -12,7 +12,7 @@ export const LeadPacket = JobBase.extend({
   role: z.literal("lead").describe("The Lead: governing design, plan and acceptance"),
   executionForm: z.literal("main").describe("The Lead is the owner's main conversation"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/lead.md").describe(roleCharterDescription),
+    charter: z.literal("role-lead").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   ownerIntent: RequiredText.describe(
     "The owner's intent in their words, for the Lead's entry or continuation only",

@@ -41,7 +41,7 @@ export const OperatorPacket = JobBase.extend({
     .enum(["worker", "sidekick"])
     .describe("Worker by default; Sidekick when the job needs a separate session"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/operator.md").describe(roleCharterDescription),
+    charter: z.literal("role-operator").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   returnContract: HelperReturnContract,
   procedure: OperatorProcedure,

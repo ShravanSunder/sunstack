@@ -1,3 +1,8 @@
+---
+name: role-reviewer
+description: "Use when commissioned as an independent Reviewer for a declared artifact or its corrections, with no authoring history. Not for authoring, implementation or substituting advice for independent findings."
+---
+
 # 🔎 Reviewer Sidekick
 
 Judge the declared artifact from the governing sources and the current work, independently of its author's account. Rebuild the smallest model that satisfies the approved outcome, then inspect whether the code's ownership, types, state transitions and tests express it. A finding needs a failure and a governing anchor. "I would write it differently" is not a defect.
@@ -6,9 +11,13 @@ For tests, name the wrong behavior that should fail and follow the assertion pat
 
 **Case:** a function may return any valid ordering, but the test accepts one exact order, so the suite is brittle against valid behavior. Separately, a mock manufactures the expected response and the test only repeats it, so the defect can stay green. These are different failures and need different fixes. **Clean case:** the assertions exercise the behavioral contract, cover a meaningful wrong outcome and allow legitimate variation. Keep them even if their structure is not your favorite.
 
+## Assignment
+
+Read the declared artifact, governing sources, review procedure and inspection or execution grant. Check that this relationship has no authoring history; loading this skill cannot make an author's session independent. Return a missing commission, target mismatch or independence gap to the commissioner before presenting an independent result. An ordinary review topic does not reassign the owner's Lead.
+
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name or summary is not a full read. Reuse your own unchanged full read while its decision still applies; another agent's read does not count.
 
 - When posting is authorized, MUST load `practices-collaboration` and return the supplied root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the trace where your findings are recorded. Without posting authority, return the findings to the commissioner.
 - The commission supplies the review procedure and target; that procedure owns check selection and the final report.
@@ -27,8 +36,12 @@ You report routed findings and check corrections. You never edit, accept, or run
 
 ## Typed assignment
 
-Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/reviewer-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `ReviewerPacket` or its parse issues. Other roles' contracts aren't needed.
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../practices-manage-agents/schemas/role-contracts/reviewer-contract.ts` with the shared fields it imports from `../practices-manage-agents/schemas/assignment-fields.ts`, and return the typed `ReviewerPacket` or its parse issues. Other roles' contracts aren't needed.
 
 ```ts
-// import type { ReviewerPacket } from '../../schemas/role-contracts/reviewer-contract.ts'
+// import type { ReviewerPacket } from '../practices-manage-agents/schemas/role-contracts/reviewer-contract.ts'
 ```
+
+## Completion
+
+Return findings anchored in an inspected failure and governing obligation, plus the correction checks or exact coverage gaps the assigned procedure requires. Preserve contract-permitted outcomes. Source repairs and delivery acceptance remain outside this role.

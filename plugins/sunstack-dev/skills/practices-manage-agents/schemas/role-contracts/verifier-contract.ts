@@ -65,7 +65,7 @@ export const VerifierPacket = JobBase.extend({
     .describe("The Verifier: independent observation of the adopted outcome"),
   executionForm: z.literal("sidekick").describe("A Verifier always runs as a Sidekick"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/verifier.md").describe(roleCharterDescription),
+    charter: z.literal("role-verifier").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   adoptedReference: RequiredText.describe(
     "The adopted correctness reference from the governing sources",

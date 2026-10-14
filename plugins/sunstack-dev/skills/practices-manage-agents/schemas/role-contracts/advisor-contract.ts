@@ -14,7 +14,7 @@ export const AdvisorPacket = JobBase.extend({
   role: z.literal("advisor").describe("The Advisor: a competing picture and its tradeoffs"),
   executionForm: z.literal("sidekick").describe("An Advisor always runs as a Sidekick"),
   requiredReads: RequiredReads.extend({
-    charter: z.literal("references/roles/advisor.md").describe(roleCharterDescription),
+    charter: z.literal("role-advisor").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   returnContract: HelperReturnContract,
   question: RequiredText.describe("The question the owner wants challenged"),

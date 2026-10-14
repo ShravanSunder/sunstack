@@ -1,0 +1,6 @@
+interface:
+  display_name: "Researcher"
+  short_description: "Answer bounded questions with checked sources"
+  default_prompt: "Use $role-researcher to answer the supplied question from decisive sources within the assigned scope and form."
+policy:
+  allow_implicit_invocation: true
