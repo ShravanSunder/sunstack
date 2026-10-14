@@ -8,6 +8,7 @@ import {
   DesignDocumentReferenceSchema,
   FiveDocumentSetSchema,
   RequiredText,
+  checkDistinctDocumentLocations,
   designDocumentReferenceOf,
   documentLocationKey,
 } from "./design-document-references.ts";
@@ -80,11 +81,13 @@ interface ReadyPhaseDocuments {
   readonly inputs?: Readonly<Record<string, DesignDocumentReference>>;
 }
 
-// Used by each phase's locally-ready result: the produced document is new, and its local review covered that document.
+// Used by each phase's locally-ready result: its upstream inputs are distinct documents, the produced document is new,
+// and its local review covered that document.
 export const checkReadyPhaseDocuments = (
   ready: ReadyPhaseDocuments,
   context: z.RefinementCtx,
 ): void => {
+  checkDistinctDocumentLocations(ready.inputs ?? {}, context, ["inputs"]);
   const documentKey = documentLocationKey(ready.document.location);
   const inputKeys = Object.values(ready.inputs ?? {}).map((input) =>
     documentLocationKey(input.location),

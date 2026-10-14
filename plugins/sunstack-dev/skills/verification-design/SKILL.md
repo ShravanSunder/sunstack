@@ -61,9 +61,9 @@ Completion: the route's real target and boundary are known from its source, and 
 
 ### 3. Choose the cases tests cannot reach
 
-Read `principle-prove-it-works` in full at this choice. Read the adopted Test Design first: it already catches the wrong behavior that a cheaper layer can show. Verification takes what only the real system shows: the delivered build and its configuration, startup wiring, the real transport, layout at a real size, durability across a restart, and the failures the claim covers driven through the same entry point. A second path earns its cost only when it can detect something the first cannot; repeating a test's case on the real app to look independent adds nothing.
+Read `principle-prove-it-works` in full at this choice. Read the adopted Test Design first: it already catches the wrong behavior that a cheaper layer can show. Verification takes what only the real system shows: the delivered build and its configuration, startup wiring, the real transport, layout at a real size, durability across a restart, and the failures the claim covers driven through the same entry point. A second path earns its cost only when it can detect something the first cannot. An existing real-path test or journey that already observes the outcome on an applicable target can supply a case (step 5); what adds nothing is a new real-system run that repeats a case a cheaper test already settles, only to look independent.
 
-Completion: every case names the risk it covers that the Test Design does not, and no case only repeats a test.
+Completion: every case names the risk it covers that cheaper tests do not, or the existing real-path observation that already covers it, and no new run only repeats what a test settles.
 
 ### 4. Define passing and the limits
 
@@ -75,9 +75,9 @@ Completion: every case has a passing condition a wrong implementation would fail
 
 ### 5. Plan reuse
 
-A permanent journey that already observes the outcome on an applicable target is reused, not rebuilt. Name it, say why it still applies (which code paths and target properties it depends on, and that they have not changed in the relevant respects), and plan to rerun it only when something it depends on changed. Planned reuse is still planned: the delivered run has to happen at delivery.
+A permanent real-path test or journey that already observes the outcome on an applicable target can supply a case's observation, instead of a rebuilt one. Name it, say why it still applies (the code paths, configuration and target properties it depends on, unchanged in the relevant respects), and inspect its actual run before relying on it. Run it again only when something it depends on changed, when it failed, or when a specific concern about it is unresolved. Without an actual applicable run, the observation stays owed at delivery; a plan to reuse is not an observation.
 
-Completion: each reused journey names what it depends on and when it must rerun.
+Completion: each reused journey names its actual applicable run, what it depends on, and what would require running it again.
 
 ### 6. Judge delivered evidence
 
@@ -91,7 +91,7 @@ Completion: every delivered claim is supported, narrowed or marked unverified wi
 
 Read `principle-write-for-the-reader` in full before you organize the document. Lead with the outcome, the reference and the route, so a reader can confirm in one pass what will be observed and where. Then give each case its risk, passing condition, target identity and limits; then planned reuse; then what stays unverified. Link to the Specification's obligations and the Test Design's scenarios instead of restating them.
 
-Re-read the whole document as an author self-check: every case observes the outcome rather than an acknowledgement; every passing condition names its target identity and reference; no case only repeats a test; no planned observation is described as observed; every limit is named. The self-check never replaces independent review.
+Re-read the whole document as an author self-check: every case observes the outcome rather than an acknowledgement; every passing condition names its target identity and reference; no new run only repeats what a test settles; no planned observation is described as observed; every limit is named. The self-check never replaces independent review.
 
 Completion: a reader can tell what will be observed, where, against what, and what stays open.
 
@@ -109,7 +109,7 @@ Completion: the returned result or report validates against its contract, and ev
 - no declared reference exists, or a model's judgment stands in for one;
 - a case observes an acknowledgement, a dev build, a mocked backend or offline preparation in place of the outcome on the declared target;
 - a passing condition lacks its target identity, or would still pass for a wrong implementation;
-- a case only repeats what a test already catches;
+- a new real-system run only repeats what a cheaper test already settles, or a reused observation was relied on without inspecting its actual applicable run;
 - a planned observation or reused journey is described as observed;
 - a driver is assumed to work because it exists or imports;
 - the required local review is missing, partial, stale or not ready.

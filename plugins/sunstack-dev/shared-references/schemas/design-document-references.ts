@@ -61,9 +61,11 @@ export const DesignDocumentReferenceSchema = z
 export type DesignDocumentReference = z.infer<typeof DesignDocumentReferenceSchema>;
 
 // Used wherever several design documents travel together: no two may share a location key.
+// pathPrefix places the issue when the documents sit inside a field, such as a phase result's inputs.
 export const checkDistinctDocumentLocations = (
   documents: Readonly<Record<string, DesignDocumentReference>>,
   context: z.RefinementCtx,
+  pathPrefix: readonly string[] = [],
 ): void => {
   const seenLocations = new Set<string>();
   for (const [slot, document] of Object.entries(documents)) {
@@ -71,7 +73,7 @@ export const checkDistinctDocumentLocations = (
     if (seenLocations.has(locationKey)) {
       context.addIssue({
         code: "custom",
-        path: [slot, "location"],
+        path: [...pathPrefix, slot, "location"],
         message: "Each design document needs its own location",
       });
     }

@@ -75,6 +75,11 @@ const blockedRequirements: Payload = {
   draftDocuments: [],
 };
 
+const sameMessageRecord = (kind: string, label: string): Payload => ({
+  kind,
+  location: { medium: "chat", recordReference: "thread-message-9", label },
+});
+
 describe("design document references", () => {
   test("accepts five documents, each in its own slot and location", () => {
     expect(issuePaths(FiveDocumentSetSchema, fiveDocuments)).toEqual([]);
@@ -439,6 +444,30 @@ describe("program-design result", () => {
     ).toEqual(["document.location"]);
   });
 
+  test("rejects two upstream inputs at the same location", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        inputs: {
+          requirements: requirementsDocument,
+          specification: fileReference("specification", "requirements.md"),
+        },
+      }),
+    ).toEqual(["inputs.specification.location"]);
+  });
+
+  test("accepts upstream inputs that are separately labeled records in one message", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        inputs: {
+          requirements: sameMessageRecord("requirements", "Requirements"),
+          specification: sameMessageRecord("specification", "Specification"),
+        },
+      }),
+    ).toEqual([]);
+  });
+
   test("rejects a Specification input of the wrong kind", () => {
     expect(
       issuePaths(ProgramDesignResultSchema, {
@@ -519,6 +548,32 @@ describe("test-design result", () => {
         caseCoverage: [{ obligation: "R1", layer: "integration" }],
       }),
     ).toBe(false);
+  });
+
+  test("rejects two upstream inputs at the same location", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        inputs: {
+          requirements: requirementsDocument,
+          specification: specificationDocument,
+          programDesign: fileReference("program-design", "specification.md"),
+        },
+      }),
+    ).toEqual(["inputs.programDesign.location"]);
+  });
+
+  test("accepts upstream inputs that are separately labeled records in one message", () => {
+    expect(
+      issuePaths(TestDesignResultSchema, {
+        ...readyTestDesign,
+        inputs: {
+          requirements: sameMessageRecord("requirements", "Requirements"),
+          specification: sameMessageRecord("specification", "Specification"),
+          programDesign: sameMessageRecord("program-design", "Program Design"),
+        },
+      }),
+    ).toEqual([]);
   });
 
   test("rejects a ready result missing its Program Design input", () => {
@@ -624,6 +679,34 @@ describe("verification-design result", () => {
         summary: { ...(readyVerificationDesign.summary as Payload), declaredReference: "" },
       }),
     ).toEqual(["summary.declaredReference"]);
+  });
+
+  test("rejects two upstream inputs at the same location", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        inputs: {
+          requirements: requirementsDocument,
+          specification: specificationDocument,
+          programDesign: programDesignDocument,
+          testDesign: fileReference("test-design", "program-design.md"),
+        },
+      }),
+    ).toEqual(["inputs.testDesign.location"]);
+  });
+
+  test("accepts upstream inputs that are separately labeled records in one message", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        inputs: {
+          requirements: sameMessageRecord("requirements", "Requirements"),
+          specification: sameMessageRecord("specification", "Specification"),
+          programDesign: sameMessageRecord("program-design", "Program Design"),
+          testDesign: sameMessageRecord("test-design", "Test Design"),
+        },
+      }),
+    ).toEqual([]);
   });
 
   test("rejects a ready result missing its Test Design input", () => {
