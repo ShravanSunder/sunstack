@@ -110,7 +110,7 @@ Completion: the returned result or report validates against its contract, and ev
 - a case observes an acknowledgement, a dev build, a mocked backend or offline preparation in place of the outcome on the declared target;
 - a passing condition lacks its target identity, or would still pass for a wrong implementation;
 - a new real-system run only repeats what a cheaper test already settles, or a reused observation was relied on without inspecting its actual applicable run;
-- a planned observation or reused journey is described as observed;
+- a planned observation, or a reuse without an inspected actual applicable run, is described as observed;
 - a driver is assumed to work because it exists or imports;
 - the required local review is missing, partial, stale or not ready.
 
