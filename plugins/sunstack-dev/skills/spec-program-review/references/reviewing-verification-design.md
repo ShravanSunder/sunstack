@@ -26,7 +26,7 @@ Finding:     the case observes an acknowledgement. Observe pane B's and pane A's
 - each case covers a risk cheaper tests cannot reach, or names the existing real-path observation that already covers it: the delivered build and configuration, startup wiring, the real transport, layout at a real size, durability across a restart, failures driven through the same entry point;
 - each passing condition names what is seen, where, against which reference, on which target identity, and would fail for a wrong implementation;
 - feasibility gaps are named with their owner: a missing observation point to `program-design`, a missing grant or route to the Lead;
-- reuse of a permanent journey names its actual applicable run, what it depends on, and what would require running it again; without such a run the observation stays owed;
+- reuse of a permanent journey names its actual applicable run on the declared target, configuration and client, what it depends on, and what would require running it again; without such a run the observation stays owed;
 - planned observations are listed as owed at delivery, never as observed;
 - limits are named: platforms not tried, stand-ins still in place, cases needing access nobody has.
 

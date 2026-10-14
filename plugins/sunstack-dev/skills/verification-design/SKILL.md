@@ -35,7 +35,7 @@ The Verifier's assignment, grants and report shape come from its `practices-mana
 
 ### 1. Name the adopted outcome and the declared reference
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the current identities of the four upstream documents and the separate Verification Design home.
+Name the basis your job works from. IF authoring the Verification Design, load `../../shared-references/requirements-specification-program-design.md` and return the current identities of the four upstream documents and the separate Verification Design home; a substantial design unit needs all five. IF challenging feasibility or judging delivered work, read the governing basis your Verifier commission supplies and return its adopted outcome and reference, plus the adopted design set and expectations when the commission names them. A required reference or observation that no governing source holds is a gap for the Lead: never invent a document, waive a required design set, or take more execution than the commission grants.
 
 State the core outcome the way the user or calling program sees it: "the text the operator sent appears in pane B, in the delivered app", not "routing works". Then declare the reference correctness is judged against: the Specification's obligation and its worked example, a published protocol at a named version, a reference implementation, or a known-good output someone checked against the contract. A model's opinion of the output is never the reference. When no reference can be declared, return a `verification-design-gap` (or a `specification-gap` when the obligation itself is missing).
 
@@ -61,7 +61,7 @@ Completion: the route's real target and boundary are known from its source, and 
 
 ### 3. Choose the cases tests cannot reach
 
-Read `principle-prove-it-works` in full at this choice. Read the adopted Test Design first: it already catches the wrong behavior that a cheaper layer can show. Verification takes what only the real system shows: the delivered build and its configuration, startup wiring, the real transport, layout at a real size, durability across a restart, and the failures the claim covers driven through the same entry point. A second path earns its cost only when it can detect something the first cannot. An existing real-path test or journey that already observes the outcome on an applicable target can supply a case (step 5); what adds nothing is a new real-system run that repeats a case a cheaper test already settles, only to look independent.
+Read `principle-prove-it-works` in full at this choice. Read the adopted Test Design first: it already catches the wrong behavior that a cheaper layer can show. Verification takes what only the real system shows: the delivered build and its configuration, startup wiring, the real transport, layout at a real size, durability across a restart, and the failures the claim covers driven through the same entry point. A second path earns its cost only when it can detect something the first cannot. An existing real-path test or journey that already observes the outcome on the declared target, configuration and client can supply a case (step 5); what adds nothing is a new real-system run that repeats a case a cheaper test already settles, only to look independent.
 
 Completion: every case names the risk it covers that cheaper tests do not, or the existing real-path observation that already covers it, and no new run only repeats what a test settles.
 
@@ -75,7 +75,7 @@ Completion: every case has a passing condition a wrong implementation would fail
 
 ### 5. Plan reuse
 
-A permanent real-path test or journey that already observes the outcome on an applicable target can supply a case's observation, instead of a rebuilt one. Name it, say why it still applies (the code paths, configuration and target properties it depends on, unchanged in the relevant respects), and inspect its actual run before relying on it. Run it again only when something it depends on changed, when it failed, or when a specific concern about it is unresolved. Without an actual applicable run, the observation stays owed at delivery; a plan to reuse is not an observation.
+A permanent real-path test or journey that already observes the outcome on the declared target, configuration and client can supply a case's observation, instead of a rebuilt one. A pass on a dev build, another configuration or another client is not that observation. Name it, say why it still applies (the code paths, configuration and target properties it depends on, unchanged in the relevant respects), and inspect its actual run before relying on it. Run it again only when something it depends on changed, when it failed, or when a specific concern about it is unresolved. Without an actual applicable run, the observation stays owed at delivery; a plan to reuse is not an observation.
 
 Completion: each reused journey names its actual applicable run, what it depends on, and what would require running it again.
 
