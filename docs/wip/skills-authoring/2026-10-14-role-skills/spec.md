@@ -1,6 +1,6 @@
 # Standalone role skills selected by agent management
 
-Draft v1, 2026-10-14. Owner-directed behavior change. Seven role skills replace the seven current charter references; one management update performs the mapping and consumer cutover. This is an eight-run spec with one named skill target per run, not runtime implementation. Spec review is required before files change.
+Reviewed v1, 2026-10-14; accepted-to-implement at SPEC stage. Owner-directed behavior change. Seven role skills replace the seven current charter references; one management update performs the mapping and consumer cutover. This is an eight-run spec with one named skill target per run, not runtime implementation.
 
 ## Owner decision and intended result
 
@@ -154,6 +154,6 @@ At implementation, select one current base after project 1, check pending writer
 
 R1–R7: proposed creates of seven role skills. R8: proposed management update plus its named typed/pointer/test support. No runtime, schema, role reference, manifest or client copy changed during this design.
 
-Current SPEC review: not yet commissioned; no acceptance. Project 1's reviewed specification remains unchanged and accepted for its own 11 runs. This role-promotion spec needs its own current review before authoring. Broader project 2 extraction, domain/audit family content, security rename and disputed #128 phases remain outside this named implementation proposal.
+Current SPEC review: independent teaching and structure sessions completed mental-model-fit, depth-coverage, trigger-routing and rule-agreement; independent reduction accepted the v1 meaning at `29db9cb6de1bdc7be4af3e528cd2e32ee8bec8e4` with verdict `great`, decision `accepted-to-implement` and zero open findings. Review used separate Sol/xhigh sessions; no cross-family assurance. This status update changes no reviewed design meaning. No implementation, executed validation, implicit-discovery, behavior or release result is established. Project 1's reviewed specification remains unchanged and accepted for its own 11 runs; its implementation is still the prerequisite. Broader project 2 extraction, domain/audit family content, security rename and disputed #128 phases remain outside this named implementation proposal. Review reports remain outside the design document under the existing temporary review home.
 
 Highest risks: implicit discovery silently switching responsibility; role content becoming another model/setup owner; stale charter literals after the move; overloading every agent with all roles; and treating a loaded Reviewer skill as no-author-history independence. The trigger boundaries, one-role mapping, exact typed cutover and realistic controls are designed to expose those risks; no behavior improvement is claimed yet.
