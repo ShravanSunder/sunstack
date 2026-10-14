@@ -2,6 +2,8 @@
 
 This reference owns `specification-only` mode judgment.
 
+Return: the observable meaning and domain judgment against the Requirements, with the strongest divergent-implementer risk named.
+
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether the Requirements and Specification identities are present, resolvable, and different before judging the Specification's meaning.
 
 Requirements answers why the work matters, for whom, and within which authorized boundary; it had its own `requirements-only` review. Specification answers what must be observably true and traces each normative obligation to Requirements. This mode judges the Specification against that distinct Requirements.

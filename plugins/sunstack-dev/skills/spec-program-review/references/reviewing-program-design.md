@@ -2,6 +2,8 @@
 
 This reference owns `program-only` mode judgment.
 
+Return: the structural realization and proof-seam judgment, with internal coherence and Specification satisfaction judged separately.
+
 Judge separately:
 
 1. Is structural How internally coherent?

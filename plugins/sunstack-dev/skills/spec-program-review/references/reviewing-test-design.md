@@ -2,6 +2,8 @@
 
 This reference owns `test-only` mode judgment: whether the planned tests would catch the wrong behavior the Specification forbids, at layers that keep the responsible interactions real, with expected outcomes that come from the contract.
 
+Return: the scenario, oracle, layer and fixture adequacy, with each false-green countercase walked.
+
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether the Requirements, Specification, Program Design and Test Design identities are present, resolvable and distinct.
 
 ## Walk a Scenario Against a Wrong Implementation

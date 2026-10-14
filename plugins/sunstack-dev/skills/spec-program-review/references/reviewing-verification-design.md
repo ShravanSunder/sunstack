@@ -2,6 +2,8 @@
 
 This reference owns `verification-only` mode judgment: whether the planned real-system observations would show the adopted outcome on the declared target, judged against an independent reference, and whether the design names what stays unverified.
 
+Return: the reference, surface, observation and feasibility judgment, with the unverified limits named.
+
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether all five identities are present, resolvable and distinct.
 
 ## Walk a Case Against Its Look-Alike

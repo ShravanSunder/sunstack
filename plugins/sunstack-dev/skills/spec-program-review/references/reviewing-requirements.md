@@ -2,6 +2,8 @@
 
 This reference owns `requirements-only` mode judgment: whether the Requirements says what the owner adopted, for whom, and within which boundary, with authority a reader can inspect. No Specification is required for this mode.
 
+Return: the authority, adoption and scope judgment, with each finding anchored to the row and the source it cites.
+
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether the Requirements identity is present and resolvable, and, when a Specification exists, whether it is a different document.
 
 ## Authority Before Coverage

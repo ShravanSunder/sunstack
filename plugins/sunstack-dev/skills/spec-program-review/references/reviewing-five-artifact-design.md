@@ -2,6 +2,8 @@
 
 This reference owns `five-artifact-design` mode judgment: one integrated reader of the whole current set.
 
+Return: the independently reconstructed end-to-end outcome and the cross-document consistency judgment, with each lens's result for its document.
+
 The integrated reader reconstructs the design end to end itself. Each document already had its own local review; those results and reviewers are context to consult, never verdicts to forward. The per-document lenses below run inside this whole-set reading and do not replace the local cycles.
 
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return the Requirements, Specification, Program Design, Test Design and Verification Design identity status: present, resolvable and distinct, or the exact gap.

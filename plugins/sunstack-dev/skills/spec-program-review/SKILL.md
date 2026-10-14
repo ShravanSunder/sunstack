@@ -113,7 +113,7 @@ Completion: one independent Reviewer Sidekick with no authoring history owns thi
 IF operation is review, load `references/coordination-and-chunking.md` and return a whole-mode pass or a sequential plan of overlapping seams, and load `references/lanes/lane-schema.md` and return the `complete | partial | blocked` status and selection reason for every check. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return the whole-mode judgment from complete artifacts, using the common method and the selected lens.
-2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` and walk the chunk passes sequentially. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
+2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md`, walk the chunk passes sequentially, and return each pass's seam coverage and status. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
 
 Completion: the mode-complete check and every selected chunk pass have statuses, each pass lists its seam sections, and every required dimension has current coverage.
 
