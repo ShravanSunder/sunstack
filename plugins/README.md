@@ -62,7 +62,9 @@ Shravan's Codex-first development workflow plugin. Provides:
 
 - **spec-design** skill -- defines authoritative Why/What, observable obligations, and proof obligations before program design
 - **program-design** skill -- turns settled obligations into source-grounded structural How, including ownership, interfaces, calls, state, failure, and proof seams
-- **spec-program-review** skill -- independently reviews current specification/program-design meaning and reuses coverage only for parent-verified non-semantic edits
+- **test-design** skill -- plans the regression strategy before tests exist: wrong behavior, real interactions, honest layers, independent oracles, and planned red runs
+- **verification-design** skill -- plans real-system proof against a declared reference, and guides the Verifier's prebuild challenge and delivered-evidence judgment
+- **spec-program-review** skill -- independently reviews one design document or the whole five-document set and reuses coverage only for parent-verified non-semantic edits
 - **discuss-clarify-mental-models** skill -- reconverges unstable shared mental models before artifact work without the old one-question grill shape
 - **discuss-pathfinding** skill -- Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/process/glossary records as they crystallize.
 - **practices-manage-agents** skill -- chooses each helper's role, Worker or Sidekick form and model, commissions it with a typed job packet, and assesses its handback across native, agent-router, or ACPX runtimes, with ACP adapter implementation kept separate

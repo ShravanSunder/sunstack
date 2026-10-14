@@ -429,11 +429,16 @@ describe("user requirements and design-view contracts", () => {
     expect(artifactNavigation).toContain("entry artifact or labeled record");
   });
 
-  test("keeps the current three-artifact design-review contract aligned across direct consumers", () => {
-    const currentDesignReviewConsumers = [
-      readPluginFile("skills/spec-handoff/SKILL.md"),
+  test("keeps the current design-review contract aligned across direct consumers", () => {
+    const designFamilyHandoff = readPluginFile("skills/spec-handoff/SKILL.md");
+    // The improvement planner keeps its three-artifact basis until its own planner-convergence layer.
+    const improvementPlannerConsumers = [
       readPluginFile("skills/plan-improve-repo/SKILL.md"),
       readPluginFile("skills/plan-improve-repo/references/improvement-plan-template.md"),
+    ];
+    const currentDesignReviewConsumers = [
+      designFamilyHandoff,
+      ...improvementPlannerConsumers,
       readPluginFile("shared-references/requirements-specification-program-design.md"),
       readPluginFile("README.md"),
       readPluginFile("skills/discuss-clarify-mental-models/SKILL.md"),
@@ -450,7 +455,9 @@ describe("user requirements and design-view contracts", () => {
       expect(consumer).not.toContain("review invocation identity");
       expect(consumer).not.toContain("review result identity");
     }
-    for (const consumer of currentDesignReviewConsumers.slice(0, 3)) {
+    expect(designFamilyHandoff).toContain("five-artifact design review result");
+    expect(designFamilyHandoff).not.toContain("three-artifact");
+    for (const consumer of improvementPlannerConsumers) {
       expect(consumer).toContain("three-artifact design review result");
     }
   });

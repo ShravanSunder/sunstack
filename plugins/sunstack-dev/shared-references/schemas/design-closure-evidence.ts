@@ -6,6 +6,7 @@ import {
   type DesignDocumentReference,
   type DesignDocumentReferenceShape,
   DesignDocumentReferenceSchema,
+  FiveDocumentSetSchema,
   RequiredText,
   designDocumentReferenceOf,
   documentLocationKey,
@@ -46,6 +47,16 @@ export const localReviewClosureOf = <TDocumentKind extends DesignDocumentKind>(
       ),
     })
     .describe(`A ready independent local review of the ${kind} document`);
+
+export const IntegratedReviewClosureSchema = z
+  .strictObject({
+    ...readyReviewFields,
+    coveredDocuments: FiveDocumentSetSchema.describe(
+      "The whole five-document set the integrated reader reviewed",
+    ),
+  })
+  .describe("A ready independent integrated review of the whole five-document set");
+export type IntegratedReviewClosure = z.infer<typeof IntegratedReviewClosureSchema>;
 
 export const OwnerConfirmationSchema = z
   .discriminatedUnion("status", [

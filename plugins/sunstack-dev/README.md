@@ -9,11 +9,13 @@ The plugin is built around one idea: each workflow phase should have a clear own
 ```text
 shared understanding
   -> orchestrator-implementation-goal: implementation planning, execution/proof, review, and delivery
-       -> orchestrator-design: coordinate and verify the design cycle
+       -> orchestrator-design: coordinate and verify the five-document design cycle
        -> spec-design: separate Requirements and Specification
        -> program-design: structural How
-       -> spec-program-review: proportional independent three-artifact design review
-       -> stop at reviewed three-artifact design or explicit gap; never enter planning automatically
+       -> test-design: regression strategy before any test is written
+       -> verification-design: real-system proof against a declared reference
+       -> spec-program-review: a local review per document, then one integrated five-artifact review
+       -> stop at the reviewed five-artifact design or an explicit gap; never enter planning automatically
   -> plan-implementation: one canonical plan + proof mapping
   -> implement-plan: approved immutable plan + implementation proof
   -> implementation-review: ordered checks in one independent 🔎 Reviewer Sidekick session + rails reduction
@@ -39,6 +41,8 @@ orchestrator-*       bounded workflow routing      orchestrator-implementation-g
                                                   orchestrator-design
 spec-*               design/spec boundary          spec-design
                                                   program-design
+                                                  test-design
+                                                  verification-design
                                                   spec-program-review
                                                   spec-handoff
 plan-*               planning and portability     plan-implementation
@@ -84,7 +88,9 @@ flowchart LR
 
     specDesign["spec-design<br/>separate Requirements and Specification"]
     programDesign["program-design<br/>structural How"]
-    specReview["spec-program-review<br/>independent review"]
+    testDesign["test-design<br/>regression strategy"]
+    verificationDesign["verification-design<br/>real-system proof strategy"]
+    specReview["spec-program-review<br/>local and integrated review"]
     specHandoff["spec-handoff<br/>portable spec context"]
 
     planImplementation["plan-implementation<br/>reviewed design to canonical plan"]
@@ -104,11 +110,15 @@ flowchart LR
     deliveryGoal -.-> implWrap
     designCycle -.->|"first phase"| specDesign
     designCycle -.->|"follows phase-selected routes"| programDesign
-    designCycle -.->|"one three-artifact design review"| specReview
+    designCycle -.-> testDesign
+    designCycle -.-> verificationDesign
+    designCycle -.->|"one integrated five-artifact review"| specReview
     designCycle -.->|"only for unmade owner meaning"| pathfinding
 
     specDesign --> programDesign
-    programDesign --> specReview
+    programDesign --> testDesign
+    testDesign --> verificationDesign
+    verificationDesign --> specReview
     specDesign --> specHandoff
     programDesign --> specHandoff
     specReview --> specHandoff
@@ -142,7 +152,7 @@ Skills are layered: orchestrators, then phases, then practices (with `ops-*` and
 
 Use `practices-manage-agents` when delegation is the work: choosing a helper's role (Advisor, Implementer, Verifier, Reviewer, Researcher or Operator), its Worker or Sidekick form and its model, then commissioning, steering, monitoring and assessing it, including fan-outs. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent Implementer Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. `practices-manage-agents` owns the role charters, execution forms, classification, the catalog tables, the typed job packet, and native, agent-router, or legacy ACPX routing; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
 
-Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design` and `program-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial Requirements, Specification, and Program Design artifact, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one three-artifact design review, then stops before planning. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
+Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead picks the next unresolved decision, loads the phase that owns it in this session, reads what came back, and decides what it means for the design. It loads `spec-design`, `program-design`, `test-design` and `verification-design` and authors all governing documents, views, visual briefs, diagrams and settled sections; helpers gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. Each of the five documents gets its own local review, then one independent integrated review reads the whole set, and the owner confirms the Requirements, the structural realization and the final set. The cycle stops before planning with a typed result that lists the evidence still owed at delivery. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
 
 Use `orchestrator-implementation-goal` to carry implementation goals through Lead-authored planning, planned-PR implementation and proof, Lead assessment, independent review, accepted corrections, and the requested delivery boundary. Design stays with its own workflow when missing or contradicted. The default terminal is PR-ready and unmerged; merge requires explicit authority. Both orchestrators use `practices-show-me-your-work` for meaningful decision and evidence history, while checking current sources rather than replaying stored status. Direct one-phase requests bypass orchestration.
 
@@ -154,13 +164,17 @@ Use `practices-show-me-your-work` at the start of a qualifying task to open or r
 
 Use `spec-design` to preserve two separate upstream concepts before program design or planning. Requirements owns WHY, for whom, and within what authorized boundary. Specification owns WHAT must be observably true and traces its normative obligations to Requirements. Each newly authored or substantively revised substantial document receives its own meaningful visual treatment at the correct altitude. A changed screen is an Image Gen picture grounded in the current app. Ownership, calls, state, flow, failure, and trust are Mermaid. Normative meaning remains in prose and tables. For substantial file-backed work, the skill reuses or creates a separately identifiable Requirements home and creates a different Specification home; it never substitutes one combined `Requirements/spec` artifact. It keeps unresolved owner meaning visible and leaves internal component structure downstream.
 
-Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and proof seams. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It turns stack/trace evidence into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
+Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and proof seams with what must stay real. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It turns stack/trace evidence into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
 
-Use `spec-program-review` to classify and independently review a Specification, Program Design, or complete Requirements, Specification, and Program Design set. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, and walks mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Reviewer Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Why/What findings route to `spec-design`; structural How findings route to `program-design`.
+Use `test-design` to plan how tests will catch the Specification's forbidden behavior before any test is written: name the wrong behavior, keep the responsible interaction real inside Program Design's seams, choose the cheapest honest layer, take the oracle from the contract, accept every permitted outcome, wait on a correlated completion signal, and plan the red run without claiming it. It judges existing tests as keep, repair or remove and routes repairs to the Implementer.
+
+Use `verification-design` to plan how the delivered system will show the adopted outcome: a reference independent of the implementation, the project's existing route inspected from source, an observation of the outcome rather than an acknowledgement, cases only the real system can reach, passing conditions with target identity, and named limits. The paired Verifier uses the same skill to challenge feasibility before the build and to judge delivered evidence.
+
+Use `spec-program-review` to classify and independently review any one of the five design documents, or the whole set as one integrated design. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, walks a concrete case and its countercase, and runs mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Reviewer Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Findings route to the earliest affected owner: `spec-design`, `program-design`, `test-design` or `verification-design`.
 
 The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` source trees are preserved under [`retired-skills/`](retired-skills/) for provenance and are not runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of those retired trees; they do not restore swarms, controller briefs, worker protocols, transition ledgers, or a separate plan-review layer.
 
-Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, complete but unreviewed or semantically stale three-artifact designs to `spec-program-review`, and current ready three-artifact designs to `plan-implementation`.
+Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the current five-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, a missing test or proof strategy to `test-design` or `verification-design`, complete but unreviewed or semantically stale five-artifact designs to `spec-program-review`, and current ready five-artifact designs to `plan-implementation`.
 
 ### Plan boundary
 
@@ -200,7 +214,7 @@ Review workflows do not use broad multi-model counsel by default. The persistent
 ```text
 normal review path
   spec-program-review
-      -> bounded independent specification/program review
+      -> bounded independent design review, per document or of the whole set
   implementation-review
       -> one complete independent implementation/proof review
 ```
@@ -215,7 +229,9 @@ Use principle-design-for-failure on this design and name the decision it changed
 Use discuss-pathfinding to grill me on tacit requirements or unmade decisions.
 Use spec-design to preserve separate Requirements and Specification identities: authorized Why and observable What.
 Use program-design to turn this specification into structural How.
-Use spec-program-review to independently review these Requirements, Specification, and Program Design artifacts.
+Use test-design to plan which wrong behavior each test must catch and where it runs.
+Use verification-design to plan how the delivered app will show this outcome, and what stays unverified.
+Use spec-program-review to independently review this five-document design as one set.
 Use spec-handoff to package this design for another agent without creating a plan.
 Use orchestrator-implementation-goal to carry this goal through planning, implementation, proof, review, and PR readiness.
 Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.
