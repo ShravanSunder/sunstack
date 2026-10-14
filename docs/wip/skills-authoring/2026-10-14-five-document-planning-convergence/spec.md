@@ -1,6 +1,6 @@
 # Planning from the five design documents
 
-2026-10-14 · proposed v2 · owner plugin: `sunstack-dev` · F6, after the design-family layer
+2026-10-14 · v3 accepted at SPEC stage · owner plugin: `sunstack-dev` · F6, after the design-family layer
 
 Planning turns an adopted design into work that can be carried out and checked. It must use the Test Design's regression strategy and the Verification Design's real-system observations, rather than quietly starting again from the first three documents. This change connects the existing planners to the new family; it leaves their slicing, dependency, grouping and improvement-triage methods intact.
 
@@ -67,17 +67,30 @@ No unresolved product or strategy decision has been assigned to the implementer.
 | D13 | Extends D6's proposed default to any durable basis without a file-backed spec folder, including five separately labeled chat documents: use `docs/specs/<yyyy-mm-dd-work-name>/plans/` with no invented spec file. | Chat-only design keeps its existing semantic readiness and can support delivery. File creation is not a new design-admission requirement. This remains a proposed Lead default, not an owner-confirmed answer. |
 | D14 | Clarifies D7–D9: the Lead owns the plan as a governing artifact; executors read it and may not silently author, move, upgrade or sweep it into their write scope. When it must travel, the Lead arranges its existing authorized repository delivery. | No universal pre-execution commit gate or separate docs branch is added. If a plan is in the reviewed diff, read it fully and check its canonical contract and governing authority; route defects to the originating planner rather than counting its proposed tasks as delivered product behavior. The diff is never ignored. |
 
+2026-10-14 bounded v3 corrections; these effective rows supersede the indicated wording above:
+
+| ID | Decision | Reason and cost |
+| --- | --- | --- |
+| D15 | Supersedes D11's validator wording: the cycle producer validates its own result before handback. Planning consumes a supplied ready payload as data, using the shared document/closure contracts and actual evidence; it never loads or imports an orchestrator-owned schema. | Preserve the accepted producer/consumer boundary and layer rule. No schema ownership move, duplicate cycle validator or implicit upstream workflow invocation. Confirmations and owed observations are still inspected and scheduled. |
+| D16 | Clarifies D5/D12 and supersedes D13's subject: absent explicit owner/repo policy, a written plan is durable by default; use a temporary home only for explicitly requested temporary/advisory work. `plan-only` alone does not mean temporary. For a durable plan whose basis has no file-backed spec folder, retain D13's proposed dated work-unit folder with no fabricated spec. | Remove the arbitrary home choice for direct improvement plans without adding a question at every run. The no-spec folder remains a strikeable Lead default, not owner-confirmed. |
+
 ## Run 1 — `plan-implementation`
 
 **Classification:** behavior-changing update from user-directed intent. One target; consumer edits below only implement this input/output boundary.
 
-**Trigger:** keep model and user invocation available. Update the description and discovery wording to recognize planning from the reviewed five-document design or an admitted improvement. Preserve its audit-only neighbour boundary. Do not use the description as a workflow summary.
+**Trigger:** keep model and user invocation available. Update description and discovery wording with this proposed trigger; it names situations and adjacent strategy owners, not workflow steps:
+
+```yaml
+description: "Use when writing or revising a repository-grounded implementation plan from a reviewed five-document design, an admitted improvement finding, or a direct planning request. Not for discovering improvements (plan-improve-repo), designing tests (test-design), or designing real-system proof (verification-design)."
+```
 
 **Main path:** admit the complete current five-document set and its closures, or the unchanged admitted-improvement return. Open the governing sources and inspect repository reality. Schedule proof-bearing slices, choose meaningful edges and grouping, write one canonical plan at its proper home, then return the unchanged existing ready/non-ready and delivery-context forms. Incomplete TD, VD or their review coverage routes to the semantic owner; it never falls back to the first three documents or manufactures a mechanics-only classification.
 
-When a design-cycle return is supplied, validate and interpret its existing ready payload instead of extracting only its first three documents or assembling a second shape. Open its actual confirmations/review evidence and schedule its `deliveryEvidenceOwed`; a well-formed ready literal is not semantic acceptance. Direct source-based planning without that return checks the same adopted readiness against its actual sources, preserving file and separately labeled chat media. A non-ready cycle is routed by its exact gap, never promoted by the planner.
+When a design-cycle return is supplied, consume its producer-validated ready payload as data instead of extracting only its first three documents or assembling a second shape. Open its actual confirmations/review evidence and schedule its `deliveryEvidenceOwed`; producer validation and a ready literal are not semantic acceptance. Direct source-based planning without that return checks the same adopted readiness against its actual sources, preserving file and separately labeled chat media. A non-ready cycle is routed by its exact gap, never promoted by the planner.
 
 **Depth and calls:** retain `references/slice-and-proof-design.md` as the all-run teaching owner and `shared-references/canonical-implementation-plan.md` as the shared record/home owner. Their main-path calls use literal `MUST load` with the concrete slice/proof map and canonical result returned. Keep basis selection, the strategy boundary and completion visible inline. Add no new reference shell merely to rename a concept.
+
+The canonical reference owns this conditional field-contract call: IF consuming a design-bearing basis, load `shared-references/schemas/design-document-references.ts` and `shared-references/schemas/design-closure-evidence.ts` (paths from the plugin root) and return the current FiveDocumentSet and matching closure/confirmation references or an exact shape/applicability discrepancy. These shared files own the representations; the planner opens the actual documents and evidence for meaning. Any component-shape validation uses these existing shared schemas, not an orchestrator-owned file. Producer cycle validation stays with its producer; existing permanent cycle tests may import its schema without turning the planning phase into its caller.
 
 Use existing principles at the decisions they improve, reading their leaves in full: shared-model and ground-truth before interpreting the design, tests-that-can-fail and prove-it-works when judging a proof substitution, and verify-before-accepting before returning ready. Existing practices continue to own research, management, collaboration and traces. The planner teaches how to turn constraints into executable work; it does not restate those manuals or treat field presence as engineering judgment.
 
@@ -96,7 +109,7 @@ Concrete teaching case: TD specifies that saving one draft ID twice must leave o
 - `skills/orchestrator-implementation-goal/SKILL.md` and its goal-routing reference: admit the new current basis and map TD/VD gaps to the existing bounded design owner, alongside spec/program gaps. Do not widen the requested terminal.
 - `skills/implement-plan` and `skills/implementation-review`: inspect their canonical-contract calls; change only a demonstrated basis/admission omission. Existing complete-basis reading now includes all five. Do not recopy phase fields or redesign review lanes/rails.
 - `skills/implementation-handoff/SKILL.md`: verify its existing complete canonical-record pass-through against the new basis; no edit is required when that existing call suffices. Apply D14 at canonical ownership and executor/review admission only where the durable artifact creates an actual omission.
-- `skills/discuss-clarify-mental-models/SKILL.md` planning route and the plugin README planning-admission sections: remove the live three-document-only path.
+- `skills/discuss-clarify-mental-models/SKILL.md` planning route, the plugin README planning-admission/usage sections, and the repository `AGENTS.md` plan-implementation index row: remove the live three-document-only input description. The repo row mirrors the owning skill; no global/devfiles edit is included.
 - The two named permanent source-contract tests: update this run's assertions and add narrowly scoped absence checks at the actual active consumers. Historical three-document examples are excluded from a blanket zero-string rule.
 
 **Completion:** the new cycle → canonical basis → design planner → handoff → executor/review source walk preserves all five responsibilities. It covers a valid set, missing TD, missing VD, stale local or integrated coverage, alias/combined content despite well-formed pointers, a command that cannot execute adopted strategy, mechanics-only admission, and a plan-only result that remains non-executable. Source inspection establishes these written paths; it does not prove an agent follows them.
@@ -110,6 +123,8 @@ Concrete teaching case: TD specifies that saving one draft ID twice must leave o
 **Main path:** keep audit, vetting and prioritization intact. A design-bearing finding is ready for planning only with the five current documents, five local closures and integrated ready review covering their current meaning. `implementation-mechanics-only` retains its positive source test. `design-required` returns the exact missing semantic owner without plan writing. Direct admitted plans remain `plan-only`; orchestrated delivery returns the unchanged admitted finding for the design planner to author its delivery plan.
 
 Test strategy is consumed from the reviewed design, as in D3, when this skill writes a design-bearing direct improvement plan. The mechanics-only branch follows D4. Neither direct improvement planning nor validation invents TD/VD or decides absent product meaning.
+
+For the proposed no-file-backed-spec home default, use one dated folder per scoped audit/work unit and one separate plan per admitted finding; design-backed findings keep their own spec-associated home, and a later new delivery plan uses the existing applicable work home. This placement creates no shared-index prerequisite or new plan authority.
 
 **Depth:** retain `references/improvement-plan-template.md`, `validation-checklist.md`, and `reconcile-backlog.md`, under their existing observable write/validate/reconcile predicates. Update the template's basis and coverage to five documents and the current closure. Validation and reconciliation preserve the original canonical record and return a separate receipt; an old three-document plan remains unchanged and returns the exact originating-planner discrepancy.
 
@@ -132,6 +147,8 @@ Use the existing `tests/skills` harness from the monorepo root. Its package decl
 
 An actual fresh-context behavior/trigger evaluation is separately admitted later. No model experiment, pressure run, Jev judgment or product-app run is required or authorized here, and no source green is advertised as earned trust. The independent SPEC review checks this entire two-run scope before implementation; correction verification reuses the same review lead and preserves finding identity.
 
+Deferred existing recognition gap: `docs-maintain`'s doc-role map names `docs/plans/` and `docs/superpowers/plans/`, omitting nested spec-associated plans. This predates F6; its actual lifecycle method checks current accepted/user authority and preserves active phase ownership, and no actual incorrect move was observed. F6 does not rewrite that lifecycle/index. The adopted home and D12 precedence remain governing; a later doc-maintenance correction may recognize that home without reopening it.
+
 Direct-call routing has a named integration limit: the family defines TD/VD gap tokens and this layer updates the goal orchestrator, but the installed/global devfiles index has not yet been converged in the separately authorized lane. F6 returns the exact semantic gap/owner and does not claim complete installed direct-routing behavior. Global changes remain outside this layer; actual consumer convergence alone is not client/release readiness.
 
 ## Coordination, status and non-goals
@@ -146,9 +163,9 @@ Sensitive-surface decision: allowed for the bounded source/reference/test-contra
 
 | Run | Target | Actual status | Evidence |
 | --- | --- | --- | --- |
-| 1 | `plan-implementation` | proposed | This v2 spec; no runtime change or F6 run |
-| 2 | `plan-improve-repo` | proposed | This v2 spec; depends on Run 1 |
+| 1 | `plan-implementation` | proposed | This v3 spec; no runtime change or F6 run |
+| 2 | `plan-improve-repo` | proposed | This v3 spec; depends on Run 1 |
 
-Review record: pending independent whole-spec review of this exact v2 artifact; no acceptance or implementation decision is claimed yet.
+Review record: accepted revision v3; mental-model-fit, depth-coverage, trigger-routing and rule-agreement complete across both named runs and their supporting consumer contracts. Verdict `great`; implementation decision `accepted-to-implement`; boundary `source-only`. The original whole-v2 report plus the same Review Lead's current-anchor v3 verification closes all four accepted findings (4 → 0) and binds this entire design, including the Run 2 placement clarification. Full reports and dispositions stay on the work root supplied in the commission. Both runs remain proposed: implementation, behavior proof, installed routing and release are not established or authorized by SPEC acceptance.
 
 Non-goals: global/devfiles instruction changes; cache/client/platform loading changes; role/practice additions; new verification drivers; Jev runtime or eval-system implementation; model/behavior testing; product code; planning algorithms, DAGs, tickets, sequencing, audit triage, delivery terminals or author transfers; new plan schemas, hashes, copied case inventories, approval/progress records or shared indexes; handoff-packet location cleanup; dormant fixtures and historical document rewrites; release or merge.
