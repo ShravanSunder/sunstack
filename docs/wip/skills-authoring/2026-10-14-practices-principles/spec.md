@@ -1,6 +1,6 @@
 # Useful practice and principle composition — project 1 specification
 
-Draft v1, 2026-10-14. Owner-directed behavior-changing updates. This document is the proposal for one implementation PR, containing 11 runs with exactly one named skill per run. All runs are proposed; spec acceptance, implementation and behavior proof are not claimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
+Draft v2, 2026-10-14. Owner-directed behavior-changing updates. This document is the proposal for one implementation PR, containing 11 runs with exactly one named skill per run. All runs are proposed; current spec acceptance, implementation and behavior proof are not claimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
 
 ## Purpose and success
 
@@ -116,6 +116,19 @@ R1/R2 land first; remaining runs consume their current teaching. R7 alone edits 
 
 **Depth.** Move the complete tier/exact-id/model tables unchanged to `references/model-catalog.md`. Step 3 MUST loads it and consumes one eligible row and the reason that row requires. Body keeps classification, role/form admissibility, owner override and completion. Catalog owns policy detail, not job meaning. Preserve owner-assigned model/effort and continuation; no model changes are designed by this move. Keep the full examples as teaching, but choose the relevant worked cut; the agent need not narrate all six answers in every owner reply.
 
+**Same-run catalog consumer cutover.** Retarget the current catalog/exact-id/effort policy reads in these eight management references to the single `references/model-catalog.md` owner:
+
+- `references/execution-forms.md`
+- `references/native-providers-codex.md`
+- `references/native-providers-claude.md`
+- `references/native-providers-cursor.md`
+- `references/acpx-legacy.md`
+- `references/acpx-provider-codex.md`
+- `references/acpx-provider-claude.md`
+- `references/acpx-provider-cursor.md`
+
+Update all policy-home mentions in those files in R4, alongside Step 3's mandatory read. Preserve every provider command/encoding, eligibility row, exact-id rule, effort rule, relationship lifecycle and access grant; this is a pointer cutover, not provider redesign. Selected routes read the one policy home when they need it; unrelated provider contracts are not a read bundle. Remove the old policy body rather than leave a second copy or forwarding shell. Complete the move only when each listed consumer reaches the new owner and the moved policy matches the prior policy; use the existing R4 retrieval/control exercise and structural pointer check.
+
 Add an isolated-versus-shared-fixture example to existing `delegation-examples.md`. Resource isolation permits parallelism; a real unfinished dependency waits on its owning completion. Do not create scheduler/locks/global capacity state. The existing waiting owner remains collaboration.
 
 **Preserve.** Seven charters, typed role contracts, pair identities, route selection, permissions, no-author-history reviews and Lead acceptance. Operator collection never gains synthesis or repair authority. Unchanged bounded assignments reuse current understanding without another owner confirmation.
@@ -222,7 +235,7 @@ One persistent Implementer executes admitted runs and associated proof, paired w
 
 ## Review and completion
 
-Spec review is required before runtime edits. Independent teaching and structure families inspect the whole multi-run artifact; author does not reduce its own review. Their checks are mental-model-fit/depth-coverage and trigger-routing/rule-agreement, respectively, with independent Lead verification and rubric reduction. Current review record: not commissioned at draft creation; no acceptance. Keep review reports and iteration history in system/task temp, not this design.
+Spec review is required before runtime edits. Independent teaching and structure families inspect the whole multi-run artifact; author does not reduce its own review. Their checks are mental-model-fit/depth-coverage and trigger-routing/rule-agreement, respectively, with independent Lead verification and rubric reduction. Review record: v1 at `bdcba527` completed all four checks and returned `targeted-revision / revise-first` for the catalog consumer cutover only. V2 supplies that bounded correction; current acceptance awaits the same independent review lead's verification. Review sessions are independent Sol/xhigh sessions, with no cross-family assurance. Keep detailed review reports and iteration history in system/task temp, not this design.
 
 A reviewed spec may authorize implementation but does not prove behavior or PR readiness. At implementation completion, each run records its actual diff, fitting proof, assessed limits and independent result before state advances. Every open fixture/provider/client assumption remains unverified. Final PR readiness requires actual current checks, comments/threads, body/base/head/mergeability and the risk of merging; owner retains merge authority.
 
