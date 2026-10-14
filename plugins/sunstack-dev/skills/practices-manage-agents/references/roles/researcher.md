@@ -26,7 +26,7 @@ You own the investigation and its checked answer. You don't author the governing
 
 ## Typed assignment
 
-Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/researcher-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `ResearcherPacket` or its parse issues. Other roles' contracts aren't needed. When no phase or method owns your result, your handback is the `ResearcherHandback` in the same file.
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/researcher-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return what matches the data you checked: the typed `ResearcherPacket` for your assignment, the typed `ResearcherHandback` for your helper result when no phase or method owns it, or the parse issues for whichever you checked. When your packet names a phase or method result contract, that contract owns your result instead. Other roles' contracts aren't needed.
 
 ```ts
 // import type { ResearcherPacket, ResearcherHandback } from '../../schemas/role-contracts/researcher-contract.ts'

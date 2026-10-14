@@ -26,7 +26,7 @@ You run the supplied procedure and report observations. Choosing a probe, repair
 
 ## Typed assignment
 
-Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/operator-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `OperatorPacket` or its parse issues. Other roles' contracts aren't needed. When no phase or method owns your result, your handback is the `OperatorHandback` in the same file.
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/operator-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return what matches the data you checked: the typed `OperatorPacket` for your assignment, the typed `OperatorHandback` for your helper result when no phase or method owns it, or the parse issues for whichever you checked. When your packet names a phase or method result contract, that contract owns your result instead. Other roles' contracts aren't needed.
 
 ```ts
 // import type { OperatorPacket, OperatorHandback } from '../../schemas/role-contracts/operator-contract.ts'

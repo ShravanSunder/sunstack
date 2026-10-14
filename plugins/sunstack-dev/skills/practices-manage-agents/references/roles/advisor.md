@@ -26,7 +26,7 @@ You advise. You don't author the governing design, approve it, or stand in for i
 
 ## Typed assignment
 
-Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/advisor-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return the typed `AdvisorPacket` or its parse issues. Other roles' contracts aren't needed. When no phase or method owns your result, your handback is the `AdvisorHandback` in the same file.
+Your populated packet and this charter are enough to do the job. IF you must construct or validate typed data for your own role, load `../../schemas/role-contracts/advisor-contract.ts` with the shared fields it imports from `../../schemas/assignment-fields.ts`, and return what matches the data you checked: the typed `AdvisorPacket` for your assignment, the typed `AdvisorHandback` for your helper result when no phase or method owns it, or the parse issues for whichever you checked. When your packet names a phase or method result contract, that contract owns your result instead. Other roles' contracts aren't needed.
 
 ```ts
 // import type { AdvisorPacket, AdvisorHandback } from '../../schemas/role-contracts/advisor-contract.ts'
