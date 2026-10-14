@@ -1,6 +1,6 @@
 # Useful practice and principle composition — project 1 specification
 
-Draft v2, 2026-10-14. Owner-directed behavior-changing updates. This document is the proposal for one implementation PR, containing 11 runs with exactly one named skill per run. All runs are proposed; current spec acceptance, implementation and behavior proof are not claimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
+Specification v2, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all runtime runs remain proposed, with implementation and behavior proof unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
 
 ## Purpose and success
 
@@ -235,7 +235,7 @@ One persistent Implementer executes admitted runs and associated proof, paired w
 
 ## Review and completion
 
-Spec review is required before runtime edits. Independent teaching and structure families inspect the whole multi-run artifact; author does not reduce its own review. Their checks are mental-model-fit/depth-coverage and trigger-routing/rule-agreement, respectively, with independent Lead verification and rubric reduction. Review record: v1 at `bdcba527` completed all four checks and returned `targeted-revision / revise-first` for the catalog consumer cutover only. V2 supplies that bounded correction; current acceptance awaits the same independent review lead's verification. Review sessions are independent Sol/xhigh sessions, with no cross-family assurance. Keep detailed review reports and iteration history in system/task temp, not this design.
+Spec review is required before runtime edits. Independent teaching and structure families inspect the whole multi-run artifact; author does not reduce its own review. Their checks are mental-model-fit/depth-coverage and trigger-routing/rule-agreement, respectively, with independent Lead verification and rubric reduction. Review record: v1 at `bdcba527` completed all four checks and returned `targeted-revision / revise-first` for the catalog consumer cutover only. The same independent review lead verified that correction at v2 `2d57193b` and returned `great / accepted-to-implement`, four checks complete, no accepted findings open. This process-only record preserves the reviewed v2 meaning; runtime dispatch, proof, PR readiness and release remain separate. Review sessions are independent Sol/xhigh sessions, with no cross-family assurance. Keep detailed review reports and iteration history in system/task temp, not this design.
 
 A reviewed spec may authorize implementation but does not prove behavior or PR readiness. At implementation completion, each run records its actual diff, fitting proof, assessed limits and independent result before state advances. Every open fixture/provider/client assumption remains unverified. Final PR readiness requires actual current checks, comments/threads, body/base/head/mergeability and the risk of merging; owner retains merge authority.
 
