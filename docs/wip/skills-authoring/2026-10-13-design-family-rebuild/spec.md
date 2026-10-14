@@ -127,4 +127,4 @@ Each run needs a complete teaching/structure source assessment and independent s
 
 Main executes only after a ready reviewed per-run commission. Same Verifier examines real proof/current applicability, same Lead reads decisive evidence and accepts, and retained independent reviewers close findings. No extra review fleet, separate ADR/event store or full-code-generation experiment follows.
 
-Implementation and proof status are recorded on the draft PR and the work trail, not in this spec. Before any delivery-ready claim: independent review closure, planner convergence (F6) and behavior evaluation; no merge or release is authorized.
+Implementation and proof status are recorded on the draft PR and the work trail, not in this spec. Before any delivery-ready claim: independent review closure and planner convergence (F6). Teaching effect and live routing remain unverified until a separately admitted evaluation; no merge or release is authorized.

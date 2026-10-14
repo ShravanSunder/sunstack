@@ -1,6 +1,6 @@
 # Delivered Evidence and Test Adequacy
 
-This reference owns judging delivered work against the adopted design: whether each piece of evidence applies to what was delivered, whether the delivered tests carry out the Test Design, what the red-to-green record shows, and who corrects each gap.
+This reference owns judging delivered work against the adopted design: whether each piece of evidence applies to what was delivered, whether the delivered tests carry out the expected regression strategy, what the red-to-green record shows, and who corrects each gap.
 
 Expected inputs: the governing basis the Verifier commission supplies, including the adopted Verification Design and Test Design when it names them, the delivered head and target, the delivered tests read in full, and the executor's actual logs and observations.
 
@@ -12,16 +12,16 @@ Evidence applies to a delivered claim when it observed the delivered target (bui
 
 Reuse is legitimate when nothing the evidence depends on has changed. A permanent journey ran at commit `a1` and observed pane B's input on the installed build. The delivered head `a4` changes only documentation and an unrelated export module. The journey's code paths, configuration and target properties are unchanged, so rerunning it adds nothing; report it as reused, with that reason. Had `a4` touched the router, the journey would need to run again at `a4`. Reusing adequate evidence is honest; rerunning it only to look independent is not.
 
-## Do the Delivered Tests Carry Out the Test Design?
+## Do the Delivered Tests Carry Out the Expected Strategy?
 
-Compare the delivered tests with the adopted Test Design, scenario by scenario:
+Compare the delivered tests, scenario by scenario, with the adopted Test Design when the commission names one, and otherwise with the commission's actual regression and proof expectations. Do not treat a document the commission does not name as the standard; an expectation the judgment needs that no governing source holds is a gap for the Lead.
 
-- **Placement.** Is each scenario at the layer the design chose, with the interaction it claims kept real? A routing scenario delivered as a unit test with a mocked pane writer does not carry out an integration scenario.
+- **Placement.** Is each scenario at the layer the expectations chose, with the interaction it claims kept real? A routing scenario delivered as a unit test with a mocked pane writer does not carry out an integration scenario.
 - **Assertion.** Does the assertion reject the named wrong behavior and accept every permitted outcome? An assertion on global event order where the Specification leaves it open fails a correct implementation.
 - **Oracle.** Does the expected value come from the contract, a literal or a reviewed table, rather than from the code under test?
-- **Completion.** Does the test wait on the correlated signal the design named, with a bound, rather than sleeping?
+- **Completion.** Does the test wait on the correlated signal the expectations named, with a bound, rather than sleeping?
 
-A gap here is a product-test correction for the Implementer. A scenario the design itself got wrong is a design question for the Lead. The Verifier edits neither the product suite nor the design.
+A gap here is a product-test correction for the Implementer. A scenario the expectations themselves got wrong, or a missing expectation, is a question for the Lead. The Verifier edits neither the product suite nor the design.
 
 ## What the Red Record Shows
 
@@ -51,4 +51,4 @@ Name one owner per gap:
 
 Report observations and limits. Acceptance stays with the Lead, and nothing in this judgment grants permission to change product code, product tests, or to run mutation or property tooling.
 
-Complete when: each piece of evidence is marked applicable, reused with its reason, or not applicable; each Test Design scenario is matched to its delivered test or marked missing; each scenario's red chronology is established, unestablished, or a gap; and every gap has one correction owner.
+Complete when: each piece of evidence is marked applicable, reused with its reason, or not applicable; each expected scenario, from the named Test Design or the commission's expectations, is matched to its delivered test or marked missing; each scenario's red chronology is established, unestablished, or a gap; and every gap has one correction owner.
