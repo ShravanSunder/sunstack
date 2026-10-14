@@ -4,7 +4,7 @@ This reference owns externally observable contract and negative-space inspection
 
 Expected inputs: requirement inventory, consumers, external surfaces, compatibility constraints, and known failure policies.
 
-Return: applicable contract slots per surface, unresolved policy decisions, examples/counterexamples, and requirement links.
+Return: the permitted and forbidden behavior per load-bearing surface, the literal-counterexample correction for each material obligation, unresolved policy decisions, and requirement links.
 
 For each load-bearing UI, API, CLI, protocol, schema/event, configuration, operator, or human/agent artifact surface, inspect:
 
@@ -43,6 +43,31 @@ Bad:
 - exposing internal component names as public contract without an authoritative reason;
 - claiming atomic success when partial external effects are possible.
 
+## Break the Words
+
+For each material obligation, write the cheapest implementation that satisfies its words, then check it against the outcome the owner adopted. When the cheap implementation passes the words and misses the outcome, the obligation names a proxy instead of the outcome. Rewrite it over the observable result, and say which near-miss counts as failure.
+
+```text
+Words:    The dashboard shows current figures.
+Cheap:    Rebuild the figures once a day; "current" is whatever the last rebuild produced.
+Missed:   The owner's operators act on figures within minutes of a transaction.
+Rewrite:  Figures include every transaction committed at least five minutes before the
+          page loads, and the page shows the as-of time it reflects.
+```
+
+```text
+Words:    Duplicate submissions are handled.
+Cheap:    Reject every second request with the same key, including a retry after a timeout.
+Missed:   The owner wanted a retry to return the original result.
+Rewrite:  For a repeated request with the same idempotency key and equivalent payload,
+          the service returns the original outcome and performs no second side effect.
+          A different payload under the same key is rejected.
+```
+
+A clean case needs no rewrite: "The export file contains one row per invoice in the selected period" already fails a cheap implementation that drops or duplicates rows, because a row count against the source invoices tells pass from fail.
+
+Stop when no cheap implementation you can name satisfies the words while missing the outcome. An obligation you could not break because you never tried is unfinished.
+
 ## Negative Space
 
 Name the nearest behavior a capable implementer may assume but must not build. Examples:
@@ -55,4 +80,4 @@ Name the nearest behavior a capable implementer may assume but must not build. E
 
 Undefined behavior is not permission to violate an invariant. Say which freedom remains and which guarantees still constrain it.
 
-Complete when: each load-bearing consumer can predict normal, boundary, failure, partial, cancellation, and compatibility behavior without guessing internal structure.
+Complete when: each load-bearing consumer can predict normal, boundary, failure, partial, cancellation, and compatibility behavior without guessing internal structure, and each material obligation has survived its literal counterexample.

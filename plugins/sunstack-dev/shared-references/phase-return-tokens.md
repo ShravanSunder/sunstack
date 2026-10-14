@@ -7,6 +7,8 @@ When a phase, practice, or shared reference must send work elsewhere, it returns
 | `requirements-gap` | the missing owner meaning, evidence |
 | `specification-gap` | the missing observable obligation, evidence |
 | `program-design-gap` | the structural gap, evidence |
+| `test-design-gap` | the missing regression scenario, oracle, or strategy, evidence |
+| `verification-design-gap` | the missing real reference or observation strategy, evidence |
 | `ready-for-planning` | reviewed design identities |
 | `plan-defect` | plan anchor, defect, evidence, and the plan's existing `originating planner` field |
 | `ready-for-implementation` | plan path and revision |

@@ -23,6 +23,7 @@
     "fixtures/**/cases.ts",
     "pressure-scenarios/**/cases.ts",
     "vitest.config.ts",
-    "../../plugins/sunstack-dev/skills/*/schemas/**/*.ts"
+    "../../plugins/sunstack-dev/skills/*/schemas/**/*.ts",
+    "../../plugins/sunstack-dev/shared-references/schemas/**/*.ts"
   ]
 }

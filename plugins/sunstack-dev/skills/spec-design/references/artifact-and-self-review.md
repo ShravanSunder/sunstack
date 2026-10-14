@@ -4,11 +4,11 @@ This reference owns artifact structure choice, normative-home integrity, navigat
 
 Expected inputs: authority/problem model, outcomes/non-goals, requirement and contract inventories, cross-cutting obligations, proof coverage, and repo documentation conventions.
 
-Return in workflow order: first the artifact structure decision, artifact identity, traceability/navigation result, view-verification result, and pruned elements; after the caller runs the complete author self-check stage, return the author self-check with exact gaps.
+Return the distinct artifact identity and its structure decision, the required views with their verification result, the traceability and navigation result, pruned elements, and, once the caller has re-read the whole document, the author self-check with its exact unresolved gaps.
 
 ## Choose Structure for the Reader
 
-Apply the identity representation returned from the shared Requirements/Specification/Program Design reference before choosing sections. For substantial file-backed work, create a Specification artifact whose pointer differs from the admitted Requirements pointer. For chat-only work, keep separately labeled Requirements and Specification records. A combined `Requirements/spec` artifact is never a valid structure.
+Apply the identity representation returned from the shared design-document reference before choosing sections. For substantial file-backed work, create a Specification artifact whose pointer differs from the admitted Requirements pointer. For chat-only work, keep separately labeled Requirements and Specification records. A combined `Requirements/spec` artifact is never a valid structure.
 
 A substantial specification normally needs semantic homes for:
 

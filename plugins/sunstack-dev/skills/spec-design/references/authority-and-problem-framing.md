@@ -4,10 +4,7 @@ This reference owns source classification, decision authority, consumer framing,
 
 Expected inputs: bounded request, current artifact when revising, candidate sources, repo instructions, and known decision makers.
 
-Return in workflow order:
-
-1. Artifact boundary, consumers, decision authority, governing-source identities/classes and current applicability, confirmed goal boundary, and accepted-requirements recovery.
-2. After the caller completes problem modeling, the complete authority/problem model with current reality, desired gap, important decisions, conflicts, and evidence gaps.
+Return the consumer problem (affected classes, current reality and desired gap), the adopted goal boundary, the governing sources with their class, authority and current applicability, the accepted-requirements recovery when revising, and the authority conflicts and evidence gaps.
 
 ## Classify Sources
 
@@ -33,6 +30,18 @@ Bad:
 - converting current implementation accidents into requirements;
 - presenting an author recommendation as a user decision;
 - using “industry best practice” without transfer assumptions.
+
+## Adopted Constraint or Invented Restriction
+
+A constraint binds the design only when its trace ends at an owner decision or a binding contract. Follow each restriction back to where it came from before writing it as normative.
+
+Good: "Package B stays untouched" traces to the owner's confirmed goal boundary. It binds Program Design even though a cleaner structure would touch package B.
+
+Bad: "The system never retries a failed send" traces to the author's sense of caution. Nobody adopted it, and it forbids a retry the owner may want. Drop it, or bring it to the owner as a decision with its cost.
+
+Bad: "Messages are delivered in order" copied from the current implementation's behavior. Code shows what happens today. It becomes a promise only when an owner or contract adopts it; until then it is observational evidence and an open question.
+
+When the trace ends at you, the restriction is a proposal. A proposal that survives scrutiny still needs the owner before it becomes a `MUST`.
 
 ## Frame the Problem
 

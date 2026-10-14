@@ -461,15 +461,19 @@ describe("user requirements and design-view contracts", () => {
     ).toBe(false);
   });
 
-  test("preserves both design identities across spec-design review calls", () => {
+  test("gives each spec-design document its own required local review with both identities", () => {
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
 
     expect(specDesign).toContain(
-      "requested future mode `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect",
+      "requested mode `requirements-only` or `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect",
     );
     expect(specDesign).toContain(
-      "carrying the distinct Requirements and Specification identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps",
+      "`callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive",
     );
+    expect(specDesign).toContain(
+      "carrying the document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps",
+    );
+    expect(specDesign).toContain("MUST load `schemas/spec-design-result.ts`");
   });
 
   test("supports file-backed and chat-only artifact navigation review", () => {

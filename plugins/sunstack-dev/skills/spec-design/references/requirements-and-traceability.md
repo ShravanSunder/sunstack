@@ -1,10 +1,33 @@
 # Requirements and Traceability
 
-This reference owns construction and repair of normative requirements plus coverage from problem and outcome to the proof-obligation slot. `proof-obligations.md` alone selects the proof modality.
+This reference owns two things: what the Requirements document must cover, and how the Specification's normative requirements are built and traced. `proof-obligations.md` alone selects the proof modality.
 
-Expected inputs: authority/problem model, the stage-2 entity table and undefined-noun gaps, goals/non-goals, resolved decisions, candidate constraints, and current requirement text.
+Expected inputs: the authority/problem model and adopted goal boundary; for Specification work, also the entity table and undefined-noun gaps, resolved decisions, candidate constraints, and current requirement text.
 
-Return: requirement inventory and coverage map, including exact gaps or conflicts.
+Return, for the Requirements: the adopted Requirements coverage, each normative-eligible U row with its authority, and the owner meaning still unmet. For Specification obligations: the requirement inventory and coverage map, with exact gaps or conflicts.
+
+## The Requirements Document
+
+Each adopted need becomes one U row that a person can confirm or correct:
+
+```text
+U3  Operator (direct user)
+    need:       text sent to a named pane arrives in that pane, even when another pane has focus
+    why:        operators lose typed work when it lands in the focused pane
+    evidence:   support thread 2026-09-30, three reports from operators
+    authority:  authorized, owner decision in the design thread 2026-10-02
+    priority:   must, assigned by the owner
+```
+
+Bad: "U3 Users want reliable routing." It names no class, no observable outcome and no authority, so nobody can confirm it and no obligation can trace to it.
+
+Bad: a row marked `authorized` because the author found it convincing. Authority belongs to whoever adopted the row, and a convincing proposal stays a proposal with a visible hypothesis label.
+
+Coverage means every adopted owner statement inside the goal boundary lands on a U row or a named non-goal, and every row either carries authority or shows its hypothesis state. Unmet owner meaning is a question whose answer would change a row ("does a hidden pane count as addressable?"), never a request to "clarify requirements".
+
+Review the Requirements in `requirements-only` mode before deriving obligations from it. A wrong U row propagates into every obligation that cites it, and catching it before the Specification exists is cheap.
+
+Complete for the Requirements when: every adopted statement in the boundary has a row or a non-goal, each normative-eligible row has inspectable authority, and each unmet meaning is an exact question with its owning document.
 
 ## Requirement Shape
 
@@ -98,4 +121,4 @@ Flag:
 
 Apply the stranger test: a capable reader with no session history must state the same pass/fail behavior and proof obligation.
 
-Complete when: every material requirement is authoritative, singular, observable, written over defined entities, traceable in both directions through U when present, and separated from implementation tasks.
+Complete for Specification obligations when: every material requirement is authoritative, singular, observable, written over defined entities, traceable in both directions through U when present, and separated from implementation tasks.

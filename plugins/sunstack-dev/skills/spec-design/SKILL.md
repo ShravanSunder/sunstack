@@ -1,134 +1,68 @@
 ---
 name: spec-design
-description: "Use when authoring or revising durable Requirements from settled meaning, or a Specification's observable obligations, domain entities, and coverage views. Not for eliciting genuinely unwritten owner meaning (discuss-pathfinding)."
+description: "Use when authoring or revising durable Requirements from settled owner meaning, or a Specification's domain entities and observable obligations. Not for eliciting unwritten owner meaning (discuss-pathfinding) or choosing internal structure (program-design)."
 ---
 
 # Spec Design
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-Requirements, Specification, and Program Design are separate authoritative concepts:
+This skill answers one question: what must be true for the people this work serves, and how would someone outside the system tell whether it is? It answers in two documents with separate homes:
 
 ```text
-Requirements
-  WHY, for whom, and within what boundary?
-  Authorized needs, desired outcomes, priorities, and limits.
-                    |
-                    v
-Specification
-  WHAT must be observably true?
-  Normative observable obligations traced to Requirements.
-                    |
-                    v
-Program Design
-  HOW will the internal system satisfy it?
-  Structural realization of the fixed observable obligations.
+Requirements    why, and for whom
+                who is affected, what hurts today, which outcomes the owner adopted,
+                what stays protected, what is out of bounds
+                        |
+                        v
+Specification   what must be observably true
+                the nouns the obligations talk about, the obligations over them,
+                failure behavior, and the proof each claim needs
 ```
 
-A specification is the observable contract for authorized product meaning. It never substitutes for the separately identifiable Requirements source that authorizes it.
+Neither document says how the system is built. Program Design owns internal structure, Test Design owns the regression strategy, and Verification Design owns real-system proof.
 
-The Lead loads this skill and authors the Requirements and Specification itself, including their views, diagrams, organization, settled sections and visual briefs. Bounded helpers may return evidence. A rendering tool may realize pixels, typography, spacing and style from an unchanged Lead-authored brief, but the Lead chooses the reader question, exact labels and relationships, semantic composition, invariants and exclusions and accepts or corrects the candidate. Neither route transfers governing authorship or makes an image the normative home.
+Two judgments carry the work. The first is legitimacy: every normative statement traces to an owner decision or a binding contract. A well-argued proposal, the current code, and your own restatement of the owner are not decisions. The second is precision: for each obligation, picture the cheapest implementation that satisfies its words. If that implementation could still miss the outcome the owner wants, the words are wrong, and you rewrite them until it fails.
 
-It turns evidence and authorized decisions into a contract that another capable agent can realize without inventing product meaning:
+The Lead loads this skill and writes both documents, their views and their visual briefs. Helpers return evidence. A rendering tool may realize pixels from an unchanged Lead-authored brief; it never becomes the author.
 
-```text
-consumer and problem
-  -> current observable reality
-  -> desired outcome
-  -> domain entities the obligations are written over
-  -> normative requirement
-  -> observable contract or constraint
-  -> failure expectation
-  -> proof obligation
-```
+## Main Path
 
-Source authority establishes which meaning is legitimate; it supports the contract rather than replacing it as the primary model. Every `MUST` needs a legitimate basis. Every material requirement needs an observable consequence. An obligation is a sentence about nouns, so the Specification defines those nouns — what makes two instances the same, how they relate, which states they pass through — before it writes obligations over them. Unresolved owner meaning routes through `discuss-pathfinding`; internal component structure and the binding of entities to packages, schemas, and wire shapes stay downstream in `program-design`.
+### 1. Frame the problem and its authority
 
-## Boundary
+Start from the people affected. Name each affected class (end users, developers consuming an API or CLI, buyers, operators, downstream agents), what they observe today, who pays for it, and the difference the owner wants. Keep the observable problem apart from its suspected cause; an unproven cause never authorizes product behavior.
 
-This skill admits or materializes durable Requirements from already-settled authoritative meaning and authors the separate Specification:
+Then sort the sources. Normative sources are owner decisions, adopted records and binding external contracts. Everything else is evidence: code shows current behavior, incidents show cost, prior art shows options. Evidence about an internal mechanism yields an observable outcome to preserve, never an owner choice about keeping that mechanism.
 
-- Requirements: affected people, authorized needs, desired outcomes, priorities, limits, and non-goals;
-- Specification: normative observable obligations traced to the Requirements identity;
-- problem, consumers, and current observable behavior;
-- domain entities: canonical terms with stable `E` identifiers, identity rules, relationships, invariants, and observable states that obligations are written over;
-- source authority and important user decisions;
-- normative requirements and traceability;
-- public or externally observable UI, API, CLI, data, configuration, and operational contracts;
-- externally required failure, compatibility, security, reliability, performance, accessibility, privacy, and operability obligations;
-- proof modalities required by material obligations;
-- the specification artifact and author self-check.
+MUST load `../../shared-references/requirements-specification-program-design.md` and return the document identities this work uses: the Requirements home, the separate Specification home, and whether each is a file or a labeled chat record.
 
-It does not elicit or confirm genuinely unwritten owner meaning and does not choose components, internal owners, dependency direction, state storage, call graphs, recovery mechanisms, task order, files, or exact validation commands, and it does not bind an entity to a package, schema, type, table, or wire shape. Route unwritten owner meaning to `discuss-pathfinding`, structural How and entity binding to `program-design`, and review-only work to `spec-program-review`.
+MUST load `references/authority-and-problem-framing.md` and return the consumer problem, the adopted goal boundary, the governing sources with their authority, and the authority conflicts.
 
-Routing cases:
+Read `principle-build-the-shared-model-first` in full when you frame the problem, and `principle-read-ground-truth-first` in full before you claim what a source establishes.
 
-```text
-true:      "Write a durable Requirements document from these settled, user-confirmed decisions. Do not write the Specification yet."
-near miss: "Interview me to discover what users need and which boundary I actually want." -> discuss-pathfinding
-near miss: "Clean up this settled Requirements document without changing its meaning." -> docs-maintain
-near miss: "Take this through Requirements, Specification, Program Design, and independent three-artifact design review." -> the full design-cycle workflow, not this phase
-```
+IF important owner meaning is unwritten, or the sources cannot settle meaning the Requirements or Specification needs, use `discuss-pathfinding`, record which document owns the missing meaning, and resume with its returned record; never re-ask a decision it already confirmed. Ask the owner only what legitimate sources cannot settle, one load-bearing decision at a time. IF you bring the owner a decision, read `principle-name-the-tradeoffs` in full, then load `../../shared-references/owner-decision-brief.md` and return the brief.
 
-## Terminal Contract
+IF an external platform, protocol, library or empirical claim could change an obligation and local sources do not establish it, use `practices-research` or a bounded lookup, and return the source, its version, and the transfer assumptions before you derive the obligation.
 
-Return exactly one:
+The caller may pass a `new artifact home` policy. When it names `<project-root>/docs/specs/`, create new Requirements and Specification files there as distinct paths. Authoritative pre-existing artifacts stay where they live.
 
-```text
-locally-ready
-decision-needed
-evidence-blocked
-deferred
-```
+Completion: you can state who is affected, what they observe now, which difference the owner adopted and which source authorizes it, and every remaining owner question is exact.
 
-A `locally-ready` result includes distinct Requirements and Specification identities; governing-source identities, authority, current applicability, and coverage; the confirmed goal boundary; the accepted requirements set; load-bearing decisions; requirement/proof inventory; author self-check; required independent local-review coverage; remaining gaps; and an explicit statement that three-artifact design acceptance is not claimed. These are returned workflow state, not narrative sections in the specification.
+### 2. Hold the boundary
 
-For an explicitly Requirements-only request, finish the Requirements identity and return `deferred` for Specification. Before that early return, state the Requirements reader question at Requirements altitude—affected people, their job, current pain and desired outcome—and MUST load `../../shared-references/diagram-rendering-and-fallbacks.md` to return the selected medium, semantic-preservation result, actual visual check and exact generated-image/capability gap for that Requirements artifact. This call does not run Specification-only entity, context or coverage predicates and must not invent a Specification, interface or internal component. Record the caller's authority to stop there, the consequence that Specification and Program Design are not ready, the exact visual or capability gap when one remains, and the condition for re-entering Specification work. Do not create a Specification or recommend `program-design`.
+Re-anchor before deriving or revising normative requirements: compare the proposed meaning with the confirmed goal, accepted requirements, permitted and protected systems, owner-set package limits, non-goals, and existing foundation from the confirmed goal boundary. Return `aligned` or the exact mismatch. On a mismatch, stop normative authoring and return the owner decision, or use `discuss-clarify-mental-models` when the shared model itself drifted. Keep the comparison in returned workflow state, not durable specification prose.
 
-Produce terminal labels by observable condition:
+Read `principle-hold-the-scope` in full at this comparison. It decides between an adopted constraint and an invented restriction. "Package B stays untouched", confirmed by the owner, binds the design. "Never retry a failed send", added because it felt safer, traces to no one; drop it, or bring it to the owner as a decision.
 
-- `locally-ready`: every completion blocker is cleared and the complete return above exists.
-- `decision-needed`: legitimate sources cannot settle load-bearing product meaning, public behavior, compatibility, policy, or cost/risk tolerance; return the decision owner and evidence, and IF returning `decision-needed`, load `../../shared-references/owner-decision-brief.md` and return the brief.
-- `evidence-blocked`: required governing or observational evidence is missing, inaccessible, stale, or contradictory enough that a truthful obligation cannot be derived; return the exact evidence and access/state change needed.
-- `deferred`: an authorized caller explicitly postpones scoped work after its consequence is recorded; return completed coverage, deferred scope, authority for deferral, consequence, and re-entry condition.
+When revising, classify the correction first: Requirements, Specification, Program Design, or a named combination. Removing unrelated machinery is a Program Design correction unless the owner also changes users, outcomes, obligations or proof. A Program Design-only correction routes to `program-design` and never narrows these documents. When both change, settle Requirements and Specification first.
 
-After producing the terminal result, return exactly one phase-guided route:
+A revision changes only what its correction touches. Recover the accepted requirements set from the current owner-confirmed record and confirmed goal boundary, or else from the last inspectable owner-accepted governing source; mutually narrowed current files never establish it by themselves. Reuse the existing identities and coverage links: affected classes, stable U/E/P/O/R/C/V identities, priorities and assigners, named variants, defaults, observable contracts, constraints and proof obligations. Produce inspectable per-item coverage that names each accepted identity, authoritative meaning, and specification destination or owner-authorized supersession. A count or an assertion that coverage is intact is not coverage evidence. Every removed item needs explicit owner authority.
 
-```text
-locally-ready -> recommend program-design
-decision-needed | evidence-blocked | deferred -> stop with the exact reason
-```
+Completion: the comparison is `aligned` or has returned the exact mismatch and its owner route, and on a revision every accepted identity has a destination or an owner-authorized supersession.
 
-When unmade owner meaning blocks Requirements or Specification, use `discuss-pathfinding` and resume this phase with its clarified return. Pathfinding is not a separate next phase after `locally-ready`. Before recommending `program-design`, inspect its declared inputs and return a compact pointer-based handoff containing the distinct Requirements and Specification identities, confirmed goal boundary and accepted-requirements status, phase result, exact remaining gaps, and why structural How is next. Do not copy full artifacts, unrelated history, or orchestration counters. A direct spec-design invocation carries no cycle budget.
+### 3. Write the Requirements, then confirm and review them
 
-## Workflow
-
-### 1. Establish authority, audience, and artifact boundary
-
-Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Requirements and Specification as distinct resolvable paths beneath that home and return both exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
-
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the applicable identity representation, the Requirements/Specification separation check, and the identities downstream phases must consume.
-
-MUST load `references/authority-and-problem-framing.md` and return its first result for stage 1: artifact boundary, consumers, decision authority, governing-source identities/classes and current applicability, confirmed goal boundary, and accepted-requirements recovery. Retain the loaded reference and working state for stage 2 and the terminal return. Surface an exact owner decision immediately when it blocks authoring.
-
-Inventory current sources before treating the draft as truth. External popularity is advisory evidence unless an authorized contract makes it normative.
-
-When implementation or incident evidence names internal mechanisms, classify it as evidence and return every authorized observable outcome before any remaining gap. That evidence does not create an owner choice between retaining the mechanism and turning it into a product contract. Route structural choices to `program-design`; ask only about missing product meaning or an actual external compatibility or operational constraint established by a legitimate source.
-
-IF important user or stakeholder meaning is unwritten, or an authoritative source cannot settle required Requirements or Specification meaning, use `discuss-pathfinding`, record which of those two homes owns the missing meaning, and return the complete record, record identity and rows, goal boundary established by `discuss-pathfinding` and checked against the fields in the already-loaded reference, explicit confirmation or correction by the authorized owner, refusal or fallback result, and exact gaps.
-
-Consume pathfinding's complete return as input to the recorded Requirements or Specification owner. Do not create a second Requirements record or re-ask an already confirmed decision. If a field required by the already-loaded reference is absent, keep it as an exact gap. Classify the returned record in the governing-source inventory.
-
-If the user declines extraction, reassess the remaining sources:
-
-- continue when an alternate authoritative source exists;
-- return `decision-needed` when owner meaning is missing;
-- return `evidence-blocked` when necessary evidence is missing;
-- keep only non-blocking uncertainty as a visible hypothesis gap.
-
-Decline itself selects no terminal label, and a hypothesis never authorizes a normative requirement or `locally-ready`.
-
-The minimum accepted Requirements source contract is:
+The Requirements document organizes the owner's settled meaning. It meets this minimum source contract:
 
 ```text
 source identity
@@ -141,175 +75,118 @@ priority and priority assigner
 unresolved hypotheses
 ```
 
-A row is normative-eligible only when its producer-owned authority state is `authorized`. A pathfinding record or an equivalent source may satisfy this contract; equivalent sources need not copy the pathfinding document shape. Reuse one qualifying, separately identifiable Requirements source. When settled authoritative meaning is distributed across sources but has no qualifying Requirements home, materialize one normalized Requirements artifact without eliciting, confirming, or inventing meaning. Then preserve its stable identities, evidence/authority classifications, priorities, and gaps in Specification traceability.
+A row is normative-eligible only when its producer-owned authority state is `authorized`. Reuse one qualifying Requirements source when it exists. When settled authoritative meaning is spread across sources with no qualifying home, materialize one normalized Requirements artifact from it, without asking, inferring or confirming missing meaning.
 
-Before deriving normative requirements, consume the explicitly confirmed goal boundary or apply the already-loaded reference's goal-boundary check to another governing source. Proposed meaning outside that boundary returns `decision-needed`; specification completeness does not authorize it.
+State each outcome separately from any requested mechanism, and name the nearest plausible expansion the work will not make; a useful non-goal blocks a scope guess a capable implementer would make. When independently governed capabilities, protocols or consumer journeys are mixed, split them into semantic slices before polishing requirements.
 
-IF an external platform, protocol, library, policy, or empirical claim could change product meaning or an observable obligation and current local sources do not establish it, perform a bounded lookup directly or use `practices-research`; return the exact external source identity/version, authority status, transfer assumptions, and remaining evidence gap before deriving the affected obligation.
+MUST load `references/requirements-and-traceability.md` and return the adopted Requirements coverage, each normative-eligible U row with its authority, and the owner meaning still unmet.
 
-Completion: the Requirements identity is qualifying, reused or materialized without duplication, and separate from the planned Specification identity; artifact boundary, consumers, decision authority, source classes, confirmed goal boundary, accepted-requirements recovery, and authority conflicts are explicit.
+Author the document by Authoring Each Document below. Then show it to the owner. Explicit confirmation, a correction, or an explicit waiver counts; vague assent, silence, delegation and your own restatement do not. Obtain its independent local review in mode `requirements-only` (step 8) before any Specification work.
 
-### 2. Model the problem and its domain before proposing obligations
+A Requirements-only request ends with its RequirementsResult. It creates no Specification and runs no Specification-only entity, context or coverage views.
 
-Name what happens today, who bears the cost, where it is observable, what proves it, and what would remain wrong if the requested feature existed only nominally. Keep implementation root cause separate from the observable problem.
+Completion: the Requirements identity is reused or materialized without duplication, the owner confirmed or waived it, and its local review is ready.
 
-Using the already-loaded `references/authority-and-problem-framing.md`, complete problem modeling and return its second result: the authority/problem model with current reality, desired gap, important decisions, conflicts, and evidence gaps. Retain it in working state for the artifact and terminal return.
+### 4. Define the nouns
 
-MUST load `references/domain-entities.md` and return the entity table — stable `E` identifier, canonical term, identity rule, relationships with cardinality, invariants, observable states, the source terms it canonicalizes, and the authorizing U rows when present or otherwise the settling source or decision record — with every slot filled from the sources or marked as an exact gap, plus undefined-noun gaps and any term routed to `discuss-pathfinding` with its exact same-instance question. Define an entity when the settled sources let two readers decide the same-instance question the same way; route a term only when they cannot. Deriving an identity rule or state from settled owner behavior statements is Specification authoring, not the Requirements inference that `references/authority-and-problem-framing.md` forbids. Three rationalizations leave nouns undefined and each is rejected here: "the words are obvious", "the data model is design's problem", and "the source did not define enough entity semantics, so I must ask" — the last is a stop only when two readers would answer differently. The test is whether a stranger reading only the Specification can decide every same-instance and state question the obligations depend on. An entity definition names no type, schema, table, package, or payload field; that binding is `program-design`'s work.
+An obligation is a sentence about nouns. "At most one pending reminder per ticket" cannot be tested until a reader knows what makes two reminders the same and when a reminder stops being pending. Define every entity the obligations will name: its identity rule, relationships with cardinality, invariants and observable states. Derive them from what the owner already said; reading "a fresh reminder, not the old one" as an identity rule is Specification work, because the owner already decided it. Route a term to `discuss-pathfinding` only when two careful readers of the settled sources would answer its same-instance question differently, and carry that exact question.
 
-When revising existing artifacts, classify the requested correction before editing: Requirements, Specification, Program Design, or a named combination. Removing unrelated concurrency, cleanup, reporter, or lifecycle machinery is a Program Design correction unless the authorized owner also changes users, outcomes, requirements, scenarios, defaults, observable obligations, or proof obligations. A Program Design-only correction routes to `program-design` and does not authorize narrowing the governing Requirements or Specification. When upstream meaning and Program Design both change, settle Requirements and Specification first.
+IF authoring or changing a domain entity, read `principle-define-the-domain-first` in full, then load `references/domain-entities.md` and return each entity's identity rule, states and invariants, with no type, schema, table, package or wire shape.
 
-For a semantic correction to an existing Requirements or Specification view, re-open its governing sources, re-run correction classification and the affected view predicate and semantic-field check, update affected trace links, and run artifact self-review. Skip unrelated stages unless the correction invalidates their source or decision result. Pure rendering-format changes route to `docs-maintain`.
+Completion: a stranger reading only the Specification can decide every same-instance and state question the obligations depend on.
 
-Using the comparison taught by `references/authority-and-problem-framing.md`, build the accepted requirements set from the current owner-confirmed requirements record and confirmed goal boundary. If unavailable, recover the last inspectable owner-accepted governing source. If neither exists or the sources conflict, return `decision-needed` with the authority conflict; mutually narrowed current files never establish the accepted starting point by themselves.
+### 5. Write the obligations, then try to break them
 
-Reuse the existing identities and coverage links for:
+Write each normative requirement in the shape the loaded `references/requirements-and-traceability.md` teaches: over defined entities, with a basis, an observable pass/fail condition, and its failure expectation. Cover normal behavior, boundaries, failure, partial success, cancellation, compatibility, and the nearest behavior deliberately left undefined.
 
-- affected classes and stable U/E/P/O/R/C/V identities;
-- priorities and assigners;
-- named variants such as skills or scenarios;
-- customer defaults;
-- observable contracts, constraints, and proof obligations.
+Then break each material obligation. Take the cheapest implementation that satisfies its words and ask whether it delivers the outcome:
 
-Do not create a separate ledger or duplicate document. Every removed or superseded item needs explicit owner authority.
+```text
+Words:    When an operator sends text to pane B, the send succeeds.
+Cheap:    The router acknowledges the request; the text lands in the focused pane, or nowhere.
+Result:   Outcome missed. An acknowledgement satisfied "succeeds".
+Rewrite:  When an operator sends text to pane B, the text appears in pane B's input
+          and in no other pane. An acknowledgement without that arrival is a failure.
+```
 
-Produce inspectable per-item coverage that names each accepted identity, authoritative meaning, and specification destination or owner-authorized supersession. A count or an assertion that coverage is intact is not coverage evidence.
+Keep breaking until no cheap implementation passes the words while missing the outcome.
 
-Re-anchor before deriving or revising normative requirements: compare the proposed meaning with the confirmed goal, accepted requirements, permitted and protected systems, owner-set package limits, non-goals, and existing foundation from the confirmed goal boundary. Return `aligned` or the exact mismatch. On mismatch, stop normative authoring and return the existing owner decision, or use `discuss-clarify-mental-models` when the shared model itself drifted. Keep the comparison in returned workflow state, not durable specification prose.
+IF authoring or changing an observable obligation, load `references/observable-contracts.md` and return the permitted and forbidden behavior plus the literal-counterexample correction.
 
-Completion: the current/desired gap is inspectable, each causal claim is evidenced or labeled as a hypothesis, every noun the desired outcomes name is a defined entity with an `E` identifier and every slot filled or marked as an exact gap, accepted-requirements coverage is inspectable when applicable, and the Re-anchor comparison is aligned or has returned the exact mismatch and owner route.
+For security, privacy, reliability, performance, accessibility, observability, data lifecycle and platform compatibility, state the externally required guarantee or mark it not applicable with a reason. Name assets, actors and prohibited outcomes when sensitive behavior is in scope; enforcement design belongs to `program-design`.
 
-### 3. Define outcomes, non-goals, and semantic slices
+Completion: every goal is covered by obligations over defined entities, each consumer can predict normal, boundary, failure, partial, cancellation and compatibility behavior, and two capable implementers would not invent different product behavior.
 
-State the outcomes the change must create and the nearest plausible expansions it will not create. Separate outcomes from requested mechanisms.
+### 6. Name the proof each claim needs
 
-When independently governed capabilities, protocols, domains, or consumer journeys are mixed, split those semantic slices before polishing requirements.
+MUST load `references/proof-obligations.md` and return which observable claims need proof and the independent reference each is judged against. Scenarios, oracles and test layers stay with `test-design`; real-system observation stays with `verification-design`. When no observation could tell pass from fail at the claimed boundary, return a `program-design-gap` for the missing seam instead of weakening the obligation.
 
-Completion: each goal has an observable success condition, each material non-goal blocks a likely scope guess, and every slice has one reason to change.
+Completion: every material obligation names evidence that could prove it at its real boundary, and every proof gap is explicit.
 
-### 4. Resolve decisions at the correct altitude
+### 7. Author the Specification and check it
 
-Search legitimate sources before asking. Ask only when product meaning, public behavior, irreversible compatibility, policy, or cost/risk tolerance remains undecidable.
+Author it by Authoring Each Document below. The Specification links to the Requirements identity instead of copying its needs, and every normative claim has exactly one home.
 
-Ask one load-bearing decision at a time: load `../../shared-references/owner-decision-brief.md` and return the brief, including foreclosed choices. Delegation, vague assent, silence, or a topic change is not decision authority.
+For substantial work, stage source notes, alternative wording and temporary U→E→P→O→R→C→V comparisons in working state or `tmp/design-workflows/<date>-<slug>/`. Scratch never owns normative meaning or becomes required reading.
 
-Completion: each load-bearing branch has durable authority evidence, is explicitly deferred with consequence, or produces `decision-needed`.
+Then re-read the whole document as an author self-check, using the procedure in the loaded `references/artifact-and-self-review.md`: authority conflicts, accepted-requirements coverage, traceability, vague or compound obligations, missing failure behavior, hidden internal How, contradictory goals and non-goals, questions disguised as assumptions, process residue, and elements that fail the human deletion test. The self-check is author evidence and never replaces independent review.
 
-### 5. Derive normative requirements
+Completion: a stranger can navigate from user need through entity, obligation, observable behavior and proof, and the self-check names every known gap.
 
-MUST load `references/requirements-and-traceability.md` with the stage-2 entity table and undefined-noun gaps to construct requirements over defined entities, repair vague or task-shaped statements, and return requirement-to-entity/problem/outcome/basis coverage plus any entity no requirement uses.
+### 8. Review each document, then return
 
-For substantial or uncertain work, stage source notes, alternative wording, prototype views, and temporary U→E→P→O→R→C→V comparisons in private working state, the repository's ignored scratch convention, or `tmp/design-workflows/<date>-<slug>/`. Quick work keeps the comparison in working state. Scratch never owns normative meaning or becomes required reading.
+Each document gets its own independent local review before its result is locally ready. Call `spec-program-review` using its `classify-review-requirement` operation with: requested mode `requirements-only` or `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `callerRequirement: required` on a document's first or substantive local cycle, which classification cannot waive. A later purely nonsemantic edit may pass `none` and reuse current coverage under that skill's semantic-change rules.
 
-For each requirement, contract, failure obligation, constraint, and proof obligation, name the confirmed need it serves and what becomes observably false or unverifiable if removed. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. Delete an element that changes neither the confirmed outcome nor a necessary truth boundary; a template slot does not authorize adjacent work.
+When review is required, invoke `spec-program-review` separately in that mode with fresh context and read-only authority, carrying the document identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps. Correct accepted findings here; the same review relationship checks the corrected anchors under `spec-program-review`'s bounded review-and-correction-round policy.
 
-Completion: every goal is covered, every requirement has a basis and observable pass/fail consequence, every normative statement names only defined entities — an obligation over an undefined noun routes back to stage 2, and an entity no requirement uses is pruned or its gap recorded — and two capable implementers would not need to invent different product behavior.
+MUST load `schemas/spec-design-result.ts` and return the RequirementsResult, plus the SpecificationResult when the request covered it, each after its own local review closed. A result is `locally-ready` (the document, its summary, its ready review, and for Requirements the owner's confirmation or waiver), `blocked` (an exact gap with its evidence), or `decision-needed` (the same plus the owner decision brief). Locally ready means the caller can use the document; it never means the five-document design is ready. Program Design consumes the Specification result.
 
-### 6. Specify observable contracts and negative space
+IF returning a substantial specification in chat and its problem, consumer, authority or requirement-to-proof relationships are non-obvious, use the `presentation-*` skill matching the current surface to render only those relationships; an exact user-requested format wins.
 
-MUST load `references/observable-contracts.md` to inspect each load-bearing external surface and return its applicable contract, failure, compatibility, example, and undefined-behavior slots.
+Completion: each returned result validates, its review closure names the document it produced, and every gap is in the result instead of in the documents.
 
-Completion: each consumer can predict normal, boundary, failure, partial-success, and compatibility behavior without knowing the internal architecture.
+## Authoring Each Document
 
-### 7. State cross-cutting obligations without designing their realization
+Read `principle-write-for-the-reader` in full before you organize a document. Lead with the smallest Why/What map a person needs to confirm the problem and intended outcome, then reveal requirements, entities, obligations, failure behavior, constraints and proof. Link every normative-eligible U row to the obligation it authorizes, and show one compact `Requirements -> Specification -> Program Design` path instead of repeating each document's role.
 
-For security, privacy, reliability, performance, accessibility, observability, data lifecycle, compliance, and platform compatibility, state the externally required guarantee or mark it not applicable with a reason.
+Apply the Required Why/What Views below. For each selected view, state the reader question it answers. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `../../shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference and return the selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap. A Requirements view stays at Requirements altitude: affected people, their job, current pain and desired outcome.
 
-Name assets, actors, prohibited outcomes, and security non-goals when sensitive behavior is in scope. Leave trust-boundary realization and enforcement calls to `program-design`.
+Each newly authored or substantively revised substantial document needs a meaningful visual beside the explanation it supports; reuse a current correct visual when it still explains current meaning. Each accepted requirement that changes a screen, page or other UI surface is a user-visible moment: Requirements shows that moment with Image Gen grounded in the current app, or records `no current UI`. A people/job/pain picture does not cover a changed screen. Specification may show the same screens only to pin what the user observes, and keeps the product one opaque system. Context, entity and other topology views render as Mermaid when the destination renders Mermaid; an exact user format wins, except that a text fence is not a pass for a picture-type view when Mermaid can render. A cache path, prompt, chat-only image or broken embed is not completion, and generated imagery supplements normative prose and tables without replacing them. Rejecting a requested all-in-one or internally focused diagram still leaves the selected views to render; in a chat-only run, show and check them in the response.
 
-Completion: applicable qualities are observable obligations or constraints, not adjectives or hidden implementation choices.
+MUST load `references/artifact-and-self-review.md` and return the distinct artifact, required views, author self-check and unresolved gaps.
 
-### 8. Define proof obligations
+Apply the caller's artifact-home policy first; otherwise follow the repository's documented spec location, or `docs/specs/` for substantial file-backed work. A combined `Requirements/spec` artifact, or a Requirements document that contains the observable contract, does not satisfy the separation. Research ledgers, review reports, readiness narration and process history stay out of both documents.
 
-MUST load `references/proof-obligations.md` to map each material requirement to an evidence class and return requirement-to-modality coverage plus proof gaps.
+### Required Why/What Views
 
-Do not choose test files, commands, mocks, task order, or capture procedure. Those belong to program-design seams and planning mechanics.
-
-Completion: every material obligation names evidence that could prove it, and no proof gap is hidden behind “test later.”
-
-### 9. Author the smallest coherent artifact
-
-Apply the Required Why/What Views predicates. For each selected view, state the reader question it answers: whose job and pain must be understood, who interacts with the opaque system and across which observable surfaces, which nouns the obligations are about and what makes two instances the same, or which need-to-proof link is missing. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `../../shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference. Supply the selected precise views plus the per-document explanatory-visual obligation when applicable, and return the selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap.
-
-Each newly authored or substantively revised substantial Requirements and Specification document needs a meaningful visual beside the explanation it supports; reuse a current correct embedded visual when it still explains current meaning. Each accepted requirement that changes a screen, page, or other UI surface is a user-visible moment: Requirements shows that moment with Image Gen grounded in the current app, or records `no current UI`. A people/job/pain picture does not cover a changed screen. Non-UI clauses stay sentences. Specification may show the same screens only to pin what the user observes; the product stays one opaque system, with no internal components, stores, or enforcement. Context, entity, and other topology views render as Mermaid when that destination renders Mermaid. An exact user format takes precedence, except a text fence for a picture-type view when Mermaid can render. No decorative filler satisfies the requirement. The shared rendering owner returns the medium, and a text fence is not a pass for a picture-type view when Mermaid can render. A cache path, prompt, chat-only image, or broken embed is not completion. Generated imagery supplements normative prose and tables. A typo-only edit does not regenerate images, and a companion document's image does not satisfy this document's reader question.
-
-Rejecting a requested all-in-one or internally focused diagram does not complete the selected views and does not require owner approval of their presentation. Render the clearest valid replacements that preserve the required meaning. In a read-only or chat-only run, show those views in the response; describing the diagrams without producing and checking them leaves the view work incomplete.
-
-MUST load `references/artifact-and-self-review.md` with the Required Why/What Views decisions and rendering results to choose the artifact structure, preserve the specification spine, apply view discrimination and pruning, and return the structure decision, traceability/navigation result, view-verification result, pruned elements, artifact identity, and exact view gaps.
-
-Apply any caller-supplied artifact-home policy first. Otherwise follow the repository's documented spec location, or use `docs/specs/` for substantial file-backed work. Create a Specification artifact distinct from the admitted Requirements source. A combined `Requirements/spec` artifact or a Requirements document containing the observable contract does not satisfy this boundary. Keep research ledgers and review reports out of the normative design artifact.
-
-Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal normative requirements, observable contracts, failures, constraints, and proof. Link every normative-eligible U row to the obligation it authorizes. Expose one compact `Requirements -> Specification -> Program Design` path with distinct identities instead of repeating their roles or contents.
-
-Completion: the Requirements and Specification homes are separately identifiable and non-identical; every normative claim has one home; a stranger can navigate from user need through problem, obligation, observable behavior, and proof; and every accepted identity has an inspectable destination or owner-authorized supersession.
-
-### 10. Run the author self-check
-
-Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the whole artifact. Check authority conflicts, accepted-requirements coverage, traceability, vague obligations, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, process residue, obscure headings, duplicated companion narration, and reader-facing elements that fail the human deletion test. For each generated visual also consume the actual project asset, relative embed, pixel inspection and destination-preview result from the shared rendering owner, then return the author self-check with exact gaps.
-
-Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
-
-### 11. Obtain fresh local review when required
-
-Call `spec-program-review` using its `classify-review-requirement` operation with: requested future mode `specification-only`; the distinct Requirements and Specification identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
-
-When `review-required`, invoke `spec-program-review` separately in `specification-only` mode with fresh context and read-only authority, carrying the distinct Requirements and Specification identities, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, and proof claims or gaps. Route accepted Why/What findings back here and follow `spec-program-review`'s bounded review-and-correction-round policy for its convergence rule, parent verification, and any later review.
-
-Completion: the permitted independent review coverage and parent-verified corrections are ready under `spec-program-review`'s policy, or the exact `non-substantial` basis or block is recorded.
-
-### 12. Return the local result
-
-Return the distinct Requirements and Specification identities; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; requirement/proof inventory; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
-
-IF returning a substantial specification in chat and problem, consumer, authority, journey, or requirement-to-proof relationships are non-obvious, use the `presentation-*` skill matching the current surface to render only those Why/What relationships; honor an exact user-requested format instead. Keep normative meaning in the artifact and route internal component, call, state, or failure-mechanism views to `program-design`.
-
-Completion: the caller can invoke `program-design`, compose the result into caller-owned workflow state, or provide the exact missing decision/evidence without reinterpreting the artifact.
-
-## Required Why/What Views
-
-Use a view only when it makes an important Why/What relationship easier for a human to understand, confirm, or correct. This table is the sole owner of view predicates, cardinality, and required semantic fields:
+Use a view only when it makes an important Why/What relationship easier for a person to understand, confirm or correct. This table is the sole owner of view predicates, cardinality and required semantic fields:
 
 | View | Use when | Must expose |
 | --- | --- | --- |
 | journey map | per normative-eligible load-bearing direct-user class when the job has a material sequence or pain relationship and the view makes that relationship easier to confirm or correct | one distinct view for that class exposing user-worded steps, observed pain and evidence, desired observable difference, and cited U rows; never chain separate direct-user classes into one journey; when pain or evidence is not established, mark that field unknown rather than inventing it, and when the source says the current outcome is already the desired one, show preservation of that settled outcome rather than fabricating a gap; reuse or link a current requirements-level sequence when it already exposes these fields, and keep the user-requirements source as the normative home |
 | context diagram | two or more external consumers or observable surfaces exist | consumers and stakeholders, observable surfaces/contracts, relevant negative space, and the system as one opaque node |
-| entity map | the Specification defines one or more entities | entities with `E` identifiers, identity rules, domain relationships with cardinality (belongs-to, references — not component owners), and observable states; the entity table remains the normative home and the map shows no package, schema, type, or store |
-| requirement coverage table | multiple or interacting material requirements exist, or their U/E/P/O/R/C/V trace is non-obvious | U when present, E, P, O, R, C, and V links plus gaps; keep one simple trace inline instead of creating a table |
+| entity map | the Specification defines one or more entities | entities with `E` identifiers, identity rules, domain relationships with cardinality (belongs-to and references, never component owners), and observable states; the entity table remains the normative home and the map shows no package, schema, type or store |
+| requirement coverage table | multiple or interacting material requirements exist, or their U/E/P/O/R/C/V trace is non-obvious | U when present, E, P, O, R, C and V links plus gaps; keep one simple trace inline instead of creating a table |
 
-The first internal component, owner, dependency edge, state store, or enforcement point inside the system crosses into `program-design`. Diagrams may explain relationships but may not be the only home of normative meaning.
+The first internal component, owner, dependency edge, state store or enforcement point inside the system crosses into `program-design`. Diagrams may explain relationships but are never the only home of normative meaning.
 
 ## Bounded Evidence Help
 
-There is no default swarm. IF one bounded evidence, observable-surface, product-intent, or contract question benefits from independent work, use `practices-manage-agents` to select the agent pattern and runtime.
+There is no default swarm. IF one bounded evidence, observable-surface, product-intent or contract question benefits from independent work, load `practices-manage-agents` and return the role, form and packet for that question. The packet names the exact question, sources, maximum authority and expected anchors. A helper never writes Requirements or Specification meaning, prose, organization or views; the Lead opens the decisive sources and authors the documents.
 
-The packet names the exact evidence question, sources, maximum authority, non-goals, and expected anchors. Delegation is parallel-safe only after the source inventory and semantic boundary exist. Instance authority is equal to or narrower than the packet and never includes Requirements or Specification meaning, prose, organization, views, diagrams, or integration. Return a `complete | partial | blocked` evidence receipt; the Lead opens the decisive sources, verifies the result, and authors the artifact itself.
-
-## Completion Blockers
+## Not Ready While
 
 Do not return `locally-ready` while any of these hold:
 
-- substantial file-backed work lacks a present, resolvable Requirements identity and a different present, resolvable Specification identity, or either identity cannot be inspected;
-- Requirements and Specification are collapsed into one artifact, including a combined `Requirements/spec` label or a Requirements artifact used as the Specification;
-- settled authoritative Requirements are duplicated instead of reused, or a normalized Requirements artifact invents or confirms missing owner meaning instead of routing it through `discuss-pathfinding`;
-- a normative claim lacks authority or an explicit decision gap;
-- a normative requirement names an entity the Specification does not define; an entity lacks an identity rule that decides the hardest case the source raises, or leaves a relationship, invariant, or observable-state slot neither filled nor marked as an exact gap; or an entity is defined in implementation terms such as a type, schema, table, package, or payload field;
-- a user-facing normative requirement is based on a row whose authority state is not `authorized`, or normative-eligible user-requirements rows cannot be traced by stable U identifier;
-- the goal boundary lacks explicit confirmation or correction by the authorized owner, acceptable outcome-level evidence, or the specification expands its goal, affected classes, missing outcomes, permitted/protected systems, owner-set package limits, non-goals, or acceptable complexity without a new owner decision;
-- the accepted requirements set cannot be recovered from the current owner-confirmed source or last inspectable owner-accepted baseline, conflicts with those sources, lacks inspectable per-item coverage, or loses an item without owner-authorized supersession;
-- the problem, entity, outcome, requirement, contract/failure, and proof chain cannot be traced;
-- unresolved product meaning is disguised as an assumption;
-- a returned gap omits an authorized observable outcome, or `decision-needed` is based only on whether implementation or incident mechanisms should be retained or made normative;
-- a material non-goal is omitted, or an applicable cross-cutting quality lacks an observable obligation or constraint or a reasoned not-applicable result;
-- internal architecture or implementation tasks are presented as requirements without an externally authoritative constraint;
-- an applicable Required Why/What View lacks the required cardinality, semantic fields, passed rendering result, or separate normative home;
-- an accepted requirement changes a UI surface and Requirements has neither a current-app-grounded Image Gen result for that moment nor an explicit `no current UI` gap, without an exact user-format override that is not a text fence, or an explicit owner-authorized deferral;
-- a picture-type view is passed as fenced plain text while the destination renders Mermaid;
-- delegated evidence was copied as governing prose or a helper originated, organized, rewrote, or chose the expression of Requirements, Specification, a settled section, or a required view;
-- a required independent review is missing, stale, partial, silent, or blocked;
-- governing-source coverage, self-check, readiness, review state, or acceptance/PR narration appears as specification prose instead of returned workflow state;
-- either Requirements or Specification identity, source coverage, or non-acceptance boundary is missing.
-- a `locally-ready` result omits `program-design`, recommends more than one next skill, or routes to planning, implementation, or pathfinding;
-- a non-ready terminal invents a continuation instead of returning its exact decision, evidence, or deferral stop;
-- the continuation handoff omits the destination's required boundary and authority state or copies full artifacts and unrelated history.
+- Requirements and Specification lack separate, resolvable identities, or one artifact plays both roles;
+- a normative claim lacks an authorizing source, or rests on a row whose authority state is not `authorized`;
+- an obligation names an undefined entity, an entity's identity rule cannot decide the hardest case the sources raise, or an entity is defined in implementation terms;
+- a material obligation still passes the cheapest literal implementation that misses the outcome;
+- the goal boundary lacks the owner's explicit confirmation or correction, or the documents expand it without a new owner decision;
+- an accepted requirement lost its destination without owner-authorized supersession;
+- unresolved product meaning is disguised as an assumption, or internal architecture is presented as a requirement without an authoritative constraint;
+- an applicable view lacks its cardinality, semantic fields, passed rendering result or separate normative home;
+- a helper authored governing prose, organization or views;
+- the Requirements confirmation or waiver is missing, or a required local review is missing, partial, stale or not ready.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.
