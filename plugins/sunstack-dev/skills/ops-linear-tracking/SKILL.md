@@ -110,7 +110,7 @@ IF dependency or source records disagree, load `principle-read-ground-truth-firs
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Issues with empty `blockedBy` (or all blockers in completed state) are ready to work.
+3. Treat issues with empty `blockedBy` or completed blockers as readiness candidates. Before reporting one ready, confirm that any required artifact has reached the delivery boundary named in the adopted plan. Reuse adequate current evidence of that delivery.
 
 ### Update ticket after implementation
 

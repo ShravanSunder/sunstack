@@ -125,7 +125,7 @@ Use when:
 
 Don't use when:
 
-  ▸ Concepts have sequential relationship (use flow for work steps, state for lifecycle transitions, or sequence for actor messages)
+  ▸ Concepts have a sequential relationship (use flow for work steps, state for lifecycle transitions, or sequence for actor messages)
   ▸ One concept much bigger than others (use separate framed cards)
   ▸ Readability suffers at canvas 70 — consider stacking vertically
 

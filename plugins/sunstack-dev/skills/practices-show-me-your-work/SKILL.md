@@ -25,7 +25,7 @@ Retain the service, project, board, topic, and root ids (or the exact session-lo
 
 ## Record meaningful updates
 
-At a meaningful update or checkpoint, MUST load `principle-write-for-the-reader` and return a concise decision, reason, evidence and open-action account appropriate to its reader. Put that account in the existing trace. A cold successor needs the reasons and evidence that govern the next action. Keep assumptions, risks and unverified interactions visible: “The adapter stand-in passes; the actual provider remains unobserved” cannot become “provider complete” on resume.
+At a meaningful update or checkpoint, MUST load `principle-write-for-the-reader` and return a concise decision, reason, evidence and open-action account appropriate to its reader. Put that account in the existing trace. Keep assumptions, risks and unverified interactions visible: “The adapter stand-in passes; the actual provider remains unobserved” cannot become “provider complete” on resume.
 
 Record consequential findings, decisions and reasons, accepted or rejected findings, proof outcomes, blockers, material user corrections, and deferred improvements. Each entry should make sense without opening its links. Link detailed evidence; skip routine commands and effort narration. Describe uncertainty honestly and sanitize private content before sharing.
 
