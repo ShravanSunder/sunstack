@@ -35,3 +35,7 @@ PR #128 was closed on the owner's instruction. Its `skills/design-family-rebuild
 The earlier composition HTML contains proposals from an #128 source snapshot. Its teaching examples are discovery material; reread any selected target at the #127 baseline before authoring. The ten extraction candidates are not all project 1 requirements.
 
 Scope precedence: latest owner correction → these project scopes → project 1's reviewed spec. Preserve a dated superseding decision if the owner changes either scope; do not silently rewrite the old instruction into a new one.
+
+## 2026-10-14 owner decision: promote roles to model-invocable skills
+
+The owner chose seven standalone role skills and stated that `practices-manage-agents` is the mapping/setup owner, including models and how to set up/use helpers. This supersedes the earlier recommendation to keep role references for the long term. A [separate role-promotion spec](../2026-10-14-role-skills/spec.md) defines the named cutover; it needs its own spec review and does not alter project 1's accepted practice/principle design. Deliver project 1 first, then the role promotion dependent on it, because both update management. Broader role/phase extraction and domain/audit proposals remain analysis until separately admitted. The role-promotion spec carries discovery, single teaching owner, models/setup separation, typed literal/pointer cutover and no-Markdown-schema boundaries.

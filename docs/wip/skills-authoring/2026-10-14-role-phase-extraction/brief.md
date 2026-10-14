@@ -31,3 +31,7 @@ A readable extraction table: teaching, current source, proposed owner, condition
 ## Boundaries
 
 Sunstack-dev only; orchestrators and skill-authoring runtime are excluded. Analyze active #127-based phases and roles, then selected #128 reference material where it helps test an idea. No runtime changes, security scans, global/cache writes, schema additions, role expansion, product repairs or wholesale phase migration are authorized by this brief. No Markdown schemas. New domain/audit names and their invocation policy remain proposals until designed and admitted.
+
+## 2026-10-14 admitted named design: standalone role skills
+
+The owner now explicitly selected role skills with normal model invocation and management-owned model/setup mapping. [Role-promotion spec](../2026-10-14-role-skills/spec.md) owns this particular design and its eight runs. It supersedes the reference-only recommendation, not the remaining analysis boundaries above. No role runtime move, schema literal change or live discovery claim is authorized by this brief itself; the named spec goes through its own review and implementation/proof path.
