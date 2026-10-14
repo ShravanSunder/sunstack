@@ -10,6 +10,7 @@ import {
 } from "../../../plugins/sunstack-dev/skills/spec-design/schemas/spec-design-result.ts";
 import { ProgramDesignResultSchema } from "../../../plugins/sunstack-dev/skills/program-design/schemas/program-design-result.ts";
 import { TestDesignResultSchema } from "../../../plugins/sunstack-dev/skills/test-design/schemas/test-design-result.ts";
+import { VerificationDesignResultSchema } from "../../../plugins/sunstack-dev/skills/verification-design/schemas/verification-design-result.ts";
 
 type Payload = Record<string, unknown>;
 
@@ -556,6 +557,107 @@ describe("test-design result", () => {
   });
 });
 
+describe("verification-design result", () => {
+  const readyVerificationDesign: Payload = {
+    phase: "verification-design",
+    status: "locally-ready",
+    inputs: {
+      requirements: requirementsDocument,
+      specification: specificationDocument,
+      programDesign: programDesignDocument,
+      testDesign: testDesignDocument,
+    },
+    document: verificationDesignDocument,
+    summary: {
+      declaredReference:
+        "Specification R1 and its worked example: the sent text appears in pane B's input and in no other pane.",
+      observationStrategy:
+        "Drive the installed app through its CLI send command and read both panes' visible input through the existing UI driver.",
+      decisiveLimits:
+        "An IPC acknowledgement is not an observation; only the panes' visible input counts. The hidden-pane case stays unverified.",
+    },
+    localReview: readyLocalReview(verificationDesignDocument),
+    plannedEvidence: [
+      "Pane B's visible input on the delivered build, recorded with the build identity",
+      "Pane A unchanged on the same run",
+    ],
+  };
+
+  test("accepts a locally-ready result whose delivery observations are still owed", () => {
+    expect(issuePaths(VerificationDesignResultSchema, readyVerificationDesign)).toEqual([]);
+  });
+
+  test("rejects a ready result that reports observed delivery results", () => {
+    expect(
+      accepts(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        observedResults: ["Pane B showed the text on build 1.4.2"],
+      }),
+    ).toBe(false);
+  });
+
+  test("rejects a ready result with no declared reference", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        summary: { ...(readyVerificationDesign.summary as Payload), declaredReference: "" },
+      }),
+    ).toEqual(["summary.declaredReference"]);
+  });
+
+  test("rejects a ready result missing its Test Design input", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        inputs: {
+          requirements: requirementsDocument,
+          specification: specificationDocument,
+          programDesign: programDesignDocument,
+        },
+      }),
+    ).toEqual(["inputs.testDesign"]);
+  });
+
+  test("rejects a local review that covers a different Verification Design document", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        localReview: readyLocalReview(
+          fileReference("verification-design", "verification-design-old.md"),
+        ),
+      }),
+    ).toEqual(["localReview.coveredDocument"]);
+  });
+
+  test("rejects a Verification Design stored at its Test Design's location", () => {
+    expect(
+      issuePaths(VerificationDesignResultSchema, {
+        ...readyVerificationDesign,
+        document: fileReference("verification-design", "test-design.md"),
+        localReview: readyLocalReview(fileReference("verification-design", "test-design.md")),
+      }),
+    ).toEqual(["document.location"]);
+  });
+
+  test("lets a blocked result report a reference that cannot be specified", () => {
+    expect(
+      accepts(VerificationDesignResultSchema, {
+        phase: "verification-design",
+        status: "blocked",
+        gap: {
+          token: "verification-design-gap",
+          reason: "No reference says which protocol version the delivered client must speak.",
+          affectedSources: ["docs/specs/2026-10-13-pane-routing/specification.md"],
+          requiredResolution: "A declared protocol version the observation can be judged against.",
+        },
+        evidenceSummary:
+          "The Specification names the protocol without a version, and two versions ship today.",
+        draftDocuments: [],
+      }),
+    ).toBe(true);
+  });
+});
+
 describe("phase schema imports", () => {
   const relativeImportsOf = (file: string): readonly string[] =>
     [...readFileSync(file, "utf8").matchAll(/from "(\.[^"]+)"/g)].map((match) =>
@@ -581,6 +683,7 @@ describe("phase schema imports", () => {
       "skills/spec-design/schemas/spec-design-result.ts",
       "skills/program-design/schemas/program-design-result.ts",
       "skills/test-design/schemas/test-design-result.ts",
+      "skills/verification-design/schemas/verification-design-result.ts",
     ]) {
       const entry = path.join(pluginRoot, phaseSchema);
       const outsideShared = [...reachableFiles(entry)].filter(
