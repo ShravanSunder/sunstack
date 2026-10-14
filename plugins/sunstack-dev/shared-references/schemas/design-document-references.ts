@@ -60,6 +60,25 @@ export const DesignDocumentReferenceSchema = z
   .describe("A pointer to one design document; the producer checks that it resolves");
 export type DesignDocumentReference = z.infer<typeof DesignDocumentReferenceSchema>;
 
+// Used wherever several design documents travel together: no two may share a location key.
+export const checkDistinctDocumentLocations = (
+  documents: Readonly<Record<string, DesignDocumentReference>>,
+  context: z.RefinementCtx,
+): void => {
+  const seenLocations = new Set<string>();
+  for (const [slot, document] of Object.entries(documents)) {
+    const locationKey = documentLocationKey(document.location);
+    if (seenLocations.has(locationKey)) {
+      context.addIssue({
+        code: "custom",
+        path: [slot, "location"],
+        message: "Each design document needs its own location",
+      });
+    }
+    seenLocations.add(locationKey);
+  }
+};
+
 export const RequirementsReferenceSchema = designDocumentReferenceOf("requirements");
 export const SpecificationReferenceSchema = designDocumentReferenceOf("specification");
 export const ProgramDesignReferenceSchema = designDocumentReferenceOf("program-design");
@@ -74,26 +93,7 @@ export const FiveDocumentSetSchema = z
     testDesign: TestDesignReferenceSchema,
     verificationDesign: VerificationDesignReferenceSchema,
   })
-  .superRefine((documents, context) => {
-    const seenLocations = new Set<string>();
-    for (const slot of [
-      "requirements",
-      "specification",
-      "programDesign",
-      "testDesign",
-      "verificationDesign",
-    ] as const) {
-      const locationKey = documentLocationKey(documents[slot].location);
-      if (seenLocations.has(locationKey)) {
-        context.addIssue({
-          code: "custom",
-          path: [slot, "location"],
-          message: "Each design document needs its own location",
-        });
-      }
-      seenLocations.add(locationKey);
-    }
-  })
+  .superRefine(checkDistinctDocumentLocations)
   .readonly()
   .describe(
     "All five design documents, one per responsibility; the caller still checks aliases and content",

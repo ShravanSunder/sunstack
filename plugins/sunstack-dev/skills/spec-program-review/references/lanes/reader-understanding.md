@@ -4,7 +4,7 @@ Mission: reconstruct the complete artifact as a human reader, test whether the i
 
 Predicate: the mode-complete result leaves a concrete material reader-comprehension risk, or the caller explicitly requests a deep reader review with an exact question and scope.
 
-Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for `program-only` or `three-artifact-design`, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
+Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for every mode that reads the Program Design, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
 
 Prerequisites: the complete target and source set, confirmed goal boundary, accepted requirements set, and applicable structural-realization confirmation exist in the review context; the 🔎 Reviewer Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
 
@@ -17,6 +17,9 @@ Non-goals: prose taste, arbitrary shortening, semantic redesign, editing, remedi
 Follow the selected mode:
 
 ```text
+requirements-only
+  affected people -> current pain -> adopted outcome -> boundary and non-goals
+
 specification-only
   Requirements -> Specification observable contract
     -> proof obligation
@@ -25,9 +28,18 @@ program-only
   governing obligation -> scenario/contract -> current/proposed call-path delta
     -> owner/state/failure behavior -> proof seam
 
-three-artifact-design
+test-only
+  obligation -> wrong behavior -> what stays real -> layer and oracle
+    -> completion and planned red
+
+verification-only
+  outcome -> declared reference -> route and target -> observation
+    -> passing condition and limits
+
+five-artifact-design
   Requirements -> Specification observable contract -> scenario/contract
-    -> program-design call-path delta and other How -> proof
+    -> program-design call-path delta and other How -> test scenario
+    -> real-system verification case
 ```
 
 For specification review, a human must be able to restate who is affected, what is wrong today, the desired outcomes and obligations, negative space, normal and failure behavior, and proof, then point to the exact claim they would correct.

@@ -4,10 +4,7 @@ This reference owns `specification-only` mode judgment.
 
 MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether the Requirements and Specification identities are present, resolvable, and different before judging the Specification's meaning.
 
-Review Requirements and Specification separately:
-
-- Requirements answers why the work matters, for whom, and within which authorized boundary.
-- Specification answers what must be observably true and traces each normative obligation to Requirements.
+Requirements answers why the work matters, for whom, and within which authorized boundary; it had its own `requirements-only` review. Specification answers what must be observably true and traces each normative obligation to Requirements. This mode judges the Specification against that distinct Requirements.
 
 Judge whether the Specification's What is authoritative, coherent, observable, testable, and sufficient to constrain Program Design without silently changing its governing Requirements.
 
@@ -18,10 +15,12 @@ Inspect:
 - goals, non-goals, and negative space;
 - source classification and conflicts;
 - outcome-to-requirement coverage;
+- defined entities: each noun the obligations use has an identity rule that decides the hardest case the sources raise, relationships, invariants and observable states, with no type, schema, table or package;
 - requirement pass/fail observability;
+- each material obligation survives its cheapest literal implementation: an acknowledgement, a proxy or the focused pane satisfying the words while missing the outcome is a finding;
 - public/external contracts and failure/partial-success behavior;
 - cross-cutting obligations;
-- proof modality per material requirement;
+- the evidence class and independent reference per material requirement; scenario and layer choices belong to Test Design;
 - hidden structural How or unresolved product meaning;
 - artifact navigation and traceability.
 

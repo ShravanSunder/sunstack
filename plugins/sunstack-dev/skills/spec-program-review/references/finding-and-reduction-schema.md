@@ -12,8 +12,8 @@ artifact and source anchor
 claim or rule
 failure and downstream ambiguity: contradiction or failure path, observable consequence, and what the next author/planner would otherwise have to guess
 smallest semantic correction target
-affected concept: Requirements | Specification | Program Design | named combination
-semantic correction route: spec-design | program-design | caller | spec-design -> program-design
+affected concept: Requirements | Specification | Program Design | Test Design | Verification Design | named combination
+semantic correction route: spec-design | program-design | test-design | verification-design | caller | ordered from the earliest affected owner, such as spec-design -> program-design
 validation note
 semantic coverage to rerun
 contested evidence
@@ -70,7 +70,7 @@ non-edit / non-acceptance statement
 
 ## Phase-Guided Route And Handoff
 
-Only the parent-reduced result may select what happens next. Return exactly one of these shapes:
+Only the parent-reduced result may select what happens next. The returned `DesignReviewResult` (`../schemas/design-review-result.ts`) carries it as `next`: `stop` with its reason, or `continue` with one owner and handoff references that point into the report and the affected documents. The report holds the handoff content. Return exactly one of these shapes:
 
 ```text
 stop
@@ -79,7 +79,7 @@ stop
   or deferral condition when applicable
 
 continue
-  recommended next skill: discuss-pathfinding | spec-design | program-design
+  recommended next skill: discuss-pathfinding | spec-design | program-design | test-design | verification-design
   phase-owned reason
   compact handoff:
     relevant governing-source and artifact pointers
@@ -97,9 +97,12 @@ Select one route from the reduced result:
 
 - accepted Requirements or Specification correction only -> `spec-design`;
 - accepted Program Design correction only -> `program-design`;
+- accepted Test Design correction only -> `test-design`;
+- accepted Verification Design correction only -> `verification-design`;
 - accepted Requirements or Specification correction plus Program Design correction -> `spec-design` first, carrying the complete accepted set;
+- any other accepted correction spanning several documents -> the earliest affected owner in the order Requirements, Specification, Program Design, Test Design, Verification Design, carrying the complete accepted set;
 - accepted caller-owned correction -> stop with `needs-revision` and the exact caller action;
-- complete review evidence proves the current model fails and replacement owner meaning is unmade -> `discuss-pathfinding`, with return owner `spec-design` for Requirements or Specification meaning, `program-design` for an owner-controlled tolerance that blocks structural How, or `spec-design` first when the gap spans observable meaning and Program Design;
+- complete review evidence proves the current model fails and replacement owner meaning is unmade -> `discuss-pathfinding`, with return owner `spec-design` for Requirements or Specification meaning, `program-design` for an owner-controlled tolerance that blocks structural How, `test-design` or `verification-design` for an owner-controlled tolerance that blocks the test or proof strategy, or the earliest affected owner when the gap spans documents;
 - unresolved owner choice that is not the unmade-replacement case -> stop `decision-needed`;
 - invalid input or missing evidence -> stop `blocked`;
 - no required correction -> stop `ready`.
@@ -113,7 +116,7 @@ Produce exactly one result:
 - `not-converging`: the correction loop meets the convergence rule below; the orchestrator brings the owner a brief of what keeps failing.
 - `blocked`: a required artifact/source/access input is missing or stale, or required mode/check coverage is partial, blocked, or missing status, so the review cannot truthfully judge the mode.
 - `decision-needed`: required coverage is complete enough to isolate an unresolved user/authority-owned choice, including a proposed scope expansion or requirement subtraction, and that choice—not missing evidence or author correction—is the first action needed.
-- `needs-revision`: coverage is sufficient to judge the artifact and at least one accepted blocker/important finding requires `spec-design`, `program-design`, or caller correction; this takes precedence over `decision-needed` when revision is independently required.
+- `needs-revision`: coverage is sufficient to judge the artifact and at least one accepted blocker/important finding requires `spec-design`, `program-design`, `test-design`, `verification-design`, or caller correction; this takes precedence over `decision-needed` when revision is independently required.
 - `ready`: the complete condition above holds.
 
 When states mix, apply precedence `not-converging -> blocked -> needs-revision -> decision-needed -> ready`.

@@ -1,6 +1,4 @@
-import { readFileSync } from "node:fs";
 import path from "node:path";
-import type { ZodType } from "zod";
 import { describe, expect, expectTypeOf, test } from "vitest";
 import { FiveDocumentSetSchema } from "../../../plugins/sunstack-dev/shared-references/schemas/design-document-references.ts";
 import {
@@ -12,35 +10,23 @@ import {
 import { ProgramDesignResultSchema } from "../../../plugins/sunstack-dev/skills/program-design/schemas/program-design-result.ts";
 import { TestDesignResultSchema } from "../../../plugins/sunstack-dev/skills/test-design/schemas/test-design-result.ts";
 import { VerificationDesignResultSchema } from "../../../plugins/sunstack-dev/skills/verification-design/schemas/verification-design-result.ts";
-
-type Payload = Record<string, unknown>;
-
-const pluginRoot = path.resolve(import.meta.dirname, "../../../plugins/sunstack-dev");
-const sharedSchemaRoot = path.join(pluginRoot, "shared-references/schemas");
-
-const issuePaths = (schema: ZodType, input: unknown): readonly string[] => {
-  const result = schema.safeParse(input);
-  return result.success ? [] : result.error.issues.map((issue) => issue.path.join("."));
-};
-
-const accepts = (schema: ZodType, input: unknown): boolean => schema.safeParse(input).success;
-
-const fileReference = (kind: string, file: string): Payload => ({
-  kind,
-  location: { medium: "file", path: `docs/specs/2026-10-13-pane-routing/${file}` },
-});
-
-const requirementsDocument = fileReference("requirements", "requirements.md");
-const specificationDocument = fileReference("specification", "specification.md");
-const programDesignDocument = fileReference("program-design", "program-design.md");
-const testDesignDocument = fileReference("test-design", "test-design.md");
-const verificationDesignDocument = fileReference("verification-design", "verification-design.md");
-
-const readyLocalReview = (coveredDocument: Payload): Payload => ({
-  reviewStatus: "ready",
-  reviewResultReference: "tmp/design-reviews/pane-routing-local-review.md",
-  coveredDocument,
-});
+import {
+  type Payload,
+  accepts,
+  fileReference,
+  fiveDocuments,
+  issuePaths,
+  pluginRoot,
+  programDesignDocument,
+  reachableFiles,
+  readyLocalReview,
+  requirementsDocument,
+  sharedSchemaRoot,
+  specificationDocument,
+  testDesignDocument,
+  verificationDesignDocument,
+  withoutField,
+} from "./design-result-fixtures.ts";
 
 const readyRequirements: Payload = {
   phase: "requirements",
@@ -89,21 +75,7 @@ const blockedRequirements: Payload = {
   draftDocuments: [],
 };
 
-const withoutField = (payload: Payload, field: string): Payload => {
-  const copy = { ...payload };
-  delete copy[field];
-  return copy;
-};
-
 describe("design document references", () => {
-  const fiveDocuments: Payload = {
-    requirements: requirementsDocument,
-    specification: specificationDocument,
-    programDesign: programDesignDocument,
-    testDesign: testDesignDocument,
-    verificationDesign: verificationDesignDocument,
-  };
-
   test("accepts five documents, each in its own slot and location", () => {
     expect(issuePaths(FiveDocumentSetSchema, fiveDocuments)).toEqual([]);
   });
@@ -708,25 +680,6 @@ describe("verification-design result", () => {
 });
 
 describe("phase schema imports", () => {
-  const relativeImportsOf = (file: string): readonly string[] =>
-    [...readFileSync(file, "utf8").matchAll(/from "(\.[^"]+)"/g)].map((match) =>
-      path.resolve(path.dirname(file), match[1] ?? ""),
-    );
-
-  const reachableFiles = (entry: string): ReadonlySet<string> => {
-    const seen = new Set<string>();
-    const pending = [entry];
-    while (pending.length > 0) {
-      const file = pending.pop();
-      if (file === undefined || seen.has(file)) {
-        continue;
-      }
-      seen.add(file);
-      pending.push(...relativeImportsOf(file));
-    }
-    return seen;
-  };
-
   test("a phase schema reaches only itself and the shared design schemas", () => {
     for (const phaseSchema of [
       "skills/spec-design/schemas/spec-design-result.ts",

@@ -20,11 +20,11 @@ Inspect:
 - normal control/data/call flows;
 - source-anchored current entrypoint-to-effect paths and proposed paths, or proposed-only paths with an explicit no-predecessor case;
 - added, removed, and changed owners, caller/callee edges, state reads/writes or effects, and result/error propagation for every applicable material runtime-behavior group, plus unchanged edges whose preservation is requirement-critical, safety-critical, or contested;
-- failure, retry, idempotency, partial success, cancellation, cleanup, recovery;
+- failure, retry, idempotency, partial success, cancellation, cleanup, recovery, judged by walking at least one concrete failure or interleaving to its single recovery owner;
 - concurrency, ordering, consistency, backpressure;
 - trust/security/reliability/operability and other applicable qualities;
-- migration/cutover authority;
-- proof seams and enforcement classes;
+- migration/cutover authority: a hard cutover by default, and any compatibility path or dual read backed by an owner decision with a named end;
+- proof seams and enforcement classes: where behavior can be observed and which interactions a proof must keep real; scenario, oracle and layer choices belong to Test Design;
 - requirement-to-design traceability;
 - plan leakage and hidden requirement invention.
 

@@ -1,143 +1,133 @@
 ---
 name: spec-program-review
-description: "Use when independently reviewing a Specification, Program Design, or Requirements, Specification, and Program Design set, including reader understanding or readability, or deciding if a spec-only or program-only change needs review. Not for implementation review."
+description: "Use when independently reviewing one design document (Requirements, Specification, Program Design, Test Design or Verification Design) or the whole five-document set, including reader understanding or readability, or when classifying whether a local design change needs review. Not for skill quality (skill-review) or implemented code (implementation-review)."
 ---
 
-# Specification and Program Design Review
+# Design Review
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-Review is independent reconstruction of the smallest system that satisfies the confirmed goal. It is not proofreading, design by committee, or a search for mechanisms to complete.
-
-The reviewer rebuilds and challenges:
+Review is independent reconstruction of the smallest system that satisfies the confirmed goal. It is not proofreading, design by committee, or a search for mechanisms to complete. The reviewer rebuilds the design from its governing sources without the author's framing, then walks a concrete case through it and a countercase against it:
 
 ```text
-Requirements: WHY, for whom, and within what boundary?
-  -> Specification: WHAT must be observably true?
-  -> Program Design: HOW will the internal system satisfy it?
-  -> existing foundation and structural realization
-  -> current/proposed calls, state, failure, and proof
-  -> reader understanding and planning readiness
+Requirements          who is affected, what the owner adopted, what is out of bounds
+  -> Specification       what must be observably true, over which defined nouns
+  -> Program Design      who owns each truth, how a request reaches its effect, what fails
+  -> Test Design         which wrong behavior each test catches, and where it runs
+  -> Verification Design how the real system shows the outcome, against what reference
 ```
 
-Requirements, Specification, and Program Design are separate authoritative concepts. Review reconstructs each one independently before judging their agreement; agreement inside a combined `Requirements/spec` document cannot substitute for a separately identifiable Requirements source and Specification.
+Traceability tells you where things are linked; it never settles whether the linked thing is right. A requirement can trace cleanly to an obligation, an owner, a test and a verification case and still promise the wrong outcome. So the walk follows meaning: pick a real input, follow it through the obligations, the owners, the tests and the real-system check, and ask at each step whether a capable implementer would land on the outcome the owner adopted. Then pick the countercase most likely to break it (the timeout after the side effect, the mock that erases the interaction, the acknowledgement taken for arrival) and see whether the design catches it.
 
-A persistent 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the complete target set and governing sources, then walks the ordered checks in its own session. The Reviewer Sidekick verifies candidates against accepted requirements, Specification obligations, and the confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The orchestrator disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
+A good design that needs no change is a real result. Return `ready` with what held; do not manufacture findings to show diligence.
 
-Prefer one independent review-and-correction round. After 🔎 Reviewer Sidekick verification, run further rounds only for a concrete source-backed substantive issue that remains or was introduced inside the accepted boundary, until the review is `ready` or `not-converging` (see `references/finding-and-reduction-schema.md`); pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify. Each round may span both semantic owners through the ordered `spec-design -> program-design` route, with each affected artifact corrected at most once in that round and every corrected anchor verified by the Reviewer Sidekick.
+A persistent 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents` with no authoring history, reads the complete target set and governing sources, walks the ordered checks in its own session, verifies candidates against the accepted requirements, obligations and confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The caller disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
 
-Disposition comes before remediation. Reject pedantic, stylistic, already-satisfied, or otherwise non-semantic findings with source evidence and continue. Route each valid correction set inside the settled mental model to its semantic owner. If a finding disproves a load-bearing assumption or exposes unmade owner meaning, return the failed assumption, evidence, consequence, and exact owner as `decision-needed` or `blocked`; do not push a mental-model break through correction. The break stops current continuation and goes to the Lead for an owner brief. When the same result also contains an accepted bounded correction, preserve it explicitly as one `spec-design -> program-design` round after the owner decision, with each affected artifact corrected at most once and one parent verification against the original findings. Once the owner settles the break, review continues under the convergence rule in `references/finding-and-reduction-schema.md`.
+Prefer one independent review-and-correction round. After 🔎 Reviewer Sidekick verification, run further rounds only for a concrete source-backed substantive issue that remains or was introduced inside the accepted boundary, until the review is ready or not-converging (see `references/finding-and-reduction-schema.md`); pedantic, stylistic, already-satisfied, confidence-only, and generic-freshness concerns do not qualify. Each round follows the ordered owner route from the earliest affected document, with each affected artifact corrected at most once in that round and every corrected anchor verified by the same Reviewer Sidekick.
 
-## Operations
+Disposition comes before remediation. Reject pedantic, stylistic, already-satisfied or otherwise non-semantic findings with source evidence and continue. Route each valid correction inside the settled mental model to its semantic owner. If a finding disproves a load-bearing assumption or exposes unmade owner meaning, return the failed assumption, evidence, consequence and exact owner as `decision-needed` or `blocked`; a mental-model break stops continuation and goes to the Lead for an owner brief, and it never travels as an ordinary correction.
+
+## Operations and Modes
 
 ```text
 classify-review-requirement
-  requested future mode: specification-only | program-only
-  returns: review-required | non-substantial, or blocked input
+  requested mode: requirements-only | specification-only | program-only | test-only | verification-only
+  returns: ReviewClassification, schemas/review-classification.ts
   dispatches: no reviewer
 
 review
-  mode: specification-only | program-only | three-artifact-design
-  three-artifact-design targets:
+  mode: requirements-only | specification-only | program-only | test-only | verification-only | five-artifact-design
+  five-artifact-design targets:
     Requirements identity
     Specification identity
     Program Design identity
+    Test Design identity
+    Verification Design identity
   result: ready | needs-revision | blocked | decision-needed | not-converging
-  coverage: current meaning coverage for every target; uncertain semantic effect is stale
+  returns: DesignReviewResult, schemas/design-review-result.ts, pointing at the review report
   checks: mode-complete always; sequential chunk passes along artifact seams when
     the set is large; proof-challenge for executable claims; dispel always;
     focused checks for named unresolved risks
 ```
 
-Review coverage follows meaning, not changed bytes. After each permitted correction round, the parent performs and records a semantic-change check before deciding whether review is complete:
+| Mode | Target, and the governing context it reads |
+| --- | --- |
+| `requirements-only` | Requirements; owner and source authority and the adopted goal boundary. No Specification is required. |
+| `specification-only` | Specification, with its distinct governing Requirements |
+| `program-only` | Program Design, with distinct Requirements and Specification and the structural-realization confirmation or owner waiver |
+| `test-only` | Test Design, with Requirements, Specification and Program Design |
+| `verification-only` | Verification Design, with all four upstream documents |
+| `five-artifact-design` | All five distinct documents, read whole as one design |
 
-- if meaning changed inside the accepted correction and every accepted finding is resolved, preserve the review as the independent finding source and add parent-verified correction anchors for every accepted finding;
-- if the parent verifies that meaning did not change—for example, a formatting, link-repair, process-metadata, or typo-only edit—carry the existing semantic coverage forward without another review;
-- run further rounds for concrete source-backed substantive issues inside the accepted boundary until the review is ready or not-converging (see `references/finding-and-reduction-schema.md`); reject a rerun based only on pedantry, style, an already-satisfied finding, confidence, or generic freshness.
+Every document gets its own independent local review and correction cycle before its phase returns locally ready, and the caller passes `callerRequirement: required` on a document's first or substantive local cycle. One integrated reader then reads the whole current set in `five-artifact-design` mode. That reader may consult the five local results and reviewers for context, but it reconstructs the design itself and never forwards their verdicts as its own; the per-document lenses it applies inside the whole-set pass do not replace the local cycles.
 
-Closure is established by the latest permitted review result plus parent-verified correction evidence for the current artifacts. Keep this call-scoped record out of durable design artifacts and do not add persistent review bookkeeping.
+Review coverage follows meaning, not changed bytes. After each permitted correction round, the parent performs and records a semantic-change check:
 
-## 1. Classify Review Requirement
+- if meaning changed inside the accepted correction and every accepted finding is resolved, keep the review as the independent finding source and add parent-verified correction anchors for every accepted finding;
+- if the parent verifies that meaning did not change (formatting, link repair, process metadata, a typo), carry the existing semantic coverage forward without another review;
+- run further rounds only under the convergence rule; an uncertain semantic effect counts as changed.
 
-IF operation is `classify-review-requirement`, load `references/classifying-review-requirement.md` and return its `review-required | non-substantial` result or blocked missing-input result.
+## 1. Classify the Review Requirement
 
-Dispatch no reviewer, select no checks, and return no review verdict. `review-required` instructs the caller to make a separate fresh review invocation.
+IF operation is `classify-review-requirement`, load `references/classifying-review-requirement.md` and return the ReviewClassification with zero reviewer dispatches. Load `schemas/review-classification.ts` for its shape. A caller-required first or substantive cycle cannot be classified away, and `five-artifact-design` is never classified: its first readiness always needs the integrated review.
 
-Completion: classification returns immediately with zero reviewer dispatches.
+Completion: classification returns immediately, with no reviewer dispatched and no review verdict implied.
 
-## 2. Prepare the Review
+## 2. Admit the Review
 
-For operation `review`, require:
+For operation `review`, require the mode's targets and governing context from the table above, plus: governing sources with their authority states and coverage basis; the confirmed goal boundary and accepted requirements set, or the exact authority gap; constraints and non-goals; risk predicates; claimed proof evidence or gaps; the review question when narrower than readiness; prior coverage and its semantic-change record when coverage is reused; and the round history (no prior review, prior rounds with their findings, or earlier results unavailable).
 
-```text
-mode and complete target identities: file paths or separately labeled in-chat records
-governing sources, authority states, and coverage basis
-confirmed goal boundary and accepted requirements set, or the exact authority gap
-structural-realization confirmation for program-only or three-artifact-design (an owner confirmation or `waived by owner`), or the exact owner decision still needed
-constraints and non-goals
-risk predicates
-claimed proof evidence or gaps
-review question when narrower than readiness
-prior review coverage and semantic-change record when coverage is being reused
-bounded design-review status: no prior review | prior rounds with their findings | earlier results unavailable
-```
-
-When prior results are unavailable, inspect the current target and governing sources, record the reason, and review against the current baseline (see the convergence rule in `references/finding-and-reduction-schema.md`). Reject stale, wrong-source, or unverified inputs. Route any material design break or newly exposed owner decision to its owner.
-
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the Requirements, Specification, and Program Design identity status for the selected mode. `specification-only` inspects separately identifiable Requirements and Specification sources. `program-only` and `three-artifact-design` inspect separately identifiable Requirements, Specification, and Program Design sources. Reuse resolvable file pointers for file-backed records. Separately labeled in-chat records are copied verbatim into the tmp review packet — a fresh reviewer cannot follow a pointer into a conversation — but never into a durable combined review artifact.
+MUST load `../../shared-references/requirements-specification-program-design.md` and return the identity status of every document the selected mode reads: present, resolvable and distinct, or the exact gap. Reuse file pointers; copy separately labeled chat records verbatim into the tmp review packet, because a fresh reviewer cannot follow a pointer into a conversation.
 
 Use the owner-confirmed requirements record and confirmed goal boundary when available. Otherwise use the last inspectable owner-accepted governing source. If neither exists, or they conflict, return the authority gap. Mutually narrowed current files never establish the accepted requirements set by themselves.
 
-A combined `Requirements/spec`, a Requirements-titled artifact that also stands in for the Specification, or an absent separate Requirements or Specification identity is a concrete blocker-level design finding, not permission for review to infer the missing identity. Record `needs-revision`, route the smallest correction to `spec-design`, and do not repair or create either artifact during review. Continue only with bounded findings that the available sources can support; never return `ready`.
+A combined `Requirements/spec`, a Requirements-titled artifact standing in for the Specification, or a missing identity the mode needs is a blocker-level finding, not permission to infer the missing document. Record `needs-revision`, route the smallest correction to its owner, and never return `ready`. A missing structural-realization confirmation for a mode that reads Program Design may produce `decision-needed`; a recorded owner waiver counts as the confirmation, and a packet claim, a goal-boundary confirmation or a `locally-ready` label is neither.
 
-`program-only` also requires the governing Specification. `three-artifact-design` requires the current Requirements, Specification, and Program Design. A missing confirmed goal boundary, or missing structural-realization confirmation for `program-only` or `three-artifact-design`, may produce `decision-needed`; review does not infer acceptance from silence or a status label. A recorded `structural-realization confirmation: waived by owner` is the confirmation: review proceeds and judges the design on its merits. A packet claim, a goal-boundary confirmation, or a `locally-ready` label is neither a confirmation nor a waiver.
+When prior results are unavailable, inspect the current documents and governing sources, record why, and review against the current baseline under the convergence rule. Switching modes, checks, target labels or caller skills does not reset the convergence comparison.
 
-Completion: the complete target set, governing sources, accepted requirements, boundaries, open authority decisions, and any prior-coverage semantic-change record are unambiguous; any missing-history baseline is recorded with its reason.
+Completion: the mode, every target, the governing sources, accepted requirements, boundaries, open authority decisions and any reused-coverage record are unambiguous.
 
-If a review-and-correction round already ran, admit another only under the convergence rule and accepted boundary in `references/finding-and-reduction-schema.md`. Switching modes, checks, target labels, or caller skills does not reset the convergence comparison.
+## 3. Reconstruct and Walk
 
-## 3. Select the Mode
+The 🔎 Reviewer Sidekick reads every target and governing source whole before any finding. IF operation is review, load `references/reviewing-common-method.md` and return the reconstructed intent, the source-backed case and countercase walk, and the exact semantic gaps. Then load the selected mode's lens:
 
-The selected mode reference owns its review judgment:
+- IF reviewing requirements-only, load `references/reviewing-requirements.md` and return the authority, adoption and scope judgment.
+- IF reviewing specification-only, load `references/reviewing-specification.md` and return the observable meaning and domain judgment against the Requirements.
+- IF reviewing program-only, load `references/reviewing-program-design.md` and return the structural realization and proof-seam judgment.
+- IF reviewing test-only, load `references/reviewing-test-design.md` and return the scenario, oracle, layer and fixture adequacy with its false-green countercases.
+- IF reviewing verification-only, load `references/reviewing-verification-design.md` and return the reference, surface, observation and feasibility judgment with its unverified limits.
+- IF reviewing five-artifact-design, load `references/reviewing-five-artifact-design.md` and return the independently reconstructed end-to-end outcome and the cross-document consistency judgment.
 
-```text
-specification-only -> references/reviewing-specification.md
-program-only       -> references/reviewing-program-design.md
-three-artifact-design -> references/reviewing-three-artifact-design.md
-```
+Each mode judges in dependency order, and an upstream fatal defect bounds what downstream judgment can mean. Calibrate severity by consequence, and keep the clean control: when the walk and countercase hold, say what held.
 
-Specification review judges the governing Requirements authority and the Specification's observable What. Program review judges structural How and realization of the governing Specification, including each entity's binding, the shape at each boundary, and closed result and decision variants. Three-artifact design review independently repeats both, walks the trace table row by row, checks that each term means the same thing in all three artifacts, and judges integration and planning readiness. A design noun with no entity routes `Route: spec-design` when it names no `E` or `R` it serves, or carries its own identity, lifecycle, or relationships; a synonym for an existing entity routes `Route: program-design`.
+Completion: the selected mode is reconstructed from complete documents, at least one concrete case and its most dangerous countercase were walked, and every gap is anchored.
 
-Completion: exactly one mode and its complete required artifact set are selected.
+## 4. Commission the Reviewer
 
-## 4. Resolve Reviewer Runtime and Authority
+The caller completes classification and admission. For an admitted substantive review, load `practices-manage-agents` and return the commissioned or resumed persistent 🔎 Reviewer Sidekick with read-only access; its role charter governs its authority. Resume that same Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
 
-The caller completes classification and admission. For an admitted substantive review, MUST use `practices-manage-agents` to commission or resume one persistent 🔎 Reviewer Sidekick with read-only workspace access. Resume that exact Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
-
-A later semantic change outside an accepted correction invalidates affected check coverage. Further rounds follow the convergence rule in `references/finding-and-reduction-schema.md`.
+Completion: one independent Reviewer Sidekick with no authoring history owns this review relationship.
 
 ## 5. Walk the Mode and Chunk Checks
 
-The 🔎 Reviewer Sidekick reads the complete target set and governing sources first, every artifact whole. MUST load `references/coordination-and-chunking.md` and return a sequential chunk-pass plan with complete seam text and overlap, or one mode-complete pass when the whole target fits.
+IF operation is review, load `references/coordination-and-chunking.md` and return a whole-mode pass or a sequential plan of overlapping seams, and load `references/lanes/lane-schema.md` and return the `complete | partial | blocked` status and selection reason for every check. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
 
-MUST load `references/lanes/lane-schema.md` and record `complete | partial | blocked` for every check. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
-
-1. MUST load `references/lanes/mode-complete-reviewer.md`, `references/reviewing-common-method.md`, and the selected mode reference. Reconstruct and judge the whole mode from complete artifacts.
+1. MUST load `references/lanes/mode-complete-reviewer.md` and return the whole-mode judgment from complete artifacts, using the common method and the selected lens.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` and walk the chunk passes sequentially. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
 
 Completion: the mode-complete check and every selected chunk pass have statuses, each pass lists its seam sections, and every required dimension has current coverage.
 
-## 6. Proof-Challenge, Dispel, and Focused Checks
+## 6. Challenge Proof, Dispel, and Focused Checks
 
-IF the design cites executable proof claims, load `references/lanes/proof-challenge.md` and challenge each claim. Assign prescribed proof commands to a 🔧 Operator under an exact execution grant. The 🔧 Operator performs the reference's write-set preflight, executes only granted commands with scratchpad output, compares `git status --porcelain` before and after, and returns commands, observations, and exit codes. The 🔎 Reviewer Sidekick judges claimed against observed. Without a grant, inspect only and record the proof gap.
+IF executable proof is claimed, load `references/lanes/proof-challenge.md` and return claim-versus-observation findings within the explicit execution grant; with no grant, inspect only and record source-only proof gaps. Assign prescribed proof commands to a 🔧 Operator under the exact grant; it runs only granted commands with scratchpad output, compares `git status --porcelain` before and after, and returns commands, observations and exit codes. The 🔎 Reviewer Sidekick judges claimed against observed.
 
-MUST load `references/lanes/dispel.md` after mode-complete and chunk checks. Classify every candidate and map delivered design elements to a rail or `absent`, even when the candidate set is empty.
+IF operation is review, load `references/lanes/dispel.md` after the mode-complete and chunk checks and return the candidate classifications and the unsupported-delivery findings, mapping every delivered design element to a rail or `absent`, even when the candidate set is empty.
 
-Select a focused check only for a concrete unresolved risk with a falsifiable question. Load `references/reviewing-common-method.md` and the selected reference below. Run one check per named risk after the earlier checks, and stop when no named risk remains:
+Select a focused check only for a concrete unresolved risk with a falsifiable question. IF a named unresolved risk matches a predicate below, load that exact lane with `references/reviewing-common-method.md` and return its source-backed risk findings. Run one check per named risk after the earlier checks, and stop when no named risk remains:
 
 ```text
 material reader-comprehension risk, or an explicit deep-reader request from the
-  user or calling workflow — a request from the reviewed artifact's author is not one
+  user or calling workflow (a request from the reviewed artifact's author is not one)
   -> references/lanes/reader-understanding.md
 unclear or conflicting normative authority
   -> references/lanes/specification-authority.md
@@ -153,96 +143,69 @@ unresolved runtime, platform, tool, or harness feasibility risk
   -> references/lanes/platform-harness.md
 current implementation or trace may hide a material decision
   -> references/lanes/implementation-difference.md
-material proof modality or seam remains disputed
+material proof modality, seam, or verification route remains disputed
   -> references/lanes/proof.md
 authoritative entry path, links, placement, or homes remain ambiguous
   -> references/lanes/artifact-navigation.md
 ```
 
-After correction, verify affected finding anchors. A concrete substantive residual returns to normal-round admission. Stop a focused check when the risk is resolved, unsupported, outside the confirmed goal, or needs an owner decision.
-
-Completion: dispel is complete, executable proof claims have challenge results or named gaps, and each focused check has a status and selection reason. Record every unselected optional check with `complete` and `not selected: <reason>`.
+Completion: dispel is complete, executable proof claims have challenge results or named gaps, and each focused check has a status and selection reason.
 
 ## 7. Verify Check Coverage
 
-Compare each check's covered target text with the current target. Confirm the 🔧 Operator ran only granted commands, wrote no tracked file, and returned an unchanged `git status --porcelain` result. A permitted correction is verified by the same 🔎 Reviewer Sidekick against accepted findings without automatically starting another review round.
+Compare each check's covered text with the current targets. Confirm the 🔧 Operator ran only granted commands, wrote no tracked file, and returned an unchanged `git status --porcelain` result. A permitted correction is verified by the same 🔎 Reviewer Sidekick against the accepted findings without automatically starting another round.
 
-Completion: each check supplies current coverage for its selected target, and proof execution stayed inside the recorded grant.
+Completion: each check supplies current coverage for its target, and proof execution stayed inside its grant.
 
 ## 8. Verify and Reduce Findings
 
-MUST load `references/finding-and-reduction-schema.md` and return its dispositions, merged duplicates/conflicts, coverage gaps, goal-relevance record, deletion-first decision, scope effect, and final coverage-bound result. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
+IF operation is review, load `references/finding-and-reduction-schema.md` and return the coverage-bound result, the verified dispositions, the cause-based owner of each correction, and the retained remediation evidence. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
 
-Re-anchor before accepting a finding: identify the confirmed requirement or goal-boundary field it serves, whether the existing foundation already satisfies it or can supply the correction, the concrete failure if unresolved, the smallest correction, whether the confirmed obligations still hold without the questioned mechanism, whether the proposed mechanism is the smallest change that serves the quoted clause or one of several, and whether the correction stays inside the confirmed goal boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status. When evidence is missing, follow that reference's evidence-lookup branch before accepting. Question whether a proposed mechanism is needed before accepting findings that merely complete its missing contracts.
+Re-anchor before accepting a finding: identify the confirmed requirement or goal-boundary field it serves, whether the existing foundation already satisfies it or can supply the correction, the concrete failure if unresolved, the smallest correction, whether the confirmed obligations still hold without the questioned mechanism, whether the proposed mechanism is the smallest change that serves the quoted clause or one of several, and whether the correction stays inside the confirmed goal boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status. When evidence is missing, follow that reference's evidence-lookup branch before accepting.
 
-Every finding uses the complete Finding shape from the loaded schema. For the caller-facing explanation, write every returned finding in ordinary language, whether it is an unreduced reviewer candidate or has the parent disposition `accepted | rejected | contested | unverified`. Each explanation includes:
+Write every returned finding for the caller in ordinary language: a title naming the concrete problem; what is wrong and where the evidence appears; the affected requirement or design relationship and its consequence; the smallest correction, followed by a separate `Route:` line; and the evidence that would confirm the correction. A review label may summarize the explanation but never replaces a field.
 
-- a title naming the concrete problem rather than a review method;
-- what is wrong and where the evidence appears;
-- the affected confirmed requirement or design relationship and concrete consequence;
-- the smallest correction, followed by a separate `Route:` line naming `spec-design`, `program-design`, `caller`, or ordered `spec-design -> program-design`;
-- the evidence or affected review coverage that would confirm the correction.
-
-Do not leave the route implicit from the artifact or section named. Record parent disposition separately after reduction; unreduced candidate status does not waive the useful finding fields. A review label may summarize the explanation but may not replace any field.
-
-For each material proof claim, compare the claimed outcome with the supplied evidence's actual observation boundary. State what the evidence proves, what it cannot observe, and the smallest missing proof modality or structural observation seam. Do not collapse distinct unsupported claims into generic “runtime proof”; match each claim with the smallest observation that could confirm or falsify it. For each applicable diagram, name the reader question it should answer and compare its visible owners, direction, state or effect, normal and error behavior, and changed edges with the written requirements and design. Rendering or repeated labels alone do not establish usefulness or agreement.
-
-Classify each requested correction by the concept it affects: `Requirements`, `Specification`, `Program Design`, or a named combination. A Program Design-only correction preserves Requirements and the observable Specification unless the owner explicitly changes them.
-
-Route accepted corrections by semantic owner:
+Classify each correction by the concept it affects: `Requirements`, `Specification`, `Program Design`, `Test Design`, `Verification Design`, or a named combination. Route accepted corrections by semantic owner:
 
 - `Requirements` returns to `spec-design`, using `discuss-pathfinding` when owner meaning is missing;
 - `Specification` returns to `spec-design`;
 - `Program Design` returns to `program-design`;
-- any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled.
+- `Test Design` returns to `test-design`;
+- `Verification Design` returns to `verification-design`;
+- any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled; more generally, a correction spanning several documents starts at the earliest affected owner in the five-document order;
 - `caller` returns the exact owner/caller decision; review does not resume until that decision is resolved.
 
-Reject prose taste without reader or design effect. Missing evidence is `unverified`. Preserve real disagreement as contested. Two kinds of scope expansion get two different dispositions: a reviewer candidate that proposes adding scope with no rail anchor — new persistence, history, identity, governance, certification, control planes, external services, resilience layers — is `rejected: scope expansion` and listed for the owner as an observation, never `decision-needed`; anchoring it one altitude up does not rescue it when the mechanism is one of several ways to serve the quoted clause, and an accepted finding then names the unrealized obligation, never the reviewer's mechanism. A design element the artifacts already contain that dispel mapped `absent` is never rejected as harmless: it returns `decision-needed` with deletion as the default recommendation, or `needs-revision` routed to `program-design` when the owner has already declined it. When the parent's disposition contradicts dispel's correction class, record the quoted rail text that overrides it.
+Reject prose taste with no reader or design effect. Missing evidence is `unverified`. Preserve real disagreement as contested. A reviewer candidate that adds scope with no rail anchor is `rejected: scope expansion` and listed for the owner as an observation, never `decision-needed`. A design element the documents already contain that dispel mapped `absent` is never rejected as harmless: it returns `decision-needed` with deletion as the default recommendation, or `needs-revision` routed to its owner when the owner already declined it.
 
-Completion: every candidate has a source-backed disposition; every finding uses the complete loaded Finding shape and contains each caller-facing field above regardless of disposition or final verdict; and no accepted finding silently changes the confirmed goal or accepted requirements.
+Completion: every candidate has a source-backed disposition and every returned finding carries each caller-facing field, regardless of disposition or verdict.
 
-## 9. Return the Coverage-Bound Result
+## 9. Return the Result
 
-Return every field in the `Coverage-Bound Result` owned by `references/finding-and-reduction-schema.md` for the current mode and targets.
+IF returning a review, load `schemas/design-review-result.ts` and return the DesignReviewResult with its report pointer. Check statuses, findings, coverage and correction evidence stay in that report, owned by `references/finding-and-reduction-schema.md`; the result carries the mode, targets, verdict and one next step. Refuse `ready` while the report holds a partial or blocked selected check, a coverage gap, or an unresolved accepted correction. The caller opens the report before acting on the verdict.
 
-`ready` means the reviewed artifact meaning satisfies the invoked mode. When accepted bounded findings are remediated, downstream callers may continue only with the original result plus complete parent-verified remediation evidence. Rejected non-semantic findings need no remediation. A mental-model break remains a stop until its owner supplies settled meaning. Durable artifacts remain about their subject matter and do not acquire review lifecycle or acceptance status.
+`ready` means the reviewed meaning satisfies the invoked mode; it never means accepted. The next step is `stop` with its reason, or `continue` with exactly one owner and compact handoff references: the earliest affected semantic owner for accepted corrections, or `discuss-pathfinding` with the recorded return owner when complete review evidence shows that owner meaning is unmade. Missing evidence stops; it never acquires invented meaning. Reviewer candidates never select the route.
 
-After parent reduction, return either a stop or exactly one recommended next skill using the route and compact-handoff procedure in the loaded reference. Reviewer candidates never select this route. When validated findings span Requirements or Specification plus Program Design, recommend `spec-design` first and carry the complete accepted set; the later Specification result decides whether `program-design` follows. Recommend `discuss-pathfinding` only when complete review evidence establishes that the current model fails and replacement owner meaning is genuinely unmade, and include the review-selected return owner. A current authoritative correction routes directly to its semantic owner; missing evidence stops.
-
-Completion: the result names the first required revision, coverage gaps, any owner decision, what a downstream program designer or planner would still have to invent, and one parent-selected compact continuation handoff or an exact stop reason.
+Completion: the result validates, names the first required revision or what held, and carries one parent-selected next step or an exact stop.
 
 ## Completion Blockers
 
 Do not return `ready` while any of these hold:
 
-- the current target identity or semantic scope is missing or ambiguous;
-- Requirements and Specification are not separately identifiable in any review mode, or a combined `Requirements/spec` is being used as both;
-- the complete target or governing-source set was not read;
-- the confirmed goal boundary, accepted requirements, or applicable structural-realization confirmation is missing or conflicting without an explicit returned authority gap;
-- no complete semantically current mode-complete check exists;
-- a selected check has no status;
-- partial or blocked coverage affects a required dimension;
-- a finding lacks an accepted requirement identity or confirmed goal-boundary field, its plain-language meaning, the observable outcome that fails, source-backed evidence, deletion test, scope effect, semantic correction route, or disposition;
-- specification, program, or three-artifact-design mode boundaries are conflated;
-- `program-only` or `three-artifact-design` omits an applicable current/proposed call path, explicit no-predecessor case, added/removed/changed edge status, or a preservation-critical or contested unchanged edge;
-- `program-only` or `three-artifact-design` accepts a Specification entity with no binding, a boundary shape written only as prose, or an open-string result or decision contract; or `three-artifact-design` passes traceability without walking every trace-table row or leaves a design noun unresolved against the entity table;
-- a material proof claim is accepted without evidence that can observe it at the required layer, or an applicable diagram is accepted without checking that it answers its reader question and agrees with the written meaning;
-- a picture-type view is accepted as a text fence while Mermaid can render, or a UI image is accepted that invents a control or skips a changed screen;
-- required file-backed visuals or relative embeds are missing or broken, generated labels/edges/boundaries disagree with governing meaning, or unavailable image/preview access was treated as complete visual coverage;
-- three-artifact-design mode trusts author or local checks without independent reinspection;
-- the Reviewer Sidekick did not read the complete target set and governing sources before planning checks, or an optional check lacks a selection reason;
-- a chunk plan split one requirement's trace to its obligation and realization, or one call-path delta with its owners and proof seam, across chunks with no overlap seam; or a chunk pass was treated as mode-complete coverage;
-- any reviewer judged an artifact it did not read completely, or the common method's coverage rows leave a target section neither covered nor excluded with a reason;
-- the dispel check is missing, or a design element dispel mapped `absent` lacks either a `decision-needed` return or an accepted removal routed to `program-design` — "well drawn" is not a disposition;
-- a reviewer candidate that adds unrequested scope was returned as `decision-needed` or accepted instead of rejected as scope expansion;
-- a 🔧 Operator ran a command outside the recorded grant, or an executable proof claim was accepted without a proof-challenge result or a named proof gap;
-- focused review began before reduction of the earlier checks, a focused check was selected without a named predicate, or a broad predicate was treated as sufficient selection;
-- a round ran after not-converging, or outside the accepted boundary without an owner brief;
-- the downstream consumer must invent meaning owned by the reviewed artifact;
-- the result recommends no next skill, more than one next skill, or a route selected from an unreduced reviewer candidate when a validated continuation exists;
-- a continuation omits the current boundary status or makes the destination choose among correction alternatives instead of carrying one smallest verified correction;
-- a pathfinding recommendation omits the review-selected return owner, or complete current authority/evidence already settles the correction;
-- a continuation copies artifact contents or unrelated history instead of returning the destination's compact pointer-based handoff;
-- the result implies edit, remediation, lifecycle, planning, or acceptance authority.
+- a target identity the mode needs is missing, ambiguous, or collapsed into another document;
+- the complete target or governing-source set was not read, or a reviewer judged an artifact it did not read completely;
+- the confirmed goal boundary, accepted requirements, or applicable structural-realization confirmation is missing or conflicting without a returned authority gap;
+- no concrete case and countercase were walked, or traceability alone was taken as proof that the meaning is right;
+- no complete, semantically current mode-complete check exists, a selected check has no status, or partial or blocked coverage affects a required dimension;
+- mode boundaries are conflated, or a local cycle's verdict was forwarded as the integrated reader's own;
+- a finding lacks its requirement or boundary anchor, plain-language meaning, failing outcome, evidence, deletion test, scope effect, correction route, or disposition;
+- a Program Design is accepted with an unbound entity, a prose-only boundary shape, an open-string contract, or a missing current/proposed call-path delta;
+- a Test Design is accepted with a mock that erases the interaction it claims, an oracle drawn from the code under test, an assertion that excludes a permitted outcome, or a claimed red nobody observed;
+- a Verification Design is accepted whose case observes an acknowledgement, a wrong target, or offline preparation in place of the outcome, or whose reference is a model's judgment;
+- a material proof claim is accepted without evidence that can observe it, or a required view or visual is missing, unreadable, or disagrees with the written meaning;
+- the dispel check is missing, or an `absent` element lacks its `decision-needed` return or routed removal;
+- a 🔧 Operator ran a command outside its grant;
+- a round ran after `not-converging`, or outside the accepted boundary without an owner brief;
+- the downstream consumer would have to invent meaning the reviewed document owns;
+- the result implies edit, remediation, lifecycle, planning or acceptance authority.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.

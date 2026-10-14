@@ -275,7 +275,7 @@ describe("user requirements and design-view contracts", () => {
     expect(reviewSkill).toContain("Assign prescribed proof commands");
     expect(reviewSkill).not.toContain("at most one focused reviewer by default");
     expect(reviewSkill).toContain(
-      "`Requirements`, `Specification`, `Program Design`, or a named combination",
+      "`Requirements`, `Specification`, `Program Design`, `Test Design`, `Verification Design`, or a named combination",
     );
     expect(reviewSkill).toContain(
       "any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled",
@@ -324,8 +324,8 @@ describe("user requirements and design-view contracts", () => {
     const programReview = readPluginFile(
       "skills/spec-program-review/references/reviewing-program-design.md",
     );
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
+    const fiveArtifactDesignReview = readPluginFile(
+      "skills/spec-program-review/references/reviewing-five-artifact-design.md",
     );
     const classification = readPluginFile(
       "skills/spec-program-review/references/classifying-review-requirement.md",
@@ -333,44 +333,54 @@ describe("user requirements and design-view contracts", () => {
 
     for (const marker of ["added", "removed", "changed"]) {
       expect(programReview).toContain(marker);
-      expect(threeArtifactDesignReview).toContain(marker);
+      expect(fiveArtifactDesignReview).toContain(marker);
     }
     expect(programReview).toContain("preservation-critical or contested unchanged");
-    expect(threeArtifactDesignReview).toContain("preservation-critical or contested unchanged");
+    expect(fiveArtifactDesignReview).toContain("preservation-critical or contested unchanged");
     expect(reviewSkill).toContain("last inspectable owner-accepted governing source");
     expect(reviewSkill).toContain("Mutually narrowed current files");
     expect(programReview).toContain("explicit no-predecessor case");
-    expect(threeArtifactDesignReview).toContain("accepted requirements remain covered");
+    expect(fiveArtifactDesignReview).toContain("accepted requirements remain covered");
     expect(reviewSkill).not.toContain("digest");
     expect(programReview).not.toContain("digest");
-    expect(threeArtifactDesignReview).not.toContain("digest");
+    expect(fiveArtifactDesignReview).not.toContain("digest");
     expect(classification).not.toContain("digest");
   });
 
-  test("keeps three-artifact design review responsible for complete local judgments", () => {
+  test("keeps the integrated five-artifact review its own reader of every document", () => {
     const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
+    const fiveArtifactDesignReview = readPluginFile(
+      "skills/spec-program-review/references/reviewing-five-artifact-design.md",
     );
     const reduction = readPluginFile(
       "skills/spec-program-review/references/finding-and-reduction-schema.md",
     );
 
-    expect(threeArtifactDesignReview).toContain("MUST load `reviewing-specification.md`");
-    expect(threeArtifactDesignReview).toContain("MUST load `reviewing-program-design.md`");
-    expect(threeArtifactDesignReview).toContain(
-      "Requirements, Specification, and Program Design identity status",
+    for (const lens of [
+      "reviewing-requirements.md",
+      "reviewing-specification.md",
+      "reviewing-program-design.md",
+      "reviewing-test-design.md",
+      "reviewing-verification-design.md",
+    ]) {
+      expect(fiveArtifactDesignReview).toContain(`MUST load \`${lens}\``);
+    }
+    expect(fiveArtifactDesignReview).toContain(
+      "Requirements, Specification, Program Design, Test Design and Verification Design identity status",
     );
-    expect(threeArtifactDesignReview).toContain(
-      "This reference owns `three-artifact-design` mode judgment.",
+    expect(fiveArtifactDesignReview).toContain(
+      "This reference owns `five-artifact-design` mode judgment",
     );
+    expect(fiveArtifactDesignReview).toContain("never verdicts to forward");
     expect(reviewSkill).toContain(
-      "mode: specification-only | program-only | three-artifact-design",
+      "mode: requirements-only | specification-only | program-only | test-only | verification-only | five-artifact-design",
     );
     for (const identity of [
       "Requirements identity",
       "Specification identity",
       "Program Design identity",
+      "Test Design identity",
+      "Verification Design identity",
     ]) {
       expect(reviewSkill).toContain(identity);
     }
@@ -380,9 +390,13 @@ describe("user requirements and design-view contracts", () => {
     expect(reduction).not.toContain("exact review invocation identity");
     expect(reduction).toContain("result: ready | needs-revision | blocked | decision-needed");
     expect(reduction).not.toContain("verdict: ready | needs-revision | blocked | decision-needed");
-    expect(
-      existsSync(path.join(pluginRoot, "skills/spec-program-review/references/reviewing-pair.md")),
-    ).toBe(false);
+    for (const retiredReference of ["reviewing-pair.md", "reviewing-three-artifact-design.md"]) {
+      expect(
+        existsSync(
+          path.join(pluginRoot, "skills/spec-program-review/references", retiredReference),
+        ),
+      ).toBe(false);
+    }
   });
 
   test("gives each spec-design document its own required local review with both identities", () => {

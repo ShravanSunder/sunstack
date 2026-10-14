@@ -14,7 +14,7 @@ Check boundary: read-only. A tmp scratchpad may hold working notes. No mode reco
 
 MUST load `../reviewing-common-method.md` and apply its complete-read rule, authority audit, reconstruction, crux probes, and finding calibration to the assigned seam, and return the seam's coverage rows, reconstructed slice, and candidate findings.
 
-MUST load the selected mode reference (`../reviewing-specification.md`, `../reviewing-program-design.md`, or `../reviewing-three-artifact-design.md`) and apply only the dimensions the chunk assignment maps to this seam, and return each mapped dimension as `required | satisfied by the existing system | not applicable | unresolved` with evidence.
+MUST load the selected mode reference (`../reviewing-requirements.md`, `../reviewing-specification.md`, `../reviewing-program-design.md`, `../reviewing-test-design.md`, `../reviewing-verification-design.md`, or `../reviewing-five-artifact-design.md`) and apply only the dimensions the chunk assignment maps to this seam, and return each mapped dimension as `required | satisfied by the existing system | not applicable | unresolved` with evidence.
 
 Read every artifact in the assignment whole before substantive findings. Reconstruct the seam: which requirement or obligation, which design element realizes it, which owners, edges, state, failure behavior, and proof seam the realization depends on. Attack the seam's crux with the applicable probes (divergent implementers, owner removal, failure interleaving, proof break). If judging the seam requires artifact text outside the assignment and its overlap seams, stop and return `partial` naming the missing text — that is a chunking defect the 🔎 Reviewer Sidekick repairs, not a gap to fill with inference.
 
