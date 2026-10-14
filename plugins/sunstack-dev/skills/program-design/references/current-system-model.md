@@ -4,7 +4,7 @@ This reference owns source-grounded reconstruction of the current runtime and it
 
 Expected inputs: governing specification and accepted boundary, bounded system surface, repo source roots, current docs/tests/logs/traces, and known platform constraints.
 
-Return: current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, contradictions, evidence gaps, and source identities with current applicability and coverage.
+Return: the source-backed entry-to-effect and recovery model used to compare proposed changes: the current owners, production and proof flows, state and mutation sites, failure and recovery behavior, the degree of constraint, what changes versus what stays authoritative, contradictions, evidence gaps, and source identities with current applicability.
 
 ## Trace Relationships, Not File Lists
 

@@ -8,6 +8,7 @@ import {
   SpecDesignResultSchema,
   SpecificationResultSchema,
 } from "../../../plugins/sunstack-dev/skills/spec-design/schemas/spec-design-result.ts";
+import { ProgramDesignResultSchema } from "../../../plugins/sunstack-dev/skills/program-design/schemas/program-design-result.ts";
 
 type Payload = Record<string, unknown>;
 
@@ -341,6 +342,120 @@ describe("spec-design result union", () => {
   });
 });
 
+describe("program-design result", () => {
+  const readyProgramDesign: Payload = {
+    phase: "program-design",
+    status: "locally-ready",
+    inputs: { requirements: requirementsDocument, specification: specificationDocument },
+    document: programDesignDocument,
+    summary: {
+      ownersAndInterfaces:
+        "PaneRouter owns delivery and its retry; the client sends once and branches on delivered | failed(reason).",
+      cruxAndTradeoff:
+        "Retry had two owners. Moving it to PaneRouter removes duplicate delivery; the client waits up to the router's deadline.",
+      proofSeamConstraints:
+        "Delivery is observed in the target pane's input buffer; the router-to-pane hop stays real in any interaction proof.",
+    },
+    confirmation: {
+      status: "confirmed",
+      sourceReference: "Owner confirmed the structural realization in the design thread",
+    },
+    localReview: readyLocalReview(programDesignDocument),
+    plannedEvidence: [
+      "Whether the terminal transport drops duplicate writes, observed on the real terminal",
+    ],
+  };
+
+  test("accepts a locally-ready result with confirmation, review and owed evidence", () => {
+    expect(issuePaths(ProgramDesignResultSchema, readyProgramDesign)).toEqual([]);
+  });
+
+  test("accepts an explicit owner waiver of the structural-realization confirmation", () => {
+    expect(
+      accepts(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        confirmation: {
+          status: "waived-by-owner",
+          sourceReference: "Owner asked to skip the structural confirmation and go to review",
+        },
+      }),
+    ).toBe(true);
+  });
+
+  test("rejects a ready result without the structural-realization confirmation", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, withoutField(readyProgramDesign, "confirmation")),
+    ).toEqual(["confirmation"]);
+  });
+
+  test("rejects a ready result that omits its proof-seam constraints", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        summary: { ...(readyProgramDesign.summary as Payload), proofSeamConstraints: "" },
+      }),
+    ).toEqual(["summary.proofSeamConstraints"]);
+  });
+
+  test("rejects a local review that covers a different Program Design document", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        localReview: readyLocalReview(fileReference("program-design", "program-design-v1.md")),
+      }),
+    ).toEqual(["localReview.coveredDocument"]);
+  });
+
+  test("rejects a Program Design stored at its Specification's location", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        document: fileReference("program-design", "specification.md"),
+        localReview: readyLocalReview(fileReference("program-design", "specification.md")),
+      }),
+    ).toEqual(["document.location"]);
+  });
+
+  test("rejects a Specification input of the wrong kind", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        ...readyProgramDesign,
+        inputs: { requirements: requirementsDocument, specification: requirementsDocument },
+      }),
+    ).toEqual(["inputs.specification.kind"]);
+  });
+
+  test("lets a blocked result name the upstream document that owns the gap", () => {
+    expect(
+      accepts(ProgramDesignResultSchema, {
+        phase: "program-design",
+        status: "blocked",
+        gap: {
+          token: "specification-gap",
+          reason: "No obligation says what an operator sees when pane B closes mid-send.",
+          affectedSources: ["docs/specs/2026-10-13-pane-routing/specification.md"],
+          requiredResolution:
+            "The Specification states the observable outcome of a send to a closed pane.",
+        },
+        evidenceSummary: "The recovery walk reached a closed pane and found no obligation for it.",
+        draftDocuments: [programDesignDocument],
+      }),
+    ).toBe(true);
+  });
+
+  test("rejects a draft document of another kind", () => {
+    expect(
+      issuePaths(ProgramDesignResultSchema, {
+        phase: "program-design",
+        status: "blocked",
+        gap: { ...designGap, token: "program-design-gap" },
+        evidenceSummary: "The terminal transport's duplicate handling is unknown.",
+        draftDocuments: [testDesignDocument],
+      }),
+    ).toEqual(["draftDocuments.0.kind"]);
+  });
+});
+
 describe("phase schema imports", () => {
   const relativeImportsOf = (file: string): readonly string[] =>
     [...readFileSync(file, "utf8").matchAll(/from "(\.[^"]+)"/g)].map((match) =>
@@ -362,7 +477,10 @@ describe("phase schema imports", () => {
   };
 
   test("a phase schema reaches only itself and the shared design schemas", () => {
-    for (const phaseSchema of ["skills/spec-design/schemas/spec-design-result.ts"]) {
+    for (const phaseSchema of [
+      "skills/spec-design/schemas/spec-design-result.ts",
+      "skills/program-design/schemas/program-design-result.ts",
+    ]) {
       const entry = path.join(pluginRoot, phaseSchema);
       const outsideShared = [...reachableFiles(entry)].filter(
         (file) => file !== entry && !file.startsWith(`${sharedSchemaRoot}${path.sep}`),

@@ -4,7 +4,7 @@ This reference owns the structural crux, forces, credible alternatives, selectio
 
 Expected inputs: authoritative requirements, current-system model, constraint degree, and open feasibility evidence.
 
-Return in workflow order: first the crux, forces, and evidence gaps that block credible alternatives; after the caller generates and compares alternatives, return the alternatives, comparison, selected direction, tradeoffs, debt/payer, falsifiers, and unresolved decision/evidence gaps.
+Return the crux, the credible alternatives, the chosen boundary, its cost and who pays, the evidence that could overturn it, and any decision or evidence gap that blocks the choice.
 
 ## Find the Crux
 
@@ -35,7 +35,9 @@ falsifier or revisit signal
 
 Do not pad a non-choice into two labels. A first design has no predecessor-improvement burden. A redesign must name what materially improves and where cost moves.
 
-Good: options differ on an actual owner, boundary, consistency, lifecycle, or proof decision.
+Good: options differ on a real owner, boundary, consistency, lifecycle, or proof decision.
+
+Clean case: the existing `InvoiceLedger` already owns invoice state and the change adds one field to its settled event. No credible alternative moves that ownership, so the design says so in one sentence and spends its attention on the event's consumers.
 
 Bad: “simple vs scalable,” the preferred design plus a strawman, or alternatives that share the same load-bearing structure.
 

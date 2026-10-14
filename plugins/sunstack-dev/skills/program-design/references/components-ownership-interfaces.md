@@ -4,7 +4,9 @@ This reference owns entity binding, target composition, component depth, singula
 
 Expected inputs: selected direction, requirements, the Specification's entity table (`E` identifiers with identity rules, relationships, invariants, and states), current-system model, constraints, and design crux.
 
-Return in workflow order: first the entity binding table, its code shapes, the found type conventions or `none found`, and each design-only concept with the `E` or `R` it serves; then the integrated overview and component tree; after the caller assigns ownership/dependency direction and defines interfaces, return the component tree, ownership/dependency maps, interface contracts, forbidden edges, and gaps.
+Return the chosen owners, interfaces and domain-state and schema bindings: the entity binding table with its code shapes and found type conventions or `none found`, each design-only concept with the `E` or `R` it serves, the component tree, ownership and dependency maps, interface contracts, forbidden edges, and gaps.
+
+The binding table records choices the crux comparison already made. Filled in before the alternatives are weighed, it hides the decision it should record.
 
 ## Entity Binding
 

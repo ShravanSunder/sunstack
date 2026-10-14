@@ -4,7 +4,7 @@ This reference owns state/lifecycle models, normal end-to-end flows, and compati
 
 Expected inputs: component/ownership/interface model, the entity binding table with its boundary shapes, requirements, external boundaries, and current-system constraints.
 
-Return in workflow order: first the applicable state/lifecycle model and current-to-proposed call-path comparison procedure; after the caller draws normal flows, return the state model, call-path deltas, control/data/call flows with the shape on each boundary-crossing edge, migration phase model, authority rules, and gaps.
+Return the state, call and data realization and the real callers it affects: the state model, current-to-proposed call-path deltas, control and data flows with the shape on each boundary-crossing edge, the cutover or migration phase model, authority rules, and gaps.
 
 ## State and Lifecycle
 
@@ -75,7 +75,13 @@ Bad: only boxes and arrows, separate current/target descriptions with no delta m
 
 ## Migration and Cutover
 
-For each coexistence phase, name:
+The default is a hard cutover: one path after the change, with a migration for data already stored. An old stored value or a deployed consumer is a fact the cutover must handle; it does not justify keeping an old path alive, a compatibility shim, or a flag the owner never approved. A coexistence phase is an owner decision with a named end.
+
+Good: stored reminders without an account id are migrated by joining their ticket's account, and the reader accepts only the new shape after cutover.
+
+Bad: the reader accepts both shapes indefinitely "for safety", and nobody owns removing the old one.
+
+When the owner approves a coexistence phase, name for each phase:
 
 ```text
 authoritative state

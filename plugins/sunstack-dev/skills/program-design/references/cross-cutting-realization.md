@@ -4,7 +4,7 @@ This reference owns structural realization of applicable quality obligations.
 
 Expected inputs: specification obligations/non-goals, component/flow/failure models, platform constraints, and proof modalities.
 
-Return: per-obligation owner, mechanism/boundary, normal behavior, failure/degradation behavior, proof seam, or reasoned not-applicable result.
+Return, per applicable obligation: its enforcement or observation owner, mechanism and boundary, normal and degraded behavior, proof seam, and its consequence for the chosen structure; or a reasoned not-applicable result.
 
 Inspect when applicable:
 
@@ -28,7 +28,7 @@ For reliability/operability, trace isolation, fallback/degradation, health, logs
 
 For performance/capacity, trace budgeted boundary, queue/load/backpressure owner, overload degradation, measurement seam, and failure.
 
-For accessibility/platform compatibility, name the structural enforcement point and real supported boundary rather than leaving a planner-owned test note.
+For accessibility/platform compatibility, name the structural enforcement point and the real supported boundary, so Test Design and Verification Design know which boundary their proof must reach.
 
 Good: complete obligation → owner → control → failure/degradation → proof chain.
 

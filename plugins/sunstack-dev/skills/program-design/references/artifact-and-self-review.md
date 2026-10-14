@@ -4,10 +4,7 @@ This reference owns view application, artifact navigation, simplification, bindi
 
 Expected inputs: distinct Requirements and Specification identities, governing Requirements and Specification contents including the entity table, accepted requirements set, confirmed goal boundary, current/target models, entity binding table, decisions, debt, trace table, selected rendering results, and repo documentation conventions.
 
-Return in workflow order:
-
-1. Artifact structure and view application, artifact identity, verification of the binding table and trace table, view-verification result, and pruned elements.
-2. After the caller runs the complete integration self-check stage, the self-check gaps.
+Return the structural artifact and its identity, the views with their verification result, verification of the binding table and trace table, pruned elements, and, once the caller has re-read the whole artifact, the integration self-check gaps and any confirmation gap.
 
 ## Apply Required Views
 
