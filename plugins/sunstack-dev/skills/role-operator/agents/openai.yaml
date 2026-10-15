@@ -1,5 +1,5 @@
 interface:
-  display_name: "Operator"
+  display_name: "Role: Operator"
   short_description: "Execute supplied procedures and report observations"
   default_prompt: "Use $role-operator to perform the supplied procedure or collection criteria and return observations and exceptions."
 policy:
