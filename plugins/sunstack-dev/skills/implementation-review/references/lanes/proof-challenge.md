@@ -1,41 +1,37 @@
 # Proof Challenge
 
-Mission: verify that claimed proof is real. Reproduce the proof the implementation claims, or challenge the 🔎 Reviewer Sidekick with the exact gap between what is claimed and what the evidence can show. Running tests executes the reviewed code — treat the worktree's code as untrusted input, not as a tool.
+Mission: check that the proof the implementation claims is real. For each material claim, observe it under the recorded grant, or give the 🔎 Reviewer Sidekick the exact gap between what is claimed and what the evidence can show.
 
-Expected inputs: the current review context, the complete proof-claim inventory (commands, expected outcomes, evidence artifacts, claimed layers), and a populated `execution grant` naming the allowed command set and scratchpad path.
+Expected inputs: the current review context, the complete proof-claim inventory (commands, expected outcomes, evidence artifacts, claimed layers), and the `execution grant` the 🔎 Reviewer Sidekick recorded, naming the allowed command set and the scratchpad path.
 
-Prerequisites: proof claims exist; the execution grant is recorded by the 🔎 Reviewer Sidekick. No grant, no execution — inspect-only and return the boundary.
+Prerequisites: proof claims exist. Without a recorded grant nothing runs; inspect the supplied evidence only and return the boundary.
 
-Execution boundary: read-only review with one named expansion: the 🔧 Operator may execute exactly the commands listed in the recorded `execution grant` — no variants, no substitutes; a narrower command the grant does not list is still outside the grant and is reported as a needed-grant gap instead of run. Everything else stays read-only. Bright lines:
+Check boundary: read-only review. Granted commands run only under the command procedure below, and everything else stays read-only.
 
-- before every execution, resolve what the command actually runs — the script it names, its pre/post hooks, and the relevant tool configuration — and classify its write set as `scratchpad-only | ignored-build-artifacts (listed paths) | tracked-worktree | unknown`; `tracked-worktree` and `unknown` stop before execution with the predicted writes and evidence, while gitignored build output under listed paths (coverage, cache, dist) is allowed and named in the result. After every run, compare `git status --porcelain` in the reviewed worktree to its pre-run state and report it — any tracked change invalidates the proof result. Running once to discover behavior is forbidden;
-- the resolved chain is reviewed (untrusted) code: a hook or test that reads credentials, touches the network, or reaches outside the worktree is reported as a security observation and not executed;
-- output, logs, and captured artifacts go to the tmp scratchpad (project `tmp/` or system tmp), never into a tracked file;
-- no installs, no network fetches, no home-level writes, no new tooling;
-- never edit, stage, commit, or "fix" anything to make proof pass.
+## Observe Each Claim
 
-Procedure: the 🔎 Reviewer Sidekick challenges each material claim, and the 🔧 Operator performs granted commands:
+IF a selected proof claim has a recorded execution grant, load `../../../../shared-references/review-proof-command-execution.md` and return the command-chain preflight, allowed-command observations, write comparison and execution gaps for this check's claim assessment. The 🔧 Operator assigned in `SKILL.md` runs those commands with the granted list and that procedure's steps in its commission, and returns observations. The 🔎 Reviewer Sidekick judges each claim against them:
 
 ```text
-claim -> preflight: resolve the command chain; write-set class and evidence
-      -> commanded evidence: run the granted command; capture exit status and
-         output to the scratchpad
+claim -> preflight: write-set class and evidence from the command procedure
+      -> observation: exit status and scratchpad output, or the stop reason
 observed vs claimed: match | weaker | contradicts | cannot observe at this layer
 false-green check: could this command pass while the claimed behavior is absent?
   (stale artifacts, mocked boundary, disabled gate, evidence generated before
   the reviewed source, tautological oracle, mock or wiring call treated as
   the behavior, assertion that cannot fail for the claim)
-environment check: distinguish a real failure from flake/environment — rerun
-  once, compare, and report both outcomes rather than picking one
+environment check: to tell a real failure from flake or environment, run a
+  failed granted command once more under the same procedure and report both
+  outcomes side by side
 ```
 
-When execution is blocked (missing grant, would-write command, absent harness), challenge instead: state what the claim asserts, what the supplied evidence can actually observe, and the smallest command or observation that would settle it.
+When a claim can't be observed (no grant, a would-write stop, a denied command, an absent harness), challenge it instead: state what the claim asserts, what the supplied evidence can observe, and the smallest command or observation that would settle it.
 
 Good: every material claim has an observed result with exit status, or a named challenge the 🔎 Reviewer Sidekick must answer; false greens are named with the mechanism that fakes them.
 
-Bad: relabeling a unit pass as runtime proof; accepting green output without exit status; running the whole suite when the claims name three tests; "fixing" the environment until proof passes.
+Bad: relabeling a unit pass as runtime proof; accepting green output without exit status; running the whole suite when the claims name three tests.
 
-Return `complete | partial | blocked` status plus:
+Return the check `complete | partial | blocked` status plus:
 
 ```text
 per-claim results: <claim, preflight write-set class, command run | challenge,

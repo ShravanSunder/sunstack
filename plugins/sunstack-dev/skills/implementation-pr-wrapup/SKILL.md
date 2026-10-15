@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 Close the PR loop with current GitHub state and a reviewer-facing why-and-shape body. Green checks are one gate, not merge readiness. Independent-review coverage is not a wrap-up ready gate. Description authoring is 📚 Researcher Worker work through `practices-manage-agents`; parent gates stay mechanical. The body is HEAD-tied: a head or diff identity change re-enters description dispatch before ready.
 
-This is a low-thinking workflow by default: use repeatable state checks, reference files, API reads, and crisp gate decisions. Escalate reasoning only when PR state, review feedback, mergeability, security/public-artifact safety, or user authorization is ambiguous. Do not write the PR body in the parent — not at `gh pr create`, and not because a 🔧 Operator can "jot the outline."
+This is a low-thinking workflow by default: use repeatable state checks, reference files, API reads, and crisp gate decisions. Escalate reasoning only when PR state, review feedback, mergeability, security/public-artifact safety, or user authorization is ambiguous. Do not write the PR body in the parent, including at `gh pr create`, and do not accept "a 🔧 Operator can jot the outline" as a reason to.
 
 ## When To Use
 
@@ -32,7 +32,7 @@ The assigned 🐒 Implementer Sidekick may carry its delivery assignment through
 1. Inspect local branch/worktree state. MUST load `references/local-branch-state.md` and return push/readiness blockers.
 2. Sanitize public artifacts. MUST load `references/public-artifact-safety.md` and return redactions or refuse-to-publish.
 3. Inspect or create/update the PR without authoring `## Why the change`, `## Special things to note`, or `## Change outline`. MUST load `references/github-pr-state.md` and return number, URL, head SHA, base, body, and mergeability snapshot. Description waits for step 4. Reject "it's faster to write the body in the parent."
-4. IF this run created a PR, or the current body is missing `## Why the change` / `## Special things to note` / `## Change outline`, is a file-list changelog (`- path — note` bullets as the outline), stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite — including after a head/diff identity change and before a ready claim:
+4. IF this run created a PR, or the current body is missing `## Why the change` / `## Special things to note` / `## Change outline`, is a file-list changelog (`- path — note` bullets as the outline), stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite (including after a head/diff identity change and before a ready claim):
    ```text
    IF this run created a PR, or the current body is missing those headings, is a file-list changelog, stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite:
      dispatch `pr-description` to a 📚 Researcher Worker through `practices-manage-agents` using this packet:

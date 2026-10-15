@@ -13,7 +13,8 @@ flowchart TD
     B -- Blocked or stale --> D[Stop with the exact blocker]
     B -- Yes --> E[Check branch, files, commands, scope, and proof]
     E --> F[Choose the smallest ready slice]
-    F --> G[Implement and run focused proof]
+    F --> V[Map each obligation to its required proof, and practices-verification proposes the route]
+    V --> G[Implement, then practices-verification observes each obligation]
     G --> H{Did reality contradict the plan?}
     H -- Reversible drift --> I[Correct inside the approved boundary]
     H -- Design or plan problem --> J[Stop and route to the owning phase]
@@ -29,8 +30,9 @@ flowchart TD
 - Plan-only, missing, malformed, or stale governing basis/delivery context stops implementation.
 - A design surprise is not patched around. It returns to design.
 - A required proof gate is never weakened to make the run pass.
+- This phase decides which obligation needs proof and at which gate; `practices-verification` decides how each one is observed and reports supported, unsupported or unknown.
 - Independent implementation review happens afterward in `implementation-review`.
 
 ## Output
 
-Changed files plus fresh focused, integration, manual/runtime, and quality evidence as applicable. Progress and proof remain outside the plan itself.
+Changed files, each obligation's observation route, target and result, and fresh focused, integration and quality evidence as applicable. Progress and proof remain outside the plan itself.

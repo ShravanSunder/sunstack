@@ -1,6 +1,6 @@
 # Merge Gates
 
-Before saying "ready", "merge-clear", "green", "fixed", or "complete", name the fresh command/API query that proves the claim and compare it to this gate list.
+Before saying "ready", "merge-clear", "green", "fixed", or "complete", match each gate below to the output of the fresh command or API query that shows it, and count any gate without that output as not ready ([evidence must observe this exact claim, at this version](../../principle-verify-before-accepting/SKILL.md)). Other people, bots and CI change checks, comments, threads, mergeability, the head and the body without any action of yours. An earlier read of any of them does not replace the final re-fetch, even when nothing you did since could have changed it.
 
 ## Ready-To-Merge Gates
 
@@ -13,9 +13,9 @@ Before saying "ready", "merge-clear", "green", "fixed", or "complete", name the 
 - Comments and review threads have been inspected from fresh GitHub state.
 - Unresolved threads are fixed and resolved, rejected with evidence and replied to, or explicitly left open by user decision.
 - Mergeability is clean, not blocked or conflicting.
-- The live GitHub PR body uses `## Why the change` / `## Special things to note` / `## Change outline`, is current against HEAD/diff, is not a file-list changelog (`- path — note` bullets as the outline), has a non-empty Change outline, and is public-artifact-safe. Inspect the current GitHub body vs current HEAD/diff. Not ready on a missing required heading, an empty Change outline, a file-list changelog, a stale body, or a public-artifact-safety fail.
+- The body gate reads the live GitHub PR body against the current HEAD and diff. It passes only when the body has `## Why the change`, `## Special things to note` and `## Change outline`, the Change outline is non-empty and is not a file-list changelog (`- path — note` bullets as the outline), the body is current against HEAD/diff, and it passes public-artifact safety. Any one miss is not ready.
 - One quiet poll passed after all gates first became clear.
-- Final re-fetch confirms checks, comments, threads, mergeability, head SHA, and reapplies the body bullet above — not merely that a body exists.
+- Final re-fetch confirms checks, comments, threads, mergeability and head SHA, and applies the whole body gate again to the re-fetched body.
 
 If the PR base branch is wrong or uncertain, stop and ask or update the PR base before claiming readiness.
 

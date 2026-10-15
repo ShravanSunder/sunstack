@@ -1,6 +1,6 @@
 # Implementation Review
 
-`implementation-review` independently checks implemented work and its proof. The parent agent coordinates: it reads the governing sources and the whole diff itself, chooses which reviewer lanes to run and in what order, hands each reviewer complete files plus the quoted rails with deliberate overlap, and verifies every candidate finding against those rails before accepting anything.
+`implementation-review` independently checks implemented work and its proof. The caller commissions one 🔎 Reviewer Sidekick, which reads the governing sources and the whole diff itself, plans sequential chunk passes with deliberate overlap, walks every check in its own session, and verifies each candidate finding against the quoted rails before accepting it. The orchestrator then disposes and routes the result.
 
 The runtime contract is [SKILL.md](./SKILL.md). Chunking and lane order are in [coordination-and-chunking.md](./references/coordination-and-chunking.md), the review method is in [reviewing-implementation.md](./references/reviewing-implementation.md), and rails-anchored reduction is in [finding-and-reduction.md](./references/finding-and-reduction.md).
 
@@ -12,14 +12,15 @@ flowchart TD
     B -- No --> C[Verify every changed file and consumer; return non-substantial]
     B -- Yes --> D{Authority, plan, diff, proof complete?}
     D -- No --> E[Return blocked input]
-    D -- Yes --> F[Coordinator reads governing basis and whole diff]
-    F --> G[Chunk plan with overlap; choose lanes with reasons]
+    D -- Yes --> F[Reviewer Sidekick reads governing basis and whole diff]
+    F --> G[Chunk plan with overlap; choose checks with reasons]
     G --> H[Spec-compliance]
-    H --> I[Chunk reviewers in parallel]
-    G --> J[Proof-challenge when proof is claimed]
-    I --> K[Dispel: challenge findings and unrequested delivery]
+    H --> I[Chunk passes, one after another]
+    I --> J{Proof claimed?}
+    J -- Yes --> Q[Proof-challenge]
+    J -- No --> K[Dispel: challenge findings and unrequested delivery]
+    Q --> K
     K --> L[Reduce on the rails]
-    J --> L
     L --> M{Result}
     M -- Ready --> N[PR readiness]
     M -- Needs revision --> O[Route each finding by cause]
@@ -35,4 +36,4 @@ flowchart TD
 
 ## Output
 
-One result — ready, needs revision, blocked input, decision needed, or not converging — with rails-anchored findings, rejected findings with evidence, remaining uncertainty, and exact routes.
+One result (ready, needs revision, blocked input, decision needed, or not converging) with rails-anchored findings, rejected findings with evidence, remaining uncertainty, and exact routes.

@@ -1,6 +1,6 @@
 # Components, Ownership, and Interfaces
 
-This reference owns entity binding, target composition, component depth, singular ownership, dependency direction, and behavioral interfaces.
+This reference owns entity binding, target composition, singular ownership, dependency direction, and behavioral interfaces.
 
 Expected inputs: selected direction, requirements, the Specification's entity table (`E` identifiers with identity rules, relationships, invariants, and states), current-system model, constraints, and design crux.
 
@@ -117,9 +117,7 @@ Components are semantic owners, not directories, and each has one home. For UI w
 
 Use a component tree when hierarchy/composition matters and a topology view when peer boundaries or dependency direction matter more than nesting. Label owners and consumers on the view; do not infer ownership from box position alone.
 
-## Depth and Ownership
-
-Apply the deletion test: if removing a component makes its complexity disappear rather than move to callers, it is probably pass-through. If callers must learn nearly all its policy, lifecycle, or failure rules, it is shallow.
+## Ownership and Dependency Direction
 
 For every truth, invariant, lifecycle, and side effect, name exactly one authoritative owner. Define allowed/forbidden edges and the detection or enforcement class.
 
@@ -148,7 +146,7 @@ type SettlementDecision =
   | { readonly kind: "reject"; readonly reason: "amount-mismatch" | "already-settled" | "invoice-voided" };
 ```
 
-Write one representative caller interaction before finalizing. Add a seam for real variation, trust/process boundary, lifecycle owner, proof boundary, external/fallible dependency, or multiple consumers—not for abstraction aesthetics.
+Before finalizing a load-bearing interface, write one representative caller interaction from the consumer's side and use it to decide whether the boundary needs a seam or stays a direct call ([give each part one job and inject only at real seams](../../principle-separate-the-concerns/SKILL.md)).
 
 Good: interface hides owner policy and makes caller assumptions explicit; every variant a caller must branch on is a named member of the union.
 

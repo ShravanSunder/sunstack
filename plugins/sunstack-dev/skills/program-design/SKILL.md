@@ -155,11 +155,11 @@ Completion: every `E` has a binding row with every cell filled or marked `gap: <
 
 ### 6. Select the target composition
 
-Using the already-loaded `references/components-ownership-interfaces.md`, apply its target-tree, depth/deletion, ownership, dependency, and behavioral-interface method in working state.
+Using the already-loaded `references/components-ownership-interfaces.md`, apply its target-tree, ownership, dependency, and behavioral-interface method in working state.
 
 Derive the integrated overview from the binding table before detailing mechanisms. For UI/refactor work, include the render/component tree and distinguish state owners, pure views, integration/effect boundaries, and derived state.
 
-For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks if removed, why the existing foundation cannot supply it, and why it remains within the agreed acceptable complexity. Delete it when no confirmed obligation breaks; do not complete missing contracts for an unnecessary mechanism.
+For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks or moves into its callers if it is removed, why the existing foundation cannot supply it, and why it stays within the agreed acceptable complexity ([keep complexity only when an outcome needs it now](../principle-justify-the-complexity/SKILL.md)). Delete it when no confirmed obligation breaks and its callers would not inherit a lifecycle, policy, or failure rule it owns. Do not complete missing contracts for a mechanism you deleted.
 
 Completion: each component has one job, reason to change, consumers, owned behavior, and justified interface.
 
@@ -243,7 +243,7 @@ Author top-down. Begin with the rendered fired views. Use concise prose as the o
 
 The Lead expresses every selected requirement realization, entity binding, component, ownership rule, interface, state/failure policy, view, and claim. Unmapped needs return as gaps rather than becoming delegated design work.
 
-After deletion or simplification, compare coverage with the accepted requirements set. Many mechanisms may become fewer; the complete accepted requirements set from `spec-design` — affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations — may not lose any item without owner authority. Stop on a conflict with mutually narrowed current files.
+After deletion or simplification, compare coverage with the accepted requirements set. Many mechanisms may become fewer, but the complete accepted requirements set from `spec-design` (affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations) may not lose any item without owner authority. Stop on a conflict with mutually narrowed current files.
 
 Completion: each design element serves an obligation, constraint, failure policy, or proof need; after any deletion or simplification pass, every accepted identity has an inspectable `covered | owner-authorized supersession | gap` disposition and anchor, derived from its trace-table row for each Specification obligation and reported beside the table for every other accepted identity, with shared rows allowed only when every member identity is enumerated and has the same disposition and anchor; and every fired Required View has a passed rendering result with its semantic fields preserved.
 
@@ -356,7 +356,7 @@ Do not return `locally-ready` while any of these hold:
 - a screen the user will see lacks a current-app-grounded Image Gen result, or that result is missing, broken, uninspected, unreadable, inconsistent with the Mermaid views, or not accepted by the Lead, without an exact `no current UI` gap, a user-format override that is not a text fence, or an explicit owner-authorized deferral;
 - state, flow, failure/recovery, concurrency, migration, trust, or proof semantics are applicable but undefined;
 - delegated evidence was treated as target design, or a helper originated alternatives, target models/views, structural realization, section prose, or any design meaning;
-- a mechanism survives even though removing it breaks no confirmed requirement, or simplification loses accepted requirements without owner authority;
+- a mechanism survives even though removing it breaks no confirmed requirement and its callers would not inherit a lifecycle, policy, or failure rule it owns, or simplification loses accepted requirements without owner authority;
 - the current structural realization lacks explicit owner confirmation or a recorded `structural-realization confirmation: waived by owner`;
 - planning would still need to invent an owner, interface, state/failure policy, trust control, or proof seam;
 - required independent review is missing, stale, partial, silent, or blocked;

@@ -75,7 +75,9 @@ Bad: only boxes and arrows, separate current/target descriptions with no delta m
 
 ## Migration and Cutover
 
-For each coexistence phase, name:
+A change that moves every caller and deletes the old path in one step has no coexistence phase to model. Model coexistence only when a consumer this change cannot move in one step, such as stored data, another system, or a deployed client, has to keep working through it, and the owner has decided its cutover plan. Name that consumer and the owner's decision before any phase. When the consumer exists and no owner decision covers its cutover, return that unmade compatibility choice as `decision-needed` and design no phases for it. Delete a parallel or compatibility path that no such consumer and decision require.
+
+For each phase the owner authorized, name:
 
 ```text
 authoritative state
@@ -87,6 +89,6 @@ failure/recovery behavior
 proof seam
 ```
 
-A temporary dual path is one coordination boundary with an authority rule per phase, not two sources of truth.
+Within an authorized phase, the old and new paths form one coordination boundary with one authority rule per phase, so each truth keeps one source.
 
-Complete when: every material runtime-behavior group has a source-anchored current/proposed call-path delta or proposed-only no-predecessor result; every added, removed, or changed owner, call, state/effect, and result/error edge is explicit, with preservation-critical or contested unchanged edges marked; every boundary-crossing edge names its shape or a `gap: <why>`; a human can trace effect and return without mentally diffing separate prose; state writes cannot bypass owners; and each migration phase has explicit authority, transition, rollback, failure, and proof.
+Complete when: every material runtime-behavior group has a source-anchored current/proposed call-path delta or proposed-only no-predecessor result; every added, removed, or changed owner, call, state/effect, and result/error edge is explicit, with preservation-critical or contested unchanged edges marked; every boundary-crossing edge names its shape or a `gap: <why>`; a human can trace effect and return without mentally diffing separate prose; state writes cannot bypass owners; every coexistence phase names the consumer that needs it and the owner's cutover decision; and each migration phase has explicit authority, transition, rollback, failure, and proof.
