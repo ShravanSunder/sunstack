@@ -4,6 +4,8 @@ This is your side of commissioning an independent review and disposing of what i
 
 ## Commission
 
+Commission an implementation review only after you have assessed the work against the plan and its proof, and, when an Advisor exists, asked it to check the work too.
+
 Start the review lead in a fresh session with no authoring history. Never fork or resume a conversation that wrote the target, and that includes yours when you wrote the design or the plan. Its procedure decides whether it starts stage reviewers, and each of those also starts with no authoring history. Follow the lineage rule in `practices-manage-agents`: at least one reviewer per review comes from a different lineage than the author or you. For the how and why practices the writers were Claude, so a review lead on OpenAI Sol supplied it.
 
 Send the target with its revision, the procedure, the governing sources and the proof artifacts. Keep out the author's summary of what it did and your own verdict. The reviewer judges from the sources, and a summary steers it toward the author's reading.

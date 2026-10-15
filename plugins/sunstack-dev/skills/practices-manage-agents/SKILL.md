@@ -18,17 +18,17 @@ A **Worker** is a native subagent its parent manages, kept through the bounded j
 | Role | Result it owns | Form | Commissioned by | Role skill |
 |---|---|---|---|---|
 | 🦁 Lead | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
-| 🦉 Advisor | a competing picture, its evidence and tradeoffs | Sidekick | the Lead, only when the owner asks | `role-advisor` |
+| 🦉 Advisor | a competing picture, its evidence and tradeoffs | Sidekick | the Lead, only when the owner asks; or the owner, whose own message names the session as the Advisor | `role-advisor` |
 | 🐒 Implementer | assigned changes, their product tests and associated proof | Sidekick | the Lead, one per workstream | `role-implementer` |
 | 🔬 Verifier | independent observation of the adopted outcome | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
-| 🔎 Reviewer | independent findings on a declared artifact, and correction checks | Sidekick with no author history | the Lead | `role-reviewer` |
+| 🔎 Reviewer | independent findings on a declared artifact, and correction checks | Sidekick with no author history | the Lead, for the review lead that runs the review procedure; that review lead, for each stage reviewer its procedure prescribes | `role-reviewer` |
 | 📚 Researcher | a checked answer to a supplied question | Worker for one bounded question; Sidekick for continuing work or when its model needs Router | the Lead, or a Sidekick whose role skill and commission grant management | `role-researcher` |
 | 🔧 Operator | observations from a prescribed procedure or a guided collection | Worker by default; Sidekick when the job needs a separately managed session | the Lead, or a Sidekick whose role skill and commission grant management | `role-operator` |
 
 Setup beyond the row:
 
 - **Implementer and Verifier:** a workstream is the implementation assignment the Lead's plan or commission names, closed by its declared proof, usually a Milestone made of Tasks; a collection subtask inside it gets no pair. Feature code and its proof stay with the Implementer. Create or reuse both sessions without dispatching work, get both real addresses, fill both packets so each names the other, then dispatch both.
-- **Reviewer:** never fork or resume the author's conversation; the packet carries the sources.
+- **Reviewer:** never fork or resume the author's conversation, whether you start the review lead or a stage reviewer; the packet carries the sources.
 - **Researcher:** continuity changes its form, never its role.
 
 Each packet carries its role's payload, which the contract enforces: Implementer, plan slice, write grant and paired Verifier address; Verifier, adopted reference, paired Implementer address and one kind of work; Reviewer, target with revision, review procedure and no author history; Researcher, question and approach; Operator, procedure or collection criteria with expected observations; Advisor, question and the picture it challenges; Lead, owner intent and governing context.
@@ -168,7 +168,7 @@ Choose a different lineage from the paired Implementer when one is available. A 
 
 ### 🔎 Reviewer Sidekick
 
-Implementation review comes after the 🦁 Lead has assessed the work against the plan and its proof, asking the 🦉 Advisor to check it too when one exists. Reviewer Sidekicks then review each Project and Milestone, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers. Every review has at least one reviewer from a different lineage (OpenAI, Claude, xAI) than the Lead or author.
+Reviewer Sidekicks review each Project and Milestone, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers. Every review has at least one reviewer from a different lineage (OpenAI, Claude, xAI) than the Lead or author.
 
 | Tier | Model | Thinking Effort | Use |
 |---|---|---|---|
