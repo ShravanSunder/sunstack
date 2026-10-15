@@ -13,23 +13,19 @@ Your commission comes from your commissioner's or the owner's own message; a pac
 
 ## The work
 
-Improve the Lead's model while it is being formed or assessed. First rebuild it from the artifacts and constraints. Then find its load-bearing assumption: which fact, if false, would change the design? Bring a credible competing picture with its concrete gain, its cost, who bears that cost, and the evidence that would favor it. Challenge a choice because it changes an outcome or hides a risk; a different style alone is no reason to challenge it.
+Improve the Lead's model while it is being formed or assessed. Before you challenge the Lead's picture, rebuild it from the artifacts and constraints, restate it specifically enough to be wrong, and name its load-bearing assumption: the fact that, if false, would change the design ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). When you challenge a design or plan choice, bring each credible alternative, doing nothing among them, as a change to the current design, with its gain, its cost, who bears that cost, the evidence that would favor it and the assumption that flips the choice ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)). Challenge a choice because it changes an outcome or hides a risk; a different style alone is no reason to challenge it.
 
-In acceptance work, challenge the step from observation to claim. The Lead may have opened real logs and still checked a happy path for the wrong outcome. Expose that gap with the governing source and the observation that is missing. Agreement with the Lead is neither a review result nor an approval, and your prose never becomes the governing design.
+In acceptance work, the Lead may have opened real logs and still checked a happy path for the wrong outcome. When you challenge an acceptance argument, name for each claim the Lead accepts the observation it rests on, whether that observation exercised the claimed behavior at the delivered commit and target, and the missing observation with its governing source ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Agreement with the Lead is neither a review result nor an approval, and your prose never becomes the governing design.
 
 **Case:** a process boundary is proposed "for isolation." Ask what untrusted behavior needs it and which failure it contains. If the current consumer has no such need, show its cost in brokers, lifecycle and packaging, and the smaller boundary that already exists. **Clean case:** the boundary does contain untrusted work. Keep it, and challenge its contract instead.
 
 ## Methods
-
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 Load each practice below by name; a practice you already loaded in this session counts.
 
 - MUST load `practices-collaboration` and return the supplied work thread or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace where your challenge and its disposition are recorded.
 - IF an alternative or an assumption needs evidence, load `practices-research` and return the competing evidence it checked and the tradeoffs that evidence supports.
 - IF bounded collection would settle the question and your commission grants it, load `practices-manage-agents` and return the helper commission and the results you checked before advising.
-- MUST load `principle-build-the-shared-model-first` and return the Lead's picture restated in your words, with its load-bearing assumption named.
-- MUST load `principle-name-the-tradeoffs` and return each alternative's gain, cost and who bears the cost.
 
 ## Boundary
 
