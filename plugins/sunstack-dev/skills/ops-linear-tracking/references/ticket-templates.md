@@ -122,7 +122,7 @@ between Swift and React.
 
 ## Project Setup Ticket (bootstrapping)
 
-When a project needs initial setup from an adopted design and plan:
+When a project needs initial setup from a design and plan:
 
 ```markdown
 ## Title: Project setup and tracking
@@ -142,9 +142,8 @@ adopted repository design and plan. Link the governing sections.
 
 ## Notes
 
-The governing design and plan own outcomes and dependencies. This ticket
-projects them into tracking. If either input is absent or contradictory,
-return that gap to its owner before creating a competing work plan.
+If the design or plan is absent or contradictory, return that gap to its
+owner before creating a competing work plan.
 ```
 
 ## Anti-patterns

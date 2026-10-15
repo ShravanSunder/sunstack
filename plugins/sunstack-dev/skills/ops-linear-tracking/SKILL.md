@@ -7,7 +7,9 @@ description: Use when the user asks to create, organize, update, delete, or insp
 
 Manage Linear projects, milestones, and issues following the **docs-are-truth, tickets-are-tracking** paradigm. Architecture documents in the repo are the source of truth for design and plans. Linear tickets track progress, dependencies, and what's blocked.
 
-IF a ticket becomes competing design authority, load `principle-one-owner-per-truth` and return the established owner and conflict. Project the adopted design into tracking; return disputed meaning to its owner through the commissioner. A routine checklist update under unchanged meaning needs no ownership audit.
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+IF a ticket states design that differs from its linked doc section, load `principle-one-owner-per-truth` and return the doc section and the ticket text that differ, to report to the user or the agent that assigned this work before changing either.
 
 ## The Paradigm
 
@@ -38,7 +40,7 @@ See `references/ticket-templates.md` for full examples.
 1. **Two levels only: milestones and tasks.** Milestones are conceptual phases. Tasks are deliverables within them. No sub-tasks — checklists in the description carry that role.
 2. **A task is a concept, not an implementation step.** "JSON-RPC command channel" is a task. "Add error code -32602" is a checklist item in the description.
 3. **If two tasks always ship together, they're one task.** The test: can each be delivered and verified independently? If not, merge them.
-4. **Dependencies are first-class.** Cross-project and cross-milestone dependencies use `blockedBy`/`blocks` relations. This is how agents determine what's unblocked.
+4. **Dependencies are first-class.** Cross-project and cross-milestone dependencies use `blockedBy`/`blocks` relations. This is how agents determine what's unblocked; a plan can add a delivery check (see Find what's unblocked).
 5. **Docs live in the repo, tickets reference them.** Architecture docs at `docs/architecture/` (or project-specific path). Tickets link to section numbers, not duplicate content.
 
 ## Tool Routing: MCP vs CLI
@@ -87,7 +89,7 @@ linear issue relation add LUNA-336 blocked-by LUNA-335
 
 **Reading dependencies — use MCP.** `get_issue` with `includeRelations: true` returns the full relation graph.
 
-IF dependency or source records disagree, load `principle-read-ground-truth-first` and return the governing versus current relation comparison. Read the adopted dependency and the actual relation list before changing it. For example, a completed ticket does not unblock its consumer if the required artifact has not reached the delivery boundary the plan names. Apply the resolved relation surgically through the existing tool route.
+IF the plan's dependencies and Linear's `blockedBy` relations disagree, load `principle-read-ground-truth-first` and return what the plan says each dependency is and what Linear's relation list shows, before changing either.
 
 ## Common Workflows
 
@@ -110,13 +112,13 @@ IF dependency or source records disagree, load `principle-read-ground-truth-firs
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Treat issues with empty `blockedBy` or completed blockers as readiness candidates. Before reporting one ready, confirm that any required artifact has reached the delivery boundary named in the adopted plan. Reuse adequate current evidence of that delivery.
+3. Treat issues with empty `blockedBy` or completed blockers as readiness candidates. If the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: check that delivery before calling the issue ready.
 
 ### Update ticket after implementation
 
-Update description checklists and mark observed completed items within the adopted scope. IF implementation contradicts the adopted model, load `principle-refine-mental-models` and return what was assumed, what was found, what it changes and the owning correction destination. Bring changed meaning to its design owner through the commissioner before projecting the resolution into tickets. If code omitted approved recovery, keep that obligation open; rewriting the ticket cannot make the implementation complete. Once the owner settles a correction, align tracking with the governing document.
+Tick only checklist items you saw completed. IF the shipped code does something its linked doc section doesn't say, or leaves out something it says, load `principle-refine-mental-models` and return what the doc assumed, what the code showed and which doc section must change. Get the doc corrected by its owner, through the user or the agent that assigned this work, before changing the ticket. If code omitted approved recovery, keep that obligation open; rewriting the ticket cannot make the implementation complete.
 
-Complete when the supplied tracking operation reflects adopted meaning, observed progress and actual dependencies; any unsettled design conflict stays with its existing owner.
+Done when each touched ticket links its doc section, its checklist matches what shipped, its blockers match the plan, and any doc conflict is reported rather than edited around.
 
 ## Reference Files (read on demand)
 
