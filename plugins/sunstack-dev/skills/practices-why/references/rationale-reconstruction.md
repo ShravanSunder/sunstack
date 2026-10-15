@@ -10,6 +10,10 @@ Good: "`a1b2c3` (2024-03) adds the retry loop with 3 attempts, message 'retry on
 
 Bad: "The retries were added in `d4e5f6` to handle maintenance windows." That reads the latest change as the origin and loses the first reason.
 
+Good: "`b7c8d9` adds the contract with 'Status: Draft for user review'. `e1f2a3` changes it to 'Accepted for implementation'."
+
+Bad: "`b7c8d9` records the contract as accepted for implementation." That quotes today's file and dates it to the commit that introduced the file.
+
 ## Introduction versus last touch
 
 Reformatting, renames, moves, lint fixes, dependency bumps and broad refactors often sit between the commit blame names and the commit that matters. Open the last-touch diff. If it only moved or reformatted the line, keep going back. `git blame <commit>^ -- <path>` continues from the parent, `git log -S '<literal>'` finds when a string or number appeared or vanished, `git log -L :<function>:<path>` follows one function, `--follow` crosses a file rename, and `git blame -C` finds lines moved from another file. The introduction is the commit where the behavior first exists in the form the question asks about.
