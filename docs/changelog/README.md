@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-15 Principle citation grammar](2026-10-15-principle-citation-grammar.md)
 - [2026-10-14 Practice and principle composition](2026-10-14-practice-principle-composition.md)
 - [2026-10-13 practices-manage-agents: roles, forms and typed packets](2026-10-13-practices-manage-agents.md)
 - [2026-10-12 Work-trail log homes](2026-10-12-work-trail-log-homes.md)
