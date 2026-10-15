@@ -345,12 +345,16 @@ role-verifier's Methods line "Apply them to the assignment's surface: a skill-on
 
 | Run | Target | State |
 |---|---|---|
-| — | merge of #131 `0f714775` | `38fa011f` |
-| R1 | role-lead | v3 in progress · behavior unverified/deferred · B5 owed |
-| R2 | role-advisor | v3 in progress · behavior unverified/deferred · B5 owed |
-| R3 | role-implementer | v3 in progress · behavior unverified/deferred · B5 owed |
-| R4 | role-verifier | v3 in progress · behavior unverified/deferred · B5 owed |
-| R5 | role-reviewer | v3 in progress · behavior unverified/deferred · B5 owed |
+| — | merge of #131 `0f714775` | `38fa011f` · not yet verified by the review lead |
+| R1 | role-lead | v3 implemented `fb1ca8e6` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
+| R2 | role-advisor | v3 implemented `ced2a47d` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
+| R3 | role-implementer | v3 implemented `7b167bbe` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
+| R4 | role-verifier | v3 implemented `f283dc10` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
+| R5 | role-reviewer | v3 implemented `d2df345b` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
 | R6 | role-researcher | no v3 change (merge only) · behavior unverified/deferred |
-| R7 | role-operator | v3 in progress · behavior unverified/deferred · B5 owed |
-| R8 | practices-manage-agents | merge resolution `38fa011f`; V3-6 in progress · behavior unverified/deferred |
+| R7 | role-operator | v3 implemented `8b12e03c` · not yet verified by the review lead · behavior unverified/deferred · B5 owed |
+| R8 | practices-manage-agents | merge resolution `38fa011f`; V3-6 implemented `23c6a7e9` · not yet verified by the review lead · behavior unverified/deferred |
+
+### Implementation state, 2026-10-15
+
+On `skills/role-skill-promotion` from `6fae56f`: merge commit `38fa011f`, this section's commit `a8380cc7`, the six role commits and the management commit above, and the changelog update `1f572fea`. The implementer observed: `pnpm --dir tests/skills run test` 163/163; `typecheck` exit 0; `claude plugin validate .` passing; `git diff --check origin/skills/practices-principles` clean; #131's citation check passing with 43 citation sentences (27 outside the roles, 16 in five role skills); and the role check passing, after failing on a seeded Methods citation and a seeded bare `principle-` mention that were then restored. Word counts by `wc -w`, from `6fae56f`: role-lead 652 → 695, role-advisor 639 → 664, role-implementer 712 → 805, role-verifier 840 → 880, role-reviewer 610 → 590, role-researcher 688 → 688, role-operator 624 → 600; the management Main path 713 → 792 (780 at the merge). Static proof is structural only. No review of v3 has run yet; B5 is owed; nothing is pushed.
