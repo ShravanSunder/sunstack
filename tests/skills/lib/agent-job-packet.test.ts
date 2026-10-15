@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import type { ZodType } from "zod";
 import { describe, expect, test } from "vitest";
 import { AgentJobPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/agent-job-packet.ts";
@@ -12,6 +14,8 @@ import {
 } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/researcher-contract.ts";
 import { ReviewerPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/reviewer-contract.ts";
 import { VerifierPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/verifier-contract.ts";
+
+const skillsRoot = path.resolve(import.meta.dirname, "../../../plugins/sunstack-dev/skills");
 
 type PacketFields = Record<string, unknown>;
 
@@ -452,6 +456,26 @@ describe("role contracts", () => {
 
       // Assert
       expect(issues).toEqual(["requiredReads.charter"]);
+    },
+  );
+
+  test.each(roleContractCases)(
+    "the $role contract's charter names an existing role skill with a matching name",
+    ({ contract, valid }) => {
+      // Arrange
+      const parsed = contract.parse(valid) as { readonly requiredReads: { readonly charter: string } };
+      const charter = parsed.requiredReads.charter;
+      const skillFile = path.join(skillsRoot, charter, "SKILL.md");
+
+      // Act
+      const skillExists = existsSync(skillFile);
+      const frontmatterName = skillExists
+        ? /^name:\s*(\S+)\s*$/m.exec(readFileSync(skillFile, "utf8"))?.[1]
+        : undefined;
+
+      // Assert
+      expect(skillExists).toBe(true);
+      expect(frontmatterName).toBe(charter);
     },
   );
 
