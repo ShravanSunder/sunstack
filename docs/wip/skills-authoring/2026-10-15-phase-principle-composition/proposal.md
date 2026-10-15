@@ -1,6 +1,6 @@
 # Compose phase work from existing engineering principles
 
-Draft v1 · 2026-10-15 · `sunstack-dev` · user-directed, behavior-changing updates.
+Spec v1 · independently accepted-to-implement, 2026-10-15 · `sunstack-dev` · user-directed, behavior-changing updates.
 
 This is the specification for the next implementation PR above #132. It is not an implementation, a review verdict or a request to publish a spec-only PR.
 
@@ -181,4 +181,4 @@ At implementation integration, choose the next unreleased `sunstack-dev` version
 
 ## Status
 
-R1–R9: **proposed**. Thesis challenge requested from an independent Sol 6.1 high Worker with a Lead perspective; this is advice, not formal acceptance. Spec review must read this complete artifact and return the four required teaching/structure checks through an independent review lead before any runtime authoring. Review reports and discussion stay outside this spec. No spec acceptance, implementation, behavior proof or shipping is claimed.
+R1–R9: **proposed**; no runtime authoring has started. The independent Sol 6.1 high Lead-perspective challenge found no material residual. Independent formal SPEC review of v1 returned `great` and `accepted-to-implement` on 2026-10-15: mental-model-fit, depth-coverage, trigger-routing and rule-agreement are all complete, with no accepted findings. The retained review lead and its two prescribed reviewers had no target authorship; this was same-family review, without cross-family assurance. Review reports and discussion stay outside this spec. This accepts the specified design for a later implementation commission; it claims no implementation, behavior proof, publication or shipping.
