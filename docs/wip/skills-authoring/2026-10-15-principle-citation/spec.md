@@ -264,8 +264,21 @@ No sensitive surface is in scope (list in `security-gate.md`). The edits touch M
 
 | run | state | evidence |
 |---|---|---|
-| R1 `skill-creation` | proposed | — |
-| R2 `skill-review` | proposed | — |
+| R1 `skill-creation` | implemented · behavior unverified (deferred) | diff `ff8c911b`: R1 edits a–i, matching the accepted text |
+| R2 `skill-review` | implemented · behavior unverified (deferred) | diff `312391ab`: R2 edits a–g, matching the accepted text; version 0.2.0 and changelog entry |
+
+Static proof (2026-10-15, at `312391ab`):
+- **S1.** The changed files add no live markdown link: the grammar examples sit inside fences. Every path named in the new text resolves (`references/glossary.md`, `../SKILL.md`, `../../../skill-creation/SKILL.md`).
+- **S2.** The glossary definition and the read-rule text match word for word where they are copied. No line still requires one literal marker for every caller. `spec-review.md:28` names citation calls.
+- **S3.** All passed:
+  - `claude plugin validate .` passed; the README install-line warnings it prints exist for every plugin and are outside this diff.
+  - The contract test passed (7/7), the full `tests/skills` suite passed (149/149), and `typecheck` exited 0.
+  - `git diff --check` is clean.
+  - Codex `quick_validate.py` was not run: it is not available in this container.
+- **S4.** Version 0.2.0 is in the 3 plugin manifests and the 2 versioned marketplace entries; no `skill-authoring` 0.1.1 remains.
+- **S5.** See the run's final diff stat against `a737b87`.
+
+Static proof is structural only. Behavior proof B1–B5 is deferred, and the conversion spec owns B5. No implementation review has run yet, and no cache refresh has been done.
 
 ## Review record
 
