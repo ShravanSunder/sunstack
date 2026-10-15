@@ -1,5 +1,5 @@
 interface:
-  display_name: "Reviewer"
+  display_name: "Role: Reviewer"
   short_description: "Judge declared artifacts independently"
   default_prompt: "Use $role-reviewer to inspect the assigned artifact without authoring history and return anchored findings and correction checks."
 policy:
