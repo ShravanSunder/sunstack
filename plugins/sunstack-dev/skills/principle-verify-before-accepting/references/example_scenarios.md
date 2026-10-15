@@ -44,11 +44,11 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## Reuse after prose, recheck after routing
 
-**What happened.** A real reconnect journey on a declared build, client and provider profile observed one visible delivery after recovery. An unrelated documentation edit landed. Later the routing configuration changed; alternatively, the same checkout was used to claim a different installed binary had the fix.
+**What happened.** A real reconnect journey on a declared build, client and provider profile observed one visible delivery after recovery. An unrelated documentation edit landed, and the agent re-ran every journey. Later the routing configuration changed, and the agent accepted the old journey as proof for the new route.
 
-**The move.** Follow the dependencies of the exact claim instead of using commit age or source equality as a verdict.
+**The move.** Ask what the claim depended on, not how old the commit is.
 
-**Better.** Inspect the diff and the recorded target. When only prose changed and the exercised path, configuration and target still match, reuse the journey for its scoped claim. A routing change leaves the newly selected path unobserved; an installed binary of unknown provenance leaves delivery unproven. Drive that changed interaction or establish the actual build before extending the claim. Do not rerun every unrelated journey, and do not call reading the router source a runtime observation. A semantic review can likewise carry across an unchanged obligation, but says nothing about whether a binary executed it.
+**Better.** Inspect the diff and the recorded target. When only prose changed and the exercised path, configuration and target still match, reuse the journey for its scoped claim. A routing change leaves the newly selected path unobserved: drive that changed interaction before extending the claim. Do not rerun every unrelated journey, and do not call reading the router source a runtime observation.
 
 ## "Ready" on structural checks
 
