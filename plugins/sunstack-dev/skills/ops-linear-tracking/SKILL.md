@@ -7,9 +7,7 @@ description: Use when the user asks to create, organize, update, delete, or insp
 
 Manage Linear projects, milestones, and issues following the **docs-are-truth, tickets-are-tracking** paradigm. Architecture documents in the repo are the source of truth for design and plans. Linear tickets track progress, dependencies, and what's blocked.
 
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
-
-IF a ticket states design that differs from its linked doc section, load `principle-one-owner-per-truth` and return the doc section and the ticket text that differ, to report to the user or the agent that assigned this work before changing either.
+If a ticket states design that differs from its linked doc section, report the doc section and the ticket text that differ to the user or the agent that assigned this work before changing either.
 
 ## The Paradigm
 
@@ -89,7 +87,7 @@ linear issue relation add LUNA-336 blocked-by LUNA-335
 
 **Reading dependencies — use MCP.** `get_issue` with `includeRelations: true` returns the full relation graph.
 
-IF the plan's dependencies and Linear's `blockedBy` relations disagree, load `principle-read-ground-truth-first` and return what the plan says each dependency is and what Linear's relation list shows, before changing either.
+When the plan's dependencies and Linear's `blockedBy` relations disagree, compare, for each disputed dependency, the plan line that states it (or "inferred from order" when the plan only sequences the work) with the relation Linear lists, before changing either; an inferred dependency never overwrites a listed relation ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
 ## Common Workflows
 
@@ -108,15 +106,19 @@ IF the plan's dependencies and Linear's `blockedBy` relations disagree, load `pr
 4. Create milestones, then issues referencing doc sections
 5. Set `blockedBy`/`blocks` relations based on the dependency graph
 
+When you derive milestones or tickets from a design or plan, trace every scope line, acceptance criterion and Deferred item of each ticket to the doc or plan section it comes from; raise an untraced line, or a deferral of something the doc requires, with the user or the agent that assigned this work instead of writing it ([hold the scope](../principle-hold-the-scope/SKILL.md)).
+
+When a create or relation call errored or timed out after sending, or a breakdown resumes in a project that already has milestones or issues, match each intended milestone, issue and relation to the Linear item it already exists as (adopt it) or mark it absent (create it), before any further create call ([design for failure](../principle-design-for-failure/SKILL.md)).
+
 ### Find what's unblocked
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: check that delivery before calling the issue ready.
+3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: observe that delivery where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or report its readiness as unverified and say where you looked ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
 ### Update ticket after implementation
 
-Tick only checklist items you saw completed. IF the shipped code does something its linked doc section doesn't say, or leaves out something it says, load `principle-refine-mental-models` and return what the doc assumed, what the code showed and which doc section must change. Get the doc corrected by its owner, through the user or the agent that assigned this work, before changing the ticket. If code omitted approved recovery, keep that obligation open; rewriting the ticket cannot make the implementation complete.
+Tick only checklist items you saw completed. When the shipped code does something its linked doc section doesn't say, or leaves out something it says, name what the doc assumed and what the code showed, and decide drift or break: drift leaves the doc standing and the gap open as an implementation obligation that no ticket edit closes; a break means the doc's assumption failed, so name the doc section that must change ([refine mental models](../principle-refine-mental-models/SKILL.md)). Get a break corrected in the doc by its owner, through the user or the agent that assigned this work, before changing the ticket.
 
 Done when each touched ticket links its doc section, its checklist matches what shipped, its blockers match the plan, and any doc conflict is reported rather than edited around.
 
