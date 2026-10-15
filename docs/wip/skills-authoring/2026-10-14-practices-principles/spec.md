@@ -1,6 +1,6 @@
 # Useful practice and principle composition — project 1 specification
 
-Specification v3, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all eleven runtime runs are now implemented as authored source, with tests/evaluations explicitly deferred by the owner. Independent implementation review returned `targeted-revision`; the dated [v3 corrections](#2026-10-14-v3-corrections) supersede the v2 rows they name, and the same review lead re-verified them on 2026-10-15. Behavior proof and release remain unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
+Specification v3, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all eleven runtime runs are now implemented as authored source, with tests/evaluations explicitly deferred by the owner. Independent implementation review returned `targeted-revision`; the dated [v3 corrections](#2026-10-14-v3-corrections) supersede the v2 rows they name, and the same review lead re-verified them on 2026-10-15. The dated [v4 section](#2026-10-15-v4-principle-citations) converts every principle call to a citation and applies the approved principle inventory. Behavior proof and release remain unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
 
 ## Purpose and success
 
@@ -365,3 +365,83 @@ A3, A4, A9, A10 (`shape-catalog.md:275`, `:726` and the family-to-picker line), 
 ## Implementation state, 2026-10-14
 
 R1–R11 are committed on `skills/practices-principles` as draft PR #131, head `b064824`, base #127 `0bad422`. `16e0bd8a` records the implementation slices, `b7d6541f` authors R1–R11, and `b0648241` reconciles readiness and clarifies prose, including the Linear rule and README edits that V3-5 and V3-7 now admit. Version 2.77.0 is set in all three client manifests and marketplace entries. Independent cross-lineage implementation review at `b064824` returned `targeted-revision` with ship decision `blocked`, and owner decision D7 was added. The v3 corrections in `4d05ac7..fa5139a` close findings D1–D5 and A1–A18; D6 was handled in the PR descriptions. In a throwaway worktree the review lead observed `git diff --check` clean, `claude plugin validate .` passing, the skill suite at 149/149 and typecheck exit 0. Behavior proof stays deferred by the owner. The v3 corrections, including V3-9, are applied on this branch in local commits after `4d05ac7` and were verified by the review lead. After them the implementer observed the skill suite at 149/149, typecheck exit 0, `claude plugin validate .` passing and `git diff --check` clean. Nothing is pushed, and no merge, release or cache refresh has happened.
+
+## 2026-10-15 v4: principle citations
+
+Source: the owner's 2026-10-15 decisions for this conversion; the accepted principle citation grammar ([spec](../2026-10-15-principle-citation/spec.md), accepted at `cd26f9b3`, implemented in `skill-authoring` 0.2.0 at `ff8c911b` and `312391ab`); and the owner-approved principle inventory for the four practices and the five ops and presentation skills ("all recommended"). The inventory rows were anchored at `991667b`; the rows below are re-anchored on this branch at `c2b9c18`. Each decision names the v2 or v3 text it supersedes, and that text stays above as history. Role-skill inventory items are not in this PR; they land on #132.
+
+### Decisions
+
+| ID | Supersedes | Decision | Why and cost |
+|---|---|---|---|
+| V4-1 | V3-1 rules 3–4 and V3-10 "How" (the read rule lived in `principle-reading.md`) | In all 17 `principle-*` cards, the first body line after the H1 title is exactly: "Read this card in full before applying it; your own full read earlier this session counts." | Owner decision 1. The grammar makes the card's read rule the precondition for citing it, and `placement-and-calls` checks it, so a citing skill writes no loader line. |
+| V4-2 | V3-1 (shared reference and pointer line), V3-10, and the V3-7 alignment lines that name `principle-reading.md` | Hard cutover with no stub: delete `shared-references/principle-reading.md` and the pointer line "Before your first `principle-*` call, MUST load …" in all nine callers. Update every live file that names it: `AGENTS.md` (Skill layers principles clause, principles table row), the plugin `README.md` Principles paragraph, `docs/principles-index.md` `:3` and `:8`, and the #131 changelog entry. Older dated changelogs and `docs/wip` history stay. | Owner decision 2. Two homes for the read rule would drift, and the grammar has no loader line. |
+| V4-3 | Common authoring contract "Use the ordinary literal call forms: `MUST load <principle> …`"; the "New call" column of the V3-2 call table (its predicates survive as moments where a row below keeps them) | Every principle use in the nine skills, their references (including the seven role charters under `practices-manage-agents/references/roles/`) and `shared-references/diagram-semantics.md` uses the citation form `<observable moment>, <action in plain words> ([<card's judgment in plain words>](<relative path>))`. No ``load `principle-`` remains in these files. | Owner decision 3; grammar D1 and D5. |
+| V4-4 | The V3-2 call table rows, as changed below | Apply the approved inventory for the nine skills (rows below): the inventory predicate becomes the moment and its return becomes the action. Side fixes: the ticket-templates "sync handlers sufficient for now" Deferred example; the presentation-tui walkthrough's adjective pro/con example, whose costs now say what and who pays; diagram-semantics' "two viable options", aligned with including doing nothing. practices-research · define-the-domain-first is dropped. | Owner decision 4. |
+| V4-5 | — | The seven role charters in this PR change form only. A charter copy of a citation that a skill it names at that step already makes is dropped: `lead.md`'s cut-work shared-model (management step 1 cites it) and `researcher.md`'s read-ground-truth and write-for-the-reader (`practices-research` steps 2 and 6 cite them). Every role inventory item lands on #132, where the charters become `role-*` skills. | Role items are out of this stage; the drops follow the grammar's once-per-decision rule. Cost: the #131 → #132 merge resolves these files against #132's role skills. |
+| V4-6 | V3 "Run states" | Run states below. The version stays 2.77.0: #131 is unreleased, and its changelog entry is updated in place. | D12: one version change for the PR. |
+| V4-7 | — | Runtime proof B5 from the citation grammar spec is owed by this conversion. It is planned and deferred, not run. A failing B5 goes to the owner before any further conversion. | The grammar spec's Coordination gives B5 to this conversion; its D2 records the assumption B5 tests. |
+
+### Inventory rows (V4-4)
+
+Anchors are at `c2b9c18`. Each row's citation sentence is the moment, then the action, then the link to the card.
+
+| Skill | Anchor | Card | Inventory | Moment → action |
+|---|---|---|---|---|
+| practices-research | step 2 `:25` | read-ground-truth-first | change | A question asks what code, a library or a running system does → trace each claim to its decisive source read in full (every matching caller or write, the conditions around it, what is wired or deployed), label it by a Boundaries class, and report a failed read as an access gap, not an absence. |
+| practices-research | step 5 `:28` | verify-before-accepting | keep | Before accepting a load-bearing conclusion → name the anchor opened for it and what that anchor doesn't cover. |
+| practices-research | step 5 `:28` | experiment-before-proposing | add | A behavior or performance question is still unresolved or contested after the walk → write the bounded probe and its deciding result down before running it where it touches no product state, and record what it showed; without a grant to run it, return the probe and the grant it needs as a gap. |
+| practices-research | step 6 `:29` | write-for-the-reader | keep | The answer combines several sources or competing findings for another reader → order it for the decision named in step 1, keeping in the reply only what that decision needs. |
+| practices-research | — | define-the-domain-first | dropped | — |
+| practices-manage-agents | step 1 `:38` | build-the-shared-model-first | keep | The owner's result can't be stated in one sentence from the plan or commission → settle that sentence and its assumption, or name the blocking owner question, before cutting. |
+| practices-manage-agents | step 1 `:38` | separate-the-concerns | remove | The sentence stays without a citation. |
+| practices-manage-agents | step 6 `:48` | design-for-concurrency | keep | Two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output → name the shared resource and the ordering that breaks it, and write the isolation or wait into each packet's limits. |
+| practices-manage-agents | step 7 `:50` | refine-mental-models | add | A helper returns the same gap or failure after a correction, or contradicts the plan's premise → find the premise every attempt shared and decide drift (correct the packet) or break (back to the plan or the owner), before another correction or a higher model tier. |
+| practices-manage-agents | step 7 `:50` | verify-before-accepting | keep | Before using a claim from a handback → match it to the commit, target and output opened, or name it as a gap. |
+| practices-manage-agents | step 7 `:50` | hold-the-scope | add | A handback returns a change → mark each commission outcome and limit line carried, weakened or dropped, and trace each addition to the plan or return it as an owner question. |
+| practices-manage-agents | `references/execution-forms.md` Continue | design-for-failure | add | A helper granted `write-and-execute` or an external effect ends or goes silent without a handback, before its job is resumed, replaced or re-dispatched → list what it may already have changed with the source checked for each, and decide adopt, clean up or wait. |
+| practices-collaboration | Message or post `:40` | write-for-the-reader | remove | The inline rule stays: a follow-up that changes what another session must deliver or decide states the new deliverable, its source and what stays out of scope. |
+| practices-collaboration | resolve `:54` | verify-before-accepting | keep | The root's orchestrator, or its explicit successor, is about to resolve it → name the check that covered the slices together, or the obligation still open. |
+| practices-show-me-your-work | Lead resume cell `:22` | verify-before-accepting | keep | An unchecked "done" claim in the thread will guide the next step → find the part current sources support, continue from it and carry the rest as open work. |
+| practices-show-me-your-work | after the resume table | build-the-shared-model-first | add | The Lead resumes and the thread, session-log or conversation holds an owner correction made after the plan → restate the goal and decisions, list each later correction with the plan line it overrides, and put that list to the owner before dependent work. |
+| practices-show-me-your-work | `:32` | write-for-the-reader | keep | The checkpoint will be read cold → use the sources' own names instead of labels coined in the session, give the next step as a command or path checked at its source, and keep assumptions, risks and unverified interactions near the top. |
+| presentation-webui | Media selection `:27` | write-for-the-reader | change | Before choosing a medium → name the reader's next question or action and the smallest view that answers it, and keep the assumptions, risks and unverified items ahead of technical detail. |
+| presentation-webui | Core rules | name-the-tradeoffs | add | The response asks the owner to choose → per option (doing nothing included when credible) the gain, the cost and who pays; the assumption that would flip the choice and its cheapest check; the recommendation and its revisit signal; one-way door or reversible call. |
+| presentation-tui | Shape picker `:30` | write-for-the-reader | change | Before picking a shape → name the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width, and keep the assumptions, risks and unverified items ahead of technical detail. |
+| presentation-tui | Core rules | name-the-tradeoffs | add | As presentation-webui. |
+| ops-linear-tracking | `:12` | one-owner-per-truth | remove | The sentence stays without a citation. |
+| ops-linear-tracking | `:92` | read-ground-truth-first | change | The plan's dependencies and Linear's `blockedBy` relations disagree → for each disputed dependency, set the plan line that states it (or "inferred from order") beside Linear's relation; an inferred dependency never overwrites a listed relation. |
+| ops-linear-tracking | Create issues workflow | hold-the-scope | add | Deriving milestones or tickets from a design or plan → trace each scope line, acceptance criterion and Deferred item to its section; raise an untraced line or a deferred doc obligation instead of writing it. |
+| ops-linear-tracking | Create issues workflow | design-for-failure | add | A create or relation call errored or timed out, or a breakdown resumes in a project that already has items → match each intended item to an existing one (adopt) or mark it absent (create), before any further create call. |
+| ops-linear-tracking | Find what's unblocked `:115` | read-ground-truth-first | add | The plan needs the blocker's artifact delivered → observe the delivery where it runs, or say "unverified" and where you looked, before calling the issue ready. |
+| ops-linear-tracking | `:119` | refine-mental-models | change | Shipped code and its doc section differ → decide drift (the doc holds; the gap stays an open obligation) or break (the assumption failed; name the doc section). Absorbs the omitted-recovery sentence. |
+| ops-observability-stack | `:12` | one-owner-per-truth | keep | A change touches both the stack and a producer, or the Separation Rule names no owner → name the owner of each file before editing. |
+| ops-observability-stack | before `:23` | read-ground-truth-first | add | Telemetry is missing or a stack check fails, before restarting or editing → find the first point on the path observed failing, each labeled seen or inferred. |
+| ops-observability-stack | `:23` | verify-before-accepting | change | A health check or query will close a proof claim → name the app, worktree and marker it matched and what it didn't cover; a canary-absence claim needs the canary on the producer path under that marker. |
+| ops-security-review | step 2 `:52` | hold-the-scope | remove | The sentence stays without a citation. |
+| ops-security-review | step 6 `:65` | verify-before-accepting | keep | Before fixing a finding or stating a report's coverage as current → check it against current source, or say why it no longer holds. |
+| role charters | Methods | 11 citations | form only (V4-5) | advisor 2, implementer 2, lead 1, operator 1, reviewer 2, verifier 3, researcher 0. |
+
+### Proof (V4-7)
+
+- **Static.** A check script confirms that every `](…principle-…/SKILL.md)` link resolves from its file, that no ``load `principle-`` remains in `plugins/`, that `principle-reading` appears nowhere outside `docs/wip` and changelogs dated before 2026-10-14, and that all 17 cards open with the read rule; it lists every citation with file:line and is shown failing on a seeded defect. Also `pnpm --dir tests/skills run test` and `typecheck`, `claude plugin validate .` and `git diff --check`. Static proof is structural only.
+- **B5 runtime A/B (owed, deferred).** Fixture A holds a strong citation at step 3, beside a card whose first body line is the read rule and which holds a move the sentence lacks: a green run on an older commit doesn't prove the head. Fixture B holds the same sentence without the link. The task reaches step 3 with a handback whose CI is green on the previous commit. Check, from the host's record: A opens the card at step 3 and rejects the stale run; B is the control. Not run in this PR. A failing B5 (card unread at the moment, or its judgment absent from the action) goes to the owner before any further conversion, including #132's.
+- **Behavior.** The inventory changes stay behavior-unverified, with the rest of this spec.
+
+### Run states (v4; supersede the v3 Run states)
+
+| Run | Target | State |
+|---|---|---|
+| — | 17 `principle-*` cards: read rule (V4-1) | v4 in progress |
+| — | `shared-references/principle-reading.md`: deleted (V4-2) | v4 in progress |
+| R1 | principle-write-tests-that-can-fail | v3 implemented and verified · read rule (V4-1) in progress · behavior unverified/deferred |
+| R2 | principle-verify-before-accepting | v3 implemented and verified · read rule (V4-1) in progress · behavior unverified/deferred |
+| R3 | practices-research | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R4 | practices-manage-agents | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R5 | practices-collaboration | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R6 | practices-show-me-your-work | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R7 | presentation-webui | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R8 | presentation-tui | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R9 | ops-linear-tracking | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R10 | ops-observability-stack | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| R11 | ops-security-review | v4 citations in progress · behavior unverified/deferred · B5 owed |
