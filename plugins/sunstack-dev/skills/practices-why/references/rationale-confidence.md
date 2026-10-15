@@ -30,7 +30,7 @@ Good: "#88 proposed 2000 for speed. Nothing shows it was adopted, and the value 
 
 **A compliance ticket against a cleanup PR.** A ticket says audit logs must be kept seven years for a customer's compliance review. The PR that changed retention is titled "cleanup: consolidate log retention config" and never mentions compliance.
 Bad: picking one story, either "a compliance change" or "a cleanup".
-Good: present both with their anchors, then what ties them. If the PR links the ticket, the compliance reason is the supported motive and the PR title is its author's framing. If nothing links them, say the timing fits and the connection isn't established.
+Good: present both with their anchors, then what ties them. If the PR's own context expressly adopts the ticket's reason, the compliance reason is the supported motive and the PR title is its author's framing. If the PR only links the ticket or doesn't mention it, say the timing fits and the connection isn't established.
 
 **Defensive code with an unrelated nearby incident.** A null check on `account.region` landed three days after incident INC-204, and the asker assumes the incident prompted it. INC-204's report concerns the payments service's currency field, a different path, and the commit message says "guard region lookup".
 Bad: "Added in response to INC-204."
