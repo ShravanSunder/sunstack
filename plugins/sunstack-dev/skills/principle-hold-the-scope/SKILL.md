@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Hold the Scope
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Sit in the problem before you reach for answers. Scope is the promise of what you will build: who it is for, what a successful user or implementer will be able to do or see, and what stays out. It rarely breaks in one big decision. It erodes through small moves that each look helpful: a gate added "for safety", a refactor "while we're here", a "must" that becomes "best effort" with no decision behind it, an exclusion that drops out between drafts. Each is reasonable on its own; together they deliver something nobody asked for and skip something they did. Holding the scope means every line traces to the owner's ask, or to a constraint that forces it, and checking that again every time work comes back.
 
 ## How to think it through

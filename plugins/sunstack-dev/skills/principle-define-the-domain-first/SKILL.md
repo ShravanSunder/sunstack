@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Define the Domain First
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Before structure, decide what the things are. Every system has a handful of nouns that carry its meaning (an order, a run, a reminder, a session), and each one needs three answers: what it refers to, what makes two of them the same thing, and what states it moves through. Get these right and the types, tables, keys, and APIs mostly follow. Get them wrong and the structure faithfully encodes the confusion: duplicates that should have merged, merges that should have stayed apart, a status that means two things. Names are promises. `processData` is a lie; `classifyBillsByVendorCategory` is a promise. Fixing a meaning early is a rename; fixing it after it is in stored data is a migration.
 
 ## How to think it through
