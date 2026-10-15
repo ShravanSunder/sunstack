@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-15 How and why practices](2026-10-15-how-why-practices.md)
 - [2026-10-15 Principle citation grammar](2026-10-15-principle-citation-grammar.md)
 - [2026-10-14 Standalone role skills](2026-10-14-role-skill-promotion.md)
 - [2026-10-14 Practice and principle composition](2026-10-14-practice-principle-composition.md)
