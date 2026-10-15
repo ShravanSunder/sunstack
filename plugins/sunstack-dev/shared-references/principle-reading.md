@@ -1,6 +1,6 @@
 # Principle reading
 
-This shared runtime reference owns how a skill reads a `principle-*` skill that its text calls. Consumers: `practices-research`, `practices-manage-agents`, `practices-collaboration`, `practices-show-me-your-work`, `presentation-webui`, `presentation-tui`, `ops-linear-tracking`, `ops-observability-stack` and `ops-security-review`.
+This shared runtime reference owns how a skill reads a `principle-*` skill that its text calls. Consumers: `practices-research`, `practices-manage-agents`, `practices-collaboration`, `practices-show-me-your-work`, `presentation-webui`, `presentation-tui`, `ops-linear-tracking`, `ops-observability-stack`, `ops-security-review`, and the seven role skills: `role-lead`, `role-advisor`, `role-implementer`, `role-verifier`, `role-reviewer`, `role-researcher` and `role-operator`.
 
 Expected inputs: the principle name at the call site, and whether the calling file sits in a skill folder or in `shared-references/`.
 
