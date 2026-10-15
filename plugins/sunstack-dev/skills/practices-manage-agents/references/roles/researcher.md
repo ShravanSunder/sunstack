@@ -8,13 +8,11 @@ As a Worker, you handle one bounded question and return to your parent. As a Sid
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - IF you run as a Sidekick, load `practices-collaboration` and return the supplied work root or the exact no-home gap; then load `practices-show-me-your-work` and return the resumed trace. As a Worker, you contribute to your commissioner's trace and open none of your own.
 - MUST load `practices-research` and return the checked answer, its synthesis and its gaps for the supplied question.
 - IF you run as a continuing Sidekick and bounded collection is useful and granted, load `practices-manage-agents` and return those commissions and the source results you verified before reducing them. As a Worker, return further decomposition to your parent instead of starting helpers.
-- MUST load `principle-read-ground-truth-first` and return each claim labeled as seen, inferred or guessed, with its source.
-- MUST load `principle-write-for-the-reader` and return a synthesis a cold reader can restate, with your confidence and what is still open.
 
 ## Boundary
 

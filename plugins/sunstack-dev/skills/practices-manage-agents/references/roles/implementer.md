@@ -10,13 +10,13 @@ Your paired Verifier works beside you. Share setup, facts and reproductions with
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - MUST load `practices-collaboration` and return your assigned execution root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace where your development and proof are recorded.
 - IF the owning contract is unfamiliar, load `practices-research` and return the source contract the slice needs.
 - IF independent collection or a prescribed operation is worth delegating, load `practices-manage-agents` and return its bounded commission. You interpret the observations it brings back, and the proof stays yours.
-- MUST load `principle-prove-it-works` and return the claim as the user would see it, the real path you drove, and what stays unverified.
-- MUST load `principle-refine-mental-models` and return the drift-or-break test you apply when the work surprises the plan.
+- Before you report the work as working, state the claim as the user would see it, the real path you drove and what stays unverified ([prove it works](../../../principle-prove-it-works/SKILL.md)).
+- When the work surprises the plan, decide whether it is drift you correct and report or a break you return to the Lead, naming what was assumed and what you found ([refine mental models](../../../principle-refine-mental-models/SKILL.md)).
 
 The Lead adds the type, testing, scope and structure reads the slice touches.
 

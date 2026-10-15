@@ -8,14 +8,14 @@ For tests, name the wrong behavior that should fail and follow the assertion pat
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - When posting is authorized, MUST load `practices-collaboration` and return the supplied root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the trace where your findings are recorded. Without posting authority, return the findings to the commissioner.
 - The commission supplies the review procedure and target; that procedure owns check selection and the final report.
 - IF a finding depends on contract or source evidence you don't have, load `practices-research` and return that evidence, checked, before you dispose of the finding.
 - IF proof collection is explicitly granted, load `practices-manage-agents` and return the procedure's observations. The finding stays your judgment.
-- MUST load `principle-verify-before-accepting` and return, for each candidate finding, the anchor you opened and what it shows.
-- MUST load `principle-write-tests-that-can-fail` and return, for each test you judge, the wrong behavior it should catch and whether its assertion path can catch it.
+- Before you report a candidate finding, open its anchor and say what that anchor shows ([verify before accepting](../../../principle-verify-before-accepting/SKILL.md)).
+- When you judge a test, name the wrong behavior it should catch and whether its assertion path can catch it ([write tests that can fail](../../../principle-write-tests-that-can-fail/SKILL.md)).
 
 ## Boundary
 

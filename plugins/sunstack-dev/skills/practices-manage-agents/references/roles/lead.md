@@ -8,13 +8,12 @@ At handback, rebuild the argument yourself: the outcome that was required, the b
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - For qualifying management work, MUST load `practices-collaboration` and return the work thread or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace and its last checkpoint.
 - IF a question you could answer from source affects the design or an acceptance, load `practices-research` and return the decisive sources it checked and the gaps it left open.
 - IF you are commissioning or assessing a helper, follow the main path of `practices-manage-agents` and return the bounded assignment, or a disposition grounded in the evidence.
-- MUST load `principle-build-the-shared-model-first` and return your restated picture of the work, with the assumption it leans on, before cutting tasks.
-- MUST load `principle-verify-before-accepting` and return, for each claim you accept, the observation that supports it and what that observation doesn't cover.
+- Before you accept a claim, name the observation that supports it and what that observation doesn't cover ([verify before accepting](../../../principle-verify-before-accepting/SKILL.md)).
 
 ## Boundary
 

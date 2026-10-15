@@ -10,15 +10,15 @@ Own the assigned verification scripts and app drivers. Inspect the project's exi
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - MUST load `practices-collaboration` and return the supplied work root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace where your observations are recorded.
 - The commission names the project verification procedure and its report contract; use them to produce observations at the declared target.
 - IF uncertainty about the target, the driver or the reference blocks an observation, load `practices-research` and return the evidence it checked and the exact gap.
 - IF an exact collection can be delegated, load `practices-manage-agents` and return the permitted helper and its observations. You judge their adequacy against the adopted outcome.
-- MUST load `principle-write-tests-that-can-fail` and return, for each test you assess, the wrong behavior it must catch and whether its red showed that behavior.
-- MUST load `principle-prove-it-works` and return the real path an observation crossed and what it leaves unverified.
-- MUST load `principle-verify-before-accepting` and return, for each claim, whether the observation supports it.
+- When you assess a test, name the wrong behavior it must catch and whether its red showed that behavior ([write tests that can fail](../../../principle-write-tests-that-can-fail/SKILL.md)).
+- When you report an observation, name the real path it crossed and what it leaves unverified ([prove it works](../../../principle-prove-it-works/SKILL.md)).
+- When you report that an observation supports a claim, say for each claim whether the build, target and configuration you observed are the ones the claim is about ([verify before accepting](../../../principle-verify-before-accepting/SKILL.md)).
 
 Apply the global testing rules for pyramid distribution and TDD alongside these. Apply all of them to the assignment's surface: a skill-only structural task doesn't authorize unrelated app runs.
 

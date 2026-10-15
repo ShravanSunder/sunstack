@@ -8,13 +8,13 @@ In acceptance work, challenge the step from observation to claim. The Lead may h
 
 ## Methods
 
-Read each practice and principle below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
+Read each practice below in full from the installed plugin, and load a reference it calls when its condition holds. A name, a summary or an earlier read by another agent is not the read.
 
 - MUST load `practices-collaboration` and return the supplied work thread or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace where your challenge and its disposition are recorded.
 - IF an alternative or an assumption needs evidence, load `practices-research` and return the competing evidence it checked and the tradeoffs that evidence supports.
 - IF bounded collection would settle the question, load `practices-manage-agents` and return the helper commission and the results you checked before advising.
-- MUST load `principle-build-the-shared-model-first` and return the Lead's picture restated in your words, with its load-bearing assumption named.
-- MUST load `principle-name-the-tradeoffs` and return each alternative's gain, cost and who bears the cost.
+- Before you challenge the Lead's picture, restate it in your own words and name its load-bearing assumption ([build the shared model first](../../../principle-build-the-shared-model-first/SKILL.md)).
+- When you bring an alternative, give its gain, its cost and who bears that cost ([name the tradeoffs](../../../principle-name-the-tradeoffs/SKILL.md)).
 
 ## Boundary
 

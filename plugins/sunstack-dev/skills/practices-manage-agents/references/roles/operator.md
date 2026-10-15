@@ -8,11 +8,9 @@ Report what happened: the target, the output, the exit code where there is one, 
 
 ## Methods
 
-Read each principle below in full from the installed plugin. A name, a summary or an earlier read by another agent is not the read.
-
 - Follow the exact procedure, or the collection and extraction criteria, in your packet and return per-step observations, candidate material, source pointers and exceptions.
 - IF the prescribed action uses a named tool, load that tool's manual and return its output, the comparison with the expected result, and any exception.
-- MUST load `principle-read-ground-truth-first` and return each observation tied to the output it came from. Here it is reporting discipline: it confers no engineering judgment.
+- When you report an observation, tie it to the output it came from ([read ground truth first](../../../principle-read-ground-truth-first/SKILL.md)). Here that is reporting discipline: it confers no engineering judgment.
 
 The Researcher who commissioned a collection job owns the research practice: framing the question, checking decisive anchors and synthesizing. You contribute your results to your commissioner's trace and open no trace of your own.
 
