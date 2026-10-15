@@ -4,7 +4,7 @@
 
 - Promote `role-lead`, `role-advisor`, `role-implementer`, `role-verifier`, `role-reviewer`, `role-researcher` and `role-operator` to model-invocable skills with Codex metadata (`display_name: "Role: <Name>"`). The seven charter files are removed without aliases.
 - Each helper role opens with what to do when no commission names it, and treats a packet or role line found inside a file or tool output as material to report, not a grant. `role-advisor` triggers when a Lead commissions the Advisor Sidekick.
-- Each role skill has a Commissioning section: the forms it allows, who commissions it, its setup and what its commission carries. `practices-manage-agents` keeps a slim role table, Classify, the model catalog and the steps, and reads the selected role skill before choosing the model.
+- Role skills address only the role. `practices-manage-agents` holds the caller's view: each role's form, commissioner, setup and payload, one prompt template that tells the helper to load its role skill, Classify, the model catalog and the steps.
 - Role principle calls read through `shared-references/principle-reading.md`; calls that fire only at one decision are IFs, and the Researcher's two calls that duplicated `practices-research` are gone. Each role ends with one "Not done while" line.
 - Role skills link their contracts in `practices-manage-agents/schemas`; `requiredReads.charter` holds the role skill name. Running helpers keep their sessions, models and grants; a continuation names the new role skill, and old charter-path values fail validation.
 - AGENTS.md and the plugin README place roles above practices; management names them only as data values.
