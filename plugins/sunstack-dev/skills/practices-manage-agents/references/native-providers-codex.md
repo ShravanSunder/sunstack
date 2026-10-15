@@ -27,7 +27,7 @@ Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. I
 
 ## Workspace Access
 
-Launch with `spawn_agent`. `spawn_agent` has no sandbox field; do not switch to `codex exec --sandbox read-only` to invent one. Reader and writer authority details are owned by `agent-job-packet.md`.
+Launch with `spawn_agent`. `spawn_agent` has no sandbox field; do not switch to `codex exec --sandbox read-only` to invent one. Reader and writer authority details are owned by the packet's `limits` field in `../schemas/assignment-fields.ts`.
 
 - Readers: packet access `inspect`. Parent verifies the repo worktree is unchanged after the receipt.
 - Writers: packet access `write-and-execute`, its `writePaths` declared. Codex cannot path-scope writes while the repo is cwd. Parent verifies the receipt's diff stayed inside the declared scope.

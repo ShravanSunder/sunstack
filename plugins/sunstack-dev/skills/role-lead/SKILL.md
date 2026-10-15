@@ -45,7 +45,7 @@ This opening starts or continues the Lead's management work.
 
 ## Typed assignment
 
-When you start or continue management work, your own packet is a `LeadPacket`. IF you must construct or validate it, load `../practices-manage-agents/schemas/role-contracts/lead-contract.ts` with the shared fields it imports from `../practices-manage-agents/schemas/assignment-fields.ts`, and return the typed value or its parse issues. Commissioning a helper follows `practices-manage-agents`, whose step 6 loads the packet guide.
+When you start or continue management work, your own packet is a `LeadPacket`. IF you must construct or validate it, load `../practices-manage-agents/schemas/role-contracts/lead-contract.ts` with the shared fields it imports from `../practices-manage-agents/schemas/assignment-fields.ts`, and return the typed value or its parse issues. Commissioning a helper follows `practices-manage-agents` step 6.
 
 ```ts
 // import type { LeadPacket } from '../practices-manage-agents/schemas/role-contracts/lead-contract.ts'

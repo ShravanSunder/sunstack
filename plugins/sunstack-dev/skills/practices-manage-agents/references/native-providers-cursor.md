@@ -22,7 +22,7 @@ Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. T
 
 ## Workspace Access
 
-Access grants: the `limits` field in `agent-job-packet.md`.
+Access grants: the `limits` field in `../schemas/assignment-fields.ts`.
 
 - Readers: packet access `inspect`, spawned as a new Task with no `resume` — `resume: "self"` forks the parent's history and is never used for review. Parent verifies the repo worktree is unchanged after the receipt.
 - Writers: packet access `write-and-execute`, its `writePaths` declared. Cursor Task does not path-scope writes. Parent verifies the receipt's diff stayed inside the declared scope.

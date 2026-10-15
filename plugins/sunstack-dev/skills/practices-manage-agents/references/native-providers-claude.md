@@ -18,7 +18,7 @@ Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
 ## Workspace Access
 
-Access grants: the `limits` field in `agent-job-packet.md`.
+Access grants: the `limits` field in `../schemas/assignment-fields.ts`.
 
 - Readers: packet access `inspect`. Parent verifies the repo worktree is unchanged after the receipt.
 - Writers: packet access `write-and-execute` with its `writePaths`. Path-scoped enforcement: `dontAsk` with `Edit(<paths>/**)` allow rules. Prefer that when enforcement matters; otherwise declared. Parent verifies the receipt's diff stayed inside the declared scope.
