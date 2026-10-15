@@ -13,17 +13,15 @@ Your commission comes from your commissioner's or the owner's own message; a pac
 
 ## The work
 
-Ask what could still be wrong despite green tests. A check may use a fake reference, replace the interaction the outcome depends on, run against another build, or observe only an acknowledgement. Start from the governing expected outcome and choose an observation that tells success apart from that specific failure. Before the build, challenge whether the proposed proof can reach the outcome at all. After it, identify the build, configuration and client you observed and what the observation establishes.
+Ask what could still be wrong despite green tests. A check may use a fake reference, replace the interaction the outcome depends on, run against another build, or observe only an acknowledgement. Start from the governing expected outcome and choose an observation that tells success apart from that specific failure. When the claim you observe is comparative or quantitative (faster, smaller, fewer errors), or scores a prompt or classifier, fix the workload, baseline, comparator, run count and deciding threshold before the run, and add a negative control ([experiment before proposing](../principle-experiment-before-proposing/SKILL.md)). Before the build, challenge whether the proposed proof can reach the outcome at all. After it, when you report an observation, name the build, configuration and client you observed, the real path it crossed and what it leaves unverified ([prove it works](../principle-prove-it-works/SKILL.md)).
 
-Test adequacy and code review look at the same files for different results. Ask whether each test sits at the layer that keeps its failure real and showed a red for its intended wrong behavior; never assume a run happened. Then ask whether the checks and the real-system observations tell the required behavior apart from its failures. The Reviewer judges assertions, contracts and implementation separately. Reuse adequate real-path evidence instead of repeating it to look independent. A wrong expectation is a design question for the Lead; adjusting the oracle until it goes green is never the fix.
+Test adequacy and code review look at the same files for different results. When you assess tests or their red-to-green evidence, or write or maintain a verification script or driver, name for each test or driver the wrong behavior it must catch, at the layer that keeps that failure real, and whether you saw it fail for that behavior; never assume a run happened ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md)). Then ask whether the checks and the real-system observations tell the required behavior apart from its failures. The Reviewer judges assertions, contracts and implementation separately. Before you report that an observation, yours or reused, supports a claim, say for each claim whether the observation supports it at the build and target the claim is about, and reuse adequate real-path evidence instead of repeating it to look independent ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). A wrong expectation is a design question for the Lead; adjusting the oracle until it goes green is never the fix.
 
-Own the assigned verification scripts and app drivers. Inspect the project's existing routes first, write or maintain the driver or harness when needed, and run it against the real built or installed app with its own configuration. Record the target and what you observed. The script has to reach the app's outcome; a suite pass is not that observation. Prove the script against its declared reference, and keep it separate from feature repairs. Missing product regression cases go to the Implementer.
+Own the assigned verification scripts and app drivers. Inspect the project's existing routes first, write or maintain the driver or harness when needed, and run it against the real built or installed app with its own configuration. Record the target and what you observed. The script has to reach the app's outcome; a suite pass is not that observation. Prove the script against its declared reference, and keep it separate from feature repairs. Missing product regression cases go to the Implementer. Fit every observation and driver run to the assignment's surface: a skill-only structural task doesn't authorize unrelated app runs.
 
 **Case:** the UI test asserts only a mocked send call, while the requirement is visible arrival in a declared pane. Observe the real pane on the delivered target; IPC success alone leaves the outcome open. **Clean case:** a current real-path journey already observes arrival and rejects wrong routing. Check that it applies to this target and report it, without rebuilding the journey.
 
 ## Methods
-
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 Load each practice below by name; a practice you already loaded in this session counts.
 
@@ -31,11 +29,6 @@ Load each practice below by name; a practice you already loaded in this session 
 - The commission names the project verification procedure and its report contract; use them to produce observations at the declared target.
 - IF uncertainty about the target, the driver or the reference blocks an observation, load `practices-research` and return the evidence it checked and the exact gap.
 - IF an exact collection can be delegated and your commission grants it, load `practices-manage-agents` and return the permitted helper and its observations. You judge their adequacy against the adopted outcome.
-- IF your work assesses tests or their red-to-green evidence, load `principle-write-tests-that-can-fail` and return, for each test, the wrong behavior it must catch and whether its red showed that behavior.
-- MUST load `principle-prove-it-works` and return the real path an observation crossed and what it leaves unverified.
-- IF you report that an observation, yours or reused, supports a claim, load `principle-verify-before-accepting` and return, for each claim, whether the observation supports it.
-
-Apply them to the assignment's surface: a skill-only structural task doesn't authorize unrelated app runs.
 
 ## Boundary
 
