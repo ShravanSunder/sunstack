@@ -182,7 +182,7 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## Principles
 
-Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill that calls one reads its file through `shared-references/principle-reading.md`. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
+Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill cites one with a relative link at the decision it informs, and each card opens with its read rule. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
 
 ## Supporting Skills
 
