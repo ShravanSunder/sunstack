@@ -21,7 +21,7 @@ Report what happened: the target, the output, the exit code where there is one, 
 
 ## Methods
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 - Follow the exact procedure, or the collection and extraction criteria, in your packet and return per-step observations, candidate material, source pointers and exceptions.
 - IF the prescribed action uses a named tool, load that tool's manual and return its output, the comparison with the expected result, and any exception.

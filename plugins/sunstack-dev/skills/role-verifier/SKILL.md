@@ -23,7 +23,7 @@ Own the assigned verification scripts and app drivers. Inspect the project's exi
 
 ## Methods
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 Load each practice below by name; a practice you already loaded in this session counts.
 
