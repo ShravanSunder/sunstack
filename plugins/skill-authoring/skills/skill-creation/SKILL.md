@@ -38,7 +38,7 @@ The trigger surface has two capabilities. Each pays a different cost.
 
 **User-invocable** — the human names the skill directly. Pays **cognitive load**: the human is the index that has to remember it exists.
 
-They are not exclusive: a description adds agent reach without removing the human's. Choose model-invocable when the agent must find the skill unprompted, or when another skill must reach it. When user-invocable skills outgrow what a human can hold, a router skill indexes them.
+They are not exclusive: a description adds agent reach without removing the human's. Choose model-invocable when the agent must find the skill unprompted, or when another skill must reach it. A judgment card that skills only cite stays hidden from model invocation. When user-invocable skills outgrow what a human can hold, a router skill indexes them.
 
 `references/frontmatter-design.md` owns description wording, adjacent-skill boundaries, and the invocation tradeoff. `references/platform-mechanics.md` owns client-specific invocation controls.
 
@@ -53,12 +53,13 @@ Placement answers one question: who reads this, and when? The answer picks the c
 | `IF ..., load` reference | this agent | when the predicate holds |
 | `MUST dispatch` procedure | a helper agent | on reaching the call |
 | `IF ..., dispatch` procedure | a helper agent | when the predicate holds |
+| cited judgment card | this agent | at the moment its citing sentence names |
 
 Review checks and research are steps the current agent loads and performs. Dispatch is only for a prescribed procedure: a command, watch, or mechanical transform with an observed result. A judgment check is never a dispatched procedure, even when it could be described as independent. Independent review is not dispatch: a review skill may start reviewer agents with no authoring history to walk its checks, and its lead verifies their findings.
 
 ### Call Grammar
 
-A call the agent cannot act on sends it away with nothing to bring back. Each form names when to go, where, what to do there, and what to return — and every call site uses exactly one of them.
+A call the agent cannot act on sends it away with nothing to bring back. Each load or dispatch form names when to go, where, what to do there, and what to return. Every call site uses exactly one form: load, dispatch, or citation.
 
 ```text
 Reference
@@ -74,6 +75,17 @@ Prescribed procedure
 ```
 
 The caller names the exact procedure, allowed commands or transformation, execution boundary, and result to return. The helper reports observations and exceptions; the calling agent judges them. A known check skipped under pressure cannot become a dispatched procedure because it is independent. Load its reference and perform it as a step.
+
+```text
+Judgment card
+  <moment>, <action in plain words> ([<the card's judgment in plain words>](<relative path to the card's SKILL.md>)).
+
+  strong  Before relying on a handback, match each claim to the commit, target and output you opened, or name it as a gap ([verify before accepting](../verify-before-accepting/SKILL.md)).
+  weak    Before relying on a handback, verify it before you accept it ([verify before accepting](../verify-before-accepting/SKILL.md)).
+  load    MUST load `references/handback-checks.md` and return each claim matched to its commit, target and output.
+```
+
+A judgment card is defined in `references/glossary.md`. It ships in the same plugin as the citing file, and its first body line after the title is its read rule: "Read this card in full before applying it; your own full read earlier this session counts." The citing skill therefore writes no loader line. A card is only cited, never loaded; a reference or procedure is loaded or dispatched, never cited. The sentence carries the moment and the action, and the link carries the depth; steps and narrative prose use the same form. The moment is an observable point or condition in the work, held to the branch-predicate test in step 4. The action names what to produce or check at that moment, in words other than the link text. A bare name such as "apply X" or "(see X)" states no action, and neither does an action that restates the link text; either leaves the citation incomplete. Cite a card only where its judgment changes how this action is done. The path resolves from the file that holds the citation; from `references/`, add one `../`. A citation never replaces a load call for this skill's own procedure depth. Cite a card once per decision. The skills this one uses at a step are those it names or loads there; when one of them already cites the card for that decision, rely on that citation and do not repeat it here.
 
 ### Progressive Disclosure
 
@@ -123,6 +135,7 @@ Include every applicable element below. Choose headings and a format that fit th
 - **Always-needed steering and invariants:** keep rules every run needs inline and near the decision they govern.
 - **Reference calls:** name the load mode, exact destination, and concrete result the main path consumes, plus the requested work where the result alone does not say what to do there.
 - **Dispatch, for a prescribed procedure:** fill the procedure form in the Call Grammar above.
+- **Citations, for a judgment card:** at the decision the card informs, fill the citation form in the Call Grammar above.
 - **Overall completion boundary:** name the proof, unresolved conditions, or blockers that prevent a done claim.
 
 ## Workflow
@@ -182,7 +195,7 @@ Add a branch only when an observable condition changes the work; a topic being i
 
 #### The call sites
 
-Write every call site here, in the literal grammar above. A `load` site names its mode, path, and needed result, plus the requested work where the result alone does not say what to do there. A `dispatch` site names a prescribed procedure, its steps and boundary, and the observed result. Review checks and research use `load` sites.
+Write every call site here, in the grammar above. A `load` site names its mode, path, and needed result, plus the requested work where the result alone does not say what to do there. A `dispatch` site names a prescribed procedure, its steps and boundary, and the observed result. A citation names an observable moment and the action, and links its judgment card relatively. Review checks and research use `load` sites.
 
 #### The wording
 

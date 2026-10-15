@@ -7,9 +7,7 @@ description: Use when starting, checking, using, debugging, or verifying the sha
 
 The runnable stack source of truth is `~/dev/ai-tools/observability`. App repos are telemetry producers: they may own launch flags, markers, state files, and source-side scrubbing, but they must not own Docker Compose, Victoria service lifecycle, or generic Victoria query cookbooks.
 
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
-
-IF a change would touch both the shared stack and a producer, or the Separation Rule doesn't name the owner of a file you are about to change, load `principle-one-owner-per-truth` and return the owner of each file before editing.
+When a change would touch both the shared stack and a producer, or the Separation Rule doesn't name the owner of a file you are about to change, name the owner of each file before editing ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)).
 
 Choose the smallest loop first:
 
@@ -20,7 +18,9 @@ Choose the smallest loop first:
 - Agent VM, OpenClaw, or `shravan-claw-beta`: read `references/resource-naming.md` and `references/agent-vm-loop.md`.
 - Victoria proof or debugging queries: read `references/victoria-queries.md`.
 
-IF a health check or telemetry query will close a proof claim, load `principle-verify-before-accepting` and return which app, worktree and marker the query matched. Collector health supports a health claim; a stale sample from another worktree cannot establish current app emission. Use the selected query loop to match the producer, resource labels and fresh marker to the target. Query access failure or timeout leaves emission inconclusive.
+When expected telemetry is missing or a stack check fails, before restarting the stack or editing a producer, find the first point on the path you observed failing (reachability from this shell, collector health, the endpoint and resource attributes the running process read, the state-file marker), each labeled seen or inferred ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
+
+Before a health check or telemetry query closes a proof claim, name which app, worktree and marker the query matched and what it did not cover; for a claim that a canary is absent, show where the canary entered the producer path under that marker, since a canary the run never received proves nothing by its absence ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Collector health supports a health claim; a stale sample from another worktree cannot establish current app emission. Use the selected query loop to match the producer, resource labels and fresh marker to the target. Query access failure or timeout leaves emission inconclusive.
 
 ## Operating Model
 

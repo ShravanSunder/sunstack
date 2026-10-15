@@ -54,7 +54,7 @@ RPCRouter already has:
 
 * JS command sender requires web app to exist (LUNA-338)
 * commandAck push requires `pushJSON` wiring (LUNA-337/338)
-* Async command handlers — sync handlers sufficient for now
+* Async command handlers — §13 keeps them out of the Phase 3 exit criteria
 
 ## Design doc references
 
@@ -72,7 +72,7 @@ RPCRouter already has:
 2. **Prior art acknowledged** — what already exists from earlier work
 3. **Scope grouped by doc section** — each group references the architecture doc section it implements
 4. **Checklists for implementation steps** — not sub-tasks, just markdown checkboxes
-5. **Deferred items are explicit** — what's out of scope, why, and which ticket covers it
+5. **Deferred items are explicit** — what's out of scope, why (a doc section or a blocking ticket, never the author's preference), and which ticket covers it
 6. **Doc section references** — precise section markers (`§5.2`, `§9.2`) that link to the architecture doc
 
 ## Minimal Task Ticket

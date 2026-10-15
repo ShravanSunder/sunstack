@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Experiment Before Proposing
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Many design arguments are questions about behavior: is this faster, does the API do what we think, does the model handle this case, which of two layouts reads better? When the answer is a fact you could observe by running something, it isn't a question to argue about, and it isn't the owner's to answer. Run it and let the result decide. The skill is fitting the rigor to the question and the stakes, and writing down what result would change your mind before you look. Otherwise you will read the result to fit the plan you already had.
 
 ## How to think it through

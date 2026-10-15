@@ -38,3 +38,5 @@ The exact model id follows the exact-id rule in `SKILL.md` under Model catalog.
 ## Continue
 
 Send a follow-up with only what changed and any new evidence, to the same agent, in the same scope. A queued or delivered message is a stage, not a result: wait for the reply or result the assignment declares. When you're waiting on another agent's reply or on board activity, `practices-collaboration` owns how to wait.
+
+When a helper granted `write-and-execute` or any external effect (a push, post or publish) ends or goes silent without a handback, before you resume, replace or re-dispatch its job, list what it may already have changed (worktree, branch, PR, posts) with the source you checked for each, and decide whether the next run adopts that change, cleans it up or waits ([design for failure](../../principle-design-for-failure/SKILL.md)).

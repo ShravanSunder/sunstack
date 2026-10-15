@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Separate the Concerns
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation is not about more files. It is about putting a boundary where something differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
 
 ## How to think it through

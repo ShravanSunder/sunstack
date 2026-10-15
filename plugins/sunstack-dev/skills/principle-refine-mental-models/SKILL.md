@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Refine Mental Models
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Every piece of work runs on a mental model: a picture of how the system works and why. When implementation surprises you, the first question isn't "how do I fix the code" but "what was wrong with our understanding?" A model fails in two ways. **Drift** is the work wandering off while the model still holds: the wrong module owns the change, an abstraction nobody named appears, complexity spikes. A **break** is the model itself being wrong: the abstraction forces contortions, the boundary you drew doesn't hold. Explicit breaks are easy: we said X, reality said Y. Implicit breaks are dangerous: nobody discussed Z, and the code is quietly being shaped by an assumption nobody examined. Fix the understanding first; the code follows.
 
 ## How to think it through

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # One Owner per Truth
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Every truth in a system (a status, a balance, a setting, an identity, a lifecycle, a side effect) needs exactly one place that decides it. Others read it, cache it with a stated refresh rule, or ask the owner to change it; they don't write it themselves. When two parts write the same truth, they eventually disagree, and the bug looks like flicker, lost updates, or "it reverted itself". The same goes for contracts: what callers may rely on is written down in one place, or it becomes whatever the current code happens to do, and each caller depends on a different accident. And stored data needs an owner for its meaning, because data outlives the code that wrote it.
 
 ## How to think it through

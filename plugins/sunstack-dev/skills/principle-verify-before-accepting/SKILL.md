@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Verify Before Accepting
 
+Read this card in full before applying it; your own full read earlier this session counts.
+
 Accepting a result is a claim that the evidence supports a conclusion. Most false "done"s rest on real evidence for a different claim: a green run on an older commit, a unit test offered as proof of runtime behavior, a summary of a run nobody read, a true quote that doesn't say what it's cited for, a structural check offered as proof that the content is right. A false "done" costs more than any other failure, because everyone downstream has to verify everything again. Verifying means checking that this evidence establishes this conclusion, at this version, and was observed rather than reported. That holds whether the result came from a helper, a reviewer, a CI run, or your own reasoning.
 
 ## How to think it through

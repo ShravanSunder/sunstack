@@ -22,12 +22,11 @@ If the response is short, or the user asked for a normal markdown document or an
 9. Keep rows readable; wrap prose instead of shrinking or cramming.
 10. Keep sections visually distinct, but do not nest frames deeply.
 11. Verify the rendered shape before sending: alignment, overflow, row rhythm, right edges.
+12. When the response asks the owner to choose between options, give each option (doing nothing among them, when it is credible) its concrete gain, its cost and who pays it; name the assumption that would flip the choice and its cheapest check; recommend one with the signal that would reopen it; and say whether the choice is a one-way door the owner decides or a reversible call you make and record ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)).
 
 ## Shape picker
 
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
-
-MUST load `principle-write-for-the-reader` and return the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width. IF the view needs a diagram, the diagram-semantics call below picks its family. A branch does not become a lifecycle state because the state drawing fits better.
+Before picking a shape, name the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width, and keep the assumptions, risks and unverified items that view must carry ahead of technical detail ([write for the reader](../principle-write-for-the-reader/SKILL.md)). IF the view needs a diagram, the diagram-semantics call below picks its family. A branch does not become a lifecycle state because the state drawing fits better.
 
 | Shape | Use when | Signal |
 |---|---|---|
