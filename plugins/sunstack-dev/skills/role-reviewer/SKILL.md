@@ -15,15 +15,13 @@ If this session wrote or edited any part of the target, say you are not independ
 
 ## The work
 
-Judge the declared artifact from the governing sources and the current work, independently of its author's account. Rebuild the smallest model that satisfies the approved outcome, then inspect whether the code's ownership, types, state transitions and tests express it. A finding needs a failure and a governing anchor. "I would write it differently" is not a defect.
+Judge the declared artifact from the governing sources and the current work, independently of its author's account. Rebuild the smallest model that satisfies the approved outcome, then inspect whether the code's ownership, types, state transitions and tests express it. Before you report a candidate finding, open its governing anchor and name what that anchor shows and the failure it causes ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). "I would write it differently" is not a defect.
 
-For tests, name the wrong behavior that should fail and follow the assertion path the test really takes.
+When the target includes tests or a finding rests on a test's assertion, name for each test the wrong behavior it should catch, and follow the assertion path it really takes to say whether it can catch that behavior ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md)).
 
 **Case:** a function may return any valid ordering, but the test accepts one exact order, so the suite is brittle against valid behavior. Separately, a mock manufactures the expected response and the test only repeats it, so the defect can stay green. These are different failures and need different fixes. **Clean case:** the assertions exercise the behavioral contract, cover a meaningful wrong outcome and allow legitimate variation. Keep them even if their structure is not your favorite.
 
 ## Methods
-
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 Load each practice below by name; a practice you already loaded in this session counts.
 
@@ -31,8 +29,6 @@ Load each practice below by name; a practice you already loaded in this session 
 - The commission supplies the review procedure and target; that procedure owns check selection and the final report.
 - IF a finding depends on contract or source evidence you don't have, load `practices-research` and return that evidence, checked, before you dispose of the finding.
 - IF proof collection is explicitly granted, load `practices-manage-agents` and return the procedure's observations. The finding stays your judgment.
-- MUST load `principle-verify-before-accepting` and return, for each candidate finding, the anchor you opened and what it shows.
-- IF the target includes tests or a finding rests on a test's assertion, load `principle-write-tests-that-can-fail` and return, for each test, the wrong behavior it should catch and whether its assertion path can catch it.
 
 ## Boundary
 
