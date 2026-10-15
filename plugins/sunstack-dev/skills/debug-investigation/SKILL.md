@@ -7,19 +7,18 @@ description: Use when investigating bugs, failing tests, flaky behavior, crashes
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-Investigate before fixing. This is systematic debugging: build evidence, rank hypotheses, prove a likely root cause, then change code. The Lead owns that loop even when subagents inspect bounded slices.
+Investigate before fixing. Systematic debugging builds evidence, ranks hypotheses, proves a likely root cause, and only then changes code. The diagnosis claims no more cause than its evidence shows, and the next action it recommends targets the uncertainty that is left. The Lead owns that loop even when subagents inspect bounded slices.
 
 ## Core Rules
 
 - No fixes before root-cause investigation.
-- Treat logs, stack traces, failing tests, current code, recent diffs, and runtime state as evidence.
-- Use hypothesis-driven debugging: each theory must name supporting evidence, missing evidence, and the smallest proof step.
+- Use hypothesis-driven debugging. Each theory names its supporting evidence, missing evidence, and smallest proof step.
 - Use subagents only for bounded investigation slices. The Lead owns synthesis, evidence checking, and the final diagnosis.
 - Use `practices-manage-agents` to pick, launch, and hand off to each helper; keep root-cause method and deterministic watcher guidance here.
 - Keep investigation read-only until the user explicitly asks to fix or a validated fix phase begins.
-- If 3+ fix attempts already failed, stop and question the design or architecture before trying another patch.
+- When three or more fix attempts for this symptom have already failed, stop patching. Write down the one premise every failed fix assumed, list every observed failure beside it, and decide whether that premise, or the design and architecture behind it, still holds before anyone tries another patch ([question the premise the failed fixes share](../principle-refine-mental-models/SKILL.md)).
 - For real debugging work with a clear symptom, target, and reproduction surface, write a repo-local debug artifact by default. Stay in chat only when the user explicitly asks for chat-only/no-files output or the debugging scope is still unclear.
-- When the symptom, target, or reproduction surface is unclear, do not create a file yet: first build the missing bug packet from available evidence in chat. Ask one material question only when the missing field cannot be resolved from the provided context or read-only inspection. Once the scope is clear, write the artifact unless chat-only/no-files output was requested.
+- When the symptom, target, or reproduction surface is unclear, build the missing bug packet in chat from the available evidence before creating any file. Ask one material question only when the missing field cannot be resolved from the provided context or read-only inspection. Once the scope is clear, write the artifact unless chat-only/no-files output was requested.
 - Debug artifacts are disposable investigation outputs. Later cleanup, preservation, or promotion belongs to `docs-maintain`.
 - For long-running shell, service, or infra monitoring, when artifact creation is allowed, load `references/background-monitoring.md` before proposing watcher shape, background jobs, JSONL/state files, helper agents, restarts, or secret handling. When chat-only/no-files output was requested, do not create watcher files; provide a visible non-persistent plan or report a blocker if that cannot be done safely.
 
@@ -44,8 +43,7 @@ Investigate before fixing. This is systematic debugging: build evidence, rank hy
    - deterministic, flaky, environment-specific, or not yet reproduced
    - smallest known failing surface
 5. Trace the code path:
-   - read the failing boundary and callers
-   - identify where expected and actual behavior diverge
+   - read the failing boundary and its callers in current code, with the logs, stack traces, and runtime state of the real run, and name the line or event where expected and actual behavior first diverge; mark each link in that path as seen or inferred, and record a read or run that the sandbox, credentials, or network blocked as a gap in access ([read ground truth first](../principle-read-ground-truth-first/SKILL.md))
    - separate source cause from downstream symptom
 6. Check recent changes and working examples:
    - git diff, recent commits, changed config, dependency or schema drift
@@ -53,7 +51,8 @@ Investigate before fixing. This is systematic debugging: build evidence, rank hy
 7. Form ranked hypotheses:
    - state one concrete root-cause hypothesis at a time
    - list supporting evidence and missing evidence
-   - name the smallest proof step
+   - label how far the evidence reaches: an unconfirmed hypothesis when no opened source, log, or run shows the mechanism itself; a mechanism confirmed in source when you read it in the code but have not observed it acting in this incident; or that mechanism observed causing this failure, claimed only with a reproduction, log, or trace that shows it
+   - name the smallest proof step that would confirm the hypothesis or rule it out
 8. Recommend next action:
    - prove now
    - fix next
@@ -86,7 +85,7 @@ When fixing:
 - make one root-cause fix at a time
 - avoid unrelated cleanup
 - run targeted verification, then broader relevant checks
-- if the fix fails, return to investigation rather than stacking guesses
+- if the fix fails, go back to investigation and add what the failure showed to the evidence before forming the next hypothesis; at the third failed attempt, the failed-premise rule in Core Rules applies
 
 ## Output Shape
 
@@ -95,7 +94,7 @@ Return:
 - bug packet summary
 - artifact path with a full clickable link (absolute path + line), or why no artifact was written
 - reproduction/coverage evidence
-- most likely root cause
+- most likely root cause, labeled as an unconfirmed hypothesis, a source-confirmed mechanism, or an observed cause
 - alternate hypotheses, if still plausible
 - fastest proof step
 - recommended fix path
