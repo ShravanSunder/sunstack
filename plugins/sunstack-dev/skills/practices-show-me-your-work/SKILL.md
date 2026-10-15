@@ -11,11 +11,15 @@ A task qualifies when the work spans more than one session, commissions another 
 
 ## Open or resume the trace
 
-At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference or `no-home: <gap>`. That practice owns discovery, seats, and resolution; `agent-collaboration` owns the calls. Then act by what came back:
+At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference or `no-home: <gap>`. That practice owns discovery, seats, and resolution; `agent-collaboration` owns the calls.
+
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+Then act by what came back:
 
 | Situation | Do this now |
 | --- | --- |
-| 🦁 Lead, work thread found | Read its history and verify load-bearing claims against current sources before acting. IF an old completion claim or newly accepted result will guide continuation and its evidence-to-claim step is unchecked, load `principle-verify-before-accepting` and return the supported claim or narrower fact and gap. For a new thread, open it with the goal, scope, orchestrator, repository and worktree, and relevant artifact links. |
+| 🦁 Lead, work thread found | Read its history and verify load-bearing claims against current sources before acting. IF a “done” claim in the thread will guide your next step and you haven't checked it against current sources, load `principle-verify-before-accepting` and return the part current sources support; continue from that part and carry the rest as open work. For a new thread, open it with the goal, scope, orchestrator, repository and worktree, and relevant artifact links. |
 | 🦁 Lead, `no-home` | Use session-logs for the running account and choose an eligible home by content. If access or write authority is missing, report the exact gap and continue independent work where possible. |
 | Sidekick, execution root supplied | Record on that root; checkpoint the assignment there. |
 | Sidekick commissioned before a board exists | The commission identifies the session-logs destination, grants write authority for one dated file, and includes the required destination-instruction paths. Write only that file. Without destination access or write authority, return current state and the exact gap to the commissioner instead. |
@@ -25,7 +29,7 @@ Retain the service, project, board, topic, and root ids (or the exact session-lo
 
 ## Record meaningful updates
 
-At a meaningful update or checkpoint, MUST load `principle-write-for-the-reader` and return a concise decision, reason, evidence and open-action account appropriate to its reader. Put that account in the existing trace. Keep assumptions, risks and unverified interactions visible: “The adapter stand-in passes; the actual provider remains unobserved” cannot become “provider complete” on resume.
+IF the checkpoint will be read cold (a handoff, a stop, or a resume by another session), load `principle-write-for-the-reader` and return an entry a cold successor can act on. Keep assumptions, risks and unverified interactions visible.
 
 Record consequential findings, decisions and reasons, accepted or rejected findings, proof outcomes, blockers, material user corrections, and deferred improvements. Each entry should make sense without opening its links. Link detailed evidence; skip routine commands and effort narration. Describe uncertainty honestly and sanitize private content before sharing.
 
@@ -34,7 +38,7 @@ Contributors record as themselves only within their assignment's communication a
 Two entry types other skills point to:
 
 - **Decision made without asking**: the reversible, in-scope call and the reason for it.
-- **Stand-in**: the seam, the stand-in, its assumptions, what it gains, what it costs, and what closes it. A stand-in is a known tradeoff and never counts as proof of the real interaction.
+- **Stand-in**: the seam, the stand-in, its assumptions, what it gains, what it costs, and what closes it. A stand-in is a known tradeoff and never counts as proof of the real interaction: “The adapter stand-in passes; the real provider remains unobserved” cannot become “provider complete” on resume.
 
 Memory-logs holds curated reusable lessons, methods, verified project facts, and durable decision summaries with links to their source. It is not a second automatic checkpoint stream. Link repository artifacts in their original homes instead of copying them. Before any log write or delegation, apply the destination call below.
 
@@ -55,7 +59,7 @@ Each concurrent writer owns a separate dated file. Before delegating a log write
 
 Before a terminal response, record the actual outcome, established facts, remaining work or blockers, open stand-ins, and the next useful action, and include the trace reference in the handoff. The final outcome lists every open stand-in as unverified. A contributing agent checkpoints its assignment and leaves the outer work unresolved. Resolve a thread only as `practices-collaboration` allows: the root's orchestrator, after reading current activity and linked outcomes and confirming the whole integrated scope is finished.
 
-Reuse a current adequate checkpoint and its applicable evidence. An attributed historical claim remains the original author's claim until inspected; transcribing it does not make the trace writer a Verifier or require another proof run.
+When you copy an earlier claim into the trace, attribute it to its author unless you checked it.
 
 IF the user requests a readable view or the trace needs substantial synthesis, load `references/markdown-view.md` and return the view path, source cutoff, and coverage gaps. The view is a replaceable reading aid, not another authority.
 
