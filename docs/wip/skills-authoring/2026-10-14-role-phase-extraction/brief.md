@@ -35,3 +35,11 @@ Sunstack-dev only; orchestrators and skill-authoring runtime are excluded. Analy
 ## 2026-10-14 admitted named design: standalone role skills
 
 The owner now explicitly selected role skills with normal model invocation and management-owned model/setup mapping. [Role-promotion spec](../2026-10-14-role-skills/spec.md) owns this particular design and its eight runs. It supersedes the reference-only recommendation, not the remaining analysis boundaries above. No role runtime move, schema literal change or live discovery claim is authorized by this brief itself; the named spec goes through its own review and implementation/proof path.
+
+## 2026-10-15 owner follow-up: explanation method and `diagram-semantics.md` (separate PR)
+
+Raised during the #131/#132 implementation review. These changes are deferred to their own follow-up PR, and #131/#132 do not change them.
+
+1. **Reference the principle.** `shared-references/diagram-semantics.md` "From the question to the view" restates `principle-write-for-the-reader`, which both presentation skills already read before choosing a view. Keep its three worked examples ("what changed?" → before/after table; "who owns retries?" → topology; "what happens after approval is refused?" → flow), point to the principle for the rest, and delete the restated judgment.
+2. **Design skills load it.** The owner expects the design-doc skills (`spec-design`, `program-design`) to load `diagram-semantics.md` for visual-family selection and staged disclosure. Today they choose views through their own predicates and render through `diagram-rendering-and-fallbacks.md`. Decide each one's call site and its observable predicate.
+3. **Possible skill.** If design skills, handoffs, PR descriptions and `docs-maintain` all need the same "pick the view, reveal in stages" method, consider promoting it to one surface-independent explanation skill (working name `presentation-explain`), with `presentation-tui`/`presentation-webui` reduced to surface manuals. This needs `skill-audit` classification and a skill spec first.
