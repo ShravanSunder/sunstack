@@ -11,7 +11,7 @@ If the response is short, or the user asked for a normal markdown document or an
 
 ## Core rules
 
-1. Pick one shape by content type before writing (picker below).
+1. Pick one shape for the reader's question (picker below).
 2. For hard explanations, pick a disclosure sequence before detail: one map, one selected slice, one small ledger, then technical detail.
 3. Treat zoom as a disclosure move, not a visual family.
 4. Render research as handed-over lanes plus parent synthesis; presentation does not run agents or decide acceptance.
@@ -25,7 +25,9 @@ If the response is short, or the user asked for a normal markdown document or an
 
 ## Shape picker
 
-Before picking a shape for a substantial explanation, MUST load `principle-write-for-the-reader` and return the reader's question, essential relationship and smallest readable view under the host geometry. Use shared diagram semantics to choose what the view means; then select its terminal realization. A branch does not become a lifecycle state because the state drawing fits better.
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+MUST load `principle-write-for-the-reader` and return the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width. IF the view needs a diagram, the diagram-semantics call below picks its family. A branch does not become a lifecycle state because the state drawing fits better.
 
 | Shape | Use when | Signal |
 |---|---|---|
@@ -37,6 +39,8 @@ Before picking a shape for a substantial explanation, MUST load `principle-write
 | Pipeline box | numbered process | boxes + arrows |
 | State diagram | states and transitions | `state ──► state` |
 | No-frame list | linear scan path | aligned text |
+
+A diagram family maps to a shape: flow → Pipeline box, or "Pipeline with branches" in `references/architecture.md` when it branches; state → State diagram; sequence → `references/sequence-and-state.md`; topology → `references/architecture.md`.
 
 The picker chooses the skeleton's shape and the standalone constructs around it; it never overrides the skeleton default or the GFM comparison default.
 

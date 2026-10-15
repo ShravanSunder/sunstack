@@ -272,7 +272,7 @@ Use when:
 
 Don't use when:
 
-  ▸ Branches or loops overwhelm this stacked layout (use the branched-flow layout in architecture.md or select one path; keep the flow family)
+  ▸ Branches or loops overwhelm this stacked layout (use the "Pipeline with branches" layout in architecture.md or select one path; keep the flow family)
   ▸ Steps are independent, not sequential (use ruled cards)
   ▸ Individual step content is large — pipeline forces thin strips
 
@@ -723,7 +723,7 @@ Don't use when:
 
   ▸ Status vocabulary is large or open-ended (more than ~6 values) — use a table with a status column instead
 
-  ▸ Items need cross-referencing or relational structure — use a table or state diagram
+  ▸ Items need cross-referencing or relational structure — use a table, or topology when ownership or dependency edges matter
 
 
 ─── Shape 1 application — scope inventory with subsections ─────────
