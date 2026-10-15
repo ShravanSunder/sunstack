@@ -7,7 +7,7 @@ description: "Use when delegating to subagents, agent teams or parallel agents: 
 
 Every helper is described by four things, and each answers a different question. Its **role** says which result it owns and which decisions it may make. Its **execution form** says how its conversation is managed. Its **assignment**, a typed job packet, says what it is doing now, from which sources and under which grant. Its **model** is the capacity the job needs. Keeping them apart lets one role skill teach its responsibility however it runs, and lets the Lead tell implementation, observation, review and advice apart when the evidence comes back.
 
-The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, commissions the roles below, and accepts results. The owner decides tradeoffs and merges and can override any pick. No helper writes the governing design or plan, and no form, title or board seat grants that authority.
+The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, commissions the roles below, and accepts results. The owner decides one-way-door tradeoffs and merges and can override any pick. No helper writes the governing design or plan, and no form, title or board seat grants that authority.
 
 A role composes methods; it doesn't choose a lifecycle. The caller selects the phase or procedure, and the packet carries it. Practices teach how to do recurring work, principles sharpen judgment at a decision, and each role skill names the ones its decisions depend on.
 
