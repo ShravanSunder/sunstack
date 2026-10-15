@@ -143,7 +143,7 @@ Use `discuss-clarify-mental-models` when the shared picture is unstable before a
 
 Codex display titles use the `Category: Action` form (for example, `Discuss: Pathfinding` and `Spec: Design`). Skill IDs remain kebab-case for invocation. Cursor can load these plugin directories through its explicit `agent --plugin-dir <path>` path; this repository does not provide a separate Cursor marketplace.
 
-Use `practices-research` when the next step is to gather evidence: local code/docs, sibling repos, DeepWiki-style repository research, current web/docs, Reader sources, memory, or session logs. It frames bounded research questions, walks source classes in order, labels claim quality, and writes tmp research ledgers for substantial runs. Substantial runs use source-class coverage, primary anchors, and a verified research ledger. It returns its checked answer and limits to the commissioner, using a phase return token only for an applicable gap or transition.
+Use `practices-research` when the next step is to gather evidence: local code/docs, sibling repos, DeepWiki-style repository research, current web/docs, Reader sources, memory, or session logs. It frames bounded research questions, walks source classes in order, labels claim quality, and writes tmp research ledgers for substantial runs. Substantial runs record source-class coverage, primary anchors and null results in a research ledger. It returns its checked answer and limits to the commissioner, with a phase return token only when the evidence shows a gap another owner must fill.
 
 Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals, with principles at the bottom. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
 
@@ -191,7 +191,7 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## Principles
 
-Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. None loads on its own. Consuming skills select and read principles in full at applicable decisions. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
+Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill that calls one reads its file through `shared-references/principle-reading.md`. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
 
 ## Supporting Skills
 

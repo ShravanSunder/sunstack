@@ -33,23 +33,24 @@ A **workstream** is the bounded implementation assignment the Lead's plan or com
 
 ## Main path
 
-1. **Cut and classify the job.** Name the bounded result and the check that closes it, then direction, span and horizon using Classify. IF the inherited outcome or owner picture is unsettled, materially changed or ambiguous, load `principle-build-the-shared-model-first` and return the understood outcome, boundary and unsettled premise before cutting work. IF independently checkable responsibilities are mixed or a proposed split changes their boundary, load `principle-separate-the-concerns` and return the distinct jobs and reason for the cut. Missing intent, contract, plan or grant is a gap to fill before handing off, not a Partial direction. MUST load `references/delegation-examples.md` and return the relevant worked cut applied to this job. Keep classification in working state; the owner needs the decision and consequential limits, not six answers recited for every assignment.
-   Completion: each of the four answers is named, or the gap that blocks it is reported.
-2. **Choose the role, then the form.** The result the job needs picks the role: changes and their proof go to an Implementer, observation of an outcome to its paired Verifier, findings to a Reviewer, a checked answer to a Researcher, a procedure's observations to an Operator. Then apply the form column. Continuity changes a Researcher's form, never its role. The Lead commissions Advisor, Implementer, Verifier and Reviewer Sidekicks. A Sidekick whose role and commission grant management may commission bounded Operator or Researcher help for its own job, as native Workers or, when the route requires it, as separate sessions (Luna through Router from a Claude host, for example). It keeps their exact addresses, corrections and handbacks. Creating a session never grants leadership or wider work. A native Worker returns further decomposition to its parent; it doesn't fan out or open sessions.
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+1. **Cut and classify the job.** IF you can't state in one sentence, from the plan or commission, the result the owner wants, load `principle-build-the-shared-model-first` and return that sentence with the assumption it rests on, or the owner question that blocks it, before cutting. Name the bounded result, its closing check, and its direction, span and horizon from Classify. IF one job would both build and judge its own result, or both collect and interpret evidence, load `principle-separate-the-concerns` and return the split jobs, each with the check that closes it. Missing intent, contract, plan or grant is a gap to fill, not a Partial direction. MUST load `references/delegation-examples.md` and return the closest example's cut applied to this job. Report the cut to the owner, not the classification.
+   Completion: the bounded result, its closing check, direction, span, horizon and the cut are named, or the blocking gap is reported.
+2. **Choose the role, then the form.** Pick the role by the result it owns in the table. The Lead commissions Advisor, Implementer, Verifier and Reviewer Sidekicks. A Sidekick whose role skill grants management may commission bounded Operator or Researcher help for its own job. A native Worker returns further decomposition to its parent.
    Completion: the role and form are named, and the form is one the table admits.
-3. **Resolve an eligible model.** MUST load `references/model-catalog.md` and return one eligible row for the role, form and classified job, with the reason that row requires. Preserve an owner-assigned model and effort; the owner can override a pick and nothing here escalates the Lead.
+3. **Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires.
    Completion: one row matches. If none does, cut the job until one matches or report the capability or policy gap; never improvise a frontier pick or change the Lead's model.
-4. **Load the selected role skill.** MUST load the one role skill selected from the table and return its ready opening, boundary and applicable reads. The commissioner and recipient each read that skill in full; reuse an unchanged same-agent read while it still applies. IF you are the Lead starting qualifying management work, load `role-lead` and return its acceptance stance and the reads it applies. Loading the role supplies teaching, not a new assignment, session or claim of independence.
-   Completion: the selected role has been read in full and its opening, boundary and relevant reads fit this job. Do not preload all seven roles or recursively launch another Lead.
-5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form, before creating, reusing or dispatching any helper. It owns the form mechanics and selects the provider and ACP manuals. Keep exact target identities, observed creation and delivery stages, and recovery from uncertain operations.
-   Completion: the route, lifecycle and history boundary are chosen. For a Sidekick, a suitable existing session was looked for and reused if found; only when none exists is a new one created through the chosen route, and a failed lookup is not proof that none exists. A native Worker is spawned through the host's own tool, with no existing session to find.
-6. **Write the commission.** MUST load `references/agent-job-packet.md` and return the typed commission: role, form, supplied method, selected role skill in `requiredReads.charter`, relevant full reads, reachable sources, limits, closing condition and declared return owner. It names the selected role's contract under `schemas/role-contracts/`; read that contract with the shared fields, not the other roles' contracts. For an Implementer and Verifier pair, create or reuse both Sidekick sessions without dispatching work, get their real addresses, fill both packets so each references the other, then dispatch both. Host settings go in the tool's own arguments; packet text establishes no confinement or authorization.
-   IF jobs can touch shared mutable resources or consume unfinished work, load `principle-design-for-concurrency` and return the invariant, harmful ordering and existing isolation or prerequisite before parallel dispatch. Independent topics are not resource isolation: two probes resetting one fixture can destroy each other's evidence. Separate fixtures and outputs can stay parallel; a consumer of unfinished work waits for its owning completion through collaboration's existing waiting path.
+4. **Load the selected role skill.** MUST load the role skill the table names and return its ready opening and default reads. The commissioner and the recipient each read that skill in full. IF you are the Lead starting qualifying management work, load `role-lead` and return its acceptance stance and the reads it applies.
+   Completion: the selected role skill has been read in full, and its opening and default reads are in hand.
+5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form, before creating, reusing or dispatching any helper.
+   Completion: the route, lifecycle and history boundary are chosen, and for a Sidekick an existing session was looked for and reused if found.
+6. **Write the commission.** MUST load `references/agent-job-packet.md` and return the filled commission for the selected role, with that role skill's name in `requiredReads.charter`. IF two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output, load `principle-design-for-concurrency` and return the shared resource, the ordering that breaks it, and the isolation or wait you write into each packet's limits. For an Implementer and Verifier pair, create or reuse both Sidekick sessions without dispatching work, get their real addresses, fill both packets so each references the other, then dispatch both. Host settings go in the tool's own arguments; packet text grants nothing.
    Completion: the packet is complete and went to a real address. A packet missing its outcome, sources, limits or closing condition doesn't go out.
-7. **Continue and assess.** At assignment, after a material correction and on resume, the helper reacquires its selected role skill, commission and trace, then the governing sources they point to, and checks its role boundary before handing back. Continue the existing relationship with its current grant; a new role teaching home alone requires no new session or model. Earlier commissions remain historical; a new continuation names the current role skill without silently changing the grant. Send a drifting agent a correction instead of restarting it. Before relying on a handback, MUST load `principle-verify-before-accepting` and return the exact supported claim, observed scope and remaining gap. A green run at the wrong owner cannot close the assigned result; adequate current proof at the correct owner needs no extra summary or equivalent run. Return a specific gap or a scoped result to whoever commissioned it.
+7. **Continue and assess.** At assignment, after a correction that changes the job and on resume, the helper rereads its role skill, commission, trace and the sources they name, and checks its role boundary before handing back. Send a drifting agent a correction instead of restarting it. IF you will use a claim from a handback, load `principle-verify-before-accepting` and return each claim matched to the commit, target and output you opened, or named as a gap. A green run that exercised a different component, or another helper's checkout, doesn't close the job. Return a specific gap or a scoped result to whoever commissioned it.
    Completion: every claim used is matched to evidence or returned as a gap. Only the Lead accepts delivery.
 
-Delegate only independent work that costs less to hand off than to do. Work that splits into independent units (an audit, a migration, a review across files) can fan out within the grant after resource isolation and prerequisites are settled. Integrate the results at their owning boundary.
+Delegate only independent work that costs less to hand off than to do. Units that each have their own fixture and output and wait on no other unit (an audit, a migration, a review across files) fan out: one helper per unit, one table at the end.
 
 ## Classify
 
@@ -113,6 +114,81 @@ What the agent must hold in its head to get the job right. Size and module count
 ### How they fit
 
 Horizon caps the role. Direction decides whether an Operator can take the job. Direction and span pick the role's catalog row.
+
+## Model catalog
+
+| Tier | Definition |
+|---|---|
+| Workhorse | procedures, repeatable work, guided execution |
+| Daily driver | execution or synthesis that needs judgment |
+| Frontier | demanding judgment, design, or review |
+
+A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A job that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
+
+Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
+
+### 🔧 Operator
+
+| Tier | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|
+| Workhorse | OpenAI Luna | medium | Exact | any |
+| Workhorse | OpenAI Luna | high | Complete, guided collection under supplied criteria | Local |
+
+### 📚 Researcher
+
+| Tier | Form | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|---|
+| Workhorse | Worker, or a Sidekick when the model needs Router | OpenAI Luna | high | Complete | Local |
+| Daily driver | Worker | OpenAI Sol | medium | Complete | Cross-domain |
+| Daily driver | Sidekick, continuing investigation | OpenAI Sol | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system |
+
+A Researcher Sidekick started only because its model needs Router keeps the bounded job's row and closing check, with no fan-out of its own. A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection. Opus is not a research row; it needs the owner's override.
+
+### 🐒 Implementer Sidekick
+
+| Tier | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|
+| Workhorse | OpenAI Luna | xhigh | Exact, Complete | Local |
+| Workhorse | OpenAI Luna | high | Exact, Complete | Local |
+| Daily driver | OpenAI Sol | medium | Complete | Cross-domain |
+| Daily driver | Claude Opus | medium | Complete | Cross-domain |
+| Daily driver | OpenAI Sol | high to xhigh | Partial | Cross-domain, Cross-system |
+| Daily driver | Claude Opus | high to xhigh | Partial | Cross-domain, Cross-system |
+
+### 🔬 Verifier Sidekick
+
+| Tier | Model | Thinking Effort |
+|---|---|---|
+| Daily driver | OpenAI Sol | high to xhigh |
+| Daily driver | Claude Opus | high to xhigh |
+
+Choose a different lineage from the paired Implementer when one is available. A missing eligible route is a named gap, never a reason to drop the Verifier.
+
+### 🔎 Reviewer Sidekick
+
+Implementation review comes after the 🦁 Lead has assessed the work against the plan and its proof, asking the 🦉 Advisor to check it too when one exists. Reviewer Sidekicks then review each Project and Milestone, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers. Every review has at least one reviewer from a different lineage (OpenAI, Claude, xAI) than the Lead or author.
+
+| Tier | Model | Thinking Effort | Use |
+|---|---|---|---|
+| Daily driver | xAI Grok | high | |
+| Daily driver | OpenAI Sol | xhigh | |
+| Daily driver | Claude Opus | xhigh | |
+| Frontier | OpenAI Astra | high to xhigh | User must authorize |
+
+Beyond the rows above, another reviewer joins only when the owner asks for one and names its model.
+
+### 🦉 Advisor Sidekick
+
+| Tier | Model | Thinking Effort | Use |
+|---|---|---|---|
+| Daily driver | OpenAI Sol | xhigh | |
+| Daily driver | Claude Opus | xhigh | |
+| Frontier | OpenAI Astra | xhigh | User must authorize |
+| Frontier | Claude Fable | high | User must authorize |
+
+### 🦁 Lead
+
+The owner chooses the Lead's model. Nothing here escalates it.
 
 ## Completion
 

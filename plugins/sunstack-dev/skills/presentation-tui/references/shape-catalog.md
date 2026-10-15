@@ -2,7 +2,7 @@ Shape Catalog — TUI Presentation Reference
 ══════════════════════════════════════════════════════════════════════
 
 This reference owns: worked examples, geometry choices, and anti-patterns for the framed TUI shapes and six compositional applications.
-Expected inputs: the shape selected by the SKILL.md picker, the semantic family selected through shared diagram semantics, and the content it must carry.
+Expected inputs: the shape selected by the SKILL.md picker, the semantic family from shared diagram semantics when the view needs a diagram, and the content it must carry.
 Return: the shape's geometry choices and its don't-use conditions, applied to the current block.
 Complete when: the composed block matches the worked geometry, none of the shape's don't-use conditions hold, and every copyable atom follows the baseline's labels-versus-atoms boundary — where an example shows a full identifier or path inside a row, your real response keeps a short label in the row and the formatted atom outside it.
 
@@ -272,7 +272,7 @@ Use when:
 
 Don't use when:
 
-  ▸ Branches or loops overwhelm this stacked layout (use the branched-flow layout in architecture.md or select one path; keep the flow family)
+  ▸ Branches or loops overwhelm this stacked layout (use the "Pipeline with branches" layout in architecture.md or select one path; keep the flow family)
   ▸ Steps are independent, not sequential (use ruled cards)
   ▸ Individual step content is large — pipeline forces thin strips
 
@@ -723,7 +723,7 @@ Don't use when:
 
   ▸ Status vocabulary is large or open-ended (more than ~6 values) — use a table with a status column instead
 
-  ▸ Items need cross-referencing or relational structure — use a table or state diagram
+  ▸ Items need cross-referencing or relational structure — use a table, or topology when ownership or dependency edges matter
 
 
 ─── Shape 1 application — scope inventory with subsections ─────────

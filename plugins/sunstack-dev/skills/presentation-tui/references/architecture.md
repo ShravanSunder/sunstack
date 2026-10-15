@@ -30,7 +30,7 @@ user asks
   ──► terminal surface renders readable structure
 ```
 
-After the spine is clear, add one branch or failure outcome. Keep ordered work as flow; use a state view only for an actual lifecycle, and a sequence view for messages between actors.
+After the spine is clear, add one branch or failure outcome.
 
 
 ─── Boundary / ownership map ────────────────────────────────────────

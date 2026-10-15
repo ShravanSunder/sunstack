@@ -35,7 +35,9 @@ When the commissioner supplies a visible title for a conversation you create or 
 
 ## Message or post
 
-IF shaping an assignment or consequential decision another session must use, load `principle-write-for-the-reader` and return the requested result, governing source and relevant limits in actionable wording. “Continue” is enough for an unchanged assignment; after a changed obligation, say which result now governs and what stays bounded. Use this result directly in the assignment message.
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+IF a follow-up message changes what another session must deliver or decide, load `principle-write-for-the-reader` and return the message: the new deliverable, the source it comes from and what stays out of scope. “Continue” is enough when nothing changed.
 
 A message to a separate session (another conversation or terminal on Codex, Claude Code, or Cursor) goes through Router: use the supplied exact SessionRef, discover it through Router when missing or ambiguous, then `message send`. Do not use host-native cross-session channels for that. Native messaging to your own in-session subagents and teammates is unchanged. An empty active-session list does not prove a session is gone.
 
@@ -49,6 +51,6 @@ IF waiting on another agent's reply, result, or board activity, load `references
 
 Finishing an assignment means posting its outcome, evidence, and remaining work on its root. It does not resolve anything. Only a root's `orchestrator`, or an explicit successor, resolves it: after reading current activity and the linked execution outcomes, and checking that the whole integrated scope is finished. An implementer reports completion or handback on its execution root and never resolves the coordination root. A session ending, a blocked assignment, or one finished contribution leaves the work unresolved. If authorized work belongs in a resolved thread, read why it was resolved and unresolve it explicitly before posting; do not open a duplicate thread.
 
-IF the root's authorized closer is about to resolve it, load `principle-verify-before-accepting` and return the whole integrated claim, decisive outcomes and remaining obligation. Two green slices do not establish that their shared contract works together. Inspect the combined evidence the scope requires; when adequate current evidence already covers it, close without another equivalent run. Any remaining obligation leaves the work unresolved.
+IF you hold the root's `orchestrator` seat, or are its explicit successor, and are about to resolve it, load `principle-verify-before-accepting` and return the check that covered the slices together, or the obligation still open. Two green slices do not establish that their shared contract works together.
 
-Complete when the work thread or `no-home: <gap>` is known and returned, every post and message went to the right root under your own identity and seat, any wait has a named listener, wake, or gap, and no thread was resolved by a session that does not hold its `orchestrator` seat.
+Complete when the work thread or `no-home: <gap>` is known and returned, every post and message went to the right root under your own identity and seat, any wait has a named listener, wake, or gap, no thread was resolved by a session that does not hold its `orchestrator` seat, and no root was resolved with an obligation still open.

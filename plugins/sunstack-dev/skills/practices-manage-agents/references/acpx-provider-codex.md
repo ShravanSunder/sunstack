@@ -4,13 +4,13 @@ Agent token: `codex`. Legacy route: agent-router carries persistent Codex relati
 
 ## Models
 
-Examples: GPT-6 Luna, Sol, and Astra ids. Resolve the exact id with the exact-id rule in `model-catalog.md`.
+Examples: GPT-6 Luna, Sol, and Astra ids. Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
 Pass the provider-advertised id with `--model` at session creation or `acpx codex set model <id> -s <name>` afterward. Unknown ids are rejected. Prefer the short form unless the adapter requires an `openai.` prefix.
 
 ## Effort
 
-The Codex adapter's effort key is `reasoning_effort`: use `acpx codex set reasoning_effort <level> -s <name>`. A 2026-09-25 check against `@agentclientprotocol/codex-acp@1.6.2` accepted `reasoning_effort=high` and rejected both `effort` and an unadvertised value with ACP `-32602` (Invalid params). Select the model-and-effort pair from `model-catalog.md`, then use its advertised level; do not duplicate role-tier mappings here.
+The Codex adapter's effort key is `reasoning_effort`: use `acpx codex set reasoning_effort <level> -s <name>`. A 2026-09-25 check against `@agentclientprotocol/codex-acp@1.6.2` accepted `reasoning_effort=high` and rejected both `effort` and an unadvertised value with ACP `-32602` (Invalid params). Select the model-and-effort pair from the `SKILL.md` Model catalog, then use its advertised level; do not duplicate role-tier mappings here.
 
 ## Sessions And Identity
 

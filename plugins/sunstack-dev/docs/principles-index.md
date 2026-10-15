@@ -1,11 +1,11 @@
 # Principles Index
 
-A principle is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it. More scenarios sit in each skill's `references/example_scenarios.md`. Each is a skill named `principle-*` that the owner calls by name; none load on their own.
+A principle is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it. More scenarios sit in each skill's `references/example_scenarios.md`. Each is a skill named `principle-*`, hidden from model invocation: the owner calls one by name, and a skill that calls one reads its file through `shared-references/principle-reading.md`.
 
 ## Using a principle
 
 - Read the card in full before applying it. This index chooses the card; it does not replace it.
-- When a principle shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied.
+- When a principle the owner called by name shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied. A read that a skill directed follows rule 5 of `shared-references/principle-reading.md` instead.
 - Principles compose. One task often needs two, and each card's closing lines say where a neighbour takes over. A principle owns a question, not a file, tool, or test type.
 
 ## Understand

@@ -1,6 +1,6 @@
 # Delegation examples
 
-Each example walks the six steps: direction, span, horizon, cut, role and form, catalog row. The first three are the contrasts that matter most: who collects versus who interprets, a short research job versus a continuing one, and an implementation workstream with its Verifier.
+Most examples walk the six steps: direction, span, horizon, cut, role and form, catalog row; the last shows one isolation decision. The first three are the contrasts that matter most: who collects versus who interprets, a short research job versus a continuing one, and an implementation workstream with its Verifier.
 
 ### Collection versus interpretation: owner decisions in old sessions
 
@@ -118,6 +118,6 @@ Job the Lead is tempted to hand off: "Move the server and the app to integer cen
 
 ### Independent topics, shared fixture
 
-Two assigned probes ask different questions, but both reset the same database fixture and write `result.log`. Probe A can reset while B is observing, then B can overwrite A's output. Each may report green against state the other changed. The invariant is that each observation belongs to its declared fixture and survives for inspection; topic independence does not preserve it.
+Two assigned probes ask different questions, but both reset the same database fixture and write `result.log`. Probe A can reset while B is observing, then B can overwrite A's output. Each may report green against state the other changed. What must hold: each probe's result comes from its own fixture and is still on disk when read.
 
-Give independently checkable probes separate fixture instances and output paths through the existing setup. They can then run in parallel without adding locks or a scheduler. If B instead consumes the actual artifact A is still producing, isolation cannot remove that dependency: B waits for A's owning completion, checks the finished artifact, then proceeds. A prompt delivered to A is not that completion.
+Give independently checkable probes separate fixture instances and output paths through the existing setup. They can then run in parallel without adding locks or a scheduler. If B instead consumes the actual artifact A is still producing, isolation cannot remove that dependency: B waits for A's handback, checks the finished artifact, then proceeds. A prompt delivered to A is not that handback.

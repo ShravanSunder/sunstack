@@ -1,6 +1,6 @@
 # Useful practice and principle composition — project 1 specification
 
-Specification v2, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all eleven runtime runs are now implemented as authored source, with tests/evaluations explicitly deferred by the owner. Implementation review, behavior proof and release remain unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
+Specification v3, 2026-10-14. Owner-directed behavior-changing updates. This document specifies one implementation PR, containing 11 runs with exactly one named skill per run. Independent SPEC review accepted v2 at `2d57193b`; all eleven runtime runs are now implemented as authored source, with tests/evaluations explicitly deferred by the owner. Independent implementation review returned `targeted-revision`; the dated [v3 corrections](#2026-10-14-v3-corrections) supersede the v2 rows they name, and the same review lead re-verified them on 2026-10-15. Behavior proof and release remain unclaimed. [projects.md](projects.md) preserves both project scopes and the owner's base correction.
 
 ## Purpose and success
 
@@ -244,10 +244,123 @@ Highest design risk is adding plausible principle links that merely increase rea
 Detailed spec completion requires all 11 promises, call predicates/results, owned depths, retained responsibilities and proof cases to be reviewable; no run may be accepted with a missing method or an unspecified proof route. Project 2 remains saved analysis scope. Implemented states record authored source only; these documents establish no shipped or behaviorally improved result.
 
 
+## 2026-10-14 v3 corrections
+
+Source: independent implementation review of PR #131 at `b064824` (findings D1–D6, A1–A18) and the owner's decisions D1, D4, D5 and D7 of the same day, plus D8 of 2026-10-15. Each row names the v2 text it supersedes; that text stays above as history. The same review lead re-verified this section on 2026-10-15, before any runtime edit; V3-9 was added that day.
+
+### Decisions
+
+| ID | Supersedes | Decision | Why and cost |
+|---|---|---|---|
+| V3-1 | D3 "caller-selected full reads"; Common authoring contract `:51` "Resolve skill names through the installed plugin…" and the `:55` reuse paragraph | Principles are read as files through one new shared reference, `shared-references/principle-reading.md` (contract below). Each calling skill gets one pointer line before its first principle call. Call sites keep the `principle-<name>` name and the `load` verb. | Principles are hidden from model invocation, so "load `principle-x`" did not resolve on a host without the owner's private devfiles instruction, and the D5 reuse rule never reached runtime text (review D1). One owner for both rules; costs one file read per run that reaches a principle call. |
+| V3-2 | v2 call-site text in R3, R4, R5, R6, R9, R10, R11 | Each principle call fires on an observable event and returns a result the next action uses (call table below). | v2 predicates such as "materially changed", "consequential decision" and "competing design authority" can't be observed, so the read happened by mood; the runtime copied them word for word (review D4). |
+| V3-3 | R6 "At meaningful update/checkpoint: MUST"; R7/R8 "for a substantial explanation" | Show-me's write-for-the-reader call becomes an IF on a cold-read checkpoint. The presentation MUSTs stay, without the leading clause: the bypass at the top of each skill already gates them. | Show-me's MUST fired at every checkpoint and changed no decision its body didn't already make. |
+| V3-4 | Failure/control text in R4 `:136`, R5 `:146`, R6 `:156`, R10 `:196`, R11 `:208` copied into runtime | Runtime carries no "reuse adequate current evidence / no equivalent run" clause; `principle-verify-before-accepting` (`:17`) owns reuse. Failure/control lines are proof design only. | Restated in six consumers with "adequate" undefined where used (review A6). |
+| V3-5 | R9 "Local consistency repairs" (no readiness rule admitted) | Admit the Linear readiness rule in the owner's D5 wording (R9 rows below). | Added in `b064824` without admission, with "delivery boundary" undefined (review D5). |
+| V3-6 | R4 Depth "Move the complete tier/exact-id/model tables unchanged to `references/model-catalog.md`. Step 3 MUST loads it…"; R4 "Same-run catalog consumer cutover"; D8 "New management catalog is a coherent policy module"; Coordination `:228` "The new management `model-catalog.md` is the only planned new runtime reference" | Owner decision D7: the model catalog stays in `practices-manage-agents/SKILL.md`. Restore `## Model catalog` byte-identical to `0bad422`, after `## Classify` and before `## Completion`. Delete `references/model-catalog.md`. Step 3 returns to "**Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires." with its base Completion line. The eight consumers in R4's list return to their `0bad422` pointer text. | Owner preference: the catalog is read where the model is chosen. Cost: step 3 reads a longer body; no consumer cutover remains to maintain. |
+| V3-7 | Coordination write set `:228`; and, for these lines only, projects.md project 1 "no … global instruction change" | The write set adds: `shared-references/principle-reading.md`; `docs/principles-index.md` `:3` and `:8`; plugin README Research (`:139`) and Principles (`:185`) paragraphs; root `AGENTS.md` research row (`:124`), principles clause of "Skill layers" (`:113`) and principles table row (`:148`); changelog alignment. Text below. | These lines say how principles load and what research returns. v2 left them stale or changed them without admission (review A1, A16). |
+| V3-8 | R1 Body change "no logged intended red remains a gap"; R3 "Keep queries/nulls/coverage where consequential" | R1: the gap is "no red observed against the pre-fix code"; a deliberate break after green shows sensitivity only. R3: record every null result (Boundaries `:16`); Boundaries `:15` owns the claim labels and the ledger uses the same five. | The v2 wording produced the runtime defects in review A8 and A7. |
+| V3-9 | R4 Main path as authored at `b064824` (910 words by `wc -w`) | Owner decision D8: rewrite `practices-manage-agents` "## Main path" in one pass to about 550 words, below #127's 721. Keep the step order, each step's Completion line, every MUST/IF call in its v3 form, the V3-1 pointer line once, and these bright lines: missing intent, contract, plan or grant is a gap, not a Partial direction; who may commission whom; a native Worker returns further decomposition to its parent; host settings go in the tool's own arguments and packet text grants nothing; send a drifting agent a correction instead of restarting it; only the Lead accepts delivery; delegate only independent work that costs less to hand off than to do, with #127's "one helper per unit, one table at the end" restored (A4). Cut what another owner states: step 2's role-to-result list and Researcher continuity (role table); its Luna-through-Router example and address keeping (`execution-forms.md` route list and ledger); "Creating a session never grants leadership" (`execution-forms.md:5`, intro); step 5's form-mechanics and target-identity sentences and its Worker Completion sentence (`execution-forms.md`); step 6's field list and contract-reading sentence (`agent-job-packet.md` "Fill each field", "Read only the schema you need") and the two sentences after the concurrency IF (`delegation-examples.md` shared-fixture example). Step 3 is V3-6's base one-liner. A cut rule with no other owner keeps its shortest form. Role-specific text (role table, pair order, fixed-forms paragraph) stays until the role layer moves it. | The Main path grew by restating rules other files own. Cost: steps 5 and 6 send the agent to their references for detail it used to see inline. |
+
+### Shared reference contract (V3-1)
+
+`plugins/sunstack-dev/shared-references/principle-reading.md` opens like the other shared references: what it owns, its consumers, expected inputs, return.
+
+- Owns: how a skill reads a `principle-*` skill its text calls.
+- Consumers: the nine R3–R11 skills; the seven `role-*` skills once the role layer lands.
+- Expected input: the principle name at the call site, and whether the caller sits in a skill folder or in `shared-references/`.
+- It states exactly these rules:
+  1. `principle-*` skills are files, not invocable skills; they are hidden from model invocation on purpose, so read the file.
+  2. From a skill folder, `principle-<name>` is `../principle-<name>/SKILL.md`, a sibling folder in the same plugin. From `shared-references/` it is `../skills/principle-<name>/SKILL.md`.
+  3. Read the principle in full. Load its `references/example_scenarios.md` only when the principle's own IF holds.
+  4. A full read this same agent already made in this session, of an unchanged file, counts. Another agent's read never counts.
+  5. Use the principle's result in the calling method's next action. Don't recite it to the owner unless it explains an outcome, risk or decision the owner needs.
+- Return: the file read, whether its scenario reference was read, and the result the call site names.
+- Complete when: the call site's result comes from a full read this agent made in this session of the unchanged file.
+
+Pointer line, identical in every caller:
+
+> IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+
+It sits immediately before the skill's first principle call: research, first line under Ordered Workflow; manage-agents, first line under Main path; collaboration, first line under Message or post; show-me, before the Open-or-resume table; webui, first line under Media selection; tui, first line under Shape picker; linear and observability, after the opening paragraph; security, first line under Workflow.
+
+### Call sites (V3-2, V3-3, V3-4)
+
+Anchors are at `b064824`. "Also" lists the sentences around the call that the rewrite replaces or that restate another owner's rule.
+
+| Run | Anchor | New call | Also |
+|---|---|---|---|
+| R3 | research step 2 `:23` | IF a claim rests on a summary, memory, quote or label whose source you haven't opened, load `principle-read-ground-truth-first` and return that source, opened, with the claim labeled by a Boundaries class. | Delete S2; proposal versus adoption is said once, at step 5. |
+| R3 | research step 5 `:26` | IF a conclusion is load-bearing, load `principle-verify-before-accepting` and return the conclusion, the anchor you opened for it and what that anchor doesn't cover. | Keep the proposal/adoption sentence, ending "…report only that it was proposed". Delete "That establishes provenance…". |
+| R3 | research step 6 `:27` | IF the answer combines several sources or competing findings for another reader, load `principle-write-for-the-reader` and return the answer ordered for the decision named in step 1. | Restore, per question, whether the evidence supports, refutes or complicates it (step 1's frame). |
+| R3 | research Return `:33` | IF the evidence shows a missing requirement, specification or design decision that another owner must fill, load `../../shared-references/phase-return-tokens.md` and return that gap token with its evidence. | Questions, coverage, verbatim queries, every null result, competing hypotheses and gaps go "in the ledger when one is written, otherwise in the reply". One no-readiness sentence stays: "A completed answer returns without a phase token; the caller decides what follows." |
+| R4 | manage-agents step 1 `:36`, moved to the head of the step | IF you can't state in one sentence, from the plan or commission, the result the owner wants, load `principle-build-the-shared-model-first` and return that sentence with the assumption it rests on, or the owner question that blocks it, before cutting. | — |
+| R4 | manage-agents step 1 `:36` | IF one job would both build and judge its own result, or both collect and interpret evidence, load `principle-separate-the-concerns` and return the split jobs, each with the check that closes it. | — |
+| R4 | manage-agents step 6 `:47`, moved before "then dispatch both" | IF two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output, load `principle-design-for-concurrency` and return the shared resource, the ordering that breaks it, and the isolation or wait you write into each packet's limits. | — |
+| R4 | manage-agents step 7 `:49` | IF you will use a claim from a handback, load `principle-verify-before-accepting` and return each claim matched to the commit, target and output you opened, or named as a gap. | "A green run that exercised a different component, or another helper's checkout, doesn't close the job." Delete the reuse clause. |
+| R5 | collaboration Message or post `:38` | IF a follow-up message changes what another session must deliver or decide, load `principle-write-for-the-reader` and return the message: the new deliverable, the source it comes from and what stays out of scope. | "'Continue' is enough when nothing changed." Delete "Use this result directly…". The typed commission stays with `practices-manage-agents` step 6. |
+| R5 | collaboration resolve `:52` | IF you hold the root's `orchestrator` seat and are about to resolve it, load `principle-verify-before-accepting` and return the check that covered the slices together, or the obligation still open. | Keep "Two green slices…". Delete the reuse clause and "Any remaining obligation…" (`:50` owns it). |
+| R6 | show-me Lead resume cell `:18` | IF a "done" claim in the thread will guide your next step and you haven't checked it against current sources, load `principle-verify-before-accepting` and return the part current sources support; continue from that part and carry the rest as open work. | — |
+| R6 | show-me `:28` | IF the checkpoint will be read cold (a handoff, a stop, or a resume by another session), load `principle-write-for-the-reader` and return an entry a cold successor can act on. | Delete "Put that account…". Move the stand-in example to the Stand-in entry (`:37`); entry content lists stay at `:30` and `:56`. At `:58`, delete the reuse sentence; S2 becomes "When you copy an earlier claim into the trace, attribute it to its author unless you checked it." |
+| R7 | webui Media selection `:25` | MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it. | Delete S2. |
+| R8 | tui Shape picker `:28` | MUST load `principle-write-for-the-reader` and return the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width. | Replace "Use shared diagram semantics…" with "IF the view needs a diagram, the diagram-semantics call below picks its family." Rule 1 (`:14`): "Pick one shape for the reader's question (picker below)." |
+| R9 | linear `:10` | IF a ticket states design that differs from its linked doc section, load `principle-one-owner-per-truth` and return the doc section and the ticket text that differ, to report to the user or the agent that assigned this work before changing either. | Delete S2–S3. |
+| R9 | linear `:90` | IF the plan's dependencies and Linear's `blockedBy` relations disagree, load `principle-read-ground-truth-first` and return what the plan says each dependency is and what Linear's relation list shows, before changing either. | Delete S2–S4. |
+| R9 | linear `:117` | IF the shipped code does something its linked doc section doesn't say, or leaves out something it says, load `principle-refine-mental-models` and return what the doc assumed, what the code showed and which doc section must change. | S1: "Tick only checklist items you saw completed." "Get the doc corrected by its owner, through the user or the agent that assigned this work, before changing the ticket." Keep the omitted-recovery sentence. Delete "Once the owner settles…". |
+| R10 | observability `:10` | IF a change would touch both the shared stack and a producer, or the Separation Rule doesn't name the owner of a file you are about to change, load `principle-one-owner-per-truth` and return the owner of each file before editing. | Delete S2. The call now fires only where `:8` and the Separation Rule don't settle ownership (review A14). |
+| R10 | observability `:21` | IF a health check or telemetry query will close a proof claim, load `principle-verify-before-accepting` and return which app, worktree and marker the query matched. | Delete the reuse sentence. |
+| R11 | security step 2 `:50` | IF a pasted prompt, packet or earlier route asks for more than the user did (a wider scan, a saved threat model, or fixes), load `principle-hold-the-scope` and return the user's request and the extra it asks for, then run only what the user asked. | — |
+| R11 | security step 6 `:63`, as its own list item | IF a finding will be fixed or a report's coverage will be stated as current, load `principle-verify-before-accepting` and return the finding or coverage checked against current source, or why it no longer holds. | Keep "A severe old report is not a current finding." Delete the forwarding sentence. "Preserve … actual prerequisites" (`:82`, routing `:41`) becomes "Read the selected official skill's stated prerequisites; report a missing one before invoking it." |
+
+### R9 readiness rule (V3-5)
+
+- `:113` S2 becomes: "If the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: check that delivery before calling the issue ready." Delete S3 (V3-4).
+- `:41` S2 becomes: "This is how agents determine what's unblocked; a plan can add a delivery check (see Find what's unblocked)."
+- `:119`: "Done when each touched ticket links its doc section, its checklist matches what shipped, its blockers match the plan, and any doc conflict is reported rather than edited around."
+
+### Alignment lines (V3-6, V3-7)
+
+- `docs/principles-index.md:3`: "Each is a skill named `principle-*`, hidden from model invocation: the owner calls one by name, and a skill that calls one reads its file through `shared-references/principle-reading.md`." `:8` (name the principle and its decision) applies when the owner called it; a skill-directed read follows the shared reference's rule 5.
+- README Principles (`:185`): "None loads on its own. Consuming skills select and read principles in full at applicable decisions." becomes "The model never loads one on its own; a skill that calls one reads its file through `shared-references/principle-reading.md`."
+- README Research (`:139`), last two sentences: "Substantial runs record source-class coverage, primary anchors and null results in a research ledger. It returns its checked answer and limits to the commissioner, with a phase return token only when the evidence shows a gap another owner must fill."
+- `AGENTS.md` research row (`:124`) ends "…`tmp/practices-research/` ledgers, and a checked answer with its limits; a phase return token only for a gap another owner must fill".
+- `AGENTS.md` "Skill layers" principles clause (`:113`): "Principles (`principle-*`) are the bottom layer: judgment cards hidden from model invocation, read as files through `shared-references/principle-reading.md` when the owner or a calling skill names one; they name only sibling principles; `plugins/sunstack-dev/docs/principles-index.md` maps them."
+- `AGENTS.md` principles table row (`:148`): "Engineering judgment cards, one judgment each (for example `principle-design-for-failure`), hidden from model invocation and read as files through `shared-references/principle-reading.md`; family map in `plugins/sunstack-dev/docs/principles-index.md`".
+- Changelog `2026-10-14-practice-principle-composition.md`: delete line 7 (V3-6). Line 10 names as updated the README Research and Principles paragraphs, the AGENTS research and principle lines and the principles index. Add the shared reference (V3-1) and the Linear readiness rule (V3-5). Record the implementation-review result and behavior unverified/deferred. Stays under 20 lines.
+
+### Security gate record (review A17)
+
+| Surface | Change after v3 | Decision | Required proof |
+|---|---|---|---|
+| `ops-security-review` SKILL + `references/routing.md` | Narrows: a missing threat model is reported, not created; stated prerequisites are read before invoking | allowed (R11, D11) | source review; no scan runs as proof |
+| 8 native/ACPX provider references | None: V3-6 returns their pointer lines to `0bad422` | allowed | `git diff 0bad422 -- <file>` shows no change for each |
+| Model catalog, including its `~/.config/agent-context/model-map.md` read | Back in `SKILL.md`, byte-identical to `0bad422` | allowed | the section diffs empty against `0bad422` |
+| `ops-observability-stack`, `ops-linear-tracking` | Adds checks only; no new commands or writes | allowed | source review |
+| `shared-references/principle-reading.md` | New read-only procedure naming relative sibling paths | allowed | each caller's pointer path and each sibling principle path resolve |
+
+No runtime line adds a home, cache or installed-plugin path.
+
+### Covered without spec change
+
+A3, A4, A9, A10 (`shape-catalog.md:275`, `:726` and the family-to-picker line), A12's Completion clause ("no root resolved with an open obligation"), A15's list-item split and A18 are runtime corrections inside the v2 and v3 boundary. A18 applies the review's slop line list after the rows above; where a row above rewrites a line, the row's text wins.
+
+### Run states (supersede the State column in "Run order and surfaces")
+
+| Run | Target | State |
+|---|---|---|
+| — | `shared-references/principle-reading.md` (shared prerequisite, no skill target; lands before the pointer lines) | implemented · verified by the review lead |
+| R1 | principle-write-tests-that-can-fail | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R2 | principle-verify-before-accepting | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R3 | practices-research | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R4 | practices-manage-agents | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R5 | practices-collaboration | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R6 | practices-show-me-your-work | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R7 | presentation-webui | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R8 | presentation-tui | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R9 | ops-linear-tracking | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R10 | ops-observability-stack | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+| R11 | ops-security-review | implemented · v3 corrections applied and verified by the review lead · behavior unverified/deferred |
+
 ## Implementation state, 2026-10-14
 
-R1–R11 were authored sequentially from the accepted v2 meaning under implementation-plan slices 1–2, starting at `16e0bd8a` with runtime equal to #127 `0bad422c`. Evidence for each implemented row is the current working diff of its named body and depth above: R1/R2 add their worked teaching cases; R3 replaces the ledger field template; R4 moves the complete catalog and retargets all eight named policy consumers; R5/R6 add local composition; R7 owns the shared semantic edit; R8 aligns its three craft references; R9/R11 correct their existing prompts/examples; R10 retains operational references. Frontmatter and `agents/openai.yaml` are unchanged. Role charters, typed contracts, fixtures and project 2 are unchanged.
-
-The owner explicitly deferred tests and evaluations. Validators, formatters and runtime exercises were not run in this authoring draft per the plan's dated boundary. The proof design above remains owed for later verification, not waived or reported passing. All eleven runs are drafted from approved intent; behavior has not been evaluated and independent implementation review has not run. Source comparison is author assessment, not an independent verdict. The sole requested scratch handback carries the complete current diff and per-run comparison for Lead inspection before commit/PR.
-
-Source metadata inspected at this stage used 2.76.0 across all three clients and marketplace entries, with no 2.77.0 live-source release entry. The authoring changeset selects 2.77.0 consistently and records the deferred proof and unrefreshed clients in its dated changelog. Closed #128's unmerged version is not adoption authority. No commit, push, PR, merge, release or installed-cache refresh is performed by this authoring commission.
+R1–R11 are committed on `skills/practices-principles` as draft PR #131, head `b064824`, base #127 `0bad422`. `16e0bd8a` records the implementation slices, `b7d6541f` authors R1–R11, and `b0648241` reconciles readiness and clarifies prose, including the Linear rule and README edits that V3-5 and V3-7 now admit. Version 2.77.0 is set in all three client manifests and marketplace entries. Independent cross-lineage implementation review at `b064824` returned `targeted-revision` with ship decision `blocked`, and owner decision D7 was added. The v3 corrections in `4d05ac7..fa5139a` close findings D1–D5 and A1–A18; D6 was handled in the PR descriptions. In a throwaway worktree the review lead observed `git diff --check` clean, `claude plugin validate .` passing, the skill suite at 149/149 and typecheck exit 0. Behavior proof stays deferred by the owner. The v3 corrections, including V3-9, are applied on this branch in local commits after `4d05ac7` and were verified by the review lead. After them the implementer observed the skill suite at 149/149, typecheck exit 0, `claude plugin validate .` passing and `git diff --check` clean. Nothing is pushed, and no merge, release or cache refresh has happened.
