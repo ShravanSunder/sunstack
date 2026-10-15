@@ -432,16 +432,20 @@ Anchors are at `c2b9c18`. Each row's citation sentence is the moment, then the a
 
 | Run | Target | State |
 |---|---|---|
-| — | 17 `principle-*` cards: read rule (V4-1) | v4 in progress |
-| — | `shared-references/principle-reading.md`: deleted (V4-2) | v4 in progress |
-| R1 | principle-write-tests-that-can-fail | v3 implemented and verified · read rule (V4-1) in progress · behavior unverified/deferred |
-| R2 | principle-verify-before-accepting | v3 implemented and verified · read rule (V4-1) in progress · behavior unverified/deferred |
-| R3 | practices-research | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R4 | practices-manage-agents | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R5 | practices-collaboration | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R6 | practices-show-me-your-work | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R7 | presentation-webui | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R8 | presentation-tui | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R9 | ops-linear-tracking | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R10 | ops-observability-stack | v4 citations in progress · behavior unverified/deferred · B5 owed |
-| R11 | ops-security-review | v4 citations in progress · behavior unverified/deferred · B5 owed |
+| — | 17 `principle-*` cards: read rule (V4-1) | implemented `4b640de3` · not yet verified by the review lead |
+| — | `shared-references/principle-reading.md`: deleted (V4-2) | implemented `b8a739fa` · not yet verified by the review lead |
+| R1 | principle-write-tests-that-can-fail | v3 implemented and verified · read rule implemented `4b640de3` · behavior unverified/deferred |
+| R2 | principle-verify-before-accepting | v3 implemented and verified · read rule implemented `4b640de3` · behavior unverified/deferred |
+| R3 | practices-research | v4 citations implemented `3b04ea47` · behavior unverified/deferred · B5 owed |
+| R4 | practices-manage-agents | v4 citations implemented `d53c9070`, `79c79957` · behavior unverified/deferred · B5 owed |
+| R5 | practices-collaboration | v4 citations implemented `974940b8` · behavior unverified/deferred · B5 owed |
+| R6 | practices-show-me-your-work | v4 citations implemented `fda2f0c8` · behavior unverified/deferred · B5 owed |
+| R7 | presentation-webui | v4 citations implemented `a54785c2` · behavior unverified/deferred · B5 owed |
+| R8 | presentation-tui | v4 citations implemented `a54785c2` · behavior unverified/deferred · B5 owed |
+| R9 | ops-linear-tracking | v4 citations implemented `caeda35c` · behavior unverified/deferred · B5 owed |
+| R10 | ops-observability-stack | v4 citations implemented `4c41cd0d` · behavior unverified/deferred · B5 owed |
+| R11 | ops-security-review | v4 citations implemented `43024a83` · behavior unverified/deferred · B5 owed |
+
+### Implementation state, 2026-10-15
+
+The v4 runtime commits `4b640de3..b8a739fa` follow this section's commit `e8127da4` on `skills/practices-principles`, from `c2b9c18`. The implementer observed: the citation check passing (38 citation sentences; every link resolves to a same-plugin card; no ``load `principle-`` in `plugins/`; no `principle-reading` outside `docs/wip` and changelogs dated before 2026-10-14; all 17 cards open with the read rule), and failing on four seeded defects before they were restored; `pnpm --dir tests/skills run test` 149/149; `typecheck` exit 0; `claude plugin validate .` passing; `git diff --check c2b9c18` clean. The management Main path is 757 words by `wc -w` (685 before v4 without the pointer line; #127's was 721). Static proof is structural only. No implementation review of v4 has run; B5 is owed; nothing is pushed.
