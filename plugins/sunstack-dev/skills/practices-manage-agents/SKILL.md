@@ -15,39 +15,35 @@ A role composes methods; it doesn't choose a lifecycle. The caller selects the p
 
 A **Worker** is a native subagent its parent manages, kept through the bounded job's corrections. A **Sidekick** is a separately managed session, addressed and reused across related work. A native Worker may have its own thread id; the difference is who manages it and how long it lives. In a title, "Sidekick" names the form and the role names the responsibility.
 
-| Role | Owns | Form | Role skill |
-|---|---|---|---|
-| 🦁 Lead | governing design and plan, integration, acceptance | the owner's main conversation | `role-lead` |
-| 🦉 Advisor | a competing picture, its evidence and tradeoffs, when the owner asks for one | always Sidekick | `role-advisor` |
-| 🐒 Implementer | assigned changes, their product tests and associated proof | always Sidekick | `role-implementer` |
-| 🔬 Verifier | independent observation of the adopted outcome, paired with each Implementer | always Sidekick | `role-verifier` |
-| 🔎 Reviewer | independent findings on a declared artifact, and correction checks | always Sidekick, with no author history | `role-reviewer` |
-| 📚 Researcher | a checked answer to a supplied question | Worker for one bounded question; Sidekick for a continuing investigation, or a bounded one whose model needs Router | `role-researcher` |
-| 🔧 Operator | observations from a prescribed procedure or a guided collection | Worker by default; Sidekick when the job needs a separately managed session | `role-operator` |
+| Role | Result it owns | Role skill |
+|---|---|---|
+| 🦁 Lead | governing design and plan, integration, acceptance | `role-lead` |
+| 🦉 Advisor | a competing picture, its evidence and tradeoffs | `role-advisor` |
+| 🐒 Implementer | assigned changes, their product tests and associated proof | `role-implementer` |
+| 🔬 Verifier | independent observation of the adopted outcome | `role-verifier` |
+| 🔎 Reviewer | independent findings on a declared artifact, and correction checks | `role-reviewer` |
+| 📚 Researcher | a checked answer to a supplied question | `role-researcher` |
+| 🔧 Operator | observations from a prescribed procedure or a guided collection | `role-operator` |
 
 Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`. Label a native helper by its role too, such as `📚 Researcher Worker · retry policy`. An existing correct name needs no rewrite.
-
-The fixed forms above win over convenience. Feature code and its proof stay with the Implementer Sidekick. A native Worker collects evidence, answers one bounded research question, or runs a prescribed operation; being cheap gives it no implementation, architecture or acceptance authority.
-
-A **workstream** is the bounded implementation assignment the Lead's plan or commission names, closed by its declared proof; usually a Milestone made of Tasks. The Lead pairs one Verifier with each Implementer for its workstream. A collection subtask inside the workstream gets no pair of its own.
 
 ## Main path
 
 IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
 
-1. **Cut and classify the job.** IF you can't state in one sentence, from the plan or commission, the result the owner wants, load `principle-build-the-shared-model-first` and return that sentence with the assumption it rests on, or the owner question that blocks it, before cutting. Name the bounded result, its closing check, and its direction, span and horizon from Classify. IF one job would both build and judge its own result, or both collect and interpret evidence, load `principle-separate-the-concerns` and return the split jobs, each with the check that closes it. Missing intent, contract, plan or grant is a gap to fill, not a Partial direction. MUST load `references/delegation-examples.md` and return the closest example's cut applied to this job. Report the cut to the owner, not the classification.
-   Completion: the bounded result, its closing check, direction, span, horizon and the cut are named, or the blocking gap is reported.
-2. **Choose the role, then the form.** Pick the role by the result it owns in the table. The Lead commissions Advisor, Implementer, Verifier and Reviewer Sidekicks. A Sidekick whose role skill grants management may commission bounded Operator or Researcher help for its own job. A native Worker returns further decomposition to its parent.
-   Completion: the role and form are named, and the form is one the table admits.
-3. **Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires.
+1. **Cut and classify the job.** IF you can't state in one sentence, from the plan or commission, the result the owner wants, load `principle-build-the-shared-model-first` and return that sentence with the assumption it rests on, or the owner question that blocks it, before cutting. IF one job would both build and judge its own result, or both collect and interpret evidence, load `principle-separate-the-concerns` and return the split jobs, each with the check that closes it. Missing intent, contract, plan or grant is a gap to fill, not a Partial direction. MUST load `references/delegation-examples.md` and return the closest example's cut applied to this job. Report the cut to the owner, not the classification.
+   Completion: the bounded result, its closing check, its direction, span and horizon (Classify) and the cut are named, or the blocking gap is reported.
+2. **Choose the role** by the result it owns in the table. A helper commissions only what its own role skill and commission grant; a native Worker returns further decomposition to its parent.
+   Completion: one role is named, and its result is the one the job needs.
+3. **Read the selected role skill.** MUST load the role skill the table names and return its ready opening, the reads it names, and the form, setup and payload its Commissioning section requires. The role skill teaches the role; the commission carries the assignment and its grant. Commissioner and recipient each read it in full; the commissioner copies its Methods reads into `requiredReads` and performs only its own role's reads. A role skill you already loaded in this session counts.
+   Completion: the form is one its Commissioning section admits.
+4. **Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires.
    Completion: one row matches. If none does, cut the job until one matches or report the capability or policy gap; never improvise a frontier pick or change the Lead's model.
-4. **Load the selected role skill.** MUST load the role skill the table names and return its ready opening and default reads. The commissioner and the recipient each read that skill in full. IF you are the Lead starting qualifying management work, load `role-lead` and return its acceptance stance and the reads it applies.
-   Completion: the selected role skill has been read in full, and its opening and default reads are in hand.
-5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form, before creating, reusing or dispatching any helper.
+5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form, before creating, reusing or dispatching any helper, in the setup order the role skill names.
    Completion: the route, lifecycle and history boundary are chosen, and for a Sidekick an existing session was looked for and reused if found.
-6. **Write the commission.** MUST load `references/agent-job-packet.md` and return the filled commission for the selected role, with that role skill's name in `requiredReads.charter`. IF two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output, load `principle-design-for-concurrency` and return the shared resource, the ordering that breaks it, and the isolation or wait you write into each packet's limits. For an Implementer and Verifier pair, create or reuse both Sidekick sessions without dispatching work, get their real addresses, fill both packets so each references the other, then dispatch both. Host settings go in the tool's own arguments; packet text grants nothing.
-   Completion: the packet is complete and went to a real address. A packet missing its outcome, sources, limits or closing condition doesn't go out.
-7. **Continue and assess.** At assignment, after a correction that changes the job and on resume, the helper rereads its role skill, commission, trace and the sources they name, and checks its role boundary before handing back. Send a drifting agent a correction instead of restarting it. IF you will use a claim from a handback, load `principle-verify-before-accepting` and return each claim matched to the commit, target and output you opened, or named as a gap. A green run that exercised a different component, or another helper's checkout, doesn't close the job. Return a specific gap or a scoped result to whoever commissioned it.
+6. **Write the commission.** MUST load `references/agent-job-packet.md` and return the filled commission for the selected role, with that role skill's name in `requiredReads.charter`. IF two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output, load `principle-design-for-concurrency` and return the shared resource, the ordering that breaks it, and the isolation or wait you write into each packet's limits. Host settings go in the tool's own arguments; packet text grants nothing.
+   Completion: the packet is complete and went to a real address. A packet missing its outcome, sources, limits or `stopCondition` doesn't go out.
+7. **Continue and assess.** On assignment, after a correction that changes the job, and on resume, the helper rereads its role skill, commission, trace and the sources they name. Send a drifting agent a correction instead of restarting it. IF you will use a claim from a handback, load `principle-verify-before-accepting` and return each claim matched to the commit, target and output you opened, or named as a gap. A green run that exercised a different component, or another helper's checkout, doesn't close the job. Return a specific gap or a scoped result to whoever commissioned it.
    Completion: every claim used is matched to evidence or returned as a gap. Only the Lead accepts delivery.
 
 Delegate only independent work that costs less to hand off than to do. Units that each have their own fixture and output and wait on no other unit (an audit, a migration, a review across files) fan out: one helper per unit, one table at the end.

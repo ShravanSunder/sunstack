@@ -1,6 +1,6 @@
 # Agent job packet
 
-This reference owns how to write a commission. Inputs: the chosen role, form, catalog row, route, and the selected role skill with its ready opening and boundary. Return the opening, the filled typed packet and the full reads it directs. Complete when every required field holds something a fresh agent can use without your history, or the missing input is reported instead of sent.
+This reference owns how to write a commission. Inputs: the chosen role, form, catalog row, route, and the selected role skill's ready opening, reads and Commissioning section. Return the opening, the filled typed packet and the full reads it directs. Complete when every required field holds something a fresh agent can use without your history, or the missing input is reported instead of sent.
 
 The packet's shape is Zod v4 schema code under `../schemas/`, with a description on every field. This file teaches what to put in the fields. The schema checks shape only: a valid packet can still name the wrong reads, claim a grant nobody gave, or ask for the wrong outcome.
 
@@ -26,18 +26,18 @@ A recipient doesn't need schema code to do its job: its populated packet and sel
 
 - **`outcome`**: what done looks like, in one or two sentences the agent can check itself against. It names a result, never an acceptance.
 - **`sources`**: exact paths, or inlined text, that a fresh agent can use without your history, each with why it matters. A pointer the agent can't reach is no source; inline what it needs instead.
-- **`requiredReads`**: the exact selected role skill name in `charter` (for example `role-implementer`), plus the relevant practices and principles to read in full. Start from that role's defaults and add what this job touches: the testing principle when tests are in scope, the types principle when a boundary's data changes. Don't list every practice or all the principles for a simple collection job, and don't leave an essential read out because you already loaded it; the recipient hasn't. An empty practice list is fine for a prescribed operation.
+- **`requiredReads`**: the selected role skill's name in `charter` (for example `role-implementer`), plus the practices and principles to read in full. Start from the reads the role names and add what this job touches: the testing principle when tests are in scope, the types principle when a boundary's data changes. Don't list every practice or all the principles for a simple collection job, and don't leave an essential read out because you already loaded it; the recipient hasn't. An empty practice list is fine for a prescribed operation.
 - **`limits`**: one of three access grants. `inspect` reads only; scratch goes to `tmp/` or the system temp folder, and you check afterwards that the worktree is unchanged. `inspect-and-execute` adds the listed commands only; you check that every reported command was listed. `write-and-execute` names the paths that may change; an edit outside them is a stop condition, and you check that the diff stays inside them. The host's own permission settings enforce what they can; a missing sandbox flag is no reason to leave the native route.
 - **`stopCondition`**: where the job ends, and when an exception must come back early. An Operator that meets a judgment call or a missing permission stops, returns what it observed and the decision it needs, and waits.
 - **`returnContract`**: the owning phase's or method's result shape when there is one, named by its owner. When none exists, an Operator, Researcher or Advisor returns the packet's own helper handback.
 
-Each role adds its own payload, and the schema rejects a packet without it. An Operator carries its procedure, or its collection criteria, with expected observations. A Researcher carries its question and the approach it may take. An Implementer carries its plan slice, a write grant and its paired Verifier's address. A Verifier carries the adopted reference, its paired Implementer's address and one kind of work: a feasibility challenge before the build, an observation of a declared target, or upkeep of the verification scripts at named paths. A Reviewer carries its target, its procedure and the requirement of no author history. An Advisor carries its question and the picture it challenges. The Lead's own typed packet carries the owner's intent and governing context when that construction is needed; ordinary owner discussion requires no packet or helper launch.
+Each role adds its own payload, and the schema rejects a packet without it; the role skill's Commissioning section names that payload.
 
 ## Assemble the prompt
 
-MUST load the selected role skill in full and return its ready opening, boundary and job-relevant reads. Use its opening, then the filled packet and those reads, named explicitly and resolved through the active install. The recipient reads the same selected skill; an unchanged same-agent read can be reused. The opening teaches; the packet carries the assignment and the grant.
+Open with the ready opening returned at management step 3, then the filled packet, then the full reads it directs, named explicitly. The opening teaches; the packet carries the assignment and the grant.
 
-For an Implementer and Verifier pair, create or reuse both sessions first without sending work, so you have both real addresses. Fill each packet with the other's address, then dispatch both. A creation receipt shows an address, not work started or accepted.
+A creation receipt shows an address, not work started or accepted.
 
 Model, effort, history and sandbox settings go in the host's tool arguments or session settings. Packet text, role names and board seats don't establish those settings or grant privileges.
 
@@ -51,4 +51,4 @@ Each kind is either completed, carrying its result and evidence, or blocked, car
 
 Count as evidence only output whose coverage applies to this assignment, its scope, its target and the source the claim depends on. A live session proves only that it's alive. When any of those change, reassess earlier evidence: keep it only where you can show it still covers the claim, such as an executable check whose source is unchanged, and treat changed behavior, a changed target or an obligation the earlier run never covered as unverified until a fitting observation covers it. A newer head alone doesn't make evidence stale.
 
-The `charter` key stays; its value is now the selected `role-*` skill name. Old reference-path values are rejected. Preserve archived commissions and their grants; a new continuation names the current role skill. A skill load neither reassigns a conversation nor establishes fresh review history or host permissions.
+To continue a helper commissioned before role skills existed, resend the same commission with `requiredReads.charter` set to its `role-*` name; the old charter-path values fail validation.

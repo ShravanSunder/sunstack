@@ -12,9 +12,7 @@ A Worker is a native subagent its parent spawns and manages. It lives for one bo
 
 A Sidekick is a separately managed session, addressed through agent-router and reused across related work. Keep the model and effort it was created with. Reuse it across follow-ups, idle time and a cold cache; replace it only when its context is wrong or it is gone, and record why. Session titles follow `<emoji> <Role> Sidekick · <purpose>`; apply the title the commissioner supplies and check that it saved.
 
-A Reviewer Sidekick gets no author history: no fork and no resume of the author's conversation. Its packet carries the sources.
-
-To create a session without starting its work, use agent-router's conversation create, which returns the address and starts nothing. That's how a commissioner gets real addresses for an Implementer and Verifier pair before writing either packet.
+To create a session without starting its work, use agent-router's conversation create, which returns the address and starts nothing.
 
 Keep one current row per Sidekick before any prompt that relies on its history: name, address, worktree, model and effort, status, last prompt, and what is expected back. Label each id with its transport (agent-router SessionRef, ACPX record, or provider-native id); they are not interchangeable.
 
