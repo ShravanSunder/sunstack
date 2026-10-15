@@ -2,7 +2,7 @@ Shape Catalog — TUI Presentation Reference
 ══════════════════════════════════════════════════════════════════════
 
 This reference owns: worked examples, geometry choices, and anti-patterns for the framed TUI shapes and six compositional applications.
-Expected inputs: the shape selected by the SKILL.md picker, the semantic family selected through shared diagram semantics, and the content it must carry.
+Expected inputs: the shape selected by the SKILL.md picker, the semantic family from shared diagram semantics when the view needs a diagram, and the content it must carry.
 Return: the shape's geometry choices and its don't-use conditions, applied to the current block.
 Complete when: the composed block matches the worked geometry, none of the shape's don't-use conditions hold, and every copyable atom follows the baseline's labels-versus-atoms boundary — where an example shows a full identifier or path inside a row, your real response keeps a short label in the row and the formatted atom outside it.
 

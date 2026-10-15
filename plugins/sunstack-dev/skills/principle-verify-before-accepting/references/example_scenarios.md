@@ -38,7 +38,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **What happened.** Helpers ran their proof work in the shared checkout instead of the isolated worktree they were assigned. A docs comparison reported deletions that hadn't happened, and a browser test was created and run in the wrong tree, then presented as proof.
 
-**The move.** Check the version and the place.
+**The move.** Check the version, the place and the dependencies of the claim.
 
 **Better.** Confirm the working directory, branch, and head behind every result before accepting it. A result from the wrong tree is evidence about a different tree.
 

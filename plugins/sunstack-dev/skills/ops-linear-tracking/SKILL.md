@@ -112,7 +112,7 @@ IF the plan's dependencies and Linear's `blockedBy` relations disagree, load `pr
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Treat issues with empty `blockedBy` or completed blockers as readiness candidates. If the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: check that delivery before calling the issue ready.
+3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: check that delivery before calling the issue ready.
 
 ### Update ticket after implementation
 
