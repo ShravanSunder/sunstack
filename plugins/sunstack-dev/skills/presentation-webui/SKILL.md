@@ -19,12 +19,11 @@ If the user asked for an exact format or a terse answer, or the whole reply fits
 4. For a difficult system, investigation, implementation, or design, pick a disclosure sequence before detail (`diagram-semantics.md` owns the sequence).
 5. Render research as handed-over lanes plus parent synthesis (`diagram-semantics.md`'s ledger step owns the rendering shape); presentation does not run agents or decide acceptance.
 6. Place each visual next to the short text it supports; one medium per point.
+7. When the response asks the owner to choose between options, give each option (doing nothing among them, when it is credible) its concrete gain, its cost and who pays it; name the assumption that would flip the choice and its cheapest check; recommend one with the signal that would reopen it; and say whether the choice is a one-way door the owner decides or a reversible call you make and record ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)).
 
 ## Media selection
 
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
-
-MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it.
+Before choosing a medium, name the reader's next question or action and the smallest view that answers it, and keep the assumptions, risks and unverified items that view must carry ahead of technical detail ([write for the reader](../principle-write-for-the-reader/SKILL.md)).
 
 The table is ordered smallest to largest. Walk down it and stop at the first medium that makes the point without a caption explaining it. Don't name the rejected smaller medium in the reply.
 

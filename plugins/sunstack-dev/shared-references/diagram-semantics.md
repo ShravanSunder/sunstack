@@ -97,7 +97,7 @@ Default sequence for a difficult system, investigation, implementation, or desig
 Variants (same discipline, different spine):
 
 - Debug narrative: symptom → suspected boundary → proof gathered → decision → next validation.
-- Design tradeoff: goal → two viable options → cost paid by each → recommended slice → proof gate.
+- Design tradeoff: goal → the credible options, doing nothing among them → what each costs and who pays → recommended slice → proof gate.
 - Review synthesis: finding → evidence → failure mode → accepted/rejected/deferred → smallest edit.
 
 Red flags — stop and simplify when:
