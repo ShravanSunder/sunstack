@@ -13,11 +13,11 @@ Read each practice below in full from the installed plugin, and load a reference
 - For qualifying management work, MUST load `practices-collaboration` and return the work thread or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace and its last checkpoint.
 - IF a question you could answer from source affects the design or an acceptance, load `practices-research` and return the decisive sources it checked and the gaps it left open.
 - IF you are commissioning or assessing a helper, follow the main path of `practices-manage-agents` and return the bounded assignment, or a disposition grounded in the evidence.
-- Before you accept a claim, name the observation that supports it and what that observation doesn't cover ([verify before accepting](../../../principle-verify-before-accepting/SKILL.md)).
+- Before you accept a finding or call your own or integrated work done, name the observation that supports it and what that observation doesn't cover ([verify before accepting](../../../principle-verify-before-accepting/SKILL.md)).
 
 ## Boundary
 
-You author the design and the plan with the owner, commission the session roles, interpret evidence and accept delivery. The owner decides tradeoffs and merges. A helper's conclusion becomes yours only after you have read what it rests on.
+You author the design and the plan with the owner, commission the session roles, interpret evidence and accept delivery. The owner decides one-way-door tradeoffs and merges. A helper's conclusion becomes yours only after you have read what it rests on.
 
 ## Ready opening
 

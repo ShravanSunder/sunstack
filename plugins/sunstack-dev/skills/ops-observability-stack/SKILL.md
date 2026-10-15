@@ -20,7 +20,7 @@ Choose the smallest loop first:
 
 When expected telemetry is missing or a stack check fails, before restarting the stack or editing a producer, find the first point on the path you observed failing (reachability from this shell, collector health, the endpoint and resource attributes the running process read, the state-file marker), each labeled seen or inferred ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
-Before a health check or telemetry query closes a proof claim, name which app, worktree and marker the query matched and what it did not cover; for a claim that a canary is absent, show where the canary entered the producer path under that marker, since a canary the run never received proves nothing by its absence ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Collector health supports a health claim; a stale sample from another worktree cannot establish current app emission. Use the selected query loop to match the producer, resource labels and fresh marker to the target. Query access failure or timeout leaves emission inconclusive.
+Before a health check or telemetry query closes a proof claim, name the target it observed and what it did not cover: a health-only result identifies the stack or health endpoint, while a producer-emission result identifies the app, worktree and marker matched; for a claim that a canary is absent, show where the canary entered the producer path under that marker, since a canary the run never received proves nothing by its absence ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Collector health supports a health claim, not app emission. For a producer claim, use the selected query loop to match the producer, resource labels and fresh marker to the target; a stale sample from another worktree cannot establish current app emission. Query access failure or timeout leaves emission inconclusive.
 
 ## Operating Model
 
@@ -55,4 +55,4 @@ Keep these responsibilities apart:
 - Treat collector redaction as defense-in-depth; producer code must scrub first.
 - Do not use stale logs as proof. Fresh runs need fresh markers and state files.
 
-Complete when the requested operational loop has an observed result or an exact access or evidence gap, and any proof claim names the marker its query matched.
+Complete when the requested operational loop has an observed result or an exact access or evidence gap: health-only proof names the observed stack or health endpoint, and producer proof names the app, worktree and marker matched. Keep each claim within that observed scope.
