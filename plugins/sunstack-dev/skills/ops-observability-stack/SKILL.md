@@ -7,7 +7,7 @@ description: Use when starting, checking, using, debugging, or verifying the sha
 
 The runnable stack source of truth is `~/dev/ai-tools/observability`. App repos are telemetry producers: they may own launch flags, markers, state files, and source-side scrubbing, but they must not own Docker Compose, Victoria service lifecycle, or generic Victoria query cookbooks.
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 IF a change would touch both the shared stack and a producer, or the Separation Rule doesn't name the owner of a file you are about to change, load `principle-one-owner-per-truth` and return the owner of each file before editing.
 

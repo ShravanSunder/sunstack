@@ -7,7 +7,7 @@ description: Use when the user asks to create, organize, update, delete, or insp
 
 Manage Linear projects, milestones, and issues following the **docs-are-truth, tickets-are-tracking** paradigm. Architecture documents in the repo are the source of truth for design and plans. Linear tickets track progress, dependencies, and what's blocked.
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 IF a ticket states design that differs from its linked doc section, load `principle-one-owner-per-truth` and return the doc section and the ticket text that differ, to report to the user or the agent that assigned this work before changing either.
 

@@ -35,7 +35,7 @@ When the commissioner supplies a visible title for a conversation you create or 
 
 ## Message or post
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 IF a follow-up message changes what another session must deliver or decide, load `principle-write-for-the-reader` and return the message: the new deliverable, the source it comes from and what stays out of scope. “Continue” is enough when nothing changed.
 
