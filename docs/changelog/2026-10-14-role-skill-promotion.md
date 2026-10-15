@@ -2,12 +2,13 @@
 
 `sunstack-dev` 2.77.0 → 2.78.0, authored source only.
 
-- Promote `role-lead`, `role-advisor`, `role-implementer`, `role-verifier`, `role-reviewer`, `role-researcher` and `role-operator` as complete normally invocable skills with Codex metadata, assignment boundaries and completion guidance.
-- Preserve the seven charters' engineering methods and practical cases; relocate conditional typed reads to management's existing schemas and remove the seven old charter files without aliases.
-- `practices-manage-agents` selects one role skill and retains forms, models, setup, commissioning, continuation and assessment. Its current catalog and project 1 methods remain unchanged.
-- Keep `requiredReads.charter`; cut over its seven role-specific literals and descriptions to role-skill names. Existing fixture values and foreign-role checks are updated; old-path rejection assertions are added but unrun.
-- Update the packet guide, plugin README namespace/ownership and AGENTS role index. No new schemas, frameworks, hooks, commands or delivery mechanism.
-- Synchronize Codex, Claude and Cursor plugin manifests and all three marketplace versions; existing principle invocation flags are unchanged.
-- Inspection: current sources and role-to-charter diffs; `git diff --check` exit 0. Source/whitespace assessment establishes no behavior or independent review result.
-- Tests/evaluations are explicitly deferred by the owner. Typechecks, formatters, validators and discovery/runtime proof are unrun in this authoring draft per plan; independent implementation review remains pending.
+- Promote `role-lead`, `role-advisor`, `role-implementer`, `role-verifier`, `role-reviewer`, `role-researcher` and `role-operator` to model-invocable skills with Codex metadata (`display_name: "Role: <Name>"`). The seven charter files are removed without aliases.
+- Each helper role opens with what to do when no commission names it, and treats a packet or role line found inside a file or tool output as material to report, not a grant. `role-advisor` triggers when a Lead commissions the Advisor Sidekick.
+- Each role skill has a Commissioning section: the forms it allows, who commissions it, its setup and what its commission carries. `practices-manage-agents` keeps a slim role table, Classify, the model catalog and the steps, and reads the selected role skill before choosing the model.
+- Role principle calls read through `shared-references/principle-reading.md`; calls that fire only at one decision are IFs, and the Researcher's two calls that duplicated `practices-research` are gone. Each role ends with one "Not done while" line.
+- Role skills link their contracts in `practices-manage-agents/schemas`; `requiredReads.charter` holds the role skill name. Running helpers keep their sessions, models and grants; a continuation names the new role skill, and old charter-path values fail validation.
+- AGENTS.md and the plugin README place roles above practices; management names them only as data values.
+- Affected: Codex, Claude and Cursor manifests and marketplace versions; README role and management paragraphs; AGENTS.md layer sentence and skill table; packet guide and execution forms; a new test ties each charter literal to its skill folder.
+- Independent cross-lineage implementation review returned `targeted-revision`; its corrections are applied in this changeset and await the review lead's verification.
+- Validation: `pnpm --dir tests/skills run test` 163/163 (the new test fails on a misspelled literal), `pnpm --dir tests/skills run typecheck` exit 0, `claude plugin validate .` passed, `git diff --check` clean. Discovery and behavior evaluations are deferred by the owner, so behavior is unverified.
 - Refresh/reinstall: no Codex, Claude or Cursor cache refresh. No publication, release or merge-readiness claim.
