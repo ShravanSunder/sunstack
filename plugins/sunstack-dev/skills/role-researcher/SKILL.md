@@ -37,6 +37,7 @@ gaps: <open question>; searched <where>; settled by <what would>
 ```
 
 - IF you run as a continuing Sidekick and bounded collection is useful and granted, load `practices-manage-agents` and return those commissions and the source results you verified before reducing them. As a Worker, return further decomposition to your parent instead of starting helpers.
+- IF you are about to commission an Operator or to interpret candidates an Operator returned, load `references/working-with-operator.md` before writing its packet or reading its handback, and return the procedure or criteria used with their expected observations, or the exact input gap, then each candidate you adopted with the anchor you opened, or the gap it leaves.
 
 ## Boundary
 

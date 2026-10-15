@@ -6,6 +6,7 @@ Consumers, and only these:
 
 - `docs-maintain` loads this in file mode when it rewrites human sentences in a README, architecture doc, runbook, or changelog.
 - `implementation-pr-wrapup` loads this in embedded mode for Why and Special things to note. The description worker owns that load. The parent does not rewrite those parts.
+- `role-implementer` loads this from `references/working-with-lead.md` when its commission asks for the slop and infractions pass on skill work. It reads the patterns as a list of tells for the slop and infractions pass in its handback, uses neither mode below, and returns each tell it found in the files it changed, fixed or kept with a reason. The skill it writes never calls this file.
 
 Leave YAML descriptions, schemas, label sets, call-site grammar, code, commands, paths, links, Change outline fences, and work-trail JSONL unchanged. Do not load this from `presentation-tui`, `presentation-webui`, `spec-design`, `program-design`, review packets, or a trigger description.
 
