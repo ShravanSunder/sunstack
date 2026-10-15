@@ -1,6 +1,6 @@
 # Standalone role skills selected by agent management
 
-Reviewed v1, 2026-10-14; accepted-to-implement at SPEC stage. Owner-directed behavior change. Seven role skills replace the seven current charter references; one management update performs the mapping and consumer cutover. This eight-run spec keeps one named skill target per run. All eight runs are implemented as authored source. Independent implementation review returned `targeted-revision`; the dated [v2 corrections](#2026-10-14-v2-corrections) supersede the v1 rows they name, and the same review lead re-verified them on 2026-10-15. Discovery and behavior proof remain pending.
+Reviewed v1, 2026-10-14; accepted-to-implement at SPEC stage. Owner-directed behavior change. Seven role skills replace the seven current charter references; one management update performs the mapping and consumer cutover. This eight-run spec keeps one named skill target per run. All eight runs are implemented as authored source. Independent implementation review returned `targeted-revision`; the dated [v2 corrections](#2026-10-14-v2-corrections) supersede the v1 rows they name, and the same review lead re-verified them on 2026-10-15. The dated [v3 section](#2026-10-15-v3-principle-citations-d13-and-role-inventory) merges #131's principle citations and converts the role skills to citations under D13 and the role inventory. Discovery and behavior proof remain pending.
 
 ## Owner decision and intended result
 
@@ -282,3 +282,75 @@ R1–R8: implemented · v2 corrections applied and verified by the review lead �
 ## Implementation state, 2026-10-14
 
 R1–R8 are committed on `skills/role-skill-promotion` as draft PR #132, head `7680f19`, base `b064824` (PR #131). `6164387f` promotes the seven roles and cuts management over; `7680f199` clarifies the Verifier prerequisite wording. Version 2.78.0 is set in all three client manifests and marketplace entries. Independent cross-lineage implementation review at `7680f19` returned `targeted-revision` with ship decision `blocked`; owner decisions D7 and D9 were added. In a throwaway worktree the review lead observed `git diff --check` clean, `claude plugin validate .` passing, the skill suite at 156/156 and typecheck exit 0. Discovery and behavior proof stay deferred by the owner. The v2 corrections, including V2-12, are applied on this branch in local commits after `7d88ed7`, the first of them the merge of #131's corrected head `4818608` (merge commit `71c1fff`). The review lead verified them on 2026-10-15 and independently observed the skill suite at 163/163, typecheck exit 0, `claude plugin validate .` passing and `git diff --check` clean, so findings D1–D4 and B1–B21 are closed; the new existence test fails on a misspelled literal. Discovery and behavior evaluations remain deferred by the owner; no release or cache refresh has happened.
+
+## 2026-10-15 v3: principle citations, D13 and role inventory
+
+Source: #131's accepted principle citation grammar (`skill-authoring` 0.2.0) and its v4 conversion ([spec #131 v4](../2026-10-14-practices-principles/spec.md#2026-10-15-v4-principle-citations), verified by the review lead and pushed at `0f714775`); owner decision D13 (principle citations live in each role's "The work"); and the owner-approved role inventory ("all recommended"), whose rows were anchored at `991667b` and are re-anchored below on the merge commit `38fa011f`. Each row names the v1 or v2 text it supersedes; that text stays above as history.
+
+### Merge (V3-1)
+
+`skills/practices-principles` at `0f714775` is merged into this branch with a merge commit, `38fa011f`. Resolutions:
+- `practices-manage-agents/references/roles/*.md` and `references/agent-job-packet.md`: this branch's deletions stand (V2-12, V2-14, V2-15). #131's form-only edits to those files are dropped; `role-lead` and `role-operator` take this branch's text, converted below.
+- `schemas/assignment-fields.ts` `principles` description: this branch's "Job-specific principles to read in full beyond the role skill's own".
+- `practices-manage-agents/SKILL.md`: this branch's structure (Roles and forms, setup lines, steps 2–6 and the step-6 prompt) with #131's citation sentences at step 1 (shared model; the split sentence in its #131 V4-8 wording), step 6 (concurrency) and step 7 (refine, verify, hold the scope). No pointer line.
+- `shared-references/principle-reading.md`: deleted (#131 V4-2).
+- `AGENTS.md`: this branch's role-layer text with #131's principles clause and principles table row.
+- `docs/changelog/README.md`: both entries, newest first.
+
+### Decisions
+
+| ID | Supersedes | Decision | Why and cost |
+|---|---|---|---|
+| V3-2 | V2-5 and V2-13 (the pointer line in each role's Methods) | Delete the pointer line "Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`." from the six role skills that carry it. Each card carries its own read rule (#131 V4-1). The Methods intro "Load each practice below by name; a practice you already loaded in this session counts." stays as it is. | `principle-reading.md` no longer exists; the citation form needs no loader line. |
+| V3-3 | V2-6 and the "Principle calls in roles" table (their MUST/IF load forms); v1 `:77` "Every existing method/principle call is carried forward" for principle calls | Owner decision D13: a role's principle citations live in "The work", at the sentence where that judgment applies; the existing sentence is rewritten into the citation form `<moment>, <action> ([<judgment>](../principle-<name>/SKILL.md))` rather than joined by a parallel one. "Methods" keeps only the practice load calls (and role-operator's tool-manual line) and holds no principle citation, so each card is cited once per decision. No bare `principle-*` name stays in role prose. | One home per decision, in the role's own teaching; a card is cited, never loaded (grammar D5). |
+| V3-4 | The V2-6 table rows, as changed below | Apply the role inventory rows below: each predicate becomes the moment and each return becomes the action. | Owner-approved inventory. |
+| V3-5 | role-lead Boundary "The owner decides tradeoffs and merges." | "The owner decides one-way-door tradeoffs and merges; you make and record reversible calls." | It contradicted #131's presentation rule ("a one-way door the owner decides or a reversible call you make and record") and the orchestrator's reversible-call rule. |
+| V3-6 | V2-15's Implementer setup line "Add the type, testing, scope and structure principles the slice touches as job reads"; V2-15's step-6 prompt template | Management: the Implementer setup line is dropped (role-implementer now cites the testing and types cards; scope stays bounded by the write grant and management step 7's hold-the-scope citation, and structure is a Lead design choice step 1 keeps out of helpers' hands). The step-6 prompt gains one clause so a listed card resolves: "…then the reads listed below; a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder." | Category names left the Lead guessing which cards they meant; a recipient couldn't find a hidden card named only in `requiredReads`. |
+| V3-7 | — | B5 (the runtime citation A/B from the grammar spec, owned by #131 V4-7) is owed here too: planned and deferred, not run. A failing B5 goes to the owner before further conversion. | The role citations rest on the same untested assumption (grammar D2). |
+| V3-8 | — | The version stays 2.78.0 (#132 is unreleased); `docs/changelog/2026-10-14-role-skill-promotion.md` is updated in place and no longer names `principle-reading`. | D12-style single version change per PR. |
+
+### Role inventory rows (V3-4)
+
+Anchors are `role-x:N` in `plugins/sunstack-dev/skills/role-x/SKILL.md` at `38fa011f`. The citation goes at the named sentence in "The work"; the Methods bullet is deleted.
+
+| Role | Anchor | Card | Inventory | Moment → action |
+|---|---|---|---|---|
+| lead | `:29` Methods; `:14` | build-the-shared-model-first | change | About to start a long build or commission on the owner's generic assent ("sounds good") to a complex design → state the goal and governing decisions in a few lines and ask the one specific question the owner must answer before you build. The cut-work citation is deleted (management step 1 makes it); a resume past later owner corrections is `practices-show-me-your-work`'s. |
+| lead | `:30` Methods; `:16` | verify-before-accepting | change (narrow) | About to accept a review finding, or call your own work or the integrated delivery done → for each claim, the observation that supports it, the commit and target it ran against, and what it doesn't cover. Handback claims stay with management step 7; root resolution with `practices-collaboration`. |
+| lead | `:16` S5–S6 ("If an approved assumption broke… If an extra that an agent added failed…") | refine-mental-models | add | A design break reaches you, from a helper or as a result that contradicts an assumption in the design or plan you authored → what was assumed, what was found, and whose assumption it was (an owner decision, contract or demonstrated constraint, or an inference in an agent-written artifact); then drop the inference, repair it inside scope and record that, or stop dependent work and brief the owner. Absorbs both sentences. Distinct from management step 7, which decides correct-the-packet versus break. |
+| advisor | `:31` Methods; `:16` S2–S3 | build-the-shared-model-first | keep | Before challenging the Lead's picture → rebuild it, restate it specifically enough to be wrong and name its load-bearing assumption. |
+| advisor | `:32` Methods; `:16` S4 | name-the-tradeoffs | change (MUST → moment) | Challenging a design or plan choice → each credible alternative, doing nothing among them, as a change to the current design, with its gain, its cost, who bears that cost and the assumption that flips the choice. |
+| advisor | `:18` S1, S3 | verify-before-accepting | add | Challenging an acceptance argument → for each claim the Lead accepts, the observation it rests on, whether that observation exercised the claimed behavior at the delivered commit and target, and the missing observation with its governing source. |
+| implementer | `:33` Methods; `:16` S4 | prove-it-works | keep | Before handing back the work as working → the claim as the user would see it, the real path you drove and what stays unverified. |
+| implementer | `:34` Methods; `:18` S2–S4 | refine-mental-models | change | The code or a result contradicts the plan (a wrapper, shared state or branch nobody named, or a test failing for a reason the plan didn't predict), or a second fix for the same failure has failed → what was assumed, what you found, and for repeated failures the one premise every failed fix shared; then drift you correct and report, or a break you return to the Lead. |
+| implementer | `:16` S5 (bare name) | write-tests-that-can-fail | add | You write, change, keep or remove a product test → for each test, the wrong behavior it must catch, where its expected value comes from, the layer that keeps that behavior real, and the red you saw for that reason, or that no pre-fix red was observed. Replaces the bare name. |
+| implementer | `:16` S3 ("name types and states so the compiler rejects invalid combinations…") | types-are-communication | add | The slice adds or changes a status, id, result shape, or data that crosses a boundary (network, file, environment, database, model output) → each state as a variant with its payload, where untrusted input is parsed, and each cast, non-exhaustive switch or hand-written duplicate shape removed or kept, with the reason. |
+| verifier | `:34` Methods; `:18` S2 | write-tests-that-can-fail | change | You assess tests or their red-to-green evidence, or write or maintain a verification script or driver → for each test or driver, the wrong behavior it must catch and whether you saw it fail for that behavior. |
+| verifier | `:35` Methods; `:16` S5 | prove-it-works | keep | Reporting an observation → the build, configuration and client observed, the real path it crossed and what it leaves unverified. |
+| verifier | `:36` Methods; `:18` S5 | verify-before-accepting | keep | Before reporting that an observation, yours or reused, supports a claim → for each claim, whether the observation supports it at the build and target the claim is about. |
+| verifier | `:16` S3 | experiment-before-proposing | add | The claim you observe is comparative or quantitative (faster, smaller, fewer errors), or scores a prompt or classifier → the workload, baseline, comparator, run count and deciding threshold, fixed before the run, plus a negative control. |
+| reviewer | `:34` Methods; `:18` S3 | verify-before-accepting | keep | Before reporting a candidate finding → the governing anchor opened, what it shows and the failure it causes. |
+| reviewer | `:35` Methods; `:20` | write-tests-that-can-fail | keep | The target includes tests or a finding rests on a test's assertion → for each test, the wrong behavior it should catch and whether its assertion path can catch it. |
+| researcher | — | — | no citations | `practices-research` cites read-ground-truth, verify, experiment and write-for-the-reader at the Researcher's decisions. |
+| operator | `:24`, `:28` Methods | read-ground-truth-first | remove | Its one added sentence goes inline at `:18`: a failed request shows lost access, not an outage. The "reporting discipline" disclaimer goes with it. |
+
+role-verifier's Methods line "Apply them to the assignment's surface: a skill-only structural task doesn't authorize unrelated app runs." loses its antecedent when the principle bullets leave Methods; it moves to the end of The work's driver paragraph as "Fit every observation and driver run to the assignment's surface: …".
+
+### Proof (V3-7)
+
+- **Static.** #131's citation check (links resolve to same-plugin cards; no ``load `principle-`` in `plugins/`; no `principle-reading` outside `docs/wip` and changelogs dated before 2026-10-14; all 17 cards open with the read rule) plus a role check that fails on a principle link inside a role's "## Methods" or a bare `principle-` mention outside a link in a role skill, each shown failing on a seeded defect. `pnpm --dir tests/skills run test` and `typecheck`, `claude plugin validate .`, `git diff --check`. Structural only.
+- **B5 and behavior.** Deferred, not run; discovery and behavior evaluations stay deferred by the owner.
+
+### Run states (v3; supersede the v2 Run states)
+
+| Run | Target | State |
+|---|---|---|
+| — | merge of #131 `0f714775` | `38fa011f` |
+| R1 | role-lead | v3 in progress · behavior unverified/deferred · B5 owed |
+| R2 | role-advisor | v3 in progress · behavior unverified/deferred · B5 owed |
+| R3 | role-implementer | v3 in progress · behavior unverified/deferred · B5 owed |
+| R4 | role-verifier | v3 in progress · behavior unverified/deferred · B5 owed |
+| R5 | role-reviewer | v3 in progress · behavior unverified/deferred · B5 owed |
+| R6 | role-researcher | no v3 change (merge only) · behavior unverified/deferred |
+| R7 | role-operator | v3 in progress · behavior unverified/deferred · B5 owed |
+| R8 | practices-manage-agents | merge resolution `38fa011f`; V3-6 in progress · behavior unverified/deferred |
