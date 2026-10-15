@@ -37,7 +37,7 @@ A **workstream** is the bounded implementation assignment the Lead's plan or com
    Completion: each of the four answers is named, or the gap that blocks it is reported.
 2. **Choose the role, then the form.** The result the job needs picks the role: changes and their proof go to an Implementer, observation of an outcome to its paired Verifier, findings to a Reviewer, a checked answer to a Researcher, a procedure's observations to an Operator. Then apply the form column. Continuity changes a Researcher's form, never its role. The Lead commissions Advisor, Implementer, Verifier and Reviewer Sidekicks. A Sidekick whose charter grants management may commission bounded Operator or Researcher help for its own job, as native Workers or, when the route requires it, as separate sessions (Luna through Router from a Claude host, for example). It keeps their exact addresses, corrections and handbacks. Creating a session never grants leadership or wider work. A native Worker returns further decomposition to its parent; it doesn't fan out or open sessions.
    Completion: the role and form are named, and the form is one the table admits.
-3. **Resolve an eligible model.** MUST load `references/model-catalog.md` and return one eligible row for the role, form and classified job, with the reason that row requires. Preserve an owner-assigned model and effort; the owner can override a pick and nothing here escalates the Lead.
+3. **Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires.
    Completion: one row matches. If none does, cut the job until one matches or report the capability or policy gap; never improvise a frontier pick or change the Lead's model.
 4. **Load the role prompt.** MUST load the selected role's charter from the table and return its ready opening and default reads. The commissioner and the recipient each read that charter in full. IF you are the Lead starting qualifying management work, load `references/roles/lead.md` and return its acceptance stance and the reads it applies.
    Completion: the charter has been read in full, and its opening and default reads are in hand.
@@ -113,6 +113,81 @@ What the agent must hold in its head to get the job right. Size and module count
 ### How they fit
 
 Horizon caps the role. Direction decides whether an Operator can take the job. Direction and span pick the role's catalog row.
+
+## Model catalog
+
+| Tier | Definition |
+|---|---|
+| Workhorse | procedures, repeatable work, guided execution |
+| Daily driver | execution or synthesis that needs judgment |
+| Frontier | demanding judgment, design, or review |
+
+A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A job that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
+
+Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
+
+### 🔧 Operator
+
+| Tier | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|
+| Workhorse | OpenAI Luna | medium | Exact | any |
+| Workhorse | OpenAI Luna | high | Complete, guided collection under supplied criteria | Local |
+
+### 📚 Researcher
+
+| Tier | Form | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|---|
+| Workhorse | Worker, or a Sidekick when the model needs Router | OpenAI Luna | high | Complete | Local |
+| Daily driver | Worker | OpenAI Sol | medium | Complete | Cross-domain |
+| Daily driver | Sidekick, continuing investigation | OpenAI Sol | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system |
+
+A Researcher Sidekick started only because its model needs Router keeps the bounded job's row and closing check, with no fan-out of its own. A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection. Opus is not a research row; it needs the owner's override.
+
+### 🐒 Implementer Sidekick
+
+| Tier | Model | Thinking Effort | Direction | Span |
+|---|---|---|---|---|
+| Workhorse | OpenAI Luna | xhigh | Exact, Complete | Local |
+| Workhorse | OpenAI Luna | high | Exact, Complete | Local |
+| Daily driver | OpenAI Sol | medium | Complete | Cross-domain |
+| Daily driver | Claude Opus | medium | Complete | Cross-domain |
+| Daily driver | OpenAI Sol | high to xhigh | Partial | Cross-domain, Cross-system |
+| Daily driver | Claude Opus | high to xhigh | Partial | Cross-domain, Cross-system |
+
+### 🔬 Verifier Sidekick
+
+| Tier | Model | Thinking Effort |
+|---|---|---|
+| Daily driver | OpenAI Sol | high to xhigh |
+| Daily driver | Claude Opus | high to xhigh |
+
+Choose a different lineage from the paired Implementer when one is available. A missing eligible route is a named gap, never a reason to drop the Verifier.
+
+### 🔎 Reviewer Sidekick
+
+Implementation review comes after the 🦁 Lead has assessed the work against the plan and its proof, asking the 🦉 Advisor to check it too when one exists. Reviewer Sidekicks then review each Project and Milestone, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers. Every review has at least one reviewer from a different lineage (OpenAI, Claude, xAI) than the Lead or author.
+
+| Tier | Model | Thinking Effort | Use |
+|---|---|---|---|
+| Daily driver | xAI Grok | high | |
+| Daily driver | OpenAI Sol | xhigh | |
+| Daily driver | Claude Opus | xhigh | |
+| Frontier | OpenAI Astra | high to xhigh | User must authorize |
+
+Beyond the rows above, another reviewer joins only when the owner asks for one and names its model.
+
+### 🦉 Advisor Sidekick
+
+| Tier | Model | Thinking Effort | Use |
+|---|---|---|---|
+| Daily driver | OpenAI Sol | xhigh | |
+| Daily driver | Claude Opus | xhigh | |
+| Frontier | OpenAI Astra | xhigh | User must authorize |
+| Frontier | Claude Fable | high | User must authorize |
+
+### 🦁 Lead
+
+The owner chooses the Lead's model. Nothing here escalates it.
 
 ## Completion
 

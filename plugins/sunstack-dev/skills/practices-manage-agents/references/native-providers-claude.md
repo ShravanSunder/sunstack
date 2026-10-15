@@ -14,7 +14,7 @@ Task / Agent may omit plan-mode or readonly flags. Do not hop to `claude -p --pe
 
 No catalog row runs as a native Worker on Claude: the Operator and Researcher Worker rows are OpenAI Luna or Sol. Run those helpers as Sidekicks through agent-router, as `references/execution-forms.md` says. A Claude model in Worker form needs the owner's named override.
 
-Resolve the exact id with the exact-id rule in `model-catalog.md`.
+Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
 ## Workspace Access
 
