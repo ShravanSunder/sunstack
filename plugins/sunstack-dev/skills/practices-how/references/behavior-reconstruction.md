@@ -27,6 +27,8 @@ Start with the path the question names. Add the path most callers take when it d
 
 ## Record each path
 
+At the entry and at each hop, find the guards that can end the path before its main line runs: early returns, environment or config flags, caps and checks for missing input. Note what each guard returns and who sets each flag it reads. A flag that another process sets for this one, such as a parent that exports a variable before launching a child that runs the same code, is a boundary crossing, so name it with the other crossings.
+
 For each path, carry the walk from step 2 through every function between the entry and the effect, and name the form the result takes on the way back to its consumer: a return value, a thrown error, an emitted event or state a later reader observes. A working note can look like this. It is scratch for your own walk, and the explanation the reader gets takes its shape from their question.
 
 ```text
@@ -44,7 +46,7 @@ The implementation behind an edge decides whether the sender waits, what it obse
 - **Await or future.** Find who awaits the future and where. For one nobody awaits, read what the runtime does with its failure (logs it, crashes the process or drops it) and whether a handler is attached.
 - **Callback.** The dispatcher that runs a callback often lives apart from the code that registered it. Find the registration to know who owns the behavior, and read whether the dispatcher runs the callback before it returns or later, and what it does with an error the callback throws.
 - **Event or message.** Find every subscriber the configuration registers, whether publishing returns before or after they run, whether the publisher sees their state changes and errors, and the delivery guarantee (at most once or at least once) and ordering the dispatcher or broker gives.
-- **Job or queue.** Find whether the submitter gets an acknowledgement or a future it awaits for the result, where the job records its outcome, how the original requester learns it and what happens after the last retry.
+- **Job or queue.** Find whether the submitter gets an acknowledgement or a future it awaits for the result, what it sees when the queue is closed or full, the result is never sent or the consumer rejects the job, where the job records its outcome, how the original requester learns it and what happens after the last retry.
 - **External.** A network call, a subprocess or a database. Find the timeout, the retry and what the caller does when the other side is slow, unreachable or answers with an error.
 
 An in-process emitter may call its listeners before `emit` returns. Then the publisher's next line sees the state a listener changed, and a listener that throws raises its error out of `emit` and fails the publisher's request unless something there catches it. Read as fire-and-forget, that edge would lose its error path.
