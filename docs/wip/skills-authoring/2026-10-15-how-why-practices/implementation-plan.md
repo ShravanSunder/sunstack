@@ -11,7 +11,7 @@ Lead-authored, 2026-10-15. Governing spec: [spec.md](spec.md), accepted to imple
 
 ## Runs and writers
 
-Each run names one skill. Opus 5.5 native Workers write, per the owner's direction ("use opus 5.5 worker with all the skills to write instead of a sidekick"). Each Worker holds the Implementer role in Worker form. The management table admits only the Sidekick form for an Implementer; the owner's direction overrides that for skill writing. Workers don't commit, and none writes outside its run's paths.
+Each run names one skill. Opus 5.5 native Workers write, per the owner's direction ("use opus 5.5 worker with all the skills to write instead of a sidekick"). Each Worker holds the Implementer role in Worker form. The management table admits only the Sidekick form for an Implementer, and the owner's direction overrides that form for skill writing. It doesn't waive the pairing: one 🔬 Verifier Sidekick on OpenAI Sol at xhigh (codex-local `01a140c2-d953-7861-ac9a-6a127a5933ef`, a different lineage from the Opus writers) pairs with the whole workstream. The native Workers have no Router address, so the Lead relays between them. Workers don't commit, and none writes outside its run's paths.
 
 | Run | Target and write scope | Starts after | Reads beyond the role skill, skill-creation and the spec |
 | --- | --- | --- | --- |
@@ -22,6 +22,8 @@ Each run names one skill. Opus 5.5 native Workers write, per the owner's directi
 
 A1 and A2 write disjoint directories. A3 and A4 write disjoint files. No run touches release metadata.
 
+The accepted nine-run phase-composition proposal (`skills/phase-principle-composition` at `789e0ef0`) also edits `program-design` in its R2: target-composition selection, `components-ownership-interfaces.md`, `artifact-and-self-review.md` and the coexistence paragraph of `state-calls-and-flows.md`. A3 leaves those passages untouched. It may change the one `current-system-model.md` pointer at `state-calls-and-flows.md:53` only if A3 renames or removes that reference. When the nine-run lands later, it rebases onto the program-design A3 produced.
+
 The Lead owns these shared homes and writes them after A1–A4: the `sunstack-dev` version in the Codex, Claude and Cursor manifests and the Claude and Cursor marketplace entries; `plugin.json` keywords; the plugin README namespace map and practice paragraph; the AGENTS.md layer sentence and skill table; the dated changelog entry and its index line; and the lite source-inspiration catalog when the how/why row changes.
 
 ## What every writer must hold
@@ -31,13 +33,16 @@ The Lead owns these shared homes and writes them after A1–A4: the `sunstack-de
 - **Citations:** principle cards are cited, never loaded, in the form `<moment>, <action> ([<judgment>](<relative path>))`, once per decision, only where the card changes the action. From `SKILL.md` the path is `../principle-<name>/SKILL.md`; from `references/` it is `../../principle-<name>/SKILL.md`. Where `practices-research` already cites a card for the same decision, don't cite it again.
 - **Layers:** a practice may name practices, `presentation-*`, `ops-*`, tool manuals and principle cards. It never names a phase, an orchestrator or a role skill.
 - **Upstream:** Pstack is a source of method, not prose. Write original wording. Don't import Cursor model slugs, always-spawn explainers, fan-out by category, fixed output headings or confidence tiers.
+- **Skill system for every agent:** each writer, the Verifier and each reviewer reads the worktree `skill-creation` 0.2.0. Reviewers also load `skill-review`.
 - **Prose:** plain, direct sentences in the owner's register. Old wording in A3 and A4 may be rewritten freely as long as every obligation, return, contract, grant, gate, trigger and route survives. No stock phrases, no em-dash asides, no "not X but Y" framing, no colon reveals, no restating a heading as its first sentence.
 
 ## Proof
 
+Three owners, kept apart. **Writer proof:** each Worker runs the static checks on its own files and returns a slop and infractions inventory (the tells catalogued in `shared-references/humanizer.md`, read as a catalog and never called from a skill, and skill-review's `placement-and-calls`, `steering-strength`, `no-op-pruning`, `trigger-routing` and `depth-coverage` checks walked as an author's self-check), with each item fixed or kept for a stated reason. **Verifier observation:** the Verifier first challenges the cases' feasibility, then runs the behavior cases on the delivered files. **Lead acceptance:** the Lead judges the handbacks and the Verifier's observations against the spec.
+
 Static, run by each writer on its own files and by the Lead on the whole diff: `git diff --check`; every relative link in a changed file resolves; no changed practice names a phase, orchestrator or role skill; `pnpm --dir tests/skills run test` and `pnpm --dir tests/skills run typecheck`; `claude plugin validate .` after the Lead's metadata change.
 
-Behavior, at the strength the spec sets. Before any run, the Lead writes the cases and pass checks in `/private/tmp/2026-10-how-why-practices-eval/cases.md`, outside every subject's context. Subjects are fresh Sonnet 5.5 native subagents with no authoring history. Each is told to read the new skill from this worktree and answer a real question, and the Lead judges the actions and anchors in its transcript as well as its final answer.
+Behavior, at the strength the spec sets. Before any run, the Lead wrote the cases and pass checks in `/private/tmp/2026-10-how-why-practices-eval/cases.md`, outside every writer's and subject's context. The Verifier challenges them, then runs them through fresh host-native subagents with no authoring history, using the subject route, run count and deciding rule it fixes before running. Each subject is told to read the new skill from this worktree and answer a real question. The Verifier inspects actions and anchors in each transcript, not only the final answer, and reports observations. The Lead judges acceptance.
 
 | Case | Skill | Real question | Passes when |
 | --- | --- | --- | --- |
@@ -64,3 +69,5 @@ T-routing simulates selection from descriptions. It is not client discovery, and
 - `ai-dev-skills/docs/my-ai-tools/` provenance entries for the two practices. That repository has another session's staged, uncommitted changes, so the Lead adds the entries only after that work lands.
 - Moving `docs/wip/skills-authoring/2026-10-15-principle-citation/handoff/` out of #132 into memory-logs, which is owed before #132 merges. Branch switches wait until no Worker is writing in this worktree.
 - Possible later extraction from other phases and roles, recorded in the nine-run phase-composition proposal.
+- `program-design`'s description has no boundary against "how does X work", which is now `practices-how`'s trigger (raised by the A1 writer). This is a trigger change outside the spec. T-routing tests the neighbour, and a failure there becomes its own skill-creation run.
+- `role-researcher` routes to how or why only when the commission names that practice as its method (A4's strict predicate). `practices-manage-agents` doesn't yet tell commissioners to name it in the Researcher's approach. That is a management change outside this spec, raised by the A4 writer.
