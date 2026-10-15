@@ -1,28 +1,18 @@
 # Domain Entities
 
-This reference owns deriving the Specification's domain entities from settled sources: the nouns every obligation is written over, each with an identity rule, relationships, invariants, and observable states.
+This reference owns deriving the Specification's domain entities, the nouns every obligation is written over, from settled sources. Each entity gets an identity rule, relationships, invariants, and observable states.
 
 Expected inputs: the authority/problem model, the admitted Requirements rows and their U identifiers or the settling decision records, pathfinding records when present, and existing code or documentation vocabulary as observational evidence of terms already in use.
 
 Return: the entity table, undefined-noun gaps, and any term routed to `discuss-pathfinding` with the exact same-instance question the sources cannot settle.
 
-## Why the Specification Owns This
+## Choose the Nouns and Sources
 
-An obligation is a sentence about nouns. "At most one pending reminder per ticket" cannot be tested until a reader knows what makes two reminders the same and when a reminder stops being pending. The stage that writes the obligations must define the nouns; leaving them to design lets each downstream reader invent a different meaning, and the trace from requirement to realization has nothing stable to bind to.
+Start from every noun the problem and desired outcomes name, and every noun that appears in more than one U row or outcome.
 
-Requirements surfaces the owner's words. Program Design binds each entity to an owner, a package, a schema, and a wire shape. Neither of those is definition.
+Take meaning from the authorized U rows, the decision records that settle meaning, and pathfinding records. Code, contracts, and prior specifications show which terms are already in use. When an authoritative contract, decision, or Specification already gives a term the same meaning, reuse the term and its meaning without renaming or reopening it. Code alone shows current behavior and does not settle desired meaning.
 
-## What to Inspect
-
-Read every owner statement as evidence about entities, not only as a future requirement:
-
-- a noun that appears in more than one U row or outcome;
-- two words the owner uses for one thing, or one word used for two things ("account" as tenant and as agent login);
-- behavior that only makes sense if two instances are distinct ("a fresh reminder, not the old one" says identity includes the occurrence that created it);
-- behavior that only makes sense if two instances are the same ("moving the date moves it, not a second one" says identity excludes the due date);
-- conditions that mark a state boundary ("nothing comes back after close" names a terminal state);
-- constraints across nouns ("never touch another tenant's ticket" is a relationship invariant);
-- vocabulary already in use in code, contracts, or prior specifications — reuse the term when an authoritative contract, decision, or Specification gives it the same meaning; code alone shows current behavior and does not settle desired meaning. Do not rename a term a governing source has already fixed.
+When you fill an entity's slots, derive each one from what the owner's statements already decide, and word the identity rule so it decides the hardest same-instance case those statements raise ([define the domain first](../../principle-define-the-domain-first/SKILL.md)).
 
 ## Entity Table
 
@@ -42,11 +32,9 @@ Give every entity a stable `E` identifier. It travels with the identity chain (`
 
 ## Settled or Unmade
 
-Define the entity when two capable readers of the settled sources would answer the same-instance question the same way. Route it to `discuss-pathfinding` only when they would not, and carry the exact question: "Is a reminder re-created after re-hold the same reminder or a new one?" not "please define reminder". A term whose readings differ only in implementation detail is settled at this altitude; the difference belongs to `program-design`.
+Define the entity when two capable readers of the settled sources would answer the same-instance question the same way. Route it to `discuss-pathfinding` only when they would not, and carry the exact question the sources leave open. If nothing the owner said settles re-hold, that question is "Is a reminder re-created after re-hold the same reminder or a new one?"; "please define reminder" gives the owner nothing to decide. A term whose readings differ only in implementation detail is settled at this altitude, and the difference belongs to `program-design`.
 
-Reading "a fresh reminder, not the old one" as an identity rule is Specification authoring over settled statements. It is not the Requirements inference that `authority-and-problem-framing.md` forbids: that rule stops an author from inventing owner meaning while normalizing Requirements; this stage derives what the owner's statements already decide.
-
-Four rationalizations leave nouns undefined: "the words are obvious", "the team knows what it means", "the data model is design's problem", and — the one that returns `decision-needed` instead of a table — "the source did not define enough entity semantics, so I must ask". The last is a stop only for a question two readers would answer differently; for every other noun the answer is in the statements. The test is not whether the team knows; it is whether a stranger reading only the Specification can decide every same-instance and state question the obligations depend on.
+Reading "a fresh reminder, not the old one" as an identity rule is Specification authoring over settled statements. The rule in `authority-and-problem-framing.md` stops an author from filling in missing owner meaning while normalizing Requirements. This stage writes down what the owner's statements already decide.
 
 ## Good and Bad
 
@@ -67,8 +55,8 @@ Bad:
 - a one-line description with no identity rule ("the pending wait for a ticket");
 - a type, table, schema, package, or event payload field standing in for a definition;
 - a glossary of every noun in the source, including ones no obligation uses;
-- states copied from a workflow engine rather than from owner statements;
-- a term redefined when existing code or a prior Specification already fixes its meaning.
+- states copied from a workflow engine instead of from owner statements;
+- a term renamed or redefined when a governing source already fixes its meaning.
 
 ## Complete When
 

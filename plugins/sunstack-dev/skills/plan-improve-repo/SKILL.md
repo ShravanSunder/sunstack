@@ -11,7 +11,7 @@ Audit a repo like a senior advisor and let the Lead turn admitted findings into 
 
 Its direct authority is the admitted repository-improvement finding. `plan-implementation` owns direct reviewed-design planning and the single plan for an orchestrated improvement delivery. Both use the same canonical plan contract without sharing audit authority.
 
-Inspired by the MIT-licensed `shadcn-improve` plugin mechanics: scout broadly, verify claims yourself, then produce plans an executor can run.
+Inspired by the MIT-licensed `shadcn-improve` plugin, which scouts broadly, verifies claims itself, and writes plans an executor can run.
 
 ## Entry And Planning Admission
 
@@ -49,7 +49,6 @@ Completion: every written plan carries one current admissible planning basis, th
 - Use the repository home and proportional Markdown form returned by `../../shared-references/canonical-implementation-plan.md`.
 - Read repo instructions, README/docs, package/tooling files, tests, CI, and recent git history before recommending work.
 - Before inspecting audit categories, load `practices-manage-agents` to decide which go to 📚 Researcher Workers and which the Lead inspects; the Lead keeps synthesis, verification, admission, and plan authorship.
-- Treat subagent findings as candidates, not truth. Re-open cited files before accepting a finding.
 - Delegated audit work returns evidence and candidate findings only. Bounded mechanical validation or proof checks may also return observed results. The Lead performs admission, prioritization, all plan structure and prose, and the governing validation/acceptance judgment; no helper authors or accepts the plan.
 - Never quote or copy secret values. Report secret classes and file locations only when relevant.
 - If asked to implement a direct plan-only result, establish new delivery intent through `plan-implementation`; do not upgrade the existing plan. If asked for independent implementation review, route it to `implementation-review`; never invoke a retired skill or treat validation as either execution or review.
@@ -61,7 +60,7 @@ Completion: every written plan carries one current admissible planning basis, th
 - `quick`: inspect instructions, README, manifests, tests, and churn; produce a short vetted shortlist and at most one admitted plan.
 - `deep`: cover all relevant audit categories, verify candidates, and write admitted plans for the top 3-5 improvements unless the user picks different ones; route design-required findings without plan writing.
 - `focus <area>`: audit only the named area, such as security, tests, DX, performance, docs, architecture, or one package/module; apply the same admission gate.
-- `branch`: compare the current branch against its base and plan only admitted improvements for the branch's changed surface, not the whole repo.
+- `branch`: compare the current branch against its base and plan admitted improvements only for the branch's changed surface.
 - `next`: choose the highest-leverage existing completed canonical plan and validate its planning basis and current-state readiness without mutating it.
 - `validate-plan <path>`: read the whole plan, compare it to the live repo, and return a separate `ready | needs-refresh | blocked | rejected` receipt; missing planning admission is `blocked`.
 - `reconcile`: assess whether existing improvement plans remain current and return separate reconciliation receipts without mutating them.
@@ -82,10 +81,10 @@ Completion: every written plan carries one current admissible planning basis, th
    - performance and reliability
    - developer experience and tooling
    - docs or onboarding drift
-3. Vet candidates:
-   - parent reads every accepted candidate's cited files
-   - reject false positives and duplicates
-   - classify unknowns separately from accepted findings
+3. Vet candidates as the Lead. Before you accept a candidate as a finding, yours or a helper's, open each anchor it cites in the current checkout and name what that anchor shows and what it leaves open ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Sort every candidate into one list:
+   - accepted: its anchors establish the claimed problem
+   - rejected: an anchor contradicts it, or it duplicates another finding; record the anchor or finding that rejects it
+   - unknown: the anchors you could open neither establish nor contradict it; keep it apart from accepted findings
 4. Prioritize by leverage:
    - user impact
    - risk reduction
@@ -99,10 +98,11 @@ Completion: every written plan carries one current admissible planning basis, th
 7. Write one plan per admitted improvement that can return `ready`:
    - the Lead authors the entire plan; delegated evidence is verified input, never plan text or planning judgment
    - default to the top 3-5 in non-interactive runs
-   - one focused plan per finding, not a mega-plan
+   - one focused plan per finding
    - instantiate the canonical plan record with originating planner `plan-improve-repo`
    - return `ready` with `requested terminal: plan-only`, or return `revision-requested | blocked` with `plan identity: none` and no artifact write
    - include planning-basis identity, exact files, current-state evidence, proof-bearing slices, proof gates, and stop conditions
+   - choose each slice's proof with the proof-integrity check in Plan Validation Flow step 6
 8. Validate each generated ready plan without changing its plan record or planning result. A new `revision-requested` or `blocked` result has `plan identity: none` and skips artifact validation:
    - read the plan back after writing it
    - confirm every write surface exists or is intentionally new
@@ -131,7 +131,7 @@ Use this for `validate-plan`, `next`, and pre-execution checks.
 6. Check proof integrity:
    - red/green proof required or explicit user-approved exception
    - focused validation and full validation listed separately
-   - proof maps back to the problem, not just to changed files
+   - when you choose or check the proof for an obligation, name the failure the improvement removes and confirm the planned check runs where that failure can make it fail ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md))
 7. Return a separate readiness receipt. Do not edit source code, the canonical plan record, planning result, governing basis, or delivery context.
 
 ## Progressive Disclosure
@@ -159,7 +159,6 @@ Return:
 ## Common Mistakes
 
 - Implementing a fix instead of writing the plan.
-- Trusting subagent output without re-reading cited files.
 - Writing one giant cleanup plan.
 - Prioritizing aesthetic refactors over high-leverage risk reduction.
 - Omitting proof gates, stop conditions, or current-state evidence.
