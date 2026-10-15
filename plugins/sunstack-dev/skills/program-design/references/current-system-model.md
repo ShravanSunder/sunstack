@@ -1,62 +1,34 @@
 # Current-System Model
 
-This reference owns source-grounded reconstruction of the current runtime and its proof path before target design.
+This reference owns Program Design's current-system model. It shapes the `practices-how` return into the owners, flows, state and failure behavior the later steps design against, and it classifies how far the current system constrains the target.
 
-Expected inputs: governing specification and accepted boundary, bounded system surface, repo source roots, current docs/tests/logs/traces, and known platform constraints.
+Expected inputs: the governing Specification and confirmed goal boundary, the `practices-how` model step 2 returned, current docs, and known platform constraints.
 
-Return: current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, contradictions, evidence gaps, and source identities with current applicability and coverage.
+Return: current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, the greenfield basis where nothing current exists, contradictions, evidence gaps, and source identities with current applicability and coverage.
 
-## Trace Relationships, Not File Lists
+## Cover What the Obligations Touch
 
-Inspect the smallest useful set:
-
-```text
-entry boundary and consumers
-runtime components and authoritative owners
-mutation and side-effect sites
-production calls/events/data flow
-state lifetime and storage
-failure/retry/recovery behavior
-platform/external boundaries
-real proof harness and observation path
-```
-
-Open load-bearing sources. A file list or search result is not a model.
-
-For each relationship, record direct observation, inference, or unresolved gap. Current code is evidence; desired behavior remains governed by the specification.
-
-## Reconstruct Representative Call Paths
-
-For each load-bearing behavior, start at a concrete user, API, event, job, CLI, or test entrypoint and follow the real caller/callee chain to the state mutation, side effect, or external boundary. Then trace the result, error, event, or observable state back to its consumer.
+Step 10 pairs the current path of each material runtime-behavior group with its proposed path, so the how return must cover every group the Specification's obligations change or depend on. List those groups and match each to a returned path. IF a group has no returned path, load `practices-how` and return that group's path, or the search that shows no current implementation exists.
 
 If no current implementation or call path exists, record the source-backed greenfield basis and applicable platform, external-boundary, and proof-harness constraints instead of inventing frames or edges.
 
-Use source navigation and tests as the baseline. When runtime stack traces, distributed traces, logs, profiles, or debugger captures exist, parse them to validate which dynamic path actually ran. A stack trace is point-in-time evidence, not the whole program model: normalize it into the relevant call chain and keep recursion, framework frames, generated code, callbacks, async continuations, event hops, and process boundaries explicit when they affect ownership or behavior.
+## Shape the Outputs
 
-Record each representative path as:
+| Output | What it holds, from the how return |
+| --- | --- |
+| component/owner tree | each part on the paths and the state, decision or effect it owns |
+| production and proof flows | each anchored path with its return and error edges, plus the test or harness path wherever its wiring differs from production |
+| state/mutation map | each piece of state on the paths, its owner, its lifetime and every writer |
+| failure behavior | the failure, retry, timeout and cancellation edges on the paths |
+| source identities | each source the model rests on, the version read, and whether it still describes current behavior |
 
-```text
-entrypoint -> caller -> callee/owner -> mutation or side effect
-           <- result | error | event | observable state
-edge semantics: sync | async | callback | event | job | external
-evidence anchors: source plus runtime/test evidence when available
-```
+Carry each anchor and its observed or inferred label into these outputs. Keep each ownership smell the how return reports on the component/owner tree. Step 3 takes it as a crux the alternatives pass must resolve. The smell shows ownership is unsettled; it does not prove which target boundary fixes it.
 
-Good: a source-anchored entrypoint-to-effect chain that distinguishes observed runtime frames from inferred edges and exposes where ownership, state, failure, or proof crosses a boundary.
+## Contradictions and Gaps
 
-Bad: a raw stack dump, a list of function names, or a diagram that omits the return/error path and state/side effect.
+Compare the model with current docs and with what the Specification assumes about the current system. Record each contradiction with both anchors. Current code is evidence of what exists; the Specification governs what must be true.
 
-## Diagnose Ownership Smells
-
-In UI/refactor work, repeated synchronization effects, duplicated derived state, prop/state mirroring, and cleanup races often reveal unclear ownership or lifecycle coupling. Trace:
-
-- who owns the source value;
-- who derives it;
-- who starts/cancels effects;
-- which render or callback observes stale state;
-- which current interface forces cross-owner coordination.
-
-Do not assume the symptom proves the target boundary. It identifies the crux the alternatives pass must resolve.
+An inferred or unresolved edge that a target choice would rest on is an evidence gap. List it with what would settle it.
 
 ## Degree of Constraint
 
@@ -72,8 +44,8 @@ legacy-ownership-bound
 
 Name what the change may replace and what remains authoritative. For external prior art/platform evidence, return borrow/adapt/do-not-borrow plus version and transfer assumptions.
 
-Good: a source-backed map from entry to state owner to side effect to observable proof.
+Good: every behavior group the target changes has an anchored current path ready to pair with its proposed path, each owner and writer is named, the constraint class and the replace/keep split rest on sources, and each inferred edge a target choice leans on is listed as a gap.
 
-Bad: folder inventory, undocumented inference treated as fact, or current code treated as desired authority.
+Bad: current code treated as desired authority; a target choice resting on an edge the how return marked inferred; a changed behavior group with neither a current path nor a greenfield basis; a constraint class with no source behind it.
 
-Complete when: load-bearing current behavior has a normalized entrypoint-to-effect call path with return/error behavior and evidence anchors, or its absence is bound to a source-backed greenfield basis; proof paths are inspectable; contradictions are explicit; and target design can no longer rely on an invented current model.
+Complete when: each load-bearing current behavior has an anchored entry-to-effect path with its return and error edges, or its absence is bound to a source-backed greenfield basis; proof paths are inspectable; contradictions are explicit with both anchors; constraint degree and `changes / remains authoritative` are named; and target design can no longer rely on an invented current model.

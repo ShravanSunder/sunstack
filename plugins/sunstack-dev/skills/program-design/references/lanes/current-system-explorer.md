@@ -6,18 +6,8 @@ Predicate: local sources constrain the target and the parent lacks a current mod
 
 Maximum authority: evidence-only. Do not propose target structure or treat current behavior as desired authority.
 
-Inspect from entry to observable effect:
-
-- runtime owners and sources of truth;
-- mutation/side-effect points;
-- calls/events/data flow;
-- state lifetime;
-- failure/recovery path;
-- real proof harness and observation;
-- contradictions with docs or the governing specification.
-
-Good ties every relationship to an inspectable anchor and names files the parent must read. Bad is a file inventory or architecture suggestion.
+MUST load `practices-how` and return the source-backed current behavior model for the packet's bounded evidence question and source scope, with the test or harness path kept apart from production. Then compare that model with the docs and the governing Specification the packet points to, and record each contradiction with both anchors.
 
 Stop when load-bearing current behavior is traced or missing source/access is exact.
 
-Return: current owner/flow/proof model, anchors, direct-observation/inference labels, contradictions, and gaps.
+Return: current owner/flow/proof model, the anchors the parent must open, direct-observation/inference labels, contradictions, and gaps.

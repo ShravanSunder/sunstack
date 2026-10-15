@@ -104,13 +104,15 @@ Completion: distinct Requirements and Specification identities, confirmed goal b
 
 ### 2. Build the current-system model from sources
 
-MUST load `references/current-system-model.md` to reconstruct representative execution paths from real entrypoints through named callers/callees, owners, state mutations or side effects, and observable results/errors; use runtime stack traces, logs, traces, tests, and source navigation when available to validate the dynamic path. Return the source-grounded current-system model, normalized current call paths, and inference gaps.
+MUST load `practices-how` and return the source-backed current behavior model for each load-bearing behavior the Specification's obligations change or depend on: anchored entry-to-effect paths with their return and error edges, the owners and state on them, their boundary crossings, the test or harness path wherever its wiring differs from production, observed and inferred edges, and the edges left unresolved. Delegated parts of that walk go through the current-system-explorer lane under Bounded Evidence Help.
+
+MUST load `references/current-system-model.md` and return, built from that model, the current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, the greenfield basis where nothing current exists, contradictions, evidence gaps, and source identities with current applicability.
 
 IF an external platform, protocol, library, sandbox, runtime, or empirical claim could change feasibility, structure, or proof and current local sources do not establish it, perform a bounded lookup directly or use `practices-research`. If delegation is useful, the external-prior-art-platform lane may perform that lookup under the Bounded Evidence Help contract; delegation is not required. Return the exact external source identity/version, authority status, transfer assumptions, structural consequence, and remaining evidence gap before selection.
 
-Completion: current behavior and degree of constraint are source-backed, and `changes / remains authoritative` is explicit.
+Completion: each load-bearing current behavior has an anchored entry-to-effect path with its return and error edges, or a source-backed greenfield basis; degree of constraint is source-backed; and `changes / remains authoritative` is explicit.
 
-For each dimension—components, interfaces, state, calls/flows, failure/recovery, concurrency/consistency, compatibility/cutover, trust, and proof—record one applicability judgment in working state or the returned self-check:
+For each dimension (components, interfaces, state, calls/flows, failure/recovery, concurrency/consistency, compatibility/cutover, trust, and proof), record one applicability judgment in working state or the returned self-check:
 
 ```text
 required by a named specification obligation
