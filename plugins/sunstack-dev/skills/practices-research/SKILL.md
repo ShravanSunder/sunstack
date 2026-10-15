@@ -18,7 +18,7 @@ Turn a fuzzy evidence need into bounded questions, walk relevant source classes 
 
 ## Ordered Workflow
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 1. Frame one to five researchable questions. Name the decision target, non-goals, source classes, freshness requirement, and what would support, refute, or complicate each question.
 2. Re-anchor locally when a repo is involved: read current code, docs, specs, plans, runbooks, findings, and relevant sibling repos. Treat memory and session summaries as discovery.

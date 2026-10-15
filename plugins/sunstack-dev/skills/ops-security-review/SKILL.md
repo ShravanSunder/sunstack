@@ -41,7 +41,7 @@ If Codex Security is not installed or not available, produce a copy-paste prompt
 
 ## Workflow
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 1. Resolve security request type:
    - diff scan

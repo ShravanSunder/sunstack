@@ -25,7 +25,7 @@ If the response is short, or the user asked for a normal markdown document or an
 
 ## Shape picker
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 MUST load `principle-write-for-the-reader` and return the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width. IF the view needs a diagram, the diagram-semantics call below picks its family. A branch does not become a lifecycle state because the state drawing fits better.
 

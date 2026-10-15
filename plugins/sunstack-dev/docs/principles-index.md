@@ -5,7 +5,7 @@ A principle is one engineering judgment, written to teach: the idea behind it, h
 ## Using a principle
 
 - Read the card in full before applying it. This index chooses the card; it does not replace it.
-- When a principle the owner called by name shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied. A read that a skill directed follows rule 5 of `shared-references/principle-reading.md` instead.
+- When a principle the owner called by name shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied. A read that a skill directed follows `shared-references/principle-reading.md` instead.
 - Principles compose. One task often needs two, and each card's closing lines say where a neighbour takes over. A principle owns a question, not a file, tool, or test type.
 
 ## Understand

@@ -22,7 +22,7 @@ If the user asked for an exact format or a terse answer, or the whole reply fits
 
 ## Media selection
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it.
 

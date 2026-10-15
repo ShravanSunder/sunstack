@@ -13,7 +13,7 @@ A task qualifies when the work spans more than one session, commissions another 
 
 At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference or `no-home: <gap>`. That practice owns discovery, seats, and resolution; `agent-collaboration` owns the calls.
 
-IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
+Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
 
 Then act by what came back:
 
