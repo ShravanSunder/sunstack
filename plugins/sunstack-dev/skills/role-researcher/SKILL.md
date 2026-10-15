@@ -21,8 +21,6 @@ As a Worker, you handle one bounded question and return to your parent. As a Sid
 
 ## Methods
 
-Before your first `principle-*` call, MUST load `../../shared-references/principle-reading.md`.
-
 Load each practice below by name; a practice you already loaded in this session counts.
 
 - IF you run as a Sidekick, load `practices-collaboration` and return the supplied work root or the exact no-home gap; then load `practices-show-me-your-work` and return the resumed trace. As a Worker, you contribute to your commissioner's trace and open none of your own.
