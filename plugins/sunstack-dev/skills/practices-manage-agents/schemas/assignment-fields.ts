@@ -59,7 +59,7 @@ export const RequiredReads = z
     principles: z
       .array(z.string().regex(/^principle-[a-z]+(-[a-z]+)*$/))
       .readonly()
-      .describe("Principles to read in full: the charter's defaults plus what this job touches"),
+      .describe("Job-specific principles to read in full beyond those the charter cites"),
   })
   .describe(
     "Full reads the recipient performs; a name in this list is a direction, not proof the read happened",
