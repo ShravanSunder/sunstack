@@ -1,5 +1,5 @@
 interface:
-  display_name: "Implementer"
+  display_name: "Role: Implementer"
   short_description: "Build approved changes and their associated proof"
   default_prompt: "Use $role-implementer to execute the assigned approved slice and return its changes, proof and limits."
 policy:
