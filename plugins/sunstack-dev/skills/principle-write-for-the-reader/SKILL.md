@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Write for the Reader
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Code is communication, and so are designs, instructions, and explanations. They are read far more often than they are written, mostly by someone without your context: a reviewer, the next engineer, another agent, the owner tomorrow. Writing for the reader means they can answer the question they came with (what is this for, where does this value come from, what can change it, what do I need to decide) quickly, and find the place to disagree. Every line, layer, and piece of state costs the reader something. Jargon, process narration, and repetition waste that reader's time and hide mistakes from the people best placed to catch them.
 

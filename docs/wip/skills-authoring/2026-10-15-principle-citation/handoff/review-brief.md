@@ -22,19 +22,19 @@ Reviewers read only these frozen worktrees.
 
 ## What changed and why
 
-Skills used to call a principle card (`principle-*`, hidden from model invocation, the bottom layer) with `IF <predicate>, load principle-x and return <result>`, behind a pointer to `shared-references/principle-reading.md`.
+Skills used to call a principle (`principle-*`, hidden from model invocation, the bottom layer) with `IF <predicate>, load principle-x and return <result>`, behind a pointer to `shared-references/principle-reading.md`.
 
-Now a skill states the moment and the applied action in plain words and cites the card:
+Now a skill states the moment and the applied action in plain words and cites the principle:
 
 ```text
-<observable moment>, <action in plain words> ([<card's judgment>](../principle-<name>/SKILL.md))
+<observable moment>, <action in plain words> ([<principle's judgment>](../principle-<name>/SKILL.md))
 ```
 
 Rules:
-- Each card's first body line is its read rule.
-- A card is cited, never loaded, and cited once per decision.
+- Each principle's first body line is its read rule.
+- A principle is cited, never loaded, and cited once per decision.
 - A citation must change the action at that decision; otherwise it is decorative.
-- The owner-approved principle × skill inventory decides which card belongs at which decision.
+- The owner-approved principle × skill inventory decides which principle belongs at which decision.
 - Prior art is pstack (cursor/plugins): "state the rule, not the label; no name-dropping".
 
 The owner's named risk is "adding plausible principle links that merely increase reading and leave the agent's decisions unchanged". Hunt slop.
@@ -44,7 +44,7 @@ The owner's named risk is "adding plausible principle links that merely increase
 | ID | Target | Diff | Read current files at | Governing doc |
 |---|---|---|---|---|
 | G | Citation grammar in `skill-creation` and `skill-review` (skill-authoring 0.2.0) | `git -C ../rv diff a737b87 c2b9c18 -- plugins/skill-authoring docs/changelog/2026-10-15-principle-citation-grammar.md .claude-plugin .cursor-plugin .agents` | RV131 | `docs/wip/skills-authoring/2026-10-15-principle-citation/spec.md` |
-| A | #131 v4 plus `aa5af8cb`: the 17 cards' read rule; `principle-reading.md` deleted; 9 skills converted (see list below); `shared-references/diagram-semantics.md`; the role charters under `practices-manage-agents/references/roles/` (form only); AGENTS.md, plugin README, `docs/principles-index.md`, changelog | `git -C ../rv131 diff c2b9c18 aa5af8cb` | RV131 | `docs/wip/skills-authoring/2026-10-14-practices-principles/spec.md`, "2026-10-15 v4" |
+| A | #131 v4 plus `aa5af8cb`: the 17 principles' read rule; `principle-reading.md` deleted; 9 skills converted (see list below); `shared-references/diagram-semantics.md`; the role charters under `practices-manage-agents/references/roles/` (form only); AGENTS.md, plugin README, `docs/principles-index.md`, changelog | `git -C ../rv131 diff c2b9c18 aa5af8cb` | RV131 | `docs/wip/skills-authoring/2026-10-14-practices-principles/spec.md`, "2026-10-15 v4" |
 | B | #132 v3 plus `d9e717b6`: merge `38fa011`; 7 `role-*/SKILL.md` (D13 citations in "The work"); `practices-manage-agents/SKILL.md` (merged Main path, step-6 clause, setup line dropped, `:10`); changelog | `git -C ../rv diff 38fa011 d9e717b6`, plus the merge's resolution: `git -C ../rv diff 6fae56f 38fa011 -- plugins/sunstack-dev/skills/practices-manage-agents/SKILL.md AGENTS.md plugins/sunstack-dev/skills/practices-manage-agents/schemas/assignment-fields.ts` | RV | `docs/wip/skills-authoring/2026-10-14-role-skills/spec.md`, "2026-10-15 v3" |
 
 The 9 skills in target A, with the references that changed:
@@ -69,7 +69,7 @@ Lead-prescribed wording, to review like any other text:
 ## Review machinery
 
 1. Load `plugins/skill-authoring/skills/skill-review/references/checks/review-schema.md` from RV first.
-2. Walk only your assigned check files, in order, from `plugins/skill-authoring/skills/skill-review/references/checks/<name>.md`. They point into `plugins/skill-authoring/skills/skill-creation/`; `skill-creation`'s Call Grammar and Judgment card block govern citations.
+2. Walk only your assigned check files, in order, from `plugins/skill-authoring/skills/skill-review/references/checks/<name>.md`. They point into `plugins/skill-authoring/skills/skill-creation/`; `skill-creation`'s Call Grammar and its Principle block govern citations.
 3. Read `skill-review/references/implementation-review.md` "Review Rubric".
 
 Behavior is deferred by the owner, and B5 is owed: treat behavior as `unverified/deferred` and review source.
@@ -80,7 +80,7 @@ You may run read-only:
 
 ## What to hunt
 
-1. **Decorative citations.** The action would be the same without the card, the card's judgment isn't reflected, or the link text is restated as the action.
+1. **Decorative citations.** The action would be the same without the principle, the principle's judgment isn't reflected, or the link text is restated as the action.
 2. **Moments that aren't observable** (they fail the branch-predicate test), or moments that fire on nearly every run.
 3. **Once-per-decision violations.** Check in particular:
    - lead verify vs management step 7;
@@ -139,7 +139,7 @@ Keep it under about 2,500 words, except the slop list.
 - **a-structure** (A + G): placement-and-calls, rule-agreement, plus a grammar-agreement walk across the five grammar files. trigger-routing is not selected because no description changed; confirm that no frontmatter changed in G, A or B.
 - **b-teaching** (B): mental-model-fit, depth-coverage, steering-strength.
 - **b-structure** (B, plus a whole-stack walk): placement-and-calls, rule-agreement.
-  - Walk one Implementer commission end to end: management steps 1–7 → the step-6 prompt → `role-implementer` → its practices → each cited card. Count which cards are read, and when.
+  - Walk one Implementer commission end to end: management steps 1–7 → the step-6 prompt → `role-implementer` → its practices → each cited principle. Count which principles are read, and when.
   - Do the same for a Lead resume (role-lead + show-me + management).
   - Report double citations and reads that never fire.
 - **slop** (A + B): no-op-pruning plus the D34 inventory over every added or changed runtime prose sentence (the 43 citations from `check_citations.py`, plus the other changed sentences).

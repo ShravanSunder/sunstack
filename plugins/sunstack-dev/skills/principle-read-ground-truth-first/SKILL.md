@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Read Ground Truth First
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Don't start from assumptions; read ground truth first, in proportion to the task. A claim about what code or a system does is only as good as the reading behind it. Memory, function names, summaries, and other agents' reports are claims about the source, not the source, and a stale assumption is a hidden guess. A design built on "I assume it works like X" carries that guess into the code, where it surfaces later as rework or an outage. Reading first is cheap; un-building is not. So every claim should carry its evidence, or say plainly that it is inferred or a guess.
 

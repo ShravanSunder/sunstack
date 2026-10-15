@@ -42,10 +42,10 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** Mask the answer before scoring, and keep the masked score as the real one. The unmasked number measured leakage, not classification.
 
-## The card that seemed to teach
+## The principle that seemed to teach
 
-**What happened.** To decide what a skill card needed, a study compared no card, a short rule card, and a rule card plus a worked example, using blind scorers and a threshold set in advance. The short card lifted scores; the example didn't cross the threshold.
+**What happened.** To decide what a principle needed, a study compared no principle, a short rule, and a rule plus a worked example, using blind scorers and a threshold set in advance. The short rule lifted scores; the example didn't cross the threshold.
 
 **The move.** Read the result for what it measured.
 
-**Better.** The rubric rewarded naming the right things, which a rule-and-checklist card is good at. It didn't measure whether an agent understood the principle on an unseen case. The owner later found the rule cards taught little. Judge teaching by transfer to cases the card doesn't contain, and keep the result's limits next to the result.
+**Better.** The rubric rewarded naming the right things, which a rule-and-checklist principle is good at. It didn't measure whether an agent understood the principle on an unseen case. The owner later found the rule-style principles taught little. Judge teaching by transfer to cases the principle doesn't contain, and keep the result's limits next to the result.

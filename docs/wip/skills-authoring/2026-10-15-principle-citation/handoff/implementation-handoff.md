@@ -27,13 +27,13 @@ Prior review coverage:
 
 ## What this work does
 
-Skills compose bottom-up: principle cards → practices / ops / presentation → roles. This stack replaces `IF … load principle-x and return …` with a citation sentence:
+Skills compose bottom-up: principles → practices / ops / presentation → roles. This stack replaces `IF … load principle-x and return …` with a citation sentence:
 
 ```text
-<observable moment>, <action in plain words> ([<card's judgment>](../principle-<name>/SKILL.md))
+<observable moment>, <action in plain words> ([<principle's judgment>](../principle-<name>/SKILL.md))
 ```
 
-- Each of the 17 cards opens with its own read rule: "Read this card in full before applying it; your own full read earlier this session counts."
+- Each of the 17 principles opens with its own read rule: "Read this principle in full before applying it; your own full read earlier this session counts."
 - The interim `shared-references/principle-reading.md` and its pointer lines are deleted.
 - The owner-approved principle inventory (adds, changes, removes) is applied to 9 practice, ops and presentation skills and 7 role skills.
 - D13: role citations live in each role's "The work"; Methods keeps practice loads.
@@ -43,8 +43,8 @@ Skills compose bottom-up: principle cards → practices / ops / presentation →
 | Commit(s) | Branch | What |
 |---|---|---|
 | `ff8c911`, `312391a`, `c2b9c18` | #131 | Citation grammar in `skill-creation` and `skill-review` (checks citations in `placement-and-calls.md`). skill-authoring is at 0.2.0, with changelog `2026-10-15-principle-citation-grammar.md`. |
-| `e8127da..ea14e55` | #131 | v4: card read rules; `principle-reading.md` deleted; 9 skills converted plus the inventory; the role charters under `practices-manage-agents/references/roles/` converted in form only. |
-| `dc84c01..0f71477` | #131 | Lead corrections C1–C4:<br>• C1: packet `requiredReads.principles` = cards beyond those the charter cites.<br>• C2: management step 1 says "build its own result and review or accept it".<br>• C3: spec row aligned.<br>• C4: spec states. |
+| `e8127da..ea14e55` | #131 | v4: principle read rules; `principle-reading.md` deleted; 9 skills converted plus the inventory; the role charters under `practices-manage-agents/references/roles/` converted in form only. |
+| `dc84c01..0f71477` | #131 | Lead corrections C1–C4:<br>• C1: packet `requiredReads.principles` = principles beyond those the charter cites.<br>• C2: management step 1 says "build its own result and review or accept it".<br>• C3: spec row aligned.<br>• C4: spec states. |
 | `38fa011` | #132 | Merge of #131 `0f71477` (`--no-ff`). |
 | `a8380cc..195232e` | #132 | v3: 7 role skills converted to citations in "The work" (D13) plus the role inventory.<br>• Management step-6 prompt clause: a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder.<br>• Implementer setup line dropped. |
 | `f737828..39572d7` | #132 | Lead corrections E1–E3:<br>• E1: the role-operator access sentence is limited to sandbox, no-credentials or wrong-network failures.<br>• E2: management `:10` says "one-way-door tradeoffs".<br>• E3: spec states and a word-count fix. |
@@ -61,11 +61,11 @@ Skills compose bottom-up: principle cards → practices / ops / presentation →
 | `pnpm --dir tests/skills run typecheck` | exit 0 | exit 0 |
 | `claude plugin validate .` | passed | passed |
 | `git diff --check` (against base) | clean (`0bad422..`) | clean (`origin/skills/practices-principles..`) |
-| `python3 -I handoff/check_citations.py .` | PASS: 17 cards, 38 citations | PASS: 17 cards, 43 citations |
+| `python3 -I handoff/check_citations.py .` | PASS: 17 principles, 38 citations | PASS: 17 principles, 43 citations |
 | `python3 -I handoff/check_role_citations.py .` | n/a | PASS: citations only in "The work" (advisor 3, implementer 4, lead 3, reviewer 2, verifier 4) |
 
 The two scripts in this folder are the static proof:
-- `check_citations.py` checks that every `](…principle-…/SKILL.md)` link resolves to a same-plugin card, that no `load principle-` remains in `plugins/`, that no live `principle-reading` mention exists, and that all 17 cards open with the read rule. It also lists every citation sentence with file:line.
+- `check_citations.py` checks that every `](…principle-…/SKILL.md)` link resolves to a same-plugin principle, that no `load principle-` remains in `plugins/`, that no live `principle-reading` mention exists, and that all 17 principles open with the read rule. It also lists every citation sentence with file:line.
 - `check_role_citations.py` checks that no role skill has a principle link in its Methods section and that none mentions a principle without a link.
 
 Both were shown failing on seeded defects before use.
@@ -73,7 +73,7 @@ Both were shown failing on seeded defects before use.
 ## What is not proven
 
 - **Independent implementation review of the v4 and v3 conversions and the grammar implementation.** Owed; it is the next step.
-- **B5:** the runtime citation A/B, which tests whether an agent opens a cited card at the moment and acts on it. It is planned in the grammar spec (Coordination) and in #131 V4-7 / #132 V3-7, and has not been run. Every conversion rests on this assumption.
+- **B5:** the runtime citation A/B, which tests whether an agent opens a cited principle at the moment and acts on it. It is planned in the grammar spec (Coordination) and in #131 V4-7 / #132 V3-7, and has not been run. Every conversion rests on this assumption.
 - **Behavior and trigger evaluations**, deferred by the owner. All behavior is `unverified/deferred`.
 - The Codex quick validator was not run. No Codex, Claude or Cursor cache refresh. No merge-readiness claim.
 
@@ -84,7 +84,7 @@ Both were shown failing on seeded defects before use.
    - `role-lead` refine vs step 7 (drift or break);
    - `role-lead` shared-model vs `practices-show-me-your-work`'s Lead resume paragraph;
    - `role-verifier` prove-it-works vs verify, which both name build and target.
-2. **Decorative citations:** a sentence that would act the same without its card.
+2. **Decorative citations:** a sentence that would act the same without its principle.
 3. **Readability cost:**
    - the management Main path is about 790 words (#127 was 721);
    - presentation core rules carry a name-the-tradeoffs rule of about 75 words;
@@ -103,7 +103,7 @@ Security: not applicable (skill prose, schemas descriptions; no trust boundary o
 
 - The grammar change, the v4 and v3 conversions, the C1–C4 and E1–E3 corrections, and `aa5af8cb` / `d9e717b6`.
 - The inventory decisions. They are applied and recorded as spec rows (#131 v4 "Inventory rows", #132 v3 "Role inventory rows").
-- Don't reintroduce `principle-reading.md`, pointer lines, or `MUST/IF … load principle-` for cards.
+- Don't reintroduce `principle-reading.md`, pointer lines, or `MUST/IF … load principle-` for principles.
 
 ## Unfinished work, in order
 

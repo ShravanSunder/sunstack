@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Write Tests That Can Fail
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Tests are executable claims about behavior. A passing test claims the behavior is right, and that claim is worth something only if the test would have failed had the behavior been wrong. Many green tests can't fail: a mock answers before the real code runs, the expected value comes from the code under test, the assertion checks that a function was called rather than what came out, or the fixture never reaches the case. They cost CI time and review attention, and they look like proof. A test that can fail takes two decisions: what wrong behavior it must catch, and where it has to run so that wrong behavior can make it fail.
 

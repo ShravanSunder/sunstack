@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Experiment Before Proposing
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Many design arguments are questions about behavior: is this faster, does the API do what we think, does the model handle this case, which of two layouts reads better? When the answer is a fact you could observe by running something, it isn't a question to argue about, and it isn't the owner's to answer. Run it and let the result decide. The skill is fitting the rigor to the question and the stakes, and writing down what result would change your mind before you look. Otherwise you will read the result to fit the plan you already had.
 
@@ -38,7 +38,7 @@ Many design arguments are questions about behavior: is this faster, does the API
 
 A change claimed to make startup faster by loading modules lazily, and was about to merge on that claim. Measured on the real app (cold start, ten runs, main against the branch), startup was 40 ms slower: the first request now loaded modules one after another. Naming the workload and comparator took a minute, the run took five, and the result reversed the decision.
 
-IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` (scenarios, simplest first: two layouts, side by side; the probe that looked in the wrong place; the hook runtime, warm and cold; the oracle stricter than the contract; the score that fell when the answer was hidden; the card that seemed to teach) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the lazy-loading example, or you are judging someone else's experiment or measurement, load `references/example_scenarios.md` (scenarios, simplest first: two layouts, side by side; the probe that looked in the wrong place; the hook runtime, warm and cold; the oracle stricter than the contract; the score that fell when the answer was hidden; the principle that seemed to teach) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

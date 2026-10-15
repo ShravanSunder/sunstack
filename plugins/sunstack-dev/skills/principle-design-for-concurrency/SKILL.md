@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Design for Concurrency
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Concurrency is how work stays fast and an interface stays responsive, so you want it. The cost is that once actors overlap (two workers, a retry and its original, a callback arriving late, a background task and the code that started it, two tabs) correctness depends on an order you don't control. Interleaving bugs are intermittent: they pass every test that runs in one order and appear under load or on a slower machine. Designing for concurrency means naming the invariant that must hold, finding the order of events that breaks it, preferring to remove the sharing over coordinating it, and ordering by signals, never by time. It copes with concurrency that exists or that you chose for a reason; it is not a reason to add locks.
 

@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Justify the Complexity
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Every abstraction justifies the complexity it introduces. Each layer, option, mechanism, and second path costs reading, testing, and maintenance for as long as it exists, and a speculative one usually guesses the future wrong. Complexity is right when an outcome needs it now; "we might need it" is not an outcome. The discipline is a double-check before you add something and before you keep it: what breaks without it, and does something simpler, or something that already exists, do the job? Subtract first. The simplest base that works is the easiest one to change when the real need arrives.
 

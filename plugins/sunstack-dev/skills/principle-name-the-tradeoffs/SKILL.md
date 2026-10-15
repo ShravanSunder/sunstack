@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Name the Tradeoffs
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Every design decision is a tradeoff: you gain something, you pay for it, and somebody bears the cost. The dangerous tradeoffs aren't the ones you discuss; they're the ones you don't realize you're making. An implicit assumption is a load-bearing wall nobody labeled. Naming the tradeoff means putting the real alternatives side by side as changes to the current design, being concrete about what each costs ("simpler" and "cleaner" are not costs), saying out loud the assumption the choice leans on, and then recommending one. The goal is a comparison someone can decide from.
 

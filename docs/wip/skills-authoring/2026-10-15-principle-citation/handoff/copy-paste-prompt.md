@@ -33,7 +33,7 @@ Then:
 
 Constraints:
 - Don't redo the grammar, the v4/v3 conversions or the applied inventory.
-- Don't reintroduce principle-reading.md, pointer lines, or MUST/IF load calls for principle cards.
+- Don't reintroduce principle-reading.md, pointer lines, or MUST/IF load calls for principles.
 - Verify claims against current files.
 - Run the listed validation before claiming completion.
 

@@ -52,8 +52,8 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 ## "Ready" on structural checks
 
-**What happened.** A set of skill cards passed every check run on it: frontmatter parsed, metadata valid, names consistent, packaging validation green. They were reported "ready for comments". The owner read them and found they were mostly bookkeeping that taught nothing.
+**What happened.** A set of principles passed every check run on it: frontmatter parsed, metadata valid, names consistent, packaging validation green. They were reported "ready for comments". The owner read them and found they were mostly bookkeeping that taught nothing.
 
 **The move.** Check that the evidence observes the claimed thing.
 
-**Better.** The checks observed packaging, not teaching. The honest claim was "structurally valid; whether the cards teach is unverified". The right check was a reader walking an unseen case with only the card, and that was what found the problem.
+**Better.** The checks observed packaging, not teaching. The honest claim was "structurally valid; whether the principles teach is unverified". The right check was a reader walking an unseen case with only the principle, and that was what found the problem.

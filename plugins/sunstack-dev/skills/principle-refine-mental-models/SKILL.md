@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Refine Mental Models
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Every piece of work runs on a mental model: a picture of how the system works and why. When implementation surprises you, the first question isn't "how do I fix the code" but "what was wrong with our understanding?" A model fails in two ways. **Drift** is the work wandering off while the model still holds: the wrong module owns the change, an abstraction nobody named appears, complexity spikes. A **break** is the model itself being wrong: the abstraction forces contortions, the boundary you drew doesn't hold. Explicit breaks are easy: we said X, reality said Y. Implicit breaks are dangerous: nobody discussed Z, and the code is quietly being shaped by an assumption nobody examined. Fix the understanding first; the code follows.
 
@@ -33,7 +33,7 @@ Every piece of work runs on a mental model: a picture of how the system works an
 
 The approved design put fuzzy search on SQLite's trigram index. Review found trigram candidates can't include typo-only matches, so the core feature couldn't work. A full-scan prototype off the main thread met the latency target. That made it a break, not drift: the storage assumption failed at the real query boundary, and it was an approved design decision. The right move was to stop and bring the owner the decision (keep SQLite with a different matcher, or change the storage contract), not to swap storage on its own because a prototype was fast.
 
-IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios, simplest first: the same review comment, again; the backend that wasn't broken; the two sleeps; the fourth refresh; the cards that taught nothing) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the search example, or you are reviewing how someone else handled a surprise, load `references/example_scenarios.md` (scenarios, simplest first: the same review comment, again; the backend that wasn't broken; the two sleeps; the fourth refresh; the principles that taught nothing) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 

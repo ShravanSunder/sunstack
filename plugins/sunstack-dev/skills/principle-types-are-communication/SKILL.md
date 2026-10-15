@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Types Are Communication
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 Types tell the reader what is possible, and the compiler enforces the promise. Hiding type information removes load-bearing documentation. When a status is a string, an id is a bare string, or a result is a bag of booleans and optional fields, the code still runs, but the knowledge of which combinations are real lives only in people's heads, and the next change breaks it with nothing failing to compile. Model the domain's states as named types that constrain what can exist, check untrusted data once where it enters, and let the compiler carry the rest. Whole classes of bugs then never compile, and a reader learns the design from the signatures.
 

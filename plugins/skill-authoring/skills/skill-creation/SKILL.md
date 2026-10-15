@@ -34,11 +34,11 @@ Design them in that order. Each one can only be judged against the one before it
 
 The trigger surface has two capabilities. Each pays a different cost.
 
-**Model-invocable** — the skill keeps a `description`, so the agent loads it on its own and other skills can reach it. Pays **context load**: the description sits in the window every turn.
+**Model-invocable.** The skill keeps a `description`, so the agent loads it on its own and other skills can reach it. It pays **context load**, because the description sits in the window every turn.
 
-**User-invocable** — the human names the skill directly. Pays **cognitive load**: the human is the index that has to remember it exists.
+**User-invocable.** The human names the skill directly. It pays **cognitive load**, because the human is the index that has to remember it exists.
 
-They are not exclusive: a description adds agent reach without removing the human's. Choose model-invocable when the agent must find the skill unprompted, or when another skill must reach it. A judgment card that skills only cite stays hidden from model invocation. When user-invocable skills outgrow what a human can hold, a router skill indexes them.
+They are not exclusive: a description adds agent reach without removing the human's. Choose model-invocable when the agent must find the skill unprompted, or when another skill must reach it. A principle, which other skills only cite, stays hidden from model invocation. When user-invocable skills outgrow what a human can hold, a router skill indexes them.
 
 `references/frontmatter-design.md` owns description wording, adjacent-skill boundaries, and the invocation tradeoff. `references/platform-mechanics.md` owns client-specific invocation controls.
 
@@ -53,7 +53,7 @@ Placement answers one question: who reads this, and when? The answer picks the c
 | `IF ..., load` reference | this agent | when the predicate holds |
 | `MUST dispatch` procedure | a helper agent | on reaching the call |
 | `IF ..., dispatch` procedure | a helper agent | when the predicate holds |
-| cited judgment card | this agent | at the moment its citing sentence names |
+| cited principle | this agent | at the moment its citing sentence names |
 
 Review checks and research are steps the current agent loads and performs. Dispatch is only for a prescribed procedure: a command, watch, or mechanical transform with an observed result. A judgment check is never a dispatched procedure, even when it could be described as independent. Independent review is not dispatch: a review skill may start reviewer agents with no authoring history to walk its checks, and its lead verifies their findings.
 
@@ -77,23 +77,23 @@ Prescribed procedure
 The caller names the exact procedure, allowed commands or transformation, execution boundary, and result to return. The helper reports observations and exceptions; the calling agent judges them. A known check skipped under pressure cannot become a dispatched procedure because it is independent. Load its reference and perform it as a step.
 
 ```text
-Judgment card
-  <moment>, <action in plain words> ([<the card's judgment in plain words>](<relative path to the card's SKILL.md>)).
+Principle
+  <moment>, <action in plain words> ([<the principle's judgment in plain words>](<relative path to the principle's SKILL.md>)).
 
   strong  Before relying on a handback, match each claim to the commit, target and output you opened, or name it as a gap ([verify before accepting](../verify-before-accepting/SKILL.md)).
   weak    Before relying on a handback, verify it before you accept it ([verify before accepting](../verify-before-accepting/SKILL.md)).
   load    MUST load `references/handback-checks.md` and return each claim matched to its commit, target and output.
 ```
 
-A judgment card is defined in `references/glossary.md`. It ships in the same plugin as the citing file, and its first body line after the title is its read rule: "Read this card in full before applying it; your own full read earlier this session counts." The citing skill therefore writes no loader line. A card is only cited, never loaded; a reference or procedure is loaded or dispatched, never cited. The sentence carries the moment and the action, and the link carries the depth; steps and narrative prose use the same form. The moment is an observable point or condition in the work, held to the branch-predicate test in step 4. The action names what to produce or check at that moment, in words other than the link text. A bare name such as "apply X" or "(see X)" states no action, and neither does an action that restates the link text; either leaves the citation incomplete. Cite a card only where its judgment changes how this action is done. The path resolves from the file that holds the citation; from `references/`, add one `../`. A citation never replaces a load call for this skill's own procedure depth. Cite a card once per decision. The skills this one uses at a step are those it names or loads there; when one of them already cites the card for that decision, rely on that citation and do not repeat it here.
+A principle is defined in `references/glossary.md`. It ships in the same plugin as the citing file, and its first body line after the title is its read rule: "Read this principle in full before applying it; your own full read earlier this session counts." So the citing skill writes no loader line. A principle is only cited, never loaded; a reference or procedure is loaded or dispatched, never cited. The sentence carries the moment and the action, and the link carries the depth; steps and narrative prose use the same form. The moment is an observable point or condition in the work, held to the branch-predicate test in step 4. The action names what to produce or check at that moment, in words other than the link text. A bare name such as "apply X" or "(see X)" states no action, and neither does an action that restates the link text; either leaves the citation incomplete. Cite a principle only where its judgment changes how this action is done. The path resolves from the file that holds the citation; from `references/`, add one `../`. A citation never replaces a load call for this skill's own procedure depth. Cite a principle once per decision. The skills this one uses at a step are those it names or loads there; when one of them already cites the principle for that decision, rely on that citation and do not repeat it here.
 
 ### Progressive Disclosure
 
 Two different reasons move material out of `SKILL.md`.
 
-**Branch** — only some runs need it. Moving it out keeps every other run from reading it. This is the `IF <predicate>, load` case, and it is an attention decision.
+**Branch.** Only some runs need it. Moving it out keeps every other run from reading it. This is the `IF <predicate>, load` case, and it is an attention decision.
 
-**Module** — every run needs it, but it is one coherent thing that changes for its own reason. Moving it out keeps the main path scannable and lets that piece be maintained on its own. This is the `MUST load` case, and it is a maintenance decision.
+**Module.** Every run needs it, but it is one coherent thing that changes for its own reason. Moving it out keeps the main path scannable and lets that piece be maintained on its own. This is the `MUST load` case, and it is a maintenance decision.
 
 Moving all-run procedure behind `MUST load` does not move the obligation. The obligation, order, decision, required return, invariant, and completion stay visible in `SKILL.md`; the reference owns the detail.
 
@@ -101,11 +101,11 @@ Long examples, provider mechanics, branch-local rubrics, and exceptional procedu
 
 ## Leading Words
 
-A leading word is a compact concept the model already holds from pretraining — `root cause`, `vertical slice`, `tracer bullet`, `red-green`, `single source of truth`. Repeated as a token, it anchors a region of behavior in a few characters by recruiting priors the model already has.
+A leading word is a compact concept the model already holds from pretraining, such as `root cause`, `vertical slice`, `tracer bullet`, `red-green`, or `single source of truth`. Repeated as a token, it anchors a region of behavior in a few characters by recruiting priors the model already has.
 
 It works twice. In the body it anchors execution: the agent reaches for the same behavior every time the word appears. In the description it anchors invocation: when the same word lives in the user's prompts, docs, and code, the agent links that language to the skill and loads it more reliably.
 
-Prefer a word the model already has. A coined term recruits nothing — you pay in definition tokens what a pretrained word gives free. When a skill needs coined terms anyway, `references/glossary.md` owns them.
+Prefer a word the model already has. A coined term recruits nothing, so you pay in definition tokens what a pretrained word gives free. When a skill needs coined terms anyway, `references/glossary.md` owns them.
 
 A leading word too weak to beat the model's default changes nothing. `be thorough` is not a leading word when the agent is already thorough-ish.
 
@@ -115,9 +115,9 @@ IF a term is unclear, load `references/glossary.md` and return the applicable de
 
 Steering is the wording that changes what the agent does. Three moves carry most of it.
 
-**Completion criteria.** Test every one twice: can the agent tell done from not-done, and does it demand the legwork? `Understanding reached` fails the first — there is nothing to check. `Produce a change list` passes the first and fails the second — a list of nothing satisfies it. `Name every caller of the changed function and say which ones break` passes both, because it cannot be written without opening the callers. The second test is the one that gets skipped, and it is the one that buys depth.
+**Completion criteria.** Test every one twice: can the agent tell done from not-done, and does it demand the legwork? `Understanding reached` fails the first, because there is nothing to check. `Produce a change list` passes the first and fails the second, because a list of nothing satisfies it. `Name every caller of the changed function and say which ones break` passes both, because it cannot be written without opening the callers. The second test is the one that gets skipped, and it is the one that buys depth.
 
-**Rule strength.** Match the rule to how the agent fails. A rule it already follows needs no wording at all. A rule it skips under pressure needs a bright line — one unambiguous condition, no judgment call left at the moment of temptation — with the rationalization named beside it in the words the agent actually used. `I already know this` and `I'll verify later` belong in the skill, not in the postmortem.
+**Rule strength.** Match the rule to how the agent fails. A rule it already follows needs no wording at all. A rule it skips under pressure needs a bright line: one unambiguous condition that leaves no judgment call at the moment of temptation. Name the rationalization beside it in the words the agent actually used. `I already know this` and `I'll verify later` belong in the skill, not in the postmortem.
 
 **The deletion test.** Would the agent act differently if this sentence disappeared? Apply it sentence by sentence inside its surrounding context, never to whole sections at once. Rationale that changes no behavior is padding however true it is.
 
@@ -135,7 +135,7 @@ Include every applicable element below. Choose headings and a format that fit th
 - **Always-needed steering and invariants:** keep rules every run needs inline and near the decision they govern.
 - **Reference calls:** name the load mode, exact destination, and concrete result the main path consumes, plus the requested work where the result alone does not say what to do there.
 - **Dispatch, for a prescribed procedure:** fill the procedure form in the Call Grammar above.
-- **Citations, for a judgment card:** at the decision the card informs, fill the citation form in the Call Grammar above.
+- **Citations, for a principle:** at the decision the principle informs, fill the citation form in the Call Grammar above.
 - **Overall completion boundary:** name the proof, unresolved conditions, or blockers that prevent a done claim.
 
 ## Workflow
@@ -150,7 +150,7 @@ Classify the run as `create` or `update`. IF the request is to judge an existing
 
 An invitation like "just quickly fix it" that names neither a success definition nor an authoring basis is not a commission for an `update` run.
 
-Completion: classification, owner, reusable behavior, baseline (the current skill files and behavior the change starts from, or `none`), success definition, and the surface allocation — which of the four surfaces carries each part of the change — are named.
+Completion: classification, owner, reusable behavior, baseline (the current skill files and behavior the change starts from, or `none`), success definition, and the surface allocation (which of the four surfaces carries each part of the change) are named.
 
 ### 2. Choose the authoring basis and proof posture
 
@@ -162,9 +162,9 @@ Then classify the change, and classify why you are making it.
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | `mechanical`        | typos, formatting, version-only, or metadata-only edits with no behavior claim                                                                                                                                                       | static-only; skips both reviews                           |
 | `behavior-changing` | the diff alters trigger or invocation, mental model, main path, reference/check/schema allocation, steering, completion, proof, security, or platform contract                                                                        | both review stages plus the proof posture below           |
-| `scoped` (behavior-changing) | behavior-changing, and the entire diff is wording inside one owned home — `SKILL.md` prose or a single reference — touching no trigger, call site, branch predicate, check selection, schema, label set, security surface, or ownership boundary | each review stage narrows to its scoped form; proof rules unchanged |
+| `scoped` (behavior-changing) | behavior-changing, and the entire diff is wording inside one owned home (`SKILL.md` prose or a single reference) and touches no trigger, call site, branch predicate, check selection, schema, label set, security surface, or ownership boundary | each review stage narrows to its scoped form; proof rules unchanged |
 
-Every classification is a claim the next reader can check, and this session makes the call about its own work: `mechanical` names the surfaces the change touches and shows none is in the behavior-changing row; `behavior-changing` names which listed surface the diff alters; `scoped` names its one home and shows each excluded surface is untouched. Edits to `SKILL.md` prose, a reference's rules, or the description are behavior-changing whatever their size — small is not a surface.
+Every classification is a claim the next reader can check, and this session makes the call about its own work: `mechanical` names the surfaces the change touches and shows none is in the behavior-changing row; `behavior-changing` names which listed surface the diff alters; `scoped` names its one home and shows each excluded surface is untouched. Edits to `SKILL.md` prose, a reference's rules, or the description are behavior-changing whatever their size; size is not one of the listed surfaces.
 
 Behavior-changing work is either `observed failure` or `user-directed intent`. IF the change is behavior-changing, load `references/proof-and-claims.md` and return the proof shape for the skill type; for `observed failure` only, attempt faithful reproduction there, as runs that follow its Running section, and also return the reproduction result, representative-hypothesis boundary, and available next decisions.
 
@@ -173,7 +173,7 @@ Behavior-changing work is either `observed failure` or `user-directed intent`. I
 
 Never manufacture RED, and never let a passing control automatically forbid authoring. "I already know the wording problem" is not a skip.
 
-Completion: authoring basis, reproduction result when applicable, user decision, and strongest honest proof posture are explicit — and each sourcing return that ran exists. A `mechanical` classification names the surfaces it touched; a `scoped` classification names its one home and shows each excluded surface is untouched.
+Completion: authoring basis, reproduction result when applicable, user decision, and strongest honest proof posture are explicit, and each sourcing return that ran exists. A `mechanical` classification names the surfaces it touched; a `scoped` classification names its one home and shows each excluded surface is untouched.
 
 ### 3. Design the trigger
 
@@ -191,11 +191,11 @@ Decide what concept, lens, or leading word the skill should pull into the model'
 
 Express the body in the form this skill needs: steps, a compact route, references, or a mix. IF the classification is `create` or the main-path shape is contested, load `references/worked-examples.md` to anchor the small end of the range and return the shape choice for this skill. Keep the all-run spine, always-needed steering, and the overall completion boundary visible. Put ordered steps in `SKILL.md` only when order changes behavior. Name the workflow from load to completion.
 
-Add a branch only when an observable condition changes the work; a topic being interesting, provider-specific, or detailed is not enough. `IF the skill needs more depth, load ...` is a topic wearing IF clothing; `IF the diff adds a script, load references/security-gate.md` is a branch — the condition is observable and the work changes. Each branch names its predicate, action or destination, and concrete return. A result of only "more context" is incomplete.
+Add a branch only when an observable condition changes the work; a topic being interesting, provider-specific, or detailed is not enough. `IF the skill needs more depth, load ...` is a topic wearing IF clothing; `IF the diff adds a script, load references/security-gate.md` is a branch, because the condition is observable and the work changes. Each branch names its predicate, action or destination, and concrete return. A result of only "more context" is incomplete.
 
 #### The call sites
 
-Write every call site here, in the grammar above. A `load` site names its mode, path, and needed result, plus the requested work where the result alone does not say what to do there. A `dispatch` site names a prescribed procedure, its steps and boundary, and the observed result. A citation names an observable moment and the action, and links its judgment card relatively. Review checks and research use `load` sites.
+Write every call site here, in the grammar above. A `load` site names its mode, path, and needed result, plus the requested work where the result alone does not say what to do there. A `dispatch` site names a prescribed procedure, its steps and boundary, and the observed result. A citation names an observable moment and the action, and links its principle relatively. Review checks and research use `load` sites.
 
 #### The wording
 
@@ -217,7 +217,7 @@ Completion: the mental model is stated before details or exceptions; one all-run
 
 ### 5. Place the depth
 
-Keep all-run obligations, decisions, invariants, required returns, and completion in the body while allowing coherent detailed procedure to have its own owner. MUST load `references/reference-design.md` and return the placement decision plus the ordinary caller/callee contract. A draft shown in the conversation still shows each file it would create under its own path: provider mechanics and long examples that Progressive Disclosure moves out appear as their own `references/<name>.md`, called with the load mode the placement decision chose — `IF ..., load` for branch-only detail such as alternative providers, `MUST load` for an all-run module. Showing the draft in chat is not a request to keep that depth inline; only an explicit request for one file keeps it in `SKILL.md`. Asking for the `SKILL.md` draft is not a one-file request. Depth must teach: a reference owning a promised stage carries what to inspect, what good and bad look like, and when to stop — written from the step-2 sourcing records or a named source; a reference that only pins output shape (schemas, label sets, packet forms) is ceremony, justified by a named consumer and never a stage's owner. IF several consumers need one stable output shape or a tool validates the structure, load `references/shared-shape-design.md` and return the output or tool shape owner and its consumers. Completion: nothing sits in two homes, every reference exists because a named call site asked for it, every promised stage names its teaching owner — an inline body section or a teaching reference — and advanced shape guidance remains discoverable.
+Keep all-run obligations, decisions, invariants, required returns, and completion in the body while allowing coherent detailed procedure to have its own owner. MUST load `references/reference-design.md` and return the placement decision plus the ordinary caller/callee contract. A draft shown in the conversation still shows each file it would create under its own path: provider mechanics and long examples that Progressive Disclosure moves out appear as their own `references/<name>.md`, called with the load mode the placement decision chose: `IF ..., load` for branch-only detail such as alternative providers, and `MUST load` for an all-run module. Showing the draft in chat is not a request to keep that depth inline; only an explicit request for one file keeps it in `SKILL.md`. Asking for the `SKILL.md` draft is not a one-file request. Depth must teach: a reference owning a promised stage carries what to inspect, what good and bad look like, and when to stop, written from the step-2 sourcing records or a named source; a reference that only pins output shape (schemas, label sets, packet forms) is ceremony, justified by a named consumer and never a stage's owner. IF several consumers need one stable output shape or a tool validates the structure, load `references/shared-shape-design.md` and return the output or tool shape owner and its consumers. Completion: nothing sits in two homes, every reference exists because a named call site asked for it, every promised stage names its teaching owner (an inline body section or a teaching reference), and advanced shape guidance remains discoverable.
 
 ### 6. Write the skill spec and get it reviewed
 
@@ -235,7 +235,7 @@ The run is not done while any of these hold:
 - behavior-changing authoring lacks a human-readable success definition or authoring basis;
 - an observed-failure path hides a failed, missing, or inconclusive reproduction result instead of returning the user decision;
 - the workflow has branches without observable predicates or return shapes;
-- a promised stage or branch has no teaching owner — an inline body section or a reference that teaches it; a shape-only reference never owns a stage and separately requires a named consumer;
+- a promised stage or branch has no teaching owner, meaning no inline body section or reference that teaches it; a shape-only reference never owns a stage and separately requires a named consumer;
 - a dispatch site is judgment work rather than a prescribed procedure, or omits its steps, boundary, or observed result;
 - a behavior-changing change reached implementation without an accepted spec review or an explicit user skip;
 - implementation completed without comparing the diff to the accepted spec boundary;

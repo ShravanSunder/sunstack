@@ -63,7 +63,7 @@ debug-*              root-cause investigation      debug-investigation
 docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
-principle-*          engineering judgment cards    principle-hold-the-scope
+principle-*          engineering judgment          principle-hold-the-scope
                                                   principle-build-the-shared-model-first
                                                   principle-define-the-domain-first
                                                   principle-read-ground-truth-first
@@ -197,7 +197,7 @@ Use `implementation-handoff` when real implementation state exists: branch, diff
 
 ## Principles
 
-Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill cites one with a relative link at the decision it informs, and each card opens with its read rule. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
+Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill cites one with a relative link at the decision it informs, and each principle opens with its read rule. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
 
 ## Supporting Skills
 

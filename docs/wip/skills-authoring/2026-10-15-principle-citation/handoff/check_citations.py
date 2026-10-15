@@ -5,10 +5,10 @@ Usage: python3 -I check_citations.py <repo-root>
 
 Checks:
   1. every markdown link to .../principle-*/SKILL.md under plugins/ resolves
-     from its file, to a principle card in the same plugin;
+     from its file, to a principle in the same plugin;
   2. no `load principle-` call (with or without a backtick) remains in plugins/;
   3. no `principle-reading` outside docs/wip/ and changelogs dated before 2026-10-14;
-  4. all 17 cards have the read rule as their first body line after the H1;
+  4. all 17 principles have the read rule as their first body line after the H1;
   5. lists every citation sentence with file:line.
 Exit 1 when any check fails.
 """
@@ -17,7 +17,7 @@ import re
 import subprocess
 import sys
 
-READ_RULE = "Read this card in full before applying it; your own full read earlier this session counts."
+READ_RULE = "Read this principle in full before applying it; your own full read earlier this session counts."
 LINK = re.compile(r"\]\(([^)\s]*principle-[a-z-]+/SKILL\.md)\)")
 LOAD = re.compile(r"load `?principle-")
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z\"“])")
@@ -54,13 +54,13 @@ def main():
             for target in LINK.findall(line):
                 resolved = os.path.normpath(os.path.join(root, os.path.dirname(rel), target))
                 plugin_dir = os.path.join(root, *rel.split("/")[:2])
-                card_dir = os.path.basename(os.path.dirname(resolved))
+                principle_dir = os.path.basename(os.path.dirname(resolved))
                 if not os.path.isfile(resolved):
                     failures.append(f"[link] {rel}:{n}: {target} does not resolve")
                 elif not resolved.startswith(plugin_dir + os.sep):
                     failures.append(f"[link] {rel}:{n}: {target} leaves plugin {plugin_dir}")
-                elif not card_dir.startswith("principle-"):
-                    failures.append(f"[link] {rel}:{n}: {target} is not a principle card")
+                elif not principle_dir.startswith("principle-"):
+                    failures.append(f"[link] {rel}:{n}: {target} is not a principle")
             if LINK.search(line):
                 for sentence in citation_sentences(line):
                     citations.append(f"{rel}:{n}: {sentence}")
@@ -79,18 +79,18 @@ def main():
             if "principle-reading" in line:
                 failures.append(f"[principle-reading] {rel}:{n}: {line.strip()[:160]}")
 
-    cards = sorted(p for p in files
+    principles = sorted(p for p in files
                    if re.fullmatch(r"plugins/sunstack-dev/skills/principle-[a-z-]+/SKILL\.md", p))
-    if len(cards) != 17:
-        failures.append(f"[cards] expected 17 cards, found {len(cards)}")
-    for rel in cards:
+    if len(principles) != 17:
+        failures.append(f"[principles] expected 17 principles, found {len(principles)}")
+    for rel in principles:
         lines = read_lines(os.path.join(root, rel))
         h1 = next((i for i, l in enumerate(lines) if l.startswith("# ")), None)
         body = next((l for l in lines[h1 + 1:] if l.strip()), None) if h1 is not None else None
         if body != READ_RULE:
             failures.append(f"[read-rule] {rel}: first body line is {body!r}")
 
-    print(f"cards checked: {len(cards)}")
+    print(f"principles checked: {len(principles)}")
     print(f"citation sentences: {len(citations)}")
     for c in citations:
         print("  " + c)

@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Design for Failure
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 When your code reaches outside itself (a payment provider, another service, a queue, a database someone else reads), a call does not end two ways. It worked; it was rejected; it failed in a way worth retrying; it got partway; or **you don't know**. A timeout, a dropped connection, or a crash puts you in that last ending: the effect may have happened on the other side, may still be happening, or may never happen. "Unknown" is its own outcome. It is not a failure, and it is never a guessed success.
 

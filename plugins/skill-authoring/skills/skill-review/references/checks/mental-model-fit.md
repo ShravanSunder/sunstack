@@ -23,7 +23,7 @@ cost         is a coined term carrying weight a pretrained word carries free?
 coverage     does the workflow walk the lens, or abandon it after the intro?
 ```
 
-The last one is the most common failure. A skill states a frame in its opening section and then runs a procedure organized on some other principle, leaving the frame as decoration.
+The last one is the most common failure. A skill states a frame in its opening section and then runs a procedure organized around some other idea, leaving the frame as decoration.
 
 Good signals:
 - the lens is stated once and the workflow visibly follows it;

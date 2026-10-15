@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Prove It Works
 
-Read this card in full before applying it; your own full read earlier this session counts.
+Read this principle in full before applying it; your own full read earlier this session counts.
 
 A passing test proves only what it observes. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider production selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
 
