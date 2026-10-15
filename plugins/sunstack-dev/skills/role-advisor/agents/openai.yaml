@@ -1,5 +1,5 @@
 interface:
-  display_name: "Advisor"
+  display_name: "Role: Advisor"
   short_description: "Challenge the model with evidence and tradeoffs"
   default_prompt: "Use $role-advisor to challenge the assigned picture with checked alternatives and their tradeoffs."
 policy:
