@@ -348,19 +348,19 @@ A3, A4, A9, A10 (`shape-catalog.md:275`, `:726` and the family-to-picker line), 
 
 | Run | Target | State |
 |---|---|---|
-| — | `shared-references/principle-reading.md` (shared prerequisite, no skill target; lands before the pointer lines) | proposed |
-| R1 | principle-write-tests-that-can-fail | implemented · v3 corrections pending · behavior unverified/deferred |
-| R2 | principle-verify-before-accepting | implemented · v3 corrections pending · behavior unverified/deferred |
-| R3 | practices-research | implemented · v3 corrections pending · behavior unverified/deferred |
-| R4 | practices-manage-agents | implemented · v3 corrections pending · behavior unverified/deferred |
-| R5 | practices-collaboration | implemented · v3 corrections pending · behavior unverified/deferred |
-| R6 | practices-show-me-your-work | implemented · v3 corrections pending · behavior unverified/deferred |
-| R7 | presentation-webui | implemented · v3 corrections pending · behavior unverified/deferred |
-| R8 | presentation-tui | implemented · v3 corrections pending · behavior unverified/deferred |
-| R9 | ops-linear-tracking | implemented · v3 corrections pending · behavior unverified/deferred |
-| R10 | ops-observability-stack | implemented · v3 corrections pending · behavior unverified/deferred |
-| R11 | ops-security-review | implemented · v3 corrections pending · behavior unverified/deferred |
+| — | `shared-references/principle-reading.md` (shared prerequisite, no skill target; lands before the pointer lines) | implemented · correction review pending |
+| R1 | principle-write-tests-that-can-fail | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R2 | principle-verify-before-accepting | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R3 | practices-research | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R4 | practices-manage-agents | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R5 | practices-collaboration | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R6 | practices-show-me-your-work | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R7 | presentation-webui | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R8 | presentation-tui | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R9 | ops-linear-tracking | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R10 | ops-observability-stack | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
+| R11 | ops-security-review | implemented · v3 corrections applied, correction review pending · behavior unverified/deferred |
 
 ## Implementation state, 2026-10-14
 
-R1–R11 are committed on `skills/practices-principles` as draft PR #131, head `b064824`, base #127 `0bad422`. `16e0bd8a` records the implementation slices, `b7d6541f` authors R1–R11, and `b0648241` reconciles readiness and clarifies prose, including the Linear rule and README edits that V3-5 and V3-7 now admit. Version 2.77.0 is set in all three client manifests and marketplace entries. Independent cross-lineage implementation review at `b064824` returned `targeted-revision` with ship decision `blocked`; findings D1–D6 and A1–A18 are open, and owner decision D7 was added. In a throwaway worktree the review lead observed `git diff --check` clean, `claude plugin validate .` passing, the skill suite at 149/149 and typecheck exit 0. Behavior proof stays deferred by the owner. The v3 corrections are in progress on this branch; no merge, release or cache refresh has happened.
+R1–R11 are committed on `skills/practices-principles` as draft PR #131, head `b064824`, base #127 `0bad422`. `16e0bd8a` records the implementation slices, `b7d6541f` authors R1–R11, and `b0648241` reconciles readiness and clarifies prose, including the Linear rule and README edits that V3-5 and V3-7 now admit. Version 2.77.0 is set in all three client manifests and marketplace entries. Independent cross-lineage implementation review at `b064824` returned `targeted-revision` with ship decision `blocked`; findings D1–D6 and A1–A18 are open, and owner decision D7 was added. In a throwaway worktree the review lead observed `git diff --check` clean, `claude plugin validate .` passing, the skill suite at 149/149 and typecheck exit 0. Behavior proof stays deferred by the owner. The v3 corrections, including V3-9, are applied on this branch in local commits after `4d05ac7` and await the review lead's verification. After them the implementer observed the skill suite at 149/149, typecheck exit 0, `claude plugin validate .` passing and `git diff --check` clean. Nothing is pushed, and no merge, release or cache refresh has happened.
