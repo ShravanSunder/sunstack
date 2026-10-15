@@ -20,6 +20,8 @@ Model-invocable, user-invocable, context load, cognitive load, and router skills
 
 - Load mode: the caller-owned choice between all-run `MUST load` and conditional `IF <observable predicate>, load`.
 - Mandatory reference: coherent all-run detail consumed through `MUST load` while its parent obligation and completion stay visible in `SKILL.md`.
+- Judgment card: a skill hidden from model invocation that holds the judgment for one kind of decision and opens with its own read rule.
+- Citation: the call form for a judgment card — a sentence that names the moment and the action, followed by a relative link to the card.
 
 - Steps: ordered actions the agent performs. They belong in `SKILL.md` when order changes behavior.
 - All-run spine: the part of the workflow every invocation needs. It belongs in `SKILL.md`.

@@ -16,6 +16,7 @@ shared model-readable output                             -> references/<name>-ou
 machine-validated structure                              -> schemas/<name>.schema.json
                                                             or references/<name>-tool-schema.md
 deterministic executable mechanic                        -> scripts/
+judgment held by a judgment card                         -> cite the card at the decision (../SKILL.md, Call Grammar)
 term meaning only                                        -> glossary.md
 no behavior change                                       -> prune
 ```
@@ -34,7 +35,7 @@ IF `<observable predicate>`, load `<reference>` and return `<result>`.
 ...add `to <requested work>` when the result alone does not say what to do there.
 ```
 
-Use `MUST load` for an all-run reference pass. Use `IF` with an observable predicate for a branch that changes the work. Give every caller exactly one of those literal markers.
+Use `MUST load` for an all-run reference pass. Use `IF` with an observable predicate for a branch that changes the work. Give every ordinary reference caller exactly one of those literal markers. A judgment card is cited, never loaded, from `SKILL.md` and from a reference alike; the Call Grammar in `../SKILL.md` owns that form.
 
 The caller owns:
 

@@ -1,6 +1,6 @@
 # Principle citation grammar — skill spec
 
-Spec v2, 2026-10-15. Owner plugin `skill-authoring` (0.1.1 at base). Two runs, one named skill each: **R1 `skill-creation`**, then **R2 `skill-review`**. Both are `update`, `behavior-changing`, not `scoped`. Spec only: no skill file changes in this commit. v2 applies the v1 spec review; see [Review record](#review-record).
+Spec v2, 2026-10-15. Owner plugin `skill-authoring` (0.1.1 at base). Two runs, one named skill each: **R1 `skill-creation`**, then **R2 `skill-review`**. Both are `update`, `behavior-changing`, not `scoped`. v2 applies the v1 spec review and was accepted at `cd26f9b3`; see [Review record](#review-record) and [Run status](#run-status).
 
 ## Problem and evidence
 
@@ -274,7 +274,12 @@ No sensitive surface is in scope (list in `security-gate.md`). The edits touch M
 - Implementation decision: `revise-first`.
 - Every finding is inside the owner's three decisions.
 
-**v2 (this revision)** applies findings F1–F18. It now awaits the same review lead's verification of the corrected anchors. The author does not review this spec.
+**v2 (`cd26f9b3`)** applies findings F1–F18. The author does not review this spec.
+
+**Acceptance (2026-10-15).** The same review lead verified all 18 findings at their anchors in `cd26f9b3`. Acceptance closes:
+- Accepted revision: `cd26f9b3`.
+- Verdict: `great`.
+- Implementation decision: `accepted-to-implement`.
 
 | finding | change in v2 |
 |---|---|
