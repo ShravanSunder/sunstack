@@ -38,7 +38,7 @@ Constraints:
 - Preserve report paths.
 - Validate plausible findings before remediation.
 - Do not fix anything unless this prompt explicitly asks for one finding fix.
-- Create, update or persist a threat model only when explicitly requested; preserve the selected workflow's actual prerequisites and report what remains missing.
+- Create, update or persist a threat model only when explicitly requested. Read the selected official skill's stated prerequisites; report a missing one before invoking it.
 
 Return:
 - scan route used
