@@ -22,9 +22,11 @@ If the user asked for an exact format or a terse answer, or the whole reply fits
 
 ## Media selection
 
-Before media selection for a substantial explanation, MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it. Use that result to choose what the explanation shows; keep required relationships, assumptions, risks and unknowns intact.
+IF this run reaches a `principle-*` call, load `../../shared-references/principle-reading.md` before that call and return the principle file to read and whether a read you already made counts.
 
-The table is ordered smallest to largest. Walk down it and stop at the first medium that makes the point without a caption explaining it. Compare smaller choices in working state; the reply need not narrate their rejection.
+MUST load `principle-write-for-the-reader` and return the reader's next question or action and the smallest view that answers it.
+
+The table is ordered smallest to largest. Walk down it and stop at the first medium that makes the point without a caption explaining it. Don't name the rejected smaller medium in the reply.
 
 | Medium | Inspect | Good / bad signal |
 |---|---|---|
