@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Verification"
+  short_description: "Check a declared behavior on its real target"
+  default_prompt: "Use practices-verification to check this behavior on its intended target with an observation that can catch the wrong behavior, and report what the evidence supports."
