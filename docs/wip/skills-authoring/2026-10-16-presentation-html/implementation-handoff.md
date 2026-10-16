@@ -7,15 +7,15 @@ Date: 2026-10-16. Stage: post-review, source branch pushed; default-branch integ
 This section is current at cd20df72. The sections below keep the original standalone cut, its proof and its reviews at the versions they observed; where they name the fc86a941 base or version 2.81.0, read them as historical.
 
 - Stack: draft [PR #137](https://github.com/ShravanSunder/sunstack/pull/137) (`feat/presentation-html-cloudflare`) is stacked on PR #136 (`skills/preflight-cleanup-domain`), which bases on main.
-- Integration merge: cd20df72b39c8517b75c441c523db2cb57be1d14 merges #136's head c66ccb09 into this branch's 7ff5e920 without rewriting history. Review cd20df72, or its successor once the I1 and I2 corrections are committed.
+- Integration merge: cd20df72b39c8517b75c441c523db2cb57be1d14 merges #136's head c66ccb09 into this branch's 7ff5e920 without rewriting history. Later commits on this branch add the I1/I2 corrections, the shared presentation-reference loads (4f158d59), the removal of measurement accounting from the proof record, and later #136 merges; review the branch head.
 - Version: all six sunstack-dev version homes are 2.82.0. #136 carries 2.81.0.
-- Skill source: `plugins/sunstack-dev/skills/presentation-html/` is unchanged since f18980581a009e8f985ce927105e66b564275a4f, apart from the I1 fix.
-- Review state: the Advisor's integration review returned targeted-revision with two accepted findings. I1 adds principle citations at SKILL.md steps 1, 2 and 4. I2 is this addendum and the matching update to [the prompt](copy-paste-prompt.md). Both corrections go back to the same review lead for a correction check. Sol browser verification of the fresh trial pages is running; its result is not recorded here.
+- Skill source: `plugins/sunstack-dev/skills/presentation-html/` changed since f18980581a009e8f985ce927105e66b564275a4f in two ways: the I1 principle citations (78e3e185) and step 3 loading the three shared presentation references like its siblings (4f158d59).
+- Review state: the Advisor's integration review returned targeted-revision with two accepted findings. I1 adds principle citations at SKILL.md steps 1, 2 and 4. I2 is this addendum and the matching update to [the prompt](copy-paste-prompt.md). Both corrections go back to the same review lead for a correction check.
 
 The two diffs answer different questions:
 
-- Presentation increment, what #137 adds over its #136 base (17 paths): `git diff c66ccb09..cd20df72`
-- Integration reconciliation, what the merge brought into this branch (#136's work plus the version and registration resolutions, 64 paths): `git diff 7ff5e920..cd20df72`
+- Presentation increment, what #137 adds over its #136 base: `git diff origin/skills/preflight-cleanup-domain...HEAD`
+- Integration reconciliation, the merge commits that bring #136 into this branch with the version and registration resolutions: `git log --merges origin/skills/preflight-cleanup-domain..HEAD`
 
 ## Objective and governing authority
 
