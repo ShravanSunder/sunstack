@@ -2,13 +2,30 @@
 
 Date: 2026-10-16. Stage: post-review, source branch pushed; default-branch integration and installed availability pending.
 
+## Current integration (addendum)
+
+This section is current at cd20df72. The sections below keep the original standalone cut, its proof and its reviews at the versions they observed; where they name the fc86a941 base or version 2.81.0, read them as historical.
+
+- Stack: draft [PR #137](https://github.com/ShravanSunder/sunstack/pull/137) (`feat/presentation-html-cloudflare`) is stacked on PR #136 (`skills/preflight-cleanup-domain`), which bases on main.
+- Integration merge: cd20df72b39c8517b75c441c523db2cb57be1d14 merges #136's head c66ccb09 into this branch's 7ff5e920 without rewriting history. Review cd20df72, or its successor once the I1 and I2 corrections are committed.
+- Version: all six sunstack-dev version homes are 2.82.0. #136 carries 2.81.0.
+- Skill source: `plugins/sunstack-dev/skills/presentation-html/` is unchanged since f18980581a009e8f985ce927105e66b564275a4f, apart from the I1 fix.
+- Review state: the Advisor's integration review returned targeted-revision with two accepted findings. I1 adds principle citations at SKILL.md steps 1, 2 and 4. I2 is this addendum and the matching update to [the prompt](copy-paste-prompt.md). Both corrections go back to the same review lead for a correction check. Sol browser verification of the fresh trial pages is running; its result is not recorded here.
+
+The two diffs answer different questions:
+
+- Presentation increment, what #137 adds over its #136 base (17 paths): `git diff c66ccb09..cd20df72`
+- Integration reconciliation, what the merge brought into this branch (#136's work plus the version and registration resolutions, 64 paths): `git diff 7ff5e920..cd20df72`
+
 ## Objective and governing authority
 
 The owner asked for a Sunstack presentation-html skill that any agent can use to make compact standalone engineering explainers with the public Cloudflare Demistify library, and now requests another agent to use/run it and review/integrate it. The library owns rendering, themes, components and interactions. The agent owns meaning, content and ordinary HTML composition. An HTML consumer needs two public asset tags, not a framework install or a new application build.
 
 Plan identity: none. The governing non-plan request is the owner's named-skill creation and current use/review/integration request. [Accepted S2](spec.md) governs the implementation. Do not fabricate a canonical implementation plan or route a planless packet into generic implementation-review; the named-skill workflow is skill-authoring:skill-review followed by the repository's integration/release workflow. The previous delivery boundary was feature-branch commit/push. This handoff does not claim main merge, hosted CI, release or cache installation.
 
-## Exact source and diff
+## Exact source and diff (historical, pre-stack)
+
+This is the original standalone cut. The implementation head still identifies the skill source; the base, diff and version below are superseded by Current integration above.
 
 - Repository: https://github.com/ShravanSunder/sunstack
 - Branch: feat/presentation-html-cloudflare
@@ -36,7 +53,7 @@ The remaining 12 implementation paths are:
 - Inventory/documentation: AGENTS.md, plugins/sunstack-dev/README.md, docs/changelog/README.md and docs/changelog/2026-10-16-presentation-html.md.
 - Governing/proof documents: this directory's spec.md and docs/changelog/references/2026-10-16-presentation-html-proof.md.
 
-All six plugin/marketplace version homes currently agree on 2.81.0. Recheck current main before integrating; if another release uses that version, update all six consistently. Preserve unrelated upstream work and follow repository Git policy without history rewriting.
+Historical, at f1898058: all six plugin/marketplace version homes agreed on 2.81.0. #136 later took 2.81.0, so the integration merge moved all six to 2.82.0 (Current integration above). Recheck the #136 base and current main before integrating; if another release uses that version, update all six consistently. Preserve unrelated upstream work and follow repository Git policy without history rewriting.
 
 ## Use and run immediately
 
