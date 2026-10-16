@@ -32,9 +32,9 @@ Codex skills are delivered by installed Codex plugins. Do not add runtime sync s
 
 Claude Code can load the same skill tree when a plugin also has `.claude-plugin/plugin.json`. Keep shared workflow skills under the plugin that owns them.
 
-## Standing ACPX Authority
+## Agent Delegation
 
-The user has always granted, and continues to grant, standing authority to use ACPX for in-scope agent work, including the runtime writes ACPX and its Codex adapter require beneath `~/.acpx` and `~/.codex`. ACPX access does not require separate conversational approval. When sandbox enforcement requires those filesystem capabilities, request them directly through the platform permission mechanism and continue once granted. This standing authority does not broaden the delegated task, reviewer write authority, model choice, publication authority, or merge authority.
+For helpers, sessions and their models, use `practices-manage-agents`; for Router sessions, boards and messages, use `agent-collaboration`.
 
 ## Skill Work SOP
 

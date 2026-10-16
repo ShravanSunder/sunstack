@@ -14,7 +14,7 @@ A Sidekick is a separately managed session, addressed through agent-router and r
 
 To create a session without starting its work, use agent-router's conversation create, which returns the address and starts nothing.
 
-Keep one current row per Sidekick before any prompt that relies on its history: name, address, worktree, model and effort, status, last prompt, and what is expected back. Label each id with its transport (agent-router SessionRef, ACPX record, or provider-native id); they are not interchangeable.
+Keep one current row per Sidekick before any prompt that relies on its history: name, address, worktree, model and effort, status, last prompt, and what is expected back. Label each id with its transport (agent-router SessionRef or provider-native id); they are not interchangeable.
 
 | When | Do |
 |---|---|
@@ -32,8 +32,7 @@ The exact model id follows the exact-id rule in `SKILL.md` under Model catalog.
 - IF Claude spawns a Worker, load `references/native-providers-claude.md` and return the spawn encoding.
 - IF Cursor spawns a Worker, load `references/native-providers-cursor.md` and return the spawn encoding.
 - IF the host has no native model for the row (Luna from a Claude host, for example), run the helper as a Sidekick through agent-router within the commissioner's grant, and return its address. It keeps the bounded job's row and closing check.
-- IF agent-router can't meet the model, effort, access or title, load `references/acpx-legacy.md` and return the route. An access denial needs the grant, not a route switch.
-- IF you are building or wrapping an ACP adapter, load `references/building-acp-adapters.md` and return its checklist.
+- IF agent-router can't meet the model, effort, access or title, report that gap to the commissioner. An access denial needs the grant, not a route switch.
 
 ## Continue
 
