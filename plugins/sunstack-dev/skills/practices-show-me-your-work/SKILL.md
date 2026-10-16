@@ -11,7 +11,7 @@ A task qualifies when it spans sessions, commissions another agent, crosses comp
 
 ## Open or resume
 
-At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference or `no-home: <gap>`.
+At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference or `no-home: <gap>`. When the thread is new, its first entry carries the goal, scope, orchestrator, repository and worktree, and links to the relevant artifacts.
 
 IF that load returns `no-home`, the thread you used drops, or a board appears after no-board work was recorded, load `references/no-board-trace.md` and return the session-logs file you write to, the reconciled thread, or the exact gap.
 

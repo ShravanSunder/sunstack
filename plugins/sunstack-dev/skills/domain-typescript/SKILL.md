@@ -122,7 +122,7 @@ Before creating a file or folder, name the one responsibility it holds (`databas
 
 The repository's own scripts, oxlint config and formatter config win over anything listed here, and the formatter owns indentation and layout. Follow the oxlint rules without exceptions: fix the code instead of adding a disable comment.
 
-IF the repo defines no lint, format, type-check or test script for the changed path, or a type error points into another workspace package, load `references/toolchain.md` and return the commands to run for the changed paths, including any workspace package to build first.
+IF the repo defines no lint, format, type-check or test script for the changed path, a type error points into another workspace package, or you're adding a component in a shadcn project (`components.json` present), load `references/toolchain.md` and return the commands to run for the changed paths, including any workspace package to build first, and for a new component the shadcn command that adds it.
 
 ## Signs you skipped it
 

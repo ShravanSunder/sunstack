@@ -6,13 +6,11 @@ This is your side of working with an Advisor. You commission one only when the o
 
 When you commission it, send the work's context: the governing artifacts as paths it can open, the current state with anchors (branch and commit, the trace, open handbacks and review results), and the owner's goal in the owner's words. Add your own questions if you have any. Leave out a list of points to check, because finding the high-risk points is the Advisor's job. A list hands it your blind spots: it checks what you already suspected and never reaches the part you didn't think to name. A summary in place of the files does the same, because it can only check your summary. Leave out any request to sign off, because its agreement can't be a sign-off.
 
-Give it the unblocking job in the same commission. Read or write access tells the Advisor what it may touch, not which sessions it may wake, so an Advisor commissioned with access alone can watch your work stall and do nothing about it. The packet's `unblockGrant` carries the rest. Fill it from the work as it stands:
+Give it the unblocking job in the same commission, with the packet's `unblockGrant`. Fill it from the work as it stands:
 
 - `resumableSessions`: the exact address of every helper session the work can stall on. When you start a helper later, send the Advisor an updated grant that adds it.
 - `helperStarts`: `bounded-collection` when an Operator or a Researcher Worker could fetch a missing input or evidence without you; otherwise `none`.
 - `whenLeadUnreachable`: what it does when you don't answer, in words it can act on, such as "post the stall on the work thread, keep resuming the listed sessions, and message the owner once if the review is still stopped by morning." The owner hears from you by default, so say whether the Advisor may reach the owner.
-
-**Case:** overnight on 2026-10-15, the Advisor's commission granted access and said nothing about stalls. The master reviewer's session wasn't loaded, two of the Lead's messages never started a turn, and the Advisor's wakes reported "No implementation/investigation/proof resumed by Advisor" for hours. **Clean case:** the commission lists the reviewer's session in `resumableSessions`, so the first wake that finds it unloaded resumes it with the Lead's messages and reports the cause.
 
 When the owner opened it, give it the files and anchors it asks for, and leave the owner's questions as the owner framed them.
 

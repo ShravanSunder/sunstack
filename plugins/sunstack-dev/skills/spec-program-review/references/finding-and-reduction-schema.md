@@ -17,7 +17,7 @@ semantic correction route: spec-design | program-design | caller | spec-design -
 validation note
 semantic coverage to rerun
 contested evidence
-accepted requirement identity or confirmed goal-boundary field
+accepted requirement identity or confirmed goal-boundary field, or a domain-skill rule for a language-specific design finding
 governing source identity and exact section or field
 quoted or faithful obligation text
 plain-language requirement meaning
@@ -33,6 +33,8 @@ Severity follows consequence, not tone:
 - important: correctness depends on guessing or inconsistent interpretation;
 - minor: intended model lands with avoidable ambiguity/cost;
 - observation: no proven behavior effect.
+
+A domain-skill rule anchors a language-specific design finding when it comes from a `domain-<lang>` skill loaded for a language the design targets, because those skills hold the owner's language standards. The rule takes the requirement's place in every anchor field and check, and the finding routes to `program-design`. Where the repository's own conventions differ, the repository wins and the finding doesn't stand.
 
 ## Reviewer Sidekick verification
 

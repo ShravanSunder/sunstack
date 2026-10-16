@@ -1,10 +1,10 @@
 # TypeScript toolchain
 
-This reference owns the default lint, format, type-check and test commands for a TypeScript repo that doesn't define its own, and the fix for type errors that come from a stale workspace package.
+This reference owns the default lint, format, type-check and test commands for a TypeScript repo that doesn't define its own, the fix for type errors that come from a stale workspace package, and the command that adds a shadcn component.
 
 Expected inputs: the changed paths, and the type error when one sent you here.
 
-Return: the commands to run for the changed paths, including any workspace package to build before the type check.
+Return: the commands to run for the changed paths, including any workspace package to build before the type check, and for a new component the shadcn command that adds it.
 
 ## Default commands
 
@@ -28,4 +28,4 @@ When a package depends on a workspace package that uses conditional exports, the
 
 A `components.json` at the app root marks a shadcn project. Add components with the latest CLI: `pnpx shadcn@latest add button`.
 
-Complete when: every changed path has a lint, type check, format check and test command, each one the repo's own where it defines one.
+Complete when: every changed path has a lint, type check, format check and test command, each one the repo's own where it defines one, and a new component has the shadcn command that adds it.

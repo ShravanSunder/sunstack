@@ -93,7 +93,7 @@ let bundle = tokio::task::spawn_blocking(move || secret_store.read_secret(&key))
 
 When work leaves the hot path through `tokio::spawn`, register it with a `TaskTracker` or the crate's equivalent, give it a cancellation path, and drain it at shutdown ([every background task has an owner](../principle-design-for-concurrency/SKILL.md)).
 
-Before putting a `Mutex` around state that crosses an `.await`, check whether one owning task can hold that state instead; when a lock stays, look the key up synchronously and hold a per-key `tokio::sync::Mutex` lease, never a `std::sync::Mutex` guard across the `.await` ([remove the sharing before you serialize it](../principle-design-for-concurrency/SKILL.md)).
+Before putting a `Mutex` around state that crosses an `.await`, check whether one owning task can hold that state instead; when a lock stays, choose its scope from the invariant it protects, hold a per-key `tokio::sync::Mutex` lease with a synchronous key lookup when the resources are independently keyed, and never hold a `std::sync::Mutex` guard across the `.await` ([remove the sharing before you serialize it](../principle-design-for-concurrency/SKILL.md)).
 
 ## Names
 
@@ -103,7 +103,7 @@ When naming a function, name the effect it has: `attach_and_observe` is not a re
 
 ## Storage
 
-IF the change touches SQLx queries, migrations or pools, load `references/sqlx-sqlite.md` and return each rule that applies to the change, met or named as a gap, and the checked-query metadata command when the repo uses checked queries.
+IF the change touches SQLx queries, migrations or pools, load `references/sqlx-sqlite.md` and return each rule that applies to the change under the selected backend and the repo's conventions, met or named as a gap, and the checked-query metadata command when the repo uses checked queries.
 
 ## Tests
 

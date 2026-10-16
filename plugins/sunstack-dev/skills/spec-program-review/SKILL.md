@@ -222,7 +222,7 @@ Do not return `ready` while any of these hold:
 - no complete semantically current mode-complete check exists;
 - a selected check has no status;
 - partial or blocked coverage affects a required dimension;
-- a finding lacks an accepted requirement identity or confirmed goal-boundary field, its plain-language meaning, the observable outcome that fails, source-backed evidence, deletion test, scope effect, semantic correction route, or disposition;
+- a finding lacks its anchor (an accepted requirement identity, confirmed goal-boundary field, or domain-skill rule), its plain-language meaning, the observable outcome that fails, source-backed evidence, deletion test, scope effect, semantic correction route, or disposition;
 - specification, program, or three-artifact-design mode boundaries are conflated;
 - `program-only` or `three-artifact-design` omits an applicable current/proposed call path, explicit no-predecessor case, added/removed/changed edge status, or a preservation-critical or contested unchanged edge;
 - `program-only` or `three-artifact-design` accepts a Specification entity with no binding, a boundary shape written only as prose, or an open-string result or decision contract; or `three-artifact-design` passes traceability without walking every trace-table row or leaves a design noun unresolved against the entity table;
