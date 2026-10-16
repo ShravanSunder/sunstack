@@ -12,13 +12,13 @@ Lead-authored spec, 2026-10-16. Owner `sunstack-dev`. User-directed intent. Stac
 ## Evidence
 
 On 2026-10-16, most of the Advisor's messages to the Lead were relays:
-- the Sunbook Chief of Staff's cache refresh notes (push 01a14488);
-- "carrying an owner direction relayed by Sunstack Tools Advisor" (01a144d5);
-- link requests and wording notes for another agent's eval write-up (01a144d9, 01a144db, 01a144e0, 01a144e2, 01a14507);
-- status-only checks for the owner's sitrep (01a14447, 01a14448);
-- wake bookkeeping, and a report that its Stop-review hook kept nudging it to continue after its work was done (01a1450a).
+- the Sunbook Chief of Staff's cache refresh notes (push 01a14488-a328-7ed0-8780-8d427dedb6bc);
+- "carrying an owner direction relayed by Sunstack Tools Advisor" (01a144d5-600b-7443-a024-1c77850e2a17);
+- link requests and wording notes for another agent's eval write-up (01a144d9-2cc9-7c71-96d5-227e1044aef5, 01a144db-e770-75a1-8272-ea73d036172d, 01a144e0-66a6-7820-9d1e-46b0c0d56d60, 01a144e2-17cf-76d3-b905-afb54c2e4df0, 01a14507-b325-7992-a714-44627e609782);
+- status-only checks for the owner's sitrep (01a14447-22aa-7593-8252-35868150b422, 01a14448-6297-7482-b496-4bc9c4fb7406);
+- wake bookkeeping, and a report that its Stop-review hook kept nudging it to continue after its work was done (01a1450a-3d05-7252-bf4d-dc805c612d2d).
 
-The message that changed the work was its own: the review of `practices-show-me-your-work` (01a1447a, `/private/tmp/2026-10-one-pr/advisor-show-me-your-work.md`). It rebuilt the picture from decisive sources and kept what was useful. It proposed a competing shape with its cost, and caught a stale line in the Lead's own ledger.
+The message that changed the work was its own: the review of `practices-show-me-your-work` (01a1447a-efa3-7383-984f-257f2a6ddc98, `/private/tmp/2026-10-one-pr/advisor-show-me-your-work.md`). It rebuilt the picture from decisive sources and kept what was useful. It proposed a competing shape with its cost, and caught a stale line in the Lead's own ledger.
 
 Today's skill explains part of this. `role-advisor` frames the job as challenging "the picture you were given". The packet requires a Lead-supplied `question` and `challengedPicture`. Nothing assigns the Advisor to find the risks itself, to hold scope, or to keep relays out of the Lead's inbox.
 
