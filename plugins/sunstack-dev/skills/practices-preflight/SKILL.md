@@ -21,6 +21,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
    | service | a call or health check that exercises what the gate uses, with a timeout |
    | tool | run it and read its version |
    | agent | its route on the plan's model and effort, checked without sending the job |
+   | verification skill | when a proof gate observes through the project's `verify-<app>` skill, open it and find each journey in scope; a missing skill or journey is a gap whose fix is a Verifier commission to build or update it |
    | disk | `df -h` on the volume, against the work's build and test output |
 
    ```sh

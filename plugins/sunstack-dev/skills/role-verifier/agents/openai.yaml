@@ -1,6 +1,6 @@
 interface:
   display_name: "Role: Verifier"
-  short_description: "Observe adopted outcomes and challenge proof"
-  default_prompt: "Use $role-verifier to observe the declared target against the adopted reference and report what it shows and what stays open."
+  short_description: "Own the verification system and observe outcomes"
+  default_prompt: "Use $role-verifier to do your one commissioned kind of work: build or update the project's verify-<app> skill, challenge the proposed proof, or observe the declared target against the adopted reference, with the test check and the product's own proof."
 policy:
   allow_implicit_invocation: true

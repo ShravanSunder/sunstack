@@ -132,8 +132,12 @@ const advisorPacket = (): PacketFields => ({
   role: "advisor",
   executionForm: "sidekick",
   returnContract: { kind: "helper-handback" },
-  question: "Does a per-role schema split cost more than it saves?",
-  challengedPicture: "One shared fields file plus seven role contracts",
+  workContext: {
+    ownerGoal: "Each agent reads only its own role's contract.",
+    currentState:
+      "Branch skills/role-contracts at 4a9e6383: one shared fields file plus seven role contracts; spec review open.",
+  },
+  leadQuestions: ["Does a per-role schema split cost more than it saves?"],
   unblockGrant: {
     resumableSessions: [sessionAddress("01a14477-4a38-79d3-8110-c84362f47f5e")],
     helperStarts: "bounded-collection",
@@ -218,6 +222,27 @@ describe("agent job packet schema", () => {
     expect(unreachablePlanIssues).toEqual(["unblockGrant.whenLeadUnreachable"]);
   });
 
+  test("accepts an Advisor commissioned with the work's context and no Lead questions, and rejects one without that context", () => {
+    // Arrange
+    const withQuestions = advisorPacket();
+    const contextOnly = withoutField(withQuestions, "leadQuestions");
+    const withoutContext = withoutField(withQuestions, "workContext");
+    const contextWithoutOwnerGoal = {
+      ...withQuestions,
+      workContext: withoutField(withQuestions.workContext as PacketFields, "ownerGoal"),
+    };
+
+    // Act
+    const contextOnlyIssues = issuePaths(AgentJobPacket, contextOnly);
+    const withoutContextIssues = issuePaths(AgentJobPacket, withoutContext);
+    const withoutOwnerGoalIssues = issuePaths(AgentJobPacket, contextWithoutOwnerGoal);
+
+    // Assert
+    expect(contextOnlyIssues).toEqual([]);
+    expect(withoutContextIssues).toEqual(["workContext"]);
+    expect(withoutOwnerGoalIssues).toEqual(["workContext.ownerGoal"]);
+  });
+
   test("holds each role to its own charter and grant", () => {
     // Arrange
     const implementerWithVerifierCharter = {
@@ -274,6 +299,36 @@ describe("agent job packet schema", () => {
     expect(challengeIssues).toEqual([]);
     expect(observationIssues).toEqual([]);
     expect(missingTargetIssues).toEqual(["work.target"]);
+  });
+
+  test("accepts a Verifier commission to update the project's verification skill and rejects one without the journeys in scope", () => {
+    // Arrange
+    const skillPaths = [".agents/skills/verify-desktop/", ".claude/skills/verify-desktop"];
+    const skillWork = {
+      mode: "verification-skill",
+      change: "upkeep",
+      app: "desktop",
+      journeysInScope: ["Export the open review as a PDF from the File menu"],
+      skillWritePaths: skillPaths,
+    };
+    const skillGrant = {
+      access: "write-and-execute",
+      writePaths: skillPaths,
+      allowedCommands: ["pnpm --dir apps/desktop run dev"],
+    };
+    const skillCommission = { ...verifierPacket(skillWork), limits: skillGrant };
+    const withoutJourneys = {
+      ...verifierPacket(withoutField(skillWork, "journeysInScope")),
+      limits: skillGrant,
+    };
+
+    // Act
+    const acceptedIssues = issuePaths(AgentJobPacket, skillCommission);
+    const rejectedIssues = issuePaths(AgentJobPacket, withoutJourneys);
+
+    // Assert
+    expect(acceptedIssues).toEqual([]);
+    expect(rejectedIssues).toEqual(["work.journeysInScope"]);
   });
 
   test("allows a continuing investigation only in Sidekick form", () => {
@@ -400,8 +455,8 @@ const roleContractCases: readonly RoleContractCase[] = [
     role: "advisor",
     contract: AdvisorPacket,
     valid: advisorPacket(),
-    invalid: withoutField(advisorPacket(), "question"),
-    invalidPath: "question",
+    invalid: withoutField(advisorPacket(), "workContext"),
+    invalidPath: "workContext",
     foreignCharter: "role-lead",
   },
   {

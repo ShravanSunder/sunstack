@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-16 The Advisor's second look and the Verifier's verification system](2026-10-16-advisor-second-look.md)
 - [2026-10-16 — Presentation HTML](2026-10-16-presentation-html.md)
 - [2026-10-16 Preflight, cleanup and the domain layer](2026-10-16-preflight-cleanup-domain.md)
 - [2026-10-16 Verification practices, role relationships and phase composition](2026-10-16-verification-roles-phases.md)

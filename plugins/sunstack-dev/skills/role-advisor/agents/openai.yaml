@@ -1,6 +1,6 @@
 interface:
   display_name: "Role: Advisor"
-  short_description: "Challenge the model and unblock the Lead's stalled work"
-  default_prompt: "Use $role-advisor to challenge the assigned picture with checked alternatives and their tradeoffs."
+  short_description: "Second-look risks, answer the owner, unblock the Lead"
+  default_prompt: "Use $role-advisor to pick the high-risk points in the work's context, give each an independent second look, and tell the Lead what you checked, concluded and recommend, and what stays out."
 policy:
   allow_implicit_invocation: true

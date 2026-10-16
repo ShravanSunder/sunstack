@@ -18,9 +18,9 @@ A **Worker** is a native subagent its parent manages, kept through the bounded j
 | Role | Result it owns | Form | Commissioned by | Role skill |
 |---|---|---|---|---|
 | 🦁 Lead | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
-| 🦉 Advisor | a competing picture, its evidence and tradeoffs; unblocking the Lead's stalled work within its grant | Sidekick | the Lead, only when the owner asks; or the owner, whose own message names the session as the Advisor | `role-advisor` |
+| 🦉 Advisor | an independent second look at high-risk points it picks, the owner's questions, and unblocking the Lead's stalled work within its grant | Sidekick | the Lead, only when the owner asks; or the owner, whose own message names the session as the Advisor | `role-advisor` |
 | 🐒 Implementer | assigned changes, their product tests and associated proof | Sidekick | the Lead, one per workstream | `role-implementer` |
-| 🔬 Verifier | independent observation of the adopted outcome | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
+| 🔬 Verifier | independent observation of the adopted outcome, and the verification system it runs on | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
 | 🔎 Reviewer | independent findings on a declared artifact, and correction checks | Sidekick with no author history | the Lead, for the review lead that runs the review procedure; that review lead, for each stage reviewer its procedure prescribes | `role-reviewer` |
 | 📚 Researcher | a checked answer to a supplied question | Worker for one bounded question; Sidekick for continuing work or when its model needs Router | the Lead, or a Sidekick whose role skill and commission grant management | `role-researcher` |
 | 🔧 Operator | observations from a prescribed procedure or a guided collection | Worker by default; Sidekick when the job needs a separately managed session | the Lead, or a Sidekick whose role skill and commission grant management | `role-operator` |
@@ -31,7 +31,7 @@ Setup beyond the row:
 - **Reviewer:** never fork or resume the author's conversation, whether you start the review lead or a stage reviewer; the packet carries the sources.
 - **Researcher:** continuity changes its form, never its role.
 
-Each packet carries its role's payload, which the contract enforces: Implementer, plan slice, write grant and paired Verifier address; Verifier, adopted reference, paired Implementer address and one kind of work; Reviewer, target with revision, review procedure and no author history; Researcher, question and approach; Operator, procedure or collection criteria with expected observations; Advisor, question, the picture it challenges and its unblock grant (the sessions it may resume, whether it may start helpers, and what it does when the Lead is unreachable); Lead, owner intent and governing context.
+Each packet carries its role's payload, which the contract enforces: Implementer, plan slice, write grant and paired Verifier address; Verifier, adopted reference, paired Implementer address and one kind of work; Reviewer, target with revision, review procedure and no author history; Researcher, question and approach; Operator, procedure or collection criteria with expected observations; Advisor, the work's context (governing artifacts as its sources, the current state with anchors and the owner's goal), the Lead's questions if any, and its unblock grant (the sessions it may resume, whether it may start helpers, and what it does when the Lead is unreachable); Lead, owner intent and governing context.
 
 Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`. Label a native helper by its role too, such as `📚 Researcher Worker · retry policy`. An existing correct name needs no rewrite.
 
@@ -87,7 +87,7 @@ Horizon limits the role; it doesn't pick it.
 | 🔎 Reviewer Sidekick | a Project or a Milestone, through its corrections |
 | 📚 Researcher | Task or Subtask as a Worker; related questions across a Milestone as a Sidekick |
 | 🔧 Operator | Subtask: one procedure or one bounded collection |
-| 🦉 Advisor | the owner's question |
+| 🦉 Advisor | the work its context covers |
 
 ### Direction
 
