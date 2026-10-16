@@ -51,4 +51,4 @@ When one feasible option meets the settled requirements and no assumption would 
 - A one-way door decided in passing, or a reversible choice escalated to the owner for no reason.
 - A workaround with no stated reason or end.
 
-When the question is whether a mechanism is needed at all, use `principle-justify-the-complexity`. When running something would settle the question faster than comparing, use `principle-experiment-before-proposing`.
+When the question is whether a mechanism is needed at all, name the outcome that needs it now ([justify the complexity](../principle-justify-the-complexity/SKILL.md)). When running something would settle the question faster than comparing, write the deciding result and run it ([experiment before proposing](../principle-experiment-before-proposing/SKILL.md)).

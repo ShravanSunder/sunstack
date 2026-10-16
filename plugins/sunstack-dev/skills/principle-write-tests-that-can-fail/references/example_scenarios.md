@@ -48,7 +48,7 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **The move.** Take the expected value from somewhere independent.
 
-**Better.** Assert a literal from the published tax table for a few representative amounts, or a property the rule implies. Then apply a deliberately wrong rate once and watch the test fail. The layer was never the problem; the oracle was.
+**Better.** Assert a literal from the published tax table for a few representative amounts, or a property the rule implies. Then apply a deliberately wrong rate once and watch the test fail.
 
 ## Per-pane order versus global order
 

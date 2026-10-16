@@ -1,6 +1,6 @@
-# Practice/principle improvements and role promotion — implementation
+# Practice/principle improvements and role promotion: implementation
 
-Owner authorized actual implementation and draft PR delivery, 2026-10-14. Tests and behavior evaluations are explicitly deferred for now. This changes the delivery proof boundary, not the adopted runtime design. Neither PR is merge-ready or shipped by this task.
+Owner authorized implementation and draft PR delivery, 2026-10-14. Tests and behavior evaluations are explicitly deferred for now. This changes the delivery proof boundary, not the adopted runtime design. Neither PR is merge-ready or shipped by this task.
 
 ## Current base and accepted design
 
@@ -26,4 +26,4 @@ One persistent Sol Implementer Sidekick owns runtime authoring and its eventual 
 
 ## Closure
 
-This delivery closes when both sets of actual skill changes are committed/pushed in their ordered layers and visible in draft PRs, with current source assessment and honest deferred-testing status. Implementation states mean authored, not tested/reviewed/shipped. Return each PR URL, base/head, actual changed skills and every deferred gate.
+This delivery closes when both sets of skill changes are committed/pushed in their ordered layers and visible in draft PRs, with current source assessment and honest deferred-testing status. Implementation states mean authored, not tested/reviewed/shipped. Return each PR URL, base/head, the skills it changed and every deferred gate.

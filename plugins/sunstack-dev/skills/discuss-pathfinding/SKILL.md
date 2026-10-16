@@ -7,13 +7,13 @@ description: "Use when requirements, user needs, domain terms, tacit process, or
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-The knowledge exists — in the user's head, unwritten — and the session is the instrument that gets it out before it shapes work. The job is extraction. The question sequence cannot be planned in advance because each answer opens the next branch.
+The knowledge exists, unwritten, in the user's head, and the session is the instrument that gets it out before it shapes work. The job is extraction. The question sequence cannot be planned in advance because each answer opens the next branch.
 
-Asking is expensive: a turn spent on an observable fact is stolen from a judgment call only the user can make. Ask one to three related questions together when they share context and clarify one decision. Ask a determining question first when its answer decides whether another question applies. Separate unrelated questions. Raw understanding remains provisional until it has been checked and challenged.
+Asking is expensive: a turn spent on an observable fact is stolen from a judgment call only the user can make. Raw understanding remains provisional until it has been checked and challenged.
 
 Pathfinding is self-contained judgment, not isolated execution. A caller may supply artifacts, conversation context, hypotheses, or constraints; treat them as useful leads rather than authority. Inspect what can be inspected, distinguish what the owner confirmed from what an agent inferred, expose the credible branches, and return the clearest proportional understanding the next skill can use.
 
-Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint—such as acceptable cost, risk, downtime, compatibility, or policy—and return it to `program-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `program-design`, not questions pathfinding asks the user to design.
+Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint (such as acceptable cost, risk, downtime, compatibility, or policy) and return it to `program-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `program-design`, not questions pathfinding asks the user to design.
 
 Routing cases:
 
@@ -45,17 +45,17 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
 ## Bright Lines
 
-- **Live user required.** No responsive user in the loop — CI, autonomous run, background job — means stop and name the unanswered questions. For an orchestrated continuation, return `decision-needed`; otherwise return a blocker. Never answer your own questions; a session that interviews itself has extracted nothing.
-- **Resolution is concrete.** A concrete selection, constraint, example, or correction resolves a question; generic assent does not. Delegation ("whatever you think is best"), ambiguous assent ("sounds good"), a topic change, and silence never resolve — each has a named counter in `references/question-craft.md`.
+- **Live user required.** No responsive user in the loop (CI, autonomous run, background job) means stop and name the unanswered questions. For an orchestrated continuation, return `decision-needed`; otherwise return a blocker. Never answer your own questions; a session that interviews itself has extracted nothing.
+- **Resolution is concrete.** A concrete selection, constraint, example, or correction resolves a question; generic assent does not. Delegation ("whatever you think is best"), ambiguous assent ("sounds good"), a topic change, and silence never resolve; each has a named counter in `references/question-craft.md`.
 - **Chat-only on request.** The user may decline files; the records still get written, in-chat, in the same shapes.
 
 ## Workflow
 
-1. **Name the destination.** State what the session must extract—decision, process, terms, or user requirements—the depth, and what is out of scope.
+1. **Name the destination.** State what the session must extract (decision, process, terms, or user requirements), the depth, and what is out of scope.
 
    IF the missing meaning blocks Requirements, Specification, or a Program Design choice, load `../../shared-references/requirements-specification-program-design.md` and return the three-concept boundary, the pathfinding boundary that applies to this destination, and the exact owner that must receive the clarified meaning.
 
-   If a calling phase supplies a return destination, record that exact destination before questioning. It is a boundary, not a suggestion: this session may return confirmed meaning only to that destination and may not replace it with another plausible phase.
+   If a calling phase supplies a return destination, record that exact destination before questioning. It is a boundary: this session may return confirmed meaning only to that destination and may not replace it with another plausible phase.
 
    Name whether the missing owner meaning blocks Requirements, Specification, or a Program Design choice. Do not turn every destination into a user-requirements record. For a Program Design destination, name the owner-controlled tolerance or constraint to clarify and explicitly exclude components, interfaces, ownership allocation, and mechanisms. If the request contains only structural synthesis from settled obligations, return the `program-design` route without starting an interview.
 
@@ -151,14 +151,14 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
 ## Routes
 
-- `practices-research` — the broad-evidence bin in step 2 owns this call; never single facts a bounded read answers.
-- `discuss-clarify-mental-models` — IF mid-session the two of you disagree about a model you both already hold, use it to repair the drift and return the rebuilt shared model before extraction continues.
-- `presentation-tui` / `presentation-webui` — IF a material ambiguity is easier to understand as relationships, branches, or sequence, use the `presentation-*` skill matching the current surface for the conversational map; honor an exact user-requested format instead. It does not select or own durable specification views.
-- `spec-design` — a confirmed goal boundary from a user-requirements destination or proposed-change handoff routes here; otherwise return the exact owner decision rather than claiming readiness.
-- `program-design` — settled obligations that require components, interfaces, ownership allocation, or mechanisms route here without pathfinding; owner-controlled structural tolerance clarified for this recorded destination returns here without a pathfinding-authored architecture.
-- caller-supplied return destination — for an orchestrated continuation, this exact phase is the only permitted return; a mismatch stops instead of rerouting.
-- `docs-maintain` — maintaining or reformatting settled content in an existing artifact; do not restart extraction when meaning is already accepted.
-- `practices-manage-agents` — the reader-test dispatch contract in `references/decisions-and-docs.md` owns this call.
+- `practices-research`: the broad-evidence bin in step 2 owns this call; never single facts a bounded read answers.
+- `discuss-clarify-mental-models`: IF mid-session the two of you disagree about a model you both already hold, use it to repair the drift and return the rebuilt shared model before extraction continues.
+- `presentation-tui` / `presentation-webui`: IF a material ambiguity is easier to understand as relationships, branches, or sequence, use the `presentation-*` skill matching the current surface for the conversational map; honor an exact user-requested format instead. It does not select or own durable specification views.
+- `spec-design`: a confirmed goal boundary from a user-requirements destination or proposed-change handoff routes here; otherwise return the exact owner decision rather than claiming readiness.
+- `program-design`: settled obligations that require components, interfaces, ownership allocation, or mechanisms route here without pathfinding; owner-controlled structural tolerance clarified for this recorded destination returns here without a pathfinding-authored architecture.
+- caller-supplied return destination: for an orchestrated continuation, this exact phase is the only permitted return; a mismatch stops instead of rerouting.
+- `docs-maintain`: maintaining or reformatting settled content in an existing artifact; do not restart extraction when meaning is already accepted.
+- `practices-manage-agents`: the reader-test dispatch contract in `references/decisions-and-docs.md` owns this call.
 
 ## Completion Blockers
 
@@ -171,9 +171,9 @@ The session is not done while any of these hold:
 - a material ambiguity was reduced to a mechanically complete question without an evidence-plausible alternative, discriminating countercase, or downstream difference;
 - a selected pathfinding visual hides provisional meaning, settles an unresolved choice, invents downstream architecture, or treats missing generation capability as an answer;
 - a challengeable answer did not receive its applicable follow-up or lacks a resolved/open state;
-- an unresolved response — delegation, ambiguous assent, topic change, silence — was treated as resolution;
+- an unresolved response (delegation, ambiguous assent, topic change, silence) was treated as resolution;
 - the run proceeded without a live user instead of returning `decision-needed` for an orchestrated continuation or a blocker otherwise;
-- a crystallized decision, process, settled term, or user requirement has no record — chat-only changes where records live, never whether they exist;
+- a crystallized decision, process, settled term, or user requirement has no record (chat-only changes where records live, never whether they exist);
 - a destination closes without distinguishing confirmed meaning and negative space from provisional assumptions and exact open choices;
 - a Specification or Program Design destination was collapsed into a user-requirements record instead of returning the clarified meaning to its owner;
 - a Program Design destination produced or selected components, interfaces, ownership allocation, or mechanisms instead of returning only the clarified owner-controlled tolerance or constraint;

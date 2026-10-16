@@ -12,9 +12,9 @@ Check boundary: read-only. This check may recommend `ready | needs-revision | bl
 
 ## Method
 
-MUST load `../reviewing-common-method.md` and apply its baseline inspection procedure, coverage requirements, dependency order, common result fields, and stop boundary during the combined inspection.
+MUST load `../reviewing-common-method.md` and return its common result fields, applying its baseline inspection procedure, coverage requirements, dependency order, and stop boundary during the combined inspection.
 
-MUST load exactly one selected mode reference and apply its mode-specific judgment dimensions, ownership routes, and completion condition during that same inspection:
+MUST load exactly one selected mode reference and return its judgment on each mode-specific dimension, applying its ownership routes and completion condition during that same inspection:
 
 ```text
 specification-only -> ../reviewing-specification.md

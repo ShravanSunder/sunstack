@@ -10,4 +10,4 @@ For each claim:
 4. Check freshness against live sources when the fact can drift.
 5. Return `complete | partial | blocked`, the surviving or refuted claim, anchors both for and against, and the exact unfinished coverage or missing access.
 
-The researcher compares this result with the original evidence before synthesis. A partial or blocked countercheck leaves the affected load-bearing conclusion unresolved unless another verified primary anchor settles the gap. The countercheck keeps its judgment in one session and leaves the owning phase's decisions with that phase.
+The researcher compares this result with the original evidence before synthesis. A partial or blocked countercheck leaves the affected load-bearing conclusion unresolved unless another verified primary anchor settles the gap.

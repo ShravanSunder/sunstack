@@ -21,7 +21,7 @@ A principle is one engineering judgment, written to teach: the idea behind it, h
 
 ## Decide
 
-- `principle-name-the-tradeoffs`. A real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one.
+- `principle-name-the-tradeoffs`. A real choice changes complexity, risk, cost, or reversibility, or one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one.
 
 ## Shape
 

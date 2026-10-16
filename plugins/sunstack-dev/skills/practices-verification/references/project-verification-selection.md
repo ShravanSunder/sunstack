@@ -18,7 +18,7 @@ Reading a project skill grants nothing. Its commands, writes and targets are usa
 
 2. **Find the candidates.** List `.agents/skills/verify-*/SKILL.md` in that project and any verification skill the project instructions configure explicitly. Read each candidate's frontmatter and the app scope its body states. Match the named app and the claimed behavior. Loading every candidate, or taking the first filename, picks a recipe by accident.
 
-3. **Resolve one canonical owner and read it.** Resolve `.claude/skills/verify-<app>` and treat a link that lands on the matching `.agents` folder as the same skill. A real directory at that path, a link to anywhere else or a link that leaves the project is a competing owner. Report it as a conflict and leave both copies as they are; picking the newer copy or repairing the link is a write your assignment didn't grant ([each truth needs one authoritative owner, and a copy that can be written is a second writer](../../principle-one-owner-per-truth/SKILL.md)). Read the selected `SKILL.md` in full, then only the journey or reference files this claim needs.
+3. **Resolve one canonical owner and read it.** Resolve `.claude/skills/verify-<app>` and treat a link that lands on the matching `.agents` folder as the same skill. A real directory at that path, a link to anywhere else or a link that leaves the project is a competing owner. When you find one, report it as a conflict and leave both copies as they are; picking the newer copy or repairing the link is a write your assignment didn't grant ([each truth needs one authoritative owner, and a copy that can be written is a second writer](../../principle-one-owner-per-truth/SKILL.md)). Read the selected `SKILL.md` in full, then only the journey or reference files this claim needs.
 
 4. **Report absence or ambiguity before you depend on a choice.** With no match, report the missing verification capability, and say what bounded generic check the method in this skill can still make. That check doesn't mean the project's verification capability exists or is maintained. With several plausible matches, or explicit pointers that disagree, report the exact app or route ambiguity before any drive or write that depends on the choice.
 
@@ -34,7 +34,7 @@ A repository has `verify-storefront` and `verify-admin` under `.agents/skills/`.
 
 ### Failed: two copies, one deleted
 
-`.agents/skills/verify-desktop/` holds the current skill. `.claude/skills/verify-desktop` is a real directory holding an older copy. The agent decides the `.agents` copy is newer, deletes the Claude directory and replaces it with a link. That was a write nobody granted, and it may have destroyed someone's work. The fit move is to report the conflict with both paths and how they differ before any drive that depends on either recipe, and to make only a bounded generic check if the claim needs one.
+`.agents/skills/verify-desktop/` holds the current skill. `.claude/skills/verify-desktop` is a real directory holding an older copy. The agent decides the `.agents` copy is newer, deletes the Claude directory and replaces it with a link. That was a write nobody granted, and it may have destroyed someone's work. The agent should have reported the conflict with both paths and how they differ before any drive that depends on either recipe, and made only a bounded generic check if the claim needed one.
 
 ### Clean: one skill, one journey
 

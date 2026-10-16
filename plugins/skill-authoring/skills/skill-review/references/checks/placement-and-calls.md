@@ -1,13 +1,13 @@
 # placement-and-calls
 
-Mission / stance: Decide whether each obligation lives where the agent will actually meet it, and whether every call site says enough to act on. Material in the wrong home is silently skipped; a call site missing its return shape sends the agent away with nothing to bring back.
+Mission / stance: Decide whether each obligation lives where the agent will meet it, and whether every call site says enough to act on. Material in the wrong home is silently skipped; a call site missing its return shape sends the agent away with nothing to bring back.
 
 Maximum authority: read-only inspection of placement, call sites, and reference reachability. Return candidate findings; the review lead owns reduction and the final review result. Edits route to the author.
 
 Where to look:
 - every call site and its form (load, dispatch, or citation) in `SKILL.md` and in any reference under review; references hold call sites too, and are the callee half of every caller/callee contract;
 - for each step that holds a citation, the skills this one names or loads at that step, for a citation of the same principle;
-- the all-run spine against what actually sits in references;
+- the all-run spine against what sits in references;
 - every `references/*.md` path mentioned anywhere in the skill;
 - the Completion Blockers list against the steps it mirrors.
 

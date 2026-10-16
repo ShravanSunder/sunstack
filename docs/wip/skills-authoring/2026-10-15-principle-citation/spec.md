@@ -1,6 +1,6 @@
-# Principle citation grammar — skill spec
+# Principle citation grammar: skill spec
 
-Spec v2, 2026-10-15. Owner plugin `skill-authoring` (0.1.1 at base). Two runs, one named skill each: **R1 `skill-creation`**, then **R2 `skill-review`**. Both are `update`, `behavior-changing`, not `scoped`. v2 applies the v1 spec review and was accepted at `cd26f9b3`; see [Review record](#review-record) and [Run status](#run-status).
+Spec v2, 2026-10-15. Owner plugin `skill-authoring` (0.1.1 at base). Two runs, one named skill each: R1 `skill-creation`, then R2 `skill-review`. Both are `update`, `behavior-changing`, not `scoped`. v2 applies the v1 spec review and was accepted at `cd26f9b3`; see [Review record](#review-record) and [Run status](#run-status).
 
 Owner direction, 2026-10-15: "get rid of card". The skills now call a `principle-*` skill a principle, and this spec uses the same word. The citation form, its rules and its behavior are unchanged, and the quoted edits below show the current wording.
 
@@ -14,8 +14,8 @@ Owner direction, 2026-10-15: "get rid of card". The skills now call a `principle
 
 ## Success definition
 
-1. **Writing a skill that relies on a principle.** The agent writes one plain sentence at the decision. The sentence names an observable moment and an action in words other than the link text, then links a principle from the same plugin relatively. The agent cites only where the principle's judgment changes how the action is done. It does not repeat a citation that a skill it names or loads at that step already makes. It writes no `MUST`/`IF` load of the principle and no bare name. Load calls stay for the skill's own procedure depth.
-2. **Reviewing that skill.** `placement-and-calls` reports each citation defect:
+1. Writing a skill that relies on a principle. The agent writes one plain sentence at the decision. The sentence names an observable moment and an action in words other than the link text, then links a principle from the same plugin relatively. The agent cites only where the principle's judgment changes how the action is done. It does not repeat a citation that a skill it names or loads at that step already makes. It writes no `MUST`/`IF` load of the principle and no bare name. Load calls stay for the skill's own procedure depth.
+2. Reviewing that skill. `placement-and-calls` reports each citation defect:
    - a link that does not open a same-plugin principle whose first body line is the read rule;
    - a moment that is not observable;
    - an action that is missing or restates the link text;
@@ -24,7 +24,7 @@ Owner direction, 2026-10-15: "get rid of card". The skills now call a `principle
    - a principle loaded instead of cited.
 
    It routes a citation that changes no decision to `no-op-pruning`. At spec stage, a vague or incomplete proposed citation is a blocker override.
-3. **Runtime premise (owner decision 3, open).** An agent running a skill that cites a principle opens the principle at the moment and applies judgment only the principle holds. B5 tests this; the conversion spec owns B5 (see Coordination).
+3. Runtime premise (owner decision 3, open). An agent running a skill that cites a principle opens the principle at the moment and applies judgment only the principle holds. B5 tests this; the conversion spec owns B5 (see Coordination).
 
 ## Decisions (the owner may strike any row)
 
@@ -35,16 +35,16 @@ Owner direction, 2026-10-15: "get rid of card". The skills now call a `principle
 | D3 | Runtime text names no other plugin's skill. "Principle" is defined generically. The grammar examples use `../verify-before-accepting/SKILL.md` inside a `text` block, so they are not live links. `principle-*` appears only in this spec and the changelog. | `plugins/skill-authoring/README.md`: "It names no skill from another plugin". "Principle" is the repo's word for `principle-*` (AGENTS.md "Skill layers"). Cost: the example path does not exist. It is marked as an example by its fence and its template line. |
 | D4 | One owner per meaning:<br>• `glossary.md` owns the term "principle" (`SKILL.md:96`); R1-c points to it, and R2-b copies it verbatim.<br>• `SKILL.md`'s Call Grammar owns the citation form, its rules, and the read-rule text.<br>• `reference-design.md` limits its literal-marker rule to ordinary references and adds one placement row that points to the Call Grammar.<br>• `placement-and-calls` restates only the slots and checks it inspects, plus the read-rule text and position it verifies. | The forms already live in the Call Grammar, which every run that writes call sites reads. `placement-and-calls` already restates the dispatch slots (`:22`), so it follows that precedent. Alternative: have the check `IF`-load `skill-creation/SKILL.md` for the rules instead of restating them. |
 | D5 | Hard cutover: a principle is only cited, never loaded, and a load call to a principle is a placement finding. | Two valid forms for one target would let both survive. Cost: unconverted sunstack-dev skills fail this check until they are converted (see Coordination). |
-| D6 | The duplicate rule is generic. The skills this one "uses" at a step are those it names or loads at that step. When one of them already cites the principle for that decision, rely on that citation and do not repeat it. | The brief's "lower-layer" is sunstack-dev layering vocabulary (AGENTS.md "Skill layers"). Defining "uses" as named or loaded at the step makes the duplicate check something a reviewer can actually walk. |
+| D6 | The duplicate rule is generic. The skills this one "uses" at a step are those it names or loads at that step. When one of them already cites the principle for that decision, rely on that citation and do not repeat it. | The brief's "lower-layer" is sunstack-dev layering vocabulary (AGENTS.md "Skill layers"). Defining "uses" as named or loaded at the step makes the duplicate check something a reviewer can walk. |
 | D7 | The `skill-review` change touches `placement-and-calls` and the `spec-review.md:28` blocker override, which becomes "a reference, dispatched-procedure, or citation call is vague or incomplete". The other checks stay unchanged. | No other check literally requires MUST/IF for every call (`git grep` at `a737b87`). The blocker override lists the call kinds it blocks, so without this change a vague proposed citation would pass spec review. |
 | D8 | No `skill-authoring` skill cites a principle itself. Like dispatch, the citation form is grammar for the skills being authored. Its first real call sites are the Coordination conversion runs; until then, the B1 fixture is its only instance. | `skill-authoring` declares dispatch and never calls it (`git grep` finds only `SKILL.md:54-55,72-73`). `rule-agreement`'s dead-declaration test covers a skill's own call sites, not grammar it teaches. |
-| D9 | One version bump, 0.1.1 → 0.2.0, landing with R2: the three plugin manifests plus the marketplace entries at `.claude-plugin/marketplace.json:32` and `.cursor-plugin/marketplace.json:33`. The Codex marketplace entry has no `version` field and stays unchanged. | A new call form is new authoring behavior, so it gets a minor bump. `platform-mechanics.md:14` changes Codex marketplace metadata only for availability, path, category, or policy. The brief's "three marketplace entries" is really two versioned entries. |
+| D9 | One version bump, 0.1.1 → 0.2.0, landing with R2: the three plugin manifests plus the marketplace entries at `.claude-plugin/marketplace.json:32` and `.cursor-plugin/marketplace.json:33`. The Codex marketplace entry has no `version` field and stays unchanged. | A new call form is new authoring behavior, so it gets a minor bump. `platform-mechanics.md:14` changes Codex marketplace metadata only for availability, path, category, or policy. The brief's "three marketplace entries" are two versioned entries. |
 | D10 | One changelog entry, `docs/changelog/2026-10-15-principle-citation-grammar.md`, of 20 lines or fewer, plus a newest-first line in `docs/changelog/README.md`. Both land with R2. | Repo changelog rule. The entry text is below. |
 | D11 | No new tests. `tests/skills/lib/minimal-planning-delivery-contract.test.ts:177-199` reads `skill-review/SKILL.md`, `skill-creation/SKILL.md`, `skill-orchestrator/SKILL.md` and `skill-audit/SKILL.md` for the convergence-rule text. No planned edit touches those strings, and S3 runs that test. | The existing contract test is the only test that reads `skill-authoring` text. Static proof otherwise runs as commands. |
 | D12 | A cited principle ships in the same plugin as the citing file. | Installed plugins are separate cache units, so a relative path that leaves the plugin breaks after install. |
 | D13 | A citation is complete only when its moment is observable (held to the branch-predicate test, `SKILL.md:181`), its action is in words other than the link text, and the principle's judgment bears on that action. | A paraphrased name, a topic-shaped moment, or a decorative link fills the v1 slots while changing nothing (v1 spec review, findings 1–3). |
 
-## R1 — `skill-creation`
+## R1: `skill-creation`
 
 **Baseline:** `plugins/skill-authoring/skills/skill-creation/` at `a737b87`.
 
@@ -115,7 +115,7 @@ judgment a principle teaches                             -> cite the principle a
 
 > They are not exclusive: a description adds agent reach without removing the human's. Choose model-invocable when the agent must find the skill unprompted, or when another skill must reach it. A principle, which other skills only cite, stays hidden from model invocation. When user-invocable skills outgrow what a human can hold, a router skill indexes them.
 
-## R2 — `skill-review`
+## R2: `skill-review`
 
 **Baseline:** `plugins/skill-authoring/skills/skill-review/` at `a737b87`.
 
@@ -132,7 +132,7 @@ judgment a principle teaches                             -> cite the principle a
 
 **a. Where to look** (`:8`). Replace the first bullet, and add a bullet after it:
 
-> - every call site and its form — load, dispatch, or citation — in `SKILL.md` and in any reference under review; references hold call sites too, and are the callee half of every caller/callee contract;
+> - every call site and its form (load, dispatch, or citation) in `SKILL.md` and in any reference under review; references hold call sites too, and are the callee half of every caller/callee contract;
 > - for each step that holds a citation, the skills this one names or loads at that step, for a citation of the same principle;
 
 **b. How to inspect** (`:15-22`). The row block becomes:
@@ -170,7 +170,7 @@ Insert this after the sentence "Review checks and research source classes are lo
 
 ## Authoring basis and proof plan
 
-**Authoring basis:** `user-directed intent`, from owner decisions 1–4 in the 2026-10-15 brief. RED is not required and none is claimed. Current claim: **drafted from user intent; behavior not yet evaluated.**
+**Authoring basis:** `user-directed intent`, from owner decisions 1–4 in the 2026-10-15 brief. RED is not required and none is claimed. Current claim: drafted from user intent; behavior not yet evaluated.
 
 **Static proof**, run after each run and again with R2:
 

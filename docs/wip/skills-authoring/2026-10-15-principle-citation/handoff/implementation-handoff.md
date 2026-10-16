@@ -1,6 +1,6 @@
 # Implementation handoff: principle citations across PR #131 → #132
 
-> **Temporary transport.** This folder lives on the PR branch only so local agents can pull it. Before merge, move it to memory-logs `skills/authoring/2026-10-15-principle-citation/` and delete it from the branch (AGENTS.md keeps only skill specs under `docs/wip/skills-authoring/`).
+> This folder is temporary. It lives on the PR branch only so local agents can pull it. Before merge, move it to memory-logs `skills/authoring/2026-10-15-principle-citation/` and delete it from the branch (AGENTS.md keeps only skill specs under `docs/wip/skills-authoring/`).
 
 ```text
 Implementation handoff
@@ -48,10 +48,10 @@ Skills compose bottom-up: principles → practices / ops / presentation → role
 | `38fa011` | #132 | Merge of #131 `0f71477` (`--no-ff`). |
 | `a8380cc..195232e` | #132 | v3: 7 role skills converted to citations in "The work" (D13) plus the role inventory.<br>• Management step-6 prompt clause: a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder.<br>• Implementer setup line dropped. |
 | `f737828..39572d7` | #132 | Lead corrections E1–E3:<br>• E1: the role-operator access sentence is limited to sandbox, no-credentials or wrong-network failures.<br>• E2: management `:10` says "one-way-door tradeoffs".<br>• E3: spec states and a word-count fix. |
-| **`aa5af8cb`** (owner's local agent) | #131 | • ops-observability-stack verify citation split: a health-only proof names the stack or health endpoint; a producer proof names the app, worktree and marker. The Complete line matches, and so does spec V4 row `:23`.<br>• `native-providers-codex.md`: `fork_turns` documents only `none` and `all`.<br>• #131 `roles/lead.md` Boundary and management `:10` say "one-way-door".<br>• The changelog states honest validation. |
-| **`d9e717b6`** (owner's local agent) | #132 | Merge of `aa5af8cb` into `39572d7`. `role-researcher` drops its model examples ("Luna from a Claude host", "cheap Luna"), so management stays the model-policy owner. The role changelog is updated. |
+| `aa5af8cb` (owner's local agent) | #131 | • ops-observability-stack verify citation split: a health-only proof names the stack or health endpoint; a producer proof names the app, worktree and marker. The Complete line matches, and so does spec V4 row `:23`.<br>• `native-providers-codex.md`: `fork_turns` documents only `none` and `all`.<br>• #131 `roles/lead.md` Boundary and management `:10` say "one-way-door".<br>• The changelog states honest validation. |
+| `d9e717b6` (owner's local agent) | #132 | Merge of `aa5af8cb` into `39572d7`. `role-researcher` drops its model examples ("Luna from a Claude host", "cheap Luna"), so management stays the model-policy owner. The role changelog is updated. |
 
-**Conflicts: none outstanding.** The cloud session had nothing unpushed when `aa5af8cb` and `d9e717b6` landed, and both checkouts fast-forwarded. `d9e717b6` is itself the merge that carried `aa5af8cb` into #132.
+No conflicts are outstanding. The cloud session had nothing unpushed when `aa5af8cb` and `d9e717b6` landed, and both checkouts fast-forwarded. `d9e717b6` is itself the merge that carried `aa5af8cb` into #132.
 
 ## Implementation proof (fresh, 2026-10-15 ~15:15 UTC, cloud session)
 
@@ -72,32 +72,32 @@ Both were shown failing on seeded defects before use.
 
 ## What is not proven
 
-- **Independent implementation review of the v4 and v3 conversions and the grammar implementation.** Owed; it is the next step.
-- **B5:** the runtime citation A/B, which tests whether an agent opens a cited principle at the moment and acts on it. It is planned in the grammar spec (Coordination) and in #131 V4-7 / #132 V3-7, and has not been run. Every conversion rests on this assumption.
-- **Behavior and trigger evaluations**, deferred by the owner. All behavior is `unverified/deferred`.
+- Independent implementation review of the v4 and v3 conversions and the grammar implementation is owed. It is the next step.
+- B5, the runtime citation A/B, tests whether an agent opens a cited principle at the moment and acts on it. It is planned in the grammar spec (Coordination) and in #131 V4-7 / #132 V3-7, and has not been run. Every conversion rests on this assumption.
+- The owner deferred behavior and trigger evaluations. All behavior is `unverified/deferred`.
 - The Codex quick validator was not run. No Codex, Claude or Cursor cache refresh. No merge-readiness claim.
 
 ## Known risks: reviewer focus
 
-1. **Once per decision.** Check these overlaps:
+1. Once per decision. Check these overlaps:
    - `role-lead` verify vs management step 7 (handback claims);
    - `role-lead` refine vs step 7 (drift or break);
    - `role-lead` shared-model vs `practices-show-me-your-work`'s Lead resume paragraph;
    - `role-verifier` prove-it-works vs verify, which both name build and target.
-2. **Decorative citations:** a sentence that would act the same without its principle.
-3. **Readability cost:**
+2. Decorative citations: a sentence that would act the same without its principle.
+3. Readability cost:
    - the management Main path is about 790 words (#127 was 721);
    - presentation core rules carry a name-the-tradeoffs rule of about 75 words;
    - step 7 holds three citations.
-4. **Step-6 prompt clause:** whether a recipient can resolve a packet `principle-<name>` from "beside your role skill's folder" on Claude, Codex and Cursor installs.
-5. **Slop rate.** r1 measured #131 at 33.1 suspect qualifiers per 1k words against a 19.0 baseline. Re-measure the added lines of v4 (`c2b9c18..aa5af8cb`) and v3 (`38fa011..d9e717b6`).
-6. **Lead-prescribed wording** (review it like any other text):
+4. Step-6 prompt clause: whether a recipient can resolve a packet `principle-<name>` from "beside your role skill's folder" on Claude, Codex and Cursor installs.
+5. Slop rate. r1 measured #131 at 33.1 suspect qualifiers per 1k words against a 19.0 baseline. Re-measure the added lines of v4 (`c2b9c18..aa5af8cb`) and v3 (`38fa011..d9e717b6`).
+6. Lead-prescribed wording (review it like any other text):
    - C1: `agent-job-packet.md:29` on #131, and the `assignment-fields.ts` `principles` describe;
    - C2: management step 1 split sentence;
    - E1: the role-operator access sentence;
    - E2: management `:10`.
 
-Security: not applicable (skill prose, schemas descriptions; no trust boundary or credential surface changed).
+Security: not applicable (skill prose, schema descriptions; no trust boundary or credential surface changed).
 
 ## Do not redo
 
@@ -107,15 +107,15 @@ Security: not applicable (skill prose, schemas descriptions; no trust boundary o
 
 ## Unfinished work, in order
 
-1. **Independent implementation review r2.** Run `skill-authoring:skill-review` at the implementation stage. Use `review-brief.md` in this folder for targets, diffs, checks per agent and the slop rubric. Reviewers must be fresh agents with no authoring history, read-only.
-2. **Reduce and correct.** Verify each finding at its anchor. Route accepted corrections to an implementer.
+1. Independent implementation review r2. Run `skill-authoring:skill-review` at the implementation stage. Use `review-brief.md` in this folder for targets, diffs, checks per agent and the slop rubric. Reviewers must be fresh agents with no authoring history, read-only.
+2. Reduce and correct. Verify each finding at its anchor. Route accepted corrections to an implementer.
    - Commit on #131 first, then `git merge --no-ff` #131 into #132.
    - Rerun the proof table above and push both.
    - Corrections outside the accepted boundary (design meaning, scope, contract) go to the owner.
-3. **PR descriptions.** #131 says "Validation at `0f71477`" and #132 says "Validation at `39572d7`". Update both to the new heads, and mention `aa5af8cb` / `d9e717b6` and the r2 outcome.
-4. **B5.** Owner decision: run it before merge, or ship with it owed. The fixture is defined in the grammar spec's proof section.
-5. **Cleanup.** Move this folder to memory-logs and delete it from the branch before merge.
-6. **Follow-up PR** (not this stack): diagram-semantics trim and design-skill loading, a possible `presentation-explain`, and principle homes in phases (define-the-domain-first → spec-design; justify-the-complexity → program-design and implementation-review; design-for-failure, types-are-communication and experiment-before-proposing in program-design). Also align `orchestrator-implementation-goal:29` and `orchestrator-design:57` with `role-lead`'s break handling. All are recorded in `2026-10-14-role-phase-extraction/brief.md`.
+3. PR descriptions. #131 says "Validation at `0f71477`" and #132 says "Validation at `39572d7`". Update both to the new heads, and mention `aa5af8cb` / `d9e717b6` and the r2 outcome.
+4. B5. Owner decision: run it before merge, or ship with it owed. The fixture is defined in the grammar spec's proof section.
+5. Cleanup. Move this folder to memory-logs and delete it from the branch before merge.
+6. Follow-up PR (not this stack): diagram-semantics trim and design-skill loading, a possible `presentation-explain`, and principle homes in phases (define-the-domain-first → spec-design; justify-the-complexity → program-design and implementation-review; design-for-failure, types-are-communication and experiment-before-proposing in program-design). Also align `orchestrator-implementation-goal:29` and `orchestrator-design:57` with `role-lead`'s break handling. All are recorded in `2026-10-14-role-phase-extraction/brief.md`.
 
 ## Recommended next action
 

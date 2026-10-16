@@ -11,11 +11,11 @@ If a ticket states design that differs from its linked doc section, report the d
 
 ## The Paradigm
 
-**Why this split exists:**
+Why the split exists:
 
-- **Agents lose context between sessions.** Ticket descriptions live in an API — ephemeral. Architecture docs live in the repo — versioned, searchable, durable. A new session reads docs from the repo and has full context. If the spec lived only in tickets, continuity depends on fetching every ticket, which is fragile.
-- **Two sources of truth always drift.** If a ticket duplicates a design doc, one becomes stale. Instead, tickets *link to* doc sections. One true place.
-- **Different questions, different cadences.** Tickets answer "what's done and what's next." Docs answer "how does it work and why."
+- Agents lose context between sessions. Ticket descriptions live in an API and are ephemeral. Architecture docs live in the repo, where they are versioned, searchable and durable. A new session reads docs from the repo and has full context. If the spec lived only in tickets, continuity depends on fetching every ticket, which is fragile.
+- Two sources of truth always drift. If a ticket duplicates a design doc, one becomes stale, so tickets link to doc sections and the design lives in one place.
+- Tickets and docs answer different questions at different cadences. Tickets answer "what's done and what's next." Docs answer "how does it work and why."
 
 ## Ticket Anatomy
 
@@ -23,7 +23,7 @@ A well-formed ticket contains:
 
 | Field | Purpose |
 |-------|---------|
-| **Title** | Concept name — what this deliverable is, not an implementation step |
+| **Title** | Concept name: what this deliverable is, not an implementation step |
 | **Scope description** | Rough scope, what's in and what's deferred |
 | **Doc section references** | Links or section markers (e.g., `§5.2 Method Namespaces`) pointing to architecture docs |
 | **Dependencies** | `blockedBy`/`blocks` relations to other issues |
@@ -31,21 +31,21 @@ A well-formed ticket contains:
 | **Checklists** | Implementation steps within the ticket (replaces sub-tasks) |
 | **Deferred items** | Explicitly called out: what is out of scope and why (with ticket refs if known) |
 
-See `references/ticket-templates.md` for full examples.
+IF you need a full example of these fields, load `references/ticket-templates.md` and return the template that fits the ticket.
 
 ## Structural Principles
 
-1. **Two levels only: milestones and tasks.** Milestones are conceptual phases. Tasks are deliverables within them. No sub-tasks — checklists in the description carry that role.
-2. **A task is a concept, not an implementation step.** "JSON-RPC command channel" is a task. "Add error code -32602" is a checklist item in the description.
-3. **If two tasks always ship together, they're one task.** The test: can each be delivered and verified independently? If not, merge them.
-4. **Dependencies are first-class.** Cross-project and cross-milestone dependencies use `blockedBy`/`blocks` relations. This is how agents determine what's unblocked; a plan can add a delivery check (see Find what's unblocked).
-5. **Docs live in the repo, tickets reference them.** Architecture docs at `docs/architecture/` (or project-specific path). Tickets link to section numbers, not duplicate content.
+1. Two levels only: milestones and tasks. Milestones are conceptual phases. Tasks are deliverables within them. No sub-tasks; checklists in the description carry that role.
+2. A task is a concept, not an implementation step. "JSON-RPC command channel" is a task. "Add error code -32602" is a checklist item in the description.
+3. If two tasks always ship together, they're one task. Ask whether each can be delivered and verified independently, and merge them if not.
+4. Dependencies are first-class. Cross-project and cross-milestone dependencies use `blockedBy`/`blocks` relations. This is how agents determine what's unblocked; a plan can add a delivery check (see Find what's unblocked).
+5. Docs live in the repo, and tickets reference them. Architecture docs at `docs/architecture/` (or project-specific path). Tickets link to section numbers, not duplicate content.
 
 ## Tool Routing: MCP vs CLI
 
 Use Linear MCP tools as the primary interface. Fall back to CLI for three specific gaps.
 
-### MCP (primary — ~90% of operations)
+### MCP (primary, ~90% of operations)
 
 | Operation | MCP Tool |
 |-----------|----------|
@@ -58,34 +58,34 @@ Use Linear MCP tools as the primary interface. Fall back to CLI for three specif
 | List teams | `list_teams` |
 | Comments | `list_comments`, `create_comment` |
 
-All MCP tools are prefixed `mcp__plugin_linear_linear__`. See `references/mcp-tool-reference.md` for parameter details and usage patterns.
+All MCP tools are prefixed `mcp__plugin_linear_linear__`. IF you need a tool's parameter details or usage patterns, load `references/mcp-tool-reference.md` and return them for that tool.
 
 ### CLI (gap operations)
 
 | Operation | Command |
 |-----------|---------|
-| **Add single dependency** | `linear issue relation add <issueId> <relationType> <relatedId>` |
-| **Remove single dependency** | `linear issue relation delete <issueId> <relationType> <relatedId>` |
-| **List relations** | `linear issue relation list <issueId>` |
-| **Delete issue** | `linear issue delete <issueId>` |
-| **Delete milestone** | `linear milestone delete <id>` |
-| **Start issue (branch + status)** | `linear issue start <issueId>` |
+| Add single dependency | `linear issue relation add <issueId> <relationType> <relatedId>` |
+| Remove single dependency | `linear issue relation delete <issueId> <relationType> <relatedId>` |
+| List relations | `linear issue relation list <issueId>` |
+| Delete issue | `linear issue delete <issueId>` |
+| Delete milestone | `linear milestone delete <id>` |
+| Start issue (branch + status) | `linear issue start <issueId>` |
 
 Relation types: `blocks`, `blocked-by`, `related`, `duplicate`.
 
-See `references/cli-reference.md` for full CLI patterns.
+IF you need the full pattern for a CLI operation, load `references/cli-reference.md` and return it for that operation.
 
-### Critical: Dependency Management
+### Dependency Management
 
-**Adding a single dependency — use CLI, not MCP.** The MCP `update_issue` with `blockedBy`/`blocks` **replaces the entire relation list**. To add one dependency without clobbering existing ones, use:
+To add a single dependency, use the CLI, not MCP. The MCP `update_issue` with `blockedBy`/`blocks` **replaces the entire relation list**. To add one dependency without clobbering existing ones, use:
 
 ```bash
 linear issue relation add LUNA-336 blocked-by LUNA-335
 ```
 
-**Setting all dependencies at creation time — use MCP.** When creating a new issue, pass `blockedBy`/`blocks` arrays directly — no existing relations to clobber.
+To set all dependencies at creation time, use MCP. When creating a new issue, pass `blockedBy`/`blocks` arrays directly, since there are no existing relations to clobber.
 
-**Reading dependencies — use MCP.** `get_issue` with `includeRelations: true` returns the full relation graph.
+To read dependencies, use MCP. `get_issue` with `includeRelations: true` returns the full relation graph.
 
 When the plan's dependencies and Linear's `blockedBy` relations disagree, compare, for each disputed dependency, the plan line that states it (or "inferred from order" when the plan only sequences the work) with the relation Linear lists, before changing either; an inferred dependency never overwrites a listed relation ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
@@ -114,7 +114,7 @@ When a create or relation call errored or timed out after sending, or a breakdow
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: observe that delivery where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or report its readiness as unverified and say where you looked ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
+3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough; observe that delivery where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or report its readiness as unverified and say where you looked ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
 ### Update ticket after implementation
 
@@ -124,8 +124,6 @@ Done when each touched ticket links its doc section, its checklist matches what 
 
 ## Reference Files (read on demand)
 
-These files are not auto-loaded. Read them when you hit these situations:
-
-- **`references/mcp-tool-reference.md`** — Read when you need exact parameter names, response shapes, or filter options for any MCP tool call.
-- **`references/cli-reference.md`** — Read when using CLI for relation management, deletion, or `issue start`. Contains exact command syntax.
-- **`references/ticket-templates.md`** — Read before creating your FIRST ticket in a session. Contains well-formed examples and anti-patterns to avoid.
+- IF you need exact parameter names, response shapes, or filter options for an MCP tool call, load `references/mcp-tool-reference.md` and return them for that call.
+- IF you use the CLI for relation management, deletion, or `issue start`, load `references/cli-reference.md` and return the exact command syntax.
+- IF you are about to create your first ticket in a session, load `references/ticket-templates.md` and return the well-formed example that fits and the anti-patterns to avoid.

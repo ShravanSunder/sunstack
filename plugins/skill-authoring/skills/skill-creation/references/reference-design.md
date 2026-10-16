@@ -23,7 +23,7 @@ no behavior change                                       -> prune
 
 Branch-only placement follows who consumes the material. Move all-run detail into a separate reference when it forms one coherent procedure, has enough density to obscure the main path, or changes for a different reason than the body. Keep detail with its existing owner when line count is the only reason to split it.
 
-The calling `SKILL.md` loads `shared-shape-design.md` when repeated model output, or machine-validated structure is the hard part. This reference returns the ordinary placement decision; the table above names each final home.
+The calling `SKILL.md` loads `shared-shape-design.md` when repeated model output or machine-validated structure is the hard part. This reference returns the ordinary placement decision; the table above names each final home.
 
 ## Caller Owns Routing
 
@@ -62,7 +62,7 @@ checkable stop or completion condition
 
 The opened reference starts from the work already selected by its caller. Keep the current file's entry route, `MUST`/`IF` mode, and caller predicate with the caller.
 
-The entry-ownership boundary is narrow. A reference states its owned decision and expected inputs, may use local conditional procedure, and may call deeper references while its caller retains the current file's entry route.
+A reference states its owned decision and expected inputs, may use local conditional procedure, and may call deeper references while its caller retains the current file's entry route.
 
 A useful opening shape is:
 
@@ -80,7 +80,7 @@ A good ordinary reference:
 - holds one coherent kind of detail;
 - changes behavior without duplicating the main path;
 - keeps local rules, examples, caveats, and templates together;
-- returns a result the caller can actually use;
+- returns a result the caller can use;
 - has a checkable stop when it asks the agent to do work;
 - leaves entry routing and parent completion with the caller.
 

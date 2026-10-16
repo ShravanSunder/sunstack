@@ -7,7 +7,7 @@ description: Use when packaging spec, design, architecture, or product-decision 
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-Package spec/design context so another agent can continue without reconstructing the conversation. This is a portability boundary, not a completion boundary: handoff means the context is transferable, not that the spec is approved or the next phase is complete.
+Package spec/design context so another agent can continue without reconstructing the conversation. This is a portability boundary. Handoff means the context is transferable; it does not mean the spec is approved or the next phase is complete.
 
 ## Core Rules
 

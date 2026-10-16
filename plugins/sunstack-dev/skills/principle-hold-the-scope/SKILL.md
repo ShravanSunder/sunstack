@@ -45,4 +45,4 @@ A small, bounded fix with a clear consumer, outcome, and exclusion needs no rest
 - A delivery split into many pull requests for the builders' convenience, with no dependency or proof reason given.
 - A fix that regresses something the owner already cared about.
 
-Whether two people mean the same thing is `principle-build-the-shared-model-first`. Whether a mechanism earns its place is `principle-justify-the-complexity`.
+When the question is whether two people mean the same thing, restate the picture specifically enough to be corrected and get an explicit answer ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). When the question is whether a mechanism earns its place, name the outcome that needs it now ([justify the complexity](../principle-justify-the-complexity/SKILL.md)).

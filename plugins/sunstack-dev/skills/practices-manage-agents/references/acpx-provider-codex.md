@@ -1,6 +1,6 @@
 # ACPX Provider: Codex
 
-Agent token: `codex`. Legacy route: agent-router carries persistent Codex relationships over ACP by default. Use this contract only when `acpx-legacy.md` admits ACPX because agent-router cannot meet a stated requirement, and record that gap in the ledger. Prefer native Codex subagents for native-eligible bounded assignments; see `references/native-providers-codex.md`.
+Agent token: `codex`. This is a legacy route; agent-router carries persistent Codex relationships over ACP by default. Use this contract only when `acpx-legacy.md` admits ACPX because agent-router cannot meet a stated requirement, and record that gap in the ledger. Prefer native Codex subagents for native-eligible bounded assignments. IF the assignment is native-eligible and bounded, load `references/native-providers-codex.md` and return the spawn encoding.
 
 ## Models
 
@@ -56,4 +56,4 @@ CODEX_CONFIG='<JSON object>' MODEL_PROVIDER='<configured provider id>' \
 
 ## Permissions
 
-Use `--approve-reads` for source-grounded 🦉 Advisor and review work. Keep `--non-interactive-permissions deny` for unattended runs: unknown requests are denied, never approved, and the turn continues instead of aborting. The parent authorizes write access for non-review assignments.
+Use `--approve-reads` for source-grounded 🦉 Advisor and review work. Keep `--non-interactive-permissions deny` for unattended runs: unknown requests are denied and the turn continues instead of aborting. The parent authorizes write access for non-review assignments.

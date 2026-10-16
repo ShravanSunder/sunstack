@@ -1,10 +1,10 @@
 # Source Inspiration Catalog
 
-Lite maintainer map for `sunstack-dev` design. **Not** a runtime skill reference — do not load during normal spec, plan, review, or implementation.
+Lite maintainer map for `sunstack-dev` design. It is not a runtime skill reference, so do not load it during normal spec, plan, review, or implementation.
 
 ## Full admired-source index (canonical)
 
-Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog compare live in the **`ai-dev-skills`** meta-repo:
+Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog compare live in the `ai-dev-skills` meta-repo:
 
 `/Users/shravansunder/Documents/dev/open-source/agent-skills/ai-dev-skills/`
 
@@ -15,7 +15,7 @@ Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog 
 | Date-pinned history | `docs/repo-index-changelog/` | Cheap compare between two submodule SHAs |
 | Maintenance contract | `AGENTS.md` | How to bump submodules and keep indexes in sync |
 
-**Maintain both:** keep this file as a short in-plugin reminder; put durable path-level mappings, pin SHAs, and bump notes in `ai-dev-skills`. When they diverge, prefer updating `ai-dev-skills` first, then refresh the lite tables here if the high-level preserve/avoid story changed.
+Maintain both. Keep this file as a short in-plugin reminder; put durable path-level mappings, pin SHAs, and bump notes in `ai-dev-skills`. When they diverge, prefer updating `ai-dev-skills` first, then refresh the lite tables here if the high-level preserve/avoid story changed.
 
 ## Source Trees To Preserve (lite)
 
@@ -48,7 +48,7 @@ Inspected 2026-09-26 at local `cursor-plugins` revision `ecc249f`. Preserve/avoi
 | --- | --- | --- |
 | Discussion requirement capture | Pstack `show-me-your-work`, Matt Pocock discussion/domain modeling, Addy interview/spec/doubt patterns, Steipete owner briefs | Split discussion surfaces by job; capture material interjections and session requirements; avoid one ritual forcing question |
 | Spec creation | Pstack `how`, Addy source/spec-driven patterns, Matt Pocock domain modeling | Reflect top-level target requirements before swarms; keep current state separate from target state |
-| Plan creation | Obra `writing-plans`, Pstack proof/boundary principles, Codex subagent guidance | Create DAG-shaped vertical slices with valuable proof and subagent suitability |
+| Plan creation | Obra `writing-plans`, Pstack proof/boundary principles, Codex subagent guidance | Create DAG-shaped vertical slices with useful proof and subagent suitability |
 | Implementation execution | Pstack `poteto-mode`, Obra `subagent-driven-development`, existing controller packets | Parent-owned subagent lifecycle, evidence verification, integration, and proof claims |
 | Review transport | OpenClaw ACPX / ACP, local review swarms, Claude/Gemini structured feedback | ACPX is external review transport; parent reducer verifies all candidate findings |
 | Security review | Codex curated security skills | Route to `ops-security-review`; keep normal review lanes lightweight |

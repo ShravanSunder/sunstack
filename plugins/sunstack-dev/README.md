@@ -2,7 +2,7 @@
 
 Shravan's development workflow skills for moving from shared understanding to spec, plan, implementation, review, handoff, debugging, docs, and operations work.
 
-The plugin is built around one idea: each workflow phase should have a clear owner, a clear artifact boundary, and a clear next handoff. Day-to-day work should use the narrower phase skills here.
+Each workflow phase in this plugin should have a clear owner, artifact boundary, and next handoff. Day-to-day work should use the narrower phase skills here.
 
 ## Mental Model
 
@@ -141,15 +141,15 @@ flowchart LR
 
 ### Shared understanding
 
-Use `discuss-clarify-mental-models` when the shared picture is unstable before artifact work: terms, boundaries, assumptions, source-of-truth questions, or tradeoffs need to be made inspectable. It stays read-only, checks bounded evidence, maps branches, names the countercase, and routes only after the model is confirmed or explicitly open. It is not the old one-forcing-question grill.
+Use `discuss-clarify-mental-models` when the shared picture is unstable before artifact work: terms, boundaries, assumptions, source-of-truth questions, or tradeoffs need to be made inspectable. It stays read-only, checks bounded evidence, maps branches, names the countercase, and routes only after the model is confirmed or explicitly open.
 
-`discuss-pathfinding`: Extract unwritten understanding from the user — user and stakeholder requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and records as they crystallize. User-requirements extraction separates evidence from row-level authority, preserves direct users and non-operating stakeholders, forces priority ownership, and captures user-job sequence inputs for later specification views.
+`discuss-pathfinding`: Extract unwritten understanding from the user (user and stakeholder requirements, tacit process knowledge, domain terms, design decisions) via batched grilling with attached reads, live challenge, and records as they crystallize. User-requirements extraction separates evidence from row-level authority, preserves direct users and non-operating stakeholders, forces priority ownership, and captures user-job sequence inputs for later specification views.
 
 Codex display titles use the `Category: Action` form (for example, `Discuss: Pathfinding` and `Spec: Design`). Skill IDs remain kebab-case for invocation. Cursor can load these plugin directories through its explicit `agent --plugin-dir <path>` path; this repository does not provide a separate Cursor marketplace.
 
 Use `practices-research` when the next step is to gather evidence: local code/docs, sibling repos, DeepWiki-style repository research, current web/docs, Reader sources, memory, or session logs. It frames bounded research questions, walks source classes in order, labels claim quality, and writes tmp research ledgers for substantial runs. Substantial runs record source-class coverage, primary anchors and null results in a research ledger. It returns its checked answer and limits to the commissioner, with a phase return token only when the evidence shows a gap another owner must fill.
 
-Use `practices-how` to explain how existing code or a subsystem works before changing it. It traces a real entry through owners, state changes and effects back to the result or error, checks which implementation is actually wired in, keeps what source shows apart from what a runtime capture confirms and what is inferred, and stops when the reader can walk the named case with an anchor at each step. Program Design calls it for the current-system model.
+Use `practices-how` to explain how existing code or a subsystem works before changing it. It traces a real entry through owners, state changes and effects back to the result or error, checks which implementation is wired in, keeps what source shows apart from what a runtime capture confirms and what is inferred, and stops when the reader can walk the named case with an anchor at each step. Program Design calls it for the current-system model.
 
 Use `practices-why` to recover why code or a design took its current shape. It walks back past the last touch to the commit that introduced the behavior, loads `practices-research` for the evidence walk, keeps a proposal apart from an adopted decision, and writes the answer as anchored facts, supported interpretations and named unknowns. It explains, and the next owner decides what to keep or change.
 
@@ -181,7 +181,7 @@ Use `spec-program-review` to classify and independently review a Specification, 
 
 The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` source trees are preserved under [`retired-skills/`](retired-skills/) for provenance and are not runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of those retired trees; they do not restore swarms, controller briefs, worker protocols, transition ledgers, or a separate plan-review layer.
 
-Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, complete but unreviewed or semantically stale three-artifact designs to `spec-program-review`, and current ready three-artifact designs to `plan-implementation`.
+Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, complete but unreviewed or semantically stale three-artifact designs to `spec-program-review`, and current ready three-artifact designs to `plan-implementation`.
 
 ### Plan boundary
 
@@ -211,8 +211,8 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 - `docs-maintain`: durable documentation maintenance after source-of-truth drift is identified. It keeps README human-facing, `AGENTS.md` compact, and workflow history in changelog/runbook docs.
 - `ops-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
 - `ops-linear-tracking`: manages Linear projects, milestones, issues, and dependencies while keeping docs as the design source of truth.
-- `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces — box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
-- `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces — headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.
+- `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: a box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
+- `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces, with headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.
 
 ## External Counsel
 
@@ -255,6 +255,6 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 - Shared runtime references: [`shared-references/`](shared-references/)
 - Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
 - Source inspiration catalog: [`docs/source-inspiration-catalog.md`](docs/source-inspiration-catalog.md)
-- Release smoke and behavioral checks: [`../../docs/changelog/references/sunstack-dev-smoke.md`](../../docs/changelog/references/sunstack-dev-smoke.md)
+- Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
 - Release notes: [`../../docs/changelog/`](../../docs/changelog/)
 - Maintainer guidance: [`../../AGENTS.md`](../../AGENTS.md)

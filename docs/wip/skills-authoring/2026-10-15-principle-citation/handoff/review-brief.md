@@ -18,7 +18,7 @@ Reviewers read only these frozen worktrees.
 
 - You are independent, with no authoring history on these files. Find defects; don't approve. Assume the author optimized for "looks rigorous", and check whether each sentence changes what an agent does.
 - Every finding needs a `path:line` anchor that you opened yourself at the stated revision.
-- **Read-only.** Don't edit, commit, check out, stash or reset anything. Use `git show <rev>:<path>` or `git diff <a> <b>` for other revisions. Scratch notes go outside the repo. Start no further agents.
+- Stay read-only. Don't edit, commit, check out, stash or reset anything. Use `git show <rev>:<path>` or `git diff <a> <b>` for other revisions. Scratch notes go outside the repo. Start no further agents.
 
 ## What changed and why
 
@@ -80,25 +80,25 @@ You may run read-only:
 
 ## What to hunt
 
-1. **Decorative citations.** The action would be the same without the principle, the principle's judgment isn't reflected, or the link text is restated as the action.
-2. **Moments that aren't observable** (they fail the branch-predicate test), or moments that fire on nearly every run.
-3. **Once-per-decision violations.** Check in particular:
+1. Decorative citations. The action would be the same without the principle, the principle's judgment isn't reflected, or the link text is restated as the action.
+2. Moments that aren't observable (they fail the branch-predicate test), or moments that fire on nearly every run.
+3. Once-per-decision violations. Check in particular:
    - lead verify vs management step 7;
    - lead refine vs step 7;
    - lead shared-model vs show-me's Lead resume paragraph;
    - verifier prove vs verify.
-4. **Inventory drift.** An approved add, change or remove that is missing or weakened, or an addition the inventory didn't admit. The inventory rows are in each spec's v4 or v3 section.
-5. **Dangling or stale references.**
+4. Inventory drift. An approved add, change or remove that is missing or weakened, or an addition the inventory didn't admit. The inventory rows are in each spec's v4 or v3 section.
+5. Dangling or stale references.
    - `principle-reading`, pointer lines, "charter's defaults", "charter" in role skills, `references/roles/*` paths;
    - broken links, `load principle-` remnants;
    - how a recipient resolves a packet `principle-<name>`: check the step-6 clause on Claude, Codex and Cursor installs.
-6. **Contradictions:**
+6. Contradictions:
    - management vs role skills;
    - AGENTS.md vs README vs principles-index;
    - the grammar text across `skill-creation` SKILL.md, `references/glossary.md`, `references/reference-design.md`, `skill-review` `checks/placement-and-calls.md` and `references/spec-review.md`;
    - specs vs runtime.
-7. **Readability cost.** The Main path is about 790 words, the presentation tradeoff rule about 75 words, and step 7 holds 3 citations. Would a cut lose behavior?
-8. **Teaching quality of citation sentences:** a concrete action that discriminates and can be checked.
+7. Readability cost. The Main path is about 790 words, the presentation tradeoff rule about 75 words, and step 7 holds 3 citations. Would a cut lose behavior?
+8. Teaching quality of citation sentences: a concrete action that discriminates and can be checked.
 
 ## Slop rubric (owner's D34 inventory)
 

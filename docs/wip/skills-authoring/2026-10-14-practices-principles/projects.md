@@ -1,4 +1,4 @@
-# Practices, principles and later extraction — project scopes
+# Practices, principles and later extraction: project scopes
 
 Owner decisions recorded 2026-10-14. These scopes supersede the earlier proposal to build on PR #128.
 
@@ -12,15 +12,15 @@ Deliverable: a reviewed specification, then bounded implementation, fitting proo
 
 In scope: four `practices-*` skills, the two presentation methods, three existing `ops-*` methods, `principle-write-tests-that-can-fail`, and `principle-verify-before-accepting`. References belonging to those methods may change where this spec names them. Preserve existing role contracts and selected-read semantics from #127. Security keeps its current name in this project.
 
-No new principles, practices, domain leaves or audit names. No role/phase rewrite, Verification Design introduction, orchestrator change, Markdown schema, new schema or global instruction change. Preserve approved user outcomes and useful local teaching; reduce only the precise duplicated instruction replaced by a useful call.
+No new principles, practices, domain leaves or audit names. No role/phase rewrite, Verification Design introduction, orchestrator change, Markdown schema, new schema or global instruction change. Preserve approved user outcomes and useful local teaching; reduce only the duplicated instruction that a useful call replaces.
 
 ## Project 2: analyze roles and phases and propose the next decomposition
 
 This is the precursor to the earlier branches “new or reclassified methods” and “improve roles and L2 phases.” Its output is an analysis and extraction proposal, not blanket implementation authority.
 
-Read the current roles and active phases; identify what each teaches and consumes. Classify repeated material as general judgment, recurring method, domain knowledge, audit method, tool mechanics or local responsibility. Inspect actual consumers and counterexamples before proposing a move. Repeated names do not establish duplicated teaching; a short role-specific application may be necessary.
+Read the current roles and active phases; identify what each teaches and consumes. Classify repeated material as general judgment, recurring method, domain knowledge, audit method, tool mechanics or local responsibility. Inspect the consumers and counterexamples before proposing a move. Repeated names do not establish duplicated teaching; a short role-specific application may be necessary.
 
-For each proposal, show current source, proposed owner, why the move helps, when/how consumers use it, what remains local, gain/cost and a failure with a valid control. Prefer the right existing home; a genuinely distinct method or judgment can warrant a new skill without a universal consumer-count quota. Never extract a phase's governing authorship, admission, result or proof obligations merely because several phases use related words.
+For each proposal, show current source, proposed owner, why the move helps, when/how consumers use it, what remains local, gain/cost and a failure with a valid control. Prefer the right existing home; a distinct method or judgment can warrant a new skill without a universal consumer-count quota. Never extract a phase's governing authorship, admission, result or proof obligations merely because several phases use related words.
 
 Consider `ops-security-review` → `audit-security-review`, preserving explicit scan authority and official tool ownership. Consider caller-selected `domain-<subject>-*` knowledge leaves, with security trust-boundary knowledge as the first candidate. Their mental models and examples must teach, rather than copy packet headings. Project-specific facts, threat models and accepted risks remain project-owned.
 

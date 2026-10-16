@@ -53,4 +53,4 @@ When no uncertain claim or measurable outcome is being decided, a spike, benchma
 - A result judged against a condition the contract never set, like valid extra receipts called "amplification" because the harness expected an exact count.
 - A deciding result changed after the run came back, to fit what it showed.
 
-Reading evidence that already exists is `principle-read-ground-truth-first`. When both options already satisfy the evidence and the question is which cost to accept, use `principle-name-the-tradeoffs`.
+When the evidence already exists, read it at its source ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). When both options already satisfy the evidence and the question is which cost to accept, set the options side by side with what each costs and who pays, then recommend one ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)).

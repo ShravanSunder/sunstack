@@ -4,7 +4,7 @@ You arrive with the named target and question, the lineage anchors from step 2 a
 
 ## Chronology
 
-For each event, record the date, the author, the anchor, and what it changed or said. Start at the earliest event the question needs and walk forward to the current code. The present shape is often several decisions stacked on one another, so the most recent change is rarely the whole story. A retry count introduced as 3 and later raised to 5 has two reasons, and the question may be about either.
+For each event, record the date, the author, the anchor, and what it changed or said. Start at the earliest event the question needs and walk forward to the current code. The present shape is often several decisions stacked on one another, so the most recent change rarely holds every reason. A retry count introduced as 3 and later raised to 5 has two reasons, and the question may be about either.
 
 Good: "`a1b2c3` (2024-03) adds the retry loop with 3 attempts, message 'retry on 503 from billing'. `d4e5f6` (2025-01) raises it to 5 and links OPS-88, which reports timeouts during the billing provider's maintenance windows."
 

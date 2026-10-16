@@ -11,12 +11,12 @@ When a change would touch both the shared stack and a producer, or the Separatio
 
 Choose the smallest loop first:
 
-- Stack lifecycle only: use `~/dev/ai-tools/observability/README.md`.
-- Producer requirements: read `references/producer-contract.md`.
-- Resource labels, marker/state-file keys, or service names: read `references/resource-naming.md`.
-- AgentStudio debug or beta: read `references/agentstudio-loop.md`.
-- Agent VM, OpenClaw, or `shravan-claw-beta`: read `references/resource-naming.md` and `references/agent-vm-loop.md`.
-- Victoria proof or debugging queries: read `references/victoria-queries.md`.
+- IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md` and return its lifecycle commands.
+- IF the work touches producer requirements, load `references/producer-contract.md` and return the requirements that apply.
+- IF the work touches resource labels, marker/state-file keys, or service names, load `references/resource-naming.md` and return the names and keys that apply.
+- IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and return that loop's steps.
+- IF the work is Agent VM, OpenClaw, or `shravan-claw-beta`, load `references/resource-naming.md` and return the names and keys that apply, then load `references/agent-vm-loop.md` and return the loop for its ownership mode.
+- IF the work needs Victoria proof or debugging queries, load `references/victoria-queries.md` and return the queries for the fresh marker.
 
 When expected telemetry is missing or a stack check fails, before restarting the stack or editing a producer, find the first point on the path you observed failing (reachability from this shell, collector health, the endpoint and resource attributes the running process read, the state-file marker), each labeled seen or inferred ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 

@@ -1,4 +1,4 @@
-# AI Tools - Agent Instructions
+# AI Tools: Agent Instructions
 
 This repository contains personal Codex and Claude Code plugins.
 
@@ -50,7 +50,7 @@ Home: `~/dev/memory-logs/skills/` (clone of https://github.com/ShravanSunder/mem
 | Evidence for a named skill-change | `authoring/<yyyy-mm-dd-name>/` |
 | What to do next | `backlog/` |
 
-In this repo, only the **skill spec** for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
+In this repo, only the skill spec for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
 
 Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-authoring/`):
 
@@ -81,7 +81,7 @@ Other sources:
 
 ## Admired-source provenance (ai-dev-skills)
 
-Upstream skill collections are tracked in a separate meta-repo so this plugin can keep a **lite** inspiration map while durable provenance lives next to the actual upstream checkouts.
+Upstream skill collections are tracked in a separate meta-repo so this plugin can keep a lite inspiration map while durable provenance lives next to the actual upstream checkouts.
 
 - **Meta-repo:** `/Users/shravansunder/Documents/dev/open-source/ai-dev-skills/`
 - **Lite in-plugin map:** `plugins/sunstack-dev/docs/source-inspiration-catalog.md` (preserve/avoid + workflow-area overview; not a runtime skill reference)
@@ -94,7 +94,7 @@ Upstream skill collections are tracked in a separate meta-repo so this plugin ca
 | Cheap compare between two pinned SHAs | `ai-dev-skills/docs/repo-index-changelog/` |
 | How to bump submodules / keep indexes synced | `ai-dev-skills/AGENTS.md` |
 
-**Maintain both.** Update `ai-dev-skills` for path-level mappings, pin SHAs, and bump notes. Refresh the lite catalog here only when the high-level preserve/avoid or workflow-area story changes. Do not copy upstream skill prose into plugin skills; do not treat inspiration as proof that local behavior works.
+Maintain both. Update `ai-dev-skills` for path-level mappings, pin SHAs, and bump notes. Refresh the lite catalog here only when the high-level preserve/avoid or workflow-area story changes. Do not copy upstream skill prose into plugin skills; do not treat inspiration as proof that local behavior works.
 
 ## Shared Runtime References
 
@@ -120,7 +120,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | program-design | `plugins/sunstack-dev/skills/program-design/` | Structural How: components, ownership, interfaces, state, flows, failure/recovery, concurrency, trust boundaries, and proof seams |
 | spec-program-review | `plugins/sunstack-dev/skills/spec-program-review/` | Independent 🔎 Reviewer Sidekick walks mode-complete, sequential seam passes, dispel, proof challenge, and predicate-selected focused checks; rails-anchored reduction, no editing or acceptance, bounded review rounds |
 | discuss-clarify-mental-models | `plugins/sunstack-dev/skills/discuss-clarify-mental-models/` | Read-only reconvergence for unstable shared mental models before specs, plans, docs, or code: terms, boundaries, assumptions, source-of-truth questions, tradeoffs, branches, and countercase |
-| discuss-pathfinding | `plugins/sunstack-dev/skills/discuss-pathfinding/` | Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
+| discuss-pathfinding | `plugins/sunstack-dev/skills/discuss-pathfinding/` | Extract unwritten understanding from the user (requirements, tacit process knowledge, domain terms, design decisions) via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
 | practices-research | `plugins/sunstack-dev/skills/practices-research/` | Practice: evidence gathering for local code/docs, prior art, current web/docs, Reader, memory, and session-log research with ordered source classes, `tmp/practices-research/` ledgers, and a checked answer with its limits; a phase return token only for a gap another owner must fill |
 | practices-how | `plugins/sunstack-dev/skills/practices-how/` | Practice: explain how existing code works by tracing real paths from entry to effect and back, with wiring checks, edge semantics resolved from the actual implementation, and source, capture and inference kept apart; Program Design's current-system model calls it |
 | practices-why | `plugins/sunstack-dev/skills/practices-why/` | Practice: reconstruct the recorded rationale behind code or a design, from introducing commit to adoption evidence, through `practices-research`, with calibrated facts, interpretations and unknowns; explains without approving changes |
@@ -158,7 +158,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | presentation-webui | `plugins/sunstack-dev/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
 | principle-* (17) | `plugins/sunstack-dev/skills/principle-*/` | Engineering principles, one judgment each (for example `principle-design-for-failure`), hidden from model invocation; skills cite them with a relative link, and each opens with its read rule; family map in `plugins/sunstack-dev/docs/principles-index.md` |
 | ops-linear-tracking | `plugins/sunstack-dev/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |
-| peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common — works in both Claude and Codex) |
+| peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common; works in both Claude and Codex) |
 | scaffold-project | `plugins/ai-scaffold/skills/scaffold-project/` | Project scaffolding (common) |
 | agent-collaboration | `plugins/agent-router/skills/agent-collaboration/` | Tool manual for the agent-collaboration CLI and agent-router MCP: identity, sessions, boards, messages, listen/wait, wakes, schedules, uncertain-mutation recovery (Codex, Claude Code, and Cursor via `agent-router`) |
 
@@ -255,18 +255,18 @@ plugins/<plugin-name>/
 ### Key Rules
 
 - Plugin `source` paths in marketplace manifests must use `./plugins/<name>` format (explicit relative paths)
-- `${CLAUDE_PLUGIN_ROOT}` resolves to the cached install path at runtime -- use it in hooks and scripts
-- Path traversal (`..`) is NOT allowed in source paths
-- Plugin `name` is the cache key for consumers -- changing it breaks existing installs
+- `${CLAUDE_PLUGIN_ROOT}` resolves to the cached install path at runtime; use it in hooks and scripts
+- Path traversal (`..`) is not allowed in source paths
+- Plugin `name` is the cache key for consumers, so changing it breaks existing installs
 - Run `claude plugin validate .` after Claude marketplace changes and `codex plugin list --marketplace sunstack --available --json` after Codex marketplace changes
 
 ### Hook Development Gotchas
 
-- **Transcript vs stdin**: The `transcript_path` JSONL file uses Anthropic API format -- tool usage is `{"type": "tool_use", "name": "Write", "input": {...}}` inside a `content` array. The field is `"name"`, NOT `"tool_name"`. The `"tool_name"` field only exists in hook stdin input. Do not grep the transcript for `"tool_name"`.
-- **Display names differ from tool names**: Terminal shows `Create(file)` but the transcript stores `"name": "Write"`. Similarly, `MultiEdit` is a separate tool name.
-- **Cache versioning**: Plugin files are cached by `version` in `plugin.json`. Changing hook scripts or config without bumping the version means Claude Code uses stale cached files. Always bump version after changes.
-- **Stop hooks**: Require `"matcher": "*"` in `hooks.json`. Use `bash ${CLAUDE_PLUGIN_ROOT}/hooks/script.sh` (with `bash` prefix) to ensure execution even if permissions are stripped during caching. Check `stop_hook_active` and exit 0 when true to prevent infinite loops. Exit code 2 blocks the stop; stderr is fed back to Claude as the reason.
-- **Debugging hooks**: Run `claude --debug`, check logs at `~/.claude/debug/`, grep for `Hook Stop` to see hook output and exit codes.
+- The `transcript_path` JSONL file uses Anthropic API format: tool usage is `{"type": "tool_use", "name": "Write", "input": {...}}` inside a `content` array. The field is `"name"`, not `"tool_name"`; `"tool_name"` exists only in hook stdin input. Do not grep the transcript for `"tool_name"`.
+- Display names differ from tool names. The terminal shows `Create(file)` but the transcript stores `"name": "Write"`, and `MultiEdit` is a separate tool name.
+- Plugin files are cached by `version` in `plugin.json`. Changing hook scripts or config without bumping the version means Claude Code uses stale cached files. Always bump version after changes.
+- Stop hooks require `"matcher": "*"` in `hooks.json`. Use `bash ${CLAUDE_PLUGIN_ROOT}/hooks/script.sh` (with `bash` prefix) to ensure execution even if permissions are stripped during caching. Check `stop_hook_active` and exit 0 when true to prevent infinite loops. Exit code 2 blocks the stop; stderr is fed back to Claude as the reason.
+- To debug hooks, run `claude --debug`, check logs at `~/.claude/debug/`, and grep for `Hook Stop` to see hook output and exit codes.
 
 ### Adding a New Plugin
 

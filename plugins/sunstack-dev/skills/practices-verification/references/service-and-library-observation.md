@@ -20,7 +20,7 @@ Read back what the caller can read. After a write, read the state through the pu
 
 ## Telemetry as evidence
 
-When the evidence comes from the shared local OpenTelemetry and Victoria stack, use `ops-observability-stack` for its mechanics and for how it separates a health result from proof that this producer emitted. Other telemetry stacks use the project's own procedure. In both cases a healthy collector or a dashboard that loads says nothing about whether your target emitted the record, and a missing span is weak evidence until you know the run could have recorded it.
+IF the evidence comes from the shared local OpenTelemetry and Victoria stack, load `ops-observability-stack` and return its query mechanics and the check that separates a health result from proof that this producer emitted. Other telemetry stacks use the project's own procedure. In both cases a healthy collector or a dashboard that loads says nothing about whether your target emitted the record, and a missing span is weak evidence until you know the run could have recorded it.
 
 ## Examples
 

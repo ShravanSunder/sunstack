@@ -65,7 +65,7 @@ IF the user requests a readable view or the trace needs substantial synthesis, l
 
 ## No-board account and reconciliation
 
-The session-logs file holds the running account when no board thread exists. Each concurrent writer owns a separate dated file and records timestamps, decisions and reasons, evidence, outcome, pending updates, and the exact thread reference when one is known. Report when no thread exists and never invent ids. Follow the destination repository's sanitization and ownership rules.
+Each concurrent writer owns a separate dated session-logs file and records timestamps, decisions and reasons, evidence, outcome, pending updates, and the exact thread reference when one is known. Report when no thread exists and never invent ids. Follow the destination repository's sanitization and ownership rules.
 
 If the board thread is unavailable after one existed, report the sharing gap, keep independent work going, and hold only work that depends on another agent's reply. Respect access boundaries; do not restart services or probe alternate profiles. Continue the account in the already authorized session-logs file only if its destination instructions and write authority permit it; otherwise return current state and the exact access gap to the commissioner.
 
@@ -79,4 +79,4 @@ When a board thread becomes available after no-board work has been recorded in s
 
 Keep any unresolved submission outcome explicit. The session-log is the running conversation account when there is no board thread; it is not a shared handoff index or a duplicate board.
 
-Complete when the current outcome and continuation context are recorded in the work thread or an eligible session-logs file, required views are honestly covered, and no thread was resolved outside `practices-collaboration`'s rule. If no authorized trace home is accessible, report current state and the exact access gap as a blocker; this does not initialize a trace or satisfy an owner-required sharing gate. Independent work may continue where possible; hold only work that depends on another agent's reply. Existing JSONL trails stay read-only historical inputs; inspect them without inventing missing events or migrating them.
+Complete when the current outcome and continuation context are recorded in the work thread or an eligible session-logs file, required views are honestly covered, and no thread was resolved outside `practices-collaboration`'s rule. If no authorized trace home is accessible, report current state and the exact access gap as a blocker; this does not initialize a trace or meet an owner requirement that the work be shared. Independent work may continue where possible; hold only work that depends on another agent's reply. Existing JSONL trails stay read-only historical inputs; inspect them without inventing missing events or migrating them.

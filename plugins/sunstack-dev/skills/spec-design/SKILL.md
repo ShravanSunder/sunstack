@@ -280,7 +280,7 @@ The first internal component, owner, dependency edge, state store, or enforcemen
 
 ## Bounded Evidence Help
 
-There is no default swarm. IF one bounded evidence, observable-surface, product-intent, or contract question benefits from independent work, use `practices-manage-agents` to select the agent pattern and runtime.
+IF one bounded evidence, observable-surface, product-intent, or contract question benefits from independent work, use `practices-manage-agents` to select the agent pattern and runtime.
 
 The packet names the exact evidence question, sources, maximum authority, non-goals, and expected anchors. Delegation is parallel-safe only after the source inventory and semantic boundary exist. Instance authority is equal to or narrower than the packet and never includes Requirements or Specification meaning, prose, organization, views, diagrams, or integration. Return a `complete | partial | blocked` evidence receipt; the Lead opens the decisive sources, verifies the result, and authors the artifact itself.
 

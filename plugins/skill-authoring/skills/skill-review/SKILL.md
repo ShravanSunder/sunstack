@@ -52,7 +52,7 @@ Corrections return to the same review lead with its review history, which verifi
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
 
-Worked example: open accepted findings go 4 → 3 → 3 → 4 over four reviews. 4 → 3 is progress; 3 → 3 and 3 → 4 are two adjacent comparisons without a drop, so the fourth review returns `not-converging` — the stop rule is already met there, not one round later.
+Worked example: open accepted findings go 4 → 3 → 3 → 4 over four reviews. 4 → 3 is progress; 3 → 3 and 3 → 4 are two adjacent comparisons without a drop, so the fourth review returns `not-converging`. The stop rule is met at that review, not one round later.
 
 The accepted boundary:
 

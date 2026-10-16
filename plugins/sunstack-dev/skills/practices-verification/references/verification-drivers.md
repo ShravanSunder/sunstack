@@ -32,11 +32,11 @@ The projects, scripts and signals below are illustrative.
 
 ### Failed: the probe that always passed
 
-A driver greps the app's output for "ok" and exits 0 when it finds it. It passes every run, including against a build where the feature is broken, because the app prints "ok" in its startup banner. Its silence was never evidence. The repair makes the probe read the specific outcome the claim names, then runs it against the broken build to see it fail.
+A driver greps the app's output for "ok" and exits 0 when it finds it. It passes every run, including against a build where the feature is broken, because the app prints "ok" in its startup banner. The repair makes the probe read the specific outcome the claim names, then runs it against the broken build to see it fail.
 
 ### Failed: the hook added under a product grant
 
-The driver can't observe a queue's result, and the agent holds write access to the product code. It adds a test-only endpoint to the service to expose the queue and calls the driver fixed. The assignment named only `verify/` paths, so that endpoint is a product change nobody assigned. The right return is the seam gap: the observation needs a read route the product doesn't expose.
+The driver can't observe a queue's result, and the agent holds write access to the product code. It adds a test-only endpoint to the service to expose the queue and calls the driver fixed. The assignment named only `verify/` paths, so that endpoint is a product change nobody assigned. The agent should have returned the seam gap, naming the read route the observation needs and the product doesn't expose.
 
 ### Clean: one broken piece, repaired and shown
 

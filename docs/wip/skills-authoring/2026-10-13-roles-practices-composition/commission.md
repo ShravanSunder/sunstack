@@ -13,7 +13,7 @@ You are the 🐒 Implementer Sidekick. Translate the accepted engineering pictur
 - All use Router service `0ff962c5-7fa3-4c18-a5ca-1bbe8db09e89`, with endpoint `claude-local` or `codex-local` as named above.
 - Workstream: this single management-skill update and new PR, closed at implemented/proven handback for Lead assessment. No merge or release is granted.
 
-Both paired sessions already exist. Fill their actual pair references before dispatching work. Share source facts, setup and reproductions directly, and send design/reference breaks to the Lead. An address or prompt-delivery receipt is not evidence of a correct result.
+Both paired sessions already exist. Fill in their pair references before dispatching work. Share source facts, setup and reproductions directly, and send design/reference breaks to the Lead. An address or prompt-delivery receipt is not evidence of a correct result.
 
 ## Governing sources and full reads
 
@@ -25,7 +25,7 @@ Read current source and local instructions at the implementation worktree, plus 
 
 ## Worktree and writes
 
-Use `/Users/shravansunder/dev/ai-tools.skills-practices-manage-agents`, branch `skills/practices-manage-agents`. Actual setup was independently inspected at baseline `54a075aa`, with only the two pre-existing untracked owner WIP folders. Recheck cwd, branch, HEAD and dirty state before writing; preserve those folders and never stage them. Do not create another worktree or write on main.
+Use `/Users/shravansunder/dev/ai-tools.skills-practices-manage-agents`, branch `skills/practices-manage-agents`. The setup was independently inspected at baseline `54a075aa`, with only the two pre-existing untracked owner WIP folders. Recheck cwd, branch, HEAD and dirty state before writing; preserve those folders and never stage them. Do not create another worktree or write on main.
 
 Allowed source writes:
 
@@ -44,14 +44,14 @@ Private devfiles role/form and naming edits belong to the already approved separ
 2. Rename management and author its visible model and main path. Encode responsibility/form selection, Complete/Cross-domain executor eligibility, guided Operator candidate collection, and charter-granted bounded Luna helper routes exactly as specified. Keep design and acceptance Lead-owned.
 3. Write all seven role files from the teaching prototypes, with examples, conditions and ready prompt full reads. Write execution-form detail and meaningful delegation contrasts. Keep the main route visible and the tool manuals at their existing owner.
 4. Author one described Zod v4 packet schema with inferred types and real discriminants/payloads. Build object variants before readonly wrapping. Preserve phase-owned returns. Integrate only the existing test seam; use one direct schema/test Zod 4.6.5 resolution. Normal pnpm deduplication of the existing compatible eval core/peer/optional Zod references to 4.6.5 is allowed; inspect and record that bounded lock effect. No alias, override or unrelated dependency bump. Run existing fitting offline lib/typecheck/import proof; eval/model execution stays unrun and explicitly unverified.
-5. Cut over live callers/metadata and add fitting permanent structural tests. Update required changelog/version metadata. Provide the paired Verifier the actual diff/source and proof output as soon as there is something concrete to inspect.
+5. Cut over live callers/metadata and add fitting permanent structural tests. Update required changelog/version metadata. Give the paired Verifier the diff, source and proof output as soon as there is something concrete to inspect.
 6. Run appropriate structural proof, read the resulting diff against the accepted need, and fix bounded defects. Return proof and gaps. After the Lead's substantive assessment, independent implementation review follows; a draft PR may be prepared through the existing wrap-up route when appropriate, with no merge or home-cache refresh.
 
 ## Proof and stops
 
 Meaningful schema tests cover a valid Operator procedure vs missing procedure; a valid Implementer Sidekick vs illegal Worker form; a pre-build Verifier challenge without a build vs delivery observation missing its target; and completed helper handback missing evidence vs valid blocked handback. These test interface failures, not the prose word-for-word.
 
-Run fitting affected unit tests, shared TypeScript typecheck, import/Bun smoke, applicable formatter/linter and live caller/metadata/reachability checks. Use repository-root commands targeting `tests/skills`; preserve logs with command, exit code and pass/fail counts. The Verifier judges sensitivity/adequacy against actual source and may use those same established structural commands. Do not manufacture broader runtime proof or duplicate an already adequate run without a specific concern.
+Run fitting affected unit tests, shared TypeScript typecheck, import/Bun smoke, applicable formatter/linter and live caller/metadata/reachability checks. Use repository-root commands targeting `tests/skills`; preserve logs with command, exit code and pass/fail counts. The Verifier judges sensitivity/adequacy against the source and may use those same established structural commands. Do not manufacture broader runtime proof or duplicate an already adequate run without a specific concern.
 
 No new pressure, trigger-evaluation, E1/compaction, mutation/property or paid inference runs. Prepare any later scenarios only as unrun. Structural success cannot establish trusted role behavior. Name that gap before handback/release and preserve the owner's later release decision.
 
@@ -59,6 +59,6 @@ Stop dependent writing for a governing contract/ownership/scope break; return as
 
 ## Return and coordination
 
-Record consequential work on existing root `01a118f1-aa7e-74cc-9785-b01f77b10a48`, using your own identity and assigned seat. Return a path-first handback with actual branch/HEAD, complete scoped diff, checks and raw output paths, Verifier observations, deviations and unverified limits. The Lead reads that evidence and accepts; Reviewer findings and Advisor agreement do not replace acceptance. No shared index, auto-merge, cache refresh or installed behavior claim.
+Record consequential work on existing root `01a118f1-aa7e-74cc-9785-b01f77b10a48`, using your own identity and assigned seat. Return a path-first handback with the branch and HEAD, complete scoped diff, checks and raw output paths, Verifier observations, deviations and unverified limits. The Lead reads that evidence and accepts; Reviewer findings and Advisor agreement do not replace acceptance. No shared index, auto-merge, cache refresh or installed behavior claim.
 
 Current release state: source/spec accepted and execution authorized for the named pair; implementation/proof are not yet established. No merge, release or home-cache refresh grant.

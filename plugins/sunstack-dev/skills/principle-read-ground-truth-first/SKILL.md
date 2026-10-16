@@ -26,7 +26,7 @@ Don't start from assumptions; read ground truth first, in proportion to the task
 
 **A failed read is about your access until you've checked the instrument.** A request that fails from inside a sandbox, without credentials, or from the wrong network tells you that you couldn't reach the thing, not that the thing is down. Check your access and permissions before reporting an outage or rerunning work.
 
-**Read in proportion.** Read what the claim depends on: the touched code, its callers, the contract it relies on. Not the whole repository.
+**Read in proportion.** Read what the claim depends on (the touched code, its callers, the contract it relies on), not the whole repository.
 
 **The hard call is when a summary is good enough.** For a claim that matters, it isn't: the agent making the claim inspects the decisive source itself, at its current version. A doc, a helper's report, or your own memory is a lead that tells you where to read, not evidence. When you couldn't verify something, say so and say where you looked.
 
@@ -48,4 +48,4 @@ If no claim depends on current behavior, such as formatting text you were given,
 - A new guard or a restart called "the fix" without showing the failing behavior and the state that caused it.
 - "It's integrated" with no look at where it's called.
 
-Judging whether gathered evidence supports a conclusion is `principle-verify-before-accepting`. Creating new evidence by running something is `principle-experiment-before-proposing`. When what you read contradicts the design's premise, not just a detail, use `principle-refine-mental-models`.
+When you judge whether gathered evidence supports a conclusion, check that it observed that exact claim at this version ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). When you create new evidence by running something, write the deciding result before you run ([experiment before proposing](../principle-experiment-before-proposing/SKILL.md)). When what you read contradicts the design's premise, not just a detail, stop and say what was assumed, what you found, and what it means ([refine mental models](../principle-refine-mental-models/SKILL.md)).

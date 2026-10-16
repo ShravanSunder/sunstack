@@ -10,30 +10,30 @@ Phases should teach how to carry out their particular engineering job. Principle
 
 The first slice updates nine existing phase skills. It composes their concrete decisions with existing principles and removes only the portable tutorial material those principles already teach. It also extracts the common proof-command execution procedure from the two review phases into one shared reference. No new practice or principle is proposed in this slice.
 
-Example: Specification still produces the entity table and settles or raises each identity question. The domain principle teaches how to decide identity from behavior. Program Design still produces the actual owner/interface model; the separation principle teaches where a boundary earns its place. Neither phase becomes a list of links.
+Example: Specification still produces the entity table and settles or raises each identity question. The domain principle teaches how to decide identity from behavior. Program Design still produces the owner/interface model; the separation principle teaches where a boundary earns its place. Neither phase becomes a list of links.
 
 ## Problem and decisive evidence
 
 The owner's goal is for skills to teach engineering judgment through composition rather than duplicate it or accumulate ceremony. The six source-audit units covered the active non-orchestrator portfolio. The following findings justify this bounded slice; citation counts are a discovery signal, not its success criterion.
 
-Paths below are relative to `plugins/sunstack-dev/`. They refer to the source inherited from #132; implementation must reopen the actual current files before editing.
+Paths below are relative to `plugins/sunstack-dev/`. They refer to the source inherited from #132; implementation must reopen the current files before editing.
 
 | Existing phase teaching | Existing judgment owner | Why change the composition |
 | --- | --- | --- |
 | `skills/spec-design/references/domain-entities.md`, What to Inspect and Settled or Unmade: extracting synonyms, same-instance distinctions, states and the Reminder example | `principle-define-the-domain-first` | The reference repeats the principle's extraction moves and example. Identity judgment has two editable tutorial homes. |
 | `skills/program-design/references/components-ownership-interfaces.md`, Behavioral Interfaces: representative caller and real-seam taxonomy | `principle-separate-the-concerns` | The principle already teaches reason to change, consumer-shaped interfaces and when a direct function needs no seam. |
 | Program Design selection/simplification and both review `references/lanes/dispel.md` files: deletion, pass-through layers and unsupported mechanisms | `principle-justify-the-complexity` | The same portable necessity test is retaught. Local requirement coverage and finding dispositions are separate obligations. |
-| `skills/plan-implementation/references/slice-and-proof-design.md`, Match Proof to Each Change: cheapest honest layer, independent oracle and test-removal grounds | `principle-write-tests-that-can-fail` | The principle owns those judgments; the planner owns the actual proof map and implementation sequence. |
+| `skills/plan-implementation/references/slice-and-proof-design.md`, Match Proof to Each Change: cheapest honest layer, independent oracle and test-removal grounds | `principle-write-tests-that-can-fail` | The principle owns those judgments; the planner owns the proof map and implementation sequence. |
 | Implementation execution and both review reductions: claim versus observation and drift versus a failed premise | `principle-prove-it-works`, `principle-verify-before-accepting`, `principle-refine-mental-models` | Producing proof, assessing proof and deciding what a surprise means are distinct judgments with existing owners. |
-| Both review `references/lanes/proof-challenge.md` files: exact execution grant, command-chain preflight, write containment and observed-output capture | Proposed `shared-references/review-proof-command-execution.md` | These are nearly identical operational instructions with two actual callers. The review methods already decide when to run them. |
+| Both review `references/lanes/proof-challenge.md` files: exact execution grant, command-chain preflight, write containment and observed-output capture | Proposed `shared-references/review-proof-command-execution.md` | These are nearly identical operational instructions with two callers. The review methods already decide when to run them. |
 
 Source observations establish duplicated teaching and procedure, not a demonstrated improvement in agent behavior. Earlier citation pilots observed principle retrieval and correct judgments with equally correct controls; they do not prove the benefit of this new composition or qualify every client.
 
 ## Observable success
 
-For each updated phase, an agent can perform its concrete job without inventing a missing step or following a generic virtue. At the selected judgment point it reaches the existing principle, applies it to the actual decision, and preserves the phase's required result and authority. It also recognizes the valid case where no extra boundary, broader proof or owner question is needed.
+For each updated phase, an agent can perform its concrete job without inventing a missing step or following a generic virtue. At the selected judgment point it reaches the existing principle, applies it to the decision at hand, and preserves the phase's required result and authority. It also recognizes the valid case where no extra boundary, broader proof or owner question is needed.
 
-The resulting source has one maintained home for each extracted tutorial and for the shared command procedure. Each phase retains the obligations another agent needs to use its result: its actual tables, source reads, coverage, decision conditions, grants, routes and completion criteria. Fewer words or more principle citations alone do not satisfy this goal.
+The resulting source has one maintained home for each extracted tutorial and for the shared command procedure. Each phase retains the obligations another agent needs to use its result: its tables, source reads, coverage, decision conditions, grants, routes and completion criteria. Fewer words or more principle citations alone do not satisfy this goal.
 
 ## Design decisions
 
@@ -56,37 +56,37 @@ These are the proposed defaults for review, not claims that the owner already ap
 
 Each run updates exactly one named skill. All use the current trigger and invocation settings unchanged. The sequence below is for authoring and integration; it does not authorize publishing an incomplete shared-reference cutover.
 
-### R1 — `spec-design`: derive meaning using the domain principle
+### R1 (`spec-design`): derive meaning using the domain principle
 
 **Promise:** turn settled owner meaning into defined entities and observable obligations without inventing implementation or unnecessarily asking the owner to define what the sources already decide.
 
-At entity derivation in `references/domain-entities.md`, cite `../../principle-define-the-domain-first/SKILL.md` on the action of deciding identity, relationships and observable states from settled behavior. Keep the body's mandatory reference load and its concrete entity-table return. Keep the explicit distinction between derivation from settled statements and genuinely unmade owner meaning.
+At entity derivation in `references/domain-entities.md`, cite `../../principle-define-the-domain-first/SKILL.md` on the action of deciding identity, relationships and observable states from settled behavior. Keep the body's mandatory reference load and its concrete entity-table return. Keep the explicit distinction between derivation from settled statements and unmade owner meaning.
 
 Remove the reference's repeated general extraction/sufficiency tutorial where the principle already owns it; keep source selection, authoritative-term reuse, stable E identifiers, filled entity-table example, exact gap and route, and completion. The Reminder may remain as a filled phase table, not a second free-standing explanation of the same principle. No table, route or phase convention moves into the principle.
 
-**Pressure cases:** a moved due date preserves identity while re-hold creates a new instance; a genuinely ambiguous same-instance rule needs the exact owner question; an authoritative glossary is reused without reopening it. Check the produced entity meaning and gap, not whether the reply recites the principle.
+**Pressure cases:** a moved due date preserves identity while re-hold creates a new instance; an ambiguous same-instance rule needs the exact owner question; an authoritative glossary is reused without reopening it. Check the produced entity meaning and gap, not whether the reply recites the principle.
 
-### R2 — `program-design`: boundaries and complexity earn their place
+### R2 (`program-design`): boundaries and complexity earn their place
 
 **Promise:** realize the fixed observable contract with justified components, consumer-shaped interfaces, singular owners and preserved requirements.
 
-At target-composition selection, retain the concrete obligation/deletion challenge and cite `principle-justify-the-complexity`. In `references/components-ownership-interfaces.md`, put the separation citation at the real boundary/interface choice. If a decision already lives in that reference, do not add a parallel body citation for it. In `references/artifact-and-self-review.md`, prune portable necessity explanations while retaining the actual artifact/coverage self-check and local view/trace obligations.
+At target-composition selection, retain the concrete obligation/deletion challenge and cite `principle-justify-the-complexity`. In `references/components-ownership-interfaces.md`, put the separation citation at the real boundary/interface choice. If a decision already lives in that reference, do not add a parallel body citation for it. In `references/artifact-and-self-review.md`, prune portable necessity explanations while retaining the artifact/coverage self-check and local view/trace obligations.
 
-Retain entity bindings, shapes, closed variants, representative interaction, owners, dependency rules, actual diagrams, accepted-requirements coverage and structural-realization confirmation. A boundary that hides a necessary lifecycle or policy remains legitimate. The principle supplies judgment, not permission to remove it.
+Retain entity bindings, shapes, closed variants, representative interaction, owners, dependency rules, diagrams, accepted-requirements coverage and structural-realization confirmation. A boundary that hides a necessary lifecycle or policy remains legitimate. The principle supplies judgment, not permission to remove it.
 
 In `references/state-calls-and-flows.md`, qualify coexistence modeling: first establish the external consumer or persisted-state constraint and the owner's cutover decision. Then model only the authorized phases. Preserve the existing phase fields for authority, readers/writers, skew, transition, rollback, failure and proof. No new shim, dual path or approval ledger is introduced by this edit.
 
 **Pressure cases:** remove an unneeded wrapper but retain the adapter that owns cancellation; reject a new store with no required outcome; preserve every accepted identity after simplification; distinguish an elective parallel compatibility path from an owner-authorized external-consumer migration.
 
-### R3 — `plan-implementation`: plan tests that can disprove the claim
+### R3 (`plan-implementation`): plan tests that can disprove the claim
 
-**Promise:** produce a runnable slice/proof plan whose checks can observe the actual obligation at a suitable layer.
+**Promise:** produce a runnable slice/proof plan whose checks can observe the obligation at a suitable layer.
 
 In `references/slice-and-proof-design.md`, cite `../../principle-write-tests-that-can-fail/SKILL.md` where proof and an independent oracle are selected. Prune the duplicate general mocked-boundary/oracle tutorial. Retain each slice's proof map, project layer source or `project silent`, property/example choice, concrete test keep/repair/remove disposition and required removal evidence, integration gates and split/replan stops. Do not create a proof-design practice or framework.
 
 **Pressure cases:** a producer/consumer change requires their real serialization connection and a contract-derived expected value; a pure rounding rule stays a focused unit check; an existing test is not removed merely because a new test looks similar.
 
-### R4 — `plan-improve-repo`: accept candidates, then plan their real proof
+### R4 (`plan-improve-repo`): accept candidates, then plan their real proof
 
 **Promise:** turn verified, admitted improvement evidence into a plan without upgrading an unsupported candidate or planning through a design gap.
 
@@ -94,7 +94,7 @@ Cite `principle-verify-before-accepting` at candidate vetting before admission, 
 
 **Pressure cases:** reject a polished candidate contradicted by its cited source; plan a real interaction instead of two disconnected mocked suites; retain the design-required route; allow matching evidence to be reused after a prose-only edit.
 
-### R5 — `implement-plan`: produce proof and classify surprises
+### R5 (`implement-plan`): produce proof and classify surprises
 
 **Promise:** carry the approved slice through its real path and distinguish a bounded repair from a failed governing premise.
 
@@ -102,17 +102,17 @@ In `references/execution-and-proof.md`, cite `../../principle-prove-it-works/SKI
 
 **Pressure cases:** a real-path automated journey counts without an equivalent repeated manual run; a green wrapper test does not prove the planned transport effect; reversible drift is repaired inside scope; an owner-contract break returns its exact consequence rather than inventing a new seam.
 
-### R6 — `debug-investigation`: ground causal claims and reconsider failed premises
+### R6 (`debug-investigation`): ground causal claims and reconsider failed premises
 
-**Promise:** return a diagnosis whose causal claim is as narrow as the evidence and a next action that addresses the actual uncertainty.
+**Promise:** return a diagnosis whose causal claim is as narrow as the evidence and a next action that addresses the remaining uncertainty.
 
-At failing-boundary/caller tracing, cite `principle-read-ground-truth-first` with the actual divergence to locate. At repeated-premise failure, cite `principle-refine-mental-models` while retaining the existing local failed-fix signal and read-only/fix admission. Do not centralize debugging into the principle or add a generic investigation practice: `practices-research` already owns gathering/checking sources, while this phase owns reproduction and ranked causal hypotheses.
+At failing-boundary/caller tracing, cite `principle-read-ground-truth-first` with the divergence to locate. At repeated-premise failure, cite `principle-refine-mental-models` while retaining the existing local failed-fix signal and read-only/fix admission. Do not centralize debugging into the principle or add a generic investigation practice: `practices-research` already owns gathering/checking sources, while this phase owns reproduction and ranked causal hypotheses.
 
 Retain the bug packet, reproduction classification, supporting/missing evidence, smallest discriminating step, artifact rules and monitoring procedure. A source-confirmed mechanism is distinct from proving it caused a historical incident.
 
 **Pressure cases:** sandbox denial remains inability to observe rather than an outage; a plausible downstream symptom remains a hypothesis; repeated fixes sharing a wrong premise trigger reconsideration; an ordinary established regression can receive a bounded fix without redesign.
 
-### R7 — `implementation-review`: compose judgment and extract common execution
+### R7 (`implementation-review`): compose judgment and extract common execution
 
 **Promise:** judge the delivered implementation against its governing obligations and challenge claimed proof without adding unrequested design.
 
@@ -122,21 +122,21 @@ Extract only the common command procedure from `references/lanes/proof-challenge
 
 **Pressure cases:** reject a reviewer request for an unneeded circuit breaker; retain a necessary lifecycle boundary; reject stale/wrong-target proof while reusing still-applicable evidence; stop an ungranted or would-write command without repairing the environment.
 
-### R8 — `spec-program-review`: consume the same execution procedure, preserve design judgment
+### R8 (`spec-program-review`): consume the same execution procedure, preserve design judgment
 
 **Promise:** reconstruct and judge the current design's meaning and realization without turning review into new design or implementation.
 
-Use complexity at its dispel decision, verification at its candidate assessment, and refinement at its ordinary correction versus failed-premise decision. Keep mode-specific target admission, semantic coverage, structural-realization confirmation, ordered routes and bounded correction policy. Conditional failure/concurrency citations belong only in the selected risk lane when that actual operation has uncertain effects or overlapping actors; keep the scenario's invariant/recovery/proof result.
+Use complexity at its dispel decision, verification at its candidate assessment, and refinement at its ordinary correction versus failed-premise decision. Keep mode-specific target admission, semantic coverage, structural-realization confirmation, ordered routes and bounded correction policy. Conditional failure/concurrency citations belong only in the selected risk lane when the operation has uncertain effects or overlapping actors; keep the scenario's invariant/recovery/proof result.
 
 Retarget this phase's `references/lanes/proof-challenge.md` to the shared command procedure. Retain its narrower executable-claim predicate and existing design-level proof interpretation. Do not import implementation review's automatic failure-rerun rule: the shared reference must not harmonize the existing difference silently.
 
 **Pressure cases:** design without executable proof uses its read-only proof-seam check, not an invented run; a cited executable claim gets the granted observation or exact gap; an unknown mutation outcome is not definite failure; a harmless completion-order difference is not a race defect.
 
-### R9 — `implementation-pr-wrapup`: assess readiness evidence at its actual gate
+### R9 (`implementation-pr-wrapup`): assess readiness evidence at its gate
 
 **Promise:** compare current PR gates with observations of the current PR without treating green CI as merge permission or inventing fresh code review.
 
-In `references/merge-gates.md`, cite `../../principle-verify-before-accepting/SKILL.md` on the actual gate-to-observation comparison. Keep all live head/base/body/check/thread/mergeability, public-safety, final re-fetch and explicit merge-authority requirements. Retain description authoring/publishing ownership and monitor behavior. No new PR policy, watch cadence, API call or automatic merge is introduced.
+In `references/merge-gates.md`, cite `../../principle-verify-before-accepting/SKILL.md` on the gate-to-observation comparison. Keep all live head/base/body/check/thread/mergeability, public-safety, final re-fetch and explicit merge-authority requirements. Retain description authoring/publishing ownership and monitor behavior. No new PR policy, watch cadence, API call or automatic merge is introduced.
 
 **Pressure cases:** matching previous execution evidence may survive unrelated prose edits, while independently mutable PR state still needs its existing current query; green CI with an unresolved actionable thread is not ready; readiness without merge authority does not merge.
 
@@ -158,9 +158,9 @@ Both active callers cut over in the same PR. Remove the common procedure copies 
 
 Authoring basis: user-directed intent, supported by current source duplication. No behavioral RED has been reproduced for these phase-composition changes. The proposed safety decision is **allowed** for relocating the existing bounded review-command instructions without changing their grant or effects. Untrusted input remains the reviewed command chain. Third-party adoption, secrets, new executable code, new network behavior and home/cache writes are out of scope. Any implementation that would change those effects must stop before that edit and return the changed surface for disposition.
 
-At implementation, compare each extracted passage with its existing principle and every local obligation before deleting it. Check relative links from their actual containing files, both consumers of the new shared reference, unchanged trigger/metadata and preserved phase result/grant rules. Run the repository's fitting formatter/structural checks, skill suite/typecheck and plugin validation required for the resulting diff. Static success proves source integration, not teaching efficacy.
+At implementation, compare each extracted passage with its existing principle and every local obligation before deleting it. Check relative links from the files that contain them, both consumers of the new shared reference, unchanged trigger/metadata and preserved phase result/grant rules. Run the repository's fitting formatter/structural checks, skill suite/typecheck and plugin validation required for the resulting diff. Static success proves source integration, not teaching efficacy.
 
-Each run has its positive and counterexample scenarios above. If executing behavior proof, use fresh agents with no authoring history and realistic requests that do not expose the checks; confirm the actual changed skill/principle copy opened from the host record. Record what action occurred and whether required local outputs survived. Prior-revision controls are needed for an improvement claim. No fixed repetition quota, public read receipts, document digests or ceremonial artifact identity is introduced. A missing/equal control means no demonstrated improvement, not invented RED or an automatic ban on owner-directed authoring.
+Each run has its positive and counterexample scenarios above. If executing behavior proof, use fresh agents with no authoring history and realistic requests that do not expose the checks; confirm from the host record which changed skill/principle copy opened. Record what action occurred and whether required local outputs survived. Prior-revision controls are needed for an improvement claim. No fixed repetition quota, public read receipts, document digests or ceremonial artifact identity is introduced. A missing/equal control means no demonstrated improvement, not invented RED or an automatic ban on owner-directed authoring.
 
 This spec authorizes no evaluations or runtime edits by itself. Those belong to the subsequently accepted implementation/proof commission. Report drafted source, structural integration, observed examples and cross-client discovery as separate claims. Existing B5, role discovery and Claude/Cursor reliability gaps are not closed by this spec.
 

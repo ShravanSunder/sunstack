@@ -9,9 +9,9 @@ Part of spec v5, 2026-10-13, with the owner's accepted [progressive-disclosure a
 | Shared field | Shape and meaning |
 |---|---|
 | `outcome` | Nonempty string: the concrete result requested, not an acceptance claim |
-| `sources` | Readonly source entries: either a reachable pointer with its relevance, or actual supplied inline material with its relevance |
+| `sources` | Readonly source entries: either a reachable pointer with its relevance, or supplied inline material with its relevance |
 | `requiredReads` | Full `charter` pointer; readonly named `practices` and `principles`; role defaults plus the job's additions |
-| `limits` | Access union: inspect; inspect + granted execution; or named writes + granted execution. Required payloads differ. Actual host permissions remain separate |
+| `limits` | Access union: inspect; inspect + granted execution; or named writes + granted execution. Required payloads differ. Host permissions remain separate |
 | `stopCondition` | The assignment's closing check or event, including when an exception must return |
 | `returnContract` | Owner/shape reference for the current phase/method result, or the packet-owned helper handback when none exists |
 
@@ -49,9 +49,9 @@ These extend the same base; an absent required payload is rejected.
 | Researcher | Bounded/continuing question, supplied approach/scope and closing check |
 | Operator | Nonempty prescribed procedure or supplied collection/extraction criteria, with expected observations and stop behavior |
 
-Verifier work is a nested union. **Feasibility challenge** requires the proposed proof/contract and may precede a build. **Delivery observation** requires a declared runtime target/build locator and observation procedure; the report records the actual identity observed. **Verification apparatus** requires the driver/harness outcome, its declared reference, plan/approach and exact apparatus write paths. It grants no feature-code or product-suite repair authority.
+Verifier work is a nested union. **Feasibility challenge** requires the proposed proof/contract and may precede a build. **Delivery observation** requires a declared runtime target/build locator and observation procedure; the report records the identity it observed. **Verification apparatus** requires the driver/harness outcome, its declared reference, plan/approach and exact apparatus write paths. It grants no feature-code or product-suite repair authority.
 
-Operator steps may be shell scripts, tool actions, watches or guided extraction. State the exact action/rule and expected observation. Candidate extraction labels are allowed under supplied criteria; unknown relevance, missing content and failures are reported rather than upgraded into an engineering verdict. The limits must actually permit the procedure; shape alone cannot establish that grant.
+Operator steps may be shell scripts, tool actions, watches or guided extraction. State the exact action/rule and expected observation. Candidate extraction labels are allowed under supplied criteria; unknown relevance, missing content and failures are reported rather than upgraded into an engineering verdict. The limits must permit the procedure; shape alone cannot establish that grant.
 
 ## Handbacks
 
@@ -59,19 +59,19 @@ Existing phase/method result schemas keep their own fields and decision labels. 
 
 When no phase/method contract owns the result, `RoleHandback` covers these three cases:
 
-- Operator: actual per-step observations/output references, exit codes where applicable, candidate extracted material and exceptions.
+- Operator: per-step observations/output references, exit codes where applicable, candidate extracted material and exceptions.
 - Researcher: checked answer/synthesis, decisive source references, distinction between source/history/inference and unresolved gaps.
 - Advisor: checked challenge, credible alternatives/tradeoffs and what remains for the Lead/owner to decide.
 
-Each has a completed-assignment or blocked-assignment variant. Completed requires its result/evidence payload. Blocked requires the missing input/permission/decision and whatever was actually observed. Neither result means delivery accepted. There is no Worker handback role: use its actual responsibility and declared return contract.
+Each has a completed-assignment or blocked-assignment variant. Completed requires its result/evidence payload. Blocked requires the missing input/permission/decision and whatever was observed. Neither result means delivery accepted. There is no Worker handback role: use the Worker's role and its declared return contract.
 
 ## Ready prompt assembly
 
-For an Implementer–Verifier pair, create or reuse both sessions first without prompting their work; use their actual addresses to fill the paired references in both packets, then dispatch both commissions. A creation receipt establishes an address, not work started or accepted. No placeholder address or new pairing index is required.
+For an Implementer and Verifier pair, create or reuse both sessions first without prompting their work; use their addresses to fill the paired references in both packets, then dispatch both commissions. A creation receipt establishes an address, not work started or accepted. No placeholder address or new pairing index is required.
 
 The commissioner selects the charter-owned opening from the selected role file (`references/roles/<role>.md`), fills the single typed job packet, and explicitly directs full reads from `requiredReads`. Additional job-specific principles are added according to the work, not through an unconditional catalog. Role template defaults point to the same shape; they do not redefine its fields.
 
-Host model, effort, history and sandbox settings are applied through the host's actual arguments. Separate-session addresses and native subagent identities are recorded through existing management/collaboration procedures. Packet strings, role names and board seats do not authenticate those settings or grant privileges.
+Host model, effort, history and sandbox settings are applied through the host's own arguments. Separate-session addresses and native subagent identities are recorded through existing management/collaboration procedures. Packet strings, role names and board seats do not authenticate those settings or grant privileges.
 
 ## Structural proof to implement
 
@@ -84,4 +84,4 @@ Use fitting permanent tests in the existing skill test harness:
 - named phase/method return contract remains the authority; no generic acceptance field is introduced;
 - import/typecheck succeeds against the single Zod version/resolution used by the repo's existing validation setup.
 
-These check the interface failure modes. They do not establish appropriate requirements, actual full reads, author-history independence, observation adequacy, permitted execution or role retention. Those remain role/host/evidence responsibilities and the explicitly deferred behavior proof.
+These check the interface failure modes. They do not establish appropriate requirements, that full reads happened, author-history independence, observation adequacy, permitted execution or role retention. Those remain role/host/evidence responsibilities and the explicitly deferred behavior proof.

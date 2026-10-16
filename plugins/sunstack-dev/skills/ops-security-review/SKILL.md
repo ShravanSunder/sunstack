@@ -64,8 +64,8 @@ If Codex Security is not installed or not available, produce a copy-paste prompt
 
 ## Progressive Disclosure
 
-- Load `references/routing.md` before preparing a prompt or deciding between scan modes.
-- Load `references/threat-model-context.md` when preparing a threat model or packaging security context into another skill. Do not reintroduce a retired workflow as a cross-skill caller of this reference.
+- MUST load `references/routing.md` before preparing a prompt or deciding between scan modes, and return the scan route and its prompt shape.
+- IF you are preparing a threat model or packaging security context into another skill, load `references/threat-model-context.md` and return the filled security context shape. Do not reintroduce a retired workflow as a cross-skill caller of this reference.
 
 ## Output Shape
 

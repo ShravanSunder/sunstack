@@ -66,14 +66,14 @@ RPCRouter already has:
 * §13 Phase 3 exit criteria
 ```
 
-### Key patterns in this template
+### Patterns in this template
 
-1. **Title is a concept** — "JSON-RPC command channel", not "implement typed RPC handlers"
-2. **Prior art acknowledged** — what already exists from earlier work
-3. **Scope grouped by doc section** — each group references the architecture doc section it implements
-4. **Checklists for implementation steps** — not sub-tasks, just markdown checkboxes
-5. **Deferred items are explicit** — what's out of scope, why (a doc section or a blocking ticket, never the author's preference), and which ticket covers it
-6. **Doc section references** — precise section markers (`§5.2`, `§9.2`) that link to the architecture doc
+1. The title is a concept: "JSON-RPC command channel", not "implement typed RPC handlers".
+2. Prior art is acknowledged: what already exists from earlier work.
+3. Scope is grouped by doc section, and each group references the architecture doc section it implements.
+4. Implementation steps are markdown checkboxes in the ticket, not sub-tasks.
+5. Deferred items are explicit: what's out of scope, why (a doc section or a blocking ticket, never the author's preference), and which ticket covers it.
+6. Doc section references are precise section markers (`§5.2`, `§9.2`) that link to the architecture doc.
 
 ## Minimal Task Ticket
 
@@ -103,7 +103,7 @@ bridge work.
 
 ## Milestone Description
 
-Milestones are brief — just enough to explain the phase:
+Milestones are brief, with just enough to explain the phase:
 
 ```markdown
 ## Name: Bridge Infrastructure
@@ -209,4 +209,4 @@ Design doc: §4 Transport Layer
 
 **Why it's bad:** Without explicit deferral, scope creeps silently. An agent working on the ticket might implement deferred items, or a reviewer might flag them as missing.
 
-**Fix:** Always include a "Deferred" section, even if it's just "None — this ticket is self-contained."
+**Fix:** Always include a "Deferred" section, even if it's just "None. This ticket is self-contained."

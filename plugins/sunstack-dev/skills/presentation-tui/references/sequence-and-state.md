@@ -2,22 +2,22 @@ Sequence and State Diagrams
 ══════════════════════════════════════════════════════════════════════
 
 This reference owns: TUI patterns for time-ordered flows and state
-machines — sequence when the story is "who talks to whom in what
+machines; sequence when the story is "who talks to whom in what
 order," state when it is "what states exist and how do we transition."
 Expected inputs: the lifecycle or interaction selected by the SKILL.md
 caller.
 Return: the diagram's entry state, labeled transitions, and terminal
-states — or its actors and messages.
+states (or its actors and messages).
 Complete when: every required transition or message is drawn and
 labeled, including the recovery or failure path when one exists.
 
 See also:
 
-  ▸ SKILL.md — core rules, canvas-width discipline, shape vocabulary
-  ▸ ../../../shared-references/diagram-semantics.md — choose sequence vs. state before drawing
-  ▸ shape-catalog.md ──► Shape 6 (State diagram) — full state-machine worked example with re-entry arm
-  ▸ build-discipline.md ──► Alignment recipes — positioning lifelines, arrow landings, junction selection
-  ▸ architecture.md — pipeline with branches, pub/sub fan-out, request roundtrip
+  ▸ SKILL.md: core rules, canvas-width discipline, shape vocabulary
+  ▸ ../../../shared-references/diagram-semantics.md: choose sequence vs. state before drawing
+  ▸ shape-catalog.md ──► Shape 6 (State diagram), a full state-machine worked example with re-entry arm
+  ▸ build-discipline.md ──► Alignment recipes: positioning lifelines, arrow landings, junction selection
+  ▸ architecture.md: pipeline with branches, pub/sub fan-out, request roundtrip
 
 
 ─── Sequence (actors + lifelines + messages) ────────────────────────
@@ -58,7 +58,7 @@ If a retry changes ownership, draw the retry as a real message, not a footnote.
                        └────────┘
 ```
 
-Boxes are states.  Labeled arrows are transitions.  Return arrows (▲ │ └──) for cycles.
+Boxes are states, labeled arrows are transitions, and return arrows (▲ │ └──) draw cycles.
 
 Each state diagram should identify:
 

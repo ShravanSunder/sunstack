@@ -33,7 +33,7 @@ Use these inspection criteria:
 - **Evidence:** cited source or observed proof supports the claim at the right proof layer.
 - **Boundary:** no producer exceeded its authority, weakened proof, inferred merge permission, or hid a design decision.
 
-Do not reject a useful result solely because it lacks an expected label or opaque identity. Do not copy a producer's full return schema into the orchestration result. Open the producer's current contract when a field or boundary is actually needed for the next decision.
+Do not reject a useful result solely because it lacks an expected label or opaque identity. Do not copy a producer's full return schema into the orchestration result. Open the producer's current contract when the next decision needs a field or boundary.
 
 The work trail is a navigation and continuity aid. Reopen its evidence before relying on it. A logged success can be stale; a missing historical label is harmless when current scope, source, outcome, and evidence are clear.
 

@@ -6,9 +6,9 @@
 
 Update and rename one skill: `manage-agents` → `practices-manage-agents`, owned by `sunstack-dev`. It commissions and assesses agent work with a clear responsibility, execution form, method, scope and closing check.
 
-The owner's goal is engineering guidance that improves thinking, not a system optimized for filling packets. Success means an agent can explain the problem and governing outcome, inspect decisive evidence, use the right method, recognize a broken assumption, and return a result inside its actual authority. The Lead understands what the evidence establishes before accepting it.
+The owner's goal is engineering guidance that improves thinking, not a system optimized for filling packets. Success means an agent can explain the problem and governing outcome, inspect decisive evidence, use the right method, recognize a broken assumption, and return a result inside its granted authority. The Lead understands what the evidence establishes before accepting it.
 
-Authoring basis: **user-directed intent**. The owner approved roles composed from principles and practices, clarified Worker/Sidekick as execution forms, kept Operator as a cheap collection/execution role, and said every Implementer gets a Verifier. Historical failures inform examples; this change has no causal-fix or measured improvement claim. Pressure testing remains explicitly deferred.
+Authoring basis: user-directed intent. The owner approved roles composed from principles and practices, clarified Worker/Sidekick as execution forms, kept Operator as a cheap collection/execution role, and said every Implementer gets a Verifier. Historical failures inform examples; this change has no causal-fix or measured improvement claim. Pressure testing remains explicitly deferred.
 
 This spec includes [role teaching and ready prompts](role-teaching-and-prompts.md) and [the typed-packet contract](packet-contract.md). The independent review covers this whole set, not only the filename rename.
 
@@ -17,7 +17,7 @@ This spec includes [role teaching and ready prompts](role-teaching-and-prompts.m
 - Live baseline inspected: main `54a075aa6d873e67953c3456b16beeb835c58eaa`, sunstack-dev 2.75.1.
 - Candidate PR #122 at `e2adb45a535645f4563e778800f397059a7a7974` supplies useful duties. Its role charters, five-document controller, schemas and compaction claims are not automatically adopted.
 - The Codex Lead owns this spec, execution commission/plan and substantive acceptance. Claude `67681626` is the owner-assigned main Implementer; the existing Advisor challenges. The owner may talk directly to the Implementer and retains merge authority.
-- Owner authorized a **new PR**, separate from #122. Implementer setup is reported at `ai-tools.skills-practices-manage-agents`, branch `skills/practices-manage-agents`, based on origin/main `54a075aa`. Verify actual cwd/branch/head/dirty state before writes.
+- Owner authorized a new PR, separate from #122. Implementer setup is reported at `ai-tools.skills-practices-manage-agents`, branch `skills/practices-manage-agents`, based on origin/main `54a075aa`. Verify cwd, branch, head and dirty state before writes.
 - This target becomes the role/form authority. Before #122 lands, its owner removes competing charter changes and consumes this home. No aliases, forwarding skills, history rewrite or automatic merge.
 - Ordinary trails remain on the shared board or in session-logs under destination rules; curated conclusions belong in memory-logs. No shared handoff index.
 
@@ -27,7 +27,7 @@ This spec includes [role teaching and ready prompts](role-teaching-and-prompts.m
 |---|---|---|
 | Role | The result, judgment and decision boundary the agent owns | Selected role charter |
 | Execution form | How its conversation is managed | Management's execution-form rules |
-| Assignment | Current outcome, inputs, grants and closing check | Commissioner under its actual authority |
+| Assignment | Current outcome, inputs, grants and closing check | Commissioner under its own authority |
 | Practice | Repeatable method used for this work | That practice's skill |
 | Principle | Engineering judgment applied at the relevant decision | Full principle leaf and conditional depth |
 | Phase | The current engineering step and its return | Selected by the caller; carried as assignment data |
@@ -35,7 +35,7 @@ This spec includes [role teaching and ready prompts](role-teaching-and-prompts.m
 
 **Worker** is a parent-managed native subagent, retained through the bounded job's corrections. **Sidekick** is a separately managed session, addressed and reused across related work. Native workers may themselves have thread IDs: the distinction is management/lifetime, not whether an ID exists. Neither form independently grants governing design or acceptance authority.
 
-**Roles are seven:** Lead, Advisor, Implementer, Verifier, Reviewer, Researcher and Operator. There is no Worker role. Sidekick is a postfix showing execution form, not a generic responsibility.
+There are seven roles: Lead, Advisor, Implementer, Verifier, Reviewer, Researcher and Operator. There is no Worker role. Sidekick is a postfix showing execution form, not a generic responsibility.
 
 | Role | Form policy | Charter |
 |---|---|---|
@@ -71,11 +71,11 @@ These are source/content checks, not proof that agents already apply the guidanc
 
 The global action-triggered principles stay authoritative. Each role names its distinctive judgments; the commissioner adds job-specific full reads, including testing/type/boundary principles when the work calls for them. The role's short list is not an exclusive allowlist. Do not duplicate the global trigger catalog.
 
-Research remains **one practice**. A Researcher Worker on Luna can investigate one supplied question. A Researcher Sidekick on Sol can coordinate Operators/Workers and synthesize a continuing investigation. Operators perform the cheap first pass: scripts, scraping, extraction, observation and monitoring, using supplied criteria. They return candidate material; the Researcher checks decisive anchors and interprets it. Guided local extraction is allowed; deciding the investigation's premise, engineering meaning or acceptance is not.
+Research remains one practice. A Researcher Worker on Luna can investigate one supplied question. A Researcher Sidekick on Sol can coordinate Operators/Workers and synthesize a continuing investigation. Operators perform the cheap first pass: scripts, scraping, extraction, observation and monitoring, using supplied criteria. They return candidate material; the Researcher checks decisive anchors and interprets it. Guided local extraction is allowed; deciding the investigation's premise, engineering meaning or acceptance is not.
 
 ## Control and evidence
 
-The Lead designs and plans with the owner, names the workstream, and commissions the Implementer–Verifier pair. They share setup, facts and reproductions directly. Expected outcomes and correctness references come from governing sources, not their agreement.
+The Lead designs and plans with the owner, names the workstream, and commissions the Implementer and Verifier pair. They share setup, facts and reproductions directly. Expected outcomes and correctness references come from governing sources, not their agreement.
 
 The Implementer changes code, writes product tests and supplies associated proof. The Verifier checks test adequacy, pyramid placement and the intended red-to-green evidence, then observes the real affected behavior. For app work it writes, maintains and runs the assigned verification scripts/drivers against the real built or installed app and configuration, rather than treating suite code as the app observation. That does not grant feature-code edits or product regression-suite authorship. Missing regression cases return to the Implementer. A later explicit owner grant may change that boundary through a revised charter/commission.
 
@@ -92,18 +92,18 @@ The Chief of Staff's outer-loop policy stays in its own repo. A watchdog may use
 3. **Resolve an eligible model** and host-supported settings. No row means cut the job or report the capability/policy gap; never improvise a frontier pick or change the Lead's model.
 4. **Load the role prompt.** MUST load the selected role's charter from the table and return its ready opening and default reads. The commissioner and recipient each read it in full. IF you are the Lead starting qualifying management work, load `references/roles/lead.md` and return its acceptance stance and applicable reads.
 5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form before creating, reusing or dispatching any helper. It owns detailed form mechanics and selects the retained provider and ACP manuals. Preserve exact target identities, observed creation and delivery stages, and recovery from uncertain operations.
-6. **MUST load `references/agent-job-packet.md` and return the typed commission.** Fill the role, form, supplied method, required full reads, reachable sources, limits, closing condition and declared return owner. For an Implementer–Verifier pair, create or reuse both Sidekick sessions without dispatching their work, obtain their real addresses, then fill both mutually referencing packets and dispatch them. No placeholder pair address or extra ID/index is needed. Host settings go in actual tool arguments; packet text does not establish OS confinement or authorization.
+6. **MUST load `references/agent-job-packet.md` and return the typed commission.** Fill the role, form, supplied method, required full reads, reachable sources, limits, closing condition and declared return owner. For an Implementer and Verifier pair, create or reuse both Sidekick sessions without dispatching their work, obtain their real addresses, then fill both mutually referencing packets and dispatch them. No placeholder pair address or extra ID/index is needed. Host settings go in the tool's own arguments; packet text does not establish OS confinement or authorization.
 7. **Continue and assess.** Reacquire charter/commission/trace at assignment, material correction and resume, and check the role boundary before handback. Read governing sources through those pointers. Match each material claim to current evidence; return a specific gap or scoped result. Only the Lead accepts delivery.
 
-`delegation-examples.md` must show contrasts: cheap prescribed extraction versus research interpretation; a short Researcher Worker versus a continuing Researcher Sidekick; and a full Implementer–Verifier pair. Remove examples where “continuity changed the role” or a generic Sidekick catalog selects research on the wrong model.
+`delegation-examples.md` must show contrasts: cheap prescribed extraction versus research interpretation; a short Researcher Worker versus a continuing Researcher Sidekick; and a full Implementer and Verifier pair. Remove examples where “continuity changed the role” or a generic Sidekick catalog selects research on the wrong model.
 
 ## Models and budget
 
-The catalog maps **role + valid form + classified job** to capacity. Keep a short set of rows; do not generate a Cartesian matrix.
+The catalog maps role + valid form + classified job to capacity. Keep a short set of rows; do not generate a Cartesian matrix.
 
 - Operator: Luna, medium for exact watch/script/collection work; high for bounded Complete/Local collection when supplied extraction criteria require local inference. Both remain cheap collection/execution, not an independent engineering verdict. Remove the Claude Haiku Operator and native-Worker rows.
 - Researcher: bounded Complete/Local work uses Luna high, as a native Worker when supported or a Sidekick when the required model must use Router. A route-required bounded Sidekick keeps that job's capacity and closing check; it gets no automatic fan-out or continuing-program mandate. The existing Sol medium capacity for a supplied cross-owner approach remains subject to the recorded Daily-driver reason. A continuing Researcher Sidekick uses Sol high to xhigh with useful Luna helpers. Opus is not a research default.
-- Implementer Sidekick: transfer existing executor eligibility explicitly—Luna high/xhigh for Exact or Complete Local; Sol/Opus medium for Complete Cross-domain (the old Worker executor row); Sol/Opus high to xhigh for the existing permitted Partial cross-domain/system implementation work. Missing governing choices still belong to the Lead. Preserve owner-assigned Claude execution.
+- Implementer Sidekick: transfer existing executor eligibility explicitly: Luna high/xhigh for Exact or Complete Local; Sol/Opus medium for Complete Cross-domain (the old Worker executor row); Sol/Opus high to xhigh for the existing permitted Partial cross-domain/system implementation work. Missing governing choices still belong to the Lead. Preserve owner-assigned Claude execution.
 - Verifier Sidekick: Sol or Opus high to xhigh, from a different lineage than its Implementer when available. A missing eligible route is a named gap, not omission of the Verifier.
 - Reviewer Sidekick: existing Grok/Sol/Opus rows and effort ranges; at least one reviewer from a different lineage than Lead/author. Frontier rows need their existing explicit authorization.
 - Advisor Sidekick: existing Sol/Opus rows; existing frontier authorization boundaries remain.
@@ -113,25 +113,25 @@ Exact provider IDs still come from the active model map/advertised host contract
 
 ## Typed packet and prompt ownership
 
-The owner superseded the one-physical-file placement on 2026-10-13. Use **one modular TypeScript schema authority**: shared `schemas/assignment-fields.ts`, seven `schemas/role-contracts/*-contract.ts` leaves, and thin packet/handback union files. The accepted [progressive-disclosure amendment](progressive-schema-disclosure.md) owns the exact allocation, conditional reading route and raw-role versus frozen-family contract. Zod v4 and `.describe()` field meanings remain. This is not a new SDK, parser framework or orchestration store.
+The owner superseded the one-physical-file placement on 2026-10-13. Use one modular TypeScript schema authority: shared `schemas/assignment-fields.ts`, seven `schemas/role-contracts/*-contract.ts` leaves, and thin packet/handback union files. The accepted [progressive-disclosure amendment](progressive-schema-disclosure.md) owns the exact allocation, conditional reading route and raw-role versus frozen-family contract. Zod v4 and `.describe()` field meanings remain. This is not a new SDK, parser framework or orchestration store.
 
-`agent-job-packet.md` teaches how to commission, selecting shared fields and the role's contract. Each role file owns its ready opening/read defaults and points to its own exact contract/type under the amendment's load condition. Mixed-role validation uses the thin family unions. No duplicate Markdown field definitions or seven parallel interfaces.
+`agent-job-packet.md` teaches how to commission, selecting shared fields and the role's contract. Each role file owns its ready opening/read defaults and points to its own contract/type under the amendment's load condition. Mixed-role validation uses the thin family unions. No duplicate Markdown field definitions or seven parallel interfaces.
 
 The schema exports inferred types and:
 - one shared job base (outcome, sources, limits, closing condition, return-contract reference);
 - `requiredReads` carrying the full charter pointer, named practices and named principles; role defaults plus job-specific additions;
 - a role-discriminated union with a required execution form, fixed to Sidekick for the four fixed roles and main for Lead;
 - real role payloads: Operator procedure/criteria and expected observations; Researcher question/approach; Implementer plan/slice and write scope; Verifier adopted reference and distinct pre-build challenge, observation-with-target, or apparatus assignment; Reviewer target/procedure and no-author-history requirement; Advisor current question/model; Lead owner intent/current governing context;
-- access variants that require actual allowed operations/write paths where relevant, rather than optional boolean bags;
+- access variants that require the allowed operations/write paths where relevant, rather than optional boolean bags;
 - typed helper handbacks for Operator observations, Researcher synthesis and Advisor challenges when no existing phase/method return owns them.
 
 Existing phase-owned returns retain their authority. A typed packet references that result owner; it does not create a universal acceptance result or copy phase schemas. Human chat stays prose. Worker is a form and never a role discriminator.
 
 Derive types with `z.infer`, reuse `.pick()`/`.omit()`/`.extend()` as appropriate, use readonly values, descriptive names and explicit function types, and avoid casts/`any`. Build object variants before readonly wrapping; ZodReadonly is not an extendable object. Do not add a refinement-heavy schema framework to encode natural-language judgment.
 
-A typed read list does not prove correct selection or actual reading. A schema-valid grant does not prove permission. A typed completed handback does not prove the feature works. Evidence collection, semantic interpretation and acceptance remain in the roles/methods.
+A typed read list does not prove correct selection or that the reading happened. A schema-valid grant does not prove permission. A typed completed handback does not prove the feature works. Evidence collection, semantic interpretation and acceptance remain in the roles/methods.
 
-Main starts without a direct Zod dependency or plugin TS setup. Implement the narrow validation seam in the existing `tests/skills` TypeScript/Vitest setup: a single `zod@4.6.5` pin in the schema import and matching test dependency/resolution, with fitting import/typecheck/invalid-payload proof. Normal pnpm resolution also moves the existing eval core/peer/optional Zod 4.4.3 references to 4.6.5; both installed consumer manifests allow `>=3 <5`, and candidate #122 shows that lock change. This bounded dependency effect is allowed. Do not add an alias, override, second schema version or unrelated dependency upgrade to preserve the disproven unchanged-graph assumption. Run fitting offline unit/typecheck/import proof; actual eval/model execution remains unrun and must be named as a gap. Keep one version when the branches converge. Reuse the candidate pattern selectively without merging it or migrating repo tooling. Bun may run the schema directly using its shared cache; no new package/service or cache refresh is commissioned here.
+Main starts without a direct Zod dependency or plugin TS setup. Implement the narrow validation seam in the existing `tests/skills` TypeScript/Vitest setup: a single `zod@4.6.5` pin in the schema import and matching test dependency/resolution, with fitting import/typecheck/invalid-payload proof. Normal pnpm resolution also moves the existing eval core/peer/optional Zod 4.4.3 references to 4.6.5; both installed consumer manifests allow `>=3 <5`, and candidate #122 shows that lock change. This bounded dependency effect is allowed. Do not add an alias, override, second schema version or unrelated dependency upgrade to preserve the disproven unchanged-graph assumption. Run fitting offline unit/typecheck/import proof; eval/model execution remains unrun and must be named as a gap. Keep one version when the branches converge. Reuse the candidate pattern selectively without merging it or migrating repo tooling. Bun may run the schema directly using its shared cache; no new package/service or cache refresh is commissioned here.
 
 ## Runtime placement
 
@@ -174,7 +174,7 @@ Primary sources inspected: [Claude startup](https://code.claude.com/docs/en/sub-
 
 ## Hard cutover and scope
 
-Rename the management folder/frontmatter/metadata and every live name consumer in one changeset. Remove the old discoverable skill; no shim. Inventory actual consumers again before implementation.
+Rename the management folder/frontmatter/metadata and every live name consumer in one changeset. Remove the old discoverable skill; no shim. Inventory the consumers again before implementation.
 
 Inspected consumers include repo/plugin READMEs and AGENTS; both plugin manifests' keyword/usage metadata; current phases/practices/orchestrators and owned references naming management; active planning-delivery and sample-scenario fixtures, their directory name and parser test. Correct generic Worker-as-role/Sidekick-as-purpose descriptions and retain valid responsibility + form names. Keep historical/retired documents and protocol data historical/data, not new authorities.
 
@@ -193,7 +193,7 @@ Before runtime edits, independent `skill-review` spec review checks this spec an
 Implementation proof:
 - meaningful schema rejection of missing Operator procedure, illegal fixed role/form pairing and missing observation target; valid corresponding packets accepted;
 - typecheck/import/format and existing affected unit gates; active caller/metadata/source reachability and no old live owner;
-- source review that each role actually teaches a move on its contrasting cases and read directions are complete;
+- source review that each role teaches a move on its contrasting cases and read directions are complete;
 - no new pressure, trigger, E1, property/mutation or paid inference runs under the current owner boundary.
 
 Prepare later skill-routing true/near-miss and authority/adequacy prompts, but label them unrun. Static checks and good prose do not establish behavioral trust. Implementation may proceed from an accepted user-intent spec with the named evaluation gap; do not claim demonstrated improvement, trusted autonomy, merge readiness or released behavior from it. Before release, preserve the user's decision on that exact proof gap.
@@ -206,7 +206,7 @@ Run status: accepted-to-implement. Review records: `/private/tmp/2026-10-roles-p
 
 - Owner-confirmed: role/form split; Operator role with cheap Luna collection/execution; four roles always Sidekick; Researcher form by job; every Implementer has a Verifier; per-role prompts with appropriate full reads; typed Zod v4 described packets; new PR; no pressure testing now.
 - Lead defaults: Operator may use either valid form with Worker default; route-required bounded Researcher Sidekicks keep bounded-job eligibility without automatic fan-out; seven role files; Reviewer Sidekick display; one owned TS schema; model rows above; product test fixes stay with Implementer while Verifier owns apparatus/checking.
-- Latest owner clarification: the Verifier checks pyramid/TDD/proof principles and actually verifies the app. The prior apparatus grant covers assigned verification scripts/drivers against the real built or installed app. Product-suite repair authorship remains the labelled Lead default. These duties apply to the actual assignment surface; this skill-only run retains its fitting structural proof and deferred role behavior checks.
+- Latest owner clarification: the Verifier checks pyramid/TDD/proof principles and actually verifies the app. The prior apparatus grant covers assigned verification scripts/drivers against the real built or installed app. Product-suite repair authorship remains the labelled Lead default. These duties apply to the assigned surface; this skill-only run retains its fitting structural proof and deferred role behavior checks.
 - Implementation evidence correction: normal single-pin pnpm resolution unifies the compatible eval Zod references at 4.6.5. The old unchanged-graph promise was a Lead-added assumption, not owner intent or an existing contract; it is withdrawn. Single pin, narrow test seam and existing proof strength remain. Offline harness proof is required; eval/model behavior remains unverified.
 - Owner can strike a default; a strike revises the dependent contract before code consumes it.
 - Explicitly deferred: test/mutation/property strategy, new practice bodies, planner/tracking/controller changes, behavior/E1 proof and final release/merge.
@@ -215,7 +215,7 @@ Run status: accepted-to-implement. Review records: `/private/tmp/2026-10-roles-p
 
 | Proposed default | Reason and cost |
 |---|---|
-| v0: one charter reference in the management home — superseded by the dated row below | One authority per role; proposed a shared file, which would also load unrelated charters. |
+| v0: one charter reference in the management home (superseded by the dated row below) | One authority per role; proposed a shared file, which would also load unrelated charters. |
 | 2026-10-13 v1: one file per role under the same management home; supersedes v0 placement | The role table supplies exact pointers; commissioner and recipient load only the charter they use. Costs small files, saves repeated unrelated reads. |
 | Preserve existing packet and trace owners | Limits lossy paraphrase and duplicate state; requires reachable sources rather than self-contained repeated catalogs. |
 | Current main as implementation base; adapt candidate duties selectively | Avoids importing the rejected design controller; requires explicit convergence with PR #122. |
@@ -223,7 +223,7 @@ Run status: accepted-to-implement. Review records: `/private/tmp/2026-10-roles-p
 | 2026-10-13 v2: quick bounded Workers and a continuing Researcher both use practices-research | Owner direct correction: choose by job; keeps one research method and preserves continuing evidence/synthesis without making every lookup a session. |
 | 2026-10-13 v2: Luna-high Complete · Local Worker row | Owner relay explicitly names high for small contained jobs/research; supersedes the earlier unresolved row, not a new xhigh default. |
 | 2026-10-13 v2: Verifier owns assigned harness/driver creation and upkeep | Owner relay part 2 authorizes verification apparatus work; feature code and regression-test authoring do not move with it. |
-| v2 proposed Sol-or-Opus Researcher default — superseded below | This missed the owner's standing instruction to conserve Claude tokens for research. |
+| v2 proposed Sol-or-Opus Researcher default (superseded below) | This missed the owner's standing instruction to conserve Claude tokens for research. |
 | 2026-10-13 v3: Sol Researcher with useful bounded Luna helpers | Supersedes v2's model default; follows the owner's existing research direction and today's job-based choice. |
 | 2026-10-13 v4: retain the Sidekick postfix for separate sessions; withdraw complete removal | Typed owner correction: "Implementer Sidekick use sidekick postfix"; "workers are subagents, sidkicks are eperate sessions". The hierarchy marker helps the owner understand placement. |
 | 2026-10-13 v4: one ready prompt per role, owned beside its charter | Owner requires the Lead to hand each helper the appropriate practices/principles; keeps that reusable opening in one home and its full-read direction explicit. |

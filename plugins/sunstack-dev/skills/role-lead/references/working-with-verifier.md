@@ -10,7 +10,7 @@ Give it the adopted reference from the governing sources, never the Implementer'
 
 When the Verifier runs a held-out evaluation of skill or agent behavior, fix the cases, the checks and the deciding rule before any run. Keep the cases and checks out of everything the writers read, the plan included. Name in the commission the proof guidance from the skill-authoring system that governs those runs. Ordinary product proof stays visible. The Implementer sees its tests and the Verifier's procedure, because it builds against them.
 
-**Case:** the plan for the how and why practices kept its pass checks in a separate file. Its Proof section still listed every case's question: the stop-review hook, a retired skill, a small pure function, the removal of pressure scenarios. Both writers read the plan whole and said so. The checks stayed hidden and the targets didn't. **Clean case:** the Verifier proposed a substitute for each case on a target neither writer had seen, keeping the kind of target and the failure it had to catch. The exposed originals ran only as labeled secondary cases, and the changelog says so.
+**Case:** the plan for the how and why practices kept its pass checks in a separate file. Its Proof section still listed every case's question: the stop-review hook, a retired skill, a small pure function, the removal of pressure scenarios. Both writers read the plan whole and said so, which exposed every target while the checks stayed hidden. **Clean case:** the Verifier proposed a substitute for each case on a target neither writer had seen, keeping the kind of target and the failure it had to catch. The exposed originals ran only as labeled secondary cases, and the changelog says so.
 
 ## While it observes
 

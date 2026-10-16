@@ -54,4 +54,4 @@ When a simple module already makes its flow and ownership clear, rearranging it 
 - A copy-paste command that fails because its options were never checked against the tool.
 - A reviewer asking "what is this for?"
 
-A clear write-up can still describe the wrong model; checking that the picture is shared is `principle-build-the-shared-model-first`. When the difficulty comes from one module doing several jobs, fix the structure with `principle-separate-the-concerns`, not the prose.
+A clear write-up can still describe the wrong model; when you check that the picture is shared, restate it and get an explicit answer ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). When the difficulty comes from one module doing several jobs, fix the structure, not the prose, by giving each part one job ([separate the concerns](../principle-separate-the-concerns/SKILL.md)).

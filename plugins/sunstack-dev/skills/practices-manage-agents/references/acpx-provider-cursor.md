@@ -44,4 +44,4 @@ Keep cwd, resolved `cursor` command, exact model id, mode, and permission bounda
 
 ## Permissions
 
-Use `--approve-reads` for source-grounded work. Keep `--non-interactive-permissions deny` for unattended runs: unknown requests are denied, never approved, and the turn continues instead of aborting. The parent authorizes write access for non-review assignments.
+Use `--approve-reads` for source-grounded work. Keep `--non-interactive-permissions deny` for unattended runs: unknown requests are denied and the turn continues instead of aborting. The parent authorizes write access for non-review assignments.

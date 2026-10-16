@@ -51,4 +51,4 @@ When the model and the question are already agreed and nothing has been correcte
 - The same correction arriving twice.
 - The owner calling a model confusing after you reported it as agreed and ready to build.
 
-Whether the writing conveys the picture is `principle-write-for-the-reader`. What the code does is `principle-read-ground-truth-first`, which shared intent can't answer. When reality, not another person, contradicts the picture, use `principle-refine-mental-models`.
+When the question is whether your writing conveys the picture, test it on a reader who has none of your context ([write for the reader](../principle-write-for-the-reader/SKILL.md)). When the question is what the code does, which shared intent can't answer, open the source that decides it ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). When reality, not another person, contradicts the picture, say what you assumed, what you found, and what it means for the design ([refine mental models](../principle-refine-mental-models/SKILL.md)).

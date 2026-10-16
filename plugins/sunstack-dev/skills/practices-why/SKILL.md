@@ -5,7 +5,7 @@ description: "Use when investigating why existing code or a design took its curr
 
 # Practices: Why
 
-Reconstruct the rationale behind existing code or a design from the record left while it took shape. Code shows what was built. The motive lives in commits, reviews, tickets, design notes and conversations, each written by someone at a particular time. Start from the actual code, find the decisions and constraints recorded around it, and keep what a record says apart from what you read into it. A design that makes sense today is no evidence of what its author intended. When the searched record can't settle the question, an honest unknown that names what was searched and who might know is a useful answer.
+Reconstruct the rationale behind existing code or a design from the record left while it took shape. Code shows what was built. The motive lives in commits, reviews, tickets, design notes and conversations, each written by someone at a particular time. Start from the actual code, find the decisions and constraints recorded around it, and keep what a record says apart from what you read into it. A design that makes sense today is no evidence of what its author intended. When the searched record can't settle the question, answer with an unknown that names what was searched and who might know.
 
 ## Boundaries
 

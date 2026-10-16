@@ -44,7 +44,7 @@ They are not exclusive: a description adds agent reach without removing the huma
 
 ## Information Hierarchy
 
-Placement answers one question: who reads this, and when? The answer picks the call form.
+Placement depends on who reads the material and when, and that answer picks the call form.
 
 | home | read by | when |
 | --- | --- | --- |
@@ -117,7 +117,7 @@ Steering is the wording that changes what the agent does. Three moves carry most
 
 **Completion criteria.** Test every one twice: can the agent tell done from not-done, and does it demand the legwork? `Understanding reached` fails the first, because there is nothing to check. `Produce a change list` passes the first and fails the second, because a list of nothing satisfies it. `Name every caller of the changed function and say which ones break` passes both, because it cannot be written without opening the callers. The second test is the one that gets skipped, and it is the one that buys depth.
 
-**Rule strength.** Match the rule to how the agent fails. A rule it already follows needs no wording at all. A rule it skips under pressure needs a bright line: one unambiguous condition that leaves no judgment call at the moment of temptation. Name the rationalization beside it in the words the agent actually used. `I already know this` and `I'll verify later` belong in the skill, not in the postmortem.
+**Rule strength.** Match the rule to how the agent fails. A rule it already follows needs no wording at all. A rule it skips under pressure needs a bright line: one unambiguous condition that leaves no judgment call at the moment of temptation. Name the rationalization beside it in the agent's own words. `I already know this` and `I'll verify later` belong in the skill, not in the postmortem.
 
 **The deletion test.** Would the agent act differently if this sentence disappeared? Apply it sentence by sentence inside its surrounding context, never to whole sections at once. Rationale that changes no behavior is padding however true it is.
 
@@ -140,9 +140,9 @@ Include every applicable element below. Choose headings and a format that fit th
 
 ## Workflow
 
-Steps 1–6 produce the skill spec: the proposal a reviewer can judge before any skill file changes. Step 7 writes the files inside the accepted spec. Proof and independent implementation review come after this skill: proof follows `references/proof-and-claims.md`, and `skill-review` reviews the changed files.
+Steps 1 to 6 produce the skill spec: the proposal a reviewer can judge before any skill file changes. Step 7 writes the files inside the accepted spec. Proof and independent implementation review come after this skill: proof follows `references/proof-and-claims.md`, and `skill-review` reviews the changed files.
 
-A run implementing one slice of an accepted multi-run skill spec reads that spec doc and takes its step 1–6 returns from it, quoting the slice's success definition, authoring basis, surface allocation, proof posture, and the decision rows it must honor, and checks the doc's coordination slot before editing. Before editing, it also confirms the spec's acceptance still covers the spec's current meaning, under the acceptance binding in `../skill-review/references/spec-review.md`: formatting, typo, link, process-only changes and verified remediations keep the acceptance; any other change since acceptance, or one of uncertain effect, goes back to spec review before any skill file is edited. The doc is the commission for that slice, and each slice still names exactly one skill target.
+A run implementing one slice of an accepted multi-run skill spec reads that spec doc and takes the returns of steps 1 to 6 from it, quoting the slice's success definition, authoring basis, surface allocation, proof posture, and the decision rows it must honor, and checks the doc's coordination slot before editing. Before editing, it also confirms the spec's acceptance still covers the spec's current meaning, under the acceptance binding in `../skill-review/references/spec-review.md`: formatting, typo, link, process-only changes and verified remediations keep the acceptance; any other change since acceptance, or one of uncertain effect, goes back to spec review before any skill file is edited. The doc is the commission for that slice, and each slice still names exactly one skill target.
 
 ### 1. Name the promise and success
 

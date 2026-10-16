@@ -5,7 +5,7 @@ description: "Use when creating or maintaining a project's verification skill, i
 
 # Practices: Verification Maintenance
 
-A project's verification skill is a recipe another agent will run cold, in the middle of a task, against an app it has never seen. It names the app, starts it, tells a usable instance from one that only answers on a port, drives each journey the way a user would, observes the result that proves it, and cleans up without losing the evidence. This practice creates that skill when the project has none and keeps it true as the app changes. A recipe is worth what it does when it runs. Until it has driven its real target, it is a draft with a named gap.
+A project's verification skill is a recipe another agent will run cold, in the middle of a task, against an app it has never seen. It names the app, starts it, tells a usable instance from one that only answers on a port, drives each journey the way a user would, observes the result that proves it, and cleans up without losing the evidence. This practice creates that skill when the project has none and keeps it true as the app changes. Until the recipe has driven its real target, it is a draft with a named gap.
 
 Each journey's expected result comes from an adopted source, such as a contract, a spec, project docs or an owner decision. What the app does today can show that the recipe went stale, or that the app regressed. Only the adopted source can say which one happened.
 
@@ -26,7 +26,7 @@ Each journey's expected result comes from an adopted source, such as a contract,
    - upkeep is asked for and no skill exists: return that gap and stop;
    - creation is asked for and a skill already exists: report it and stop, leaving it as it is.
 
-   When the Claude path holds a real directory, a link to anything other than the canonical skill or a link that leaves the project, or when another recipe covers the same app, report the exact conflict before writing anything and leave it in place. Keep one authored recipe per app under `.agents/skills/`, with the Claude path only a link to it ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)).
+   When the Claude path holds a real directory, a link to anything other than the canonical skill or a link that leaves the project, or when another recipe covers the same app, report the exact conflict before writing anything and leave it in place. When you choose where to write, keep one authored recipe per app under `.agents/skills/`, with the Claude path only a link to it ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)).
    Completion: the outcome is create, maintain, or a returned gap or conflict with its paths; the canonical path, the link state, the writable paths and the journeys in scope are named.
 
 2. **Reconstruct how the scoped behavior works.** MUST load `practices-how` and return, for the app's launch and each journey in scope, the source-backed path from entry to effect and back, its owners and state, and its gaps. Read the project's real launch, initialization, seed and auth, harness, test and cleanup instructions, and look for an existing harness before planning a new one. Ask only for meaning, permission or target selection that the sources can't settle. A product build that fails or a prerequisite you can't reach is a gap to report, and repairing product code stays outside this work.

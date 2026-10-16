@@ -37,7 +37,7 @@ Completion: the unchanged ready plan record, governing basis, delivery context, 
 - Never alter plan meaning, governing basis, delivery context, required proof, design, tracker state, review verdict, PR state, or merge authority.
 - This phase does not mutate PR state; the same implementer may later run separately authorized `implementation-pr-wrapup` after assessment and review prerequisites are satisfied.
 - Orchestrator feedback may inform execution, but neither it nor partial direction supplies absent architecture or changes required plan meaning; return those gaps to the orchestrator or originating-plan owner.
-- A completed slice is not independent review. It routes to `implementation-review`.
+- A completed slice routes to `implementation-review` for independent review.
 
 Completion: every obligation a claimed slice covers has a fresh supported result at its gate's target, every incomplete obligation/blocker and unverified interaction is explicit, the plan record remains unchanged, and no correction continued after `not-converging`.
 

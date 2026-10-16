@@ -30,7 +30,7 @@ Zoom is not a visual family. Zoom is a disclosure move: start broad, select one 
 
 One worked example per family (renderer-neutral sketches; the consuming skill picks the medium):
 
-Flow — ordered work with a branch:
+Flow, for ordered work with a branch:
 
 ```text
 input ──► parse ──► validate ──► output
@@ -39,7 +39,7 @@ input ──► parse ──► validate ──► output
                   error
 ```
 
-Sequence — participants and messages; time flows down; a retry that changes ownership is a real message, not a footnote:
+Sequence, for participants and messages. Time flows down, and a retry that changes ownership is a real message, not a footnote:
 
 ```text
 client          api           auth
@@ -49,7 +49,7 @@ client          api           auth
   │◄── result ───│             │
 ```
 
-State — entry state, labeled transitions, terminal states, and the recovery path:
+State, with the entry state, labeled transitions, terminal states, and the recovery path:
 
 ```text
 idle ──start──► loading ──ok──► done
@@ -57,7 +57,7 @@ idle ──start──► loading ──ok──► done
   └──── retry ◄────┘ failed
 ```
 
-Quadrant / 2D — only when both axes are real tradeoff dimensions, never because it looks tidy:
+Quadrant / 2D, only when both axes are real tradeoff dimensions:
 
 ```text
                  high clarity
@@ -67,7 +67,7 @@ low effort ◄──────────┼──────────►
                  low clarity
 ```
 
-Topology — ownership labels ride the edges; do not imply data flow when the point is responsibility:
+Topology, where ownership labels ride the edges. Do not imply data flow when the point is responsibility:
 
 ```text
 ┌────────────┐   owns layout   ┌──────────────┐
@@ -83,16 +83,16 @@ Wrong-family red flags:
 - quadrant chosen for tidiness rather than two real axes;
 - a table chosen where the relationship, not comparison, is the point.
 
-Stop when one primary family is named with its inspection question answered. If no family fits after two attempts, the concept is probably a comparison or a list — simplify to a table or prose instead of forcing a diagram.
+Stop when one primary family is named with its inspection question answered. If no family fits after two attempts, the concept is probably a comparison or a list; simplify to a table or prose instead of forcing a diagram.
 
 ## Progressive Disclosure
 
 Default sequence for a difficult system, investigation, implementation, or design:
 
-1. **One map** — the user's named target and current question, their nouns preserved, placed in one small relationship view. It answers: what are the moving parts, and why are they in tension? Not every subsystem, not every test, not a table that hides the relationship.
-2. **One selected slice** — one path through the system, narrower than the map and deeper than a label. Name why this slice: it is the user-visible failure, it crosses the disputed boundary, it proves the tradeoff, or it explains the confusing transition.
-3. **One small ledger** — compact status, not a second giant diagram: what is known, new, open, and the next proof. For research synthesis, render the handed-over lanes and parent status; presentation renders research state, it does not run agents or decide acceptance.
-4. **Technical detail** — only now name concrete files, commands, code, and data, each per the technical-content bright line in `markdown-presentation-baseline.md`.
+1. **One map**: the user's named target and current question, their nouns preserved, placed in one small relationship view. It answers: what are the moving parts, and why are they in tension? It does not show every subsystem or every test, and it is not a table that hides the relationship.
+2. **One selected slice**: one path through the system, narrower than the map and deeper than a label. Name why this slice: it is the user-visible failure, it crosses the disputed boundary, it proves the tradeoff, or it explains the confusing transition.
+3. **One small ledger**: compact status, not a second giant diagram. It shows what is known, new, open, and the next proof. For research synthesis, render the handed-over lanes and parent status; presentation renders research state, it does not run agents or decide acceptance.
+4. **Technical detail**: only now name concrete files, commands, code, and data, each per the technical-content bright line in `markdown-presentation-baseline.md`.
 
 Variants (same discipline, different spine):
 
@@ -100,7 +100,7 @@ Variants (same discipline, different spine):
 - Design tradeoff: goal → the credible options, doing nothing among them → what each costs and who pays → recommended slice → proof gate.
 - Review synthesis: finding → evidence → failure mode → accepted/rejected/deferred → smallest edit.
 
-Red flags — stop and simplify when:
+Stop and simplify when any of these red flags appear:
 
 - the first diagram tries to show everything;
 - three unrelated visuals appear before one clear map;

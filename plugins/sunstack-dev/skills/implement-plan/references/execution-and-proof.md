@@ -97,8 +97,6 @@ Place each gap `practices-verification` returns in the same classes. A disputed 
 
 Do not call a change reversible when it moves ownership, changes a public contract or data format, writes migration state, weakens proof, or becomes a prerequisite for other work before correction.
 
-Orchestrator feedback may inform execution, but neither it nor partial direction supplies absent architecture or changes required plan meaning. Return those gaps to the orchestrator or originating-plan owner.
-
 ## Report What Changed and What Was Proven
 
 Return implementation evidence keyed to the unchanged canonical plan record, governing basis, and delivery context:

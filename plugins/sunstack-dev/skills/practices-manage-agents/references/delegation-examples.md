@@ -118,6 +118,6 @@ Job the Lead is tempted to hand off: "Move the server and the app to integer cen
 
 ### Independent topics, shared fixture
 
-Two assigned probes ask different questions, but both reset the same database fixture and write `result.log`. Probe A can reset while B is observing, then B can overwrite A's output. Each may report green against state the other changed. What must hold: each probe's result comes from its own fixture and is still on disk when read.
+Two assigned probes ask different questions, but both reset the same database fixture and write `result.log`. Probe A can reset while B is observing, then B can overwrite A's output. Each may report green against state the other changed. Each probe's result must come from its own fixture and still be on disk when read.
 
 Give independently checkable probes separate fixture instances and output paths through the existing setup. They can then run in parallel without adding locks or a scheduler. If B instead consumes the actual artifact A is still producing, isolation cannot remove that dependency: B waits for A's handback, checks the finished artifact, then proceeds. A prompt delivered to A is not that handback.

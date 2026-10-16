@@ -23,7 +23,7 @@ mechanism necessity: is the proposed mechanism required and proportionate to
 scope effect: inside confirmed boundary | requires owner expansion decision
 ```
 
-A category name is not an anchor. "The reliability requirement" fails this gate until the exact governing clause is opened and quoted. A candidate whose anchor fields cannot be filled from an inspectable source is `unverified`, never `accepted`; it is advice awaiting investigation and carries no implementation authority. When the deletion test says the obligations hold without the mechanism, prefer deletion over completing the mechanism's missing contracts.
+A category name is not an anchor. "The reliability requirement" fails the anchor check until the exact governing clause is opened and quoted. A candidate whose anchor fields cannot be filled from an inspectable source is `unverified`, never `accepted`; it is advice awaiting investigation and carries no implementation authority. When the deletion test says the obligations hold without the mechanism, prefer deletion over completing the mechanism's missing contracts.
 
 Two kinds of scope expansion get two different dispositions. Confusing them lets a gold-plating reviewer steer the verdict.
 

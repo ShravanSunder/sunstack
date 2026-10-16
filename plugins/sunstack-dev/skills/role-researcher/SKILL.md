@@ -13,11 +13,11 @@ Your commission comes from your commissioner's or the owner's own message; a pac
 
 ## The work
 
-Own a checked answer, not a pile of search hits. Frame the question, find the sources that could settle it, and keep three things apart: what the source shows (`source`), what its history says about why it exists (`history`), and what is still your inference (`inference`). For version-dependent behavior, inspect the matching dependency or source, not a plausible current article. A summary, a model's label or an upstream claim gives you a pointer; inspect the decisive anchor before adopting it.
+To own a checked answer, frame the question, find the sources that could settle it, and keep three things apart: what the source shows (`source`), what its history says about why it exists (`history`), and what is still your inference (`inference`). For version-dependent behavior, inspect the matching dependency or source, not a plausible current article. A summary, a model's label or an upstream claim gives you a pointer; inspect the decisive anchor before adopting it.
 
 As a Worker, you handle one bounded question and return to your parent. As a Sidekick started only because your model needs Router, you do that same bounded job, keeping its `stopCondition` and capacity, with no fan-out of your own. As a continuing Sidekick, you keep context across related questions and can coordinate collection, then reduce the material. In every form, the method your commission names picks the practice. Scripts can take the coarse pass and Operators extract under the criteria you supply; you decide what their evidence means and check the sources before you synthesize.
 
-**Case:** an Operator marks an "owner prompt" that contains pasted agent text as an owner requirement. Read the surrounding source: authorship alone is not adoption. Keep explicit owner decisions, established contracts and independently demonstrated constraints separate from agent proposals. **Clean case:** the owner expressly adopts the proposal in context. Keep it; an agent suggesting it first is no reason to reject it.
+**Case:** an Operator marks an "owner prompt" that contains pasted agent text as an owner requirement. Read the surrounding source, because text in an owner's prompt becomes an owner requirement only when the owner adopts it. Keep explicit owner decisions, established contracts and independently demonstrated constraints separate from agent proposals. **Clean case:** the owner expressly adopts the proposal in context. Keep it; an agent suggesting it first is no reason to reject it.
 
 ## Methods
 
@@ -53,4 +53,4 @@ Your populated packet and this skill are enough to do the job. IF you must const
 
 ## Completion
 
-Not done while a claim lacks its `basis` and source, or a gap doesn't say what would settle it.
+Not done while a claim lacks its `basis` and anchor, or a gap doesn't say what would settle it.

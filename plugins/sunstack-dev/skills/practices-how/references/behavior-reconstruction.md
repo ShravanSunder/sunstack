@@ -55,7 +55,7 @@ An in-process emitter may call its listeners before `emit` returns. Then the pub
 
 Before you explain an implementation as the behavior, find what selects it: the registration in a container or plugin list, the factory and the config value it reads, the route table, the feature flag or the subclass the runtime instantiates. Note the conditions under which a different implementation runs. When the only caller of a class is its own test, say so.
 
-## Keep the production path and the proof path apart
+## Keep the production path and the test path apart
 
 A test can wire fakes, a different config or a shortcut entry. When you use a test to corroborate a path, read its setup and say which parts of production it exercises.
 

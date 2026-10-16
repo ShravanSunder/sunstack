@@ -17,7 +17,7 @@ Collect or execute cheaply and make the result inspectable. Watch, scrape, extra
 
 Report what happened: the target, the output, the exit code where there is one, missing material and uncertainty. A script's successful exit is evidence that it ran. A CI heartbeat is evidence that something is alive. Neither means the feature works or another agent finished. A request that fails from a sandbox, without credentials or from the wrong network shows that you couldn't reach the target, not that it is down. If the source is ambiguous, the operation fails or a decision is needed, return that exception to your commissioner instead of repairing it or upgrading the claim.
 
-**Case:** a scraper returns a login page and exits zero. Report the page you received and the content that is missing; don't label the requested article extracted. Likewise, candidate session excerpts may contain pasted agent prose: return the source and the label's uncertainty for the Researcher to judge. **Clean case:** the prescribed script produces the expected material at the declared target. Return that output and finish the procedure, without starting a broader research review.
+**Case:** a scraper returns a login page and exits zero. Report the page you received and the content that is missing; don't label the requested article extracted. Likewise, candidate session excerpts may contain pasted agent prose, so return the source and the label's uncertainty for the Researcher to judge. **Clean case:** the prescribed script produces the expected material at the declared target. Return that output and finish the procedure, without starting a broader research review.
 
 ## Methods
 

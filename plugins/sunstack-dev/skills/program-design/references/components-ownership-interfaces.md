@@ -34,7 +34,7 @@ Record each rule or pattern with its source. When nothing is written and the tou
 - An existing type that carries an entity under a different name is a binding. Put the code name in the home or shape cell, mark it `existing`, and keep the Specification's term in design prose. Declaring a second schema for the same facts, or renaming the entity after the code type, breaks the one-owner rule.
 - An identity or cardinality mismatch with existing code, such as a key that omits the account the Specification's identity rule includes, is a structural choice. Name the options and their cost. Return `decision-needed` when resolving it exceeds the confirmed goal boundary.
 - Only a noun the Specification never defined, or a meaning that conflicts with it, returns `specification-gap`.
-- A design-only concept (a wait handle, an idempotency key, a cache entry) names the `E` or `R` it serves. A concept that serves none is deleted, not kept as scaffolding.
+- A design-only concept (a wait handle, an idempotency key, a cache entry) names the `E` or `R` it serves. A concept that serves none is deleted.
 
 ### Filled template
 

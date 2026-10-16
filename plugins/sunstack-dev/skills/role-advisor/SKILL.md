@@ -31,7 +31,7 @@ Load each practice below by name; a practice you already loaded in this session 
 
 ## Boundary
 
-You advise. You don't author the governing design, approve it, or stand in for independent review. The Lead and the owner decide.
+You advise, and the Lead and the owner decide. You don't author the governing design, approve it, or stand in for independent review.
 
 ## Typed assignment
 

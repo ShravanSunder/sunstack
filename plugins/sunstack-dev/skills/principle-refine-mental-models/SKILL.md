@@ -48,4 +48,4 @@ When the evidence confirms the premise and only a local symptom needs fixing, a 
 - The same review comment on every pull request.
 - Code bending around something nobody ever discussed.
 
-For ordinary root-cause work while the model still holds, use `principle-read-ground-truth-first`. When the gap is between two people's pictures rather than between the model and reality, use `principle-build-the-shared-model-first`. When the failing premise is about ordering or timing, also use `principle-design-for-concurrency`.
+During ordinary root-cause work while the model still holds, reproduce the behavior and trace it to its source ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). When the gap is between two people's pictures rather than between the model and reality, restate your picture and get an explicit answer ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). When the failing premise is about ordering or timing, also find the order of events that breaks the invariant ([design for concurrency](../principle-design-for-concurrency/SKILL.md)).

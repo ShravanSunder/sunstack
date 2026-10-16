@@ -125,7 +125,7 @@ These are inspection questions, not mandatory artifact sections. Never invent a 
 
 ### 3. State the crux and forces
 
-MUST load `references/alternatives-and-crux.md` for stages 3-4 and apply its structural-crux, forces, alternatives, tradeoff, falsifier, and selection method in working state. Surface only an evidence gap that blocks credible alternatives.
+MUST load `references/alternatives-and-crux.md` for stages 3-4 and return the crux, forces, and evidence gaps that block credible alternatives. Apply its structural-crux, forces, alternatives, tradeoff, falsifier, and selection method in working state. Surface only an evidence gap that blocks credible alternatives.
 
 Completion: the design problem is expressed as falsifiable structural choices rather than generic quality goals.
 
@@ -179,7 +179,7 @@ Completion: a planner can later locate implementation surfaces without deciding 
 
 ### 9. Model state and lifecycle
 
-MUST load `references/state-calls-and-flows.md` for stages 9-10 and apply its state/lifecycle, current-to-proposed call-path, flow, and migration/cutover method in working state.
+MUST load `references/state-calls-and-flows.md` for stages 9-10 and return the applicable state/lifecycle model and current-to-proposed call-path comparison procedure. Apply its state/lifecycle, current-to-proposed call-path, flow, and migration/cutover method in working state.
 
 Use a state machine or table when timing/order changes correctness. Distinguish persisted, derived, cached, and synchronized state.
 
@@ -195,7 +195,7 @@ Completion: there is no “and then magic happens” hop; every applicable runti
 
 ### 11. Design failure, partial success, and recovery
 
-MUST load `references/failure-concurrency-recovery.md` for stages 11-12 and apply its detection, containment, retry, idempotency, timeout/cancellation, cleanup, partial-success, recovery, ordering, and consistency method in working state.
+MUST load `references/failure-concurrency-recovery.md` for stages 11-12 and return the failure/recovery and partial-success map. Apply its detection, containment, retry, idempotency, timeout/cancellation, cleanup, partial-success, recovery, ordering, and consistency method in working state.
 
 Completion: failure flows are as explicit as happy paths and every recovery action has one owner.
 
@@ -316,7 +316,7 @@ Paths are valid current-source or traceability anchors; the design must not beco
 
 ## Bounded Evidence Help
 
-There is no fixed swarm. Select an evidence lane only when its observable predicate holds:
+Select an evidence lane only when its observable predicate holds:
 
 ```text
 current sources constrain ownership/calls/state/proof and the parent lacks a model

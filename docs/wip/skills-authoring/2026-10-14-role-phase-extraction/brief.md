@@ -1,4 +1,4 @@
-# Role and phase extraction — analysis brief
+# Role and phase extraction: analysis brief
 
 Status: saved scope, not an implementation spec. Owner-directed 2026-10-14. This is project 2; project 1 starts from #127 and has its own [spec](../2026-10-14-practices-principles/spec.md) and [project scopes](../2026-10-14-practices-principles/projects.md).
 
@@ -13,16 +13,16 @@ Find general teaching and reusable methods currently embedded in roles or L2 pha
 3. Does the right principle or practice already exist? If so, what precise call/application replaces duplicate teaching?
 4. Is a stable subject-specific concept better taught by a caller-read `domain-*` leaf? What example, limits and source maintenance does it need?
 5. Does an evaluation method belong under `audit-*` alongside practices? Analyze the security rename and retain its official scan routing and scope.
-6. What ordered recurring preparation/execution/interpretation method is actually missing? Investigate experimentation; do not infer a missing practice from a common word.
+6. Which ordered recurring preparation/execution/interpretation method is missing? Investigate experimentation; do not infer a missing practice from a common word.
 7. Does the proposed decomposition let an agent solve a new realistic case with less reconstruction, without losing local obligations?
 
-Inspect each actual caller and receiving home. Evidence of existing teaching is not evidence it is applied well. Future proof needs a plausible failure, a materially different valid case, and observations from the selected loaded copy. Existing role schemas remain progressive typed support, not universal recipient reads.
+Inspect each caller and receiving home. Evidence of existing teaching is not evidence it is applied well. Future proof needs a plausible failure, a materially different valid case, and observations from the selected loaded copy. Existing role schemas remain progressive typed support, not universal recipient reads.
 
 ## Initial candidates to reassess
 
 Testing general judgment versus Test Design/Reviewer/Verifier applications; source evidence versus adopted authority; evidence applicability after changed targets; discriminating observations in Program Design/Debug; question-to-slice presentation; necessity/subtraction in review; security knowledge versus audit procedure. Several principles are strengthened by project 1, so do not copy or overwrite that teaching in project 2.
 
-Verification Design from closed #128 deserves special scrutiny: actual real-system method and role boundaries, useful engineering teaching, smallest fitting proof, and any procedural or schema machinery that has no consumer benefit. It does not exist on #127 and is not automatically restored. The closed branch is reference, not authority.
+Verification Design from closed #128 deserves special scrutiny: its real-system method and role boundaries, useful engineering teaching, smallest fitting proof, and any procedural or schema machinery that has no consumer benefit. It does not exist on #127 and is not automatically restored. The closed branch is reference, not authority.
 
 ## Proposed deliverable
 
@@ -40,6 +40,6 @@ The owner now explicitly selected role skills with normal model invocation and m
 
 Raised during the #131/#132 implementation review. These changes are deferred to their own follow-up PR, and #131/#132 do not change them.
 
-1. **Reference the principle.** `shared-references/diagram-semantics.md` "From the question to the view" restates `principle-write-for-the-reader`, which both presentation skills already read before choosing a view. Keep its three worked examples ("what changed?" → before/after table; "who owns retries?" → topology; "what happens after approval is refused?" → flow), point to the principle for the rest, and delete the restated judgment.
-2. **Design skills load it.** The owner expects the design-doc skills (`spec-design`, `program-design`) to load `diagram-semantics.md` for visual-family selection and staged disclosure. Today they choose views through their own predicates and render through `diagram-rendering-and-fallbacks.md`. Decide each one's call site and its observable predicate.
-3. **Possible skill.** If design skills, handoffs, PR descriptions and `docs-maintain` all need the same "pick the view, reveal in stages" method, consider promoting it to one surface-independent explanation skill (working name `presentation-explain`), with `presentation-tui`/`presentation-webui` reduced to surface manuals. This needs `skill-audit` classification and a skill spec first.
+1. Reference the principle. `shared-references/diagram-semantics.md` "From the question to the view" restates `principle-write-for-the-reader`, which both presentation skills already read before choosing a view. Keep its three worked examples ("what changed?" → before/after table; "who owns retries?" → topology; "what happens after approval is refused?" → flow), point to the principle for the rest, and delete the restated judgment.
+2. Design skills load it. The owner expects the design-doc skills (`spec-design`, `program-design`) to load `diagram-semantics.md` for visual-family selection and staged disclosure. Today they choose views through their own predicates and render through `diagram-rendering-and-fallbacks.md`. Decide each one's call site and its observable predicate.
+3. Possible skill. If design skills, handoffs, PR descriptions and `docs-maintain` all need the same "pick the view, reveal in stages" method, consider promoting it to one surface-independent explanation skill (working name `presentation-explain`), with `presentation-tui`/`presentation-webui` reduced to surface manuals. This needs `skill-audit` classification and a skill spec first.

@@ -28,7 +28,7 @@ flowchart TD
 
 - A plan needing revision returns to its planner; a blocked plan stops at its named owner.
 - Plan-only, missing, malformed, or stale governing basis/delivery context stops implementation.
-- A design surprise is not patched around. It returns to design.
+- A design surprise returns to design instead of being patched around.
 - A required proof gate is never weakened to make the run pass.
 - This phase decides which obligation needs proof and at which gate; `practices-verification` decides how each one is observed and reports supported, unsupported or unknown.
 - Independent implementation review happens afterward in `implementation-review`.

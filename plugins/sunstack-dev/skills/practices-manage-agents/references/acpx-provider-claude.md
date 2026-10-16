@@ -1,6 +1,6 @@
 # ACPX Provider: Claude
 
-Legacy route. agent-router carries persistent Claude relationships over ACP by default. Use this contract only when `acpx-legacy.md` admits ACPX: the selected agent-router service has no Claude endpoint, or cannot meet a stated model, effort, access, or title requirement. Record that gap in the ledger.
+This is a legacy route; agent-router carries persistent Claude relationships over ACP by default. Use this contract only when `acpx-legacy.md` admits ACPX: the selected agent-router service has no Claude endpoint, or cannot meet a stated model, effort, access, or title requirement. Record that gap in the ledger.
 
 ## Models
 
@@ -22,8 +22,8 @@ The adapter observed `default`, `low`, `medium`, `high`, `xhigh`, and `max`. Use
 
 ## Settings And Permissions
 
-`ACPX_CLAUDE_INCLUDE_USER_SETTINGS=1` also loads user plugins, commands, hooks, and external resources. Keep `--approve-reads --no-terminal --non-interactive-permissions deny` for source-grounded advice and review (writes and exec are denied, never approved; `deny` keeps the turn alive where `fail` would abort it) and record `inspect` as the review packet's access. The parent authorizes write access for non-review assignments; via ACPX a write scope is always `(declared)`. When path-scoped write enforcement matters, load `native-providers-claude.md` and dispatch native Claude Code.
+`ACPX_CLAUDE_INCLUDE_USER_SETTINGS=1` also loads user plugins, commands, hooks, and external resources. Keep `--approve-reads --no-terminal --non-interactive-permissions deny` for source-grounded advice and review (writes and exec are denied; `deny` keeps the turn alive where `fail` would abort it) and record `inspect` as the review packet's access. The parent authorizes write access for non-review assignments; via ACPX a write scope is always `(declared)`. IF path-scoped write enforcement matters, load `native-providers-claude.md` to spawn the helper through native Claude Code and return the spawn encoding.
 
 A friendly alias or exit code 0 does not prove Fable launched; verify capability evidence and record the accepted id in the ledger.
 
-When a saved selection is unsupported, deliberately update it to a verified id in the same named session, then inspect the recorded identity rather than creating a replacement session.
+When a saved selection is unsupported, update it to a verified id in the same named session, then inspect the recorded identity rather than creating a replacement session.

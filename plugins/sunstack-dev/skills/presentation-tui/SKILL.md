@@ -5,7 +5,7 @@ description: "Use when composing a substantial architecture, comparison, tradeof
 
 # Presentation: TUI
 
-On a monospace surface, the box-drawing skeleton is the default layout and markdown owns the atoms inside it. The skeleton is the top-level section framing, nothing more; every other box or glyph construct is used only where it beats its markdown equivalent at its job (a GFM table, a fence, a bullet list). Markdown atoms are governed by rules 5-7.
+On a monospace surface, the box-drawing skeleton is the default layout and markdown owns the atoms inside it. The skeleton covers only the top-level section framing; every other box or glyph construct is used only where it beats its markdown equivalent at its job (a GFM table, a fence, a bullet list). Markdown atoms are governed by rules 5-7.
 
 If the response is short, or the user asked for a normal markdown document or another exact format, skip the TUI treatment.
 
@@ -15,8 +15,8 @@ If the response is short, or the user asked for a normal markdown document or an
 2. For hard explanations, pick a disclosure sequence before detail: one map, one selected slice, one small ledger, then technical detail.
 3. Treat zoom as a disclosure move, not a visual family.
 4. Render research as handed-over lanes plus parent synthesis; presentation does not run agents or decide acceptance.
-5. Markdown mixes into the skeleton deliberately: **bold** for the few load-bearing words, *italic* sparingly, headings for long multi-section answers, `-` bullets where glyph alignment adds nothing. Never markup as decoration.
-6. Technical content — code, JSON, config, commands, structured data, identifiers — is always inline code, a fenced block, or a navigational link, never undifferentiated plain text. Inside fixed-width rows, relocate rather than strip (the baseline owns the procedure and the labels-versus-atoms boundary).
+5. Markdown mixes into the skeleton deliberately: **bold** for the few load-bearing words, *italic* sparingly, headings for long multi-section answers, `-` bullets where glyph alignment adds nothing. Never use markup as decoration.
+6. Technical content (code, JSON, config, commands, structured data, identifiers) is always inline code, a fenced block, or a navigational link, never undifferentiated plain text. Inside fixed-width rows, relocate rather than strip (the baseline owns the procedure and the labels-versus-atoms boundary).
 7. Comparisons default to GFM tables; box-drawn tables fire only past the baseline's fallback threshold.
 8. Use 70 columns for framed blocks by default; widen only when the content earns it.
 9. Keep rows readable; wrap prose instead of shrinking or cramming.

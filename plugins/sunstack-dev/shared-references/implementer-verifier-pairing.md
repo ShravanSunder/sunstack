@@ -13,7 +13,7 @@ Return: the governing sources the pair takes the expected outcome from, and any 
 
 ## The expected outcome comes from the sources
 
-The pair takes the expected outcome from the governing sources the commissions name, such as the adopted reference, the plan, the specification or the contract. Two of you agreeing never sets it, and neither does what the code does today. When a source passage settles a question, cite it and act on it. When a test or an observation rejects behavior the source allows, change the check to accept that behavior and name the passage that allows it. Narrow a check only with a recorded reason, and report its result from before and after the change.
+The governing sources are the ones the commissions name, such as the adopted reference, the plan, the specification or the contract. Two of you agreeing never sets the expected outcome, and neither does what the code does today. When a source passage settles a question, cite it and act on it. When a test or an observation rejects behavior the source allows, change the check to accept that behavior and name the passage that allows it. Narrow a check only with a recorded reason, and report its result from before and after the change.
 
 ## Disagreements go to the Lead
 
@@ -29,7 +29,7 @@ Each side repairs only what its role skill's Boundary gives it. Send a defect in
 
 ## One target per observation
 
-An observation belongs to one declared target. Whoever declares a target names its commit, its build or install location, its configuration and its client. The target stays unchanged until the observation on it is reported. A new build is a new target and is declared as new.
+Whoever declares a target for an observation names its commit, its build or install location, its configuration and its client. The target stays unchanged until the observation on it is reported. A new build is a new target and is declared as new.
 
 ## Held-out evaluations
 

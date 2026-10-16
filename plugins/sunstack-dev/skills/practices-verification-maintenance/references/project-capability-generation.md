@@ -27,7 +27,7 @@ Ground each part in what the interview found, with no placeholder left. The layo
 - Drive. The route with real selectors and commands from this repository. Prefer stable handles such as accessible names, data attributes, prompt strings and route paths over coordinates and tab order.
 - Evidence. What to keep and where it goes. Drive the path a real user takes, since internal setters and test-only endpoints prove nothing about it. Keep the action and the state it produced along with the final screen. Check side effects, such as files written, rows inserted and messages sent, beside what is visible. Use a mock only where a production boundary already isolates the external system. When the safe path is a dry run or a test mode, observe what it skips (files, network, git refs) before trusting its name, because some dry runs still touch the network or open a browser.
 - Cleanup. Stop what the run started by its recorded process id or session name, never by process name. Remove instances and scratch state, and keep the evidence at a location the skill names.
-- Helpers. Each script the skill ships is executable, runs on its own, shows its invocation in the skill body and has been run against its real target. A helper the reader has to reverse-engineer doesn't help.
+- Helpers. Each script the skill ships is executable, runs on its own, shows its invocation in the skill body and has been run against its real target.
 
 ## Choose the journeys
 

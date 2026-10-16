@@ -32,7 +32,7 @@ The same goes for reviews: a wording-only edit keeps an earlier review valid; an
 
 **Before calling something ready, say the risk.** What could go wrong if this merged today, and what is the worst thing that could break?
 
-**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that proves the claim, not ceremonial gates that prove nothing extra.
+**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that proves the claim, not ceremonial checks that prove nothing extra.
 
 ## Example: the green run on the wrong commit
 
@@ -53,4 +53,4 @@ When there is no result or claim to accept, there is nothing to check. Don't re-
 - A pull request called merge-ready with no word on the worst thing it could break.
 - A structural or static check reported as proof of behavior.
 
-Gathering the evidence in the first place is `principle-read-ground-truth-first`. Producing evidence that the feature works end to end is `principle-prove-it-works`.
+When you gather the evidence in the first place, read the decisive source and label each claim seen, inferred, or guessed ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). When you produce evidence that the feature works end to end, drive it through its real entry point and look where the user would ([prove it works](../principle-prove-it-works/SKILL.md)).
