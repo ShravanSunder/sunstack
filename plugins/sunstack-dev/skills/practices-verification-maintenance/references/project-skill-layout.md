@@ -46,11 +46,15 @@ On a create or an upkeep, run this from the project root once for each path you 
 ```bash
 check_write_path() {
   root="$(realpath .)"
+  rest="$1/"
   walked=""
-  for part in $(printf '%s\n' "$1" | tr '/' ' '); do
+  while [ -n "$rest" ]; do
+    part="${rest%%/*}"
+    rest="${rest#*/}"
+    [ -n "$part" ] || continue
     walked="${walked:+$walked/}$part"
     if [ -e "$walked" ] || [ -L "$walked" ]; then
-      [ "$(realpath "$walked" 2>/dev/null)" = "$root/$walked" ] || { echo "unsafe: $walked"; return 1; }
+      [ "$(realpath "$walked" 2>/dev/null)" = "$root/$walked" ] || { printf 'unsafe: %s\n' "$walked"; return 1; }
     else
       return 0
     fi

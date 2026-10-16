@@ -65,4 +65,4 @@ If a value has one valid representation, comes from inside the system, and no op
 - A `switch` over a union with no exhaustive check.
 - Two hand-written types for the same shape.
 
-Before naming the types, decide what each state means and what makes two values the same thing ([define the domain first](../principle-define-the-domain-first/SKILL.md)). When an operation reaches another system, give each of its endings, including "unknown", its own variant and decide which system knows whether the effect happened ([design for failure](../principle-design-for-failure/SKILL.md)).
+Before naming the types, decide what each state means and what makes two values the same thing ([define the domain first](../principle-define-the-domain-first/SKILL.md)). When an operation has an effect another system can see and can end without you knowing whether it landed, give each of its endings, including "unknown", its own variant and decide which system knows whether the effect happened ([design for failure](../principle-design-for-failure/SKILL.md)). A read that is safe to repeat has no such effect and needs no "unknown" variant.
