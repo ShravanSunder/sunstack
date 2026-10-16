@@ -6,7 +6,7 @@ This reference applies after `references/execution-forms.md` selects the Worker 
 
 ## Launch
 
-Use the host Task / Agent tool for the selected Claude model. Do not substitute `claude -p` or ACPX when that tool can spawn the selected model.
+Use the host Task / Agent tool for the selected Claude model. Do not substitute `claude -p` when that tool can spawn the selected model.
 
 Task / Agent may omit plan-mode or readonly flags. Do not hop to `claude -p --permission-mode plan` to invent one.
 

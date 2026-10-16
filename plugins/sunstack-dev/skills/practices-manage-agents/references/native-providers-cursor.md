@@ -6,7 +6,7 @@ This reference applies after `references/execution-forms.md` selects the Worker 
 
 ## Launch
 
-Use the host Task tool for a model listed below. Do not substitute Cursor CLI or ACPX when Task can spawn the selected model.
+Use the host Task tool for a model listed below. Do not substitute Cursor CLI when Task can spawn the selected model.
 
 Task may omit a sandbox or `workspace_readonly` flag. Do not hop to Cursor CLI to invent one.
 

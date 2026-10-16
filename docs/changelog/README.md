@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-16 practices-manage-agents back to mechanical](2026-10-16-manage-agents-mechanical.md)
 - [2026-10-16 Cross-language standards move into principles](2026-10-16-standards-into-principles.md)
 - [2026-10-16 The Advisor's second look and the Verifier's verification system](2026-10-16-advisor-second-look.md)
 - [2026-10-16 — Presentation HTML](2026-10-16-presentation-html.md)

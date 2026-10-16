@@ -5,60 +5,15 @@ description: "Use when delegating to subagents, agent teams or parallel agents: 
 
 # Practices: Manage Agents
 
-Every helper is described by four things, and each answers a different question. Its **role** says which result it owns and which decisions it may make. Its **execution form** says how its conversation is managed. Its **assignment**, a typed job packet, says what it is doing now, from which sources and under which grant. Its **model** is the capacity the job needs. Keeping them apart lets one role skill teach its responsibility however it runs, and lets the Lead tell implementation, observation, review and advice apart when the evidence comes back.
+Collaborate with other agents through a fixed structure: each job is classified, each agent has a role and a model, each handoff is a packet, and each result is checked against its evidence.
 
-The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, commissions the roles below, and accepts results. The owner decides one-way-door tradeoffs and merges and can override any pick. No helper writes the governing design or plan, and no form, title or board seat grants that authority.
-
-A role composes methods; it doesn't choose a lifecycle. The caller selects the phase or procedure, and the packet carries it. Practices teach how to do recurring work, principles sharpen judgment at a decision, and each role skill names the ones its decisions depend on.
-
-## Roles and forms
-
-A **Worker** is a native subagent its parent manages, kept through the bounded job's corrections. A **Sidekick** is a separately managed session, addressed and reused across related work. A native Worker may have its own thread id; the difference is who manages it and how long it lives. In a title, "Sidekick" names the form and the role names the responsibility.
-
-| Role | Result it owns | Form | Commissioned by | Role skill |
-|---|---|---|---|---|
-| 🦁 Lead | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
-| 🦉 Advisor | an independent second look at high-risk points it picks, the owner's questions, and unblocking the Lead's stalled work within its grant | Sidekick | the Lead, only when the owner asks; or the owner, whose own message names the session as the Advisor | `role-advisor` |
-| 🐒 Implementer | assigned changes, their product tests and associated proof | Sidekick | the Lead, one per workstream | `role-implementer` |
-| 🔬 Verifier | independent observation of the adopted outcome, and the verification system it runs on | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
-| 🔎 Reviewer | independent findings on a declared artifact, and correction checks | Sidekick with no author history | the Lead, for the review lead that runs the review procedure; that review lead, for each stage reviewer its procedure prescribes | `role-reviewer` |
-| 📚 Researcher | a checked answer to a supplied question | Worker for one bounded question; Sidekick for continuing work or when its model needs Router | the Lead, or a Sidekick whose role skill and commission grant management | `role-researcher` |
-| 🔧 Operator | observations from a prescribed procedure or a guided collection | Worker by default; Sidekick when the job needs a separately managed session | the Lead, or a Sidekick whose role skill and commission grant management | `role-operator` |
-
-Setup beyond the row:
-
-- **Implementer and Verifier:** a workstream is the implementation assignment the Lead's plan or commission names, closed by its declared proof, usually a Milestone made of Tasks; a collection subtask inside it gets no pair. Feature code and its proof stay with the Implementer. Create or reuse both sessions without dispatching work, get both real addresses, fill both packets so each names the other, then dispatch both.
-- **Reviewer:** never fork or resume the author's conversation, whether you start the review lead or a stage reviewer; the packet carries the sources.
-- **Researcher:** continuity changes its form, never its role.
-
-Each packet carries its role's payload, which the contract enforces: Implementer, plan slice, write grant and paired Verifier address; Verifier, adopted reference, paired Implementer address and one kind of work; Reviewer, target with revision, review procedure and no author history; Researcher, question and approach; Operator, procedure or collection criteria with expected observations; Advisor, the work's context (governing artifacts as its sources, the current state with anchors and the owner's goal), the Lead's questions if any, and its unblock grant (the sessions it may resume, whether it may start helpers, and what it does when the Lead is unreachable); Lead, owner intent and governing context.
-
-Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`. Label a native helper by its role too, such as `📚 Researcher Worker · retry policy`. An existing correct name needs no rewrite.
-
-## Main path
-
-1. **Cut and classify the job.** When you can't state the owner's result in one sentence from the plan or commission, settle that sentence and its assumption, or name the owner question that blocks it, before cutting ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). If one job would both build its own result and review or accept it, or both collect and interpret evidence, split it and give each job the check that closes it. Missing intent, contract, plan or grant is a gap to fill, not a Partial direction. MUST load `references/delegation-examples.md` and return the closest example's cut applied to this job. Report the cut to the owner, not the classification.
-   Completion: the bounded result, its closing check, its direction, span and horizon (Classify) and the cut are named, or the blocking gap is reported.
-2. **Choose the role** by the result it owns in the table. A helper commissions only what its own role skill and commission grant; a native Worker returns further decomposition to its parent.
-   Completion: one role is named, and its result is the one the job needs.
-3. **Set up the role** from its row and setup line in Roles and forms: its form, who may commission it, its setup and its payload.
-   Completion: the form is one the row admits, and you are a commissioner the row names.
-4. **Resolve an eligible model** from the catalog for that role, form and classified job, with any recorded reason the tier requires.
-   Completion: one row matches. If none does, cut the job until one matches or report the capability or policy gap; never improvise a frontier pick or change the Lead's model.
-5. **Choose the route for the form.** MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary for the chosen form, before creating, reusing or dispatching any helper, in the setup order its row names.
-   Completion: the route, lifecycle and history boundary are chosen. For a Sidekick, an existing session was looked for and reused if found, or one was created without starting work. For a native Worker, the spawn encoding is chosen and nothing is spawned yet, because its spawn carries the job.
-6. **Write the commission.** MUST load `schemas/assignment-fields.ts` and the selected role's `schemas/role-contracts/<role>-contract.ts` and return its packet, filled from each field's description, with the role skill's name in `requiredReads.charter` and only the job-specific practices and principles beyond the role skill's own. Beyond passing the schema, the `outcome` must be a checkable result, every source reachable by a fresh agent or inlined, the `limits` the narrowest grant that works, and the `stopCondition` must say when to hand back early. Before the packet goes out, MUST load `practices-preflight` for this assignment's execution context (where the helper runs and what its gates need) and return `ready` or the gap list. A preflight that already covered the same context, such as the orchestration's entry check for the same worktree and gates, counts; reuse its result. Carry the checked list in `sources` so the helper doesn't rediscover it, and hold back any work an open gap blocks. Send this prompt, then the packet: "You are the <emoji> <Role> <Form>. Load `role-<name>` and read it in full, then the reads listed below; a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder. If you can't load `role-<name>`, return that gap before starting work." The role skill teaches the role; the packet carries the assignment and its grant. When two jobs would write the same file, fixture, branch or service state, or one needs the other's unfinished output, name the shared resource and the ordering that breaks it, and write the isolation or wait into each packet's limits ([design for concurrency](../principle-design-for-concurrency/SKILL.md)). Host settings go in the tool's own arguments; packet text grants nothing.
-   Completion: preflight returned `ready` for this context, or the packet carries only work no open gap blocks; the packet is complete and went to a real address. A packet missing its outcome, sources, limits or `stopCondition` doesn't go out.
-7. **Continue and assess.** On assignment, after a correction that changes the job, and on resume, the helper rereads its role skill, commission, trace and the sources they name. Send a drifting agent a correction instead of restarting it. When a helper repeats a gap after a correction, or its result contradicts the plan's premise, find the premise the attempts shared and decide drift (correct the packet) or break (back to the plan or owner) before another correction or a higher tier ([refine mental models](../principle-refine-mental-models/SKILL.md)). Before using a handback claim, match it to the commit, target and output you opened, or name it as a gap ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). A green run that exercised a different component, or another helper's checkout, doesn't close the job. When a handback returns a change, mark each outcome and limit line of the commission carried, weakened or dropped, and trace each addition to the plan or return it as an owner question ([hold the scope](../principle-hold-the-scope/SKILL.md)). Return a specific gap or a scoped result to whoever commissioned it.
-   Completion: every claim used is matched to evidence or returned as a gap. Only the Lead accepts delivery.
-
-Delegate only independent work that costs less to hand off than to do. Units that each have their own fixture and output and wait on no other unit (an audit, a migration, a review across files) fan out to one helper per unit, and the results come back in one table.
+The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, and accepts results. The owner decides tradeoffs, merges, and can override any pick. Other agents take jobs from the Lead, or from a Sidekick whose role skill and commission let it start helpers, and return evidence, findings, or changes; they never write the design or the plan.
 
 ## Classify
 
 ### Work levels
 
-Work nests like a project plan. At every level the agent works in a loop: do one piece, check it against that level's check, then do the next piece or hand back. An agent can drive only as far as there is a check to verify against; if the Lead can't name the check for a level, the job is cut smaller.
+Work nests like a project plan. At every level the agent works in a loop: do one piece, check it against that level's check, then do the next piece or hand back. An agent can drive only as far as there is a check to verify against; if the Lead cannot name the check for a level, the job is cut smaller.
 
 | Level | Made of | Checked against |
 |---|---|---|
@@ -77,29 +32,17 @@ The highest work level the agent closes before handing back. Name the check that
 | Task | one result made of subtasks | its acceptance check |
 | Milestone | one deliverable made of tasks | the plan's proof |
 
-Horizon limits the role; it doesn't pick it.
-
-| Role | Horizons it can take |
-|---|---|
-| 🦁 Lead | Project |
-| 🐒 Implementer Sidekick | Milestone, Task, Subtask |
-| 🔬 Verifier Sidekick | its paired Implementer's workstream |
-| 🔎 Reviewer Sidekick | a Project or a Milestone, through its corrections |
-| 📚 Researcher | Task or Subtask as a Worker; related questions across a Milestone as a Sidekick |
-| 🔧 Operator | Subtask: one procedure or one bounded collection |
-| 🦉 Advisor | the work its context covers |
-
 ### Direction
 
 How much of the job the brief decides.
 
 | Answer | The brief | Test | Then |
 |---|---|---|---|
-| Exact | is a procedure; nothing is left to judge | could a script run it? | an Operator can take it |
-| Complete | names the approach; the agent decides only details nothing else depends on | can you name the approach in one sentence? | ready to hand off; an Operator can take Complete · Local collection under supplied criteria, returning candidates |
-| Partial | gives only the outcome, so the agent would choose the approach | does the job hide a design choice? | the Lead writes any design choice into the plan, since a design choice never goes to another agent; what stays Partial after that, an approach inside choices nothing else builds on, takes the Partial row of the 🐒 Implementer Sidekick catalog when it crosses domains or systems |
+| Exact | is a procedure; nothing is left to judge | could a script run it? | only an Exact job can go to a 🔧 Operator |
+| Complete | names the approach; the agent decides only details nothing else depends on | can you name the approach in one sentence? | ready to hand off |
+| Partial | gives only the outcome, so the agent would choose the approach | does the job hide a design choice? | the Lead writes any design choice into the plan, since a design choice never goes to another agent; what stays Partial after that takes a Partial row in the catalog |
 
-An Operator makes no engineering judgment: it doesn't decide what to run, what a result means, or how to fix it. It runs the suite and reports failures, watches CI until it finishes, publishes a verified file, applies a codemod, collects logs, or extracts excerpts and labels under the criteria it was given. What it labels stays a candidate; the Researcher or the commissioning role decides what it means. Tests and proof for an agent's own change stay with that agent; an Operator takes only a procedure assigned on its own, such as a suite run or a CI watch.
+Missing intent or a missing plan is missing input, not Partial.
 
 ### Span
 
@@ -113,7 +56,30 @@ What the agent must hold in its head to get the job right. Size and module count
 
 ### How they fit
 
-Horizon caps the role. Direction decides whether an Operator can take the job. Direction and span pick the role's catalog row.
+Horizon caps the role, direction decides whether an Operator can take the job, and direction and span pick the catalog row.
+
+## Roles
+
+| Role | Takes | Returns | Form | Commissioned by | Role skill |
+|---|---|---|---|---|---|
+| 🦁 Lead | the Project | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
+| 🦉 Advisor | an independent second look at high-risk points it picks, the owner's questions, unblocking the Lead's stalled work within its grant | judgments with what was checked, concluded, recommended and kept out | Sidekick | the Lead when the owner asks, or the owner directly | `role-advisor` |
+| 🐒 Implementer | one planned workstream, a Milestone or Task: changes, product tests, proof and corrections | the change and its proof | Sidekick | the Lead, one per workstream | `role-implementer` |
+| 🔬 Verifier | the paired Implementer's workstream: a proof-feasibility challenge, building or updating `verify-<app>`, observing the delivered target and checking the offered tests | observations and gaps | Sidekick | the Lead, as an Implementer's pair | `role-verifier` |
+| 🔎 Reviewer | an independent review of a declared artifact and its corrections | anchored findings | Sidekick with no author history | the Lead, for a review lead; that review lead, for its stage reviewers | `role-reviewer` |
+| 📚 Researcher | one bounded question, or a continuing investigation | a checked answer with its sources | Worker; Sidekick for continuing work or when its model needs Router | the Lead, or a Sidekick allowed to start helpers | `role-researcher` |
+| 🔧 Operator | an Exact Subtask: a written procedure, a watch, a mechanical transform or a guided collection | what it observed | Worker; Sidekick when the job needs its own session | the Lead, or a Sidekick allowed to start helpers | `role-operator` |
+
+A **Worker** is a native subagent its parent spawns for one bounded job and manages through that job's corrections. A **Sidekick** is a separately managed session, reused by address across related work.
+
+An Operator makes no judgment calls: it never decides what to run, what a result means, or how to fix it. It runs the suite and reports failures, watches CI until it finishes, pushes and publishes a verified file, applies a codemod, or collects logs; it does not fix a failing test or decide whether a failure matters. Judgment it meets goes back to whoever assigned it. Tests and proof for an agent's own change stay with that agent; an Operator takes only a procedure assigned on its own, such as a suite run or a CI watch.
+
+- **Implementer and Verifier:** create both sessions without starting work, fill each packet with the other's address, then dispatch both. A collection subtask inside a workstream gets no pair.
+- **Reviewer:** never fork or resume the author's conversation; the packet carries the sources.
+
+Delegate only independent work that costs less to hand off than to do. Work that splits into independent units (an audit, a migration, a review across files) fans out: one helper per unit, one table at the end.
+
+Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`, and label a native helper by its role, such as `📚 Researcher Worker · retry policy`.
 
 ## Model catalog
 
@@ -142,7 +108,7 @@ Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise th
 | Daily driver | Worker | OpenAI Sol | medium | Complete | Cross-domain |
 | Daily driver | Sidekick, continuing investigation | OpenAI Sol | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system |
 
-A Researcher Sidekick started only because its model needs Router keeps the bounded job's row and closing check, with no fan-out of its own. A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection. Opus is not a research row; it needs the owner's override.
+A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection. Opus is not a research row; it needs the owner's override.
 
 ### 🐒 Implementer Sidekick
 
@@ -190,6 +156,33 @@ Beyond the rows above, another reviewer joins only when the owner asks for one a
 
 The owner chooses the Lead's model. Nothing here escalates it.
 
+## Work with an agent
+
+Classify the job (the Examples show how), pick its role and model rows, then launch, hand off, wait, and check the result's evidence against its claim. The Lead gives the overall verdict.
+
+### Launch
+
+MUST load `references/execution-forms.md` and return the route, lifecycle and history boundary for the chosen form.
+
+### Hand off
+
+Whoever assigns the job writes its prompt.
+
+1. MUST load `schemas/assignment-fields.ts` and the role's `schemas/role-contracts/<role>-contract.ts` and return the packet, filled from each field's description, with the role skill in `requiredReads.charter`.
+2. MUST load `practices-preflight` for the assignment's context and return `ready` or the gap list. A preflight that already covered the same context counts. Carry the checked list in `sources`, and hold back any work an open gap blocks.
+3. When two jobs would write the same file, branch or service state, write the isolation or the ordering into each packet's `limits`.
+4. Send this prompt, then the packet: "You are the <emoji> <Role> <Form>. Load `role-<name>` and read it in full, then the reads listed below; a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder. If you can't load `role-<name>`, return that gap before starting work."
+
+When an agent drifts, send it a correction; don't restart it.
+
+### Check the result
+
+Before using a handback, match each claim to the commit, file or output you opened; return anything unmatched as a gap. Only the Lead accepts delivery.
+
+## Examples
+
+MUST load `references/delegation-examples.md` and return the six steps (direction, span, horizon, cut, role and form, catalog row) written for this job.
+
 ## Completion
 
-Managing a helper is done when its role, form and model are chosen with the reasons their rows require; its prompt told the recipient to load its role skill; its packet carried the preflight result for its context and went to a real address; and its handback was matched to evidence and returned as a scoped result or a named gap. A delivered prompt, a created session, a filled packet or a green check is a stage on the way. The typed packet constrains the assignment's shape; it doesn't prove the reads happened, the grant exists, or the work is right.
+Done when the helper's role, form and model rows are chosen with any reason their rows require, its packet carried the preflight result and went to a real address, and its handback was matched to evidence.
