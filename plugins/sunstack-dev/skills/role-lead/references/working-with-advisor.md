@@ -18,7 +18,7 @@ When the owner opened it, give it the files and anchors it asks for, and leave t
 
 ## Reading what comes back
 
-Each message from the Advisor says what it checked, what it concluded, what it recommends and what stays out of scope. The Advisor judges and you decide. For each judgment, adopt it, reject it with the evidence that answers it, or bring it to the owner when it is a tradeoff only the owner can make. Record the disposition and its reason in the trace. Before you adopt a judgment your decision rests on, open the anchor it names as checked.
+A second-look judgment from the Advisor says what it checked, what it concluded, what it recommends and what stays out of scope; a gap question or a stall report carries only the facts you decide on. The Advisor judges and you decide. For each judgment, adopt it, reject it with the evidence that answers it, or bring it to the owner when it is a tradeoff only the owner can make. Record the disposition and its reason in the trace. Before you adopt a judgment your decision rests on, open the anchor it names as checked.
 
 "The Advisor agreed" never stands in for a review result, an acceptance, a Verifier observation or your own read of the anchors.
 

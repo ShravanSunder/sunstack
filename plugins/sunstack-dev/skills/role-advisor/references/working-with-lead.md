@@ -10,7 +10,7 @@ The Lead's questions, when it sends any, get answers, and the points you pick si
 
 ## What you send back
 
-Open with the revision you read, so a Lead who meant another one sees it at once. Then name each point with why it is expensive if wrong, and give it four parts:
+For a second look, open with the revision you read, so a Lead who meant another one sees it at once. Then name each point with why it is expensive if wrong, and give it four parts:
 
 - **Checked:** each source you opened, with its path, its revision and the one thing it shows. Leave your reading notes out.
 - **Concluded:** the picture you rebuilt, its load-bearing assumption and your judgment. When several sources touched the point, the judgment is what they mean together.
@@ -57,7 +57,7 @@ Before you send anything again, reconcile any send whose result was uncertain an
 
 When the work waits on a missing input, gather it within your limits, or through a helper when `helperStarts` allows it, and give it to the Lead, who decides where it goes. When the cause needs something your grant doesn't cover, such as a new session, a different model or a change to the plan, propose that move to the Lead with the evidence.
 
-Tell the Lead on the work thread: the stall, its observed cause, each action with its result, and what still waits on the Lead. When the Lead doesn't answer, do what `whenLeadUnreachable` says; the Lead's silence doesn't widen your grant.
+Tell the Lead on the work thread: the stall, its observed cause, each action with its result, and what still waits on the Lead. The report carries only those facts; the four parts are for a second look. When the Lead doesn't answer, do what `whenLeadUnreachable` says; the Lead's silence doesn't widen your grant.
 
 ## When you stop
 
