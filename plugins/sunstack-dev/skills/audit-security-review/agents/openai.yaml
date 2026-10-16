@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit: Security Review"
+  short_description: "Route Codex Security scans"
+  default_prompt: "Use audit-security-review to choose the right Codex Security scan for this authorized security task."

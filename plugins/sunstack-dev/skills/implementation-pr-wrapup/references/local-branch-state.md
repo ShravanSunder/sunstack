@@ -23,4 +23,4 @@ Then compare local `HEAD` to the PR head SHA from GitHub.
 - Missing upstream: push/create PR intentionally; do not guess.
 - Local `HEAD` differs from PR head: not ready unless the user explicitly decides to leave local-only work out of the PR.
 
-Preserve worktrees after PR creation/update. Do not run destructive cleanup unless the user explicitly requested it.
+Cleanup of build output and of the merged worktree follows `merge-cleanup.md`.

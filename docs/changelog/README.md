@@ -1,7 +1,7 @@
 # Changelog
 
 - [2026-10-16 — Presentation HTML](2026-10-16-presentation-html.md)
-
+- [2026-10-16 Preflight, cleanup and the domain layer](2026-10-16-preflight-cleanup-domain.md)
 - [2026-10-16 Verification practices, role relationships and phase composition](2026-10-16-verification-roles-phases.md)
 - [2026-10-15 How and why practices](2026-10-15-how-why-practices.md)
 - [2026-10-15 Principle citation grammar](2026-10-15-principle-citation-grammar.md)

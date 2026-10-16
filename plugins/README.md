@@ -65,11 +65,13 @@ Shravan's Codex-first development workflow plugin. Provides:
 - **spec-program-review** skill -- independently reviews current specification/program-design meaning and reuses coverage only for parent-verified non-semantic edits
 - **discuss-clarify-mental-models** skill -- reconverges unstable shared mental models before artifact work without the old one-question grill shape
 - **discuss-pathfinding** skill -- Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/process/glossary records as they crystallize.
-- **practices-manage-agents** skill -- chooses each helper's role, Worker or Sidekick form and model, commissions it with a typed job packet, and assesses its handback across native, agent-router, or ACPX runtimes, with ACP adapter implementation kept separate
+- **practices-manage-agents** skill -- chooses each helper's role, Worker or Sidekick form and model, runs a preflight for each commission, commissions it with a typed job packet, and assesses its handback across native, agent-router, or ACPX runtimes, with ACP adapter implementation kept separate
+- **practices-preflight** skill -- before an orchestration, a plan's implementation or a commission, checks for real what every required gate needs (credentials by name, services, tools, assigned agents, disk) and returns ready or the gap list
+- **practices-cleanup** skill -- removes the large residue a task created (build output, large logs, task temp folders, merged worktrees) through an allow list, and asks the owner about anything outside it
 - **docs-maintain** skill -- reconciles docs, AGENTS.md, README.md, specs, plans, changelogs, and architecture docs against code and current decisions
 - **spec-handoff** skill -- packages spec/design context for another agent before an implementation plan exists
 - **plan-handoff** skill -- packages an existing implementation plan for another agent without pretending design context is a plan
-- **ops-security-review** skill -- routes explicit security scans to official Codex Security workflows instead of reimplementing audit-grade scanning
+- **audit-security-review** skill -- routes explicit security scans to official Codex Security workflows instead of reimplementing audit-grade scanning
 - **ops-observability-stack** skill -- guides shared local OpenTelemetry/Victoria stack use, producer boundaries, AgentStudio and Agent VM loops, resource naming, and Victoria proof queries
 - **implementation-pr-wrapup** skill -- finishes the GitHub PR lifecycle with fresh checks, comments, review-thread, and mergeability gates without merging without authorization
 - **debug-investigation** skill -- investigates bugs, failing tests, flaky behavior, crashes, regressions, and unexpected behavior before fixes

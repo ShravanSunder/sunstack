@@ -1,4 +1,4 @@
-# Sunstack Dev 2.81.0 — standalone HTML explainers
+# Sunstack Dev 2.82.0 — standalone HTML explainers
 
 - Added `presentation-html` for standalone technical HTML files using public Demistify assets.
 - The skill separates author content/layout from library rendering and fetches version-matched component documentation.

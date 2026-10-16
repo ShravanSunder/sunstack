@@ -134,6 +134,11 @@ const advisorPacket = (): PacketFields => ({
   returnContract: { kind: "helper-handback" },
   question: "Does a per-role schema split cost more than it saves?",
   challengedPicture: "One shared fields file plus seven role contracts",
+  unblockGrant: {
+    resumableSessions: [sessionAddress("01a14477-4a38-79d3-8110-c84362f47f5e")],
+    helperStarts: "bounded-collection",
+    whenLeadUnreachable: "Post the stall on the work thread and keep resuming only the listed sessions.",
+  },
 });
 
 const deliveryObservationWork = (): PacketFields => ({
@@ -191,6 +196,26 @@ describe("agent job packet schema", () => {
     // Assert
     expect(acceptedIssues).toEqual([]);
     expect(rejectedIssues).toEqual(["executionForm"]);
+  });
+
+  test("accepts an Advisor with its unblock grant and rejects one commissioned with access alone", () => {
+    // Arrange
+    const withGrant = advisorPacket();
+    const accessOnly = withoutField(withGrant, "unblockGrant");
+    const grantWithoutUnreachablePlan = {
+      ...withGrant,
+      unblockGrant: withoutField(withGrant.unblockGrant as PacketFields, "whenLeadUnreachable"),
+    };
+
+    // Act
+    const acceptedIssues = issuePaths(AgentJobPacket, withGrant);
+    const accessOnlyIssues = issuePaths(AgentJobPacket, accessOnly);
+    const unreachablePlanIssues = issuePaths(AgentJobPacket, grantWithoutUnreachablePlan);
+
+    // Assert
+    expect(acceptedIssues).toEqual([]);
+    expect(accessOnlyIssues).toEqual(["unblockGrant"]);
+    expect(unreachablePlanIssues).toEqual(["unblockGrant.whenLeadUnreachable"]);
   });
 
   test("holds each role to its own charter and grant", () => {

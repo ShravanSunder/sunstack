@@ -16,7 +16,7 @@ specific URL or docs site extraction       Tavily extract/crawl or scraper if av
 saved personal research                    Readwise/Reader
 user workflow history                      memory, rollout summaries, targeted sessions
 UI/page behavior                           Browser or app-specific tooling
-security research                          ops-security-review / Codex Security routes
+security research                          audit-security-review / Codex Security routes
 ```
 
 ## Routing Rules

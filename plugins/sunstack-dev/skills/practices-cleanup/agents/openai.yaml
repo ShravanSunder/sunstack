@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Cleanup"
+  short_description: "Remove the large residue your own task created"
+  default_prompt: "Use practices-cleanup to find the build output, large logs, task temp folders and merged worktrees this task created, check each one, and remove what is safe or report why it is held."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Domain: Rust"
+  short_description: "The owner's Rust standards"
+  default_prompt: "Use $domain-rust on the current Rust work and name each item fixed or kept."
+policy:
+  allow_implicit_invocation: false

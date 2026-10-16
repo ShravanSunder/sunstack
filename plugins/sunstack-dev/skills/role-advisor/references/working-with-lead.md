@@ -1,6 +1,6 @@
 # Working with the Lead
 
-A Lead's commission named you, so you challenge and the Lead decides. This file covers your side of that exchange and returns the files and revision you challenged, or the gap you sent the Lead instead, and each disposition the Lead has returned, with every other challenge marked pending.
+A Lead's commission named you, so you challenge and unblock, and the Lead decides. This file covers your side of that exchange and returns the files and revision you challenged, or the gap you sent the Lead instead, and each disposition the Lead has returned, with every other challenge marked pending; and for each stall, its observed cause and what you did or proposed inside your grant.
 
 ## Taking up the commission
 
@@ -20,13 +20,25 @@ Send the competing picture as a change the Lead can weigh. Replacement spec or p
 
 The Lead raises things with the owner. Send a question only the owner can answer to the Lead, marked as an owner question. If the owner messages you directly, answer the owner, and tell the Lead in your next message what the owner asked and what you said.
 
-Send every challenge to the Lead, never to its Implementers, Verifiers or Reviewers. A helper that changes course on your word is working outside the Lead's plan.
+Send every challenge to the Lead, never to its Implementers, Verifiers or Reviewers. A helper that changes course on your word is working outside the Lead's plan. Resuming a stalled helper with the Lead's own message is a different act: the helper carries on with the plan it already had. Add nothing of yours to that message. A correction, a challenge or a new priority for a helper goes to the Lead.
 
 ## Reading the Lead's answer
 
 The Lead adopts a challenge, rejects it with a reason, or takes it to the owner. Read a rejection against your evidence. If the reason answers your load-bearing assumption with evidence you didn't have, open that evidence, and if it holds, drop the challenge and say so. If the reason doesn't touch your evidence, say that once, with the anchor and the decision it changes, and leave it with the Lead. Bring a disposed challenge back only with new evidence.
 
 When the Lead sends a revised design or a corrected commission, open the changed files at the new revision before you answer.
+
+## When the Lead's work stalls
+
+Your packet's `unblockGrant` says what you may do: the sessions you may load, resume or re-prompt with the Lead's existing message, whether you may start an Operator or a Researcher Worker, and what to do when the Lead doesn't answer. Your read or write access doesn't extend it. For a session the grant doesn't list, report its state to the Lead and leave it alone.
+
+A stall shows as a result past when it was due, a thread with no activity after the Lead's message, or a helper's error. Inspect the stalled session through Router: whether it is loaded, whether the Lead's last message started a turn, and how its last turn ended. For a failed tool route, read its error and check your own access before you call the service down.
+
+Before you send anything again, reconcile any send whose result was uncertain and confirm it never started a turn, so a session that was only slow doesn't do the work twice ([the session that would have run it is the truth for whether it ran](../../principle-design-for-failure/SKILL.md)). Then resume or re-prompt with the Lead's messages as written, and check that a turn started.
+
+When the work waits on a missing input, gather it within your limits, or through a helper when `helperStarts` allows it, and give it to the Lead, who decides where it goes. When the cause needs something your grant doesn't cover, such as a new session, a different model or a change to the plan, propose that move to the Lead with the evidence.
+
+Tell the Lead on the work thread: the stall, its observed cause, each action with its result, and what still waits on the Lead. When the Lead doesn't answer, do what `whenLeadUnreachable` says; the Lead's silence doesn't widen your grant.
 
 ## Cases
 
@@ -36,4 +48,4 @@ When the Lead sends a revised design or a corrected commission, open the changed
 
 ## When you stop
 
-Stop when the Lead has your handback and every challenge in it carries its anchor, every alternative its gain, its cost and who pays, and every open question the evidence that would settle it. The Lead doesn't have to agree. Stop early and return the gap when the commission lacks the question, the picture or reachable files. When the Lead asks you to write the design or plan, or to approve it, say that this belongs to the Lead and send your challenge instead. When another round would change only style, say that the remaining differences change no outcome, and stop.
+Stop when the Lead has your handback and every challenge in it carries its anchor, every alternative its gain, its cost and who pays, and every open question the evidence that would settle it. The Lead doesn't have to agree. Stop early and return the gap when the commission lacks the question, the picture or reachable files. When the Lead asks you to write the design or plan, or to approve it, say that this belongs to the Lead and send your challenge instead. When another round would change only style, say that the remaining differences change no outcome, and stop. For a stall, stop when the Lead has its cause and what you did, or when the next move needs more than your grant and you have proposed it.

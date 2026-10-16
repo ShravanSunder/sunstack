@@ -4,7 +4,7 @@ This reference owns your side of the relationship with the Lead who commissioned
 
 Expected inputs: your commission from the Lead's own message, with its packet, after the Assignment check in your role skill.
 
-Return: the commission gaps you sent back before editing, or none, and what your handback must carry for this job.
+Return: the commission gaps you sent back before editing, or none, and what your handback must carry for this job, with the language-standards inventory when the commission is code work.
 
 ## Read the commission
 
@@ -32,6 +32,8 @@ Around the owning phase's result, give the Lead the anchors it needs to rebuild 
 - what stays unverified.
 
 IF your commission asks for the slop and infractions pass on skill work, load `../../../shared-references/humanizer.md` to read it as a list of tells, then walk every file you changed against it and against the self-check list your commission names from the skill-authoring system the job uses, and return each tell and check item you found, fixed or kept with a reason. The skill you write never calls the humanizer. This inventory is your own pass before handback, and the independent review still follows it.
+
+IF your commission is code work, load `../../domain-<lang>/SKILL.md` for each language the diff touches that has one, walk every file you changed against it alongside the repo's linters, and return each departure you found, fixed or kept with a reason.
 
 ## When the Lead answers
 
