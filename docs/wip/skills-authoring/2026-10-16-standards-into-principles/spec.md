@@ -37,4 +37,4 @@ Companion: the reduced Standards section of `devfiles/shared/my_agents.md` (mapp
 ## Coordination
 
 - Base: `skills/preflight-cleanup-domain` (#136). Version and stack position are set at PR time.
-- Run states: all proposed.
+- Run states: N1–N4 reviewed (implementation review great at 8a7ca804). Shipped as 2.84.0 once the PR merges.
