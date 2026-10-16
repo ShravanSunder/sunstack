@@ -1,6 +1,6 @@
 interface:
   display_name: "Role: Advisor"
-  short_description: "Challenge the model with evidence and tradeoffs"
+  short_description: "Challenge the model and unblock the Lead's stalled work"
   default_prompt: "Use $role-advisor to challenge the assigned picture with checked alternatives and their tradeoffs."
 policy:
   allow_implicit_invocation: true
