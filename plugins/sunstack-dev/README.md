@@ -37,6 +37,8 @@ practices-*          always-on practices           practices-collaboration
                                                   practices-research
                                                   practices-how
                                                   practices-why
+                                                  practices-verification
+                                                  practices-verification-maintenance
 role-*               assigned responsibility       role-lead
                                                   role-advisor
                                                   role-implementer
@@ -150,6 +152,10 @@ Use `practices-research` when the next step is to gather evidence: local code/do
 Use `practices-how` to explain how existing code or a subsystem works before changing it. It traces a real entry through owners, state changes and effects back to the result or error, checks which implementation is actually wired in, keeps what source shows apart from what a runtime capture confirms and what is inferred, and stops when the reader can walk the named case with an anchor at each step. Program Design calls it for the current-system model.
 
 Use `practices-why` to recover why code or a design took its current shape. It walks back past the last touch to the commit that introduced the behavior, loads `practices-research` for the evidence walk, keeps a proposal apart from an adopted decision, and writes the answer as anchored facts, supported interpretations and named unknowns. It explains, and the next owner decides what to keep or change.
+
+Use `practices-verification` to check that a declared behavior works on its intended target. It finds the project's own verification skill under `.agents/skills/verify-<app>/`, picks an observation route, checks that the target and evidence still apply, drives the real interaction within the caller's grant, and reports only what was observed, keeping gaps unknown instead of passing them. UI checks use computer use or the Chrome plugin, with Peekaboo second, never Playwright.
+
+Use `practices-verification-maintenance` to create or keep current a project's verification skill at `.agents/skills/verify-<app>/`, with a relative `.claude/skills/verify-<app>` link. It reads the app's paths with `practices-how`, writes or corrects the journeys, proves them once on the real target with `practices-verification`, and reports conflicts instead of overwriting. It adapts Lauren Tan's MIT-licensed Pstack create and maintain skills; see its NOTICE.
 
 Skills are layered: orchestrators, then phases, then practices (with `ops-*` and `presentation-*`), then tool manuals, with principles at the bottom. Role skills (`role-*`) sit above practices; phases and orchestrators reach a role only through `practices-manage-agents`, which names roles only as data values in its role table and `requiredReads.charter`. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
 

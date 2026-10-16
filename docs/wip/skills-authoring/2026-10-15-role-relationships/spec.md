@@ -83,4 +83,4 @@ RL2 is folded into RL3 as support work (review finding F6).
 
 ## Open items for the owner
 
-- **Native Worker pairs.** The owner directed Opus native Workers for skill writing, with a paired Verifier. The retained contracts can't represent that pair: the Implementer contract admits only `executionForm: sidekick`, and the Verifier contract's `pairedImplementer` needs a real Router address, which a native Worker doesn't have. Options: change both contracts to allow a native Implementer plus a named relay through the Lead, or keep skill-writing Workers outside the typed contract as a recorded owner exception. Until the owner decides, this spec changes no form rule.
+- **Native Worker pairs, decided by the owner on 2026-10-15:** "for workers you can send it as a message we do oukr best". A native skill-writing Worker gets its commission as a message, best effort, outside the typed contracts. No contract change. Its Verifier stays paired through the Lead.
