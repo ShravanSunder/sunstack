@@ -10,10 +10,10 @@ Check boundary: read-only. Granted commands run only under the command procedure
 
 ## Observe Each Claim
 
-IF a selected proof claim has a recorded execution grant, load `../../../../shared-references/review-proof-command-execution.md` and return the command-chain preflight, allowed-command observations, write comparison and execution gaps for this check's claim assessment. The 🔧 Operator assigned in `SKILL.md` runs those commands with the granted list and that procedure's steps in its commission, and returns observations. The 🔎 Reviewer Sidekick fills one row per claim from them:
+IF a selected proof claim has a recorded execution grant, load `../../../../shared-references/review-proof-command-execution.md` and return each granted command's result (the command as run, its exit status, output path and `git status --porcelain` comparison, or the exact reason it didn't run) for this check's claim assessment. The 🔧 Operator assigned in `SKILL.md` runs those commands with the grant and that reference's rules in its commission, and returns those results. The 🔎 Reviewer Sidekick fills one row per claim from them:
 
 ```text
-claim | preflight write-set: scratchpad-only|ignored-build-artifacts|tracked-worktree|unknown | command run or challenge | observed vs claimed: match|weaker|contradicts|cannot observe at this layer | false-green check: <how this could pass with the behavior absent: stale artifacts, mocked boundary, disabled gate, evidence older than the design> | exit status | rerun comparison: <both outcomes> or no failure
+claim | command run or challenge | observed vs claimed: match|weaker|contradicts|cannot observe at this layer | false-green check: <how this could pass with the behavior absent: stale artifacts, mocked boundary, disabled gate, evidence older than the design> | exit status | rerun comparison: <both outcomes> or no failure
 ```
 
 When a claim can't be observed (no grant, a would-write stop, a denied command, an absent harness), challenge it instead: state what the claim asserts, what the cited evidence can observe, and the smallest command or observation that would settle it.

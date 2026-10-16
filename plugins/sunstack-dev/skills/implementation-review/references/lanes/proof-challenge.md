@@ -10,11 +10,10 @@ Check boundary: read-only review. Granted commands run only under the command pr
 
 ## Observe Each Claim
 
-IF a selected proof claim has a recorded execution grant, load `../../../../shared-references/review-proof-command-execution.md` and return the command-chain preflight, allowed-command observations, write comparison and execution gaps for this check's claim assessment. The 🔧 Operator assigned in `SKILL.md` runs those commands with the granted list and that procedure's steps in its commission, and returns observations. The 🔎 Reviewer Sidekick judges each claim against them:
+IF a selected proof claim has a recorded execution grant, load `../../../../shared-references/review-proof-command-execution.md` and return each granted command's result (the command as run, its exit status, output path and `git status --porcelain` comparison, or the exact reason it didn't run) for this check's claim assessment. The 🔧 Operator assigned in `SKILL.md` runs those commands with the grant and that reference's rules in its commission, and returns those results. The 🔎 Reviewer Sidekick judges each claim against them:
 
 ```text
-claim -> preflight: write-set class and evidence from the command procedure
-      -> observation: exit status and scratchpad output, or the stop reason
+claim -> observation: exit status and scratchpad output, or the stop reason
 observed vs claimed: match | weaker | contradicts | cannot observe at this layer
 false-green check: could this command pass while the claimed behavior is absent?
   (stale artifacts, mocked boundary, disabled gate, evidence generated before
@@ -34,8 +33,8 @@ Bad: relabeling a unit pass as runtime proof; accepting green output without exi
 Return the check `complete | partial | blocked` status plus:
 
 ```text
-per-claim results: <claim, preflight write-set class, command run | challenge,
-  observed vs claimed, false-green check, exit status, scratchpad evidence path>
+per-claim results: <claim, command run | challenge, observed vs claimed,
+  false-green check, exit status, scratchpad evidence path>
 commands run: <every command executed, verbatim, for the Reviewer Sidekick's
   grant comparison>
 proof gaps:
