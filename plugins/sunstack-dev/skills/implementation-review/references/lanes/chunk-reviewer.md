@@ -10,6 +10,8 @@ Check boundary: read-only review. Open/search current source and existing proof 
 
 Procedure: MUST load `../reviewing-implementation.md` to perform its full obligation trace, whole-file reads, normal and failure-path inspection, proof-fit checks, applicable reachability and weaker-substitute checks, and riskiest-assumption test, scoped to the assigned chunk and its overlap seams, and return its coverage and anchored-exclusion rows, path inspection, proof/reachability/weaker-substitute/riskiest-assumption results, candidate findings, and uncovered boundary for this chunk.
 
+IF the chunk changes code, load `../../../domain-<lang>/SKILL.md` for each language it touches that has one, and return each place the changed code departs from that standard as a candidate finding naming the rule it breaks.
+
 If judging the chunk requires code outside the assignment and its seams, stop and return that boundary as `partial`. A chunk that cannot be judged from its packet is a chunking defect the 🔎 Reviewer Sidekick must repair, not a gap to fill with inference.
 
 Return the check `complete | partial | blocked` status plus:

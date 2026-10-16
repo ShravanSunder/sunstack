@@ -12,7 +12,8 @@ Before any disposition, anchor each candidate to the rails:
 
 ```text
 rails anchor: confirmed requirement | Specification obligation |
-              Program Design element | confirmed goal-boundary field
+              Program Design element | confirmed goal-boundary field |
+              domain-skill rule (code findings)
 governing source identity and exact section/field:
 quoted or faithful obligation text:
 plain-language meaning of that anchor:
@@ -22,6 +23,8 @@ mechanism necessity: is the proposed mechanism required and proportionate to
   the quoted clause, or one of several ways to serve it?
 scope effect: inside confirmed boundary | requires owner expansion decision
 ```
+
+A domain-skill rule anchors a code finding when it comes from a `domain-<lang>` skill loaded for a language the diff touches, because those skills hold the owner's language standards. Where the repository's own conventions or gates differ, the repository wins and the finding doesn't stand.
 
 A category name is not an anchor. "The reliability requirement" fails the anchor check until the exact governing clause is opened and quoted. A candidate whose anchor fields cannot be filled from an inspectable source is `unverified`, never `accepted`; it is advice awaiting investigation and carries no implementation authority. When the deletion test says the obligations hold without the mechanism, prefer deletion over completing the mechanism's missing contracts.
 
@@ -75,7 +78,7 @@ Route by cause, not severity:
 - Requirements or observable-contract meaning -> `spec-design`.
 - Structural ownership, interface, state, failure, concurrency, trust, compatibility, or proof seam -> `program-design`.
 - Slice, sequence, dependency, collision, write scope, or plan-proof mapping -> the plan record's `plan-implementation` or `plan-improve-repo` origin.
-- Code, test, fixture, or implementation-proof evidence -> `implement-plan`.
+- Code, test, fixture, implementation-proof evidence, or a domain-skill rule -> `implement-plan`.
 - Missing authority or unresolved owner choice -> caller.
 
 ## Decide the Review Result
