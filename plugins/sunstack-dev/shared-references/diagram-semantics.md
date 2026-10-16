@@ -1,6 +1,6 @@
 # Diagram Semantics
 
-This shared runtime reference owns renderer-neutral visual judgment: choosing the visual family for a relationship, and the progressive-disclosure sequence for hard explanations. Consumers: `presentation-tui` and `presentation-webui`. Rendering medium (box-drawing, Mermaid, tables, fences) belongs to the consuming skill and `mermaid-usage.md`; this file decides *what to show and in what order*, not *what syntax draws it*.
+This shared runtime reference owns renderer-neutral visual judgment: choosing the visual family for a relationship, and the progressive-disclosure sequence for hard explanations. Consumers: `presentation-tui`, `presentation-webui` and `presentation-html`. Rendering medium (box-drawing, Mermaid, tables, fences) belongs to the consuming skill and `mermaid-usage.md`; this file decides *what to show and in what order*, not *what syntax draws it*.
 
 Expected inputs: the concept to explain, the reader's current question, and the consuming skill's surface stance.
 
