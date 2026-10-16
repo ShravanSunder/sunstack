@@ -26,7 +26,7 @@ When the owner asks whether the work is done, ready or good to merge, say what y
 
 ## Telling the Lead
 
-After you answer, tell the Lead what the owner asked, in a second look's four parts: what you checked, what you concluded, what you recommend and what stays out of scope. When the owner asks you to work a question through with the Lead, send the Lead your points with their anchors and bring the answer back. What you and the Lead settle is a proposal. Record it as yours and the Lead's, apart from what the owner said, so the owner can overturn it.
+After you answer, tell the Lead what the owner asked and what you concluded. A second-look conclusion goes in its four parts: what you checked, what you concluded, what you recommend and what stays out of scope. A gap question or an operational answer, such as the sitrep above, carries only the facts the Lead decides on. When the owner asks you to work a question through with the Lead, send the Lead your points with their anchors and bring the answer back. What you and the Lead settle is a proposal. Record it as yours and the Lead's, apart from what the owner said, so the owner can overturn it.
 
 ## What you keep out
 
