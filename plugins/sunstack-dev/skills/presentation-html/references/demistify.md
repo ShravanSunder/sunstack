@@ -1,10 +1,10 @@
 # Demistify delivery and component documentation
 
-This reference owns the shared-library binding, version-matched API retrieval and local viewing. Inputs: the page scope, any existing asset binding and available authoring tools. Return the exact runtime/theme and documentation sources, component choices and viewing/checker method.
+This reference owns the library binding, retrieval of the guide that matches it, and delivery and viewing. Inputs: the page scope, any existing binding and available authoring tools. Return the binding and its release, the guide and references read, component choices and the viewing/checker method.
 
-## Public assets
+## Library binding
 
-For a new page use this verified experimental pin:
+A new page binds Demistify v1:
 
 ```html
 <!doctype html>
@@ -13,8 +13,8 @@ For a new page use this verified experimental pin:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Engineering explanation</title>
-<link rel="stylesheet" href="https://demistify-assets-cli-experiment.askluna.workers.dev/demistify/experimental/c96a72e/theme.css">
-<script type="module" src="https://demistify-assets-cli-experiment.askluna.workers.dev/demistify/experimental/c96a72e/runtime.js"></script>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
 </head>
 <body><ex-document>
 <!-- Compose the explanation here. -->
@@ -22,13 +22,13 @@ For a new page use this verified experimental pin:
 </html>
 ```
 
-No React, Vite, package install or app server is needed by this HTML consumer. The browser fetches optional renderer chunks, fonts and worker assets relative to that same library version. Keep theme and runtime on one exact pin. This is an experimental URL, with no promised stable alias or retention service; do not invent `/latest/`.
+`/v1/` is a moving experimental major path: breaking changes can land within v1 until a stable major is declared. Past majors are retained, but v1 keeps no public history of its minor releases, so the page’s proof records `version` and `sourceCommit` from `https://demistify.getagentstudio.dev/v1/release.json`. Keep theme and runtime on one binding; the browser fetches renderer chunks, fonts and worker assets relative to it.
 
-The canonical component guide for that pin is:
+A page that keeps an older binding uses that release’s own guide and checker, and its proof records that binding; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
 
-`https://demistify-assets-cli-experiment.askluna.workers.dev/demistify/experimental/c96a72e/authoring/SKILL.md`
+## Component guide
 
-MUST load that URL and return the component syntax and composition rules needed by the page. Treat it as the library API reference even though its file retains embedded-skill frontmatter; this Sunstack skill owns the authoring workflow. The library guide’s relative references resolve beside it:
+MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1:
 
 | Page contains | Canonical reference |
 | --- | --- |
@@ -39,30 +39,27 @@ MUST load that URL and return the component syntax and composition rules needed 
 | Pictures, galleries or image comparison | `references/pictures.md` |
 | Guided routes across views/pages | `references/tours.md` |
 
-IF the page contains a feature named in this table, load its corresponding reference relative to the canonical guide URL and return the attributes, composition and data-reference rules applied to the page. Use supplied explorer data and stable graph IDs rather than duplicate the graph or generate another application. Markdown may contain Mermaid fences; explicit Mermaid islands are also supported. D2 diagrams are outside this library.
+IF the page contains a feature named in this table, load its reference and return the constructs the page takes from it.
 
-For a revision retaining another pin, obtain documentation and the checker from that release’s supplied distribution or matching source revision. Do not silently use the default pin’s API against an older runtime. If the public guide cannot be fetched, use a verified matching local copy; report an unavailable required reference and avoid fabricating its interface.
+The guide at the page’s binding is the only source of available API. A construct you know only from a proposal, a design discussion or another version, including a different presentation model, stays unavailable until that guide documents it. If the guide cannot be fetched, use a verified matching local copy or report the missing reference; never reconstruct its interface.
 
-## View and validate
+## Delivery and viewing
 
-An ordinary HTML page can load the public library in a browser. For relative JSON/data, or when the host blocks local-file URLs, serve the artifact directory through an available static HTTP server. Python, when installed, provides one:
+Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. A remote runtime executes in the page, so sensitive content also calls for the local copy.
+
+For sibling files, or when the browser tool blocks `file://` URLs, Python provides a static server when installed. Choose an unused port and open `http://127.0.0.1:4174/page.html` in the supported browser:
 
 ```sh
 python3 -m http.server 4174 --bind 127.0.0.1 --directory /path/to/explainer-directory
 ```
 
-Open `http://127.0.0.1:4174/page.html` in the supported browser. Choose an unused port. This serves the page and its data; it does not rebuild the library. Relative links provide multiple pages, ordinary `nav aria-label="Breadcrumb"` provides breadcrumbs, and page headings generate the left outline.
-
-The static checker currently comes from a matching Sunstack tools source checkout, with Node 26 and that checkout’s pnpm dependencies already installed. Run from its monorepo root:
+The Demistify CLI exists only in source and provides `embed` and `check`; nothing is published to npm. Run it from the monorepo root of a matching Sunstack tools checkout with Node 26 and its pnpm dependencies installed:
 
 ```sh
+node packages/demistify/bin/demistify.ts embed /absolute/path/to/input.html /absolute/path/to/output.html
 node packages/demistify/bin/demistify.ts check /absolute/path/to/page.html
 ```
 
-There is no published standalone checker/npm installation promised here. When it is unavailable, state that limitation and still inspect the real browser result. A successful checker proves recognized markup/data constraints, not diagram readability, prose truth, links or interaction. Check the actual supplied document, including relative data, sidebar/fullscreen controls and navigation.
+A passing check proves recognized markup and data constraints, not diagram readability, prose truth, links or interaction.
 
-## Local or offline library
-
-A remote runtime executes in the page. For sensitive content or offline use, use a trusted complete build of the matching library beside the page, change both bindings to that local directory, and serve it locally. Copy the whole distribution, including hashed chunks, worker, fonts and icon files; copying only runtime.js/theme.css breaks lazy dependencies. Match the guide/checker to that same source revision. A CDN-bound file is not a self-contained offline export; a single-file bundle requires the library’s separate packaging support.
-
-Complete when the asset and guide versions match, the chosen elements follow their opened references, and the viewing/checker route is available or its exact limitation is reported.
+Complete when the page’s theme, runtime and guide share one binding, its release is recorded, the chosen elements follow their opened references, and the viewing/checker route is available or its exact limitation is reported.
