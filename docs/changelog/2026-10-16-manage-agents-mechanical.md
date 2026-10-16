@@ -6,6 +6,6 @@
 - Hand off keeps the typed packet (schema plus role contract), the preflight call, the shared-resource ordering and the role prompt.
 - Removed the legacy ACPX route and ACP adapter guidance: `references/acpx-legacy.md`, `acpx-provider-{claude,codex,cursor}.md` and `building-acp-adapters.md` are deleted, with no stubs. `execution-forms.md` reports an unmet agent-router route as a gap, and the native provider references no longer mention ACPX.
 - Docs: plugin README, plugins README, the skill's `openai.yaml` prompt and the plugin keywords no longer advertise ACPX.
-- Unchanged: the `tests/skills` harness and AGENTS.md's Standing ACPX Authority.
+- AGENTS.md: the Standing ACPX Authority section is replaced by an Agent Delegation pointer to `practices-manage-agents` and `agent-collaboration`. The `tests/skills` harness is unchanged.
 - Validation: `git diff --check` clean; `pnpm --dir tests/skills run test` 166/166; `typecheck` exit 0; citation check PASS; `claude plugin validate .` passed.
 - Codex, Claude and Cursor cache refresh: not run.
