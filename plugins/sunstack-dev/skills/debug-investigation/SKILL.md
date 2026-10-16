@@ -20,7 +20,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
 - For real debugging work with a clear symptom, target, and reproduction surface, write a repo-local debug artifact by default. Stay in chat only when the user explicitly asks for chat-only/no-files output or the debugging scope is still unclear.
 - When the symptom, target, or reproduction surface is unclear, build the missing bug packet in chat from the available evidence before creating any file. Ask one material question only when the missing field cannot be resolved from the provided context or read-only inspection. Once the scope is clear, write the artifact unless chat-only/no-files output was requested.
 - Debug artifacts are disposable investigation outputs. Later cleanup, preservation, or promotion belongs to `docs-maintain`.
-- IF the work is long-running shell, service, or infra monitoring and artifact creation is allowed, load `references/background-monitoring.md` before proposing watcher shape, background jobs, JSONL/state files, helper agents, restarts, or secret handling, and return the constraints it sets on those choices. When chat-only/no-files output was requested, do not create watcher files; provide a visible non-persistent plan or report a blocker if that cannot be done safely.
+- IF the work is long-running shell, service, or infra monitoring and artifact creation is allowed, load `references/background-monitoring.md` before proposing watcher shape, background jobs, JSONL/state files, helper agents, restarts, or secret handling. When chat-only/no-files output was requested, do not create watcher files; provide a visible non-persistent plan or report a blocker if that cannot be done safely.
 
 ## Workflow
 
@@ -37,7 +37,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
    - Use `<repo-root>/tmp/debug-workflows/<yyyy-mm-dd>-<repo>-<branch>-<bug-slug>/debug-investigation.md`.
    - Keep it updated with evidence, hypotheses, proof steps, and commands.
    - Skip file creation only for chat-only/no-files requests or unclear debugging scope.
-3. IF the monitoring is file-backed and long-running, load `references/background-monitoring.md` to keep the watcher read-only, harness-visible, cancellable, stateful, and redacted, and return the constraints the watcher follows. For chat-only/no-files monitoring, provide a visible non-persistent plan or report a blocker; do not create watcher files.
+3. IF the monitoring is file-backed and long-running, load `references/background-monitoring.md` and keep the watcher read-only, harness-visible, cancellable, stateful, and redacted. For chat-only/no-files monitoring, provide a visible non-persistent plan or report a blocker; do not create watcher files.
 4. Reproduce or bound the failure:
    - exact command, UI path, input, or event sequence
    - deterministic, flaky, environment-specific, or not yet reproduced

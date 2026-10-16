@@ -31,7 +31,7 @@ A well-formed ticket contains:
 | **Checklists** | Implementation steps within the ticket (replaces sub-tasks) |
 | **Deferred items** | Explicitly called out: what is out of scope and why (with ticket refs if known) |
 
-IF you need a full example of these fields, load `references/ticket-templates.md` and return the template that fits the ticket.
+Full examples of these fields are in `references/ticket-templates.md`.
 
 ## Structural Principles
 
@@ -58,7 +58,7 @@ Use Linear MCP tools as the primary interface. Fall back to CLI for three specif
 | List teams | `list_teams` |
 | Comments | `list_comments`, `create_comment` |
 
-All MCP tools are prefixed `mcp__plugin_linear_linear__`. IF you need a tool's parameter details or usage patterns, load `references/mcp-tool-reference.md` and return them for that tool.
+All MCP tools are prefixed `mcp__plugin_linear_linear__`. Parameter details and usage patterns are in `references/mcp-tool-reference.md`.
 
 ### CLI (gap operations)
 
@@ -73,7 +73,7 @@ All MCP tools are prefixed `mcp__plugin_linear_linear__`. IF you need a tool's p
 
 Relation types: `blocks`, `blocked-by`, `related`, `duplicate`.
 
-IF you need the full pattern for a CLI operation, load `references/cli-reference.md` and return it for that operation.
+Full CLI patterns are in `references/cli-reference.md`.
 
 ### Dependency Management
 
