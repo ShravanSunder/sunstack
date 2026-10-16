@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ops: Security Review"
-  short_description: "Route Codex Security scans"
-  default_prompt: "Use ops-security-review to choose the right Codex Security scan for this authorized security task."

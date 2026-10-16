@@ -28,7 +28,7 @@ Maintain both. Keep this file as a short in-plugin reminder; put durable path-le
 | Sentry skills | `agents-md`, skill writer/scanner, security review, GitHub Actions security review, PR iteration patterns | Avoid Sentry-domain-specific process unless the local workflow has the same domain |
 | Steipete agent scripts | deep review, maintainer orchestration, skill cleanup, source-first debugging | Keep selected mechanics only; the full tree is personal/tool-specific |
 | Curated PR/adversarial review materials | material finding bar, false-green and silent-failure review lenses, type/test/comment review lenses | Do not promote broad curated catalogs as general workflow sources |
-| Codex curated security skills | threat modeling, security best practices, security ownership map | Route security-heavy work to `ops-security-review`; do not dilute normal review lanes |
+| Codex curated security skills | threat modeling, security best practices, security ownership map | Route security-heavy work to `audit-security-review`; do not dilute normal review lanes |
 | Vendor model prompting guidance: [GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra), [Opus 5.5](https://claude.dev/blog/getting-the-most-out-of-opus-5-5/) | short trigger-only descriptions, a root skill that routes to references only when needed, contextual doc pointers, a stated finish line, keep going unless blocked, pre-authorized fan-out with evidence checks, specific UI avoid-lists, marking what could not be verified, asking for justification rather than reasoning | Do not treat one model's tuning as permanent; re-audit prompts and skills at each model release. Do not copy app-specific tips (fast mode, model picker, flag handling) into skills |
 | OpenClaw ACPX / ACP | structured cross-agent communication with Claude, Gemini/`agy`, Codex-compatible ACP agents, queues, typed events, and review transport | Do not use it for normal discussion, native Codex thread control, or implementation ownership |
 
@@ -51,7 +51,7 @@ Inspected 2026-09-26 at local `cursor-plugins` revision `ecc249f`. Preserve/avoi
 | Plan creation | Obra `writing-plans`, Pstack proof/boundary principles, Codex subagent guidance | Create DAG-shaped vertical slices with useful proof and subagent suitability |
 | Implementation execution | Pstack `poteto-mode`, Obra `subagent-driven-development`, existing controller packets | Parent-owned subagent lifecycle, evidence verification, integration, and proof claims |
 | Review transport | OpenClaw ACPX / ACP, local review swarms, Claude/Gemini structured feedback | ACPX is external review transport; parent reducer verifies all candidate findings |
-| Security review | Codex curated security skills | Route to `ops-security-review`; keep normal review lanes lightweight |
+| Security review | Codex curated security skills | Route to `audit-security-review`; keep normal review lanes lightweight |
 | Engineering principles | Pstack `principle-*` leaves and `poteto-mode` index, the owner's own engineering instructions and corrections | `principle-*` skills named from the owner's own phrases; callable by name, not auto-invoked; leaf shape adapted, no upstream prose copied |
 
 For per-skill borrowed/do-not-copy detail, open the matching file under `ai-dev-skills/docs/my-ai-tools/sunstack-dev/`.

@@ -28,6 +28,8 @@ Inspect:
 - requirement-to-design traceability;
 - plan leakage and hidden requirement invention.
 
+IF the design targets TypeScript, Python or Rust, load `../../domain-<lang>/SKILL.md` for each such language and return each place the design's types, interfaces, module boundaries or concurrency depart from that standard as a candidate finding naming the rule it breaks.
+
 Check the binding table against the Specification's entity table one entity at a time. Prose that mentions an entity is not a binding, and an entity missing from the table is a finding even when the components around it are sound.
 
 Good: a reader can simulate normal/failure behavior, find where each entity lives and what crosses each boundary, and trace every obligation to one owner and proof seam.

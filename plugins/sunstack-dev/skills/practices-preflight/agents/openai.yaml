@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Preflight"
+  short_description: "Check everything the work needs before it starts"
+  default_prompt: "Use practices-preflight to list what every required gate of this work needs, check each need for real without printing secrets, and return ready or the gap list."

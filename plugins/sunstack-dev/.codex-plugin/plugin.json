@@ -1,6 +1,6 @@
 {
   "name": "sunstack-dev",
-  "version": "2.80.0",
+  "version": "2.81.0",
   "description": "Shravan's development workflow plugin with long-horizon delivery routing, bounded design orchestration, canonical planning, implementation and independent review, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI and rendered web/chat).",
   "author": {
     "name": "Shravan Sunder"
@@ -47,7 +47,7 @@
     "docs-maintain",
     "docs",
     "changelog",
-    "ops-security-review",
+    "audit-security-review",
     "ops-observability-stack",
     "observability",
     "opentelemetry",
@@ -68,7 +68,9 @@
     "markdown",
     "gfm",
     "practices-collaboration",
-    "practices-show-me-your-work"
+    "practices-show-me-your-work",
+    "practices-preflight",
+    "practices-cleanup"
   ],
   "skills": "./skills/",
   "interface": {
@@ -99,7 +101,7 @@
       "Use spec-program-review to independently review this Specification, this Program Design, or this complete Requirements, Specification, and Program Design set.",
       "Use spec-handoff to package this design for another agent.",
       "Use plan-improve-repo to audit this repo and write executable improvement plans.",
-      "Use ops-security-review to choose the right Codex Security scan.",
+      "Use audit-security-review to choose the right Codex Security scan.",
       "Use ops-observability-stack to prove local logs, metrics, and traces through the shared stack.",
       "Use implementation-pr-wrapup to finish this PR.",
       "Investigate this bug before fixing it.",

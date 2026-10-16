@@ -145,6 +145,8 @@ Completion: the selected direction names what improves, where cost moves, accept
 
 ### 5. Bind the domain model
 
+IF the design targets TypeScript, Python or Rust, load `../domain-<lang>/SKILL.md` for each such language and return the rules the design's types, interfaces, module boundaries and concurrency follow; the repository's own conventions win where they differ.
+
 MUST load `references/components-ownership-interfaces.md` for stages 5-8 and return, first, the entity binding table: one row per `E` giving its semantic owner, package or module home (`new | modified | existing`, with the code name on `existing` rows), schema/type home, shape at each boundary it crosses, `persisted | derived | cached`, and the type convention it follows or `none found`. That reference owns convention discovery, the filled binding-and-shape template, and the existing-code rules.
 
 The binding table comes before any component tree, whatever order the request asks for. Write each shape in the repository's type conventions; with none found, write fields, nullability, and discriminant. Results and decisions are closed variants with bounded reasons. Disclose by depth: the entity -> home map when its Required View fires, then the binding table, then each code shape. Schemas, homes, and payload fields are this step's output even when a request assigns them to planning. Package detail stops at the binding table; exact files stay with planning.

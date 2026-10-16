@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 The caller commissions a 🔎 Reviewer Sidekick through `practices-manage-agents`. That Reviewer Sidekick reads every governing source and the complete diff, walks the checks below in its own session, and reduces findings against the rails. The orchestrator disposes and routes the assessment.
 
-The rails are the confirmed requirements, Specification obligations, Program Design elements, and goal boundary. A finding that cannot be anchored to a quoted clause from them is not accepted, however well-argued or however many reviewers agree.
+The rails are the confirmed requirements, Specification obligations, Program Design elements, goal boundary and, for code, the rules of the `domain-<lang>` skills loaded for the languages the diff touches. A finding that cannot be anchored to a quoted clause from them is not accepted, however well-argued or however many reviewers agree.
 
 ## Admit Review
 
