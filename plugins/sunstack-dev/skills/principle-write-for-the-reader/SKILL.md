@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Write for the Reader
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Code is communication, and so are designs, instructions, and explanations. They are read far more often than they are written, mostly by someone without your context: a reviewer, the next engineer, another agent, the owner tomorrow. Writing for the reader means they can answer the question they came with (what is this for, where does this value come from, what can change it, what do I need to decide) quickly, and find the place to disagree. Every line, layer, and piece of state costs the reader something. Jargon, process narration, and repetition waste that reader's time and hide mistakes from the people best placed to catch them.
 
 ## How to think it through
@@ -52,4 +54,4 @@ When a simple module already makes its flow and ownership clear, rearranging it 
 - A copy-paste command that fails because its options were never checked against the tool.
 - A reviewer asking "what is this for?"
 
-A clear write-up can still describe the wrong model; checking that the picture is shared is `principle-build-the-shared-model-first`. When the difficulty comes from one module doing several jobs, fix the structure with `principle-separate-the-concerns`, not the prose.
+A clear write-up can still describe the wrong model; when you check that the picture is shared, restate it and get an explicit answer ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)). When the difficulty comes from one module doing several jobs, fix the structure, not the prose, by giving each part one job ([separate the concerns](../principle-separate-the-concerns/SKILL.md)).

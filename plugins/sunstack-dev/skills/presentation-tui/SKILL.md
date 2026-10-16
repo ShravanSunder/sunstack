@@ -5,23 +5,28 @@ description: "Use when composing a substantial architecture, comparison, tradeof
 
 # Presentation: TUI
 
-On a monospace surface, the box-drawing skeleton is the default layout and markdown owns the atoms inside it. The skeleton is the top-level section framing, nothing more; every other box or glyph construct is used only where it beats its markdown equivalent at its job (a GFM table, a fence, a bullet list). Markdown atoms are governed by rules 5-7.
+On a monospace surface, the box-drawing skeleton is the default layout and markdown owns the atoms inside it. The skeleton covers only the top-level section framing; every other box or glyph construct is used only where it beats its markdown equivalent at its job (a GFM table, a fence, a bullet list). Markdown atoms are governed by rules 5-7.
+
+If the response is short, or the user asked for a normal markdown document or another exact format, skip the TUI treatment.
 
 ## Core rules
 
-1. Pick one shape by content type before writing (picker below).
+1. Pick one shape for the reader's question (picker below).
 2. For hard explanations, pick a disclosure sequence before detail: one map, one selected slice, one small ledger, then technical detail.
 3. Treat zoom as a disclosure move, not a visual family.
 4. Render research as handed-over lanes plus parent synthesis; presentation does not run agents or decide acceptance.
-5. Markdown mixes into the skeleton deliberately: **bold** for the few load-bearing words, *italic* sparingly, headings for long multi-section answers, `-` bullets where glyph alignment adds nothing. Never markup as decoration.
-6. Technical content — code, JSON, config, commands, structured data, identifiers — is always inline code, a fenced block, or a navigational link, never undifferentiated plain text. Inside fixed-width rows, relocate rather than strip (the baseline owns the procedure and the labels-versus-atoms boundary).
+5. Markdown mixes into the skeleton deliberately: **bold** for the few load-bearing words, *italic* sparingly, headings for long multi-section answers, `-` bullets where glyph alignment adds nothing. Never use markup as decoration.
+6. Technical content (code, JSON, config, commands, structured data, identifiers) is always inline code, a fenced block, or a navigational link, never undifferentiated plain text. Inside fixed-width rows, relocate rather than strip (the baseline owns the procedure and the labels-versus-atoms boundary).
 7. Comparisons default to GFM tables; box-drawn tables fire only past the baseline's fallback threshold.
 8. Use 70 columns for framed blocks by default; widen only when the content earns it.
 9. Keep rows readable; wrap prose instead of shrinking or cramming.
 10. Keep sections visually distinct, but do not nest frames deeply.
 11. Verify the rendered shape before sending: alignment, overflow, row rhythm, right edges.
+12. When the response asks the owner to choose between options, give each option (doing nothing among them, when it is credible) its concrete gain, its cost and who pays it; name the assumption that would flip the choice and its cheapest check; recommend one with the signal that would reopen it; and say whether the choice is a one-way door the owner decides or a reversible call you make and record ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)).
 
 ## Shape picker
+
+Before picking a shape, name the reader's question, the relationship the answer depends on and the smallest view that fits the terminal width, and keep the assumptions, risks and unverified items that view must carry ahead of technical detail ([write for the reader](../principle-write-for-the-reader/SKILL.md)). IF the view needs a diagram, the diagram-semantics call below picks its family. A branch does not become a lifecycle state because the state drawing fits better.
 
 | Shape | Use when | Signal |
 |---|---|---|
@@ -33,6 +38,8 @@ On a monospace surface, the box-drawing skeleton is the default layout and markd
 | Pipeline box | numbered process | boxes + arrows |
 | State diagram | states and transitions | `state ──► state` |
 | No-frame list | linear scan path | aligned text |
+
+A diagram family maps to a shape: flow → Pipeline box, or "Pipeline with branches" in `references/architecture.md` when it branches; state → State diagram; sequence → `references/sequence-and-state.md`; topology → `references/architecture.md`.
 
 The picker chooses the skeleton's shape and the standalone constructs around it; it never overrides the skeleton default or the GFM comparison default.
 
@@ -63,5 +70,3 @@ Before sending, in addition to the baseline's before-send check:
 - row labels stay short (baseline's labels-versus-atoms boundary); ordinary prose shortens or wraps without breaking tokens; no identifier is truncated mid-token;
 - markdown inside the skeleton is deliberate (rule 5), and nothing markup-bearing sits inside a fixed-width row;
 - if deleting a frame or glyph construct would lose no relationship the reader needs, delete it and keep the markdown.
-
-If the response is short, or the user asked for a normal markdown document or another exact format, skip the TUI treatment.

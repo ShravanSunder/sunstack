@@ -6,6 +6,7 @@ Consumers, and only these:
 
 - `docs-maintain` loads this in file mode when it rewrites human sentences in a README, architecture doc, runbook, or changelog.
 - `implementation-pr-wrapup` loads this in embedded mode for Why and Special things to note. The description worker owns that load. The parent does not rewrite those parts.
+- `role-implementer` loads this from `references/working-with-lead.md` when its commission asks for the slop and infractions pass on skill work. It reads the patterns as a list of tells, uses neither mode below, and returns in its handback each tell it found in the files it changed, fixed or kept with a reason. The skill it writes never calls this file.
 
 Leave YAML descriptions, schemas, label sets, call-site grammar, code, commands, paths, links, Change outline fences, and work-trail JSONL unchanged. Do not load this from `presentation-tui`, `presentation-webui`, `spec-design`, `program-design`, review packets, or a trigger description.
 
@@ -89,7 +90,7 @@ These are the patterns that justify an edit alone. Each after keeps only claims 
 
 ## Keep when the meaning needs it
 
-A person may do any one of these on purpose. Act when the tell is repeated, or when it sits with other tells. One sighting is not enough.
+A person may do any one of these on purpose. Act when the tell is repeated, or when it sits with other tells.
 
 ### 6. Forced triads
 
@@ -200,7 +201,7 @@ These are leftovers. Remove them. Keep the content under them.
 
 ## Pattern 12, the word list
 
-This is the only vocabulary list. A formal word outside it is not a tell by itself. A cluster of these words is. The list is the teaching. A sample paragraph is not copied here, because the usual samples add facts the before never had.
+This is the only vocabulary list. A formal word outside it is not a tell by itself. A cluster of these words is. The list does the teaching; no sample paragraph is copied here, because the usual samples add facts the before never had.
 
 Actually, additionally, align with, bolstered, crucial, deep dive, delve, emphasizing, enduring, enhance, fostering, garner, gate/gated/gating (figurative; keep technical uses), highlight (verb), interplay, intricate/intricacies, key (adjective), landscape (abstract noun), meticulous/meticulously, pivotal, quietly, robust (figurative; keep technical uses), showcase, tapestry (abstract noun), testament, underscore (verb), valuable, vibrant.
 

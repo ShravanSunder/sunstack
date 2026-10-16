@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: How"
+  short_description: "Explain how existing code works by tracing its real paths"
+  default_prompt: "Use practices-how to trace how this behavior works from its real entry to its effect and back, and explain it with source anchors."

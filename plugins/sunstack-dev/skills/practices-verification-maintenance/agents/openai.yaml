@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Verification Maintenance"
+  short_description: "Create or maintain a project's verify-<app> skill"
+  default_prompt: "Use practices-verification-maintenance to create or maintain this project's verification skill, exercise it on the real app, and report its coverage and gaps."

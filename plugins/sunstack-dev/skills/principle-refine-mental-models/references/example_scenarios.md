@@ -34,10 +34,10 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** Written down, the three fixes shared one premise: that something in production refreshes the catalog. Reading the call graph showed that nothing does; the catalog was designed to live for one request. The fix was to change the catalog's lifetime, not to add a fourth refresh.
 
-## The cards that taught nothing
+## The principles that taught nothing
 
-**What happened.** A set of skill cards was written to a template that scored well on a rubric: a rule, test questions, neighbour lists, completion lines. The owner read them and said they were mostly bookkeeping that taught nothing.
+**What happened.** A set of principles was written to a template that scored well on a rubric: a rule, test questions, neighbour lists, completion lines. The owner read them and said they were mostly bookkeeping that taught nothing.
 
 **The move.** Tell drift from a break.
 
-**Better.** It was a break: the template's assumption, that short rule-plus-checklist cards teach, had failed, and the template was the agent's own inference, not an owner decision. The right move was to stop producing cards from it, say what had been assumed, gather the real sources, and rebuild one card at a time for the owner to read. Patching the template's headings would only have shipped the same failure in a new layout.
+**Better.** It was a break: the template's assumption, that short rule-plus-checklist principles teach, had failed, and the template was the agent's own inference, not an owner decision. The right move was to stop producing principles from it, say what had been assumed, gather the real sources, and rebuild one principle at a time for the owner to read. Patching the template's headings would only have shipped the same failure in a new layout.

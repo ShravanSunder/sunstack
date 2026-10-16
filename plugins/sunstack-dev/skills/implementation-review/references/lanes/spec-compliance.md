@@ -1,6 +1,6 @@
 # Spec Compliance
 
-Mission: judge whether the implemented change matches what was actually asked — nothing missing, nothing extra, no misread requirement — before quality lanes spend depth on code that answers the wrong question.
+Mission: judge whether the implemented change matches what was asked (nothing missing, nothing extra, no misread requirement) before quality lanes spend depth on code that answers the wrong question.
 
 Expected inputs: the current review context; the complete governing-basis artifacts and the complete diff, not summaries.
 
@@ -17,7 +17,7 @@ delivered -> asked   every delivered behavior, file, and subsystem traces to a
                      requirement, obligation, plan slice, or authorized constraint
 ```
 
-The second direction is this check's sharp edge: name anything delivered that nothing asked for — an extra subsystem, an unrequested hardening layer, a broader interface than the contract requires. Classify each mismatch: `missing`, `extra`, `misread requirement`, `scope underdelivery`, `scope overreach`. Do not judge code quality, structure, or proof depth; other checks own those.
+Push hardest on the second direction. Name anything delivered that nothing asked for, such as an extra subsystem, an unrequested hardening layer, a broader interface than the contract requires. Classify each mismatch: `missing`, `extra`, `misread requirement`, `scope underdelivery`, `scope overreach`. Do not judge code quality, structure, or proof depth; other checks own those.
 
 Good: the diff is the requested change, whole and nothing more, or every gap is named with its governing anchor.
 

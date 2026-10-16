@@ -1,6 +1,6 @@
 # Finding And Reduction
 
-This reference owns parent verification, the rails re-anchor, finding semantics, cause-based routing, affected coverage, and the final review result. `parent` means the immediate 🔎 Review Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
+This reference owns parent verification, the rails re-anchor, finding semantics, cause-based routing, affected coverage, and the final review result. `parent` means the immediate 🔎 Reviewer Sidekick for the ordered checks; the orchestrator later owns final disposition and delivery routing.
 
 Expected inputs: the current review context, per-check results including the dispel classification, current governing sources and diff, proof evidence, and any prior coverage record.
 
@@ -23,18 +23,16 @@ mechanism necessity: is the proposed mechanism required and proportionate to
 scope effect: inside confirmed boundary | requires owner expansion decision
 ```
 
-A category name is not an anchor: "the reliability requirement" fails this gate until the exact governing clause is opened and quoted. A candidate whose anchor fields cannot be filled from an inspectable source is `unverified`, never `accepted` — it is advice awaiting investigation, not implementation authority. When the deletion test says the obligations hold without the mechanism, prefer deletion over completing the mechanism's missing contracts.
+A category name is not an anchor. "The reliability requirement" fails the anchor check until the exact governing clause is opened and quoted. A candidate whose anchor fields cannot be filled from an inspectable source is `unverified`, never `accepted`; it is advice awaiting investigation and carries no implementation authority. When the deletion test says the obligations hold without the mechanism, prefer deletion over completing the mechanism's missing contracts.
 
-Two kinds of scope expansion get two different dispositions, and confusing them is how a gold-plating reviewer ends up steering the verdict:
+Two kinds of scope expansion get two different dispositions. Confusing them lets a gold-plating reviewer steer the verdict.
 
-- A **reviewer candidate that proposes adding scope** with no rail anchor — a circuit breaker, a hardening layer, an abstraction for imagined consumers — is `rejected: scope expansion` and listed for the owner as an observation. It never produces `decision-needed`; a suggestion is not a decision the owner owes an answer to. Anchoring it one altitude up ("the spec says return a typed error on provider outage") does not rescue it when `mechanism necessity` says the mechanism is one of several ways to serve the clause — then the accepted finding, if any, names the unrealized obligation and its failure and routes to its owner; the mechanism choice is not the reviewer's to make and never rides into the handoff.
-- A **delivered item the diff already contains** that dispel mapped `absent` (or spec-compliance classified `extra`/`scope overreach`) is never `rejected` as "non-defective" — being well built is not a disposition. Its only dispositions are `accepted` (removal, owner `implement-plan`) or `decision-needed` with deletion as the default recommendation when the owner may want to adopt it as a scope expansion.
-
-When the parent's disposition contradicts dispel's correction class, record the quoted rail text that overrides it. A candidate is a mental-model break — not an ordinary design finding — when its correction cannot be expressed inside the current governing basis because an assumption the basis itself relies on is false: the design assumes an interface, ordering, ownership, or guarantee the current system does not provide. A defect the basis already forbids and can name the fix for routes to its semantic owner as usual; a break stops reduction and returns the failed assumption, evidence, and consequence to the orchestrator (the Lead), which brings the owner a brief, instead of being pushed through remediation; the reviewer does not author the brief. The bad signal is routing a break to `program-design` and continuing.
+- A reviewer candidate that proposes adding scope with no rail anchor (a circuit breaker, a hardening layer, an abstraction for imagined consumers) is `rejected: scope expansion` and listed for the owner as an observation. It never produces `decision-needed`, because a suggestion is not a decision the owner owes an answer to. Anchoring it one altitude up ("the spec says return a typed error on provider outage") does not rescue it when `mechanism necessity` says the mechanism is one of several ways to serve the clause. Then the accepted finding, if any, names the unrealized obligation and its failure and routes to its owner. The mechanism choice is not the reviewer's to make and never rides into the handoff.
+- A delivered item the diff already contains that dispel mapped `absent` (or spec-compliance classified `extra` or `scope overreach`) is never `rejected` as non-defective, since being well built is not a disposition. Its only dispositions are `accepted` (removal, owner `implement-plan`) or `decision-needed` with deletion as the default recommendation when the owner may want to adopt it as a scope expansion.
 
 ## Verify Before Accepting
 
-For every candidate, reopen the cited governing and implementation anchors and inspect the claimed proof. Assign exactly one disposition:
+For every candidate, reopen the cited governing and implementation anchors and inspect the claimed proof. Before you dispose of a candidate, match its claim and the proof behind it to the source and output you opened: for each piece of proof, the commit and target it ran against, whether the reviewed diff changed anything it depended on, and what it doesn't cover ([accept only evidence that observed this claim at this version](../../principle-verify-before-accepting/SKILL.md)). Assign exactly one disposition:
 
 ```text
 accepted    current source proves the defect and consequence, and the rails
@@ -47,7 +45,13 @@ unverified  missing evidence prevents acceptance or rejection
 conflict    candidates disagree in a decision-relevant way
 ```
 
-Confidence, reviewer agreement, severity, and reviewer identity are not evidence — verify against source, never rubber-stamp. Weigh the dispel check's classification as candidate evidence like any other check result. Merge duplicates by root cause. Preserve conflicts only when they change the result, then state what source or owner decision would settle them.
+Weigh the dispel check's classification as candidate evidence like any other check result. When the parent's disposition contradicts dispel's correction class, record the quoted rail text that overrides it. Merge duplicates by root cause. Preserve conflicts only when they change the result, then state what source or owner decision would settle them.
+
+## Ordinary Finding or Broken Premise
+
+Before you accept and route a candidate, decide whether its correction fits inside the current governing basis. Name the assumption the basis relies on, what the current source shows, and whether that assumption still holds ([fix the understanding before the code](../../principle-refine-mental-models/SKILL.md)).
+
+A defect the basis already forbids, with a fix the basis can name, routes to its semantic owner as usual. A mental-model break is a candidate whose correction cannot be expressed inside the basis because an assumption the basis itself relies on is false, such as an interface, ordering, ownership, or guarantee the current system does not provide. A break stops reduction. Return the failed assumption, the evidence, and the consequence to the orchestrator (the Lead), which brings the owner a brief. The reviewer does not author the brief or push the break through remediation. Routing a break to `program-design` and continuing is the failure to catch.
 
 ## Record an Accepted Finding
 
@@ -103,7 +107,7 @@ not-converging
 Convergence (this reference is its home for implementation review):
 
 > After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
-> 1. **Recurrence.** A finding the Review Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
+> 1. **Recurrence.** A finding the Reviewer Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
 > 2. **No progress.** The count of open accepted findings did not drop in two adjacent comparisons in a row: it stayed equal or rose from review N−1 to N, and again from N to N+1.
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
@@ -114,7 +118,7 @@ Accepted boundary:
 
 The result includes reviewed authority, unchanged plan/governing-basis/delivery-context records, base and reviewed identities, diff and proof freshness, prior review findings, obligation coverage, normal/failure-path coverage, runtime reachability when applicable, accepted/rejected/unverified findings, conflicts, weaker-substitute risks, first correction, exact route, and uncovered boundary.
 
-A proof claim whose proof-challenge check returned only challenges — nothing executed because every command would write into the worktree or no grant was recorded — cannot support `ready` when that claim is the sole proof for a changed contract; it is `needs-revision` to `implement-plan` (supply runnable, scratchpad-safe proof) or `blocked-input`.
+A proof claim whose proof-challenge check returned only challenges (nothing executed because every command would write into the worktree or no grant was recorded) cannot support `ready` when that claim is the sole proof for a changed contract; it is `needs-revision` to `implement-plan` (supply runnable, scratchpad-safe proof) or `blocked-input`.
 
 Accepted corrections to source or proof invalidate affected coverage. A remediation report, green proof, or focused-only result does not restore it; require a new meaningful review with fresh chunk coverage for the corrected source and affected proof. State which coverage became invalid and bind the new result to the corrected source.
 

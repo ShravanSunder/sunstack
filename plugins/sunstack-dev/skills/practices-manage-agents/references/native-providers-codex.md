@@ -1,0 +1,53 @@
+# Native Providers: Codex
+
+Owns Codex native v2 `spawn_agent` model, effort, conversation-history, and workspace-access encoding. Return the exact `model`, `reasoning_effort`, `fork_turns`, and workspace-access encoding.
+
+This reference applies after `references/execution-forms.md` selects the Worker form on this host. Sidekick-form roles use their separate session route.
+
+## Models
+
+| Role | Model | Route |
+| --- | --- | --- |
+| 📚 Researcher Worker | OpenAI Luna or Sol, effort from the `SKILL.md` Model catalog | native `spawn_agent` |
+| 🔧 Operator Worker | OpenAI Luna, effort from the `SKILL.md` Model catalog | native `spawn_agent` |
+
+Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog. If the host requires a provider prefix, it takes the form `openai.<resolved id>` (example format only).
+
+## Effort
+
+`none` | `minimal` | `low` | `medium` (default) | `high` | `xhigh` | `max` | `ultra` | custom string. The model-and-effort pairs in the `SKILL.md` Model catalog still apply.
+
+## Conversation History
+
+- A 🔧 Operator running prescribed review proof receives the exact execution grant and command procedure. Use `fork_turns="none"` when its packet must exclude the 🔎 Reviewer Sidekick's history.
+- No inherited parent history: set `fork_turns="none"`.
+- Full parent history (non-reviewers only): set `fork_turns="all"`.
+- Full-history inheritance uses the parent model and reasoning effort; omit `model` and `reasoning_effort`.
+- Fresh history may pass explicit model and reasoning-effort overrides.
+
+## Workspace Access
+
+Launch with `spawn_agent`. `spawn_agent` has no sandbox field; do not switch to `codex exec --sandbox read-only` to invent one. Reader and writer authority details are owned by the packet's `limits` field in `../schemas/assignment-fields.ts`.
+
+- Readers: packet access `inspect`. Parent verifies the repo worktree is unchanged after the receipt.
+- Writers: packet access `write-and-execute`, its `writePaths` declared. Codex cannot path-scope writes while the repo is cwd. Parent verifies the receipt's diff stayed inside the declared scope.
+
+## Examples
+
+```json
+{
+  "message": "Run only the prescribed proof command after write-set preflight. Capture output and exit code under tmp/, compare git status before and after, and return the observations. Do not edit tracked files.",
+  "task_name": "review_proof_operator",
+  "model": "<resolved Luna id>",
+  "reasoning_effort": "medium",
+  "fork_turns": "none"
+}
+```
+
+## Continue, Wait, and Interrupt
+
+Use the lifecycle tools advertised by the current host. On the collaboration surface exposing `followup_task`, use it to send a follow-up and start an idle Worker turn; `send_message` delivers information without starting an idle turn. `wait_agent` waits for activity, `list_agents` reports liveness, and `interrupt_agent` stops the current turn while preserving the Worker relationship. None of those alone proves assignment completion.
+
+When `wait_agent` is available and no independent useful work remains, call it immediately with an explicit `timeout_ms` no longer than the host's advertised cap or the assignment's real deadline. `practices-collaboration` owns when to wait at all and what to do when a wait ends. Do not replace an expired bounded wait with `list_agents` merely to ask whether a reply arrived. Rearm `wait_agent` when the assignment still warrants waiting; use `list_agents` for actual liveness or dropped-wait recovery evidence.
+
+Other hosts may expose `send_input`, `resume_agent`, or `close_agent`; use them only when advertised and follow their returned contracts. Do not invent missing tools or spawn a replacement merely because the Worker is idle. Reuse the returned task/session identity. Display names and agent-router SessionRefs are separate from native tool IDs. A native child can have its own session ID without supporting agent-router direct input.

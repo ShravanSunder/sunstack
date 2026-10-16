@@ -11,7 +11,7 @@ Use this before returning a current-state validation receipt for an improvement 
 - Every cited file exists, or the plan says the file is intentionally new.
 - Every write surface has a reason to change.
 - Tasks are small enough that proof can pass inside scope.
-- Proof gates are concrete commands or manual checks, not vibes.
+- Proof gates are concrete commands or manual checks.
 - Focused validation and full validation are separate.
 - Red/green proof is required for behavior changes unless the user explicitly approved an exception.
 - Security-sensitive surfaces are named when touched.

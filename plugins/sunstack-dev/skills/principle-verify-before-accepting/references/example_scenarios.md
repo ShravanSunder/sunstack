@@ -38,14 +38,22 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **What happened.** Helpers ran their proof work in the shared checkout instead of the isolated worktree they were assigned. A docs comparison reported deletions that hadn't happened, and a browser test was created and run in the wrong tree, then presented as proof.
 
-**The move.** Check the version and the place.
+**The move.** Check the version, the place and the dependencies of the claim.
 
 **Better.** Confirm the working directory, branch, and head behind every result before accepting it. A result from the wrong tree is evidence about a different tree.
 
+## Reuse after prose, recheck after routing
+
+**What happened.** A real reconnect journey on a declared build, client and provider profile observed one visible delivery after recovery. An unrelated documentation edit landed, and the agent re-ran every journey. Later the routing configuration changed, and the agent accepted the old journey as proof for the new route.
+
+**The move.** Ask what the claim depended on, not how old the commit is.
+
+**Better.** Inspect the diff and the recorded target. When only prose changed and the exercised path, configuration and target still match, reuse the journey for its scoped claim. A routing change leaves the newly selected path unobserved: drive that changed interaction before extending the claim. Do not rerun every unrelated journey, and do not call reading the router source a runtime observation.
+
 ## "Ready" on structural checks
 
-**What happened.** A set of skill cards passed every check run on it: frontmatter parsed, metadata valid, names consistent, packaging validation green. They were reported "ready for comments". The owner read them and found they were mostly bookkeeping that taught nothing.
+**What happened.** A set of principles passed every check run on it: frontmatter parsed, metadata valid, names consistent, packaging validation green. They were reported "ready for comments". The owner read them and found they were mostly bookkeeping that taught nothing.
 
 **The move.** Check that the evidence observes the claimed thing.
 
-**Better.** The checks observed packaging, not teaching. The honest claim was "structurally valid; whether the cards teach is unverified". The right check was a reader walking an unseen case with only the card, and that was what found the problem.
+**Better.** The checks observed packaging, not teaching. The honest claim was "structurally valid; whether the principles teach is unverified". The right check was a reader walking an unseen case with only the principle, and that was what found the problem.

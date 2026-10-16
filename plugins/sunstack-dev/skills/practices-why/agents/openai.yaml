@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Why"
+  short_description: "Recover the recorded reasons behind existing code or a design"
+  default_prompt: "Use practices-why to find out why this code or design took its current shape, keeping recorded rationale, interpretation and missing history apart."

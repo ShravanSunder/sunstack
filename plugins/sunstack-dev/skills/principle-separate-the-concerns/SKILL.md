@@ -6,7 +6,9 @@ disable-model-invocation: true
 
 # Separate the Concerns
 
-Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation is not about more files. It is about putting a boundary where something differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
+Read this principle in full before applying it; your own full read earlier this session counts.
+
+Code structure is a reflection of understanding. Every module exists because you can state its job and name its reason to change. When concerns tangle (business rules mixed with I/O, the clock, the framework, the wire format) every change touches everything, and testing one rule drags in the network. Separation puts a boundary where something differs: where the system reaches outside, where a dependency varies, where one responsibility ends and another begins. More files alone separate nothing. A boundary in the right place lets you change one part, test it on its own, and replace what sits behind it. In the wrong place it is only indirection, and every abstraction has to justify the complexity it adds.
 
 ## How to think it through
 
@@ -53,4 +55,4 @@ A small module with one stable job, no I/O, and one caller needs no interface an
 - Interfaces with one implementation that hide nothing, a dependency threaded through layers that never use it, or a whole config object passed to a part that reads one field.
 - A component that changes globals or environment at startup.
 
-For how values cross a boundary as types, see `principle-types-are-communication`. When the question is who owns and writes a piece of data, use `principle-one-owner-per-truth`; when a layer may not be needed at all, use `principle-justify-the-complexity`.
+When values cross a boundary, parse them once into types that say which states can exist ([types are communication](../principle-types-are-communication/SKILL.md)). When the question is who owns and writes a piece of data, name the one part that decides it ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)); when a layer may not be needed at all, name the outcome that needs it now ([justify the complexity](../principle-justify-the-complexity/SKILL.md)).

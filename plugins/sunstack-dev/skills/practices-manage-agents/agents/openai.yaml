@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Manage Agents"
+  short_description: "Choose a helper's role, form and model; commission and assess it."
+  default_prompt: "Use practices-manage-agents to choose a helper's role, execution form and model, commission it with a typed packet, and assess its handback through native, agent-router or legacy ACPX routes."

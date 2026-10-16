@@ -34,13 +34,29 @@ Each scenario is a real or realistic case: what happened, the move it teaches, a
 
 **Better.** A valid red fails because of the intended wrong behavior (the old code, the fix removed, or a deliberate break at the owner), whether that shows as a failed assertion or the subject throwing. A red caused by anything else is a broken test run, and says nothing about the test.
 
+## Setup-red, green, break, restore
+
+**What happened.** The first run failed to import the subject. After setup was repaired, the existing behavior passed. A deliberate owner-local break then produced the intended assertion failure; restoring it returned green. The report called that tests-first proof of a fixed defect.
+
+**The move.** Report what each run showed, in the order it ran.
+
+**Better.** Report what occurred: setup failure, existing green, deliberate break caught, restored green. Only the break run shows sensitivity to the named wrong behavior. Without a red observed against the pre-fix code, a pre-existing defect and tests-first order stay unobserved; the import failure is not that red.
+
 ## The tax helper on both sides
 
 **What happened.** An invoice test computed its expected total by calling the production tax helper, then compared it with the invoice's total. A bug in the helper's rate changed both numbers the same way, and the test stayed green. Moving the same comparison into an end-to-end test changed nothing.
 
 **The move.** Take the expected value from somewhere independent.
 
-**Better.** Assert a literal from the published tax table for a few representative amounts, or a property the rule implies. Then apply a deliberately wrong rate once and watch the test fail. The layer was never the problem; the oracle was.
+**Better.** Assert a literal from the published tax table for a few representative amounts, or a property the rule implies. Then apply a deliberately wrong rate once and watch the test fail.
+
+## Per-pane order versus global order
+
+**What happened.** A delivery contract preserves order inside each pane. The test expected `A1, B1, A2, B2` across both panes, so a correct scheduler delivering `B1, B2, A1, A2` failed. Reversing `A1, A2` inside pane A was the defect the test needed to catch.
+
+**The move.** Check both sides of the assertion: reject the forbidden order and allow a different permitted schedule.
+
+**Better.** Observe real arrivals and compare each pane's sequence with its exact contracted sequence. The reversed A sequence fails; either cross-pane schedule passes. If the contract instead promises a global sequence, assert that sequence exactly. The contract decides which order matters, not whichever order the first run happened to produce.
 
 ## The wrong first responder
 

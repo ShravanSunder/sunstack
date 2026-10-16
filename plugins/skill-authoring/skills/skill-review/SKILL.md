@@ -28,7 +28,9 @@ Name the stage, the target (spec path and revision, or the files), and who asked
 
 IF the stage is spec review, load `references/spec-review.md` and return its per-check statuses, findings, verdict, and implementation decision. IF the stage is implementation review or an evaluation of existing files, load `references/implementation-review.md` and return its per-check statuses, findings, verdict, and ship decision.
 
-Start each reviewer agent the stage names in its own session with no authoring history. Give it the target, the check references it walks by path, and `references/checks/review-schema.md`, and ask for candidate findings with anchors only. Use the host's own way to start an agent. If the host cannot start a separate agent, stop and tell the user: a review without a second agent is not a review. When the selected checks fit one family, split them across two agents.
+Start each reviewer agent the stage names in its own session with no authoring history. Give it the target, the check references it walks by path, and `references/checks/review-schema.md`, and ask for candidate findings with anchors only. When the selected checks fit one family, split them across two agents.
+
+IF the host repository's instructions or skills provide an agent-management practice with a Reviewer role, load `references/reviewers-through-host-practice.md` and return one commission per stage reviewer, sent through that practice as a review-lead commissioner it admits, or the gap you returned to the requester when it admits none. Otherwise use the host's own way to start an agent. If the host cannot start a separate agent, stop and tell the user: a review without a second agent is not a review.
 
 Completion: every selected check has a status from the agent that walked it.
 
@@ -50,7 +52,7 @@ Corrections return to the same review lead with its review history, which verifi
 >
 > When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
 
-Worked example: open accepted findings go 4 → 3 → 3 → 4 over four reviews. 4 → 3 is progress; 3 → 3 and 3 → 4 are two adjacent comparisons without a drop, so the fourth review returns `not-converging` — the stop rule is already met there, not one round later.
+Worked example: open accepted findings go 4 → 3 → 3 → 4 over four reviews. 4 → 3 is progress; 3 → 3 and 3 → 4 are two adjacent comparisons without a drop, so the fourth review returns `not-converging`. The stop rule is met at that review, not one round later.
 
 The accepted boundary:
 
@@ -64,6 +66,7 @@ Do not return a clean result while any of these hold:
 
 - a reviewer agent had authoring history for the target;
 - fewer than two reviewer agents ran on a behavior-changing review;
+- the host provides an agent-management practice with a Reviewer role, and a reviewer started outside it;
 - an accepted finding was not verified at its anchor before acceptance;
 - a required check is missing, `partial`, or `blocked` without a recorded closure;
 - reviewer agreement or reviewer count stood in for verification;

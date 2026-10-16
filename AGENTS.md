@@ -1,4 +1,4 @@
-# AI Tools - Agent Instructions
+# AI Tools: Agent Instructions
 
 This repository contains personal Codex and Claude Code plugins.
 
@@ -50,7 +50,7 @@ Home: `~/dev/memory-logs/skills/` (clone of https://github.com/ShravanSunder/mem
 | Evidence for a named skill-change | `authoring/<yyyy-mm-dd-name>/` |
 | What to do next | `backlog/` |
 
-In this repo, only the **skill spec** for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
+In this repo, only the skill spec for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
 
 Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-authoring/`):
 
@@ -71,7 +71,7 @@ When doing skill work in this repo:
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
 7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
-For execution ownership, load `manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent implementation Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned implementation Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
+For execution ownership, load `practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
 
 Other sources:
 
@@ -81,7 +81,7 @@ Other sources:
 
 ## Admired-source provenance (ai-dev-skills)
 
-Upstream skill collections are tracked in a separate meta-repo so this plugin can keep a **lite** inspiration map while durable provenance lives next to the actual upstream checkouts.
+Upstream skill collections are tracked in a separate meta-repo so this plugin can keep a lite inspiration map while durable provenance lives next to the actual upstream checkouts.
 
 - **Meta-repo:** `/Users/shravansunder/Documents/dev/open-source/ai-dev-skills/`
 - **Lite in-plugin map:** `plugins/sunstack-dev/docs/source-inspiration-catalog.md` (preserve/avoid + workflow-area overview; not a runtime skill reference)
@@ -94,7 +94,7 @@ Upstream skill collections are tracked in a separate meta-repo so this plugin ca
 | Cheap compare between two pinned SHAs | `ai-dev-skills/docs/repo-index-changelog/` |
 | How to bump submodules / keep indexes synced | `ai-dev-skills/AGENTS.md` |
 
-**Maintain both.** Update `ai-dev-skills` for path-level mappings, pin SHAs, and bump notes. Refresh the lite catalog here only when the high-level preserve/avoid or workflow-area story changes. Do not copy upstream skill prose into plugin skills; do not treat inspiration as proof that local behavior works.
+Maintain both. Update `ai-dev-skills` for path-level mappings, pin SHAs, and bump notes. Refresh the lite catalog here only when the high-level preserve/avoid or workflow-area story changes. Do not copy upstream skill prose into plugin skills; do not treat inspiration as proof that local behavior works.
 
 ## Shared Runtime References
 
@@ -110,7 +110,7 @@ Design-view ownership follows the same split: `shared-references/diagram-renderi
 
 ### Skill layers
 
-Skills are layered by the role they play: orchestrators run a whole job; phases are its steps; practices (`practices-collaboration` < `practices-show-me-your-work` < `manage-agents` < `practices-research`) are always on, with `ops-*` and `presentation-*` at the same level; tool manuals such as `agent-collaboration` cover only how to call a tool. Within a layer, skills may name each other freely, cycles included. No skill names a skill in a higher layer: phases never name an orchestrator, and practices, tool manuals, and shared references never name phases or orchestrators except as consumer declarations or data values. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which orchestrators map to the next owner; mapping never widens the requested task. Phase skills open or resume the trace through `practices-show-me-your-work` at entry and checkpoint at completion. Principles (`principle-*`) are the bottom layer: callable judgment cards, not auto-invoked, that name only sibling principles; `plugins/sunstack-dev/docs/principles-index.md` maps them. Devfiles is the session root outside the layers. The historical `docs/wip/skills-authoring/2026-09-25-capability-revamp/proposal.md` governs skill layering; current `practices-show-me-your-work` governs trace storage and reconciliation, superseding that proposal's historical WIP trace fallback.
+Skills are layered by the role they play: orchestrators run a whole job; phases are its steps; practices (`practices-collaboration` < `practices-show-me-your-work` < `practices-manage-agents` < `practices-research` < `practices-how` < `practices-why` < `practices-verification` < `practices-verification-maintenance`) are always on, with `ops-*` and `presentation-*` at the same level; tool manuals such as `agent-collaboration` cover only how to call a tool. Roles (`role-*`) sit above practices: a role skill may name practices, `ops-*` and `presentation-*` skills, tool manuals, principles, and the phase its no-commission route hands to; phases and orchestrators commission a role through `practices-manage-agents` and never name a role skill. Within a layer, skills may name each other freely, cycles included. No skill names a skill in a higher layer: phases never name an orchestrator, and practices, tool manuals, and shared references never name phases, orchestrators or roles except as consumer declarations or data values, such as `practices-manage-agents`'s role table and `requiredReads.charter` value. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which orchestrators map to the next owner; mapping never widens the requested task. Phase skills open or resume the trace through `practices-show-me-your-work` at entry and checkpoint at completion. Principles (`principle-*`) are the bottom layer. Each teaches one engineering judgment, is hidden from model invocation, and opens with its own read rule; the owner calls one by name, or a skill cites one with a relative link at the decision it informs. Principles name only sibling principles, and `plugins/sunstack-dev/docs/principles-index.md` maps them. Devfiles is the session root outside the layers. The historical `docs/wip/skills-authoring/2026-09-25-capability-revamp/proposal.md` governs skill layering; current `practices-show-me-your-work` governs trace storage and reconciliation, superseding that proposal's historical WIP trace fallback.
 
 ### Current Plugin Skills
 
@@ -118,11 +118,22 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 |-------|----------|---------|
 | spec-design | `plugins/sunstack-dev/skills/spec-design/` | Authoritative Why/What: problem, consumers, outcomes, requirements, observable contracts, constraints, failure obligations, and proof obligations |
 | program-design | `plugins/sunstack-dev/skills/program-design/` | Structural How: components, ownership, interfaces, state, flows, failure/recovery, concurrency, trust boundaries, and proof seams |
-| spec-program-review | `plugins/sunstack-dev/skills/spec-program-review/` | Independent 🔎 Review Sidekick walks mode-complete, sequential seam passes, dispel, proof challenge, and predicate-selected focused checks; rails-anchored reduction, no editing or acceptance, bounded review rounds |
+| spec-program-review | `plugins/sunstack-dev/skills/spec-program-review/` | Independent 🔎 Reviewer Sidekick walks mode-complete, sequential seam passes, dispel, proof challenge, and predicate-selected focused checks; rails-anchored reduction, no editing or acceptance, bounded review rounds |
 | discuss-clarify-mental-models | `plugins/sunstack-dev/skills/discuss-clarify-mental-models/` | Read-only reconvergence for unstable shared mental models before specs, plans, docs, or code: terms, boundaries, assumptions, source-of-truth questions, tradeoffs, branches, and countercase |
-| discuss-pathfinding | `plugins/sunstack-dev/skills/discuss-pathfinding/` | Extract unwritten understanding from the user — requirements, tacit process knowledge, domain terms, design decisions — via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
-| practices-research | `plugins/sunstack-dev/skills/practices-research/` | Practice: evidence gathering for local code/docs, prior art, current web/docs, Reader, memory, and session-log research with ordered source classes, `tmp/practices-research/` ledgers, and a return token for the next owner |
-| manage-agents | `plugins/sunstack-dev/skills/manage-agents/` | Practice: classify (direction, span, horizon), roles, models by role, launch (native, agent-router, legacy ACPX), handoff, and verification for advisors, sidekicks, workers, operators, and subagents |
+| discuss-pathfinding | `plugins/sunstack-dev/skills/discuss-pathfinding/` | Extract unwritten understanding from the user (requirements, tacit process knowledge, domain terms, design decisions) via batched grilling with attached reads, live challenge, and decision/glossary records as they crystallize |
+| practices-research | `plugins/sunstack-dev/skills/practices-research/` | Practice: evidence gathering for local code/docs, prior art, current web/docs, Reader, memory, and session-log research with ordered source classes, `tmp/practices-research/` ledgers, and a checked answer with its limits; a phase return token only for a gap another owner must fill |
+| practices-how | `plugins/sunstack-dev/skills/practices-how/` | Practice: explain how existing code works by tracing real paths from entry to effect and back, with wiring checks, edge semantics resolved from the actual implementation, and source, capture and inference kept apart; Program Design's current-system model calls it |
+| practices-why | `plugins/sunstack-dev/skills/practices-why/` | Practice: reconstruct the recorded rationale behind code or a design, from introducing commit to adoption evidence, through `practices-research`, with calibrated facts, interpretations and unknowns; explains without approving changes |
+| practices-verification | `plugins/sunstack-dev/skills/practices-verification/` | Practice: observe whether a declared behavior works on its real target, through the project's own `verify-<app>` skill when one exists; reports what was observed and keeps gaps unknown |
+| practices-verification-maintenance | `plugins/sunstack-dev/skills/practices-verification-maintenance/` | Practice: create or maintain a project's `.agents/skills/verify-<app>/` skill with its `.claude` link, proving journeys once on the real target; adapted from Pstack (MIT) |
+| practices-manage-agents | `plugins/sunstack-dev/skills/practices-manage-agents/` | Practice: classify and select one role skill, valid execution form and model; setup, typed commissioning, continuation and handback assessment |
+| role-lead | `plugins/sunstack-dev/skills/role-lead/` | Governing design and plan, integration and evidence-based acceptance in the owner's main conversation |
+| role-advisor | `plugins/sunstack-dev/skills/role-advisor/` | Assigned competing picture with checked evidence and concrete tradeoffs; advice without governing authorship |
+| role-implementer | `plugins/sunstack-dev/skills/role-implementer/` | Approved changes, product tests, associated proof and bounded corrections at the planned owner |
+| role-verifier | `plugins/sunstack-dev/skills/role-verifier/` | Paired check that proof can reach the outcome; observes the delivered target; owns assigned drivers |
+| role-reviewer | `plugins/sunstack-dev/skills/role-reviewer/` | Independent anchored findings and correction checks without authoring history or delivery acceptance |
+| role-researcher | `plugins/sunstack-dev/skills/role-researcher/` | Checked answer to the supplied bounded question or continuing investigation, with source and inference limits |
+| role-operator | `plugins/sunstack-dev/skills/role-operator/` | Prescribed execution and guided collection, returning observations and candidate material within its grant |
 | orchestrator-implementation-goal | `plugins/sunstack-dev/skills/orchestrator-implementation-goal/` | Coordinate Lead-authored planning, planned-PR implementation/proof, Lead assessment, independent review, corrections, and the requested delivery boundary |
 | practices-collaboration | `plugins/sunstack-dev/skills/practices-collaboration/` | Practice: find the repository's board project and work thread at entry (ask once and return `no-home` when none), seats by role, message vs post, waiting on another agent, and deliberate resolution |
 | practices-show-me-your-work | `plugins/sunstack-dev/skills/practices-show-me-your-work/` | Practice: use the board thread when available; otherwise keep the running account in session-logs. Route curated reusable knowledge to memory-logs under its instructions; preserve WIP/spec/debug artifact homes when explicitly requested or produced by owner-requested work, require explicit owner request for formal handoff packets, and honor chat-only/no-files directions; no product-repository trace or shared handoff index |
@@ -132,7 +143,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | plan-implementation | `plugins/sunstack-dev/skills/plan-implementation/` | Lead-authored translation of one current ready Requirements/Specification/Program Design set into a repo-grounded proof-bearing plan |
 | plan-improve-repo | `plugins/sunstack-dev/skills/plan-improve-repo/` | Audit a repository for high-leverage improvements; the Lead writes or validates canonical plans only after planning admission |
 | implement-plan | `plugins/sunstack-dev/skills/implement-plan/` | Validate and execute one immutable-path approved canonical plan with slice-local proof and explicit replan stops |
-| implementation-review | `plugins/sunstack-dev/skills/implementation-review/` | Independent 🔎 Review Sidekick reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and focused checks; rails-anchored reduction and cause-based routing without editing |
+| implementation-review | `plugins/sunstack-dev/skills/implementation-review/` | Independent 🔎 Reviewer Sidekick reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and focused checks; rails-anchored reduction and cause-based routing without editing |
 | ops-security-review | `plugins/sunstack-dev/skills/ops-security-review/` | Routes authorized security scans to the official Codex Security workflows |
 | implementation-pr-wrapup | `plugins/sunstack-dev/skills/implementation-pr-wrapup/` | Finish GitHub PR lifecycle work after implementation: push/open/update, monitor checks/comments, handle existing review threads, prove merge readiness, and merge only when authorized |
 | plan-handoff | `plugins/sunstack-dev/skills/plan-handoff/` | Copy-pasteable existing implementation-plan packets for other agents, CLIs, machines, or future sessions |
@@ -145,9 +156,9 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | skill-audit | `plugins/skill-authoring/skills/skill-audit/` | Evidence-backed portfolio audits using current plugin inventory, session patterns, and upstream inspirations |
 | presentation-tui | `plugins/sunstack-dev/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
 | presentation-webui | `plugins/sunstack-dev/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
-| principle-* (17) | `plugins/sunstack-dev/skills/principle-*/` | Callable engineering judgment cards, one judgment each (for example `principle-design-for-failure`); not auto-invoked; family map in `plugins/sunstack-dev/docs/principles-index.md` |
+| principle-* (17) | `plugins/sunstack-dev/skills/principle-*/` | Engineering principles, one judgment each (for example `principle-design-for-failure`), hidden from model invocation; skills cite them with a relative link, and each opens with its read rule; family map in `plugins/sunstack-dev/docs/principles-index.md` |
 | ops-linear-tracking | `plugins/sunstack-dev/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |
-| peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common — works in both Claude and Codex) |
+| peekaboo | `plugins/dev-workflow-tools/skills/peekaboo/` | macOS visual UI testing (common; works in both Claude and Codex) |
 | scaffold-project | `plugins/ai-scaffold/skills/scaffold-project/` | Project scaffolding (common) |
 | agent-collaboration | `plugins/agent-router/skills/agent-collaboration/` | Tool manual for the agent-collaboration CLI and agent-router MCP: identity, sessions, boards, messages, listen/wait, wakes, schedules, uncertain-mutation recovery (Codex, Claude Code, and Cursor via `agent-router`) |
 
@@ -244,18 +255,18 @@ plugins/<plugin-name>/
 ### Key Rules
 
 - Plugin `source` paths in marketplace manifests must use `./plugins/<name>` format (explicit relative paths)
-- `${CLAUDE_PLUGIN_ROOT}` resolves to the cached install path at runtime -- use it in hooks and scripts
-- Path traversal (`..`) is NOT allowed in source paths
-- Plugin `name` is the cache key for consumers -- changing it breaks existing installs
+- `${CLAUDE_PLUGIN_ROOT}` resolves to the cached install path at runtime; use it in hooks and scripts
+- Path traversal (`..`) is not allowed in source paths
+- Plugin `name` is the cache key for consumers, so changing it breaks existing installs
 - Run `claude plugin validate .` after Claude marketplace changes and `codex plugin list --marketplace sunstack --available --json` after Codex marketplace changes
 
 ### Hook Development Gotchas
 
-- **Transcript vs stdin**: The `transcript_path` JSONL file uses Anthropic API format -- tool usage is `{"type": "tool_use", "name": "Write", "input": {...}}` inside a `content` array. The field is `"name"`, NOT `"tool_name"`. The `"tool_name"` field only exists in hook stdin input. Do not grep the transcript for `"tool_name"`.
-- **Display names differ from tool names**: Terminal shows `Create(file)` but the transcript stores `"name": "Write"`. Similarly, `MultiEdit` is a separate tool name.
-- **Cache versioning**: Plugin files are cached by `version` in `plugin.json`. Changing hook scripts or config without bumping the version means Claude Code uses stale cached files. Always bump version after changes.
-- **Stop hooks**: Require `"matcher": "*"` in `hooks.json`. Use `bash ${CLAUDE_PLUGIN_ROOT}/hooks/script.sh` (with `bash` prefix) to ensure execution even if permissions are stripped during caching. Check `stop_hook_active` and exit 0 when true to prevent infinite loops. Exit code 2 blocks the stop; stderr is fed back to Claude as the reason.
-- **Debugging hooks**: Run `claude --debug`, check logs at `~/.claude/debug/`, grep for `Hook Stop` to see hook output and exit codes.
+- The `transcript_path` JSONL file uses Anthropic API format: tool usage is `{"type": "tool_use", "name": "Write", "input": {...}}` inside a `content` array. The field is `"name"`, not `"tool_name"`; `"tool_name"` exists only in hook stdin input. Do not grep the transcript for `"tool_name"`.
+- Display names differ from tool names. The terminal shows `Create(file)` but the transcript stores `"name": "Write"`, and `MultiEdit` is a separate tool name.
+- Plugin files are cached by `version` in `plugin.json`. Changing hook scripts or config without bumping the version means Claude Code uses stale cached files. Always bump version after changes.
+- Stop hooks require `"matcher": "*"` in `hooks.json`. Use `bash ${CLAUDE_PLUGIN_ROOT}/hooks/script.sh` (with `bash` prefix) to ensure execution even if permissions are stripped during caching. Check `stop_hook_active` and exit 0 when true to prevent infinite loops. Exit code 2 blocks the stop; stderr is fed back to Claude as the reason.
+- To debug hooks, run `claude --debug`, check logs at `~/.claude/debug/`, and grep for `Hook Stop` to see hook output and exit codes.
 
 ### Adding a New Plugin
 

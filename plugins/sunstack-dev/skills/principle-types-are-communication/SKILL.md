@@ -6,13 +6,15 @@ disable-model-invocation: true
 
 # Types Are Communication
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Types tell the reader what is possible, and the compiler enforces the promise. Hiding type information removes load-bearing documentation. When a status is a string, an id is a bare string, or a result is a bag of booleans and optional fields, the code still runs, but the knowledge of which combinations are real lives only in people's heads, and the next change breaks it with nothing failing to compile. Model the domain's states as named types that constrain what can exist, check untrusted data once where it enters, and let the compiler carry the rest. Whole classes of bugs then never compile, and a reader learns the design from the signatures.
 
 ## How to think it through
 
 **Name the states the domain has, and what each one carries.** A job that failed has an error; one that succeeded has a result; one that is running has a start time. Make that a sum type: a discriminated union in TypeScript, a tagged union of models in Python, an enum with payloads in Rust. The payload is required per variant, so a "failed" without an error or a "succeeded" without a result can't be written, and the type documents exactly what is present in each state. Every optional field whose validity depends on another field is a state the type failed to name; don't let unknowns and optionals proliferate.
 
-**Narrow by the tag, never by casting.** Checking `kind` (or `state`, or matching the enum) tells the compiler which variant you hold, and that variant's fields become available. No `as`, no `isinstance` ladders, no "I know it's there" assertions.
+**Narrow by the tag, never by casting.** Checking `kind` (or `state`, or matching the enum) tells the compiler which variant you hold, and that variant's fields become available. Don't use `as`, `isinstance` ladders, or "I know it's there" assertions.
 
 **Make every consumer handle every state.** A union protects you only if each `switch` or `match` over it is exhaustive: `assertNever` in the default branch in TypeScript, a `match` without a catch-all in Rust. Adding a variant next month then breaks the build exactly where it isn't handled yet: "We're adding `unknown`, so this switch should stop compiling until each caller decides what unknown means; a catch-all default would hide that decision."
 
@@ -63,4 +65,4 @@ If a value has one valid representation, comes from inside the system, and no op
 - A `switch` over a union with no exhaustive check.
 - Two hand-written types for the same shape.
 
-Decide what the states mean first with `principle-define-the-domain-first`. For the endings of an operation that reaches another system, including "unknown", see `principle-design-for-failure`.
+Before naming the types, decide what each state means and what makes two values the same thing ([define the domain first](../principle-define-the-domain-first/SKILL.md)). When an operation has an effect another system can see and can end without you knowing whether it landed, give each of its endings, including "unknown", its own variant and decide which system knows whether the effect happened ([design for failure](../principle-design-for-failure/SKILL.md)).

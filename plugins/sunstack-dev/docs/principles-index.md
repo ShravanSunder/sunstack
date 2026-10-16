@@ -1,12 +1,12 @@
 # Principles Index
 
-A principle is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it. More scenarios sit in each skill's `references/example_scenarios.md`. Each is a skill named `principle-*` that the owner calls by name; none load on their own.
+A principle is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it. More scenarios sit in each skill's `references/example_scenarios.md`. Each is a skill named `principle-*`, hidden from model invocation: the owner calls one by name, and a skill cites one with a relative link at the decision it informs. Each principle opens with its read rule.
 
 ## Using a principle
 
-- Read the card in full before applying it. This index chooses the card; it does not replace it.
-- When a principle shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle cited with no decision behind it was not applied.
-- Principles compose. One task often needs two, and each card's closing lines say where a neighbour takes over. A principle owns a question, not a file, tool, or test type.
+- Read the principle in full before applying it. This index only helps you choose one.
+- When a principle the owner called by name shaped your work, name it and the concrete decision it made, changed, ruled out, or confirmed, with the reason. A principle named with no decision behind it was not applied. A principle a skill cites serves the action its citing sentence names: apply it there, and tell the owner only when it explains an outcome, risk or decision.
+- Principles compose. One task often needs two, and each principle's closing lines say where a neighbour takes over. A principle owns a question, not a file, tool, or test type.
 
 ## Understand
 
@@ -21,7 +21,7 @@ A principle is one engineering judgment, written to teach: the idea behind it, h
 
 ## Decide
 
-- `principle-name-the-tradeoffs`. A real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one.
+- `principle-name-the-tradeoffs`. A real choice changes complexity, risk, cost, or reversibility, or one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one.
 
 ## Shape
 

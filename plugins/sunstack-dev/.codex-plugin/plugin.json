@@ -1,6 +1,6 @@
 {
   "name": "sunstack-dev",
-  "version": "2.75.1",
+  "version": "2.80.0",
   "description": "Shravan's development workflow plugin with long-horizon delivery routing, bounded design orchestration, canonical planning, implementation and independent review, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI and rendered web/chat).",
   "author": {
     "name": "Shravan Sunder"
@@ -35,8 +35,12 @@
     "mental-model",
     "reconverge",
     "practices-research",
+    "practices-how",
+    "practices-why",
+    "practices-verification",
+    "practices-verification-maintenance",
     "research",
-    "manage-agents",
+    "practices-manage-agents",
     "acpx",
     "agent-orchestration",
     "prior-art",
@@ -85,7 +89,7 @@
       "Use discuss-clarify-mental-models to rebuild the shared map before artifact work.",
       "Use discuss-pathfinding to extract unwritten requirements or decisions before artifact work.",
       "Use practices-research to gather source-grounded evidence into a tmp ledger.",
-      "Use manage-agents to spawn, resume, monitor, or reduce subordinate agent work.",
+      "Use practices-manage-agents to choose a helper's role, form and model, then commission, monitor, or assess its work.",
       "Use orchestrator-design to run this through one bounded Requirements, Specification, Program Design, and three-artifact design review cycle before planning.",
       "Use orchestrator-implementation-goal to carry this implementation goal through planning, implementation, proof, review, and PR readiness.",
       "Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.",

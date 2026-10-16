@@ -23,19 +23,19 @@
       "name": "sunstack-dev",
       "source": "./plugins/sunstack-dev",
       "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI and rendered web/chat)",
-      "version": "2.75.1"
+      "version": "2.80.0"
     },
     {
       "name": "skill-authoring",
       "source": "./plugins/skill-authoring",
       "description": "Skill authoring for any repository: design and write skills, review them with independent agents, and audit which skills to create, update, merge, or skip",
-      "version": "0.1.1"
+      "version": "0.3.0"
     },
     {
       "name": "agent-router",
       "source": "./plugins/agent-router",
       "description": "Agent collaboration, shared message boards, wake-ups and scheduled workflows through Codex Router.",
-      "version": "0.17.0"
+      "version": "0.17.1"
     }
   ]
 }

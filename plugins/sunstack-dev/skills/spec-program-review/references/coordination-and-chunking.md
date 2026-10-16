@@ -1,14 +1,14 @@
 # Coordination and Chunking for Design Review
 
-This reference owns how the 🔎 Review Sidekick splits a large design review into chunks and which checks it runs.
+This reference owns how the 🔎 Reviewer Sidekick splits a large design review into chunks and which checks it runs.
 
-Expected inputs: the 🔎 Review Sidekick's own whole-artifact read of the complete target set and governing sources, the selected mode, the confirmed goal boundary and accepted requirements set, and any proof claims the design cites.
+Expected inputs: the 🔎 Reviewer Sidekick's own whole-artifact read of the complete target set and governing sources, the selected mode, the confirmed goal boundary and accepted requirements set, and any proof claims the design cites.
 
-Return: the chunk plan — each chunk's seam, its listed sections, mapped dimensions, and overlap seams, or the decision that the mode-complete check alone covers the artifacts — and the checks to run with the reason for each.
+Return: the chunk plan (each chunk's seam, its listed sections, mapped dimensions, and overlap seams, or the decision that the mode-complete check alone covers the artifacts) and the checks to run with the reason for each.
 
 ## What a Design Chunk Pass Is
 
-A design chunk is a bounded review responsibility over one artifact seam, carried with the seam's complete text on both sides: every section that names the seam's obligation, realizing element, owners, edges, and proof seam, plus all governing sources whole. The 🔎 Review Sidekick reopens each complete artifact involved in the pass and records the seam sections judged. A heading list or a paraphrase is never a seam. The seams are the ones the modes already judge:
+A design chunk is a bounded review responsibility over one artifact seam, carried with the seam's complete text on both sides: every section that names the seam's obligation, realizing element, owners, edges, and proof seam, plus all governing sources whole. The 🔎 Reviewer Sidekick reopens each complete artifact involved in the pass and records the seam sections judged. A heading list or a paraphrase is never a seam. The seams are the ones the modes already judge:
 
 ```text
 three-artifact-design   Requirements -> Specification traceability
@@ -23,13 +23,13 @@ Never split these across chunks without a seam carrying their full text: one req
 
 ## Overlap Seams
 
-A seam is the complete text both adjacent chunks receive — the obligation and the design element realizing it, the contract and the component owning it, the call path and the proof seam observing it — not a shared requirement label. If a chunk pass needs unseen artifact text to judge its seam, the plan is wrong. Reopen complete governing sources for every pass.
+A seam is the complete text both adjacent chunks receive: the obligation and the design element realizing it, the contract and the component owning it, the call path and the proof seam observing it. A shared requirement label is not a seam. If a chunk pass needs unseen artifact text to judge its seam, the plan is wrong. Reopen complete governing sources for every pass.
 
-Signs the plan is wrong — fix the plan rather than push the review through: a chunk pass cannot judge without text outside its assignment; a candidate finding's evidence sits outside the reporting chunk; adjacent passes reach opposite conclusions about one seam neither fully holds.
+When the plan is wrong, fix the plan and do not push the review through. Signs of a wrong plan: a chunk pass cannot judge without text outside its assignment; a candidate finding's evidence sits outside the reporting chunk; adjacent passes reach opposite conclusions about one seam neither fully holds.
 
 ## When Not to Chunk
 
-Most design reviews are small enough that the mode-complete check alone covers the artifacts: the 🔎 Review Sidekick reads every target whole with room to judge the full mode. Compose chunks only when one reviewer cannot hold every material seam — as a working default, several material call-path groups or many public contracts. Either way dispel still runs, and proof-challenge and focused checks keep their reasons.
+Most design reviews are small enough that the mode-complete check alone covers the artifacts: the 🔎 Reviewer Sidekick reads every target whole with room to judge the full mode. Compose chunks only when one reviewer cannot hold every material seam. As a working default, that is several material call-path groups or many public contracts. Either way dispel still runs, and proof-challenge and focused checks keep their reasons.
 
 ## Which Checks, in What Order
 

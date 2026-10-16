@@ -5,7 +5,7 @@ expected inputs: PR number or create-intent, base, head SHA, diff identity, exis
 return: tmp markdown path, `included_views`, head SHA, `complete | partial | blocked`
 complete when: the tmp file is the template below, filled, with only the views this diff needs
 
-The caller owns when this runs, 🛠️ Worker dispatch, mechanical parent checks, and Operator `gh pr edit`. Do not push, merge, claim ready, reply to comments, or run `gh pr edit`.
+The caller owns when this runs, 📚 Researcher Worker dispatch, mechanical parent checks, and Operator `gh pr edit`. Do not push, merge, claim ready, reply to comments, or run `gh pr edit`.
 
 MUST load `public-artifact-safety.md` and return redactions or refuse-to-publish.
 MUST load `pr-outline-views.md` and return the views used in Change outline.
@@ -34,7 +34,7 @@ Fill this template. Brace text is the instruction. Drop any view whose fence you
 
 ## Change outline
 
-{Smallest combination of the views below that explains this implementation. Prefer `diff` for an existing shape and a complete block when most of it is new. Do not include views that did not change. Order them so a reviewer can follow the change — files first, or a type / table / contract first. Write as one human to another.}
+{Smallest combination of the views below that explains this implementation. Prefer `diff` for an existing shape and a complete block when most of it is new. Do not include views that did not change. Order them so a reviewer can follow the change: files first, or a type / table / contract first. Write as one human to another.}
 
 {short line of what this view shows}
 
@@ -95,7 +95,7 @@ included_views: <subset of sql-api, types, file-tree, component-tree, call-flow>
 stop condition: met | not met, with what remains
 ```
 
-`complete` when Why is one sentence, notes are 1–3 bullets or `- None.`, Change outline has at least one view from the diff, unused views are omitted, and the file is public-artifact-safe.
+`complete` when Why is one sentence, notes are 1-3 bullets or `- None.`, Change outline has at least one view from the diff, unused views are omitted, and the file is public-artifact-safe.
 
 `partial` when the file exists but Why is weak, notes are filler, a needed view is missing, or a leftover unused view remains.
 

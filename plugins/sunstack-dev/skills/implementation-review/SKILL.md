@@ -7,7 +7,7 @@ description: "Use when independently reviewing implemented code, proof, a branch
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-The caller commissions a 🔎 Review Sidekick through `manage-agents`. That Review Sidekick reads every governing source and the complete diff, walks the checks below in its own session, and reduces findings against the rails. The orchestrator disposes and routes the assessment.
+The caller commissions a 🔎 Reviewer Sidekick through `practices-manage-agents`. That Reviewer Sidekick reads every governing source and the complete diff, walks the checks below in its own session, and reduces findings against the rails. The orchestrator disposes and routes the assessment.
 
 The rails are the confirmed requirements, Specification obligations, Program Design elements, and goal boundary. A finding that cannot be anchored to a quoted clause from them is not accepted, however well-argued or however many reviewers agree.
 
@@ -15,12 +15,12 @@ The rails are the confirmed requirements, Specification obligations, Program Des
 
 1. Classify `meaningful-review-required | non-substantial | blocked-input`. Non-substantial is limited to fully inspected formatting, typo, link, or generated-metadata changes with no semantic consumer; a non-substantial return lists, per changed file, the path, the diff inspected, the consumer search performed, and the no-effect conclusion. A `blocked-input` return names each missing identity and who can restore it.
 2. For meaningful review, MUST load `../../shared-references/canonical-implementation-plan.md` to validate the unchanged ready plan record, governing planning basis, delivery context, base/reviewed commits, diff range, instructions, proof claims/evidence, constraints, and known gaps, and return `admit | blocked-input`; take earlier review findings from the caller, never from the plan, as the convergence baseline in `references/finding-and-reduction.md`.
-3. Admit reviewed-design and admitted-repository-improvement governing-basis variants through their canonical fields. Reject missing, stale, malformed, plan-only, mismatched, wrong-origin, or unproven authority without inference. With no plan record at all, review only when the user explicitly asked for a diff-only review with no risk trigger present, or when a risk trigger (runtime authority, security boundary, public capability, cross-module surface) forces review with the user's confirmed goal statement as the sole rail — and say plainly that source-backed readiness cannot be claimed. Never infer a plan or design from the PR description.
-4. When prior review evidence is missing, inspect the current source and proof, record what is missing, and review against the current baseline (see `references/finding-and-reduction.md`). Reject a stale or wrong source or proof.
+3. Admit reviewed-design and admitted-repository-improvement governing-basis variants through their canonical fields. Reject missing, stale, malformed, plan-only, mismatched, wrong-origin, or unproven authority without inference. With no plan record at all, review only when the user explicitly asked for a diff-only review with no risk trigger present, or when a risk trigger (runtime authority, security boundary, public capability, cross-module surface) forces review with the user's confirmed goal statement as the sole rail, and say plainly that source-backed readiness cannot be claimed. Never infer a plan or design from the PR description.
+4. When prior review evidence is missing, inspect the current source and proof, record what is missing, and treat this review as the baseline; the convergence rule in `references/finding-and-reduction.md`, loaded at Reduce on the Rails, counts from it. Reject a stale or wrong source or proof.
 
 Completion: classification, governing sources, base and reviewed commits, diff and proof boundary, prior-findings evidence (or the missing-evidence reason), and `admit | blocked-input` are stated.
 
-The caller completes admission. A non-substantial or blocked exit commissions no 🔎 Review Sidekick. For an admitted meaningful review, the caller uses `manage-agents` to commission or resume one Review Sidekick. The assigned Review Sidekick executes this method and never commissions another Review Sidekick.
+The caller completes admission. A non-substantial or blocked exit commissions no 🔎 Reviewer Sidekick. For an admitted meaningful review, the caller uses `practices-manage-agents` to commission or resume one Reviewer Sidekick. The assigned Reviewer Sidekick executes this method and never commissions another Reviewer Sidekick.
 
 ## Read the Whole Map
 
@@ -42,19 +42,19 @@ Completion: each pass lists its complete file set and seams, and every optional 
 
 MUST load `references/lanes/lane-schema.md` and record `complete | partial | blocked` for every check below. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
 
-1. MUST load `references/lanes/spec-compliance.md` and compare asked-to-delivered and delivered-to-asked coverage across the whole diff.
-2. MUST load `references/lanes/chunk-reviewer.md` and `references/reviewing-implementation.md`; walk each planned chunk pass sequentially. Reopen every complete file in that pass and inspect overlap seams from both sides. Record coverage and candidate findings per pass.
-3. IF proof claims exist, load `references/lanes/proof-challenge.md` and challenge every claim. For prescribed commands, assign a 🔧 Operator under an exact execution grant. The 🔧 Operator performs the reference's write-set preflight and `git status --porcelain` comparison, executes only granted commands, and returns observed output and exit codes. The 🔎 Review Sidekick judges claimed against observed and records proof gaps. If there is no grant, inspect only and record the boundary.
-4. MUST load `references/lanes/dispel.md` after all chunk passes. Classify every candidate and map every delivered item to a rail or `absent`, even when there are no candidates.
-5. IF reduction leaves a named material risk, load `references/lanes/focused-reviewer.md` and answer one falsifiable question per risk. Stop when no named risk remains.
+1. MUST load `references/lanes/spec-compliance.md` and return asked-to-delivered and delivered-to-asked coverage, compared across the whole diff.
+2. MUST load `references/lanes/chunk-reviewer.md` and `references/reviewing-implementation.md` to walk the planned chunk passes sequentially, and return each pass's coverage and candidate findings. Reopen every complete file in each pass and inspect overlap seams from both sides.
+3. IF proof claims exist, load `references/lanes/proof-challenge.md` and return per-claim results, with every claim challenged. For prescribed commands, assign a 🔧 Operator under an exact execution grant. The 🔧 Operator performs the reference's write-set preflight and `git status --porcelain` comparison, executes only granted commands, and returns observed output and exit codes. The 🔎 Reviewer Sidekick judges claimed against observed and records proof gaps. If there is no grant, inspect only and record the boundary.
+4. MUST load `references/lanes/dispel.md` after all chunk passes and return a classification for every candidate and a rail or `absent` mapping for every delivered item, even when there are no candidates.
+5. IF reduction leaves a named material risk, load `references/lanes/focused-reviewer.md` and return the answer to one falsifiable question per risk. Stop when no named risk remains.
 6. List every stand-in in the diff and receipts, and check that none is counted as proof of the real interaction; a claim that rests on a stand-in is a finding.
 
 
 ## Reduce on the Rails
 
-MUST load `references/finding-and-reduction.md` and return every candidate's disposition with its quoted rail anchor, merged duplicates, scope effects, and the review result. In that reference, `parent` means the 🔎 Review Sidekick, never the author or orchestrator.
+MUST load `references/finding-and-reduction.md` and return every candidate's disposition with its quoted rail anchor, merged duplicates, scope effects, and the review result. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
 
-Before accepting any finding, open the governing clause it claims to serve and quote it; ask whether the confirmed obligations still hold without the questioned mechanism, and whether the proposed correction fits the task boundary and serves the clause. A reviewer proposal that adds unrequested scope is rejected as scope expansion — never escalated to the owner as if a decision were owed. An unrequested element the diff already delivers gets removal or an owner `decision-needed`, never "well built." A finding that breaks a load-bearing assumption of the governing design stops and returns to the orchestrator for an owner brief with the failed assumption, evidence, and consequence.
+Before accepting any finding, open the governing clause it claims to serve and quote it; ask whether the confirmed obligations still hold without the questioned mechanism, and whether the proposed correction fits the task boundary and serves the clause. A reviewer proposal that adds unrequested scope is rejected as scope expansion and never escalated to the owner as if a decision were owed. An unrequested element the diff already delivers gets removal or an owner `decision-needed`, never "well built." A finding that breaks a load-bearing assumption of the governing design stops and returns to the orchestrator for an owner brief with the failed assumption, evidence, and consequence.
 
 Return `ready | needs-revision | blocked-input | decision-needed | not-converging` with the exact correction owner and affected coverage; `references/finding-and-reduction.md` owns these labels and their precedence. With it, answer: "What are the risks of merging this today, and what is the worst thing that could break?" and "List assumptions, environment details, or judgment calls you could not verify, and where you looked."
 

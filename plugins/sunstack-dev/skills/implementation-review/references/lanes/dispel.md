@@ -1,37 +1,37 @@
 # Dispel
 
-Mission: scope defense. Challenge the candidate findings and the implementation itself against the rails — the confirmed requirements, Specification obligations, Program Design elements, and goal boundary — so over-engineering dies before reduction instead of after merge. This is not a second general defect hunt.
+Mission: scope defense. Before reduction, challenge the candidate findings and the implementation itself against the rails.
 
-Expected inputs: the current review context with `chunk: whole-diff`, the complete diff (not summaries), the candidate-finding set from prior checks — possibly empty — and the complete governing-basis artifacts.
+Expected inputs: the current review context with `chunk: whole-diff`, the complete diff (not summaries), the candidate-finding set from prior checks (possibly empty), and the complete governing-basis artifacts.
 
-Prerequisites: the governing basis and complete diff are inspectable; chunk passes are complete. An empty candidate set does not block this check — the over-delivery sweep runs regardless.
+Prerequisites: the governing basis and complete diff are inspectable, and the chunk passes are complete. An empty candidate set does not block this check; the over-delivery sweep runs regardless.
 
-Check boundary: read-only review. Read-only discovery commands and a tmp scratchpad only; no proof-generation commands, edits, or workflow decisions. Classifications are candidate evidence for the 🔎 Review Sidekick, never dispositions.
+Check boundary: read-only review. Read-only discovery commands and a tmp scratchpad only; no proof-generation commands, edits, or workflow decisions. Classifications are candidate evidence for the 🔎 Reviewer Sidekick, never dispositions.
 
 ## Challenge the Candidates
 
-For each candidate finding, answer one bounded question: is the proposed correction required by the rails?
+For each candidate finding, decide whether the rails require the proposed correction. When you run the deletion test on a proposed mechanism, name the quoted rail it serves, what would break against that rail without it, and whether a simpler or existing path already serves that clause ([keep a piece only when an outcome needs it now](../../../principle-justify-the-complexity/SKILL.md)).
 
 ```text
 rails anchor the candidate serves: <anchor | none found>
-deletion test: removing the questioned mechanism — do the confirmed
+deletion test: without the questioned mechanism, do the confirmed
   obligations still hold?
 mechanism necessity: required and proportionate to the quoted clause | one of
-  several ways to serve it — if several, only the obligation gap can be a finding
+  several ways to serve it (if several, only the obligation gap can be a finding)
 correction class: required by anchor | gold-plating | scope expansion |
   requirements-weakening | cannot tell without owner decision
 evidence:
 ```
 
-The failure this check exists to catch: a reviewer proposes completing an unrequested mechanism's missing contracts — retries it was never asked for, a hardening harness no obligation demands, an abstraction serving imagined future needs — and the correction reads as diligence. Name it. A candidate that would genuinely repair a confirmed obligation is classified `required by anchor` and passed through untouched; dispel is not reflexive rejection.
+Name a correction that completes an unrequested mechanism's missing contracts (retries nobody asked for, a hardening harness no obligation demands, an abstraction for imagined future needs), even when it reads as diligence. A candidate that repairs a confirmed obligation is `required by anchor` and passes through untouched.
 
 ## Challenge the Implementation
 
-Independently sweep the whole diff for over-delivery, and make the sweep accountable: map each delivered subsystem, layer, dependency, and capability to the exact rail that asks for it or to `absent`. For each `absent`, return an over-delivery finding with the delivered thing, the absent anchor, the appropriate removal or the owner decision needed, and the consequence of keeping it unowned. The sweep is complete only when every delivered item carries a mapping.
+Sweep the whole diff for over-delivery yourself. Map each delivered subsystem, layer, dependency, and capability to the exact rail that asks for it or to `absent`, deciding each with the same deletion test. For each `absent`, return an over-delivery finding with the delivered thing, the absent anchor, the appropriate removal or the owner decision needed, and the consequence of keeping it unowned. The sweep is complete only when every delivered item carries a mapping.
 
-Good: every candidate carries a rails classification with evidence; unrequested subsystems in the diff are named even when well-built.
+Good: every candidate carries a rails classification with evidence; unrequested subsystems in the diff are named even when well built.
 
-Bad: rejecting valid corrections as "over-engineering" without running the deletion test; blessing an unrequested subsystem because it looks professional; drifting into general code review.
+Bad: rejecting valid corrections as over-engineering without running the deletion test; drifting into general code review.
 
 Return the check `complete | partial | blocked` status plus:
 

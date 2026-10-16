@@ -1,6 +1,6 @@
 # Divide the Work and Attach Proof
 
-Use this reference to turn obligations allowed by the planning start check into a proportional implementation sequence. Return the slice graph, obligation/proof mapping, necessary edges, integration gates, false-green risks, and any split or replan stop.
+Use this reference to turn the obligations admitted at the planning start check into a proportional sequence of slices, each with proof that can observe its obligation. Return the slice graph, the obligation/proof map with each proof's oracle source, the project proof-layer source or `project silent`, the property-versus-example choice where one rule covers the cases, a keep/repair/remove disposition for each overlapping existing test, necessary dependency edges, integration gates, false-green risks, and any split or replan stop.
 
 ## Start From Obligations
 
@@ -11,7 +11,7 @@ obligation identity | governing artifact | current owner/path | change needed |
 observable proof | risk or unknown
 ```
 
-Every normative requirement, specified behavior, program-design boundary, migration/cutover obligation, and required proof seam appears exactly once. A row that cannot name its owner, change, or observation is a design gap, not a planning task.
+Every normative requirement, specified behavior, program-design boundary, migration/cutover obligation, and required proof seam appears exactly once. A row that cannot name its owner, change, or observation is a design gap. Return it to its design owner with the missing field.
 
 ## Choose Small Changes That Can Be Proven
 
@@ -24,7 +24,7 @@ A slice is the smallest coherent change that can earn evidence without leaving t
 - `migration/cutover`: changes stored state, external contracts, or ownership. It names compatibility, rollback or recovery, and observation.
 - `proof-only`: adds a missing observation for already-required behavior. It cannot substitute for the behavior change.
 
-Use a compact plan for one low-risk owner and one or two proof gates. Use a full plan when the change crosses owners, trust boundaries, state, concurrency, compatibility, migrations, or multiple proof layers. Proportional means fewer fields, never weaker obligations.
+Use a compact plan for one low-risk owner and one or two proof gates. Use a full plan when the change crosses owners, trust boundaries, state, concurrency, compatibility, migrations, or multiple proof layers. A compact plan drops fields, and every obligation keeps its proof.
 
 ## Order Only Real Dependencies
 
@@ -55,11 +55,11 @@ quality commands
 stop/replan condition
 ```
 
-Use the cheapest proof that can actually observe the obligation, then add broader proof only for wiring or regression reach. A mocked unit cannot prove a real process, filesystem, network, UI, or distribution boundary. A full suite cannot make an unobserved behavior green.
+When you choose a slice's proof, name in its pre-change signal the wrong behavior that proof must fail on, put the proof at the cheapest layer where that behavior stays real, and take its expected value from the obligation, recording that source as the slice's oracle ([write tests that can fail](../../principle-write-tests-that-can-fail/SKILL.md)). Add broader proof only for wiring or regression reach the focused proof cannot cover. A full-suite run cannot prove a behavior no planned check observes.
 
-Name an independent oracle: the expected observation comes from the obligation, not from recomputing the result with the code under test. When the repository defines proof-layer names, those names win; record the source. When it is silent, say `project silent` and use the ordinary unit, integration, smoke, and end-to-end names. When one rule covers the cases, plan a property or a table of that rule. A single example is enough only when the claim is that one case.
+When the repository defines proof-layer names, those names win; record the source. When it is silent, write `project silent` and use the ordinary unit, integration, smoke, and end-to-end names. When one rule covers the cases, plan a property or a table of that rule. A single example is enough only when the claim is that one case.
 
-When existing tests overlap the slice, return `keep`, `repair`, or `remove` for each. `remove` requires replacement proof, redundancy proof, or dead-contract proof. A remove row without one of those three is not a ready plan. A snapshot or fixture with no live contract is a dead-contract candidate, not an automatic delete.
+When existing tests overlap the slice, return `keep`, `repair`, or `remove` for each. A `remove` row carries one of three proofs: a replacement that fails on the same wrong behavior, redundancy shown by a kept test that already fails on it, or a dead contract shown by the governing change that retires it. A new test that looks similar proves none of the three. A snapshot or fixture with no live contract is a dead-contract candidate and still needs that proof before removal.
 
 ## Catch Proof That Can Pass for the Wrong Reason
 
@@ -74,4 +74,6 @@ Split or replan when:
 - a slice changes several owners and cannot isolate its failure;
 - completing the slice would require an unmade product or structural decision.
 
-Return the exact gap and its owner instead of padding the plan with speculative tasks.
+Return the exact gap and its owner. Add no speculative task to cover it.
+
+Complete when every ledger obligation sits in exactly one slice, every slice's proof names its wrong behavior, layer, and oracle source, every existing test that covers a slice's write surfaces has a disposition and every `remove` its proof, and each split or replan condition you hit is returned as a gap with its owner.

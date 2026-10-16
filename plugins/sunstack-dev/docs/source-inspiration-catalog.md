@@ -1,10 +1,10 @@
 # Source Inspiration Catalog
 
-Lite maintainer map for `sunstack-dev` design. **Not** a runtime skill reference — do not load during normal spec, plan, review, or implementation.
+Lite maintainer map for `sunstack-dev` design. It is not a runtime skill reference, so do not load it during normal spec, plan, review, or implementation.
 
 ## Full admired-source index (canonical)
 
-Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog compare live in the **`ai-dev-skills`** meta-repo:
+Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog compare live in the `ai-dev-skills` meta-repo:
 
 `/Users/shravansunder/Documents/dev/open-source/agent-skills/ai-dev-skills/`
 
@@ -15,13 +15,13 @@ Detailed per-skill provenance, upstream pins, and date-pinned From/To changelog 
 | Date-pinned history | `docs/repo-index-changelog/` | Cheap compare between two submodule SHAs |
 | Maintenance contract | `AGENTS.md` | How to bump submodules and keep indexes in sync |
 
-**Maintain both:** keep this file as a short in-plugin reminder; put durable path-level mappings, pin SHAs, and bump notes in `ai-dev-skills`. When they diverge, prefer updating `ai-dev-skills` first, then refresh the lite tables here if the high-level preserve/avoid story changed.
+Maintain both. Keep this file as a short in-plugin reminder; put durable path-level mappings, pin SHAs, and bump notes in `ai-dev-skills`. When they diverge, prefer updating `ai-dev-skills` first, then refresh the lite tables here if the high-level preserve/avoid story changed.
 
 ## Source Trees To Preserve (lite)
 
 | Source tree | Preserve | Narrow / avoid |
 | --- | --- | --- |
-| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents; `principle-*` leaves for callable judgment cards (one judgment each, user-invoked, name the decision a principle changed) | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
+| Pstack / poteto | `show-me-your-work` for decision/action trails, `how` for architecture mental models, `why` for source coverage and confidence calibration, `poteto-mode` for playbook routing, verified iterations, and parent-owned subagents; `create-verification-skill` and `maintain-verification-skill` for a project's own verification skill and its upkeep (`practices-verification-maintenance`); `principle-*` leaves (one judgment each, user-invoked, name the decision a principle changed) | Do not copy Cursor-specific commands, model names, anti-planning stance, blanket autonomy, or style micro-rules |
 | Matt Pocock skills | `grill-me`, `grill-with-docs`, domain modeling, codebase design, debugging/TDD, handoff patterns | Do not treat discussion prompts as a substitute for source-backed spec creation |
 | Addy Osmani agent skills | lifecycle taxonomy, interview/idea/spec/doubt/source-driven development, ADR/docs and observability ideas | Use as taxonomy and selected source, not a wholesale workflow |
 | Dimillian skills | review swarms, bug-hunt swarms, skill audit, batch refactor orchestration | Narrow Apple/UI-specific skills to macOS/iOS workflow contexts |
@@ -48,11 +48,11 @@ Inspected 2026-09-26 at local `cursor-plugins` revision `ecc249f`. Preserve/avoi
 | --- | --- | --- |
 | Discussion requirement capture | Pstack `show-me-your-work`, Matt Pocock discussion/domain modeling, Addy interview/spec/doubt patterns, Steipete owner briefs | Split discussion surfaces by job; capture material interjections and session requirements; avoid one ritual forcing question |
 | Spec creation | Pstack `how`, Addy source/spec-driven patterns, Matt Pocock domain modeling | Reflect top-level target requirements before swarms; keep current state separate from target state |
-| Plan creation | Obra `writing-plans`, Pstack proof/boundary principles, Codex subagent guidance | Create DAG-shaped vertical slices with valuable proof and subagent suitability |
+| Plan creation | Obra `writing-plans`, Pstack proof/boundary principles, Codex subagent guidance | Create DAG-shaped vertical slices with useful proof and subagent suitability |
 | Implementation execution | Pstack `poteto-mode`, Obra `subagent-driven-development`, existing controller packets | Parent-owned subagent lifecycle, evidence verification, integration, and proof claims |
 | Review transport | OpenClaw ACPX / ACP, local review swarms, Claude/Gemini structured feedback | ACPX is external review transport; parent reducer verifies all candidate findings |
 | Security review | Codex curated security skills | Route to `ops-security-review`; keep normal review lanes lightweight |
-| Engineering principles | Pstack `principle-*` leaves and `poteto-mode` index, the owner's own engineering instructions and corrections | `principle-*` cards named from the owner's own phrases; callable by name, not auto-invoked; card shape adapted, no upstream prose copied |
+| Engineering principles | Pstack `principle-*` leaves and `poteto-mode` index, the owner's own engineering instructions and corrections | `principle-*` skills named from the owner's own phrases; callable by name, not auto-invoked; leaf shape adapted, no upstream prose copied |
 
 For per-skill borrowed/do-not-copy detail, open the matching file under `ai-dev-skills/docs/my-ai-tools/sunstack-dev/`.
 

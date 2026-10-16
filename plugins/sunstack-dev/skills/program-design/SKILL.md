@@ -9,7 +9,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 A program design is the structural realization of a fixed observable contract.
 
-The Lead loads this skill and authors the complete structural How: alternatives, selections, components, ownership, interfaces, state/failure policy, target views and diagrams, final prose and visual briefs. Bounded helpers may return current-system or external evidence. A 🦉 Advisor may challenge and advise through `manage-agents`; advice is neither authorship nor acceptance. A rendering tool may realize pixels, typography, spacing and style from an unchanged Lead-authored brief, while semantic grouping, order, boundaries, labels, edges, invariants and candidate acceptance remain with the Lead.
+The Lead loads this skill and authors the complete structural How: alternatives, selections, components, ownership, interfaces, state/failure policy, target views and diagrams, final prose and visual briefs. Bounded helpers may return current-system or external evidence. A 🦉 Advisor may challenge and advise through `practices-manage-agents`; advice is neither authorship nor acceptance. A rendering tool may realize pixels, typography, spacing and style from an unchanged Lead-authored brief, while semantic grouping, order, boundaries, labels, edges, invariants and candidate acceptance remain with the Lead.
 
 It explains how authoritative obligations become owned runtime behavior:
 
@@ -104,13 +104,15 @@ Completion: distinct Requirements and Specification identities, confirmed goal b
 
 ### 2. Build the current-system model from sources
 
-MUST load `references/current-system-model.md` to reconstruct representative execution paths from real entrypoints through named callers/callees, owners, state mutations or side effects, and observable results/errors; use runtime stack traces, logs, traces, tests, and source navigation when available to validate the dynamic path. Return the source-grounded current-system model, normalized current call paths, and inference gaps.
+MUST load `practices-how` and return the source-backed current behavior model for each load-bearing behavior the Specification's obligations change or depend on: anchored entry-to-effect paths with their return and error edges, the owners and state on them, their boundary crossings, the test or harness path wherever its wiring differs from production, observed and inferred edges, and the edges left unresolved. Delegated parts of that walk go through the current-system-explorer lane under Bounded Evidence Help.
+
+MUST load `references/current-system-model.md` and return, built from that model, the current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, the greenfield basis where nothing current exists, contradictions, evidence gaps, and source identities with current applicability.
 
 IF an external platform, protocol, library, sandbox, runtime, or empirical claim could change feasibility, structure, or proof and current local sources do not establish it, perform a bounded lookup directly or use `practices-research`. If delegation is useful, the external-prior-art-platform lane may perform that lookup under the Bounded Evidence Help contract; delegation is not required. Return the exact external source identity/version, authority status, transfer assumptions, structural consequence, and remaining evidence gap before selection.
 
-Completion: current behavior and degree of constraint are source-backed, and `changes / remains authoritative` is explicit.
+Completion: each load-bearing current behavior has an anchored entry-to-effect path with its return and error edges, or a source-backed greenfield basis; degree of constraint is source-backed; and `changes / remains authoritative` is explicit.
 
-For each dimension—components, interfaces, state, calls/flows, failure/recovery, concurrency/consistency, compatibility/cutover, trust, and proof—record one applicability judgment in working state or the returned self-check:
+For each dimension (components, interfaces, state, calls/flows, failure/recovery, concurrency/consistency, compatibility/cutover, trust, and proof), record one applicability judgment in working state or the returned self-check:
 
 ```text
 required by a named specification obligation
@@ -123,7 +125,7 @@ These are inspection questions, not mandatory artifact sections. Never invent a 
 
 ### 3. State the crux and forces
 
-MUST load `references/alternatives-and-crux.md` for stages 3-4 and apply its structural-crux, forces, alternatives, tradeoff, falsifier, and selection method in working state. Surface only an evidence gap that blocks credible alternatives.
+MUST load `references/alternatives-and-crux.md` for stages 3-4 and return the crux, forces, and evidence gaps that block credible alternatives. Apply its structural-crux, forces, alternatives, tradeoff, falsifier, and selection method in working state. Surface only an evidence gap that blocks credible alternatives.
 
 Completion: the design problem is expressed as falsifiable structural choices rather than generic quality goals.
 
@@ -153,11 +155,11 @@ Completion: every `E` has a binding row with every cell filled or marked `gap: <
 
 ### 6. Select the target composition
 
-Using the already-loaded `references/components-ownership-interfaces.md`, apply its target-tree, depth/deletion, ownership, dependency, and behavioral-interface method in working state.
+Using the already-loaded `references/components-ownership-interfaces.md`, apply its target-tree, ownership, dependency, and behavioral-interface method in working state.
 
 Derive the integrated overview from the binding table before detailing mechanisms. For UI/refactor work, include the render/component tree and distinguish state owners, pure views, integration/effect boundaries, and derived state.
 
-For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks if removed, why the existing foundation cannot supply it, and why it remains within the agreed acceptable complexity. Delete it when no confirmed obligation breaks; do not complete missing contracts for an unnecessary mechanism.
+For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks or moves into its callers if it is removed, why the existing foundation cannot supply it, and why it stays within the agreed acceptable complexity ([keep complexity only when an outcome needs it now](../principle-justify-the-complexity/SKILL.md)). Delete it when no confirmed obligation breaks and its callers would not inherit a lifecycle, policy, or failure rule it owns. Do not complete missing contracts for a mechanism you deleted.
 
 Completion: each component has one job, reason to change, consumers, owned behavior, and justified interface.
 
@@ -177,7 +179,7 @@ Completion: a planner can later locate implementation surfaces without deciding 
 
 ### 9. Model state and lifecycle
 
-MUST load `references/state-calls-and-flows.md` for stages 9-10 and apply its state/lifecycle, current-to-proposed call-path, flow, and migration/cutover method in working state.
+MUST load `references/state-calls-and-flows.md` for stages 9-10 and return the applicable state/lifecycle model and current-to-proposed call-path comparison procedure. Apply its state/lifecycle, current-to-proposed call-path, flow, and migration/cutover method in working state.
 
 Use a state machine or table when timing/order changes correctness. Distinguish persisted, derived, cached, and synchronized state.
 
@@ -193,7 +195,7 @@ Completion: there is no “and then magic happens” hop; every applicable runti
 
 ### 11. Design failure, partial success, and recovery
 
-MUST load `references/failure-concurrency-recovery.md` for stages 11-12 and apply its detection, containment, retry, idempotency, timeout/cancellation, cleanup, partial-success, recovery, ordering, and consistency method in working state.
+MUST load `references/failure-concurrency-recovery.md` for stages 11-12 and return the failure/recovery and partial-success map. Apply its detection, containment, retry, idempotency, timeout/cancellation, cleanup, partial-success, recovery, ordering, and consistency method in working state.
 
 Completion: failure flows are as explicit as happy paths and every recovery action has one owner.
 
@@ -241,7 +243,7 @@ Author top-down. Begin with the rendered fired views. Use concise prose as the o
 
 The Lead expresses every selected requirement realization, entity binding, component, ownership rule, interface, state/failure policy, view, and claim. Unmapped needs return as gaps rather than becoming delegated design work.
 
-After deletion or simplification, compare coverage with the accepted requirements set. Many mechanisms may become fewer; the complete accepted requirements set from `spec-design` — affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations — may not lose any item without owner authority. Stop on a conflict with mutually narrowed current files.
+After deletion or simplification, compare coverage with the accepted requirements set. Many mechanisms may become fewer, but the complete accepted requirements set from `spec-design` (affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations) may not lose any item without owner authority. Stop on a conflict with mutually narrowed current files.
 
 Completion: each design element serves an obligation, constraint, failure policy, or proof need; after any deletion or simplification pass, every accepted identity has an inspectable `covered | owner-authorized supersession | gap` disposition and anchor, derived from its trace-table row for each Specification obligation and reported beside the table for every other accepted identity, with shared rows allowed only when every member identity is enumerated and has the same disposition and anchor; and every fired Required View has a passed rendering result with its semantic fields preserved.
 
@@ -314,7 +316,7 @@ Paths are valid current-source or traceability anchors; the design must not beco
 
 ## Bounded Evidence Help
 
-There is no fixed swarm. Select an evidence lane only when its observable predicate holds:
+Select an evidence lane only when its observable predicate holds:
 
 ```text
 current sources constrain ownership/calls/state/proof and the parent lacks a model
@@ -323,7 +325,7 @@ one bounded external question could change feasibility/structure/proof
   -> references/lanes/external-prior-art-platform.md
 ```
 
-Before any optional dispatch, MUST use `manage-agents` to pick the role and launch and hand off the lane.
+Before any optional dispatch, MUST use `practices-manage-agents` to pick the role and launch and hand off the lane.
 
 IF a predicate holds and delegation is useful, MUST load `references/lanes/lane-schema.md` and return its shared evidence packet and receipt contract. Dispatch the selected lane with the exact assignment, governing source pointers, observed predicate and prerequisites, bounded evidence question and source scope, and any instance constraint that narrows the selected lane reference. The lane reference owns the invariant mission, maximum authority, return, and stop boundary.
 
@@ -354,7 +356,7 @@ Do not return `locally-ready` while any of these hold:
 - a screen the user will see lacks a current-app-grounded Image Gen result, or that result is missing, broken, uninspected, unreadable, inconsistent with the Mermaid views, or not accepted by the Lead, without an exact `no current UI` gap, a user-format override that is not a text fence, or an explicit owner-authorized deferral;
 - state, flow, failure/recovery, concurrency, migration, trust, or proof semantics are applicable but undefined;
 - delegated evidence was treated as target design, or a helper originated alternatives, target models/views, structural realization, section prose, or any design meaning;
-- a mechanism survives even though removing it breaks no confirmed requirement, or simplification loses accepted requirements without owner authority;
+- a mechanism survives even though removing it breaks no confirmed requirement and its callers would not inherit a lifecycle, policy, or failure rule it owns, or simplification loses accepted requirements without owner authority;
 - the current structural realization lacks explicit owner confirmation or a recorded `structural-realization confirmation: waived by owner`;
 - planning would still need to invent an owner, interface, state/failure policy, trust control, or proof seam;
 - required independent review is missing, stale, partial, silent, or blocked;

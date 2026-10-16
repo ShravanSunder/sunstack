@@ -1,6 +1,6 @@
 # Review Check Status
 
-This reference owns the status enum and the per-check result shape. The 🔎 Review Sidekick holds governing basis, goal boundary, obligations, constraints, complete diff, chunk plan, proof claims, and known gaps in its own session. The individual check references own their missions.
+This reference owns the status enum and the per-check result shape. The 🔎 Reviewer Sidekick holds governing basis, goal boundary, obligations, constraints, complete diff, chunk plan, proof claims, and known gaps in its own session. The individual check references own their missions.
 
 ```text
 check: spec-compliance | chunk-reviewer | dispel | proof-challenge | focused-reviewer
@@ -11,4 +11,4 @@ result: <shape required by the check reference>
 remaining boundary: <none | exact unfinished coverage or blocker>
 ```
 
-`complete` means the selected check finished, or an optional check was not selected with its reason. `partial` names unfinished coverage. `blocked` names the missing input or access. Missing, partial, or blocked required checks prevent `ready`. Findings carry source anchors; do not add reading digests or line-count attestations. A 🔧 Operator proof result is evidence for the 🔎 Review Sidekick's proof-challenge check, never a review verdict.
+`complete` means the selected check finished, or an optional check was not selected with its reason. `partial` names unfinished coverage. `blocked` names the missing input or access. Missing, partial, or blocked required checks prevent `ready`. Findings carry source anchors; do not add reading digests or line-count attestations. A 🔧 Operator proof result is evidence for the 🔎 Reviewer Sidekick's proof-challenge check, never a review verdict.

@@ -24,9 +24,13 @@ Select the highest-risk operation and simulate:
 
 For each, identify authority, state transition, invariant, containment, recovery, idempotency/ordering rule, caller-visible outcome, and proof seam. A finding must name a concrete interleaving or failure path.
 
+When the operation's effect is visible outside it and a call can time out, be retried, or partly succeed, trace each ending the design gives it. Record a timeout after the request was sent as an unknown outcome, distinct from a definite failure, and compare it with the handling the design adopts for that ending. Require a pending state, or reconciliation against the system that knows whether the effect happened, only when the governing contract asks for it or a repeated or missed effect would break an accepted obligation ([decide every ending, and who knows the truth, before retries](../../../principle-design-for-failure/SKILL.md)).
+
+When two or more actors can touch the same state, name the invariant the design states and find the order of events that breaks it. Report a different completion order only when it breaks that invariant ([name the invariant, then find the interleaving that breaks it](../../../principle-design-for-concurrency/SKILL.md)).
+
 Good: the design says who detects failure, what state can remain, how retry/recovery behaves, and what proves the invariant.
 
-Bad: generic “retry,” “transaction,” “lock,” or “eventual consistency” language; cleanup without an owner; success emitted before its durable condition; cancellation treated as ordinary error.
+Bad: generic “retry,” “transaction,” “lock,” or “eventual consistency” language; cleanup without an owner; success emitted before its durable condition; cancellation treated as ordinary error; an unknown outcome traced as a definite failure.
 
 Calibration: do not invent product failure policy. When desired observable behavior is unspecified, route the missing obligation to `spec-design` and stop before choosing it.
 

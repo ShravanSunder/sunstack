@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Design for Concurrency
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Concurrency is how work stays fast and an interface stays responsive, so you want it. The cost is that once actors overlap (two workers, a retry and its original, a callback arriving late, a background task and the code that started it, two tabs) correctness depends on an order you don't control. Interleaving bugs are intermittent: they pass every test that runs in one order and appear under load or on a slower machine. Designing for concurrency means naming the invariant that must hold, finding the order of events that breaks it, preferring to remove the sharing over coordinating it, and ordering by signals, never by time. It copes with concurrency that exists or that you chose for a reason; it is not a reason to add locks.
 
 ## How to think it through
@@ -20,7 +22,7 @@ Concurrency is how work stays fast and an interface stays responsive, so you wan
 
 **Order by causal signals, never by time.** Wait on an event, a task handle, or a version, and never infer readiness from elapsed time. When an external system offers only reads (a status endpoint, no callback), poll its authoritative state with a deadline, backoff, cancellation, and a check that it is still the thing you started. In tests, hold a step open or drive a controllable clock to force the bad order; no wall-clock waits. Before choosing a debounce or throttle, find out the current state and when events arrive.
 
-**Every task has an owner.** Whoever starts background work tracks it, can cancel it cooperatively, and drains it on shutdown; close or await it before claiming the work is done. A fire-and-forget task that must finish is a lost write waiting to happen.
+**Every task has an owner.** Whoever starts background work tracks it, can cancel it cooperatively, and drains it on shutdown; close or await it before claiming the work is done. A fire-and-forget task that must finish can lose its write.
 
 **Bound it.** Fan-out gets a maximum concurrency. Identical work is deduplicated (refresh once per worktree, not once per open tab). Every wait on the hot path has a timeout and a cancellation path. When a producer is faster than its consumer (title updates during generation, a stream of test output), coalesce, batch, or chunk it.
 
@@ -47,4 +49,4 @@ When one actor owns the state and every completion order gives the same result, 
 - A background task nobody tracks, cancels, or drains.
 - Unbounded fan-out, or the same refresh started once per tab.
 
-For one operation's endings (a timeout, a partial result), use `principle-design-for-failure`; use both when a retry can overlap the original. For deciding which single part owns a piece of state, see `principle-one-owner-per-truth`.
+When one operation can end in a timeout or a partial result, decide what each ending leaves behind and which system knows whether the effect happened ([design for failure](../principle-design-for-failure/SKILL.md)); when a retry can overlap the original, use both. When you decide which single part owns a piece of state, name that owner and the operation the others call ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)).

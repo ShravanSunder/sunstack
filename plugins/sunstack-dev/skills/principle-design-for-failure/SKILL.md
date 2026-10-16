@@ -6,9 +6,11 @@ disable-model-invocation: true
 
 # Design for Failure
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 When your code reaches outside itself (a payment provider, another service, a queue, a database someone else reads), a call does not end two ways. It worked; it was rejected; it failed in a way worth retrying; it got partway; or **you don't know**. A timeout, a dropped connection, or a crash puts you in that last ending: the effect may have happened on the other side, may still be happening, or may never happen. "Unknown" is its own outcome. It is not a failure, and it is never a guessed success.
 
-Most expensive production bugs live in the unknown ending. Code written for "worked or failed" treats "don't know" as "failed" and does the thing again: a second charge, a duplicate email, a server created after the caller already gave up. Designing for failure means deciding what each ending looks like, and how the system gets back to a correct state, before you write the happy path. Retries, locks, and idempotency keys are answers; the endings are the question.
+Most expensive production bugs live in the unknown ending. Code written for "worked or failed" treats "don't know" as "failed" and does the thing again: a second charge, a duplicate email, a server created after the caller already gave up. Designing for failure means deciding what each ending looks like, and how the system gets back to a correct state, before you write the happy path. Choose retries, locks, and idempotency keys only after the endings are named.
 
 ## How to think it through
 
@@ -70,4 +72,4 @@ A pure calculation, or a read that is safe to repeat, cannot half-happen; its fa
 - A call or retry loop with no deadline.
 - Half-done work nobody owns, a rerun that assumes a clean start, or a health check that stays green while real operations fail.
 
-For modeling the endings as types the compiler checks, see `principle-types-are-communication`. When two actors can touch the same thing at once, also use `principle-design-for-concurrency`.
+When you model the endings as types the compiler checks, give each ending its own variant and make every caller handle each one ([types are communication](../principle-types-are-communication/SKILL.md)). When two actors can touch the same thing at once, also name what must stay true and find the order of events that breaks it ([design for concurrency](../principle-design-for-concurrency/SKILL.md)).

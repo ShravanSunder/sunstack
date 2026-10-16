@@ -36,21 +36,20 @@ Bad: prose labeled as a diagram, decorative boxes with no semantic owners, every
 
 ## Simplify
 
-For every heading, paragraph, list, table, component, interface, state, mechanism, and view, ask:
+Recheck the components, interfaces, states, and mechanisms chosen at target-composition selection against the finished artifact. Remove one that no longer serves an obligation, constraint, failure policy, or proof need, or that owns a truth another component already owns, and record the removal in the coverage report below.
+
+For every heading, paragraph, list, table, and view, ask:
 
 ```text
 which requirement/constraint/failure/proof need does it serve:
-what complexity does it hide:
-who consumes it:
-what breaks if deleted:
+who reads it:
+what that reader loses if it is deleted:
 ```
 
 Removal is valid only when it changes no human confirmation, correction, decision, trace, failure simulation, proof path, accepted-requirements coverage, or later authoritative lookup.
 
 Remove:
 
-- pass-through components and duplicate owners;
-- unused seams and premature concurrency;
 - process, review, or PR narration;
 - repeated companion ownership recitals;
 - obscure headings;
@@ -79,7 +78,7 @@ Choose the expression that fits the relationship:
 
 Make headings say what the human will learn, such as “How Each Requirement Works and How We Verify It,” rather than compressed workflow jargon.
 
-Remove an “Architecture documentation impact” section when it only lists post-implementation documentation or PR cleanup; route that work to planning or `docs-maintain`. Remove a “Design completion boundary” section when it only repeats acceptance, review, or planning gates. Preserve any actual system obligation and keep the useful readiness result—whether planning can proceed without inventing owners, interfaces, state, failure behavior, or proof seams—in the returned self-check.
+Remove an “Architecture documentation impact” section when it only lists post-implementation documentation or PR cleanup; route that work to planning or `docs-maintain`. Remove a “Design completion boundary” section when it only repeats acceptance, review, or planning gates. Preserve any actual system obligation, and keep in the returned self-check the readiness result that says whether planning can proceed without inventing owners, interfaces, state, failure behavior, or proof seams.
 
 ## Integration Self-Check
 

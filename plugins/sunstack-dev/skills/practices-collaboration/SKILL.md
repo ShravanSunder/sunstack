@@ -19,23 +19,25 @@ When discovery returns no project for the repository, no access, or several cand
 
 ## Seats by role
 
-Take the seat for your role on the thread you were given:
+Take the seat for your role on your work thread:
 
 | Role | Seat | Where |
 | --- | --- | --- |
 | 🦁 Lead | `orchestrator` | the coordination root and each execution root it commissions |
-| Implementation 🐒 Sidekick | `implementer` | its assigned execution root only |
-| 🔎 Review Sidekick | `reviewer` | the supplied root, only when posting is authorized |
-| Owner-requested 🦉 Advisor | `advisor` | the supplied root |
-| Research 🐒 Sidekick, 🛠️ Worker, 🔧 Operator, other contributors | `participant` | only with explicit posting authority |
+| 🐒 Implementer Sidekick | `implementer` | its assigned execution root only |
+| 🔎 Reviewer Sidekick | `reviewer` | the supplied root, only when posting is authorized |
+| 🦉 Advisor, commissioned by the Lead or opened by the owner | `advisor` | the supplied work thread, or the one found at entry |
+| 📚 Researcher, 🔬 Verifier, 🔧 Operator, other contributors | `participant` | only with explicit posting authority |
 
-A 🐒 Sidekick uses the execution root it was given and never opens a coordination root. A 🔎 Review Sidekick without posting authority returns its result to the commissioner. A 🛠️ Worker or 🔧 Operator keeps no trace, returns evidence to its owner, and posts only when the assignment grants it. When the seat you need is held by a predecessor session, report that to the orchestrator and join as `participant` if you must post; never post under another session's identity.
+When discovery returns `no-home: <gap>`, a 🦉 Advisor returns that exact gap to its commissioner, the Lead or the owner who opened it, and keeps advising. Every other Sidekick uses the execution root it was given, and no Sidekick opens a coordination root. A 🔎 Reviewer Sidekick without posting authority returns its result to the commissioner. A Worker, or an Operator in either form, keeps no trace, returns evidence to its owner, and posts only when the assignment grants it. When the seat you need is held by a predecessor session, report that to the orchestrator and join as `participant` if you must post; never post under another session's identity.
 
 When the commissioner supplies a visible title for a conversation you create or fork, apply exactly that title through the tool and verify the saved result. Do not compose titles yourself.
 
 ## Message or post
 
-A message to a separate session (another conversation or terminal on Codex, Claude Code, or Cursor) goes through Router: use the supplied exact SessionRef, discover it through Router when missing or ambiguous, then `message send`. Do not use host-native cross-session channels for that. Native messaging to your own in-session subagents and teammates is unchanged. An empty active-session list does not prove a session is gone.
+A follow-up message that changes what another session must deliver or decide states the new deliverable, the source it comes from and what stays out of scope. “Continue” is enough when nothing changed.
+
+A message to a separate session (another conversation or terminal on Codex, Claude Code, or Cursor) goes through Router: use the supplied exact SessionRef, discover it through Router when missing or ambiguous, then `message send`. Do not use host-native cross-session channels for that. Message your own in-session subagents and teammates natively. An empty active-session list does not prove a session is gone.
 
 Send a direct message when one session needs to act: an assignment, a request for attention, or an explicit reply to its sender. Post to the work thread when the content should outlive the conversation: decisions and reasons, evidence, proof outcomes, blockers, corrections, and checkpoints. A message that asks for work does not replace the thread post that records it. Contributors post as themselves and only within their assignment's communication authority; otherwise they return findings to the orchestrator. Correct a mistaken post with a new post that references it.
 
@@ -47,4 +49,6 @@ IF waiting on another agent's reply, result, or board activity, load `references
 
 Finishing an assignment means posting its outcome, evidence, and remaining work on its root. It does not resolve anything. Only a root's `orchestrator`, or an explicit successor, resolves it: after reading current activity and the linked execution outcomes, and checking that the whole integrated scope is finished. An implementer reports completion or handback on its execution root and never resolves the coordination root. A session ending, a blocked assignment, or one finished contribution leaves the work unresolved. If authorized work belongs in a resolved thread, read why it was resolved and unresolve it explicitly before posting; do not open a duplicate thread.
 
-Complete when the work thread or `no-home: <gap>` is known and returned, every post and message went to the right root under your own identity and seat, any wait has a named listener, wake, or gap, and no thread was resolved by a session that does not hold its `orchestrator` seat.
+When you hold the root's `orchestrator` seat, or are its explicit successor, and are about to resolve it, name the check that covered the slices together, or the obligation still open ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Two green slices do not establish that their shared contract works together.
+
+Complete when the work thread or `no-home: <gap>` is known and returned, every post and message went to the right root under your own identity and seat, any wait has a named listener, wake, or gap, no thread was resolved by a session that does not hold its `orchestrator` seat, and no root was resolved with an obligation still open.

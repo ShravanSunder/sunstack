@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # One Owner per Truth
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Every truth in a system (a status, a balance, a setting, an identity, a lifecycle, a side effect) needs exactly one place that decides it. Others read it, cache it with a stated refresh rule, or ask the owner to change it; they don't write it themselves. When two parts write the same truth, they eventually disagree, and the bug looks like flicker, lost updates, or "it reverted itself". The same goes for contracts: what callers may rely on is written down in one place, or it becomes whatever the current code happens to do, and each caller depends on a different accident. And stored data needs an owner for its meaning, because data outlives the code that wrote it.
 
 ## How to think it through
@@ -26,7 +28,7 @@ Every truth in a system (a status, a balance, a setting, an identity, a lifecycl
 
 ## Example: the comments that flickered
 
-An editor saved comment drafts locally and also synced posted replies from the server, and both wrote the same comment list. Typing a reply made saved comments flicker as each writer overwrote the other. Better: the server owns posted comments; the draft store owns only unposted drafts, kept apart; the view merges the two when it reads. One writer per truth, and the flicker is gone by construction.
+An editor saved comment drafts locally and also synced posted replies from the server, and both wrote the same comment list. Typing a reply made saved comments flicker as each writer overwrote the other. Better: the server owns posted comments; the draft store owns only unposted drafts, kept apart; the view merges the two when it reads. Each list now has one writer, so the flicker cannot recur.
 
 IF the case in front of you doesn't match the comment example, or you are reviewing who owns what in someone else's design, load `references/example_scenarios.md` (scenarios, simplest first: the schema written twice; two services, one status; two contracts in conflict; whose identity?; a required field with no version bump; the field one side didn't know; the menu nobody owned; the delete that skipped the owner) and return the closest scenario and how its move applies to your case.
 
@@ -43,4 +45,4 @@ When one owner and one caller contract are already explicit and no second writer
 - Stored values whose meaning changed with no migration or version.
 - Behavior placed in a component that can't perform it, like a context menu attached to a view whose native host swallows the click.
 
-For how the parts are cut, see `principle-separate-the-concerns`. For the contract's shape as types, see `principle-types-are-communication`. When two actors must share one truth at the same time, also use `principle-design-for-concurrency`.
+When the question is how the parts are cut, name each part's job and the seams where its dependencies come in ([separate the concerns](../principle-separate-the-concerns/SKILL.md)). When you give the contract its shape as types, model each state as a variant and parse once at the boundary ([types are communication](../principle-types-are-communication/SKILL.md)). When two actors must share one truth at the same time, also find the order of events that breaks the owner's invariant ([design for concurrency](../principle-design-for-concurrency/SKILL.md)).

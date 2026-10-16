@@ -6,11 +6,13 @@ disable-model-invocation: true
 
 # Justify the Complexity
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Every abstraction justifies the complexity it introduces. Each layer, option, mechanism, and second path costs reading, testing, and maintenance for as long as it exists, and a speculative one usually guesses the future wrong. Complexity is right when an outcome needs it now; "we might need it" is not an outcome. The discipline is a double-check before you add something and before you keep it: what breaks without it, and does something simpler, or something that already exists, do the job? Subtract first. The simplest base that works is the easiest one to change when the real need arrives.
 
 ## How to think it through
 
-**Map every piece to the outcome that needs it.** For each component, layer, option, dependency, and mechanism in the design or the diff, name the requirement or obligation that asks for it. If there is none, the honest label is "absent": cut it, or raise it with the owner as a question. A piece that is well built but unasked for is still unasked for.
+**Map every piece to the outcome that needs it.** For each component, layer, option, dependency, and mechanism in the design or the diff, name the requirement or obligation that asks for it. If there is none, the honest label is "absent": cut it, or raise it with the owner as a question. Being well built does not make a piece asked for.
 
 **Look for the existing path before building a new one.** The product's existing integration pattern, the common code path, an established library or parser, what the platform already provides. A one-off path built for one case drifts from the supported one and doubles what has to be maintained.
 
@@ -49,4 +51,4 @@ When a layer owns a policy or a lifecycle, hides substantial behavior, or provid
 - A wrapper with one caller that forwards data unchanged and adds no rule, lifecycle, or check, yet has to be traced to understand the call.
 - A cleanup that also deletes tests or helpers a remaining feature still needs.
 
-When the question is where a boundary belongs, use `principle-separate-the-concerns`. When several options each meet the need and the question is which cost to accept, use `principle-name-the-tradeoffs`. To check the requirements themselves rather than the mechanisms, use `principle-hold-the-scope`.
+When the question is where a boundary belongs, name each part's job and its reason to change ([separate the concerns](../principle-separate-the-concerns/SKILL.md)). When several options each meet the need and the question is which cost to accept, compare what each costs and who pays, then recommend one ([name the tradeoffs](../principle-name-the-tradeoffs/SKILL.md)). When you check the requirements themselves rather than the mechanisms, trace each one to an owner line or a constraint that forces it ([hold the scope](../principle-hold-the-scope/SKILL.md)).

@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Prove It Works
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 A passing test proves only what it observes. Proof is the feature working through the real entry point, observed where the user would see it. The two get conflated all the time, and most "done but broken" lives in the gap between them: the configuration, the wiring, the provider production selected, the layout at a real size, the installed package, the full window transition. A unit test crosses none of those. Done means the agreed feature works through its real path, the required checks pass, and whatever is still unverified is named.
 
 ## How to think it through
@@ -24,7 +26,7 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **Match the proof to the claim, without repeating yourself.** An automated test that drives the real path (an integration test, one of a few end-to-end journeys) can be the proof. Use a manual check for what the suite doesn't establish. A docs or config change needs only the smallest real check. Don't repeat an equivalent validation unless something changed.
 
-**Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both. A focused green is not "the build is green".
+**Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both, and never call the focused green "the build is green".
 
 **Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried: "The reconnect fix goes red to green in focused tests; the deployed beta path hasn't been exercised, so that claim stays open." And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
 
@@ -51,4 +53,4 @@ Pure domain logic with no entry point, viewport, or journey is proven by a focus
 - A focused result reported as the whole suite.
 - A required check weakened, skipped, or disabled to get green.
 
-Designing a test that fails when the behavior is wrong is `principle-write-tests-that-can-fail`; one automated real-path test can serve both. Judging whether an observation supports the claim made from it is `principle-verify-before-accepting`.
+When you design a test that fails when the behavior is wrong, name the wrong behavior and see the test fail on it ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md)); one automated real-path test can serve both. When you judge whether an observation supports the claim made from it, match the observation to that claim, its version and its target ([verify before accepting](../principle-verify-before-accepting/SKILL.md)).

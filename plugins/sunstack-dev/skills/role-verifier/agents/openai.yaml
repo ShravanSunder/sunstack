@@ -1,0 +1,6 @@
+interface:
+  display_name: "Role: Verifier"
+  short_description: "Observe adopted outcomes and challenge proof"
+  default_prompt: "Use $role-verifier to observe the declared target against the adopted reference and report what it shows and what stays open."
+policy:
+  allow_implicit_invocation: true

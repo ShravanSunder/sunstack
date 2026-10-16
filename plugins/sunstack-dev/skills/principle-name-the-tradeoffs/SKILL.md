@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Name the Tradeoffs
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Every design decision is a tradeoff: you gain something, you pay for it, and somebody bears the cost. The dangerous tradeoffs aren't the ones you discuss; they're the ones you don't realize you're making. An implicit assumption is a load-bearing wall nobody labeled. Naming the tradeoff means putting the real alternatives side by side as changes to the current design, being concrete about what each costs ("simpler" and "cleaner" are not costs), saying out loud the assumption the choice leans on, and then recommending one. The goal is a comparison someone can decide from.
 
 ## How to think it through
@@ -49,4 +51,4 @@ When one feasible option meets the settled requirements and no assumption would 
 - A one-way door decided in passing, or a reversible choice escalated to the owner for no reason.
 - A workaround with no stated reason or end.
 
-When the question is whether a mechanism is needed at all, use `principle-justify-the-complexity`. When running something would settle the question faster than comparing, use `principle-experiment-before-proposing`.
+When the question is whether a mechanism is needed at all, name the outcome that needs it now ([justify the complexity](../principle-justify-the-complexity/SKILL.md)). When running something would settle the question faster than comparing, write the deciding result and run it ([experiment before proposing](../principle-experiment-before-proposing/SKILL.md)).

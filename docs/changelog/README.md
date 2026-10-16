@@ -1,5 +1,11 @@
 # Changelog
 
+- [2026-10-16 Verification practices, role relationships and phase composition](2026-10-16-verification-roles-phases.md)
+- [2026-10-15 How and why practices](2026-10-15-how-why-practices.md)
+- [2026-10-15 Principle citation grammar](2026-10-15-principle-citation-grammar.md)
+- [2026-10-14 Standalone role skills](2026-10-14-role-skill-promotion.md)
+- [2026-10-14 Practice and principle composition](2026-10-14-practice-principle-composition.md)
+- [2026-10-13 practices-manage-agents: roles, forms and typed packets](2026-10-13-practices-manage-agents.md)
 - [2026-10-12 Work-trail log homes](2026-10-12-work-trail-log-homes.md)
 - [2026-10-12 Rename to sunstack](2026-10-12-rename-sunstack.md)
 - [2026-10-12 Principles humanizer pass](2026-10-12-principles-humanizer-pass.md)

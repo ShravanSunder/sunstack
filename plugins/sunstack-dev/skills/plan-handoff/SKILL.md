@@ -59,6 +59,6 @@ IF writing the handoff artifact or copy-paste prompt, load `references/handoff-t
 - The obligation/slice/proof mapping is omitted, forcing the next agent to infer how the plan will be proven.
 - The handoff drops evidence sources, freshness guards, or parent-owned verification, letting the next agent treat delegated evidence as completion.
 - The handoff changes the plan record, upgrades `plan-only`, or omits the governing basis or delivery context.
-- The packet silently promotes an implementer, reviewer, 🐒 Sidekick, or future session into plan author without the named successor, transferred scope, and explicit user direction.
+- The packet silently promotes an implementer, reviewer, other Sidekick, or future session into plan author without the named successor, transferred scope, and explicit user direction.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.

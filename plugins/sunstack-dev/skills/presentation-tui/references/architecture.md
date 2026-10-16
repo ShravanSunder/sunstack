@@ -11,11 +11,11 @@ with ownership or flow labels on the edges that carry it.
 
 See also:
 
-  ▸ SKILL.md — core rules, canvas-width discipline, shape vocabulary
-  ▸ ../../../shared-references/diagram-semantics.md — map first, then selected slice; choose topology vs. flow vs. 2D map
-  ▸ shape-catalog.md ──► Shape 5 (Pipeline box) — bordered pipeline with numbered steps; Shape 6 (State diagram) — full state-machine worked example
-  ▸ build-discipline.md ──► Alignment recipes — positioning lifelines, arrow landings, junction characters
-  ▸ sequence-and-state.md — state machines, sequence diagrams, decision trees, event timelines
+  ▸ SKILL.md: core rules, canvas-width discipline, shape vocabulary
+  ▸ ../../../shared-references/diagram-semantics.md: map first, then selected slice; choose topology vs. flow vs. 2D map
+  ▸ shape-catalog.md ──► Shape 5 (Pipeline box), a bordered pipeline with numbered steps; Shape 6 (State diagram), a full state-machine worked example
+  ▸ build-discipline.md ──► Alignment recipes: positioning lifelines, arrow landings, junction characters
+  ▸ sequence-and-state.md: state machines, sequence diagrams, decision trees, event timelines
 
 
 ─── Canonical path first ────────────────────────────────────────────
@@ -30,7 +30,7 @@ user asks
   ──► terminal surface renders readable structure
 ```
 
-After the spine is clear, add one branch or failure state.
+After the spine is clear, add one branch or failure outcome.
 
 
 ─── Boundary / ownership map ────────────────────────────────────────
@@ -45,7 +45,7 @@ Use topology when the question is "who owns what?"
        └──────────────────────────────────────────┘
 ```
 
-Keep ownership labels on arrows.  Do not imply a data flow where the real point is responsibility.
+Keep ownership labels on arrows.  Do not imply a data flow where the point is responsibility.
 
 
 ─── Two-axis map ────────────────────────────────────────────────────
@@ -96,7 +96,7 @@ Bidirectional flow with labels on both directions.
    └─────────┘ └────────┘ └─────────┘
 ```
 
-One producer, multiple consumers.  Fan-out via ├──┬──┐ junction.
+One producer feeds multiple consumers through a ├──┬──┐ fan-out junction.
 
 
 ─── Layered stack ───────────────────────────────────────────────────
@@ -117,7 +117,7 @@ One producer, multiple consumers.  Fan-out via ├──┬──┐ junction.
  └──────────────────────────────────────┘
 ```
 
-Stacked rectangles sharing borders.  Each layer labeled and briefly described.
+Stacked rectangles share borders, and each layer is labeled and briefly described.
 
 
 ─── Pipeline with branches ──────────────────────────────────────────
@@ -150,4 +150,4 @@ Main path horizontal, branch drops down on condition.
    │               │── cache ──    │            │
 ```
 
-Time flows down.  Lifelines vertical.  Dashed tail for async post- response work.
+Time flows down and lifelines are vertical.  The dashed tail marks async post-response work.

@@ -8,13 +8,13 @@ Expected inputs: the complete review context, complete current target set, compl
 
 Prerequisites: the complete target set, governing-source coverage, confirmed goal boundary and accepted requirements set, plus structural-realization confirmation for `program-only` or `three-artifact-design`, are complete and unambiguous.
 
-Check boundary: read-only. This check may recommend `ready | needs-revision | blocked | decision-needed`; it may not issue the 🔎 Review Sidekick verdict, edit, remediate, plan, mutate lifecycle, or accept.
+Check boundary: read-only. This check may recommend `ready | needs-revision | blocked | decision-needed`; it may not issue the 🔎 Reviewer Sidekick verdict, edit, remediate, plan, mutate lifecycle, or accept.
 
 ## Method
 
-MUST load `../reviewing-common-method.md` and apply its baseline inspection procedure, coverage requirements, dependency order, common result fields, and stop boundary during the combined inspection.
+MUST load `../reviewing-common-method.md` and return its common result fields, applying its baseline inspection procedure, coverage requirements, dependency order, and stop boundary during the combined inspection.
 
-MUST load exactly one selected mode reference and apply its mode-specific judgment dimensions, ownership routes, and completion condition during that same inspection:
+MUST load exactly one selected mode reference and return its judgment on each mode-specific dimension, applying its ownership routes and completion condition during that same inspection:
 
 ```text
 specification-only -> ../reviewing-specification.md
@@ -30,7 +30,7 @@ Good: every mode dimension is `required`, `satisfied by the existing system`, `n
 
 Bad: sampling sections, trusting summaries, treating every review category as mandatory architecture, proofreading, or recommending readiness despite incomplete required coverage.
 
-Overlap boundary: focused checks may deepen one risk; the 🔎 Review Sidekick alone owns the final coverage-bound verdict.
+Overlap boundary: focused checks may deepen one risk; the 🔎 Reviewer Sidekick alone owns the final coverage-bound verdict.
 
 Return: a check `complete | partial | blocked` result with full mode evidence, reader reconstruction, deletion-pass result, candidate findings, what held, gaps, and candidate recommendation.
 

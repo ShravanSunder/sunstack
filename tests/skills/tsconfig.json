@@ -10,13 +10,19 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "types": ["node", "vitest/globals"]
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node", "vitest/globals"],
+    "paths": {
+      "zod@4.6.5": ["./node_modules/zod"]
+    }
   },
   "include": [
     "lib/**/*.ts",
     "evals/**/*.ts",
     "fixtures/**/cases.ts",
     "pressure-scenarios/**/cases.ts",
-    "vitest.config.ts"
+    "vitest.config.ts",
+    "../../plugins/sunstack-dev/skills/*/schemas/**/*.ts"
   ]
 }

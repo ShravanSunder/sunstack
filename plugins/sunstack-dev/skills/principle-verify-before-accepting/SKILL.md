@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Verify Before Accepting
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Accepting a result is a claim that the evidence supports a conclusion. Most false "done"s rest on real evidence for a different claim: a green run on an older commit, a unit test offered as proof of runtime behavior, a summary of a run nobody read, a true quote that doesn't say what it's cited for, a structural check offered as proof that the content is right. A false "done" costs more than any other failure, because everyone downstream has to verify everything again. Verifying means checking that this evidence establishes this conclusion, at this version, and was observed rather than reported. That holds whether the result came from a helper, a reviewer, a CI run, or your own reasoning.
 
 ## How to think it through
@@ -14,7 +16,9 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Check that the evidence observes the claimed thing.** A unit pass doesn't prove runtime behavior; a clean lint doesn't prove it compiles; valid frontmatter doesn't prove a skill teaches; a green suite that never touches the changed module proves nothing about the change. Ask what the evidence could have caught, and whether that includes the failure you care about.
 
-**Check the version and the place.** Is the evidence from the head the claim is about, in the checkout or worktree it should be, against what is deployed? A result from the wrong commit or the wrong directory is evidence about something else.
+**Check the version, the place and the dependencies of the claim.** Identify the observed build or source, configuration, client and exercised path. Inspect what changed in those dependencies before reusing the observation. A newer commit does not by itself invalidate prior evidence; an unrelated prose edit need not trigger another app journey. Equal source alone proves no delivery: an installed binary, route or provider configuration may differ even when the checkout does not. Reuse an observation only where what it depended on and the target it ran against still match; name what still needs observing.
+
+The same goes for reviews: a wording-only edit keeps an earlier review valid; an edit that changes what is required needs that part re-reviewed. A review never counts as a test run.
 
 **Read it; don't count it.** Open the log, the output, the diff. A summary, a receipt, a link, a reviewer's agreement, someone's confidence, or a finding's severity is not evidence of the thing itself. When you assign proof work, ask for persistent logs and check that they exist: "The helper reports the commands succeeded, but the raw logs it was asked for don't exist, so those receipts can't close the runtime proof." Prefer "run this" to "trust me".
 
@@ -28,13 +32,13 @@ Accepting a result is a claim that the evidence supports a conclusion. Most fals
 
 **Before calling something ready, say the risk.** What could go wrong if this merged today, and what is the worst thing that could break?
 
-**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that proves the claim, not ceremonial gates that prove nothing extra.
+**The hard call is your own conclusion.** It gets the same check; confidence is not evidence. And keep it proportionate: require the evidence that proves the claim, not ceremonial checks that prove nothing extra.
 
 ## Example: the green run on the wrong commit
 
 A helper reported "all tests pass, ready for review" with a CI link. The run was green, but it ran on the commit before the helper's last change, and the suite never touched the changed module. Accepting it would have sent unproven behavior to review. Better: match the run to the head, check that the suite exercises the change, and read the diff. The claim narrows to "the earlier commit is green; the current change is unproven".
 
-IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios, simplest first: the review finding that was wrong; summaries without logs; fixed in CI?; a second harness; proof from the wrong checkout; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
+IF the case in front of you doesn't match the green-run example, or you are reducing someone else's findings or proof, load `references/example_scenarios.md` (scenarios, simplest first: the review finding that was wrong; summaries without logs; fixed in CI?; a second harness; proof from the wrong checkout; reuse after prose, recheck after routing; "Ready" on structural checks) and return the closest scenario and how its move applies to your case.
 
 ## When it doesn't apply
 
@@ -49,4 +53,4 @@ When there is no result or claim to accept, there is nothing to check. Don't re-
 - A pull request called merge-ready with no word on the worst thing it could break.
 - A structural or static check reported as proof of behavior.
 
-Gathering the evidence in the first place is `principle-read-ground-truth-first`. Producing evidence that the feature works end to end is `principle-prove-it-works`.
+When you gather the evidence in the first place, read the decisive source and label each claim seen, inferred, or guessed ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). When you produce evidence that the feature works end to end, drive it through its real entry point and look where the user would ([prove it works](../principle-prove-it-works/SKILL.md)).

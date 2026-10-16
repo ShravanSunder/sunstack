@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 # Define the Domain First
 
+Read this principle in full before applying it; your own full read earlier this session counts.
+
 Before structure, decide what the things are. Every system has a handful of nouns that carry its meaning (an order, a run, a reminder, a session), and each one needs three answers: what it refers to, what makes two of them the same thing, and what states it moves through. Get these right and the types, tables, keys, and APIs mostly follow. Get them wrong and the structure faithfully encodes the confusion: duplicates that should have merged, merges that should have stayed apart, a status that means two things. Names are promises. `processData` is a lie; `classifyBillsByVendorCategory` is a promise. Fixing a meaning early is a rename; fixing it after it is in stored data is a migration.
 
 ## How to think it through
@@ -45,4 +47,4 @@ When an authoritative glossary or contract already fixes a term and nobody uses 
 - A function whose name hides its effect: `read_stored_thread` that starts a subscription, `open` that also migrates.
 - A cache that never hits, or a dedup that never matches, because its key includes something that changes while the thing itself doesn't (a revision number on unchanged content).
 
-To make these states and identities into types the compiler checks, use `principle-types-are-communication`. To decide which part owns and writes each one, use `principle-one-owner-per-truth`.
+When you turn these states and identities into types the compiler checks, give each state its own variant carrying what it needs ([types are communication](../principle-types-are-communication/SKILL.md)). When you decide which part owns and writes each one, name the one part that decides it and what the others may only read ([one owner per truth](../principle-one-owner-per-truth/SKILL.md)).

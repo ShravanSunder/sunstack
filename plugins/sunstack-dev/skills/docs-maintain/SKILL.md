@@ -7,7 +7,7 @@ description: "Use when updating, cleaning up, reconciling, archiving, or promoti
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-Maintain docs as durable working memory for humans and agents. This skill owns document lifecycle: keeping repo docs, `AGENTS.md`, `README.md`, changelogs, runbooks, architecture docs, and existing workflow artifacts aligned with current code and decisions.
+Maintain docs as durable working memory for humans and agents. This skill owns document lifecycle: keeping repo docs, `AGENTS.md`, `README.md`, changelogs, runbooks, architecture docs, and existing workflow artifacts consistent with current code and decisions.
 
 Core pipeline:
 
@@ -32,11 +32,11 @@ docs request
    - specs, plans, debug notes, research packets, and handoffs are stage artifacts until this skill classifies them as durable, archived, or disposable.
 - Keep `AGENTS.md` short. Move runbook detail to docs and link it.
 - Do not let old plans/specs/debug notes displace current source-of-truth docs by inertia.
-- Do not replace phase skills for active artifact work: `spec-design`, `program-design`, `spec-program-review`, `spec-handoff`, `plan-handoff`, `implementation-handoff`, `implementation-review` for implementation review, `implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners rather than retired workflows.
+- Do not replace phase skills for active artifact work: `spec-design`, `program-design`, `spec-program-review`, `spec-handoff`, `plan-handoff`, `implementation-handoff`, `implementation-review` for implementation review, `implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
 - Before purging or rewriting docs, propose the change and say what will be preserved.
 - When code and docs disagree, identify the driver and, IF it is not obvious, load `../../shared-references/owner-decision-brief.md` and return a brief of both versions.
-- The parent owns final doc edits; bounded inventory or stale-doc research goes to a 🛠️ Worker through `manage-agents`.
-- Use `manage-agents` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
+- The parent owns final doc edits; bounded inventory goes to a 🔧 Operator and stale-doc research to a 📚 Researcher Worker, through `practices-manage-agents`.
+- Use `practices-manage-agents` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
 - Use progressive disclosure: load only the workflow reference that matches the docs job.
 
 ## Workflow
@@ -81,11 +81,11 @@ docs request
 
 ## Progressive Disclosure
 
-- Load `references/doc-roles.md` before deciding where content belongs.
-- Load `references/workflows.md` for create, update, cleanup, and discrepancy workflows.
-- Load `references/staleness-and-purge.md` before deleting, archiving, or rewriting stale plans/specs.
-- Load `references/changelog-runbooks.md` when adding `docs/changelog` or reference excerpts.
-- Load `../../docs/source-inspiration-catalog.md` only when auditing or updating workflow skills against admired upstream sources.
+- Before deciding where content belongs, MUST load `references/doc-roles.md` and return the file or folder it belongs in.
+- IF the job is a create, update, cleanup, or discrepancy workflow, load `references/workflows.md` to follow that workflow and return the changes made or proposed.
+- Before deleting, archiving, or rewriting stale plans/specs, MUST load `references/staleness-and-purge.md` and return its Proposal Shape filled for each candidate.
+- IF adding `docs/changelog` or reference excerpts, load `references/changelog-runbooks.md` and return the changes made and the links updated.
+- IF auditing or updating workflow skills against admired upstream sources, load `../../docs/source-inspiration-catalog.md` and return the changes made or proposed.
 
 ## Output Shape
 
