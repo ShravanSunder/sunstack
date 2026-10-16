@@ -16,6 +16,8 @@ Every abstraction justifies the complexity it introduces. Each layer, option, me
 
 **Look for the existing path before building a new one.** The product's existing integration pattern, the common code path, an established library or parser, what the platform already provides. A one-off path built for one case drifts from the supported one and doubles what has to be maintained.
 
+**Follow the codebase's own conventions.** How it validates input, handles errors, structures tests, and names things is an existing path as much as a library it already uses. Writing your preferred library, pattern, or style beside it makes a second path, and preference is not an outcome, so the codebase wins. A handler validated with a different library from the rest of the repo means every later change to validation has to handle two. When the codebase itself holds two conflicting patterns, follow the one its configuration sets, such as a lint rule or a formatter setting, and say which one you followed; when nothing settles it, raise it with the owner rather than picking one silently or adding a third. When the convention is itself a defect, follow it and write the defect down for later, unless the agreed work can't be delivered without fixing it; then make the smallest repair at its owning boundary ([hold the scope](../principle-hold-the-scope/SKILL.md)).
+
 **Subtract before you add.** Remove dead code, redundant paths, and decisions repeated in several places, then build on the simpler base. Put a repeated decision in one place and pass its result along.
 
 **Know what an abstraction has to give.** It earns its place when it removes something (branches, duplicated rules, states that shouldn't exist, lifecycle risk) or provides a real seam (an external dependency to replace in a test, a process or trust boundary). An abstraction that adds indirection and gives none of those is the one to cut.
@@ -44,6 +46,7 @@ When a layer owns a policy or a lifecycle, hides substantial behavior, or provid
 
 - A mechanism no current requirement needs, added or kept "in case", like steering and spooling machinery a protocol no longer uses.
 - An old path still running next to the new one, a compatibility shim, or a flag for a gradual migration.
+- A second library, pattern, or style for something the codebase already does one way, chosen by preference.
 - An option nobody sets, or an abstraction with one implementation that removes nothing and serves no seam.
 - A rewrite proposed before anyone measured where the cost is, like a storage-engine rewrite for CPU a driver's lock wait was burning.
 - A home-grown container or service locator where passing dependencies as arguments would do.

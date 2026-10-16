@@ -24,11 +24,11 @@ A passing test proves only what it observes. Proof is the feature working throug
 
 **Script it when you can.** A rerunnable check whose output is kept is stronger than a one-time look, because a reviewer can run it again instead of trusting your word.
 
-**Match the proof to the claim, without repeating yourself.** An automated test that drives the real path (an integration test, one of a few end-to-end journeys) can be the proof. Use a manual check for what the suite doesn't establish. A docs or config change needs only the smallest real check. Don't repeat an equivalent validation unless something changed.
+**Match the proof to the claim, without repeating yourself.** An automated test that drives the real path (an integration test, one of a few end-to-end journeys) can be the proof. Use a manual check for what the suite doesn't establish. A smoke check starts the real surface and drives its essential behavior, so a run against mocks or fake integrations isn't one. A short journey can be the smoke check, but a passing smoke check shows the system starts and runs, not that the feature works. Docs, config, prompt-only, generated, and throwaway work needs only the smallest real check. Don't repeat an equivalent validation unless something changed.
 
 **Keep the scoped result apart from the whole.** Seven focused tests passing while the full suite still fails is two results, so report both, and never call the focused green "the build is green".
 
-**Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried: "The reconnect fix goes red to green in focused tests; the deployed beta path hasn't been exercised, so that claim stays open." And never weaken, skip, or disable a required check to get a pass; if it can't pass, say why.
+**Name what is still unverified:** stubs and stand-ins, layers not exercised, environments not tried: "The reconnect fix goes red to green in focused tests; the deployed beta path hasn't been exercised, so that claim stays open." And never delete, weaken, skip, or disable a required check (the repo's, the spec's, or the plan's) to get a pass unless the owner has explicitly approved it and the reason is written down; if it can't pass, say why.
 
 **When the real path isn't reachable from where you are** (it needs a device, a login, production access), use the closest thing through the same entry point, such as a test mode or a staging account. Name exactly what that leaves unverified, and give the owner the exact steps to check the rest themselves.
 
@@ -51,6 +51,6 @@ Pure domain logic with no entry point, viewport, or journey is proven by a focus
 - Screenshots from a different viewport, build, or environment than the claim.
 - Stubs and stand-ins not named as unverified.
 - A focused result reported as the whole suite.
-- A required check weakened, skipped, or disabled to get green.
+- A required check deleted, weakened, skipped, or disabled to get green, with no owner approval on record.
 
 When you design a test that fails when the behavior is wrong, name the wrong behavior and see the test fail on it ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md)); one automated real-path test can serve both. When you judge whether an observation supports the claim made from it, match the observation to that claim, its version and its target ([verify before accepting](../principle-verify-before-accepting/SKILL.md)).
