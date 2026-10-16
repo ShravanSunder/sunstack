@@ -3,7 +3,7 @@
 `sunstack-dev` 2.79.0 → 2.80.0, `skill-authoring` 0.2.0 → 0.3.0.
 
 - `practices-verification` (new): observes a declared behavior on its real target through the project's own `verify-<app>` skill, and keeps action and result evidence.
-- `practices-verification-maintenance` (new): creates and maintains that project skill under `.agents/skills/verify-<app>/` with a relative `.claude/skills` link and a write-path containment check. Adapted from Pstack (MIT, see its NOTICE).
+- `practices-verification-maintenance` (new): creates and maintains that project skill under `.agents/skills/verify-<app>/` with a relative `.claude/skills` link and a write-path containment check. Adapted from Pstack's `create-verification-skill` and `maintain-verification-skill`.
 - Roles: `working-with-*` references for each relationship (the Lead with each role, the Implementer and Verifier with each other through `shared-references/implementer-verifier-pairing.md`, the Reviewer and Advisor with the Lead, the Advisor with the owner, the Researcher with the Operator). One Reviewer covers design, spec, code and skill review. The owner can open the Advisor directly.
 - Phases: nine phases cite principles at the decisions they inform. `implement-plan` observes through `practices-verification`. The two review phases share `shared-references/review-proof-command-execution.md`.
 - `practices-manage-agents` and `practices-collaboration`: a review lead may start its stage reviewers, and the owner may open the Advisor. Models, forms and schemas are unchanged.

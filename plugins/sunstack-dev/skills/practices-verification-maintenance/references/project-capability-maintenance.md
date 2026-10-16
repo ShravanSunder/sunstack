@@ -8,7 +8,7 @@ Return: drift for each journey with its anchors, the corrections made, the journ
 
 ## Edit scope
 
-Edit only the skill's own directory (its `SKILL.md`, its journey files and the helpers it owns) and its Claude link. When the app no longer does what the skill describes, either the skill drifted and you correct it, or the product regressed and you report it. The adopted source decides which.
+Edit only the skill's canonical directory (its `SKILL.md`, journey files and owned helpers) and its Claude link. When the app no longer does what the skill describes, either the skill drifted and you correct it, or the product regressed and you report it. The adopted source decides which.
 
 ## Read the whole skill
 
@@ -23,19 +23,19 @@ Measure drift against the adopted source. When the source and the skill disagree
 ## Reconcile
 
 - Check that every journey in coverage has its summary from the source pass.
-- Merge overlapping recipes into as few app states as practical, so the live pass doesn't relaunch for each journey.
+- Where recipes overlap, combine them so several journeys run from one app state. Keep the number of states as small as practical, so the live pass doesn't relaunch for each journey.
 - Open the anchor behind each drift claim before acting on it. Claims the source pass found clean need no second proof.
 - Look for user-facing surfaces the skill doesn't cover among the changes since the skill last changed. `git log -1 --format=%H -- .agents/skills/verify-<app>` gives that commit, and `git log --oneline <commit>..HEAD -- <app source paths>` lists the app changes after it. Call a surface missing only with a concrete source path. Add it when the request covers it, and otherwise report it as a candidate journey.
 
 ## Live pass
 
-The live pass runs through `practices-verification` at step 4 and follows the project skill's own launch model: one long-lived instance driven in order for a server or a UI, or a fresh isolated session for each drive of a short-lived CLI. One agent does all the driving. Hold these for the whole pass, whatever fails:
+The live pass runs through `practices-verification` at step 4 and uses the launch model the project skill defines. A server or a UI gets one long-lived instance that the drives use in turn, and a short-lived CLI gets a new isolated session for every drive. One agent does all the driving. Hold these for the whole pass, whatever fails:
 
-1. Run the health check before the first drive, on each fresh session and after any failed drive. When the health check can't see the failure, such as a wedged UI on a healthy process, reset to a known state or relaunch before driving again.
-2. Evidence captured so far survives every cleanup. Check it at its named location.
-3. Nothing a drive started outlives its use. Clean failed-attempt residue whether the session is stuck, exited or shared. For a shared instance, clean the residue and leave the instance running.
+1. Run the health check before the first drive, on each fresh session and after any failed drive. When a failure doesn't show in the health check, as with a stuck UI whose process stays healthy, relaunch or restore a known state before the next drive.
+2. Every cleanup leaves the evidence gathered so far intact. Open it at its named location to confirm.
+3. Remove what a drive started once nothing needs it. Clean up after every failed attempt, including one whose session is stuck, has exited or is shared. On a shared instance, remove what the attempt left and keep the instance running.
 
-A health-check failure caused by drift in the skill is drift. Correct it within the edit scope, restart only what the correction invalidated, and retry once before calling the pass blocked. A journey counts as unreachable only with the concrete prerequisite (auth, entitlement, OS, external state) and the route you tried, and when the skill doesn't name that prerequisite, the omission is drift. Do the final teardown after the last drive of the run, including the drives that re-check corrections.
+When the health check fails because the skill drifted, the failure counts as drift. Correct the skill within the edit scope, restart only what the correction invalidated and retry once; if the retry fails too, the pass is `blocked`. Call a journey unreachable only when you can name the specific prerequisite that stops it, such as auth, an entitlement, an OS or external state, along with the route you tried. A prerequisite the skill doesn't mention is drift in the skill. Leave the final teardown until every drive in the run is done, including the drives that re-check corrections.
 
 ## Triage
 
@@ -54,9 +54,9 @@ A repaired helper follows the helper rules in the layout reference.
 
 - `clean`: every journey in coverage has its source pass and a live observation or applicable reuse, and nothing needed changing. Nothing to commit.
 - `changed`: corrections were made, and each was driven again.
-- `blocked`: coverage couldn't finish or a correction couldn't be proven. Say exactly what blocked it.
+- `blocked`: coverage stopped short, or a correction couldn't be proven. Name exactly what stopped it.
 
-Keep short run notes (journeys covered, unreachable prerequisites, confirmed drift, outcome) in scratch or the task's existing evidence home, outside the skill.
+Write short run notes in scratch or the task's existing evidence home, outside the skill: the outcome, the journeys covered, the drift you confirmed and any unreachable prerequisites.
 
 ## Example
 

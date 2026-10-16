@@ -82,7 +82,7 @@ Report a conflict with its path, what sits there and what resolving it would nee
 
 ## Frontmatter
 
-Give the skill valid portable frontmatter: `name: verify-<app>`, matching the folder, and a `description` that names the app, its surface and when to reach for it. A skill without frontmatter never registers. Add client-specific metadata only when the target client supports it and you validated it.
+Give the skill valid portable frontmatter: `name: verify-<app>`, matching the folder, and a `description` that says which app and surface the skill verifies and when an agent should load it. A skill without frontmatter never registers. Add client-specific metadata only when the target client supports it and you validated it.
 
 ## What goes where
 
