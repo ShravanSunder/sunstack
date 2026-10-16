@@ -2,6 +2,7 @@
 
 - Added `presentation-html` for standalone technical HTML files using public Demistify assets.
 - The skill separates author content/layout from library rendering and fetches version-matched component documentation.
+- New pages bind Demistify v1 (`demistify.getagentstudio.dev/v1/`), a moving major path, so each page's proof records the release it loaded.
 - Existing-page revisions preserve their data, IDs, links and deliberate asset binding.
 - Public library loading is separate from publishing page content; local complete-bundle use is documented.
 - Checker, real browser inspection, screenshots and proof limitations are distinct.
