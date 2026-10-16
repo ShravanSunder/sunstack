@@ -18,7 +18,7 @@ Then confirm the assignment is finished and nothing uses the tree: no build, tes
 
 ## 2. Inventory before removing
 
-Note the tree's size and the volume's free space. Read the helper's own report on the worktree (working changes, `tmp/` evidence, blockers and readiness) and a preview of this exact removal that doesn't fetch. A blocker in either is a hold until you resolve its cause. A clean preview knows nothing about whether the work is finished or what runs from the tree; step 1 settles those.
+Note the tree's size and the volume's free space. Without fetching, read the helper's own report on the worktree (working changes, `tmp/` evidence, blockers and readiness) and a preview of this exact removal. A blocker in either is a hold until you resolve its cause. A clean preview knows nothing about whether the work is finished or what runs from the tree; step 1 settles those.
 
 Then classify the files:
 
