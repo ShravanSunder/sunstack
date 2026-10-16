@@ -24,10 +24,10 @@ Ground each part in what the interview found, with no placeholder left. The layo
 
 - Launch. The exact command that brings the app up for a verification run, the signal that it is ready to use, and teardown. A log line, a health response carrying the expected build, or a prompt can be that signal. A port that answers isn't one. A short-lived CLI or TUI has no long-running server, so build the binary or install dependencies once, then run each drive in a separate isolated session.
 - Health check. A single read-only check that decides whether this instance is fit to drive: the process is running, the build is the expected one, this run owns the port, and auth is valid. The agent runs it before the first drive and again whenever something looks wrong.
-- Drive. The route with real selectors and commands from this repository. Use a stable handle, such as an accessible name, a data attribute, a prompt string or a route path, and fall back to coordinates or tab order only when no stable handle exists.
+- Drive. The route with real selectors and commands from this repository. Favor a stable handle, such as an accessible name, a data attribute, a prompt string or a route path, over tab order and screen coordinates.
 - Evidence. What to keep and where it goes. Drive the path a real user takes, since internal setters and test-only endpoints prove nothing about it. Keep the action and the state it produced along with the final screen. Check side effects, such as files written, rows inserted and messages sent, beside what is visible. Mock an external system only where a boundary in production already isolates it. A test mode or dry run can still make network calls or open a browser, so when the safe path relies on one, observe which effects it skips (files, network, git refs) before trusting its name.
 - Cleanup. Stop what the run started by its recorded process id or session name, never by process name. Remove instances and scratch state, and keep the evidence at a location the skill names.
-- Helpers. Each helper the skill ships is an executable script that runs on its own, has its invocation shown in the skill body, and has been run against its real target.
+- Helpers. Every script that ships with the skill is executable, runs on its own, has its invocation shown in the skill body, and has been run against its real target.
 
 ## Choose the journeys
 
