@@ -49,7 +49,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
 
 On 2026-10-15, a Lead about to start the sunstack-tools rule engine found 1Password failing and the API key's item unknown, although the spec had required a real hosted call since 2026-10-12. It decided: "This only matters at the hosted-proof step, so the work can start without it." The plan it wrote next put hosted tests in the milestone 1 gate. The same message said it couldn't create the four Sol 6.1 sessions the work needed, and that is what held the start.
 
-Preflight lists what the hosted-proof gate needs, so the key goes on the list by name beside the four sessions. The credential check fails; the Lead checks its own 1Password access, then asks the owner once for the item before anything starts. The agent check finds no route to a Sol 6.1 address from this host, so the same message asks for session ids or a creation route. Preflight returns two gaps, and nothing is commissioned. When the owner supplied the reference, a read and a shape check that never printed the value closed the first gap; the second held the commissions.
+Preflight lists what the hosted-proof gate needs, so the key goes on the list by name beside the four sessions. The credential check fails; the Lead checks its own 1Password access, then asks the owner once for the item before anything starts. The agent check finds no route to a Sol 6.1 address from this host, so the same message asks for a creation route. Preflight returns two gaps, and nothing is commissioned. When the owner supplied the reference, a read and a shape check that never printed the value closed the first gap; the second held the commissions.
 
 ## Completion
 
