@@ -1,4 +1,4 @@
-// The Verifier's packet and its three kinds of work. Read with ../assignment-fields.ts; no other role contract is needed.
+// The Verifier's packet and its four kinds of work. Read with ../assignment-fields.ts; no other role contract is needed.
 import * as z from "zod@4.6.5";
 import {
   JobBase,
@@ -35,6 +35,33 @@ export const DeliveryObservationWork = z
   })
   .describe("Observe the delivered behavior on a declared target");
 
+export const VerificationSkillWork = z
+  .strictObject({
+    mode: z
+      .literal("verification-skill")
+      .describe("Build or update the project's verify-<app> skill"),
+    change: z
+      .enum(["create", "upkeep"])
+      .describe(
+        "create when the project has no verify-<app> skill; upkeep when it has one that misses or misstates a journey in scope",
+      ),
+    app: z
+      .string()
+      .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+      .describe("The project's own name for the app, lowercase with hyphens, as in verify-<app>"),
+    journeysInScope: z
+      .array(RequiredText)
+      .min(1)
+      .readonly()
+      .describe("The journeys the skill must drive, each named as the user would see it"),
+    skillWritePaths: RepositoryPaths.describe(
+      "The only paths the Verifier may write: the skill directory .agents/skills/verify-<app>/, its journeys and drivers included, and its Claude link .claude/skills/verify-<app>; no feature code or product tests",
+    ),
+  })
+  .describe(
+    "Build or update the project's verification skill, its journeys and drivers, and drive it on its real target",
+  );
+
 export const VerificationScriptWork = z
   .strictObject({
     mode: z
@@ -49,12 +76,15 @@ export const VerificationScriptWork = z
       "The only paths the Verifier may write; no feature code or product tests",
     ),
   })
-  .describe("Write or maintain the assigned verification scripts and drivers");
+  .describe(
+    "Write or maintain assigned verification scripts and drivers that no project verification skill owns",
+  );
 
 export const VerifierWork = z
   .discriminatedUnion("mode", [
     FeasibilityChallengeWork,
     DeliveryObservationWork,
+    VerificationSkillWork,
     VerificationScriptWork,
   ])
   .describe("Exactly one kind of Verifier work");
@@ -62,7 +92,9 @@ export const VerifierWork = z
 export const VerifierPacket = JobBase.extend({
   role: z
     .literal("verifier")
-    .describe("The Verifier: independent observation of the adopted outcome"),
+    .describe(
+      "The Verifier: independent observation of the adopted outcome, and the verification system it runs on",
+    ),
   executionForm: z.literal("sidekick").describe("A Verifier always runs as a Sidekick"),
   requiredReads: RequiredReads.extend({
     charter: z.literal("role-verifier").describe(roleCharterDescription),

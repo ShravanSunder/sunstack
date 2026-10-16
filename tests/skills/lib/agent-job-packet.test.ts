@@ -301,6 +301,36 @@ describe("agent job packet schema", () => {
     expect(missingTargetIssues).toEqual(["work.target"]);
   });
 
+  test("accepts a Verifier commission to update the project's verification skill and rejects one without the journeys in scope", () => {
+    // Arrange
+    const skillPaths = [".agents/skills/verify-desktop/", ".claude/skills/verify-desktop"];
+    const skillWork = {
+      mode: "verification-skill",
+      change: "upkeep",
+      app: "desktop",
+      journeysInScope: ["Export the open review as a PDF from the File menu"],
+      skillWritePaths: skillPaths,
+    };
+    const skillGrant = {
+      access: "write-and-execute",
+      writePaths: skillPaths,
+      allowedCommands: ["pnpm --dir apps/desktop run dev"],
+    };
+    const skillCommission = { ...verifierPacket(skillWork), limits: skillGrant };
+    const withoutJourneys = {
+      ...verifierPacket(withoutField(skillWork, "journeysInScope")),
+      limits: skillGrant,
+    };
+
+    // Act
+    const acceptedIssues = issuePaths(AgentJobPacket, skillCommission);
+    const rejectedIssues = issuePaths(AgentJobPacket, withoutJourneys);
+
+    // Assert
+    expect(acceptedIssues).toEqual([]);
+    expect(rejectedIssues).toEqual(["work.journeysInScope"]);
+  });
+
   test("allows a continuing investigation only in Sidekick form", () => {
     // Arrange
     const boundedWorker = researcherPacket("worker", "bounded-question");
