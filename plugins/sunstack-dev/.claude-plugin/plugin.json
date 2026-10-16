@@ -47,7 +47,7 @@
     "docs-maintain",
     "docs",
     "changelog",
-    "ops-security-review",
+    "audit-security-review",
     "ops-observability-stack",
     "observability",
     "opentelemetry",

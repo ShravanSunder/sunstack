@@ -51,8 +51,8 @@ flowchart LR
     clarify --> plan
 ```
 
-Operations skills such as `ops-security-review` and `ops-linear-tracking` sit
-outside the main phase path.
+Operations skills such as `ops-linear-tracking`, and audit skills such as
+`audit-security-review`, sit outside the main phase path.
 
 ### Shared Observability
 

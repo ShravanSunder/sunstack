@@ -59,12 +59,13 @@ implement-*          approved-plan execution      implement-plan
 implementation-*     implementation judgment and lifecycle  implementation-review
                                                   implementation-pr-wrapup
                                                   implementation-handoff
-ops-*                external operational systems  ops-security-review
-                                                  ops-linear-tracking
+ops-*                external operational systems  ops-linear-tracking
+audit-*              audits and scans              audit-security-review
 debug-*              root-cause investigation      debug-investigation
 docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
+domain-*             subject knowledge a caller loads
 principle-*          engineering judgment          principle-hold-the-scope
                                                   principle-build-the-shared-model-first
                                                   principle-define-the-domain-first
@@ -209,7 +210,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 - `debug-investigation`: diagnosis-first debugging before fixes. Use it for failing tests, flaky behavior, crashes, regressions, build failures, or unexpected behavior. For long-running infra or batch monitoring, it loads a background-monitoring reference for redacted JSONL/state watchers that are cheap, cancellable, and visible through the agent harness when available.
 - `docs-maintain`: durable documentation maintenance after source-of-truth drift is identified. It keeps README human-facing, `AGENTS.md` compact, and workflow history in changelog/runbook docs.
-- `ops-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
+- `audit-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
 - `ops-linear-tracking`: manages Linear projects, milestones, issues, and dependencies while keeping docs as the design source of truth.
 - `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: a box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
 - `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces, with headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.

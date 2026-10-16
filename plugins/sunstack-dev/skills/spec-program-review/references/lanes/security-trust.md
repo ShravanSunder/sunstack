@@ -26,7 +26,7 @@ Good: policy and enforcement have named owners; untrusted data stays untrusted u
 
 Bad: “trusted internal” without a boundary; validation after privileged use; secrets copied into artifacts; sandbox or approval assumed without runtime support; security declared out of scope despite a privileged path.
 
-Calibration: report only source-backed design/requirement effects. Route an explicitly requested scan, audit, or threat model to `ops-security-review`.
+Calibration: report only source-backed design/requirement effects. Route an explicitly requested scan, audit, or threat model to `audit-security-review`.
 
 Overlap boundary: `failure-concurrency` owns non-security recovery mechanics; `platform-harness` owns actual sandbox/tool feasibility. This check owns trust and enforcement design.
 

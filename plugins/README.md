@@ -69,7 +69,7 @@ Shravan's Codex-first development workflow plugin. Provides:
 - **docs-maintain** skill -- reconciles docs, AGENTS.md, README.md, specs, plans, changelogs, and architecture docs against code and current decisions
 - **spec-handoff** skill -- packages spec/design context for another agent before an implementation plan exists
 - **plan-handoff** skill -- packages an existing implementation plan for another agent without pretending design context is a plan
-- **ops-security-review** skill -- routes explicit security scans to official Codex Security workflows instead of reimplementing audit-grade scanning
+- **audit-security-review** skill -- routes explicit security scans to official Codex Security workflows instead of reimplementing audit-grade scanning
 - **ops-observability-stack** skill -- guides shared local OpenTelemetry/Victoria stack use, producer boundaries, AgentStudio and Agent VM loops, resource naming, and Victoria proof queries
 - **implementation-pr-wrapup** skill -- finishes the GitHub PR lifecycle with fresh checks, comments, review-thread, and mergeability gates without merging without authorization
 - **debug-investigation** skill -- investigates bugs, failing tests, flaky behavior, crashes, regressions, and unexpected behavior before fixes

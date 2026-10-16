@@ -1,9 +1,9 @@
 ---
-name: ops-security-review
+name: audit-security-review
 description: Use when the user asks for a security scan, security audit, threat model, vulnerability review, security diff scan, or remediation of one security finding.
 ---
 
-# Operations Security Review
+# Audit: Security Review
 
 Route security-primary work to the narrowest appropriate official Codex Security workflow. This is an audit boundary: review lanes can notice security risks, but explicit scans belong to the official security workflows. This skill is a security-review handoff layer, not a replacement scanner.
 
