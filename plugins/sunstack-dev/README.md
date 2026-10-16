@@ -67,6 +67,7 @@ debug-*              root-cause investigation      debug-investigation
 docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
+                                                  presentation-html
 domain-*             subject knowledge a caller loads  domain-typescript
                                                   domain-python
                                                   domain-rust
@@ -216,7 +217,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 ## Domain Skills
 
-Each `domain-*` skill holds one subject's knowledge. The current three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. The repository's own conventions and gates win where they differ. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
+Each `domain-*` skill holds one subject's knowledge. The current three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. The repository's own conventions and gates win where they differ. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
 
 ## Supporting Skills
 
@@ -225,6 +226,7 @@ Each `domain-*` skill holds one subject's knowledge. The current three hold the 
 - `audit-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
 - `ops-linear-tracking`: manages Linear projects, milestones, issues, and dependencies while keeping docs as the design source of truth.
 - `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: a box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
+- `presentation-html`: standalone HTML engineering explainers using the public Demistify library, canonical component documentation and separate checker/browser proof.
 - `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces, with headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.
 
 ## External Counsel
@@ -271,3 +273,7 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 - Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
 - Release notes: [`../../docs/changelog/`](../../docs/changelog/)
 - Maintainer guidance: [`../../AGENTS.md`](../../AGENTS.md)
+
+### Standalone HTML explainers
+
+Use `sunstack-dev:presentation-html` for an HTML artifact that loads the public Demistify library. [The skill](skills/presentation-html/SKILL.md) owns authoring and verification; its reference points to the version-matched component guide. `presentation-webui` remains the rendered-chat surface and `presentation-tui` the terminal surface.

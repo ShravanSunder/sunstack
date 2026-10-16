@@ -1,0 +1,4 @@
+interface:
+  display_name: "Presentation: HTML"
+  short_description: "Standalone HTML explainers with reusable visual islands"
+  default_prompt: "Use $presentation-html to create or revise a standalone engineering explainer using the public Demistify library."

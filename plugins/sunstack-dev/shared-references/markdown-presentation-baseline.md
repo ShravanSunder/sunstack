@@ -1,6 +1,6 @@
 # Markdown Presentation Baseline
 
-This shared runtime reference owns the supported Markdown set, the technical-content bright line, and the table default for every presentation surface. Consumers: `presentation-tui`, `presentation-webui`, and `shared-references/diagram-rendering-and-fallbacks.md`.
+This shared runtime reference owns the supported Markdown set, the technical-content bright line, and the table default for every presentation surface. Consumers: `presentation-tui`, `presentation-webui`, `presentation-html`, and `shared-references/diagram-rendering-and-fallbacks.md`.
 
 Expected inputs: the draft response (or the content about to be composed) and the consuming skill's surface stance (TUI skeleton default, or markdown skeleton).
 

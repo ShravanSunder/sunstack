@@ -1,10 +1,10 @@
 # Mermaid Usage
 
-This shared runtime reference owns the Mermaid decision: when a Mermaid diagram earns its place, how to check the result, and when to fall back. Consumers: `presentation-webui` (primary), `presentation-tui` (fenced Mermaid source only when the user will render it elsewhere), and `shared-references/diagram-rendering-and-fallbacks.md`.
+This shared runtime reference owns the Mermaid decision: when a Mermaid diagram earns its place, how to check the result, and when to fall back. Consumers: `presentation-webui` (primary), `presentation-tui` (fenced Mermaid source only when the user will render it elsewhere), `presentation-html` (Mermaid islands in an HTML page), and `shared-references/diagram-rendering-and-fallbacks.md`.
 
 The stance is understanding-first and anti-catalog: choose the visual family for the relationship first (`diagram-semantics.md`), then ask whether Mermaid is the best renderer for that family on this surface. Never build or recommend a broad Mermaid syntax catalog, a diagram-type inventory, or a Mermaid-translation table.
 
-Expected inputs: the selected visual family, the required semantic fields, and the destination (rendered chat, durable markdown file, or terminal).
+Expected inputs: the selected visual family, the required semantic fields, and the destination (rendered chat, durable markdown file, HTML page, or terminal).
 
 Return: use-Mermaid or fallback, with the trigger; and the readability/semantics check result.
 
