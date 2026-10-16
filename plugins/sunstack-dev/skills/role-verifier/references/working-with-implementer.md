@@ -4,15 +4,15 @@ This reference owns your side of the pair with your Implementer: taking its setu
 
 Expected inputs: the Implementer's address from your packet, your adopted reference and the one kind of work your commission names.
 
-Return: the target you are observing as it was declared, or the setup you still wait for, and for each observation you sent, whose action it calls for.
+Return: the target you are observing as it was declared, or the setup you still wait for, and for each observation and test finding you sent, whose action it calls for.
 
 MUST load `../../../shared-references/implementer-verifier-pairing.md` and return the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead.
 
 ## Take the setup
 
-Your Implementer messages you at assignment with its slice, how to build and run the project with its fixtures, the commands its gates run and when to expect the first target. Ask it directly for anything your method needs that the message left out. Its description of the slice tells you where to look. The expected outcome still comes from your adopted reference.
+Your Implementer messages you at assignment with its slice, how to build and run the project with its fixtures, the commands its gates run and when to expect the first target. Ask it directly for anything your method needs that the message left out, including the tests it offers as proof and where their runs live. Its description of the slice tells you where to look. The expected outcome still comes from your adopted reference.
 
-While you wait for a target, prepare. Read the project's verification skill and check that your drivers start. Observe nothing until a target is declared.
+While you wait for a target, prepare. Read the project's verification skill and check that your drivers start; a skill that is missing or lacks a journey in scope goes to the Lead as the gap your role skill names. Observe nothing until a target is declared.
 
 For a feasibility challenge, ask for the proof design: the tests it plans, the layer of each and the real path it will drive. Send back each gap with the wrong behavior the design would miss, the passage of the adopted reference that requires catching it, and a route that would. The Implementer decides how to change its design inside the slice, and the Lead decides when the plan's proof has to change.
 
@@ -22,14 +22,15 @@ Before your first action on a declared target, check that what you are about to 
 
 ## What you send
 
-Send each observation with its target, the action you drove, the result you saw and where the evidence lives, and say which kind it is:
+Send each observation or test finding with its target, the action you drove or the test you read, the result you saw and where the evidence lives, and say which kind it is:
 
 - A product regression case the tests don't cover. Send the behavior and its reproduction, and leave the test to the Implementer.
-- A test that can't fail for its wrong behavior. Name that behavior and the layer where it stays real.
+- A weak test: its assertion checks a mock or an internal call instead of the required outcome, it skips the boundary it claims, or it can't fail for its wrong behavior. Name the test, that behavior and the layer where it stays real, with your scratch run when you made one.
+- A gap in the offered set: an obligation, a negative or edge case that matters, or an interaction between components with no real integration test. Name what's missing, and leave the test to the Implementer.
 - Product behavior that contradicts the adopted outcome. Send the reproduction and the passage it contradicts.
 - A route that can't reach the outcome. Say what the route lacks.
 
-A driver defect stays with you. Repair it when your script paths cover the driver, and otherwise send the Lead the reproduction and the script work it needs. A disagreement over the expected outcome, over whether an observation applies or over who owns a fix goes as the pairing file says.
+A driver defect stays with you. Repair it when your script or skill paths cover the driver, and otherwise send the Lead the reproduction and the script work it needs. A disagreement over the expected outcome, over whether an observation applies or over who owns a fix goes as the pairing file says.
 
 ## Keep out of your messages
 
@@ -39,10 +40,10 @@ A driver defect stays with you. Repair it when your script paths cover the drive
 
 ## Act on what the Implementer sends
 
-- When it says its tests already cover something, open the run and decide reuse with the applicability check in `practices-verification`. Its passing tests never decide what you skip.
+- When it says its tests already cover something, open the run, put those tests through the test check in your role skill, and decide reuse with the applicability check in `practices-verification`. Its passing tests never decide what you skip.
 - When it states the expected outcome as an instruction, such as "check that it returns 3", find the passage and take the oracle from there.
 - When it reports a driver defect, reproduce it at the commit it names before you change anything ([a reported failure is a claim until you open its evidence](../../principle-verify-before-accepting/SKILL.md)). Then handle it like a defect you found yourself, run any repaired piece alone, and tell the Implementer what you did with it.
-- When a change you didn't write appears in your script paths, run no observation through it until you have read it and either kept it as your own change or replaced it. Tell the Lead, which checks each writer's diff against its grant.
+- When a change you didn't write appears in your script or skill paths, run no observation through it until you have read it and either kept it as your own change or replaced it. Tell the Lead, which checks each writer's diff against its grant.
 - When it declares a new target after a fix, observe that target. An earlier observation carries over only where the applicability check still holds.
 
 ## Examples
@@ -63,4 +64,4 @@ The Implementer declares commit `c3d4`, the build path, its configuration and ho
 
 ## When to stop
 
-Your side is done for a target when every observation on it has gone to its owner, whether that is the Implementer, the Lead, or your own driver repair driven again. Wait for a declared target the way `practices-collaboration` teaches. A target that never arrives is a gap you name in your report to the Lead, and you never describe an observation of it as made.
+Your side is done for a target when every observation and test finding on it has gone to its owner, whether that is the Implementer, the Lead, or your own driver repair driven again. Wait for a declared target the way `practices-collaboration` teaches. A target that never arrives is a gap you name in your report to the Lead, and you never describe an observation of it as made.
