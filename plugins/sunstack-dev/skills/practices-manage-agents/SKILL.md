@@ -102,13 +102,14 @@ Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise th
 
 ### 📚 Researcher
 
-| Tier | Form | Model | Thinking Effort | Direction | Span |
-|---|---|---|---|---|---|
-| Workhorse | Worker, or a Sidekick when the model needs Router | OpenAI Luna | high | Complete | Local |
-| Daily driver | Worker | OpenAI Sol | medium | Complete | Cross-domain |
-| Daily driver | Sidekick, continuing investigation | OpenAI Sol | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system |
+| Tier | Form | Model | Thinking Effort | Direction | Span | Use |
+|---|---|---|---|---|---|---|
+| Workhorse | Worker, or a Sidekick when the model needs Router | OpenAI Luna | high | Complete | Local | |
+| Daily driver | Worker | OpenAI Sol | medium | Complete | Cross-domain | |
+| Daily driver | Sidekick, continuing investigation | OpenAI Sol | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system | |
+| Daily driver | Worker or Sidekick | Claude Opus | high to xhigh | Complete, Partial | Local, Cross-domain, Cross-system | User must authorize |
 
-A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection. Opus is not a research row; it needs the owner's override.
+A continuing Researcher Sidekick may use Luna Operators or Researcher Workers for collection.
 
 ### 🐒 Implementer Sidekick
 
