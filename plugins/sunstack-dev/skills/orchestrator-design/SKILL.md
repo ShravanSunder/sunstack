@@ -18,6 +18,8 @@ MUST load `../../shared-references/requirements-specification-program-design.md`
 
 MUST load `practices-show-me-your-work` once at the start and return the shared work reference (or explicitly unshared checkpoint path) plus whether this workflow is responsible for the whole work or contributes to it. Reuse supplied work context for nested work. The tracker owns recording, fallback, and conditional readable views. If tracking cannot initialize, report the gap and continue independent design/review work; tracking availability is not a review-admission prerequisite unless the user explicitly made it one.
 
+MUST load `practices-preflight` at entry and return `ready` or the gap list; route only the work no open gap blocks.
+
 Record only consequential design decisions, owner confirmations, accepted or rejected review findings, corrections, results with evidence, and unresolved meaning. A historical event helps orientation but never proves the current artifact or review state. User corrections append a record referencing the earlier record; do not rewrite history.
 
 ## Orient And Route
