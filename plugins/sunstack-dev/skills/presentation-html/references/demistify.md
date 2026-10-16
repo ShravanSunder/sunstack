@@ -24,7 +24,7 @@ A new page binds Demistify v1:
 
 `/v1/` is a moving experimental major path: breaking changes can land within v1 until a stable major is declared. Past majors are retained, but v1 keeps no public history of its minor releases, so the page’s proof records `version` and `sourceCommit` from `https://demistify.getagentstudio.dev/v1/release.json`. Keep theme and runtime on one binding; the browser fetches renderer chunks, fonts and worker assets relative to it.
 
-A page that keeps an older binding uses that release’s own guide and checker. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
+A page that keeps an older binding uses that release’s own guide and checker, and its proof records that binding; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
 
 ## Component guide
 
