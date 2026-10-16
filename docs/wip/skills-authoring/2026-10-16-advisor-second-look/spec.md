@@ -1,4 +1,4 @@
-# The Advisor as an independent second engineer
+# The Advisor as an independent second engineer, and the Verifier as owner of the verification system
 
 Lead-authored spec, 2026-10-16. Owner `sunstack-dev`. User-directed intent. Stacked after `skills/preflight-cleanup-domain`, whose run A1 (the Advisor unblocks stalled work) stays as written.
 
@@ -39,6 +39,16 @@ Today's skill explains part of this. `role-advisor` frames the job as challengin
 - The owner can talk to it directly. It does the work behind its answer, then tells the Lead what the owner asked and what it concluded.
 - The Lead commissions it with the work's context, its own questions if any, and the grant. The Lead reads its judgments, decides, and never uses it as a message bus.
 
+## The Verifier (amendment, 2026-10-16)
+
+The owner asked: "is it obvious the verifier agent will build verification systems and can use the maintain verifications?" and "and the other verification practices?" Today it isn't:
+- `role-verifier`'s description says "challenge proof feasibility, observe the adopted outcome or maintain assigned verification drivers", with nothing about building.
+- `practices-verification-maintenance` loads only "IF your commission assigns creating or maintaining the project's verification skill".
+- The `practices-manage-agents` Verifier row says "independent observation of the adopted outcome".
+- Neither `role-lead`'s `working-with-verifier.md` nor `practices-preflight` mentions a missing or stale `verify-<app>` skill.
+
+Success: the Verifier owns the project's verification system. It builds the `verify-<app>` skill, its journeys and its drivers when they're missing (`practices-verification-maintenance`), keeps them current as the app changes, and observes through them (`practices-verification`). It still never edits product code or product tests. The Lead commissions building or updating that system first, whenever it's missing or doesn't cover the journeys in scope. Preflight treats a required proof gate's missing verification skill as a gap for the Verifier, not as "later".
+
 ## Runs
 
 One skill per run.
@@ -48,6 +58,11 @@ One skill per run.
 | V1 | `role-advisor` | New description: "Use when a Lead commissions you as the Advisor Sidekick, or the owner opens a session and names you as their Advisor: to find the high-risk points in a design, plan or acceptance argument and give each an independent second look, to answer the owner's questions with your own work, or to find why the Lead's stalled work stopped and move it within your grant. Not for governing authorship, acceptance or independent review findings." Cut over every place that assumes a Lead-chosen question and picture. Assignment's admission gate becomes: the commission must carry the work's context, meaning reachable governing artifacts and current state with anchors, plus the owner's goal; Lead questions are optional; the Advisor finds the risks. A commission without reachable context is the gap to return. Update the method returns, `agents/openai.yaml`'s default prompt, and the entry and stop rules in both references to match. Rewrite "The work" around three jobs: (1) the independent second look on high-risk points the Advisor picks, (2) the owner's questions, done as real work, and (3) unblocking stalled work (A1, kept). Teach how to pick a high-risk point, with the criteria in Success. Cite the principles where they decide: building its own picture, reading ground truth, the verifier's question ("verify before accepting", "prove it works"), scope and edge cases ("hold the scope", "justify the complexity"), and alternatives with their costs ("name the tradeoffs"). Make the no-relay rule a bright line, with the excuses named: "the Lead should know" means say what it changes for the Lead's decision; "keeping the record complete" belongs in the trace, not the Lead's inbox; a hook nudge to continue is not a reason to message. Worked examples from the Evidence: the show-me-your-work review as the clean case, a status or custody message as the failed case, and one mixed message showing which part to keep and which to cut. In `references/working-with-lead.md`: the message shape (checked, concluded, recommend, out of scope), how a disagreement is resolved, and that the Lead decides. In `references/working-with-owner.md`: the owner talks to it directly, it does the work, and it tells the Lead what it found. |
 | V2 | `role-lead` | `references/working-with-advisor.md`: commission the Advisor with the work's context (governing artifacts and current state with anchors, the owner's goal), the Lead's questions if any, and the grant, not a list of points to check. Read its judgments, record a disposition for each, and decide. Never route other agents' messages through it, or use it to carry status. |
 | V3 | `practices-manage-agents` | The Advisor row says: an independent second look at high-risk points it picks, the owner's questions, and unblocking. In `schemas/role-contracts/advisor-contract.ts`, the packet's required `question` and `challengedPicture` become the work's context, plus optional Lead questions. The completed handback carries each point picked, with what was checked, the conclusion, the recommendation and what stays out, in place of a single `challenge`. Keep `alternatives` and `openDecisions`. Update the Horizon or payload table's Advisor row ("the owner's question") to the work's context. Update the packet test fixtures. |
+
+| V4 | `role-verifier` | Description and opening: the Verifier owns the project's verification system, building, maintaining and observing through it. Make building or updating the system a named kind of work, beside the feasibility challenge and the observation, carried by `practices-verification-maintenance`. Name it as the first job when the project's `verify-<app>` skill is missing or doesn't cover the journeys in scope. Keep the existing limits: verification apparatus only, never product code or product tests, within the script paths and skill paths the commission grants. |
+| V5 | `role-lead` | `references/working-with-verifier.md`: before the first observation, check whether the project has a `verify-<app>` skill covering the journeys in scope. When it doesn't, commission the Verifier to build or update it first, with the skill path and the Claude link in its grant. |
+| V6 | `practices-manage-agents` | The Verifier row: "independent observation of the adopted outcome, and the verification system it runs on". If the Verifier packet's work kinds don't include building or maintaining the project verification skill, add that kind, in the existing Zod style. |
+| V7 | `practices-preflight` | When a required proof gate observes behavior through a project verification skill, check that `verify-<app>` exists and covers the journeys in scope. A missing or stale skill is a gap whose fix is a Verifier commission to build or update it. |
 
 Companion: one `sunstack-dev` version bump and changelog entry, after review.
 
@@ -61,4 +76,4 @@ Companion: one `sunstack-dev` version bump and changelog entry, after review.
 ## Coordination
 
 - Base: `skills/preflight-cleanup-domain` (under review). Rebase when it changes or merges.
-- Run states: all proposed.
+- Run states: V1–V3 implemented (6bfd81a1, abd43042), under implementation review. V4–V7 proposed (amendment), awaiting spec review.
