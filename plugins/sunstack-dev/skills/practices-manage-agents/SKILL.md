@@ -20,7 +20,7 @@ A **Worker** is a native subagent its parent manages, kept through the bounded j
 | 🦁 Lead | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
 | 🦉 Advisor | an independent second look at high-risk points it picks, the owner's questions, and unblocking the Lead's stalled work within its grant | Sidekick | the Lead, only when the owner asks; or the owner, whose own message names the session as the Advisor | `role-advisor` |
 | 🐒 Implementer | assigned changes, their product tests and associated proof | Sidekick | the Lead, one per workstream | `role-implementer` |
-| 🔬 Verifier | independent observation of the adopted outcome | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
+| 🔬 Verifier | independent observation of the adopted outcome, and the verification system it runs on | Sidekick | the Lead, only as an Implementer's pair | `role-verifier` |
 | 🔎 Reviewer | independent findings on a declared artifact, and correction checks | Sidekick with no author history | the Lead, for the review lead that runs the review procedure; that review lead, for each stage reviewer its procedure prescribes | `role-reviewer` |
 | 📚 Researcher | a checked answer to a supplied question | Worker for one bounded question; Sidekick for continuing work or when its model needs Router | the Lead, or a Sidekick whose role skill and commission grant management | `role-researcher` |
 | 🔧 Operator | observations from a prescribed procedure or a guided collection | Worker by default; Sidekick when the job needs a separately managed session | the Lead, or a Sidekick whose role skill and commission grant management | `role-operator` |
