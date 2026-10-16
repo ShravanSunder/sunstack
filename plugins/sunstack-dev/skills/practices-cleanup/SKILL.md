@@ -49,21 +49,21 @@ Ask the owner first unless they gave an equally explicit grant for that exact ac
 
 - `rm -rf /private/tmp`, `rm -rf "$TMPDIR"`, or deleting by age (`find ... -mtime ...`);
 - shared caches: `rm -rf "$HOME/.cargo"`, broad `DerivedData` deletion, `pnpm store prune`;
-- repository-wide sweeps: `"$ASW" worktree prune --apply`, `git clean -fdx`, blanket force removal, `-D`;
-- `"$ASW" worktree remove ... --discard-tmp` while `tmp/` holds unclassified evidence;
-- killing builds or services, `wt remove --reap`, or deleting a stale lock to force progress;
+- repository-wide sweeps: pruning every worktree, `git clean -fdx`, blanket force removal, force-deleting a branch that still has contribution;
+- removing a worktree without archiving its `tmp/` while that holds unclassified evidence;
+- killing builds or services, ending processes as part of a worktree removal, or deleting a stale lock to force progress;
 - runtime databases, accounts, credentials, source experiments, unmerged or unpushed work, another agent's checkout, or the only copy of proof.
 
 ## Main path
 
 1. List each candidate your task created, from the trace, the commission and your own commands, with its `du -sh` size, and take `df -h`. Completion: each candidate has a path, a size and the step that created it.
 2. Before removing a candidate, list what it holds, look for a process or session using it, and read the project's policy for it, because a name like `target` or `tmp` only says what the folder was meant for ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). Copy evidence out. Completion: each candidate is marked remove, with its command, or hold, with the check that failed.
-3. Remove with the project's clean task, or else the allow-list command exactly as written. IF a candidate is a worktree whose PR has merged, load `references/merged-worktree-removal.md` and return the worktree removed, with the helper's result, or held, with its blocker. Ask the owner about anything outside the allow list, naming the path, its size and what would make it safe.
+3. Remove with the project's clean task, or else the allow-list command exactly as written. IF a candidate is a worktree whose PR has merged, load `references/merged-worktree-removal.md` and return the worktree removed, with its branch outcome and where its `tmp/` evidence went, or held, with its blocker. Ask the owner about anything outside the allow list, naming the path, its size and what would make it safe.
 4. Confirm each removed path is gone and take `df -h` again. Report the change in free space from `df`; a sum of `du` sizes overstates it, because nested folders overlap and APFS clones share blocks.
 
 ## Return
 
-Each candidate removed, with its command and the free space after, or held, with the check that failed; and any question for the owner.
+Each candidate removed, with its command (for a worktree, the branch outcome and where `tmp/` went) and the free space after, or held, with the check that failed; and any question for the owner.
 
 ## Worked example: 54 GiB in a merged worktree
 

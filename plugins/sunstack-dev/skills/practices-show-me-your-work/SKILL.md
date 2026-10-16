@@ -31,7 +31,7 @@ At resume, at each handback and before calling work done, compare each open item
 
 ## Record what changed
 
-Record consequential decisions and reasons, accepted or rejected findings, proof outcomes, blockers and deferred improvements, each readable without its links, with uncertainty stated and private content removed. Correct a mistaken entry with a new one that references it, and attribute a copied claim to its author unless you checked it.
+Record what the owner, or someone picking up the work cold, would care about: decisions and reasons, accepted or rejected findings, what is proven and what isn't, blockers, changes of course and deferred improvements. Write an entry only when that reader would act or decide differently for having read it, and leave out routine commands, step-by-step narration and status that changes no decision. Link the detail, keep each entry readable without its links, state uncertainty and remove private content. Correct a mistaken entry with a new one that references it, and attribute a copied claim to its author unless you checked it.
 
 Two entry types other skills point to:
 
