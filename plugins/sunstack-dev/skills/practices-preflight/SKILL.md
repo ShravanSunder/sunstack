@@ -20,7 +20,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
    | credential | read it into memory and test its shape without printing it |
    | service | a call or health check that exercises what the gate uses, with a timeout |
    | tool | run it and read its version |
-   | agent | a real address on the plan's model and effort |
+   | agent | its route on the plan's model and effort, checked without sending the job |
    | disk | `df -h` on the volume, against the work's build and test output |
 
    ```sh
@@ -29,7 +29,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
    unset value
    ```
 
-   When you check a service, exercise the operation the gate depends on under a deadline and count a timeout or an unclear answer as a gap, because a service that answers a ping can still fail the call your gate makes ([design for failure](../principle-design-for-failure/SKILL.md)). IF the plan or commission assigns agents, load `practices-manage-agents` and return, for each, a real address on its model and effort, or the route gap.
+   When you check a service, exercise the operation the gate depends on under a deadline and count a timeout or an unclear answer as a gap, because a service that answers a ping can still fail the call your gate makes ([design for failure](../principle-design-for-failure/SKILL.md)). IF the plan or commission assigns agents, load `practices-manage-agents` and return, for each, its checked route or the route gap. For a Sidekick, the route is its address, with the model and effort read back from a session found or created without starting work. A native Worker has no address until its spawn carries the job, so its route is the host's spawn encoding for its model and effort, with that model selectable by the host's spawn tool. The lookup stops before the commission and never sends the job.
 
    Completion: each need has the check you ran and its result: met, or a gap.
 
