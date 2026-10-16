@@ -155,6 +155,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | skill-review | `plugins/skill-authoring/skills/skill-review/` | Independent review of a skill spec or skill files by several reviewer agents |
 | skill-audit | `plugins/skill-authoring/skills/skill-audit/` | Evidence-backed portfolio audits using current plugin inventory, session patterns, and upstream inspirations |
 | presentation-tui | `plugins/sunstack-dev/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
+| presentation-html | `plugins/sunstack-dev/skills/presentation-html/` | Standalone HTML engineering explainers using public shared Demistify assets and version-matched component guidance |
 | presentation-webui | `plugins/sunstack-dev/skills/presentation-webui/` | Markdown-first presentation for rendered proportional-font chat surfaces: smallest-view media selection, Mermaid judgment, GFM comparisons |
 | principle-* (17) | `plugins/sunstack-dev/skills/principle-*/` | Engineering principles, one judgment each (for example `principle-design-for-failure`), hidden from model invocation; skills cite them with a relative link, and each opens with its read rule; family map in `plugins/sunstack-dev/docs/principles-index.md` |
 | ops-linear-tracking | `plugins/sunstack-dev/skills/ops-linear-tracking/` | Linear projects, milestones, issues, and dependencies using docs as truth and tickets as tracking |

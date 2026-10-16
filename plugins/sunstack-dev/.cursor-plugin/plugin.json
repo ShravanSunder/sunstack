@@ -1,7 +1,7 @@
 {
   "name": "sunstack-dev",
-  "version": "2.80.0",
-  "description": "Development workflow skills for long-horizon delivery routing, bounded design orchestration, canonical planning, plan execution, independent implementation review, research, handoffs, PR lifecycle, debugging, operations, agent management, and structured TUI presentation.",
+  "version": "2.81.0",
+  "description": "Development workflow skills for long-horizon delivery routing, bounded design orchestration, canonical planning, plan execution, independent implementation review, research, handoffs, PR lifecycle, debugging, operations, agent management, and structured TUI, rendered chat and standalone HTML presentation.",
   "author": {
     "name": "Shravan Sunder"
   },
@@ -16,7 +16,10 @@
     "implementation-review",
     "presentation-tui",
     "practices-collaboration",
-    "practices-show-me-your-work"
+    "practices-show-me-your-work",
+    "presentation-html",
+    "demistify",
+    "html-islands"
   ],
   "skills": "./skills/"
 }
