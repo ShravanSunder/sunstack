@@ -217,7 +217,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 ## Domain Skills
 
-Each `domain-*` skill holds one subject's knowledge. The current three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. The repository's own conventions and gates win where they differ. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
+Each `domain-*` skill holds one subject's knowledge. The current three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. The repository's own conventions and gates win where they differ. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
 
 ## Supporting Skills
 
