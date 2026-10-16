@@ -82,4 +82,4 @@ Companion: one `sunstack-dev` version bump and changelog entry, after review.
 ## Coordination
 
 - Base: `skills/preflight-cleanup-domain` (under review). Rebase when it changes or merges.
-- Run states: V1–V3 implemented (6bfd81a1, abd43042), under implementation review. V4–V7 proposed (amendment), awaiting spec review.
+- Run states: V1–V7 reviewed (implementation review great at 5ec98170). Shipped as 2.83.0 once the PR merges.
