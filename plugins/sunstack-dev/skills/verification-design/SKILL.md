@@ -25,6 +25,7 @@ One row per requirement (`U`), linked to its Specification obligations (`R`):
 | proven by | one sentence the owner can read: what will be done, and what will be seen | "covered by e2e tests" |
 | reference | what correct is judged against, from the Specification: its worked example, threshold, protocol version or checked known-good output | what the app does today, or a model's opinion of the output |
 | target and journey | the app or package with its planned build, platform, configuration and client; the `verify-<app>` journey that will observe it, or `needed:` with the entry it must drive and what it must read | a journey you didn't read; "the app" |
+| lifetime | for a row that names a journey: `lasting` when its outcome will be checked again, or `temporary` for a one-time check | a lifetime on a row that a focused test, structural evidence or a reused real-path test decides |
 | passes when | what is seen, where, matched against the reference, and the wrong build that fails it | "works"; an exit code, a success toast or any other acknowledgement |
 | reuses | the real-path test that already decides the row, with the target and configuration it depends on, or `none` | a test that mocks the interaction the row claims |
 | unverified | what stays open: platforms not tried, stand-ins still in place, access nobody has granted, journeys still to build | blank |
@@ -41,13 +42,13 @@ Completion: every requirement is listed with its obligations, references and sea
 
 ### 2. Read what already observes the app
 
-For the app each requirement is about, read the project's `verify-<app>` skill under `.agents/skills/`: its journey index and the journeys these requirements touch. Read the real-path tests, integration and end-to-end, that enter at the same points. Before you name a journey or test as covering a requirement, read from its source what it drives, against which build and configuration, what it keeps real and what it replaces, and where it looks ([a name says what something is for; its source says what it does](../principle-read-ground-truth-first/SKILL.md)). A missing `verify-<app>` skill, or one that doesn't reach a requirement's entry, doesn't stop the design: those rows name the journey still needed.
+For the app each requirement is about, read the project's `verify-<app>` skill under `.agents/skills/`: its journey index, and the journeys these requirements touch with the scripts they run. Read the real-path tests, integration and end-to-end, that enter at the same points. Before you name a journey or test as covering a requirement, read from its source what it drives, against which build and configuration, what it keeps real and what it replaces, and where it looks ([a name says what something is for; its source says what it does](../principle-read-ground-truth-first/SKILL.md)). A missing `verify-<app>` skill, or one that doesn't reach a requirement's entry, doesn't stop the design: those rows name the journey still needed.
 
 Completion: each requirement's entry has its journeys and real-path tests with what each drives and observes, or `none found` with where you looked.
 
 ### 3. Choose each observation
 
-MUST load `references/choosing-the-observation.md` and return, for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, or needed with its entry and observation), and any gap.
+MUST load `references/choosing-the-observation.md` and return, for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, or needed with its entry and observation), each journey's lifetime, and any gap.
 
 When you place each observation, put it where the user or calling program meets the outcome, through the real entry on the planned target ([a passing test proves only what it observes](../principle-prove-it-works/SKILL.md)). Scale the proof to the claim: a pure rule is proven by a focused test and launches no app, and a structural claim, such as a schema or a skill's text, gets structural evidence that names the behavior it leaves unevaluated.
 
@@ -100,7 +101,7 @@ decision-needed
 evidence-blocked
 ```
 
-- `locally-ready`: no item in Not ready while holds. Return the four identities (Requirements, Specification, Program Design, Verification Design), each obligation's deciding observation or named limit, the journeys still needed, the tests reused, the rendering results, and the statement that nothing has been observed or reviewed. Lead with the owner's "proven by" view.
+- `locally-ready`: no item in Not ready while holds. Return the four identities (Requirements, Specification, Program Design, Verification Design), each obligation's deciding observation or named limit, the journeys still needed with their lifetimes, the tests reused, the rendering results, and the statement that nothing has been observed or reviewed. Lead with the owner's "proven by" view.
 - `specification-gap`: an obligation lacks the observable outcome, reference, threshold or target constraint its row needs. Return each obligation, what it lacks and the evidence. Carry any Program Design gaps in the same payload, because a changed obligation can change its seam.
 - `program-design-gap`: no seam lets an observation see an obligation's outcome. Return each obligation, the seam its trace row names, what the observation would need to see and the evidence.
 - `decision-needed`: a limit would leave a required observation undone or weaken it, or the planned target needs access, a device or an account only the owner can grant. IF returning `decision-needed`, load `../../shared-references/owner-decision-brief.md` and return the brief.
@@ -125,6 +126,7 @@ A review handoff carries pointers to the four documents, this return and the rev
 - a row's reference is the app's current behavior, a model's judgment, or missing;
 - a passing condition names no wrong build that fails it, or an acknowledgement alone would pass it;
 - a journey is named as existing without its source read, or a needed journey is missing from the return;
+- a row that names a journey has no lifetime, or a row with no journey carries one;
 - a reused test mocks the interaction its row claims;
 - a pure rule or structural claim is given an app launch, or an outcome the user meets in the app is given only a unit test;
 - a row says or implies that something was observed;

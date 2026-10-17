@@ -27,7 +27,7 @@ Ground each part in what the interview found, with no placeholder left. The layo
 - Drive. The route with real selectors and commands from this repository. Favor a stable handle, such as an accessible name, a data attribute, a prompt string or a route path, over tab order and screen coordinates.
 - Evidence. What to keep and where it goes. Drive the path a real user takes, since internal setters and test-only endpoints prove nothing about it. Keep the action and the state it produced along with the final screen. Check side effects, such as files written, rows inserted and messages sent, beside what is visible. Mock an external system only where a boundary in production already isolates it. A test mode or dry run can still make network calls or open a browser, so when the safe path relies on one, observe which effects it skips (files, network, git refs) before trusting its name.
 - Cleanup. Stop what the run started by its recorded process id or session name, never by process name. Remove instances and scratch state, and keep the evidence at a location the skill names.
-- Helpers. Every script that ships with the skill is executable, runs on its own, has its invocation shown in the skill body, and has been run against its real target.
+- Scripts. The journey index names each journey's script with when and why to run it, and each script meets the script rules in the layout reference.
 
 ## Choose the journeys
 
@@ -45,7 +45,7 @@ The case is fictional. The request is to create a verification skill for `ledger
 
 Weak draft: "Run `cargo run`, wait five seconds, press `a` to add an entry, take a screenshot. Cleanup: `pkill ledger`." The command came from memory, the sleep is a guess, the screenshot shows only the last screen, the expected result has no source, and `pkill` also kills the user's own session.
 
-Adequate draft: the launch command is the workspace's `verify-ledger` task, read at its line. Each drive runs in its own named terminal session with `LEDGER_DATA_DIR` pointing at a scratch directory. Readiness is the `ledger ready (build <sha>)` banner, checked against the checkout's commit. The add-entry journey types an entry, then reads the list back from the CLI with `ledger list --json` and finds the entry there, and its expected result cites the spec section that defines an entry. Cleanup kills the named session and removes the scratch data directory, and the transcript stays in the evidence directory.
+Adequate draft: the launch command is the workspace's `verify-ledger` task, read at its line. Each drive runs in its own named terminal session with `LEDGER_DATA_DIR` pointing at a scratch directory. Readiness is the `ledger ready (build <sha>)` banner, checked against the checkout's commit. The add-entry journey runs `scripts/verify-ledger-add-entry.sh`; its `--help` names the claim it proves, its data-directory input and its command line. The script types an entry, then reads the list back with `ledger list --json` and finds the entry there. The journey index says to run it after any change to how entries are stored, and the journey's expected result cites the spec section that defines an entry. Cleanup kills the named session and removes the scratch data directory, and the transcript stays in the evidence directory.
 
 ## When to stop
 

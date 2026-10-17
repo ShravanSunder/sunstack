@@ -4,7 +4,7 @@ This reference owns choosing, for each obligation, the evidence that can tell a 
 
 Expected inputs: each requirement with its obligations, references and target constraints; each obligation's seam from the Program Design trace table; and the journeys and real-path tests step 2 read.
 
-Return: for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, needed with its entry and observation, or none), and any `specification-gap` or `program-design-gap`.
+Return: for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, needed with its entry and observation, or none), each journey's lifetime, and any `specification-gap` or `program-design-gap`.
 
 ## Evidence classes
 
@@ -46,8 +46,19 @@ Bad choices:
 ## Journey: existing, needed or none
 
 - **Existing:** a `verify-<app>` journey whose source drives this entry and reads this outcome on the planned target. When it observes the outcome but misses a case the obligation covers, such as the failure path or the denied actor, the row names the case to add.
-- **Needed:** no journey reaches the entry or reads the outcome. Write `needed:` with the entry it must drive and what it must read. The Verifier builds it before delivery.
+- **Needed:** no journey reaches the entry or reads the outcome. Write `needed:` with the entry it must drive and what it must read.
 - **None:** a pure rule or structural claim needs no journey.
+
+## Lifetime: lasting or temporary
+
+Each row that names a journey marks it lasting or temporary.
+
+- **Lasting:** the outcome will be checked again, such as a user-facing behavior that can regress, a release check, or something other projects touch. The journey runs from a self-describing script in the project's own scripts location, and `verify-<app>` says which script proves it and when and why to run it. An existing journey is lasting. A lasting `needed:` journey is built before any observation that depends on it.
+- **Temporary:** a one-time check. The Verifier runs it as a probe in the task's scratch beside its evidence, and deletes the probe once the evidence is kept.
+
+A row checking that a one-time backfill set each old note's created date is temporary: once the release has run the backfill, nothing runs it again. The drafts row below is lasting.
+
+A row with no journey, decided by a focused test, structural evidence or a reused real-path test, carries no lifetime and adds no script or probe.
 
 ## Worked rows
 
@@ -62,6 +73,7 @@ proven by     Save a draft in the installed app, quit it, reopen it, and see the
 reference     R4's worked example: title "Q3 plan", a 2,000-character body ending in an emoji
 target        the installed release build on macOS, default profile, empty data directory
 journey       verify-notes `drafts`: drives save, quit and relaunch; reads the editor's title and body
+lifetime      lasting: any later storage change can lose drafts
 passes when   after relaunch the editor shows exactly that title and body; a build that keeps drafts
               only in memory, or cuts the body at 1,024 characters, fails
 reuses        none: `drafts-store.test.ts` swaps the disk for an in-memory store, so it never crosses a restart
@@ -119,4 +131,4 @@ U3 "search finds my file" (R8 pressing Enter submits once; R9 results come from 
 - **No reference to judge against.** R21 says search "feels fast", with no threshold or workload, so no passing condition can fail a slow build. Record a `specification-gap` for the missing threshold and workload.
 - **A harness that can't reach the boundary.** When the existing journey can't restart the app, "survives a restart" doesn't become "save returns 201". Keep the obligation, and write the journey as `needed:`.
 
-Complete when every obligation has a class whose observation sits where its wrong behavior is real, a target, and an existing, needed or no journey; every pure rule and structural claim has proportional proof; and every row that can't be written carries its gap.
+Complete when every obligation has a class whose observation sits where its wrong behavior is real, a target, and an existing, needed or no journey, with a lifetime for each journey; every pure rule and structural claim has proportional proof; and every row that can't be written carries its gap.

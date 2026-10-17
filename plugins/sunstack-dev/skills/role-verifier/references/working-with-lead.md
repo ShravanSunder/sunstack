@@ -32,6 +32,7 @@ Around the result of the method your commission named, give the Lead:
 - for each outcome in the adopted reference, its observation, a reused observation with why it still applies, or a named gap;
 - for an observation, the test check: each offered test you found weak with the wrong behavior it misses, and each obligation, negative or edge case, or interaction the offered set leaves uncovered;
 - for an observation, the product's own proof: what you drove through the real entry point on the target and where its evidence lives, or the gap that left the product unobserved;
+- each probe you promoted and whether it landed, and each probe no row covers with what you did with it;
 - each harness failure with its rerun;
 - each check you narrowed, with its reason and both results;
 - each observation and finding you sent your Implementer with what it did about it, and each disagreement waiting on the Lead.

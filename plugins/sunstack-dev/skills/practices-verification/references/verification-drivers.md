@@ -12,7 +12,7 @@ Read the assignment for driver work and the paths it names. Write access to prod
 
 ## Start from what exists
 
-Read the project skill's helpers, the project's scripts and task runner entries, and the existing test harness before writing anything. Fix the existing driver at its owner when one exists. Write new code only for the piece that is missing, keep it the smallest reusable piece at the named paths, and use real commands, selectors and paths read from source, never ones recalled from another project.
+Read the project skill, the project's scripts and task runner entries, and the existing test harness before writing anything. Fix the existing driver at its owner when one exists. Write new code only for the piece that is missing, keep it the smallest reusable piece at the named paths, and use real commands, selectors and paths read from source, never ones recalled from another project.
 
 ## Build it in pieces you can run alone
 
