@@ -12,8 +12,8 @@ artifact and source anchor
 claim or rule
 failure and downstream ambiguity: contradiction or failure path, observable consequence, and what the next author/planner would otherwise have to guess
 smallest semantic correction target
-affected concept: Requirements | Specification | Program Design | named combination
-semantic correction route: spec-design | program-design | caller | spec-design -> program-design
+affected concept: Requirements | Specification | Program Design | Verification Design | named combination
+semantic correction route: spec-design | program-design | verification-design | caller | owners in document order, such as spec-design -> program-design
 validation note
 semantic coverage to rerun
 contested evidence
@@ -89,7 +89,8 @@ stop
   or deferral condition when applicable
 
 continue
-  recommended next skill: discuss-pathfinding | spec-design | program-design
+  recommended next skill: discuss-pathfinding | spec-design | program-design |
+    verification-design
   phase-owned reason
   compact handoff:
     relevant governing-source and artifact pointers
@@ -107,9 +108,10 @@ Select one route from the reduced result:
 
 - accepted Requirements or Specification correction only -> `spec-design`;
 - accepted Program Design correction only -> `program-design`;
-- accepted Requirements or Specification correction plus Program Design correction -> `spec-design` first, carrying the complete accepted set;
+- accepted Verification Design correction only -> `verification-design`;
+- accepted corrections spanning documents -> the most upstream owner first, in the order `spec-design`, `program-design`, `verification-design`, carrying the complete accepted set;
 - accepted caller-owned correction -> stop with `needs-revision` and the exact caller action;
-- complete review evidence proves the current model fails and replacement owner meaning is unmade -> `discuss-pathfinding`, with return owner `spec-design` for Requirements or Specification meaning, `program-design` for an owner-controlled tolerance that blocks structural How, or `spec-design` first when the gap spans observable meaning and Program Design;
+- complete review evidence proves the current model fails and replacement owner meaning is unmade -> `discuss-pathfinding`, with return owner `spec-design` for Requirements or Specification meaning, `program-design` for an owner-controlled tolerance that blocks structural How, `verification-design` for an owner-controlled limit on what may stay unverified, or the most upstream of these when the gap spans several;
 - unresolved owner choice that is not the unmade-replacement case -> stop `decision-needed`;
 - invalid input or missing evidence -> stop `blocked`;
 - no required correction -> stop `ready`.
@@ -123,7 +125,7 @@ Produce exactly one result:
 - `not-converging`: the correction loop meets the convergence rule below; the orchestrator brings the owner a brief of what keeps failing.
 - `blocked`: a required artifact/source/access input is missing or stale, or required mode/check coverage is partial, blocked, or missing status, so the review cannot truthfully judge the mode.
 - `decision-needed`: required coverage is complete enough to isolate an unresolved user/authority-owned choice, including a proposed scope expansion or requirement subtraction, and that choice (not missing evidence or author correction) is the first action needed.
-- `needs-revision`: coverage is sufficient to judge the artifact and at least one accepted blocker/important finding requires `spec-design`, `program-design`, or caller correction; this takes precedence over `decision-needed` when revision is independently required.
+- `needs-revision`: coverage is sufficient to judge the artifact and at least one accepted blocker/important finding requires `spec-design`, `program-design`, `verification-design`, or caller correction; this takes precedence over `decision-needed` when revision is independently required.
 - `ready`: the complete condition above holds.
 
 When states mix, apply precedence `not-converging -> blocked -> needs-revision -> decision-needed -> ready`.

@@ -5,7 +5,7 @@ Use this before returning a current-state validation receipt for an improvement 
 ## Required Checks
 
 - Plan was read end to end after writing or loading.
-- Planning admission is `current-three-artifact-design-ready` or `implementation-mechanics-only`, its evidence identity is recorded, and its semantic coverage is current. Missing or semantically stale admission is `blocked`, not `needs-refresh`.
+- Planning admission is `current-four-document-design-ready` or `implementation-mechanics-only`, its evidence identity is recorded, and its semantic coverage is current. Missing or semantically stale admission is `blocked`, not `needs-refresh`.
 - Planned-at branch and HEAD are recorded; current validation branch/HEAD belongs to this receipt, not the plan artifact.
 - Target branch/base branch are recorded when branch-specific.
 - Every cited file exists, or the plan says the file is intentionally new.
@@ -45,7 +45,7 @@ Issues:
 - <missing proof, stale path, oversized task, blocker, or none>
 
 Next:
-- spec-design | program-design | spec-program-review | plan-handoff | plan-implementation to establish delivery intent | implementation-review | originating planner correction
+- spec-design | program-design | verification-design | spec-program-review | plan-handoff | plan-implementation to establish delivery intent | implementation-review | originating planner correction
 
 ```
 

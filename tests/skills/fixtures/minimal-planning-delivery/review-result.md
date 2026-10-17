@@ -1,7 +1,7 @@
-# Three-Artifact Design Review Result
+# Four-Document Design Review Result
 
 Operation: review
-Mode: three-artifact-design
+Mode: four-document-design
 Requirements identity: requirements-scenario-label-summary-v1
 Specification identity: specification-scenario-label-summary-v1
 Program Design identity: program-design-scenario-label-summary-v1

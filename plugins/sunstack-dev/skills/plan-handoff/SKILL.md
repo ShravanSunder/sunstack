@@ -12,7 +12,7 @@ Package an existing implementation plan so another agent can review or execute w
 ## Core Rules
 
 - Use only when an implementation plan or plan artifact exists.
-- If the source is spec/design context without an implementation plan, use `spec-handoff` for portability. If the caller wants a plan and carries current ready three-artifact design authority, route to `plan-implementation`; never create the plan inside the handoff.
+- If the source is spec/design context without an implementation plan, use `spec-handoff` for portability. If the caller wants a plan and carries current ready four-document design authority, route to `plan-implementation`; never create the plan inside the handoff.
 - If the source is branch, diff, changed files, commits, validation, or blocker evidence, use `implementation-handoff`.
 - Prefer repo-local temp artifacts: `<repo-root>/tmp/plan-workflows/<yyyy-mm-dd>-<repo>-<branch>-<plan-slug>/`.
 - Include the repo/worktree, branch, source plan path, referenced code/docs, open questions, and exact requested task.

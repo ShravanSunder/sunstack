@@ -13,13 +13,13 @@ Package spec/design context so another agent can continue without reconstructing
 
 - Use this only before an implementation plan exists.
 - Package decisions, non-goals, open questions, source evidence, contracts, tradeoffs, security context, and proof expectations.
-- Always name proof expectations in the handoff response: validation strategy, proof assumptions, explicit planning deferral, or open proof gaps.
+- Always name proof expectations in the handoff response: a pointer to the Verification Design, or, before one exists, the validation strategy, proof assumptions, explicit planning deferral, or open proof gaps.
 - Preserve uncertainty. Do not hide open questions to make the packet feel done.
-- Do not create an implementation plan here. When the packet proves a `three-artifact-design` mode `spec-program-review` result is `ready` and semantically current for the current Requirements, Specification, and Program Design, recommend exactly `plan-implementation`. Missing structural How routes to `program-design`; a complete but unreviewed or stale three-artifact design routes to `spec-program-review`; missing Why/What routes to `spec-design`.
+- Do not create an implementation plan here. When the packet proves a `four-document-design` mode `spec-program-review` result is `ready` and semantically current for the current Requirements, Specification, Program Design, and Verification Design, recommend exactly `plan-implementation`. Missing structural How routes to `program-design`; a missing or stale proof strategy routes to `verification-design`; a complete but unreviewed or stale four-document design routes to `spec-program-review`; missing Why/What routes to `spec-design`.
 - Do not review the specification or program design here. Use `spec-program-review`.
 - Do not package code, branch, diff, commits, or test state. Use `implementation-handoff` when implementation state exists.
 - Always write a file artifact and also print the copy-paste prompt in the response unless the user explicitly asks for chat-only output.
-- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, other Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
+- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, other Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design/Verification Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
 
 ## Workflow
 
@@ -41,7 +41,7 @@ Package spec/design context so another agent can continue without reconstructing
    - decisions and non-goals
    - open questions
    - proof expectations or proof gaps
-   - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `spec-program-review` for a complete but unreviewed/stale three-artifact design, `plan-implementation` for current ready three-artifact design, or `docs-maintain` for artifact lifecycle work
+   - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `verification-design` for a missing or stale proof strategy, `spec-program-review` for a complete but unreviewed/stale four-document design, `plan-implementation` for current ready four-document design, or `docs-maintain` for artifact lifecycle work
    - full clickable artifact links (absolute path + line) for handoff artifacts the human is expected to open
 
 ## Packet Contents
@@ -52,8 +52,8 @@ Package spec/design context so another agent can continue without reconstructing
 - Contracts, interfaces, data flow, and ownership boundaries
 - Tradeoffs and who pays their cost
 - Security context or reason it is not security-sensitive
-- Proof expectations: validation strategy, proof assumptions, explicit planning deferrals, or open proof gaps
-- Planning-admission evidence: current Requirements, Specification, and Program Design paths, the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, evidence that it covers all three artifacts' current meaning, or the exact missing/stale prerequisite
+- Proof expectations: the Verification Design pointer, or, before one exists, validation strategy, proof assumptions, explicit planning deferrals, or open proof gaps
+- Planning-admission evidence: current Requirements, Specification, Program Design, and Verification Design paths, the current four-document design review result (mode, covered targets, result, and coverage statement) or a pointer to it, evidence that it covers all four documents' current meaning, or the exact missing/stale prerequisite
 - Source evidence inspected
 - Open questions and why they matter
 - Exact next task for the receiving agent
@@ -62,7 +62,7 @@ Package spec/design context so another agent can continue without reconstructing
 ## Common Mistakes
 
 - Treating handoff as spec approval or phase completion.
-- Routing a handoff to planning without a `three-artifact-design` mode `ready` review result whose semantic coverage includes the current Requirements, Specification, and Program Design.
+- Routing a handoff to planning without a `four-document-design` mode `ready` review result whose semantic coverage includes the current Requirements, Specification, Program Design, and Verification Design.
 - Turning design context into an implementation plan inside the handoff.
 - Hiding open questions.
 - Asking the next agent to infer source files from chat history.

@@ -123,7 +123,8 @@ Bright line: the ten definition labels and every label this skill coined (the fi
 - `practices-research`: evidence gathering, prior art, current docs, memory/session mining, or source ledgers.
 - `spec-design`: durable authoritative Why/What contract.
 - `program-design`: durable structural How once observable obligations are settled.
-- Planning from current ready three-artifact design: `plan-implementation`; execution of an exact ready canonical plan whose delivery context is `pr-ready-unmerged`: `implement-plan`; independent implementation review: `implementation-review`. Do not invoke a retired workflow.
+- `verification-design`: how each requirement will be proven, once structural How is settled.
+- Planning from current ready four-document design: `plan-implementation`; execution of an exact ready canonical plan whose delivery context is `pr-ready-unmerged`: `implement-plan`; independent implementation review: `implementation-review`. Do not invoke a retired workflow.
 - open in this skill: blocked work, broken model, conflicting artifacts, repeated loop, or missing authority when no shipped owner exists yet.
 
 ## Red Flags

@@ -89,6 +89,27 @@ export const VerifierWork = z
   ])
   .describe("Exactly one kind of Verifier work");
 
+export const VerificationDesignBasis = z
+  .discriminatedUnion("kind", [
+    z.strictObject({
+      kind: z
+        .literal("pointer")
+        .describe("A design project's Verification Design governs the work"),
+      location: RequiredText.describe(
+        "The Verification Design at its reviewed revision, reachable without the commissioner, and the requirement rows this commission covers",
+      ),
+    }),
+    z.strictObject({
+      kind: z.literal("none").describe("No design project governs the work"),
+      reason: RequiredText.describe(
+        "Why none governs it, such as a mechanics-only improvement or a skill change; a design project without a current Verification Design is a gap to close before the commission, never none",
+      ),
+    }),
+  ])
+  .describe(
+    "The proof strategy the Verifier challenges before the build and observes from at delivery",
+  );
+
 export const VerifierPacket = JobBase.extend({
   role: z
     .literal("verifier")
@@ -102,6 +123,7 @@ export const VerifierPacket = JobBase.extend({
   adoptedReference: RequiredText.describe(
     "The adopted correctness reference from the governing sources",
   ),
+  verificationDesign: VerificationDesignBasis,
   pairedImplementer: SessionAddress.describe("The paired Implementer Sidekick's real address"),
   work: VerifierWork,
 });

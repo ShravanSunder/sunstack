@@ -2,7 +2,7 @@
 
 Mission: verify that executable proof a design cites is real. When a Specification or Program Design points at commands, harnesses, or reproducible evidence as its proof, observe that proof under the recorded grant, or give the 🔎 Reviewer Sidekick the exact gap between the claim and the evidence.
 
-Predicate: the reviewed design cites executable proof claims. When it does not, proof modality and seam sufficiency stay with the read-only `proof` focused check.
+Predicate: the reviewed design cites executable proof claims. When it does not, seam sufficiency stays with the read-only `proof` focused check.
 
 Expected inputs: the complete review context, the claim inventory (each cited command, expected outcome, evidence artifact, claimed layer), and a populated `execution grant` naming the allowed command set and scratchpad path. Without a grant nothing runs; inspect the cited evidence only and return the boundary.
 

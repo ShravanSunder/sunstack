@@ -10,11 +10,11 @@ Return: coverage, reconstructed claims/model slice, authority/traceability evide
 
 Verify the complete target set, governing specification, and source authority. Read every target file or separately labeled in-chat record completely — the whole artifact, top to bottom — before substantive findings; sampling sections or trusting a summary is a skipped read. Account for the read in the coverage rows: every section of every target artifact appears as covered by a dimension or judgment, or as an anchored exclusion with its reason, and completion binds to that accounting. Coverage rows are the accounting, not a reading receipt: add no digests, hashes, line counts, or read attestations beside them. Open load-bearing sources cited by claims.
 
-For file-backed design documents, inventory every required visual asset and Markdown embed. Resolve relative links, open the actual image when access exists, and compare labels, edges, grouping, boundaries, order, alt text and caption with the governing prose and exact semantic views. Require actual image-inspection evidence and the supported destination-preview result claimed by the author. A cache-only path, missing asset, broken embed, unreadable image, invented relationship or decorative visual is a concrete finding. A picture-type view passed as a text fence while the destination renders Mermaid is a finding, even when image access is missing. A UI image that adds a control the requirement does not change, or that skips a changed screen, is a finding. When image or preview access is unavailable, return exact partial visual coverage; do not infer a pass from Markdown syntax, a prompt or an author's summary.
+For file-backed design documents, inventory every required visual asset and Markdown embed. Resolve relative links, open the actual image when access exists, and compare labels, edges, grouping, boundaries, order, alt text and caption with the governing prose and exact semantic views. Require actual image-inspection evidence and the supported destination-preview result claimed by the author. A cache-only path, missing asset, broken embed, unreadable image, invented relationship or decorative visual is a concrete finding. A drawn view with no rendering result from the shared rendering owner, or whose gap was recorded as a pass, is a finding, even when image access is missing. A UI image that adds a control the requirement does not change, or that skips a changed screen, is a finding. When image or preview access is unavailable, return exact partial visual coverage; do not infer a pass from Markdown syntax, a prompt or an author's summary.
 
 Verify the accepted requirements set against the current owner-confirmed requirements record and confirmed goal boundary. Otherwise use the last inspectable owner-accepted governing source. If neither source exists or they conflict, return the authority gap. Never recover accepted meaning from mutually narrowed current files alone. Any removed or superseded requirement needs explicit owner authority. For simplification, recovery of the accepted starting point, or requirement subtraction, return one compact disposition row per stable identity (`covered | owner-authorized supersession | gap` plus anchor). Identities may share a row only when every member identity is enumerated and all share the same disposition and anchor; a bare "coverage intact" assertion is not a result in those cases.
 
-For `program-only` and `three-artifact-design`, inspect the complete structural-realization confirmation or return its exact missing owner decision. Treat design dimensions as `required | satisfied by the existing system | not applicable | unresolved`; a general review category is not a reason to invent a subsystem.
+For `program-only` and `four-document-design`, inspect the complete structural-realization confirmation or return its exact missing owner decision. Treat design dimensions as `required | satisfied by the existing system | not applicable | unresolved`; a general review category is not a reason to invent a subsystem.
 
 Partial coverage cannot return a clean recommendation.
 
@@ -27,7 +27,7 @@ authority, problem, consumers, outcomes
 requirements, contracts, constraints
 components, owners, interfaces, state, flows
 failure/concurrency/security behavior
-proof modalities and seams
+proof obligations, observation seams, and planned observations
 decisions, non-goals, debt, assumptions, gaps
 ```
 
@@ -60,7 +60,7 @@ Use applicable probes:
 - proof break;
 - pretend planner.
 
-Use the downstream consumer for the selected mode: a pretend program designer for `specification-only`, and a pretend planner for `program-only` or `three-artifact-design`. The consumer may decide only its downstream-owned work; a required invention of meaning owned by the reviewed artifact is a readiness failure.
+Use the downstream consumer for the selected mode: a pretend program designer for `specification-only`, and a pretend planner for `program-only` or `four-document-design`. The consumer may decide only its downstream-owned work; a required invention of meaning owned by the reviewed artifact is a readiness failure.
 
 ## Reconstruct for the Human Reader
 
@@ -72,7 +72,7 @@ failure simulation, proof path, or authoritative lookup would become
 underdetermined?
 ```
 
-For `specification-only`, reconstruct Requirements -> Specification observable contract -> proof obligation. For `program-only`, reconstruct governing obligation -> scenario/contract -> current/proposed call-path delta -> owner/state/failure behavior -> proof seam. For `three-artifact-design`, reconstruct Requirements -> Specification -> scenario/contract -> Program Design call path and other internal How -> proof.
+For `specification-only`, reconstruct Requirements -> Specification observable contract -> proof obligation. For `program-only`, reconstruct governing obligation -> scenario/contract -> current/proposed call-path delta -> owner/state/failure behavior -> proof seam. For `four-document-design`, reconstruct Requirements -> Specification and its proof obligations -> scenario/contract -> Program Design call path, other internal How, and proof seam -> Verification Design observation and passing condition.
 
 Flag a concrete comprehension failure, process narration, obscure heading, decorative view, or deletion candidate only when its reader consequence is named. Inability to restate the model is evidence of incoherence, not automatically a prose finding. A material unresolved comprehension risk may route to `reader-understanding` after parent reduction.
 

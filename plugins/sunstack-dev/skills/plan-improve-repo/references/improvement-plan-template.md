@@ -10,11 +10,11 @@ Planned at branch/HEAD: <branch> / <git sha>
 Repo: <absolute path>
 ## Why This Plan Can Be Written
 
-- Basis: current-three-artifact-design-ready | implementation-mechanics-only
+- Basis: current-four-document-design-ready | implementation-mechanics-only
 - Evidence identity:
-  - current-three-artifact-design-ready: <current Requirements path, current Specification path, current Program Design path, the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it, covered identities>
+  - current-four-document-design-ready: <current Requirements path, current Specification path, current Program Design path, current Verification Design path, the current four-document design review result (mode, covered targets, result, and coverage statement) or a pointer to it, covered identities>
   - implementation-mechanics-only: <classification result identity and inspected-source identities>
-- Current review coverage: <evidence that review still covers all three artifacts>
+- Current review coverage: <evidence that review still covers all four documents>
 
 ## Problem
 
@@ -53,7 +53,7 @@ Read-only context:
 
 | Obligation | Slice | Evidence source | Focused proof | Integration/manual proof | Freshness/stop guard |
 | --- | --- | --- | --- | --- | --- |
-| <identity> | <slice> | <source> | <command/check> | <if required> | <guard> |
+| <identity> | <slice> | <Verification Design row, or the chosen source when mechanics-only> | <command/check> | <if required> | <guard> |
 
 ## Proof Gates
 

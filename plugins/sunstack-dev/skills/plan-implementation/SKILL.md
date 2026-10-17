@@ -1,6 +1,6 @@
 ---
 name: plan-implementation
-description: "Use when writing or revising a repository-grounded implementation plan from reviewed Requirements, Specification, and Program Design, an admitted improvement finding, or a direct planning request. Not for audit-only discovery (plan-improve-repo)."
+description: "Use when writing or revising a repository-grounded implementation plan from a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for audit-only discovery (plan-improve-repo)."
 ---
 
 # Plan Implementation
@@ -12,9 +12,9 @@ An implementation plan is a proof route through current authority and repository
 ## Admit Planning
 
 1. Admit either:
-   - current distinct Requirements, Specification, and Program Design with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule; or
-   - for an orchestrated improvement goal or owner-requested delivery of a direct improvement result, the unchanged `plan-improve-repo` return containing an admitted finding pointer, `current-three-artifact-design-ready | implementation-mechanics-only` classification, required evidence pointers, and current applicability anchors.
-2. Reject missing, combined, conflicting, stale, `design-required`, or malformed authority with `revision-requested | blocked`, exact evidence, and semantic owner. Do not upgrade an improvement basis.
+   - the four current, distinct design documents (Requirements, Specification, Program Design, Verification Design) with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule, in its `four-document-design` mode; or
+   - for an orchestrated improvement goal or owner-requested delivery of a direct improvement result, the unchanged `plan-improve-repo` return containing an admitted finding pointer, `current-four-document-design-ready | implementation-mechanics-only` classification, required evidence pointers, and current applicability anchors.
+2. Reject missing, combined, conflicting, stale, `design-required`, or malformed authority with `revision-requested | blocked`, exact evidence, and semantic owner. A design with a missing or stale Verification Design is `revision-requested` carrying `verification-design-gap` with the requirements that lack a current row; planning never writes the proof strategy itself. Do not upgrade an improvement basis.
 3. Establish `requested terminal: plan-only | pr-ready-unmerged` before substantive planning. Use explicit user or orchestrator intent. If a direct request is ambiguous, ask once at entry.
 4. At the same entry boundary, preserve an existing tracking selection or offer once between no tracking and one available named `ops-*` owner. Return a named selection separately for the caller to invoke; no tracking continues immediately.
 
@@ -24,9 +24,9 @@ Completion: the governing basis, requested terminal, tracking disposition, and p
 
 1. Read the governing authority completely and re-anchor against current branch/HEAD, instructions, owners, interfaces, tests, commands, and proof seams.
    IF one bounded repository or proof question benefits from helper work, load `practices-manage-agents` and return an evidence-only assignment, then verify its anchors before continuing. The Lead still authors every plan row and delivery boundary.
-2. MUST load `references/slice-and-proof-design.md` and return its vertical slice graph, obligation/proof map, independent oracle, project proof-layer source or "project silent", property-versus-example choice when one rule covers the cases, existing-test keep/repair/remove disposition, necessary dependency edges, integration gates, false-green risks, and stop conditions. A remove row without replacement, redundancy, or dead-contract proof is not a ready plan.
+2. MUST load `references/slice-and-proof-design.md` and return its vertical slice graph, obligation/proof map with the slice and command that earn each Verification Design row, independent oracle, project proof-layer source or "project silent", property-versus-example choice when one rule covers the cases, existing-test keep/repair/remove disposition, necessary dependency edges, integration gates, false-green risks, and stop conditions. A remove row without replacement, redundancy, or dead-contract proof is not a ready plan.
 3. Choose the smallest coherent vertical grouping. If only one exists, use it without alternatives. If materially different groupings or PR topologies exist, pick one and record the choice, the alternatives, and the reason in the plan.
-4. Ensure every slice names its external dependencies and the boundary where a stand-in is allowed if one is missing; every contract-only or prefactoring slice names its downstream vertical consumer; every obligation has fitting proof; and no step invents Why, What, structural How, or external authority.
+4. Ensure every slice names its external dependencies and the boundary where a stand-in is allowed if one is missing; every contract-only or prefactoring slice names its downstream vertical consumer; every Verification Design row is scheduled in a slice and every other obligation has fitting proof; and no step invents Why, What, structural How, proof strategy, or external authority.
 5. MUST load `../../shared-references/canonical-implementation-plan.md` and return its Canonical Result record, applying its complete governing-basis, result, delivery-context, home, and validation contract.
 6. For every `pr-ready-unmerged` plan, first resolve the project root, then inspect that project's ignore coverage for `tmp/*`, add that line to the project-root `.gitignore` only when equivalent coverage is absent, and finally write exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan and return its exact path. This includes orchestrated goals and direct continued-delivery planning.
 7. Return exactly `ready | revision-requested | blocked`. `ready` includes the complete canonical record and any separate tracking side-route selection; non-ready results create no new plan or preserve an existing ready record unchanged.
