@@ -15,7 +15,7 @@ Draft of 2026-10-17 by the 🦁 Lead (claude-local a6321a2f), written with `skil
 
 ## Targets and runs
 
-Plugin `sunstack-dev`. Each run has one target. Two stacked PRs (`gh stack`): PR A holds runs 1–6, the design side; PR B holds runs 7–13, the consumers. They merge together.
+Plugin `sunstack-dev`. Each run has one target. Three stacked PRs (`gh stack`): PR A holds runs 1–6, the design side; PR B holds runs 7–13, the consumers; PR C holds run 14. They merge together.
 
 | Run | Target | Kind | PR |
 |---|---|---|---|
@@ -32,6 +32,7 @@ Plugin `sunstack-dev`. Each run has one target. Two stacked PRs (`gh stack`): PR
 | 11 | `skills/spec-handoff` and `skills/plan-handoff`: carry the four-document basis | update | B |
 | 12 | `skills/orchestrator-implementation-goal`: token mapping | update | B |
 | 13 | the Verifier's commission: `role-lead/references/working-with-verifier.md` and `verifier-contract.ts` | update | B |
+| 14 | lasting versus temporary journeys (D17): `verification-design` (row field and reference), `role-lead/references/working-with-verifier.md`, `practices-verification`, `practices-verification-maintenance` | update | C |
 
 Outside this repository: the devfiles skill index needs a `verification-design-gap` row. That needs the owner's commit approval, so it's listed under Coordination.
 
@@ -87,6 +88,7 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 | D14 | Two stacked PRs: the design side, then the consumers. | Lead call: review in two readable pieces that merge together. |
 | D15 | `diagram-rendering-and-fallbacks.md` is the only rule for choosing a medium. Each phase keeps its view predicates, its required semantic fields and its UI-moment obligations, and drops its own medium mandate. On main those mandates are `spec-design/SKILL.md:234,306`, `program-design/SKILL.md:232–238,356,358`, `orchestrator-design/SKILL.md:46` and `spec-program-review/SKILL.md:230`. | Spec review RA1, 2026-10-17: two live medium rules would let an HTML view pass one rule and fail the other. |
 | D16 | Verification Design has no standalone review mode. A revision to it alone is reviewed in the four-document mode, which replaces `three-artifact-design`. The `specification-only` and `program-only` modes stay. | Spec review, 2026-10-17: a standalone mode would need its own admission design, and D8 adds no review ceremony. |
+| D17 | Each Verification Design row marks its journey **lasting** or **temporary**. A lasting journey (the outcome will be checked again: a user-facing behavior that can regress, a release check, something other projects touch) goes into the project's `verify-<app>` skill: its script in `scripts/`, its reference, and its line in the journey index. A temporary one is a probe in the task's scratch beside its evidence, deleted once the evidence is kept. The Lead commissions a lasting `needed:` journey as verification-skill work before observing. A probe no row covers is reported to the Lead, never promoted or deleted silently. Run 14 owns this, as a third stacked PR. | Owner, 2026-10-17: "the verification phase should decide if a verification script will be temporary or something useful going forward and properly put them in scripts with docs to easily find them going forward"; "verification is skills and scripts in a repo right". |
 
 ## Descriptions
 
