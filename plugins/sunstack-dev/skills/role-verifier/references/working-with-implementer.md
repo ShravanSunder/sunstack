@@ -12,7 +12,7 @@ MUST load `../../../shared-references/implementer-verifier-pairing.md` and retur
 
 Your Implementer messages you at assignment with its slice, how to build and run the project with its fixtures, the commands its gates run and when to expect the first target. Ask it directly for anything your method needs that the message left out, including the tests it offers as proof and where their runs live. Its description of the slice tells you where to look. The expected outcome still comes from your adopted reference.
 
-While you wait for a target, prepare. Read the project's verification skill and check that your drivers start; a skill that is missing or lacks a journey in scope goes to the Lead as the gap your role skill names. Observe nothing until a target is declared.
+While you wait for a target, prepare. Read the project's verification skill and check that your drivers start; a skill that is missing or lacks a lasting journey in scope goes to the Lead as the gap your role skill names. Observe nothing until a target is declared.
 
 For a feasibility challenge, ask for the proof design: the tests it plans, the layer of each and the real path it will drive. Send back each gap with the wrong behavior the design would miss, the passage of the adopted reference that requires catching it, and a route that would. The Implementer decides how to change its design inside the slice, and the Lead decides when the plan's proof has to change.
 
