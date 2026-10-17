@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verification: Design"
+  short_description: "Plan how requirements will be proven"
+  default_prompt: "Use $verification-design after Program Design to plan how each requirement will be proven: the reference it is judged against, the target and `verify-<app>` journey that will observe it, a passing condition a wrong build fails, reused real-path tests, and what stays unverified."

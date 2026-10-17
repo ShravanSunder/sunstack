@@ -53,7 +53,7 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
 1. **Name the destination.** State what the session must extract (decision, process, terms, or user requirements), the depth, and what is out of scope.
 
-   IF the missing meaning blocks Requirements, Specification, or a Program Design choice, load `../../shared-references/requirements-specification-program-design.md` and return the three-concept boundary, the pathfinding boundary that applies to this destination, and the exact owner that must receive the clarified meaning.
+   IF the missing meaning blocks Requirements, Specification, or a Program Design choice, load `../../shared-references/design-documents.md` and return the three-concept boundary, the pathfinding boundary that applies to this destination, and the exact owner that must receive the clarified meaning.
 
    If a calling phase supplies a return destination, record that exact destination before questioning. It is a boundary: this session may return confirmed meaning only to that destination and may not replace it with another plausible phase.
 

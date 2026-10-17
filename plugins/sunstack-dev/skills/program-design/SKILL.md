@@ -71,7 +71,7 @@ Produce terminal labels by observable condition:
 After producing the terminal result, return exactly one phase-guided route:
 
 ```text
-locally-ready      -> recommend spec-program-review in three-artifact-design mode
+locally-ready      -> recommend verification-design
 specification-gap  -> recommend spec-design
 decision-needed    -> missing structural-realization confirmation: stop for
                       the owner's reply;
@@ -82,7 +82,7 @@ decision-needed    -> missing structural-realization confirmation: stop for
 evidence-blocked | deferred -> stop with the exact reason
 ```
 
-Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A three-artifact design review handoff includes the distinct Requirements, Specification, and Program Design identities, confirmed goal boundary and accepted requirements set, structural-realization confirmation, constraints/non-goals, claimed proof and gaps, and review question. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct program-design invocation carries no cycle budget.
+Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A Verification Design handoff includes the distinct Requirements, Specification, and Program Design identities, confirmed goal boundary and accepted requirements set, structural-realization confirmation, the trace table's proof seams and their gaps, and constraints/non-goals. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct program-design invocation carries no cycle budget.
 
 ## Workflow
 
@@ -90,9 +90,9 @@ Before recommending a skill, inspect that destination's declared inputs and retu
 
 Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Program Design beneath that home and return its exact path. Preserve an authoritative pre-existing Program Design elsewhere; do not relocate or reject it because of the policy. The artifact-home policy applies only to a new output in the current call and is not persisted as workflow state.
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the Requirements and Specification identity check plus the fixed observable-contract boundary. Require one Requirements identity and one different Specification identity using the valid representation for the work's medium. A combined `Requirements/spec` artifact, a Requirements-titled artifact that also serves as the observable contract, or either missing identity returns `specification-gap` to `spec-design` before structural work begins. Do not infer separation from headings inside one artifact and do not create or copy either upstream artifact.
+MUST load `../../shared-references/design-documents.md` and return the Requirements and Specification identity check plus the fixed observable-contract boundary. Require one Requirements identity and one different Specification identity using the valid representation for the work's medium. A combined `Requirements/spec` artifact, a Requirements-titled artifact that also serves as the observable contract, or either missing identity returns `specification-gap` to `spec-design` before structural work begins. Do not infer separation from headings inside one artifact and do not create or copy either upstream artifact.
 
-Read the entire Requirements source, governing Specification, and confirmed goal boundary accepted by `spec-design`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity table (`E`), observable contracts and obligations (`R`), constraints, failure expectations, proof modalities, non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `spec-design` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
+Read the entire Requirements source, governing Specification, and confirmed goal boundary accepted by `spec-design`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity table (`E`), observable contracts and obligations (`R`), constraints, failure expectations, proof constraints (each proof obligation's threshold, target constraints, and reference), non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `spec-design` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
 
 Classify gaps as `missing meaning | conflicting meaning | feasibility question | design choice | planning detail`. Missing or conflicting meaning returns `specification-gap`; do not patch it locally.
 
@@ -227,15 +227,11 @@ Completion: every Specification obligation has one trace row with no blank cell;
 
 ### 15. Trace, simplify, and author the artifact
 
-Apply the Required Views predicates. For each selected view, state the reader question it answers: where each entity lives, who owns what, how a request reaches its effect and returns a result, what shape crosses each boundary, how state changes, how failure is contained or recovered, or how requirements map to owners and proof. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `../../shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference. Supply the selected precise views plus the per-document explanatory-visual obligation when applicable, and return the selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap.
+Apply the Required Views predicates. For each selected view, state the reader question it answers: where each entity lives, who owns what, how a request reaches its effect and returns a result, what shape crosses each boundary, how state changes, how failure is contained or recovered, or how requirements map to owners and proof. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `../../shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference. Supply the selected precise views plus the per-document explanatory-visual obligation when applicable, and return the document medium and any page proof, plus each view's selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap.
 
-A newly authored or substantively revised substantial Program Design renders each fired structural view through the shared renderer. Ownership, calls, sequence, state, flow, failure, and trust are Mermaid in the file when the destination renders Mermaid. A screen the user will see is also an Image Gen picture grounded in the current app, beside that Mermaid, not instead of it. An exact user format takes precedence, except a text fence for a picture-type view when Mermaid can render. No decorative filler satisfies the requirement. Route the Lead-authored composition through the shared rendering owner. An attractive generated image with an invented owner, edge, state, boundary, or UI control fails. A generated image never excuses a missing required field or becomes the authoritative design. Reuse only after freshness inspection, and do not regenerate for typo-only edits. A text fence is not a pass for those views when Mermaid can render.
+A newly authored or substantively revised substantial Program Design renders each fired structural view through the shared rendering owner, which chooses every medium. A screen the user will see also gets a UI view grounded in the current app, beside its structural views, not instead of them. No decorative filler satisfies the requirement. An attractive generated image with an invented owner, edge, state, boundary, or UI control fails. A generated image never excuses a missing required field or becomes the authoritative design. Reuse only after freshness inspection, and do not regenerate for typo-only edits.
 
 Keep distinct reader questions in separate views when combining them would hide an owner, call edge, state transition, failure path, or proof seam. A request for one diagram or valid Mermaid syntax does not override the fired view predicates or semantic fields: reject the overloaded request and render the separate inspectable views now rather than also producing the lossy all-in-one view.
-
-Rejecting a requested medium as lossy does not complete a fired view. Select and render the clearest supported alternative that preserves the required semantic fields. In a read-only or chat-only run, show that view in the response; explaining the fallback without producing it leaves the view incomplete.
-
-Do not present unverified Mermaid as the readable result. A fenced plain-text sketch is allowed only when no Mermaid renderer exists. For a picture-type or Mermaid-bound view, that sketch is a gap, not a pass, including in a read-only or chat-only response.
 
 MUST load `references/artifact-and-self-review.md` with the Required Views decisions and rendering results to consume and verify the binding table and trace table, apply view examples and pruning, and return the artifact decision, artifact identity, trace-navigation result, view-verification result, pruned elements, and exact view gaps.
 
@@ -296,7 +292,7 @@ Return the distinct Requirements, Specification, and Program Design identities; 
 
 IF returning a substantial program design in chat, use the `presentation-*` skill matching the current surface to render the selected component, call, state, or failure views before the compact result summary; honor an exact user-requested format instead. The durable artifact remains the source of truth.
 
-Completion: the caller can request three-artifact design review through `spec-program-review` or supply the exact missing specification decision/evidence.
+Completion: the caller can continue to `verification-design` or supply the exact missing specification decision/evidence.
 
 ## Required Views
 
@@ -333,7 +329,7 @@ IF a predicate holds and delegation is useful, MUST load `references/lanes/lane-
 
 The subagent loads `references/lanes/lane-schema.md` and the exact selected lane path named above.
 
-Parallel-safe only after the lane prerequisites exist and its result is not an input to another selected lane; scheduling may serialize. Instance authority is equal to or narrower than the lane maximum and never includes alternatives, target models or views, design selection, structural realization, prose, normative integration, three-artifact design review, or acceptance. Return a `complete | partial | blocked` evidence receipt; after one explicit follow-up, silence is `no-receipt`. The Lead opens load-bearing sources, verifies the evidence, resolves conflicts, and alone designs and writes.
+Parallel-safe only after the lane prerequisites exist and its result is not an input to another selected lane; scheduling may serialize. Instance authority is equal to or narrower than the lane maximum and never includes alternatives, target models or views, design selection, structural realization, prose, normative integration, design review, or acceptance. Return a `complete | partial | blocked` evidence receipt; after one explicit follow-up, silence is `no-receipt`. The Lead opens load-bearing sources, verifies the evidence, resolves conflicts, and alone designs and writes.
 
 ## Planning Boundary
 
@@ -353,9 +349,9 @@ Do not return `locally-ready` while any of these hold:
 - a material component lacks one owner, reason to change, consumer, or behavioral interface;
 - a material runtime-behavior group lacks a source-grounded current and proposed entrypoint-to-effect path, or proposed-only with explicit no predecessor, including added/removed/changed owner/call/state/effect/result-error edges and any preservation-critical or contested unchanged edge;
 - an applicable Required View was selected but not rendered in an inspectable form, or a substantial design with contested ownership or cross-owner control remains prose-only;
-- a picture-type Required View is passed as fenced plain text while Mermaid can render, or a generated screen replaces the Mermaid for calls, state, failure, or trust;
+- a generated screen replaces a structural view for calls, state, failure, or trust;
 - a fired Required View lacks a passed rendering result or any required semantic field was lost in the selected medium;
-- a screen the user will see lacks a current-app-grounded Image Gen result, or that result is missing, broken, uninspected, unreadable, inconsistent with the Mermaid views, or not accepted by the Lead, without an exact `no current UI` gap, a user-format override that is not a text fence, or an explicit owner-authorized deferral;
+- a screen the user will see lacks a passed UI view grounded in the current app, consistent with the structural views and accepted by the Lead, without an exact `no current UI` gap or an explicit owner-authorized deferral;
 - state, flow, failure/recovery, concurrency, migration, trust, or proof semantics are applicable but undefined;
 - delegated evidence was treated as target design, or a helper originated alternatives, target models/views, structural realization, section prose, or any design meaning;
 - a mechanism survives even though removing it breaks no confirmed requirement and its callers would not inherit a lifecycle, policy, or failure rule it owns, or simplification loses accepted requirements without owner authority;
