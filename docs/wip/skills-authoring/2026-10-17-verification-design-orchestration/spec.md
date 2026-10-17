@@ -141,8 +141,7 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 
 | Run | Status |
 |---|---|
-| 14 | reviewed: implementation review `great` at `e72f96ed` after C1 (fix: skill-first setup applies only to lasting journeys). PR #146 in stack #145. Not shipped until merged. |
-| 1–13 | reviewed: implementation review `great` at `4f7e27a7` after T1 (fix `32929ff8`). PRs #143 (runs 1–6) and #144 (runs 7–13, 2.86.0) are open as stack #145. Not shipped until merged. |
+| 1–14 | shipped: stack #145 merged 2026-10-17. #143 `f65dd20e` (runs 1–6), #144 `23d61cb1` (runs 7–13, sunstack-dev 2.86.0), #146 `5fd04c9f` (run 14). Caches not refreshed yet. |
 
 ## Review record
 
