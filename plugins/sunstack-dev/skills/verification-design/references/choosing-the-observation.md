@@ -115,7 +115,7 @@ U3 "search finds my file" (R8 pressing Enter submits once; R9 results come from 
 
 ## When a row can't be written
 
-- **No seam to observe through.** R20 says a reminder fires at its due time. The design runs the scheduler on the wall clock and exposes no way to set the clock or read the queued job, so no observation can see "fired at the due time" without waiting until then. Record a `program-design-gap`: the obligation, the seam its trace row names, and what the observation needs, which is a controllable clock or a readable job queue.
+- **No seam to observe through.** R20 says a reminder fires at its due time, but the design leaves nothing a user or caller can see showing when it fired: no notification with its time, no readable record. No observation can tell on-time from late. Record a `program-design-gap`: the obligation, its trace row's seam, and the observable effect it needs. Waiting for a near due time on the planned target is a valid observation, not a gap.
 - **No reference to judge against.** R21 says search "feels fast", with no threshold or workload, so no passing condition can fail a slow build. Record a `specification-gap` for the missing threshold and workload.
 - **A harness that can't reach the boundary.** When the existing journey can't restart the app, "survives a restart" doesn't become "save returns 201". Keep the obligation, and write the journey as `needed:`.
 
