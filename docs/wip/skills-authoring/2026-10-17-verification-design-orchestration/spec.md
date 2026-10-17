@@ -24,7 +24,7 @@ Plugin `sunstack-dev`. Each run has one target. Two stacked PRs (`gh stack`): PR
 | 3 | `shared-references/requirements-specification-program-design.md` → `design-documents.md`: the four-document contract, with every caller updated | update | A |
 | 4 | `shared-references/phase-return-tokens.md`: adds `verification-design-gap` | update | A |
 | 5 | `skills/spec-design`: modality selection moves out; Requirements views go through run 2 | update | A |
-| 6 | `skills/program-design`: input and continuation only | update | A |
+| 6 | `skills/program-design`: input, continuation and its medium clauses only | update | A |
 | 7 | `skills/orchestrator-design`: cleanup | update | B |
 | 8 | `skills/spec-program-review`: four documents | update | B |
 | 9 | `skills/plan-implementation` with `shared-references/canonical-implementation-plan.md` | update | B |
@@ -85,20 +85,32 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 | D12 | Phases teach the decision and cite principles at the decisions they improve. A Zod `.ts` result exists only where a named consumer validates it, and there are no Markdown schemas. | Owner Oct 14: "actually is practices not some pendantic shit. and no markdown schema". |
 | D13 | Opus Workers write, Sol reviews both the spec and the implementation, and no new tests or pressure tests are added. | Standing owner rules for skill work. |
 | D14 | Two stacked PRs: the design side, then the consumers. | Lead call: review in two readable pieces that merge together. |
+| D15 | `diagram-rendering-and-fallbacks.md` is the only rule for choosing a medium. Each phase keeps its view predicates, its required semantic fields and its UI-moment obligations, and drops its own medium mandate. On main those mandates are `spec-design/SKILL.md:234,306`, `program-design/SKILL.md:232–238,356,358`, `orchestrator-design/SKILL.md:46` and `spec-program-review/SKILL.md:230`. | Spec review RA1, 2026-10-17: two live medium rules would let an HTML view pass one rule and fail the other. |
+
+## Descriptions
+
+| Skill | Description |
+|---|---|
+| `verification-design` (new) | "Use when planning how a design project's requirements will be proven: for each requirement, the reference, the target and `verify-<app>` journey, a passing condition a wrong build fails, reused real-path tests and what stays unverified, after Program Design or when that plan is missing or stale. Not for observing or challenging a delivered claim (practices-verification), building journeys (practices-verification-maintenance), or regression tests." |
+| `orchestrator-design` | "Use when a user asks to run, resume, or finish one design cycle before planning: Requirements, Specification, Program Design, Verification Design, and their independent review. Not for a direct design phase, implementation delivery, or PR work." |
+| `spec-program-review` | "Use when independently reviewing a Specification, Program Design, Verification Design, or the four-document design set, including reader understanding or readability, or deciding if a single-document change needs review. Not for implementation review." |
+| `plan-implementation` | "Use when writing or revising a repository-grounded implementation plan from a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for audit-only discovery (plan-improve-repo)." |
+| `spec-design`, `program-design`, `plan-improve-repo`, `spec-handoff`, `plan-handoff`, `orchestrator-implementation-goal` | Unchanged. None of them names the three-document basis or proof planning. |
 
 ## Surface allocation
 
 | Run | Trigger | Main path | Depth | Proof |
 |---|---|---|---|---|
-| 1 | new: plan proof per requirement after Program Design; not how to observe (`practices-verification`) or regression tests | start from requirements and obligations; inspect existing `verify-<app>` coverage and Program Design seams; choose cases and reuse; write passing conditions and limits; return seam gaps | the modality teaching moved from `proof-obligations.md`, with worked rows | structural |
+| 1 | the new description in Descriptions | start from requirements and obligations; inspect existing `verify-<app>` coverage and Program Design seams; choose cases and reuse; write passing conditions and limits; return seam gaps | the modality teaching moved from `proof-obligations.md`, with worked rows | structural |
 | 2 | — | the document-medium decision and its call to `presentation-html`; native HTML views count where they preserve the relationships | the page-proof record (D5) | structural |
 | 3 | — | — | the four-document contract and its identities | caller check |
 | 4 | — | — | the `verification-design-gap` row | caller check |
-| 5 | wording only if it names proof planning | modality selection removed; the views name what the reader must understand | `proof-obligations.md` removed | structural |
-| 6 | — | continuation points to Verification Design | the input list (D6) | structural |
-| 7 | four documents | a short spine with a routing table; the delivery tail replaced | — | structural |
-| 8 | four documents | the integrated walk: requirement, obligation, seam, observation | a reviewing reference for Verification Design | structural |
-| 9–11 | four documents | admission and carriers updated | — | structural |
+| 5 | unchanged | modality selection removed; the views name what the reader must understand; the medium mandate goes to run 2 (D15) | `proof-obligations.md` removed | structural |
+| 6 | unchanged | continuation points to Verification Design; the medium clauses go to run 2 (D15) | the input list (D6) | structural |
+| 7 | new description | a short spine with a routing table; the delivery tail replaced; the medium check goes to run 2 (D15) | — | structural |
+| 8 | new description | the integrated walk: requirement, obligation, seam, observation; the medium blocker goes to run 2 (D15) | a reviewing reference for Verification Design | structural |
+| 9 | new description | admission updated | — | structural |
+| 10–11 | unchanged | admission and carriers updated | — | structural |
 | 12 | — | the token row | — | structural |
 | 13 | — | — | the packet field | the existing schema tests |
 
@@ -131,4 +143,4 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 ## Review record
 
 - 2026-10-17 Advisor second look (A1–A4): all four accepted. A1 → D2, D3 and run 1's main path. A2 → D6 and run 6. A3 → runs 7–12, D8 and D9. A4 → D4, D5 and run 2.
-- Pending: spec review by `skill-review` (two Sol reviewers with no authoring history).
+- 2026-10-17 spec review at `b34c6424` (review lead codex-local 01a149c2): `targeted-revision`, `revise-first`. RA1 (two medium rules) accepted → D15 and runs 5–8. G1 (descriptions missing) → the Descriptions section. Returned to the same review lead to verify the corrected anchors and finish trigger-routing.
