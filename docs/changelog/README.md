@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-17 Verification Design in the design cycle](2026-10-17-verification-design.md)
 - [2026-10-16 Current Demistify navigation pointers](2026-10-16-presentation-guide-pointer.md)
 
 - [2026-10-16 practices-manage-agents back to mechanical](2026-10-16-manage-agents-mechanical.md)

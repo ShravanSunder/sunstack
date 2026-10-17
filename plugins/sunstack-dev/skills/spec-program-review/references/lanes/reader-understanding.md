@@ -4,7 +4,7 @@ Mission: reconstruct the complete artifact as a human reader, test whether the i
 
 Predicate: the mode-complete result leaves a concrete material reader-comprehension risk, or the caller explicitly requests a deep reader review with an exact question and scope.
 
-Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for `program-only` or `three-artifact-design`, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
+Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for `program-only` or `four-document-design`, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
 
 Prerequisites: the complete target and source set, confirmed goal boundary, accepted requirements set, and applicable structural-realization confirmation exist in the review context; the 🔎 Reviewer Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
 
@@ -25,14 +25,17 @@ program-only
   governing obligation -> scenario/contract -> current/proposed call-path delta
     -> owner/state/failure behavior -> proof seam
 
-three-artifact-design
+four-document-design
   Requirements -> Specification observable contract -> scenario/contract
-    -> program-design call-path delta and other How -> proof
+    -> program-design call-path delta and other How -> proof seam
+    -> Verification Design "proven by" and planned observation
 ```
 
 For specification review, a human must be able to restate who is affected, what is wrong today, the desired outcomes and obligations, negative space, normal and failure behavior, and proof, then point to the exact claim they would correct.
 
 For program review, a human must be able to compare a representative current and proposed entrypoint-to-effect path, or follow proposed-only and see the explicit no-predecessor case, through owner, interface, callers/callees, edge status, state or effect, result/error, failure/recovery, tradeoff, and proof seam, then point to the exact structural assumption they would correct.
+
+For Verification Design review, a human must be able to read each requirement's "proven by" line and say what will be done, what will be seen, and what stays unverified, then point to the exact row they would correct.
 
 Check that each artifact starts with the smallest useful model and reveals detail afterward. Flag missing links, bottom-up detail before the model, copied prose presented as traceability, or a final artifact that requires scratch or review notes to recover accepted meaning. Preserve one compact breadcrumb or artifact map. Scratch may remain optional evidence.
 

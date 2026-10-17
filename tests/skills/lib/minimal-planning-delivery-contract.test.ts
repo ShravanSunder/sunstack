@@ -26,7 +26,7 @@ describe("goal delivery intent hard cutover", () => {
 
     expect(contract).toContain("planning result: ready");
     expect(contract).toContain("governing planning basis:");
-    expect(contract).toContain("kind: reviewed-three-artifact-design");
+    expect(contract).toContain("kind: reviewed-four-document-design");
     expect(contract).toContain("kind: admitted-repository-improvement");
     expect(contract).toContain("requested terminal: plan-only | pr-ready-unmerged");
     expect(contract).toContain("delivery grouping:");

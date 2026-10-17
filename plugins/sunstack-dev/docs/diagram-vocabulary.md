@@ -1,6 +1,6 @@
 # Design View Vocabulary
 
-This maintainer index records current view names, artifact altitude, semantic owner, and runtime rendering consumers. It is not runtime authority. View-selection and required-field rules live in the owning `SKILL.md`; medium, fallback, semantic-preservation, and visual-check procedure lives in `shared-references/diagram-rendering-and-fallbacks.md`; conditional Image Gen production, durable embedding and pixel/preview inspection live in `shared-references/generated-document-visuals.md`.
+This maintainer index records current view names, artifact altitude, semantic owner, and runtime rendering consumers. It is not runtime authority. View-selection and required-field rules live in the owning `SKILL.md`; the document medium (Markdown alone or an HTML page built on it), each view's medium, fallback, semantic-preservation, and visual-check procedure live in `shared-references/diagram-rendering-and-fallbacks.md`; conditional Image Gen production, durable embedding and pixel/preview inspection live in `shared-references/generated-document-visuals.md`.
 
 ## Why/What Views
 
@@ -13,7 +13,7 @@ This maintainer index records current view names, artifact altitude, semantic ow
 
 `system context map` is an accepted name for a context diagram. `traceability matrix` is an accepted name for a requirement coverage table. The canonical tokens above remain the source and test vocabulary.
 
-`generated-image` is a rendering medium, not another semantic view token. The consuming Requirements, Specification or Program Design skill still owns the reader question, altitude, exact relationships and required fields. The main authors and accepts the visual meaning; the generated-visual reference owns only capability, execution, project asset/embed and inspection procedure.
+`generated-image` and `html-view` are rendering media, not semantic view tokens. The consuming design skill still owns the reader question, altitude, exact relationships and required fields. The main authors and accepts the visual meaning. For a generated image, the generated-visual reference owns only capability, execution, project asset/embed and inspection procedure; for an HTML view, `presentation-html` builds and checks the page.
 
 ## Structural How Views
 
@@ -28,6 +28,13 @@ This maintainer index records current view names, artifact altitude, semantic ow
 | failure/recovery flow | structural How | `skills/program-design/SKILL.md` Required Views | `skills/program-design/SKILL.md` |
 | trust-boundary view | structural How | `skills/program-design/SKILL.md` Required Views | `skills/program-design/SKILL.md` |
 | requirement/design/proof trace | structural How | `skills/program-design/SKILL.md` Required Views | `skills/program-design/SKILL.md` |
+
+## Proof Strategy Views
+
+| View token | Altitude | Runtime semantic owner | Runtime rendering consumer |
+| --- | --- | --- | --- |
+| "proven by" cards | proof strategy | `skills/verification-design/SKILL.md` Write the document and its views | `skills/verification-design/SKILL.md` |
+| coverage rows | proof strategy | `skills/verification-design/SKILL.md` Write the document and its views | `skills/verification-design/SKILL.md` |
 
 ## Altitude Boundary
 

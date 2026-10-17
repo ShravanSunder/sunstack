@@ -11,15 +11,16 @@ Return: the chunk plan (each chunk's seam, its listed sections, mapped dimension
 A design chunk is a bounded review responsibility over one artifact seam, carried with the seam's complete text on both sides: every section that names the seam's obligation, realizing element, owners, edges, and proof seam, plus all governing sources whole. The 🔎 Reviewer Sidekick reopens each complete artifact involved in the pass and records the seam sections judged. A heading list or a paraphrase is never a seam. The seams are the ones the modes already judge:
 
 ```text
-three-artifact-design   Requirements -> Specification traceability
+four-document-design    Requirements -> Specification traceability
                         Specification -> Program Design realization
                         each material call-path group with its owners, edges,
                           state or effect, and proof seam
+                        each requirement's obligations -> seams -> planned observation
 specification-only      one chunk per material public contract or obligation cluster
 program-only            one chunk per component cluster or call-path group
 ```
 
-Never split these across chunks without a seam carrying their full text: one requirement's trace to its obligation and its realization; one call-path delta with its owners, edges, and proof seam; one contract with its consumers and failure behavior.
+Never split these across chunks without a seam carrying their full text: one requirement's trace to its obligation, its realization, and its planned observation; one call-path delta with its owners, edges, and proof seam; one contract with its consumers and failure behavior.
 
 ## Overlap Seams
 

@@ -3,7 +3,7 @@
 ## Design Review
 
 Operation: review
-Mode: three-artifact-design
+Mode: four-document-design
 Targets: requirements-scenario-label-summary-v1 / specification-scenario-label-summary-v1 / program-design-scenario-label-summary-v1
 Result: ready
 Freshness: current

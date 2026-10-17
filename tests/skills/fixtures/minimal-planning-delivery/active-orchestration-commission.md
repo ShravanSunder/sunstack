@@ -8,7 +8,7 @@ Owner plugin: `sunstack-dev`
 
 This is one multi-run skill-change spec. Each update run names exactly one skill target.
 
-1. `plan-implementation` — create one repo-grounded implementation plan from the reviewed three-artifact design set.
+1. `plan-implementation` — create one repo-grounded implementation plan from the reviewed four-document design set.
 2. `implement-plan` — validate and execute an approved plan with slice-local proof and explicit replan stops.
 3. `implementation-review` — independently judge the implementation and its proof through a regimented review workflow.
 4. `orchestrator-implementation-goal` — compose design, planning, optional operations tracking, implementation, review, and PR readiness without owning phase judgment.
@@ -17,7 +17,7 @@ PR0 is a hard predecessor, not a run in this spec. The user's direct commission 
 
 ```text
 operation: review
-mode: three-artifact-design
+mode: four-document-design
 targets:
   Requirements identity
   Specification identity
@@ -72,7 +72,7 @@ Specification
     |
 Program Design
     |
-three-artifact design review = ready -------> plan-implementation --+
+four-document design review = ready -------> plan-implementation --+
                                                                     |
 admitted repository-improvement finding ---> plan-improve-repo -----+
                                                                     |
@@ -108,7 +108,7 @@ The user may strike any row before acceptance.
 | --- | --- | --- |
 | Canonical planning authority | One Markdown plan; tickets are optional tracking projections | A plan-or-tickets branch creates two schemas and lets provider tickets become design authority. Existing `ops-*` skills already own external mutations and tracking mechanics. |
 | Planning delegation | No default subagents or planning lanes | Repo inspection and plan synthesis are one coherent parent-owned judgment. Evidence gaps stop or route to research rather than silently creating a swarm. |
-| `plan-implementation` admission | Exact current Requirements, Specification, Program Design, and ready three-artifact review; no mechanics-only bypass in this reviewed-design planner in v1 | The strict gate prevents `plan-implementation` from inventing design. It does not narrow `plan-improve-repo`'s distinct existing authority to plan from admitted repository-improvement findings, including its current implementation-mechanics-only admission. Mixed inputs still route by direct planning authority rather than using that route as a bypass. |
+| `plan-implementation` admission | Exact current Requirements, Specification, Program Design, and ready four-document review; no mechanics-only bypass in this reviewed-design planner in v1 | The strict gate prevents `plan-implementation` from inventing design. It does not narrow `plan-improve-repo`'s distinct existing authority to plan from admitted repository-improvement findings, including its current implementation-mechanics-only admission. Mixed inputs still route by direct planning authority rather than using that route as a bypass. |
 | Plan approval | Planning stops with `draft`; implementation requires later explicit owner approval naming the immutable completed plan path and its current meaning | Plan creation must not silently authorize code changes, and a goal cannot pre-authorize unseen future plan meaning. A semantic plan change creates a new path and requires new approval. |
 | Approval and execution evidence | When an extant completed plan exists, one shared canonical-plan contract teaches production, validation, and preservation. Its tuple records the immutable plan path, originating-planner identity, planning result, and result-specific payload: `draft` carries the separate-later-approval requirement, `revision-requested` carries the exact requested correction, and `blocked` carries blocker identity, evidence, and unblock owner. The same contract owns the separate approval-evidence record—authorized approver identity, exact plan path and current meaning, approval decision, source evidence, and proof it followed completion—or an explicit-absence record. Only `draft` plus later owner approval naming that path and meaning is executable. No producer, reviewer, or carrier computes or maintains a document hash, digest, Git blob identity, or parallel version ledger. A planning admission failure returns a `route | blocked` phase receipt with governing-input identities, reason/evidence, and semantic or unblock owner. When no completed plan exists, it adds `plan identity: none`; when one exists, it travels beside the unchanged tuple and approval record/absence and blocks advancement without mutating them. | Without the absence predicate, failure invents a phantom plan or falsely erases a real one. Without one shared teaching owner for extant plans, producers and consumers guess different gates. Mutating the plan into a progress ledger or sending a plan defect to another planner gives planning and execution competing ownership. |
 | Independent plan review | No separate pre-execution plan-review phase in v1; owner approval plus `implement-plan` validation guard execution, and plan defects found later route back to planning | The retired separate review lifecycle was expensive. A new independent plan-review phase should be earned by failures these two gates do not catch. |
@@ -129,9 +129,9 @@ Sensitive-surface decision: no scripts, hooks, executable third-party source, cr
 
 ### Reusable behavior and success
 
-This skill helps agents reliably translate one semantically current reviewed three-artifact design set into one repo-grounded implementation plan without inventing design or beginning implementation.
+This skill helps agents reliably translate one semantically current reviewed four-document design set into one repo-grounded implementation plan without inventing design or beginning implementation.
 
-Success: given distinct current Requirements, Specification, and Program Design identities plus an exact ready three-artifact design-review result, the agent reads them completely, anchors their owners and proof seams in the current repository, writes one proportional plan built from proof-bearing slices, maps every obligation to a slice and proof gate, records dependency and collision edges, and stops before tickets, implementation, review, handoff, Git, or PR work.
+Success: given distinct current Requirements, Specification, and Program Design identities plus an exact ready four-document design-review result, the agent reads them completely, anchors their owners and proof seams in the current repository, writes one proportional plan built from proof-bearing slices, maps every obligation to a slice and proof gate, records dependency and collision edges, and stops before tickets, implementation, review, handoff, Git, or PR work.
 
 Invocation: both model-invocable and user-invocable.
 
@@ -263,7 +263,7 @@ Proposed trigger:
 
 ```yaml
 name: orchestrator-implementation-goal
-description: Use when starting, resuming, auditing, or completing a general-domain long-horizon delivery goal that may span design, implementation planning, optional operations tracking, plan execution, independent implementation review, and PR readiness. Not for one named runtime skill package or an accepted multi-run skill-change slice without explicit skills-creation composition, a user who requests only one phase, the bounded Requirements, Specification, Program Design, and three-artifact design-review cycle alone, or unclear owner intent that still needs pathfinding or mental-model repair.
+description: Use when starting, resuming, auditing, or completing a general-domain long-horizon delivery goal that may span design, implementation planning, optional operations tracking, plan execution, independent implementation review, and PR readiness. Not for one named runtime skill package or an accepted multi-run skill-change slice without explicit skills-creation composition, a user who requests only one phase, the bounded Requirements, Specification, Program Design, and four-document design-review cycle alone, or unclear owner intent that still needs pathfinding or mental-model repair.
 ```
 
 ### Main path
@@ -280,7 +280,7 @@ description: Use when starting, resuming, auditing, or completing a general-doma
 
 - Unclear never-articulated intent -> `discuss-pathfinding`; drifted shared model -> `discuss-clarify-mental-models`.
 - An explicit request for the complete bounded design cycle takes precedence over artifact completeness and routes to `orchestrator-design`; a fresh long-horizon delivery goal with no admitted design artifacts or a valid stored design-run continuation also routes there.
-- When the request does not ask for the complete bounded design cycle, partial design artifacts without a valid design-run continuation route to the first missing phase: Requirements/observable Why/What to `spec-design`, structural How to `program-design`, complete unreviewed three-artifact set to `spec-program-review` operation `review`, mode `three-artifact-design`.
+- When the request does not ask for the complete bounded design cycle, partial design artifacts without a valid design-run continuation route to the first missing phase: Requirements/observable Why/What to `spec-design`, structural How to `program-design`, complete unreviewed four-document set to `spec-program-review` operation `review`, mode `four-document-design`.
 - A direct one-phase request bypasses `orchestrator-implementation-goal`. A phase-owned correction returned by review goes directly to that named owner rather than restarting a full design cycle.
 - Repository-improvement audit or plan whose direct authority is admitted improvement findings -> `plan-improve-repo`; a ready reviewed design set used only as supporting evidence does not change that authority.
 - Ready reviewed design without plan -> `plan-implementation`.
@@ -318,13 +318,13 @@ A missing, conflicting, status-only, or stale return stops at its owner. The rou
 
 ## Cross-run ownership and integration
 
-- `orchestrator-design` continues to end at ready three-artifact design review and never enters planning.
+- `orchestrator-design` continues to end at ready four-document design review and never enters planning.
 - `plan-implementation` is the sole direct reviewed-design-to-plan author.
 - `plan-handoff` packages an existing plan, preserves the complete canonical tuple and complete separate approval-evidence record or explicit absence, and never authors or approves either.
 - `implementation-handoff` packages implementation continuation or review state and preserves the unchanged canonical tuple, complete separate approval-evidence record or explicit absence, and implementation proof without re-authoring any of them.
 - `plan-improve-repo` continues to own admitted repository-improvement planning; direct reviewed-design translation routes elsewhere.
 - `plan-improve-repo` preserves its current admitted-improvement and implementation-mechanics-only planning authority; this is a distinct direct-authority route, not a bypass around `plan-implementation` admission.
-- Direct planning authority resolves mixed inputs: a reviewed three-artifact design set as authority routes to `plan-implementation`; admitted audit findings as authority route to `plan-improve-repo`. The `plan-implementation` run must add the reciprocal near-miss boundary to `plan-improve-repo`.
+- Direct planning authority resolves mixed inputs: a reviewed four-document design set as authority routes to `plan-implementation`; admitted audit findings as authority route to `plan-improve-repo`. The `plan-implementation` run must add the reciprocal near-miss boundary to `plan-improve-repo`.
 - `ops-*` skills own external tracker mutations. Their artifacts reference the canonical plan.
 - `implement-plan` is the sole approved-plan executor and implementation-finding remediation owner.
 - `implementation-review` owns independent product-implementation review. It does not review runtime skill authoring; `skills-creation` retains its own proposal and changed-skill review contracts.
@@ -419,7 +419,7 @@ Rejected findings: none at revision 17.
 
 First required revision: none.
 
-Proof or retest implication: refresh proposal review for the revision-21 delta, implement only accepted corrections, rerun the failed scenarios first, then rerun all 62 affected scenarios. Each affected one-skill run must read revision 21 completely, verify the post-PR0 three-artifact contract is semantically identical, and refresh review coverage affected by the immutable-plan-path, complete approval-record, no-document-digest, read-only characterization, and invoke-now deltas.
+Proof or retest implication: refresh proposal review for the revision-21 delta, implement only accepted corrections, rerun the failed scenarios first, then rerun all 62 affected scenarios. Each affected one-skill run must read revision 21 completely, verify the post-PR0 four-document contract is semantically identical, and refresh review coverage affected by the immutable-plan-path, complete approval-record, no-document-digest, read-only characterization, and invoke-now deltas.
 
 Semantic coverage: complete proposal promise, mental model, all four triggers and main paths, reference/lane allocation, canonical-plan ownership, approval and correction routing, active caller cutovers, proof plan, stacking, version/changelog landing, cache boundary, and no-merge terminal.
 

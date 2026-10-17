@@ -6,7 +6,7 @@ export const skillPressureCaseDefinitions = [
     requiredSourceReads: [
       "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
       "plugins/sunstack-dev/skills/discuss-pathfinding/references/question-craft.md",
-      "plugins/sunstack-dev/shared-references/requirements-specification-program-design.md",
+      "plugins/sunstack-dev/shared-references/design-documents.md",
     ],
     maximumToolCalls: 40,
     semanticCriteria: [
