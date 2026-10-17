@@ -86,6 +86,7 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 | D13 | Opus Workers write, Sol reviews both the spec and the implementation, and no new tests or pressure tests are added. | Standing owner rules for skill work. |
 | D14 | Two stacked PRs: the design side, then the consumers. | Lead call: review in two readable pieces that merge together. |
 | D15 | `diagram-rendering-and-fallbacks.md` is the only rule for choosing a medium. Each phase keeps its view predicates, its required semantic fields and its UI-moment obligations, and drops its own medium mandate. On main those mandates are `spec-design/SKILL.md:234,306`, `program-design/SKILL.md:232–238,356,358`, `orchestrator-design/SKILL.md:46` and `spec-program-review/SKILL.md:230`. | Spec review RA1, 2026-10-17: two live medium rules would let an HTML view pass one rule and fail the other. |
+| D16 | Verification Design has no standalone review mode. A revision to it alone is reviewed in the four-document mode, which replaces `three-artifact-design`. The `specification-only` and `program-only` modes stay. | Spec review, 2026-10-17: a standalone mode would need its own admission design, and D8 adds no review ceremony. |
 
 ## Descriptions
 
@@ -93,7 +94,7 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 |---|---|
 | `verification-design` (new) | "Use when planning how a design project's requirements will be proven: for each requirement, the reference, the target and `verify-<app>` journey, a passing condition a wrong build fails, reused real-path tests and what stays unverified, after Program Design or when that plan is missing or stale. Not for observing or challenging a delivered claim (practices-verification), building journeys (practices-verification-maintenance), or regression tests." |
 | `orchestrator-design` | "Use when a user asks to run, resume, or finish one design cycle before planning: Requirements, Specification, Program Design, Verification Design, and their independent review. Not for a direct design phase, implementation delivery, or PR work." |
-| `spec-program-review` | "Use when independently reviewing a Specification, Program Design, Verification Design, or the four-document design set, including reader understanding or readability, or deciding if a single-document change needs review. Not for implementation review." |
+| `spec-program-review` | "Use when independently reviewing a Specification, Program Design, or the four-document design set (Requirements, Specification, Program Design, Verification Design), including reader understanding or readability, or deciding if a spec-only or program-only change needs review. Not for implementation review." |
 | `plan-implementation` | "Use when writing or revising a repository-grounded implementation plan from a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for audit-only discovery (plan-improve-repo)." |
 | `spec-design`, `program-design`, `plan-improve-repo`, `spec-handoff`, `plan-handoff`, `orchestrator-implementation-goal` | Unchanged. None of them names the three-document basis or proof planning. |
 
@@ -143,4 +144,4 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 ## Review record
 
 - 2026-10-17 Advisor second look (A1–A4): all four accepted. A1 → D2, D3 and run 1's main path. A2 → D6 and run 6. A3 → runs 7–12, D8 and D9. A4 → D4, D5 and run 2.
-- 2026-10-17 spec review at `b34c6424` (review lead codex-local 01a149c2): `targeted-revision`, `revise-first`. RA1 (two medium rules) accepted → D15 and runs 5–8. G1 (descriptions missing) → the Descriptions section. Returned to the same review lead to verify the corrected anchors and finish trigger-routing.
+- 2026-10-17 spec review at `b34c6424` (review lead codex-local 01a149c2): `targeted-revision`, `revise-first`. RA1 (two medium rules) accepted → D15 and runs 5–8. G1 (descriptions missing) → the Descriptions section. Returned to the same review lead to verify the corrected anchors and finish trigger-routing. Follow-up at `3f8f6fa4`: RA1 verified closed. The new `spec-program-review` description promised a standalone Verification Design review, so it was narrowed (D16).
