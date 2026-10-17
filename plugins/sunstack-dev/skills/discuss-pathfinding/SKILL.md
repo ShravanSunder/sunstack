@@ -13,7 +13,7 @@ Asking is expensive: a turn spent on an observable fact is stolen from a judgmen
 
 Pathfinding is self-contained judgment, not isolated execution. A caller may supply artifacts, conversation context, hypotheses, or constraints; treat them as useful leads rather than authority. Inspect what can be inspected, distinguish what the owner confirmed from what an agent inferred, expose the credible branches, and return the clearest proportional understanding the next skill can use.
 
-Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint (such as acceptable cost, risk, downtime, compatibility, or policy) and return it to `program-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `program-design`, not questions pathfinding asks the user to design.
+Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design or Verification Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW or on proof; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint (such as acceptable cost, risk, downtime, compatibility, or policy) and return it to `program-design`. For proof work, clarify only the owner's tolerance, such as a limit allowed to stay unverified, and return it to `verification-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `program-design`, and evidence routes, targets, and journeys are `verification-design`'s; none are questions pathfinding asks the user to design.
 
 Routing cases:
 
@@ -53,11 +53,11 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
 1. **Name the destination.** State what the session must extract (decision, process, terms, or user requirements), the depth, and what is out of scope.
 
-   IF the missing meaning blocks Requirements, Specification, or a Program Design choice, load `../../shared-references/design-documents.md` and return the three-concept boundary, the pathfinding boundary that applies to this destination, and the exact owner that must receive the clarified meaning.
+   IF the missing meaning blocks Requirements, Specification, or a Program Design or Verification Design choice, load `../../shared-references/design-documents.md` and return the boundary between the four design documents, the pathfinding boundary that applies to this destination, and the exact owner that must receive the clarified meaning.
 
    If a calling phase supplies a return destination, record that exact destination before questioning. It is a boundary: this session may return confirmed meaning only to that destination and may not replace it with another plausible phase.
 
-   Name whether the missing owner meaning blocks Requirements, Specification, or a Program Design choice. Do not turn every destination into a user-requirements record. For a Program Design destination, name the owner-controlled tolerance or constraint to clarify and explicitly exclude components, interfaces, ownership allocation, and mechanisms. If the request contains only structural synthesis from settled obligations, return the `program-design` route without starting an interview.
+   Name whether the missing owner meaning blocks Requirements, Specification, or a Program Design or Verification Design choice. Do not turn every destination into a user-requirements record. For a Program Design destination, name the owner-controlled tolerance or constraint to clarify and explicitly exclude components, interfaces, ownership allocation, and mechanisms. For a Verification Design destination, name the owner tolerance to clarify and explicitly exclude evidence routes, targets, and journeys. If the request contains only structural synthesis from settled obligations, return the `program-design` route without starting an interview.
 
    For a proposed change headed to specification work, establish the goal boundary before handoff:
 

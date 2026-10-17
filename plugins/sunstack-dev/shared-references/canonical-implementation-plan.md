@@ -6,7 +6,7 @@ This reference owns the one active implementation-plan contract shared by plan p
 
 Before producing or validating a completed plan, inspect governing authority, current branch/HEAD, repository instructions, owners, paths, interfaces, tests, commands, proof obligations, security boundaries, and any existing completed plan.
 
-The `originating planner` values name the two planners: `plan-implementation`, the design planner, and `plan-improve-repo`, the improvement planner. The design planner admits current reviewed three-artifact design and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
+The `originating planner` values name the two planners: `plan-implementation`, the design planner, and `plan-improve-repo`, the improvement planner. The design planner admits the current reviewed four-document design (Requirements, Specification, Program Design, Verification Design) and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
 
 ## Canonical Result
 
@@ -17,14 +17,14 @@ plan path: <sole Markdown document identity>
 originating planner: plan-implementation | plan-improve-repo
 planning result: ready
 governing planning basis:
-  kind: reviewed-three-artifact-design
-  Requirements, Specification, Program Design paths
-  current three-artifact review/remediation result identities
+  kind: reviewed-four-document-design
+  Requirements, Specification, Program Design, Verification Design paths
+  current four-document review/remediation result identities
   current applicability anchors
 or:
   kind: admitted-repository-improvement
   admitted finding pointer
-  basis classification: current-three-artifact-design-ready |
+  basis classification: current-four-document-design-ready |
                         implementation-mechanics-only
   basis evidence pointers
   current applicability anchors
@@ -60,7 +60,7 @@ For every `pr-ready-unmerged` plan, including orchestrated goals and direct cont
 
 Direct plan-only work may use an established repository plan home. Otherwise use `docs/specs/<spec>/plans/` for durable direct planning or `<repo-root>/tmp/plan-workflows/` for temporary/advisory work.
 
-Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions.
+Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row.
 
 ## Preserve and Admit
 
@@ -76,4 +76,4 @@ Validation, handoff, tickets, tracker state, or plan completion never upgrade th
 
 Good signals: one immutable plan path, current governing authority, complete delivery context, proof attached to obligations, only meaningful edges, explicit design-gap routes, and no redundant approval stop.
 
-Bad signals: tickets as another plan, `Status: approved`, approval evidence, mutable progress, validation changing the result, document hashes, placeholder grouping/topology, inferred implementation authority, or a carrier silently repairing the plan.
+Bad signals: tickets as another plan, `Status: approved`, approval evidence, mutable progress, validation changing the result, document hashes, placeholder grouping/topology, inferred implementation authority, a plan that re-chooses a Verification Design row's observation or passing condition, or a carrier silently repairing the plan.

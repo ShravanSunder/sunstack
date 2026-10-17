@@ -1,6 +1,6 @@
 {
   "name": "sunstack-dev",
-  "version": "2.85.1",
+  "version": "2.86.0",
   "description": "Shravan's development workflow plugin with long-horizon delivery routing, bounded design orchestration, canonical planning, implementation and independent review, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI, rendered chat and standalone HTML).",
   "author": {
     "name": "Shravan Sunder"
@@ -22,6 +22,7 @@
     "spec-handoff",
     "spec-design",
     "program-design",
+    "verification-design",
     "spec-program-review",
     "orchestrator-design",
     "orchestrator-implementation-goal",
@@ -94,13 +95,13 @@
       "Use discuss-pathfinding to extract unwritten requirements or decisions before artifact work.",
       "Use practices-research to gather source-grounded evidence into a tmp ledger.",
       "Use practices-manage-agents to choose a helper's role, form and model, then commission, monitor, or assess its work.",
-      "Use orchestrator-design to run this through one bounded Requirements, Specification, Program Design, and three-artifact design review cycle before planning.",
+      "Use orchestrator-design to run this through one design cycle before planning: Requirements, Specification, Program Design, Verification Design, and their independent review.",
       "Use orchestrator-implementation-goal to carry this implementation goal through planning, implementation, proof, review, and PR readiness.",
       "Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.",
       "Use implement-plan to execute this ready canonical plan at its immutable path, current meaning, and pr-ready-unmerged delivery context.",
       "Use implementation-review to independently review this implementation and proof without editing.",
       "Use docs-maintain to reconcile these docs with current code and plans.",
-      "Use spec-program-review to independently review this Specification, this Program Design, or this complete Requirements, Specification, and Program Design set.",
+      "Use spec-program-review to independently review this Specification, this Program Design, or this four-document design set (Requirements, Specification, Program Design, Verification Design).",
       "Use spec-handoff to package this design for another agent.",
       "Use plan-improve-repo to audit this repo and write executable improvement plans.",
       "Use audit-security-review to choose the right Codex Security scan.",

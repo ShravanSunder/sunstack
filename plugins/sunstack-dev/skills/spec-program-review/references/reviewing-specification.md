@@ -21,13 +21,13 @@ Inspect:
 - requirement pass/fail observability;
 - public/external contracts and failure/partial-success behavior;
 - cross-cutting obligations;
-- proof modality per material requirement;
+- each material obligation's proof obligation (`V`) names its expected behavior, threshold, target constraints, and reference; choosing the evidence, target, or journey belongs to Verification Design;
 - hidden structural How or unresolved product meaning;
 - artifact navigation and traceability.
 
 A combined `Requirements/spec`, a Requirements-titled artifact standing in for both concepts, or a missing separate identity is a blocker-level finding. Return `needs-revision` with the smallest correction routed to `spec-design`. Do not reconstruct, split, or edit the artifacts during review. Other findings are bounded by the sources that actually exist, and the result cannot be `ready`.
 
-Good: Requirements and Specification have separate authoritative homes, every normative claim traces to Requirements, every requirement has observable behavior and proof, and Program Design can proceed without inventing meaning.
+Good: Requirements and Specification have separate authoritative homes, every normative claim traces to Requirements, every requirement has observable behavior and a proof obligation, and Program Design can proceed without inventing meaning.
 
 Bad: a combined `Requirements/spec`, a Requirements title used to hide the missing Specification identity, feature slogans, code behavior treated as desired authority, implementation tasks disguised as requirements, undefined failures, or self-check substituted for review.
 

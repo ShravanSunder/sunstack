@@ -15,7 +15,7 @@ Accepted finding:
 - concrete consequence: grouping ownership is split across the caller and formatter
 - smallest correction: move grouping into the formatter owner
 - owner: program-design
-- confirmation evidence: corrected Program Design plus fresh affected three-artifact review
+- confirmation evidence: corrected Program Design plus fresh affected four-document review
 - parent disposition: accepted
 - coverage invalidated: structural ownership and affected implementation rows
 - current review coverage: stale until corrected design and affected review are current

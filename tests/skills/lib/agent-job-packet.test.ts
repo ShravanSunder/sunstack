@@ -105,6 +105,10 @@ const verifierPacket = (work: PacketFields): PacketFields => ({
   role: "verifier",
   executionForm: "sidekick",
   adoptedReference: "docs/specs/saved-search/spec.md",
+  verificationDesign: {
+    kind: "pointer",
+    location: "docs/specs/saved-search/verification-design.md, rows U1 to U3",
+  },
   pairedImplementer: sessionAddress("67681626-30db-4807-ad65-ce8845d5e2c2"),
   work,
 });

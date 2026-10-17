@@ -35,7 +35,7 @@ Several rows may share one observation. Describe a shared observation once, and 
 
 ### 1. Take in the design being proven
 
-MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities and the Verification Design's own identity beside the Program Design. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names.
+MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities and the Verification Design's own identity beside the Program Design. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
 
 Completion: every requirement is listed with its obligations, references and seams, or with the exact piece that is missing.
 
@@ -109,7 +109,7 @@ evidence-blocked
 Then return one route:
 
 ```text
-locally-ready       -> recommend spec-program-review in its four-document mode
+locally-ready       -> recommend spec-program-review in four-document-design mode
 specification-gap   -> return the token and its payload
 program-design-gap  -> return the token and its payload
 decision-needed     -> stop with the brief

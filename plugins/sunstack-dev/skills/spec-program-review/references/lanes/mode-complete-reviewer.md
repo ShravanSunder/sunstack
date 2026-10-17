@@ -6,7 +6,7 @@ Predicate: mandatory for every `review` invocation.
 
 Expected inputs: the complete review context, complete current target set, complete governing-source set, and one selected mode reference.
 
-Prerequisites: the complete target set, governing-source coverage, confirmed goal boundary and accepted requirements set, plus structural-realization confirmation for `program-only` or `three-artifact-design`, are complete and unambiguous.
+Prerequisites: the complete target set, governing-source coverage, confirmed goal boundary and accepted requirements set, plus structural-realization confirmation for `program-only` or `four-document-design`, are complete and unambiguous.
 
 Check boundary: read-only. This check may recommend `ready | needs-revision | blocked | decision-needed`; it may not issue the 🔎 Reviewer Sidekick verdict, edit, remediate, plan, mutate lifecycle, or accept.
 
@@ -17,14 +17,14 @@ MUST load `../reviewing-common-method.md` and return its common result fields, a
 MUST load exactly one selected mode reference and return its judgment on each mode-specific dimension, applying its ownership routes and completion condition during that same inspection:
 
 ```text
-specification-only -> ../reviewing-specification.md
-program-only       -> ../reviewing-program-design.md
-three-artifact-design -> ../reviewing-three-artifact-design.md
+specification-only   -> ../reviewing-specification.md
+program-only         -> ../reviewing-program-design.md
+four-document-design -> ../reviewing-four-document-design.md
 ```
 
 After both references are loaded, read the complete target set before substantive findings. Reconstruct the artifact model without preserving author section order. Apply the common method and every material dimension in the selected mode as one combined inspection, including its compact human-reader reconstruction and section/view-level deletion pass. Then attack the highest-risk crux and run the divergent-implementer and pretend-planner probes.
 
-For three-artifact-design mode, independently repeat load-bearing specification and program-design checks. Prior local review or author self-check is evidence to inspect, never a substitute.
+For four-document-design mode, independently repeat load-bearing specification, program-design, and verification-design checks. Prior local review or author self-check is evidence to inspect, never a substitute.
 
 Good: every mode dimension is `required`, `satisfied by the existing system`, `not applicable`, or `unresolved`; the recommendation follows the evidence; and a human can restate, challenge, and navigate the model without workflow narration.
 

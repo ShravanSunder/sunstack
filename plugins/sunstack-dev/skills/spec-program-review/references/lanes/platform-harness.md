@@ -31,7 +31,7 @@ Bad: provider-specific tools presented as portable; subagents without packets/au
 
 Calibration: report an issue only when it makes execution infeasible, changes behavior, or weakens proof. Do not demand portability from an explicitly single-platform design.
 
-Overlap boundary: `proof` owns modality-to-seam sufficiency; `artifact-navigation` owns loading/routing. This check owns whether the named platform can perform the action.
+Overlap boundary: `proof` owns seam sufficiency; `../reviewing-verification-design.md` owns the observation planned at a seam; `artifact-navigation` owns loading/routing. This check owns whether the named platform can perform the action.
 
 Return: check result with platform claim, verified source, real/fake boundary, failure/degradation consequence, and smallest design correction.
 

@@ -6,7 +6,7 @@ Planned at branch/HEAD: fixture / 1111111111111111111111111111111111111111
 
 ## Governing Planning Basis
 
-- Kind: reviewed-three-artifact-design
+- Kind: reviewed-four-document-design
 - Requirements: requirements-scenario-label-summary-v1
 - Specification: specification-scenario-label-summary-v1
 - Program Design: program-design-scenario-label-summary-v1

@@ -18,14 +18,14 @@ Inspired by the MIT-licensed `shadcn-improve` plugin, which scouts broadly, veri
 Vetted findings and prioritized backlogs may be returned without planning admission. Before writing a new completed plan or returning a `ready` current-state validation receipt for an existing completed canonical plan, classify its planning basis:
 
 ```text
-current-three-artifact-design-ready
-  complete current Requirements, Specification, and Program Design
+current-four-document-design-ready
+  complete current Requirements, Specification, Program Design, and Verification Design
   required local review coverage is semantically current
-  current review mode: three-artifact-design
-  the current three-artifact design review result (mode, covered targets, result, and coverage statement) or a pointer to it
-  review result: ready and covers all three current identities
+  current review mode: four-document-design
+  the current four-document design review result (mode, covered targets, result, and coverage statement) or a pointer to it
+  review result: ready and covers all four current identities
   accepted findings corrected under refreshed review
-  review coverage matches all three artifacts' current meaning
+  review coverage matches all four documents' current meaning
   no blocking decision or evidence gap
 
 implementation-mechanics-only
@@ -38,7 +38,9 @@ design-required
   either admissible basis is missing or contradicted
 ```
 
-`design-required` returns the vetted finding and exact missing semantic owner: Why/What to `spec-design`, structural How to `program-design`, or a complete but unreviewed/stale three-artifact design to `spec-program-review`. Do not write a new completed plan. For an existing plan, return `blocked` in the separate current-state validation receipt without rewriting it.
+A missing Verification Design never makes design work mechanics-only. A finding that needs any decision the mechanics-only check rules out is `design-required`, even when the other three documents are current.
+
+`design-required` returns the vetted finding and exact missing semantic owner: Why/What to `spec-design`, structural How to `program-design`, a missing or stale proof strategy to `verification-design` as `verification-design-gap`, or a complete but unreviewed/stale four-document design to `spec-program-review`. Do not write a new completed plan. For an existing plan, return `blocked` in the separate current-state validation receipt without rewriting it.
 
 Completion: every written plan carries one current admissible planning basis, the current review result or a pointer to it when design-bearing, and its semantic-freshness record. Any `ready` label belongs only to a separate current-state validation receipt.
 
@@ -92,7 +94,7 @@ Completion: every written plan carries one current admissible planning basis, th
    - proof clarity
    - dependency order
 5. Classify each selected improvement under **Entry And Planning Admission**:
-   - write plans only for `current-three-artifact-design-ready` or `implementation-mechanics-only`
+   - write plans only for `current-four-document-design-ready` or `implementation-mechanics-only`
    - preserve and route `design-required` findings without turning them into execution tasks
 6. IF producing or revising a completed direct plan result, or validating or preserving an extant completed plan, load `../../shared-references/canonical-implementation-plan.md` to keep this skill's admitted-improvement and implementation-mechanics-only admission inline while applying the shared producer/validator contract, and return the complete canonical plan record or non-ready result plus any blocking discrepancy. For an orchestrated goal, return the admitted-finding handoff instead of writing the delivery plan. Audit-only runs and pre-artifact admission failures do not load it.
 7. Write one plan per admitted improvement that can return `ready`:
@@ -120,7 +122,7 @@ Completion: every written plan carries one current admissible planning basis, th
 Use this for `validate-plan`, `next`, and pre-execution checks.
 
 1. Read the full plan artifact. Do not require a separate reading receipt. Apply the conditional canonical-plan load call in the main workflow and return the unchanged plan record, governing basis, delivery context, and any discrepancy.
-2. Verify the plan's `current-three-artifact-design-ready` or `implementation-mechanics-only` basis against current evidence. A missing, stale, or contradicted basis is `blocked` and routes to the exact semantic owner.
+2. Verify the plan's `current-four-document-design-ready` or `implementation-mechanics-only` basis against current evidence. A missing, stale, or contradicted basis is `blocked` and routes to the exact semantic owner.
 3. Verify the planned-at SHA, current branch, and changed target files.
 4. Re-open all cited source files and commands from the plan.
 5. Classify each task:
@@ -132,6 +134,7 @@ Use this for `validate-plan`, `next`, and pre-execution checks.
    - red/green proof required or explicit user-approved exception
    - focused validation and full validation listed separately
    - when you choose or check the proof for an obligation, name the failure the improvement removes and confirm the planned check runs where that failure can make it fail ([write tests that can fail](../principle-write-tests-that-can-fail/SKILL.md))
+   - on a design-ready basis, each Verification Design row is scheduled with a runnable command, and its observation and passing condition are unchanged
 7. Return a separate readiness receipt. Do not edit source code, the canonical plan record, planning result, governing basis, or delivery context.
 
 ## Progressive Disclosure

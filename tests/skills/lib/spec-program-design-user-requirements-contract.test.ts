@@ -88,7 +88,9 @@ describe("user requirements and design-view contracts", () => {
         "or the substantial per-document visual obligation applies even when no precise-view predicate fires",
       );
       expect(designSkill).toContain("no current UI");
-      expect(designSkill).toContain("text fence is not a pass");
+      expect(sharedReference).toContain(
+        "For a drawn view, that result is a gap, not a pass.",
+      );
     }
     expect(sharedReference).toContain(
       "selected medium: generated-image | mermaid | markdown-table | presentation-tui | fenced-plain-text",
@@ -324,7 +326,7 @@ describe("user requirements and design-view contracts", () => {
     );
     expect(reviewSkill).not.toContain("at most one focused reviewer by default");
     expect(reviewSkill).toContain(
-      "`Requirements`, `Specification`, `Program Design`, or a named combination",
+      "`Requirements`, `Specification`, `Program Design`, `Verification Design`, or a named combination",
     );
     expect(reviewSkill).toContain(
       "any correction spanning Requirements or Specification plus Program Design returns to `spec-design` first, then `program-design` after the observable contract is settled",
@@ -381,8 +383,8 @@ describe("user requirements and design-view contracts", () => {
     const programReview = readPluginFile(
       "skills/spec-program-review/references/reviewing-program-design.md",
     );
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
+    const fourDocumentDesignReview = readPluginFile(
+      "skills/spec-program-review/references/reviewing-four-document-design.md",
     );
     const classification = readPluginFile(
       "skills/spec-program-review/references/classifying-review-requirement.md",
@@ -390,47 +392,47 @@ describe("user requirements and design-view contracts", () => {
 
     for (const marker of ["added", "removed", "changed"]) {
       expect(programReview).toContain(marker);
-      expect(threeArtifactDesignReview).toContain(marker);
+      expect(fourDocumentDesignReview).toContain(marker);
     }
     expect(programReview).toContain("preservation-critical or contested unchanged");
-    expect(threeArtifactDesignReview).toContain(
+    expect(fourDocumentDesignReview).toContain(
       "preservation-critical or contested unchanged",
     );
     expect(reviewSkill).toContain("last inspectable owner-accepted governing source");
     expect(reviewSkill).toContain("Mutually narrowed current files");
     expect(programReview).toContain("explicit no-predecessor case");
-    expect(threeArtifactDesignReview).toContain(
+    expect(fourDocumentDesignReview).toContain(
       "accepted requirements remain covered",
     );
     expect(reviewSkill).not.toContain("digest");
     expect(programReview).not.toContain("digest");
-    expect(threeArtifactDesignReview).not.toContain("digest");
+    expect(fourDocumentDesignReview).not.toContain("digest");
     expect(classification).not.toContain("digest");
   });
 
-  test("keeps three-artifact design review responsible for complete local judgments", () => {
+  test("keeps four-document design review responsible for complete local judgments", () => {
     const reviewSkill = readPluginFile("skills/spec-program-review/SKILL.md");
-    const threeArtifactDesignReview = readPluginFile(
-      "skills/spec-program-review/references/reviewing-three-artifact-design.md",
+    const fourDocumentDesignReview = readPluginFile(
+      "skills/spec-program-review/references/reviewing-four-document-design.md",
     );
     const reduction = readPluginFile(
       "skills/spec-program-review/references/finding-and-reduction-schema.md",
     );
 
-    expect(threeArtifactDesignReview).toContain(
+    expect(fourDocumentDesignReview).toContain(
       "MUST load `reviewing-specification.md`",
     );
-    expect(threeArtifactDesignReview).toContain(
+    expect(fourDocumentDesignReview).toContain(
       "MUST load `reviewing-program-design.md`",
     );
-    expect(threeArtifactDesignReview).toContain(
-      "Requirements, Specification, and Program Design identity status",
+    expect(fourDocumentDesignReview).toContain(
+      "Requirements, Specification, Program Design, and Verification Design identity status",
     );
-    expect(threeArtifactDesignReview).toContain(
-      "This reference owns `three-artifact-design` mode judgment.",
+    expect(fourDocumentDesignReview).toContain(
+      "This reference owns `four-document-design` mode judgment.",
     );
     expect(reviewSkill).toContain(
-      "mode: specification-only | program-only | three-artifact-design",
+      "mode: specification-only | program-only | four-document-design",
     );
     for (const identity of [
       "Requirements identity",
@@ -483,14 +485,14 @@ describe("user requirements and design-view contracts", () => {
     expect(artifactNavigation).toContain("entry artifact or labeled record");
   });
 
-  test("keeps the current three-artifact design-review contract aligned across direct consumers", () => {
+  test("keeps the current four-document design-review contract aligned across direct consumers", () => {
     const currentDesignReviewConsumers = [
       readPluginFile("skills/spec-handoff/SKILL.md"),
       readPluginFile("skills/plan-improve-repo/SKILL.md"),
       readPluginFile(
         "skills/plan-improve-repo/references/improvement-plan-template.md",
       ),
-      readPluginFile("shared-references/requirements-specification-program-design.md"),
+      readPluginFile("shared-references/design-documents.md"),
       readPluginFile("README.md"),
       readPluginFile("skills/discuss-clarify-mental-models/SKILL.md"),
       readPluginFile("skills/practices-research/SKILL.md"),
@@ -507,7 +509,7 @@ describe("user requirements and design-view contracts", () => {
       expect(consumer).not.toContain("review result identity");
     }
     for (const consumer of currentDesignReviewConsumers.slice(0, 3)) {
-      expect(consumer).toContain("three-artifact design review result");
+      expect(consumer).toContain("four-document design review result");
     }
   });
 
