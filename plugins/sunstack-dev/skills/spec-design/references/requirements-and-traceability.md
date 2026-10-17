@@ -1,6 +1,6 @@
 # Requirements and Traceability
 
-This reference owns construction and repair of normative requirements plus coverage from problem and outcome to the proof-obligation slot. `proof-obligations.md` alone selects the proof modality.
+This reference owns construction and repair of normative requirements plus coverage from problem and outcome to the proof-obligation slot.
 
 Expected inputs: authority/problem model, the stage-2 entity table and undefined-noun gaps, goals/non-goals, resolved decisions, candidate constraints, and current requirement text.
 

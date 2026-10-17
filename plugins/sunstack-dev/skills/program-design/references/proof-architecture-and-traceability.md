@@ -2,7 +2,7 @@
 
 This reference owns requirement realization, structural proof seams, real/fake boundaries, enforcement classes, and construction of the requirement/design/proof trace table. It is the table's only builder: `artifact-and-self-review.md` verifies it, and the returned coverage disposition is derived from its rows.
 
-Expected inputs: the Requirements rows (`U`), the Specification's obligations (`R`) with their scenarios or observable contracts, the entity binding table, behavioral interface contracts, state model, failure/recovery decisions, proof-modality inventory, and complete target structure/flows.
+Expected inputs: the Requirements rows (`U`), the Specification's obligations (`R`) with their scenarios or observable contracts, the entity binding table, behavioral interface contracts, state model, failure/recovery decisions, the Specification's proof constraints, and complete target structure/flows.
 
 Return: the trace table, seam sufficiency, dependency proof classes, enforcement decisions, and gaps.
 
