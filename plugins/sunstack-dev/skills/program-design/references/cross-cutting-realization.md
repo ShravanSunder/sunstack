@@ -2,7 +2,7 @@
 
 This reference owns structural realization of applicable quality obligations.
 
-Expected inputs: specification obligations/non-goals, component/flow/failure models, platform constraints, and proof modalities.
+Expected inputs: specification obligations/non-goals, component/flow/failure models, platform constraints, and the Specification's proof constraints.
 
 Return: per-obligation owner, mechanism/boundary, normal behavior, failure/degradation behavior, proof seam, or reasoned not-applicable result.
 

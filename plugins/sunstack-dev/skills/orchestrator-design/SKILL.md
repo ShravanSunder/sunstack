@@ -14,7 +14,7 @@ spec-program-review  independent three-artifact review
 discuss-pathfinding  genuinely unwritten owner meaning
 ```
 
-MUST load `../../shared-references/requirements-specification-program-design.md` and return the separate concept and identity boundaries used to validate every downstream handoff.
+MUST load `../../shared-references/design-documents.md` and return the separate concept and identity boundaries used to validate every downstream handoff.
 
 MUST load `practices-show-me-your-work` once at the start and return the shared work reference (or explicitly unshared checkpoint path) plus whether this workflow is responsible for the whole work or contributes to it. Reuse supplied work context for nested work. The tracker owns recording, fallback, and conditional readable views. If tracking cannot initialize, report the gap and continue independent design/review work; tracking availability is not a review-admission prerequisite unless the user explicitly made it one.
 

@@ -2,7 +2,7 @@
 
 This reference owns `specification-only` mode judgment.
 
-MUST load `../../../shared-references/requirements-specification-program-design.md` and return whether the Requirements and Specification identities are present, resolvable, and different before judging the Specification's meaning.
+MUST load `../../../shared-references/design-documents.md` and return whether the Requirements and Specification identities are present, resolvable, and different before judging the Specification's meaning.
 
 Review Requirements and Specification separately:
 
