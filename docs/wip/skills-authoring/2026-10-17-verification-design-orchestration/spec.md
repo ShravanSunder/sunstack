@@ -139,10 +139,10 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 
 | Run | Status |
 |---|---|
-| 1–6 | implemented: `ec7e67be` on `skills/verification-design` (PR A). Suite at that commit: 164 passed, 2 failed; both failing tests pin the old path or the moved medium rule, and their update is owed after PR B |
-| 7–13 | proposed: Opus Workers B1 (runs 7–8) and B2 (runs 9–13 and the release surface) on `skills/verification-design-consumers` |
+| 1–13 | reviewed: implementation review `great` at `4f7e27a7` after T1 (fix `32929ff8`). PRs #143 (runs 1–6) and #144 (runs 7–13, 2.86.0) are open as stack #145. Not shipped until merged. |
 
 ## Review record
 
 - 2026-10-17 Advisor second look (A1–A4): all four accepted. A1 → D2, D3 and run 1's main path. A2 → D6 and run 6. A3 → runs 7–12, D8 and D9. A4 → D4, D5 and run 2.
 - 2026-10-17 spec review at `b34c6424` (review lead codex-local 01a149c2): `targeted-revision`, `revise-first`. RA1 (two medium rules) accepted → D15 and runs 5–8. G1 (descriptions missing) → the Descriptions section. Returned to the same review lead to verify the corrected anchors and finish trigger-routing. Follow-up at `3f8f6fa4`: RA1 verified closed. The new `spec-program-review` description promised a standalone Verification Design review, so it was narrowed (D16).
+- 2026-10-17 implementation review (review lead codex-local 01a149f4, three Sol xhigh reviewers, nine checks): `targeted-revision` at `59c894ba`, accepting T1 (the gap example treated waiting as a missing seam) and rejecting RA-F1 (a fixture label inconsistency with no consumer) as non-blocking. T1 was fixed at `32929ff8`; verdict `great` at `4f7e27a7`.
