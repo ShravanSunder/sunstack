@@ -8,11 +8,11 @@ Return: drift for each journey with its anchors, the corrections made, the journ
 
 ## Edit scope
 
-Edit only the skill's canonical directory (its `SKILL.md`, journey files and owned helpers) and its Claude link. When the app no longer does what the skill describes, either the skill drifted and you correct it, or the product regressed and you report it. The adopted source decides which.
+Edit only the skill's canonical directory (its `SKILL.md` and journey files), its Claude link and its journeys' scripts. When the app no longer does what the skill describes, either the skill drifted and you correct it, or the product regressed and you report it. The adopted source decides which.
 
 ## Read the whole skill
 
-Read `SKILL.md`, the journey index and every journey file in scope. Fix index entries that are missing, extra, duplicated or dead. Keep this pass light, because the index is the only inventory.
+Read `SKILL.md`, the journey index, and every journey file in scope with the script it names. Fix index entries that are missing, extra, duplicated or dead. Keep this pass light, because the index is the only inventory.
 
 ## Source pass for each journey
 
@@ -42,13 +42,13 @@ When the health check fails because the skill drifted, the failure counts as dri
 | What the evidence shows | Cause | What to do |
 | --- | --- | --- |
 | The skill's account of the user path is wrong or missing, and the adopted source agrees with the app | drift in the skill | Correct the skill and drive it again |
-| The behavior works, but the helper or recipe can't drive it | driver gap | Repair within the named helper paths, run the helper alone, then drive again |
+| The behavior works, but the script or recipe can't drive it | driver gap | Repair within the named script paths, run the script alone, then drive again |
 | The app breaks an adopted outcome | product regression | Keep the journey and report the regression with its evidence |
 | The adopted source is silent, disputed or contradicted by another adopted source | unsettled expectation | Return it to whoever owns that expectation |
 | A prerequisite you can't reach blocks the journey | unreachable | Report the prerequisite and the route tried |
 | The evidence shows none of these | unknown | Return the observation and the missing evidence that would decide it |
 
-A repaired helper follows the helper rules in the layout reference.
+A repaired script follows the script rules in the layout reference.
 
 ## Outcomes
 

@@ -55,11 +55,11 @@ export const VerificationSkillWork = z
       .readonly()
       .describe("The journeys the skill must drive, each named as the user would see it"),
     skillWritePaths: RepositoryPaths.describe(
-      "The only paths the Verifier may write: the skill directory .agents/skills/verify-<app>/, its journeys and drivers included, and its Claude link .claude/skills/verify-<app>; no feature code or product tests",
+      "The only paths the Verifier may write, each also in limits.writePaths: the skill directory .agents/skills/verify-<app>/, its Claude link .claude/skills/verify-<app>, and the script of each journey in scope in the project's own scripts location; no feature code or product tests",
     ),
   })
   .describe(
-    "Build or update the project's verification skill, its journeys and drivers, and drive it on its real target",
+    "Build or update the project's verification skill, its journeys and their scripts, and drive it on its real target",
   );
 
 export const VerificationScriptWork = z
@@ -77,7 +77,7 @@ export const VerificationScriptWork = z
     ),
   })
   .describe(
-    "Write or maintain assigned verification scripts and drivers that no project verification skill owns",
+    "Write or maintain assigned verification scripts and drivers that no project verification skill indexes",
   );
 
 export const VerifierWork = z

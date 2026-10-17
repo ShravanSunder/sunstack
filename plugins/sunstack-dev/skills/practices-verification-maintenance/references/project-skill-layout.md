@@ -1,10 +1,10 @@
 # Project Skill Layout
 
-This reference owns where a project's verification skill lives, how the Claude path reaches it, and where its content goes.
+This reference owns where a project's verification skill lives, how the Claude path reaches it, and where its content and its journeys' scripts go.
 
 Expected inputs: the project root, the named app and the paths you may write.
 
-Return: the canonical path, the Claude path's state, any other recipe for the same app, and the home for each part step 3 writes.
+Return: the canonical path, the Claude path's state, any other recipe for the same app, the project's scripts location, and the home for each part step 3 writes.
 
 ## The canonical home
 
@@ -12,9 +12,10 @@ Return: the canonical path, the Claude path's state, any other recipe for the sa
 <project>/.agents/skills/verify-<app>/
   SKILL.md        app identity, launch and readiness, health check, journey index, evidence, cleanup
   references/     one file per journey or small group, and setup only some runs need
-  scripts/        only helpers this project needs
 <project>/.claude/skills/verify-<app>
   -> ../../.agents/skills/verify-<app>
+<project>/<the project's scripts location>/
+  one self-describing script per journey
 ```
 
 `<app>` is the project's own name for the app, in lowercase with hyphens. A project with several apps has one skill per app. The `.agents` directory holds the only authored copy, and the Claude path is a relative link to it. Global links, cache syncing, installs and home-level writes play no part here.
@@ -26,6 +27,7 @@ Work from the project root and read what you find.
 - List `.agents/skills/verify-*/SKILL.md` and read each one's frontmatter and app scope. Match the named app and the behavior in scope; the first filename that looks close isn't a match.
 - List `.claude/skills/verify-*` and any other skill home the project uses, such as `.cursor/skills/verify-*`.
 - Read the project's instructions (`AGENTS.md`, `CLAUDE.md`, the README) for an explicit pointer to a verification skill or runbook. A pointer tells you where to look and grants nothing.
+- Find the scripts location: the path your assignment names, or else the one the project already uses for its own scripts. When it has none or several fit, return the question to your caller.
 
 A second recipe for the same app anywhere in the project is a competing owner. Report it with its path. Which one survives is the owner's decision.
 
@@ -41,7 +43,7 @@ Classify `.claude/skills/verify-<app>` in this order, because `test -e` follows 
 
 ### Write check
 
-On a create or an upkeep, run this from the project root once for each path you will write, before the first write: every file and new directory under `.agents/skills/verify-<app>/`, a helper's test file, and `.claude/skills` before you create the Claude link in it. Run it again for any path you add later. It walks the path from the project root down. Every component that exists must resolve to its own location inside the project, so a symlinked directory anywhere on the way fails even when you never listed it. A path that doesn't exist yet passes only when its deepest existing ancestor passes.
+On a create or an upkeep, run this from the project root once for each path you will write, before the first write: every file and new directory under `.agents/skills/verify-<app>/`, each journey script and its test file, and `.claude/skills` before you create the Claude link in it. Run it again for any path you add later. It walks the path from the project root down. Every component that exists must resolve to its own location inside the project, so a symlinked directory anywhere on the way fails even when you never listed it. A path that doesn't exist yet passes only when its deepest existing ancestor passes.
 
 ```bash
 check_write_path() {
@@ -86,17 +88,18 @@ Give the skill valid portable frontmatter: `name: verify-<app>`, matching the fo
 
 ## What goes where
 
-`SKILL.md` carries what every run needs: which app this is and its surfaces, how to start it and the signal that it is ready to use, the read-only health check, the journey index with how to pick and drive a journey, what evidence to keep and where, and owned cleanup. An agent will read it mid-task, so keep it short enough to scan.
+`SKILL.md` carries what every run needs: which app this is and its surfaces, how to start it and the signal that it is ready to use, the read-only health check, the journey index naming each journey's script with when and why to run it, what evidence to keep and where, and owned cleanup. An agent will read it mid-task, so keep it short enough to scan.
 
-`references/` holds one file per journey or small group of journeys, plus setup that only some runs need, such as seeding an account or a platform quirk. A journey file says, from the user's side, what the behavior is, its prerequisites, every entry point, the driving steps with the observable result of each, the expected result with its adopted source, the failures that matter and the gotchas. Pick headings that fit the journey.
+`references/` holds one file per journey or small group of journeys, plus setup that only some runs need, such as seeding an account or a platform quirk. A journey file says, from the user's side, what the behavior is, its prerequisites, every entry point, the driving steps with the observable result of each, the expected result with its adopted source, the failures that matter, the gotchas and the script that runs it. Pick headings that fit the journey.
 
-`scripts/` holds only the helpers this project needs. Each one runs on its own, has its invocation shown in `SKILL.md`, and has been run against its real target. A helper with logic worth testing gets tests where the project keeps its tests.
+Each journey's script lives in the project's scripts location, and the skill keeps no copy. The script is self-describing: its header and `--help` say what it proves, its inputs and how to run it, so an agent can use it cold. It runs on its own and has been run against its real target. A script with logic worth testing gets tests where the project keeps its tests.
 
 Keep these out of the skill:
 
 - tools, flags or selectors nobody ran or read at their source, and placeholders written as working steps;
 - credential values, and machine-specific paths such as an installed plugin cache;
 - calls back to the generic verification or verification-maintenance practices, so that loading the project skill never loops back here;
+- a copy of any journey script;
 - a log of past runs or results, since evidence and run notes stay in the task, project or log homes that already hold them;
 - copied principle text, and any inventory kept beside the journey index.
 
@@ -110,4 +113,4 @@ A request to maintain the API skill finds that `.claude/skills/verify-api` is a 
 
 ## When to stop
 
-Stop when the canonical path is named; the Claude path is classified as the intended link, a pending link, absent, or a conflict with what sits there; every other recipe for the same app is listed, or the search that found none is named; and each part step 3 writes has its home.
+Stop when the canonical path and the scripts location are named, or the scripts location is returned as a question; the Claude path is classified as the intended link, a pending link, absent, or a conflict with what sits there; every other recipe for the same app is listed, or the search that found none is named; and each part step 3 writes has its home.
