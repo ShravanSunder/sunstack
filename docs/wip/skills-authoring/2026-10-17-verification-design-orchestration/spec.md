@@ -139,7 +139,8 @@ The owner may strike any row. A struck row stays, with a dated row naming what r
 
 | Run | Status |
 |---|---|
-| 1–13 | proposed |
+| 1–6 | implemented: `ec7e67be` on `skills/verification-design` (PR A). Suite at that commit: 164 passed, 2 failed; both failing tests pin the old path or the moved medium rule, and their update is owed after PR B |
+| 7–13 | proposed: Opus Workers B1 (runs 7–8) and B2 (runs 9–13 and the release surface) on `skills/verification-design-consumers` |
 
 ## Review record
 
