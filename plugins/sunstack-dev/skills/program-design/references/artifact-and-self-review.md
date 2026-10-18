@@ -96,6 +96,7 @@ Re-read the whole artifact:
 - every Specification obligation has its own trace row with realization and seam, and the rows agree with the returned coverage disposition;
 - every accepted requirement and entity remains covered or has owner-authorized supersession;
 - every design element has a legitimate basis;
+- the artifact records the selected structure with its credible alternatives, tradeoffs, and falsifiers;
 - every reader-facing element passes the human deletion test;
 - every generated visual has a current accepted asset/embed, accurate labels and edges, readable placement, and agreement with the authoritative prose and exact views;
 - progressive disclosure leads from specification obligation through owner, call/state/failure behavior, and proof without scratch or process notes;

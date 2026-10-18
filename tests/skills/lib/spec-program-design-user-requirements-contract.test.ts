@@ -386,6 +386,33 @@ describe("user requirements and design-view contracts", () => {
     expect(brief).toContain("**Where the agents stand**");
   });
 
+  test("routes decision briefs to the Chief of Staff role, never directly to the owner", () => {
+    const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const brief = readPluginFile("shared-references/owner-decision-brief.md");
+    const routeBlock = programDesign.slice(
+      programDesign.indexOf("return exactly one phase-guided route:"),
+      programDesign.indexOf("Before recommending a skill"),
+    );
+
+    expect(brief).toContain(
+      "Send the brief to the Chief of Staff role, never directly to the owner.",
+    );
+    expect(brief).toContain(
+      "Take the Chief of Staff from the commission, the work thread, or the session's standing instructions.",
+    );
+    expect(brief).toContain(
+      "return the brief to your commissioner with the exact recipient gap",
+    );
+    expect(brief).toContain(
+      "A question tool may ask only the brief's recipient for the final pick",
+    );
+    expect(brief).toContain("it never asks the owner directly");
+    expect(routeBlock).toContain(
+      "decision-needed    -> stop with the brief from owner-decision-brief.md",
+    );
+    expect(routeBlock).not.toContain("discuss-pathfinding");
+  });
+
   test("retires the structural-realization confirmation from every active skill", () => {
     const activeSkillFiles = ["skills", "shared-references"].flatMap((root) =>
       readdirSync(path.join(pluginRoot, root), {

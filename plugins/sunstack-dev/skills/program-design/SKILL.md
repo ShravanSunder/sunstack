@@ -73,10 +73,8 @@ After producing the terminal result, return exactly one phase-guided route:
 ```text
 locally-ready      -> recommend verification-design
 specification-gap  -> recommend spec-design
-decision-needed    -> recommend discuss-pathfinding only when this skill's
-                      method identifies an unmade owner-controlled structural
-                      choice; required return owner: program-design;
-                      otherwise stop with the exact owner decision
+decision-needed    -> stop with the brief from owner-decision-brief.md,
+                      routed as that reference says
 evidence-blocked | deferred -> stop with the exact reason
 ```
 
@@ -353,7 +351,6 @@ Do not return `locally-ready` while any of these hold:
 - source/review coverage, self-check, readiness, acceptance, planning, PR, or release narration appears as durable program-design prose instead of returned workflow state;
 - Requirements, Specification, or Program Design identities, source coverage, or non-acceptance are missing.
 - a continuation omits a next skill, recommends more than one, or contradicts the terminal mapping above;
-- a pathfinding recommendation lacks an unmade owner-controlled structural choice or omits `program-design` as its return owner;
 - a continuation handoff omits the destination's required exact gap, boundary state, or artifact pointers, or copies unrelated history.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.

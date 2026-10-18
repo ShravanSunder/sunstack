@@ -14,8 +14,8 @@ Return one brief per decision, in this order:
 
 Good briefs look like the ones owners accept quickly: one picture of today, one picture per option, a clear pick. Bad briefs are option menus with a preselected answer, a bare request to confirm a choice already made, several unrelated decisions bundled into one prompt, and internal jargon the owner has not used.
 
-Send the brief to the Chief of Staff role, never directly to the owner. When no Chief of Staff resolves, return the brief to your commissioner with the exact recipient gap; the gap is not leave to contact the owner.
+Send the brief to the Chief of Staff role, never directly to the owner. Take the Chief of Staff from the commission, the work thread, or the session's standing instructions. When none of them names one, return the brief to your commissioner with the exact recipient gap; the gap is not leave to contact the owner.
 
-A question tool may carry the final pick only after the brief is on screen. Ask once. Later updates point back to the open brief in one line instead of asking again.
+A question tool may ask only the brief's recipient for the final pick, and only after the brief is on that recipient's screen; it never asks the owner directly. Ask once. Later updates point back to the open brief in one line instead of asking again.
 
 Complete when the owner can decide from the brief alone, without opening a file.
