@@ -93,7 +93,10 @@ D8.
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1–4 | proposed | — |
+| 1 | implemented | `05c069ed`, author self-check fixes `03d726cb` |
+| 2 | implemented | `064bffc5`, author self-check fixes `03d726cb` |
+| 3 | implemented | `197f59e8`, author self-check fixes `03d726cb` |
+| 4 | implemented | `b9668624`, author self-check fixes `03d726cb` |
 
 ## Review record
 
