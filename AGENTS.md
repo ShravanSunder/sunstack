@@ -17,7 +17,7 @@ ai-tools/
 │   ├── ai-scaffold/                  # Project scaffolding (biome, ruff, vitest, pytest)
 │   ├── dev-workflow-tools/           # Common tool skills, including Peekaboo UI testing
 │   ├── sunstack-dev/                  # Spec, review, docs, TUI, and Linear workflow skills
-│   └── skill-authoring/              # Skill creation, review, and audit
+│   └── skill-authoring/              # Skill creation, rules, review, and audit
 ├── observability/                    # Shared local OpenTelemetry and Victoria stack
 ├── agent-scripts/                    # Host agent scripts (not plugin skills)
 │   ├── stop-review/                  # Luna Stop-review; deploy-home-hook.sh copies runtime to ~/.agents/stop-review
@@ -58,6 +58,7 @@ Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-author
 | --- | --- |
 | Carry one skill change from spec to release | `skill-authoring:skill-orchestrator` |
 | Design or write one named skill and its skill spec; the craft (trigger, main path, depth, steering, platform mechanics, security gate) | `skill-authoring:skill-creation` |
+| Decide which of a skill's standards become checked `sunstack-rule` rules, mark them, and prove them | `skill-authoring:skill-rules` |
 | Independent review of a skill spec or skill files, with several reviewer agents | `skill-authoring:skill-review` |
 | Which skills to create, update, merge, or skip | `skill-authoring:skill-audit` |
 
@@ -154,6 +155,7 @@ Skills are layered by the role they play: orchestrators run a whole job; phases 
 | debug-investigation | `plugins/sunstack-dev/skills/debug-investigation/` | Diagnosis-first debugging with repo-local debug artifacts for clear real debugging work before fixes |
 | skill-orchestrator | `plugins/skill-authoring/skills/skill-orchestrator/` | Carry one skill change from spec through review, implementation, proof, assessment, and release |
 | skill-creation | `plugins/skill-authoring/skills/skill-creation/` | The skill craft and the skill spec: design and write one named skill |
+| skill-rules | `plugins/skill-authoring/skills/skill-rules/` | Five-outcome decision matrix for a skill's standards, narrowest-host markers, rules entries and RuleSet wiring, proven by `check_rules` and good and bad examples |
 | skill-review | `plugins/skill-authoring/skills/skill-review/` | Independent review of a skill spec or skill files by several reviewer agents |
 | skill-audit | `plugins/skill-authoring/skills/skill-audit/` | Evidence-backed portfolio audits using current plugin inventory, session patterns, and upstream inspirations |
 | presentation-tui | `plugins/sunstack-dev/skills/presentation-tui/` | Hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: design, architecture, comparisons, flows, and multi-section explanations |
