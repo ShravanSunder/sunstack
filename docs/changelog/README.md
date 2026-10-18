@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-18 Presentation HTML adopts shared components](2026-10-18-presentation-html-adopted-components.md)
 - [2026-10-18 Capability through-lines](2026-10-18-capability-through-lines.md)
 - [2026-10-18 Design sets: one source, two reading paths](2026-10-18-design-set-composition.md)
 - [2026-10-18 Merge authority up front](2026-10-18-merge-authority-up-front.md)

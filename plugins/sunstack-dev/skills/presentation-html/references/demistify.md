@@ -37,9 +37,14 @@ MUST load the guide for the page’s binding (for v1, `https://demistify.getagen
 | Flow, board, arrows or layers | `references/maps.md` |
 | Tree or mind map | `references/trees.md` |
 | Pictures, galleries or image comparison | `references/pictures.md` |
-| Guided routes across views/pages | `references/tours.md` |
+| Aligned alternatives on matching topics | `references/comparisons.md` |
+| Ordered steps with expandable evidence | `references/traces.md` |
+| Source-derived call-path changes | `references/call-paths.md` |
+| Walkthroughs across views/pages, including Gallery Journeys | `references/tours.md` |
 
 IF the page contains a feature named in this table, load its reference and return the constructs the page takes from it.
+
+The main guide owns the available elements, attributes, tones, icons and widths. Recipes in `presentation-html` choose how to explain the content; they do not add API. For a topic comparison, use `comparisons.md` as the canonical comparison guide; `pictures.md` describes the image slider and gallery.
 
 The guide at the page’s binding is the only source of available API. A construct you know only from a proposal, a design discussion or another version, including a different presentation model, stays unavailable until that guide documents it. If the guide cannot be fetched, use a verified matching local copy or report the missing reference; never reconstruct its interface.
 
