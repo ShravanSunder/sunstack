@@ -82,7 +82,7 @@ head SHA:
 diff identity:
 existing body:
 related URLs: <only those already supplied>
-never-publish rules: <step-2 return>
+never-publish rules: <step-3 return>
 ```
 
 ## Receipt
