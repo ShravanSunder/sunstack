@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-18 Blameless retrospective](2026-10-18-practices-retrospective.md)
 - [2026-10-18 skill-rules](2026-10-18-skill-rules.md)
 - [2026-10-17 Real decision stops](2026-10-17-real-decision-stops.md)
 - [2026-10-17 Verification Design in the design cycle](2026-10-17-verification-design.md)
