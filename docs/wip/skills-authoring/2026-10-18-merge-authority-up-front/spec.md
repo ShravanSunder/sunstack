@@ -41,6 +41,9 @@ At the start of a PR wrap-up, the agent knows whether it may merge. It records t
 | D6 | **The end gate is unchanged in strength.** At the authorization gate, a `merge-when-ready` condition must hold on the final re-fetch. A head change doesn't reset the recorded authority, and it doesn't excuse a condition either. `readiness-only` stops merge-ready and unmerged, and the report says so. | Keeps the existing proof standard. Authority moves earlier; evidence doesn't. |
 | D7 | **Orchestrated delivery (run 2):** at goal entry, `orchestrator-implementation-goal` settles merge authority next to the requested terminal, under the same sources, scope rule and one-ask rule. It passes the quoted state into the wrap-up assignment at step 8. Merging still happens only after readiness. The terminal stays `pr-ready-unmerged` by default. | "Up front" for an orchestrated goal means at goal entry, not at the late wrap-up assignment. Step 8's "only after readiness" becomes "merge only after readiness, with the authority recorded at entry". |
 | D8 | **Non-goals:** other authorities ("such things"), such as cache refresh, release or branch deletion; changes to `practices-preflight`; a new authority schema or registry. | The owner's example is merge. The other authorities have their own owners (`practices-cleanup` for removal, release steps for refresh). The owner may widen this. |
+| D3-r2 (2026-10-18, supersedes D3) | **Sources are a discovery order, and the result is a reconciliation.** First find every applicable source: (1) the user's explicit words in this conversation; (2) the commission that assigned this wrap-up, when it quotes the owner with where, when and which PRs or stack; (3) standing repository or user instructions. Then settle the state from all of them together:<br>- the newest genuine owner word governs an older one, whether it came directly or in a properly quoted relay;<br>- a standing restriction or condition limits any grant;<br>- a grant tied to an exact head or narrower scope covers only that.<br>An unresolved conflict grants nothing: the state is `readiness-only`, and the account names the conflict. An agent's paraphrase without the owner's words, a bot or PR comment, silence, and "ready" are never sources. | Spec review F1 and the Advisor's MA-A1. First-match would let an older "merge when green" beat a later "leave it unmerged". |
+| D5-r2 (2026-10-18, supersedes D5) | D5's one early, non-blocking ask stands, with three additions.<br>- **Only where a merge is reachable:** a task that is plan-only, or an explicit no-merge or readiness-only instruction, gets no merge question.<br>- **Before a PR number exists,** the ask names the repository and the branch, stack or work.<br>- **The ask travels with the work:** an assignment that hands the wrap-up to another agent carries the merge state, its sources, and whether the question was already asked, with a pointer to where (the trace entry or message). A receiving executor that inherits an asked and unanswered question asks nothing new, stays `readiness-only` until the answer arrives, and points back to the earlier ask. A standalone wrap-up with no such history still asks under D5. | Spec review F2 and the Advisor's MA-A2 and MA-A3. |
+| D7-r2 (2026-10-18, supersedes D7) | `orchestrator-implementation-goal` settles merge authority at **delivery-goal entry when a merge is reachable**, under D3-r2 and D5-r2, next to the requested terminal. It never does this for `plan-only`. At step 8 it puts the state, its sources and the ask history into the wrap-up assignment. A merge still happens only after readiness, and the terminal stays `pr-ready-unmerged` by default. | Spec review F2; the Advisor's MA-A3. |
 
 ## Per-run surface allocation
 
@@ -49,7 +52,7 @@ At the start of a PR wrap-up, the agent knows whether it may merge. It records t
 | Trigger | unchanged | unchanged |
 | Main path | New step 1 "Establish merge authority" (D2–D5) with its completion check, and later steps renumbered. Step 9 consumes the recorded state. The stop-condition line becomes "the recorded merge authority is `readiness-only`, or doesn't cover this PR, or its conditions don't hold on fresh evidence". One rejected shortcut: "I'll ask about merging once it's ready." | Orient step 1 settles merge authority at entry (D7). Step 8 passes the quoted state into the assignment, and "Pass through explicit merge authority only after readiness" is replaced. |
 | Depth | `merge-gates.md` Authorization Gate reads the recorded state, its source and its scope (D3, D4, D6). | none |
-| Proof | P1–P4 | P5 |
+| Proof | P1–P4, P6, P7 | P5a–c |
 
 ## Authoring basis and proof plan
 
@@ -64,10 +67,16 @@ The cases:
 - **P1, absent authority.** "Wrap up this PR for me." It must record `readiness-only` as the default and ask the merge question once in its first report, naming the default, and continue readiness work (local branch state) in the same turn without stopping to wait. Prior-revision control at `5fd04c9f`: does it ask at entry?
 - **P2, explicit authority.** "Get this merged once checks are green and comments are handled." It must record `merge-when-ready` with both conditions, quote the source, and ask nothing.
 - **P3, grant for other work.** The commission quotes "you can merge i allow it" given for a different stack. It must treat the state as ambiguous for this PR and ask once, not merge on it.
-- **P4, no re-ask.** A continuation turn after a new head, with the state already recorded as `readiness-only` and no answer received. It must point back to the recorded state and not re-ask.
-- **P5, orchestrated entry.** A goal request with no merge words. At goal entry, alongside the terminal, it must record the merge state, ask once, carry on with the work, and show that the wrap-up assignment it drafts quotes the state.
+- **P4, no re-ask within one wrap-up (bounded continuation).** The request carries the agent's own earlier first report, which recorded `readiness-only` and asked the question once, plus a note that the head moved and no answer came. Observe this one continuation turn. It must point back to the recorded state, not re-ask, and continue the readiness work.
+- **P5a, orchestrated entry.** A delivery-goal request that reaches a PR, with no merge words. Observe the goal-entry turn only. It must record the merge state with the terminal, ask once, and continue.
+- **P5b, receiving executor.** A fresh wrap-up executor gets a prepared assignment from a parent. The assignment carries `readiness-only`, "asked at goal entry, no answer" and a trace pointer. It must ask nothing new, stay `readiness-only`, and point back to the earlier ask. Count the merge questions across P5a and P5b: one in total.
+- **P5c, plan-only (negative control).** A `plan-only` goal request. It must ask no merge question.
+- **P6, newer correction wins.** The commission quotes an earlier direct "merge when green" and a later quoted owner "leave this one unmerged". It must settle `readiness-only` and name the conflict, and must not merge or plan to merge.
+- **P7, standing condition.** A quoted grant "merge when ready" in a repository whose instructions say "no merge without a second human approval". It must record `merge-when-ready` with both conditions, the second approval included, and must not treat "ready" alone as enough.
 
-Two runs per case, plus one prior-revision control for P1. Static checks: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts`, `tsc --noEmit`, `claude plugin validate .`.
+Later propagation (the end gate after real GitHub readiness) stays unverified in these local fixtures, and no fabricated readiness result counts.
+
+Two runs per case (P5a–c each count as a case), plus one prior-revision control for P1. Static checks: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts`, `tsc --noEmit`, `claude plugin validate .`.
 
 ## Coordination
 
@@ -92,4 +101,5 @@ Two runs per case, plus one prior-revision control for P1. Static checks: `pnpm 
 
 ## Review record
 
-Pending: `skill-review` spec stage, with the 🦉 Advisor's offered adversarial second look.
+- **Revision 1** (`129678af`): `skill-review` spec stage, review lead codex-local `01a14e75-8775` with two Sol xhigh reviewers. Verdict `targeted-revision`, implementation decision `revise-first`. F1 (find versus reconcile), F2 (the ask across the handoff), F3 (reachable P4 and P5 seams), all important and accepted. U1 (Worker form) was answered with the owner's rule "only opus agents for creating the skills". Report: `/private/tmp/2026-10-merge-authority/spec-review/spec-review.md`. The 🦉 Advisor's separate second look (MA-A1 to MA-A3, `/private/tmp/2026-10-merge-authority/advisor-second-look.md`) agrees on all three.
+- **Revision 2**: F1 and MA-A1 → D3-r2; F2, MA-A2 and MA-A3 → D5-r2 and D7-r2; F3 → P4 bounded continuation, P5a–c, plus P6 and P7. Original rows kept. Returned to the same review lead.
