@@ -96,7 +96,7 @@ Two runs per case (P5a–c each count as a case), plus one prior-revision contro
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 `implementation-pr-wrapup` | implemented | `9bbc376f`, wording `f350bafa`, Lead go-ahead `230dd731` |
+| 1 `implementation-pr-wrapup` | implemented | `9bbc376f`, wording `f350bafa`, Lead go-ahead `230dd731`, ask predicate `a07c684e` |
 | 2 `orchestrator-implementation-goal` | implemented | `8759e723`, wording `f350bafa`, Lead go-ahead `230dd731` |
 
 ## Review record
