@@ -99,3 +99,4 @@ D8.
 
 - Spec review 1 at `1a9419a9`: `targeted-revision`, revise first; F1–F4 accepted, all important (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review.md`). This revision answers F1 with D6-r1, F2 with D9 and the Run 2 allocation, F3 with P1's two-turn owner setup, and F4 with P6a and P6b. It goes back to the same review lead.
 - Correction round 2 at `91d640bf`: F1–F4 closed; F5 accepted (D9's "one view per set" contradicted D2's map in both documents). D9 now gives one map per document, each covering the whole set (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review-r2.md`).
+- Correction round 3 at `71ce7973`: F5 closed; open findings 4 → 1 → 0. Verdict `great`, `accepted-to-implement` (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review-r3.md`).
