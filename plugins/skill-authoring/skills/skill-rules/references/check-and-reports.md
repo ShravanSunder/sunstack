@@ -60,7 +60,7 @@ Find the intended occurrence by matching its `key` and `target` location, which 
 | `zero_matches` for the rule on either example | no: the selector reaches nothing there |
 | occurrences exist, but none at the intended unit | no: the selector reaches other text |
 | the intended occurrence is `unresolved` or `cancelled` | no |
-| the rule is in `skipped_rules`, or coverage is `partial` or `none` because of it | no |
+| the rule is in `skipped_rules`, or coverage is `partial` or `none` | no |
 | both examples `pass` | no: the predicate can't see the break |
 | both examples `fail` | no: the predicate or its polarity is wrong |
 | exit 0 | says nothing either way |

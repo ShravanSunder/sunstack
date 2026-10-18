@@ -78,6 +78,7 @@ Bad:
 - "important, so deterministic", or "everything in Workflow is a rule";
 - a judgment rule for a claim no single unit can answer;
 - a marker planned for an eval or prose standard because "it could still be checked";
+- the same standard marked twice, once in its section and again in a checklist;
 - a check that tests for a word, recorded as testing the property the word stands for.
 
 | thought | reality |

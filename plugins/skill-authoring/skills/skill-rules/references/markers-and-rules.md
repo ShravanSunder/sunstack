@@ -61,7 +61,7 @@ The rules file is one strict JSON object keyed by marker ID, paired with exactly
 
 Choose the verdict from the standard's outcome:
 
-- **Judgment `threshold`** for a model-judged standard. The marked wording becomes the question, and the threshold, above 0 and at most 1, is the confidence a yes needs. Take thresholds from the repository's existing rules. A judgment runs once per selected unit, so select only the units the standard is about.
+- **Judgment `threshold`** for a model-judged standard. The marked wording becomes the question, and the threshold, above 0 and at most 1, is the confidence a yes needs. Take thresholds from the repository's existing rules, or the engine examples' 0.8, and say which. A judgment runs once per selected unit, so select only the units the standard is about.
 - **`expect`** when one unit's visible text, or one field's decoded value, either has the property or doesn't: exactly one of `starts_with`, `matches`, `not_matches` or `present: true`. Text predicates read visible text with inline code removed, so a pattern looking for a path written in backticks finds nothing. An absent field fails every predicate, `null` counts as present, and a missing or malformed frontmatter block is unresolved.
 - **`ast_grep`** when the property is structural, or needs the raw source (inline code included) or the unit's ancestors. The rule describes the *violation*: a match fully inside the target unit fails it, and no match passes. Write it the other way round and it fails good text and passes bad. It sees the whole original syntax tree, so ancestors outside the unit count and siblings outside it don't. The engine validates it as an ast-grep rule and refuses unknown keys, even nested ones such as a misspelt `stop_by`.
 
