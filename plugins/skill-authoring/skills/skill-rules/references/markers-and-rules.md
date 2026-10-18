@@ -49,7 +49,7 @@ The heading comes last on purpose: its section runs to the next heading of the s
 
 ## Write the entry
 
-The rules file is one strict JSON object keyed by marker ID, paired with exactly one Markdown file. Each entry has a `name`, which becomes the rule ID (lowercase letters, digits, `.`, `_` and `-`), a `target` with an explicit `input` and a `select`, and exactly one verdict. These entries for the three markers above follow the engine's examples, with the load check's wording narrowed to what the check actually tests:
+The rules file is one strict JSON object keyed by marker ID, paired with exactly one Markdown file. Each entry has a `name`, which becomes the rule ID (lowercase letters, digits, `.`, `_` and `-`), a `target` with an explicit `input` and a `select`, and exactly one verdict. These entries for the three markers above follow the engine's examples, with the load check's wording narrowed to what the check tests:
 
 ```json
 {
@@ -61,7 +61,7 @@ The rules file is one strict JSON object keyed by marker ID, paired with exactly
 
 Choose the verdict from the standard's outcome:
 
-- **Judgment `threshold`** for a model-judged standard. The marked wording becomes the question, and the threshold, above 0 and at most 1, is the confidence a yes needs. Take thresholds from the repository's existing rules rather than inventing one. A judgment runs once per selected unit, so select only the units the standard is about.
+- **Judgment `threshold`** for a model-judged standard. The marked wording becomes the question, and the threshold, above 0 and at most 1, is the confidence a yes needs. Take thresholds from the repository's existing rules. A judgment runs once per selected unit, so select only the units the standard is about.
 - **`expect`** when one unit's visible text, or one field's decoded value, either has the property or doesn't: exactly one of `starts_with`, `matches`, `not_matches` or `present: true`. Text predicates read visible text with inline code removed, so a pattern looking for a path written in backticks finds nothing. An absent field fails every predicate, `null` counts as present, and a missing or malformed frontmatter block is unresolved.
 - **`ast_grep`** when the property is structural, or needs the raw source (inline code included) or the unit's ancestors. The rule describes the *violation*: a match fully inside the target unit fails it, and no match passes. Write it the other way round and it fails good text and passes bad. It sees the whole original syntax tree, so ancestors outside the unit count and siblings outside it don't. The engine validates it as an ast-grep rule and refuses unknown keys, even nested ones such as a misspelt `stop_by`.
 
@@ -87,7 +87,7 @@ Name the cost: an input used only for context, like `calibration` here, has to b
 
 ## Wire the RuleSet
 
-A correct Markdown and rules pair proves nothing until the RuleSet that actually runs includes it. Inspect, in order:
+A correct Markdown and rules pair proves nothing until the RuleSet the repository's invocation runs includes it. Inspect, in order:
 
 1. **The invocation.** Find the check request or runtime invocation the repository passes to `sunstack-rule`, in its scripts, CI or docs. Note `definition_root`, each `definitions.rule_sets[].path`, its `binding_groups`, and the `repositories` with their `input_paths`. Open the RuleSet it names, not a similarly named file.
 2. **The pair.** Add `{"markdown": "<path>", "rules": "<path>"}` to `rule_sources`, both paths relative to the RuleSet file. A path relative to the repository root resolves to a different place.

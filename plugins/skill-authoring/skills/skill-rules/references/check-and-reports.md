@@ -67,7 +67,7 @@ Find the intended occurrence by matching its `key` and `target` location, which 
 
 ### Worked calibration
 
-Take the load check `K015` from the entry examples: it selects paragraphs whose visible text starts with `MUST`, and its `ast_grep` rule fails one that contains `MUST load` without the word `return`. Its marked wording says exactly that: "A paragraph with a `MUST load` instruction contains the word `return`."
+Take the load check `K015` from the entry examples: it selects paragraphs whose visible text starts with `MUST`, and its `ast_grep` rule fails one that contains `MUST load` without the word `return`. Its marked wording says exactly that: "A paragraph with a `MUST load` instruction contains the word `return`." The outcomes below are predicted from the engine's selection and matching rules.
 
 - **Good:** "MUST load `reference.md` and return the selected facts." The paragraph is an occurrence, `completed`, `pass`.
 - **Bad:** "MUST load `reference.md` before step 2." The paragraph is an occurrence, `completed`, `fail`, with an AST match observation on it. With both rows observed, calibration closes for this selector.

@@ -4,7 +4,7 @@ This reference owns classification: which of the five outcomes each candidate st
 
 ## Decide in this order
 
-Ask these questions in order and stop at the first one that settles the outcome. The cheap exits come first, so nothing reaches a marker by default.
+Ask these questions in order and stop at the first one that settles the outcome.
 
 1. **Does it make a claim some text can keep or break?** A stance, a rationale, a definition or a piece of teaching makes none. → prose.
 2. **Is the claim about what an agent does while working, rather than what a text says?** Choices under pressure, steps skipped, what it reads before acting. → eval: only a fresh agent run under that pressure observes it.
@@ -12,11 +12,11 @@ Ask these questions in order and stop at the first one that settles the outcome.
 4. **Is the property visible in that unit's text or structure?** Write the check you'd use, then hunt for counterexamples in both directions: a text that keeps the standard and fails the check, and a text that breaks the standard and passes it. Neither exists → deterministic. Either exists → the check is a proxy; go on to question 5 with the standard itself.
 5. **Does deciding need reading comprehension, and does the marked wording alone make a good question?** Yes → model-judged. If the wording only reads as a question with its lead-in, a neighbouring sentence or a rewrite, it isn't ready: return it for `skill-creation` to rewrite, and don't mark it.
 
-The tempting shortcut sits at questions 2 and 3: a model can be asked anything, so almost any standard *could* become a judgment question. What matters is whether the marked words and one selected unit hold what the judgment needs. When they don't, a judgment rule asks the model to guess, on every run, for every selected unit.
+The tempting shortcut sits at questions 2 and 3: a model can be asked anything, so almost any standard *could* become a judgment question. The test is whether the marked words and one selected unit hold what the judgment needs. When they don't, a judgment rule asks the model to guess, on every run, for every selected unit.
 
 ## Worked examples
 
-Each example names the standard and where it lives, the outcome, why, and near misses that look similar but land elsewhere. Paths are in the `skill-authoring` plugin unless they name the engine's examples (`docs/specs/2026-10-12-rust-rule-engine/examples/` in the engine repository).
+Paths are in the `skill-authoring` plugin unless they name the engine's examples (`docs/specs/2026-10-12-rust-rule-engine/examples/` in the engine repository).
 
 ### The description starts with `Use when`: deterministic
 
@@ -32,9 +32,9 @@ Each example names the standard and where it lives, the outcome, why, and near m
 - **Standard.** The engine's example wording "A mandatory load instruction also names its returned result." (`mechanical-standards.md:3`), which restates part of `skill-creation/SKILL.md:62`: "Each load or dispatch form names when to go, where, what to do there, and what to return."
 - **Outcome.** Model-judged.
 - **Why.** Deciding that a result is *named* needs comprehension. The shipped check, `K015` in `mechanical.rules.json`, selects paragraphs starting with `MUST` and fails one that contains `MUST load` without the word `return`. Counterexample: `MUST load reference.md and return.` has both words, names nothing, and passes. The regex is a proxy.
-- **The proxy, marked honestly.** A cheap lexical gate can still be worth having. Give it its own wording that says what it checks, such as "A paragraph with a `MUST load` instruction contains the word `return`." Against that wording the check is deterministic. The decision table records it as a proxy for the result-naming standard, which keeps its own model-judged rule.
+- **The proxy, marked honestly.** A cheap lexical check can still be worth having. Give it its own wording that says what it checks, such as "A paragraph with a `MUST load` instruction contains the word `return`." Against that wording the check is deterministic. The decision table records it as a proxy for the result-naming standard, which keeps its own model-judged rule.
 - **Near miss: a real result, an unselected place.** "MUST load `references/frontmatter-design.md` and return the trigger and invocation decision" (`skill-creation/SKILL.md:180`) names a concrete result, so it meets both the semantic standard and the proxy. It also sits mid-paragraph, so `K015`'s `starts_with: "MUST"` selector never selects it. That isn't a pass; it's a coverage gap, and step 6 catches it only when a calibration example puts the call mid-paragraph.
-- **Near miss: a mention, not a call.** "Moving all-run procedure behind `MUST load` does not move the obligation." (`skill-creation/SKILL.md:98`) names the form inside inline code. Filters read visible text with inline code removed, so it isn't a call site. Correct, not a miss.
+- **Near miss: a mention, not a call.** "Moving all-run procedure behind `MUST load` does not move the obligation." (`skill-creation/SKILL.md:98`) names the form inside inline code. Filters read visible text with inline code removed, so the selector rightly skips it.
 
 ### Call Grammar: model-judged, marked on its paragraph
 
@@ -55,7 +55,7 @@ Each example names the standard and where it lives, the outcome, why, and near m
 - **Standard.** `skill-creation/SKILL.md:224`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
 - **Outcome.** Eval.
 - **Why.** The claim is about what an agent does when it is pressed. The skill text already says the right thing; whether the agent does it shows only in a fresh run under that pressure.
-- **Near miss.** "Name the rationalization beside it in the agent's own words." (`skill-creation/SKILL.md:120`) is about a skill's text: a judge can read one rule paragraph and say whether its rationalization is named. Model-judged. Text about pressure isn't behavior under pressure.
+- **Near miss.** "Name the rationalization beside it in the agent's own words." (`skill-creation/SKILL.md:120`) is about a skill's text: a judge can read one rule paragraph and say whether its rationalization is named. Model-judged.
 
 ### "A skill wrangles determinism out of a stochastic system": prose
 

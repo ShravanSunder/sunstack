@@ -11,7 +11,7 @@ Most of a skill should never become a rule. Each standard lands in exactly one o
 
 | outcome | when | marked |
 | --- | --- | --- |
-| deterministic (`expect` or `ast_grep`) | the property is visible in one unit's text or structure, and the check passes every text that keeps the standard and fails every text that breaks it | yes |
+| deterministic (a mechanical `expect` or `ast_grep` rule) | the property is visible in one unit's text or structure, and the check passes every text that keeps the standard and fails every text that breaks it | yes |
 | model-judged (judgment threshold) | deciding needs reading comprehension, and the marked wording alone is a good question | yes |
 | review-only | it needs cross-file, history or intent judgment, or a target the engine can't select; `skill-review` owns it | no |
 | eval | it is about what an agent does under pressure; it belongs in evals or pressure scenarios | no |
@@ -31,7 +31,7 @@ Read the skill's `SKILL.md` and every reference whose standards are in scope. Li
 
 ### 2. Classify each standard
 
-MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A candidate whose wording needs rewording to read as a question goes back to `skill-creation` unmarked.
+MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A candidate that reads as a question only after a rewrite goes back to `skill-creation` unmarked.
 
 ### 3. Mark the standards
 
@@ -45,13 +45,13 @@ Write one entry per marker in the rules file paired with that Markdown file, key
 
 ### 5. Wire the RuleSet
 
-Open the RuleSet the repository actually runs and the invocation that runs it. Add the Markdown and rules pair to `rule_sources` with paths relative to the RuleSet file and the matching `marker_prefix`, and align each entry's target and context inputs with the RuleSet's input declarations and the invocation's bindings. Completion: `check_rules` with `output: assembled_rules` lists every intended rule ID and the expected count, and every refusal on the way was fixed at the cause its code names. A clean check that omits them is not wired.
+Open the invocation the repository runs and the RuleSet it names. Add the Markdown and rules pair to `rule_sources` with paths relative to the RuleSet file and the matching `marker_prefix`, and align each entry's target and context inputs with the RuleSet's input declarations and the invocation's bindings. Completion: `check_rules` with `output: assembled_rules` lists every intended rule ID and the expected count, and every refusal on the way was fixed at the cause its code names. A clean check that omits them is not wired.
 
 ### 6. Prove each rule
 
 MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
 
-Completion: `check_rules` passes on the real binary; print shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
+Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
 
 ### 7. Return
 
@@ -61,7 +61,7 @@ Return the decision table, the diff, and the check output and evaluation reports
 | standard (path:line, quoted) | outcome | reason | host | marker | rule ID | check | proxy for | proof |
 ```
 
-One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the good and bad results for a mechanical rule and `printed` for a model-judged one. Name what stays unproven: how well a hosted judge answers a model-judged question is not shown by check or print.
+One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the good and bad results for a mechanical rule and `printed` for a model-judged one. Name what stays unproven: check and print don't show how well a hosted judge answers a model-judged question.
 
 ## Completion Blockers
 
