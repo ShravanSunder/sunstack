@@ -5,12 +5,16 @@ Use this when a skill needs the owner to decide something about design: domain b
 Return one brief per decision, in this order:
 
 1. **The decision in one sentence**, in the owner's words where possible.
-2. **The current model, drawn.** Load `presentation-tui` or `presentation-webui` for the host and draw what exists today: the parts, who owns what, and the path that matters.
-3. **Each option, drawn as a change to that picture**, with what it gains, what it costs, and who bears the cost.
-4. **Your recommendation and why.**
-5. **What happens if the owner defers**: what stays blocked and what continues.
+2. **Why it is genuinely open**: the evidence and standing owner instructions you checked, and why none of them settles it.
+3. **The current model, drawn.** Load `presentation-tui` or `presentation-webui` for the host and draw what exists today: the parts, who owns what, and the path that matters.
+4. **Two or three concrete options, each drawn as a change to that picture**, with what it gains, what it costs, and who bears the cost.
+5. **Where the agents stand**: for each agent that weighed in (Lead, Advisor, reviewers), its position, where it agrees and disagrees with the others, and why.
+6. **Your recommendation and why.**
+7. **What happens if the owner defers**: what stays blocked and what continues.
 
-Good briefs look like the ones owners accept quickly: one picture of today, one picture per option, a clear pick. Bad briefs are option menus with a preselected answer, several unrelated decisions bundled into one prompt, and internal jargon the owner has not used.
+Good briefs look like the ones owners accept quickly: one picture of today, one picture per option, a clear pick. Bad briefs are option menus with a preselected answer, a bare request to confirm a choice already made, several unrelated decisions bundled into one prompt, and internal jargon the owner has not used.
+
+Send the brief to the Chief of Staff role, never directly to the owner. When no Chief of Staff resolves, return the brief to your commissioner with the exact recipient gap; the gap is not leave to contact the owner.
 
 A question tool may carry the final pick only after the brief is on screen. Ask once. Later updates point back to the open brief in one line instead of asking again.
 
