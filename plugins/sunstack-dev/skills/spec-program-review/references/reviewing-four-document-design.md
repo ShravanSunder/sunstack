@@ -21,6 +21,7 @@ Inspect:
 - the four documents remain separately identifiable, with normative Specification obligations tracing to the governing Requirements source;
 - every applicable material runtime-behavior group has a visible current/proposed call-path delta or explicit no-predecessor case, with added, removed, and changed edges plus preservation-critical or contested unchanged edges;
 - the trace table walks cleanly row by row (see Trace Table Rows below);
+- each capability's line runs from its need to its proof (see Capability Through-Lines below);
 - each term means the same thing across all four documents (see Term Consistency below);
 - all coverage is semantically current for the current artifacts, with any post-review non-semantic changes recorded by the parent;
 - a planner can choose tasks/order/commands without inventing meaning, How, or the proof route.
@@ -64,6 +65,46 @@ Route a defective cell to `program-design` with the smallest correction: fill th
 
 Stop when every row has been walked and every defective cell has a finding.
 
+## Capability Through-Lines
+
+Skip this walk when the Requirements carry no capability list; the per-row walks above cover a one-concern set.
+
+What to open: the capability list and its home `U` rows in the Requirements, the capability map and capability groups in the Specification, the capability groups of the Program Design trace rows and of the Verification Design rows, and each capability's through-line in the root index when the set has one.
+
+How to judge: walk every capability; do not sample. Follow each key through the documents:
+
+```text
+capability key and purpose (Requirements)
+  -> its home U rows (Requirements)
+  -> the R obligations those rows reach, under the same key (Specification)
+  -> one trace row per R, under the R's home key (Program Design)
+  -> the rows for its U rows, under the same key (Verification Design)
+  -> its through-line, when the set has an index
+```
+
+The line holds when each document carries the same key over the rows the document before it passed on. It stops at the first document where the capability's rows are missing, filed under another key, or grouped under a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
+
+- a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or whose `R` sit under no key or another key, stops at the Specification: both route to `spec-design`;
+- an `R` with no trace row, or a row grouped under another capability, stops at Program Design: `program-design`;
+- no row for the capability's `U` rows, or rows grouped under another key, stops at Verification Design: `verification-design`;
+- a through-line that skips a step or links the wrong section goes to the phase that owns that document's step.
+
+In a broken copy of the job-submission set:
+
+```text
+billing-export  U5 U6 -> R7 R8 R9 -> trace rows R7 R8 R9 -> no Verification Design row names U5 or U6
+                stops at Verification Design; route verification-design
+
+scheduling      U3 U4 -> no R traces to U3 or U4
+                stops at the Specification; route spec-design
+```
+
+The per-row walk already flags U5 and U6 as rowless. The capability finding says what the owner needs to hear: finance's whole part of the system has no planned proof. Scheduling's line stops earlier. Program Design and Verification Design may still have sections headed scheduling, but with no `R` behind them they realize and prove nothing the owner asked for here. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+
+A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
+
+Stop when every capability has been walked to its proof or to a routed finding at the document where its line stops.
+
 ## Term Consistency
 
 What to open: the Specification's entity table, each obligation, each Program Design heading, binding-table row, and contract name, and each Verification Design row.
@@ -91,4 +132,4 @@ must consume: requirements/contracts, entity bindings and boundary shapes,
               reused tests, passing condition, and what stays unverified
 ```
 
-Complete when: all four identities were separately reconstructed, cross-artifact traceability is bidirectional, every requirement was walked to its observation and every trace-table row was walked, every design noun resolved under Term Consistency, accepted requirements remain covered, applicable call-path deltas are visible, contradictions are resolved or blocked, and planning has no semantic design decisions left.
+Complete when: all four identities were separately reconstructed, cross-artifact traceability is bidirectional, every requirement was walked to its observation and every trace-table row was walked, every capability's line was walked to its proof or its stop, every design noun resolved under Term Consistency, accepted requirements remain covered, applicable call-path deltas are visible, contradictions are resolved or blocked, and planning has no semantic design decisions left.
