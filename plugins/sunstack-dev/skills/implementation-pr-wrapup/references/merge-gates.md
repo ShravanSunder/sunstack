@@ -21,7 +21,9 @@ If the PR base branch is wrong or uncertain, stop and ask or update the PR base 
 
 ## Authorization Gate
 
-Ready-to-merge is not allowed-to-merge. Merge only when:
+Ready-to-merge is not allowed-to-merge. Read the merge authority the wrap-up recorded at entry, as settled again by any later answer or correction, with its sources and scope. Merge only when the grant covers this PR (it names this PR, its stack or this work, and a grant tied to an exact head names the final re-fetched head), and:
 
-- the user explicitly says to merge now; or
-- the user previously gave an exact condition such as "merge when green and comments are handled", and every condition is satisfied by fresh evidence.
+- the state is `merge-now`; or
+- the state is `merge-when-ready: <exact conditions>`, such as "merge when green and comments are handled", and every condition, including any a standing instruction added, holds on fresh evidence from the final re-fetch.
+
+A head change doesn't reset the recorded authority, and it doesn't excuse a condition. Under `readiness-only`, or when the grant doesn't cover this PR or a condition doesn't hold, stop merge-ready and unmerged, and say in the report which of these holds.
