@@ -80,7 +80,7 @@ Two runs per case for P1–P6 (P2 counts its three variants as cases); one run p
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 `practices-retrospective` | implemented | Diff `84379379..a675bbd3` (commit `a675bbd3`): new `SKILL.md`, `references/worked-examples.md`, `references/evidence-checklist.md`, `agents/openai.yaml`; AGENTS.md and sunstack-dev README rows. Proof P1–P7 and implementation review still owed. |
+| 1 `practices-retrospective` | implemented | Diff `84379379..a18eebda` (commit `a675bbd3`; wording pass `5f789820`, P-1 row fix `a18eebda`): new `SKILL.md`, `references/worked-examples.md`, `references/evidence-checklist.md`, `agents/openai.yaml`; AGENTS.md and sunstack-dev README rows. Proof P1–P7 and implementation review still owed. |
 
 ## Review record
 
