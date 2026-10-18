@@ -94,9 +94,9 @@ D8.
 | Run | Status | Evidence |
 | --- | --- | --- |
 | 1 | implemented | `05c069ed`, author self-check fixes `03d726cb` |
-| 2 | implemented | `064bffc5`, author self-check fixes `03d726cb` |
+| 2 | implemented | `064bffc5`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (artifact chain) and F2 `8ddb89fb` (Requirements-only map) |
 | 3 | implemented | `197f59e8`, author self-check fixes `03d726cb` |
-| 4 | implemented | `b9668624`, author self-check fixes `03d726cb` |
+| 4 | implemented | `b9668624`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (through-line walk) |
 
 ## Review record
 
