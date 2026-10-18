@@ -26,7 +26,7 @@ Obligations are sentences about entities. The Specification defines each entity 
 
 ## Capabilities Are the Shared Key
 
-A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `scheduling: a queued job runs, and runs once, even when a worker dies`. It is never named by a component. Program Design may realize one capability with several components, or several capabilities with one.
+A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `scheduling: a queued job runs, and runs once, even when a worker dies`. It is never named by a component, internal owner, or store. Program Design may realize one capability with several components, or several capabilities with one.
 
 The Requirements document is the list's home, confirmed by the owner before any row is written. Other documents refer to a capability by its key; a view that shows its name and purpose again re-renders that list and never redefines it. Each document carries the key over its own rows:
 
@@ -39,7 +39,7 @@ The Requirements document is the list's home, confirmed by the owner before any 
 
 Each `U` and `R` row has exactly one home capability. A row that also serves another capability names it under "also serves" and is never copied there, so a shared `R` still has one trace row. Entities (`E`) belong to the whole set, and every capability links to them.
 
-Identifiers never encode a capability. Moving a row to another capability changes its capability key and nothing else; no identifier is renumbered. A capability is a name, not a new identifier kind, and it is a grouping, not a file: it becomes its own chunk only when it passes the split test.
+Identifiers never encode a capability. Moving a row to another capability changes its capability key and nothing else; no identifier is renumbered. A capability is a name, so it adds no identifier kind. It groups rows, and it becomes its own chunk only when it passes the split test.
 
 A set that is one concern has no capability level, and its documents carry no key.
 

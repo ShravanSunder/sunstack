@@ -62,7 +62,7 @@ need U1 when present
                       -> proof obligation V1
 ```
 
-When the capability map fires, it comes first, and this chain then runs inside one capability.
+When the capability map fires, this chain runs inside one capability.
 
 Diagrams may explain relationships but may not be the only home of normative meaning.
 
@@ -72,7 +72,7 @@ Consume each selected view's reader question plus the predicates, cardinality, a
 
 Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
 
-- Capability maps let the owner confirm the parts at a glance, before any row. The Requirements map re-renders the confirmed list the record opens with and adds each capability's home `U` rows, so the list keeps one home. The Specification map shows the same keys with the `R` obligations each owns. A linked row appears once, under its home, and names the other capability:
+- Capability maps let the owner confirm the parts at a glance, before any row. Both maps re-render the confirmed list the Requirements record opens with, so the list keeps one home. A linked row appears once, under its home, and names the other capability, as in this Specification map:
 
   ```text
   import    card charges and receipt photos arrive in a claim without retyping    R1 R2 R5   R5 also serves approval

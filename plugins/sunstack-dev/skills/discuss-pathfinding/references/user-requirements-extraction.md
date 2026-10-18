@@ -24,9 +24,9 @@ Bad: one generic “users” bucket, or erasing the buyer because no journey map
 
 ## Name the Capabilities Before the Rows
 
-A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `approval: a manager approves or returns a claim, with a reason, in one place`. Name it by what users get, never by a component, team or store. Program Design may later realize one capability with several components, or several capabilities with one, so a component name settles structure before the Specification exists.
+A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `approval: a manager approves or returns a claim, with a reason, in one place`. Name it by what users get, never by a component, internal owner, or store. Program Design may later realize one capability with several components, or several capabilities with one, so a component name settles structure before the Specification exists.
 
-From the sources and the conversation so far, state the list as your read: each capability in the owner's words, with its purpose. Where the owner has no word for a part, propose a plain one and say it is yours. The list decides how every later question and row is grouped, so ask it first, before the requirement questions below, and write no `U` row until the owner has confirmed or corrected it. A correction, such as a rename, a merge, a split or a need moved to another capability, is a full answer: apply it to the list and to every row you write afterwards. Ambiguous assent ("looks fine") gets its counter from `question-craft.md`.
+From the sources and the conversation so far, state the list as your read: each capability in the owner's words, with its purpose. Where the owner has no word for a part, propose a plain one and say it is yours. The list decides how every later question and row is grouped, so ask it first, before the requirement questions below, and write no `U` row until the owner has confirmed or corrected it. A correction, such as a rename, a merge, a split, or a need moved to another capability, is a full answer: apply it to the list and to every row you write afterwards. Ambiguous assent ("looks fine") gets its counter from the already-loaded `question-craft.md`.
 
 An expense tool, from an owner who said "people photograph receipts and retype card charges, managers chase claims by email, and payouts slip a week":
 
@@ -40,7 +40,7 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
-When the whole request is one concern, such as "add a CSV download of the claims list", say so in your read and carry no capability level: no list, no capability field, the rows directly. One capability equals none, because a list with one entry adds a level and tells the reader nothing. Most multi-part sets need only the capability level. Add an *area* above the capabilities only when there are more than about seven of them, and never go deeper than area, capability, row.
+When the whole request is one concern, such as "add a CSV download of the claims list", say so in your read and write the rows directly, with no capability list and no capability field. One capability equals none, because a list with one entry adds a level and tells the reader nothing. Add an *area* above the capabilities only when there are more than about seven of them, and never go deeper than area, capability, row.
 
 Stop this stage when the owner has confirmed or corrected the list. A one-concern read needs no turn of its own: it travels in the goal boundary, which the owner confirms as a whole.
 

@@ -99,7 +99,7 @@ scheduling      U3 U4 -> no R traces to U3 or U4
                 stops at the Specification; route spec-design
 ```
 
-The per-row walk already flags U5 and U6 as rowless. The capability finding says what the owner needs to hear: finance's whole part of the system has no planned proof. Scheduling's line stops earlier. Program Design and Verification Design may still have sections headed scheduling, but with no `R` behind them they realize and prove nothing the owner asked for here. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier. Program Design and Verification Design may still have sections headed scheduling, but with no `R` behind them they realize and prove nothing the owner asked for here. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
 
 A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
 
