@@ -386,7 +386,7 @@ describe("user requirements and design-view contracts", () => {
     expect(brief).toContain("**Where the agents stand**");
   });
 
-  test("routes decision briefs to the Chief of Staff role, never directly to the owner", () => {
+  test("routes a decision brief by who raised the decision", () => {
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
     const brief = readPluginFile("shared-references/owner-decision-brief.md");
     const routeBlock = programDesign.slice(
@@ -394,8 +394,15 @@ describe("user requirements and design-view contracts", () => {
       programDesign.indexOf("Before recommending a skill"),
     );
 
+    expect(brief).toContain("The recipient depends on who raised the decision.");
     expect(brief).toContain(
-      "Send the brief to the Chief of Staff role, never directly to the owner.",
+      "When the owner asked you the question directly in this conversation, the brief answers the owner here",
+    );
+    expect(brief).toContain(
+      "Answering grants no wider scope, implementation or merge authority.",
+    );
+    expect(brief).toContain(
+      "A decision you raise yourself from your own work, a phase stop such as `decision-needed` included, goes to the Chief of Staff role, never directly to the owner.",
     );
     expect(brief).toContain(
       "Take the Chief of Staff from the commission, the work thread, or the session's standing instructions.",
@@ -404,9 +411,14 @@ describe("user requirements and design-view contracts", () => {
       "return the brief to your commissioner with the exact recipient gap",
     );
     expect(brief).toContain(
+      "When that commissioner is the owner, state the gap and keep the brief unsent",
+    );
+    expect(brief).toContain(
       "A question tool may ask only the brief's recipient for the final pick",
     );
-    expect(brief).toContain("it never asks the owner directly");
+    expect(programDesign).toContain(
+      "return the brief addressed to the Chief of Staff role, never directly to the owner",
+    );
     expect(routeBlock).toContain(
       "decision-needed    -> stop with the brief from owner-decision-brief.md",
     );
