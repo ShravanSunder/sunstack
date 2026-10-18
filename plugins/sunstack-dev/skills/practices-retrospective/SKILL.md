@@ -58,7 +58,7 @@ You return each destination to your caller as data; you start none of them.
 | One lapse, where the guidance and checks were adequate and reached the actor | Correct execution, or no change | Your caller, with the step to redo, or nothing |
 | The owner changed the task and the work followed | No change | Nothing; it isn't a defect |
 | A skill's guidance was absent, ambiguous, never triggered, wasn't read or is now redundant, or was read and skipped in more than one event | Update a skill | `skill-audit`, which chooses update, create, merge or skip |
-| The repository, a tool or the environment lacks structure, a type, a lint, a test or a wired check, or hid what the actor needed | Improve the repository or its checks | Your caller, for its design or delivery route, naming the owner of that code, tool or path |
+| The repository, a tool or the environment lacks, or has a broken, structure, type, lint, test, fixture or wired check, or hid what the actor needed | Improve the repository or its checks | Your caller, for its design or delivery route, naming the owner of that code, tool or path |
 | The journey and its driver work, but nobody ran them on the claimed target | Missing observation | `practices-verification` |
 | An absent or broken driver blocks an observation | Driver work | `practices-verification`, as driver work the caller assigns with named paths |
 | The project's verification skill under `.agents/skills/verify-<app>/`, or one of its journeys, is missing or stale | Maintain verification | `practices-verification-maintenance` |
