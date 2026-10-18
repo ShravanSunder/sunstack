@@ -21,7 +21,7 @@ Mark a section only when the whole section is one standard and its visible words
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
 - `skill-creation`'s `### Call Grammar` is over the cap and holds three standards. Mark the paragraph at `SKILL.md:62` for call completeness; the dispatch paragraph (`:77`) and the citation paragraph (`:88`) are separate candidates.
-- In `frontmatter-design.md`, the item "starts with `Use when` unless the platform requires another shape;" reads as a fragment, because its subject sits in the lead-in line "A good `description`:". For a mechanical rule the wording is only the explanation shown with a result, so a fragment that still names its property can stand. For a model-judged item it can't, because the judge never sees the subject. Return it to `skill-creation` to carry its subject, or mark the list's section if the whole list is one standard.
+- In `frontmatter-design.md`, the item "starts with `Use when` unless the platform requires another shape;" reads as a fragment, because its subject sits in the lead-in line "A good `description`:". The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it to `skill-creation` for a rewrite that carries its subject, or mark a complete host that carries exactly one standard.
 - A paragraph that carries five standards, like `skill-creation/SKILL.md:224`, is no narrow host for any of them. Split it in the teaching first.
 
 The engine forbids some hosts outright: a level 1 heading, a block quote, a table, HTML, a link reference definition and frontmatter. A marker inside fenced or indented code or an inline code span isn't a marker at all; it's ignored, and its entry turns up orphaned.
@@ -106,7 +106,7 @@ Stop when the assembled output lists every intended rule ID and the count is rig
 
 ## Repair a refusal
 
-A refusal carries a `code`, a location (`file`, `line`, `column`, and a `field_path` that holds the marker ID) and guidance. Fix the cause the code names, in the host or the entry:
+A refusal carries a `code`, a location (`file`, `line`, `column` and `field_path`) and guidance. A marker-binding refusal's `field_path` holds its marker ID; for any other refusal, follow the reported `field_path`, which may be empty, together with the file, line and column. Fix the cause the code names, in the host or the entry:
 
 | code | cause | fix at the cause |
 | --- | --- | --- |
@@ -117,7 +117,7 @@ A refusal carries a `code`, a location (`file`, `line`, `column`, and a `field_p
 | `missing_rule_entry` | a marker with no entry | write the entry, or remove the marker if step 2 didn't mark that standard |
 | `orphaned_rule_entry` | an entry whose marker didn't bind | find out why: the marker was deleted or misspelt (`K0014`), uses another prefix letter, has text after it on the line, sits inside code, is escaped, or lives in a different Markdown file from the one the pair names; restore it at the standard's host, or remove the entry if the standard is gone |
 | `invalid_rule_source_key` | a key that isn't a marker ID with this prefix | rename the key to the marker's ID |
-| entry-shape codes such as `unknown_field`, `invalid_threshold`, `invalid_band`, `invalid_mechanical_check`, `undeclared_input` | the entry's fields | fix the field at the reported `field_path` against the engine's rules-object schema |
+| entry-shape codes such as `unknown_field`, `invalid_threshold`, `invalid_band`, `invalid_mechanical_check`, `undeclared_input` | the entry's fields | fix the field at the reported location against the engine's rules-object schema |
 
 Each of these repairs makes a refusal disappear by losing the standard; never use them:
 

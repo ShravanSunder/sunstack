@@ -6,8 +6,8 @@ This reference owns classification: which of the five outcomes each candidate st
 
 Ask these questions in order and stop at the first one that settles the outcome.
 
-1. **Does it make a claim some text can keep or break?** A stance, a rationale, a definition or a piece of teaching makes none. → prose.
-2. **Is the claim about what an agent does while working, rather than what a text says?** Choices under pressure, steps skipped, what it reads before acting. → eval: only a fresh agent run under that pressure observes it.
+1. **Is it a requirement, or only rationale or stance?** A stance, a rationale, a definition or a piece of teaching requires nothing of a text or an agent. → prose.
+2. **Is the requirement about what an agent does while working, rather than a property of a text?** Choices under pressure, steps skipped, what it reads before acting. → eval: only a fresh agent run under that pressure observes it.
 3. **Can the engine select the text the claim judges?** The engine judges one unit at a time: a frontmatter field, a section, a paragraph, a list item, or a call site inside one. A claim that needs two files compared, a record of who did what, the author's intent, or evidence from outside the skill is review-only. So is a claim whose unit the engine can't give to the check it needs, such as a judgment about a frontmatter field.
 4. **Is the property visible in that unit's text or structure?** Write the check you'd use, then hunt for counterexamples in both directions: a text that keeps the standard and fails the check, and a text that breaks the standard and passes it. Neither exists → deterministic. Either exists → the check is a proxy; go on to question 5 with the standard itself.
 5. **Does deciding need reading comprehension, and does the marked wording alone make a good question?** Yes → model-judged. If the wording only reads as a question with its lead-in, a neighbouring sentence or a rewrite, it isn't ready: return it for `skill-creation` to rewrite, and don't mark it.

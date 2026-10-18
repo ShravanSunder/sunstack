@@ -25,7 +25,7 @@ Exit 0 says the engine finished, not that a rule passed. Read the response.
 
 `check_rules` assembles every requested RuleSet and validates each rule without reading any reviewed document, constructing a backend or sending a model request. Its input holds `definition_root`, `definitions`, `repositories`, `payload_schemas`, `limits` and `output`: `diagnostics` only validates, and `assembled_rules` also prints every assembled rule after a clean check. That printing run is "print".
 
-A clean check returns `result.outcome.kind: checked` with `checked_rule_count`, and exits 0. A refusal returns `kind: refused` with `refused_rule_count` and `diagnostics.items`, each carrying a `code`, a `location` (`file`, `line`, `column`, and a `field_path` that holds the marker ID) and `guidance`, and exits 2; nothing prints. IF `check_rules` refuses, load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then rerun the check.
+A clean check returns `result.outcome.kind: checked` with `checked_rule_count`, and exits 0. A refusal returns `kind: refused` with `refused_rule_count` and `diagnostics.items`, each carrying a `code`, a `location` (`file`, `line`, `column` and `field_path`, which holds the marker ID for a marker-binding refusal and may be empty otherwise) and `guidance`, and exits 2; nothing prints. IF `check_rules` refuses, load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then rerun the check.
 
 Read the print in two passes.
 

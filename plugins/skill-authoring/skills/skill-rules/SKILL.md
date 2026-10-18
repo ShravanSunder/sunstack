@@ -27,7 +27,7 @@ A run that starts from a refusal or a broken rule still walks steps 1 and 2 for 
 
 ### 1. List the candidate standards
 
-Read the skill's `SKILL.md` and every reference whose standards are in scope. List each sentence, list item, paragraph or section that states a requirement some text can keep or break, with its `path:line`, its exact wording and the Markdown unit it sits in. Completion: every candidate is quoted with its `path:line` and unit, and anything left off the list states no requirement; length is never the reason.
+Read the skill's `SKILL.md` and every reference whose standards are in scope. List each sentence, list item, paragraph or section that states a requirement that text or agent behavior can keep or break, with its `path:line`, its exact wording and the Markdown unit it sits in. Completion: every candidate is quoted with its `path:line` and unit, and anything left off the list states no requirement; length is never the reason.
 
 ### 2. Classify each standard
 
