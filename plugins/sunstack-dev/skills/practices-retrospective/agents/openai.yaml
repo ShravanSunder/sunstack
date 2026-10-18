@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Blameless Retrospective"
+  short_description: "Learn from a bounded session what helped and what hindered"
+  default_prompt: "Use practices-retrospective to look back over this work: reconstruct what helped and hindered from the session records, explain each outcome by its conditions, and return the smallest justified disposition for each."
