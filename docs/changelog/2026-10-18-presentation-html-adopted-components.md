@@ -10,3 +10,4 @@
 - Validation: Claude plugin packaging, version/link/diff checks, six secondary compositions and five fresh named authoring examples. Both HTML groups pass the release-matched checker with zero errors/warnings; this is markup evidence.
 - Direct-file interaction, other host lineages, assistive technology and reader comprehension remain unverified. No improvement delta is claimed.
 - Codex quick validation was not run because PyYAML is unavailable; no dependency was installed solely for it.
+- Codex, Claude Code and Cursor refresh/reinstall not run; pending source release.

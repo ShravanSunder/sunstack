@@ -6,7 +6,7 @@ MUST load `../../../shared-references/design-documents.md` and return the four c
 
 ## Match the view to the document question
 
-Keep each document’s complete Markdown as its own island, whether it is one file or an ordered set of chunks. Use this mapping after reading the canonical meanings above:
+Keep the complete Markdown of each source chunk in its own island; a single-file document uses one island. Do not concatenate chunks into a page-owned replacement. Use this mapping after reading the canonical meanings above:
 
 | Existing document question | Useful view | Keep clear |
 | --- | --- | --- |
