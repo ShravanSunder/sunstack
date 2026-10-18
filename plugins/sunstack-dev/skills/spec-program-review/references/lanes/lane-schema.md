@@ -1,6 +1,6 @@
 # Design Review Check Status
 
-This reference owns the status enum and per-check result shape. The 🔎 Reviewer Sidekick holds complete targets, governing sources, quoted goal boundary and requirements, structural-realization confirmation, constraints, chunk seams, proof claims, and known gaps in its own session. Check references own their missions; findings use `../finding-and-reduction-schema.md`.
+This reference owns the status enum and per-check result shape. The 🔎 Reviewer Sidekick holds complete targets, governing sources, quoted goal boundary and requirements, constraints, chunk seams, proof claims, and known gaps in its own session. Check references own their missions; findings use `../finding-and-reduction-schema.md`.
 
 ```text
 check: mode-complete-reviewer | chunk-reviewer | dispel | proof-challenge |

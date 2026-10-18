@@ -96,10 +96,11 @@ Re-read the whole artifact:
 - every Specification obligation has its own trace row with realization and seam, and the rows agree with the returned coverage disposition;
 - every accepted requirement and entity remains covered or has owner-authorized supersession;
 - every design element has a legitimate basis;
+- the artifact records the selected structure with its credible alternatives, tradeoffs, and falsifiers;
 - every reader-facing element passes the human deletion test;
 - every generated visual has a current accepted asset/embed, accurate labels and edges, readable placement, and agreement with the authoritative prose and exact views;
 - progressive disclosure leads from specification obligation through owner, call/state/failure behavior, and proof without scratch or process notes;
-- the structural-realization confirmation shows the binding table, the trace table, one representative entry-to-effect path, and `deviations and unresolved decisions: none | list`;
+- the shown views include the binding table, the trace table, one representative entry-to-effect path, and `deviations and unresolved decisions: none | list`;
 - no planner-owned file, sequence, or command detail leaked in;
 - no missing Why/What or entity meaning was invented;
 - Requirements and Specification remain separately identifiable, and the Program Design preserves rather than rewrites their authorized boundary and observable contract;
@@ -111,6 +112,6 @@ Complete when:
 
 - the artifact composes as one proportional structural realization;
 - every fired view has a passed rendering result with preserved semantics;
-- the binding table, trace table, current/proposed call deltas, accepted-requirements coverage, and structural-realization confirmation are visible;
+- the binding table, trace table, current/proposed call deltas, and accepted-requirements coverage are visible;
 - unnecessary structure is pruned;
 - every known gap is exact.

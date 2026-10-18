@@ -2,7 +2,7 @@
 
 This reference owns the baseline every mode-complete and focused reviewer follows before its mission.
 
-Expected inputs: exact mode, complete targets, governing sources, confirmed goal boundary, accepted requirements set, applicable structural-realization confirmation, constraints, risk predicates, and selected mission.
+Expected inputs: exact mode, complete targets, governing sources, confirmed goal boundary, accepted requirements set, constraints, risk predicates, and selected mission.
 
 Return: coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary.
 
@@ -14,7 +14,7 @@ For file-backed design documents, inventory every required visual asset and Mark
 
 Verify the accepted requirements set against the current owner-confirmed requirements record and confirmed goal boundary. Otherwise use the last inspectable owner-accepted governing source. If neither source exists or they conflict, return the authority gap. Never recover accepted meaning from mutually narrowed current files alone. Any removed or superseded requirement needs explicit owner authority. For simplification, recovery of the accepted starting point, or requirement subtraction, return one compact disposition row per stable identity (`covered | owner-authorized supersession | gap` plus anchor). Identities may share a row only when every member identity is enumerated and all share the same disposition and anchor; a bare "coverage intact" assertion is not a result in those cases.
 
-For `program-only` and `four-document-design`, inspect the complete structural-realization confirmation or return its exact missing owner decision. Treat design dimensions as `required | satisfied by the existing system | not applicable | unresolved`; a general review category is not a reason to invent a subsystem.
+For `program-only` and `four-document-design`, treat design dimensions as `required | satisfied by the existing system | not applicable | unresolved`; a general review category is not a reason to invent a subsystem.
 
 Partial coverage cannot return a clean recommendation.
 

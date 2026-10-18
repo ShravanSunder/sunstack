@@ -87,6 +87,7 @@ Skill authoring for any repository, standalone from the workflow plugin. Provide
 
 - **skill-orchestrator** skill -- carries one skill change from spec through review, implementation, proof, assessment, and release
 - **skill-creation** skill -- the skill craft and the skill spec: designs and writes one named skill
+- **skill-rules** skill -- decides which of a skill's standards become checked `sunstack-rule` rules, marks them in the skill's Markdown, and proves them with `check_rules` and good and bad examples
 - **skill-review** skill -- independent review of a skill spec or skill files by several reviewer agents
 - **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations before recommending create/update/merge/skip decisions
 
