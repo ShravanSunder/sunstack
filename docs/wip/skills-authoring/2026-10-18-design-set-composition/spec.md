@@ -101,7 +101,11 @@ Two runs per case (P2's two variants count as cases), plus one prior-revision co
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1–5 | proposed | — |
+| 1 `orchestrator-design` | implemented | `38ee723f` |
+| 2 `spec-design` | implemented | `5061caf0` |
+| 3 `presentation-html` | implemented | `c804e436` |
+| 4 `docs-maintain` | implemented | `5f71979d` |
+| 5 `discuss-clarify-mental-models` | implemented | `d2bf2628` |
 
 ## Review record
 
