@@ -1,6 +1,6 @@
 # Evidence Checklist
 
-You arrive from move 1 with the boundary and evidence that is a summary, a partial transcript, or spread across sessions. Decide what to read first, say what the evidence can and can't carry, and check whether a recurrence claim is possible. This checklist decides what is worth reading; it fetches nothing. Return the records to read first, the coverage they leave and whether a recurrence claim is possible.
+You arrive from move 1 with the boundary and evidence that is a summary, a partial transcript, or spread across sessions. This checklist decides what is worth reading; move 1's research step collects what lies outside the conversation. Return the records to read first, the coverage they leave and whether a recurrence claim is possible.
 
 ## Read actions before accounts
 
@@ -11,7 +11,7 @@ Read in this order:
 3. What the work left behind: diffs and commits, review reports, proof and CI output.
 4. The source of whatever governed the behavior, at the revision the work used where the record shows it: the skill text and which revision was offered or loaded, the hook and CI config, the driver.
 
-Read summaries, traces, handoffs and memory notes last, to find the records behind them. Until you have read that record, what a summary says stays its claim, and a "done" in a trace is a claim about the work, not the work.
+Read summaries, traces, handoffs and memory notes last, to find the records behind them. Until you have read the record behind one, what it says stays its claim, a "done" in a trace included.
 
 ## Name what the evidence can't carry
 
