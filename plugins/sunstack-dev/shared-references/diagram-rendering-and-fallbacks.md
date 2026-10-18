@@ -1,10 +1,10 @@
 # Diagram Rendering and Fallbacks
 
-This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page built on its Markdown, and it owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
+This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page built on its Markdown, how a page composes that Markdown, where a diagram lives, and how an embedded copy stays current after an edit. It owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
 
-Expected inputs: destination, repository rendering capabilities, user-requested format when present, the durable document or documents the views belong to when any, and one or more view requests containing the fired predicate plus required semantic fields. A generated-image request also supplies the artifact identity and Lead-authored visual brief or its source pointer.
+Expected inputs: destination, repository rendering capabilities, user-requested format when present, the durable document or documents the views belong to when any, and one or more view requests containing the fired predicate plus required semantic fields. A generated-image request also supplies the artifact identity and Lead-authored visual brief or its source pointer. After an edit, the caller also supplies the edited Markdown files and any embedded copy that includes them.
 
-Return: the document medium and, for a page, its page proof; per view: selected medium, fallback decision, semantic-preservation result, visual-check result, and exact gap when no supported medium passes.
+Return: the document medium and, for a page, its page proof; after an edit, the freshness-on-edit result; per view: selected medium, fallback decision, semantic-preservation result, visual-check result, and exact gap when no supported medium passes.
 
 ## Choose the Document Medium
 
@@ -17,22 +17,48 @@ When the views belong to a durable document, choose the document's medium before
 
 Chat, terminal, and read-only runs produce no page. Their views appear in the response, through the `presentation-*` skill matching the surface when visual structure materially helps.
 
-On a page, the Markdown file stays the truth:
-
-- The page includes each document with `<ex-markdown src="./<doc>.md">` and places views around it. Each requirement's text lives once, in its Markdown; no card, island, or page table keeps a second copy.
-- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its source document first. The view then shows that source.
-- A live `src` island needs HTTP serving and picks up later edits. For double-click viewing, Demistify's `embed` command writes an embedded copy. That copy is regenerated output: rerun `embed` after any `.md` edit, and never edit the embedded text.
-
 IF the page is chosen, use `presentation-html` to build and check it, and return the page path, its screenshot, its binding and release, and its verification limits.
+
+## Two Entries Over One Source
+
+On a page, the Markdown stays the truth and the page composes it. For a design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
+
+- The page includes each chunk, or each single-file document, with `<ex-markdown src="./<path>.md">` and places layout, navigation, and views around it. Each requirement's text lives once, in its Markdown. No card, island, or page table keeps a second copy, and the page writes no normative prose of its own. A reading path in `index.md` can become a page presentation over the same islands.
+- The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. Hiding never makes a failure case look absent: a collapsed section's title names the failure cases inside it.
+- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning chunk first. The view then shows that source.
+
+For example, a job-submission page opens on the worker-loss path: two sentences on what goes wrong when a worker dies, the scheduling chunk's lifecycle diagram, then each document's island in its own tab. Lease expiry, duplicate runs, and the requeue limit sit in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
+
+### Where a Diagram Lives
+
+The chunk that owns a design fact owns its diagram. When Mermaid is the chosen medium, the chunk holds the diagram source, so the agent reading the Markdown and the human reading its island see the same picture. When another medium fits (this reference still chooses it), the chunk holds the accepted asset or its source link plus the exact facts the diagram shows.
+
+The page never originates a governing fact. A native page view may project the owning chunk's meaning in a layout Markdown cannot give, and it is checked against that chunk's facts. A derived view reaches its facts through source anchors or islands, never through table positions or row counts: a page script that expects ten requirement rows breaks, or goes silently stale, when an eleventh arrives. A projection richer than anchors and islands needs a separately designed renderer contract, and page script never improvises one.
+
+## Page Proof
 
 The page passes only when its proof records:
 
 - the Demistify binding and its release (`version` and `sourceCommit` from `release.json`);
 - each island's source file, and whether it was live or embedded;
-- for each embedded island, whether its text matches the source file, checked by direct text comparison or the page's **Show Markdown source** view;
+- for each embedded island, whether its text matches the source file, by the regenerate-and-compare check under Freshness on Edit;
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it.
 
 Record no hashes and keep no provenance registry.
+
+## Freshness on Edit
+
+A live `src` island needs HTTP serving and picks up later edits. For double-click viewing, Demistify's `embed` command writes an embedded copy. That copy is regenerated output, so its text is never edited by hand, and it goes stale without warning when a source it includes changes.
+
+Whoever edits a Markdown file that an embedded copy includes keeps the page current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
+
+1. Change the fact once, in its owning chunk. A row in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design row whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
+2. Use `presentation-html` to regenerate the embedded copy from the live source page to a temporary path, compare it byte for byte with the committed copy, and return `identical` or `stale`. A fresh regeneration carries each source's current text exactly, so a byte-identical committed copy carries it too. A stale copy is replaced by the regeneration and compared again.
+3. Recheck each derived view and dependent row that names an edited identity against the owning chunk's facts. Equal text says nothing about them.
+
+The page is current only when the comparison is `identical` and every rechecked view and row agrees with its chunk. Until then, report the page stale and name what differs.
+
+For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. The Verification Design's owner redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The regenerated copy replaces the committed one and then compares identical. `entities.md` and `billing-export.md` stay untouched.
 
 ## Choose Each View's Medium
 
@@ -77,6 +103,7 @@ Each medium label names an output medium, not a skill: `presentation-tui` denote
 ```text
 document medium: markdown | html-page | none (chat, terminal, or read-only), with reason
 page proof: binding and release, islands live | embedded, embedded-text match, when a page
+freshness on edit: identical | stale, with each rechecked view and dependent row, when an edit touched an embedded copy's source
 view and fired predicate
 required semantic fields
 selected medium: generated-image | mermaid | markdown-table | presentation-tui | fenced-plain-text | html-view
@@ -88,4 +115,4 @@ fallback: none | from -> to, with trigger
 result: pass | gap
 ```
 
-Complete when the document medium is chosen, a chosen page has its page proof, and every fired view has a `pass` result with all required semantic fields preserved and readable, or the caller receives an exact gap that blocks its artifact-completion step.
+Complete when the document medium is chosen, a chosen page has its page proof, an edit that touched an embedded copy's source has a freshness-on-edit result (a `stale` result is reported, never called current), and every fired view has a `pass` result with all required semantic fields preserved and readable, or the caller receives an exact gap that blocks its artifact-completion step.

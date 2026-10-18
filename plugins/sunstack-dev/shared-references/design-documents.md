@@ -73,6 +73,97 @@ Program Design -> docs/design/job-submission.md, whose trace table's proof colum
 
 The second form is invalid because a Requirements title does not make a separate Specification identity exist. The third is invalid because a proof seam says where behavior can be observed, not how each requirement will be shown to hold.
 
+## Design Set Layout
+
+A design set is one design's four documents plus the entries that lead into them. Layout never changes identity: each document settles the same question and owns the same truths whatever files hold it. A document is one Markdown file, or an ordered index over its chunks. One file per document is a valid set and the usual one.
+
+### Split a Document by Question and Reason to Change
+
+A chunk is one Markdown file that answers one cohesive design question for a named reader. It belongs to one document and keeps a stable path and stable heading anchors, because indexes and other documents link to them. The text of each identity (`U`, `E`, `R`, `C`, `V` and the rest) lives in exactly one chunk, and every other mention links to it.
+
+Split only when each candidate chunk passes both halves of this test:
+
+- a named reader can answer a real question from the chunk and its explicit links;
+- the chunk can change for its own reason without editing its siblings.
+
+Name the reader question and the reason to change for every split. Length is never the reason, and neither is one file per requirement, since one requirement is rarely the whole of anyone's question. If every candidate needs all the others to make sense, the split has not earned its cost, and the document stays whole however long it is.
+
+A chunked document's entry is the `index.md` in its folder: the chunks in reading order, each with the question it answers. That entry is the document's identity pointer under Keep The Identities Separate. It holds no identity text, and its chunks are parts of the one document, never new identities.
+
+### Give Agents an Index
+
+A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job.
+
+The index is navigation only. An obligation, threshold, or decision written in it has no home there and moves to the chunk that owns it.
+
+Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. IF an embedded copy of the set's page includes an edited file, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
+
+### Humans Read the Page
+
+When `diagram-rendering-and-fallbacks.md` chooses a page for the set, the page is the human entry. It composes the same Markdown files and adds layout, navigation, and views, never normative prose. That reference owns how the page composes its sources and stays current with them.
+
+### Keep the Markdown Complete
+
+The Markdown carries the complete design: definitions, conditions, alternatives, error cases, exact interfaces, and proof obligations, in tables where they compare. Dense means more of that detail sits directly in the chunk an agent opens. It does not mean compressed jargon, private abbreviations, or one huge table whose rows hide how they relate. The page decides how much a human sees at once, and the Markdown never drops detail to match it.
+
+### Worked Set
+
+A job-submission service has three capabilities. Its Requirements name a different owner and release schedule for each, and all three share one set of entities:
+
+```text
+docs/specs/2026-10-18-job-submission/
+  index.md                agent entry: document entries and two reading paths
+  index.html              human entry: a page over the same files
+  requirements.md
+  specification/
+    index.md              Specification entry: chunks in reading order
+    entities.md           E1 Job, E2 Submission, E3 Tenant
+    submission.md
+    scheduling.md
+    billing-export.md
+  program-design.md
+  verification-design.md
+```
+
+Each Specification chunk passes the test on its own terms:
+
+| Chunk | Reader and the question it answers | Its own reason to change |
+| --- | --- | --- |
+| `entities.md` | every reader: what is a job, and when are two submissions the same job? | entity meaning, which changes rarely and touches every capability, so it lives once and the others link to it |
+| `submission.md` | client integrators: what do I see when I submit, resubmit, or exceed my quota? | the public API's versioned releases |
+| `scheduling.md` | operators: when does a queued job run, and what happens when a worker dies? | scheduling and capacity policy, owned by the platform team |
+| `billing-export.md` | finance: which finished jobs are billed, and when does an export include them? | billing policy, released by finance on its own schedule |
+
+Three things stay whole. Worker-loss recovery in `scheduling.md` runs long: leases, heartbeats, the requeue limit, and fencing a duplicate run. Splitting it by heading fails the test, because requeue makes no sense without leases, fencing makes no sense without requeue, and a change to the lease timeout edits all of them. It stays one section of one chunk whatever its length. Program Design stays one file because its components share one job store and one lease protocol, so a store change edits every section. Verification Design stays one file because its shared observations serve rows from every capability.
+
+The root `index.md`:
+
+```markdown
+# Job submission design
+
+- Requirements: [requirements.md](requirements.md)
+- Specification: [specification/index.md](specification/index.md)
+- Program Design: [program-design.md](program-design.md)
+- Verification Design: [verification-design.md](verification-design.md)
+
+## Reading path: a worker dies mid-job
+
+1. [Requirements: U3](requirements.md#authorized-needs)
+2. [Specification: worker loss](specification/scheduling.md#worker-loss)
+3. [Program Design: lease and requeue](program-design.md#lease-and-requeue)
+4. [Verification Design: worker loss](verification-design.md#worker-loss)
+
+## Reading path: a client resubmits a job
+
+1. [Requirements: U1](requirements.md#authorized-needs)
+2. [Specification: job identity](specification/entities.md#job-identity)
+3. [Specification: resubmission](specification/submission.md#resubmission)
+4. [Program Design: submission API](program-design.md#submission-api)
+5. [Verification Design: resubmission](verification-design.md#resubmission)
+```
+
+An agent fixing a worker-loss bug opens four sections and nothing else. The second path crosses two Specification chunks because resubmission depends on job identity, which `entities.md` owns.
+
 ## Requirements And Normative Requirements Are Different
 
 The Requirements artifact records authorized needs, outcomes, priorities, and boundaries. A Specification contains normative requirements such as `MUST` statements that define observable obligations. Those obligations trace to the Requirements identity; their name does not turn the Specification into a combined `Requirements/spec` artifact.

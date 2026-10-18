@@ -1,6 +1,6 @@
 # Demistify delivery and component documentation
 
-This reference owns the library binding, retrieval of the guide that matches it, and delivery and viewing. Inputs: the page scope, any existing binding and available authoring tools. Return the binding and its release, the guide and references read, component choices and the viewing/checker method.
+This reference owns the library binding, retrieval of the guide that matches it, and delivery and viewing. Inputs: the page scope, any existing binding and available authoring tools. Return the binding and its release, the guide and references read, component choices, the viewing/checker method and, for a page with an embedded copy, the regenerate-and-compare method.
 
 ## Library binding
 
@@ -62,4 +62,15 @@ node packages/demistify/bin/demistify.ts check /absolute/path/to/page.html
 
 A passing check proves recognized markup and data constraints, not diagram readability, prose truth, links or interaction.
 
-Complete when the page’s theme, runtime and guide share one binding, its release is recorded, the chosen elements follow their opened references, and the viewing/checker route is available or its exact limitation is reported.
+## Regenerate and compare an embedded copy
+
+An embedded copy is `embed` output, and only a fresh regeneration shows whether it still carries its sources. Regenerate from the live source page, the one whose `<ex-markdown>` islands still carry `src`. `embed` reads each `src` and removes it, so running it on an embedded copy returns that copy unchanged and proves nothing. Write the fresh copy to a temporary path outside the repository and compare it byte for byte with the committed copy:
+
+```sh
+node packages/demistify/bin/demistify.ts embed /absolute/path/to/index.html /tmp/<task>/index.embedded.html
+cmp /tmp/<task>/index.embedded.html /absolute/path/to/index.embedded.html
+```
+
+`embed` writes each source’s exact text and nothing time- or path-dependent, so `cmp` exiting 0 means the committed copy carries every source as it stands now. Any difference means the copy is stale: regenerate it in place with the same `embed` command pointed at the committed path, never edit its text, and run `cmp` again. Return `identical`, or `stale` followed by the result of the comparison after replacement.
+
+Complete when the page’s theme, runtime and guide share one binding, its release is recorded, the chosen elements follow their opened references, the viewing/checker route is available or its exact limitation is reported, and any embedded copy has an `identical` or `stale` comparison result.
