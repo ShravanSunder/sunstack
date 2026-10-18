@@ -24,6 +24,25 @@ Tokens and payloads are defined in `phase-return-tokens.md`.
 
 Obligations are sentences about entities. The Specification defines each entity its obligations name — a stable `E` identifier, canonical term, identity rule (what makes two instances the same), relationships with cardinality, invariants, and observable states — without naming any type, schema, table, package, or wire shape. Requirements surfaces the owner's words; Program Design consumes the `E` identifiers as fixed input and owns their structural realization in its own workflow. A missing or wrong entity discovered downstream is returned as `specification-gap`, never patched in design. The identity chain is `U -> E -> P -> O -> R -> C -> V`.
 
+## Capabilities Are the Shared Key
+
+A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `scheduling: a queued job runs, and runs once, even when a worker dies`. It is never named by a component, internal owner, or store. Program Design may realize one capability with several components, or several capabilities with one.
+
+The Requirements document is the list's home, confirmed by the owner before any row is written. Other documents refer to a capability by its key; a view that shows its name and purpose again re-renders that list and never redefines it. Each document carries the key over its own rows:
+
+| Document | Carries the key on | How |
+| --- | --- | --- |
+| Requirements | each `U` row | one home key per row |
+| Specification | each `R` obligation | obligations grouped under their home capability, as sections or as chunks that pass the split test below |
+| Program Design | each trace-table row | rows grouped under their `R`'s home capability, or with that key in the `R` cell; still one row per `R`, with the same columns |
+| Verification Design | each row | rows grouped under their `U`'s home capability, or with that key in the requirement field; a shared observation is still described once and may serve rows from several capabilities |
+
+Each `U` and `R` row has exactly one home capability. A row that also serves another capability names it under "also serves" and is never copied there, so a shared `R` still has one trace row. Entities (`E`) belong to the whole set, and every capability links to them.
+
+Identifiers never encode a capability. Moving a row to another capability changes its capability key and nothing else; no identifier is renumbered. A capability is a name, so it adds no identifier kind. It groups rows, and it becomes its own chunk only when it passes the split test.
+
+A set that is one concern has no capability level, and its documents carry no key.
+
 ## Keep The Identities Separate
 
 For substantial file-backed work, each document has its own separately identifiable home:
@@ -92,11 +111,11 @@ A chunked document's entry is the `index.md` in its folder: the chunks in readin
 
 ### Give Agents an Index
 
-A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job.
+A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. When the set has capabilities, the reading paths include one through-line per capability, in the same order: its need, its obligations, their owner and call path, and their proof. Task paths sit beside the through-lines. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job; there, the capability groups inside each document carry the through-line.
 
 The index is navigation only. An obligation, threshold, or decision written in it has no home there and moves to the chunk that owns it.
 
-Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. IF an embedded copy of the set's page includes an edited file, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
+Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. A capability's through-line therefore grows one step per phase, and in a fresh set it ends at the Specification until Program Design exists. IF an embedded copy of the set's page includes an edited file, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
 
 ### Humans Read the Page
 
@@ -108,11 +127,11 @@ The Markdown carries the complete design: definitions, conditions, alternatives,
 
 ### Worked Set
 
-A job-submission service has three capabilities. Its Requirements name a different owner and release schedule for each, and all three share one set of entities:
+A job-submission service has three capabilities, which the owner confirmed as `submission`, `scheduling`, and `billing-export`. Its Requirements name a different owner and release schedule for each, and all three share one set of entities:
 
 ```text
 docs/specs/2026-10-18-job-submission/
-  index.md                agent entry: document entries and two reading paths
+  index.md                agent entry: document entries, three through-lines and two task paths
   index.html              human entry: a page over the same files
   requirements.md
   specification/
@@ -134,7 +153,11 @@ Each Specification chunk passes the test on its own terms:
 | `scheduling.md` | operators: when does a queued job run, and what happens when a worker dies? | scheduling and capacity policy, owned by the platform team |
 | `billing-export.md` | finance: which finished jobs are billed, and when does an export include them? | billing policy, released by finance on its own schedule |
 
+Each capability earned its own chunk here because each has its own reader and release schedule. In a smaller set the same three would be sections of one file.
+
 Three things stay whole. Worker-loss recovery in `scheduling.md` runs long: leases, heartbeats, the requeue limit, and fencing a duplicate run. Splitting it by heading fails the test, because requeue makes no sense without leases, fencing makes no sense without requeue, and a change to the lease timeout edits all of them. It stays one section of one chunk whatever its length. Program Design stays one file because its components share one job store and one lease protocol, so a store change edits every section. Verification Design stays one file because its shared observations serve rows from every capability.
+
+One obligation crosses capabilities. R9 says a job that ran twice after a worker loss is billed once. It lives in `billing-export.md` because finance looks for billing rules there, and it also serves `scheduling`. It has one trace row, grouped under `billing-export`, and the scheduling chunk links to it.
 
 The root `index.md`:
 
@@ -146,23 +169,44 @@ The root `index.md`:
 - Program Design: [program-design.md](program-design.md)
 - Verification Design: [verification-design.md](verification-design.md)
 
+## Through-line: submission
+
+1. [Requirements: submission](requirements.md#submission)
+2. [Specification: submission](specification/submission.md)
+3. [Program Design: submission rows](program-design.md#trace-submission)
+4. [Verification Design: submission](verification-design.md#submission)
+
+## Through-line: scheduling
+
+1. [Requirements: scheduling](requirements.md#scheduling)
+2. [Specification: scheduling](specification/scheduling.md)
+3. [Program Design: scheduling rows](program-design.md#trace-scheduling)
+4. [Verification Design: scheduling](verification-design.md#scheduling)
+
+## Through-line: billing-export
+
+1. [Requirements: billing-export](requirements.md#billing-export)
+2. [Specification: billing export](specification/billing-export.md)
+3. [Program Design: billing-export rows](program-design.md#trace-billing-export)
+4. [Verification Design: billing-export](verification-design.md#billing-export)
+
 ## Reading path: a worker dies mid-job
 
-1. [Requirements: U3](requirements.md#authorized-needs)
+1. [Requirements: U3](requirements.md#scheduling)
 2. [Specification: worker loss](specification/scheduling.md#worker-loss)
 3. [Program Design: lease and requeue](program-design.md#lease-and-requeue)
 4. [Verification Design: worker loss](verification-design.md#worker-loss)
 
 ## Reading path: a client resubmits a job
 
-1. [Requirements: U1](requirements.md#authorized-needs)
+1. [Requirements: U1](requirements.md#submission)
 2. [Specification: job identity](specification/entities.md#job-identity)
 3. [Specification: resubmission](specification/submission.md#resubmission)
 4. [Program Design: submission API](program-design.md#submission-api)
 5. [Verification Design: resubmission](verification-design.md#resubmission)
 ```
 
-An agent fixing a worker-loss bug opens four sections and nothing else. The second path crosses two Specification chunks because resubmission depends on job identity, which `entities.md` owns.
+Each through-line's Program Design step opens that capability's group of trace rows, whose owner and interface cells lead on to the call paths. An agent changing billing policy follows the billing-export through-line from finance's need to its proof. An agent fixing a worker-loss bug opens four sections and nothing else. The second task path crosses two Specification chunks because resubmission depends on job identity, which `entities.md` owns.
 
 ## Requirements And Normative Requirements Are Different
 

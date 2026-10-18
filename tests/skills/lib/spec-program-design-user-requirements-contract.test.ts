@@ -232,6 +232,10 @@ describe("user requirements and design-view contracts", () => {
     expect(specArtifact).not.toContain(
       "two or more external consumers or observable surfaces exist",
     );
+    expect(specDesign).toContain("the Requirements name two or more capabilities");
+    expect(specArtifact).not.toContain(
+      "the Requirements name two or more capabilities",
+    );
     expect(programDesign).toContain("control crosses owners or async boundaries");
     expect(programArtifact).not.toContain(
       "control crosses owners or async boundaries",
@@ -582,6 +586,7 @@ describe("user requirements and design-view contracts", () => {
     const vocabulary = readPluginFile("docs/diagram-vocabulary.md");
 
     for (const viewToken of [
+      "capability map",
       "journey map — specification",
       "entity map",
       "context diagram",

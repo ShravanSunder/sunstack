@@ -29,7 +29,9 @@ resolved alternatives when they change meaning
 open decisions, assumptions, and evidence gaps
 ```
 
-These are not mandatory headings. Organize by journey, capability, protocol, domain, or decision when that better preserves the specification spine.
+These are not mandatory headings. When the capability map fires, group the normative requirements by capability: each `R` sits once, in its home capability's section, or in that capability's own chunk when the chunk test below says split. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
+
+An `R` takes its home from the `U` rows it traces to. When those rows sit in different capabilities, home it in the capability whose reader would look for it first and name the others under "also serves". An obligation with no `U` row, such as a platform constraint, takes the capability whose behavior it constrains. A cross-cutting obligation, such as one audit rule over every capability, takes the home of the need that asked for it and lists the rest under "also serves". `E`, `R`, `C`, and `V` identifiers never encode a capability, so regrouping renumbers nothing.
 
 IF a vertical capability, protocol, domain boundary, or independently governed contract is a candidate for its own linked file, load `../../../shared-references/design-documents.md` and return, for each candidate, the reader question it answers, its own reason to change, and the split-or-keep result of that reference's chunk test.
 
@@ -60,6 +62,8 @@ need U1 when present
                       -> proof obligation V1
 ```
 
+When the capability map fires, start this chain at one capability's home `U` rows. An `R` they reach may live in another capability that names this one under "also serves"; follow that link instead of copying the `R`.
+
 Diagrams may explain relationships but may not be the only home of normative meaning.
 
 ## Apply Required Why/What Views
@@ -68,10 +72,20 @@ Consume each selected view's reader question plus the predicates, cardinality, a
 
 Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
 
+- Capability maps let the owner confirm the parts at a glance, before any row. Both maps re-render the confirmed list the Requirements record opens with, so the list keeps one home. A linked row appears once, under its home, and names the other capability, as in this Specification map:
+
+  ```text
+  import    card charges and receipt photos arrive in a claim without retyping    R1 R2 R5   R5 also serves approval
+  approval  a manager approves or returns a claim, with a reason, in one place    R3 R4 R6
+  payout    an approved claim reaches the employee's account on the next pay run  R7 R8
+  ```
+
+  An entry named `ingest service`, or arrows between capabilities as if they called each other, has crossed into structure and routes to `program-design`.
 - Journey maps cite the stable U rows they re-render; the source record remains normative. Good steps express the user's job and source-established observable pain, or mark that pain and its evidence unknown. A screen tour, component name, or cross-class chain is not a journey.
 - Context diagrams keep the system opaque and place external consumers, stakeholders, surfaces, contracts, and relevant non-consumers around the boundary. Internal components, owners, stores, or enforcement points are structural How and route to `program-design`.
 - Entity maps show each `E` entity with its identity rule, relationships with cardinality, and observable states; the entity table stays normative. A map that shows a package, schema, type, or store has crossed into `program-design`.
-- Requirement coverage tables expose missing U/E/P/O/R/C/V links rather than filling gaps with guessed meaning.
+- Requirement coverage tables expose missing U/E/P/O/R/C/V links rather than filling gaps with guessed meaning. When the table is grouped by capability, also read each group whole: a capability whose home `U` rows reach no `R`, and an `R` with no home capability, are gaps here. A capability whose home rows are all unauthorized reaches no `R` by rule; record that authority gap rather than inventing an obligation.
+- Coverage stops at `V`. Do not open Program Design or Verification Design documents to extend it. In a fresh set they do not exist yet, and their absence is the next phases' work, not a gap. Walking each capability through trace rows and Verification Design rows is four-document review's job.
 
 Prune a view that adds no decision clarity. View application is complete when every fired predicate has the required number of passed views, each required semantic field is visible, and adding another view would only duplicate an existing relationship.
 
@@ -107,6 +121,7 @@ Re-read the complete artifact and record:
 - missing, semantically incomplete, unreadable, or decorative Required Why/What Views;
 - missing or broken generated-image assets/embeds, image/text disagreement, unreadable labels, inaccurate alt/captions, or an uninspected destination placement;
 - journey maps that fail to cite their U rows or context diagrams that cross into internal How;
+- a capability named by a component, a row with no home capability or two homes, a row copied under a second capability instead of linked, or an identifier that encodes its capability;
 - accepted requirements lost or superseded without owner authority;
 - changes from the confirmed goal boundary hidden as specification completeness;
 - process state, obscure headings, repeated companion narration, or reader-facing elements that fail the human deletion test;
@@ -120,4 +135,4 @@ Run the result against the current artifact state. Record exact failures, not â€
 
 Self-check is author evidence only. It never substitutes for fresh independent review.
 
-Complete when: Requirements and Specification have separate valid identities, the artifact has one normative home per meaning, the reader can navigate need to proof, every reader-facing element earns its attention cost, boundary and accepted-requirements coverage are intact, and the self-check names every known gap.
+Complete when: Requirements and Specification have separate valid identities, the artifact has one normative home per meaning, every capability reaches its `R` obligations or carries a named gap, the reader can navigate need to proof, every reader-facing element earns its attention cost, boundary and accepted-requirements coverage are intact, and the self-check names every known gap.
