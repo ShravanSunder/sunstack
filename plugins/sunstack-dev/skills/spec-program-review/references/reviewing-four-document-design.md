@@ -77,17 +77,17 @@ How to judge: walk every capability; do not sample. Follow each key through the 
 capability key and purpose (Requirements)
   -> its home U rows (Requirements)
   -> each R those rows reach, under that R's own home key (Specification)
-  -> that R's one trace row, under the same R home (Program Design)
-  -> the Verification Design row for each home U row, under this capability
+  -> that R's one trace row, keyed to the same R home (Program Design)
+  -> the Verification Design row for each home U row, keyed to this capability
   -> its through-line, when the set has an index
 ```
 
-Keep two homes apart. Every `U` on this line is homed here, but an `R` it reaches has one home of its own, which may be another capability. An `R` homed elsewhere belongs to this line when it names this capability under "also serves": follow it to its single trace row, grouped under its own home, then return to this capability for its `U` rows' Verification Design rows. A row's key is its group heading or the key in its `R` cell or requirement field. Read a row that carries only one of them by that one. A row that carries both must name the same capability in each: a row grouped under one key whose cell names another sits under a key that is not its home, and the line stops at that document. The line stops at the first document where a link is missing, a row sits under a key that is not its home, or a group carries a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
+Keep two homes apart. Every `U` on this line is homed here, but an `R` it reaches has one home of its own, which may be another capability. An `R` homed elsewhere belongs to this line when it names this capability under "also serves": follow it to its single trace row, keyed to its own home, then return to this capability for its `U` rows' Verification Design rows. A row's key is the home key written in its own `R` cell or requirement field when it has one, and otherwise its group heading. Check that key against the `R`'s home in the Specification, or the `U`'s home in the Requirements; a row whose key names a different home is keyed to the wrong home. When a document declares its groups to be home groups, such as "each trace group lists the obligations whose home is that capability", each heading in it is a home claim too, and a row whose heading and cell disagree carries two home claims, which is a stop. A correctly keyed row may sit in another capability's group; the through-lines and the `U` rows' links must still reach it where it is. The line stops at the first document where a link is missing, a row is keyed to the wrong home or carries two disagreeing home claims, or a group carries a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
 
 - a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or reach an `R` that has no home, has two homes, or is homed elsewhere without naming this capability under "also serves", stops at the Specification: both route to `spec-design`;
-- a reached `R` with no trace row, or whose trace row sits under a key other than that `R`'s home, stops at Program Design: `program-design`;
-- a home `U` row with no Verification Design row, or whose row sits under a key other than this capability, stops at Verification Design: `verification-design`;
-- a through-line that skips a step or links the wrong section goes to the phase that owns that document's step.
+- a reached `R` with no trace row, or whose trace row is keyed to another home or carries two home claims that disagree, stops at Program Design: `program-design`;
+- a home `U` row with no Verification Design row, or whose row is keyed to another capability or carries two home claims that disagree, stops at Verification Design: `verification-design`;
+- a through-line or a `U` row's link that skips a step or misses the row where it sits goes to the phase that owns that document's step.
 
 In a broken copy of the job-submission set:
 
@@ -104,7 +104,7 @@ scheduling      U3 -> no R traces to U3
 
 The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier, at U3. Program Design and Verification Design may still have sections headed scheduling, but nothing there realizes or proves U3 without an `R` behind it. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
 
-U4's link is complete although R9 lives in billing-export: R9 names scheduling under "also serves", has one trace row under its own home, and U4's row sits under scheduling. It would stop at the Specification if R9 did not name scheduling, at Program Design if R9's trace row sat under scheduling, even with billing-export still written in its `R` cell, and at Verification Design if U4's row sat under billing-export.
+U4's link is complete although R9 lives in billing-export: R9 names scheduling under "also serves", has one trace row keyed to its own home, and U4's row is keyed to scheduling. It would stop at the Specification if R9 did not name scheduling, at Program Design if R9's trace row named scheduling as its home, and at Verification Design if U4's row were keyed to billing-export. If R9's row sat in the scheduling group but kept billing-export in its own `R` cell, it would still be validly keyed, and the billing-export through-line and U4's link must reach it there. Only a Program Design that declares its trace groups to be home groups would make that row a stop, because its heading and cell would then be two home claims that disagree.
 
 A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
 
