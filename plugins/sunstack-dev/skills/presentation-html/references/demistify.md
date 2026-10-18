@@ -52,13 +52,9 @@ The guide at the page’s binding is the only source of available API. A constru
 
 Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. A remote runtime executes in the page, so sensitive content also calls for the local copy.
 
-For sibling files, or when the browser tool blocks `file://` URLs, Python provides a static server when installed. Choose an unused port and open `http://127.0.0.1:4174/page.html` in the supported browser:
+For a direct-file artifact, open it with the OS default app when available; a successful launch proves only that the file opened, not that its content or interactions rendered. If supported browser tooling rejects `file://` by security policy, report that exact rendering gap. Do not switch browser surfaces, use Peekaboo, headless Chrome or raw CDP, or start a server to work around the rejection. HTTP serving is available only for a separately authorized HTTP-delivery task and when tool policy permits it.
 
-```sh
-python3 -m http.server 4174 --bind 127.0.0.1 --directory /path/to/explainer-directory
-```
-
-The Demistify CLI exists only in source and provides `embed` and `check`; nothing is published to npm. Run it from the monorepo root of a matching Sunstack tools checkout with Node 26 and its pnpm dependencies installed:
+The authoring guide for the page’s binding owns the available CLI authoring operations. The Demistify CLI exists only in source; nothing is published to npm. Run documented operations from the monorepo root of a matching Sunstack tools checkout with Node 26 and its pnpm dependencies installed. These verified examples embed a page and check recognized markup:
 
 ```sh
 node packages/demistify/bin/demistify.ts embed /absolute/path/to/input.html /absolute/path/to/output.html
