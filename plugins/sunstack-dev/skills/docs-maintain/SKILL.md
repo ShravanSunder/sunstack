@@ -30,6 +30,7 @@ docs request
    - `README.md` is the human-facing advertisement and quick orientation.
    - architecture docs, runbooks, and changelogs carry durable working context.
    - specs, plans, debug notes, research packets, and handoffs are stage artifacts until this skill classifies them as durable, archived, or disposable.
+- A design set's `index.md` and its HTML page are two entries over the same Markdown, so this separation never splits them: keep both pointing at the one source, and never fork a copy of its text into the page or a second doc.
 - Keep `AGENTS.md` short. Move runbook detail to docs and link it.
 - Do not let old plans/specs/debug notes displace current source-of-truth docs by inertia.
 - Do not replace phase skills for active artifact work: `spec-design`, `program-design`, `spec-program-review`, `spec-handoff`, `plan-handoff`, `implementation-handoff`, `implementation-review` for implementation review, `implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
@@ -73,9 +74,11 @@ docs request
    - detailed docs under the appropriate docs folder
    - changelog entries when meta-instructions or workflows change
    - IF the edit rewrites human sentences in a README, architecture doc, runbook, or changelog, load `../../shared-references/humanizer.md` in file mode and return the rewritten prose plus the fences, YAML, commands, and paths left unchanged. Classifying, purging, linking, or promoting without a prose rewrite does not load it. Completion: claims, names, numbers, dates, and quotes match the source, or the missing fact is named instead of invented.
+   - IF an edited Markdown file is included by an embedded page (an HTML file whose `data-ex-markdown-source` records name it), load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result: the comparison `identical` or `stale`, and each derived view and dependent row rechecked. Completion: the page is reported current only after an `identical` comparison with every rechecked view and row agreeing; otherwise it is reported stale with what differs.
 6. Validate:
    - no broken obvious links
    - no stale source-of-truth claims
+   - no embedded page left stale against a Markdown file this change edited
    - no duplicated long detail in `AGENTS.md` and README
    - no unrelated docs churn
 
