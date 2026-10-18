@@ -1,11 +1,12 @@
 # Skill Authoring
 
-Skills for authoring skills in any repository: design and write them, review them with independent agents, and audit which skills to create, update, merge, or skip.
+Skills for authoring skills in any repository: design and write them, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.
 
 | Skill | Use it to |
 | --- | --- |
 | `skill-orchestrator` | carry one skill change from spec to release: spec, review, implementation, proof, assessment, review, ship |
 | `skill-creation` | design and write one skill and its skill spec; owns the craft every other skill judges against |
+| `skill-rules` | decide which of a skill's standards become checked `sunstack-rule` rules, mark them in the skill's Markdown, and prove them with `check_rules` and good and bad examples |
 | `skill-review` | review a skill spec or skill files with several independent reviewer agents |
 | `skill-audit` | decide from evidence which skills to create, update, merge, or skip |
 
