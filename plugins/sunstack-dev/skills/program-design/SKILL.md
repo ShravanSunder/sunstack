@@ -56,7 +56,7 @@ decision-needed
 deferred
 ```
 
-A `locally-ready` result includes the distinct Requirements, Specification, and Program Design identities; the confirmed goal boundary and accepted requirements set from `spec-design`; current-system, constraint, platform, and external source identities with current applicability; structural model and call-path deltas; the coverage disposition derived from the artifact's trace table; structural-realization confirmation; author self-check; required independent local-review coverage; debt/gaps; and explicit non-acceptance. These are returned workflow state, not narrative sections in the program-design artifact. The binding table and trace table themselves are artifact content.
+A `locally-ready` result includes the distinct Requirements, Specification, and Program Design identities; the confirmed goal boundary and accepted requirements set from `spec-design`; current-system, constraint, platform, and external source identities with current applicability; structural model and call-path deltas; the coverage disposition derived from the artifact's trace table; author self-check; required independent local-review coverage; debt/gaps; and explicit non-acceptance. These are returned workflow state, not narrative sections in the program-design artifact. The binding table and trace table themselves are artifact content.
 
 A bounded scope decision, design excerpt, or chat explanation without that complete return cannot be `locally-ready`, even when its selected structure is sound.
 
@@ -65,7 +65,7 @@ Produce terminal labels by observable condition:
 - `locally-ready`: every completion blocker is cleared and the complete return above exists.
 - `specification-gap`: governing Why/What, including an entity the design needs, is missing, conflicting, stale, or would be silently invented; return the exact gap and `spec-design` route.
 - `evidence-blocked`: load-bearing current-system, platform, feasibility, or proof-path evidence is missing, inaccessible, stale, or contradictory; return the exact evidence and access/state change needed.
-- `decision-needed`: two or more viable structural directions remain and selection requires owner-controlled cost, risk, compatibility, or policy tolerance not settled by the specification; return the decision owner and falsifiers, and load `../../shared-references/owner-decision-brief.md` and return the brief. It is also the result when the structural-realization confirmation is missing: return the human owner as decision owner and the views step 16 showed.
+- `decision-needed`: exactly two conditions qualify. **Open selection:** two or more viable structural directions remain inside the confirmed goal boundary, and choosing needs owner-controlled cost, risk, compatibility, or policy tolerance that neither the Specification, the confirmed goal, nor the owner's standing instructions settle. **Needed authority:** every viable realization needs a material change outside current authority (step 4's material scope expansion, step 5's identity or cardinality mismatch, or a cutover the owner has not decided), so the work cannot proceed without authorization. Nothing else qualifies: "the structure is new" and "the owner might want to see it" are not decisions, and optional machinery is rejected while the run continues (step 16). Return the decision owner and falsifiers, and load `../../shared-references/owner-decision-brief.md` and return the brief addressed to the Chief of Staff role, never directly to the owner; when no Chief of Staff resolves, follow that reference's recipient-gap rule instead.
 - `deferred`: an authorized caller explicitly postpones scoped work after its consequence is recorded; return completed coverage, deferred scope, authority for deferral, consequence, and re-entry condition.
 
 After producing the terminal result, return exactly one phase-guided route:
@@ -73,16 +73,12 @@ After producing the terminal result, return exactly one phase-guided route:
 ```text
 locally-ready      -> recommend verification-design
 specification-gap  -> recommend spec-design
-decision-needed    -> missing structural-realization confirmation: stop for
-                      the owner's reply;
-                      otherwise recommend discuss-pathfinding only when this skill's
-                      method identifies an unmade owner-controlled structural
-                      choice; required return owner: program-design;
-                      otherwise stop with the exact owner decision
+decision-needed    -> stop with the brief from owner-decision-brief.md,
+                      routed as that reference says
 evidence-blocked | deferred -> stop with the exact reason
 ```
 
-Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A Verification Design handoff includes the distinct Requirements, Specification, and Program Design identities, confirmed goal boundary and accepted requirements set, structural-realization confirmation, the trace table's proof seams and their gaps, and constraints/non-goals. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct program-design invocation carries no cycle budget.
+Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A Verification Design handoff includes the distinct Requirements, Specification, and Program Design identities, confirmed goal boundary and accepted requirements set, the trace table's proof seams and their gaps, and constraints/non-goals. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct program-design invocation carries no cycle budget.
 
 ## Workflow
 
@@ -245,11 +241,11 @@ After deletion or simplification, compare coverage with the accepted requirement
 
 Completion: each design element serves an obligation, constraint, failure policy, or proof need; after any deletion or simplification pass, every accepted identity has an inspectable `covered | owner-authorized supersession | gap` disposition and anchor, derived from its trace-table row for each Specification obligation and reported beside the table for every other accepted identity, with shared rows allowed only when every member identity is enumerated and has the same disposition and anchor; and every fired Required View has a passed rendering result with its semantic fields preserved.
 
-### 16. Run the author integration self-check and stop for the owner
+### 16. Run the author integration self-check and record the structure decision
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the trace table and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. Consume each generated visual's accepted project asset, relative embed, semantic/readability inspection and destination-preview result, then return the integration self-check with exact gaps.
 
-Before review or planning, ask the authorized owner to confirm the current structural realization, and end the turn. Lead with pictures the owner can read, then the tables:
+Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show the views, pictures a reader can follow first, then the tables:
 
 ```text
 component view, drawn
@@ -259,17 +255,13 @@ trace table
 deviations and unresolved decisions: none | list
 ```
 
-New components and contracts, complexity spent, and accepted-requirements coverage are read from those tables. Saying the tables exist is not showing them; a read-only or chat-only run puts them in the response. Reuse confirmation only when it covers this same component view, entry-to-effect path, binding table, trace table, and deviations list. When requested machinery falls outside the confirmed goal boundary, reject it and continue with the authorized design; that rejected pressure does not create a new owner decision. Missing confirmation or a real material expansion in the selected design returns `decision-needed`, and step 17 runs only on a later turn, after the owner replies. Confirmation state stays in the returned result rather than a durable status field.
+New components and contracts, complexity spent, and accepted-requirements coverage are read from those tables. Saying the tables exist is not showing them; a read-only or chat-only run puts them in the response. When requested machinery falls outside the confirmed goal boundary, reject it and continue with the authorized design; that rejected pressure does not create a new owner decision.
 
-An explicit owner instruction to skip this confirmation and go to review is a waiver. Record `structural-realization confirmation: waived by owner`, still show the same views, and step 17 may then run in the same turn. A packet claim, a goal-boundary confirmation, a caller's instruction, or silence is not a waiver.
+Then continue to step 17 in the same run. Do not ask anyone to confirm the structure: stop only when a `decision-needed` condition holds, and then with its brief.
 
-Call this the structural-realization confirmation in every result and handoff. Retired procedural boundary-check names are not aliases for it.
-
-Completion: the current artifact has exact passes and gaps; the views above were shown; the turn ended with `decision-needed`, the owner confirmed this same current structural realization, or the result records `structural-realization confirmation: waived by owner`; and every accepted requirement remains covered or has owner-authorized supersession. Self-check is never independent review.
+Completion: the current artifact has exact passes and gaps and records the selected structure with its alternatives, tradeoffs, and falsifiers; the views above were shown; and every accepted requirement remains covered or has owner-authorized supersession. Self-check is never independent review.
 
 ### 17. Obtain fresh local review when required
-
-This step runs after the owner's reply to step 16, or in the same turn when the owner waived the confirmation and step 16 showed its views.
 
 Call `spec-program-review` using `classify-review-requirement` with: requested future mode `program-only`; current Requirements, Specification, and Program Design identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
 
@@ -278,7 +270,6 @@ When required, invoke `spec-program-review` separately in `program-only` mode wi
 - current distinct Requirements, Specification, and Program Design identities;
 - governing sources, authority states, and coverage;
 - confirmed goal boundary and accepted requirements set;
-- structural-realization confirmation;
 - constraints, non-goals, risk predicates, and claimed proof evidence or gaps;
 - the readiness question and any prior coverage plus semantic-change record.
 
@@ -288,7 +279,7 @@ Completion: the permitted independent review coverage and parent-verified correc
 
 ### 18. Return the local result
 
-Return the distinct Requirements, Specification, and Program Design identities; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the coverage disposition derived from the trace table; structural-realization confirmation; self-check; independent review; debt/gaps; and non-acceptance.
+Return the distinct Requirements, Specification, and Program Design identities; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the coverage disposition derived from the trace table; self-check; independent review; debt/gaps; and non-acceptance.
 
 IF returning a substantial program design in chat, use the `presentation-*` skill matching the current surface to render the selected component, call, state, or failure views before the compact result summary; honor an exact user-requested format instead. The durable artifact remains the source of truth.
 
@@ -355,13 +346,11 @@ Do not return `locally-ready` while any of these hold:
 - state, flow, failure/recovery, concurrency, migration, trust, or proof semantics are applicable but undefined;
 - delegated evidence was treated as target design, or a helper originated alternatives, target models/views, structural realization, section prose, or any design meaning;
 - a mechanism survives even though removing it breaks no confirmed requirement and its callers would not inherit a lifecycle, policy, or failure rule it owns, or simplification loses accepted requirements without owner authority;
-- the current structural realization lacks explicit owner confirmation or a recorded `structural-realization confirmation: waived by owner`;
 - planning would still need to invent an owner, interface, state/failure policy, trust control, or proof seam;
 - required independent review is missing, stale, partial, silent, or blocked;
 - source/review coverage, self-check, readiness, acceptance, planning, PR, or release narration appears as durable program-design prose instead of returned workflow state;
 - Requirements, Specification, or Program Design identities, source coverage, or non-acceptance are missing.
 - a continuation omits a next skill, recommends more than one, or contradicts the terminal mapping above;
-- a pathfinding recommendation lacks an unmade owner-controlled structural choice or omits `program-design` as its return owner;
 - a continuation handoff omits the destination's required exact gap, boundary state, or artifact pointers, or copies unrelated history.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.

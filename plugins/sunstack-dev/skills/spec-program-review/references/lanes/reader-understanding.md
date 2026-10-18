@@ -4,9 +4,9 @@ Mission: reconstruct the complete artifact as a human reader, test whether the i
 
 Predicate: the mode-complete result leaves a concrete material reader-comprehension risk, or the caller explicitly requests a deep reader review with an exact question and scope.
 
-Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, structural-realization confirmation for `program-only` or `four-document-design`, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
+Expected inputs: review context, complete target and governing-source set, confirmed goal boundary and accepted requirements set, companion links, and the mode-complete result plus its unresolved reader risk or the caller's exact deep-reader question.
 
-Prerequisites: the complete target and source set, confirmed goal boundary, accepted requirements set, and applicable structural-realization confirmation exist in the review context; the 🔎 Reviewer Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
+Prerequisites: the complete target and source set, confirmed goal boundary, and accepted requirements set exist in the review context; the 🔎 Reviewer Sidekick has reduced the mode-complete result and named the unresolved reader risk or caller-authorized deep-reader question.
 
 Check boundary: read-only.
 

@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 
@@ -258,9 +258,6 @@ describe("user requirements and design-view contracts", () => {
     expect(programDesign).toContain("satisfied by the existing system");
     expect(programDesign).toContain("agreed acceptable complexity");
     expect(programDesign).toContain(
-      "confirm the current structural realization",
-    );
-    expect(programDesign).toContain(
       "affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations",
     );
     expect(artifact).toContain("one compact row per stable identity");
@@ -347,12 +344,8 @@ describe("user requirements and design-view contracts", () => {
     expect(commonMethod).toContain("satisfied by the existing system");
     expect(modeComplete).toContain("compact human-reader reconstruction");
     expect(modeComplete).toContain("confirmed goal boundary");
-    expect(modeComplete).toContain("structural-realization confirmation");
     expect(readerUnderstanding).toContain("Apply the Human Deletion Test");
     expect(readerUnderstanding).toContain("confirmed goal boundary");
-    expect(readerUnderstanding).toContain(
-      "structural-realization confirmation",
-    );
     expect(readerUnderstanding).toContain(
       "Only a caller-authorized full-artifact audit",
     );
@@ -376,6 +369,78 @@ describe("user requirements and design-view contracts", () => {
       "whether the confirmed obligations still hold without the questioned mechanism",
     );
     expect(reduction).toContain("requires owner expansion decision");
+  });
+
+  test("stops program design only for a real open decision, with a full brief", () => {
+    const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const brief = readPluginFile("shared-references/owner-decision-brief.md");
+
+    expect(programDesign).toContain("`decision-needed`: exactly two conditions qualify.");
+    expect(programDesign).toContain("**Open selection:**");
+    expect(programDesign).toContain("**Needed authority:**");
+    expect(programDesign).toContain(
+      "optional machinery is rejected while the run continues",
+    );
+    expect(brief).toContain("**Why it is genuinely open**");
+    expect(brief).toContain("**Two or three concrete options");
+    expect(brief).toContain("**Where the agents stand**");
+  });
+
+  test("routes a decision brief by who raised the decision", () => {
+    const programDesign = readPluginFile("skills/program-design/SKILL.md");
+    const brief = readPluginFile("shared-references/owner-decision-brief.md");
+    const routeBlock = programDesign.slice(
+      programDesign.indexOf("return exactly one phase-guided route:"),
+      programDesign.indexOf("Before recommending a skill"),
+    );
+
+    expect(brief).toContain("The recipient depends on who raised the decision.");
+    expect(brief).toContain(
+      "When the owner asked you the question directly in this conversation, the brief answers the owner here",
+    );
+    expect(brief).toContain(
+      "Answering grants no wider scope, implementation or merge authority.",
+    );
+    expect(brief).toContain(
+      "A decision you raise yourself from your own work, a phase stop such as `decision-needed` included, goes to the Chief of Staff role, never directly to the owner.",
+    );
+    expect(brief).toContain(
+      "Take the Chief of Staff from the commission, the work thread, or the session's standing instructions.",
+    );
+    expect(brief).toContain(
+      "return the brief to your commissioner with the exact recipient gap",
+    );
+    expect(brief).toContain(
+      "When that commissioner is the owner, keep the brief unsent: hold it in the work's artifact or trace for the Chief of Staff, and reply with only the recipient gap and where the brief is held, never its options or recommendation.",
+    );
+    expect(brief).toContain(
+      "A question tool may ask only the brief's recipient for the final pick",
+    );
+    expect(programDesign).toContain(
+      "return the brief addressed to the Chief of Staff role, never directly to the owner",
+    );
+    expect(routeBlock).toContain(
+      "decision-needed    -> stop with the brief from owner-decision-brief.md",
+    );
+    expect(routeBlock).not.toContain("discuss-pathfinding");
+  });
+
+  test("retires the structural-realization confirmation from every active skill", () => {
+    const activeSkillFiles = ["skills", "shared-references"].flatMap((root) =>
+      readdirSync(path.join(pluginRoot, root), {
+        recursive: true,
+        withFileTypes: true,
+      })
+        .filter((entry) => entry.isFile())
+        .map((entry) => path.join(entry.parentPath, entry.name)),
+    );
+
+    expect(activeSkillFiles.length).toBeGreaterThan(0);
+    for (const filePath of activeSkillFiles) {
+      const text = readFileSync(filePath, "utf8").toLowerCase();
+      expect(text, filePath).not.toContain("structural-realization confirmation");
+      expect(text, filePath).not.toContain("waived by owner");
+    }
   });
 
   test("reviews accepted requirements and call-path deltas without digest ceremony", () => {
