@@ -78,7 +78,7 @@ Repetitions: two fresh runs per case. Static: `claude plugin validate .`; the sk
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 `skill-rules` | proposed | — |
+| 1 `skill-rules` | implemented | skill `c4631b86`; version, manifests and changelog `985b73ea` |
 
 ## Review record
 
