@@ -31,7 +31,7 @@ open decisions, assumptions, and evidence gaps
 
 These are not mandatory headings. Organize by journey, capability, protocol, domain, or decision when that better preserves the specification spine.
 
-Use linked slice specifications only when a vertical capability, protocol, domain boundary, or independently governed contract has its own consumers and reason to change. Do not create appendix-style mini-doc sprawl or duplicate normative claims.
+IF a vertical capability, protocol, domain boundary, or independently governed contract is a candidate for its own linked file, load `../../../shared-references/design-documents.md` and return, for each candidate, the reader question it answers, its own reason to change, and the split-or-keep result of that reference's chunk test.
 
 Keep these workflow and process details out of the design artifact:
 
