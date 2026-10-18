@@ -42,6 +42,7 @@ practices-*          always-on practices           practices-collaboration
                                                   practices-verification-maintenance
                                                   practices-preflight
                                                   practices-cleanup
+                                                  practices-retrospective
 role-*               assigned responsibility       role-lead
                                                   role-advisor
                                                   role-implementer
@@ -189,6 +190,8 @@ Use `practices-show-me-your-work` at the start of a qualifying task to open or r
 Use `practices-preflight` before starting an orchestration, implementing a plan or commissioning another agent. It lists what every required gate needs, proof gates included: inputs, access, credentials by name, services, tools, the agents the plan assigns, and disk. It checks each need by running something, reads a credential into memory without printing it, and resolves each gap, asks the owner once, or records a stand-in that never satisfies a required gate. A credential that a required gate needs is a start prerequisite. It returns `ready` or the gap list, and the checked list travels in the commission. It loads `practices-cleanup` for this work's merged worktrees, and when free disk is below what the work needs.
 
 Use `practices-cleanup` when a slice, milestone, PR or investigation ends, when your own merged worktree is still on disk, or when disk runs low. It removes only what the task itself created (build output, large logs, task temp folders and merged worktrees) once four checks hold: the exact path is the task's own, it is rebuildable or finished with, nothing uses it, and its evidence is kept. Its allow list runs without asking and prefers the project's own clean task; shared caches, age-based sweeps, repository-wide prunes and anything else outside the list go to the owner first. `references/merged-worktree-removal.md` holds the merged-worktree procedure, which `implementation-pr-wrapup` and `practices-preflight` reach through this practice.
+
+Use `practices-retrospective` for a blameless retrospective: a look back over a finished or bounded session or delivery at what helped, what hindered and what to preserve, or at why a correction keeps recurring across sessions. It reads the actual records rather than summaries, explains each consequential outcome by its conditions (information, triggers, guidance, checks, environment, owner corrections) instead of blame, and opens the existing owner or check before proposing anything. It returns the smallest justified disposition as data: preserve a technique with its conditions, correct execution, a skill finding for `skill-audit`, a repository or check finding for the caller, an observation or assigned driver work for `practices-verification`, project-skill upkeep for `practices-verification-maintenance`, an investigation question, or no change. A finding authorizes reporting it; each change goes through its own workflow, and the account keeps proposed, implemented and proven apart.
 
 ### Spec boundary
 
