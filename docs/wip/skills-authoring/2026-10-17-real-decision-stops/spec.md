@@ -78,8 +78,8 @@ Repetitions: two fresh runs per case or variant on the new revision, and one pri
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 `program-design` | implemented | `e56839b6`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5` |
-| 2 `spec-program-review` | implemented | `c0b4e458`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5` |
+| 1 `program-design` | implemented | `e56839b6`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5`; behavior proof P1 (comparison shown), P2a, P2b, P2c 2/2, P2n 1/2 |
+| 2 `spec-program-review` | implemented | `c0b4e458`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5`; behavior proof P3 (comparison shown) |
 
 ## Review record
 
