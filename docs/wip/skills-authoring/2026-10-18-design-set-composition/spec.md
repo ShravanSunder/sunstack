@@ -4,16 +4,17 @@ Skill spec for one behavior change across six runs in `sunstack-dev`. Author: �
 
 ## Targets and runs
 
-| Run | Target (owner) | Files |
+| Run | Skill target | Files |
 | --- | --- | --- |
-| 1 | design-set layout, `shared-references/design-documents.md` (owned by `orchestrator-design`, its first loader) | `design-documents.md`; the caller restatement at `skills/spec-design/references/artifact-and-self-review.md:34` |
-| 2 | the two entries, density, diagram home, freshness on edit, `shared-references/diagram-rendering-and-fallbacks.md` (the medium owner) | `diagram-rendering-and-fallbacks.md` |
-| 3 | relationship-first diagram cases, `shared-references/diagram-semantics.md` | `diagram-semantics.md` |
-| 4 | `presentation-html` | `skills/presentation-html/SKILL.md`, `references/demistify.md` |
-| 5 | `docs-maintain` | `skills/docs-maintain/SKILL.md` |
-| 6 | `discuss-clarify-mental-models` (conflict C1) | `skills/discuss-clarify-mental-models/SKILL.md` |
+| 1 | `orchestrator-design` (first loader of the design-set contract) | `shared-references/design-documents.md` |
+| 2 | `spec-design` (the first phase consumer that MUST load the medium rule) | `shared-references/diagram-rendering-and-fallbacks.md`; its own restatement at `skills/spec-design/references/artifact-and-self-review.md:34` |
+| 3 | `presentation-html` | `skills/presentation-html/SKILL.md`, `references/demistify.md`; `shared-references/diagram-semantics.md` (step 3 loads it) |
+| 4 | `docs-maintain` | `skills/docs-maintain/SKILL.md` |
+| 5 | `discuss-clarify-mental-models` (conflict C1) | `skills/discuss-clarify-mental-models/SKILL.md` |
 
-Runs 2 and 4 depend on run 1, and run 5 depends on run 2. All six land in one PR. The version is the next sunstack-dev minor at merge time (#147 takes 2.87.0, the retrospective 2.88.0).
+Revision 2 regroups the six original runs into five (spec review F4), so each run names exactly one existing skill and each shared reference changes in exactly one run.
+
+Runs 2 and 3 depend on run 1, and run 4 depends on run 2. All five land in one PR. The version is the next sunstack-dev minor at merge time (#147 takes 2.87.0, the retrospective 2.88.0).
 
 ## Problem and evidence
 
@@ -52,17 +53,17 @@ When a document that a page embeds is edited, the embedded copy is regenerated a
 | D8 | **Relationship-first cases in DS.** Five worked cases, each with a counterexample, teach the question "what relationship must the reader understand?": entity identity and cardinality, an entry-to-effect path, ownership and dependency, a lifecycle, and a failure and recovery exchange. The page renderer's supported forms stay in the matching Demistify guide. MU's anti-catalog rule is unchanged. | Owner: "how and when to use different types of Mermaid diagrams"; D12 (user-confirmed) forbids a type inventory. Cases answer "how and when" without one. |
 | D9 | **C1 fix.** In `discuss-clarify-mental-models`, the map's medium follows DR. On a surface that renders drawings, the map is drawn (Mermaid or the surface's drawing). On a terminal that cannot, it uses `presentation-tui` structure or fenced text, and it says why. | DR:47–49 is the shared rule; the consumer must not claim the opposite default. |
 | D10 | **No new owner or mechanism:** no new skill, chunk registry, generator, renderer contract, schema or script. Every change extends an existing owner and updates its callers in the same cutover. | Hard cutover; both models agreed. |
+| D3-r2 (2026-10-18, supersedes D3) | D3 stands with one exact predicate. **A set with chunks or a page has `index.md`.** Only a set with neither chunks nor a page, one file per document, may let its document entries do the index's job. The index is navigation only. | Spec review F2: the success definition and D3 disagreed for four unsplit documents with a page. |
 
 ## Per-run surface allocation
 
 | Run | Main path | Depth | Proof |
 | --- | --- | --- | --- |
-| 1 | DD gains "Design set layout" (D1–D4 and D6's Markdown half) with one worked set: a large Specification split by capability, the others single files, and `index.md` with two reading paths. spec-design's artifact reference line 34 points to it. | DD itself (it is the reference) | P1, P2 |
-| 2 | DR gains "Two entries over one source" (D4–D6's page half), the diagram-home rule (D5) and freshness on edit (D7) beside its existing page proof. | DR itself | P1, P3 |
-| 3 | DS gains the five relationship cases (D8). | DS itself | P4 |
-| 4 | `presentation-html` step 1 recognizes a design-set page (islands per chunk, reading paths as presentations), and step 4's proof adds the regenerate-and-compare check (D7). | `references/demistify.md` names the `embed` command and the comparison | P1, P3 |
-| 5 | `docs-maintain` gains: an edit to a document an embedded page includes triggers D7, and a source/view relationship is kept, never forked. | none | P3 |
-| 6 | `discuss-clarify-mental-models:68` follows D9. | none | P5 |
+| 1 `orchestrator-design` | DD gains "Design set layout" (D1, D2, D3-r2, D4 and D6's Markdown half). Its one worked set has a Specification whose capabilities each answer a named reader question and change for their own reason, the other documents single files, and `index.md` with two reading paths. | DD itself | P1, P2 |
+| 2 `spec-design` | DR gains "Two entries over one source" (D4–D6's page half), the diagram-home rule (D5) and freshness on edit (D7) beside its page proof. spec-design's artifact reference line 34 points to DD's chunk rule instead of restating it. | DR itself | P1, P3 |
+| 3 `presentation-html` | Step 1 recognizes a design-set page (islands per chunk, reading paths as presentations), and step 4's proof adds the regenerate-and-compare check (D7). DS gains the five relationship cases (D8). | `references/demistify.md` names `embed` and the comparison | P1, P3, P4 |
+| 4 `docs-maintain` | An edit to a document an embedded page includes triggers D7; the source and view relationship is kept, never forked. | none | P3 |
+| 5 `discuss-clarify-mental-models` | Line 68 follows D9. | none | P5 |
 
 Triggers are unchanged in every run.
 
@@ -75,13 +76,13 @@ Basis: **user-directed intent** (the owner's words). Posture:
 
 | Case | Setup | Must |
 | --- | --- | --- |
-| P1, large set | An accepted Requirements and a 400-line Specification covering three capabilities; ask for the design documents and a page for review. | Chunk the Specification by capability with each identity in one chunk. Keep the other documents single unless a split passes D2's test. Write `index.md` with the document entries and at least one reading path. Build a page composing the same files with no normative prose of its own. Its embedded copy matches its sources. Control: does the prior revision chunk or index? |
-| P2, small set | A small feature with four short documents. | No chunking (the split hasn't earned its cost). No forced index beyond what D3 allows. |
-| P3, edit after build | An existing chunked set with a current page and embedded copy; ask for one obligation change. | Edit the owning chunk only, regenerate the embedded copy, compare it exactly, recheck the derived view naming that obligation, and report it current. Control: does the prior revision regenerate on edit? |
+| P1, separable capabilities | An accepted Requirements and a Specification with three capabilities. Each serves a different named reader question (import, sharing, retention), changes on its own schedule (different owners and releases are named in the Requirements), and shares only the entity definitions. Ask for the design documents and a page for review. | Split the Specification along those seams, putting shared entities in one chunk and each identity in exactly one chunk. Give the reason for each split as its reader question and its reason to change, not length. Keep the other documents single unless a split passes D2. Write `index.md` with the document entries and at least one reading path, and build a page composing the same files with no normative prose of its own; its embedded copy matches its sources. Control: does the prior revision chunk or index? |
+| P2, cohesive concern | A long Specification (similar length to P1's) for one protocol whose parts (handshake, framing, error recovery) each need the others to make sense. Two variants: with no page requested, and with a review page requested. | No split at any length: D2's test fails because each piece needs the others. Without a page: no separate `index.md` is required (D3-r2). With a page: `index.md` exists (D3-r2), and the page composes the unsplit files. Fail: splitting by length or by heading. |
+| P3, edit after build | An existing chunked set with a current page and embedded copy. Ask to change one obligation's threshold (a deadline from 2 s to 5 s) that a Verification Design proof row and a page view also state. | Change the canonical obligation once, in its owning chunk. Update the dependent proof row through its owner's rule and the derived view, and leave unrelated chunks unchanged. Regenerate the embedded copy and compare it exactly. Check the view's and the proof row's meaning separately from text equality, then report the page current. Control: does the prior revision regenerate and update the dependents on edit? |
 | P4, diagram choice | Three requests: a job's lifecycle, a retry exchange between two services, and a one-to-many entity relationship. | Choose by relationship (state, sequence, entity relationship) and reject a flowchart for each, giving the reason, with no type list. |
 | P5, map medium | A reconvergence request on a surface the request says renders Mermaid, and the same request on a terminal. | A drawn map on the first; on the second, `presentation-tui` or fenced text with the reason. |
 
-Two runs per case, plus one prior-revision control each for P1 and P3. Static: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts`, `tsc --noEmit`, `claude plugin validate .`.
+Two runs per case (P2's two variants count as cases), plus one prior-revision control each for P1 and P3. Before any run, the Lead checks that the P1 and P2 rubrics reject a length-only splitter and accept a cohesive unsplit document whatever its length (spec review F3). Static: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts`, `tsc --noEmit`, `claude plugin validate .`.
 
 ## Coordination
 
@@ -100,8 +101,9 @@ Two runs per case, plus one prior-revision control each for P1 and P3. Static: `
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1–6 | proposed | — |
+| 1–5 | proposed | — |
 
 ## Review record
 
-Pending: `skill-review` spec stage.
+- **Revision 1** (`15f00bbe`): `skill-review` spec stage, review lead codex-local `01a14e7e-cd06` with two Sol xhigh reviewers. Verdict `targeted-revision`, implementation decision `revise-first`. F1 (P3's "only" forbade dependent updates), F2 (two index rules), F3 (examples taught size), F4 (runs without a named skill), all important and accepted. Report: `/private/tmp/2026-10-design-docs-presentation/spec-review/spec-review.md`.
+- **Revision 2**: F1 → P3; F2 → D3-r2 and P2; F3 → P1 and P2 fixtures graded on reader questions and reasons to change, plus the run-1 worked set; F4 → five runs, each naming one skill. Original rows kept. Returned to the same review lead.
