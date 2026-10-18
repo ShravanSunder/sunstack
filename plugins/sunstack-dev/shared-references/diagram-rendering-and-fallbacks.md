@@ -52,13 +52,13 @@ A live `src` island needs HTTP serving and picks up later edits. For double-clic
 
 Whoever edits a Markdown file that an embedded copy includes keeps the page current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
 
-1. Change the fact once, in its owning chunk. A row in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design row whose passing condition uses a changed threshold is redone under `verification-design`'s rule for rows a changed obligation touches.
+1. Change the fact once, in its owning chunk. A row in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design row whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
 2. Use `presentation-html` to regenerate the embedded copy from the live source page to a temporary path, compare it byte for byte with the committed copy, and return `identical` or `stale`. A fresh regeneration carries each source's current text exactly, so a byte-identical committed copy carries it too. A stale copy is replaced by the regeneration and compared again.
 3. Recheck each derived view and dependent row that names an edited identity against the owning chunk's facts. Equal text says nothing about them.
 
 The page is current only when the comparison is `identical` and every rechecked view and row agrees with its chunk. Until then, report the page stale and name what differs.
 
-For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. `verification-design` redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The regenerated copy replaces the committed one and then compares identical. `entities.md` and `billing-export.md` stay untouched.
+For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. The Verification Design's owner redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The regenerated copy replaces the committed one and then compares identical. `entities.md` and `billing-export.md` stay untouched.
 
 ## Choose Each View's Medium
 

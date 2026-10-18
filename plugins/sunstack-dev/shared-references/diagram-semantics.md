@@ -79,11 +79,12 @@ Topology, where ownership labels ride the edges. Do not imply data flow when the
 Entity map, with each entity's identity rule and the cardinality on every edge:
 
 ```text
-┌───────────┐ 1      * ┌────────────┐ *      1 ┌────────────────────────┐
-│ Workspace │──────────│ Membership │──────────│ User                   │
-└───────────┘          └────────────┘          │ same user when their   │
-                                               │ verified emails match  │
-                                               └────────────────────────┘
+┌───────────────────┐ 1      * ┌────────────────────┐ *      1 ┌────────────────────────┐
+│ Workspace         │──────────│ Membership         │──────────│ User                   │
+│ same workspace    │          │ same membership    │          │ same user when their   │
+│ when its URL slug │          │ when the user and  │          │ verified emails match  │
+│ matches           │          │ workspace match    │          └────────────────────────┘
+└───────────────────┘          └────────────────────┘
 ```
 
 Wrong-family red flags:
