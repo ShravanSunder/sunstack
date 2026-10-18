@@ -76,17 +76,17 @@ How to judge: walk every capability; do not sample. Follow each key through the 
 ```text
 capability key and purpose (Requirements)
   -> its home U rows (Requirements)
-  -> the R obligations those rows reach, under the same key (Specification)
-  -> one trace row per R, under the R's home key (Program Design)
-  -> the rows for its U rows, under the same key (Verification Design)
+  -> each R those rows reach, under that R's own home key (Specification)
+  -> that R's one trace row, under the same R home (Program Design)
+  -> the Verification Design row for each home U row, under this capability
   -> its through-line, when the set has an index
 ```
 
-The line holds when each document carries the same key over the rows the document before it passed on. It stops at the first document where the capability's rows are missing, filed under another key, or grouped under a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
+Keep two homes apart. Every `U` on this line is homed here, but an `R` it reaches has one home of its own, which may be another capability. An `R` homed elsewhere belongs to this line when it names this capability under "also serves": follow it to its single trace row, grouped under its own home, then return to this capability for its `U` rows' Verification Design rows. A row's key is its group heading, or the key in its `R` cell or requirement field; read either. The line stops at the first document where a link is missing, a row sits under a key that is not its home, or a group carries a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
 
-- a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or whose `R` sit under no key or another key, stops at the Specification: both route to `spec-design`;
-- an `R` with no trace row, or a row grouped under another capability, stops at Program Design: `program-design`;
-- no row for the capability's `U` rows, or rows grouped under another key, stops at Verification Design: `verification-design`;
+- a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or reach an `R` that has no home, has two homes, or is homed elsewhere without naming this capability under "also serves", stops at the Specification: both route to `spec-design`;
+- a reached `R` with no trace row, or whose trace row sits under a key other than that `R`'s home, stops at Program Design: `program-design`;
+- a home `U` row with no Verification Design row, or whose row sits under a key other than this capability, stops at Verification Design: `verification-design`;
 - a through-line that skips a step or links the wrong section goes to the phase that owns that document's step.
 
 In a broken copy of the job-submission set:
@@ -95,11 +95,16 @@ In a broken copy of the job-submission set:
 billing-export  U5 U6 -> R7 R8 R9 -> trace rows R7 R8 R9 -> no Verification Design row names U5 or U6
                 stops at Verification Design; route verification-design
 
-scheduling      U3 U4 -> no R traces to U3 or U4
+scheduling      U3 -> no R traces to U3
                 stops at the Specification; route spec-design
+                U4 -> R9, homed in billing-export, also serves scheduling
+                   -> R9's one trace row, under billing-export -> U4's row, under scheduling
+                this link holds
 ```
 
-The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier. Program Design and Verification Design may still have sections headed scheduling, but with no `R` behind them they realize and prove nothing the owner asked for here. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier, at U3. Program Design and Verification Design may still have sections headed scheduling, but nothing there realizes or proves U3 without an `R` behind it. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+
+U4's link is complete although R9 lives in billing-export: R9 names scheduling under "also serves", has one trace row under its own home, and U4's row sits under scheduling. It would stop at the Specification if R9 did not name scheduling, at Program Design if R9's trace row sat under scheduling, and at Verification Design if U4's row sat under billing-export.
 
 A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
 

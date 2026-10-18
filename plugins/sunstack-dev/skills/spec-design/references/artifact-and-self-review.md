@@ -62,7 +62,7 @@ need U1 when present
                       -> proof obligation V1
 ```
 
-When the capability map fires, this chain runs inside one capability.
+When the capability map fires, start this chain at one capability's home `U` rows. An `R` they reach may live in another capability that names this one under "also serves"; follow that link instead of copying the `R`.
 
 Diagrams may explain relationships but may not be the only home of normative meaning.
 
