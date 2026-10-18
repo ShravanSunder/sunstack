@@ -1,6 +1,6 @@
 # Design sets: one source, two reading paths
 
-Skill spec for one behavior change across six runs in `sunstack-dev`. Author: 🦁 Lead (Claude a6321a2f). Base: `origin/main` at `5fd04c9f`, branch `skills/design-set-composition`.
+Skill spec for one behavior change across five runs (regrouped from six in revision 2) in `sunstack-dev`. Author: 🦁 Lead (Claude a6321a2f). Base: `origin/main` at `5fd04c9f`, branch `skills/design-set-composition`.
 
 ## Targets and runs
 
