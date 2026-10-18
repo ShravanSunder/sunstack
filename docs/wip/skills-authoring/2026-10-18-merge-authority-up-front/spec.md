@@ -85,7 +85,7 @@ Two runs per case (P5a–c each count as a case), plus one prior-revision contro
   - #147 (`skills/real-decision-stops`) touches neither file.
   - The retrospective (`skills/practices-retrospective`) touches neither file.
   - All three bump sunstack-dev, so the version is settled at merge time.
-- One changelog entry. An Opus skill Worker implements; Sol reviewers work under `skill-review`; Sol agents run the proof.
+- One changelog entry. An Opus 5.5 native Worker writes the skill files. This follows the owner's explicit form override, 2026-10-15: "since this skills you can use opus 5.5 worker with all teh skilsl to write isntad of a sidekickick and tehy msut follow the rules", narrowed on 2026-10-17 to "only opus agents for creating the skills is that clear. all other work goes through sol". Sol reviewers work under `skill-review`, and Sol agents run the proof.
 
 ## Non-goals
 
@@ -101,5 +101,5 @@ Two runs per case (P5a–c each count as a case), plus one prior-revision contro
 
 ## Review record
 
-- **Revision 1** (`129678af`): `skill-review` spec stage, review lead codex-local `01a14e75-8775` with two Sol xhigh reviewers. Verdict `targeted-revision`, implementation decision `revise-first`. F1 (find versus reconcile), F2 (the ask across the handoff), F3 (reachable P4 and P5 seams), all important and accepted. U1 (Worker form) was answered with the owner's rule "only opus agents for creating the skills". Report: `/private/tmp/2026-10-merge-authority/spec-review/spec-review.md`. The 🦉 Advisor's separate second look (MA-A1 to MA-A3, `/private/tmp/2026-10-merge-authority/advisor-second-look.md`) agrees on all three.
+- **Revision 1** (`129678af`): `skill-review` spec stage, review lead codex-local `01a14e75-8775` with two Sol xhigh reviewers. Verdict `targeted-revision`, implementation decision `revise-first`. F1 (find versus reconcile), F2 (the ask across the handoff), F3 (reachable P4 and P5 seams), all important and accepted. U1 (Worker form) is answered with the owner's 2026-10-15 form override ("opus 5.5 worker ... instead of a sidekick") and the 2026-10-17 lineage rule, both quoted in Coordination. Report: `/private/tmp/2026-10-merge-authority/spec-review/spec-review.md`. The 🦉 Advisor's separate second look (MA-A1 to MA-A3, `/private/tmp/2026-10-merge-authority/advisor-second-look.md`) agrees on all three.
 - **Revision 2**: F1 and MA-A1 → D3-r2; F2, MA-A2 and MA-A3 → D5-r2 and D7-r2; F3 → P4 bounded continuation, P5a–c, plus P6 and P7. Original rows kept. Returned to the same review lead.
