@@ -411,7 +411,7 @@ describe("user requirements and design-view contracts", () => {
       "return the brief to your commissioner with the exact recipient gap",
     );
     expect(brief).toContain(
-      "When that commissioner is the owner, state the gap and keep the brief unsent",
+      "When that commissioner is the owner, keep the brief unsent: hold it in the work's artifact or trace for the Chief of Staff, and reply with only the recipient gap and where the brief is held, never its options or recommendation.",
     );
     expect(brief).toContain(
       "A question tool may ask only the brief's recipient for the final pick",
