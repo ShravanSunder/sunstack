@@ -79,7 +79,7 @@ Repetitions: two fresh runs per case or variant on the new revision, and one pri
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 `program-design` | implemented | `e56839b6`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5`; D5-r3 routing correction `bb9fb48a`, unsent-brief hold `440ed893`; behavior proof P1 (comparison shown), P2a, P2b, P2c 2/2, P2n 1/2 |
+| 1 `program-design` | implemented | `e56839b6`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5`; D5-r3 routing correction `bb9fb48a`, unsent-brief hold `440ed893`; behavior proof P1 (comparison shown); P2a first-stop 1/2, eventual full briefs 2/2 (one run briefed only after a stop-review hook resumed it); P2b, P2c 2/2; P2n 1/2; R1 (D5-r3) R1a 2/2, R1b 2/2 at `c141d038` (judgments in the gate-incident proof folder) |
 | 2 `spec-program-review` | implemented | `c0b4e458`; version and changelog `e25d7ae4`; Lead-assessment corrections `505202b5`; D5-r3 routing correction `bb9fb48a`, unsent-brief hold `440ed893` (contract test); behavior proof P3 (comparison shown) |
 
 ## Review record
