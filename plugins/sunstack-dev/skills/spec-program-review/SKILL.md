@@ -75,7 +75,6 @@ For operation `review`, require:
 mode and complete target identities: file paths or separately labeled in-chat records
 governing sources, authority states, and coverage basis
 confirmed goal boundary and accepted requirements set, or the exact authority gap
-structural-realization confirmation for program-only or four-document-design (an owner confirmation or `waived by owner`), or the exact owner decision still needed
 constraints and non-goals
 risk predicates
 claimed proof evidence or gaps
@@ -92,7 +91,7 @@ Use the owner-confirmed requirements record and confirmed goal boundary when ava
 
 A combined `Requirements/spec`, a Requirements-titled artifact that also stands in for the Specification, or an absent separate Requirements or Specification identity is a concrete blocker-level design finding, not permission for review to infer the missing identity. Record `needs-revision`, route the smallest correction to `spec-design`, and do not repair or create either artifact during review. Continue only with bounded findings that the available sources can support; never return `ready`.
 
-`program-only` also requires the governing Specification. `four-document-design` requires the current Requirements, Specification, Program Design, and Verification Design. A missing confirmed goal boundary, or missing structural-realization confirmation for `program-only` or `four-document-design`, may produce `decision-needed`; review does not infer acceptance from silence or a status label. A recorded `structural-realization confirmation: waived by owner` is the confirmation: review proceeds and judges the design on its merits. A packet claim, a goal-boundary confirmation, or a `locally-ready` label is neither a confirmation nor a waiver.
+`program-only` also requires the governing Specification. `four-document-design` requires the current Requirements, Specification, Program Design, and Verification Design. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label.
 
 Completion: the complete target set, governing sources, accepted requirements, boundaries, open authority decisions, and any prior-coverage semantic-change record are unambiguous; any missing-history baseline is recorded with its reason.
 
@@ -222,7 +221,7 @@ Do not return `ready` while any of these hold:
 - the current target identity or semantic scope is missing or ambiguous;
 - Requirements and Specification are not separately identifiable in any review mode, or a combined `Requirements/spec` is being used as both;
 - the complete target or governing-source set was not read;
-- the confirmed goal boundary, accepted requirements, or applicable structural-realization confirmation is missing or conflicting without an explicit returned authority gap;
+- the confirmed goal boundary or accepted requirements are missing or conflicting without an explicit returned authority gap;
 - no complete semantically current mode-complete check exists;
 - a selected check has no status;
 - partial or blocked coverage affects a required dimension;
