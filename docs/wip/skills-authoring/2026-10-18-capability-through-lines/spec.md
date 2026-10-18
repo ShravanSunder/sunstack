@@ -93,13 +93,14 @@ D8.
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 | implemented | `05c069ed`, author self-check fixes `03d726cb` |
-| 2 | implemented | `064bffc5`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (artifact chain) and F2 `8ddb89fb` (Requirements-only map) |
-| 3 | implemented | `197f59e8`, author self-check fixes `03d726cb` |
-| 4 | implemented | `b9668624`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (through-line walk), its R1c retest fix `7ad636fd` (heading and cell keys agree), and implementation review F3 `5d3431ee` (a row's own home key first, D5's group-or-cell choice kept; supersedes `7ad636fd`'s blanket agreement rule) |
+| 1 | reviewed | `05c069ed`, author self-check fixes `03d726cb` |
+| 2 | reviewed | `064bffc5`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (artifact chain) and F2 `8ddb89fb` (Requirements-only map) |
+| 3 | reviewed | `197f59e8`, author self-check fixes `03d726cb` |
+| 4 | reviewed | `b9668624`, author self-check fixes `03d726cb`, implementation review F1 `98dcf6b0` (through-line walk), its R1c retest fix `7ad636fd` (heading and cell keys agree), and implementation review F3 `5d3431ee` (a row's own home key first, D5's group-or-cell choice kept; supersedes `7ad636fd`'s blanket agreement rule) |
 
 ## Review record
 
 - Spec review 1 at `1a9419a9`: `targeted-revision`, revise first; F1–F4 accepted, all important (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review.md`). This revision answers F1 with D6-r1, F2 with D9 and the Run 2 allocation, F3 with P1's two-turn owner setup, and F4 with P6a and P6b. It goes back to the same review lead.
 - Correction round 2 at `91d640bf`: F1–F4 closed; F5 accepted (D9's "one view per set" contradicted D2's map in both documents). D9 now gives one map per document, each covering the whole set (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review-r2.md`).
 - Correction round 3 at `71ce7973`: F5 closed; open findings 4 → 1 → 0. Verdict `great`, `accepted-to-implement` (`/private/tmp/2026-10-capability-through-lines/spec-review/spec-review-r3.md`).
+- Implementation review: round 1 `targeted-revision` (F1, F2), round 2 `targeted-revision` (F3, from the R1c retest fix), round 3 `great` at `f6d5718e`, findings 2 → 1 → 0 (`/private/tmp/2026-10-capability-through-lines/impl-review/`). Proof: `/private/tmp/2026-10-capability-through-lines/proof/judgment.md` and `judgment-r1.md`.
