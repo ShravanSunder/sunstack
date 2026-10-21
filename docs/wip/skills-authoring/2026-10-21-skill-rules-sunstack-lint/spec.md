@@ -45,6 +45,8 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 | D7 | R2 adds a repository `sunstack.lint.json` at the root with one RuleSet whose target input binds `plugins/**/SKILL.md`. It also adds a CI workflow that runs `npx --yes @sunstack/cli@0.1.0 lint --check`, then `lint --all` for the mechanical rules. Judged rules are `off` in CI: no key, no cost. | A credential-free CI is the safe default. Judged rules need a key and cost money per selected unit; enabling them later is the owner's choice. |
 | D6-r2 (2026-10-21, supersedes D6) | D6 stands, and its rewrite boundary also covers hosts the engine cannot mark. `frontmatter-design.md`'s "Required Shape" (`:9–15`) states the `name` charset, the 64-character limit, the folder-name match and the 1024-character `description` limit inside one fenced block. A fence can't host a marker, and marking the section would bundle several standards into one rule. So R2 restates that block as one list item per standard, each item carrying its own subject, in the same reference, and removes the fence, so each standard is still stated once. The folder-name match stays unmarked (review-only: it needs the file path, which no selected unit holds). | The Implementer's preparation found this (push 01a15c18). These are the most deterministic standards `skill-creation` owns; leaving them fenced would keep the best checks out of reach. The restatement keeps one home per standard and changes no rule's meaning. |
 | D8 | A mechanical rule that current skills already violate starts at `warn`, and rules every current skill passes start at `error`. R2 fixes no other skill's text; violations are listed for follow-up. | Fixing another skill's description changes its trigger surface, which is a behavior change to that skill and needs its own run. `warn` keeps CI useful without failing on day one. |
+| D2-r2 (2026-10-21, supersedes D2; spec review SR1, SR2) | D2's split stands, and gains two conditions. **(a) The lint front door applies only when lint can run the RuleSet:** the RuleSet declares exactly one `document` input and a `sunstack.lint.json` names it. Under that condition, `lint --check` validates wiring, `lint --rules` gives the inventory, and the CI job runs lint. Any other RuleSet shape the engine supports (for example a separate `calibration` context input) stays on `exec check_rules`, and no lint pass is claimed for it. Native print (`exec check_rules` with `assembled_rules`) is required for every RuleSet. **(b) Native calibration runs a mechanical-only view.** Build the `exec evaluate_rules` request from the assembled mechanical definitions alone: the same rule ID, target, predicate or `ast_grep` rule, and severity, compared field by field against the print. Judged definitions are left out, so no backend or credential is reachable. Calibration closes only when the intended good occurrence is `completed/pass`, the intended bad occurrence is `completed/fail`, and the report shows zero model requests and inference attempts. Setting judged rules `off` in a lint config is not the same thing: native input has no lint-off policy. | `lint` rejects anything but exactly one document input (`config_validation.rs:122–145`, research report :195), while `markers-and-rules.md:80–95` permits and requires a bound calibration input. Native `RuleInvocationInput` carries no lint-off policy, and the research succeeded through a separate mechanical-only view. |
+| D9 (2026-10-21, spec review SR4) | **Sensitive surfaces, classified before any outline.** **(1) Running the pinned CLI** (`npx --yes @sunstack/cli@0.1.0`): *allowed*. It's an exact-version package with npm SLSA provenance, and on first run it fetches the release binary from GitHub. Local and CI execution read only the repository's files, use no credential, make no model call (D2-r2b, judged rules off), and write only npm and package caches. **(2) The new repository CI workflow** (R2): *allowed*, bounded to `on: pull_request` and `push` to `main`; `permissions: contents: read`; no secrets or environment variables holding credentials; actions pinned to full commit SHAs; network limited to the npm registry and GitHub release downloads; and nothing written beyond the runner workspace. Proof: the workflow's YAML is `actionlint`-clean, and its first PR run is observed. **(3) The post-merge Codex/Claude cache refresh:** *deferred*. It's a home-level mutation outside this PR, done only when the owner scopes it as usual. Public-safety: no paths, accounts or credentials go into the workflow, README or changelog. | `skill-creation` `security-gate.md:3–25` requires the decision before outlining a sensitive surface, and spec-review blocks acceptance while surfaces are unclassified. These classifications carry existing authority accurately and widen none. |
 
 ## Surface allocation
 
@@ -52,13 +54,14 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 - **Trigger.** In the description, `sunstack-rule` becomes the `sunstack` CLI, and the `check_rules` refusals clause is kept, since the operation name is unchanged. Update the `agents/openai.yaml` default prompt to match.
 - **Main path (`SKILL.md`).**
   - `:22` names the `sunstack` CLI README and schemas and the pinned install.
-  - Step 5 completion uses `sunstack lint --check` plus `exec check_rules` print.
-  - Step 6 completion keeps the outcome criteria and names `exec evaluate_rules` for calibration.
+  - Step 5 completion: when D2-r2(a)'s condition holds, `sunstack lint --check` plus `exec check_rules` print; otherwise `exec check_rules` print alone.
+  - Step 6 completion keeps the outcome criteria and names `exec evaluate_rules` on the mechanical-only view (D2-r2b), with zero model requests.
   - The completion blockers say "the real `sunstack` binary".
 - **Depth.**
   - `references/check-and-reports.md`:
     - the "Run the engine" section names `sunstack exec` (request on stdin);
-    - a new short "Front doors" passage maps `lint --check`, `lint --rules`, `exec check_rules` and `exec evaluate_rules` to what each shows, with the two lint limits (no wording; passing mechanical results dropped);
+    - a new short "Front doors" passage maps `lint --check`, `lint --rules`, `exec check_rules` and `exec evaluate_rules` to what each shows, with the two lint limits (no wording; passing mechanical results dropped) and the exactly-one-document-input condition (D2-r2a);
+    - the calibration section teaches building the mechanical-only `evaluate_rules` request from the print, with the equivalence check and the zero-model-request requirement (D2-r2b);
     - the CI section names the concrete command (D5);
     - lint's exit codes are added beside exec's.
   - `references/markers-and-rules.md`:
@@ -69,7 +72,7 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 
 **R2**
 - **Trigger and main path.** No change to `skill-creation`'s description or route.
-- **Depth.** Markers on the `skill-creation` hosts that pass the matrix, and wording rewrites only where a host is a fragment (D6), each rewrite inside the reference that owns it. A rules file is paired with each marked Markdown file.
+- **Depth.** Markers on the `skill-creation` hosts that pass the matrix, plus host repairs only where D6-r2 allows them: a fragment whose subject sits in a lead-in, or a standard held in a host the engine cannot mark (the fenced Required Shape block). Each repair goes inside the reference that owns it, and each standard keeps one home. A rules file is paired with each marked Markdown file.
 - **Repository.** `sunstack.lint.json`, `rules/skill-standards.ruleset.json` (or the nearest repository convention), the CI workflow, a README note, and a changelog entry.
 - **Proof.** As planned below.
 
@@ -79,6 +82,8 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 - **R1 proof (a reference skill: retrieval and correct use).**
   1. Every command block in the updated skill runs as written against the Researcher's fixture with `npx --yes @sunstack/cli@0.1.0`, with outputs kept. The recorded exits and fields are the expectations.
   2. A static grep shows no `sunstack-rule`, `block`, `nudge` or `block_at_or_below` left in the skill's files, apart from a deliberate "the old word is refused" mention.
+  2a. **Two-input control (SR1).** A valid RuleSet with `skill` and `calibration` document inputs keeps both bindings, completes `exec check_rules` print, and is not claimed as a lint pass. Lint's refusal of it is recorded as the reason.
+  2b. **Mixed-RuleSet control (SR2).** On a RuleSet holding one mechanical and one judged rule, the mechanical-only `evaluate_rules` request matches the print field by field, closes good `pass` and bad `fail`, and reports zero model requests and inference attempts. Lint's `off` setting alone is not accepted as closing it.
   3. One fresh agent with no authoring history gets a realistic request ("make these two standards in this skill checked rules and prove them") on a copy of the fixture skill, with no hint of the checks. The checks, written beforehand and kept outside its directory:
      - it validates with `lint --check`;
      - it prints with `exec check_rules` and `assembled_rules`;
@@ -91,8 +96,10 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
   1. `lint --check` passes on the repository config.
   2. `exec check_rules` print lists every intended rule ID, the count and each question's wording, read against its standard.
   3. Every mechanical rule records a good `completed/pass` and a bad `completed/fail` through `exec evaluate_rules`, on fixtures copied from real `SKILL.md` files with one edit.
-  4. A negative control (an orphaned marker and a missing entry) makes the CI command exit 2 locally.
-  5. The CI job runs green on the PR, and its findings list matches a local `lint --all` run.
+  4. Negative controls make the CI command exit 2 locally: an orphaned marker, a missing entry, and an over-cap host.
+  5. **Coverage against an independent inventory (SR3).** List the shipped skill files independently with `git ls-files 'plugins/*/skills/*/SKILL.md'` (70 at `e34ad3f8`: 62 sunstack-dev, 5 skill-authoring, and one each in agent-router, ai-scaffold and dev-workflow-tools). Compare that list with the files the config's target binding resolves, using `sunstack lint --rules <file>` per file or the report's per-file settings. The two sets must be equal. A control config that drops one plugin subtree must fail the comparison.
+  6. **Expected findings.** Every rule that starts at `warn` under D8 has its current violations listed by rule and file before the CI run. The CI report must show exactly those findings at those locations, which proves the rules ran on those files. Equality of two possibly incomplete runs isn't enough.
+  7. The CI job runs on the PR; its conclusion and findings are read from the run.
 
   Judged rules are proven as check plus print only; hosted judging is unproven.
 
@@ -100,14 +107,14 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 
 - **Base.** `ShravanSunder/sunstack` (this repository, formerly ai-tools), `main` at `e34ad3f8`. Branch `feat/skill-rules-sunstack-lint`, worktree `/Users/shravansunder/dev/ai-tools.feat-skill-rules-sunstack-lint`.
 - **Pending edits.** None on these skills on `main` (checked 2026-10-21).
-- **Version and changelog.** skill-authoring `0.4.0` → `0.5.0` once, in the PR, covering both runs. One dated changelog entry under `docs/changelog/` plus its README row. Codex and Claude caches refresh after merge, as a post-merge step.
+- **Version and changelog.** skill-authoring `0.4.0` → `0.5.0` once, in the PR, covering both runs. One dated changelog entry under `docs/changelog/` plus its README row. The Codex and Claude cache refresh is deferred until the owner scopes it (D9.3).
 - **Engine pin.** `@sunstack/cli@0.1.0`. A later engine release that changes these surfaces reopens D2.
 
 ## Non-goals
 
 - Code targets (Swift, Rust, TypeScript) in the engine. That's a separate sunstack-tools design.
 - Hosted calibration of judged rules, or enabling judged rules in CI.
-- Changing any skill's teaching other than R2's fragment rewrites in `skill-creation`, and fixing other skills' violations (D8).
+- Changing any skill's teaching other than R2's D6-r2 host repairs in `skill-creation` (fragments and unmarkable hosts), and fixing other skills' violations (D8).
 - A uv/PyPI channel; renumbering existing markers; the TS port of verification fixtures.
 
 ## Run status
