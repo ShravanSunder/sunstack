@@ -34,7 +34,7 @@ Open each document section with at most one framing line that states no rule and
 
 ## When the set is incomplete
 
-- **No `index.md`.** Build the page with one island per document, in the canonical four-document order. Add no Walkthrough and no reading path. Name the missing `index.md` on the page, in one framing line, and as a gap to the caller. The canonical order originates no fact.
+- **No `index.md`.** Build the page with one island per document, in the canonical four-document order. Add no Walkthrough and no reading path, and return the missing `index.md` to the caller as a gap. The canonical order originates no fact.
 - **Extra documents** beyond the four, such as an alternatives study. Give each its own island outside the four questions, and do not fold it into one of them.
 
 Load the matching component references through `demistify.md`. The public guide owns all markup and visual tokens.

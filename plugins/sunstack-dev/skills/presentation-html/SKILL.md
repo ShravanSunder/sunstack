@@ -46,7 +46,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - One card is one named component, option or finding, never a frame around a section.
    - A callout carries a summary, proposal, decision, risk, open question or unverified outcome; give a proposal explicit "Proposed" wording, and keep a recommendation distinct from an owner's choice.
    - One visual per point, next to the text it supports.
-   - Library styling only: no page colors, fonts, shadows, borders or width caps of your own. Layout CSS the guide allows (grid, flex, gaps, a scroll wrapper around a wide table) is fine.
+   - Library styling only: no page colors, fonts, shadows, borders or width rules of your own. The layout CSS the guide itself allows (grid, flex, gaps) is the limit; a wide table the bound release crushes at phone width is a release gap to name, not a width to set.
    - Reading width for text; Canvas only for views that need the room.
    - Long detail sits one action away (a tab, a disclosure, a linked island), so nothing becomes a text wall. A disclosure's title names the failure cases inside it; a tab keeps a short label, and the text that introduces it names its failure cases.
    - No `xychart-beta` until it supports series names; use stats and a table.
@@ -57,12 +57,12 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - Markdown rendered, never literal; a real SVG for every Mermaid island, including inactive tabs once opened;
    - no blank, clipped or overlapping content or labels; the outline lists each heading once;
    - the answer is on the first screen; no text wall (on a design-set page, whole documents stacked in one scroll are a text wall); no card or callout framing ordinary prose;
-   - no authored colors, fonts, shadows or width caps; one shared left edge when the bound release provides it;
+   - no authored colors, fonts, shadows, borders or width rules; one shared left edge when the bound release provides it;
    - at phone width nothing overflows and no control covers content;
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
    - each named view's signal from `views.md` holds.
 
-   IF the page has an embedded copy, regenerate it and compare it by `demistify.md`'s method; return `identical`, or `stale` with the copy replaced and compared again. Matching text proves nothing about a view, so check each view against its owning source's current facts ([a passing check proves only what it observes](../principle-prove-it-works/SKILL.md)). Completion: every item your markup controls passes, and each remaining gap names the release or opening-method limit you observed; static success alone cannot close this step.
+   IF the page has an embedded copy, regenerate it and compare it by `demistify.md`'s method; return `identical`, or `stale` with the copy replaced and compared again. Matching text proves nothing about a view, so check each view against its owning source's current facts ([a passing check proves only what it observes](../principle-prove-it-works/SKILL.md)). Report gaps in your return, not on the page: a reader sees a limit only when the design itself records it. Completion: every item your markup controls passes, and each remaining gap names the release or opening-method limit you observed; static success alone cannot close this step.
 
 6. **Return** the file link or authorized hosted URL, screenshots, recorded library release, the embedded-copy result when there is one, and what was verified with its limits. Loading public library assets does not publish the page. IF comparing efficiency, report authored HTML, referenced data and shared library costs separately. Completion: the reader can open the result and see what was actually verified.
 
