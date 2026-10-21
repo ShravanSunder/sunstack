@@ -126,4 +126,7 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 
 ## Review record
 
-Not yet reviewed. The spec stage is `skill-review`'s spec stage, run on this doc before any skill file changes.
+- **Spec stage** (`skill-review`, retained Sol xhigh review lead with independent structure and teaching reviewers). Report: `/private/tmp/2026-10-sunstack-runner/skill-spec-review/skill-rules-cli-spec-review.md`.
+- **Revisions reviewed:** initial `c55736d3`; D6-r2 at `8870b856`; SR1–SR5 corrections at `398cc1fc`; SR3 canary refinement at `44bc8db3`.
+- **Findings:** SR1 (the lint single-document-input condition), SR2 (mechanical-only native calibration), SR3 (independent all-skill coverage), SR4 (sensitive-surface decisions) and SR5 (scope summaries). All closed, 5 → 1 → 0, with no recurrence.
+- **Verdict:** great. **Implementation decision:** `accepted-to-implement` for the whole two-run spec at `44bc8db3`. R1 may implement; R2 waits until R1 is `reviewed`. Acceptance is not implementation proof, a CI result, hosted judging, a release or a cache refresh.
