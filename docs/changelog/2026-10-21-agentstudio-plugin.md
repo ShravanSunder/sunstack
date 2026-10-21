@@ -6,6 +6,7 @@
 - Includes three plugin manifests and marketplace entries, Codex presentation metadata, a plugin README and catalog entry; no hooks or provider configuration changes.
 - `plugin-sources.json` keeps the upstream pin pending until the matching CLI and identical skill text land.
 - Cursor uses its `pluginRoot`-relative source path, matching the installed resolver and existing `agent-router` entry.
-- Validation: 21 static invariants, skill validator, Claude plugin/marketplace validation and whitespace checks passed; three fresh advisory cases captured actual skill reads.
-- New app CLI/age behavior, installed discovery and duplicate-skill precedence remain unverified; this is a draft awaiting the matching app release.
-- Refresh/reinstall: not performed for Codex, Claude Code or Cursor; app-package delivery is retained; app and skill release together.
+- Validation: [25 source checks](references/2026-10-21-agentstudio-plugin-validation.md), skill/Claude validators and whitespace checks passed; three advisory cases captured actual skill reads. Added exact-name and declared-root assertions after negative controls exposed gaps in the original 21.
+- Disposable-home verification observed Claude install/discovery and Codex install with matching bytes. Codex discovery and Cursor remain authentication-blocked; automatic invocation and duplicate-copy precedence remain unverified.
+- App CLI/age behavior and the upstream pin remain pending; this draft awaits the matching joint app/skill release.
+- Owner installations/caches are unchanged; verification used disposable homes. App-package skill delivery is retained.
