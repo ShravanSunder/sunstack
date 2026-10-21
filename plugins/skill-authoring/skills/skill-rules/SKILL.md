@@ -19,7 +19,7 @@ Most of a skill should never become a rule. Each standard lands in exactly one o
 
 Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. The proxy may be marked too, but only on its own wording that says exactly what it checks, and the decision table records it as a proxy for the standard it approximates.
 
-The engine's docs own every exact schema: the `sunstack` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry. Use the repository's pinned CLI version through `npx --yes @sunstack/cli@<version>`, or its Homebrew or shell-installed `sunstack` at that version.
+The engine's docs own every exact schema. Use the repository's pinned CLI version through `npx --yes @sunstack/cli@<version>`, or its Homebrew or shell-installed `sunstack` at that version. Before writing an entry, read the engine's public docs at the matching tag, `https://github.com/ShravanSunder/sunstack-tools/tree/v<version>/`: the root README, exec protocol, schemas, examples and release config schema listed under "Engine docs" in `references/check-and-reports.md`. Read local engine docs only when the working repository ships the engine itself at that version. A consumer repository or installed npm package need not contain those files.
 
 ## Workflow
 

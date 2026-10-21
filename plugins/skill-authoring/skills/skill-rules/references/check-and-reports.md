@@ -2,6 +2,25 @@
 
 This reference owns step 6: running the engine's check, print and local evaluation, reading what comes back, and deciding whether each rule is proven. Expected input: the wired RuleSet and the invocation that runs it, the intended rule IDs and which of them are mechanical, and for each mechanical rule one good and one bad example. Return: the check outcome and rule count; each intended rule's printed wording and your reading of it; for each mechanical rule, the good and bad occurrences with their completed results; and what stays unproven.
 
+## Engine docs
+
+Replace `<version>` below with the repository's CLI pin, without a leading `v`. Read these public files before authoring definitions; their tag must match the binary. The raw URLs work in a consumer repository with no engine checkout. Follow relative schema references and example dependencies from the same tag.
+
+| contract | version-matched public file |
+| --- | --- |
+| installation and lint overview | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/README.md` |
+| native stdin protocol, operations and exits | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/crates/sunstack/README.md` |
+| RuleSet shape | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/schemas/rule-set.schema.json` |
+| native runtime input | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/schemas/rule-invocation.schema.json` |
+| native check/print input | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/schemas/check-rules-input.schema.json` |
+| marker-keyed rules entries | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/schemas/rule-source.schema.json` |
+| marked-source RuleSet example | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/examples/marked-standards.ruleset.json` |
+| complete check/print request example | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/examples/marked-standards.check.request.json` |
+| mechanical runtime input example (wrap in the exec protocol frame) | `https://raw.githubusercontent.com/ShravanSunder/sunstack-tools/v<version>/docs/specs/2026-10-12-rust-rule-engine/examples/mechanical.invocation.json` |
+| lint config schema release asset | `https://github.com/ShravanSunder/sunstack-tools/releases/download/v<version>/sunstack.lint.schema.json` |
+
+The tagged `docs/specs/2026-10-12-rust-rule-engine/examples/` directory holds the companion files. Adapt example paths and bindings to the consumer repository; do not assume the example's engine-repository paths exist locally. If a public file cannot be retrieved, report the missing contract instead of guessing its shape. When the working repository ships the matching engine source, its copies of these files and its verification skill may supply the same contracts. Relative links in an installed package README do not establish that the package contains their targets.
+
 ## Run the engine
 
 `sunstack exec` reads one JSON request on stdin and writes one JSON response on stdout:
@@ -14,7 +33,7 @@ Use the repository's pinned version: `npx --yes @sunstack/cli@<version> exec < r
 
 ### Front doors
 
-Lint applies only when the RuleSet declares exactly one `document` input and a `sunstack.lint.json` names it. Under that condition, use these lint commands with the repository's pinned CLI; `--config <file>` selects the intended config explicitly:
+Use the repository's pinned CLI for every row below. The two lint rows apply only when the RuleSet declares exactly one `document` input and a `sunstack.lint.json` names it; `--config <file>` selects that config explicitly. The native `exec` rows apply to every supported RuleSet; evaluation uses its mechanical-only calibration view.
 
 | command | what it shows |
 | --- | --- |

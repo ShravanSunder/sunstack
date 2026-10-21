@@ -2,7 +2,7 @@
 
 This reference owns steps 3 to 5: where each marker goes, the rules entry behind it, wiring the pair into the RuleSet that runs it, and repairing what `check_rules` refuses. Expected input: the deterministic and model-judged standards from step 2, each with its `path:line`. Return, per standard: its host and marker, its rules entry, and the RuleSet change; for each refusal, its cause and the fix.
 
-Everything below matches the engine's CLI README and its native refusal causes. When the working repository's engine docs say something different, they win.
+Everything below follows the engine's CLI contracts and native refusal causes. The public docs at the tag matching the pinned CLI own the exact shapes; "Engine docs" in `check-and-reports.md` gives their raw URLs. Use local copies only when the working repository ships that matching engine source. If this teaching differs from those contracts, the version-matched engine docs win.
 
 ## Two ends of a rule
 
@@ -95,7 +95,7 @@ A correct Markdown and rules pair proves nothing until the RuleSet the repositor
 4. **The inputs.** Each entry's `target.input` and every `context` input is a key in the RuleSet's `inputs`, with the kind its selector needs (`document` for Markdown units and frontmatter). Lint binds its selected file to the single document input. A native invocation binds every declared input exactly once with that kind, and each bound file matches an `exact` or `glob` entry in its repository's `input_paths`. Keep a separate calibration context input and its binding on the native route; do not remove it to fit lint.
 5. **The cap.** If the RuleSet sets `max_question_words`, your hosts were sized against that number, not the default.
 
-If the repository runs no RuleSet for these standards yet, write one in the shape of the engine's `marked-standards.ruleset.json` (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`), with a check request that binds its inputs, and report both as new. Where it runs, in a script or CI, is the repository's decision.
+If the repository runs no RuleSet for these standards yet, read `marked-standards.ruleset.json` and its complete check request from the pinned tag's `docs/specs/2026-10-12-rust-rule-engine/examples/` directory (raw URLs in `check-and-reports.md`, "Engine docs"). Write a consumer RuleSet with that shape (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`) and a check request binding its inputs to the consumer's actual files; report both as new. Where it runs, in a script or CI, is the repository's decision.
 
 Then MUST load `check-and-reports.md` and return the `check_rules` outcome with `output: assembled_rules`: its count and the printed rule IDs with their provenance, to judge against these signals.
 
