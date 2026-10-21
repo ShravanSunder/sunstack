@@ -150,6 +150,7 @@ Each run is graded on:
 - `demistify-explainer` teaching is #62's work.
 - The composition of design Markdown and the design phases' page duties (moved to the composition-model spec).
 - Portability product work (in-place embedding, a one-file CLI) and the owner-decision brief on a page.
+- Aligning `mermaid-usage.md`'s plain-text-sketch fallback with the rendering reference for every destination that can draw. It is shared with presentation-webui and presentation-tui, so it needs its own scoped spec; this skill applies the rule at its own call site (step 2).
 
 ## Run status
 
