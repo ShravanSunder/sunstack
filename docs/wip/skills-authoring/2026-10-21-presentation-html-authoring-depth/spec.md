@@ -1,13 +1,13 @@
 # presentation-html: tasteful explainers, the right view for each job
 
-This spec proposes an update to `sunstack-dev:presentation-html`, plus the shared references that route design work to it. It replaces the first 2026-10-21 draft on this branch. It keeps that draft's ownership boundary and marks each claim with its evidence.
+This spec proposes an update to `sunstack-dev:presentation-html`, plus one example in the shared rendering reference. It replaces the first 2026-10-21 draft on this branch. It keeps that draft's ownership boundary and marks each claim with its evidence.
 
 ## Targets and runs
 
 | Run | Target (one per run) | Purpose |
 | --- | --- | --- |
 | 1 | `sunstack-dev/presentation-html` | Teach agents to write pages for people: the chooser for ordinary content, the view map for named views, the page lenses for design sets (reading paths and concept sections), taste, and the screenshot check. Includes `docs/diagram-vocabulary.md` and its contract test, which list the page-form owner. |
-| 2 | `shared-references/diagram-rendering-and-fallbacks.md` (scoped: one example) | Correct the opening-slice example so that it links to the owning chunk's diagram instead of implying a second copy (D18). |
+| 2 | `shared-references/diagram-rendering-and-fallbacks.md` (scoped: one example) | Correct the opening-slice example so that it links to the owning chunk's diagram instead of implying a second copy (D27). |
 
 The component API stays with Demistify's guide (`demistify-explainer`, [sunstack-tools #62](https://github.com/ShravanSunder/sunstack-tools/pull/62)). The design skills keep each view's predicate and required fields. `diagram-semantics.md` keeps the relationship family. This skill owns the judgment in between: which page form shows the content, how to compose the page with taste, and how to prove it.
 
@@ -43,7 +43,7 @@ Every problem claim below carries one label:
 | Agents write the whole document, so the skills must teach them to write for people. | owner, 21 October |
 | Break information up by document, capability, concept, depth and journey. A concept such as authorization shown only as a column cannot be understood. | owner, 21 October |
 | Agent detail stays in the documents, in its own parts, so a person can choose to dive in while an agent always reads it. | owner, 21 October |
-| Design sets are 13–36k words in 3–7 files with no `index.md` (rust-rule-engine 36,175; sunstack-runner 13,561). `design-documents.md` calls one file per document "the usual one". | measured (word counts, 21 October) |
+| Design sets are 13–36k words in 3–7 files with no `index.md` (rust-rule-engine 36,175; sunstack-runner 13,561). `design-documents.md` calls one file per document "the usual one". | measured (word counts, 21 October); context for the composition-model spec |
 | Flow labels should fall back and be reported to the author only. Authoring issues must stay out of the reader's way. | owner; author-only diagnostics shipped in 1.10.0 (#63), fallback placement still pending |
 | Checks are optional, small, fast and portable, with nothing to install. | owner |
 | Tables vs prose, and repeated one-row tables. | intent (no run observed it) |
@@ -78,18 +78,19 @@ Defaults taken. Strike any row; a struck or changed row stays and gains a dated 
 | D9 | `references/patterns.md`, loaded IF the page has more than one page, a guided path, or three or more component kinds. It holds worked good/bad arrangements: mixed widths, disclosure vs tabs, pages and guided paths, framed vs unframed cards. | Branch-depth examples keep the main path small. |
 | D10 | The Markdown baseline stays MUST load. The call site takes its technical-atom rule and table default. The baseline's before-send check is for chat responses; a page's check is step 5. Run 1 adds one sentence to the baseline saying so. | Measured ceremony complaint. The baseline is shared, so its owner states the scope rather than the caller silently ignoring part of it. |
 | D11 | **Proof route.**<br>- Run the matching checker.<br>- Open the page as the reader will (the intended opening method) with the browser tooling the environment already provides: a project `verify-*` skill, a provided render script, or the supported browser. Install or start nothing new.<br>- When the bound release documents an author-check mode (for example `?ex-check` in 1.10.0), use it.<br>- HTTP preview is not direct-file proof. If the intended opening method is blocked, that is a named proof gap (guide line 47).<br>- This replaces `demistify.md:55`'s ban on headless Chrome and CDP. | Measured friction 7; keeps the owner's "nothing to install". |
-| D12 | Design-set branches in `engineering-documents.md`:<br>- No `index.md`: build the page with one island per document in the canonical four-document order, add no Walkthrough or reading path, and name the missing `index.md` as a gap to the caller. The canonical order originates no fact.<br>- Extra documents: one island each, outside the four questions.<br>- The page's views use `views.md`.<br>Run 2 fixes the opening-slice example as D18 states. | Measured friction 4. The example's owner is the rendering reference. |
+| D12 | Design-set branches in `engineering-documents.md`:<br>- No `index.md`: build the page with one island per document in the canonical four-document order, add no Walkthrough or reading path, and name the missing `index.md` as a gap to the caller. The canonical order originates no fact.<br>- Extra documents: one island each, outside the four questions.<br>- The page's views use `views.md`.<br>Run 2 fixes the opening-slice example as D27 states. | Measured friction 4. The example's owner is the rendering reference. |
 | D13 | Decisions in `options-and-decisions.md`:<br>- Draw the current model first.<br>- When the owner-decision brief draws every option (`owner-decision-brief.md:10`), give each option a "picture" topic row in `ex-compare` (a figure or small flow). This adds no new slot API. | Measured friction 5. |
-| D16 | Mandatory reading floor: `SKILL.md`, `demistify.md`, the guide, and the baseline. Every other load needs an observable predicate. Proof records the bytes each run reads, against the control. No reduction is claimed in advance. | Review A14. |
-| D17 | **Page lenses on a design page.** These are taught in `engineering-documents.md` (the design-set branch), with a row for each in `views.md`. They add no facts.<br>- **Reading paths:** each through-line or task path already in the set's `index.md` becomes a Walkthrough over the islands. A stop carries at most one line of non-normative narration.<br>- **Concept section:** for an idea that obligations in two or more capabilities name, or that the owner names. It links to the idea's meaning in its owning entry, links to its picture (or states that the picture is missing), then lists links grouped by document: needs, rules, who enforces, how it is proven. It is never shown only as a column or tag.<br>- **Human part first:** each island's section opens with its answer, and long detail sits one action away, with its summary naming the failure cases inside. | Owner directions (21 October): write for people; organize by document, capability, concept, depth and reading path; a concept is not just a column; a person chooses to dive into agent detail. The page side is settled here. The Markdown side is in the composition-model spec. |
-| D18 | Opening slice: open on a link to the owning chunk's diagram, or a Walkthrough stop on its heading. Any framing sentences are non-normative and link to the chunk. Never a second copy, never a sub-chunk island. | |
+| D16 | Mandatory reading floor: `SKILL.md`, `demistify.md`, the guide, and the baseline. Every other load needs an observable predicate. Proof records the bytes each run reads, against the control. No reduction is claimed in advance. | |
+| D26 | **Page lenses on a design page.** These are taught in `engineering-documents.md` (the design-set branch), with a navigation row for each in `views.md`. The rows are navigation, not vocabulary tokens, so `docs/diagram-vocabulary.md` does not change for them. The lenses add no facts.<br>- **Reading paths:** each through-line or task path already in the set's `index.md` becomes a Walkthrough over the islands. A stop carries at most one line of non-normative narration.<br>- **Concept section** (a page-side default the owner may strike): for an idea that obligations in two or more capabilities name, or that the owner names. It links to the idea's meaning in its owning entry, links to its picture, then lists links grouped by document: needs, rules, who enforces, how it is proven. A missing picture goes back to the caller as a gap; readers see it only when the design itself records it. It is never shown only as a column or tag. When the set's Markdown carries a concept section, the page renders that section and builds none of its own.<br>- **Human part first on the page:** each document section opens with at most one non-normative framing line that links into its island. Beyond the opening slice, whole islands sit one action away (a tab or a disclosure) under titles that name the failure cases inside. Folding inside an island follows the source Markdown. | Owner directions (21 October): write for people; organize by document, capability, concept, depth and reading path; a concept is not just a column; a person chooses to dive into agent detail. The page side is settled here. The Markdown side is in the composition-model spec. |
+| D27 | Opening slice: open on a link to the owning chunk's diagram, or a Walkthrough stop on its heading. Any framing sentences are non-normative and link to the chunk. Never a second copy, never a sub-chunk island. | |
+| — | D14, D15, D17–D22, D24 and D25 of the 21 October drafts moved to `../2026-10-21-design-composition-model/spec.md` as C1–C10. Numbers D17–D25 are not reused here. | Scope split, 21 October. |
 
 ## Surface allocation
 
 | Run | Trigger | Main path | Depth | Proof |
 | --- | --- | --- | --- | --- |
-| 1 | Unchanged name and description; both invocation paths kept | Lens D1. Steps: understand → choose (chooser D2, precedence D3) → bind and load → compose (taste D7) → check and look (D8, D11, embedded-copy call) → return. Step 3's paragraph is split into one call site per branch. | New `views.md` (D4–D6), new `patterns.md` (D9). `demistify.md`: D11 replaces line 55, and its component table moves into the chooser. `engineering-documents.md`: D12 and D17's page lenses. `options-and-decisions.md`: D13. One scope sentence in `markdown-presentation-baseline.md` (D10). `docs/diagram-vocabulary.md` names `presentation-html` `references/views.md` as the page-form owner, and the contract test lists it. | E1–E6 |
-| 2 | — | — | Opening-slice example only (D18) | static |
+| 1 | Unchanged name and description; both invocation paths kept | Lens D1. Steps: understand → choose (chooser D2, precedence D3) → bind and load → compose (taste D7) → check and look (D8, D11, embedded-copy call) → return. Step 3's paragraph is split into one call site per branch. | New `views.md` (D4–D6, D26), new `patterns.md` (D9). `demistify.md`: D11 replaces line 55, and its component table moves into the chooser. `engineering-documents.md`: D12 and D26's page lenses. `views.md` also carries D26's lens rows. `options-and-decisions.md`: D13. One scope sentence in `markdown-presentation-baseline.md` (D10). `docs/diagram-vocabulary.md` names `presentation-html` `references/views.md` as the page-form owner, and the contract test lists it. | E1–E6 |
+| 2 | — | — | Opening-slice example only (D27) | static |
 
 ## Route the main file will show
 
@@ -115,6 +116,8 @@ The posture is **user-directed intent with manual exercise**. The owner said pre
 - E5: the pyramid results.
 - E6: Stop-review.
 
+- E8 (D12, D26, D27): a Haiku run builds a page for a copy of the sunstack-runner design set. The brief names only the subject, the sources and the reader's question, and the run happens twice:<br>- **E8a:** without `index.md`, which exercises D12's branch;<br>- **E8b:** with an `index.md` that the test setup adds, holding one through-line and one task path.<br>Checks: Walkthroughs come only from `index.md` paths; a concept section holds only links; the page writes no answers of its own beyond one framing line per section; the opening slice follows D27; the D8 checklist passes. A control run on the prior revision runs for each.
+
 **Control.** The same briefs run against the prior revision (`e34ad3f`; folders a1–a6 are done). The result is therefore a representative comparison for these cases, not a general claim.
 
 **Library.** A local mirror of Demistify 1.9.4 (`94552b5`), because the hosted CDN is blocked in this environment. Same checker and render script for both arms.
@@ -131,7 +134,7 @@ Each run is graded on:
 - taste, judged from screenshots by an agent that did not write the page and does not know which arm it is grading;
 - facts that match the sources.
 
-**Claim.** "Observed in named examples (E1–E6), with a representative comparison against the prior revision." Static checker passes are reported as static.
+**Claim.** "Observed in named examples (E1–E6, E8a, E8b), with a representative comparison against the prior revision." Static checker passes are reported as static.
 
 ## Coordination
 
