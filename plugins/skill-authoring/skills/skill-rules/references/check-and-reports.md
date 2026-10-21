@@ -4,13 +4,32 @@ This reference owns step 6: running the engine's check, print and local evaluati
 
 ## Run the engine
 
-`sunstack-rule` reads one JSON request on stdin and writes one JSON response on stdout:
+`sunstack exec` reads one JSON request on stdin and writes one JSON response on stdout:
 
 ```json
 { "protocol_version": 1, "operation": "check_rules", "input": { "...": "the operation's native input" } }
 ```
 
-Use the binary the repository declares, built the way its engine docs or verify skill say. Run it from the repository root, because relative paths in the input resolve from the working directory. Keep every request and response you rely on; the decision table's proof column points at them. If no binary is available, the proof is blocked: report that, and never infer a pass from a request that looks right.
+Use the repository's pinned version: `npx --yes @sunstack/cli@<version> exec < request.json`, substituting the pin and your saved request path, or use its Homebrew or shell-installed `sunstack exec` at that version. Run it from the repository root, because relative paths in the input resolve from the working directory. Keep every request and response you rely on; the decision table's proof column points at them. If no binary is available, the proof is blocked: report that, and never infer a pass from a request that looks right.
+
+### Front doors
+
+Lint applies only when the RuleSet declares exactly one `document` input and a `sunstack.lint.json` names it. Under that condition, use these lint commands with the repository's pinned CLI; `--config <file>` selects the intended config explicitly:
+
+| command | what it shows |
+| --- | --- |
+| `sunstack lint --config <file> --check` | validates the config, RuleSets and marker/entry bindings without a credential; prints a success message, not a count |
+| `sunstack lint --config <file> --rules` | lists rule IDs, settings and rules-entry file/line; count the array and compare its IDs with the intended inventory |
+| `sunstack exec` with `check_rules`, `output: assembled_rules` | prints the count, native definitions, Markdown marker provenance and wording for every intended rule |
+| `sunstack exec` with `evaluate_rules` | gives native per-occurrence calibration results on the mechanical-only view described below |
+
+Lint's inventory does not print the question or Markdown marker provenance, so native print is required for every RuleSet. `lint --all --format json` reports failed mechanical findings but drops passing mechanical results; a clean report cannot prove that the intended good occurrence was selected.
+
+A RuleSet with another supported input shape, such as separate `skill` and `calibration` document inputs, stays on native `exec check_rules` for validation and print. Keep every declared input and binding. Do not remove context to fit lint, or claim lint passed on that shape.
+
+### Exit codes
+
+Native `exec` exits:
 
 | exit | meaning |
 | --- | --- |
@@ -20,6 +39,8 @@ Use the binary the repository declares, built the way its engine docs or verify 
 | 4 | cancelled by the caller |
 
 Exit 0 says the engine finished, not that a rule passed. Read the response.
+
+Lint exits: 0 for a successful check/list or clean run; 1 for findings that reach the failure policy (including a configured warning limit); 2 for invalid input/config or a definition refusal; 3 for failed or incomplete work; 4 for cancellation. A lint exit does not close native calibration.
 
 ## Check and print
 
@@ -43,7 +64,13 @@ A mechanical rule is proven by what it selects and what it decides on two exampl
 
 A copy of a real skill file with one edit makes the best example, because it brings real surroundings: frontmatter, nesting and inline code. Put the break where real text puts it, mid-paragraph included, so the example tests the selector as well as the predicate. Keep the examples as fixtures outside the skill being checked.
 
-Run `evaluate_rules` once per example, with the RuleSet's target input bound to that example file. The runtime invocation is the check input plus runtime settings (origin, cursors, execution, backend, attempts and request budget), and the engine's invocation schema owns them. Local-only rules construct no backend and need no credential. A rule that would reach a model needs real backend configuration and a credential; that is a hosted run, with its own cost and authority, and it isn't part of this proof unless the request grants it.
+Build a **mechanical-only calibration view** from the successful native print before running either example:
+
+1. Copy only the mechanical `printed_rules[].definition` objects, unchanged, into a calibration JSONL rules file outside the checked skill. Wire it through a calibration-only RuleSet's `rule_paths`, with the inputs and bindings those definitions require. Keep the full authored RuleSet for check and print.
+2. Compare each copied definition field by field against its printed definition: rule ID, evidence declarations (including the target input and selector and any context), target, applicability, questions, verdict explanation, `expect` predicate or `ast_grep` rule, and severity. Preserve every field; selecting the mechanical members is the only definition change. Record that equivalence beside the requests.
+3. Confirm the calibration view contains no judged definitions or model-based applicability/routing. A lint config's `off` setting does not disable anything in native input. If model work is still reachable, return that proof gap rather than evaluating it without a hosted grant.
+
+Run `sunstack exec` with `evaluate_rules` once per example, with the calibration view's target input bound to that example file. Use the shared definition/binding/repository/limit fields and the runtime settings (origin, cursors, execution, backend, attempts and request budget) that the invocation schema requires; `evaluate_rules` takes no `output` field. Even a local-only request carries backend metadata, but constructs no backend and needs no credential when no model work is reachable. A hosted run has its own cost and authority and is outside this proof unless explicitly granted.
 
 Read `result.outcome.report`:
 
@@ -51,6 +78,7 @@ Read `result.outcome.report`:
 - **`skipped_rules`**: entries or sources that didn't run, with their diagnostics.
 - **`rule_evaluations`**: per rule, `expanded` with its occurrences, or `zero_matches`, `not_applicable`, `outside_change_scope`, `selection_failed`, `evaluation_failed` or `cancelled`. Zero matches is complete, and it is never a pass.
 - **`occurrences`**: one per selected unit. A mechanical occurrence is `kind: checked`, with `key.rule_id`, its `target` location, `declared_severity`, and an `outcome` that is `completed` with `result` `pass` or `fail` (plus AST match observations), `unresolved` with diagnostics, or `cancelled`.
+- **`measurements.model_requests` and `measurements.inference_attempts`**: both must be zero for this local calibration. A planning record in `requests` with `status.kind: not_sent` and reason `no_questions` is not a dispatched request.
 
 Find the intended occurrence by matching its `key` and `target` location, which carry the source and the unit's range, against the unit you chose. Then decide:
 
@@ -61,6 +89,7 @@ Find the intended occurrence by matching its `key` and `target` location, which 
 | occurrences exist, but none at the intended unit | no: the selector reaches other text |
 | the intended occurrence is `unresolved` or `cancelled` | no |
 | the rule is in `skipped_rules`, or coverage is `partial` or `none` | no |
+| the copied mechanical definitions differ from the print, or either model-request counter is nonzero | no |
 | both examples `pass` | no: the predicate can't see the break |
 | both examples `fail` | no: the predicate or its polarity is wrong |
 | exit 0 | says nothing either way |
@@ -89,6 +118,6 @@ For a model-judged rule, this proof is check plus print: the rule assembles, and
 
 ## CI
 
-Recommend one `check_rules` run per RuleSet in CI, so a teaching edit that orphans a marker or overflows a host fails before it ships. Adding that job is the repository's decision.
+For RuleSets with exactly one `document` input and a lint config, recommend one credential-free `sunstack lint --config <file> --check` per intended config in CI, so an orphaned marker, missing entry or over-cap host fails before shipping. For other supported input shapes, recommend `sunstack exec` with a saved `check_rules` request per RuleSet. Adding the job is the repository's decision. A check covers only the sources its config/request names; compare the printed IDs and count with the intended inventory.
 
-Complete when: `check_rules` passed on the real binary; print listed every intended rule ID, with the expected count, and each question read as its standard; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports kept as evidence; and everything still unproven is named.
+Complete when: `check_rules` passed on the real `sunstack` binary; print listed every intended rule ID, with the expected count, and each question read as its standard; the mechanical-only calibration definitions match the print; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports with zero model requests and inference attempts kept as evidence; and everything still unproven is named.

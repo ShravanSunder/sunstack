@@ -1,6 +1,6 @@
 ---
 name: skill-rules
-description: "Use when deciding which standards in a skill should become checked `sunstack-rule` rules, placing `<!-- K014 -->` markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-creation) or deciding which skills to change (skill-audit)."
+description: "Use when deciding which standards in a skill should become checked rules for the `sunstack` CLI, placing `<!-- K014 -->` markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-creation) or deciding which skills to change (skill-audit)."
 ---
 
 # Skill Rules
@@ -19,7 +19,7 @@ Most of a skill should never become a rule. Each standard lands in exactly one o
 
 Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. The proxy may be marked too, but only on its own wording that says exactly what it checks, and the decision table records it as a proxy for the standard it approximates.
 
-The engine's docs own every exact schema: the `sunstack-rule` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
+The engine's docs own every exact schema: the `sunstack` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry. Use the repository's pinned CLI version through `npx --yes @sunstack/cli@<version>`, or its Homebrew or shell-installed `sunstack` at that version.
 
 ## Workflow
 
@@ -45,13 +45,13 @@ Write one entry per marker in the rules file paired with that Markdown file, key
 
 ### 5. Wire the RuleSet
 
-Open the invocation the repository runs and the RuleSet it names. Add the Markdown and rules pair to `rule_sources` with paths relative to the RuleSet file and the matching `marker_prefix`, and align each entry's target and context inputs with the RuleSet's input declarations and the invocation's bindings. Completion: `check_rules` with `output: assembled_rules` lists every intended rule ID and the expected count, and every refusal on the way was fixed at the cause its code names. A clean check that omits them is not wired.
+Open the invocation the repository runs and the RuleSet it names. Add the Markdown and rules pair to `rule_sources` with paths relative to the RuleSet file and the matching `marker_prefix`, and align each entry's target and context inputs with the RuleSet's input declarations and the invocation's bindings. Completion: when the RuleSet declares exactly one `document` input and a lint config names it, `sunstack lint --check` passes; for every RuleSet, `sunstack exec` with `check_rules` and `output: assembled_rules` lists every intended rule ID and the expected count. Every refusal on the way was fixed at the cause its code names. A clean check that omits them is not wired.
 
 ### 6. Prove each rule
 
 MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
 
-Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
+Completion: `check_rules` passes on the real `sunstack` binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard. Native `exec evaluate_rules` calibration uses a mechanical-only view whose definitions match the print field by field; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`, with zero model requests and inference attempts. An exit code, zero matches or partial coverage never closes calibration. Recommend the conditional lint or native check CI route in `references/check-and-reports.md`.
 
 ### 7. Return
 
@@ -74,4 +74,5 @@ The run is not done while any of these hold:
 - a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
 - the assembled output lacks an intended rule ID, or the count is off;
 - a mechanical rule lacks a selected good `pass` and a selected bad `fail` in the native reports;
-- `check_rules` wasn't run with the real binary, or a passing check is claimed as proof that a rule detects anything.
+- `check_rules` wasn't run with the real `sunstack` binary, or a passing check is claimed as proof that a rule detects anything;
+- native calibration includes judged definitions, differs from the printed mechanical definitions, or reports model requests or inference attempts.
