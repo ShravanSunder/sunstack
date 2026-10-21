@@ -153,5 +153,5 @@ Each run is graded on:
 
 ## Run status
 
-- Run 1: proposed.
-- Run 2: proposed.
+- Run 1: implemented (presentation-html `SKILL.md`, `references/views.md`, `references/patterns.md`, `references/demistify.md`, `references/engineering-documents.md`, `references/options-and-decisions.md`; the baseline's scope sentence; the vocabulary index and its contract test). Proof and implementation review owed.
+- Run 2: implemented (one example in `diagram-rendering-and-fallbacks.md`). Static.

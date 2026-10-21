@@ -584,6 +584,7 @@ describe("user requirements and design-view contracts", () => {
 
   test("indexes every view owner and rendering consumer", () => {
     const vocabulary = readPluginFile("docs/diagram-vocabulary.md");
+    const pageForms = readPluginFile("skills/presentation-html/references/views.md");
 
     for (const viewToken of [
       "capability map",
@@ -602,12 +603,14 @@ describe("user requirements and design-view contracts", () => {
       "requirement/design/proof trace",
     ]) {
       expect(vocabulary).toContain(viewToken);
+      expect(pageForms).toContain(viewToken);
     }
 
     for (const consumer of [
       "skills/spec-design/SKILL.md",
       "skills/program-design/SKILL.md",
       "shared-references/diagram-rendering-and-fallbacks.md",
+      "skills/presentation-html/references/views.md",
     ]) {
       expect(vocabulary).toContain(consumer);
     }

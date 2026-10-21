@@ -4,7 +4,7 @@ This shared runtime reference owns the supported Markdown set, the technical-con
 
 Expected inputs: the draft response (or the content about to be composed) and the consuming skill's surface stance (TUI skeleton default, or markdown skeleton).
 
-Return: the construct choices taken, every technical atom's rendering decision (inline code, fence, link, or relocated out of a fixed-width row), and the before-send check result.
+Return: the construct choices taken, every technical atom's rendering decision (inline code, fence, link, or relocated out of a fixed-width row), and the before-send check result. The before-send check is for chat and terminal responses; an HTML page takes the construct and atom decisions here and is checked by `presentation-html`'s own screenshot check.
 
 ## Supported Markdown Set
 
