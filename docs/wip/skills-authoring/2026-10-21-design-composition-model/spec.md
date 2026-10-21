@@ -18,7 +18,7 @@ Status: **proposed, design open.** The owner's directions below are settled; the
 
 ## Draft decisions
 
-Carried from the presentation-html spec as drafts (its former C1, C2, C3–C8, C9 and C10, renumbered here as C1–C10). Each needs rework against the open questions before acceptance.
+Carried from the presentation-html spec as drafts (its former D14, D15, D17–D22, D24 and D25, renumbered here as C1–C10). Each needs rework against the open questions before acceptance.
 
 | # | Draft | Rationale |
 | --- | --- | --- |
