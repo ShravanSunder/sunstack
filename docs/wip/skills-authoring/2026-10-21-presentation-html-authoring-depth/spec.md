@@ -154,5 +154,5 @@ Each run is graded on:
 
 ## Run status
 
-- Run 1: implemented, with corrections after implementation review (6e83e645, 1887b837, 3b9fad4b, a4ee13c1, 4484a1a1 and the H1 wording). Proof: a representative comparison at 7442f320 (14 of 16 blind preferences) plus single new-skill retests of each correction. Release surfaces: sunstack-dev 2.93.0 and `docs/changelog/2026-10-21-presentation-html-smallest-view.md`. Implementation review: verification of the final edits pending.
+- Run 1: implemented, with corrections after implementation review (6e83e645, 1887b837, 3b9fad4b, a4ee13c1, 4484a1a1 and the H1 wording). Proof: a representative comparison at 7442f320 (14 of 16 blind preferences) plus single new-skill retests of each correction. Release surfaces: sunstack-dev 2.93.0 and `docs/changelog/2026-10-21-presentation-html-smallest-view.md`. Implementation review: `skill-review` implementation stage, three rounds (19 → 3 → 1 → 0 open accepted findings), final verdict great on the skill change; release surfaces verified after the Codex marketplace bump. Cache refresh happens after merge.
 - Run 2: implemented (one example in `diagram-rendering-and-fallbacks.md`). Static.
