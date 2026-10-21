@@ -1,0 +1,14 @@
+{
+  "name": "agentstudio",
+  "version": "0.1.0",
+  "description": "Use Agent Studio pane progress, notices, asks and context from coding agents.",
+  "author": {
+    "name": "Shravan Sunder"
+  },
+  "keywords": [
+    "agentstudio",
+    "pane",
+    "agent-line"
+  ],
+  "skills": "./skills/"
+}

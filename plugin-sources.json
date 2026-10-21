@@ -14,6 +14,15 @@
       "commit": "f6eb23cd7cf2363529344a520a4cd13e043e3d23",
       "sourcePath": "agent-skills/agent-collaboration",
       "destinationPath": "plugins/agent-router/skills/agent-collaboration"
+    },
+    "agentstudio": {
+      "status": "pending",
+      "repository": "https://github.com/getagentstudio/agentstudio",
+      "commit": null,
+      "sourcePath": "Sources/AgentStudio/Resources/AgentPackage/skills/agentstudio",
+      "destinationPath": "plugins/agentstudio/skills/agentstudio",
+      "baselineCommit": "4ad6ef04a0ef6578b4fe802f05739b0099bec40b",
+      "pendingReason": "Await the message-only Agent Line CLI release and identical upstream SKILL.md; replace commit only after source equality is verified."
     }
   }
 }

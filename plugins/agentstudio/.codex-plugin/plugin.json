@@ -1,0 +1,18 @@
+{
+  "name": "agentstudio",
+  "version": "0.1.0",
+  "description": "Use Agent Studio pane progress, notices, asks and context from coding agents.",
+  "author": {
+    "name": "Shravan Sunder"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Studio",
+    "shortDescription": "Keep progress and decisions in your Agent Studio pane",
+    "developerName": "Shravan Sunder",
+    "category": "Productivity",
+    "longDescription": "Use the Agent Studio pane CLI for Agent Line updates, titles, notices, asks and context with Claude Code, Codex and Cursor.",
+    "defaultPrompt": "Use Agent Studio to keep my pane progress and decisions current.",
+    "capabilities": []
+  }
+}

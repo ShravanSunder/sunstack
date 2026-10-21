@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-21 Agent Studio skill plugin](2026-10-21-agentstudio-plugin.md)
 - [2026-10-18 Presentation HTML adopts shared components](2026-10-18-presentation-html-adopted-components.md)
 - [2026-10-18 Capability through-lines](2026-10-18-capability-through-lines.md)
 - [2026-10-18 Design sets: one source, two reading paths](2026-10-18-design-set-composition.md)
