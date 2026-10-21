@@ -46,7 +46,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - One card is one named component, option or finding, never a frame around a section.
    - A callout carries a summary, proposal, decision, risk, open question or unverified outcome; give a proposal explicit "Proposed" wording, and keep a recommendation distinct from an owner's choice.
    - One visual per point, next to the text it supports.
-   - Library styling only: no page colors, fonts, shadows, borders or width overrides.
+   - Library styling only: no page colors, fonts, shadows, borders or width caps of your own. Layout CSS the guide allows (grid, flex, gaps, a scroll wrapper around a wide table) is fine.
    - Reading width for text; Canvas only for views that need the room.
    - Long detail sits one action away (a tab, a disclosure, a linked island), so nothing becomes a text wall. A disclosure's title names the failure cases inside it; a tab keeps a short label, and the text that introduces it names its failure cases.
    - No `xychart-beta` until it supports series names; use stats and a table.
@@ -56,8 +56,8 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
 5. **Check and look.** Run the matching checker and fix its errors and warnings; record the command and result. Open the page the way its reader will, with the browser tooling the environment already provides (a project `verify-*` skill, a provided render script, or the supported browser); install or start nothing new. When the bound release documents an author-check mode, use it. HTTP preview is not direct-file proof; a blocked opening method is a named gap. Look at desktop and phone screenshots and fix what you see. Fix every item your own markup causes; name as a gap only what the bound release or the opening method prevents, with what you observed:
    - Markdown rendered, never literal; a real SVG for every Mermaid island, including inactive tabs once opened;
    - no blank, clipped or overlapping content or labels; the outline lists each heading once;
-   - the answer is on the first screen; no text wall; no card or callout framing ordinary prose;
-   - no authored colors, fonts, shadows or width overrides; one shared left edge when the bound release provides it;
+   - the answer is on the first screen; no text wall (on a design-set page, whole documents stacked in one scroll are a text wall); no card or callout framing ordinary prose;
+   - no authored colors, fonts, shadows or width caps; one shared left edge when the bound release provides it;
    - at phone width nothing overflows and no control covers content;
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
    - each named view's signal from `views.md` holds.
