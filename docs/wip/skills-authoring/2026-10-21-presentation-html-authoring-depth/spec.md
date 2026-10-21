@@ -89,3 +89,5 @@ Do not introduce a navigation engine, server requirement, renderer or new compon
 Runtime fixes and the neutral rounded table treatment belong to Demistify's product release. The authoring guide may explain them once they are part of the bound release; authored examples should not recreate them with page-specific paint. Preserve the current radius scale and purposeful exceptions rather than assigning a new radius per page.
 
 The implementation keeps each rule in one owner and updates its active callers together. Preserve existing complete material where the inventory identifies it as working. Keep ordinary reader examples meaningful; state-retention instruments belong in explicit fixtures.
+
+The component-teaching dependency is [Demistify #62](https://github.com/ShravanSunder/sunstack-tools/pull/62). Finalize its reference structure before updating this workflow's component pointers. Demistify 1.9.4 already supplies the product Flow and rounded-table fixes; this specification changes the teaching only.
