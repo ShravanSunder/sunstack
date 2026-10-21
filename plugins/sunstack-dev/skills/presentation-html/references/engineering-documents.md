@@ -21,7 +21,7 @@ Follow step 1's human-entry route and the result already required from `../../..
 
 ## Open with the answer and one slice
 
-The first screen answers the reader's question in two or three sentences, then opens on the slice that matters most. It does that with a link to the owning chunk's diagram, or a Walkthrough stop on that chunk's heading. It never shows a second copy of the diagram or an island smaller than a chunk. Framing sentences are non-normative and link to the chunk. Keep the important failure cases named even when their details are collapsed.
+The first screen tells the reader where each part of the answer lives. For each part of the question, write one framing line that states no rule and links to the document or heading that answers it. Then open on the slice that matters most, through a link to the owning chunk's diagram or a Walkthrough stop on that chunk's heading. Do not restate a requirement, obligation, threshold or decision in the page's own words, even in a card. Never show a second copy of a diagram or an island smaller than a chunk. Keep the important failure cases named even when their details are collapsed. Good: "What we are building: the runner's capabilities and their rows, in Requirements →". Bad: a card that rewrites the install channels or the severity words the Specification owns.
 
 ## Lenses over the islands
 
@@ -30,11 +30,11 @@ Two lenses help a person move through the set. Neither adds a fact.
 - **Reading paths.** Each through-line or task path already in `index.md` becomes a Walkthrough over the islands, in the same order. A stop carries at most one line of narration that frames it and states no rule. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof. Bad: narration that restates a threshold a chunk owns.
 - **Concept sections.** Give an idea its own section when obligations in two or more capabilities name it, or when the owner names it: authorization, identity, retries. Open with a link to its meaning in its owning entry, and link to its picture: the view its owning skill already requires, such as the trust-boundary view for authorization or the entity map for identity. If that view does not exist yet, return the missing picture to the caller as a gap; show it to readers only when the design itself records it. Then list links grouped by document: the needs, the rules, who enforces them, and how they are proven. When the set's Markdown already carries a section for the idea, render that section and build none of your own. Good: a reader learns what authorization is and where each part of it lives. Bad: an "auth" column of ticks, which says where the idea appears but never what it is.
 
-Open each document section with at most one framing line that states no rule and links into its island. Beyond the opening slice, whole islands sit one action away, in a tab or a disclosure whose title names the failure cases inside. Folding inside an island follows its source Markdown.
+Open each document section with at most one framing line that states no rule and links into its island. Beyond the opening slice, whole islands sit one action away. A tab keeps the document's short name, and its framing line names the failure cases inside; a disclosure's title names them. Folding inside an island follows its source Markdown.
 
 ## When the set is incomplete
 
-- **No `index.md`.** Build the page with one island per document, in the canonical four-document order. Add no Walkthrough and no reading path, and name the missing `index.md` as a gap to the caller. The canonical order originates no fact.
+- **No `index.md`.** Build the page with one island per document, in the canonical four-document order. Add no Walkthrough and no reading path. Name the missing `index.md` on the page, in one framing line, and as a gap to the caller. The canonical order originates no fact.
 - **Extra documents** beyond the four, such as an alternatives study. Give each its own island outside the four questions, and do not fold it into one of them.
 
 Load the matching component references through `demistify.md`. The public guide owns all markup and visual tokens.

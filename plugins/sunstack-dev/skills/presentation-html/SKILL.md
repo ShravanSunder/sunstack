@@ -22,24 +22,24 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    | The same questions answered for several items | rows share columns | Native table |
    | A few headline numbers | each number has a meaning and a comparison | `ex-stat` in an `ex-grid` row, then a table with exact values |
    | Hierarchy, belonging or a checklist | parent and child matter | `ex-tree` |
+   | Who calls whom from an entry to its effect | a source-derived path | a source-derived call path: IF this row fires, load `references/views.md` and return its call-path form |
    | Ordered steps with evidence behind each | order matters and each step has proof | `ex-trace` |
-   | Who calls whom from an entry to its effect | a source-derived path | nested `ex-trace` frames (the call-path row in `views.md`) |
    | Ordered work with branches | the branch is the point | Mermaid `flowchart` or `ex-flow` |
    | Participants exchanging messages over time | two or more actors | Mermaid `sequenceDiagram` |
    | States and transitions | lifecycle decides correctness | Mermaid `stateDiagram-v2` |
-   | Boundaries, ownership, dependencies | who owns what | `ex-board` regions with `ex-flow` arrows |
+   | Boundaries, ownership, dependencies | who owns what | `ex-board` regions with `ex-arrow` arrows |
    | Records, identity and cardinality | which things are the same | Mermaid `erDiagram` |
    | Alternatives on corresponding topics | topics match across options | `ex-compare` |
    | One named component, option or finding with depth | it is a thing the reader names | `ex-card` |
    | Code or a diff with comments | lines are the evidence | `ex-code` with `ex-note` |
-   | Screens or captures | pictures are the evidence | figure; a Gallery on its own page |
+   | Screens or captures | pictures are the evidence | figure; a Gallery when readers browse many |
    | Optional depth under the current point | most readers skip it | native `details` |
    | Peer views of one thing | the reader picks one | `ex-tabs` |
    | Another document, or a guided sequence | separate pages or ordered stops | Pages, Walkthrough |
 
    IF the chosen form is a relationship diagram, load `../../shared-references/diagram-semantics.md` and return the primary family with its reason and the disclosure sequence. IF Mermaid draws it, load `../../shared-references/mermaid-usage.md` and return the use-or-fallback decision; check its readability in step 5. On a page, a Mermaid diagram that fails that check falls back to a native view that keeps the relationship drawn (`ex-flow`, `ex-board` or `ex-trace`) or to a smaller diagram of one slice, never to a plain-text sketch; the page can draw, so a text sketch is a gap. Completion: every piece of content has a form, and every non-prose form names the relationship it shows that prose would not.
 
-3. **Bind and load.** MUST load `references/demistify.md` and return the binding and its recorded release, the guide, and the viewing and checker method. Then load only the guide references its "Load depth when needed" list names for your chosen components. Before writing any element, attribute, tone or icon, find it in the guide at the page's binding ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). Completion: runtime, theme and guide share one binding; missing API is a named gap, never an invented attribute.
+3. **Bind and load.** MUST load `references/demistify.md` and return the binding and its recorded release, the guide, and the viewing and checker method. Then load the guide references the guide itself calls for your chosen components, including its section-level IF calls (such as `tours.md` for a Walkthrough). Before writing any element, attribute, tone or icon, find it in the guide at the page's binding ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). Completion: runtime, theme and guide share one binding; missing API is a named gap, never an invented attribute.
 
 4. **Compose with taste.**
    - Answer first; ordinary prose in the flow.
@@ -48,12 +48,12 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - One visual per point, next to the text it supports.
    - Library styling only: no page colors, fonts, shadows, borders or width overrides.
    - Reading width for text; Canvas only for views that need the room.
-   - Long detail sits one action away (a tab, a disclosure, a linked island) with the failure cases named in its title, so nothing looks absent and nothing becomes a text wall.
+   - Long detail sits one action away (a tab, a disclosure, a linked island), so nothing becomes a text wall. A disclosure's title names the failure cases inside it; a tab keeps a short label, and the text that introduces it names its failure cases.
    - No `xychart-beta` until it supports series names; use stats and a table.
 
-   MUST load `../../shared-references/markdown-presentation-baseline.md` and return its technical-atom decisions (inline, fenced or linked) and its table default for the page's Markdown. IF readers compare alternatives or an owner must decide, load `references/options-and-decisions.md` and return the comparison form, the corresponding topics and the decision state. IF the page presents a four-document design, load `references/engineering-documents.md` and return the source homes, the opening slice, the reading-path Walkthroughs and any concept sections. IF the page has more than one page, a guided path, or three or more component kinds, load `references/patterns.md` and return the arrangement and the example it follows. Follow the guide's sections on Pages, headings and Walkthroughs for navigation. Completion: all requested content is present once, every component passes its chooser or `views.md` signal, and the page carries no decorative styling.
+   MUST load `../../shared-references/markdown-presentation-baseline.md` and return its construct and technical-atom decisions (inline, fenced or linked) and its table default for the page's Markdown. IF readers compare alternatives or an owner must decide, load `references/options-and-decisions.md` and return the comparison form, the corresponding topics and the decision state. IF the page is the human entry to a design set, load `references/engineering-documents.md` and return the source homes, the opening slice, the reading-path Walkthroughs and any concept sections. IF the page has more than one page, a guided path, or three or more component kinds, load `references/patterns.md` and return the arrangement and the example it follows. Follow the guide's sections on Pages, headings and Walkthroughs for navigation. Completion: all requested content is present once, every component passes its chooser or `views.md` signal, and the page carries no decorative styling.
 
-5. **Check and look.** Run the matching checker and fix its errors and warnings; record the command and result. Open the page the way its reader will, with the browser tooling the environment already provides (a project `verify-*` skill, a provided render script, or the supported browser); install or start nothing new. When the bound release documents an author-check mode, use it. HTTP preview is not direct-file proof; a blocked opening method is a named gap. Look at desktop and phone screenshots and fix what you see, until every item passes or is named as a gap:
+5. **Check and look.** Run the matching checker and fix its errors and warnings; record the command and result. Open the page the way its reader will, with the browser tooling the environment already provides (a project `verify-*` skill, a provided render script, or the supported browser); install or start nothing new. When the bound release documents an author-check mode, use it. HTTP preview is not direct-file proof; a blocked opening method is a named gap. Look at desktop and phone screenshots and fix what you see. Fix every item your own markup causes; name as a gap only what the bound release or the opening method prevents, with what you observed:
    - Markdown rendered, never literal; a real SVG for every Mermaid island, including inactive tabs once opened;
    - no blank, clipped or overlapping content or labels; the outline lists each heading once;
    - the answer is on the first screen; no text wall; no card or callout framing ordinary prose;
@@ -62,7 +62,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
    - each named view's signal from `views.md` holds.
 
-   IF the page has an embedded copy, regenerate it and compare it by `demistify.md`'s method; return `identical`, or `stale` with the copy replaced and compared again. Matching text proves nothing about a view, so check each view against its owning source's current facts ([a passing check proves only what it observes](../principle-prove-it-works/SKILL.md)). Completion: the checklist passed or its gaps are named; static success alone cannot close this step.
+   IF the page has an embedded copy, regenerate it and compare it by `demistify.md`'s method; return `identical`, or `stale` with the copy replaced and compared again. Matching text proves nothing about a view, so check each view against its owning source's current facts ([a passing check proves only what it observes](../principle-prove-it-works/SKILL.md)). Completion: every item your markup controls passes, and each remaining gap names the release or opening-method limit you observed; static success alone cannot close this step.
 
 6. **Return** the file link or authorized hosted URL, screenshots, recorded library release, the embedded-copy result when there is one, and what was verified with its limits. Loading public library assets does not publish the page. IF comparing efficiency, report authored HTML, referenced data and shared library costs separately. Completion: the reader can open the result and see what was actually verified.
 

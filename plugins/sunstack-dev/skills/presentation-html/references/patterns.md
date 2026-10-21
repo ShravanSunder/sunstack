@@ -8,7 +8,7 @@ Return: the arrangement (what opens the page, where each form sits, which width 
 
 ## Open with the answer, then one slice
 
-The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Everything else is one action away. Good: two sentences, then the capability tree with each capability linking to its section. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
+The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Everything else is one action away. Good: two sentences, then the capability tree with each capability linking to its section. On a design-set page, `engineering-documents.md`'s opening governs instead: framing lines that link to the documents, and no page-written answer. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
 
 ## Reading text beside Canvas views
 
