@@ -55,8 +55,9 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
 
 5. **Check and look.** Run the matching checker and fix its errors and warnings; record the command and result. Open the page the way its reader will, with the browser tooling the environment already provides (a project `verify-*` skill, a provided render script, or the supported browser); install or start nothing new. When the bound release documents an author-check mode, use it. HTTP preview is not direct-file proof; a blocked opening method is a named gap. Look at desktop and phone screenshots and fix what you see, until every item passes or is named as a gap:
    - Markdown rendered, never literal; a real SVG for every Mermaid island, including inactive tabs once opened;
-   - no overlapping labels; the outline lists each heading once;
-   - the answer is on the first screen; no text wall;
+   - no blank, clipped or overlapping content or labels; the outline lists each heading once;
+   - the answer is on the first screen; no text wall; no card or callout framing ordinary prose;
+   - no authored colors, fonts, shadows or width overrides; one shared left edge when the bound release provides it;
    - at phone width nothing overflows and no control covers content;
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
    - each named view's signal from `views.md` holds.
