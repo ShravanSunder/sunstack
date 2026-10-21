@@ -6,16 +6,12 @@ This spec proposes an update to `sunstack-dev:presentation-html`, plus the share
 
 | Run | Target (one per run) | Purpose |
 | --- | --- | --- |
-| 1 | `sunstack-dev/presentation-html` | Teach agents to write pages for people: the five dimensions, the chooser for ordinary content, the view map for named views, concept views and journeys, taste, and the screenshot check. Includes `docs/diagram-vocabulary.md` and its contract test, which list the page-form owner. |
-| 2 | `shared-references/diagram-rendering-and-fallbacks.md` | Make a page the default medium for a design set, keyed to observable inputs. Freshness covers every page that includes an edited file. Correct the opening-slice example. |
-| 3 | `shared-references/design-documents.md` | Compose the Markdown for people as well as agents: chunk by capability by default, human part first with agent detail collapsed, concept views and journeys as lenses, the capability list as a tree, and which phase creates and updates `index.md` and the set page. |
-| 4 | `sunstack-dev/verification-design` | Pass the durable document and return the document medium and page proof, as `spec-design` and `program-design` already do. |
-| 5 | `sunstack-dev/docs-maintain` | Widen the freshness predicate from "an embedded page includes the edited file" to "any page includes it". |
-| deferred | `shared-references/owner-decision-brief.md` | Drawing a brief on a page needs a destination input that no caller supplies today, and conflicts with the brief's "decide without opening a file". Left for a later spec. |
+| 1 | `sunstack-dev/presentation-html` | Teach agents to write pages for people: the chooser for ordinary content, the view map for named views, the page lenses for design sets (reading paths and concept sections), taste, and the screenshot check. Includes `docs/diagram-vocabulary.md` and its contract test, which list the page-form owner. |
+| 2 | `shared-references/diagram-rendering-and-fallbacks.md` (scoped: one example) | Correct the opening-slice example so that it links to the owning chunk's diagram instead of implying a second copy (D18). |
 
 The component API stays with Demistify's guide (`demistify-explainer`, [sunstack-tools #62](https://github.com/ShravanSunder/sunstack-tools/pull/62)). The design skills keep each view's predicate and required fields. `diagram-semantics.md` keeps the relationship family. This skill owns the judgment in between: which page form shows the content, how to compose the page with taste, and how to prove it.
 
-`spec-design` (`SKILL.md:91`, `:240`) and `program-design` (`:226`) already pass their durable document to the rendering reference and return the document medium, so run 2 reaches them without edits. `verification-design` (`:82`) passes views only, so run 4 adds the document. `orchestrator-design` step 5 already inspects each phase's document medium and visual result; a medium returned with a stated proof gap is a result, not a missing one (D14).
+How design documents are composed for people (the page as the default for design sets, chunk shape, the capability tree, concept views, reading paths, page ownership and freshness) moved to `../2026-10-21-design-composition-model/spec.md`. That work touches pathfinding, the three design phases, orchestrator-design, a review lane and docs-maintain, and it has open owner questions.
 
 ## Evidence labels
 
@@ -62,7 +58,6 @@ Given an explainer request that names only its subject, sources and the reader's
 3. produces a page with taste: the answer first, ordinary prose in the flow, components only where they help the reader, library styling only, no invented API;
 4. passes the matching checker, looks at its own rendered page against the screenshot checklist, and fixes what it sees.
 
-For run 2: given a durable design document or set that a person will read, the design route produces an HTML page over its Markdown, not Markdown alone.
 
 The **view map** is the `SKILL.md` chooser together with `references/views.md`. A named view takes its form from `views.md`; everything else takes the smallest chooser row that answers.
 
@@ -83,32 +78,18 @@ Defaults taken. Strike any row; a struck or changed row stays and gains a dated 
 | D9 | `references/patterns.md`, loaded IF the page has more than one page, a guided path, or three or more component kinds. It holds worked good/bad arrangements: mixed widths, disclosure vs tabs, pages and guided paths, framed vs unframed cards. | Branch-depth examples keep the main path small. |
 | D10 | The Markdown baseline stays MUST load. The call site takes its technical-atom rule and table default. The baseline's before-send check is for chat responses; a page's check is step 5. Run 1 adds one sentence to the baseline saying so. | Measured ceremony complaint. The baseline is shared, so its owner states the scope rather than the caller silently ignoring part of it. |
 | D11 | **Proof route.**<br>- Run the matching checker.<br>- Open the page as the reader will (the intended opening method) with the browser tooling the environment already provides: a project `verify-*` skill, a provided render script, or the supported browser. Install or start nothing new.<br>- When the bound release documents an author-check mode (for example `?ex-check` in 1.10.0), use it.<br>- HTTP preview is not direct-file proof. If the intended opening method is blocked, that is a named proof gap (guide line 47).<br>- This replaces `demistify.md:55`'s ban on headless Chrome and CDP. | Measured friction 7; keeps the owner's "nothing to install". |
-| D12 | Design-set branches in `engineering-documents.md`:<br>- No `index.md`: build the page with one island per document in the canonical four-document order, add no Walkthrough or reading path, and name the missing `index.md` as a gap to the caller. The canonical order originates no fact.<br>- Extra documents: one island each, outside the four questions.<br>- The page's views use `views.md`.<br>Run 2 fixes the opening-slice example as D23 states. | Measured friction 4. The example's owner is the rendering reference. |
+| D12 | Design-set branches in `engineering-documents.md`:<br>- No `index.md`: build the page with one island per document in the canonical four-document order, add no Walkthrough or reading path, and name the missing `index.md` as a gap to the caller. The canonical order originates no fact.<br>- Extra documents: one island each, outside the four questions.<br>- The page's views use `views.md`.<br>Run 2 fixes the opening-slice example as D18 states. | Measured friction 4. The example's owner is the rendering reference. |
 | D13 | Decisions in `options-and-decisions.md`:<br>- Draw the current model first.<br>- When the owner-decision brief draws every option (`owner-decision-brief.md:10`), give each option a "picture" topic row in `ex-compare` (a figure or small flow). This adds no new slot API. | Measured friction 5. |
-| D14 | Run 2: the document medium is chosen from inputs the caller supplies.<br>- **Page:** the document belongs to a design set (the four documents under one set root, `design-documents.md` "Design Set Layout"), or the caller names a person who will review it.<br>- **Markdown alone:** the caller says the consumer is an agent, the user asked for Markdown, or the run is chat, terminal or read-only (the existing line 18 stays).<br>- A set's first document already belongs to the set (D22). Any other durable document keeps today's table.<br>- The rendering reference's Expected inputs gain the named reviewer and the agent-consumer flag.<br>- The Markdown stays the normative home and the agent entry.<br>- A page whose browser proof is unavailable returns `html-page` with the exact proof gap. That travels as a stated limit; it does not block the phase, because the Markdown is normative. A view that fails its own check is still an exact gap that blocks its step (rendering reference line 118); only the page's browser-proof gap becomes a limit. | Owner direction ("the main way to show and compose design for people"). |
-| D15 | Run 3: the capability list's home in Requirements is a nested Markdown list, a tree a person reads anywhere: capability key and purpose → its U rows as links. In the Requirements Markdown, this list is the capability map's rendering, and the document draws no second map of the same hierarchy. The rendering reference still picks every other view's medium. On the page, `presentation-html` may render that chunk as an `ex-tree` (D5). That is a derived view, covered by D24's freshness check. | Owner ("requirements broken into concepts and hierarchy"; "design is for humans, not just agents"). |
 | D16 | Mandatory reading floor: `SKILL.md`, `demistify.md`, the guide, and the baseline. Every other load needs an observable predicate. Proof records the bytes each run reads, against the control. No reduction is claimed in advance. | Review A14. |
-| D17 | **Five dimensions.** Every design page, and every design set, is organized along five dimensions:<br>- **Document:** the four kinds of truth.<br>- **Capability:** what users get, as a tree.<br>- **Concept:** an idea that cuts across capabilities, such as authorization, identity or retries.<br>- **Depth:** how much one piece shows at once.<br>- **Journey:** one feature or scenario, told in order.<br>The first three hold facts, each in one home. Depth is the shape inside a piece. Concept views and journeys are **lenses**: they gather or order links and add no fact. | Owner discussion, 21 October. The walkthrough and disclosure parts already exist in pieces (`index.md` reading paths, Demistify Walkthroughs, `diagram-semantics` progressive disclosure). |
-| D18 | **Human part first.** Each chunk opens with what it settles (2–3 sentences), then one view, then its rows. The detail an agent always needs (exact interfaces, conditions, evidence, rationale) follows in collapsed `<details>` blocks or a final "Detail" section, never left out. On the page, that detail sits one action away. | Owner ("information for agents too, but in different parts, so a human chooses to dive in"). Extends `design-documents.md` "Keep the Markdown Complete". |
-| D19 | **Chunk by capability by default.** A set with two or more capabilities gives each document a folder: an `index.md`, one chunk per capability, and shared chunks (entities, cross-cutting rules). The existing split test (a named reader's question; a reason to change) still decides any further split. Add a human-size signal: a chunk a person cannot read in one sitting probably holds two questions, so test it again. Length alone still never splits. | Owner ("gigantic specs help no one"). Measured set sizes. Replaces "one file per document is the usual one". |
-| D20 | **Concept views.** Concepts come out of the design (Specification entities and cross-cutting obligations); the owner may add one. A concept view shows, in order:<br>1. its meaning, linked from its owning entry;<br>2. its picture, which is the view the owning skill already requires (trust-boundary view for authorization, entity map for identity) and is never invented;<br>3. links grouped by document: needs, rules, who enforces, how it is proven.<br>It is never shown only as a column or a tag. | Owner ("authorization as a concept … if that's just a column, humans cannot easily understand"). Defaults taken for the two open questions; the owner may strike them. |
-| D21 | **Journeys.** One through-line per capability, plus scenario paths (both exist in `index.md` today). Each is authored once in `index.md` as links. On the page, each journey is a Walkthrough whose stops are islands or headings, with at most one line of non-normative narration per stop. | `design-documents.md` reading paths; owner discussion. |
-| D22 | **Who builds the set page.** The phase that first writes a document into a set (normally `spec-design`, with Requirements) creates `index.md`, then has `presentation-html` build `index.html`. Every later phase that writes a document updates its `index.md` entry and reading-path steps (existing rule) and has `presentation-html` add or refresh that document's islands and journeys. With no `index.md` (an older set), the phase that builds the page writes `index.md` first. | |
-| D23 | Opening slice: open on a link to the owning chunk's diagram, or a Walkthrough stop on its heading. Any framing sentences are non-normative and link to the chunk. Never a second copy, never a sub-chunk island. | |
-| D24 | Freshness: re-check derived views and dependent rows whenever an edited Markdown file is included by any page, live or embedded. That applies to the rendering reference's rule and to its callers (`design-documents.md:118`, `docs-maintain:77`). | Page-first makes live pages common. |
-| D25 | Portability (in-place embedding, a one-file CLI, journeys loaded from `index.md`) is a later Demistify product spec. Skills teach today's route, worded to switch when the bound release documents the new one. | Owner ("we can do this later; skills are more important"). |
+| D17 | **Page lenses on a design page.** These are taught in `engineering-documents.md` (the design-set branch), with a row for each in `views.md`. They add no facts.<br>- **Reading paths:** each through-line or task path already in the set's `index.md` becomes a Walkthrough over the islands. A stop carries at most one line of non-normative narration.<br>- **Concept section:** for an idea that obligations in two or more capabilities name, or that the owner names. It links to the idea's meaning in its owning entry, links to its picture (or states that the picture is missing), then lists links grouped by document: needs, rules, who enforces, how it is proven. It is never shown only as a column or tag.<br>- **Human part first:** each island's section opens with its answer, and long detail sits one action away, with its summary naming the failure cases inside. | Owner directions (21 October): write for people; organize by document, capability, concept, depth and reading path; a concept is not just a column; a person chooses to dive into agent detail. The page side is settled here. The Markdown side is in the composition-model spec. |
+| D18 | Opening slice: open on a link to the owning chunk's diagram, or a Walkthrough stop on its heading. Any framing sentences are non-normative and link to the chunk. Never a second copy, never a sub-chunk island. | |
 
 ## Surface allocation
 
 | Run | Trigger | Main path | Depth | Proof |
 | --- | --- | --- | --- | --- |
-| 1 | Unchanged name and description; both invocation paths kept | Lens D1. Steps: understand → choose (chooser D2, precedence D3) → bind and load → compose (taste D7) → check and look (D8, D11, embedded-copy call) → return. Step 3's paragraph is split into one call site per branch. | New `views.md` (D4–D6), new `patterns.md` (D9). `demistify.md`: D11 replaces line 55, and its component table moves into the chooser. `engineering-documents.md`: D12. `options-and-decisions.md`: D13. One scope sentence in `markdown-presentation-baseline.md` (D10). `docs/diagram-vocabulary.md` names `presentation-html` `references/views.md` as the page-form owner, and the contract test lists it. | E1–E6 |
-| 2 | — | — | Medium inputs and table (D14), opening slice (D23), freshness for any page (D24) | E7, E7b |
-| 3 | — | — | Set layout and chunk shape (D17–D19), capability list as a tree (D15), concept views (D20), journeys (D21), page ownership (D22), freshness predicate at line 118 (D24) | E7 |
-| 4 | — | call site at `:82` passes the document and returns the document medium and page proof | — | static; E7 if reached |
-| 5 | — | freshness predicate at `:77` (D24) | — | static |
-
-Run 1 also teaches the page side of D17–D21: the page composes the five dimensions, with concept views and journeys as lenses (`views.md` and `patterns.md`).
+| 1 | Unchanged name and description; both invocation paths kept | Lens D1. Steps: understand → choose (chooser D2, precedence D3) → bind and load → compose (taste D7) → check and look (D8, D11, embedded-copy call) → return. Step 3's paragraph is split into one call site per branch. | New `views.md` (D4–D6), new `patterns.md` (D9). `demistify.md`: D11 replaces line 55, and its component table moves into the chooser. `engineering-documents.md`: D12 and D17's page lenses. `options-and-decisions.md`: D13. One scope sentence in `markdown-presentation-baseline.md` (D10). `docs/diagram-vocabulary.md` names `presentation-html` `references/views.md` as the page-form owner, and the contract test lists it. | E1–E6 |
+| 2 | — | — | Opening-slice example only (D18) | static |
 
 ## Route the main file will show
 
@@ -133,10 +114,8 @@ The posture is **user-directed intent with manual exercise**. The owner said pre
 - E4: the marketplace manifests.
 - E5: the pyramid results.
 - E6: Stop-review.
-- E7 (runs 2–3): a Sonnet run starts in `spec-design`, revising the sunstack-runner Requirements in a copy of the set, with no hint about presentation. It passes only if the transcript shows:<br>- the rendering reference loaded, then `document medium: html-page` (D14);<br>- `index.md` written and `presentation-html` loaded (D22);<br>- the capability list as a nested-list tree (D15);<br>- chunks that lead with the human part (D18);<br>- the Markdown still the source.<br>Sonnet is used because `spec-design` is heavy; the Haiku runs cover `presentation-html`.
-- E7b: an agent-only artifact (a handoff note for another agent) must stay Markdown alone.
 
-**Control.** The same briefs run against the prior revision (`e34ad3f`; folders a1–a6 are done). E7's control uses the prior revision of the shared references. The result is therefore a representative comparison for these cases, not a general claim.
+**Control.** The same briefs run against the prior revision (`e34ad3f`; folders a1–a6 are done). The result is therefore a representative comparison for these cases, not a general claim.
 
 **Library.** A local mirror of Demistify 1.9.4 (`94552b5`), because the hosted CDN is blocked in this environment. Same checker and render script for both arms.
 
@@ -152,7 +131,7 @@ Each run is graded on:
 - taste, judged from screenshots by an agent that did not write the page and does not know which arm it is grading;
 - facts that match the sources.
 
-**Claim.** "Observed in named examples (E1–E7), with a representative comparison against the prior revision." Static checker passes are reported as static.
+**Claim.** "Observed in named examples (E1–E6), with a representative comparison against the prior revision." Static checker passes are reported as static.
 
 ## Coordination
 
@@ -166,13 +145,10 @@ Each run is graded on:
 - No copy of the guide's API, and no copy of the design skills' field lists.
 - Shiki and highlighting are another agent's work.
 - `demistify-explainer` teaching is #62's work.
-- No `spec-design` edit. Its existing call sites already pass the document (runs 2–3 reach it), and D15 changes the capability list's form in `design-documents.md`, not spec-design's view fields.
-- Portability product work (D25) and the owner-decision brief on a page (deferred).
+- The composition of design Markdown and the design phases' page duties (moved to the composition-model spec).
+- Portability product work (in-place embedding, a one-file CLI) and the owner-decision brief on a page.
 
 ## Run status
 
 - Run 1: proposed.
 - Run 2: proposed.
-- Run 3: proposed.
-- Run 4: proposed.
-- Run 5: proposed.
