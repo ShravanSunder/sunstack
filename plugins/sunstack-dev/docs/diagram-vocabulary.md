@@ -14,7 +14,7 @@ This maintainer index records current view names, artifact altitude, semantic ow
 
 `system context map` is an accepted name for a context diagram. `traceability matrix` is an accepted name for a requirement coverage table. The canonical tokens above remain the source and test vocabulary.
 
-`generated-image` and `html-view` are rendering media, not semantic view tokens. The consuming design skill still owns the reader question, altitude, exact relationships and required fields. The main authors and accepts the visual meaning. For a generated image, the generated-visual reference owns only capability, execution, project asset/embed and inspection procedure; for an HTML view, `presentation-html` builds and checks the page.
+`generated-image` and `html-view` are rendering media, not semantic view tokens. The consuming design skill still owns the reader question, altitude, exact relationships and required fields. The main authors and accepts the visual meaning. For a generated image, the generated-visual reference owns only capability, execution, project asset/embed and inspection procedure; for an HTML view, `presentation-html` builds and checks the page, and `skills/presentation-html/references/views.md` maps each view token above to its page form.
 
 ## Structural How Views
 
