@@ -78,7 +78,8 @@
         "authentication": "ON_USE"
       },
       "category": "Productivity",
-      "version": "0.1.0"
+      "version": "0.2.0",
+      "description": "Use Agent Studio worktrees, pane messages, context and App commands from coding agents."
     }
   ]
 }

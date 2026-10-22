@@ -95,6 +95,6 @@ Skill authoring for any repository, standalone from the workflow plugin. Provide
 
 ### [agentstudio](agentstudio/)
 
-Own-pane Agent Line messages, titles, notices, asks and context. Install as `agentstudio@sunstack` in Codex and Claude Code, or select `agentstudio` in Cursor's sunstack marketplace.
+Agent Studio CLI worktrees, own-pane messages/context, terminal operations and discovered App commands, with conditional references and recovery guidance. Install as `agentstudio@sunstack` in Codex and Claude Code, or select `agentstudio` in Cursor's sunstack marketplace.
 
 This draft targets the matching message-only Agent Studio release; its upstream pin remains pending. See the [plugin README](agentstudio/README.md) for setup, canonical source and delivery limits.
