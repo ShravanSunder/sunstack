@@ -601,6 +601,8 @@ describe("user requirements and design-view contracts", () => {
       "failure/recovery flow",
       "trust-boundary view",
       "requirement/design/proof trace",
+      '"proven by" cards',
+      "coverage rows",
     ]) {
       expect(vocabulary).toContain(viewToken);
       expect(pageForms).toContain(viewToken);

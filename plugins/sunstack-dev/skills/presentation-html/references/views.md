@@ -16,7 +16,7 @@ The names below are the canonical tokens from `docs/diagram-vocabulary.md`.
 | journey map — specification | One `ex-trace` per user class. Each step is in the user's words, with pain and evidence in its body. Add a supplied picture per step when one exists, or a Gallery Journey over supplied pictures. | Pain and evidence sit on the step they explain. | Classes chained into one path; invented pain. |
 | context diagram | Mermaid `flowchart` or an `ex-board`, with the system as one opaque node and labeled edges to each consumer and surface. | One opaque system node, every consumer on a labeled edge. | Internals drawn inside the system. |
 | entity map | Mermaid `erDiagram`. | Cardinality readable on every edge. | Packages, schemas or stores. |
-| requirement coverage table | Native table grouped by capability, with link cells. | Gaps written as words. | One ungrouped table when the capability map exists. |
+| requirement coverage table | Native table with link cells; group by capability when the source's capability map fires, otherwise keep it ungrouped. | Gaps written as words. | One ungrouped table when the capability map exists. |
 | entity -> home map | Native table. | Each home is marked new, modified or existing. | An entity without a home row. |
 | component tree | `ex-tree`, with each label carrying its responsibility. | Ownership readable without opening anything. | Folders presented as components. |
 | call graph/sequence | A **source-derived call path** (see the section below). Fan-in, async or event edges, or several participants exchanging messages: Mermaid `sequenceDiagram` or a flow, with the path for detail when it helps. | The reader follows the entry to its effect and sees where it can stop. | A branch drawn as a frame; a claimed runtime capture. |
@@ -25,9 +25,9 @@ The names below are the canonical tokens from `docs/diagram-vocabulary.md`.
 | data/event flow | `ex-flow` or a Mermaid `flowchart`, with the shape named on each boundary edge. | Each boundary edge names what crosses it. | Colliding edge labels; an edge with no shape. |
 | failure/recovery flow | `ex-flow` or a Mermaid `flowchart`, with detection, retry and the recovery owner on the edges; or `ex-trace` when each step carries evidence. | The recovery owner is named at each failure. | A happy path with failure as a footnote. |
 | trust-boundary view | `ex-board` regions for boundaries, with `ex-arrow` arrows for entry points. | Every entry point crosses a drawn boundary. | A network map with no enforcement point. |
-| requirement/design/proof trace | Native table, one row per R, grouped by capability. | Every R has a row, and gaps are written as words. | Rows merged across obligations. |
+| requirement/design/proof trace | Native table, one row per R; group by the source's capability keys when present. | Every R has a row, and gaps are written as words. | Rows merged across obligations. |
 | "proven by" cards | One `ex-card` per requirement. | What stays unverified is on every card. | A card that reads as already proven. |
-| coverage rows | Native table grouped by capability. Link a shared observation from each row it serves. | A shared observation appears once and is linked. | The same observation copied into several rows. |
+| coverage rows | Native table; group by the source's capability keys when present. Link a shared observation from each row it serves. | A shared observation appears once and is linked. | The same observation copied into several rows. |
 
 ## Workflow records
 
