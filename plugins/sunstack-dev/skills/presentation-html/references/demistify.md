@@ -28,21 +28,7 @@ A page that keeps an older binding uses that release’s own guide and checker, 
 
 ## Component guide
 
-MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1:
-
-| Page contains | Canonical reference |
-| --- | --- |
-| Code/diffs with line comments | `references/code.md` |
-| Supplied explorer graph | `references/explorers.md` |
-| Flow, board, arrows or layers | `references/maps.md` |
-| Tree or mind map | `references/trees.md` |
-| Pictures, galleries or image comparison | `references/pictures.md` |
-| Aligned alternatives on matching topics | `references/comparisons.md` |
-| Ordered steps with expandable evidence | `references/traces.md` |
-| Source-derived call-path changes | `references/call-paths.md` |
-| Walkthroughs across views/pages, including Gallery Journeys | `references/tours.md` |
-
-IF the page contains a feature named in this table, load its reference and return the constructs the page takes from it.
+MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1. Then load the guide references that its own "Load depth when needed" list names for the components you chose in step 2, and return the constructs the page takes from each.
 
 The main guide owns the available elements, attributes, tones, icons and widths. Recipes in `presentation-html` choose how to explain the content; they do not add API. For a topic comparison, use `comparisons.md` as the canonical comparison guide; `pictures.md` describes the image slider and gallery.
 
@@ -52,7 +38,7 @@ The guide at the page’s binding is the only source of available API. A constru
 
 Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. A remote runtime executes in the page, so sensitive content also calls for the local copy.
 
-For a direct-file artifact, open it with the OS default app when available; a successful launch proves only that the file opened, not that its content or interactions rendered. If supported browser tooling rejects `file://` by security policy, report that exact rendering gap. Do not switch browser surfaces, use Peekaboo, headless Chrome or raw CDP, or start a server to work around the rejection. HTTP serving is available only for a separately authorized HTTP-delivery task and when tool policy permits it.
+`presentation-html` step 5 owns how the page is opened and checked. A successful launch with the OS default app proves only that the file opened, not that its content or interactions rendered.
 
 The authoring guide for the page’s binding owns the available CLI authoring operations. The Demistify CLI exists only in source; nothing is published to npm. Run documented operations from the monorepo root of a matching Sunstack tools checkout with Node 26 and its pnpm dependencies installed. These verified examples embed a page and check recognized markup:
 
