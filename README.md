@@ -34,6 +34,8 @@ See [`plugins/`](plugins/) for full details.
 
 Release notes live in [`docs/changelog/`](docs/changelog/).
 
+The [architecture guide](docs/architecture/README.md) explains skill layers, role ownership, the design and delivery paths, source inspiration, and how standards become linter checks.
+
 ### Shravan Dev Workflow
 
 The main workflow plugin is organized by namespace and phase boundary:
