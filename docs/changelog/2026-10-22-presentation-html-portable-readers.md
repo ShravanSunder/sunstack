@@ -6,3 +6,5 @@
 - The delivery reference teaches the existing source-only `embed`, `index` and `check` commands, matching-source tooling, remaining companion/network dependencies and like-for-like freshness checks for indexed collections.
 - Authored inline readers skip unnecessary embedding. Generated copies refresh from retained live sources; missing originals or tools remain explicit gaps.
 - No Demistify runtime, new exporter command, offline bundle or installed-cache change is included. Command exercises and manual HTTP observations are separate from direct-file/offline and fresh-agent proof.
+- Validation: `pnpm --dir tests/skills test` passed 169 tests in 18 files; `node tests/skills/node_modules/typescript/bin/tsc --project tests/skills/tsconfig.json --noEmit` passed in a same-head isolated checkout; `claude plugin validate .` passed. No pressure/model evaluations ran.
+- Updated Codex, Claude Code and Cursor manifests and marketplace versions. Codex and Claude installed caches were not refreshed.
