@@ -66,12 +66,6 @@ for the full workflow map, phase diagrams, and skill boundaries.
 
 ---
 
-## Agent Sidecar
-
-Sandboxed Docker environments for coding agents. Docs live in [`agent_sidecar/`](agent_sidecar/).
-
----
-
 ## Repository Structure
 
 ```
@@ -80,7 +74,6 @@ ai-tools/
 │   ├── sunstack-dev/             # Spec, plan, implementation, review, handoff workflows
 │   ├── dev-workflow-tools/      # Common tool skills, including Peekaboo UI testing
 │   └── ai-scaffold/             # Project scaffolding
-├── agent_sidecar/               # Docker sidecar system
 ├── observability/               # Shared local OTel/Victoria stack
 ├── AGENTS.md                    # Maintainer and agent instructions
 └── CLAUDE.md                    # Claude Code alias for AGENTS.md
