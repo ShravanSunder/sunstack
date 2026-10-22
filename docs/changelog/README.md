@@ -1,6 +1,7 @@
 # Changelog
 
 - [2026-10-22 Skill system architecture and onboarding](2026-10-22-skill-system-architecture.md)
+- [2026-10-21 Agent Studio skill plugin](2026-10-21-agentstudio-plugin.md)
 - [2026-10-21 Presentation HTML: the smallest view](2026-10-21-presentation-html-smallest-view.md)
 - [2026-10-21 Non-plugin cleanup](2026-10-21-non-plugin-cleanup.md)
 - [2026-10-18 Presentation HTML adopts shared components](2026-10-18-presentation-html-adopted-components.md)
