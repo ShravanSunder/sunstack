@@ -1,6 +1,6 @@
 # Skill system architecture
 
-Start with [how the skill system fits together](skill-system.md). It explains the layers, role boundaries, design documents and delivery paths. Follow [skill standards and the linter](skill-standards-linter.md) for the path from a written standard to an executable check, and [source inspiration and evolution](skill-system-provenance.md) for the pstack, Matt Pocock and Addy Osmani background.
+Start with [how the skill system fits together](skill-system.md). It explains the layers, role boundaries, design documents and delivery paths. Follow [skill standards and the linter](skill-standards-linter.md) for the path from a written standard to an executable check. Historical source detail is optional: [admired-skill references](references/admired-skills.md).
 
 These documents explain the current source. The linked `SKILL.md` files, shared references, manifests and engine contracts own the runtime instructions. A source description establishes neither installed-client behavior nor the effectiveness of a model following a skill.
 
@@ -12,6 +12,6 @@ These documents explain the current source. The linked `SKILL.md` files, shared 
 | What does a complete design contain? | [The four-document design](skill-system.md#the-four-document-design) |
 | How do we audit or change skills? | [Skill authoring](skill-system.md#skill-authoring) |
 | What can static rules prove? | [Proof boundaries](skill-standards-linter.md#proof-boundaries) |
-| Which upstream ideas did we adapt? | [Source inspiration](skill-system-provenance.md#source-inspiration) |
+| Which upstream ideas did we adapt? | [Optional source references](references/admired-skills.md#source-inspiration) |
 
 Update these views when their source owners change. Keep source inventories in the owning plugin README, exact execution mechanics in the skill or tool manual, and session-specific status in the work trace or handoff. Architecture is the maintained explanation; old proposals are historical inputs.

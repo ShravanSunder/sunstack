@@ -1,6 +1,6 @@
 # 2026-10-22 Skill system architecture and onboarding
 
-- Added `docs/architecture/`: skill layers and call forms, role/form/model boundaries, four-document design, capability through-lines, skill authoring, linter ownership and proof boundaries, and admired-source lineage.
+- Added `docs/architecture/`: skill layers and call forms, role/form/model boundaries, four-document design, capability through-lines, skill authoring, linter ownership and proof boundaries, and optional admired-source lineage under `docs/architecture/references/`.
 - `AGENTS.md` links the architecture and plugin-owned inventories, removes the duplicate per-skill table, and replaces a stale machine-specific provenance path with checkout discovery. The root README links the architecture guide.
 - The operating map now describes Cursor's shipped `metadata.pluginRoot` resolution separately from Codex/Claude source paths; no manifest was changed.
 - Corrected the plugin README's stale draft-plan/later-approval and inline-execution summary to match `implement-plan`'s ready delivery context and assigned executor.
