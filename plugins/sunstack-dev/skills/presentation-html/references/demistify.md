@@ -1,6 +1,6 @@
 # Demistify delivery and component documentation
 
-This reference owns the library binding, retrieval of the guide that matches it, and delivery and viewing. Inputs: the page scope, any existing binding and available authoring tools. Return the binding and its release, the guide and references read, component choices, the viewing/checker method and, for a page with an embedded copy, the regenerate-and-compare method.
+This reference owns the library binding, retrieval of the guide that matches it, and delivery and viewing. Inputs: the page scope, any existing binding and available authoring tools. At the binding pass (main step 3), return the binding/release, guide and references read, source-kind decision, intended source/reader files and dependencies, available authoring/viewing/checker route, and selected preparation/comparison methods. Select those methods now; run them after composition at main step 5, whose preparation pass returns the actual delivered files, final check results, dependencies and embedded-copy comparison when applicable.
 
 ## Library binding
 
@@ -28,7 +28,7 @@ A page that keeps an older binding uses that release’s own guide and checker, 
 
 ## Component guide
 
-MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1. Then load the guide references that its own "Load depth when needed" list names for the components you chose in step 2, and return the constructs the page takes from each.
+MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1. Follow the guide's own MUST/IF calls, including its content/source-carrier reference and the conditional references for the components and navigation this page uses; return the constructs and delivery decisions taken from each.
 
 The main guide owns the available elements, attributes, tones, icons and widths. Recipes in `presentation-html` choose how to explain the content; they do not add API. For a topic comparison, use `comparisons.md` as the canonical comparison guide; `pictures.md` describes the image slider and gallery.
 
@@ -40,24 +40,47 @@ Delivery depends on what the page loads. Library assets from the CDN need no app
 
 `presentation-html` step 5 owns how the page is opened and checked. A successful launch with the OS default app proves only that the file opened, not that its content or interactions rendered.
 
-The authoring guide for the page’s binding owns the available CLI authoring operations. The Demistify CLI exists only in source; nothing is published to npm. Run documented operations from the monorepo root of a matching Sunstack tools checkout with Node 26 and its pnpm dependencies installed. These verified examples embed a page and check recognized markup:
+## Prepare the reader
 
-```sh
-node packages/demistify/bin/demistify.ts embed /absolute/path/to/input.html /absolute/path/to/output.html
-node packages/demistify/bin/demistify.ts check /absolute/path/to/page.html
-```
+The matching guide owns the CLI operations. The CLI is source-only, with no published npm package; readers run no command. Use an already available matching Sunstack tools checkout with Node 26 and its installed pnpm dependencies. Verify its source commit and relevant source state against the binding's recorded `release.json` source commit, or a separately verified matching snapshot; a package version alone does not establish that match. If the tool route is unavailable, return that exact gap. Do not silently install tools, substitute another release or invent an npm or `bundle` command from a source API.
 
-A passing check proves recognized markup and data constraints, not diagram readability, prose truth, links or interaction.
+1. Inspect the page's source history and dependencies before treating missing `src` as inline authorship. A generated embedded copy or known-source refresh uses its retained live source page and original Markdown, even though the output has consumed `src`. Missing required originals are a gap; the generated copy cannot prove freshness. Other pages with local Markdown references retain those files and a live source page such as `guide.source.html`. An independently authored inline page with neither local Markdown references nor a known-source refresh remains the reader and skips embedding.
+2. After composition is complete, run from the matching checkout's monorepo root:
+
+   ```sh
+   node packages/demistify/bin/demistify.ts embed /path/guide.source.html /path/guide.html
+   ```
+
+   Keep output beside input or preserve its relative page/image layout. Deliver `guide.html`; retain `guide.source.html` and its Markdown for updates. The transform embeds exact Markdown, including literal script terminators. It does not inline arbitrary JSON, pictures, the library or fonts. Prepare other local data only through a route documented by the matching guide, or name the unresolved dependency.
+3. For a collection whose command search needs other pages' headings, embed each live-source page first, then index the explicit delivered collection in place:
+
+   ```sh
+   node packages/demistify/bin/demistify.ts index /path/guide.html /path/details.html
+   ```
+
+   Keep stable island IDs, relative paths and the input list. An authored inline peer participates in the index without an extra embed. The matching navigation guide owns indexing order and freshness.
+4. Check every final HTML file after all transforms:
+
+   ```sh
+   node packages/demistify/bin/demistify.ts check /path/guide.html /path/details.html
+   ```
+
+   For a single reader, list only that file. Require a nonzero file count, zero errors and zero warnings. A passing check proves recognized markup/data constraints, not readability, source truth, links or interaction. Apply permitted repairs to the live HTML/Markdown source, never directly to generated output (including with `check --fix`); prepare and index again as applicable, then recheck every final file. If a repair exceeds the delivery-only grant or needs a product change, return the exact failed check/gap instead. Perform main step 5's observations on those delivered files.
+5. Return the reader files, the retained authoring-source paths and the actual companions that must travel with them: linked pages, relative pictures and any unresolved local data. Embedded Markdown need not travel for rendering. State whether the shared library or data still needs the network. Fully offline delivery needs a complete matching distribution or a documented standalone route; it is a distinct target, not a consequence of embedding prose.
 
 ## Regenerate and compare an embedded copy
 
-An embedded copy is `embed` output, and only a fresh regeneration shows whether it still carries its sources. Regenerate from the live source page, the one whose `<ex-markdown>` islands still carry `src`. `embed` reads each `src` and removes it, so running it on an embedded copy returns that copy unchanged and proves nothing. Write the fresh copy to a temporary path outside the repository and compare it byte for byte with the committed copy:
+Regenerate from the live source page whose `<ex-markdown>` islands still carry `src`. Running `embed` on its consumed output leaves it unchanged and proves nothing. For an unindexed reader, write fresh output to a separate task directory and compare it byte for byte:
 
 ```sh
-node packages/demistify/bin/demistify.ts embed /absolute/path/to/index.html /tmp/<task>/index.embedded.html
-cmp /tmp/<task>/index.embedded.html /absolute/path/to/index.embedded.html
+node packages/demistify/bin/demistify.ts embed /path/guide.source.html /tmp/task/guide.html
+cmp /tmp/task/guide.html /path/guide.html
 ```
 
-`embed` writes each source’s exact text and nothing time- or path-dependent, so `cmp` exiting 0 means the committed copy carries every source as it stands now. Any difference means the copy is stale: regenerate it in place with the same `embed` command pointed at the committed path, never edit its text, and run `cmp` again. Return `identical`, or `stale` followed by the result of the comparison after replacement.
+For an indexed collection, regenerate every source-backed reader into a separate collection with the delivered file names and relative layout. Copy authored inline peers unchanged, preserve required companions, then apply the same `index` transform with the same input list before comparing every delivered HTML file. An unindexed fresh embed and an indexed reader are different outputs. Compare exact source carriers and index destinations separately only when the matching guide documents that route.
 
-Complete when the page’s theme, runtime and guide share one binding, its release is recorded, the chosen elements follow their opened references, the viewing/checker route is available or its exact limitation is reported, and any embedded copy has an `identical` or `stale` comparison result.
+`embed` carries exact source without time- or output-path-dependent data; `cmp` exit 0 means the equivalently transformed copy is identical. A difference marks the delivered copy stale. Replace it from its live source, reapply collection indexing when present, compare again and recheck every final delivered file. A check before replacement does not certify the replacement. Keep all permitted repairs in the authoring source; never repair generated text or index data directly, by hand or through an autofix. Return `identical`, or `stale` followed by the post-replacement result. Missing required source/tooling or an unapplied transform prevents a freshness claim.
+
+Binding pass complete: theme, runtime and guide share a recorded binding; source kinds, intended files/dependencies, available routes and preparation/comparison methods are selected, or their exact prerequisite gaps are named. A new page need not exist yet.
+
+Preparation pass complete: after composition, the final reader is prepared, compared and checked or its exact failure/gap is returned. Return actual source/reader paths, companion/network dependencies and any embedded-copy comparison with its limits; an earlier binding pass never substitutes for these results.

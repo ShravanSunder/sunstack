@@ -1,6 +1,6 @@
 # Portable HTML readers from source pages
 
-Target: `sunstack-dev:presentation-html`, one update run on PR155. Base: `6aba22698799dd85f53bae4199c5d9aedd91c404`, already integrated with `origin/main` at `f8c1a1b`. Revision 2: bounded F1–F5 corrections to e3e1dd3. Status: proposed; no delivery teaching edited for this proposal yet.
+Target: `sunstack-dev:presentation-html`, one follow-up update after PR155. Base: `6aba22698799dd85f53bae4199c5d9aedd91c404`, already integrated with `origin/main` at `f8c1a1b`. Revision 2: bounded F1–F5 corrections to e3e1dd3. Status: implemented; proof and independent implementation review remain to be assessed.
 
 ## Promise and basis
 
@@ -54,6 +54,6 @@ No Demistify product changes, server feature, global config, public deployment, 
 
 Sensitive surface decision before authoring: allowed for documentation of the existing source CLI and binding, with actual command/source checks; no executable resource or privilege boundary is added. Public prose contains only generic paths and public source/version anchors. Source/guide reads do not grant publication authority.
 
-Release: the owner has authorized merging the existing PR155 authoring work first. This portable-reader proposal remains a follow-up; it adds no runtime teaching until its spec is accepted and implemented. Choose release metadata for that later implementation against the then-current default branch.
+Release: this implementation follows the merged PR155 from `origin/main` at `6c4809f60d63f0a98bf738cbe15fdd1ae24d55c9`, with `sunstack-dev` 2.94.0 across all six metadata entries. It changes teaching only; it adds no Demistify runtime or exporter command.
 
-Spec review: e3e1dd3 returned targeted-revision/revise-first, all four checks complete, five bounded accepted findings F1–F5. Revision 2 applies those corrections and returns to the same independent review lead for verification under the spec-stage acceptance binding. The retained review and process history live outside this design document. Run status: proposed.
+Run status: implemented. Proof and independent implementation review remain separate from this design document.
