@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-22 Portable HTML reader instructions](2026-10-22-presentation-html-portable-readers.md)
 - [2026-10-22 Skill system architecture and onboarding](2026-10-22-skill-system-architecture.md)
 - [2026-10-21 Presentation HTML: the smallest view](2026-10-21-presentation-html-smallest-view.md)
 - [2026-10-21 Non-plugin cleanup](2026-10-21-non-plugin-cleanup.md)
