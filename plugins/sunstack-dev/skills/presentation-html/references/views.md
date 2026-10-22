@@ -10,6 +10,8 @@ Return, for each view: its form, and the good and bad signals you will check in 
 
 The names below are the canonical tokens from `docs/diagram-vocabulary.md`.
 
+For a design set, apply `engineering-documents.md`'s source rules before choosing a form below. Reuse a view already in its owning chunk through that chunk's island. A native projection reaches its facts through source anchors or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a chunk to fill it.
+
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
 | capability map | `ex-tree`. Each capability shows the fields its view request names, with its home rows as children: U rows in Requirements, R obligations in Specification. Each row links to its heading. Add an area level only above about seven capabilities. Put "also serves" in the row label as a link, never as a second child. Use tones only when the source states a status. | The owner confirms or corrects each capability and its rows in one scan. | One flat table of every row; status the source does not state. |

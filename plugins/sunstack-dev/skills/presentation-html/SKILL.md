@@ -58,7 +58,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - no blank, clipped or overlapping content or labels; the outline lists each heading once;
    - the answer is on the first screen; no text wall (on a design-set page, whole documents stacked in one scroll are a text wall); no card or callout framing ordinary prose;
    - no authored colors, fonts, shadows, borders or width rules; one shared left edge when the bound release provides it;
-   - at phone width nothing overflows and no control covers content;
+   - at a 390 CSS px phone viewport nothing overflows and no control covers content;
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
    - each named view's signal from `views.md` holds.
 
