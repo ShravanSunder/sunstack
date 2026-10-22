@@ -1,13 +1,5 @@
 {
   "skills": {
-    "agent-communication": {
-      "status": "deprecated",
-      "destinationPath": "plugins/agent-router/skills/agent-communication"
-    },
-    "router-controls": {
-      "status": "deprecated",
-      "destinationPath": "plugins/agent-router/skills/router-controls"
-    },
     "agent-collaboration": {
       "status": "current",
       "repository": "https://github.com/ShravanSunder/codex-router",
@@ -16,13 +8,11 @@
       "destinationPath": "plugins/agent-router/skills/agent-collaboration"
     },
     "agentstudio": {
-      "status": "pending",
+      "status": "current",
       "repository": "https://github.com/getagentstudio/agentstudio",
-      "commit": null,
+      "commit": "b982f19c7f3be3c19a46fc1deaa321034783eeb2",
       "sourcePath": "Sources/AgentStudio/Resources/AgentPackage/skills/agentstudio",
-      "destinationPath": "plugins/agentstudio/skills/agentstudio",
-      "baselineCommit": "7582f1c38ec7c4b1cf9cda613b9c3986d5d6018d",
-      "pendingReason": "Await the matching message-only Agent Line CLI, recursive app installer and identical upstream runtime tree (SKILL.md plus references/**); replace commit only after complete runtime-tree equality is verified. agents/openai.yaml is vendor presentation metadata."
+      "destinationPath": "plugins/agentstudio/skills/agentstudio"
     }
   }
 }

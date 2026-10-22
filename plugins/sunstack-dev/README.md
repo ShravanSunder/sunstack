@@ -217,7 +217,7 @@ Use `plan-handoff` to package an existing implementation plan for another agent,
 
 ### Implementation boundary
 
-Use `implement-plan` to validate and execute one immutable-path canonical `draft` plan only after separate later owner approval names that exact path and current meaning. It re-anchors before edits, works inline by default, advances through the smallest ready proof-bearing slice, preserves proof gates, and stops with an exact semantic route when current reality breaks the plan or design. It stops before independent review and PR work.
+Use `implement-plan` to validate and execute one immutable ready plan whose current delivery context authorizes implementation. Admission requires a current governing basis and the `pr-ready-unmerged` terminal. In an orchestrated workstream the assigned persistent Implementer Sidekick executes and proves the plan; direct phase work follows its resolved execution owner. It advances through proof-bearing slices, preserves proof gates, and routes a design break or plan defect to its owner. It stops before independent review and PR work.
 
 Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
 
@@ -281,6 +281,7 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 
 ## Source And Maintainer Resources
 
+- Skill-system architecture: [`../../docs/architecture/README.md`](../../docs/architecture/README.md)
 - Skill source: [`skills/`](skills/)
 - Shared runtime references: [`shared-references/`](shared-references/)
 - Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
