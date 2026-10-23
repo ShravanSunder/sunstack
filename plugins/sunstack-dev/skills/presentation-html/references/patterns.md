@@ -1,10 +1,10 @@
 # Page patterns
 
-This reference covers arranging a page that has more than one page, a guided path, or three or more kinds of component. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
+This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, or a compact-cell/meter comparison. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
 
-Expected inputs: the reader's question and the forms chosen in step 2.
+Expected inputs: the reader's question, forms chosen in step 2, and any compact-cell/meter comparison being considered.
 
-Return: the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the pattern below that it follows.
+Return: the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the applicable pattern and example it follows.
 
 ## Open with the answer, then one slice
 
@@ -21,6 +21,23 @@ Use a disclosure for depth under the current point that most readers skip. Its s
 ## Pages and Walkthroughs
 
 Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a design set, `engineering-documents.md` turns each reading path in `index.md` into a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates thresholds the chunks own.
+
+## Compact evidence in a table
+
+Keep status, count and timing distinct: status is authored meaning, a fraction reports completed work, and timing values describe total duration or phase share. Exact supplied values stay visible. A complete count reports completion; the authored status communicates outcome.
+
+Recommend C when rows have meaningful, comparable phase measurements: use a native table with one short authored status, exact count and total duration per row, plus named phase bars. Keep a timing cell to its bar and exact values; put the common phase names, order and scale beside the table once. Keep each named phase on the same identity across rows and views, and use the bound guide’s palette for phase color. Follow the [binding and guide retrieval steps](demistify.md) to obtain the matching component guide and its worked small-parts recipe; this reference owns selection and arrangement. When carrying a selected experiment into shared components, compare the same records and preserve its useful identity and metadata fields. A reduced dataset tests another example, not visual agreement with the selected one.
+
+| Run | Status | Checks | Duration | Phase share |
+| --- | --- | --- | --- | --- |
+| Import | Complete | 6 / 6 | 228 ms | Connect 28 ms · Work 156 ms · Transfer 44 ms |
+| Delivery | Queued | 0 / 6 | 0 ms | Not started |
+
+Give the table's full wrapper Canvas width when the table needs room. Keep surrounding explanation at Reading width with the shared left edge. Put short facts and focused links in cells; put long code, explanations and a full Trace outside the table.
+
+Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Show progress only with a meaningful denominator and keep missing, empty or inconsistent facts explicit. A progress ring is optional when the progress fraction is the reader's main comparison. Inspect the actual page at desktop and 390 CSS px in light and dark themes for wrapping, local scrolling and clipping.
+
+When phase timing adds nothing, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter. A card in every cell obscures the row comparison.
 
 ## Framed or unframed
 
