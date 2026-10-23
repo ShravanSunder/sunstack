@@ -22,22 +22,22 @@ Use a disclosure for depth under the current point that most readers skip. Its s
 
 Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a design set, `engineering-documents.md` turns each reading path in `index.md` into a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates thresholds the chunks own.
 
-## Compact evidence in a table
+## Combined identity and timing row
 
 Keep status, count and timing distinct: status is authored meaning, a fraction reports completed work, and timing values describe total duration or phase share. Exact supplied values stay visible. A complete count reports completion; the authored status communicates outcome.
 
-Recommend C when rows have meaningful, comparable phase measurements: use a native table with one short authored status, exact count and total duration per row, plus named phase bars. Keep a timing cell to its bar and exact values; put the common phase names, order and scale beside the table once. Keep each named phase on the same identity across rows and views, and use the bound guide’s palette for phase color. Follow the [binding and guide retrieval steps](demistify.md) to obtain the matching component guide and its worked small-parts recipe; this reference owns selection and arrangement. When carrying a selected experiment into shared components, compare the same records and preserve its useful identity and metadata fields. A reduced dataset tests another example, not visual agreement with the selected one.
+When the user asks for identity, status, checks and phase comparison together, or both progress and phase comparisons are useful for the same records, choose one native table for the complete combination: supplied identity/avatar, a short status badge, exact checks centered in a ring with its subject beside it, total duration and compact named phase bars. Recommend C for rows with meaningful, comparable phase measurements. Keep each named phase on the same identity across rows and views; put the common phase names, order and scale beside the table once. The [matching Demistify guide](demistify.md) owns the component API, shared classes and full worked recipe; retrieve it before writing markup. Preserve the same records and useful identity fields when carrying a selected experiment into shared components. A reduced dataset tests another example, not visual agreement with the selected one.
 
-| Run | Status | Checks | Duration | Phase share |
+| Identity and run | Status | Checks | Duration | Phase comparison |
 | --- | --- | --- | --- | --- |
-| Import | Complete | 6 / 6 | 228 ms | Connect 28 ms · Work 156 ms · Transfer 44 ms |
-| Delivery | Queued | 0 / 6 | 0 ms | Not started |
+| Asha Patel · North workspace; Document import · A-148 | Complete badge | 6 / 6 centered ring | 228 ms | Connect 28 ms · Work 156 ms · Transfer 44 ms bars |
+| Noor Chen · West workspace; Delivery reconciliation · A-152 | Neutral queued badge | 0 / 6 neutral ring | 0 ms | Not started |
 
 Give the table's full wrapper Canvas width when the table needs room. Keep surrounding explanation at Reading width with the shared left edge. Put short facts and focused links in cells; put long code, explanations and a full Trace outside the table.
 
-Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Show progress only with a meaningful denominator and keep missing, empty or inconsistent facts explicit. A progress ring is optional when the progress fraction is the reader's main comparison. Inspect the actual page at desktop and 390 CSS px in light and dark themes for wrapping, local scrolling and clipping.
+Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Keep missing, empty or inconsistent facts explicit. Inspect the actual page at desktop and 390 CSS px in light and dark themes for wrapping, local scrolling and clipping.
 
-When phase timing adds nothing, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter. A card in every cell obscures the row comparison.
+When the requested facts need no useful progress or phase comparison, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter. A card in every cell obscures the row comparison.
 
 ## Framed or unframed
 
