@@ -37,7 +37,7 @@ Give the table's full wrapper Canvas width when the table needs room. Keep surro
 
 Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Keep missing, empty or inconsistent facts explicit. Inspect the actual page at desktop and 390 CSS px in light and dark themes for wrapping, local scrolling and clipping.
 
-When the requested facts need no useful progress or phase comparison, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter. A card in every cell obscures the row comparison.
+When no progress or phase visual was requested and the facts offer no useful comparison, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter; retain an explicitly requested visual even when its values do not offer a useful comparison. A card in every cell obscures the row comparison.
 
 ## Framed or unframed
 
