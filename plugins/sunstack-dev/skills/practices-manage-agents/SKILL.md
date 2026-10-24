@@ -89,7 +89,7 @@ Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier S
 | Daily driver | execution or synthesis that needs judgment |
 | Frontier | demanding judgment, design, or review |
 
-A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A job that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
+A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. A row whose Use names a task, such as `skill text`, is the owner's pick for that task and replaces the other rows for it. Thinking Effort lists the allowed range for the row. A job that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
 
 Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
 
@@ -113,14 +113,15 @@ A continuing Researcher Sidekick may use Luna Operators or Researcher Workers fo
 
 ### 🐒 Implementer Sidekick
 
-| Tier | Model | Thinking Effort | Direction | Span |
-|---|---|---|---|---|
-| Workhorse | OpenAI Luna | xhigh | Exact, Complete | Local |
-| Workhorse | OpenAI Luna | high | Exact, Complete | Local |
-| Daily driver | OpenAI Sol | medium | Complete | Cross-domain |
-| Daily driver | Claude Opus | medium | Complete | Cross-domain |
-| Daily driver | OpenAI Sol | high to xhigh | Partial | Cross-domain, Cross-system |
-| Daily driver | Claude Opus | high to xhigh | Partial | Cross-domain, Cross-system |
+| Tier | Model | Thinking Effort | Direction | Span | Use |
+|---|---|---|---|---|---|
+| Workhorse | OpenAI Luna | xhigh | Exact, Complete | Local | |
+| Workhorse | OpenAI Luna | high | Exact, Complete | Local | |
+| Daily driver | OpenAI Sol | medium | Complete | Cross-domain | |
+| Daily driver | Claude Opus | medium | Complete | Cross-domain | |
+| Daily driver | OpenAI Sol | high to xhigh | Partial | Cross-domain, Cross-system | |
+| Daily driver | Claude Opus | high to xhigh | Partial | Cross-domain, Cross-system | |
+| Daily driver | Claude Opus 5.5 | high to xhigh | any | any | skill text |
 
 ### 🔬 Verifier Sidekick
 
@@ -140,6 +141,7 @@ Reviewer Sidekicks review each Project and Milestone, never a single Task or Sub
 | Daily driver | xAI Grok | high | |
 | Daily driver | OpenAI Sol | xhigh | |
 | Daily driver | Claude Opus | xhigh | |
+| Daily driver | OpenAI Sol | xhigh | skill review |
 | Frontier | OpenAI Astra | high to xhigh | User must authorize |
 
 Beyond the rows above, another reviewer joins only when the owner asks for one and names its model.
@@ -169,7 +171,7 @@ MUST load `references/execution-forms.md` and return the route, lifecycle and hi
 
 Whoever assigns the job writes its prompt.
 
-1. MUST load `schemas/assignment-fields.ts` and the role's `schemas/role-contracts/<role>-contract.ts` and return the packet, filled from each field's description, with the role skill in `requiredReads.charter`.
+1. MUST load `schemas/assignment-fields.ts` and the role's `schemas/role-contracts/<role>-contract.ts` and return the packet, filled from each field's description, with the role skill in `requiredReads.charter`. When the job touches persistence, a dependency or a check gate, `sources` names the repository's standard for it and its existing example, such as Drizzle on better-sqlite3 in `packages/oauth-broker`, or says the repository has none.
 2. MUST load `practices-preflight` for the assignment's context and return `ready` or the gap list. A preflight that already covered the same context counts. Carry the checked list in `sources`, and hold back any work an open gap blocks.
 3. When two jobs would write the same file, branch or service state, write the isolation or the ordering into each packet's `limits`.
 4. Send this prompt, then the packet: "You are the <emoji> <Role> <Form>. Load `role-<name>` and read it in full, then the reads listed below; a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder. If you can't load `role-<name>`, return that gap before starting work."
