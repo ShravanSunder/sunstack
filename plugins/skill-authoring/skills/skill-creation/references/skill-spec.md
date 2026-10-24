@@ -10,6 +10,8 @@ A proposal that meets none of the doc predicates below stays conversational: it 
 
 If the spec spans more than one run, carries user decisions a later run must honor, or must survive a session boundary, write it as a spec doc before commissioning review and make the doc the reviewed artifact; the review packet's `review target` carries the doc's path and revision. Home: the repository's skill-work location, or `docs/wip/skills-authoring/<yyyy-mm-dd-name>/spec.md` when the repository has none. The reviewer reviews the provided artifact and reports a missing required spec as blocked; it does not author the target. The doc is working memory that outlives the conversation, not durable truth: after its last run lands, the repository's own rules for working documents decide its disposition. The doc is one draft — acceptance covers it as a whole — and each run in its sequence names exactly one skill target; a run naming more is split before acceptance.
 
+A behavior-changing spec doc the owner approves also gets a composed page beside it, so the owner reads it as a page. Build it with the host's HTML presentation skill when the host provides one; the page composes the doc and adds no prose of its own. When the host has no such skill, the doc stands alone and the missing page is named in the return.
+
 ## Slots
 
 ```text
