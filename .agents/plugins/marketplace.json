@@ -41,7 +41,7 @@
         "authentication": "ON_USE"
       },
       "category": "Coding",
-      "version": "2.92.0"
+      "version": "2.97.0"
     },
     {
       "name": "skill-authoring",
@@ -66,6 +66,20 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "agentstudio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agentstudio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity",
+      "version": "0.2.0",
+      "description": "Use Agent Studio worktrees, pane messages, context and App commands from coding agents."
     }
   ]
 }

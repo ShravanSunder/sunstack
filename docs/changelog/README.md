@@ -1,5 +1,13 @@
 # Changelog
 
+- [2026-10-24 Batched delivery rounds](2026-10-24-batched-delivery-rounds.md)
+- [2026-10-23 Presentation HTML combined evidence rows](2026-10-23-demistify-combined-cells.md)
+- [2026-10-22 Presentation HTML compact evidence](2026-10-22-presentation-html-compact-evidence.md)
+- [2026-10-22 Portable HTML reader instructions](2026-10-22-presentation-html-portable-readers.md)
+- [2026-10-22 Skill system architecture and onboarding](2026-10-22-skill-system-architecture.md)
+- [2026-10-21 Agent Studio skill plugin](2026-10-21-agentstudio-plugin.md)
+- [2026-10-21 Presentation HTML: the smallest view](2026-10-21-presentation-html-smallest-view.md)
+- [2026-10-21 Non-plugin cleanup](2026-10-21-non-plugin-cleanup.md)
 - [2026-10-18 Presentation HTML adopts shared components](2026-10-18-presentation-html-adopted-components.md)
 - [2026-10-18 Capability through-lines](2026-10-18-capability-through-lines.md)
 - [2026-10-18 Design sets: one source, two reading paths](2026-10-18-design-set-composition.md)

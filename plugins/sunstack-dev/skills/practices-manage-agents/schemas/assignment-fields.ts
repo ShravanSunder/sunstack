@@ -131,7 +131,7 @@ export const JobBase = z.strictObject({
   requiredReads: RequiredReads,
   limits: AccessLimits,
   stopCondition: RequiredText.describe(
-    "Where the job ends, and when an exception must come back early",
+    "Where the job ends; what to stop for and return early; and what to decide and record within what the role and assignment delegate",
   ),
   returnContract: OwnedResultContract,
 });

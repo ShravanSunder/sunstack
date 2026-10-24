@@ -27,7 +27,7 @@ On a page, the Markdown stays the truth and the page composes it. For a design s
 - The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. Hiding never makes a failure case look absent: a collapsed section's title names the failure cases inside it.
 - A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning chunk first. The view then shows that source.
 
-For example, a job-submission page opens on the worker-loss path: two sentences on what goes wrong when a worker dies, the scheduling chunk's lifecycle diagram, then each document's island in its own tab. Lease expiry, duplicate runs, and the requeue limit sit in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
+For example, a job-submission page opens on the worker-loss path: two framing sentences that state no rule and link to the scheduling chunk, a link (or a Walkthrough stop) to that chunk's lifecycle diagram, then each document's island in its own tab. Lease expiry, duplicate runs, and the requeue limit sit in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
 
 ### Where a Diagram Lives
 

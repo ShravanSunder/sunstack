@@ -18,7 +18,7 @@ The PR body and the changelog entry are part of the target. They make public cla
 
 Dispose of each finding at its anchor. Open the anchor, then accept it and route the correction, or reject it with the evidence that answers it. A finding you disposed of without opening its anchor is still open.
 
-Send corrections back to the same review lead, with what changed. It keeps its review history and verifies the corrected anchors against it. A new reviewer would start the review over and can't tell a fixed finding from a new one.
+Send the whole correction pass, as the procedure you named defines it, back to the same review lead once, with what changed for each finding. It keeps its review history and verifies the corrected anchors against it. A new reviewer would start the review over and can't tell a fixed finding from a new one.
 
 ## When to stop
 

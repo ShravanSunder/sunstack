@@ -1,0 +1,20 @@
+{
+  "name": "agentstudio",
+  "version": "0.2.0",
+  "description": "Use Agent Studio worktrees, pane messages, context and App commands from coding agents.",
+  "author": {
+    "name": "Shravan Sunder"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Studio",
+    "shortDescription": "Use Agent Studio worktrees, panes and App commands",
+    "developerName": "Shravan Sunder",
+    "category": "Productivity",
+    "longDescription": "Use the Agent Studio CLI for worktrees, pane messages, session and terminal context, and discovered App commands, with conditional teaching references.",
+    "defaultPrompt": "Use Agent Studio to choose the supported CLI command for my task.",
+    "capabilities": [
+
+    ]
+  }
+}

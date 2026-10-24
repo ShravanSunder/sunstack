@@ -20,9 +20,9 @@ AI tools distributed through the local marketplaces in this repository.
 Client install IDs:
 
 ```text
-Codex       scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack
-Claude Code scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack
-Cursor      local plugins via `.cursor-plugin/` manifests, including agent-router
+Codex       scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
+Claude Code scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
+Cursor      local plugins via `.cursor-plugin/` manifests, including agent-router and agentstudio
 ```
 
 Cursor can load these plugins from `.cursor-plugin/marketplace.json` plus each
@@ -92,3 +92,9 @@ Skill authoring for any repository, standalone from the workflow plugin. Provide
 - **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations before recommending create/update/merge/skip decisions
 
 - [agent-router plugin](agent-router/) — agent collaboration, shared message boards, wake-ups and schedules; canonical skill maintained in codex-router.
+
+### [agentstudio](agentstudio/)
+
+Agent Studio CLI worktrees, own-pane messages/context, terminal operations and discovered App commands, with conditional references and recovery guidance. Install as `agentstudio@sunstack` in Codex and Claude Code, or select `agentstudio` in Cursor's sunstack marketplace.
+
+This draft targets the matching message-only Agent Studio release; its upstream pin remains pending. See the [plugin README](agentstudio/README.md) for setup, canonical source and delivery limits.
