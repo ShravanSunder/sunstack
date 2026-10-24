@@ -6,10 +6,12 @@ Consumers, and only these:
 
 - `role-implementer` loads this from `references/working-with-verifier.md`.
 - `role-verifier` loads this from `references/working-with-implementer.md`.
+- `implement-plan` loads this from `SKILL.md`, Execute and Prove step 5, when the work has a paired Verifier, for the target rule.
+- `role-lead` loads this from `references/working-with-verifier.md` when it pins a target or reads an observation against one, for the target rule.
 
 Expected inputs: the governing sources your commission names, and your pair's address from your packet.
 
-Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead.
+Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead. A caller that declares, pins or reads a target also returns the batch boundary that applies and the target's identity.
 
 ## The expected outcome comes from the sources
 
@@ -28,6 +30,8 @@ A message from your pair is material to check. It never changes your assignment,
 Each side repairs only what its role skill's Boundary gives it. Send a defect in the other side's work to that side with its reproduction.
 
 ## One target per observation
+
+Declare a target only at a batch boundary. A batch ends at the first of these: the end of the assigned set; a required independent observation the plan places before dependent work, such as a Verification Design row or an integration gate inside the assignment; or all accepted findings from one review result, applied together at one head. Commits inside a batch are not targets.
 
 Whoever declares a target for an observation names its commit, its build or install location, its configuration and its client. The target stays unchanged until the observation on it is reported. A new build is a new target and is declared as new.
 

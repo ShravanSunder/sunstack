@@ -44,6 +44,8 @@ Place an integration gate at the earliest slice where separately changed compone
 
 The Verification Design already chose how each requirement is shown to hold. Each row gives its "proven by" line, target, journey or reused test, and passing condition. Put each row in the slice where its passing condition can first be met. Then schedule when it runs and with which command. Do not re-choose its observation, boundary, target, or passing condition. A row's `needed:` journey gets a build step before the slice that observes through it. A slice that can't earn its row as written goes back with `verification-design-gap`, the row and the evidence. That happens when no command reaches the target, or when the slice's change would let a wrong build pass the condition.
 
+Place a batch boundary only where the plan schedules a required independent observation before dependent work starts: put it after the slice that observation covers, and start the dependent slice after the observation reports. There the Implementer declares the paired Verifier's target under the target rule in `implementer-verifier-pairing.md`, which its role loads. Local proof and integration gates the executor runs keep their timing and declare no Verifier target. With no required independent observation inside an assignment, the whole assignment is one batch. One PR can hold several batches.
+
 For each slice, name:
 
 ```text

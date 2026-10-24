@@ -21,7 +21,7 @@ Resume the existing trace and read its history first. Before an unchecked "done"
 
 The 🦁 Lead keeps one current list in the trace. Each item is an actionable ask, question, constraint or correction in the owner's words, with where it was said, its state, and the evidence or next step behind that state.
 
-- When an ask or correction arrives, update the list before acting on it.
+- When an ask or correction arrives, update the list before acting on it. A correction about how agents work in general, such as when to review or whether to relay, also goes in the skill-failure log your standing instructions name, where skill audits look for it.
 - Done needs evidence; deferred needs a reason and a follow-up owner.
 - A later correction supersedes an item with a link; the old item stays.
 - An explored option is not an instruction, and a question is done once answered.
