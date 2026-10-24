@@ -6,10 +6,12 @@ Consumers, and only these:
 
 - `role-implementer` loads this from `references/working-with-verifier.md`.
 - `role-verifier` loads this from `references/working-with-implementer.md`.
+- `implement-plan` loads this from `SKILL.md`, Execute and Prove step 5, when the work has a paired Verifier, for the target rule.
+- `role-lead` loads this from `references/working-with-verifier.md` when it pins a target or reads an observation against one, for the target rule.
 
 Expected inputs: the governing sources your commission names, and your pair's address from your packet.
 
-Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead.
+Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead. A caller that declares, pins or reads a target also returns the batch boundary that applies and the target's identity.
 
 ## The expected outcome comes from the sources
 
