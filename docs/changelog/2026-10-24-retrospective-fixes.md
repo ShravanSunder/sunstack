@@ -1,0 +1,10 @@
+# 2026-10-24 Retrospective fixes: persistence standards and skill models
+
+- Plugin: `sunstack-dev` 2.98.0 to 2.99.0 in the Codex, Claude Code and Cursor manifests and their marketplace entries.
+- `role-advisor`: a second look at stored data, a dependency or a technology choice checks it against the owner's standing standards and the repository's existing way before judging correctness, names the example it compared with, never brings a deprecated API, and sends an existing use that breaks the standard to the Lead as a conflict for the owner. `working-with-lead.md` adds the Tool Portal failed and clean cases.
+- `practices-manage-agents`: when a job touches persistence, a dependency or a check gate, the commission's `sources` names the repository's standard and its existing example, or says there is none. The catalog adds a skill-text Implementer row (Claude Opus 5.5, high to xhigh) and a skill-review Reviewer row (OpenAI Sol, xhigh); the other rows are unchanged.
+- `domain-typescript`: a new Persistence standard. Persisted data goes to SQLite through Drizzle with the runtime's driver and checked-in `drizzle-kit` migrations, never the Durable Object key-value API, `node:sqlite`, or hand-written SQL or Kysely as the storage layer. An existing store that breaks it goes to the owner as a conflict, neither extended nor migrated.
+- `domain-rust`: Storage becomes Persistence. Persisted data goes to SQLite through SQLx with the driver the repository declares; a new engine or driver is the owner's call.
+- Spec: `docs/wip/skills-authoring/2026-10-24-retrospective-fixes/spec.md`. Descriptions, invocation, commands and hooks are unchanged, and no skill was added, so README inventories are unchanged.
+- Validation: `pnpm --dir tests/skills test` passed 169 tests in 18 files; typecheck passed; `claude plugin validate .` passed; `git diff --check` clean.
+- Status: drafted from the owner's corrections and checked by source walks over the incident records; agent behavior is unevaluated, and no pressure or model evaluation ran. Installed Codex, Claude Code and Cursor caches are not refreshed.
