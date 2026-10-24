@@ -14,7 +14,7 @@
     "allowImportingTsExtensions": true,
     "types": ["node", "vitest/globals"],
     "paths": {
-      "zod@4.6.5": ["./node_modules/zod"]
+      "zod@4.6.5": ["./node_modules/zod/index.d.cts"]
     }
   },
   "include": [
