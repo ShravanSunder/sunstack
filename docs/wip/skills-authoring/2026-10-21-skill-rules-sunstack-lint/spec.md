@@ -48,23 +48,25 @@ R2 starts only after R1 is `reviewed`, because R2 follows R1's updated workflow.
 | D2-r2 (2026-10-21, supersedes D2; spec review SR1, SR2) | D2's split stands, and gains two conditions. **(a) The lint front door applies only when lint can run the RuleSet:** the RuleSet declares exactly one `document` input and a `sunstack.lint.json` names it. Under that condition, `lint --check` validates wiring, `lint --rules` gives the inventory, and the CI job runs lint. Any other RuleSet shape the engine supports (for example a separate `calibration` context input) stays on `exec check_rules`, and no lint pass is claimed for it. Native print (`exec check_rules` with `assembled_rules`) is required for every RuleSet. **(b) Native calibration runs a mechanical-only view.** Build the `exec evaluate_rules` request from the assembled mechanical definitions alone: the same rule ID, target, predicate or `ast_grep` rule, and severity, compared field by field against the print. Judged definitions are left out, so no backend or credential is reachable. Calibration closes only when the intended good occurrence is `completed/pass`, the intended bad occurrence is `completed/fail`, and the report shows zero model requests and inference attempts. Setting judged rules `off` in a lint config is not the same thing: native input has no lint-off policy. | `lint` rejects anything but exactly one document input (`config_validation.rs:122–145`, research report :195), while `markers-and-rules.md:80–95` permits and requires a bound calibration input. Native `RuleInvocationInput` carries no lint-off policy, and the research succeeded through a separate mechanical-only view. |
 | D9 (2026-10-21, spec review SR4) | **Sensitive surfaces, classified before any outline.** **(1) Running the pinned CLI** (`npx --yes @sunstack/cli@0.1.0`): *allowed*. It's an exact-version package with npm SLSA provenance, and on first run it fetches the release binary from GitHub. Local and CI execution read only the repository's files, use no credential, make no model call (D2-r2b, judged rules off), and write only npm and package caches. **(2) The new repository CI workflow** (R2): *allowed*, bounded to `on: pull_request` and `push` to `main`; `permissions: contents: read`; no secrets or environment variables holding credentials; actions pinned to full commit SHAs; network limited to the npm registry and GitHub release downloads; and nothing written beyond the runner workspace. Proof: the workflow's YAML is `actionlint`-clean, and its first PR run is observed. **(3) The post-merge Codex/Claude cache refresh:** *deferred*. It's a home-level mutation outside this PR, done only when the owner scopes it as usual. Public-safety: no paths, accounts or credentials go into the workflow, README or changelog. | `skill-creation` `security-gate.md:3–25` requires the decision before outlining a sensitive surface, and spec-review blocks acceptance while surfaces are unclassified. These classifications carry existing authority accurately and widen none. |
 
-## Amendment, 2026-10-24: R3, the agent runs the linter while creating a skill
+## Amendment, 2026-10-24: R3, the agent runs the linter while creating a skill; no CI
 
-Lead-authored by 🦁 claude-local `68844339`. To be added verbatim to `docs/wip/skills-authoring/2026-10-21-skill-rules-sunstack-lint/spec.md`, after the Decisions table, and reviewed before R3 is implemented. R1 and R2 are unchanged.
+Lead-authored by 🦁 claude-local `68844339`. To be added verbatim to `docs/wip/skills-authoring/2026-10-21-skill-rules-sunstack-lint/spec.md`, after the Decisions table, replacing any earlier transcription of this amendment. It is reviewed before R3 is implemented. R1 and R2 keep their accepted scope, except where D11 below replaces a CI-dependent part with a local one.
 
 ### Requirement
 
 - "we dont need a claude opus for htis. and we gonan run that as lint for what? shodu lwe not have runes that trigger in skill creaiton as alitner and aks teh agent to run it when creating a skill?" (owner, 2026-10-24)
 - "isnt atha tmore improtant to actually do that for skillc reation?" and "it shoudl run locally isntead of pukllign ci inti thos first" (owner, 2026-10-24)
+- "why we nee dci now? it amke no snese to start with ci" and "it snot a good loop, we shoudl roll it out to not put it in ci" (owner, 2026-10-24)
 - Earlier: "i think we cant ahve auto checks we nee3d to ahve mechnism with router and baord and statemachiens as a afte rpoject" (owner, 2026-10-24). Until that mechanism exists, skills tell agents when to run checks themselves.
 
 ### Situations
 
-1. **An agent creates or changes a skill with `skill-creation`.** Before it hands back, it runs the repository's pinned linter on the `SKILL.md` and reference files it changed, and reports each command with its exit code and findings.
-2. **A finding is an `error`.** The agent fixes it before handing back. A fix that would change another skill's trigger or meaning is out of scope and is listed instead (D8).
-3. **A finding is a `warn`.** The agent fixes it when it's in a file the agent changed; otherwise it lists it.
-4. **The repository has no lint configuration.** The agent says so and skips the step. It never invents a config.
-5. **No CI job.** The rollout is local: the check runs in the agent's own loop, where the skill is written (D11).
+1. **An agent creates or changes a skill with `skill-creation`.** Before it hands back, it runs the repository's linter at the repository's declared pinned version, naming the files it changed. It reports each command with its exit code and every finding.
+2. **A changed file the config doesn't cover**, such as a reference file when the RuleSet binds only `SKILL.md`. The agent reports it as "not linted". An exit 0 with nothing selected is never reported as a clean check.
+3. **A finding at `error` severity.** The agent fixes it before handing back. A fix that would change another skill's trigger or meaning is out of scope and is listed instead (D8).
+4. **A finding at `warn` severity.** The agent fixes it when it's in a file the agent changed; otherwise it lists it. Warnings alone exit 0, by the engine's policy.
+5. **No lint configuration, or no declared CLI pin.** The agent says which is missing and skips the run. It never invents a config and never guesses a version, for example from a `$schema` URL.
+6. **No CI job.** The check runs in the agent's own loop, where the skill is written (D11).
 
 ### Run
 
@@ -75,18 +77,33 @@ Lead-authored by 🦁 claude-local `68844339`. To be added verbatim to `docs/wip
 **Surface allocation.**
 
 - **Trigger:** no change.
-- **Main path (`SKILL.md`):** step 7's completion check gains one sentence. IF the repository has a `sunstack.lint.json`, run its pinned `sunstack lint --check`, then `lint` over the changed skill files, and return each command, its exit code and every finding, with errors fixed. The commands and the version come from the repository's config and `skill-rules`' front-door table (R1), not from this sentence.
-- **Depth:** none new; `skill-rules`' `references/check-and-reports.md` already owns the front doors.
+- **Main path (`SKILL.md`):** step 7's completion check gains one sentence. It reads: IF the repository has a lint config and a declared CLI pin, load `skill-rules`' `references/check-and-reports.md` and return the local run's result: each command with its exit code, every finding with errors fixed, and each changed file the config didn't select, marked not linted.
+- **Depth:** the local-run section in `skill-rules`' `references/check-and-reports.md` is allocated to R1 (see D11). It carries the command route, the pin input, naming the changed files, the not-linted report, and the missing-config and missing-pin branches. R3 adds nothing there.
 - **`skill-orchestrator`:** none. Its proof step consumes `skill-creation`'s return.
 
-**Proof.** A changed `SKILL.md` with a description that doesn't start with "Use when…" makes the step report a finding with a nonzero exit, and fixing it makes the step clean. This is static plus one real lint run on the engine. Fresh-agent behavior is not claimed.
+**Proof.** Run on a scratch copy of the repository, never the worktree:
 
-### Decision
+- **The rule's real severity.** A changed `SKILL.md` whose description doesn't start with "Use when…" yields that rule's finding at its declared severity (`warn` under D8), at the expected file and line, with exit 0. After the fix, the finding is gone.
+- **An error-severity control.** A rule every current skill passes, broken on purpose, yields an `error` and a nonzero exit. After the fix, the exit is 0.
+- **Coverage.** A change to a reference file only is reported as not linted, not as clean.
+- **Branches.** Missing config and missing pin each report the gap and skip.
+
+This is static plus real lint runs on the engine. Fresh-agent behavior is not claimed.
+
+### Decisions
 
 | # | Decision | Reason |
 | --- | --- | --- |
 | D10 | The agent runs the linter locally during skill creation, as `skill-creation`'s step 7 check | Owner direction, 2026-10-24: catch a broken standard where it's made, in the agent's own run |
-| D11 | Supersedes D7's CI workflow, D5's CI recommendation and D9 item 2. R2 keeps the repository `sunstack.lint.json` and the RuleSet, which the local run needs, and adds no CI workflow. `skill-rules` teaches the local run, not a CI job | Owner, 2026-10-24: "it shoudl run locally isntead of pukllign ci inti thos first", "why we nee dci now? it amke no snese to start with ci" and "it snot a good loop, we shoudl roll it out to not put it in ci". With no workflow, D9's CI classification no longer applies. D9 item 1 (running the pinned CLI) still governs the local run |
+| D11 | No CI. This supersedes D7's CI workflow, D5's CI recommendation, D9 item 2 and every CI-dependent part of R1 and R2, each replaced by its local equivalent. See the list below the table | The owner's four quotes above. D9 item 1 (running the pinned CLI) still governs the local run |
+
+D11's replacements:
+
+- **R2's success definition.** "A credential-free CI job fails when…" becomes "the local `sunstack lint --check` fails when a marker loses its entry or a host overflows". The rest stands.
+- **D2-r2 (a).** "The CI job runs lint" becomes "the local run uses lint". The exactly-one-document-input condition stands.
+- **R1 depth.** In `references/check-and-reports.md`, the CI section becomes the local-run section described under Surface allocation. That is R1's scope, not R3's.
+- **R2's repository allocation.** No CI workflow. The README note becomes local-use documentation: how to run the pinned CLI, the declared pin, and what the config selects.
+- **R2's proof.** "Its first PR run is observed" and the PR-job findings become a local lint report. It is checked against the expected rule and file findings. It keeps the wiring negative controls, the native calibration and the inventory equality.
 
 ## Surface allocation
 
