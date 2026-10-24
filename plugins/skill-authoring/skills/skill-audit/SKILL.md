@@ -31,6 +31,7 @@ Audit real workflows before creating skills. Skills encode judgment and house st
 2. Gather usage evidence:
    - memory summary already in context
    - targeted `MEMORY.md` hits for the repo, plugin, or workflow
+   - the skill-failure log the standing instructions name, and other projects' memory notes, as candidates: check each against the owner's own words before using it, and label the note writer's own generalization a hypothesis
    - the 1-3 most relevant rollout summaries when exact evidence matters
    - raw sessions only when summaries do not contain the needed proof
 

@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-24 Batched delivery rounds](2026-10-24-batched-delivery-rounds.md)
 - [2026-10-23 Presentation HTML combined evidence rows](2026-10-23-demistify-combined-cells.md)
 - [2026-10-22 Presentation HTML compact evidence](2026-10-22-presentation-html-compact-evidence.md)
 - [2026-10-22 Portable HTML reader instructions](2026-10-22-presentation-html-portable-readers.md)

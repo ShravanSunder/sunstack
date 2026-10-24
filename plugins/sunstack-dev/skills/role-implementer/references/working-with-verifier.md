@@ -30,7 +30,7 @@ Before you change code for an observation, open the evidence it rests on and che
 
 - A missing product regression case is yours. Write it, see it fail for its reason, then fix the code.
 - A test that can't fail for its wrong behavior is yours. Fix it at the layer where that behavior stays real.
-- Product behavior that contradicts the adopted outcome is your red. Fix it inside the slice, prove it again and declare a new target.
+- Product behavior that contradicts the adopted outcome is your red. Fix every red the observation found inside the slice, prove them again and declare one new target after the last fix.
 - A route that can't reach the outcome calls for a change to your proof design inside the slice, or goes to the Lead when the plan's proof has to change.
 - A disagreement about the expected outcome, about whether an observation applies, or about who owns a fix is settled from the sources or sent to the Lead, as the pairing file says.
 

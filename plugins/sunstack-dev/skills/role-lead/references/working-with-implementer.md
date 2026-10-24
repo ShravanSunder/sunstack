@@ -6,7 +6,7 @@ This is your side of commissioning, correcting and closing out an Implementer. `
 
 An Implementer always works beside a paired Verifier. An owner override of the Implementer's form changes how it runs and leaves the pairing in place. If the packet can't name the pair, for example because a native Worker has no Router address, keep the Verifier, record how the two reach each other for this run, and bring the missing contract field to the owner as a gap.
 
-Give it the write scope, meaning the exact paths it may change. Give it a stop condition that says when to hand back early, including a result that contradicts the plan. Name the paired Verifier and how to reach it. A design choice the slice depends on goes into the plan before the commission goes out.
+Give it the write scope, meaning the exact paths it may change. Give it a stop condition in two halves. The first names what it stops for and hands back early: a design break, a public-contract change, a decision that belongs to the owner, a destructive action, and any contradiction the slice names, including a result that contradicts the plan. The second tells it to decide and record every other mechanism choice inside the plan, and to hand back once per batch. Name the paired Verifier and how to reach it. A design choice the slice depends on goes into the plan before the commission goes out.
 
 Its own product tests and proof stay visible to it, because it builds against them. The cases and checks of a held-out evaluation stay out of everything it reads, the plan included. `working-with-verifier.md` owns that rule.
 

@@ -107,6 +107,8 @@ not-converging
   comparisons
 ```
 
+A correction pass is all the accepted implementation-owned findings of one review result, corrected together and applied at one head.
+
 Convergence (this reference is its home for implementation review):
 
 > After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
@@ -123,6 +125,6 @@ The result includes reviewed authority, unchanged plan/governing-basis/delivery-
 
 A proof claim whose proof-challenge check returned only challenges (nothing executed because every command would write into the worktree or no grant was recorded) cannot support `ready` when that claim is the sole proof for a changed contract; it is `needs-revision` to `implement-plan` (supply runnable, scratchpad-safe proof) or `blocked-input`.
 
-Accepted corrections to source or proof invalidate affected coverage. A remediation report, green proof, or focused-only result does not restore it; require a new meaningful review with fresh chunk coverage for the corrected source and affected proof. State which coverage became invalid and bind the new result to the corrected source.
+Accepted corrections to source or proof invalidate affected coverage. A remediation report, green proof, or focused-only result does not restore it; require one new meaningful review per correction pass, with fresh chunk coverage for the corrected source and affected proof. State which coverage became invalid and bind the new result to the corrected source.
 
 Complete when: every candidate has one verified disposition; duplicates and conflicts are reduced; each accepted finding has every required field and one semantic owner; the result follows the labels above; uncovered boundaries are explicit; and no stale coverage supports `ready`.
