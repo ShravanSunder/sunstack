@@ -37,6 +37,13 @@ This maintainer index records current view names, artifact altitude, semantic ow
 | "proven by" cards | proof strategy | `skills/verification-design/SKILL.md` Write the document and its views | `skills/verification-design/SKILL.md` |
 | coverage rows | proof strategy | `skills/verification-design/SKILL.md` Write the document and its views | `skills/verification-design/SKILL.md` |
 
+## Plan Views
+
+| View token | Altitude | Runtime semantic owner | Runtime rendering consumer |
+| --- | --- | --- | --- |
+| delivery map | delivery plan | the plan's slices, reads, rows, proof layers, edges and gates (`skills/plan-implementation/references/slice-and-proof-design.md`), its PR topology and repositories (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
+| plan change view | delivery plan | a superseding plan's "Changed from" section (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
+
 ## Altitude Boundary
 
 Journey maps, context diagrams, and requirement coverage tables expose authoritative Why/What. The system remains one opaque node in a context diagram; drawing its first internal component, owner, dependency edge, state store, or enforcement point crosses into program-design views.

@@ -39,13 +39,21 @@ For a design set, apply `engineering-documents.md`'s source rules before choosin
 | review findings | `ex-note` on the code line for code findings; otherwise an `ex-card` or `ex-callout` per blocking finding, with nits grouped in one list. | Each finding sits next to its evidence. | A card per nit. |
 | owner decision brief | the form in `options-and-decisions.md` | The current model is drawn before the options. | Options with no picture of today. |
 | debug narrative | `ex-trace`: symptom → suspected boundary → proof → decision → next validation. | Observed results are distinct from inferred ones. | An inference labeled as observed. |
-| plan slices and order | `ex-tree` checklist; `ex-flow` when dependencies cross slices. | Order and dependencies readable at a glance. | Slices with hidden dependencies. |
+
+## Plan views
+
+Both read the plan file and add no fact to it.
+
+| View | Form on the page | Good signal | Bad signal |
+| --- | --- | --- | --- |
+| delivery map | `ex-flow` from PRs to their slices, each slice with its reads and the Verification Design rows it earns, each proof's layer (focused, integration or journey, and whether a journey drives the normal entry), the dependency edges and the integration gates. When the plan spans repositories, a repository level sits above the PRs, with an edge at each point where one repository waits on another. An `ex-tree` when no edges cross. | The owner sees which PR earns which proof, at which layer, and where one PR or repository waits on another. | Slices with hidden dependencies; a journey whose entry the map doesn't state. |
+| plan change view | `ex-compare` over corresponding topics, or a list: each change from the superseding plan's "Changed from" section, with what it invalidated (slices, rows, PRs). | Each change shows what it invalidated. | A text diff of the two plans; a change without its invalidations. |
 
 ## Page lenses on a design set
 
 | Lens | Form | Good signal | Bad signal |
 | --- | --- | --- | --- |
-| reading path (a through-line or task path in `index.md`) | a Walkthrough over the islands, in the path's order, as `engineering-documents.md` teaches | Each stop is an existing island or heading; narration states no rule. | A path the set does not define. |
+| walkthrough (the feature end to end, a through-line or task path in `index.md`, a PR's slice reads, or a point where one repository waits on another) | a Walkthrough over the islands, in the path's order, as `engineering-documents.md` teaches | It answers a question that crosses documents, or that needs a new order through one file; each stop is an existing island or heading; narration states no rule. | One file's headings in their own order, which is its outline; a path the set does not define. |
 | concept section (an idea that two or more capabilities' obligations name) | a section of links: meaning, picture (or a gap returned to the caller), then links by document, as `engineering-documents.md` teaches | A reader learns what the idea is, not only where it appears. | A column or tag of ticks. |
 
 ## The source-derived call path
