@@ -1,11 +1,11 @@
 ---
 name: orchestrator-design
-description: "Use when a user asks to run, resume, or finish one design cycle before planning: Requirements, Specification, Program Design, Verification Design, and their independent review. Not for a direct design phase, implementation delivery, or PR work."
+description: "Use when a user asks to run, resume, or finish one design cycle: Requirements, Specification, Program Design, Verification Design, their independent review, and the first implementation plan reviewed with them. Not for a direct design phase, changing a plan during delivery, implementation delivery, or PR work."
 ---
 
 # Design Orchestration
 
-One design cycle produces four documents in order: Requirements and Specification (`spec-design`), Program Design (`program-design`), then Verification Design (`verification-design`). One independent review then judges them together. The orchestrator is the Lead. It writes every document in this session by loading each phase, assigns only the review out, routes each correction to the owner of the defect, and ends at an honest design terminal: reviewed and design-ready, or stopped at the exact decision or blocker. Phases own their judgment, the review owns its findings, and the orchestrator owns the route and the final claim.
+One design cycle produces four documents in order: Requirements and Specification (`spec-design`), Program Design (`program-design`), then Verification Design (`verification-design`). One independent review then judges them together, and a first cycle ends with the first implementation plan, which the owner reviews beside the design. The orchestrator is the Lead. It writes every document in this session by loading each phase, assigns only the review out, routes each correction to the owner of the defect, and ends at an honest design terminal: reviewed and design-ready, or stopped at the exact decision or blocker. Phases own their judgment, the review owns its findings, and the orchestrator owns the route and the final claim.
 
 MUST load `../../shared-references/design-documents.md` and return the four document identities and the boundaries each handoff is checked against.
 
@@ -39,6 +39,9 @@ Load the smallest owner that can advance the current state, and verify its retur
 | the first three current; Verification Design missing or stale | `verification-design` |
 | all four current; no current review | the persistent 🔎 Reviewer Sidekick runs `spec-program-review` in `four-document-design` mode |
 | unmade owner meaning blocks a phase | `discuss-pathfinding`, returning to that phase |
+| review `ready`; no current delivery plan | `plan-implementation`, for the first plan (Design Terminal) |
+| review `ready`; an existing delivery plan | the delivery caller, with the corrected identities and that plan's path (Design Terminal) |
+| review `ready`; the user asked for design only | the design terminal, `ready-for-planning` |
 
 Accept a producer's recommended next owner only from this table, and a producer's stop as the run's exact stop. MUST load `../../shared-references/phase-return-tokens.md` and return each returned token with its payload, mapped to its next owner here:
 
@@ -79,8 +82,18 @@ A round runs the affected owners in document order, `spec-design`, `program-desi
 
 ## Design Terminal
 
-`ready` requires four distinct current documents, an independent `four-document-design` review, the retained Reviewer Sidekick's verification of every corrected anchor, and the Lead's acceptance. It means design-ready, not implemented: return `ready-for-planning` with the four reviewed identities. Short of `ready`, return the exact decision or blocker and its owner.
+`ready` requires four distinct current documents, an independent `four-document-design` review, the retained Reviewer Sidekick's verification of every corrected anchor, and the Lead's acceptance. It means design-ready, not implemented. Short of `ready`, return the exact decision or blocker and its owner.
 
-IF the user asked for continued delivery, load `orchestrator-implementation-goal` with the `ready-for-planning` result and the requested terminal, and return its delivery result. It owns planning, implementation, review and PR work from there; continue into it in the same run instead of stopping at the design terminal.
+At `ready`, the entry context chooses the terminal:
+
+| Entry context | Terminal |
+| --- | --- |
+| no current delivery plan (a first design cycle) | load `plan-implementation` with the four reviewed identities and the requested terminal, write the first plan, and give the owner one page over the design and the plan. For a new feature, wait for the owner to approve or change the plan, then return `ready-for-implementation` with the four design identities and the plan path; the approval goes on the work thread, never in the plan file. For improvement work, record the page and the decision to proceed on the work thread, and return the same result unless the owner objects. |
+| an existing delivery plan (a design correction during delivery) | write no plan. Return the corrected, reviewed design identities and the existing plan's path to the delivery caller, which loads `plan-update`; that skill judges the completed slices and when the update reaches the owner. |
+| design only, as the user asked | return `ready-for-planning` with the four reviewed identities |
+
+While the owner hasn't answered a new-feature gate, the gate holds: keep working on anything the plan doesn't touch, and start no Implementer.
+
+IF the user asked for continued delivery, load `orchestrator-implementation-goal` with the terminal's result and the requested terminal, and return its delivery result. It owns plan updates, implementation, review and PR work from there; continue into it in the same run instead of stopping at the design terminal.
 
 At each owner return and at the terminal, checkpoint the decision, reason, evidence and result through `practices-show-me-your-work`, including blocked, deferred or stopped work.
