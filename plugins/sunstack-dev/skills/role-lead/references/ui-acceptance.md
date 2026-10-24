@@ -26,8 +26,12 @@ The Lead launches the build, sees the pane open and the line update, and capture
 
 ### Failed: the Verifier's card-only matrix
 
-A paired Verifier judges the card at five widths and reports one FAIL at the narrowest and quality UNKNOWN elsewhere, with the popover outside its commission. The Lead accepts "with limits", and a later summary calls the pane ready. The limits were real: quality was never established, so the pane was never ready.
+A paired Verifier judges the card at five widths and reports one FAIL at the narrowest and quality UNKNOWN elsewhere, with the popover outside its commission. The Lead accepts "with limits", and a later summary calls the pane ready. Quality was never established, so the pane was never ready.
 
 ### Clean: a complete scoped result
 
 The commission named the toolbar and the Messages popover, closed and open, at the three supported widths. The Verifier returns a frame for each cell and a quality PASS for each. The Lead opens the narrowest frames of both surfaces, agrees, and accepts without asking for another run.
+
+## When to stop
+
+Stop when every scoped cell has a frame you judged or is named missing, and both verdicts are written. Call the UI ready only when every scoped cell passes.
