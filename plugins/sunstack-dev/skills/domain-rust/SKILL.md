@@ -101,7 +101,9 @@ Modules that carry a responsibility get two or three words (`native_channel_rela
 
 When naming a function, name the effect it has: `attach_and_observe` is not a read, and an `open` that migrates needs a name that says so ([a name is a promise about the effect](../principle-define-the-domain-first/SKILL.md)).
 
-## Storage
+## Persistence
+
+When the code persists data, store it in SQLite through SQLx, with the driver the repository already declares. A new engine or driver is the owner's call.
 
 IF the change touches SQLx queries, migrations or pools, load `references/sqlx-sqlite.md` and return each rule that applies to the change under the selected backend and the repo's conventions, met or named as a gap, and the checked-query metadata command when the repo uses checked queries.
 
