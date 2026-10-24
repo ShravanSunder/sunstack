@@ -90,4 +90,4 @@ Source walks of the real incident records named above, and the test suite. No fr
 
 | Run | Status |
 | --- | --- |
-| R1–R4 | accepted to implement; commissioned 2026-10-24 to an Opus 5.5 xhigh Worker |
+| R1–R4 | implemented on `skills/retro-fixes`, one commit per run; source walks done; independent implementation review owed |
