@@ -73,8 +73,8 @@ development and fitting proof complete
 orchestrator assessment complete
   -> implementation-review
 
-accepted implementation finding; review has not returned not-converging
-  -> implement-plan by the same implementer, fresh affected proof, then the same 🔎 Reviewer Sidekick
+accepted implementation findings from one review result; review has not returned not-converging
+  -> one correction pass through implement-plan by the same implementer, fresh affected proof once, then the same 🔎 Reviewer Sidekick once
 
 accepted specification, design, or plan finding
   -> exact semantic owner, then resume the open implementation goal
@@ -94,7 +94,7 @@ A request for one direct phase bypasses this orchestrator. Optional `ops-*` trac
 
 After every owner returns, the orchestrator inspects the source anchors that control the next decision. The 🔎 Reviewer Sidekick supplies its review result after detailed source reading and lane reduction. The orchestrator checks findings against cited evidence, records why rejected findings are invalid, and routes accepted findings to their actual owner. Contextual design feedback does not replace independent review.
 
-Implementation review continues under the convergence rule in `implementation-review`'s `references/finding-and-reduction.md`. After each accepted implementation correction, require fresh affected proof and fresh review coverage. Design or planning corrections follow their owners' review boundaries and do not become implementation-remediation passes.
+Implementation review continues under the convergence rule in `implementation-review`'s `references/finding-and-reduction.md`. After each correction pass, require fresh affected proof and fresh review coverage. Design or planning corrections follow their owners' review boundaries and do not become implementation-remediation passes.
 
 If current evidence establishes that no review has run, use the ordinary first-review route. When prior review history should exist but its evidence cannot be inspected, inspect the current source, diff, proof, and governing basis, record what is missing, and route an ordinary review; the current review sets the convergence baseline. Missing history never excuses stale proof.
 

@@ -1,6 +1,6 @@
 ---
 name: implement-plan
-description: "Use when executing or continuing one ready canonical implementation plan whose delivery context authorizes implementation, or correcting one implementation-owned review finding. Not for plan or design defects, independent review, or PR work."
+description: "Use when executing or continuing one ready canonical implementation plan whose delivery context authorizes implementation, or correcting the implementation-owned findings of one review result. Not for plan or design defects, independent review, or PR work."
 ---
 
 # Implement Plan
@@ -27,9 +27,9 @@ Completion: the unchanged ready plan record, governing basis, delivery context, 
 2. Under the resolved execution owner, select the smallest ready frontier. IF the owner assigns a separate executor or procedure, load `practices-manage-agents` at that assignment point and return the bounded assignment; otherwise continue with the existing assigned executor or direct implementation. Assignment may cover serial work. Parallelism is only eligible for plan-identified independent slices with disjoint writes after proven prerequisites.
 3. Before editing the slice, map each of its obligations to the proof its gate requires. Then MUST load `practices-verification` and return, for each obligation, the route it proposes and the target before you edit, and its result after the change: supported, unsupported or unknown, with where the evidence lives and what stays unverified. A route that can't run inside the slice's scope stops the slice before edits. Classify that stop as in step 6 and send it to that class's owner, or return a split when a smaller slice can be proven inside scope.
 4. Execute one slice inside its write scope, using red/green when required and preserving every proof gate. When a dependency the slice needs is missing, put a contract-honoring stand-in at a boundary the plan names, record it as a stand-in through `practices-show-me-your-work`, and continue the slice. Claim no proof for the stubbed interaction. Route a replan only when the stand-in would change a public contract, persisted data format, or ownership.
-5. Re-anchor and prove the slice before advancing. Advance only when every obligation the slice claims has a supported result at its gate's target and the local quality and broader checks pass. Integrate only at the plan's named gate. IF this slice ends a plan milestone, load `practices-cleanup` once its gate passes and return the removed and held paths for the slice report.
+5. Re-anchor and prove the slice before advancing. Advance only when every obligation the slice claims has a supported result at its gate's target and the local quality and broader checks pass. Integrate only at the plan's named gate. Declare a target for the paired Verifier only at a batch boundary, under the target rule in `../../shared-references/implementer-verifier-pairing.md`; slice proof and integration gates keep their own timing. IF this slice ends a plan milestone, load `practices-cleanup` once its gate passes and return the removed and held paths for the slice report.
 6. Classify each surprise, including each gap the practice returns, as `reversible drift | design break | plan defect | out-of-scope infrastructure failure | evidence gap`. Correct reversible drift inside scope and route every other class to its owner before building on it.
-7. For an accepted implementation-owned review finding, apply the smallest correction and fresh proof. In an orchestrated project flow, return the affected proof through orchestrator disposition to the same 🔎 Reviewer Sidekick. When the review returns `not-converging`, stop correcting and return it to the orchestrator.
+7. Apply the accepted implementation-owned findings of one review result as one correction pass, defined in `implementation-review`'s `references/finding-and-reduction.md`. Each finding keeps its own admission, semantic route and affected-proof mapping. Give each the smallest correction, then refresh the affected proof once at the pass's head and return once. In an orchestrated project flow, return that proof through orchestrator disposition to the same 🔎 Reviewer Sidekick. When the review returns `not-converging`, stop correcting and return it to the orchestrator.
 8. Return each slice report, including decisions made and open stand-ins, to its assigning implementer. When all planned development and fitting proof are complete, return the canonical plan record, governing basis, delivery context, and completion report to the orchestrator for assessment before the first independent review.
 
 ## Boundaries
@@ -37,7 +37,7 @@ Completion: the unchanged ready plan record, governing basis, delivery context, 
 - Never alter plan meaning, governing basis, delivery context, required proof, design, tracker state, review verdict, PR state, or merge authority.
 - This phase does not mutate PR state; the same implementer may later run separately authorized `implementation-pr-wrapup` after assessment and review prerequisites are satisfied.
 - Orchestrator feedback may inform execution, but neither it nor partial direction supplies absent architecture or changes required plan meaning; return those gaps to the orchestrator or originating-plan owner.
-- A completed slice routes to `implementation-review` for independent review.
+- Completed planned development returns to the orchestrator's assessment before independent review.
 
 Completion: every obligation a claimed slice covers has a fresh supported result at its gate's target, every incomplete obligation/blocker and unverified interaction is explicit, the plan record remains unchanged, and no correction continued after `not-converging`.
 

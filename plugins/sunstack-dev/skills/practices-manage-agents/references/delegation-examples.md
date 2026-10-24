@@ -41,19 +41,19 @@ Job two: "For each question as it comes, trace the field's writes, reads and ser
 5. Role and form: still a 📚 Researcher. Each answer goes faster with what the last one found, so a Sidekick.
 6. Catalog row: a continuing Researcher Sidekick, Sol high to xhigh, which may use Luna helpers for collection.
 
-### Implementation: a breakdown with three PRs
+### Implementation: dependent slices in one PR
 
-Main point: each PR is a workstream with its own Implementer and Verifier pair, and a dependent PR waits for its prerequisite.
+Main point: dependent work joins one PR as ordered slices under one Implementer and Verifier pair; a separate PR, with its own pair, is for work that is genuinely independent.
 
-The Lead's plan for saved searches has three PRs. PR 1 adds storage and an API in the search module; PR 2 adds a settings screen that calls that API; PR 3 adds sharing. PR 2 needs PR 1 merged first, and PR 3 needs neither.
+The Lead's plan for saved searches has three parts: storage and an API in the search module, a settings screen that calls that API, and sharing. The settings screen needs the API, and sharing needs neither. The plan writes the API contract down, puts storage, the API and the settings screen into PR 1 as six ordered slices, and puts sharing into PR 2.
 
-Job to hand off: "Implement PR 1: its four slices, in order, from the plan."
+Job to hand off: "Implement PR 1: its six slices, in order, from the plan."
 
 1. Direction: the plan names each slice. Complete.
-2. Span: the search module and the storage it owns. Local.
-3. Horizon: four slices make one PR, checked against the plan's proof. Milestone.
-4. Cut: name where the workstream ends: "run the full suite, push, open the PR, then report".
-5. Role and form: changes and their proof, so a 🐒 Implementer Sidekick, and the Lead pairs a 🔬 Verifier Sidekick with it. Create both sessions, fill both packets with each other's address, then dispatch both. PR 3 gets its own pair now; PR 2's pair starts once PR 1 lands.
+2. Span: each slice touches one owner, the search module or the settings screen, and the screen's slices build against the API contract the plan wrote down. Local.
+3. Horizon: six slices make one PR, checked against the plan's proof. Milestone.
+4. Cut: name where the workstream ends: "run the full suite, push, open the PR, then report". The settings-screen slices follow the API slices in the same workstream, so nothing waits on another PR's merge.
+5. Role and form: changes and their proof, so a 🐒 Implementer Sidekick, and the Lead pairs a 🔬 Verifier Sidekick with it. Create both sessions, fill both packets with each other's address, then dispatch both. PR 2 gets its own pair now, because sharing needs nothing from PR 1.
 6. Catalog row: the Implementer's Complete · Local matches a Luna Workhorse row. The Verifier is Sol or Opus, high to xhigh, from a different lineage than its Implementer when one is available.
 
 ### Implementation: a slice blocked by a missing seam

@@ -29,6 +29,8 @@ Each side repairs only what its role skill's Boundary gives it. Send a defect in
 
 ## One target per observation
 
+Declare a target only at a batch boundary. A batch ends at the first of these: the end of the assigned set; a required independent observation the plan places before dependent work, such as a Verification Design row or an integration gate inside the assignment; or all accepted findings from one review result, applied together at one head. Commits inside a batch are not targets.
+
 Whoever declares a target for an observation names its commit, its build or install location, its configuration and its client. The target stays unchanged until the observation on it is reported. A new build is a new target and is declared as new.
 
 ## Held-out evaluations

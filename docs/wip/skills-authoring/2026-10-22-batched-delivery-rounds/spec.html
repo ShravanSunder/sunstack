@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Batched delivery rounds</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-document id="content">
+
+<h1>Batched delivery rounds</h1>
+
+<p>This change edits nine skills so that the expensive steps of delivery (the Verifier's observation, the independent review and the Lead's assessment) run once per batch of work instead of once per change. Nothing is dropped: every observation, review and proof still runs, and whatever a batch touches is re-checked.</p>
+
+<ex-callout id="your-decision" title="Your decision" tone="decision" icon="user">
+  <p>Approve the promise in <a href="#promise">What you'd see happen</a> and the defaults in <a href="#defaults">Defaults you can strike</a>, or strike any of them. No skill file changes until you do.</p>
+  <p><strong>Status:</strong> spec review passed in round two (verdict <em>great</em>). Then the implementation Worker's pre-read found two more places that still send each fix back for its own review. The spec was revised and now waits for the whole improvement program's review round. No skill file has changed. <strong>Behavior not yet evaluated:</strong> no agent has been run on the new wording.</p>
+</ex-callout>
+
+<h2 id="what-changes">What changes</h2>
+
+<p>The codex-router Lead lost a day because every small fix got its own Verifier pass and its own review, and its stacked PRs had to be rebuilt after each lower change. The skills told it to work that way. The fix collects a round's corrections into one batch, builds once, checks once and reviews once.</p>
+
+<ex-tabs label="Review findings before and after" data-width="canvas">
+  <section id="today" label="Today" icon="clock">
+    <p>A review returns three findings. Each fix gets its own build, Verifier pass and review.</p>
+    <ex-mermaid id="today-loop" label="Today: one cycle per finding"><script type="text/plain">
+flowchart LR
+  Review[Review returns 3 findings] --> Cycle1
+  subgraph Cycle1[Finding 1]
+    direction TB
+    Fix1[Fix] --> Ver1[Verifier pass] --> Rev1[Re-review]
+  end
+  Cycle1 --> Cycle2
+  subgraph Cycle2[Finding 2]
+    direction TB
+    Fix2[Fix] --> Ver2[Verifier pass] --> Rev2[Re-review]
+  end
+  Cycle2 --> Cycle3
+  subgraph Cycle3[Finding 3]
+    direction TB
+    Fix3[Fix] --> Ver3[Verifier pass] --> Rev3[Re-review]
+  end
+</script></ex-mermaid>
+  </section>
+  <section id="with-fix" label="With this fix" icon="rocket">
+    <p>The same three findings become one correction pass at one commit, observed once and re-reviewed once by the same reviewer.</p>
+    <ex-mermaid id="batched-loop" label="With the fix: one cycle per batch"><script type="text/plain">
+flowchart LR
+  BReview[Review returns 3 findings] --> BFix[Fix all 3 at one commit]
+  BFix --> BVer[One Verifier target]
+  BVer --> BRev[Same reviewer re-reviews once]
+</script></ex-mermaid>
+  </section>
+</ex-tabs>
+
+<h2 id="batch">What counts as a batch</h2>
+
+<p>A batch is the work between two observation points. It ends at the first of these:</p>
+<ul>
+  <li>the end of the helper's assigned set of work;</li>
+  <li>an observation the plan requires before dependent work can start, such as a Verification Design check or an integration gate inside the assignment;</li>
+  <li>every accepted finding from one review result, applied together at one commit.</li>
+</ul>
+<p>One PR can hold several batches. Local tests and integration gates keep their timing. A Verifier target stays fixed while it is being observed.</p>
+
+<h2 id="promise">What you'd see happen</h2>
+
+<ol>
+  <li>A review returns four accepted findings. The Implementer applies all four, builds once, declares one Verifier target, and the same reviewer re-reviews once.</li>
+  <li>An Implementer hits three failures inside its slice. It fixes all three and declares one new target after the last fix, not three.</li>
+  <li>A feature has dependent parts. The plan keeps it in one PR unless you asked for a split or one PR would be too big to review in one pass. Dependent work joins by merge, not by restacking.</li>
+  <li>An Implementer's commission tells it to stop only for a design break, a public-contract change, your decision or something destructive, and to decide and record the mechanism choices inside the plan. An Operator watching CI that meets a failure its procedure doesn't cover still hands it back rather than fixing it.</li>
+  <li>A Lead receives six progress messages from helpers. It relays none of them to you, and acts when a batch completes or a helper is blocked.</li>
+  <li>An assignment has slices A and B, and the plan requires an observation of A before B starts. The Implementer closes a batch after A and waits for the observation. With no such requirement, A and B are one batch.</li>
+</ol>
+
+<h2 id="defaults">Defaults you can strike</h2>
+
+<p>Each default was taken with a reason so you can strike it cheaply. D4 and D5 were replaced during review by D11 and D12; their originals stay in the spec.</p>
+
+<ex-tree id="defaults-tree" title="Defaults by topic" icon="gear"><script type="text/markdown">
+- How this change itself is delivered
+  - D1: one PR for all nine skill edits, one spec review, one implementation review. Your batch rule applied to this change.
+  - D2: built from your stated corrections, with no reproduction runs, because you excluded pressure testing. The claim stops at "drafted from your intent".
+  - D10: no trigger or description changes. The skills load at the right time; the defect is in their bodies. Narrowed by D14.
+  - D14: one description changes: `implement-plan` says "the findings of one review result" instead of "one finding", because "one finding" invites the per-finding loop.
+  - D15: this change waits for the whole improvement program's specs and is reviewed with them, following your "lets make all spec for imprvement".
+- Batches
+  - D11: a batch ends at the first of: the end of the assigned set, a required observation before dependent work, or one review result's findings. A Verifier target is declared only when a batch closes.
+  - D12: stop conditions follow the role. An Implementer stops for the four cases and decides the rest; an Operator still returns anything its procedure doesn't cover.
+- Pull requests
+  - D3: one PR is the default, not a ban. Split when you ask, or when one PR is too big to review in one pass.
+  - D13: the stack permission covers both kinds of split, yours and the review-size one.
+- Pacing
+  - D6: the Lead acts on helper messages at batch boundaries or on a blocker, and tells you only about milestones, decisions and blockers.
+- Where things live
+  - D7: your global prompt's changes are proposed wording for you to apply in devfiles, not edited from here.
+  - D8: each new rule is one checkable sentence a later Router check could use. No lint markers yet, because the lint pilot owns them.
+  - D9: corrections about how agents work also go to the skill-failure log, and `skill-audit` reads other projects' memories as candidates, checking your own words before anything becomes skill text.
+</script></ex-tree>
+
+<h2 id="why-today">Why it happens today</h2>
+
+<p>The step-by-step skills repeat their cycle for every change, and nothing defines a batch. One rule contradicts its own file: <code>implement-plan</code> sends every completed slice to review, while the same file, the orchestrator and the agent-management skill all review only the finished deliverable. The principle about accepting evidence already allows reusing proof that a change didn't touch; the procedures override it.</p>
+
+<p>Your corrections never reached the skills. They live only in the codex-router project's memory. The skill-failure log has no entry for them, and <code>skill-audit</code> only reads memory for the repository it audits.</p>
+
+<details>
+  <summary>The sentences that cause each behavior (seven rows)</summary>
+  <div class="ex-table-scroll" data-width="canvas">
+    <table>
+      <thead><tr><th>Behavior</th><th>What the skill says today</th></tr></thead>
+      <tbody>
+        <tr><td>A review for every slice</td><td><code>implement-plan/SKILL.md:40</code>: "A completed slice routes to <code>implementation-review</code> for independent review."</td></tr>
+        <tr><td>A review for every fix</td><td><code>implement-plan/SKILL.md:32</code> and <code>references/execution-and-proof.md:64</code> handle one finding at a time; <code>implementation-review/SKILL.md:64</code>: "After each correction … the caller invokes another review"; <code>finding-and-reduction.md:126</code> requires a new review per accepted correction.</td></tr>
+        <tr><td>A Verifier pass for every change</td><td><code>role-implementer/references/working-with-verifier.md:33</code>: "Fix it inside the slice, prove it again and declare a new target"; <code>role-lead/references/working-with-verifier.md:27</code>: "the Verifier reruns against that commit".</td></tr>
+        <tr><td>Stacked PRs</td><td>Your global prompt, lines 250, 327 and 420: "dependent slices use <code>gh stack</code>". The plan rules default only an indivisible deliverable to one PR, and the delegation example is a three-PR breakdown.</td></tr>
+        <tr><td>Helpers asking about mechanisms</td><td><code>role-lead/references/working-with-implementer.md:9</code> and the packet's <code>stopCondition</code> field define only "when to hand back early".</td></tr>
+        <tr><td>Relaying every message</td><td>The orchestrator says not to relay, but your global "Provide inline progress updates" (line 185) and the harness's narration push the other way.</td></tr>
+        <tr><td>Corrections stuck in one project</td><td><code>skill-audit/SKILL.md:33</code> reads "targeted <code>MEMORY.md</code> hits for the repo".</td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<h2 id="edits">The nine skill edits</h2>
+
+<ex-tree id="edits-tree" title="Edits by plugin" icon="package"><script type="text/markdown">
+- sunstack-dev 2.93.0 to 2.94.0
+  - R1 `implement-plan`: one correction pass per review result; completed development goes to assessment before review; targets declared at batch boundaries; its description says "the findings of one review result", not "one finding"
+  - R2 `orchestrator-implementation-goal`: corrections return as one set; pacing; one PR by default; its routing reference stops sending each finding back alone
+  - R3 `role-lead`: one Verifier rerun per batch, including the worked case; two-part stop condition; corrections sent back once
+  - R4 `role-implementer`, with the shared pairing rules: fix every failure, then declare one target
+  - R5 `implementation-review`: "correction pass" defined once; one new review per pass
+  - R6 `practices-manage-agents`: the shared stop-condition field gets its two halves; the three-PR example becomes one PR
+  - R7 `plan-implementation`, with the shared plan format: one PR by default; where a batch boundary falls
+  - R8 `practices-show-me-your-work`: workflow corrections go to the skill-failure log
+- skill-authoring 0.4.0 to 0.5.0
+  - R9 `skill-audit`: reads that log and other projects' memories as candidate evidence
+</script></ex-tree>
+
+<h2 id="devfiles">Your global prompt</h2>
+
+<p>Four lines in your global prompt (the same lines in the Claude and Codex copies) push toward stacks and narration. I won't edit devfiles from here; the proposed wording is for you to apply, or to hand to a devfiles session.</p>
+
+<details>
+  <summary>Proposed wording for lines 185, 250, 327 and 420</summary>
+  <div class="ex-table-scroll" data-width="canvas">
+    <table>
+      <thead><tr><th>Line</th><th>Today</th><th>Proposed</th></tr></thead>
+      <tbody>
+        <tr><td>327</td><td>"Use worktrees for independent parallel tracks; dependent slices use <code>gh stack</code>."</td><td>"Use worktrees for independent parallel tracks. One deliverable is one PR by default; dependent work in it lands by merge. Use <code>gh stack</code> only when the owner asks for split PRs, or when one PR would be too big to review in one pass."</td></tr>
+        <tr><td>420</td><td>"When designing branches for dependent work, use a linear <code>gh stack</code> …"</td><td>"When a split into stacked PRs has been chosen, use a linear <code>gh stack</code> …"</td></tr>
+        <tr><td>250</td><td>"Exception: stacked PRs are routine."</td><td>"Exception: on a stack chosen under the split rule (owner request, or one PR too big for one review pass), <code>gh stack</code> operations on your own stack need no permission."</td></tr>
+        <tr><td>185</td><td>"Provide inline progress updates …"</td><td>Keep it, then add: "Don't relay or summarize helper messages; report finished milestones, owner decisions and blockers."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<h2 id="proof">Proof and what stays unverified</h2>
+
+<ex-callout id="unverified" title="Behavior not yet evaluated" tone="risk" icon="test-tube">
+  <p>The PR will carry static checks only: the existing contract tests, plugin validation, link checks, and a search showing no remaining sentence sends a single slice or a single finding to review. No fresh agent will be run to show a Lead actually batching, because you excluded pressure testing for this work.</p>
+</ex-callout>
+
+<h2 id="review">Review so far</h2>
+
+<p>An independent review lead on a different model family ran the spec stage with two reviewers. Round one found six problems, all accepted and fixed in one pass: batches must end at required observation gates; helper autonomy has to follow each role; two more per-fix review loops were found; shared files needed a named skill; the stack permission had to cover both split reasons; and the pairing rules' users were named wrongly. Round two verified all six closed and found nothing new.</p>
+
+<p>After round two, the Worker paused before any edit when you stopped to compare pictures. It reported two more per-finding review routes in the orchestrator's routing reference and one worked case in the Lead's Verifier reference. I checked all three, and the spec now covers them. Because the scope changed, the earlier approval no longer covers it, and it goes back to review with the rest of the program.</p>
+
+<p>Source of truth: <a href="./spec.md">spec.md</a> in this folder. This page explains it and adds no decisions of its own. The program page is <a href="../2026-10-24-improvement-program/index.html">here</a>.</p>
+
+</ex-document>
+</body>
+</html>
