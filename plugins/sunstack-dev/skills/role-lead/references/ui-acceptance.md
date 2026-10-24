@@ -30,7 +30,7 @@ A paired Verifier judges the card at five widths and reports one FAIL at the nar
 
 ### Clean: a complete scoped result
 
-The commission named the toolbar and the Messages popover, closed and open, at the three supported widths. The Verifier returns a frame for each cell and a quality PASS for each. The Lead opens the narrowest frames of both surfaces, agrees, and accepts without asking for another run.
+The commission named the toolbar and the Messages popover, closed and open, at the three supported widths. The Verifier returns a frame for each cell and a quality PASS for each. The Lead opens every returned frame, both surfaces in both states at all three widths, judges each one, agrees, and accepts. Judging captured frames needs no new observation, so the Lead asks for no other run.
 
 ## When to stop
 
