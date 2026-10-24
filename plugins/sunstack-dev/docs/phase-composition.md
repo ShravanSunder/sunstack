@@ -10,7 +10,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 - **Loads when a condition holds:** a load call with an IF before it in its sentence, even when it says MUST.
 - **Kinds:** a practice includes the always-available `presentation-`, `ops-` and `audit-` skills; an own reference sits in the skill's folder; a shared reference sits in `shared-references/`.
 - **Named without a load call:** an active skill name, or a path that resolves to a file in the plugin, that the `SKILL.md` mentions in code formatting without a load call, including a load worded with neither MUST nor IF.
-- **Phases an orchestrator routes:** the phase and orchestrator skills its `SKILL.md` names, in the order it first names them.
+- **Phases an orchestrator routes:** the phase and orchestrator skills its `SKILL.md` route table names, in row order. A route table is a table whose last column is headed Owner or Next owner, or a list of `token` -> `owner` mappings. Phases its `SKILL.md` names only elsewhere follow, in the order it first names them.
 - **Cites:** principle links, in `SKILL.md` and in the skill's `references/`.
 - **Returns:** a token from `shared-references/phase-return-tokens.md` named in a sentence that returns it (a form of "return", or "carrying"), outside a token-to-owner mapping.
 - **Lines:** the line count of `SKILL.md`. Fenced code and the frontmatter are not read for calls.
@@ -43,48 +43,87 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 
 ### orchestrator-design routes
 
-Phases, in the order its `SKILL.md` first names them: `spec-design`, `program-design`, `verification-design`, `spec-program-review`, `discuss-pathfinding`, `plan-implementation`, `plan-update`, `orchestrator-implementation-goal`. Solid arrows are practices a phase always loads; dashed arrows load when a condition holds. A nested orchestrator's own loads are in its section.
+- Route order, from its `SKILL.md` route table: `spec-design`, `program-design`, `verification-design`, `spec-program-review`, `discuss-pathfinding`, `plan-implementation`
+- Named only elsewhere in its `SKILL.md`, in the order it first names them: `plan-update`, `orchestrator-implementation-goal`
 
 ```mermaid
 flowchart LR
   orchestrator_design["orchestrator-design"]
-  orchestrator_design --> spec_design["1. spec-design"]
-  orchestrator_design --> program_design["2. program-design"]
-  orchestrator_design --> verification_design["3. verification-design"]
-  orchestrator_design --> spec_program_review["4. spec-program-review"]
-  orchestrator_design --> discuss_pathfinding["5. discuss-pathfinding"]
-  orchestrator_design --> plan_implementation["6. plan-implementation"]
-  orchestrator_design --> plan_update["7. plan-update"]
-  orchestrator_design --> orchestrator_implementation_goal["8. orchestrator-implementation-goal"]
-  program_design --> practices_how(["practices-how"])
-  verification_design -.-> practices_manage_agents(["practices-manage-agents"])
-  plan_implementation -.-> practices_manage_agents(["practices-manage-agents"])
+  subgraph routed["Route order"]
+    spec_design["1. spec-design"]
+    program_design["2. program-design"]
+    verification_design["3. verification-design"]
+    spec_program_review["4. spec-program-review"]
+    discuss_pathfinding["5. discuss-pathfinding"]
+    plan_implementation["6. plan-implementation"]
+  end
+  subgraph elsewhere["Named elsewhere"]
+    plan_update["plan-update"]
+    orchestrator_implementation_goal["orchestrator-implementation-goal"]
+  end
+  orchestrator_design --> spec_design
+  orchestrator_design --> program_design
+  orchestrator_design --> verification_design
+  orchestrator_design --> spec_program_review
+  orchestrator_design --> discuss_pathfinding
+  orchestrator_design --> plan_implementation
+  orchestrator_design --> plan_update
+  orchestrator_design --> orchestrator_implementation_goal
+```
+
+The practices its phases load: solid arrows load always, dashed arrows when a condition holds. A nested orchestrator's own loads are in its section.
+
+```mermaid
+flowchart LR
+  program_design["2. program-design"] --> practices_how(["practices-how"])
+  verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
+  plan_implementation["6. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
 ```
 
 ### orchestrator-implementation-goal routes
 
-Phases, in the order its `SKILL.md` first names them: `plan-implementation`, `plan-update`, `implementation-pr-wrapup`, `discuss-pathfinding`, `orchestrator-design`, `verification-design`, `implement-plan`, `implementation-review`, `plan-improve-repo`. Solid arrows are practices a phase always loads; dashed arrows load when a condition holds. A nested orchestrator's own loads are in its section.
+- Route order, from its `SKILL.md` route table: `discuss-pathfinding`, `orchestrator-design`, `verification-design`, `plan-implementation`, `plan-update`, `implement-plan`, `implementation-review`
+- Named only elsewhere in its `SKILL.md`, in the order it first names them: `implementation-pr-wrapup`, `plan-improve-repo`
 
 ```mermaid
 flowchart LR
   orchestrator_implementation_goal["orchestrator-implementation-goal"]
-  orchestrator_implementation_goal --> plan_implementation["1. plan-implementation"]
-  orchestrator_implementation_goal --> plan_update["2. plan-update"]
-  orchestrator_implementation_goal --> implementation_pr_wrapup["3. implementation-pr-wrapup"]
-  orchestrator_implementation_goal --> discuss_pathfinding["4. discuss-pathfinding"]
-  orchestrator_implementation_goal --> orchestrator_design["5. orchestrator-design"]
-  orchestrator_implementation_goal --> verification_design["6. verification-design"]
-  orchestrator_implementation_goal --> implement_plan["7. implement-plan"]
-  orchestrator_implementation_goal --> implementation_review["8. implementation-review"]
-  orchestrator_implementation_goal --> plan_improve_repo["9. plan-improve-repo"]
-  plan_implementation -.-> practices_manage_agents(["practices-manage-agents"])
-  implementation_pr_wrapup --> practices_manage_agents(["practices-manage-agents"])
-  verification_design -.-> practices_manage_agents(["practices-manage-agents"])
-  implement_plan --> practices_preflight(["practices-preflight"])
-  implement_plan -.-> practices_manage_agents(["practices-manage-agents"])
-  implement_plan --> practices_verification(["practices-verification"])
-  implement_plan -.-> practices_cleanup(["practices-cleanup"])
-  plan_improve_repo --> practices_manage_agents(["practices-manage-agents"])
+  subgraph routed["Route order"]
+    discuss_pathfinding["1. discuss-pathfinding"]
+    orchestrator_design["2. orchestrator-design"]
+    verification_design["3. verification-design"]
+    plan_implementation["4. plan-implementation"]
+    plan_update["5. plan-update"]
+    implement_plan["6. implement-plan"]
+    implementation_review["7. implementation-review"]
+  end
+  subgraph elsewhere["Named elsewhere"]
+    implementation_pr_wrapup["implementation-pr-wrapup"]
+    plan_improve_repo["plan-improve-repo"]
+  end
+  orchestrator_implementation_goal --> discuss_pathfinding
+  orchestrator_implementation_goal --> orchestrator_design
+  orchestrator_implementation_goal --> verification_design
+  orchestrator_implementation_goal --> plan_implementation
+  orchestrator_implementation_goal --> plan_update
+  orchestrator_implementation_goal --> implement_plan
+  orchestrator_implementation_goal --> implementation_review
+  orchestrator_implementation_goal --> implementation_pr_wrapup
+  orchestrator_implementation_goal --> plan_improve_repo
+```
+
+The practices its phases load: solid arrows load always, dashed arrows when a condition holds. A nested orchestrator's own loads are in its section.
+
+```mermaid
+flowchart LR
+  verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
+  plan_implementation["4. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
+  implement_plan["6. implement-plan"] --> practices_preflight(["practices-preflight"])
+  implement_plan["6. implement-plan"] -.-> practices_manage_agents(["practices-manage-agents"])
+  implement_plan["6. implement-plan"] --> practices_verification(["practices-verification"])
+  implement_plan["6. implement-plan"] -.-> practices_cleanup(["practices-cleanup"])
+  implementation_pr_wrapup["implementation-pr-wrapup"] --> practices_manage_agents(["practices-manage-agents"])
+  plan_improve_repo["plan-improve-repo"] --> practices_manage_agents(["practices-manage-agents"])
 ```
 
 ## Each orchestrator and phase

@@ -5,6 +5,7 @@ import {
   buildPhaseCompositionMap,
   extractLoadCalls,
   extractReturnedTokens,
+  extractRouteOwners,
   phaseCompositionMapPath,
 } from "./phase-composition/phase-composition-map.ts";
 
@@ -46,6 +47,50 @@ describe("phase composition map", () => {
     expect(committedMap, "regenerate with: pnpm --dir tests/skills phase-composition").toBe(
       buildPhaseCompositionMap(repoRoot),
     );
+  });
+
+  test("lists the delivery orchestrator's phases in its route table's order", () => {
+    const committedMap = readFileSync(path.join(repoRoot, phaseCompositionMapPath), "utf8");
+    const deliveryOrchestrator = readFileSync(
+      path.join(repoRoot, "plugins/sunstack-dev/skills/orchestrator-implementation-goal/SKILL.md"),
+      "utf8",
+    );
+    const tokenMapLine = deliveryOrchestrator.split("\n").find((line) => line.includes("map a returned token to its next owner"));
+    const routeTableOrder = [...new Set([...(tokenMapLine ?? "").matchAll(/->\s*`([^`]+)`/g)].map((match) => match[1]))];
+    const mappedRouteOrder = /### orchestrator-implementation-goal routes\n\n- Route order, from its `SKILL\.md` route table: (.+)\n/
+      .exec(committedMap)?.[1]
+      ?.split(", ")
+      .map((phaseName) => phaseName.replaceAll("`", ""));
+
+    expect(routeTableOrder.length, "the delivery orchestrator's token map was not found").toBeGreaterThan(0);
+    expect(mappedRouteOrder).toEqual(routeTableOrder);
+  });
+
+  test("reads route owners from owner tables in row order and from token arrows, and skips other tables", () => {
+    const skill = [
+      "| Rationalization | Reality |",
+      "| --- | --- |",
+      "| \"spawn `program-design`\" | the phase owns judgment |",
+      "",
+      "| Current state | Owner |",
+      "| --- | --- |",
+      "| fresh request | `spec-design` |",
+      "| review ready | `plan-implementation`, for the first plan |",
+      "",
+      "Map each token: `requirements-gap` -> `discuss-pathfinding`; `plan-defect` -> `plan-update`.",
+      "",
+      "| Token | Next owner |",
+      "| --- | --- |",
+      "| `ready-for-review` | `implementation-review` |",
+    ].join("\n");
+
+    expect(extractRouteOwners(skill)).toEqual([
+      "spec-design",
+      "plan-implementation",
+      "discuss-pathfinding",
+      "plan-update",
+      "implementation-review",
+    ]);
   });
 
   test("the page embeds the committed map", () => {

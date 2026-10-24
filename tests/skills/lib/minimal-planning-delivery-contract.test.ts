@@ -50,10 +50,12 @@ describe("goal delivery intent hard cutover", () => {
       "picks one, records the choice, the alternatives, and the reason in the plan, and returns `ready`",
     );
     expect(planner).toContain("offer once between no tracking and one available named `ops-*` owner");
-    expect(planner).toContain("first resolve the project root");
-    expect(planner).toContain(
-      "write exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan",
+    expect(contract).toContain("first resolves the project root");
+    expect(contract).toContain(
+      "writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan",
     );
+    expect(planner).toContain("the canonical reference's Plan Home names");
+    expect(planner).not.toContain("plan-workflows");
     expect(planner).toContain("invokes `implement-plan` without another generic approval question");
   });
 
@@ -200,14 +202,14 @@ describe("goal delivery intent hard cutover", () => {
   });
 
   test("uses distinct durable, project-temporary, and OS-temporary artifact homes", () => {
-    const planner = readPluginFile("skills/plan-implementation/SKILL.md");
+    const planContract = readPluginFile("shared-references/canonical-implementation-plan.md");
     const designOrchestrator = readPluginFile("skills/orchestrator-design/SKILL.md");
     const goalOrchestrator = readPluginFile("skills/orchestrator-implementation-goal/SKILL.md");
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
 
-    expect(planner).toContain("project-root `.gitignore`");
-    expect(planner).toContain(
+    expect(planContract).toContain("project-root `.gitignore`");
+    expect(planContract).toContain(
       "`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`",
     );
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");

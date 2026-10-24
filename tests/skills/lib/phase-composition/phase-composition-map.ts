@@ -29,7 +29,8 @@ export interface SkillComposition {
   readonly principlesInSkill: readonly string[];
   readonly principlesInReferences: readonly string[];
   readonly returnedTokens: readonly string[];
-  readonly namedPhases: readonly string[];
+  readonly routedPhases: readonly string[];
+  readonly phasesNamedElsewhere: readonly string[];
 }
 
 export interface SkillSource {
@@ -198,19 +199,54 @@ const backtickedSpans = (skillMarkdown: string): string[] =>
 
 const uniqueInOrder = (values: readonly string[]): string[] => [...new Set(values)];
 
+const isOtherPhase = (span: string, skillName: string, activeSkillNames: ReadonlySet<string>): boolean =>
+  span !== skillName && activeSkillNames.has(span) && ["phase", "orchestrator"].includes(classifySkillKind(span));
+
 const extractNamedPhases = (
   skillMarkdown: string,
   skillName: string,
   activeSkillNames: ReadonlySet<string>,
 ): string[] =>
-  uniqueInOrder(
-    backtickedSpans(skillMarkdown).filter(
-      (span) =>
-        span !== skillName &&
-        activeSkillNames.has(span) &&
-        ["phase", "orchestrator"].includes(classifySkillKind(span)),
-    ),
-  );
+  uniqueInOrder(backtickedSpans(skillMarkdown).filter((span) => isOtherPhase(span, skillName, activeSkillNames)));
+
+const backtickedIn = (text: string): string[] => [...text.matchAll(/`([^`]+)`/g)].map((match) => match[1] ?? "");
+
+// The owners a skill's route table names, in row order: the owner cells of a table whose last column is headed
+// "Owner" or "Next owner", and each target of a `token` -> `owner` mapping.
+export const extractRouteOwners = (skillMarkdown: string): string[] => {
+  const owners: string[] = [];
+  let insideFence = false;
+  let insideTable = false;
+  let ownerColumn: number | undefined;
+  for (const line of stripFrontmatter(skillMarkdown).split("\n")) {
+    const trimmed = line.trim();
+    if (/^(```|~~~)/.test(trimmed)) {
+      insideFence = !insideFence;
+      continue;
+    }
+    if (insideFence) continue;
+    if (!trimmed.startsWith("|")) {
+      insideTable = false;
+      owners.push(...[...trimmed.matchAll(/->\s*`([^`]+)`/g)].map((match) => match[1] ?? ""));
+      continue;
+    }
+    const cells = trimmed.split("|").slice(1, -1).map((cell) => cell.trim());
+    if (!insideTable) {
+      insideTable = true;
+      ownerColumn = /^(next )?owner$/i.test(cells.at(-1) ?? "") ? cells.length - 1 : undefined;
+      continue;
+    }
+    if (ownerColumn !== undefined) owners.push(...backtickedIn(cells[ownerColumn] ?? ""));
+  }
+  return owners;
+};
+
+const extractRoutedPhases = (
+  skillMarkdown: string,
+  skillName: string,
+  activeSkillNames: ReadonlySet<string>,
+): string[] =>
+  uniqueInOrder(extractRouteOwners(skillMarkdown).filter((owner) => isOtherPhase(owner, skillName, activeSkillNames)));
 
 // A pointer names an active skill, or a path that resolves from the skill's folder to a file in the plugin.
 const isPointerSpan = (
@@ -263,6 +299,7 @@ export const composeSkill = (
   const kind = classifySkillKind(source.name);
   const loads = extractLoadCalls(source.skillMarkdown, source.name, activeSkillNames);
   const namedPhases = kind === "orchestrator" ? extractNamedPhases(source.skillMarkdown, source.name, activeSkillNames) : [];
+  const routedPhases = kind === "orchestrator" ? extractRoutedPhases(source.skillMarkdown, source.name, activeSkillNames) : [];
   const loadTargets = new Set(loads.map((call) => call.target));
   const pointers = uniqueInOrder(
     backtickedSpans(source.skillMarkdown).filter(
@@ -282,7 +319,8 @@ export const composeSkill = (
     principlesInSkill: extractPrinciples(source.skillMarkdown),
     principlesInReferences: uniqueInOrder(source.referenceMarkdown.flatMap(extractPrinciples)),
     returnedTokens: extractReturnedTokens(source.skillMarkdown, returnTokens),
-    namedPhases,
+    routedPhases,
+    phasesNamedElsewhere: namedPhases.filter((phaseName) => !routedPhases.includes(phaseName)),
   };
 };
 
@@ -354,25 +392,51 @@ const renderLoadsByKind = (loads: readonly LoadCall[], condition: LoadCondition)
 
 const mermaidNodeId = (skillName: string): string => skillName.replaceAll("-", "_");
 
-const renderOrchestratorFlowchart = (
+// The route fan-out: the orchestrator's phases in route order, then those it names only elsewhere.
+const renderRouteFlowchart = (orchestrator: SkillComposition): string[] => {
+  const orchestratorId = mermaidNodeId(orchestrator.name);
+  const renderGroup = (groupId: string, title: string, labels: ReadonlyMap<string, string>): string[] => [
+    `  subgraph ${groupId}["${title}"]`,
+    ...[...labels].map(([phaseName, label]) => `    ${mermaidNodeId(phaseName)}["${label}"]`),
+    "  end",
+  ];
+  const phaseNames = [...orchestrator.routedPhases, ...orchestrator.phasesNamedElsewhere];
+  return [
+    "```mermaid",
+    "flowchart LR",
+    `  ${orchestratorId}["${orchestrator.name}"]`,
+    ...renderGroup(
+      "routed",
+      "Route order",
+      new Map(orchestrator.routedPhases.map((phaseName, index) => [phaseName, `${index + 1}. ${phaseName}`])),
+    ),
+    ...(orchestrator.phasesNamedElsewhere.length > 0
+      ? renderGroup("elsewhere", "Named elsewhere", new Map(orchestrator.phasesNamedElsewhere.map((phaseName) => [phaseName, phaseName])))
+      : []),
+    ...phaseNames.map((phaseName) => `  ${orchestratorId} --> ${mermaidNodeId(phaseName)}`),
+    "```",
+  ];
+};
+
+// The practices each of the orchestrator's phases loads, apart from the route so each chart stays two columns wide.
+const renderPracticeFlowchart = (
   orchestrator: SkillComposition,
   compositionsByName: ReadonlyMap<string, SkillComposition>,
 ): string[] => {
-  const lines = ["```mermaid", "flowchart LR", `  ${mermaidNodeId(orchestrator.name)}["${orchestrator.name}"]`];
-  orchestrator.namedPhases.forEach((phaseName, index) => {
-    lines.push(`  ${mermaidNodeId(orchestrator.name)} --> ${mermaidNodeId(phaseName)}["${index + 1}. ${phaseName}"]`);
-  });
-  for (const phaseName of orchestrator.namedPhases) {
+  const routeNumbers = new Map(orchestrator.routedPhases.map((phaseName, index) => [phaseName, index + 1]));
+  const lines: string[] = [];
+  for (const phaseName of [...orchestrator.routedPhases, ...orchestrator.phasesNamedElsewhere]) {
     const phase = compositionsByName.get(phaseName);
     if (phase === undefined || phase.kind === "orchestrator") continue;
+    const routeNumber = routeNumbers.get(phaseName);
+    const label = routeNumber === undefined ? phaseName : `${routeNumber}. ${phaseName}`;
     for (const call of phase.loads) {
       if (call.kind !== "practice") continue;
       const arrow = call.condition === "always" ? "-->" : "-.->";
-      lines.push(`  ${mermaidNodeId(phaseName)} ${arrow} ${mermaidNodeId(call.target)}(["${call.target}"])`);
+      lines.push(`  ${mermaidNodeId(phaseName)}["${label}"] ${arrow} ${mermaidNodeId(call.target)}(["${call.target}"])`);
     }
   }
-  lines.push("```");
-  return lines;
+  return lines.length === 0 ? [] : ["```mermaid", "flowchart LR", ...lines, "```"];
 };
 
 const renderSkillSection = (composition: SkillComposition): string[] => [
@@ -411,7 +475,7 @@ export const renderPhaseCompositionMap = (compositions: readonly SkillCompositio
     "- **Loads when a condition holds:** a load call with an IF before it in its sentence, even when it says MUST.",
     "- **Kinds:** a practice includes the always-available `presentation-`, `ops-` and `audit-` skills; an own reference sits in the skill's folder; a shared reference sits in `shared-references/`.",
     "- **Named without a load call:** an active skill name, or a path that resolves to a file in the plugin, that the `SKILL.md` mentions in code formatting without a load call, including a load worded with neither MUST nor IF.",
-    "- **Phases an orchestrator routes:** the phase and orchestrator skills its `SKILL.md` names, in the order it first names them.",
+    "- **Phases an orchestrator routes:** the phase and orchestrator skills its `SKILL.md` route table names, in row order. A route table is a table whose last column is headed Owner or Next owner, or a list of `token` -> `owner` mappings. Phases its `SKILL.md` names only elsewhere follow, in the order it first names them.",
     "- **Cites:** principle links, in `SKILL.md` and in the skill's `references/`.",
     "- **Returns:** a token from `shared-references/phase-return-tokens.md` named in a sentence that returns it (a form of \"return\", or \"carrying\"), outside a token-to-owner mapping.",
     "- **Lines:** the line count of `SKILL.md`. Fenced code and the frontmatter are not read for calls.",
@@ -429,9 +493,14 @@ export const renderPhaseCompositionMap = (compositions: readonly SkillCompositio
     lines.push(
       `### ${orchestrator.name} routes`,
       "",
-      `Phases, in the order its \`SKILL.md\` first names them: ${listOrNone(orchestrator.namedPhases)}. Solid arrows are practices a phase always loads; dashed arrows load when a condition holds. A nested orchestrator's own loads are in its section.`,
+      `- Route order, from its \`SKILL.md\` route table: ${listOrNone(orchestrator.routedPhases)}`,
+      `- Named only elsewhere in its \`SKILL.md\`, in the order it first names them: ${listOrNone(orchestrator.phasesNamedElsewhere)}`,
       "",
-      ...renderOrchestratorFlowchart(orchestrator, compositionsByName),
+      ...renderRouteFlowchart(orchestrator),
+      "",
+      "The practices its phases load: solid arrows load always, dashed arrows when a condition holds. A nested orchestrator's own loads are in its section.",
+      "",
+      ...renderPracticeFlowchart(orchestrator, compositionsByName),
       "",
     );
   }
