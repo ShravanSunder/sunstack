@@ -39,7 +39,8 @@ describe("goal delivery intent hard cutover", () => {
     expect(planner).toContain("Establish `requested terminal: plan-only | pr-ready-unmerged`");
     expect(planner).toContain("If a direct request is ambiguous, ask once at entry");
     expect(planner).toContain("Choose the smallest coherent vertical grouping");
-    expect(planner).toContain("materially different groupings or PR topologies");
+    expect(planner).toContain("materially different groupings exist inside one PR shape");
+    expect(planner).toContain("a split is the owner's decision, for every kind of work");
     expect(planner).toContain(
       "pick one and record the choice, the alternatives, and the reason in the plan",
     );

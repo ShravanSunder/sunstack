@@ -30,7 +30,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
 | implementation-review | 81 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `proof-challenge`, `focused-reviewer` | none | none |
 | plan-handoff | 64 | `canonical-implementation-plan` | `handoff-template` | none | none |
-| plan-implementation | 44 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents` | none | `verification-design-gap` |
+| plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 174 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
 | plan-update | 34 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
 | program-design | 356 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
@@ -278,12 +278,13 @@ flowchart LR
 
 ### plan-implementation
 
-- Lines: 44
+- Lines: 45
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/slice-and-proof-design.md`
 - Loads when a condition holds:
   - practice: `practices-manage-agents`
+  - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: `practices-show-me-your-work`, `plan-update`, `spec-program-review`, `plan-improve-repo`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-write-tests-that-can-fail`
