@@ -7,5 +7,6 @@
 - Validation: `pnpm --dir tests/skills test` passed 169 tests; `claude plugin validate .` passed; `git diff --check origin/main...HEAD` passed.
 - Pinned CLI: `lint --check` passed; full `lint --all --format json` returned 0 errors and 2 existing warnings; native print listed 8 rules.
 - Mechanical calibration: 6 selected good `completed/pass` and bad `completed/fail`, zero model requests/inference attempts. Canary covered 71/71 tracked skills; omitting a subtree detected a missing skill. Three invalid-wiring controls exited 2.
+- Local completion reports missing prerequisites directly from step 7; ordinary lint returns commands, findings and coverage, and rule authoring retains full native calibration.
 - Scratch local-run proof: the prefix warning exits 0; an error control exits 1; both fixes are clean. Reference-only changes are not linted; missing config or declared pin skips.
 - Hosted semantic judging and fresh-agent behavior are unproven. Push, PR and release remain with the delivery owner; Codex/Claude refresh or reinstall was not performed.

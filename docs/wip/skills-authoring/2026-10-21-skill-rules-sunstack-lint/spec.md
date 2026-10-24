@@ -77,8 +77,15 @@ Lead-authored by 🦁 claude-local `68844339`. To be added verbatim to `docs/wip
 **Surface allocation.**
 
 - **Trigger:** no change.
-- **Main path (`SKILL.md`):** step 7's completion check gains one sentence. It reads: IF the repository has a lint config and a declared CLI pin, load `skill-rules`' `references/check-and-reports.md` and return the local run's result: each command with its exit code, every finding with errors fixed, and each changed file the config didn't select, marked not linted.
+- **Main path (`SKILL.md`):** step 7's completion check gains two sentences. They read: IF the repository has a lint config and a declared CLI pin, load `skill-rules`' `references/check-and-reports.md` and return the local run's result: each command with its exit code, every finding with errors fixed, and each changed file the config didn't select, marked not linted. Otherwise return which of the two is missing and that the lint run was skipped. *(Corrected 2026-10-24 after implementation review F1: the skip branch must be reachable without the load.)*
 - **Depth:** the local-run section in `skill-rules`' `references/check-and-reports.md` is allocated to R1 (see D11). It carries the command route, the pin input, naming the changed files, the not-linted report, and the missing-config and missing-pin branches. R3 adds nothing there.
+- **Completion scope** *(corrected 2026-10-24 after implementation review F2)*. The reference's rule-authoring completion line (`check_rules` passed, print, calibration pairs, zero requests) applies to `skill-rules`' own rule-authoring workflow. A `skill-creation` lint run is complete when it has returned:
+  - each command with its exit code;
+  - every finding;
+  - each changed file not linted;
+  - or the missing-config or missing-pin skip.
+
+  The rule-authoring proof is unchanged.
 - **`skill-orchestrator`:** none. Its proof step consumes `skill-creation`'s return.
 
 **Proof.** Run on a scratch copy of the repository, never the worktree:
