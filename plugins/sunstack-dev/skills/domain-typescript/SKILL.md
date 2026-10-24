@@ -110,6 +110,14 @@ const input = sectorConfigInputSchema.parse(await request.json());
 
 Zod v4 deprecates `a.merge(b)`; write `a.extend(b.shape)`.
 
+## Persistence
+
+When the code persists data, store it in SQLite through Drizzle, with the driver the runtime injects: `drizzle-orm/better-sqlite3` on Node, `drizzle-orm/durable-sqlite` in a Durable Object and `drizzle-orm/d1` on Workers D1. Generate the migrations with `drizzle-kit` and check them in. The storage layer is Drizzle: never the Durable Object key-value API, never `node:sqlite`, and never hand-written SQL or Kysely as the storage layer. A deprecated API is never a choice.
+
+"Drizzle everywhere" and "never `node:sqlite`" are the owner's words; the driver for each runtime and the `drizzle-kit` migrations are the owner's rule as the Tool Portal Lead recorded it.
+
+When code the repository already has breaks this standard, such as a store on the Durable Object key-value API or on Kysely, the standard still wins, and you neither extend that store nor migrate it on your own. Raise the conflict for the owner, through the Lead, naming the existing use with its path and the clause it breaks, and carry on with the work that doesn't touch that store until the owner decides.
+
 ## Shapes and names
 
 - A function with more than three parameters takes one props object: `function executeQuery<TRow>(props: ExecuteQueryProps): Promise<QueryResult<TRow>>`.
@@ -129,5 +137,6 @@ IF the repo defines no lint, format, type-check or test script for the changed p
 - `as` on parsed JSON or `process.env`, or `!` on a value that can be missing.
 - An exported function with no declared return type, or a public generic named `T`.
 - A hand-written `Omit<>` or interface beside a Zod schema for the same shape, or `.merge()`.
+- Persisted data behind `ctx.storage` key-value calls, `node:sqlite`, or hand-written SQL or Kysely as the storage layer.
 - A state spread across booleans and optional fields, or a `switch` over a union with no `assertNever`.
 - A file named `utils.ts`, `helpers.ts` or `db.ts`.
