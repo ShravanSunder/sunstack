@@ -26,7 +26,7 @@ flowchart TD
 
 ## Important Branches
 
-- A plan needing revision returns to its planner; a blocked plan stops at its named owner.
+- A plan needing revision returns to the Lead for `plan-update`; a blocked plan stops at its named owner.
 - Plan-only, missing, malformed, or stale governing basis/delivery context stops implementation.
 - A design surprise returns to design instead of being patched around.
 - A required proof gate is never weakened to make the run pass.
