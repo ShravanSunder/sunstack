@@ -48,7 +48,7 @@ From the report, section C, at `ca7e9d2f`:
 1. **An agent writes a design chunk.** It opens with the answer to the chunk's question in the reader's words, naming any assumption, risk or unknown. Then the one view that fires for it, then the governing rows, all visible. Rationale, evidence, derivations and examples follow in `<details>` blocks whose summaries say what's inside.
 2. **A chunk carries a failure obligation.** The obligation and its threshold stay visible. Only the evidence or reasoning behind it may be collapsed, with a summary that names the failure case.
 3. **A reader compares options.** The compared facts sit side by side, visible together, never in separate collapsed blocks.
-4. **An agent builds a page.** Walkthroughs exist only for a question whose answer crosses documents, or that needs an order the documents don't give. A path through one file's own headings in their order is an outline, so the page's outline and Pages menu do that job. A single-file page, such as a decisions page, gets no walkthrough.
+4. **An agent builds a page.** Walkthroughs exist only for a question whose answer crosses documents, or that needs an order the documents don't give. A path through one file's own headings in their order is an outline, so the page's outline and Pages menu do that job. The decisions page is that case: one file whose questions are answered in its own order gets no walkthrough. A path through one file in a different order still qualifies when it answers a named question. An example is a failure walkthrough that visits a Program Design file's binding, call path and failure sections in the order the failure travels.
 5. **An agent writes a skill.** The same layering holds from the description to `SKILL.md` to a reference: the decision every use needs stays in `SKILL.md`, and the reference is the next layer down, in the same order.
 6. **A rule runs over a design chunk.** A mechanical rule flags an explanatory section whose first block is a table or a child heading. A judge, when one is calibrated, asks whether the opening actually answers the question. Whether something may be hidden at all is a review question.
 7. **Failure: a page hides what the reader needed.** The owner reports it, and the fix goes to the chunk's opening or visibility, not to more page prose.
@@ -75,7 +75,7 @@ Rides with part B's R1, which already changes this file (B·R5). The chunk-shape
 
 ### E·R3 presentation-html: walkthroughs and labels
 
-In `references/engineering-documents.md` (Lenses) and `references/views.md` (the lens rows), a walkthrough is for a question whose answer crosses documents, or that needs a new order. A path through one file in its own order is never one. Disclosure titles follow the principle's label rule. Rides with part B's R2, which changes the same files.
+In `references/engineering-documents.md` (Lenses) and `references/views.md` (the lens rows), a walkthrough is for a question whose answer crosses documents, or that needs a new order. A path through one file in its own order is never one; a path through one file in a new order, answering a named question, is one. Disclosure titles follow the principle's label rule. Rides with part B's R2, which changes the same files.
 
 ### E·W1 rule checks for every focus 2 skill (ancillary)
 
@@ -87,7 +87,7 @@ For each skill focus 2 changes, `skill-authoring:skill-rules` classifies the sta
 | The opening answers the chunk's question and introduces what it needs | judged rule | Off until a judge is calibrated |
 | A chosen heading-rank cap | mechanical candidate | A policy choice, not a cognitive law |
 | A disclosure label predicts its contents | judged rule, inside one Markdown section | Off until calibrated |
-| Every HTML `details` has a non-empty `summary`; a walkthrough doesn't stay inside one file | review now; mechanical later through a page checker | The rule engine targets Markdown only (no HTML DOM selector at `c49d2f2f`) |
+| Every HTML `details` has a non-empty `summary`; a walkthrough isn't a same-order path through one file's headings | review now; mechanical later through a page checker | The rule engine targets Markdown only (no HTML DOM selector at `c49d2f2f`). A future checker flags only stops that follow one file's headings in their own order, and passes a one-file path in a new order and any path across documents |
 | What may be hidden; a composed page adds no normative prose | review only | Needs the design's meaning |
 
 Each mechanical rule is proven on the real engine: a selected good case passes and a bad case fails. Judged rules are written and stay off, as in the lint pilot, until a judge is calibrated (T1). Markers and rules land only once the lint pilot (P6) has landed the repository's lint configuration, RuleSet and declared CLI pin. They run the way the pilot runs them: locally, by the agent, in `skill-creation`'s step 7 check, with no CI job (the pilot's D10 and D11).

@@ -31,15 +31,21 @@ Each run changes exactly one skill. A skill's own references ride with its run; 
 | E | R1 | `principle-write-for-the-reader` | its new `references/layered-detail.md` |
 | E | R2 | `shared-references/design-documents.md` | rides with B's R5 |
 | E | R3 | `presentation-html` | rides with B's R2 |
-| Amendment | A·R11 | `plan-implementation` | `shared-references/canonical-implementation-plan.md` (stacking decided at plan review); rides with A's R2 |
+| Amendment | A·R11 | `plan-implementation` | `shared-references/canonical-implementation-plan.md` (stacking decided at plan review) and `shared-references/owner-decision-brief.md` (the PR-shape entry and recipient sentence); rides with A's R2 |
 | Amendment | A·R12 | `plan-update` | rides with A's R3 (a PR-shape change reaches the owner) |
-| Amendment | A·R13 | `implement-plan` | rides with A's R7 (storage or a dependency the plan didn't name stops as a design gap) |
+| Amendment | A·R13 | `implement-plan` | rides with A's R7: storage the design doesn't name stops as a design gap; a new or second technology is raised before use; routine use of what the repository already uses continues |
 | Amendment | B·R3 | `program-design` | rides with B's R3: engine, driver and migration tool marked `existing` or `new`; the injected storage boundary across runtimes |
 | Amendment | A·R2, A·R1 | `plan-implementation`, `orchestrator-design` | ride with A's R2 and R1: a first plan across repositories carries its orchestration section; B's R2 delivery map gains a repository level |
 | Amendment | D·R6 | `practices-verification` | `references/native-observation.md`, `references/browser-observation.md` |
-| Amendment | D·R7 | `role-lead` | `references/working-with-verifier.md` |
+| Amendment | D·R7 | `role-lead` | `SKILL.md` (the UI-acceptance predicate), a new `references/ui-acceptance.md`, `references/working-with-verifier.md` |
 
-Focus 3 rows the amendments add (B·R1 `practices-owner-attention` raise lists; C·R1 `practices-show-me-your-work` page links and the decisions-made-alone view) are applied when focus 3 is implemented, not in focus 2's PR.
+Focus 3 rows the amendments add are implemented with focus 3, not in focus 2's PR. A Lead-owned binding step makes them reachable from focus 3's own entry. It runs before focus 3 is planned, and focus 3 can't be planned until it's done. The step:
+
+1. **B·R1 in `owner-attention.md`** (focus 3's spec, `2026-10-24-discussion-and-owner-attention/`): transcribe the accepted additions verbatim. These are the two raise-list items (the PR split, and the new technology), the brief's storage line ("and the technology that stores it"), and the note that B·R1's recipient rewrite builds on the PR-shape sentence A·R11 already landed. Mark B·R1's earlier situation and proof that let the Lead regroup PRs on its own as superseded, linking this amendment.
+2. **C·R1 in `the-trace.md`:** transcribe the two trace additions. Checkpoints link the current design and plan pages at their top, and the decisions-made-alone view is produced at milestones and on request.
+3. **Focus 3's `index.md`:** list `amendments.md` under its decisions as the source of those transcriptions.
+
+The transcription is checked by focus 3's Reviewer as a closure check, not a new review, as long as it adds nothing beyond the accepted text.
 
 Batch 1's applied runs are listed in the superseded plan. Batch 2's superseding plan carries the rows above, B's runs, part D's remaining runs and the correction pass for the batch 1 Verifier observations (`focus2-batch1-verifier-30d9abf9.md`).
 

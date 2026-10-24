@@ -19,7 +19,11 @@ The merged batched-delivery text lets the Lead split one deliverable "when one P
 ### Runs
 
 - **A·R11 `plan-implementation`.** In step 3 and the canonical plan's Delivery Intent and Grouping (riding with it), the split is proposed and decided by the owner at plan review. "Or one PR would be too big to review in one pass" becomes a reason the Lead may give in that proposal, not a reason to split alone. PR topology `separate-prs` records the owner's decision, made on the work thread.
-- **A·R12 `plan-update`.** A change to PR shape is raised to the owner (part A, D6 widened).
+- **A·R11 also carries `shared-references/owner-decision-brief.md`,** the brief that the split proposal and A·R12's owner stop both load. This is the smallest cutover that lets the gate reach the owner before focus 3 lands:
+  - **Entry.** The procedure list's "PR grouping" becomes "grouping and order inside an agreed PR shape". The decision list gains "a proposal to split one deliverable into several PRs, or to change an agreed PR shape".
+  - **Recipient.** A PR-shape decision goes to the owner: at plan review for a first plan, and through `plan-update`'s owner stop during delivery. When the owner is away it goes to the Chief of Staff (the owner, Q5). That is one sentence beside the existing recipient paragraph, which otherwise stays as it is until focus 3's B·R1 replaces it and builds on this sentence.
+  - **Proof.** Walk two cases through the real callers and the loaded brief: an improvement's first plan that proposes a split, and a later split of a default one-PR shape. Each reaches the owner's decision before any stack starts. Ordinary mechanics inside an agreed shape stay with the Lead.
+- **A·R12 `plan-update`.** A change to PR shape is raised to the owner (part A, D6 widened), through the brief as carried above.
 - **Focus 3, B·R1 `practices-owner-attention`.** Its raise list gains "a proposal to split a deliverable into several PRs". Its keep-internal list keeps only the Lead's mechanics inside an agreed shape.
 - **W6, the global prompt** (devfiles, by a subagent, timed by A·D7): "the implementation plan decides PR shape, and a split into stacked PRs is decided with the owner at plan review"; plus the `gh stack` how-to.
 
@@ -50,7 +54,7 @@ Evidence: the agent-identity Lead chose `node:sqlite` for a durable Node store m
 ### Runs
 
 - **B·R3 `program-design`** (rides with part B's existing run): the entity binding table gains "storage engine or driver and migration tool, `existing | new`" for persisted homes. A `new` one is material scope under the existing rule at `:134`, which returns `decision-needed`.
-- **A·R13 `implement-plan`**: in its stop classification, storage or a dependency the plan didn't name is a design gap, returned before any code. Cite `principle-justify-the-complexity` at that moment.
+- **A·R13 `implement-plan`**: its stop classification gains two cases, each returned before any code. First, storage the governing design doesn't name is a `program-design-gap` (situation 2). Second, a technology new to the repository, or a second one for a job it already does, is raised to the Lead for the owner before it is used (situation 3). Cite `principle-justify-the-complexity` at that moment. Situation 4 holds inside the classification: using a library or tool the repository already uses, the way it already uses it, continues even when the plan doesn't name it. Plans name dependency edges and proof-bearing scope, not every library.
 - **Focus 3, B·R1 `practices-owner-attention`**: the raise list names it explicitly: "a runtime, storage engine, persistence library, migration tool or dependency the repository doesn't already use, or a second one for a job it already does". The owner-decision brief's storage line gains "and the technology that stores it".
 
 ### Later, mechanical
@@ -75,7 +79,11 @@ Evidence: `ui-quality-2026-10-24/ui-quality-proof-chain.md` in the work's scratc
 ### Runs
 
 - **D·R6 `practices-verification`**, in `references/native-observation.md` and `references/browser-observation.md`: the evidence follows the claim (situation 1). Proof: an accessibility-complete but visibly truncated popover fails; a readable one passes.
-- **D·R7 `role-lead`**, in `references/working-with-verifier.md`: the UI commission and acceptance (situations 2 and 3). Proof: a card-only handback with quality UNKNOWN can't be accepted as "pane UI ready".
+- **D·R7 `role-lead`**: UI acceptance gets one home, reached whoever collected the proof.
+  - A new `references/ui-acceptance.md` owns situation 3.
+  - `SKILL.md` gains its predicate: IF the result being accepted includes a UI or visual claim, whether the proof came from the Lead itself, an Implementer or a Verifier, load `references/ui-acceptance.md` and return how each deciding frame was judged, every missing cell, and the working and quality verdicts separately.
+  - `references/working-with-verifier.md` keeps situation 2, the UI commission, and links to `ui-acceptance.md` for acceptance.
+  - Proof: the Lead's own proof and a paired Verifier's proof, each with working PASS and quality UNKNOWN; neither can be accepted as "pane UI ready". A complete quality result for the scoped surfaces closes without a second observation.
 
 AgentStudio's own `verify-agentstudio` journeys (the Messages popover, the Agent Line states in context) belong to the AgentStudio Lead, as a note the owner can pass on.
 
