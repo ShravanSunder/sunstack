@@ -1,6 +1,9 @@
 # Focus 2: orchestration and planning
 
-The agent entry for focus 2 of the improvement program (`../2026-10-24-improvement-program/index.md`). The owner reads the same files on `index.html`. Lead: 🦁 claude-local `68844339`. Status: proposed, before spec review.
+The agent entry for focus 2 of the improvement program (`../2026-10-24-improvement-program/index.md`). The owner reads the same files on `index.html`. Lead: 🦁 claude-local `68844339`. Status:
+
+- Parts A–D: accepted, and batch 1 is implemented at `30d9abf9`.
+- Part E and the amendments: proposed, before spec review.
 
 ## Documents
 
@@ -8,11 +11,14 @@ The agent entry for focus 2 of the improvement program (`../2026-10-24-improveme
 - Part B, [readable-design-sets.md](readable-design-sets.md): pages composed from the Markdown, walkthroughs, and views chosen by the owner's questions.
 - Part C, [phase-composition.md](phase-composition.md): a generated map of what each phase is built from.
 - Part D, [testing-and-verification.md](testing-and-verification.md): testing and verification rules. It covers the normal entry, driver language and harness ownership, stand-in setup, the Python format check, and proof layers on the delivery map.
-- [coordination.md](coordination.md), shared by all four parts: which run changes which skill, the ancillary work W1–W7 and who does it, the security decisions, and the release.
+- Part E, [progressive-disclosure.md](progressive-disclosure.md): writing in layers for people, and which parts of that a rule, a judge or a reviewer checks.
+- [amendments.md](amendments.md): changes to accepted parts. It covers stacking decided with the owner, new technology as the owner's call, UI quality evidence and verdicts, and three lessons from the agent-identity build: the injected storage boundary, a cross-repository plan's orchestration section, and the pages and decisions-made-alone view.
+- [coordination.md](coordination.md), shared by every part: which run changes which skill, the ancillary work W1–W7 and E·W1 and who does it, the security decisions, and the release.
 
 ## Decisions
 
 - Decided 2026-10-24: Part A, D8. A plan lives with its spec, in `plans/`, holding plan files only.
+- Decided 2026-10-24: Part E, E-D5. The lint pilot lands first; E·W1's rules run locally with no CI.
 
 Waiting for the owner:
 

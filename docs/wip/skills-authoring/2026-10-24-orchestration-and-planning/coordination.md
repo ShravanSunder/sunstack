@@ -28,6 +28,20 @@ Each run changes exactly one skill. A skill's own references ride with its run; 
 | D | R2b | `practices-verification-maintenance` | `references/project-capability-generation.md` |
 | D | R3 | `practices-verification-maintenance` | same commit as D's R2b |
 | D | R4 | `domain-python` | |
+| E | R1 | `principle-write-for-the-reader` | its new `references/layered-detail.md` |
+| E | R2 | `shared-references/design-documents.md` | rides with B's R5 |
+| E | R3 | `presentation-html` | rides with B's R2 |
+| Amendment | A·R11 | `plan-implementation` | `shared-references/canonical-implementation-plan.md` (stacking decided at plan review); rides with A's R2 |
+| Amendment | A·R12 | `plan-update` | rides with A's R3 (a PR-shape change reaches the owner) |
+| Amendment | A·R13 | `implement-plan` | rides with A's R7 (storage or a dependency the plan didn't name stops as a design gap) |
+| Amendment | B·R3 | `program-design` | rides with B's R3: engine, driver and migration tool marked `existing` or `new`; the injected storage boundary across runtimes |
+| Amendment | A·R2, A·R1 | `plan-implementation`, `orchestrator-design` | ride with A's R2 and R1: a first plan across repositories carries its orchestration section; B's R2 delivery map gains a repository level |
+| Amendment | D·R6 | `practices-verification` | `references/native-observation.md`, `references/browser-observation.md` |
+| Amendment | D·R7 | `role-lead` | `references/working-with-verifier.md` |
+
+Focus 3 rows the amendments add (B·R1 `practices-owner-attention` raise lists; C·R1 `practices-show-me-your-work` page links and the decisions-made-alone view) are applied when focus 3 is implemented, not in focus 2's PR.
+
+Batch 1's applied runs are listed in the superseded plan. Batch 2's superseding plan carries the rows above, B's runs, part D's remaining runs and the correction pass for the batch 1 Verifier observations (`focus2-batch1-verifier-30d9abf9.md`).
 
 `verification-design` and `practices-verification-maintenance` are each touched by more than one run. Their runs land in one commit per skill, so a reviewer reads each skill's change whole. Focus 3 also changes `discuss-pathfinding`; whichever focus lands second rebases its runs onto the first.
 
@@ -43,7 +57,8 @@ Work that changes no skill's teaching. Each item has a delivery owner and a proc
 | W4 | Maintainer index links: `docs/architecture/skill-system.md`, `plugins/sunstack-dev/README.md` | The focus 2 Implementer |
 | W5 | `docs/diagram-vocabulary.md` adds the delivery map and the plan change view; the vocabulary contract test updates (was part B's R8) | The focus 2 Implementer, with B's R2 |
 | W6 | The global prompt, devfiles `shared/my_agents.md` (was part A's R8) | A subagent, never the Lead, in its own devfiles PR, after the owner decides A·D7's timing; it asks the owner before committing |
-| W7 | Caller cutover for `plan-update`: the AGENTS.md skill table and `plugins/sunstack-dev/README.md` inventory | The focus 2 Implementer, with A's R3 |
+| W7 | Caller cutover for `plan-update`: the `plugins/sunstack-dev/README.md` inventory, done in batch 1. The skill index row ("the AGENTS.md skill table") is the global prompt's table in devfiles `shared/my_agents.md`, so it rides with W6 | The focus 2 Implementer for the README; W6's subagent for the global index row |
+| E·W1 | Rule checks for the standards focus 2 adds (part E): `skill-rules` classification, markers, rules-file entries, and good and bad proof on the real engine | The focus 2 Implementer, after the lint pilot (P6) lands, using its configuration and pin |
 
 ## Security classification
 
@@ -78,6 +93,22 @@ copy-vs-adapt decision: reference only; no library code enters the repository
 decision: allowed for public-safe design content in this public repository; sensitive or private content keeps presentation-html's existing rule (a complete local distribution)
 required proof: demistify check with zero errors and warnings on every delivered file; byte comparison of the embedded copy with a fresh regeneration; a browser observation
 public-safe constraints: no credentials, secret references, account identifiers or private machine configuration in page or Markdown
+review route: skill-review spec and implementation stages
+```
+
+### E·W1, rule checks run locally
+
+```text
+sensitive surfaces: shell commands (the pinned sunstack CLI run through npx, which fetches the published @sunstack/cli package at its declared pin); repository rules files and markers
+entry points: the authoring agent runs lint locally in skill-creation's step 7 check; a maintainer may run it by hand
+untrusted inputs: repository-owned skill Markdown and rules files; the published package at its exact pin
+privileged actions: none; lint reads files and writes reports only under the run's own output path
+third-party source: none copied; the owner's own published @sunstack/cli, at an exact version
+license / permission state: the owner's own package
+copy-vs-adapt decision: reference only
+decision: allowed for mechanical rules; judged rules stay off, so no model backend, API key or network call beyond the package fetch
+required proof: each mechanical rule's good case passes and bad case fails on the real engine, with zero model requests recorded; a changed file the config doesn't select is reported not linted
+public-safe constraints: reports and rules hold repository-relative paths and rule ids only
 review route: skill-review spec and implementation stages
 ```
 
