@@ -135,8 +135,8 @@ The examples were fixed before the run and stand for the standard's meaning. Don
 
 For a model-judged rule, this proof is check plus print: the rule assembles, and its question reads as its standard. How well a hosted judge answers that question, with or without calibration `context`, is a separate hosted observation. Report it as unproven.
 
-## CI
+## Local checks
 
-For RuleSets with exactly one `document` input and a lint config, recommend one credential-free `sunstack lint --config <file> --check` per intended config in CI, so an orphaned marker, missing entry or over-cap host fails before shipping. For other supported input shapes, recommend `sunstack exec` with a saved `check_rules` request per RuleSet. Adding the job is the repository's decision. A check covers only the sources its config/request names; compare the printed IDs and count with the intended inventory.
+For RuleSets with exactly one `document` input and a lint config, run one credential-free `sunstack lint --config <file> --check` per intended config locally, then `sunstack lint --config <file> <changed files>` to inspect findings. For other supported input shapes, run `sunstack exec` with a saved `check_rules` request per RuleSet. Return each command, its exit code and findings. A check covers only the sources its config/request names; compare the printed IDs and count with the intended inventory.
 
 Complete when: `check_rules` passed on the real `sunstack` binary; print listed every intended rule ID, with the expected count, and each question read as its standard; the mechanical-only calibration definitions match the print; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports with zero model requests and inference attempts kept as evidence; and everything still unproven is named.

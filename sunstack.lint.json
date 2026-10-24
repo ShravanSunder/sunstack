@@ -1,0 +1,13 @@
+{
+  "$schema": "https://github.com/ShravanSunder/sunstack-tools/releases/download/v0.1.0/sunstack.lint.schema.json",
+  "rule_sets": {
+    "skills": {
+      "path": "rules/skill-standards.ruleset.json",
+      "files": ["plugins/**/SKILL.md"]
+    }
+  },
+  "rules": {
+    "skills/skill.call-completeness": "off",
+    "skills/skill.observable-branch": "off"
+  }
+}

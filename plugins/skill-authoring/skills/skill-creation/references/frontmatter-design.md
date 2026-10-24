@@ -6,13 +6,13 @@ This reference owns description wording, adjacent-skill boundaries, invocation t
 
 ## Required Shape
 
-```text
-name: required; max 64 characters; lowercase letters, numbers, and hyphens
-only; must match the parent folder name exactly.
-
-description: required; max 1024 characters; action-oriented trigger phrase
-that tells the agent when to invoke the skill.
-```
+- The skill's frontmatter includes a `name` field.<!-- K001 -->
+- The skill's `name` has at most 64 characters.<!-- K002 -->
+- The skill's `name` contains only lowercase letters, numbers, and hyphens.<!-- K003 -->
+- The skill's `name` matches its parent folder name exactly.
+- The skill's frontmatter includes a `description` field.<!-- K004 -->
+- The skill's `description` has at most 1024 characters.<!-- K005 -->
+- The skill's `description` is an action-oriented trigger phrase that tells the agent when to invoke the skill.
 
 ## Invocation Controls
 
@@ -22,7 +22,7 @@ First decide whether the skill is model-invocable, user-invocable, or both. Retu
 
 A good `description`:
 
-- starts with `Use when` unless the platform requires another shape;
+- The skill's `description` starts with `Use when` unless the platform requires another shape.<!-- K006 -->
 - names the situation, symptom, user request, repo event, or failure that should trigger the skill;
 - uses searchable words the user, codebase, docs, or logs actually use;
 - includes a succinct why only when it improves routing;

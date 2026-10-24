@@ -51,7 +51,7 @@ Open the invocation the repository runs and the RuleSet it names. Add the Markdo
 
 MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
 
-Completion: `check_rules` passes on the real `sunstack` binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard. Native `exec evaluate_rules` calibration uses a mechanical-only view whose definitions match the print field by field; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`, with zero model requests and inference attempts. An exit code, zero matches or partial coverage never closes calibration. Recommend the conditional lint or native check CI route in `references/check-and-reports.md`.
+Completion: `check_rules` passes on the real `sunstack` binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard. Native `exec evaluate_rules` calibration uses a mechanical-only view whose definitions match the print field by field; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`, with zero model requests and inference attempts. An exit code, zero matches or partial coverage never closes calibration. Run the conditional local lint or native check route in `references/check-and-reports.md`.
 
 ### 7. Return
 

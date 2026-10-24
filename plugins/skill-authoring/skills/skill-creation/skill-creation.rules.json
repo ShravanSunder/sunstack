@@ -1,0 +1,20 @@
+{
+  "K001": {
+    "name": "skill.call-completeness",
+    "target": {
+      "input": "skill",
+      "select": { "kind": "markdown_units", "mode": "call_site", "units": ["paragraph", "list_item"], "pattern": "(?i)\\b(?:load|dispatch)\\b" }
+    },
+    "threshold": 0.8,
+    "severity": "warn"
+  },
+  "K002": {
+    "name": "skill.observable-branch",
+    "target": {
+      "input": "skill",
+      "select": { "kind": "markdown_units", "mode": "call_site", "units": ["paragraph", "list_item"], "pattern": "(?i)\\bif\\b" }
+    },
+    "threshold": 0.8,
+    "severity": "warn"
+  }
+}

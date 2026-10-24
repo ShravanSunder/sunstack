@@ -162,7 +162,7 @@ Lead-authored by 🦁 claude-local `68844339`. To be added verbatim to `docs/wip
 | Run | Status | Evidence |
 | --- | --- | --- |
 | R1 `skill-rules` | reviewed | Implemented in `38d83f0e`, with the D4 correction in `069ca0a3` (the isolated fresh run showed consumer repositories don't hold the engine schemas, so the skill now indexes the tagged public engine docs). Proof: 22/22 released-CLI cases; HTTP 200 on 11 of 11 tagged URLs; one isolated fresh Luna xhigh example meeting 5/5 frozen checks (Verifier `verification/r1-observation-069ca0a3.md`). `skill-review` implementation stage: **great**, 0 findings, ship decision source-only for R1 (`skill-rules-r1-impl-review.md`). |
-| R2 `skill-creation` + wiring | proposed | — |
+| R2 `skill-creation` + wiring | implemented | Six frontmatter mechanical rules and two disabled semantic rules; local config and RuleSet, no CI (D11). Native print: 8 rules. Mechanical-only calibration: 6 selected good `completed/pass` and bad `completed/fail`, zero model requests/inference attempts. Canary: 71/71 tracked skills; omitted-subtree control detects the missing skill. Independent Verifier observation and implementation review remain owed. |
 
 ## Review record
 

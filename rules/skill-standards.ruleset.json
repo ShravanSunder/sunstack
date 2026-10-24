@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "Skill creation standards",
+  "description": "Frontmatter and call contracts stated by skill-creation, applied to shipped skills.",
+  "inputs": { "skill": { "kind": "document" } },
+  "applicability": [],
+  "common_ruleset_instructions": null,
+  "marker_prefix": "K",
+  "rule_sources": [
+    {
+      "markdown": "../plugins/skill-authoring/skills/skill-creation/references/frontmatter-design.md",
+      "rules": "../plugins/skill-authoring/skills/skill-creation/references/frontmatter-design.rules.json"
+    },
+    {
+      "markdown": "../plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "rules": "../plugins/skill-authoring/skills/skill-creation/skill-creation.rules.json"
+    }
+  ]
+}

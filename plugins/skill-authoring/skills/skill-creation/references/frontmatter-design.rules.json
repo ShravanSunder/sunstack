@@ -1,0 +1,38 @@
+{
+  "K001": {
+    "name": "skill.name-present",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "name" } },
+    "expect": { "present": true },
+    "severity": "error"
+  },
+  "K002": {
+    "name": "skill.name-length",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "name" } },
+    "expect": { "matches": "(?s)^.{0,64}$" },
+    "severity": "error"
+  },
+  "K003": {
+    "name": "skill.name-characters",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "name" } },
+    "expect": { "matches": "^[a-z0-9-]*$" },
+    "severity": "error"
+  },
+  "K004": {
+    "name": "skill.description-present",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } },
+    "expect": { "present": true },
+    "severity": "error"
+  },
+  "K005": {
+    "name": "skill.description-length",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } },
+    "expect": { "matches": "(?s)^.{0,1024}$" },
+    "severity": "error"
+  },
+  "K006": {
+    "name": "skill.description-prefix",
+    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } },
+    "expect": { "starts_with": "Use when" },
+    "severity": "warn"
+  }
+}
