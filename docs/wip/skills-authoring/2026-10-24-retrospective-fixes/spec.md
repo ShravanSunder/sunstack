@@ -56,7 +56,7 @@ The owner's words, 2026-10-24:
 | Durable Object key-value calls for authorization records | W:311 | breaks "never the Durable Object key-value API": raise or redesign before writing |
 | Core store port shaped as key-value | C:203 (the Lead's commission, C:10) | a port design question for Program Design under focus 2's binding table. The standard says the store behind it is SQLite through Drizzle; the port shape itself is the design's |
 | The volatile in-memory store for conformance tests | C:203 | outside the standard: a test double, not persistence |
-| Node process-memory approval records | N:458 (the Lead's design call, T:42822) | persistence is in question, and the owner's adoption is unresolved (account, investigation question 2). Raised as a conflict under situation 7 until the owner decides |
+| Node process-memory approval records | N:458 (the Lead's design call, T:42822) | not decided by this standard. Whether these records must outlive the process is a lifetime decision for the design and the owner (account, investigation question 2), not a store that breaks the standard. So the text neither calls the Map a violation nor raises it under situation 7, which covers existing code already breaking the standard. If the design makes them persisted, the standard then says SQLite through Drizzle. Corrected 2026-10-24 after the paired Verifier's source walk: the earlier row claimed situation 7 raised this case, which its trigger doesn't cover |
 | Hand-written D1 SQL and the Kysely adapter | S:452, S:495 | breaks "never hand-written SQL or Kysely as the storage layer": D1 through `drizzle-orm/d1` |
 | `node:sqlite` for the identity store | T:142279 | breaks "never `node:sqlite`": Drizzle on better-sqlite3 |
 
@@ -90,4 +90,4 @@ Source walks of the real incident records named above, and the test suite. No fr
 
 | Run | Status |
 | --- | --- |
-| R1–R4 | implemented on `skills/retro-fixes`, one commit per run; source walks done; independent implementation review owed |
+| R1–R4 | implemented at `97a346f6` on `skills/retro-fixes` (an Opus 5.5 xhigh Worker). The paired Verifier observed it (`retro-fixes-verifier-97a346f6.md`); the implementation review is running |
