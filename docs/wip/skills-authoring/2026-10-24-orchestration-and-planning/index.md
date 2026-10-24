@@ -2,8 +2,9 @@
 
 The agent entry for focus 2 of the improvement program (`../2026-10-24-improvement-program/index.md`). The owner reads the same files on `index.html`. Lead: 🦁 claude-local `68844339`. Status:
 
-- Parts A–D: accepted, and batch 1 is implemented at `30d9abf9`.
-- Part E and the amendments: proposed, before spec review.
+- Parts A–D: accepted (8 → 0). Batch 1 is implemented at `30d9abf9`.
+- Part E and the amendments: accepted (5 → 0, closure at `9fef2f49`). Batch 2 is implemented at `12672cdb`.
+- Batch 3 (E·W1, and `skill-authoring` 0.7.0) follows the lint pilot's merge. See `plans/2026-10-24-focus-2-batch-3.md`.
 
 ## Documents
 
