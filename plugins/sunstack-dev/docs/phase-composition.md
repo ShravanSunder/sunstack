@@ -37,7 +37,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | spec-design | 326 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
 | spec-handoff | 72 | none | none | none | none |
 | spec-program-review | 252 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
-| verification-design | 148 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
+| verification-design | 150 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
 
 ## Orchestrators
 
@@ -372,14 +372,14 @@ flowchart LR
 
 ### verification-design
 
-- Lines: 148
+- Lines: 150
 - Always loads:
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/choosing-the-observation.md`
 - Loads when a condition holds:
   - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-show-me-your-work`, `practices-verification`, `practices-verification-maintenance`, `plan-update`
+- Named without a load call: `practices-show-me-your-work`, `practices-verification`, `practices-verification-maintenance`, `plan-update`, `presentation-html`
 - Cites in `SKILL.md`: `principle-read-ground-truth-first`, `principle-prove-it-works`, `principle-verify-before-accepting`, `principle-write-tests-that-can-fail`, `principle-write-for-the-reader`
 - Cites in its references: `principle-write-tests-that-can-fail`
 - Returns: none

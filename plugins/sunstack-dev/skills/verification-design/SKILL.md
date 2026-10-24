@@ -36,7 +36,7 @@ Several rows may share one observation. Describe a shared observation once, and 
 
 ### 1. Take in the design being proven
 
-MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities and the Verification Design's own identity beside the Program Design. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
+MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the set layout, chunk shape and `index.md` duty this run follows. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
 
 A row is stale when, since its review, any of these changed:
 
@@ -85,14 +85,16 @@ The rows are the document's one home, with the shared observations under them. W
 
 Two readers need views over the rows:
 
-| View | Use when | Must expose |
-| --- | --- | --- |
-| "proven by" cards, for the owner | every Verification Design | per requirement: the requirement in the owner's words, its "proven by" line, and what stays unverified |
-| coverage rows, for review, the plan and the Verifier | every Verification Design | per requirement: `U`, its `R` obligations, seam, observation, target with its journey or reused test, passing condition and unverified; each shared observation visible across the rows it serves |
+| View | Owner's question | Use when | Must expose |
+| --- | --- | --- | --- |
+| "proven by" cards, for the owner | How will we know it works, and what stays unverified? | every Verification Design | per requirement: the requirement in the owner's words, its "proven by" line, and what stays unverified |
+| coverage rows, for review, the plan and the Verifier | none: agent detail, one action away on the owner's page | every Verification Design | per requirement: `U`, its `R` obligations, seam, observation, target with its journey or reused test, passing condition and unverified; each shared observation visible across the rows it serves |
 
-MUST load `../../shared-references/diagram-rendering-and-fallbacks.md` with both views, their predicates and their fields, and return each view's selected medium, semantic-preservation result, visual-check result and exact gap.
+MUST load `../../shared-references/diagram-rendering-and-fallbacks.md` with both views, their predicates and their fields, and return the document medium and any page proof, and each view's selected medium, semantic-preservation result, visual-check result and exact gap.
 
-Completion: the document has one row per requirement, and both views have a passing rendering result or an exact gap.
+In a file-backed set, update the document's `index.md` entry and its through-line steps as the set layout says. When the rendering reference chooses a page, as it does by default for a set the owner reviews, use `presentation-html` to refresh it once the Markdown is written.
+
+Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set its `index.md` entry and through-line steps are current.
 
 ### 6. Re-read it as the Verifier would
 
