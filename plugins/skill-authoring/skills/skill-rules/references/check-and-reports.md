@@ -135,8 +135,13 @@ The examples were fixed before the run and stand for the standard's meaning. Don
 
 For a model-judged rule, this proof is check plus print: the rule assembles, and its question reads as its standard. How well a hosted judge answers that question, with or without calibration `context`, is a separate hosted observation. Report it as unproven.
 
-## Local checks
+## Local run
 
-For RuleSets with exactly one `document` input and a lint config, run one credential-free `sunstack lint --config <file> --check` per intended config locally, then `sunstack lint --config <file> <changed files>` to inspect findings. For other supported input shapes, run `sunstack exec` with a saved `check_rules` request per RuleSet. Return each command, its exit code and findings. A check covers only the sources its config/request names; compare the printed IDs and count with the intended inventory.
+Take the lint config and the declared CLI pin from the repository's package metadata or local-use documentation. A `$schema` URL is not a CLI pin. If the config or declared pin is missing, report which is missing and skip the run; create neither and guess no version.
 
+For a RuleSet with exactly one `document` input and a lint config, use that pin through `npx --yes @sunstack/cli@<version>`. Run `sunstack lint --config <file> --check`, then `sunstack lint --config <file> --format json <changed file>` once for each changed `SKILL.md` or reference file. Named files use full scope. Keep the JSON report with each command and exit code, and report every finding. Inspect `status.kind`: `nothing_selected` means that file was not linted, even with exit 0. Report each changed file the config didn't select as `not linted`; for example, a config binding only `SKILL.md` doesn't lint its references. A clean report on a selected file and an unselected file are different results.
+
+Fix errors before handing back. Fix warnings in files you changed; list warnings elsewhere. A fix that would change another skill's trigger or meaning stays out of scope and is listed for its owner. Warnings alone exit 0 under the engine's policy; don't change their severity to make the run fail.
+
+For another supported RuleSet input shape, run `sunstack exec` with a saved `check_rules` request per RuleSet. A check covers only the sources its config/request names; compare the printed IDs and count with the intended inventory. Return each command, its exit code and findings, every changed file not linted, or the missing-config or missing-pin skip.
 Complete when: `check_rules` passed on the real `sunstack` binary; print listed every intended rule ID, with the expected count, and each question read as its standard; the mechanical-only calibration definitions match the print; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports with zero model requests and inference attempts kept as evidence; and everything still unproven is named.

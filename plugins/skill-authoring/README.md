@@ -18,7 +18,7 @@ The plugin ships no eval runner and no stored scenarios. `skill-creation`'s `ref
 
 ## Local skill checks
 
-This repository pins `@sunstack/cli@0.1.0`, matching the release in the root `sunstack.lint.json` schema URL. Run from the repository root:
+The declared CLI pin for this repository is `@sunstack/cli@0.1.0`. Run from the repository root:
 
 ```sh
 npx --yes @sunstack/cli@0.1.0 lint --config sunstack.lint.json --check
