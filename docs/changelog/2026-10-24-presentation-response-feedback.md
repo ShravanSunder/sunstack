@@ -1,6 +1,6 @@
 # 2026-10-24 Presentation HTML responses and feedback
 
-- Plugin: `sunstack-dev` 2.97.0 across Codex, Claude Code and Cursor manifests.
+- Plugin: `sunstack-dev` 2.98.0 across Codex, Claude Code and Cursor manifests; follows the upstream 2.97.0 batched-delivery update.
 - `presentation-html` distinguishes explaining, comparing and recommending from collecting a reader's answers or precise feedback.
 - The chooser and existing decision/pattern references teach optional responses, supporting details and one Comments handoff; the matching Demistify guide remains the only component API owner.
 - Unreleased source previews use a complete matching library and local guide; source readiness does not imply public API availability.
