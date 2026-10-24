@@ -29,11 +29,11 @@ resolved alternatives when they change meaning
 open decisions, assumptions, and evidence gaps
 ```
 
-These are not mandatory headings. When the capability map fires, group the normative requirements by capability: each `R` sits once, in its home capability's section, or in that capability's own chunk when the chunk test below says split. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
+These are not mandatory headings. When the capability map fires, group the normative requirements by capability: each `R` sits once, in its home capability's chunk, the default the chunk test below confirms, or in that capability's section when the test keeps the document whole. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
 
 An `R` takes its home from the `U` rows it traces to. When those rows sit in different capabilities, home it in the capability whose reader would look for it first and name the others under "also serves". An obligation with no `U` row, such as a platform constraint, takes the capability whose behavior it constrains. A cross-cutting obligation, such as one audit rule over every capability, takes the home of the need that asked for it and lists the rest under "also serves". `E`, `R`, `C`, and `V` identifiers never encode a capability, so regrouping renumbers nothing.
 
-IF a vertical capability, protocol, domain boundary, or independently governed contract is a candidate for its own linked file, load `../../../shared-references/design-documents.md` and return, for each candidate, the reader question it answers, its own reason to change, and the split-or-keep result of that reference's chunk test.
+IF the capability map fires, or a protocol, domain boundary, or independently governed contract is a candidate for its own linked file, load `../../../shared-references/design-documents.md` and return, for each capability or other candidate, the reader question it answers, its own reason to change, and the split-or-keep result of that reference's chunk test.
 
 Keep these workflow and process details out of the design artifact:
 

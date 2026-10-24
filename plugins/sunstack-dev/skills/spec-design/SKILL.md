@@ -112,7 +112,7 @@ When unmade owner meaning blocks Requirements or Specification, use `discuss-pat
 
 Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Requirements and Specification as distinct resolvable paths beneath that home and return both exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
 
-MUST load `../../shared-references/design-documents.md` and return the applicable identity representation, the Requirements/Specification separation check, and the identities downstream phases must consume.
+MUST load `../../shared-references/design-documents.md` and return the applicable identity representation, the Requirements/Specification separation check, the identities downstream phases must consume, and the set layout, chunk shape and `index.md` duty this run follows.
 
 MUST load `references/authority-and-problem-framing.md` and return its first result for stage 1: artifact boundary, consumers, decision authority, governing-source identities/classes and current applicability, confirmed goal boundary, and accepted-requirements recovery. Retain the loaded reference and working state for stage 2 and the terminal return. Surface an exact owner decision immediately when it blocks authoring.
 
@@ -248,6 +248,8 @@ MUST load `references/artifact-and-self-review.md` with the Required Why/What Vi
 Apply any caller-supplied artifact-home policy first. Otherwise follow the repository's documented spec location, or use `docs/specs/` for substantial file-backed work. Create a Specification artifact distinct from the admitted Requirements source. A combined `Requirements/spec` artifact or a Requirements document containing the observable contract does not satisfy this boundary. Keep research ledgers and review reports out of the normative design artifact.
 
 Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal normative requirements, observable contracts, failures, constraints, and proof. Link every normative-eligible U row to the obligation it authorizes. Expose one compact `Requirements -> Specification -> Program Design -> Verification Design` path with distinct identities instead of repeating their roles or contents.
+
+In a file-backed set, write the capability list in the Requirements entry as the nested Markdown list the set layout names, open each chunk with its human part in the chunk shape it names, and write the set's root `index.md` when this run starts the set. When the rendering reference chooses a page, as it does by default for a set the owner reviews, use `presentation-html` to build or refresh it once the Markdown is written.
 
 Completion: the Requirements and Specification homes are separately identifiable and non-identical; every normative claim has one home; a stranger can navigate from user need through problem, obligation, observable behavior, and proof; and every accepted identity has an inspectable destination or owner-authorized supersession.
 
