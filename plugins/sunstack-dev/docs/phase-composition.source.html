@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phase composition</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+
+<ex-presentation id="design-cycle" title="What the design cycle is built from" description="orchestrator-design's phases, from Requirements to the first plan, and what each one loads.">
+  <ex-step to="composition--how-the-map-is-counted" icon="stack">How a load call, a pointer and a returned token are counted from the skill text.</ex-step>
+  <ex-step to="composition--orchestrator-design-routes" icon="path">The phases the design cycle routes, with the practices each one loads.</ex-step>
+  <ex-step to="composition--orchestrator-design">The orchestrator's own loads and the tokens it returns at its terminal.</ex-step>
+  <ex-step to="composition--spec-design">Requirements and Specification.</ex-step>
+  <ex-step to="composition--program-design">Program Design: structural How, and the references it loads stage by stage.</ex-step>
+  <ex-step to="composition--verification-design">Verification Design: how each requirement will be proven.</ex-step>
+  <ex-step to="composition--spec-program-review">The independent review of the four documents.</ex-step>
+  <ex-step to="composition--plan-implementation">The first plan, written at the end of a first design cycle.</ex-step>
+  <ex-step to="composition--plan-update">A design correction during delivery goes to the plan update instead.</ex-step>
+</ex-presentation>
+
+<ex-presentation id="delivery-goal" title="What a delivery goal is built from" description="orchestrator-implementation-goal's phases, from the plan through implementation, review and PR wrap-up.">
+  <ex-step to="composition--orchestrator-implementation-goal-routes" icon="path">The phases a delivery goal routes, with the practices each one loads.</ex-step>
+  <ex-step to="composition--orchestrator-implementation-goal">The orchestrator's own loads: delegation, the trace, preflight and its routing reference.</ex-step>
+  <ex-step to="composition--plan-implementation">The first plan, when the goal starts without one from the design cycle.</ex-step>
+  <ex-step to="composition--plan-update">Any change to a ready plan's meaning during delivery.</ex-step>
+  <ex-step to="composition--implement-plan">Executing the plan's slices and their proof.</ex-step>
+  <ex-step to="composition--implementation-review">The independent review of the implementation.</ex-step>
+  <ex-step to="composition--implementation-pr-wrapup">PR checks, threads and mergeability.</ex-step>
+</ex-presentation>
+
+<ex-document id="content">
+<ex-markdown id="composition" label="Phase composition map" src="./phase-composition.md" data-width="canvas"></ex-markdown>
+</ex-document>
+</body>
+</html>

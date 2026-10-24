@@ -21,7 +21,7 @@ The `sunstack-dev` layers separate decisions that change for different reasons. 
 | `domain-*` | Subject-specific knowledge a caller loads | TypeScript, Python and Rust standards |
 | `principle-*` | One engineering judgment applied at a concrete decision | One owner per truth; verify before accepting |
 
-The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. Neither index replaces reading the selected skill.
+The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. The [phase composition map](../../plugins/sunstack-dev/docs/phase-composition.md), generated from the skill files and drawn on [its page](../../plugins/sunstack-dev/docs/phase-composition.html), shows what each orchestrator and phase loads, cites and returns. None of them replaces reading the selected skill.
 
 An orchestrator calls phases. A phase may use other skills at its own layer and methods below it, but does not call an orchestrator to decide its own continuation. Practices and tool manuals do not route upward into phases or roles. They return the supported result or a gap. A [phase return token](../../plugins/sunstack-dev/shared-references/phase-return-tokens.md) carries the gap and its evidence to the caller, which selects its owner within the existing task. A token never grants new scope.
 

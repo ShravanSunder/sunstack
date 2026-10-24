@@ -285,6 +285,7 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 - Skill source: [`skills/`](skills/)
 - Shared runtime references: [`shared-references/`](shared-references/)
 - Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
+- Phase composition map, generated from the skill files: [`docs/phase-composition.md`](docs/phase-composition.md), drawn on [`docs/phase-composition.html`](docs/phase-composition.html)
 - Source inspiration catalog: [`docs/source-inspiration-catalog.md`](docs/source-inspiration-catalog.md)
 - Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
 - Release notes: [`../../docs/changelog/`](../../docs/changelog/)

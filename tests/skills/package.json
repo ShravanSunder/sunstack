@@ -7,7 +7,8 @@
     "test": "vitest run lib --config vitest.config.ts",
     "test:unit": "vitest run lib --config vitest.config.ts",
     "test:evals": "vitest run evals --config vitest.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "phase-composition": "node lib/phase-composition/write-phase-composition-map.ts"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
