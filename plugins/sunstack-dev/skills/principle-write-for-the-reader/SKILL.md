@@ -30,6 +30,8 @@ Code is communication, and so are designs, instructions, and explanations. They 
 
 **The hard call is what to leave out.** Completeness is cheap to write and expensive to read. Keep what the reader needs to understand and decide; move detail to references they can open when they need it. Three things never get cut for brevity: the assumption the work leans on, the risk, and what is still unverified. Put them near the top, where a skimming reader will see them.
 
+**Layer the detail.** Order it from the answer down to the depth, split it into pieces that each answer one question, and only then fold away what is optional for this reader. IF you are writing a document a person reads in layers, such as a design chunk, a composed page or a skill with references, load `references/layered-detail.md` and return the four layers each chunk will take and what in it stays visible.
+
 **Write only commands and examples you have run or read at their source.** A command with the wrong option name or order, written from memory, sends every reader into the same failure. Check the tool's help or an accepted run first.
 
 **Test it on a cold reader.** After thirty seconds, can they restate the main point in a sentence, answer "where does this come from and what can change it?", and point to the line they would correct?
