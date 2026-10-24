@@ -19,14 +19,14 @@ Read from the entry artifact or labeled record as a fresh program designer or pl
 - follow every normative link or chat-record reference and confirm its target exists;
 - resolve every relative document-image link to a project-local asset and report cache-only, external-expiring, missing or broken targets;
 - identify one authoritative home for each repeated claim;
-- verify deeper files correspond to real ownership, protocol, domain, or consumer/change boundaries;
+- verify deeper files correspond to real capability, ownership, protocol, domain, or consumer/change boundaries;
 - trace requirements to realization and proof without path guessing.
 
 Good: one readable entry, explicit routes to deeper contracts, optional evidence, and no duplicated authority.
 
-Bad: index-only primary file; review notes required for meaning; appendices split only by heading; tiny-file sprawl; duplicated normative prose; stale or circular links.
+Bad: an entry index that lists files without their reading order or the question each answers; review notes required for meaning; appendices split only by heading; tiny-file sprawl; duplicated normative prose; stale or circular links.
 
-Calibration: more files are not automatically clearer. Recommend the smallest merge, split, link, or authority move that restores a readable spine.
+Calibration: more files are not automatically clearer. Recommend the smallest merge, split, link, or authority move that restores a readable spine. Requirements and Specification are chunked by capability by default, under `design-documents.md`'s split test, so a chunk that holds one capability's rows is not sprawl. Sprawl is a split that fails that test, such as one file per requirement or chunks that each need all the others to make sense.
 
 Overlap boundary: this check owns entry paths, link targets, placement, and authoritative homes. `reader-understanding` owns disclosure order, human reconstruction, attention cost, process leakage, and redundant content. Other checks own semantic quality after the claim is found.
 
