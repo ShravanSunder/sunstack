@@ -5,7 +5,7 @@ Skills for authoring skills in any repository: design and write them, turn their
 | Skill | Use it to |
 | --- | --- |
 | `skill-orchestrator` | carry one skill change from spec to release: spec, review, implementation, proof, assessment, review, ship |
-| `skill-creation` | design and write one skill and its skill spec; owns the craft every other skill judges against |
+| `skill-creation` | design and write one skill and its skill spec, with a composed page once the owner approves the spec; owns the craft every other skill judges against |
 | `skill-rules` | decide which of a skill's standards become checked `sunstack-rule` rules, mark them in the skill's Markdown, and prove them with `check_rules` and good and bad examples |
 | `skill-review` | review a skill spec or skill files with several independent reviewer agents |
 | `skill-audit` | decide from evidence which skills to create, update, merge, or skip |
