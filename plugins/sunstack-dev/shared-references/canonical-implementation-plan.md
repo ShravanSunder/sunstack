@@ -6,7 +6,7 @@ This reference owns the one active implementation-plan contract shared by plan p
 
 Before producing or validating a completed plan, inspect governing authority, current branch/HEAD, repository instructions, owners, paths, interfaces, tests, commands, proof obligations, security boundaries, and any existing completed plan.
 
-The `originating planner` values name the two planners: `plan-implementation`, the design planner, and `plan-improve-repo`, the improvement planner. The design planner admits the current reviewed four-document design (Requirements, Specification, Program Design, Verification Design) and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
+The `originating planner` values name the three planners: `plan-implementation`, the design planner; `plan-improve-repo`, the improvement planner; and `plan-update`, which writes a superseding plan when a ready plan's meaning changes during delivery. The field is provenance and records who wrote this plan; Preserve and Admit says where a correction goes. The design planner admits the current reviewed four-document design (Requirements, Specification, Program Design, Verification Design) and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
 
 ## Canonical Result
 
@@ -14,7 +14,8 @@ A ready plan returns:
 
 ```text
 plan path: <sole Markdown document identity>
-originating planner: plan-implementation | plan-improve-repo
+originating planner: plan-implementation | plan-improve-repo | plan-update
+supersedes: none | <plan path>
 planning result: ready
 governing planning basis:
   kind: reviewed-four-document-design
@@ -34,7 +35,7 @@ delivery context:
   PR topology: not-applicable | one-pr | separate-prs
 ```
 
-The plan file records the same governing basis and delivery context. These values are immutable plan meaning, not progress. A meaning change creates a new plan path. Never compute a plan hash or digest or add approval chronology, progress, reviewer status, PR state, or tracker state.
+The plan file records the same governing basis and delivery context. These values are immutable plan meaning, not progress. A meaning change creates a new plan path. A superseding plan carries a "Changed from" section: each change, with what it invalidates. That section records meaning lineage only. Never compute a plan hash or digest or add approval chronology, progress, reviewer status, PR state, or tracker state.
 
 Unsettled planning returns no fabricated ready record:
 
@@ -56,7 +57,9 @@ Optional tracking remains outside this record. At planning entry, preserve an ex
 
 ## Plan Home
 
-For every `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the design planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. It never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
+A plan whose governing basis is a reviewed four-document design lives with that design set, tracked, in its `plans/` folder: `docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.md`. For every other `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. For those plans it never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
+
+A superseding plan sits beside the plan it replaces. A `plans/` folder holds plan files only: progress, tracking, status, ledger and scratch files live in the trace or in `tmp/`.
 
 Direct plan-only work may use an established repository plan home. Otherwise use `docs/specs/<spec>/plans/` for durable direct planning or `<repo-root>/tmp/plan-workflows/` for temporary/advisory work.
 
@@ -64,12 +67,12 @@ Every plan includes its result, governing basis, delivery context, planned-at br
 
 ## Preserve and Admit
 
-Producers verify every field before returning. Carriers preserve the record unchanged and never repair a mismatch. A missing path, later meaning change, stale governing basis, incomplete delivery context, or missing required field is a blocking discrepancy returned to the originating planner or exact semantic owner.
+Producers verify every field before returning. Carriers preserve the record unchanged and never repair a mismatch. A missing path, later meaning change, stale governing basis, incomplete delivery context, or missing required field is a blocking discrepancy. A correction to an existing ready plan goes to `plan-update`, whatever the plan's origin. A genuine gap in Requirements, Specification, Program Design or Verification Design goes to its semantic owner first, then to `plan-update`.
 
 An executor returns exactly one:
 
 - `admit`: result is `ready`; terminal is `pr-ready-unmerged`; the plan resolves; opened plan, governing basis, and delivery context agree; authority and repository source remain current; and no real design, proof, authority, or environment blocker is open.
-- `route`: result is `revision-requested`; return its exact correction and originating planner without execution depth.
+- `route`: result is `revision-requested`; return its exact correction without execution depth, to `plan-update` when an existing ready plan stands, or to the semantic or planning owner its payload names.
 - `blocked`: result is `blocked`, terminal is `plan-only`, plan identity is absent, or any record/basis/context/current-source check fails; return the exact discrepancy and owner.
 
 Validation, handoff, tickets, tracker state, or plan completion never upgrade the requested terminal or repair the canonical record.
