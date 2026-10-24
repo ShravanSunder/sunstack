@@ -84,6 +84,15 @@ plan defect
   slice, sequence, dependency, collision, write scope, or proof mapping is wrong
   -> stop and return it to the Lead for plan-update
 
+unnamed storage
+  the slice needs persisted data, a store or a schema the governing Program Design
+  doesn't bind -> return program-design-gap with the data and the evidence, before any code
+
+new technology
+  a runtime, storage engine, persistence library, migration tool or dependency the
+  repository doesn't already use, or a second one for a job it already does
+  -> raise it to the Lead for the owner before it is used
+
 out-of-scope infrastructure failure
   required tooling or environment failed outside the approved change surface
   -> preserve scoped evidence and return the exact external owner/blocker
@@ -94,6 +103,8 @@ evidence gap
 ```
 
 Place each gap `practices-verification` returns in the same classes. A disputed expected outcome is a design break when the design owns that meaning, or a plan defect when the plan does. An unreachable target or setup, stale project verification instructions, or a driver defect outside the slice's write scope is an out-of-scope infrastructure failure, or an evidence gap when the observation needs new authority or a plan change. Product behavior that contradicts the expected outcome is the slice's own red, so fix it inside scope and prove it again. A failure with an unknown cause gets diagnosis before another fix.
+
+A plan names dependency edges and proof-bearing scope, not every library. Using a library or tool the repository already uses, the way it already uses it, continues without a stop, even when the plan doesn't name it. Before you add an import, package or tool, look for the one the repository already uses for that job, and raise a new or second one with the existing one named beside it ([the codebase's existing way wins over preference](../../principle-justify-the-complexity/SKILL.md)). A Node store the repository already keeps with Drizzle on better-sqlite3 gets Drizzle, not `node:sqlite`; a second persistence library chosen mid-build is new technology even when it looks like an implementation detail.
 
 Do not call a change reversible when it moves ownership, changes a public contract or data format, writes migration state, weakens proof, or becomes a prerequisite for other work before correction.
 

@@ -222,7 +222,7 @@ flowchart LR
   - shared reference: `../../shared-references/implementer-verifier-pairing.md`
 - Named without a load call: `practices-show-me-your-work`, `plan-update`, `implementation-review`, `implementation-pr-wrapup`
 - Cites in `SKILL.md`: none
-- Cites in its references: `principle-prove-it-works`, `principle-refine-mental-models`
+- Cites in its references: `principle-prove-it-works`, `principle-refine-mental-models`, `principle-justify-the-complexity`
 - Returns: none
 
 ### implementation-handoff
