@@ -9,7 +9,7 @@ The runtime contract remains in [SKILL.md](./SKILL.md). Detailed execution and p
 ```mermaid
 flowchart TD
     A[Ready plan plus delivery context] --> B{May implementation start?}
-    B -- Needs revision --> C[Return to the plan's author]
+    B -- Needs revision --> C[Return to the Lead for plan-update]
     B -- Blocked or stale --> D[Stop with the exact blocker]
     B -- Yes --> E[Check branch, files, commands, scope, and proof]
     E --> F[Choose the smallest ready slice]
