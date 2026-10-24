@@ -33,6 +33,10 @@ When a point holds up, say so with what you opened and what you didn't. The Lead
 >
 > **Out of scope:** no evaluations were run; this is advice and a named proof gap, not a passing evaluation.
 
+**Failed case:** on 2026-10-20 and 10-21 the Tool Portal's Advisor took second looks at the Node operation store and the Durable Object core. It checked the Node store's atomicity and the core's runtime separation, found both source-correct, and never compared either persistence API with the repository's existing Drizzle store in `packages/oauth-broker`. The Durable Object's key-value store went on into the core extraction, and the owner later rejected it.
+
+**Clean case:** before it weighs atomicity, the Advisor opens `packages/oauth-broker`, finds Drizzle on better-sqlite3, and checks the core against `domain-typescript`'s Persistence standard. Its point names that example and flags the Durable Object's `ctx.storage` key-value calls as breaking "never the Durable Object key-value API". The extraction preserves records an earlier slice already wrote that way, so the Advisor sends the Lead a conflict for the owner, with the key-value store's path and the clause it breaks, and endorses neither extending that store nor migrating it. Atomicity is weighed once the owner has decided which store stays.
+
 ## What you keep out
 
 Replacement spec or plan text for the Lead to paste in is governing authorship, so leave it out. Leave out verdict words such as "approved", "ready" and "LGTM", which belong to review and acceptance.
