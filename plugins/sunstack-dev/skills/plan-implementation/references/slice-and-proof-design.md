@@ -1,6 +1,6 @@
 # Divide the Work and Attach Proof
 
-Use this reference to turn the obligations admitted at the planning start check into a proportional sequence of slices, each with proof that can observe its obligation. Return the slice graph, the obligation/proof map with the slice and command that earn each Verification Design row and each focused proof's oracle source, the project proof-layer source or `project silent`, the property-versus-example choice where one rule covers the cases, a keep/repair/remove disposition for each overlapping existing test, necessary dependency edges, integration gates, false-green risks, and any split or replan stop.
+Use this reference to turn the obligations admitted at the planning start check into a proportional sequence of slices, each with proof that can observe its obligation. Return the slice graph, each slice's reads, the obligation/proof map with the slice and command that earn each Verification Design row and each focused proof's oracle source, the project proof-layer source or `project silent`, the property-versus-example choice where one rule covers the cases, a keep/repair/remove disposition for each overlapping existing test, necessary dependency edges, integration gates, false-green risks, and any split or replan stop.
 
 ## Start From Obligations
 
@@ -50,6 +50,7 @@ For each slice, name:
 
 ```text
 obligation covered
+reads
 write surfaces
 Verification Design rows it earns, with the command or journey and when it runs
 pre-change signal or approved exception
@@ -59,6 +60,8 @@ manual observation when the user-visible or operational surface requires it
 quality commands
 stop/replan condition
 ```
+
+A slice's reads are the anchors it realizes or earns: the headings, rows and diagram nodes of the governing documents, each with its path. That one list is the Implementer's required reads for the slice and the slice's walkthrough on the owner's page, so neither keeps a list of its own.
 
 A slice's focused tests are the plan's own and never stand in for its rows. With no Verification Design, as in a mechanics-only improvement, the focused proof below is the slice's proof. When you choose a slice's proof, name in its pre-change signal the wrong behavior that proof must fail on, put the proof at the cheapest layer where that behavior stays real, and take its expected value from the obligation, recording that source as the slice's oracle ([write tests that can fail](../../principle-write-tests-that-can-fail/SKILL.md)). Add broader proof only for wiring or regression reach the focused proof cannot cover. A full-suite run cannot prove a behavior no planned check observes.
 
@@ -81,4 +84,4 @@ Split or replan when:
 
 Return the exact gap and its owner. Add no speculative task to cover it.
 
-Complete when every ledger obligation sits in exactly one slice, every Verification Design row is scheduled in the slice that earns it, every slice's focused proof names its wrong behavior, layer, and oracle source, every existing test that covers a slice's write surfaces has a disposition and every `remove` its proof, and each split or replan condition you hit is returned as a gap with its owner.
+Complete when every ledger obligation sits in exactly one slice, every slice lists its reads, every Verification Design row is scheduled in the slice that earns it, every slice's focused proof names its wrong behavior, layer, and oracle source, every existing test that covers a slice's write surfaces has a disposition and every `remove` its proof, and each split or replan condition you hit is returned as a gap with its owner.

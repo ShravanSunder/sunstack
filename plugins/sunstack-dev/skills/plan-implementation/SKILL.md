@@ -1,13 +1,13 @@
 ---
 name: plan-implementation
-description: "Use when writing or revising a repository-grounded implementation plan from a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for audit-only discovery (plan-improve-repo)."
+description: "Use when writing the first repository-grounded implementation plan for a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for changing an existing plan during delivery (plan-update) or audit-only discovery (plan-improve-repo)."
 ---
 
 # Plan Implementation
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
 
-An implementation plan is a proof route through current authority and repository reality. The Lead loads this skill and authors the complete plan, including strategy, slices, dependencies, proof mapping, and PR boundaries; helpers may return bounded repository or proof evidence but never plan prose or structure. The caller owns materially different delivery grouping and PR choices. A ready delivery plan is executable input, not a request for generic post-plan approval.
+An implementation plan is a proof route through current authority and repository reality. This skill writes the first plan for a ready design or an admitted improvement; a change to an existing plan's meaning goes to `plan-update`. The Lead loads this skill and authors the complete plan, including strategy, slices, dependencies, proof mapping, and PR boundaries; helpers may return bounded repository or proof evidence but never plan prose or structure. The caller owns materially different delivery grouping and PR choices. A ready delivery plan is executable input, not a request for generic post-plan approval. An owner-review gate, when the caller holds one, stays the caller's input; the plan never records approval.
 
 ## Admit Planning
 
@@ -24,11 +24,11 @@ Completion: the governing basis, requested terminal, tracking disposition, and p
 
 1. Read the governing authority completely and re-anchor against current branch/HEAD, instructions, owners, interfaces, tests, commands, and proof seams.
    IF one bounded repository or proof question benefits from helper work, load `practices-manage-agents` and return an evidence-only assignment, then verify its anchors before continuing. The Lead still authors every plan row and delivery boundary.
-2. MUST load `references/slice-and-proof-design.md` and return its vertical slice graph, obligation/proof map with the slice and command that earn each Verification Design row, independent oracle, project proof-layer source or "project silent", property-versus-example choice when one rule covers the cases, existing-test keep/repair/remove disposition, necessary dependency edges, integration gates, false-green risks, and stop conditions. A remove row without replacement, redundancy, or dead-contract proof is not a ready plan.
+2. MUST load `references/slice-and-proof-design.md` and return its vertical slice graph, each slice's reads, obligation/proof map with the slice and command that earn each Verification Design row, independent oracle, project proof-layer source or "project silent", property-versus-example choice when one rule covers the cases, existing-test keep/repair/remove disposition, necessary dependency edges, integration gates, false-green risks, and stop conditions. A remove row without replacement, redundancy, or dead-contract proof is not a ready plan.
 3. Choose the smallest coherent vertical grouping. If only one exists, use it without alternatives. Keep one deliverable in one PR, and split it only when the owner asks for separate PRs or one PR would be too big to review in one pass; record which reason applies. If materially different groupings or PR topologies exist, pick one and record the choice, the alternatives, and the reason in the plan.
 4. Ensure every slice names its external dependencies and the boundary where a stand-in is allowed if one is missing; every contract-only or prefactoring slice names its downstream vertical consumer; every Verification Design row is scheduled in a slice and every other obligation has fitting proof; and no step invents Why, What, structural How, proof strategy, or external authority.
 5. MUST load `../../shared-references/canonical-implementation-plan.md` and return its Canonical Result record, applying its complete governing-basis, result, delivery-context, home, and validation contract.
-6. For every `pr-ready-unmerged` plan, first resolve the project root, then inspect that project's ignore coverage for `tmp/*`, add that line to the project-root `.gitignore` only when equivalent coverage is absent, and finally write exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan and return its exact path. This includes orchestrated goals and direct continued-delivery planning.
+6. Write one plan and return its exact path. A plan for a reviewed four-document design goes in that design set's `plans/` folder, `docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.md`, tracked with the spec. For every other `pr-ready-unmerged` plan, first resolve the project root, then inspect that project's ignore coverage for `tmp/*`, add that line to the project-root `.gitignore` only when equivalent coverage is absent, and finally write exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. Both homes apply to orchestrated goals and direct continued-delivery planning.
 7. Return exactly `ready | revision-requested | blocked`. `ready` includes the complete canonical record and any separate tracking side-route selection; non-ready results create no new plan or preserve an existing ready record unchanged.
 
 ## Route the Result
