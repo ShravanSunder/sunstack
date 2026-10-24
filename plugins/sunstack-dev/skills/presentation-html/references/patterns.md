@@ -1,8 +1,8 @@
 # Page patterns
 
-This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, or a compact-cell/meter comparison. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
+This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, a compact-cell/meter comparison or a response/feedback composition. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
 
-Expected inputs: the reader's question, forms chosen in step 2, and any compact-cell/meter comparison being considered.
+Expected inputs: the reader's question, forms chosen in step 2, and any requested answers, feedback handoff or compact-cell/meter comparison.
 
 Return: the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the applicable pattern and example it follows.
 
@@ -42,5 +42,17 @@ When no progress or phase visual was requested and the facts offer no useful com
 ## Framed or unframed
 
 A card is one named thing: a component, an option or a finding, with depth inside it. Leave explanations in the flow. Good: three option cards inside a comparison, each holding a picture and its cost. Bad: a card around a whole section, or a card per paragraph.
+
+## A response with one feedback handoff
+
+Open a review with the answer or proposal the supplied sources establish, then the question the reader must answer. Keep prose at Reading width. Use a short comparison first if the options share topics, then native choice cards; give a selectable table Canvas width only when its aligned rows help. Keep the compact title, quieter Markdown body and optional full extras distinct. Extras use the native sidebar by default; an inline disclosure is a deliberate local alternative.
+
+For example, a rollout review first explains the proposed pilot and its cost, then asks **Where should rollout start?** with **Small pilot** and **All teams**. A full supporting diagram sits in the relevant option's details. If the task also asks for independent safeguards, put those in their own multiple-answer question. If the task asks for feedback, use the guide's one Comments surface for item/passage comments and the current-answer handoff. Without those requests, omit the extra question, extras or feedback surface rather than filling them with decorative controls.
+
+Keep the normal document navigation, widths and library styling. Stable review/question/option/target identities come from the matching guide and supplied content; one page-owned response store or another comments editor would split authority. Local saved comments and current transient answers are different states. Copy/Export is an explicit reader handoff, not automatic agent submission.
+
+Good: a reader selects the body of an option, opens its diagram without changing that answer, comments on the exact source passage, and carries the requested feedback from one place. Bad: a recommendation is preselected as the reader's answer, every paragraph becomes a choice, or a custom copy bar competes with Comments.
+
+Observe the actual requested interactions: answer selection versus link/detail/comment actions, rendered body and extras, native panel replacement and focus return, quote/source fidelity, and actual handed-off comments/current answers. Check desktop and 390 CSS px with the shared reader controls. Source and static checks cannot establish these interactions; keep unobserved outcomes explicit in the artifact return.
 
 Complete when the arrangement names what opens the page, where each form sits and at what width, what is one action away, and which pattern above it follows.

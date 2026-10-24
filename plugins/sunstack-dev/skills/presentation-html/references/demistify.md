@@ -26,6 +26,8 @@ A new page binds Demistify v1:
 
 A page that keeps an older binding uses that release’s own guide and checker, and its proof records that binding; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
 
+An unreleased source preview uses the complete matching built library, verified local component guide and matching source tools. Record its source commit and any permitted dirty-state exceptions; name absent release metadata instead of presenting the preview as published. Read the candidate guide's relative references from that same source tree. A source PR, a package version or an installed workflow skill does not establish that the public runtime supports the candidate API.
+
 ## Component guide
 
 MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1. Follow the guide's own MUST/IF calls, including its content/source-carrier reference and the conditional references for the components and navigation this page uses; return the constructs and delivery decisions taken from each.
