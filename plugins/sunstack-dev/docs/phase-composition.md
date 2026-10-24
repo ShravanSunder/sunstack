@@ -32,7 +32,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | plan-handoff | 64 | `canonical-implementation-plan` | `handoff-template` | none | none |
 | plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 174 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
-| plan-update | 34 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
+| plan-update | 35 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `presentation-html` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
 | program-design | 362 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
 | spec-design | 326 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
 | spec-handoff | 72 | none | none | none | none |
@@ -78,6 +78,7 @@ flowchart LR
   program_design["2. program-design"] --> practices_how(["practices-how"])
   verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
   plan_implementation["6. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
+  plan_update["plan-update"] -.-> presentation_html(["presentation-html"])
 ```
 
 ### orchestrator-implementation-goal routes
@@ -118,6 +119,7 @@ The practices its phases load: solid arrows load always, dashed arrows when a co
 flowchart LR
   verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
   plan_implementation["4. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
+  plan_update["5. plan-update"] -.-> presentation_html(["presentation-html"])
   implement_plan["6. implement-plan"] --> practices_preflight(["practices-preflight"])
   implement_plan["6. implement-plan"] -.-> practices_manage_agents(["practices-manage-agents"])
   implement_plan["6. implement-plan"] --> practices_verification(["practices-verification"])
@@ -305,11 +307,12 @@ flowchart LR
 
 ### plan-update
 
-- Lines: 34
+- Lines: 35
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - another skill's file: `../plan-implementation/references/slice-and-proof-design.md`
 - Loads when a condition holds:
+  - practice: `presentation-html`
   - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: `practices-show-me-your-work`, `implement-plan`, `verification-design`
 - Cites in `SKILL.md`: none
