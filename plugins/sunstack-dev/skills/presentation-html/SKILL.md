@@ -31,7 +31,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    | Records, identity and cardinality | which things are the same | Mermaid `erDiagram` |
    | Alternatives on corresponding topics | topics match across options | `ex-compare` |
    | An answer to a question or independent answers | the reader must respond | Native choice from the matching guide |
-   | Feedback on an item or exact passage | the reader must attach feedback | One Comments surface from the matching guide |
+   | Feedback on an item or exact passage | the reader must attach feedback | Existing Comments controls from the matching guide |
    | One named component, option or finding with depth | it is a thing the reader names | `ex-card` |
    | Code or a diff with comments | lines are the evidence | `ex-code` with `ex-note` |
    | Screens or captures | pictures are the evidence | figure; a Gallery when readers browse many |
@@ -42,6 +42,8 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    IF the chosen form is a relationship diagram, load `../../shared-references/diagram-semantics.md` and return the primary family with its reason and the disclosure sequence. IF Mermaid draws it, load `../../shared-references/mermaid-usage.md` and return the use-or-fallback decision; check its readability in step 5. On a page, a Mermaid diagram that fails that check falls back to a native view that keeps the relationship drawn (`ex-flow`, `ex-board` or `ex-trace`) or to a smaller diagram of one slice, never to a plain-text sketch; the page can draw, so a text sketch is a gap. Completion: every piece of content has a form, and every non-prose form names the relationship it shows that prose would not.
 
 3. **Bind and load.** MUST load `references/demistify.md` and return the binding and its recorded release, the guide, and the viewing and checker method, and an available matching authoring-tool route or its exact gap. Then load the guide references the guide itself calls for your chosen components, including its section-level IF calls (such as `tours.md` for a Walkthrough). Before writing any element, attribute, tone or icon, find it in the guide at the page's binding ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). Completion: runtime, theme and guide share one binding; missing API is a named gap, never an invented attribute.
+
+   When the matching guide documents default Comments, ordinary pages get its Comments control and semantic targets automatically, without a manual feedback tag, document metadata or paragraph labels. Keep answer controls task-driven. Follow that guide for deliberate opt-out or metadata overrides; an older binding keeps its own feedback contract.
 
 4. **Compose with taste.**
    - Answer first; ordinary prose in the flow.
@@ -64,7 +66,7 @@ You supply meaning, order and the choice of view. Demistify supplies the compone
    - no authored colors, fonts, shadows, borders or width rules; one shared left edge when the bound release provides it;
    - at a 390 CSS px phone viewport nothing overflows and no control covers content;
    - links, stops, sidebar and fullscreen behave as authored, and closing fullscreen restores the view;
-   - requested answers select independently of links, Details and Comments actions; requested extras use the native inspector or chosen local disclosure, and requested feedback has one Comments handoff with actual carried comments/current answers;
+   - at a binding documenting default Comments, its normal control and semantic targets are present unless deliberately opted out; requested answers select independently of links, Details and Comments actions; requested extras use the native inspector or chosen local disclosure, and requested feedback has one Comments handoff with actual carried comments/current answers;
    - each named view's signal from `views.md` holds.
 
    IF the page has an embedded copy, regenerate it and compare it by `demistify.md`'s method; return `identical`, or `stale` with the copy replaced from its live source, reindexed when needed, compared again and checked again in its final delivered state. Matching text proves nothing about a view, so check each view against its owning source's current facts ([a passing check proves only what it observes](../principle-prove-it-works/SKILL.md)). Report your check's gaps (release, opening-method and authoring limits) in your return, not on the page; the page shows only the limits its sources state. Completion: every defect introduced by this work is fixed; creation/content revisions also pass every markup-controlled checklist item. Final checks pass or their exact failure is returned as a blocker. Each remaining limit identifies its release, opening method or, for delivery-only work, the inherited supplied-source defect; static success alone cannot close this step.
