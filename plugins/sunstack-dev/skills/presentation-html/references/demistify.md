@@ -47,6 +47,7 @@ Delivery depends on what the page loads. Library assets from the CDN need no app
 The matching guide owns the CLI operations. The CLI is source-only, with no published npm package; readers run no command. Use an already available matching Sunstack tools checkout with Node 26 and its installed pnpm dependencies. Verify its source commit and relevant source state against the binding's recorded `release.json` source commit, or a separately verified matching snapshot; a package version alone does not establish that match. If the tool route is unavailable, return that exact gap. Do not silently install tools, substitute another release or invent an npm or `bundle` command from a source API.
 
 1. Inspect the page's source history and dependencies before treating missing `src` as inline authorship. A generated embedded copy or known-source refresh uses its retained live source page and original Markdown, even though the output has consumed `src`. Missing required originals are a gap; the generated copy cannot prove freshness. Other pages with local Markdown references retain those files and a live source page such as `guide.source.html`. An independently authored inline page with neither local Markdown references nor a known-source refresh remains the reader and skips embedding.
+   For generation or a local edit, keep model context on the source wrappers and affected Markdown; let tools read the complete explicit collection. Keep each walkthrough definition on its owning source page. Return concise file/count/issue results instead of dumping generated readers or search-index payloads.
 2. After composition is complete, run from the matching checkout's monorepo root:
 
    ```sh
@@ -54,13 +55,13 @@ The matching guide owns the CLI operations. The CLI is source-only, with no publ
    ```
 
    Keep output beside input or preserve its relative page/image layout. Deliver `guide.html`; retain `guide.source.html` and its Markdown for updates. The transform embeds exact Markdown, including literal script terminators. It does not inline arbitrary JSON, pictures, the library or fonts. Prepare other local data only through a route documented by the matching guide, or name the unresolved dependency.
-3. For a collection whose command search needs other pages' headings, embed each live-source page first, then index the explicit delivered collection in place:
+3. For shared collection search or Walkthroughs, embed each live-source page first, then index every explicit delivered page, including peers without local paths:
 
    ```sh
    node packages/demistify/bin/demistify.ts index /path/guide.html /path/details.html
    ```
 
-   Keep stable island IDs, relative paths and the input list. An authored inline peer participates in the index without an extra embed. The matching navigation guide owns indexing order and freshness.
+   Keep stable island IDs, relative paths and the input list. An authored inline peer participates without an extra embed. Keep `ex-nav` and the same Pages links on each peer; the generated index supplies shared path discovery without copying walkthrough definitions. After a local source edit, regenerate affected snapshots and reindex/check the complete delivered collection. The matching navigation guide owns discovery, indexing order and freshness; smaller authoring context does not reduce final validation or the full-collection comparison below.
 4. Check every final HTML file after all transforms:
 
    ```sh

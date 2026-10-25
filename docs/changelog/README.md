@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-25 Presentation HTML collection walkthroughs](2026-10-25-presentation-collection-walkthroughs.md)
 - [2026-10-24 Presentation HTML responses and feedback](2026-10-24-presentation-response-feedback.md)
 - [2026-10-24 Batched delivery rounds](2026-10-24-batched-delivery-rounds.md)
 - [2026-10-23 Presentation HTML combined evidence rows](2026-10-23-demistify-combined-cells.md)
