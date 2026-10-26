@@ -1,28 +1,15 @@
 # Skill Security Review
 
-Treat executable resources, third-party content, secrets, and home/cache writes as sensitive surfaces before ordinary authoring continues.
-
-This reference owns sensitive-surface inspection for scripts, hooks, assets, package scripts, shell/network behavior, third-party source, private auth material, privileged actions, installed-cache refresh, and home-level mutation. Return the security decision and required proof before the sensitive surface is edited.
-
-## Sensitive Surfaces
-
-- `scripts/`
-- hooks
-- `assets/`
-- package scripts
-- shell commands or subprocess behavior
-- network access
-- third-party source or skill adoption
-- private auth material, tokens, or sensitive-value paths
-- privileged actions
-- installed Codex/Claude cache refresh
-- home-level writes
-
-This list is the single owner of the term set. `skill-creation`'s `SKILL.md` and `skill-review`'s `sensitive-surface` check cite it rather than restating it. Plugin manifests and versioning are not sensitive surfaces; they belong to `platform-mechanics.md`.
+Run this gate before ordinary authoring continues. This reference owns how a sensitive surface is inspected and decided; the term set and the standards a decision must meet are the root's. MUST load `../../domain-skill-crafting/references/security.md` and return each sensitive surface in scope, or none, with the standards its decision must meet. Return the labels below, filled for each surface it names.
 
 ## How To Inspect
 
-Inventory sensitive surfaces and entry points. Identify untrusted inputs and privileged actions. For third-party source or assets, record source, license or permission state, and a copy-vs-adapt decision before anything is copied. Decide `allowed`, `disallowed`, `blocked`, or `deferred`, and gate that decision before any write or edit of the sensitive surface — not alongside it. Executable resources need behavior proof (deterministic tests). Recommend a dedicated security review only when the user asks for an explicit security scan or vulnerability review, not for routine authoring judgment.
+For each sensitive surface the root's list puts in scope:
+
+1. Inventory its entry points.
+2. Identify its untrusted inputs and privileged actions.
+3. Decide `allowed`, `disallowed`, `blocked`, or `deferred`, and name the proof the root's standards require of that surface.
+4. Recommend a dedicated security review only when the user asks for an explicit security scan or vulnerability review, not for routine authoring judgment.
 
 ## Return Labels
 
@@ -36,10 +23,10 @@ privileged actions:
 third-party source:
 license / permission state:
 copy-vs-adapt decision:
-decision: allowed | disallowed | blocked | deferred — include in the run summary, or skill-creation's step 7 return, because this branch ran
+decision: allowed | disallowed | blocked | deferred; include in the run summary, or skill-creation's step 7 return, because this branch ran
 required proof:
 public-safe constraints:
 review route:
 ```
 
-Complete when: every sensitive surface in scope carries an allowed, disallowed, blocked, or deferred decision recorded before that surface was outlined or written.
+Complete when every label is filled for each surface the root's list put in scope, or that list put none in scope, and each decision meets the standards the root returned.
