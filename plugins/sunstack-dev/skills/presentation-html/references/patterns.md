@@ -1,8 +1,8 @@
 # Page patterns
 
-This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, a compact-cell/meter comparison or a response/feedback composition. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
+This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, a compact-cell/meter comparison, a capture-variation comparison or a response/feedback composition. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
 
-Expected inputs: the reader's question, forms chosen in step 2, and any requested answers, feedback handoff or compact-cell/meter comparison.
+Expected inputs: the reader's question, forms chosen in step 2, and any requested answers, feedback handoff, compact-cell/meter comparison or related-capture comparison.
 
 Return: the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the applicable pattern and example it follows.
 
@@ -22,6 +22,23 @@ Use a disclosure for depth under the current point that most readers skip. Its s
 
 Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a design set, `engineering-documents.md` turns each reading path in `index.md` into a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates thresholds the chunks own.
 
+## Related captures: items, variations and filters
+
+Choose what the reader advances between and what they compare without leaving that item. Use separate items for different logical subjects or meaningful states, variations for alternate captures of the same subject/state, and filters to narrow the collection. A filterable list alone does not express a variation relationship. One capture needs only a figure; an ordered explanation over a collection can use a Gallery Journey.
+
+For example, suppose the supplied evidence has these screen sizes:
+
+| Logical item | Captured variations | Ordered explanation |
+| --- | --- | --- |
+| Cart, ready | Phone, Tablet, Desktop | One Cart stop |
+| Payment, ready | Phone, Tablet, Desktop | One Payment stop |
+
+This is two items with three variations each, not six unrelated screens or six journey stops. A reader can stay on Cart while comparing sizes, then advance to Payment. For a size-switching journey, use the matching guide's variation-enabled path; for an exact evidence sequence, address the specific captures instead. In a size-switching journey, a missing or ambiguous variation stays a disclosed gap, not invented evidence.
+
+Screen size is an example of the judgment, not a fixed list of device names. Use categories the supplied evidence supports and keep them consistent. Different states are separate items in this gallery's screen/state model. A useful size facet may also filter the collection; it does not replace grouped navigation. Bad: naming the logical items “Cart — Phone” and “Cart — Desktop”, or showing only a Phone filter when the reader needs to compare sizes of Cart.
+
+Retrieve `pictures.md` and, for a journey, `tours.md` from the matching Demistify guide before writing the declarations. They own actual grouping fields, supported variation categories, the flag's owner, one-step-per-item syntax, and the difference between ordinary browsing and guided missing/ambiguous variations. Keep a Gallery on its own page with normal document navigation; this pattern adds no component attribute or page-owned navigation.
+
 ## Combined identity and timing row
 
 Keep status, count and timing distinct: status is authored meaning, a fraction reports completed work, and timing values describe total duration or phase share. Exact supplied values stay visible. A complete count reports completion; the authored status communicates outcome.
@@ -35,7 +52,7 @@ When the user asks for identity, status, checks and phase comparison together, o
 
 Give the table's full wrapper Canvas width when the table needs room. Keep surrounding explanation at Reading width with the shared left edge. Put short facts and focused links in cells; put long code, explanations and a full Trace outside the table.
 
-Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Keep missing, empty or inconsistent facts explicit. Inspect the actual page at desktop and 390 CSS px in light and dark themes for wrapping, local scrolling and clipping.
+Label phase-share comparisons as shares. For absolute duration comparisons, use one common explicit scale. Keep missing, empty or inconsistent facts explicit.
 
 When no progress or phase visual was requested and the facts offer no useful comparison, use ordinary text such as “6 / 6 checks in 228 ms” and omit the meter; retain an explicitly requested visual even when its values do not offer a useful comparison. A card in every cell obscures the row comparison.
 
@@ -53,6 +70,6 @@ Keep the normal document navigation, widths and library styling. Stable review/q
 
 Good: a reader selects the body of an option, opens its diagram without changing that answer, comments on the exact source passage, and carries the requested feedback from one place. Bad: a recommendation is preselected as the reader's answer, every paragraph becomes a choice, or a custom copy bar competes with Comments.
 
-Observe the actual requested interactions: answer selection versus link/detail/comment actions, rendered body and extras, native panel replacement and focus return, quote/source fidelity, and actual handed-off comments/current answers. Check desktop and 390 CSS px with the shared reader controls. Source and static checks cannot establish these interactions; keep unobserved outcomes explicit in the artifact return.
+Observe the actual requested interactions: answer selection versus link/detail/comment actions, rendered body and extras, native panel replacement and focus return, quote/source fidelity, and actual handed-off comments/current answers. Source and static checks cannot establish these interactions; keep unobserved outcomes explicit in the artifact return.
 
 Complete when the arrangement names what opens the page, where each form sits and at what width, what is one action away, and which pattern above it follows.
