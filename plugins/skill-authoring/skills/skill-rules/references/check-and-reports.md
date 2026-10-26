@@ -4,7 +4,7 @@ This reference owns step 6: running the engine's check, print and local evaluati
 
 ## Run the engine
 
-`sunstack-rule` reads one JSON request on stdin and writes one JSON response on stdout:
+`sunstack exec` reads one JSON request on stdin and writes one JSON response on stdout:
 
 ```json
 { "protocol_version": 1, "operation": "check_rules", "input": { "...": "the operation's native input" } }
@@ -87,8 +87,8 @@ The examples were fixed before the run and stand for the standard's meaning. Don
 
 For a model-judged rule, this proof is check plus print: the rule assembles, and its question reads as its standard. How well a hosted judge answers that question, with or without calibration `context`, is a separate hosted observation. Report it as unproven.
 
-## CI
+## Where rules run
 
-Recommend one `check_rules` run per RuleSet in CI, so a teaching edit that orphans a marker or overflows a host fails before it ships. Adding that job is the repository's decision.
+Rules run locally, by the skills that use them, not in CI: run `check_rules` once per RuleSet whenever those skills check skill text, so a teaching edit that orphans a marker or overflows a host fails before it ships.
 
 Complete when: `check_rules` passed on the real binary; print listed every intended rule ID, with the expected count, and each question read as its standard; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports kept as evidence; and everything still unproven is named.

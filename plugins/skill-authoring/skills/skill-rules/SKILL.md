@@ -1,6 +1,6 @@
 ---
 name: skill-rules
-description: "Use when deciding which standards in a skill should become checked `sunstack-rule` rules, placing `<!-- K014 -->` markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-creation) or deciding which skills to change (skill-audit)."
+description: "Use when deciding which standards in a skill should become checked rules, placing rule markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-design, skill-creation) or deciding which skills to change (skill-audit)."
 ---
 
 # Skill Rules
@@ -19,7 +19,7 @@ Most of a skill should never become a rule. Each standard lands in exactly one o
 
 Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. The proxy may be marked too, but only on its own wording that says exactly what it checks, and the decision table records it as a proxy for the standard it approximates.
 
-The engine's docs own every exact schema: the `sunstack-rule` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
+The engine's docs own every exact schema: the `sunstack exec` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
 
 ## Workflow
 
@@ -51,7 +51,7 @@ Open the invocation the repository runs and the RuleSet it names. Add the Markdo
 
 MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
 
-Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
+Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Rules run locally, by the skills that use them, not in CI.
 
 ### 7. Return
 

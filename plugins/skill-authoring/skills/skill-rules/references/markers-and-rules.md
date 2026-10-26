@@ -53,7 +53,7 @@ The rules file is one strict JSON object keyed by marker ID, paired with exactly
 
 ```json
 {
-  "K014": { "name": "skill.description", "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } }, "expect": { "starts_with": "Use when" }, "severity": "block" },
+  "K014": { "name": "skill.description", "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } }, "expect": { "starts_with": "Use when" }, "severity": "error" },
   "K015": { "name": "skill.load-return-word", "target": { "input": "skill", "select": { "kind": "markdown_units", "mode": "unit", "units": ["paragraph"], "starts_with": "MUST" } }, "ast_grep": { "kind": "paragraph", "regex": "\\bMUST\\s+load\\b", "not": { "regex": "\\breturn\\b" } } },
   "K016": { "name": "paragraph.clear-result", "target": { "input": "skill", "select": { "kind": "markdown_units", "mode": "unit", "units": ["paragraph"] } }, "threshold": 0.8 }
 }
@@ -65,7 +65,7 @@ Choose the verdict from the standard's outcome:
 - **`expect`** when one unit's visible text, or one field's decoded value, either has the property or doesn't: exactly one of `starts_with`, `matches`, `not_matches` or `present: true`. Text predicates read visible text with inline code removed, so a pattern looking for a path written in backticks finds nothing. An absent field fails every predicate, `null` counts as present, and a missing or malformed frontmatter block is unresolved.
 - **`ast_grep`** when the property is structural, or needs the raw source (inline code included) or the unit's ancestors. The rule describes the *violation*: a match fully inside the target unit fails it, and no match passes. Write it the other way round and it fails good text and passes bad. It sees the whole original syntax tree, so ancestors outside the unit count and siblings outside it don't. The engine validates it as an ast-grep rule and refuses unknown keys, even nested ones such as a misspelt `stop_by`.
 
-`severity` defaults to `nudge`; use `block` for a standard that must hold. `block_at_or_below` belongs only on a `block` judgment rule, below its threshold.
+`severity` defaults to `warn`; use `error` for a standard that must hold. `error_at_or_below` belongs only on an `error` judgment rule, below its threshold.
 
 ## Choose the target
 
@@ -89,13 +89,13 @@ Name the cost: an input used only for context, like `calibration` here, has to b
 
 A correct Markdown and rules pair proves nothing until the RuleSet the repository's invocation runs includes it. Inspect, in order:
 
-1. **The invocation.** Find the check request or runtime invocation the repository passes to `sunstack-rule`, in its scripts, CI or docs. Note `definition_root`, each `definitions.rule_sets[].path`, its `binding_groups`, and the `repositories` with their `input_paths`. Open the RuleSet it names, not a similarly named file.
+1. **The invocation.** Find the check request or runtime invocation the repository passes to `sunstack exec`, in its scripts, CI or docs. Note `definition_root`, each `definitions.rule_sets[].path`, its `binding_groups`, and the `repositories` with their `input_paths`. Open the RuleSet it names, not a similarly named file.
 2. **The pair.** Add `{"markdown": "<path>", "rules": "<path>"}` to `rule_sources`, both paths relative to the RuleSet file. A path relative to the repository root resolves to a different place.
 3. **The prefix.** A RuleSet with sources needs `marker_prefix`, and it must be the letter your markers use.
 4. **The inputs.** Each entry's `target.input` and every `context` input is a key in the RuleSet's `inputs`, with the kind its selector needs (`document` for Markdown units and frontmatter). The invocation binds every declared input exactly once with that kind, and each bound file matches an `exact` or `glob` entry in its repository's `input_paths`.
 5. **The cap.** If the RuleSet sets `max_question_words`, your hosts were sized against that number, not the default.
 
-If the repository runs no RuleSet for these standards yet, write one in the shape of the engine's `marked-standards.ruleset.json` (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`), with a check request that binds its inputs, and report both as new. Where it runs, in a script or CI, is the repository's decision.
+If the repository runs no RuleSet for these standards yet, write one in the shape of the engine's `marked-standards.ruleset.json` (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`), with a check request that binds its inputs, and report both as new. It runs locally, by the skills that use the rules, not in CI.
 
 Then MUST load `check-and-reports.md` and return the `check_rules` outcome with `output: assembled_rules`: its count and the printed rule IDs with their provenance, to judge against these signals.
 
