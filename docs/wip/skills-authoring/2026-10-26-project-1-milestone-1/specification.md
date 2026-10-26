@@ -1,36 +1,39 @@
 # Project 1, milestone 1: specification
 
-Draft 1, by the 🦁 Lead, 2026-10-26. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
+Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
 
 ## Entities
 
-- **E1 Standard.** A requirement that a skill's text can keep or break, such as *a call names what it brings back*. Identity: its sentence in the root. One standard is one judgment; a sentence that bundles two is two standards. States: in the root; later, in milestone 2, also carrying a rule.
+- **E1 Standard.** A requirement that a skill's text can keep or break, such as *a call names what it brings back*. Identity: its sentence in the root, and its ID in the [standards annex](standards.md). One standard is one judgment; a sentence that bundles two is two standards. A procedure (how to carry out a step) is not a standard. States: in the root; later, in milestone 2, also carrying a rule.
 - **E2 The root,** `domain-skill-crafting`. The one home of every standard for skill text. It is a skill that no agent loads on its own; other skills load it.
-- **E3 Design set.** The design of one behavior-changing skill change: four parts (requirements, specification, skill design, skill verification) as Markdown, and one page built from them. One design set per change; a change spanning several skills has one run per skill inside one set.
-- **E4 Skill change.** One change to one named skill, classified `mechanical`, `scoped` or `behavior-changing` as today.
+- **E3 Design set.** The design of one behavior-changing skill change: four parts (requirements, specification, skill design, skill verification) as Markdown, and one page built from them. One design set per change.
+- **E4 Skill change.** A change to one or more named skills, classified `mechanical`, `scoped` or `behavior-changing` as today.
 - **E5 Phase.** One step of the lifecycle: design, design review, creation, proof, implementation review, ship. Each phase belongs to exactly one skill.
+- **E6 Run.** One authoring pass inside a design set, naming exactly one skill. A change spanning several skills has one run per skill.
+- **E7 Reviewed boundary.** A state of the branch that an implementation review judges. States between two boundaries are work in progress: never reviewed, never shipped.
+- **E8 Token.** A rule marker such as `<!-- K014 -->`, the thing that binds a rule to a standard's sentence (governing spec: "A rule's token sits once on its sentence there, never in any skill's description").
 
 ## Obligations
 
 ### The root
 
-- **R1** Every standard for skill text appears as its own sentence in exactly one place, the root. No other skill-authoring skill restates a standard; where a skill needs one at a decision, it loads the root's topic that holds it. *(U1)*
+- **R1** Every standard for skill text appears as its own sentence in exactly one place, the root. No other skill-authoring skill restates a standard; where a skill needs one at a decision, it loads the root's topic that holds it. A procedure stays once, with the skill that runs it. *(U1)*
 - **R2** The root never loads on its own: it is hidden from model invocation on every host the plugin supports, and is reached only by other skills' load calls. *(U1)*
 - **R3** Every standard is a paragraph or list item outside tables, headings, block quotes, HTML and frontmatter, so a rule can attach to it in milestone 2. Plain facts (a name's 64-character limit, a validator's command) stay facts in a topic reference and aren't standards. *(U2)*
-- **R4** The root's core is read at every skill-authoring step, so it stays short: the mental model, the topics and when each applies, and nothing a step reads only some of the time. Topic depth loads only when its topic applies. **Proposed threshold:** the core is at most about 150 lines; a longer core is a finding. *(U1)*
-- **R5** No skill's description carries a token. Nothing in milestone 1 adds a marker anywhere. *(U2)*
+- **R4** The root's core is read every time a skill-authoring skill loads the root, so it holds only what each of them uses: the mental model, where standards live, and the topics with when each applies. Topic depth loads only when its topic applies. **Threshold:** the core's body, everything in `SKILL.md` after its frontmatter, is at most 1,200 words, counted by `wc -w`, so line wrapping can't change the count; more fails. Within the cap, a paragraph that any one of the five loading skills (design, creation, review, audit, orchestrator) never uses also fails. *(U1)*
+- **R5** No skill's description carries a token; the one in `skill-rules`' description today goes. Milestone 1 binds no new token: anything token-shaped it adds sits inside fenced or inline code, as an example. The existing examples stay. *(U2)*
 
 ### The lifecycle
 
-- **R6** For every behavior-changing skill change, `skill-design` produces a design set (E3). A `mechanical` change has none, as today. *(U3)*
+- **R6** For every behavior-changing skill change, scoped ones included, `skill-design` produces a design set (E3). A `mechanical` change has none, as today: it goes to `skill-creation` with static validation. The page opens with the answer, carries each part unchanged from its Markdown file, walks the four parts in order, and explains internal terms where they first appear. *(U3)*
 - **R7** The requirements part names the need and the success definition in the owner's words, who uses the skill and when, and the evidence: dated signals from sessions, retrospectives or audit, a reproduced failure, or the owner's direction named as the basis. *(U3)*
 - **R8** The specification part states what the skill must do and the standards it must meet, each as one self-contained sentence. *(U3, U2)*
-- **R9** The skill design part states the trigger, the main path, every call site, the references, and which of the root's topics apply. *(U3)*
-- **R10** The skill verification part says, for each requirement and each standard the skill states, how it will be shown to hold: a rule (judged or mechanical, from milestone 2), an eval, a review check, or named as unverified. Pressure tests are a later addition to this part. *(U3, U8)*
-- **R11** `skill-review` reviews the whole design set at a design stage before any of the change's files are edited, with at least two independent reviewer agents, as its spec stage does today. Its implementation stage is unchanged. Both stages load the root. *(U3, U6)*
-- **R12** `skill-creation` edits a skill only inside an accepted design set, and names any deviation from it. *(U4)*
-- **R13** `skill-orchestrator` runs one change's phases in order: design, design review, creation, proof, implementation review, ship. Its input is audit's approved recommendation or a change the owner names. Until milestone 2's rules exist, its proof step names the rule check as pending; a pending rule check is never reported as passed. *(U5)*
-- **R14** `skill-audit` loads the root and composes `skill-review` for single-skill checks on the skills flagged by the rules (from milestone 2) or by session evidence. *(U6)*
+- **R9** The skill design part states the trigger, the main path, every call site, the references, and which of the root's topics apply, and, for every sensitive surface in scope, its allowed, disallowed, blocked or deferred decision, made before the surface is outlined. *(U3)*
+- **R10** The skill verification part says, for each requirement and each standard the skill states, how it will be shown to hold: a rule (judged or mechanical, from milestone 2), an eval, a review check, or named as unverified. Each choice names the properties it was decided on: whether the item is a requirement at all, whether it concerns the text or what an agent does, whether one selectable unit holds it, and whether a check would pass every text that keeps it and fail every text that breaks it. Pressure tests are a later addition to this part. *(U3, U8)*
+- **R11** `skill-review` reviews the whole design set at a design stage before any of the change's files are edited, with at least two independent reviewer agents, as its spec stage does today. The implementation stage keeps its purpose; its loads move to the root, and its correction routes name the new owners: a design mismatch goes to `skill-design`, wording or placement to `skill-creation`. Both stages load the root. *(U3, U6)*
+- **R12** `skill-creation` writes a behavior-changing change only inside its accepted design set, and names any deviation from it. It writes a `mechanical` change from its classification claim, with static validation only. When a write would touch a sensitive surface the design set has no decision for, it stops and returns the change to `skill-design`. *(U4)*
+- **R13** `skill-orchestrator` runs one change's phases in order: design, design review, creation, proof, implementation review, ship. Its input is audit's approved recommendation or a change the owner names. Its proof step carries out the planned proof with `skill-design`'s run procedure and judges the claim by the root's proof standards. *(U5)*
+- **R14** `skill-audit` loads the root and composes `skill-review` for single-skill checks on the skills flagged by the rules (from milestone 2) or by session evidence; each flagged skill's review verdict feeds its recommendation. *(U6)*
 
 ### Generalization
 
@@ -39,8 +42,17 @@ Draft 1, by the 🦁 Lead, 2026-10-26. Part two of milestone 1's design set: [re
 
 ### Cutover
 
-- **R17** Every consumer of a moved standard or a changed skill boundary points to its new home in the same change: the skill-authoring skills, the repository documents named in requirements, the manifests and the test. No forwarding stub or old path remains. The owner's global prompt changes in its own devfiles PR, landing with this milestone. *(U1, U3)*
+- **R17** Every consumer of a moved standard or a changed skill boundary points to its new home in the same change: the skill-authoring skills, their UI metadata (`agents/openai.yaml`), every sentence that routes design work or a design correction, the repository documents named in requirements, the manifests and the test. No forwarding stub or old path remains. The owner's global prompt changes in its own devfiles PR, landing with this milestone. *(U1, U3)*
+
+### The rules' sites and engine
+
+- **R18** Four steps run the rules once milestone 2 has made them, and milestone 1 writes each one now, inert: `skill-creation` checks its own draft before returning it; `skill-orchestrator`'s proof step; `skill-review`'s implementation stage runs them first, each failed judged rule becoming a candidate finding a reviewer verifies; `skill-audit` runs them on every skill in scope. Until project unit U5 switches them on, each site returns `rules: pending`, and a pending check is never reported as passed. *(U4, U5, U6)*
+- **R19** `skill-rules` matches the current engine: the `sunstack exec` front door, the `error` and `warn` severities, and local runs by the skills in place of CI. Its corrected example assembles in the real engine's `check_rules` without a refusal. *(U2; governing spec, unit U0)*
+
+### Reviewed boundaries
+
+- **R20** At every reviewed boundary (E7), every standard has exactly one home and every load path resolves; a move of standards is reviewed in the same state as every consumer that loads them. The reviewer at a boundary reads `skill-review` as it stands at the branch's base commit, never the branch being changed. *(U1, U3)*
 
 ## What this specification doesn't decide
 
-The root's topic files and the exact sentence of each standard (skill design); the exact length limit for the root's core beyond the proposed threshold (review may challenge it); the rules themselves (milestone 2).
+The root's topic files and the final wording of each standard (skill design and its annex fix the meaning; run 2 writes the wording); the rules themselves and how ai-tools runs the engine for them (milestone 2: ai-tools has no engine runner today, so that question goes to the owner when milestone 2's set is written, as the governing spec says).
