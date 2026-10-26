@@ -1,6 +1,6 @@
 # presentation-html: authoring verification scope
 
-Revision: 1. Target: `plugins/sunstack-dev/skills/presentation-html`. One run, update; implemented.
+Revision: 1. Target: `plugins/sunstack-dev/skills/presentation-html`. Revision 1 run: update; reviewed.
 
 ## Problem and success
 
@@ -27,7 +27,7 @@ Base origin/main `e427d8c93f92b704562157c911efea3e460f48fd`; branch already isol
 
 Non-goals: runtime/CSS/test implementation, storage/identity/API changes, deleting responsive behavior documentation, broad verification-policy rewrite.
 
-Run status: implemented. Review record: revision1 accepted-to-implement by independent skill-review SPEC stage; report retained in the owning lab. Implementation review follows focused proof and Root assessment.
+Run status: reviewed. Revision1 SPEC accepted-to-implement; combined independent implementation review returned great/source-only with no accepted findings. Reports remain in the owning work record; fresh-agent application is unobserved.
 
 ## Revision 2 — additional owner-directed variation teaching
 
@@ -45,4 +45,4 @@ A second run, same named skill. Main screenshot chooser and patterns call cover 
 
 Proof for added teaching: manual source/API walk against current galleryScreenKey (screen+state) and viewport navigation; static check the literal product example against unchanged matching checker when available; current frontmatter/link/version checks and independent review. Fresh author transfer remains unobserved/deferred. No browser/product-suite or paid evaluation rerun for prose-only changes. Same base/newPR/version allocation as above; patch Changeset/changelog now describes both changes.
 
-Run status: revision1 phone scope implemented/awaiting implementation review; revision2 variation teaching implemented after independent rev2 SPEC acceptance. Acceptance of revision1 does not cover the new teaching.
+Run status: revision1 phone scope reviewed; revision2 variation teaching separately SPEC-accepted and reviewed. Combined independent implementation review returned great/source-only at 22a105e3083ff3470626a7f9de32e79676b44aa2; no accepted findings. Fresh-agent application, rendering and installed/released uptake remain unobserved.
