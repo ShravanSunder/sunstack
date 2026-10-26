@@ -1,4 +1,23 @@
-# presentation-html default-comments teaching — revision 1
+# presentation-html default-comments teaching — revision 2
+
+## Current revision 2 — always available at the matching binding
+
+Run status: implemented. Owner explicitly confirmed removing the Comments opt-out and its complexity. This supersedes the revision-1 opt-out decision and exception/checklist language below; historical rows remain for context. Behavior-changing update from user-directed intent, not a reproduced agent failure.
+
+Success: an author using a matching guide that documents automatic Comments keeps it available on every ordinary page, with no enable/disable choice or manual setup. Preserve the binding check for older releases, independent identity/revision overrides, task-driven answers/details and one native handoff. In the same three skill homes, remove opt-out instructions and the checklist exemption. Exact API remains in the product guide; no new calls, references, schemas or provider behavior.
+
+| Dated revision-2 decision | Supersedes | Reason |
+| --- | --- | --- |
+| 2026-10-25: remove opt-out guidance and its observation exemption | Revision-1 deliberate-exception row and associated proof case | Owner confirmed always available and removal of the escape hatch |
+| Keep older-binding and identity-override routes | No change | Availability must follow actual bound runtime; identity still names a namespace |
+
+Proof: source/spec agreement and existing 169-test/type/link/manifest gates; compare ordinary supported-binding and identity-override cases, with no disabled-page branch. Known fresh-author loaded-copy/action-record gap remains explicit; claim reviewed source and validated named examples only. No installed/transfer/release claim.
+
+Coordination: current clean workflow 30a29ade24508d6908085a65649dfc1ce4f10a98, update existing PR168, keep six source2.99.0 version homes (unreleased) and revise its dated changelog. No extra version, cache refresh, merge or release. Revision-2 spec review precedes writes; independent implementation review follows source/proof assessment.
+
+Review record revision 2: great / accepted-to-implement, zero findings in the independent revision-2 SPEC review. All other revision-1 non-goals remain.
+
+## Historical revision 1 — opt-out superseded
 
 Target: only `plugins/sunstack-dev/skills/presentation-html/` in sunstack. Classification: update, behavior-changing, user-directed intent. Run status: implemented. This is separate from the Demistify API-guide run.
 

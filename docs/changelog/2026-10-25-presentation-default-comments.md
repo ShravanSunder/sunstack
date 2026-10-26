@@ -2,10 +2,10 @@
 
 `sunstack-dev` 2.99.0 updates `presentation-html` and its `options-and-decisions.md` and `patterns.md` references.
 
-Ordinary pages use automatic Comments when the guide at their binding documents that default, without manual feedback tags, document metadata or paragraph labels. Older bindings keep their own contract; opt-out and overrides follow the matching guide. Answer controls remain task-driven, with one native feedback handoff.
+Every ordinary page keeps automatic Comments available when the guide at its binding documents that default, without manual feedback tags, document metadata or paragraph labels. Older bindings keep their own contract; independent identity and revision overrides follow the matching guide. Answer controls remain task-driven, with one native feedback handoff.
 
-All six Codex, Claude and Cursor plugin/marketplace version fields move to 2.99.0. The changelog index links this entry; no commands, hooks or plugin README sections change.
+All six Codex, Claude and Cursor plugin/marketplace version fields remain at unreleased 2.99.0 for this continuation. The changelog index links this entry; no commands, hooks or plugin README sections change.
 
-Validation: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts` (169 passed); `pnpm --dir tests/skills exec tsc --noEmit`, `claude plugin validate .`, source link/manifest checks and `git diff --check` passed. Codex marketplace discovery passed and still reports installed 2.98.0.
+Revision-2 validation: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts` passed 169 tests in 18 files; `pnpm --dir tests/skills exec tsc --noEmit`, local link/JSON/version/source checks and `git diff --check` passed. All six manifest files are unchanged.
 
-Refresh/reinstall was not performed for Codex or Claude; this is source-only and unreleased at validation. Agent application and independent implementation review remain separate proof.
+Refresh/reinstall was not performed for Codex or Claude; this is source-only and unreleased at validation. Fresh author transfer remains unverified because the loaded-copy/action-record gap persists; independent implementation review follows source/proof assessment.
