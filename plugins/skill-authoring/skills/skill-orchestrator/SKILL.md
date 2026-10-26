@@ -5,7 +5,7 @@ description: "Use when creating, updating, or fixing one skill end to end: carry
 
 # Skill Orchestrator
 
-A skill change is a small delivery with three gates: an accepted spec before files change, proof before review, and an independent review before ship. This skill carries one change through those gates and keeps the record honest. It does not write the spec or the review itself; `skill-creation` and `skill-review` do. It runs the proof the spec plans under `skill-creation`'s proof reference, and checks each result before moving on.
+A skill change is a small delivery with three gates: an accepted spec before files change, proof before review, and an independent review before ship. This skill carries one change through those gates and keeps the record honest. It does not write the spec or the review itself; `skill-creation` and `skill-review` do. It runs the proof the spec plans with `skill-creation`'s `proof-runs.md`, judges each claim by `domain-skill-crafting`'s proof standards, and checks each result before moving on.
 
 ## Practices This Skill Carries
 
@@ -38,7 +38,7 @@ Use `skill-creation` step 7 inside the accepted boundary and return the diff, an
 
 ### 4. Prove
 
-MUST load `../skill-creation/references/proof-and-claims.md`, run the proof the spec plans, and return the strongest supported claim and its evidence. Completion: proof ran against the current files, or the user accepted a named proof gap.
+MUST load `../skill-creation/references/proof-runs.md`, carry out the proof the spec plans by its procedure, and return each run's record and check results. MUST load `../domain-skill-crafting/references/proof-claims.md`, judge the claim by its standards, and return the strongest supported claim and its evidence. Completion: proof ran against the current files, or the user accepted a named proof gap.
 
 ### 5. Assess
 
@@ -51,7 +51,7 @@ Open the diff and the decisive proof yourself before any independent review. Che
 - no complexity, compatibility path, check, schema, or mechanism outside the accepted boundary;
 - when this run depends on earlier runs of the spec, those runs are at their current revisions and the combined behavior is proven, not only this run's local proof.
 
-Missing or stale proof and bounded defects go back to step 3 or 4. A broken assumption, an undecided user choice, a public-contract change, or a wider target stops the work: bring the user the decision. Before accepting for independent review, run the deletion test on the changed text sentence by sentence: would the agent act differently if this sentence disappeared? If not, delete it; a deletion that affects meaning needs fresh proof and assessment. Completion: `accepted-for-independent-review`, `correction-required`, or `design-stop`, with the diff and proof you inspected and your reasons.
+Missing or stale proof and bounded defects go back to step 3 or 4. A broken assumption, an undecided user choice, a public-contract change, or a wider target stops the work: bring the user the decision. MUST load `../domain-skill-crafting/references/steering.md` before accepting for independent review, run its deletion test on the changed text, and return each sentence that fails it, or none. Delete each sentence that fails; a deletion that affects meaning needs fresh proof and assessment. Completion: `accepted-for-independent-review`, `correction-required`, or `design-stop`, with the diff and proof you inspected and your reasons.
 
 ### 6. Review the implementation
 
@@ -59,7 +59,16 @@ IF step 5 returned `accepted-for-independent-review` and the change is behavior-
 
 ### 7. Ship
 
-IF shipping, load `../skill-creation/references/platform-mechanics.md` and return the validation, versioning, changelog, and cache route. Completion: the run status is `shipped` only once the change is released or merged as the user scoped.
+IF shipping, load `../domain-skill-crafting/references/platform.md` and return the facts and standards for each platform surface the change touches. Then carry out the shipping actions for those surfaces, and return a report line for each in that topic's reporting form:
+
+- Run the validators: the Codex quick validator for the target skill, the Codex `skill-creator`'s validation scripts when they fit the repository, and Claude plugin validation when the owning plugin supports Claude.
+- Move the versions as that topic's version standard calls for: the source plugin's, and the Claude manifest's and the Claude marketplace's with it.
+- Write the dated changelog entry.
+- IF the user scoped release or readback, refresh the installed caches, and report the refresh on its own line.
+
+MUST load `../domain-skill-crafting/references/security.md` and return its public-safety standard applied to what ships, meaning the changed files, the changelog entry and the report lines: each home-cache path or local cache identifier they hold, or none.
+
+Completion: the run status is `shipped` only once the change is released or merged as the user scoped.
 
 ## Run Summary
 

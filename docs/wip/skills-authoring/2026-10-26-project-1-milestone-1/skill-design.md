@@ -218,7 +218,7 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. A con
 | 2 | U2a | `domain-skill-crafting`: every standard in the annex | create | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-2-handback.md`; 146 of 146 IDs placed once; core 599 words) |
 | 3 | U2a | `skill-creation`: standards out, root loads in; procedure files kept | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-3-handback.md`; body 3,870 to 1,566 words; 18 of 18 paths resolve) |
 | 4 | U2a | `skill-review`: loads the root; restatements go | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-4-handback.md`; 45 of 45 paths resolve; one evidence-rule sentence restored by the Lead) |
-| 5 | U2a | `skill-orchestrator`: proof and ship load their new homes | update | Opus 5.5 xhigh | proposed |
+| 5 | U2a | `skill-orchestrator`: proof and ship load their new homes | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-5-handback.md`; 6 of 6 loads resolve; ship step keeps the public-safety check through the root's `security.md`; step 5's deletion test loads the root) |
 | 6 | U2a | `skill-audit`: its standards to the root | update | Opus 5.5 xhigh | proposed |
 | 7 | U2a | `skill-rules`: links to the root | update | Opus 5.5 xhigh | proposed |
 | documents A | U2a | the repository documents that link to moved files | shipping surfaces | Sol | proposed |
