@@ -1,6 +1,6 @@
 # Project 1, milestone 1: where each standard goes
 
-Draft 3, by the 🦁 Lead, 2026-10-26. Annex to the [skill design](skill-design.md), and project unit U1's decision: which standards move into the root, and what each sentence means. The run that writes the root (run 2) may polish a sentence's wording but not its meaning; a change of meaning is a deviation it names.
+Draft 4, by the 🦁 Lead, 2026-10-26. Annex to the [skill design](skill-design.md), and project unit U1's decision: which standards move into the root, and what each sentence means. The run that writes the root (run 2) may polish a sentence's wording but not its meaning; a change of meaning is a deviation it names.
 
 **How to read it.** Each row is one standard: one judgment a skill's text keeps or breaks, written as the sentence the root will hold, and each judgment has exactly one ID. The source column cites `ai-tools` at `e427d8c9`; where today's files state the same judgment twice, the row cites both places. A row marked *new* comes from the owner's 26 October decisions or the governing project spec, not from today's files. The six rows marked **rule 1** to **rule 6** are the six judged rules milestone 2 starts with; their sentences are the rule questions. A row keeps its source's subject and scope: where the source speaks of Codex, Claude or all-run detail, so does the row.
 

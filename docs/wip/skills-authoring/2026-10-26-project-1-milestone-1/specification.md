@@ -1,6 +1,6 @@
 # Project 1, milestone 1: specification
 
-Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correction check. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
+Draft 4, by the 🦁 Lead, 2026-10-26, revised after review M1, its correction check and the draft 3 admission check. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
 
 ## Entities
 
@@ -10,7 +10,7 @@ Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correctio
 - **E4 Skill change.** A change to one or more named skills, classified `mechanical`, `scoped` or `behavior-changing` as today.
 - **E5 Phase.** One step of the lifecycle: design, design review, creation, proof, implementation review, ship. Each phase belongs to exactly one skill.
 - **E6 Run.** One authoring pass inside a design set, naming exactly one skill. A change spanning several skills has one run per skill.
-- **E7 Reviewed unit state.** The state of the branch after one project unit's runs, which that unit's implementation review judges before the next unit starts. Only the last unit's state ships; the earlier ones are reviewed work in progress inside an unshipped branch.
+- **E7 Reviewed unit state.** The state of the branch after one project unit's runs, which that unit's implementation review judges, against today's review manual, before the next unit starts. Commits between runs inside a unit are work in progress, never reviewed or shipped.
 - **E8 Token.** A rule marker such as `<!-- K014 -->`, the thing that binds a rule to a standard's sentence (governing spec: "A rule's token sits once on its sentence there, never in any skill's description").
 
 ## Obligations
@@ -51,7 +51,7 @@ Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correctio
 
 ### Reviewed boundaries
 
-- **R20** Each project unit is reviewed before the next unit's runs start, as the governing spec requires. Each unit's review (E7) judges what that unit's state should hold and nothing a later unit adds. At every unit's state, every load that resolves at the base commit still resolves, and every new load resolves or is a forward reference to a later unit that the skill design lists by name. The moved standards may sit both in the root and in their old homes only in the states before the last unit; at the last unit's state, the one that ships, every standard has exactly one home, every load resolves and no old path remains. The reviewer of every unit reads `skill-review` as it stands at the branch's base commit, never the branch being changed. *(U1, U3)*
+- **R20** Each project unit is reviewed before the next unit's runs start, as the governing spec requires. At every unit's reviewed state (E7), every path resolves, every rule and procedure has exactly one live owner, and no file links to a moved path, as today's review manual requires everywhere; so a unit moves something together with everything that loads it. Each unit's review also checks its own obligations, and is never failed for something a later unit adds. The reviewer of every unit reads `skill-review` as it stands at the branch's base commit, never the branch being changed. *(U1, U3)*
 
 ## What this specification doesn't decide
 
