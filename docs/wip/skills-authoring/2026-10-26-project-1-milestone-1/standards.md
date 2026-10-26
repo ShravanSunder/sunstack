@@ -279,6 +279,7 @@ Procedures stay with the skill that runs them (CORE-6):
 | Reproducing an observed failure, and carrying out a proof run (pc:7-20, 62-70) | `skill-design/references/proof-runs.md` | `skill-design` for the failing baseline; `skill-orchestrator`'s proof step for proof |
 | The security gate: inspect, decide, labels, stop (sg:3-5, 25-45) | `skill-design/references/security-gate.md` | `skill-design`, before outlining a behavior-changing change; `skill-creation`, before writing a mechanical change that touches a sensitive surface; `skill-review`'s sensitive-surface check re-walks it |
 | Shipping actions: validators, versions, changelog, refresh (pm:14, 21-22, 28, 31) | `skill-orchestrator`'s ship step | `skill-orchestrator` |
+| Using the Codex `skill-creator`'s scripts when they fit the repository (pm:13), added during run 2 | scaffolding a new skill's folder: `skill-creation`'s writing step; validating: `skill-orchestrator`'s ship step | `skill-creation` (run 3); `skill-orchestrator` (run 5) |
 
 Shapes and systems with their own owner:
 
