@@ -220,8 +220,8 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. A con
 | 4 | U2a | `skill-review`: loads the root; restatements go | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-4-handback.md`; 45 of 45 paths resolve; one evidence-rule sentence restored by the Lead) |
 | 5 | U2a | `skill-orchestrator`: proof and ship load their new homes | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-5-handback.md`; 6 of 6 loads resolve; ship step keeps the public-safety check through the root's `security.md`; step 5's deletion test loads the root) |
 | 6 | U2a | `skill-audit`: its standards to the root | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-6-handback.md`; 5 loads resolve; every audit still reaches STEER-20 and GEN-2 at step 4) |
-| 7 | U2a | `skill-rules`: links to the root | update | Opus 5.5 xhigh | proposed |
-| documents A | U2a | the repository documents that link to moved files | shipping surfaces | Sol | proposed |
+| 7 | U2a | `skill-rules`: links to the root | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-7-handback.md`; 23 of 23 anchors hold their quoted text; the 467-word example re-measured on the real engine) |
+| documents A | U2a | the repository documents that link to moved files | shipping surfaces | Sol | implemented (`tmp/project-1-runs/documents-a-handback.md`; 4 documents, 8 links resolve) |
 | 8 | U2b | `skill-design`: steps 1 to 6 and the three procedure files from creation, plus `design-page.md` | create | Opus 5.5 xhigh | proposed |
 | 9 | U2b | `skill-creation`: narrowed to writing; admission by class; self-check site | update | Opus 5.5 xhigh | proposed |
 | 10 | U2b | `skill-review`: design stage, transfer check, routes, first rule pass | update | Opus 5.5 xhigh | proposed |

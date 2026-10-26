@@ -20,9 +20,9 @@ Mark a section only when the whole section is one standard and its visible words
 
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
-- `skill-creation`'s `### Call Grammar` is over the cap and holds three standards. Mark the paragraph at `SKILL.md:62` for call completeness; the dispatch paragraph (`:77`) and the citation paragraph (`:88`) are separate candidates.
-- In `frontmatter-design.md`, the item "starts with `Use when` unless the platform requires another shape;" reads as a fragment, because its subject sits in the lead-in line "A good `description`:". The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it to `skill-creation` for a rewrite that carries its subject, or mark a complete host that carries exactly one standard.
-- A paragraph that carries five standards, like `skill-creation/SKILL.md:224`, is no narrow host for any of them. Split it in the teaching first.
+- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` is over the cap and holds 43 standards. Mark the list item at `:26` for call completeness; the dispatch items (`:29` to `:31`) and the citation items (`:39` to `:47`) are separate candidates.
+- An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it to `skill-creation` for a rewrite that carries its subject, or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows that rewrite: "A description starts with `Use when`, unless the platform requires another shape."
+- A paragraph that carries five standards, like `skill-creation/SKILL.md:68`, is no narrow host for any of them. Split it in the teaching first.
 
 The engine forbids some hosts outright: a level 1 heading, a block quote, a table, HTML, a link reference definition and frontmatter. A marker inside fenced or indented code or an inline code span isn't a marker at all; it's ignored, and its entry turns up orphaned.
 
@@ -73,7 +73,7 @@ Choose the verdict from the standard's outcome:
 - **`markdown_units`.** `mode: unit` yields one occurrence per requested `section`, `paragraph` or `list_item`, optionally filtered by `starts_with` or `pattern`. `mode: call_site` needs exactly one nonempty filter and yields one occurrence per match, owned by the innermost requested unit; a list item owns its paragraphs. Filters read visible text with inline code removed, and a regex that can match empty text is refused.
 - The engine selects other things too, such as whole documents, change sets and conversations; its schema owns them.
 
-The selector decides what gets judged, and a wrong one fails silently. `K015`'s `starts_with: "MUST"` reaches only paragraphs that open with `MUST`, so a load instruction mid-paragraph, like `skill-creation/SKILL.md:180`, is never judged. When a standard applies to every occurrence of a form, select the form itself, with `call_site` on its pattern, rather than the paragraphs that happen to start with it. Step 6 proves the selector reaches the intended text.
+The selector decides what gets judged, and a wrong one fails silently. `K015`'s `starts_with: "MUST"` reaches only paragraphs that open with `MUST`, so a load instruction that doesn't open its paragraph, like this reference's own `Then MUST load` call (`:100`), is never judged. When a standard applies to every occurrence of a form, select the form itself, with `call_site` on its pattern, rather than the paragraphs that happen to start with it. Step 6 proves the selector reaches the intended text.
 
 ## Context
 

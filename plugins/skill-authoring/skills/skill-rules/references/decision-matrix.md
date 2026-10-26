@@ -20,49 +20,49 @@ Paths are in the `skill-authoring` plugin unless they name the engine's examples
 
 ### The description starts with `Use when`: deterministic
 
-- **Standard.** `skill-creation/references/frontmatter-design.md:25`, in the list under "A good `description`:": "starts with `Use when` unless the platform requires another shape".
+- **Standard.** `domain-skill-crafting/references/descriptions-and-invocation.md:6`, in the topic's `## Standards` list: "A description starts with `Use when`, unless the platform requires another shape."
 - **Outcome.** Deterministic: `frontmatter_field` on `description`, `expect: {"starts_with": "Use when"}`, as the engine's `mechanical.rules.json` entry `K014` does.
 - **Why.** The property is a literal prefix of one field's decoded value. Every description that keeps it passes and every one that breaks it fails, with one exception the check can't see: a skill for a platform that requires another shape keeps the standard and fails the check. So the outcome is deterministic only where every platform the repository targets uses `Use when`, and the decision table says so.
 - **Near miss: same check, semantic wording.** The engine's example marks "Explain when the skill applies." (`mechanical-standards.md:1`) and checks it with the same `starts_with`. Against *that* wording the check is a proxy: `description: Use when.` passes and explains nothing. The check didn't change; the marked standard did, and the marked standard decides.
-- **Near miss: needs comprehension, no target.** "names the situation, symptom, user request, repo event, or failure that should trigger the skill" (`frontmatter-design.md:26`) needs reading comprehension. But a judgment can't target frontmatter: `frontmatter_field` takes only `expect`, and Markdown unit selectors skip the metadata block. Unless the engine's docs name a judgment target that reaches the field, it's review-only.
-- **Near miss: needs outside evidence.** "uses searchable words the user, codebase, docs, or logs actually use" (`frontmatter-design.md:27`) can't be decided from the skill alone; it needs the prompts, code and logs. Review-only.
+- **Near miss: needs comprehension, no target.** "A description names the situation, symptom, user request, repository event or failure that should load the skill." (`descriptions-and-invocation.md:7`) needs reading comprehension. But a judgment can't target frontmatter: `frontmatter_field` takes only `expect`, and Markdown unit selectors skip the metadata block. Unless the engine's docs name a judgment target that reaches the field, it's review-only.
+- **Near miss: needs outside evidence.** "A description uses the searchable words the user, codebase, docs or logs actually use." (`descriptions-and-invocation.md:8`) can't be decided from the skill alone; it needs the prompts, code and logs. Review-only.
 
 ### A mandatory load names its returned result: model-judged, and the `return` check is a proxy
 
-- **Standard.** The engine's example wording "A mandatory load instruction also names its returned result." (`mechanical-standards.md:3`), which restates part of `skill-creation/SKILL.md:62`: "Each load or dispatch form names when to go, where, what to do there, and what to return."
+- **Standard.** The engine's example wording "A mandatory load instruction also names its returned result." (`mechanical-standards.md:3`), which restates part of `domain-skill-crafting/references/calls-and-placement.md:26`: "Each load or dispatch call says when to go, where, what to do there, and what to bring back."
 - **Outcome.** Model-judged.
 - **Why.** Deciding that a result is *named* needs comprehension. The shipped check, `K015` in `mechanical.rules.json`, selects paragraphs starting with `MUST` and fails one that contains `MUST load` without the word `return`. Counterexample: `MUST load reference.md and return.` has both words, names nothing, and passes. The regex is a proxy.
 - **The proxy, marked honestly.** A cheap lexical check can still be worth having. Give it its own wording that says what it checks, such as "A paragraph with a `MUST load` instruction contains the word `return`." Against that wording the check is deterministic. The decision table records it as a proxy for the result-naming standard, which keeps its own model-judged rule.
-- **Near miss: a real result, an unselected place.** "MUST load `references/frontmatter-design.md` and return the trigger and invocation decision" (`skill-creation/SKILL.md:180`) names a concrete result, so it meets both the semantic standard and the proxy. It also sits mid-paragraph, so `K015`'s `starts_with: "MUST"` selector never selects it. That isn't a pass; it's a coverage gap, and step 6 catches it only when a calibration example puts the call mid-paragraph.
-- **Near miss: a mention, not a call.** "Moving all-run procedure behind `MUST load` does not move the obligation." (`skill-creation/SKILL.md:98`) names the form inside inline code. Filters read visible text with inline code removed, so the selector rightly skips it.
+- **Near miss: a real result, an unselected place.** "Then MUST load `check-and-reports.md` and return the `check_rules` outcome with `output: assembled_rules`: its count and the printed rule IDs with their provenance" (`skill-rules/references/markers-and-rules.md:100`) names a concrete result, so it meets both the semantic standard and the proxy. Its paragraph opens with "Then", so `K015`'s `starts_with: "MUST"` selector never selects it. That isn't a pass; it's a coverage gap, and step 6 catches it only when a calibration example puts the call mid-paragraph.
+- **Near miss: a mention, not a call.** "Moving all-run procedure behind `MUST load` leaves its obligation, order, decision, required return, invariant and completion visible in `SKILL.md`." (`domain-skill-crafting/references/calls-and-placement.md:9`) names the form inside inline code. Filters read visible text with inline code removed, so the selector rightly skips it.
 
-### Call Grammar: model-judged, marked on its paragraph
+### Call completeness: model-judged, marked on its list item
 
-- **Standard.** `skill-creation/SKILL.md`, the `### Call Grammar` section (`:60` to `:89`).
-- **Outcome.** Model-judged, marked on the paragraph at `:62`, not on the section.
-- **Why.** Judging whether a call site says when, where, what and what to return needs comprehension. The section is the wrong host twice over: with its fenced templates it rendered to 467 visible words when measured, over the 400-word default, and it holds three standards, for load calls, dispatch (`:77`) and citations (`:88`). Each is its own candidate with its own outcome and host.
-- **Near miss.** Raising `max_question_words` until the section binds makes one question out of three standards. The judge returns one verdict, and a failure doesn't say which standard broke.
+- **Standard.** `domain-skill-crafting/references/calls-and-placement.md:26`, in the `## Standards` section (`:3` to `:58`): "Each load or dispatch call says when to go, where, what to do there, and what to bring back."
+- **Outcome.** Model-judged, marked on the list item at `:26`, not on the section.
+- **Why.** Judging whether a call site says when, where, what and what to bring back needs comprehension. The section is the wrong host twice over: it rendered to 873 visible words when measured, over the 400-word default, and it holds the topic's 43 standards, among them dispatch (`:29` to `:31`) and citations (`:39` to `:47`). Each is its own candidate with its own outcome and host.
+- **Near miss.** Raising `max_question_words` until the section binds makes one question out of 43 standards. The judge returns one verdict, and a failure doesn't say which standard broke.
 
 ### "Whoever writes a change never reviews it.": review-only
 
-- **Standard.** `skill-creation/SKILL.md:18`.
+- **Standard.** `skill-creation/SKILL.md:16`.
 - **Outcome.** Review-only.
 - **Why.** Authorship and review are facts about agents and sessions. No text the engine selects records them; `skill-review` checks them when it admits its reviewers.
 - **Near miss.** "This skill routes review to agents that did not write the change" is a claim about a skill's text, so it could be model-judged on the paragraph that routes review. It's a different standard. Mark it only where a skill states *that* standard; never relabel the authorship rule as a text check.
 
 ### The review-skip rule: eval
 
-- **Standard.** `skill-creation/SKILL.md:224`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
+- **Standard.** `skill-creation/SKILL.md:68`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
 - **Outcome.** Eval.
 - **Why.** The claim is about what an agent does when it is pressed. The skill text already says the right thing; whether the agent does it shows only in a fresh run under that pressure.
-- **Near miss.** "Name the rationalization beside it in the agent's own words." (`skill-creation/SKILL.md:120`) is about a skill's text: a judge can read one rule paragraph and say whether its rationalization is named. Model-judged.
+- **Near miss.** "A bright-line rule names, beside it, the rationalization it blocks, in the agent's own words." (`domain-skill-crafting/references/steering.md:18`) is about a skill's text: a judge can read one rule paragraph and say whether its rationalization is named. Model-judged.
 
-### "A skill wrangles determinism out of a stochastic system": prose
+### "A skill makes an agent follow a predictable process": prose
 
-- **Standard.** `skill-creation/SKILL.md:8`: "A skill wrangles determinism out of a stochastic system by making the agent follow a predictable process." "Be direct" is the same kind.
+- **Standard.** `domain-skill-crafting/SKILL.md:13`: "A skill makes an agent follow a predictable process; predictable means the same process every run, not the same output." "Be direct" is the same kind.
 - **Outcome.** Prose.
 - **Why.** It frames how to think. No text keeps or breaks it, and a marker would buy a model call per selected unit for a question with no answer.
-- **Near miss.** "Lead with the positive shape: tell the agent what action to take, what result to produce, and what good judgment looks like." (`skill-creation/SKILL.md:124`) reads like stance, but a judge can hold one guidance paragraph against it. Model-judged.
+- **Near miss.** "Guidance says what to do and what good looks like, not only what to avoid." (`domain-skill-crafting/references/steering.md:10`) reads like stance, but a judge can hold one guidance paragraph against it. Model-judged.
 
 ## Signals
 
