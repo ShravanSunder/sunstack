@@ -284,7 +284,7 @@ Shapes and systems with their own owner:
 
 - The skill spec's slots, decisions table, run status and doc rule (`skill-creation/references/skill-spec.md`) become `skill-design/references/design-set.md`, the design set's shape. Its rules govern a design document, not skill text, and its consumers are design (writes it), creation (reads the accepted boundary and runs), review (judges it) and the orchestrator (reads decisions and status).
 - `skill-rules` keeps everything about rules (marker hosts, rules entries, RuleSets and reading the engine's reports), because the governing spec gives it how rules are written and run. The root holds the standards those rules check.
-- `skill-review`'s checks keep their inspection procedures. Where a check today restates a standard, the restatement goes and the check loads the root topic instead (run 5).
+- `skill-review`'s checks keep their inspection procedures. Where a check today restates a standard, the restatement goes and the check loads the root topic instead (run 4).
 
 ## IDs retired in draft 3
 
