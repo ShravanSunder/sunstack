@@ -1,8 +1,8 @@
 # Project 1, milestone 1: requirements
 
-Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. One of four parts of milestone 1's design set: requirements, [specification](specification.md), [skill design](skill-design.md) and [skill verification](skill-verification.md). The governing project spec is Project 1, revision 3, whose decisions the owner settled on 26 October: `~/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/project-1/spec.md`, with the owner's words in `.../intent/owner-messages-2026-10-26.md`. This set covers milestone 1 only: one root for the standards, and the skill lifecycle. Milestone 2, the checked rules, gets its own set.
+Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correction check. One of four parts of milestone 1's design set: requirements, [specification](specification.md), [skill design](skill-design.md) and [skill verification](skill-verification.md). The governing project spec is Project 1, revision 3, whose decisions the owner settled on 26 October: `~/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/project-1/spec.md`, with the owner's words in `.../intent/owner-messages-2026-10-26.md`. This set covers milestone 1 only: one root for the standards, and the skill lifecycle. Milestone 2, the checked rules, gets its own set.
 
-Names used across the set: U1 to U8 are the requirements below; R1 to R20 are the specification's obligations; the governing spec's work units are written *project unit U0* to *U7*; and the runs that carry them are numbered 1 to 8 in the skill design.
+Names used across the set: U1 to U8 are the requirements below; R1 to R20 are the specification's obligations; the governing spec's work units are written *project unit U0* to *U7*; and the runs that carry them are numbered 1 to 9 in the skill design.
 
 ## Capabilities
 

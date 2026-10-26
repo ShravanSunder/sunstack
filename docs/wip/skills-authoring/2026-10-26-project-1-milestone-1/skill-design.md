@@ -1,6 +1,6 @@
 # Project 1, milestone 1: skill design
 
-Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1 (`tmp/project-1-reviews/review-m1.md`). Part three of milestone 1's design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md), with the annex [where each standard goes](standards.md). It says which files carry each obligation, what each skill's text becomes, and the runs that make the change. Sources are `ai-tools` `main` at `e427d8c9`.
+Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correction check (`tmp/project-1-reviews/review-m1.md`, `review-m1-draft2.md`). Part three of milestone 1's design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md), with the annex [where each standard goes](standards.md). It says which files carry each obligation, what each skill's text becomes, and the runs that make the change. Sources are `ai-tools` `main` at `e427d8c9`.
 
 ## The shape
 
@@ -45,15 +45,15 @@ plugins/skill-authoring/skills/domain-skill-crafting/
   agents/openai.yaml           display name, short description, default prompt;
                                policy.allow_implicit_invocation: false
   references/
-    descriptions-and-invocation.md   DESC-1 to DESC-15
-    main-path.md                     MAIN-1 to MAIN-12
-    calls-and-placement.md           PLACE-1 to PLACE-43
-    steering.md                      STEER-1 to STEER-20
-    generalization.md                GEN-1 to GEN-4, and the transfer test (new)
-    proof-claims.md                  PROOF-1 to PROOF-19: what evidence may claim
-    change-classes.md                CLASS-1 to CLASS-5 (new topic, moved definitions)
-    security.md                      the sensitive-surface term set, SEC-1 to SEC-5
-    platform.md                      platform facts, PLAT-1 to PLAT-10
+    descriptions-and-invocation.md   the DESC standards
+    main-path.md                     the MAIN standards
+    calls-and-placement.md           the PLACE standards
+    steering.md                      the STEER standards
+    generalization.md                the GEN standards, and the transfer test (new)
+    proof-claims.md                  the PROOF standards: what evidence may claim
+    change-classes.md                the CLASS definitions (new topic, moved)
+    security.md                      the sensitive-surface term set, the SEC standards
+    platform.md                      platform facts, the PLAT standards
     glossary.md                      definitions only
     worked-examples.md               the small end of the size range
 ```
@@ -86,7 +86,7 @@ Its references:
 | `design-set.md` | the design set's shape: the four parts' slots, the decisions table, run status, coordination, the review record, and when it is a document | `skill-creation/references/skill-spec.md` | design writes it; creation reads the accepted boundary and runs; review judges it; the orchestrator reads decisions and status |
 | `design-page.md` | how to make and inspect the page (new) | new, taught from this set's own page | design |
 | `proof-runs.md` | how to reproduce a failure and carry out a proof run | `proof-and-claims.md:7-20, 62-70`, as procedure | design (failing baseline); the orchestrator's proof step |
-| `security-gate.md` | how to inspect a sensitive surface and decide before outlining: entry points, untrusted inputs, privileged actions, third-party source, the decision, the return labels, the stop | `security-gate.md:3-5, 25-45` | design; review's `sensitive-surface` check |
+| `security-gate.md` | how to inspect a sensitive surface and decide before outlining or writing it: entry points, untrusted inputs, privileged actions, third-party source, the decision, the return labels, the stop | `security-gate.md:3-5, 25-45` | design, for behavior-changing work; creation, for a mechanical change that touches a sensitive surface; review's `sensitive-surface` check |
 
 **What `design-page.md` teaches.** Its input is the four Markdown parts. The page opens with the answer in plain words, carries each part unchanged from its Markdown file (the page is a view, never a second copy that can drift), walks the four parts in reading order, and explains internal terms where they first appear. IF the host repository's instructions or skills provide an HTML presentation practice, build the page through it and return its checker result; otherwise write one self-contained HTML file whose parts come from the Markdown files, not retyped. The inspections: each part on the page equals its Markdown file; the answer comes first; the walkthrough reaches every part; the page reads at phone width. Stop when every inspection holds and the host's checker, when one ran, reports no errors. The plugin names no skill from another plugin (`plugins/skill-authoring/README.md:13`), so the host practice is found the way `skill-review` finds a host's Reviewer role (`references/reviewers-through-host-practice.md`).
 
@@ -97,16 +97,17 @@ Its description triggers on designing a skill change before files are edited. It
 It keeps one job, writing the files (`SKILL.md:226-228`), with its admission set by change class:
 
 - **Admission.** For a behavior-changing or scoped change, read the accepted design set and take the run's success definition, basis, surface allocation, proof posture and decision rows from it, after checking that `../skill-review/references/design-review.md`'s acceptance binding still covers it (today's `SKILL.md:145`). For a mechanical change, take its classification claim (CLASS-4) and do static validation only; no design set is needed.
-- **Write.** MUST load the root's core, and the topics for the surfaces the run touches. A draft shown in the conversation still shows each file under its own path (today's `SKILL.md:220`). IF the write would touch a sensitive surface the design set has no decision for, stop and return the change to `skill-design`.
+- **Gate sensitive surfaces before writing** (SEC-1, as today's `SKILL.md:228`). For a behavior-changing change, the decision comes from the design set; IF the write would touch a sensitive surface the set has no decision for, stop and return the change to `skill-design`. For a mechanical change, IF it touches a sensitive surface (a typo in a comment of an existing `scripts/` file, say), MUST load `../skill-design/references/security-gate.md` and return its decision before writing that surface; a disallowed or blocked decision stops the write. The mechanical change still needs no design set.
+- **Write.** MUST load the root's core, and the topics for the surfaces the run touches. A draft shown in the conversation still shows each file under its own path (today's `SKILL.md:220`).
 - **Self-check** (a pending rule site, below).
-- **Compare and return.** Compare the diff with the accepted design set, name any deviation, set the run to `implemented`, and return the proof and review still owed.
+- **Compare and return, by class.** For a behavior-changing change: compare the diff with the accepted design set, name any deviation, set the run to `implemented`, and return the proof and the implementation review still owed. For a mechanical change: compare the diff with its classification claim (the surfaces it named, none of them behavior-changing), and return the static validation result, any security decision, and that no review is owed; a diff that touches a surface the claim didn't name is reclassified, not written.
 
-Its `references/` folder empties: every file moves to the root or to `skill-design`. Its description narrows to writing a skill's files from an accepted design, or a mechanical edit.
+Its `references/` folder empties in run 9, once every consumer has moved: each file goes to the root or to `skill-design`. Its description narrows to writing a skill's files from an accepted design, or a mechanical edit.
 
 ### `skill-review`
 
 - `SKILL.md:10` says the checks judge a skill against the root's standards and load its topics by path, so the root's wording governs.
-- **Design stage.** `references/spec-review.md` becomes `references/design-review.md`. Its artifact is the design set, whose shape `../../skill-design/references/design-set.md` owns. Its rubric is regrouped under the four parts; its blocker overrides stay (one skill per run among them) and gain two: the page is missing or a part on it differs from its Markdown, and a sensitive surface has no decision. Its teaching reviewer walks `mental-model-fit`, `depth-coverage`, then `transfer`; its structure reviewer walks `trigger-routing`, then `rule-agreement`. The first-required-revision step loads the root's `steering.md` (STEER-11 to STEER-17) in place of `skill-creation/SKILL.md`'s wording table (`spec-review.md:68`), and the shape step loads the root's `calls-and-placement.md` (`spec-review.md:22`). The acceptance binding is unchanged.
+- **Design stage.** `references/spec-review.md` becomes `references/design-review.md`. Its artifact is the design set, whose shape `../../skill-design/references/design-set.md` owns. Its rubric is regrouped under the four parts; its blocker overrides stay (one skill per run among them) and gain two: the page is missing or a part on it differs from its Markdown, and a sensitive surface has no decision. Its teaching reviewer walks `mental-model-fit`, `depth-coverage`, then `transfer`; its structure reviewer walks `trigger-routing`, then `rule-agreement`. The first-required-revision step loads the root's `steering.md` (STEER-5, STEER-6 and STEER-12 to STEER-17) in place of `skill-creation/SKILL.md`'s wording table (`spec-review.md:68`), and the shape step loads the root's `calls-and-placement.md` (`spec-review.md:22`). The acceptance binding is unchanged.
 - **Implementation stage.** Its purpose is unchanged. It loads the root's topics where it loaded `skill-creation`'s references (`implementation-review.md:19, 31, 45`). Its correction routes name the new owners (`:61`): a design mismatch goes to the design set (`skill-design`), wording or placement to `skill-creation`, proof honesty to whoever ran the proof, an assessment gap to whoever assessed, and the ship surface to shipping. `transfer` is selected whenever a reviewed surface states a rule, and goes to the teaching reviewer. The first rule pass is a pending site.
 - **Checks.** `trigger-routing.md:15` loads the root's `descriptions-and-invocation.md`. `sensitive-surface.md:12, 14` loads the root's `security.md` for the term set and standards, and `../../../skill-design/references/security-gate.md` for the inspection it re-walks. `placement-and-calls.md:14` loads the root's `calls-and-placement.md`. `mental-model-fit.md:15` and `rule-agreement.md:15, 39` load the root's `glossary.md`. `claim-vs-evidence.md:12` loads the root's `proof-claims.md`; its `:8` names creation's return, and its overlap note (`:40`) says carrying out proof belongs to `skill-design`'s `proof-runs.md`. Each check is compared, by meaning, with the [standards annex](standards.md): a sentence that restates a root standard is replaced by the load. The new `checks/transfer.md` loads the root's `generalization.md` and, for each rule a reviewed skill states, returns its two transfer cases and a verdict (R16).
 - `references/reviewers-through-host-practice.md:34` says *design review* and *the design set at its commit*.
@@ -165,7 +166,7 @@ How the six neighbours split prompts:
 | *The design set for skill-x is accepted; write run 2's files.* | `skill-creation` | writing only; the orchestrator is for carrying the run through proof and review |
 | *Make us a skill that quarantines flaky tests.* | `skill-orchestrator` | end to end, from need to shipped |
 | *Is skill-x any good?* | `skill-review` | judging only |
-| *Fix the typo in skill-x's description.* | `skill-creation` | mechanical; no design set |
+| *Bump skill-x's plugin version for the release.* | `skill-creation` | mechanical; no design set |
 | *Which of our skills should we merge?* | `skill-audit` | which skills should exist |
 | *Turn skill-x's standards into checked rules.* | `skill-rules` | rules, not teaching |
 
@@ -178,6 +179,7 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. Histo
 | Consumer | What changes | Run |
 | --- | --- | --- |
 | `skill-creation/agents/openai.yaml:3-4` | short description and default prompt: write files from an accepted design | 4 |
+| `skill-creation/references/` (all nine files) | removed, once runs 5 to 8 have moved every consumer | 9 |
 | `skill-review/SKILL.md:3, 10, 16, 29`; `references/spec-review.md` (renamed `design-review.md`); `references/implementation-review.md:19, 31, 45, 61`; `references/reviewers-through-host-practice.md:34`; `references/checks/trigger-routing.md:15`, `sensitive-surface.md:12, 14`, `placement-and-calls.md:14, 24`, `mental-model-fit.md:15`, `rule-agreement.md:15, 39`, `claim-vs-evidence.md:8, 12, 40`; `agents/openai.yaml` | as in its section above | 5 |
 | `skill-orchestrator/SKILL.md:3, 8, 13, 20, 22, 23, 33, 37, 41, 58, 62, 85`; `agents/openai.yaml` | as in its section above | 6 |
 | `skill-audit/SKILL.md:8, 80, 82, 84`, a new step and blocker | as in its section above | 7 |
@@ -195,32 +197,42 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. Histo
 
 ## Runs and reviewed boundaries
 
-**Units and runs.** The governing spec's project units bundle skills: U2b is two skills and U2c four. A run is narrower: one skill, as today's contract requires (`skill-spec.md:11`). So the units become runs:
+**Units and runs.** The governing spec's project units bundle skills: U2b is two skills and U2c four. A run is narrower: one skill, as today's contract requires (`skill-spec.md:11`). Each unit is reviewed before the next unit depends on it, as the governing spec requires ("Each unit is reviewed before the next depends on it", `spec.md:153`), so a unit's runs start only after the unit before it is reviewed.
 
 | Run | Unit | Target | Kind | Writer | Depends on | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | U0 | `skill-rules`: the engine correction | update | Opus 5.5 high | this set accepted | proposed |
 | 2 | U2a | `domain-skill-crafting` | create | Opus 5.5 xhigh | this set accepted | proposed |
-| 3 | U2b | `skill-design` | create | Opus 5.5 xhigh | run 2 | proposed |
-| 4 | U2b | `skill-creation`: narrowed | update | Opus 5.5 xhigh | runs 2 and 3 | proposed |
-| 5 | U2c | `skill-review` | update | Opus 5.5 xhigh | runs 2 and 3 | proposed |
-| 6 | U2c | `skill-orchestrator` | update | Opus 5.5 xhigh | runs 3, 4 and 5 | proposed |
-| 7 | U2c | `skill-audit` | update | Opus 5.5 xhigh | runs 2 and 5 | proposed |
-| 8 | U2c | `skill-rules`: links | update | Opus 5.5 xhigh | runs 1 and 2 | proposed |
-| cutover | U2c | the repository documents, manifests, test, version and changelog above | shipping surfaces | Sol | runs 2 to 8 | proposed |
-| devfiles | U2c | the owner's global prompt, in the devfiles repository's own PR | outside this repository | a subagent | boundary B accepted | proposed |
+| 3 | U2b | `skill-design` | create | Opus 5.5 xhigh | unit U2a reviewed | proposed |
+| 4 | U2b | `skill-creation`: narrowed `SKILL.md` and UI text; its references stay for now | update | Opus 5.5 xhigh | unit U2a reviewed; run 3 | proposed |
+| 5 | U2c | `skill-review` | update | Opus 5.5 xhigh | unit U2b reviewed | proposed |
+| 6 | U2c | `skill-orchestrator` | update | Opus 5.5 xhigh | unit U2b reviewed; run 5 | proposed |
+| 7 | U2c | `skill-audit` | update | Opus 5.5 xhigh | unit U2b reviewed; run 5 | proposed |
+| 8 | U2c | `skill-rules`: links | update | Opus 5.5 xhigh | unit U0 reviewed; unit U2b reviewed | proposed |
+| 9 | U2c | `skill-creation`: remove its nine moved references | update | Sol | runs 5 to 8 | proposed |
+| cutover | U2c | the repository documents, manifests, test, version and changelog above | shipping surfaces | Sol | runs 5 to 9 | proposed |
+| devfiles | U2c | the owner's global prompt, in the devfiles repository's own PR | outside this repository | a subagent | unit U2c reviewed | proposed |
 
 Every run is behavior-changing, drafted from the owner's 26 October decisions (user-directed intent), with structural proof and source walks now, and behavior proof on the next real skill change (part four). Each run's success definition is its obligations' rows in the specification; its surface allocation is its section above.
 
-**Why the move is one reviewed state.** Moving a standard into the root and repointing everything that loads it can't be reviewed in pieces. If the root were reviewed alone while `skill-creation` still held the standards, they'd sit in two homes (R1). If `skill-creation`'s references went first, every `skill-review` check that loads them would break until run 5 (R17), and so would a reviewer reading the branch. So runs 2 to 8 and the cutover land as one integration, and the intermediate commits between them are work in progress: never reviewed, never shipped.
+**How each unit stays reviewable.** Three things keep the state after every unit open to review:
 
-**The reviewed boundaries:**
+- The reviewer reads `skill-review`, and the `skill-creation` references it loads, as they stand at the branch's base commit (`e427d8c9` today), from a detached checkout of that commit, never from the branch being changed. Those references hold the same standards the root receives; the annex marks the few that are new, and the reviewers judge those against this accepted design set.
+- `skill-creation`'s old references stay in place until run 9, after every consumer has moved. So every load that resolves at the base commit still resolves after U2a and after U2b.
+- Each unit's review judges what that unit's state should hold, and nothing a later unit adds (R20).
 
-- **A: run 1 alone.** It touches only `skill-rules` and moves nothing, so it is reviewed before run 8 builds on it.
-- **B: runs 2 to 8 and the cutover, together.** Every standard has one home and every load path resolves (R20). Each run gets its own implementation review record at this head, covering its own files, and its status moves to `reviewed` on its own result.
-- **C: the devfiles PR**, after B is accepted, reviewed in that repository with the owner's approval.
+Between U2a and U2c the moved standards sit both in the root and in their old homes. That is work in progress inside an unshipped branch: R1's one home is a condition of what lands, and it is checked at U2c, the only state that ships.
 
-**The reviewer's source at A and B.** `skill-review` and the `skill-creation` references it loads, as they stand at the branch's base commit (`e427d8c9` today), read from a detached checkout of that commit, never from the branch being changed. Those references hold the same standards the root receives: the annex marks the few that are new, and the reviewers judge those against this accepted design set. A reviewer can therefore open every source it needs at every boundary. From B's release, after the owner merges and the installed plugins refresh, changes go through the new lifecycle, including milestone 2's.
+**What each unit's state must show:**
+
+| Unit | The state | Its review checks | Expected, and closed later |
+| --- | --- | --- | --- |
+| U0 | run 1 applied; nothing else changed | R19's native check; `skill-rules`' description holds no marker (R5); every load in `skill-rules` resolves; no other file changed | nothing |
+| U2a | the root added; every other file as at the base | every annex ID sits in its named root topic, as a paragraph or list item (R1's root half, R3); R2; R4; the root's description (R5); every load inside the root resolves; no file outside the root changed | each moved standard still also at its old source line, until run 9 |
+| U2b | `skill-design` added; `skill-creation`'s `SKILL.md` and UI text narrowed; its references still present | R6 to R10 for `skill-design`, R12 and the self-check site (R18) for `skill-creation`; every load the two skills make resolves, except the forward references listed next; every base load elsewhere still resolves | two forward references to U2c: `skill-design`'s step 6 calling `skill-review`'s design stage, and `skill-creation`'s admission loading `../skill-review/references/design-review.md`; the duplicate standards, until run 9 |
+| U2c | runs 5 to 9 and the cutover; the state that ships | everything: R1's one home, R11, R13, R14, R16, R17, all four rule sites (R18), R20; every load resolves; no old path; the tests and both validators | nothing |
+
+**The devfiles PR** follows U2c's review, reviewed in that repository with the owner's approval. From U2c's release, after the owner merges and the installed plugins refresh, changes go through the new lifecycle, including milestone 2's.
 
 ## Coordination
 
@@ -234,16 +246,18 @@ Defaults the Lead took inside the settled model, each with its reason; the owner
 
 | # | Decision | Reason |
 | --- | --- | --- |
-| D1 | Eight one-skill runs and a cutover, with reviewed boundaries A, B and C | today's contract requires one skill per run (review M1, C1), and the move can only be reviewed whole (C2) |
-| D2 | The reviewer reads `skill-review` at the base commit | the skill under change can't review its own change, and the base holds the same standards |
+| D1 | Nine one-skill runs and a cutover, grouped in the governing units, each unit reviewed before the next starts | today's contract requires one skill per run (review M1, C1); the governing spec requires review before dependence (`spec.md:153`; D2-N1). It costs four review rounds, and a root defect is caught before six runs build on it |
+| D2 | The reviewer reads `skill-review` at the base commit | the skill under change can't review its own change, and the base holds the same standards (C2) |
 | D3 | The change classes become a root topic; each skill keeps its own consequence | four skills classify changes, and the root is the one place all four load |
 | D4 | Proof claims in the root; carrying out runs in `skill-design`'s `proof-runs.md` | claims are standards and running is a procedure (C9); `skill-design` reproduces failures and the orchestrator may load a phase's reference, while a phase may not load the orchestrator's |
-| D5 | The security term set and standards in the root; the gate's procedure in `skill-design` | the decision must come before a surface is outlined, and `skill-design` outlines (C8) |
+| D5 | The security term set and standards in the root; the gate's procedure in `skill-design`, run there for behavior-changing work and by `skill-creation` for a mechanical change that touches a sensitive surface | the decision must come before a surface is outlined or written (C8); a mechanical change has no design step to make it (C4) |
 | D6 | The page's teaching lives in `skill-design`, with an optional host practice | the plugin names no skill from another plugin (C7) |
 | D7 | The core's budget is 1,200 words of body | the hidden domain skills that load the same way run 807 to 1,171 words today (C10) |
 | D8 | Platform facts and standards in the root; shipping actions in the orchestrator's ship step | the same standard-or-procedure split as D4 |
 | D9 | `skill-authoring` goes to 0.6.0 | two new skills and changed boundaries are user-visible behavior |
+| D10 | `skill-creation`'s old references go last, in run 9 | every load that works at the base keeps working at every unit, so no unit is reviewed with a broken consumer |
 
 ## Review record
 
-Review M1, at `9e360e33`: **targeted-revision**, implementation decision **revise-first**, 13 accepted findings (I1 to I3, C1 to C10) and two gaps (G1, G2). Review lead `codex-local/01a179cd`; teaching reviewer `codex-local/01a179cf-00fc`, structure reviewer `codex-local/01a179cf-1e75`. This draft answers each finding; the same review lead verifies the corrected anchors and closes G1.
+- **Review M1**, at `9e360e33`: **targeted-revision**, **revise-first**; 13 accepted findings (I1 to I3, C1 to C10) and two gaps (G1, G2). Review lead `codex-local/01a179cd`; teaching reviewer `codex-local/01a179cf-00fc`, structure reviewer `codex-local/01a179cf-1e75`.
+- **Correction check**, at `26bc4681`: **targeted-revision**, **revise-first**; 12 findings and both gaps closed; C4 still open; four new findings (D2-N1 to D2-N4); open findings 13 to 5. This draft answers the five; the same review lead verifies the corrected anchors.

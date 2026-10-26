@@ -1,6 +1,6 @@
 # Project 1, milestone 1: specification
 
-Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
+Draft 3, by the 🦁 Lead, 2026-10-26, revised after review M1 and its correction check. Part two of milestone 1's design set: [requirements](requirements.md), specification, [skill design](skill-design.md), [skill verification](skill-verification.md). It says what must hold when milestone 1 lands, without choosing files or wording; skill design does that.
 
 ## Entities
 
@@ -10,7 +10,7 @@ Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. Part two of mile
 - **E4 Skill change.** A change to one or more named skills, classified `mechanical`, `scoped` or `behavior-changing` as today.
 - **E5 Phase.** One step of the lifecycle: design, design review, creation, proof, implementation review, ship. Each phase belongs to exactly one skill.
 - **E6 Run.** One authoring pass inside a design set, naming exactly one skill. A change spanning several skills has one run per skill.
-- **E7 Reviewed boundary.** A state of the branch that an implementation review judges. States between two boundaries are work in progress: never reviewed, never shipped.
+- **E7 Reviewed unit state.** The state of the branch after one project unit's runs, which that unit's implementation review judges before the next unit starts. Only the last unit's state ships; the earlier ones are reviewed work in progress inside an unshipped branch.
 - **E8 Token.** A rule marker such as `<!-- K014 -->`, the thing that binds a rule to a standard's sentence (governing spec: "A rule's token sits once on its sentence there, never in any skill's description").
 
 ## Obligations
@@ -31,7 +31,7 @@ Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. Part two of mile
 - **R9** The skill design part states the trigger, the main path, every call site, the references, and which of the root's topics apply, and, for every sensitive surface in scope, its allowed, disallowed, blocked or deferred decision, made before the surface is outlined. *(U3)*
 - **R10** The skill verification part says, for each requirement and each standard the skill states, how it will be shown to hold: a rule (judged or mechanical, from milestone 2), an eval, a review check, or named as unverified. Each choice names the properties it was decided on: whether the item is a requirement at all, whether it concerns the text or what an agent does, whether one selectable unit holds it, and whether a check would pass every text that keeps it and fail every text that breaks it. Pressure tests are a later addition to this part. *(U3, U8)*
 - **R11** `skill-review` reviews the whole design set at a design stage before any of the change's files are edited, with at least two independent reviewer agents, as its spec stage does today. The implementation stage keeps its purpose; its loads move to the root, and its correction routes name the new owners: a design mismatch goes to `skill-design`, wording or placement to `skill-creation`. Both stages load the root. *(U3, U6)*
-- **R12** `skill-creation` writes a behavior-changing change only inside its accepted design set, and names any deviation from it. It writes a `mechanical` change from its classification claim, with static validation only. When a write would touch a sensitive surface the design set has no decision for, it stops and returns the change to `skill-design`. *(U4)*
+- **R12** `skill-creation` writes a behavior-changing change only inside its accepted design set, and names any deviation from it. It writes a `mechanical` change from its classification claim, with static validation only and no design set, and returns it checked against that claim rather than against a design set. A sensitive surface is decided before it is written: for behavior-changing work the decision comes from the design set, and a write that meets a surface the set didn't decide returns to `skill-design`; for a mechanical change, `skill-creation` runs the security gate itself before writing. *(U4)*
 - **R13** `skill-orchestrator` runs one change's phases in order: design, design review, creation, proof, implementation review, ship. Its input is audit's approved recommendation or a change the owner names. Its proof step carries out the planned proof with `skill-design`'s run procedure and judges the claim by the root's proof standards. *(U5)*
 - **R14** `skill-audit` loads the root and composes `skill-review` for single-skill checks on the skills flagged by the rules (from milestone 2) or by session evidence; each flagged skill's review verdict feeds its recommendation. *(U6)*
 
@@ -51,7 +51,7 @@ Draft 2, by the 🦁 Lead, 2026-10-26, revised after review M1. Part two of mile
 
 ### Reviewed boundaries
 
-- **R20** At every reviewed boundary (E7), every standard has exactly one home and every load path resolves; a move of standards is reviewed in the same state as every consumer that loads them. The reviewer at a boundary reads `skill-review` as it stands at the branch's base commit, never the branch being changed. *(U1, U3)*
+- **R20** Each project unit is reviewed before the next unit's runs start, as the governing spec requires. Each unit's review (E7) judges what that unit's state should hold and nothing a later unit adds. At every unit's state, every load that resolves at the base commit still resolves, and every new load resolves or is a forward reference to a later unit that the skill design lists by name. The moved standards may sit both in the root and in their old homes only in the states before the last unit; at the last unit's state, the one that ships, every standard has exactly one home, every load resolves and no old path remains. The reviewer of every unit reads `skill-review` as it stands at the branch's base commit, never the branch being changed. *(U1, U3)*
 
 ## What this specification doesn't decide
 
