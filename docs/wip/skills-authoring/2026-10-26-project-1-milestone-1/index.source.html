@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project 1, milestone 1: the root and the lifecycle</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+
+<ex-presentation id="read-milestone-1" title="Read milestone 1's design" description="The four parts in order: what's needed, what must hold, which files carry it, and how each is shown.">
+  <ex-step to="short-answer" icon="book-open"><script type="text/markdown">
+**What milestone 1 does**
+
+One hidden root holds every standard for skill text, and one skill change goes through separate skills: design, review, creation, proof, review, ship. No rules yet; those are milestone 2.
+</script></ex-step>
+  <ex-step to="requirements--project-1-milestone-1-requirements" icon="path"><script type="text/markdown">
+**Requirements**
+
+What you settled on 26 October, as eight requirements, each with where you said it, and the boundary: what changes, what doesn't, what waits for milestone 2.
+</script></ex-step>
+  <ex-step to="specification--project-1-milestone-1-specification" icon="path"><script type="text/markdown">
+**Specification**
+
+What must hold when milestone 1 lands: one home per standard, the root hidden, every standard a sentence a rule can attach to, the four-part design set, the design stage, the lifecycle's order, and the cutover.
+</script></ex-step>
+  <ex-step to="skill-design--the-shape" icon="path"><script type="text/markdown">
+**Skill design**
+
+Which skill carries each obligation, the root's files, where every standard moves from today, and the runs that make the change.
+</script></ex-step>
+  <ex-step to="skill-verification--project-1-milestone-1-skill-verification" icon="path"><script type="text/markdown">
+**Skill verification**
+
+How each obligation is shown, with a passing condition a wrong build fails, and what stays unverified until the next real skill change.
+</script></ex-step>
+</ex-presentation>
+
+<ex-document id="content" document-id="project-1-milestone-1-design" revision="draft-1">
+<h1>Project 1, milestone 1: the root and the lifecycle</h1>
+
+<ex-callout id="short-answer" title="The short answer" tone="tldr" icon="book-open">
+  <p>Every standard a skill's text must meet moves into one hidden skill, <code>domain-skill-crafting</code>, as one sentence each, so a rule can attach to it in milestone 2. <code>skill-design</code> is new: it produces each change's design set, four parts and a page, with generalization as its own step. <code>skill-creation</code> only writes the files. <code>skill-orchestrator</code> runs the phases, and <code>skill-audit</code> sends flagged skills to <code>skill-review</code>. Every link moves in the same change, with no forwarding stubs. It's a draft, by the Lead, not yet reviewed; nothing is built.</p>
+</ex-callout>
+
+<p>Press <kbd>W</kbd> to walk through it, or read the four parts below.</p>
+
+<ex-markdown id="requirements" label="Requirements" src="requirements.md"></ex-markdown>
+<ex-markdown id="specification" label="Specification" src="specification.md"></ex-markdown>
+<ex-markdown id="skill-design" label="Skill design" src="skill-design.md"></ex-markdown>
+<ex-markdown id="skill-verification" label="Skill verification" src="skill-verification.md"></ex-markdown>
+
+<p>When you're done, open Comments, press <strong>Copy</strong>, and paste it to me.</p>
+</ex-document>
+<ex-comments for="content"></ex-comments>
+</body>
+</html>
