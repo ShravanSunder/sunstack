@@ -5,7 +5,7 @@ description: Use when auditing existing skills, comparing admired upstream skill
 
 # Skill Audit
 
-Audit real workflows before creating skills. Skills encode judgment and house style, not task history; create or update one only when the wording teaches behavior a smart model would otherwise shortcut. Prefer updating an existing skill over creating a duplicate.
+Audit real workflows before creating skills. Prefer updating an existing skill over creating a duplicate.
 
 ## Core Rules
 
@@ -50,6 +50,10 @@ Audit real workflows before creating skills. Skills encode judgment and house st
    - `merge`: overlapping skills should become one clearer workflow
    - `skip`: one-off, vague, sensitive, or already covered
 
+   MUST load `../domain-skill-crafting/SKILL.md` before choosing any action, and return the topics whose conditions hold for the candidates, with the standards each returns; each candidate's action keeps them.
+
+   MUST load `../domain-skill-crafting/references/steering.md` and `../domain-skill-crafting/references/generalization.md` before choosing any action, and return, for each candidate, whether it keeps or breaks steering's standard on when a change is worth making and generalization's standard on task history; both results feed the candidate's action.
+
    Completion: every candidate carries exactly one action, with the evidence that selects it.
 
 5. Shape every update/create recommendation:
@@ -58,6 +62,8 @@ Audit real workflows before creating skills. Skills encode judgment and house st
    - `references/`: what deeper detail, examples, rubrics, or templates move out of the core instructions
    - `scripts/`: what deterministic mechanics belong in scripts, or `not needed`
    - pressure coverage: exists (cite the run evidence), needed, or not needed with reason
+
+   IF any candidate's action is `update` or `create`, load `../domain-skill-crafting/references/calls-and-placement.md` and return its placement standards that apply to each such recommendation; its `SKILL.md`, `references/` and `scripts/` slots keep them.
 
    Completion: every update/create recommendation fills all five slots, or the audit says no update/create recommendation is being made yet.
 
@@ -77,11 +83,7 @@ Audit real workflows before creating skills. Skills encode judgment and house st
 
 When the audited plugin keeps a map of admired upstream skills and borrowed mechanics (for example a source-inspiration catalog in its docs), read it before opening upstream sources.
 
-When repeated wording across runtime skills tempts one shared contract, keep each skill's packet anatomy, source-truth rules, security context, receipts, reducer rules, check names, route-backs, proof details, statuses, and examples in that skill's own references. A shared output shape earns a shared home only under the shared-shape rule in `../skill-creation/references/shared-shape-design.md`: two or more real consumers of the same fields, or a tool that validates them. Do not create or preserve a global runtime contract every skill imports. A request to combine skills' packets into one shared runtime document because their headings or wording repeat is that contract when their fields or meanings differ, even when the request calls it avoiding duplication: recommend against it and keep each skill's packet where it is.
-
-Shared authoring lessons belong in authoring skills or references, not in runtime workflow skills. Runtime skills should load only the references their own phase needs.
-
-Do not add per-skill provenance docs unless a skill needs a task-specific reference file for progressive disclosure.
+IF the audit or a request proposes one shared contract for runtime skills whose wording repeats, load `../domain-skill-crafting/references/calls-and-placement.md` and return its shared-shape standards, with each packet's consumers and the home those standards give it. A request to combine skills' packets into one shared runtime document because their headings or wording repeat is the shared contract those standards rule out when the packets' fields or meanings differ, even when the request calls it avoiding duplication: recommend against it and keep each skill's packet where it is.
 
 ## Failure Shields
 
