@@ -19,26 +19,28 @@ Two reviewer agents walk the checks, each in its own session, each loading `chec
 
 The proposal contains the lens, trigger, rules, promised stages, and planned reference tree those checks need. Line-level checks wait for implementation review.
 
-For a scoped change, the review lead still checks the proposal against the Verdicts and Rubric below, assigns only the check that owns the targeted failure form plus `rule-agreement`, and records why each other check was not selected. IF the proposal changes an output or tool shape, load `../../skill-creation/references/shared-shape-design.md` and return its shape-consumer contract. Each selected check records `complete | partial | blocked`; an unselected check records `complete` with `not selected: <reason>`. Return the per-check status block before the verdict.
+For a scoped change, the review lead still checks the proposal against the Verdicts and Rubric below, assigns only the check that owns the targeted failure form plus `rule-agreement`, and records why each other check was not selected. IF the proposal changes an output or tool shape, load `../../domain-skill-crafting/references/calls-and-placement.md` and return its shared-shape standards, with the shape's consumers and owner. Each selected check records `complete | partial | blocked`; an unselected check records `complete` with `not selected: <reason>`. Return the per-check status block before the verdict.
 
 ## Verdicts
 
 `checks/review-schema.md` owns the verdict labels. Here, `great` means accepted to implement, `targeted-revision` means a bounded spec fix before editing, and `significant-rewrite` means the promise, trigger, workflow, or proof route must be redesigned before implementation.
 
-Blocker overrides: a spec cannot be accepted when the target behavior is not one named skill (for a multi-run spec doc: per run in its sequence), the trigger is not a loading condition, the authored body contract or usable main path is incomplete, a reference, dispatched-procedure, or citation call is vague or incomplete, a callee owns its entry routing, proposed dispatched work is not a prescribed procedure or widens authority, a promised stage or branch has no teaching owner, a shape-only reference lacks a named consumer, shared shapes lack real consumers or duplicate authority, a hard cutover retains competing owners, a proposed rule, gate, or completion criterion names no failure form, behavior-changing guidance has no proof route, sensitive surfaces are unclassified, or the proposed text is mostly no-op prose.
+MUST load `../../domain-skill-crafting/SKILL.md` and return the topics whose conditions hold for the proposal, with the standards each returns; the blocker overrides and the rubric below judge the proposal against them.
+
+Blocker overrides: a spec cannot be accepted when the target behavior is not one named skill (for a multi-run spec doc: per run in its sequence), behavior-changing guidance has no proof route, most of the proposed text fails the root's deletion test, or the proposal breaks a root standard on any of these: the description's loading condition; the body's main path; the form and completeness of a reference call, a dispatch or a citation, or a callee's entry route; what may be dispatched; the teaching owner of each promised stage or branch; shape-only references and shared shapes; one owner after a cutover; a proposed rule, gate or completion criterion naming its failure; or a sensitive surface's decision.
 
 ## Rubric
 
 Covers what only a whole-spec verdict can judge:
 
 - promise: the reusable behavior is specific and worth making durable.
-- steering: proposed guidance leads with the action, result, and taste that define strong work; prohibitions are reserved for named failure boundaries and paired with the positive target. Each proposed rule, gate, and completion criterion names the failure form it serves. `steering-strength` does not run on a proposal, so this is the only gate on proposed wording before files are edited; checkability is covered by the `authored body` item below.
-- invocation: model-invocable and user-invocable capabilities pay the right load for this skill's real callers.
-- authored body: `SKILL.md` will name the mental model or stance, show a scan-visible all-run spine, end each meaningful step or reference pass with checkable completion, and state the overall proof, unresolved-condition, or blocker boundary.
-- shape proposals: apply the returned shared-shape contract; every shared shape names a real consumer.
-- ownership and cutover: every concept has one live owner, superseded paths and duplicate prose are removed without aliases or forwarding stubs, and the spec names all active consumers that must cut over together when ownership changes.
-- proof plan: structural proof and artifact-scoped behavior proof are separated, behavior proof matches the skill type, a reproduced failure is proven against that same failure, and the plan preserves the authoring basis the spec records.
-- safety/platform: sensitive surfaces, plugin mechanics, changelog, and cache refresh are routed correctly when in scope.
+- steering: the proposed guidance, rules, gates and completion criteria keep the root's steering standards. `steering-strength` does not run on a proposal, so this is the only gate on proposed wording before files are edited.
+- invocation: the proposed invocation capabilities and description keep the root's description and invocation standards for this skill's real callers.
+- authored body: the proposed `SKILL.md` keeps the root's main-path standards for its mental model, its all-run spine, the completion of each step and reference pass, and its completion boundary.
+- shape proposals: every proposed shape keeps the returned shared-shape standards.
+- ownership and cutover: the proposal keeps the root's placement standards on one home for each meaning and on a change of home, and the spec names all active consumers that must cut over together when ownership changes.
+- proof plan: the plan keeps the root's proof standards for the skill's type and for the claim it plans, and preserves the authoring basis the spec records.
+- safety/platform: sensitive surfaces, plugin mechanics, changelog, and cache refresh keep the root's security and platform standards when in scope.
 
 Cover each item with source-backed evidence. When a check result already covers an item, cite it rather than re-deriving it.
 
@@ -65,6 +67,6 @@ proof or retest implication:
 implementation decision: accepted-to-implement | revise-first | restart | skipped-by-user
 ```
 
-The first required revision is the smallest useful spec change. IF the revision changes wording, output shape, omitted slots, conditional behavior, invocation, reference retrieval, or completion criteria, load `../../skill-creation/SKILL.md` and return the matching failure form from its wording table.
+The first required revision is the smallest useful spec change. IF the revision changes wording, output shape, omitted slots, conditional behavior, invocation, reference retrieval, or completion criteria, load `../../domain-skill-crafting/references/steering.md` and return the failure the revision answers with the wording repair that topic matches to it.
 
 Complete when: the verdict carries one of the allowed labels, every blocker override is checked, and the implementation decision is explicit.

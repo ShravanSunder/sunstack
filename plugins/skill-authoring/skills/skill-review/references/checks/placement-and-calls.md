@@ -11,7 +11,7 @@ Where to look:
 - every `references/*.md` path mentioned anywhere in the skill;
 - the Completion Blockers list against the steps it mirrors.
 
-MUST load `../../../skill-creation/references/reference-design.md` to apply the canonical placement test and caller/callee contract and return the correct home and complete call shape for each finding.
+MUST load `../../../domain-skill-crafting/references/calls-and-placement.md` and return its placement, call, citation and shared-shape standards that apply, with the correct home and complete call shape for each finding.
 
 How to inspect: Walk every call site and fill this row. A blank cell is the finding:
 
@@ -21,23 +21,17 @@ dispatched procedure: prescribed steps | exact authority | observed result
 citation:       moment (observable) | action | relative link to a principle
 ```
 
-A dispatch site is complete only for a prescribed procedure with steps, authority, and observed result. Review checks and research source classes are loaded by the current agent. A citation is complete when its moment is observable, its action names what to produce or check in words other than the link text, and its link, followed from the file that holds it, opens a principle in the same plugin: a skill hidden from model invocation that teaches one engineering judgment, opens with its own read rule, and is cited by other skills at the decision it informs. Open every cited principle. Its first body line after the title is the read rule, "Read this principle in full before applying it; your own full read earlier this session counts.", as quoted in the Call Grammar of `../../../skill-creation/SKILL.md`. A missing rule is a finding, fixed in the principle's own file. Confirm the principle's judgment bears on the named action; a principle that does not is a decorative link and a finding. When the same principle is cited twice at one decision, either twice in this skill or once here and once in a skill this one names or loads at that step, the finding is against this skill's extra copy. Then walk the reverse direction: for each reference, name the caller that opens it, and check that caller's return shape. A caller with no return shape is a dead end. Finally, confirm that no all-run obligation, order, decision, required return, invariant, or completion boundary is visible only inside a reference.
+Judge each filled row by the returned call and citation standards. Open every cited principle. Its first body line after the title is the read rule, "Read this principle in full before applying it; your own full read earlier this session counts." A missing rule is a finding, fixed in the principle's own file. Confirm the principle's judgment bears on the named action. When the same principle is cited twice at one decision, either twice in this skill or once here and once in a skill this one names or loads at that step, the finding is against this skill's extra copy. Then walk the reverse direction: for each reference, name the caller that opens it, and check that caller's return shape. Finally, check the all-run spine against what sits in references by the returned placement standards.
 
 Good signals:
-- every call site uses exactly one form of the grammar and fills its slots;
-- every reference has at least one caller;
-- every path mentioned resolves to a file that exists;
-- branch depth sits behind an observable predicate rather than a topic;
-- the body still states the obligation when detail moved behind `MUST load`.
+- every returned standard is kept at each call site and home, with the line that shows it;
+- every path mentioned resolves to a file that exists.
 
 Bad signals:
-- "see X for details", "load X when useful", or "should load" in place of a form of the grammar;
-- a principle reached through `MUST load` or `IF ..., load`, or a citation standing in for a reference that holds this skill's own procedure;
-- a citation that names its principle but no action, such as "apply X" or "(see X)", or an action that restates its link text;
-- a required gate whose only statement lives in a reference;
+- a returned standard broken, at the site that breaks it;
+- "see X for details", "load X when useful", or "should load" in place of a call form;
 - several `IF` predicates routing to the same destination, which means topics rather than branches;
-- a call to a path that does not exist;
-- branch-only depth inlined in the body with no stated reason.
+- a call to a path that does not exist.
 
 Calibration: Report placement and call-completeness defects with the exact site. Do not judge whether the rule itself is well worded; that is `steering-strength`. Do not count lines; length alone is not a finding here.
 

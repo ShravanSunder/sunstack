@@ -1,6 +1,6 @@
 # Skill Implementation Review
 
-Review one of two targets. For implemented behavior-changing delivery, review after fitting proof and after whoever carries the change has assessed the diff and proof against the accepted spec, and before ship status advances; review consumes demonstrated behavior and does not substitute for missing proof. For an evaluation of existing files, perform the source-only review before any new implementation commission, mark behavior `unverified/deferred`, and authorize no shipping. Mechanical changes and an explicit implementation-review skip do not enter this reference merely to fabricate coverage.
+Review one of two targets. For implemented behavior-changing delivery, review after fitting proof and after whoever carries the change has assessed the diff and proof against the accepted spec, and before ship status advances. For an evaluation of existing files, perform the source-only review before any new implementation commission, mark behavior `unverified/deferred`, and authorize no shipping. Mechanical changes and an explicit implementation-review skip do not enter this reference merely to fabricate coverage.
 
 Return a verdict, changed-file coverage, accepted/rejected/unverified findings, smallest edits, targeted retest, and ship decision.
 
@@ -16,7 +16,7 @@ The artifact is changed or existing skill files. For a scoped wording change, se
 | Behavior-proof claim | `claim-vs-evidence` |
 | Sensitive surface | `sensitive-surface` |
 
-Each name resolves to `checks/<name>.md`. Deduplicate the selected set. For an evaluation of existing files, use current files as the reviewed surface and read them whole. A `create` run reviews new files. Sensitive-surface ownership stays in `../../skill-creation/references/security-gate.md`.
+Each name resolves to `checks/<name>.md`. Deduplicate the selected set. For an evaluation of existing files, use current files as the reviewed surface and read them whole. A `create` run reviews new files. The sensitive-surface term set and its standards are owned by `../../domain-skill-crafting/references/security.md`, and the gate's inspection procedure by `../../skill-creation/references/security-gate.md`.
 
 Then split the selected checks across reviewer agents by family, each agent in its own session with no authoring history, each loading `checks/review-schema.md` first and walking its checks in the order listed:
 
@@ -28,7 +28,7 @@ proof and safety         claim-vs-evidence, sensitive-surface
 
 Start only reviewers that have a selected check, and always at least two. Keep the order within each agent so placement and rule agreement see the entire change before the claim comparison.
 
-Each reviewer records `complete | partial | blocked` per check and returns candidate findings with anchors. IF a changed surface adds an output or tool shape, load `../../skill-creation/references/shared-shape-design.md` for its consumers and owner. A reviewer walks its checks itself and starts no further agents. Prescribed proof commands may run under the exact grant; the review lead judges the observations.
+Each reviewer records `complete | partial | blocked` per check and returns candidate findings with anchors. IF a changed surface adds an output or tool shape, load `../../domain-skill-crafting/references/calls-and-placement.md` and return its shared-shape standards, with the shape's consumers and owner. A reviewer walks its checks itself and starts no further agents. Prescribed proof commands may run under the exact grant; the review lead judges the observations.
 
 ## Verdicts
 
@@ -36,19 +36,21 @@ Each reviewer records `complete | partial | blocked` per check and returns candi
 
 ## Review Rubric
 
+MUST load `../../domain-skill-crafting/SKILL.md` and return the topics whose conditions hold for the reviewed surfaces, with the standards each returns; the rubric judges the change against them.
+
 Covers what only a whole-change ship decision can judge:
 
 - Every edited, added, or deleted source file is covered. Each file is reviewed semantically, marked source/static-only with its behavior status, or explicitly excluded by the accepted behavior-review boundary; deletions are verified through both absence and pointer inventory.
 - The implemented diff matches the accepted spec and user constraints without crossing the accepted source, behavior, or ship boundary.
 - For implemented behavior-changing delivery, fitting proof ran against the reviewed current files before this review, and the diff and proof were assessed against the original need, accepted spec, ownership, complexity, and integration before review began. An evaluation of existing files instead preserves the source-only, unverified/deferred behavior boundary above.
-- Every added or changed check has one teaching owner, a complete stop condition, and a caller that loads it at the right step.
-- Every added or changed output or tool schema satisfies the shared-shape and ownership contract returned by `../../skill-creation/references/shared-shape-design.md`; cite the returned contract rather than re-deriving its field or ownership rules.
-- For a skill that defines review checks, award `great` only when a schema defines the statuses, verdicts, finding fields, and reduction its review workflow consumes.
-- Check every added or changed term against the reviewed skill's glossary or term definitions, including cases where they stayed unchanged. Award a `great` verdict when each definition in scope is concrete, has one owner, and matches how `SKILL.md` and the references use the term.
-- Guidance leads with the positive shape: the action to take, the result to produce, and the taste or judgment that distinguishes strong work. Use prohibitions only as bright-line boundaries for named failures, paired with the positive target.
-- Each rule has one live owner, with no aliases, forwarding stubs, or duplicate prose preserving a retired ownership.
+- Every added or changed check keeps the root's placement standards on teaching owners, stops and callers.
+- IF the change adds or changes an output or tool schema, load `../../domain-skill-crafting/references/calls-and-placement.md` and return its shared-shape standards; each such schema keeps them. Cite the returned standards rather than re-deriving them.
+- For a skill that defines review checks, award `great` only when it keeps the root's placement standard on a review schema.
+- Check every added or changed term against the reviewed skill's glossary or term definitions, including cases where they stayed unchanged. Award `great` only when each definition in scope keeps the root's placement standards on term meanings.
+- Guidance keeps the root's steering standards on positive guidance and prohibitions.
+- Each rule keeps the root's placement standards on one home for each meaning and on a change of home.
 - Behavior rows in a source-only review are explicitly `unverified/deferred`; source or static review may authorize only the next proof step and cannot authorize ship.
-- The four surfaces still line up: trigger, `SKILL.md`, references, proof.
+- The four surfaces the root's core names still line up.
 - Sensitive surfaces, platform metadata, changelog, and cache decisions are handled when in scope.
 - The smallest accepted edit is clear enough to implement without broadening into portfolio audit.
 

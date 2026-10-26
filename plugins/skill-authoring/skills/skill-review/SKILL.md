@@ -7,7 +7,7 @@ description: "Use when reviewing a skill spec before its files change or a skill
 
 Review is independent inspection. Agents that did not write the change each hunt one family of defects, and one review lead verifies every candidate at its anchor before accepting it. A finding is a claim about a file: it is true only once someone opened that file in the current revision and saw it. Reviewers agreeing with each other is not verification.
 
-The checks judge a skill against the craft in `skill-creation`. They load its references by path, so the standard lives in one place; `skill-creation`'s wording governs where a check restates it.
+The checks and stages judge a skill against the standards in `domain-skill-crafting`, the hidden root this plugin's skills load. They load its core and topics by path, so each standard lives in one place and the root's wording governs.
 
 ## Two Stages
 

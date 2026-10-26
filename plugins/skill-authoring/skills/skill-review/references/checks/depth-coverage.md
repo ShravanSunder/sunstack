@@ -11,15 +11,16 @@ Where to look, when the artifact is **changed files**:
 - every reference under `references/` in scope, read in full;
 - the step-2 sourcing records or named sources the depth was written from, when the run recorded them.
 
-How to inspect: Derive the promised-stage list yourself from the trigger and main path — an author-supplied list is evidence to diff against, never the denominator. For each stage, name its owner (an inline body section or a reference) and classify the owner. Teaching: it carries what to inspect, what good and bad look like, and when to stop. Ceremony: it pins only output shape — schemas, label sets, packet forms. The test is deletion on the process axis: delete the reference and name what the stage's execution loses beyond output shape. Prose with teaching headings that names no inspection target, signal, or stop condition is ceremony whatever its headings claim.
+MUST load `../../../domain-skill-crafting/references/calls-and-placement.md` and return its standards on teaching owners, on a section that owns a stage, and on shape-only references.
+
+How to inspect: Derive the promised-stage list yourself from the trigger and main path — an author-supplied list is evidence to diff against, never the denominator. For each stage, name its owner (an inline body section or a reference) and classify the owner. Teaching: it keeps the returned standard on a section that owns a stage. Ceremony: it pins only output shape — schemas, label sets, packet forms. The test is deletion on the process axis: delete the reference and name what the stage's execution loses beyond output shape. Prose with teaching headings that doesn't keep that standard is ceremony whatever its headings claim.
 
 Good signals:
-- every derived stage has a teaching owner;
-- teaching content traces to sourcing records or a named source;
-- ceremony references name their consumer.
+- every returned standard is kept for each derived stage and each reference in scope;
+- teaching content traces to sourcing records or a named source.
 
 Bad signals:
-- a promised stage whose only owner defines fields, labels, or packet forms;
+- a returned standard broken, with the stage or reference that breaks it;
 - many schemas beside one thin teaching file;
 - "how to" headings over prose that never says what to open or when to stop.
 

@@ -1,6 +1,6 @@
 # sensitive-surface
 
-Mission / stance: Gate executable and privileged surfaces before they are written. Apply the security decision, proof, and public-safety contract to the surfaces `security-gate.md` lists.
+Mission / stance: Check executable and privileged surfaces against the root's security standards: each one's decision and its timing, its proof, and public safety. The surfaces are the ones the root's security topic lists.
 
 Maximum authority: read-only verification of sensitive-surface classification, decision timing, proof, and public safety. Return candidate findings; the review lead owns security decisions, edits, escalation, and the final verdict.
 
@@ -11,24 +11,23 @@ Where to look:
 - license or permission state for anything copied;
 - the conditional security result in the run summary, or skill-creation's step 7 return, which `../../../skill-creation/references/security-gate.md` requires when that branch runs. Its presence is the observable proxy for decision timing.
 
-MUST load `../../../skill-creation/references/security-gate.md` to apply its inspection procedure and return the sensitive-surface decision, required proof, and public-safe constraints.
+MUST load `../../../domain-skill-crafting/references/security.md` and return each sensitive surface in scope, or none, with the standards its decision and proof must meet.
 
-How to inspect: Confirm the returned `allowed | disallowed | blocked | deferred` decision exists and predates the edit rather than accompanying it. Then confirm the returned public-safe constraints hold.
+MUST load `../../../skill-creation/references/security-gate.md` to re-walk its inspection procedure for each surface in scope and return the sensitive-surface decision, required proof, and public-safe constraints.
+
+IF a surface in scope is an installed-cache refresh or a home-level write, load `../../../domain-skill-crafting/references/platform.md` and return its refresh standards.
+
+How to inspect: Confirm each surface's returned `allowed | disallowed | blocked | deferred` decision exists and predates the edit rather than accompanying it. Then confirm the returned public-safe constraints hold.
 
 Good signals:
-- a decision exists and its timing predates the write;
-- executable resources carry deterministic tests;
-- third-party adoption records source, license or permission state, and a copy-vs-adapt decision;
-- shipped text contains no credential or cache identifiers.
+- every returned standard is kept for each surface in scope;
+- shipped text contains no credential, account email or account UUID.
 
 Bad signals:
-- a script written first and classified afterwards;
-- an executable resource with no deterministic test;
-- copied upstream content with no license or permission note;
-- home-cache paths, account emails, or account UUIDs in shipped docs;
-- installed-cache refresh presented as validation evidence.
+- a returned standard broken, with the surface and line that break it;
+- account emails, account UUIDs or credentials in shipped docs.
 
-Calibration: Report unclassified or late-classified surfaces and missing proof. Recommend a dedicated security review only when the user asks for an explicit security scan or vulnerability review, never for routine authoring judgment.
+Calibration: Report unclassified or late-classified surfaces and missing proof. Recommend a dedicated security review only as the gate's inspection procedure allows.
 
 Overlap boundary: This check owns sensitive surfaces, their decision timing, and deterministic tests for executables. `claim-vs-evidence` owns whether behavior evidence supports a stated claim. `placement-and-calls` owns where the security call site sits in the workflow.
 
