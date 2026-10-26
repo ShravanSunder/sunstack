@@ -31,14 +31,14 @@ Principles are the bottom layer. They are hidden from model invocation, teach on
 
 ### A skill's four surfaces
 
-The [skill-creation model](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#great-skill-frame) separates:
+The [skill-crafting model](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md#the-model) separates:
 
 1. The YAML trigger: when the skill should load and where adjacent skills take over.
 2. The `SKILL.md` main path: the mental model, decisions, required actions and finish conditions.
 3. `references/`: detail reached by an explicit call. A branch is conditional; an always-required module can still have its own maintenance boundary.
 4. Proof: evidence that the other surfaces change the behavior they promise.
 
-`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-creation's call grammar](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#call-grammar).
+`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-crafting's calls and placement topic](../../plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md#call-forms).
 
 ## Roles and execution forms
 
@@ -93,7 +93,7 @@ The [skill-authoring plugin](../../plugins/skill-authoring/README.md) is a separ
 
 For a broad portfolio question, `skill-audit` examines current instructions, real usage evidence and selected upstream sources, then classifies update, create, merge or skip. Each recommendation identifies the fix owner: teaching, a code check, or the tool. A single skill's design and writing belongs to `skill-creation`; independent judgment belongs to `skill-review`. `skill-orchestrator` carries one admitted change through spec, implementation, proof, assessment, review and the scoped release. `skill-rules` handles the subset of standards that should become executable checks.
 
-The [proof-and-claims reference](../../plugins/skill-authoring/skills/skill-creation/references/proof-and-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
+The [proof-claims reference](../../plugins/skill-authoring/skills/domain-skill-crafting/references/proof-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
 
 ### Follow one concrete change
 

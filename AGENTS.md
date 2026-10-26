@@ -74,7 +74,7 @@ When doing skill work in this repo:
 2. If the target is not named, use `skill-audit` for broad portfolio classification or ask for a named target.
 3. Use `skill-orchestrator` to carry a named create or update through spec, review, implementation, proof, and release; `skill-creation` alone for design and writing.
 4. Keep `SKILL.md` compact and progressive. Put depth in `references/` and deterministic mechanics in `scripts/`.
-5. `skill-creation`'s `references/proof-and-claims.md` owns what a behavior-proof claim may say and how a fresh run must be read to count.
+5. `domain-skill-crafting`'s `references/proof-claims.md` owns what a behavior-proof claim may say; `skill-creation`'s `references/proof-runs.md` owns how a run is carried out.
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
 7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
@@ -83,7 +83,7 @@ For execution ownership, load `practices-manage-agents` and follow it decisively
 Other sources:
 
 - `superpowers:writing-skills` is source inspiration for pressure proof and rationalization traps; Matt-style great-skill vocabulary is source inspiration for invocation, hierarchy, steering, and pruning. Normal repo skill authoring routes through `skill-authoring`.
-- `skill-creator` (bundled with Codex) owns Codex skill anatomy and generated metadata as platform support loaded through `skill-creation/references/platform-mechanics.md`.
+- `skill-creator` (bundled with Codex) owns Codex skill anatomy and generated metadata as platform support loaded through `domain-skill-crafting/references/platform.md`.
 - `docs-maintain` owns cleanup, archival, promotion, and durable docs reconciliation after artifacts exist.
 
 ## Admired-source provenance (ai-dev-skills)
@@ -160,7 +160,7 @@ Use the changelog system as the durable release memory:
 Skills encode judgment, house style, and repeatable failure prevention. Prefer improving an existing skill over adding a near-duplicate.
 
 - Treat this section as repo-local guardrails. Use `Skill Work SOP` above and the `skill-authoring` skills before relying on these bullets.
-- When creating, editing, evaluating, or pressure-testing one named skill, use the `skill-authoring` skills. `skill-creation`'s references adapt Matt-style great-skill vocabulary, pressure-proof lessons from `superpowers:writing-skills`, and platform mechanics from `skill-creator`. For broad portfolio questions, use `skill-audit` instead.
+- When creating, editing, evaluating, or pressure-testing one named skill, use the `skill-authoring` skills. `domain-skill-crafting`'s references adapt Matt-style great-skill vocabulary, pressure-proof lessons from `superpowers:writing-skills`, and platform mechanics from `skill-creator`. For broad portfolio questions, use `skill-audit` instead.
 - Name skills namespace-first in hyphen-case: lead with the domain family, then the searchable action or role (`implementation-review`, `spec-design`, `plan-handoff`). The namespace table in `plugins/sunstack-dev/README.md` owns the family list.
 - Write the frontmatter `description` as a trigger: start with `Use when...`, name concrete situations and symptoms, and do not summarize the workflow.
 - Keep `SKILL.md` concise and progressive. Move heavy examples, rubrics, templates, and long prompt packets into `references/`; use `scripts/` for deterministic mechanics.
