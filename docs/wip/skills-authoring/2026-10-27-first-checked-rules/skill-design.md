@@ -60,9 +60,9 @@ No description or invocation capability changes (review R1, G1). The four target
 
 | Run | Target | Kind | Writer | Status |
 | --- | --- | --- | --- | --- |
-| 1 | `domain-skill-crafting`: markers on the eight sentences, the rules files and both RuleSets, by `skill-rules`' procedure; `generalization.md`'s example describes its pull request without the number (F12) | update | Opus 5.5 xhigh | proposed |
-| 2 | `skill-rules`: `references/running-rules.md` and its caller line | update | Opus 5.5 xhigh | proposed |
-| 3 | the runner: script, test, `package.json` script and dev dependency | repository code | Sol, as an Implementer Sidekick | proposed |
+| 1 | `domain-skill-crafting`: markers on the eight sentences, the rules files and both RuleSets, by `skill-rules`' procedure; `generalization.md`'s example describes its pull request without the number (F12) | update | Opus 5.5 xhigh | started (`tmp/project-1-runs/fcr-run-1-commission.md`) |
+| 2 | `skill-rules`: `references/running-rules.md` and its caller line | update | Opus 5.5 xhigh | started (`tmp/project-1-runs/fcr-run-2-commission.md`) |
+| 3 | the runner: script, test, `package.json` script and dev dependency | repository code | Sol, as an Implementer Sidekick | started (`tmp/project-1-runs/fcr-run-3-commission.md`; Sidekick `codex-local/01a17d2c`) |
 | 4 | `skill-review`: first rule pass on, and its completion | update | Opus 5.5 xhigh | proposed |
 | 5 | `skill-creation`: self-check on, its completion, both class returns and the blocker | update | Opus 5.5 xhigh | proposed |
 | 6 | `AGENTS.md` line and the 0.6.0 changelog entry updated | documents | Sol | proposed |
@@ -96,3 +96,4 @@ Base: the Project 1 branch at `e326e387`, before U2c's correction lands (that co
 
 - **Review R1**, at `5155d995`: **targeted-revision**, **revise-first**; five accepted findings (F1 to F5) and one coverage gap (G1). Review lead `codex-local/01a17d0d`; teaching reviewer `codex-local/01a17d13-eaae`, structure reviewer `codex-local/01a17d13-eb89`. Record: `tmp/project-1-reviews/review-r1-design.md`. Draft 2 answers each: F1 two RuleSets (E6); F2 per-file bindings, metadata on `SKILL.md` only, and `prepare_rules` as the reference-selection observation (E7); F3 both caller paths; F4 every return and completion named; F5 the unit review loads the post-run-4 copy; G1 the *Trigger and invocation* section. Also added, at the owner's direction: F12 and E8.
 - **R1 correction check**, at `eeba2653`: **targeted-revision**, **revise-first**; F1 to F5 and G1 closed; two new accepted findings. N1: the seven-rule fallback let a reduced set pass the eight-rule gate; now fewer than eight leaves F1 open and goes back to the Lead and the owner. N2: F12's path ban would have rejected the plugin-relative call paths the sites need; now it bans paths tied to one machine, worktree or cache and keeps portable relative references. Record: `tmp/project-1-reviews/review-r1-design-corrections.md`.
+- **R1 second correction check**, at `a59c977f`: **great**, **accepted-to-implement**; N1 and N2 verified closed, no new finding. Record: `tmp/project-1-reviews/review-r1-design-corrections-2.md`. Runs 1 to 3 start from this state.
