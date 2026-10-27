@@ -24,7 +24,7 @@ Your 27 October direction in your words, what success looks like, and what this 
   <ex-step to="specification--first-checked-rules-specification" icon="path"><script type="text/markdown">
 **Specification**
 
-Eleven things that must hold, from the eight markers to skills naming no repository command.
+Twelve things that must hold, from the eight markers and their two rule sets to skills that stay general.
 </script></ex-step>
   <ex-step to="skill-design--first-checked-rules-skill-design" icon="path"><script type="text/markdown">
 **Skill design**
@@ -38,11 +38,11 @@ How each obligation is shown with a check a wrong build fails, the dogfood run, 
 </script></ex-step>
 </ex-presentation>
 
-<ex-document id="content" document-id="first-checked-rules-design" revision="draft-1">
+<ex-document id="content" document-id="first-checked-rules-design" revision="draft-2">
 <h1>First checked rules</h1>
 
 <ex-callout id="short-answer" title="The short answer" tone="tldr" icon="book-open">
-  <p>Eight of the root's sentences get a rule each: the six judged standards you chose, plus two description checks. The real engine assembles all eight, and runs the two description checks on every skill. The six judged ones are assembled and printed but not judged by a model yet; that waits for their evals. One command runs them (<code>pnpm --dir tests/skills rules</code>), and two skills switch on their rule step: <code>skill-review</code> runs the rules before its reviewers start, and <code>skill-creation</code> runs them on what it just wrote. Every rule warns; nothing blocks. This is the first real change through milestone 1's new skills, so it also tests them.</p>
+  <p>Eight of the root's sentences get a rule each: the six judged standards you chose, plus two description checks. They sit in two rule sets, because the engine won't evaluate a set holding a judged rule without a model. The real engine assembles all eight, and runs the two description checks on every skill's <code>SKILL.md</code>. The six judged ones are assembled and printed but not judged by a model yet; that waits for their evals. One command runs them (<code>pnpm --dir tests/skills rules</code>), and two skills switch on their rule step: <code>skill-review</code> runs the rules before its reviewers start, and <code>skill-creation</code> runs them on what it just wrote. Every rule warns; nothing blocks. This is the first real change through milestone 1's new skills, so it also tests them.</p>
 </ex-callout>
 
 <p>Press <kbd>W</kbd> to walk through it, or read the four parts below.</p>
