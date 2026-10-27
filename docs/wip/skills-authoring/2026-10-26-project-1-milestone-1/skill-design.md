@@ -222,7 +222,7 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. A con
 | 6 | U2a | `skill-audit`: its standards to the root | update | Opus 5.5 xhigh | reviewed: unit U2a's review returned great, source-only (`tmp/project-1-reviews/review-u2a.md`); `tmp/project-1-runs/run-6-handback.md`; 5 loads resolve; every audit still reaches STEER-20 and GEN-2 at step 4) |
 | 7 | U2a | `skill-rules`: links to the root | update | Opus 5.5 xhigh | reviewed: unit U2a's review returned great, source-only (`tmp/project-1-reviews/review-u2a.md`); `tmp/project-1-runs/run-7-handback.md`; 23 of 23 anchors hold their quoted text; the 467-word example re-measured on the real engine) |
 | documents A | U2a | the repository documents that link to moved files | shipping surfaces | Sol | reviewed: unit U2a's review returned great, source-only (`tmp/project-1-reviews/review-u2a.md`); `tmp/project-1-runs/documents-a-handback.md`; 4 documents, 8 links resolve) |
-| 8 | U2b | `skill-design`: steps 1 to 6 and the three procedure files from creation, plus `design-page.md` | create | Opus 5.5 xhigh | proposed |
+| 8 | U2b | `skill-design`: steps 1 to 6 and the three procedure files from creation, plus `design-page.md` | create | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-8-handback.md`; 17 of 17 loads resolve; the four walks hold) |
 | 9 | U2b | `skill-creation`: narrowed to writing; admission by class; self-check site | update | Opus 5.5 xhigh | proposed |
 | 10 | U2b | `skill-review`: design stage, transfer check, routes, first rule pass | update | Opus 5.5 xhigh | proposed |
 | 11 | U2b | `skill-orchestrator`: the lifecycle; proof through `skill-design`; rule check | update | Opus 5.5 xhigh | proposed |
