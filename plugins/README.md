@@ -91,7 +91,7 @@ Skill authoring for any repository, standalone from the workflow plugin. Provide
 - **domain-skill-crafting** skill -- hidden; holds every standard a skill's text must meet; loaded by the other skills
 - **skill-rules** skill -- decides which of a skill's standards become checked `sunstack-rule` rules, marks them in the skill's Markdown, and proves them with `check_rules` and good and bad examples
 - **skill-review** skill -- independent review of a skill change's design set or skill files by several reviewer agents
-- **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations before recommending create/update/merge/skip decisions
+- **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations; sends each flagged skill to skill-review and uses its verdict and accepted findings in create/update/merge/skip decisions
 
 - [agent-router plugin](agent-router/) — agent collaboration, shared message boards, wake-ups and schedules; canonical skill maintained in codex-router.
 
