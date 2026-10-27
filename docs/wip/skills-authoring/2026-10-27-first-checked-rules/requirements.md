@@ -1,6 +1,6 @@
 # First checked rules: requirements
 
-Draft 3, by the 🦁 Lead, 2026-10-27 (after review R1 and its correction check), written with the branch's `skill-design` (`plugins/skill-authoring/skills/skill-design/SKILL.md` at the Project 1 branch head). Part one of the design set: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It is Project 1's first milestone 2 slice, and the first real skill change run through milestone 1's new lifecycle, so it is also the behavior proof the owner chose.
+Draft 4, by the 🦁 Lead, 2026-10-27 (after review R1, its correction checks and one change after acceptance), written with the branch's `skill-design` (`plugins/skill-authoring/skills/skill-design/SKILL.md` at the Project 1 branch head). Part one of the design set: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It is Project 1's first milestone 2 slice, and the first real skill change run through milestone 1's new lifecycle, so it is also the behavior proof the owner chose.
 
 ## The change
 
