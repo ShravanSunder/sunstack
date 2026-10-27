@@ -41,9 +41,9 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
    A skill in scope is flagged when a step 2 signal records its failure. Return `rules: pending` with the flagged skills: this step does not yet run the rules on the skills in scope, so it flags skills by session evidence only. A pending rule run is never reported as passed, and a rule is reported as run only when the engine's own report shows that it ran.
 
-   IF any skill is flagged, use `skill-review`'s implementation stage as an evaluation of each flagged skill's existing files, and return each one's verdict and accepted findings; both feed that skill's action at step 5. IF the review can't run for a flagged skill (for example, the host can't start a second reviewer agent), return the reason beside that skill instead; its action at step 5 carries that reason as an unreviewed signal. IF no skill is flagged, return `flagged skills: none` and go on to step 4.
+   IF any skill is flagged, use `skill-review`'s implementation stage as an evaluation of each flagged skill's existing files, and return each one's verdict and accepted findings; both feed that skill's action at step 5. IF the review can't run for a flagged skill (for example, the host can't start a second reviewer agent), return the reason beside that skill and mark its recommendation `awaiting review`: it stays incomplete until a review verdict exists, and its action at step 5 may be drafted from the session signal, labeled unreviewed. IF no skill is flagged, return `flagged skills: none` and go on to step 4.
 
-   Completion: `rules: pending` stands with the flagged skills, and each flagged skill has its review verdict and accepted findings or the reason its review couldn't run; or the audit returned `flagged skills: none`.
+   Completion: `rules: pending` stands with the flagged skills, and each flagged skill has its review verdict and accepted findings, or is marked `awaiting review` with the reason its review couldn't run, its recommendation still incomplete; or the audit returned `flagged skills: none`.
 
 4. Inspect upstream inspirations selectively:
    - open only the skills that map to the candidate workflow
@@ -78,7 +78,7 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 7. Produce the audit:
    - candidate name and action: update, create, merge, or skip
    - evidence: each signal with its source, date, and how often it recurred; label inferred or single-sighting signals as hypotheses
-   - review verdict, for a flagged skill: its `skill-review` verdict and the accepted findings its action used, or the reason its review couldn't run
+   - review verdict, for a flagged skill: its `skill-review` verdict and the accepted findings its action used, or `awaiting review` with the reason its review couldn't run
    - fix owner: skill prose, a code check, or the tool
    - source inspirations
    - why it helps
@@ -107,8 +107,9 @@ IF the audit or a request proposes one shared contract for runtime skills whose 
 
 Return:
 
+- while any recommendation is `awaiting review`: that the audit is partial, naming each of those skills
 - existing skills checked
-- the flagged skills with `rules: pending`, each with its review verdict or the reason its review couldn't run, or `flagged skills: none`
+- the flagged skills with `rules: pending`, each with its review verdict or `awaiting review` and the reason its review couldn't run, or `flagged skills: none`
 - each recommendation with its action, fix owner, dated signals, recurrence, and hypothesis or confirmed status
 - suggested updates
 - suggested new skills
@@ -123,7 +124,7 @@ Return:
 The audit is not done while any of these hold:
 
 - a recommendation lacks its action, fix owner, dated signals, recurrence, or hypothesis or confirmed status;
-- a recommendation for a flagged skill lacks its review verdict, or the reason the review couldn't run;
+- a recommendation for a flagged skill is presented as complete without its review verdict;
 - a new-skill recommendation rests on recurrence that is not clearly likely and costly;
 - an update/create recommendation lacks its `SKILL.md` boundary, `references/` depth, `scripts/` need, or pressure coverage;
 - upstream inspiration appears without the local behavior it improves;
