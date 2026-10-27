@@ -1,6 +1,6 @@
 # First checked rules: skill design
 
-Draft 2, by the 🦁 Lead, 2026-10-27, after review R1. Part three of the design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Built on the Project 1 branch after milestone 1's units U0, U2a and U2b were reviewed.
+Draft 3, by the 🦁 Lead, 2026-10-27, after review R1 and its correction check. Part three of the design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Built on the Project 1 branch after milestone 1's units U0, U2a and U2b were reviewed.
 
 ## The shape
 
@@ -34,7 +34,7 @@ skill-review first pass ───┘   running-rules.md        └─ evaluate_r
 | `guidance.positive` | `steering.md:10` (STEER-9) | judged | judged | list items and paragraphs |
 | `reference.teaching-depth` | `calls-and-placement.md:18` (PLACE-14) | judged | judged | sections of reference files only |
 
-All eight are `warn`. The exact selectors and patterns are settled in run 1 with `skill-rules`' decision matrix and its calibration, which may narrow a target; a rule whose selector can't be made honest is reported, not marked. That includes `reference.teaching-depth`: RuleSet applicability tests payload fields or asks a model, never a file path, so if run 1 can't confine it to reference files with the engine's own selection, it stays unmarked and is reported, and seven rules ship. The name rule (`descriptions-and-invocation.md:26`) is not marked: its folder-name half can't be seen by one field's check, so marking it would make a proxy.
+All eight are `warn`. The exact selectors and patterns are settled in run 1 with `skill-rules`' decision matrix and its calibration, which may narrow a target; a rule whose selector can't be made honest is reported, not marked. That includes `reference.teaching-depth`: RuleSet applicability tests payload fields or asks a model, never a file path, so if run 1 can't confine it to reference files with the engine's own selection, it stays unmarked rather than become a proxy, F1 stays open, and run 1 returns that to the Lead, who brings the scope question to the owner. A result with fewer than eight rules is not accepted or shipped, since the six judged standards are the owner's choice (review R1, N1). The name rule (`descriptions-and-invocation.md:26`) is not marked: its folder-name half can't be seen by one field's check, so marking it would make a proxy.
 
 ## Where the files go
 
@@ -95,3 +95,4 @@ Base: the Project 1 branch at `e326e387`, before U2c's correction lands (that co
 ## Review record
 
 - **Review R1**, at `5155d995`: **targeted-revision**, **revise-first**; five accepted findings (F1 to F5) and one coverage gap (G1). Review lead `codex-local/01a17d0d`; teaching reviewer `codex-local/01a17d13-eaae`, structure reviewer `codex-local/01a17d13-eb89`. Record: `tmp/project-1-reviews/review-r1-design.md`. Draft 2 answers each: F1 two RuleSets (E6); F2 per-file bindings, metadata on `SKILL.md` only, and `prepare_rules` as the reference-selection observation (E7); F3 both caller paths; F4 every return and completion named; F5 the unit review loads the post-run-4 copy; G1 the *Trigger and invocation* section. Also added, at the owner's direction: F12 and E8.
+- **R1 correction check**, at `eeba2653`: **targeted-revision**, **revise-first**; F1 to F5 and G1 closed; two new accepted findings. N1: the seven-rule fallback let a reduced set pass the eight-rule gate; now fewer than eight leaves F1 open and goes back to the Lead and the owner. N2: F12's path ban would have rejected the plugin-relative call paths the sites need; now it bans paths tied to one machine, worktree or cache and keeps portable relative references. Record: `tmp/project-1-reviews/review-r1-design-corrections.md`.

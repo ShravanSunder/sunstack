@@ -1,10 +1,10 @@
 # First checked rules: skill verification
 
-Draft 2, by the 🦁 Lead, 2026-10-27, after review R1. Part four of the design set: [requirements](requirements.md), [specification](specification.md), [skill design](skill-design.md), skill verification. Routes were decided with `skill-rules/references/decision-matrix.md`.
+Draft 3, by the 🦁 Lead, 2026-10-27, after review R1 and its correction check. Part four of the design set: [requirements](requirements.md), [specification](specification.md), [skill design](skill-design.md), skill verification. Routes were decided with `skill-rules/references/decision-matrix.md`.
 
 | Obligation | Route, and the property it was decided on | Passing condition (a wrong build fails it) |
 | --- | --- | --- |
-| F1 eight markers | review check: placement across files | exactly eight bound markers (seven if `reference.teaching-depth` is reported unmarked), one per named sentence's list item; none elsewhere; no description holds `<!--` |
+| F1 eight markers | review check: placement across files | exactly eight bound markers, one per named sentence's list item; none elsewhere; no description holds `<!--`; fewer than eight leaves F1 open and fails this row |
 | F2 assembly, two RuleSets | native engine check | `pnpm --dir tests/skills rules --check` returns `kind: checked` for one request naming both RuleSets, `checked_rule_count` equal to the marked rules, with every rule ID printed under its RuleSet (two under metadata, the rest under judged), exit 0; a refusal or a missing ID fails |
 | F3 metadata rules | mechanical, calibrated: a literal property of one field | for each: a good fixture completes `pass` and a bad one `fail` in the engine's report; both passing or both failing fails; and on a real skill, no description check reaches a `references/` file (the evaluate request binds only `SKILL.md` files, and the report has no occurrence outside them) |
 | F4 judged rules | review check: the printed question read as its standard | each printed question states its one standard with its subject; the report and the run sites say `not evaluated`; any claim that a judged rule passed fails |
@@ -14,7 +14,7 @@ Draft 2, by the 🦁 Lead, 2026-10-27, after review R1. Part four of the design 
 | F8, F9 run sites | review check: source walks from the actual caller files | a review walk resolves `../../skill-rules/references/running-rules.md` from `implementation-review.md`, reaches the runner, turns a mechanical failure into a candidate finding, records judged rules as `not evaluated`, and reaches completion with that state; a creation walk resolves `../skill-rules/references/running-rules.md` from `SKILL.md`, fixes or names a failure before the diff comparison, and both class returns and the blocker carry the actual state; a walk where no runner is named reports the rules as not run with the reason; no return or completion still says `pending` |
 | F10 portability | review check | no skill text names `pnpm`, `tests/skills` or an ai-tools path; `AGENTS.md` names the command |
 | F11 untouched sites | review check | the orchestrator's and the audit's sites are byte-identical |
-| F12 general text | review check, plus each run's own search | a search of every changed skill file for repository commands, local paths, project units, run numbers, session identifiers and pull request numbers finds none; `generalization.md`'s example reads as before without its numbers |
+| F12 general text | review check, plus each run's own search | a search of every changed skill file for repository commands, paths tied to one machine, worktree or install cache (absolute home paths, `.claude/worktrees/`, plugin caches), project units, run numbers, session identifiers and pull request numbers finds none; every plugin-relative call path still resolves; `generalization.md`'s example reads as before without its numbers |
 
 ## The dogfood run, and what it shows
 
