@@ -56,25 +56,26 @@ Home: `~/dev/memory-logs/skills/` (clone of https://github.com/ShravanSunder/mem
 | Evidence for a named skill-change | `authoring/<yyyy-mm-dd-name>/` |
 | What to do next | `backlog/` |
 
-In this repo, only the skill spec for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
+In this repo, only the design set for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies, `skill-design` writes the design set, and `skill-creation` writes the skill's files from its accepted design.
 
 Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-authoring/`):
 
 | Need | Skill |
 | --- | --- |
-| Carry one skill change from spec to release | `skill-authoring:skill-orchestrator` |
-| Design or write one named skill and its skill spec; the craft (trigger, main path, depth, steering, platform mechanics, security gate) | `skill-authoring:skill-creation` |
+| Carry one skill change from design to release | `skill-authoring:skill-orchestrator` |
+| Design one skill change and write its design set before its files change | `skill-authoring:skill-design` |
+| Write one skill's files from its accepted design, or make a mechanical edit | `skill-authoring:skill-creation` |
 | Decide which of a skill's standards become checked `sunstack-rule` rules, mark them, and prove them | `skill-authoring:skill-rules` |
-| Independent review of a skill spec or skill files, with several reviewer agents | `skill-authoring:skill-review` |
+| Independent review of a skill change's design set or skill files, with several reviewer agents | `skill-authoring:skill-review` |
 | Which skills to create, update, merge, or skip | `skill-authoring:skill-audit` |
 
 When doing skill work in this repo:
 
 1. Start from a concrete need, repeated failure mode, or user-approved workflow change.
 2. If the target is not named, use `skill-audit` for broad portfolio classification or ask for a named target.
-3. Use `skill-orchestrator` to carry a named create or update through spec, review, implementation, proof, and release; `skill-creation` alone for design and writing.
+3. Use `skill-orchestrator` to carry a named create or update through design, review, writing, proof, and release; `skill-design` for design only and `skill-creation` for writing files from the accepted design or a mechanical edit.
 4. Keep `SKILL.md` compact and progressive. Put depth in `references/` and deterministic mechanics in `scripts/`.
-5. `domain-skill-crafting`'s `references/proof-claims.md` owns what a behavior-proof claim may say; `skill-creation`'s `references/proof-runs.md` owns how a run is carried out.
+5. `domain-skill-crafting`'s `references/proof-claims.md` owns what a behavior-proof claim may say; `skill-design`'s `references/proof-runs.md` owns how a run is carried out.
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
 7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 

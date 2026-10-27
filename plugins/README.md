@@ -85,10 +85,12 @@ Shravan's Codex-first development workflow plugin. Provides:
 
 Skill authoring for any repository, standalone from the workflow plugin. Provides:
 
-- **skill-orchestrator** skill -- carries one skill change from spec through review, implementation, proof, assessment, and release
-- **skill-creation** skill -- the skill craft and the skill spec: designs and writes one named skill
+- **skill-orchestrator** skill -- carries one skill change from design through review, writing, proof, assessment, and release
+- **skill-design** skill -- designs one skill change and writes its design set before its files change
+- **skill-creation** skill -- writes one skill's files from its accepted design, or makes a mechanical edit
+- **domain-skill-crafting** skill -- hidden; holds every standard a skill's text must meet; loaded by the other skills
 - **skill-rules** skill -- decides which of a skill's standards become checked `sunstack-rule` rules, marks them in the skill's Markdown, and proves them with `check_rules` and good and bad examples
-- **skill-review** skill -- independent review of a skill spec or skill files by several reviewer agents
+- **skill-review** skill -- independent review of a skill change's design set or skill files by several reviewer agents
 - **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations before recommending create/update/merge/skip decisions
 
 - [agent-router plugin](agent-router/) — agent collaboration, shared message boards, wake-ups and schedules; canonical skill maintained in codex-router.
