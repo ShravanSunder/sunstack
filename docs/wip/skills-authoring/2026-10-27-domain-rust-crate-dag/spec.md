@@ -94,7 +94,8 @@ Proof posture (pattern skill: recognition, correct use, counter-example):
     | 3 ratchet pressure | pass (f)–(h) | pass (f)–(h); cited the new rule, and flagged `AppContext` as a services struct |
     | 4 counter-example, one small crate | pass (i)–(k) | pass (i)–(k); no workspace, no trait |
 
-  - **Strongest claim:** observed in named examples. Every prior-revision control passed, so no improvement over the old text is demonstrated on this model; the change codifies the owner's standard and shows no over-application on the counter-example. The runs read the skill copy named in their AGENTS.md (a snapshot of this branch's file); their tool records were not inspected beyond the files they left. Runs were on Claude Opus only, not the Codex models that do most Rust work here.
+  - **Loaded copy and actions (host records):** each run's host session record shows a Bash `cat` of its assigned copy before any edit: `skills-old/domain-rust/SKILL.md` for the four prior-revision runs, `skills-new/domain-rust/SKILL.md` (byte-identical to this branch's file) for the three new runs. Its Edit and Write calls touch only its own fixture copy (4–11 per run). Results were judged from the files those calls left, not from the run's reply. The records stay in the Lead's local session store and are not published.
+  - **Strongest claim:** observed in named examples: on these four scenarios, on Claude Opus, with the loaded copy confirmed. Every prior-revision control passed, so no improvement over the old text is demonstrated; the new text showed no over-application on the counter-example. Codex models were not run.
   - Untested: the `test-support` feature-tree check and composition lifetimes (request scope); those stay named gaps.
 - If the host cannot show which copy a run loaded or its actions, the strongest claim is "drafted from approved intent; static checks pass", and the gap is named.
 

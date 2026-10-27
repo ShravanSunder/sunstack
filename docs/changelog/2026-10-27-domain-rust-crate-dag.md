@@ -6,4 +6,8 @@ Dependencies point one way, and a boundary that must hold is a crate boundary, b
 
 All six Codex, Claude and Cursor plugin and marketplace version fields move to 2.100.0, and the changelog index links this entry. No commands, hooks, references or plugin README sections change.
 
+Validation: `pnpm --dir tests/skills exec vitest run lib --config vitest.config.ts` passed 169 tests in 18 files; `pnpm --dir tests/skills exec tsc --noEmit`, the six-manifest JSON and version checks, and `git diff --check` passed. Behaviour: seven fresh-agent fixture runs (four scenarios, prior and new revision) passed their frozen checks; no improvement over the prior text is claimed.
+
+Refresh and reinstall were not performed for Codex or Claude; this is source-only and unreleased at validation.
+
 Spec: `docs/wip/skills-authoring/2026-10-27-domain-rust-crate-dag/spec.md`.
