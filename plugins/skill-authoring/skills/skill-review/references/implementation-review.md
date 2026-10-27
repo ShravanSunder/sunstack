@@ -9,7 +9,7 @@ Return a verdict, the rule pass's state, changed-file coverage, accepted/rejecte
 Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the folder of each skill under review, and return its report; that reference owns when a rule counts as run. Record the report's lines with the per-check statuses, then carry it into the review:
 
 - Each `failing` line becomes a candidate finding raised by the rule pass, with its location as the anchor and the rule's wording as the finding; the review lead verifies it at that anchor like any other candidate.
-- When the check refused and the report gives each refusal's cause and fix, because the change under review touched a rule's definition, each refusal is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal returned without a cause and fix stays only a coverage gap.
+- Each refusal the report traces to the change under review is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal the report doesn't trace to the change stays only a coverage gap, with its cause.
 - A model-judged rule stays `not evaluated`, even when a check finds its standard kept.
 - Each gap the report names, and a `rules: not run` result, stays with the per-check statuses as a coverage gap, with its reason.
 

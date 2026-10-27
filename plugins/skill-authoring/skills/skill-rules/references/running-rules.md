@@ -1,6 +1,6 @@
 # Running Rules
 
-This reference owns one run of this plugin's rules on a skill's files from a step that checks skill text, such as a review's first rule pass or a writer's self-check, and the reading of the engine's responses into one state per rule. Expected input: the folder of each skill the step checks, and the repository's own instructions. Return: whether the rules ran, or why not; where the engine's responses are kept; each rule's state; and each failing occurrence with its rule ID, its location and the rule's wording.
+This reference owns one run of this plugin's rules on a skill's files from a step that checks skill text, such as a review's first rule pass or a writer's self-check, and the reading of the engine's responses into one state per rule. Expected input: the folder of each skill the step checks, the diff of the change it checks when there is one, and the repository's own instructions. Return: whether the rules ran, or why not; where the engine's responses are kept; each rule's state; each failing occurrence with its rule ID, its location and the rule's wording; and each refusal with its cause, traced to the change or left as a gap.
 
 A rule has run only when the engine's report, from a run on the files as they stand now, says it ran. The runner's own summary is not that report, and whatever the report doesn't show as run is a gap, never a pass.
 
@@ -18,7 +18,9 @@ Run the runner as its instructions say, on the folder of each skill the step che
 
 MUST load `check-and-reports.md` and return what each field this reading uses means: the check's outcome and its print, including how a printed rule shows whether it is model-judged or mechanical, and the evaluation report's coverage, skipped rules, rule evaluations and occurrences. Take only those meanings from it: its calibration and repair steps are for writing and proving rules, and this run follows the steps below.
 
-1. **The check.** It succeeded when its outcome is `checked`. Its print lists the assembled rules, which are the rules this run accounts for, so get the print before reading on, or return its absence as a gap when the runner can't print. Any other outcome means no rule ran: return `rules: not run`, with the outcome and each diagnostic's code and location as the reason. IF the check refused and the checked change touched a file the rules are defined in (a RuleSet, a rules file, or the Markdown a rules file is paired with), load `markers-and-rules.md` and return each refusal's cause and fix from its repair table: the change broke a rule's definition, and the fix belongs to the change.
+1. **The check.** It succeeded when its outcome is `checked`. Its print lists the assembled rules, which are the rules this run accounts for, so get the print before reading on, or return its absence as a gap when the runner can't print. Any other outcome means no rule ran: return `rules: not run`, with the outcome and each diagnostic's code and location as the reason.
+
+   IF the check refused, load `markers-and-rules.md` and return each refusal's code, location, and the cause and fix its repair table gives that code. Then decide, one refusal at a time, whether the change being checked caused it: it did only when the change's diff holds the edit that produces this code at this location, in the location's file, in the file paired with it (a rules file and its Markdown), or in the RuleSet that pairs them. For example, the diff deletes a marker from its Markdown, and the refusal is that marker's entry, named by its ID, orphaned in the paired rules file. A traced refusal is the change breaking a rule's definition, and its fix belongs to the change. Every other refusal is not the change's: one the change's edits didn't produce, even in the same file or its pair; one the diff doesn't settle; and every refusal when the step checks no change. Return each of those as a gap with its code, location and cause, and no fix for the change to own.
 2. **The evaluation.** An evaluation that returned no report leaves every mechanical rule a gap, with its outcome as the reason. Otherwise, read every entry the report holds for each mechanical rule the print lists; a rule can have one for each group of files it was bound to.
 
    | what the report shows for the rule | what it means |
@@ -44,14 +46,16 @@ responses:  <where the check and evaluation responses are kept>
 coverage:   full | <the evaluation's coverage, as a gap>
 per rule:   <rule ID>: pass | fail | not evaluated | gap: <reason>
 failing:    <rule ID> at <file>:<line>: <the rule's wording from the print>
+refusal:    <code> at <file>:<line> (<field_path>): <cause>; traced to the change, fix: <fix> | not traced: a gap
 ```
 
-Give one `per rule` line for each rule the print lists, and one `failing` line for each failing occurrence, with the file and, when it has one, the line taken from the occurrence's `target`, so a reviewer can verify it at that anchor and a writer can fix it there. `rules: ran` means the check came back `checked` with its print and the evaluation returned a report; when they didn't, the lines that exist still carry what was read.
+Give one `per rule` line for each rule the print lists, and one `failing` line for each failing occurrence, with the file and, when it has one, the line taken from the occurrence's `target`, so a reviewer can verify it at that anchor and a writer can fix it there. When the check refused, give one `refusal` line for each diagnostic, with a fix only on one traced to the change. `rules: ran` means the check came back `checked` with its print and the evaluation returned a report; when they didn't, the lines that exist still carry what was read.
 
 Good and bad readings:
 
 - Good: the evaluation shows the description rule `expanded`, with one occurrence `completed`, `fail` at a skill's `SKILL.md` line 3. The return names that rule `fail`, gives a `failing` line at `SKILL.md:3` with the rule's wording, lists every judged rule `not evaluated`, and reports coverage `full`.
 - Bad: "rules pass", read from the runner's summary, while one mechanical rule shows `zero_matches`. That rule selected nothing, so it is a gap.
 - Bad: the judged rules reported as passing because the print listed them. They are `not evaluated`.
+- Bad: a refusal traced to the change because the change edited a rules file, when the refusal is an entry orphaned in another topic's rules file, or an entry whose marker was already gone before the change. The diff holds no edit that produces it, so it is a gap with its cause.
 
-Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the check and the evaluation were read, every rule the print lists has exactly one state, taken from the report or `not evaluated` for a judged rule, every failing occurrence has its rule ID, location and wording, and every gap names its reason.
+Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the check and the evaluation were read, every rule the print lists has exactly one state, taken from the report or `not evaluated` for a judged rule, every failing occurrence has its rule ID, location and wording, and every gap names its reason; when the check refused, every refusal has its code, location and cause, and is either traced to the change by the edit in its diff that produces it or returned as a gap.

@@ -46,11 +46,49 @@ const recordingSchema = z.object({
         }),
         output: z.string().optional(),
         backend: z.object({ endpoint: z.string() }).passthrough().optional(),
+        repositories: z.array(
+          z
+            .object({
+              key: z.string(),
+              root: z.string(),
+              input_paths: z.array(
+                z.object({ kind: z.literal("exact"), path: z.string() }).passthrough(),
+              ),
+              change_scope: z.object({ kind: z.literal("full") }).passthrough(),
+            })
+            .passthrough(),
+        ),
       })
       .passthrough(),
   }),
 });
 type Recording = z.infer<typeof recordingSchema>;
+
+interface RuleSetMembership {
+  readonly path: string;
+  readonly files: readonly string[];
+}
+
+function sortedRuleSetMemberships(
+  memberships: readonly RuleSetMembership[] = [],
+): RuleSetMembership[] {
+  return memberships
+    .map((membership) => ({ ...membership, files: [...membership.files].sort() }))
+    .sort((left, right) => left.path.localeCompare(right.path));
+}
+
+function sortedRepositoryBindings(
+  repositories: Recording["request"]["input"]["repositories"] = [],
+): Recording["request"]["input"]["repositories"] {
+  return repositories
+    .map((repository) => ({
+      ...repository,
+      input_paths: [...repository.input_paths].sort((left, right) =>
+        left.path.localeCompare(right.path),
+      ),
+    }))
+    .sort((left, right) => left.key.localeCompare(right.key));
+}
 
 interface Fixture {
   readonly root: string;
@@ -219,35 +257,59 @@ describe("repository skill rule runner", () => {
     const evaluation = recordings[1];
     expect(check?.request.input.output).toBe("assembled_rules");
     expect(
-      check?.request.input.definitions.rule_sets.map((set) => ({
-        path: set.path,
-        files: set.binding_groups.map((group) => group.bindings.skill.path),
-      })),
-    ).toEqual([
-      {
-        path: metadataName,
-        files: [`${pluginSkills}/alpha/SKILL.md`, `${pluginSkills}/beta/SKILL.md`],
-      },
-      {
-        path: textName,
-        files: [
-          `${pluginSkills}/alpha/SKILL.md`,
-          `${pluginSkills}/beta/SKILL.md`,
-          `${pluginSkills}/alpha/references/guide.md`,
-          `${pluginSkills}/alpha/references/nested/details.txt`,
-        ],
-      },
-      {
-        path: referencesName,
-        files: [
-          `${pluginSkills}/alpha/references/guide.md`,
-          `${pluginSkills}/alpha/references/nested/details.txt`,
-        ],
-      },
-    ]);
-    expect(evaluation?.request.input.definitions.rule_sets).toEqual([
-      check?.request.input.definitions.rule_sets[0],
-    ]);
+      sortedRuleSetMemberships(
+        check?.request.input.definitions.rule_sets.map((set) => ({
+          path: set.path,
+          files: set.binding_groups.map((group) => group.bindings.skill.path),
+        })),
+      ),
+    ).toEqual(
+      sortedRuleSetMemberships([
+        {
+          path: metadataName,
+          files: [`${pluginSkills}/alpha/SKILL.md`, `${pluginSkills}/beta/SKILL.md`],
+        },
+        {
+          path: textName,
+          files: [
+            `${pluginSkills}/alpha/SKILL.md`,
+            `${pluginSkills}/beta/SKILL.md`,
+            `${pluginSkills}/alpha/references/guide.md`,
+            `${pluginSkills}/alpha/references/nested/details.txt`,
+          ],
+        },
+        {
+          path: referencesName,
+          files: [
+            `${pluginSkills}/alpha/references/guide.md`,
+            `${pluginSkills}/alpha/references/nested/details.txt`,
+          ],
+        },
+      ]),
+    );
+    const metadata = check?.request.input.definitions.rule_sets.find(
+      (set) => set.path === metadataName,
+    );
+    expect(metadata).toBeDefined();
+    expect(
+      sortedRuleSetMemberships(
+        evaluation?.request.input.definitions.rule_sets.map((set) => ({
+          path: set.path,
+          files: set.binding_groups.map((group) => group.bindings.skill.path),
+        })),
+      ),
+    ).toEqual(
+      sortedRuleSetMemberships(
+        metadata
+          ? [
+              {
+                path: metadata.path,
+                files: metadata.binding_groups.map((group) => group.bindings.skill.path),
+              },
+            ]
+          : [],
+      ),
+    );
     expect(evaluation?.request.input.backend?.endpoint).toBe("http://127.0.0.1:9/v1/systemone");
     expect(
       recordings.every(
@@ -422,44 +484,54 @@ describe("repository skill rule runner", () => {
       // Assert: all three assemble; the extra file never becomes an evaluation target.
       expect(result.status, result.stderr).toBe(0);
       expect(
-        recordings[0]?.request.input.definitions.rule_sets.map((set) => ({
-          path: set.path,
-          files: set.binding_groups.map((group) => group.bindings.skill.path),
-        })),
-      ).toEqual([
-        { path: metadataName, files: [selectedFile] },
-        { path: textName, files: [selectedFile] },
-        { path: referencesName, files: [definitionFile] },
-      ]);
-      expect(recordings[0]?.request.input.repositories).toEqual([
-        {
-          key: "ai-tools",
-          root: ".",
-          input_paths: [
-            { kind: "exact", path: selectedFile },
-            { kind: "exact", path: definitionFile },
-          ],
-          change_scope: { kind: "full" },
-        },
-      ]);
+        sortedRuleSetMemberships(
+          recordings[0]?.request.input.definitions.rule_sets.map((set) => ({
+            path: set.path,
+            files: set.binding_groups.map((group) => group.bindings.skill.path),
+          })),
+        ),
+      ).toEqual(
+        sortedRuleSetMemberships([
+          { path: metadataName, files: [selectedFile] },
+          { path: textName, files: [selectedFile] },
+          { path: referencesName, files: [definitionFile] },
+        ]),
+      );
+      expect(sortedRepositoryBindings(recordings[0]?.request.input.repositories)).toEqual(
+        sortedRepositoryBindings([
+          {
+            key: "ai-tools",
+            root: ".",
+            input_paths: [
+              { kind: "exact", path: selectedFile },
+              { kind: "exact", path: definitionFile },
+            ],
+            change_scope: { kind: "full" },
+          },
+        ]),
+      );
       expect(recordings.map((recording) => recording.request.operation)).toEqual(
         mode === "check" ? ["check_rules"] : ["check_rules", "evaluate_rules"],
       );
       if (mode === "normal") {
         expect(
-          recordings[1]?.request.input.definitions.rule_sets.map((set) => ({
-            path: set.path,
-            files: set.binding_groups.map((group) => group.bindings.skill.path),
-          })),
-        ).toEqual([{ path: metadataName, files: [selectedFile] }]);
-        expect(recordings[1]?.request.input.repositories).toEqual([
-          {
-            key: "ai-tools",
-            root: ".",
-            input_paths: [{ kind: "exact", path: selectedFile }],
-            change_scope: { kind: "full" },
-          },
-        ]);
+          sortedRuleSetMemberships(
+            recordings[1]?.request.input.definitions.rule_sets.map((set) => ({
+              path: set.path,
+              files: set.binding_groups.map((group) => group.bindings.skill.path),
+            })),
+          ),
+        ).toEqual(sortedRuleSetMemberships([{ path: metadataName, files: [selectedFile] }]));
+        expect(sortedRepositoryBindings(recordings[1]?.request.input.repositories)).toEqual(
+          sortedRepositoryBindings([
+            {
+              key: "ai-tools",
+              root: ".",
+              input_paths: [{ kind: "exact", path: selectedFile }],
+              change_scope: { kind: "full" },
+            },
+          ]),
+        );
       }
       expect(result.stdout).toContain("Checked 8 rules.");
       expect(result.stdout).toContain(

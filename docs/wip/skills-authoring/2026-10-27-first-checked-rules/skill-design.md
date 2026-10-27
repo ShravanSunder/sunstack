@@ -70,6 +70,11 @@ No description or invocation capability changes (review R1, G1). The four target
 
 Runs 1, 2 and 3 touch separate files and run side by side; runs 4 and 5 follow run 2 (they load its reference) and run side by side; run 6 follows. Every run checks its diff against F12 and reports the search it ran.
 
+**Unit review corrections (27 October).** The unit review at `9ed9730c` returned targeted-revision with two findings (`tmp/project-1-reviews/review-fcr-unit.md`), both accepted after the Lead reopened their anchors:
+
+- **U1, runs 2 and 4:** a refused check's refusals were all attributed to the change once any definition file was touched. `running-rules.md` now attributes each refusal by the edit in the change's diff that produces it, and returns the others as gaps with their cause; `implementation-review.md`'s first pass makes only traced refusals candidates. Written by an Opus 5.5 xhigh Worker (`tmp/project-1-runs/fcr-unit-u1-handback.md`; engine refusals for a traced case and two inherited ones; Lead accepted deviations 1 to 6).
+- **U2, run 3:** the runner test fixed an enumeration order F7 never required; its comparisons now sort copies and keep exact membership (`tmp/project-1-runs/fcr-unit-u2-handback.md`; a misbinding still fails, reversed enumeration passes).
+
 One unit: the runs call each other (the sites load run 2's reference, which runs run 3's command on run 1's RuleSets), so they are reviewed together once all have landed, with every path resolving. That unit review is a fresh `skill-review` implementation review that loads the branch's `skill-review` **after run 4**, so its first pass runs the new rules on this change itself; its host record must show that copy loaded and a native report consumed. Review R1 used milestone 1's copy, whose first pass is still pending, so it proves only the design route (review R1, F5).
 
 ## Security
