@@ -1,6 +1,6 @@
 ---
 name: domain-rust
-description: "Use when writing, changing or reviewing Rust code, especially domain enums and newtypes, Serde boundaries, error types, time, Tokio tasks, blocking work and locks, module and function names, SQLx queries, migrations and pools, and which cargo commands to run."
+description: "Use when writing, changing or reviewing Rust code, especially domain enums and newtypes, Serde boundaries, error types, time, Tokio tasks, blocking work and locks, crate boundaries, dependency direction and injection, module cycles, module and function names, SQLx queries, migrations and pools, and which cargo commands to run."
 disable-model-invocation: true
 ---
 
@@ -101,6 +101,25 @@ Modules that carry a responsibility get two or three words (`native_channel_rela
 
 When naming a function, name the effect it has: `attach_and_observe` is not a read, and an `open` that migrates needs a name that says so ([a name is a promise about the effect](../principle-define-the-domain-first/SKILL.md)).
 
+## Crates and dependencies
+
+Dependencies point one way. Cargo rejects a cycle between crates through normal and build dependencies, and allows one between modules, so a boundary that must hold is a crate boundary. Keep the layers the repository already has. Before adding a crate, name the boundary that needs the compiler to hold it, and prefer a few large crates to many small ones, since each extra crate adds public surface, duplicated generic code and churn ([add complexity only when an outcome needs it now](../principle-justify-the-complexity/SKILL.md)).
+
+One allowed shape, for an application whose execution and rules have grown apart (illustrative, not required):
+
+```text
+contracts   ids, ports, shared data            depends on nothing above it
+runtime     stores, workers, adapters          depends on contracts
+service     the application's rules            depends on contracts, runtime
+host        startup: builds and injects        depends on all three
+```
+
+- When a lower crate needs something from a higher one, move the item down, split the type, or have the lower crate declare a small trait that the higher crate implements. Never add the upward dependency, and never move the caller up to dodge it.
+- Inside a crate, module cycles compile and grow quietly. When the repo has a module-cycle check, keep it passing by breaking the new cycle; refresh its baseline only to record a cycle that shrank or a rename.
+- When wiring a component, give its constructor the named handles it uses, built at the composition point for their lifetime ([wire each dependency where its lifetime starts, and hand each part only what it uses](../principle-separate-the-concerns/SKILL.md)). In Rust a service locator usually looks like a `Services` or `Context` struct passed down for callers to pick from, a global registry, or an `Arc<dyn Any>` map; replace it with the handles.
+- Keep a test helper that only its own crate uses in a `#[cfg(test)]` module or under `tests/`. When other crates' tests need it, export it behind a `test-support` feature that no default feature and no production dependency enables, and check that the shipping package's production dependency view (`cargo tree -p <package> -e normal,build,features` with its release target and features) does not show the feature. Cargo merges features across a build, so a dev-dependency alone does not keep it out, and the tree is a diagnostic, not proof of what the release build compiled.
+- When an item moves to another crate, update every caller in the same change; leave no `pub use` at the old path.
+
 ## Storage
 
 IF the change touches SQLx queries, migrations or pools, load `references/sqlx-sqlite.md` and return each rule that applies to the change under the selected backend and the repo's conventions, met or named as a gap, and the checked-query metadata command when the repo uses checked queries.
@@ -118,3 +137,4 @@ When a test proves async behavior, hold a step open with a blocking test double 
 - `sqlx::Error` or `std::io::Error` in a public signature, or `Ok` after a mutation whose reply didn't parse.
 - A `std::sync::Mutex` guard held across `.await`, a nested `block_on`, or an untracked `tokio::spawn` for work that must finish.
 - `sleep` in an async test.
+- A lower crate's `Cargo.toml` naming a higher crate, a services struct handed to constructors, a `pub use` left at a moved item's old path, a module-cycle baseline that grew, or a `test-support` feature in the shipping package's normal/build feature tree.
