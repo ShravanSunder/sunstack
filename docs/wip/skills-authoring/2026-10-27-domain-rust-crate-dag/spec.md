@@ -1,6 +1,6 @@
 # domain-rust: crates set the dependency direction
 
-Target: only `plugins/sunstack-dev/skills/domain-rust/` in sunstack (one run). Classification: update, behavior-changing (main path, steering, completion signs, and the trigger description), user-directed intent. Run status: implemented (revision 3 accepted by spec review; implementation review pending).
+Target: only `plugins/sunstack-dev/skills/domain-rust/` in sunstack (one run). Classification: update, behavior-changing (main path, steering, completion signs, and the trigger description), user-directed intent. Run status: reviewed (implementation review great at 20b5d5d2).
 
 ## Promise and success
 
@@ -111,7 +111,7 @@ Base: `skill/domain-rust-crate-dag` at origin/main e427d8c9 (sunstack-dev 2.99.0
 
 ## Run status
 
-implemented: SKILL.md section, Signs bullet and description as accepted; six version homes at 2.100.0; changelog entry and index line.
+reviewed: independent Sol xhigh implementation review, findings F7 (proof claim bound to host records and tool results) and F8 (changelog validation and refresh status) fixed, final verdict great at 20b5d5d2. Implemented: SKILL.md section, Signs bullet and description as accepted; six version homes at 2.100.0; changelog entry and index line.
 
 ## Review record
 
