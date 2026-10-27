@@ -18,6 +18,8 @@ Keep prose, headings and short callouts at Reading width, and give a table, diag
 
 Use a disclosure for depth under the current point that most readers skip. Its summary names what is inside, including any failure cases. Use tabs for peer views of one thing when the reader picks one, such as current and proposed, or the sequence view and the state view. Good: "Retry and cancellation (3 failure cases)" as a disclosure. Bad: tabs named "Details", "More" and "Other".
 
+Use layers when several optional views may be visible together, such as independently showing proposed ownership and failure paths on the same map. Tabs choose one peer view; a local disclosure opens detail under one point. Keep those reader choices distinct and retrieve their actual controls from the matching guide.
+
 ## Pages and Walkthroughs
 
 Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a design set, `engineering-documents.md` turns each reading path in `index.md` into a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates thresholds the chunks own.
@@ -39,11 +41,17 @@ Screen size is an example of the judgment, not a fixed list of device names. Use
 
 Retrieve `pictures.md` and, for a journey, `tours.md` from the matching Demistify guide before writing the declarations. They own actual grouping fields, supported variation categories, the flag's owner, one-step-per-item syntax, and the difference between ordinary browsing and guided missing/ambiguous variations. Keep a Gallery on its own page with normal document navigation; this pattern adds no component attribute or page-owned navigation.
 
+## Readable diagrams
+
+A node names an identity and its short responsibility; the surrounding document carries the full explanation. Good: **Review queue** followed by **Retain pending work** on a supported second line, with retry/retention rules in adjacent prose or a linked detail. Bad: placing that whole rule paragraph in one long node label, or deleting its constraints merely to shorten the drawing. Retrieve the matching guide's supported line-break syntax before writing source.
+
+Use the direction that exposes the relationship. A short horizontal **Reader → Queue → Worker** can be clear; long responsibilities across several columns may read better top-down or as an overview with a linked detail view. Preserve every required identity, edge, branch and unknown when splitting. Fullscreen is useful depth, not a repair for an unreadable first view.
+
 ## Combined identity and timing row
 
 Keep status, count and timing distinct: status is authored meaning, a fraction reports completed work, and timing values describe total duration or phase share. Exact supplied values stay visible. A complete count reports completion; the authored status communicates outcome.
 
-When the user asks for identity, status, checks and phase comparison together, or both progress and phase comparisons are useful for the same records, choose one native table for the complete combination: supplied identity/avatar, a short status badge, exact checks centered in a ring with its subject beside it, total duration and compact named phase bars. Recommend C for rows with meaningful, comparable phase measurements. Keep each named phase on the same identity across rows and views; put the common phase names, order and scale beside the table once. The [matching Demistify guide](demistify.md) owns the component API, shared classes and full worked recipe; retrieve it before writing markup. Preserve the same records and useful identity fields when carrying a selected experiment into shared components. A reduced dataset tests another example, not visual agreement with the selected one.
+When the user asks for identity, status, checks and phase comparison together, or both progress and phase comparisons are useful for the same records, choose one native table for the complete combination: supplied identity/avatar, a short status badge, exact checks centered in a ring with its subject beside it, total duration and compact named phase bars. Keep each named phase on the same identity across rows and views; put the common phase names, order and scale beside the table once. The [matching Demistify guide](demistify.md) owns the component API, shared classes and full worked recipe; retrieve it before writing markup. Preserve the same records and useful identity fields when carrying a selected experiment into shared components. A reduced dataset tests another example, not visual agreement with the selected one.
 
 | Identity and run | Status | Checks | Duration | Phase comparison |
 | --- | --- | --- | --- | --- |
