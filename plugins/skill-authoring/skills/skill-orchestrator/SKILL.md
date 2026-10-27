@@ -18,7 +18,7 @@ A skill change is a small delivery with three gates: an accepted design set befo
 
 A run starts from a `skill-audit` recommendation the user approved, or from a change the user names.
 
-- `create` or `update` of one named skill: MUST load `../domain-skill-crafting/references/change-classes.md` and return the change's class with its claim. A `behavior-changing` or `scoped` change walks the workflow below.
+- `create` or `update` of one named skill: MUST load `../domain-skill-crafting/SKILL.md` and return its model and the topics whose conditions hold for this run. Then MUST load `../domain-skill-crafting/references/change-classes.md` and return the change's class with its claim. A `behavior-changing` or `scoped` change walks the workflow below.
 - `evaluate` an existing skill or a draft: use `skill-review` (implementation stage for files on disk, design stage for a draft in the conversation) and end at its verdict and the run summary. An evaluation gains no implementation or shipping authority, and an invitation like "just quickly fix it" that names no success definition or authoring basis is not a commission.
 - A question about which skills should exist, merge, or go: use `skill-audit`.
 - A `mechanical` change (typo, formatting, version, metadata) goes straight to `skill-creation` with its classification claim, for static validation only: no design set and no reviews. Its run then continues at step 6, which records that boundary.

@@ -13,7 +13,7 @@ Where to look, when the artifact is **changed files**:
 
 MUST load `../../../domain-skill-crafting/references/generalization.md` and return its standards and its transfer test, then each rule in scope with its two cases and its verdict.
 
-How to inspect: Build your own two cases for each rule before reading any the author recorded; a recorded case is evidence to compare against, never the case you run. Run the loaded test on each rule and fill:
+How to inspect: Run the loaded test on each rule, deriving your own two cases independently from the rule's judgment and any scope the owner adopted, then compare them with the pair the author recorded; the recorded pair is evidence to compare against and never substitutes for your judgment. Fill:
 
 ```text
 rule:        path:line, quoted
