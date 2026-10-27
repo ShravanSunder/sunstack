@@ -226,7 +226,7 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. A con
 | 9 | U2b | `skill-creation`: narrowed to writing; admission by class; self-check site | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-9-handback.md`; body 1,566 to 1,102 words; the four walks hold) |
 | 10 | U2b | `skill-review`: design stage, transfer check, routes, first rule pass | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-10-handback.md`; 59 of 59 paths resolve; transfer fails #166's rule and passes the owner's) |
 | 11 | U2b | `skill-orchestrator`: the lifecycle; proof through `skill-design`; rule check | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-11-handback.md`; 7 of 7 loads open; the three walks hold) |
-| 12 | U2b | `skill-rules`: the teaching-change route | update | Opus 5.5 xhigh | proposed |
+| 12 | U2b | `skill-rules`: the teaching-change route | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-12-handback.md`; 8 route sites; 29 of 29 anchors hold) |
 | documents B | U2b | the repository documents and manifests that describe the design and write boundary | shipping surfaces | Sol | implemented (`tmp/project-1-runs/documents-b-handback.md`; 7 files; `24a4716d`) |
 | 13 | U2c | `skill-audit`: composes review; its rule run | update | Opus 5.5 xhigh | proposed |
 | cutover | U2c | the test, version and changelog | shipping surfaces | Sol | proposed |

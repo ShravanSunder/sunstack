@@ -21,8 +21,8 @@ Mark a section only when the whole section is one standard and its visible words
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
 - `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` is over the cap and holds 43 standards. Mark the list item at `:26` for call completeness; the dispatch items (`:29` to `:31`) and the citation items (`:39` to `:47`) are separate candidates.
-- An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it to `skill-creation` for a rewrite that carries its subject, or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows that rewrite: "A description starts with `Use when`, unless the platform requires another shape."
-- A paragraph that carries five standards, like `skill-creation/SKILL.md:68`, is no narrow host for any of them. Split it in the teaching first.
+- An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it for a rewrite that carries its subject, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`; or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows that rewrite: "A description starts with `Use when`, unless the platform requires another shape."
+- A paragraph that carries five standards, like `skill-design/SKILL.md:77`, is no narrow host for any of them. Split it in the teaching first.
 
 The engine forbids some hosts outright: a level 1 heading, a block quote, a table, HTML, a link reference definition and frontmatter. A marker inside fenced or indented code or an inline code span isn't a marker at all; it's ignored, and its entry turns up orphaned.
 
@@ -110,7 +110,7 @@ A refusal carries a `code`, a location (`file`, `line`, `column` and `field_path
 
 | code | cause | fix at the cause |
 | --- | --- | --- |
-| `forbidden_marker_host` | marker on a level 1 heading, or in a block quote, table, HTML, link reference definition or frontmatter | move it to the paragraph, list item or level 2 to 6 heading that states the standard; if the standard lives only in a table or quote, return it for `skill-creation` to restate in prose |
+| `forbidden_marker_host` | marker on a level 1 heading, or in a block quote, table, HTML, link reference definition or frontmatter | move it to the paragraph, list item or level 2 to 6 heading that states the standard; if the standard lives only in a table or quote, return it for a restatement in prose, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation` |
 | `spaced_heading_marker` | whitespace between the heading text and the marker | remove the whitespace |
 | `duplicate_marker` | one ID twice in one Markdown file | keep the ID on the host its entry was written for; give the other standard a new ID and entry, or remove the stray copy; leave every other distinct ID alone |
 | `question_too_large` | the host's visible words exceed `max_question_words` | mark a narrower host, such as a subsection, paragraph or list item, that carries the one standard |

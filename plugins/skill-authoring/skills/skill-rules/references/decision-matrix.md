@@ -10,7 +10,7 @@ Ask these questions in order and stop at the first one that settles the outcome.
 2. **Is the requirement about what an agent does while working, rather than a property of a text?** Choices under pressure, steps skipped, what it reads before acting. → eval: only a fresh agent run under that pressure observes it.
 3. **Can the engine select the text the claim judges?** The engine judges one unit at a time: a frontmatter field, a section, a paragraph, a list item, or a call site inside one. A claim that needs two files compared, a record of who did what, the author's intent, or evidence from outside the skill is review-only. So is a claim whose unit the engine can't give to the check it needs, such as a judgment about a frontmatter field.
 4. **Is the property visible in that unit's text or structure?** Write the check you'd use, then hunt for counterexamples in both directions: a text that keeps the standard and fails the check, and a text that breaks the standard and passes it. Neither exists → deterministic. Either exists → the check is a proxy; go on to question 5 with the standard itself.
-5. **Does deciding need reading comprehension, and does the marked wording alone make a good question?** Yes → model-judged. If the wording only reads as a question with its lead-in, a neighbouring sentence or a rewrite, it isn't ready: return it for `skill-creation` to rewrite, and don't mark it.
+5. **Does deciding need reading comprehension, and does the marked wording alone make a good question?** Yes → model-judged. If the wording only reads as a question with its lead-in, a neighbouring sentence or a rewrite, it isn't ready: don't mark it, and return the rewrite as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
 The tempting shortcut sits at questions 2 and 3: a model can be asked anything, so almost any standard *could* become a judgment question. The test is whether the marked words and one selected unit hold what the judgment needs. When they don't, a judgment rule asks the model to guess, on every run, for every selected unit.
 
@@ -43,16 +43,16 @@ Paths are in the `skill-authoring` plugin unless they name the engine's examples
 - **Why.** Judging whether a call site says when, where, what and what to bring back needs comprehension. The section is the wrong host twice over: it rendered to 873 visible words when measured, over the 400-word default, and it holds the topic's 43 standards, among them dispatch (`:29` to `:31`) and citations (`:39` to `:47`). Each is its own candidate with its own outcome and host.
 - **Near miss.** Raising `max_question_words` until the section binds makes one question out of 43 standards. The judge returns one verdict, and a failure doesn't say which standard broke.
 
-### "Whoever writes a change never reviews it.": review-only
+### "Review always runs in agents that did not write the change.": review-only
 
-- **Standard.** `skill-creation/SKILL.md:16`.
+- **Standard.** `skill-orchestrator/SKILL.md:14`.
 - **Outcome.** Review-only.
 - **Why.** Authorship and review are facts about agents and sessions. No text the engine selects records them; `skill-review` checks them when it admits its reviewers.
 - **Near miss.** "This skill routes review to agents that did not write the change" is a claim about a skill's text, so it could be model-judged on the paragraph that routes review. It's a different standard. Mark it only where a skill states *that* standard; never relabel the authorship rule as a text check.
 
 ### The review-skip rule: eval
 
-- **Standard.** `skill-creation/SKILL.md:68`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
+- **Standard.** `skill-design/SKILL.md:77`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
 - **Outcome.** Eval.
 - **Why.** The claim is about what an agent does when it is pressed. The skill text already says the right thing; whether the agent does it shows only in a fresh run under that pressure.
 - **Near miss.** "A bright-line rule names, beside it, the rationalization it blocks, in the agent's own words." (`domain-skill-crafting/references/steering.md:18`) is about a skill's text: a judge can read one rule paragraph and say whether its rationalization is named. Model-judged.
@@ -71,7 +71,7 @@ Good:
 - every reason names the property: "a literal prefix of one field", "telling whether a result is named needs comprehension", "authorship isn't in any text";
 - every deterministic outcome says which counterexamples were tried and that none held;
 - every proxy names the standard it approximates;
-- an unready wording is sent back to `skill-creation` with what it would need to say.
+- an unready wording is sent back with what it would need to say, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
 Bad:
 
@@ -86,6 +86,6 @@ Bad:
 | "A model could judge that." | Any sentence can be put to a model. Ask whether the marked words and one selected unit hold what the judgment needs. |
 | "The regex catches most cases." | Name the case it misses. If there is one, it's a proxy, and the semantic standard stays model-judged. |
 | "Marking it costs nothing." | Every judgment rule is a model call per selected unit on every run, and an unanswerable question returns noise that looks like a verdict. |
-| "I'll tighten the wording when I mark it." | The marker carries no wording; the host's words are the question. Changing them is a teaching change for `skill-creation`. |
+| "I'll tighten the wording when I mark it." | The marker carries no wording; the host's words are the question. Changing them is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`. |
 
 Complete when: every candidate has one outcome and a property-based reason, every deterministic outcome names the counterexample search that left it standing, every proxy names its standard, and no unmarked outcome is headed for a marker.

@@ -5,7 +5,7 @@ description: "Use when deciding which standards in a skill should become checked
 
 # Skill Rules
 
-A checked rule is one of the skill's own sentences asked as a question. The marker binds the wording where the skill states the standard; the rules entry's target selects the text that standard judges, usually in other files. The engine asks the marked text's visible words, and there is no second copy of the wording to tune. So mark only text whose own wording is the standard. When a sentence would need rewording to be checkable, it isn't ready for a marker: the rewrite is a teaching change for `skill-creation`, made before any marker goes on.
+A checked rule is one of the skill's own sentences asked as a question. The marker binds the wording where the skill states the standard; the rules entry's target selects the text that standard judges, usually in other files. The engine asks the marked text's visible words, and there is no second copy of the wording to tune. So mark only text whose own wording is the standard. When a sentence would need rewording to be checkable, it isn't ready for a marker: the rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
 
 Most of a skill should never become a rule. Each standard lands in exactly one of five outcomes:
 
@@ -31,7 +31,7 @@ Read the skill's `SKILL.md` and every reference whose standards are in scope. Li
 
 ### 2. Classify each standard
 
-MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule ID. A candidate that reads as a question only after a rewrite goes back to `skill-creation` unmarked.
+MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule ID. A candidate that reads as a question only after a rewrite goes back unmarked, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
 ### 3. Mark the standards
 
