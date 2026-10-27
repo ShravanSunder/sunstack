@@ -37,14 +37,22 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
    Completion: every signal carries its source and date, and each inferred or single-sighting signal is labeled a hypothesis.
 
-3. Inspect upstream inspirations selectively:
+3. Review the flagged skills.
+
+   A skill in scope is flagged when a step 2 signal records its failure. Return `rules: pending` with the flagged skills: this step does not yet run the rules on the skills in scope, so it flags skills by session evidence only. A pending rule run is never reported as passed, and a rule is reported as run only when the engine's own report shows that it ran.
+
+   IF any skill is flagged, use `skill-review`'s implementation stage as an evaluation of each flagged skill's existing files, and return each one's verdict and accepted findings; both feed that skill's action at step 5. IF the review can't run for a flagged skill (for example, the host can't start a second reviewer agent), return the reason beside that skill instead; its action at step 5 carries that reason as an unreviewed signal. IF no skill is flagged, return `flagged skills: none` and go on to step 4.
+
+   Completion: `rules: pending` stands with the flagged skills, and each flagged skill has its review verdict and accepted findings or the reason its review couldn't run; or the audit returned `flagged skills: none`.
+
+4. Inspect upstream inspirations selectively:
    - open only the skills that map to the candidate workflow
    - extract mechanics, trigger wording, failure shields, and output shapes
    - avoid bulk-loading unrelated repositories
 
    Completion: each upstream skill opened maps to a named candidate workflow, or none was needed.
 
-4. Classify candidates:
+5. Classify candidates:
    - `update`: existing skill is the right bucket but stale or incomplete
    - `create`: missing distinct workflow with repeated evidence
    - `merge`: overlapping skills should become one clearer workflow
@@ -56,7 +64,7 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
    Completion: every candidate carries exactly one action, with the evidence that selects it.
 
-5. Shape every update/create recommendation:
+6. Shape every update/create recommendation:
    - trigger and ownership fit
    - `SKILL.md`: what stays in the compact core instructions
    - `references/`: what deeper detail, examples, rubrics, or templates move out of the core instructions
@@ -67,9 +75,10 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
    Completion: every update/create recommendation fills all five slots, or the audit says no update/create recommendation is being made yet.
 
-6. Produce the audit:
+7. Produce the audit:
    - candidate name and action: update, create, merge, or skip
    - evidence: each signal with its source, date, and how often it recurred; label inferred or single-sighting signals as hypotheses
+   - review verdict, for a flagged skill: its `skill-review` verdict and the accepted findings its action used, or the reason its review couldn't run
    - fix owner: skill prose, a code check, or the tool
    - source inspirations
    - why it helps
@@ -77,7 +86,7 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
    - progressive shape and proof recommendation for update/create items
    - priority
 
-   Completion: every candidate has each field above, filled from the evidence of steps 1–5.
+   Completion: every candidate has each field above, filled from the evidence of steps 1–6.
 
 ## Source Inspiration Map
 
@@ -99,6 +108,7 @@ IF the audit or a request proposes one shared contract for runtime skills whose 
 Return:
 
 - existing skills checked
+- the flagged skills with `rules: pending`, each with its review verdict or the reason its review couldn't run, or `flagged skills: none`
 - each recommendation with its action, fix owner, dated signals, recurrence, and hypothesis or confirmed status
 - suggested updates
 - suggested new skills
@@ -113,6 +123,7 @@ Return:
 The audit is not done while any of these hold:
 
 - a recommendation lacks its action, fix owner, dated signals, recurrence, or hypothesis or confirmed status;
+- a recommendation for a flagged skill lacks its review verdict, or the reason the review couldn't run;
 - a new-skill recommendation rests on recurrence that is not clearly likely and costly;
 - an update/create recommendation lacks its `SKILL.md` boundary, `references/` depth, `scripts/` need, or pressure coverage;
 - upstream inspiration appears without the local behavior it improves;
