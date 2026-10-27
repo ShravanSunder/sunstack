@@ -3,7 +3,7 @@
 ## Standards
 
 - A description's job is to help the agent decide whether to load the skill.
-- A description starts with `Use when`, unless the platform requires another shape.
+- A description starts with `Use when`, unless the platform requires another shape.<!-- K001 -->
 - A description names the situation, symptom, user request, repository event or failure that should load the skill.
 - A description uses the searchable words the user, codebase, docs or logs actually use.
 - A description gives a short why only when it sharpens routing.
@@ -24,7 +24,7 @@
 - A model-invocable skill keeps a description the agent reads to load it on its own. It pays context load, because the description sits in the window every turn.
 - A user-invocable skill is named directly by a person. It pays cognitive load, because the person is the index that has to remember the skill exists.
 - A skill's `name` is at most 64 characters of lowercase letters, digits and hyphens, and matches its folder name exactly.
-- A skill's `description` is at most 1,024 characters.
+- A skill's `description` is at most 1,024 characters.<!-- K002 -->
 
 ## Decide the capability first
 

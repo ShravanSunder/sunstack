@@ -2,7 +2,7 @@
 
 ## Standards
 
-- A rule a skill teaches states a reusable judgment, with any product, library, API or incident only as an example, unless the rule names the scope the owner adopted it for.
+- A rule a skill teaches states a reusable judgment, with any product, library, API or incident only as an example, unless the rule names the scope the owner adopted it for.<!-- K001 -->
 - A skill encodes judgment and house style, never task history.
 - A rule passes the transfer test both ways: it holds on a materially different repository where it should apply, and it rejects a bad choice that uses something the rule never names.
 
@@ -21,7 +21,7 @@ The two cases below are worked examples, not rules; neither storage choice is a 
 
 ## Worked case: storage rules that fail
 
-A closed pull request in the repository this plugin ships from (sunstack #166) proposed persistence rules for two language standards skills: TypeScript persistence through SQLite with Drizzle and checked-in migrations, and Rust persistence through SQLite with SQLx. Both were written as rules for every repository.
+A closed pull request in this plugin's repository proposed persistence rules for two language standards skills: TypeScript persistence through SQLite with Drizzle and checked-in migrations, and Rust persistence through SQLite with SQLx. Both were written as rules for every repository.
 
 - Case one: a TypeScript service already built on Postgres, with its own migration tool. The rule tells the agent to bring in SQLite and Drizzle, so it rejects a valid repository. It fails.
 - Case two: an agent adds a second database to a repository that uses one. The rule rejects it, but only because the addition isn't SQLite; in a SQLite repository it would wave through a second SQLite store nobody asked for.
@@ -41,7 +41,7 @@ What an adopted scope looks like in a rule: "A principle or domain skill carries
 
 ## Task history
 
-Task history is what happened on one run, kept as if it were judgment. Bad, an illustration built on the worst case #166 itself named: "Every commission cites `packages/oauth-broker` as the persistence example." In a repository without that package, the commission points at nothing. Good, the form #166's own description used: "A commission that touches persistence names the repository's own example of the pattern, or says none." The incident stays in the change's evidence, where it explains why the rule exists.
+Task history is what happened on one run, kept as if it were judgment. Bad, an illustration built on the worst case named by the pull request in the storage case above: "Every commission cites `packages/oauth-broker` as the persistence example." In a repository without that package, the commission points at nothing. Good, the form that pull request's own description used: "A commission that touches persistence names the repository's own example of the pattern, or says none." The incident stays in the change's evidence, where it explains why the rule exists.
 
 ## When to stop
 

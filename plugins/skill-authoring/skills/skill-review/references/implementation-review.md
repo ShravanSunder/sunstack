@@ -2,11 +2,18 @@
 
 Review one of two targets. For implemented behavior-changing delivery, review after fitting proof and after whoever carries the change has assessed the diff and proof against the accepted design set, and before ship status advances. For an evaluation of existing files, perform the source-only review before any new implementation commission, mark behavior `unverified/deferred`, and authorize no shipping. Mechanical changes and an explicit implementation-review skip do not enter this reference merely to fabricate coverage.
 
-Return a verdict, changed-file coverage, accepted/rejected/unverified findings, smallest edits, targeted retest, and ship decision.
+Return a verdict, the rule pass's state, changed-file coverage, accepted/rejected/unverified findings, smallest edits, targeted retest, and ship decision.
 
 ## First Rule Pass
 
-Before any reviewer starts, return `rules: pending` with the per-check statuses: this stage does not yet run the rules on the reviewed files. A pending rule pass is never reported as passed, and a rule is reported as run only when the engine's own report shows that it ran.
+Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the folder of each skill under review, and return its report; that reference owns when a rule counts as run. Record the report's lines with the per-check statuses, then carry it into the review:
+
+- Each `failing` line becomes a candidate finding raised by the rule pass, with its location as the anchor and the rule's wording as the finding; the review lead verifies it at that anchor like any other candidate.
+- When the check refused and the report gives each refusal's cause and fix, because the change under review touched a rule's definition, each refusal is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal returned without a cause and fix stays only a coverage gap.
+- A model-judged rule stays `not evaluated`, even when a check finds its standard kept.
+- Each gap the report names, and a `rules: not run` result, stays with the per-check statuses as a coverage gap, with its reason.
+
+Whatever the report shows, the reviewers then start as below; `rules: not run` ends only the rule pass.
 
 ## Ordered Checks
 
@@ -70,4 +77,4 @@ After accepted edits, rerun the narrowest fitting pressure and static proof that
 
 At ship, reuse the semantically current review result when its changed-file coverage and proof remain current. Refresh affected coverage only when it is stale.
 
-Complete when: the verdict carries one of the allowed labels, `rules: pending` stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.
+Complete when: the verdict carries one of the allowed labels, the rule pass's reported state (`rules: ran` with each rule's state, or `rules: not run: <reason>`) stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.

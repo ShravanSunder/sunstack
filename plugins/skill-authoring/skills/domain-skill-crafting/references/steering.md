@@ -4,10 +4,10 @@
 
 - A leading word is a concept the model already holds from pretraining, and it is preferred over a coined term.
 - A leading word is strong enough to beat the model's default behavior; one that isn't changes nothing.
-- Each completion criterion lets the agent tell done from not done, and demands the legwork the step needs.
+- Each completion criterion lets the agent tell done from not done, and demands the legwork the step needs.<!-- K001 -->
 - Every sentence changes what the agent would do; a sentence whose deletion would change nothing is padding, however true.
 - The deletion test is applied sentence by sentence, in context, never to whole sections at once.
-- Guidance says what to do and what good looks like, not only what to avoid.
+- Guidance says what to do and what good looks like, not only what to avoid.<!-- K002 -->
 - A prohibition appears only where a known failure needs a bright line.
 - A wording change names the failure or success gap it addresses, without overstating its evidence.
 - A skill is created or changed only where its wording teaches behavior a capable model would otherwise shortcut.

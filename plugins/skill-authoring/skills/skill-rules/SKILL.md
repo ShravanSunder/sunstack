@@ -21,6 +21,8 @@ Prefer deterministic when the check fully captures the standard. **A proxy isn't
 
 The engine's docs own every exact schema: the `sunstack exec` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
 
+IF a step runs this plugin's rules on a skill's files instead of writing or proving rules, as a review's first rule pass or a writer's self-check does, load `references/running-rules.md` and return each rule's state, with every failing occurrence's rule ID and location. That run ends with its return; the workflow below is for writing and proving rules.
+
 ## Workflow
 
 A run that starts from a refusal or a broken rule still walks steps 1 and 2 for the standards it touches, because whether a standard should carry a marker at all decides the fix.

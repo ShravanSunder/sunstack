@@ -15,7 +15,7 @@ Placement:
 - Each defined term is concrete and matches how `SKILL.md` and the references use it.
 - Each meaning has exactly one home.
 - Every reference exists because a named call site asks for it.
-- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.
+- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.<!-- R001 -->
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
@@ -23,7 +23,7 @@ Placement:
 
 Calls:
 
-- Each load or dispatch call says when to go, where, what to do there, and what to bring back.
+- Each load or dispatch call says when to go, where, what to do there, and what to bring back.<!-- K001 -->
 - Every call site uses exactly one form: a load, a dispatch or a citation.
 - A reference call opens with exactly one literal load form, `MUST load` or `IF <observable condition>, load`.
 - A dispatch is only for a prescribed procedure: a command, a watch or a mechanical transform with an observed result; review checks, research and every other judgment are loaded and performed by the current agent.
