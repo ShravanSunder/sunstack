@@ -67,7 +67,7 @@ state:            candidate | verified-at-anchor | accepted | rejected
 
 Severity is graded by effect on behavior, not by how wrong the text reads. `route` names the owning check when the defect is outside the reporting check's boundary.
 
-Each check belongs to one property: `mental-model-fit`, `depth-coverage`, `steering-strength`, and `no-op-pruning` judge teaching; `trigger-routing` judges the trigger; `rule-agreement` judges rule agreement; `placement-and-calls` judges placement; `claim-vs-evidence` judges claim strength; `sensitive-surface` judges safety.
+Each check belongs to one property: `mental-model-fit`, `depth-coverage`, `steering-strength`, `no-op-pruning`, and `transfer` judge teaching; `trigger-routing` judges the trigger; `rule-agreement` judges rule agreement; `placement-and-calls` judges placement; `claim-vs-evidence` judges claim strength; `sensitive-surface` judges safety.
 
 A finding enters as `candidate`. Only the review lead moves it to `verified-at-anchor`, after opening the cited anchor in the current revision; an absence claim is verified only by opening the file where the item would be. Only a `verified-at-anchor` finding can be `accepted`. Agreement between reviewers is never verification.
 
@@ -78,7 +78,7 @@ Every field below is filled by the review lead. `changed-file coverage` is deriv
 ```text
 review:
 required: yes | no
-kind: spec | implementation
+kind: design | implementation
 artifact: proposal | changed files | existing files
 reviewers:
 - agent:

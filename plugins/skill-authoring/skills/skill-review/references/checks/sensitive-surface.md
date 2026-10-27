@@ -9,11 +9,11 @@ Where to look:
 - the inputs it accepts and where they originate;
 - actions it performs outside the repo;
 - license or permission state for anything copied;
-- the conditional security result in the run summary, or skill-creation's step 7 return, which `../../../skill-creation/references/security-gate.md` requires when that branch runs. Its presence is the observable proxy for decision timing.
+- the conditional security result in the run summary, or in the return the gate names (`skill-design`'s step 4 return for behavior-changing work, `skill-creation`'s return for a mechanical change that touches a sensitive surface), which `../../../skill-design/references/security-gate.md` requires when that branch runs. Its presence is the observable proxy for decision timing.
 
 MUST load `../../../domain-skill-crafting/references/security.md` and return each sensitive surface in scope, or none, with the standards its decision and proof must meet.
 
-MUST load `../../../skill-creation/references/security-gate.md` to re-walk its inspection procedure for each surface in scope and return the sensitive-surface decision, required proof, and public-safe constraints.
+MUST load `../../../skill-design/references/security-gate.md` to re-walk its inspection procedure for each surface in scope and return the sensitive-surface decision, required proof, and public-safe constraints.
 
 IF a surface in scope is an installed-cache refresh or a home-level write, load `../../../domain-skill-crafting/references/platform.md` and return its refresh standards.
 

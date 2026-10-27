@@ -224,10 +224,10 @@ Every consumer, with its anchor at `e427d8c9` and the run that changes it. A con
 | documents A | U2a | the repository documents that link to moved files | shipping surfaces | Sol | reviewed: unit U2a's review returned great, source-only (`tmp/project-1-reviews/review-u2a.md`); `tmp/project-1-runs/documents-a-handback.md`; 4 documents, 8 links resolve) |
 | 8 | U2b | `skill-design`: steps 1 to 6 and the three procedure files from creation, plus `design-page.md` | create | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-8-handback.md`; 17 of 17 loads resolve; the four walks hold) |
 | 9 | U2b | `skill-creation`: narrowed to writing; admission by class; self-check site | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-9-handback.md`; body 1,566 to 1,102 words; the four walks hold) |
-| 10 | U2b | `skill-review`: design stage, transfer check, routes, first rule pass | update | Opus 5.5 xhigh | proposed |
+| 10 | U2b | `skill-review`: design stage, transfer check, routes, first rule pass | update | Opus 5.5 xhigh | implemented (`tmp/project-1-runs/run-10-handback.md`; 59 of 59 paths resolve; transfer fails #166's rule and passes the owner's) |
 | 11 | U2b | `skill-orchestrator`: the lifecycle; proof through `skill-design`; rule check | update | Opus 5.5 xhigh | proposed |
 | 12 | U2b | `skill-rules`: the teaching-change route | update | Opus 5.5 xhigh | proposed |
-| documents B | U2b | the repository documents and manifests that describe the design and write boundary | shipping surfaces | Sol | proposed |
+| documents B | U2b | the repository documents and manifests that describe the design and write boundary | shipping surfaces | Sol | implemented (`tmp/project-1-runs/documents-b-handback.md`; 7 files; `24a4716d`) |
 | 13 | U2c | `skill-audit`: composes review; its rule run | update | Opus 5.5 xhigh | proposed |
 | cutover | U2c | the test, version and changelog | shipping surfaces | Sol | proposed |
 | devfiles | after U2c | the owner's global prompt, in the devfiles repository's own PR | outside this repository | a subagent | proposed |

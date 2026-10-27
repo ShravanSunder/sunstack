@@ -1,6 +1,6 @@
 ---
 name: skill-review
-description: "Use when reviewing a skill spec before its files change or a skill draft shown in the conversation, or changed or existing skill files before they ship, especially when the review must be independent of the author or a skill's quality is in question. Not for reviewing product code or deciding which skills should exist (skill-audit)."
+description: "Use when reviewing a skill change's design set before its files change, a skill draft shown in the conversation, or changed or existing skill files before they ship, especially when the review must be independent of the author or a skill's quality is in question. Not for reviewing product code or deciding which skills should exist (skill-audit)."
 ---
 
 # Skill Review
@@ -13,7 +13,7 @@ The checks and stages judge a skill against the standards in `domain-skill-craft
 
 | stage | when | artifact | reference |
 | --- | --- | --- | --- |
-| spec review | before any skill file is edited | the skill spec, or a skill draft shown in the conversation | `references/spec-review.md` |
+| design review | before any skill file is edited | the design set, or a skill draft shown in the conversation | `references/design-review.md` |
 | implementation review | after proof and assessment, before ship; or a source-only evaluation of an existing skill | changed or existing skill files | `references/implementation-review.md` |
 
 Mechanical changes are not reviewed.
@@ -22,11 +22,11 @@ Mechanical changes are not reviewed.
 
 ### 1. Admit the review
 
-Name the stage, the target (spec path and revision, or the files), and who asked for the review. You are the review lead: if you wrote or edited the target, stop and have the review run in an agent that did not. Read the target whole. Completion: stage, target identity, requester, and your independence from the author are stated.
+Name the stage, the target (the design set's path and revision, or the files), and who asked for the review. You are the review lead: if you wrote or edited the target, stop and have the review run in an agent that did not. Read the target whole. Completion: stage, target identity, requester, and your independence from the author are stated.
 
 ### 2. Run the stage
 
-IF the stage is spec review, load `references/spec-review.md` and return its per-check statuses, findings, verdict, and implementation decision. IF the stage is implementation review or an evaluation of existing files, load `references/implementation-review.md` and return its per-check statuses, findings, verdict, and ship decision.
+IF the stage is design review, load `references/design-review.md` and return its per-check statuses, findings, verdict, and implementation decision. IF the stage is implementation review or an evaluation of existing files, load `references/implementation-review.md` and return its per-check statuses, findings, verdict, and ship decision.
 
 Start each reviewer agent the stage names in its own session with no authoring history. Give it the target, the check references it walks by path, and `references/checks/review-schema.md`, and ask for candidate findings with anchors only. When the selected checks fit one family, split them across two agents.
 
