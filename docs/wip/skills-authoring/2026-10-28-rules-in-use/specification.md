@@ -40,7 +40,7 @@ Draft 2, by the 🦁 Lead, 2026-10-28. Part two of the design set: [requirements
 
 **Proof and text**
 
-- **G15** One ordinary skill change from a later pull request, made by a fresh Opus writer with this kit and reviewed by Sol, goes through design, writing with its self-check, review's first pass, the audit of the changed skill and the orchestrator's prove step, with Jev judging. One planted failure is caught there: a description over 300 characters.
+- **G15** One ordinary skill change from a later pull request, made on a scratch branch by a fresh Luna agent following this kit (the measured subject) and reviewed by Sol, goes through design, writing with its self-check, review's first pass, the audit of the changed skill and the orchestrator's prove step, with Jev judging. One planted failure is caught there: a description over 300 characters.
 - **G16** Shipped skill text stays general: no repository command, machine path, project unit, run, session or pull request number in any skill.
 
 ## Standards this change states

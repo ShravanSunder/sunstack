@@ -77,7 +77,19 @@ Each loads `running-rules.md` with a path that resolves from the file holding th
 
 ## Trigger and invocation
 
-Seven descriptions change, to meet G1 and G2 at 225 characters or less; each keeps its invocation capability. `domain-skill-crafting` stays hidden (frontmatter and `agents/openai.yaml`). Each writer drafts its skill's description against the root's standards, and Jev judges it in the writer's self-check. Each model-visible one gets G4's trial: one true prompt and one near miss, each in a fresh Luna session with no turn cap that cuts the routing decision short, isolated from this repository's design files.
+Seven descriptions change, to meet G1 and G2; each keeps its invocation capability. `domain-skill-crafting` stays hidden (its frontmatter and `agents/openai.yaml` `allow_implicit_invocation: false` are unchanged). Each writer uses the string below, and Jev judges it in the writer's self-check. Each model-visible one gets G4's trial: one true prompt and one near miss, each in a fresh Luna session with no turn cap that cuts the routing decision short, isolated from this repository's design files.
+
+| Skill | Now | Proposed description | Characters |
+| --- | --- | --- | --- |
+| `skill-creation` | 366 | Use when writing one named skill's files from its accepted design, or making a mechanical edit to a skill (typo, formatting, version, metadata). Not for designing or judging a skill. | 182 |
+| `skill-review` | 347 | Use when a skill's design set, draft or changed files need an independent review before they change or ship, or a skill's quality is in question. Not for product code. | 167 |
+| `skill-orchestrator` | 397 | Use when one skill change has to go all the way from need to shipped, or one run of an accepted multi-run skill design set has to be carried through. Not for a single step alone. | 178 |
+| `skill-audit` | 264 | Use when deciding which skills to create, update, merge or skip from real session evidence, or finding stale or duplicated skill behavior. Not for judging one skill. | 165 |
+| `skill-design` | 411 | Use when a skill change needs its design before any file is edited: a new skill, a behavior change, or an observed skill failure to fix. Not for writing, judging or shipping it. | 177 |
+| `skill-rules` | 384 | Use when deciding which of a skill's standards become checked rules, writing or fixing their markers and rules entries, or reading a rule check's refusals. Not for a skill's teaching. | 183 |
+| `domain-skill-crafting` (hidden) | 264 | Use when writing, designing, reviewing or auditing a skill's text against its standards: description, main path, calls, steering, proof claims, security and platform surfaces. | 175 |
+
+Each keeps the near miss its old description guarded against, in fewer words. G4's trial prompts, per skill: the true prompt is the moment in its first clause, and the near miss is its `Not for` neighbour (for `skill-creation`, "write the files for the accepted `presentation-html` design" against "design a new skill for release notes").
 
 ## Runs
 
@@ -87,12 +99,18 @@ Seven descriptions change, to meet G1 and G2 at 225 characters or less; each kee
 | 1 | `domain-skill-crafting`: standards 1 to 7, markers and decision-model entries, severities, its description | update | Opus 5.5 xhigh | proposed |
 | 2 | `skill-rules`: `running-rules.md`, `markers-and-rules.md`, `decision-matrix.md`, `check-and-reports.md`, its description | update | Opus 5.5 xhigh | proposed |
 | 3 | the runner: `.mts`, G10, tests, `tsconfig`, `package.json`, `AGENTS.md` | repository code | Sol, Implementer Sidekick | proposed |
-| 4 | the four sites and the descriptions of `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit`, `skill-design` | update | Opus 5.5 high | proposed |
+| 4a | `skill-creation`: its self-check site and its description | update | Opus 5.5 high | proposed |
+| 4b | `skill-review`: its first rule pass site and its description | update | Opus 5.5 high | proposed |
+| 4c | `skill-orchestrator`: its prove-step site, run summary and description | update | Opus 5.5 high | proposed |
+| 4d | `skill-audit`: its rule site, its return and its description | update | Opus 5.5 high | proposed |
+| 4e | `skill-design`: its description, and its verification step planning G4's trial for a changed description | update | Opus 5.5 high | proposed |
 | 5 | the eval (G14): labeled sets from the owner's samples, development and held-out, `score_eval` per judged rule | eval | Sol Researcher, the owner labeling the HTML samples, Jev judging | proposed |
-| 6 | consumer run (G15): #172's `presentation-html` design-page change on a scratch branch from this change's head, a 301-character description planted | proof | fresh Opus writer, Sol reviewer, Jev and Luna for every test | proposed |
+| 6 | consumer run (G15): #172's `presentation-html` design-page change on a scratch branch from this change's head, a 301-character description planted | proof | measured subject: a fresh Luna agent following the kit; judge: Jev; review step: Sol; collector: Sol | proposed |
 | 7 | changelog entry, plugin versions | documents | the Lead | proposed |
 
-Order: run 0 first; runs 1 and 3 side by side once the release exists; then run 2, which reads run 1's rules; then run 4; then runs 5 and 6; run 7 last. Every run checks its diff against G16 and reports its search, and names the model of every model run it launches. No run uses Opus for a test.
+Order: run 0 first; runs 1 and 3 side by side once the release exists; then run 2, which reads run 1's rules; then runs 4a to 4e, one batch with one writer if wanted, each its own `skill-creation` invocation with its own target, self-check, status and diff comparison; then runs 5 and 6; run 7 last. Every run checks its diff against G16 and reports its search, and names the model of every model run it launches. No run uses Opus for a test.
+
+**Run 6's roles, fixed before launch.** Run 6 is a test of the kit, so it runs on the test models. Its commission names each role with its exact model and is checked before launch: the measured subject, the agent that makes the scratch change by following the kit, is a fresh Luna session; every judgment is Jev; the kit's review step uses its Sol reviewer; the collector that reads the records is Sol. A subject on any other model fails the check, whatever its collector or nested tests run on. The real #172 change, made after this merges, is ordinary skill creation by an Opus writer, not this test.
 
 One unit, one review: after run 7, a fresh `skill-review` implementation review loads this branch's `skill-review`, so its first pass runs the new rules, with Jev, on this change itself.
 
@@ -109,7 +127,7 @@ One unit, one review: after run 7, a fresh `skill-review` implementation review 
 | E7 | Version stays 0.6.0, in #171 | One PR; #171 is unreleased |
 | E8 | The consumer run is #172's design-page phone-width change, made on a scratch branch | Real work already decided (I5); keeps #172 untouched until #171 merges |
 | E9 | "Passes" means A | Offered on 28 October, not objected to |
-| E10 | Trigger trials run on Luna; judgments on Jev; Opus writes skills only; Sol does everything else | The owner, 28 October |
+| E10 | Trigger trials and the consumer run's subject run on Luna; judgments on Jev; Opus writes skills only; Sol does everything else | The owner, 28 October: "luna and jev thats fuckign it for test runs of skills. use opus for fuckign creating skills only. and sol for evyerhting else" |
 | E11 | Eval labels come from the owner's samples, the owner labeling the HTML ones | The owner, 28 October |
 
 ## Coordination
@@ -121,4 +139,4 @@ One unit, one review: after run 7, a fresh `skill-review` implementation review 
 
 ## Review record
 
-Draft 1 was reviewed (`tmp/project-1-reviews/rules-in-use-design-review.md`, targeted-revision: RUI-1 eligibility not buildable on the published engine; RUI-2 calibration predicate; RUI-3 state home; RUI-4 the `AGENTS.md` opener). Draft 2 answers RUI-1 with A22, removes RUI-2 and RUI-3's subject (no calibration state; the engine's eval), and cuts over `AGENTS.md:167`. Draft 2's design review follows A22's acceptance.
+Draft 1 was reviewed (`tmp/project-1-reviews/rules-in-use-design-review.md`, targeted-revision: RUI-1 eligibility not buildable on the published engine; RUI-2 calibration predicate; RUI-3 state home; RUI-4 the `AGENTS.md` opener). Draft 2 answers RUI-1 with A22, removes RUI-2 and RUI-3's subject (no calibration state; the engine's eval), and cuts over `AGENTS.md:167`. Draft 2's review at `4a82b9b0` (`tmp/project-1-reviews/rules-in-use-draft2-review.md`, targeted-revision) closed RUI-1 to RUI-4 and found D2-1 to D2-4 plus the missing descriptions. This revision answers them: G11's proof reads `dropped` by phase (D2-1); run 4 is five one-target runs, 4a to 4e (D2-2); run 6 names each role's model, with a Luna subject (D2-3); G10's proof allows the configured backend and the scripted judge and rejects only a substituted endpoint (D2-4); the seven proposed descriptions are in "Trigger and invocation"; Run 0 reads A22's V34 to V40.
