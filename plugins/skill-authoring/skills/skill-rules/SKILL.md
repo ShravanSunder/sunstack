@@ -1,11 +1,11 @@
 ---
 name: skill-rules
-description: "Use when deciding which standards in a skill should become checked `sunstack-rule` rules, placing `<!-- K014 -->` markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-creation) or deciding which skills to change (skill-audit)."
+description: "Use when deciding which standards in a skill should become checked rules, placing rule markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-design, skill-creation) or deciding which skills to change (skill-audit)."
 ---
 
 # Skill Rules
 
-A checked rule is one of the skill's own sentences asked as a question. The marker binds the wording where the skill states the standard; the rules entry's target selects the text that standard judges, usually in other files. The engine asks the marked text's visible words, and there is no second copy of the wording to tune. So mark only text whose own wording is the standard. When a sentence would need rewording to be checkable, it isn't ready for a marker: the rewrite is a teaching change for `skill-creation`, made before any marker goes on.
+A checked rule is one of the skill's own sentences asked as a question. The marker binds the wording where the skill states the standard; the rules entry's target selects the text that standard judges, usually in other files. The engine asks the marked text's visible words, and there is no second copy of the wording to tune. So mark only text whose own wording is the standard. When a sentence would need rewording to be checkable, it isn't ready for a marker: the rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
 
 Most of a skill should never become a rule. Each standard lands in exactly one of five outcomes:
 
@@ -19,7 +19,9 @@ Most of a skill should never become a rule. Each standard lands in exactly one o
 
 Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. The proxy may be marked too, but only on its own wording that says exactly what it checks, and the decision table records it as a proxy for the standard it approximates.
 
-The engine's docs own every exact schema: the `sunstack-rule` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
+The engine's docs own every exact schema: the `sunstack exec` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
+
+IF a step runs this plugin's rules on a skill's files instead of writing or proving rules, as a review's first rule pass or a writer's self-check does, load `references/running-rules.md` and return each rule's state, with every failing occurrence's rule ID and location. That run ends with its return; the workflow below is for writing and proving rules.
 
 ## Workflow
 
@@ -31,7 +33,7 @@ Read the skill's `SKILL.md` and every reference whose standards are in scope. Li
 
 ### 2. Classify each standard
 
-MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule ID. A candidate that reads as a question only after a rewrite goes back to `skill-creation` unmarked.
+MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule ID. A candidate that reads as a question only after a rewrite goes back unmarked, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
 ### 3. Mark the standards
 
@@ -51,7 +53,7 @@ Open the invocation the repository runs and the RuleSet it names. Add the Markdo
 
 MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
 
-Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
+Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Rules run locally, by the skills that use them, not in CI.
 
 ### 7. Return
 

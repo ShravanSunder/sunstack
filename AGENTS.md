@@ -56,26 +56,28 @@ Home: `~/dev/memory-logs/skills/` (clone of https://github.com/ShravanSunder/mem
 | Evidence for a named skill-change | `authoring/<yyyy-mm-dd-name>/` |
 | What to do next | `backlog/` |
 
-In this repo, only the skill spec for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies and `skill-creation` writes the spec.
+In this repo, only the design set for a skill change belongs under `docs/wip/skills-authoring/<yyyy-mm-dd-name>/`. When a signal is ready to change a named skill, `skill-audit` classifies, `skill-design` writes the design set, and `skill-creation` writes the skill's files from its accepted design.
 
 Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-authoring/`):
 
 | Need | Skill |
 | --- | --- |
-| Carry one skill change from spec to release | `skill-authoring:skill-orchestrator` |
-| Design or write one named skill and its skill spec; the craft (trigger, main path, depth, steering, platform mechanics, security gate) | `skill-authoring:skill-creation` |
+| Carry one skill change from design to release | `skill-authoring:skill-orchestrator` |
+| Design one skill change and write its design set before its files change | `skill-authoring:skill-design` |
+| Write one skill's files from its accepted design, or make a mechanical edit | `skill-authoring:skill-creation` |
 | Decide which of a skill's standards become checked `sunstack-rule` rules, mark them, and prove them | `skill-authoring:skill-rules` |
-| Independent review of a skill spec or skill files, with several reviewer agents | `skill-authoring:skill-review` |
+| Independent review of a skill change's design set or skill files, with several reviewer agents | `skill-authoring:skill-review` |
 | Which skills to create, update, merge, or skip | `skill-authoring:skill-audit` |
 
 When doing skill work in this repo:
 
 1. Start from a concrete need, repeated failure mode, or user-approved workflow change.
 2. If the target is not named, use `skill-audit` for broad portfolio classification or ask for a named target.
-3. Use `skill-orchestrator` to carry a named create or update through spec, review, implementation, proof, and release; `skill-creation` alone for design and writing.
+3. Use `skill-orchestrator` to carry a named create or update through design, review, writing, proof, and release; `skill-design` for design only and `skill-creation` for writing files from the accepted design or a mechanical edit.
 4. Keep `SKILL.md` compact and progressive. Put depth in `references/` and deterministic mechanics in `scripts/`.
-5. `skill-creation`'s `references/proof-and-claims.md` owns what a behavior-proof claim may say and how a fresh run must be read to count.
+5. `domain-skill-crafting`'s `references/proof-claims.md` owns what a behavior-proof claim may say; `skill-design`'s `references/proof-runs.md` owns how a run is carried out.
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
+   - **The rule runner.** The repository's rule runner, which `skill-rules`' `references/running-rules.md` sends a skill step to, is `pnpm --dir tests/skills rules [skill folders]`, run from the repository root (every skill in `plugins/skill-authoring/skills/` when no folder is named). It checks all of the plugin's RuleSets with their printed rules, evaluates the metadata RuleSet locally, keeps the engine's responses in a new folder it prints (`--out <empty dir>` to choose one), and exits with the engine's status. `--check` assembles and prints only; `--engine <path>` names an engine binary.
 7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
 For execution ownership, load `practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
@@ -83,7 +85,7 @@ For execution ownership, load `practices-manage-agents` and follow it decisively
 Other sources:
 
 - `superpowers:writing-skills` is source inspiration for pressure proof and rationalization traps; Matt-style great-skill vocabulary is source inspiration for invocation, hierarchy, steering, and pruning. Normal repo skill authoring routes through `skill-authoring`.
-- `skill-creator` (bundled with Codex) owns Codex skill anatomy and generated metadata as platform support loaded through `skill-creation/references/platform-mechanics.md`.
+- `skill-creator` (bundled with Codex) owns Codex skill anatomy and generated metadata as platform support loaded through `domain-skill-crafting/references/platform.md`.
 - `docs-maintain` owns cleanup, archival, promotion, and durable docs reconciliation after artifacts exist.
 
 ## Admired-source provenance (ai-dev-skills)
@@ -160,7 +162,7 @@ Use the changelog system as the durable release memory:
 Skills encode judgment, house style, and repeatable failure prevention. Prefer improving an existing skill over adding a near-duplicate.
 
 - Treat this section as repo-local guardrails. Use `Skill Work SOP` above and the `skill-authoring` skills before relying on these bullets.
-- When creating, editing, evaluating, or pressure-testing one named skill, use the `skill-authoring` skills. `skill-creation`'s references adapt Matt-style great-skill vocabulary, pressure-proof lessons from `superpowers:writing-skills`, and platform mechanics from `skill-creator`. For broad portfolio questions, use `skill-audit` instead.
+- When creating, editing, evaluating, or pressure-testing one named skill, use the `skill-authoring` skills. `domain-skill-crafting`'s references adapt Matt-style great-skill vocabulary, pressure-proof lessons from `superpowers:writing-skills`, and platform mechanics from `skill-creator`. For broad portfolio questions, use `skill-audit` instead.
 - Name skills namespace-first in hyphen-case: lead with the domain family, then the searchable action or role (`implementation-review`, `spec-design`, `plan-handoff`). The namespace table in `plugins/sunstack-dev/README.md` owns the family list.
 - Write the frontmatter `description` as a trigger: start with `Use when...`, name concrete situations and symptoms, and do not summarize the workflow.
 - Keep `SKILL.md` concise and progressive. Move heavy examples, rubrics, templates, and long prompt packets into `references/`; use `scripts/` for deterministic mechanics.

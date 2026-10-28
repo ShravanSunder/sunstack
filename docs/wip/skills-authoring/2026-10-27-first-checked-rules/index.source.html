@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First checked rules</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+
+<ex-presentation id="read-first-rules" title="Read the first checked rules design" description="What's needed, what must hold, which files carry it, and how each is shown.">
+  <ex-step to="short-answer" icon="book-open"><script type="text/markdown">
+**What this change does**
+
+The root's first eight rules go live, a one-command runner calls the real engine, and two skills start using it: `skill-review` before its reviewers start, and `skill-creation` after it writes. Nothing blocks yet.
+</script></ex-step>
+  <ex-step to="requirements--first-checked-rules-requirements" icon="path"><script type="text/markdown">
+**Requirements**
+
+Your 27 October direction in your words, what success looks like, and what this change leaves for later.
+</script></ex-step>
+  <ex-step to="specification--first-checked-rules-specification" icon="path"><script type="text/markdown">
+**Specification**
+
+Twelve things that must hold, from the eight markers and their three rule sets to skills that stay general.
+</script></ex-step>
+  <ex-step to="skill-design--first-checked-rules-skill-design" icon="path"><script type="text/markdown">
+**Skill design**
+
+The eight rules and where each sits, where the files go, the two run sites, the six runs, and the security decision for the runner.
+</script></ex-step>
+  <ex-step to="skill-verification--first-checked-rules-skill-verification" icon="path"><script type="text/markdown">
+**Skill verification**
+
+How each obligation is shown with a check a wrong build fails, the dogfood run, and what stays unverified.
+</script></ex-step>
+</ex-presentation>
+
+<ex-document id="content" document-id="first-checked-rules-design" revision="draft-5">
+<h1>First checked rules</h1>
+
+<ex-callout id="short-answer" title="The short answer" tone="tldr" icon="book-open">
+  <p>Eight of the root's sentences get a rule each: the six judged standards you chose, plus two description checks. They sit in three rule sets: the engine won't evaluate a set holding a judged rule without a model, and the rule about reference files needs a set that only sees reference files. The real engine assembles all eight, and runs the two description checks on every skill's <code>SKILL.md</code>. The six judged ones are assembled and printed but not judged by a model yet; that waits for their evals. One command runs them (<code>pnpm --dir tests/skills rules</code>), and two skills switch on their rule step: <code>skill-review</code> runs the rules before its reviewers start, and <code>skill-creation</code> runs them on what it just wrote. Every rule warns; nothing blocks. This is the first real change through milestone 1's new skills, so it also tests them.</p>
+</ex-callout>
+
+<p>Press <kbd>W</kbd> to walk through it, or read the four parts below.</p>
+
+<ex-markdown id="requirements" label="Requirements" src="requirements.md"></ex-markdown>
+<ex-markdown id="specification" label="Specification" src="specification.md"></ex-markdown>
+<ex-markdown id="skill-design" label="Skill design" src="skill-design.md"></ex-markdown>
+<ex-markdown id="skill-verification" label="Skill verification" src="skill-verification.md"></ex-markdown>
+
+<p>When you're done, open Comments, press <strong>Copy</strong>, and paste it to me.</p>
+</ex-document>
+<ex-comments for="content"></ex-comments>
+</body>
+</html>

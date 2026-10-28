@@ -4,7 +4,7 @@ This reference owns step 6: running the engine's check, print and local evaluati
 
 ## Run the engine
 
-`sunstack-rule` reads one JSON request on stdin and writes one JSON response on stdout:
+`sunstack exec` reads one JSON request on stdin and writes one JSON response on stdout:
 
 ```json
 { "protocol_version": 1, "operation": "check_rules", "input": { "...": "the operation's native input" } }
@@ -30,7 +30,7 @@ A clean check returns `result.outcome.kind: checked` with `checked_rule_count`, 
 Read the print in two passes.
 
 1. **Coverage.** `checked_rule_count` is the count you expect, and every intended rule ID appears as a `printed_rules[].definition.rule_id`, with `source.provenance.marker_id` and `source.provenance.markdown` naming your marker and file.
-2. **Wording.** Read each rule's wording as a stranger would, with nothing but its words: `definition.verdict.question.instructions` for a judgment rule, `definition.verdict.explanation` for a mechanical one. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 3 for a narrower host, or to `skill-creation` when no host reads well.
+2. **Wording.** Read each rule's wording as a stranger would, with nothing but its words: `definition.verdict.question.instructions` for a judgment rule, `definition.verdict.explanation` for a mechanical one. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 3 for a narrower host, or, when no host reads well, to the standard's home as a teaching change, designed with `skill-design` and written with `skill-creation`.
 
 What check and print prove: the definitions assemble and each question reads as its standard. They can't show that a rule selects or detects anything, because they never read a reviewed document.
 
@@ -87,8 +87,8 @@ The examples were fixed before the run and stand for the standard's meaning. Don
 
 For a model-judged rule, this proof is check plus print: the rule assembles, and its question reads as its standard. How well a hosted judge answers that question, with or without calibration `context`, is a separate hosted observation. Report it as unproven.
 
-## CI
+## Where rules run
 
-Recommend one `check_rules` run per RuleSet in CI, so a teaching edit that orphans a marker or overflows a host fails before it ships. Adding that job is the repository's decision.
+Rules run locally, by the skills that use them, not in CI: run `check_rules` once per RuleSet whenever those skills check skill text, so a teaching edit that orphans a marker or overflows a host fails before it ships.
 
 Complete when: `check_rules` passed on the real binary; print listed every intended rule ID, with the expected count, and each question read as its standard; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports kept as evidence; and everything still unproven is named.

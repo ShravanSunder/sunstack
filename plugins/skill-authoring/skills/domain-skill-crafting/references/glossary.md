@@ -1,33 +1,32 @@
 # Glossary
 
-Vocabulary for judging great skills. This file holds definitions only; operational rules live in `SKILL.md` or the reference that owns them.
+Vocabulary for judging skills. This file holds definitions only; each standard lives in the topic that owns it.
 
-## Root Virtue
+## Root virtue
 
 - Predictability: the agent follows the same process reliably, even when the output differs. The route is judged, not token-for-token sameness.
 - Reusable behavior: the durable agent behavior the skill exists to stabilize.
 
 ## Invocation
 
-Model-invocable, user-invocable, context load, cognitive load, and router skills are explained in `SKILL.md`.
+Model-invocable, user-invocable, context load, cognitive load and router skills are explained in `descriptions-and-invocation.md`.
 
-- Trigger surface: YAML/frontmatter description plus any router wording that decides whether the skill loads.
-- Description: the always-visible context pointer for a model-invocable skill. It names when to load and why, not how to run the workflow.
+- Trigger surface: the YAML frontmatter description, plus any router wording that decides whether the skill loads.
+- Description: the always-visible context pointer for a model-invocable skill.
 
-## Information Hierarchy
+## Information hierarchy
 
-`SKILL.md` carries the compact hierarchy and call grammar. `reference-design.md` owns ordinary-reference rules, and `shared-shape-design.md` owns shared output and tool shapes.
+`calls-and-placement.md` holds the placement standards, the call forms and the shared-shape standards.
 
 - Load mode: the caller-owned choice between all-run `MUST load` and conditional `IF <observable predicate>, load`.
-- Mandatory reference: coherent all-run detail consumed through `MUST load` while its parent obligation and completion stay visible in `SKILL.md`.
+- Mandatory reference: coherent all-run detail consumed through `MUST load`.
 - Principle: a skill hidden from model invocation that teaches one engineering judgment, opens with its own read rule, and is cited by other skills at the decision it informs.
-- Citation: the call form for a principle. It is one sentence that names the moment and the action, followed by a relative link to the principle.
-
-- Steps: ordered actions the agent performs. They belong in `SKILL.md` when order changes behavior.
-- All-run spine: the part of the workflow every invocation needs. It belongs in `SKILL.md`.
+- Citation: the call form for a principle.
+- Steps: ordered actions the agent performs.
+- All-run spine: the part of the workflow every invocation needs.
 - Reference: detail consulted after its caller selects the work.
 - Ordinary reference: mandatory or conditional detail loaded by the same agent that follows the calling workflow.
-- Review check: one narrow review question with its own reference in `skill-review`; reviewer agents each walk a family of checks. Only prescribed procedures are dispatched by the Call Grammar.
+- Review check: one narrow review question with its own reference in `skill-review`; reviewer agents each walk a family of checks.
 - Execution shape: an agent-loaded step or a prescribed procedure dispatched to a helper agent.
 - Context pointer: wording that names when to load a reference and what to do with it. Weak pointer wording is a variance bug.
 - Branch predicate: the observable condition that selects a branch.

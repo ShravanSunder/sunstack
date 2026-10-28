@@ -1,6 +1,6 @@
 # Skill standards and the linter
 
-A skill teaches an agent how to work. A checked rule asks whether selected text satisfies one of that skill's standards. A pressure experiment observes what an agent actually does. These use different evidence and should produce separate claims.
+A skill teaches an agent how to work. A checked rule asks whether selected text satisfies one of that skill's standards. A pressure experiment observes what an agent actually does. These use different evidence and should produce separate claims. [domain-skill-crafting](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md) holds every standard a skill's text must meet.
 
 The teaching and rule-authoring instructions live in this repository. The reusable Rust engine, `sunstack` executable, npm distribution and lint command live in [Sunstack Tools](https://github.com/ShravanSunder/sunstack-tools). The engine executes supplied definitions; this repository owns which skill standards to check and the meaning of their expected results.
 

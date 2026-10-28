@@ -12,23 +12,18 @@ Where to look, when the artifact is **changed files**:
 - the words the user, repo, docs, and logs actually use for this work;
 - any router or index that names this skill.
 
-MUST load `../../../skill-creation/references/frontmatter-design.md` to apply the trigger pattern and adjacent-skill boundary rules and return the expected trigger shape.
+MUST load `../../../domain-skill-crafting/references/descriptions-and-invocation.md` and return the description and invocation standards that apply, with the trigger shape they expect for this skill.
 
-How to inspect: Read only the description, as an agent choosing among the plugin's skills, and answer two questions: would this load for the real trigger, and would it stay quiet for the near miss? Then read the adjacent descriptions and find the boundary each confusable pair needs. A boundary stated only in the body arrives after routing already happened, which is too late to change the decision.
+How to inspect: Read only the description, as an agent choosing among the plugin's skills, and test it on the root's two prompts, the true one and the near miss. Then read the adjacent descriptions and find the boundary each confusable pair needs. A boundary stated only in the body arrives after routing already happened, which is too late to change the decision.
 
 Good signals:
-- opens with the real loading condition;
-- uses searchable words from prompts, code, or docs;
-- one trigger per genuinely distinct branch;
-- names the adjacent boundary when a neighbour is easy to confuse;
-- survives both the true prompt and the near miss.
+- every returned standard is kept, with the words that show it;
+- one trigger per genuinely distinct branch.
 
 Bad signals:
-- a workflow summary complete enough that the agent could follow it instead of opening the skill;
+- a returned standard broken, with the words that break it;
 - synonyms that rename one branch as if it were several;
-- generic virtue with no observable condition;
-- the boundary against a named neighbour living only in the body;
-- so broad that it loads for everything.
+- the boundary against a named neighbour living only in the body.
 
 Calibration: Propose the smallest description edit that fixes routing. Do not rewrite for style. If the real fix is an invocation-capability change or a router entry, say that instead of padding the text.
 

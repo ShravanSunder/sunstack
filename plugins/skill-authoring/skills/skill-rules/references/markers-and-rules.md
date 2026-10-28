@@ -20,9 +20,9 @@ Mark a section only when the whole section is one standard and its visible words
 
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
-- `skill-creation`'s `### Call Grammar` is over the cap and holds three standards. Mark the paragraph at `SKILL.md:62` for call completeness; the dispatch paragraph (`:77`) and the citation paragraph (`:88`) are separate candidates.
-- In `frontmatter-design.md`, the item "starts with `Use when` unless the platform requires another shape;" reads as a fragment, because its subject sits in the lead-in line "A good `description`:". The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it to `skill-creation` for a rewrite that carries its subject, or mark a complete host that carries exactly one standard.
-- A paragraph that carries five standards, like `skill-creation/SKILL.md:224`, is no narrow host for any of them. Split it in the teaching first.
+- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` is over the cap and holds 43 standards. Mark the list item at `:26` for call completeness; the dispatch items (`:29` to `:31`) and the citation items (`:39` to `:47`) are separate candidates.
+- An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. The printed wording, a judgment question or a mechanical explanation alike, has to state its standard without that lead-in. Return it for a rewrite that carries its subject, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`; or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows that rewrite: "A description starts with `Use when`, unless the platform requires another shape."
+- A paragraph that carries five standards, like `skill-design/SKILL.md:77`, is no narrow host for any of them. Split it in the teaching first.
 
 The engine forbids some hosts outright: a level 1 heading, a block quote, a table, HTML, a link reference definition and frontmatter. A marker inside fenced or indented code or an inline code span isn't a marker at all; it's ignored, and its entry turns up orphaned.
 
@@ -53,7 +53,7 @@ The rules file is one strict JSON object keyed by marker ID, paired with exactly
 
 ```json
 {
-  "K014": { "name": "skill.description", "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } }, "expect": { "starts_with": "Use when" }, "severity": "block" },
+  "K014": { "name": "skill.description", "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } }, "expect": { "starts_with": "Use when" }, "severity": "error" },
   "K015": { "name": "skill.load-return-word", "target": { "input": "skill", "select": { "kind": "markdown_units", "mode": "unit", "units": ["paragraph"], "starts_with": "MUST" } }, "ast_grep": { "kind": "paragraph", "regex": "\\bMUST\\s+load\\b", "not": { "regex": "\\breturn\\b" } } },
   "K016": { "name": "paragraph.clear-result", "target": { "input": "skill", "select": { "kind": "markdown_units", "mode": "unit", "units": ["paragraph"] } }, "threshold": 0.8 }
 }
@@ -65,7 +65,7 @@ Choose the verdict from the standard's outcome:
 - **`expect`** when one unit's visible text, or one field's decoded value, either has the property or doesn't: exactly one of `starts_with`, `matches`, `not_matches` or `present: true`. Text predicates read visible text with inline code removed, so a pattern looking for a path written in backticks finds nothing. An absent field fails every predicate, `null` counts as present, and a missing or malformed frontmatter block is unresolved.
 - **`ast_grep`** when the property is structural, or needs the raw source (inline code included) or the unit's ancestors. The rule describes the *violation*: a match fully inside the target unit fails it, and no match passes. Write it the other way round and it fails good text and passes bad. It sees the whole original syntax tree, so ancestors outside the unit count and siblings outside it don't. The engine validates it as an ast-grep rule and refuses unknown keys, even nested ones such as a misspelt `stop_by`.
 
-`severity` defaults to `nudge`; use `block` for a standard that must hold. `block_at_or_below` belongs only on a `block` judgment rule, below its threshold.
+`severity` defaults to `warn`; use `error` for a standard that must hold. `error_at_or_below` belongs only on an `error` judgment rule, below its threshold.
 
 ## Choose the target
 
@@ -73,7 +73,7 @@ Choose the verdict from the standard's outcome:
 - **`markdown_units`.** `mode: unit` yields one occurrence per requested `section`, `paragraph` or `list_item`, optionally filtered by `starts_with` or `pattern`. `mode: call_site` needs exactly one nonempty filter and yields one occurrence per match, owned by the innermost requested unit; a list item owns its paragraphs. Filters read visible text with inline code removed, and a regex that can match empty text is refused.
 - The engine selects other things too, such as whole documents, change sets and conversations; its schema owns them.
 
-The selector decides what gets judged, and a wrong one fails silently. `K015`'s `starts_with: "MUST"` reaches only paragraphs that open with `MUST`, so a load instruction mid-paragraph, like `skill-creation/SKILL.md:180`, is never judged. When a standard applies to every occurrence of a form, select the form itself, with `call_site` on its pattern, rather than the paragraphs that happen to start with it. Step 6 proves the selector reaches the intended text.
+The selector decides what gets judged, and a wrong one fails silently. `K015`'s `starts_with: "MUST"` reaches only paragraphs that open with `MUST`, so a load instruction that doesn't open its paragraph, like this reference's own `Then MUST load` call (`:100`), is never judged. When a standard applies to every occurrence of a form, select the form itself, with `call_site` on its pattern, rather than the paragraphs that happen to start with it. Step 6 proves the selector reaches the intended text.
 
 ## Context
 
@@ -89,13 +89,13 @@ Name the cost: an input used only for context, like `calibration` here, has to b
 
 A correct Markdown and rules pair proves nothing until the RuleSet the repository's invocation runs includes it. Inspect, in order:
 
-1. **The invocation.** Find the check request or runtime invocation the repository passes to `sunstack-rule`, in its scripts, CI or docs. Note `definition_root`, each `definitions.rule_sets[].path`, its `binding_groups`, and the `repositories` with their `input_paths`. Open the RuleSet it names, not a similarly named file.
+1. **The invocation.** Find the check request or runtime invocation the repository passes to `sunstack exec`, in its scripts, CI or docs. Note `definition_root`, each `definitions.rule_sets[].path`, its `binding_groups`, and the `repositories` with their `input_paths`. Open the RuleSet it names, not a similarly named file.
 2. **The pair.** Add `{"markdown": "<path>", "rules": "<path>"}` to `rule_sources`, both paths relative to the RuleSet file. A path relative to the repository root resolves to a different place.
 3. **The prefix.** A RuleSet with sources needs `marker_prefix`, and it must be the letter your markers use.
 4. **The inputs.** Each entry's `target.input` and every `context` input is a key in the RuleSet's `inputs`, with the kind its selector needs (`document` for Markdown units and frontmatter). The invocation binds every declared input exactly once with that kind, and each bound file matches an `exact` or `glob` entry in its repository's `input_paths`.
 5. **The cap.** If the RuleSet sets `max_question_words`, your hosts were sized against that number, not the default.
 
-If the repository runs no RuleSet for these standards yet, write one in the shape of the engine's `marked-standards.ruleset.json` (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`), with a check request that binds its inputs, and report both as new. Where it runs, in a script or CI, is the repository's decision.
+If the repository runs no RuleSet for these standards yet, write one in the shape of the engine's `marked-standards.ruleset.json` (`schema_version`, `name`, `description`, `inputs`, `applicability`, `common_ruleset_instructions`, `marker_prefix`, `rule_sources`), with a check request that binds its inputs, and report both as new. It runs locally, by the skills that use the rules, not in CI.
 
 Then MUST load `check-and-reports.md` and return the `check_rules` outcome with `output: assembled_rules`: its count and the printed rule IDs with their provenance, to judge against these signals.
 
@@ -110,7 +110,7 @@ A refusal carries a `code`, a location (`file`, `line`, `column` and `field_path
 
 | code | cause | fix at the cause |
 | --- | --- | --- |
-| `forbidden_marker_host` | marker on a level 1 heading, or in a block quote, table, HTML, link reference definition or frontmatter | move it to the paragraph, list item or level 2 to 6 heading that states the standard; if the standard lives only in a table or quote, return it for `skill-creation` to restate in prose |
+| `forbidden_marker_host` | marker on a level 1 heading, or in a block quote, table, HTML, link reference definition or frontmatter | move it to the paragraph, list item or level 2 to 6 heading that states the standard; if the standard lives only in a table or quote, return it for a restatement in prose, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation` |
 | `spaced_heading_marker` | whitespace between the heading text and the marker | remove the whitespace |
 | `duplicate_marker` | one ID twice in one Markdown file | keep the ID on the host its entry was written for; give the other standard a new ID and entry, or remove the stray copy; leave every other distinct ID alone |
 | `question_too_large` | the host's visible words exceed `max_question_words` | mark a narrower host, such as a subsection, paragraph or list item, that carries the one standard |

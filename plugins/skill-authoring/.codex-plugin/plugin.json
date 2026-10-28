@@ -1,7 +1,7 @@
 {
   "name": "skill-authoring",
   "version": "0.6.0",
-  "description": "Skill authoring for any repository: design and write skills, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.",
+  "description": "Skill authoring for any repository: design skill changes, write their files, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.",
   "author": {
     "name": "Shravan Sunder"
   },
@@ -9,7 +9,9 @@
     "skill-authoring",
     "skills",
     "skill-orchestrator",
+    "skill-design",
     "skill-creation",
+    "domain-skill-crafting",
     "skill-rules",
     "skill-review",
     "skill-audit",
@@ -19,8 +21,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Skill Authoring",
-    "shortDescription": "Create, check, review, and audit skills",
-    "longDescription": "Use Skill Authoring to carry a skill change from spec to release, design and write one skill with its skill spec, turn its standards into checked rules, review it with independent agents, and audit which skills a repository should create, update, merge, or skip.",
+    "shortDescription": "Design, write, check, review, and audit skills",
+    "longDescription": "Use Skill Authoring to carry a skill change from design to release, design one skill change before its files change, write one skill's files from its accepted design or make a mechanical edit, turn its standards into checked rules, review it with independent agents, and audit which skills a repository should create, update, merge, or skip.",
     "developerName": "Shravan Sunder",
     "category": "Developer Tools",
     "capabilities": [
@@ -28,8 +30,9 @@
       "Read"
     ],
     "defaultPrompt": [
-      "Use skill-orchestrator to carry this skill change from spec to release.",
-      "Use skill-creation to design or update one named skill.",
+      "Use skill-orchestrator to carry this skill change from design to release.",
+      "Use skill-design to design one skill change before its files change.",
+      "Use skill-creation to write one skill's files from its accepted design.",
       "Use skill-rules to turn this skill's standards into checked rules.",
       "Use skill-review to independently review this skill.",
       "Use skill-audit to audit these skills against session evidence."
