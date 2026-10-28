@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Readable views standard</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+
+<ex-presentation id="read-readable-views" title="Read the readable views design" description="The standard, your past views behind it, where it goes, and how each part is shown.">
+  <ex-step to="short-answer" icon="book-open"><script type="text/markdown">
+**What this change does**
+
+One short section in the file every design phase reads when it draws a view: seven one-sentence standards for a view you can read, and a load of the guide to choosing the kind of diagram.
+</script></ex-step>
+  <ex-step to="requirements--readable-views-standard-requirements" icon="path"><script type="text/markdown">
+**Requirements**
+
+Your words on diagrams, what success looks like, and who reaches this file.
+</script></ex-step>
+  <ex-step to="requirements--evidence-your-reactions-to-past-views" icon="path"><script type="text/markdown">
+**Your past views**
+
+Three bad views and two good ones, each with what you said about it. There is no third good one.
+</script></ex-step>
+  <ex-step to="specification--readable-views-standard-specification" icon="path"><script type="text/markdown">
+**Specification**
+
+The seven standards, how they re-cut the spec's seven, and each tested on cases it never names.
+</script></ex-step>
+  <ex-step to="skill-design--readable-views-standard-skill-design" icon="path"><script type="text/markdown">
+**Skill design**
+
+The two runs, where the standard acts, the proposed section text, and eight defaults you can strike.
+</script></ex-step>
+  <ex-step to="skill-verification--readable-views-standard-skill-verification" icon="path"><script type="text/markdown">
+**Skill verification**
+
+Which standards become judged rules, which stay review checks, and what stays unverified.
+</script></ex-step>
+</ex-presentation>
+
+<ex-document id="content" document-id="readable-views-standard-design" revision="draft-1">
+<h1>Readable views standard</h1>
+
+<ex-callout id="short-answer" title="The short answer" tone="tldr" icon="book-open">
+  <p><strong>Proposed:</strong> one short section in the file every design phase already reads when it draws a view. It states seven standards, one sentence each: a view states the question it answers, shows one relationship, stays at its document's level of detail, uses your words, is the smallest that answers, sits beside its text, and changes what you conclude. It also loads the guide to choosing the kind of diagram, which no design phase reads today.</p>
+  <p>Your past views: three bad ones are tied to your own words, from three projects. Only two good ones are, and both are chat answers, not pages, so there is no third good one to show.</p>
+  <p><strong>Open:</strong> you confirm the seven sentences, then Sol reviews this design. No skill file changes before that, or before focus 2 merges.</p>
+</ex-callout>
+
+<p>Press <kbd>W</kbd> to walk through it, or read the four parts below.</p>
+
+<ex-markdown id="requirements" label="Requirements" src="requirements.md"></ex-markdown>
+<ex-markdown id="specification" label="Specification" src="specification.md"></ex-markdown>
+<ex-markdown id="skill-design" label="Skill design" src="skill-design.md"></ex-markdown>
+<ex-markdown id="skill-verification" label="Skill verification" src="skill-verification.md"></ex-markdown>
+
+<p>When you're done, open Comments, press <strong>Copy</strong>, and paste it to me.</p>
+</ex-document>
+<ex-comments for="content"></ex-comments>
+</body>
+</html>
