@@ -1,11 +1,11 @@
 # Readable views standard: requirements
 
-Draft 1, 2026-10-27, by an Opus 5.5 🛠️ Worker for the 🦁 Lead, written with this branch's `skill-design` (`plugins/skill-authoring/skills/skill-design/SKILL.md` at `66e8adae`). Part one of four: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It is Project 3's unit U2; the governing spec is Project 3's spec, revision 2, section 1 and the U2 row (`~/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/project-3/spec.md`). Nothing here is built.
+Draft 2, 2026-10-27, by an Opus 5.5 🛠️ Worker for the 🦁 Lead, after the design review's targeted revision (findings F1 to F3 and gap G3, `tmp/project-3-reviews/u2-design-review.md`); draft 1 was `49caeebe`. Written with this branch's `skill-design` (`plugins/skill-authoring/skills/skill-design/SKILL.md` at `66e8adae`). Part one of four: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It is Project 3's unit U2; the governing spec is Project 3's spec, revision 2, section 1 and the U2 row (`~/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/project-3/spec.md`). Nothing here is built.
 
 ## The change
 
-- **What it does:** one short section in the reference every design phase loads when it draws a view (`plugins/sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md`). The section states seven standards for a view a person can read, one sentence each, and loads `diagram-semantics.md` so the phase picks the right kind of diagram for the question.
-- **Class:** behavior-changing. It adds teaching and a reference call (`diagram-semantics.md`) to one shared reference, and makes its completion line require the new standards: it alters the reference's steering, its calls and its completion.
+- **What it does:** one short section in the reference every design phase loads when it draws a view (`plugins/sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md`). The section states seven standards for a view a person can read, one sentence each. It loads `diagram-semantics.md` so the phase picks the right kind of diagram for the question, and `markdown-presentation-baseline.md` when a label would carry a technical name, so that name moves beside the view.
+- **Class:** behavior-changing. It adds teaching and two reference calls (`diagram-semantics.md`, `markdown-presentation-baseline.md`) to one shared reference, and makes its completion line require the new standards: it alters the reference's steering, its calls and its completion.
 - **Runs:** `update` on the rendering reference (U2); then a mechanical run that adds the rendering reference to `diagram-semantics.md`'s consumer line (U2b).
 - **Who already owns parts of this:** the rendering reference owns semantic preservation and the visual check (`:3`, `:77-97`); `diagram-semantics.md` owns choosing the kind of diagram (`:3`, `:17-115`), but no design phase loads it. The rest is scattered as examples: `mermaid-usage.md:17,23,27`, `markdown-presentation-baseline.md:54`, `presentation-html/SKILL.md:48`, `presentation-html/references/views.md`, `principle-write-for-the-reader/SKILL.md:27` and its `references/layered-detail.md:12,24-42`. None states a standard every view must meet, in the file the phases read at the moment they draw.
 - **Baseline:** the rendering reference as it stands on this branch at `66e8adae` (118 lines; last changed by focus 2's I4 fix, `52ab5cec`), and `diagram-semantics.md`, unchanged from main `39957959`.
@@ -22,7 +22,7 @@ Draft 1, 2026-10-27, by an Opus 5.5 🛠️ Worker for the 🦁 Lead, written wi
 
 The `intent/` paths are in the same scratch folder as the governing spec.
 
-**Success definition:** when a skill asks an agent to draw a view, the agent draws one you can understand at a glance: it says which question it answers, shows that one relationship in your words, at the size the question needs, beside the text it explains, and it changes what you conclude. A view you'd have to decode is never reported as passing. Each standard is one sentence, so each can later become a checked rule.
+**Success definition:** when a skill asks an agent to draw a view, the agent draws one you can understand at a glance: it says which question it answers, shows only what that question needs, in your words, at the size the question needs, beside the text it explains, and it changes what you conclude. A view you'd have to decode is never reported as passing. Each standard is one sentence, so each can later become a checked rule.
 
 ## Who reaches it, and when
 
@@ -32,7 +32,7 @@ An agent, through a skill. Every design phase loads this reference with `MUST lo
 
 How I found these: a scripted pass over your own typed turns in every Claude session log since 10 September (191 logs) and the Codex sessions of September and October, for any reaction that names a diagram, view, picture, table or page, plus every page-comment Copy you pasted back. I read each candidate in its context and kept it only when your words are about one view and its revision can be found. This is enough to show the standard; it isn't the Luna mining that settled decision 2 asks for before eval labels (U10).
 
-Three bad views have a reaction tied to them, from three projects. Only two good views do, and both are in chat answers, not pages. There is no third.
+Three bad views have a reaction tied to them, from three projects. Only two good views do, and both are in chat answers, not pages. This search found no third; that doesn't show none exists. A wider search, your own pick of a page you liked, or your decision to change the promise would close it.
 
 ### Bad 1: two relationships in one picture (agent-vm, 26 October)
 
@@ -40,7 +40,7 @@ The only drawing on the Organization hierarchy page, revision `2026-10-26.1` ("C
 
 Your reactions: a screenshot of this picture with "this make sense for you? do self review" (13:49 UTC), then a comment on the storage question of that revision: "unclean not good dieagrams entity relations hiot clearf" (13:51 UTC). Sources: agent-vm session, lines 9866 and 9916.
 
-What it shows: standard 2 broken. The picture carries two relationships (what contains what, and what refers to what), and the relationship the question asks about (which records live together) has no view at all. Your words don't speak to its heading.
+What it shows: standard 2 broken. On top of what contains what, the picture answers a second question (what refers to what), and those arrows obscure the first; the question the page itself asks (which records live together) has no view at all. Your words don't speak to its heading.
 
 The view as it was, so you can see it again (today's renderer may lay it out differently):
 
@@ -84,7 +84,7 @@ Your reaction: "its too hard to visualize too many dashes" (12:32 UTC), after as
 
 Revision: approximate. The nearest commit before your reaction is `a41cf5d1` (11:18 UTC); the agent changed the drawing in its working copy between 12:22 and 12:29 UTC, adding role arrows, and the next commit is `347a65f8` (14:44 UTC). So you saw at least these four kinds of line.
 
-What it shows: standard 2 broken (four kinds of edge are four relationships in one drawing) and the rendered check (line styles you can't tell apart). Its heading does state a question; your words don't speak to it.
+What it shows: the rendered check broken (line styles you can't tell apart), which is what your words are about. Standard 2 is unknown here: a count of edge kinds doesn't settle it, and whether the dashed kinds (peer links, missing links) answer a different question from "what does this skill build on?" is my reading, not your words. Its heading does state a question; your words don't speak to it.
 
 ### Bad 3: requirements as one big table (codex-router, 24 October)
 
@@ -102,7 +102,7 @@ In the Lead's chat answer about Project 2, a small top-down text tree: ingested 
 
 Your reaction: you pasted it back with "yes this is what i meant" (10:51 UTC), after asking "and deicsion tree did you udntaend what that means? for jev?" (10:50 UTC). Sources: Lead session, lines 18307 and 18191 (ledger O075, O073).
 
-What it shows: standard 2 kept. It shows the one relationship your question asked about: the order of the filters and where each drops a candidate. Its questions reuse your own rule ("use teh repo techonolgoy or ask the suker dont assume tech choices", O065), which is standard 4, but your reaction doesn't single that out. It's a chat view, not a page, and isn't copied here because it is session text.
+What it shows: standard 2 kept. Everything in it serves the one question you asked: the order of the filters and where each drops a candidate. Its questions reuse your own rule ("use teh repo techonolgoy or ask the suker dont assume tech choices", O065), which is standard 4, but your reaction doesn't single that out. It's a chat view, not a page, and isn't copied here because it is session text.
 
 ### Good 2, with one flaw: the four-level ladder (a chat answer, 29 September)
 
@@ -110,9 +110,9 @@ In a chat answer about agent roles, a small text ladder (project, milestone, tas
 
 Your reaction: "we do need to explain what operator does better but this is good." (13:11 UTC, two and a half minutes after the answer). Source: devfiles session, line 8270.
 
-What it shows: the view as a whole is good (standard 2 kept); one row, the Operator's, doesn't explain the part it names (standard 4 broken for that row). A chat view, not copied.
+What it shows: the view as a whole is good (standard 2 kept). Your correction asks for a better explanation of the Operator's row; that is about explaining, and doesn't settle whether the row's words are yours (standard 4), so standard 4 stays unknown and unscored for that row until you label it. A chat view, not copied.
 
-### No third good view
+### No third good view found
 
 The closest: "it looks good the reqkuriemetns, spec is hard to read as its a wall of text with no diagrasma fter the first seciton" (28 September; codex-router Claude routing session, line 20374). It's about the whole Requirements file of the Claude account routing design (written at line 20081 of that session; first committed in codex-router `b89cf100a`), which held one "today and wanted" picture and two tables. It covers the whole file, so it can't label the picture alone, and the same file's needs table is the kind your later words reject. It labels nothing.
 
