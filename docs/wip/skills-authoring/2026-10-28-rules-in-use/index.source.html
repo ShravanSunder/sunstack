@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rules in use · draft 2</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-presentation id="read-rules-in-use" title="Read draft 2" description="The need, the obligations, the skill changes, and the planned proof.">
+  <ex-step to="requirements--rules-in-use-requirements" icon="book-open">Requirements: why draft 1 changed, the owner's need, and the evidence.</ex-step>
+  <ex-step to="specification--rules-in-use-specification" icon="path">Specification: what must hold, including failures and incomplete results.</ex-step>
+  <ex-step to="skill-design--rules-in-use-skill-design" icon="gear">Skill design: the engine dependency, decision models, seven descriptions and work order.</ex-step>
+  <ex-step to="skill-verification--rules-in-use-skill-verification" icon="test-tube">Skill verification: planned checks that reject wrong builds, and the remaining proof limits.</ex-step>
+</ex-presentation>
+<ex-document id="content">
+<h1>Rules in use · draft 2</h1>
+<h2 id="what-changed">What changed from draft 1 and why?</h2>
+<p>Jev, the model that judges skill standards, now runs by default. Each judged standard becomes a decision model: it selects the pieces of a skill it governs, checks whether each belongs, then judges it. Draft 1 made Jev optional and put workarounds in the caller; draft 2 puts that work in the engine. <a href="#requirements--rules-in-use-requirements">Read the correction and its evidence in Requirements.</a></p>
+<p>The engine comes first: amendment A22 supplies the missing engine capabilities, and its release is the dependency before the skill changes begin. <a href="#skill-design--the-shape">See the shape</a> and <a href="#skill-design--runs">the order of work</a>.</p>
+<p>All seven proposed skill descriptions are now written out, keeping their triggering purpose in fewer words. The standards root stays hidden from implicit invocation. <a href="#skill-design--trigger-and-invocation">Read the exact descriptions and their planned trials.</a></p>
+<p>The four parts below are the design's source of truth. Skill verification is the plan for showing the change works; it is not a record of completed proof.</p>
+<p>A walkthrough is a guided path through those same parts. Press <kbd>W</kbd> to start it, or select a part.</p>
+<ex-tabs label="Four design parts" data-width="reading">
+  <section label="Requirements" icon="book-open">
+    <ex-markdown id="requirements" label="Requirements" src="requirements.md"></ex-markdown>
+  </section>
+  <section label="Specification" icon="file">
+    <ex-markdown id="specification" label="Specification" src="specification.md"></ex-markdown>
+  </section>
+  <section label="Skill design" icon="gear">
+    <ex-markdown id="skill-design" label="Skill design" src="skill-design.md"></ex-markdown>
+  </section>
+  <section label="Skill verification" icon="test-tube">
+    <ex-markdown id="skill-verification" label="Skill verification" src="skill-verification.md"></ex-markdown>
+  </section>
+</ex-tabs>
+</ex-document>
+</body>
+</html>
