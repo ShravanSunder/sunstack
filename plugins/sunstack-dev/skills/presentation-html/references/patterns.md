@@ -78,6 +78,6 @@ Keep the normal document navigation, widths and library styling. Stable review/q
 
 Good: a reader selects the body of an option, opens its diagram without changing that answer, comments on the exact source passage, and carries the requested feedback from one place. Bad: a recommendation is preselected as the reader's answer, every paragraph becomes a choice, or a custom copy bar competes with Comments.
 
-Observe the actual requested interactions: answer selection versus link/detail/comment actions, rendered body and extras, native panel replacement and focus return, quote/source fidelity, and actual handed-off comments/current answers. Source and static checks cannot establish these interactions; keep unobserved outcomes explicit in the artifact return.
+Use the main workflow's single static lint pass. Selection, feedback, state restoration and export regression journeys belong to library development; exercise them only when the user requests verification or reports a specific defect.
 
 Complete when the arrangement names what opens the page, where each form sits and at what width, what is one action away, and which pattern above it follows.
