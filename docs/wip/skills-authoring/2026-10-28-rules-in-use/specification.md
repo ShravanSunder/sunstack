@@ -16,7 +16,7 @@ Draft 2, by the 🦁 Lead, 2026-10-28. Part two of the design set: [requirements
 
 - **G6** The root again says to name a validator *and test the representation it consumes* (L1), in the topic that owns shared shapes.
 - **G7** Every root standard the decision matrix routes to a rule carries one marker and one rules entry: the inventory's 2 mechanical and 31 judged standards (`tmp/project-1-fix/root-standards.md`), less any the matrix finds unready (each returned with its reason), plus G1, G2's two limits and G3's judgments. Review, eval and prose standards carry none.
-- **G8** Every judged rule is a decision model. Its mechanical pass selects the unit kinds its standard governs (sections, paragraphs, list items or a frontmatter field); its gates ask whether this unit is one the standard covers; its verdict asks the standard. A unit a gate rejects ends `dropped` with its answer, never `pass`. The six existing judged rules are rewritten this way.
+- **G8** Every judged rule is a decision model. Its target selects the unit kinds its standard governs (sections, paragraphs, list items or a frontmatter field); an optional mechanical pass only filters those units by their text; its gates ask whether this unit is one the standard covers; its verdict asks the standard. A unit narrowing or a gate rejects ends `dropped` with that answer; a unit that meets the standard ends `dropped` at the verdict; a unit that fails it ends `finding`. The six existing judged rules are rewritten this way.
 - **G9** Severities: G2's 300 limit is `error`; every other rule is `warn`.
 
 **Running the rules**
@@ -30,9 +30,9 @@ Draft 2, by the 🦁 Lead, 2026-10-28. Part two of the design set: [requirements
   - never deletes, replaces or writes the key, and never names an endpoint other than the engine's Jev backend;
   - is a TypeScript (`.mts`) script run by Node directly.
 - **G11** `skill-rules`' run procedure reads every result one way for every caller:
-  - a mechanical `error` is fixed before the calling step completes; a mechanical `warn` is fixed or named;
-  - a judged finding is a candidate a person or reviewer confirms at its anchor;
-  - `dropped` is the rule not applying, with its gate's answer;
+  - a `finding` from a mechanical `error` rule is fixed before the calling step completes; one from a mechanical `warn` rule is fixed or named;
+  - a judged `finding` is a candidate a person or reviewer confirms at its anchor;
+  - `dropped` at narrowing or a gate is the rule not applying, with that answer; `dropped` at the verdict is the unit meeting the standard;
   - anything uncertain, unresolved, not processed, refused or incomplete is a gap that reaches the caller's return.
 - **G12** The four sites run the rules: `skill-creation`'s self-check on its changed files; `skill-review`'s first rule pass on the reviewed files; `skill-orchestrator`'s prove step on the change's files; `skill-audit` over the skills it audits, turning failures and confirmed findings into flags beside its session evidence. None says `rules: pending`.
 - **G13** A judged rule's accuracy comes from the engine's eval (`score_eval`): labeled examples from real sources (the owner's design-session samples, the current skills, the owner's HTML pages), grouped by source document, split into development and held-out, thresholds frozen before the held-out run, reporting misses, wrong calls and unknowns. `skill-rules` teaches how to build and read that eval; it adds no state, store or procedure of its own.

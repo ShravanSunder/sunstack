@@ -10,7 +10,7 @@ skill-review first pass ───┤                    ┌─ check_rules      
 skill-orchestrator prove ──┼─► skill-rules'    ─┤
 skill-audit over skills ───┘   running-rules.md └─ evaluate_candidates  every RuleSet over the skill files, Jev on
                                     │                each judged standard a decision model:
-                                    │                  mechanical pass (selects its units) → gates → verdict
+                                    │                  target selects its units → optional text filter → gates → verdict
                          the repository's rule runner   (ai-tools: pnpm --dir tests/skills rules [folders])
                                     │                    default: every plugin's skills
                          sunstack exec (@sunstack/cli, pinned to the release with A22)
@@ -48,7 +48,7 @@ Constraints, all at their real owner: the engine resolves the key and never prin
 | `description.names-the-moment` | "names the situation…" | judged, target the `description` field | warn |
 | `description.no-workflow` | "carries no workflow steps…" | judged, target the `description` field | warn |
 | `description.always-earned` | standard 2 | judged, target the `description` field; gate: does it open with `Always`? | warn |
-| the six existing judged rules | as now | decision models: mechanical pass over the unit kinds the standard governs, gates for "is this unit one the standard covers?", the marked sentence as verdict | warn |
+| the six existing judged rules | as now | decision models: the target selects the unit kinds the standard governs (unchanged selectors), an optional text filter, gates for "is this unit one the standard covers?", the marked sentence as verdict; a unit that meets it ends `dropped` at the verdict, one that fails it `finding` | warn |
 | the inventory's other judged standards | `root-standards.md` judged rows | the same pattern, each settled with the decision matrix | warn |
 | the inventory's 2 mechanical | `root-standards.md` mechanical rows | mechanical, proved on good and bad cases | warn |
 
@@ -58,7 +58,7 @@ The old 1,024-character rule goes; the 300 limit replaces it, and the platform's
 
 - **`domain-skill-crafting/references/descriptions-and-invocation.md`:** standards 1 to 6, and the depth that teaches the `Always` choice and the two-prompt trial, including the hidden-skill case.
 - **`domain-skill-crafting/references/calls-and-placement.md`:** standard 7 (L1).
-- **`domain-skill-crafting/rules/`:** the changed and new entries, each judged entry carrying its mechanical pass, gates and verdict in the marker entry (A22.5).
+- **`domain-skill-crafting/rules/`:** the changed and new entries, each judged entry carrying its optional text filter, narrowing, gates and verdict in the marker entry (A22.6); its target selector stays the one source of its units (A22.2).
 - **`skill-rules/references/running-rules.md`:** rewritten for G11. Run the runner; read the check and the evaluation by the engine's outcomes; carry every gap to the caller's return. The sentence that the step "never evaluates a judged RuleSet" goes.
 - **`skill-rules/references/markers-and-rules.md`:** how a marked standard carries its decision model, with one worked case.
 - **`skill-rules/references/decision-matrix.md`:** a standard's unit kinds and gates are part of routing it to a rule; the frontmatter near miss routes to a judged field target.
@@ -103,7 +103,7 @@ One unit, one review: after run 7, a fresh `skill-review` implementation review 
 | E1 | The 300 limit is `error`; everything else `warn` | The owner: "300 means it fails its a failure" |
 | E2 | Judged rules warn until their eval shows them accurate | The owner's spec: no judged rule blocks before its eval; the hosted run's warning rate shows the flat rules weren't ready |
 | E3 | Jev runs by default, with the key the engine resolves; no switch | The owner: "jev is teh whole fuckign poitn"; draft 1's `--judge` removed |
-| E4 | Every judged standard is a decision model in its marker entry, run per unit by the engine | The owner: "decion models eveyrwehre"; A22 makes the engine carry it |
+| E4 | Every judged standard is a decision model in its marker entry, run per unit by the engine; a marked standard's pass means the unit conforms | The owner: "decion models eveyrwehre"; A22 (revision 4, accepted) makes the engine carry it, A22.11 its meaning |
 | E5 | Descriptions are judged as their own frontmatter field | The owner's 26 October choice, built in A22 |
 | E6 | Calibration is the engine's `score_eval`, nothing beside it | One owner per job; draft 1's advisory states and calibration procedure removed |
 | E7 | Version stays 0.6.0, in #171 | One PR; #171 is unreleased |
@@ -115,7 +115,7 @@ One unit, one review: after run 7, a fresh `skill-review` implementation review 
 ## Coordination
 
 - **Base:** #171's branch, `worktree-project-1-skill-crafting`. Skill-authoring 0.6.0 and its changelog entry are already there; run 7 extends that entry.
-- **Engine:** Project 2's branch `feat/session-ingestion-and-trees`; A22 at `tmp/project-2/amendment-a22-skill-decision-models.md`, under review.
+- **Engine:** Project 2's branch `feat/session-ingestion-and-trees`; A22 at `tmp/project-2/amendment-a22-skill-decision-models.md`, revision 4, accepted-to-implement (`tmp/project-2/review-a22-recheck-3.md`), built as slice P10.
 - **After merge:** #172 and #173 take this in by merge. #172 then fixes its 17 descriptions and I5's `presentation-html` change for real.
 - **Work thread:** board "Workflow improvements", project `01a1635f`.
 
