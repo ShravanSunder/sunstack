@@ -1,144 +1,124 @@
 # Rules in use: skill design
 
-Draft 1, by the 🦁 Lead, 2026-10-28. Part three of the design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Built on #171's branch at `9eabb3a8`, after the first checked rules.
+Draft 2, by the 🦁 Lead, 2026-10-28. Part three of the design set: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Built on #171's branch at `9eabb3a8` (the first checked rules) and on the engine release that carries Project 2's slices P5, P8b and P10 (amendment A22).
 
 ## The shape
 
 ```text
 skill-creation self-check ─┐
-skill-review first pass ───┤                    ┌─ check_rules    every RuleSet (assembled, printed)
-skill-orchestrator prove ──┼─► skill-rules'    ─┼─ evaluate_rules mechanical RuleSets (local, no model)
-skill-audit over skills ───┘   running-rules.md └─ evaluate_rules judged RuleSets, only with --judge and a key
-                                    │                 (Jev; eligibility gate first; results advisory until calibrated)
-                         the repository's rule runner  (ai-tools: pnpm --dir tests/skills rules [--judge] [folders])
+skill-review first pass ───┤                    ┌─ check_rules          every RuleSet's definitions, no target, no key
+skill-orchestrator prove ──┼─► skill-rules'    ─┤
+skill-audit over skills ───┘   running-rules.md └─ evaluate_candidates  every RuleSet over the skill files, Jev on
+                                    │                each judged standard a decision model:
+                                    │                  mechanical pass (selects its units) → gates → verdict
+                         the repository's rule runner   (ai-tools: pnpm --dir tests/skills rules [folders])
                                     │                    default: every plugin's skills
-                         sunstack exec  (@sunstack/cli, pinned)
+                         sunstack exec (@sunstack/cli, pinned to the release with A22)
+                                    │  key: environment, else the OS key store (the engine resolves it)
+                         score_eval (calibration, run by a rule author, not by the four sites)
 ```
 
 What changes from the first checked rules:
 
-- every plugin is checked by default, not only skill-authoring;
-- judged rules can run, with an explicit `--judge` and a key;
-- each judged rule judges only the units its standard governs;
-- the audit and the orchestrator run the rules;
-- the description standards are the owner's.
+- Jev runs by default; the runner no longer deletes the key, names a dead endpoint, evaluates only metadata or binds a stand-in file.
+- Every judged standard is a decision model the engine runs per unit.
+- Every plugin is checked by default.
+- The audit and the orchestrator run the rules.
+- The description standards are the owner's, and Jev judges the description itself.
 
 ## Security, decided before the runner is outlined
 
 | Label | Decision for the runner (run 3) |
 | --- | --- |
-| sensitive surfaces | shell and subprocess (`sunstack exec`); network access (the engine calls Jev at OpenRouter); a credential (`OPENROUTER_API_KEY`) |
-| entry points | `pnpm --dir tests/skills rules [--judge] [folders]`; the four skill sites through `running-rules.md` |
+| sensitive surfaces | shell and subprocess (`sunstack exec`); network access (the engine calls Jev at OpenRouter); a credential the engine resolves |
+| entry points | `pnpm --dir tests/skills rules [folders]`; the four skill sites through `running-rules.md` |
 | untrusted inputs | skill text and the engine's responses; nothing from the network reaches a shell |
-| privileged actions | sending selected skill files to Jev |
-| decision | **allowed**, with these constraints |
+| privileged actions | the engine sending selected skill units to Jev |
+| decision | **allowed**: the skill text is the owner's, in a public repository, and judging it is the purpose of the kit |
 
-The constraints:
+Constraints, all at their real owner: the engine resolves the key and never prints it; the runner passes no key, writes none and saves no output that contains one; the destination is the engine's configured Jev backend; the engine's native request budget and attempts bound each run, and the runner prints the engine's reported usage. Proof: the runner's tests (a run with a key reaches the scripted local judge; a run without one reports the engine's refusal; no saved file contains a credential), and one real run over #171's skills. Public-safe: no cache path, account or `op://` reference in any shipped file.
 
-- **Explicit opt-in to send.** The runner sends content only with `--judge`, which a repository's own instructions decide to use. `AGENTS.md` here says skill text is public and may be judged.
-- **The key.** It comes only from the runner's environment and is never read from a keychain or 1Password by the runner. It's never written to a request, response, log or summary; any file about to be saved that contains it is refused.
-- **Cost.** A request cap (default 400) and the reported cost are printed; a run that would exceed the cap stops with the gap named.
-- **Destination.** No endpoint other than the engine's configured Jev backend.
+## The rules as decision models
 
-Proof required: the runner's own tests (`--judge` absent, `--judge` without a key, and `--judge` with a synthetic key against a local endpoint), and one real `--judge` run whose saved files contain no key. Public-safe: no cache path, account or `op://` reference in any shipped file. Review route: the unit's implementation review, with this table as its security input. Every other surface: none in scope.
-
-## The rules
-
-| Rule | Root sentence | Kind | Severity |
+| Rule | Root sentence | Shape | Severity |
 | --- | --- | --- | --- |
-| `skill.description-opener` (was `-use-when`) | standard 1 | mechanical: `frontmatter_field` `description`, `matches` the four openers | warn |
-| `skill.description-length-warn` | standard 4 | mechanical: `matches` at most 225 characters | warn |
-| `skill.description-length-limit` | standard 5 | mechanical: `matches` at most 300 characters | error |
-| `description.names-the-moment` | `descriptions-and-invocation.md` "names the situation…" | judged: target the skill's title section, description as `frontmatter_field` evidence | warn, advisory |
-| `description.no-workflow` | "carries no workflow steps…" | judged, the same target and evidence | warn, advisory |
-| the six existing judged rules | as now | judged, each given G9 eligibility | warn, advisory |
-| the inventory's other judged standards | `root-standards.md` judged rows | judged, with eligibility | warn, advisory |
-| the inventory's 2 mechanical | `root-standards.md` mechanical rows | mechanical, calibrated on good and bad cases | warn |
+| `skill.description-opener` | standard 1 | mechanical: `frontmatter_field description`, matches the four openers | warn |
+| `skill.description-length-warn` | standard 4 | mechanical: at most 225 characters | warn |
+| `skill.description-length-limit` | standard 5 | mechanical: at most 300 characters | error |
+| `description.names-the-moment` | "names the situation…" | judged, target the `description` field | warn |
+| `description.no-workflow` | "carries no workflow steps…" | judged, target the `description` field | warn |
+| `description.always-earned` | standard 2 | judged, target the `description` field; gate: does it open with `Always`? | warn |
+| the six existing judged rules | as now | decision models: mechanical pass over the unit kinds the standard governs, gates for "is this unit one the standard covers?", the marked sentence as verdict | warn |
+| the inventory's other judged standards | `root-standards.md` judged rows | the same pattern, each settled with the decision matrix | warn |
+| the inventory's 2 mechanical | `root-standards.md` mechanical rows | mechanical, proved on good and bad cases | warn |
 
-The old 1,024-character rule goes; the 300 limit replaces it, and the platform's 1,024 maximum stays a stated fact, unmarked. Run 1 settles each new judged rule's exact selector and eligibility question with `skill-rules`' decision matrix. A standard the matrix finds unready is returned with its rewrite, not marked. A rule whose eligibility can't be made honest stays unmarked, with its evidence.
-
-**Eligibility (G9), by rule:**
-
-- `rule.generalization`: judges rule statements, not local instructions. A gate asks whether the paragraph states a reusable rule.
-- `guidance.positive`: judges guidance paragraphs.
-- `reference.teaching-depth`: judges a section that owns a stage, not a lookup or subsection. Narrowed by a selector where the engine allows, otherwise by a gate.
-- `call.completeness`, `branch.condition`, `completion.criterion`: keep their call-site selectors. A gate gives each the call's surrounding step as context, so a complete local example isn't judged in isolation.
-
-The hosted run's 2,005 warnings and their sampled causes (`tmp/project-1-fix/hosted-sample-review.md`) are the development cases.
+The old 1,024-character rule goes; the 300 limit replaces it, and the platform's 1,024 maximum stays a stated fact, unmarked. Run 1 settles each judged rule's unit kinds, gates and wording with `skill-rules`' decision matrix; a standard the matrix finds unready is returned with its rewrite, not marked. The hosted run's sampled warnings (`tmp/project-1-fix/hosted-sample-review.md`) are the development cases for the gates: a local instruction is not a reusable rule; a lookup subsection doesn't own a stage; a complete call read with its step is not incomplete.
 
 ## Where the files go
 
 - **`domain-skill-crafting/references/descriptions-and-invocation.md`:** standards 1 to 6, and the depth that teaches the `Always` choice and the two-prompt trial, including the hidden-skill case.
 - **`domain-skill-crafting/references/calls-and-placement.md`:** standard 7 (L1).
-- **`domain-skill-crafting/rules/`:** the changed and new rules entries, the eligibility gates, and a RuleSet split if severities or evaluation need it.
-- **`skill-rules/references/running-rules.md`:** G13's reading. Run the check; evaluate the mechanical RuleSets; with the repository's judge flag and a key, evaluate the judged ones; read each result by its kind and calibration state; carry every gap to the caller's return.
-- **`skill-rules/references/check-and-reports.md`:** a section "Calibrate each judged rule", beside the mechanical one (G15), so calibration has one home.
-- **`skill-rules/references/decision-matrix.md`:**
-  - the frontmatter near miss now names the evidence route (G4);
-  - a worked case of an eligibility gate (G9).
-- **`skill-rules/references/markers-and-rules.md`:** how an eligibility gate is written: a gate question before the verdict, or a narrower selector.
-- **`tests/skills/scripts/run-skill-rules.mts`** (renamed from `.mjs`), its test, `tsconfig.json` including `scripts/**/*.mts`, and `package.json`'s `rules` script. G12 behavior: default every plugin; `--judge`; the key passed through only then; request cap and cost; gaps named; no key in any output.
-- **`AGENTS.md`:** the runner line, with `--judge` and the statement that this repository's skill text is public and may be judged.
+- **`domain-skill-crafting/rules/`:** the changed and new entries, each judged entry carrying its mechanical pass, gates and verdict in the marker entry (A22.5).
+- **`skill-rules/references/running-rules.md`:** rewritten for G11. Run the runner; read the check and the evaluation by the engine's outcomes; carry every gap to the caller's return. The sentence that the step "never evaluates a judged RuleSet" goes.
+- **`skill-rules/references/markers-and-rules.md`:** how a marked standard carries its decision model, with one worked case.
+- **`skill-rules/references/decision-matrix.md`:** a standard's unit kinds and gates are part of routing it to a rule; the frontmatter near miss routes to a judged field target.
+- **`skill-rules/references/check-and-reports.md`:** the evaluation's candidate outcomes, and building and reading a rule's eval with `score_eval` (G13).
+- **`tests/skills/scripts/run-skill-rules.mts`** (renamed from `.mjs`), its test, `tsconfig.json` including `scripts/**/*.mts`, and `package.json`'s `rules` script: G10.
+- **`AGENTS.md`:** the runner line, and the opener policy at line 167 (`Use when` only) cut over to the four openers.
 
 ## The four sites
 
-Each loads `running-rules.md` with a path that resolves from the file holding the call; each return and completion reports the rules' actual state.
+Each loads `running-rules.md` with a path that resolves from the file holding the call; each return reports the rules' actual state.
 
-- **`skill-creation`, self-check:** runs on the changed files. An `error` is fixed before the diff comparison; a `warn` is fixed or named; a judged warning is confirmed or named as a candidate.
-- **`skill-review`, first rule pass:** as now. Judged warnings become candidate findings the review lead confirms at their anchor, marked with their rule's calibration state.
-- **`skill-orchestrator`, step 4:** the `rules: pending` line becomes a call on the change's files. An `error` returns to step 3; judged warnings go into step 5's assessment; the run summary's `rules:` line reports the actual state.
-- **`skill-audit`, its rule step:** the `rules: pending` line becomes a call over the skills in scope. A failed check or a confirmed judged warning flags its skill beside the step 2 signals. The return's `rules:` line reports what ran, what was judged, and every gap.
+- **`skill-creation`, self-check:** runs on the changed files. An `error` is fixed before the diff comparison; a `warn` is fixed or named; a judged finding is confirmed or named as a candidate.
+- **`skill-review`, first rule pass:** judged findings become candidate findings the review lead confirms at their anchor.
+- **`skill-orchestrator`, step 4:** the `rules: pending` line becomes a call on the change's files. An `error` returns to step 3; judged findings go into step 5's assessment; the run summary's `rules:` line reports the actual state.
+- **`skill-audit`, its rule step:** the `rules: pending` line becomes a call over the skills in scope. A failure or a confirmed finding flags its skill beside the step 2 signals; the return's `rules:` line reports what ran and every gap.
 
 ## Trigger and invocation
 
-Seven descriptions change, to meet G1 and G3 at 225 characters or less; each keeps its invocation capability. `domain-skill-crafting` stays hidden (frontmatter and `agents/openai.yaml`). Each writer drafts its skill's description against the root's standards, and its run carries G5's trial (one true prompt and one near miss, two fresh sessions each, capped at three turns). Today all six model-visible ones load 2/2 and stay quiet 2/2, and the new ones must too.
+Seven descriptions change, to meet G1 and G2 at 225 characters or less; each keeps its invocation capability. `domain-skill-crafting` stays hidden (frontmatter and `agents/openai.yaml`). Each writer drafts its skill's description against the root's standards, and Jev judges it in the writer's self-check. Each model-visible one gets G4's trial: one true prompt and one near miss, each in a fresh Luna session with no turn cap that cuts the routing decision short, isolated from this repository's design files.
 
 ## Runs
 
 | Run | Target | Kind | Writer | Status |
 | --- | --- | --- | --- | --- |
-| 1 | `domain-skill-crafting`: standards 1 to 7, markers and rules entries with eligibility, severities, its description | update | Opus 5.5 xhigh | proposed |
-| 2 | `skill-rules`: `running-rules.md`, judged calibration in `check-and-reports.md`, decision-matrix and markers-and-rules cases, its description | update | Opus 5.5 xhigh | proposed |
-| 3 | the runner: `.mts`, G12, tests, `tsconfig`, `package.json`, `AGENTS.md` line | repository code | Sol, Implementer Sidekick | proposed |
-| 4 | `skill-creation`: self-check reading, its description | update | Opus 5.5 high | proposed |
-| 5 | `skill-review`: first pass reading, its description | update | Opus 5.5 high | proposed |
-| 6 | `skill-orchestrator`: prove-step site, run summary, its description | update | Opus 5.5 high | proposed |
-| 7 | `skill-audit`: rule site, its return, its description | update | Opus 5.5 high | proposed |
-| 8 | `skill-design`: its description; its verification step plans G5's trial for a changed description | update | Opus 5.5 high | proposed |
-| 9 | calibration (G16): labeled sets from the owner's samples, eligibility then threshold, held-out results per rule | eval | Sol Researcher, with the owner labeling on a presentation-html page | proposed |
-| 10 | consumer run (G17): #172's `presentation-html` design-page phone-width change, made by fresh agents with this kit on a scratch branch from this change's head, with a description over 300 characters planted | proof | fresh Opus writer, Sol reviewer | proposed |
-| 11 | changelog entry, plugin versions, `AGENTS.md` check | documents | the Lead | proposed |
+| 0 | the engine release with P5, P8b and P10 | dependency (Project 2) | Project 2 Implementer, Sol | in progress |
+| 1 | `domain-skill-crafting`: standards 1 to 7, markers and decision-model entries, severities, its description | update | Opus 5.5 xhigh | proposed |
+| 2 | `skill-rules`: `running-rules.md`, `markers-and-rules.md`, `decision-matrix.md`, `check-and-reports.md`, its description | update | Opus 5.5 xhigh | proposed |
+| 3 | the runner: `.mts`, G10, tests, `tsconfig`, `package.json`, `AGENTS.md` | repository code | Sol, Implementer Sidekick | proposed |
+| 4 | the four sites and the descriptions of `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit`, `skill-design` | update | Opus 5.5 high | proposed |
+| 5 | the eval (G14): labeled sets from the owner's samples, development and held-out, `score_eval` per judged rule | eval | Sol Researcher, the owner labeling the HTML samples, Jev judging | proposed |
+| 6 | consumer run (G15): #172's `presentation-html` design-page change on a scratch branch from this change's head, a 301-character description planted | proof | fresh Opus writer, Sol reviewer, Jev and Luna for every test | proposed |
+| 7 | changelog entry, plugin versions | documents | the Lead | proposed |
 
-Order:
-- **Side by side:** runs 1 and 3 (separate files); then run 2, which reads run 1's rules.
-- **After run 2:** runs 4 to 8, side by side.
-- **Then:** run 9, which needs runs 1 to 3; run 10, which needs all of 1 to 8; run 11 last.
+Order: run 0 first; runs 1 and 3 side by side once the release exists; then run 2, which reads run 1's rules; then run 4; then runs 5 and 6; run 7 last. Every run checks its diff against G16 and reports its search, and names the model of every model run it launches. No run uses Opus for a test.
 
-Every run checks its diff against G18 and reports its search.
-
-One unit, one review: the runs call each other. After run 11, a fresh `skill-review` implementation review loads this branch's `skill-review`, so its first pass runs the new rules, with `--judge`, on this change itself.
+One unit, one review: after run 7, a fresh `skill-review` implementation review loads this branch's `skill-review`, so its first pass runs the new rules, with Jev, on this change itself.
 
 ## Decisions
 
 | # | Decision | Reason |
 | --- | --- | --- |
 | E1 | The 300 limit is `error`; everything else `warn` | The owner: "300 means it fails its a failure" |
-| E2 | Judged rules are `advisory` until calibrated, and never block | The owner's spec: no judged rule blocks before its eval; the 73% warning rate shows they aren't ready |
-| E3 | Sending text to Jev needs `--judge`, which a repository's instructions choose | Content leaving the machine is the repository owner's choice; the Codex reviewer refused it twice without the owner's direct word |
-| E4 | The runner takes the key from its environment only | The OS keychain lookup lives in the CLI (#94, unreleased); the runner adds no second credential path |
-| E5 | Version stays 0.6.0, in #171 | One PR; #171 is unreleased |
-| E6 | The consumer run is #172's design-page phone-width change, made on a scratch branch | It's real work already decided (I5); a scratch branch keeps #172 untouched until #171 merges |
-| E7 | "Passes" means A (requirements) | The Lead's and the Advisor's recommendation, offered to the owner on 28 October |
-| E8 | Trigger trials: two fresh sessions per prompt, three turns, no extra reruns without the Lead | The 28 October trigger runs cost $24.77 with reruns; the owner's attention to cost |
-| E9 | Description judgments go through the title section with the description as evidence | The engine refuses a frontmatter judged target; the probe showed the evidence route works |
-| E10 | Calibration labels come from the owner's samples, with the owner labeling the HTML ones | The owner, 28 October: existing samples, current skills, and "we will go though html presetnation samlpes" |
+| E2 | Judged rules warn until their eval shows them accurate | The owner's spec: no judged rule blocks before its eval; the hosted run's warning rate shows the flat rules weren't ready |
+| E3 | Jev runs by default, with the key the engine resolves; no switch | The owner: "jev is teh whole fuckign poitn"; draft 1's `--judge` removed |
+| E4 | Every judged standard is a decision model in its marker entry, run per unit by the engine | The owner: "decion models eveyrwehre"; A22 makes the engine carry it |
+| E5 | Descriptions are judged as their own frontmatter field | The owner's 26 October choice, built in A22 |
+| E6 | Calibration is the engine's `score_eval`, nothing beside it | One owner per job; draft 1's advisory states and calibration procedure removed |
+| E7 | Version stays 0.6.0, in #171 | One PR; #171 is unreleased |
+| E8 | The consumer run is #172's design-page phone-width change, made on a scratch branch | Real work already decided (I5); keeps #172 untouched until #171 merges |
+| E9 | "Passes" means A | Offered on 28 October, not objected to |
+| E10 | Trigger trials run on Luna; judgments on Jev; Opus writes skills only; Sol does everything else | The owner, 28 October |
+| E11 | Eval labels come from the owner's samples, the owner labeling the HTML ones | The owner, 28 October |
 
 ## Coordination
 
-- **Base:** #171's branch, `worktree-project-1-skill-crafting`, at `9eabb3a8`. Skill-authoring 0.6.0 and its changelog entry are already there; run 11 extends that entry.
-- **After merge:** #172 and #173 take this in by merge. #172 then fixes its 17 descriptions and I5's presentation-html change for real.
+- **Base:** #171's branch, `worktree-project-1-skill-crafting`. Skill-authoring 0.6.0 and its changelog entry are already there; run 7 extends that entry.
+- **Engine:** Project 2's branch `feat/session-ingestion-and-trees`; A22 at `tmp/project-2/amendment-a22-skill-decision-models.md`, under review.
+- **After merge:** #172 and #173 take this in by merge. #172 then fixes its 17 descriptions and I5's `presentation-html` change for real.
 - **Work thread:** board "Workflow improvements", project `01a1635f`.
 
 ## Review record
 
-None yet. The design review (`skill-review`, design stage, Sol xhigh) comes next, then the owner's look at the page.
+Draft 1 was reviewed (`tmp/project-1-reviews/rules-in-use-design-review.md`, targeted-revision: RUI-1 eligibility not buildable on the published engine; RUI-2 calibration predicate; RUI-3 state home; RUI-4 the `AGENTS.md` opener). Draft 2 answers RUI-1 with A22, removes RUI-2 and RUI-3's subject (no calibration state; the engine's eval), and cuts over `AGENTS.md:167`. Draft 2's design review follows A22's acceptance.

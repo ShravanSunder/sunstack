@@ -1,54 +1,46 @@
 # Rules in use: requirements
 
-Draft 1, by the 🦁 Lead, 2026-10-28, written with the branch's `skill-design`. Part one of the design set: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It is Project 1's second milestone 2 slice: it finishes the kit the first checked rules started, so later pull requests are made with it and checked by it.
+Draft 2, by the 🦁 Lead, 2026-10-28. Part one of the design set: requirements, [specification](specification.md), [skill design](skill-design.md), [skill verification](skill-verification.md). It finishes the kit the first checked rules started, so later pull requests are made with it and checked by it. Draft 2 replaces draft 1, which kept Jev off by default (`--judge`), wrote eligibility gates into prompts the engine can't run, invented calibration states and routed descriptions through the title section. It depends on the engine change in Project 2's amendment A22 (slice P10) and its eval operation (slice P8b), shipped in one tagged release.
 
 ## The change
 
-- **Class:** behavior-changing. It alters descriptions (the trigger of seven skills), four skills' rule sites, `skill-rules`' procedure, the root's standards and their checks, and the rule runner. Runs: `update` on seven skills, plus repository code, a calibration and a consumer run.
-- **Reusable behavior:** this change helps skill-authoring agents reliably check every skill they write, review, release or audit against the root's standards, with the real engine deciding the checked rules and Jev judging the rest as advisory warnings, whenever a skill changes in any pull request.
+- **Class:** behavior-changing. It alters descriptions (the trigger of seven skills), four skills' rule sites, `skill-rules`' procedure, the root's standards and their rules, and the rule runner. Runs: `update` on seven skills, plus repository code, an eval and a consumer run.
+- **Reusable behavior:** skill-authoring agents check every skill they write, review, release or audit against the root's standards, as decision models the engine runs through Jev, whenever a skill changes in any pull request.
 - **Who reaches it:** `skill-creation` at its self-check, `skill-review` at its first rule pass, `skill-orchestrator` at its prove step, `skill-audit` over the skills it audits, each through the repository's rule runner; a person runs the runner with one command.
 
 ## The need, in the owner's words
 
 - 24 October: "start twith the high priority oens and ksill creaiton parts and impvoements to skill audits etc. teh skil adut can have all the rules we can run them easily then".
-- 28 October, on the stack: "we were skukppsed ot skue pr1 to make  future prs and use the rules and audits and eisng htem in"; "we need to fix pr1 agree on it.  then we can merge ti and use int all the folow up prs"; "ci is les simprotant thatn using it for pr1"; "we stil figurign thigns out".
-- 28 October, on descriptions: "we want fornt mateter deisgn not jsut rules as it sjusdgement of reviwer and creator.  descriptiosn shoduk be suscint"; "So lets keep this forngmatter diesn.  Trigger wen, Always trigger when is also ok"; "300 means it fails its a failure.  we shoudl check thos good skilsl are working. so lets have warnigns after 225 chars.  lets have guidance below 200 is ideaq. lets have 300 as ahrd rule with jev or rules etc."; "why not? why can we use the markdown and yaml grep ast to get forntmatter for rule?".
-- 28 October, on removed files: "make srue any creation skill file yo uremove dis acuratley represented aska dvisor to check in that pr1".
-- 28 October, on the runner: "tests/skills/scripts/run-skill-rules.mjs can this not be mts?".
-- 28 October, agreeing the fix list item by item: "1. yes, 2. yes, 3. yes we have exisitn sampels for korhcset diesgtn sesiosn forma dvisior.  we ahve for skilsl current skills to audit and claibrate and talk about we will go though html presetnation samlpes.  4. yes, good start, 5. yes.  6yes, 7 lets go?".
+- 25 October, the pipeline: "soruces go thorugh -> trigger (otouf scope) -> inputs -> mechiancialf itler -> possilbe jev fileter decision tree -> the judge".
+- 26 October, descriptions: the selected answer "A small engine change, so Jev can judge it".
+- 27 October: "yes release for 1. we can sue a script with righ tparameters to help with pnpm." (the mechanical-first start, approved); "ok get all prs reayd after testign dog foodign rules with our new skillreation set of ksills".
+- 28 October, on the stack: "we were skukppsed ot skue pr1 to make  future prs and use the rules and audits and eisng htem in"; "we need to fix pr1 agree on it.  then we can merge ti and use int all the folow up prs"; "ci is les simprotant thatn using it for pr1".
+- 28 October, on descriptions: "we want fornt mateter deisgn not jsut rules as it sjusdgement of reviwer and creator.  descriptiosn shoduk be suscint"; "100 to 200 charcters"; "so soft rulle is 100 to 200"; "Trigger wen, Always trigger when is also ok"; "300 means it fails its a failure.  we shoudl check thos good skilsl are working. so lets have warnigns after 225 chars.  lets have guidance below 200 is ideaq. lets have 300 as ahrd rule with jev or rules etc.".
+- 28 October, on removed files: "make srue any creation skill file yo uremove dis acuratley represented"; on the runner: "tests/skills/scripts/run-skill-rules.mjs can this not be mts?".
+- 28 October, the fix list: "1. yes, 2. yes, 3. yes we have exisitn sampels for korhcset diesgtn sesiosn forma dvisior.  we ahve for skilsl current skills to audit and claibrate and talk about we will go though html presetnation samlpes.  4. yes, good start, 5. yes.  6yes, 7 lets go?".
+- 28 October, the correction this draft answers: "the whole fuckign poitn of this is deiciosn models"; "how teh fuck we gonna fix this without stupid shiims and hot patches"; "in sunstack and this process of skill rules and rules engien i dont want worka orudsn"; "fix the fuckign engine"; "jev is teh whole fuckign poitn . we wnat to use decion models eveyrwehre"; "it is not afuckign afterhogiuht"; "luna and jev thats fuckign it for test runs of skills. use opus for fuckign creating skills only. and sol for evyerhting else".
 
-**Success definition:** an agent writing, reviewing, releasing or auditing a skill in a later pull request runs the root's rules with the repository's one command. The checked rules decide: a description outside the owner's openers, or over 225 characters, warns; one over 300 fails and is fixed before the step completes. With the repository's permission and a key, the judged rules run through Jev on the units their standards govern, and come back as advisory warnings with their calibration state. A rule that didn't run, an input too large to judge, or a missing key shows as a named gap, never as a pass. #171's own skills pass their checked rules, and one ordinary later-PR skill change shows all of this end to end, including a planted failure caught.
+**Success definition:** an agent writing, reviewing, releasing or auditing a skill in a later pull request runs the root's rules with the repository's one command, and Jev judges them by default. Each judged standard is a decision model: it selects the units its standard governs, asks whether each one is the kind the standard covers, and judges only those. A description outside the owner's openers, or over 225 characters, warns; one over 300 fails and is fixed before the step completes. Judged findings are confirmed at their anchor; anything uncertain, unresolved or not processed is a named gap, never a pass. #171's own skills pass, and one ordinary later-PR skill change shows all of this end to end, with a planted failure caught.
 
-**What "passes" means** (the Lead's default A, offered to the owner on 28 October; the owner may change it): the checked rules pass; the judged rules actually run on eligible units, and each warning a person confirms is fixed or explained; anything incomplete is named. Clearing every judged warning is not the bar, because the judged rules are not calibrated yet.
+**What "passes" means** (the Lead's default A, offered on 28 October and not objected to): the mechanical limits pass; the judged rules ran on the units they govern, and each finding a person confirms is fixed or explained; anything incomplete is named. Clearing every judged warning is not the bar until a rule's eval shows it is accurate.
 
 ## Evidence
 
-- The #171 inventory (`tmp/project-1-fix/inventory.md`, 28 October, Researcher `codex-local/01a1822d`), read by the Lead:
-  - #171's seven descriptions are 264 to 411 characters; five fail the 300 limit and two warn.
-  - The six model-visible ones load 2/2 on their real prompt and stay quiet 2/2 on a near miss.
-  - The runner checks only `plugins/skill-authoring/skills` (`run-skill-rules.mjs:19`), strips the key (`:206-207`) and evaluates only the metadata RuleSet.
-  - The audit and the orchestrator still say `rules: pending`.
-  - Of the root's 235 standard units: 2 mechanical, 31 judged, 110 review-only, 88 eval, 4 prose.
-  - Across all 74 skills, the owner's description policy gives 25 failures, 33 warnings and 16 passes.
-- The hosted judged run, from the Lead's session with the owner's "yes", 28 October:
-  - 327 requests, $0.148, model `typesafe/jev-1.14-20261014`.
-  - 2,739 judged passages: 2,005 warned and 734 passed; one request was over budget.
-  - Sampling 30 warnings: 11 judged the wrong kind of unit, 17 were stricter than the standard, 2 were possible wording fixes.
-- The 🦉 Advisor's second look (`tmp/project-1-fix/finishing-plan-advisor.md`, `codex-local/01a14e6a`), adopted:
-  - (1) prove the kit on one ordinary later-PR skill change through the normal route, not a Lead-run campaign;
-  - (2) don't rewrite text to clear an uncalibrated judge: give each rule an eligibility gate and calibrate it;
-  - (3) markers only where a rule fits.
-- The Advisor's removed-files check (`tmp/project-1-reviews/removed-files-advisor.md`): 282 kept, 5 changed on recorded decisions, 1 lost. L1, "Name that validator and test the representation it consumes" (`shared-shape-design.md:11` at base), was verified by the Lead at source.
-- The judge probe (`tmp/frontmatter-judge-probe/report.md`, 28 October): a judged rule can read a description as extra evidence beside a Markdown target; a frontmatter field can't be a judged target in the published engine (`invalid_target`).
-- The `.mts` report (`tmp/mts-check/report.md`): convert, using Node's built-in type stripping.
-- **Authoring basis:** user-directed intent, for every part, with observed failures as its evidence: the inventory's description failures, the pending rule sites, the runner's scope and key handling, and L1.
+- **What went wrong in draft 1 and the first slice** (the 🦉 Advisor's independent inventory, `tmp/project-1-reviews/lead-additions-inventory-advisor.md`, 52 items, with one correction: its item 25 missed the owner's "100 to 200" messages). The mechanical-first start was approved; what failed was the finish: the shipped run procedure says the step "never evaluates a judged RuleSet" (`skill-rules/references/running-rules.md:9`), and the runner deletes the key (`run-skill-rules.mjs:207`), points Jev at a dead port (`:341`), evaluates only the metadata RuleSet (`:333-335`), binds a stand-in file when no references are selected (`:313-314`) and scans one plugin (`:19`).
+- **Why the engine couldn't run skill standards as decision models** (the 📚 Researcher's report, `tmp/project-1-fix/engine-decision-models-research.md`, decisive claims reopened by the Lead): a candidate can't be a skill unit; a marked rule can't carry a mechanical pass, gates or a tree; a judged rule refuses a frontmatter field; checking rules needs a target binding; an eval case needs a session. Project 2's amendment A22 fixes each in the engine.
+- **The #171 inventory** (`tmp/project-1-fix/inventory.md`): #171's seven descriptions are 264 to 411 characters (five fail 300, two warn); of the root's 235 standard units, 2 are mechanical, 31 judged, 110 review-only, 88 eval and 4 prose; across all 74 skills the owner's description policy gives 25 failures, 33 warnings and 16 passes.
+- **The hosted run of the six flat judged rules** (owner's "yes", 28 October): 327 requests, $0.148, 2,739 judged passages, 2,005 warned. Of 30 sampled warnings, 11 judged the wrong kind of unit and 17 were stricter than the standard. The flat rules had no way to ask whether a unit was theirs to judge.
+- **The removed-files check** (`tmp/project-1-reviews/removed-files-advisor.md`): one standard lost, L1, "Name that validator and test the representation it consumes" (`shared-shape-design.md:11` at base).
+- **The trigger campaigns:** 82 headless Claude Code runs on default Opus, $33.14, against the owner's model rules. Their receipts stay as evidence; the method is not reused.
+- **Authoring basis:** user-directed intent for every part, with the observed failures above as evidence.
 
 ## Non-goals
 
 - CI. The owner: "ci is les simprotant thatn using it for pr1".
-- Making any judged rule block. Judged rules warn until calibrated, and they don't block afterwards either without the owner's later decision.
+- Any switch, mode or flag that turns Jev off or makes it opt-in.
+- Any caller-side substitute for an engine capability: no placeholder endpoint, deleted credential, stand-in binding, prompt-written gate or parallel calibration procedure.
 - Rewriting text to clear judged warnings.
+- Making a judged rule block before its eval shows it accurate, and afterwards without the owner's decision.
 - Marking standards the decision matrix routes to review, eval or prose.
-- The other 67 skills' descriptions: #172's 17 follow in #172 after this merges, and the remaining 50 get their own descriptions pass.
-- Reading the OS keychain from the runner. The runner reads the key only from its environment until a released CLI does the lookup (`sunstack-tools` #94, merged, not yet released).
+- The other 67 skills' descriptions: #172's 17 follow in #172 after this merges; the remaining 50 get their own pass.
 - A rule-discovery mode in the engine's CLI (later, as the owner said on 27 October).
