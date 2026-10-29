@@ -4,7 +4,7 @@ This reference owns one decision: the page form for a view or record that anothe
 
 Expected inputs: the view's name, its required fields, and the source content.
 
-Return, for each view: its form, and the good and bad signals you will check in the screenshot.
+Return, for each view: its form, and the good and bad signals to guide composition.
 
 ## Design views
 
@@ -72,4 +72,4 @@ To compare a current path with a proposed one, put the two paths in `ex-compare`
 
 Give a frame a tone only when the source states that call's status, such as Planned for a call that is designed but not built.
 
-Complete when every named view has a form, every field from its view request is visible in that form, its good signal is confirmed in the screenshot, and its bad signal is absent.
+Complete when every named view has a form, every field from its view request is visible in that form, its content follows the good signal, and its bad signal is absent. The main workflow owns validation; this table adds no screenshot requirement.
