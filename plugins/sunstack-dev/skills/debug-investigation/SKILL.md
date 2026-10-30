@@ -79,7 +79,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
    - fix next
    - follow up later
 
-   Completion: one action is chosen, with the proof step or fix it names and the uncertainty it targets.
+   Completion: one action is chosen, naming the ranked hypothesis it acts on, the proof step or fix it takes, and the uncertainty from step 7 it removes.
 
 ## Subagent Use
 
