@@ -1,6 +1,6 @@
 ---
 name: plan-update
-description: "Use when a ready implementation plan's meaning must change during delivery: a design correction, a plan-defect finding, a slice that must split or merge, a changed dependency or proof target, or a PR that must re-split. Not for the first plan (plan-implementation) or choices inside one slice (implement-plan)."
+description: "Use when a plan's meaning changes in delivery: design correction, plan defect, slice split or merge, new dependency or proof target, PR re-split. Not for first plans (plan-implementation) or in-slice choices (implement-plan)."
 ---
 
 # Plan Update
