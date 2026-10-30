@@ -1,6 +1,6 @@
 ---
 name: orchestrator-design
-description: "Use when asked to run, resume or finish one design cycle (the four documents and first plan, reviewed together). Not for one direct design phase, changing a plan during delivery, implementation delivery or PR work."
+description: "Use when asked to run, resume or finish one design cycle. Not for one direct design phase, changing a plan during delivery, implementation delivery or PR work."
 ---
 
 # Design Orchestration
