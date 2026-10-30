@@ -1,6 +1,6 @@
 ---
 name: verification-design
-description: "Use when planning how a design project's requirements will be proven: for each requirement, the reference, the target and `verify-<app>` journey, a passing condition a wrong build fails, reused real-path tests and what stays unverified, after Program Design or when that plan is missing or stale. Not for observing or challenging a delivered claim (practices-verification), building journeys (practices-verification-maintenance), or regression tests."
+description: "Use when planning how a design's requirements will be proven, after Program Design or when that plan is missing or stale. Not for checking a delivered claim (practices-verification), building journeys or regression tests."
 ---
 
 # Verification Design
