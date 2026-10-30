@@ -42,7 +42,7 @@ Draft 3, by the 🦁 Lead, 2026-10-29. Part two of the design set: [requirements
   - checks the config, the rulebook, the rule entries and the evidence project, with no checked file read and no credential (`--check`);
   - evaluates every rule over every plugin's skills by default, over the skill folders or files named, or over the evidence changed since a revision (`--since REV`), with Jev on;
   - takes the key the engine resolves itself (its environment, else the OS key store); a run without one is refused by the engine before any checked file is read, and the runner reports that refusal as the run's state;
-  - prints the engine's status and usage, every finding with its file and line, every `uncertain` piece with its decision step, answers and location, every incomplete part with its reason, and every skipped rule, and keeps the engine's JSON report;
+  - prints the engine's status and usage, the count of each outcome (`pass`, `not_applicable`, `finding`, `uncertain`, `incomplete`) from the report's per-piece results, every finding with its file and line, every `uncertain` piece with its decision step, answers and location, every incomplete part with its reason, and every skipped rule, and keeps the engine's JSON report;
   - refuses a full-scope run (default or named paths) whose engine status is `nothing_selected`, so a wrong path never reads as clean; a `--since` run with nothing selected is clean; every other status passes through unchanged;
   - exits with the engine's code otherwise;
   - never deletes, replaces or writes the key, and never names an endpoint; the config's decision model is the engine's Jev backend;
