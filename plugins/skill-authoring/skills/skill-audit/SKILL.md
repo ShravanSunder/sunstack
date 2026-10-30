@@ -35,7 +35,7 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
    - the 1-3 most relevant rollout summaries when exact evidence matters
    - raw sessions only when summaries do not contain the needed proof
 
-   Completion: every signal carries its source and date, and each inferred or single-sighting signal is labeled a hypothesis.
+   Completion: each source above was searched, or named as not needed with the reason, and says what it gave; every signal carries its source and date; and each inferred or single-sighting signal is labeled a hypothesis.
 
 3. Review the flagged skills.
 
@@ -50,7 +50,7 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
    - extract mechanics, trigger wording, failure shields, and output shapes
    - avoid bulk-loading unrelated repositories
 
-   Completion: each upstream skill opened maps to a named candidate workflow, or none was needed.
+   Completion: each upstream skill opened maps to a named candidate workflow and names what was taken from it (a mechanic, trigger wording, a failure shield or an output shape), or the audit says why no upstream source was needed.
 
 5. Classify candidates:
    - `update`: existing skill is the right bucket but stale or incomplete
