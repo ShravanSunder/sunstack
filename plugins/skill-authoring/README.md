@@ -8,7 +8,7 @@ Skills for authoring skills in any repository: design and write them, turn their
 | `skill-design` | design one skill change and write its design set before its files change |
 | `skill-creation` | write one skill's files from its accepted design, or make a mechanical edit |
 | `domain-skill-crafting` | hidden; holds every standard a skill's text must meet; loaded by the other skills |
-| `skill-rules` | decide which of a skill's standards become checked `sunstack-rule` rules, mark them in the skill's Markdown, and prove them with `check_rules` and good and bad examples |
+| `skill-rules` | decide which skill standards become checked rules, define their evidence and decision models, and prove them with config checks and labelled cases |
 | `skill-review` | review a skill change's design set or skill files with several independent reviewer agents |
 | `skill-audit` | decide from evidence which skills to create, update, merge, or skip |
 

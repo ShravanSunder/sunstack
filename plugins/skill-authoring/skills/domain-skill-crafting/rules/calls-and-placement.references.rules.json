@@ -1,8 +1,0 @@
-{
-  "R001": {
-    "name": "reference.teaching-depth",
-    "target": { "input": "skill", "select": { "kind": "markdown_units", "mode": "unit", "units": ["section"] } },
-    "threshold": 0.8,
-    "severity": "warn"
-  }
-}
