@@ -1,6 +1,6 @@
 ---
 name: practices-manage-agents
-description: "Use when delegating to subagents, agent teams or parallel agents: the Lead or an authorized helper chooses an Advisor, Implementer, Verifier, Reviewer, Researcher or Operator, its valid Worker or Sidekick form, and model; or spawns, commissions, continues, steers, waits for, monitors, verifies or assesses that work, including a fan-out across many units. Not for performing the assigned engineering phase itself."
+description: "Use when delegating to subagents, teams or parallel agents (fan-out too): choosing role, form and model, or spawning, commissioning, continuing, steering, awaiting, verifying or assessing them. Not for doing the phase itself."
 ---
 
 # Practices: Manage Agents
