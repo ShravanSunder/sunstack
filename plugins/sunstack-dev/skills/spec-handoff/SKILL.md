@@ -32,7 +32,7 @@ Package spec/design context so another agent can continue without reconstructing
 
 2. Inspect only the code/docs needed to make claims grounded.
 
-   Completion: every code or doc path the packet cites was opened in this run.
+   Completion: every existing code or doc path the packet cites as evidence was opened in this run; each path the design declares as new is kept and marked intentionally new, not created; evidence that couldn't be opened is named as a gap.
 
 3. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred design scope, and exact user-direction evidence; otherwise preserve the current Lead as design owner.
 

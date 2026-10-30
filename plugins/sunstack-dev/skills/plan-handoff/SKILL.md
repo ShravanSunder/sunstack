@@ -37,7 +37,7 @@ Package an existing implementation plan so another agent can review or execute w
 
 3. Inspect only the secondary code/docs needed to make the handoff grounded.
 
-   Completion: every code or doc path the packet cites was opened in this run.
+   Completion: every existing code or doc path the packet cites as evidence was opened in this run; each path the plan declares as new is kept and marked intentionally new, not created; evidence that couldn't be opened is named as a gap.
 
 4. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred plan scope, and exact user-direction evidence; otherwise preserve the current Lead as planning owner.
 
