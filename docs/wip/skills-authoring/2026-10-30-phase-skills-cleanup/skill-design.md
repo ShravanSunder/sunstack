@@ -15,6 +15,10 @@ Draft 1, by the 🦁 Lead, 2026-10-30. Part three: [requirements](requirements.m
 
 The writer follows `skill-authoring:skill-creation` for each skill, one invocation and one commit per skill, in this order: the three handoff skills (`plan-handoff`, `spec-handoff`, `implementation-handoff`), then `debug-investigation`, `docs-maintain`, `implementation-pr-wrapup`, `plan-improve-repo`.
 
+## Security
+
+Decided by the Lead after the first review named its absence (it belonged before the outline; recorded late): the change edits skill text only. It adds no command, script, network call, credential, file write outside the skills' existing outputs, or new trust boundary; the throwaway check harness lives in the ignored `tmp/` and is never committed. Sensitive surfaces: none new. Decision: allowed.
+
 ## Running the rules here
 
 `main` doesn't carry the #171 kit, and #171's runner always uses its own config and root, so it can't be pointed here. Each check runs the native engine (frozen C2) directly with a throwaway config in this worktree's ignored `tmp/` that points at #171's frozen rulebook, rules files and evidence project (entries `188116d0`) by absolute path, with `check.files` anchored at this worktree's root. It is checked with `--check` (twelve rules) and `--evidence` (pieces from all seven skill homes) before any Jev run. It is a check harness only; nothing of it is committed. Jev runs belong to the Lead, who holds the key; the writer runs `--evidence` and asks the Lead for each Jev run.
