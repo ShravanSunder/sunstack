@@ -58,5 +58,20 @@
     "outcome": "pass",
     "line": null,
     "source": "sol-settled"
+  },
+  "case-013": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-014": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-015": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
   }
 }
