@@ -128,7 +128,7 @@ Each keeps the near miss its old description guarded against, in fewer words. G4
 | Run | Target | Kind | Writer | Status |
 | --- | --- | --- | --- | --- |
 | 0 | the engine change, built locally from `feat/skill-rules-evidence-decisions`; its PR opened unmerged; the owner merges and releases it | dependency | sunstack-tools Implementer, Sol | built, in review |
-| 1 | `domain-skill-crafting`: standards 1 to 7, markers, the five rules files' entries, its description | update | Opus 5.5 xhigh | proposed |
+| 1 | `domain-skill-crafting`: standards 1 to 7, markers, the five rules files' entries, its description | update | Opus 5.5 xhigh | implemented (`74e3d3ca`); Jev self-check incomplete pending the config limit |
 | 2 | `skill-rules`: its four references, `SKILL.md`, `agents/openai.yaml`, its description | update | Opus 5.5 xhigh | proposed |
 | 3 | config, evidence project, runner `.ts` and its test, `tsconfig`, `package.json`, `AGENTS.md`, READMEs, the architecture doc, removals | repository code and kit data | Sol, Implementer Sidekick | proposed |
 | 4a to 4e | `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit` sites and descriptions; `skill-design`'s description and its verification step planning G4's trial | update | Opus 5.5 high | proposed |
