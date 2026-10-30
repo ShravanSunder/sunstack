@@ -198,5 +198,49 @@
       "path": "case-010/SKILL.md",
       "line": 3
     }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/steipete/agent-scripts",
+      "revision": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+      "path": "skills/remote-mac/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/steipete/agent-scripts",
+      "revision": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+      "path": "skills/openai-image-gen/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-012/SKILL.md",
+      "line": 3
+    }
   }
 ]
