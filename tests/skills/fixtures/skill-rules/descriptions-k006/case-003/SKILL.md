@@ -1,51 +1,73 @@
 ---
-name: principle-read-ground-truth-first
-description: "Always use when about to claim what current code, a system, a document, or a library does, or to explain an unexpected behavior. Read the decisive source and the whole artifact, trace the real path, and label every claim as seen, inferred, or guessed."
-disable-model-invocation: true
+name: skill-review
+description: "Always use when reviewing a skill change's design set before its files change, a skill draft shown in the conversation, or changed or existing skill files before they ship, especially when the review must be independent of the author or a skill's quality is in question. Not for reviewing product code or deciding which skills should exist (skill-audit)."
 ---
 
-# Read Ground Truth First
+# Skill Review
 
-Read this principle in full before applying it; your own full read earlier this session counts.
+Review is independent inspection. Agents that did not write the change each hunt one family of defects, and one review lead verifies every candidate at its anchor before accepting it. A finding is a claim about a file: it is true only once someone opened that file in the current revision and saw it. Reviewers agreeing with each other is not verification.
 
-Don't start from assumptions; read ground truth first, in proportion to the task. A claim about what code or a system does is only as good as the reading behind it. Memory, function names, summaries, and other agents' reports are claims about the source, not the source, and a stale assumption is a hidden guess. A design built on "I assume it works like X" carries that guess into the code, where it surfaces later as rework or an outage. Reading first is cheap; un-building is not. So every claim should carry its evidence, or say plainly that it is inferred or a guess.
+The checks and stages judge a skill against the standards in `domain-skill-crafting`, the hidden root this plugin's skills load. They load its core and topics by path, so each standard lives in one place and the root's wording governs.
 
-## How to think it through
+## Two Stages
 
-**Find the decisive source for the claim.** That means the code the change touches, the whole spec, the library's actual interface, the reference implementation, the logs and traces of the real run. For an open-source library, use its docs or an index to learn where to look, then read the code there. Don't guess a library's API from its name.
+| stage | when | artifact | reference |
+| --- | --- | --- | --- |
+| design review | before any skill file is edited | the design set, or a skill draft shown in the conversation | `references/design-review.md` |
+| implementation review | after proof and assessment, before ship; or a source-only evaluation of an existing skill | changed or existing skill files | `references/implementation-review.md` |
 
-**Follow the real path, from entry to effect.** Trace a request or a click from where it enters (the handler, the command, the event) to where the effect happens (the write, the response, the message), through the logs and spans if it's running. Which server handles this? Where is that connection made? Don't stop at a function whose name suggests the answer; names describe intent, not behavior.
+Mechanical changes are not reviewed.
 
-**Read the whole artifact, not the search hit.** The condition three lines up, the early return, the flag read at startup: these change what the line you found means. Read past the first match, too: "Two other callers discard panes without going through the method we found, so the fix belongs where every discard meets."
+## Workflow
 
-**Keep what you saw apart from what you infer.** Seen means a file and line, a log entry, an output you ran. Everything else is inferred or guessed, and you say which when you report. A cause you haven't observed is a guess, however likely it seems.
+### 1. Admit the review
 
-**For a surprising behavior, reproduce it before you fix it.** Then ask why until you reach the root cause, and add logging rather than guessing when you're stuck. When you find the cause, look for the same pattern elsewhere. Don't add a guard that only silences the symptom. When something "fails after a restart", suspect stale persistent state (a cache, a lock file, saved state) before the code. And "works after a restart" hides a cause too; find out what changed.
+Name the stage, the target (the design set's path and revision, or the files), and who asked for the review. You are the review lead: if you wrote or edited the target, stop and have the review run in an agent that did not. Read the target whole. Completion: stage, target identity, requester, and your independence from the author are stated.
 
-**Check that "it's there" means "it's wired", and that it's what's running.** A dependency in the manifest, a plugin in the config, or a flag in the docs doesn't prove the code path uses it; look for the call: "The telemetry package is installed; show me the startup call that registers it before calling it integrated." For a claim about running behavior, check what is deployed and loaded (the installed version, the pinned package, the config the process read), because a fix on the main branch is not evidence about production.
+### 2. Run the stage
 
-**A failed read is about your access until you've checked the instrument.** A request that fails from inside a sandbox, without credentials, or from the wrong network tells you that you couldn't reach the thing, not that the thing is down. Check your access and permissions before reporting an outage or rerunning work.
+IF the stage is design review, load `references/design-review.md` and return its per-check statuses, findings, verdict, and implementation decision. IF the stage is implementation review or an evaluation of existing files, load `references/implementation-review.md` and return its per-check statuses, findings, verdict, and ship decision.
 
-**Read in proportion.** Read what the claim depends on (the touched code, its callers, the contract it relies on), not the whole repository.
+Start each reviewer agent the stage names in its own session with no authoring history. Give it the target, the check references it walks by path, and `references/checks/review-schema.md`, and ask for candidate findings with anchors only. When the selected checks fit one family, split them across two agents.
 
-**The hard call is when a summary is good enough.** For a claim that matters, it isn't: the agent making the claim inspects the decisive source itself, at its current version. A doc, a helper's report, or your own memory is a lead that tells you where to read, not evidence. When you couldn't verify something, say so and say where you looked.
+IF the host repository's instructions or skills provide an agent-management practice with a Reviewer role, load `references/reviewers-through-host-practice.md` and return one commission per stage reviewer, sent through that practice as a review-lead commissioner it admits, or the gap you returned to the requester when it admits none. Otherwise use the host's own way to start an agent. If the host cannot start a separate agent, stop and tell the user: a review without a second agent is not a review.
 
-## Example: the missing range read
+Completion: every selected check has a status from the agent that walked it.
 
-An agent told the owner the storage library can't read byte ranges, and designed a workaround that downloads whole objects and slices them in memory. The library has a range-read call. One look at its interface before making the claim would have removed a whole component and its memory cost. Better: read the library's interface first, then claim, and say "I checked the API" or "I'm assuming this, unchecked".
+### 3. Verify and reduce
 
-IF the case in front of you doesn't match the range-read example, or you are checking the evidence behind someone else's claim about the system, load `references/example_scenarios.md` (scenarios, simplest first: the cache that wasn't invalidated; the plugin that was never wired; it failed after restart; the fix that wasn't deployed; "Who decided this?"; the wrapper that dropped the filter; the outage that was a sandbox; counts passed, meaning wrong) and return the closest scenario and how its move applies to your case.
+Open the anchor of every candidate. MUST load `references/checks/review-schema.md` and return each candidate's state. An absence claim is verified only by opening the file where the item would be. Merge duplicates, settle conflicts by reading the artifact, rank, and name the first fix. Completion: every candidate has a state, and every accepted finding was verified at its anchor before acceptance.
 
-## When it doesn't apply
+### 4. Return
 
-If no claim depends on current behavior, such as formatting text you were given, don't go re-reading unrelated code. Don't read the whole repository to change one function.
+MUST load `references/checks/review-schema.md` and return the stage's report labels with its reduction block. Accepted findings carry their route.
 
-## Signs you skipped it
+## Correction Loop
 
-- A cause stated as fact from one failed read, like "the service is down" from a request the sandbox blocked, with no check of access.
-- A claim with no file, line, log, or output behind it.
-- A diagnosis that credits fixes on the main branch while production runs an older pinned version.
-- A new guard or a restart called "the fix" without showing the failing behavior and the state that caused it.
-- "It's integrated" with no look at where it's called.
+Corrections return to the same review lead with its review history, which verifies corrected anchors. Both stages follow this convergence rule:
 
-When you judge whether gathered evidence supports a conclusion, check that it observed that exact claim at this version ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). When you create new evidence by running something, write the deciding result before you run ([experiment before proposing](../principle-experiment-before-proposing/SKILL.md)). When what you read contradicts the design's premise, not just a detail, stop and say what was assumed, what you found, and what it means ([refine mental models](../principle-refine-mental-models/SKILL.md)).
+> After each correction pass, compare this review with the previous one using the existing finding identity (anchor plus failure form). Return `not-converging` when either holds:
+> 1. **Recurrence.** A finding the review lead verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.
+> 2. **No progress.** The count of open accepted findings did not drop in two adjacent comparisons in a row: it stayed equal or rose from review N−1 to N, and again from N to N+1.
+>
+> When earlier review history is unavailable, the current review sets the baseline, and both conditions count from there. A correction outside the accepted boundary is not a pass.
+
+Worked example: open accepted findings go 4 → 3 → 3 → 4 over four reviews. 4 → 3 is progress; 3 → 3 and 3 → 4 are two adjacent comparisons without a drop, so the fourth review returns `not-converging`. The stop rule is met at that review, not one round later.
+
+The accepted boundary:
+
+> A correction is inside the accepted boundary when it changes no design meaning, scope, contract, or user decision. Only those corrections get further review rounds automatically. A correction that changes, or might change, any of those goes to the user first. Once the user settles it, review continues under the convergence rule without a permission prompt.
+
+IF a stage returns `not-converging` or a semantic change outside the accepted boundary, stop and bring the user the decision: what is open, the options with what each costs, and your recommendation. The review lead stays read-only.
+
+## Completion Blockers
+
+Do not return a clean result while any of these hold:
+
+- a reviewer agent had authoring history for the target;
+- fewer than two reviewer agents ran on a behavior-changing review;
+- the host provides an agent-management practice with a Reviewer role, and a reviewer started outside it;
+- an accepted finding was not verified at its anchor before acceptance;
+- a required check is missing, `partial`, or `blocked` without a recorded closure;
+- reviewer agreement or reviewer count stood in for verification;
+- a round ran after `not-converging`, or outside the accepted boundary without the user's decision.

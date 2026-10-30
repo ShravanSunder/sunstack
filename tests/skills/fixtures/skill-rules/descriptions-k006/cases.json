@@ -50,9 +50,9 @@
       "class": "derived",
       "repository": "ai-tools",
       "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
-      "path": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+      "path": "plugins/skill-authoring/skills/skill-review/SKILL.md",
       "startLine": 1,
-      "endLine": 51
+      "endLine": 73
     },
     "excerpt": {
       "path": "case-003/SKILL.md",
