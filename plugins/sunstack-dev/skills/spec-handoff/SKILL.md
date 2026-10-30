@@ -23,19 +23,28 @@ Package spec/design context so another agent can continue without reconstructing
 
 ## Workflow
 
-1. Resolve the source context:
+1. Resolve the source context, and if a source file exists, count lines and read the whole file in chunks before summarizing:
    - spec/design/architecture artifact
    - chat decision
    - current repo evidence
-2. If a source file exists, count lines and read the whole file in chunks before summarizing.
-3. Inspect only the code/docs needed to make claims grounded.
-4. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred design scope, and exact user-direction evidence; otherwise preserve the current Lead as design owner.
-5. Create a repo-local artifact under:
-   - `<repo-root>/tmp/spec-workflows/<yyyy-mm-dd>-<repo>-<branch>-<spec-slug>/`
-6. Write:
+
+   Completion: each source the packet rests on is named, and each source file was read end to end.
+
+2. Inspect only the code/docs needed to make claims grounded.
+
+   Completion: every code or doc path the packet cites was opened in this run.
+
+3. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred design scope, and exact user-direction evidence; otherwise preserve the current Lead as design owner.
+
+   Completion: the line reads `none`, or names the recipient, the transferred scope and the user's direction that authorizes it.
+
+4. Create a repo-local artifact under `<repo-root>/tmp/spec-workflows/<yyyy-mm-dd>-<repo>-<branch>-<spec-slug>/`, and write:
    - `spec-handoff.md`
    - `copy-paste-prompt.md`
-7. Report:
+
+   Completion: both files exist in that directory, or the user asked for chat-only output and no file is claimed.
+
+5. Report:
    - artifact paths
    - source coverage
    - decisions and non-goals
@@ -43,6 +52,8 @@ Package spec/design context so another agent can continue without reconstructing
    - proof expectations or proof gaps
    - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `verification-design` for a missing or stale proof strategy, `spec-program-review` for a complete but unreviewed/stale four-document design, `plan-implementation` for current ready four-document design, or `docs-maintain` for artifact lifecycle work
    - full clickable artifact links (absolute path + line) for handoff artifacts the human is expected to open
+
+   Completion: the report carries every item above, and its recommended next skill is the one the core routing rule selects for what the packet shows.
 
 ## Packet Contents
 
