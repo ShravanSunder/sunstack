@@ -1,6 +1,6 @@
 ---
 name: practices-manage-agents
-description: "Use when delegating to subagents, teams or parallel agents (fan-out too): choosing role, form and model, or spawning, commissioning, continuing, steering, awaiting, verifying or assessing them. Not for doing the phase itself."
+description: "Use when delegating to subagents, teams or parallel agents (fan-out too): picking role, form, model; spawning, commissioning, continuing, steering, awaiting, monitoring, verifying or assessing them. Not for doing the phase."
 ---
 
 # Practices: Manage Agents
