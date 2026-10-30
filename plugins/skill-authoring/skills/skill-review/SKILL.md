@@ -42,6 +42,8 @@ Open the anchor of every candidate. MUST load `references/checks/review-schema.m
 
 MUST load `references/checks/review-schema.md` and return the stage's report labels with its reduction block. Accepted findings carry their route.
 
+Completion: the report carries every label the stage's reference names, each accepted finding with its route, and the reduction block accounts for every candidate step 3 gave a state.
+
 ## Correction Loop
 
 Corrections return to the same review lead with its review history, which verifies corrected anchors. Both stages follow this convergence rule:
