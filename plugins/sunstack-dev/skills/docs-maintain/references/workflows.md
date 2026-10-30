@@ -10,6 +10,8 @@ Use when no doc exists for a durable concept.
 4. Write current-state facts and decisions, not process history.
 5. Add links from `AGENTS.md` or README only if future agents/humans need the pointer.
 
+Good: a runbook that states the current command, what it checks and where its output goes, with one pointer to it from `AGENTS.md`. Bad: a doc that narrates how the feature was built, or restates a fact another doc already owns.
+
 ## Update
 
 Use when docs exist but are stale or incomplete.
@@ -19,6 +21,8 @@ Use when docs exist but are stale or incomplete.
 3. Patch only stale sections.
 4. Preserve useful historical rationale when it still explains current design.
 5. Remove duplicated text if one source should link to another.
+
+Good: the one stale step in a runbook replaced after checking it against the current config, and the rest left as it was. Bad: the whole doc rewritten in a new voice, so nobody can see what was actually stale.
 
 ## Cleanup
 
@@ -30,6 +34,8 @@ Use when old specs/plans/docs create confusion.
 4. Preserve useful decisions in the current architecture doc or changelog before removing old context.
 5. Leave unknown docs alone and report what evidence is missing.
 
+Good: an old spec marked superseded with a link to what replaced it, after its one still-useful decision moved into the architecture doc. Bad: a folder of old plans deleted because they looked old, losing a decision nothing else records.
+
 ## Discrepancy
 
 Use when code, docs, README, AGENTS, tickets, or plans disagree.
@@ -40,6 +46,8 @@ Use when code, docs, README, AGENTS, tickets, or plans disagree.
 4. Patch the non-driving source.
 5. Add a changelog note when the discrepancy taught a durable repo rule.
 
+Good: "The README documents a flag the code removed; the code drives, so the README changes." Bad: both sources edited toward a guess, or code changed to match a stale doc.
+
 ## Plans And Specs
 
 Use when maintaining `docs/plans`, `docs/specs`, or `docs/superpowers/*`.
@@ -49,6 +57,8 @@ Use when maintaining `docs/plans`, `docs/specs`, or `docs/superpowers/*`.
 3. Compare major claims against current code, package layout, branch state, and architecture docs.
 4. Mark whether the artifact is executable, design reference, substrate input, superseded, historical, obsolete, or unknown.
 5. Update indexes and links so only current artifacts are presented as current.
+
+Good: a plan read end to end, marked superseded, and moved off the index's current list with a link to its successor. Bad: an index that still lists a plan as current because only its title was read.
 
 ## Agent Instructions
 
