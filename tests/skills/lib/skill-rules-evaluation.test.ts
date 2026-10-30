@@ -9,11 +9,8 @@ import {
   ruleLabelSchema,
   selectRuleCases,
 } from "./skill-rules-evaluation-cases.ts";
-import {
-  pieceDecisionSchema,
-  scoreRuleCase,
-  summarizeRuleScores,
-} from "./skill-rules-evaluation-scoring.ts";
+import { scoreRuleCase, summarizeRuleScores } from "./skill-rules-evaluation-scoring.ts";
+import { pieceDecisionSchema } from "./skill-rules-report.ts";
 import { selectLabelledPiece } from "./skill-rules-evaluation-engine.ts";
 
 const fixtureRoot = fileURLToPath(

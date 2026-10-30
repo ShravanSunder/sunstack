@@ -1,17 +1,6 @@
-import { z } from "zod";
+import type { PieceDecision } from "./skill-rules-report.ts";
 import type { RuleLabel } from "./skill-rules-evaluation-cases.ts";
 
-// R25's new observable; validated against the frozen C2 binary before hosted proof.
-export const pieceDecisionSchema = z.object({
-  name: z.string(),
-  marker: z.string(),
-  file: z.string(),
-  first_line: z.number().int().positive(),
-  last_line: z.number().int().positive(),
-  outcome: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]),
-  step: z.string().nullable(),
-});
-export type PieceDecision = z.infer<typeof pieceDecisionSchema>;
 export type CaseScore =
   | { readonly kind: "matched" }
   | { readonly kind: "missed" }

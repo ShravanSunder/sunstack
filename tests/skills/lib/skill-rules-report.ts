@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+// R25's new observable; validated against the frozen C2 binary before hosted proof.
+export const pieceDecisionSchema = z.object({
+  name: z.string(),
+  marker: z.string(),
+  file: z.string(),
+  first_line: z.number().int().positive(),
+  last_line: z.number().int().positive(),
+  outcome: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]),
+  step: z.string().nullable(),
+});
+export type PieceDecision = z.infer<typeof pieceDecisionSchema>;
+
 const locationSchema = z.object({ file: z.string(), first_line: z.number() }).passthrough();
 const findingSchema = z
   .object({
@@ -41,6 +53,7 @@ export const lintReportSchema = z
       cost_reported_requests: z.number(),
       cost_missing_requests: z.number(),
     }),
+    results: z.array(pieceDecisionSchema),
     findings: z.array(findingSchema),
     uncertain: z.array(
       z
@@ -83,9 +96,12 @@ const assembledRuleSchema = z
 export const checkOutputSchema = z.array(assembledRuleSchema);
 
 export function formatLintReport(report: LintReport): string {
+  const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };
+  for (const result of report.results) outcomes[result.outcome]++;
   const lines = [
     `Status: ${report.status.kind}`,
     `Counts: error ${report.counts.error}, warn ${report.counts.warn}`,
+    `Outcomes: ${JSON.stringify(outcomes)}`,
     `Usage: ${JSON.stringify(report.usage)}`,
   ];
   for (const severity of ["error", "warn"]) {

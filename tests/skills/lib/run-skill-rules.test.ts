@@ -2,7 +2,8 @@ import { cpSync, existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
-import { formatLintReport } from "./skill-rules-report.ts";
+import { checkOutputSchema, formatLintReport } from "./skill-rules-report.ts";
+import type { LintReport } from "./skill-rules-report.ts";
 import {
   askStep,
   askingRule,
@@ -21,6 +22,18 @@ import {
 } from "./skill-rules-test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
+
+function expectPrintedOutcomeCounts(stdout: string, report: LintReport): void {
+  const printed = /^Outcomes: (.+)$/m.exec(stdout)?.[1];
+  if (!printed) throw new Error("Missing printed per-piece outcome counts");
+  expect(JSON.parse(printed)).toEqual({
+    pass: report.results.filter((result) => result.outcome === "pass").length,
+    not_applicable: report.results.filter((result) => result.outcome === "not_applicable").length,
+    finding: report.results.filter((result) => result.outcome === "finding").length,
+    uncertain: report.results.filter((result) => result.outcome === "uncertain").length,
+    incomplete: report.results.filter((result) => result.outcome === "incomplete").length,
+  });
+}
 
 describe("skill evidence selection (G8)", () => {
   test("whole multi-paragraph and nested list items retain exact spans, without paragraph fragments", () => {
@@ -137,8 +150,18 @@ describe("repository skill rule runner (G10)", () => {
       path.join(root, "plugins/example/skills/sample"),
       { recursive: true },
     );
+    cpSync(
+      path.join(repositoryRoot, "tests/skills/fixtures/run-skill-rules/completion"),
+      path.join(root, "plugins/example/skills/completion"),
+      { recursive: true },
+    );
     await withJudge({}, async (endpoint, requests) => {
       saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
+      const checked = await runRunner(root, ["--check", "--out", path.join(root, "checked")]);
+      expect(checked.status, checked.stderr).toBe(0);
+      const assembled = checkOutputSchema.parse(
+        JSON.parse(readFileSync(path.join(root, "checked/report.json"), "utf8")),
+      );
       const result = await runRunner(root, [], "synthetic-runner-test-key");
       const report = reportSchema.parse(result.report);
       expect(result.status, result.stderr).toBe(0);
@@ -146,6 +169,31 @@ describe("repository skill rule runner (G10)", () => {
       expect(report.uncertain).toEqual([]);
       expect(report.usage.model_requests).toBe(requests.length);
       expect(requests.length).toBeGreaterThan(0);
+      const exercised = new Set(
+        report.results.map((piece) => {
+          const definition = assembled.find(
+            (entry) => entry.rule === piece.name && entry.marker === piece.marker,
+          );
+          if (!definition) throw new Error(`Unassembled result ${piece.name}/${piece.marker}`);
+          return `${path.basename(definition.source.file)}:${piece.marker}:${piece.name}`;
+        }),
+      );
+      expect([...exercised].sort()).toEqual(
+        [
+          "descriptions-and-invocation.md:K001:description.opener",
+          "descriptions-and-invocation.md:K002:description.length-warning",
+          "descriptions-and-invocation.md:K003:description.length-limit",
+          "descriptions-and-invocation.md:K004:description.loading-moment",
+          "descriptions-and-invocation.md:K005:description.trigger-only",
+          "descriptions-and-invocation.md:K006:description.always-earned",
+          "generalization.md:K001:rule.generalization",
+          "calls-and-placement.md:K001:call.completeness",
+          "calls-and-placement.md:K002:reference.teaching-depth",
+          "main-path.md:K001:branch.condition",
+          "steering.md:K001:completion.criterion",
+          "steering.md:K002:guidance.positive",
+        ].sort(),
+      );
     });
   });
   test("default scope includes each plugin and excludes retired trees, test fixtures and ignored nested worktrees", async () => {
@@ -274,14 +322,22 @@ describe("repository skill rule runner (G10)", () => {
         expect(requests).toHaveLength(1);
         expect(report.usage.model_requests).toBe(1);
         expect(result.stdout).toContain(`Usage: ${JSON.stringify(report.usage)}`);
+        expectPrintedOutcomeCounts(result.stdout, report);
         if (probability === 0.1) {
           expect(report.findings).toHaveLength(1);
           expect(result.stdout).toContain("SKILL.md:3: warn description_judgment");
         }
         if (probability === 0.5) {
-          expect(result.stdout).toContain("step verdict");
-          expect(result.stdout).toContain("Answers:");
-          expect(result.stdout).toContain("Evidence:");
+          expect(report.uncertain).toHaveLength(1);
+          const uncertain = report.uncertain[0];
+          if (!uncertain) throw new Error("Missing uncertain piece");
+          expect(uncertain.answers).toHaveProperty("verdict");
+          expect(uncertain.state).not.toEqual({});
+          expect(result.stdout).toContain(
+            `${uncertain.where.file}:${uncertain.where.first_line}: uncertain ${uncertain.rule}, step ${uncertain.step}`,
+          );
+          expect(result.stdout).toContain(`Answers: ${JSON.stringify(uncertain.answers)}`);
+          expect(result.stdout).toContain(`Evidence: ${JSON.stringify(uncertain.state)}`);
         }
         expect(readFileSync(path.join(root, "reports/report.json"), "utf8")).not.toContain(
           "synthetic-runner-test-key",
@@ -361,6 +417,7 @@ describe("repository skill rule runner (G10)", () => {
       expect(result.status, result.stderr).toBe(3);
       const report = reportSchema.parse(result.report);
       expect(report.status.kind).toBe("incomplete");
+      expectPrintedOutcomeCounts(result.stdout, report);
       expect(requests).toHaveLength(1);
       expect(report.incomplete.length).toBeGreaterThan(0);
       for (const item of report.incomplete) expect(result.stdout).toContain(item.reason.kind);
@@ -423,6 +480,7 @@ describe("decision controls (G8)", () => {
       expect(result.status, result.stderr).toBe(0);
       expect(requests).toHaveLength(0);
       expect(reportSchema.parse(result.report).exclusions.not_applicable).toBe(1);
+      expectPrintedOutcomeCounts(result.stdout, reportSchema.parse(result.report));
     });
   });
 

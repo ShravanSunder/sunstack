@@ -4,12 +4,11 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { z } from "zod";
 import { lintReportSchema } from "./skill-rules-report.ts";
-import type { LintReport } from "./skill-rules-report.ts";
+import type { LintReport, PieceDecision } from "./skill-rules-report.ts";
 import type { LoadedRuleCase, RuleLabel } from "./skill-rules-evaluation-cases.ts";
-import { pieceDecisionSchema, scoreRuleCase } from "./skill-rules-evaluation-scoring.ts";
-import type { CaseScore, PieceDecision } from "./skill-rules-evaluation-scoring.ts";
+import { scoreRuleCase } from "./skill-rules-evaluation-scoring.ts";
+import type { CaseScore } from "./skill-rules-evaluation-scoring.ts";
 
-const reportWithResultsSchema = lintReportSchema.extend({ results: z.array(pieceDecisionSchema) });
 const spanSchema = z.object({ start_line: z.number(), end_line: z.number() }).passthrough();
 const evidencePieceSchema = z
   .object({
@@ -202,7 +201,7 @@ export async function evaluateLabelledCase(
     writeFileSync(reportFile, evaluated.stdout);
     if (evaluated.stderr)
       writeFileSync(path.join(request.reportDirectory, "engine.stderr.txt"), evaluated.stderr);
-    const report = reportWithResultsSchema.parse(JSON.parse(evaluated.stdout));
+    const report = lintReportSchema.parse(JSON.parse(evaluated.stdout));
     const matching = report.results.filter(
       (result) =>
         result.name === identity.rule &&
