@@ -1,6 +1,6 @@
 ---
 name: spec-program-review
-description: "Use when independently reviewing a Specification, Program Design, or the four-document design set (Requirements, Specification, Program Design, Verification Design), including reader understanding or readability, or deciding if a spec-only or program-only change needs review. Not for implementation review."
+description: "Use when independently reviewing a Specification, Program Design or the four-document design set, including readability, or deciding if a spec-only or program-only change needs review. Not for implementation review."
 ---
 
 # Design Review
