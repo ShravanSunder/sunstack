@@ -1,6 +1,6 @@
 ---
 name: plan-implementation
-description: "Use when writing the first repository-grounded implementation plan for a reviewed four-document design (Requirements, Specification, Program Design, Verification Design), an admitted improvement finding, or a direct planning request. Not for changing an existing plan during delivery (plan-update) or audit-only discovery (plan-improve-repo)."
+description: "Use when writing the first implementation plan from a reviewed four-document design, an admitted improvement finding or a direct planning request. Not for changing it later (plan-update) or repo audits (plan-improve-repo)."
 ---
 
 # Plan Implementation
