@@ -31,6 +31,8 @@ Read the status first, then every list, because warnings don't move the status. 
 | an incomplete part or a skipped rule | a gap, with its reason |
 | status `invalid` (including a refusal for no key), `cancelled` or `incomplete`, or a full-scope run with `nothing_selected` | a gap for the run: the rules didn't all run, so the return says which didn't and why |
 
+IF the run is refused at a line in a file the change edited (a marked standard's host, its rules file, or the config), load `markers-and-rules.md` and return the refusal's cause and fix from its repair table: the change broke a rule's definition, so fix it there and run again. A refusal at text the change didn't touch, and a refusal for no key, stay gaps.
+
 Pieces that are the same case, such as one label line repeated across several files, may be decided together, each still named with its file and line.
 
 A finding is traced to the change when the change's diff made the text at its line; one the diff didn't touch is still read and returned, but its fix belongs to the step that owns that text.
