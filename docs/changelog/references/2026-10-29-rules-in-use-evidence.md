@@ -14,7 +14,9 @@ Runs over the same unchanged text moved 59 pieces between a finding or uncertain
 - Labels: craft rules by two blind Sol labelers (67 of 74 agreed) and a third that settled the other 7; generalization's 30 wait on the owner's labels, per the owner's 26 October decision.
 - Development, after one criteria-only tuning pass: 30 of 39 labelled cases matched.
 - Held-out, run once on the frozen entries: 25 of 35 matched (2 wrong, 2 missed, 6 uncertain). Call completeness and the description's loading moment matched 5 of 5; reference teaching depth was weakest at 2 of 5. Provisional until the owner's spot-checks.
+- After the independent review, supplementary real cases (run separately; the held-out result above is unchanged): description K004's development set gained two blind-labelled breaches, which the rule returns as uncertain rather than passing. Steering K002's held-out set still has no labelled breach: five more real prohibitions were all labelled pass by both labelers, who read each with its step's positive alternative, and the rule flagged all five. `guidance.positive` judges a "don't …" item without its step's context; giving sentence evidence that context is follow-up work.
 - Named cases measure decisions on chosen pieces, not how many real instances an evidence kind misses; no result here makes a rule ready to block.
+- Third-party excerpts kept as fixtures are attributed in `tests/skills/fixtures/skill-rules/THIRD_PARTY.md` (Apache-2.0 and MIT sources).
 
 ## Not verified
 
