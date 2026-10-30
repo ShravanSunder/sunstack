@@ -36,13 +36,13 @@ Package spec/design context so another agent can continue without reconstructing
 
 3. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred design scope, and exact user-direction evidence; otherwise preserve the current Lead as design owner.
 
-   Completion: the line reads `none`, or names the recipient, the transferred scope and the user's direction that authorizes it.
+   Completion: the line reads `none` and names the current Lead as design owner, or names the recipient, the transferred scope and the user's own words that authorize the transfer.
 
 4. Create a repo-local artifact under `<repo-root>/tmp/spec-workflows/<yyyy-mm-dd>-<repo>-<branch>-<spec-slug>/`, and write:
    - `spec-handoff.md`
    - `copy-paste-prompt.md`
 
-   Completion: both files exist in that directory, or the user asked for chat-only output and no file is claimed.
+   Completion: both files exist in that directory and `spec-handoff.md` carries each item under Packet Contents, or the item marked absent with the reason; or the user asked for chat-only output and no file is claimed.
 
 5. Report:
    - artifact paths
