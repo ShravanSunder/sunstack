@@ -1,6 +1,6 @@
 ---
 name: skill-creation
-description: "Use when writing or editing one named skill's files from its accepted design set, or making a mechanical edit to a skill: a typo, formatting, a version or metadata. Not for designing a skill change (skill-design), carrying it through proof, review and release (skill-orchestrator), judging a skill (skill-review), or choosing which skills should exist (skill-audit)."
+description: "Use when writing one named skill's files from its accepted design, or making a mechanical edit to a skill (typo, formatting, version, metadata). Not for designing or judging a skill."
 ---
 
 # Skill Creation
@@ -45,14 +45,21 @@ Completion: each surface the boundary admits is written or held back by its step
 
 ### 4. Self-check
 
-MUST load `../skill-rules/references/running-rules.md`, run the rules on the folder of the skill this run changed, and return its report beside the diff. Fix each `fail`, and each refusal the report traces to this change, then run the self-check again on the fixed files; leave an item only for a reason, such as a fix the boundary doesn't admit, and step 5 names it with that reason. Any other gap, or `rules: not run`, stays as the report states it, with its reason, and the run goes on to step 5.
+MUST load `../skill-rules/references/running-rules.md`, run the rules on the files this run changed, and return its reading beside the diff: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. Act on it before the diff comparison:
 
-Completion: the report from the self-check's last run, made after the last edit, stands beside the diff, and each `fail` and each refusal traced to this change is fixed or left for step 5 with its reason.
+- an `error` finding, or a refusal the reading traces to this change, is fixed, and the self-check runs again on the fixed files;
+- a `warn` finding is fixed, or named with the reason it stays;
+- a judged finding is confirmed at its line and fixed where this run's boundary admits the fix, named as a candidate where it doesn't, or explained where it doesn't hold;
+- an `uncertain` piece is yours to decide against its standard: fix or explain it, and report your call.
+
+Any gap, or `rules: not run`, stays as the reading states it, with its reason, and the run goes on to step 5.
+
+Completion: the reading from the self-check's last run, made after the last edit, stands beside the diff; no `error` finding or refusal traced to this change remains; and each warning, judged finding and `uncertain` piece carries its call (fixed, named or explained) for step 5.
 
 ### 5. Compare and return, by class
 
-- **Behavior-changing or scoped.** Compare the diff with this run's boundary in the accepted design set, and name each deviation with its reason, each item the self-check left among them. Set the run's status in the set to `implemented`. Return the diff, each deviation, the self-check's report, the proof posture the set records, the sensitive-surface decisions the write used, and the proof and implementation review still owed.
-- **Mechanical.** Compare the diff with its classification claim: it touches only the surfaces the claim named. A diff that touches a surface the claim didn't name is reclassified at step 1, and its write doesn't stand until the new class admits it. Return the diff, the static validation result, the self-check's report with the reason for each item it left, any security decision, and that no review is owed.
+- **Behavior-changing or scoped.** Compare the diff with this run's boundary in the accepted design set, and name each deviation with its reason, each item the self-check left among them. Set the run's status in the set to `implemented`. Return the diff, each deviation, the self-check's reading, the proof posture the set records, the sensitive-surface decisions the write used, and the proof and implementation review still owed.
+- **Mechanical.** Compare the diff with its classification claim: it touches only the surfaces the claim named. A diff that touches a surface the claim didn't name is reclassified at step 1, and its write doesn't stand until the new class admits it. Return the diff, the static validation result, the self-check's reading with the reason for each item it left, any security decision, and that no review is owed.
 
 Completion: the diff is compared with its boundary, and the return for its class is complete.
 
@@ -63,7 +70,8 @@ The run is not done while any of these hold:
 - a behavior-changing or scoped change was written without an accepted design set covering its run, or with a sensitive surface that set did not decide;
 - a mechanical change was written outside the surfaces its claim names;
 - the diff was not compared with its boundary: this run of the accepted design set, or the mechanical claim;
-- a rule was reported as run, or as passing, without the self-check's report showing it;
+- a rule was reported as run, or as passing, without the self-check's report showing it, or an `uncertain` piece or a gap was reported as a pass;
+- an `error` finding was left unfixed at the diff comparison;
 - the written `SKILL.md` breaks a root main-path standard on its mental model, its all-run spine or its branches;
 - a promised stage, a branch, or a shape-only reference breaks a root placement standard on teaching owners or shape-only references;
 - a dispatch site breaks a root call standard on dispatch;
