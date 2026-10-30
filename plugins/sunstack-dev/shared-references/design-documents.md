@@ -28,7 +28,7 @@ Obligations are sentences about entities. The Specification defines each entity 
 
 A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `scheduling: a queued job runs, and runs once, even when a worker dies`. It is never named by a component, internal owner, or store. Program Design may realize one capability with several components, or several capabilities with one.
 
-The Requirements document is the list's home, confirmed by the owner before any row is written. Other documents refer to a capability by its key; a view that shows its name and purpose again re-renders that list and never redefines it. Each document carries the key over its own rows:
+The Requirements entry is the list's home, confirmed by the owner before any row is written. Write it as a nested Markdown list: one item per capability, carrying its key, the owner's name and its one-line purpose, with its home `U` rows nested under it. That tree is the capability map's Markdown form, and its only home. Other documents refer to a capability by its key; a view that shows its name and purpose again re-renders that list and never redefines it. Each document carries the key over its own rows:
 
 | Document | Carries the key on | How |
 | --- | --- | --- |
@@ -94,7 +94,11 @@ The second form is invalid because a Requirements title does not make a separate
 
 ## Design Set Layout
 
-A design set is one design's four documents plus the entries that lead into them. Layout never changes identity: each document settles the same question and owns the same truths whatever files hold it. A document is one Markdown file, or an ordered index over its chunks. One file per document is a valid set and the usual one.
+A design set is one design's four documents, the entries that lead into them, and a `plans/` folder for its implementation plans, whose contents `canonical-implementation-plan.md`'s Plan Home governs. Layout never changes identity: each document settles the same question and owns the same truths whatever files hold it. A document is one Markdown file, or an ordered index over its chunks.
+
+When the Requirements name two or more capabilities, Requirements and Specification are chunked by capability by default, and the split test below confirms each chunk. Program Design and Verification Design stay one file each unless that test splits them. A one-concern set keeps one file per document.
+
+Some chunks serve every capability. Entities live in the Specification's `entities.md`, which every capability links to. An observation that several Verification Design rows share lives in its `observations.md` when that document is chunked. The capability list lives in the Requirements entry. A cross-cutting obligation stays in the chunk of the need that asked for it and names the rest under "also serves".
 
 ### Split a Document by Question and Reason to Change
 
@@ -111,11 +115,13 @@ A chunked document's entry is the `index.md` in its folder: the chunks in readin
 
 ### Give Agents an Index
 
-A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. When the set has capabilities, the reading paths include one through-line per capability, in the same order: its need, its obligations, their owner and call path, and their proof. Task paths sit beside the through-lines. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job; there, the capability groups inside each document carry the through-line.
+A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. When the set has capabilities, the reading paths include one through-line per capability, in the same order: its need, its obligations, their owner and call path, and their proof. Task paths sit beside the through-lines. Call these orders reading paths or through-lines, never journeys: a journey is a user's path in a journey map, or the route a Verification Design row drives. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job; there, the capability groups inside each document carry the through-line.
+
+An idea that the obligations of two or more capabilities name, or that the owner names, such as authorization or identity, gets a concept section in `index.md`. It links to the idea's meaning in its owning chunk, to its picture, and to where each document handles it. Its picture is a link to the view its owning skill already requires, such as the trust-boundary view for authorization, and a missing picture is a gap the writing phase returns. The phase that writes the idea's owning entry updates the section.
 
 The index is navigation only. An obligation, threshold, or decision written in it has no home there and moves to the chunk that owns it.
 
-Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. A capability's through-line therefore grows one step per phase, and in a fresh set it ends at the Specification until Program Design exists. IF an embedded copy of the set's page includes an edited file, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
+Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. A capability's through-line therefore grows one step per phase, and in a fresh set it ends at the Specification until Program Design exists. IF the set's page includes an edited file, live or embedded, or renders paths from an edited `index.md`, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
 
 ### Humans Read the Page
 
@@ -125,6 +131,10 @@ When `diagram-rendering-and-fallbacks.md` chooses a page for the set, the page i
 
 The Markdown carries the complete design: definitions, conditions, alternatives, error cases, exact interfaces, and proof obligations, in tables where they compare. Dense means more of that detail sits directly in the chunk an agent opens. It does not mean compressed jargon, private abbreviations, or one huge table whose rows hide how they relate. The page decides how much a human sees at once, and the Markdown never drops detail to match it.
 
+### Put the Human Part First
+
+When you write a chunk, open it with its human part, using the views whose predicates fire for it, in the layered shape that `principle-write-for-the-reader`'s `references/layered-detail.md` teaches; agent detail such as rationale, evidence, exact shapes and examples follows in `<details>` blocks ([answer first, and fold only the depth this reader may skip](../skills/principle-write-for-the-reader/SKILL.md)). Binding, trace and call-path tables stay visible. Visible means shown inside the chunk, not collapsed; one action away means a tab or a section on the page. A failure obligation stays visible with its threshold, and only the rationale or evidence about it may be collapsed, under a summary that names the case it explains.
+
 ### Worked Set
 
 A job-submission service has three capabilities, which the owner confirmed as `submission`, `scheduling`, and `billing-export`. Its Requirements name a different owner and release schedule for each, and all three share one set of entities:
@@ -133,7 +143,11 @@ A job-submission service has three capabilities, which the owner confirmed as `s
 docs/specs/2026-10-18-job-submission/
   index.md                agent entry: document entries, three through-lines and two task paths
   index.html              human entry: a page over the same files
-  requirements.md
+  requirements/
+    index.md              Requirements entry: the capability list as a nested tree
+    submission.md
+    scheduling.md
+    billing-export.md
   specification/
     index.md              Specification entry: chunks in reading order
     entities.md           E1 Job, E2 Submission, E3 Tenant
@@ -142,9 +156,11 @@ docs/specs/2026-10-18-job-submission/
     billing-export.md
   program-design.md
   verification-design.md
+  plans/
+    2026-10-20-job-submission.md
 ```
 
-Each Specification chunk passes the test on its own terms:
+Each Specification chunk passes the test on its own terms, and each Requirements chunk passes for the same capability's reader and reason:
 
 | Chunk | Reader and the question it answers | Its own reason to change |
 | --- | --- | --- |
@@ -153,7 +169,7 @@ Each Specification chunk passes the test on its own terms:
 | `scheduling.md` | operators: when does a queued job run, and what happens when a worker dies? | scheduling and capacity policy, owned by the platform team |
 | `billing-export.md` | finance: which finished jobs are billed, and when does an export include them? | billing policy, released by finance on its own schedule |
 
-Each capability earned its own chunk here because each has its own reader and release schedule. In a smaller set the same three would be sections of one file.
+Each capability earned its own chunk here because each has its own reader and release schedule. Where the test fails, say because one team owns and releases all three together, the same three are sections of one file.
 
 Three things stay whole. Worker-loss recovery in `scheduling.md` runs long: leases, heartbeats, the requeue limit, and fencing a duplicate run. Splitting it by heading fails the test, because requeue makes no sense without leases, fencing makes no sense without requeue, and a change to the lease timeout edits all of them. It stays one section of one chunk whatever its length. Program Design stays one file because its components share one job store and one lease protocol, so a store change edits every section. Verification Design stays one file because its shared observations serve rows from every capability.
 
@@ -164,42 +180,42 @@ The root `index.md`:
 ```markdown
 # Job submission design
 
-- Requirements: [requirements.md](requirements.md)
+- Requirements: [requirements/index.md](requirements/index.md)
 - Specification: [specification/index.md](specification/index.md)
 - Program Design: [program-design.md](program-design.md)
 - Verification Design: [verification-design.md](verification-design.md)
 
 ## Through-line: submission
 
-1. [Requirements: submission](requirements.md#submission)
+1. [Requirements: submission](requirements/submission.md)
 2. [Specification: submission](specification/submission.md)
 3. [Program Design: submission rows](program-design.md#trace-submission)
 4. [Verification Design: submission](verification-design.md#submission)
 
 ## Through-line: scheduling
 
-1. [Requirements: scheduling](requirements.md#scheduling)
+1. [Requirements: scheduling](requirements/scheduling.md)
 2. [Specification: scheduling](specification/scheduling.md)
 3. [Program Design: scheduling rows](program-design.md#trace-scheduling)
 4. [Verification Design: scheduling](verification-design.md#scheduling)
 
 ## Through-line: billing-export
 
-1. [Requirements: billing-export](requirements.md#billing-export)
+1. [Requirements: billing-export](requirements/billing-export.md)
 2. [Specification: billing export](specification/billing-export.md)
 3. [Program Design: billing-export rows](program-design.md#trace-billing-export)
 4. [Verification Design: billing-export](verification-design.md#billing-export)
 
 ## Reading path: a worker dies mid-job
 
-1. [Requirements: U3](requirements.md#scheduling)
+1. [Requirements: U3](requirements/scheduling.md#u3)
 2. [Specification: worker loss](specification/scheduling.md#worker-loss)
 3. [Program Design: lease and requeue](program-design.md#lease-and-requeue)
 4. [Verification Design: worker loss](verification-design.md#worker-loss)
 
 ## Reading path: a client resubmits a job
 
-1. [Requirements: U1](requirements.md#submission)
+1. [Requirements: U1](requirements/submission.md#u1)
 2. [Specification: job identity](specification/entities.md#job-identity)
 3. [Specification: resubmission](specification/submission.md#resubmission)
 4. [Program Design: submission API](program-design.md#submission-api)

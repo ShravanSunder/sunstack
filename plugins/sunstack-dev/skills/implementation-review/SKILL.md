@@ -1,6 +1,6 @@
 ---
 name: implementation-review
-description: "Use when independently reviewing implemented code, proof, a branch diff, commit, PR head, or one bounded remediation before PR readiness, including when governing inputs are missing or conflicting. Not for design review (spec-program-review)."
+description: "Use when independently reviewing implemented code, proof, a diff, commit, PR head or one bounded remediation before PR readiness, even with missing or conflicting governing inputs. Not for design review (spec-program-review)."
 ---
 
 # Implementation Review

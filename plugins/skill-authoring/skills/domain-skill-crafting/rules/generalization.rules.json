@@ -1,0 +1,58 @@
+{
+  "K001": {
+    "name": "rule.generalization",
+    "evidence": "sentence",
+    "questions": {
+      "kind": {
+        "type": "choice",
+        "instructions": {
+          "check": "body",
+          "context": "headings",
+          "task": "What kind of text is this?"
+        },
+        "criteria": {
+          "rule": "A rule the skill teaches: a standard or judgment meant to hold wherever its situation recurs, beyond this one run of this one workflow.",
+          "local": "A local instruction for running this workflow: what to do next in this step, which file or skill to load or hand to, what to return, or the scope and owners of this skill. It holds only inside this workflow.",
+          "other": "Neither: an example, a definition, a fact, a quotation, or the rationale for a rule stated elsewhere."
+        }
+      },
+      "reusable": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "context": "headings",
+          "task": "Is the rule stated as a judgment that would still guide a materially different repository, stack or team, with any product, library, API or incident it names only as an example, or as the scope the owner adopted the rule for?"
+        },
+        "criteria": {
+          "true": "The judgment transfers: on another stack or under other conventions it still tells the agent the right thing, and it rejects a bad choice it never names. A named product, file or incident appears only as an example, or the rule states the scope it was adopted for. The vocabulary of the subject the skill governs, such as a skill's description, references and call sites for a skill-writing skill, is its domain, not a product.",
+          "false": "It is one case written as the rule: it names a particular product, library, API, path, stack or incident as what to do everywhere, with no example label and no adopted scope, so it misleads a repository whose answer differs, as 'persist with SQLite and Drizzle' would for a TypeScript service built on Postgres."
+        }
+      }
+    },
+    "decision": {
+      "start": "kind",
+      "steps": {
+        "kind": {
+          "ask": "kind",
+          "min_probability": 0.6,
+          "routes": {
+            "rule": "reusable",
+            "local": "not_applicable",
+            "other": "not_applicable"
+          }
+        },
+        "reusable": {
+          "ask": "reusable",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Rule is one case written as the rule; state the judgment, or name the scope it was adopted for.",
+            "at": "body"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

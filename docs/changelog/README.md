@@ -1,6 +1,13 @@
 # Changelog
 
-- [2026-10-25 Presentation HTML collection walkthroughs](2026-10-25-presentation-collection-walkthroughs.md)
+- [2026-10-30 Presentation HTML collection walkthroughs](2026-10-30-presentation-collection-walkthroughs.md)
+- [2026-10-30 Phase skills cleanup](2026-10-30-phase-skills-cleanup.md)
+- [2026-10-28 Lightweight HTML authoring](2026-10-28-lightweight-html-authoring.md)
+- [2026-10-27 Orchestration and planning](2026-10-27-orchestration-and-planning.md)
+- [2026-10-27 Skill authoring: standards root and design](2026-10-27-skill-authoring-root-and-design.md)
+- [2026-10-27 Domain Rust: crates set the dependency direction](2026-10-27-domain-rust-crate-dag.md)
+- [2026-10-26 Presentation HTML capture variations and verification scope](2026-10-26-presentation-verification-scope.md)
+- [2026-10-25 Presentation HTML default Comments](2026-10-25-presentation-default-comments.md)
 - [2026-10-24 Presentation HTML responses and feedback](2026-10-24-presentation-response-feedback.md)
 - [2026-10-24 Batched delivery rounds](2026-10-24-batched-delivery-rounds.md)
 - [2026-10-23 Presentation HTML combined evidence rows](2026-10-23-demistify-combined-cells.md)

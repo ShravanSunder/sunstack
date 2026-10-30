@@ -603,6 +603,8 @@ describe("user requirements and design-view contracts", () => {
       "requirement/design/proof trace",
       '"proven by" cards',
       "coverage rows",
+      "delivery map",
+      "plan change view",
     ]) {
       expect(vocabulary).toContain(viewToken);
       expect(pageForms).toContain(viewToken);

@@ -55,11 +55,17 @@ incomplete design prerequisite
 material design break discovered during planning or implementation
   -> orchestrator and user decision; do not build on the break
 
+owner-reviewed plan from the design cycle
+  -> admit it as the ready delivery plan
+
 current reviewed design; no ready plan
-  -> orchestrator loads plan-implementation and authors the plan
+  -> orchestrator loads plan-implementation and authors the plan; a new feature's plan passes the owner gate before any Implementer starts
 
 admitted repository improvement; no ready delivery plan
   -> preserve the plan-improve-repo admission; orchestrator loads plan-implementation and authors the plan
+
+plan-defect, a design-cycle return carrying an existing plan's path, or any other change of plan meaning during delivery
+  -> orchestrator loads plan-update; its verification-design-gap goes to verification-design before dependent work continues
 
 ready plan; terminal is plan-only
   -> finish at plan-only
@@ -76,8 +82,11 @@ orchestrator assessment complete
 accepted implementation findings from one review result; review has not returned not-converging
   -> one correction pass through implement-plan by the same implementer, fresh affected proof once, then the same 🔎 Reviewer Sidekick once
 
-accepted specification, design, or plan finding
-  -> exact semantic owner, then resume the open implementation goal
+accepted specification or design finding
+  -> exact semantic owner, then plan-update for the plan it changes, then resume the open implementation goal
+
+accepted plan finding
+  -> plan-update, then resume the open implementation goal
 
 review ready; PR gates not current
   -> assigned 🐒 Implementer Sidekick or 🔧 Operator runs implementation-pr-wrapup and returns current PR gate evidence to the Lead
