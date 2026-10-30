@@ -26,7 +26,7 @@ Use when docs exist but are stale or incomplete.
 
 Good: the one stale step in a runbook replaced after checking it against the current config, and the rest left as it was. Bad: the whole doc rewritten in a new voice, so nobody can see what was actually stale.
 
-Done when each section you changed was stale against a source you checked, and every unchanged section still matches its source.
+Done when each section you changed agrees with the source you checked it against, and any stale or unverifiable material you left untouched is named as a limitation.
 
 ## Cleanup
 
