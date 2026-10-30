@@ -1,6 +1,6 @@
 ---
 name: practices-why
-description: "Use when investigating why existing code or a design took its current shape, which decision or constraint motivated it, where a threshold, magic number or defensive check came from, or whether its recorded reason still holds before changing it. Not for tracing how it works now, proving what caused an incident or choosing a new design."
+description: "Use when asking why code or a design took its shape: the decision or constraint behind it, where a threshold or check came from, or if its reason holds before a change. Not for how it works, incident causes or a new design."
 ---
 
 # Practices: Why

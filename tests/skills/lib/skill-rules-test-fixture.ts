@@ -72,7 +72,15 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/node_modules/zod"),
     path.join(root, "tests/skills/node_modules/zod"),
   );
-  symlinkSync(enginePath, path.join(root, "tests/skills/node_modules/.bin/sunstack"));
+  mkdirSync(path.join(root, "tests/skills/node_modules/@sunstack"), { recursive: true });
+  symlinkSync(
+    path.join(repositoryRoot, "tests/skills/node_modules/@sunstack/cli"),
+    path.join(root, "tests/skills/node_modules/@sunstack/cli"),
+  );
+  symlinkSync(
+    path.join(repositoryRoot, "tests/skills/node_modules/.bin/sunstack"),
+    path.join(root, "tests/skills/node_modules/.bin/sunstack"),
+  );
   mkdirSync(kit, { recursive: true });
   cpSync(path.join(repositoryRoot, kitRelative, "evidence"), path.join(kit, "evidence"), {
     recursive: true,
@@ -304,4 +312,25 @@ export async function withJudge<TValue>(
       server.close((error) => (error ? reject(error) : resolve())),
     );
   }
+}
+
+export function assertInstalledPackageIsRequired(root: string): void {
+  rmSync(path.join(root, "tests/skills/node_modules/@sunstack/cli"));
+  const result = spawnSync(
+    process.execPath,
+    [path.join(root, "tests/skills/scripts/run-skill-rules.ts"), "--check"],
+    {
+      cwd: path.join(root, "tests/skills"),
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        INIT_CWD: root,
+        OPENROUTER_API_KEY: "",
+        SUNSTACK_CREDENTIAL_STORE: "off",
+      },
+    },
+  );
+  expect(result.status).not.toBe(0);
+  expect(result.stderr).toContain("MODULE_NOT_FOUND");
+  expect(result.stderr).toContain("@sunstack/cli/run-sunstack.js");
 }

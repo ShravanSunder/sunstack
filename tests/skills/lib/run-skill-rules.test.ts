@@ -5,6 +5,7 @@ import { afterEach, describe, expect, test } from "vitest";
 import { checkOutputSchema, formatLintReport } from "./skill-rules-report.ts";
 import type { LintReport } from "./skill-rules-report.ts";
 import {
+  assertInstalledPackageIsRequired,
   askStep,
   askingRule,
   cleanupFixtureRoots,
@@ -371,6 +372,7 @@ describe("repository skill rule runner (G10)", () => {
     expect(output).toMatch(new RegExp(`${root}/tests/skills/tmp/rules-`));
     if (!output) throw new Error("Missing report path");
     expect(JSON.parse(readFileSync(path.join(output, "report.json"), "utf8"))).toHaveLength(1);
+    assertInstalledPackageIsRequired(root);
   });
 
   test("relative output uses the caller's INIT_CWD and refuses existing contents", async () => {
@@ -401,6 +403,7 @@ describe("repository skill rule runner (G10)", () => {
     expect(refused.status).toBe(2);
     expect(refused.stderr).toContain("empty directory");
     expect(readFileSync(path.join(root, "reports/existing.txt"), "utf8")).toBe("Keep me");
+    assertInstalledPackageIsRequired(root);
   });
 
   test("an incomplete asking run prints its reason and preserves exit 3", async () => {

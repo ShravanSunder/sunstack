@@ -1,6 +1,6 @@
 ---
 name: practices-how
-description: "Use when explaining how existing code or a subsystem works (\"how does X work\", \"walk me through\", \"what happens when\"), tracing a behavior through the code before changing it, or locating which part currently owns a state, an effect or a boundary. Not for why it was built that way, diagnosing a particular incident's cause, choosing a new architecture, or looking up a single fact."
+description: "Use when explaining how existing code or a subsystem works, tracing a behavior before changing it, or locating what owns a state, effect or boundary. Not for why, an incident's cause, new architecture or a single fact."
 ---
 
 # Practices: How
