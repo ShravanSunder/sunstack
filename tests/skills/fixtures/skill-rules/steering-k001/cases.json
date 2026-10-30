@@ -1,0 +1,222 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 22,
+      "endLine": 29,
+      "fieldLine": 29
+    },
+    "excerpt": {
+      "path": "case-001/SKILL.md",
+      "line": 8,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+      "startLine": 56,
+      "endLine": 62,
+      "fieldLine": 56
+    },
+    "excerpt": {
+      "path": "case-002/SKILL.md",
+      "line": 1,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 52,
+      "endLine": 57,
+      "fieldLine": 57
+    },
+    "excerpt": {
+      "path": "case-003/SKILL.md",
+      "line": 6,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+      "startLine": 134,
+      "endLine": 157,
+      "fieldLine": 134
+    },
+    "excerpt": {
+      "path": "case-004/SKILL.md",
+      "line": 1,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 46,
+      "endLine": 50,
+      "fieldLine": 50
+    },
+    "excerpt": {
+      "path": "case-005/SKILL.md",
+      "line": 5,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "held-out",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 24,
+      "endLine": 34,
+      "fieldLine": 34
+    },
+    "excerpt": {
+      "path": "case-006/SKILL.md",
+      "line": 11,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "held-out",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "startLine": 58,
+      "endLine": 66,
+      "fieldLine": 58
+    },
+    "excerpt": {
+      "path": "case-007/SKILL.md",
+      "line": 1,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "held-out",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 75,
+      "endLine": 81,
+      "fieldLine": 81
+    },
+    "excerpt": {
+      "path": "case-008/SKILL.md",
+      "line": 7,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "held-out",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 55,
+      "endLine": 67,
+      "fieldLine": 67
+    },
+    "excerpt": {
+      "path": "case-009/SKILL.md",
+      "line": 13,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "held-out",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "startLine": 34,
+      "endLine": 36,
+      "fieldLine": 36
+    },
+    "excerpt": {
+      "path": "case-010/SKILL.md",
+      "line": 3,
+      "pieceLine": 1
+    }
+  }
+]
