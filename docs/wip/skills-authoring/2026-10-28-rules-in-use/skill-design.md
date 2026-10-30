@@ -59,10 +59,10 @@ Each row is one marker and one rule entry. "Gate" is the step that can end `not_
 | calls-and-placement K001 | a call says when, where, what, what back | `load` | none | Jev, of `line` against `step` | warn |
 | calls-and-placement K002 (was R001) | a reference section teaches at its depth | `reference_section` | Jev choice: does the section own teaching, or is it a lookup (table, list of facts); a lookup ends `not_applicable` | Jev, of `body` with `heading` | warn |
 | main-path K001 | a branch names a condition and its different work | `branch` | `IF` lines go on; a `When` line goes on only when Jev classes it a branch, not plain guidance | Jev, of `line` against `step` | warn |
-| steering K001 | a completion lets the agent tell done, with the legwork | `step` | mechanical `ast_grep` `completion`; a step without one ends `not_applicable` | Jev, of `completion` against `body` | warn |
+| steering K001 | a completion lets the agent tell done, with the legwork | `step` | none | mechanical `ast_grep` `completion` first: a step without one is a `finding` at its heading, no question asked; then Jev, of `completion` against `body` | warn |
 | steering K002 | guidance says what to do, not only what to avoid | `sentence` | Jev choice: guidance (an instruction or standard) or something else (an example, a fact, a quote); only guidance goes on | Jev, of `body` | warn |
 
-The old 1,024-character rule goes; the platform's 1,024 maximum stays a stated fact, unmarked. The hosted run's sampled warnings (`tmp/project-1-fix/hosted-sample-review.md`) are development cases for the gates: a local instruction is not a reusable rule; a lookup subsection doesn't own teaching; a complete call read with its step passes.
+A mechanical gate that rejects a piece sends nothing to Jev. A Jev gate costs no saving: the engine sends all of an entry's questions in one request once the walk reaches its first question, and the walk then takes only the routes its answers lead to, so a piece the gate rejects ends `not_applicable` without ever reaching the verdict step. The old 1,024-character rule goes; the platform's 1,024 maximum stays a stated fact, unmarked. The hosted run's sampled warnings (`tmp/project-1-fix/hosted-sample-review.md`) are development cases for the gates: a local instruction is not a reusable rule; a lookup subsection doesn't own teaching; a complete call read with its step passes.
 
 ## The config
 
@@ -70,12 +70,18 @@ The old 1,024-character rule goes; the platform's 1,024 maximum stays a stated f
 
 - `rulebook`: five pairs, `../references/<topic>.md` with `<topic>.rules.json`, for descriptions-and-invocation, generalization, calls-and-placement, main-path and steering;
 - `marker_prefix`: `K`;
-- `check.files`: every skill's `SKILL.md` and every file under its `references/`, for skills in a `skills/` folder; retired skill trees, test fixtures and nested worktrees select nothing;
+- `check.files`: `plugins/*/skills/*/SKILL.md` and `plugins/*/skills/*/references/**/*.md`, anchored at the repository root; retired skill trees, `tests/` fixtures and nested worktrees select nothing (a broad `**/skills/**` would reach fixtures and worktrees shaped like skills);
 - `evidence`: `ast_grep` points at `evidence/sgconfig.yml`; `kinds` defines the six kinds and their fields (specification G8), with step shapes shared once as a util;
 - `decision_model`: `jev-latest`, the engine's default endpoint;
 - `limits`: `evidence_max_chars` 6,000 and `request_max_chars` 20,000, the page's figures.
 
-The evidence project is ported from the confirmed experiment the engine's fixture copied (`crates/sunstack/tests/fixtures/rulebook-lint/evidence/`, from this repository at `565d763f`), widened to references for `load`, `branch` and `sentence` and given `load.step` and `branch.step`.
+The evidence project is ported from the confirmed experiment the engine's fixture copied (`crates/sunstack/tests/fixtures/rulebook-lint/evidence/`, from this repository at `565d763f`), with three repairs a literal port would miss:
+
+- `sentence` picks a whole list item, or a paragraph that is not inside a list item; the fixture's rule picks every paragraph, which splits a multi-paragraph item into fragments.
+- `load` and `branch` pick from references as well as SKILL.md.
+- `load.step` and `branch.step` come from a contextual step rule that also matches numbered steps in references; the `step` kind itself stays SKILL.md-only. The fixture's step rule is limited to SKILL.md, and the engine only indexes the rules that apply to a file, so reusing it would leave every reference piece's `step` empty.
+
+Each repair is proved by exact spans, not by counts: a multi-paragraph and a nested list item each give one `sentence` piece with the item's span, and a numbered step in a reference file that holds a load and a branch gives both pieces that step as their `step`.
 
 ## Where the files go
 
@@ -126,8 +132,8 @@ Each keeps the near miss its old description guarded against, in fewer words. G4
 | 2 | `skill-rules`: its four references, `SKILL.md`, `agents/openai.yaml`, its description | update | Opus 5.5 xhigh | proposed |
 | 3 | config, evidence project, runner `.ts` and its test, `tsconfig`, `package.json`, `AGENTS.md`, READMEs, the architecture doc, removals | repository code and kit data | Sol, Implementer Sidekick | proposed |
 | 4a to 4e | `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit` sites and descriptions; `skill-design`'s description and its verification step planning G4's trial | update | Opus 5.5 high | proposed |
-| 5 | labelled cases from real skills, development and held-out, per judged rule, and the rule tests that run them | eval | cases: Sol Researcher drafts, the Lead accepts each label; tests: run 3's Implementer | proposed |
-| 6 | proof: every rule over every creation skill on the local engine build with Jev; held-out rule-test run | proof | the Lead, with run 3's Implementer | proposed |
+| 5 | labelled cases from real skills, development and held-out, per judged rule, and the rule tests that run them | eval | candidate pieces: Sol Researcher; labels: the owner for generalization's 30 cases, two independent Sol labelers and a Sol settler for the other judged rules, the owner spot-checking 10 per rule; tests: run 3's Implementer | proposed |
+| 6 | proof: every rule over every creation skill on the local engine build with Jev, after runs 2 and 4 finish (or refreshed after any later skill edit); held-out rule-test run once run 5's labels and tests exist and run 1's entries are frozen | proof | the Lead, with run 3's Implementer | proposed |
 | 7 | G4 trials for the six visible changed descriptions | proof | Luna sessions, run by a Sol Operator | proposed |
 | 8 | changelog entry, plugin versions | documents | the Lead | proposed |
 | 9 | consumer run (G15): a later skill change on a scratch branch, a 301-character description planted | proof (the experiment) | measured subject: a fresh Luna agent following the kit; judge: Jev; review step: Sol; collector: Sol | proposed |
@@ -152,11 +158,12 @@ One unit, one review: after run 8, a fresh `skill-review` implementation review 
 | E8 | The consumer run is a later skill change on a scratch branch | Real work; keeps other PRs untouched until #171 merges |
 | E9 | "Passes" means A | Offered on 28 October, not objected to |
 | E10 | Trigger trials and the consumer run's subject run on Luna; judgments on Jev; Opus writes skills only; Sol does everything else | The owner, 28 October |
-| E11 | Labelled cases come from current skills, each label accepted by the Lead; the owner's HTML samples belong to the presentation rules, later | The owner, 28 October: "we have for skills current skills to audit and calibrate" |
+| E11 | Labelled cases come from current skills; labels follow the owner's adopted split (the owner labels generalization's first 30, 15 overfitted and 15 general; two independent Sol labelers and a Sol settler label the other judged rules; the owner spot-checks 10 per rule); the owner's HTML samples belong to the presentation rules, later | The owner, 28 October: "we have for skills current skills to audit and calibrate"; the owner's 26 October choice "who-labels-evals A (owner-labels-generalization)" (Project 1 spec, settled decision) |
 | E12 | One config, beside the rules files in `domain-skill-crafting/rules/`, with the evidence project in `rules/evidence/` | The confirmed page's files table |
 | E13 | The marked set is the twelve in G7; the inventory's other judged standards are later work | The confirmed page: "one entry per tagged sentence"; each new rule needs labelled cases first ("coverage is labelled before it's claimed") |
 | E14 | `calls-and-placement`'s `R001` becomes `K002` | One config has one marker prefix |
-| E15 | The runner refuses a full-scope run that selects nothing | The engine exits 0 for nothing selected, so a wrong path would read as clean |
+| E15 | The runner refuses a full-scope run whose engine status is `nothing_selected` | The engine exits 0 for nothing selected, so a wrong path would read as clean; `evidence_seen` lists only pieces sent to Jev, so it can be empty on a run that selected mechanical work |
+| E17 | Steering K001's missing completion is a `finding` at the step heading, with no question asked | The confirmed page's worked example: "If not, it's a finding at the heading and no question is asked" |
 | E16 | The runner is `.ts` run by Node directly | The owner: TypeScript or Rust only, "node can run ts"; the rest of `tests/skills` is `.ts` |
 
 ## Coordination
