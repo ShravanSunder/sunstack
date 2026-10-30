@@ -6,6 +6,7 @@ import { z } from "zod";
 import { loadRuleCases } from "./skill-rules-evaluation-cases.ts";
 import type { LoadedRuleCase } from "./skill-rules-evaluation-cases.ts";
 import { evaluateLabelledCase } from "./skill-rules-evaluation-engine.ts";
+import { createRuleEvaluationHarness } from "./skill-rules-evaluation-harness.ts";
 import {
   cleanupFixtureRoots,
   createFixture,
@@ -66,6 +67,30 @@ function copyKit(root: string, endpoint: string, requestLimit?: number): string 
 }
 
 describe("rule evaluations through the C2 CLI results contract", () => {
+  test("the eval entry point's real harness packages the labelled CLI result and records it", async () => {
+    const root = createFixture();
+    await withJudge({}, async (endpoint) => {
+      const recorded: string[] = [];
+      const harness = createRuleEvaluationHarness({
+        engine: enginePath,
+        kitRules: copyKit(root, endpoint),
+        reportDirectory: path.join(root, "evaluation"),
+        onResult: (output) => {
+          recorded.push(`${output.id}:${output.score}`);
+        },
+      });
+      const result = await harness.run(labelledFixture(), { artifacts: {}, setArtifact: () => {} });
+      expect(result.output).toMatchObject({
+        id: "case-001",
+        observed: "pass",
+        score: "matched",
+        labelSource: "sol-settled",
+      });
+      expect(recorded).toEqual(["case-001:matched"]);
+      expect(result.session.events).toHaveLength(1);
+      expect(result.traces?.length ?? 0).toBeGreaterThan(0);
+    });
+  });
   test.each([
     [0.95, "pass", "matched"],
     [0.1, "finding", "wrong"],

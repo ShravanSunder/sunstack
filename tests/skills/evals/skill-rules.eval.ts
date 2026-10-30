@@ -2,14 +2,13 @@ import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterAll, expect, test } from "vitest";
-import { createHarness, describeEval } from "vitest-evals";
+import { describeEval } from "vitest-evals";
 import {
   loadRuleCases,
   parseHeldOutFlag,
   selectRuleCases,
 } from "../lib/skill-rules-evaluation-cases.ts";
-import type { LoadedRuleCase } from "../lib/skill-rules-evaluation-cases.ts";
-import { evaluateLabelledCase } from "../lib/skill-rules-evaluation-engine.ts";
+import { createRuleEvaluationHarness } from "../lib/skill-rules-evaluation-harness.ts";
 import type { CaseEvaluationOutput } from "../lib/skill-rules-evaluation-engine.ts";
 import { summarizeRuleScores } from "../lib/skill-rules-evaluation-scoring.ts";
 import type { CaseScore, ScoredRuleCase } from "../lib/skill-rules-evaluation-scoring.ts";
@@ -98,24 +97,12 @@ afterAll(() => {
 for (const item of unlabelled)
   test.skip(`unlabelled: ${item.ruleFolder}/${item.definition.id}`, () => {});
 
-const harness = createHarness<LoadedRuleCase, CaseEvaluationOutput>({
-  name: "skill-rule-cli",
-  run: async ({ input, signal }) => {
-    const output = await evaluateLabelledCase({
-      loaded: input,
-      kitRules,
-      engine,
-      reportDirectory: path.join(reportDirectory, input.ruleFolder, input.definition.id),
-      ...(signal ? { signal } : {}),
-    });
+const harness = createRuleEvaluationHarness({
+  engine,
+  kitRules,
+  reportDirectory,
+  onResult: (output) => {
     results.push(output);
-    return {
-      output,
-      events: [
-        { type: "message", role: "user", content: `${input.ruleFolder}/${input.definition.id}` },
-      ],
-      artifacts: { labelSource: output.labelSource, report: output.report },
-    };
   },
 });
 
