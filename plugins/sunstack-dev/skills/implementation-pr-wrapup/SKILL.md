@@ -40,7 +40,7 @@ The assigned 🐒 Implementer Sidekick may carry its delivery assignment through
 2. Inspect local branch/worktree state. MUST load `references/local-branch-state.md` and return push/readiness blockers.
 3. Sanitize public artifacts. MUST load `references/public-artifact-safety.md` and return redactions or refuse-to-publish.
 4. Inspect or create/update the PR without authoring `## Why the change`, `## Special things to note`, or `## Change outline`. MUST load `references/github-pr-state.md` and return number, URL, head SHA, base, body, and mergeability snapshot. Description waits for step 5. Reject "it's faster to write the body in the parent."
-5. IF this run created a PR, or the current body is missing `## Why the change` / `## Special things to note` / `## Change outline`, is a file-list changelog (`- path — note` bullets as the outline), stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite (including after a head/diff identity change and before a ready claim), commission the body's draft as below:
+5. IF this run created a PR, or the current body is missing `## Why the change` / `## Special things to note` / `## Change outline`, is a file-list changelog (`- path — note` bullets as the outline), stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite (including after a head/diff identity change and before a ready claim):
    ```text
    IF this run created a PR, or the current body is missing those headings, is a file-list changelog, stale against the current HEAD/diff, secret-unsafe, or the user asked to rewrite:
      commission a 📚 Researcher Worker through `practices-manage-agents` to draft the PR body, with these sources in its packet:
