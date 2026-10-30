@@ -47,6 +47,7 @@ skill design
 skill verification
   per requirement and per standard: its route (mechanical rule, judged rule, eval, review check, no proof needed, or unverified with its reason) and the properties it was decided on
   proof plan: each run's proof posture, from the authoring basis
+  trigger trial: per written or altered description of a model-invocable skill, its true prompt and near miss and how each runs, or `not applicable` for a hidden skill
   what stays unverified
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: skill-review
-description: "Use when reviewing a skill change's design set before its files change, a skill draft shown in the conversation, or changed or existing skill files before they ship, especially when the review must be independent of the author or a skill's quality is in question. Not for reviewing product code or deciding which skills should exist (skill-audit)."
+description: "Use when a skill's design set, draft or changed files need an independent review before they change or ship, or a skill's quality is in question. Not for product code."
 ---
 
 # Skill Review
@@ -41,6 +41,8 @@ Open the anchor of every candidate. MUST load `references/checks/review-schema.m
 ### 4. Return
 
 MUST load `references/checks/review-schema.md` and return the stage's report labels with its reduction block. Accepted findings carry their route.
+
+Completion: the report carries every label the stage's reference names, each accepted finding with its route, and the reduction block accounts for every candidate step 3 gave a state.
 
 ## Correction Loop
 

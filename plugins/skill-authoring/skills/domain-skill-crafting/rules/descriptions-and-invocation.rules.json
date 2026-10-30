@@ -1,14 +1,177 @@
 {
   "K001": {
-    "name": "skill.description-use-when",
-    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } },
-    "expect": { "starts_with": "Use when" },
+    "name": "description.opener",
+    "evidence": "skill",
+    "decision": {
+      "start": "opener",
+      "steps": {
+        "opener": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "description",
+            "pattern": "^(?:Use when|Trigger when|Always use when|Always trigger when)\\b"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Description doesn't open with Use when, Trigger when, Always use when or Always trigger when.",
+            "at": "description"
+          }
+        }
+      }
+    },
     "severity": "warn"
   },
   "K002": {
-    "name": "skill.description-length",
-    "target": { "input": "skill", "select": { "kind": "frontmatter_field", "field": "description" } },
-    "expect": { "matches": "^[\\s\\S]{0,1024}$" },
+    "name": "description.length-warning",
+    "evidence": "skill",
+    "decision": {
+      "start": "within_225",
+      "steps": {
+        "within_225": {
+          "mechanical_check": {
+            "tool": "max_chars",
+            "field": "description",
+            "max": 225
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Description is over 225 characters; aim for 100 to 200.",
+            "at": "description"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K003": {
+    "name": "description.length-limit",
+    "evidence": "skill",
+    "decision": {
+      "start": "within_300",
+      "steps": {
+        "within_300": {
+          "mechanical_check": {
+            "tool": "max_chars",
+            "field": "description",
+            "max": 300
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Description is over 300 characters; shorten it before the step completes.",
+            "at": "description"
+          }
+        }
+      }
+    },
+    "severity": "error"
+  },
+  "K004": {
+    "name": "description.loading-moment",
+    "evidence": "skill",
+    "questions": {
+      "names_moment": {
+        "type": "noul",
+        "instructions": {
+          "check": "description",
+          "task": "Does the description name a moment that should load this skill, one an agent could recognize when it arrives: a situation, symptom, user request, repository event or failure?"
+        },
+        "criteria": {
+          "true": "It names at least one such moment in words an agent could match against a prompt or the work in front of it, such as 'writing or reviewing a database migration', 'a test that passes locally and fails in CI', or 'a slow SQL query or a missing index'. This holds whether the moment is phrased as a trigger or as the work the skill does; how the description opens is a different standard. A boundary or a short payoff beside the moment doesn't change this.",
+          "false": "It names only an abstract topic, quality or benefit that no prompt would contain, or a boundary, so nothing tells the agent the moment has come, such as 'Helps with migrations', 'Database expertise', or a 'Not for ...' clause standing alone."
+        }
+      }
+    },
+    "decision": {
+      "start": "names_moment",
+      "steps": {
+        "names_moment": {
+          "ask": "names_moment",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Description names no moment that should load the skill.",
+            "at": "description"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K005": {
+    "name": "description.trigger-only",
+    "evidence": "skill",
+    "questions": {
+      "carries_extra": {
+        "type": "noul",
+        "instructions": {
+          "check": "description",
+          "task": "Beyond what decides loading, does the description carry workflow steps, a tool list, implementation detail or generic virtue?"
+        },
+        "criteria": {
+          "true": "It carries at least one: what the skill does step by step ('reads the files, checks X, reports Z'), including a list of the stages or phases it runs, even in parentheses ('(plan, build, test and deploy)'); the tools it uses ('uses grep, tests and GitHub'); how it works inside; or praise with no routing value ('helps write better code', 'thorough and reliable').",
+          "false": "Everything in it serves the load decision: the moment and its symptoms, examples of situations that count, a short why that sharpens routing, and boundaries with neighbouring skills."
+        }
+      }
+    },
+    "decision": {
+      "start": "carries_extra",
+      "steps": {
+        "carries_extra": {
+          "ask": "carries_extra",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": {
+            "finding": "Description carries workflow, tools, implementation detail or generic virtue; keep only what decides loading.",
+            "at": "description"
+          },
+          "no": "pass"
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K006": {
+    "name": "description.always-earned",
+    "evidence": "skill",
+    "questions": {
+      "breaks_when_skipped": {
+        "type": "noul",
+        "instructions": {
+          "check": "description",
+          "against": "steps",
+          "task": "Every time the description's condition holds, would skipping this skill break the work, rather than make it plainer, slower, or wrong only in some runs?"
+        },
+        "criteria": {
+          "true": "Whenever the condition holds, work done without the skill is not a valid result: unsafe, unverified, or not acceptable however well it is otherwise done, because the skill carries a check, gate or required condition the result must meet, as a skill for writing unsafe Rust does with its invariant checks.",
+          "false": "Work done without it is still a valid result, only plainer, slower, less polished or less consistent, or it breaks in only some of the runs the condition covers, as with a release-notes skill, a commit-message skill, or a CI-config skill where most edits are safe."
+        }
+      }
+    },
+    "decision": {
+      "start": "opens_with_always",
+      "steps": {
+        "opens_with_always": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "description",
+            "pattern": "^Always\\b"
+          },
+          "yes": "earned",
+          "no": "not_applicable"
+        },
+        "earned": {
+          "ask": "breaks_when_skipped",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Always opener not earned: skipping the skill doesn't break the work every time its condition holds; open with Use when or Trigger when.",
+            "at": "description"
+          }
+        }
+      }
+    },
     "severity": "warn"
   }
 }

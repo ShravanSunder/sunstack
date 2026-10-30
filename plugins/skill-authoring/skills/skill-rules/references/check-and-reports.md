@@ -1,94 +1,74 @@
 # Check and Reports
 
-This reference owns step 6: running the engine's check, print and local evaluation, reading what comes back, and deciding whether each rule is proven. Expected input: the wired RuleSet and the invocation that runs it, the intended rule IDs and which of them are mechanical, and for each mechanical rule one good and one bad example. Return: the check outcome and rule count; each intended rule's printed wording and your reading of it; for each mechanical rule, the good and bad occurrences with their completed results; and what stays unproven.
+This reference owns step 6: checking the rules, printing the evidence they will judge, reading a run's report, and proving each rule with rule tests. Expected input: the paired rulebook, the runner the repository's instructions name, the intended rules with which of them are mechanical, and for each rule the pieces you meant it to judge. Return: the check's outcome and printed rules; for each rule's evidence kind, the pieces it picks with your intended ones among them; for each rule, its rule tests and their per-rule results; and what stays unproven.
 
-## Run the engine
+## Check
 
-`sunstack exec` reads one JSON request on stdin and writes one JSON response on stdout:
+The check reads the config, the rulebook, every rule entry and the evidence project, and judges nothing: it reads no checked file and needs no key. Run it through the repository's runner when the runner offers it, or through the engine's own check, from the repository root.
 
-```json
-{ "protocol_version": 1, "operation": "check_rules", "input": { "...": "the operation's native input" } }
-```
-
-Use the binary the repository declares, built the way its engine docs or verify skill say. Run it from the repository root, because relative paths in the input resolve from the working directory. Keep every request and response you rely on; the decision table's proof column points at them. If no binary is available, the proof is blocked: report that, and never infer a pass from a request that looks right.
-
-| exit | meaning |
-| --- | --- |
-| 0 | the operation completed, including a `fail` verdict and partial coverage |
-| 2 | invalid input or a refusal |
-| 3 | failed or incomplete: an unresolved check, or no valid rule |
-| 4 | cancelled by the caller |
-
-Exit 0 says the engine finished, not that a rule passed. Read the response.
-
-## Check and print
-
-`check_rules` assembles every requested RuleSet and validates each rule without reading any reviewed document, constructing a backend or sending a model request. Its input holds `definition_root`, `definitions`, `repositories`, `payload_schemas`, `limits` and `output`: `diagnostics` only validates, and `assembled_rules` also prints every assembled rule after a clean check. That printing run is "print".
-
-A clean check returns `result.outcome.kind: checked` with `checked_rule_count`, and exits 0. A refusal returns `kind: refused` with `refused_rule_count` and `diagnostics.items`, each carrying a `code`, a `location` (`file`, `line`, `column` and `field_path`, which holds the marker ID for a marker-binding refusal and may be empty otherwise) and `guidance`, and exits 2; nothing prints. IF `check_rules` refuses, load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then rerun the check.
+- **Clean** (exit 0): it prints every assembled rule with its rule ID, marker, source file and line, evidence kind, `mechanical` or `asking`, severity, and the standard's wording as the judge will see it.
+- **Refused** (exit 2): it prints one line per refusal, `file:line:column:`, the path inside an entry when the refusal is there, and the message. IF the check refuses, load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then check again.
 
 Read the print in two passes.
 
-1. **Coverage.** `checked_rule_count` is the count you expect, and every intended rule ID appears as a `printed_rules[].definition.rule_id`, with `source.provenance.marker_id` and `source.provenance.markdown` naming your marker and file.
-2. **Wording.** Read each rule's wording as a stranger would, with nothing but its words: `definition.verdict.question.instructions` for a judgment rule, `definition.verdict.explanation` for a mechanical one. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 3 for a narrower host, or, when no host reads well, to the standard's home as a teaching change, designed with `skill-design` and written with `skill-creation`.
+1. **Coverage.** The count is the count you expect, and every intended rule appears with your marker and source line, at the severity and kind you meant.
+2. **Wording.** Read each printed standard as a stranger would, with nothing but its words. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 3 for a narrower host, or, when no host reads well, to the standard's home as a teaching change, designed with `skill-design` and written with `skill-creation`.
 
-What check and print prove: the definitions assemble and each question reads as its standard. They can't show that a rule selects or detects anything, because they never read a reviewed document.
+What the check proves: the definitions assemble and each standard reads as itself. It can't show that a rule picks or decides anything, because it reads no checked file.
 
-## Calibrate each mechanical rule
+## Print the evidence
 
-A mechanical rule is proven by what it selects and what it decides on two examples, chosen before anything runs:
+The engine's evidence print (`--evidence`, optionally with one kind) lists the pieces each kind picks from the checked files, with every field, and asks nothing, so it needs no key. Print the kind each rule judges, over the files the rule is meant for, and look for three things:
 
-- a **good example**, a target document where the standard holds at one unit you can point to;
-- a **bad example**, where the standard breaks at one unit, in the way the standard names.
+- **the intended pieces:** the good and bad pieces you chose for the rule are there, each as one piece with the span you expect (a whole list item, not a fragment of it);
+- **the fields:** every field the rule's questions and checks read is filled on those pieces, and a field that is legitimately empty, such as a step heading for a call that sits in no numbered step, is empty for that reason;
+- **the count:** a kind with no pieces in files that plainly hold them is a gap in the evidence project, not a quiet rule.
 
-A copy of a real skill file with one edit makes the best example, because it brings real surroundings: frontmatter, nesting and inline code. Put the break where real text puts it, mid-paragraph included, so the example tests the selector as well as the predicate. Keep the examples as fixtures outside the skill being checked.
+## Read a report
 
-Run `evaluate_rules` once per example, with the RuleSet's target input bound to that example file. The runtime invocation is the check input plus runtime settings (origin, cursors, execution, backend, attempts and request budget), and the engine's invocation schema owns them. Local-only rules construct no backend and need no credential. A rule that would reach a model needs real backend configuration and a credential; that is a hosted run, with its own cost and authority, and it isn't part of this proof unless the request grants it.
+A run's report carries a `status`, the `findings`, the `uncertain` pieces, the `incomplete` parts, the `skipped_rules`, the `counts` by severity, the `exclusions` (including how many pieces ended `not_applicable`), the `usage` (requests, tokens, cost) and `evidence_seen`. `evidence_seen` lists only the pieces sent to the decision model, so it is empty on a run whose pieces all settled mechanically; never read emptiness from it.
 
-Read `result.outcome.report`:
+| status | exit | what it means |
+| --- | --- | --- |
+| `cancelled` | 4 | the run was stopped |
+| `incomplete` | 3 | some work didn't finish: a request limit, a provider failure, evidence too large or unavailable |
+| `findings` | 1 | an `error` finding, or more warnings than the run's set maximum |
+| `uncertain` | 5 | no failing finding, and at least one piece ended between its thresholds |
+| `nothing_selected` | 0 | no piece was selected: clean for a run over changed evidence with nothing changed, and a gap for a full run, which usually means a wrong path |
+| `clean` | 0 | nothing above happened |
+| `invalid` | 2 | refused before reading, such as a config refusal or no key for a run with asking rules |
 
-- **`rule_coverage`**: `full`, `partial` or `none`. Partial coverage still exits 0.
-- **`skipped_rules`**: entries or sources that didn't run, with their diagnostics.
-- **`rule_evaluations`**: per rule, `expanded` with its occurrences, or `zero_matches`, `not_applicable`, `outside_change_scope`, `selection_failed`, `evaluation_failed` or `cancelled`. Zero matches is complete, and it is never a pass.
-- **`occurrences`**: one per selected unit. A mechanical occurrence is `kind: checked`, with `key.rule_id`, its `target` location, `declared_severity`, and an `outcome` that is `completed` with `result` `pass` or `fail` (plus AST match observations), `unresolved` with diagnostics, or `cancelled`.
+A refused run is `invalid` and reads nothing; otherwise the status is the first row, top to bottom, that holds. Warnings don't move it: a `clean` or `uncertain` run can carry warn findings, so read every list, never just the status.
 
-Find the intended occurrence by matching its `key` and `target` location, which carry the source and the unit's range, against the unit you chose. Then decide:
+Each finding carries its rule, marker, file and line (the line of the field its route names), severity, message, and for a judged finding its answers and the path its decision took. Each `uncertain` piece carries the step it stopped at, the answers, and the piece's state as the judge saw it. Each incomplete part names its reason, and its rule, file or field when it has one.
 
-| observation | closes calibration? |
-| --- | --- |
-| good example: the intended unit is an occurrence of this rule, `completed`, `pass`; bad example: the intended unit is an occurrence, `completed`, `fail` | yes |
-| `zero_matches` for the rule on either example | no: the selector reaches nothing there |
-| occurrences exist, but none at the intended unit | no: the selector reaches other text |
-| the intended occurrence is `unresolved` or `cancelled` | no |
-| the rule is in `skipped_rules`, or coverage is `partial` or `none` | no |
-| both examples `pass` | no: the predicate can't see the break |
-| both examples `fail` | no: the predicate or its polarity is wrong |
-| exit 0 | says nothing either way |
+## Rule tests
 
-### Worked calibration
+A rule is proven by what it decides on labelled pieces, not by a clean check. Rule tests live in the repository's eval suite, as labelled cases taken from real skills, each run through the same command and judge the rules use, and each checking the outcome the decision reaches: `pass`, `finding` (and its line), `not_applicable` or `uncertain`. They add no store, state or procedure of their own.
 
-Take the load check `K015` from the entry examples: it selects paragraphs whose visible text starts with `MUST`, and its `ast_grep` rule fails one that contains `MUST load` without the word `return`. Its marked wording says exactly that: "A paragraph with a `MUST load` instruction contains the word `return`." The outcomes below are predicted from the engine's selection and matching rules.
+**Building the cases.** Each judged rule's cases together hold at least one good case (expects `pass`), one bad case (expects `finding`) and one near miss, a look-alike that expects `not_applicable` when the gate should drop it, or `pass` when it is a conforming piece that only looks wrong. They split into two sets:
 
-- **Good:** "MUST load `reference.md` and return the selected facts." The paragraph is an occurrence, `completed`, `pass`.
-- **Bad:** "MUST load `reference.md` before step 2." The paragraph is an occurrence, `completed`, `fail`, with an AST match observation on it. With both rows observed, calibration closes for this selector.
-- **Bad, mid-paragraph:** "Read the skill first. MUST load `reference.md` before step 2." With `starts_with: "MUST"` this paragraph is never selected; the report shows `zero_matches` or no occurrence at that unit, and the process exits 0. The rule looks clean and calibration hasn't closed. Fix the selector, for example with `call_site` on the same pattern so every call is reached, and rerun both examples.
-- **Proxy surfaced:** "MUST load `reference.md` and return." is selected and passes. Against the rule's own lexical wording that's correct. Against "a mandatory load names its returned result" it shows the check is a proxy, which is why that semantic standard keeps its own model-judged rule.
+- a **development set**, used to write and tune the entry;
+- a **held-out set**, drawn from other skills, run once after the entry is frozen.
 
-When calibration doesn't close, fix the cause:
+Each set aims for all three kinds. When a set still lacks a kind after two targeted rounds of collecting real pieces, each labelled blind, record the gap with the search that was made, and claim nothing from that set about the missing kind: a held-out set with no labelled breach says nothing about how well the rule finds breaches.
 
-- the selector misses the intended unit: change `select` (unit kinds, the filter, or `call_site`), not the example;
-- both examples pass: check whether the predicate reads visible text when the break sits in inline code, or whether the check is a proxy, in which case the standard goes back to step 2;
-- both fail: an `ast_grep` rule must describe the violation, and an `expect` predicate must describe the property that holds;
-- unresolved: the target doesn't suit the check, as with a missing frontmatter block, or `ast_grep` on a frontmatter field.
+Each case is an excerpt of a real piece with its source, and each label records who gave it. Labels come from people or agents independent of the rule's writer and of any run of the rule, such as two labelers who don't see each other's labels and a third who settles their disagreements; where the owner of the standards labels a rule's cases, those labels govern. A label the rule's writer took from the rule's own answers proves nothing.
 
-The examples were fixed before the run and stand for the standard's meaning. Don't edit one until the rule agrees with it; if an example was wrong, say so, replace it, and rerun both.
+**Reading the results.** Report, per rule: matched, missed (expected a finding, got `pass` or `not_applicable`), wrong (expected `pass` or `not_applicable`, got a finding), uncertain, and gaps, with each case's label source, so every case is counted exactly once. A gap is any other non-match, named with its reason, and never a match: expected `pass` but got `not_applicable` or the reverse (the decision reached a different place than the label, such as a gate dropping a piece the labelers judged), a finding at a line other than the labelled one, or a piece whose evaluation didn't complete. Tune a rule's questions, criteria and thresholds only from its development results, before the freeze. A held-out miss is reported, never tuned away. Results that rest on labels still owed are provisional, and say so.
 
-## Model-judged rules
+**Mechanical rules** are tested at their edges with no model: for a 300-character limit, 300 characters pass and 301 fail; for an opener rule, each allowed opener passes and a near opener (`Use for`) fails, at the description's line.
 
-For a model-judged rule, this proof is check plus print: the rule assembles, and its question reads as its standard. How well a hosted judge answers that question, with or without calibration `context`, is a separate hosted observation. Report it as unproven.
+**What tests don't show.** Named cases measure a rule's decisions on the pieces chosen; they don't measure how many real pieces its evidence kind misses. No result here makes a judged rule ready to block: that needs whole sources labelled independently, with a held-out group of files, and a decision by whoever owns the standards.
 
-## Where rules run
+### Worked reading
 
-Rules run locally, by the skills that use them, not in CI: run `check_rules` once per RuleSet whenever those skills check skill text, so a teaching edit that orphans a marker or overflows a host fails before it ships.
+A guidance rule over the `sentence` kind asks first whether the piece is guidance, then whether it names a positive target. Its development set:
 
-Complete when: `check_rules` passed on the real binary; print listed every intended rule ID, with the expected count, and each question read as its standard; every mechanical rule has a selected good `pass` and a selected bad `fail` in native reports kept as evidence; and everything still unproven is named.
+- **Good:** "Run the tests for each changed module and report each result with its command." Expected `pass`; got `pass`. Matched.
+- **Bad:** "Don't skip tests." Expected a finding at the sentence; got `finding`. Matched.
+- **Near miss:** the list item `Weak: "Don't skip tests."`, an example inside a section that teaches the positive shape. Expected `not_applicable` (an example, not guidance). Got a finding: the gate read the quoted example as guidance. Wrong.
+
+The wrong case is the gate's, not the verdict's: the fix belongs in the gate's criteria (an example quoted to show a weak form is not guidance), and the case reruns with the rest of the development set. If that held-out set later shows the same miss, it is reported as a miss, and the rule keeps warning, not blocking.
+
+Complete when: the check passed on the real engine and printed every intended rule with the expected count, each standard reading as itself; the evidence print shows each rule's intended pieces with their fields; every mechanical rule has edge tests that pass and fail where its standard does; every judged rule has good, bad and near-miss cases across its sets, development results, and held-out results after its freeze, each case with its label source; any kind a set lacks is recorded with its search; and everything still unproven is named.

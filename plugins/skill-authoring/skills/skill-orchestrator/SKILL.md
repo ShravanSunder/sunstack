@@ -1,6 +1,6 @@
 ---
 name: skill-orchestrator
-description: "Use when creating, updating, or fixing one skill's behavior end to end: carrying one skill change from need to shipped (design, review, writing, proof, and release), or carrying one run of an accepted multi-run design set. Not for only designing a change (skill-design), only writing files (skill-creation), only judging a skill (skill-review), or deciding which skills should exist (skill-audit)."
+description: "Use when one skill change has to go all the way from need to shipped, or one run of an accepted multi-run skill design set has to be carried through. Not for a single step alone."
 ---
 
 # Skill Orchestrator
@@ -40,7 +40,7 @@ Use `skill-creation` inside the accepted design set and return the diff, any dev
 
 ### 4. Prove
 
-MUST load `../skill-design/references/proof-runs.md`, carry out the proof the design set plans by its procedure, and return each run's record and check results. MUST load `../domain-skill-crafting/references/proof-claims.md`, judge the claim by its standards, and return the strongest supported claim and its evidence. Return `rules: pending` with the proof result: this step does not yet run the rules on the changed files. A pending rule check is never reported as passed, and a rule is reported as run only when the engine's own report shows that it ran. Completion: proof ran against the current files, or the user accepted a named proof gap, and `rules: pending` stands with the proof result.
+MUST load `../skill-design/references/proof-runs.md`, carry out the proof the design set plans by its procedure, and return each run's record and check results. MUST load `../domain-skill-crafting/references/proof-claims.md`, judge the claim by its standards, and return the strongest supported claim and its evidence. MUST load `../skill-rules/references/running-rules.md`, run the rules on the change's files, and return its reading with the proof result: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. An `error` finding, or a refusal the reading traces to the change, sends the change back to step 3 for its fix, and this step runs again on the fixed files. Judged findings and decided `uncertain` pieces go to step 5 with your calls. A rule is reported as run only when the engine's own report shows that it ran. Completion: proof ran against the current files, or the user accepted a named proof gap; and the rules' reading, from a run on the current files, stands with the proof result, with no `error` finding left and each gap named with its reason.
 
 ### 5. Assess
 
@@ -49,6 +49,7 @@ Open the diff and the decisive proof yourself before any independent review. Che
 - the success definition and the accepted design set, including its run allocation;
 - the four surfaces still aligned, and every changed reference and caller current;
 - proof that observes the claimed behavior, with every check read from its run and static results labeled as static;
+- the rules' reading from step 4: each judged finding confirmed at its line or explained, and each `uncertain` piece's call holding against its standard;
 - ownership and names that match the design set;
 - no complexity, compatibility path, check, schema, or mechanism outside the accepted boundary;
 - when this run depends on earlier runs of the design set, those runs are at their current revisions and the combined behavior is proven, not only this run's local proof.
@@ -70,7 +71,7 @@ IF shipping, load `../domain-skill-crafting/references/platform.md` and return t
 
 MUST load `../domain-skill-crafting/references/security.md` and return its public-safety standard applied to what ships, meaning the changed files, the changelog entry and the report lines: each home-cache path or local cache identifier they hold, or none.
 
-Completion: the run status is `shipped` only once the change is released or merged as the user scoped.
+Completion: each validator the step names reported its result, or the reason it doesn't fit; the version moves and the changelog entry are in the diff; a scoped refresh is reported on its own line; the public-safety check returned each cache path or identifier it found, or none; and the run status is `shipped` only once the change is released or merged as the user scoped.
 
 ## Run Summary
 
@@ -84,7 +85,7 @@ success and basis: <success definition; observed failure | user-directed intent>
 run status: <per run: proposed | implemented | reviewed | shipped>
 review: <stages run, checks, and complete | partial | blocked results>                   # only if review ran
 proof: <claim, evidence, and remaining gap>                                              # only if proof ran
-rules: pending                                                                           # only if proof ran
+rules: <ran: status, findings with calls, uncertain decided, gaps | not run: reason>     # only if proof ran
 security: <allowed | disallowed | blocked | deferred>                                    # only if a sensitive surface was routed
 deviations: <accepted design set boundary or review deviation>                           # only if one occurred
 ```
@@ -100,5 +101,6 @@ The run is not done while any of these hold:
 - an accepted correction reached refreshed review without fresh proof and reassessment;
 - a behavior-changing change is reported shipped without behavior proof or a user-accepted proof gap, or without a `great` implementation review or an explicit, recorded user skip;
 - a run status is reported beyond the state the run reached;
+- the `rules:` line reports a rule as run or passing that the engine's report doesn't show, an `uncertain` piece as a pass, or an `error` finding left standing at step 5;
 - a review round ran after `not-converging`, or outside the accepted boundary without the user's decision;
 - required platform validation failed, or was skipped without a stated reason.

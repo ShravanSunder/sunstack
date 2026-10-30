@@ -2,18 +2,19 @@
 
 Review one of two targets. For implemented behavior-changing delivery, review after fitting proof and after whoever carries the change has assessed the diff and proof against the accepted design set, and before ship status advances. For an evaluation of existing files, perform the source-only review before any new implementation commission, mark behavior `unverified/deferred`, and authorize no shipping. Mechanical changes and an explicit implementation-review skip do not enter this reference merely to fabricate coverage.
 
-Return a verdict, the rule pass's state, changed-file coverage, accepted/rejected/unverified findings, smallest edits, targeted retest, and ship decision.
+Return a verdict, the rule pass's reading, changed-file coverage, accepted/rejected/unverified findings, smallest edits, targeted retest, and ship decision.
 
 ## First Rule Pass
 
-Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the folder of each skill under review, and return its report; that reference owns when a rule counts as run. Record the report's lines with the per-check statuses, then carry it into the review:
+Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the files under review, and return its reading: the run's status, each finding, each `uncertain` piece and each gap. That reference owns when a rule counts as run and how each result reads; here the review lead is the agent running the check. Record the reading with the per-check statuses, then carry it into the review:
 
-- Each `failing` line becomes a candidate finding raised by the rule pass, with its location as the anchor and the rule's wording as the finding; the review lead verifies it at that anchor like any other candidate.
-- Each refusal the report traces to the change under review is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal the report doesn't trace to the change stays only a coverage gap, with its cause.
-- A model-judged rule stays `not evaluated`, even when a check finds its standard kept.
-- Each gap the report names, and a `rules: not run` result, stays with the per-check statuses as a coverage gap, with its reason.
+- Each finding from a mechanical rule becomes a candidate finding raised by the rule pass, anchored at its file and line, with the rule's message as the finding; the review lead verifies it at that anchor like any other candidate. An accepted `error` finding blocks the ship decision until a correction fixes it.
+- Each judged finding becomes a candidate finding the review lead confirms at its line against the rule's standard, or rejects with the reason it doesn't hold; the model's answer alone never accepts it.
+- Each `uncertain` piece goes to the review lead, who decides it against the rule's standard. A piece decided as a breach becomes a candidate finding with that call as its reason; a piece decided as meeting the standard, or as outside it, is recorded with its reason.
+- Each refusal the reading traces to the change under review is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal the reading doesn't trace to the change stays only a coverage gap, with its cause.
+- Each gap the reading names, and a `rules: not run` result, stays with the per-check statuses as a coverage gap, with its reason.
 
-Whatever the report shows, the reviewers then start as below; `rules: not run` ends only the rule pass.
+Whatever the reading shows, the reviewers then start as below; `rules: not run` ends only the rule pass.
 
 ## Ordered Checks
 
@@ -77,4 +78,4 @@ After accepted edits, rerun the narrowest fitting pressure and static proof that
 
 At ship, reuse the semantically current review result when its changed-file coverage and proof remain current. Refresh affected coverage only when it is stale.
 
-Complete when: the verdict carries one of the allowed labels, the rule pass's reported state (`rules: ran` with each rule's state, or `rules: not run: <reason>`) stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.
+Complete when: the verdict carries one of the allowed labels, the rule pass's reading (`rules: ran` with its status, each finding and `uncertain` piece with the review lead's call, and its gaps, or `rules: not run: <reason>`) stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.

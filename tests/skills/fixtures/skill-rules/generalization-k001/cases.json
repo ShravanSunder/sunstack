@@ -1,0 +1,632 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "startLine": 1,
+      "endLine": 58,
+      "fieldLine": 9
+    },
+    "excerpt": {
+      "path": "case-001/references/calls-and-placement.md",
+      "line": 9
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 22,
+      "endLine": 29,
+      "fieldLine": 24
+    },
+    "excerpt": {
+      "path": "case-002/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+      "startLine": 1,
+      "endLine": 7,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-003/references/generalization.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 31,
+      "endLine": 38,
+      "fieldLine": 33
+    },
+    "excerpt": {
+      "path": "case-004/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/steering.md",
+      "startLine": 1,
+      "endLine": 24,
+      "fieldLine": 9
+    },
+    "excerpt": {
+      "path": "case-005/references/steering.md",
+      "line": 9
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 40,
+      "endLine": 44,
+      "fieldLine": 42
+    },
+    "excerpt": {
+      "path": "case-006/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "startLine": 1,
+      "endLine": 58,
+      "fieldLine": 16
+    },
+    "excerpt": {
+      "path": "case-007/references/calls-and-placement.md",
+      "line": 16
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 46,
+      "endLine": 50,
+      "fieldLine": 48
+    },
+    "excerpt": {
+      "path": "case-008/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+      "startLine": 1,
+      "endLine": 16,
+      "fieldLine": 10
+    },
+    "excerpt": {
+      "path": "case-009/references/main-path.md",
+      "line": 10
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 52,
+      "endLine": 57,
+      "fieldLine": 57
+    },
+    "excerpt": {
+      "path": "case-010/SKILL.md",
+      "line": 6
+    }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "startLine": 1,
+      "endLine": 58,
+      "fieldLine": 20
+    },
+    "excerpt": {
+      "path": "case-011/references/calls-and-placement.md",
+      "line": 20
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/steering.md",
+      "startLine": 1,
+      "endLine": 24,
+      "fieldLine": 8
+    },
+    "excerpt": {
+      "path": "case-012/references/steering.md",
+      "line": 8
+    }
+  },
+  {
+    "id": "case-013",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+      "startLine": 1,
+      "endLine": 16,
+      "fieldLine": 14
+    },
+    "excerpt": {
+      "path": "case-013/references/main-path.md",
+      "line": 14
+    }
+  },
+  {
+    "id": "case-014",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+      "startLine": 1,
+      "endLine": 19,
+      "fieldLine": 7
+    },
+    "excerpt": {
+      "path": "case-014/references/descriptions-and-invocation.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-015",
+    "set": "development",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+      "startLine": 1,
+      "endLine": 7,
+      "fieldLine": 7
+    },
+    "excerpt": {
+      "path": "case-015/references/generalization.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-016",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 53,
+      "endLine": 63,
+      "fieldLine": 55
+    },
+    "excerpt": {
+      "path": "case-016/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-017",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 53,
+      "endLine": 63,
+      "fieldLine": 56
+    },
+    "excerpt": {
+      "path": "case-017/SKILL.md",
+      "line": 4
+    }
+  },
+  {
+    "id": "case-018",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 53,
+      "endLine": 63,
+      "fieldLine": 57
+    },
+    "excerpt": {
+      "path": "case-018/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-019",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 53,
+      "endLine": 63,
+      "fieldLine": 59
+    },
+    "excerpt": {
+      "path": "case-019/SKILL.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-020",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 53,
+      "endLine": 63,
+      "fieldLine": 60
+    },
+    "excerpt": {
+      "path": "case-020/SKILL.md",
+      "line": 8
+    }
+  },
+  {
+    "id": "case-021",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 24,
+      "endLine": 34,
+      "fieldLine": 28
+    },
+    "excerpt": {
+      "path": "case-021/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-022",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 24,
+      "endLine": 34,
+      "fieldLine": 30
+    },
+    "excerpt": {
+      "path": "case-022/SKILL.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-023",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 24,
+      "endLine": 34,
+      "fieldLine": 32
+    },
+    "excerpt": {
+      "path": "case-023/SKILL.md",
+      "line": 9
+    }
+  },
+  {
+    "id": "case-024",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 38
+    },
+    "excerpt": {
+      "path": "case-024/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-025",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 40
+    },
+    "excerpt": {
+      "path": "case-025/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-026",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 42
+    },
+    "excerpt": {
+      "path": "case-026/SKILL.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-027",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 43
+    },
+    "excerpt": {
+      "path": "case-027/SKILL.md",
+      "line": 8
+    }
+  },
+  {
+    "id": "case-028",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 45
+    },
+    "excerpt": {
+      "path": "case-028/SKILL.md",
+      "line": 10
+    }
+  },
+  {
+    "id": "case-029",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 69,
+      "endLine": 73,
+      "fieldLine": 71
+    },
+    "excerpt": {
+      "path": "case-029/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-030",
+    "set": "held-out",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 75,
+      "endLine": 81,
+      "fieldLine": 77
+    },
+    "excerpt": {
+      "path": "case-030/SKILL.md",
+      "line": 3
+    }
+  }
+]
