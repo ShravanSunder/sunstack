@@ -1,6 +1,6 @@
 ---
 name: practices-retrospective
-description: "Use when asked for a blameless retrospective, look back or lessons from a finished or bounded session or delivery, or why a correction recurs across sessions. Not re-anchoring, live diagnosis, evidence alone or skill upkeep."
+description: "Use when asked for a retrospective or lessons from a finished or bounded session or delivery, or why a correction recurs across sessions. Not for re-anchoring, diagnosis, evidence alone, skill choice or verification skills."
 ---
 
 # Practices: Blameless Retrospective
