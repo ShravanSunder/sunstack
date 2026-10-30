@@ -53,7 +53,7 @@ Package spec/design context so another agent can continue without reconstructing
    - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `verification-design` for a missing or stale proof strategy, `spec-program-review` for a complete but unreviewed/stale four-document design, `plan-implementation` for current ready four-document design, or `docs-maintain` for artifact lifecycle work
    - full clickable artifact links (absolute path + line) for handoff artifacts the human is expected to open
 
-   Completion: the report carries every item above, and its recommended next skill is the one the core routing rule selects for what the packet shows.
+   Completion: the report carries every item above (for chat-only output, the artifact paths and links give way to the copy-paste prompt printed in full), and its recommended next skill is the one the core routing rule selects for what the packet shows.
 
 ## Packet Contents
 

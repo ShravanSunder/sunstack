@@ -55,7 +55,7 @@ Package an existing implementation plan so another agent can review or execute w
    - copy-paste prompt
    - what the next agent should inspect first
 
-   Completion: the response carries all four, and its prompt is the one in `copy-paste-prompt.md`, word for word.
+   Completion: on the write-enabled route, the response carries all four and its prompt is the one in `copy-paste-prompt.md`, word for word; under read-only authority, it carries the complete prompt inline with the source plan path, governing basis and delivery context, and says that no file was created.
 
 ## Progressive Disclosure
 
