@@ -24,7 +24,7 @@
       "name": "sunstack-dev",
       "source": "sunstack-dev",
       "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and structured TUI, rendered chat and standalone HTML presentation",
-      "version": "2.100.2"
+      "version": "2.100.3"
     },
     {
       "name": "skill-authoring",

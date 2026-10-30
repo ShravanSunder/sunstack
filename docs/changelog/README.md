@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-30 Phase skills cleanup](2026-10-30-phase-skills-cleanup.md)
 - [2026-10-28 Lightweight HTML authoring](2026-10-28-lightweight-html-authoring.md)
 
 - [2026-10-27 Domain Rust: crates set the dependency direction](2026-10-27-domain-rust-crate-dag.md)
