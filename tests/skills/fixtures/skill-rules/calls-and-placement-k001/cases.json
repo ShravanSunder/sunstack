@@ -1,0 +1,212 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 22,
+      "endLine": 29,
+      "fieldLine": 24
+    },
+    "excerpt": {
+      "path": "case-001/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "startLine": 25,
+      "endLine": 59,
+      "fieldLine": 40
+    },
+    "excerpt": {
+      "path": "case-002/SKILL.md",
+      "line": 16
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "startLine": 22,
+      "endLine": 29,
+      "fieldLine": 26
+    },
+    "excerpt": {
+      "path": "case-003/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 49,
+      "endLine": 53,
+      "fieldLine": 51
+    },
+    "excerpt": {
+      "path": "case-004/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "startLine": 36,
+      "endLine": 47,
+      "fieldLine": 43
+    },
+    "excerpt": {
+      "path": "case-005/SKILL.md",
+      "line": 8
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "held-out",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "startLine": 34,
+      "endLine": 36,
+      "fieldLine": 36
+    },
+    "excerpt": {
+      "path": "case-006/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "held-out",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "startLine": 6,
+      "endLine": 23,
+      "fieldLine": 17
+    },
+    "excerpt": {
+      "path": "case-007/SKILL.md",
+      "line": 12
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "held-out",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "startLine": 52,
+      "endLine": 56,
+      "fieldLine": 54
+    },
+    "excerpt": {
+      "path": "case-008/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "held-out",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+      "startLine": 33,
+      "endLine": 37,
+      "fieldLine": 37
+    },
+    "excerpt": {
+      "path": "case-009/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "held-out",
+    "evidence": {
+      "kind": "load",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+      "startLine": 123,
+      "endLine": 125,
+      "fieldLine": 125
+    },
+    "excerpt": {
+      "path": "case-010/SKILL.md",
+      "line": 3
+    }
+  }
+]
