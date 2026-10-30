@@ -81,7 +81,7 @@ The evidence project is ported from the confirmed experiment the engine's fixtur
 - `load` and `branch` pick from references as well as SKILL.md.
 - `load.step` and `branch.step` come from a contextual step rule that also matches numbered steps in references; the `step` kind itself stays SKILL.md-only. The fixture's step rule is limited to SKILL.md, and the engine only indexes the rules that apply to a file, so reusing it would leave every reference piece's `step` empty.
 
-Each repair is proved by exact spans, not by counts: a multi-paragraph and a nested list item each give one `sentence` piece with the item's span, and a numbered step in a reference file that holds a load and a branch gives both pieces that step as their `step`.
+Each repair is proved by exact spans, not by counts: a multi-paragraph and a nested list item each give one `sentence` piece with the item's span, and a numbered step in a reference file that holds a load and a branch gives both pieces that step's heading as their `step`.
 
 ## Where the files go
 
