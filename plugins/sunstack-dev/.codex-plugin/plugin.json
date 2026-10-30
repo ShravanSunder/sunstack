@@ -1,6 +1,6 @@
 {
   "name": "sunstack-dev",
-  "version": "2.100.4",
+  "version": "2.101.2",
   "description": "Shravan's development workflow plugin with long-horizon delivery routing, bounded design orchestration, canonical planning, implementation and independent review, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI, rendered chat and standalone HTML).",
   "author": {
     "name": "Shravan Sunder"
@@ -82,7 +82,10 @@
     "longDescription": "Use Shravan Dev Workflow to route a long-horizon delivery goal through proven phase gates, run one bounded design cycle, translate reviewed design into one canonical ready plan with delivery intent, execute it without a generic post-plan approval gate, independently review implementation and proof, and finish PR readiness without merging. The plugin also gathers source-grounded evidence, packages handoffs, investigates bugs, routes operations work, maintains docs, and structures presentation-surface-matched explanations (TUI, rendered chat and standalone HTML).",
     "developerName": "Shravan Sunder",
     "category": "Developer Tools",
-    "capabilities": ["Interactive", "Read"],
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
     "defaultPrompt": [
       "Prepare a plan handoff.",
       "Prepare an implementation handoff.",

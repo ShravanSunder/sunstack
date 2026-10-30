@@ -16,7 +16,7 @@ Keep prose, headings and short callouts at Reading width, and give a table, diag
 
 ## Disclosure or tabs
 
-Use a disclosure for depth under the current point that most readers skip. Its summary names what is inside, including any failure cases. Use tabs for peer views of one thing when the reader picks one, such as current and proposed, or the sequence view and the state view. Good: "Retry and cancellation (3 failure cases)" as a disclosure. Bad: tabs named "Details", "More" and "Other".
+Use a disclosure for depth under the current point that most readers skip. Its summary names what is inside. Failure cases and their thresholds stay in view; a disclosure holds only the rationale or evidence about them, and its summary names the cases it explains. Use tabs for peer views of one thing when the reader picks one, such as current and proposed, or the sequence view and the state view. Good: "Evidence for the retry and cancellation limits (3 failure cases)" as a disclosure. Bad: tabs named "Details", "More" and "Other".
 
 Use layers when several optional views may be visible together, such as independently showing proposed ownership and failure paths on the same map. Tabs choose one peer view; a local disclosure opens detail under one point. Keep those reader choices distinct and retrieve their actual controls from the matching guide.
 

@@ -39,7 +39,8 @@ describe("goal delivery intent hard cutover", () => {
     expect(planner).toContain("Establish `requested terminal: plan-only | pr-ready-unmerged`");
     expect(planner).toContain("If a direct request is ambiguous, ask once at entry");
     expect(planner).toContain("Choose the smallest coherent vertical grouping");
-    expect(planner).toContain("materially different groupings or PR topologies");
+    expect(planner).toContain("materially different groupings exist inside one PR shape");
+    expect(planner).toContain("a split is the owner's decision, for every kind of work");
     expect(planner).toContain(
       "pick one and record the choice, the alternatives, and the reason in the plan",
     );
@@ -50,10 +51,12 @@ describe("goal delivery intent hard cutover", () => {
       "picks one, records the choice, the alternatives, and the reason in the plan, and returns `ready`",
     );
     expect(planner).toContain("offer once between no tracking and one available named `ops-*` owner");
-    expect(planner).toContain("first resolve the project root");
-    expect(planner).toContain(
-      "write exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan",
+    expect(contract).toContain("first resolves the project root");
+    expect(contract).toContain(
+      "writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan",
     );
+    expect(planner).toContain("the canonical reference's Plan Home names");
+    expect(planner).not.toContain("plan-workflows");
     expect(planner).toContain("invokes `implement-plan` without another generic approval question");
   });
 
@@ -193,6 +196,8 @@ describe("goal delivery intent hard cutover", () => {
     for (const otherSkill of [
       "skill-orchestrator/SKILL.md",
       "skill-creation/SKILL.md",
+      "skill-design/SKILL.md",
+      "domain-skill-crafting/SKILL.md",
       "skill-audit/SKILL.md",
     ]) {
       expect(readSkillAuthoringFile(otherSkill)).not.toContain(convergenceRuleOpening);
@@ -200,14 +205,14 @@ describe("goal delivery intent hard cutover", () => {
   });
 
   test("uses distinct durable, project-temporary, and OS-temporary artifact homes", () => {
-    const planner = readPluginFile("skills/plan-implementation/SKILL.md");
+    const planContract = readPluginFile("shared-references/canonical-implementation-plan.md");
     const designOrchestrator = readPluginFile("skills/orchestrator-design/SKILL.md");
     const goalOrchestrator = readPluginFile("skills/orchestrator-implementation-goal/SKILL.md");
     const specDesign = readPluginFile("skills/spec-design/SKILL.md");
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
 
-    expect(planner).toContain("project-root `.gitignore`");
-    expect(planner).toContain(
+    expect(planContract).toContain("project-root `.gitignore`");
+    expect(planContract).toContain(
       "`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`",
     );
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");

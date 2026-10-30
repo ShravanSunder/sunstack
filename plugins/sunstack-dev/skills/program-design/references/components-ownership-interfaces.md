@@ -8,7 +8,7 @@ Return in workflow order: first the entity binding table, its code shapes, the f
 
 ## Entity Binding
 
-An entity the Specification defined has to live somewhere before components can be composed around it. For each `E`, binding gives three separate answers: which component is responsible for its truth and invariants (semantic owner), which package or module its code lives in (home), and which module declares its shape (schema/type home). It adds whether the entity is `persisted | derived | cached` and what shape it has at every boundary it crosses.
+An entity the Specification defined has to live somewhere before components can be composed around it. For each `E`, binding gives three separate answers: which component is responsible for its truth and invariants (semantic owner), which package or module its code lives in (home), and which module declares its shape (schema/type home). It adds whether the entity is `persisted | derived | cached`, what shape it has at every boundary it crosses, and, for a persisted home, the storage engine or driver and the migration tool that keep it, each marked `existing | new`.
 
 Semantic owner, home, and schema/type home are different altitudes. The owner is a component; the home is where that code lives; the schema/type home is the single module every consumer imports the shape from. Two components in one package is normal. One entity with two schema copies is a defect.
 
@@ -27,7 +27,8 @@ Record each rule or pattern with its source. When nothing is written and the tou
 - the Specification's entity table: every `E`, its identity rule, relationships, invariants, and states; the binding never redefines any of them;
 - existing types and schemas for the same nouns in the current system, and the import paths consumers already use;
 - package boundaries and import rules (workspace layout, package exports, lint boundaries, dependency direction);
-- every place an entity crosses a process, service, storage, or queue boundary.
+- every place an entity crosses a process, service, storage, or queue boundary;
+- the storage engines, drivers and migration tools the repository already uses for persisted data, and where, such as Drizzle on better-sqlite3 in an existing service.
 
 ### Bind against existing code
 
@@ -35,6 +36,8 @@ Record each rule or pattern with its source. When nothing is written and the tou
 - An identity or cardinality mismatch with existing code, such as a key that omits the account the Specification's identity rule includes, is a structural choice. Name the options and their cost. Return `decision-needed` when resolving it exceeds the confirmed goal boundary.
 - Only a noun the Specification never defined, or a meaning that conflicts with it, returns `specification-gap`.
 - A design-only concept (a wait handle, an idempotency key, a cache entry) names the `E` or `R` it serves. A concept that serves none is deleted.
+- A persisted home reuses the engine, driver and migration tool the repository already uses for the same kind of data, marked `existing`. A `new` one, or a second tool for a job the repository already does one way, is material scope: return `decision-needed` so the owner chooses it on the design page before planning.
+- When an entity's home must work on more than one runtime, such as Cloudflare and Node, bind it to one storage boundary: its interface, and its schema in the repository's existing schema tool. Each runtime injects its own driver at startup, and core code never picks an engine. The row names that boundary and each runtime's driver, each `existing | new`. Choosing that boundary is the owner's decision on the design page, even when every driver already exists: return `decision-needed` unless the design reuses unchanged a boundary the owner already settled. Engines chosen separately per host, with no shared boundary, are a design gap to close before the design is ready.
 
 ### Filled template
 
@@ -48,10 +51,10 @@ flowchart LR
   E2 -.->|schema home| BC["packages/billing-contracts/src/contracts.ts<br/>InvoiceEvent (modified)"]
 ```
 
-| E | Semantic owner | Package or module home | Schema/type home | Shape at each boundary | Disposition | Convention |
-| --- | --- | --- | --- | --- | --- | --- |
-| E1 Customer | `CustomerDirectory` | `packages/accounts` (existing; code name `AccountHolder`) | `packages/accounts/src/contracts.ts` (existing) | `customerId: string` on every billing event (existing) | persisted | Zod owns the type (root `AGENTS.md`) |
-| E2 Invoice | `InvoiceLedger` | `packages/billing` (modified) | `packages/billing-contracts/src/contracts.ts` (modified) | `InvoiceEvent`, billing to notifications, below (new variants) | persisted | Zod discriminated union with `z.infer` (root `AGENTS.md`) |
+| E | Semantic owner | Package or module home | Schema/type home | Shape at each boundary | Disposition | Storage engine or driver; migration tool | Convention |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| E1 Customer | `CustomerDirectory` | `packages/accounts` (existing; code name `AccountHolder`) | `packages/accounts/src/contracts.ts` (existing) | `customerId: string` on every billing event (existing) | persisted | Postgres through `pg` (existing); Drizzle migrations (existing) | Zod owns the type (root `AGENTS.md`) |
+| E2 Invoice | `InvoiceLedger` | `packages/billing` (modified) | `packages/billing-contracts/src/contracts.ts` (modified) | `InvoiceEvent`, billing to notifications, below (new variants) | persisted | Postgres through `pg` (existing); Drizzle migrations (existing) | Zod discriminated union with `z.infer` (root `AGENTS.md`) |
 
 ```ts
 export const invoiceEventSchema = z.discriminatedUnion("name", [
@@ -87,11 +90,11 @@ billing/invoice.settled    discriminant: name
 schema home: packages/billing-contracts (new variant)
 ```
 
-Good: one schema home imported by every consumer; the owner named as a component and the home named separately; each boundary crossing showing its discriminant and nullable fields; an existing contract reused under its code name and marked `existing`; an open string the conventions forbid recorded with its closed replacement or a `gap: <why>`.
+Good: one schema home imported by every consumer; the owner named as a component and the home named separately; a persisted home on the engine and migration tool the repository already uses, marked `existing`; each boundary crossing showing its discriminant and nullable fields; an existing contract reused under its code name and marked `existing`; an open string the conventions forbid recorded with its closed replacement or a `gap: <why>`.
 
-Bad: two copies of a payload schema in two packages; a package named as the semantic owner; a boundary shape described as "the event payload"; bullets where the table belongs; an entity redefined here with a different identity rule; a `new` contract where an `existing` one already carries the same facts; schema homes or payload fields deferred to planning.
+Bad: two copies of a payload schema in two packages; a package named as the semantic owner; a boundary shape described as "the event payload"; bullets where the table belongs; an entity redefined here with a different identity rule; a `new` contract where an `existing` one already carries the same facts; schema homes or payload fields deferred to planning; `node:sqlite` picked for a store the repository keeps with Drizzle elsewhere; a Cloudflare engine and a Node engine chosen separately for one entity.
 
-Stop when every `E` has a row with every cell filled or marked `gap: <why>`, every boundary crossing has a shape in the found convention or a field list with nullability and discriminant, and every design-only concept names the `E` or `R` it serves.
+Stop when every `E` has a row with every cell filled or marked `gap: <why>`, every persisted row names its engine or driver and migration tool, every boundary crossing has a shape in the found convention or a field list with nullability and discriminant, and every design-only concept names the `E` or `R` it serves.
 
 ## Integrated Overview
 

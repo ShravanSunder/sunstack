@@ -1,6 +1,6 @@
 # 2026-10-30 Practice skills cleanup
 
-`sunstack-dev` 2.100.2 → 2.100.4 (2.100.3 is the phase skills cleanup, a separate PR).
+`sunstack-dev` 2.101.0 → 2.101.2 (2.101.1 is the phase skills cleanup, a separate PR).
 
 - Nine practice skills checked against the creation-skill rules and fixed where a standard was really broken: `practices-cleanup`, `practices-collaboration`, `practices-how`, `practices-manage-agents`, `practices-preflight`, `practices-research`, `practices-retrospective`, `practices-show-me-your-work`, `practices-why`. Each skill's purpose, calls, returns and route tokens are unchanged.
 - All nine descriptions now fit the owner's limits (212–223 characters, from 243–434; five were over 300). Each keeps its loading moments and its `Not for` boundary; `practices-collaboration` and `practices-show-me-your-work` now open with `Use when`. Example phrases and the role list were cut before any moment; `practices-retrospective` drops the qualifier "blameless" and the synonym "look back".

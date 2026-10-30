@@ -1,0 +1,4 @@
+{
+  "case-001": { "outcome": "pass", "line": null, "source": "sol-settled" },
+  "case-003": { "outcome": "finding", "line": 3, "source": "owner" }
+}

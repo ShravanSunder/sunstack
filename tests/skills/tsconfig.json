@@ -18,6 +18,7 @@
     }
   },
   "include": [
+    "scripts/**/*.ts",
     "lib/**/*.ts",
     "evals/**/*.ts",
     "fixtures/**/cases.ts",

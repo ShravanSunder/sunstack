@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rules in use · draft 3</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-presentation id="read-rules-in-use" title="Read draft 3" description="The need, the obligations, the skill changes, and the proof.">
+  <ex-step to="requirements--rules-in-use-requirements" icon="book-open">Requirements: why draft 1 changed, the owner's need, and the evidence.</ex-step>
+  <ex-step to="specification--rules-in-use-specification" icon="path">Specification: what must hold, including failures and incomplete results.</ex-step>
+  <ex-step to="skill-design--rules-in-use-skill-design" icon="gear">Skill design: the engine it runs on, twelve decision models, seven descriptions and the runs.</ex-step>
+  <ex-step to="skill-verification--rules-in-use-skill-verification" icon="test-tube">Skill verification: checks that reject wrong builds, and the remaining proof limits.</ex-step>
+</ex-presentation>
+<ex-document id="content">
+<h1>Rules in use · draft 3</h1>
+<h2 id="what-changed">What changed in draft 3 and why?</h2>
+<p>Jev, the model that judges skill standards, runs by default. Each of the twelve checked standards is a decision model over one kind of evidence that ast-grep picks from a skill: a description, a step, a load, a branch, a sentence or a reference section. A gate decides whether the piece is one the standard covers; the verdict judges it; an uncertain piece goes back to the agent running the check. <a href="#requirements--rules-in-use-requirements">Read the need and its evidence in Requirements.</a></p>
+<p>Draft 3 runs on the engine change the owner confirmed on 29 October and that was then built: <code>sunstack lint --config</code>, one config instead of three RuleSets, and rule tests as labelled real cases in <code>tests/skills</code>. <a href="#skill-design--the-shape">See the shape</a> and <a href="#skill-design--runs">the runs and their status</a>.</p>
+<p>All seven skill descriptions are rewritten at 165 to 182 characters, keeping their triggering purpose. The standards root stays hidden from implicit invocation. <a href="#skill-design--trigger-and-invocation">Read the exact descriptions and their trials.</a></p>
+<p>The four parts below are the design's source of truth. Skill verification says how each obligation is shown; the run results live with the change's proof, not on this page.</p>
+<p>A walkthrough is a guided path through those same parts. Press <kbd>W</kbd> to start it, or select a part.</p>
+<ex-tabs label="Four design parts" data-width="reading">
+  <section label="Requirements" icon="book-open">
+    <ex-markdown id="requirements" label="Requirements" src="requirements.md"></ex-markdown>
+  </section>
+  <section label="Specification" icon="file">
+    <ex-markdown id="specification" label="Specification" src="specification.md"></ex-markdown>
+  </section>
+  <section label="Skill design" icon="gear">
+    <ex-markdown id="skill-design" label="Skill design" src="skill-design.md"></ex-markdown>
+  </section>
+  <section label="Skill verification" icon="test-tube">
+    <ex-markdown id="skill-verification" label="Skill verification" src="skill-verification.md"></ex-markdown>
+  </section>
+</ex-tabs>
+</ex-document>
+</body>
+</html>

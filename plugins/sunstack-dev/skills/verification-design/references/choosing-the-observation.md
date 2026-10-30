@@ -43,6 +43,12 @@ Bad choices:
 - a success status or a row count for a durability claim;
 - a new test file or command prescribed in the row, when the plan chooses those and a row names only an existing test it reuses.
 
+## The ordinary entry
+
+A row that proves an end-to-end behavior names the ordinary entry: the process started the way a user or the release starts it, from its real producer's output, such as the enrollment a real install writes. A composition that a fixture or test helper builds counts only for the component it isolates.
+
+In one router project, a debug loader composed the board session, and every observation through that loader passed. The ordinary startup passed no board session at all. Only a journey that started the process from a real install's enrollment could have failed for that wrong build.
+
 ## Journey: existing, needed or none
 
 - **Existing:** a `verify-<app>` journey whose source drives this entry and reads this outcome on the planned target. When it observes the outcome but misses a case the obligation covers, such as the failure path or the denied actor, the row names the case to add.
@@ -131,4 +137,4 @@ U3 "search finds my file" (R8 pressing Enter submits once; R9 results come from 
 - **No reference to judge against.** R21 says search "feels fast", with no threshold or workload, so no passing condition can fail a slow build. Record a `specification-gap` for the missing threshold and workload.
 - **A harness that can't reach the boundary.** When the existing journey can't restart the app, "survives a restart" doesn't become "save returns 201". Keep the obligation, and write the journey as `needed:`.
 
-Complete when every obligation has a class whose observation sits where its wrong behavior is real, a target, and an existing, needed or no journey, with a lifetime for each journey; every pure rule and structural claim has proportional proof; and every row that can't be written carries its gap.
+Complete when every obligation has a class whose observation sits where its wrong behavior is real, a target, and an existing, needed or no journey, with a lifetime for each journey; every end-to-end row names its ordinary entry; every pure rule and structural claim has proportional proof; and every row that can't be written carries its gap.

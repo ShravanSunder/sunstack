@@ -18,11 +18,22 @@ Answer each question from the code and docs. Ask your caller only for what the r
 
 When the unmodified checkout won't build or start, report the exact failure as a gap and stop drafting the steps that depend on it, because a recipe drafted on a broken checkout teaches the next agent wrong steps.
 
+## Choose the harness language and its owner
+
+The harness uses the repository's own language and existing harness first, and a project rule wins over both, such as the Router repository's "TS, Rust, or ask". For example:
+
+- a Rust-only repository gets a Rust harness; proposing TypeScript there adds a runtime;
+- a Rust repository with an established TypeScript harness can use either language, inside that harness;
+- a Python repository with an established Python harness gets Python.
+
+Adding a new runtime, even TypeScript, or growing the harness from an extension into its own subsystem, is a design tradeoff: return it to the Lead with its toolchain and upkeep cost, and the Lead brings it to the owner. A harness built from several pieces has one integrating owner, and its composed route is rehearsed on the real target before anyone depends on it. Show each new journey or test file on the CI path that runs it, because adding a file doesn't add it to an explicit module list.
+
 ## What the skill must teach
 
 Ground each part in what the interview found, with no placeholder left. The layout reference decides where each part lives.
 
 - Launch. The exact command that brings the app up for a verification run, the signal that it is ready to use, and teardown. A log line, a health response carrying the expected build, or a prompt can be that signal. A port that answers isn't one. A short-lived CLI or TUI has no long-running server, so build the binary or install dependencies once, then run each drive in a separate isolated session.
+- Setup. Every setup step a stand-in supplied that the real target won't, such as seeds, migrations or credentials, listed in the recipe; that list is the stand-in's stated limit. Show readiness from an empty data directory. A missing precondition stays a failed run, and the case keeps its full strength.
 - Health check. A single read-only check that decides whether this instance is fit to drive: the process is running, the build is the expected one, this run owns the port, and auth is valid. The agent runs it before the first drive and again whenever something looks wrong.
 - Drive. The route with real selectors and commands from this repository. Favor a stable handle, such as an accessible name, a data attribute, a prompt string or a route path, over tab order and screen coordinates.
 - Evidence. What to keep and where it goes. Drive the path a real user takes, since internal setters and test-only endpoints prove nothing about it. Keep the action and the state it produced along with the final screen. Check side effects, such as files written, rows inserted and messages sent, beside what is visible. Mock an external system only where a boundary in production already isolates it. A test mode or dry run can still make network calls or open a browser, so when the safe path relies on one, observe which effects it skips (files, network, git refs) before trusting its name.
@@ -49,4 +60,4 @@ Adequate draft: the launch command is the workspace's `verify-ledger` task, read
 
 ## When to stop
 
-The draft is ready for step 4 when every part above rests on a source you opened or a command you ran, each journey names its adopted source, the representative journey is chosen, and each gap says what it blocks. Creation finishes only after step 4 runs the skill on its real target. Until then, return a draft with its gap.
+The draft is ready for step 4 when every part above rests on a source you opened or a command you ran, each journey names its adopted source, the harness language follows the repository or a project rule or went to the Lead as a tradeoff, the representative journey is chosen, and each gap says what it blocks. Creation finishes only after step 4 runs the skill on its real target. Until then, return a draft with its gap.

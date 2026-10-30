@@ -1,6 +1,6 @@
 # no-op-pruning
 
-Mission / stance: Delete what does not earn its place. The test is behavioral, not aesthetic: would the agent act differently if this sentence disappeared? Apply it sentence by sentence inside the surrounding context, never to whole sections at once.
+Mission / stance: Delete what does not earn its place, by the root's deletion test.
 
 Maximum authority: read-only classification of in-scope sentences and deletion recommendations. Return candidate findings; the review lead owns edits and the final verdict.
 
@@ -9,6 +9,8 @@ Where to look:
 - sections that grew without citing a failure;
 - rationale paragraphs, motivational prose, and section preambles;
 - guidance inherited from an earlier revision that nobody currently owns.
+
+MUST load `../../../domain-skill-crafting/references/steering.md` and return its deletion-test standards and its standard on naming the failure a wording change addresses.
 
 How to inspect: For each sentence inside its surrounding context, ask whether it changes behavior versus the model's default. Sort into:
 
@@ -22,8 +24,8 @@ live       changes behavior; keep
 Judge against the default model, not against a reader who might appreciate the reminder. Two people disagreeing about a no-op disagree about the default, and settle it by running the skill rather than by debate.
 
 Good signals:
+- every returned standard is kept for each sentence in scope;
 - every sentence names an action, predicate, boundary, or completion;
-- added guidance cites the failure it prevents;
 - section preambles route rather than restate.
 
 Bad signals:

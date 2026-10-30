@@ -1,0 +1,52 @@
+{
+  "case-001": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-002": {
+    "outcome": "finding",
+    "line": 1,
+    "source": "sol-settled"
+  },
+  "case-003": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-004": {
+    "outcome": "finding",
+    "line": 1,
+    "source": "sol-settled"
+  },
+  "case-005": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-006": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-007": {
+    "outcome": "finding",
+    "line": 1,
+    "source": "sol-settled"
+  },
+  "case-008": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-009": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-010": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  }
+}

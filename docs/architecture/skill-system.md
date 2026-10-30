@@ -21,7 +21,7 @@ The `sunstack-dev` layers separate decisions that change for different reasons. 
 | `domain-*` | Subject-specific knowledge a caller loads | TypeScript, Python and Rust standards |
 | `principle-*` | One engineering judgment applied at a concrete decision | One owner per truth; verify before accepting |
 
-The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. Neither index replaces reading the selected skill.
+The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. The [phase composition map](../../plugins/sunstack-dev/docs/phase-composition.md), generated from the skill files and drawn on [its page](../../plugins/sunstack-dev/docs/phase-composition.html), shows what each orchestrator and phase loads, cites and returns. None of them replaces reading the selected skill.
 
 An orchestrator calls phases. A phase may use other skills at its own layer and methods below it, but does not call an orchestrator to decide its own continuation. Practices and tool manuals do not route upward into phases or roles. They return the supported result or a gap. A [phase return token](../../plugins/sunstack-dev/shared-references/phase-return-tokens.md) carries the gap and its evidence to the caller, which selects its owner within the existing task. A token never grants new scope.
 
@@ -31,14 +31,14 @@ Principles are the bottom layer. They are hidden from model invocation, teach on
 
 ### A skill's four surfaces
 
-The [skill-creation model](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#great-skill-frame) separates:
+The [skill-crafting model](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md#the-model) separates:
 
 1. The YAML trigger: when the skill should load and where adjacent skills take over.
 2. The `SKILL.md` main path: the mental model, decisions, required actions and finish conditions.
 3. `references/`: detail reached by an explicit call. A branch is conditional; an always-required module can still have its own maintenance boundary.
 4. Proof: evidence that the other surfaces change the behavior they promise.
 
-`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-creation's call grammar](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#call-grammar).
+`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-crafting's calls and placement topic](../../plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md#call-forms).
 
 ## Roles and execution forms
 
@@ -81,7 +81,7 @@ The [rendering reference](../../plugins/sunstack-dev/shared-references/diagram-r
 
 ## From design to delivery
 
-Design-only work ends at its reviewed design or exact gap. Planning does not begin simply because a preceding phase finished. When delivery is authorized, [plan-implementation](../../plugins/sunstack-dev/skills/plan-implementation/SKILL.md) creates the canonical proof-bearing plan from a current admitted design basis, and [implement-plan](../../plugins/sunstack-dev/skills/implement-plan/SKILL.md) executes that plan's slices. The implementation orchestrator owns continuation within the requested delivery boundary.
+Design-only work ends at its reviewed design or exact gap. A first design cycle ends with the first plan: [plan-implementation](../../plugins/sunstack-dev/skills/plan-implementation/SKILL.md) creates the canonical proof-bearing plan from the reviewed design, and the owner reviews it beside the design. A goal that starts without a design-cycle plan loads `plan-implementation` itself. During delivery, [plan-update](../../plugins/sunstack-dev/skills/plan-update/SKILL.md) writes a superseding plan whenever a ready plan's meaning changes, and [implement-plan](../../plugins/sunstack-dev/skills/implement-plan/SKILL.md) executes the current plan's slices. The implementation orchestrator owns continuation within the requested delivery boundary.
 
 The executor supplies fitting change proof. The Lead assesses the diff and evidence before [independent implementation review](../../plugins/sunstack-dev/skills/implementation-review/SKILL.md). Corrections return to their cause's owner. [PR wrap-up](../../plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md) handles publication, checks, comments, mergeability and the authorized terminal. Source review, tests, real-system observation, installed delivery, PR readiness and merge are separate claims.
 
@@ -91,15 +91,15 @@ The executor supplies fitting change proof. The Lead assesses the diff and evide
 
 The [skill-authoring plugin](../../plugins/skill-authoring/README.md) is a separate package, designed to work beside other workflows without importing their practices. This repository's operating instructions supply its trace, Git and delivery conventions.
 
-For a broad portfolio question, `skill-audit` examines current instructions, real usage evidence and selected upstream sources, then classifies update, create, merge or skip. Each recommendation identifies the fix owner: teaching, a code check, or the tool. A single skill's design and writing belongs to `skill-creation`; independent judgment belongs to `skill-review`. `skill-orchestrator` carries one admitted change through spec, implementation, proof, assessment, review and the scoped release. `skill-rules` handles the subset of standards that should become executable checks.
+For a broad portfolio question, `skill-audit` examines current instructions, real usage evidence and selected upstream sources. It sends each flagged skill's existing files to `skill-review`'s implementation stage and uses its verdict and accepted findings to decide update, create, merge or skip. Each recommendation identifies the fix owner: teaching, a code check, or the tool. `skill-design` designs one skill change and writes its design set; `skill-creation` writes the skill's files from its accepted design, or makes a mechanical edit. Independent judgment belongs to `skill-review`. `skill-orchestrator` carries one admitted change through design, writing, proof, assessment, review and the scoped release. `skill-rules` handles the subset of standards that should become executable checks.
 
-The [proof-and-claims reference](../../plugins/skill-authoring/skills/skill-creation/references/proof-and-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
+The [proof-claims reference](../../plugins/skill-authoring/skills/domain-skill-crafting/references/proof-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
 
 ### Follow one concrete change
 
-Suppose a named skill's trigger sends a requirements interview to implementation. The first check is the current description, its neighboring triggers and an actual recorded task. That distinguishes a wording defect from a client that never offered the intended skill. The Lead uses `skill-creation` to state the intended routing and proof before editing; a domain standard applies only if the change also touches that subject. A principle such as read-ground-truth-first informs that investigation at its citing decision, while `practices-research` supplies the source-gathering method. These are different responsibilities within the same work.
+Suppose a named skill's trigger sends a requirements interview to implementation. The first check is the current description, its neighboring triggers and an actual recorded task. That distinguishes a wording defect from a client that never offered the intended skill. The Lead uses `skill-design` to state the intended routing and proof in the design set before editing; a domain standard applies only if the change also touches that subject. A principle such as read-ground-truth-first informs that investigation at its citing decision, while `practices-research` supplies the source-gathering method. These are different responsibilities within the same work.
 
-After spec review, the executor changes the owned trigger and any affected metadata/reference. Proof observes an eligible fresh task against the intended and neighboring routes, rather than checking only that YAML parses. The Lead assesses it, independent skill review judges the change, and the authorized release updates the owning plugin's version and changelog. If the source is already correct and the installed copy is stale, repair delivery at that boundary instead of rewriting the teaching. This example follows the existing authoring workflow; it adds no new approval or test requirement.
+After design review accepts the set, the executor uses `skill-creation` to change the owned trigger and any affected metadata/reference inside that boundary. Proof observes an eligible fresh task against the intended and neighboring routes, rather than checking only that YAML parses. The Lead assesses it, independent skill review judges the change, and the authorized release updates the owning plugin's version and changelog. If the source is already correct and the installed copy is stale, repair delivery at that boundary instead of rewriting the teaching. This example follows the existing authoring workflow; it adds no new approval or test requirement.
 
 ## Source and artifact homes
 
@@ -109,7 +109,7 @@ After spec review, the executor changes the owned trigger and any affected metad
 | Runtime procedure with real shared consumers | Owning plugin's `shared-references/` |
 | Maintainer explanation of this repository | `docs/architecture/` |
 | Plugin-local maintainer index | Owning plugin's `docs/` and README |
-| Current skill-change spec | `docs/wip/skills-authoring/<date-name>/` |
+| Current skill-change design set | `docs/wip/skills-authoring/<date-name>/` |
 | Curated failure, investigation, lesson, authoring evidence or portfolio backlog | The configured private memory-log repository's `skills/` lanes |
 | Conversations and conversational handoffs | The configured private session-log repository's project lanes |
 | Raw build output, caches and disposable working material | Task-scoped system temporary storage |

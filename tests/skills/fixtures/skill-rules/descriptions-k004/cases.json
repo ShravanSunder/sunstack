@@ -1,0 +1,246 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-001/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/mitsuhiko/agent-stuff",
+      "revision": "13bc8f87970bec8830aab0f1c0487d35aa7c0917",
+      "path": "skills/github/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-002/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-003/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-004/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+      "startLine": 1,
+      "endLine": 5
+    },
+    "excerpt": {
+      "path": "case-005/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-006/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/steipete/agent-scripts",
+      "revision": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+      "path": "skills/create-cli/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-007/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-008/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/spec-design/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-009/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-010/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/steipete/agent-scripts",
+      "revision": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+      "path": "skills/remote-mac/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/steipete/agent-scripts",
+      "revision": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+      "path": "skills/openai-image-gen/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-012/SKILL.md",
+      "line": 3
+    }
+  }
+]
