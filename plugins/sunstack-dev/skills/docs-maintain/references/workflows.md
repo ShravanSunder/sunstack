@@ -12,6 +12,8 @@ Use when no doc exists for a durable concept.
 
 Good: a runbook that states the current command, what it checks and where its output goes, with one pointer to it from `AGENTS.md`. Bad: a doc that narrates how the feature was built, or restates a fact another doc already owns.
 
+Done when the new doc's facts each trace to the code, config or decision they came from, and any pointer to it exists only where a reader needs it.
+
 ## Update
 
 Use when docs exist but are stale or incomplete.
@@ -23,6 +25,8 @@ Use when docs exist but are stale or incomplete.
 5. Remove duplicated text if one source should link to another.
 
 Good: the one stale step in a runbook replaced after checking it against the current config, and the rest left as it was. Bad: the whole doc rewritten in a new voice, so nobody can see what was actually stale.
+
+Done when each section you changed was stale against a source you checked, and every unchanged section still matches its source.
 
 ## Cleanup
 
@@ -36,6 +40,8 @@ Use when old specs/plans/docs create confusion.
 
 Good: an old spec marked superseded with a link to what replaced it, after its one still-useful decision moved into the architecture doc. Bad: a folder of old plans deleted because they looked old, losing a decision nothing else records.
 
+Done when each candidate has its class and its proposed action, the decisions worth keeping are moved before anything is removed, and each unknown doc is reported with the evidence it lacks.
+
 ## Discrepancy
 
 Use when code, docs, README, AGENTS, tickets, or plans disagree.
@@ -48,6 +54,8 @@ Use when code, docs, README, AGENTS, tickets, or plans disagree.
 
 Good: "The README documents a flag the code removed; the code drives, so the README changes." Bad: both sources edited toward a guess, or code changed to match a stale doc.
 
+Done when the driving source is named with its evidence and the other source now agrees with it, or the unclear driver went to the user as a brief.
+
 ## Plans And Specs
 
 Use when maintaining `docs/plans`, `docs/specs`, or `docs/superpowers/*`.
@@ -59,6 +67,8 @@ Use when maintaining `docs/plans`, `docs/specs`, or `docs/superpowers/*`.
 5. Update indexes and links so only current artifacts are presented as current.
 
 Good: a plan read end to end, marked superseded, and moved off the index's current list with a link to its successor. Bad: an index that still lists a plan as current because only its title was read.
+
+Done when each artifact read has its status, and the indexes present as current only the artifacts marked current.
 
 ## Agent Instructions
 

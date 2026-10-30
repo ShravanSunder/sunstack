@@ -70,7 +70,7 @@ docs request
    - reconcile discrepancies
    - add changelog/runbook references
 
-   Completion: each doc in scope has its class, and each class names the docs it covers.
+   Completion: each doc the inventory put in scope has its class, with what in that doc selects it (missing, stale, superseded or contradicted), and each class names the docs it covers.
 
 4. Verify source-of-truth:
    - code/config/test reality
@@ -94,7 +94,7 @@ docs request
    - no duplicated long detail in `AGENTS.md` and README
    - no unrelated docs churn
 
-   Completion: each check above was run on the changed docs, and each reports what it found, or that it found nothing.
+   Completion: each check above names what it opened or compared on the changed docs (the links followed, the claims set against their sources, the pages set against their Markdown) and what it found, or that it found nothing.
 
 ## Progressive Disclosure
 
