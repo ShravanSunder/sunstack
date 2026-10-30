@@ -71,7 +71,7 @@ IF shipping, load `../domain-skill-crafting/references/platform.md` and return t
 
 MUST load `../domain-skill-crafting/references/security.md` and return its public-safety standard applied to what ships, meaning the changed files, the changelog entry and the report lines: each home-cache path or local cache identifier they hold, or none.
 
-Completion: the run status is `shipped` only once the change is released or merged as the user scoped.
+Completion: each validator the step names reported its result, or the reason it doesn't fit; the version moves and the changelog entry are in the diff; a scoped refresh is reported on its own line; the public-safety check returned each cache path or identifier it found, or none; and the run status is `shipped` only once the change is released or merged as the user scoped.
 
 ## Run Summary
 
