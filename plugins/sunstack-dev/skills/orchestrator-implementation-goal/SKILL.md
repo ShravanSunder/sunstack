@@ -1,6 +1,6 @@
 ---
 name: orchestrator-implementation-goal
-description: "Use when starting, resuming, auditing, or completing an implementation delivery goal across planning, implementation, review, and PR readiness. Not for a design-only cycle or one direct phase."
+description: "Use when starting, resuming, auditing or completing an implementation delivery goal. Not for a design-only cycle or one direct phase."
 ---
 
 # Implementation Goal Orchestration
