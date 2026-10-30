@@ -1,6 +1,6 @@
 ---
 name: practices-preflight
-description: "Use when about to start an orchestration, implement a plan, or commission another agent, to check that everything the work needs to succeed is in place: inputs, access, credentials, services, tools, the agents the plan assigns, and disk. Not for checking a finished result or for choosing who takes a job."
+description: "Use when about to start an orchestration, implement a plan or commission an agent: checking inputs, access, credentials, services, tools, assigned agents and disk. Not for checking finished work or choosing who takes a job."
 ---
 
 # Practices: Preflight
@@ -41,6 +41,8 @@ A gap you know about and call "later" comes back as a block in the middle of the
    Completion: each gap is resolved, asked, or covered by a stand-in with the gates that wait on it.
 
 4. Clear your merged worktrees and make room. IF the trace names a worktree of this work whose PR GitHub shows as merged, load `practices-cleanup` with its path and PR number and return it removed or held with its reason, whatever the free disk. IF free disk is below what the work needs, load `practices-cleanup` and return the space reclaimed and what was held.
+
+   Completion: each merged worktree of this work that the trace names is removed or held with its reason; free disk covers the work's needs, or the shortfall left after cleanup is a gap in the list; when neither condition holds, nothing was loaded.
 
 ## Return
 
