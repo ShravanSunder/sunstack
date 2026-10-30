@@ -252,5 +252,71 @@
       "path": "case-012/SKILL.md",
       "line": 5
     }
+  },
+  {
+    "id": "case-013",
+    "set": "held-out",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+      "path": "skills/writing-skills/SKILL.md",
+      "startLine": 213,
+      "endLine": 259,
+      "fieldLine": 257
+    },
+    "excerpt": {
+      "path": "case-013/SKILL.md",
+      "line": 45
+    }
+  },
+  {
+    "id": "case-014",
+    "set": "held-out",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+      "path": "skills/writing-skills/SKILL.md",
+      "startLine": 213,
+      "endLine": 259,
+      "fieldLine": 258
+    },
+    "excerpt": {
+      "path": "case-014/SKILL.md",
+      "line": 46
+    }
+  },
+  {
+    "id": "case-015",
+    "set": "held-out",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "upstream",
+      "repository": "https://github.com/obra/superpowers",
+      "revision": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+      "path": "skills/writing-skills/SKILL.md",
+      "startLine": 213,
+      "endLine": 259,
+      "fieldLine": 259
+    },
+    "excerpt": {
+      "path": "case-015/SKILL.md",
+      "line": 47
+    }
   }
 ]
