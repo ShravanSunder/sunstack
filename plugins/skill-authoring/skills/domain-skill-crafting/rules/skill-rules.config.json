@@ -28,8 +28,46 @@
   "evidence": {
     "ast_grep": "evidence/sgconfig.yml",
     "kinds": {
+      "workflow_section": {
+        "rule": "workflow-candidate",
+        "max_chars": 12000,
+        "fields": {
+          "heading": {
+            "from": "first_line"
+          },
+          "body": {
+            "from": "remainder",
+            "exclude": {
+              "rule": "section-heading"
+            }
+          },
+          "outline": {
+            "from": "same_file",
+            "rule": "heading-line"
+          }
+        },
+        "select": {
+          "question": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "against": "heading",
+              "context": ["outline"],
+              "task": "Classify this section by what its OWN direct body instructs. heading is this section's first line; outline is file context only. Excluded child sections never classify the parent. A workflow advances an agent through a run or a branch recipe. Actions such as classify, admit/reject, read, load, choose, execute, check, record and return can be procedural stages; embedded requirements do not turn the procedure into a rule list. Distinguish performing checks in a procedure, whose results guide later work, from enumerating conditions or quality rules that independently must hold. A numbered or Step heading can be one execution stage when its own direct body instructs in-run action; a stage heading alone does not make a catalog of options a workflow. Decide by the direct contents and their procedural relationship, not the heading or imperative wording alone."
+            },
+            "criteria": {
+              "true": "The direct body directs actions an agent performs during a run, with an intelligible progression from earlier work or admission through later work or a returned result, including a branch-specific recipe. Admission/routing and ordered verification/checking procedures count; not every action must mutate files and branches may stop early. Alternatively, a numbered or Step heading and its direct instructions constitute one action stage of that run.",
+              "false": "The list enumerates independent rules, principles, safety/quality conditions, options, references, examples or templates, rather than a procedure that advances the run. Numbering, imperative verbs or a nearby workflow alone do not establish progression."
+            }
+          },
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "shared": ["outline"]
+        }
+      },
       "step": {
-        "rule": "step",
+        "rule": "step-candidate",
+        "within": "workflow_section",
         "fields": {
           "heading": {
             "from": "capture",
@@ -53,7 +91,40 @@
           },
           "steps": {
             "from": "same_file",
-            "rule": "step"
+            "kind": "step"
+          }
+        }
+      },
+      "skill_target": {
+        "rule": "skill",
+        "fields": {
+          "description": {
+            "from": "yaml",
+            "key": "description"
+          }
+        }
+      },
+      "skill_body": {
+        "rule": "skill-body",
+        "max_chars": 12000,
+        "fields": {
+          "body": {
+            "from": "remainder",
+            "exclude": {
+              "rule": "skill"
+            }
+          },
+          "outline": {
+            "from": "same_file",
+            "rule": "heading-line"
+          },
+          "numbered": {
+            "from": "same_file",
+            "rule": "workflow-candidate"
+          },
+          "workflows": {
+            "from": "same_file",
+            "kind": "workflow_section"
           }
         }
       },
@@ -67,11 +138,11 @@
             "from": "target",
             "regex": "`([^`]+)`",
             "resolve": "path_or_skill",
-            "as_kind": "skill"
+            "as_kind": "skill_target"
           },
           "step": {
             "from": "enclosing",
-            "rule": "context-step"
+            "kind": "step"
           }
         }
       },
@@ -83,7 +154,15 @@
           },
           "step": {
             "from": "enclosing",
-            "rule": "context-step"
+            "kind": "step"
+          }
+        }
+      },
+      "standards_section": {
+        "rule": "standards-section",
+        "fields": {
+          "heading": {
+            "from": "first_line"
           }
         }
       },

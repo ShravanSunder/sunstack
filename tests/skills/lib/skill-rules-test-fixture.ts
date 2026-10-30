@@ -35,7 +35,19 @@ const pieceSchema = z.object({
   }),
   fields: z.record(z.string(), z.unknown()),
 });
-const evidenceSchema = z.object({ pieces: z.array(pieceSchema) });
+const selectionSchema = z
+  .object({
+    kind: z.string(),
+    where: z.object({ file: z.string(), first_line: z.number() }).passthrough(),
+    outcome: z
+      .object({ kind: z.enum(["selected", "not_selected", "uncertain", "incomplete"]) })
+      .passthrough(),
+  })
+  .passthrough();
+const evidenceSchema = z.object({
+  pieces: z.array(pieceSchema),
+  selections: z.array(selectionSchema),
+});
 const configSchema = z
   .object({
     rulebook: z.array(z.unknown()),
@@ -117,24 +129,65 @@ export function createFixture(): string {
   return root;
 }
 
-export function listEvidence(root: string): z.infer<typeof evidenceSchema> {
-  const result = spawnSync(
-    enginePath,
-    [
-      "lint",
-      "--config",
-      path.join(root, kitRelative, "skill-rules.config.json"),
-      "--all",
-      "--evidence",
-    ],
-    {
-      cwd: root,
-      encoding: "utf8",
-      env: { ...process.env, OPENROUTER_API_KEY: "", SUNSTACK_CREDENTIAL_STORE: "off" },
-    },
-  );
-  expect(result.status, result.stderr || result.stdout).toBe(0);
-  return evidenceSchema.parse(JSON.parse(result.stdout));
+export interface EvidenceListing extends z.infer<typeof evidenceSchema> {
+  readonly status: number | null;
+  readonly requests: readonly unknown[];
+}
+
+/**
+ * Prints the kit's evidence for a fixture. The kit selects workflow sections through the decision
+ * model, and the engine refuses `--evidence` on a selected kind without a credential even when no
+ * file has a candidate, so every listing runs against the scripted judge. Its answers default to
+ * 0.95 (selected); name a candidate key (`c1`, `c2`, ...) to answer it otherwise.
+ */
+export async function listEvidence(
+  root: string,
+  selectionAnswers: Readonly<Record<string, number>> = {},
+  expectedStatus = 0,
+): Promise<EvidenceListing> {
+  return withJudge(selectionAnswers, async (endpoint, requests) => {
+    saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
+    const result = await spawnCollected(
+      enginePath,
+      [
+        "lint",
+        "--config",
+        path.join(root, kitRelative, "skill-rules.config.json"),
+        "--all",
+        "--evidence",
+      ],
+      {
+        cwd: root,
+        env: {
+          ...process.env,
+          OPENROUTER_API_KEY: "synthetic-evidence-test-key",
+          SUNSTACK_CREDENTIAL_STORE: "off",
+        },
+      },
+    );
+    expect(result.status, result.stderr || result.stdout).toBe(expectedStatus);
+    return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests };
+  });
+}
+
+function spawnCollected(
+  command: string,
+  argumentsList: readonly string[],
+  options: { readonly cwd: string; readonly env: NodeJS.ProcessEnv },
+): Promise<{ status: number | null; stdout: string; stderr: string }> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, argumentsList, { ...options, stdio: ["ignore", "pipe", "pipe"] });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.setEncoding("utf8").on("data", (chunk: string) => {
+      stdout += chunk;
+    });
+    child.stderr.setEncoding("utf8").on("data", (chunk: string) => {
+      stderr += chunk;
+    });
+    child.once("error", reject);
+    child.once("close", (status) => resolve({ status, stdout, stderr }));
+  });
 }
 
 export function cleanupFixtureRoots(): void {
@@ -230,6 +283,28 @@ export function runRunner(
   });
 }
 
+/**
+ * Runs the runner against the scripted judge with a synthetic key. The kit selects workflow
+ * sections through the decision model, so the engine needs a credential for every run, even one
+ * whose rules are all mechanical and whose files hold no candidate; such a run still sends nothing.
+ */
+export async function runRunnerJudged(
+  root: string,
+  argumentsList: readonly string[] = [],
+  answers: Readonly<Record<string, number>> = {},
+  choices: Readonly<Record<string, string>> = {},
+): Promise<RunnerResult & { readonly requests: readonly unknown[] }> {
+  return withJudge(
+    answers,
+    async (endpoint, requests) => {
+      saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
+      const result = await runRunner(root, argumentsList, "synthetic-runner-test-key");
+      return { ...result, requests };
+    },
+    choices,
+  );
+}
+
 export const askStep = {
   ask: "verdict",
   yes_at_or_above: 0.8,
@@ -250,9 +325,14 @@ export const askingRule = {
   decision: { start: "verdict", steps: { verdict: askStep } },
 };
 
+/**
+ * A scripted decision model. A noul question answers its named probability, else 0.95; a choice
+ * question answers its named label in `choices`, else its first label.
+ */
 export async function withJudge<TValue>(
   probabilities: Readonly<Record<string, number>>,
   action: (endpoint: string, requests: unknown[]) => Promise<TValue>,
+  choices: Readonly<Record<string, string>> = {},
 ): Promise<TValue> {
   const requests: unknown[] = [];
   const questionSchema = z.discriminatedUnion("type", [
@@ -273,8 +353,9 @@ export async function withJudge<TValue>(
           if (question.type === "noul")
             return [name, { type: "noul", noul: probabilities[name] ?? 0.95 }];
           const labels = Object.keys(question.criteria);
-          const choice = labels[0];
-          if (!choice) throw new Error(`Choice question ${name} has no labels`);
+          const choice = choices[name] ?? labels[0];
+          if (!choice || !labels.includes(choice))
+            throw new Error(`Choice question ${name} has no label ${String(choice)}`);
           return [
             name,
             {

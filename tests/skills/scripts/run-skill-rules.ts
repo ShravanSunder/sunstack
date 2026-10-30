@@ -3,7 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import {
+  assembledKinds,
+  assembledRules,
   checkOutputSchema,
+  formatAssembledKind,
   formatLintReport,
   lintReportSchema,
 } from "../lib/skill-rules-report.ts";
@@ -112,11 +115,13 @@ function runRules(): number {
   const output: unknown = JSON.parse(result.stdout);
   if (options.check) {
     const check = checkOutputSchema.parse(output);
-    console.log(`Checked ${check.length} rules.`);
-    for (const rule of check)
+    const rules = assembledRules(check);
+    console.log(`Checked ${rules.length} rules.`);
+    for (const rule of rules)
       console.log(
         `${rule.source.file}:${rule.source.line}: ${rule.marker} ${rule.rule} (${rule.evidence}, ${rule.kind.kind}, ${rule.severity}): ${rule.standard}`,
       );
+    for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
     const report = lintReportSchema.parse(output);
     console.log(formatLintReport(report));

@@ -93,7 +93,44 @@ const assembledRuleSchema = z
     source: z.object({ file: z.string(), line: z.number() }),
   })
   .passthrough();
-export const checkOutputSchema = z.array(assembledRuleSchema);
+const assembledKindSchema = z
+  .object({
+    kind: z.string(),
+    within: z.string().optional(),
+    select: z
+      .object({
+        yes_at_or_above: z.number(),
+        no_at_or_below: z.number(),
+        shared: z.array(z.string()).optional(),
+      })
+      .passthrough()
+      .optional(),
+  })
+  .passthrough();
+export const checkOutputSchema = z.array(z.union([assembledRuleSchema, assembledKindSchema]));
+export type CheckOutput = z.infer<typeof checkOutputSchema>;
+export type AssembledRule = z.infer<typeof assembledRuleSchema>;
+export type AssembledKind = z.infer<typeof assembledKindSchema>;
+
+export function assembledRules(check: CheckOutput): AssembledRule[] {
+  return check.filter((entry): entry is AssembledRule => "rule" in entry);
+}
+
+export function assembledKinds(check: CheckOutput): AssembledKind[] {
+  return check.filter((entry): entry is AssembledKind => !("rule" in entry));
+}
+
+export function formatAssembledKind(entry: AssembledKind): string {
+  const parts = [`Kind ${entry.kind}:`];
+  if (entry.within) parts.push(`within ${entry.within}`);
+  if (entry.select) {
+    const shared = entry.select.shared?.length ? `, shared ${entry.select.shared.join(", ")}` : "";
+    parts.push(
+      `selected (yes at or above ${entry.select.yes_at_or_above}, no at or below ${entry.select.no_at_or_below}${shared})`,
+    );
+  }
+  return parts.join(" ");
+}
 
 export function formatLintReport(report: LintReport): string {
   const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };

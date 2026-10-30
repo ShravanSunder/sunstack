@@ -1,12 +1,19 @@
 {
-  "id": "step",
+  "id": "step-candidate",
   "language": "Markdown",
   "files": ["**/SKILL.md"],
   "rule":
     {
       "all":
         [
-          { "matches": "step" },
+          {
+            "any":
+              [
+                { "matches": "numbered-item" },
+                { "matches": "numbered-heading-section" },
+                { "matches": "step-heading-section" },
+              ],
+          },
           { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
         ],
     },
@@ -48,7 +55,7 @@
     {
       "all":
         [
-          { "kind": "paragraph", "regex": "^(?:IF|When)\\b" },
+          { "kind": "paragraph", "regex": "^(?:IF|If|if|When|when)\\b" },
           { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
         ],
     },
@@ -100,6 +107,20 @@
 }
 ---
 { "id": "section-heading", "language": "Markdown", "rule": { "kind": "section" } }
+---
+{
+  "id": "standards-section",
+  "language": "Markdown",
+  "files": ["**/SKILL.md", "**/references/**/*.md"],
+  "rule":
+    {
+      "all":
+        [
+          { "matches": "standards-heading-section" },
+          { "not": { "inside": { "matches": "quoted", "stopBy": "end" } } },
+        ],
+    },
+}
 ---
 {
   "id": "reference-section",

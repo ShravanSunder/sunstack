@@ -2,7 +2,8 @@ import { cpSync, existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
-import { checkOutputSchema, formatLintReport } from "./skill-rules-report.ts";
+import { z } from "zod";
+import { assembledRules, checkOutputSchema, formatLintReport } from "./skill-rules-report.ts";
 import type { LintReport } from "./skill-rules-report.ts";
 import {
   assertInstalledPackageIsRequired,
@@ -15,6 +16,7 @@ import {
   reportSchema,
   repositoryRoot,
   runRunner,
+  runRunnerJudged,
   sampleSkill,
   saveConfig,
   saveRules,
@@ -37,7 +39,7 @@ function expectPrintedOutcomeCounts(stdout: string, report: LintReport): void {
 }
 
 describe("skill evidence selection (G8)", () => {
-  test("whole multi-paragraph and nested list items retain exact spans, without paragraph fragments", () => {
+  test("whole multi-paragraph and nested list items retain exact spans, without paragraph fragments", async () => {
     // Wrong behavior: selecting every paragraph splits one governed item into multiple judgments.
     const root = createFixture();
     const text = readFileSync(
@@ -45,7 +47,7 @@ describe("skill evidence selection (G8)", () => {
       "utf8",
     );
     writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
-    const pieces = listEvidence(root).pieces.filter((piece) => piece.kind === "sentence");
+    const pieces = (await listEvidence(root)).pieces.filter((piece) => piece.kind === "sentence");
     const outerStart = text.indexOf("- Keep one");
     const nestedStart = text.indexOf("- Keep the nested");
     const end = text.indexOf("An independent");
@@ -63,52 +65,132 @@ describe("skill evidence selection (G8)", () => {
     ]);
   });
 
-  test("reference loads and branches carry their numbered step; step pieces stay in SKILL.md", () => {
+  test("loads and branches take their step context only from a selected SKILL.md step", async () => {
+    // Wrong behavior: a step context that comes from a heading name, an unselected section or a
+    // reference, where the kit selects no workflow, rather than from the selected step.
     const root = createFixture();
     const reference = readFileSync(
       path.join(repositoryRoot, "tests/skills/fixtures/run-skill-rules/sample/references/guide.md"),
       "utf8",
     );
     writeFixtureFile(root, "plugins/example/skills/sample/references/guide.md", reference);
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", reference);
     writeFixtureFile(
       root,
       "plugins/example/skills/sample/references/details.md",
       "## Details\n\nFacts.\n",
     );
-    const pieces = listEvidence(root).pieces;
-    expect(pieces.filter((piece) => piece.kind === "step")).toEqual([]);
+    const selected = await listEvidence(root);
+    expect(selected.selections.map((item) => [item.where.file, item.outcome.kind])).toEqual([
+      ["plugins/example/skills/sample/SKILL.md", "selected"],
+    ]);
     for (const kind of ["load", "branch"]) {
-      const selected = pieces.filter((piece) => piece.kind === kind);
-      expect(selected).toHaveLength(1);
-      expect(selected[0]?.fields.step).toMatchObject({
-        state: "texts",
-        values: ["### 1. Inspect evidence"],
-      });
-      expect(selected[0]?.where.span).toMatchObject({
+      const pieces = selected.pieces.filter((piece) => piece.kind === kind);
+      expect(pieces.map((piece) => [piece.where.file, piece.fields.step])).toEqual([
+        [
+          "plugins/example/skills/sample/SKILL.md",
+          expect.objectContaining({ state: "texts", values: ["### 1. Inspect evidence"] }),
+        ],
+        [
+          "plugins/example/skills/sample/references/guide.md",
+          expect.objectContaining({ state: "texts", values: [] }),
+        ],
+      ]);
+      expect(pieces[1]?.where.span).toMatchObject({
         byte_start: reference.indexOf("IF evidence"),
         byte_end: reference.indexOf("\n\nCompletion") + 1,
       });
     }
+    const unselected = await listEvidence(root, { c1: 0.1 });
+    expect(unselected.selections.map((item) => item.outcome.kind)).toEqual(["not_selected"]);
+    expect(unselected.pieces.filter((piece) => piece.kind === "step")).toEqual([]);
+    for (const piece of unselected.pieces.filter((item) => item.kind === "load"))
+      expect(piece.fields.step).toMatchObject({ state: "texts", values: [] });
   });
 
-  test("named dispatches in paragraphs and list items are call evidence, while prose and quoted examples stay out", () => {
+  test("named dispatches in paragraphs and list items are call evidence, while prose and quoted examples stay out", async () => {
     const root = createFixture();
     const text =
       "## Steps\n\n### 1. Collect\n\nMUST dispatch `collect-evidence` to a helper agent and return its counts.\n\n- IF input is ready, dispatch `inspect-input` to a helper agent and return its observations.\n\nThe dispatch mechanism is described here.\n\n> MUST dispatch `quoted-example` to an agent.\n";
-    writeFixtureFile(root, "plugins/example/skills/sample/references/dispatch.md", text);
-    const pieces = listEvidence(root).pieces.filter((piece) => piece.kind === "load");
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const pieces = (await listEvidence(root)).pieces.filter((piece) => piece.kind === "load");
     expect(pieces).toHaveLength(2);
     expect(pieces.map((piece) => piece.where.first_line)).toEqual([5, 7]);
     for (const piece of pieces)
       expect(piece.fields.step).toMatchObject({ state: "texts", values: ["### 1. Collect"] });
   });
 
-  test("plain numbered workflow steps retain a heading and its exact source span", () => {
+  test("a selected workflow's numbered items are steps; a rule list answered no, or an uncertain section, gives none", async () => {
+    // Wrong behavior: steps found by numbering or by a heading name rather than by the section judgment.
+    const root = createFixture();
+    const text =
+      "---\ndescription: Use when testing selection.\n---\n\n## How this runs\n\n1. Inspect the input.\n\n   Completion: the input is named.\n\n2. Return the result.\n\n## Core rules\n\n1. Keep it short.\n2. Name the owner.\n";
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const chosen = await listEvidence(root, { c2: 0.1 });
+    expect(chosen.selections.map((item) => [item.where.first_line, item.outcome.kind])).toEqual([
+      [5, "selected"],
+      [13, "not_selected"],
+    ]);
+    expect(
+      chosen.pieces.filter((piece) => piece.kind === "step").map((piece) => piece.where.first_line),
+    ).toEqual([7, 11]);
+    const skill = chosen.pieces.find((piece) => piece.kind === "skill");
+    expect(skill?.fields.steps).toMatchObject({
+      state: "texts",
+      values: ["1. Inspect the input.", "2. Return the result."],
+    });
+    const uncertain = await listEvidence(root, { c1: 0.5, c2: 0.1 }, 5);
+    expect(uncertain.selections.map((item) => item.outcome.kind)).toEqual([
+      "uncertain",
+      "not_selected",
+    ]);
+    expect(uncertain.pieces.filter((piece) => piece.kind === "step")).toEqual([]);
+  });
+
+  test("numbered and Step headings at any level below the title are candidates, judged on their own body", async () => {
+    const root = createFixture();
+    const text =
+      "---\ndescription: Use when testing headings.\n---\n\n# 1. Title is not a stage\n\n## 1. Plan\n\nWrite the plan.\n\n### Notes\n\nA child section the parent is not judged on.\n\n#### Step 2: Build\n\nBuild it.\n";
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const listing = await listEvidence(root);
+    expect(listing.selections.map((item) => item.where.first_line)).toEqual([7, 15]);
+    const plan = listing.pieces.find(
+      (piece) => piece.kind === "workflow_section" && piece.where.first_line === 7,
+    );
+    expect(plan?.fields.body).toMatchObject({ state: "text" });
+    const body = JSON.stringify(plan?.fields.body);
+    expect(body).toContain("Write the plan.");
+    expect(body).not.toContain("A child section");
+    expect(
+      listing.pieces.filter((piece) => piece.kind === "step").map((piece) => piece.where.first_line),
+    ).toEqual([7, 15]);
+  });
+
+  test("branch openers IF, If, if, When and when start a branch; mid-sentence, longer words and quotes do not", async () => {
+    const root = createFixture();
+    const text = [
+      "IF upper.",
+      "If capital.",
+      "if lower.",
+      "When capital.",
+      "when lower.",
+      "Do this if needed.",
+      "Iffy start.",
+      "Whenever possible.",
+      "Otherwise do that.",
+      "> If quoted.",
+    ].join("\n\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/references/branches.md", `${text}\n`);
+    const pieces = (await listEvidence(root)).pieces.filter((piece) => piece.kind === "branch");
+    expect(pieces.map((piece) => piece.where.first_line)).toEqual([1, 3, 5, 7, 9]);
+  });
+
+  test("plain numbered workflow steps retain a heading and its exact source span", async () => {
     const root = createFixture();
     const text =
       "---\ndescription: Use when inspecting steps.\n---\n\n## Workflow\n\n1. Inspect the input.\n\n   Completion: the input is named.\n";
     writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
-    const piece = listEvidence(root).pieces.find((candidate) => candidate.kind === "step");
+    const piece = (await listEvidence(root)).pieces.find((candidate) => candidate.kind === "step");
     expect(piece?.fields.heading).toMatchObject({
       state: "text",
       value: "Inspect the input.",
@@ -123,7 +205,7 @@ describe("skill evidence selection (G8)", () => {
 });
 
 describe("repository skill rule runner (G10)", () => {
-  test("the actual twelve-rule kit assembles and runs through the scripted judge", async () => {
+  test("the actual thirteen-rule kit assembles and runs through the scripted judge", async () => {
     const root = createFixture();
     for (const topic of [
       "descriptions-and-invocation",
@@ -160,8 +242,10 @@ describe("repository skill rule runner (G10)", () => {
       saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
       const checked = await runRunner(root, ["--check", "--out", path.join(root, "checked")]);
       expect(checked.status, checked.stderr).toBe(0);
-      const assembled = checkOutputSchema.parse(
-        JSON.parse(readFileSync(path.join(root, "checked/report.json"), "utf8")),
+      const assembled = assembledRules(
+        checkOutputSchema.parse(
+          JSON.parse(readFileSync(path.join(root, "checked/report.json"), "utf8")),
+        ),
       );
       const result = await runRunner(root, [], "synthetic-runner-test-key");
       const report = reportSchema.parse(result.report);
@@ -191,6 +275,7 @@ describe("repository skill rule runner (G10)", () => {
           "calls-and-placement.md:K001:call.completeness",
           "calls-and-placement.md:K002:reference.teaching-depth",
           "main-path.md:K001:branch.condition",
+          "main-path.md:K002:main-path.spine",
           "steering.md:K001:completion.criterion",
           "steering.md:K002:guidance.positive",
         ].sort(),
@@ -226,7 +311,7 @@ describe("repository skill rule runner (G10)", () => {
         },
       },
     });
-    const result = await runRunner(root);
+    const result = await runRunnerJudged(root);
     expect(result.status, result.stderr).toBe(1);
     const report = reportSchema.parse(result.report);
     expect(report.findings.map((item) => item.file).sort()).toEqual([
@@ -241,7 +326,7 @@ describe("repository skill rule runner (G10)", () => {
     const root = createFixture();
     sampleSkill(root);
     sampleSkill(root, "bad", "x".repeat(301));
-    const result = await runRunner(root, ["plugins/example/skills/sample"]);
+    const result = await runRunnerJudged(root, ["plugins/example/skills/sample"]);
     expect(result.status, result.stderr).toBe(0);
     const report = reportSchema.parse(result.report);
     expect(report.status.kind).toBe("clean");
@@ -252,7 +337,7 @@ describe("repository skill rule runner (G10)", () => {
   test("a nothing-selected full run is a gap, with the unchanged engine report kept", async () => {
     const root = createFixture();
     sampleSkill(root);
-    const result = await runRunner(root, ["tests"]);
+    const result = await runRunnerJudged(root, ["tests"]);
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("full-scope run selected nothing");
     expect(reportSchema.parse(result.report).status.kind).toBe("nothing_selected");
@@ -261,25 +346,31 @@ describe("repository skill rule runner (G10)", () => {
   test("--since with no changes is clean", async () => {
     const root = createFixture();
     sampleSkill(root);
-    expect(spawnSync("git", ["add", "plugins"], { cwd: root }).status).toBe(0);
-    const committed = spawnSync(
-      "git",
-      [
-        "-c",
-        "user.name=Fixture",
-        "-c",
-        "user.email=fixture@example.invalid",
-        "commit",
-        "--no-gpg-sign",
-        "-m",
-        "Fixture",
-      ],
-      { cwd: root, encoding: "utf8" },
-    );
-    expect(committed.status, committed.stderr).toBe(0);
-    const result = await runRunner(root, ["--since", "HEAD"]);
-    expect(result.status, result.stderr).toBe(0);
-    expect(reportSchema.parse(result.report).status.kind).toBe("nothing_selected");
+    // The judge's endpoint goes into the config before the commit: a changed config widens the
+    // run to full scope, which would hide the no-change case.
+    await withJudge({}, async (endpoint, requests) => {
+      saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
+      expect(spawnSync("git", ["add", "plugins"], { cwd: root }).status).toBe(0);
+      const committed = spawnSync(
+        "git",
+        [
+          "-c",
+          "user.name=Fixture",
+          "-c",
+          "user.email=fixture@example.invalid",
+          "commit",
+          "--no-gpg-sign",
+          "-m",
+          "Fixture",
+        ],
+        { cwd: root, encoding: "utf8" },
+      );
+      expect(committed.status, committed.stderr).toBe(0);
+      const result = await runRunner(root, ["--since", "HEAD"], "synthetic-runner-test-key");
+      expect(result.status, result.stderr).toBe(0);
+      expect(reportSchema.parse(result.report).status.kind).toBe("nothing_selected");
+      expect(requests).toHaveLength(0);
+    });
   });
 
   test("--check assembles rules with no key and no checked-file acquisition", async () => {
@@ -487,7 +578,7 @@ describe("decision controls (G8)", () => {
     });
   });
 
-  test("a missing completion is a finding at its heading with zero requests", async () => {
+  test("a missing completion is a finding at its heading with zero rule requests", async () => {
     const root = createFixture();
     writeFixtureFile(
       root,
@@ -522,7 +613,12 @@ describe("decision controls (G8)", () => {
       saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
       const result = await runRunner(root, [], "synthetic-runner-test-key");
       expect(result.status, result.stderr).toBe(0);
-      expect(requests).toHaveLength(0);
+      // The only request selects the step's section; the mechanical gate asks nothing.
+      expect(requests).toHaveLength(1);
+      const selection = z
+        .object({ questions: z.record(z.string(), z.unknown()) })
+        .parse(requests[0]);
+      expect(Object.keys(selection.questions)).toEqual(["c1"]);
       const report = reportSchema.parse(result.report);
       expect(report.findings).toHaveLength(1);
       expect(report.findings[0]).toMatchObject({ line: 9, message: "Missing completion." });

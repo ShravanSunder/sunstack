@@ -1,0 +1,67 @@
+{
+  "id": "workflow-candidate",
+  "language": "Markdown",
+  "files": ["**/SKILL.md"],
+  "rule":
+    {
+      "all":
+        [
+          { "matches": "workflow-candidate-section" },
+          { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
+        ],
+    },
+}
+---
+{ "id": "heading-line", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "kind": "atx_heading" } }
+---
+{ "id": "skill-body", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "kind": "document" } }
+---
+{
+  "id": "sentence-unit",
+  "language": "Markdown",
+  "files": ["**/SKILL.md", "**/references/**/*.md"],
+  "rule":
+    {
+      "all":
+        [
+          {
+            "any":
+              [
+                { "kind": "list_item" },
+                {
+                  "all":
+                    [
+                      { "kind": "paragraph" },
+                      { "not": { "inside": { "kind": "list_item", "stopBy": "end" } } },
+                    ],
+                },
+              ],
+          },
+          { "not": { "inside": { "matches": "quoted", "stopBy": "end" } } },
+          {
+            "inside":
+              {
+                "any":
+                  [
+                    { "matches": "workflow-candidate-section" },
+                    { "matches": "standards-heading-section" },
+                  ],
+                "stopBy": "end",
+              },
+          },
+          {
+            "not":
+              {
+                "all":
+                  [
+                    { "matches": "numbered-item" },
+                    { "not": { "inside": { "kind": "list_item", "stopBy": "end" } } },
+                    { "not": { "inside": { "matches": "numbered-heading-section", "stopBy": "end" } } },
+                    { "not": { "inside": { "matches": "step-heading-section", "stopBy": "end" } } },
+                    { "not": { "inside": { "matches": "standards-heading-section", "stopBy": "end" } } },
+                  ],
+              },
+          },
+        ],
+    },
+}
