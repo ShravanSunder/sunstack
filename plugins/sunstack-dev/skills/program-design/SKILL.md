@@ -1,6 +1,6 @@
 ---
 name: program-design
-description: "Use when defining or revising structural How and its views: binding Specification entities to owners, homes, and schemas, then components, interfaces, state, flows, failure, trust boundaries, and proof seams. Not for defining what entities mean or other Why/What (spec-design)."
+description: "Use when defining or revising structural How: entities' owners, homes and schemas; components, interfaces, state, flows, failure, trust boundaries, proof seams. Not for what entities mean or other Why/What (spec-design)."
 ---
 
 # Program Design
