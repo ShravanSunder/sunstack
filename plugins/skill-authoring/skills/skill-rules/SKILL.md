@@ -67,6 +67,8 @@ Return the decision table, the diff, and the check, evidence and rule-test resul
 
 One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the edge results for a mechanical rule and the development and held-out results for a judged one. Name what stays unproven: named cases test a rule's decisions on chosen pieces, not how many real pieces its evidence kind misses, and no result here makes a judged rule ready to block.
 
+Completion: the table has one row for every candidate step 1 listed; each marked row's proof points at a check, evidence print or rule-test result you kept; and every rule still owed a result is named as unproven, with what would close it.
+
 ## Completion Blockers
 
 The run is not done while any of these hold:
