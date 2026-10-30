@@ -208,5 +208,49 @@
       "path": "case-010/SKILL.md",
       "line": 7
     }
+  },
+  {
+    "id": "case-011",
+    "set": "held-out",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "history",
+      "repository": "ai-tools",
+      "revision": "9fda3d5696dde6a3f44509740b331bda5131dff1",
+      "path": "plugins/shravan-dev-workflow/skills/program-design/SKILL.md",
+      "startLine": 157,
+      "endLine": 163,
+      "fieldLine": 161
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "held-out",
+    "supplement": "review-R4",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "history",
+      "repository": "ai-tools",
+      "revision": "9fda3d5696dde6a3f44509740b331bda5131dff1",
+      "path": "plugins/shravan-dev-workflow/skills/spec-design/SKILL.md",
+      "startLine": 116,
+      "endLine": 122,
+      "fieldLine": 120
+    },
+    "excerpt": {
+      "path": "case-012/SKILL.md",
+      "line": 5
+    }
   }
 ]
