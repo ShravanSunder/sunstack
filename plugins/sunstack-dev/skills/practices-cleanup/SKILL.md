@@ -1,6 +1,6 @@
 ---
 name: practices-cleanup
-description: "Use when a slice, milestone, PR or investigation ends, when your own merged worktree is still on disk, or when disk runs low, to remove the large residue your own task created: build output, large logs, task temp folders and merged worktrees. Not for archiving documents or managing PR state."
+description: "Use when a slice, milestone, PR or investigation ends, your own merged worktree is still on disk, or disk runs low, to remove the large residue your task created. Not for archiving documents or managing PR state."
 ---
 
 # Practices: Cleanup
@@ -58,8 +58,8 @@ Ask the owner first unless they gave an equally explicit grant for that exact ac
 
 1. List each candidate your task created, from the trace, the commission and your own commands, with its `du -sh` size, and take `df -h`. Completion: each candidate has a path, a size and the step that created it.
 2. Before removing a candidate, list what it holds, look for a process or session using it, and read the project's policy for it, because a name like `target` or `tmp` only says what the folder was meant for ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)). Copy evidence out. Completion: each candidate is marked remove, with its command, or hold, with the check that failed.
-3. Remove with the project's clean task, or else the allow-list command exactly as written. IF a candidate is a worktree whose PR has merged, load `references/merged-worktree-removal.md` and return the worktree removed, with its branch outcome and where its `tmp/` evidence went, or held, with its blocker. Ask the owner about anything outside the allow list, naming the path, its size and what would make it safe.
-4. Confirm each removed path is gone and take `df -h` again. Report the change in free space from `df`; a sum of `du` sizes overstates it, because nested folders overlap and APFS clones share blocks.
+3. Remove with the project's clean task, or else the allow-list command exactly as written. IF a candidate is a worktree whose PR has merged, load `references/merged-worktree-removal.md` and return the worktree removed, with its branch outcome and where its `tmp/` evidence went, or held, with its blocker. Ask the owner about anything outside the allow list, naming the path, its size and what would make it safe. Completion: each candidate marked remove is gone through the project's clean task, an allow-list command exactly as written, or an action the owner granted explicitly for that exact path, or is held with the clean task's refusal, the allow-list condition it failed, or the observed failure or denial of the command it ran and what of the path remains; each merged worktree is removed with its branch outcome and where its `tmp/` evidence went, or held with its blocker; each candidate outside the allow list without that grant was asked about and is still in place; each candidate marked hold is untouched.
+4. Confirm each removed path is gone and take `df -h` again. Report the change in free space from `df`; a sum of `du` sizes overstates it, because nested folders overlap and APFS clones share blocks. Completion: each path step 3 removed is confirmed absent, a path still present is reported as not removed, and the free-space change comes from the two `df -h` readings.
 
 ## Return
 
