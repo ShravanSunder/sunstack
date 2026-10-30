@@ -15,7 +15,7 @@ Placement:
 - Each defined term is concrete and matches how `SKILL.md` and the references use it.
 - Each meaning has exactly one home.
 - Every reference exists because a named call site asks for it.
-- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.<!-- R001 -->
+- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.<!-- K002 -->
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
@@ -49,7 +49,8 @@ Citations of principles:
 Shared shapes:
 
 - A model-readable output shape gets its own home only when two or more real consumers need the same fields and meanings; a shape with one consumer stays with it.
-- A tool shape gets its own home when a tool, test, CI check or runtime validates the structure, and it names that validator; a readable example is not a machine contract.
+- A tool shape gets its own home when a tool, test, CI check or runtime validates the structure; a readable example is not a machine contract.
+- A tool shape that a validator reads names that validator and tests the representation it consumes.
 - A shared shape defines each field, value and ordering constraint once.
 - A shared shape leaves the judgment, selection and completion that produce it with the calling workflow; a schema owns fields and labels, not the workflow.
 - A reference that only pins an output shape is justified by a named consumer.
@@ -163,7 +164,9 @@ Reference fit, as questions:
 
 ## Shared shapes
 
-When a shape earns its own home, return its consumers, the reason they need the same shape, the authoritative home, and the proof that the current caller can load or validate it.
+When a shape earns its own home, return its consumers, the reason they need the same shape, the authoritative home, and the proof that the current caller can load or validate it. For a tool shape, that proof is the validator by name and a test that feeds it the representation it actually consumes.
+
+A tool shape whose validator is named but never fed its real input proves nothing about that input. A JSON schema for a rules file, validated only against a hand-written sample, passes while the files the tool reads drift from it; the test that counts loads the real rules files, or the exact form the tool parses, through that validator.
 
 The near miss: a long provider-specific procedure moved into its own file is still an ordinary reference. With no second consumer of its fields and no validator reading it, it isn't a schema, however structured it looks.
 
