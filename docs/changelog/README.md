@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-30 Presentation HTML collection walkthroughs](2026-10-30-presentation-collection-walkthroughs.md)
 - [2026-10-30 Practice skills cleanup](2026-10-30-practices-skills-cleanup.md)
 - [2026-10-30 Phase skills cleanup](2026-10-30-phase-skills-cleanup.md)
 - [2026-10-28 Lightweight HTML authoring](2026-10-28-lightweight-html-authoring.md)
