@@ -49,13 +49,13 @@ Package actual implementation state so another agent can review, continue, or au
 
 4. Preserve the returned canonical plan record, governing basis, and delivery context, then bind implementation proof to that exact plan path and current meaning.
 
-   Completion: the packet carries the plan record unchanged, or `plan identity: none` with the request or ticket identity, and each proof item names the plan path and the obligation it proves.
+   Completion: when a plan exists, the packet carries its record unchanged and each proof item names the plan path and the obligation it proves; otherwise it carries `plan identity: none` with the request or ticket identity, each proof item names the outcome it claims for that request, and no plan record is invented.
 
 5. Create the temp artifact directory and write:
    - `implementation-handoff.md`
    - `copy-paste-prompt.md`
 
-   Completion: both files exist in that directory, filled from their templates with the inventory, the proof bound to the plan and the stage's additions; a review-only prompt says "do not edit files".
+   Completion: both files exist in that directory, filled from their templates with the inventory, the proof bound as step 4 binds it and the stage's additions; a review-only prompt says "do not edit files".
 
 6. Print a TUI-friendly response with:
    - artifact paths
