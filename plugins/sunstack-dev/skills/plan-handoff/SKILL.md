@@ -41,13 +41,13 @@ Package an existing implementation plan so another agent can review or execute w
 
 4. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred plan scope, and exact user-direction evidence; otherwise preserve the current Lead as planning owner.
 
-   Completion: the line reads `none`, or names the recipient, the transferred scope and the user's direction that authorizes it.
+   Completion: the line reads `none` and names the current Lead as planning owner, or names the recipient, the transferred scope and the user's own words that authorize the transfer.
 
 5. Create the temp artifact directory, with repo, branch/worktree, and plan slug in the path, and write at least:
    - `plan-handoff.md`
    - `copy-paste-prompt.md`
 
-   Completion: both files exist in that directory; under read-only authority, the prompt is returned inline instead and no file is claimed.
+   Completion: both files exist in that directory, each filled from the handoff template with the source plan path, governing basis and delivery context; under read-only authority, the prompt is returned inline instead and no file is claimed.
 
 6. Print a TUI-friendly response with:
    - artifact path
