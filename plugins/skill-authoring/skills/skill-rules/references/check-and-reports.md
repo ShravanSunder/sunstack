@@ -46,10 +46,12 @@ Each finding carries its rule, marker, file and line (the line of the field its 
 
 A rule is proven by what it decides on labelled pieces, not by a clean check. Rule tests live in the repository's eval suite, as labelled cases taken from real skills, each run through the same command and judge the rules use, and each checking the outcome the decision reaches: `pass`, `finding` (and its line), `not_applicable` or `uncertain`. They add no store, state or procedure of their own.
 
-**Building the cases.** Per judged rule:
+**Building the cases.** Each judged rule's cases together hold at least one good case (expects `pass`), one bad case (expects `finding`) and one near miss, a look-alike that expects `not_applicable` when the gate should drop it, or `pass` when it is a conforming piece that only looks wrong. They split into two sets:
 
-- a **development set**: at least one good case (expects `pass`), one bad case (expects `finding`), and one near miss, a look-alike that expects `not_applicable` when the gate should drop it, or `pass` when it is a conforming piece that only looks wrong;
-- a **held-out set** of the same three kinds, drawn from other skills, run once after the entry is frozen.
+- a **development set**, used to write and tune the entry;
+- a **held-out set**, drawn from other skills, run once after the entry is frozen.
+
+Each set aims for all three kinds. When a set still lacks a kind after two targeted rounds of collecting real pieces, each labelled blind, record the gap with the search that was made, and claim nothing from that set about the missing kind: a held-out set with no labelled breach says nothing about how well the rule finds breaches.
 
 Each case is an excerpt of a real piece with its source, and each label records who gave it. Labels come from people or agents independent of the rule's writer and of any run of the rule, such as two labelers who don't see each other's labels and a third who settles their disagreements; where the owner of the standards labels a rule's cases, those labels govern. A label the rule's writer took from the rule's own answers proves nothing.
 
@@ -69,4 +71,4 @@ A guidance rule over the `sentence` kind asks first whether the piece is guidanc
 
 The wrong case is the gate's, not the verdict's: the fix belongs in the gate's criteria (an example quoted to show a weak form is not guidance), and the case reruns with the rest of the development set. If that held-out set later shows the same miss, it is reported as a miss, and the rule keeps warning, not blocking.
 
-Complete when: the check passed on the real engine and printed every intended rule with the expected count, each standard reading as itself; the evidence print shows each rule's intended pieces with their fields; every mechanical rule has edge tests that pass and fail where its standard does; every judged rule has development results, and held-out results after its freeze, each case with its label source; and everything still unproven is named.
+Complete when: the check passed on the real engine and printed every intended rule with the expected count, each standard reading as itself; the evidence print shows each rule's intended pieces with their fields; every mechanical rule has edge tests that pass and fail where its standard does; every judged rule has good, bad and near-miss cases across its sets, development results, and held-out results after its freeze, each case with its label source; any kind a set lacks is recorded with its search; and everything still unproven is named.
