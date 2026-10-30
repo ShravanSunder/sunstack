@@ -52,7 +52,7 @@ Paths are in the `skill-authoring` plugin; the rules files beside `domain-skill-
 
 ### The review-skip rule: eval
 
-- **Standard.** `skill-design/SKILL.md:77`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
+- **Standard.** `skill-design/SKILL.md:79`: "Wanting speed, "just implement it", or "no extra review ceremony unless the skill requires it" is not a skip: this skill requires the review, so say so and run it." A stop rule such as "stop only for a real open decision" is the same kind.
 - **Outcome.** Eval.
 - **Why.** The claim is about what an agent does when it is pressed. The skill text already says the right thing; whether the agent does it shows only in a fresh run under that pressure.
 - **Near miss.** "A bright-line rule names, beside it, the rationalization it blocks, in the agent's own words." (`domain-skill-crafting/references/steering.md:18`) is about a skill's text: a judge can read one rule's list item and say whether its rationalization is named. Model-judged.

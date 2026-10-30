@@ -1,6 +1,6 @@
 ---
 name: skill-design
-description: "Use when a skill change needs its design before any file is edited: a new skill, a behavior change to an existing one, an observed skill failure to fix, or a design set to write or revise for review. Not for writing files from an accepted design (skill-creation), judging a design or a skill (skill-review), carrying a change end to end (skill-orchestrator), or choosing which skills should exist (skill-audit)."
+description: "Use when a skill change needs its design before any file is edited: a new skill, a behavior change, or an observed skill failure to fix. Not for writing, judging or shipping it."
 ---
 
 # Skill Design
@@ -70,7 +70,9 @@ Completion: each part of the design names the root topic that governs it, every 
 
 MUST load `../skill-rules/references/decision-matrix.md`, put each requirement and each standard the design set states through its questions, and return each one's outcome with the properties it was decided on. Each outcome maps to a route: deterministic to a mechanical rule, model-judged to a judged rule, review-only to a review check, eval to an eval, and prose to no proof needed. Anything no route can show is named as unverified, with the reason. A rule route stays pending until `skill-rules` has made that rule. A wording the matrix finds unready goes back to step 3. Carry step 2's proof posture into this part as each run's proof plan.
 
-Completion: every requirement and standard has its route and the properties it was decided on, and every unverified item is named with its reason.
+IF a run writes or alters the description of a model-invocable skill, load `../domain-skill-crafting/references/descriptions-and-invocation.md` and return that run's two-prompt trial as its two-prompt section teaches it: the true prompt and the near miss in the words a user would type, each to run in a fresh session that sees the skill's description beside its neighbours and nothing of this design set, with the loaded skill read from the host's record. A skill hidden from model invocation records its trial as `not applicable`.
+
+Completion: every requirement and standard has its route and the properties it was decided on, every changed description has its trial planned or `not applicable`, and every unverified item is named with its reason.
 
 ### 6. Present the design set, and have it reviewed
 

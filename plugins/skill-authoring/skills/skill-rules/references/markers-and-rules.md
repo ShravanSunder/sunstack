@@ -22,7 +22,7 @@ Before marking, read the host as if it were the only text a judge will see. Good
 
 - `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` holds dozens of standards. Mark the list item at `:26` for call completeness; the dispatch items and the citation items below it are separate candidates.
 - An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. Return it for a rewrite that carries its subject, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`; or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows the complete form: "A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`."
-- A paragraph that carries five standards, like `skill-design/SKILL.md:77`, is no narrow host for any of them. Split it in the teaching first.
+- A paragraph that carries five standards, like `skill-design/SKILL.md:79`, is no narrow host for any of them. Split it in the teaching first.
 
 The engine forbids some hosts outright: a level 1 heading, a block quote, a table, HTML, a link reference definition and frontmatter. A marker inside fenced or indented code or an inline code span isn't a marker at all; it's ignored, and its entry turns up orphaned.
 
