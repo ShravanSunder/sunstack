@@ -1,0 +1,124 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../references/descriptions-and-invocation.md",
+      "rules": "descriptions-and-invocation.rules.json"
+    },
+    {
+      "markdown": "../references/generalization.md",
+      "rules": "generalization.rules.json"
+    },
+    {
+      "markdown": "../references/calls-and-placement.md",
+      "rules": "calls-and-placement.rules.json"
+    },
+    {
+      "markdown": "../references/main-path.md",
+      "rules": "main-path.rules.json"
+    },
+    {
+      "markdown": "../references/steering.md",
+      "rules": "steering.rules.json"
+    }
+  ],
+  "marker_prefix": "K",
+  "check": {
+    "files": ["plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/**/*.md"]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "step": {
+        "rule": "step",
+        "fields": {
+          "heading": {
+            "from": "capture",
+            "regex": "^(?:#{1,6}\\s+|[0-9]+[.)]\\s+(?:\\*\\*)?)([^\\n]+)\\n?"
+          },
+          "completion": {
+            "from": "inside",
+            "rule": "completion"
+          },
+          "body": {
+            "from": "remainder"
+          }
+        }
+      },
+      "skill": {
+        "rule": "skill",
+        "fields": {
+          "description": {
+            "from": "yaml",
+            "key": "description"
+          },
+          "steps": {
+            "from": "same_file",
+            "rule": "step"
+          }
+        }
+      },
+      "load": {
+        "rule": "load",
+        "fields": {
+          "line": {
+            "from": "first_line"
+          },
+          "targets": {
+            "from": "target",
+            "regex": "`([^`]+)`",
+            "resolve": "path_or_skill",
+            "as_kind": "skill"
+          },
+          "step": {
+            "from": "enclosing",
+            "rule": "context-step"
+          }
+        }
+      },
+      "branch": {
+        "rule": "branch",
+        "fields": {
+          "line": {
+            "from": "first_line"
+          },
+          "step": {
+            "from": "enclosing",
+            "rule": "context-step"
+          }
+        }
+      },
+      "sentence": {
+        "rule": "sentence",
+        "fields": {
+          "body": {
+            "from": "remainder"
+          },
+          "headings": {
+            "from": "enclosing",
+            "rule": "section-heading"
+          }
+        }
+      },
+      "reference_section": {
+        "rule": "reference-section",
+        "fields": {
+          "heading": {
+            "from": "first_line"
+          },
+          "body": {
+            "from": "remainder"
+          }
+        }
+      }
+    }
+  },
+  "decision_model": {
+    "model": "jev-latest"
+  },
+  "limits": {
+    "evidence_max_chars": 6000,
+    "request_max_chars": 20000,
+    "max_model_requests": 5000,
+    "max_concurrent_requests": 8
+  }
+}

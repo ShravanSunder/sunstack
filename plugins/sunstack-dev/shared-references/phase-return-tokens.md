@@ -9,7 +9,7 @@ When a phase, practice, or shared reference must send work elsewhere, it returns
 | `program-design-gap` | the structural gap, evidence |
 | `verification-design-gap` | the requirement with no proof strategy, evidence |
 | `ready-for-planning` | reviewed design identities |
-| `plan-defect` | plan anchor, defect, evidence, and the plan's existing `originating planner` field |
+| `plan-defect` | plan anchor, defect, evidence, and the plan's existing `originating planner` field, which records who wrote the plan |
 | `ready-for-implementation` | plan path and revision |
 | `ready-for-review` | diff, proof, and assessment |
 

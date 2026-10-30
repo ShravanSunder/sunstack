@@ -40,6 +40,16 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
+Write the confirmed list into the record as a nested Markdown list: one item per capability with its key, the owner's name and its purpose, and its home `U` rows nested under it as you write them. That tree is the capability map's Markdown form in `design-documents.md`, and `spec-design` writes the same shape, so the list has one form wherever it lives:
+
+```markdown
+- `import` (Import): card charges and receipt photos arrive in a claim without retyping
+  - U1 employee: a card charge is in my claim without my retyping it
+  - U6 employee: a card charge I already claimed is flagged before I submit it again (also serves: approval)
+- `approval` (Approval): a manager approves or returns a claim, with a reason, in one place
+- `payout` (Payout): an approved claim reaches the employee's account on the next pay run
+```
+
 When the whole request is one concern, such as "add a CSV download of the claims list", say so in your read and write the rows directly, with no capability list and no capability field. One capability equals none, because a list with one entry adds a level and tells the reader nothing. Add an *area* above the capabilities only when there are more than about seven of them, and never go deeper than area, capability, row.
 
 Stop this stage when the owner has confirmed or corrected the list. A one-concern read needs no turn of its own: it travels in the goal boundary, which the owner confirms as a whole.
@@ -162,6 +172,6 @@ Keep missing observable behavior, permitted and protected systems, non-goals, ac
 
 A durable record uses its path as its inspectable identity. An in-chat record returns its complete text and uses a session or message anchor only when the host exposes one.
 
-The record opens with the confirmed capability list, so a reader confirms the parts before the rows. Assign U identifiers once within that record: reordering, correcting, or moving a row to another capability preserves the identifier; splitting creates new identifiers and marks the old row superseded. Carry out-of-scope classes, unresolved questions, and the subject-matter goal boundary in the record, while keeping confirmation state in the returned result. `decisions-and-docs.md` owns the general record-home discipline and reader test.
+The record opens with the confirmed capability list, written as the nested tree, so a reader confirms the parts before the rows. Assign U identifiers once within that record: reordering, correcting, or moving a row to another capability preserves the identifier; splitting creates new identifiers and marks the old row superseded. Carry out-of-scope classes, unresolved questions, and the subject-matter goal boundary in the record, while keeping confirmation state in the returned result. `decisions-and-docs.md` owns the general record-home discipline and reader test.
 
-Complete when every in-scope class has row-level needs or an exact unknown, a multi-part set has an owner-confirmed capability list written before its rows and every row has exactly one home capability (a one-concern set has neither), evidence and authority are separate, priorities name an assigner or gap, useful sequence inputs are captured without forcing a view, the record has a stable identity at a permitted destination, the goal boundary includes acceptable complexity and acceptable outcome-level evidence, and the result carries owner confirmation of that same boundary or the exact decision still needed.
+Complete when every in-scope class has row-level needs or an exact unknown, a multi-part set has an owner-confirmed capability list written as the nested tree before its rows and every row has exactly one home capability (a one-concern set has neither), evidence and authority are separate, priorities name an assigner or gap, useful sequence inputs are captured without forcing a view, the record has a stable identity at a permitted destination, the goal boundary includes acceptable complexity and acceptable outcome-level evidence, and the result carries owner confirmation of that same boundary or the exact decision still needed.

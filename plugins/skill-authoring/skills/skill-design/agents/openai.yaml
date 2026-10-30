@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skills: Design"
+  short_description: "Design one skill change before its files change"
+  default_prompt: "Use $skill-design to design one skill change before its files change and take its design set to design review."

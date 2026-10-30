@@ -1,6 +1,6 @@
 # 2026-10-30 Phase skills cleanup
 
-`sunstack-dev` 2.100.2 → 2.100.3.
+`sunstack-dev` 2.101.0 → 2.101.1.
 
 - Seven phase skills checked against the creation-skill rules and fixed where a standard was really broken: `debug-investigation`, `docs-maintain`, `implementation-handoff`, `implementation-pr-wrapup`, `plan-handoff`, `plan-improve-repo`, `spec-handoff`. Each skill's purpose, calls, returns and route tokens are unchanged.
 - In the six skills with a `Workflow` section, every step now states a completion an agent can check, or is merged into the step it serves; thin completions name the observable result and the work behind it. Each completion keeps the branches its skill already supports (read-only handoffs, no-plan handoffs, intentionally new paths, narrow docs edits). `implementation-pr-wrapup`'s Core Flow keeps its existing returns, each walked and found to have an observable done boundary.

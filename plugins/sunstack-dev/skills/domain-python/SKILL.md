@@ -92,6 +92,7 @@ Commands the repo defines win, and its ruff config owns formatting. When the rep
 uv run pytest <path>
 uv run basedpyright <path>
 uv run ruff check <path>
+uv run ruff format --check <path>
 ```
 
 ## Signs you skipped it

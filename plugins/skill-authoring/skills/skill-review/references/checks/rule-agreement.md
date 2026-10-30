@@ -12,7 +12,7 @@ Where to look, when the artifact is **changed files**:
 - reference-to-reference restatements of the same rule;
 - proof records and changelog entries that assert current behavior.
 
-IF a term is added, changed, or used in the reviewed surface, load `../../../skill-creation/references/glossary.md` to compare its definition with every use and return its authoritative meaning and any disagreement.
+IF a term is added, changed, or used in the reviewed surface, load `../../../domain-skill-crafting/references/glossary.md` to compare its definition with every use and return its authoritative meaning and any disagreement.
 
 How to inspect: Build the claim inventory before judging. For each rule, term, predicate, label set, or required field, list every file and line that states it. Then compare wording, not intent. Separate three failures:
 
@@ -29,14 +29,12 @@ The fourth is the same failure with one statement living outside the skill. Open
 A rule with one home cannot fail this check. A rule with five homes fails the moment any one of them is edited.
 
 Good signals:
-- each rule, term, and label set has exactly one authoritative home;
-- other files cite that home instead of restating it;
-- every declared form has at least one real call site;
-- glossary definitions match the body's actual usage.
+- the claim inventory finds none of the failures above;
+- every declared form has at least one real call site.
 
 Bad signals:
 - one predicate named two ways, such as `behavior-changing` in one file and `non-trivial` in another;
-- a term defined in `../../../skill-creation/references/glossary.md` and redefined differently in `SKILL.md`;
+- a term defined in `../../../domain-skill-crafting/references/glossary.md` and redefined differently in `SKILL.md`;
 - a grammar half that is specified, policed by a blocker, and never used;
 - a rule restated in full inside a review rubric that also lives in its owning reference;
 - a renamed file still referenced under its old name.

@@ -14,8 +14,10 @@ shared understanding
        -> program-design: structural How
        -> verification-design: how each requirement will be proven
        -> spec-program-review: proportional independent four-document design review
-       -> stop at reviewed four-document design or explicit gap; never enter planning automatically
-  -> plan-implementation: one canonical plan + proof mapping
+       -> plan-implementation: the first plan, which the owner reviews with the design
+       -> stop at the reviewed design and its first plan, or an explicit gap
+  -> plan-implementation: one canonical plan + proof mapping, when a goal starts without one
+  -> plan-update: a superseding plan when a ready plan's meaning changes during delivery
   -> implement-plan: approved immutable plan + implementation proof
   -> implementation-review: ordered checks in one independent 🔎 Reviewer Sidekick session + rails reduction
        -> stop before corrections and PR work
@@ -58,6 +60,7 @@ spec-*               design/spec boundary          spec-design
                                                   spec-program-review
                                                   spec-handoff
 plan-*               planning and portability     plan-implementation
+                                                  plan-update
                                                   plan-handoff
                                                   plan-improve-repo
 implement-*          approved-plan execution      implement-plan
@@ -109,6 +112,7 @@ flowchart LR
     specHandoff["spec-handoff<br/>portable spec context"]
 
     planImplementation["plan-implementation<br/>reviewed design to canonical plan"]
+    planUpdate["plan-update<br/>superseding plan during delivery"]
     planHandoff["plan-handoff<br/>portable plan context"]
 
     implementPlan["implement-plan<br/>ready delivery-plan execution"]
@@ -120,6 +124,8 @@ flowchart LR
     mentalModels --> specDesign
     deliveryGoal -.->|"first unproven gate"| designCycle
     deliveryGoal -.-> planImplementation
+    deliveryGoal -.->|"plan meaning changes"| planUpdate
+    designCycle -.->|"first plan"| planImplementation
     deliveryGoal -.-> implementPlan
     deliveryGoal -.-> implementationReview
     deliveryGoal -.-> implWrap
@@ -144,6 +150,8 @@ flowchart LR
     specReview --> planImplementation
     planImplementation --> planHandoff
     planImplementation -.->|"ready delivery context"| implementPlan
+    planUpdate -.->|"verification-design-gap"| verificationDesign
+    planUpdate -.->|"superseding plan"| implementPlan
     planHandoff -.->|"when exact approval is preserved"| implementPlan
     implementPlan --> implementationReview
     implementationReview -.->|"accepted implementation correction"| implementPlan
@@ -179,7 +187,7 @@ Use `practices-manage-agents` when delegation is the work: choosing a helper's r
 
 Role skills are model-invocable. A helper role applies only when a commission names it; without one, the agent stays the owner's Lead and routes the work.
 
-Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design`, `program-design`, and `verification-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial design document, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one four-document design review, then stops before planning. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
+Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design`, `program-design`, and `verification-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial design document, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one four-document design review. A first cycle then writes the first plan through `plan-implementation` and gives the owner one page over the design and the plan; a design correction during delivery returns the corrected design to `plan-update` instead, and design-only work stops at the reviewed design. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
 
 Use `orchestrator-implementation-goal` to carry implementation goals through Lead-authored planning, planned-PR implementation and proof, Lead assessment, independent review, accepted corrections, and the requested delivery boundary. Design stays with its own workflow when missing or contradicted. The default terminal is PR-ready and unmerged; merge requires explicit authority. Both orchestrators use `practices-show-me-your-work` for meaningful decision and evidence history, while checking current sources rather than replaying stored status. Direct one-phase requests bypass orchestration.
 
@@ -209,7 +217,9 @@ Use `spec-handoff` to package spec/design context for a future session. It prese
 
 ### Plan boundary
 
-Use `plan-implementation` when the Lead translates one semantically current ready four-document design into one repo-grounded canonical Markdown plan. Each slice earns the Verification Design rows assigned to it; the plan schedules when and with which commands, and never re-chooses the proof. Helpers may gather bounded repository/proof evidence, but the Lead authors every slice, dependency, proof row, and PR boundary. It stops before tickets, implementation, review, Git, or PR work.
+Use `plan-implementation` when the Lead translates one semantically current ready four-document design into the first repo-grounded canonical Markdown plan. Each slice earns the Verification Design rows assigned to it; the plan schedules when and with which commands, and never re-chooses the proof. Helpers may gather bounded repository/proof evidence, but the Lead authors every slice, dependency, proof row, and PR boundary. One deliverable is one PR; a split is proposed to the owner at plan review, and a plan across repositories carries its orchestration section. It stops before tickets, implementation, review, Git, or PR work.
+
+Use `plan-update` when a ready plan's meaning must change during delivery: a design correction, a plan-defect finding, a slice that splits or merges, a changed dependency or proof target, or a PR that re-splits. The Lead lists what the change invalidates, sends affected Verification Design rows to `verification-design` first, stops with an owner brief when an adopted obligation would narrow or the PR shape would change, and writes a superseding plan beside the old one with what changed and what it invalidates. A choice inside one slice stays with `implement-plan`.
 
 Use `plan-improve-repo` to audit a repo for high-leverage improvements without editing source. Delegated audit work returns evidence and candidates; the Lead admits findings and authors any canonical plan. It retains direct authority over admitted repository-improvement findings, including source-proven implementation-mechanics-only work, without taking reviewed-design planning away from `plan-implementation`.
 
@@ -217,7 +227,7 @@ Use `plan-handoff` to package an existing implementation plan for another agent,
 
 ### Implementation boundary
 
-Use `implement-plan` to validate and execute one immutable ready plan whose current delivery context authorizes implementation. Admission requires a current governing basis and the `pr-ready-unmerged` terminal. In an orchestrated workstream the assigned persistent Implementer Sidekick executes and proves the plan; direct phase work follows its resolved execution owner. It advances through proof-bearing slices, preserves proof gates, and routes a design break or plan defect to its owner. It stops before independent review and PR work.
+Use `implement-plan` to validate and execute one immutable ready plan whose current delivery context authorizes implementation. Admission requires a current governing basis and the `pr-ready-unmerged` terminal. In an orchestrated workstream the assigned persistent Implementer Sidekick executes and proves the plan; direct phase work follows its resolved execution owner. It advances through proof-bearing slices, preserves proof gates, and routes a design break or plan defect to its owner. Storage the design doesn't name, and technology new to the repository, stop before any code. It stops before independent review and PR work.
 
 Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
 
@@ -240,7 +250,7 @@ Each `domain-*` skill holds one subject's knowledge. The current three hold the 
 - `audit-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
 - `ops-linear-tracking`: manages Linear projects, milestones, issues, and dependencies while keeping docs as the design source of truth.
 - `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: a box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
-- `presentation-html`: standalone HTML engineering explainers using the public Demistify library, canonical component documentation and separate checker/browser proof.
+- `presentation-html`: standalone HTML engineering explainers using the public Demistify library, canonical component documentation and separate checker/browser proof; a design set becomes a page collection in the owner's-question order, with walkthroughs and the plan's delivery map and change view.
 - `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces, with headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.
 
 ## External Counsel
@@ -285,6 +295,7 @@ Use docs-maintain to reconcile this README and AGENTS.md with current plugin sta
 - Skill source: [`skills/`](skills/)
 - Shared runtime references: [`shared-references/`](shared-references/)
 - Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
+- Phase composition map, generated from the skill files: [`docs/phase-composition.md`](docs/phase-composition.md), drawn on [`docs/phase-composition.html`](docs/phase-composition.html)
 - Source inspiration catalog: [`docs/source-inspiration-catalog.md`](docs/source-inspiration-catalog.md)
 - Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
 - Release notes: [`../../docs/changelog/`](../../docs/changelog/)

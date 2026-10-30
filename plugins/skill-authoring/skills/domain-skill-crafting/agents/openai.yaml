@@ -1,0 +1,6 @@
+interface:
+  display_name: "Domain: Skill Crafting"
+  short_description: "The standards a skill's text must meet"
+  default_prompt: "Use $domain-skill-crafting on the current skill text and name each standard kept or broken."
+policy:
+  allow_implicit_invocation: false

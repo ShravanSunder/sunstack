@@ -1,0 +1,123 @@
+{
+  "K001": {
+    "name": "completion.criterion",
+    "evidence": "step",
+    "questions": {
+      "tells_done": {
+        "type": "noul",
+        "instructions": {
+          "check": "completion",
+          "against": "body",
+          "task": "At the end of this step, could an agent tell from the completion criterion whether the step is done or not done?"
+        },
+        "criteria": {
+          "true": "It names things the agent can check: a result produced, slots filled, items each matched to a source, a decision recorded, a list compared. A criterion that points at returns the step's body spells out counts as naming them.",
+          "false": "It names a state of mind or an activity with nothing to check, such as 'understanding reached', 'the code is reviewed' or 'context gathered'."
+        }
+      },
+      "demands_legwork": {
+        "type": "noul",
+        "instructions": {
+          "check": "completion",
+          "against": "body",
+          "task": "Can the criterion be met only by doing the work the step asks for, rather than by a thin or empty result?"
+        },
+        "criteria": {
+          "true": "It can't be written without the step's real work: it names what had to be opened, read, compared or run, or ties each item it requires to its evidence, as 'name every caller of the changed function and say which ones break' does. A criterion that requires the return or result the step's body spells out item by item demands that legwork too, because those items can't be produced without the work.",
+          "false": "A thin or empty result meets it: 'produce a change list' is met by a list of nothing, and 'note any issues' by 'none' without looking."
+        }
+      }
+    },
+    "decision": {
+      "start": "has_completion",
+      "steps": {
+        "has_completion": {
+          "mechanical_check": {
+            "tool": "ast_grep",
+            "rule": "completion"
+          },
+          "yes": "tells_done",
+          "no": {
+            "finding": "Step has no completion criterion.",
+            "at": "heading"
+          }
+        },
+        "tells_done": {
+          "ask": "tells_done",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "legwork",
+          "no": {
+            "finding": "Completion criterion doesn't let the agent tell done from not done.",
+            "at": "completion"
+          }
+        },
+        "legwork": {
+          "ask": "demands_legwork",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Completion criterion can be met without the step's legwork.",
+            "at": "completion"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K002": {
+    "name": "guidance.positive",
+    "evidence": "sentence",
+    "questions": {
+      "kind": {
+        "type": "choice",
+        "instructions": {
+          "check": "body",
+          "context": "headings",
+          "task": "What kind of text is this?"
+        },
+        "criteria": {
+          "guidance": "Guidance: an instruction or a standard that tells the agent what to do, or what not to do.",
+          "other": "Something else: an example, a fact, a definition, a quotation, rationale, or a statement of what a role, file or skill owns."
+        }
+      },
+      "positive": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "context": "headings",
+          "task": "Does the guidance give a positive target, an action to take or what a good result looks like, rather than only naming what to avoid?"
+        },
+        "criteria": {
+          "true": "It names an action or a target, even when it also forbids something, or sends the agent to another skill and says what to bring back from it.",
+          "false": "It only names what to avoid or not do, and leaves the agent to guess the target, as 'Don't skip tests' or 'Never guess an API' do."
+        }
+      }
+    },
+    "decision": {
+      "start": "kind",
+      "steps": {
+        "kind": {
+          "ask": "kind",
+          "min_probability": 0.6,
+          "routes": {
+            "guidance": "positive",
+            "other": "not_applicable"
+          }
+        },
+        "positive": {
+          "ask": "positive",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Guidance names only what to avoid; give the action or result to aim for.",
+            "at": "body"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

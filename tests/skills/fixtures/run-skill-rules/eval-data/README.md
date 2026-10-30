@@ -1,0 +1,1 @@
+These synthetic cases and label literals exercise loading, selection and scoring. They are test data, not independently labelled real-skill evidence. The held-out example here is synthetic and may be used in unit tests; the real Researcher fixtures remain excluded from default held-out execution.

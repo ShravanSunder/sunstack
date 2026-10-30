@@ -1,6 +1,6 @@
 ---
 name: principle-write-for-the-reader
-description: "Use when writing a design, code, an instruction, or an explanation someone else must follow: a reviewer, a future maintainer, another agent, the owner tomorrow. Write so a reader with no context can answer their question quickly, restate the point, and find where to correct it."
+description: "Use when writing a design, code, an instruction, or an explanation someone else must follow: a reviewer, a future maintainer, another agent, the owner tomorrow."
 disable-model-invocation: true
 ---
 
@@ -29,6 +29,8 @@ Code is communication, and so are designs, instructions, and explanations. They 
 **Say each thing once.** Give a rule or a decision one home and link to it elsewhere: "The README says reviewers run in parallel and the skill says one at a time; keep the rule in the skill and make the README point to it." Cut narration of how the work went and summaries that repeat the section above. Point the next contributor to the existing code that already does the thing, so they don't build a second one.
 
 **The hard call is what to leave out.** Completeness is cheap to write and expensive to read. Keep what the reader needs to understand and decide; move detail to references they can open when they need it. Three things never get cut for brevity: the assumption the work leans on, the risk, and what is still unverified. Put them near the top, where a skimming reader will see them.
+
+**Layer the detail.** Order it from the answer down to the depth, split it into pieces that each answer one question, and only then fold away what is optional for this reader. IF you are writing a document a person reads in layers, such as a design chunk, a composed page or a skill with references, load `references/layered-detail.md` and return the four layers each chunk will take and what in it stays visible.
 
 **Write only commands and examples you have run or read at their source.** A command with the wrong option name or order, written from memory, sends every reader into the same failure. Check the tool's help or an accepted run first.
 

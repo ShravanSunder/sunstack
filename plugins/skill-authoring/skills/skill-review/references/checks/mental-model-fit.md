@@ -1,6 +1,6 @@
 # mental-model-fit
 
-Mission / stance: Judge the lens, not the wording. The Great Skill Frame makes `SKILL.md` the home of the mental model, which means the skill's most load-bearing claim is a concept the agent is asked to think with. A skill whose every sentence binds can still steer the agent toward the wrong shape of the problem.
+Mission / stance: Judge the lens, not the wording. The four surfaces of the root's model place the mental model in `SKILL.md`, which makes the skill's most load-bearing claim a concept the agent is asked to think with. A skill whose every sentence binds can still steer the agent toward the wrong shape of the problem.
 
 Maximum authority: read-only inspection of the supplied lens, vocabulary, and workflow. Return candidate findings; the review lead owns purpose changes, edits, and the final verdict.
 
@@ -12,7 +12,11 @@ Where to look, when the artifact is changed files:
 - the workflow, to see whether the route the skill walks matches the lens it claims;
 - the skill's stated promise and success definition.
 
-IF the artifact uses a coined term, load `../../../skill-creation/references/glossary.md` to compare its definition with body usage and return the term's definition cost and agreement.
+MUST load `../../../domain-skill-crafting/references/main-path.md` and return its standards for the mental model.
+
+MUST load `../../../domain-skill-crafting/references/steering.md` and return its leading-word standards.
+
+IF the artifact uses a coined term, load `../../../domain-skill-crafting/references/glossary.md` to compare its definition with body usage and return the term's definition cost and agreement.
 
 How to inspect: Name the lens in your own words after reading only the body, then test it four ways:
 
@@ -28,9 +32,7 @@ The last one is the most common failure. A skill states a frame in its opening s
 Good signals:
 - the lens is stated once and the workflow visibly follows it;
 - leading words appear as repeated tokens, not as one-off definitions;
-- borrowed vocabulary comes from domain or engineering language the model already holds;
-- coined terms exist only where no pretrained word fits, and are defined once;
-- someone reading only the mental model could predict the shape of the workflow.
+- every returned standard is kept, with the line that shows it.
 
 Bad signals:
 - a frame in the opening section that no later step uses;
