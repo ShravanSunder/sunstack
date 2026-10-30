@@ -1,61 +1,61 @@
 # Running Rules
 
-This reference owns one run of this plugin's rules on a skill's files from a step that checks skill text, such as a review's first rule pass or a writer's self-check, and the reading of the engine's responses into one state per rule. Expected input: the folder of each skill the step checks, the diff of the change it checks when there is one, and the repository's own instructions. Return: whether the rules ran, or why not; where the engine's responses are kept; each rule's state; each failing occurrence with its rule ID, its location and the rule's wording; and each refusal with its cause, traced to the change or left as a gap.
+This reference owns one run of this plugin's rules on skill files from a step that checks skill text (a writer's self-check, a review's first rule pass, a release's prove step, an audit) and the reading of its report into that step's return. Expected input: the files or skill folders the step checks, the diff of the change when there is one, and the repository's own instructions. Return: whether the rules ran, or why not; where the report is kept; the run's status; each finding with your call on it; each `uncertain` piece with your decision; and each gap.
 
-A rule has run only when the engine's report, from a run on the files as they stand now, says it ran. The runner's own summary is not that report, and whatever the report doesn't show as run is a gap, never a pass.
+Every caller reads a result the same way. A rule has run only when the engine's report, from a run on the files as they stand now, says so; whatever the report doesn't show as decided is a gap, never a pass.
 
 ## The rules and the runner
 
-The rules are `domain-skill-crafting`'s standards, marked where that skill states them and kept in RuleSets of two kinds: RuleSets of mechanical rules, which the engine evaluates locally (in this plugin, the metadata RuleSet), and RuleSets of model-judged rules, which are checked and printed only. This step configures no model backend or credential, so it never evaluates a judged RuleSet.
+The rules are `domain-skill-crafting`'s marked standards, each a decision model the engine runs over the pieces of skill text its standard governs: mechanical checks run locally, and questions go to the decision model, which is on for every run. The engine finds its own key; a run it can't make is refused, and the refusal is that run's result.
 
-The repository's rule runner is the command the repository's own instructions name for running these rules on skill folders: look in its agent instructions, such as `AGENTS.md`, and its contributor docs. IF the repository names no runner, or the runner fails before the engine responds, return `rules: not run` with that reason: this rule run ends there, and the step that called it goes on with that result. A rule's state comes only from the repository's runner, so don't build an engine request of your own or install an engine to fill the gap.
+The repository's rule runner is the command the repository's own instructions name for running these rules: look in its agent instructions, such as `AGENTS.md`, and its contributor docs. IF the repository names no runner, or the runner fails before the engine responds, return `rules: not run` with that reason: this run ends there, and the calling step goes on with that result. A rule's state comes only from the repository's runner, so don't build an engine request of your own, install an engine, or supply, replace or remove a key or a model endpoint to get a run through.
 
 ## Run it
 
-Run the runner as its instructions say, on the folder of each skill the step checks, and keep the responses it writes. The reading below needs two responses: the check of every RuleSet the runner names, with every assembled rule printed, and the evaluation of the RuleSets that run locally. When one run of the runner doesn't give both, run it once for each, as its usage says.
+Run the runner as its instructions say, on the files or skill folders the calling step names, or on the changes since a revision when the step checks a change. Keep the report path it prints. Its printed lines are a view of that report; when they and the report differ, the report wins.
 
-## Read the responses
+## Read the report
 
-MUST load `check-and-reports.md` and return what each field this reading uses means: the check's outcome and its print, including how a printed rule shows whether it is model-judged or mechanical, and the evaluation report's coverage, skipped rules, rule evaluations and occurrences. Take only those meanings from it: its calibration and repair steps are for writing and proving rules, and this run follows the steps below.
+MUST load `check-and-reports.md` and return what the report's status and lists mean (the statuses with their exits, and the fields of a finding, an `uncertain` piece and an incomplete part). Take only those meanings from it: its rule-test steps are for writing and proving rules.
 
-1. **The check.** It succeeded when its outcome is `checked`. Its print lists the assembled rules, which are the rules this run accounts for, so get the print before reading on, or return its absence as a gap when the runner can't print. Any other outcome means no rule ran: return `rules: not run`, with the outcome and each diagnostic's code and location as the reason.
+Read the status first, then every list, because warnings don't move the status. Then act on each result:
 
-   IF the check refused, load `markers-and-rules.md` and return each refusal's code, location, and the cause and fix its repair table gives that code. Then decide, one refusal at a time, whether the change being checked caused it: it did only when the change's diff holds the edit that produces this code at this location, in the location's file, in the file paired with it (a rules file and its Markdown), or in the RuleSet that pairs them. For example, the diff deletes a marker from its Markdown, and the refusal is that marker's entry, named by its ID, orphaned in the paired rules file. A traced refusal is the change breaking a rule's definition, and its fix belongs to the change. Every other refusal is not the change's: one the change's edits didn't produce, even in the same file or its pair; one the diff doesn't settle; and every refusal when the step checks no change. Return each of those as a gap with its code, location and cause, and no fix for the change to own.
-2. **The evaluation.** An evaluation that returned no report leaves every mechanical rule a gap, with its outcome as the reason. Otherwise, read every entry the report holds for each mechanical rule the print lists; a rule can have one for each group of files it was bound to.
+| the report shows | what you do |
+| --- | --- |
+| a finding from a mechanical `error` rule | fix it before the calling step completes, then run again on the fixed files |
+| a finding from a mechanical `warn` rule | fix it, or name it in the return with the reason it stays |
+| a judged finding (it carries the model's answers) | a candidate: open its line and read the piece against the standard. Confirmed, fix it where the calling step's boundary lets you, or name it; not confirmed, explain why it doesn't hold. Never reword text only to clear a judged warning. |
+| an `uncertain` piece | yours to decide. Read the piece with the step it stopped at, its answers and its state, judge it against the standard yourself, fix or explain it, and report your call. It is never a pass. |
+| a piece counted `not_applicable` | the rule doesn't cover that piece; it neither meets nor breaks the standard |
+| a piece that passed | it meets that rule's standard, and says nothing else about the skill's quality |
+| an incomplete part or a skipped rule | a gap, with its reason |
+| status `invalid` (including a refusal for no key), `cancelled` or `incomplete`, or a full-scope run with `nothing_selected` | a gap for the run: the rules didn't all run, so the return says which didn't and why |
 
-   | what the report shows for the rule | what it means |
-   | --- | --- |
-   | `expanded`, and every occurrence `completed` with `pass` | passing there |
-   | an occurrence `completed` with `fail` | failing at that occurrence |
-   | an occurrence `unresolved` or `cancelled` | a gap at that occurrence, with its diagnostics |
-   | any other rule-evaluation result, such as `zero_matches` | a gap, with that result as the reason |
-   | listed in `skipped_rules` | a gap, with its diagnostics |
-   | absent from the report | a gap: the rule didn't run |
+Pieces that are the same case, such as one label line repeated across several files, may be decided together, each still named with its file and line.
 
-   The rule is `pass` only when every entry it has is passing, `fail` when any occurrence is failing, and otherwise a gap; name each gap among its entries beside its state. Coverage other than `full` is a gap for the whole run: name it beside the per-rule states, and never sum the run up as passing.
-3. **The judged rules.** Every model-judged rule the print lists is `not evaluated`.
-
-A `pass` shows only the property its rule's wording names, such as a description's opening words; it says nothing about the skill's quality, which stays with review.
+A finding is traced to the change when the change's diff made the text at its line; one the diff didn't touch is still read and returned, but its fix belongs to the step that owns that text.
 
 ## Return
 
 ```text
 rules:      ran | not run: <reason>
 runner:     <the command, as the repository's instructions name it> | none named
-responses:  <where the check and evaluation responses are kept>
-coverage:   full | <the evaluation's coverage, as a gap>
-per rule:   <rule ID>: pass | fail | not evaluated | gap: <reason>
-failing:    <rule ID> at <file>:<line>: <the rule's wording from the print>
-refusal:    <code> at <file>:<line> (<field_path>): <cause>; traced to the change, fix: <fix> | not traced: a gap
+report:     <the path the runner printed>
+status:     <status>, exit <code>; usage <requests>, <cost>
+finding:    <rule> at <file>:<line> (<severity>, mechanical | judged): <message> -> fixed | confirmed, named: <why it stays> | explained: <why it doesn't hold>
+uncertain:  <rule> at <file>:<line> (stopped at <step>): <your call: pass | finding | not applicable>, <one-line reason> -> fixed | named | explained
+gap:        <the incomplete part, skipped rule, or refused, cancelled or nothing-selected run>: <reason>
 ```
 
-Give one `per rule` line for each rule the print lists, and one `failing` line for each failing occurrence, with the file and, when it has one, the line taken from the occurrence's `target`, so a reviewer can verify it at that anchor and a writer can fix it there. When the check refused, give one `refusal` line for each diagnostic, with a fix only on one traced to the change. `rules: ran` means the check came back `checked` with its print and the evaluation returned a report; when they didn't, the lines that exist still carry what was read.
+Give one `finding` line per finding and one `uncertain` line per piece (or per group of identical pieces, each named), with the file and line from the report, so a reviewer can check your call at that anchor. `rules: ran` means the runner returned a report; the status and the gap lines say how much of it decided.
 
 Good and bad readings:
 
-- Good: the evaluation shows the description rule `expanded`, with one occurrence `completed`, `fail` at a skill's `SKILL.md` line 3. The return names that rule `fail`, gives a `failing` line at `SKILL.md:3` with the rule's wording, lists every judged rule `not evaluated`, and reports coverage `full`.
-- Bad: "rules pass", read from the runner's summary, while one mechanical rule shows `zero_matches`. That rule selected nothing, so it is a gap.
-- Bad: the judged rules reported as passing because the print listed them. They are `not evaluated`.
-- Bad: a refusal traced to the change because the change edited a rules file, when the refusal is an entry orphaned in another topic's rules file, or an entry whose marker was already gone before the change. The diff holds no edit that produces it, so it is a gap with its cause.
+- Good: status `uncertain`, exit 5, with two warn findings and three uncertain pieces. The return gives the status as it is, one judged finding confirmed and fixed in the change's own text, one explained at its line, and each uncertain piece with its call and reason.
+- Bad: "rules pass" read from a `clean` status, while two warn findings sat in the list unread.
+- Bad: an `uncertain` piece counted as a pass, or left out of the return.
+- Bad: a sentence reworded until the judge said yes, when the sentence already met the standard.
+- Bad: a run refused for a missing key, reported as clean, or pushed through with a stand-in key or endpoint.
+- Bad: a full run over a misspelt folder that selected nothing, reported as clean.
 
-Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the check and the evaluation were read, every rule the print lists has exactly one state, taken from the report or `not evaluated` for a judged rule, every failing occurrence has its rule ID, location and wording, and every gap names its reason; when the check refused, every refusal has its code, location and cause, and is either traced to the change by the edit in its diff that produces it or returned as a gap.
+Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the report was read, every finding has your call at its line, every `uncertain` piece has your decision and reason, and every incomplete part, skipped rule, refusal or nothing-selected full run is a gap with its reason.
