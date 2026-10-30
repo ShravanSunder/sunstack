@@ -61,7 +61,7 @@ The matching guide owns the CLI operations and tool route. When it ships `demist
    pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz index /path/guide.html /path/details.html
    ```
 
-   Keep stable island IDs, relative paths and the input list. An authored inline peer participates without an extra embed. Keep `ex-nav` and the same Pages links on each peer. Give each peer an ordinary link to each shared path's owning reader and stable ID: a path `review` declared in `guide.source.html` is linked as `<a href="guide.html#review">Review path</a>`. The matching guide owns any dedicated path launcher; index data does not replace authored navigation. After a local source edit, regenerate affected readers and refresh the complete collection index. The matching guide owns navigation syntax, indexing order and freshness.
+   Keep stable island IDs, relative paths and the input list. An authored inline peer participates without an extra embed. Keep the matching guide's native navigation and the same Pages links on each peer; shared path discovery comes from the complete collection index. After a local source edit, regenerate affected readers and refresh the complete collection index. The matching guide owns navigation syntax, indexing order and freshness.
 4. Lint the changed final HTML files once after all transforms:
 
    ```sh

@@ -1,6 +1,6 @@
 # presentation-html: source-first collection preparation
 
-Revision 3. Target: `plugins/sunstack-dev/skills/presentation-html`. Run status: implemented after revision 3 spec review accepted the bounded change; candidate proof and implementation review pending. Refresh of draft PR #167 onto current main. Supersedes revision 2's routine full-collection comparison and historical checkout-only CLI assumptions; the owner's later lightweight-authoring decisions govern.
+Revision 3. Target: `plugins/sunstack-dev/skills/presentation-html`. Run status: implemented after revision 3 spec review; current-main and two candidate applications completed, with no incremental efficacy claim. The agent-added manual path-link workaround is removed after evaluation; final independent review pending. Refresh of draft PR #167 onto current main. Supersedes revision 2's routine full-collection comparison and historical checkout-only CLI assumptions; the owner's later lightweight-authoring decisions govern.
 
 ## Success and basis
 
@@ -12,7 +12,7 @@ Success: an author reads the retained source wrappers and affected Markdown, def
 
 The functional change is wording in `presentation-html/references/demistify.md` only. Keep the existing trigger, main path, component choices, API ownership, version binding, published `pnpm dlx`/`npx` tool route and delivery limits. Coordinated current plugin metadata/changelog update is required; no installed-cache mutation. No new CLI, source discovery, collection builder, schema, flag or runtime mechanism.
 
-Current main already teaches retained sources and regeneration. Replace the command-search-only indexing condition in Prepare the reader step 3 with one condition for shared collection search or Walkthrough discovery; do not keep two indexing predicates. Add the missing collection application and concise-context guidance beside the existing source/regeneration decisions. Preserve independently authored inline peers. Say that collection indexing carries shared discovery data; do not promise a visible launcher solely from indexed paths: the current runtime launcher condition remains a separate product defect. Retain the guide's supported explicit presentation-link route when a peer needs a launcher.
+Current main already teaches retained sources and regeneration. Replace the command-search-only indexing condition in Prepare the reader step 3 with one condition for shared collection search or Walkthrough discovery; do not keep two indexing predicates. Add the missing collection application and concise-context guidance beside the existing source/regeneration decisions. Preserve independently authored inline peers. Say that collection indexing carries shared discovery data; do not promise a visible launcher solely from indexed paths: the current runtime launcher condition remains a separate product defect. Keep existing native navigation. Do not require a manually repeated path-link list as a substitute for the separate launcher repair; that was an agent-added workaround, not the owner's automatic collection-discovery outcome.
 
 ## Proof and assessment
 
