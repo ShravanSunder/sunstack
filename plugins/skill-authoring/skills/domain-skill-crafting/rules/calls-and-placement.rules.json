@@ -11,10 +11,10 @@
           "task": "Read each load or dispatch call in the line; the step is the heading of the numbered step it sits in, empty when it sits in none. Which part does a call leave out?"
         },
         "criteria": {
-          "none": "Every call says when to go (an IF condition, or a MUST at its point in the step), where (a named file, path or skill), what to do there, and what to bring back (a concrete result the step goes on to use). A result that names the work, such as 'return the standards that apply', also says what to do there.",
+          "none": "Every call says when to go (an IF condition, or a MUST at its point in the step), where (a named file, path or skill), what to do there, and what to bring back (a concrete result the step goes on to use). What to do there is said when the call names an action at the destination ('apply its test', 'run its check') or when the result names the work, as 'return the standards that apply' or 'return each case with its verdict' do; a separate 'to <work>' is needed only when the result alone doesn't show it.",
           "when": "A call gives no moment to go: no IF condition and no MUST, or a condition nobody could observe, such as 'if useful'.",
           "where": "A call names no destination the agent can open: no file, path or skill, or one too vague to find, such as 'the relevant reference'.",
-          "work": "Neither the call nor its result says what to do at the destination, as in 'load the reference and return the result'.",
+          "work": "The result is too generic to show what to do at the destination, and the call names no action there, as in 'load the reference and return its findings' or 'consult the guide and report back'. A named result that implies the work is not this.",
           "result": "A call brings nothing back the step can use: no return, 'more context', 'the details', or a bare 'and return' with no result named."
         }
       }

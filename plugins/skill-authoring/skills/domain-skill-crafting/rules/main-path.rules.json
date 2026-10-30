@@ -24,7 +24,7 @@
         },
         "criteria": {
           "none": "It names a condition an agent can observe in the work (a file, a result, a state, a request, a diff) and the different work that condition causes.",
-          "condition": "Its condition can't be observed: it names a topic, a need or a feeling, such as 'if the skill needs more depth', 'if useful' or 'when appropriate', so nothing in the work tells the agent it holds.",
+          "condition": "Its condition can't be observed: it names a topic, a need or a feeling, including the agent's own doubt or uncertainty, such as 'if the skill needs more depth', 'if useful', 'when appropriate' or 'if unsure', so nothing in the work tells the agent it holds. A condition someone else can see, such as a disagreement already raised or a result already returned, is observable.",
           "work": "The condition is observable, but the line doesn't name the different work it causes, or the work is the same with or without it."
         }
       }

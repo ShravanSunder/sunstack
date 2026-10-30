@@ -23,7 +23,7 @@
           "task": "Can the criterion be met only by doing the work the step asks for, rather than by a thin or empty result?"
         },
         "criteria": {
-          "true": "It can't be written without the step's real work: it names what had to be opened, read, compared or run, or ties each item it requires to its evidence, as 'name every caller of the changed function and say which ones break' does.",
+          "true": "It can't be written without the step's real work: it names what had to be opened, read, compared or run, or ties each item it requires to its evidence, as 'name every caller of the changed function and say which ones break' does. A criterion that requires the return or result the step's body spells out item by item demands that legwork too, because those items can't be produced without the work.",
           "false": "A thin or empty result meets it: 'produce a change list' is met by a list of nothing, and 'note any issues' by 'none' without looking."
         }
       }
