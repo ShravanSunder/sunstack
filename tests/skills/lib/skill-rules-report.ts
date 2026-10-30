@@ -96,7 +96,7 @@ const assembledRuleSchema = z
 const assembledKindSchema = z
   .object({
     kind: z.string(),
-    within: z.string().optional(),
+    within: z.array(z.string()).min(1).optional(),
     select: z
       .object({
         yes_at_or_above: z.number(),
@@ -122,7 +122,7 @@ export function assembledKinds(check: CheckOutput): AssembledKind[] {
 
 export function formatAssembledKind(entry: AssembledKind): string {
   const parts = [`Kind ${entry.kind}:`];
-  if (entry.within) parts.push(`within ${entry.within}`);
+  if (entry.within) parts.push(`within ${entry.within.join(" or ")}`);
   if (entry.select) {
     const shared = entry.select.shared?.length ? `, shared ${entry.select.shared.join(", ")}` : "";
     parts.push(

@@ -80,6 +80,50 @@ describe("branch.condition routes every accepted opener (kit K001, main-path)", 
   });
 });
 
+describe("sentence evidence lies within a selected step or a Standards section", () => {
+  test("a selected step's nested item is a sentence; the step's own item, an unselected list and prose outside are not", async () => {
+    // Wrong behavior: a step's own text read as a sentence (the held convention says it isn't), or a
+    // rule list the section judgment rejected read as sentences.
+    const root = createFixture();
+    const text = [
+      "---",
+      "description: Use when checking sentences.",
+      "---",
+      "",
+      "## How this runs",
+      "",
+      "1. Inspect the input.",
+      "",
+      "   - Keep the source named.",
+      "",
+      "## Core rules",
+      "",
+      "1. Keep it short.",
+      "",
+      "   - Name the owner.",
+      "",
+      "## Notes",
+      "",
+      "Prose outside any step.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    writeFixtureFile(
+      root,
+      "plugins/example/skills/sample/references/standards.md",
+      "## Standards\n\n- A standard.\n",
+    );
+    const listing = await listEvidence(root, { c2: 0.1 });
+    const sentences = listing.pieces
+      .filter((piece) => piece.kind === "sentence")
+      .map((piece) => [piece.where.file.split("/sample/")[1], piece.where.first_line]);
+    expect(sentences).toEqual([
+      ["SKILL.md", 9],
+      ["references/standards.md", 3],
+    ]);
+  });
+});
+
 describe("main-path.spine is asked only where numbered lists hold no workflow (kit K002, main-path)", () => {
   const ruleList =
     "---\ndescription: Use when checking spines.\n---\n\n# Sample\n\nApply the lens to the question and state the result.\n\n## Core rules\n\n1. Keep it short.\n2. Name the owner.\n";

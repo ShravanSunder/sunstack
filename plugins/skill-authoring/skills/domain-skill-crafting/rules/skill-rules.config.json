@@ -67,7 +67,7 @@
       },
       "step": {
         "rule": "step-candidate",
-        "within": "workflow_section",
+        "within": ["workflow_section"],
         "fields": {
           "heading": {
             "from": "capture",
@@ -167,7 +167,8 @@
         }
       },
       "sentence": {
-        "rule": "sentence",
+        "rule": "sentence-unit",
+        "within": ["step", "standards_section"],
         "fields": {
           "body": {
             "from": "remainder"
