@@ -193,6 +193,8 @@ describe("goal delivery intent hard cutover", () => {
     for (const otherSkill of [
       "skill-orchestrator/SKILL.md",
       "skill-creation/SKILL.md",
+      "skill-design/SKILL.md",
+      "domain-skill-crafting/SKILL.md",
       "skill-audit/SKILL.md",
     ]) {
       expect(readSkillAuthoringFile(otherSkill)).not.toContain(convergenceRuleOpening);

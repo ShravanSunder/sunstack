@@ -31,14 +31,14 @@ Principles are the bottom layer. They are hidden from model invocation, teach on
 
 ### A skill's four surfaces
 
-The [skill-creation model](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#great-skill-frame) separates:
+The [skill-crafting model](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md#the-model) separates:
 
 1. The YAML trigger: when the skill should load and where adjacent skills take over.
 2. The `SKILL.md` main path: the mental model, decisions, required actions and finish conditions.
 3. `references/`: detail reached by an explicit call. A branch is conditional; an always-required module can still have its own maintenance boundary.
 4. Proof: evidence that the other surfaces change the behavior they promise.
 
-`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-creation's call grammar](../../plugins/skill-authoring/skills/skill-creation/SKILL.md#call-grammar).
+`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-crafting's calls and placement topic](../../plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md#call-forms).
 
 ## Roles and execution forms
 
@@ -91,15 +91,15 @@ The executor supplies fitting change proof. The Lead assesses the diff and evide
 
 The [skill-authoring plugin](../../plugins/skill-authoring/README.md) is a separate package, designed to work beside other workflows without importing their practices. This repository's operating instructions supply its trace, Git and delivery conventions.
 
-For a broad portfolio question, `skill-audit` examines current instructions, real usage evidence and selected upstream sources, then classifies update, create, merge or skip. Each recommendation identifies the fix owner: teaching, a code check, or the tool. A single skill's design and writing belongs to `skill-creation`; independent judgment belongs to `skill-review`. `skill-orchestrator` carries one admitted change through spec, implementation, proof, assessment, review and the scoped release. `skill-rules` handles the subset of standards that should become executable checks.
+For a broad portfolio question, `skill-audit` examines current instructions, real usage evidence and selected upstream sources. It sends each flagged skill's existing files to `skill-review`'s implementation stage and uses its verdict and accepted findings to decide update, create, merge or skip. Each recommendation identifies the fix owner: teaching, a code check, or the tool. `skill-design` designs one skill change and writes its design set; `skill-creation` writes the skill's files from its accepted design, or makes a mechanical edit. Independent judgment belongs to `skill-review`. `skill-orchestrator` carries one admitted change through design, writing, proof, assessment, review and the scoped release. `skill-rules` handles the subset of standards that should become executable checks.
 
-The [proof-and-claims reference](../../plugins/skill-authoring/skills/skill-creation/references/proof-and-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
+The [proof-claims reference](../../plugins/skill-authoring/skills/domain-skill-crafting/references/proof-claims.md) bounds what a fresh run establishes. The plugin ships no general semantic eval runner or stored pressure-scenario corpus. The repository's historical test harness is a separate surface. A static check, scenario catalogue or successful named example does not establish general skill reliability.
 
 ### Follow one concrete change
 
-Suppose a named skill's trigger sends a requirements interview to implementation. The first check is the current description, its neighboring triggers and an actual recorded task. That distinguishes a wording defect from a client that never offered the intended skill. The Lead uses `skill-creation` to state the intended routing and proof before editing; a domain standard applies only if the change also touches that subject. A principle such as read-ground-truth-first informs that investigation at its citing decision, while `practices-research` supplies the source-gathering method. These are different responsibilities within the same work.
+Suppose a named skill's trigger sends a requirements interview to implementation. The first check is the current description, its neighboring triggers and an actual recorded task. That distinguishes a wording defect from a client that never offered the intended skill. The Lead uses `skill-design` to state the intended routing and proof in the design set before editing; a domain standard applies only if the change also touches that subject. A principle such as read-ground-truth-first informs that investigation at its citing decision, while `practices-research` supplies the source-gathering method. These are different responsibilities within the same work.
 
-After spec review, the executor changes the owned trigger and any affected metadata/reference. Proof observes an eligible fresh task against the intended and neighboring routes, rather than checking only that YAML parses. The Lead assesses it, independent skill review judges the change, and the authorized release updates the owning plugin's version and changelog. If the source is already correct and the installed copy is stale, repair delivery at that boundary instead of rewriting the teaching. This example follows the existing authoring workflow; it adds no new approval or test requirement.
+After design review accepts the set, the executor uses `skill-creation` to change the owned trigger and any affected metadata/reference inside that boundary. Proof observes an eligible fresh task against the intended and neighboring routes, rather than checking only that YAML parses. The Lead assesses it, independent skill review judges the change, and the authorized release updates the owning plugin's version and changelog. If the source is already correct and the installed copy is stale, repair delivery at that boundary instead of rewriting the teaching. This example follows the existing authoring workflow; it adds no new approval or test requirement.
 
 ## Source and artifact homes
 
@@ -109,7 +109,7 @@ After spec review, the executor changes the owned trigger and any affected metad
 | Runtime procedure with real shared consumers | Owning plugin's `shared-references/` |
 | Maintainer explanation of this repository | `docs/architecture/` |
 | Plugin-local maintainer index | Owning plugin's `docs/` and README |
-| Current skill-change spec | `docs/wip/skills-authoring/<date-name>/` |
+| Current skill-change design set | `docs/wip/skills-authoring/<date-name>/` |
 | Curated failure, investigation, lesson, authoring evidence or portfolio backlog | The configured private memory-log repository's `skills/` lanes |
 | Conversations and conversational handoffs | The configured private session-log repository's project lanes |
 | Raw build output, caches and disposable working material | Task-scoped system temporary storage |

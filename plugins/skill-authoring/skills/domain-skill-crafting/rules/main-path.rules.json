@@ -1,0 +1,71 @@
+{
+  "K001": {
+    "name": "branch.condition",
+    "evidence": "branch",
+    "questions": {
+      "when_kind": {
+        "type": "choice",
+        "instructions": {
+          "check": "line",
+          "against": "step",
+          "task": "This line opens with When. Does it start a branch, or is it guidance?"
+        },
+        "criteria": {
+          "branch": "A branch: its condition picks out some runs, and those runs do work the others don't, such as a different action, destination or result.",
+          "guidance": "Guidance: the When clause names the moment in every run at which an action happens, or frames a rule that holds whenever its activity does, so no run is sent down a different path."
+        }
+      },
+      "gap": {
+        "type": "choice",
+        "instructions": {
+          "check": "line",
+          "against": "step",
+          "task": "Read the branch; the step is the heading of the numbered step it sits in, empty when it sits in none. Which part does the branch leave out?"
+        },
+        "criteria": {
+          "none": "It names a condition an agent can observe in the work (a file, a result, a state, a request, a diff) and the different work that condition causes.",
+          "condition": "Its condition can't be observed: it names a topic, a need or a feeling, including the agent's own doubt or uncertainty, such as 'if the skill needs more depth', 'if useful', 'when appropriate' or 'if unsure', so nothing in the work tells the agent it holds. A condition someone else can see, such as a disagreement already raised or a result already returned, is observable.",
+          "work": "The condition is observable, but the line doesn't name the different work it causes, or the work is the same with or without it."
+        }
+      }
+    },
+    "decision": {
+      "start": "opens_with_if",
+      "steps": {
+        "opens_with_if": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "line",
+            "pattern": "^IF\\b"
+          },
+          "yes": "branch_parts",
+          "no": "when_kind"
+        },
+        "when_kind": {
+          "ask": "when_kind",
+          "min_probability": 0.6,
+          "routes": {
+            "branch": "branch_parts",
+            "guidance": "not_applicable"
+          }
+        },
+        "branch_parts": {
+          "ask": "gap",
+          "min_probability": 0.6,
+          "routes": {
+            "none": "pass",
+            "condition": {
+              "finding": "Branch condition can't be observed in the work.",
+              "at": "line"
+            },
+            "work": {
+              "finding": "Branch doesn't name the different work its condition causes.",
+              "at": "line"
+            }
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

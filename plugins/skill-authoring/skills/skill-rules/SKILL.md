@@ -1,25 +1,29 @@
 ---
 name: skill-rules
-description: "Use when deciding which standards in a skill should become checked `sunstack-rule` rules, placing `<!-- K014 -->` markers in skill Markdown, writing or fixing a rules-file entry or a RuleSet's `rule_sources`, proving a mechanical rule on good and bad examples, or reading `check_rules` refusals. Not for writing a skill's teaching (skill-creation) or deciding which skills to change (skill-audit)."
+description: "Use when deciding which of a skill's standards become checked rules, writing or fixing their markers and rule entries, or reading a rule run's results. Not for a skill's teaching."
 ---
 
 # Skill Rules
 
-A checked rule is one of the skill's own sentences asked as a question. The marker binds the wording where the skill states the standard; the rules entry's target selects the text that standard judges, usually in other files. The engine asks the marked text's visible words, and there is no second copy of the wording to tune. So mark only text whose own wording is the standard. When a sentence would need rewording to be checkable, it isn't ready for a marker: the rewrite is a teaching change for `skill-creation`, made before any marker goes on.
+A checked rule is a decision model for one of a skill's own standards. A marker binds the standard's wording where the skill states it, and the rule entry behind the marker names the evidence kind the standard governs (pieces such as a skill's description, a step, a load call or a list item, picked from the checked files with their named fields) and a decision: mechanical checks and questions to the decision model, routed to `pass`, `finding`, `not_applicable` or `uncertain` for each piece. The judge sees the standard's own words beside every piece, so mark only text whose own wording is the standard. A sentence that would need rewording to be checkable isn't ready for a marker: the rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
+
+A good decision model asks only of the pieces its standard covers. Most kinds hold pieces a standard doesn't govern: a list item that is a label, a section that is a lookup table, a paragraph that is a local instruction rather than a rule. A gate ends those `not_applicable` before the walk reaches the verdict step, so no verdict answer ever decides them. A walk that ends before its first question, as one stopped by a mechanical gate placed first does, sends nothing to the decision model; a question gate's answer comes back in the same request as the verdict's, and the walk reads only the answers its path needs. A piece whose answers fall between the thresholds comes back as `uncertain` for the agent running the check to decide.
 
 Most of a skill should never become a rule. Each standard lands in exactly one of five outcomes:
 
 | outcome | when | marked |
 | --- | --- | --- |
-| deterministic (a mechanical `expect` or `ast_grep` rule) | the property is visible in one unit's text or structure, and the check passes every text that keeps the standard and fails every text that breaks it | yes |
-| model-judged (judgment threshold) | deciding needs reading comprehension, and the marked wording alone is a good question | yes |
-| review-only | it needs cross-file, history or intent judgment, or a target the engine can't select; `skill-review` owns it | no |
+| deterministic (a mechanical check in the decision) | the property is visible in one field of one piece, and the check passes every piece that keeps the standard and fails every piece that breaks it | yes |
+| model-judged (questions in the decision) | deciding needs reading comprehension, one piece's fields hold what the judgment needs, and the marked wording alone states the standard | yes |
+| review-only | it needs cross-file, history or intent judgment, or a piece no evidence kind picks; `skill-review` owns it | no |
 | eval | it is about what an agent does under pressure; it belongs in evals or pressure scenarios | no |
 | prose | teaching, rationale or stance with no checkable claim | no |
 
-Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. The proxy may be marked too, but only on its own wording that says exactly what it checks, and the decision table records it as a proxy for the standard it approximates.
+Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. A proxy may still be a mechanical step inside the standard's decision, such as a gate, but never its verdict.
 
-The engine's docs own every exact schema: the `sunstack-rule` CLI README, its RuleSet, rules-object and check-input schemas, and any verify skill the repository ships for the engine. Read them in the repository you're working in before writing an entry.
+The engine's lint documentation owns every exact shape: the config, the rule entry, the question types, the decision steps and the report. Read it, and the rules files the repository already has, before writing an entry.
+
+IF a step runs this plugin's rules on a skill's files instead of writing or proving rules, as a writer's self-check, a review's first rule pass, a release's prove step or an audit does, load `references/running-rules.md` and return the run's status, each finding with its file, line and your call, each `uncertain` piece with your decision, and each gap. That run ends with its return; the workflow below is for writing and proving rules.
 
 ## Workflow
 
@@ -31,47 +35,50 @@ Read the skill's `SKILL.md` and every reference whose standards are in scope. Li
 
 ### 2. Classify each standard
 
-MUST load `references/decision-matrix.md` and return, for each candidate, its outcome, the reason stated as the property that outcome depends on, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each proxy is named as one; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule ID. A candidate that reads as a question only after a rewrite goes back to `skill-creation` unmarked.
+MUST load `references/decision-matrix.md` and return, for each candidate, its outcome with the property that outcome depends on, and for each marked outcome its evidence kind, its gate or why it needs none, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each marked outcome names an evidence kind whose pieces hold what the standard judges; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule. A candidate that reads as a standard only after a rewrite goes back unmarked, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
 ### 3. Mark the standards
 
-MUST load `references/markers-and-rules.md` and return, for each deterministic or model-judged standard, its host and marker, its rules entry, and the RuleSet change that wires it, to apply in steps 3 to 5.
+MUST load `references/markers-and-rules.md` and return, for each marked standard, its host and marker, its rule entry, and any change to the config's rulebook pairs or evidence kinds, to apply in steps 3 to 5.
 
-Mark the narrowest host that carries the whole standard: a list item or paragraph before a section, and a section only when the whole section is one standard and stays under the RuleSet's `max_question_words` (400 by default). The marker is the last thing on its line in the host, touches heading text with no space, uses the RuleSet's prefix letter, and appears at most once per Markdown file; one file may carry many distinct IDs. Completion: every marker sits on an allowed host, and the host's visible words, read with nothing around them, state the standard.
+Mark the narrowest host that carries the whole standard: a list item or paragraph before a section, and a section only when the whole section is one standard and stays under the config's `max_question_words`. The marker is the last thing on its line in the host, touches heading text with no space, uses the config's prefix letter, and appears at most once per Markdown file; one file may carry many distinct IDs. Completion: every marker sits on an allowed host, and the host's visible words, read with nothing around them, state the standard.
 
-### 4. Write the rules entries
+### 4. Write the rule entries
 
-Write one entry per marker in the rules file paired with that Markdown file, keyed by the marker ID: a `name` that becomes the rule ID, a `target` with an explicit input, and exactly one of a judgment `threshold`, an `expect` predicate or an `ast_grep` rule. Calibration examples go in the entry's `context`, never into the marked wording. Completion: every marker has one entry and every entry one marker, and each entry's check kind matches its standard's outcome from step 2.
+Write one entry per marker in the rules file paired with that Markdown file, keyed by the marker ID: a `name` that becomes the rule ID, the `evidence` kind, the `questions` the decision may ask, the `decision` graph, and the `severity`. A judged entry has a gate whenever its kind holds pieces the standard doesn't cover, and states its thresholds; a mechanical check whose failure is itself a breach of the standard ends in a `finding` with no question asked. Completion: every marker has one entry and every entry one marker; each entry's checks and questions match its standard's outcome from step 2; every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs.
 
-### 5. Wire the RuleSet
+### 5. Pair the rulebook in the config
 
-Open the invocation the repository runs and the RuleSet it names. Add the Markdown and rules pair to `rule_sources` with paths relative to the RuleSet file and the matching `marker_prefix`, and align each entry's target and context inputs with the RuleSet's input declarations and the invocation's bindings. Completion: `check_rules` with `output: assembled_rules` lists every intended rule ID and the expected count, and every refusal on the way was fixed at the cause its code names. A clean check that omits them is not wired.
+Open the config the repository's rule runner uses. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config; when an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 6) lists every intended rule with the expected count. A clean check that omits one is not paired.
 
 ### 6. Prove each rule
 
-MUST load `references/check-and-reports.md` and return the check outcome, the printed wording of each intended rule with your reading of it, and for each mechanical rule the selected good and bad occurrences with their completed results.
+MUST load `references/check-and-reports.md` and return the check's outcome and printed rules, the evidence print for each rule's kind with the pieces you meant it to judge, and the rule tests for each rule with their per-rule results.
 
-Completion: `check_rules` passes on the real binary; print (`check_rules` with `output: assembled_rules`) shows every intended rule ID, the count, and each question reading as its standard; for every mechanical rule, the intended good occurrence was selected and completed `pass` and the intended bad occurrence was selected and completed `fail`. An exit code, zero matches or partial coverage never closes calibration. Recommend a `check_rules` run per RuleSet in CI.
+Completion: the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question; the evidence print shows each rule's intended good and bad pieces with their fields filled; every mechanical rule has edge tests with no model that pass and fail where the standard does; every judged rule has labelled development cases run on the decision model, and its held-out results once its entry is frozen, or the missing ones named as unproven. Rules run locally, by the skills that use them, not in CI.
 
 ### 7. Return
 
-Return the decision table, the diff, and the check output and evaluation reports its proof column cites:
+Return the decision table, the diff, and the check, evidence and rule-test results its proof column cites:
 
 ```text
-| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | check | proxy for | proof |
+| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | evidence | gate | verdict | proxy for | proof |
 ```
 
-One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the good and bad results for a mechanical rule and `printed` for a model-judged one. Name what stays unproven: check and print don't show how well a hosted judge answers a model-judged question.
+One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the edge results for a mechanical rule and the development and held-out results for a judged one. Name what stays unproven: named cases test a rule's decisions on chosen pieces, not how many real pieces its evidence kind misses, and no result here makes a judged rule ready to block.
+
+Completion: the table has one row for every candidate step 1 listed; each marked row's proof points at a check, evidence print or rule-test result you kept; and every rule still owed a result is named as unproven, with what would close it.
 
 ## Completion Blockers
 
 The run is not done while any of these hold:
 
 - a candidate has no outcome, or its reason doesn't name the property;
-- a deterministic outcome rests on a check nobody searched for counterexamples, or a proxy is recorded as capturing the standard it approximates;
+- a deterministic outcome rests on a check nobody searched for counterexamples, or a proxy is recorded as the standard's verdict;
 - a review-only, eval or prose standard carries a marker;
 - a marker sits on wording that needed rewording to read as its standard;
+- a judged entry asks of every piece of a kind that holds pieces its standard doesn't cover, with no gate;
 - a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
-- the assembled output lacks an intended rule ID, or the count is off;
-- a mechanical rule lacks a selected good `pass` and a selected bad `fail` in the native reports;
-- `check_rules` wasn't run with the real binary, or a passing check is claimed as proof that a rule detects anything.
+- the check's print lacks an intended rule, or the count is off;
+- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases;
+- the check wasn't run on the real engine, or a passing check or evidence print is claimed as proof that a rule decides well.
