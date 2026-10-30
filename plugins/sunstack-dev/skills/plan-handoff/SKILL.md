@@ -27,21 +27,35 @@ Package an existing implementation plan so another agent can review or execute w
 
 ## Workflow
 
-1. Resolve the repo root with `git rev-parse --show-toplevel` when possible.
-2. Resolve the source plan artifact or plan packet. If none exists, apply the core routing rule and stop.
-3. If a source file exists, read the whole file before summarizing. A heading search, path listing, or user summary is not a substitute for the plan contents.
-4. MUST load `../../shared-references/canonical-implementation-plan.md` to validate the existing completed plan and preserve it without re-authoring, and return the unchanged plan record, governing basis, delivery context, and any blocking discrepancy for the handoff packet.
-5. Inspect only the secondary code/docs needed to make the handoff grounded.
-6. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred plan scope, and exact user-direction evidence; otherwise preserve the current Lead as planning owner.
-7. Create the temp artifact directory. Include repo, branch/worktree, and plan slug in the path.
-8. Write at least:
+1. Resolve the repo root with `git rev-parse --show-toplevel` when possible, then the source plan artifact or plan packet. If none exists, apply the core routing rule and stop. If a source file exists, read the whole file before summarizing. A heading search, path listing, or user summary is not a substitute for the plan contents.
+
+   Completion: the repo root and the source plan are named and the plan was read end to end, or the core routing rule sent the request elsewhere and the run stopped.
+
+2. MUST load `../../shared-references/canonical-implementation-plan.md` to validate the existing completed plan and preserve it without re-authoring, and return the unchanged plan record, governing basis, delivery context, and any blocking discrepancy for the handoff packet.
+
+   Completion: the plan record, governing basis and delivery context are carried unchanged, and each blocking discrepancy is named, or none.
+
+3. Inspect only the secondary code/docs needed to make the handoff grounded.
+
+   Completion: every existing code or doc path the packet cites as evidence was opened in this run; each path the plan declares as new is kept and marked intentionally new, not created; evidence that couldn't be opened is named as a gap.
+
+4. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred plan scope, and exact user-direction evidence; otherwise preserve the current Lead as planning owner.
+
+   Completion: the line reads `none` and names the current Lead as planning owner, or names the recipient, the transferred scope and the user's own words that authorize the transfer.
+
+5. Create the temp artifact directory, with repo, branch/worktree, and plan slug in the path, and write at least:
    - `plan-handoff.md`
    - `copy-paste-prompt.md`
-9. Print a TUI-friendly response with:
+
+   Completion: both files exist in that directory, each filled from the handoff template with the source plan path, governing basis and delivery context; under read-only authority, the prompt is returned inline instead and no file is claimed.
+
+6. Print a TUI-friendly response with:
    - artifact path
    - full clickable artifact links (absolute path + line)
    - copy-paste prompt
    - what the next agent should inspect first
+
+   Completion: on the write-enabled route, the response carries all four and its prompt is the one in `copy-paste-prompt.md`, word for word; under read-only authority, it carries the complete prompt inline with the source plan path, governing basis and delivery context, and says that no file was created.
 
 ## Progressive Disclosure
 

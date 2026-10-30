@@ -1,6 +1,6 @@
 ---
 name: plan-improve-repo
-description: "Use when auditing a repository for improvement opportunities, backlog-worthy refactors, quality gaps, or leverage points and turning admitted findings into implementation plans. Not for planning directly from a reviewed design (plan-implementation)."
+description: "Use when auditing a repository for improvement opportunities, backlog-worthy refactors or quality gaps, and turning admitted findings into plans. Not for planning from a reviewed design."
 ---
 
 # Plan Improve Repo
@@ -75,6 +75,9 @@ Completion: every written plan carries one current admissible planning basis, th
    - build, test, lint, typecheck, and CI commands
    - recent churn from git history
    - obvious risk surfaces: auth, secrets, parsing, filesystem, network, subprocesses, plugins, MCP, package scripts, agents, external services
+
+   Completion: each item above is filled from files or history read in this run, or marked absent.
+
 2. Audit improvement categories:
    - correctness and behavior
    - security and trust boundaries
@@ -83,20 +86,35 @@ Completion: every written plan carries one current admissible planning basis, th
    - performance and reliability
    - developer experience and tooling
    - docs or onboarding drift
+
+   Completion: each category is marked inspected, with its anchors and its candidate or null result, or skipped with the reason, and each delegated category came back as evidence only.
+
 3. Vet candidates as the Lead. Before you accept a candidate as a finding, yours or a helper's, open each anchor it cites in the current checkout and name what that anchor shows and what it leaves open ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). Sort every candidate into one list:
    - accepted: its anchors establish the claimed problem
    - rejected: an anchor contradicts it, or it duplicates another finding; record the anchor or finding that rejects it
    - unknown: the anchors you could open neither establish nor contradict it; keep it apart from accepted findings
+
+   Completion: every candidate is in exactly one list, and each accepted or rejected one names the anchor that decides it.
+
 4. Prioritize by leverage:
    - user impact
    - risk reduction
    - implementation size
    - proof clarity
    - dependency order
+
+   Completion: the accepted findings are ranked, each with how it stands on the five factors.
+
 5. Classify each selected improvement under **Entry And Planning Admission**:
    - write plans only for `current-four-document-design-ready` or `implementation-mechanics-only`
    - preserve and route `design-required` findings without turning them into execution tasks
+
+   Completion: each selected improvement carries one planning basis, and each `design-required` one names its semantic owner.
+
 6. IF producing or revising a completed direct plan result, or validating or preserving an extant completed plan, load `../../shared-references/canonical-implementation-plan.md` to keep this skill's admitted-improvement and implementation-mechanics-only admission inline while applying the shared producer/validator contract, and return the complete canonical plan record or non-ready result plus any blocking discrepancy. For an orchestrated goal, return the admitted-finding handoff instead of writing the delivery plan. Audit-only runs and pre-artifact admission failures do not load it.
+
+   Completion: the canonical plan record or non-ready result is returned with any discrepancy, or the admitted-finding handoff for an orchestrated goal, or the run is audit-only or failed admission and the step didn't apply.
+
 7. Write one plan per admitted improvement that can return `ready`:
    - the Lead authors the entire plan; delegated evidence is verified input, never plan text or planning judgment
    - default to the top 3-5 in non-interactive runs
@@ -105,6 +123,9 @@ Completion: every written plan carries one current admissible planning basis, th
    - return `ready` with `requested terminal: plan-only`, or return `revision-requested | blocked` with `plan identity: none` and no artifact write
    - include planning-basis identity, exact files, current-state evidence, proof-bearing slices, proof gates, and stop conditions
    - choose each slice's proof with the proof-integrity check in Plan Validation Flow step 6
+
+   Completion: each admitted improvement has its own plan carrying every item above and returning `ready`, or a `revision-requested` or `blocked` result with `plan identity: none` and no artifact.
+
 8. Validate each generated ready plan without changing its plan record or planning result. A new `revision-requested` or `blocked` result has `plan identity: none` and skips artifact validation:
    - read the plan back after writing it
    - confirm every write surface exists or is intentionally new
@@ -112,10 +133,15 @@ Completion: every written plan carries one current admissible planning basis, th
    - confirm task size is small enough for proof to pass inside scope
    - confirm stop conditions cover stale repo state, unrelated validation failures, and security-sensitive surprises
    - return a separately labeled non-authoritative `Current-state validation receipt` with inspected branch/HEAD, paths, commands, findings, `ready | needs-refresh | blocked | rejected`, and next owner; this never collapses into the plan summary
+
+   Completion: each ready plan was read back after writing and has its separate receipt naming the branch and HEAD, the paths and commands checked, its findings and its verdict.
+
 9. Route next:
    - `plan-handoff` to package the plan for another agent
    - `plan-implementation` when an owner explicitly requests delivery of a direct plan-only result
    - `implementation-review` for independent implementation review
+
+   Completion: each plan has one next skill from this list, with the request or evidence that selects it.
 
 ## Plan Validation Flow
 

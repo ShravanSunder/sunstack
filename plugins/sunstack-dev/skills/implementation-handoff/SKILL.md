@@ -31,25 +31,41 @@ Package actual implementation state so another agent can review, continue, or au
    - `pre-review`: implementation is believed ready for review.
    - `post-review`: review feedback was addressed or needs another pass.
    - `blocked`: work cannot continue without a decision or missing evidence.
+
+   Completion: the stage is one of the four, with the evidence that puts the work there.
+
 2. Inventory current state:
    - repo root, branch/worktree, base/head when available
    - `git status --short`
    - changed files and diff summary
    - commits since base when relevant
    - plan/ticket/request source
+
+   Completion: each item is filled from a command run or a file read in this run, or marked unavailable with the reason.
+
 3. Inspect enough code/tests/docs to make the handoff accurate.
+
+   Completion: every claim the packet makes about code, tests or docs points at a file or command output opened in this run.
+
 4. Preserve the returned canonical plan record, governing basis, and delivery context, then bind implementation proof to that exact plan path and current meaning.
-5. Create the temp artifact directory.
-6. Write:
+
+   Completion: when a plan exists, the packet carries its record unchanged and each proof item names the plan path and the obligation it proves; otherwise it carries `plan identity: none` with the request or ticket identity, each proof item names the outcome it claims for that request, and no plan record is invented.
+
+5. Create the temp artifact directory and write:
    - `implementation-handoff.md`
    - `copy-paste-prompt.md`
-7. Print a TUI-friendly response with:
+
+   Completion: both files exist in that directory, filled from their templates with the inventory, the proof bound as step 4 binds it and the stage's additions; a review-only prompt says "do not edit files".
+
+6. Print a TUI-friendly response with:
    - artifact paths
    - full clickable artifact links (absolute path + line)
    - stage
    - changed files
    - validation evidence
    - exact copy-paste prompt
+
+   Completion: the response carries every item above, and its prompt is the one in `copy-paste-prompt.md`, word for word.
 
 ## Stage Guidance
 

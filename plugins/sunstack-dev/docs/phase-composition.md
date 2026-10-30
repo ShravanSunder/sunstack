@@ -21,21 +21,21 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | --- | --- | --- | --- | --- | --- |
 | orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
-| debug-investigation | 103 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
+| debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
-| docs-maintain | 105 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
+| docs-maintain | 119 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
 | implement-plan | 44 | `canonical-implementation-plan`, `execution-and-proof`, `practices-preflight`, `practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `practices-cleanup` | none | none |
-| implementation-handoff | 78 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
+| implementation-handoff | 94 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
 | implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
 | implementation-review | 81 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `proof-challenge`, `focused-reviewer` | none | none |
-| plan-handoff | 64 | `canonical-implementation-plan` | `handoff-template` | none | none |
+| plan-handoff | 78 | `canonical-implementation-plan` | `handoff-template` | none | none |
 | plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
-| plan-improve-repo | 174 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
+| plan-improve-repo | 200 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
 | plan-update | 35 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `presentation-html` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
 | program-design | 362 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
 | spec-design | 326 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
-| spec-handoff | 72 | none | none | none | none |
+| spec-handoff | 83 | none | none | none | none |
 | spec-program-review | 252 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
 | verification-design | 150 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
 
@@ -162,7 +162,7 @@ flowchart LR
 
 ### debug-investigation
 
-- Lines: 103
+- Lines: 126
 - Always loads:
   - none
 - Loads when a condition holds:
@@ -200,7 +200,7 @@ flowchart LR
 
 ### docs-maintain
 
-- Lines: 105
+- Lines: 119
 - Always loads:
   - own reference: `references/doc-roles.md`, `references/staleness-and-purge.md`
 - Loads when a condition holds:
@@ -229,7 +229,7 @@ flowchart LR
 
 ### implementation-handoff
 
-- Lines: 78
+- Lines: 94
 - Always loads:
   - own reference: `references/handoff-template.md`, `references/copy-paste-prompts.md`
 - Loads when a condition holds:
@@ -268,7 +268,7 @@ flowchart LR
 
 ### plan-handoff
 
-- Lines: 64
+- Lines: 78
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
 - Loads when a condition holds:
@@ -294,7 +294,7 @@ flowchart LR
 
 ### plan-improve-repo
 
-- Lines: 174
+- Lines: 200
 - Always loads:
   - practice: `practices-manage-agents`
 - Loads when a condition holds:
@@ -350,7 +350,7 @@ flowchart LR
 
 ### spec-handoff
 
-- Lines: 72
+- Lines: 83
 - Always loads:
   - none
 - Loads when a condition holds:
