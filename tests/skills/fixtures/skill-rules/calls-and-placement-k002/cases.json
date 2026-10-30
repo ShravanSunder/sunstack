@@ -1,0 +1,212 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/references/check-and-reports.md",
+      "startLine": 37,
+      "endLine": 84,
+      "fieldLine": 37
+    },
+    "excerpt": {
+      "path": "case-001/references/check-and-reports.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/docs-maintain/references/workflows.md",
+      "startLine": 3,
+      "endLine": 11,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-002/references/workflows.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "startLine": 60,
+      "endLine": 75,
+      "fieldLine": 60
+    },
+    "excerpt": {
+      "path": "case-003/references/calls-and-placement.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-rules/references/check-and-reports.md",
+      "startLine": 24,
+      "endLine": 35,
+      "fieldLine": 24
+    },
+    "excerpt": {
+      "path": "case-004/references/check-and-reports.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "startLine": 77,
+      "endLine": 92,
+      "fieldLine": 77
+    },
+    "excerpt": {
+      "path": "case-005/references/calls-and-placement.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "held-out",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+      "startLine": 22,
+      "endLine": 35,
+      "fieldLine": 22
+    },
+    "excerpt": {
+      "path": "case-006/references/proof-runs.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "held-out",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+      "startLine": 5,
+      "endLine": 14,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-007/references/agentstudio-loop.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "held-out",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/sunstack-dev/skills/practices-collaboration/references/work-home-discovery.md",
+      "startLine": 13,
+      "endLine": 24,
+      "fieldLine": 13
+    },
+    "excerpt": {
+      "path": "case-008/references/work-home-discovery.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "held-out",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/references/design-set.md",
+      "startLine": 17,
+      "endLine": 53,
+      "fieldLine": 17
+    },
+    "excerpt": {
+      "path": "case-009/references/design-set.md",
+      "line": 1
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "held-out",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+      "startLine": 9,
+      "endLine": 20,
+      "fieldLine": 9
+    },
+    "excerpt": {
+      "path": "case-010/references/proof-runs.md",
+      "line": 1
+    }
+  }
+]
