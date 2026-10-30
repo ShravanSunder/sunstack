@@ -55,7 +55,7 @@ Package actual implementation state so another agent can review, continue, or au
    - `implementation-handoff.md`
    - `copy-paste-prompt.md`
 
-   Completion: both files exist in that directory, and a review-only prompt says "do not edit files".
+   Completion: both files exist in that directory, filled from their templates with the inventory, the proof bound to the plan and the stage's additions; a review-only prompt says "do not edit files".
 
 6. Print a TUI-friendly response with:
    - artifact paths
