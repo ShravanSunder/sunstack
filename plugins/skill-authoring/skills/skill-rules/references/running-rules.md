@@ -22,7 +22,7 @@ Read the status first, then every list, because warnings don't move the status. 
 
 | the report shows | what you do |
 | --- | --- |
-| a finding from a mechanical `error` rule | fix it before the calling step completes, then run again on the fixed files |
+| a finding from a mechanical `error` rule | a breach that must be repaired before the change completes; your step's part in the repair is under "Repair, by what the calling step may do" |
 | a finding from a mechanical `warn` rule | fix it, or name it in the return with the reason it stays |
 | a judged finding (it carries the model's answers) | a candidate: open its line and read the piece against the standard. Confirmed, fix it where the calling step's boundary lets you, or name it; not confirmed, explain why it doesn't hold. Never reword text only to clear a judged warning. |
 | an `uncertain` piece | yours to decide. Read the piece with the step it stopped at, its answers and its state, judge it against the standard yourself, fix or explain it, and report your call. It is never a pass. |
@@ -31,7 +31,13 @@ Read the status first, then every list, because warnings don't move the status. 
 | an incomplete part or a skipped rule | a gap, with its reason |
 | status `invalid` (including a refusal for no key), `cancelled` or `incomplete`, or a full-scope run with `nothing_selected` | a gap for the run: the rules didn't all run, so the return says which didn't and why |
 
-IF the run is refused at a line in a file the change edited (a marked standard's host, its rules file, or the config), load `markers-and-rules.md` and return the refusal's cause and fix from its repair table: the change broke a rule's definition, so fix it there and run again. A refusal at text the change didn't touch, and a refusal for no key, stay gaps.
+IF the run is refused at a line in a file the change edited (a marked standard's host, its rules file, or the config), load `markers-and-rules.md` and return the refusal's cause and fix from its repair table: the change broke a rule's definition, and it is repaired as the calling step may, below. A refusal at text the change didn't touch, and a refusal for no key, stay gaps.
+
+**Repair, by what the calling step may do.** Every caller reads each result the same way. What a step does about an `error` finding, or a refusal its change caused, follows the boundary that step already has:
+
+- a step that writes or releases the change, such as a writer's self-check or a release's prove step, fixes it before the step completes and runs again on the fixed files;
+- a review, which doesn't edit what it reviews, returns it as a candidate finding with its fix, and an accepted one blocks the ship decision until a correction fixes it;
+- an audit, which stays read-only, returns an `error` finding as a flag on its skill, with the fix in that skill's recommendation; it checks no change, so every refusal it meets is a gap.
 
 Pieces that are the same case, such as one label line repeated across several files, may be decided together, each still named with its file and line.
 
@@ -44,7 +50,7 @@ rules:      ran | not run: <reason>
 runner:     <the command, as the repository's instructions name it> | none named
 report:     <the path the runner printed>
 status:     <status>, exit <code>; usage <requests>, <cost>
-finding:    <rule> at <file>:<line> (<severity>, mechanical | judged): <message> -> fixed | confirmed, named: <why it stays> | explained: <why it doesn't hold>
+finding:    <rule> at <file>:<line> (<severity>, mechanical | judged): <message> -> fixed | raised as a candidate | flagged | confirmed, named: <why it stays> | explained: <why it doesn't hold>
 uncertain:  <rule> at <file>:<line> (stopped at <step>): <your call: pass | finding | not applicable>, <one-line reason> -> fixed | named | explained
 gap:        <the incomplete part, skipped rule, or refused, cancelled or nothing-selected run>: <reason>
 ```
@@ -57,6 +63,7 @@ Good and bad readings:
 - Bad: "rules pass" read from a `clean` status, while two warn findings sat in the list unread.
 - Bad: an `uncertain` piece counted as a pass, or left out of the return.
 - Bad: a sentence reworded until the judge said yes, when the sentence already met the standard.
+- Bad: a review or an audit that edits a 301-character description to clear its `error`. The review raises it as a candidate that blocks the ship decision; the audit flags its skill.
 - Bad: a run refused for a missing key, reported as clean, or pushed through with a stand-in key or endpoint.
 - Bad: a full run over a misspelt folder that selected nothing, reported as clean.
 
