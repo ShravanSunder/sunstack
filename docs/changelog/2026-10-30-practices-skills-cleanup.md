@@ -1,0 +1,10 @@
+# 2026-10-30 Practice skills cleanup
+
+`sunstack-dev` 2.100.2 → 2.100.4 (2.100.3 is the phase skills cleanup, a separate PR).
+
+- Nine practice skills checked against the creation-skill rules and fixed where a standard was really broken: `practices-cleanup`, `practices-collaboration`, `practices-how`, `practices-manage-agents`, `practices-preflight`, `practices-research`, `practices-retrospective`, `practices-show-me-your-work`, `practices-why`. Each skill's purpose, calls, returns and route tokens are unchanged.
+- All nine descriptions now fit the owner's limits (212–223 characters, from 243–434; five were over 300). Each keeps its loading moments and its `Not for` boundary; `practices-collaboration` and `practices-show-me-your-work` now open with `Use when`. Example phrases and the role list were cut before any moment; `practices-retrospective` drops the qualifier "blameless" and the synonym "look back".
+- `practices-cleanup` (steps 3 and 4) and `practices-preflight` (step 4) now state a completion an agent can check on every branch the step already supports. The cleanup completion keeps both authorized routes (the allow list with its checks, and an exact-action owner grant), and holds a candidate whose clean task refuses or whose allow-list condition fails.
+- Every numbered workflow in the nine skills was inventoried from source, including two the rule extractor selects no step from; their existing done states were found sufficient.
+- Validation: twelve rules (sunstack #171's frozen kit, local engine build) on Jev. Baseline over the nine: 5 errors, 23 warnings, 71 uncertain. Complete run over all nine at the final skill text: 0 errors, no description warning, 7 warnings, 74 uncertain, each warning and uncertain piece given a recorded disposition. `claude plugin validate .` passes.
+- Description trigger trials are not yet run (they wait on the owner's choice of how a fresh Luna session loads a branch plugin). Codex and Claude caches: not refreshed; release pending the owner's merge.
