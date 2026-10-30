@@ -1,6 +1,6 @@
 ---
 name: implement-plan
-description: "Use when executing or continuing one ready canonical implementation plan whose delivery context authorizes implementation, or correcting the implementation-owned findings of one review result. Not for plan or design defects, independent review, or PR work."
+description: "Use when executing or continuing one ready plan whose delivery context authorizes implementation, or correcting the implementation-owned findings of one review. Not for plan or design defects, independent review or PR work."
 ---
 
 # Implement Plan
