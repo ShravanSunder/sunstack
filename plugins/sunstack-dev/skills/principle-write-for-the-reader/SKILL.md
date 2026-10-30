@@ -1,6 +1,6 @@
 ---
 name: principle-write-for-the-reader
-description: "Use when writing a design, code, an instruction, or an explanation someone else must follow: a reviewer, a future maintainer, another agent, the owner tomorrow. Write so a reader with no context can answer their question quickly, restate the point, and find where to correct it."
+description: "Use when writing a design, code, an instruction, or an explanation someone else must follow: a reviewer, a future maintainer, another agent, the owner tomorrow."
 disable-model-invocation: true
 ---
 
