@@ -1,6 +1,6 @@
 # presentation-html: source-first collection preparation
 
-Revision 3. Target: `plugins/sunstack-dev/skills/presentation-html`. Run status: implemented after revision 3 spec review; current-main and two candidate applications completed, with no incremental efficacy claim. The agent-added manual path-link workaround is removed after evaluation; final independent review pending. Refresh of draft PR #167 onto current main. Supersedes revision 2's routine full-collection comparison and historical checkout-only CLI assumptions; the owner's later lightweight-authoring decisions govern.
+Revision 3. Target: `plugins/sunstack-dev/skills/presentation-html`. Run status: reviewed. Independent source/evidence review accepted the corrected implementation with no open findings; PR gates remain with the Lead. Current-main and two candidate applications completed with no incremental efficacy claim. The agent-added manual path-link workaround was removed after evaluation. Refresh of draft PR #167 onto current main. Supersedes revision 2's routine full-collection comparison and historical checkout-only CLI assumptions; the owner's later lightweight-authoring decisions govern.
 
 ## Success and basis
 
