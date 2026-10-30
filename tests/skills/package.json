@@ -7,7 +7,8 @@
     "test:unit": "vitest run lib --config vitest.config.ts",
     "test:evals": "vitest run evals --config vitest.config.ts",
     "typecheck": "tsc --noEmit",
-    "rules": "node scripts/run-skill-rules.ts"
+    "rules": "node scripts/run-skill-rules.ts",
+    "phase-composition": "node lib/phase-composition/write-phase-composition-map.ts"
   },
   "devDependencies": {
     "@sunstack/cli": "0.1.0",

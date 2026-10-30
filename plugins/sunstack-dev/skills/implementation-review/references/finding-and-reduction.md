@@ -77,7 +77,7 @@ Route by cause, not severity:
 
 - Requirements or observable-contract meaning -> `spec-design`.
 - Structural ownership, interface, state, failure, concurrency, trust, compatibility, or proof seam -> `program-design`.
-- Slice, sequence, dependency, collision, write scope, or plan-proof mapping -> the plan record's `plan-implementation` or `plan-improve-repo` origin.
+- Slice, sequence, dependency, collision, write scope, or plan-proof mapping on an existing plan -> `plan-update`.
 - Code, test, fixture, implementation-proof evidence, or a domain-skill rule -> `implement-plan`.
 - Missing authority or unresolved owner choice -> caller.
 

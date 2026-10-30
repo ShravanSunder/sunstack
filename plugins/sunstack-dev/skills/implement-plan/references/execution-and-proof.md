@@ -34,7 +34,7 @@ The ready frontier is the smallest plan slice whose prerequisites are proven and
 - The ready plan, selected slice, and any scoped handoff remain the contract for this implementation phase: their inputs, authoritative artifacts, task boundary, completion or escalation, and proof/results travel with the executor. In an orchestrated project flow, the 🐒 Implementer Sidekick delegates only through `practices-manage-agents`; `SKILL.md` owns execution responsibility.
 - Assignment may cover serial work. Parallel work is advisory and only eligible when the ready canonical plan identifies independent slices with disjoint writes after proven prerequisites. `practices-manage-agents` owns dispatch mechanics.
 - Contract-only or prefactoring work must name the downstream consumer it unlocks and integrate at that consumer's first interaction.
-- A slice too large to prove inside scope returns a split or plan-defect route before edits.
+- A slice too large to prove inside scope returns a split or plan-defect route to the Lead for `plan-update` before edits.
 
 Return the selected slice, prerequisites, allowed writes, non-goals, collision decision, and first integration gate. For one isolated slice with no separately changed parts, return `integration gate: not applicable` with that reason instead of inventing a gate.
 
@@ -59,7 +59,7 @@ Integrate only when every named prerequisite and the slice-local proof are green
 
 ## Fix an Accepted Review Finding
 
-Inspect the accepted finding, its source anchors, parent disposition, exact route, governing plan obligation, and prior proof before treating remediation as executable work. An implementation-owned correction changes code, tests, fixtures, or implementation-proof evidence inside approved meaning and write scope. A finding that changes an obligation, observable contract, owner, interface, state/failure policy, sequence, dependency, collision, proof seam, or authority routes to the applicable design or originating-plan owner instead.
+Inspect the accepted finding, its source anchors, parent disposition, exact route, governing plan obligation, and prior proof before treating remediation as executable work. An implementation-owned correction changes code, tests, fixtures, or implementation-proof evidence inside approved meaning and write scope. A finding that changes an obligation, observable contract, owner, interface, state/failure policy, sequence, dependency, collision, proof seam, or authority routes to the applicable design owner, or to `plan-update` for a plan change, instead.
 
 For the implementation-owned findings of one correction pass, select one bounded corrective slice, name its allowed writes, and map every obligation any of them affects to fresh proof the way Match Each Obligation to Proof does, with a new `practices-verification` result after the pass's last correction. Do not resolve a finding from reviewer prose or reuse proof produced before its correction. In an orchestrated project flow, return the pass's affected proof once, through orchestrator disposition, to the same 🔎 Reviewer Sidekick, which refreshes affected coverage. Stop before launching that review.
 
@@ -82,7 +82,16 @@ design break
 
 plan defect
   slice, sequence, dependency, collision, write scope, or proof mapping is wrong
-  -> stop at the recorded originating planner
+  -> stop and return it to the Lead for plan-update
+
+unnamed storage
+  the slice needs persisted data, a store or a schema the governing Program Design
+  doesn't bind -> return program-design-gap with the data and the evidence, before any code
+
+new technology
+  a runtime, storage engine, persistence library, migration tool or dependency the
+  repository doesn't already use, or a second one for a job it already does
+  -> raise it to the Lead for the owner before it is used
 
 out-of-scope infrastructure failure
   required tooling or environment failed outside the approved change surface
@@ -94,6 +103,8 @@ evidence gap
 ```
 
 Place each gap `practices-verification` returns in the same classes. A disputed expected outcome is a design break when the design owns that meaning, or a plan defect when the plan does. An unreachable target or setup, stale project verification instructions, or a driver defect outside the slice's write scope is an out-of-scope infrastructure failure, or an evidence gap when the observation needs new authority or a plan change. Product behavior that contradicts the expected outcome is the slice's own red, so fix it inside scope and prove it again. A failure with an unknown cause gets diagnosis before another fix.
+
+A plan names dependency edges and proof-bearing scope, not every library. Using a library or tool the repository already uses, the way it already uses it, continues without a stop, even when the plan doesn't name it. Before you add an import, package or tool, look for the one the repository already uses for that job, and raise a new or second one with the existing one named beside it ([the codebase's existing way wins over preference](../../principle-justify-the-complexity/SKILL.md)). A Node store the repository already keeps with Drizzle on better-sqlite3 gets Drizzle, not `node:sqlite`; a second persistence library chosen mid-build is new technology even when it looks like an implementation detail.
 
 Do not call a change reversible when it moves ownership, changes a public contract or data format, writes migration state, weakens proof, or becomes a prerequisite for other work before correction.
 

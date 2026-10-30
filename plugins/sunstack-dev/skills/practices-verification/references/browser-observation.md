@@ -26,6 +26,8 @@ A browser suite the project already commits runs through the project's own comma
 
 Look at the visible result the claim promises at the claimed size. When the claim depends on a request, storage or a cookie, inspect that effect too: the request the action sent, the response it got and the state left behind. Tie each effect to your action, for example by the value you entered or the id the response returned. A toast, a spinner that stops or a 200 status is an acknowledgement. Persistence needs a readback through a fresh load or a second session, and a claim about errors needs the failing input driven through the same page.
 
+Let the claim pick the evidence. The DOM, the accessibility tree or a response establishes content and state. A visual claim, that something is readable, fits, isn't clipped or groups as designed, needs the rendered page, judged by you at each width the claim covers, with each secondary surface it opens, such as a popover, a menu or a dialog, open. Text present in the DOM can still be clipped or hidden on screen, so a visual claim the DOM alone supports stays unknown.
+
 ## Examples
 
 The pages, fields and flows below are illustrative.
@@ -44,4 +46,4 @@ The project commits a browser journey for draft editing that reloads and asserts
 
 ## When to stop
 
-Stop when the action, the scene and each effect the claim names were observed on the pinned build, backend, session and size, each tied to your action, with persistence or failure behavior driven where the claim covers it; or when the outcome you couldn't reach is named with what blocked it, such as a login, missing data or an environment you can't open.
+Stop when the action, the scene and each effect the claim names were observed on the pinned build, backend, session and size, each tied to your action, with each visual claim judged from the rendered page at every width it covers, with persistence or failure behavior driven where the claim covers it; or when the outcome you couldn't reach is named with what blocked it, such as a login, missing data or an environment you can't open.

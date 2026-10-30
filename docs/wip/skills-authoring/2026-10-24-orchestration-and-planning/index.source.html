@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Focus 2: orchestration and planning</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+
+<ex-presentation id="end-to-end" title="Focus 2, end to end" description="The planning lifecycle, how you read designs, what phases are made of, and the evidence behind the testing rules.">
+  <ex-step to="planning--diagram-1" icon="path">How a plan is born, reviewed by you and changed during delivery.</ex-step>
+  <ex-step to="planning--requirements" icon="user">Your words this part answers.</ex-step>
+  <ex-step to="reading--what-demistify-gives-us">What the page library can actually do, read from its live guide.</ex-step>
+  <ex-step to="reading--the-owner-s-questions-and-the-views-that-answer-them">Each view on a page, by the question it answers for you.</ex-step>
+  <ex-step to="composition--today-measured" icon="stack">What each phase is made of today, counted from the skill files.</ex-step>
+  <ex-step to="testing--evidence-the-design-must-answer" icon="test-tube">The retrospective evidence the testing rules must answer.</ex-step>
+  <ex-step to="planning--decisions">The decisions, including the two waiting for you.</ex-step>
+</ex-presentation>
+
+<ex-presentation id="plan-changes" title="A plan changes mid-delivery" description="A dependency change, a plan-defect finding or a design correction, through plan-update and the Verification Design.">
+  <ex-step to="planning--situations">Situations 3, 4 and 5 are the three ways a plan's meaning changes.</ex-step>
+  <ex-step to="planning--r3-plan-update-a-new-skill" icon="path">The new skill and its main step.</ex-step>
+  <ex-step to="planning--r6-verification-design" icon="test-tube">When a Verification Design row is stale.</ex-step>
+  <ex-step to="planning--r4-canonical-implementation-plan-md">How a superseding plan records what changed.</ex-step>
+  <ex-step to="reading--the-owner-s-questions-and-the-views-that-answer-them">The plan change view you see.</ex-step>
+</ex-presentation>
+
+<ex-presentation id="owner-review" title="You review a new feature" description="The design cycle's last step: the first plan and one page over the design and the plan.">
+  <ex-step to="planning--situations" icon="user">Situations 1, 2 and 8: a new feature, improvement work, and no answer yet.</ex-step>
+  <ex-step to="planning--r1-orchestrator-design">The plan step at the end of the design cycle.</ex-step>
+  <ex-step to="reading--situations">Situations 1 and 2: what you open and the end-to-end walkthrough.</ex-step>
+  <ex-step to="reading--r2-presentation-html">How the page is built.</ex-step>
+</ex-presentation>
+
+<ex-presentation id="slice-start" title="An Implementer starts a slice" description="One list of reads in the plan serves the Implementer's commission and your walkthrough of that slice.">
+  <ex-step to="planning--situations" icon="robot">Situation 7: the slice's reads become the commission's required reads.</ex-step>
+  <ex-step to="planning--r2-plan-implementation-the-first-plan">The first plan lists each slice's reads.</ex-step>
+  <ex-step to="reading--diagram-1">One source, read two ways.</ex-step>
+  <ex-step to="reading--situations">Situation 3: the PR walkthrough you open.</ex-step>
+  <ex-step to="planning--r7-implement-plan">The executor's side.</ex-step>
+</ex-presentation>
+
+
+
+
+<ex-document id="content">
+<h1>Focus 2: orchestration and planning</h1>
+
+<p>What changes in how plans are made, reviewed and changed, and how you read the designs behind them. Press <kbd>W</kbd> for the walkthroughs, or open a part below.</p>
+
+<ul>
+  <li>How a plan is born, reviewed by you and changed during delivery: <a href="#planning--design-runs">Part A, planning lifecycle →</a></li>
+  <li>How you read a design and follow a feature through its PRs and slices: <a href="#reading--the-owner-s-questions-and-the-views-that-answer-them">Part B, readable design sets →</a></li>
+  <li>What each phase is made of: <a href="#composition--today-measured">Part C, phase composition →</a></li>
+  <li>Test pyramid, driver language and running checks without hooks: <a href="#testing--testing-and-verification-rules">Part D, testing and verification →</a></li>
+  <li>Which skill each run changes, the work that changes none, security and release: <a href="#coordination--skill-runs">Coordination →</a></li>
+</ul>
+
+<ex-callout title="Three decisions wait for you" tone="decision">
+  <p>Part A, D7 and D8: when the global prompt drops its PR-shape rule, and where a design-set plan lives. <a href="#planning--decisions">Part A's Decisions →</a></p>
+  <p>Part D, D-D4: formal verification and statecharts, later or not at all. <a href="#testing--decisions">Part D's Decisions →</a></p>
+</ex-callout>
+
+<p>Start with the lifecycle: <a href="#planning--diagram-1">the planning lifecycle diagram →</a></p>
+
+<ex-tabs label="Focus 2 documents" data-width="canvas">
+  <section id="part-a" label="A · Planning lifecycle" icon="path">
+    <ex-markdown id="planning" label="Part A: planning lifecycle" src="./planning-lifecycle.md"></ex-markdown>
+  </section>
+  <section id="part-b" label="B · Readable design sets" icon="user">
+    <ex-markdown id="reading" label="Part B: readable design sets" src="./readable-design-sets.md"></ex-markdown>
+  </section>
+  <section id="part-c" label="C · Phase composition" icon="stack">
+    <ex-markdown id="composition" label="Part C: phase composition" src="./phase-composition.md"></ex-markdown>
+  </section>
+  <section id="part-d" label="D · Testing rules" icon="test-tube">
+    <ex-markdown id="testing" label="Part D: testing and verification" src="./testing-and-verification.md"></ex-markdown>
+  </section>
+  <section id="part-coordination" label="Coordination" icon="package">
+    <ex-markdown id="coordination" label="Coordination: allocation, security and release" src="./coordination.md"></ex-markdown>
+  </section>
+</ex-tabs>
+</ex-document>
+</body>
+</html>

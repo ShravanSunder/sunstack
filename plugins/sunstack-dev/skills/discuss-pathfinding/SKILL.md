@@ -1,6 +1,6 @@
 ---
 name: discuss-pathfinding
-description: "Use when requirements, user needs, domain terms, tacit process, or owner tolerances are unwritten and must be drawn out of someone's head: \"grill me\", \"interview me\", \"help me figure out what I actually want\". Not for authoring from settled sources."
+description: "Use when requirements, user needs, domain terms, tacit process or owner tolerances are unwritten and must be drawn out of someone's head: \"grill me\", \"interview me\". Not for authoring from settled sources."
 ---
 
 # Discuss Pathfinding

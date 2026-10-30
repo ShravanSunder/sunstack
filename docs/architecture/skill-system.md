@@ -21,7 +21,7 @@ The `sunstack-dev` layers separate decisions that change for different reasons. 
 | `domain-*` | Subject-specific knowledge a caller loads | TypeScript, Python and Rust standards |
 | `principle-*` | One engineering judgment applied at a concrete decision | One owner per truth; verify before accepting |
 
-The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. Neither index replaces reading the selected skill.
+The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. The [phase composition map](../../plugins/sunstack-dev/docs/phase-composition.md), generated from the skill files and drawn on [its page](../../plugins/sunstack-dev/docs/phase-composition.html), shows what each orchestrator and phase loads, cites and returns. None of them replaces reading the selected skill.
 
 An orchestrator calls phases. A phase may use other skills at its own layer and methods below it, but does not call an orchestrator to decide its own continuation. Practices and tool manuals do not route upward into phases or roles. They return the supported result or a gap. A [phase return token](../../plugins/sunstack-dev/shared-references/phase-return-tokens.md) carries the gap and its evidence to the caller, which selects its owner within the existing task. A token never grants new scope.
 
@@ -81,7 +81,7 @@ The [rendering reference](../../plugins/sunstack-dev/shared-references/diagram-r
 
 ## From design to delivery
 
-Design-only work ends at its reviewed design or exact gap. Planning does not begin simply because a preceding phase finished. When delivery is authorized, [plan-implementation](../../plugins/sunstack-dev/skills/plan-implementation/SKILL.md) creates the canonical proof-bearing plan from a current admitted design basis, and [implement-plan](../../plugins/sunstack-dev/skills/implement-plan/SKILL.md) executes that plan's slices. The implementation orchestrator owns continuation within the requested delivery boundary.
+Design-only work ends at its reviewed design or exact gap. A first design cycle ends with the first plan: [plan-implementation](../../plugins/sunstack-dev/skills/plan-implementation/SKILL.md) creates the canonical proof-bearing plan from the reviewed design, and the owner reviews it beside the design. A goal that starts without a design-cycle plan loads `plan-implementation` itself. During delivery, [plan-update](../../plugins/sunstack-dev/skills/plan-update/SKILL.md) writes a superseding plan whenever a ready plan's meaning changes, and [implement-plan](../../plugins/sunstack-dev/skills/implement-plan/SKILL.md) executes the current plan's slices. The implementation orchestrator owns continuation within the requested delivery boundary.
 
 The executor supplies fitting change proof. The Lead assesses the diff and evidence before [independent implementation review](../../plugins/sunstack-dev/skills/implementation-review/SKILL.md). Corrections return to their cause's owner. [PR wrap-up](../../plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md) handles publication, checks, comments, mergeability and the authorized terminal. Source review, tests, real-system observation, installed delivery, PR readiness and merge are separate claims.
 

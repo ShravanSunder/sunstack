@@ -1,6 +1,7 @@
 # Changelog
 
 - [2026-10-28 Lightweight HTML authoring](2026-10-28-lightweight-html-authoring.md)
+- [2026-10-27 Orchestration and planning](2026-10-27-orchestration-and-planning.md)
 - [2026-10-27 Skill authoring: standards root and design](2026-10-27-skill-authoring-root-and-design.md)
 - [2026-10-27 Domain Rust: crates set the dependency direction](2026-10-27-domain-rust-crate-dag.md)
 - [2026-10-26 Presentation HTML capture variations and verification scope](2026-10-26-presentation-verification-scope.md)

@@ -18,6 +18,10 @@ Read the project skill and instructions for the inspection and control routes th
 
 After every action, read the UI again from the app. A screenshot or accessibility tree taken before the action describes the old state. Observe the effect the claim names in the place it lands: the pane the message reaches, the file the export writes, the window that opens. For a routing claim, also check the place the effect must not reach. When the claim crosses a restart, quit the app, relaunch the same build and compare what comes back.
 
+## Let the claim pick the evidence
+
+What a claim is about decides what can establish it. The accessibility tree, a log or a state file establishes content and state: which labels exist, which row is selected, what a field holds. A visual claim, that something is readable, fits, isn't clipped or groups the way the design intends, needs the rendered pixels, judged by you at each width the claim covers, with each secondary surface the claim opens, such as a popover or a menu, open. A visual claim the tree alone supports stays unknown.
+
 ## Examples
 
 The apps, panes and paths below are illustrative.
@@ -30,10 +34,14 @@ The claim is that a message sent to pane B appears in pane B. A UI test asserts 
 
 The agent builds the change, then opens the app by name. The system launches the copy installed weeks ago, which behaves the old way, and the agent reports a regression. Binding the path and build identity of the running process before observing would have shown the wrong executable.
 
+### Failed: the popover the tree called complete
+
+The claim is that the Messages popover is readable at the narrowest supported width. The accessibility tree lists every button label and message body, and the agent reports the claim passing. On screen the labels are cut off and the bodies collapse into one line. The tree established the content and said nothing about what the user can read. The observation that decides it opens the popover at that width, captures the frame and judges it, which fails here. The same popover with each label whole and each body readable in that frame passes.
+
 ### Clean: bound, driven, read back
 
 The agent builds the debug configuration the project skill names, launches that bundle path and confirms the running process's path and build identity match. It drives the send through computer use, reads pane B and pane A again after the action, then quits, relaunches the same bundle and sees the message still in pane B. It reports the bundle path, the configuration, the actions and what each read showed.
 
 ## When to stop
 
-Stop when the running executable is bound to the intended path, build and configuration, the claimed effect and any must-not-happen effect were read from current app state through an allowed route, and a restart claim was checked across a relaunch of the same build; or when the gap is named, such as a missing permission, an unreachable device or a build that wouldn't launch, together with what the build or launch alone did and didn't show.
+Stop when the running executable is bound to the intended path, build and configuration, the claimed effect and any must-not-happen effect were read from current app state through an allowed route, a visual claim was judged from rendered frames at each width it covers with its secondary surfaces open, and a restart claim was checked across a relaunch of the same build; or when the gap is named, such as a missing permission, an unreachable device or a build that wouldn't launch, together with what the build or launch alone did and didn't show.

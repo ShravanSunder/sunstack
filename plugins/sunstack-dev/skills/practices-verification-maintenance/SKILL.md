@@ -1,6 +1,6 @@
 ---
 name: practices-verification-maintenance
-description: "Use when creating or maintaining a project's verification skill, including its owned journeys and drivers. Not for one ordinary verification run, a driver-only task without a project-skill target, product repairs or delivery acceptance."
+description: "Use when creating or maintaining a project's verification skill, its journeys and drivers. Not for one ordinary verification run, a driver-only task without a project-skill target, product repairs or delivery acceptance."
 ---
 
 # Practices: Verification Maintenance

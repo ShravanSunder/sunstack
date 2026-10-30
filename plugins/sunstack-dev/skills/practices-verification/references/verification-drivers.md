@@ -14,6 +14,12 @@ Read the assignment for driver work and the paths it names. Write access to prod
 
 Read the project skill, the project's scripts and task runner entries, and the existing test harness before writing anything. Fix the existing driver at its owner when one exists. Write new code only for the piece that is missing, keep it the smallest reusable piece at the named paths, and use real commands, selectors and paths read from source, never ones recalled from another project.
 
+## Choose the language and the owner on purpose
+
+A driver uses the repository's own language and existing harness first, and a project rule wins over both, such as the Router repository's "TS, Rust, or ask". In a Rust-only repository the driver is Rust; proposing TypeScript there adds a runtime. Adding a new runtime, even TypeScript, or growing a lasting harness from an extension into its own subsystem, is a design tradeoff: return it to the Lead with its toolchain and upkeep cost, and the Lead brings it to the owner.
+
+A harness built from several pieces has one integrating owner, and its composed route is rehearsed on the real target before anyone depends on it. Show each new journey or test file on the CI path that runs it, because adding a file doesn't add it to an explicit module list.
+
 ## Build it in pieces you can run alone
 
 A driver usually has a launch, a readiness check, an action, an observation and a cleanup. Make each substantive piece runnable on its own and run it alone before composing the route. A readiness check that only sees a port answer, or a cleanup that kills by a broad process name, fails there instead of hiding inside a composed run. Use readiness and completion signals the target owns, with bounds; a fixed sleep or a hardcoded port is a guess about someone else's machine.
@@ -44,4 +50,4 @@ The assignment names `verify/desktop/` for driver upkeep, and the claim is that 
 
 ## When to stop
 
-Stop when the change sits inside the named paths, each substantive piece ran on its own, the composed driver made the claimed observation on its declared real target, and it was seen to fail on a known-bad case or the missing sensitivity is named; or when the scope, seam or prerequisite gap is returned without writing.
+Stop when the change sits inside the named paths, its language follows the repository or a project rule or went to the Lead as a tradeoff, each substantive piece ran on its own, the composed driver made the claimed observation on its declared real target, and it was seen to fail on a known-bad case or the missing sensitivity is named; or when the scope, seam or prerequisite gap is returned without writing.

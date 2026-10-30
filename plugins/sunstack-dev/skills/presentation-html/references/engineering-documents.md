@@ -6,7 +6,9 @@ MUST load `../../../shared-references/design-documents.md` and return the four c
 
 ## Compose the set
 
-Keep the complete Markdown of each source chunk in its own island; a single-file document uses one island. Do not concatenate chunks into a page-owned replacement.
+The set's page is a collection: a home page, one page per document, and a plan page once the set has a plan. The Pages menu joins them, and `demistify index` makes their headings and walkthroughs searchable together. Keep the complete Markdown of each source chunk in its own island; a single-file document uses one island. Do not concatenate chunks into a page-owned replacement.
+
+The plan page composes the current plan file from the set's `plans/` folder as its island. It draws the delivery map from the plan's slices and, for a superseding plan, the plan change view from its "Changed from" section, both through `views.md`. When a plan is superseded, the plan page and each PR walkthrough follow the superseding plan. No page logic lives in the plan.
 
 When a design view is named, load `views.md` and take its page form from there. The table below gives each document's reader question and its usual views; the owning skills supply each view's fields.
 
@@ -19,24 +21,42 @@ When a design view is named, load `views.md` and take its page form from there. 
 
 Follow step 1's human-entry route and the result already required from `../../../shared-references/diagram-rendering-and-fallbacks.md`. The set's `index.md` remains the agent entry. Its document entries and reading paths decide which source chunks each island and Walkthrough uses. Present each source once. The page adds navigation, one reader-focused opening slice, and views that make relationships easier to inspect. Keep every Mermaid source in its owning Markdown chunk, and keep each view traceable to that chunk. The page adds no normative prose, obligation, owner, threshold, decision, phase rule or status field.
 
-## Open with the answer and one slice
+## Open with the answer, then in the owner's order
 
-The first screen tells the reader where each part of the answer lives. For each part of the question, write one framing line that states no rule and links to the document or heading that answers it. Then open on the slice that matters most, through a link to the owning chunk's diagram or a Walkthrough stop on that chunk's heading. Do not restate a requirement, obligation, threshold or decision in the page's own words, even in a card. Never show a second copy of a diagram or an island smaller than a chunk. Keep the important failure cases named even when their details are collapsed. Good: "What we are building: the runner's capabilities and their rows, in Requirements →". Bad: a card that rewrites the install channels or the severity words the Specification owns.
+The home page's first screen tells the reader where each part of the answer lives. For each part of the question, write one framing line that states no rule and links to the document or heading that answers it. Then open on the slice that matters most, through a link to the owning chunk's diagram or a Walkthrough stop on that chunk's heading. Do not restate a requirement, obligation, threshold or decision in the page's own words, even in a card. Never show a second copy of a diagram or an island smaller than a chunk. Keep the important failure cases named even when their details are collapsed. Good: "What we are building: the runner's capabilities and their rows, in Requirements →". Bad: a card that rewrites the install channels or the severity words the Specification owns.
+
+After the opening, each page shows its views in the order the owner asks about them, top to bottom, keeping only the views whose predicates fired in the owning document:
+
+| The owner asks | View | Owning document |
+| --- | --- | --- |
+| What are we building, and for whom? | capability map, as a tree | Requirements |
+| What will a person see and do? | journey map, with pictures or a Gallery Journey when supplied | Specification |
+| What must always hold, and what can go wrong? | context diagram, with the failure cases named in the section title | Specification |
+| What are the things the system keeps track of? | entity map | Specification |
+| Who does what, and where are the boundaries? | component tree, trust-boundary view | Program Design |
+| How does each thing move through its states, and what is never allowed? | state machine/table, with its guards and illegal paths | Program Design |
+| What happens when a request comes in? | source-derived call path, or a sequence diagram | Program Design |
+| How will we know it works, and what stays unverified? | "proven by" cards | Verification Design |
+| How will it be built, in what order, in which PRs? | delivery map | Plan |
+| What changed since I last looked? | plan change view | Plan |
+| What do you need from me? | the decision brief, with today's model drawn before the options | the work thread |
+
+The views agents need beyond these, such as coverage tables, traces and entity-to-home maps, sit one action away, behind a tab or a disclosure whose title names what is inside.
 
 ## Lenses over the islands
 
 Two lenses help a person move through the set. Neither adds a fact.
 
-- **Reading paths.** Each through-line or task path already in `index.md` becomes a Walkthrough over the islands, in the same order. A stop carries at most one line of narration that frames it and states no rule. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof. Bad: narration that restates a threshold a chunk owns.
+- **Walkthroughs.** Before you add a walkthrough, name the question it answers and check that the answer crosses documents or needs an order the documents don't give ([a walkthrough earns its place where the file order doesn't answer the question](../../principle-write-for-the-reader/SKILL.md)). A set gets the feature end to end, stopping at the need, the contract, the call path and the proof row; one walkthrough per through-line and task path in `index.md`, in the same order; one per PR, whose stops are the reads the plan lists for that PR's slices, in plan order; and, for a plan across repositories, one per point where one repository waits on another. A path through one file's headings in their own order is that file's outline, which the page outline and Pages menu already give, so it gets no walkthrough: a decisions page answered row by row in its own order is that case. A path through one file in a new order still gets one when it answers a named question, such as a failure walkthrough through a Program Design file's binding, call path and failure sections in the order the failure travels. A stop carries at most one line of narration that frames it and states no rule. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof. Bad: narration that restates a threshold a chunk owns.
 - **Concept sections.** Give an idea its own section when obligations in two or more capabilities name it, or when the owner names it: authorization, identity, retries. Open with a link to its meaning in its owning entry, and link to its picture: the view its owning skill already requires, such as the trust-boundary view for authorization or the entity map for identity. If that view does not exist yet, return the missing picture to the caller as a gap; show it to readers only when the design itself records it. Then list links grouped by document: the needs, the rules, who enforces them, and how they are proven. When the set's Markdown already carries a section for the idea, render that section and build none of your own. Good: a reader learns what authorization is and where each part of it lives. Bad: an "auth" column of ticks, which says where the idea appears but never what it is.
 
-Open each document section with at most one framing line that states no rule and links into its island. Beyond the opening slice, whole islands sit one action away: give each document its own tab (or disclosure), and never stack whole documents in one scroll. A tab keeps the document's short name, and its framing line names the failure cases inside; a disclosure's title names them. Folding inside an island follows its source Markdown.
+Open each document page with at most one framing line that states no rule and links into its island. Beyond the home page's opening slice, whole documents sit one action away, each on its own page; never stack whole documents in one scroll. Failure cases and their thresholds stay in view; a disclosure holds only the rationale or evidence about them, and its title names what it holds and the cases it explains ("Evidence for the 250 ms budget", never "More"); a tab keeps a short label, and the line that introduces it names the failure cases inside. Folding inside an island follows its source Markdown.
 
 ## When the set is incomplete
 
-- **No `index.md`.** Build the page with one island per document, in the canonical four-document order. Add no Walkthrough and no reading path, and return the missing `index.md` to the caller as a gap. The canonical order originates no fact.
+- **No `index.md`.** Build the home page and one page per document, in the canonical four-document order. Add no Walkthrough and no reading path, and return the missing `index.md` to the caller as a gap. The canonical order originates no fact.
 - **Extra documents** beyond the four, such as an alternatives study. Give each its own island outside the four questions, and do not fold it into one of them.
 
 Load the matching component references through `demistify.md`. The public guide owns all markup and visual tokens.
 
-Completion: the four source homes and their meanings are intact. Each view answers its document's reader question and is traceable to its owning source. Every reading path and concept section links into the islands without restating them, and no view duplicates or invents design facts or turns planned evidence into an observation.
+Completion: the four source homes and their meanings are intact, and the collection has its home page, one page per document and, once the set has a plan, the plan page. Each view answers its document's reader question, sits in the owner's order and is traceable to its owning source. Every walkthrough answers a question that crosses documents or needs a new order, every walkthrough and concept section links into the islands without restating them, and no view duplicates or invents design facts or turns planned evidence into an observation.

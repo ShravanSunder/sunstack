@@ -30,7 +30,7 @@ flowchart TD
 
 ## Important Branches
 
-- Requirements or observable-behavior problems return to `spec-design`; structural problems to `program-design`; slice or proof-map problems to the originating planner; code and proof problems to `implement-plan`.
+- Requirements or observable-behavior problems return to `spec-design`; structural problems to `program-design`; slice or proof-map problems to `plan-update`; code and proof problems to `implement-plan`.
 - A reviewer proposal that adds unrequested scope is rejected; an unrequested element already in the diff gets removal or an owner decision.
 - Corrected work inside the accepted boundary is reviewed again until the loop is ready or stops converging; a correction that changes design meaning goes to the owner as a brief first.
 

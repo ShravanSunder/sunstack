@@ -9,7 +9,7 @@ The runtime contract remains in [SKILL.md](./SKILL.md). Detailed execution and p
 ```mermaid
 flowchart TD
     A[Ready plan plus delivery context] --> B{May implementation start?}
-    B -- Needs revision --> C[Return to the plan's author]
+    B -- Needs revision --> C[Return to the Lead for plan-update]
     B -- Blocked or stale --> D[Stop with the exact blocker]
     B -- Yes --> E[Check branch, files, commands, scope, and proof]
     E --> F[Choose the smallest ready slice]
@@ -26,7 +26,7 @@ flowchart TD
 
 ## Important Branches
 
-- A plan needing revision returns to its planner; a blocked plan stops at its named owner.
+- A plan needing revision returns to the Lead for `plan-update`; a blocked plan stops at its named owner.
 - Plan-only, missing, malformed, or stale governing basis/delivery context stops implementation.
 - A design surprise returns to design instead of being patched around.
 - A required proof gate is never weakened to make the run pass.
