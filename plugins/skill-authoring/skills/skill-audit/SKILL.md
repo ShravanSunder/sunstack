@@ -1,6 +1,6 @@
 ---
 name: skill-audit
-description: Use when auditing existing skills, comparing admired upstream skill repositories, finding stale or duplicated skill behavior, or deciding which skills to create, update, merge, or skip from real session evidence. Not for judging one skill's quality (skill-review).
+description: "Use when deciding which skills to create, update, merge or skip from real session evidence, or finding stale or duplicated skill behavior. Not for judging one skill."
 ---
 
 # Skill Audit
@@ -39,11 +39,11 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
 3. Review the flagged skills.
 
-   A skill in scope is flagged when a step 2 signal records its failure. Return `rules: pending` with the flagged skills: this step does not yet run the rules on the skills in scope, so it flags skills by session evidence only. A pending rule run is never reported as passed, and a rule is reported as run only when the engine's own report shows that it ran.
+   MUST load `../skill-rules/references/running-rules.md`, run the rules over the skills in scope, and return its reading: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. A skill in scope is flagged when a step 2 signal records its failure, when the reading holds an `error` finding in it, or when you confirm a finding there at its line, or decide an `uncertain` piece there is a breach of its standard. Each flag names its source, the dated signal or the rule and line, and a rule's flag sits beside the skill's session signals, never in place of them. The audit stays read-only, so a flag is its answer to a finding, not a fix. A rule is reported as run only when the engine's own report shows that it ran.
 
    IF any skill is flagged, use `skill-review`'s implementation stage as an evaluation of each flagged skill's existing files, and return each one's verdict and accepted findings; both feed that skill's action at step 5. IF the review can't run for a flagged skill (for example, the host can't start a second reviewer agent), return the reason beside that skill and mark its recommendation `awaiting review`: it stays incomplete until a review verdict exists, and its action at step 5 may be drafted from the session signal, labeled unreviewed. IF no skill is flagged, return `flagged skills: none` and go on to step 4.
 
-   Completion: `rules: pending` stands with the flagged skills, and each flagged skill has its review verdict and accepted findings, or is marked `awaiting review` with the reason its review couldn't run, its recommendation still incomplete; or the audit returned `flagged skills: none`.
+   Completion: the rules' reading stands with what ran and every gap, each flagged skill names its flag's source, and each flagged skill has its review verdict and accepted findings, or is marked `awaiting review` with the reason its review couldn't run, its recommendation still incomplete; or the audit returned `flagged skills: none`.
 
 4. Inspect upstream inspirations selectively:
    - open only the skills that map to the candidate workflow
@@ -109,7 +109,8 @@ Return:
 
 - while any recommendation is `awaiting review`: that the audit is partial, naming each of those skills
 - existing skills checked
-- the flagged skills with `rules: pending`, each with its review verdict or `awaiting review` and the reason its review couldn't run, or `flagged skills: none`
+- `rules:` what ran (the status and where the report is kept) and every gap, or `not run` with its reason
+- the flagged skills, each with its flag's source (the dated signal, or the rule and line) and its review verdict or `awaiting review` and the reason its review couldn't run, or `flagged skills: none`
 - each recommendation with its action, fix owner, dated signals, recurrence, and hypothesis or confirmed status
 - suggested updates
 - suggested new skills
