@@ -1,6 +1,6 @@
 ---
 name: docs-maintain
-description: "Use when updating, cleaning up, reconciling, archiving, or promoting project docs (AGENTS.md, README, changelogs, runbooks, architecture docs, workflow artifacts) from settled code or decisions. Not for authoring unsettled spec or design meaning."
+description: "Use when updating, cleaning up, reconciling, archiving or promoting project docs (AGENTS.md, README, changelogs, runbooks) or workflow artifacts from settled code or decisions. Not for unsettled spec or design."
 ---
 
 # Docs Maintain
@@ -47,6 +47,9 @@ docs request
    - requested docs
    - whether edits are allowed
    - whether stale-doc purge is in scope
+
+   Completion: each of the four is stated, taken from the request or asked for.
+
 2. Inventory doc roles:
    - `AGENTS.md`
    - `README.md`
@@ -56,6 +59,9 @@ docs request
    - `docs/wip`
    - `tmp/*-workflows`
    - `docs/changelog`
+
+   Completion: each location above is marked present in this repository, with its path, or absent.
+
 3. Classify the job:
    - create new docs
    - update existing docs
@@ -63,11 +69,17 @@ docs request
    - classify workflow artifacts as current, historical, disposable, or promotion candidates
    - reconcile discrepancies
    - add changelog/runbook references
+
+   Completion: each doc the inventory put in scope has its class, with what in that doc selects it (missing, stale, superseded or contradicted), and each class names the docs it covers.
+
 4. Verify source-of-truth:
    - code/config/test reality
    - accepted spec/plan
    - release or PR state
    - user decision
+
+   Completion: each doc claim the change rests on is checked against one of these sources, named with its path or reference, or its driver is unclear and goes to the user as the core rules' brief.
+
 5. Edit narrowly:
    - concise `AGENTS.md`
    - clear `README.md`
@@ -81,6 +93,8 @@ docs request
    - no embedded page left stale against a Markdown file this change edited
    - no duplicated long detail in `AGENTS.md` and README
    - no unrelated docs churn
+
+   Completion: each check above names what it opened or compared on the changed docs (the links followed, the claims set against their sources, the pages set against their Markdown) and what it found, or that it found nothing.
 
 ## Progressive Disclosure
 
