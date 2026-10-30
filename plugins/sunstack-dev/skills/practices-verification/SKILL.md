@@ -1,6 +1,6 @@
 ---
 name: practices-verification
-description: "Use when checking whether a declared behavior works on its intended target, challenging whether proposed proof can establish it, or building or maintaining an assigned verification driver. Not for delivery acceptance, general code review, root-cause investigation or product repairs."
+description: "Use when checking a declared behavior on its target, challenging proposed proof, or building or maintaining an assigned verification driver. Not for delivery acceptance, code review, root-causing or product repairs."
 ---
 
 # Practices: Verification
