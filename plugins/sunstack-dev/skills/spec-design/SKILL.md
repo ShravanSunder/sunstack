@@ -1,6 +1,6 @@
 ---
 name: spec-design
-description: "Use when authoring or revising durable Requirements from settled meaning, or a Specification's observable obligations, domain entities, and coverage views. Not for eliciting genuinely unwritten owner meaning (discuss-pathfinding)."
+description: "Use when authoring or revising Requirements from settled meaning, or a Specification's obligations, entities and coverage views. Not for eliciting unwritten owner meaning (discuss-pathfinding)."
 ---
 
 # Spec Design
