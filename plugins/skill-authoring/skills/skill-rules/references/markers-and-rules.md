@@ -98,11 +98,11 @@ Read it as the decision it is:
 
 - **No gate.** Every step falls under the standard; a step with no criterion breaks it.
 - **The mechanical first step.** A step without a completion paragraph is itself the breach, so it ends in a finding at the step's heading and no question is asked. Routing it to `not_applicable` would hide the most common failure.
-- **Two questions, in order.** The standard makes two demands, so the verdict asks them one at a time and each failure names its own message: "Understanding reached" fails the first; "Produce a change list" passes the first and fails the second.
+- **Two questions, in order.** The standard makes two demands, so the walk reads their answers one at a time (both questions go in the entry's one request) and each failure names its own message: "Understanding reached" fails the first; "Produce a change list" passes the first and fails the second.
 - **Against the body.** A criterion such as "the return for its class is complete" points at returns the step's body spells out. Read alone it looks empty; read against the body it names them.
 - **The band.** An answer between 0.3 and 0.7 is `uncertain` and goes back to the agent running the check, who decides it against the standard. The thresholds are a first setting until the rule's development cases run; change them only from those results.
 
-The same shape, with a question gate in front, serves a standard whose kind holds pieces it doesn't govern: a guidance standard over the `sentence` kind asks first whether the piece is guidance or something else (an example, a fact, a quotation), sends the something-else to `not_applicable`, and asks the verdict only of guidance.
+The same shape, with a question gate in front, serves a standard whose kind holds pieces it doesn't govern: a guidance standard over the `sentence` kind asks first whether the piece is guidance or something else (an example, a fact, a quotation), sends the something-else to `not_applicable`, and lets the verdict decide only guidance. Both questions go in the one request; a piece the gate drops never reaches the verdict step, whatever its verdict answer says.
 
 ## Pair the rulebook in the config
 
