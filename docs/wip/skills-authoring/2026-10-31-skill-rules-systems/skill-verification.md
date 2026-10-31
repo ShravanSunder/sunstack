@@ -1,6 +1,6 @@
 # skill-rules systems: skill verification
 
-Draft 2, by the 🐒 Implementer Sidekick (Opus 5.5, `claude-local/c6a9871a`), 31 Oct 2026, revised after 10:38 EDT (from `date`), for the Advisor's per-skill check 1 (P1, N4–N6); the Lead's note on graders is folded in after 10:50 EDT, and C11 is added to the unexercised list after 11:11 EDT. Part four: [requirements](requirements.md), [specification](specification.md), [skill design](skill-design.md), skill verification. The [orchestration design](orchestration.md) §10 fixes the shape of the proof; this part fixes its material, checks and run conditions.
+Draft 3, by the 🐒 Implementer Sidekick (Opus 5.5, `claude-local/c6a9871a`), 31 Oct 2026, revised after 10:38 EDT (from `date`), for the Advisor's per-skill check 1 (P1, N4–N6); the Lead's note on graders is folded in after 10:50 EDT, and C11 is added to the unexercised list after 11:11 EDT. Part four: [requirements](requirements.md), [specification](specification.md), [skill design](skill-design.md), skill verification. The [orchestration design](orchestration.md) §10 fixes the shape of the proof; this part fixes its material, checks and run conditions. Draft 3, after 12:12 EDT: the behavior comparison is a later step (owner, 31 Oct), not run in this change; this change's proof is named below.
 
 ## Routes, by `decision-matrix.md`
 
@@ -8,8 +8,8 @@ Each requirement and standard went through the matrix's six questions (`skill-ru
 
 | item | route | properties it was decided on |
 | --- | --- | --- |
-| Success definition 1–5 (requirements) | eval: the teaching-transfer comparison | what an agent designs while working; only a fresh run shows it |
-| Success definition 6 (requirements) | eval: the seeded-defect comparison | what a reviewer finds while working |
+| Success definition 1–5 (requirements) | eval: the teaching-transfer comparison, a later step (owner, 31 Oct), not run in this change | what an agent designs while working; only a fresh run shows it |
+| Success definition 6 (requirements) | eval: the seeded-defect comparison, a later step (owner, 31 Oct), not run in this change | what a reviewer finds while working |
 | A1–A23 (Part A) | eval, through the teaching-transfer properties below; on any authored model, a review check by `decision-model-review` | the property lives in a decision model no evidence kind picks |
 | W1, W3 | eval (teaching transfer, property "standard preserved") | agent behavior; unchanged from today |
 | W2, W5 | eval (teaching transfer: the output carries the design and the return columns) | agent behavior |
@@ -19,11 +19,11 @@ Each requirement and standard went through the matrix's six questions (`skill-ru
 | C1–C10 (Part C) | eval: the seeded-defect comparison; C10 also a review check (the schema and per-check references exist, each check with a bad control) | reviewer behavior; the file structure is cross-file |
 | the three descriptions' openers, length, situation and no-workflow standards | deterministic and judged rules already in the kit (`descriptions-and-invocation` K001–K006), run by the self-check | the kit marks these standards |
 | the new `SKILL.md` bodies and references against the main-path, calls, steering and generalization standards | the kit's existing rules, run by the self-check (`running-rules.md`); the rest by `skill-review` | marked standards run as rules; unmarked ones are review-only |
-| the two model-invocable descriptions' loading | eval: the two-prompt trials below | invocation is session behavior |
+| the two model-invocable descriptions' loading | eval: the two-prompt trials below, a later step (owner, 31 Oct), not run in this change | invocation is session behavior |
 
 No requirement or standard went to "prose". No new rule is proposed in this change; rule routes for the new skills' own standards wait for stage 3.
 
-## What the runs exercise, and what they don't
+## What the later runs would exercise, and what they wouldn't
 
 Routing a standard to an eval doesn't mean the runs observe it. Each grading property and planted defect exercises the standards below; every other standard is reviewed structurally (the skill text states it, with its worked examples) and stays unexercised by behavior.
 
@@ -50,14 +50,28 @@ Routing a standard to an eval doesn't mean the runs observe it. Each grading pro
 
 These stay structurally reviewed, and the claim names them.
 
-## Proof posture
+## This change's proof
+
+Static and review evidence. Behavior is not evaluated in this change.
+- **Static checks:** `pnpm --dir tests/skills test` and typecheck, `rules --check`, `claude plugin validate .` and the Codex listing, the phase-composition contract, and the design page's lint with its embedded parts compared.
+- **The keyed rules self-check** over the five changed skills, run by the Lead, with every finding and uncertain piece dispositioned (`self-check-dispositions.md`).
+- **The Advisor's validations:** orchestration rounds 1–4, and per-skill content checks 1–3.
+- **The formal design review** (closed 6 → 1 → 0, verdict great), and the `skill-review` implementation stage still to come.
+
+**The gap, named:** behavior is not evaluated. The behavior comparison (teaching transfer, seeded-defect review and the trigger trials below) is a later step the owner plans (owner, 31 Oct). It isn't run in this change, and isn't part of its done criteria. Its design and run material stay as the plan for that step. The success definition in the requirements says what the skills aim at; it isn't claimed as proven.
+
+## The later step: behavior comparison (owner, 31 Oct), not run in this change
+
+The sections from here to "Static checks" are the plan for that later step.
+
+### Proof posture for the later step
 
 - **Authoring basis:** observed failure, reproduced statically, plus user-directed intent (requirements).
 - **Skill types:** `domain-decision-models` and `skill-rules` are technique skills, whose proof is "the technique transferring to a fresh, similar task without handholding" (`proof-claims.md`). `decision-model-review` is also a technique skill, a review procedure applied to new material.
 - **The strongest claim planned:** "a difference shown for an approved representative case" (`proof-claims.md`'s ladder). Each arm runs once per standard or packet, so variance across repetitions is unmeasured and is named as a proof gap. "Repeated fresh runs passing" is not claimed.
-- **Until the runs:** the runs are reported as "drafted from user intent; behavior not yet evaluated".
+- **Until the runs:** the skills are reported as "drafted from user intent; behavior not yet evaluated".
 
-## Run conditions (every subject run)
+### Run conditions (every subject run)
 
 From `proof-claims.md`'s run standards and validation 3's N3:
 - **A fresh agent.** Each subject is a new Luna session, never a fork or a resume.
@@ -69,7 +83,7 @@ From `proof-claims.md`'s run standards and validation 3's N3:
 - **Breaks rerun.** A run that broke before the work (a permission stop, a runtime failure) is rerun, not scored.
 - **Who does what.** Subject sessions are separate from any reviewer or grader helpers. The writer prepares the material and checks. The Lead commissions the graders and chooses their model, and accepts the checks before the first session. Graders are blind to the arm, and are never the writer or the Advisor.
 
-## Teaching transfer (runs 1 and 2)
+### Teaching transfer (runs 1 and 2)
 
 - **Two unseen real standards.** Both are unmarked in the kit today, so no rule entry exists to copy, and the rewritten skills must not use them as worked examples:
   - S1: `domain-skill-crafting/references/calls-and-placement.md:41`, "A citation's action says what to produce or check, in words other than the link text; "apply X", "(see X)", or an action that restates the link text is incomplete."
@@ -98,7 +112,7 @@ From `proof-claims.md`'s run standards and validation 3's N3:
 
 - **Deciding condition:** orchestration §10, per standard. The candidate arm passes every property the baseline passes and at least one the baseline fails. Equal, worse and incomplete are as §10 defines them.
 
-## Seeded-defect review (run 3)
+### Seeded-defect review (run 3)
 
 - **Material:** two rule-change packets, both declared as a kit rule at the implementation stage, which `skill-review`'s implementation stage and `decision-model-review` both admit. Each holds a skill diff with its rule entry, the evidence print, encoded state samples, a policy table and a development-results summary. Both arms get the same declared profile and stage.
   - **The seeded packet** holds the five planted defects of orchestration §10. Each sits at a recorded anchor in the manifest: file, line, or the entry's question or step name.
@@ -107,7 +121,7 @@ From `proof-claims.md`'s run standards and validation 3's N3:
 - **Sessions:** four, one per arm per packet. The candidate arm has `decision-model-review`; the baseline arm has `skill-review` only.
 - **Grading and deciding condition:** orchestration §10 (the four finding classes, missed anchors, and the no-regression condition), fixed before the first session.
 
-## Trigger trials (runs 2 and 3)
+### Trigger trials (runs 2 and 3)
 
 Each prompt runs in a fresh session that sees the installed skills' descriptions side by side, and nothing of this design set. Which skill loaded is read from the host's record.
 
@@ -129,9 +143,10 @@ Static results are structural proof only, never behavior proof.
 
 ## What stays unverified
 
+- **Behavior.** Not evaluated in this change: the behavior comparison and the trigger trials are a later step (owner, 31 Oct). Until then, the skills' teaching is drafted from user intent, and its effect on agents is unobserved. That includes whether each changed description loads on its true prompt and stays quiet on its near miss.
 - **Rule accuracy.** No rebuilt rule is measured here; that's stage 3, with the rules CLI's full-denominator and version proof unavailable until O3.
-- **Variance.** One run per arm per standard or packet shows a difference for those cases, not a repeatable effect.
+- **Variance, for the later step.** One run per arm per standard or packet would show a difference for those cases, not a repeatable effect.
 - **Other callers.** The domain's reach through `run_judgments` and engine-selection authors is unexercised; no run here takes those paths.
 - **Routing.** Runs 4–5 (O2, decided option a) are proven statically only: the routing sentence exists and names its condition. That a routing review actually hands off to `decision-model-review` is unexercised.
-- **Triggers.** Each trial is one prompt pair, not a sample of real phrasings.
+- **Triggers, for the later step.** Each planned trial is one prompt pair, not a sample of real phrasings.
 - **The keyed-run handoff (W7).** No run here puts an agent without a grant in front of a keyed step.

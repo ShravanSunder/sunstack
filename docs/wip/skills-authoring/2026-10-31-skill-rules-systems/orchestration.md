@@ -181,7 +181,7 @@ What follows:
 
   The architecture behind this is sufficient state → typed assessments → a retained execution record → pure code policy → a separately observed outcome or effect. It's our justified synthesis, supported by the cookbooks' caching and rerouting examples, not a delivered persistence API.
 - **Until O3 chooses a route,** G7's replay and the resolved version in G7–G9 are unavailable for rule rebuilds. That dependency carries into the delivery boundary of stage 3, the rule rebuilds.
-- **This three-skill change doesn't depend on it.** Its own proof (§10) is a teaching-transfer comparison. The skills teach replay "over stored assessments", and name the gap where none are stored. No public report or storage design is part of this change.
+- **This three-skill change doesn't depend on it.** Its own proof (§10) is static and keyed checks and reviews. The skills teach replay "over stored assessments", and name the gap where none are stored. No public report or storage design is part of this change.
 
 ## 5. Callers beyond the kit
 
@@ -306,11 +306,19 @@ The analysis and options are in `skill-design.md`.
 - **(a) a report option** that emits each rule-and-piece pair's typed assessments, path and resolved model;
 - **(b) a Lead-run harness over `run_judgments`.** It rebuilds each rule's request from `evidence_seen` and the rule's questions, checks its bytes against the engine's, and stores assessments and receipts with §4's correlation.
 
-Until it lands, the spec names full-denominator and version proof on the rules CLI as **unavailable**, and no public format is adopted silently. What waits: G7's replay and the resolved version in G7–G9 for rule rebuilds (§4). The domain's teaching and this change's teaching-transfer proof go ahead with the gap named.
+Until it lands, the spec names full-denominator and version proof on the rules CLI as **unavailable**, and no public format is adopted silently. What waits: G7's replay and the resolved version in G7–G9 for rule rebuilds (§4). The domain's teaching goes ahead with the gap named.
 
 ## 10. Proof, kept in three parts
 
-**The skills themselves (this change): a teaching-transfer comparison.** It measures whether an agent designs better decision models with the rewritten skills. It says nothing about rule accuracy: Jev answers questions, it doesn't design, and that's measured in stage 3.
+**This change's proof.** It's static and review evidence; behavior is not evaluated in this change.
+- **Static checks:** the skills test suite and typecheck, `rules --check`, plugin validation, the phase-composition contract, and the design page's lint with its embedded parts compared.
+- **The keyed rules self-check** over the changed skills, with every finding and uncertain piece dispositioned.
+- **The Advisor's validations** of this orchestration and of the per-skill parts.
+- **The formal design review,** and the implementation review still to come.
+
+**Behavior comparison: a later step (owner, 31 Oct), not run in this change.** The owner plans it as a later step. The two comparisons below stay as its plan, and the run material for them is kept. They aren't part of this change's proof or its done criteria.
+
+**The skills themselves (later step): a teaching-transfer comparison.** It measures whether an agent designs better decision models with the rewritten skills. It says nothing about rule accuracy: Jev answers questions, it doesn't design, and that's measured in stage 3.
 - **The subject and the task.** A Luna coding agent designs a rule for an unseen real standard, one the skills don't use as a worked example. The skill-verification part names two such standards.
 - **Two arms, each isolated.** Every run is its own fresh Luna session, one per arm per standard: four sessions. One arm has the current `skill-rules` (the baseline); the other has the rewritten three skills. Each run gets the same task text, tools, repository and engine sources. The only variable is which skills are installed. No session sees the other arm's output, the expected tree or the grading properties. The loaded skill revisions are confirmed, and the host's run records are read by hand (validation 3, N3).
 - **Grading.** Each output is graded property by property, pass or fail, on these properties:
@@ -324,11 +332,11 @@ Until it lands, the spec names full-denominator and version proof on the rules C
 - **The graders.** Two independent graders grade each output; neither wrote the skills or ran the subject. Each output reaches them under a neutral id, with the loaded skill's name removed where it appears, and with neither the arm nor an expected tree. When the two disagree on a property, a third grader decides.
 - **The deciding condition, fixed before any run.** The Lead accepts the properties and the condition with the skill-verification part, before the first session starts:
   - the claim "the rewrite teaches better design" holds only when, on each standard, the rewrite arm passes every property the baseline passes and at least one the baseline fails;
-  - **equal results** (the same properties passed) mean no measured gain; the change ships only if the owner accepts that named proof gap;
+  - **equal results** (the same properties passed) mean no measured gain;
   - **worse on any property** is a regression, which goes back to design or writing;
   - **an incomplete result** (a failed session, a missing output, an unresolved grade) gets one rerun of that session; still incomplete, it's a named gap and supports no claim.
 
-**`decision-model-review` itself (this change): a seeded-defect comparison.** It measures whether a reviewer finds real defects with the skill. It says nothing about rule accuracy.
+**`decision-model-review` itself (later step): a seeded-defect comparison.** It measures whether a reviewer finds real defects with the skill. It says nothing about rule accuracy.
 - **The material.** Two rule-change packets that are valid input to the existing `skill-review` route: one holding planted defects, and one clean control. The planted defects are drawn from the adopted controls:
   - an inverted instruction-and-criteria pair;
   - a multi-proposition Choice;
@@ -350,7 +358,7 @@ Until it lands, the spec names full-denominator and version proof on the rules C
   - the skill arm raises no unfounded blocking finding on either packet.
 
   The other outcomes:
-  - **equal** (the same anchors, and no unfounded blocking finding) is no measured gain, and ships only with the owner's acceptance of the named gap;
+  - **equal** (the same anchors, and no unfounded blocking finding) is no measured gain;
   - **worse** is a regression that goes back to design or writing. Worse means losing an anchor the baseline detected, or any unfounded blocking finding on either packet;
   - **incomplete** follows the rule above.
 

@@ -85,14 +85,14 @@ Draft 2 reconciled draft 1 with the owner's later decisions: three skills, not t
 
 - **Basis:** observed failure, plus user-directed intent.
 - **The failure:** the kit's rules show the defects above, written by agents following the current `skill-rules`.
-- **Reproduction:** reproduced (static). The rule entries, the run's findings and the dispositions show each defect. No fresh-agent run has yet shown that an agent following the current skill designs a rule this way. The proof plan makes that run with the current skill as the baseline arm (orchestration §10).
+- **Reproduction:** reproduced (static). The rule entries, the run's findings and the dispositions show each defect. No fresh-agent run has yet shown that an agent following the current skill designs a rule this way. The behavior comparison that would make that run, with the current skill as the baseline arm, is a later step (owner, 31 Oct), not run in this change (orchestration §10).
 - **The intent:** the owner's direction to write "better systems" with the Advisor, and to design the rule and review skills as one system.
 
 ## Non-goals
 
 - No edit to the kit's rules, evidence, config, the engine, or any skill besides these three and the two routing lines. `plugins/skill-authoring/README.md:15` changes only to name the one dependency (O4). Rebuilding the rules is the next stage.
 - No keyed model runs by this writer; the Lead runs them, including evidence prints over a selected kind.
-- No measurement of rebuilt rules on held-out labels. That is the next stage; this change's proof is the teaching-transfer comparison.
+- No measurement of rebuilt rules on held-out labels. That is the next stage. This change's proof is static and keyed checks and reviews (skill verification); the behavior comparison is a later step (owner, 31 Oct), not run in this change.
 - No decision-model tooling, such as a policy-replay script, and no public report or storage design. The rules CLI's capture route is the Lead's engine design cycle (orchestration §9, O3), and any report-format addition goes to the owner first.
 - No pinning standard. Model versions follow the owner's O1 decision: `jev-latest` by default, an explicit, recorded pinned override where one is needed.
 - No Box, image or generic-runtime work; the Sunstack driver's text primitives stay the scope.

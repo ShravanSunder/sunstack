@@ -18,9 +18,9 @@ All runs ship in one PR, which the owner merges.
 
 | run | trigger | main path | depth | proof |
 | --- | --- | --- | --- | --- |
-| 1 | new hidden description | new `SKILL.md`: lens, standards A1–A23 by section, IF loads, signs you skipped it | seven new references, each loaded on its own condition | the teaching-transfer comparison (orchestration §10), shared with run 2; rules self-check |
-| 2 | one phrase added to the description | a new design step (3) and a proof step (7) that load the domain; the gate paragraph corrected; W7's keyed-run line; new completion blockers | `rule-design.md` new; `markers-and-rules.md` and `check-and-reports.md` revised; `decision-matrix.md` and `running-rules.md` unchanged | the teaching-transfer comparison; the two-prompt trial; rules self-check |
-| 3 | new model-invocable description | new `SKILL.md`: admit, read, walk the checks, request probes, reduce, return; never edits | a review schema and one reference per check | the seeded-defect comparison (orchestration §10); the two-prompt trial; rules self-check |
+| 1 | new hidden description | new `SKILL.md`: lens, standards A1–A23 by section, IF loads, signs you skipped it | seven new references, each loaded on its own condition | static checks and the keyed rules self-check; the teaching-transfer comparison is a later step (owner, 31 Oct), not run in this change |
+| 2 | one phrase added to the description | a new design step (3) and a proof step (7) that load the domain; the gate paragraph corrected; W7's keyed-run line; new completion blockers | `rule-design.md` new; `markers-and-rules.md` and `check-and-reports.md` revised; `decision-matrix.md` and `running-rules.md` unchanged | static checks and the keyed rules self-check; the teaching-transfer comparison and the two-prompt trial are a later step (owner, 31 Oct) |
+| 3 | new model-invocable description | new `SKILL.md`: admit, read, walk the checks, request probes, reduce, return; never edits | a review schema and one reference per check | static checks and the keyed rules self-check; the seeded-defect comparison and the two-prompt trial are a later step (owner, 31 Oct) |
 | 4, 5 | none | one routing sentence each | none | static: the routing sentence names its condition and destination; covered by run 3's proof only as far as routing reaches it |
 
 ## Run 1: `domain-decision-models` (create)
@@ -92,7 +92,7 @@ The kit-specific mechanics now in `markers-and-rules.md` under "What the judge r
 - **Invocation:** unchanged, model-invocable.
 - **Description:** current (179 characters): "Use when deciding which of a skill's standards become checked rules, writing or fixing their markers and rule entries, or reading a rule run's results. Not for a skill's teaching." Proposed (197 characters): "Use when deciding which of a skill's standards become checked rules, designing a rule's questions and thresholds, writing its markers and entries, or reading a rule run. Not for a skill's teaching."
 - **`agents/openai.yaml`:** `default_prompt` gains "design" ("…become checked rules, design their questions and thresholds, mark them, write their rule entries, and prove them."); the rest is unchanged.
-- **Two-prompt trial:** planned in the skill verification part.
+- **Two-prompt trial:** planned in the skill verification part, as part of the later behavior step (owner, 31 Oct); not run in this change.
 
 ### Main path (`SKILL.md`)
 
@@ -164,7 +164,7 @@ What changes:
 - **Invocation:** model-invocable. A Lead or a routing review must reach it, and an agent asked to review a decision model must find it unprompted.
 - **Description (194 characters):** "Use when independently reviewing a decision model before it ships: a rule's decision graph, questions a model answers for code, their evidence, thresholds or proof claims. Not for designing one."
 - **`agents/openai.yaml`:** `display_name: "Review: Decision models"`, `short_description: "Independent review of a decision model"`, `default_prompt: "Use $decision-model-review on this decision model and return each check's status and findings."`
-- **Two-prompt trial:** planned in the skill verification part.
+- **Two-prompt trial:** planned in the skill verification part, as part of the later behavior step (owner, 31 Oct); not run in this change.
 
 ### Main path (`SKILL.md`)
 
@@ -241,7 +241,7 @@ Run 4's sentence names a `sunstack-dev` skill from `skill-authoring`, as O4 deci
 | `calls-and-placement.md` | every IF and MUST load, the review schema and per-check references (V6), one home per meaning (D2), cross-plugin calls by skill name |
 | `steering.md` | the leading word *measurement*; completion criteria on new steps; the deletion test at assessment |
 | `generalization.md` | A1–A23 transfer cases (specification) |
-| `proof-claims.md` | the teaching-transfer and seeded-defect claims (skill verification) |
+| `proof-claims.md` | the claim this change can make (static and review evidence; behavior not evaluated), and the later step's comparisons (skill verification) |
 | `change-classes.md` | every run is behavior-changing |
 | `security.md` | the surfaces below |
 | `platform.md` | versions, manifests, `agents/openai.yaml`, the changelog |

@@ -9,5 +9,6 @@
 - The design set lives in `docs/wip/skills-authoring/2026-10-31-skill-rules-systems/`.
 - Validation:
   - `tests/skills`: vitest 268/268 and tsc clean; `rules --check` exit 0; `claude plugin validate .` passed;
-  - the keyed rules self-check, the teaching-transfer and seeded-defect comparisons, and the trigger trials are pending.
+  - keyed rules self-check over the five changed skills: no error; 11 warn findings, all the kit's literal-label gate (two real findings fixed); every uncertain piece dispositioned;
+  - behavior not evaluated: the behavior comparison and trigger trials are a later step (owner, 31 Oct), not run in this change.
 - Codex and Claude caches: not refreshed.
