@@ -19,7 +19,7 @@
     <ex-mermaid id="how-a-rule-works" label="How a rule works" data-width="canvas"><script type="text/plain">
 flowchart TD
   standard["Standard<br/>what good skill text does"] --> rule["Rule<br/>names its chunk and questions"]
-  rule --> chunk["Evidence chunk<br/>the section, the files it loads,<br/>where the skill lives"]
+  rule --> chunk["Evidence chunk<br/>the section and<br/>the files it loads"]
   chunk --> jev["Jev<br/>answers the questions"]
   jev --> code["Code<br/>turns answers into an outcome"]
   code -->|"worth a look"| nudge["Nudge: warn<br/>what, where, why, read next"]
@@ -43,7 +43,7 @@ flowchart TD
 flowchart LR
   subgraph after["What the design does"]
     direction TB
-    a1["Placement rule<br/>section, loaded file, skill scope"] --> a2["Nudge at line 17<br/>'routes into AgentStudio's own loop'<br/>read: agentstudio-loop.md"]
+    a1["Placement rule<br/>the calling section and the file it loads"] --> a2["Nudge at line 17<br/>'routes into AgentStudio's own loop'<br/>read: agentstudio-loop.md"]
     a2 --> a3["Writer or reviewer<br/>reads the loaded file"]
     a3 --> a4["Routed<br/>belongs in AgentStudio's repo"]
   end
@@ -83,7 +83,7 @@ flowchart LR
     <table>
       <thead><tr><th>Where</th><th>What changes</th></tr></thead>
       <tbody>
-        <tr><td>Engine</td><td>A nudge carries its related places (the standard, the loaded file) and can point at a line inside a section. Each chunk can carry context the config declares: where the file lives and whether its plugin is meant for any repository. Answers are kept on every result. Cut text is flagged, and a section only gets its own loads. Lint reads JSON, reusing the collector the engine already has.</td></tr>
+        <tr><td>Engine</td><td>A nudge carries its related places (the standard, the loaded file) and can point at a line inside a section. Answers are kept on every result. Cut text is flagged, and a section only gets its own loads. Lint reads JSON, reusing the collector the engine already has.</td></tr>
         <tr><td><code>skill-rules</code></td><td>Designing a rule as a nudge: the judgment it helps, its chunk, its questions, what it says. Reading a run: the agent's answer per nudge, and the gaps.</td></tr>
         <tr><td><code>domain-decision-models</code></td><td>A tree that can't decide nudges or says uncertain, never passes.</td></tr>
         <tr><td><code>decision-model-review</code></td><td>A new check: does the nudge help the agent make the right call?</td></tr>
@@ -108,7 +108,7 @@ flowchart LR
         <tr><td>This toolkit's own VictoriaMetrics queries</td><td>no nudge</td><td>two false nudges: the question lacked the "a tool used through its interface" exemption</td></tr>
       </tbody>
     </table>
-    <p>Three changes came out of it: each chunk carries context the config declares (where the file lives, whether its plugin is generic); each exemption sits on the question that owns it; and the engine learns to point at a line inside a section. The first two are likely causes of the misses, still to be tested.</p>
+    <p>A follow-up test on the same pieces, with each condition written down first, settled the two guesses. The tool exemption, put on the question it belongs to, removed both false nudges. But giving each section the skill's description made the AgentStudio sections pass: the description itself names AgentStudio, so it reads as "this skill is meant to cover it". So placement judges each load (the calling section plus the loaded file's opening, which nudged on line 17 every time) and the skill's description, not the loaded file's sections on their own. The engine still needs to point at a line inside a section.</p>
 
     <ex-callout title="Still open" tone="question" icon="bell">
       <p>What "related places" should cover has a provisional answer until you say otherwise. Whether an agent given a nudge makes the right call waits for evals. The independent design review hasn't run yet.</p>

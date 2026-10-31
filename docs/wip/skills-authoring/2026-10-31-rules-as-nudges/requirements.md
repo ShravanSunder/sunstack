@@ -139,7 +139,7 @@ The proof posture each run can honestly claim goes in the verification part.
 
   The evidence module collects exactly that. Collected completeness (every field gathered) and model-visible completeness (what Jev actually saw after the size cap) are reported apart.
 - **R3. A rule can nudge without deciding.** A standard that one chunk can't settle can still have a rule. Its nudge says what to check and where to read, and never claims a breach.
-- **R4. Generalization and placement read every section.** Their chunks cover every section of a skill and its references, from the H1's introduction down, tables included, each with the files its own text loads.
+- **R4. Generalization and placement leave nothing unread.** Generalization's chunks cover every section of a skill and its references, from the H1's introduction down, tables included, each with the files its own text loads. Placement judges every load (the calling section with the loaded file's opening) and every skill description: the 2x2 probe showed a loaded file's sections judged on their own stay uncertain, while the load nudges reliably (D18b).
 - **R5. What wasn't read is shown, apart from what was decided.** As gaps, the agent sees:
   - per rule, the files under review inside the rule's declared denominator where the rule read nothing. A file outside it, such as a reference for a rule that reads only `SKILL.md` descriptions, is out of scope, not a gap;
   - each piece whose model view a cap cut;

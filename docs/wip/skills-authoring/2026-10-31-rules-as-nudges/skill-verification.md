@@ -64,6 +64,8 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
      - two false nudges on the toolkit's own VictoriaMetrics queries, the criteria gap D19 answers;
      - 8 of 49 pieces uncertain.
 
+     A follow-up 2x2 probe through native `run_judgments`, with hand-built state standing in for the collector: H2 (the owned tool exemption removes the false nudges) confirmed; H1 (declared context helps) refuted, since the skill's description suppressed the AgentStudio nudges; H1b (the description is the cause) confirmed; line 17's load chunk nudged in all six conditions. 36 requests, reported $0.0023. Folded in as D18b and D19b; kept under `skill-rules/rules-purpose/probe-2x2/`.
+
      Kept with its definitions and expectations in the owner's memory-logs under `skill-rules/rules-purpose/spike-1/`.
 2. **The engine pull request.** Its own design's verification, with the engine tests named above.
 3. **This pull request, per run:**
