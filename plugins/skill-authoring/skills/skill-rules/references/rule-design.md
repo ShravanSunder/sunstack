@@ -148,7 +148,7 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   The bars are a first setting, provisional until development results.
 - **The nudge.**
   - **Message:** "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository." The repository is a direction: the run never reads it.
-  - **Where:** `at: "body"`, with a locator `product_line`, "Which line sends the agent into the product's own workflow?", at `min_probability` .5, a provisional bar on the top line's probability over the section's lines. Line 17's section has more than one load, and the generic `producer-contract.md` load comes first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
+  - **Where:** `at: "body"`, with a locator `product_line`, "Which line sends the agent into the product's own workflow?", at `min_probability` .5, a provisional bar on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
   - **Severity:** `warn`: both paths read a model's answer.
   - **Read next:** `related: ["targets"]`. The finding lists the standard's line, then each loaded file whose opening the run read, `agentstudio-loop.md` among them. The list names every file the section loads; the locator, not the list, says which line the nudge is about.
 - **Proof plan.**
