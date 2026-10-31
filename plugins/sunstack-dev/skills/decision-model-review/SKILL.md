@@ -25,7 +25,7 @@ Completion: the profile, the stage, and each supplied and missing input are name
 
 ## 2. Read the whole model
 
-MUST load the `domain-decision-models` skill and return the standards that apply to this model's profile and nodes; the checks below test against them. Read every supplied input whole.
+MUST load `domain-decision-models` and return the standards that apply to this model's profile and nodes; the checks below test against them. Read every supplied input whole.
 
 Completion: every supplied input was read in full, and the applicable standards are listed.
 
