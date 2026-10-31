@@ -1,6 +1,6 @@
 ---
 name: principle-one-owner-per-truth
-description: "Use when truth, effects, or guarantees cross a boundary: two parts can write the same state, a copy holds data another part owns, a schema is defined twice, or stored data starts to mean something new. Give each truth one authoritative owner and state what callers may rely on."
+description: "Use when truth, effects, or guarantees cross a boundary: two parts can write the same state, a copy holds data another part owns, a schema is defined twice, or stored data starts to mean something new."
 disable-model-invocation: true
 ---
 
