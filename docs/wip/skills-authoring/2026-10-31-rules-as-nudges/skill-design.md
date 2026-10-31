@@ -300,7 +300,7 @@ The 🦁 Lead decides each gate and owns routing any rework: a gate that fails s
 
 ## Review record
 
-- **Co-design challenge:** the 🦉 Advisor (`codex-local/01a14e6a`), views 1 to 5 and two experiments; closed with no remaining substantive objection at `c867d46d`. Its check of the four later commits (`c867d46d..4b85a656`) is pending as view 6.
+- **Co-design challenge:** the 🦉 Advisor (`codex-local/01a14e6a`), views 1 to 5 and two experiments; closed with no remaining substantive objection at `c867d46d`. Its view 6 checked the four later commits (`c867d46d..4b85a656`): the owner confirmations and the parallel drafting fit; four work-plan clarifications and one test edge, applied at `6896b66b` (named contract revision with a sample report and a refresh rule; drafts versus final self-checks; owner-allowed gaps only; owners for the engine plan and preflight, the engine's implementation review, the pin and the gates; route-level severity in the policy check).
 - **Design review 1:** `skill-review` design stage, review lead 🔎 `codex-local/01a193be` (OpenAI Sol, xhigh) with three stage reports and a `decision-model-review` reviewer, at `4b85a656`: targeted revision, five verified findings (F1 blocker, F2 to F5 important).
 - **Recheck:** at `9e26addc`, F1 to F5 closed, no new defect. **Verdict great; implementation decision `accepted-to-implement`.** Open findings 5 → 0.
 - **Records:** `design-review-1.md` and `design-review-1-recheck.md` in the owner's memory-logs under `skill-rules/rules-purpose/`.
