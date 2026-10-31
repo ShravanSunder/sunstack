@@ -11,7 +11,7 @@ import {
   runRunnerJudged as runRunner,
   sampleSkill,
   saveRules,
-} from "./skill-rules-test-fixture.ts";
+} from "../test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

@@ -52,4 +52,4 @@ Structural views expose components, owners, interfaces, state, calls, flows, fai
 
 ## Maintenance
 
-When a view token, predicate owner, required field, or runtime consumer changes, update this index and `tests/skills/lib/spec-program-design-user-requirements-contract.test.ts` in the same changeset. Keep runtime procedure out of this file and do not duplicate predicate tables here.
+When a view token, predicate owner, required field, or runtime consumer changes, update this index and `tests/skills/lib/contracts/spec-program-design-user-requirements-contract.test.ts` in the same changeset. Keep runtime procedure out of this file and do not duplicate predicate tables here.

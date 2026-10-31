@@ -9,7 +9,7 @@ import {
   formatAssembledKind,
   formatLintReport,
   lintReportSchema,
-} from "../lib/skill-rules-report.ts";
+} from "../lib/skill-rules/report.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }

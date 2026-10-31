@@ -1,4 +1,4 @@
-import type { PieceDecision } from "./skill-rules-report.ts";
+import type { PieceDecision } from "../report.ts";
 import type { RuleLabel } from "./skill-rules-evaluation-cases.ts";
 
 export type CaseScore =

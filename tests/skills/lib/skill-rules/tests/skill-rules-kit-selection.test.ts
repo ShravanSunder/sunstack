@@ -14,7 +14,7 @@ import {
   saveConfig,
   saveRules,
   writeFixtureFile,
-} from "./skill-rules-test-fixture.ts";
+} from "../test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

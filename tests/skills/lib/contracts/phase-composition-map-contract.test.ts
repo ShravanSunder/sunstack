@@ -7,9 +7,9 @@ import {
   extractReturnedTokens,
   extractRouteOwners,
   phaseCompositionMapPath,
-} from "./phase-composition/phase-composition-map.ts";
+} from "../phase-composition/phase-composition-map.ts";
 
-const repoRoot = path.resolve(import.meta.dirname, "../../..");
+const repoRoot = path.resolve(import.meta.dirname, "../../../..");
 const phaseCompositionPagePath = "plugins/sunstack-dev/docs/phase-composition.html";
 
 const sampleSkill = `---

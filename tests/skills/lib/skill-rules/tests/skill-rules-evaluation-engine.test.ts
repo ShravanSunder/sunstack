@@ -3,10 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { z } from "zod";
-import { loadRuleCases } from "./skill-rules-evaluation-cases.ts";
-import type { LoadedRuleCase } from "./skill-rules-evaluation-cases.ts";
-import { evaluateLabelledCase } from "./skill-rules-evaluation-engine.ts";
-import { createRuleEvaluationHarness } from "./skill-rules-evaluation-harness.ts";
+import { loadRuleCases } from "../evaluation/skill-rules-evaluation-cases.ts";
+import type { LoadedRuleCase } from "../evaluation/skill-rules-evaluation-cases.ts";
+import { evaluateLabelledCase } from "../evaluation/skill-rules-evaluation-engine.ts";
+import { createRuleEvaluationHarness } from "../evaluation/skill-rules-evaluation-harness.ts";
 import {
   cleanupFixtureRoots,
   createFixture,
@@ -14,7 +14,7 @@ import {
   kitRelative,
   repositoryRoot,
   withJudge,
-} from "./skill-rules-test-fixture.ts";
+} from "../test-fixture.ts";
 
 beforeEach(() => {
   vi.stubEnv("OPENROUTER_API_KEY", "synthetic-runner-test-key");
@@ -25,7 +25,7 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 const fixturesRoot = fileURLToPath(
-  new URL("../fixtures/run-skill-rules/eval-data", import.meta.url),
+  new URL("../../../fixtures/run-skill-rules/eval-data", import.meta.url),
 );
 
 function labelledFixture(): LoadedRuleCase {

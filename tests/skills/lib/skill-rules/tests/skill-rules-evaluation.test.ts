@@ -8,13 +8,13 @@ import {
   parseHeldOutFlag,
   ruleLabelSchema,
   selectRuleCases,
-} from "./skill-rules-evaluation-cases.ts";
-import { scoreRuleCase, summarizeRuleScores } from "./skill-rules-evaluation-scoring.ts";
-import { pieceDecisionSchema } from "./skill-rules-report.ts";
-import { selectLabelledPiece } from "./skill-rules-evaluation-engine.ts";
+} from "../evaluation/skill-rules-evaluation-cases.ts";
+import { scoreRuleCase, summarizeRuleScores } from "../evaluation/skill-rules-evaluation-scoring.ts";
+import { pieceDecisionSchema } from "../report.ts";
+import { selectLabelledPiece } from "../evaluation/skill-rules-evaluation-engine.ts";
 
 const fixtureRoot = fileURLToPath(
-  new URL("../fixtures/run-skill-rules/eval-data", import.meta.url),
+  new URL("../../../fixtures/run-skill-rules/eval-data", import.meta.url),
 );
 const temporaryRoots: string[] = [];
 afterEach(() => {
