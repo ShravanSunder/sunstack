@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review: Decision models"
+  short_description: "Independent review of a decision model"
+  default_prompt: "Use $decision-model-review on this decision model and return each check's status and findings."
