@@ -39,11 +39,11 @@ Audit real workflows before creating skills. Prefer updating an existing skill o
 
 3. Review the flagged skills.
 
-   MUST load `../skill-rules/references/running-rules.md`, run the rules over the skills in scope, and return its reading: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. A skill in scope is flagged when a step 2 signal records its failure, when the reading holds an `error` finding in it, or when you confirm a finding there at its line, or decide an `uncertain` piece there is a breach of its standard. Each flag names its source, the dated signal or the rule and line, and a rule's flag sits beside the skill's session signals, never in place of them. The audit stays read-only, so a flag is its answer to a finding, not a fix. A rule is reported as run only when the engine's own report shows that it ran.
+   MUST load `../skill-rules/references/running-rules.md`, run the rules over the skills in scope, and return its reading: the run's status, the account for each nudge, each `uncertain` piece with your decision, the gaps by kind, and the decided exclusions apart from them. Read each nudge at its line and its read-next places before deciding it. A skill in scope is flagged when a step 2 signal records its failure, when the reading holds an `error` finding in it, when you confirm a nudge there at its line (a confirmed `warn` nudge is a grounded signal too), or when you decide an `uncertain` piece there is a breach of its standard. A nudge you can't settle from its places stays an open item naming the evidence it lacks: neither a flag nor dismissed. For example, a placement nudge at `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, confirmed by opening `agentstudio-loop.md` and finding AgentStudio's own loop, flags that skill for intake; whether the loop already exists in AgentStudio's repository stays open until someone reads that repository. Each flag names its source, the dated signal or the rule and line, and a rule's flag sits beside the skill's session signals, never in place of them. The audit stays read-only, so a flag or an open item is its answer to a nudge: it records "flagged" where a writer would record "fixed", and never invents a fix. A rule is reported as run only when the engine's own report shows that it ran.
 
    IF any skill is flagged, use `skill-review`'s implementation stage as an evaluation of each flagged skill's existing files, and return each one's verdict and accepted findings; both feed that skill's action at step 5. IF the review can't run for a flagged skill (for example, the host can't start a second reviewer agent), return the reason beside that skill and mark its recommendation `awaiting review`: it stays incomplete until a review verdict exists, and its action at step 5 may be drafted from the session signal, labeled unreviewed. IF no skill is flagged, return `flagged skills: none` and go on to step 4.
 
-   Completion: the rules' reading stands with what ran and every gap, each flagged skill names its flag's source, and each flagged skill has its review verdict and accepted findings, or is marked `awaiting review` with the reason its review couldn't run, its recommendation still incomplete; or the audit returned `flagged skills: none`.
+   Completion: the rules' reading stands with what ran, each nudge's account, every gap by kind and the exclusions apart; each open item names the evidence it lacks; each flagged skill names its flag's source, and each flagged skill has its review verdict and accepted findings, or is marked `awaiting review` with the reason its review couldn't run, its recommendation still incomplete; or the audit returned `flagged skills: none`.
 
 4. Inspect upstream inspirations selectively:
    - open only the skills that map to the candidate workflow
@@ -109,8 +109,9 @@ Return:
 
 - while any recommendation is `awaiting review`: that the audit is partial, naming each of those skills
 - existing skills checked
-- `rules:` what ran (the status and where the report is kept) and every gap, or `not run` with its reason
-- the flagged skills, each with its flag's source (the dated signal, or the rule and line) and its review verdict or `awaiting review` and the reason its review couldn't run, or `flagged skills: none`
+- `rules:` what ran (the status and where the report is kept), every gap by kind, and the decided exclusions apart from them, or `not run` with its reason
+- the flagged skills, each with its flag's source (the dated signal, or the rule and line of the nudge or `error` you confirmed) and its review verdict or `awaiting review` and the reason its review couldn't run, or `flagged skills: none`
+- the open items: each nudge or `uncertain` piece the audit couldn't settle, with its rule, file and line and the evidence it lacks, or `open items: none`
 - each recommendation with its action, fix owner, dated signals, recurrence, and hypothesis or confirmed status
 - suggested updates
 - suggested new skills
