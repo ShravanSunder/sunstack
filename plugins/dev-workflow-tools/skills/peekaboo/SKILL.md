@@ -17,12 +17,16 @@ Peekaboo is a macOS automation CLI for screenshots, UI maps, and native desktop 
    peekaboo list windows --app "MyApp" --json
    ```
 
+   Completion: the target app and window are named from the `list` output, and `permissions status` has shown whether Screen Recording and Accessibility are granted.
+
 2. Discover current commands before automation.
 
    ```bash
    peekaboo --help
    peekaboo <command> --help
    ```
+
+   Completion: each command the automation will run has been checked against its current `--help` output.
 
 3. Use live progressive-disclosure guides when available.
 
@@ -31,6 +35,8 @@ Peekaboo is a macOS automation CLI for screenshots, UI maps, and native desktop 
    peekaboo tools
    ```
 
+   Completion: `peekaboo learn` and `peekaboo tools` have been read, or their absence on this install is noted.
+
 4. Capture current UI before element actions.
 
    ```bash
@@ -38,6 +44,8 @@ Peekaboo is a macOS automation CLI for screenshots, UI maps, and native desktop 
    UI_JSON=$(mktemp "${TMPDIR:-/tmp}/peekaboo-ui.XXXXXX.json")
    peekaboo see --app "MyApp" --window-title "Window Title" --json > "$UI_JSON"
    ```
+
+   Completion: a `see --json` snapshot of the confirmed target window is in the private temp file, and every element ID the next action uses comes from it.
 
 ## Operating Rules
 
