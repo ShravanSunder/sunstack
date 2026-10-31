@@ -54,7 +54,7 @@ A probe is a deliberate experiment on one variable:
 
 ## Model versions
 
-- **On a moving alias** (such as `jev-latest`), every result records the alias requested and the version that answered.
+- **The default is `jev-latest`,** a moving alias, for a Jev decision model. Every result records the alias requested and the version that answered.
 - **A pinned version** is an explicit, recorded override for a run that must hold the version fixed. A requested pin is not proof of the version that answered; the returned version is.
 - **Every comparison runs within one resolved version group,** or names the missing comparator. Never average across versions.
 - **When the version behind the alias changes,** the policies tuned on the old one are rechecked before anyone relies on them.
