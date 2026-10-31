@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-31 Skill rules: kit precision after the step-5 run](2026-10-31-skill-rules-kit-precision.md)
 - [2026-10-30 Skill rules: workflow sections chosen by the decision model](2026-10-30-skill-rules-evidence-selection.md)
 - [2026-10-30 Presentation HTML collection walkthroughs](2026-10-30-presentation-collection-walkthroughs.md)
 - [2026-10-30 Practice skills cleanup](2026-10-30-practices-skills-cleanup.md)

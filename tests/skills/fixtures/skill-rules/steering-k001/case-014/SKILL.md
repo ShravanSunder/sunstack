@@ -1,0 +1,208 @@
+## Workflow
+
+### 1. Validate authoritative Why/What
+
+Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Program Design beneath that home and return its exact path. Preserve an authoritative pre-existing Program Design elsewhere; do not relocate or reject it because of the policy. The artifact-home policy applies only to a new output in the current call and is not persisted as workflow state.
+
+MUST load `../../shared-references/design-documents.md` and return the Requirements and Specification identity check, the fixed observable-contract boundary, and the set layout, chunk shape and `index.md` duty this run follows. Require one Requirements identity and one different Specification identity using the valid representation for the work's medium. A combined `Requirements/spec` artifact, a Requirements-titled artifact that also serves as the observable contract, or either missing identity returns `specification-gap` to `spec-design` before structural work begins. Do not infer separation from headings inside one artifact and do not create or copy either upstream artifact.
+
+Read the entire Requirements source, governing Specification, and confirmed goal boundary accepted by `spec-design`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity table (`E`), observable contracts and obligations (`R`), constraints, failure expectations, proof constraints (each proof obligation's threshold, target constraints, and reference), non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `spec-design` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
+
+Classify gaps as `missing meaning | conflicting meaning | feasibility question | design choice | planning detail`. Missing or conflicting meaning returns `specification-gap`; do not patch it locally.
+
+Classify a requested correction as requirements/Why/What, structural How, or both. Removing unrelated implementation machinery is How unless the owner changes governing outcomes or scope. For How-only corrections, consume the accepted requirements set as fixed input. When both change, return to `spec-design` first and resume only after revised Why/What is settled.
+
+For a semantic correction to a structural view, reload current-system evidence and the governing obligation, re-run the affected ownership/interface/call/state/flow decision and view predicate, update affected trace links, and run artifact self-review. Skip unrelated stages unless the correction changes their source, owner, or invariant. Pure rendering-format changes route to `docs-maintain`.
+
+Completion: distinct Requirements and Specification identities, confirmed goal boundary, accepted requirements set, requirement inventory, entity table, non-goals, fixed observable contract, correction class, and route-back gaps are explicit.
+
+### 2. Build the current-system model from sources
+
+MUST load `practices-how` and return the source-backed current behavior model for each load-bearing behavior the Specification's obligations change or depend on: anchored entry-to-effect paths with their return and error edges, the owners and state on them, their boundary crossings, the test or harness path wherever its wiring differs from production, observed and inferred edges, and the edges left unresolved. Delegated parts of that walk go through the current-system-explorer lane under Bounded Evidence Help.
+
+MUST load `references/current-system-model.md` and return, built from that model, the current component/owner tree, production and proof flows, state/mutation map, failure behavior, constraint degree, `changes / remains authoritative`, the greenfield basis where nothing current exists, contradictions, evidence gaps, and source identities with current applicability.
+
+IF an external platform, protocol, library, sandbox, runtime, or empirical claim could change feasibility, structure, or proof and current local sources do not establish it, perform a bounded lookup directly or use `practices-research`. If delegation is useful, the external-prior-art-platform lane may perform that lookup under the Bounded Evidence Help contract; delegation is not required. Return the exact external source identity/version, authority status, transfer assumptions, structural consequence, and remaining evidence gap before selection.
+
+Completion: each load-bearing current behavior has an anchored entry-to-effect path with its return and error edges, or a source-backed greenfield basis; degree of constraint is source-backed; and `changes / remains authoritative` is explicit.
+
+For each dimension (components, interfaces, state, calls/flows, failure/recovery, concurrency/consistency, compatibility/cutover, trust, and proof), record one applicability judgment in working state or the returned self-check:
+
+```text
+required by a named specification obligation
+satisfied by the existing system and linked to evidence
+not applicable, with the reason when omission could look like a gap
+unresolved and requiring evidence or an owner decision
+```
+
+These are inspection questions, not mandatory artifact sections. Never invent a store, protocol, retry policy, migration, governance surface, or other subsystem merely to make a category non-empty.
+
+### 3. State the crux and forces
+
+MUST load `references/alternatives-and-crux.md` for stages 3-4 and return the crux, forces, and evidence gaps that block credible alternatives. Apply its structural-crux, forces, alternatives, tradeoff, falsifier, and selection method in working state. Surface only an evidence gap that blocks credible alternatives.
+
+Completion: the design problem is expressed as falsifiable structural choices rather than generic quality goals.
+
+### 4. Generate viable alternatives
+
+Start with the existing foundation and its minimal-change realization. Use clean-boundary, pragmatic, and risk perspectives only when they produce a materially different credible structure. Compare alternatives only when a real choice exists; do not manufacture an architecture to fill the alternatives stage.
+
+Using the already-loaded `references/alternatives-and-crux.md`, select the direction and record its tradeoffs, debt/payer, falsifiers/revisit signals, and unresolved decision/evidence gaps for the terminal result.
+
+New durable identity or history, persistence, certification or governance, a control plane, an external service, cross-run state, or a broad migration is material scope expansion when the confirmed goal boundary did not authorize it. Return the owner decision needed to allow that additional complexity rather than making the mechanism inevitable through design prose.
+
+Re-anchor before selecting target composition: compare the selected direction with the confirmed goal, accepted requirements and non-goals, permitted and protected systems, owner-set package limits, existing foundation, smallest workable change, and acceptable complexity. Delete a mechanism when no confirmed obligation needs it. If pursuing it would widen the confirmed goal boundary or budget, return the exact mismatch and owner expansion decision instead of completing the mechanism. Keep this comparison in returned workflow state, not durable program-design prose.
+
+Explain the selection in ordinary language: what changes, what stays the same, why the smaller structure is enough, what it costs, who bears that cost, and what evidence would justify a larger design. A request to use architecture vocabulary does not replace any of those concrete answers; labels such as “minimal structural delta” or “clean boundary” may summarize the explanation but may not carry it.
+
+Completion: the selected direction names what improves, where cost moves, accepted debt/payer, complexity spent, and evidence that would reopen the choice; the Re-anchor comparison is aligned, has deleted unsupported machinery, or has returned the exact expansion decision; and the actual choice and tradeoff are explained in ordinary language.
+
+### 5. Bind the domain model
+
+IF the design targets TypeScript, Python or Rust, load `../domain-<lang>/SKILL.md` for each such language and return the rules the design's types, interfaces, module boundaries and concurrency follow; the repository's own conventions win where they differ.
+
+MUST load `references/components-ownership-interfaces.md` for stages 5-8 and return, first, the entity binding table: one row per `E` giving its semantic owner, package or module home (`new | modified | existing`, with the code name on `existing` rows), schema/type home, shape at each boundary it crosses, `persisted | derived | cached`, the type convention it follows or `none found`, and, for a persisted home, its storage engine or driver and migration tool, each `existing | new`. A home that must work on more than one runtime names its injected storage boundary and each runtime's driver, each `existing | new`. That reference owns convention discovery, the filled binding-and-shape template, and the existing-code rules.
+
+A `new` storage engine, driver or migration tool, or a second one for a job the repository already does one way, is material scope under stage 4's rule and returns `decision-needed`, so the owner chooses it on the design page before planning. Choosing the injected storage boundary for a home on more than one runtime is also the owner's decision on the design page, even when every driver already exists: return `decision-needed` for it unless the design reuses unchanged a boundary the owner already settled. Engines chosen separately per runtime, with no shared injected boundary, are a design gap to close before `locally-ready`.
+
+The binding table comes before any component tree, whatever order the request asks for. Write each shape in the repository's type conventions; with none found, write fields, nullability, and discriminant. Results and decisions are closed variants with bounded reasons. Disclose by depth: the entity -> home map when its Required View fires, then the binding table, then each code shape. Schemas, homes, and payload fields are this step's output even when a request assigns them to planning. Package detail stops at the binding table; exact files stay with planning.
+
+Every design-only concept names the `E` or `R` it serves. An existing type with a different name is a binding recorded in the home cell, never a synonym or a rename. An identity or cardinality mismatch with existing code is a structural choice, and `decision-needed` when resolving it exceeds the confirmed goal boundary. Only a missing noun or a conflicting meaning returns `specification-gap`.
+
+Completion: every `E` has a binding row with every cell filled or marked `gap: <why>`; every persisted row names its engine or driver and migration tool, each `existing | new`; every boundary crossing has a shape in the found convention or a field list with nullability and discriminant; every result or decision contract is a closed variant; and every design-only concept names the `E` or `R` it serves.
+
+### 6. Select the target composition
+
+Using the already-loaded `references/components-ownership-interfaces.md`, apply its target-tree, ownership, dependency, and behavioral-interface method in working state.
+
+Derive the integrated overview from the binding table before detailing mechanisms. For UI/refactor work, include the render/component tree and distinguish state owners, pure views, integration/effect boundaries, and derived state.
+
+For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks or moves into its callers if it is removed, why the existing foundation cannot supply it, and why it stays within the agreed acceptable complexity ([keep complexity only when an outcome needs it now](../principle-justify-the-complexity/SKILL.md)). Delete it when no confirmed obligation breaks and its callers would not inherit a lifecycle, policy, or failure rule it owns. Do not complete missing contracts for a mechanism you deleted.
+
+Completion: each component has one job, reason to change, consumers, owned behavior, and justified interface.
+
+### 7. Assign ownership and dependency direction
+
+Name one authoritative owner for each material truth, invariant, lifecycle, and side effect. Define allowed and forbidden edges plus how violations are detected.
+
+Completion: no second source of truth or unexplained shared responsibility remains.
+
+### 8. Define interfaces as behavioral boundaries
+
+Specify caller-visible guarantees, not only signatures. Derive at least one representative interaction from consumer needs while hiding owner policy. Write result and decision contracts as closed variants in the conventions step 5 found.
+
+Using the already-loaded `references/components-ownership-interfaces.md`, complete the component tree, ownership/dependency maps, behavioral interface contracts, forbidden edges, and gaps for the artifact and terminal result.
+
+Completion: a planner can later locate implementation surfaces without deciding interface semantics.
+
+### 9. Model state and lifecycle
+
+MUST load `references/state-calls-and-flows.md` for stages 9-10 and return the applicable state/lifecycle model and current-to-proposed call-path comparison procedure. Apply its state/lifecycle, current-to-proposed call-path, flow, and migration/cutover method in working state.
+
+Use a state machine or table when timing/order changes correctness. Distinguish persisted, derived, cached, and synchronized state.
+
+Completion: every write path reaches one owner and illegal transitions have defined handling.
+
+### 10. Draw normal control, data, and call flows
+
+Trace each material requirement from consumer to owner and observable outcome. Include async/background, event, persistence, cache, and proof-harness paths when they alter semantics.
+
+Using the already-loaded `references/state-calls-and-flows.md`, return the state transitions; for every material runtime-behavior group, the source-anchored current and proposed entrypoint-to-effect paths or proposed-only with explicit no predecessor; added, removed, and changed owner/caller/callee/state/effect/result-error edges plus unchanged edges whose preservation is requirement-critical, safety-critical, or contested; end-to-end control/data flows naming the binding table's shape on each boundary-crossing edge; and compatibility/migration/cutover phase models. Requirements sharing one path may cite one delta. A raw stack trace is evidence, not the design output.
+
+Completion: there is no “and then magic happens” hop; every applicable runtime-behavior design has a visible call path and marked delta edges; every boundary-crossing edge names its shape or a `gap: <why>`; migration phases each name authority, version skew, transition, rollback/reconciliation, failure, and proof.
+
+### 11. Design failure, partial success, and recovery
+
+MUST load `references/failure-concurrency-recovery.md` for stages 11-12 and return the failure/recovery and partial-success map. Apply its detection, containment, retry, idempotency, timeout/cancellation, cleanup, partial-success, recovery, ordering, and consistency method in working state.
+
+Completion: failure flows are as explicit as happy paths and every recovery action has one owner.
+
+### 12. Design concurrency and consistency
+
+Model overlap only when multiple actors, processes, renders, requests, events, or retries can interact. State ordering, atomicity, conflict resolution, duplicates/out-of-order behavior, mechanism class, and backpressure where applicable.
+
+Using the already-loaded `references/failure-concurrency-recovery.md`, return the complete failure/recovery, concurrency, ordering, and consistency decisions plus gaps.
+
+Completion: every material interleaving preserves invariants or has defined conflict/failure behavior.
+
+### 13. Realize cross-cutting obligations
+
+MUST load `references/cross-cutting-realization.md` to map each applicable quality obligation and return its structural owner, mechanism/boundary, failure or degradation behavior, proof seam, or reasoned not-applicable result.
+
+Standalone security scans remain separate; ordinary trust-boundary architecture remains program design.
+
+Completion: each applicable obligation has structural How or a reasoned not-applicable result.
+
+### 14. Define proof architecture, structural enforcement, and the trace table
+
+MUST load `references/proof-architecture-and-traceability.md` to return the trace table, proof seams, real/fake boundary decisions, enforcement classes, and one illegality decision per material invalid state: unrepresentable, or rejected at the trusted entry. That reference is the trace table's only builder. The table has one row per Specification obligation (`R`) with the columns `U · R · E · owner · interface · shape and home · state · failure · proof`, goes into the artifact (or the response, in a chat-only run), and marks missing design `gap: <why>`. Identifier tags in prose are not a trace.
+
+Do not choose exact test files, commands, or execution order. Completion of this load: the artifact names no test path and no red/green step for that illegality decision.
+
+Completion: every Specification obligation has one trace row with no blank cell; every material requirement has an observable seam or a `gap: <why>` proof cell; and every load-bearing rule has an enforcement class or explicit proof gap.
+
+### 15. Trace, simplify, and author the artifact
+
+Apply the Required Views predicates. For each selected view, state the reader question it answers: where each entity lives, who owns what, how a request reaches its effect and returns a result, what shape crosses each boundary, how state changes, how failure is contained or recovered, or how requirements map to owners and proof. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `../../shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference. Supply the selected precise views plus the per-document explanatory-visual obligation when applicable, and return the document medium and any page proof, plus each view's selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap.
+
+A newly authored or substantively revised substantial Program Design renders each fired structural view through the shared rendering owner, which chooses every medium. A screen the user will see also gets a UI view grounded in the current app, beside its structural views, not instead of them. No decorative filler satisfies the requirement. An attractive generated image with an invented owner, edge, state, boundary, or UI control fails. A generated image never excuses a missing required field or becomes the authoritative design. Reuse only after freshness inspection, and do not regenerate for typo-only edits.
+
+In a file-backed set, update the document's `index.md` entry and its through-line steps as the set layout says. When the rendering reference chooses a page, as it does by default for a set the owner reviews, use `presentation-html` to refresh it once the Markdown is written.
+
+Keep distinct reader questions in separate views when combining them would hide an owner, call edge, state transition, failure path, or proof seam. A request for one diagram or valid Mermaid syntax does not override the fired view predicates or semantic fields: reject the overloaded request and render the separate inspectable views now rather than also producing the lossy all-in-one view.
+
+MUST load `references/artifact-and-self-review.md` with the Required Views decisions and rendering results to consume and verify the binding table and trace table, apply view examples and pruning, and return the artifact decision, artifact identity, trace-navigation result, view-verification result, pruned elements, and exact view gaps.
+
+For substantial or uncertain work, stage source notes, current/target comparisons, credible alternatives, and prototype component/call/state/failure views in private working state, the repository's ignored scratch convention, or `tmp/design-workflows/<date>-<slug>/`. Quick work keeps the comparison in working state. Scratch is optional evidence, never a normative home or required reading. The trace table is never scratch: it lives in the artifact.
+
+Author top-down. Begin with the rendered fired views. Use concise prose as the overview only when no picture-type view fired. The overview lets a human explain how the specified behavior works, then reveal entity homes, components, interfaces, call paths, state, flows, failure/recovery, concurrency, cutover, trust, and proof. Link through the immediate specification scenario or observable contract rather than jumping from raw customer needs directly to components.
+
+The Lead expresses every selected requirement realization, entity binding, component, ownership rule, interface, state/failure policy, view, and claim. Unmapped needs return as gaps rather than becoming delegated design work.
+
+After deletion or simplification, compare coverage with the accepted requirements set. Many mechanisms may become fewer, but the complete accepted requirements set from `spec-design` (affected classes, stable identities and requirements, priorities and assigners, named variants, defaults, observable contracts, constraints, and proof obligations) may not lose any item without owner authority. Stop on a conflict with mutually narrowed current files.
+
+Completion: each design element serves an obligation, constraint, failure policy, or proof need; after any deletion or simplification pass, every accepted identity has an inspectable `covered | owner-authorized supersession | gap` disposition and anchor, derived from its trace-table row for each Specification obligation and reported beside the table for every other accepted identity, with shared rows allowed only when every member identity is enumerated and has the same disposition and anchor; and every fired Required View has a passed rendering result with its semantic fields preserved.
+
+### 16. Run the author integration self-check and record the structure decision
+
+Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the trace table and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. Consume each generated visual's accepted project asset, relative embed, semantic/readability inspection and destination-preview result, then return the integration self-check with exact gaps.
+
+Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show the views, pictures a reader can follow first, then the tables:
+
+```text
+component view, drawn
+one representative entry-to-effect path, drawn
+binding table
+trace table
+deviations and unresolved decisions: none | list
+```
+
+New components and contracts, complexity spent, and accepted-requirements coverage are read from those tables. Saying the tables exist is not showing them; a read-only or chat-only run puts them in the response. When requested machinery falls outside the confirmed goal boundary, reject it and continue with the authorized design; that rejected pressure does not create a new owner decision.
+
+Then continue to step 17 in the same run. Do not ask anyone to confirm the structure: stop only when a `decision-needed` condition holds, and then with its brief.
+
+Completion: the current artifact has exact passes and gaps and records the selected structure with its alternatives, tradeoffs, and falsifiers; the views above were shown; and every accepted requirement remains covered or has owner-authorized supersession. Self-check is never independent review.
+
+### 17. Obtain fresh local review when required
+
+Call `spec-program-review` using `classify-review-requirement` with: requested future mode `program-only`; current Requirements, Specification, and Program Design identities; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
+
+When required, invoke `spec-program-review` separately in `program-only` mode with fresh context and read-only authority, carrying:
+
+- current distinct Requirements, Specification, and Program Design identities;
+- governing sources, authority states, and coverage;
+- confirmed goal boundary and accepted requirements set;
+- constraints, non-goals, risk predicates, and claimed proof evidence or gaps;
+- the readiness question and any prior coverage plus semantic-change record.
+
+Consume each accepted finding's ordered correction route: Why/What returns to `spec-design`; structural How returns here; `both` returns to `spec-design` first and resumes here only after the observable contract is settled; caller-owned decisions return to the caller and this design does not resume until they are resolved. Follow `spec-program-review`'s bounded review-and-correction-round policy for its convergence rule, parent verification, and any later review.
+
+Completion: the permitted independent review coverage and parent-verified corrections are ready under `spec-program-review`'s policy, or the exact non-substantial basis or block is recorded.
+
+### 18. Return the local result
+
+Return the distinct Requirements, Specification, and Program Design identities; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the coverage disposition derived from the trace table; self-check; independent review; debt/gaps; and non-acceptance.
+
+IF returning a substantial program design in chat, use the `presentation-*` skill matching the current surface to render the selected component, call, state, or failure views before the compact result summary; honor an exact user-requested format instead. The durable artifact remains the source of truth.
+
+Completion: the caller can continue to `verification-design` or supply the exact missing specification decision/evidence.
