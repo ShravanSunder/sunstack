@@ -1,6 +1,6 @@
 ---
 name: domain-typescript
-description: "Use when writing, changing or reviewing TypeScript code, especially function signatures and generics, unions over states or outcomes, Zod schemas and the types derived from them, escapes such as `any`, `as` or `!`, file and folder names, and which lint, format and test commands to run."
+description: "Use when writing, changing or reviewing TypeScript code, naming its files and folders, or choosing which lint, format and test commands to run."
 disable-model-invocation: true
 ---
 

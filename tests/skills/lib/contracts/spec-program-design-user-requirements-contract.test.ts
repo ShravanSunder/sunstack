@@ -17,10 +17,10 @@ describe("user requirements and design-view contracts", () => {
     const review = readPluginFile("skills/spec-program-review/SKILL.md");
 
     expect(clarification).toContain(
-      "reflect back, or re-anchor.",
+      "reflect back or re-anchor.",
     );
     expect(clarification).toContain(
-      "Not for artifact edits, review, evidence gathering, or first-pass extraction.",
+      "Not for edits, review, research or pathfinding.",
     );
     expect(clarification).toContain(
       "Re-anchor: compare the confirmed goal and governing boundaries",
