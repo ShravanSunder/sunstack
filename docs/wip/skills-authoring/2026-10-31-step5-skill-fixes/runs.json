@@ -1,0 +1,576 @@
+{
+  "source": "step-5 run 1 at sunstack f747b37e; W2 dispositions; blind-settled labels (13 overturned removed)",
+  "summary": {
+    "1-creation": {
+      "skills": 1,
+      "findings": 4
+    },
+    "4-principle-descriptions": {
+      "skills": 16,
+      "findings": 24
+    },
+    "5-other-descriptions": {
+      "skills": 10,
+      "findings": 16
+    },
+    "6-step-text": {
+      "skills": 9,
+      "findings": 33
+    },
+    "2-phase": {
+      "skills": 7,
+      "findings": 11
+    },
+    "3-practice": {
+      "skills": 1,
+      "findings": 1
+    }
+  },
+  "runs": {
+    "1-creation": {
+      "skill-authoring/domain-skill-crafting": [
+        {
+          "id": "f001",
+          "rule": "description.trigger-only",
+          "at": "skill-authoring/skills/domain-skill-crafting/SKILL.md:3"
+        },
+        {
+          "id": "f111",
+          "rule": "branch.condition",
+          "at": "skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md:123"
+        },
+        {
+          "id": "f112",
+          "rule": "branch.condition",
+          "at": "skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md:43"
+        },
+        {
+          "id": "f113",
+          "rule": "branch.condition",
+          "at": "skill-authoring/skills/domain-skill-crafting/references/main-path.md:39"
+        }
+      ]
+    },
+    "4-principle-descriptions": {
+      "sunstack-dev/principle-build-the-shared-model-first": [
+        {
+          "id": "f002",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-build-the-shared-model-first/SKILL.md:3"
+        },
+        {
+          "id": "f016",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-build-the-shared-model-first/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-design-for-concurrency": [
+        {
+          "id": "f003",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-design-for-concurrency/SKILL.md:3"
+        },
+        {
+          "id": "f018",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-design-for-concurrency/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-hold-the-scope": [
+        {
+          "id": "f004",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-hold-the-scope/SKILL.md:3"
+        },
+        {
+          "id": "f021",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-hold-the-scope/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-read-ground-truth-first": [
+        {
+          "id": "f005",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md:3"
+        },
+        {
+          "id": "f026",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-types-are-communication": [
+        {
+          "id": "f006",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-types-are-communication/SKILL.md:3"
+        },
+        {
+          "id": "f029",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-types-are-communication/SKILL.md:3"
+        },
+        {
+          "id": "f038",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/principle-types-are-communication/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-write-tests-that-can-fail": [
+        {
+          "id": "f007",
+          "rule": "description.trigger-only",
+          "at": "sunstack-dev/skills/principle-write-tests-that-can-fail/SKILL.md:3"
+        },
+        {
+          "id": "f031",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-write-tests-that-can-fail/SKILL.md:3"
+        },
+        {
+          "id": "f039",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/principle-write-tests-that-can-fail/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-define-the-domain-first": [
+        {
+          "id": "f017",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-define-the-domain-first/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-design-for-failure": [
+        {
+          "id": "f019",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-design-for-failure/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-experiment-before-proposing": [
+        {
+          "id": "f020",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-experiment-before-proposing/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-justify-the-complexity": [
+        {
+          "id": "f022",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-justify-the-complexity/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-name-the-tradeoffs": [
+        {
+          "id": "f023",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-name-the-tradeoffs/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-one-owner-per-truth": [
+        {
+          "id": "f024",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-one-owner-per-truth/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-prove-it-works": [
+        {
+          "id": "f025",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-prove-it-works/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-refine-mental-models": [
+        {
+          "id": "f027",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-refine-mental-models/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-separate-the-concerns": [
+        {
+          "id": "f028",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-separate-the-concerns/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/principle-verify-before-accepting": [
+        {
+          "id": "f030",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/principle-verify-before-accepting/SKILL.md:3"
+        }
+      ]
+    },
+    "5-other-descriptions": {
+      "agent-router/agent-collaboration": [
+        {
+          "id": "f008",
+          "rule": "description.length-warning",
+          "at": "agent-router/skills/agent-collaboration/SKILL.md:3"
+        },
+        {
+          "id": "f034",
+          "rule": "description.length-limit",
+          "at": "agent-router/skills/agent-collaboration/SKILL.md:3"
+        }
+      ],
+      "ai-scaffold/scaffold-project": [
+        {
+          "id": "f009",
+          "rule": "description.length-warning",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:3"
+        }
+      ],
+      "dev-workflow-tools/peekaboo": [
+        {
+          "id": "f010",
+          "rule": "description.length-warning",
+          "at": "dev-workflow-tools/skills/peekaboo/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/discuss-clarify-mental-models": [
+        {
+          "id": "f011",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/discuss-clarify-mental-models/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/domain-rust": [
+        {
+          "id": "f012",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/domain-rust/SKILL.md:3"
+        },
+        {
+          "id": "f035",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/domain-rust/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/domain-typescript": [
+        {
+          "id": "f013",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/domain-typescript/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/presentation-tui": [
+        {
+          "id": "f014",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/presentation-tui/SKILL.md:3"
+        },
+        {
+          "id": "f036",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/presentation-tui/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/presentation-webui": [
+        {
+          "id": "f015",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/presentation-webui/SKILL.md:3"
+        },
+        {
+          "id": "f037",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/presentation-webui/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/role-advisor": [
+        {
+          "id": "f032",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/role-advisor/SKILL.md:3"
+        },
+        {
+          "id": "f040",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/role-advisor/SKILL.md:3"
+        }
+      ],
+      "sunstack-dev/role-verifier": [
+        {
+          "id": "f033",
+          "rule": "description.length-warning",
+          "at": "sunstack-dev/skills/role-verifier/SKILL.md:3"
+        },
+        {
+          "id": "f041",
+          "rule": "description.length-limit",
+          "at": "sunstack-dev/skills/role-verifier/SKILL.md:3"
+        }
+      ]
+    },
+    "6-step-text": {
+      "dev-workflow-tools/peekaboo": [
+        {
+          "id": "f050",
+          "rule": "reference.teaching-depth",
+          "at": "dev-workflow-tools/skills/peekaboo/references/visual-testing-patterns.md:27"
+        },
+        {
+          "id": "f153",
+          "rule": "completion.criterion",
+          "at": "dev-workflow-tools/skills/peekaboo/SKILL.md:12"
+        },
+        {
+          "id": "f154",
+          "rule": "completion.criterion",
+          "at": "dev-workflow-tools/skills/peekaboo/SKILL.md:20"
+        },
+        {
+          "id": "f155",
+          "rule": "completion.criterion",
+          "at": "dev-workflow-tools/skills/peekaboo/SKILL.md:27"
+        },
+        {
+          "id": "f156",
+          "rule": "completion.criterion",
+          "at": "dev-workflow-tools/skills/peekaboo/SKILL.md:34"
+        }
+      ],
+      "sunstack-dev/orchestrator-implementation-goal": [
+        {
+          "id": "f073",
+          "rule": "reference.teaching-depth",
+          "at": "sunstack-dev/skills/orchestrator-implementation-goal/references/goal-contract-and-routing.md:110"
+        },
+        {
+          "id": "f218",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/orchestrator-implementation-goal/SKILL.md:22"
+        },
+        {
+          "id": "f225",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/orchestrator-implementation-goal/SKILL.md:34"
+        }
+      ],
+      "sunstack-dev/ops-observability-stack": [
+        {
+          "id": "f107",
+          "rule": "call.completeness",
+          "at": "sunstack-dev/skills/ops-observability-stack/SKILL.md:14"
+        },
+        {
+          "id": "f108",
+          "rule": "call.completeness",
+          "at": "sunstack-dev/skills/ops-observability-stack/SKILL.md:17"
+        }
+      ],
+      "sunstack-dev/presentation-tui": [
+        {
+          "id": "f127",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/presentation-tui/SKILL.md:50"
+        },
+        {
+          "id": "f128",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/presentation-tui/SKILL.md:56"
+        }
+      ],
+      "sunstack-dev/presentation-webui": [
+        {
+          "id": "f129",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/presentation-webui/SKILL.md:45"
+        }
+      ],
+      "sunstack-dev/role-advisor": [
+        {
+          "id": "f131",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/role-advisor/SKILL.md:47"
+        },
+        {
+          "id": "f132",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/role-advisor/SKILL.md:48"
+        }
+      ],
+      "ai-scaffold/scaffold-project": [
+        {
+          "id": "f141",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:56"
+        },
+        {
+          "id": "f142",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:64"
+        },
+        {
+          "id": "f143",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:134"
+        },
+        {
+          "id": "f145",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:211"
+        },
+        {
+          "id": "f147",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:229"
+        },
+        {
+          "id": "f152",
+          "rule": "completion.criterion",
+          "at": "ai-scaffold/skills/scaffold-project/SKILL.md:237"
+        }
+      ],
+      "sunstack-dev/audit-security-review": [
+        {
+          "id": "f163",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/audit-security-review/SKILL.md:44"
+        },
+        {
+          "id": "f164",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/audit-security-review/SKILL.md:50"
+        },
+        {
+          "id": "f165",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/audit-security-review/SKILL.md:51"
+        },
+        {
+          "id": "f166",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/audit-security-review/SKILL.md:57"
+        },
+        {
+          "id": "f167",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/audit-security-review/SKILL.md:58"
+        }
+      ],
+      "sunstack-dev/ops-linear-tracking": [
+        {
+          "id": "f206",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:103"
+        },
+        {
+          "id": "f207",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:104"
+        },
+        {
+          "id": "f208",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:105"
+        },
+        {
+          "id": "f209",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:106"
+        },
+        {
+          "id": "f210",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:107"
+        },
+        {
+          "id": "f211",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:115"
+        },
+        {
+          "id": "f212",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/ops-linear-tracking/SKILL.md:116"
+        }
+      ]
+    },
+    "2-phase": {
+      "sunstack-dev/debug-investigation": [
+        {
+          "id": "f115",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/debug-investigation/references/background-monitoring.md:83"
+        },
+        {
+          "id": "f116",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/debug-investigation/references/background-monitoring.md:119"
+        }
+      ],
+      "sunstack-dev/plan-improve-repo": [
+        {
+          "id": "f124",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/plan-improve-repo/references/reconcile-backlog.md:20"
+        },
+        {
+          "id": "f241",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/plan-improve-repo/SKILL.md:152"
+        },
+        {
+          "id": "f242",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/plan-improve-repo/SKILL.md:153"
+        }
+      ],
+      "sunstack-dev/spec-design": [
+        {
+          "id": "f136",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/spec-design/SKILL.md:294"
+        },
+        {
+          "id": "f268",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/spec-design/SKILL.md:220"
+        }
+      ],
+      "sunstack-dev/implement-plan": [
+        {
+          "id": "f178",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/implement-plan/SKILL.md:29"
+        }
+      ],
+      "sunstack-dev/implementation-pr-wrapup": [
+        {
+          "id": "f188",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/implementation-pr-wrapup/SKILL.md:60"
+        }
+      ],
+      "sunstack-dev/plan-implementation": [
+        {
+          "id": "f232",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/plan-implementation/SKILL.md:25"
+        }
+      ],
+      "sunstack-dev/spec-program-review": [
+        {
+          "id": "f270",
+          "rule": "completion.criterion",
+          "at": "sunstack-dev/skills/spec-program-review/SKILL.md:114"
+        }
+      ]
+    },
+    "3-practice": {
+      "sunstack-dev/practices-research": [
+        {
+          "id": "f126",
+          "rule": "branch.condition",
+          "at": "sunstack-dev/skills/practices-research/SKILL.md:29"
+        }
+      ]
+    }
+  }
+}
