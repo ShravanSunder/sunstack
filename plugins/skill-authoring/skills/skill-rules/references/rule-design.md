@@ -110,7 +110,7 @@ Both questions go in the entry's one request, and the walk reads `requires_resul
 
 This is the author's stage of the one example every skill in this change teaches. `decision-matrix.md` classified the standard as worth checking; here it becomes a design.
 
-The standard (`domain-skill-crafting/references/calls-and-placement.md:22`): "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example."
+The standard (`domain-skill-crafting/references/calls-and-placement.md:22`): "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths." That one sentence is what the judge sees. Its section's teaching names the exemptions (a tool or platform used through its supported interface, domain vocabulary, this toolkit's own infrastructure, a product named only as a labelled example), and the questions below carry them.
 
 The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction before its first H2: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." In #187 no rule asked this of line 17: the one that read it judged its call's return, and passed the line once a return was added.
 

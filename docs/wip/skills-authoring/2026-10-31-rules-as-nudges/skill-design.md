@@ -141,7 +141,9 @@ No description changes, so no trigger trial applies.
 
 - **`references/calls-and-placement.md`.** The placement standard, marked (D16):
 
-  > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
+  > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.
+
+  Its section opens with the teaching around it: "That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example." The exemptions stay enforced on the rule's questions (D19a). (The 🦁 Lead's decision, 31 Oct: the standard is the first sentence alone; form only, meaning unchanged.)
 - **`rules/skill-rules.config.json`.**
   - A `section` kind: each section's own text from the H1 down, tables included, with its own loads, and the parent heading for context.
   - The rule-file checked files and a JSON evidence kind, once the engine admits JSON (D7).

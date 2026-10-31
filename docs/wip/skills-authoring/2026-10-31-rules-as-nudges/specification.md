@@ -82,7 +82,7 @@ Every skill below teaches its part on the same case: #187's line, `ops-observabi
 | act | the writer, review lead or Lead | reads the loaded file and asks where AgentStudio's own workflow lives; records "routed: belongs in AgentStudio's repository" instead of polishing the call's return, which is what #187 did |
 | review the rule | the rule's reviewer, with `decision-model-review` | checks the chunk holds the loaded file's opening, that "can't settle" ends in a nudge or `uncertain` rather than `pass`, and that the countercases pass |
 
-The countercases matter as much as the case, and each follows from the standard's own wording (below), not from exceptions kept only in test notes:
+The countercases matter as much as the case, and each follows from the standard's home (below), not from exceptions kept only in test notes:
 - **a labelled example:** a product named only as an example ("for example, AgentStudio's beta channel") gets no nudge;
 - **this toolkit's own infrastructure,** such as its own observability stack, gets no nudge;
 - **a tool or platform the work uses,** such as running `claude plugin validate .` for a Claude plugin, gets no nudge: that is the platform's supported contract, not one product's own workflow;
@@ -177,7 +177,9 @@ Each skill shows its own stage of this example. None restates the others' stages
 
 - **A placement standard:**
 
-  > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
+  > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.
+
+  Its section opens with the teaching around it: "That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example." The exemptions stay enforced on the rule's questions (D19a). (The 🦁 Lead's decision, 31 Oct: the standard is the first sentence alone; form only, meaning unchanged.)
 
   It leaves out the "scope the owner adopted" escape on purpose. The owner's direction was that a product's workflow belongs in its own repository even when its scope is stated: "skills for agentstudio shodukl be in agent stkudio repo".
 - The rules folder:

@@ -19,7 +19,7 @@ Placement:
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
-- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
+- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.
 - A skill has no per-skill provenance document unless it needs a task-specific reference for progressive disclosure.
 
 Calls:
@@ -95,7 +95,7 @@ no behavior change                                       -> prune
 
 ## A product's own workflow
 
-A skill meant for any repository is read by agents in every repository that installs it. A step, branch or load that sends them into one product's own workflow (its build and release scripts, its run commands, its state files, its machine paths) is wrong in every other repository, and it drifts, because the product's own repository is where that workflow changes. So the workflow lives there, and a generic skill names the product only as an example.
+A skill meant for any repository is read by agents in every repository that installs it. A step, branch or load that sends them into one product's own workflow (its build and release scripts, its run commands, its state files, its machine paths) is wrong in every other repository, and it drifts, because the product's own repository is where that workflow changes. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
 
 Read each step, branch and load with these questions, in order:
 
@@ -117,7 +117,7 @@ The transfer test, both ways:
 - **Case one, where it should hold:** a generic debugging skill in a toolkit for Python data pipelines, with a branch that loads one company's own Airflow runbook. The standard says that runbook belongs in the company's repository, and the branch names the company only as an example. It holds.
 - **Case two, a bad choice it never names:** a generic release skill whose step reads one machine's `~/Library/Application Support/<product>/state.json` before tagging. The standard names no release tooling and no state file of that product, and it still rejects the step, as a product's state file and machine path. It holds. Its countercase, a release step that runs `gh release create` through GitHub's own CLI, is kept under the tool clause.
 
-A rule that checks this standard can show the route into a product's workflow, but not where that workflow should live, so its finding is a nudge to read the loaded file and decide; `skill-rules` designs it.
+A rule that checks this standard can show the route into a product's workflow, but not where that workflow should live, so its finding is a nudge to read the loaded file and decide. Its judge sees the standard's one sentence; the exemptions above sit on the rule's questions, each on the question that owns it. `skill-rules` designs it.
 
 ## Call forms
 
