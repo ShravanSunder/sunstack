@@ -12,8 +12,7 @@
   - `plan-implementation` step 1;
   - `plan-improve-repo` validation steps 3 and 4;
   - `spec-program-review`'s Reviewer commission.
-- `spec-design`'s two findings are explained as conforming at their lines; its text is unchanged.
-- The phase composition map is regenerated, with line counts only.
+- `spec-design`'s two findings are explained as conforming at their lines, and its text is unchanged. The phase composition map is regenerated (line counts only).
 - Validation:
   - a complete keyed rules run over the seven skills on the 0.8.0 kit: no incomplete part, no skipped rule, 0 errors, no description warning; ten assigned findings cleared and one explained;
   - `tests/skills`: tsc clean, vitest 268/268, `rules --check` 13 rules;
