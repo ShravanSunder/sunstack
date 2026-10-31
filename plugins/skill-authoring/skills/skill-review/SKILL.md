@@ -30,6 +30,8 @@ IF the stage is design review, load `references/design-review.md` and return its
 
 Start each reviewer agent the stage names in its own session with no authoring history. Give it the target, the check references it walks by path, and `references/checks/review-schema.md`, and ask for candidate findings with anchors only. When the selected checks fit one family, split them across two agents.
 
+IF the target adds or edits a rules entry, the evidence or config, or a marked standard's wording, also start a reviewer agent on the `sunstack-dev` skill `decision-model-review` for that decision model, and verify its returned findings in step 3 like any other candidate. When `decision-model-review` isn't installed, record `skill unavailable: decision-model-review` as a coverage gap in this review's result; the decision-model part never passes silently.
+
 IF the host repository's instructions or skills provide an agent-management practice with a Reviewer role, load `references/reviewers-through-host-practice.md` and return one commission per stage reviewer, sent through that practice as a review-lead commissioner it admits, or the gap you returned to the requester when it admits none. Otherwise use the host's own way to start an agent. If the host cannot start a separate agent, stop and tell the user: a review without a second agent is not a review.
 
 Completion: every selected check has a status from the agent that walked it.
