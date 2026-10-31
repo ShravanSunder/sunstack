@@ -80,7 +80,7 @@ Use 1Password without leaking secrets:
 - prefer `op://` references passed through environment variables, `op run`, or `op inject` into an ephemeral env file
 - do not ask the user for 1Password access again once a usable reference path is known; verify the reference and report the exact blocker only if it fails
 - never persist secret values, passwords, tokens, `Authorization` headers, `AWS_ACCESS_KEY_ID`, or connection string values in `monitor.json`, `events.jsonl`, `stdout.log`, `stderr.log`, debug artifacts, shell history, or chat output
-- if the child process accepts the credential only as a file and no file the user already authorized holds it, create a temporary credential file under the monitor tmp directory with `umask 077` or `chmod 600`, use it only for the child process, and delete it in `trap` cleanup
+- if the authorized way to pass the credential to the child process needs a file and no usable file the user already authorized holds it, create a temporary credential file under the monitor tmp directory with `umask 077` or `chmod 600`, use it only for the child process, and delete it in `trap` cleanup
 - record secret provenance as a field name or 1Password reference label only, not the value
 
 Set `redaction_applied: true` whenever any process output was scanned or persisted. Redact before writing, not after.
