@@ -3,7 +3,12 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
 import { z } from "zod";
-import { assembledRules, checkOutputSchema, formatLintReport } from "./skill-rules-report.ts";
+import {
+  assembledKinds,
+  assembledRules,
+  checkOutputSchema,
+  formatLintReport,
+} from "./skill-rules-report.ts";
 import type { LintReport } from "./skill-rules-report.ts";
 import {
   assertInstalledPackageIsRequired,
@@ -462,7 +467,15 @@ describe("repository skill rule runner (G10)", () => {
     const output = /^Reports: (.+)$/m.exec(result.stdout)?.[1];
     expect(output).toMatch(new RegExp(`${root}/tests/skills/tmp/rules-`));
     if (!output) throw new Error("Missing report path");
-    expect(JSON.parse(readFileSync(path.join(output, "report.json"), "utf8"))).toHaveLength(1);
+    const check = checkOutputSchema.parse(
+      JSON.parse(readFileSync(path.join(output, "report.json"), "utf8")),
+    );
+    expect(assembledRules(check)).toHaveLength(1);
+    expect(assembledKinds(check).map((entry) => entry.kind).sort()).toEqual([
+      "sentence",
+      "step",
+      "workflow_section",
+    ]);
     assertInstalledPackageIsRequired(root);
   });
 
