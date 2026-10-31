@@ -11,7 +11,7 @@ This check owns whether each node's policy is complete, and whether the composit
 | item | fails when | bad control | smallest correction |
 | --- | --- | --- | --- |
 | statistic named | a threshold doesn't name the quantity it reads | "≥ .6 is confident enough" for a Noul and a Choice alike | name each node's statistic |
-| inequality stated | a band doesn't say whether its ends are included | ".3–.7 is uncertain", copied with no equality stated | state each end's inequality |
+| inequality stated | a band doesn't say whether its ends are included | ".3 to .7 is uncertain", copied with no equality stated | state each end's inequality |
 | bar per label count | a Choice's top-probability bar ignores its label count | one .6 bar for a 3-label and a 5-label Choice | set each bar for its n |
 | in-between route intended | an in-between answer has no intended route, or is conflated with a failed reply or missing evidence | a .5 answer, a timeout and a missing source all routed to pass | route each of the three to its own outcome |
 | costs named | a threshold or precedence rests on no named cost of a false finding, a miss and a review | a bar moved "until the report looks quieter" | name the costs; choose from development results |

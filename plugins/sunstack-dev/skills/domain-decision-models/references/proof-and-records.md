@@ -15,10 +15,10 @@ This reference owns how a decision model is shown to work: the sets and labels, 
 
 ## Sets and labels
 
-- **Labels come first.** Labels come from people or agents independent of the model's author and of any run, collected before the run. A label taken from the model's own answers proves nothing.
+- Labels come from people or agents independent of the model's author and of any run, and are collected before the run. A label taken from the model's own answers proves nothing.
 - **Each set holds all three kinds:** good, bad and near miss, each case with its source. A set that still lacks a kind after a real search names that gap, and claims nothing about the missing kind.
-- **Development cases** are used to refine evidence, questions and policy.
-- **Freeze, then held-out.** Freeze the evidence, questions, policy and model record. Then score held-out cases end to end, once, against the current model as the baseline. Held-out cases come from other sources than the development cases; any overlap is named.
+- Development cases refine the evidence, the questions and the policy.
+- Freeze the evidence, questions, policy and model record. Then score held-out cases end to end, once, against the current model as the baseline. Held-out cases come from other sources than the development cases; any overlap is named.
 - **A held-out miss is reported, never tuned away.** After a correction, cases already scored as held-out become regression cases. A fresh held-out claim needs cases not yet seen.
 
 ## The comparison, one variable at a time
@@ -48,7 +48,7 @@ A probe is a deliberate experiment on one variable:
 3. **Record, for every result,** the requested and returned model version, the raw assessments, and the route and outcome.
 4. **Compare identical-byte repeats first,** to measure baseline variation. Never add changing ids or timestamps to a "repeat"; that confounds field sensitivity with sampling variation.
 5. **Then change one variable:** a meaning-preserving paraphrase, or the real on-wire option order.
-6. **An order claim is admissible only when the bytes sent actually differed.** A source-key shuffle a driver re-sorts proves nothing, and a renamed label is a different experiment. If the provider canonicalizes order, a null result can't prove invariance.
+6. **An order claim is admissible only when the bytes sent differed.** A source-key shuffle a driver re-sorts proves nothing, and a renamed label is a different experiment. If the provider canonicalizes order, a null result can't prove invariance.
 7. **A deliberately inverted instruction-and-criteria pair is a control, rejected locally** before any paid test.
 8. **Expected labels come from the standard and independent labelers,** never from whichever wording scores more confidently. A meaning-preserving route flip is a counterexample on that case; a passing pair doesn't establish general stability.
 

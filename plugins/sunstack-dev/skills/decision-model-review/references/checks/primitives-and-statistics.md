@@ -10,7 +10,7 @@ This check owns whether each question's type fits what its answer means, whether
 
 | item | fails when | bad control | smallest correction |
 | --- | --- | --- | --- |
-| primitive by meaning | a Noul carries a category, a Choice carries coexisting properties, or a Score's levels mix dimensions | a "quality 1–5" Score mixing clarity, length and accuracy | pick the primitive the answer means; split mixed dimensions |
+| primitive by meaning | a Noul carries a category, a Choice carries coexisting properties, or a Score's levels mix dimensions | a "quality 1 to 5" Score mixing clarity, length and accuracy | pick the primitive the answer means; split mixed dimensions |
 | exclusive labels | a Choice's labels can be true together | a "which gap?" Choice where two gaps coexist | separate Nouls with a declared first-failure order |
 | fit where the menu may not cover | a candidate menu that may hold no acceptable match has no reject, fit or fallback path | acting on the top search result when none is the item meant | add a fit question or a fallback, judged against the actual candidates |
 | no redundant fit | an exhaustive menu carries a fit gate that restates membership | a fit question on {refund, cancel, other} | remove the gate |

@@ -82,7 +82,7 @@ Returning the parent category when the child is uncertain changes specificity, n
 ```text
 Good: how fully is the argument supported? none · one claim · most claims · all claims
       code reads the normalized position against its bars
-Bad:  quality 1–5, whose levels mix clarity, length and accuracy
+Bad:  quality 1 to 5, whose levels mix clarity, length and accuracy
 Bad:  position .5 read as "half the work done"
 ```
 
@@ -107,7 +107,7 @@ Bad:  state = the lead-in line "When retrofitting, handle existing files:"
       names different work? → no (.66) → finding
       (the two options listed under it were never sent)
 Good: state = the lead-in with its attached list
-      same question → pass, finding or uncertain on what is actually there
+      same question → pass, finding or uncertain on what is there
       attached block unavailable → evidence gap, never "no action"
 ```
 

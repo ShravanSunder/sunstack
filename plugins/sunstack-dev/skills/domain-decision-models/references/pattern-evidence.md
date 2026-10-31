@@ -22,7 +22,7 @@ A synthesis or an extension can be the right design. The label says how much its
 ## Two capability profiles
 
 - **The provider and model profile** is what the provider documents. Box exists, but it's experimental, behind an opt-in header, and needs 1.14; it always returns a box, so presence needs its own assessment. Older text-only pages lag the newer image pages: record that discrepancy rather than resolving it by assumption.
-- **The client or driver profile** is what the client actually implements. Sunstack's driver supports Noul, Choice and Score text questions over one state, in a static graph, with no Box or assets.
+- **The client or driver profile** is what the client implements. Sunstack's driver supports Noul, Choice and Score text questions over one state, in a static graph, with no Box or assets.
 
 A feature in the provider's docs isn't support in a client. Don't apply Choice or Score confidence formulas to Box confidence without a defined contract.
 
