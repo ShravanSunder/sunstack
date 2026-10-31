@@ -218,5 +218,212 @@
       "line": 3,
       "pieceLine": 1
     }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "startLine": 25,
+      "endLine": 82,
+      "fieldLine": 44
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 20,
+      "pieceLine": 15
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+      "startLine": 83,
+      "endLine": 290,
+      "fieldLine": 164
+    },
+    "excerpt": {
+      "path": "case-012/SKILL.md",
+      "line": 82,
+      "pieceLine": 74
+    }
+  },
+  {
+    "id": "case-013",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
+      "startLine": 52,
+      "endLine": 150,
+      "fieldLine": 92
+    },
+    "excerpt": {
+      "path": "case-013/SKILL.md",
+      "line": 41,
+      "pieceLine": 39
+    }
+  },
+  {
+    "id": "case-014",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+      "startLine": 83,
+      "endLine": 290,
+      "fieldLine": 178
+    },
+    "excerpt": {
+      "path": "case-014/SKILL.md",
+      "line": 96,
+      "pieceLine": 90
+    }
+  },
+  {
+    "id": "case-015",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "startLine": 25,
+      "endLine": 82,
+      "fieldLine": 82
+    },
+    "excerpt": {
+      "path": "case-015/SKILL.md",
+      "line": 58,
+      "pieceLine": 53
+    }
+  },
+  {
+    "id": "case-016",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+      "startLine": 83,
+      "endLine": 290,
+      "fieldLine": 186
+    },
+    "excerpt": {
+      "path": "case-016/SKILL.md",
+      "line": 104,
+      "pieceLine": 98
+    }
+  },
+  {
+    "id": "case-017",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+      "startLine": 167,
+      "endLine": 171,
+      "fieldLine": 171
+    },
+    "excerpt": {
+      "path": "case-017/SKILL.md",
+      "line": 5,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-018",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+      "startLine": 62,
+      "endLine": 68,
+      "fieldLine": 68
+    },
+    "excerpt": {
+      "path": "case-018/SKILL.md",
+      "line": 7,
+      "pieceLine": 1
+    }
+  },
+  {
+    "id": "case-019",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "step",
+      "field": "completion"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+      "startLine": 83,
+      "endLine": 290,
+      "fieldLine": 290
+    },
+    "excerpt": {
+      "path": "case-019/SKILL.md",
+      "line": 208,
+      "pieceLine": 202
+    }
   }
 ]

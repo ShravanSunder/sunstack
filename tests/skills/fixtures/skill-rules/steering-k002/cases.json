@@ -318,5 +318,159 @@
       "path": "case-015/SKILL.md",
       "line": 47
     }
+  },
+  {
+    "id": "case-016",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+      "startLine": 1,
+      "endLine": 132,
+      "fieldLine": 15
+    },
+    "excerpt": {
+      "path": "case-016/references/descriptions-and-invocation.md",
+      "line": 15
+    }
+  },
+  {
+    "id": "case-017",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/skill-audit/SKILL.md",
+      "startLine": 21,
+      "endLine": 89,
+      "fieldLine": 59
+    },
+    "excerpt": {
+      "path": "case-017/SKILL.md",
+      "line": 39
+    }
+  },
+  {
+    "id": "case-018",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+      "startLine": 43,
+      "endLine": 97,
+      "fieldLine": 91
+    },
+    "excerpt": {
+      "path": "case-018/SKILL.md",
+      "line": 49
+    }
+  },
+  {
+    "id": "case-019",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/security.md",
+      "startLine": 1,
+      "endLine": 45,
+      "fieldLine": 9
+    },
+    "excerpt": {
+      "path": "case-019/references/security.md",
+      "line": 9
+    }
+  },
+  {
+    "id": "case-020",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/security.md",
+      "startLine": 1,
+      "endLine": 45,
+      "fieldLine": 6
+    },
+    "excerpt": {
+      "path": "case-020/references/security.md",
+      "line": 6
+    }
+  },
+  {
+    "id": "case-021",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/plan-improve-repo/SKILL.md",
+      "startLine": 146,
+      "endLine": 164,
+      "fieldLine": 158
+    },
+    "excerpt": {
+      "path": "case-021/SKILL.md",
+      "line": 13
+    }
+  },
+  {
+    "id": "case-022",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "sentence",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+      "startLine": 43,
+      "endLine": 97,
+      "fieldLine": 95
+    },
+    "excerpt": {
+      "path": "case-022/SKILL.md",
+      "line": 53
+    }
   }
 ]
