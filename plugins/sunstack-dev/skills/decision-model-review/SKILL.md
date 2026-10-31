@@ -12,12 +12,12 @@ A 🔎 Reviewer Sidekick with no authoring history runs it, commissioned through
 ## 1. Admit the profile and the stage
 
 Name the model's execution profile and the review's stage:
-- **profile:** a kit rule, a `run_judgments` caller, or an engine selection;
+- **profile:** a lint rule (a rule in a rulebook whose findings go to an agent), a `run_judgments` caller, or an engine selection;
 - **stage:** design, implementation, or delivery.
 
 Then name the inputs that profile and stage supply.
-- **A kit rule** supplies what its stage has produced so far: the classification, the evidence print and encoded state, the question set, the tree and policy table, the cases and run reports, and the frozen configuration.
-- **A `run_judgments` caller or a selection** supplies its equivalents: the exact state or its builder, the questions with their criteria, the policy code, and its tests, results and version evidence. It never fabricates kit artifacts.
+- **A lint rule** supplies what its stage has produced so far: the classification, the evidence print and encoded state, the question set, the tree and policy table, each finding route's nudge, the cases and run reports, and the frozen configuration. When one exists, it also supplies the receiving reading or commission built from its nudges: what an agent or a Lead made of them.
+- **A `run_judgments` caller or a selection** supplies its equivalents: the exact state or its builder, the questions with their criteria, the policy code, and its tests, results and version evidence. Its own code acts on the outcome, so it has no nudge to review. It never fabricates lint-rule artifacts.
 
 Return `blocked-input` only when nothing supplied supports any check, naming what's missing and who restores it. Otherwise the review goes on. A supplied request that is visibly empty or invalid is a finding where a check supports it, not missing review input.
 
@@ -35,7 +35,7 @@ MUST load `references/checks/review-schema.md` and return the status, finding, r
 
 Record a status for every check. A check whose evidence the profile or stage doesn't supply yet is `blocked` or `partial`, named with the missing input; the checks that can run still return their findings. A design-stage model can show an inverted question or an averaged veto before any results exist.
 
-Walk every check below. Each MUST load returns the check's status, the inputs it read, and its candidate findings with their anchors, or its `blocked` or `partial` reason.
+Walk every check below that the profile selects. Each load returns the check's status, the inputs it read, and its candidate findings with their anchors, or its `blocked` or `partial` reason.
 
 1. MUST load `references/checks/state-and-evidence.md`: whether the state holds the decisive content, names its evaluated fields, and keeps out what the judgment doesn't use.
 2. MUST load `references/checks/questions.md`: whether each question asks one proposition its criteria define, states its route direction, and passes the standard's own bad examples.
@@ -43,6 +43,7 @@ Walk every check below. Each MUST load returns the check's status, the inputs it
 4. MUST load `references/checks/policy-and-composition.md`: whether each node's policy is complete, and whether the composition keeps obligations and vetoes ahead of any weighting.
 5. MUST load `references/checks/proof-and-claims.md`: whether each claim rests on labels, a full denominator, a frozen set, a baseline and one version group.
 6. MUST load `references/checks/patterns-and-capability.md`: whether each pattern and capability claim carries its evidence, and whether a composed model passes the pattern-fit checklist.
+7. IF the profile is a lint rule, load `references/checks/nudge-and-receiver.md` and return its check record: whether each finding route gives the receiving agent what it needs to make the broader call (what was observed, the standard, the severity, where to read, an honest basis, no can't-settle route ending `pass`), and, when the receiving reading or commission is supplied, whether it carries the nudge and its broader question or narrows it into "make it pass". This is judged apart from whether the tree classifies the piece correctly. For a `run_judgments` caller or a selection, whose own code acts on the outcome, record this check as not selected, with the profile as the reason.
 
 Completion: every check has a status, and each `blocked` or `partial` one names its missing input.
 
@@ -66,7 +67,7 @@ Completion: every candidate is kept, merged or rejected, with its reason.
 
 ## 6. Return the verdict
 
-Return `ready`, `needs-revision`, `blocked-input` or `not-converging`, with the probes still owed and each proof the records can't support marked unavailable. Unavailable proof never passes. A delivery-stage review never returns `ready` while a check the profile requires is `blocked` or `partial`.
+Return `ready`, `needs-revision`, `blocked-input` or `not-converging`, with the probes still owed and each proof the records can't support marked unavailable. Unavailable proof never passes. A delivery-stage review never returns `ready` while a check, or a part of one, that the profile requires is `blocked` or `partial`. A part blocked only for want of an input the profile marks optional, such as a lint rule's receiving reading or commission, is reported as not run with that input named, never hidden, and doesn't hold back `ready`.
 
 ## 7. Rounds
 
@@ -81,7 +82,7 @@ The review is not done while any of these hold:
 
 - a check has no status, or a `blocked` or `partial` check doesn't name its missing input;
 - a whole review stopped as `blocked-input` while a supplied input supported any check;
-- a delivery-stage `ready` with a required check not `complete`;
+- a delivery-stage `ready` with a required check or part not `complete`, or a part not run for want of an optional input left out of the return;
 - a finding without its anchor or its standard, or a candidate neither kept, merged nor rejected;
 - unavailable proof reported as passed;
 - a probe run by the reviewer;
