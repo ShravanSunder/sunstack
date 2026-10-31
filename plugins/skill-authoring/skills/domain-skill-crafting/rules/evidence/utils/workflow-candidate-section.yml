@@ -1,0 +1,26 @@
+{
+  "id": "workflow-candidate-section",
+  "language": "Markdown",
+  "rule":
+    {
+      "any":
+        [
+          {
+            "all":
+              [
+                { "kind": "section" },
+                {
+                  "has":
+                    {
+                      "kind": "list",
+                      "has": { "matches": "numbered-item", "stopBy": "neighbor" },
+                      "stopBy": "neighbor",
+                    },
+                },
+              ],
+          },
+          { "matches": "numbered-heading-section" },
+          { "matches": "step-heading-section" },
+        ],
+    },
+}

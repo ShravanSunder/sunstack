@@ -11,7 +11,7 @@
     "phase-composition": "node lib/phase-composition/write-phase-composition-map.ts"
   },
   "devDependencies": {
-    "@sunstack/cli": "0.2.0",
+    "@sunstack/cli": "0.4.0",
     "@types/node": "^25.5.0",
     "ajv": "^8.17.1",
     "tinyrainbow": "^3.1.0",

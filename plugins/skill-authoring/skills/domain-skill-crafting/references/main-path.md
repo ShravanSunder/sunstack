@@ -5,7 +5,7 @@
 - `SKILL.md` states the mental model or stance before any detail or exception.
 - The mental model names the concept, lens or leading word the skill draws on, and the behavior it makes predictable.
 - A reader of the mental model alone can predict the shape of the workflow.
-- `SKILL.md` shows the all-run spine, from load to completion, in one scan.
+- `SKILL.md` shows the all-run spine, from load to completion, in one scan.<!-- K002 -->
 - The all-run spine handles every branch the description promises.
 - Steps are ordered only where order changes behavior.
 - Each meaningful step or reference pass ends by saying what must be true before the work continues.

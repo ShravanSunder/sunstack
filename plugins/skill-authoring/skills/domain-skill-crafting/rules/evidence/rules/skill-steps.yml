@@ -1,12 +1,19 @@
 {
-  "id": "step",
+  "id": "step-candidate",
   "language": "Markdown",
   "files": ["**/SKILL.md"],
   "rule":
     {
       "all":
         [
-          { "matches": "step" },
+          {
+            "any":
+              [
+                { "matches": "numbered-item" },
+                { "matches": "numbered-heading-section" },
+                { "matches": "step-heading-section" },
+              ],
+          },
           { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
         ],
     },
@@ -48,58 +55,27 @@
     {
       "all":
         [
-          { "kind": "paragraph", "regex": "^(?:IF|When)\\b" },
+          { "kind": "paragraph", "regex": "^(?:IF|If|if|When|when)\\b" },
           { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
         ],
     },
 }
 ---
+{ "id": "section-heading", "language": "Markdown", "rule": { "kind": "section" } }
+---
 {
-  "id": "sentence",
+  "id": "standards-section",
   "language": "Markdown",
   "files": ["**/SKILL.md", "**/references/**/*.md"],
   "rule":
     {
       "all":
         [
-          {
-            "any":
-              [
-                { "kind": "list_item" },
-                {
-                  "all":
-                    [
-                      { "kind": "paragraph" },
-                      { "not": { "inside": { "kind": "list_item", "stopBy": "end" } } },
-                    ],
-                },
-              ],
-          },
+          { "matches": "standards-heading-section" },
           { "not": { "inside": { "matches": "quoted", "stopBy": "end" } } },
-          {
-            "inside":
-              {
-                "any":
-                  [
-                    { "matches": "step" },
-                    {
-                      "kind": "section",
-                      "has":
-                        {
-                          "kind": "atx_heading",
-                          "regex": "^##\\s+Standards\\s*$",
-                          "stopBy": "neighbor",
-                        },
-                    },
-                  ],
-                "stopBy": "end",
-              },
-          },
         ],
     },
 }
----
-{ "id": "section-heading", "language": "Markdown", "rule": { "kind": "section" } }
 ---
 {
   "id": "reference-section",

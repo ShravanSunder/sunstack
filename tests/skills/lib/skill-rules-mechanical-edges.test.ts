@@ -8,7 +8,7 @@ import {
   kitRelative,
   reportSchema,
   repositoryRoot,
-  runRunner,
+  runRunnerJudged as runRunner,
   sampleSkill,
   saveRules,
 } from "./skill-rules-test-fixture.ts";

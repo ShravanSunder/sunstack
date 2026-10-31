@@ -36,7 +36,7 @@
           "mechanical_check": {
             "tool": "regex",
             "field": "line",
-            "pattern": "^IF\\b"
+            "pattern": "^(?:IF|If|if)\\b"
           },
           "yes": "branch_parts",
           "no": "when_kind"
@@ -62,6 +62,58 @@
               "finding": "Branch doesn't name the different work its condition causes.",
               "at": "line"
             }
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K002": {
+    "name": "main-path.spine",
+    "evidence": "skill_body",
+    "questions": {
+      "has_spine": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "context": "outline",
+          "task": "Does SKILL.md show the all-run spine, from load to completion, in one scan? First identify the job promised by the description and opening model. Then trace its entry/admission or dispatch, the work it calls for, and its returned result, handoff, sufficiency check or stop. This is a spine test, not a workflow-list test: a compact judgment/application route or conditional dispatch to references can satisfy it. In a judgment skill, framing the question, applying the lens and checking or stating the result can be the whole route. A role can admit its commission, dispatch to its supplied phase/procedure and state its handback/completion obligations. Read body plus outline, numbered_first_lines and completion_first_lines as supplementary context; those first lines do not impose a numbering requirement. A formal Done heading and one universally numbered procedure are unnecessary. If the cut hides decisive material, stay uncertain instead of inventing it."
+        },
+        "criteria": {
+          "true": "The visible body makes the job's entry-to-result route traceable in one scan, in the form its job needs: ordered steps, a compact judgment/application route, conditional reference dispatch or a mix. A branch may return its specified result or exact gap; an explicit sufficiency/handback check can be completion.",
+          "false": "The visible body gives disconnected advice, topic/rule lists or optional references without showing how an entering agent chooses/applies the work and reaches its result or completion boundary. Missing numbering alone is not a failure; a formal process must not be demanded of a compact judgment."
+        }
+      }
+    },
+    "decision": {
+      "start": "has_numbered",
+      "steps": {
+        "has_numbered": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "numbered",
+            "pattern": "\\S"
+          },
+          "yes": "has_workflow",
+          "no": "not_applicable"
+        },
+        "has_workflow": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "workflows",
+            "pattern": "\\S"
+          },
+          "yes": "not_applicable",
+          "no": "spine"
+        },
+        "spine": {
+          "ask": "has_spine",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "Numbered lists hold no workflow, and the all-run spine from load to completion isn't visible.",
+            "at": "body"
           }
         }
       }
