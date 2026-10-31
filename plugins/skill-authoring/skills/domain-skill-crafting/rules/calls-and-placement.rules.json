@@ -57,12 +57,13 @@
         "type": "choice",
         "instructions": {
           "check": ["heading", "body"],
-          "task": "What does this section of a reference do?"
+          "context": ["opening"],
+          "task": "What does this section of a reference do? The opening holds the paragraphs under the reference's title, where it says what the reference covers or owns."
         },
         "criteria": {
-          "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished. A section that has the agent run commands or read their output and then says what that output does and doesn't prove owns a stage, even when it lists the commands.",
+          "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished. A section that has the agent run commands and then judge, with good and bad readings, which results support a claim owns a stage even when it lists the commands.",
           "part": "It is one part of a stage the reference as a whole owns, such as the stage's inputs, one of its signals, its examples or its stop, with the rest of the stage in other sections.",
-          "lookup": "It is a lookup the agent consults rather than work it performs: a standards list, a table, a diagram, definitions, facts, or a list of shapes or templates. That includes a list of commands, queries or APIs with what each does or returns, a table mapping errors or symptoms to their fixes, a code pattern or helper to copy, a prompt or binding template, and a catalogue of rules or patterns to consult. Rules that govern a decision the agent makes in this section belong to that stage and are not a lookup."
+          "lookup": "It is a lookup the agent consults rather than work it performs: a standards list, a table, a diagram, definitions, facts, or a list of shapes or templates. That includes a list of commands, queries or APIs with what each does or returns, a table mapping errors or symptoms to their fixes, a code pattern or helper to copy, a prompt or binding template, a catalogue of rules or patterns to consult, and a description of a mode or setup with the commands it uses. A section of a reference whose opening says it covers calls, commands or values while its caller decides when to use them is a lookup too. Rules that govern a decision the agent makes in this section belong to that stage and are not a lookup."
         }
       },
       "missing": {

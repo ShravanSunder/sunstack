@@ -20,11 +20,11 @@
         "instructions": {
           "check": "completion",
           "against": "body",
-          "task": "Can the criterion be met only by doing the work the step asks for, rather than by a thin or empty result?"
+          "task": "Read the criterion with the step's body. Can it be met only by doing the work the body asks for, rather than by a thin or empty result?"
         },
         "criteria": {
-          "true": "It can't be written without the step's real work: it names what had to be opened, read, compared or run, or ties each item it requires to its evidence, as 'name every caller of the changed function and say which ones break' does. A criterion that requires the return or result the step's body spells out item by item demands that legwork too, because those items can't be produced without the work. So does one that requires every item of the step's subject to carry the properties the body names, as 'each endpoint has its owner, its auth rule and its error shape' does; one that requires the artifact the step produces, in the place the body sets and holding what the body says it holds; or one that requires the statement or decision the step exists to make, at the moment the body sets, when making it is the step's whole work.",
-          "false": "A thin or empty result meets it: 'produce a change list' is met by a list of nothing, and 'note any issues' by 'none' without looking."
+          "true": "It can't be written without the step's real work: it names what had to be opened, read, compared or run, or ties each item it requires to its evidence, as 'name every caller of the changed function and say which ones break' does. A criterion that requires the return or result the step's body spells out item by item demands that legwork too, because those items can't be produced without the work. So does one that requires every item of the step's subject to carry the properties the body names, as 'each endpoint has its owner, its auth rule and its error shape' does; one that requires the artifact the step produces, in the place the body sets and holding what the body says it holds; or one that requires the statement or decision the step exists to make, at the moment the body sets, when making it is the step's whole work. So does one stated as what a later reader or caller can do with the step's result, when the body spells out what that result holds: the reader can do it only once that work is done, as 'the next phase can start without asking for a missing input' needs every input the body lists.",
+          "false": "A thin or empty result meets it: the criterion asks for less than the body does, so a token result satisfies it, as 'produce a change list' is met by a list of nothing and 'note any issues' by 'none' without looking."
         }
       }
     },
@@ -78,8 +78,9 @@
           "task": "What kind of text is this?"
         },
         "criteria": {
-          "guidance": "Guidance: an instruction or a standard that tells the agent what to do, or what not to do. That includes a limit a result must keep, and an item without its own verb in a list whose lead-in instructs, such as a field to capture, a value to choose or a condition to check, which carries the lead-in's instruction.",
-          "other": "Something else: an example, a fact, a definition, a quotation, rationale, or a statement of what a role, file or skill owns."
+          "guidance": "Guidance: an instruction or a standard that tells the agent what to do, or what not to do. That includes a limit a result must keep, a standard saying what a good artifact carries or never carries, and a check item in a list of checks to run, even one worded 'no …'.",
+          "option": "An option the agent assigns: one value, status or action in a list of choices, paired with the condition that selects it, as '`defer`: blocked by an outside dependency' is. It says what to do: choose that value when its condition holds.",
+          "other": "Something else: an example, a fact, a definition, a quotation, rationale, or a statement of what a role, file or skill owns. That includes a bare label or field name with no verb and no condition of its own, such as a field to capture, a source to gather or a topic to cover in a list whose lead-in gives the instruction ('- owner', '- risks and mitigations'), and a list of values with no condition for each: they name what to fill in or pick from, not guidance of their own."
         }
       },
       "positive": {
@@ -90,7 +91,7 @@
           "task": "Does the guidance give a positive target, an action to take or what a good result looks like, rather than only naming what to avoid?"
         },
         "criteria": {
-          "true": "It names an action or a target, even when it also forbids something, or sends the agent to another skill and says what to bring back from it. A standard that states the property a good result has, and then rules out what breaks it, names the target. A limit names its target too, the side of the bound a good result stays on, as 'a function over 80 lines fails review' does. So does an item without its own verb in a list whose lead-in instructs: a value to choose, with the condition that selects it, names the action of choosing it, and a check item, even one worded 'no …', names the state the check confirms, as 'no failing tests' does in a list of checks to run.",
+          "true": "It names an action or a target, even when it also forbids something, or sends the agent to another skill and says what to bring back from it. A standard that states the property a good result has, and then rules out what breaks it, names the target. A limit names its target too, the side of the bound a good result stays on: 'a log line over 120 characters fails the check' aims at 120 or fewer. A check item, even one worded 'no …', names the state the check confirms, as 'no failing tests' does in a list of checks to run. A rule that says what a condition makes the agent do, as 'a failed check blocks the merge' does, names that action.",
           "false": "It only names what to avoid or not do, and leaves the agent to guess the target, as 'Don't skip tests' or 'Never guess an API' do. A full sentence that bans something without saying what to do instead names only what to avoid, as 'configs carry no secrets' does when nothing says where secrets go."
         }
       }
@@ -103,6 +104,7 @@
           "min_probability": 0.6,
           "routes": {
             "guidance": "positive",
+            "option": "pass",
             "other": "not_applicable"
           }
         },

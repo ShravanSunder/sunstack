@@ -243,6 +243,33 @@ describe("sentence evidence lies within a selected step or a Standards section",
   });
 });
 
+describe("guidance.positive routes each kind of sentence (kit K002, steering)", () => {
+  test.each([
+    ["option", "kind", "pass"],
+    ["other", "kind", "not_applicable"],
+    ["guidance", "positive", "finding"],
+  ] satisfies [string, string, string][])(
+    "kind %s ends at %s as %s",
+    async (kind, step, outcome) => {
+      // Wrong behavior: an option paired with its condition, or a bare label, reaches the positive
+      // verdict and is judged as avoidance guidance; or an option ends not_applicable though it says
+      // what to do. The judge answers positive 0.1, so only a walk that reaches it ends in a finding.
+      const root = createFixture();
+      saveRules(root, { K001: kitEntry("steering", "K002") });
+      writeFixtureFile(
+        root,
+        "plugins/example/skills/sample/references/standards.md",
+        "## Standards\n\n- `skip`: one-off or already covered.\n",
+      );
+      const result = await runRunnerJudged(root, [], { positive: 0.1 }, { kind });
+      const report = reportSchema.parse(result.report);
+      expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
+        [3, step, outcome],
+      ]);
+    },
+  );
+});
+
 describe("step evidence: a heading step owns its numbered sub-items", () => {
   test("items nested in a numbered heading step are not steps; items of a plain numbered list are", async () => {
     // Wrong behavior: each sub-item of "### 1. Apply the change" read as a step of its own, owing
