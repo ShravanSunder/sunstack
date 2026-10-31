@@ -56,7 +56,7 @@ A chunk is the evidence one rule's decision reads about one place. The rule name
 A rule's chunk design states:
 - **the subject:** what one piece is, such as a load line, or a section's own text;
 - **the denominator:** which files and which pieces the rule scans, so "unread" has a meaning;
-- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings;
+- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings, and the owning skill's scope (its description). A reference's sections carry their skill's scope. The spike showed why: AgentStudio's own loop reference mostly passed section by section, because nothing in its chunks said it lives in a generic plugin;
 - **the fields** each question reads;
 - **the budget:** the size cap and what a cut means for the answer.
 
@@ -197,6 +197,8 @@ These go to the engine's own design in `sunstack-tools`. Each comes from a sourc
 - **A section owns its own loads.** The target regex reads only the piece's own text, not its excluded children's, so one child's load isn't attached to the H1, the parent and the child at once.
 - **Fuller context fields.** A full-text option for the enclosing section (`enclosing` and `same_file` give first lines today), and fields for a reference target (today `as_kind` fills fields only for a skill target, and a path target gets its opening only).
 - **JSON evidence in lint.** The native `prepare_evidence` already parses JSON and returned a full K001 rule entry with its spans. Lint's project loading refuses non-Markdown (`evidence_project_loading.rs:184-188, 225-228`), so the change is admitting JSON there and reusing the native collector, not a second JSON reader.
+- **The owning skill's scope as a field.** A section kind can carry its own file's frontmatter description, and a reference's sections can carry their skill's. Today section bodies omit frontmatter, and a reference can't reach its skill's `SKILL.md`.
+- **An observation anchor inside a chunk.** A route's nudge can point at a specific line inside a section-sized subject. Today a finding at `body` anchors at the section's first span (`decision_walking.rs:215-221`); the spike's line-17 nudge landed on line 6.
 - **Coverage per rule,** zeros included, as a report field, when the runner's join proves too fragile. This one is optional: the runner can derive it today.
 
 ## Standards the change teaches, with transfer cases
