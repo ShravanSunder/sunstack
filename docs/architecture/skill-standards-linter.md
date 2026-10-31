@@ -44,7 +44,7 @@ Jev is enabled for asking rules and for workflow selection. Because the kit has 
 | `cancelled` | 4 | Preserve |
 | `uncertain` | 5 | Preserve evidence, decision step and answers; selection alone can set it |
 
-The runner prints status, rule outcome counts, selection counts per selected kind and usage; findings by severity with file and line; uncertain pieces with their step and answers; each uncertain or incomplete selection candidate with its file, line, heading and probability or reason, whose contents stay unjudged; each file whose candidates were all answered and none selected, as information; incomplete reasons and skipped rules. Empty `evidence_seen` does not imply an empty selection: mechanical work may send nothing to Jev.
+The runner prints status, rule outcome counts, selection counts per selected kind and usage; findings by severity with file and line; uncertain pieces with their step and answers; each uncertain or incomplete selection candidate with its file, line, heading and probability or reason (pieces that exist only through it, such as its steps, are absent, while plain-kind pieces in its range, such as loads and branches, keep their results); each file with candidates and none selected, with its separate counts (only an all-not-selected file is a negative judgment; uncertain, incomplete and not-asked candidates stay gaps); incomplete reasons and skipped rules. Empty `evidence_seen` does not imply an empty selection: mechanical work may send nothing to Jev.
 
 ## Proof and delivery boundaries
 

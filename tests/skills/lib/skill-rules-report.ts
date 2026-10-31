@@ -23,7 +23,8 @@ const findingSchema = z
   })
   .passthrough();
 // Selection (sunstack 0.3.0+): a selected kind's candidates and their outcomes, kept apart from rule
-// verdicts. Only a selected candidate becomes a piece; an unresolved one leaves its pieces unevaluated.
+// verdicts. Only a selected candidate becomes a piece; a piece that exists only through an unresolved
+// one is absent, while other pieces in its range keep their results.
 const selectionOutcomeSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("selected"), yes: z.number() }).passthrough(),
   z.object({ kind: z.literal("not_selected"), yes: z.number() }).passthrough(),
@@ -127,28 +128,38 @@ export function selectionTotals(report: LintReport): Map<string, SelectionCounts
   for (const file of report.file_counts)
     for (const [kind, count] of Object.entries(file.kinds)) {
       if (!count.selection) continue;
-      const total = totals.get(kind) ?? {
-        candidates: 0,
-        asked: 0,
-        selected: 0,
-        not_selected: 0,
-        uncertain: 0,
-        incomplete: 0,
-      };
-      for (const key of Object.keys(total) as (keyof SelectionCounts)[])
-        total[key] += count.selection[key];
-      totals.set(kind, total);
+      const total = totals.get(kind);
+      const add = count.selection;
+      totals.set(
+        kind,
+        total
+          ? {
+              candidates: total.candidates + add.candidates,
+              asked: total.asked + add.asked,
+              selected: total.selected + add.selected,
+              not_selected: total.not_selected + add.not_selected,
+              uncertain: total.uncertain + add.uncertain,
+              incomplete: total.incomplete + add.incomplete,
+            }
+          : { ...add },
+      );
     }
   return totals;
 }
+
+// An unresolved candidate is never a piece, so a piece that exists only through it (a step of a
+// workflow candidate, say) is absent. A piece of a plain kind in the same range, or one kept
+// through another container, still exists and keeps its own result.
+const unresolvedConsequence =
+  "pieces that exist only through this selection are absent; other results in its range stand";
 
 function formatUnresolvedSelection(item: Selection): string | null {
   const at = `${item.where.file}:${item.where.first_line}`;
   const heading = JSON.stringify(item.first_line);
   if (item.outcome.kind === "uncertain")
-    return `${at}: uncertain selection ${item.kind} ${heading}, yes ${item.outcome.yes}; what lies within it is unevaluated`;
+    return `${at}: uncertain selection ${item.kind} ${heading}, yes ${item.outcome.yes}; ${unresolvedConsequence}`;
   if (item.outcome.kind === "incomplete")
-    return `${at}: incomplete selection ${item.kind} ${heading}, ${item.outcome.reason.kind}; what lies within it is unevaluated`;
+    return `${at}: incomplete selection ${item.kind} ${heading}, ${item.outcome.reason.kind}; ${unresolvedConsequence}`;
   return null;
 }
 
@@ -231,14 +242,16 @@ export function formatLintReport(report: LintReport): string {
     const line = formatUnresolvedSelection(item);
     if (line) lines.push(line);
   }
-  // A file whose candidates were all answered and none chosen is information, not a failure: a
-  // numbered rule list is meant to be not selected.
+  // A file that was asked about and had nothing selected, with its separate counts. Only when every
+  // candidate is not_selected did the model judge none to be that kind (as a numbered rule list
+  // should be); an uncertain, incomplete or not-asked candidate is a gap, not a negative judgment.
   for (const file of report.file_counts)
     for (const [kind, count] of Object.entries(file.kinds)) {
       const selection = count.selection;
       if (!selection || selection.asked === 0 || selection.selected > 0) continue;
+      const notAsked = selection.candidates - selection.asked;
       lines.push(
-        `${file.file}: no ${kind} selected (${selection.not_selected} not selected, ${selection.uncertain} uncertain, ${selection.incomplete} incomplete)`,
+        `${file.file}: no ${kind} selected (${selection.not_selected} not selected, ${selection.uncertain} uncertain, ${selection.incomplete} incomplete${notAsked > 0 ? `, ${notAsked} not asked` : ""})`,
       );
     }
   for (const item of report.incomplete)

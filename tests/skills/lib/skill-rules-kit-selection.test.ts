@@ -104,10 +104,14 @@ describe("the runner prints selection apart from rule verdicts", () => {
     expect(report.uncertain).toEqual([]);
     expect(result.stdout).toContain('"uncertain":0,"incomplete":0}');
     expect(result.stdout).toContain(
-      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; what lies within it is unevaluated',
+      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; pieces that exist only through this selection are absent; other results in its range stand',
     );
     expect(result.stdout).toContain(
       'Selection workflow_section: {"candidates":1,"asked":1,"selected":0,"not_selected":0,"uncertain":1,"incomplete":0}',
+    );
+    // Nothing was selected, but by an uncertain answer, not a negative one: the count says so.
+    expect(result.stdout).toContain(
+      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (0 not selected, 1 uncertain, 0 incomplete)",
     );
     // The engine's JSON is kept as it came: the candidate is in its selections.
     expect(report.selections.map((item) => [item.first_line, item.outcome.kind])).toEqual([
@@ -126,7 +130,49 @@ describe("the runner prints selection apart from rule verdicts", () => {
     expect(result.status, result.stderr).toBe(3);
     expect(reportSchema.parse(result.report).status.kind).toBe("incomplete");
     expect(result.stdout).toContain(
-      'plugins/example/skills/sample/SKILL.md:7: incomplete selection workflow_section "## Flow", provider_failure; what lies within it is unevaluated',
+      'plugins/example/skills/sample/SKILL.md:7: incomplete selection workflow_section "## Flow", provider_failure; pieces that exist only through this selection are absent; other results in its range stand',
+    );
+    expect(result.stdout).toContain(
+      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (0 not selected, 0 uncertain, 1 incomplete)",
+    );
+  });
+
+  test("an uncertain workflow keeps its plain-kind branch result, and its step, absent, is never counted as passed", async () => {
+    // Wrong behavior: a branch decided inside an unresolved workflow discarded as "never judged", or
+    // a step that doesn't exist read as a passed completion.
+    const root = createFixture();
+    saveRules(root, {
+      K001: kitEntry("main-path", "K001"),
+      K002: kitEntry("steering", "K001"),
+    });
+    writeFixtureFile(
+      root,
+      "plugins/example/skills/sample/SKILL.md",
+      [
+        "---",
+        "description: Use when checking coverage.",
+        "---",
+        "",
+        "# Sample",
+        "",
+        "## Flow",
+        "",
+        "1. Inspect the input.",
+        "",
+        "   IF the input is missing, return the gap to the caller.",
+        "",
+        "   Completion: the input is named.",
+        "",
+      ].join("\n"),
+    );
+    const result = await runRunnerJudged(root, [], { c1: 0.5 }, { gap: "none" });
+    expect(result.status, result.stderr).toBe(5);
+    const report = reportSchema.parse(result.report);
+    expect(report.results.map((item) => [item.name, item.first_line, item.outcome])).toEqual([
+      ["branch.condition", 11, "pass"],
+    ]);
+    expect(result.stdout).toContain(
+      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; pieces that exist only through this selection are absent; other results in its range stand',
     );
   });
 

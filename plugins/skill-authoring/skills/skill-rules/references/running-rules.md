@@ -29,8 +29,8 @@ Read the status first, then every list, because warnings don't move the status. 
 | a piece counted `not_applicable` | the rule doesn't cover that piece; it neither meets nor breaks the standard |
 | a piece that passed | it meets that rule's standard, and says nothing else about the skill's quality |
 | an incomplete part or a skipped rule | a gap, with its reason |
-| an `uncertain` or `incomplete` selection candidate (the runner prints its file, line, heading, and its yes probability or reason) | a gap for what lies within it: its steps and the other pieces inside it were never judged, so they are unproven, never passed. Name the candidate, say whether you read it as the kind it was asked about, and leave its contents unproven; your reading is not a verdict on them |
-| a file whose candidates were all answered and none selected | information, not a failure: the decision model judged none of them to be that kind, as it should for a numbered list of rules. Read the headings, and raise one only when it plainly is that kind |
+| an `uncertain` or `incomplete` selection candidate (the runner prints its file, line, heading, and its yes probability or reason) | a gap for the pieces that exist only through it, such as the steps of a workflow candidate: they are absent, so their rules never ran there, and an absent step is never a passed one. Pieces of a plain kind in its range, such as loads and branches, and pieces kept through another container still exist and keep their own results (a load or branch inside it carries no step context). Take what was decided from the results, not from the candidate's range. Name the candidate, say whether you read it as the kind it was asked about, and leave the pieces that depend only on it unproven; your reading is not a verdict on them |
+| a file with candidates and none selected (the runner prints its separate counts) | read the counts. When every candidate is `not_selected`, the decision model judged none of them to be that kind, as it should for a numbered list of rules: information, not a failure; read the headings, and raise one only when it plainly is that kind. An `uncertain`, `incomplete` or not-asked candidate in the count is no negative judgment: it stays the gap its own row says |
 | status `invalid` (including a refusal for no key), `cancelled` or `incomplete`, or a full-scope run with `nothing_selected` | a gap for the run: the rules didn't all run, so the return says which didn't and why |
 
 IF the run is refused at a rule's definition (a line in a marked standard's host, a rules file or the config), load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then decide whether the change caused it. It did only when the diff holds the edit that produces that cause, in the refusal's own file, in the file paired with it (a host and its rules file), or in the config that pairs them. A deleted marker that leaves its untouched rules entry orphaned is change-caused, because the producing edit is the deletion in the paired Markdown; an unrelated edit beside a definition that was already invalid is not, because nothing in the diff produces that cause. A change-caused refusal is repaired as the calling step may, below; every other refusal, and a refusal for no key, stays a gap with its cause.
@@ -54,7 +54,7 @@ report:     <the path the runner printed>
 status:     <status>, exit <code>; usage <requests>, <cost>
 finding:    <rule> at <file>:<line> (<severity>, mechanical | judged): <message> -> fixed | raised as a candidate | flagged | confirmed, named: <why it stays> | explained: <why it doesn't hold>
 uncertain:  <rule> at <file>:<line> (stopped at <step>): <your call: pass | finding | not applicable>, <one-line reason> -> fixed | named | explained
-selection:  <kind> at <file>:<line> "<heading>": uncertain (yes <p>) | incomplete (<reason>); <your reading of the candidate> -> its contents unproven
+selection:  <kind> at <file>:<line> "<heading>": uncertain (yes <p>) | incomplete (<reason>); <your reading of the candidate> -> the pieces that depend only on it unproven
 gap:        <the incomplete part, skipped rule, or refused, cancelled or nothing-selected run>: <reason>
 ```
 
@@ -70,5 +70,7 @@ Good and bad readings:
 - Bad: a run refused for a missing key, reported as clean, or pushed through with a stand-in key or endpoint.
 - Bad: a full run over a misspelt folder that selected nothing, reported as clean.
 - Bad: a run that exits 5 with every rule result decided, reported as "the steps all pass", when an uncertain workflow candidate kept its steps from being judged at all.
+- Bad: a branch finding inside that same uncertain workflow dropped from the return as "never judged": a branch is a plain piece, and its result stands.
+- Bad: a file whose one candidate was uncertain, or failed at the provider, reported as "the model found no workflow there".
 
-Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the report was read, every finding has your call at its line, every `uncertain` piece has your decision and reason, every `uncertain` or `incomplete` selection candidate is named with its contents left unproven, and every incomplete part, skipped rule, refusal or nothing-selected full run is a gap with its reason.
+Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the report was read, every finding has your call at its line, every `uncertain` piece has your decision and reason, every `uncertain` or `incomplete` selection candidate is named with the pieces that depend only on it left unproven, and every incomplete part, skipped rule, refusal or nothing-selected full run is a gap with its reason.
