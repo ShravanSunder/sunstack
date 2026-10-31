@@ -1,6 +1,6 @@
 # Step 5 skill fixes: skill design
 
-Draft 1, by the 🦁 Lead, 2026-10-31 04:29 EDT. Part three: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Base: `main` at `f747b37e`. Copy-on-write worktrees start at the stale `39957959` and are fast-forwarded to `origin/main` before any work.
+Draft 2, by the 🦁 Lead, 2026-10-31 (after the design review's F1–F4). Part three: [requirements](requirements.md), [specification](specification.md), skill design, [skill verification](skill-verification.md). Base: `main` at `f747b37e`. Copy-on-write worktrees start at the stale `39957959` and are fast-forwarded to `origin/main` before any work.
 
 ## How each kind of finding is handled
 
@@ -9,48 +9,73 @@ Draft 1, by the 🦁 Lead, 2026-10-31 04:29 EDT. Part three: [requirements](requ
 | `description.length-limit` (8), `description.length-warning` (26) | over 300 or over 225 characters | rewrite to 100–200 where the trigger still holds, never over 225; keep the loading moment and the `Not for` boundary |
 | `description.trigger-only` (7) | the description summarizes the workflow or lists the skill's contents | keep only when to load it and the boundary; move any content the description carried into the body if the body lacks it |
 | `completion.criterion` (31) | a step with no completion in any wording, or a thin one | add a `Completion:` line naming what is observably true and the legwork that produces it, or merge a one-line mechanical step into the step it serves; walk the step's branches so the completion holds on each |
-| `branch.condition` (13) | the condition is the agent's doubt, need or a size word | name what in the work selects the branch: a request, a file, a returned result, a named artifact; keep the branch's load target and return |
+| `branch.condition` (13) | the condition is the agent's doubt, need or a size word | name what in the work selects the branch: a request, a file, a returned result, a named artifact. Keep the branch's load target and return, and check that the new condition selects every case the old one was meant to, in both directions where the decision has two |
 | `reference.teaching-depth` (2) | a section that owns a stage misses its stop, or good and bad | add the missing element from the file's own material |
-| `call.completeness` (2) | a load that names no return | say what comes back, as the callee returns it |
+| `call.completeness` (2) | a load that names no return | say what comes back, as the callee returns it, without adding an effect |
 
-The writer follows `skill-authoring:skill-creation` for each skill, one invocation and one commit per skill, and records each finding's disposition in the run's receipt.
+## Batches and runs
 
-## Runs
+[runs.json](runs.json) holds six PR batches. Each batch holds one single-skill authoring run per skill, 44 runs in all across 39 distinct skills.
+- **A run** is one `skill-creation` invocation on one named skill. It makes one commit and has its own status and its own keyed after-run (C7).
+- **A batch** is one PR. Its status rolls up its runs, and it opens for review only when every run in it has passed.
+- **The order:** batches are built and reviewed one at a time, readiness-only (the owner reviews and merges each). Inside a batch, runs go in the order runs.json lists.
 
-| Run | Target | Kind | Writer | Status |
+| Batch (PR) | Runs | Findings | Writer | Status |
 | --- | --- | --- | --- | --- |
-| 1 | domain-skill-crafting (f001, f111, f112, f113) | update | Opus 5.5 | proposed |
-| 2 | the 7 phase skills in runs.json (11) | update | Opus 5.5 | proposed |
-| 3 | practices-research (1) | update | Opus 5.5 | proposed |
-| 4 | the 16 principle descriptions (24) | update | Opus 5.5 | proposed |
-| 5 | the other 10 descriptions (16) | update | Opus 5.5 | proposed |
-| 6 | step text in 9 skills (33) | update | Opus 5.5 | proposed |
-| each | keyed rules over the run's skills after its writing | proof | the Lead | proposed |
-| each | independent review (skill-review, implementation) | review | Sol xhigh | proposed |
-| each | plugin version, changelog, PR body (Researcher) | documents | the Lead | proposed |
+| 1 creation | domain-skill-crafting | 4 | Opus 5.5 | proposed |
+| 2 phase | 7 skills, one run each | 11 | Opus 5.5 | proposed |
+| 3 practice | practices-research | 1 | Opus 5.5 | proposed |
+| 4 principle descriptions | 16 principles, one run each | 24 | Opus 5.5 | proposed |
+| 5 other descriptions | 10 skills, one run each | 16 | Opus 5.5 | proposed |
+| 6 step text | 9 skills, one run each | 33 | Opus 5.5 | proposed |
 
-One run is one PR, built and reviewed one at a time, readiness-only: the owner reviews and merges each.
+For every batch, after its runs:
+- the Lead runs the keyed rules over the batch's skills;
+- an independent Sol xhigh review follows (skill-review, implementation);
+- the Lead adds the plugin version and changelog, and a Researcher drafts the PR body.
 
-## Run 1's drafts (from the writer's reading, to be confirmed by skill-creation)
+## Run 1's drafts (domain-skill-crafting, to be confirmed by skill-creation)
 
-- **f001:** the description becomes "Use when writing, designing, reviewing or auditing a skill, or judging any part of a skill's text against the skill-writing standards." It keeps the loading moment and drops the inventory of standard areas.
-- **f111:** "IF a citation's moment is a condition rather than a point in a step, …"
-- **f112:** "IF the decision hides the skill from model invocation or limits who can invoke it, …"
-- **f113:** "IF the lens rests on a coined term or a word the skill has to define, …"
+- **f001, the description:** "Use when writing, designing, reviewing or auditing a skill, or judging any part of a skill's text against the skill-writing standards." It keeps the loading moment and drops the inventory of standard areas. The skill is hidden from model invocation, so a trigger trial is `not applicable`.
+- **f111, `calls-and-placement.md`:** "IF a citation's moment is a condition rather than a point in a step, …"
+- **f112, `descriptions-and-invocation.md` (corrected after review F2):** "IF the invocation decision sets or changes how a client exposes the skill: hiding it, limiting who can invoke it, or restoring or enabling invocation, load `platform.md` and return the platform encoding." Transfer cases:
+  - hide or restrict a skill: loads (the condition holds);
+  - restore a previously hidden skill to normal invocation: loads (the condition holds; draft 1 missed this);
+  - a decision that changes no client exposure, such as wording only: doesn't load.
+
+  Verdict: the condition covers both directions the old "needs a client-specific encoding" was meant to.
+- **f113, `main-path.md` (corrected after review F1):** "IF the lens rests on a leading word or phrase, familiar or coined, load `steering.md` and return its standards for that word's meaning and strength." Transfer cases:
+  - a familiar strong concept, such as "ground truth": loads;
+  - a familiar weak phrase, such as "be thorough": loads, and steering's line 32 rejects it (draft 1 missed this);
+  - a coined term: loads;
+  - a lens with no leading word: doesn't load.
+
+  Verdict: it selects every case the old "whose strength is in doubt" was meant to, on something visible in the lens.
 
 Each keeps its load target and its return. None touches a marked line.
 
-## Security
+## Security (corrected after review F4)
 
-The change edits skill text only. It adds no command, script, network call, credential, file write outside the skills' existing outputs, or new trust boundary. Sensitive surfaces: none. Decision: allowed.
+The change edits skill text only, and adds no command, script, network call, credential, privileged action or operational effect. It does edit existing sensitive text, inventoried here with the decision for each. Each run's writer walks the guards in its receipt before writing, and the review checks them by diff walk.
+
+| Surface | Finding (batch) | Existing guards that must hold | Decision |
+| --- | --- | --- | --- |
+| temporary credential file, `debug-investigation/references/background-monitoring.md:83` | f115 (2) | created only when unavoidable, under the monitor tmp directory, with `umask 077` or `chmod 600`, used only for the child process, deleted in `trap` cleanup; secret values are never persisted in monitor files, logs, shell history or chat, and redaction happens before writing (lines 79–85) | allowed: the condition becomes observable; every guard keeps its words |
+| process termination, same file `:119` | the stop order: the harness cancel first, otherwise a written `stop.requested`, and only then terminating the recorded process group; monitor files are preserved for review (lines 115–121) | allowed: the condition names when, as observed; no new target, authority or step order |
+| scan authorization, `audit-security-review/SKILL.md:44–58` | f163–f167 (6) | a pasted prompt, packet or earlier route never widens the user's scan, saved-model or repair authority; an exactly authorized request still routes | allowed: completions name done states only; the step-2 authority text is unchanged |
+| lifecycle and producer loops, `ops-observability-stack/SKILL.md:14, :17` | f107, f108 (6) | the loops' own effects and their documented lifecycle | allowed: each call says what comes back; no new effect |
+| UI input probes and private captures, `peekaboo/SKILL.md:12–34` and `references/visual-testing-patterns.md:27` | f153–f156, f050 (6) | probes only on the confirmed target and with current permissions; captures stay local | allowed: completions and teaching name done states and stops; no new probe or capture |
+
+A note on timing: no earlier security decision was recorded for this set. This inventory is made now, after review, before any writing.
 
 ## Decisions
 
 | # | Decision | Reason |
 | --- | --- | --- |
-| P1 | One design set, six runs, one PR per run, by family | The owner's "one at a time"; one owner per file across open PRs |
-| P2 | Base `main`; this set travels in run 1's PR, and later runs cite it | Skill text only; no new stack layer (the owner decides stacking) |
+| P1 | One design set; six serial PR batches by family; one single-skill run per skill inside each | The owner's "one at a time"; skill-design's one-skill-per-run contract (review F3); one owner per file across open PRs |
+| P2 | Base `main`; this set travels in batch 1's PR, and later batches cite it | Skill text only; no new stack layer (the owner decides stacking) |
 | P3 | Judged findings are candidates, confirmed or explained at the line | Measured: threshold variance; blind labels overturned 13 "real" findings |
-| P4 | Description trigger trials: `not applicable` for skills hidden from model invocation (domain-skill-crafting, the principles); for model-invocable skills, a named gap until the trial route is settled | As the 30 Oct cleanups recorded |
+| P4 | Description trigger trials: `not applicable` for skills hidden from model invocation (domain-skill-crafting, the principles); for model-invocable skills, a named gap, not a pass or a ship waiver | As the 30 Oct cleanups recorded; the review counted 19 hidden targets and 8 model-invocable descriptions |
 | P5 | D4-held steps untouched | The owner's decision is pending, and D4 changes their fix |
 | P6 | Each added completion walks its step's branches | The 30 Oct phase cleanup's review found completions that broke a branch |
+| P7 | Each rewritten branch condition is walked through its transfer cases, in both directions where the decision has two | Review F1 and F2 |

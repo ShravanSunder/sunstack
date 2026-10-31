@@ -13,7 +13,7 @@
 
 <h1>Step 5 skill fixes: design set</h1>
 
-<p>This change fixes the 89 real failures that step 5's rules run found in 44 skills. It rewrites descriptions that are too long or that list a skill's contents, adds completions to steps that never say when they're done, turns branch conditions built on the agent's own doubt into conditions it can see, and makes two calls say what they return. It runs as six PRs, one per family, built and reviewed one at a time; the owner reviews and merges each. The 81 steps that wait on the owner's completion-phrasing decision are left alone. Still open: the design review of this set.</p>
+<p>This change fixes the 89 real failures that step 5's rules run found in 39 skills. It rewrites descriptions that are too long or that list a skill's contents, adds completions to steps that never say when they're done, turns branch conditions built on the agent's own doubt into conditions it can see, and makes two calls say what they return. Each skill is its own authoring run, 44 runs in all, and the runs are grouped into six PRs, one per family, built and reviewed one at a time. The owner reviews and merges each PR. The 81 steps that wait on the owner's completion-phrasing decision are left alone, and every existing guard on the sensitive text the edits touch stays as it is. This is draft 2, after the design review's four findings. Still open: the reviewer's recheck.</p>
 
 <h2 id="walkthrough">Walkthrough</h2>
 <ol>
