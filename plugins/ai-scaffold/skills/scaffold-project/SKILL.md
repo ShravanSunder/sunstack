@@ -61,8 +61,6 @@ Silently check if scaffolding a new project or retrofitting:
 ls -la package.json pyproject.toml .git 2>/dev/null
 ```
 
-Completion: the run is named a new project or a retrofit, from whether `package.json`, `pyproject.toml` or `.git` already exists.
-
 ### Step 2: Ask All Questions Upfront
 
 Use AskUserQuestion to collect ALL preferences before executing anything. Ask in batches:
@@ -133,8 +131,6 @@ Options:
 - Overwrite all - replace existing with scaffold templates
 ```
 
-Completion: every batch that applies has the user's answers (Batch 6 only for a retrofit), and nothing has been executed yet.
-
 ### Step 3: Execute Scaffolding (ONCE)
 
 Run the appropriate scaffold scripts:
@@ -159,8 +155,6 @@ The script handles:
 - Creating CLAUDE.md and AGENTS.md (symlink to CLAUDE.md)
 - Setting up .gitignore
 - Creating worktrunk config (.config/wt.toml)
-
-Completion: the scaffold script has run exactly once, with the options collected in Step 2.
 
 ### Step 4: Handle Conflicts (Retrofit Only)
 
@@ -222,8 +216,6 @@ Use web search and deepwiki to research:
 - TypeScript strict mode updates
 - BasedPyright configuration changes
 
-Completion: each template in the chosen scope has its current recommended configuration with the source it came from, or the gap where none was found.
-
 ### Step 3: Propose Changes
 
 Show diff of proposed changes with explanations:
@@ -242,8 +234,6 @@ For each change:
 3. Ask user to accept/modify/reject
 4. Apply accepted changes
 
-Completion: every proposed change has the user's accept, modify or reject answer, and only the accepted changes, with the user's modifications, are applied.
-
 ### Step 5: Commit Changes
 
 After all changes applied, commit to ai-tools repo:
@@ -252,8 +242,6 @@ After all changes applied, commit to ai-tools repo:
 git add templates/
 git commit -m "chore: update templates with latest standards"
 ```
-
-Completion: the commit holds the changes applied in Step 4 under `templates/`.
 
 ## Template Location
 

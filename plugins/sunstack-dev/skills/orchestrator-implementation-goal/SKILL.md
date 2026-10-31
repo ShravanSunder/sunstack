@@ -20,9 +20,6 @@ Each 🐒 Implementer Sidekick executes its assigned change and associated proof
 3. MUST load `practices-preflight` for the gates the requested terminal requires and return `ready` or the gap list, whose open gaps the delivery loop records as prerequisites.
 4. MUST load `references/goal-contract-and-routing.md` and return the current orientation, admitted basis, next owner or exact stop, and finish decision.
 5. Read current repository instructions, relevant source and diff, governing artifacts, plan, proof, and review evidence. Use the trail to find evidence, then verify current facts at their source; a historical result is context, not current proof.
-
-   Completion: each fact the next-owner choice rests on (the branch and HEAD, the governing artifacts, the plan, the proof and the review evidence) has been read at its current source, and anything known only from the trail is marked as historical context.
-
 6. MUST load `../../shared-references/phase-return-tokens.md` and map a returned token to its next owner: `requirements-gap` -> `discuss-pathfinding`; `specification-gap` or `program-design-gap` -> `orchestrator-design`; `verification-design-gap` -> `verification-design`; `ready-for-planning` -> `plan-implementation`; `plan-defect` -> `plan-update` for any existing plan, whose `originating planner` field stays provenance; a design-cycle return that carries an existing plan's path -> `plan-update`; `ready-for-implementation` -> `implement-plan`; `ready-for-review` -> `implementation-review`. Mapping names the next owner; it never widens the requested task or terminal.
 
 ## Carry the Delivery Loop
@@ -35,9 +32,6 @@ Each 🐒 Implementer Sidekick executes its assigned change and associated proof
    Return a concise source-backed assessment decision that makes the substantive inspection and outcome clear without imposing a reporting schema. A missing label alone does not invalidate adequate evidence; an assessment supported only by the implementer's summary does not authorize review.
 5. The 🔎 Reviewer Sidekick runs `implementation-review`. It owns detailed source reading, lane reduction, and its review result. The orchestrator checks findings against cited evidence, resolves scope or design disputes, and returns the accepted implementation findings of one review result to the implementer together, as one correction pass.
 6. The same 🔎 Reviewer Sidekick checks the corrected head and its fresh affected proof once per correction pass. It refreshes affected coverage and applies the convergence rule in `implementation-review`'s `references/finding-and-reduction.md`. Contextual design feedback remains separate from independent review.
-
-   Completion: the corrected head and its fresh affected proof have one review result from that same 🔎 Reviewer Sidekick, with affected coverage refreshed and the convergence rule's verdict stated.
-
 7. Repeat the pass, its proof and one review while accepted findings remain. IF the review returns `not-converging`, load `../../shared-references/owner-decision-brief.md` and return a brief of what keeps failing and why.
 8. When review is ready, assign `implementation-pr-wrapup` to an 🔧 Operator or the assigned Implementer Sidekick, put the merge state recorded at goal entry, or as settled again since, with its sources and the ask history in the assignment, and require current PR gate evidence back to the Lead for verification. Wait for their notifications or authorized wakes through `practices-manage-agents`, never by model polling. Stop at PR-ready and unmerged by default, and merge only after readiness, under that recorded authority and after you verify the returned gate evidence: the executor merges on your go-ahead, or you merge.
 

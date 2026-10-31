@@ -101,24 +101,10 @@ When the plan's dependencies and Linear's `blockedBy` relations disagree, compar
 ### Create issues from an architecture doc
 
 1. Read the architecture doc from the repo
-
-   Completion: the doc has been read whole at its current revision in the repo.
-
 2. Identify deliverables (concepts, not implementation steps)
-
-   Completion: each deliverable is named with the doc section it comes from, and none is an implementation step.
-
 3. Group deliverables into milestones (conceptual phases)
-
-   Completion: every deliverable sits in exactly one milestone, and each milestone is a conceptual phase of the doc.
-
 4. Create milestones, then issues referencing doc sections
-
-   Completion: each planned milestone and issue exists in Linear once, adopted or created under the matching rule below, and each issue links the doc section it traces to.
-
 5. Set `blockedBy`/`blocks` relations based on the dependency graph
-
-   Completion: every dependency in the doc's graph is a `blockedBy`/`blocks` relation between the matching issues.
 
 When you derive milestones or tickets from a design or plan, trace every scope line, acceptance criterion and Deferred item of each ticket to the doc or plan section it comes from; raise an untraced line, or a deferral of something the doc requires, with the user or the agent that assigned this work instead of writing it ([hold the scope](../principle-hold-the-scope/SKILL.md)).
 
@@ -127,13 +113,7 @@ When a create or relation call errored or timed out after sending, or a breakdow
 ### Find what's unblocked
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
-
-   Completion: the issues `list_issues` returned for the project's `Ready` state, and for `Backlog` when it was queried, are in hand.
-
 2. For each result, `get_issue` with `includeRelations: true`
-
-   Completion: every listed issue has its relations from `get_issue`, with each `blockedBy` entry and its state.
-
 3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough; observe that delivery where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or report its readiness as unverified and say where you looked ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
 
 ### Update ticket after implementation
