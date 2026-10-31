@@ -37,7 +37,7 @@ Paths are in the `skill-authoring` plugin; the rules files beside `domain-skill-
 
 ### Call completeness: model-judged, and the `return` check is a proxy
 
-- **Standard.** `domain-skill-crafting/references/calls-and-placement.md:26`: "Each load or dispatch call says when to go, where, what to do there, and what to bring back."
+- **Standard.** `domain-skill-crafting/references/calls-and-placement.md:27`: "Each load or dispatch call says when to go, where, what to do there, and what to bring back."
 - **Outcome.** Model-judged on the `load` evidence: its `line`, read against its `step` heading, with the call's `targets` resolved.
 - **Why.** Deciding that a result is *named* needs comprehension. A mechanical check that a load line contains `return` is a proxy: `MUST load reference.md and return.` has the word and names nothing. Every `load` piece is a call, so there is no gate.
 - **The proxy, kept honest.** A cheap lexical check can still sit inside the decision, but only as what it is. If it were the verdict, the bare `and return.` would pass; as a gate it would wrongly drop calls whose result is named without the word. Neither use earns it a place here.
@@ -53,7 +53,7 @@ Paths are in the `skill-authoring` plugin; the rules files beside `domain-skill-
 
 ### Placement: worth checking, on #187's line
 
-- **Standard.** The placement standard in `domain-skill-crafting/references/calls-and-placement.md`: "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example."
+- **Standard.** The placement standard, `domain-skill-crafting/references/calls-and-placement.md:22`: "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example."
 - **The case.** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
 - **Outcome.** Worth checking, on the `section` evidence, whose pieces carry the section's own text and the openings of the files it loads.
 - **Why not model-judged.** The chunk shows the line routing the agent into one product's own loop: the line names the load, and the loaded file's opening shows whose loop it is. It can't show where AgentStudio's workflow should live, or whether that repository has it already: no chunk holds another repository. So the finding says what to check ("read the loaded file and decide whether this belongs in the product's own repository"), and never says the line is wrong.

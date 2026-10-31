@@ -297,7 +297,8 @@ The 🦁 Lead decides each gate and owns routing any rework: a gate that fails s
 | Run | State |
 | --- | --- |
 | 1-6 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
-| 7-9 | proposed |
+| 7 | the placement standard's teaching implemented as a step-4 draft; its marker, the rules folder (config, section kind, rebuilt `rule.generalization`, placement rule, rule-file rules) and the final self-check wait for step 5 |
+| 8-9 | proposed |
 
 ## Review record
 

@@ -19,6 +19,7 @@ Placement:
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
+- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
 - A skill has no per-skill provenance document unless it needs a task-specific reference for progressive disclosure.
 
 Calls:
@@ -91,6 +92,32 @@ judgment a principle teaches                             -> cite the principle a
 term meaning only                                        -> glossary.md
 no behavior change                                       -> prune
 ```
+
+## A product's own workflow
+
+A skill meant for any repository is read by agents in every repository that installs it. A step, branch or load that sends them into one product's own workflow (its build and release scripts, its run commands, its state files, its machine paths) is wrong in every other repository, and it drifts, because the product's own repository is where that workflow changes. So the workflow lives there, and a generic skill names the product only as an example.
+
+Read each step, branch and load with these questions, in order:
+
+1. Does it send the agent into one named product's own procedures, run commands, state files or machine paths? Loading a file whose content is that product's own workflow counts, and so does a command written inline, in prose or in a table row.
+2. Does it instead use a tool or platform the work runs on, through that tool's supported interface? `claude plugin validate .` for a Claude plugin, or a metrics store's HTTP query API, is the platform's contract, not one product's workflow.
+3. Is the product named only as a labelled example ("for example, AgentStudio's beta channel")?
+4. Is it this toolkit's own shared infrastructure, such as its observability stack, or the vocabulary of the subject the skill governs?
+
+Only a yes to the first, with no yes after it, breaks the standard.
+
+- **Breaks:** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
+- **Breaks:** `sunstack-dev`'s `practices-cleanup/SKILL.md:40`, a row of its allow list that runs `mise -C "$agentstudio_worktree" run clean-artifacts`, AgentStudio's own clean task. No load is involved: the command itself is the product's workflow.
+- **Keeps:** `ops-observability-stack`'s `references/victoria-queries.md`, which queries this toolkit's own Victoria stack through its HTTP API.
+- **Keeps:** `domain-skill-crafting`'s `references/platform.md`, whose plugin checks run each client's documented CLI.
+
+There is no adopted-scope escape. A rule in `generalization.md` may name the scope the owner adopted it for; a product's workflow can't be made at home in a generic skill by saying it's for that product. A skill for one product belongs in that product's repository.
+
+The transfer test, both ways:
+- **Case one, where it should hold:** a generic debugging skill in a toolkit for Python data pipelines, with a branch that loads one company's own Airflow runbook. The standard says that runbook belongs in the company's repository, and the branch names the company only as an example. It holds.
+- **Case two, a bad choice it never names:** a generic release skill whose step reads one machine's `~/Library/Application Support/<product>/state.json` before tagging. The standard names no release tooling and no state file of that product, and it still rejects the step, as a product's state file and machine path. It holds. Its countercase, a release step that runs `gh release create` through GitHub's own CLI, is kept under the tool clause.
+
+A rule that checks this standard can show the route into a product's workflow, but not where that workflow should live, so its finding is a nudge to read the loaded file and decide; `skill-rules` designs it.
 
 ## Call forms
 
@@ -186,4 +213,4 @@ Where those answers are weak, inline the detail with its actual owner, merge ove
 
 ## When to stop
 
-Complete when each meaning has one owner, every caller is complete, and every opened reference can finish its local work without claiming its own entry route. Return each standard above that applies as kept or broken, with the line that shows it.
+Complete when each meaning has one owner, every caller is complete, every opened reference can finish its local work without claiming its own entry route, and in a skill meant for any repository, every step, branch and load that names a product has been read against the product-workflow questions. Return each standard above that applies as kept or broken, with the line that shows it.

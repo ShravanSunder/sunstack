@@ -20,7 +20,7 @@ Mark a section only when the whole section is one standard and its visible words
 
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
-- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` holds dozens of standards. Mark the list item at `:26` for call completeness; the dispatch items and the citation items below it are separate candidates.
+- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` holds dozens of standards. Mark the list item at `:27` for call completeness; the dispatch items and the citation items below it are separate candidates.
 - An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. Return it for a rewrite that carries its subject, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`; or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows the complete form: "A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`."
 - A paragraph that carries five standards, like `skill-design/SKILL.md:79`, is no narrow host for any of them. Split it in the teaching first.
 
