@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-31 Step 5 fixes: step text](2026-10-31-step5-fixes-step-text.md)
 - [2026-10-31 Step 5 fixes: other descriptions](2026-10-31-step5-fixes-other-descriptions.md)
 - [2026-10-31 Step 5 fixes: principle descriptions](2026-10-31-step5-fixes-principle-descriptions.md)
 - [2026-10-31 Step 5 fixes: phase skills](2026-10-31-step5-fixes-phase-skills.md)
