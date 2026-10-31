@@ -174,17 +174,11 @@ The proof posture each run can honestly claim goes in the verification part.
 - **Not the app-specific move.** Moving AgentStudio, Agent VM and OpenClaw content to their own repos is a parked follow-up. This change only makes the rules nudge about it.
 - **Not changing who decides.** Judged results never accept or block a change by themselves, as today. Mechanical `error` rules keep blocking.
 - **Not the parked work.** The step-5 fix PRs and the earlier placement-rule commission are parked; this design supersedes the placement commission.
+- **Not yet: rules in `AGENTS.md` files, and linting skills in other repositories.** The owner, 31 Oct: "eventaully we will want the agents.md to have rules and also skilsl in repos to force linting". This design must not block it: the engine stays generic, and checked files and denominators are declared by config. When a product repository's own skills are checked, the placement standard (which applies to skills meant for any repository) needs its denominator to declare which skills are generic; a product's own skills aren't judged against it.
 
-## Open meaning, with provisional answers
+## Open meaning
 
-These need the owner's word. Until then each provisional answer is labelled as such wherever it's used.
-
-1. **What "related locations" covers.** *Provisional:*
-   - the standard's own line;
-   - the parts of the chunk the rule judged (the loaded file, the enclosing section);
-   - other places in the files under review where the rule raised the same nudge.
-
-   Places outside the checked repository, such as AgentStudio's own instructions, come in as text the nudge tells the agent to go and read, not as locations the engine finds.
+1. **What "related locations" covers.** *Confirmed by the owner, 31 Oct* ("yes this amke sense"), as R1 states it with line 17: links to places the rule read (the loaded file, the standard, the enclosing section), pointers to places it never read ("check whether this belongs in AgentStudio's repo"), and other places where the same rule gave the same nudge.
 2. **What shows the whole thing worked.** *Provisional:*
    - now: the rule run on the anchor cases gives the nudges in the success definition;
    - later, with evals: an agent receiving the nudge makes a justified placement call on line 17.

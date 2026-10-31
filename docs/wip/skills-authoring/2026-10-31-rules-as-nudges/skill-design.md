@@ -219,7 +219,7 @@ This is the recipe to build from. Each row is the default taken, consolidated fr
 | C14 | An observation anchor inside a chunk is required of the engine. | D20 |
 | C15 | The placement standard separates one product's own application workflow from tools and platforms used through their supported interface, domain vocabulary, this toolkit's infrastructure and labelled examples, with no adopted-scope escape. | D16 |
 | C16 | `call.completeness` stays a narrow rule; the bad control is a narrowing commission or reading; the composition case shows two rules on one line. | D17 |
-| C17 | "Related locations" uses the provisional answer in the Requirements. | D13 |
+| C17 | "Related locations" are confirmed by the owner (31 Oct): links to places the rule read, pointers to places it never read, and the same rule's nudges elsewhere. | D13, owner 31 Oct |
 
 ## Decision history
 
