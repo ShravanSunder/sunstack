@@ -94,6 +94,39 @@ flowchart LR
       </tbody>
     </table>
 
+    <h2 id="plan">How the work runs</h2>
+    <p>Three gates. Work in the same box runs in parallel; nothing after a gate starts before it passes. Two pull requests, one at a time: the engine's first, then the skills'.</p>
+    <ex-mermaid id="work-plan" label="How the work runs" data-width="canvas"><script type="text/plain">
+flowchart TD
+  subgraph now["1 and 2, in parallel now"]
+    direction LR
+    review1["Design review<br/>this set, independent reviewers"]
+    enginedesign["Engine design<br/>Lead writes, reviewers check"]
+  end
+  gate1{{"Gate 1<br/>both designs accepted"}}
+  subgraph build["3 and 4, in parallel"]
+    direction LR
+    enginepr["Engine pull request<br/>Sol implementer and verifier"]
+    skilltext["Skill text, runs 1 to 9<br/>Opus writer, on the branch"]
+  end
+  gate2{{"Gate 2<br/>engine 0.6.0 released"}}
+  subgraph after["5 to 8, in order"]
+    direction TB
+    rules["Rules folder and runner<br/>pin 0.6.0"]
+    proof["Rule proof<br/>labelled cases, keyed runs"]
+    gate3{{"Gate 3<br/>checks and proof in"}}
+    review2["Implementation review<br/>skills pull request"]
+    merge["You merge"]
+  end
+  now --> gate1 --> build --> gate2 --> after
+  rules --> proof --> gate3 --> review2 --> merge
+  class review1,review2 slot4
+  class enginedesign,enginepr slot2
+  class skilltext,rules,proof slot1
+  class gate1,gate2,gate3 slot3
+</script></ex-mermaid>
+    <p>Violet is review, amber is the engine, blue is the skills and rules, teal is a gate. The skill text is written during the engine's build because it only needs the engine's field names, which the engine's design fixes; the rules and their proof need the released engine. The table with who does each step is in the skill design's "How the work runs".</p>
+
     <h2 id="spike">The spike: the placement question on real skills</h2>
     <p>Run on today's engine before fixing the design, with expectations written down first. Reported cost about a quarter of a cent; 28 requests reported no cost.</p>
     <table>

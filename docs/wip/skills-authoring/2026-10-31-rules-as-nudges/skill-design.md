@@ -268,6 +268,26 @@ Every row as recorded, in the order it was added. Superseded and amended rows st
 - **Changelog:** one entry under `docs/changelog/`, with evidence under `references/`.
 - **Tooling:** `tests/skills/lib/skill-rules/report.ts` prints nudges, read-next places and gaps by kind, and derives "unread".
 
+## How the work runs
+
+Three lanes (review, engine, skills and rules) and three gates. Nothing after a gate starts before the gate passes. Two pull requests, one at a time: the engine's in `sunstack-tools`, then the skills' in `ai-tools`. The skill text is written on its branch while the engine pull request is open, but the skills pull request opens only after the engine release.
+
+| Step | Lane | Who | Starts after | In parallel with |
+| --- | --- | --- | --- | --- |
+| 1. Design review of this set (`skill-review` design stage, with a `decision-model-review` reviewer) | review | 🔎 a review lead with no authoring history, and its stage reviewers (OpenAI Sol, xhigh) | now | 2 |
+| 2. The engine's design (four documents in `sunstack-tools`: related places, an anchor inside a chunk, answers kept on every result, the cut flag, a section's own loads, fuller context fields, lint reading JSON) and its review | engine | 🦁 Lead writes; 🔎 Sol reviewers; 🦉 Advisor for a second look at high-risk points | now | 1 |
+| **Gate 1:** both designs accepted. The engine's program design fixes the report's field names the skill text will cite. | | | | |
+| 3. The engine pull request: implementation, tests, review | engine | 🐒 Implementer (Sol) with a paired 🔬 Verifier (Sol), commissioned by the Lead | Gate 1 | 4 |
+| 4. Skill text for runs 1 to 9, in run order, against the accepted contract and the engine's field names | skills | 🐒 writer (Opus), `skill-creation` per run, self-check per run | Gate 1 | 3 |
+| **Gate 2:** the engine pull request merged and 0.6.0 released (the Lead, under the engine grant); `tests/skills` pins 0.6.0. | | | | |
+| 5. The rules folder and the runner: the section kind, rebuilt `rule.generalization`, the placement rule, rule-file rules, `report.ts` | rules | 🐒 writer (Opus) for the rules; the same writer or a Sol implementer for `report.ts` | Gate 2 | none |
+| 6. Rule proof: evidence prints over the full denominator, development cases, labels from agents independent of the rules, held-out cases after the freeze | rules | 🦁 Lead runs the keyed calls; independent labelers (OpenAI Luna) | 5 | none |
+| **Gate 3:** every run's static checks pass and every rule's proof is in, or its gap named. | | | | |
+| 7. Implementation review of the skills pull request (`skill-review` implementation stage, with `decision-model-review`) | review | 🔎 Sol reviewers | Gate 3 | none |
+| 8. Pull-request wrap-up, then the owner merges | skills | the writer for wrap-up; the owner merges | 7 | none |
+
+Why this order: the skill text cites the engine's field names, so it waits for the engine's program design (Gate 1), not for the release. The rules and their proof run on the engine's new output, so they wait for the release (Gate 2). Writing the text during the engine's build saves the longest wait. The risk is a field renamed during the engine's build; then the text changes too, and step 7 checks it.
+
 ## Run status
 
 | Run | State |
