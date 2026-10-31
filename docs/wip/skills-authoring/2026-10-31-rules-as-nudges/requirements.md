@@ -127,7 +127,7 @@ The proof posture each run can honestly claim goes in the verification part.
   - the location;
   - what the rule observed, kept apart from the standard that makes it a concern (its wording and line);
   - whether a check established it or Jev's answers support it;
-  - its claim: a decided breach, worth checking, or uncertain;
+  - its severity: `error`, which blocks, or `warn`, the nudge (the engine called it `nudge` until the 18 Oct rename), and its outcome: a finding, or `uncertain` when the rule couldn't decide;
   - the related locations to read.
 
   A related location is a place the run collected. A place it didn't collect, such as another repository's instructions, is named as a direction to investigate. "The same nudge elsewhere" means the same rule gave it there, not that the text looks alike.
@@ -147,10 +147,10 @@ The proof posture each run can honestly claim goes in the verification part.
   - every incomplete part or skipped rule.
 
   Apart from the gaps, it sees what each gate decided was outside its standard, with the gate's answer, so a wrong exclusion can be challenged without treating every exclusion as unknown.
-- **R5a. A `check` never fails a run,** under any warning limit.
+- **R5a. A nudge (`warn`) never fails our rule runs.** A `warn` fails a run only under `--max-warnings`, and this repository's runner sets none. There's no new level: the engine's advisory severity is the nudge.
   - An `uncertain` result keeps its own run status: decisions are owed to the agent, so the run isn't clean, and it isn't a failure either.
   - A run that is invalid, cancelled or incomplete says so, whatever its nudges.
-  - A `breach` blocks only when every step on its path was mechanical. A path that a judged gate let through never blocks on its own, even when its last step is a mechanical check.
+  - An `error` finding blocks only when every step on its path was mechanical. A path that a judged gate let through never blocks on its own, even when its last step is a mechanical check.
 - **R5b. Every judged result keeps its answers,** passes and gate exclusions included, so the agent can see why. The rule's identity, the report's outcome, Jev's answers and the agent's final call stay four distinct things.
 - **R6. A pass says one thing.** A pass tells the agent that one property held. No reader treats it as the skill meeting the standard as a whole.
 - **R7. Nudges are read, not obeyed.** An agent acting on a nudge reads its places and decides the broader question. It records one of:

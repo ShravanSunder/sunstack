@@ -9,14 +9,14 @@ Nine runs, one skill each, in this order. Each later run cites the contract the 
 | Run | Skill (plugin) | Why it changes | Kind |
 | --- | --- | --- | --- |
 | 1 | `skill-rules` (skill-authoring) | designing a rule, reading a run: the contract's main home | update |
-| 2 | `domain-decision-models` (sunstack-dev) | how a tree ends: `check`, gate answers, a worked `check` tree | update |
+| 2 | `domain-decision-models` (sunstack-dev) | how a tree ends when it can't settle (a nudge, not `pass`), gate answers, a worked nudge tree | update |
 | 3 | `decision-model-review` (sunstack-dev) | reviewing a rule as a nudge | update |
 | 4 | `skill-creation` (skill-authoring) | the writer's self-check acts on nudges | update |
 | 5 | `skill-review` (skill-authoring) | the review lead acts on nudges; transfer reaches nudged lines | update |
-| 6 | `skill-design` (skill-authoring) | its verification step routes standards to `check` rules | update |
+| 6 | `skill-design` (skill-authoring) | its verification step routes standards to worth-checking rules | update |
 | 7 | `domain-skill-crafting` (skill-authoring) | the placement standard, and the rules folder: config, rebuilt `rule.generalization`, the placement rule, rule-file rules | update |
 | 8 | `skill-orchestrator` (skill-authoring) | runs the rules and assesses the writer's calls with the old finding/uncertain/gap shape (`SKILL.md:43`, `:52`, `:88`, `:104`) | update |
-| 9 | `skill-audit` (skill-authoring) | runs the rules read-only and flags only errors, confirmed findings or uncertain-as-breach (`SKILL.md:42`), so a `check` has no intake | update |
+| 9 | `skill-audit` (skill-authoring) | runs the rules read-only and flags only errors, confirmed findings or uncertain-as-breach (`SKILL.md:42`), so a nudge has no intake | update |
 
 The runner in `tests/skills` (`lib/skill-rules/report.ts`) is tooling, not a skill. It changes in the same pull request as run 1 and is listed under coordination.
 
@@ -43,32 +43,32 @@ No description changes, so no trigger trial applies.
 ### Run 1: `skill-rules`
 
 - **`SKILL.md`, opening (lines 8-14).** A rule is a nudge to the agent who runs it. It names the judgment it helps, collects the chunk that judgment needs, and gives a grounded nudge; the agent decides. A decided breach is one kind of nudge.
-- **The outcome table (lines 16-24).** Add `check` (marked). `review-only` narrows to standards no chunk can ground, such as one needing session history.
+- **The outcome table (lines 16-24).** Add "worth checking" (marked). `review-only` narrows to standards no chunk can ground, such as one needing session history.
 - **Step 3.** The design walks five things:
   1. the judgment, and who makes it;
   2. the chunk: subject, denominator, edges, fields, budget, proven with an evidence print;
   3. the tree;
-  4. the nudge per route: what was observed, the standard, the claim, read-next fields, directions to investigate;
+  4. the nudge per route: what was observed, the standard, the severity, read-next fields, directions to investigate;
   5. the proof, with three observations kept apart.
 - **Step 5.** The entry's nudge fields. Their exact shape waits on the engine contract (D7).
 - **Step 7.** The three observations:
   - collection;
   - the tree on labelled cases with countercases;
   - the receiving agent's call, deferred to evals.
-- **Step 8.** The return table gains `judgment`, `chunk`, `claim` and `read next` columns.
+- **Step 8.** The return table gains `judgment`, `chunk`, `severity` and `read next` columns.
 - **Completion blockers.**
   - A route that can't settle its standard ends `pass`.
-  - A `breach` or `check` route names no read-next field.
+  - A finding route names no read-next field.
   - A chunk was used without an evidence print.
 - **`references/decision-matrix.md`.**
-  - Question 3 asks whether a kind collects the chunk the judgment needs. If the chunk grounds a reason to look but can't settle the standard, the outcome is `check`.
-  - New worked example: the placement standard as a `check`, on line 17, with its countercases.
+  - Question 3 asks whether a kind collects the chunk the judgment needs. If the chunk grounds a reason to look but can't settle the standard, the outcome is "worth checking".
+  - New worked example: the placement standard as worth checking, on line 17, with its countercases.
   - The generalization example moves to section chunks.
   - "Searchable words" stays review-only, as the contrast: its evidence is prompts and logs, which no chunk holds.
 - **`references/rule-design.md`.**
   - Step 2 becomes "Design the chunk".
   - A new step: "Write each route's nudge".
-  - The policy table gains a `claim` column.
+  - The policy table gains a `severity` column.
   - The proof plan uses the three observations.
   - A second worked design, the shared example at the author's stage: the placement rule on line 17, its two Nouls, its policy and its cases.
 - **`references/running-rules.md`.**
@@ -79,7 +79,7 @@ No description changes, so no trigger trial applies.
   - The act-stage worked example: #187's chain, and what the account should have said.
 - **`references/check-and-reports.md`.** The report's new fields and what each means:
   - related locations;
-  - the claim;
+  - the basis;
   - answers on every result;
   - the cut flag;
   - the unread derivation.
@@ -90,26 +90,26 @@ No description changes, so no trigger trial applies.
 ### Run 2: `domain-decision-models`
 
 - **`SKILL.md`.** For a rule whose output goes to an agent, the outcome is a nudge:
-  - a route whose evidence can't settle its proposition ends `check` or `uncertain`, never `pass`;
+  - a route whose evidence can't settle its proposition ends in a nudge or `uncertain`, never `pass`;
   - a gate's drop keeps its answer.
 
   A `run_judgments` caller whose code acts on the outcome is unchanged.
-- **`references/worked-trees.md`.** A worked `check` tree: the shared example at the decide stage, with how the tree departs from a `breach` tree.
-- **`references/policy-algebra.md`.** The outcome set includes `check`, and its precedence beside `breach` and `uncertain`.
-- **`references/sunstack-driver.md`.** The engine fields that carry the claim, related locations and cut flag (D7).
+- **`references/worked-trees.md`.** A worked nudge tree: the shared example at the decide stage, with how the tree departs from a tree that decides its standard.
+- **`references/policy-algebra.md`.** A route that can't settle ends in a nudge or `uncertain`, with its precedence beside a decided finding.
+- **`references/sunstack-driver.md`.** The engine fields that carry the basis, related locations, cut flag and anchor (D7).
 
 ### Run 3: `decision-model-review`
 
 - **`SKILL.md` step 1.** The profile "a kit rule" becomes "a lint rule" (D11).
 - **Step 3.** A seventh check loads `references/checks/nudge-and-receiver.md`, run only for the lint-rule profile whose output goes to an agent; native callers and selections skip it with that reason. Would the nudge help the receiving agent make the right broader call? That is judged apart from whether the tree classifies the piece correctly. The check covers:
-  - every `breach` or `check` route says what was observed, the standard, the claim and where to read;
+  - every finding route says what was observed, the standard, the severity and where to read;
   - no route turns "can't settle" into `pass`;
   - the basis is honest: a judged gate followed by a mechanical step is not presented as established;
   - a place the run didn't collect is named as a direction, never as evidence.
 - **Its controls:**
   - **Bad:** a commission or reading that narrows a nudge into "make it pass", or drops its read-next places, as #187's commission did.
   - **Good:** the `call.completeness` rule on line 17, which observed a real missing return.
-  - **Composition:** the same line passing `call.completeness` while the placement rule gives `check`, for the agent to integrate.
+  - **Composition:** the same line passing `call.completeness` while the placement rule nudges, for the agent to integrate.
 - **`references/checks/state-and-evidence.md`.**
   - The chunk holds what each question needs, including the loaded files a placement or generalization question depends on.
   - Collected completeness and model-visible completeness are both checked.
@@ -133,7 +133,7 @@ No description changes, so no trigger trial applies.
 
 ### Run 6: `skill-design`
 
-- **Step 5.** The decision matrix's `check` outcome routes to a `check` rule. For it, the design names the judgment and what a useful nudge says, including a case where the right answer is to keep the text.
+- **Step 5.** The decision matrix's "worth checking" outcome routes to a worth-checking rule. For it, the design names the judgment and what a useful nudge says, including a case where the right answer is to keep the text.
 
 ### Run 7: `domain-skill-crafting`
 
@@ -144,7 +144,7 @@ No description changes, so no trigger trial applies.
   - A `section` kind: each section's own text from the H1 down, tables included, with its own loads, and the parent heading for context.
   - The rule-file checked files and a JSON evidence kind, once the engine admits JSON (D7).
 - **`rules/generalization.rules.json`.** `rule.generalization` is rebuilt over the `section` kind.
-- **`rules/calls-and-placement.rules.json`.** The placement rule, with claim `check`.
+- **`rules/calls-and-placement.rules.json`.** The placement rule, with severity `warn`.
 - **Rule-file rules,** on `domain-decision-models`' standards. Their markers sit on that skill's own wording, and their rulebook pair goes in the same config (D6).
 
 ### Run 8: `skill-orchestrator`
@@ -154,8 +154,8 @@ No description changes, so no trigger trial applies.
 
 ### Run 9: `skill-audit`
 
-- **The rule-run step.** It stays read-only. A confirmed `check` nudge becomes a grounded signal for intake, and one it can't settle stays an open item naming the missing evidence. It never invents a fix.
-- **The flag rule** admits confirmed `check` nudges as signals, next to errors and confirmed breaches.
+- **The rule-run step.** It stays read-only. A confirmed nudge becomes a grounded signal for intake, and one it can't settle stays an open item naming the missing evidence. It never invents a fix.
+- **The flag rule** admits confirmed nudges as signals, next to errors and confirmed breaches.
 - **The result surface** carries the confirmed nudges, open items and gaps.
 
 ## Consumers, the stage they load, and what they return
@@ -225,6 +225,7 @@ Each row is the default taken. The owner may strike any row.
 | D18 (from the spike) | Every chunk for generalization and placement carries its owning skill's scope (the description); a reference's sections carry their skill's. The engine gains the field. | In the spike, the AgentStudio and Agent VM loop references were mostly judged fine section by section: their chunks didn't say they live in a generic plugin. Line 17 was caught only because its section carried the loaded file's opening. |
 | D19 (from the spike) | Each placement question's criteria carry every exemption the standard states: tools and platforms through their supported interface, domain vocabulary, this toolkit's infrastructure, labelled examples | The spike's criteria lacked the tool clause and gave two false nudges on `curl` against VictoriaMetrics' export API, part of the toolkit's own stack. |
 | D20 (from the spike) | An observation anchor inside a chunk is an engine requirement, not optional | The spike's line-17 nudge anchored at line 6, the section's start. Without the anchor, the agent is told "this section", not "this line". |
+| D21 (31 Oct, supersedes D2; amends D1, D10a, D12 and D14) | No new `check` level and no `claim` axis. The nudge is `warn`; `error` blocks only on an all-mechanical path; outcomes stay the engine's own (finding, `uncertain`, `not_applicable`). "Worth checking" is a classification outcome in `skill-rules`, said in the rule's message, not an engine level. | The owner: "did we nto already have nudge vs otehrs in a coversation and spec? it snot new it mgiht even be in a enum". It was: severity `block`/`nudge` in the 12 Oct engine requirements (U26, with the owner's words "default severity of nudge unless overridden"), renamed `error`/`warn` on 18 Oct (runner R14). A `warn` fails only under `--max-warnings`, which our runner doesn't set, so D2's reason doesn't hold here. |
 | D17 | `call.completeness` stays a valid narrow rule. The bad control is a narrowing commission or reading, and the composition case shows two rules on one line. | Making one rule raise every concern would undo atomicity. #187's failure was the commission and the missing placement rule (the Advisor, view 3 point 1). |
 
 ## Coordination

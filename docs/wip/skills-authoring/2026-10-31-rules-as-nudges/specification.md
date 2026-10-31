@@ -16,13 +16,13 @@ A nudge is what one rule gives the agent who ran it, about one place in the chec
 | what | what the rule noticed, in one sentence | the rule's route, authored per route |
 | why | the standard it rests on: its wording and its own `path:line` | the engine, from the marker |
 | basis | `mechanical` (every step on the path was a check that established a fact) or `judged` (at least one step on the path, a gate included, read Jev's answer; a probability is evidence for an answer, not certainty that the skill is wrong) | the engine, from every step on the path, not only the last |
-| claim | `breach` (the rule decided the standard is broken), `check` (worth investigating: the chunk can't settle the standard), or `uncertain` (an answer fell between thresholds) | the rule's route |
+| severity and outcome | the engine's existing words: a finding at `error` (blocks) or `warn` (the nudge, called `nudge` until the 18 Oct rename), or `uncertain` (an answer fell between thresholds). Whether the rule decided the standard or only points at what to check is said in its message, not a new field | the rule's route |
 | read next | the related locations, each labelled with its relationship: the standard, the caller, the loaded file, the enclosing section, the same nudge elsewhere in the files under review. A place the rule didn't collect, such as another repository's instructions, is a direction to investigate, named in the message, never a location presented as evidence | the engine, from the spans of the fields the rule names; the standard's line always |
 | the answers | each question's answer and the path the decision took | the engine |
 | what was cut | whether the model saw less than was collected | the engine |
 
-A `check` never fails a run and never counts toward a warning limit. Today a `warn` exits 1 under a zero warning limit (the Advisor's probe), so `check` is a level of its own, not a quiet warning.
-- **`breach`** keeps today's severities: `error` blocks and `warn` is reported. An `error` blocks only when its basis is `mechanical`. A judged gate followed by a mechanical check is `judged`, so it never blocks on its own.
+The nudge is `warn`. It already advises without stopping: a `warn` fails a run only when the caller sets `--max-warnings`, and this repository's runner sets none. The 12 Oct engine requirements carry the owner's own words for it: "the severity should be by rule, can have a default severity of nudge unless overridden" (`sunstack-tools` `docs/specs/2026-10-12-rust-rule-engine/requirements.md`, U26); the runner spec renamed `nudge` to `warn` and `block` to `error` (`docs/specs/2026-10-18-sunstack-runner/requirements.md`, U4).
+- **`error`** blocks, and only when its basis is `mechanical`. A judged gate followed by a mechanical check is `judged`, so it never blocks on its own.
 - **`uncertain`** keeps its own run status (exit 5): the agent owes decisions, so the run isn't clean, and it isn't a failure.
 - **A run that is invalid, cancelled or incomplete** stays that, whatever its nudges say.
 
@@ -45,7 +45,7 @@ For each nudge, the agent reads its line and its read-next places, judges it in 
 - **routed** to the owner of the broader concern, such as content that belongs in another repository;
 - **open,** naming the evidence it lacks, when it can't honestly do any of the three yet. A read-only caller such as an audit records this, or routes the concern as intake; it never invents a fix.
 
-It says what it checked and where. A nudge that disappears after a local edit is not an account. A `check` never needs a repair invented for it; "kept, because the product is a labelled example" is a full answer.
+It says what it checked and where. A nudge that disappears after a local edit is not an account. A nudge never needs a repair invented for it; "kept, because the product is a labelled example" is a full answer.
 
 Several rules can nudge about the same line, each about its own property. The agent integrates them. No single rule has to raise every concern about its line: a call-completeness rule that rightly finds a missing return stays a good rule, even when the bigger question about the same line is placement, which the placement rule raises.
 
@@ -78,9 +78,9 @@ Every skill below teaches its part on the same case: #187's line, `ops-observabi
 | author | the rule's writer, with `skill-rules` | names the judgment ("does a generic skill route into one product's own workflow?"), the chunk (the line's section text with its own loads, and the loaded file's opening), the tree, the `check` nudge it gives, and the proof cases, the countercases included |
 | collect | the engine | gathers the section's own text with line 17, and `agentstudio-loop.md`'s path and opening |
 | decide | Jev, then code | Jev answers "does this route the agent into one named product's own workflow?" and "is the product named only as a labelled example?"; code ends `check` |
-| nudge | the report | `check` at line 17, "a generic skill routes into AgentStudio's own debug loop", why: the placement standard; read next: the loaded file, and the other product-only places in the files under review |
+| nudge | the report | a `warn` finding at line 17, "a generic skill routes into AgentStudio's own debug loop", why: the placement standard; read next: the loaded file, and the other product-only places in the files under review |
 | act | the writer, review lead or Lead | reads the loaded file and asks where AgentStudio's own workflow lives; records "routed: belongs in AgentStudio's repository" instead of polishing the call's return, which is what #187 did |
-| review the rule | the rule's reviewer, with `decision-model-review` | checks the chunk holds the loaded file's opening, that "can't settle" ends `check` rather than `pass`, and that the countercases pass |
+| review the rule | the rule's reviewer, with `decision-model-review` | checks the chunk holds the loaded file's opening, that "can't settle" ends in a nudge or `uncertain` rather than `pass`, and that the countercases pass |
 
 The countercases matter as much as the case, and each follows from the standard's own wording (below), not from exceptions kept only in test notes:
 - **a labelled example:** a product named only as an example ("for example, AgentStudio's beta channel") gets no nudge;
@@ -90,7 +90,7 @@ The countercases matter as much as the case, and each follows from the standard'
 
 The rule is "a generic skill doesn't carry one product's own workflow", not "no product names".
 
-The composition case: on line 17, `call.completeness` asks whether the call says what to bring back. With the return added, it rightly passes, while the placement rule independently gives `check` on the same line. The agent integrates the two. #187's failure wasn't the call rule: a commission narrowed its nudge into "make it pass", and no rule asked about placement.
+The composition case: on line 17, `call.completeness` asks whether the call says what to bring back. With the return added, it rightly passes, while the placement rule independently nudges on the same line. The agent integrates the two. #187's failure wasn't the call rule: a commission narrowed its nudge into "make it pass", and no rule asked about placement.
 
 Each skill shows its own stage of this example. None restates the others' stages, and none needs another skill's internals to follow its own.
 
@@ -99,17 +99,17 @@ Each skill shows its own stage of this example. None restates the others' stages
 ### `skill-rules`: designing a rule
 
 - It teaches that a rule is a nudge to the agent who runs it, and that a decided breach is one kind of nudge.
-- Its classification gains a `check` outcome. A standard whose chunk gives a grounded reason to look, but can't settle the standard, is marked and gets a rule that nudges with `check`. "Review-only" stays only for standards no chunk can ground, such as one needing session history or a fresh agent run.
+- Its classification gains a "worth checking" outcome. A standard whose chunk gives a grounded reason to look, but can't settle the standard, is marked and gets a rule whose `warn` finding says what to check and where. "Review-only" stays only for standards no chunk can ground, such as one needing session history or a fresh agent run.
 - Its rule design walks one order:
   1. the judgment the nudge helps, and who makes it;
   2. the chunk (subject, denominator, context and edges, fields, budget), proven with an evidence print on real sources;
   3. the tree;
   4. the nudge each route gives;
   5. the proof.
-- Each route that ends in `breach` or `check` names its message and its claim, and the fields whose locations become "read next".
+- Each route that ends in a finding names its message, its severity, and the fields whose locations become "read next".
 - Its proof keeps three observations apart:
   - **collection:** the evidence print covers the denominator, with cuts named;
-  - **the tree:** labelled cases, the countercases included, give the expected claim at the expected line;
+  - **the tree:** labelled cases, the countercases included, give the expected outcome at the expected line;
   - **the receiving agent's call:** this is an eval, and comes later with the owner's evals.
 - It holds the rules for the JSON rule files. Those rules nudge only about what the check accepts. The Advisor's admission probes on 0.5.0 show the check accepts all of these:
   - a question that names no field it judges;
@@ -130,14 +130,14 @@ Each skill shows its own stage of this example. None restates the others' stages
 
 ### `domain-decision-models`: designing the tree
 
-- Its outcomes include `check`: a route whose evidence can't settle the proposition ends `check` or `uncertain`, never `pass`.
+- A route whose evidence can't settle its proposition ends in a nudge (a `warn` finding saying what to check) or `uncertain`, never `pass`.
 - A gate's drop carries its answer to the agent, so a dropped piece is visible, with the reason.
-- It has a worked tree for a `check` nudge.
+- It has a worked tree for a worth-checking nudge.
 
 ### `decision-model-review`: reviewing a rule
 
 - A new check, run only for a lint rule whose output goes to an agent. A native `run_judgments` caller or an evidence selection, whose code acts on the outcome, isn't asked for agent-facing routes. The check covers:
-  - every route says what the receiving agent gets (message, claim, where to read);
+  - every route says what the receiving agent gets (message, severity, where to read);
   - no route turns "can't settle this" into `pass`;
   - the basis on a route is honest: a judged gate followed by a mechanical check is not presented as established.
 - **Its bad control** is a reading or commission that narrows a nudge into "make it pass" or drops its read-next places, as #187's commission did. The call-completeness rule itself is a good control: it observed a real gap.
@@ -166,12 +166,12 @@ Each skill shows its own stage of this example. None restates the others' stages
 
 ### `skill-audit`: reading skills, read-only
 
-- It runs the rules read-only. A `check` nudge it confirms becomes a grounded signal for intake, and one it can't settle stays an open item naming the missing evidence. It never invents a fix.
+- It runs the rules read-only. A nudge it confirms becomes a grounded signal for intake, and one it can't settle stays an open item naming the missing evidence. It never invents a fix.
 - Its result carries the nudges it confirmed, the open items and the gaps.
 
 ### `skill-design`: planning verification
 
-- Its verification step maps a standard to a `check` rule when the classification gives one.
+- Its verification step maps a standard to a worth-checking rule when the classification gives one.
 
 ### `domain-skill-crafting`: the standards and the rules folder
 
@@ -182,7 +182,7 @@ Each skill shows its own stage of this example. None restates the others' stages
   It leaves out the "scope the owner adopted" escape on purpose. The owner's direction was that a product's workflow belongs in its own repository even when its scope is stated: "skills for agentstudio shodukl be in agent stkudio repo".
 - The rules folder:
   - `rule.generalization` judges section chunks with their loads;
-  - a placement rule nudges with `check`;
+  - a placement rule nudges with `warn`;
   - the config defines the section kind;
   - the rule files get rules once the engine reads JSON.
 
@@ -191,7 +191,7 @@ Each skill shows its own stage of this example. None restates the others' stages
 These go to the engine's own design in `sunstack-tools`. Each comes from a source anchor or a probe the Advisor ran on the signed 0.5.0 engine.
 
 - **Related locations.** A result carries its related locations, labelled by relationship: the standard's source location, and the spans of the fields the rule names, the load target's opening included (it has no span today). JSON carries them as a list; SARIF carries them as `relatedLocations`.
-- **A `check` level.** It never fails a run and sits outside every warning limit (SARIF `note`). Run failures (invalid, cancelled, incomplete) stay separate from it.
+- **No new level.** `warn` is the nudge and stays non-failing unless a caller sets `--max-warnings`. Run failures (invalid, cancelled, incomplete) stay separate.
 - **Answers on every judged result,** passes and `not_applicable` included, so a gate's drop can be explained.
 - **Cuts are visible.** A piece's model view marks when a cap cut it; today the cut is marked in the text, but not in the piece state the decision reads.
 - **A section owns its own loads.** The target regex reads only the piece's own text, not its excluded children's, so one child's load isn't attached to the H1, the parent and the child at once.
@@ -206,16 +206,16 @@ These go to the engine's own design in `sunstack-tools`. Each comes from a sourc
 Each standard is tested on two cases outside #187.
 
 1. **Every route that ends in a nudge says what the agent receives:** where, what was noticed, how sure, and where to read next.
-   - *Case A:* a mechanical description-length rule. It gives `breach` at the description line ("340 characters; the limit is 300"), and read-next is the standard's line. Holds.
-   - *Case B:* a judged "does the call say what to bring back" rule. It gives `breach` at the load line, and read-next is the loaded file, whose opening shows what it returns. Holds.
+   - *Case A:* a mechanical description-length rule. It gives an `error` finding at the description line ("340 characters; the limit is 300"), and read-next is the standard's line. Holds.
+   - *Case B:* a judged "does the call say what to bring back" rule. It gives a `warn` finding at the load line, and read-next is the loaded file, whose opening shows what it returns. Holds.
    - *Verdict:* transfers.
-2. **A rule whose chunk can't settle its standard nudges with `check`, never `pass`.**
-   - *Case A:* "does this reference duplicate another skill's reference?". The chunk holds one file, so it gives `check` with both paths. Holds.
-   - *Case B:* "is this threshold justified by measured costs?". The rule file can't show the costs, so it gives `check` pointing at the rule's proof record. Holds.
+2. **A rule whose chunk can't settle its standard nudges, never `pass`.**
+   - *Case A:* "does this reference duplicate another skill's reference?". The chunk holds one file, so it nudges with both paths. Holds.
+   - *Case B:* "is this threshold justified by measured costs?". The rule file can't show the costs, so it nudges toward the rule's proof record. Holds.
    - *Verdict:* transfers.
 3. **An agent acting on a nudge decides the broader question before making the rule's property hold.**
-   - *Case A:* a length `breach` on a long description. The broader question is whether the extra text belongs in the body; moving it there beats trimming words. Holds.
-   - *Case B:* a `check` that a step routes into a vendor's CLI. The broader question is whether the step belongs in the vendor's repository; returning that beats rewording the step. Holds.
+   - *Case A:* a length finding on a long description. The broader question is whether the extra text belongs in the body; moving it there beats trimming words. Holds.
+   - *Case B:* a nudge that a step routes into a vendor's CLI. The broader question is whether the step belongs in the vendor's repository; returning that beats rewording the step. Holds.
    - *Verdict:* transfers.
 4. **A rule names the chunk its questions need, and only that.**
    - *Case A:* a branch rule needs the branch line and its enclosing step's heading, not the whole file. Holds.
