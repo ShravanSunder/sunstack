@@ -22,7 +22,7 @@ A nudge is what one rule gives the agent who ran it, about one place in the chec
 | what was cut | whether the model saw less than was collected | the engine |
 
 The nudge is `warn`. It already advises without stopping: a `warn` fails a run only when the caller sets `--max-warnings`, and this repository's runner sets none. The 12 Oct engine requirements carry the owner's own words for it: "the severity should be by rule, can have a default severity of nudge unless overridden" (`sunstack-tools` `docs/specs/2026-10-12-rust-rule-engine/requirements.md`, U26); the runner spec renamed `nudge` to `warn` and `block` to `error` (`docs/specs/2026-10-18-sunstack-runner/requirements.md`, U4).
-- **`error`** blocks, and only when its basis is `mechanical`. A judged gate followed by a mechanical check is `judged`, so it never blocks on its own.
+- **`error`** stops the run. Our skills' policy gives `error` only to mechanical rules and `warn` to any path a model judged; a judged gate followed by a mechanical check is `judged`. The engine keeps per-rule severity as authored (the owner's U26) and reports the basis; it doesn't ban a judged `error`. The run's exit is separate from the ship decision, which the review makes.
 - **`uncertain`** keeps its own run status (exit 5): the agent owes decisions, so the run isn't clean, and it isn't a failure.
 - **A run that is invalid, cancelled or incomplete** stays that, whatever its nudges say.
 
@@ -56,7 +56,7 @@ A chunk is the evidence one rule's decision reads about one place. The rule name
 A rule's chunk design states:
 - **the subject:** what one piece is, such as a load line, or a section's own text;
 - **the denominator:** which files and which pieces the rule scans, so "unread" has a meaning;
-- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings, and the owning skill's scope (its description). A reference's sections carry their skill's scope. The spike showed why: AgentStudio's own loop reference mostly passed section by section, because nothing in its chunks said it lives in a generic plugin;
+- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings, and context the caller declares: the file's provenance (its plugin path), whether that plugin is meant for any repository, and the owning skill's description. A reference's sections carry their skill's context. Whether missing context caused the spike's misses on the loop references is a hypothesis, not shown: the spike's copies had lost their plugin paths, and some of those sections (the shared-stack and producer-boundary ones) can rightly pass; the debug and beta app sections are the stronger positive cases;
 - **the fields** each question reads;
 - **the budget:** the size cap and what a cut means for the answer.
 
@@ -197,8 +197,8 @@ These go to the engine's own design in `sunstack-tools`. Each comes from a sourc
 - **A section owns its own loads.** The target regex reads only the piece's own text, not its excluded children's, so one child's load isn't attached to the H1, the parent and the child at once.
 - **Fuller context fields.** A full-text option for the enclosing section (`enclosing` and `same_file` give first lines today), and fields for a reference target (today `as_kind` fills fields only for a skill target, and a path target gets its opening only).
 - **JSON evidence in lint.** The native `prepare_evidence` already parses JSON and returned a full K001 rule entry with its spans. Lint's project loading refuses non-Markdown (`evidence_project_loading.rs:184-188, 225-228`), so the change is admitting JSON there and reusing the native collector, not a second JSON reader.
-- **The owning skill's scope as a field.** A section kind can carry its own file's frontmatter description, and a reference's sections can carry their skill's. Today section bodies omit frontmatter, and a reference can't reach its skill's `SKILL.md`.
-- **An observation anchor inside a chunk.** A route's nudge can point at a specific line inside a section-sized subject. Today a finding at `body` anchors at the section's first span (`decision_walking.rs:215-221`); the spike's line-17 nudge landed on line 6.
+- **Caller-declared context on a chunk.** The config can declare context for the files it checks (for example, which plugins are meant for any repository), and a chunk can carry it with the file's path and its owning skill's description. The engine stays generic: it carries what the caller declares and doesn't learn what a `SKILL.md` is. Today section bodies omit frontmatter, and a reference can't reach its skill's description.
+- **An observation anchor inside a chunk.** A route's nudge can point at a specific line inside a section-sized subject. Today a finding at `body` anchors at the section's first span (`decision_walking.rs:215-221`); the spike's line-17 nudge landed on line 7, the start of the section's own text.
 - **Coverage per rule,** zeros included, as a report field, when the runner's join proves too fragile. This one is optional: the runner can derive it today.
 
 ## Standards the change teaches, with transfer cases

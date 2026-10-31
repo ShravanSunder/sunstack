@@ -150,7 +150,7 @@ The proof posture each run can honestly claim goes in the verification part.
 - **R5a. A nudge (`warn`) never fails our rule runs.** A `warn` fails a run only under `--max-warnings`, and this repository's runner sets none. There's no new level: the engine's advisory severity is the nudge.
   - An `uncertain` result keeps its own run status: decisions are owed to the agent, so the run isn't clean, and it isn't a failure either.
   - A run that is invalid, cancelled or incomplete says so, whatever its nudges.
-  - An `error` finding blocks only when every step on its path was mechanical. A path that a judged gate let through never blocks on its own, even when its last step is a mechanical check.
+  - Our rules give any path a model judged `warn`; `error` is for mechanical rules. The engine doesn't forbid an authored `error` on a judged path, since severity is set per rule (the owner's U26); it reports each result's basis so the agent can see a judged one. A run's exit code is not the ship decision: the review decides.
 - **R5b. Every judged result keeps its answers,** passes and gate exclusions included, so the agent can see why. The rule's identity, the report's outcome, Jev's answers and the agent's final call stay four distinct things.
 - **R6. A pass says one thing.** A pass tells the agent that one property held. No reader treats it as the skill meeting the standard as a whole.
 - **R7. Nudges are read, not obeyed.** An agent acting on a nudge reads its places and decides the broader question. It records one of:

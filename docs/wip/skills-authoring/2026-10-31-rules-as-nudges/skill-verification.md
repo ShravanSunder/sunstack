@@ -55,8 +55,8 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
    - The description case is out: section bodies omit frontmatter.
    - Expectations are frozen in `expectations.md` beside the run, written before any result was read.
    - Records the answers. It tests the decide stage only, and ships nothing.
-   - **Ran 31 Oct, 16:05 to about 16:20,** in two runs: 78 requests, about $0.0024. The first run lost 28 pieces to transient connection failures, and the re-run completed them. Results against the frozen expectations:
-     - line 17's section: nudged, anchored at line 6;
+   - **Ran 31 Oct, 16:05 to about 16:20,** in two runs: 78 requests, reported cost $0.0024 (28 requests reported no cost, so the full bill isn't verified). The first run lost 28 pieces to transient connection failures, and the re-run completed them. Results against the frozen expectations:
+     - line 17's section: nudged, anchored at line 7 (the start of the section's own text);
      - the cleanup allow-list table: nudged;
      - a cleanup section I'd expected to pass: nudged, and correctly (it routes into AgentStudio's and Router's own clean tasks);
      - the loop references: mostly passed section by section, the scope gap D18 answers;

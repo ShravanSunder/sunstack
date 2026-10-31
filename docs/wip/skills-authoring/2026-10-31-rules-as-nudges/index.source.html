@@ -19,7 +19,7 @@
     <ex-mermaid id="how-a-rule-works" label="How a rule works" data-width="canvas"><script type="text/plain">
 flowchart TD
   standard["Standard<br/>what good skill text does"] --> rule["Rule<br/>names its chunk and questions"]
-  rule --> chunk["Evidence chunk<br/>the section, the files it loads,<br/>the skill's own description"]
+  rule --> chunk["Evidence chunk<br/>the section, the files it loads,<br/>where the skill lives"]
   chunk --> jev["Jev<br/>answers the questions"]
   jev --> code["Code<br/>turns answers into an outcome"]
   code -->|"worth a look"| nudge["Nudge: warn<br/>what, where, why, read next"]
@@ -83,7 +83,7 @@ flowchart LR
     <table>
       <thead><tr><th>Where</th><th>What changes</th></tr></thead>
       <tbody>
-        <tr><td>Engine</td><td>A nudge carries its related places (the standard, the loaded file) and can point at a line inside a section. Each chunk can carry the skill's own description. Answers are kept on every result. Cut text is flagged, and a section only gets its own loads. Lint reads JSON, reusing the collector the engine already has.</td></tr>
+        <tr><td>Engine</td><td>A nudge carries its related places (the standard, the loaded file) and can point at a line inside a section. Each chunk can carry context the config declares: where the file lives and whether its plugin is meant for any repository. Answers are kept on every result. Cut text is flagged, and a section only gets its own loads. Lint reads JSON, reusing the collector the engine already has.</td></tr>
         <tr><td><code>skill-rules</code></td><td>Designing a rule as a nudge: the judgment it helps, its chunk, its questions, what it says. Reading a run: the agent's answer per nudge, and the gaps.</td></tr>
         <tr><td><code>domain-decision-models</code></td><td>A tree that can't decide nudges or says uncertain, never passes.</td></tr>
         <tr><td><code>decision-model-review</code></td><td>A new check: does the nudge help the agent make the right call?</td></tr>
@@ -95,11 +95,11 @@ flowchart LR
     </table>
 
     <h2 id="spike">The spike: the placement question on real skills</h2>
-    <p>Run on today's engine before fixing the design, with expectations written down first. About a quarter of a cent.</p>
+    <p>Run on today's engine before fixing the design, with expectations written down first. Reported cost about a quarter of a cent; 28 requests reported no cost.</p>
     <table>
       <thead><tr><th>Case</th><th>Expected</th><th>Got</th></tr></thead>
       <tbody>
-        <tr><td>Line 17's section</td><td>nudge</td><td>nudge, but pointed at line 6 (the section start)</td></tr>
+        <tr><td>Line 17's section</td><td>nudge</td><td>nudge, but pointed at line 7 (the section start), not line 17</td></tr>
         <tr><td>Cleanup skill's no-ask table row for AgentStudio</td><td>nudge</td><td>nudge</td></tr>
         <tr><td>Cleanup "Prefer the project's own clean task"</td><td>no nudge</td><td>nudge, and right: it routes into AgentStudio's and Router's own clean tasks</td></tr>
         <tr><td>The AgentStudio and Agent VM loop files</td><td>nudge</td><td>mostly missed: their sections don't say they live in a generic plugin</td></tr>
@@ -108,7 +108,7 @@ flowchart LR
         <tr><td>This toolkit's own VictoriaMetrics queries</td><td>no nudge</td><td>two false nudges: the question lacked the "a tool used through its interface" exemption</td></tr>
       </tbody>
     </table>
-    <p>Three fixes came out of it: each chunk carries the skill's description, each question carries every exemption the standard names, and the engine learns to point at a line inside a section.</p>
+    <p>Three changes came out of it: each chunk carries context the config declares (where the file lives, whether its plugin is generic); each exemption sits on the question that owns it; and the engine learns to point at a line inside a section. The first two are likely causes of the misses, still to be tested.</p>
 
     <ex-callout title="Still open" tone="question" icon="bell">
       <p>What "related places" should cover has a provisional answer until you say otherwise. Whether an agent given a nudge makes the right call waits for evals. The independent design review hasn't run yet.</p>
