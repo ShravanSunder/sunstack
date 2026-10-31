@@ -1,6 +1,6 @@
 ---
 name: scaffold-project
-description: "Use when scaffolding or initializing a new project or repo, retrofitting one with standard configs, or adding linting, formatting, type checks, tests or agent rules (oxlint, ruff, vitest, pytest, CLAUDE.md)."
+description: "Use when scaffolding or initializing a new project or repo, retrofitting one with standard configs, or adding linting, formatting, type checks, tests or agent rules."
 version: 0.1.0
 ---
 
