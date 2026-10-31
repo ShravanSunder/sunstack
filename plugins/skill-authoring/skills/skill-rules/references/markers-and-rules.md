@@ -151,6 +151,7 @@ The nudge fields and JSON kinds have refusals of their own. Each names the entry
 | a locator without `at` | `locate` on a route that names no field | add the `at` field the locator chooses lines from |
 | a locator name that collides | the locator's `name` equals a question's or another locator's | give it a name of its own |
 | a locator's `min_probability` out of range | a bar outside (0, 1] | set the bar step 3's policy chose |
+| a target field's `exclude` names a kind | a target field's exclusion is `{"kind": ...}`; it accepts only `{"rule": ...}` | name the evidence rule whose ranges the field's own text leaves out, such as the rule that matches child sections |
 | `yaml` on a JSON kind | a JSON kind's field reads Markdown frontmatter | read the value with a source JSON admits |
 | a field naming a rule or kind of another language | a JSON kind's `inside`, `enclosing`, `same_file`, `next`, `previous` or `exclude` naming a Markdown rule or kind, or the reverse | name a rule or kind of the field's own language; only a target's `as_kind` may name either |
 
