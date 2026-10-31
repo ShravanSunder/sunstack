@@ -130,7 +130,10 @@ The proof posture each run can honestly claim goes in the verification part.
   - its severity: `error`, which blocks, or `warn`, the nudge (the engine called it `nudge` until the 18 Oct rename), and its outcome: a finding, or `uncertain` when the rule couldn't decide;
   - the related locations to read.
 
-  A related location is a place the run collected. A place it didn't collect, such as another repository's instructions, is named as a direction to investigate. "The same nudge elsewhere" means the same rule gave it there, not that the text looks alike.
+  "Where else to read" comes in three kinds, shown apart so the agent knows which it can trust. Take line 17:
+  - **A place the rule read:** line 17 loads `references/agentstudio-loop.md`, and the rule read that file's opening, so the nudge links to it with a line number.
+  - **A place the rule never read:** AgentStudio's own repository, where that workflow should live. The rule didn't open it, so the nudge can only say "check whether this belongs in AgentStudio's repo"; it's a pointer for the agent to follow, not a link.
+  - **The same problem elsewhere:** if the same rule also nudged `practices-cleanup:40`, the nudge says so. It says this only when the rule really nudged there, never because other text merely looks similar.
 - **R2. A rule names its chunk and its edges.** Each rule declares the evidence its judgment needs:
   - its subject (a line, or a section's own text);
   - which relationships it follows, such as the enclosing section, its siblings and the files its own text loads, one hop and no further unless the rule says so;
