@@ -150,7 +150,13 @@ Use this for `validate-plan`, `next`, and pre-execution checks.
 1. Read the full plan artifact. Do not require a separate reading receipt. Apply the conditional canonical-plan load call in the main workflow and return the unchanged plan record, governing basis, delivery context, and any discrepancy.
 2. Verify the plan's `current-four-document-design-ready` or `implementation-mechanics-only` basis against current evidence. A missing, stale, or contradicted basis is `blocked` and routes to the exact semantic owner.
 3. Verify the planned-at SHA, current branch, and changed target files.
+
+   Completion: the planned-at SHA stands beside the current branch and HEAD, and each target file changed since that SHA is listed, or none is.
+
 4. Re-open all cited source files and commands from the plan.
+
+   Completion: every source file and command the plan cites has been opened or checked in the current tree, and each one that is missing or no longer matches the plan is listed, or none is.
+
 5. Classify each task:
    - ready: evidence current and proof gate runnable
    - needs-refresh: paths, commands, or assumptions drifted
