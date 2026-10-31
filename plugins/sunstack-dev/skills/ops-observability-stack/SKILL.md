@@ -11,10 +11,10 @@ When a change would touch both the shared stack and a producer, or the Separatio
 
 Choose the smallest loop first:
 
-- IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md` and follow its lifecycle commands.
+- IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md`, follow its lifecycle commands, and return the result each command reported, or the gap that stopped it.
 - IF the work touches producer requirements, load `references/producer-contract.md` and return the requirements that apply.
 - IF the work touches resource labels, marker/state-file keys, or service names, load `references/resource-naming.md` and return the names and keys that apply.
-- IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.
+- IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md`, follow that loop, and return the fresh run's marker with whether it appears in Victoria and the sensitive canaries are absent, or the step that failed.
 - IF the work is Agent VM, OpenClaw, or `shravan-claw-beta`, load `references/resource-naming.md` and return the names and keys that apply, then load `references/agent-vm-loop.md` and follow the loop for its ownership mode.
 - IF the work needs Victoria proof or debugging queries, load `references/victoria-queries.md` and return the queries for the fresh marker.
 
