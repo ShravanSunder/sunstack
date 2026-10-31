@@ -197,9 +197,33 @@ The shared worked example has one home per stage, and no stage is restated elsew
 
 None. No credentials, outbound requests or permission boundaries change in the skills. Keyed runs stay with the Lead under the existing grant.
 
-## Decisions
+## Decisions in force
 
-Each row is the default taken. The owner may strike any row.
+This is the recipe to build from. Each row is the default taken, consolidated from the history below; the owner may strike any row, and the history keeps every original wording.
+
+| # | Decision in force | From |
+| --- | --- | --- |
+| C1 | The nudge is `warn`. By our skills' policy `error` is for mechanical rules; the engine keeps each rule's authored severity and reports its basis (`mechanical` only when every step on the path was mechanical, otherwise `judged`). Outcomes are the engine's own: finding, `uncertain`, `not_applicable`. No new level and no claim field. | D21, D21a, D15a, D1 (basis) |
+| C2 | `uncertain` keeps its own run status (exit 5). | D14 |
+| C3 | "Unread" counts only files inside each rule's declared denominator; the runner derives it; an engine coverage field is optional. | D3, D3a |
+| C4 | Decided exclusions are shown apart from gaps, with the gate's answer. | D4 |
+| C5 | Edges are one hop and declared per rule; collected and model-visible completeness are reported apart. | D5 |
+| C6 | Rule-file rules cover a question naming no field, a question asking two things, and criteria that disagree with the task; their standards are marked in `domain-decision-models` and paired in the same config. | D6, D6a |
+| C7 | Lint admits JSON evidence by reusing the native collector; the entry's nudge fields wait on the engine design. | D7 |
+| C8 | One shared worked example, #187's line 17, staged across four homes. | D8 |
+| C9 | Proof in three observations: collection, the tree, the receiving agent's call (the last waits for evals). | D9 |
+| C10 | Order: the spike and the 2x2 probe (both done, scratch only), then the engine pull request, then the skills pull request. | D10, D10a |
+| C11 | No "kit" in the skills' text: "a lint rule". | D11 |
+| C12 | Placement nudges with `warn`. Its units: every section's own text, every section with its loaded files' openings, and every skill description as its own subject. It doesn't use the description as context. Per-load units come later, with the `producer-contract.md` near-negative. | D12, D18b, D18c |
+| C13 | Each exemption sits on the question that owns it; the tool exemption on the routing question is confirmed. | D19a, D19b |
+| C14 | An observation anchor inside a chunk is required of the engine. | D20 |
+| C15 | The placement standard separates one product's own application workflow from tools and platforms used through their supported interface, domain vocabulary, this toolkit's infrastructure and labelled examples, with no adopted-scope escape. | D16 |
+| C16 | `call.completeness` stays a narrow rule; the bad control is a narrowing commission or reading; the composition case shows two rules on one line. | D17 |
+| C17 | "Related locations" uses the provisional answer in the Requirements. | D13 |
+
+## Decision history
+
+Every row as recorded, in the order it was added. Superseded and amended rows stay so the trail is readable; build from the table above, not from this one.
 
 | # | Decision | Rationale |
 | --- | --- | --- |

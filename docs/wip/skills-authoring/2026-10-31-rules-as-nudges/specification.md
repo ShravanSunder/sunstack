@@ -75,9 +75,9 @@ Every skill below teaches its part on the same case: #187's line, `ops-observabi
 
 | Stage | Who | What they do on line 17 |
 | --- | --- | --- |
-| author | the rule's writer, with `skill-rules` | names the judgment ("does a generic skill route into one product's own workflow?"), the chunk (the line's section text with its own loads, and the loaded file's opening), the tree, the `check` nudge it gives, and the proof cases, the countercases included |
+| author | the rule's writer, with `skill-rules` | names the judgment ("does a generic skill route into one product's own workflow?"), the chunk (the line's section text with its own loads, and the loaded file's opening), the tree, the `warn` nudge it gives, and the proof cases, the countercases included |
 | collect | the engine | gathers the section's own text with line 17, and `agentstudio-loop.md`'s path and opening |
-| decide | Jev, then code | Jev answers "does this route the agent into one named product's own workflow?" and "is the product named only as a labelled example?"; code ends `check` |
+| decide | Jev, then code | Jev answers "does this route the agent into one named product's own workflow?" and "is the product named only as a labelled example?"; code ends in a `warn` finding |
 | nudge | the report | a `warn` finding at line 17, "a generic skill routes into AgentStudio's own debug loop", why: the placement standard; read next: the loaded file, and the other product-only places in the files under review |
 | act | the writer, review lead or Lead | reads the loaded file and asks where AgentStudio's own workflow lives; records "routed: belongs in AgentStudio's repository" instead of polishing the call's return, which is what #187 did |
 | review the rule | the rule's reviewer, with `decision-model-review` | checks the chunk holds the loaded file's opening, that "can't settle" ends in a nudge or `uncertain` rather than `pass`, and that the countercases pass |
