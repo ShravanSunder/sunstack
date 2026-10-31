@@ -215,7 +215,7 @@ Each standard is tested on two cases outside #187.
    - *Verdict:* transfers.
 3. **An agent acting on a nudge decides the broader question before making the rule's property hold.**
    - *Case A:* a length finding on a long description. The broader question is whether the extra text belongs in the body; moving it there beats trimming words. Holds.
-   - *Case B:* a nudge that a step routes into a vendor's CLI. The broader question is whether the step belongs in the vendor's repository; returning that beats rewording the step. Holds.
+   - *Case B:* a nudge that a step runs one product's private release workflow (its own build scripts and state paths). The broader question is whether the step belongs in that product's repository; routing it there beats rewording the step. The countercase: a step that runs a platform's supported CLI, such as `claude plugin validate .`, is kept after inspection, under the tool exemption. Holds.
    - *Verdict:* transfers.
 4. **A rule names the chunk its questions need, and only that.**
    - *Case A:* a branch rule needs the branch line and its enclosing step's heading, not the whole file. Holds.

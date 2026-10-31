@@ -28,7 +28,7 @@ The engine change has its own design in `sunstack-tools`. Runs 1, 2 and 7 depend
 | --- | --- | --- | --- | --- |
 | 1 `skill-rules` | unchanged | opening, outcome table, steps 3, 5, 7, 8, completion blockers | `decision-matrix.md`, `rule-design.md`, `running-rules.md`, `check-and-reports.md`, `markers-and-rules.md` | the line-17 rule's evidence print and labelled cases; static checks |
 | 2 `domain-decision-models` | unchanged | the opening and the policy section | `worked-trees.md`, `policy-algebra.md`, `sunstack-driver.md` | static checks; the worked tree matches the delivered rule |
-| 3 `decision-model-review` | unchanged | step 1 (profile names), step 3 (a seventh check) | a new `checks/nudge-and-receiver.md`; `checks/state-and-evidence.md` | static checks; the new check's bad control fails it |
+| 3 `decision-model-review` | unchanged | step 1 (profile names, and the receiving reading or commission as an input when supplied), step 3 (a seventh check) | a new `checks/nudge-and-receiver.md`; `checks/state-and-evidence.md`; `checks/review-schema.md` (the new check's name) | static checks; the new check's bad control fails it |
 | 4 `skill-creation` | unchanged | step 4 | none | static checks |
 | 5 `skill-review` | unchanged | the routing line, unchanged in meaning | `implementation-review.md`, `checks/transfer.md` | static checks |
 | 6 `skill-design` | unchanged | step 5 | none | static checks |
@@ -72,7 +72,7 @@ No description changes, so no trigger trial applies.
   - The proof plan uses the three observations.
   - A second worked design, the shared example at the author's stage: the placement rule on line 17, its two Nouls, its policy and its cases.
 - **`references/running-rules.md`.**
-  - The table "the report shows → what you do" is rewritten around nudges: open the line and its read-next places, then record fixed, kept or routed, with what you checked.
+  - The table "the report shows → what you do" is rewritten around nudges: open the line and its read-next places, then record the account the specification defines: fixed, kept, routed, or open naming the evidence that's missing, with what you checked.
   - A pass means one property held.
   - Four gap kinds, with decided exclusions shown apart.
   - "Repair, by what the calling step may do" gains the commission rule: a commission built from a nudge carries the nudge and the broader question.
@@ -100,14 +100,16 @@ No description changes, so no trigger trial applies.
 
 ### Run 3: `decision-model-review`
 
-- **`SKILL.md` step 1.** The profile "a kit rule" becomes "a lint rule" (D11).
+- **`SKILL.md` step 1.** The profile "a kit rule" becomes "a lint rule" (D11). A lint rule's inputs gain one optional item: the receiving reading or commission built from its nudges, when one exists.
 - **Step 3.** A seventh check loads `references/checks/nudge-and-receiver.md`, run only for the lint-rule profile whose output goes to an agent; native callers and selections skip it with that reason. Would the nudge help the receiving agent make the right broader call? That is judged apart from whether the tree classifies the piece correctly. The check covers:
   - every finding route says what was observed, the standard, the severity and where to read;
   - no route turns "can't settle" into `pass`;
   - the basis is honest: a judged gate followed by a mechanical step is not presented as established;
   - a place the run didn't collect is named as a direction, never as evidence.
+- **What the check reads, and its two parts.** The route checks above read the rule's own artifacts and run on every lint rule. The receiving check reads the receiving reading or commission when it's supplied: does it carry the nudge (where, what, why, read next) and the broader question, or narrow it into "make it pass"? Without that artifact, the receiving part returns `blocked` naming the missing input, and the route part still runs. Neither part judges an agent's behavior; that waits for evals. `nudge-and-receiver.md` states these inputs, the result for each part, and the stop.
+- **`references/checks/review-schema.md`.** The check-name list gains `nudge-and-receiver`. A native caller or an evidence selection records it as not selected, in the same status shape, with the profile as the reason.
 - **Its controls:**
-  - **Bad:** a commission or reading that narrows a nudge into "make it pass", or drops its read-next places, as #187's commission did.
+  - **Bad:** a supplied commission or reading that narrows a nudge into "make it pass", or drops its read-next places, as #187's commission did. Walked against the same valid rule artifacts as a commission that carries the nudge: only the narrowing one fails the receiving part.
   - **Good:** the `call.completeness` rule on line 17, which observed a real missing return.
   - **Composition:** the same line passing `call.completeness` while the placement rule nudges, for the agent to integrate.
 - **`references/checks/state-and-evidence.md`.**
@@ -119,7 +121,7 @@ No description changes, so no trigger trial applies.
 - **Step 4, the self-check.** For each nudge:
   - read its line and its read-next places;
   - decide the broader question first;
-  - record fixed, kept or routed.
+  - record the account `running-rules.md` defines: fixed, kept, routed, or open naming the evidence that's missing.
 
   When the broader question changes the plan, the writer returns that to whoever commissioned the change instead of making the rule's property hold. Gaps are the four kinds; decided exclusions are shown apart.
 
