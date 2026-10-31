@@ -316,11 +316,11 @@ The analysis behind it, as it went to the owner:
 
 | run | status | evidence |
 | --- | --- | --- |
-| 1 | proposed | — |
-| 2 | proposed | — |
-| 3 | proposed | — |
-| 4 | proposed | — |
-| 5 | proposed | — |
+| 1 | implemented | commit `63933e51` |
+| 2 | implemented | commit `b7958ff3`, with README:15 (O4) |
+| 3 | implemented | commit `1ad39d8c` |
+| 4 | implemented | commit `1525d1a8` |
+| 5 | implemented, with a decided deviation | commit `f75a4758`. The design's line had `implementation-review` use `decision-model-review`. That skill's Reviewer "never commissions another Reviewer Sidekick", so the shipped line has the Reviewer load `decision-model-review` and walk its checks itself. The Lead accepted this on 31 Oct (11:42 EDT relay): it keeps both skills' rules |
 
 ## Review record
 
