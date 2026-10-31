@@ -8,8 +8,8 @@ import {
   assembledRules,
   checkOutputSchema,
   formatLintReport,
-} from "./skill-rules-report.ts";
-import type { LintReport } from "./skill-rules-report.ts";
+} from "../report.ts";
+import type { LintReport } from "../report.ts";
 import {
   assertInstalledPackageIsRequired,
   askStep,
@@ -27,7 +27,7 @@ import {
   saveRules,
   withJudge,
   writeFixtureFile,
-} from "./skill-rules-test-fixture.ts";
+} from "../test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

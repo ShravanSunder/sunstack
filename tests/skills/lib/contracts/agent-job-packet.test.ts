@@ -2,20 +2,20 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { ZodType } from "zod";
 import { describe, expect, test } from "vitest";
-import { AgentJobPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/agent-job-packet.ts";
-import { RoleHandback } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-handback.ts";
-import { AdvisorPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/advisor-contract.ts";
-import { ImplementerPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/implementer-contract.ts";
-import { LeadPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/lead-contract.ts";
-import { OperatorPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/operator-contract.ts";
+import { AgentJobPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/agent-job-packet.ts";
+import { RoleHandback } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-handback.ts";
+import { AdvisorPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/advisor-contract.ts";
+import { ImplementerPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/implementer-contract.ts";
+import { LeadPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/lead-contract.ts";
+import { OperatorPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/operator-contract.ts";
 import {
   ResearcherHandback,
   ResearcherPacket,
-} from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/researcher-contract.ts";
-import { ReviewerPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/reviewer-contract.ts";
-import { VerifierPacket } from "../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/verifier-contract.ts";
+} from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/researcher-contract.ts";
+import { ReviewerPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/reviewer-contract.ts";
+import { VerifierPacket } from "../../../../plugins/sunstack-dev/skills/practices-manage-agents/schemas/role-contracts/verifier-contract.ts";
 
-const skillsRoot = path.resolve(import.meta.dirname, "../../../plugins/sunstack-dev/skills");
+const skillsRoot = path.resolve(import.meta.dirname, "../../../../plugins/sunstack-dev/skills");
 
 type PacketFields = Record<string, unknown>;
 

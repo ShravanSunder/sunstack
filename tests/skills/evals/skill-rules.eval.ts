@@ -7,11 +7,11 @@ import {
   loadRuleCases,
   parseHeldOutFlag,
   selectRuleCases,
-} from "../lib/skill-rules-evaluation-cases.ts";
-import { createRuleEvaluationHarness } from "../lib/skill-rules-evaluation-harness.ts";
-import type { CaseEvaluationOutput } from "../lib/skill-rules-evaluation-engine.ts";
-import { summarizeRuleScores } from "../lib/skill-rules-evaluation-scoring.ts";
-import type { CaseScore, ScoredRuleCase } from "../lib/skill-rules-evaluation-scoring.ts";
+} from "../lib/skill-rules/evaluation/skill-rules-evaluation-cases.ts";
+import { createRuleEvaluationHarness } from "../lib/skill-rules/evaluation/skill-rules-evaluation-harness.ts";
+import type { CaseEvaluationOutput } from "../lib/skill-rules/evaluation/skill-rules-evaluation-engine.ts";
+import { summarizeRuleScores } from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
+import type { CaseScore, ScoredRuleCase } from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
 
 const repositoryRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const heldOut = parseHeldOutFlag(process.env.SKILL_RULES_HELD_OUT);

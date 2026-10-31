@@ -16,9 +16,9 @@ import { once } from "node:events";
 import { fileURLToPath } from "node:url";
 import { expect } from "vitest";
 import { z } from "zod";
-import { lintReportSchema } from "./skill-rules-report.ts";
+import { lintReportSchema } from "./report.ts";
 
-export const repositoryRoot = fileURLToPath(new URL("../../../", import.meta.url));
+export const repositoryRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 export const kitRelative = "plugins/skill-authoring/skills/domain-skill-crafting/rules";
 export const enginePath =
   process.env.SUNSTACK_TEST_ENGINE ??
@@ -70,14 +70,14 @@ export function createFixture(): string {
   if (initialized.status !== 0) throw new Error(initialized.stderr);
   const kit = path.join(root, kitRelative);
   mkdirSync(path.join(root, "tests/skills/scripts"), { recursive: true });
-  mkdirSync(path.join(root, "tests/skills/lib"), { recursive: true });
+  mkdirSync(path.join(root, "tests/skills/lib/skill-rules"), { recursive: true });
   cpSync(
     path.join(repositoryRoot, "tests/skills/scripts/run-skill-rules.ts"),
     path.join(root, "tests/skills/scripts/run-skill-rules.ts"),
   );
   cpSync(
-    path.join(repositoryRoot, "tests/skills/lib/skill-rules-report.ts"),
-    path.join(root, "tests/skills/lib/skill-rules-report.ts"),
+    path.join(repositoryRoot, "tests/skills/lib/skill-rules/report.ts"),
+    path.join(root, "tests/skills/lib/skill-rules/report.ts"),
   );
   mkdirSync(path.join(root, "tests/skills/node_modules/.bin"), { recursive: true });
   symlinkSync(
