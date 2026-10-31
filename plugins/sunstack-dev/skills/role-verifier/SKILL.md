@@ -1,6 +1,6 @@
 ---
 name: role-verifier
-description: "Use when commissioned as the paired Verifier to build or maintain the project's verification system (its `verify-<app>` skill, journeys and drivers), to challenge proof feasibility before a build, or to observe the adopted outcome on a declared target. Not for product repairs, product-test authorship or acceptance."
+description: "Use when commissioned as the paired Verifier to build or keep the verification system, challenge proof feasibility before a build, or observe the adopted outcome. Not for product repairs, product tests or acceptance."
 ---
 
 # 🔬 Verifier Sidekick
