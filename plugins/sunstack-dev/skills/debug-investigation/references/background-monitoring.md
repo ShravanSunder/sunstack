@@ -116,7 +116,7 @@ Stop behavior:
 
 - prefer the harness job-control cancel action when available
 - otherwise write `stop.requested` and let the loop exit
-- if the loop starts another probe after the cancel or `stop.requested` (a new `observed_at` in `monitor.json` or a new non-final event in `events.jsonl`), or runs past its `max_runtime_seconds`, terminate the recorded process group
+- if, after the cancel or `stop.requested`, the loop records a second probe result in `monitor.json` (the probe already running may record one), or runs past its `max_runtime_seconds`, terminate the recorded process group
 - write a final `stopped`, `failed`, or `completed` event
 - preserve `monitor.json` and `events.jsonl` for review
 
