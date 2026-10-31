@@ -22,7 +22,7 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
 | R5a, the exits | engine test: a run with only `check` nudges exits 0 under a zero warning limit; invalid, incomplete and uncertain runs keep their exits | mechanical |
 | R5b answers on every judged result | engine test: pass and `not_applicable` results carry answers | mechanical |
 | R6 a pass says one thing | review check of `running-rules.md` and `check-and-reports.md` | text |
-| R7 nudges are read, not obeyed | review check that `running-rules.md`, `skill-creation` step 4 and `implementation-review.md` teach the account (fixed, kept, routed) and the commission rule; the behavior is an eval | text now; behavior later |
+| R7 nudges are read, not obeyed | review check that `running-rules.md`, `skill-creation` step 4, `implementation-review.md`, `skill-orchestrator` and `skill-audit` teach the account (fixed, kept, routed, or open naming the missing evidence) and the commission rule; the behavior is an eval | text now; behavior later |
 | R8 rule files get rules | the rule-file rules' labelled cases: real entries plus planted bad ones (a question asking two things; a route whose message says nothing) | the tree on cases |
 | R9 the engine stays generic | engine design review; review check that the engine diff names no skill concept | text and diff |
 | R10 each skill makes its path extremely clear | review check, per skill: a self-contained procedure, the shared example at its stage, a completion check; the behavior is an eval | text now; behavior later |
@@ -57,7 +57,7 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
    - Records the answers. It tests the decide stage only, and ships nothing.
 2. **The engine pull request.** Its own design's verification, with the engine tests named above.
 3. **This pull request, per run:**
-   - **runs 1 to 6:** static checks, which are the repository's skill lint, `pnpm --dir tests/skills rules --check`, the rule run on the changed files read with the new reading, and the runner tests;
+   - **runs 1 to 6, 8 and 9:** static checks, which are the repository's skill lint, `pnpm --dir tests/skills rules --check`, the rule run on the changed files read with the new reading, and the runner tests;
    - **run 7:** the placement rule and the rebuilt `rule.generalization`:
      - an evidence print over the full denominator;
      - development cases (the anchor cases and countercases);
