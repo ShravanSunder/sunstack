@@ -208,5 +208,269 @@
       "path": "case-010/references/proof-runs.md",
       "line": 1
     }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/agent-router/skills/agent-collaboration/references/message-board.md",
+      "startLine": 1,
+      "endLine": 34,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-011/references/message-board.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/implementation-review/references/reviewing-implementation.md",
+      "startLine": 1,
+      "endLine": 78,
+      "fieldLine": 28
+    },
+    "excerpt": {
+      "path": "case-012/references/reviewing-implementation.md",
+      "line": 28
+    }
+  },
+  {
+    "id": "case-013",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/practices-how/references/behavior-reconstruction.md",
+      "startLine": 1,
+      "endLine": 118,
+      "fieldLine": 41
+    },
+    "excerpt": {
+      "path": "case-013/references/behavior-reconstruction.md",
+      "line": 41
+    }
+  },
+  {
+    "id": "case-014",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/discuss-clarify-mental-models/references/provenance-decomposition.md",
+      "startLine": 1,
+      "endLine": 85,
+      "fieldLine": 36
+    },
+    "excerpt": {
+      "path": "case-014/references/provenance-decomposition.md",
+      "line": 36
+    }
+  },
+  {
+    "id": "case-015",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+      "startLine": 1,
+      "endLine": 35,
+      "fieldLine": 22
+    },
+    "excerpt": {
+      "path": "case-015/references/proof-runs.md",
+      "line": 22
+    }
+  },
+  {
+    "id": "case-016",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/agentstudio/skills/agentstudio/references/panes-and-terminals.md",
+      "startLine": 1,
+      "endLine": 54,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-016/references/panes-and-terminals.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-017",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+      "startLine": 1,
+      "endLine": 307,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-017/references/troubleshooting.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-018",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/practices-verification/references/native-observation.md",
+      "startLine": 1,
+      "endLine": 47,
+      "fieldLine": 17
+    },
+    "excerpt": {
+      "path": "case-018/references/native-observation.md",
+      "line": 17
+    }
+  },
+  {
+    "id": "case-019",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/spec-design/references/authority-and-problem-framing.md",
+      "startLine": 1,
+      "endLine": 164,
+      "fieldLine": 12
+    },
+    "excerpt": {
+      "path": "case-019/references/authority-and-problem-framing.md",
+      "line": 12
+    }
+  },
+  {
+    "id": "case-020",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/practices-how/references/dynamic-path-evidence.md",
+      "startLine": 1,
+      "endLine": 72,
+      "fieldLine": 25
+    },
+    "excerpt": {
+      "path": "case-020/references/dynamic-path-evidence.md",
+      "line": 25
+    }
+  },
+  {
+    "id": "case-021",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/skill-authoring/skills/skill-design/references/security-gate.md",
+      "startLine": 1,
+      "endLine": 32,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "case-021/references/security-gate.md",
+      "line": 5
+    }
+  },
+  {
+    "id": "case-022",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "reference_section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/implement-plan/references/execution-and-proof.md",
+      "startLine": 1,
+      "endLine": 129,
+      "fieldLine": 30
+    },
+    "excerpt": {
+      "path": "case-022/references/execution-and-proof.md",
+      "line": 30
+    }
   }
 ]
