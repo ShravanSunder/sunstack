@@ -12,7 +12,12 @@
     },
 }
 ---
-{ "id": "heading-line", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "kind": "atx_heading" } }
+{
+  "id": "heading-line",
+  "language": "Markdown",
+  "files": ["**/SKILL.md", "**/references/**/*.md"],
+  "rule": { "kind": "atx_heading" },
+}
 ---
 { "id": "skill-body", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "kind": "document" } }
 ---

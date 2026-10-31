@@ -243,6 +243,167 @@ describe("sentence evidence lies within a selected step or a Standards section",
   });
 });
 
+describe("guidance.positive routes each kind of sentence (kit K002, steering)", () => {
+  test.each([
+    ["option", "kind", "pass"],
+    ["other", "kind", "not_applicable"],
+    ["guidance", "positive", "finding"],
+  ] satisfies [string, string, string][])(
+    "kind %s ends at %s as %s",
+    async (kind, step, outcome) => {
+      // Wrong behavior: an option paired with its condition, or a bare label, reaches the positive
+      // verdict and is judged as avoidance guidance; or an option ends not_applicable though it says
+      // what to do. The judge answers positive 0.1, so only a walk that reaches it ends in a finding.
+      const root = createFixture();
+      saveRules(root, { K001: kitEntry("steering", "K002") });
+      writeFixtureFile(
+        root,
+        "plugins/example/skills/sample/references/standards.md",
+        "## Standards\n\n- `skip`: one-off or already covered.\n",
+      );
+      const result = await runRunnerJudged(root, [], { positive: 0.1 }, { kind });
+      const report = reportSchema.parse(result.report);
+      expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
+        [3, step, outcome],
+      ]);
+    },
+  );
+});
+
+describe("step evidence: a heading step owns its numbered sub-items", () => {
+  test("items nested in a numbered heading step are not steps; items of a plain numbered list are", async () => {
+    // Wrong behavior: each sub-item of "### 1. Apply the change" read as a step of its own, owing
+    // its own Completion line, though the heading step carries the completion for all of them.
+    const root = createFixture();
+    const text = [
+      "---",
+      "description: Use when checking steps.",
+      "---",
+      "",
+      "## Workflow",
+      "",
+      "### 1. Apply the change",
+      "",
+      "1. Show the diff.",
+      "2. Apply what was accepted.",
+      "",
+      "Completion: the accepted changes are applied.",
+      "",
+      "## Ordered run",
+      "",
+      "1. Inspect the input.",
+      "2. Return the result.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const listing = await listEvidence(root);
+    const steps = listing.pieces
+      .filter((piece) => piece.kind === "step")
+      .map((piece) => piece.where.first_line);
+    expect(steps).toEqual([7, 16, 17]);
+  });
+});
+
+describe("reference_section evidence carries the reference's outline and opening (kit K002, calls-and-placement)", () => {
+  const textsSchema = z.object({ values: z.array(z.string()) }).passthrough();
+
+  test("the opening holds the paragraphs and list items under the title, and the outline every heading", async () => {
+    // Wrong behavior: the opening picks text under a later section or inside a quote, or misses the
+    // Return line; or the outline is empty because heading lines are read only in SKILL.md. Either
+    // hides the reference-wide stop the teaching-depth question credits.
+    const root = createFixture();
+    const text = [
+      "# Guide",
+      "",
+      "This reference owns the guide's stage.",
+      "",
+      "Return: the checked result.",
+      "",
+      "- An opening list item.",
+      "",
+      "> A quoted paragraph.",
+      "",
+      "## First stage",
+      "",
+      "Inspect the input.",
+      "",
+      "## When to stop",
+      "",
+      "Stop when the input is checked.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/references/guide.md", text);
+    const listing = await listEvidence(root);
+    const sections = listing.pieces.filter((piece) => piece.kind === "reference_section");
+    expect(sections.map((piece) => piece.where.first_line)).toEqual([11, 15]);
+    const first = sections[0];
+    if (!first) throw new Error("No reference section");
+    expect(textsSchema.parse(first.fields.opening).values).toEqual([
+      "This reference owns the guide's stage.",
+      "Return: the checked result.",
+      "- An opening list item.",
+    ]);
+    expect(textsSchema.parse(first.fields.outline).values).toEqual([
+      "# Guide",
+      "## First stage",
+      "## When to stop",
+    ]);
+  });
+
+  test("a wrapped opening paragraph or list item reaches the model as its first line only", async () => {
+    // Wrong behavior: the questions describe the opening as whole paragraphs while a wrapped
+    // paragraph's Return clause, or a list item's restriction, on its second line never reaches
+    // the model; the teaching-depth wording must say a broken-off line continues out of sight.
+    const root = createFixture();
+    const text = [
+      "# Release",
+      "",
+      "This reference owns the release stage,",
+      "and returns the signed artifact and its checksum.",
+      "",
+      "- Expected inputs: the tag",
+      "  and only the changelog entry that names it.",
+      "",
+      "## Cut the release",
+      "",
+      "Run the build.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/references/release.md", text);
+    const listing = await listEvidence(root);
+    const section = listing.pieces.find((piece) => piece.kind === "reference_section");
+    if (!section) throw new Error("No reference section");
+    const opening = textsSchema.parse(section.fields.opening).values;
+    expect(opening).toEqual(["This reference owns the release stage,", "- Expected inputs: the tag"]);
+    expect(opening.join("\n")).not.toContain("returns the signed artifact");
+    expect(opening.join("\n")).not.toContain("only the changelog entry");
+  });
+});
+
+describe("reference.teaching-depth keeps unseen teaching unresolved (kit K002, calls-and-placement)", () => {
+  test.each([
+    ["none", "pass"],
+    ["unseen", "uncertain"],
+    ["stop", "finding"],
+  ] satisfies [string, string][])("missing %s ends at teaching as %s", async (missing, outcome) => {
+    // Wrong behavior: teaching the outline only names (a 'When to stop' heading whose text isn't
+    // shown) passes the owned stage, or is reported as missing; it must stay uncertain.
+    const root = createFixture();
+    saveRules(root, { K001: kitEntry("calls-and-placement", "K002") });
+    writeFixtureFile(
+      root,
+      "plugins/example/skills/sample/references/guide.md",
+      "# Guide\n\n## First stage\n\nInspect the input and decide.\n\n## When to stop\n\nStop when it is decided.\n",
+    );
+    const result = await runRunnerJudged(root, [], {}, { role: "stage", missing });
+    const report = reportSchema.parse(result.report);
+    expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
+      [3, "teaching", outcome],
+      [7, "teaching", outcome],
+    ]);
+  });
+});
+
 describe("main-path.spine is asked only where numbered lists hold no workflow (kit K002, main-path)", () => {
   const ruleList =
     "---\ndescription: Use when checking spines.\n---\n\n# Sample\n\nApply the lens to the question and state the result.\n\n## Core rules\n\n1. Keep it short.\n2. Name the owner.\n";
