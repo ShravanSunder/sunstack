@@ -22,7 +22,7 @@ Draft 2, by the 🦁 Lead, 2026-10-31 (after the design review's F1–F4). Part 
 
 | Batch (PR) | Runs | Findings | Writer | Status |
 | --- | --- | --- | --- | --- |
-| 1 creation | domain-skill-crafting | 4 | Opus 5.5 | run implemented at 1316dc11; in review as PR #182; keyed after-run pending budget |
+| 1 creation | domain-skill-crafting | 4 | Opus 5.5 | run implemented at 1316dc11; review clean (PR #182); C7 passed on the 0.8.0 kit (all 4 findings cleared) |
 | 2 phase | 7 skills, one run each | 11 | Opus 5.5 | proposed |
 | 3 practice | practices-research | 1 | Opus 5.5 | proposed |
 | 4 principle descriptions | 16 principles, one run each | 24 | Opus 5.5 | proposed |

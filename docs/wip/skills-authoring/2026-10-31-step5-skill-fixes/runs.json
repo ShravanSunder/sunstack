@@ -10,13 +10,13 @@
     {
       "batch": "1-creation",
       "pr": 1,
-      "status": "in review (PR #182); after-run pending",
+      "status": "review clean (PR #182); C7 passed",
       "runs": [
         {
           "run": "1-creation/domain-skill-crafting",
           "skill": "skill-authoring/domain-skill-crafting",
           "kind": "update",
-          "status": "implemented at 1316dc11; keyed after-run (C7) pending model budget",
+          "status": "implemented at 1316dc11; C7 keyed after-run passed on the 0.8.0 kit: complete, 0 errors, no description warning, f001 f111 f112 f113 cleared",
           "findings": [
             {
               "id": "f001",
