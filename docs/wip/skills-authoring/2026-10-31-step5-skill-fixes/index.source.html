@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 5 skill fixes</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+
+<h1>Step 5 skill fixes: design set</h1>
+
+<p>This change fixes the 89 real failures that step 5's rules run found in 39 skills. It rewrites descriptions that are too long or that list a skill's contents, adds completions to steps that never say when they're done, turns branch conditions built on the agent's own doubt into conditions it can see, and makes two calls say what they return. Each skill is its own authoring run, 44 runs in all, and the runs are grouped into six PRs, one per family, built and reviewed one at a time. The owner reviews and merges each PR. The 81 steps that wait on the owner's completion-phrasing decision are left alone, and every existing guard on the sensitive text the edits touch stays as it is. This is draft 2, after the design review's four findings. Its recheck accepted it to implement. What stays open: the keyed after-runs, which wait for model budget, and the trigger trials for eight model-invocable descriptions.</p>
+
+<h2 id="walkthrough">Walkthrough</h2>
+<ol>
+<li><a href="#requirements">Requirements</a>: what changes, the owner's words, the success definition, the evidence and the scope.</li>
+<li><a href="#specification">Specification</a>: the eight things that must hold after each run.</li>
+<li><a href="#skill-design">Skill design</a>: how each kind of finding is fixed; the six PR batches and their 44 single-skill runs; run 1's drafts; the security inventory; and the decisions.</li>
+<li><a href="#skill-verification">Skill verification</a>: how each obligation is checked, and what stays unverified.</li>
+</ol>
+
+<ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+<ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+<ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+<ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+
+</ex-document>
+</body>
+</html>

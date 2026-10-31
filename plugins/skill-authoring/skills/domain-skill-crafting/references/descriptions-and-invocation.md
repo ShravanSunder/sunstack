@@ -40,7 +40,7 @@ Questions that settle it, each answered by a standard above:
 - Does another skill invoke it, or does another skill read it by path, as it reads a principle or a domain skill?
 - Is it reached only by a person who knows it exists, and can that person still remember it among the skills they already hold?
 
-IF the decision needs a client-specific encoding, load `platform.md` and return the encoding for each host the plugin supports.
+IF the decision sets or changes how a client exposes the skill (hiding it, limiting who can invoke it, or restoring or enabling its invocation), load `platform.md` and return the encoding for each host the plugin supports.
 
 ## Choose the opener
 
