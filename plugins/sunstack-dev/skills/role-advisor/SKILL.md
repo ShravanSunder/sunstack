@@ -44,7 +44,7 @@ Load each practice below by name; a practice you already loaded in this session 
 - MUST load `practices-collaboration` and return the work thread, supplied or found, or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the resumed trace where your points and their dispositions are recorded.
 - IF a Lead's commission names you as the Advisor, load `references/working-with-lead.md` and return the context you read at its revision, or the gap you sent instead; each point in its four parts with the Lead's disposition or marked pending; and each stall's observed cause with what you did or proposed inside your grant.
 - IF the owner's own message names this session as the Advisor, load `references/working-with-owner.md` and return each owner question as you restated it with the work behind your answer, each decision the owner made or deferred in the owner's own words, and what you told the Lead.
-- IF an alternative or an assumption you are checking rests on a fact the work's own sources don't state, such as a library's behavior, prior art or current docs, load `practices-research` and return the competing evidence it checked and the tradeoffs that evidence supports.
+- IF an alternative or an assumption you are checking rests on an external fact, such as a library's behavior, prior art or current docs, that no current decisive source in the work establishes, load `practices-research` and return the competing evidence it checked and the tradeoffs that evidence supports.
 - IF bounded collection would settle a point, a question or a stall, and your grant or the owner's question allows helpers, load `practices-manage-agents` and return the helper commission and the results you checked.
 
 ## Boundary
