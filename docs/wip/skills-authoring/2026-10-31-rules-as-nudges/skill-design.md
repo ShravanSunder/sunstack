@@ -48,7 +48,7 @@ No description changes, so no trigger trial applies.
   1. the judgment, and who makes it;
   2. the chunk: subject, denominator, edges, fields, budget, proven with an evidence print;
   3. the tree;
-  4. the nudge per route: what was observed, the standard, the severity, read-next fields, directions to investigate;
+  4. the nudge per route: what was observed, the standard, the severity, directions to investigate; the read-next fields, which the rule entry names in one `related` list that every finding route of that entry shares (engine contract R1/C1; program design E4);
   5. the proof, with three observations kept apart.
 - **Step 5.** The entry's nudge fields. Their exact shape waits on the engine contract (D7).
 - **Step 7.** The three observations:
@@ -58,7 +58,7 @@ No description changes, so no trigger trial applies.
 - **Step 8.** The return table gains `judgment`, `chunk`, `severity` and `read next` columns.
 - **Completion blockers.**
   - A route that can't settle its standard ends `pass`.
-  - A finding route names no read-next field.
+  - A finding route's design names nothing to read next beyond the standard's line, without saying why that line is enough. The read-next fields are the rule entry's one `related` list, which every finding route of that entry shares (engine contract R1/C1; program design E4).
   - A chunk was used without an evidence print.
 - **`references/decision-matrix.md`.**
   - Question 3 asks whether a kind collects the chunk the judgment needs. If the chunk grounds a reason to look but can't settle the standard, the outcome is "worth checking".

@@ -17,7 +17,7 @@ A nudge is what one rule gives the agent who ran it, about one place in the chec
 | why | the standard it rests on: its wording and its own `path:line` | the engine, from the marker |
 | basis | `mechanical` (every step on the path was a check that established a fact) or `judged` (at least one step on the path, a gate included, read Jev's answer; a probability is evidence for an answer, not certainty that the skill is wrong) | the engine, from every step on the path, not only the last |
 | severity and outcome | the engine's existing words: a finding at `error` (blocks) or `warn` (the nudge, called `nudge` until the 18 Oct rename), or `uncertain` (an answer fell between thresholds). Whether the rule decided the standard or only points at what to check is said in its message, not a new field | the rule's route |
-| read next | links to places the rule actually read, each labelled with what it is: the standard, the caller, the loaded file (on line 17, `agentstudio-loop.md`), the enclosing section, and other places where the same rule gave the same nudge (say `practices-cleanup:40`). A place the rule never read, such as AgentStudio's own repository, is a pointer in the message ("check whether this belongs in AgentStudio's repo"), never a link presented as something the rule saw | the engine, from the spans of the fields the rule names; the standard's line always |
+| read next | links to places the rule actually read, each labelled with what it is: the standard, the caller, the loaded file (on line 17, `agentstudio-loop.md`), the enclosing section, and other places where the same rule gave the same nudge (say `practices-cleanup:40`). A place the rule never read, such as AgentStudio's own repository, is a pointer in the message ("check whether this belongs in AgentStudio's repo"), never a link presented as something the rule saw | the engine, from the spans of the fields the rule entry names in its one `related` list, which every finding route of that entry shares; the standard's line always |
 | the answers | each question's answer and the path the decision took | the engine |
 | what was cut | whether the model saw less than was collected | the engine |
 
@@ -106,7 +106,7 @@ Each skill shows its own stage of this example. None restates the others' stages
   3. the tree;
   4. the nudge each route gives;
   5. the proof.
-- Each route that ends in a finding names its message, its severity, and the fields whose locations become "read next".
+- Each route that ends in a finding names its message and its severity. The rule entry names the fields whose locations become "read next" in one `related` list, which every finding route of that entry shares (engine contract R1/C1; program design E4).
 - Its proof keeps three observations apart:
   - **collection:** the evidence print covers the denominator, with cuts named;
   - **the tree:** labelled cases, the countercases included, give the expected outcome at the expected line;
