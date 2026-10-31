@@ -171,6 +171,28 @@ describe("skill evidence selection (G8)", () => {
     ).toEqual([7, 15]);
   });
 
+  test("an uncertain inner candidate under a selected outer one keeps its step, and a branch inside keeps both steps' context", async () => {
+    // Wrong behavior: reading an unresolved candidate as erasing every step and step context in its
+    // range, when its step also lies within a selected outer workflow.
+    const root = createFixture();
+    const text =
+      "---\ndescription: Use when testing nesting.\n---\n\n## 1. Plan\n\nWrite the plan.\n\n#### Step 2: Build\n\nBuild it.\n\nIF the build fails, return its log.\n";
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const listing = await listEvidence(root, { c2: 0.5 }, 5);
+    expect(listing.selections.map((item) => [item.where.first_line, item.outcome.kind])).toEqual([
+      [5, "selected"],
+      [9, "uncertain"],
+    ]);
+    expect(
+      listing.pieces.filter((piece) => piece.kind === "step").map((piece) => piece.where.first_line),
+    ).toEqual([5, 9]);
+    const branch = listing.pieces.find((piece) => piece.kind === "branch");
+    expect(branch?.fields.step).toMatchObject({
+      state: "texts",
+      values: ["## 1. Plan", "#### Step 2: Build"],
+    });
+  });
+
   test("branch openers IF, If, if, When and when start a branch; mid-sentence, longer words and quotes do not", async () => {
     const root = createFixture();
     const text = [
