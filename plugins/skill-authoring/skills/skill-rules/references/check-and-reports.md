@@ -1,6 +1,6 @@
 # Check and Reports
 
-This reference owns step 6: checking the rules, printing the evidence they will judge, reading a run's report, and proving each rule with rule tests. Expected input: the paired rulebook, the runner the repository's instructions name, the intended rules with which of them are mechanical, and for each rule the pieces you meant it to judge. Return: the check's outcome and printed rules; for each rule's evidence kind, the pieces it picks with your intended ones among them; for each rule, its rule tests and their per-rule results; and what stays unproven.
+This reference owns step 7: checking the rules, printing the evidence they will judge, reading a run's report, and proving each rule with rule tests. Expected input: the paired rulebook, the runner the repository's instructions name, the intended rules with which of them are mechanical, and for each rule the pieces you meant it to judge and step 3's proof plan. Return: the check's outcome and printed rules; for each rule's evidence kind, the pieces it picks with your intended ones among them; for each rule, its rule tests and their per-rule results; and what stays unproven.
 
 ## Check
 
@@ -12,7 +12,7 @@ The check reads the config, the rulebook, every rule entry and the evidence proj
 Read the print in two passes.
 
 1. **Coverage.** The count is the count you expect, and every intended rule appears with your marker and source line, at the severity and kind you meant.
-2. **Wording.** Read each printed standard as a stranger would, with nothing but its words. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 3 for a narrower host, or, when no host reads well, to the standard's home as a teaching change, designed with `skill-design` and written with `skill-creation`.
+2. **Wording.** Read each printed standard as a stranger would, with nothing but its words. Good: one standard, with its subject, and nothing from neighbouring text. Bad: it opens mid-thought, needs a lead-in, carries several standards, or reads as teaching rather than a requirement. A bad reading goes back to step 4 for a narrower host, or, when no host reads well, to the standard's home as a teaching change, designed with `skill-design` and written with `skill-creation`.
 
 What the check proves: the definitions assemble and each standard reads as itself. It can't show that a rule picks or decides anything, because it reads no checked file.
 
@@ -21,7 +21,7 @@ What the check proves: the definitions assemble and each standard reads as itsel
 The engine's evidence print (`--evidence`, optionally with one kind) lists the pieces each kind picks from the checked files, with every field. What it costs depends on the config:
 
 - **No selected kind:** it asks nothing, so it needs no key.
-- **A selected kind** (one with `select`, whose candidates the decision model chooses): it runs that selection and asks nothing else. It needs the key and a grant to send model requests; without a key it is refused before reading any file. Its print adds `selections`, each candidate with its outcome, and `file_counts`. A piece of a kind that lies `within` a selected kind exists only when its candidate was selected, so read a missing piece against its candidate's outcome before calling it a gap in the evidence project.
+- **A selected kind** (one with `select`, whose candidates the decision model chooses): it runs that selection and asks nothing else. It needs the key and a grant to send model requests; without a key it is refused before reading any file. Without the grant, prepare the exact command and hand it to whoever holds it, then read the print it keeps. Its print adds `selections`, each candidate with its outcome, and `file_counts`. A piece of a kind that lies `within` a selected kind exists only when its candidate was selected, so read a missing piece against its candidate's outcome before calling it a gap in the evidence project.
 
 Print the kind each rule judges, over the files the rule is meant for, and look for three things:
 
@@ -47,6 +47,8 @@ A refused run is `invalid` and reads nothing; otherwise the status is the first 
 
 Each finding carries its rule, marker, file and line (the line of the field its route names), severity, message, and for a judged finding its answers and the path its decision took. Each `uncertain` piece carries the step it stopped at, the answers, and the piece's state as the judge saw it. Each incomplete part names its reason, and its rule, file or field when it has one.
 
+What a report keeps for replay and for the answering model's version is a fact of the Sunstack driver, which `domain-decision-models` owns in its driver reference. Read it before using a report to compare thresholds or versions.
+
 ## Rule tests
 
 A rule is proven by what it decides on labelled pieces, not by a clean check. Rule tests live in the repository's eval suite, as labelled cases taken from real skills, each run through the same command and judge the rules use, and each checking the outcome the decision reaches: `pass`, `finding` (and its line), `not_applicable` or `uncertain`. They add no store, state or procedure of their own.
@@ -60,7 +62,13 @@ Each set aims for all three kinds. When a set still lacks a kind after two targe
 
 Each case is an excerpt of a real piece with its source, and each label records who gave it. Labels come from people or agents independent of the rule's writer and of any run of the rule, such as two labelers who don't see each other's labels and a third who settles their disagreements; where the owner of the standards labels a rule's cases, those labels govern. A label the rule's writer took from the rule's own answers proves nothing.
 
-**Reading the results.** Report, per rule: matched, missed (expected a finding, got `pass` or `not_applicable`), wrong (expected `pass` or `not_applicable`, got a finding), uncertain, and gaps, with each case's label source, so every case is counted exactly once. A gap is any other non-match, named with its reason, and never a match: expected `pass` but got `not_applicable` or the reverse (the decision reached a different place than the label, such as a gate dropping a piece the labelers judged), a finding at a line other than the labelled one, or a piece whose evaluation didn't complete. Tune a rule's questions, criteria and thresholds only from its development results, before the freeze. A held-out miss is reported, never tuned away. Results that rest on labels still owed are provisional, and say so.
+**Reading the results.** Report, per rule: matched, missed (expected a finding, got `pass` or `not_applicable`), wrong (expected `pass` or `not_applicable`, got a finding), uncertain, and gaps, with each case's label source, so every case is counted exactly once. A gap is any other non-match, named with its reason, and never a match: expected `pass` but got `not_applicable` or the reverse (the decision reached a different place than the label, such as a gate dropping a piece the labelers judged), a finding at a line other than the labelled one, or a piece whose evaluation didn't complete. Tune a rule's questions, criteria and thresholds only from its development results, before the freeze. A held-out miss is reported, never tuned away. After a correction, held-out cases already scored become regression cases; a fresh held-out claim needs cases not yet seen. Results that rest on labels still owed are provisional, and say so.
+
+**Measures and versions.** `domain-decision-models` owns these standards; here is how they apply to rule tests.
+- **Count every case,** passes and `not_applicable` included.
+- **Report apart:** labelled errors and misses, coverage, review load (`uncertain`), incomplete parts, and instability across identical repeats.
+- **Record the model.** Each result records the model requested and, where the record keeps it, the version that answered. A comparison runs within one version group, or names the missing comparator.
+- **Compare thresholds honestly.** A threshold change is compared by replaying stored answers only where the record keeps them for every case. Otherwise it's a fresh run, named as one.
 
 **Mechanical rules** are tested at their edges with no model: for a 300-character limit, 300 characters pass and 301 fail; for an opener rule, each allowed opener passes and a near opener (`Use for`) fails, at the description's line.
 

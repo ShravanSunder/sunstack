@@ -8,11 +8,11 @@ Skills for authoring skills in any repository: design and write them, turn their
 | `skill-design` | design one skill change and write its design set before its files change |
 | `skill-creation` | write one skill's files from its accepted design, or make a mechanical edit |
 | `domain-skill-crafting` | hidden; holds every standard a skill's text must meet; loaded by the other skills |
-| `skill-rules` | decide which skill standards become checked rules, define their evidence and decision models, and prove them with config checks and labelled cases |
+| `skill-rules` | decide which skill standards become checked rules, design their evidence, questions and policy, write their markers and entries, and prove them with config checks and labelled cases |
 | `skill-review` | review a skill change's design set or skill files with several independent reviewer agents |
 | `skill-audit` | decide from evidence which skills to create, update, merge, or skip |
 
-The plugin stands alone. It names no skill from another plugin; install it beside any other plugin and invoke both when you want them together.
+The plugin stands alone, with one named dependency. `skill-rules`' rule design and proof use `sunstack-dev`'s `domain-decision-models`, and `skill-review`'s decision-model routing uses `sunstack-dev`'s `decision-model-review`. Without `sunstack-dev` installed, those steps report `skill unavailable` instead of going on. Nothing else names a skill from another plugin; install it beside any other plugin and invoke both when you want them together.
 
 ## Proof
 

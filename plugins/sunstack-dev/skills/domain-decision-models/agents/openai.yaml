@@ -1,0 +1,6 @@
+interface:
+  display_name: "Domain: Decision models"
+  short_description: "Standards for questions a model answers for code"
+  default_prompt: "Use $domain-decision-models on the current decision model and name each standard kept or broken."
+policy:
+  allow_implicit_invocation: false
