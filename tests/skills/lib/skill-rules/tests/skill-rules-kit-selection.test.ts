@@ -349,6 +349,59 @@ describe("reference_section evidence carries the reference's outline and opening
       "## When to stop",
     ]);
   });
+
+  test("a wrapped opening paragraph or list item reaches the model as its first line only", async () => {
+    // Wrong behavior: the questions describe the opening as whole paragraphs while a wrapped
+    // paragraph's Return clause, or a list item's restriction, on its second line never reaches
+    // the model; the teaching-depth wording must say a broken-off line continues out of sight.
+    const root = createFixture();
+    const text = [
+      "# Release",
+      "",
+      "This reference owns the release stage,",
+      "and returns the signed artifact and its checksum.",
+      "",
+      "- Expected inputs: the tag",
+      "  and only the changelog entry that names it.",
+      "",
+      "## Cut the release",
+      "",
+      "Run the build.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/references/release.md", text);
+    const listing = await listEvidence(root);
+    const section = listing.pieces.find((piece) => piece.kind === "reference_section");
+    if (!section) throw new Error("No reference section");
+    const opening = textsSchema.parse(section.fields.opening).values;
+    expect(opening).toEqual(["This reference owns the release stage,", "- Expected inputs: the tag"]);
+    expect(opening.join("\n")).not.toContain("returns the signed artifact");
+    expect(opening.join("\n")).not.toContain("only the changelog entry");
+  });
+});
+
+describe("reference.teaching-depth keeps unseen teaching unresolved (kit K002, calls-and-placement)", () => {
+  test.each([
+    ["none", "pass"],
+    ["unseen", "uncertain"],
+    ["stop", "finding"],
+  ] satisfies [string, string][])("missing %s ends at teaching as %s", async (missing, outcome) => {
+    // Wrong behavior: teaching the outline only names (a 'When to stop' heading whose text isn't
+    // shown) passes the owned stage, or is reported as missing; it must stay uncertain.
+    const root = createFixture();
+    saveRules(root, { K001: kitEntry("calls-and-placement", "K002") });
+    writeFixtureFile(
+      root,
+      "plugins/example/skills/sample/references/guide.md",
+      "# Guide\n\n## First stage\n\nInspect the input and decide.\n\n## When to stop\n\nStop when it is decided.\n",
+    );
+    const result = await runRunnerJudged(root, [], {}, { role: "stage", missing });
+    const report = reportSchema.parse(result.report);
+    expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
+      [3, "teaching", outcome],
+      [7, "teaching", outcome],
+    ]);
+  });
 });
 
 describe("main-path.spine is asked only where numbered lists hold no workflow (kit K002, main-path)", () => {

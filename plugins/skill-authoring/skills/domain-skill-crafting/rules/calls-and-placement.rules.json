@@ -58,7 +58,7 @@
         "instructions": {
           "check": ["heading", "body"],
           "context": ["opening"],
-          "task": "What does this section of a reference do? The opening holds the paragraphs under the reference's title, where it says what the reference covers or owns."
+          "task": "What does this section of a reference do? The opening holds the first line of each paragraph and list item under the reference's title, where it says what the reference covers or owns; a line that breaks off continues in text not shown."
         },
         "criteria": {
           "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished. A section that has the agent run commands and then judge, with good and bad readings, which results support a claim owns a stage even when it lists the commands.",
@@ -71,13 +71,14 @@
         "instructions": {
           "check": "body",
           "context": ["heading", "outline", "opening"],
-          "task": "Of what a stage's teaching needs (what to inspect, what good and bad look like, when to stop), which does the section leave out? The outline lists the reference's headings, and the opening holds the paragraphs under its title, where it says what it owns and what it returns. Teaching that the outline or opening shows the reference gives elsewhere counts for this section."
+          "task": "Of what a stage's teaching needs (what to inspect, what good and bad look like, when to stop), which does the section leave out? Credit only text you can read: the section's body and the opening. The opening holds only the first line of each paragraph and list item under the reference's title, so a line that breaks off continues in text not shown. The outline lists the reference's other headings without their text: a heading can show where teaching might be, never that it is there."
         },
         "criteria": {
-          "none": "It says what to inspect, shows what good and bad look like, and says when the stage is done, in its own body or where the outline or opening shows the reference gives it, such as under a 'When to stop', 'Good and bad' or 'Examples' heading, or in a Return or Stop line of the opening. Good and bad can come through examples, signals, a contrast (a bad move named against the instruction, as 'quote the line; do not paraphrase it' is) or a standard the section names and judges against, such as the proof standards a reference loads; the section need not restate that standard. A stop can be the result the section or the reference returns.",
+          "none": "The text shown says what to inspect, shows what good and bad look like, and says when the stage is done: the section's body, or an opening line that speaks to this stage's work. Good and bad can come through examples, signals, a contrast (a bad move named against the instruction, as 'quote the line; do not paraphrase it' is) or a standard the section names and judges against, such as the proof standards a reference loads; the section need not restate that standard. A stop can be the result the section returns, or a stop or return an opening line states for this stage's work.",
+          "unseen": "Part of the teaching is missing from the text shown, but it may sit in text that isn't shown: under a heading of the outline that could hold it, such as 'When to stop', 'Good and bad' or 'Examples', or past an opening line that breaks off. The evidence can't settle whether this stage's teaching is there.",
           "inspect": "It never says what to look at or open.",
-          "good_bad": "It gives no picture of good and bad: no examples, signals, contrast or named standard to judge against, in its body or under another heading of the reference.",
-          "stop": "It never says when the work of the stage is done, and neither the outline nor the opening shows a stop, a completion or a return the stage ends at."
+          "good_bad": "It gives no picture of good and bad: no examples, signals, contrast or named standard to judge against, and no heading of the outline or broken-off opening line could hold one.",
+          "stop": "It never says when the work of the stage is done, no opening line states a stop or return for it, and no heading of the outline or broken-off opening line could hold one."
         }
       }
     },
@@ -98,6 +99,7 @@
           "min_probability": 0.6,
           "routes": {
             "none": "pass",
+            "unseen": "uncertain",
             "inspect": {
               "finding": "Section owns a stage but doesn't say what to inspect.",
               "at": "heading"
