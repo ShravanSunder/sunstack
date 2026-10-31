@@ -1,6 +1,6 @@
 ---
 name: peekaboo
-description: "Use when testing, inspecting, or automating native macOS UI with Peekaboo: screen or UI state, apps, windows, menus, text, clipboard, or Screen Recording and Accessibility permissions, including desktop app work a browser tool cannot reach."
+description: "Use when testing, inspecting, or automating native macOS UI with Peekaboo (screens, apps, windows, menus, clipboard) or its Screen Recording or Accessibility permissions, for desktop work a browser tool can't reach."
 ---
 
 # Peekaboo Visual Testing
