@@ -1,13 +1,17 @@
 ---
 name: skill-rules
-description: "Use when deciding which of a skill's standards become checked rules, writing or fixing their markers and rule entries, or reading a rule run's results. Not for a skill's teaching."
+description: "Use when deciding which of a skill's standards become checked rules, designing a rule's questions and thresholds, writing its markers and entries, or reading a rule run. Not for a skill's teaching."
 ---
 
 # Skill Rules
 
-A checked rule is a decision model for one of a skill's own standards. A marker binds the standard's wording where the skill states it, and the rule entry behind the marker names the evidence kind the standard governs (pieces such as a skill's description, a step, a load call or a list item, picked from the checked files with their named fields) and a decision: mechanical checks and questions to the decision model, routed to `pass`, `finding`, `not_applicable` or `uncertain` for each piece. The judge sees the standard's own words beside every piece, so mark only text whose own wording is the standard. A sentence that would need rewording to be checkable isn't ready for a marker: the rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
+A checked rule is a decision model for one of a skill's own standards. A marker binds the standard's wording where the skill states it. The rule entry behind the marker names two things:
+- **the evidence kind the standard governs:** pieces such as a skill's description, a step, a load call or a list item, picked from the checked files with their named fields;
+- **a decision:** mechanical checks and questions to the decision model, routed to `pass`, `finding`, `not_applicable` or `uncertain` for each piece.
 
-A good decision model asks only of the pieces its standard covers. Most kinds hold pieces a standard doesn't govern: a list item that is a label, a section that is a lookup table, a paragraph that is a local instruction rather than a rule. A gate ends those `not_applicable` before the walk reaches the verdict step, so no verdict answer ever decides them. A walk that ends before its first question, as one stopped by a mechanical gate placed first does, sends nothing to the decision model; a question gate's answer comes back in the same request as the verdict's, and the walk reads only the answers its path needs. A piece whose answers fall between the thresholds comes back as `uncertain` for the agent running the check to decide.
+The judge sees the standard's own words beside every piece, so mark only text whose own wording is the standard. A sentence that would need rewording to be checkable isn't ready for a marker. The rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
+
+The practice of designing and proving a decision model belongs to the `sunstack-dev` skill `domain-decision-models`. This skill loads it at design and at proof, and doesn't restate it. A good rule asks only of the pieces its standard covers: most kinds hold pieces a standard doesn't govern, such as a list item that is a label, a lookup table, or a local instruction rather than a rule. So every rule's design names its applicability decision: which established fact lets its gate end a piece `not_applicable` before the verdict, or why every piece of its kind falls under the standard.
 
 Most of a skill should never become a rule. Each standard lands in exactly one of five outcomes:
 
@@ -23,11 +27,13 @@ Prefer deterministic when the check fully captures the standard. **A proxy isn't
 
 The engine's lint documentation owns every exact shape: the config, the rule entry, the question types, the decision steps and the report. Read it, and the rules files the repository already has, before writing an entry.
 
+Every run that sends model requests needs the key and the grant to send them. That covers a rules run, and an evidence print over a selected kind or a kind that lies `within` one. Without that grant, prepare the exact command and config, hand them to whoever holds the grant, and read the report it keeps.
+
 IF a step runs this plugin's rules on a skill's files instead of writing or proving rules, as a writer's self-check, a review's first rule pass, a release's prove step or an audit does, load `references/running-rules.md` and return the run's status, each finding with its file, line and your call, each `uncertain` piece with your decision, and each gap. That run ends with its return; the workflow below is for writing and proving rules.
 
 ## Workflow
 
-A run that starts from a refusal or a broken rule still walks steps 1 and 2 for the standards it touches, because whether a standard should carry a marker at all decides the fix.
+A run that starts from a refusal or a broken rule still walks steps 1 to 3 for the standards it touches, because whether a standard should carry a marker at all, and how its decision is built, decide the fix.
 
 ### 1. List the candidate standards
 
@@ -37,37 +43,87 @@ Read the skill's `SKILL.md` and every reference whose standards are in scope. Li
 
 MUST load `references/decision-matrix.md` and return, for each candidate, its outcome with the property that outcome depends on, and for each marked outcome its evidence kind, its gate or why it needs none, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each marked outcome names an evidence kind whose pieces hold what the standard judges; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule. A candidate that reads as a standard only after a rewrite goes back unmarked, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
 
-### 3. Mark the standards
+### 3. Design each marked rule
 
-MUST load `references/markers-and-rules.md` and return, for each marked standard, its host and marker, its rule entry, and any change to the config's rulebook pairs or evidence kinds, to apply in steps 3 to 5.
+MUST load the `sunstack-dev` skill `domain-decision-models`. When it isn't installed, return `skill unavailable: domain-decision-models` and stop: a rule designed without the practice is the failure this step exists to prevent.
+
+Then MUST load `references/rule-design.md`, and return per marked rule the design its outcome and its nodes call for. A field that doesn't apply is marked `not applicable` with its reason, never invented. The design covers:
+- **every rule:** its evidence kind and the fields its nodes read, its gate with the established fact that lets it drop a piece (or why it needs none), and its tree with every route;
+- **each mechanical node:** its predicate, the field it reads, its routes and step 2's counterexample search;
+- **each node that reads a model's answer:**
+  - its question's type, proposition, evaluated field and criteria;
+  - the encoded state for sampled good, bad and near-miss pieces, or the named evidence gap;
+  - the statistic it thresholds, its inequalities and in-between route, precedence and first-failure order;
+  - the labelled costs its policy rests on;
+- **the proof plan:** edge tests for a deterministic rule; development and held-out sets, the label source and the baseline for a judged one.
+
+Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with the reason. A rule failing any goes back to step 2:
+- the decisive content is in the field or state its nodes read;
+- each mechanical node decides only what its predicate fully captures;
+- each node that reads a model's answer asks one proposition that passes the standard's own bad examples, and has its policy with inequalities and routes;
+- the proof plan fits the outcome.
+
+### 4. Mark the standards
+
+MUST load `references/markers-and-rules.md` and return, for each marked standard, its host and marker, its rule entry, and any change to the config's rulebook pairs or evidence kinds, to apply in steps 4 to 6.
 
 Mark the narrowest host that carries the whole standard: a list item or paragraph before a section, and a section only when the whole section is one standard and stays under the config's `max_question_words`. The marker is the last thing on its line in the host, touches heading text with no space, uses the config's prefix letter, and appears at most once per Markdown file; one file may carry many distinct IDs. Completion: every marker sits on an allowed host, and the host's visible words, read with nothing around them, state the standard.
 
-### 4. Write the rule entries
+### 5. Write the rule entries
 
-Write one entry per marker in the rules file paired with that Markdown file, keyed by the marker ID: a `name` that becomes the rule ID, the `evidence` kind, the `questions` the decision may ask, the `decision` graph, and the `severity`. A judged entry has a gate whenever its kind holds pieces the standard doesn't cover, and states its thresholds; a mechanical check whose failure is itself a breach of the standard ends in a `finding` with no question asked. Completion: every marker has one entry and every entry one marker; each entry's checks and questions match its standard's outcome from step 2; every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs.
+Write one entry per marker from step 3's design, in the rules file paired with that Markdown file, keyed by the marker ID:
+- a `name` that becomes the rule ID;
+- the `evidence` kind;
+- the `questions` the decision may ask;
+- the `decision` graph;
+- the `severity`.
 
-### 5. Pair the rulebook in the config
+Completion:
+- every marker has one entry, and every entry one marker;
+- each entry's gate, checks, questions and thresholds are the ones step 3 designed;
+- every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs.
 
-Open the config the repository's rule runner uses. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config; when an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 6) lists every intended rule with the expected count. A clean check that omits one is not paired.
+### 6. Pair the rulebook in the config
 
-### 6. Prove each rule
+Open the config the repository's rule runner uses. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config. When an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 7) lists every intended rule with the expected count. A clean check that omits one is not paired.
 
-MUST load `references/check-and-reports.md` and return the check's outcome and printed rules, the evidence print for each rule's kind with the pieces you meant it to judge, and the rule tests for each rule with their per-rule results.
+### 7. Prove each rule
 
-Completion: the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question; the evidence print shows each rule's intended good and bad pieces with their fields filled; every mechanical rule has edge tests with no model that pass and fail where the standard does; every judged rule has labelled development cases run on the decision model, and its held-out results once its entry is frozen, or the missing ones named as unproven. Rules run locally, by the skills that use them, not in CI.
+MUST load `references/check-and-reports.md`. Return the check's outcome and printed rules, the evidence print for each rule's kind with the pieces you meant it to judge, and each mechanical rule's edge results.
 
-### 7. Return
+IF a judged rule's development or held-out results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule:
+- its results over the full denominator, with the measures reported apart;
+- the requested model and the version that answered, or the named gap;
+- the comparison against the current rule as the baseline, or the gap that blocks it.
+
+Completion:
+- the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question;
+- the evidence print shows each rule's intended good and bad pieces with their fields filled;
+- every mechanical rule has edge tests, with no model, that pass and fail where the standard does;
+- every judged rule has labelled development cases run on the decision model, and its held-out results once its entry is frozen, or the missing ones named as unproven.
+
+Rules run locally, by the skills that use them, not in CI.
+
+### 8. Return
 
 Return the decision table, the diff, and the check, evidence and rule-test results its proof column cites:
 
 ```text
-| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | evidence | gate | verdict | proxy for | proof |
+| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | evidence | gate | questions | tree | policy | verdict | proxy for | proof | version | baseline |
 ```
 
-One row per candidate from step 1. Unmarked outcomes leave host through proof empty. `proof` names the edge results for a mechanical rule and the development and held-out results for a judged one. Name what stays unproven: named cases test a rule's decisions on chosen pieces, not how many real pieces its evidence kind misses, and no result here makes a judged rule ready to block.
+One row per candidate from step 1. Unmarked outcomes leave host through baseline empty.
+- `questions`, `tree` and `policy` summarize step 3's design, with `not applicable` where it applies.
+- `proof` names the edge results for a mechanical rule, and the development and held-out results for a judged one.
+- `version` is the model version that answered, or the gap.
+- `baseline` is the comparison against the current rule, or its gap.
 
-Completion: the table has one row for every candidate step 1 listed; each marked row's proof points at a check, evidence print or rule-test result you kept; and every rule still owed a result is named as unproven, with what would close it.
+Name what stays unproven: named cases test a rule's decisions on chosen pieces, not how many real pieces its evidence kind misses, and no result here makes a judged rule ready to block.
+
+Completion:
+- the table has one row for every candidate step 1 listed;
+- each marked row's proof points at a check, evidence print or rule-test result you kept;
+- every rule still owed a result is named as unproven, with what would close it.
 
 ## Completion Blockers
 
@@ -77,8 +133,12 @@ The run is not done while any of these hold:
 - a deterministic outcome rests on a check nobody searched for counterexamples, or a proxy is recorded as the standard's verdict;
 - a review-only, eval or prose standard carries a marker;
 - a marker sits on wording that needed rewording to read as its standard;
+- a marked rule was written without step 3's design, or step 3 ran without `domain-decision-models`;
 - a judged entry asks of every piece of a kind that holds pieces its standard doesn't cover, with no gate;
+- a lexical or label check decides a verdict its standard asks to be read;
+- a threshold has no statistic, inequality or costs;
 - a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
 - the check's print lacks an intended rule, or the count is off;
-- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases;
-- the check wasn't run on the real engine, or a passing check or evidence print is claimed as proof that a rule decides well.
+- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases, a full denominator or one version group;
+- a run that sends model requests was made without the grant;
+- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, or proof is reported as passed where the record can't support it.
