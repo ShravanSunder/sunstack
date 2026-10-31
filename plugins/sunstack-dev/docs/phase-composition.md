@@ -20,7 +20,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | Skill | Lines | Always loads | Loads when a condition holds | Cites in `SKILL.md` | Returns |
 | --- | --- | --- | --- | --- | --- |
 | orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
-| orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
+| orchestrator-implementation-goal | 57 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
@@ -147,7 +147,7 @@ flowchart LR
 
 ### orchestrator-implementation-goal
 
-- Lines: 51
+- Lines: 57
 - Always loads:
   - practice: `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`
   - shared reference: `../../shared-references/phase-return-tokens.md`
