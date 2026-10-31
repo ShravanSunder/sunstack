@@ -60,23 +60,23 @@
           "task": "What does this section of a reference do?"
         },
         "criteria": {
-          "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished.",
+          "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished. A section that has the agent run commands or read their output and then says what that output does and doesn't prove owns a stage, even when it lists the commands.",
           "part": "It is one part of a stage the reference as a whole owns, such as the stage's inputs, one of its signals, its examples or its stop, with the rest of the stage in other sections.",
-          "lookup": "It is a lookup the agent consults rather than work it performs: a standards list, a table, a diagram, definitions, facts, or a list of shapes or templates."
+          "lookup": "It is a lookup the agent consults rather than work it performs: a standards list, a table, a diagram, definitions, facts, or a list of shapes or templates. That includes a list of commands, queries or APIs with what each does or returns, a table mapping errors or symptoms to their fixes, a code pattern or helper to copy, a prompt or binding template, and a catalogue of rules or patterns to consult. Rules that govern a decision the agent makes in this section belong to that stage and are not a lookup."
         }
       },
       "missing": {
         "type": "choice",
         "instructions": {
           "check": "body",
-          "context": "heading",
-          "task": "Of what a stage's teaching needs (what to inspect, what good and bad look like, when to stop), which does the section leave out?"
+          "context": ["heading", "outline", "opening"],
+          "task": "Of what a stage's teaching needs (what to inspect, what good and bad look like, when to stop), which does the section leave out? The outline lists the reference's headings, and the opening holds the paragraphs under its title, where it says what it owns and what it returns. Teaching that the outline or opening shows the reference gives elsewhere counts for this section."
         },
         "criteria": {
-          "none": "It says what to inspect, shows what good and bad look like through examples, signals or a contrast, and says when the stage is done.",
+          "none": "It says what to inspect, shows what good and bad look like, and says when the stage is done, in its own body or where the outline or opening shows the reference gives it, such as under a 'When to stop', 'Good and bad' or 'Examples' heading, or in a Return or Stop line of the opening. Good and bad can come through examples, signals, a contrast (a bad move named against the instruction, as 'quote the line; do not paraphrase it' is) or a standard the section names and judges against, such as the proof standards a reference loads; the section need not restate that standard. A stop can be the result the section or the reference returns.",
           "inspect": "It never says what to look at or open.",
-          "good_bad": "It gives no picture of good and bad: no examples, signals or contrast to judge against.",
-          "stop": "It never says when the work of the stage is done."
+          "good_bad": "It gives no picture of good and bad: no examples, signals, contrast or named standard to judge against, in its body or under another heading of the reference.",
+          "stop": "It never says when the work of the stage is done, and neither the outline nor the opening shows a stop, a completion or a return the stage ends at."
         }
       }
     },

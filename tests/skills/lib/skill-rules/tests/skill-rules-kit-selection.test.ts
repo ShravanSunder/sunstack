@@ -243,6 +243,87 @@ describe("sentence evidence lies within a selected step or a Standards section",
   });
 });
 
+describe("step evidence: a heading step owns its numbered sub-items", () => {
+  test("items nested in a numbered heading step are not steps; items of a plain numbered list are", async () => {
+    // Wrong behavior: each sub-item of "### 1. Apply the change" read as a step of its own, owing
+    // its own Completion line, though the heading step carries the completion for all of them.
+    const root = createFixture();
+    const text = [
+      "---",
+      "description: Use when checking steps.",
+      "---",
+      "",
+      "## Workflow",
+      "",
+      "### 1. Apply the change",
+      "",
+      "1. Show the diff.",
+      "2. Apply what was accepted.",
+      "",
+      "Completion: the accepted changes are applied.",
+      "",
+      "## Ordered run",
+      "",
+      "1. Inspect the input.",
+      "2. Return the result.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
+    const listing = await listEvidence(root);
+    const steps = listing.pieces
+      .filter((piece) => piece.kind === "step")
+      .map((piece) => piece.where.first_line);
+    expect(steps).toEqual([7, 16, 17]);
+  });
+});
+
+describe("reference_section evidence carries the reference's outline and opening (kit K002, calls-and-placement)", () => {
+  const textsSchema = z.object({ values: z.array(z.string()) }).passthrough();
+
+  test("the opening holds the paragraphs and list items under the title, and the outline every heading", async () => {
+    // Wrong behavior: the opening picks text under a later section or inside a quote, or misses the
+    // Return line; or the outline is empty because heading lines are read only in SKILL.md. Either
+    // hides the reference-wide stop the teaching-depth question credits.
+    const root = createFixture();
+    const text = [
+      "# Guide",
+      "",
+      "This reference owns the guide's stage.",
+      "",
+      "Return: the checked result.",
+      "",
+      "- An opening list item.",
+      "",
+      "> A quoted paragraph.",
+      "",
+      "## First stage",
+      "",
+      "Inspect the input.",
+      "",
+      "## When to stop",
+      "",
+      "Stop when the input is checked.",
+      "",
+    ].join("\n");
+    writeFixtureFile(root, "plugins/example/skills/sample/references/guide.md", text);
+    const listing = await listEvidence(root);
+    const sections = listing.pieces.filter((piece) => piece.kind === "reference_section");
+    expect(sections.map((piece) => piece.where.first_line)).toEqual([11, 15]);
+    const first = sections[0];
+    if (!first) throw new Error("No reference section");
+    expect(textsSchema.parse(first.fields.opening).values).toEqual([
+      "This reference owns the guide's stage.",
+      "Return: the checked result.",
+      "- An opening list item.",
+    ]);
+    expect(textsSchema.parse(first.fields.outline).values).toEqual([
+      "# Guide",
+      "## First stage",
+      "## When to stop",
+    ]);
+  });
+});
+
 describe("main-path.spine is asked only where numbered lists hold no workflow (kit K002, main-path)", () => {
   const ruleList =
     "---\ndescription: Use when checking spines.\n---\n\n# Sample\n\nApply the lens to the question and state the result.\n\n## Core rules\n\n1. Keep it short.\n2. Name the owner.\n";
