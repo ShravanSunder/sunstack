@@ -18,22 +18,27 @@ What the check proves: the definitions assemble and each standard reads as itsel
 
 ## Print the evidence
 
-The engine's evidence print (`--evidence`, optionally with one kind) lists the pieces each kind picks from the checked files, with every field, and asks nothing, so it needs no key. Print the kind each rule judges, over the files the rule is meant for, and look for three things:
+The engine's evidence print (`--evidence`, optionally with one kind) lists the pieces each kind picks from the checked files, with every field. What it costs depends on the config:
+
+- **No selected kind:** it asks nothing, so it needs no key.
+- **A selected kind** (one with `select`, whose candidates the decision model chooses): it runs that selection and asks nothing else. It needs the key and a grant to send model requests; without a key it is refused before reading any file. Its print adds `selections`, each candidate with its outcome, and `file_counts`. A piece of a kind that lies `within` a selected kind exists only when its candidate was selected, so read a missing piece against its candidate's outcome before calling it a gap in the evidence project.
+
+Print the kind each rule judges, over the files the rule is meant for, and look for three things:
 
 - **the intended pieces:** the good and bad pieces you chose for the rule are there, each as one piece with the span you expect (a whole list item, not a fragment of it);
 - **the fields:** every field the rule's questions and checks read is filled on those pieces, and a field that is legitimately empty, such as a step heading for a call that sits in no numbered step, is empty for that reason;
-- **the count:** a kind with no pieces in files that plainly hold them is a gap in the evidence project, not a quiet rule.
+- **the count:** a kind with no pieces in files that plainly hold them is a gap in the evidence project, not a quiet rule, unless those pieces wait on a candidate that wasn't selected.
 
 ## Read a report
 
-A run's report carries a `status`, the `findings`, the `uncertain` pieces, the `incomplete` parts, the `skipped_rules`, the `counts` by severity, the `exclusions` (including how many pieces ended `not_applicable`), the `usage` (requests, tokens, cost) and `evidence_seen`. `evidence_seen` lists only the pieces sent to the decision model, so it is empty on a run whose pieces all settled mechanically; never read emptiness from it.
+A run's report carries a `status`, the `findings`, the `uncertain` pieces, the `incomplete` parts, the `skipped_rules`, the `counts` by severity, the `exclusions` (including how many pieces ended `not_applicable`), the `usage` (requests, tokens, cost), `evidence_seen`, and, for a config with a selected kind, the `selections` (each candidate with its outcome: `selected`, `not_selected`, `uncertain` with its yes probability, or `incomplete` with its reason) and the `file_counts` (per file and kind, with the selection counts). `evidence_seen` lists only the pieces sent to the decision model, so it is empty on a run whose pieces all settled mechanically; never read emptiness from it. Selection's outcomes sit apart from the rules' results: an `uncertain` or `incomplete` candidate can set the status while every rule result is decided, and whatever lies within it was never judged.
 
 | status | exit | what it means |
 | --- | --- | --- |
 | `cancelled` | 4 | the run was stopped |
-| `incomplete` | 3 | some work didn't finish: a request limit, a provider failure, evidence too large or unavailable |
+| `incomplete` | 3 | some work didn't finish: a request limit, a provider failure, evidence too large or unavailable, including a selection candidate that couldn't be answered (`selection_incomplete`) |
 | `findings` | 1 | an `error` finding, or more warnings than the run's set maximum |
-| `uncertain` | 5 | no failing finding, and at least one piece ended between its thresholds |
+| `uncertain` | 5 | no failing finding, and at least one piece, or one selection candidate, ended between its thresholds |
 | `nothing_selected` | 0 | no piece was selected: clean for a run over changed evidence with nothing changed, and a gap for a full run, which usually means a wrong path |
 | `clean` | 0 | nothing above happened |
 | `invalid` | 2 | refused before reading, such as a config refusal or no key for a run with asking rules |
