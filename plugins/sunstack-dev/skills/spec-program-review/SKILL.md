@@ -117,6 +117,8 @@ The caller completes classification and admission. For an admitted substantive r
 
 A later semantic change outside an accepted correction invalidates affected check coverage. Further rounds follow the convergence rule in `references/finding-and-reduction-schema.md`.
 
+Completion: for an admitted substantive review, one persistent 🔎 Reviewer Sidekick with read-only workspace access is commissioned, or the existing one resumed, through `practices-manage-agents`, and its identity is recorded for every correction round.
+
 ## 5. Walk the Mode and Chunk Checks
 
 The 🔎 Reviewer Sidekick reads the complete target set and governing sources first, every artifact whole. MUST load `references/coordination-and-chunking.md` and return a sequential chunk-pass plan with complete seam text and overlap, or one mode-complete pass when the whole target fits.
