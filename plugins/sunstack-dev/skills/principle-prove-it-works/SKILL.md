@@ -1,6 +1,6 @@
 ---
 name: principle-prove-it-works
-description: "Use when about to say a feature, fix, or UI change works. A passing test proves only what it observes: proof is the feature working through the real entry point, observed where the user would see it, with anything unverified named."
+description: "Use when about to say a feature, fix, or UI change works, or when a passing test is offered as proof that it does."
 disable-model-invocation: true
 ---
 
