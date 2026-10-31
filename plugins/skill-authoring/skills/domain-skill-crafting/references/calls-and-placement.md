@@ -120,7 +120,7 @@ Principle
 
 The weak citation's action repeats its link text, so it states no action. The load line shows the form for depth that is the skill's own procedure. The sentence carries the moment and the action, and the link carries the depth; steps and narrative prose use the same form. A citation from `references/` adds one `../` to its path.
 
-IF a citation's moment is in doubt, load `main-path.md` and return its test for a branch condition, which a citation's moment must also pass.
+IF a citation's moment is a condition rather than a point in a step, load `main-path.md` and return its test for a branch condition, which that condition must also pass.
 
 The near miss for dispatch: a known check skipped under pressure is still a check. It is loaded and performed as a step, never turned into a dispatch on the grounds that a helper would be "independent".
 

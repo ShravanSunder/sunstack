@@ -1,6 +1,6 @@
 ---
 name: domain-skill-crafting
-description: "Use when writing, designing, reviewing or auditing a skill's text against its standards: description, main path, calls, steering, proof claims, security and platform surfaces."
+description: "Use when writing, designing, reviewing or auditing a skill, or judging any part of a skill's text against the skill-writing standards."
 disable-model-invocation: true
 ---
 
