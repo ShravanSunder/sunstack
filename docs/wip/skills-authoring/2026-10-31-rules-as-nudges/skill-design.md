@@ -296,8 +296,8 @@ The 🦁 Lead decides each gate and owns routing any rework: a gate that fails s
 
 | Run | State |
 | --- | --- |
-| 1-5 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
-| 6-9 | proposed |
+| 1-6 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
+| 7-9 | proposed |
 
 ## Review record
 
