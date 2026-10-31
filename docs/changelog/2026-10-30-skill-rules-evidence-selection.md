@@ -11,5 +11,5 @@
 - Validation:
   - a full keyed run over the corpus on the 0.4.0 candidate engine, complete with nothing incomplete (later engine changes touched only error locations);
   - development rule evals: 32 matched, 2 missed, 7 uncertain, 0 wrong, none of them new against the last evals before this change;
-  - `tests/skills` on the installed 0.4.0: tsc clean, vitest 258/258, `rules --check` 13 rules and 3 kinds.
+  - `tests/skills` on the installed 0.4.0: tsc clean, vitest 259/259, `rules --check` 13 rules and 3 kinds.
 - Codex and Claude caches: not refreshed.
