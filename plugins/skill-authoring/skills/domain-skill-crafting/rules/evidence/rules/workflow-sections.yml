@@ -16,6 +16,16 @@
 ---
 { "id": "skill-body", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "kind": "document" } }
 ---
+{ "id": "numbered-first-line", "language": "Markdown", "files": ["**/SKILL.md"], "rule": { "matches": "numbered-item" } }
+---
+{
+  "id": "completion-first-line",
+  "language": "Markdown",
+  "files": ["**/SKILL.md"],
+  "rule":
+    { "kind": "paragraph", "regex": "(?i)\\b(?:Completion:|Complete when|Done when|Stop when)" },
+}
+---
 {
   "id": "sentence-unit",
   "language": "Markdown",
