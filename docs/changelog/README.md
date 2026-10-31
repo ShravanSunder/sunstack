@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-30 Skill rules: workflow sections chosen by the decision model](2026-10-30-skill-rules-evidence-selection.md)
 - [2026-10-30 Presentation HTML collection walkthroughs](2026-10-30-presentation-collection-walkthroughs.md)
 - [2026-10-30 Practice skills cleanup](2026-10-30-practices-skills-cleanup.md)
 - [2026-10-30 Phase skills cleanup](2026-10-30-phase-skills-cleanup.md)
