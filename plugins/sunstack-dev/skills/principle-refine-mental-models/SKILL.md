@@ -1,6 +1,6 @@
 ---
 name: principle-refine-mental-models
-description: "Use when reality surprises the plan, a fix fails twice on the same premise, or the same correction comes twice. Stop and ask what was wrong with the understanding before touching the code: drift or a break, and which shared premise to attack."
+description: "Use when reality surprises the plan, a fix fails twice on the same premise, or the same correction comes twice."
 disable-model-invocation: true
 ---
 

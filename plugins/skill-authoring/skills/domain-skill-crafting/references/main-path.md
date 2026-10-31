@@ -36,7 +36,7 @@ Good: a flaky-test skill opens with "A flaky test is a measurement problem befor
 
 Bad: "This skill helps you handle flaky tests effectively." It names no lens, so nothing about the workflow follows from it.
 
-IF the lens rests on a leading word whose strength is in doubt, load `steering.md` and return its leading-word standards.
+IF the lens rests on a leading word or phrase, familiar or coined, load `steering.md` and return its leading-word standards for that word's meaning and strength.
 
 ## The route
 

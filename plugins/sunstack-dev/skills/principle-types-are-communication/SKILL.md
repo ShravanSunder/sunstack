@@ -1,6 +1,6 @@
 ---
 name: principle-types-are-communication
-description: "Use when designing or reviewing types, signatures, or data that crosses a boundary (network, file, environment, database, model output), especially status fields, ids, and optional fields that only make sense together. Model states as sum types, build valid shapes, parse once at the boundary, and handle every variant."
+description: "Use when designing or reviewing types, signatures, or data that crosses a boundary (network, file, environment, database, model output), especially status fields, ids, and optional fields that only make sense together."
 disable-model-invocation: true
 ---
 

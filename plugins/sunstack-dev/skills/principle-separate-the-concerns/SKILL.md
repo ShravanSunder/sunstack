@@ -1,6 +1,6 @@
 ---
 name: principle-separate-the-concerns
-description: "Use when adding a module, layer, interface, or dependency, when one part changes for two unrelated reasons, or when testing one rule drags in the network, the clock, or the framework. Give each part one job and inject dependencies at real seams."
+description: "Use when adding a module, layer, interface, or dependency, when one part changes for two unrelated reasons, or when testing one rule drags in the network, the clock, or the framework."
 disable-model-invocation: true
 ---
 

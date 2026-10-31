@@ -1,6 +1,6 @@
 ---
 name: principle-name-the-tradeoffs
-description: "Use when a real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others. Show the credible alternatives as changes to the current design, with concrete gains, costs, who pays, and the assumption that must hold, then recommend one."
+description: "Use when a real choice changes complexity, risk, cost, or reversibility, or when one option is presented for a decision that has others."
 disable-model-invocation: true
 ---
 

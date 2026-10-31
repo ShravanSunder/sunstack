@@ -1,6 +1,6 @@
 ---
 name: principle-design-for-concurrency
-description: "Use when actors already overlap: two workers, retries, callbacks, background tasks, or late results can touch the same resource. Name the invariant, find the interleaving that breaks it, isolate the shared state before serializing it, and order by causal signals, not sleeps."
+description: "Use when actors already overlap: two workers, retries, callbacks, background tasks, or late results can touch the same resource."
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: principle-verify-before-accepting
-description: "Use when accepting any result: a helper's handback, a review finding, a passing run, 'done', an agreement, or your own conclusion. Check that this evidence establishes this exact claim, at this version, observed rather than reported, and name what it doesn't cover."
+description: "Use when accepting any result: a helper's handback, a review finding, a passing run, 'done', an agreement, or your own conclusion."
 disable-model-invocation: true
 ---
 
