@@ -1,6 +1,6 @@
 ---
 name: role-advisor
-description: "Use when a Lead commissions you as the Advisor Sidekick, or the owner opens a session and names you as their Advisor: to find the high-risk points in a design, plan or acceptance argument and give each an independent second look, to answer the owner's questions with your own work, or to find why the Lead's stalled work stopped and move it within your grant. Not for governing authorship, acceptance or independent review findings."
+description: "Use when commissioned or named as the Advisor: a second look at a design, plan or acceptance argument, the owner's questions, or the Lead's stalled work. Not for authorship, acceptance or independent review findings."
 ---
 
 # 🦉 Advisor Sidekick

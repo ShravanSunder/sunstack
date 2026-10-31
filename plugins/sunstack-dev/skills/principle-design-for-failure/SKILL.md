@@ -1,6 +1,6 @@
 ---
 name: principle-design-for-failure
-description: "Use when a call, job, or state change has an effect someone else can see and it can time out, be retried, partly succeed, or end without you knowing. Decide every ending, which system is the truth for 'did it happen?', and who cleans up, before choosing retries or locks."
+description: "Use when a call, job, or state change has an effect someone else can see and it can time out, be retried, partly succeed, or end without you knowing."
 disable-model-invocation: true
 ---
 

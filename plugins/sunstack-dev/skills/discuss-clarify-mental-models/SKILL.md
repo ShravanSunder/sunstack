@@ -1,6 +1,6 @@
 ---
 name: discuss-clarify-mental-models
-description: "Use when shared understanding may have drifted (repeated corrections, hollow agreement, a term meaning two things) or the user asks to reconverge, share understanding, reflect back, or re-anchor. Not for artifact edits, review, evidence gathering, or first-pass extraction."
+description: "Use when understanding may have drifted (repeated corrections, hollow agreement, a term with two senses) or asked to reconverge, share understanding, reflect back or re-anchor. Not for edits, review, research or pathfinding."
 ---
 
 # Discuss Clarify Mental Models

@@ -1,6 +1,6 @@
 ---
 name: principle-define-the-domain-first
-description: "Use when a new noun, state, or stored field appears, one word is doing two jobs, or two sources use different words for what may be one thing. Define what each term means, what makes two of them the same, and what changes its state, before choosing structure."
+description: "Use when a new noun, state, or stored field appears, one word is doing two jobs, or two sources use different words for what may be one thing."
 disable-model-invocation: true
 ---
 
