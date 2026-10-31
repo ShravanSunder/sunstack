@@ -17,8 +17,9 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
 | R2 a rule names its chunk and edges | an evidence print per new or rebuilt rule, over real sources, each intended piece's fields read; review check that each rule's design states subject, denominator, edges, fields, budget | collection is observable without a model; the design statement is text |
 | R3 a rule can nudge without deciding | the placement rule's labelled cases give `check` on line 17 and never `breach`; review check of the decision-matrix's `check` outcome | the tree's claim on cases; the classification's text |
 | R4 generalization and placement read every section | an evidence print with the denominator (every checked skill file, every section from the H1 down, tables included), compared with the file list | collection; the Advisor's focused print reached 76 of 76 skill files and 1,877 section pieces on 0.5.0 |
-| R5 gaps shown apart from decided exclusions | runner tests in `tests/skills` on fixture reports holding each gap kind and an exclusion | mechanical: the printout's sections |
-| R5a `check` never fails a run | engine test: a run with only `check` nudges exits 0 under a zero warning limit; invalid and incomplete runs keep their exits | mechanical |
+| R5 gaps shown apart from decided exclusions | runner tests in `tests/skills` on fixture reports holding each gap kind and an exclusion; two denominator cases: (a) a description rule over a `SKILL.md`, a reference and a JSON file gives no unread gap for the reference or the JSON file; (b) a generalization rule over an eligible section that produced no piece gives an unread gap | mechanical: the printout's sections |
+| R5a `check` never fails; `uncertain` keeps its status; an `error` blocks only on an all-mechanical path | engine tests, including a judged gate followed by a mechanical `error` step, which must not block | mechanical |
+| R5a, the exits | engine test: a run with only `check` nudges exits 0 under a zero warning limit; invalid, incomplete and uncertain runs keep their exits | mechanical |
 | R5b answers on every judged result | engine test: pass and `not_applicable` results carry answers | mechanical |
 | R6 a pass says one thing | review check of `running-rules.md` and `check-and-reports.md` | text |
 | R7 nudges are read, not obeyed | review check that `running-rules.md`, `skill-creation` step 4 and `implementation-review.md` teach the account (fixed, kept, routed) and the commission rule; the behavior is an eval | text now; behavior later |
@@ -40,14 +41,20 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
 
 ## Proof plan
 
-1. **The spike (D10), before the engine contract freezes.**
-   - A keyed run on a scratch config with the signed 0.5.0 engine: a `section` kind with its own loads, and the placement tree's two Nouls.
-   - Cases:
-     - line 17;
-     - `practices-cleanup/SKILL.md:40`;
-     - `ops-observability-stack`'s description;
-     - countercases: a labelled product example, this toolkit's own observability stack, platform vocabulary.
-   - Record the answers. This tests the decide stage only, and ships nothing. It costs about $0.02, inside the $5 budget.
+1. **The spike (D10, D10a), before the engine contract freezes.**
+   - A keyed run on a scratch config with the signed 0.5.0 engine:
+     - the Advisor's `section` kind, whose own body is proven; its targets come from the raw section text, so a child's loads also reach its parent;
+     - the placement tree's two Nouls;
+     - `warn` standing in for `check`.
+   - 49 section pieces from real copies of `ops-observability-stack` (with its references), `practices-cleanup` and `platform.md`, plus one synthetic labelled-example skill.
+   - The cases:
+     - line 17's section;
+     - `practices-cleanup`'s allow-list table;
+     - the AgentStudio and Agent VM loop references;
+     - countercases: the labelled example, the toolkit's own observability references, and the platform contracts.
+   - The description case is out: section bodies omit frontmatter.
+   - Expectations are frozen in `expectations.md` beside the run, written before any result was read.
+   - Records the answers. It tests the decide stage only, and ships nothing.
 2. **The engine pull request.** Its own design's verification, with the engine tests named above.
 3. **This pull request, per run:**
    - **runs 1 to 6:** static checks, which are the repository's skill lint, `pnpm --dir tests/skills rules --check`, the rule run on the changed files read with the new reading, and the runner tests;

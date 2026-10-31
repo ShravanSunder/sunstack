@@ -62,7 +62,12 @@ Observable, on the anchor cases below:
 
    Separately, and not as gaps, it shows what each rule's gate decided was outside its standard, with the reason.
 3. **The agent acts on the nudge, not the property.** A writer, review lead or Lead receiving a nudge reads its places and decides the broader question before changing the line. A change that only makes the rule's own property hold does not close the nudge.
-4. **Rule files get nudges too.** A rule file with a question that asks two things, a threshold with no route for an in-between answer, or a question that names no field gets a nudge to whoever wrote it.
+4. **Rule files get nudges too.** A rule file gets a nudge to whoever wrote it when:
+   - a question asks two things;
+   - a question's criteria define a different proposition from its task;
+   - a question names no field it judges.
+
+   The check accepts all three today (the Advisor's admission probes on 0.5.0). An omitted in-between route isn't one of them: the engine already routes it to `uncertain` by default.
 5. **The skills make it extremely clear.** An agent with no history of this design, following only the skill it reached:
    - can design a nudge rule end to end with `skill-rules` (name the standard, the chunk, the tree, the nudge, the proof);
    - can run the rules and read the nudges with the rule-running reference;
@@ -82,6 +87,8 @@ Observable, on the anchor cases below:
 | the Lead | before accepting a change, and when commissioning a fix from a nudge | the review's result; the commission carries the nudge |
 | the rule's writer | after writing or changing a rule file | `skill-rules` |
 | the rule's reviewer | reviewing a decision model | `decision-model-review` |
+| the skill orchestrator | when it carries a skill change through proof and assesses the writer's calls | `skill-orchestrator` |
+| the auditor | when it reads skills to decide what to create, update or skip, read-only | `skill-audit` |
 
 ## Evidence
 
@@ -134,16 +141,25 @@ The proof posture each run can honestly claim goes in the verification part.
 - **R3. A rule can nudge without deciding.** A standard that one chunk can't settle can still have a rule. Its nudge says what to check and where to read, and never claims a breach.
 - **R4. Generalization and placement read every section.** Their chunks cover every section of a skill and its references, from the H1's introduction down, tables included, each with the files its own text loads.
 - **R5. What wasn't read is shown, apart from what was decided.** As gaps, the agent sees:
-  - per rule, the files under review where the rule read nothing;
+  - per rule, the files under review inside the rule's declared denominator where the rule read nothing. A file outside it, such as a reference for a rule that reads only `SKILL.md` descriptions, is out of scope, not a gap;
   - each piece whose model view a cap cut;
   - every unresolved selection;
   - every incomplete part or skipped rule.
 
   Apart from the gaps, it sees what each gate decided was outside its standard, with the gate's answer, so a wrong exclusion can be challenged without treating every exclusion as unknown.
-- **R5a. A nudge that isn't a decided breach never fails a run,** under any warning limit. A run that is invalid, cancelled or incomplete says so, whatever its nudges. Mechanical `error` rules keep their authority to block.
+- **R5a. A `check` never fails a run,** under any warning limit.
+  - An `uncertain` result keeps its own run status: decisions are owed to the agent, so the run isn't clean, and it isn't a failure either.
+  - A run that is invalid, cancelled or incomplete says so, whatever its nudges.
+  - A `breach` blocks only when every step on its path was mechanical. A path that a judged gate let through never blocks on its own, even when its last step is a mechanical check.
 - **R5b. Every judged result keeps its answers,** passes and gate exclusions included, so the agent can see why. The rule's identity, the report's outcome, Jev's answers and the agent's final call stay four distinct things.
 - **R6. A pass says one thing.** A pass tells the agent that one property held. No reader treats it as the skill meeting the standard as a whole.
-- **R7. Nudges are read, not obeyed.** An agent acting on a nudge reads its places and decides the broader question. A change that only makes the rule's own property hold doesn't close the nudge, and a commission built from a nudge passes the nudge on rather than "make it pass".
+- **R7. Nudges are read, not obeyed.** An agent acting on a nudge reads its places and decides the broader question. It records one of:
+  - fixed;
+  - kept, with the reason;
+  - routed to the owner of the broader concern;
+  - open, naming the evidence it lacks.
+
+  A change that only makes the rule's own property hold doesn't close the nudge. A commission built from a nudge passes the nudge on, rather than "make it pass". Each rule stays narrow: a nudge about one property is integrated with other rules' nudges by the agent, and no single rule has to raise every concern about its line.
 - **R8. Rule files get rules.** The JSON rule files are checked by rules whose nudges go to the rule's writer and the rule's reviewer.
 - **R9. The engine stays generic.** Nothing in `sunstack-tools` knows about skills. Chunks, nudge kinds and related locations are declared by the caller's config and rules, and any engine gap is fixed in the engine, not worked around in the skills or rules.
 - **R10. Each skill makes its path extremely clear.** Every skill in the change teaches its own part with a worked example and a completion check an agent can follow without this design's history.

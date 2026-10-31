@@ -4,7 +4,7 @@
 
 ## Targets, owners and runs
 
-Seven runs, one skill each, in this order. Each later run cites the contract the earlier ones teach, and never restates it.
+Nine runs, one skill each, in this order. Each later run cites the contract the earlier ones teach, and never restates it. Runs 8 and 9 were added after the Advisor's view 3 found two more consumers that still narrow the old reading.
 
 | Run | Skill (plugin) | Why it changes | Kind |
 | --- | --- | --- | --- |
@@ -15,6 +15,8 @@ Seven runs, one skill each, in this order. Each later run cites the contract the
 | 5 | `skill-review` (skill-authoring) | the review lead acts on nudges; transfer reaches nudged lines | update |
 | 6 | `skill-design` (skill-authoring) | its verification step routes standards to `check` rules | update |
 | 7 | `domain-skill-crafting` (skill-authoring) | the placement standard, and the rules folder: config, rebuilt `rule.generalization`, the placement rule, rule-file rules | update |
+| 8 | `skill-orchestrator` (skill-authoring) | runs the rules and assesses the writer's calls with the old finding/uncertain/gap shape (`SKILL.md:43`, `:52`, `:88`, `:104`) | update |
+| 9 | `skill-audit` (skill-authoring) | runs the rules read-only and flags only errors, confirmed findings or uncertain-as-breach (`SKILL.md:42`), so a `check` has no intake | update |
 
 The runner in `tests/skills` (`lib/skill-rules/report.ts`) is tooling, not a skill. It changes in the same pull request as run 1 and is listed under coordination.
 
@@ -31,6 +33,8 @@ The engine change has its own design in `sunstack-tools`. Runs 1, 2 and 7 depend
 | 5 `skill-review` | unchanged | the routing line, unchanged in meaning | `implementation-review.md`, `checks/transfer.md` | static checks |
 | 6 `skill-design` | unchanged | step 5 | none | static checks |
 | 7 `domain-skill-crafting` | unchanged | unchanged | `calls-and-placement.md` (the placement standard); `rules/` | rule run on the anchor and countercases, development and held-out |
+| 8 `skill-orchestrator` | unchanged | the rule-run step, the assessment step, the result template, the blocker | none | static checks |
+| 9 `skill-audit` | unchanged | the rule-run step and its flag rule; the result surface | none | static checks |
 
 No description changes, so no trigger trial applies.
 
@@ -97,11 +101,15 @@ No description changes, so no trigger trial applies.
 ### Run 3: `decision-model-review`
 
 - **`SKILL.md` step 1.** The profile "a kit rule" becomes "a lint rule" (D11).
-- **Step 3.** A seventh check loads `references/checks/nudge-and-receiver.md`. Would the nudge help the receiving agent make the right broader call? That is judged apart from whether the tree classifies the piece correctly. The check covers:
+- **Step 3.** A seventh check loads `references/checks/nudge-and-receiver.md`, run only for the lint-rule profile whose output goes to an agent; native callers and selections skip it with that reason. Would the nudge help the receiving agent make the right broader call? That is judged apart from whether the tree classifies the piece correctly. The check covers:
   - every `breach` or `check` route says what was observed, the standard, the claim and where to read;
   - no route turns "can't settle" into `pass`;
-  - a place the run didn't collect is named as a direction, never as evidence;
-  - its bad control: #187's `call.completeness` nudge, which pointed at the right line with a question that led to polishing it.
+  - the basis is honest: a judged gate followed by a mechanical step is not presented as established;
+  - a place the run didn't collect is named as a direction, never as evidence.
+- **Its controls:**
+  - **Bad:** a commission or reading that narrows a nudge into "make it pass", or drops its read-next places, as #187's commission did.
+  - **Good:** the `call.completeness` rule on line 17, which observed a real missing return.
+  - **Composition:** the same line passing `call.completeness` while the placement rule gives `check`, for the agent to integrate.
 - **`references/checks/state-and-evidence.md`.**
   - The chunk holds what each question needs, including the loaded files a placement or generalization question depends on.
   - Collected completeness and model-visible completeness are both checked.
@@ -129,15 +137,37 @@ No description changes, so no trigger trial applies.
 
 ### Run 7: `domain-skill-crafting`
 
-- **`references/calls-and-placement.md`.** The placement standard, marked:
+- **`references/calls-and-placement.md`.** The placement standard, marked (D16):
 
-  > A skill meant for any repository routes no step, branch or load to one product's own workflow, commands, state files or machine paths; that workflow lives in the product's repository, and the skill names a product only as a labelled example.
+  > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths. That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example.
 - **`rules/skill-rules.config.json`.**
   - A `section` kind: each section's own text from the H1 down, tables included, with its own loads, and the parent heading for context.
   - The rule-file checked files and a JSON evidence kind, once the engine admits JSON (D7).
 - **`rules/generalization.rules.json`.** `rule.generalization` is rebuilt over the `section` kind.
 - **`rules/calls-and-placement.rules.json`.** The placement rule, with claim `check`.
 - **Rule-file rules,** on `domain-decision-models`' standards. Their markers sit on that skill's own wording, and their rulebook pair goes in the same config (D6).
+
+### Run 8: `skill-orchestrator`
+
+- **The rule-run step and the assessment step.** The orchestrator reads the account (fixed, kept, routed or open, with what was checked), the four gap kinds and decided exclusions. It assesses whether each call answered the broader question, and never counts a nudge that went quiet after a local edit as closed.
+- **The result template and the blocker** carry the new reading in place of the old finding/uncertain/gap fields.
+
+### Run 9: `skill-audit`
+
+- **The rule-run step.** It stays read-only. A confirmed `check` nudge becomes a grounded signal for intake, and one it can't settle stays an open item naming the missing evidence. It never invents a fix.
+- **The flag rule** admits confirmed `check` nudges as signals, next to errors and confirmed breaches.
+- **The result surface** carries the confirmed nudges, open items and gaps.
+
+## Consumers, the stage they load, and what they return
+
+| Consumer | Loads | Returns | Authority |
+| --- | --- | --- | --- |
+| `skill-creation` step 4 | `running-rules.md` (act stage) | the account per nudge; gaps; exclusions | fixes inside its run's boundary; routes the rest to whoever commissioned it |
+| `skill-review` implementation stage | `running-rules.md` (act stage) | the account per nudge as candidates; gaps into per-check statuses | verifies; never fixes |
+| `skill-orchestrator` | `running-rules.md` (act stage) | its assessment of each account | sends back for correction; never accepts a quieted nudge as closed |
+| `skill-audit` | `running-rules.md` (act stage) | confirmed nudges as signals; open items; gaps | read-only |
+| `skill-rules` (writing a rule) | `rule-design.md` (author stage) | the rule's design | writes rules |
+| `decision-model-review` | `checks/nudge-and-receiver.md` (review stage), plus `domain-decision-models` (decide stage) | findings with anchors | reviews; never edits |
 
 ## Calls and references
 
@@ -186,6 +216,13 @@ Each row is the default taken. The owner may strike any row.
 | D11 | The word "kit" goes from the skills' text: "a kit rule" becomes "a lint rule" | The owner asked "what is a kit"; the word means nothing to a reader without our history. |
 | D12 | The placement rule claims `check`, never `breach` | Whether a product's scope was adopted, and where its workflow lives, are outside the chunk. |
 | D13 | "Related locations" uses the provisional answer in the Requirements | It's the owner's open meaning 1; the row is struck if they answer differently. |
+| D3a (31 Oct, amends D3) | "unread" counts only files inside the rule's declared denominator | The Advisor's control: 210 reference files have no `skill` pieces by design, so a bare join would give every description rule 210 false gaps. |
+| D6a (31 Oct, amends D6) | Rule-file rules cover: a question naming no field, a question asking two things, criteria that disagree with the task. An omitted in-between route is not a defect. | The Advisor's nine admission probes on 0.5.0: the check accepts the first three, and routes an omitted override to `uncertain` by default (`rulebook_admission.rs:281, 318, 346`). |
+| D10a (31 Oct, amends D10) | The spike maps 0.5.0's `warn` finding to the intended `check` and doesn't count it as proof of the new output or exit. It anchors at the section's start, not line 17. It leaves the description case out, since section bodies omit frontmatter. Expectations are frozen before results are read. | Today's engine can't give `check` or an exact-line anchor for a section-sized subject. The expectations file was written at 16:12, after the run started at 16:05 and before any result was read; the slip is recorded in it. |
+| D14 | `uncertain` keeps its own run status (exit 5); only `check` is promised never to fail | The agent owes decisions on an uncertain piece, so the run isn't clean; that is different from a nudge to look. This settles the contradiction the Advisor found between R5a and the specification. |
+| D15 | Basis comes from every step on the path; an `error` blocks only on an all-mechanical path | A judged gate followed by a mechanical check would otherwise launder a model's call into automatic authority (the Advisor's countercase). |
+| D16 | The placement standard separates one product's own application workflow from tools, platforms, domain vocabulary, this toolkit's infrastructure and labelled examples. It has no "adopted scope" escape. | The countercases must follow from the standard's wording (the Advisor's control: `claude plugin validate .`). The adopted-scope escape stays out by the owner's direction: "skills for agentstudio shodukl be in agent stkudio repo". |
+| D17 | `call.completeness` stays a valid narrow rule. The bad control is a narrowing commission or reading, and the composition case shows two rules on one line. | Making one rule raise every concern would undo atomicity. #187's failure was the commission and the missing placement rule (the Advisor, view 3 point 1). |
 
 ## Coordination
 
@@ -200,7 +237,7 @@ Each row is the default taken. The owner may strike any row.
 
 | Run | State |
 | --- | --- |
-| 1-7 | proposed |
+| 1-9 | proposed |
 
 ## Review record
 
