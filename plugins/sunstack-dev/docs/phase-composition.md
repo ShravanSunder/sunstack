@@ -22,13 +22,14 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
+| decision-model-review | 89 | `domain-decision-models`, `review-schema`, `state-and-evidence`, `questions`, `primitives-and-statistics`, `policy-and-composition`, `proof-and-claims`, `patterns-and-capability` | none | none | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
 | docs-maintain | 119 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
 | implement-plan | 44 | `canonical-implementation-plan`, `execution-and-proof`, `practices-preflight`, `practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `practices-cleanup` | none | none |
 | implementation-handoff | 94 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
 | implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
-| implementation-review | 81 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `proof-challenge`, `focused-reviewer` | none | none |
+| implementation-review | 83 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `decision-model-review`, `proof-challenge`, `focused-reviewer` | none | none |
 | plan-handoff | 78 | `canonical-implementation-plan` | `handoff-template` | none | none |
 | plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 200 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
@@ -173,6 +174,19 @@ flowchart LR
 - Cites in its references: none
 - Returns: none
 
+### decision-model-review
+
+- Lines: 89
+- Always loads:
+  - domain: `domain-decision-models`
+  - own reference: `references/checks/review-schema.md`, `references/checks/state-and-evidence.md`, `references/checks/questions.md`, `references/checks/primitives-and-statistics.md`, `references/checks/policy-and-composition.md`, `references/checks/proof-and-claims.md`, `references/checks/patterns-and-capability.md`
+- Loads when a condition holds:
+  - none
+- Named without a load call: `practices-manage-agents`, `implementation-review`
+- Cites in `SKILL.md`: none
+- Cites in its references: none
+- Returns: none
+
 ### discuss-clarify-mental-models
 
 - Lines: 162
@@ -255,11 +269,12 @@ flowchart LR
 
 ### implementation-review
 
-- Lines: 81
+- Lines: 83
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/coordination-and-chunking.md`, `references/lanes/lane-schema.md`, `references/lanes/spec-compliance.md`, `references/lanes/chunk-reviewer.md`, `references/lanes/dispel.md`, `references/finding-and-reduction.md`
 - Loads when a condition holds:
+  - phase: `decision-model-review`
   - own reference: `references/lanes/proof-challenge.md`, `references/lanes/focused-reviewer.md`
 - Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `references/reviewing-implementation.md`, `implement-plan`
 - Cites in `SKILL.md`: none
