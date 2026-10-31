@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>skill-rules systems: design set</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">skill-rules systems</a>
+    <a href="orchestration.html">Orchestration</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="skill-design.html">Skill design</a>
+    <a href="skill-verification.html">Skill verification</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>skill-rules systems: design set</h1>
+
+<p>This change teaches agents to build a checked rule, or any set of questions a model answers for code, as a decision model. Each part is its own design: the evidence, single-proposition questions, a tree that code walks, a policy chosen from labelled costs, and proof against a baseline. Three skills carry it:</p>
+<ul>
+<li><code>domain-decision-models</code> (new, hidden, <code>sunstack-dev</code>) holds the practice;</li>
+<li><code>skill-rules</code> (rewritten, <code>skill-authoring</code>) runs the workflow;</li>
+<li><code>decision-model-review</code> (new, <code>sunstack-dev</code>) reviews a model with checks that can fail.</li>
+</ul>
+<p>Two routing lines, in <code>skill-review</code> and <code>implementation-review</code>, send decision-model changes to the review. The <a href="orchestration.html">orchestration design</a> says how they fit together.</p>
+
+<ex-callout title="Where the set stands" tone="question" icon="clock">
+<p>The Advisor validated the orchestration in four rounds and closed its content checks of the skill design and skill verification. The Lead accepted the set. The formal design review returned a targeted revision; its findings are corrected, and this snapshot adds the owner's O4 decision and the redrawn engine and flow diagrams for the review lead's next check. No skill file has changed.</p>
+<p>The decisions are in <a href="orchestration.html#orchestration--9-decisions">orchestration §9</a>, with O4's analysis in <a href="skill-design.html#skill-design--decision-skill-authoring-s-standalone-contract-o4-decided-option-a">skill design</a>.</p>
+</ex-callout>
+
+<h2 id="walkthrough">Reading the set</h2>
+<ol>
+<li><a href="orchestration.html">Orchestration</a>: the flow from a standard to a shipped rule, with who owns each step and which gate can fail. Start at <a href="orchestration.html#orchestration--3-the-end-to-end-flow-with-owners-and-gates">§3</a>.</li>
+<li><a href="requirements.html">Requirements</a>: why the change, in the owner's words, and what success looks like.</li>
+<li><a href="specification.html">Specification</a>: every obligation and standard as one sentence, with its transfer cases.</li>
+<li><a href="skill-design.html">Skill design</a>: what each of the five runs writes.</li>
+<li><a href="skill-verification.html">Skill verification</a>: how each part will be shown to hold, and what won't be.</li>
+</ol>
+</ex-document>
+</body>
+</html>
