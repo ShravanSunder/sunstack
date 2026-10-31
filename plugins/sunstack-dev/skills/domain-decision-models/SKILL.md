@@ -73,7 +73,7 @@ IF setting or judging a threshold, or claiming confidence, calibration or accura
 
 IF two or more answers combine into one outcome, load `references/policy-algebra.md` and return the selected composition, with its mandatory, veto and unknown routes and where weighting applies. Draw the tree from it.
 
-IF the decision needs menus, loops, state, escalation, training or effects beyond one fixed assessment, load `references/caller-workflows.md` and return the pattern chosen, with its entry conditions, execution profile, call and iteration bounds, exits, stop reason and measures. Plan the caller's code from it.
+IF producing the outcome takes a further request built from an earlier answer (a new menu, fetched detail, an escalation or a retry), or keeps state across runs, trains a model or causes an effect, load `references/caller-workflows.md` and return the pattern chosen, with its entry conditions, execution profile, call and iteration bounds, exits, stop reason and measures. Plan the caller's code from it.
 
 ## Policy
 
