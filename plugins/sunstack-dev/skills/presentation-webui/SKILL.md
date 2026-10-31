@@ -42,7 +42,7 @@ The table is ordered smallest to largest. Walk down it and stop at the first med
 
 MUST load `../../shared-references/markdown-presentation-baseline.md` and return the construct choices, every technical atom's rendering decision (inline, fenced, linked, or relocated out of a fixed-width row inside any fenced box layout), and its before-send check result.
 
-IF the request asks for a diagram or a drawing, or asks how several components, states or steps of a system work together, load `../../shared-references/diagram-semantics.md` and return the selected primary visual family with its reason, the disclosure sequence, and the stop/simplify result.
+IF the answer must show which records are the same thing and how many relate to how many, an entry-to-effect path, who sends what to whom in order, states and their transitions, or who owns what; or the request asks for a drawing; or the answer reports an investigation's findings, a design's options or an implementation's readiness, load `../../shared-references/diagram-semantics.md` and return the selected primary visual family with its reason, the disclosure sequence, and the stop/simplify result.
 
 IF Mermaid is a candidate medium, load `../../shared-references/mermaid-usage.md` to decide from the already-selected visual family and return the use-or-fallback decision with its trigger and the readability/semantics check result.
 
