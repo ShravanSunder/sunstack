@@ -54,6 +54,8 @@ Interpretation:
 - `perform-action AXPress` is the cleanest UIAX smoke test.
 - Coordinates cannot prove `actionOnly`; use coordinates only as a fallback when Accessibility metadata is unavailable.
 
+Stop probing once one of the paths above changes the app's state as expected, checked as its interpretation line says, or once all three have been tried; report which path worked, or that none did.
+
 ## Before/After State Capture
 
 Capture UI state before and after actions to verify changes:

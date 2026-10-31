@@ -11,7 +11,7 @@ When a change would touch both the shared stack and a producer, or the Separatio
 
 Choose the smallest loop first:
 
-- IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md` and follow its lifecycle commands.
+- IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md`, follow its lifecycle commands, and return the result each command reported, or the gap that stopped it.
 - IF the work touches producer requirements, load `references/producer-contract.md` and return the requirements that apply.
 - IF the work touches resource labels, marker/state-file keys, or service names, load `references/resource-naming.md` and return the names and keys that apply.
 - IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.
