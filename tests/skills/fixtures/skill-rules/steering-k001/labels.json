@@ -48,5 +48,50 @@
     "outcome": "pass",
     "line": null,
     "source": "sol-settled"
+  },
+  "case-011": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-012": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-013": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-014": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-015": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-016": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-017": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-018": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-019": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
   }
 }

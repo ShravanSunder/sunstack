@@ -15,6 +15,26 @@
               ],
           },
           { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
+          {
+            "not":
+              {
+                "all":
+                  [
+                    { "matches": "numbered-item" },
+                    {
+                      "inside":
+                        {
+                          "any":
+                            [
+                              { "matches": "numbered-heading-section" },
+                              { "matches": "step-heading-section" },
+                            ],
+                          "stopBy": "end",
+                        },
+                    },
+                  ],
+              },
+          },
         ],
     },
 }
@@ -90,6 +110,38 @@
             "has": { "kind": "atx_heading", "regex": "^##\\s+", "stopBy": "neighbor" },
           },
           { "not": { "inside": { "matches": "quoted", "stopBy": "end" } } },
+        ],
+    },
+}
+---
+{
+  "id": "reference-opening",
+  "language": "Markdown",
+  "files": ["**/references/**/*.md"],
+  "rule":
+    {
+      "any":
+        [
+          {
+            "kind": "paragraph",
+            "inside":
+              {
+                "kind": "section",
+                "has": { "kind": "atx_heading", "regex": "^#\\s+", "stopBy": "neighbor" },
+              },
+          },
+          {
+            "kind": "list_item",
+            "inside":
+              {
+                "kind": "list",
+                "inside":
+                  {
+                    "kind": "section",
+                    "has": { "kind": "atx_heading", "regex": "^#\\s+", "stopBy": "neighbor" },
+                  },
+              },
+          },
         ],
     },
 }
