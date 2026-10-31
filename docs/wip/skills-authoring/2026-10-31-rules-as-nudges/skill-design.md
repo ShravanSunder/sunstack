@@ -298,4 +298,8 @@ Why this order: the skill text cites the engine's field names, so it waits for t
 
 ## Review record
 
-Pending: the Advisor's challenge first, then `skill-review` at its design stage.
+- **Co-design challenge:** the 🦉 Advisor (`codex-local/01a14e6a`), views 1 to 5 and two experiments; closed with no remaining substantive objection at `c867d46d`. Its check of the four later commits (`c867d46d..4b85a656`) is pending as view 6.
+- **Design review 1:** `skill-review` design stage, review lead 🔎 `codex-local/01a193be` (OpenAI Sol, xhigh) with three stage reports and a `decision-model-review` reviewer, at `4b85a656`: targeted revision, five verified findings (F1 blocker, F2 to F5 important).
+- **Recheck:** at `9e26addc`, F1 to F5 closed, no new defect. **Verdict great; implementation decision `accepted-to-implement`.** Open findings 5 → 0.
+- **Records:** `design-review-1.md` and `design-review-1-recheck.md` in the owner's memory-logs under `skill-rules/rules-purpose/`.
+- **Still unavailable, not passed:** engine and rule implementation proof, and the receiving agent's behavior (evals). Gate 1 of the work plan also needs the engine design accepted.
