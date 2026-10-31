@@ -56,7 +56,7 @@ A chunk is the evidence one rule's decision reads about one place. The rule name
 A rule's chunk design states:
 - **the subject:** what one piece is, such as a load line, or a section's own text;
 - **the denominator:** which files and which pieces the rule scans, so "unread" has a meaning;
-- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings. Not the owning skill's description: the 2x2 probe (D18b) showed it can launder a product's scope, because a description that names products reads as declaring them in scope. For placement, the reliable chunk is the load itself, the calling section with the loaded file's opening, which nudged on line 17 in all six probe conditions; a reference file's sections judged alone stayed uncertain or passed in every condition. The description is judged as its own subject;
+- **the context and edges:** the caller, the enclosing section, the loaded files, the siblings, and any other context a rule's questions need, chosen per rule and tested on that rule's cases. For the placement rule, the 2x2 probe (D18b, D18c) showed the skill's description as context suppressed product nudges, because a description that names products reads as declaring them in scope; so placement doesn't use it as context, and judges the description as its own subject. That finding is about the placement graph, not a rule for every rule;
 - **the fields** each question reads;
 - **the budget:** the size cap and what a cut means for the answer.
 
