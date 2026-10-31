@@ -136,6 +136,36 @@ Bad:  the same answer forced to pass at ≥ .5
 
 An uncertain answer is a successful assessment with too little separation. It differs from a failed request (incomplete) and from missing evidence (a gap).
 
+## A nudge tree: when the evidence can't settle the standard
+
+The standard: a skill meant for any repository routes no step, branch or load into one product's own application workflow, which lives in that product's repository; a tool used through its supported interface, domain vocabulary, the toolkit's own infrastructure and a product named only as a labelled example are not that. The piece is the introduction of `sunstack-dev`'s `ops-observability-stack/SKILL.md`: its own text, which holds line 17, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.", and the openings of the files it loads. The evidence can show the route into AgentStudio's own loop. It can't show where that loop should live: no piece holds another repository.
+
+```text
+Good: one request {routes_product?, example_or_own_infrastructure?} + a locator over the body's lines in the piece
+      routes_product? → no: pass (no route into a product's workflow on this text and its loads)
+                      → yes: example_or_own_infrastructure? → yes: pass
+                                                             → no: nudge at the located line, warn:
+                                                                   "read the loaded files, then decide whether it belongs
+                                                                    in that product's own repository"
+      either between its bars → uncertain
+Bad:  belongs in this repository? → no: finding "move this to the product's repository"
+      (claims what no piece holds)
+Bad:  belongs in this repository? → between its bars → pass
+      (a question the evidence can't settle, reported as held)
+```
+
+On line 17, the model answers yes to the first question and no to the second, and the locator picks `L17` above its bar. Code ends in a `warn` finding at line 17 whose path read the model's answers, so its basis is judged. The agent reads `agentstudio-loop.md` and decides.
+
+How this tree departs from a tree that decides its standard:
+
+- **Its verdict question asks what the evidence shows,** a route into one product's own workflow, never the standard's own verdict, where that workflow belongs.
+- **Its finding is a nudge:** the message says what to check and where to read, the route ends at `warn`, and nothing in it says the line is wrong.
+- **Its `pass` routes settle only what the evidence shows:** no route into a product's workflow, or every one a labelled example or the toolkit's own.
+- **Each exemption sits on the question that owns it.** The routing question's criteria carry the tool and vocabulary exemptions, so `claude plugin validate .` in a Claude plugin's section answers no there; the example question's carry labelled examples and the toolkit's own stack.
+- **Its line comes from a locator, not a pattern.** The section's generic loads on lines 14 to 16, `producer-contract.md` among them, precede line 17, so "the first load line" points at the wrong one. The locator is an ordinary Choice whose options code built from the piece's own lines and the validator admits; the model only chooses, and below its bar the finding stays at the field's first line, marked default.
+
+A tree with a question gate shows its drop the same way: the piece ends `not_applicable` with the gate's answer kept, so an agent who would decide the piece's kind otherwise can say so.
+
 ## A hierarchy is caller code
 
 ```text

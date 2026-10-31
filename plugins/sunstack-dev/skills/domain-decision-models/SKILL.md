@@ -18,6 +18,8 @@ A decision model is a measurement instrument with code as the judge. The model m
 
 Rewording a question doesn't move a threshold, and moving a threshold doesn't change what was asked. A tree buys named properties, routes and precedence kept in code, and a path that shows how code reached its outcome. A wrong outcome narrows to candidate nodes: their evidence, their question or their threshold. The path doesn't prove a single cause, and it doesn't show the model's reasoning.
 
+Who reads the outcome changes what it must say. When code acts on it, as a `run_judgments` caller's does, the outcome is that code's input, and nothing below changes for it. When an agent reads it, as it reads a lint rule's, the outcome is a nudge: what the model measured, where, and what to check, for the agent to decide. A decided breach is one kind of nudge; a grounded reason to look, which the evidence can't settle, is another. So a tree whose outcome goes to an agent must never say more than its evidence shows: the policy section says how its routes end.
+
 ## State and evidence
 
 - The evidence holds what the question needs to judge: the antecedent, the attached block, the neighbouring text, the opening. Missing evidence is reported as an evidence gap, never read as the property being absent.
@@ -71,7 +73,7 @@ IF setting or judging a threshold, or claiming confidence, calibration or accura
   None of these adds a request inside a static rule graph, and none licenses resampling until a desired answer appears. A question used later in an `if` is not a dependency.
 - A rule's graph is static: it can't build menus, keep alternatives, loop or hold state. A workflow that needs menus, loops, state, escalation, training or effects is caller code over bounded assessments. It states its entry conditions, call and iteration bounds and stopping reason, records each cap exit, and measures what it loses before verification.
 
-IF two or more answers combine into one outcome, load `references/policy-algebra.md` and return the selected composition, with its mandatory, veto and unknown routes and where weighting applies. Draw the tree from it.
+IF two or more answers combine into one outcome, load `references/policy-algebra.md` and return the selected composition, with its mandatory, veto and unknown routes, any nudge route and its precedence, and where weighting applies. Draw the tree from it.
 
 IF producing the outcome takes a further request built from an earlier answer (a new menu, fetched detail, an escalation or a retry), or keeps state across runs, trains a model or causes an effect, load `references/caller-workflows.md` and return the pattern chosen, with its entry conditions, execution profile, call and iteration bounds, exits, stop reason and measures. Plan the caller's code from it.
 
@@ -83,6 +85,11 @@ IF producing the outcome takes a further request built from an earlier answer (a
 - Mandatory obligations and vetoes are decided before any weighted aggregation, and no score compensates for a required fact that failed or is unknown.
 - An unknown combines in one of two ways: by three-way logic (unknown and false is false; unknown and true stays unknown), or by an explicit review policy. An invalid or unavailable reply stays incomplete.
 - Coexisting defects are separate Nouls with a declared first-failure order, so the finding names the first that fails; they never compete as labels of one Choice.
+- When the outcome goes to an agent:
+  - A route whose evidence can't settle its proposition ends in a nudge (a finding whose message says what to check and where to read) or in `uncertain`, never in `pass`. A pass tells the agent the property held; reached on evidence that can't show it, it tells the agent something nobody measured.
+  - A gate's drop keeps its answer. A drop is a decision, not missing coverage, so the agent sees the piece was excluded and why, and can challenge a wrong exclusion.
+
+  Good: "does this line route into one product's own workflow?" → yes, not a labelled example → a nudge to read the loaded file and decide where it belongs. Bad: "does this workflow belong in this repository?" asked of a chunk that holds no other repository, with its in-between answer routed to `pass`.
 
 ## Proof, records and claims
 
