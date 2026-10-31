@@ -1,6 +1,6 @@
 ---
 name: principle-justify-the-complexity
-description: "Use when adding or keeping a layer, abstraction, option, mechanism, or second path, or when sequencing a refactor or rewrite. Double-check that each piece of complexity is justified by an outcome that needs it now; remove the rest and cut over completely."
+description: "Use when adding or keeping a layer, abstraction, option, mechanism, or second path, or when sequencing a refactor or rewrite."
 disable-model-invocation: true
 ---
 

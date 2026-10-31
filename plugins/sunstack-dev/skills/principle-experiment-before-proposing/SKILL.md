@@ -1,6 +1,6 @@
 ---
 name: principle-experiment-before-proposing
-description: "Use when running something would settle a question faster than arguing about it: an unknown API behavior, a performance claim, which of two designs works better, how a prompt or classifier performs. Capture a baseline, fit the rigor to the stakes, and measure the real artifact."
+description: "Use when running something would settle a question faster than arguing about it: an unknown API behavior, a performance claim, which of two designs works better, how a prompt or classifier performs."
 disable-model-invocation: true
 ---
 

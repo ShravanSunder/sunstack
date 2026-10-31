@@ -1,6 +1,6 @@
 ---
 name: principle-hold-the-scope
-description: "Use when a new request arrives, a design or plan comes back from someone else, or work is about to be called done. State who it is for, what success looks like, and what stays out; then check that every owner line is carried, nothing is invented, and nothing is weakened."
+description: "Use when a new request arrives, a design or plan comes back from someone else, or work is about to be called done."
 disable-model-invocation: true
 ---
 

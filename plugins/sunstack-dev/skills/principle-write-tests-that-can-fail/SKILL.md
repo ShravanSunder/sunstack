@@ -1,6 +1,6 @@
 ---
 name: principle-write-tests-that-can-fail
-description: "Use when writing, changing, or keeping a test for a fix, a feature, or a refactor, or when a claim rests on tests passing. Name the wrong behavior the test must catch, take the expected value from somewhere independent, run it at the cheapest layer where that wrong behavior can make it fail, and see it fail for the right reason."
+description: "Use when writing, changing, or keeping a test for a fix, a feature, or a refactor, or when a claim rests on tests passing."
 disable-model-invocation: true
 ---
 

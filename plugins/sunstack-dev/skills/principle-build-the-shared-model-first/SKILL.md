@@ -1,6 +1,6 @@
 ---
 name: principle-build-the-shared-model-first
-description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast. Form your own picture, restate it specifically enough to be corrected, and settle the gaps before building."
+description: "Use when about to build on someone else's picture (a request, a spec, a resumed plan, another agent's handback), or when agreement on something complex comes too fast."
 disable-model-invocation: true
 ---
 

@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-10-31 Step 5 fixes: principle descriptions](2026-10-31-step5-fixes-principle-descriptions.md)
 - [2026-10-31 Step 5 fixes: phase skills](2026-10-31-step5-fixes-phase-skills.md)
 - [2026-10-31 Step 5 fixes: skill-crafting standards](2026-10-31-step5-fixes-skill-crafting.md)
 - [2026-10-31 Skill rules: kit precision after the step-5 run](2026-10-31-skill-rules-kit-precision.md)
