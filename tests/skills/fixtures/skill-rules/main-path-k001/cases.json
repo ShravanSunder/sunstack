@@ -208,5 +208,247 @@
       "path": "case-010/SKILL.md",
       "line": 14
     }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+      "startLine": 99,
+      "endLine": 105,
+      "fieldLine": 105
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 7
+    }
+  },
+  {
+    "id": "case-012",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+      "startLine": 125,
+      "endLine": 129,
+      "fieldLine": 127
+    },
+    "excerpt": {
+      "path": "case-012/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-013",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/role-verifier/SKILL.md",
+      "startLine": 32,
+      "endLine": 42,
+      "fieldLine": 41
+    },
+    "excerpt": {
+      "path": "case-013/SKILL.md",
+      "line": 10
+    }
+  },
+  {
+    "id": "case-014",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/docs-maintain/references/workflows.md",
+      "startLine": 1,
+      "endLine": 81,
+      "fieldLine": 51
+    },
+    "excerpt": {
+      "path": "case-014/references/workflows.md",
+      "line": 51
+    }
+  },
+  {
+    "id": "case-015",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/role-implementer/SKILL.md",
+      "startLine": 24,
+      "endLine": 33,
+      "fieldLine": 33
+    },
+    "excerpt": {
+      "path": "case-015/SKILL.md",
+      "line": 10
+    }
+  },
+  {
+    "id": "case-016",
+    "set": "development",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/merge-gates.md",
+      "startLine": 1,
+      "endLine": 29,
+      "fieldLine": 20
+    },
+    "excerpt": {
+      "path": "case-016/references/merge-gates.md",
+      "line": 20
+    }
+  },
+  {
+    "id": "case-017",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "startLine": 1,
+      "endLine": 23,
+      "fieldLine": 19
+    },
+    "excerpt": {
+      "path": "case-017/SKILL.md",
+      "line": 19
+    }
+  },
+  {
+    "id": "case-018",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/practices-manage-agents/references/execution-forms.md",
+      "startLine": 1,
+      "endLine": 41,
+      "fieldLine": 35
+    },
+    "excerpt": {
+      "path": "case-018/references/execution-forms.md",
+      "line": 35
+    }
+  },
+  {
+    "id": "case-019",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/references/background-monitoring.md",
+      "startLine": 1,
+      "endLine": 135,
+      "fieldLine": 119
+    },
+    "excerpt": {
+      "path": "case-019/references/background-monitoring.md",
+      "line": 119
+    }
+  },
+  {
+    "id": "case-020",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+      "startLine": 22,
+      "endLine": 40,
+      "fieldLine": 39
+    },
+    "excerpt": {
+      "path": "case-020/SKILL.md",
+      "line": 18
+    }
+  },
+  {
+    "id": "case-021",
+    "set": "held-out",
+    "supplement": "step5-precision",
+    "evidence": {
+      "kind": "branch",
+      "field": "line"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "f747b37e71100776366058ac0737925d78945497",
+      "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+      "startLine": 312,
+      "endLine": 329,
+      "fieldLine": 325
+    },
+    "excerpt": {
+      "path": "case-021/SKILL.md",
+      "line": 14
+    }
   }
 ]

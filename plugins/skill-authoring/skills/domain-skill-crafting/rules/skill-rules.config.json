@@ -57,7 +57,7 @@
             },
             "criteria": {
               "true": "The direct body directs actions an agent performs during a run, with an intelligible progression from earlier work or admission through later work or a returned result, including a branch-specific recipe. Admission/routing and ordered verification/checking procedures count; not every action must mutate files and branches may stop early. Alternatively, a numbered or Step heading and its direct instructions constitute one action stage of that run.",
-              "false": "The list enumerates independent rules, principles, safety/quality conditions, options, references, examples or templates, rather than a procedure that advances the run. Numbering, imperative verbs or a nearby workflow alone do not establish progression."
+              "false": "The list enumerates independent rules, principles, safety/quality conditions, options, references, examples or templates, rather than a procedure that advances the run. Numbering, imperative verbs or a nearby workflow alone do not establish progression. A list that restates at a glance the steps the outline shows the file teaching under their own step headings is a summary, not the workflow, and a list whose items are the parts of one reply, message or artifact the agent gives at once is that output's contents, not stages of a run."
             }
           },
           "yes_at_or_above": 0.7,
@@ -186,12 +186,21 @@
       },
       "reference_section": {
         "rule": "reference-section",
+        "max_chars": 8000,
         "fields": {
           "heading": {
             "from": "first_line"
           },
           "body": {
             "from": "remainder"
+          },
+          "outline": {
+            "from": "same_file",
+            "rule": "heading-line"
+          },
+          "opening": {
+            "from": "same_file",
+            "rule": "reference-opening"
           }
         }
       }
