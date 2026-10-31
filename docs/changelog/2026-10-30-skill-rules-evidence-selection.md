@@ -6,7 +6,7 @@
 - Over all 74 skills, 116 of 126 candidate sections were selected, 6 were not and 4 were uncertain. Against the prototype's frozen labels, precision is 100% and recall 96.7%. Steps go from 201 to 298, and the skills that had none now have steps (for example `implement-plan` 11, `plan-implementation` 11, `orchestrator-implementation-goal` 14).
 - The guidance rules (`rule.generalization`, `guidance.positive`) read sentences inside a selected step or a `## Standards` section. This needs sunstack 0.4.0 (`"within": ["step", "standards_section"]`).
 - The branch rule now also counts paragraph openers `If`, `if` and `when`, alongside `IF` and `When`: 65 more branch pieces. Mid-sentence conditions and `Otherwise` and `Unless` stay out.
-- New warning rule `main-path.spine`: for a skill whose numbered lists hold no workflow, it asks whether `SKILL.md` shows the all-run spine. It applies to 2 skills today, and both pass.
+- New warning rule `main-path.spine`: for a skill whose numbered lists hold no workflow, it asks whether `SKILL.md` shows the all-run spine. It applies to 2 skills today. Both passed on its earlier evidence; a live check on the corrected evidence is pending.
 - Unchanged, and held for the owner's decision: whether the call rule covers "read" and "open", branch openers beyond these five, whether sentence rules read a step's own text, and whether "Stop when…" counts as a completion.
 - Validation:
   - a full keyed run over the corpus on the 0.4.0 candidate engine, complete with nothing incomplete (later engine changes touched only error locations);
