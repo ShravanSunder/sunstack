@@ -9,7 +9,9 @@ import {
   listEvidence,
   reportSchema,
   repositoryRoot,
+  runRunner,
   runRunnerJudged,
+  saveConfig,
   saveRules,
   writeFixtureFile,
 } from "./skill-rules-test-fixture.ts";
@@ -77,6 +79,77 @@ describe("branch.condition routes every accepted opener (kit K001, main-path)", 
     expect(report.status.kind).toBe("nothing_selected");
     expect(report.results).toEqual([]);
     expect(result.requests).toHaveLength(0);
+  });
+});
+
+describe("the runner prints selection apart from rule verdicts", () => {
+  const flow =
+    "---\ndescription: Use when checking the runner.\n---\n\n# Sample\n\n## Flow\n\n1. Inspect the input.\n2. Return the result.\n";
+  const unresolved = /uncertain selection|incomplete selection/;
+
+  function mechanicalOnly(root: string): void {
+    // One mechanical rule, so any uncertainty or gap in the run comes from selection alone.
+    saveRules(root, { K001: kitEntry("descriptions-and-invocation", "K001") });
+    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", flow);
+  }
+
+  test("a selection-only uncertain candidate makes exit 5 and is named with its heading and probability", async () => {
+    // Wrong behavior: exit 5 with every rule count at zero uncertain and nothing saying why.
+    const root = createFixture();
+    mechanicalOnly(root);
+    const result = await runRunnerJudged(root, [], { c1: 0.5 });
+    expect(result.status, result.stderr).toBe(5);
+    const report = reportSchema.parse(result.report);
+    expect(report.status.kind).toBe("uncertain");
+    expect(report.uncertain).toEqual([]);
+    expect(result.stdout).toContain('"uncertain":0,"incomplete":0}');
+    expect(result.stdout).toContain(
+      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; what lies within it is unevaluated',
+    );
+    expect(result.stdout).toContain(
+      'Selection workflow_section: {"candidates":1,"asked":1,"selected":0,"not_selected":0,"uncertain":1,"incomplete":0}',
+    );
+    // The engine's JSON is kept as it came: the candidate is in its selections.
+    expect(report.selections.map((item) => [item.first_line, item.outcome.kind])).toEqual([
+      ["## Flow", "uncertain"],
+    ]);
+  });
+
+  test("a selection the provider fails makes exit 3 and names the candidate with its reason", async () => {
+    const root = createFixture();
+    mechanicalOnly(root);
+    // Nothing listens on port 9 (discard): every selection request fails at the provider.
+    saveConfig(root, {
+      decision_model: { model: "jev-latest", endpoint: "http://127.0.0.1:9/v1/systemone" },
+    });
+    const result = await runRunner(root, [], "synthetic-runner-test-key");
+    expect(result.status, result.stderr).toBe(3);
+    expect(reportSchema.parse(result.report).status.kind).toBe("incomplete");
+    expect(result.stdout).toContain(
+      'plugins/example/skills/sample/SKILL.md:7: incomplete selection workflow_section "## Flow", provider_failure; what lies within it is unevaluated',
+    );
+  });
+
+  test("a selected candidate prints counts only, and a rule list answered no is information, not a failure", async () => {
+    const selectedRoot = createFixture();
+    mechanicalOnly(selectedRoot);
+    const selected = await runRunnerJudged(selectedRoot, [], { c1: 0.95 });
+    expect(selected.status, selected.stderr).toBe(0);
+    expect(selected.stdout).toContain(
+      'Selection workflow_section: {"candidates":1,"asked":1,"selected":1,"not_selected":0,"uncertain":0,"incomplete":0}',
+    );
+    expect(selected.stdout).not.toMatch(unresolved);
+    expect(selected.stdout).not.toContain("no workflow_section selected");
+
+    const ruleListRoot = createFixture();
+    mechanicalOnly(ruleListRoot);
+    const ruleList = await runRunnerJudged(ruleListRoot, [], { c1: 0.1 });
+    expect(ruleList.status, ruleList.stderr).toBe(0);
+    expect(reportSchema.parse(ruleList.report).status.kind).toBe("clean");
+    expect(ruleList.stdout).not.toMatch(unresolved);
+    expect(ruleList.stdout).toContain(
+      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (1 not selected, 0 uncertain, 0 incomplete)",
+    );
   });
 });
 
@@ -177,15 +250,45 @@ describe("main-path.spine is asked only where numbered lists hold no workflow (k
     },
   );
 
-  test("the spine evidence is the body without its frontmatter, with the file's outline and candidates", async () => {
+  test("the spine question receives every input its wording names: the description, the outline and both first-line supplements", async () => {
+    // Wrong behavior: the frozen W002 question asks the judge to start from the description and read
+    // numbered and completion first lines, while its evidence carries none of them.
+    const root = createFixture();
+    saveRules(root, { K002: kitEntry("main-path", "K002") });
+    writeFixtureFile(
+      root,
+      "plugins/example/skills/sample/SKILL.md",
+      `${ruleList}\nDone when the result is stated.\n`,
+    );
+    const result = await runRunnerJudged(root, [], { c1: 0.1 });
+    expect(result.status, result.stderr).toBe(0);
+    const [spineRequest, ...rest] = ruleRequests(result.requests);
+    expect(rest).toEqual([]);
+    const state = z
+      .object({
+        state: z
+          .object({
+            body: z.string(),
+            outline: z.array(z.string()),
+            numbered_first_lines: z.array(z.string()),
+            completion_first_lines: z.array(z.string()),
+          })
+          .passthrough(),
+      })
+      .passthrough()
+      .parse(spineRequest).state;
+    expect(state.body).toContain("description: Use when checking spines.");
+    expect(state.body).toContain("Apply the lens");
+    expect(state.outline).toEqual(["# Sample", "## Core rules"]);
+    expect(state.numbered_first_lines).toEqual(["1. Keep it short.", "2. Name the owner."]);
+    expect(state.completion_first_lines).toEqual(["Done when the result is stated."]);
+  });
+
+  test("the spine evidence keeps its gate fields: candidates and selected workflows", async () => {
     const root = createFixture();
     writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", ruleList);
     const listing = await listEvidence(root, { c1: 0.1 });
     const piece = listing.pieces.find((item) => item.kind === "skill_body");
-    const body = JSON.stringify(piece?.fields.body);
-    expect(body).toContain("Apply the lens");
-    expect(body).not.toContain("description:");
-    expect(piece?.fields.outline).toMatchObject({ values: ["# Sample", "## Core rules"] });
     expect(piece?.fields.numbered).toMatchObject({ values: ["## Core rules"] });
     expect(piece?.fields.workflows).toMatchObject({ values: [] });
   });

@@ -22,6 +22,43 @@ const findingSchema = z
     message: z.string(),
   })
   .passthrough();
+// Selection (sunstack 0.3.0+): a selected kind's candidates and their outcomes, kept apart from rule
+// verdicts. Only a selected candidate becomes a piece; an unresolved one leaves its pieces unevaluated.
+const selectionOutcomeSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("selected"), yes: z.number() }).passthrough(),
+  z.object({ kind: z.literal("not_selected"), yes: z.number() }).passthrough(),
+  z.object({ kind: z.literal("uncertain"), yes: z.number() }).passthrough(),
+  z
+    .object({ kind: z.literal("incomplete"), reason: z.object({ kind: z.string() }).passthrough() })
+    .passthrough(),
+]);
+const selectionSchema = z
+  .object({
+    kind: z.string(),
+    where: locationSchema,
+    first_line: z.string(),
+    outcome: selectionOutcomeSchema,
+  })
+  .passthrough();
+export type Selection = z.infer<typeof selectionSchema>;
+const selectionCountsSchema = z.object({
+  candidates: z.number(),
+  asked: z.number(),
+  selected: z.number(),
+  not_selected: z.number(),
+  uncertain: z.number(),
+  incomplete: z.number(),
+});
+type SelectionCounts = z.infer<typeof selectionCountsSchema>;
+const fileCountSchema = z
+  .object({
+    file: z.string(),
+    kinds: z.record(
+      z.string(),
+      z.object({ selection: selectionCountsSchema.optional() }).passthrough(),
+    ),
+  })
+  .passthrough();
 const diagnosticSchema = z
   .object({
     file: z.string().nullable(),
@@ -78,9 +115,42 @@ export const lintReportSchema = z
     ),
     skipped_rules: z.array(z.unknown()),
     diagnostics: z.array(diagnosticSchema),
+    selections: z.array(selectionSchema),
+    file_counts: z.array(fileCountSchema),
   })
   .passthrough();
 export type LintReport = z.infer<typeof lintReportSchema>;
+
+/** Totals per selected kind over every file the run built evidence for. */
+export function selectionTotals(report: LintReport): Map<string, SelectionCounts> {
+  const totals = new Map<string, SelectionCounts>();
+  for (const file of report.file_counts)
+    for (const [kind, count] of Object.entries(file.kinds)) {
+      if (!count.selection) continue;
+      const total = totals.get(kind) ?? {
+        candidates: 0,
+        asked: 0,
+        selected: 0,
+        not_selected: 0,
+        uncertain: 0,
+        incomplete: 0,
+      };
+      for (const key of Object.keys(total) as (keyof SelectionCounts)[])
+        total[key] += count.selection[key];
+      totals.set(kind, total);
+    }
+  return totals;
+}
+
+function formatUnresolvedSelection(item: Selection): string | null {
+  const at = `${item.where.file}:${item.where.first_line}`;
+  const heading = JSON.stringify(item.first_line);
+  if (item.outcome.kind === "uncertain")
+    return `${at}: uncertain selection ${item.kind} ${heading}, yes ${item.outcome.yes}; what lies within it is unevaluated`;
+  if (item.outcome.kind === "incomplete")
+    return `${at}: incomplete selection ${item.kind} ${heading}, ${item.outcome.reason.kind}; what lies within it is unevaluated`;
+  return null;
+}
 
 const assembledRuleSchema = z
   .object({
@@ -139,8 +209,10 @@ export function formatLintReport(report: LintReport): string {
     `Status: ${report.status.kind}`,
     `Counts: error ${report.counts.error}, warn ${report.counts.warn}`,
     `Outcomes: ${JSON.stringify(outcomes)}`,
-    `Usage: ${JSON.stringify(report.usage)}`,
   ];
+  for (const [kind, total] of selectionTotals(report))
+    lines.push(`Selection ${kind}: ${JSON.stringify(total)}`);
+  lines.push(`Usage: ${JSON.stringify(report.usage)}`);
   for (const severity of ["error", "warn"]) {
     for (const finding of report.findings.filter((item) => item.severity === severity)) {
       lines.push(
@@ -155,6 +227,20 @@ export function formatLintReport(report: LintReport): string {
       `Evidence: ${JSON.stringify(item.state)}`,
     );
   }
+  for (const item of report.selections) {
+    const line = formatUnresolvedSelection(item);
+    if (line) lines.push(line);
+  }
+  // A file whose candidates were all answered and none chosen is information, not a failure: a
+  // numbered rule list is meant to be not selected.
+  for (const file of report.file_counts)
+    for (const [kind, count] of Object.entries(file.kinds)) {
+      const selection = count.selection;
+      if (!selection || selection.asked === 0 || selection.selected > 0) continue;
+      lines.push(
+        `${file.file}: no ${kind} selected (${selection.not_selected} not selected, ${selection.uncertain} uncertain, ${selection.incomplete} incomplete)`,
+      );
+    }
   for (const item of report.incomplete)
     lines.push(
       `Incomplete: ${item.rule ?? "run"} ${item.file ?? ""} ${item.field ?? ""}: ${item.reason.kind}`,
