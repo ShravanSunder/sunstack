@@ -1,22 +1,22 @@
 # Specification: shared code standards (the #189 rework)
 
-Revision 5: revision 4 corrected for design review 2's findings F1–F8.
+Revision 9: the owner's skills-only direction (1 Nov 2026, 17:46 EST). It changes the summary, standards 8, 10, 15, 16 and 18, and adds standards 22 and 23. Revision 5: revision 4 corrected for design review 2's findings F1–F8.
 
 ## What the skills must do
 
 - **`domain-code-standards` (new):**
   - It tells an agent, before any choice a coding standard governs, to read the repository's Standards line and apply exactly the set it names.
   - It tells the agent to ask the owner, through the owner's Chief of Staff, when there's no line.
-  - It holds the owner's shared standards, each once: test layout, file and module naming, and the repository's own commands and configs.
-- **Each language skill** (`domain-typescript`, `domain-rust`, `domain-python`):
+  - It holds the owner's shared standards, each once: test layout, file and module naming, the repository's own commands and configs, and, for a monorepo, its layout and boundaries.
+- **Each language skill** (`domain-typescript`, `domain-rust`, `domain-python`, and the new `domain-swift`):
   - loads `domain-code-standards` first and acts on the set it returns;
   - keeps only its language's forms: the unit-test file name and declaration, the older test forms to move from, the naming case and examples, and the fallback commands;
   - keeps its other language teaching unchanged.
 - **`scaffold-project`:**
   - It writes the Standards section into the instruction file of every repository it creates. Under the owner's set, the section carries the skill links; under the repository's own, it points to the repository's standards file.
   - On a retrofit, it adds a missing section to the existing instruction file, and never replaces an instruction file or link.
-  - It stops copying the TypeScript and Python rule templates, whose clauses have skill homes or are retired.
-  - Only when the instruction file's Standards line names the owner's set does it keep copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback, used only where the repository defines none.
+  - It writes no rules file. Nothing it writes links or depends on `.cursor/rules/` or `.mdc`, and standards reach agents, Cursor included, only through the skills.
+  - The four rule templates it used to copy are retired. Their standards have skill homes: the TypeScript and Python clauses in those skills and the base; the Swift clauses in `domain-swift`; the monorepo clauses in the base's Monorepos part. Their stale clauses are retired.
 
 ## Standards the skills state
 
@@ -32,9 +32,9 @@ Selection, in `domain-code-standards`:
 
 The owner's shared standards, in `domain-code-standards`; each holds under the owner's set:
 
-8. A unit test sits beside the module it tests, in the form its language skill names; a language with no language skill (Swift today) follows the test layout in its additions file.
+8. A unit test sits beside the module it tests, in the form its language skill names. Swift is the exception: its unit tests live in the package's SPM `Tests/` targets, as `domain-swift` names, and standards 9, 10 and 11 don't apply to Swift's tests.
 9. A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers tests share, in one helpers folder; the repository picks its name, `tests/support/` when it has none.
-10. In a language whose skill names its form, a change that edits a module, its production code or its tests, moves that module's own unit tests from an older form into the standard form, and a repository-wide move is its own PR.
+10. In a language whose skill names a beside-the-module form (TypeScript, Rust and Python), a change that edits a module, its production code or its tests, moves that module's own unit tests from an older form into the standard form, and a repository-wide move is its own PR.
 11. A folder that already holds unit tests is the old form, not precedent.
 12. A file or module is named for the one responsibility it holds, and a catch-all such as `utils`, `helpers` or `db` is split by responsibility instead; the one shared test-helpers folder under `tests/` is the exception, and keeps the name the repository uses (`support/`, `utils/` or `lib/`), while its files still name their responsibility.
 
@@ -43,6 +43,16 @@ Added in revision 5 (design review 2, F4), from the retired templates' shared te
 19. Each test is structured Arrange / Act / Assert, and tests are few and valuable: they cover business logic and critical paths, and skip redundant or brittle cases.
 20. Unit tests outnumber integration tests, which outnumber end-to-end smoke tests; a test lives in the permanent suite or an established harness, never in a temporary script or file.
 21. Documentation explains why, briefly, and doesn't restate what the code already says; a doc comment skips its return-type section when the type annotations already say it.
+
+Added in revision 9, from the retired `monorepo-rules.md`, scoped to monorepos as that file was:
+
+22. In a monorepo, under the owner's set:
+    - `apps/` holds deployable applications, `packages/` shared libraries and `services/` backend services;
+    - its Python projects are a uv workspace (`services/py_*/pyproject.toml` for services, `packages/py_*/pyproject.toml` for shared libraries, each with its importable package root), and its TypeScript projects a pnpm workspace;
+    - `models/` hold pure data models, with no business logic, no dependency on repos or services and no database-specific DDL, and `repos/` interact with the database or external data sources;
+    - imports are absolute, from the project or package root, never `../` or `./`;
+    - editing `tsconfig.json`, `ruff.toml` or `pyrightconfig.json` waits for explicit permission.
+    The example service layout's `tests/` folder follows standard 9.
 
 Language forms, one home each:
 
@@ -55,12 +65,19 @@ Language forms, one home each:
     - A unit test for `foo.py` is `foo_test.py` beside it.
     - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder.
     - Integration tests live in `./tests/integration`.
+    - In a monorepo, an `__init__.py` exists only at a package root, unless the owner asks for another (revision 9, from `monorepo-rules.md`).
+23. **Swift** (`domain-swift`, revision 9): the standards `swift-rules.md` held, with D10a–c's edits and no new ones:
+    - its types, data models and SwiftUI patterns;
+    - its architecture;
+    - its formatting values, as `.swiftformat` defaults that the repository's config overrides;
+    - its tests: Swift Testing in SPM `Tests/` targets, with XCTest only for UI and performance tests, and the coverage map without amounts;
+    - its commands, as the fallback.
 
 The scaffold, in `scaffold-project`:
 
-16. Every repository the scaffold creates gets a Standards section with its Standards line. Under the owner's set, the section also carries the instruction to load `domain-code-standards` and the language skills before work they govern, links to them, and the owner's additions files for the project type. Under the repository's own, it points to the repository's standards file, and carries no owner skill link and no owner rule file.
+16. Every repository the scaffold creates gets a Standards section with its Standards line. Under the owner's set, the section also carries the instruction to load `domain-code-standards` and the language skills before work they govern, and links to them, Swift's included for a Swift type. Under the repository's own, it points to the repository's standards file and carries no owner skill link.
 17. A retrofit adds a missing Standards section to the existing instruction file once, and leaves the file's bytes, the symlink between CLAUDE.md and AGENTS.md in either direction, and every existing instruction file and link as they were, with or without `--overwrite`. It never changes an existing Standards line.
-18. The scaffold copies no standard a skill holds. An additions file it copies, only when the instruction file's Standards line names the owner's set, holds only clauses with no skill home, recorded with the owner's disposition, and defers to the repository's own commands and configs.
+18. The scaffold writes no rules file, and nothing it writes links or depends on `.cursor/rules/` or `.mdc`. Standards reach agents only through the skills (revision 9, superseding the additions files).
 
 ## The rules, and their transfer tests
 

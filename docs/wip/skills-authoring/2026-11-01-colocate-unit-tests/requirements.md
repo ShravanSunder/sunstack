@@ -1,19 +1,20 @@
 # Requirements: shared code standards (the #189 rework)
 
-Revision 5: revision 4, corrected for design review 2's findings F1–F8 (`skill-design.md`, "Review record"). Revision 4 revised the colocation set that #189 carried at `8dbedca5`, widened by the owner's decision of 1 Nov 2026. Revisions 1–3 stay readable in this folder's Git history and in the decisions table of `skill-design.md`.
+Revision 9 applies the owner's skills-only direction of 1 Nov 2026, 17:46 EST: the scaffold's copied rules files go, and their standards move into skills. Revision 5: revision 4, corrected for design review 2's findings F1–F8 (`skill-design.md`, "Review record"). Revision 4 revised the colocation set that #189 carried at `8dbedca5`, widened by the owner's decision of 1 Nov 2026. Revisions 1–3 stay readable in this folder's Git history and in the decisions table of `skill-design.md`.
 
 ## The change
 
 - **Class:** `behavior-changing`. The change:
-  - creates a skill;
+  - creates two skills;
   - changes three skills' main paths and the call sites between them;
   - changes `scaffold-project`'s main path, its templates and its executable script.
-- **Runs:** five, each naming one skill:
+- **Runs:** six, each naming one skill:
   1. `create` `sunstack-dev/domain-code-standards`;
   2. `update` `sunstack-dev/domain-typescript`;
   3. `update` `sunstack-dev/domain-rust`;
   4. `update` `sunstack-dev/domain-python`;
-  5. `update` `ai-scaffold/scaffold-project`.
+  5. `update` `ai-scaffold/scaffold-project`;
+  6. `create` `sunstack-dev/domain-swift` (revision 9).
 - **Reusable behavior:** these skills help agents reliably apply exactly one set of coding standards, when they write, change or review code in a repository:
   - the owner's (the shared base plus the language skill), or the repository's own, as the repository's AGENTS.md Standards line declares;
   - when the line is missing, they ask the owner instead of inferring or mixing.
@@ -32,6 +33,8 @@ Relayed by the owner's Chief of Staff (Sun), 1 Nov 2026, on PR #189:
   4. "Add an easy, standard way for a repo to carry pointers to its standards (for example a small standards section or file that AGENTS.md links to), so agents stop repeating the same mistakes."
 - The selection decision, option A: "The repo's AGENTS.md Standards line says whose standards apply: either his (the skills) or the repo's own standards. If AGENTS.md doesn't say, the agent asks Shravan through Sun. No inferring from the repo's owner, and no mixing."
 - "He didn't overturn your two calls (one domain skill as the shared base, retiring the scaffold's copied rule files), so go ahead with the rework of #189 as planned."
+- Relayed by Sun, 1 Nov 2026, 17:46 EST (revision 9): "Cursor barely supports .mdc or rules files, so we use skills only. Please make sure nothing in #189 (scaffold, AGENTS.md Standards section, language skills, docs) still writes, references, or depends on .cursor/rules or .mdc files. Cursor should get the standards only through the skills." Then: "we just use skills. The move away from rules is partway done, so go ahead and finish cleaning up the remaining .cursor/rules and .mdc leftovers in #189."
+- The homes for the two files' standards (a new `domain-swift`; a Monorepos part of the base) are the Lead's content-home calls. They were sent to the owner as questions 1 and 2 with those recommendations, and the Advisor confirmed them as Lead-owned (1 Nov, 18:12 EST). The owner's answer through Sun overrides them if it differs.
 
 The original colocation need still holds, with its owner quotes unchanged:
 - "in typescript its .test.ts"
@@ -51,6 +54,7 @@ The original colocation need still holds, with its owner quotes unchanged:
 - **One home:**
   - Each shared standard (which standards apply, test layout, file and module naming, the repository's own commands and configs) is written once, in `domain-code-standards`.
   - Each language skill keeps only its language's forms and loads the base.
+  - Standards reach agents, Cursor included, only through the skills. No file in #189 writes, links or depends on `.cursor/rules/` or `.mdc`.
 - **The scaffold:**
   - A scaffolded repository's instruction file carries a Standards section with its line. Under the owner's set, it also carries the load instruction and links to `domain-code-standards` and the chosen languages' skills. Under the repository's own, it carries a pointer to the repository's standards file and nothing of the owner's.
   - A retrofit adds the section to an existing instruction file without replacing the file, the symlink between CLAUDE.md and AGENTS.md in either direction, or unrelated text.

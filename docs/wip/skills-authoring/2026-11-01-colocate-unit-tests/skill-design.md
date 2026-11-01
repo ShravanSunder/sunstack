@@ -1,6 +1,6 @@
 # Skill design: shared code standards (the #189 rework)
 
-Revision 5: revision 4 corrected for design review 2's findings F1–F8. Revisions 1–3 designed two runs, a Tests section in `domain-typescript` and one in `domain-rust`. Both were implemented at `8dbedca5`, and revision 4's runs 2 and 3 supersede them.
+Revision 9 applies the owner's skills-only direction (1 Nov 2026, 17:46 EST; D23): the scaffold's rules files go, the Swift standards become run 6 (`domain-swift`), and the monorepo standards join the base. Its section, "Revision 9: skills only", supersedes the run 5 lines on copied rule files and D22's copy gate. Revision 5: revision 4 corrected for design review 2's findings F1–F8. Revisions 1–3 designed two runs, a Tests section in `domain-typescript` and one in `domain-rust`. Both were implemented at `8dbedca5`, and revision 4's runs 2 and 3 supersede them.
 
 ## Targets and runs
 
@@ -11,6 +11,7 @@ Revision 5: revision 4 corrected for design review 2's findings F1–F8. Revisio
 | 3 | `domain-rust` (`sunstack-dev`) | update | unchanged | first load of the base; Tests reduced to the Rust forms; Gates and Names keep only Rust | `references/sqlx-sqlite.md` unchanged | review checks; the keyed kit self-check | proposed |
 | 4 | `domain-python` (`sunstack-dev`) | update | unchanged | first load of the base; Modules and tests keep only Python forms; Gates keeps only the fallback | none | review checks; the keyed kit self-check | proposed |
 | 5 | `scaffold-project` (`ai-scaffold`) | update | unchanged | the Standards section in place of rule imports; a whose-standards question; the retrofit insertion; the template changes | `references/template-inventory.md` updated | deterministic script tests (TypeScript), review checks | proposed |
+| 6 | `domain-swift` (`sunstack-dev`), revision 9 | create | new hidden description, plus `agents/openai.yaml` | first load of the base; the Swift standards from `swift-rules.md` with D10a–c's edits; the SPM `Tests/` form as Swift's exception | none | review checks; the keyed kit self-check; behavior is an eval gap | proposed |
 
 This repository's own AGENTS.md gets its Standards section in the same PR. That's coordination, not a skill run.
 
@@ -21,6 +22,10 @@ This repository's own AGENTS.md gets its Standards section in the same PR. That'
 
   That is 171 characters, and the trigger trial is `not applicable` for a hidden skill.
 - **The three language skills:** descriptions unchanged.
+- **`domain-swift` (revision 9):** hidden, like its siblings: `disable-model-invocation: true` and `policy.allow_implicit_invocation: false`. Its description, which the writer may tighten without widening it:
+  > Use when writing, changing or reviewing Swift or SwiftUI code, especially types and optionals, view state and view models, Swift Testing, formatting, or which commands to run.
+
+  The trigger trial is `not applicable` for a hidden skill.
 - **`scaffold-project`:** its description is unchanged. It still loads for scaffolding and retrofitting, and the Standards section is part of the output it already promises ("agent rules").
 
 ## Main path
@@ -204,6 +209,66 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - `commands/scaffold-project.md`;
   - `commands/scaffold-project-update-templates.md`: coding-standard upkeep goes to the owning skills, and config upkeep stays.
 
+### Revision 9: skills only (D23, D23a, D23b)
+
+The owner's direction, relayed by Sun on 1 Nov 2026 at 17:46 EST: "Cursor barely supports .mdc or rules files, so we use skills only … Cursor should get the standards only through the skills." Nothing in #189 writes, links or depends on `.cursor/rules/` or `.mdc`. Each clause of the two remaining rule files moves to a skill home, with no new standard and no lost one.
+
+**Where each clause goes:**
+
+| From | Clauses | To |
+| --- | --- | --- |
+| `swift-rules.md`, as edited by D10a–c | types, data models, formatting, SwiftUI patterns, architecture, testing, commands | the new `domain-swift` (run 6) |
+| `monorepo-rules.md` `:7-31` | the uv and pnpm workspaces; `services/py_*` and `packages/py_*`; the service layout example | the base's Monorepos part. The example's `tests/` comment reads "tests that aren't unit tests, and their shared helpers" (base standard 9) |
+| `monorepo-rules.md` `:33-38` | models pure, repos for data access | the base's Monorepos part |
+| `monorepo-rules.md` `:40` | `__init__.py` only at package roots | `domain-python`, scoped to monorepos |
+| `monorepo-rules.md` `:42-44` | absolute imports only | the base's Monorepos part |
+| `monorepo-rules.md` `:46-48` | ask before editing tsconfig, ruff or pyright config | the base's Monorepos part (the duplicated `ruff.toml` is written once) |
+| `CLAUDE.md.template` `:15-16`, the load sentence's "a language with no skill follows its additions file" | the `@.cursor/rules/*.mdc` additions links | removed. Swift's line becomes a skill link |
+
+**Run 1 addition, the base (`domain-code-standards`):**
+- **Tests, `:40`,** becomes:
+  > A unit test sits beside the module it tests, in the form its language skill names. Swift is the exception: its unit tests live in the package's SPM `Tests/` targets, as `domain-swift` names, and the next three standards don't apply to them.
+- **Tests, `:42`:** "In a language whose skill names its form" becomes "In a language whose skill names a beside-the-module form". The next three standards are the `tests/` folder, move-on-touch and old-form-not-precedent; the Arrange/Act/Assert and pyramid bullets still apply to Swift.
+- **A new `### Monorepos` part,** after Files and modules, opening "In a monorepo:", with standard 22's five bullets. The service layout example goes in only if the writer finds that a reader needs it. The writer words it inside this boundary.
+- **Done when:** "in a language whose skill names its test form" becomes "in a language whose skill names a beside-the-module test form".
+
+**Run 4 addition, `domain-python`:** one line under Modules and tests:
+> In a monorepo, an `__init__.py` exists only at a package root, unless the owner asks for another.
+
+**Run 6, `domain-swift` (create):**
+- **Shape:** the siblings' shape: frontmatter (D23b's description, hidden), the read-rule line, and then the same first load of the base that runs 2–4 carry.
+- **Sections,** in the order `swift-rules.md` uses: Types; Data models; Formatting (the values as `.swiftformat` defaults that the repository's config overrides); SwiftUI patterns; Architecture; Tests; Commands (the fallback, under "When the repository defines no commands of its own").
+- **Tests says,** under the owner's set:
+  - unit tests live in SPM `Tests/<Target>Tests/` targets, with Swift Testing (`import Testing`, `@Test`, `@Suite`), and XCTest only for UI (`XCUITest`) and performance tests;
+  - the coverage map without amounts;
+  - the base's beside-the-module standard and its `tests/`, move-on-touch and old-form standards don't apply to Swift tests (D23a).
+- **No new clause.** Only the clauses `swift-rules.md` holds after D10a–c, and only the signs and completion the writer derives from those clauses, if any.
+- **`agents/openai.yaml`:** `allow_implicit_invocation: false`, like the siblings.
+
+**Run 5 changes, `scaffold-project`:**
+- **The script:**
+  - removed:
+    - `copy_rule`, `create_symlink` (only `copy_rule` used it) and `instruction_selects_owner_rules`;
+    - `COPY_OWNER_RULES`, the `OWNER_MONOREPO` and `OWNER_ADDITIONS` flags and their `process_conditional` calls;
+    - `mkdir .cursor/rules`, the Cursor rules block, and D22's three report lines.
+  - `OWNER_SWIFT` stays for the Swift link.
+  - `.cursor/hooks` and every instruction-file rule (create, the append-once retrofit, alias safety) are unchanged. An existing Standards line is still never changed. With nothing copied, D22's gate has nothing left to govern.
+- **The template:**
+  - the additions lines go;
+  - the load sentence becomes "Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches. If a skill can't be loaded, say which one and ask before choosing a standard.";
+  - `{{#if OWNER_SWIFT}}- Swift: \`sunstack-dev:domain-swift\`{{/if}}` joins the language lines;
+  - the conditionals become five flat tags: `OWNER_STANDARDS`, `REPO_STANDARDS`, `OWNER_TS`, `OWNER_PY` and `OWNER_SWIFT`.
+- **Deleted:** `templates/cursor/rules/swift-rules.md` and `monorepo-rules.md` (D23). `templates/cursor/` keeps `hooks/`.
+- **`SKILL.md`:**
+  - Batch 5's retrofit read keeps "pass the line's set, don't ask, say which set", and its copy wording goes;
+  - "The script handles" loses the additions bullet;
+  - `:226`'s additions line goes;
+  - the template-variables table loses the removed tags.
+- **The inventory:** the two rule entries go, and the Cursor section lists only hooks.
+- **The README:** `:77-78` go and `:176` becomes "Cursor hooks".
+- **The commands:** `scaffold-project-update-templates.md` loses the Cursor additions scope.
+- **The changelog:** the entry says the scaffold writes no rules files, and names `domain-swift` and the Monorepos part.
+
 ## Calls and placement
 
 - **New call sites.** Three loads, one per language skill: `MUST load \`../domain-code-standards/SKILL.md\` and return …`.
@@ -305,6 +370,9 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 | D18a, 1 Nov 2026, supersedes D18's literal comparison | The test runs the script for each selection and checks that the emitted Standards line equals the base's value for it, which catches swapped values and an unexpanded placeholder | F7: the template holds a conditional, not two literals to compare |
 | D20a, 1 Nov 2026, adds to D20 | The alias step never replaces an existing CLAUDE.md or AGENTS.md entry under either flag. A resolved target that isn't a regular file is reported and skipped. A second run changes nothing | F8: the alias helper's `ln -sf` under `--overwrite` could replace an independent AGENTS.md or create a cycle |
 | D22, 1 Nov 2026, supersedes D10a's and D11a's "under the owner's set" read as the answer | The Swift and monorepo copies follow the Standards line in the resolved instruction file, not the answer. The answer only chooses the section the script writes when the file has none. A differing answer is reported, not applied. An unreadable file, or a section whose line names neither of the base's two values exactly, gets no owner rule file, and that is reported. A retrofit's Batch 5 reads the line before asking | Implementation review 2, I1: an existing "this repository's own" line kept by the retrofit, plus the default owner answer, still copied the owner's always-apply rules (`scaffold-project.sh:264-266`, `:333-337` at `c21a5935`). The owner's option A: the AGENTS.md line says whose standards apply, with no mixing. The line is the one source of truth; the answer is only an input for writing it |
+| D23, 1 Nov 2026, supersedes D10, D10a's copy, D10b, D10c's copy, D11, D11a and D22 | The scaffold writes no rules file. Nothing in #189 writes, links or depends on `.cursor/rules/` or `.mdc`. `swift-rules.md`'s clauses, with D10a–c's edits, become `domain-swift` (run 6). `monorepo-rules.md`'s clauses become the base's Monorepos part, plus one `domain-python` line, per the clause table in "Revision 9: skills only". Both templates are deleted. `.cursor/hooks` stays | The owner, via Sun, 17:46 EST: "we use skills only … Cursor should get the standards only through the skills" and "finish cleaning up the remaining .cursor/rules and .mdc leftovers in #189". The homes are the Lead's content-home calls: questions 1 and 2 to the owner, with these recommendations; the Advisor confirmed them as Lead-owned (18:12 EST). **The owner's answer overrides them if it differs** |
+| D23a, 1 Nov 2026, adds to D23 | Swift's unit tests stay in SPM `Tests/` targets. The base's beside-the-module standard (8) and its `tests/`, move-on-touch and old-form standards (9–11) don't apply to Swift. The base and `domain-swift` both say so | D10's "Swift tests follow its SPM `Tests/` layout" and D15's "Swift has no skill, so it isn't covered". With a Swift skill, the base's language-skill wording would otherwise switch on colocation for Swift; the Advisor flagged it (18:12 EST). `Package.swift.template:23-26` declares the `Tests/` target |
+| D23b, 1 Nov 2026, adds to D23 | The monorepo clauses keep their monorepo scope ("In a monorepo:") and aren't widened to every repository | They were copied only for monorepo types; widening them would add a standard no source held |
 
 ## Coordination
 
@@ -319,6 +387,11 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - #189's changelog entry is rewritten for the rework, with its line in `docs/changelog/README.md`.
   - This repository's AGENTS.md gains its Standards section: "Whose standards: the owner's (sunstack-dev)", with the shared base and the TypeScript and Rust links.
   - `plugins/sunstack-dev/README.md:248`'s unconditional "repository conventions win" sentence is aligned with the base's selection rule. It predates revision 4 (a design review 2 observation).
+  - **Revision 9:**
+    - `domain-swift` joins the `sunstack-dev` README's namespace map and Domain Skills paragraph, and `docs/architecture/skill-system.md`'s domain list;
+    - versions stay at 2.103.0 and 0.3.0, which are unreleased in this PR;
+    - this repository's AGENTS.md is unchanged, since it has no Swift;
+    - the stale-reference search covers every runtime surface for `.cursor/rules` and `.mdc`.
   - One PR, #189. The owner merges.
 
 ## Run status
@@ -327,6 +400,7 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 - Revision 1–3, run 2 (`domain-rust` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 3.
 - Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`; reviewed at `31fa15b1`, with revision 8's correction.
 - Revision 8's correction to run 5 (D22, with implementation review 2's I2): implemented at `06fa4c8e` (text) and `31fa15b1` (script and tests); reviewed at `31fa15b1`.
+- Revision 9 (D23): run 1's base addition, run 4's line, run 5's removal, and run 6 (`domain-swift`, create): proposed.
 
 ## Review record
 
@@ -384,3 +458,9 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - The proof it rests on: the old script failed 7 of 8 new cases on its file output, with the control passing; 8/8 after; 301/301 in the full suite; typecheck and static checks clean.
   - Its parser note: a CRLF Standards line names neither value, so it copies nothing. That is acceptable under D22's exact match, and no normalization is claimed.
   - Left unverified: PR readiness, installed and client loading, and behavior under pressure.
+- **Revision 9, 1 Nov 2026:** the owner's skills-only direction (D23, D23a, D23b), after the PR-ready handoff at `724cf208`. It changes:
+  - the requirements' owner words, runs and success definition;
+  - specification standards 8, 10, 15, 16 and 18 and its summary, plus new standards 22 and 23;
+  - the revision 9 section and run 6 here;
+  - the script tests in `skill-verification.md`.
+  Next: a scoped design review by the same review lead, before any skill or script file changes.
