@@ -21,7 +21,7 @@ Revision 5: revision 4 corrected for design review 2's findings F1–F8. Each ro
 
 ## Script tests
 
-These are TypeScript integration tests in the repository's TypeScript test package, placed as its integration tests are, under base standard 9. Each runs `plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh` in a fresh temporary folder and asserts on the files left behind. Each case must fail on today's script.
+These are TypeScript integration tests in the repository's TypeScript test package, placed as its integration tests are, under base standard 9. Each runs `plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh` in a fresh temporary folder and asserts on the files left behind. Each case must fail on today's script. Each D22 case, apart from its marked control, must fail on `c21a5935`'s script.
 
 | Case | Setup | Pass when |
 | --- | --- | --- |
@@ -37,7 +37,13 @@ These are TypeScript integration tests in the repository's TypeScript test packa
 | Retrofit: CLAUDE.md → AGENTS.md | the reverse symlink and a real AGENTS.md | the section is in AGENTS.md; the symlink is unchanged |
 | Retrofit: two independent regular files | both files real, neither with a section | the section is in AGENTS.md only; CLAUDE.md is byte-identical |
 | Retrofit: AGENTS.md only, regular | AGENTS.md real; no CLAUDE.md | the section is in AGENTS.md; AGENTS.md isn't replaced and becomes no link; CLAUDE.md is created from the template only if the script creates it today, and never replaces AGENTS.md |
-| Retrofit: section already present | AGENTS.md with a `## Standards` heading | no file changes |
+| Retrofit: section already present | AGENTS.md with a `## Standards` heading | no instruction-file changes |
+| Retrofit: the line is the repository's own, Swift (D22) | AGENTS.md whose line is "Whose standards: this repository's own"; the Swift type; the default answer | no `.cursor/rules/swift-rules.md` or `.mdc` written; the difference is reported; AGENTS.md is byte-identical |
+| Retrofit: the line is the repository's own, monorepo (D22) | the same AGENTS.md; `monorepo-both`; the default answer | no `.cursor/rules/monorepo-rules.md` or `.mdc` written; the difference is reported |
+| Retrofit: the line is the owner's, the answer is the repository's own (D22) | AGENTS.md whose line is "Whose standards: the owner's (sunstack-dev)"; the Swift type; `--standards own` | `swift-rules.md` and its `.mdc` written, with the four edits; the difference is reported; AGENTS.md is byte-identical |
+| Retrofit: a section whose line names neither value (D22) | AGENTS.md with `## Standards` and no "Whose standards:" line; the Swift type | no owner rule file written; reported |
+| Retrofit: unreadable instruction file, Swift (D22) | AGENTS.md pointing at a missing file; the Swift type | no owner rule file written; reported; no instruction file created or changed |
+| Retrofit: the line agrees (control for D22) | AGENTS.md whose line is the owner's; `monorepo-swift-ts`; the default answer | both owner rule files and their `.mdc` aliases written; no difference reported. This control passes on `c21a5935` too; it fails a fix that stops copying altogether |
 | Retrofit: dangling AGENTS.md | AGENTS.md pointing at a missing file | reported; no file created or changed |
 | Retrofit: dangling reverse alias | CLAUDE.md pointing at a missing AGENTS.md | reported; no file created or changed; no cycle created |
 | Retrofit: resolved target is not a regular file | AGENTS.md is a directory | reported and skipped; nothing changed |

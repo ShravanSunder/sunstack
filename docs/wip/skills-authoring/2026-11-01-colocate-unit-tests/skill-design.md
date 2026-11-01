@@ -143,6 +143,10 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - The owner's (Recommended): the sunstack-dev skills
   - This repository's own: you'll write or link them
   ```
+
+  On a retrofit, the agent reads the resolved instruction file's Standards line before asking (D22):
+  - When the line names a set, the agent passes that set, doesn't ask, and tells the person which set the line names.
+  - When the file has a Standards section whose line names neither value, the agent tells the person: the scaffold doesn't edit an existing section, and it copies no owner rule file until the line names a set.
 - **The Standards section.** `templates/common/CLAUDE.md.template` replaces `## Rules` and its four `@.cursor/rules/*.mdc` imports with a Standards section. The template carries both forms under a conditional on the answer, and the language lines use its existing `INCLUDE_TS`/`INCLUDE_PY`/`INCLUDE_SWIFT`/`MONOREPO` conditionals.
 
   The section has two forms, selected by the answer (F6). Under the owner's set:
@@ -174,7 +178,10 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
     It has no load sentence, no owner skill link and no additions line.
 - **The copied rule templates:**
   - `ts-rules.md` and `python-rules.md` are no longer copied, and their `copy_rule` calls (`scaffold-project.sh:249-260`) go (D12).
-  - `swift-rules.md` and `monorepo-rules.md` are copied, with their `.mdc` aliases, **only when the answer is the owner's set** (D10a, D11a). Under "this repository's own", no owner rule file is written (F1).
+  - `swift-rules.md` and `monorepo-rules.md` are copied, with their `.mdc` aliases, **only when the resolved instruction file's Standards line names the owner's set** (D10a, D11a, D22). That is the line the script just wrote or appended, or the one already there. The answer only chooses the section the script writes when the file has none.
+    - When an existing line names a different set than the answer, the script reports the difference and follows the line.
+    - When the resolved file can't be read (a dangling link, or not a regular file), or its Standards section has no line naming either value, no owner rule file is written, and the script reports it.
+    - Under "this repository's own", no owner rule file is written (F1).
   - `swift-rules.md` is copied with four edits (D10a, D10b, D10c):
     - its "Swift Commands" opening (`:77`, "You MUST follow the ones below without any variations.") becomes "When the repository defines no commands of its own, run these:";
     - its "Formatting" fixed values (`:26`, `:28`) become the scaffold's `.swiftformat` defaults, which the repository's config overrides;
@@ -295,6 +302,7 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 | D14a, 1 Nov 2026, adds to D14 | The one shared test-helpers folder under `tests/` keeps the repository's name (`support/`, `utils/` or `lib/`) as the only exception to the naming standard, and its files still name their responsibility. TypeScript's examples narrow "never `utils/`" to folders outside `tests/` | F5; the owner: "utils or lib are test helpers or whatever you want to call it" |
 | D18a, 1 Nov 2026, supersedes D18's literal comparison | The test runs the script for each selection and checks that the emitted Standards line equals the base's value for it, which catches swapped values and an unexpanded placeholder | F7: the template holds a conditional, not two literals to compare |
 | D20a, 1 Nov 2026, adds to D20 | The alias step never replaces an existing CLAUDE.md or AGENTS.md entry under either flag. A resolved target that isn't a regular file is reported and skipped. A second run changes nothing | F8: the alias helper's `ln -sf` under `--overwrite` could replace an independent AGENTS.md or create a cycle |
+| D22, 1 Nov 2026, supersedes D10a's and D11a's "under the owner's set" read as the answer | The Swift and monorepo copies follow the Standards line in the resolved instruction file, not the answer. The answer only chooses the section the script writes when the file has none. A differing answer is reported, not applied. An unreadable file, or a section whose line names neither value, gets no owner rule file, and that is reported. A retrofit's Batch 5 reads the line before asking | Implementation review 2, I1: an existing "this repository's own" line kept by the retrofit, plus the default owner answer, still copied the owner's always-apply rules (`scaffold-project.sh:264-266`, `:333-337` at `c21a5935`). The owner's option A: the AGENTS.md line says whose standards apply, with no mixing. The line is the one source of truth; the answer is only an input for writing it |
 
 ## Coordination
 
@@ -315,7 +323,8 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 
 - Revision 1–3, run 1 (`domain-typescript` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 2.
 - Revision 1–3, run 2 (`domain-rust` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 3.
-- Revision 4, runs 1–5: proposed.
+- Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`.
+- Revision 8's correction to run 5 (D22, with implementation review 2's I2): proposed.
 
 ## Review record
 
@@ -362,3 +371,9 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - the Swift oracle is updated.
   Back to the same review lead.
 - **Design review 2 recheck 3, at `588d25bb`** (`design-review-2-recheck-3.md`): F4 closed, so all of F1–F9 are closed. Open count 8 → 2 → 1 → 0; no recurrence. **Verdict `great`; implementation decision `accepted-to-implement`.** The acceptance rests on the original two-reviewer, five-check coverage plus the same lead's three bounded verifications. It leaves unverified: runtime and pressure behavior, client loading, and implementation proof.
+- **Implementation review 2, at `c21a5935`** (`scratch-root-01a1635f/standards-rework/implementation-review/implementation-review-2.md`). The same review lead commissioned three fresh Sol xhigh reviewers: `01a1982f-bee2` (teaching checks), `01a19830-1184` (structure) and `01a19830-345b` (proof and safety). All ten checks are complete.
+  - Verdict: `targeted-revision`; ship blocked.
+  - I1, blocker: an existing Standards line and the new answer could choose different sets, because the copies followed the answer. Routed to this design.
+  - I2, minor: the README's manual options left out `--standards` and overstated `--overwrite`. Routed to the writer.
+  - The Lead's assessment adds one platform correction: the Codex marketplace entry for `sunstack-dev` carries a version (`2.101.3`), which the writer reported as absent. It goes to 2.103.0 with the other entries, as Coordination requires.
+- **Revision 8:** I1 is corrected by D22: specification standards 17 and 18 and its summary line; run 5's Batch 5 retrofit read and copy rule; and six script tests, with row 40 narrowed. Back to the same review lead for a scoped design recheck before the writer and Implementer correct the files.

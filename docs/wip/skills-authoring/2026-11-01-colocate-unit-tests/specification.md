@@ -16,7 +16,7 @@ Revision 5: revision 4 corrected for design review 2's findings F1–F8.
   - It writes the Standards section into the instruction file of every repository it creates. Under the owner's set, the section carries the skill links; under the repository's own, it points to the repository's standards file.
   - On a retrofit, it adds a missing section to the existing instruction file, and never replaces an instruction file or link.
   - It stops copying the TypeScript and Python rule templates, whose clauses have skill homes or are retired.
-  - Under the owner's set only, it keeps copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback, used only where the repository defines none.
+  - Only when the instruction file's Standards line names the owner's set does it keep copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback, used only where the repository defines none.
 
 ## Standards the skills state
 
@@ -59,8 +59,8 @@ Language forms, one home each:
 The scaffold, in `scaffold-project`:
 
 16. Every repository the scaffold creates gets a Standards section with its Standards line. Under the owner's set, the section also carries the instruction to load `domain-code-standards` and the language skills before work they govern, links to them, and the owner's additions files for the project type. Under the repository's own, it points to the repository's standards file, and carries no owner skill link and no owner rule file.
-17. A retrofit adds a missing Standards section to the existing instruction file once, and leaves the file's bytes, the symlink between CLAUDE.md and AGENTS.md in either direction, and every existing instruction file and link as they were, with or without `--overwrite`.
-18. The scaffold copies no standard a skill holds. An additions file it copies, only under the owner's set, holds only clauses with no skill home, recorded with the owner's disposition, and defers to the repository's own commands and configs.
+17. A retrofit adds a missing Standards section to the existing instruction file once, and leaves the file's bytes, the symlink between CLAUDE.md and AGENTS.md in either direction, and every existing instruction file and link as they were, with or without `--overwrite`. It never changes an existing Standards line.
+18. The scaffold copies no standard a skill holds. An additions file it copies, only when the instruction file's Standards line names the owner's set, holds only clauses with no skill home, recorded with the owner's disposition, and defers to the repository's own commands and configs.
 
 ## The rules, and their transfer tests
 
