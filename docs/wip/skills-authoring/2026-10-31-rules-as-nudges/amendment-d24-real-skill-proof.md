@@ -170,7 +170,7 @@ Search history, the other repositories and upstream first. Where a rule still ha
 - pressure tasks for the receiving agent;
 - no invented skills as proof, and no committed copies.
 
-`domain-decision-models` serves every decision-model consumer, not only skill rules. Its generic proof reference doesn't take on Git snapshots, expectation sidecars or pressure tasks. It changes only where it currently points skill-rule proof at excerpt cases, and there it points to `skill-rules`. Synthetic controls for engine mechanics stay allowed in sunstack-tools.
+`domain-decision-models` serves every decision-model consumer, not only skill rules, and stays generic. Its proof reference doesn't take on Git snapshots, expectation sidecars or pressure tasks. It never names `skill-rules`, because the layer contract forbids a domain from naming a skill above it. `skill-rules` owns the concrete recipe and loads the domain; that's the only direction. Synthetic controls for engine mechanics stay allowed in sunstack-tools. This was corrected after the Advisor caught an earlier wording that had the domain point to `skill-rules`.
 
 The 🐒 writer (Opus) writes this through `skill-creation`.
 
