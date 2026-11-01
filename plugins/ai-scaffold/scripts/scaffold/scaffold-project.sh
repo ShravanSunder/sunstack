@@ -13,6 +13,7 @@ PROJECT_DESCRIPTION=""
 AUTHOR_NAME=""
 AUTHOR_EMAIL=""
 TARGET_DIR="."
+STANDARDS_SET="owner"
 SKIP_EXISTING=true
 INCLUDE_VITEST=true
 INCLUDE_VITEST_BROWSER=false
@@ -33,7 +34,8 @@ Options:
     --author NAME         Author name
     --email EMAIL         Author email
     --target DIR          Target directory (default: current directory)
-    --overwrite           Overwrite existing files (default: skip)
+    --standards SET       Coding standards: owner or own (default: owner)
+    --overwrite           Overwrite existing configs; preserve instruction files (default: skip)
     --no-vitest           Skip vitest setup
     --vitest-browser      Include vitest browser mode
     --playwright          Include playwright e2e
@@ -56,6 +58,12 @@ while [[ $# -gt 0 ]]; do
         --author) AUTHOR_NAME="$2"; shift 2 ;;
         --email) AUTHOR_EMAIL="$2"; shift 2 ;;
         --target) TARGET_DIR="$2"; shift 2 ;;
+        --standards)
+            if [[ $# -lt 2 ]]; then
+                echo "Error: --standards requires owner or own"
+                exit 1
+            fi
+            STANDARDS_SET="$2"; shift 2 ;;
         --overwrite) SKIP_EXISTING=false; shift ;;
         --no-vitest) INCLUDE_VITEST=false; shift ;;
         --vitest-browser) INCLUDE_VITEST_BROWSER=true; shift ;;
@@ -65,6 +73,11 @@ while [[ $# -gt 0 ]]; do
         *) echo "Unknown option: $1"; exit 1 ;;
     esac
 done
+
+case "$STANDARDS_SET" in
+    owner|own) ;;
+    *) echo "Error: --standards must be owner or own"; exit 1 ;;
+esac
 
 # Validate required args
 if [[ -z "$PROJECT_NAME" ]]; then
@@ -111,6 +124,26 @@ case "$PROJECT_TYPE" in
     *) echo "Error: Invalid project type: $PROJECT_TYPE"; exit 1 ;;
 esac
 
+OWNER_STANDARDS=false
+REPO_STANDARDS=false
+OWNER_TS=false
+OWNER_PY=false
+OWNER_SWIFT=false
+OWNER_MONOREPO=false
+OWNER_ADDITIONS=false
+if [[ "$STANDARDS_SET" == "owner" ]]; then
+    OWNER_STANDARDS=true
+    OWNER_TS="$INCLUDE_TS"
+    OWNER_PY="$INCLUDE_PY"
+    OWNER_SWIFT="$INCLUDE_SWIFT"
+    OWNER_MONOREPO="$IS_MONOREPO"
+    if [[ "$INCLUDE_SWIFT" == "true" || "$IS_MONOREPO" == "true" ]]; then
+        OWNER_ADDITIONS=true
+    fi
+else
+    REPO_STANDARDS=true
+fi
+
 # Escape special characters for sed replacement (handles /, &, \)
 # Uses perl for cross-platform compatibility (BSD sed on macOS has limited support)
 escape_sed() {
@@ -151,6 +184,39 @@ create_symlink() {
     fi
 }
 
+# Rendering is shared by new instruction files and the appended retrofit section.
+render_template() {
+    local src="$1"
+    # Escape user-provided values for safe sed substitution
+    local escaped_name escaped_desc escaped_author escaped_email
+    escaped_name="$(escape_sed "$PROJECT_NAME")"
+    escaped_desc="$(escape_sed "$PROJECT_DESCRIPTION")"
+    escaped_author="$(escape_sed "$AUTHOR_NAME")"
+    escaped_email="$(escape_sed "$AUTHOR_EMAIL")"
+
+    local content
+    content="$(sed -e "s/{{PROJECT_NAME}}/$escaped_name/g" \
+        -e "s/{{PROJECT_DESCRIPTION}}/$escaped_desc/g" \
+        -e "s/{{AUTHOR_NAME}}/$escaped_author/g" \
+        -e "s/{{AUTHOR_EMAIL}}/$escaped_email/g" \
+        "$src")"
+
+    content="$(process_conditional "$content" "MONOREPO" "$IS_MONOREPO")"
+    content="$(process_conditional "$content" "INCLUDE_TS" "$INCLUDE_TS")"
+    content="$(process_conditional "$content" "INCLUDE_PY" "$INCLUDE_PY")"
+    content="$(process_conditional "$content" "INCLUDE_SWIFT" "$INCLUDE_SWIFT")"
+    content="$(process_conditional "$content" "OWNER_STANDARDS" "$OWNER_STANDARDS")"
+    content="$(process_conditional "$content" "REPO_STANDARDS" "$REPO_STANDARDS")"
+    content="$(process_conditional "$content" "OWNER_TS" "$OWNER_TS")"
+    content="$(process_conditional "$content" "OWNER_PY" "$OWNER_PY")"
+    content="$(process_conditional "$content" "OWNER_SWIFT" "$OWNER_SWIFT")"
+    content="$(process_conditional "$content" "OWNER_MONOREPO" "$OWNER_MONOREPO")"
+    content="$(process_conditional "$content" "OWNER_ADDITIONS" "$OWNER_ADDITIONS")"
+
+    content="$(printf '%s' "$content" | sed 's/{{\/if}}//g')"
+    printf '%s\n' "$content"
+}
+
 # Helper to copy file with variable substitution
 copy_template() {
     local src="$1"
@@ -164,32 +230,7 @@ copy_template() {
     mkdir -p "$(dirname "$dest")"
 
     if [[ "$src" == *.template ]]; then
-        # Escape user-provided values for safe sed substitution
-        local escaped_name escaped_desc escaped_author escaped_email
-        escaped_name="$(escape_sed "$PROJECT_NAME")"
-        escaped_desc="$(escape_sed "$PROJECT_DESCRIPTION")"
-        escaped_author="$(escape_sed "$AUTHOR_NAME")"
-        escaped_email="$(escape_sed "$AUTHOR_EMAIL")"
-
-        # Process template: substitute variables first
-        local content
-        content="$(sed -e "s/{{PROJECT_NAME}}/$escaped_name/g" \
-            -e "s/{{PROJECT_DESCRIPTION}}/$escaped_desc/g" \
-            -e "s/{{AUTHOR_NAME}}/$escaped_author/g" \
-            -e "s/{{AUTHOR_EMAIL}}/$escaped_email/g" \
-            "$src")"
-
-        # Handle conditional blocks (innermost first for nested support)
-        content="$(process_conditional "$content" "MONOREPO" "$IS_MONOREPO")"
-        content="$(process_conditional "$content" "INCLUDE_TS" "$INCLUDE_TS")"
-        content="$(process_conditional "$content" "INCLUDE_PY" "$INCLUDE_PY")"
-        content="$(process_conditional "$content" "INCLUDE_SWIFT" "$INCLUDE_SWIFT")"
-
-        # Remove remaining {{/if}} markers
-        content="$(printf '%s' "$content" | sed 's/{{\/if}}//g')"
-
-        # Write processed content
-        printf '%s\n' "$content" > "$dest"
+        render_template "$src" > "$dest"
 
         # Remove .template suffix from dest if present
         local final_dest="${dest%.template}"
@@ -202,6 +243,41 @@ copy_template() {
     fi
 
     echo "CREATE: $dest"
+}
+
+# Follow the preferred instruction entry, including either symlink direction.
+# File tests and append redirection resolve links without replacing any entry.
+append_standards() {
+    local instruction_file="CLAUDE.md"
+    if [[ -e "AGENTS.md" || -L "AGENTS.md" ]]; then
+        instruction_file="AGENTS.md"
+    fi
+
+    if [[ -L "$instruction_file" && ! -e "$instruction_file" ]]; then
+        echo "SKIP: $instruction_file (dangling symlink or missing target)"
+        return 0
+    fi
+    if [[ ! -f "$instruction_file" ]]; then
+        echo "SKIP: $instruction_file (target is not a regular file)"
+        return 0
+    fi
+    if grep -q '^## Standards[[:space:]]*$' "$instruction_file"; then
+        echo "SKIP: $instruction_file (Standards already present)"
+        return 0
+    fi
+
+    local standards_section
+    standards_section="$(render_template "$TEMPLATES_DIR/common/CLAUDE.md.template" | awk '
+        /^## Standards[[:space:]]*$/ { in_standards = 1; print; next }
+        in_standards && /^## / { exit }
+        in_standards { print }
+    ')"
+    if [[ -z "$standards_section" ]]; then
+        echo "Error: instruction template has no Standards section" >&2
+        return 1
+    fi
+    printf '\n\n%s\n' "$standards_section" >> "$instruction_file"
+    echo "APPEND: $instruction_file (Standards)"
 }
 
 # Helper to copy a rule file (.md) and create a .mdc symlink pointing to it
@@ -234,9 +310,17 @@ fi
 # Common files
 echo ""
 echo "--- Common files ---"
-copy_template "$TEMPLATES_DIR/common/CLAUDE.md.template" "CLAUDE.md"
+if [[ -e "AGENTS.md" || -L "AGENTS.md" || -e "CLAUDE.md" || -L "CLAUDE.md" ]]; then
+    echo "SKIP: instruction files (existing entries are preserved)"
+else
+    copy_template "$TEMPLATES_DIR/common/CLAUDE.md.template" "CLAUDE.md"
+fi
+append_standards
 # Create AGENTS.md as symlink to CLAUDE.md (cross-tool compatibility)
-create_symlink "CLAUDE.md" "AGENTS.md"
+if [[ ! -e "AGENTS.md" && ! -L "AGENTS.md" && -f "CLAUDE.md" ]]; then
+    ln -s "CLAUDE.md" "AGENTS.md"
+    echo "LINK: AGENTS.md -> CLAUDE.md"
+fi
 copy_template "$TEMPLATES_DIR/common/gitignore.template" ".gitignore"
 mkdir -p .config
 copy_template "$TEMPLATES_DIR/common/config/wt.toml.template" ".config/wt.toml"
@@ -246,16 +330,10 @@ echo ""
 echo "--- Cursor rules ---"
 mkdir -p .cursor/rules .cursor/hooks
 
-if [[ "$INCLUDE_TS" == "true" ]]; then
-    copy_rule "$TEMPLATES_DIR/cursor/rules/ts-rules.md" ".cursor/rules"
-fi
-if [[ "$INCLUDE_PY" == "true" ]]; then
-    copy_rule "$TEMPLATES_DIR/cursor/rules/python-rules.md" ".cursor/rules"
-fi
-if [[ "$INCLUDE_SWIFT" == "true" ]]; then
+if [[ "$OWNER_STANDARDS" == "true" && "$INCLUDE_SWIFT" == "true" ]]; then
     copy_rule "$TEMPLATES_DIR/cursor/rules/swift-rules.md" ".cursor/rules"
 fi
-if [[ "$IS_MONOREPO" == "true" ]]; then
+if [[ "$OWNER_STANDARDS" == "true" && "$IS_MONOREPO" == "true" ]]; then
     copy_rule "$TEMPLATES_DIR/cursor/rules/monorepo-rules.md" ".cursor/rules"
 fi
 
