@@ -400,7 +400,7 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 - Revision 1–3, run 2 (`domain-rust` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 3.
 - Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`; reviewed at `31fa15b1`, with revision 8's correction.
 - Revision 8's correction to run 5 (D22, with implementation review 2's I2): implemented at `06fa4c8e` (text) and `31fa15b1` (script and tests); reviewed at `31fa15b1`.
-- Revision 9 (D23): run 1's base addition, run 4's line, run 5's removal, and run 6 (`domain-swift`, create): proposed.
+- Revision 9 (D23): run 1's base addition, run 4's line, run 5's removal, and run 6 (`domain-swift`, create): implemented at `65b4561c` and `e42892b2` (text) and `cebfabfd` (script and tests).
 
 ## Review record
 

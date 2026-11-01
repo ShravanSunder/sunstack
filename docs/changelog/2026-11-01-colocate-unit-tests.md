@@ -12,6 +12,6 @@
   - The scaffold writes no rules files: standards reach agents, Cursor included, only through the skills. The four `.cursor/rules` templates are deleted.
 - This repository's AGENTS.md gains its Standards section.
 - Design set and reviews: `docs/wip/skills-authoring/2026-11-01-colocate-unit-tests/`.
-- Validation: `tests/skills` vitest 293/293 (the scaffold script tests included), typecheck exit 0, `rules --check` exit 0 (13 rules), `claude plugin validate .` passed.
+- Validation: `tests/skills` vitest 302/302 in 26 files (the scaffold script tests included), typecheck exit 0, `rules --check` exit 0 (13 rules), `claude plugin validate .` passed.
 - Unverified: agent behavior under the Standards line (pressure tasks come next), and client loading of linked hidden skills.
 - Codex and Claude caches: not refreshed.
