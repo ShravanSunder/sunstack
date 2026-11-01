@@ -1,9 +1,0 @@
-[
-  {
-    "id": "case-001",
-    "set": "development",
-    "evidence": { "kind": "section", "field": "body" },
-    "source": { "class": "synthetic", "repository": "fixture", "revision": "fixture", "path": "case-001/SKILL.md", "startLine": 10, "endLine": 14 },
-    "excerpt": { "path": "case-001/SKILL.md", "line": 13, "pieceLine": 10 }
-  }
-]

@@ -1,0 +1,172 @@
+{
+  "expectations": [
+    {
+      "id": "decision-models-k002-case-001",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/steering.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 6,
+      "field_line": 6,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k002/case-001 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k002/case-001"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k002-case-002",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 6,
+      "field_line": 6,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k002/case-002 (development, current): original sol-settled call not_applicable on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Independent Sol settler: decision-models-k002/case-002"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k002-case-003",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/calls-and-placement.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 134,
+      "field_line": 134,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k002/case-003 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k002/case-003"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k002-case-004",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/descriptions-and-invocation.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 105,
+      "field_line": 105,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k002/case-004 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k002/case-004"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k003-case-001",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/steering.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 6,
+      "field_line": 6,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k003/case-001 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k003/case-001"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k003-case-002",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 6,
+      "field_line": 6,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k003/case-002 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k003/case-002"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "decision-models-k003-case-003",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/descriptions-and-invocation.rules.json",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 181,
+      "field_line": 181,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated decision-models-k003/case-003 (development, current): original labelers-agreed call pass on rule_question.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: decision-models-k003/case-003"
+        ]
+      },
+      "added": "2026-11-01"
+    }
+  ]
+}

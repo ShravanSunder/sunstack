@@ -1,5 +1,9 @@
 # Skill Pressure Tests
 
+Rule usefulness is checked on real sources pinned by Git. The excerpt corpus and its scoring harness have been removed. Sibling `*.expect.json` files beside the authored `*.rules.json` files retain the original calls and their provenance; they contain no skill text. Engine mechanics belong to sunstack-tools.
+
+Unit tests are colocated beside their modules; integration and end-to-end tests live in `tests/integration/` and `tests/e2e/`, with shared support in `tests/support/`. Run all local checks with `pnpm --dir tests/skills test` and `pnpm --dir tests/skills typecheck`. The pressure entry `test:evals`, its library and sample scenarios remain; receiving-agent pressure proof is separate from rule checks.
+
 > **Status 2026-10-09:** the scenarios were removed while pressure testing is redesigned; this harness, its evaluator library, and its unit tests stay. `pressure-scenarios/` does not exist until a new scenario is added, so `test:evals` exits 1 with nothing to run. The unit tests read sample copies under `fixtures/sample-scenarios/`.
 
 This harness pressure-tests Codex skills through Codex. Most scenarios cover

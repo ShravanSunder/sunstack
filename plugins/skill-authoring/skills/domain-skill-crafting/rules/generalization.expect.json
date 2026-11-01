@@ -1,0 +1,450 @@
+{
+  "expectations": [
+    {
+      "id": "generalization-k001-case-001",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 9,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-001 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-001"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-002",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 5,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-002 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-002"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-003",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/steering.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 9,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-003 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-003"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-004",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 10,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-004"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-005",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 8,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-005"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-006",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/platform.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 3,
+      "field_line": 6,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-006 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-006"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-007",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 22,
+      "field_line": 24,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-007 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-007"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-008",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 46,
+      "field_line": 48,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-008 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-008"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-009",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 22,
+      "field_line": 24,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-009 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-009"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-010",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 6,
+      "field_line": 8,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Independent Sol settler: generalization-k001/case-010"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-011",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 32,
+      "field_line": 40,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-011 (development, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Independent Sol settler: generalization-k001/case-011"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-case-012",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 96,
+      "field_line": 114,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-012"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h01",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 76,
+      "field_line": 76,
+      "expect": "must_fire",
+      "lines": [
+        80,
+        81,
+        82,
+        83,
+        85
+      ],
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h01 (held-out, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h01"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h02",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 123,
+      "field_line": 123,
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h02 (held-out, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Independent Sol settler: generalization-k001/held-out-h02"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h03",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 13,
+      "field_line": 13,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h03"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h04",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/references/doc-roles.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 19,
+      "field_line": 19,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h04 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h04"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h05",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/principle-write-for-the-reader/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 13,
+      "field_line": 13,
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h05 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h05"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "generalization-k001-held-out-h06",
+      "rule": "rule.generalization",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "piece_first_line": 87,
+      "field_line": 87,
+      "expect": "must_fire",
+      "lines": [
+        89,
+        92,
+        93,
+        94,
+        95
+      ],
+      "kind": "regression_example",
+      "basis": "Migrated generalization-k001/held-out-h06 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Independent Sol settler: generalization-k001/held-out-h06"
+        ]
+      },
+      "added": "2026-11-01"
+    }
+  ]
+}

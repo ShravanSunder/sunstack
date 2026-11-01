@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run lib --config vitest.config.ts",
+    "test": "vitest run lib tests --config vitest.config.ts",
     "test:unit": "vitest run lib --config vitest.config.ts",
     "test:evals": "vitest run evals --config vitest.config.ts",
     "typecheck": "tsc --noEmit",
