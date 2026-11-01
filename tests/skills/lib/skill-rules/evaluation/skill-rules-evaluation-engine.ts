@@ -19,7 +19,48 @@ const evidencePieceSchema = z
     fields: z.record(z.string(), z.object({ spans: z.array(spanSchema).optional() }).passthrough()),
   })
   .passthrough();
-const evidenceListingSchema = z.object({ pieces: z.array(evidencePieceSchema) }).passthrough();
+const listedSelectionSchema = z
+  .object({
+    kind: z.string(),
+    where: z.object({ file: z.string(), first_line: z.number() }).passthrough(),
+    outcome: z.object({ kind: z.string() }).passthrough(),
+  })
+  .passthrough();
+const evidenceListingSchema = z
+  .object({
+    pieces: z.array(evidencePieceSchema),
+    selections: z.array(listedSelectionSchema).optional(),
+  })
+  .passthrough();
+// The engine's exit codes, by the status each one reports.
+const statusByExit: Readonly<Record<number, string>> = {
+  0: "clean",
+  1: "findings",
+  2: "invalid",
+  3: "incomplete",
+  4: "cancelled",
+  5: "uncertain",
+};
+
+/** One engine step's failure with its real exit, status and output, never an empty reason. */
+export function engineFailure(
+  step: string,
+  result: { readonly exit: number | null; readonly stderr: string; readonly stdout: string },
+): string {
+  const status =
+    result.exit === null
+      ? "terminated before it exited"
+      : `exit ${result.exit} (${statusByExit[result.exit] ?? "unknown status"})`;
+  const detail = result.stderr.trim() || result.stdout.trim().slice(0, 600) || "no output";
+  return `${step} failed: ${status}: ${detail}`;
+}
+
+/** A selection candidate that ended between its bars or incomplete, kept with the case's observation. */
+export type UnresolvedSelection = {
+  readonly kind: string;
+  readonly line: number;
+  readonly outcome: string;
+};
 const configSchema = z
   .object({
     rulebook: z.array(z.object({ markdown: z.string(), rules: z.string() })),
@@ -159,6 +200,12 @@ type CaseEvaluationDetails = {
   /** For a labelled finding the rule also found: its anchor class and line, scored apart. */
   anchor: AnchorScore | null;
   locator: LocatorReading | null;
+  /**
+   * The evidence step's status: an uncertain selection elsewhere in the file leaves the labelled
+   * piece judged, and the candidates it left unresolved are listed here.
+   */
+  evidenceStatus: "clean" | "uncertain";
+  unresolvedSelections: UnresolvedSelection[];
 };
 export type CaseEvaluationOutput = CaseEvaluationDetails &
   ({ score: "gap"; gap: string } | { score: Exclude<OutcomeScore["kind"], "gap">; gap: null });
@@ -216,13 +263,27 @@ export async function evaluateLabelledCase(
       ],
     });
     writeFileSync(path.join(request.reportDirectory, "evidence.json"), evidence.stdout);
-    if (evidence.exit !== 0)
-      throw new Error(`Evidence acquisition failed (${evidence.exit}): ${evidence.stderr}`);
-    const piece = selectLabelledPiece(
-      loaded,
-      evidenceListingSchema.parse(JSON.parse(evidence.stdout)).pieces,
-      checkedFile,
-    );
+    if (evidence.stderr)
+      writeFileSync(path.join(request.reportDirectory, "evidence.stderr.txt"), evidence.stderr);
+    // Exit 5 is the engine's uncertain status: a selection candidate ended between its bars. The
+    // listing is complete, so the case goes on unless that candidate removed the labelled piece.
+    if (evidence.exit !== 0 && evidence.exit !== 5)
+      throw new Error(engineFailure("Evidence acquisition", evidence));
+    const listing = evidenceListingSchema.parse(JSON.parse(evidence.stdout));
+    const unresolvedSelections: UnresolvedSelection[] = (listing.selections ?? [])
+      .filter((item) => item.outcome.kind === "uncertain" || item.outcome.kind === "incomplete")
+      .map((item) => ({ kind: item.kind, line: item.where.first_line, outcome: item.outcome.kind }));
+    let piece: z.infer<typeof evidencePieceSchema>;
+    try {
+      piece = selectLabelledPiece(loaded, listing.pieces, checkedFile);
+    } catch (error) {
+      const unresolved = unresolvedSelections
+        .map((item) => `${item.kind} at line ${item.line} (${item.outcome})`)
+        .join(", ");
+      throw new Error(
+        `${error instanceof Error ? error.message : String(error)}${unresolved ? `; unresolved selections: ${unresolved}` : ""}`,
+      );
+    }
     const evaluated = await executeEngine({
       ...common,
       args: ["lint", "--config", configFile, "--all", "--format", "json", "--", checkedFile],
@@ -231,7 +292,13 @@ export async function evaluateLabelledCase(
     writeFileSync(reportFile, evaluated.stdout);
     if (evaluated.stderr)
       writeFileSync(path.join(request.reportDirectory, "engine.stderr.txt"), evaluated.stderr);
-    const report = lintReportSchema.parse(JSON.parse(evaluated.stdout));
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(evaluated.stdout);
+    } catch {
+      throw new Error(engineFailure("Rule run", evaluated));
+    }
+    const report = lintReportSchema.parse(parsed);
     const matching = report.results.filter(
       (result) =>
         result.name === identity.rule &&
@@ -284,6 +351,8 @@ export async function evaluateLabelledCase(
       uncertainPieces: report.uncertain.length,
       anchor: score.anchor,
       locator,
+      evidenceStatus: evidence.exit === 5 ? "uncertain" : "clean",
+      unresolvedSelections,
     };
     return score.outcome.kind === "gap"
       ? { ...details, score: "gap", gap: score.outcome.reason }

@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { z } from "zod";
 import { loadRuleCases } from "../evaluation/skill-rules-evaluation-cases.ts";
 import type { LoadedRuleCase } from "../evaluation/skill-rules-evaluation-cases.ts";
-import { evaluateLabelledCase } from "../evaluation/skill-rules-evaluation-engine.ts";
+import { engineFailure, evaluateLabelledCase } from "../evaluation/skill-rules-evaluation-engine.ts";
 import { createRuleEvaluationHarness } from "../evaluation/skill-rules-evaluation-harness.ts";
 import {
   cleanupFixtureRoots,
@@ -266,6 +266,76 @@ describe("a located finding's outcome and anchor are scored apart", () => {
         expect(output.anchor?.line).not.toBe(13);
       },
       { product_line: { label: "L13", probability: 0.3 } },
+    );
+  });
+});
+
+const selectionFixturesRoot = fileURLToPath(
+  new URL("../../../fixtures/run-skill-rules/eval-selection", import.meta.url),
+);
+function selectionFixture(ruleFolder: string): LoadedRuleCase {
+  const loaded = loadRuleCases(selectionFixturesRoot).find((item) => item.ruleFolder === ruleFolder);
+  if (!loaded?.label) throw new Error(`Selection fixture ${ruleFolder} missing`);
+  return loaded;
+}
+
+describe("an uncertain selection elsewhere in the file", () => {
+  test("leaves the labelled description judged, with the unresolved candidate listed", async () => {
+    const root = createFixture();
+    await withJudge({ c1: 0.5 }, async (endpoint) => {
+      const output = await evaluateLabelledCase({
+        loaded: selectionFixture("descriptions-k004"),
+        kitRules: copyKit(root, endpoint),
+        engine: enginePath,
+        reportDirectory: path.join(root, "evaluation"),
+      });
+      expect(output).toMatchObject({
+        observed: "pass",
+        score: "matched",
+        evidenceStatus: "uncertain",
+        unresolvedSelections: [{ kind: "workflow_section", line: 8, outcome: "uncertain" }],
+      });
+    });
+  });
+
+  test("fails a case whose piece exists only through that candidate, naming it", async () => {
+    const root = createFixture();
+    await withJudge({ c1: 0.5 }, async (endpoint) => {
+      await expect(
+        evaluateLabelledCase({
+          loaded: selectionFixture("steering-k001"),
+          kitRules: copyKit(root, endpoint),
+          engine: enginePath,
+          reportDirectory: path.join(root, "evaluation"),
+        }),
+      ).rejects.toThrow("unresolved selections: workflow_section at line 8 (uncertain)");
+    });
+  });
+
+  test("with the candidate selected, the same step is judged", async () => {
+    const root = createFixture();
+    await withJudge({ c1: 0.95 }, async (endpoint) => {
+      const output = await evaluateLabelledCase({
+        loaded: selectionFixture("steering-k001"),
+        kitRules: copyKit(root, endpoint),
+        engine: enginePath,
+        reportDirectory: path.join(root, "evaluation"),
+      });
+      expect(output).toMatchObject({ evidenceStatus: "clean", unresolvedSelections: [] });
+    });
+  });
+});
+
+describe("an engine step's failure", () => {
+  test("names its real exit, status and output, never an empty reason", () => {
+    expect(engineFailure("Evidence acquisition", { exit: 3, stderr: "", stdout: '{"partial":true}' })).toBe(
+      'Evidence acquisition failed: exit 3 (incomplete): {"partial":true}',
+    );
+    expect(engineFailure("Rule run", { exit: 2, stderr: "config refused\n", stdout: "{}" })).toBe(
+      "Rule run failed: exit 2 (invalid): config refused",
+    );
+    expect(engineFailure("Rule run", { exit: null, stderr: "", stdout: "" })).toBe(
+      "Rule run failed: terminated before it exited: no output",
     );
   });
 });
