@@ -19,7 +19,7 @@ This reference owns step 3: turning a classified standard into a rule's design b
 
 ## Design the rule
 
-1. **Name the judgment, and read the standard's own cases.** Say which call the nudge helps and who makes it. For a placement rule: "does a skill meant for any repository route the agent into one product's own workflow?", made by the writer, the review lead or the Lead, who decides whether the text stays or the workflow moves. Then collect the good and bad examples the standard's home gives, its boundary cases, its exemptions and its accepted judgments. They are the negative controls every question must pass, and the first labelled cases.
+1. **Name the judgment, and read the standard's own cases.** Say which call the nudge helps and who makes it. For a placement rule: "does a skill meant for any repository route the agent into one product's own workflow?", made by the writer, the review lead or the Lead, who decides whether the text stays or the workflow moves. Then collect the good and bad examples the standard's home gives, its boundary cases, its exemptions and its accepted judgments. They are the negative controls every question must pass, and the first expectation entries, each pinned to the real place it comes from.
 2. **Design the chunk.** State five things:
    - **the subject:** what one piece is, such as a load line, a step, or a section's own text;
    - **the denominator:** which files and which pieces the rule scans. "Unread" is read against it, so a rule that judges only `SKILL.md` descriptions doesn't count every reference as a gap;
@@ -56,8 +56,8 @@ This reference owns step 3: turning a classified standard into a rule's design b
    Several rules can nudge about the same line, each about its own property. Keep each route's message about its own: the agent puts them together.
 7. **Plan the proof,** in three observations kept apart:
    - **the collection:** an evidence print over the rule's full denominator, every intended piece found with its fields, every cut named;
-   - **the tree:** for a deterministic rule, edge tests at its predicate's boundary, with no model. For a judged rule, development and held-out sets of real pieces, each holding good, bad and near-miss cases and the countercases the standard's own exemptions name, with labels from people or agents independent of the rule, each expecting an outcome at a line. Its baseline is the current rule for the standard, when one exists;
-   - **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is an eval: it waits for the owner's evals, and the design names it as unproven.
+   - **the tree:** for a deterministic rule, edge tests at its predicate's boundary, with no model. For a judged rule, expectation entries beside its rules file. Each entry is a place in a real skill pinned by Git, expecting `must_fire` at its lines, `must_pass` or `not_applicable`, with good, bad and near-miss places and the counter-examples the standard's own exemptions name, decided by people or agents independent of the rule. The design names the real `must_fire` places it has found, or "no real positive found" with the search that was made. Its baseline is the current rule for the standard, run on the same entries, when one exists;
+   - **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source; the design names it as unproven until one has run.
 
 ## Worked design: a step's completion criterion
 
@@ -73,9 +73,9 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
 - **Nodes.** Two Nouls, in one request, in this first-failure order:
   1. `names_end`: "Does the step's text say what must be true when the step is done?"
   2. `requires_result`: "Does the step's stated end require the result the step itself says to produce?" This is bounded by the step's own stated work. "Glance at the test output, then move on" passes when the step asks only for a glance. Requiring an investigation the step never names imports another standard.
-- **Policy.** P(yes) ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is `uncertain`, for the agent running the check to decide. These bars are a first setting, provisional until development results. Both findings are `warn`: both paths read a model's answer. A false finding costs an author a needless rewrite, and pushes toward padding the owner rejected. A miss lets an empty criterion through. A review costs the checker's time.
+- **Policy.** P(yes) ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is `uncertain`, for the agent running the check to decide. These bars are a first setting, provisional until the expectation run. Both findings are `warn`: both paths read a model's answer. A false finding costs an author a needless rewrite, and pushes toward padding the owner rejected. A miss lets an empty criterion through. A review costs the checker's time.
 - **The nudge.** Each finding points at `body`, whose first line opens the step, and needs no locator: a step is small enough to read whole. No `related` field: the step is the finding's own place, and the standard's line is the only other thing the agent needs.
-- **Proof plan.** The evidence print over every selected step. Development and held-out cases with independent labels, including:
+- **Proof plan.** The evidence print over every selected step. Expectation entries on real steps pinned by Git, decided independently, including:
   - a step whose whole job is to report an existing result;
   - a step that asks only for a glance;
   - a full return stated without any label;
@@ -83,7 +83,7 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
   - zero findings after a prescribed inspection;
   - a bare output list with no inspection required.
 
-  The baseline is the old label-gated rule. The writer's call on a finding waits for evals.
+  The baseline is the old label-gated rule, on the same entries. The writer's call on a finding waits for a pressure task.
 
 ```json
 "K001": {
@@ -104,7 +104,7 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
 }
 ```
 
-Both questions go in the entry's one request, and the walk reads `requires_result` only when `names_end` is yes. This is a worked design, not a delivered or measured rule; its accuracy is unproven until its labelled cases run.
+Both questions go in the entry's one request, and the walk reads `requires_result` only when `names_end` is yes. This is a worked design, not a delivered or measured rule; its accuracy is unproven until its expectation run on real steps is in.
 
 ## Worked design: placement, on #187's line
 
@@ -147,7 +147,7 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   | example_or_own_infrastructure | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | second     | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is the same as above |
   ```
 
-  The bars are a first setting, provisional until development results.
+  The bars are a first setting, provisional until the expectation run.
 - **The nudge.**
   - **Message:** "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository." The repository is a direction: the run never reads it.
   - **Where:** `at: "body"`, with a locator `product_line` whose task asks which line of `body` sends the agent into one named product's own workflow, and carries the questions' exemptions so a tool, the subject's vocabulary, a labelled example or the toolkit's own infrastructure isn't picked; at `min_probability` .6, on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
@@ -155,7 +155,12 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   - **Read next:** `related: ["targets"]`. The finding lists the standard's line, then each loaded file whose opening the run read, `agentstudio-loop.md` among them. The list names every file the section loads; the locator, not the list, says which line the nudge is about.
 - **Proof plan.**
   - **The collection:** an evidence print over the whole denominator, showing line 17's section with `agentstudio-loop.md`'s opening in its `targets`, `practices-cleanup`'s allow-list table whole, and every cut named.
-  - **The tree:** development cases. Line 17's section expects a finding at line 17, anchored by the locator. `practices-cleanup/SKILL.md`'s allow list, whose table row at line 40 runs AgentStudio's own `mise ... run clean-artifacts`, expects a finding, from the section's own text, with no load in it. The countercases expect no nudge: a section that names a product only as a labelled example; this toolkit's own observability queries in `victoria-queries.md`; `domain-skill-crafting/references/platform.md`'s platform contracts. Held-out cases from other plugins, labelled by agents independent of the rule, run once after the freeze. No current rule judges this standard, so there is no baseline: name that.
-  - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is an eval, and stays unproven until the evals run.
+  - **The tree:** expectation entries beside `calls-and-placement.rules.json`, each on a commit from before the fix.
+    - Line 17's section, at a commit that still holds it, expects `must_fire` at line 17, anchored by the locator.
+    - `practices-cleanup/SKILL.md`'s allow list, whose table row at line 40 runs AgentStudio's own `mise ... run clean-artifacts`, expects `must_fire` from the section's own text, with no load in it. It is a second family, so it counts apart from line 17.
+    - The counter-examples expect `must_pass`: a section that names a product only as a labelled example; this toolkit's own observability queries in `victoria-queries.md`; `domain-skill-crafting/references/platform.md`'s platform contracts.
+    - The current-skills run then accounts for every nudge the rule gives on today's skills.
+    - No current rule judges this standard, so there is no baseline: name that.
+  - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is a pressure task on the pinned source, and stays unproven until one has run.
 
-The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar, .6, was set from four development readings, after one wrong line drew .52 and one right line .44; held-out cases test it.
+The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar, .6, was set from four development readings, after one wrong line drew .52 and one right line .44; the expectation run's locator column tests it.

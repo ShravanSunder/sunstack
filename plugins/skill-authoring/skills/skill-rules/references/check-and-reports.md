@@ -1,6 +1,6 @@
 # Check and Reports
 
-This reference owns step 7: checking the rules, printing the evidence they will judge, reading a run's report, and proving each rule with rule tests. Expected input: the paired rulebook, the runner the repository's instructions name, the intended rules with which of them are mechanical, and for each rule the pieces you meant it to judge, its denominator and step 3's proof plan. Return: the check's outcome and printed rules; the proof in three observations kept apart (for each rule's evidence kind, the pieces it picks over its denominator with your intended ones among them and every cut named; for each rule, its rule tests and their per-rule results; and the receiving agent's call, named as owed to evals); and what stays unproven.
+This reference owns step 7: checking the rules, printing the evidence they will judge, reading a run's report, and proving each rule on real skills. Expected input: the paired rulebook, the runner the repository's instructions name, the intended rules with which of them are mechanical, and for each rule the pieces you meant it to judge, its denominator, its expectation entries and step 3's proof plan. Return: the check's outcome and printed rules; the proof in three observations kept apart (for each rule's evidence kind, the pieces it picks over its denominator with your intended ones among them and every cut named; for each mechanical rule its edge tests, and for each judged rule its expectation and current-skills results with outcome, locator and gaps apart; and the receiving agent's call, named as owed to a pressure task); and what stays unproven.
 
 ## Check
 
@@ -72,41 +72,92 @@ The report has no coverage field: the runner derives "unread" per rule. A rule's
 
 What a report keeps for replay and for the answering model's version is a fact of the Sunstack driver, which `domain-decision-models` owns in its driver reference. Read it before using a report to compare thresholds or versions.
 
-## Rule tests
+## Rule proof on real skills
 
-A rule's proof is three observations, kept apart: the collection (the evidence print, above), the tree on labelled cases (these tests), and the receiving agent's call. None stands in for another. A clean evidence print says nothing about decisions, labelled cases say nothing about what an agent does with a nudge, and the agent's call is an eval that waits for the owner's evals: name it as unproven.
+A rule's proof is three observations, kept apart:
+- **the collection:** the evidence print, above;
+- **the tree:** what the rule decides on real skill text, from its expectation run and its current-skills run below;
+- **the receiving agent's call:** a pressure task, in which a fresh agent works on the same real source with the rule's nudge in hand.
 
-A rule is proven by what it decides on labelled pieces, not by a clean check. Rule tests live in the repository's eval suite, as labelled cases taken from real skills, each run through the same command and judge the rules use, and each checking the outcome the decision reaches: `pass`, `finding` (and its line), `not_applicable` or `uncertain`. They add no store, state or procedure of their own.
+None stands in for another. A clean evidence print says nothing about decisions. An expectation run says nothing about what an agent does with a nudge. Pressure tasks are the next proof, owed to their own change: until one has run, name the receiving agent's call as unproven.
 
-**Building the cases.** Each judged rule's cases together hold at least one good case (expects `pass`), one bad case (expects `finding`) and one near miss, a look-alike that expects `not_applicable` when the gate should drop it, or `pass` when it is a conforming piece that only looks wrong. They also hold a countercase for each exemption the standard's home states, such as a product named only as a labelled example, expecting no finding: the exemptions come from where the standard is taught, never from notes kept beside the rule. A bad case on a located route expects its finding at the observed line with `anchor: "resolved"`. They split into two sets:
+A rule is proven by what it decides on real skills, not by a clean check, and not on text made up to be judged. The engine's own mechanics are proven with fixtures in the engine's repository. This repository proves only that an authored rule asks a useful question of real skill text, so it commits no copy of a skill as a test input and never uses an invented skill as proof.
 
-- a **development set**, used to write and tune the entry;
-- a **held-out set**, drawn from other skills, run once after the entry is frozen.
+**Sources, pinned by Git.** A source names a repository, a full commit and the paths it needs: the file judged and the files and folders it loads. The runner unpacks all of them from that one commit into a temporary folder outside the repository, judges them there, and deletes the folder.
+- **Where sources come from:** this repository's own history, especially versions from before a real fix, then the owner's other repositories and upstream skill collections.
+- **A commit the runner can't unpack** is a setup gap to fix, by fetching it or naming the repository. It's never a reason to copy text in.
+- **Choosing sources:** choose them for distinct failure modes and their counter-examples, not for size. One source family counts once: two versions of the same skill's loop are one family.
 
-Each set aims for all three kinds. When a set still lacks a kind after two targeted rounds of collecting real pieces, each labelled blind, record the gap with the search that was made, and claim nothing from that set about the missing kind: a held-out set with no labelled breach says nothing about how well the rule finds breaches.
+**Expectations, beside the rule.** Each rules file has a sibling `<name>.expect.json`: `{ "expectations": [ … ] }`, one entry per rule and source place. An entry is a claim about one rule at one place, never a copy of text:
+- `id`: stable, never reused;
+- `rule`: the rule ID, which names an entry in the sibling rules file;
+- `source`:
+  - `repository`: `"self"` for this repository;
+  - `commit`;
+  - `path`, the file judged;
+  - `context`, the files and folders it loads;
+- `piece_first_line`: the first line of the piece the engine judges, which picks the piece the way the engine does; omitted for a kind judged once per file, such as a description;
+- `expect`: `must_fire`, `must_pass`, `not_applicable` or `unknown`, and for `must_fire` the `lines` a finding may point at;
+- `kind`:
+  - `breach`, an established mistake;
+  - `worth_reading`, a place an agent should look;
+  - `regression_example`, a historical mistake, which is never a fresh holdout;
+- `basis`: why, and which context supports the call;
+- `decided_by`: `owner`, `independent` (two or more blind judges, named) or `author`. A `must_fire` that acceptance rests on needs `owner` or `independent`. Agreement between two judges isn't truth by itself, so the basis stays recorded.
 
-Each case is an excerpt of a real piece with its source, and each label records who gave it. Labels come from people or agents independent of the rule's writer and of any run of the rule, such as two labelers who don't see each other's labels and a third who settles their disagreements; where the owner of the standards labels a rule's cases, those labels govern. A label the rule's writer took from the rule's own answers proves nothing.
+Three rules keep the entries honest:
+- **Entries come first.** A semantic change to a rule's questions, criteria or bars gets its new entries before the change, never after.
+- **Never adjusted to pass.** An entry is never dropped or rewritten so a run passes. Changing `expect`, `lines` or `kind` is a commit with a new `basis`.
+- **Counter-examples count.** The entries hold the counter-examples the standard's home states, such as a product named only as a labelled example: the exemptions come from where the standard is taught, never from notes kept beside the rule.
 
-**Reading the results.** Report, per rule: matched, missed (expected a finding, got `pass` or `not_applicable`), wrong (expected `pass` or `not_applicable`, got a finding), uncertain, and gaps, with each case's label source, so every case is counted exactly once. A gap is any other non-match, named with its reason, and never a match: expected `pass` but got `not_applicable` or the reverse (the decision reached a different place than the label, such as a gate dropping a piece the labelers judged; the row's `answers` show the gate's answer), a finding at a line other than the labelled one, a `default` anchor where the label expected the locator to resolve, a result reached on a cut view, or a piece whose evaluation didn't complete. Tune a rule's questions, criteria and thresholds only from its development results, before the freeze. A held-out miss is reported, never tuned away. After a correction, held-out cases already scored become regression cases; a fresh held-out claim needs cases not yet seen. Results that rest on labels still owed are provisional, and say so.
+A `must_pass` holds for one rule at one commit. A skill is never clean across the board: an earlier `practices-cleanup` had two real placement findings.
 
-**Measures and versions.** `domain-decision-models` owns these standards; here is how they apply to rule tests.
-- **Count every case,** passes and `not_applicable` included.
-- **Report apart:** labelled errors and misses, coverage, review load (`uncertain`), incomplete parts, and instability across identical repeats.
+**The two runs.** Run both on every rule change. They count real text only, and report three things apart:
+- **the outcome against the entry:** `caught`, `missed`, `false_nudge` or `unsure`;
+- **the locator:** `hit` (a finding inside the entry's `lines`), `miss`, `not_applicable` or `unavailable`;
+- **the gaps:** `setup` (the source couldn't be unpacked), `cut`, `unread`, `incomplete` or `error`. A gap is never a pass.
+
+The two runs:
+1. **The expectation run,** `pnpm --dir tests/skills rules:expect`, unpacks every pinned source, runs the rules there and reads every entry. `--check` validates the entries without running, and `--out` keeps the reports in an empty folder outside the repository. It prints one line per entry, and the run-wide gaps.
+2. **The current-skills run,** `pnpm --dir tests/skills rules`, runs the rules over this repository's skills as they stand. After its report it lists every item that needs a person's written account: each nudge no entry covers, a sample of the places each rule passed or dropped (so a rule that never looked is caught), each cut and gap, and the decided exclusions. Give every item its account, as `running-rules.md` teaches. Clear outcomes join the expectations as new entries. This run is supporting evidence, not a holdout and not an accuracy rate.
+
+**Reading the results.** Report per rule: each entry with its outcome, its locator and its gaps, and each current-skills item with its account. Every entry is counted exactly once.
+- **The outcomes:** `caught` covers a `must_fire` that fired, a `must_pass` that passed and a `not_applicable` the gate dropped. A pass where `not_applicable` was expected, or the reverse, reads `unsure`, and the row's answers show where the decision went.
+- **What isn't a catch at the right place:** a finding outside the entry's `lines` is a locator miss, and that includes one left at its field's first line by default. `unavailable` means no single finding sat in the piece to read a line from.
+- **Tuning:** tune a rule's questions, criteria and bars only before its expectations freeze. A miss after the freeze is reported, never tuned away.
+- **No real positive:** when a rule has no real `must_fire` entry after a search of history, the other repositories and upstream, say "no real positive found". Its claim narrows to exactly what its runs showed, with their gaps. A rule with no positive hasn't shown that it catches anything, and an absence of false nudges holds only where the runs show it. Whoever owns the standards decides whether that rule ships.
+
+**Measures and versions.** `domain-decision-models` owns these standards; here is how they apply to these runs:
+- **Count every entry,** passes and `not_applicable` included.
+- **Report apart:** misses and false nudges, coverage, review load (`unsure`), gaps, and instability across identical repeats.
 - **Record the model.** Each result records the model requested and, where the record keeps it, the version that answered. A comparison runs within one version group, or names the missing comparator.
-- **Compare thresholds honestly.** A threshold change is compared by replaying stored answers only where the record keeps them for every case. Otherwise it's a fresh run, named as one.
+- **Compare thresholds honestly.** A threshold change is compared by replaying stored answers only where the record keeps them for every entry. Otherwise it's a fresh run, named as one.
 
-**Mechanical rules** are tested at their edges with no model: for a 300-character limit, 300 characters pass and 301 fail; for an opener rule, each allowed opener passes and a near opener (`Use for`) fails, at the description's line.
+**Mechanical rules** are tested at their edges with no model: for a 300-character limit, 300 characters pass and 301 fail; for an opener rule, each allowed opener passes and a near opener (`Use for`) fails, at the description's line. Those tests test the local predicate, and are unit tests beside the code they test.
 
-**What tests don't show.** Named cases measure a rule's decisions on the pieces chosen; they don't measure how many real pieces its evidence kind misses, and they don't show what an agent does with the nudge. No result here makes a judged rule ready to block: that needs whole sources labelled independently, with a held-out group of files, and a decision by whoever owns the standards. Our rules keep every judged path at `warn` regardless.
+**What the runs don't show.** Entries measure a rule's decisions at the places they name. They don't measure how many real pieces its evidence kind misses, and they don't show what an agent does with the nudge. No result here makes a judged rule ready to block: that needs whole sources judged independently, and a decision by whoever owns the standards. Our rules keep every judged path at `warn` regardless.
 
-### Worked reading
+### Worked readings
 
-A guidance rule over the `sentence` kind asks first whether the piece is guidance, then whether it names a positive target. Its development set:
+**Invented text passed for proof.** A rule set's first proof used excerpt cases copied into the repository, split into development and held-out sets.
+- **The headline:** the held-out set read 25 matched, 8 uncertain, 1 missed, 0 wrong.
+- **Split by source:** 13 of the 25 matches came from invented mini-skills and invented rule files. On real held-out text it was 12 matched, 4 uncertain and 1 missed, of 17.
+- **Coverage:** the description loading-scope rule never met a real positive, and the decision-model rules met only invented rule files.
+- **After migration to pinned sources:** real `must_fire` coverage ran from none to five entries per rule.
 
-- **Good:** "Run the tests for each changed module and report each result with its command." Expected `pass`; got `pass`. Matched.
-- **Bad:** "Don't skip tests." Expected a finding at the sentence; got `finding`. Matched.
-- **Near miss:** the list item `Weak: "Don't skip tests."`, an example inside a section that teaches the positive shape. Expected `not_applicable` (an example, not guidance). Got a finding: the gate read the quoted example as guidance. Wrong.
+So the headline measured how well the rules judged text written to be judged. Read it as the coverage it really was, rule by rule, and name each rule with no real positive.
 
-The wrong case is the gate's, not the verdict's: the fix belongs in the gate's criteria (an example quoted to show a weak form is not guidance), and the case reruns with the rest of the development set. If that held-out set later shows the same miss, it is reported as a miss, and the rule keeps warning, not blocking.
+**A locator that measured the wrong piece.** Migrating those cases to pinned entries first took each entry's `piece_first_line` from where its excerpt started.
+- **The mistake:** the excerpt's start isn't the judged piece's. `calls-and-placement-k001-case-001`'s excerpt opened at `skill-creation/SKILL.md:22`, while the load the rule judges begins at `:24`.
+- **What it caused:** 72 entries would have picked a neighbouring piece or none, and scored as unread or as a locator miss for a reason that had nothing to do with the rule.
+- **The fix:** derive each line from the case's own piece coordinates. Then check, on the evidence print, that the engine's piece starts there before an entry counts.
 
-Complete when: the check passed on the real engine and printed every intended rule with the expected count, each standard reading as itself; the evidence print covers each rule's denominator and shows its intended pieces with their fields, every cut named; every mechanical rule has edge tests that pass and fail where its standard does; every judged rule has good, bad, near-miss and countercases across its sets, development results, and held-out results after its freeze, each case with its label source; any kind a set lacks is recorded with its search; the receiving agent's call is named as owed to evals; and everything still unproven is named.
+Complete when:
+- the check passed on the real engine and printed every intended rule with the expected count, each standard reading as itself;
+- the evidence print covers each rule's denominator and shows its intended pieces with their fields, every cut named;
+- every mechanical rule has edge tests that pass and fail where its standard does;
+- every judged rule has entries on real sources pinned by Git, its counter-examples among them, each with its basis and who decided it;
+- its expectation run and current-skills run are in, with outcome, locator and gaps apart, and every listed item accounted for;
+- a rule with no real positive says so, with its claim narrowed;
+- the receiving agent's call is named as owed to a pressure task;
+- everything still unproven is named.

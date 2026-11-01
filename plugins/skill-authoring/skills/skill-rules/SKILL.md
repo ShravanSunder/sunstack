@@ -60,7 +60,7 @@ Then MUST load `references/rule-design.md`, and return per marked rule the desig
    - each question's type, proposition, evaluated field and criteria, with the encoded state for sampled good, bad and near-miss pieces or the named evidence gap;
    - each threshold's statistic, inequalities and in-between route, precedence and first-failure order, and the labelled costs its policy rests on;
 4. **the nudge** each finding route gives: what was observed, the standard, the severity, the line it points at, the fields whose places become "read next", and any direction to a place the run never reads;
-5. **the proof plan,** with three observations kept apart: the collection, the tree on labelled cases, and the receiving agent's call, which is an eval.
+5. **the proof plan,** with three observations kept apart: the collection, the tree on real skill text pinned by Git, and the receiving agent's call, which is a pressure task.
 
 Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with the reason. A rule failing any goes back to step 2:
 - the decisive content is in the field or state its nodes read, and the evidence print shows it there;
@@ -100,11 +100,12 @@ Open the config the repository's rule runner uses. When the Markdown file is new
 
 MUST load `references/check-and-reports.md`. Return the check's outcome and printed rules, and the proof in three observations kept apart:
 - **the collection:** the evidence print for each rule's kind over its full denominator, with the pieces you meant it to judge, their fields, and every cut named;
-- **the tree:** each mechanical rule's edge results, and for a judged one its labelled cases, the countercases included, each giving its expected outcome at its expected line;
-- **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is an eval: name it as unproven until the evals run, and never infer it from the other two.
+- **the tree:** each mechanical rule's edge results, and for a judged one its expectation run over the entries beside its rules file and its current-skills run, each on real skill text and each reporting outcome, locator and gaps apart;
+- **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source: name it as unproven until one has run, and never infer it from the other two.
 
-IF a judged rule's development or held-out results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule:
-- its results over the full denominator, with the measures reported apart;
+IF a judged rule's expectation or current-skills results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule:
+- its result on every expectation entry, with outcome, locator and gaps reported apart, and each current-skills item with its account;
+- its real must-fire entries, or "no real positive found" with its claim narrowed to what the runs showed;
 - the requested model and the version that answered, or the named gap;
 - the comparison against the current rule as the baseline, or the gap that blocks it.
 
@@ -112,8 +113,9 @@ Completion:
 - the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question;
 - the evidence print covers each rule's denominator and shows its intended good and bad pieces with their fields filled, and every cut is named;
 - every mechanical rule has edge tests, with no model, that pass and fail where the standard does;
-- every judged rule has labelled development cases run on the decision model, and its held-out results once its entry is frozen, or the missing ones named as unproven;
-- the receiving agent's call is named as unproven, owed to the evals.
+- every judged rule has its expectation run and its current-skills run on real skill text, with every entry reported and every listed item accounted for, or the missing ones named as unproven;
+- every judged rule with no real must-fire entry says so, and claims only what its runs showed;
+- the receiving agent's call is named as unproven, owed to a pressure task.
 
 Rules run locally, by the skills that use them, not in CI.
 
@@ -129,11 +131,11 @@ One row per candidate from step 1. Unmarked outcomes leave host through baseline
 - `judgment` names the call the nudge helps and who makes it; `chunk` names the subject, denominator and edges.
 - `questions`, `tree` and `policy` summarize step 3's design, with `not applicable` where it applies.
 - `severity` and `read next` are the nudge's: `warn` or `error` with the basis that allows it, and the `related` fields, plus any direction the message gives.
-- `proof` names the edge results for a mechanical rule, and the development and held-out results for a judged one.
+- `proof` names the edge results for a mechanical rule, and the expectation and current-skills runs for a judged one.
 - `version` is the model version that answered, or the gap.
 - `baseline` is the comparison against the current rule, or its gap.
 
-Name what stays unproven: named cases test a rule's decisions on chosen pieces, not how many real pieces its evidence kind misses; the receiving agent's call waits for evals; and no result here makes a judged rule ready to block.
+Name what stays unproven: expectation entries test a rule's decisions at the places they name, not how many real pieces its evidence kind misses; the current-skills run is supporting evidence, not a holdout or an accuracy rate; the receiving agent's call waits for a pressure task; and no result here makes a judged rule ready to block.
 
 Completion:
 - the table has one row for every candidate step 1 listed;
@@ -158,6 +160,7 @@ The run is not done while any of these hold:
 - a threshold has no statistic, inequality or costs;
 - a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
 - the check's print lacks an intended rule, or the count is off;
-- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases, a full denominator or one version group;
+- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without expectation entries on real skill text, every entry reported, or one version group;
+- a committed copy of skill text, or an invented skill, stands as a judged rule's proof, or an expectation was dropped or rewritten to make a run pass;
 - a run that sends model requests was made without the grant;
-- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, a rule's labelled cases are claimed as proof of what an agent does with its nudge, or proof is reported as passed where the record can't support it.
+- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, a rule's expectation results are claimed as proof of what an agent does with its nudge, or proof is reported as passed where the record can't support it.
