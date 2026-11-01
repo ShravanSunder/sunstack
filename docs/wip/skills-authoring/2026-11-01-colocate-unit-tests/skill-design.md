@@ -361,3 +361,4 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - the Swift pyramid keeps its coverage map without amounts (D10c);
   - the Swift oracle is updated.
   Back to the same review lead.
+- **Design review 2 recheck 3, at `588d25bb`** (`design-review-2-recheck-3.md`): F4 closed, so all of F1–F9 are closed. Open count 8 → 2 → 1 → 0; no recurrence. **Verdict `great`; implementation decision `accepted-to-implement`.** The acceptance rests on the original two-reviewer, five-check coverage plus the same lead's three bounded verifications. It leaves unverified: runtime and pressure behavior, client loading, and implementation proof.
