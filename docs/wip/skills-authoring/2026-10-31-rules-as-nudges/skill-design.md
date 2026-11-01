@@ -156,7 +156,7 @@ No description changes, so no trigger trial applies.
 - **`rules/generalization.rules.json`.** `rule.generalization` is rebuilt over the `section` kind.
 - **`rules/calls-and-placement.rules.json`.** The placement rule over the `section` kind, with severity `warn`: one entry for both of C12's section units (D22). Its locator task carries the questions' exemptions (D23).
 - **`rules/descriptions-and-invocation.rules.json`.** The description placement rule over the existing description kind, with severity `warn` (D22).
-- **Rule-file rules,** on `domain-decision-models`' standards. Their markers sit on that skill's own wording, and their rulebook pair goes in the same config (D6).
+- **Rule-file rules,** on `domain-decision-models`' standards. Their markers sit on that skill's own wording, and their rulebook pair goes in the same config (D6). Form only (the Lead's decision, 31 Oct): domain-decision-models' :26 and :42 items split so each marked standard is its own sentence; the words are unchanged except the subject a split needs.
 
 ### Run 8: `skill-orchestrator`
 
