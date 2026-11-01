@@ -71,7 +71,7 @@ Claude executes ONCE with all options, creates full project.
 
 Claude detects pyproject.toml, asks:
   "Include pytest with markers?" → Yes
-  "Whose coding standards?" → The owner's
+  "Whose coding standards?" → The owner's (asked only because the existing file has no Standards line)
   "Handle existing files?" → Skip existing
 
 Claude executes ONCE, adds only missing configs, and appends the Standards section to CLAUDE.md or AGENTS.md if it has none.

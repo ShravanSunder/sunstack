@@ -128,6 +128,11 @@ Options (multiSelect: true):
 - Skip CLAUDE.md - I'll write it myself
 ```
 
+On a retrofit, read the Standards line in the resolved instruction file (AGENTS.md's target when AGENTS.md exists, otherwise CLAUDE.md's) before asking Question 1. A line names a set only when its text after "Whose standards: " is exactly "the owner's (sunstack-dev)" or "this repository's own".
+- When the line names a set, pass that set, don't ask Question 1, and tell the person which set the line names.
+- When the file has a Standards section whose line names neither value, tell the person: the scaffold doesn't edit an existing section, and it copies no owner rule file until the line names a set.
+- When the file can't be read (a dangling link, or not a regular file), tell the person: the scaffold writes no section there and copies no owner rule file.
+
 **Batch 6: Conflict Handling** (retrofit only)
 ```
 Question: "How should we handle existing files?"
@@ -150,12 +155,12 @@ bash ${CLAUDE_PLUGIN_ROOT}/scripts/scaffold/scaffold-project.sh \
   --email "email@example.com"
 ```
 
-`--standards` carries Batch 5's first answer: `owner` for the owner's standards, `own` for this repository's own.
+`--standards` carries Batch 5's first answer, or on a retrofit the set the existing Standards line names: `owner` for the owner's standards, `own` for this repository's own.
 
 The script handles:
 - Creating directory structure (apps/, packages/, services/ for monorepos)
 - Copying linter configs (.oxlintrc.json, .oxfmtrc.json, ruff.toml, pyrightconfig.json)
-- Under the owner's standards only, copying the owner's Swift and monorepo additions (.cursor/rules/swift-rules.md, monorepo-rules.md, with .mdc symlinks) for those project types
+- Copying the owner's Swift and monorepo additions (.cursor/rules/swift-rules.md, monorepo-rules.md, with .mdc symlinks) for those project types, only when the instruction file's Standards line names the owner's standards. On a retrofit an existing line governs: a differing `--standards` is reported (`NOTE: … not applied`), not applied, and a section whose line names neither set, or an unreadable file, gets no additions (`SKIP: owner rule files …`)
 - Creating cursor hooks (.cursor/hooks/)
 - Setting up Claude hooks (.claude/hooks/)
 - Creating package.json/pyproject.toml with dependencies
@@ -321,7 +326,7 @@ Claude detects: pyproject.toml exists (retrofit mode)
 Claude asks (AskUserQuestion batch):
   Q1: "Include pytest with markers?" → Yes
   Q2: "Additional configs?" → [Claude hooks, Worktrunk]
-  Q3: "Whose coding standards?" → The owner's
+  Q3: "Whose coding standards?" → The owner's (asked because CLAUDE.md has no Standards line; a file with one passes its set without asking)
   Q4: "Handle existing files?" → Skip existing
 
 AFTER all answers, execute ONCE:

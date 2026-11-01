@@ -5,7 +5,7 @@ Complete list of all templates available for scaffolding.
 ## Common Templates
 
 ### CLAUDE.md.template
-Project-level AI assistant instructions. Its `## Standards` section has two forms, chosen by `--standards`:
+Project-level AI assistant instructions. Its `## Standards` section has two forms, chosen by `--standards` when the file has no section:
 - `owner`: "Whose standards: the owner's (sunstack-dev)", the instruction to load `sunstack-dev:domain-code-standards` and the language skills, a link per language the project type includes, and its Swift or monorepo additions files.
 - `own`: "Whose standards: this repository's own", and a pointer to `docs/standards.md`. No owner skill link and no additions file.
 
@@ -140,7 +140,7 @@ packages/py_core/
 ## Cursor Templates
 
 ### rules/swift-rules.md
-The owner's Swift additions, copied only under `--standards owner` for a Swift project type. They hold the Swift clauses no skill holds:
+The owner's Swift additions, copied for a Swift project type only when the instruction file's Standards line names the owner's standards. They hold the Swift clauses no skill holds:
 - No Any type, no force unwraps/casts
 - @Observable over ObservableObject
 - MVVM with @Observable ViewModels
@@ -148,7 +148,7 @@ The owner's Swift additions, copied only under `--standards owner` for a Swift p
 - SwiftLint/SwiftFormat commands, as the fallback where the repository defines none
 
 ### rules/monorepo-rules.md
-The owner's monorepo additions, copied only under `--standards owner` for a monorepo type:
+The owner's monorepo additions, copied for a monorepo type only when the instruction file's Standards line names the owner's standards:
 - uv workspaces for Python
 - pnpm workspaces for TypeScript
 - Absolute imports only

@@ -74,7 +74,7 @@ Just ask Claude:
 - `.config/wt.toml` - Worktrunk configuration
 
 ### Cursor Integration
-- `.cursor/rules/swift-rules.md`, `monorepo-rules.md` - the owner's Swift and monorepo additions, for those project types under the owner's standards; TypeScript and Python standards live in the `sunstack-dev` skills
+- `.cursor/rules/swift-rules.md`, `monorepo-rules.md` - the owner's Swift and monorepo additions, for those project types, only when the instruction file's Standards line names the owner's standards; TypeScript and Python standards live in the `sunstack-dev` skills
 - `.cursor/rules/*.mdc` → `*.md` (symlinks for Cursor discovery)
 - `.cursor/hooks/` - afterFileEdit hooks for linting
 
@@ -143,7 +143,8 @@ bash ~/dev/ai-tools/plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh \
 | `--author NAME` | Author name |
 | `--email EMAIL` | Author email |
 | `--target DIR` | Target directory |
-| `--overwrite` | Overwrite existing files |
+| `--standards SET` | Whose coding standards: `owner` (default) or `own`. On a retrofit, an existing Standards line governs |
+| `--overwrite` | Overwrite existing config files; an existing CLAUDE.md or AGENTS.md is never replaced |
 | `--vitest-browser` | Include vitest browser mode |
 | `--playwright` | Include Playwright E2E |
 | `--no-vitest` | Skip vitest setup |

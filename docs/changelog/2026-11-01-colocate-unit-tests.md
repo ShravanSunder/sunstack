@@ -8,7 +8,7 @@
 - `domain-typescript`, `domain-rust` and `domain-python` load it first and keep only their language's forms: `<module>.test.ts`; `<module>_test.rs` via `#[cfg(test)] #[path] mod tests;`; `<module>_test.py`. `domain-typescript` allows `as const`.
 - `scaffold-project` asks whose standards the repository follows (`--standards owner|own`). It writes a `## Standards` section into CLAUDE.md, linking the skills or pointing to the repository's own standards file.
   - A retrofit appends the section once, and never replaces an instruction file or link.
-  - `ts-rules` and `python-rules` are no longer copied. The Swift and monorepo additions are copied only under the owner's standards, trimmed to their own clauses.
+  - `ts-rules` and `python-rules` are no longer copied. The Swift and monorepo additions, trimmed to their own clauses, are copied only when the instruction file's Standards line names the owner's standards; on a retrofit, an existing line governs.
 - This repository's AGENTS.md gains its Standards section.
 - Design set and reviews: `docs/wip/skills-authoring/2026-11-01-colocate-unit-tests/`.
 - Validation: `tests/skills` vitest 293/293 (the scaffold script tests included), typecheck exit 0, `rules --check` exit 0 (13 rules), `claude plugin validate .` passed.
