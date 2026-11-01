@@ -38,6 +38,7 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
 | 4 a rule names the chunk its questions need, and only that | `decision-model-review`'s state check | the chunk against the questions |
 | 5 "no gaps" only when there are none | runner tests; review check of written readings | the printout; the text |
 | the placement standard | judged rule, severity `warn` | the tree on cases |
+| the description loading-scope standard (D22) | judged rule, severity `warn` | the tree on cases |
 | `rule.generalization`, rebuilt | judged rule | the tree on cases, against today's rule |
 
 ## Proof plan
@@ -71,10 +72,16 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
 2. **The engine pull request.** Its own design's verification, with the engine tests named above.
 3. **This pull request, per run:**
    - **runs 1 to 6, 8 and 9:** static checks, which are the repository's skill lint, `pnpm --dir tests/skills rules --check`, the rule run on the changed files read with the new reading, and the runner tests;
-   - **run 7:** the placement rule and the rebuilt `rule.generalization`:
-     - an evidence print over the full denominator;
-     - development cases (the anchor cases and countercases);
-     - after the freeze, held-out cases from other plugins, labelled by agents independent of the rules;
+   - **run 7:** both placement rules (section and description, D22) and the rebuilt `rule.generalization`:
+     - an evidence print over the full denominator: every section from the H1 down, tables included, sections with no loads among them, each with its exact own-text spans and own-load targets and no nested section's loads; and every description in the generic plugins;
+     - development cases, labelled before the run and reported per stratum:
+       - inline routes in sections with no loads, such as `practices-cleanup`'s AgentStudio rows;
+       - load routes, such as line 17's section, with a multi-load near-negative: the generic `producer-contract.md` load beside an application loop isn't the anchor;
+       - descriptions: a positive (a generic skill that loads for one application's private debug procedure); negatives (a supported platform CLI, domain vocabulary, a labelled example, this toolkit's infrastructure, a product named only in a "Not for…" boundary); one mixed description; and `ops-observability-stack`'s description, which names AgentStudio, Agent VM and OpenClaw beside the shared stack, as an adjudication case;
+       - cut and missing-target cases, which stay gaps, never a clean pass;
+     - S4's controls (D23): `practices-cleanup` line 70 and the VictoriaMetrics line 47 nudge as negative or adjudication cases;
+     - the locator: each case's acceptable labels written before its bar is chosen from labelled development cases; S4's exact line-17 result stays as recorded;
+     - after the freeze, held-out cases from other plugins, labelled by agents independent of the rules; none of S4's inspected cases counts as held out;
      - today's `rule.generalization` as the baseline.
    - **rule-file rules:** development cases on real and planted entries, once the engine admits JSON.
 4. **The design review.** `skill-review` at its design stage, on this folder.
@@ -88,4 +95,5 @@ Not applicable: no description changes.
 - **The receiving agent's call:** whether a writer, review lead or Lead, given the line-17 nudge, makes a justified placement call. Waits for evals.
 - **"Extremely clear" as behavior:** whether a fresh agent follows each skill without this history. The review can show the procedure and example are there, not that an agent succeeds.
 - **Recall across the corpus:** named cases test the trees on chosen pieces. They don't show how many real placement or generalization problems the rules miss.
+- **Merged section input (D22):** that adding loads' openings to a section leaves its own-text judgment unchanged. The 2x2 never varied openings, and no with-and-without comparison is planned; the per-stratum results carry the delivery claim.
 - **Cross-repository homes:** where a product's workflow should live is named as a direction; no run reads another repository.

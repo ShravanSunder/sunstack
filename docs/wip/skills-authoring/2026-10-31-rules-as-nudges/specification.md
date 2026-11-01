@@ -182,9 +182,14 @@ Each skill shows its own stage of this example. None restates the others' stages
   Its section opens with the teaching around it: "That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example." The exemptions stay enforced on the rule's questions (D19a). (The 🦁 Lead's decision, 31 Oct: the standard is the first sentence alone; form only, meaning unchanged.)
 
   It leaves out the "scope the owner adopted" escape on purpose. The owner's direction was that a product's workflow belongs in its own repository even when its scope is stated: "skills for agentstudio shodukl be in agent stkudio repo".
+- **A description loading-scope standard,** in the description standards (D22):
+
+  > A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow.
+
+  It is the placement standard's subject one level up: the description decides when the skill loads. "One product's own application workflow" means what the placement standard's teaching says, and the description standard links there instead of keeping a second list. A product named only in a "Not for…" boundary is not a loading condition. The current description standards don't cover it: "Use when debugging AgentStudio's beta application." opens correctly, names a concrete moment, carries no workflow steps, and passes every one of them.
 - The rules folder:
   - `rule.generalization` judges section chunks with their loads;
-  - a placement rule nudges with `warn`;
+  - a placement rule nudges with `warn` on each section's own text with its own loads' openings, and a description placement rule nudges with `warn` on each description (D22);
   - the config defines the section kind;
   - the rule files get rules once the engine reads JSON.
 

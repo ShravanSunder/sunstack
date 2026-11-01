@@ -14,7 +14,7 @@ Nine runs, one skill each, in this order. Each later run cites the contract the 
 | 4 | `skill-creation` (skill-authoring) | the writer's self-check acts on nudges | update |
 | 5 | `skill-review` (skill-authoring) | the review lead acts on nudges; transfer reaches nudged lines | update |
 | 6 | `skill-design` (skill-authoring) | its verification step routes standards to worth-checking rules | update |
-| 7 | `domain-skill-crafting` (skill-authoring) | the placement standard, and the rules folder: config, rebuilt `rule.generalization`, the placement rule, rule-file rules | update |
+| 7 | `domain-skill-crafting` (skill-authoring) | the placement standard and the description loading-scope standard, and the rules folder: config, rebuilt `rule.generalization`, both placement rules, rule-file rules | update |
 | 8 | `skill-orchestrator` (skill-authoring) | runs the rules and assesses the writer's calls with the old finding/uncertain/gap shape (`SKILL.md:43`, `:52`, `:88`, `:104`) | update |
 | 9 | `skill-audit` (skill-authoring) | runs the rules read-only and flags only errors, confirmed findings or uncertain-as-breach (`SKILL.md:42`), so a nudge has no intake | update |
 
@@ -144,11 +144,18 @@ No description changes, so no trigger trial applies.
   > A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.
 
   Its section opens with the teaching around it: "That workflow lives in the product's repository. A tool or platform the work uses, through its supported interface, is not that, and neither is domain vocabulary, this toolkit's own infrastructure, or a product named only as a labelled example." The exemptions stay enforced on the rule's questions (D19a). (The 🦁 Lead's decision, 31 Oct: the standard is the first sentence alone; form only, meaning unchanged.)
+- **`references/descriptions-and-invocation.md`.** The description loading-scope standard, marked (D22):
+
+  > A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow.
+
+  Its teaching links to `calls-and-placement.md` for what one product's application workflow is, and adds the description cases: a generic skill that loads for one application's private build, release or debug procedure nudges; a supported platform CLI, domain vocabulary, a labelled example, this toolkit's own infrastructure and a product named only in a "Not for…" boundary don't; a description that mixes a generic condition with one application's branch can still nudge. A product repository's own skills are outside the denominator.
 - **`rules/skill-rules.config.json`.**
-  - A `section` kind: each section's own text from the H1 down, tables included, with its own loads, and the parent heading for context.
+  - A `section` kind: each section's own text from the H1 down, tables included, with the openings of its own loads, and the parent heading for context. A section with no loads is a piece too, judged on its own text.
   - The rule-file checked files and a JSON evidence kind, once the engine admits JSON (D7).
+  - `max_input_tokens_per_request` set from measured encoded requests over the multi-load sections (D23).
 - **`rules/generalization.rules.json`.** `rule.generalization` is rebuilt over the `section` kind.
-- **`rules/calls-and-placement.rules.json`.** The placement rule, with severity `warn`.
+- **`rules/calls-and-placement.rules.json`.** The placement rule over the `section` kind, with severity `warn`: one entry for both of C12's section units (D22). Its locator task carries the questions' exemptions (D23).
+- **`rules/descriptions-and-invocation.rules.json`.** The description placement rule over the existing description kind, with severity `warn` (D22).
 - **Rule-file rules,** on `domain-decision-models`' standards. Their markers sit on that skill's own wording, and their rulebook pair goes in the same config (D6).
 
 ### Run 8: `skill-orchestrator`
@@ -218,7 +225,7 @@ This is the recipe to build from. Each row is the default taken, consolidated fr
 | C9 | Proof in three observations: collection, the tree, the receiving agent's call (the last waits for evals). | D9 |
 | C10 | Order: the spike and the 2x2 probe (both done, scratch only), then the engine pull request, then the skills pull request. | D10, D10a |
 | C11 | No "kit" in the skills' text: "a lint rule". | D11 |
-| C12 | Placement nudges with `warn`. Its units: every section's own text, every section with its loaded files' openings, and every skill description as its own subject. It doesn't use the description as context. Per-load units come later, with the `producer-contract.md` near-negative. | D12, D18b, D18c |
+| C12 | Placement nudges with `warn`. Its units: every section's own text, every section with its loaded files' openings, and every skill description as its own subject. It doesn't use the description as context. Per-load units come later, with the `producer-contract.md` near-negative. The two section units are one entry over the `section` kind; the description unit is its own standard and entry. | D12, D18b, D18c, D22 |
 | C13 | Each exemption sits on the question that owns it; the tool exemption on the routing question is confirmed. | D19a, D19b |
 | C14 | An observation anchor inside a chunk is required of the engine. | D20 |
 | C15 | The placement standard separates one product's own application workflow from tools and platforms used through their supported interface, domain vocabulary, this toolkit's infrastructure and labelled examples, with no adopted-scope escape. | D16 |
@@ -262,6 +269,8 @@ Every row as recorded, in the order it was added. Superseded and amended rows st
 | D15a (31 Oct, amends D15) | The engine keeps per-rule severity as authored and reports each result's basis; it doesn't ban `error` on a judged path. Our skills' policy is `warn` for any judged path. The run's exit is not the ship decision. | The owner set severity per rule (U26: "default severity of nudge unless overridden"); 0.5.0 exits 1 on an authored judged `error`. The Advisor's earlier point was about honest basis and acceptance, not an engine-wide ban. |
 | D21 (31 Oct, supersedes D2; amends D1, D10a, D12 and D14) | No new `check` level and no `claim` axis. The nudge is `warn`; `error` blocks only on an all-mechanical path; outcomes stay the engine's own (finding, `uncertain`, `not_applicable`). "Worth checking" is a classification outcome in `skill-rules`, said in the rule's message, not an engine level. | The owner: "did we nto already have nudge vs otehrs in a coversation and spec? it snot new it mgiht even be in a enum". It was: severity `block`/`nudge` in the 12 Oct engine requirements (U26, with the owner's words "default severity of nudge unless overridden"), renamed `error`/`warn` on 18 Oct (runner R14). A `warn` fails only under `--max-warnings`, which our runner doesn't set, so D2's reason doesn't hold here. |
 | D17 | `call.completeness` stays a valid narrow rule. The bad control is a narrowing commission or reading, and the composition case shows two rules on one line. | Making one rule raise every concern would undo atomicity. #187's failure was the commission and the missing placement rule (the Advisor, view 3 point 1). |
+| D22 (31 Oct, realizes C12; amends run 7) | Placement is two standards with one entry each. The operational standard keeps its one marker and one entry over the `section` kind, whose piece is a section's own text with the openings of its own loads; a section with no loads is judged on its own text, never `not_applicable` for having none. That entry carries C12's two section units. The description unit gets its own standard in `descriptions-and-invocation.md`, with its own marker and an entry over the existing description kind: "A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow." It links to the placement teaching for what that workflow is. No engine change. Whether a piece with openings judges its own text as well as one without them is unproven; the per-stratum proof carries the delivery claim. | The engine binds one marker to one entry and one evidence kind (`RuleEntryWire.evidence`, v0.6.0). The Advisor (view 7): both section units ask one question of one subject type, and S4 on 0.6.0 nudged inline routes and a load route from the same kind in one run. The current description standards pass "Use when debugging AgentStudio's beta application.", so stretching the trigger-only standard to catch it would change its proposition. The 2x2 never varied openings, so it shows neither a loss nor its absence. |
+| D23 (31 Oct, from S4 on 0.6.0) | S4's apparent positives are challenged as well as its locator. `practices-cleanup` line 70 (a labelled worked example of an ordinary `cargo clean`, with no loads) and the VictoriaMetrics line 47 nudge are negative or adjudication controls, not true positives. Line 17's exact-line result stays as recorded (named limit A). The locator's task carries its questions' exemptions; each case's acceptable labels are written before the bar is chosen from labelled development cases. The request cap is set from measured encoded requests over the multi-load sections; raising it fixes feasibility, not calibration. | The Advisor (view 7): line 70's state has the worked-example heading and no targets, and drew routing .72, exemption .23 and a resolved locator at .84, so a confident anchor isn't a correct nudge. S4 run 1 dropped the locator when the estimate went from 30,477 to 33,583 against the 32,000 default; run 2 at a 50,000 cap sent it, and line 17 still drew .44. |
 
 ## Coordination
 
@@ -299,7 +308,7 @@ The 🦁 Lead decides each gate and owns routing any rework: a gate that fails s
 | Run | State |
 | --- | --- |
 | 1-6 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
-| 7 | the placement standard's teaching implemented as a step-4 draft; its marker, the rules folder (config, section kind, rebuilt `rule.generalization`, placement rule, rule-file rules) and the final self-check wait for step 5 |
+| 7 | the placement standard's teaching implemented as a step-4 draft; its marker, the description loading-scope standard (D22), the rules folder (config, section kind, rebuilt `rule.generalization`, both placement rules, rule-file rules) and the final self-check wait for step 5 |
 | 8-9 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
 
 ## Review record
