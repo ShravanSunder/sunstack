@@ -46,10 +46,20 @@ function copyKit(root: string, endpoint: string, requestLimit?: number): string 
   const config = z
     .record(z.string(), z.unknown())
     .parse(JSON.parse(readFileSync(filename, "utf8")));
+  // A rulebook pair whose Markdown lies outside the copied kit keeps pointing at the repository's own file.
+  const rulebook = z
+    .array(z.object({ markdown: z.string(), rules: z.string() }))
+    .parse(config["rulebook"])
+    .map((pair) =>
+      pair.markdown.startsWith("../references/")
+        ? pair
+        : { ...pair, markdown: path.resolve(repositoryRoot, kitRelative, pair.markdown) },
+    );
   writeFileSync(
     filename,
     JSON.stringify({
       ...config,
+      rulebook,
       decision_model: { model: "jev-latest", endpoint },
       ...(requestLimit === undefined
         ? {}

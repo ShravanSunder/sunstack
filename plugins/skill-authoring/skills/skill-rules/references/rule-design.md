@@ -116,12 +116,12 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
 
 - **The judgment.** Does this generic skill route the agent into one product's own workflow? The writer, the review lead or the Lead decides: keep the text (it's a labelled example, a tool, the toolkit's own stack), or route the workflow to the product's repository. The rule gives them the reason to look and the places to read; it can't see where the workflow should live.
 - **The chunk.**
-  - **Subject:** each section's own text from the H1 down, its introduction and tables included, without its child sections' text.
+  - **Subject:** each section's own text from the H1 down, its introduction and tables included, without its child sections' text. A section that loads nothing is a piece too, judged on its own text: an inline command is as much a route as a load.
   - **Denominator:** every section of every checked `SKILL.md` and reference in a plugin meant for any repository.
-  - **Context and edges:** the parent's heading, and the files the section's own text loads, each with its opening. One hop: a loaded file's own loads aren't followed. A child section's loads belong to the child, so one load is never blamed on the H1, the parent and the child at once.
-  - **Fields:** `heading`, `parent`, `body` and `targets`.
+  - **Context and edges:** its heading path (the headings it sits under, its own included), and the files the section's own text loads, each with its opening. One hop: a loaded file's own loads aren't followed. A child section's loads belong to the child, so one load is never blamed on the H1, the parent and the child at once.
+  - **Fields:** `heading`, `headings`, `body` and `targets`.
   - **Budget:** the kind's cap. A cut `body`, or a loaded file's opening cut at its limit, is marked in the state and on the result, and a pass on a cut view is a gap, not a clean read.
-  - **Not context:** the skill's description. Given as context, a description that names its products read as declaring them in scope, and product sections passed. The description is judged as its own subject, by a second entry over the `skill` kind.
+  - **Not context:** the skill's description. Given as context, a description that names its products read as declaring them in scope, and product sections passed. The description has its own standard, one level up, in `descriptions-and-invocation.md`, with its own entry over the `skill` kind.
   - **The print:** the H1 introduction of `ops-observability-stack/SKILL.md` is one piece. Its `body` holds line 17, and its `targets` hold `references/agentstudio-loop.md` with its opening, "AgentStudio Loop", beside the section's other loads.
 - **Gate.** None: every section in the denominator falls under the standard. Which plugins are meant for any repository is the config's checked files, not a question per piece.
 - **Nodes.** Two Nouls in one request, in this first-failure order. Each exemption sits on the question that owns it.
@@ -148,7 +148,7 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   The bars are a first setting, provisional until development results.
 - **The nudge.**
   - **Message:** "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository." The repository is a direction: the run never reads it.
-  - **Where:** `at: "body"`, with a locator `product_line`, "Which line sends the agent into the product's own workflow?", at `min_probability` .5, a provisional bar on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
+  - **Where:** `at: "body"`, with a locator `product_line` whose task asks which line of `body` sends the agent into one named product's own workflow, and carries the questions' exemptions so a tool, the subject's vocabulary, a labelled example or the toolkit's own infrastructure isn't picked; at `min_probability` .5, a provisional bar on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
   - **Severity:** `warn`: both paths read a model's answer.
   - **Read next:** `related: ["targets"]`. The finding lists the standard's line, then each loaded file whose opening the run read, `agentstudio-loop.md` among them. The list names every file the section loads; the locator, not the list, says which line the nudge is about.
 - **Proof plan.**
@@ -156,26 +156,4 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   - **The tree:** development cases. Line 17's section expects a finding at line 17, anchored by the locator. `practices-cleanup/SKILL.md`'s allow list, whose table row at line 40 runs AgentStudio's own `mise ... run clean-artifacts`, expects a finding, from the section's own text, with no load in it. The countercases expect no nudge: a section that names a product only as a labelled example; this toolkit's own observability queries in `victoria-queries.md`; `domain-skill-crafting/references/platform.md`'s platform contracts. Held-out cases from other plugins, labelled by agents independent of the rule, run once after the freeze. No current rule judges this standard, so there is no baseline: name that.
   - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is an eval, and stays unproven until the evals run.
 
-```json
-"K001": {
-  "name": "placement.product-workflow",
-  "evidence": "section",
-  "questions": {
-    "routes_product": { "type": "noul", "instructions": { "check": "body", "context": ["heading", "parent", "targets"], "task": "Does this section's own text send the agent into one named product's or application's own workflow: its own procedures, run commands, state files or machine paths?" }, "criteria": { "true": "The text tells the agent to go into, run or follow something that belongs to one named product or application: its own procedure, loop, command, script, state file or machine path. Loading a file whose content is that product's own workflow counts.", "false": "The text describes work that applies in any repository; or it uses a tool, platform or service through its own supported interface, such as querying a metrics store's HTTP API or running a platform's documented CLI command; or it uses the subject's own vocabulary; or it mentions a product without sending the agent into that product's own workflow." } },
-    "example_or_own_infrastructure": { "type": "noul", "instructions": { "check": "body", "context": ["heading", "parent", "targets"], "task": "Is every product this section sends the agent into named only as a labelled example, or part of this toolkit's own shared infrastructure?" }, "criteria": { "true": "Each product the agent is sent into is presented as an example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack.", "false": "At least one product the agent is sent into is one product's own workflow, command, state or path, given as a step, branch or load the agent follows, not as a labelled example." } }
-  },
-  "decision": {
-    "start": "routes_product",
-    "steps": {
-      "routes_product": { "ask": "routes_product", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "example_or_own_infrastructure", "no": "pass" },
-      "example_or_own_infrastructure": { "ask": "example_or_own_infrastructure", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "pass",
-        "no": { "finding": "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository.", "at": "body",
-                "locate": { "name": "product_line", "task": "Which line sends the agent into the product's own workflow?", "min_probability": 0.5 } } }
-    }
-  },
-  "related": ["targets"],
-  "severity": "warn"
-}
-```
-
-The entry uses the nudge fields `markers-and-rules.md` describes. Its section kind, its fields and its marker are the rules folder's to deliver; this is a worked design, not a delivered or measured rule.
+The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar is provisional until labelled development cases set it.

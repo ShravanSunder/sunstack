@@ -232,7 +232,7 @@ describe("skill evidence selection (G8)", () => {
 });
 
 describe("repository skill rule runner (G10)", () => {
-  test("the actual thirteen-rule kit assembles and runs through the scripted judge", async () => {
+  test("the actual kit assembles and runs through the scripted judge", async () => {
     const root = createFixture();
     for (const topic of [
       "descriptions-and-invocation",
@@ -251,6 +251,19 @@ describe("repository skill rule runner (G10)", () => {
         readFileSync(path.join(repositoryRoot, kitRelative, `../references/${topic}.md`), "utf8"),
       );
     }
+    // The rule-file rules mark standards in another plugin's skill; copy that host at its relative path.
+    cpSync(
+      path.join(repositoryRoot, kitRelative, "domain-decision-models.rules.json"),
+      path.join(root, kitRelative, "domain-decision-models.rules.json"),
+    );
+    writeFixtureFile(
+      root,
+      "plugins/sunstack-dev/skills/domain-decision-models/SKILL.md",
+      readFileSync(
+        path.join(repositoryRoot, "plugins/sunstack-dev/skills/domain-decision-models/SKILL.md"),
+        "utf8",
+      ),
+    );
     cpSync(
       path.join(repositoryRoot, kitRelative, "skill-rules.config.json"),
       path.join(root, kitRelative, "skill-rules.config.json"),
@@ -298,9 +311,14 @@ describe("repository skill rule runner (G10)", () => {
           "descriptions-and-invocation.md:K004:description.loading-moment",
           "descriptions-and-invocation.md:K005:description.trigger-only",
           "descriptions-and-invocation.md:K006:description.always-earned",
+          "descriptions-and-invocation.md:K007:description.product-loading",
           "generalization.md:K001:rule.generalization",
           "calls-and-placement.md:K001:call.completeness",
           "calls-and-placement.md:K002:reference.teaching-depth",
+          "calls-and-placement.md:K003:placement.product-workflow",
+          "SKILL.md:K001:question.names-field",
+          "SKILL.md:K002:question.one-proposition",
+          "SKILL.md:K003:question.criteria-match",
           "main-path.md:K001:branch.condition",
           "main-path.md:K002:main-path.spine",
           "steering.md:K001:completion.criterion",

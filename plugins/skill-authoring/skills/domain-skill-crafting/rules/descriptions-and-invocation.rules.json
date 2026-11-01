@@ -173,5 +173,56 @@
       }
     },
     "severity": "warn"
+  },
+  "K007": {
+    "name": "description.product-loading",
+    "evidence": "skill",
+    "questions": {
+      "loads_for_product": {
+        "type": "noul",
+        "instructions": {
+          "check": "description",
+          "task": "Does the description give a loading condition that belongs to one named product's or application's own workflow: its own build, release, debug or run procedure, state files or machine paths?"
+        },
+        "criteria": {
+          "true": "At least one condition under which the skill loads is one named product's or application's own work, such as debugging that application's beta build or running its private release. A description that mixes a generic condition with one application's branch has such a condition.",
+          "false": "Every loading condition applies in any repository; or it uses a tool or platform through its supported interface; or it uses the vocabulary of the subject the skill governs; or it names a product only in a \"Not for…\" boundary, which is not a loading condition."
+        }
+      },
+      "example_or_own_infrastructure": {
+        "type": "noul",
+        "instructions": {
+          "check": "description",
+          "task": "Is every product named in the description's loading conditions named only as a labelled example, or as part of this toolkit's own shared infrastructure?"
+        },
+        "criteria": {
+          "true": "Each product in a loading condition is presented as an example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack.",
+          "false": "At least one product in a loading condition is one product's own work the skill loads for, not a labelled example."
+        }
+      }
+    },
+    "decision": {
+      "start": "loads_for_product",
+      "steps": {
+        "loads_for_product": {
+          "ask": "loads_for_product",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "example_or_own_infrastructure",
+          "no": "pass"
+        },
+        "example_or_own_infrastructure": {
+          "ask": "example_or_own_infrastructure",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "The description loads this skill for one product's own workflow: read the skill, then decide whether it, or that branch, belongs in the product's own repository.",
+            "at": "description"
+          }
+        }
+      }
+    },
+    "severity": "warn"
   }
 }

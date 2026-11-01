@@ -19,7 +19,7 @@ Placement:
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
-- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.
+- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.<!-- K003 -->
 - A skill has no per-skill provenance document unless it needs a task-specific reference for progressive disclosure.
 
 Calls:
