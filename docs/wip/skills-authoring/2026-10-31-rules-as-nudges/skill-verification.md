@@ -77,6 +77,7 @@ The third is an eval and waits for the owner's evals. Nothing below claims it.
      - development cases, labelled before the run and reported per stratum:
        - inline routes in sections with no loads, such as `practices-cleanup`'s AgentStudio rows;
        - load routes, such as line 17's section, with a multi-load near-negative: the generic `producer-contract.md` load beside an application loop isn't the anchor;
+       - an inline route in a section whose own loads are benign: the violation is only in the section's own text, and its loads' openings conform. Its expected nudge and acceptable inline anchor are labelled before the run, and the benign load is not an acceptable anchor. A rule that reads own text only when a section has no loads fails this case (design review 1, amendment A1);
        - descriptions: a positive (a generic skill that loads for one application's private debug procedure); negatives (a supported platform CLI, domain vocabulary, a labelled example, this toolkit's infrastructure, a product named only in a "Not for…" boundary); one mixed description; and `ops-observability-stack`'s description, which names AgentStudio, Agent VM and OpenClaw beside the shared stack, as an adjudication case;
        - cut and missing-target cases, which stay gaps, never a clean pass;
      - S4's controls (D23): `practices-cleanup` line 70 and the VictoriaMetrics line 47 nudge as negative or adjudication cases;
