@@ -38,15 +38,13 @@ test("every migrated piece line reproduces the original 74e18127 case coordinate
   let checked = 0;
   for (const manifest of manifests) {
     const folder = path.basename(path.dirname(manifest));
-    const cases = z
-      .array(legacyCaseSchema)
-      .parse(
-        JSON.parse(
-          execFileSync("git", ["-C", repository, "show", `74e18127:${manifest}`], {
-            encoding: "utf8",
-          }),
-        ),
-      );
+    const cases = z.array(legacyCaseSchema).parse(
+      JSON.parse(
+        execFileSync("git", ["-C", repository, "show", `74e18127:${manifest}`], {
+          encoding: "utf8",
+        }),
+      ),
+    );
     for (const legacy of cases) {
       if (
         legacy.source.class === "synthetic" ||

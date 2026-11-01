@@ -4,6 +4,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -75,14 +76,14 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/scripts/run-skill-rules.ts"),
     path.join(root, "tests/skills/scripts/run-skill-rules.ts"),
   );
-  cpSync(
-    path.join(repositoryRoot, "tests/skills/lib/skill-rules/report.ts"),
-    path.join(root, "tests/skills/lib/skill-rules/report.ts"),
-  );
-  cpSync(
-    path.join(repositoryRoot, "tests/skills/lib/skill-rules/denominators.ts"),
-    path.join(root, "tests/skills/lib/skill-rules/denominators.ts"),
-  );
+  const modules = "tests/skills/lib/skill-rules";
+  for (const filename of readdirSync(path.join(repositoryRoot, modules)))
+    if (
+      filename.endsWith(".ts") &&
+      !filename.endsWith(".test.ts") &&
+      filename !== "test-fixture.ts"
+    )
+      cpSync(path.join(repositoryRoot, modules, filename), path.join(root, modules, filename));
   mkdirSync(path.join(root, "tests/skills/node_modules/.bin"), { recursive: true });
   symlinkSync(
     path.join(repositoryRoot, "tests/skills/node_modules/zod"),

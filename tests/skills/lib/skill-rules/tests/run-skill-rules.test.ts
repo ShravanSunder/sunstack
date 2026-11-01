@@ -3,12 +3,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
 import { z } from "zod";
-import {
-  assembledKinds,
-  assembledRules,
-  checkOutputSchema,
-  formatLintReport,
-} from "../report.ts";
+import { assembledKinds, assembledRules, checkOutputSchema, formatLintReport } from "../report.ts";
 import type { LintReport } from "../report.ts";
 import {
   assertInstalledPackageIsRequired,
@@ -167,7 +162,9 @@ describe("skill evidence selection (G8)", () => {
     expect(body).toContain("Write the plan.");
     expect(body).not.toContain("A child section");
     expect(
-      listing.pieces.filter((piece) => piece.kind === "step").map((piece) => piece.where.first_line),
+      listing.pieces
+        .filter((piece) => piece.kind === "step")
+        .map((piece) => piece.where.first_line),
     ).toEqual([7, 15]);
   });
 
@@ -184,7 +181,9 @@ describe("skill evidence selection (G8)", () => {
       [9, "uncertain"],
     ]);
     expect(
-      listing.pieces.filter((piece) => piece.kind === "step").map((piece) => piece.where.first_line),
+      listing.pieces
+        .filter((piece) => piece.kind === "step")
+        .map((piece) => piece.where.first_line),
     ).toEqual([5, 9]);
     const branch = listing.pieces.find((piece) => piece.kind === "branch");
     expect(branch?.fields.step).toMatchObject({
@@ -460,9 +459,24 @@ describe("repository skill rule runner (G10)", () => {
         expect(report.usage.model_requests).toBe(1);
         expect(result.stdout).toContain(`Usage: ${JSON.stringify(report.usage)}`);
         expectPrintedOutcomeCounts(result.stdout, report);
+        expect(result.stdout).toContain("Current-skills accounts:");
         if (probability === 0.1) {
           expect(report.findings).toHaveLength(1);
           expect(result.stdout).toContain("SKILL.md:3: warn description_judgment");
+          const accounts = z
+            .object({
+              accounts: z.array(
+                z.object({ kind: z.string(), rule: z.string().nullable(), account: z.null() }),
+              ),
+            })
+            .parse(JSON.parse(readFileSync(path.join(root, "reports/accounts.json"), "utf8")));
+          expect(accounts.accounts).toContainEqual(
+            expect.objectContaining({
+              kind: "uncovered_nudge",
+              rule: "description_judgment",
+              account: null,
+            }),
+          );
         }
         if (probability === 0.5) {
           expect(report.uncertain).toHaveLength(1);
@@ -511,11 +525,11 @@ describe("repository skill rule runner (G10)", () => {
       JSON.parse(readFileSync(path.join(output, "report.json"), "utf8")),
     );
     expect(assembledRules(check)).toHaveLength(1);
-    expect(assembledKinds(check).map((entry) => entry.kind).sort()).toEqual([
-      "sentence",
-      "step",
-      "workflow_section",
-    ]);
+    expect(
+      assembledKinds(check)
+        .map((entry) => entry.kind)
+        .sort(),
+    ).toEqual(["sentence", "step", "workflow_section"]);
     assertInstalledPackageIsRequired(root);
   });
 

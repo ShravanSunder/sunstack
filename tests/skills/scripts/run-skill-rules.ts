@@ -2,6 +2,7 @@ import { accessSync, constants, mkdirSync, mkdtempSync, readdirSync, writeFileSy
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import { runLintEngine } from "../lib/skill-rules/engine-runner.ts";
 import {
   assembledKinds,
   assembledRules,
@@ -11,6 +12,8 @@ import {
   lintReportSchema,
 } from "../lib/skill-rules/report.ts";
 import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
+import { loadConfiguredExpectations } from "../lib/skill-rules/expectation-run.ts";
+import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }
@@ -94,12 +97,12 @@ function runRules(): number {
   else argumentsList.push("--all", ...options.scope.paths);
   console.log(`Reports: ${options.output}`);
   // Inherit the process environment unchanged: credential resolution belongs to the engine.
-  const result = spawnSync(options.engine, argumentsList, {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
+  const result = runLintEngine({
+    engine: options.engine,
+    arguments: argumentsList,
+    directory: repositoryRoot,
   });
-  if (result.error) throw result.error;
+  if (result.error) throw new Error(result.error);
   writeFileSync(path.join(options.output, "report.json"), result.stdout);
   if (result.stderr) {
     writeFileSync(path.join(options.output, "engine.stderr.txt"), result.stderr);
@@ -125,7 +128,24 @@ function runRules(): number {
     for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
     const report = lintReportSchema.parse(output);
-    console.log(formatLintReport(report, loadRuleDenominators(configPath)));
+    const denominators = loadRuleDenominators(configPath);
+    console.log(formatLintReport(report, denominators));
+    const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
+    const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
+      cwd: repositoryRoot,
+    });
+    const commit = head.status === 0 && changes.status === 0 ? head.stdout.trim() : null;
+    const accounts = listCurrentAccounts({
+      report,
+      denominators,
+      commit,
+      expectations: loadConfiguredExpectations(configPath).map((entry) => entry.expectation),
+    });
+    writeFileSync(
+      path.join(options.output, "accounts.json"),
+      JSON.stringify({ commit, accounts }, null, 2) + "\n",
+    );
+    console.log(formatCurrentAccounts(accounts));
     if (options.scope.kind === "full" && report.status.kind === "nothing_selected") {
       console.error("GAP: full-scope run selected nothing; check the paths and configured scope.");
       return 2;
