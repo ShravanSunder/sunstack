@@ -23,7 +23,8 @@ Who reads the outcome changes what it must say. When code acts on it, as a `run_
 ## State and evidence
 
 - The evidence holds what the question needs to judge: the antecedent, the attached block, the neighbouring text, the opening. Missing evidence is reported as an evidence gap, never read as the property being absent.
-- Each question names the field it evaluates. A size cap keeps a request bounded; it never shows that the evidence is complete.
+- Each question names the field it evaluates.<!-- K001 -->
+- A size cap keeps a request bounded; it never shows that the evidence is complete.
 - Responsibilities sit with their owners:
   - the state carries the content judged, and any reference material several questions share;
   - each question's criteria carry its answer meanings, boundary cases and examples;
@@ -38,8 +39,10 @@ Good: "When that is done, publish" is judged with the sentence that defines "tha
 ## Questions
 
 - Each question asks for a property the model can judge from the supplied evidence; code decides what that judgment means for the outcome.
-- A Noul asks one observable proposition, and its criteria define that proposition's yes and no without adding a second requirement.
-- A question's instruction and criteria define the same proposition and refer to named state fields directly. Every route from it says what a yes means, a pass or a finding: a high probability means yes to the proposition, not "compliant".
+- A Noul asks one observable proposition, and its criteria define that proposition's yes and no without adding a second requirement.<!-- K002 -->
+- A question's instruction and criteria define the same proposition.<!-- K003 -->
+- A question refers to named state fields directly.
+- Every route from a question says what a yes means, a pass or a finding: a high probability means yes to the proposition, not "compliant".
 - A judged property is bounded by the obligations its evidence states. "Does the end require the result the step itself says to produce?" is answerable from the step; "is this step's work enough?" imports a standard the evidence doesn't hold.
 - A shortened question keeps the standard's own negative and bounded-judgment cases. Test it against the standard's bad examples before trusting it: "IF the skill needs more depth" names a skill the agent can point at, yet its predicate is the defect.
 

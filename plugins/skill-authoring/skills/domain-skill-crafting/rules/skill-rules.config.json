@@ -19,11 +19,19 @@
     {
       "markdown": "../references/steering.md",
       "rules": "steering.rules.json"
+    },
+    {
+      "markdown": "../../../../sunstack-dev/skills/domain-decision-models/SKILL.md",
+      "rules": "domain-decision-models.rules.json"
     }
   ],
   "marker_prefix": "K",
   "check": {
-    "files": ["plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/**/*.md"]
+    "files": [
+      "plugins/*/skills/*/SKILL.md",
+      "plugins/*/skills/*/references/**/*.md",
+      "plugins/*/skills/*/rules/*.rules.json"
+    ]
   },
   "evidence": {
     "ast_grep": "evidence/sgconfig.yml",
@@ -184,6 +192,34 @@
           }
         }
       },
+      "section": {
+        "rule": "skill-section",
+        "max_chars": 30000,
+        "fields": {
+          "heading": {
+            "from": "first_line"
+          },
+          "headings": {
+            "from": "enclosing",
+            "rule": "section-heading"
+          },
+          "body": {
+            "from": "remainder",
+            "exclude": {
+              "rule": "section-heading"
+            }
+          },
+          "targets": {
+            "from": "target",
+            "regex": "(?:load|dispatch)\\s+`([^`]+)`",
+            "resolve": "path_or_skill",
+            "opening_chars": 3000,
+            "exclude": {
+              "rule": "section-heading"
+            }
+          }
+        }
+      },
       "reference_section": {
         "rule": "reference-section",
         "max_chars": 8000,
@@ -203,6 +239,15 @@
             "rule": "reference-opening"
           }
         }
+      },
+      "rule_question": {
+        "rule": "rule-question",
+        "max_chars": 6000,
+        "fields": {
+          "body": {
+            "from": "remainder"
+          }
+        }
       }
     }
   },
@@ -211,8 +256,10 @@
   },
   "limits": {
     "evidence_max_chars": 6000,
-    "request_max_chars": 20000,
-    "max_model_requests": 5000,
-    "max_concurrent_requests": 8
+    "request_max_chars": 50000,
+    "max_model_requests": 9000,
+    "max_concurrent_requests": 8,
+    "max_matches": 20000,
+    "max_input_tokens_per_request": 50000
   }
 }
