@@ -83,6 +83,7 @@ Under the owner's set:
 
 - Tests run on pytest. A unit test for `foo.py` is `foo_test.py` beside it. The older form is unit tests under `tests/`, such as `tests/test_<module>.py`.
 - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder. Integration tests live in `./tests/integration`.
+- In a monorepo, don't create an `__init__.py` unless the user asks; these files are only for package roots.
 - Mark tests that call real model APIs `integration_llm` and tests that need an external database `integration_db`; unmarked tests are unit tests.
 - Mock with pytest-mock's `mocker` fixture, never `unittest.mock`.
 

@@ -6,8 +6,8 @@ Complete list of all templates available for scaffolding.
 
 ### CLAUDE.md.template
 Project-level AI assistant instructions. Its `## Standards` section has two forms, chosen by `--standards` when the file has no section:
-- `owner`: "Whose standards: the owner's (sunstack-dev)", the instruction to load `sunstack-dev:domain-code-standards` and the language skills, a link per language the project type includes, and its Swift or monorepo additions files.
-- `own`: "Whose standards: this repository's own", and a pointer to `docs/standards.md`. No owner skill link and no additions file.
+- `owner`: "Whose standards: the owner's (sunstack-dev)", the instruction to load `sunstack-dev:domain-code-standards` and the language skills, and a link per language the project type includes.
+- `own`: "Whose standards: this repository's own", and a pointer to `docs/standards.md`. No owner skill link.
 
 On a retrofit, the script appends the section to the existing instruction file when it has none, and replaces no instruction file or link.
 
@@ -139,22 +139,7 @@ packages/py_core/
 
 ## Cursor Templates
 
-### rules/swift-rules.md
-The owner's Swift additions, copied for a Swift project type only when the instruction file's Standards line names the owner's standards. They hold the Swift clauses no skill holds:
-- No Any type, no force unwraps/casts
-- @Observable over ObservableObject
-- MVVM with @Observable ViewModels
-- Swift Testing framework, tests in SPM's `Tests/` target
-- SwiftLint/SwiftFormat commands, as the fallback where the repository defines none
-
-### rules/monorepo-rules.md
-The owner's monorepo additions, copied for a monorepo type only when the instruction file's Standards line names the owner's standards:
-- uv workspaces for Python
-- pnpm workspaces for TypeScript
-- Absolute imports only
-- Project structure guidelines
-
-TypeScript and Python standards aren't copied: they live in the `sunstack-dev` skills the Standards section links.
+No rules files are copied: TypeScript, Python, Swift and the shared and monorepo standards live in the `sunstack-dev` skills the Standards section links.
 
 ### hooks/hooks.json
 Cursor IDE hook configuration for afterFileEdit event.

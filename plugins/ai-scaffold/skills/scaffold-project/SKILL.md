@@ -130,8 +130,8 @@ Options (multiSelect: true):
 
 On a retrofit, read the Standards line in the resolved instruction file (AGENTS.md's target when AGENTS.md exists, otherwise CLAUDE.md's) before asking Question 1. A line names a set only when its text after "Whose standards: " is exactly "the owner's (sunstack-dev)" or "this repository's own".
 - When the line names a set, pass that set, don't ask Question 1, and tell the person which set the line names.
-- When the file has a Standards section whose line names neither value, tell the person: the scaffold doesn't edit an existing section, and it copies no owner rule file until the line names a set.
-- When the file can't be read (a dangling link, or not a regular file), tell the person: the scaffold writes no section there and copies no owner rule file.
+- When the file has a Standards section whose line names neither value, tell the person: the scaffold doesn't edit an existing section.
+- When the file can't be read (a dangling link, or not a regular file), tell the person: the scaffold writes no section there.
 
 **Batch 6: Conflict Handling** (retrofit only)
 ```
@@ -160,7 +160,6 @@ bash ${CLAUDE_PLUGIN_ROOT}/scripts/scaffold/scaffold-project.sh \
 The script handles:
 - Creating directory structure (apps/, packages/, services/ for monorepos)
 - Copying linter configs (.oxlintrc.json, .oxfmtrc.json, ruff.toml, pyrightconfig.json)
-- Copying the owner's Swift and monorepo additions (.cursor/rules/swift-rules.md, monorepo-rules.md, with .mdc symlinks) for those project types, only when the instruction file's Standards line names the owner's standards. On a retrofit an existing line governs: a differing `--standards` is reported (`NOTE: … not applied`), not applied, and a section whose line names neither set, or an unreadable file, gets no additions (`SKIP: owner rule files …`)
 - Creating cursor hooks (.cursor/hooks/)
 - Setting up Claude hooks (.claude/hooks/)
 - Creating package.json/pyproject.toml with dependencies
@@ -211,8 +210,7 @@ Templates use these placeholders:
 | `{{MONOREPO}}` | Is monorepo | `true` |
 | `{{OWNER_STANDARDS}}` | The owner's standards were chosen | `true` |
 | `{{REPO_STANDARDS}}` | This repository's own standards were chosen | `false` |
-| `{{OWNER_TS}}`, `{{OWNER_PY}}`, `{{OWNER_SWIFT}}`, `{{OWNER_MONOREPO}}` | The owner's standards and that language or monorepo | `true` |
-| `{{OWNER_ADDITIONS}}` | The owner's standards with Swift or a monorepo | `true` |
+| `{{OWNER_TS}}`, `{{OWNER_PY}}`, `{{OWNER_SWIFT}}` | The owner's standards and that language | `true` |
 
 ## Update Templates Workflow
 
@@ -223,10 +221,9 @@ To update base templates with latest tool standards:
 Ask which templates to update:
 - OXC config (oxlint + oxfmt rules)
 - Ruff config (latest rules)
-- The Swift and monorepo additions (`.cursor/rules/swift-rules.md`, `monorepo-rules.md`)
 - All templates
 
-Coding standards for TypeScript, Python and Rust, and the shared ones, live in the `sunstack-dev` domain skills. Change them there, not in a template.
+Coding standards for TypeScript, Python, Rust and Swift, and the shared ones, live in the `sunstack-dev` domain skills. Change them there, not in a template.
 
 ### Step 2: Research Latest Standards
 
@@ -280,7 +277,7 @@ templates/
 │   └── single/
 ├── testing/          # vitest-browser, playwright configs
 ├── monorepo/         # apps/, packages/, services/ structure
-├── cursor/           # rules/*.md (+ .mdc symlinks), hooks/
+├── cursor/           # hooks/
 └── claude/           # hooks/, settings template
 ```
 

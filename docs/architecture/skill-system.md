@@ -18,7 +18,7 @@ The `sunstack-dev` layers separate decisions that change for different reasons. 
 | `practices-*` | Reusable methods used when the work calls for them | Research, tracing behavior, verification, collaboration and cleanup |
 | `ops-*`, `audit-*`, `presentation-*` | Operational, audit and presentation methods alongside practices | Linear tracking, security review, HTML explainers |
 | Tool manuals | Exact calls, identities, receipts and errors for a tool | `agent-collaboration` |
-| `domain-*` | Subject-specific knowledge a caller loads | Shared code standards; TypeScript, Python and Rust standards |
+| `domain-*` | Subject-specific knowledge a caller loads | Shared code standards; TypeScript, Python, Rust and Swift standards |
 | `principle-*` | One engineering judgment applied at a concrete decision | One owner per truth; verify before accepting |
 
 The [plugin namespace map](../../plugins/sunstack-dev/README.md#namespace-map) is the skill inventory. The [principles index](../../plugins/sunstack-dev/docs/principles-index.md) explains the judgment each principle teaches. The [phase composition map](../../plugins/sunstack-dev/docs/phase-composition.md), generated from the skill files and drawn on [its page](../../plugins/sunstack-dev/docs/phase-composition.html), shows what each orchestrator and phase loads, cites and returns. None of them replaces reading the selected skill.

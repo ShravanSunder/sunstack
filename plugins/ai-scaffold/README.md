@@ -74,8 +74,6 @@ Just ask Claude:
 - `.config/wt.toml` - Worktrunk configuration
 
 ### Cursor Integration
-- `.cursor/rules/swift-rules.md`, `monorepo-rules.md` - the owner's Swift and monorepo additions, for those project types, only when the instruction file's Standards line names the owner's standards; TypeScript and Python standards live in the `sunstack-dev` skills
-- `.cursor/rules/*.mdc` → `*.md` (symlinks for Cursor discovery)
 - `.cursor/hooks/` - afterFileEdit hooks for linting
 
 ### Claude Code Integration
@@ -173,7 +171,7 @@ ai-scaffold/
     ├── python/              # Python configs (single/monorepo)
     ├── swift/               # Swift configs (single)
     ├── testing/             # Vitest/Playwright configs
-    ├── cursor/              # Cursor rules (.md) and hooks
+    ├── cursor/              # Cursor hooks
     ├── claude/              # Claude hooks and settings
     └── monorepo/            # Monorepo structure templates
 ```

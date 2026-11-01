@@ -37,9 +37,9 @@ These hold when the repository's line names the owner's standards.
 
 ### Tests
 
-- A unit test sits beside the module it tests, in the form its language skill names. A language with no language skill (Swift today) follows the test layout in its additions file.
+- A unit test sits beside the module it tests, in the form its language skill names. Swift is the exception: its unit tests live in the package's SPM `Tests/` targets, as `domain-swift` names, and the next three standards don't apply to them.
 - A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers tests share, in one helpers folder: `tests/support/`, or the name the repository already uses.
-- In a language whose skill names its form, when a change edits a module, its production code or its tests, and that module's unit tests sit in an older form, move them into the standard form in the same change. The move covers only that module's own unit tests; a repository-wide move is its own PR.
+- In a language whose skill names a beside-the-module form, when a change edits a module, its production code or its tests, and that module's unit tests sit in an older form, move them into the standard form in the same change. The move covers only that module's own unit tests; a repository-wide move is its own PR.
 - A folder that already holds unit tests is the old form, not precedent.
 - Structure each test as Arrange / Act / Assert. Write few, valuable tests on business logic and critical paths, and skip redundant or brittle cases.
 - Keep many unit tests, fewer integration tests and fewer still end-to-end smoke tests. Put a test in the permanent suite or an established harness, never in a temporary script or file.
@@ -47,6 +47,15 @@ These hold when the repository's line names the owner's standards.
 ### Files and modules
 
 Before creating a file or module, name the one responsibility it holds; when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)). Split a catch-all such as `utils`, `helpers` or `db` by responsibility. The one shared test-helpers folder under `tests/` is the exception: it keeps the name the repository uses (`support/`, `utils/` or `lib/`), and the files in it still name their responsibility. The language skill gives the case style and its examples.
+
+### Monorepos
+
+In a monorepo:
+
+- Python projects manage dependencies with uv and run commands through `uv run`, as a uv workspace: `services/py_*/pyproject.toml` for services and `packages/py_*/pyproject.toml` for shared libraries, each with its importable package root. TypeScript projects manage dependencies with pnpm and run commands through `pnpm run`, as a pnpm workspace. Where the repository defines its own command, that command still wins.
+- `models/` hold pure data models: no business logic, no dependency on repos or services, and no database-specific DDL. `repos/` interact with the database or external data sources.
+- Imports are absolute, from the project or package root; never `../` or `./`.
+- Ask for explicit permission before editing `tsconfig.json`, `ruff.toml` or `pyrightconfig.json`.
 
 ### Documentation
 
@@ -61,4 +70,4 @@ Explain why, briefly. Don't restate what the code already says. Skip a doc comme
 
 ## Done when
 
-The governing set is named from the line, or the owner has been asked. Under the owner's set, the change's own modules, in a language whose skill names its test form, have no unit tests left in an older form.
+The governing set is named from the line, or the owner has been asked. Under the owner's set, the change's own modules, in a language whose skill names a beside-the-module test form, have no unit tests left in an older form.
