@@ -27,7 +27,7 @@ Update the base templates in ai-tools with the latest tool standards and best pr
 
 Load the scaffold-project skill and follow its update-templates workflow:
 
-1. **Ask scope** - Which templates to update (oxc, ruff, cursor rules, all)
+1. **Ask scope** - Which templates to update (oxc, ruff, cursor: the Swift and monorepo additions, all). Coding standards for TypeScript, Python and Rust, and the shared ones, live in the `sunstack-dev` domain skills; change them there, not in a template
 2. **Research** - Look up latest standards using web search and deepwiki
 3. **Propose changes** - Show diffs with explanations for each change
 4. **Apply with approval** - User accepts/modifies/rejects each change
@@ -60,6 +60,6 @@ Load the scaffold-project skill and follow its update-templates workflow:
 /scaffold-project-update-templates all
 > Updating .oxlintrc.json + .oxfmtrc.json...
 > Updating ruff.toml...
-> Updating cursor rules...
+> Updating the Swift and monorepo additions...
 > Commit changes? [y/n]
 ```

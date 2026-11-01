@@ -33,6 +33,7 @@ Load the scaffold-project skill and follow its workflow:
    - Directory structure preferences (for monorepos)
    - Testing features (vitest, browser mode, playwright, pytest)
    - Additional configs (claude hooks, cursor hooks, worktrunk)
+   - Whose coding standards the repository follows: the owner's (the sunstack-dev skills) or its own
    - Conflict handling (for retrofit)
 3. **Execute ONCE** - Run scaffold script with all collected options
 4. **Report results** - Show what was created/skipped
@@ -45,7 +46,8 @@ When user doesn't specify:
 - **Project name**: Derive from current directory name
 - **Author**: Use git config user.name and user.email
 - **Testing**: vitest for TS, pytest with marks for Python, Swift Testing for Swift
-- **Conflict handling**: Skip existing files
+- **Whose standards**: the owner's
+- **Conflict handling**: Skip existing files; an existing CLAUDE.md or AGENTS.md is never replaced, only given a missing Standards section
 
 ## Examples
 
@@ -58,6 +60,7 @@ Claude asks (all at once):
   "Top-level directories?" → [apps, packages]
   "Testing features?" → [Vitest unit, Vitest browser mode]
   "Additional configs?" → [Claude hooks]
+  "Whose coding standards?" → The owner's
 
 Claude executes ONCE with all options, creates full project.
 ```
@@ -68,7 +71,8 @@ Claude executes ONCE with all options, creates full project.
 
 Claude detects pyproject.toml, asks:
   "Include pytest with markers?" → Yes
+  "Whose coding standards?" → The owner's
   "Handle existing files?" → Skip existing
 
-Claude executes ONCE, adds only missing configs.
+Claude executes ONCE, adds only missing configs, and appends the Standards section to CLAUDE.md or AGENTS.md if it has none.
 ```

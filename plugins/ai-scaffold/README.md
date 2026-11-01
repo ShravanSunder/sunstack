@@ -24,6 +24,8 @@ codex plugin add scaffold-project@sunstack
 
 Restart Claude Code after installation.
 
+A repository scaffolded with the owner's standards links the `sunstack-dev` skills from its Standards section (`sunstack-dev:domain-code-standards` and the language skills). Install the `sunstack-dev` plugin too, so agents in that repository can load them.
+
 ## Usage
 
 ### Commands
@@ -66,13 +68,13 @@ Just ask Claude:
 ## What Gets Created
 
 ### Common Files
-- `CLAUDE.md` - AI assistant instructions
-- `AGENTS.md` → `CLAUDE.md` (symlink for cross-tool compatibility)
+- `CLAUDE.md` - AI assistant instructions, with a `## Standards` section that says whose coding standards apply: the owner's (with links to the `sunstack-dev` skills) or this repository's own (with a pointer to its standards file). A retrofit appends the section to an existing instruction file and replaces no file or link.
+- `AGENTS.md` → `CLAUDE.md` (symlink for cross-tool compatibility, created only when AGENTS.md doesn't exist)
 - `.gitignore` - Comprehensive ignore patterns
 - `.config/wt.toml` - Worktrunk configuration
 
 ### Cursor Integration
-- `.cursor/rules/*.md` - Coding standards (source of truth)
+- `.cursor/rules/swift-rules.md`, `monorepo-rules.md` - the owner's Swift and monorepo additions, for those project types under the owner's standards; TypeScript and Python standards live in the `sunstack-dev` skills
 - `.cursor/rules/*.mdc` → `*.md` (symlinks for Cursor discovery)
 - `.cursor/hooks/` - afterFileEdit hooks for linting
 

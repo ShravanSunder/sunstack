@@ -5,10 +5,14 @@ Complete list of all templates available for scaffolding.
 ## Common Templates
 
 ### CLAUDE.md.template
-Project-level AI assistant instructions. References cursor rules based on project type.
+Project-level AI assistant instructions. Its `## Standards` section has two forms, chosen by `--standards`:
+- `owner`: "Whose standards: the owner's (sunstack-dev)", the instruction to load `sunstack-dev:domain-code-standards` and the language skills, a link per language the project type includes, and its Swift or monorepo additions files.
+- `own`: "Whose standards: this repository's own", and a pointer to `docs/standards.md`. No owner skill link and no additions file.
+
+On a retrofit, the script appends the section to the existing instruction file when it has none, and replaces no instruction file or link.
 
 ### AGENTS.md (symlink)
-Created as a symlink to CLAUDE.md for cross-tool compatibility (Codex, Copilot, etc.).
+Created as a symlink to CLAUDE.md for cross-tool compatibility (Codex, Copilot, etc.), only when AGENTS.md doesn't exist. An existing AGENTS.md, regular file or link, is left as it is.
 
 ### gitignore.template
 Comprehensive .gitignore covering:
@@ -104,9 +108,9 @@ Playwright E2E testing setup with:
 **Example structure:**
 ```
 src/
-├── utils.ts
-├── utils.test.ts           # Node unit test (default)
-├── utils.node.test.ts      # Node unit test (explicit)
+├── report.ts
+├── report.test.ts          # Node unit test (default)
+├── report.node.test.ts     # Node unit test (explicit)
 └── Component.browser.test.tsx  # Browser unit test (React)
 tests/
 ├── integration/
@@ -136,36 +140,21 @@ packages/py_core/
 ## Cursor Templates
 
 ### rules/swift-rules.md
-Swift/SwiftUI coding standards:
+The owner's Swift additions, copied only under `--standards owner` for a Swift project type. They hold the Swift clauses no skill holds:
 - No Any type, no force unwraps/casts
 - @Observable over ObservableObject
 - MVVM with @Observable ViewModels
-- Swift Testing framework
-- SwiftLint/SwiftFormat tool commands
-
-### rules/ts-rules.md
-TypeScript coding standards:
-- No `any` type
-- Use `satisfies` over `as` casts
-- Strict types everywhere
-- Descriptive naming
-- Zod schema derivation
-- Oxlint/Oxfmt/vitest tool commands
-
-### rules/python-rules.md
-Python coding standards:
-- Import typing as `t`
-- Pydantic v2 models
-- pytest-mock for mocking
-- Arrange/Act/Assert testing
-- uv commands for linting/testing
+- Swift Testing framework, tests in SPM's `Tests/` target
+- SwiftLint/SwiftFormat commands, as the fallback where the repository defines none
 
 ### rules/monorepo-rules.md
-Monorepo structure and boundaries:
+The owner's monorepo additions, copied only under `--standards owner` for a monorepo type:
 - uv workspaces for Python
 - pnpm workspaces for TypeScript
 - Absolute imports only
 - Project structure guidelines
+
+TypeScript and Python standards aren't copied: they live in the `sunstack-dev` skills the Standards section links.
 
 ### hooks/hooks.json
 Cursor IDE hook configuration for afterFileEdit event.
