@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Read this skill in full before the Python work it governs; your own full read earlier this session counts.
 
+MUST load `../domain-code-standards/SKILL.md` and return the set this repository's Standards line names, with the shared standards that apply, before the sections below. This skill's choices are the owner's and apply under the owner's set.
+
 Python's annotations promise nothing until something enforces them, so each value gets the cheapest enforcer that fits. basedpyright checks every annotation. A Pydantic `BaseModel` validates data where validation or consistency matters: at boundaries, on the wire, and in anything persisted. A plain `dataclass` holds an internal container that needs neither.
 
 ## Typing
@@ -75,10 +77,12 @@ When a result or record has several states, give each state its own model with a
 
 ## Modules and tests
 
-Before creating a module, name the one responsibility it holds in snake_case (`transaction_processor.py`, never `process.py` or `utils.py`); when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)).
+Modules are snake_case: `transaction_processor.py`, never `process.py` or `utils.py`.
 
-- Tests run on pytest, each file beside its module as `<module>_test.py`.
-- Factories and mock factories live in the package's `tests/` folder; integration tests live only in `./tests/integration`.
+Under the owner's set:
+
+- Tests run on pytest. A unit test for `foo.py` is `foo_test.py` beside it. The older form is unit tests under `tests/`, such as `tests/test_<module>.py`.
+- Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder. Integration tests live in `./tests/integration`.
 - Mark tests that call real model APIs `integration_llm` and tests that need an external database `integration_db`; unmarked tests are unit tests.
 - Mock with pytest-mock's `mocker` fixture, never `unittest.mock`.
 
@@ -86,7 +90,7 @@ When a test reaches for `mocker.patch`, patch only a dependency outside the beha
 
 ## Gates
 
-Commands the repo defines win, and its ruff config owns formatting. When the repo defines none, run exactly these from the repo root against the changed path, with no `cd` first and no `| cat`:
+When the repo defines no commands, run exactly these from the repo root against the changed path, with no `cd` first and no `| cat`:
 
 ```bash
 uv run pytest <path>
