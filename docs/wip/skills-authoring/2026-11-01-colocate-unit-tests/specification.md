@@ -42,7 +42,7 @@ Added in revision 5 (design review 2, F4), from the retired templates' shared te
 
 19. Each test is structured Arrange / Act / Assert, and tests are few and valuable: they cover business logic and critical paths, and skip redundant or brittle cases.
 20. Unit tests outnumber integration tests, which outnumber end-to-end smoke tests; a test lives in the permanent suite or an established harness, never in a temporary script or file.
-21. Documentation explains why, briefly, and doesn't restate what the code already says.
+21. Documentation explains why, briefly, and doesn't restate what the code already says; a doc comment skips its return-type section when the type annotations already say it.
 
 Language forms, one home each:
 
@@ -55,7 +55,6 @@ Language forms, one home each:
     - A unit test for `foo.py` is `foo_test.py` beside it.
     - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder.
     - Integration tests live in `./tests/integration`.
-    - A docstring skips its return-type section when the type hints already say it.
 
 The scaffold, in `scaffold-project`:
 

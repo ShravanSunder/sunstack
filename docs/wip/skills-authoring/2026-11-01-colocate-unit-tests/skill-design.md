@@ -82,7 +82,7 @@ Before creating a file or module, name the one responsibility it holds; when no 
 
 ### Documentation
 
-Explain why, briefly. Don't restate what the code already says.
+Explain why, briefly. Don't restate what the code already says. Skip a doc comment's return-type section when the type annotations already say it.
 
 ## Signs you skipped it
 
@@ -131,7 +131,6 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - The responsibility sentence moves to the base, keeping the snake_case example (`transaction_processor.py`, never `process.py` or `utils.py`).
   - The tests lines say "Under the owner's set": `<module>_test.py` beside its module. Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder (D16). Integration tests live in `./tests/integration`. The markers line and the pytest-mock line are unchanged.
   - It gains the older form: "unit tests under `tests/`, such as `tests/test_<module>.py`" (D15).
-  - It gains: "A docstring skips its return-type section when the type hints already say it." (That comes from `python-rules.md:74`; D12a.)
 - **Gates (`:89`):** "Commands the repo defines win, and its ruff config owns formatting." is removed (base standard 6). The "When the repo defines none, run exactly these …" fallback stays.
 
 ### Run 5: `scaffold-project`
@@ -176,10 +175,11 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
 - **The copied rule templates:**
   - `ts-rules.md` and `python-rules.md` are no longer copied, and their `copy_rule` calls (`scaffold-project.sh:249-260`) go (D12).
   - `swift-rules.md` and `monorepo-rules.md` are copied, with their `.mdc` aliases, **only when the answer is the owner's set** (D10a, D11a). Under "this repository's own", no owner rule file is written (F1).
-  - `swift-rules.md` is copied with three edits (D10a, D10b):
+  - `swift-rules.md` is copied with four edits (D10a, D10b, D10c):
     - its "Swift Commands" opening (`:77`, "You MUST follow the ones below without any variations.") becomes "When the repository defines no commands of its own, run these:";
     - its "Formatting" fixed values (`:26`, `:28`) become the scaffold's `.swiftformat` defaults, which the repository's config overrides;
-    - its shared clauses, which the base now owns, are removed: `:58-62` (Arrange/Act/Assert, quality over quantity, minimal valuable tests, business logic, critical paths; base standard 19) and `:73` (documentation explains why; base standard 21). `:72`, Swift's docstring return-section rule, stays, because no Swift skill holds it.
+    - its shared clauses, which the base now owns, are removed: `:58-62` (Arrange/Act/Assert, quality over quantity, minimal valuable tests, business logic, critical paths; base standard 19) and `:72-73` (the return-type documentation condition and "explains why"; base standard 21);
+    - its "Testing Pyramid" amounts (`:66-68`, "Most / Some / Few tests") become its coverage map without amounts, which base standard 20 owns: "Unit tests cover ViewModels and business logic; integration tests cover the data layer; UI tests cover only critical user flows." (D10c)
     Otherwise it is unchanged.
   - `monorepo-rules.md` is copied without its `utils`/`helpers` line (`:39`) and without its two language imports (`:49-50`) (D11).
 - **The retrofit insertion.** A new function in `scaffold-project.sh` runs after the instruction files are written or skipped. Before the alias step, it resolves the real file: AGENTS.md's target when AGENTS.md exists (following a symlink), otherwise CLAUDE.md's.
@@ -288,6 +288,8 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 | D21 | The retrofit edit stays in the existing bash script, and its tests are TypeScript | The owner's rule: TypeScript or Rust only for new code. Changing the existing script in its own language is the smallest change, and a TypeScript rewrite of the scaffold is out of scope. **Owner may strike** |
 | D10a, 1 Nov 2026, supersedes D10's "unchanged" and adds a selection guard | `swift-rules.md` is copied only under the owner's set. Its commands become the fallback where the repository defines none, and its formatting values become the scaffold's `.swiftformat` defaults; otherwise it is unchanged. Swift tests follow its SPM `Tests/` layout (base standard 8) | Design review 2: F1 (a kept copy bypassed "this repository's own"), F2 (the base didn't state Swift's boundary), F3 ("without any variations" contradicted standard 6). **Owner may strike** |
 | D10b, 1 Nov 2026, adds to D10a | The Swift copy also drops its shared clauses `:58-62` and `:73`, which the base owns (standards 19 and 21), and keeps `:72` (Swift's docstring return-section rule), which no skill holds | Design review 2 recheck: F4 left these in two homes. Clause-map rows for `swift-rules.md` classed `shared` |
+| D10c, 1 Nov 2026, supersedes D10b's "keeps `:72`" | The Swift copy also drops `:72` (the return-type documentation condition, now in base standard 21), and its "Testing Pyramid" `:66-68` keeps its coverage map without the Most/Some/Few amounts (base standard 20) | Design review 2 recheck 2: F4's last remainder. The amounts and the return-type condition are shared meaning, whether or not a Swift skill exists |
+| D12b, 1 Nov 2026, supersedes D12a's `python-rules.md:74` line | The return-type documentation condition (`python-rules.md:74`, `swift-rules.md:72`) goes once to base standard 21; `domain-python` gains no docstring line | The same: one home for a shared condition |
 | D11a, 1 Nov 2026, adds to D11 | `monorepo-rules.md` is copied only under the owner's set | F1 |
 | D12a, 1 Nov 2026, adds to D12 | Each remaining template clause gets its home: `python-rules.md:57-63,68-70,75` (Arrange/Act/Assert, few valuable tests, critical paths, no throwaway tests, the test pyramid, docs explain why) go to base standards 19–21; `ts-rules.md:43-48` (descriptive file and folder names) go to base standard 12, with TypeScript's examples; `ts-rules.md:76` (redundant wrapper types) goes to `domain-typescript`; `python-rules.md:74` (docstring return sections) goes to `domain-python`; `python-rules.md:64` retires, because the owner's global rule allows established harnesses | F4; clause-map rows for those lines |
 | D14a, 1 Nov 2026, adds to D14 | The one shared test-helpers folder under `tests/` keeps the repository's name (`support/`, `utils/` or `lib/`) as the only exception to the naming standard, and its files still name their responsibility. TypeScript's examples narrow "never `utils/`" to folders outside `tests/` | F5; the owner: "utils or lib are test helpers or whatever you want to call it" |
@@ -352,4 +354,10 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
     - F8: the overwrite and alias cases.
 - **Revision 5, at `a3c7063c`:** corrects F1–F8 inside the accepted boundary: specification standards 8, 10, 12 and 16–18; new 19–21; D10a, D11a, D12a, D14a, D18a, D20a; run 5's two section forms and alias rules; and the script tests.
 - **Design review 2 recheck, at `a3c7063c`** (`design-review-2-recheck.md`): F1, F2, F3, F5, F6, F7 and F8 closed. F4 is partly open: the Swift copy kept the shared clauses. F9 is new: the specification's summary inverted the command fallback. Open count 8 → 2; no recurrence.
-- **Revision 6:** F4 closed by D10b and run 5's third Swift edit; F9 by the specification's corrected summary line. Back to the same review lead.
+- **Revision 6, at `b60f8774`:** F4 corrected by D10b and run 5's third Swift edit; F9 corrected by the specification's summary line.
+- **Design review 2 recheck 2, at `b60f8774`** (`design-review-2-recheck-2.md`): F9 closed. F4 still partly open: Swift `:66-68`'s pyramid amounts and the return-type documentation condition (Swift `:72`, plus the Python line D12a added) sat beside base standards 20 and 21. Open count 8 → 2 → 1; no recurrence.
+- **Revision 7:**
+  - the return-type condition goes once to base standard 21 (D12b), and its Python and Swift copies are removed;
+  - the Swift pyramid keeps its coverage map without amounts (D10c);
+  - the Swift oracle is updated.
+  Back to the same review lead.
