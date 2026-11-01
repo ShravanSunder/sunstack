@@ -184,9 +184,9 @@ Pressure tasks (D24d) are not part of #188's gate. The owner moved them to the n
 
 ## Owner decisions
 
-1. Adopt D24: Git-pinned real sources and no committed copies. Recommended: yes.
-2. Do the pressure tasks (D24d) gate #188, or come in a follow-up PR? Recommended: gate #188, since the owner asked for pressure tests and nothing yet shows the receiving agent's behavior.
-3. A rule with no real must-fire case after the search: ship it as a nudge with the narrowed claim, or hold it back? Recommended: decide per rule once the search is done.
+1. **Decided 1 Nov: adopt D24.** Owner: "but rule tests shoud lbe done we align on this?"
+2. **Decided 1 Nov: the pressure tasks (D24d) are the next stacked PR and don't gate #188.** Owner: "i agree", in reply to the Lead's revised recommendation. The proposal had first recommended gating #188; the Lead changed that before the owner decided, because no verified route yet runs a tool-using test agent.
+3. **Open:** a rule with no real must-fire case after the search. Ship it as a nudge with the narrowed claim, or hold it back? It's decided per rule once the real-positive labelling and the current-skills run are in.
 
 ## Not decided here
 
