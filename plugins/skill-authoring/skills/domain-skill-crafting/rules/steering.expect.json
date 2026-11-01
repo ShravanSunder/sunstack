@@ -260,11 +260,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 25,
+      "piece_first_line": 39,
       "field_line": 44,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-011 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-011 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -284,11 +284,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 83,
+      "piece_first_line": 156,
       "field_line": 164,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-012 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-012 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -308,11 +308,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 52,
+      "piece_first_line": 90,
       "field_line": 92,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-013 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-013 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -332,11 +332,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 83,
+      "piece_first_line": 172,
       "field_line": 178,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-014 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-014 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -356,11 +356,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 25,
+      "piece_first_line": 77,
       "field_line": 82,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-015 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-015 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -380,11 +380,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 83,
+      "piece_first_line": 180,
       "field_line": 186,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-016 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-016 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -452,11 +452,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 83,
+      "piece_first_line": 284,
       "field_line": 290,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k001/case-019 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k001/case-019 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -476,11 +476,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 3,
+      "piece_first_line": 7,
       "field_line": 7,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-001 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-001 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -500,14 +500,14 @@
           "plugins"
         ]
       },
-      "piece_first_line": 3,
+      "piece_first_line": 15,
       "field_line": 15,
       "expect": "must_fire",
       "lines": [
         15
       ],
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-002 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-002 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -527,11 +527,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 3,
+      "piece_first_line": 5,
       "field_line": 5,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-003 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-003 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -551,11 +551,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 3,
+      "piece_first_line": 26,
       "field_line": 26,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-004 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-004 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -575,11 +575,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 3,
+      "piece_first_line": 39,
       "field_line": 39,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-005 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-005 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -599,11 +599,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 216,
+      "piece_first_line": 220,
       "field_line": 220,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-006 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-006 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -623,11 +623,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 24,
+      "piece_first_line": 30,
       "field_line": 30,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-007 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-007 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -647,11 +647,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 160,
+      "piece_first_line": 182,
       "field_line": 182,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-008 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-008 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -671,11 +671,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 36,
+      "piece_first_line": 45,
       "field_line": 45,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-009 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-009 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -695,11 +695,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 216,
+      "piece_first_line": 222,
       "field_line": 222,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-010 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-010 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -719,11 +719,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 157,
+      "piece_first_line": 161,
       "field_line": 161,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-011 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-011 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -743,11 +743,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 116,
+      "piece_first_line": 120,
       "field_line": 120,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-012 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-012 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -767,11 +767,11 @@
           "skills"
         ]
       },
-      "piece_first_line": 213,
+      "piece_first_line": 257,
       "field_line": 257,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-013 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-013 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -791,11 +791,11 @@
           "skills"
         ]
       },
-      "piece_first_line": 213,
+      "piece_first_line": 258,
       "field_line": 258,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-014 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-014 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -815,11 +815,11 @@
           "skills"
         ]
       },
-      "piece_first_line": 213,
+      "piece_first_line": 259,
       "field_line": 259,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-015 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-015 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -839,11 +839,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 15,
       "field_line": 15,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-016 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-016 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -863,11 +863,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 21,
+      "piece_first_line": 59,
       "field_line": 59,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-017 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-017 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -887,11 +887,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 43,
+      "piece_first_line": 91,
       "field_line": 91,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-018 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-018 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -911,14 +911,14 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 9,
       "field_line": 9,
       "expect": "must_fire",
       "lines": [
         9
       ],
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-019 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-019 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -938,11 +938,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 6,
       "field_line": 6,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-020 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-020 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -962,11 +962,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 146,
+      "piece_first_line": 158,
       "field_line": 158,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-021 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-021 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -986,11 +986,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 43,
+      "piece_first_line": 95,
       "field_line": 95,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated steering-k002/case-022 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated steering-k002/case-022 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [

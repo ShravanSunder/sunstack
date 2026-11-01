@@ -11,11 +11,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 31,
+      "piece_first_line": 33,
       "field_line": 33,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-001 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-001 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -35,14 +35,14 @@
           "plugins"
         ]
       },
-      "piece_first_line": 33,
+      "piece_first_line": 39,
       "field_line": 39,
       "expect": "must_fire",
       "lines": [
         39
       ],
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-002 (development, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-002 (development, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -62,11 +62,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 164,
+      "piece_first_line": 166,
       "field_line": 166,
       "expect": "not_applicable",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-003 (development, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-003 (development, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -86,11 +86,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 36,
+      "piece_first_line": 38,
       "field_line": 38,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-004 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-004 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -110,11 +110,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 41,
+      "piece_first_line": 45,
       "field_line": 45,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-005 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-005 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -134,11 +134,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 6,
+      "piece_first_line": 21,
       "field_line": 21,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-006 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-006 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -158,14 +158,14 @@
           "plugins"
         ]
       },
-      "piece_first_line": 61,
+      "piece_first_line": 63,
       "field_line": 63,
       "expect": "must_fire",
       "lines": [
         63
       ],
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-007 (held-out, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-007 (held-out, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -185,11 +185,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 23,
+      "piece_first_line": 37,
       "field_line": 37,
       "expect": "not_applicable",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-008 (held-out, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-008 (held-out, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -209,11 +209,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 68,
+      "piece_first_line": 94,
       "field_line": 94,
       "expect": "not_applicable",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-009 (held-out, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-009 (held-out, current): original sol-settled call not_applicable on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -233,11 +233,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 90,
+      "piece_first_line": 103,
       "field_line": 103,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-010 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-010 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -257,11 +257,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 99,
+      "piece_first_line": 105,
       "field_line": 105,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-011 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-011 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -281,11 +281,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 125,
+      "piece_first_line": 127,
       "field_line": 127,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-012 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-012 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -305,11 +305,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 32,
+      "piece_first_line": 41,
       "field_line": 41,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-013 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-013 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -329,11 +329,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 51,
       "field_line": 51,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-014 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-014 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -353,11 +353,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 24,
+      "piece_first_line": 33,
       "field_line": 33,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-015 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-015 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -377,11 +377,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 20,
       "field_line": 20,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-016 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-016 (development, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -401,11 +401,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 19,
       "field_line": 19,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-017 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-017 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -425,11 +425,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 35,
       "field_line": 35,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-018 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-018 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -449,14 +449,14 @@
           "plugins"
         ]
       },
-      "piece_first_line": 1,
+      "piece_first_line": 119,
       "field_line": 119,
       "expect": "must_fire",
       "lines": [
         119
       ],
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-019 (held-out, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-019 (held-out, current): original sol-settled call finding on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -476,11 +476,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 22,
+      "piece_first_line": 39,
       "field_line": 39,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-020 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-020 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
@@ -500,11 +500,11 @@
           "plugins"
         ]
       },
-      "piece_first_line": 312,
+      "piece_first_line": 325,
       "field_line": 325,
       "expect": "must_pass",
       "kind": "regression_example",
-      "basis": "Migrated main-path-k001/case-021 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout.",
+      "basis": "Migrated main-path-k001/case-021 (held-out, current): original sol-settled call pass on branch.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged.",
       "decided_by": {
         "how": "independent",
         "who": [
