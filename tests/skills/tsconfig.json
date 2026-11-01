@@ -20,6 +20,7 @@
   "include": [
     "scripts/**/*.ts",
     "lib/**/*.ts",
+    "tests/**/*.ts",
     "evals/**/*.ts",
     "fixtures/**/cases.ts",
     "pressure-scenarios/**/cases.ts",

@@ -16,7 +16,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, describe, expect, test } from "vitest";
 
-const repositoryRoot = fileURLToPath(new URL("../../../../../..", import.meta.url));
+const repositoryRoot = fileURLToPath(new URL("../../../..", import.meta.url));
 const scaffoldRoot = path.join(repositoryRoot, "plugins/ai-scaffold");
 const scriptPath = path.join(scaffoldRoot, "scripts/scaffold/scaffold-project.sh");
 const fixtureRoots: string[] = [];
