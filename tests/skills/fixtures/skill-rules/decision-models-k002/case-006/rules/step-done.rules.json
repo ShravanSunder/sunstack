@@ -1,0 +1,24 @@
+{
+  "K001": {
+    "name": "step.done",
+    "evidence": "step",
+    "questions": {
+      "names_done": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Does the step say what must be true when it is done?"
+        },
+        "criteria": {
+          "true": "The step says what done looks like, and it names the command that proves it.",
+          "false": "The step never says what done looks like."
+        }
+      }
+    },
+    "decision": {
+      "start": "names_done",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}

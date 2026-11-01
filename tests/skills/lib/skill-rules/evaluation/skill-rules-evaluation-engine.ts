@@ -33,6 +33,7 @@ const ruleTopics: Readonly<Record<string, string>> = {
   "calls-and-placement": "calls-and-placement",
   "main-path": "main-path",
   steering: "steering",
+  "decision-models": "domain-decision-models",
 };
 
 export function resolveRuleIdentity(

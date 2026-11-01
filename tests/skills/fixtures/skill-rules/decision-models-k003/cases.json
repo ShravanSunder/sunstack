@@ -1,0 +1,152 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/steering.rules.json",
+      "startLine": 6,
+      "endLine": 17,
+      "fieldLine": 6
+    },
+    "excerpt": {
+      "path": "case-001/rules/steering.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json",
+      "startLine": 6,
+      "endLine": 18,
+      "fieldLine": 6
+    },
+    "excerpt": {
+      "path": "case-002/rules/generalization.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/descriptions-and-invocation.rules.json",
+      "startLine": 181,
+      "endLine": 191,
+      "fieldLine": 181
+    },
+    "excerpt": {
+      "path": "case-003/rules/descriptions-and-invocation.rules.json",
+      "line": 181,
+      "pieceLine": 181
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "decision-models-k003/case-004/rules/post-safety.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "case-004/rules/post-safety.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "decision-models-k003/case-005/rules/step-done.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "case-005/rules/step-done.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "decision-models-k003/case-006/rules/text-kind.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "case-006/rules/text-kind.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "development",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "decision-models-k003/case-007/rules/step-heading.rules.json",
+      "startLine": 6,
+      "endLine": 20
+    },
+    "excerpt": {
+      "path": "case-007/rules/step-heading.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  }
+]

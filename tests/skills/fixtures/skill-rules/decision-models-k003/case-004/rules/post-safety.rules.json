@@ -1,0 +1,24 @@
+{
+  "K001": {
+    "name": "post.safety",
+    "evidence": "step",
+    "questions": {
+      "safe": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Is the post safe?"
+        },
+        "criteria": {
+          "true": "The post contains a threat.",
+          "false": "The post contains no threat."
+        }
+      }
+    },
+    "decision": {
+      "start": "safe",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}

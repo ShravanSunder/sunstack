@@ -1,0 +1,229 @@
+[
+  {
+    "id": "case-001",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-001/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-002",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-002/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-003",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-003/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-004",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/dev-workflow-tools/skills/peekaboo/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-004/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-005",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-005/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-006",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-006/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-007",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+      "startLine": 1,
+      "endLine": 4,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "case-007/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-008",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "descriptions-k007/case-008/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-008/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-009",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "descriptions-k007/case-009/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-009/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-010",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "descriptions-k007/case-010/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-010/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "case-011",
+    "set": "development",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "4d909fd39048d06f9f5e9ff367981a438297122f",
+      "path": "descriptions-k007/case-011/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "case-011/SKILL.md",
+      "line": 3
+    }
+  }
+]

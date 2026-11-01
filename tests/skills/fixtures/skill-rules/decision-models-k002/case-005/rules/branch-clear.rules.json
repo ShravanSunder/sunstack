@@ -1,0 +1,24 @@
+{
+  "K001": {
+    "name": "branch.clear",
+    "evidence": "step",
+    "questions": {
+      "clear_branch": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Does the branch have a clear, observable condition and a concrete action?"
+        },
+        "criteria": {
+          "true": "The branch is clear and actionable.",
+          "false": "The branch is vague."
+        }
+      }
+    },
+    "decision": {
+      "start": "clear_branch",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}

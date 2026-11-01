@@ -7,7 +7,16 @@ export const ruleCaseSchema = z.object({
   id: z.string().min(1),
   set: z.enum(["development", "held-out"]),
   evidence: z.object({
-    kind: z.enum(["skill", "step", "load", "branch", "sentence", "reference_section"]),
+    kind: z.enum([
+      "skill",
+      "step",
+      "load",
+      "branch",
+      "sentence",
+      "reference_section",
+      "section",
+      "rule_question",
+    ]),
     field: z.string().min(1),
   }),
   source: z.object({
