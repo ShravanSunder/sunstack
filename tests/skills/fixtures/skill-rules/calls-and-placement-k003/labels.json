@@ -1,0 +1,99 @@
+{
+  "case-001": {
+    "outcome": "finding",
+    "line": 17,
+    "lines": [
+      17,
+      18
+    ],
+    "source": "sol-settled"
+  },
+  "case-002": {
+    "outcome": "finding",
+    "line": 30,
+    "lines": [
+      30
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-003": {
+    "outcome": "finding",
+    "line": 40,
+    "lines": [
+      40
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-004": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-005": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-006": {
+    "outcome": "finding",
+    "line": 32,
+    "lines": [
+      21,
+      26,
+      30,
+      31,
+      32,
+      33,
+      35
+    ],
+    "source": "sol-settled"
+  },
+  "case-007": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-008": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-009": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-010": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "case-011": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-012": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-013": {
+    "outcome": "finding",
+    "line": 14,
+    "lines": [
+      14
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-014": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-015": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "case-001": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-002": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-003": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "case-004": {
+    "outcome": "finding",
+    "line": 10,
+    "lines": [
+      10,
+      13,
+      14
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-005": {
+    "outcome": "finding",
+    "line": 10,
+    "lines": [
+      10,
+      13
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-006": {
+    "outcome": "finding",
+    "line": 10,
+    "lines": [
+      10,
+      13,
+      14
+    ],
+    "source": "labelers-agreed"
+  },
+  "case-007": {
+    "outcome": "not_applicable",
+    "line": null,
+    "source": "labelers-agreed"
+  }
+}
