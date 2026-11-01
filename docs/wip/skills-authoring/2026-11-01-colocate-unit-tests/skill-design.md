@@ -218,9 +218,9 @@ The owner's direction, relayed by Sun on 1 Nov 2026 at 17:46 EST: "Cursor barely
 | From | Clauses | To |
 | --- | --- | --- |
 | `swift-rules.md`, as edited by D10a–c | types, data models, formatting, SwiftUI patterns, architecture, testing, commands | the new `domain-swift` (run 6) |
-| `monorepo-rules.md` `:7-31` | the uv and pnpm workspaces; `services/py_*` and `packages/py_*`; the service layout example | the base's Monorepos part. The example's `tests/` comment reads "tests that aren't unit tests, and their shared helpers" (base standard 9) |
+| `monorepo-rules.md` `:7-31` | uv for Python dependencies, with commands run through `uv run` (`:12`); pnpm for TypeScript, with commands run through `pnpm run` (`:30`); the uv and pnpm workspaces; `services/py_*` and `packages/py_*`; the service layout example | the base's Monorepos part. The example's `tests/` comment reads "tests that aren't unit tests, and their shared helpers" (base standard 9) |
 | `monorepo-rules.md` `:33-38` | models pure, repos for data access | the base's Monorepos part |
-| `monorepo-rules.md` `:40` | `__init__.py` only at package roots | `domain-python`, scoped to monorepos |
+| `monorepo-rules.md` `:40` | don't create an `__init__.py` unless the user asks; they're only for package roots (both conditions) | `domain-python`, scoped to monorepos |
 | `monorepo-rules.md` `:42-44` | absolute imports only | the base's Monorepos part |
 | `monorepo-rules.md` `:46-48` | ask before editing tsconfig, ruff or pyright config | the base's Monorepos part (the duplicated `ruff.toml` is written once) |
 | `CLAUDE.md.template` `:15-16`, the load sentence's "a language with no skill follows its additions file" | the `@.cursor/rules/*.mdc` additions links | removed. Swift's line becomes a skill link |
@@ -233,7 +233,7 @@ The owner's direction, relayed by Sun on 1 Nov 2026 at 17:46 EST: "Cursor barely
 - **Done when:** "in a language whose skill names its test form" becomes "in a language whose skill names a beside-the-module test form".
 
 **Run 4 addition, `domain-python`:** one line under Modules and tests:
-> In a monorepo, an `__init__.py` exists only at a package root, unless the owner asks for another.
+> In a monorepo, don't create an `__init__.py` unless the user asks; these files are only for package roots.
 
 **Run 6, `domain-swift` (create):**
 - **Shape:** the siblings' shape: frontmatter (D23b's description, hidden), the read-rule line, and then the same first load of the base that runs 2–4 carry.
@@ -464,3 +464,12 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - the revision 9 section and run 6 here;
   - the script tests in `skill-verification.md`.
   Next: a scoped design review by the same review lead, before any skill or script file changes.
+- **Revision 9 design review, at `724cf208..21be1bff`** (`scratch-root-01a1635f/standards-rework/revision-9/revision-9-design-review.md`). Two fresh Sol xhigh reviewers, `01a1996d-db8a` (teaching) and `01a1996e-33eb` (structure); all five checks are complete.
+  - Verdict: `targeted-revision`; implementation decision `revise-first`.
+  - F1, blocker: the `__init__.py` line had dropped the "unless the user asks" condition on creation, and had turned the package-root rule into a location exception.
+  - F2, important: the monorepo `uv run` and `pnpm run` command choices had no explicit home.
+  - Held sound: the Swift SPM exception, the hooks, the instruction-file guarantees, and the consumer and removal plan.
+- **Revision 9 corrections:**
+  - F1: standard 15's line, the clause table and run 4's line now keep both original conditions.
+  - F2: standard 22's first bullet carries the uv/`uv run` and pnpm/`pnpm run` choices, with the repository's own commands still winning (standard 6), and the clause table names `:12` and `:30`.
+  Back to the same review lead for a recheck.

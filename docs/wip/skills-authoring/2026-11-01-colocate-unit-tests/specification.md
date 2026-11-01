@@ -47,7 +47,7 @@ Added in revision 5 (design review 2, F4), from the retired templates' shared te
 Added in revision 9, from the retired `monorepo-rules.md`, scoped to monorepos as that file was:
 
 22. In a monorepo, under the owner's set:
-    - its Python projects are a uv workspace (`services/py_*/pyproject.toml` for services, `packages/py_*/pyproject.toml` for shared libraries, each with its importable package root), and its TypeScript projects a pnpm workspace;
+    - its Python projects manage dependencies with uv and run commands through `uv run`, as a uv workspace (`services/py_*/pyproject.toml` for services, `packages/py_*/pyproject.toml` for shared libraries, each with its importable package root). Its TypeScript projects manage dependencies with pnpm and run commands through `pnpm run`, as a pnpm workspace. Where the repository defines its own command, that command still wins (standard 6);
     - `models/` hold pure data models, with no business logic, no dependency on repos or services and no database-specific DDL, and `repos/` interact with the database or external data sources;
     - imports are absolute, from the project or package root, never `../` or `./`;
     - editing `tsconfig.json`, `ruff.toml` or `pyrightconfig.json` waits for explicit permission.
@@ -64,7 +64,7 @@ Language forms, one home each:
     - A unit test for `foo.py` is `foo_test.py` beside it.
     - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder.
     - Integration tests live in `./tests/integration`.
-    - In a monorepo, an `__init__.py` exists only at a package root, unless the owner asks for another (revision 9, from `monorepo-rules.md`).
+    - In a monorepo, don't create an `__init__.py` unless the user asks; these files are only for package roots (revision 9, from `monorepo-rules.md:40`, both conditions kept).
 23. **Swift** (`domain-swift`, revision 9): the standards `swift-rules.md` held, with D10a–c's edits and no new ones:
     - its types, data models and SwiftUI patterns;
     - its architecture;
