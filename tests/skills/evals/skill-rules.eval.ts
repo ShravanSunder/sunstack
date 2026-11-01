@@ -5,6 +5,7 @@ import { afterAll, expect, test } from "vitest";
 import { describeEval } from "vitest-evals";
 import {
   loadRuleCases,
+  loadRuleStrata,
   parseHeldOutFlag,
   parseRuleFolders,
   selectRuleCases,
@@ -23,8 +24,10 @@ import type {
 const repositoryRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const heldOut = parseHeldOutFlag(process.env.SKILL_RULES_HELD_OUT);
 const folders = parseRuleFolders(process.env.SKILL_RULES_FOLDERS);
+// Strata live here, outside every fixture folder the blind labelers read.
+const strata = loadRuleStrata(path.join(repositoryRoot, "tests/skills/evals/rule-strata.json"));
 const selected = selectRuleCases(
-  loadRuleCases(path.join(repositoryRoot, "tests/skills/fixtures/skill-rules")),
+  loadRuleCases(path.join(repositoryRoot, "tests/skills/fixtures/skill-rules"), strata),
   heldOut,
 ).filter((item) => folders === null || folders.includes(item.ruleFolder));
 if (folders) {

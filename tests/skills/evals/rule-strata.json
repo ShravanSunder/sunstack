@@ -1,0 +1,65 @@
+{
+  "calls-and-placement-k003": {
+    "case-001": "own loads, several",
+    "case-002": "no loads, inline command",
+    "case-003": "no loads, table row",
+    "case-004": "S4 control",
+    "case-005": "S4 control",
+    "case-006": "loaded file's section",
+    "case-007": "loaded file's section",
+    "case-008": "platform reference",
+    "case-009": "quoted worked example",
+    "case-010": "tool plugin",
+    "case-011": "tool plugin",
+    "case-012": "cut",
+    "case-013": "inline command beside own loads (A1)",
+    "case-014": "missing load target",
+    "case-015": "product named in prose"
+  },
+  "decision-models-k002": {
+    "case-001": "real",
+    "case-002": "real",
+    "case-003": "real",
+    "case-004": "real",
+    "case-005": "synthetic, two things",
+    "case-006": "synthetic, criteria add a requirement",
+    "case-007": "synthetic, criteria define another proposition"
+  },
+  "decision-models-k003": {
+    "case-001": "real",
+    "case-002": "real",
+    "case-003": "real",
+    "case-004": "synthetic, criteria define another proposition",
+    "case-005": "synthetic, criteria add a requirement",
+    "case-006": "synthetic, labels answer another question",
+    "case-007": "synthetic, no criteria"
+  },
+  "descriptions-k007": {
+    "case-001": "real, names products beside a shared stack",
+    "case-002": "tool plugin",
+    "case-003": "tool plugin",
+    "case-004": "real, a platform tool",
+    "case-005": "real, a platform tool",
+    "case-006": "real, domain vocabulary",
+    "case-007": "real, generic",
+    "case-008": "synthetic, one application's procedure",
+    "case-009": "synthetic, mixed conditions",
+    "case-010": "synthetic, product named in prose",
+    "case-011": "synthetic, Not-for boundary"
+  },
+  "generalization-k001": {
+    "case-001": "standards section",
+    "case-002": "standards section",
+    "case-003": "standards section",
+    "case-004": "standards section",
+    "case-005": "standards section",
+    "case-006": "standards section",
+    "case-007": "workflow step",
+    "case-008": "workflow step",
+    "case-009": "worked example section",
+    "case-010": "H1 introduction",
+    "case-011": "table",
+    "case-012": "teaching with named examples",
+    "case-013": "synthetic, one case as the rule"
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "case-001": "real",
-  "case-002": "real",
-  "case-003": "real",
-  "case-004": "synthetic, criteria define another proposition",
-  "case-005": "synthetic, criteria add a requirement",
-  "case-006": "synthetic, labels answer another question",
-  "case-007": "synthetic, no criteria"
-}

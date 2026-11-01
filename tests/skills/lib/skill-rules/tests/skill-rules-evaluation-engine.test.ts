@@ -207,7 +207,9 @@ const anchorFixturesRoot = fileURLToPath(
   new URL("../../../fixtures/run-skill-rules/eval-anchors", import.meta.url),
 );
 function anchorFixture(): LoadedRuleCase {
-  const loaded = loadRuleCases(anchorFixturesRoot).find((item) => item.definition.id === "case-001");
+  const loaded = loadRuleCases(anchorFixturesRoot, {
+    "calls-and-placement-k003": { "case-001": "inline route" },
+  }).find((item) => item.definition.id === "case-001");
   if (!loaded?.label) throw new Error("Anchor fixture missing");
   return loaded;
 }

@@ -61,6 +61,17 @@ describe("rule-case loading and selection", () => {
     ]);
     expect(() => parseRuleFolders("placement")).toThrow("SKILL_RULES_FOLDERS");
   });
+  test("strata come from a file outside the fixture folders, and name only real folders and cases", () => {
+    const rows = loadRuleCases(fixtureRoot, { "descriptions-k004": { "case-001": "real, generic" } });
+    expect(rows.find((row) => row.definition.id === "case-001")?.stratum).toBe("real, generic");
+    expect(rows.find((row) => row.definition.id === "case-002")?.stratum).toBe("unassigned");
+    expect(() => loadRuleCases(fixtureRoot, { "descriptions-k004": { missing: "x" } })).toThrow(
+      "stratum has no case",
+    );
+    expect(() => loadRuleCases(fixtureRoot, { "nowhere-k001": { "case-001": "x" } })).toThrow(
+      "no fixture folder",
+    );
+  });
   test("a missing labels file does not create labels or scores", () => {
     const root = copyFixture();
     rmSync(path.join(root, "descriptions-k004/labels.json"));

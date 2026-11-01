@@ -62,11 +62,21 @@ export interface LoadedRuleCase {
   readonly folder: string;
   readonly definition: RuleCase;
   readonly label: RuleLabel | undefined;
-  /** The stratum the case was picked for, from the folder's strata.json, or "unassigned". */
+  /** The stratum the case was picked for, from the strata file, or "unassigned". */
   readonly stratum: string;
 }
+/** Each rule folder's cases by stratum. Kept outside every fixture folder the blind labelers read. */
+export const ruleStrataSchema = z.record(z.string(), z.record(z.string(), z.string().min(1)));
+export type RuleStrata = z.infer<typeof ruleStrataSchema>;
 
-export function loadRuleCases(fixturesRoot: string): readonly LoadedRuleCase[] {
+export function loadRuleStrata(filename: string): RuleStrata {
+  return ruleStrataSchema.parse(JSON.parse(readFileSync(filename, "utf8")));
+}
+
+export function loadRuleCases(
+  fixturesRoot: string,
+  strata: RuleStrata = {},
+): readonly LoadedRuleCase[] {
   const loaded: LoadedRuleCase[] = [];
   for (const directory of readdirSync(fixturesRoot, { withFileTypes: true }).sort((left, right) =>
     left.name.localeCompare(right.name),
@@ -80,11 +90,7 @@ export function loadRuleCases(fixturesRoot: string): readonly LoadedRuleCase[] {
     const labels = existsSync(labelsFile)
       ? z.record(z.string(), ruleLabelSchema).parse(JSON.parse(readFileSync(labelsFile, "utf8")))
       : {};
-    // Strata sit apart from cases.json so that adding them never touches what blind labelers read.
-    const strataFile = path.join(folder, "strata.json");
-    const strata = existsSync(strataFile)
-      ? z.record(z.string(), z.string().min(1)).parse(JSON.parse(readFileSync(strataFile, "utf8")))
-      : {};
+    const folderStrata = strata[directory.name] ?? {};
     const identities = new Set<string>();
     for (const definition of cases) {
       if (identities.has(definition.id))
@@ -95,16 +101,19 @@ export function loadRuleCases(fixturesRoot: string): readonly LoadedRuleCase[] {
         folder,
         definition,
         label: labels[definition.id],
-        stratum: strata[definition.id] ?? "unassigned",
+        stratum: folderStrata[definition.id] ?? "unassigned",
       });
     }
     for (const identity of Object.keys(labels))
       if (!identities.has(identity))
         throw new Error(`${labelsFile}: label has no case ${identity}`);
-    for (const identity of Object.keys(strata))
+    for (const identity of Object.keys(folderStrata))
       if (!identities.has(identity))
-        throw new Error(`${strataFile}: stratum has no case ${identity}`);
+        throw new Error(`strata for ${directory.name}: stratum has no case ${identity}`);
   }
+  for (const folder of Object.keys(strata))
+    if (!loaded.some((item) => item.ruleFolder === folder))
+      throw new Error(`strata name no fixture folder ${folder}`);
   return loaded;
 }
 
