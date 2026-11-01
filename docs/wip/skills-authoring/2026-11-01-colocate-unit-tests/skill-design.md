@@ -473,3 +473,4 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - F1: standard 15's line, the clause table and run 4's line now keep both original conditions.
   - F2: standard 22's first bullet carries the uv/`uv run` and pnpm/`pnpm run` choices, with the repository's own commands still winning (standard 6), and the clause table names `:12` and `:30`.
   Back to the same review lead for a recheck.
+- **Revision 9 design recheck, at `21be1bff..1d14002e`** (`revision-9/revision-9-design-recheck.md`): F1 and F2 are closed at their corrected anchors against `724cf208`. The open count goes 2 → 0, with no recurrence. **Verdict `great`; implementation decision `accepted-to-implement`.** It rests on the two-reviewer, five-check record plus this scoped recheck. Left unobserved: implementation, the keyed and platform checks, client loading and pressure behavior.
