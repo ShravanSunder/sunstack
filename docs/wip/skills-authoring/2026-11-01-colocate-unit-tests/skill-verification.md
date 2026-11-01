@@ -27,7 +27,7 @@ These are TypeScript integration tests in the repository's TypeScript test packa
 | --- | --- | --- |
 | New TypeScript project, owner's standards | empty folder; a TypeScript type | CLAUDE.md has `## Standards` with "Whose standards: the owner's (sunstack-dev)", the load sentence, and the shared and TypeScript links; AGENTS.md is a symlink to CLAUDE.md; no `.cursor/rules/ts-rules.md(c)` |
 | New Python project | empty folder; a Python type | as above, with the Python link; no `python-rules.md(c)` |
-| New Swift project | empty folder; the Swift type | the Swift additions line; `.cursor/rules/swift-rules.md` equals its template except the two D10a edits (the fallback condition on the commands, and the `.swiftformat` defaults) |
+| New Swift project | empty folder; the Swift type | the Swift additions line; `.cursor/rules/swift-rules.md` equals its template except the three edits of D10a and D10b (the fallback condition on the commands; the `.swiftformat` defaults; `:58-62` and `:73` removed and `:72` kept) |
 | New monorepo | empty folder; `monorepo-both` | both language links; the monorepo additions line; `monorepo-rules.md` without its `utils`/`helpers` line and its two language imports, and otherwise identical |
 | The repository's own standards | empty folder; a TypeScript type; the "this repository's own" answer | the line reads "this repository's own"; a pointer to `docs/standards.md`; no load sentence, no owner skill link, no additions line |
 | The repository's own, Swift (F1) | empty folder; the Swift type; the "this repository's own" answer | no `.cursor/rules/swift-rules.md` or `.mdc` written; no `alwaysApply` rule file; the Swift project files are still created |

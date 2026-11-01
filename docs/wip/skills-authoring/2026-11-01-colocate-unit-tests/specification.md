@@ -16,7 +16,7 @@ Revision 5: revision 4 corrected for design review 2's findings F1–F8.
   - It writes the Standards section into the instruction file of every repository it creates. Under the owner's set, the section carries the skill links; under the repository's own, it points to the repository's standards file.
   - On a retrofit, it adds a missing section to the existing instruction file, and never replaces an instruction file or link.
   - It stops copying the TypeScript and Python rule templates, whose clauses have skill homes or are retired.
-  - Under the owner's set only, it keeps copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback where the repository defines its own.
+  - Under the owner's set only, it keeps copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback, used only where the repository defines none.
 
 ## Standards the skills state
 
