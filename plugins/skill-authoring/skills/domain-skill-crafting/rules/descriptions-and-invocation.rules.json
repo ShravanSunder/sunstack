@@ -196,8 +196,8 @@
           "task": "Is every product named in the description's loading conditions named only as a labelled example, or as part of this toolkit's own shared infrastructure?"
         },
         "criteria": {
-          "true": "Each product in a loading condition is presented as an example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack.",
-          "false": "At least one product in a loading condition is one product's own work the skill loads for, not a labelled example."
+          "true": "Each product in a loading condition is presented as an example of a general case (\"for example\", \"such as\"), inside a condition that stays general, or is this toolkit's own shared infrastructure, such as its own local observability stack.",
+          "false": "At least one loading condition is one product's own work the skill loads for, not a labelled example. A general condition elsewhere in the description doesn't exempt a separate branch that loads the skill for one product's own workflow."
         }
       }
     },

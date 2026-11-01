@@ -159,8 +159,8 @@
           "task": "Is every product this section sends the agent into named only as a labelled example, or part of this toolkit's own shared infrastructure?"
         },
         "criteria": {
-          "true": "Each product the agent is sent into is presented as an example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack.",
-          "false": "At least one product the agent is sent into is one product's own workflow, command, state or path, given as a step, branch, load or command the agent follows, not as a labelled example."
+          "true": "Each product the section names is named only in passing, or as a labelled example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack; the section doesn't ask the agent to run that product's own commands, follow its procedures or use its state files as part of this skill's work.",
+          "false": "The section tells the agent to run one product's own commands, follow its procedures or use its state files as steps of this skill's work. That is neither a labelled example nor a tool used through its supported interface, even when the same product is a tool elsewhere."
         }
       }
     },
@@ -172,7 +172,8 @@
           "yes_at_or_above": 0.7,
           "no_at_or_below": 0.3,
           "yes": "example_or_own_infrastructure",
-          "no": "pass"
+          "no": "pass",
+          "uncertain": "exemption_when_unsure"
         },
         "example_or_own_infrastructure": {
           "ask": "example_or_own_infrastructure",
@@ -185,9 +186,16 @@
             "locate": {
               "name": "product_line",
               "task": "Which line of body sends the agent into one named product's own workflow: its own procedures, run commands, state files or machine paths? Not a line that uses a tool or platform through its supported interface, uses the vocabulary of the subject the skill governs, names a product only as a labelled example, or uses this toolkit's own shared infrastructure.",
-              "min_probability": 0.5
+              "min_probability": 0.6
             }
           }
+        },
+        "exemption_when_unsure": {
+          "ask": "example_or_own_infrastructure",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": "uncertain"
         }
       }
     },

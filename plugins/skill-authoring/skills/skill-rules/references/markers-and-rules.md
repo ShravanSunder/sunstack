@@ -100,7 +100,7 @@ A finding route and its entry carry what the agent receives. Step 3's nudge desi
 
 ```json
 "no": { "finding": "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository.", "at": "body",
-        "locate": { "name": "product_line", "task": "Which line of body sends the agent into one named product's own workflow: its own procedures, run commands, state files or machine paths? Not a line that uses a tool or platform through its supported interface, uses the vocabulary of the subject the skill governs, names a product only as a labelled example, or uses this toolkit's own shared infrastructure.", "min_probability": 0.5 } }
+        "locate": { "name": "product_line", "task": "Which line of body sends the agent into one named product's own workflow: its own procedures, run commands, state files or machine paths? Not a line that uses a tool or platform through its supported interface, uses the vocabulary of the subject the skill governs, names a product only as a labelled example, or uses this toolkit's own shared infrastructure.", "min_probability": 0.6 } }
 ```
 
 with `"related": ["targets"]` and `"severity": "warn"` on the entry (`K003` in `calls-and-placement.rules.json`). A locator's task carries the exemptions its questions own, so it doesn't pick a line the questions would excuse.

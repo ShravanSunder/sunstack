@@ -133,7 +133,9 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   routes_product? → no: pass (no product workflow on this section's own text and loads)
                   → yes: example_or_own_infrastructure? → yes: pass
                                                          → no: finding at body, located (warn)
-  either between its bars → uncertain, for the agent to decide
+                  → between its bars: example_or_own_infrastructure? → yes: pass
+                                                                      → otherwise: uncertain
+  the exemption between its bars → uncertain, for the agent to decide
   ```
 
   The pass on `no` settles only what the chunk shows; it says nothing about the section's other properties.
@@ -141,14 +143,14 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
 
   ```text
   | node                         | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
-  | routes_product               | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | first      | none     | a false nudge costs one read of a loaded file; a miss leaves one product's workflow in a generic skill, which #187 showed survives a review |
+  | routes_product               | P(yes)    | ≥ .7     | ≤ .3    | ask the exemption; only its confident yes passes | first | none | a false nudge costs one read of a loaded file; a miss leaves one product's workflow in a generic skill, which #187 showed survives a review |
   | example_or_own_infrastructure | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | second     | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is the same as above |
   ```
 
   The bars are a first setting, provisional until development results.
 - **The nudge.**
   - **Message:** "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository." The repository is a direction: the run never reads it.
-  - **Where:** `at: "body"`, with a locator `product_line` whose task asks which line of `body` sends the agent into one named product's own workflow, and carries the questions' exemptions so a tool, the subject's vocabulary, a labelled example or the toolkit's own infrastructure isn't picked; at `min_probability` .5, a provisional bar on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
+  - **Where:** `at: "body"`, with a locator `product_line` whose task asks which line of `body` sends the agent into one named product's own workflow, and carries the questions' exemptions so a tool, the subject's vocabulary, a labelled example or the toolkit's own infrastructure isn't picked; at `min_probability` .6, on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
   - **Severity:** `warn`: both paths read a model's answer.
   - **Read next:** `related: ["targets"]`. The finding lists the standard's line, then each loaded file whose opening the run read, `agentstudio-loop.md` among them. The list names every file the section loads; the locator, not the list, says which line the nudge is about.
 - **Proof plan.**
@@ -156,4 +158,4 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
   - **The tree:** development cases. Line 17's section expects a finding at line 17, anchored by the locator. `practices-cleanup/SKILL.md`'s allow list, whose table row at line 40 runs AgentStudio's own `mise ... run clean-artifacts`, expects a finding, from the section's own text, with no load in it. The countercases expect no nudge: a section that names a product only as a labelled example; this toolkit's own observability queries in `victoria-queries.md`; `domain-skill-crafting/references/platform.md`'s platform contracts. Held-out cases from other plugins, labelled by agents independent of the rule, run once after the freeze. No current rule judges this standard, so there is no baseline: name that.
   - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is an eval, and stays unproven until the evals run.
 
-The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar is provisional until labelled development cases set it.
+The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar, .6, was set from four development readings, after one wrong line drew .52 and one right line .44; held-out cases test it.

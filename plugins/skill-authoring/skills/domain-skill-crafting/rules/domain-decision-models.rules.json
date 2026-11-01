@@ -43,8 +43,8 @@
           "task": "Do this question's criteria define the yes and no of its task's proposition without adding a second requirement?"
         },
         "criteria": {
-          "true": "The criteria say what yes and no to the task's one proposition look like, with its boundary cases, and ask for nothing more.",
-          "false": "The criteria add a requirement the task doesn't ask, such as a yes that also needs a second property to hold, so the answer mixes two judgments."
+          "true": "The criteria say what yes and no to the task's own proposition look like, with its boundary cases and examples, and ask for nothing more: a yes in the criteria is a yes to the task.",
+          "false": "The criteria define something other than the task's proposition: they add a requirement the task doesn't ask, such as a yes that also needs a second property to hold, or they invert or replace the proposition, so a yes in the criteria isn't a yes to the task."
         }
       }
     },
@@ -95,8 +95,8 @@
           "task": "Do this question's criteria define the answers to the same proposition its task asks, rather than to a different one? body is one question of a rule entry: its type, its instructions with the task, and its criteria."
         },
         "criteria": {
-          "true": "The criteria answer the task's own question: a Noul's yes and no, a Choice's labels or a Score's levels each describe an answer to what the task asks.",
-          "false": "The criteria define a different proposition from the task, such as a task \"Is the post safe?\" whose yes means \"contains a threat\", or labels that answer another question."
+          "true": "The criteria answer the task's own question and nothing else: a Noul's yes and no, a Choice's labels or a Score's levels each describe an answer to what the task asks. Boundary cases and examples of those answers keep the same proposition.",
+          "false": "The criteria define a different proposition from the task: they invert it, so a yes in the criteria is a no to the task; they replace it with another property; they add a requirement the task doesn't ask; or a Choice's labels answer another question."
         }
       }
     },
