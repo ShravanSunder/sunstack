@@ -1,6 +1,6 @@
 # Skill design: shared code standards (the #189 rework)
 
-Revision 4. Revisions 1–3 designed two runs, a Tests section in `domain-typescript` and one in `domain-rust`. Both were implemented at `8dbedca5`, and revision 4's runs 2 and 3 supersede them.
+Revision 5: revision 4 corrected for design review 2's findings F1–F8. Revisions 1–3 designed two runs, a Tests section in `domain-typescript` and one in `domain-rust`. Both were implemented at `8dbedca5`, and revision 4's runs 2 and 3 supersede them.
 
 ## Targets and runs
 
@@ -69,14 +69,20 @@ These hold when the repository's line names the owner's standards.
 
 ### Tests
 
-- A unit test sits beside the module it tests, in the form its language skill names.
+- A unit test sits beside the module it tests, in the form its language skill names. A language with no language skill (Swift today) follows the test layout in its additions file.
 - A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers tests share, in one helpers folder: `tests/support/`, or the name the repository already uses.
-- When a change edits a module, its production code or its tests, and that module's unit tests sit in an older form, move them into the standard form in the same change. The move covers only that module's own unit tests; a repository-wide move is its own PR.
+- In a language whose skill names its form, when a change edits a module, its production code or its tests, and that module's unit tests sit in an older form, move them into the standard form in the same change. The move covers only that module's own unit tests; a repository-wide move is its own PR.
 - A folder that already holds unit tests is the old form, not precedent.
+- Structure each test as Arrange / Act / Assert. Write few, valuable tests on business logic and critical paths, and skip redundant or brittle cases.
+- Keep many unit tests, fewer integration tests and fewer still end-to-end smoke tests. Put a test in the permanent suite or an established harness, never in a temporary script or file.
 
 ### Files and modules
 
-Before creating a file or module, name the one responsibility it holds; when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)). Split a catch-all such as `utils`, `helpers` or `db` by responsibility. The language skill gives the case style and its examples.
+Before creating a file or module, name the one responsibility it holds; when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)). Split a catch-all such as `utils`, `helpers` or `db` by responsibility. The one shared test-helpers folder under `tests/` is the exception: it keeps the name the repository uses (`support/`, `utils/` or `lib/`), and the files in it still name their responsibility. The language skill gives the case style and its examples.
+
+### Documentation
+
+Explain why, briefly. Don't restate what the code already says.
 
 ## Signs you skipped it
 
@@ -87,7 +93,7 @@ Before creating a file or module, name the one responsibility it holds; when no 
 
 ## Done when
 
-The governing set is named from the line, or the owner has been asked. Under the owner's set, the change's own modules have no unit tests left in an older form.
+The governing set is named from the line, or the owner has been asked. Under the owner's set, the change's own modules, in a language whose skill names its test form, have no unit tests left in an older form.
 ````
 
 ### Runs 2–4: the language skills
@@ -104,7 +110,10 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
 - **Tests section** (#189's) becomes:
   > Under the owner's set, a unit test for `report.ts` is `report.test.ts` in the same folder. Older forms are a `tests/` or `__tests__/` folder.
   - The shared bullets, the move-on-touch paragraph, the ask sentence and the incident sentence (the `report.ts` story; specification "Task history") are removed.
-- **Shapes and names (`:119`):** keeps the kebab-case examples (`database-connection.ts`, `query-builders/`, never `db.ts`, `utils/` or `helpers.ts`). The "name the one responsibility … split the content first" sentence and its citation move to the base.
+- **Shapes and names (`:119`):** keeps the kebab-case examples (`database-connection.ts`, `query-builders/`, never `db.ts`, `helpers.ts` or a `utils/` folder outside `tests/`). The "name the one responsibility … split the content first" sentence and its citation move to the base. It gains, beside its type guidance:
+  > A wrapper type that only returns its input is redundant: use the type it wraps.
+
+  (That comes from `ts-rules.md:76`; D12a.)
 - **Gates (`:123`):** "The repository's own scripts, oxlint config and formatter config win over anything listed here, and the formatter owns indentation and layout." is removed (base standard 6). "Follow the oxlint rules without exceptions: fix the code instead of adding a disable comment." and the toolchain fallback load stay.
 - **Types at the edges (`:32`):** gains the `as const` exception (D13):
   > `as const`, alone or as `as const satisfies`, isn't a cast: it narrows a literal to its literal type, so it's allowed.
@@ -122,6 +131,7 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - The responsibility sentence moves to the base, keeping the snake_case example (`transaction_processor.py`, never `process.py` or `utils.py`).
   - The tests lines say "Under the owner's set": `<module>_test.py` beside its module. Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder (D16). Integration tests live in `./tests/integration`. The markers line and the pytest-mock line are unchanged.
   - It gains the older form: "unit tests under `tests/`, such as `tests/test_<module>.py`" (D15).
+  - It gains: "A docstring skips its return-type section when the type hints already say it." (That comes from `python-rules.md:74`; D12a.)
 - **Gates (`:89`):** "Commands the repo defines win, and its ruff config owns formatting." is removed (base standard 6). The "When the repo defines none, run exactly these …" fallback stays.
 
 ### Run 5: `scaffold-project`
@@ -134,14 +144,16 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - The owner's (Recommended): the sunstack-dev skills
   - This repository's own: you'll write or link them
   ```
-- **The Standards section.** `templates/common/CLAUDE.md.template` replaces `## Rules` and its four `@.cursor/rules/*.mdc` imports with the section below. `{{STANDARDS_OWNER}}` is the answer. The language lines use the template's existing `INCLUDE_TS`/`INCLUDE_PY`/`INCLUDE_SWIFT`/`MONOREPO` conditionals:
+- **The Standards section.** `templates/common/CLAUDE.md.template` replaces `## Rules` and its four `@.cursor/rules/*.mdc` imports with a Standards section. The template carries both forms under a conditional on the answer, and the language lines use its existing `INCLUDE_TS`/`INCLUDE_PY`/`INCLUDE_SWIFT`/`MONOREPO` conditionals.
+
+  The section has two forms, selected by the answer (F6). Under the owner's set:
 
   ```markdown
   ## Standards
 
-  Whose standards: {{STANDARDS_OWNER}}
+  Whose standards: the owner's (sunstack-dev)
 
-  Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches. If a skill can't be loaded, say which one and ask before choosing a standard.
+  Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches; a language with no skill follows its additions file. If a skill can't be loaded, say which one and ask before choosing a standard.
 
   - Shared: `sunstack-dev:domain-code-standards`
   - TypeScript: `sunstack-dev:domain-typescript`
@@ -149,16 +161,33 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
   - This repository's additions: @.cursor/rules/swift-rules.mdc, @.cursor/rules/monorepo-rules.mdc
   ```
 
-  - The additions line lists only the files the scaffold copies for the chosen type.
-  - Under "this repository's own", the section keeps the line and an additions line pointing at `docs/standards.md`, and links no owner skill.
+  - The language lines and the additions line list only the languages and files of the chosen type.
+  - Under "this repository's own":
+
+    ```markdown
+    ## Standards
+
+    Whose standards: this repository's own
+
+    This repository's standards: [docs/standards.md](docs/standards.md)
+    ```
+
+    It has no load sentence, no owner skill link and no additions line.
 - **The copied rule templates:**
   - `ts-rules.md` and `python-rules.md` are no longer copied, and their `copy_rule` calls (`scaffold-project.sh:249-260`) go (D12).
-  - `swift-rules.md` is copied unchanged (D10).
+  - `swift-rules.md` and `monorepo-rules.md` are copied, with their `.mdc` aliases, **only when the answer is the owner's set** (D10a, D11a). Under "this repository's own", no owner rule file is written (F1).
+  - `swift-rules.md` is copied with two edits (D10a):
+    - its "Swift Commands" opening (`:77`, "You MUST follow the ones below without any variations.") becomes "When the repository defines no commands of its own, run these:";
+    - its "Formatting" fixed values (`:26`, `:28`) become the scaffold's `.swiftformat` defaults, which the repository's config overrides.
+    Otherwise it is unchanged.
   - `monorepo-rules.md` is copied without its `utils`/`helpers` line (`:39`) and without its two language imports (`:49-50`) (D11).
 - **The retrofit insertion.** A new function in `scaffold-project.sh` runs after the instruction files are written or skipped. Before the alias step, it resolves the real file: AGENTS.md's target when AGENTS.md exists (following a symlink), otherwise CLAUDE.md's.
   - It appends the Standards section, with a blank line before it, when that file has no `## Standards` heading, and changes nothing else in the file.
   - A dangling symlink, or a missing target, is reported and skipped, never repaired.
   - Once an instruction file exists, it is never replaced, even under `--overwrite` (D20). Config files keep their current overwrite behavior.
+  - The alias step never replaces an existing CLAUDE.md or AGENTS.md entry (a regular file, either symlink direction, or a dangling link), under either flag. It creates `AGENTS.md → CLAUDE.md` only when AGENTS.md doesn't exist, and never with `ln -sf` over an entry (D20a, F8).
+  - A resolved target that isn't a regular file, such as a directory, is reported and skipped.
+  - A second run adds nothing: the section is present once.
 - **Instructional consumers**, updated to match, each in its own file:
   - `references/template-inventory.md`: the common and rule inventories, and the `utils` naming example;
   - `plugins/ai-scaffold/README.md`: the prerequisite that the sunstack-dev plugin is installed for the linked skills, and the outputs;
@@ -174,8 +203,8 @@ Each keeps its own language's forms. Each sentence that the base now owns is rem
 - **References.** None new. `domain-code-standards` is about 60 lines, and every run needs all of it.
 - **The shared shape.** The Standards line's two values are one shape with two consumers:
   - `domain-code-standards` reads them and owns their meaning;
-  - the scaffold template writes them as literals.
-  A test asserts that the template's literal strings match the base's table (D18).
+  - the scaffold writes one of them into each generated file.
+  A test runs the script for each selection and checks that the emitted line equals the base's value for that selection (D18a).
 - **Callers checked for a second home:**
   - `role-implementer/references/working-with-lead.md:36` and the owner's global instruction load the language skills, which now load the base, so neither needs changing.
   - `plugins/sunstack-dev/README.md:246-248` names the domains, and gains `domain-code-standards`.
@@ -256,6 +285,12 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 | D19 | The scaffold asks whose standards apply, defaulting to the owner's | The scaffold makes the owner's projects; the person scaffolding can choose the repository's own |
 | D20 | Once an instruction file exists, the scaffold never replaces it, even under `--overwrite`; a retrofit only appends the missing Standards section. Config files keep their overwrite behavior | Advisor view 12: a retrofit keeps existing files, either symlink direction and unrelated text. Today's `--overwrite` would replace CLAUDE.md wholesale |
 | D21 | The retrofit edit stays in the existing bash script, and its tests are TypeScript | The owner's rule: TypeScript or Rust only for new code. Changing the existing script in its own language is the smallest change, and a TypeScript rewrite of the scaffold is out of scope. **Owner may strike** |
+| D10a, 1 Nov 2026, supersedes D10's "unchanged" and adds a selection guard | `swift-rules.md` is copied only under the owner's set. Its commands become the fallback where the repository defines none, and its formatting values become the scaffold's `.swiftformat` defaults; otherwise it is unchanged. Swift tests follow its SPM `Tests/` layout (base standard 8) | Design review 2: F1 (a kept copy bypassed "this repository's own"), F2 (the base didn't state Swift's boundary), F3 ("without any variations" contradicted standard 6). **Owner may strike** |
+| D11a, 1 Nov 2026, adds to D11 | `monorepo-rules.md` is copied only under the owner's set | F1 |
+| D12a, 1 Nov 2026, adds to D12 | Each remaining template clause gets its home: `python-rules.md:57-63,68-70,75` (Arrange/Act/Assert, few valuable tests, critical paths, no throwaway tests, the test pyramid, docs explain why) go to base standards 19–21; `ts-rules.md:43-48` (descriptive file and folder names) go to base standard 12, with TypeScript's examples; `ts-rules.md:76` (redundant wrapper types) goes to `domain-typescript`; `python-rules.md:74` (docstring return sections) goes to `domain-python`; `python-rules.md:64` retires, because the owner's global rule allows established harnesses | F4; clause-map rows for those lines |
+| D14a, 1 Nov 2026, adds to D14 | The one shared test-helpers folder under `tests/` keeps the repository's name (`support/`, `utils/` or `lib/`) as the only exception to the naming standard, and its files still name their responsibility. TypeScript's examples narrow "never `utils/`" to folders outside `tests/` | F5; the owner: "utils or lib are test helpers or whatever you want to call it" |
+| D18a, 1 Nov 2026, supersedes D18's literal comparison | The test runs the script for each selection and checks that the emitted Standards line equals the base's value for it, which catches swapped values and an unexpanded placeholder | F7: the template holds a conditional, not two literals to compare |
+| D20a, 1 Nov 2026, adds to D20 | The alias step never replaces an existing CLAUDE.md or AGENTS.md entry under either flag. A resolved target that isn't a regular file is reported and skipped. A second run changes nothing | F8: the alias helper's `ln -sf` under `--overwrite` could replace an independent AGENTS.md or create a cycle |
 
 ## Coordination
 
@@ -269,6 +304,7 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - `ai-scaffold` gets a minor version for its output change, in its manifests and their marketplace entries.
   - #189's changelog entry is rewritten for the rework, with its line in `docs/changelog/README.md`.
   - This repository's AGENTS.md gains its Standards section: "Whose standards: the owner's (sunstack-dev)", with the shared base and the TypeScript and Rust links.
+  - `plugins/sunstack-dev/README.md:248`'s unconditional "repository conventions win" sentence is aligned with the base's selection rule. It predates revision 4 (a design review 2 observation).
   - One PR, #189. The owner merges.
 
 ## Run status
@@ -300,4 +336,16 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - The single-reviewer limit is recorded.
   - The re-check goes to the same reviewer.
 - **Implementation review 1:** `implementation-review-1.md`, on revision 3's two runs. Superseded by the rework; its findings don't carry.
-- **Revision 4, 1 Nov 2026:** the owner-directed rework. It is owed a fresh design review: `skill-review`'s design stage, with reviewers who wrote none of revisions 1–4.
+- **Revision 4, 1 Nov 2026, at `296ce7df`:** the owner-directed rework.
+- **Design review 2, at `296ce7df`:** a fresh Sol xhigh review lead (`codex-local/01a197fc-57ea`) with two fresh Sol xhigh reviewers, `01a197fd-a0d2` (teaching checks) and `01a197fd-b5b6` (structure checks). The record is `scratch-root-01a1635f/standards-rework/design-review-2/design-review-2.md`.
+  - Verdict: `targeted-revision`; implementation decision `revise-first`.
+  - Eight findings accepted, each verified at its anchor, out of 17 candidates:
+    - F1: kept copies bypassed "this repository's own";
+    - F2: the Swift boundary was missing;
+    - F3: Swift's command mandate;
+    - F4: template clauses without a disposition;
+    - F5: the helper-name exception;
+    - F6: standard 16 against the own-policy branch;
+    - F7: D18's literal test;
+    - F8: the overwrite and alias cases.
+- **Revision 5:** corrects F1–F8 inside the accepted boundary: specification standards 8, 10, 12 and 16–18; new 19–21; D10a, D11a, D12a, D14a, D18a, D20a; run 5's two section forms and alias rules; and the script tests. Bounded verification of the corrected anchors goes to the same review lead.

@@ -14,10 +14,11 @@
 
     <p>Your standards are written once, in a new hidden skill, <code>domain-code-standards</code>. <code>domain-typescript</code>, <code>domain-rust</code> and <code>domain-python</code> each load it first and keep only their own language's forms.</p>
     <p>A repository's AGENTS.md says whose standards apply, in one <code>## Standards</code> line: yours, or the repository's own. With no line, the agent asks you through Sun. It never infers and never mixes (your option A).</p>
-    <p>The scaffold writes that section, linking the skills, into every repository it creates. A retrofit adds the section without replacing a file or its symlink. The scaffold stops copying the TypeScript and Python rule files, and keeps the Swift and monorepo files as that repository's additions.</p>
+    <p>The scaffold writes that section into every repository it creates. Under your standards, it links the skills; under the repository's own, it points to the repository's standards file and copies nothing of yours. A retrofit only adds a missing section, and never replaces a file or link, even with <code>--overwrite</code>. The scaffold stops copying the TypeScript and Python rule files. Under your standards only, it keeps the Swift and monorepo files as additions, with their commands deferring to the repository's own.</p>
+    <p>This is revision 5. It corrects revision 4 for the design review's eight findings.</p>
     <p><strong>Still open:</strong></p>
     <ul>
-      <li>the independent design review;</li>
+      <li>the review lead's check of the corrections;</li>
       <li>your strikeable defaults: D10 Swift, D11 monorepo, D12 retired template clauses, D13 <code>as const</code>, and D21 bash with TypeScript tests;</li>
       <li>behavior under pressure, which waits for the pressure-tasks PR.</li>
     </ul>

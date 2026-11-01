@@ -1,6 +1,6 @@
 # Requirements: shared code standards (the #189 rework)
 
-Revision 4. It revises the colocation set that #189 carried at `8dbedca5`, widened by the owner's decision of 1 Nov 2026. Revisions 1–3 stay readable in this folder's Git history and in the decisions table of `skill-design.md`.
+Revision 5: revision 4, corrected for design review 2's findings F1–F8 (`skill-design.md`, "Review record"). Revision 4 revised the colocation set that #189 carried at `8dbedca5`, widened by the owner's decision of 1 Nov 2026. Revisions 1–3 stay readable in this folder's Git history and in the decisions table of `skill-design.md`.
 
 ## The change
 
@@ -52,7 +52,7 @@ The original colocation need still holds, with its owner quotes unchanged:
   - Each shared standard (which standards apply, test layout, file and module naming, the repository's own commands and configs) is written once, in `domain-code-standards`.
   - Each language skill keeps only its language's forms and loads the base.
 - **The scaffold:**
-  - A scaffolded repository's instruction file carries a Standards section: the line, the load instruction and links to `domain-code-standards` and the chosen languages' skills.
+  - A scaffolded repository's instruction file carries a Standards section with its line. Under the owner's set, it also carries the load instruction and links to `domain-code-standards` and the chosen languages' skills. Under the repository's own, it carries a pointer to the repository's standards file and nothing of the owner's.
   - A retrofit adds the section to an existing instruction file without replacing the file, the symlink between CLAUDE.md and AGENTS.md in either direction, or unrelated text.
 
 ## Who reaches the skills, and when

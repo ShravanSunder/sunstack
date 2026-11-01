@@ -1,6 +1,6 @@
 # Specification: shared code standards (the #189 rework)
 
-Revision 4.
+Revision 5: revision 4 corrected for design review 2's findings F1–F8.
 
 ## What the skills must do
 
@@ -13,10 +13,10 @@ Revision 4.
   - keeps only its language's forms: the unit-test file name and declaration, the older test forms to move from, the naming case and examples, and the fallback commands;
   - keeps its other language teaching unchanged.
 - **`scaffold-project`:**
-  - It writes the Standards section into the instruction file of every repository it creates.
-  - On a retrofit, it adds a missing section to the existing instruction file.
+  - It writes the Standards section into the instruction file of every repository it creates. Under the owner's set, the section carries the skill links; under the repository's own, it points to the repository's standards file.
+  - On a retrofit, it adds a missing section to the existing instruction file, and never replaces an instruction file or link.
   - It stops copying the TypeScript and Python rule templates, whose clauses have skill homes or are retired.
-  - It keeps copying the Swift and monorepo rule templates, which hold clauses no skill holds, as that repository's additions, minus the clause that conflicts with the shared base.
+  - Under the owner's set only, it keeps copying the Swift and monorepo rule templates as that repository's additions. They hold clauses no skill holds, minus the clause that conflicts with the shared base, and their commands are the fallback where the repository defines its own.
 
 ## Standards the skills state
 
@@ -32,15 +32,21 @@ Selection, in `domain-code-standards`:
 
 The owner's shared standards, in `domain-code-standards`; each holds under the owner's set:
 
-8. A unit test sits beside the module it tests, in the form its language skill names.
+8. A unit test sits beside the module it tests, in the form its language skill names; a language with no language skill (Swift today) follows the test layout in its additions file.
 9. A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers tests share, in one helpers folder; the repository picks its name, `tests/support/` when it has none.
-10. A change that edits a module, its production code or its tests, moves that module's own unit tests from an older form into the standard form, and a repository-wide move is its own PR.
+10. In a language whose skill names its form, a change that edits a module, its production code or its tests, moves that module's own unit tests from an older form into the standard form, and a repository-wide move is its own PR.
 11. A folder that already holds unit tests is the old form, not precedent.
-12. A file or module is named for the one responsibility it holds, and a catch-all such as `utils`, `helpers` or `db` is split by responsibility instead.
+12. A file or module is named for the one responsibility it holds, and a catch-all such as `utils`, `helpers` or `db` is split by responsibility instead; the one shared test-helpers folder under `tests/` is the exception, and keeps the name the repository uses (`support/`, `utils/` or `lib/`), while its files still name their responsibility.
+
+Added in revision 5 (design review 2, F4), from the retired templates' shared test and documentation clauses:
+
+19. Each test is structured Arrange / Act / Assert, and tests are few and valuable: they cover business logic and critical paths, and skip redundant or brittle cases.
+20. Unit tests outnumber integration tests, which outnumber end-to-end smoke tests; a test lives in the permanent suite or an established harness, never in a temporary script or file.
+21. Documentation explains why, briefly, and doesn't restate what the code already says.
 
 Language forms, one home each:
 
-13. **TypeScript:** a unit test for `report.ts` is `report.test.ts` in the same folder; older forms are a `tests/` or `__tests__/` folder.
+13. **TypeScript:** a unit test for `report.ts` is `report.test.ts` in the same folder; older forms are a `tests/` or `__tests__/` folder. A wrapper type that only returns its input is redundant: use the type it wraps.
 14. **Rust:**
     - A unit test for `foo.rs` is a sibling `foo_test.rs`, declared from `foo.rs` with `#[cfg(test)] #[path = "foo_test.rs"] mod tests;` so it reaches private items.
     - Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
@@ -49,12 +55,13 @@ Language forms, one home each:
     - A unit test for `foo.py` is `foo_test.py` beside it.
     - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder.
     - Integration tests live in `./tests/integration`.
+    - A docstring skips its return-type section when the type hints already say it.
 
 The scaffold, in `scaffold-project`:
 
-16. Every repository the scaffold creates gets a Standards section in its instruction file: the Standards line, the instruction to load `domain-code-standards` and the language skills before work they govern, and links to the shared base and the chosen languages' skills.
-17. A retrofit adds a missing Standards section to the existing instruction file, and leaves the file, the symlink between CLAUDE.md and AGENTS.md in either direction, and the file's other text as they were.
-18. The scaffold copies no standard a skill holds; a template it still copies holds only clauses that have no skill home, recorded with the owner's disposition.
+16. Every repository the scaffold creates gets a Standards section with its Standards line. Under the owner's set, the section also carries the instruction to load `domain-code-standards` and the language skills before work they govern, links to them, and the owner's additions files for the project type. Under the repository's own, it points to the repository's standards file, and carries no owner skill link and no owner rule file.
+17. A retrofit adds a missing Standards section to the existing instruction file once, and leaves the file's bytes, the symlink between CLAUDE.md and AGENTS.md in either direction, and every existing instruction file and link as they were, with or without `--overwrite`.
+18. The scaffold copies no standard a skill holds. An additions file it copies, only under the owner's set, holds only clauses with no skill home, recorded with the owner's disposition, and defers to the repository's own commands and configs.
 
 ## The rules, and their transfer tests
 
