@@ -16,11 +16,22 @@ From the owner, 1 Nov 2026, as the Lead's commission quotes them:
 - "tests/integraion/* tests/e2e/* tests/utils or whatever or lib to help systems"
 - "utils or lib are test helpers or whatever you want to call it"
 
+The owner's ruling on the Rust form, 1 Nov 2026, relayed by the Lead after design review 1: "beside teh fuckign file coloclated". That is form A of the three the Lead put to the owner:
+- **A:** a sibling `foo_test.rs` beside `foo.rs`, declared `#[cfg(test)] #[path = "foo_test.rs"] mod tests;`.
+- **B:** `foo/foo_test.rs`.
+- **C:** keep `tests.rs`.
+
+The Lead's instruction is to write it "as a fixed rule, not an option", so that "no agent asks about the form again". "Ask the owner" stays only for genuine conflicts the rule doesn't settle.
+
+The helpers folder's name: the owner left it open ("utils or lib are test helpers or whatever you want to call it"). The Lead named it `tests/support/` after design review 1. It doesn't collide with `domain-typescript`'s "never … `utils/`" naming rule, and `sunstack-tools`' Rust crates already use it (`crates/sunstack-decisions/tests/support/mod.rs`, `crates/sunstack-lint/tests/support/lint_fixture.rs`).
+
 **Success definition.** An agent adding a unit test in TypeScript or Rust puts it beside the module it tests:
 - TypeScript: `report.ts` with `report.test.ts`.
 - Rust: `foo.rs` with `foo_test.rs`.
 
-It puts only integration tests, end-to-end tests and their helpers under the package's `tests/` folder (`tests/integration/`, `tests/e2e/`, `tests/utils/` or a lib folder). When the repository already does it another way, it asks the owner instead of copying the old layout or converting it.
+It puts only integration tests, end-to-end tests and their helpers under the package's `tests/` folder: `tests/integration/`, `tests/e2e/` and `tests/support/`.
+
+When a TypeScript repository already lays its unit tests out another way, the agent asks the owner before adding the test, instead of copying the old layout or converting it. In Rust the form is settled whatever the crate already does. The agent asks only when the repository's own instructions or checks require a different layout.
 
 ## Who reaches the skill, and when
 
@@ -31,6 +42,8 @@ Both domain skills are hidden from model invocation (`disable-model-invocation: 
 | Signal | Date | Source |
 | --- | --- | --- |
 | The owner's direction above | 1 Nov 2026 | the Lead's commission (Router, `claude-local/68844339`), quoting the owner |
+| The owner's Rust ruling, and the helpers folder's name | 1 Nov 2026 | the Lead's two Router messages after design review 1 (`01a196de-337e…`, `01a196de-8389…`) |
+| Design review 1: revise-first, with F1 (the proof oracle) and F2 (the `utils/` collision) | 1 Nov 2026 | `design-review-1.md` in this folder |
 | PR #188 added two new unit-test files for `tests/skills/lib/skill-rules/report.ts` to the existing `tests/skills/lib/skill-rules/tests/` folder: `skill-rules-report-gaps.test.ts` and `skill-rules-severity-policy.test.ts` | 31 Oct 2026 | `git diff --name-status origin/main...skills/rules-as-nudges -- tests/skills` (status `A` for both) |
 | The same drift in `sunstack-tools`, which the owner names as "both" | 1 Nov 2026 | the owner's first quote. Not read in this run; the owner's report is the source |
 | `domain-rust`'s only test-location sentence is about integration tests: "Integration tests live where the crate already puts them, `tests/` or `crates/*/tests/`." It says nothing about unit tests | read 1 Nov 2026 | `plugins/sunstack-dev/skills/domain-rust/SKILL.md:129` at `3511b587` |

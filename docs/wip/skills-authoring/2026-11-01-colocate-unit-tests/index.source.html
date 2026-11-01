@@ -12,12 +12,12 @@
   <ex-document id="content">
     <h1>Colocate unit tests</h1>
 
-    <p>This change puts your test layout into <code>domain-typescript</code> and <code>domain-rust</code>. A unit test sits beside its module, as <code>report.test.ts</code> or <code>report_test.rs</code>. The package's <code>tests/</code> folder holds only integration tests, end-to-end tests and their helpers. When a repository already does it another way, the agent asks you. <code>domain-python</code> already agrees and doesn't change, and no other skill says where tests go, so nothing else changes. Still open: the design review, then the pressure prompt on the real <code>lib/skill-rules/tests/</code> folder.</p>
+    <p>This change puts your test layout into <code>domain-typescript</code> and <code>domain-rust</code>. A unit test sits beside its module. In TypeScript that is <code>report.test.ts</code>. In Rust it is <code>report_test.rs</code>, declared with <code>#[cfg(test)] #[path = "report_test.rs"] mod tests;</code>, your fixed form. The package&#39;s <code>tests/</code> folder holds only integration tests, end-to-end tests and their helpers, in <code>tests/integration/</code>, <code>tests/e2e/</code> and <code>tests/support/</code>. When a TypeScript repository already does it another way, the agent asks you before adding the test. Rust asks only when the repository&#39;s own instructions or checks require another layout. <code>domain-python</code> already agrees, and no other skill restates where tests go. This is revision 2, after design review 1: the proof oracle now passes only a question asked before any write, and the helpers folder is <code>tests/support/</code>. Still open: the reviewer&#39;s re-check, then the pressure prompt on the real <code>lib/skill-rules/tests/</code> folder.</p>
 
     <h2 id="walkthrough">Walkthrough</h2>
     <ol>
       <li><a href="#requirements">Requirements</a>: your words from 1 Nov, the #188 drift, and what stays out.</li>
-      <li><a href="#specification">Specification</a>: the four standards, their transfer test, and the worked case.</li>
+      <li><a href="#specification">Specification</a>: the five standards, their transfer test, and the worked case.</li>
       <li><a href="#skill-design">Skill design</a>: two runs, the exact text each adds, and the decisions.</li>
       <li><a href="#skill-verification">Skill verification</a>: how each standard is proven, the pressure prompt, and what stays unverified.</li>
     </ol>
