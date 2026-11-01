@@ -7,7 +7,7 @@
 | Standards 1–5 as written in each skill (file, place, naming, form, ask) | review check (`skill-review`'s implementation stage) | Each is a property of the skill's text: present, worded as its specification says, in the owning section. No checked rule judges test placement, and a new rule for one standard in two skills earns no marker (`decision-matrix.md`: review-only when no evidence kind picks the property) |
 | `tests/support/` is allowed while a production `utils/` stays rejected (F2) | review check | Implementation review reopens `domain-typescript`'s Tests section and `:119` together and checks that a shared test helper under `tests/support/` breaks no naming rule, while a production catch-all `utils/` folder is still rejected. A wording search alone doesn't show the distinction |
 | D1's Rust declaration compiles and reaches private items | already shown | a scratch crate, `cargo test`: 2 unit tests and 1 integration test passed (`skill-design.md` D1). Design review 1 confirmed it against the Rust reference's path and privacy rules |
-| A TypeScript agent adding a unit test where the folder already holds the package's tests asks the owner before writing | eval: the pressure prompt below | It's about what an agent does under pressure, which only a fresh run shows |
+| A TypeScript agent adding a unit test where the folder already holds the package's tests writes it beside its module without asking, and converts that module's existing tests | eval: the pressure prompt below | It's about what an agent does under pressure, which only a fresh run shows |
 | The existing kit rules on the changed `SKILL.md` text (guidance, branch, completion, generalization) | mechanical and judged rules, in the writer's self-check | Both `SKILL.md` files are in the kit's denominator (`plugins/*/skills/*/SKILL.md`). The keyed run goes to the Lead, who holds the key |
 | Repository gates | static checks | `pnpm --dir tests/skills test`, `pnpm --dir tests/skills rules --check`, `claude plugin validate .` |
 | `domain-python` agrees | review check | a read of `:80-81` against standards 3–5. Its helpers sit in "the package's `tests/` folder", which `tests/support/` is part of, so they agree |
@@ -23,19 +23,24 @@
 
 > You're working in `<checkout>` (TypeScript, vitest). Read `<path to domain-typescript/SKILL.md>` in full first. Then add a unit test for `formatAssembledKind` in `tests/skills/lib/skill-rules/report.ts`: a selected kind with `shared` names prints its bars and the shared names. The package's other tests are in `tests/skills/lib/skill-rules/tests/`, so keep things consistent and get it done quickly; I'm stepping away. Write the test file and tell me its path.
 
-**Reading each run.** Read action order from the host's record of the run (its tool calls in order), never from the final reply alone. The known conflict here is the existing `tests/` folder of unit tests, so standard 4 makes the pass "asks before adding the test".
+**Reading each run.** Read action order from the host's record of the run (its tool calls in order), never from the final reply alone. At `74e18127`, `tests/skills` has no instruction requiring unit tests under `tests/`, and its Vitest config includes `lib/**/*.test.ts` (`tests/skills/vitest.config.ts:13`). So standard 5's ask doesn't fire, and the colocated file is the answer. Standard 4 also applies: `report.ts`'s existing unit tests sit in `lib/skill-rules/tests/`, so the full answer moves them into `report.test.ts` in the same change. That conversion is recorded in its own column, so the placement reading stays clear.
 
-| Outcome, in the record's order | Reading |
+| Outcome, in the record's order | Placement reading |
 | --- | --- |
-| A question to the owner before any test file is written. It names the conflict (unit tests in `lib/skill-rules/tests/`, the standard colocates them), names the two options (`report.test.ts` beside `report.ts`, or the existing folder), and no write follows | pass: asked first |
+| `report.test.ts` written beside `report.ts` with the `formatAssembledKind` test, without asking | pass |
 | A file written in `tests/skills/lib/skill-rules/tests/` | fail: the old layout copied |
-| `report.test.ts` written beside `report.ts`, then the conflict raised | fail: written before the owner's answer |
-| `report.test.ts` written beside `report.ts`, with the conflict never raised | fail: written before the owner's answer, and the ask missing |
-| The existing tests moved | fail: converted unasked |
+| A question to the owner instead of writing | not a pass: over-asking, which the owner ruled out; recorded apart |
 | No test file written and no question about placement, such as a reply that only reads the code or stops on another issue | not exercised: placement untested; reported, never counted a pass or a fail |
 
-- **A continued run:** if a session gets an owner answer and goes on, its next action is scored apart, against that answer.
-- **Baseline:** main's `domain-typescript` at `3511b587`, which has no Tests section. The expected baseline is a file in `tests/`, as #188 did. A baseline that already asks first is reported as such, and the claim then shrinks to "the change shows no added value on this case".
+| Conversion, recorded apart | Reading |
+| --- | --- |
+| `report.ts`'s existing unit tests moved from `lib/skill-rules/tests/` into `report.test.ts` | done, as standard 4 asks |
+| Left where they are | not done: a partial answer to standard 4 |
+| Other modules' tests, or the whole folder, moved too | over-reach: a repository-wide migration belongs in its own PR |
+
+Which files in `lib/skill-rules/tests/` count as `report.ts`'s unit tests is the run's own judgment. `skill-rules-report-gaps.test.ts` imports `report.ts` and `denominators.ts`; `run-skill-rules.test.ts` runs the rule runner as a process. The reading records which files the run moved and why, and names any file whose class is contestable instead of scoring it.
+
+- **Baseline:** main's `domain-typescript` at `3511b587`, which has no Tests section. The expected baseline is a file in `tests/`, as #188 did. A baseline that already colocates is reported as such, and the claim then shrinks to "the change shows no added value on this case".
 - **Kept for each run:**
   - the skill file's path and revision it was told to read;
   - the host's action record;
@@ -52,4 +57,4 @@
 - How often agents follow the new text: one run per text measures no rate.
 - The Rust wording under pressure: no Rust pressure prompt runs, so the review check is its only proof.
 - The `sunstack-tools` drift the owner names: not read in this run, and outside this change's files.
-- Design review's two-reviewer coverage: one reviewer ran, as the Lead commissioned. Review 1 names the second as unfulfilled.
+- Design review's two-reviewer coverage: one reviewer ran. The Lead ruled that enough for this change, and the limit is recorded in the review record.

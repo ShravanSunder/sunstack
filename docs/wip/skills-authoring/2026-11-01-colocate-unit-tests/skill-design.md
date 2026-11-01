@@ -29,10 +29,10 @@ The lens doesn't change. The new text is a section of each skill's existing teac
 
 The owner's test layout holds in every package:
 
-- A unit test sits beside the module it tests and is named for it: `report.ts` and `report.test.ts` in the same folder.
+- A unit test sits beside the module it tests and is named for it: `report.ts` and `report.test.ts` in the same folder. Every new unit test takes this form, whatever layout the repository has elsewhere.
 - The package's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`.
 
-When the repository's existing layout differs, such as unit tests under `tests/` or `__tests__/`, ask the owner before adding the test: don't follow the old layout, and don't convert it unasked. A folder that already holds unit tests is the old layout, not precedent. A change once added two unit-test files for `lib/skill-rules/report.ts` to `lib/skill-rules/tests/`, because that folder already held the package's tests; they belonged beside the module as `report.test.ts`, and the existing folder was a question for the owner.
+When a change adds or edits a module's unit tests and that module's existing unit tests sit in another form, such as a `tests/` or `__tests__/` folder, move them beside the module in the same change. A repository-wide migration is its own PR. A folder that already holds unit tests is the old form, not precedent. A change once added two unit-test files for `lib/skill-rules/report.ts` to `lib/skill-rules/tests/`, because that folder already held the package's tests. The new tests belonged in `report.test.ts` beside the module, with that module's existing tests moved into it. Ask the owner only when the repository's own instructions or checks require a different layout.
 ```
 
 Signs list, new last line:
@@ -71,7 +71,7 @@ The owner's test layout holds in every crate:
 
 - The crate's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`. Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
 
-A module that already has an in-file `mod tests { … }` block, or a crate with unit tests under `tests/`, still gets its new unit tests in this form; leave the old ones as they are unless the owner asks for the conversion. Ask the owner only when the repository's own instructions or checks require a different layout.
+When a change adds or edits a module's unit tests and that module's existing unit tests sit in another form, such as an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`, move them into its `_test.rs` in the same change. A repository-wide migration is its own PR. Ask the owner only when the repository's own instructions or checks require a different layout.
 ````
 
 The section's second paragraph, on async tests, stays as it is. The `test-support` bullet under "Crates and dependencies" (`:120`) already allows a crate-only helper "in a `#[cfg(test)]` module or under `tests/`", so it agrees and stays.
@@ -99,7 +99,9 @@ Signs list, new last line:
   - "Guidance says what to do and what good looks like": each standard names the file and its place.
   - The signs line is the red flag in the agent's own rationalization ("the folder already has tests there").
 - **`generalization.md`:** the rule is the owner's adopted layout, stated as theirs, with its transfer cases in the specification; the worked case carries no PR number.
-- **`main-path.md`:** no new branch. TypeScript's "when the existing layout differs" sentence is guidance with an observable condition (the repository's layout) and its action (ask the owner before adding the test). Rust's ask fires only on the repository's own instructions or checks, which are just as observable.
+- **`main-path.md`:** no new branch. Two conditions, each observable and each with its action:
+  - **The conversion:** a touched module's unit tests sit in another form, so they move to the standard form.
+  - **The one ask:** the repository's own instructions or checks require another layout, so the agent asks the owner.
 - **`calls-and-placement.md`:** one home per language, no reference.
 
 ## Sensitive surfaces
@@ -117,7 +119,9 @@ None. The change edits Markdown teaching only: nothing that executes, reaches th
 | D5 | Signs-list lines quote the rationalization | `steering.md`: a bright line names the rationalization it blocks |
 | D1a, 1 Nov 2026, adds to D1 | D1's form is the owner's fixed rule for every new Rust unit test, whatever the crate's existing modules do; the Rust text offers no other form and doesn't ask about it | The owner's ruling, "beside teh fuckign file coloclated" (form A), and the Lead's "a fixed rule, not an option … so no agent asks about the form again" |
 | D6 | The helpers folder is `tests/support/` in both skills (it replaces the first draft's `tests/utils/` or a lib folder) | Design review 1's F2: `tests/utils/` collided with `domain-typescript:119`'s "never … `utils/`". The owner left the name open ("utils or lib are test helpers or whatever you want to call it"), and the Lead named `tests/support/`, which `sunstack-tools`' crates already use. With it, `:119` stays as it is |
-| D7 | TypeScript keeps "ask the owner before adding the test" when the repository's layout differs; Rust asks only when the repository's own instructions or checks require another layout | The owner's original "of repo disagrees in convention ask me" stands for TypeScript, where no form ruling was made. For Rust the owner ruled on exactly the disagreeing-repository case, so the remaining ask is the conflict the ruling doesn't settle |
+| D7 (struck 1 Nov 2026 by D7a) | TypeScript keeps "ask the owner before adding the test" when the repository's layout differs; Rust asks only when the repository's own instructions or checks require another layout | The owner's original "of repo disagrees in convention ask me" stands for TypeScript, where no form ruling was made. For Rust the owner ruled on exactly the disagreeing-repository case, so the remaining ask is the conflict the ruling doesn't settle |
+| D7a, 1 Nov 2026, supersedes D7 | Both languages: the form is fixed whatever the repository does elsewhere, and the one ask is "Ask the owner only when the repository's own instructions or checks require a different layout." | The Lead's correction, quoting the owner: "in typescript its .test.ts" and "dude i said a already beside teh fuckign file coloclated", which the owner doesn't want asked again |
+| D1b, 1 Nov 2026, supersedes D1a's "leave the old ones" | A module the change gives or edits unit tests for has its existing unit tests in another form moved to the standard form in the same change; a repository-wide migration is its own PR | The owner's ruling that the existing ones get converted, relayed by the Lead (`01a196e1-dd48…`) |
 
 ## Coordination
 
@@ -141,10 +145,17 @@ None. The change edits Markdown teaching only: nothing that executes, reaches th
     - F1, blocker: the pressure oracle passed a write made before the owner's answer;
     - F2: `tests/utils/` collided with `domain-typescript:119`.
   - The reviewer also corrected the caller claim: `role-implementer`'s route already loads the domain skills.
-  - The reviewer named the two-reviewer coverage `skill-review` normally requires as unfulfilled. That is the Lead's call.
-- **This revision:**
+  - The reviewer named the two-reviewer coverage `skill-review` normally requires as unfulfilled. The Lead ruled, 1 Nov 2026, that one reviewer is enough for this two-skill standard change.
+  - **The limit, recorded:** the design is accepted on one independent reviewer's checks (`rule-agreement` and `transfer`, plus the rubric), not the stage's usual two families across two reviewers.
+- **Revision 2, at `1129415a`:**
   - F1 is fixed in `skill-verification.md`: the oracle, and a genuinely missing case.
   - F2 is fixed by D6.
   - The Rust form is fixed by D1a and D7.
   - The caller claim is corrected above.
   - Its re-check goes to the same reviewer.
+- **Revision 3:**
+  - D7 is struck by D7a: TypeScript's form is fixed like Rust's, with the one ask.
+  - D1b adds the conversion rule to both runs' text.
+  - F1's pass condition flips: writing `report.test.ts` beside `report.ts` without asking passes (`skill-verification.md`).
+  - The single-reviewer limit is recorded.
+  - The re-check goes to the same reviewer.

@@ -23,6 +23,11 @@ The owner's ruling on the Rust form, 1 Nov 2026, relayed by the Lead after desig
 
 The Lead's instruction is to write it "as a fixed rule, not an option", so that "no agent asks about the form again". "Ask the owner" stays only for genuine conflicts the rule doesn't settle.
 
+The same holds for TypeScript, per the Lead's corrections to revision 2:
+- **The form:** the owner gave it ("in typescript its .test.ts").
+- **No asking:** when asked about form, the owner answered "dude i said a already beside teh fuckign file coloclated", and doesn't want it asked again.
+- **Old forms:** the owner ruled that existing unit tests in another form get converted. They move to the standard form when the work touches their module. A repository-wide migration is its own PR.
+
 The helpers folder's name: the owner left it open ("utils or lib are test helpers or whatever you want to call it"). The Lead named it `tests/support/` after design review 1. It doesn't collide with `domain-typescript`'s "never … `utils/`" naming rule, and `sunstack-tools`' Rust crates already use it (`crates/sunstack-decisions/tests/support/mod.rs`, `crates/sunstack-lint/tests/support/lint_fixture.rs`).
 
 **Success definition.** An agent adding a unit test in TypeScript or Rust puts it beside the module it tests:
@@ -31,7 +36,10 @@ The helpers folder's name: the owner left it open ("utils or lib are test helper
 
 It puts only integration tests, end-to-end tests and their helpers under the package's `tests/` folder: `tests/integration/`, `tests/e2e/` and `tests/support/`.
 
-When a TypeScript repository already lays its unit tests out another way, the agent asks the owner before adding the test, instead of copying the old layout or converting it. In Rust the form is settled whatever the crate already does. The agent asks only when the repository's own instructions or checks require a different layout.
+The form holds whatever layout the repository has elsewhere:
+- A new unit test never goes into an existing `tests/` folder, `__tests__/` folder or in-file test block.
+- When the change adds or edits a module's unit tests and that module's existing unit tests sit in another form, the change moves them to the standard form.
+- The agent asks the owner only when the repository's own instructions or checks require a different layout.
 
 ## Who reaches the skill, and when
 
@@ -43,6 +51,7 @@ Both domain skills are hidden from model invocation (`disable-model-invocation: 
 | --- | --- | --- |
 | The owner's direction above | 1 Nov 2026 | the Lead's commission (Router, `claude-local/68844339`), quoting the owner |
 | The owner's Rust ruling, and the helpers folder's name | 1 Nov 2026 | the Lead's two Router messages after design review 1 (`01a196de-337e…`, `01a196de-8389…`) |
+| TypeScript fixed the same way, the conversion rule, and one reviewer as enough | 1 Nov 2026 | the Lead's corrections to revision 2 (`01a196e1-dd48…`), quoting the owner |
 | Design review 1: revise-first, with F1 (the proof oracle) and F2 (the `utils/` collision) | 1 Nov 2026 | `design-review-1.md` in this folder |
 | PR #188 added two new unit-test files for `tests/skills/lib/skill-rules/report.ts` to the existing `tests/skills/lib/skill-rules/tests/` folder: `skill-rules-report-gaps.test.ts` and `skill-rules-severity-policy.test.ts` | 31 Oct 2026 | `git diff --name-status origin/main...skills/rules-as-nudges -- tests/skills` (status `A` for both) |
 | The same drift in `sunstack-tools`, which the owner names as "both" | 1 Nov 2026 | the owner's first quote. Not read in this run; the owner's report is the source |
@@ -55,7 +64,7 @@ Both domain skills are hidden from model invocation (`disable-model-invocation: 
 
 ## Non-goals
 
-- Converting any existing test layout, in this repository or another.
+- A repository-wide migration of existing tests: that's its own PR, such as the `sunstack-tools` one in progress. Converting the tests of a module the work touches is in scope.
 - Changing `domain-python`. It already places a test beside its module as `<module>_test.py` and keeps integration tests in `./tests/integration`; it's checked for consistency only.
 - Restating the standard in phase, practice or role skills.
 - Any test runner configuration (vitest `include` globs, `[[test]]` targets) beyond what the layout needs to be found.
