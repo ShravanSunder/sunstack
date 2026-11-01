@@ -8,11 +8,13 @@ disable-model-invocation: true
 
 Read this skill in full before the Rust work it governs; your own full read earlier this session counts.
 
+MUST load `../domain-code-standards/SKILL.md` and return the set this repository's Standards line names, with the shared standards that apply, before the sections below. This skill's choices are the owner's and apply under the owner's set.
+
 Rust can make invalid states unrepresentable, so let it: enums with payloads, newtypes with fallible constructors, and `Result` on every production path that can fail. One Tokio runtime owns the I/O; blocking work goes to the smallest `spawn_blocking` unit, and side effects leave the hot path under a tracker that drains them. Storage and transport stay at the crate's edge, translated into domain types on the way in and into domain errors on the way out.
 
 ## Gates
 
-The repo's `rust-toolchain.toml`, `clippy.toml`, `rustfmt.toml`, workspace lints and scripts win over everything here. `unsafe` stays forbidden unless the repo allows it. Prefer workspace dependencies, and don't invent unstable rustfmt options. When the repo defines no commands:
+`unsafe` stays forbidden unless the repo allows it. Prefer workspace dependencies, and don't invent unstable rustfmt options. When the repo defines no commands:
 
 ```bash
 cargo fmt --all -- --check
@@ -126,9 +128,9 @@ IF the change touches SQLx queries, migrations or pools, load `references/sqlx-s
 
 ## Tests
 
-The owner's test layout holds in every crate:
+Under the owner's set:
 
-- A unit test sits beside the module it tests, in a sibling `<module>_test.rs` declared from that module, so it still reaches the module's private items. Every new unit test takes this form, whatever the crate's other modules do:
+- A unit test for `foo.rs` is a sibling `foo_test.rs`, declared from `foo.rs` so it reaches the module's private items:
 
   ```rust
   // src/report.rs
@@ -149,9 +151,8 @@ The owner's test layout holds in every crate:
   }
   ```
 
-- The crate's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`. Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
-
-When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, such as an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`, move them into its `_test.rs` in the same change. The move covers only that module's own unit tests. A repository-wide migration is its own PR. Ask the owner only when the repository's own instructions or checks require a different layout.
+- Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
+- Older forms are an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`.
 
 When a test proves async behavior, hold a step open with a blocking test double and bound the wait with `tokio::time::timeout`, never `sleep`; for the hot path, that double shows forwarding still completes while a side effect blocks ([a race test has to make the bad interleaving happen](../principle-write-tests-that-can-fail/SKILL.md)).
 
@@ -163,4 +164,4 @@ When a test proves async behavior, hold a step open with a blocking test double 
 - A `std::sync::Mutex` guard held across `.await`, a nested `block_on`, or an untracked `tokio::spawn` for work that must finish.
 - `sleep` in an async test.
 - A lower crate's `Cargo.toml` naming a higher crate, a services struct handed to constructors, a `pub use` left at a moved item's old path, a module-cycle baseline that grew, or a `test-support` feature in the shipping package's normal/build feature tree.
-- A new in-file `mod tests { … }` block or a unit test under `tests/`, because the module or crate already has tests there.
+- A new in-file `mod tests { … }` block.
