@@ -1,18 +1,16 @@
-# 2026-11-01 Domain skills: colocated unit tests
+# 2026-11-01 Shared code standards, and the Standards line
 
-`sunstack-dev` 2.102.1 → 2.102.2. The owner's test layout now lives in the TypeScript and Rust domain skills. Agents kept adding unit tests to a package's existing `tests/` folder, as PR #188 did.
+`sunstack-dev` 2.102.1 → 2.103.0 and `ai-scaffold` 0.2.3 → 0.3.0. PR #189 reworked on the owner's decision: the owner's coding standards are written once, and each repository says whose standards apply.
 
-- `domain-typescript` gains a Tests section. A unit test sits beside its module as `<module>.test.ts`. The package's `tests/` folder holds only `tests/integration/`, `tests/e2e/` and their helpers in `tests/support/`.
-- `domain-rust`'s Tests section now opens with the same layout:
-  - a unit test goes in a sibling `<module>_test.rs`, declared `#[cfg(test)] #[path = "<module>_test.rs"] mod tests;`;
-  - Cargo builds `tests/<name>/main.rs` as a target, which is how `tests/integration/` is found.
-- In both:
-  - the form holds whatever the repository does elsewhere;
-  - any change to a module moves that module's own old-form unit tests beside it;
-  - a repository-wide migration is its own PR;
-  - the agent asks the owner only when the repository's own instructions or checks require another layout.
-- "Signs you skipped it" now names the rationalization "the folder already has tests there".
-- `domain-python` is unchanged; it already places tests beside their modules.
-- Design set and review: `docs/wip/skills-authoring/2026-11-01-colocate-unit-tests/` (one independent reviewer, accepted-to-implement).
-- Validation: `tests/skills` vitest 268/268, typecheck exit 0, `rules --check` exit 0 (13 rules), `claude plugin validate .` passed. The planned pressure prompt hasn't run yet.
+- New hidden `domain-code-standards`.
+  - Before a choice a standard governs, read the repository's AGENTS.md Standards line and apply that set alone: the owner's, or the repository's own. With no line, ask the owner; never infer or mix.
+  - It holds the owner's shared standards: unit tests beside their module, `tests/` only for integration, e2e and shared helpers, old forms moved when a module is edited, naming by responsibility, test structure and documentation.
+- `domain-typescript`, `domain-rust` and `domain-python` load it first and keep only their language's forms: `<module>.test.ts`; `<module>_test.rs` via `#[cfg(test)] #[path] mod tests;`; `<module>_test.py`. `domain-typescript` allows `as const`.
+- `scaffold-project` asks whose standards the repository follows (`--standards owner|own`). It writes a `## Standards` section into CLAUDE.md, linking the skills or pointing to the repository's own standards file.
+  - A retrofit appends the section once, and never replaces an instruction file or link.
+  - `ts-rules` and `python-rules` are no longer copied. The Swift and monorepo additions are copied only under the owner's standards, trimmed to their own clauses.
+- This repository's AGENTS.md gains its Standards section.
+- Design set and reviews: `docs/wip/skills-authoring/2026-11-01-colocate-unit-tests/`.
+- Validation: `tests/skills` vitest 293/293 (the scaffold script tests included), typecheck exit 0, `rules --check` exit 0 (13 rules), `claude plugin validate .` passed.
+- Unverified: agent behavior under the Standards line (pressure tasks come next), and client loading of linked hidden skills.
 - Codex and Claude caches: not refreshed.

@@ -74,7 +74,8 @@ docs-*               durable documentation         docs-maintain
 presentation-*       surface-matched presentation  presentation-tui
                                                   presentation-webui
                                                   presentation-html
-domain-*             subject knowledge a caller loads  domain-typescript
+domain-*             subject knowledge a caller loads  domain-code-standards
+                                                  domain-typescript
                                                   domain-python
                                                   domain-rust
                                                   domain-decision-models
@@ -245,7 +246,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 ## Domain Skills
 
-Each `domain-*` skill holds one subject's knowledge. Three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. `domain-decision-models` holds the practice for decision models: questions a model answers for code to act on, their evidence, policy and proof. `skill-authoring`'s `skill-rules` loads it to design and prove a checked rule, `decision-model-review` checks against it, and authors of `run_judgments` callers or engine evidence selection load it by name. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. The repository's own conventions and gates win where they differ. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
+Each `domain-*` skill holds one subject's knowledge. `domain-code-standards` decides whose coding standards a repository follows, from its AGENTS.md Standards line, and holds the owner's shared ones: test layout, naming and documentation. Three hold the owner's standards for a language: `domain-typescript`, `domain-python` and `domain-rust`. Each loads `domain-code-standards` first and keeps only its language's forms. `domain-decision-models` holds the practice for decision models: questions a model answers for code to act on, their evidence, policy and proof. `skill-authoring`'s `skill-rules` loads it to design and prove a checked rule, `decision-model-review` checks against it, and authors of `run_judgments` callers or engine evidence selection load it by name. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. Which set governs, the owner's or the repository's own, is the repository's Standards line, as `domain-code-standards` teaches; under either set, the repository's own commands and tool configs are what runs. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
 
 ## Supporting Skills
 
