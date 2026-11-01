@@ -1,60 +1,60 @@
-# Skill verification: colocate unit tests
+# Skill verification: shared code standards (the #189 rework)
+
+Revision 4. Each route below was decided with `skill-rules/references/decision-matrix.md`; standard numbers refer to `specification.md`.
 
 ## Routes, per requirement and standard
 
 | Item | Route | Decided on |
 | --- | --- | --- |
-| Standards 1–5 as written in each skill (file, place, naming, form, ask) | review check (`skill-review`'s implementation stage) | Each is a property of the skill's text: present, worded as its specification says, in the owning section. No checked rule judges test placement, and a new rule for one standard in two skills earns no marker (`decision-matrix.md`: review-only when no evidence kind picks the property) |
-| `tests/support/` is allowed while a production `utils/` stays rejected (F2) | review check | Implementation review reopens `domain-typescript`'s Tests section and `:119` together and checks that a shared test helper under `tests/support/` breaks no naming rule, while a production catch-all `utils/` folder is still rejected. A wording search alone doesn't show the distinction |
-| D1's Rust declaration compiles and reaches private items | already shown | a scratch crate, `cargo test`: 2 unit tests and 1 integration test passed (`skill-design.md` D1). Design review 1 confirmed it against the Rust reference's path and privacy rules |
-| A TypeScript agent adding a unit test where the folder already holds the package's tests writes it beside its module without asking, and converts that module's existing tests | eval: the pressure prompt below | It's about what an agent does under pressure, which only a fresh run shows |
-| The existing kit rules on the changed `SKILL.md` text (guidance, branch, completion, generalization) | mechanical and judged rules, in the writer's self-check | Both `SKILL.md` files are in the kit's denominator (`plugins/*/skills/*/SKILL.md`). The keyed run goes to the Lead, who holds the key |
-| Repository gates | static checks | `pnpm --dir tests/skills test`, `pnpm --dir tests/skills rules --check`, `claude plugin validate .` |
-| `domain-python` agrees | review check | a read of `:80-81` against standards 3–5. Its helpers sit in "the package's `tests/` folder", which `tests/support/` is part of, so they agree |
+| Standards 1–7 (selection), as text in `domain-code-standards` | review check | Each is a property of one skill's text, judged against the specification. "Never infer, never mix" needs the whole section read together, and no evidence kind picks that unit as one piece (matrix question 3) |
+| An agent reads the line, applies one set, and asks when there's none | eval | It's about what an agent does while working (matrix question 2), so only a fresh run under that pressure shows it. **Deferred:** the owner's pressure tasks are the next stacked PR, not this one (see "What stays unverified") |
+| Standards 8–12 (the owner's shared standards), as text in the base | review check | Text properties, judged against the specification |
+| Each sentence the base owns appears in no language skill | review check | It compares two files, which no single evidence kind holds (matrix question 3). Check: Tests, Gates, Names/Shapes and Signs, in each of runs 2–4 |
+| Each language skill opens with the load of the base, before its sections | review check | One line, but the claim is about its position in three skills. A mechanical rule for three files earns no marker |
+| Standards 13–15 (language forms) kept, each in its own skill | review check | A text property per skill. #189's Rust form (D1) is already compiled and proved |
+| D13, the `as const` exception, in `domain-typescript` | review check | A text property |
+| The existing kit rules on the five changed `SKILL.md` files (description, steps, loads, guidance, generalization) | the repository's rule runner, keyed, in the writer's self-check | The files sit in the kit's denominator. The Lead holds the key and runs `pnpm --dir tests/skills rules <paths>` |
+| Standards 16–18 and D10–D12, D18, D20 (scaffold output) | deterministic tests: "Script tests" below | The script's output is files on disk, decidable exactly |
+| No live reference to a retired template (`ts-rules`, `python-rules`) remains in a script, template, skill, inventory, README, command or manifest | static check: a repository search, its output kept | Literal strings |
+| Platform surfaces: both plugins' manifests, the marketplaces, the changelog | static checks: `claude plugin validate .`; `codex plugin list --marketplace sunstack --available --json`; `pnpm --dir tests/skills test`; `pnpm --dir tests/skills rules --check` | Validators exist for each |
+
+## Script tests
+
+These are TypeScript integration tests in the repository's TypeScript test package, placed as its integration tests are, under base standard 9. Each runs `plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh` in a fresh temporary folder and asserts on the files left behind. Each case must fail on today's script.
+
+| Case | Setup | Pass when |
+| --- | --- | --- |
+| New TypeScript project, owner's standards | empty folder; a TypeScript type | CLAUDE.md has `## Standards` with "Whose standards: the owner's (sunstack-dev)", the load sentence, and the shared and TypeScript links; AGENTS.md is a symlink to CLAUDE.md; no `.cursor/rules/ts-rules.md(c)` |
+| New Python project | empty folder; a Python type | as above, with the Python link; no `python-rules.md(c)` |
+| New Swift project | empty folder; the Swift type | the Swift additions line; `.cursor/rules/swift-rules.md` byte-identical to its template |
+| New monorepo | empty folder; `monorepo-both` | both language links; the monorepo additions line; `monorepo-rules.md` without its `utils`/`helpers` line and its two language imports, and otherwise identical |
+| The repository's own standards | empty folder; the "this repository's own" answer | the line reads "this repository's own"; the additions line points at `docs/standards.md`; no owner skill link |
+| Retrofit: CLAUDE.md is a regular file with no section | an existing CLAUDE.md with other text | the section is appended; every earlier byte is unchanged; AGENTS.md is created as a symlink to it |
+| Retrofit: AGENTS.md → CLAUDE.md | the symlink and a real CLAUDE.md | the section is in CLAUDE.md; the symlink is unchanged |
+| Retrofit: CLAUDE.md → AGENTS.md | the reverse symlink and a real AGENTS.md | the section is in AGENTS.md; the symlink is unchanged |
+| Retrofit: two independent regular files | both files real, neither with a section | the section is in AGENTS.md only; CLAUDE.md is byte-identical |
+| Retrofit: section already present | AGENTS.md with a `## Standards` heading | no file changes |
+| Retrofit: dangling symlink | AGENTS.md pointing at a missing file | reported; no file created or changed |
+| `--overwrite` with an existing instruction file | CLAUDE.md with other text; `--overwrite` | CLAUDE.md isn't replaced; only a missing section is added (D20) |
+| The template's literal values match the base's table | read both files | the two "Whose standards" values in `CLAUDE.md.template` equal those in `domain-code-standards/SKILL.md` (D18) |
+
+Each test runs the script with no network, in a temporary folder outside the repository, and removes the folder afterwards.
 
 ## Proof plan
 
-- **Posture:** `user-directed intent`, so the draft needn't wait on a RED run. The pressure prompt runs after the draft, with a baseline on main's text and a run on the change's text, so the comparison shows what the new wording changes.
-- **Runner:** Luna, in two fresh sessions commissioned through Router, one per text. Test runs use Luna or Jev, never Opus.
-- **The material:** a throwaway checkout of `ai-tools` at `74e18127`, real text, nothing invented. Its `tests/skills/lib/skill-rules/` holds `report.ts`, and `tests/skills/lib/skill-rules/tests/` already holds eight `*.test.ts` files for that package.
-- **The case is genuinely missing at that revision.** `formatAssembledKind` (`report.ts:231`) is exported, and no `*.test.ts` file names it (`git grep -l formatAssembledKind 74e18127 -- 'tests/skills/**/*.test.ts'` finds none). So the task needs a new test, and a reply that writes nothing can't be explained as finding the case already covered.
-
-**The pressure prompt.** It's the same in both sessions; only the skill file it points at differs:
-
-> You're working in `<checkout>` (TypeScript, vitest). Read `<path to domain-typescript/SKILL.md>` in full first. Then add a unit test for `formatAssembledKind` in `tests/skills/lib/skill-rules/report.ts`: a selected kind with `shared` names prints its bars and the shared names. The package's other tests are in `tests/skills/lib/skill-rules/tests/`, so keep things consistent and get it done quickly; I'm stepping away. Write the test file and tell me its path.
-
-**Reading each run.** Read action order from the host's record of the run (its tool calls in order), never from the final reply alone. At `74e18127`, `tests/skills` has no instruction requiring unit tests under `tests/`, and its Vitest config includes `lib/**/*.test.ts` (`tests/skills/vitest.config.ts:13`). So standard 5's ask doesn't fire, and the colocated file is the answer. Standard 4 also applies: `report.ts`'s existing unit tests sit in `lib/skill-rules/tests/`, so the full answer moves them into `report.test.ts` in the same change. That conversion is recorded in its own column, so the placement reading stays clear.
-
-| Outcome, in the record's order | Placement reading |
-| --- | --- |
-| `report.test.ts` written beside `report.ts` with the `formatAssembledKind` test, without asking | pass |
-| A file written in `tests/skills/lib/skill-rules/tests/` | fail: the old layout copied |
-| A question to the owner instead of writing | not a pass: over-asking, which the owner ruled out; recorded apart |
-| No test file written and no question about placement, such as a reply that only reads the code or stops on another issue | not exercised: placement untested; reported, never counted a pass or a fail |
-
-| Conversion, recorded apart | Reading |
-| --- | --- |
-| `report.ts`'s existing unit tests moved from `lib/skill-rules/tests/` into `report.test.ts` | done, as standard 4 asks |
-| Left where they are | not done: a partial answer to standard 4 |
-| Other modules' tests, or the whole folder, moved too | over-reach: a repository-wide migration belongs in its own PR |
-
-Which files in `lib/skill-rules/tests/` count as `report.ts`'s unit tests is the run's own judgment. `skill-rules-report-gaps.test.ts` imports `report.ts` and `denominators.ts`; `run-skill-rules.test.ts` runs the rule runner as a process. The reading records which files the run moved and why, and names any file whose class is contestable instead of scoring it.
-
-- **Baseline:** main's `domain-typescript` at `3511b587`, which has no Tests section. The expected baseline is a file in `tests/`, as #188 did. A baseline that already colocates is reported as such, and the claim then shrinks to "the change shows no added value on this case".
-- **Kept for each run:**
-  - the skill file's path and revision it was told to read;
-  - the host's action record;
-  - the checkout's state after the run, read outside both run workspaces;
-  - the manual reading, as `proof-claims.md:28` requires.
-- **Claim boundary:** two single runs show what the wording can do under this pressure, not a rate. One run per text is a smoke check, named as one.
+- **Posture:** `user-directed intent`. Runs 1–4 are drafted from the owner's approved direction. Their claim is "drafted from user intent; behavior not yet evaluated", plus review checks and the keyed kit self-check.
+- **Run 5:** the script tests are behavior proof for the script's output. That claim is deterministic and observed on the tests' cases.
+- **Static validation** is reported as structural only, never as behavior proof.
 
 ## Trigger trial
 
-`not applicable`: both skills are hidden from model invocation, and neither description changes.
+`not applicable`:
+- the four domain skills are hidden from model invocation;
+- `scaffold-project`'s description doesn't change.
 
 ## What stays unverified
 
-- How often agents follow the new text: one run per text measures no rate.
-- The Rust wording under pressure: no Rust pressure prompt runs, so the review check is its only proof.
-- The `sunstack-tools` drift the owner names: not read in this run, and outside this change's files.
-- Design review's two-reviewer coverage: one reviewer ran. The Lead ruled that enough for this change, and the limit is recorded in the review record.
+- **How agents behave under the selection rule:** whether one reads the line, applies one set and asks when it's missing. That needs fresh runs under pressure, and the owner has put pressure tasks in the next stacked PR.
+- **Whether clients load a linked hidden skill** from an instruction file's Standards section: Codex, Claude and Cursor, with sunstack-dev installed or absent. Source shows no observed run (`scaffold-consumers.md`, "Runtime loading"). The section tells the agent to say so and ask when a skill can't be loaded, but whether a client surfaces that is unobserved.
+- **Already-scaffolded repositories:** they keep their old copied rules, and no migration is in scope.
+- **The owner's strikeable defaults** (D10–D13, D21) are taken, not confirmed. The owner may strike any of them.

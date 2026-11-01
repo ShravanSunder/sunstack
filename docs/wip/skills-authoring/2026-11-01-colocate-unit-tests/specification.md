@@ -1,43 +1,91 @@
-# Specification: colocate unit tests
+# Specification: shared code standards (the #189 rework)
+
+Revision 4.
 
 ## What the skills must do
 
-- `domain-typescript` tells an agent adding a TypeScript unit test to put it beside its module as `<module>.test.ts`. That is the one form, whatever the repository does elsewhere.
-- `domain-rust` tells an agent adding a Rust unit test to put it beside its module as `<module>_test.rs`, declared from that module with `#[cfg(test)] #[path = "<module>_test.rs"] mod tests;`. That is the one form, whatever the crate does elsewhere.
-- Both tell the agent that the package's or crate's `tests/` folder holds only non-unit tests (`tests/integration/`, `tests/e2e/`) and the helpers they share (`tests/support/`).
-- Both tell the agent that any change to a module, production code or tests, converts that module's own unit tests that sit in another form, in the same change, and to leave a repository-wide migration to its own PR.
-- Both tell the agent to ask the owner only when the repository's own instructions or checks require a different layout.
-- Both name the rationalization "the folder already has tests there" in their "Signs you skipped it" list.
+- **`domain-code-standards` (new):**
+  - It tells an agent, before any choice a coding standard governs, to read the repository's Standards line and apply exactly the set it names.
+  - It tells the agent to ask the owner, through the owner's Chief of Staff, when there's no line.
+  - It holds the owner's shared standards, each once: test layout, file and module naming, and the repository's own commands and configs.
+- **Each language skill** (`domain-typescript`, `domain-rust`, `domain-python`):
+  - loads `domain-code-standards` first and acts on the set it returns;
+  - keeps only its language's forms: the unit-test file name and declaration, the older test forms to move from, the naming case and examples, and the fallback commands;
+  - keeps its other language teaching unchanged.
+- **`scaffold-project`:**
+  - It writes the Standards section into the instruction file of every repository it creates.
+  - On a retrofit, it adds a missing section to the existing instruction file.
+  - It stops copying the TypeScript and Python rule templates, whose clauses have skill homes or are retired.
+  - It keeps copying the Swift and monorepo rule templates, which hold clauses no skill holds, as that repository's additions, minus the clause that conflicts with the shared base.
 
 ## Standards the skills state
 
-1. A TypeScript unit test sits beside the module it tests and is named for it: `report.ts` with `report.test.ts`. Every new unit test takes this form, whatever layout the repository has elsewhere.
-2. A Rust unit test sits beside the module it tests in a sibling `<module>_test.rs`, declared from that module with `#[cfg(test)] #[path = "<module>_test.rs"] mod tests;`, so it reaches the module's private items. Every new unit test takes this form, whatever the crate's other modules do.
-3. A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers those tests share, in `tests/support/`.
-4. When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, the change moves them to the standard form. The move covers only that module's own unit tests. Other forms include a `tests/` or `__tests__/` folder, `foo/tests.rs`, an in-file `mod tests { … }` block and `_tests.rs`. A repository-wide migration is its own PR.
-5. Ask the owner only when the repository's own instructions or checks require a different layout.
+Selection, in `domain-code-standards`:
 
-Where each standard lives:
-- `domain-typescript` states 1, 3, 4 and 5, each worded for TypeScript's forms.
-- `domain-rust` states 2, 3, 4 and 5, each worded for Rust's forms.
+1. Before a choice a coding standard governs, read the repository's Standards line in its AGENTS.md or CLAUDE.md, and apply exactly the set it names: the owner's standards (this skill and the language skill) or the repository's own.
+2. When the instruction file has no Standards line, ask the owner, through the owner's Chief of Staff, before the first choice a standard governs; don't infer the answer from who owns the repository or from how its code looks.
+3. The selected set governs alone: a repository's standards file adds compatible constraints or explicit exceptions under that set, and a clause that conflicts with the set goes to the owner instead of being picked.
+4. Under the repository's own standards, its written standards and its consistent existing practice govern, and a choice neither settles goes to the owner.
+5. A statement of how a language or tool behaves holds under either set; a choice between valid options follows the selected set.
+6. The repository's own commands and tool configs are what you run and obey under either set; a language skill's commands are the fallback where the repository defines none.
+7. When a skill the Standards section links can't be loaded, say so and ask before choosing a standard; don't rebuild it from memory.
 
-Each skill owns its own language's layout, so standards 3 to 5 have one home per language.
+The owner's shared standards, in `domain-code-standards`; each holds under the owner's set:
 
-## The rule, and its transfer test
+8. A unit test sits beside the module it tests, in the form its language skill names.
+9. A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers tests share, in one helpers folder; the repository picks its name, `tests/support/` when it has none.
+10. A change that edits a module, its production code or its tests, moves that module's own unit tests from an older form into the standard form, and a repository-wide move is its own PR.
+11. A folder that already holds unit tests is the old form, not precedent.
+12. A file or module is named for the one responsibility it holds, and a catch-all such as `utils`, `helpers` or `db` is split by responsibility instead.
 
-The rule is the owner's adopted layout, stated as theirs ("The owner's test layout"), with the language its domain skill already scopes. It names no product beyond the language's own test conventions.
+Language forms, one home each:
 
-- **Case one, where it should hold:**
-  - A Rust workspace whose crates keep integration tests in `crates/*/tests/` and unit tests in in-file `mod tests` blocks. A change that adds a test to one module moves that module's in-file block into a sibling `_test.rs` beside the new test. The crate's other modules are left for a migration PR. It holds.
-  - A TypeScript package using Jest with `__tests__/` folders, and no repository instruction requiring them. A new test for `parser.ts` goes in `parser.test.ts`, and `__tests__/parser.test.ts` moves beside it. It holds.
-  - The same package with an `AGENTS.md` that requires `__tests__/`. The agent asks the owner. It holds.
-- **Case two, a bad choice it never names:**
-  - An agent puts a new unit test in a `spec/` folder beside `src/`. The rule names no `spec/` folder, and still rejects it: a unit test sits beside its module. It holds.
-  - An agent adds a `test-fixtures.ts` at the package root for its integration tests. The rule rejects it: shared helpers go in `tests/support/`. It holds.
-- **Verdict:** passes both ways.
+13. **TypeScript:** a unit test for `report.ts` is `report.test.ts` in the same folder; older forms are a `tests/` or `__tests__/` folder.
+14. **Rust:**
+    - A unit test for `foo.rs` is a sibling `foo_test.rs`, declared from `foo.rs` with `#[cfg(test)] #[path = "foo_test.rs"] mod tests;` so it reaches private items.
+    - Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
+    - Older forms are an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`.
+15. **Python:**
+    - A unit test for `foo.py` is `foo_test.py` beside it.
+    - Factories and mock factories are the helpers tests share, in the package's `tests/` helpers folder.
+    - Integration tests live in `./tests/integration`.
 
-## The worked case
+The scaffold, in `scaffold-project`:
 
-A change added two new unit-test files for `lib/skill-rules/report.ts` (`skill-rules-report-gaps.test.ts`, `skill-rules-severity-policy.test.ts`) to `lib/skill-rules/tests/`, because that folder already held the package's other tests. The new tests belonged beside the module, in `report.test.ts`. That module's existing unit tests in that folder belonged with them, moved in the same change. Source: PR #188, recorded in the requirements.
+16. Every repository the scaffold creates gets a Standards section in its instruction file: the Standards line, the instruction to load `domain-code-standards` and the language skills before work they govern, and links to the shared base and the chosen languages' skills.
+17. A retrofit adds a missing Standards section to the existing instruction file, and leaves the file, the symlink between CLAUDE.md and AGENTS.md in either direction, and the file's other text as they were.
+18. The scaffold copies no standard a skill holds; a template it still copies holds only clauses that have no skill home, recorded with the owner's disposition.
 
-The skills carry the case without its PR number, because a skill's text holds judgment, not task history (`domain-skill-crafting/references/generalization.md:6`). The number stays in this set and in the changelog.
+## The rules, and their transfer tests
+
+**Selection (standards 1–4).** It's a reusable judgment, one authority per repository, and the owner chose its mechanism (option A).
+- Case one, where it should hold:
+  - A Go repository whose AGENTS.md says "Whose standards: this repository's own" and whose tests are table-driven in `_test.go` files. The agent follows the repository, and none of the owner's TypeScript or Rust preferences. It holds.
+  - The owner's Rust crate, whose line names the owner's standards. The owner's layout applies, even where older modules use in-file test blocks. It holds.
+- Case two, a bad choice it never names:
+  - An agent with no Standards line reads the Git remote, sees the owner's account, and applies the owner's standards without asking. Standard 2 rejects it ("don't infer the answer from who owns the repository"). It holds.
+  - An agent under a repository's own standards follows its test layout but renames `helpers.py` by the owner's naming rule. Standard 3 rejects the blend. It holds.
+- Verdict: passes both ways.
+
+**Test layout (standards 8–11).** It's the owner's adopted layout, scoped to the owner's set by its heading, and each language skill names its file form.
+- Case one, where it should hold:
+  - A Python package under the owner's set whose unit tests sit in `tests/`. A change to `ledger.py` adds `ledger_test.py` beside it and moves `ledger`'s tests there; the package's other tests wait for their own PR. It holds.
+  - A TypeScript package using Jest with `__tests__/` folders, under the owner's set. The new test for `parser.ts` goes in `parser.test.ts`. It holds.
+- Case two, a bad choice it never names:
+  - An agent puts a new unit test in a `spec/` folder beside `src/`. No standard names `spec/`, and standard 8 still rejects it. It holds.
+  - An agent adds `test-fixtures.ts` at the package root for its integration tests. Standard 9 rejects it: shared helpers go in the helpers folder. It holds.
+- Verdict: passes both ways.
+
+**Naming (standard 12).**
+- Case one: a Go package under the owner's set with a `util.go` gets split by responsibility. It holds.
+- Case two: an agent adds `common.ts` or a `misc/` folder. No standard names either, and the "catch-all" judgment rejects both. It holds.
+- Verdict: passes both ways.
+
+**Execution facts (standards 5–6).**
+- Case one: a repository with its own `justfile` and stricter clippy settings. The agent runs `just test` and obeys the clippy settings under either set. It holds.
+- Case two: an agent runs the language skill's fallback `pnpm vitest run` in a repository whose `package.json` defines `test` differently. Standard 6 rejects it, because the fallback applies only where the repository defines none. It holds.
+- Verdict: passes both ways.
+
+## Task history
+
+The PR #188 case (two new unit-test files for `report.ts` written into the existing `tests/` folder) stays in this set's evidence. The skills keep only its rationalization, standard 11 ("the folder already holds unit tests"), because a skill holds judgment, not task history (`domain-skill-crafting/references/generalization.md:6`). This removes the incident sentence #189 put in `domain-typescript`.

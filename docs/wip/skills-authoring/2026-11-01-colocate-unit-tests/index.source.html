@@ -3,23 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Colocate unit tests: design set</title>
+  <title>Shared code standards: design set</title>
   <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
   <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
 </head>
 <body>
   <ex-nav for="content"></ex-nav>
   <ex-document id="content">
-    <h1>Colocate unit tests</h1>
+    <h1>Shared code standards: the #189 rework</h1>
 
-    <p>This change puts your test layout into <code>domain-typescript</code> and <code>domain-rust</code>. A unit test sits beside its module. In TypeScript that is <code>report.test.ts</code>. In Rust it is <code>report_test.rs</code>, declared with <code>#[cfg(test)] #[path = "report_test.rs"] mod tests;</code>, your fixed form. The package&#39;s <code>tests/</code> folder holds only integration tests, end-to-end tests and their helpers, in <code>tests/integration/</code>, <code>tests/e2e/</code> and <code>tests/support/</code>. Both forms hold whatever the repository does elsewhere. Any change to a module, its code or its tests, moves that module&#39;s old-form unit tests beside it in the same change. The agent asks you only when the repository&#39;s own instructions or checks require a different layout. <code>domain-python</code> already agrees, and no other skill restates where tests go. This is revision 3, after your corrections: TypeScript&#39;s form is fixed like Rust&#39;s, old forms are converted, and the pressure prompt passes a colocated file written without asking. Still open: the reviewer&#39;s re-check, then the pressure prompt on the real <code>lib/skill-rules/tests/</code> folder.</p>
+    <p>Your standards are written once, in a new hidden skill, <code>domain-code-standards</code>. <code>domain-typescript</code>, <code>domain-rust</code> and <code>domain-python</code> each load it first and keep only their own language's forms.</p>
+    <p>A repository's AGENTS.md says whose standards apply, in one <code>## Standards</code> line: yours, or the repository's own. With no line, the agent asks you through Sun. It never infers and never mixes (your option A).</p>
+    <p>The scaffold writes that section, linking the skills, into every repository it creates. A retrofit adds the section without replacing a file or its symlink. The scaffold stops copying the TypeScript and Python rule files, and keeps the Swift and monorepo files as that repository's additions.</p>
+    <p><strong>Still open:</strong></p>
+    <ul>
+      <li>the independent design review;</li>
+      <li>your strikeable defaults: D10 Swift, D11 monorepo, D12 retired template clauses, D13 <code>as const</code>, and D21 bash with TypeScript tests;</li>
+      <li>behavior under pressure, which waits for the pressure-tasks PR.</li>
+    </ul>
+    <p><strong>Terms:</strong></p>
+    <ul>
+      <li>A <em>hidden</em> skill loads only when another skill or an instruction loads it, never on its own.</li>
+      <li>A <em>retrofit</em> runs the scaffold on an existing repository.</li>
+      <li>A <em>strikeable default</em> is a decision taken with its reason, which you can strike.</li>
+    </ul>
 
     <h2 id="walkthrough">Walkthrough</h2>
     <ol>
-      <li><a href="#requirements">Requirements</a>: your words from 1 Nov, the #188 drift, and what stays out.</li>
-      <li><a href="#specification">Specification</a>: the five standards, their transfer test, and the worked case.</li>
-      <li><a href="#skill-design">Skill design</a>: two runs, the exact text each adds, and the decisions.</li>
-      <li><a href="#skill-verification">Skill verification</a>: how each standard is proven, the pressure prompt, and what stays unverified.</li>
+      <li><a href="#requirements">Requirements</a>: your four directions and your option A, quoted; the evidence (four wordings, 352 template clauses, 23 conflicts); what stays out.</li>
+      <li><a href="#specification">Specification</a>: the 18 standards, one sentence each, and their transfer tests.</li>
+      <li><a href="#skill-design">Skill design</a>: five runs, the new skill's proposed text, each language skill's cuts, the scaffold's changes, the security decision and the decisions table.</li>
+      <li><a href="#skill-verification">Skill verification</a>: how each standard is proven, the scaffold's test cases, and what stays unverified.</li>
     </ol>
 
     <h2 id="parts">The four parts</h2>
