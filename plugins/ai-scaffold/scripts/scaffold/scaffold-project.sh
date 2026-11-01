@@ -129,17 +129,11 @@ REPO_STANDARDS=false
 OWNER_TS=false
 OWNER_PY=false
 OWNER_SWIFT=false
-OWNER_MONOREPO=false
-OWNER_ADDITIONS=false
 if [[ "$STANDARDS_SET" == "owner" ]]; then
     OWNER_STANDARDS=true
     OWNER_TS="$INCLUDE_TS"
     OWNER_PY="$INCLUDE_PY"
     OWNER_SWIFT="$INCLUDE_SWIFT"
-    OWNER_MONOREPO="$IS_MONOREPO"
-    if [[ "$INCLUDE_SWIFT" == "true" || "$IS_MONOREPO" == "true" ]]; then
-        OWNER_ADDITIONS=true
-    fi
 else
     REPO_STANDARDS=true
 fi
@@ -171,19 +165,6 @@ process_conditional() {
     printf '%s' "$content"
 }
 
-# Create a symlink, respecting the SKIP_EXISTING flag
-create_symlink() {
-    local target="$1"
-    local link_path="$2"
-
-    if [[ ( -e "$link_path" || -L "$link_path" ) ]] && [[ "$SKIP_EXISTING" == "true" ]]; then
-        echo "SKIP: $link_path (exists)"
-    else
-        ln -sf "$target" "$link_path"
-        echo "LINK: $link_path -> $target"
-    fi
-}
-
 # Rendering is shared by new instruction files and the appended retrofit section.
 render_template() {
     local src="$1"
@@ -210,8 +191,6 @@ render_template() {
     content="$(process_conditional "$content" "OWNER_TS" "$OWNER_TS")"
     content="$(process_conditional "$content" "OWNER_PY" "$OWNER_PY")"
     content="$(process_conditional "$content" "OWNER_SWIFT" "$OWNER_SWIFT")"
-    content="$(process_conditional "$content" "OWNER_MONOREPO" "$OWNER_MONOREPO")"
-    content="$(process_conditional "$content" "OWNER_ADDITIONS" "$OWNER_ADDITIONS")"
 
     content="$(printf '%s' "$content" | sed 's/{{\/if}}//g')"
     printf '%s\n' "$content"
@@ -280,58 +259,6 @@ append_standards() {
     echo "APPEND: $instruction_file (Standards)"
 }
 
-# The stored declaration governs copies; the answer only renders a missing section.
-instruction_selects_owner_rules() {
-    local instruction_file="CLAUDE.md"
-    if [[ -e "AGENTS.md" || -L "AGENTS.md" ]]; then
-        instruction_file="AGENTS.md"
-    fi
-
-    if [[ ! -f "$instruction_file" || ! -r "$instruction_file" ]]; then
-        echo "SKIP: owner rule files ($instruction_file unreadable)"
-        return 1
-    fi
-
-    local standards_value
-    if ! standards_value="$(awk '
-        in_standards && /^## / { exit }
-        /^## Standards[[:space:]]*$/ { in_standards = 1; next }
-        in_standards && /^Whose standards: / {
-            print substr($0, length("Whose standards: ") + 1)
-            exit
-        }
-    ' "$instruction_file")"; then
-        echo "SKIP: owner rule files ($instruction_file unreadable)"
-        return 1
-    fi
-
-    local declared_standards
-    case "$standards_value" in
-        "the owner's (sunstack-dev)") declared_standards="owner" ;;
-        "this repository's own") declared_standards="own" ;;
-        *)
-            echo "SKIP: owner rule files ($instruction_file Standards line names neither set)"
-            return 1 ;;
-    esac
-
-    if [[ "$declared_standards" != "$STANDARDS_SET" ]]; then
-        echo "NOTE: $instruction_file says whose standards: $standards_value; --standards $STANDARDS_SET not applied"
-    fi
-    [[ "$declared_standards" == "owner" ]]
-}
-
-# Helper to copy a rule file (.md) and create a .mdc symlink pointing to it
-copy_rule() {
-    local src="$1"
-    local dest_dir="$2"
-    local filename
-    filename="$(basename "$src")"
-    local base="${filename%.md}"
-
-    copy_template "$src" "$dest_dir/$filename"
-    create_symlink "$filename" "$dest_dir/${base}.mdc"
-}
-
 echo "=== Scaffolding $PROJECT_NAME ($PROJECT_TYPE) ==="
 echo "Target: $TARGET_DIR"
 echo ""
@@ -365,24 +292,10 @@ copy_template "$TEMPLATES_DIR/common/gitignore.template" ".gitignore"
 mkdir -p .config
 copy_template "$TEMPLATES_DIR/common/config/wt.toml.template" ".config/wt.toml"
 
-COPY_OWNER_RULES=false
-if instruction_selects_owner_rules; then
-    COPY_OWNER_RULES=true
-fi
-
-# Cursor rules
-echo ""
-echo "--- Cursor rules ---"
-mkdir -p .cursor/rules .cursor/hooks
-
-if [[ "$COPY_OWNER_RULES" == "true" && "$INCLUDE_SWIFT" == "true" ]]; then
-    copy_rule "$TEMPLATES_DIR/cursor/rules/swift-rules.md" ".cursor/rules"
-fi
-if [[ "$COPY_OWNER_RULES" == "true" && "$IS_MONOREPO" == "true" ]]; then
-    copy_rule "$TEMPLATES_DIR/cursor/rules/monorepo-rules.md" ".cursor/rules"
-fi
-
 # Cursor hooks
+echo ""
+echo "--- Cursor hooks ---"
+mkdir -p .cursor/hooks
 copy_template "$TEMPLATES_DIR/cursor/hooks/hooks.json" ".cursor/hooks/hooks.json"
 copy_template "$TEMPLATES_DIR/cursor/hooks/after-edit.sh.template" ".cursor/hooks/after-edit.sh"
 chmod +x ".cursor/hooks/after-edit.sh" 2>/dev/null || true

@@ -60,6 +60,8 @@ function runScaffold(projectRoot: string, argumentsList: readonly string[] = [])
   );
   expect(result.error).toBeUndefined();
   expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(0);
+  expectNoCopiedRules(projectRoot);
+  expectCursorHooks(projectRoot);
   return `${result.stdout}\n${result.stderr}`;
 }
 
@@ -90,87 +92,59 @@ function expectStandards(projectRoot: string, filename: string, line = ownerLine
   return instructions;
 }
 
-function expectNoRule(projectRoot: string, ruleName: string): void {
-  for (const extension of ["md", "mdc"]) {
-    expect(
-      lstatSync(path.join(projectRoot, `.cursor/rules/${ruleName}.${extension}`), {
-        throwIfNoEntry: false,
-      }),
-    ).toBeUndefined();
+function findMdcEntries(directoryPath: string): string[] {
+  return readdirSync(directoryPath, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directoryPath, entry.name);
+    if (entry.name.endsWith(".mdc")) return [entryPath];
+    return entry.isDirectory() ? findMdcEntries(entryPath) : [];
+  });
+}
+
+function expectNoCopiedRules(projectRoot: string): void {
+  expect(
+    lstatSync(path.join(projectRoot, ".cursor/rules"), { throwIfNoEntry: false }),
+  ).toBeUndefined();
+  expect(findMdcEntries(projectRoot)).toEqual([]);
+}
+
+function expectCursorHooks(projectRoot: string): void {
+  for (const filename of ["hooks.json", "after-edit.sh"]) {
+    expect(lstatSync(path.join(projectRoot, ".cursor/hooks", filename)).isFile()).toBe(true);
   }
-}
-
-function expectRuleCopy(projectRoot: string, ruleName: string): void {
-  expect(readProjectFile(projectRoot, `.cursor/rules/${ruleName}.md`)).toBe(
-    readFileSync(path.join(scaffoldRoot, `templates/cursor/rules/${ruleName}.md`), "utf8"),
-  );
-  expect(readlinkSync(path.join(projectRoot, `.cursor/rules/${ruleName}.mdc`))).toBe(
-    `${ruleName}.md`,
-  );
-}
-
-function standardsReports(output: string): string[] {
-  return output
-    .split("\n")
-    .filter((line) => line.startsWith("NOTE: ") || line.startsWith("SKIP: owner rule files "));
 }
 
 describe("scaffold standards output", () => {
   test.each([
-    ["single-ts", "TypeScript", "domain-typescript", "ts-rules"],
-    ["single-py", "Python", "domain-python", "python-rules"],
-  ])(
-    "new %s defaults to the owner's linked standards",
-    (projectType, language, skill, retiredRule) => {
-      const projectRoot = createProject();
+    ["single-ts", "TypeScript", "domain-typescript"],
+    ["single-py", "Python", "domain-python"],
+  ])("new %s defaults to the owner's linked standards", (projectType, language, skill) => {
+    const projectRoot = createProject();
 
-      runScaffold(projectRoot, ["--type", projectType]);
+    runScaffold(projectRoot, ["--type", projectType]);
 
-      expectNoRule(projectRoot, retiredRule);
-      const instructions = expectStandards(projectRoot, "CLAUDE.md");
-      expect(instructions).toContain("Before work these standards govern, load");
-      expect(instructions).toContain("- Shared: `sunstack-dev:domain-code-standards`");
-      expect(instructions).toContain(`- ${language}: \`sunstack-dev:${skill}\``);
-      expect(instructions).not.toContain(
-        language === "TypeScript" ? "domain-python" : "domain-typescript",
-      );
-      expect(instructions).not.toContain("This repository's additions:");
-      expect(readlinkSync(path.join(projectRoot, "AGENTS.md"))).toBe("CLAUDE.md");
-      expectNoRule(projectRoot, retiredRule);
-    },
-  );
+    const instructions = expectStandards(projectRoot, "CLAUDE.md");
+    expect(instructions).toContain("Before work these standards govern, load");
+    expect(instructions).toContain("- Shared: `sunstack-dev:domain-code-standards`");
+    expect(instructions).toContain(`- ${language}: \`sunstack-dev:${skill}\``);
+    expect(instructions).not.toContain(
+      language === "TypeScript" ? "domain-python" : "domain-typescript",
+    );
+    expect(instructions).not.toContain("This repository's additions:");
+    expect(readlinkSync(path.join(projectRoot, "AGENTS.md"))).toBe("CLAUDE.md");
+  });
 
-  test("new Swift copies only the revised Swift additions", () => {
+  test("new Swift links its language skill without copied additions", () => {
     const projectRoot = createProject();
 
     runScaffold(projectRoot, ["--type", "single-swift"]);
 
     const instructions = expectStandards(projectRoot, "CLAUDE.md");
-    expect(instructions).toContain(
-      "- This repository's additions:\n  - @.cursor/rules/swift-rules.mdc",
-    );
-    const additions = readProjectFile(projectRoot, ".cursor/rules/swift-rules.md");
-    expect(additions).toBe(
-      readFileSync(path.join(scaffoldRoot, "templates/cursor/rules/swift-rules.md"), "utf8"),
-    );
-    expect(additions).toContain("When the repository defines no commands of its own, run these:");
-    expect(additions).toMatch(/4 spaces.*scaffold's.*\.swiftformat.*default.*config overrides/);
-    expect(additions).toMatch(
-      /160 characters.*scaffold's.*\.swiftformat.*default.*config overrides/,
-    );
-    expect(additions).toContain(".swiftformat");
-    expect(additions).not.toMatch(
-      /without any variations|Most tests:|Some tests:|Few tests:|Arrange \/ Act \/ Assert|Quality over quantity|Skip return-type|explains \*why\*/,
-    );
-    expect(additions).toContain("Unit tests cover ViewModels and business logic");
-    expect(additions).toContain("integration tests cover the data layer");
-    expect(additions).toContain("UI tests cover only critical user flows");
-    expect(readlinkSync(path.join(projectRoot, ".cursor/rules/swift-rules.mdc"))).toBe(
-      "swift-rules.md",
-    );
+    expect(instructions).toContain("- Swift: `sunstack-dev:domain-swift`");
+    expect(instructions).not.toContain("This repository's additions:");
+    expect(instructions).not.toContain("@.cursor");
   });
 
-  test("new monorepo links both languages and copies only the revised monorepo additions", () => {
+  test("new monorepo links both languages without copied additions", () => {
     const projectRoot = createProject();
 
     runScaffold(projectRoot, ["--type", "monorepo-both"]);
@@ -178,19 +152,20 @@ describe("scaffold standards output", () => {
     const instructions = expectStandards(projectRoot, "CLAUDE.md");
     expect(instructions).toContain("sunstack-dev:domain-typescript");
     expect(instructions).toContain("sunstack-dev:domain-python");
-    expect(instructions).toContain(
-      "- This repository's additions:\n  - @.cursor/rules/monorepo-rules.mdc",
-    );
-    const additions = readProjectFile(projectRoot, ".cursor/rules/monorepo-rules.md");
-    expect(additions).toBe(
-      readFileSync(path.join(scaffoldRoot, "templates/cursor/rules/monorepo-rules.md"), "utf8"),
-    );
-    expect(additions).not.toMatch(/`utils`|`helpers`|python-rules|ts-rules/);
-    expect(readlinkSync(path.join(projectRoot, ".cursor/rules/monorepo-rules.mdc"))).toBe(
-      "monorepo-rules.md",
-    );
-    expectNoRule(projectRoot, "ts-rules");
-    expectNoRule(projectRoot, "python-rules");
+    expect(instructions).not.toContain("This repository's additions:");
+    expect(instructions).not.toContain("@.cursor");
+  });
+
+  test("new Swift monorepo links TypeScript and Swift skills without copied additions", () => {
+    const projectRoot = createProject();
+
+    runScaffold(projectRoot, ["--type", "monorepo-swift-ts"]);
+
+    const instructions = expectStandards(projectRoot, "CLAUDE.md");
+    expect(instructions).toContain("- TypeScript: `sunstack-dev:domain-typescript`");
+    expect(instructions).toContain("- Swift: `sunstack-dev:domain-swift`");
+    expect(instructions).not.toContain("This repository's additions:");
+    expect(instructions).not.toContain("@.cursor");
   });
 
   test("the repository's own standards emit only its documentation pointer", () => {
@@ -203,22 +178,17 @@ describe("scaffold standards output", () => {
     expect(instructions).not.toMatch(
       /Before work these standards govern|sunstack-dev:|This repository's additions/,
     );
-    expectNoRule(projectRoot, "ts-rules");
   });
 
   test.each(["single-swift", "monorepo-both"])(
-    "own standards never copy owner rules for %s",
+    "own standards emit no owner skill link for %s",
     (projectType) => {
       const projectRoot = createProject();
 
       runScaffold(projectRoot, ["--type", projectType, "--standards", "own"]);
 
-      expectNoRule(projectRoot, "swift-rules");
-      expectNoRule(projectRoot, "monorepo-rules");
-      expectNoRule(projectRoot, "ts-rules");
-      expectNoRule(projectRoot, "python-rules");
-      const ruleDirectory = path.join(projectRoot, ".cursor/rules");
-      expect(readdirSync(ruleDirectory)).toEqual([]);
+      const instructions = expectStandards(projectRoot, "CLAUDE.md", ownLine);
+      expect(instructions).not.toContain("sunstack-dev:");
       if (projectType === "single-swift") {
         expect(existsSync(path.join(projectRoot, "Package.swift"))).toBe(true);
         expect(existsSync(path.join(projectRoot, "Tests/standards-fixtureTests"))).toBe(true);
@@ -265,6 +235,8 @@ describe("scaffold standards output", () => {
 
     expect(result.status).toBe(1);
     expect(`${result.stdout}\n${result.stderr}`).toMatch(/standards.*owner.*own/i);
+    // Invalid input still exits before writing hooks or any other project files.
+    expectNoCopiedRules(projectRoot);
     expect(readdirSync(projectRoot)).toEqual([]);
   });
 });
@@ -373,40 +345,30 @@ describe("instruction retrofit safety", () => {
   });
 });
 
-describe("instruction Standards line governs owner rule copies (D22)", () => {
+describe("existing Standards entries stay intact without rule output (revision 9)", () => {
   test.each(["single-swift", "monorepo-both"])(
-    "existing own line overrides the default owner answer for %s",
+    "existing own line stays intact under the default answer for %s",
     (projectType) => {
       const projectRoot = createProject();
       const instructions = `# Existing project\n\n## Standards\n\n${ownLine}\n`;
       writeFileSync(path.join(projectRoot, "AGENTS.md"), instructions);
       const beforeEntries = instructionEntries(projectRoot);
 
-      const output = runScaffold(projectRoot, ["--type", projectType]);
+      runScaffold(projectRoot, ["--type", projectType]);
 
-      expectNoRule(projectRoot, "swift-rules");
-      expectNoRule(projectRoot, "monorepo-rules");
-      expect(standardsReports(output)).toEqual([
-        "NOTE: AGENTS.md says whose standards: this repository's own; --standards owner not applied",
-      ]);
       expect(readProjectFile(projectRoot, "AGENTS.md")).toBe(instructions);
       expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
     },
   );
 
-  test("existing owner line overrides the own answer for Swift", () => {
+  test("existing owner line stays intact when the Swift answer is own", () => {
     const projectRoot = createProject();
     const instructions = `# Existing project\n\n## Standards\n\n${ownerLine}\n`;
     writeFileSync(path.join(projectRoot, "AGENTS.md"), instructions);
     const beforeEntries = instructionEntries(projectRoot);
 
-    const output = runScaffold(projectRoot, ["--type", "single-swift", "--standards", "own"]);
+    runScaffold(projectRoot, ["--type", "single-swift", "--standards", "own"]);
 
-    expectRuleCopy(projectRoot, "swift-rules");
-    expectNoRule(projectRoot, "monorepo-rules");
-    expect(standardsReports(output)).toEqual([
-      "NOTE: AGENTS.md says whose standards: the owner's (sunstack-dev); --standards own not applied",
-    ]);
     expect(readProjectFile(projectRoot, "AGENTS.md")).toBe(instructions);
     expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
   });
@@ -416,51 +378,40 @@ describe("instruction Standards line governs owner rule copies (D22)", () => {
     ["near miss", "Whose standards: the owner's"],
   ])("a Standards section with %s names neither set", (_label, sectionContents) => {
     const projectRoot = createProject();
-    // Recognized lines outside the section must not supply its missing or invalid value.
+    // Existing instruction text is preserved even when the declaration names neither set.
     const instructions = `# Existing project\n\n${ownerLine}\n\n## Standards\n\n${sectionContents}\n\n## Other guidance\n\n${ownerLine}\n`;
     writeFileSync(path.join(projectRoot, "AGENTS.md"), instructions);
     const beforeEntries = instructionEntries(projectRoot);
 
-    const output = runScaffold(projectRoot, ["--type", "single-swift"]);
+    runScaffold(projectRoot, ["--type", "single-swift"]);
 
-    expectNoRule(projectRoot, "swift-rules");
-    expectNoRule(projectRoot, "monorepo-rules");
-    expect(standardsReports(output)).toEqual([
-      "SKIP: owner rule files (AGENTS.md Standards line names neither set)",
-    ]);
     expect(readProjectFile(projectRoot, "AGENTS.md")).toBe(instructions);
     expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
   });
 
-  test("an unreadable preferred instruction entry suppresses Swift owner rules", () => {
+  test("a dangling preferred instruction entry stays intact for Swift", () => {
     const projectRoot = createProject();
     symlinkSync("missing.md", path.join(projectRoot, "AGENTS.md"));
     const beforeEntries = instructionEntries(projectRoot);
 
-    const output = runScaffold(projectRoot, ["--type", "single-swift"]);
+    runScaffold(projectRoot, ["--type", "single-swift"]);
 
-    expectNoRule(projectRoot, "swift-rules");
-    expectNoRule(projectRoot, "monorepo-rules");
-    expect(standardsReports(output)).toEqual(["SKIP: owner rule files (AGENTS.md unreadable)"]);
     expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
   });
 
-  test("matching owner line and answer copy both additions (control)", () => {
+  test("existing owner line stays intact for a Swift monorepo", () => {
     const projectRoot = createProject();
     const instructions = `# Existing project\n\n## Standards\n\n${ownerLine}\n`;
     writeFileSync(path.join(projectRoot, "AGENTS.md"), instructions);
     const beforeEntries = instructionEntries(projectRoot);
 
-    const output = runScaffold(projectRoot, ["--type", "monorepo-swift-ts"]);
+    runScaffold(projectRoot, ["--type", "monorepo-swift-ts"]);
 
-    expectRuleCopy(projectRoot, "swift-rules");
-    expectRuleCopy(projectRoot, "monorepo-rules");
-    expect(standardsReports(output)).toEqual([]);
     expect(readProjectFile(projectRoot, "AGENTS.md")).toBe(instructions);
     expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
   });
 
-  test("independent files use AGENTS own line ahead of CLAUDE owner line", () => {
+  test("independent own AGENTS and owner CLAUDE files both stay intact", () => {
     const projectRoot = createProject();
     const agentsInstructions = `# Agent guidance\n\n## Standards\n\n${ownLine}\n`;
     const claudeInstructions = `# Claude guidance\n\n## Standards\n\n${ownerLine}\n`;
@@ -468,13 +419,8 @@ describe("instruction Standards line governs owner rule copies (D22)", () => {
     writeFileSync(path.join(projectRoot, "CLAUDE.md"), claudeInstructions);
     const beforeEntries = instructionEntries(projectRoot);
 
-    const output = runScaffold(projectRoot, ["--type", "single-swift"]);
+    runScaffold(projectRoot, ["--type", "single-swift"]);
 
-    expectNoRule(projectRoot, "swift-rules");
-    expectNoRule(projectRoot, "monorepo-rules");
-    expect(standardsReports(output)).toEqual([
-      "NOTE: AGENTS.md says whose standards: this repository's own; --standards owner not applied",
-    ]);
     expect(readProjectFile(projectRoot, "AGENTS.md")).toBe(agentsInstructions);
     expect(readProjectFile(projectRoot, "CLAUDE.md")).toBe(claudeInstructions);
     expect(instructionEntries(projectRoot)).toEqual(beforeEntries);
