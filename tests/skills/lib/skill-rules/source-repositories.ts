@@ -20,6 +20,8 @@ const collectionDirectories: Readonly<Record<string, string>> = {
 export function resolveSourceRepository(request: RepositoryRequest): SourceRepository {
   if (request.repository === "self")
     return { kind: "resolved", directory: path.resolve(request.self) };
+  if (request.repository === "agentstudio" && process.env.AGENTSTUDIO_REPOSITORY)
+    return { kind: "resolved", directory: path.resolve(process.env.AGENTSTUDIO_REPOSITORY) };
   const folder = collectionDirectories[request.repository];
   if (folder && request.collectionsRoot)
     return { kind: "resolved", directory: path.resolve(request.collectionsRoot, folder) };

@@ -107,6 +107,8 @@ The Vitest eval path stores ACP events raw in the first implementation.
 
 Run `pnpm --dir tests/skills rules:expect --check` without a key to validate every sibling expectation file. Run `pnpm --dir tests/skills rules:expect` through the established credential wrapper for real rule proof. Upstream entries resolve only through the local `ai-dev-skills` checkout named by `AI_DEV_SKILLS_ROOT`; the repository list never fetches. Missing repositories, commits or paths are setup gaps.
 
+Entries naming `agentstudio` resolve through `AGENTSTUDIO_REPOSITORY`, the local AgentStudio checkout. Leaving it unset preserves those entries as setup gaps.
+
 The runner archives each repository/commit once outside this checkout, lints only the source paths for each rules file, and removes the snapshot. It prints an external JSON report directory. Each entry reports outcome, locator and its own coverage gaps separately; run-wide gaps appear once per engine run. Exit 1 means an owner/independent call was contradicted, exit 5 means uncertainty or a gap, and exit 0 requires every entry to match without gaps. `--out` chooses an empty external report directory; `--engine` chooses the executable explicitly.
 
 The existing `rules` command also prints the current-skills account list and saves `accounts.json` beside its engine report: uncovered nudges, per-rule pass/not-applicable samples, cuts and exclusions. Each item needs a person's written account; listing them does not change the engine's exit code. Coverage requires a matching pinned commit, rule and source piece, so an old expectation cannot hide a new nudge. These supporting accounts are separate from expectation proof and receiving-agent pressure tasks.

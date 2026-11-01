@@ -1,5 +1,7 @@
-import { describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import { resolveSourceRepository } from "./source-repositories.ts";
+
+afterEach(() => vi.unstubAllEnvs());
 
 describe("local source repositories", () => {
   test("self resolves independently of upstream configuration", () => {
@@ -34,5 +36,16 @@ describe("local source repositories", () => {
         collectionsRoot: "/collections",
       }).kind,
     ).toBe("setup-gap");
+  });
+  test("AgentStudio resolves only from its configured local checkout", () => {
+    vi.stubEnv("AGENTSTUDIO_REPOSITORY", "/local/agentstudio");
+    expect(resolveSourceRepository({ repository: "agentstudio", self: "/workspace" })).toEqual({
+      kind: "resolved",
+      directory: "/local/agentstudio",
+    });
+    vi.stubEnv("AGENTSTUDIO_REPOSITORY", "");
+    expect(resolveSourceRepository({ repository: "agentstudio", self: "/workspace" }).kind).toBe(
+      "setup-gap",
+    );
   });
 });

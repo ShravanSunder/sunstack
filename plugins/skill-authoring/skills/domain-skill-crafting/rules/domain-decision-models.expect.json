@@ -167,6 +167,204 @@
         ]
       },
       "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l01-question-one-proposition",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "bf9a686cafe0cd6a38ad746ae36ef74ffef549fd",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/calls-and-placement.rules.json",
+        "context": [
+          "plugins",
+          "plugins/skill-authoring/skills/domain-skill-crafting/rules/calls-and-placement.rules.json"
+        ]
+      },
+      "piece_first_line": 150,
+      "field_line": 150,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L01, blind labellers agreed. G: It asks whether each named product is only an example or shared infrastructure; the true and false criteria make the same distinction by asking whether the section sends the agent into that product's own workflow. H: It asks one yes/no proposition: whether every product the section routes into is only a labelled example or shared infrastructure. The criteria supply the corresponding allowed and disallowed cases.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l01-question-criteria-match",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "bf9a686cafe0cd6a38ad746ae36ef74ffef549fd",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/calls-and-placement.rules.json",
+        "context": [
+          "plugins",
+          "plugins/skill-authoring/skills/domain-skill-crafting/rules/calls-and-placement.rules.json"
+        ]
+      },
+      "piece_first_line": 150,
+      "field_line": 150,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L01, blind labellers agreed. G: The instruction asks whether products are named only as examples or shared infrastructure, and the criteria distinguish those cases from product-specific commands, procedures, or state files. H: The instruction asks whether routed products are examples or shared infrastructure; the true and false criteria distinguish those cases from instructions to use a product's own workflow.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l03-question-one-proposition",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/main-path.rules.json",
+        "context": ["plugins"]
+      },
+      "piece_first_line": 18,
+      "field_line": 18,
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "basis": "S7 L03, independent settlement: The standard begins 'A Noul', but the source explicitly declares this question's type as 'choice' and supplies the categorical answers 'none', 'condition' and 'work'. I follow labeler_g because this entry falls outside that Noul-specific standard; labeler_h's assessment of the categorical question does not establish applicability.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb",
+          "Sol settler 01a19705-397b-7621-ab1c-430aab76fc9e"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l03-question-criteria-match",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/main-path.rules.json",
+        "context": ["plugins"]
+      },
+      "piece_first_line": 18,
+      "field_line": 18,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L03, independent settlement: The instruction asks 'Which part does the branch leave out?', and the criteria answer with both parts present, a condition that 'can't be observed', or observable condition but missing or unchanged work. I follow labeler_h because these criteria classify the same branch gap the instruction asks about; this standard says 'A question' and does not restrict itself to Nouls, so labeler_g's type-based exclusion does not apply.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb",
+          "Sol settler 01a19705-397b-7621-ab1c-430aab76fc9e"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l06-question-one-proposition",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/steering.rules.json",
+        "context": ["plugins"]
+      },
+      "piece_first_line": 85,
+      "field_line": 85,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L06, blind labellers agreed. G: It asks whether guidance states a positive target instead of only what to avoid; both criteria branches decide that one distinction, including an actionable skill handoff as a positive target. H: It asks one observable yes/no question: whether guidance gives a positive target instead of only naming what to avoid. The criteria distinguish positive actions or targets from avoidance-only guidance.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l06-question-criteria-match",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/steering.rules.json",
+        "context": ["plugins"]
+      },
+      "piece_first_line": 85,
+      "field_line": 85,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L06, blind labellers agreed. G: The instruction's positive-target test matches the criteria: true names an action, target, or useful handoff, while false only names prohibitions and leaves the target unknown. H: The criteria answer whether guidance gives an action/target or only an avoidance, matching the instruction's positive-target question.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l09-question-one-proposition",
+      "rule": "question.one-proposition",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json",
+        "context": [
+          "plugins",
+          "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json"
+        ]
+      },
+      "piece_first_line": 19,
+      "field_line": 19,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L09, blind labellers agreed. G: It asks whether a rule transfers to materially different repositories, stacks, or teams; the criteria define transferable versus single-case judgments on that same proposition. H: It asks one observable proposition: whether the rule's judgment transfers to materially different repositories, stacks, or teams. The criteria describe transferable and case-specific judgments.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "s7-l09-question-criteria-match",
+      "rule": "question.criteria-match",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json",
+        "context": [
+          "plugins",
+          "plugins/skill-authoring/skills/domain-skill-crafting/rules/generalization.rules.json"
+        ]
+      },
+      "piece_first_line": 19,
+      "field_line": 19,
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "basis": "S7 L09, blind labellers agreed. G: The instruction's transfer test matches the criteria's distinction between general judgments and a particular product, path, stack, or incident stated as universal. H: The criteria define transferability using the instruction's cases: examples or adopted scope can transfer, while a single product-specific case stated as universal cannot.",
+      "decided_by": {
+        "how": "independent",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ]
+      },
+      "added": "2026-11-01"
     }
   ]
 }
