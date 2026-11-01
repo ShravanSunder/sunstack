@@ -41,7 +41,7 @@ Good: "When that is done, publish" is judged with the sentence that defines "tha
 - Each question asks for a property the model can judge from the supplied evidence; code decides what that judgment means for the outcome.
 - A Noul asks one observable proposition, and its criteria define that proposition's yes and no without adding a second requirement.<!-- K002 -->
 - A question's instruction and criteria define the same proposition.<!-- K003 -->
-- A question refers to named state fields directly.
+- A question's instruction and criteria refer to named state fields directly.
 - Every route from a question says what a yes means, a pass or a finding: a high probability means yes to the proposition, not "compliant".
 - A judged property is bounded by the obligations its evidence states. "Does the end require the result the step itself says to produce?" is answerable from the step; "is this step's work enough?" imports a standard the evidence doesn't hold.
 - A shortened question keeps the standard's own negative and bounded-judgment cases. Test it against the standard's bad examples before trusting it: "IF the skill needs more depth" names a skill the agent can point at, yet its predicate is the defect.

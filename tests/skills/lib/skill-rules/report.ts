@@ -1,6 +1,10 @@
+import path from "node:path";
 import { z } from "zod";
+import type { RuleDenominator } from "./denominators.ts";
 
-// R25's new observable; validated against the frozen C2 binary before hosted proof.
+const basisSchema = z.enum(["mechanical", "judged"]);
+// One rule's result for one piece (sunstack 0.6.0): its walked path, the answers that walk read
+// (passes and gate drops included), whether a model's answer is on the path, and any cut fields.
 export const pieceDecisionSchema = z.object({
   name: z.string(),
   marker: z.string(),
@@ -9,17 +13,33 @@ export const pieceDecisionSchema = z.object({
   last_line: z.number().int().positive(),
   outcome: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]),
   step: z.string().nullable(),
+  basis: basisSchema.optional(),
+  path: z.array(z.string()),
+  answers: z.record(z.string(), z.unknown()).optional(),
+  cut: z.array(z.string()).optional(),
 });
 export type PieceDecision = z.infer<typeof pieceDecisionSchema>;
 
 const locationSchema = z.object({ file: z.string(), first_line: z.number() }).passthrough();
+// A place the run read that relates to a finding: the standard's line first, then the spans of the
+// fields the rule entry names in `related`.
+const relatedPlaceSchema = z.object({
+  label: z.string(),
+  file: z.string(),
+  first_line: z.number(),
+  last_line: z.number(),
+});
 const findingSchema = z
   .object({
     rule: z.string(),
+    marker: z.string(),
     file: z.string(),
     line: z.number(),
+    anchor: z.enum(["resolved", "default"]),
+    basis: basisSchema,
     severity: z.enum(["error", "warn"]),
     message: z.string(),
+    related: z.array(relatedPlaceSchema),
   })
   .passthrough();
 // Selection (sunstack 0.3.0+): a selected kind's candidates and their outcomes, kept apart from rule
@@ -56,7 +76,14 @@ const fileCountSchema = z
     file: z.string(),
     kinds: z.record(
       z.string(),
-      z.object({ selection: selectionCountsSchema.optional() }).passthrough(),
+      z
+        .object({
+          pieces: z.number(),
+          picked: z.number(),
+          limited: z.boolean(),
+          selection: selectionCountsSchema.optional(),
+        })
+        .passthrough(),
     ),
   })
   .passthrough();
@@ -213,7 +240,114 @@ export function formatAssembledKind(entry: AssembledKind): string {
   return parts.join(" ");
 }
 
-export function formatLintReport(report: LintReport): string {
+export interface UnreadGap {
+  readonly rule: string;
+  readonly marker: string;
+  readonly file: string;
+}
+export interface CutGap {
+  readonly rule: string;
+  readonly file: string;
+  readonly first_line: number;
+  readonly last_line: number;
+  readonly fields: readonly string[];
+}
+/** What the run couldn't see, by kind. "No gaps" holds only when all four lists are empty. */
+export interface ReportGaps {
+  readonly unread: readonly UnreadGap[];
+  readonly cut: readonly CutGap[];
+  readonly unresolved: readonly Selection[];
+  readonly notRun: readonly string[];
+}
+
+/**
+ * Unread: a file inside a rule's declared denominator where the rule judged no piece. A file whose
+ * kind has pieces but none picked (a change scope that left it out) is out of scope, and a file the
+ * match limit cut off is a not-run gap instead.
+ */
+export function unreadGaps(
+  report: LintReport,
+  denominators: readonly RuleDenominator[],
+): UnreadGap[] {
+  const judged = new Set(
+    report.results.map((result) => `${result.name}\u0000${result.marker}\u0000${result.file}`),
+  );
+  const gaps: UnreadGap[] = [];
+  for (const denominator of denominators)
+    for (const file of report.file_counts) {
+      if (!denominator.files.some((glob) => path.matchesGlob(file.file, glob))) continue;
+      if (
+        denominator.within.length > 0 &&
+        !denominator.within.some((container) => (file.kinds[container]?.pieces ?? 0) > 0)
+      )
+        continue;
+      const count = file.kinds[denominator.kind];
+      if (count?.limited) continue;
+      if (judged.has(`${denominator.rule}\u0000${denominator.marker}\u0000${file.file}`)) continue;
+      if (count && count.pieces > 0 && count.picked === 0) continue;
+      gaps.push({ rule: denominator.rule, marker: denominator.marker, file: file.file });
+    }
+  return gaps;
+}
+
+export function reportGaps(
+  report: LintReport,
+  denominators: readonly RuleDenominator[],
+): ReportGaps {
+  const cut = report.results
+    .filter((result) => (result.cut ?? []).length > 0)
+    .map((result) => ({
+      rule: result.name,
+      file: result.file,
+      first_line: result.first_line,
+      last_line: result.last_line,
+      fields: result.cut ?? [],
+    }));
+  const unresolved = report.selections.filter(
+    (item) => item.outcome.kind === "uncertain" || item.outcome.kind === "incomplete",
+  );
+  const notRun: string[] = [];
+  if (["invalid", "cancelled", "incomplete"].includes(report.status.kind))
+    notRun.push(`run ${report.status.kind}: not every rule ran`);
+  for (const item of report.incomplete) {
+    // A match-limited file reports its limit as a diagnostic on the same file.
+    const limit = report.diagnostics.find(
+      (diagnostic) => diagnostic.file !== null && diagnostic.file === item.file,
+    );
+    const why = limit && item.reason.kind === "selection_failed" ? ` (${limit.message})` : "";
+    notRun.push(
+      `Incomplete: ${item.rule ?? "run"} ${item.file ?? ""} ${item.field ?? ""}: ${item.reason.kind}${why}`,
+    );
+  }
+  for (const item of report.skipped_rules) notRun.push(`Skipped rule: ${JSON.stringify(item)}`);
+  return { unread: unreadGaps(report, denominators), cut, unresolved, notRun };
+}
+
+function answerSummary(answer: unknown): string {
+  const parsed = z
+    .object({
+      type: z.string().optional(),
+      yes_probability: z.number().optional(),
+      selected_label: z.string().optional(),
+      confidence: z.number().optional(),
+    })
+    .passthrough()
+    .safeParse(answer);
+  if (!parsed.success) return JSON.stringify(answer);
+  if (parsed.data.yes_probability !== undefined) return `yes ${parsed.data.yes_probability}`;
+  if (parsed.data.selected_label !== undefined)
+    return `${parsed.data.selected_label}${parsed.data.confidence === undefined ? "" : ` ${parsed.data.confidence}`}`;
+  return JSON.stringify(answer);
+}
+
+function placeLines(first: number, last: number): string {
+  return first === last ? `${first}` : `${first}-${last}`;
+}
+
+export function formatLintReport(
+  report: LintReport,
+  denominators: readonly RuleDenominator[],
+): string {
   const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };
   for (const result of report.results) outcomes[result.outcome]++;
   const lines = [
@@ -224,11 +358,15 @@ export function formatLintReport(report: LintReport): string {
   for (const [kind, total] of selectionTotals(report))
     lines.push(`Selection ${kind}: ${JSON.stringify(total)}`);
   lines.push(`Usage: ${JSON.stringify(report.usage)}`);
+  // Each finding is a nudge: its line, how it was reached, and the places the run read to go to next.
+  if (report.findings.length > 0) lines.push("Nudges:");
   for (const severity of ["error", "warn"]) {
     for (const finding of report.findings.filter((item) => item.severity === severity)) {
       lines.push(
-        `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message}`,
+        `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, anchor ${finding.anchor})`,
       );
+      for (const place of finding.related)
+        lines.push(`  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`);
     }
   }
   for (const item of report.uncertain) {
@@ -238,10 +376,19 @@ export function formatLintReport(report: LintReport): string {
       `Evidence: ${JSON.stringify(item.state)}`,
     );
   }
-  for (const item of report.selections) {
+  const gaps = reportGaps(report, denominators);
+  const gapCount = gaps.unread.length + gaps.cut.length + gaps.unresolved.length + gaps.notRun.length;
+  lines.push(gapCount === 0 ? "Gaps: none" : `Gaps: ${gapCount}`);
+  for (const gap of gaps.unread) lines.push(`unread: ${gap.rule} judged nothing in ${gap.file}`);
+  for (const gap of gaps.cut)
+    lines.push(
+      `cut: ${gap.rule} at ${gap.file}:${placeLines(gap.first_line, gap.last_line)}: ${gap.fields.join(", ")} cut for the model`,
+    );
+  for (const item of gaps.unresolved) {
     const line = formatUnresolvedSelection(item);
-    if (line) lines.push(line);
+    if (line) lines.push(`unresolved: ${line}`);
   }
+  for (const line of gaps.notRun) lines.push(`not run: ${line}`);
   // A file that was asked about and had nothing selected, with its separate counts. Only when every
   // candidate is not_selected did the model judge none to be that kind (as a numbered rule list
   // should be); an uncertain, incomplete or not-asked candidate is a gap, not a negative judgment.
@@ -254,11 +401,15 @@ export function formatLintReport(report: LintReport): string {
         `${file.file}: no ${kind} selected (${selection.not_selected} not selected, ${selection.uncertain} uncertain, ${selection.incomplete} incomplete${notAsked > 0 ? `, ${notAsked} not asked` : ""})`,
       );
     }
-  for (const item of report.incomplete)
+  // Decided exclusions sit apart from the gaps: each gate's drop, with the answer it read.
+  const excluded = report.results.filter((result) => result.outcome === "not_applicable");
+  lines.push(`Exclusions: ${excluded.length}`);
+  for (const result of excluded) {
+    const answer = result.step ? result.answers?.[result.step] : undefined;
     lines.push(
-      `Incomplete: ${item.rule ?? "run"} ${item.file ?? ""} ${item.field ?? ""}: ${item.reason.kind}`,
+      `excluded: ${result.name} at ${result.file}:${placeLines(result.first_line, result.last_line)}, ${result.step ?? "no step"}${answer === undefined ? " (mechanical)" : ` answered ${answerSummary(answer)}`}`,
     );
-  for (const item of report.skipped_rules) lines.push(`Skipped rule: ${JSON.stringify(item)}`);
+  }
   for (const item of report.diagnostics)
     lines.push(`${item.file ?? "config"}:${item.line ?? 1}: ${item.code}: ${item.message}`);
   return lines.join("\n");

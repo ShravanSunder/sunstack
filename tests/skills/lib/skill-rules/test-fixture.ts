@@ -79,6 +79,10 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/lib/skill-rules/report.ts"),
     path.join(root, "tests/skills/lib/skill-rules/report.ts"),
   );
+  cpSync(
+    path.join(repositoryRoot, "tests/skills/lib/skill-rules/denominators.ts"),
+    path.join(root, "tests/skills/lib/skill-rules/denominators.ts"),
+  );
   mkdirSync(path.join(root, "tests/skills/node_modules/.bin"), { recursive: true });
   symlinkSync(
     path.join(repositoryRoot, "tests/skills/node_modules/zod"),

@@ -592,11 +592,14 @@ test("report presentation retains cancellation, skipped rules and uncertain evid
   const result = await runRunner(root);
   const report = reportSchema.parse(result.report);
   // Formatter sensitivity only: cancellation delivery is not claimed by this case.
-  const text = formatLintReport({
-    ...report,
-    status: { kind: "cancelled" },
-    skipped_rules: [{ rule: "omitted", reason: "off" }],
-  });
+  const text = formatLintReport(
+    {
+      ...report,
+      status: { kind: "cancelled" },
+      skipped_rules: [{ rule: "omitted", reason: "off" }],
+    },
+    [],
+  );
   expect(text).toContain("Status: cancelled");
   expect(text).toContain('Skipped rule: {"rule":"omitted","reason":"off"}');
 });

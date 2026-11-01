@@ -10,6 +10,7 @@ import {
   formatLintReport,
   lintReportSchema,
 } from "../lib/skill-rules/report.ts";
+import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }
@@ -124,7 +125,7 @@ function runRules(): number {
     for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
     const report = lintReportSchema.parse(output);
-    console.log(formatLintReport(report));
+    console.log(formatLintReport(report, loadRuleDenominators(configPath)));
     if (options.scope.kind === "full" && report.status.kind === "nothing_selected") {
       console.error("GAP: full-scope run selected nothing; check the paths and configured scope.");
       return 2;
