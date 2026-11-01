@@ -59,5 +59,46 @@
     "outcome": "pass",
     "line": null,
     "source": "labelers-agreed"
+  },
+  "held-out-h01": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h02": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h03": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h04": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h05": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "held-out-h07": {
+    "outcome": "finding",
+    "line": 3,
+    "lines": [
+      3
+    ],
+    "source": "labelers-agreed"
+  },
+  "held-out-h08": {
+    "outcome": "finding",
+    "line": 3,
+    "lines": [
+      3
+    ],
+    "source": "labelers-agreed"
   }
 }

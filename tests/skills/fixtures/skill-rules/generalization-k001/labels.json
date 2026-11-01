@@ -66,5 +66,62 @@
       12
     ],
     "source": "labelers-agreed"
+  },
+  "held-out-h01": {
+    "outcome": "finding",
+    "line": 80,
+    "lines": [
+      80,
+      81,
+      82,
+      83,
+      85
+    ],
+    "source": "labelers-agreed"
+  },
+  "held-out-h02": {
+    "outcome": "not_applicable",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "held-out-h03": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h04": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h05": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h06": {
+    "outcome": "finding",
+    "line": 89,
+    "lines": [
+      89,
+      92,
+      93,
+      94,
+      95
+    ],
+    "source": "sol-settled"
+  },
+  "held-out-h07": {
+    "outcome": "finding",
+    "line": 7,
+    "lines": [
+      7
+    ],
+    "source": "labelers-agreed"
+  },
+  "held-out-h08": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
   }
 }

@@ -95,5 +95,62 @@
     "outcome": "pass",
     "line": null,
     "source": "labelers-agreed"
+  },
+  "held-out-h01": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h02": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h03": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h04": {
+    "outcome": "finding",
+    "line": 64,
+    "lines": [
+      49,
+      50,
+      57,
+      58,
+      64,
+      71,
+      72
+    ],
+    "source": "sol-settled"
+  },
+  "held-out-h05": {
+    "outcome": "pass",
+    "line": null,
+    "source": "sol-settled"
+  },
+  "held-out-h06": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h07": {
+    "outcome": "finding",
+    "line": 7,
+    "lines": [
+      7
+    ],
+    "source": "labelers-agreed"
+  },
+  "held-out-h08": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h09": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
   }
 }

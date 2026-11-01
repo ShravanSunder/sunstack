@@ -47,5 +47,45 @@
     "outcome": "not_applicable",
     "line": null,
     "source": "labelers-agreed"
+  },
+  "held-out-h01": {
+    "outcome": "pass",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h02": {
+    "outcome": "finding",
+    "line": 13,
+    "lines": [
+      10,
+      13,
+      14
+    ],
+    "source": "sol-settled"
+  },
+  "held-out-h03": {
+    "outcome": "finding",
+    "line": 13,
+    "lines": [
+      10,
+      13,
+      14
+    ],
+    "source": "sol-settled"
+  },
+  "held-out-h04": {
+    "outcome": "not_applicable",
+    "line": null,
+    "source": "labelers-agreed"
+  },
+  "held-out-h05": {
+    "outcome": "finding",
+    "line": 13,
+    "lines": [
+      10,
+      13,
+      14
+    ],
+    "source": "sol-settled"
   }
 }
