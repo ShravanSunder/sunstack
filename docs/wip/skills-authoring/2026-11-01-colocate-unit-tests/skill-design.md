@@ -129,14 +129,15 @@ None. The change edits Markdown teaching only: nothing that executes, reaches th
 - **Base:** `origin/main` at `3511b587`, worktree `skills/colocate-unit-tests` (`/Users/shravansunder/dev/ai-tools.skills-colocate-unit-tests`).
 - **Pending edits:** none on these two files. PR #188 (`skills/rules-as-nudges`) doesn't touch them.
 - **Landing:**
-  - bump `sunstack-dev` from 2.102.1 to 2.103.0 in its Codex, Claude and Cursor manifests, and in the Claude marketplace entry;
+  - bump `sunstack-dev` from 2.102.1 to 2.103.0 in its Codex, Claude and Cursor manifests, and in the Claude marketplace entry. Deviation at implementation: 2.102.2, the patch bump the Lead set in the implementation commission, also in the Cursor marketplace entry, which carries the same version;
   - add a changelog entry `docs/changelog/2026-11-01-colocate-unit-tests.md`, with a line in `docs/changelog/README.md`;
   - one PR; the owner merges.
 
 ## Run status
 
-- Run 1: proposed.
-- Run 2: proposed.
+- Run 1: implemented, 1 Nov 2026. The `domain-typescript` Tests section and signs line, as accepted at `24eea1b3`.
+- Run 2: implemented, 1 Nov 2026. The `domain-rust` Tests section and signs line, as accepted at `24eea1b3`.
+- Both are still owed the implementation review, and the pressure prompt, which this PR names as planned and unverified.
 
 ## Review record
 

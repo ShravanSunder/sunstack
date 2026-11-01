@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-01 Domain skills: colocated unit tests](2026-11-01-colocate-unit-tests.md)
 - [2026-10-31 Step 5 fixes: step text](2026-10-31-step5-fixes-step-text.md)
 - [2026-10-31 Decision-model skills: domain, rule design and review](2026-10-31-decision-model-skills.md)
 - [2026-10-31 Step 5 fixes: other descriptions](2026-10-31-step5-fixes-other-descriptions.md)

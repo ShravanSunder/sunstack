@@ -118,6 +118,15 @@ Zod v4 deprecates `a.merge(b)`; write `a.extend(b.shape)`.
 
 Before creating a file or folder, name the one responsibility it holds (`database-connection.ts`, `query-builders/`, never `db.ts`, `utils/` or `helpers.ts`); when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)).
 
+## Tests
+
+The owner's test layout holds in every package:
+
+- A unit test sits beside the module it tests and is named for it: `report.ts` and `report.test.ts` in the same folder. Every new unit test takes this form, whatever layout the repository has elsewhere.
+- The package's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`.
+
+When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, such as a `tests/` or `__tests__/` folder, move them beside it in the same change. The move covers only that module's own unit tests. A repository-wide migration is its own PR. A folder that already holds unit tests is the old form, not precedent. A change once added two unit-test files for `lib/skill-rules/report.ts` to `lib/skill-rules/tests/`, because that folder already held the package's tests. The new tests belonged in `report.test.ts` beside the module, with that module's existing tests moved into it. Ask the owner only when the repository's own instructions or checks require a different layout.
+
 ## Gates
 
 The repository's own scripts, oxlint config and formatter config win over anything listed here, and the formatter owns indentation and layout. Follow the oxlint rules without exceptions: fix the code instead of adding a disable comment.
@@ -131,3 +140,4 @@ IF the repo defines no lint, format, type-check or test script for the changed p
 - A hand-written `Omit<>` or interface beside a Zod schema for the same shape, or `.merge()`.
 - A state spread across booleans and optional fields, or a `switch` over a union with no `assertNever`.
 - A file named `utils.ts`, `helpers.ts` or `db.ts`.
+- A new unit test under `tests/` or `__tests__/` because the folder already has tests there.
