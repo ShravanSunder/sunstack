@@ -17,7 +17,7 @@ import { once } from "node:events";
 import { fileURLToPath } from "node:url";
 import { expect } from "vitest";
 import { z } from "zod";
-import { lintReportSchema } from "./report.ts";
+import { lintReportSchema } from "../../lib/skill-rules/report.ts";
 
 export const repositoryRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 export const kitRelative = "plugins/skill-authoring/skills/domain-skill-crafting/rules";

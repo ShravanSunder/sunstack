@@ -14,7 +14,7 @@ import {
   sampleSkill,
   saveConfig,
   saveRules,
-} from "../test-fixture.ts";
+} from "../support/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

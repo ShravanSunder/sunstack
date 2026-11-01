@@ -14,7 +14,7 @@ import {
   saveConfig,
   saveRules,
   writeFixtureFile,
-} from "../test-fixture.ts";
+} from "../support/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 
@@ -24,7 +24,9 @@ function kitEntry(topic: string, marker: string): unknown {
   const entries = z
     .record(z.string(), z.unknown())
     .parse(
-      JSON.parse(readFileSync(path.join(repositoryRoot, kitRelative, `${topic}.rules.json`), "utf8")),
+      JSON.parse(
+        readFileSync(path.join(repositoryRoot, kitRelative, `${topic}.rules.json`), "utf8"),
+      ),
     );
   const entry = entries[marker];
   if (!entry) throw new Error(`Missing ${topic} ${marker}`);
@@ -46,23 +48,20 @@ describe("branch.condition routes every accepted opener (kit K001, main-path)", 
     ["if the input is missing, return the gap.", "branch_parts", "pass"],
     ["When the input is missing, return the gap.", "when_kind", "not_applicable"],
     ["when the input is missing, return the gap.", "when_kind", "not_applicable"],
-  ] satisfies [string, string, string][])(
-    "%s ends at %s",
-    async (line, step, outcome) => {
-      // Wrong behavior: an If line asked "This line opens with When", or a when line judged as an IF.
-      // when_kind answers guidance, so a line that reaches it ends not_applicable; one that skips it
-      // reaches the gap question, answered none.
-      const root = createFixture();
-      saveRules(root, { K001: kitEntry("main-path", "K001") });
-      writeFixtureFile(root, "plugins/example/skills/sample/references/branch.md", `${line}\n`);
-      const result = await runRunnerJudged(root, [], {}, { when_kind: "guidance", gap: "none" });
-      expect(result.status, result.stderr).toBe(0);
-      const report = reportSchema.parse(result.report);
-      expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
-        [1, step, outcome],
-      ]);
-    },
-  );
+  ] satisfies [string, string, string][])("%s ends at %s", async (line, step, outcome) => {
+    // Wrong behavior: an If line asked "This line opens with When", or a when line judged as an IF.
+    // when_kind answers guidance, so a line that reaches it ends not_applicable; one that skips it
+    // reaches the gap question, answered none.
+    const root = createFixture();
+    saveRules(root, { K001: kitEntry("main-path", "K001") });
+    writeFixtureFile(root, "plugins/example/skills/sample/references/branch.md", `${line}\n`);
+    const result = await runRunnerJudged(root, [], {}, { when_kind: "guidance", gap: "none" });
+    expect(result.status, result.stderr).toBe(0);
+    const report = reportSchema.parse(result.report);
+    expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
+      [1, step, outcome],
+    ]);
+  });
 
   test("a mid-sentence if gives no branch piece and no request", async () => {
     const root = createFixture();
@@ -374,7 +373,10 @@ describe("reference_section evidence carries the reference's outline and opening
     const section = listing.pieces.find((piece) => piece.kind === "reference_section");
     if (!section) throw new Error("No reference section");
     const opening = textsSchema.parse(section.fields.opening).values;
-    expect(opening).toEqual(["This reference owns the release stage,", "- Expected inputs: the tag"]);
+    expect(opening).toEqual([
+      "This reference owns the release stage,",
+      "- Expected inputs: the tag",
+    ]);
     expect(opening.join("\n")).not.toContain("returns the signed artifact");
     expect(opening.join("\n")).not.toContain("only the changelog entry");
   });

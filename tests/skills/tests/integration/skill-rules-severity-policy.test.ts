@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
-import { kitRelative, repositoryRoot } from "../test-fixture.ts";
+import { kitRelative, repositoryRoot } from "../support/test-fixture.ts";
 
 // Our rules' severity policy (R5a): `error` only where every path to a finding is mechanical; any
 // path that reads a model's answer, a gate included, reaches only `warn`. The engine keeps whatever
@@ -80,8 +80,18 @@ describe("our severity policy over the rule files (R5a)", () => {
       decision: {
         start: "gate",
         steps: {
-          gate: { ask: "gate", yes_at_or_above: 0.7, no_at_or_below: 0.3, yes: "length", no: "not_applicable" },
-          length: { mechanical_check: { tool: "max_chars", field: "description", max: 300 }, yes: "pass", no: { finding: "Too long.", at: "description" } },
+          gate: {
+            ask: "gate",
+            yes_at_or_above: 0.7,
+            no_at_or_below: 0.3,
+            yes: "length",
+            no: "not_applicable",
+          },
+          length: {
+            mechanical_check: { tool: "max_chars", field: "description", max: 300 },
+            yes: "pass",
+            no: { finding: "Too long.", at: "description" },
+          },
         },
       },
     };
@@ -90,7 +100,13 @@ describe("our severity policy over the rule files (R5a)", () => {
       decision: {
         start: "verdict",
         steps: {
-          verdict: { ask: "verdict", yes_at_or_above: 0.7, no_at_or_below: 0.3, yes: "pass", no: { finding: "No.", at: "body", severity: "error" } },
+          verdict: {
+            ask: "verdict",
+            yes_at_or_above: 0.7,
+            no_at_or_below: 0.3,
+            yes: "pass",
+            no: { finding: "No.", at: "body", severity: "error" },
+          },
         },
       },
     };
@@ -99,7 +115,13 @@ describe("our severity policy over the rule files (R5a)", () => {
       severity: "error",
       decision: {
         start: "length",
-        steps: { length: { mechanical_check: { tool: "max_chars", field: "description", max: 300 }, yes: "pass", no: { finding: "Too long.", at: "description" } } },
+        steps: {
+          length: {
+            mechanical_check: { tool: "max_chars", field: "description", max: 300 },
+            yes: "pass",
+            no: { finding: "Too long.", at: "description" },
+          },
+        },
       },
     };
     expect(judgedErrorRoutes(gateThenError)).toEqual(["control.gate-then-error at length"]);
