@@ -76,7 +76,7 @@
           "no_at_or_below": 0.3,
           "yes": "pass",
           "no": {
-            "finding": "This Noul's criteria add a second requirement: keep them to the task's one proposition.",
+            "finding": "This Noul's criteria define something other than its task's own proposition, by adding a requirement or by inverting or replacing it: make them define the task's own yes and no.",
             "at": "body"
           }
         }

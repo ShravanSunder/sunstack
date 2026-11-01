@@ -159,8 +159,8 @@
           "task": "Is every product this section sends the agent into named only as a labelled example, or part of this toolkit's own shared infrastructure?"
         },
         "criteria": {
-          "true": "Each product the section names is named only in passing, or as a labelled example of a general case (\"for example\", \"such as\"), or is this toolkit's own shared infrastructure, such as its own local observability stack; the section doesn't ask the agent to run that product's own commands, follow its procedures or use its state files as part of this skill's work.",
-          "false": "The section tells the agent to run one product's own commands, follow its procedures or use its state files as steps of this skill's work. That is neither a labelled example nor a tool used through its supported interface, even when the same product is a tool elsewhere."
+          "true": "Each product the section names appears only in passing, or as a labelled example of a general instruction (\"for example\", \"such as\"), so the step the agent runs stays general; or it is this toolkit's own shared infrastructure, such as its own local observability stack.",
+          "false": "An instruction itself requires one product's own commands, procedures or state files as what this skill's step runs. That is neither a labelled example nor a tool used through its supported interface, even when the same product is a tool elsewhere, and a general instruction elsewhere in the section doesn't excuse a separate step that requires one product's own workflow."
         }
       }
     },
