@@ -1,0 +1,24 @@
+{
+  "K001": {
+    "name": "case.held-out-h01",
+    "evidence": "step",
+    "questions": {
+      "question": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Does the report identify the region where the outage occurred?"
+        },
+        "criteria": {
+          "true": "A region is named.",
+          "false": "No region is named."
+        }
+      }
+    },
+    "decision": {
+      "start": "question",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}

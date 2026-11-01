@@ -148,5 +148,110 @@
       "line": 6,
       "pieceLine": 6
     }
+  },
+  {
+    "id": "held-out-h01",
+    "set": "held-out",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "decision-models-k003/held-out-h01/rules/held-out-h01.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "held-out-h01/rules/held-out-h01.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h02",
+    "set": "held-out",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "decision-models-k003/held-out-h02/rules/held-out-h02.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "held-out-h02/rules/held-out-h02.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h03",
+    "set": "held-out",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "decision-models-k003/held-out-h03/rules/held-out-h03.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "held-out-h03/rules/held-out-h03.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h04",
+    "set": "held-out",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "decision-models-k003/held-out-h04/rules/held-out-h04.rules.json",
+      "startLine": 6,
+      "endLine": 20
+    },
+    "excerpt": {
+      "path": "held-out-h04/rules/held-out-h04.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h05",
+    "set": "held-out",
+    "evidence": {
+      "kind": "rule_question",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "decision-models-k003/held-out-h05/rules/held-out-h05.rules.json",
+      "startLine": 6,
+      "endLine": 24
+    },
+    "excerpt": {
+      "path": "held-out-h05/rules/held-out-h05.rules.json",
+      "line": 6,
+      "pieceLine": 6
+    }
   }
 ]

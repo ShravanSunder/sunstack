@@ -225,5 +225,170 @@
       "path": "case-011/SKILL.md",
       "line": 3
     }
+  },
+  {
+    "id": "held-out-h01",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "startLine": 3,
+      "endLine": 3,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "held-out-h01/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h02",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+      "startLine": 3,
+      "endLine": 3,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "held-out-h02/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h03",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md",
+      "startLine": 3,
+      "endLine": 3,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "held-out-h03/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h04",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/implementation-handoff/SKILL.md",
+      "startLine": 3,
+      "endLine": 3,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "held-out-h04/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h05",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+      "startLine": 3,
+      "endLine": 3,
+      "fieldLine": 3
+    },
+    "excerpt": {
+      "path": "held-out-h05/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h06",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "descriptions-k007/held-out-h06/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "held-out-h06/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h07",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "descriptions-k007/held-out-h07/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "held-out-h07/SKILL.md",
+      "line": 3
+    }
+  },
+  {
+    "id": "held-out-h08",
+    "set": "held-out",
+    "evidence": {
+      "kind": "skill",
+      "field": "description"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "descriptions-k007/held-out-h08/SKILL.md",
+      "startLine": 1,
+      "endLine": 4
+    },
+    "excerpt": {
+      "path": "held-out-h08/SKILL.md",
+      "line": 3
+    }
   }
 ]

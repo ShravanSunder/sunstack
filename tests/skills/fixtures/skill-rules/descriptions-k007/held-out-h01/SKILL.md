@@ -1,0 +1,126 @@
+---
+name: debug-investigation
+description: Use when investigating bugs, failing tests, flaky behavior, crashes, regressions, build failures, unexpected behavior, long-running monitor/watch requests, or requests to debug/root-cause a problem before implementing fixes.
+---
+
+# Debug Investigation
+
+IF no work reference is in context and the task qualifies, open or resume the trace through `practices-show-me-your-work` before phase work.
+
+Investigate before fixing. Systematic debugging builds evidence, ranks hypotheses, proves a likely root cause, and only then changes code. The diagnosis claims no more cause than its evidence shows, and the next action it recommends targets the uncertainty that is left. The Lead owns that loop even when subagents inspect bounded slices.
+
+## Core Rules
+
+- No fixes before root-cause investigation.
+- Use hypothesis-driven debugging. Each theory names its supporting evidence, missing evidence, and smallest proof step.
+- Use subagents only for bounded investigation slices. The Lead owns synthesis, evidence checking, and the final diagnosis.
+- Use `practices-manage-agents` to pick, launch, and hand off to each helper; keep root-cause method and deterministic watcher guidance here.
+- Keep investigation read-only until the user explicitly asks to fix or a validated fix phase begins.
+- When three or more fix attempts for this symptom have already failed, stop patching. Write down the one premise every failed fix assumed, list every observed failure beside it, and decide whether that premise, or the design and architecture behind it, still holds before anyone tries another patch ([question the premise the failed fixes share](../principle-refine-mental-models/SKILL.md)).
+- For real debugging work with a clear symptom, target, and reproduction surface, write a repo-local debug artifact by default. Stay in chat only when the user explicitly asks for chat-only/no-files output or the debugging scope is still unclear.
+- When the symptom, target, or reproduction surface is unclear, build the missing bug packet in chat from the available evidence before creating any file. Ask one material question only when the missing field cannot be resolved from the provided context or read-only inspection. Once the scope is clear, write the artifact unless chat-only/no-files output was requested.
+- Debug artifacts are disposable investigation outputs. Later cleanup, preservation, or promotion of these documents belongs to `docs-maintain`. IF the investigation closes with large logs or run residue it created still on disk, load `practices-cleanup` once the debug artifact keeps their proving excerpts, and return the removed and held paths for the final report.
+- IF the work is long-running shell, service, or infra monitoring and artifact creation is allowed, load `references/background-monitoring.md` before proposing watcher shape, background jobs, JSONL/state files, helper agents, restarts, or secret handling, and return the watcher plan it leads to: the visible launch surface, the state files and the stop path, or its blocker report. When chat-only/no-files output was requested, do not create watcher files; provide a visible non-persistent plan or report a blocker if that cannot be done safely.
+
+## Workflow
+
+1. Build the bug packet:
+   - symptom
+   - target
+   - expected behavior
+   - actual behavior
+   - reproduction steps or why reproduction is not yet proven
+   - scope of impact
+   - evidence already available
+   - artifact path, or why no artifact is being written yet
+
+   Completion: each field is filled from the evidence at hand, or marked unknown with the read or the one question that would fill it.
+
+2. Create the debug artifact when appropriate:
+   - Use `<repo-root>/tmp/debug-workflows/<yyyy-mm-dd>-<repo>-<branch>-<bug-slug>/debug-investigation.md`.
+   - Keep it updated with evidence, hypotheses, proof steps, and commands.
+   - Skip file creation only for chat-only/no-files requests or unclear debugging scope.
+
+   Completion: the artifact exists at that path holding the bug packet, or the reason it wasn't written (chat-only output, or a scope still unclear) is stated.
+
+3. IF the monitoring is file-backed and long-running, load `references/background-monitoring.md`, keep the watcher read-only, harness-visible, cancellable, stateful, and redacted, and return its launch surface, state files and stop path, or the blocker report. For chat-only/no-files monitoring, provide a visible non-persistent plan or report a blocker; do not create watcher files.
+
+   Completion: monitoring that is file-backed and long-running has its watcher plan or blocker report, chat-only monitoring has its visible plan or blocker, and any other investigation skips this step.
+
+4. Reproduce or bound the failure:
+   - exact command, UI path, input, or event sequence
+   - deterministic, flaky, environment-specific, or not yet reproduced
+   - smallest known failing surface
+
+   Completion: the failure is reproduced by a stated command, path, input or sequence, or bounded with its classification and the smallest failing surface known.
+
+5. Trace the code path:
+   - read the failing boundary and its callers in current code, with the logs, stack traces, and runtime state of the real run, and name the line or event where expected and actual behavior first diverge; mark each link in that path as seen or inferred, and record a read or run that the sandbox, credentials, or network blocked as a gap in access ([read ground truth first](../principle-read-ground-truth-first/SKILL.md))
+   - separate source cause from downstream symptom
+
+   Completion: the line or event where expected and actual behavior first diverge is named, each link in the path is marked seen or inferred, and each blocked read or run is recorded as an access gap.
+
+6. Check recent changes and working examples:
+   - git diff, recent commits, changed config, dependency or schema drift
+   - nearby working code that follows the intended pattern
+
+   Completion: each recent change or drift that touches the traced path is named or ruled out, and a nearby working example is named, or none was found.
+
+7. Form ranked hypotheses:
+   - state one concrete root-cause hypothesis at a time
+   - list supporting evidence and missing evidence
+   - label how far the evidence reaches: an unconfirmed hypothesis when no opened source, log, or run shows the mechanism itself; a mechanism confirmed in source when you read it in the code but have not observed it acting in this incident; or that mechanism observed causing this failure, claimed only with a reproduction, log, or trace that shows it
+   - name the smallest proof step that would confirm the hypothesis or rule it out
+
+   Completion: the hypotheses are ranked, and each carries its supporting and missing evidence, its evidence label and its smallest proof step.
+
+8. Recommend next action:
+   - prove now
+   - fix next
+   - follow up later
+
+   Completion: one action is chosen, naming the ranked hypothesis it acts on, the proof step or fix it takes, and the uncertainty from step 7 it removes.
+
+## Subagent Use
+
+When the bug is broad, ambiguous, or multi-layered, fan out read-only 📚 Researcher Workers through `practices-manage-agents`, each with the same bug packet and a bounded assignment.
+
+Suggested lanes:
+
+- reproduction and scope
+- code path and failure seam
+- recent change and regression
+- proof plan and observability
+
+Every subagent packet must say:
+
+> Review only. Do not edit files, apply patches, stage changes, commit, or perform state-mutating actions. Return hypotheses, evidence, missing evidence, smallest proof step, and confidence.
+
+The Lead must discard weak speculation, merge duplicates, verify claims against the repo, and present only evidence-backed findings.
+
+## Fix Phase
+
+Only move from investigation to fixing when the root cause is sufficiently proven or the user explicitly accepts the remaining uncertainty.
+
+When fixing:
+
+- create or identify a failing test/reproduction first when a durable proof fits the scope; otherwise use the smallest real proof and name why a durable reproduction does not fit, or split the fix into a provable slice
+- make one root-cause fix at a time
+- avoid unrelated cleanup
+- run targeted verification, then broader relevant checks
+- if the fix fails, go back to investigation and add what the failure showed to the evidence before forming the next hypothesis; at the third failed attempt, the failed-premise rule in Core Rules applies
+
+## Output Shape
+
+Return:
+
+- bug packet summary
+- artifact path with a full clickable link (absolute path + line), or why no artifact was written
+- reproduction/coverage evidence
+- most likely root cause, labeled as an unconfirmed hypothesis, a source-confirmed mechanism, or an observed cause
+- alternate hypotheses, if still plausible
+- fastest proof step
+- recommended fix path
+- open questions or blockers
+
+IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `practices-show-me-your-work`.

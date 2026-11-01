@@ -325,5 +325,200 @@
       "line": 12,
       "pieceLine": 10
     }
+  },
+  {
+    "id": "held-out-h01",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+      "startLine": 65,
+      "endLine": 69,
+      "fieldLine": 65
+    },
+    "excerpt": {
+      "path": "held-out-h01/SKILL.md",
+      "line": 65,
+      "pieceLine": 65
+    }
+  },
+  {
+    "id": "held-out-h02",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/github-pr-state.md",
+      "startLine": 5,
+      "endLine": 16,
+      "fieldLine": 5
+    },
+    "excerpt": {
+      "path": "held-out-h02/references/github-pr-state.md",
+      "line": 5,
+      "pieceLine": 5
+    }
+  },
+  {
+    "id": "held-out-h03",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+      "startLine": 134,
+      "endLine": 158,
+      "fieldLine": 134
+    },
+    "excerpt": {
+      "path": "held-out-h03/SKILL.md",
+      "line": 134,
+      "pieceLine": 134
+    }
+  },
+  {
+    "id": "held-out-h04",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+      "startLine": 45,
+      "endLine": 73,
+      "fieldLine": 45
+    },
+    "excerpt": {
+      "path": "held-out-h04/references/demistify.md",
+      "line": 45,
+      "pieceLine": 45
+    }
+  },
+  {
+    "id": "held-out-h05",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md",
+      "startLine": 15,
+      "endLine": 26,
+      "fieldLine": 15
+    },
+    "excerpt": {
+      "path": "held-out-h05/references/project-verification-selection.md",
+      "line": 15,
+      "pieceLine": 15
+    }
+  },
+  {
+    "id": "held-out-h06",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "current",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+      "startLine": 121,
+      "endLine": 126,
+      "fieldLine": 121
+    },
+    "excerpt": {
+      "path": "held-out-h06/SKILL.md",
+      "line": 121,
+      "pieceLine": 121
+    }
+  },
+  {
+    "id": "held-out-h07",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "calls-and-placement-k003/held-out-h07/SKILL.md",
+      "startLine": 6,
+      "endLine": 7
+    },
+    "excerpt": {
+      "path": "held-out-h07/SKILL.md",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h08",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "calls-and-placement-k003/held-out-h08/SKILL.md",
+      "startLine": 6,
+      "endLine": 7
+    },
+    "excerpt": {
+      "path": "held-out-h08/SKILL.md",
+      "line": 6,
+      "pieceLine": 6
+    }
+  },
+  {
+    "id": "held-out-h09",
+    "set": "held-out",
+    "evidence": {
+      "kind": "section",
+      "field": "body"
+    },
+    "source": {
+      "class": "synthetic",
+      "repository": "ai-tools",
+      "revision": "1bab79d1d74376b651628925a2b2aabffd366d52",
+      "path": "calls-and-placement-k003/held-out-h09/SKILL.md",
+      "startLine": 6,
+      "endLine": 7
+    },
+    "excerpt": {
+      "path": "held-out-h09/SKILL.md",
+      "line": 6,
+      "pieceLine": 6
+    }
   }
 ]

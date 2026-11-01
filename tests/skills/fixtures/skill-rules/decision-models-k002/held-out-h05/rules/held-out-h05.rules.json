@@ -1,0 +1,25 @@
+{
+  "K001": {
+    "name": "case.held-out-h05",
+    "evidence": "step",
+    "questions": {
+      "question": {
+        "type": "choice",
+        "instructions": {
+          "check": "body",
+          "task": "Which condition best describes the item count?"
+        },
+        "criteria": {
+          "empty": "The count is zero.",
+          "partial": "The count is greater than zero and less than the requested amount.",
+          "complete": "The count equals the requested amount."
+        }
+      }
+    },
+    "decision": {
+      "start": "question",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}

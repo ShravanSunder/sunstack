@@ -1,0 +1,24 @@
+{
+  "K001": {
+    "name": "case.held-out-h04",
+    "evidence": "step",
+    "questions": {
+      "question": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Does the record list an assigned owner for the follow-up?"
+        },
+        "criteria": {
+          "true": "No follow-up owner is listed.",
+          "false": "A follow-up owner is listed."
+        }
+      }
+    },
+    "decision": {
+      "start": "question",
+      "steps": {}
+    },
+    "severity": "warn"
+  }
+}
