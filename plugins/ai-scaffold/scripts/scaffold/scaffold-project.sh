@@ -280,6 +280,46 @@ append_standards() {
     echo "APPEND: $instruction_file (Standards)"
 }
 
+# The stored declaration governs copies; the answer only renders a missing section.
+instruction_selects_owner_rules() {
+    local instruction_file="CLAUDE.md"
+    if [[ -e "AGENTS.md" || -L "AGENTS.md" ]]; then
+        instruction_file="AGENTS.md"
+    fi
+
+    if [[ ! -f "$instruction_file" || ! -r "$instruction_file" ]]; then
+        echo "SKIP: owner rule files ($instruction_file unreadable)"
+        return 1
+    fi
+
+    local standards_value
+    if ! standards_value="$(awk '
+        in_standards && /^## / { exit }
+        /^## Standards[[:space:]]*$/ { in_standards = 1; next }
+        in_standards && /^Whose standards: / {
+            print substr($0, length("Whose standards: ") + 1)
+            exit
+        }
+    ' "$instruction_file")"; then
+        echo "SKIP: owner rule files ($instruction_file unreadable)"
+        return 1
+    fi
+
+    local declared_standards
+    case "$standards_value" in
+        "the owner's (sunstack-dev)") declared_standards="owner" ;;
+        "this repository's own") declared_standards="own" ;;
+        *)
+            echo "SKIP: owner rule files ($instruction_file Standards line names neither set)"
+            return 1 ;;
+    esac
+
+    if [[ "$declared_standards" != "$STANDARDS_SET" ]]; then
+        echo "NOTE: $instruction_file says whose standards: $standards_value; --standards $STANDARDS_SET not applied"
+    fi
+    [[ "$declared_standards" == "owner" ]]
+}
+
 # Helper to copy a rule file (.md) and create a .mdc symlink pointing to it
 copy_rule() {
     local src="$1"
@@ -325,15 +365,20 @@ copy_template "$TEMPLATES_DIR/common/gitignore.template" ".gitignore"
 mkdir -p .config
 copy_template "$TEMPLATES_DIR/common/config/wt.toml.template" ".config/wt.toml"
 
+COPY_OWNER_RULES=false
+if instruction_selects_owner_rules; then
+    COPY_OWNER_RULES=true
+fi
+
 # Cursor rules
 echo ""
 echo "--- Cursor rules ---"
 mkdir -p .cursor/rules .cursor/hooks
 
-if [[ "$OWNER_STANDARDS" == "true" && "$INCLUDE_SWIFT" == "true" ]]; then
+if [[ "$COPY_OWNER_RULES" == "true" && "$INCLUDE_SWIFT" == "true" ]]; then
     copy_rule "$TEMPLATES_DIR/cursor/rules/swift-rules.md" ".cursor/rules"
 fi
-if [[ "$OWNER_STANDARDS" == "true" && "$IS_MONOREPO" == "true" ]]; then
+if [[ "$COPY_OWNER_RULES" == "true" && "$IS_MONOREPO" == "true" ]]; then
     copy_rule "$TEMPLATES_DIR/cursor/rules/monorepo-rules.md" ".cursor/rules"
 fi
 
