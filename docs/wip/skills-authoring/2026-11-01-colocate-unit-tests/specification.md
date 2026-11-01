@@ -47,12 +47,11 @@ Added in revision 5 (design review 2, F4), from the retired templates' shared te
 Added in revision 9, from the retired `monorepo-rules.md`, scoped to monorepos as that file was:
 
 22. In a monorepo, under the owner's set:
-    - `apps/` holds deployable applications, `packages/` shared libraries and `services/` backend services;
     - its Python projects are a uv workspace (`services/py_*/pyproject.toml` for services, `packages/py_*/pyproject.toml` for shared libraries, each with its importable package root), and its TypeScript projects a pnpm workspace;
     - `models/` hold pure data models, with no business logic, no dependency on repos or services and no database-specific DDL, and `repos/` interact with the database or external data sources;
     - imports are absolute, from the project or package root, never `../` or `./`;
     - editing `tsconfig.json`, `ruff.toml` or `pyrightconfig.json` waits for explicit permission.
-    The example service layout's `tests/` folder follows standard 9.
+    The example service layout's `tests/` folder follows standard 9. The `apps/`, `packages/` and `services/` layout stays where it is, in the generated CLAUDE.md's Structure section, and isn't restated here.
 
 Language forms, one home each:
 

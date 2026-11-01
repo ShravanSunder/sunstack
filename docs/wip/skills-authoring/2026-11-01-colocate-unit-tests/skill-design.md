@@ -229,7 +229,7 @@ The owner's direction, relayed by Sun on 1 Nov 2026 at 17:46 EST: "Cursor barely
 - **Tests, `:40`,** becomes:
   > A unit test sits beside the module it tests, in the form its language skill names. Swift is the exception: its unit tests live in the package's SPM `Tests/` targets, as `domain-swift` names, and the next three standards don't apply to them.
 - **Tests, `:42`:** "In a language whose skill names its form" becomes "In a language whose skill names a beside-the-module form". The next three standards are the `tests/` folder, move-on-touch and old-form-not-precedent; the Arrange/Act/Assert and pyramid bullets still apply to Swift.
-- **A new `### Monorepos` part,** after Files and modules, opening "In a monorepo:", with standard 22's five bullets. The service layout example goes in only if the writer finds that a reader needs it. The writer words it inside this boundary.
+- **A new `### Monorepos` part,** after Files and modules, opening "In a monorepo:", with standard 22's four bullets. The `apps/`/`packages/`/`services/` layout isn't one of them: it stays in the generated CLAUDE.md's Structure section, its one home. The service layout example goes in only if the writer finds that a reader needs it. The writer words it inside this boundary.
 - **Done when:** "in a language whose skill names its test form" becomes "in a language whose skill names a beside-the-module test form".
 
 **Run 4 addition, `domain-python`:** one line under Modules and tests:

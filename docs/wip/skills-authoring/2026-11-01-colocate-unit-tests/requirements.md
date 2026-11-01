@@ -90,7 +90,8 @@ The original colocation need still holds, with its owner quotes unchanged:
 
 - **Other repositories' instruction files.** sunstack-tools, agent-router, AgentStudio and others each get their Standards section in their own follow-up PR. This change adds it only to this repository's AGENTS.md.
 - **Already-scaffolded repositories.** Changing the plugin's templates changes nothing they already hold, and they get no migration here.
-- **A Swift or monorepo skill.** Those templates' clauses stay in their copied files (D10 and D11 in `skill-design.md`).
+- **Rules files in other repositories.** Their `.cursor/rules` and `.mdc` leftovers are cleaned in each repository's own PR, alongside its Standards section (revision 9, the owner's question 3). The earlier non-goal "a Swift or monorepo skill" is withdrawn by D23: `domain-swift` is run 6, and the monorepo clauses join the base.
+- **New standards.** Revision 9 moves the two rule files' existing clauses into skills (D23's clause table). It adds none, and widens none beyond monorepos (D23b).
 - **The owner's global instructions** (file-size limits, naming, testing policy) stay where they are.
 - **Behavior evaluation under pressure.** Pressure tasks are the owner's next stacked work, not part of this PR.
 - **Installing or refreshing plugins** on any machine.

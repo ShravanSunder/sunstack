@@ -23,7 +23,7 @@ Revision 9 (D23): rows marked "revision 9" replace the copied-rule cases. Revisi
 
 ## Script tests
 
-These are TypeScript integration tests in the repository's TypeScript test package, placed as its integration tests are, under base standard 9. Each runs `plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh` in a fresh temporary folder and asserts on the files left behind. Each case must fail on today's script. Each D22 case, apart from its marked control, must fail on `c21a5935`'s script. Revision 9: every case also asserts that the project has no `.cursor/rules` directory and no `*.mdc` file anywhere, and that `.cursor/hooks/hooks.json` and `.cursor/hooks/after-edit.sh` exist, which catches a fix that drops all of `.cursor`. Each revision 9 row whose expectation changed must fail on `724cf208`'s script.
+These are TypeScript integration tests in the repository's TypeScript test package, placed as its integration tests are, under base standard 9. Each runs `plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh` in a fresh temporary folder and asserts on the files left behind. Each case must fail on today's script. Revision 9: every case also asserts that the project has no `.cursor/rules` directory and no `*.mdc` file anywhere, and that `.cursor/hooks/hooks.json` and `.cursor/hooks/after-edit.sh` exist, which catches a fix that drops all of `.cursor`. Each revision 9 row whose expectation changed must fail on `724cf208`'s script.
 
 | Case | Setup | Pass when |
 | --- | --- | --- |
