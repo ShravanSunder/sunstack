@@ -90,3 +90,21 @@ highest risk / worst plausible failure if merged today: untested steering could 
 ship decision: **source-only**. The record supports the source comparison and next proof step, not shipping authorization. Required behavior proof and PR-readiness disposition stay with the Lead under the declared deferral and delivery boundary; the owner retains merge authority.
 
 Checkpoint: this uncommitted report is returned to the commissioning Lead through Router. No work root or posting grant was supplied, so the prior trace gap remains; no board mutation or stand-in was used.
+
+## Publication follow-up
+
+A subsequent live reread found PR #189 still open at `93e00845` with I1 unchanged. The reviewer has no PR-write grant. The exact replacement for the pending keyed-self-check bullet, placed under **Proof**, is:
+
+> **Keyed rules self-check:** the Lead ran the repository runner on both changed skills. The raw report is `uncertain`: 0 findings, 14 pass, 16 not applicable and 2 uncertain pieces. Independent review found the TypeScript description to contain loading situations only, and the Rust conversion paragraph to satisfy the observable-condition/action standard even when read as a branch. These human dispositions do not change the engine's saved status. Pressure behavior remains unverified.
+
+This is a proposed publication correction, not a posted PR edit. The Lead owns that correction and can return its saved result for the narrow reread. No further source review or new suite run is needed for I1. The separately assigned pressure-task work remains outside this review commission.
+
+## I1 closure
+
+**I1 is closed. Effective source-review verdict: `great`; ship decision remains `source-only`.**
+
+I reread the live PR description at head `8dbedca5d7ba1d61b6ab10ed49e23445598be78a`. The keyed self-check is now under **Proof**, with 0 findings, 14 pass, 16 not applicable and 2 unsure, and with the Lead's and independent reviewer's conforming dispositions. The stale pending keyed-check bullet is removed. Pressure behavior remains explicitly unverified, assigned to task #88, and caches remain not refreshed. The description does not claim the engine returned clean or that pressure proof ran.
+
+The only committed change from `93e00845` to `8dbedca5` is this review record; the implemented skills, versions, changelog and accepted design text are unchanged. Their existing source coverage therefore remains current without another suite or paid rule run. Original implementation-review findings: `1 → 0`, no recurrence. No open finding remains in the commissioned review. This closure does not promote the attributed suite receipts, deferred behavior proof or single-reviewer coverage to a stronger claim.
+
+Closure checkpoint: report and closure returned to the Lead through Router. The reviewer made no PR edit or commit. The earlier targeted-revision verdict above records the original review; this section supplies its final disposition.
