@@ -32,7 +32,7 @@ The owner's test layout holds in every package:
 - A unit test sits beside the module it tests and is named for it: `report.ts` and `report.test.ts` in the same folder. Every new unit test takes this form, whatever layout the repository has elsewhere.
 - The package's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`.
 
-When a change adds or edits a module's unit tests and that module's existing unit tests sit in another form, such as a `tests/` or `__tests__/` folder, move them beside the module in the same change. A repository-wide migration is its own PR. A folder that already holds unit tests is the old form, not precedent. A change once added two unit-test files for `lib/skill-rules/report.ts` to `lib/skill-rules/tests/`, because that folder already held the package's tests. The new tests belonged in `report.test.ts` beside the module, with that module's existing tests moved into it. Ask the owner only when the repository's own instructions or checks require a different layout.
+When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, such as a `tests/` or `__tests__/` folder, move them beside it in the same change. The move covers only that module's own unit tests. A repository-wide migration is its own PR. A folder that already holds unit tests is the old form, not precedent. A change once added two unit-test files for `lib/skill-rules/report.ts` to `lib/skill-rules/tests/`, because that folder already held the package's tests. The new tests belonged in `report.test.ts` beside the module, with that module's existing tests moved into it. Ask the owner only when the repository's own instructions or checks require a different layout.
 ```
 
 Signs list, new last line:
@@ -71,7 +71,7 @@ The owner's test layout holds in every crate:
 
 - The crate's `tests/` folder holds only tests that aren't unit tests, `tests/integration/` and `tests/e2e/`, and the helpers they share, in `tests/support/`. Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
 
-When a change adds or edits a module's unit tests and that module's existing unit tests sit in another form, such as an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`, move them into its `_test.rs` in the same change. A repository-wide migration is its own PR. Ask the owner only when the repository's own instructions or checks require a different layout.
+When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, such as an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`, move them into its `_test.rs` in the same change. The move covers only that module's own unit tests. A repository-wide migration is its own PR. Ask the owner only when the repository's own instructions or checks require a different layout.
 ````
 
 The section's second paragraph, on async tests, stays as it is. The `test-support` bullet under "Crates and dependencies" (`:120`) already allows a crate-only helper "in a `#[cfg(test)]` module or under `tests/`", so it agrees and stays.
@@ -100,7 +100,7 @@ Signs list, new last line:
   - The signs line is the red flag in the agent's own rationalization ("the folder already has tests there").
 - **`generalization.md`:** the rule is the owner's adopted layout, stated as theirs, with its transfer cases in the specification; the worked case carries no PR number.
 - **`main-path.md`:** no new branch. Two conditions, each observable and each with its action:
-  - **The conversion:** a touched module's unit tests sit in another form, so they move to the standard form.
+  - **The conversion:** a change edits a module, production code or tests, whose unit tests sit in another form, so that module's unit tests move to the standard form.
   - **The one ask:** the repository's own instructions or checks require another layout, so the agent asks the owner.
 - **`calls-and-placement.md`:** one home per language, no reference.
 
@@ -122,6 +122,7 @@ None. The change edits Markdown teaching only: nothing that executes, reaches th
 | D7 (struck 1 Nov 2026 by D7a) | TypeScript keeps "ask the owner before adding the test" when the repository's layout differs; Rust asks only when the repository's own instructions or checks require another layout | The owner's original "of repo disagrees in convention ask me" stands for TypeScript, where no form ruling was made. For Rust the owner ruled on exactly the disagreeing-repository case, so the remaining ask is the conflict the ruling doesn't settle |
 | D7a, 1 Nov 2026, supersedes D7 | Both languages: the form is fixed whatever the repository does elsewhere, and the one ask is "Ask the owner only when the repository's own instructions or checks require a different layout." | The Lead's correction, quoting the owner: "in typescript its .test.ts" and "dude i said a already beside teh fuckign file coloclated", which the owner doesn't want asked again |
 | D1b, 1 Nov 2026, supersedes D1a's "leave the old ones" | A module the change gives or edits unit tests for has its existing unit tests in another form moved to the standard form in the same change; a repository-wide migration is its own PR | The owner's ruling that the existing ones get converted, relayed by the Lead (`01a196e1-dd48…`) |
+| D1c, 1 Nov 2026, narrows D1b's trigger | Any change to the module, its production code or its tests, triggers the move, not only a change to its tests; the move covers only that module's own unit tests | The Lead's ruling (`01a196e6-254a…`): the owner wants old layouts to converge and not be repeated, and a code-only edit that leaves tests in `tests/` keeps the old layout alive |
 
 ## Coordination
 

@@ -4,7 +4,7 @@
 
 - **Class:** `behavior-changing`. It adds a standard to two domain skills' teaching (`domain-typescript/SKILL.md`, `domain-rust/SKILL.md`): where a test file goes. An edit to `SKILL.md` prose is behavior-changing whatever its size.
 - **Run kind:** `update`, two runs, one per skill.
-- **Reusable behavior:** these skills help agents reliably put each new test where the owner's layout says, when they add or move a TypeScript or Rust test. A unit test goes beside its module. Integration tests, end-to-end tests and test helpers go in the package's `tests/` folder. When the repository's layout differs, the agent asks the owner.
+- **Reusable behavior:** these skills help agents reliably put each new test where the owner's layout says, when they add or move a TypeScript or Rust test. A unit test goes beside its module. Integration tests, end-to-end tests and test helpers go in the package's `tests/` folder. Ask the owner only when the repository's own instructions or checks require a different layout.
 
 ## The need, in the owner's words
 
@@ -38,7 +38,7 @@ It puts only integration tests, end-to-end tests and their helpers under the pac
 
 The form holds whatever layout the repository has elsewhere:
 - A new unit test never goes into an existing `tests/` folder, `__tests__/` folder or in-file test block.
-- When the change adds or edits a module's unit tests and that module's existing unit tests sit in another form, the change moves them to the standard form.
+- When the change edits a module (its production code or its tests) and that module's existing unit tests sit in another form, the change moves them to the standard form. The move covers only that module's own unit tests.
 - The agent asks the owner only when the repository's own instructions or checks require a different layout.
 
 ## Who reaches the skill, and when

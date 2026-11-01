@@ -5,7 +5,7 @@
 - `domain-typescript` tells an agent adding a TypeScript unit test to put it beside its module as `<module>.test.ts`. That is the one form, whatever the repository does elsewhere.
 - `domain-rust` tells an agent adding a Rust unit test to put it beside its module as `<module>_test.rs`, declared from that module with `#[cfg(test)] #[path = "<module>_test.rs"] mod tests;`. That is the one form, whatever the crate does elsewhere.
 - Both tell the agent that the package's or crate's `tests/` folder holds only non-unit tests (`tests/integration/`, `tests/e2e/`) and the helpers they share (`tests/support/`).
-- Both tell the agent to convert a touched module's unit tests that sit in another form, in the same change, and to leave a repository-wide migration to its own PR.
+- Both tell the agent that any change to a module, production code or tests, converts that module's own unit tests that sit in another form, in the same change, and to leave a repository-wide migration to its own PR.
 - Both tell the agent to ask the owner only when the repository's own instructions or checks require a different layout.
 - Both name the rationalization "the folder already has tests there" in their "Signs you skipped it" list.
 
@@ -14,7 +14,7 @@
 1. A TypeScript unit test sits beside the module it tests and is named for it: `report.ts` with `report.test.ts`. Every new unit test takes this form, whatever layout the repository has elsewhere.
 2. A Rust unit test sits beside the module it tests in a sibling `<module>_test.rs`, declared from that module with `#[cfg(test)] #[path = "<module>_test.rs"] mod tests;`, so it reaches the module's private items. Every new unit test takes this form, whatever the crate's other modules do.
 3. A package's `tests/` folder holds only tests that aren't unit tests, in `tests/integration/` and `tests/e2e/`, and the helpers those tests share, in `tests/support/`.
-4. When a change adds or edits a module's unit tests and that module's existing unit tests sit in another form, the change moves them to the standard form. Other forms include a `tests/` or `__tests__/` folder, `foo/tests.rs`, an in-file `mod tests { … }` block and `_tests.rs`. A repository-wide migration is its own PR.
+4. When a change edits a module, its production code or its tests, and that module's existing unit tests sit in another form, the change moves them to the standard form. The move covers only that module's own unit tests. Other forms include a `tests/` or `__tests__/` folder, `foo/tests.rs`, an in-file `mod tests { … }` block and `_tests.rs`. A repository-wide migration is its own PR.
 5. Ask the owner only when the repository's own instructions or checks require a different layout.
 
 Where each standard lives:
