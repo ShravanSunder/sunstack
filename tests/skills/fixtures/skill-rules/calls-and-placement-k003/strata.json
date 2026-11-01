@@ -1,0 +1,17 @@
+{
+  "case-001": "own loads, several",
+  "case-002": "no loads, inline command",
+  "case-003": "no loads, table row",
+  "case-004": "S4 control",
+  "case-005": "S4 control",
+  "case-006": "loaded file's section",
+  "case-007": "loaded file's section",
+  "case-008": "platform reference",
+  "case-009": "quoted worked example",
+  "case-010": "tool plugin",
+  "case-011": "tool plugin",
+  "case-012": "cut",
+  "case-013": "inline command beside own loads (A1)",
+  "case-014": "missing load target",
+  "case-015": "product named in prose"
+}

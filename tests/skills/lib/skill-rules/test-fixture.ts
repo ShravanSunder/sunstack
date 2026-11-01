@@ -329,14 +329,18 @@ export const askingRule = {
   decision: { start: "verdict", steps: { verdict: askStep } },
 };
 
+/** A scripted choice: its label alone (probability 1), or its label with the probability it gets. */
+export type ScriptedChoice = string | { readonly label: string; readonly probability: number };
+
 /**
  * A scripted decision model. A noul question answers its named probability, else 0.95; a choice
- * question answers its named label in `choices`, else its first label.
+ * question answers its named label in `choices`, else its first label, with probability 1 unless
+ * the script gives one, the rest shared evenly among the other labels.
  */
 export async function withJudge<TValue>(
   probabilities: Readonly<Record<string, number>>,
   action: (endpoint: string, requests: unknown[]) => Promise<TValue>,
-  choices: Readonly<Record<string, string>> = {},
+  choices: Readonly<Record<string, ScriptedChoice>> = {},
 ): Promise<TValue> {
   const requests: unknown[] = [];
   const questionSchema = z.discriminatedUnion("type", [
@@ -357,17 +361,20 @@ export async function withJudge<TValue>(
           if (question.type === "noul")
             return [name, { type: "noul", noul: probabilities[name] ?? 0.95 }];
           const labels = Object.keys(question.criteria);
-          const choice = choices[name] ?? labels[0];
+          const scripted = choices[name] ?? labels[0];
+          const choice = typeof scripted === "string" ? scripted : scripted?.label;
+          const chosen = typeof scripted === "object" ? scripted.probability : 1;
           if (!choice || !labels.includes(choice))
             throw new Error(`Choice question ${name} has no label ${String(choice)}`);
+          const others = labels.length > 1 ? (1 - chosen) / (labels.length - 1) : 0;
           return [
             name,
             {
               type: "choice",
               choice,
-              confidence: 1,
+              confidence: chosen,
               probabilities: Object.fromEntries(
-                labels.map((label) => [label, label === choice ? 1 : 0]),
+                labels.map((label) => [label, label === choice ? chosen : others]),
               ),
             },
           ];

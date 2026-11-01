@@ -168,7 +168,7 @@ describe("rule evaluations through the C2 CLI results contract", () => {
     const original = labelledFixture();
     const loaded: LoadedRuleCase = {
       ...original,
-      label: { outcome: "finding", line: 3, source: "owner" },
+      label: { outcome: "finding", line: 3, lines: [3], source: "owner" },
     };
     await withJudge({ names_moment: 0.1 }, async (endpoint) => {
       const output = await evaluateLabelledCase({
@@ -177,7 +177,13 @@ describe("rule evaluations through the C2 CLI results contract", () => {
         engine: enginePath,
         reportDirectory: path.join(root, "evaluation"),
       });
-      expect(output).toMatchObject({ observed: "finding", score: "matched", gap: null });
+      expect(output).toMatchObject({
+        observed: "finding",
+        score: "matched",
+        gap: null,
+        anchor: { class: "default", line: 3, inLabelledLines: true },
+        locator: null,
+      });
     });
   });
 
@@ -194,5 +200,70 @@ describe("rule evaluations through the C2 CLI results contract", () => {
       expect(output.engineExit).toBe(3);
       expect(output.incompleteParts).toBeGreaterThan(0);
     });
+  });
+});
+
+const anchorFixturesRoot = fileURLToPath(
+  new URL("../../../fixtures/run-skill-rules/eval-anchors", import.meta.url),
+);
+function anchorFixture(): LoadedRuleCase {
+  const loaded = loadRuleCases(anchorFixturesRoot).find((item) => item.definition.id === "case-001");
+  if (!loaded?.label) throw new Error("Anchor fixture missing");
+  return loaded;
+}
+
+describe("a located finding's outcome and anchor are scored apart", () => {
+  const routesIntoProduct = { routes_product: 0.95, example_or_own_infrastructure: 0.1 };
+  test.each([
+    ["L13", "resolved-in-lines", 13, 1],
+    ["L12", "resolved-elsewhere", 12, 1],
+  ] satisfies [string, string, number, number][])(
+    "the locator choosing %s anchors %s",
+    async (choice, anchorClass, line, probability) => {
+      const root = createFixture();
+      await withJudge(
+        routesIntoProduct,
+        async (endpoint) => {
+          const output = await evaluateLabelledCase({
+            loaded: anchorFixture(),
+            kitRules: copyKit(root, endpoint),
+            engine: enginePath,
+            reportDirectory: path.join(root, "evaluation"),
+          });
+          expect(output).toMatchObject({
+            rule: "calls-and-placement-k003",
+            stratum: "inline route",
+            observed: "finding",
+            score: "matched",
+            anchor: { class: anchorClass, line },
+            locator: { label: choice, probability },
+          });
+        },
+        { product_line: choice },
+      );
+    },
+  );
+
+  test("a locator below its bar leaves the default anchor, and its reading is still reported", async () => {
+    const root = createFixture();
+    await withJudge(
+      routesIntoProduct,
+      async (endpoint) => {
+        const output = await evaluateLabelledCase({
+          loaded: anchorFixture(),
+          kitRules: copyKit(root, endpoint),
+          engine: enginePath,
+          reportDirectory: path.join(root, "evaluation"),
+        });
+        expect(output).toMatchObject({
+          observed: "finding",
+          score: "matched",
+          anchor: { class: "default", inLabelledLines: false },
+          locator: { label: "L13", probability: 0.3 },
+        });
+        expect(output.anchor?.line).not.toBe(13);
+      },
+      { product_line: { label: "L13", probability: 0.3 } },
+    );
   });
 });

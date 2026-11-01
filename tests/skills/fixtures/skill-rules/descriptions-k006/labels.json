@@ -17,6 +17,7 @@
   "case-004": {
     "outcome": "finding",
     "line": 3,
+    "lines": [3],
     "source": "sol-settled"
   }
 }

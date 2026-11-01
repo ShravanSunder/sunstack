@@ -6,19 +6,37 @@ import { describeEval } from "vitest-evals";
 import {
   loadRuleCases,
   parseHeldOutFlag,
+  parseRuleFolders,
   selectRuleCases,
 } from "../lib/skill-rules/evaluation/skill-rules-evaluation-cases.ts";
 import { createRuleEvaluationHarness } from "../lib/skill-rules/evaluation/skill-rules-evaluation-harness.ts";
 import type { CaseEvaluationOutput } from "../lib/skill-rules/evaluation/skill-rules-evaluation-engine.ts";
-import { summarizeRuleScores } from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
-import type { CaseScore, ScoredRuleCase } from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
+import {
+  summarizeRuleScores,
+  summarizeStrata,
+} from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
+import type {
+  OutcomeScore,
+  ScoredRuleCase,
+} from "../lib/skill-rules/evaluation/skill-rules-evaluation-scoring.ts";
 
 const repositoryRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const heldOut = parseHeldOutFlag(process.env.SKILL_RULES_HELD_OUT);
+const folders = parseRuleFolders(process.env.SKILL_RULES_FOLDERS);
 const selected = selectRuleCases(
   loadRuleCases(path.join(repositoryRoot, "tests/skills/fixtures/skill-rules")),
   heldOut,
-);
+).filter((item) => folders === null || folders.includes(item.ruleFolder));
+if (folders) {
+  const known = new Set(
+    loadRuleCases(path.join(repositoryRoot, "tests/skills/fixtures/skill-rules")).map(
+      (item) => item.ruleFolder,
+    ),
+  );
+  const unknown = folders.filter((folder) => !known.has(folder));
+  if (unknown.length > 0)
+    throw new Error(`SKILL_RULES_FOLDERS names no fixture folder: ${unknown.join(", ")}`);
+}
 const labelled = selected.filter((item) => item.label !== undefined);
 const unlabelled = selected.filter((item) => item.label === undefined);
 const engine =
@@ -35,10 +53,10 @@ const reportDirectory = mkdtempSync(
 );
 const results: CaseEvaluationOutput[] = [];
 console.log(
-  `Rule evaluations: ${heldOut ? "held-out only" : "development only"}; ${labelled.length} labelled, ${unlabelled.length} unlabelled. Reports: ${reportDirectory}`,
+  `Rule evaluations: ${heldOut ? "held-out only" : "development only"}${folders ? ` in ${folders.join(", ")}` : ""}; ${labelled.length} labelled, ${unlabelled.length} unlabelled. Reports: ${reportDirectory}`,
 );
 
-function scoreFromOutput(output: CaseEvaluationOutput): CaseScore {
+function outcomeFromOutput(output: CaseEvaluationOutput): OutcomeScore {
   if (output.score === "gap") return { kind: "gap", reason: output.gap };
   return { kind: output.score };
 }
@@ -52,8 +70,10 @@ afterAll(() => {
     return {
       rule: output.rule,
       id: output.id,
+      stratum: output.stratum,
       label: loaded.label,
-      score: scoreFromOutput(output),
+      score: { outcome: outcomeFromOutput(output), anchor: output.anchor },
+      locator: output.locator,
     };
   });
   const executionGaps = labelled
@@ -77,6 +97,7 @@ afterAll(() => {
       scored,
       selected.map((item) => item.ruleFolder),
     ),
+    strata: summarizeStrata(scored),
     results,
     runGaps: results.filter(
       (output) =>

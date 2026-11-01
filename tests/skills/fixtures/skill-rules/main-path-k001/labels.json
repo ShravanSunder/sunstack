@@ -7,6 +7,7 @@
   "case-002": {
     "outcome": "finding",
     "line": 7,
+    "lines": [7],
     "source": "sol-settled"
   },
   "case-003": {
@@ -32,6 +33,7 @@
   "case-007": {
     "outcome": "finding",
     "line": 3,
+    "lines": [3],
     "source": "sol-settled"
   },
   "case-008": {
@@ -92,6 +94,7 @@
   "case-019": {
     "outcome": "finding",
     "line": 119,
+    "lines": [119],
     "source": "sol-settled"
   },
   "case-020": {

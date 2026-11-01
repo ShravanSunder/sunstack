@@ -7,7 +7,7 @@ import { lintReportSchema } from "../report.ts";
 import type { LintReport, PieceDecision } from "../report.ts";
 import type { LoadedRuleCase, RuleLabel } from "./skill-rules-evaluation-cases.ts";
 import { scoreRuleCase } from "./skill-rules-evaluation-scoring.ts";
-import type { CaseScore } from "./skill-rules-evaluation-scoring.ts";
+import type { AnchorScore, LocatorReading, OutcomeScore } from "./skill-rules-evaluation-scoring.ts";
 
 const spanSchema = z.object({ start_line: z.number(), end_line: z.number() }).passthrough();
 const evidencePieceSchema = z
@@ -26,7 +26,26 @@ const configSchema = z
     evidence: z.object({ ast_grep: z.string() }).passthrough(),
   })
   .passthrough();
-const ruleEntrySchema = z.object({ name: z.string(), evidence: z.string() }).passthrough();
+const ruleEntrySchema = z
+  .object({
+    name: z.string(),
+    evidence: z.string(),
+    decision: z
+      .object({ steps: z.record(z.string(), z.record(z.string(), z.unknown())) })
+      .passthrough()
+      .optional(),
+  })
+  .passthrough();
+const locatedRouteSchema = z
+  .object({ finding: z.string(), locate: z.object({ name: z.string() }).passthrough() })
+  .passthrough();
+const choiceAnswerSchema = z
+  .object({
+    selected_label: z.string(),
+    confidence: z.number().optional(),
+    probabilities: z.record(z.string(), z.number()).optional(),
+  })
+  .passthrough();
 const ruleTopics: Readonly<Record<string, string>> = {
   descriptions: "descriptions-and-invocation",
   generalization: "generalization",
@@ -39,7 +58,7 @@ const ruleTopics: Readonly<Record<string, string>> = {
 export function resolveRuleIdentity(
   ruleFolder: string,
   kitRules: string,
-): { readonly rule: string; readonly marker: string } {
+): { readonly rule: string; readonly marker: string; readonly locators: readonly string[] } {
   const identity = /^(.*)-k([0-9]{3})$/.exec(ruleFolder);
   const family = identity?.[1];
   const suffix = identity?.[2];
@@ -51,7 +70,13 @@ export function resolveRuleIdentity(
     .parse(JSON.parse(readFileSync(path.join(kitRules, `${topic}.rules.json`), "utf8")));
   const entry = entries[marker];
   if (!entry) throw new Error(`No ${marker} entry in ${topic}`);
-  return { rule: entry.name, marker };
+  const locators = Object.values(entry.decision?.steps ?? {}).flatMap((step) =>
+    [step["yes"], step["no"], step["uncertain"], ...Object.values(z.record(z.string(), z.unknown()).catch({}).parse(step["routes"]))].flatMap((route) => {
+      const located = locatedRouteSchema.safeParse(route);
+      return located.success ? [located.data.locate.name] : [];
+    }),
+  );
+  return { rule: entry.name, marker, locators };
 }
 
 export function selectLabelledPiece(
@@ -121,6 +146,7 @@ interface CaseEvaluationRequest {
 type CaseEvaluationDetails = {
   rule: string;
   id: string;
+  stratum: string;
   labelSource: RuleLabel["source"];
   expected: RuleLabel["outcome"];
   observed: PieceDecision["outcome"];
@@ -130,9 +156,12 @@ type CaseEvaluationDetails = {
   engineExit: number | null;
   incompleteParts: number;
   uncertainPieces: number;
+  /** For a labelled finding the rule also found: its anchor class and line, scored apart. */
+  anchor: AnchorScore | null;
+  locator: LocatorReading | null;
 };
 export type CaseEvaluationOutput = CaseEvaluationDetails &
-  ({ score: "gap"; gap: string } | { score: Exclude<CaseScore["kind"], "gap">; gap: null });
+  ({ score: "gap"; gap: string } | { score: Exclude<OutcomeScore["kind"], "gap">; gap: null });
 
 export async function evaluateLabelledCase(
   request: CaseEvaluationRequest,
@@ -216,19 +245,34 @@ export async function evaluateLabelledCase(
       throw new Error(
         `${loaded.ruleFolder}/${loaded.definition.id}: expected one exact per-piece result, found ${matching.length}`,
       );
-    const findingLines = report.findings
-      .filter(
-        (finding) =>
-          finding.rule === identity.rule &&
-          finding.file === checkedFile &&
-          finding.line >= piece.where.first_line &&
-          finding.line <= piece.where.last_line,
-      )
-      .map((finding) => finding.line);
-    const score = scoreRuleCase(loaded.label, { outcome: result.outcome, findingLines });
+    // A rule gives at most one finding per piece; a located one may anchor anywhere inside it.
+    const finding = report.findings.find(
+      (candidate) =>
+        candidate.rule === identity.rule &&
+        candidate.file === checkedFile &&
+        candidate.line >= piece.where.first_line &&
+        candidate.line <= piece.where.last_line,
+    );
+    const score = scoreRuleCase(loaded.label, {
+      outcome: result.outcome,
+      finding: finding ? { line: finding.line, anchor: finding.anchor } : null,
+    });
+    const locatorAnswer = identity.locators
+      .map((name) => choiceAnswerSchema.safeParse(result.answers?.[name]))
+      .find((parsed) => parsed.success);
+    const locator: LocatorReading | null = locatorAnswer?.success
+      ? {
+          label: locatorAnswer.data.selected_label,
+          probability:
+            locatorAnswer.data.probabilities?.[locatorAnswer.data.selected_label] ??
+            locatorAnswer.data.confidence ??
+            Number.NaN,
+        }
+      : null;
     const details: CaseEvaluationDetails = {
       rule: loaded.ruleFolder,
       id: loaded.definition.id,
+      stratum: loaded.stratum,
       labelSource: loaded.label.source,
       expected: loaded.label.outcome,
       observed: result.outcome,
@@ -238,10 +282,12 @@ export async function evaluateLabelledCase(
       engineExit: evaluated.exit,
       incompleteParts: report.incomplete.length,
       uncertainPieces: report.uncertain.length,
+      anchor: score.anchor,
+      locator,
     };
-    return score.kind === "gap"
-      ? { ...details, score: "gap", gap: score.reason }
-      : { ...details, score: score.kind, gap: null };
+    return score.outcome.kind === "gap"
+      ? { ...details, score: "gap", gap: score.outcome.reason }
+      : { ...details, score: score.outcome.kind, gap: null };
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

@@ -34,21 +34,36 @@ export const ruleCaseSchema = z.object({
   }),
 });
 export type RuleCase = z.infer<typeof ruleCaseSchema>;
-const labelSourceSchema = z.enum(["owner", "sol-settled"]);
-export const ruleLabelSchema = z.discriminatedUnion("outcome", [
-  z.object({ outcome: z.literal("finding"), line: positiveLineSchema, source: labelSourceSchema }),
-  z.object({
-    outcome: z.enum(["pass", "not_applicable"]),
-    line: positiveLineSchema.nullable(),
-    source: labelSourceSchema,
-  }),
-]);
+// labelers-agreed: two blind labelers, independent of the rule and of each other, gave the same label.
+const labelSourceSchema = z.enum(["owner", "sol-settled", "labelers-agreed"]);
+// A finding label names every acceptable anchor line in `lines`, its best one (`line`) among them, so a
+// located finding can be scored for its outcome and its anchor apart.
+export const ruleLabelSchema = z
+  .discriminatedUnion("outcome", [
+    z.object({
+      outcome: z.literal("finding"),
+      line: positiveLineSchema,
+      lines: z.array(positiveLineSchema).min(1),
+      source: labelSourceSchema,
+    }),
+    z.object({
+      outcome: z.enum(["pass", "not_applicable"]),
+      line: positiveLineSchema.nullable(),
+      source: labelSourceSchema,
+    }),
+  ])
+  .superRefine((label, context) => {
+    if (label.outcome === "finding" && !label.lines.includes(label.line))
+      context.addIssue({ code: "custom", message: "a finding label's line must be one of its lines" });
+  });
 export type RuleLabel = z.infer<typeof ruleLabelSchema>;
 export interface LoadedRuleCase {
   readonly ruleFolder: string;
   readonly folder: string;
   readonly definition: RuleCase;
   readonly label: RuleLabel | undefined;
+  /** The stratum the case was picked for, from the folder's strata.json, or "unassigned". */
+  readonly stratum: string;
 }
 
 export function loadRuleCases(fixturesRoot: string): readonly LoadedRuleCase[] {
@@ -65,16 +80,30 @@ export function loadRuleCases(fixturesRoot: string): readonly LoadedRuleCase[] {
     const labels = existsSync(labelsFile)
       ? z.record(z.string(), ruleLabelSchema).parse(JSON.parse(readFileSync(labelsFile, "utf8")))
       : {};
+    // Strata sit apart from cases.json so that adding them never touches what blind labelers read.
+    const strataFile = path.join(folder, "strata.json");
+    const strata = existsSync(strataFile)
+      ? z.record(z.string(), z.string().min(1)).parse(JSON.parse(readFileSync(strataFile, "utf8")))
+      : {};
     const identities = new Set<string>();
     for (const definition of cases) {
       if (identities.has(definition.id))
         throw new Error(`${casesFile}: duplicate case ${definition.id}`);
       identities.add(definition.id);
-      loaded.push({ ruleFolder: directory.name, folder, definition, label: labels[definition.id] });
+      loaded.push({
+        ruleFolder: directory.name,
+        folder,
+        definition,
+        label: labels[definition.id],
+        stratum: strata[definition.id] ?? "unassigned",
+      });
     }
     for (const identity of Object.keys(labels))
       if (!identities.has(identity))
         throw new Error(`${labelsFile}: label has no case ${identity}`);
+    for (const identity of Object.keys(strata))
+      if (!identities.has(identity))
+        throw new Error(`${strataFile}: stratum has no case ${identity}`);
   }
   return loaded;
 }
@@ -90,4 +119,13 @@ export function parseHeldOutFlag(value: string | undefined): boolean {
   if (value === undefined || value === "0") return false;
   if (value === "1") return true;
   throw new Error("SKILL_RULES_HELD_OUT must be 1 (held-out only), 0 or unset (development only)");
+}
+
+/** An optional comma-separated list of rule folders to evaluate; unset or empty means every folder. */
+export function parseRuleFolders(value: string | undefined): readonly string[] | null {
+  if (value === undefined || value.trim() === "") return null;
+  const folders = value.split(",").map((folder) => folder.trim());
+  if (folders.some((folder) => !/^[a-z-]+-k[0-9]{3}$/.test(folder)))
+    throw new Error("SKILL_RULES_FOLDERS must list rule folders such as calls-and-placement-k003");
+  return folders;
 }

@@ -6,10 +6,16 @@ import { afterEach, describe, expect, test } from "vitest";
 import {
   loadRuleCases,
   parseHeldOutFlag,
+  parseRuleFolders,
   ruleLabelSchema,
   selectRuleCases,
 } from "../evaluation/skill-rules-evaluation-cases.ts";
-import { scoreRuleCase, summarizeRuleScores } from "../evaluation/skill-rules-evaluation-scoring.ts";
+import {
+  scoreRuleCase,
+  summarizeRuleScores,
+  summarizeStrata,
+} from "../evaluation/skill-rules-evaluation-scoring.ts";
+import type { ScoredRuleCase } from "../evaluation/skill-rules-evaluation-scoring.ts";
 import { pieceDecisionSchema } from "../report.ts";
 import { selectLabelledPiece } from "../evaluation/skill-rules-evaluation-engine.ts";
 
@@ -45,6 +51,15 @@ describe("rule-case loading and selection", () => {
       "case-003",
     ]);
     expect(() => parseHeldOutFlag("true")).toThrow("SKILL_RULES_HELD_OUT");
+  });
+  test("a rule-folder filter names folders exactly, and unset means every folder", () => {
+    expect(parseRuleFolders(undefined)).toBeNull();
+    expect(parseRuleFolders("")).toBeNull();
+    expect(parseRuleFolders("calls-and-placement-k003, descriptions-k007")).toEqual([
+      "calls-and-placement-k003",
+      "descriptions-k007",
+    ]);
+    expect(() => parseRuleFolders("placement")).toThrow("SKILL_RULES_FOLDERS");
   });
   test("a missing labels file does not create labels or scores", () => {
     const root = copyFixture();
@@ -118,57 +133,87 @@ describe("exact decision scoring", () => {
     ["pass", "not_applicable", "gap"],
     ["not_applicable", "pass", "gap"],
   ])("label %s observed %s is %s", (expected, actual, kind) => {
-    const label = ruleLabelSchema.parse({
-      outcome: expected,
-      line: expected === "finding" ? 3 : null,
-      source: "owner",
-    });
+    const label = ruleLabelSchema.parse(
+      expected === "finding"
+        ? { outcome: expected, line: 3, lines: [3], source: "owner" }
+        : { outcome: expected, line: null, source: "owner" },
+    );
     const result = pieceDecisionSchema.shape.outcome.parse(actual);
-    expect(scoreRuleCase(label, { outcome: result, findingLines: [3] }).kind).toBe(kind);
+    const finding = actual === "finding" ? { line: 3, anchor: "default" as const } : null;
+    expect(scoreRuleCase(label, { outcome: result, finding }).outcome.kind).toBe(kind);
   });
-  test("a finding at the wrong line never scores as a match", () => {
-    const label = ruleLabelSchema.parse({ outcome: "finding", line: 3, source: "sol-settled" });
-    expect(scoreRuleCase(label, { outcome: "finding", findingLines: [9] })).toMatchObject({
-      kind: "gap",
-      reason: expect.stringContaining("wrong line"),
+  test("a found finding matches its outcome wherever it lands, and its anchor is scored apart", () => {
+    const label = ruleLabelSchema.parse({
+      outcome: "finding",
+      line: 17,
+      lines: [17, 18],
+      source: "labelers-agreed",
     });
-    expect(scoreRuleCase(label, { outcome: "finding", findingLines: [3] })).toEqual({
-      kind: "matched",
+    const at = (line: number, anchor: "resolved" | "default") =>
+      scoreRuleCase(label, { outcome: "finding", finding: { line, anchor } });
+    expect(at(18, "resolved")).toEqual({
+      outcome: { kind: "matched" },
+      anchor: { class: "resolved-in-lines", line: 18, inLabelledLines: true },
+    });
+    expect(at(9, "resolved")).toEqual({
+      outcome: { kind: "matched" },
+      anchor: { class: "resolved-elsewhere", line: 9, inLabelledLines: false },
+    });
+    expect(at(7, "default")).toEqual({
+      outcome: { kind: "matched" },
+      anchor: { class: "default", line: 7, inLabelledLines: false },
+    });
+    expect(scoreRuleCase(label, { outcome: "pass", finding: null })).toEqual({
+      outcome: { kind: "missed" },
+      anchor: null,
     });
   });
-  test("per-rule totals retain every label source and explicit gap", () => {
-    const label = ruleLabelSchema.parse({ outcome: "pass", line: null, source: "owner" });
-    const cases = [
+  test("a finding label needs its acceptable lines, with its best line among them", () => {
+    expect(() => ruleLabelSchema.parse({ outcome: "finding", line: 3, source: "owner" })).toThrow();
+    expect(() =>
+      ruleLabelSchema.parse({ outcome: "finding", line: 3, lines: [4], source: "owner" }),
+    ).toThrow("one of its lines");
+    expect(
+      ruleLabelSchema.parse({ outcome: "finding", line: 3, lines: [2, 3], source: "labelers-agreed" }),
+    ).toMatchObject({ lines: [2, 3] });
+  });
+  test("every label the repository keeps parses under the migrated schema", () => {
+    const fixtures = fileURLToPath(new URL("../../../fixtures/skill-rules", import.meta.url));
+    const rows = loadRuleCases(fixtures).filter((row) => row.label?.outcome === "finding");
+    expect(rows.length).toBeGreaterThan(0);
+    for (const row of rows)
+      if (row.label?.outcome === "finding") expect(row.label.lines).toContain(row.label.line);
+  });
+  test("per-rule and per-stratum totals keep every label source, gap, anchor class and locator reading", () => {
+    const pass = ruleLabelSchema.parse({ outcome: "pass", line: null, source: "owner" });
+    const finding = ruleLabelSchema.parse({ outcome: "finding", line: 17, lines: [17], source: "labelers-agreed" });
+    const cases: ScoredRuleCase[] = [
+      { rule: "a", id: "one", stratum: "no-loads", label: pass, locator: null, score: scoreRuleCase(pass, { outcome: "pass", finding: null }) },
+      { rule: "a", id: "two", stratum: "no-loads", label: pass, locator: null, score: scoreRuleCase(pass, { outcome: "finding", finding: { line: 3, anchor: "default" } }) },
       {
         rule: "a",
-        id: "one",
-        label,
-        score: scoreRuleCase(label, { outcome: "pass", findingLines: [] }),
-      },
-      {
-        rule: "a",
-        id: "two",
-        label,
-        score: scoreRuleCase(label, { outcome: "finding", findingLines: [3] }),
-      },
-      {
-        rule: "b",
         id: "three",
-        label,
-        score: scoreRuleCase(label, { outcome: "incomplete", findingLines: [] }),
+        stratum: "own-loads",
+        label: finding,
+        locator: { label: "L17", probability: 0.78 },
+        score: scoreRuleCase(finding, { outcome: "finding", finding: { line: 17, anchor: "resolved" } }),
       },
+      { rule: "b", id: "four", stratum: "unassigned", label: pass, locator: null, score: scoreRuleCase(pass, { outcome: "incomplete", finding: null }) },
     ];
     expect(summarizeRuleScores(cases)).toEqual([
       {
         rule: "a",
-        matched: 1,
+        matched: 2,
         missed: 0,
         wrong: 1,
         uncertain: 0,
         gaps: [],
+        anchors: { "resolved-in-lines": 1, "resolved-elsewhere": 0, default: 0 },
+        locators: [{ id: "three", label: "L17", probability: 0.78, anchor: "resolved-in-lines" }],
         labels: [
           { id: "one", source: "owner" },
           { id: "two", source: "owner" },
+          { id: "three", source: "labelers-agreed" },
         ],
       },
       {
@@ -177,9 +222,16 @@ describe("exact decision scoring", () => {
         missed: 0,
         wrong: 0,
         uncertain: 0,
-        gaps: [{ id: "three", reason: "Piece evaluation is incomplete" }],
-        labels: [{ id: "three", source: "owner" }],
+        gaps: [{ id: "four", reason: "Piece evaluation is incomplete" }],
+        anchors: { "resolved-in-lines": 0, "resolved-elsewhere": 0, default: 0 },
+        locators: [],
+        labels: [{ id: "four", source: "owner" }],
       },
+    ]);
+    expect(summarizeStrata(cases).map((row) => [row.rule, row.stratum, row.matched, row.wrong])).toEqual([
+      ["a", "no-loads", 1, 1],
+      ["a", "own-loads", 1, 0],
+      ["b", "unassigned", 0, 0],
     ]);
   });
 });
