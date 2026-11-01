@@ -2,19 +2,21 @@
 
 {{PROJECT_DESCRIPTION}}
 
-## Rules
-{{#if INCLUDE_TS}}
-@.cursor/rules/ts-rules.mdc
-{{/if}}
-{{#if INCLUDE_PY}}
-@.cursor/rules/python-rules.mdc
-{{/if}}
-{{#if INCLUDE_SWIFT}}
-@.cursor/rules/swift-rules.mdc
-{{/if}}
-{{#if MONOREPO}}
-@.cursor/rules/monorepo-rules.mdc
-{{/if}}
+## Standards
+
+{{#if OWNER_STANDARDS}}Whose standards: the owner's (sunstack-dev)
+
+Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches; a language with no skill follows its additions file. If a skill can't be loaded, say which one and ask before choosing a standard.
+
+- Shared: `sunstack-dev:domain-code-standards`{{/if}}
+{{#if OWNER_TS}}- TypeScript: `sunstack-dev:domain-typescript`{{/if}}
+{{#if OWNER_PY}}- Python: `sunstack-dev:domain-python`{{/if}}
+{{#if OWNER_ADDITIONS}}- This repository's additions:{{/if}}
+{{#if OWNER_SWIFT}}  - @.cursor/rules/swift-rules.mdc{{/if}}
+{{#if OWNER_MONOREPO}}  - @.cursor/rules/monorepo-rules.mdc{{/if}}
+{{#if REPO_STANDARDS}}Whose standards: this repository's own
+
+This repository's standards: [docs/standards.md](docs/standards.md){{/if}}
 {{#if MONOREPO}}
 
 ## Structure

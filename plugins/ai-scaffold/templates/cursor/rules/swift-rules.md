@@ -23,9 +23,9 @@ alwaysApply: true
 
 ## Formatting
 
-- Indent code with 4 spaces
+- Indent code with 4 spaces, the scaffold's `.swiftformat` default; the repository's own config overrides it
 - Follow SwiftFormat defaults (configured in `.swiftformat`)
-- Maximum line length: 160 characters
+- Maximum line length: 160 characters, the scaffold's `.swiftformat` default; the repository's own config overrides it
 - Use trailing closures for single-closure parameters
 
 ## SwiftUI Patterns
@@ -53,28 +53,13 @@ alwaysApply: true
 - Use `@Suite` for test organization
 - Use **XCTest only** for UI tests (`XCUITest`) and performance tests
 
-### Test Quality
-
-- Follow *Arrange / Act / Assert* comments to structure tests
-- *Quality over quantity*: cover critical paths with concise, readable tests
-  - Tests should be minimal, valuable and easy to maintain
-  - Focus on testing business logic
-  - Test critical paths
-
 ### Testing Pyramid
 
-- Most tests: Unit tests on ViewModels and business logic
-- Some tests: Integration tests for data layer
-- Few tests: UI tests only for critical user flows
-
-## Documentation
-
-- Skip return-type sections in docstrings when type annotations suffice
-- Write concise, high-impact documentation that explains *why*, not just *what*
+Unit tests cover ViewModels and business logic; integration tests cover the data layer; UI tests cover only critical user flows.
 
 ## Swift Commands
 
-Do not run random commands for linting and testing. You MUST follow the ones below without any variations.
+When the repository defines no commands of its own, run these:
 
 ### Build & Test
 

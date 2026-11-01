@@ -36,18 +36,12 @@ Monorepo managed by **uv** workspaces:
   - Models should not depend on repos or services
   - Do not add database specific ddl to models
 - `/repos` are used to interact with the database or external data sources
-- `utils` or `helpers` are pure functions that are single responsibility logic
 
 Do not create any `__init__.py` files unless the user asks. They are specifically only for package roots.
 
 ## Import Rules
 
 - **Absolute imports only** - Always use absolute imports relative to the project root or package root. Never use relative imports like `../` or `./`.
-
-## Additional Rules
-
-- Python rules are in `@.cursor/rules/python-rules.mdc`
-- TS rules are in `@.cursor/rules/ts-rules.mdc`
 
 ## Boundaries
 
