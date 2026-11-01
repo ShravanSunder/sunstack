@@ -325,8 +325,8 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 
 - Revision 1–3, run 1 (`domain-typescript` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 2.
 - Revision 1–3, run 2 (`domain-rust` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 3.
-- Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`.
-- Revision 8's correction to run 5 (D22, with implementation review 2's I2): proposed.
+- Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`; reviewed at `31fa15b1`, with revision 8's correction.
+- Revision 8's correction to run 5 (D22, with implementation review 2's I2): implemented at `06fa4c8e` (text) and `31fa15b1` (script and tests); reviewed at `31fa15b1`.
 
 ## Review record
 
@@ -380,3 +380,7 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - The Lead's assessment adds one platform correction: the Codex marketplace entry for `sunstack-dev` carries a version (`2.101.3`), which the writer reported as absent. It goes to 2.103.0 with the other entries, as Coordination requires.
 - **Revision 8:** I1 is corrected by D22: specification standards 17 and 18 and its summary line; run 5's Batch 5 retrofit read and copy rule; and six script tests, with row 40 narrowed. Back to the same review lead for a scoped design recheck before the writer and Implementer correct the files.
 - **Implementation review 2 design recheck, at `fb577093`** (`implementation-review-2-design-recheck.md`): I1's design gap is closed, with no new design finding. The design-layer open count goes 1 → 0. **Verdict `great`; implementation decision `accepted-to-implement`** for the bounded D22 correction. I2 needs no design change, and the Codex marketplace version correction is admitted. Ship stays blocked until the two implementation findings are corrected, proven and rechecked.
+- **Implementation review 2 recheck, at `31fa15b1`** (`implementation-review-2-recheck.md`). I1 and I2 are closed, with no new finding and no recurrence. The implementation-layer open count goes 2 → 0. **Verdict `great`; ship decision source-only:** no source-review blocker remains.
+  - The proof it rests on: the old script failed 7 of 8 new cases on its file output, with the control passing; 8/8 after; 301/301 in the full suite; typecheck and static checks clean.
+  - Its parser note: a CRLF Standards line names neither value, so it copies nothing. That is acceptable under D22's exact match, and no normalization is claimed.
+  - Left unverified: PR readiness, installed and client loading, and behavior under pressure.
