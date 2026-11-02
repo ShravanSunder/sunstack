@@ -419,7 +419,7 @@ This record was written on 1 Nov 2026 at 19:06 EST by the Lead, after the text i
 - Revision 1–3, run 2 (`domain-rust` Tests section): implemented at `8dbedca5`; superseded by revision 4's run 3.
 - Revision 4 (accepted at revision 7), runs 1–5: implemented at `c21a5935`; reviewed at `31fa15b1`, with revision 8's correction.
 - Revision 8's correction to run 5 (D22, with implementation review 2's I2): implemented at `06fa4c8e` (text) and `31fa15b1` (script and tests); reviewed at `31fa15b1`.
-- Revision 9 (D23): run 1's base addition, run 4's line, run 5's removal, and run 6 (`domain-swift`, create): implemented at `65b4561c` and `e42892b2` (text) and `cebfabfd` (script and tests).
+- Revision 9 (D23): run 1's base addition, run 4's line, run 5's removal, and run 6 (`domain-swift`, create): implemented at `65b4561c` and `e42892b2` (text) and `cebfabfd` (script and tests), with U1/U2's corrections at `35ce0005`. Reviewed at `35ce0005`.
 
 ## Review record
 
@@ -502,3 +502,5 @@ This record was written on 1 Nov 2026 at 19:06 EST by the Lead, after the text i
   - U1: the dated gate record "Revision 9's prose commands", labelled as recorded after the text existed.
   - U2: the sign's `ObservableObject` half is removed, and `:20` stays authoritative.
   Back to the same review lead.
+- **Revision 9 implementation recheck, at `eb077d8e..35ce0005`** (`revision-9/revision-9-implementation-recheck.md`): U1 and U2 are closed, 2 → 0, with no recurrence. **Verdict `great`; ship decision source-only.** The script proof stands, since the tested scaffold dependencies are unchanged. Left unverified: the rule engine's uncertain items, pressure behavior, client loading, CI and PR readiness.
+- **The Advisor's bounded check at `35ce0005`** (`01a14e6a`): clear for the handoff, with no question for the owner.
