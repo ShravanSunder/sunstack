@@ -69,7 +69,7 @@ Just ask Claude:
 
 ### Common Files
 - `CLAUDE.md` - AI assistant instructions, with a `## Standards` section that says whose coding standards apply: the owner's (with links to the `sunstack-dev` skills) or this repository's own (with a pointer to its standards file). A retrofit appends the section to an existing instruction file and replaces no file or link.
-- `AGENTS.md` → `CLAUDE.md` (symlink for cross-tool compatibility, created only when AGENTS.md doesn't exist)
+- `AGENTS.md` is the instruction source for new projects; `CLAUDE.md` → `AGENTS.md` provides cross-tool compatibility. Existing files and links are preserved.
 - `.gitignore` - Comprehensive ignore patterns
 - `.config/wt.toml` - Worktrunk configuration
 

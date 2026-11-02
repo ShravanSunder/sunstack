@@ -4,15 +4,15 @@ Complete list of all templates available for scaffolding.
 
 ## Common Templates
 
-### CLAUDE.md.template
+### AGENTS.md.template
 Project-level AI assistant instructions. Its `## Standards` section has two forms, chosen by `--standards` when the file has no section:
 - `owner`: "Whose standards: the owner's (sunstack-dev)", the instruction to load `sunstack-dev:domain-code-standards` and the language skills, and a link per language the project type includes.
 - `own`: "Whose standards: this repository's own", and a pointer to `docs/standards.md`. No owner skill link.
 
 On a retrofit, the script appends the section to the existing instruction file when it has none, and replaces no instruction file or link.
 
-### AGENTS.md (symlink)
-Created as a symlink to CLAUDE.md for cross-tool compatibility (Codex, Copilot, etc.), only when AGENTS.md doesn't exist. An existing AGENTS.md, regular file or link, is left as it is.
+### CLAUDE.md (symlink)
+New projects use AGENTS.md as the instruction source and CLAUDE.md as a symlink to it. Existing instruction files and either symlink direction are preserved; a legacy CLAUDE-only project receives the missing AGENTS.md alias.
 
 ### gitignore.template
 Comprehensive .gitignore covering:

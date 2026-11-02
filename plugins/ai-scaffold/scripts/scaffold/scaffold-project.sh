@@ -246,7 +246,7 @@ append_standards() {
     fi
 
     local standards_section
-    standards_section="$(render_template "$TEMPLATES_DIR/common/CLAUDE.md.template" | awk '
+    standards_section="$(render_template "$TEMPLATES_DIR/common/AGENTS.md.template" | awk '
         /^## Standards[[:space:]]*$/ { in_standards = 1; print; next }
         in_standards && /^## / { exit }
         in_standards { print }
@@ -280,10 +280,12 @@ echo "--- Common files ---"
 if [[ -e "AGENTS.md" || -L "AGENTS.md" || -e "CLAUDE.md" || -L "CLAUDE.md" ]]; then
     echo "SKIP: instruction files (existing entries are preserved)"
 else
-    copy_template "$TEMPLATES_DIR/common/CLAUDE.md.template" "CLAUDE.md"
+    copy_template "$TEMPLATES_DIR/common/AGENTS.md.template" "AGENTS.md"
+    ln -s "AGENTS.md" "CLAUDE.md"
+    echo "LINK: CLAUDE.md -> AGENTS.md"
 fi
 append_standards
-# Create AGENTS.md as symlink to CLAUDE.md (cross-tool compatibility)
+# Preserve legacy CLAUDE-only projects by adding the missing cross-tool entry.
 if [[ ! -e "AGENTS.md" && ! -L "AGENTS.md" && -f "CLAUDE.md" ]]; then
     ln -s "CLAUDE.md" "AGENTS.md"
     echo "LINK: AGENTS.md -> CLAUDE.md"

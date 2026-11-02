@@ -130,7 +130,8 @@ describe("scaffold standards output", () => {
       language === "TypeScript" ? "domain-python" : "domain-typescript",
     );
     expect(instructions).not.toContain("This repository's additions:");
-    expect(readlinkSync(path.join(projectRoot, "AGENTS.md"))).toBe("CLAUDE.md");
+    expect(lstatSync(path.join(projectRoot, "AGENTS.md")).isFile()).toBe(true);
+    expect(readlinkSync(path.join(projectRoot, "CLAUDE.md"))).toBe("AGENTS.md");
   });
 
   test("new Swift links its language skill without copied additions", () => {

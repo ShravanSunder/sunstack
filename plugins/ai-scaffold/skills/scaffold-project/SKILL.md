@@ -164,7 +164,7 @@ The script handles:
 - Setting up Claude hooks (.claude/hooks/)
 - Creating package.json/pyproject.toml with dependencies
 - Setting up vitest/pytest configurations
-- Creating CLAUDE.md, with its `## Standards` section, and AGENTS.md (a symlink to CLAUDE.md, made only when AGENTS.md doesn't exist)
+- Creating AGENTS.md, with its `## Standards` section, and CLAUDE.md as a symlink to AGENTS.md for new projects; existing instruction files and links are preserved
 - On a retrofit, appending the `## Standards` section to the existing instruction file when it has none, without replacing the file or any link
 - Setting up .gitignore
 - Creating worktrunk config (.config/wt.toml)
