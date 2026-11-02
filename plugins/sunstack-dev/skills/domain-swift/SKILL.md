@@ -70,5 +70,5 @@ swiftformat .        # format
 ## Signs you skipped it
 
 - `Any`, a force unwrap or a force cast where a narrow type, `guard let` or `as?` fits.
-- `ObservableObject` in new code, or a `@State` property that isn't `private`.
+- A `@State` property that isn't `private`.
 - A Swift unit test put beside its module instead of in its `Tests/` target.

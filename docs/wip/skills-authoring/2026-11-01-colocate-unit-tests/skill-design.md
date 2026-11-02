@@ -329,6 +329,25 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
 - **Public-safe constraints:** templates and tests carry no machine paths, home-cache paths or account names.
 - **Review route:** `skill-review`'s implementation stage checks the tests' cases against this list.
 
+### Revision 9's prose commands: gate recorded after the text existed
+
+This record was written on 1 Nov 2026 at 19:06 EST by the Lead, after the text it covers was written (`65b4561c`, `e42892b2`). Revision 9's design ran no gate for these surfaces before outlining or writing them; the gate above names the script alone. That breaches `domain-skill-crafting/references/security.md:5`: prose that teaches shell commands is in scope (`:19`, `:31`), and a decision counts for order only when it is written first (`:39`). The breach is disposed of here as a recorded timing defect, found by implementation review U1. This record doesn't show order and doesn't claim pre-authoring coverage.
+
+- **Sensitive surfaces:**
+  - `plugins/sunstack-dev/skills/domain-swift/SKILL.md`, Commands (`:61-67`): it teaches `swift build`, `swift test`, `swiftlint --strict` and `swiftformat .` (shell commands).
+  - `plugins/sunstack-dev/skills/domain-code-standards/SKILL.md`, Monorepos (`:55`): it teaches `uv run` and `pnpm run` as the command runners in a monorepo (shell commands).
+- **Entry points:** an agent working in a repository whose Standards line names the owner's set, after loading the skill. For Swift, only when the repository defines no commands of its own. For monorepos, the repository's own commands still win.
+- **Untrusted inputs:** none in the text itself. The commands run against the repository the agent is working in, as the same commands did when the scaffold copied them in its `alwaysApply` rule files (`swift-rules.md:60-75`, `monorepo-rules.md:12,30` at `724cf208`).
+- **Privileged actions:** none beyond what each tool does by default (builds, tests, lint and format writes in the working tree). No network fetch, credential, home-level write or cache refresh is taught.
+- **Third-party source:** none; the text is the owner's own, moved from his templates.
+- **Copy-vs-adapt decision:** not applicable.
+- **Decision:** `allowed`, with two constraints:
+  - the commands stay conditional: a fallback where the repository defines none, or a runner where the repository's own command doesn't win;
+  - no command that fetches, installs globally or touches credentials joins these lists without a new gate written before it.
+- **Required proof:** source inspection against the baseline templates (implementation review U1's retest). No executable resource is added, so no behavior test applies.
+- **Public-safe constraints:** no machine paths, home-cache paths or account names in either skill.
+- **Review route:** the same review lead's scoped recheck of U1.
+
 ## Decisions
 
 | # | Default taken | Rationale |
@@ -474,3 +493,12 @@ Decided here, before the surface is outlined or written. Gate run 1 Nov 2026 by 
   - F2: standard 22's first bullet carries the uv/`uv run` and pnpm/`pnpm run` choices, with the repository's own commands still winning (standard 6), and the clause table names `:12` and `:30`.
   Back to the same review lead for a recheck.
 - **Revision 9 design recheck, at `21be1bff..1d14002e`** (`revision-9/revision-9-design-recheck.md`): F1 and F2 are closed at their corrected anchors against `724cf208`. The open count goes 2 → 0, with no recurrence. **Verdict `great`; implementation decision `accepted-to-implement`.** It rests on the two-reviewer, five-check record plus this scoped recheck. Left unobserved: implementation, the keyed and platform checks, client loading and pressure behavior.
+- **Revision 9 implementation review, at `1d14002e..eb077d8e`** (`revision-9/revision-9-implementation-review.md`). Three fresh Sol xhigh reviewers ran all ten checks.
+  - Verdict: `targeted-revision`; ship blocked.
+  - U1, important: the shell commands moved into `domain-swift` and the base had no gate recorded before they were written.
+  - U2, important: the `domain-swift` sign "`ObservableObject` in new code" was wider than its source preference, which `:20` scopes to iOS 17+ and macOS 14+.
+  - Held: F1/F2, the Swift SPM exception, the hooks, the cutover, and the 33-red, 1-control, 34-green proof plus the 302-test suite.
+- **Revision 9 implementation corrections:**
+  - U1: the dated gate record "Revision 9's prose commands", labelled as recorded after the text existed.
+  - U2: the sign's `ObservableObject` half is removed, and `:20` stays authoritative.
+  Back to the same review lead.
