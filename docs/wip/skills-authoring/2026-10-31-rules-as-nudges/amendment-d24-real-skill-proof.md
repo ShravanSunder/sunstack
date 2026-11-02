@@ -5,6 +5,8 @@
 - Decision 2, pressure tasks in the next stacked PR, not gating #188: "i agree".
 - Decision 3 is still open.
 
+**Revision 2 (2 Nov):** D24h's Gate 3 is replaced by the gate in D34 (a rule nudges no one until it passes its cases), and D24b's expectations contract carries revision 2's history cases (D33). See [skill-design.md](skill-design.md), "Revision 2: what changes in the runs".
+
 So #188 is gated on D24a–c and D24e–h. D24d moves to the next stacked PR. It amends [skill-design.md](skill-design.md) (adds D24) and [skill-verification.md](skill-verification.md) (replaces its proof routes for the judged rules). Built on [Advisor view 9](../../../../../memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/skill-rules/rules-purpose/advisor-view-9.md). That path is outside this repository; the Lead's trace records it.
 
 ## Why

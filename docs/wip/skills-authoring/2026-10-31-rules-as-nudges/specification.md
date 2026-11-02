@@ -6,6 +6,97 @@
 
 A rule names the judgment it helps an agent make, collects the evidence that judgment needs, and gives a grounded nudge with where to read and what it couldn't see. The receiving agent reads those places, makes the broader call, and says what it checked, what it concluded and what it did.
 
+Revision 2 (2 Nov) adds what comes before any of that: a rule exists because of a real mistake, judges only the kinds of skills its standard is about, sets its own bars from its own cases, reads enough text to judge its standard, and nudges no one until it passes real cases. It answers to requirements R11 to R17.
+
+## Revision 2: the rules themselves
+
+### How a rule gets made
+
+This is the order `skill-rules` teaches (run 1), each step answering to the one before it.
+
+1. **The mistake.** Name the real failure the rule exists to catch: a commit, a pull request or one of the owner's corrections, with the text before and after the fix. A count or pattern check on a written standard names that standard instead (R11).
+2. **The standard.** The written sentence the mistake breaks, marked in its skill.
+3. **The kinds.** Which kinds of skills the standard is about (R12). A standard about general skills says so, and a product's own skill is never in its denominator.
+4. **The cases.** From history first, before any question is written (R14, below).
+5. **The piece.** The text the rule must read to judge the standard (R15), proven with an evidence print on real sources.
+6. **The tree.** Simple questions that lead to the answer, designed with `domain-decision-models`.
+7. **The bars.** Each step's bars, set from the cases (R13, below).
+8. **The gate.** The rule passes its cases and starts nudging, or stays held, listed as held in every run.
+
+The order is the point: a rule designed from "what can a model judge from one piece" reverses it, and 9 of today's 18 rules came that way (E16).
+
+### Which skills a rule judges: the kind filter
+
+**Settled (owner, 2 Nov).** A decision model reads each skill's description once and says what kind of skill it is. Every rule that needs the kind takes that answer as input, and declares the kinds it applies to. The run shows each skill's judged kind and how sure the model was. A rule about general skills never judges a product's own skill.
+
+**Open (open meaning 3, with the 🦉 Advisor's research).**
+- **The labels.** At least a product's own skill versus a skill meant for any repository; whether workflow, domain, principle or tool manual need their own labels depends on which rules use them.
+- **The route.** How one per-skill answer reaches every rule on every piece of the skill, its reference files included, and what the engine has to change.
+- **When the filter is unsure.** What the rules do with a skill whose kind came back unsure.
+- **The known trap (E17).** `ops-observability-stack`'s description names AgentStudio, Agent VM and OpenClaw, and the skill is the toolkit's shared stack. In the 2x2 probe, the same description given to placement as context made the AgentStudio sections pass. The filter has to call that skill general, or line 17 is never judged.
+- **Its own evals.** The 78 skills on main, each with a kind we can label, are the filter's first case set.
+
+Revision 1's finding stands for chunks: a rule doesn't carry the skill's description as context to its own questions (D18b). The filter is a separate judgment made before any rule runs.
+
+### Bars
+
+Every decision step already states its own bars; the engine requires it (E15). Revision 2 changes where the values come from, not where they live:
+- each step's bars are set from the rule's own development cases, at the point where Jev's answers separate the fire cases from the pass cases;
+- the chosen values, and the cases that set them, are recorded in the rule's expectations file;
+- the held-back cases check them, and are never used to move them;
+- nothing overrides a rule's bars: not a skill, a kind or a config (R13).
+
+### Cases
+
+A rule's cases come from these sources, in this order:
+
+1. **Its own mistake:** the failure from step 1, before (fires) and after (passes).
+2. **History.** Commits that fixed the standard's property. The text before the fix fires, the text after passes. Descriptions alone have 167 replaced lines in 125 commits (E14). For other standards, operators mine commits whose diff changes the property, and labellers confirm each pair.
+3. **The owner's corrections,** in sessions and reviews: the corrected text fires, and the owner's fix is the label.
+4. **Its near misses:** every nudge the rule got wrong on real skills is a must-pass case (195 on 30 Oct and 56 on 1 Nov, E11 and E12).
+5. **Upstream skills,** only to fill a gap the other sources leave, labelled as such.
+
+Labels: where the owner made the fix, the fix is the label; otherwise two blind labellers and a settler, with every disagreement shown to the owner. A slice is held back from the start and never tuned on. The `.expect.json` contract from D24 carries every case, with the commit pair for a history case. How many real cases a rule needs before it nudges is set per rule, once mining shows what exists (open meaning 5).
+
+**The gate.** A rule nudges no one until it fires on its fire cases and stays quiet on its pass and near-miss cases, in both the development and held-back sets. Until then the runner lists it as held, with what it's missing. A held rule still runs in a proof run.
+
+### What each rule reads: evidence fixes
+
+When a rule is wrong because of what it read, the fix is in the evidence collection, not the rule's question (R15; the owner on `guidance.positive`: "this evicde problem not a problem with the rule").
+
+- **`guidance.positive`** reads the guidance as a whole: a step's or a standards section's full list, judged on whether it mostly says what to do, with what-to-avoid lines as its caveats (the owner's reading). Today it reads one sentence at a time; 10 of its 27 wrong nudges had the "do" in the next sentence.
+- **`completion.criterion`** finds a step's done state in whatever words the step uses. Today a mechanical check accepts only a literal `Completion:` line; 78 of its 99 wrong nudges said the done state in other words.
+- **`reference.teaching-depth`** judges a reference with its outline and stop lines, once per file or with the file's outline beside each section (24 wrong nudges); its question names command lookups and catalogues as lookups (31).
+- **`branch.condition`**: a line ending in ":" carries the block after it (5).
+- **`rule.generalization`**: the owner's direction is to redo the filter and the rule together. A reference whose subject is one tool, such as `domain-rust/references/sqlx-sqlite.md`, is judged against that subject, which needs the scope from the filter's research.
+
+### The rules, one by one
+
+"Decided" names who settled the row. "Held" is the R14 gate: the rule keeps running in proof runs and nudges no one until it passes its cases. Kinds are the Lead's proposal from the rules page until the filter's labels settle.
+
+| # | Rule | The mistake or standard behind it | Kinds it judges | After revision 2 | Decided |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `description.opener` | written standard: a description opens with "Use when", "Trigger when", "Always use when" or "Always trigger when" | every skill | keep; pattern check | owner (R16) |
+| 2 | `description.length-warning` | written standard: over 225 characters warns | every skill | keep; count | owner (R16) |
+| 3 | `description.length-limit` | written standard: over 300 characters fails | every skill | keep; count | owner (R16) |
+| 4 | `description.loading-moment` | none named yet | every skill | held until its history cases | Lead (R14) |
+| 5 | `description.trigger-only` | none named yet; 7 real catches on 30 Oct | every skill | held until its history cases | Lead (R14) |
+| 6 | `description.always-earned` | none named; no description on main opens with "Always" | every skill | held until its history cases | Lead (R14) |
+| 7 | `description.product-loading` | #187 | general skills | held until the filter and its cases; one disputed case (`presentation-html`) | owner (filter); Lead |
+| 8 | `call.completeness` | none named; its nudge narrowed #187's fix | skills with load lines | held until its history cases; keeps revision 1's C16 | Lead (R14) |
+| 9 | `reference.teaching-depth` | none named | workflow skills' references | evidence fix, then held until its cases | Lead (R15) |
+| 10 | `placement.product-workflow` | #187; `practices-cleanup:40` | general skills | open: scenarios with the owner; an example never fires it | owner |
+| 11 | `rule.generalization` | #166 | every skill; product skills only against their own scope | redo the filter and the rule | owner |
+| 12 | `branch.condition` | none named; 18 real catches on 30 Oct | workflow skills | held until its history cases | Lead (R14) |
+| 13 | `main-path.spine` | none named | workflow skills | held until its cases | Lead (R14) |
+| 14 | `completion.criterion` | none named; 35 real catches on 30 Oct | workflow skills | evidence fix, then held until its cases | Lead (R15) |
+| 15 | `guidance.positive` | none named | every skill with guidance | keep; evidence fix (the guidance as a whole), then held until its cases | owner |
+| 16 | `question.names-field` | the owner's ask to check rule files | rule files | dropped | owner |
+| 17 | `question.one-proposition` | the owner's ask; no fire case anywhere | rule files | held until rule-file history gives cases | Lead (R14) |
+| 18 | `question.criteria-match` | the owner's ask; no fire case anywhere | rule files | held until rule-file history gives cases | Lead (R14) |
+
+Every row whose mistake reads "none named" is open meaning 6: the owner and the Lead find its failure, rework it or retire it, one rule at a time. Its real catches suggest the failure exists for rules 5, 12 and 14.
+
 ## The nudge
 
 A nudge is what one rule gives the agent who ran it, about one place in the checked files. The engine's report carries it, the rule-running reference teaches how to read it, and every skill that runs rules reads it the same way. Which agent receives it is the caller's business; the engine knows no roles.

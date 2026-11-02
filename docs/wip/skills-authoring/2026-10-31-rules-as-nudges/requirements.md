@@ -4,6 +4,71 @@
 
 This set governs one change across the skill system and the sunstack engine. The skill runs live in this folder; the engine change gets its own design in `sunstack-tools` and answers to these requirements.
 
+**Revision 2, 2 Nov 2026 07:17 EST, by the 🦁 Lead.** Revision 1 settled what a rule gives an agent: a nudge with its places, its gaps and the account the agent records. It was reviewed and accepted, and it stands. Revision 2 settles the rules themselves: which rules exist and why, which skills each one judges, how sure each must be, and how each is tested. It starts at [Revision 2: the rules themselves](#revision-2-the-rules-themselves) below; everything after that section is revision 1, unchanged unless a revision 2 decision names it.
+
+## Revision 2: the rules themselves
+
+### Why it reopened
+
+The owner read every rule in plain words (owner page `rules-spec-2026-11-02.html`, in the owner's memory-logs under `scratch-root-01a1635f/owner-pages/`) and found the set doesn't hold together: most rules were picked because a model could judge them, not because they catch real mistakes, and the evals mostly check that rules stay quiet.
+
+### The need, in the owner's words
+
+All 2 Nov 2026, typed in the Lead's session or in the owner's review of the rules page.
+
+- "none of the rkules seem kuseufl? kor how you set them kup so now i htink i n eed fkull escrpiton of each rule you feel confident in and hwy and what they do so i can decide oen by one"
+- "Lets focus on skill creation skills and how to create rules tehre and what issues w2e fase dint eh past and what kind of skills are tehy for not all rules apply for all skiklls"
+- "it seems liek we3 need to do better for evals now it doesnt look liek we did a good job"; earlier: "did we use descripition for prior bad descriptiosn to test as evasl? how di dyou create evals?"
+- On thresholds: "1. yes then eveyr rkule shoud configure it no /" and "6. no override wierd stuff".
+- On which skills a rule judges: "we have domain -* but we can no thsi frorm diescripiton too? descripton is filter"; on the product-loading rule: "shoukd valdiate if this is about a product or domain and ahve that as input no?"; on how: "2. yes this is ot done well go reserach and get advsiro help".
+- On `guidance.positive`: "what to avoid shodku lbe caveats. it shoulb ebe by what to do in teh majority", and "5. this evicde problem not a problem with the rule the colelciotn of evice is nto right".
+- On `rule.generalization`: "we need to redo teh filter and teh rule".
+- On placement: "4. this is very confskuign and not clearn we shoud ltalk about it mroe we can make sure that we dont trigger on examples what are all the branches erhe what are teh scnarios mayb ethis isf follow ukp".
+- On `question.names-field`: "ok iname fiels seem suelss".
+- On the description rules for hidden skills, he picked "Yes, all of them, as today".
+- On this revision: "redo the deisgn docs. we talk alter fix the stuff that is obviosu and nto confsuign we talk about all the rest. i think its clear what i want but i fm wrong we talk mroe".
+
+### What revision 2 adds to the success definition
+
+6. **Every rule exists because of a real mistake.** It names the failure it catches: a commit, a pull request or one of the owner's corrections. A written standard checked by count or pattern, such as description length, names that standard.
+7. **A rule judges only the skills its standard is about.** A decision model reads each skill's description once and says what kind of skill it is; every rule that needs the kind takes that answer as input. A rule about general skills never judges a product's own skill.
+8. **Each rule sets its own bars from its own cases.** There is no override of any kind, per skill or otherwise.
+9. **A rule nudges no one until it passes real cases.** The text before a real fix makes it fire, the text after keeps it quiet, and the near misses it once got wrong stay quiet.
+10. **A rule reads enough to judge its standard.** A standard about guidance as a whole ("mostly what to do") is judged on that guidance, not one sentence at a time.
+
+### Evidence added in revision 2
+
+- **E11. Wrong nudges came from what rules read and asked, never from their bars.** The 30 Oct run on 74 skills (main `f747b37e`): 300 nudges, 102 right, 195 wrong, 3 held. The wrong ones came from what the rule read (117), the question's wording (62) and which piece was selected (16); none from a threshold (`scratch-root-01a1635f/skill-rules/evidence-selection/step5/dispositions.md`).
+- **E12. Placement's misses are product skills and examples.** The 1 Nov run of #188's six rules: placement made 11 nudges, 2 right (`practices-cleanup/SKILL.md:40`; `ops-observability-stack/references/agentstudio-loop.md:51-59`) and 9 wrong. 4 of the wrong ones were product skills' own text (Peekaboo 3, AgentStudio 1); 5 were worked or fictional examples or a domain's own tool (`verify-tui`, `verify-notes`, the fictional `ledger`, shadcn in `domain-typescript`, the worked tree quoting line 17). `rule.generalization` made 45 nudges, all wrong (`ai-tools.skills-rules-as-nudges/tmp/d24/accounts/result-accounts.json`).
+- **E13. The evals mostly check silence.** 245 recorded cases in six `*.expect.json` files. Cases a rule must fire on: 0 to 7 per rule, and four judged rules have none. Every fire case is current text at a pin; none comes from a past mistake.
+- **E14. Real past mistakes exist and went unused.** This repository's history has 125 commits that changed a skill's `description:` line, replacing 167 lines (`git log -G'^description:' -- 'plugins/*/skills/*/SKILL.md'`).
+- **E15. Bars are per rule already, and untuned.** The engine requires every decision step to state its own bars (`sunstack-tools` `crates/sunstack-rules/src/rulebook_planning/decision_graph_contracts.rs:112-113`, `cb61a29`); every value in use is the starting 0.7/0.3, or 0.6 for a choice (`skill-rules/jev-advisor/threshold-inventory.tsv`).
+- **E16. Why the rules exist today.** 3 of the 18 trace to real failures (#187, #166), 3 are written standards checked by count or pattern, 3 came from the owner's ask to check rule files, and 9 were picked because a model could judge them from one piece (the Project 1 spec, 26 Oct; `2026-10-27-first-checked-rules/skill-design.md:27-38`).
+- **E17. The description can mislead.** In the 2x2 probe (D18b), a description that names products, given to placement as context, made product sections pass. A filter that reads descriptions has to handle the same case: `ops-observability-stack`'s description names AgentStudio, Agent VM and OpenClaw, and the skill is the toolkit's shared stack.
+
+### Requirements added in revision 2
+
+- **R11. A rule names the mistake it catches.** Each rule records the real failure it exists for (commit, pull request or owner correction), or the written standard it checks by count or pattern. A judged rule with neither stays held (R14) until the owner decides it, one by one.
+- **R12. A rule judges only its kinds of skills.** Each skill's kind comes from one decision-model judgment of its description, made once per skill. Each rule declares the kinds it applies to and takes the judged kind as input; the run shows each skill's judged kind and how sure it was. A product's own skill is never judged by a rule about general skills. How the engine carries this is open (open meaning 3).
+- **R13. Each rule's bars are its own.** Every decision step's bars are set from that rule's own cases and recorded beside the cases that set them. Nothing overrides them: not a skill, a kind or a config.
+- **R14. Real cases come before any nudge.** Each rule's cases come from real history first: the text before a real fix must fire, the text after it must pass, and every nudge the rule got wrong on real skills becomes a must-pass case. Where the owner made the fix, the fix is the label; otherwise agents label blind, and their disagreements go to the owner. Some cases are held back and never tuned on. A rule nudges no one until it passes its cases; until then the run lists it as held.
+- **R15. A rule reads the text its standard is about.** Its piece is sized to its standard: guidance judged as a whole, a step judged with its body, a reference judged with its outline. A wrong nudge caused by what the rule read is fixed in the evidence collection, not by bending the rule's question.
+- **R16. Description standards apply to every skill.** Hidden skills included (the owner's pick). Descriptions are also the kind filter's input, so their quality carries every rule.
+- **R17. The rule list changes as the owner decides.** `question.names-field` is dropped. Every other rule's keep, rework or drop is decided with the owner, rule by rule, against R11.
+
+### Non-goals added in revision 2
+
+- No threshold overrides of any kind ("no override wierd stuff").
+- Placement's scenarios: they get their own conversation with the owner, maybe a follow-up. This revision states only that an example never triggers it.
+- No new rules. A new rule starts from a failure under R11, in a later change.
+
+### Open meaning in revision 2
+
+3. **How the kind filter is built.** The 🦉 Advisor researches it (`scratch-root-01a1635f/skill-rules/rule-redesign/advisor-filter-research-commission.md`): how one per-skill answer reaches the rules on every piece, references included; how it composes with Jev; which kinds the rules need; how the description misleads (E17); how the filter is evaluated on the 78 skills.
+4. **Placement's scenarios.** Every case where a skill names a product, and what the rule does in each, so it never fires on an example. Owner: "what are all the branches erhe what are teh scnarios".
+5. **How many real cases a rule needs before it nudges.** Set per rule, once history mining shows what each rule has.
+6. **The 9 rules with no failure behind them.** Keep and find their failure, rework, or retire: one by one, with the owner.
+
 ## The change
 
 - **Class:** behavior-changing. It changes what a rule is for, so it changes how rules are designed, run, read, acted on and reviewed.

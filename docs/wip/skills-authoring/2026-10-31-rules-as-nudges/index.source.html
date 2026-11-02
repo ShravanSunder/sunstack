@@ -12,6 +12,38 @@
   <ex-document id="content">
     <h1>Rules as nudges</h1>
 
+    <ex-callout title="Revision 2, 2 Nov: the rules themselves" tone="decision" icon="test-tube">
+
+Revision 1 settled what a rule gives an agent: a nudge it reads and acts on. It was reviewed and accepted, and it stands below. Revision 2 settles **which rules exist and why, which skills each one judges, how sure each must be, and how each is tested**, because most of today's rules were picked for being easy to judge, not for catching real mistakes, and their evals mostly check silence.
+
+- **Settled with you:** each rule sets its own bars from its own cases, with no overrides; a decision model reads each skill's description once to judge its kind, and rules take that as input; description rules check every skill; `guidance.positive` stays and reads guidance as a whole; `question.names-field` is dropped; placement never fires on an example; generalization's filter and rule are redone.
+- **Proposed by me, strike any of them:** rules are made in one order (mistake, standard, kinds, cases, piece, tree, bars, gate); cases come from history first; a rule nudges no one until it passes its cases; three more rules get their evidence fixed the same way as `guidance.positive`.
+- **Open, to talk about:** how the kind filter is built (the Advisor is researching it), placement's scenarios, and the 9 rules with no mistake behind them, one by one.
+
+</ex-callout>
+
+    <h2 id="revision-2">Revision 2: how a rule gets made</h2>
+    <p>A rule starts from a real mistake and ends only when it passes real cases. Each step answers to the one before; the full order is in the specification's "How a rule gets made".</p>
+    <ex-mermaid id="rule-making" label="How a rule gets made, revision 2" data-width="canvas"><script type="text/plain">
+flowchart TD
+  mistake["1. The mistake<br/>a commit, a PR or your correction"] --> standard["2. The standard<br/>the written sentence it breaks"]
+  standard --> kinds["3. The kinds<br/>which skills the standard is about"]
+  kinds --> cases["4. The cases<br/>history first: before fires, after passes"]
+  cases --> piece["5. The piece<br/>the text the rule must read"]
+  piece --> tree["6. The tree<br/>simple questions for Jev"]
+  tree --> bars["7. The bars<br/>set from the cases, no overrides"]
+  bars --> gate["8. The gate<br/>passes its cases?"]
+  gate -->|yes| nudges["Nudges agents"]
+  gate -->|not yet| held["Held<br/>listed in every run"]
+  class mistake,standard slot1
+  class kinds slot3
+  class cases,piece,tree,bars slot4
+  class gate,held slot2
+  class nudges slot6
+</script></ex-mermaid>
+    <p>Blue is where a rule comes from, teal is which skills it judges, violet is how it's built and tuned, amber is the gate, green is a rule that has earned its nudges. A held rule goes back to its cases or its piece, and returns to the gate when it has more cases or a fix. Each skill's kind comes from a decision model reading its description; how that reaches every rule is the open research.</p>
+    <p>The table of all 18 rules, with the mistake behind each, the kinds it judges, what happens to it and who decided, is in the specification's "The rules, one by one". Revision 1 follows, unchanged.</p>
+
     <p>A rule collects the piece of a skill its question needs, asks Jev about it, and gives the agent running it a <strong>nudge</strong>: what it saw, where, which standard makes it a concern, and where else to read. The agent reads those places and decides. "Nudge" is your word from 12 October; the engine has called it <code>warn</code> since the 18 October rename, and a <code>warn</code> never fails our runs, so nothing new is needed for it.</p>
 
     <h2 id="how">How a rule works</h2>
@@ -144,21 +176,21 @@ flowchart TD
     <p>A follow-up test on the same pieces, with each condition written down first, settled the two guesses. The tool exemption, put on the question it belongs to, removed both false nudges. But giving each section the skill's description made the AgentStudio sections pass: the description itself names AgentStudio, so it reads as "this skill is meant to cover it". So placement judges three things: every section's own text (that's what caught the AgentStudio rows written straight into the cleanup skill), every section together with the files it loads (that caught line 17 every time), and every skill's description on its own, not as context. The engine still needs to point at a line inside a section.</p>
 
     <ex-callout title="Still open" tone="question" icon="bell">
-      <p>Whether an agent given a nudge makes the right call waits for evals. The independent design review is next. What "related places" covers is settled: you confirmed the three kinds on 31 October.</p>
+      <p>Revision 2: how the kind filter is built, placement's scenarios, and the 9 rules with no mistake behind them. Its design review comes after those three settle. From revision 1: whether an agent given a nudge makes the right call waits for evals. What "related places" covers is settled: you confirmed the three kinds on 31 October.</p>
     </ex-callout>
 
     <h2 id="full-design">The full design</h2>
     <p>The four documents, for when you want the detail behind a diagram.</p>
     <details>
-      <summary>Requirements: your words, the anchor cases, R1 to R10</summary>
+      <summary>Requirements: your words, the anchor cases, R1 to R17, and revision 2's open meanings</summary>
       <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
     </details>
     <details>
-      <summary>Specification: the nudge, the agent's answer, the chunk, each skill's part</summary>
+      <summary>Specification: how a rule gets made, the 18 rules one by one, the nudge, the chunk, each skill's part</summary>
       <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
     </details>
     <details>
-      <summary>Skill design: nine runs, the decisions in force, and their history</summary>
+      <summary>Skill design: revision 2's runs and order of work, nine runs, the decisions in force (C1 to C29), and their history</summary>
       <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
     </details>
     <details>
@@ -168,10 +200,15 @@ flowchart TD
 
     <ex-presentation id="tour" title="Rules as nudges in four pictures"
       description="How a rule works, line 17 before and after, who gets nudges, what changes.">
+      <ex-step to="rule-making">Revision 2: a rule starts from a real mistake and nudges no one until it passes real cases.</ex-step>
       <ex-step to="how-a-rule-works">A rule collects its chunk, Jev answers, code decides, and the agent gets a nudge to read and act on.</ex-step>
       <ex-step to="line-17-flow">PR 187's line: every step answered a narrow question. The placement rule asks the broad one.</ex-step>
       <ex-step to="who-gets-nudges">Each agent that runs rules, and what it may do with a nudge.</ex-step>
       <ex-step to="what-changes">Engine first, then nine skills and the rules folder.</ex-step>
+      <ex-step to="requirements">Requirements: your words, the success definition, R1 to R17, and what's open.</ex-step>
+      <ex-step to="specification">Specification: how a rule gets made, the 18 rules one by one, and the nudge's contract.</ex-step>
+      <ex-step to="skill-design">Skill design: which runs change, the decisions in force, and the order of work.</ex-step>
+      <ex-step to="skill-verification">Skill verification: how each requirement is proven, and what stays unverified.</ex-step>
     </ex-presentation>
   </ex-document>
 </body>

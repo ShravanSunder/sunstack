@@ -2,6 +2,35 @@
 
 31 Oct 2026. Author: 🦁 Lead. Answers to [skill-design.md](skill-design.md). Draft.
 
+**Revision 2, 2 Nov 2026, by the 🦁 Lead.** The next section covers how revision 2 is proven. Everything after it is revision 1's verification, in force except where D34 replaces its Gate 3.
+
+## Revision 2: how the rules themselves are proven
+
+### Routes, per requirement
+
+| Requirement | Route | Decided on |
+| --- | --- | --- |
+| R11 a rule names the mistake it catches | mechanical: every rule's expectations file names its mistake (commit, pull request or owner correction, with the before-and-after pair) or its written standard; review check that the named mistake is the one the rule's fire cases come from | a field in the file; the pairing is text |
+| R12 a rule judges only its kinds | the filter's own evals: the 78 skills on main, each labelled with its kind before the filter runs, a slice held back; the hard cases `ops-observability-stack`, `agent-collaboration`, `scaffold-project` and `presentation-html` among the labelled ones. Then a mechanical join over the run: no rule that declares general skills has a result on a skill judged a product's own | the filter's answers on labelled skills; the join is mechanical |
+| R13 bars come from the rule's own cases | mechanical: each step's bars in the rules file equal the values recorded in its expectations file, beside the development cases that set them; the held-back cases were frozen before the bars were chosen | file comparison; the freeze is recorded with its time |
+| R14 real cases before any nudge | per rule, case counts by source (its own mistake, history, the owner's corrections, near misses, upstream), with the held-back slice frozen first; runner tests: a rule that misses a fire case or nudges a must-pass case is listed as held with what it's missing, and gives no nudge in an ordinary run | counts are mechanical; the gate is the runner's |
+| R15 a rule reads the text its standard is about | an evidence print per changed piece (`guidance.positive`, `completion.criterion`, `reference.teaching-depth`, `branch.condition`) over the full denominator; every 30 Oct wrong nudge whose cause was what the rule read becomes a must-pass case and stays quiet | collection is observable without a model; the cases are the tree's |
+| R16 description standards apply to every skill | mechanical: the description rules' denominator includes every `SKILL.md`, hidden skills too | the config |
+| R17 `question.names-field` is dropped | mechanical: `pnpm --dir tests/skills rules --check` assembles no such rule, and `domain-decision-models` carries no marker for it | the check's output |
+
+### Proof plan
+
+1. **The filter's evals (after open meaning 3 settles).** Label the 78 skills' kinds first, independent of the filter. Run it, compare, and record each miss. The `ops-observability-stack` case is the one that decides whether line 17 is judged at all.
+2. **History mining (R2-3).** Descriptions first: the 167 replaced `description:` lines give before-and-after pairs for rules 1 to 6. Then commits that change each other kept or held rule's property. Every pair is labelled, and disagreements go to the owner.
+3. **Per rule:** development run, bars chosen and recorded, then the held-back run. The gate (D34) decides whether it nudges.
+4. **The design review of revision 2** (`skill-review` design stage, with a `decision-model-review` reviewer), after open meanings 3, 4 and 6 are settled.
+
+### What stays unverified in revision 2
+
+- **Whether history holds enough cases for every rule.** A rule whose history gives too few stays held. That is the gate working, not a gap in the proof.
+- **The filter beyond this repository.** Its evals cover the 78 skills on main; product repositories' own skills are untested until the filter runs there.
+- **The receiving agent's call,** as in revision 1: it waits for evals.
+
 Proof keeps three observations apart (D9):
 - **collection:** what the evidence module gathered;
 - **the tree:** what the decision gave on labelled cases;

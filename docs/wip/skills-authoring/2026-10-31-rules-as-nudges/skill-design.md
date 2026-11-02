@@ -2,6 +2,34 @@
 
 31 Oct 2026. Author: 🦁 Lead, co-designed with the 🦉 Advisor. Answers to [specification.md](specification.md). Draft, not yet reviewed.
 
+**Revision 2, 2 Nov 2026, by the 🦁 Lead.** The next section is revision 2's design: which runs change, the decisions D25 to D36, and the order of work. Everything after it is revision 1, which stays in force except where a D25 to D36 row supersedes it.
+
+## Revision 2: what changes in the runs
+
+Revision 2 changes four runs and the runner, and may change the engine once the filter research returns. The other five runs keep their revision 1 design.
+
+| Run | Skill | What revision 2 adds | Waits on |
+| --- | --- | --- | --- |
+| 1 | `skill-rules` | The making order (mistake, standard, kinds, cases, piece, tree, bars, gate) in `references/rule-design.md`, with #187's placement rule as its worked example from the mistake onward. The cases' sources and labels in the proof section. Bars set from cases. The held state in `references/running-rules.md`: what a held rule is, and that its silence is not a pass. The decision matrix asks for the mistake first; a standard with none goes to the owner, not to a rule. | open meaning 3, for the kinds step |
+| 2 | `domain-decision-models` | `question.names-field`'s marker goes (D29). How a rule's tree takes the judged kind as input, once the research settles the route. | open meaning 3 |
+| 6 | `skill-design` | Its verification step plans each judged rule's cases from history before the rule is written, and names each rule's mistake. | none |
+| 7 | `domain-skill-crafting` | The rules folder: `question.names-field`'s entry goes (D29); the evidence fixes for `guidance.positive`, `completion.criterion`, `reference.teaching-depth` and `branch.condition` (D28, D35); each rule's entry records its mistake or standard and the kinds it judges; each rule's expectations file gains its history cases and its recorded bars; the held list (D34). Placement and `rule.generalization` wait for their open items. | open meanings 3, 4 and 6 |
+| runner | `tests/skills` | The printout lists held rules with what each is missing, and each skill's judged kind with how sure. | open meaning 3, for the kind |
+| engine | `sunstack-tools` | Only if the research shows the per-skill kind can't reach every piece with today's evidence fields. Its own design, as revision 1's engine change had. | open meaning 3 |
+
+### How the work runs in revision 2
+
+| Step | What | Who | Starts after |
+| --- | --- | --- | --- |
+| R2-1 | Talk with the owner: placement's scenarios (open meaning 4), and the 9 rules with no named mistake, one by one (open meaning 6) | 🦁 Lead with the owner | now |
+| R2-2 | Research the kind filter (open meaning 3) | 🦉 Advisor, commissioned 2 Nov 07:15 | now |
+| R2-3 | Mine history for each rule kept or held: description rewrites first (167 lines), then commits that change each standard's property; label the pairs | Luna operators under a Sol reducer; blind labellers and a settler; the owner sees the disagreements | now, for rules 1 to 6; the others as R2-1 settles them |
+| R2-4 | Write the filter design into this set, and settle the evidence fixes' pieces with evidence prints | 🦁 Lead | R2-2 |
+| R2-5 | Design review of revision 2 (`skill-review` design stage, with a `decision-model-review` reviewer) | 🔎 Sol reviewers with no authoring history | R2-1 and R2-4 |
+| R2-6 | Write the runs, then each rule's proof against its cases and the gate | 🐒 Opus writer for the skill text; 🦁 Lead for keyed runs | R2-5 accepted |
+
+#188 stays held at `4acdbd01`; revision 2's runs land on its branch. Revision 1's Gate 3 is replaced by the gate in D34: a rule ships nudging only once it passes its cases, so no rule-by-rule ship pick is needed.
+
 ## Targets, owners and runs
 
 Nine runs, one skill each, in this order. Each later run cites the contract the earlier ones teach, and never restates it. Runs 8 and 9 were added after the Advisor's view 3 found two more consumers that still narrow the old reading.
@@ -231,6 +259,18 @@ This is the recipe to build from. Each row is the default taken, consolidated fr
 | C15 | The placement standard separates one product's own application workflow from tools and platforms used through their supported interface, domain vocabulary, this toolkit's infrastructure and labelled examples, with no adopted-scope escape. | D16 |
 | C16 | `call.completeness` stays a narrow rule; the bad control is a narrowing commission or reading; the composition case shows two rules on one line. | D17 |
 | C17 | "Related locations" are confirmed by the owner (31 Oct): links to places the rule read, pointers to places it never read, and the same rule's nudges elsewhere. | D13, owner 31 Oct |
+| C18 | Each rule's bars are its own, set from its own cases and recorded beside them. No override of any kind. | D25, owner 2 Nov |
+| C19 | A decision model reads each skill's description once and judges its kind; rules declare the kinds they judge and take the answer as input. How it's built is open (open meaning 3). | D26, owner 2 Nov |
+| C20 | Description standards apply to every skill, hidden ones included. | D27, owner 2 Nov |
+| C21 | `guidance.positive` stays; it reads guidance as a whole, with what-to-avoid lines as caveats. | D28, owner 2 Nov |
+| C22 | `question.names-field` is dropped: entry and marker. | D29, owner 2 Nov |
+| C23 | Placement never fires on an example; its scenarios are settled with the owner. | D30, owner 2 Nov |
+| C24 | `rule.generalization`: the filter and the rule are redone together. | D31, owner 2 Nov |
+| C25 | `skill-rules` teaches the making order: mistake, standard, kinds, cases, piece, tree, bars, gate. | D32 |
+| C26 | Cases come from history first; wrong nudges become must-pass; the owner's fixes are labels; a slice is held back. | D33 |
+| C27 | A rule nudges no one until it passes its cases; the runner lists held rules. This replaces revision 1's Gate 3 picks. | D34 |
+| C28 | A wrong nudge caused by what a rule read is fixed in its evidence collection: `completion.criterion`, `reference.teaching-depth` and `branch.condition` as well as `guidance.positive`. | D35 |
+| C29 | The 9 rules with no named mistake stay held until the owner decides each; the Lead deletes none. | D36 |
 
 ## Decision history
 
@@ -271,9 +311,22 @@ Every row as recorded, in the order it was added. Superseded and amended rows st
 | D17 | `call.completeness` stays a valid narrow rule. The bad control is a narrowing commission or reading, and the composition case shows two rules on one line. | Making one rule raise every concern would undo atomicity. #187's failure was the commission and the missing placement rule (the Advisor, view 3 point 1). |
 | D22 (31 Oct, realizes C12; amends run 7) | Placement is two standards with one entry each. The operational standard keeps its one marker and one entry over the `section` kind, whose piece is a section's own text with the openings of its own loads; a section with no loads is judged on its own text, never `not_applicable` for having none. That entry carries C12's two section units. The description unit gets its own standard in `descriptions-and-invocation.md`, with its own marker and an entry over the existing description kind: "A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow." It links to the placement teaching for what that workflow is. No engine change. Whether a piece with openings judges its own text as well as one without them is unproven; the per-stratum proof carries the delivery claim. | The engine binds one marker to one entry and one evidence kind (`RuleEntryWire.evidence`, v0.6.0). The Advisor (view 7): both section units ask one question of one subject type, and S4 on 0.6.0 nudged inline routes and a load route from the same kind in one run. The current description standards pass "Use when debugging AgentStudio's beta application.", so stretching the trigger-only standard to catch it would change its proposition. The 2x2 never varied openings, so it shows neither a loss nor its absence. |
 | D23 (31 Oct, from S4 on 0.6.0) | S4's apparent positives are challenged as well as its locator. `practices-cleanup` line 70 (a labelled worked example of an ordinary `cargo clean`, with no loads) and the VictoriaMetrics line 47 nudge are negative or adjudication controls, not true positives. Line 17's exact-line result stays as recorded (named limit A). The locator's task carries its questions' exemptions; each case's acceptable labels are written before the bar is chosen from labelled development cases. The request cap is set from measured encoded requests over the multi-load sections; raising it fixes feasibility, not calibration. | The Advisor (view 7): line 70's state has the worked-example heading and no targets, and drew routing .72, exemption .23 and a resolved locator at .84, so a confident anchor isn't a correct nudge. S4 run 1 dropped the locator when the estimate went from 30,477 to 33,583 against the 32,000 default; run 2 at a 50,000 cap sent it, and line 17 still drew .44. |
+| D25 (owner, 2 Nov) | Each rule configures its own bars, set from its own cases; no override of any kind. Supersedes the per-skill override sketch on the Lead's rules page (`rules-spec-2026-11-02.html`), which was never adopted. | The owner: "1. yes then eveyr rkule shoud configure it no /" and "6. no override wierd stuff"; on the sketch, "no. i meant the rule can override or set this not each rkule has a override". The engine already requires every step's bars (E15), so no engine change. |
+| D26 (owner, 2 Nov) | The kind filter: a decision model reads each skill's description once and judges its kind; rules declare the kinds they judge and take the answer as input; the run shows each judged kind and how sure. How it's built is researched with the Advisor (open meaning 3). Supersedes the Lead's proposal to read kinds from name prefixes and frontmatter in config. | The owner picked "A decision-model question on each run", and wrote "we have domain -* but we can no thsi frorm diescripiton too? descripton is filter" and "shoukd valdiate if this is about a product or domain and ahve that as input no?"; confirmed one answer per skill handed to the rules with "2. yes this is ot done well go reserach and get advsiro help". |
+| D27 (owner, 2 Nov) | Description standards apply to every skill, hidden ones included. | The owner picked "Yes, all of them, as today" over the Lead's proposal to skip hidden skills. Descriptions are also the filter's input (D26). |
+| D28 (owner, 2 Nov) | `guidance.positive` stays; its evidence collection changes so it reads guidance as a whole and judges whether it mostly says what to do, with what-to-avoid lines as caveats. Supersedes the Lead's proposal to drop it. | The owner: "what to avoid shodku lbe caveats. it shoulb ebe by what to do in teh majority" and "5. this evicde problem not a problem with the rule the colelciotn of evice is nto right". 10 of its 27 wrong nudges had the "do" in the next sentence (E11). |
+| D29 (owner, 2 Nov) | `question.names-field` is dropped: its rule entry in `domain-decision-models.rules.json` and its marker in `domain-decision-models`. | The owner: "ok iname fiels seem suelss". It made 0 nudges on 22 questions, and history holds no case. |
+| D30 (owner, 2 Nov) | Placement never fires on an example; its scenarios are settled in a conversation with the owner, possibly as a follow-up change. Supersedes the owner's earlier pick on the six-rules page ("Revise in the next PR, then rerun"), whose fix the scenarios now decide. | The owner: "4. this is very confskuign and not clearn we shoud ltalk about it mroe we can make sure that we dont trigger on examples what are all the branches erhe what are teh scnarios mayb ethis isf follow ukp". All 5 of its wrong nudges on general skills were worked or fictional examples (E12). |
+| D31 (owner, 2 Nov) | `rule.generalization`: the filter and the rule are redone together. | The owner: "we need to redo teh filter and teh rule". 45 nudges on 1 Nov, all wrong; the typical one judged a reference about SQLx for naming SQLx (E12). |
+| D32 (Lead, 2 Nov) | `skill-rules` teaches the making order: mistake, standard, kinds, cases, piece, tree, bars, gate. | 9 of 18 rules were made the other way round, from "what can a model judge from one piece" (E16). The owner asked for "how to create rules tehre and what issues w2e fase dint eh past". |
+| D33 (Lead, 2 Nov) | Cases come from history first: the text before a real fix fires and the text after passes; every wrong nudge on real skills becomes a must-pass case; the owner's fixes are labels; a slice is held back and never tuned on. | The owner: "it seems liek we3 need to do better for evals" and "did we use descripition for prior bad descriptiosn to test as evasl?". The evals mostly checked silence and used no past mistake (E13, E14). |
+| D34 (Lead, 2 Nov) | A rule nudges no one until it passes its cases, development and held back; the runner lists held rules with what each is missing. Replaces revision 1's Gate 3, where rules shipped by one-by-one picks. | A rule that hasn't caught a real mistake can't be told apart from a useful one; the gate makes each rule earn its nudges, and makes per-rule ship picks unnecessary. The owner may strike this row. |
+| D35 (Lead, 2 Nov) | A wrong nudge caused by what a rule read is fixed in its evidence collection: `completion.criterion` (accept a done state in any words, not only a literal `Completion:` line), `reference.teaching-depth` (judge with the file's outline and stop lines; name lookups as lookups), `branch.condition` (a line ending in ":" carries its block). | The owner's principle on `guidance.positive` (D28) applied to the same cause in other rules: 117 of the 195 wrong nudges on 30 Oct came from what the rule read (E11). |
+| D36 (Lead, 2 Nov) | The 9 rules with no named mistake (rules 4, 5, 6, 8, 9, 12, 13, 14, 15 in the specification's table) stay held until the owner decides each; the Lead deletes none. | The owner: "so i can decide oen by one". Three of them have real catches (rules 5, 12, 14), so a mistake may exist to name. |
 
 ## Coordination
 
+- **Revision 2 base:** `4acdbd01` on the same branch, #188 held there until revision 2 is accepted.
 - **Base:** `3511b587`, branch `skills/rules-as-nudges`, worktree `/Users/shravansunder/dev/ai-tools.skills-rules-as-nudges`.
 - **Depends on:** the engine pull request in `sunstack-tools` and its 0.6.0 release, then a pin bump in `tests/skills`.
 - **Pending edits elsewhere:** none. The parked step-5 fixes and the app-specific move touch other skills' text, and wait.
@@ -310,6 +363,8 @@ The 🦁 Lead decides each gate and owns routing any rework: a gate that fails s
 | 1-6 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
 | 7 | the placement standard's teaching implemented as a step-4 draft; its marker, the description loading-scope standard (D22), the rules folder (config, section kind, rebuilt `rule.generalization`, both placement rules, rule-file rules) and the final self-check wait for step 5 |
 | 8-9 | implemented as step-4 drafts; final self-check on 0.6.0 owed (step 5) |
+| 1, 2, 6, 7 (revision 2 parts) | proposed (2 Nov); not reviewed; waits on open meanings 3, 4 and 6 |
+| runner (revision 2 part) | proposed (2 Nov) |
 
 ## Review record
 
