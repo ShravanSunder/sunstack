@@ -115,20 +115,30 @@ Options (multiSelect: true):
 
 **Batch 5: CLAUDE.md Content**
 ```
-Question: "What should go in CLAUDE.md?"
+Question 1: "Whose coding standards does this repository follow?"
+Options:
+- The owner's (Recommended): the sunstack-dev skills
+- This repository's own: you'll write or link them
+
+Question 2: "What should go in CLAUDE.md?"
 Options (multiSelect: true):
-- Structure + rule references (Recommended) - include @.cursor/rules references and project structure
+- Structure (Recommended) - include the project structure
 - Package dependency graph - for monorepos, document inter-package dependencies
 - Placeholders for patterns/constraints - empty sections for you to fill in
 - Skip CLAUDE.md - I'll write it myself
 ```
+
+On a retrofit, read the Standards line in the resolved instruction file (AGENTS.md's target when AGENTS.md exists, otherwise CLAUDE.md's) before asking Question 1. A line names a set only when its text after "Whose standards: " is exactly "the owner's (sunstack-dev)" or "this repository's own".
+- When the line names a set, pass that set, don't ask Question 1, and tell the person which set the line names.
+- When the file has a Standards section whose line names neither value, tell the person: the scaffold doesn't edit an existing section.
+- When the file can't be read (a dangling link, or not a regular file), tell the person: the scaffold writes no section there.
 
 **Batch 6: Conflict Handling** (retrofit only)
 ```
 Question: "How should we handle existing files?"
 Options:
 - Skip existing files (Recommended) - only add missing configs
-- Overwrite all - replace existing with scaffold templates
+- Overwrite configs - replace existing config files with scaffold templates; an existing CLAUDE.md or AGENTS.md is never replaced
 ```
 
 ### Step 3: Execute Scaffolding (ONCE)
@@ -140,19 +150,22 @@ Run the appropriate scaffold scripts:
 bash ${CLAUDE_PLUGIN_ROOT}/scripts/scaffold/scaffold-project.sh \
   --name "project-name" \
   --type "monorepo-both" \
+  --standards owner \
   --author "Name" \
   --email "email@example.com"
 ```
 
+`--standards` carries Batch 5's first answer, or on a retrofit the set the existing Standards line names: `owner` for the owner's standards, `own` for this repository's own.
+
 The script handles:
 - Creating directory structure (apps/, packages/, services/ for monorepos)
 - Copying linter configs (.oxlintrc.json, .oxfmtrc.json, ruff.toml, pyrightconfig.json)
-- Setting up cursor rules (.cursor/rules/*.md with .mdc symlinks)
 - Creating cursor hooks (.cursor/hooks/)
 - Setting up Claude hooks (.claude/hooks/)
 - Creating package.json/pyproject.toml with dependencies
 - Setting up vitest/pytest configurations
-- Creating CLAUDE.md and AGENTS.md (symlink to CLAUDE.md)
+- Creating AGENTS.md, with its `## Standards` section, and CLAUDE.md as a symlink to AGENTS.md for new projects; existing instruction files and links are preserved
+- On a retrofit, appending the `## Standards` section to the existing instruction file when it has none, without replacing the file or any link
 - Setting up .gitignore
 - Creating worktrunk config (.config/wt.toml)
 
@@ -173,7 +186,7 @@ Show summary of what was created/skipped:
 Created:
   - .oxlintrc.json
   - .oxfmtrc.json
-  - .cursor/rules/ts-rules.mdc
+  - CLAUDE.md (with its Standards section)
   - .cursor/hooks/after-edit.sh
   ...
 
@@ -195,6 +208,9 @@ Templates use these placeholders:
 | `{{INCLUDE_PY}}` | Include Python | `true` |
 | `{{INCLUDE_SWIFT}}` | Include Swift | `true` |
 | `{{MONOREPO}}` | Is monorepo | `true` |
+| `{{OWNER_STANDARDS}}` | The owner's standards were chosen | `true` |
+| `{{REPO_STANDARDS}}` | This repository's own standards were chosen | `false` |
+| `{{OWNER_TS}}`, `{{OWNER_PY}}`, `{{OWNER_SWIFT}}` | The owner's standards and that language | `true` |
 
 ## Update Templates Workflow
 
@@ -205,8 +221,9 @@ To update base templates with latest tool standards:
 Ask which templates to update:
 - OXC config (oxlint + oxfmt rules)
 - Ruff config (latest rules)
-- Cursor rules (content updates)
 - All templates
+
+Coding standards for TypeScript, Python, Rust and Swift, and the shared ones, live in the `sunstack-dev` domain skills. Change them there, not in a template.
 
 ### Step 2: Research Latest Standards
 
@@ -260,7 +277,7 @@ templates/
 │   └── single/
 ├── testing/          # vitest-browser, playwright configs
 ├── monorepo/         # apps/, packages/, services/ structure
-├── cursor/           # rules/*.md (+ .mdc symlinks), hooks/
+├── cursor/           # hooks/
 └── claude/           # hooks/, settings template
 ```
 
@@ -288,9 +305,10 @@ Claude asks (AskUserQuestion batch):
   Q2: "Top-level directories?" → [apps, packages, services]
   Q3: "Testing features?" → [Vitest unit, Playwright E2E]
   Q4: "Additional configs?" → [Claude hooks, Cursor hooks]
+  Q5: "Whose coding standards?" → The owner's
 
 AFTER all answers collected, execute ONCE:
-  bash scaffold-project.sh --name my-platform --type monorepo-ts --playwright
+  bash scaffold-project.sh --name my-platform --type monorepo-ts --standards owner --playwright
 
 Result: Full monorepo created with all selected options.
 ```
@@ -305,12 +323,13 @@ Claude detects: pyproject.toml exists (retrofit mode)
 Claude asks (AskUserQuestion batch):
   Q1: "Include pytest with markers?" → Yes
   Q2: "Additional configs?" → [Claude hooks, Worktrunk]
-  Q3: "Handle existing files?" → Skip existing
+  Q3: "Whose coding standards?" → The owner's (asked because CLAUDE.md has no Standards line; a file with one passes its set without asking)
+  Q4: "Handle existing files?" → Skip existing
 
 AFTER all answers, execute ONCE:
-  bash scaffold-project.sh --name existing-project --type single-py
+  bash scaffold-project.sh --name existing-project --type single-py --standards owner
 
-Result: Missing configs added, existing files preserved.
+Result: Missing configs added, and the Standards section appended to the existing CLAUDE.md or AGENTS.md if it had none; existing files preserved.
 ```
 
 ### Add Individual Testing Config

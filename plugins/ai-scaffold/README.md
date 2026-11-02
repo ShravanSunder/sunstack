@@ -24,6 +24,8 @@ codex plugin add scaffold-project@sunstack
 
 Restart Claude Code after installation.
 
+A repository scaffolded with the owner's standards links the `sunstack-dev` skills from its Standards section (`sunstack-dev:domain-code-standards` and the language skills). Install the `sunstack-dev` plugin too, so agents in that repository can load them.
+
 ## Usage
 
 ### Commands
@@ -66,14 +68,12 @@ Just ask Claude:
 ## What Gets Created
 
 ### Common Files
-- `CLAUDE.md` - AI assistant instructions
-- `AGENTS.md` → `CLAUDE.md` (symlink for cross-tool compatibility)
+- `CLAUDE.md` - AI assistant instructions, with a `## Standards` section that says whose coding standards apply: the owner's (with links to the `sunstack-dev` skills) or this repository's own (with a pointer to its standards file). A retrofit appends the section to an existing instruction file and replaces no file or link.
+- `AGENTS.md` is the instruction source for new projects; `CLAUDE.md` → `AGENTS.md` provides cross-tool compatibility. Existing files and links are preserved.
 - `.gitignore` - Comprehensive ignore patterns
 - `.config/wt.toml` - Worktrunk configuration
 
 ### Cursor Integration
-- `.cursor/rules/*.md` - Coding standards (source of truth)
-- `.cursor/rules/*.mdc` → `*.md` (symlinks for Cursor discovery)
 - `.cursor/hooks/` - afterFileEdit hooks for linting
 
 ### Claude Code Integration
@@ -141,7 +141,8 @@ bash ~/dev/ai-tools/plugins/ai-scaffold/scripts/scaffold/scaffold-project.sh \
 | `--author NAME` | Author name |
 | `--email EMAIL` | Author email |
 | `--target DIR` | Target directory |
-| `--overwrite` | Overwrite existing files |
+| `--standards SET` | Whose coding standards: `owner` (default) or `own`. On a retrofit, an existing Standards line governs |
+| `--overwrite` | Overwrite existing config files; an existing CLAUDE.md or AGENTS.md is never replaced |
 | `--vitest-browser` | Include vitest browser mode |
 | `--playwright` | Include Playwright E2E |
 | `--no-vitest` | Skip vitest setup |
@@ -170,7 +171,7 @@ ai-scaffold/
     ├── python/              # Python configs (single/monorepo)
     ├── swift/               # Swift configs (single)
     ├── testing/             # Vitest/Playwright configs
-    ├── cursor/              # Cursor rules (.md) and hooks
+    ├── cursor/              # Cursor hooks
     ├── claude/              # Claude hooks and settings
     └── monorepo/            # Monorepo structure templates
 ```

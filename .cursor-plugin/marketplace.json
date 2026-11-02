@@ -12,7 +12,7 @@
       "name": "scaffold-project",
       "source": "ai-scaffold",
       "description": "Project scaffolding with standard dev configs (biome, ruff, vitest, pytest, cursor rules, claude hooks)",
-      "version": "0.2.3"
+      "version": "0.3.0"
     },
     {
       "name": "dev-workflow-tools",
@@ -24,7 +24,7 @@
       "name": "sunstack-dev",
       "source": "sunstack-dev",
       "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and structured TUI, rendered chat and standalone HTML presentation",
-      "version": "2.102.1"
+      "version": "2.103.0"
     },
     {
       "name": "skill-authoring",

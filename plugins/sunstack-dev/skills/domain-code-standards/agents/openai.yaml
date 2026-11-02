@@ -1,0 +1,6 @@
+interface:
+  display_name: "Domain: Code standards"
+  short_description: "Whose standards apply, and the owner's shared ones"
+  default_prompt: "Use $domain-code-standards to name whose standards govern the current work and apply that set."
+policy:
+  allow_implicit_invocation: false
