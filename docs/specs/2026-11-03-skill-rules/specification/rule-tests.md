@@ -11,7 +11,7 @@
 
 `kind: obligation · capability: rule-tests · links: U17, E3, E8, C1, C5, V18 · status: authorized`
 
-A judged rule is `nudging` only while: it has at least 3 real-mistake cases, 3 good cases and 3 near-miss cases in development, plus a held-back set; it gives every development case its label; and it gives every held-back case its label. Each real fix's before text is a `fire` case and its after text a `quiet` case, kept together in one set. Every wrong nudge the rule gave on a real skill is a must-pass case. If any of these fails, then the rule is `held` and the run lists what it lacks.
+A judged rule is `nudging` only while: it has at least 3 real-mistake cases, 3 good cases and 3 near-miss cases in development, plus a held-back set frozen before any of its bars was recorded and never cited by a bar; and a complete case run of its current definition (its questions, bars, chunk, kind gate and cases, on the current engine and model) gave every development and held-back case its label, with none unsure. Cases that were already seen while designing a rule are development cases, however they were once labelled. Each real fix's before text is a `fire` case and its after text a `quiet` case, kept together in one set. Every wrong nudge the rule gave on a real skill is a must-pass case. If any of these fails, then the rule is `held` and the run lists what it lacks.
 
 <a id="r19"></a>
 ### R19 · Labels say where they came from
@@ -25,7 +25,7 @@ Each case's label cites its basis: the owner's fix or words; blind labels from a
 
 `kind: obligation · capability: rule-tests · links: U18, E9, C1, V20 · status: authorized`
 
-Each decision step's bars are set from its rule's development cases and recorded with the cases that set them; a bar still at its starting value is shown as `starting`. No config, skill or kind can change a rule's bars: there is no override mechanism.
+Each decision step's current bar values are recorded together with the development cases that justified them; a value may equal the starting default if the cases support it. A bar not yet assessed is `starting`, and a judged rule with any `starting` bar, or a bar whose current value differs from its recorded one, is `held`. No config, skill or kind can change a rule's bars: there is no override mechanism.
 
 <a id="r21"></a>
 ### R21 · Cases are real skill text
@@ -47,5 +47,5 @@ For each rule a reader can see: its cases by kind (real mistake, good, near miss
 | --- | --- | --- | --- |
 | <a id="v18"></a>V18 | R18 | no `nudging` judged rule is short of its floor or fails a case; a fix pair never splits across sets | the case sets |
 | <a id="v19"></a>V19 | R19 | every label cites its basis; no disputed case is counted | the case sets; owner decisions |
-| <a id="v20"></a>V20 | R20 | every bar is `starting` or cites its cases; no override setting exists | the rule files; the config schema |
+| <a id="v20"></a>V20 | R20 | every nudging rule's current bar values equal the values recorded with their development cases; a `starting` bar, or a value changed after it was recorded, keeps the rule held; no override setting exists | the rule files; the case files; the config schema |
 | <a id="v21"></a>V21 | R21 | every case resolves at its cited commit and span | git |

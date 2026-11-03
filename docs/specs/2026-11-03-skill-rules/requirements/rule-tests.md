@@ -25,7 +25,7 @@ Each judged rule has, before it nudges anyone, at least **3 real mistakes** (it 
 
 `kind: requirement · capability: rule-tests · status: authorized · was: R13`
 
-Every decision step's bars are set from that rule's own cases and recorded beside the cases that set them. Each rule configures its own; a sensible starting value is where tuning begins, not where it ends. Nothing overrides a rule's bars: not a skill, a kind or a config.
+Every decision step's bars are set from that rule's own cases, and each current value is recorded beside the cases that justified it. Each rule configures its own; a sensible starting value is where tuning begins, not where it ends, so a rule still on an unassessed starting value doesn't nudge. Nothing overrides a rule's bars: not a skill, a kind or a config.
 
 <details>
 <summary>Authority and evidence</summary>

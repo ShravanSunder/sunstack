@@ -39,10 +39,12 @@ Chunk shape (agreed with the design-documents Lead, 3 Nov): each row opens with 
 4. [R6](specification/nudges.md#r6): the nudge's parts
 5. [R11](specification/nudges.md#r11): the agent's disposition decides the broader question, not "make it pass"
 6. [R18](specification/rule-tests.md#r18): product-leak nudges only because it passed its cases, PR187's before and after among them
+7. [The path from line 17 to the agent](program-design.md#the-path-from-line-17-to-the-agent): who calls whom, from the runner through the assessment and the gate to the printed nudge; [the nudge, as the agent reads it](program-design.md#the-nudge-as-the-agent-reads-it-reportts): which part comes from where
+8. [Proof](verification-design.md#the-rows): the U1 · R6 row (every part on line 17, a second nudge, a quiet control) and the U13 · R13, R14 row (the kind census)
 
 ## Reading path: is this rule worth running?
 
-1. [R1](specification/rule-making.md#r1): its named mistake → 2. [C1](specification/rule-making.md#c1): its entry → 3. [C5](specification/rule-tests.md#c5): its case set → 4. [R20](specification/rule-tests.md#r20): its bars and their cases
+1. [R1](specification/rule-making.md#r1): its named mistake → 2. [C1](specification/rule-making.md#c1): its entry → 3. [C5](specification/rule-tests.md#c5): its case set → 4. [R20](specification/rule-tests.md#r20): its bars and their cases → 5. [the derived rule state](program-design.md#the-derived-rule-state-runner) and [the case-run receipt](program-design.md#the-case-run-receipt-case-runjson-new-committed) → 6. [proof](verification-design.md#the-rows): the U17 and U18 rows
 
 ## Concept: the kind of a skill
 

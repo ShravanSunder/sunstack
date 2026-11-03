@@ -37,9 +37,9 @@ flowchart TB
 | run expectations | `pnpm --dir tests/skills rules:expect` → `scripts/run-rule-expectations.ts` → `expectation-run.ts` `runExpectations` checks each pinned case (`pinned-source.ts` extracts the file at its commit) → `expectation-scoring.ts` | changes: reads case files, reports per-rule floor, sets, bar sources, derived state |
 | what a rule is | `*.rules.json` entries keyed by marker: `name`, `evidence`, `questions`, `decision.steps` with `min_probability` or `yes_at_or_above`/`no_at_or_below`, `severity` | gains a kind gate (engine feature); nothing else |
 | what a case is | `*.expect.json` `expectations[]`: `id`, `rule`, `source{repository, commit, path}`, lines, `expect` (`must_fire` 28, `must_pass` 191, `not_applicable` 26), `kind` (`regression_example` 173, `worth_reading` 69, `breach` 3), `basis`, `decided_by{how: independent}`, `added` | replaced by `*.cases.json` (hard cutover); every expectation migrates |
-| held-back set | 35 held-out cases frozen in `tests/skills/evals/rule-strata.json` (commit `74e18127`), labelled blind (`429a3a88`) | moves into each case's `set` |
+| held-back set | none today. The 35 cases once held out (`74e18127`, blind-labelled in `429a3a88`) were migrated by the accepted D24 amendment into the expectation files as regression examples, and `rule-strata.json` was removed; each says it "is a regression example, not a fresh holdout" (e.g. `calls-and-placement.expect.json:172`) | every current case migrates as `development`; a new held-back group is frozen before any bar is tuned |
 | which skills a rule judges | none: every rule judges every file its evidence kind matches. `select` is noul-only and `as_kind` refuses selected kinds (the Advisor's 3 keyless probes on v0.6.0) | engine feature: owner assessment |
-| nudge parts | v0.6.0 report: location, basis, related locations from canonical paths (`ad7dd96`), JSON lint with declared grammars (`2129d77`) | stays |
+| nudge parts | engine v0.6.0: each finding carries location, basis, answers and path, and related places built from the standard's line and the piece's declared fields (`report_contracts.rs:73–105`, `outcome.rs:189–229`); it never joins other results. The runner's `formatLintReport` (`report.ts:347–377`) prints message, basis, anchor and read places only | the runner's formatter gains the standard's wording, the answers and path, the cut flag and the same rule's nudges elsewhere; the engine is unchanged for this |
 
 ## The choice, and what it costs
 
@@ -65,10 +65,10 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 | [E4 Mistake](specification/entities.md#e4) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
 | [E5 Kind judgment](specification/entities.md#e5) | the engine (asks), the config (defines) | engine report `assessments[]` (new, engine); question in `skill-rules.config.json` `assessments.work_scope` (new) | `{ owner: string, assessment: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
 | [E6 Chunk](specification/entities.md#e6) | config evidence kinds | existing `evidence.kinds`; modified: `guidance` kind (new, whole guidance section) replaces `sentence` for `guidance.positive`; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
-| [E7 Nudge](specification/entities.md#e7) | the engine | existing v0.6.0 report result | existing | derived per run |
+| [E7 Nudge](specification/entities.md#e7) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
 | [E8 Case](specification/entities.md#e8) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
-| [E9 Bar](specification/entities.md#e9) | rulebook author | values: existing step fields in `*.rules.json`; sources: `*.cases.json` `rules[name].bars[step]` (new) | `{ status: "starting" \| "tuned", cases: string[] }` | persisted |
-| [E10 Gap](specification/entities.md#e10) | the runner (unread, held), the engine (cut, unresolved, kind unsure) | `report.ts` `ReportGaps` (modified: gains `kindUnsure`, `noOwner`) | closed variant below | derived per run |
+| [E9 Bar](specification/entities.md#e9) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
+| [E10 Gap](specification/entities.md#e10) | the runner (unread, held), the engine (cut, unresolved, kind unsure, no owner) | existing `report.ts` `ReportGaps` (modified, no parallel schema) | `Gap` below | derived per run |
 | [E11 Behavior-test candidate](specification/entities.md#e11) | the Lead | `tests/skills/evals/behavior-candidates.json` (new; a list, nothing runs it) | `{ id, episode, records: string[], behavior: string, teaching_rule?: string }` | persisted |
 | [E12 Disposition](specification/entities.md#e12) | the agent acting on the nudge | existing reporting surfaces taught by the skills (self-check, review findings, acceptance); modified teaching | text: rule, place, disposition, what was checked | in the agent's report |
 | [E13 Run](specification/entities.md#e13) | engine (exit), runner (state) | existing `engine-runner.ts`, `report.ts` | existing exit statuses (uncertain = 5) | derived |
@@ -84,7 +84,13 @@ const reason = z.object({
   locator: z.string().min(1),          // SM017, a commit sha, a PR URL, or a K marker
   quote: z.string().optional(),        // the owner's exact words when type is inventory
 });
-const barSource = z.object({ status: z.enum(["starting", "tuned"]), cases: z.array(z.string()) });
+const barValues = z.object({ yes_at_or_above: z.number().optional(), no_at_or_below: z.number().optional(), min_probability: z.number().optional() });
+const barSource = z.object({
+  status: z.enum(["starting", "tuned"]),
+  values: barValues,                   // the values the cases justified; must equal the step's current values
+  cases: z.array(z.string()),          // development case ids only
+  recorded_at: z.string().regex(/^[0-9a-f]{40}$/), // the commit where these values were set
+});
 const ruleRecord = z.object({
   basis: z.enum(["mechanical", "judged"]),
   decision: ownerDecision,
@@ -93,14 +99,23 @@ const ruleRecord = z.object({
   bars: z.record(z.string(), barSource), // step name → where its bars came from
 });
 
+const positiveLine = z.number().int().positive();
 const caseRecord = z.object({
-  id: z.string(),
+  id: z.string(),                      // kept from the old expectation
   rule: z.string(),
-  source: z.object({ repository: z.string(), commit: z.string().regex(/^[0-9a-f]{40}$/), path: z.string() }),
-  lines: z.object({ piece_first: z.number().int(), field: z.number().int().optional() }),
-  expect: z.enum(["must_fire", "must_pass", "not_applicable"]),
+  source: z.object({
+    repository: z.string(),
+    commit: z.string().regex(/^[0-9a-f]{40}$/),
+    path: z.string(),
+    context: z.array(z.string()).min(1), // what is pinned with it at the same commit (loaded files; the owner's SKILL.md for a reference)
+  }),
+  select: z.object({ piece_first_line: positiveLine.optional(), field_line: positiveLine.optional() }).optional(), // which piece, only when the file has several
+  expect: z.enum(["must_fire", "must_pass", "not_applicable", "unknown"]),
+  finding_lines: z.array(positiveLine).min(1).optional(), // required for must_fire, absent otherwise; a finding elsewhere is a wrong locator, reported apart
+  kind: z.enum(["breach", "worth_reading", "regression_example"]), // kept as today
   case_kind: z.enum(["real_mistake", "good", "near_miss", "unclassified"]),
   set: z.enum(["development", "held_back"]),
+  frozen: z.object({ commit: z.string().regex(/^[0-9a-f]{40}$/), date: z.string() }).optional(), // required for held_back
   fix_pair: z.string().optional(),     // shared by a fix's before and after
   label: z.object({
     basis: z.enum(["owner_fix", "owner_words", "agents_agreed", "owner_decided"]),
@@ -113,7 +128,30 @@ const caseRecord = z.object({
 const casesFile = z.object({ rules: z.record(z.string(), ruleRecord), cases: z.array(caseRecord) });
 ```
 
-`unclassified` exists only for migrated expectations not yet adjudicated by the case mining; it counts toward no floor. `expect` keeps today's three values; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
+`unclassified` exists only for migrated expectations not yet adjudicated by the case mining; it counts toward no floor, and neither does `expect: unknown`. `expect`, `kind`, the selector and the finding lines keep today's meaning; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
+
+**Migration, one format, no compatibility reader.** Each old expectation becomes one case with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: agents_agreed`, `label.state: labelled`; `case_kind: unclassified`; `set: development` for every one, since all current cases are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
+
+**A held-back case** carries `frozen`: the commit that froze its group. That commit must come before every `bars[*].recorded_at` of its rule, and no held-back id may appear in any `bars[*].cases`. Otherwise the rule is held.
+
+### The case-run receipt (`*.case-run.json`, new, committed)
+
+Written only by `rules:expect` beside each rulebook, so an ordinary run (no model key needed for this check) can tell whether a rule's current definition passed its cases:
+
+```ts
+const caseRunReceipt = z.object({
+  engine_version: z.string(),
+  model: z.string(),
+  complete: z.boolean(),               // false when the run was cancelled, incomplete or any case errored
+  rules: z.record(z.string(), z.object({
+    fingerprint: z.string(),           // sha256 over the rule's inputs, below
+    development: z.object({ passed: z.number(), failed: z.array(z.string()), unsure: z.array(z.string()) }),
+    held_back: z.object({ passed: z.number(), failed: z.array(z.string()), unsure: z.array(z.string()) }),
+  })),
+});
+```
+
+A rule's fingerprint covers: its rulebook entry (questions, decision, bars, severity, `requires`); the config definitions of the evidence kind it reads and, when gated, the owners and assessment it reads; its case records; the engine version and model. On every ordinary run the runner recomputes it. No receipt, `complete: false`, a different fingerprint, or any failed or unsure case → `held`.
 
 ### The derived rule state (runner)
 
@@ -123,6 +161,11 @@ type RuleState =
   | { state: "held"; lacks: HeldReason[] }
   | { state: "dropped" };
 type HeldReason =
+  | { kind: "no_matching_case_run"; why: "missing" | "incomplete" | "changed_since" } // R18, F2
+  | { kind: "unsure_cases"; cases: string[] }                 // R18
+  | { kind: "untuned_bar"; step: string }                      // R20
+  | { kind: "bar_changed"; step: string }                      // R20: current value ≠ recorded value
+  | { kind: "held_back_not_independent" }                       // R18: frozen after tuning, or cited by a bar
   | { kind: "no_reason" }                                     // R1
   | { kind: "owner"; decision: "rework_first" | "held_by_owner" | "undecided" } // R2
   | { kind: "floor"; case_kind: "real_mistake" | "good" | "near_miss"; have: number; need: 3 } // R18
@@ -132,7 +175,32 @@ type HeldReason =
   | { kind: "needs_engine"; feature: "owner_assessment" };      // R14 before the release
 ```
 
-Mechanical rules (`basis: "mechanical"`) are `nudging` once they name a `written_standard` reason and the owner kept them; floor and held-back reasons apply to judged rules only.
+Mechanical rules (`basis: "mechanical"`) are `nudging` once they name a `written_standard` reason and the owner kept them; case-run, floor, bar and held-back reasons apply to judged rules only.
+
+### The nudge, as the agent reads it (`report.ts`)
+
+| R6 part | Comes from |
+| --- | --- |
+| where | engine finding `file`, `line` (the locator inside the chunk) |
+| what | engine finding `message` (the route's authored text, which also carries any never-read pointer) |
+| why | the runner reads the standard's line text at the finding's `standard` related place |
+| basis, severity, outcome | engine finding |
+| read next: read places | engine `related` places, labelled |
+| read next: same rule elsewhere | the runner joins this run's findings with the same rule name, listed as "same rule also nudged" |
+| answers and path | engine finding answers and path |
+| cut | the piece's model-visible state in the engine report |
+
+### Gaps (`ReportGaps`, existing, extended)
+
+```ts
+type Gap =
+  | { kind: "nothing_read"; rule: string; file: string }
+  | { kind: "cut"; rule: string; file: string; line: number }
+  | { kind: "unresolved"; selection: string; file: string; line: number }
+  | { kind: "incomplete"; rule: string; reason: string }
+  | { kind: "kind_unsure"; owner: string; answers: Record<string, number> }
+  | { kind: "no_owner"; rule: string; file: string };
+```
 
 ### The engine feature: owner assessment
 
@@ -157,6 +225,9 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 | `call.completeness`, `branch.condition` | `load`, `branch` | none | cases from history |
 | `reference.teaching-depth`, `main-path.spine`, `completion.criterion` | `reference_section`, `skill_body`, `step` | none | `rework_first`: evidence fix (R24), then cases |
 | `guidance.positive` | `guidance` (new: whole guidance section) | none | evidence fix (R24), then cases |
+| `completion.criterion` (repair) | `step` with its whole body | none | the literal `Completion:` AST gate (`evidence/rules/skill-steps.yml:50`, `steering.rules.json:32–47`) is removed; the question judges a done state in any words |
+| `reference.teaching-depth` (repair) | `reference_section` plus the file's outline and stop lines | none | outline and stop-line fields added; lookups named as lookups in the question's criteria |
+| `branch.condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
 | `question.one-proposition`, `question.criteria-match` | `rule_question` | none | `held_by_owner` until old rule files give cases |
 
@@ -176,7 +247,7 @@ sequenceDiagram
   L->>J: section piece with line 17 + agentstudio-loop.md opening
   J-->>L: routes into one product's own workflow
   L-->>R: report JSON: result warn, judged, related places; assessments[]
-  R->>R: derive rule states from *.cases.json + last case run
+  R->>R: derive rule states: case files, rule files, matching case-run receipt (fingerprint)
   R-->>A: nudge at SKILL.md:17 (product-leak is nudging); kinds; gaps; held rules
   A->>A: read places, decide; record disposition (R11)
 ```
@@ -188,13 +259,13 @@ sequenceDiagram
 ```mermaid
 stateDiagram-v2
   [*] --> held: entry written
-  held --> nudging: reasons named, owner kept it, floor met, all cases pass, engine features present
-  nudging --> held: question, chunk, bars or cases change and a case fails or the floor drops
+  held --> nudging: reasons named, owner kept it, floor met, bars tuned, a complete matching case run with every case passing, engine features present
+  nudging --> held: any input in its fingerprint changes (until a new case run matches), or a case fails
   held --> dropped: owner drops it
   nudging --> dropped: owner drops it
 ```
 
-Owner: the runner derives the state on every run from the case file and the last case run; nobody writes it. Illegal: `nudging` with a failing case or a disputed case counted (the derivation can't produce it); a held rule's result in the agent report (the report filters by state).
+Owner: the runner derives the state on every run from the case file, the rule files and the matching case-run receipt; nobody writes it. Illegal: `nudging` with a failing case or a disputed case counted (the derivation can't produce it); a held rule's result in the agent report (the report filters by state).
 
 ## When things go wrong
 
@@ -233,30 +304,30 @@ No concurrency: a run is one process over one commit. No migration of stored use
 
 | U | R | E | Owner | Interface | Shape and home | State | Failure | Proof seam |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| U9 | R1 | E3, E4 | runner | rule state derivation | `ruleRecord.reasons` in `*.cases.json` | `held: no_reason` | no reason → held | case report per rule |
-| U10 | R2 | E3 | owner via case file | `ruleRecord.decision` | `ownerDecision` enum | held / dropped | undecided → held | case report vs U10 |
-| U12 | R3 | E4, E11 | Lead | list file | `behavior-candidates.json` | listed | — | inventory vs list |
-| U8 | R4 | E3, E7 | rulebook `domain-decision-models` | lint over `*.rules.json` (v0.6.0 JSON lint) | existing `rule_question` kind | — | JSON parse failure isolated (v0.6.0) | real rule-file cases |
-| U11 | R5 | none: engine boundary | engine | owner assessment config + `requires` | generic config sections | — | — | engine diff and release |
-| U1 | R6 | E7, E2 | engine | v0.6.0 report | existing result | — | — | line-17 run |
-| U2 | R7 | E7 | rulebook routes | route `finding` text | existing | — | — | routes' text |
-| U3 | R8 | E10, E13 | runner + engine | `ReportGaps` | closed gap variant | — | — | silent-coverage case |
-| U4 | R9 | E13 | engine + runner | exit status | existing (uncertain = 5) | run states | invalid/cancelled/incomplete reported | exit codes |
-| U5 | R10 | none: teaching | skills | skill text | — | — | — | skills' text |
-| U6 | R11 | E12 | agents, taught by skills | reporting surfaces | disposition text | E12 states | narrow fix not `fixed` | skills' text; #187 |
-| U7 | R12 | none: teaching | skills | skill text | — | — | — | skills' text |
-| U13 | R13 | E1, E5 | engine (asks), config (defines) | owner assessment | `assessments[]` | judged / unsure / incomplete | incomplete → run incomplete | kind cases on every skill |
-| U13 | R14 | E3, E5 | engine gate | `requires` | `{assessment, accept}` | — | outside accept → not_applicable | 1 Nov product-skill nudges |
-| U14 | R15 | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
-| U15 | R16 | E1 | rulebook | no `requires` on description rules | — | — | — | hidden skills' results |
-| U16 | R17 | E3, E5 | rulebooks calls-and-placement (+ descriptions, generalization if A-2) | `product-leak` entries | rule entries + cases | per rule | — | U16's rows as cases |
-| U17 | R18 | E3, E8 | runner | rule state derivation | `RuleState`, `HeldReason` | held / nudging | broken case → held | case report |
-| U17 | R19 | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
-| U18 | R20 | E9 | rulebook author | step bar fields + `ruleRecord.bars` | `barSource` | starting / tuned | — | case report; no override key in schema |
-| U19 | R21 | E8 | runner | `pinned-source.ts` | `caseRecord.source` | — | unresolvable → held | case resolution |
-| U20 | R22 | E6 | config evidence kinds | evidence kind declaration | existing kinds | — | cut reported | rule files; report |
-| U21 | R23 | E6 | config `section` kind | piece building | `section` with table rows | — | — | lines 17 and 40 |
-| U22 | R24 | E6 | config | `guidance` kind | new evidence kind | — | — | 30 Oct guidance dispositions |
+| U9 | R1 (rule-making) | E3, E4 | runner | rule state derivation | `ruleRecord.reasons` in `*.cases.json` | `held: no_reason` | no reason → held | case report per rule |
+| U10 | R2 (rule-making) | E3 | owner via case file | `ruleRecord.decision` | `ownerDecision` enum | held / dropped | undecided → held | case report vs U10 |
+| U12 | R3 (rule-making) | E4, E11 | Lead | list file | `behavior-candidates.json` | listed | — | inventory vs list |
+| U8 | R4 (rule-making) | E3, E7 | rulebook `domain-decision-models` | lint over `*.rules.json` (v0.6.0 JSON lint) | existing `rule_question` kind | — | JSON parse failure isolated (v0.6.0) | real rule-file cases |
+| U11 | R5 (rule-making) | none: engine boundary | engine | owner assessment config + `requires` | generic config sections | — | — | engine diff and release |
+| U1 | R6 (nudges) | E7, E2 | runner formatter over the engine finding | `formatLintReport` | the nudge rendering table | — | — | line-17 run plus a second real nudge and a non-nudged control |
+| U2 | R7 (nudges) | E7 | rulebook routes | route `finding` text | existing | — | — | routes' text |
+| U3 | R8 (nudges) | E10, E13 | runner + engine | `ReportGaps` | closed gap variant | — | — | silent-coverage case |
+| U4 | R9 (nudges) | E13 | engine + runner | exit status | existing (uncertain = 5) | run states | invalid/cancelled/incomplete reported | exit codes |
+| U5 | R10 (nudges) | none: teaching | skills | skill text | — | — | — | skills' text |
+| U6 | R11 (nudges) | E12 | agents, taught by skills | reporting surfaces | disposition text | E12 states | narrow fix not `fixed` | skills' text; #187 |
+| U7 | R12 (nudges) | none: teaching | skills | skill text | — | — | — | skills' text |
+| U13 | R13 (skill-kinds) | E1, E5 | engine (asks), config (defines) | owner assessment | `assessments[]` | judged / unsure / incomplete | incomplete → run incomplete | kind cases on every skill |
+| U13 | R14 (skill-kinds) | E3, E5 | engine gate | `requires` | `{assessment, accept}` | — | outside accept → not_applicable | 1 Nov product-skill nudges |
+| U14 | R15 (skill-kinds) | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
+| U15 | R16 (skill-kinds) | E1 | rulebook | no `requires` on description rules | — | — | — | hidden skills' results |
+| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement (+ descriptions, generalization if A-2) | `product-leak` entries | rule entries + cases | per rule | — | U16's rows as cases |
+| U17 | R18 (rule-tests) | E3, E8 | runner | rule state derivation + case-run receipt | `RuleState`, `HeldReason`, `caseRunReceipt` | held / nudging | missing, incomplete or changed receipt → held | case report; a change after a passing run |
+| U17 | R19 (rule-tests) | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
+| U18 | R20 (rule-tests) | E9 | rulebook author; runner checks | step bar fields + `ruleRecord.bars` | `barSource` with values | starting / tuned | starting or changed → held | values vs recorded values; no override key |
+| U19 | R21 (rule-tests) | E8 | runner | `pinned-source.ts` | `caseRecord.source` | — | unresolvable → held | case resolution |
+| U20 | R22 (what-rules-read) | E6 | config evidence kinds | evidence kind declaration | existing kinds | — | cut reported | rule files; report |
+| U21 | R23 (what-rules-read) | E6 | config `section` kind | piece building | `section` with table rows | — | — | lines 17 and 40 |
+| U22 | R24 (what-rules-read) | E6 | config evidence kinds + rulebooks | `guidance` kind; `step` body; reference outline/stop fields; `branch` block | modified kinds | — | — | the four rules' 30 Oct wrong nudges |
 
 ## Order of work
 
