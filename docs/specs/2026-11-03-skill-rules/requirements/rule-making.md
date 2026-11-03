@@ -30,14 +30,16 @@ The rules that exist, and what happens to each, are the owner's decisions of 2 a
 | --- | --- |
 | `description.opener`, `description.length-warning`, `description.length-limit` | keep (written standards, checked by pattern and count) |
 | `description.loading-moment`, `description.trigger-only`, `call.completeness`, `branch.condition` | keep; test on history first |
-| `description.always-earned` | keep, held ("this depends on teh skill text no?") |
-| `reference.teaching-depth`, `main-path.spine`, `completion.criterion` | rework first |
+| `description.always-earned` | drop (owner, 3 Nov: "also remvoe it, i just want to make sure always is not flagged by rules if i ask an agent to use it") |
+| `main-path.spine`, `completion.criterion` | rework first |
+| `reference.teaching-depth`, `guidance.positive` | drop for now (owner, 3 Nov: "we can remove teachign depth for now. and guidance positive") |
 | `placement.product-workflow` | rename (now product-leak, U16) and keep, nudging per U16 |
 | `description.product-loading` | held until the kind filter and its tests exist (owner and Lead) |
 | `rule.generalization` | redo the filter and the rule ("we need to redo teh filter and teh rule") |
-| `guidance.positive` | keep; fix what it reads (U22), then held until tested |
 | `question.names-field` | drop ("ok iname fiels seem suelss") |
 | `question.one-proposition`, `question.criteria-match` | held until old rule files give tests (the Lead's call; they overlap and may merge) |
+
+No rule flags a description for opening with "Always": `description.opener` accepts "Always use when" and "Always trigger when", and with `description.always-earned` dropped no other rule judges the word. A new rule that would flag it needs the owner's decision first.
 
 <details>
 <summary>Authority</summary>

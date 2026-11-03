@@ -64,7 +64,7 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 | [E3 Rule](specification/entities.md#e3-rule) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `requires`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
 | [E4 Mistake](specification/entities.md#e4-mistake) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
 | [E5 Kind judgment](specification/entities.md#e5-kind-judgment) | the engine (asks), the config (defines) | engine report `assessments[]` (new, engine); question in `skill-rules.config.json` `assessments.work_scope` (new) | `{ owner: string, assessment: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
-| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`; modified: `guidance` kind (new, whole guidance section) replaces `sentence` for `guidance.positive`; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
+| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`; modified: `step` keeps its whole body; `branch` gains a colon block; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
 | [E7 Nudge](specification/entities.md#e7-nudge) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
 | [E8 Case](specification/entities.md#e8-case) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
 | [E9 Bar](specification/entities.md#e9-bar) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
@@ -224,15 +224,15 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 | Rule (entry) | Evidence | Gate | Change |
 | --- | --- | --- | --- |
 | `description.opener`, `.length-warning`, `.length-limit` | `skill` | none | case record only (mechanical) |
-| `description.loading-moment`, `.trigger-only`, `.always-earned` | `skill` | none (R16) | cases from history; `always-earned` `held_by_owner` |
+| `description.loading-moment`, `.trigger-only` | `skill` | none (R16) | cases from history |
+| `description.always-earned` | — | — | dropped (owner): entry and marker removed; nothing flags "Always" |
 | `product-leak` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; cases from U16's rows; quiet cases from general skills |
 | `product-leak.description` (was `description.product-loading`, K007) — *if A-2 accepted* | `skill` | `work_scope ∈ {any_repository}` | renamed into the product-leak standard; otherwise stays as is, held |
 | `rule.generalization` (K001 generalization) — *merged into `product-leak`'s body question if A-2 accepted* | `section` | `work_scope ∈ {any_repository}` | redone with its filter (owner) |
 | `call.completeness`, `branch.condition` | `load`, `branch` | none | cases from history |
-| `reference.teaching-depth`, `main-path.spine`, `completion.criterion` | `reference_section`, `skill_body`, `step` | none | `rework_first`: evidence fix (R24), then cases |
-| `guidance.positive` | `guidance` (new: whole guidance section) | none | evidence fix (R24), then cases |
+| `main-path.spine`, `completion.criterion` | `skill_body`, `step` | none | `rework_first`: evidence fix (R24), then cases |
+| `reference.teaching-depth`, `guidance.positive` | — | — | dropped for now (owner): entries and markers removed |
 | `completion.criterion` (repair) | `step` with its whole body | none | the literal `Completion:` AST gate (`evidence/rules/skill-steps.yml:50`, `steering.rules.json:32–47`) is removed; the question judges a done state in any words |
-| `reference.teaching-depth` (repair) | `reference_section` plus the file's outline and stop lines | none | outline and stop-line fields added; lookups named as lookups in the question's criteria |
 | `branch.condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
 | `question.one-proposition`, `question.criteria-match` | `rule_question` | none | `held_by_owner` until old rule files give cases |
@@ -333,12 +333,12 @@ No concurrency: a run is one process over one commit. No migration of stored use
 | U19 | R21 (rule-tests) | E8 | runner | `pinned-source.ts` | `caseRecord.source` | — | unresolvable → held | case resolution |
 | U20 | R22 (what-rules-read) | E6 | config evidence kinds | evidence kind declaration | existing kinds | — | cut reported | rule files; report |
 | U21 | R23 (what-rules-read) | E6 | config `section` kind | piece building | `section` with table rows | — | — | lines 17 and 40 |
-| U22 | R24 (what-rules-read) | E6 | config evidence kinds + rulebooks | `guidance` kind; `step` body; reference outline/stop fields; `branch` block | modified kinds | — | — | the four rules' 30 Oct wrong nudges |
+| U22 | R24 (what-rules-read) | E6 | config evidence kinds + rulebooks | `step` body; `branch` block | modified kinds | — | — | the two rules' 30 Oct wrong nudges |
 
 ## Order of work
 
 1. Engine: owner assessment and `requires`, released (its own design and PR in `sunstack-tools`).
-2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (`guidance`, table rows); `names-field` removed; product-leak rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
+2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (step body, branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth` and `guidance.positive` removed; product-leak rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
 3. The teaching skills (the table above).
 
 ## Deviations and unresolved

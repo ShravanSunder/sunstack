@@ -66,7 +66,7 @@ Rules and their tests come from the owner's real corrections, as he asked on 3 N
 | Behavior the owner corrected | Episodes | Skill text can show it | Where this design uses it |
 | --- | ---: | --- | --- |
 | checks not run through the real path | 7 | no | U12: a behavior-test candidate |
-| skills that don't teach judgment | 6 | yes | U9, U10: teaching-depth's real cases |
+| skills that don't teach judgment | 6 | yes | no rule in this change: `reference.teaching-depth` dropped for now (owner, 3 Nov); the episodes stay in the inventory for later |
 | rules that don't give the reviewer useful evidence | 6 | partly | nudges, what-rules-read |
 | drifting from the ask; new responsibilities not raised | 5 | no | U12 |
 | not using the commissioned role or skill | 4 | no | U12 |
