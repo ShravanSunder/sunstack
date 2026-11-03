@@ -4,8 +4,7 @@
 
 A rule is worth running only if it catches something the owner has had to correct by hand, or checks a written standard by count or pattern. The inventory shows two areas where skill text itself shows the mistake: skills that don't teach judgment, and product details baked into general skills. The owner's most frequent corrections (checks not run for real, drifting from the ask, the wrong role) are about what an agent did, which no rule reading skill text can see.
 
-<a id="u9"></a>
-### U9 · A rule names the mistake it catches
+### U9: A rule names the mistake it catches
 
 `kind: requirement · capability: rule-making · status: authorized · was: R11`
 
@@ -21,8 +20,7 @@ Each rule records the real failure it exists for — a commit, a pull request, o
 
 </details>
 
-<a id="u10"></a>
-### U10 · The rule list follows the owner's decisions, rule by rule
+### U10: The rule list follows what the owner decided, rule by rule
 
 `kind: requirement · capability: rule-making · links: U9, U16, U17 · status: authorized · was: R17`
 
@@ -48,8 +46,7 @@ Review 842d1327 of `rule-decisions-2026-11-03.html`, q4 (per-rule), q3a–c (pla
 
 </details>
 
-<a id="u12"></a>
-### U12 · Behavior that skill text can't show is listed, not made into a text rule
+### U12: Behavior that skill text cannot show is listed, not made into a text rule
 
 `kind: requirement · capability: rule-making · links: U9 · status: proposed (the Lead's reading of the inventory; for the owner to confirm)`
 
@@ -62,8 +59,7 @@ The owner wants high-value behavior tested (3 Nov comment under U9), and also pu
 
 </details>
 
-<a id="u8"></a>
-### U8 · Rule files get rules
+### U8: Rule files get rules
 
 `kind: requirement · capability: rule-making · also serves: nudges · status: authorized · was: R8`
 
@@ -76,8 +72,7 @@ Owner, 31 Oct: "we have rules that need to check json to amek srue its doen well
 
 </details>
 
-<a id="u11"></a>
-### U11 · The engine stays generic
+### U11: The engine stays generic
 
 `kind: requirement · capability: rule-making · also serves: skill-kinds, what-rules-read · status: authorized · was: R9`
 

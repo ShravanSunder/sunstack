@@ -1,41 +1,40 @@
 # rule-tests: what a rule must pass before it nudges
 
-**Reader:** the owner, deciding whether to trust a rule; a rule's writer, proving one. **Question:** which cases must a rule pass, where do they come from, and where did its bars come from? **Changes when:** a rule's cases or bars change, or the owner moves the floor. Requirements: [rule-tests](../requirements/rule-tests.md). Entities: [E8 Case](entities.md#e8), [E9 Bar](entities.md#e9), [E3 Rule](entities.md#e3).
+**Reader:** the owner, deciding whether to trust a rule; a rule's writer, proving one. **Question:** which cases must a rule pass, where do they come from, and where did its bars come from? **Changes when:** a rule's cases or bars change, or the owner moves the floor. Requirements: [rule-tests](../requirements/rule-tests.md). Entities: [E8 Case](entities.md#e8-case), [E9 Bar](entities.md#e9-bar), [E3 Rule](entities.md#e3-rule).
 
-<a id="p4"></a>**P4 · Problem.** Of 245 recorded cases, most check silence, four judged rules have no case that must fire, no fire case comes from a past mistake, and every bar is the untuned starting value.
+### P4: Problem
 
-<a id="o4"></a>**O4 · Outcome.** For any rule, the reader sees real mistakes it catches, good texts and near misses it stays quiet on, held-back results it was never tuned on, and the cases behind each bar.
+Of 245 recorded cases, most check silence, four judged rules have no case that must fire, no fire case comes from a past mistake, and every bar is the untuned starting value.
 
-<a id="r18"></a>
-### R18 · A judged rule nudges only after its floor
+### O4: Outcome
+
+For any rule, the reader sees real mistakes it catches, good texts and near misses it stays quiet on, held-back results it was never tuned on, and the cases behind each bar.
+
+### R18: A judged rule nudges only after its floor
 
 `kind: obligation · capability: rule-tests · links: U17, E3, E8, C1, C5, V18 · status: authorized`
 
 A judged rule is `nudging` only while: it has at least 3 real-mistake cases, 3 good cases and 3 near-miss cases in development, plus a held-back set frozen before any of its bars was recorded and never cited by a bar; and a complete case run of its current definition (its questions, bars, chunk, kind gate and cases, on the current engine and model) gave every development and held-back case its label, with none unsure. Cases that were already seen while designing a rule are development cases, however they were once labelled. Each real fix's before text is a `fire` case and its after text a `quiet` case, kept together in one set. Every wrong nudge the rule gave on a real skill is a must-pass case. If any of these fails, then the rule is `held` and the run lists what it lacks.
 
-<a id="r19"></a>
-### R19 · Labels say where they came from
+### R19: Labels say where they came from
 
 `kind: obligation · capability: rule-tests · links: U17, E8, V19 · status: authorized`
 
 Each case's label cites its basis: the owner's fix or words; blind labels from agents that agreed; or the owner's decision where they disagreed. A `disputed` case counts toward no floor until the owner decides it, and neither does a case whose label predates this policy (kept with its original history) until it is labelled again on one of these bases.
 
-<a id="r20"></a>
-### R20 · Bars are tuned per rule from its development cases
+### R20: Bars are tuned per rule from its development cases
 
 `kind: obligation · capability: rule-tests · links: U18, E9, C1, V20 · status: authorized`
 
 Each decision step's current bar values are recorded together with the development cases that justified them; a value may equal the starting default if the cases support it. A bar not yet assessed is `starting`, and a judged rule with any `starting` bar, or a bar whose current value differs from its recorded one, is `held`. No config, skill or kind can change a rule's bars: there is no override mechanism.
 
-<a id="r21"></a>
-### R21 · Cases are real skill text
+### R21: Cases are real skill text
 
 `kind: obligation · capability: rule-tests · links: U19, E8, V21 · status: authorized`
 
 Every case cites a repository, path, commit and span of real skill text. No made-up text counts toward a floor. Copied text fixtures appear only in `sunstack-tools`' tests of its own mechanics.
 
-<a id="c5"></a>
-### C5 · The case set
+### C5: The case set
 
 `kind: contract · capability: rule-tests · links: R18–R21 · status: authorized`
 
@@ -45,7 +44,7 @@ For each rule a reader can see: its cases by kind (real mistake, good, near miss
 
 | V | For | What decides pass and fail | Reference |
 | --- | --- | --- | --- |
-| <a id="v18"></a>V18 | R18 | no `nudging` judged rule is short of its floor or fails a case; a fix pair never splits across sets | the case sets |
-| <a id="v19"></a>V19 | R19 | every label cites its basis; no disputed case is counted | the case sets; owner decisions |
-| <a id="v20"></a>V20 | R20 | every nudging rule's current bar values equal the values recorded with their development cases; a `starting` bar, or a value changed after it was recorded, keeps the rule held; no override setting exists | the rule files; the case files; the config schema |
-| <a id="v21"></a>V21 | R21 | every case resolves at its cited commit and span | git |
+| V18 | R18 | no `nudging` judged rule is short of its floor or fails a case; a fix pair never splits across sets | the case sets |
+| V19 | R19 | every label cites its basis; no disputed case is counted | the case sets; owner decisions |
+| V20 | R20 | every nudging rule's current bar values equal the values recorded with their development cases; a `starting` bar, or a value changed after it was recorded, keeps the rule held; no override setting exists | the rule files; the case files; the config schema |
+| V21 | R21 | every case resolves at its cited commit and span | git |

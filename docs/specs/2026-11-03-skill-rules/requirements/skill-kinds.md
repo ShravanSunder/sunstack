@@ -4,8 +4,7 @@
 
 Not every rule applies to every skill. A rule that says "a general skill shouldn't send agents into one product's own workflow" is wrong on a product's own skill, where that workflow is the point. On 1 Nov, 4 of placement's 9 wrong nudges were product skills' own text (Peekaboo 3, AgentStudio 1). So each skill gets one judgment of what its work is for, and each rule judges only the kinds it is about.
 
-<a id="u13"></a>
-### U13 · A skill's kind is what its work is for, judged once
+### U13: The kind of a skill is what its work is for, judged once
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making · status: authorized · was: R12`
 
@@ -20,8 +19,7 @@ A model reads each skill's description once and answers what the work is for: **
 
 </details>
 
-<a id="u14"></a>
-### U14 · An unsure kind is skipped and listed
+### U14: An unsure kind is skipped and listed
 
 `kind: requirement · capability: skill-kinds · also serves: nudges · status: authorized`
 
@@ -34,8 +32,7 @@ Owner, 3 Nov (q2b): picked "skip, and list it"; comment: "this shokudlo be caugh
 
 </details>
 
-<a id="u15"></a>
-### U15 · Description standards apply to every skill
+### U15: Description standards apply to every skill
 
 `kind: requirement · capability: skill-kinds · status: authorized · was: R16`
 
@@ -48,8 +45,7 @@ Owner, 2 Nov review of `rules-spec-2026-11-02.html`: picked "Yes, all of them, a
 
 </details>
 
-<a id="u16"></a>
-### U16 · product-leak judges general skills only, and knows an example from a leak
+### U16: product-leak judges general skills only, and knows an example from a leak
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making, what-rules-read · status: authorized, except where marked`
 

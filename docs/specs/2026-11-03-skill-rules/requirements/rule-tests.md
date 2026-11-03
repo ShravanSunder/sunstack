@@ -4,8 +4,7 @@
 
 Today the tests mostly check silence: of 245 recorded cases, 0 to 7 per rule must fire, four judged rules have none, and no fire case comes from a past mistake. Meanwhile the repository's history holds 125 commits that changed a skill's description. This capability makes a rule's tests come from real history and real skill text, and keeps a rule from nudging anyone until it passes them.
 
-<a id="u17"></a>
-### U17 · Real cases come before any nudge
+### U17: Real cases come before any nudge
 
 `kind: requirement · capability: rule-tests · status: authorized · was: R14`
 
@@ -20,8 +19,7 @@ Each judged rule has, before it nudges anyone, at least **3 real mistakes** (it 
 
 </details>
 
-<a id="u18"></a>
-### U18 · Each rule's bars are its own
+### U18: Each rule sets its own bars
 
 `kind: requirement · capability: rule-tests · status: authorized · was: R13`
 
@@ -36,8 +34,7 @@ Every decision step's bars are set from that rule's own cases, and each current 
 
 </details>
 
-<a id="u19"></a>
-### U19 · Cases are real skill text, never made up
+### U19: Cases are real skill text, never made up
 
 `kind: requirement · capability: rule-tests · status: authorized`
 

@@ -20,8 +20,7 @@ flowchart LR
 
 Each table is the definition; the picture only shows how they relate. No entity names a type, file format, schema or engine structure; that binding is Program Design's.
 
-<a id="e1"></a>
-### E1 · Skill
+### E1: Skill
 
 `kind: entity · status: authorized · basis: U13, U15, U21`
 
@@ -33,8 +32,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | none this design changes |
 | canonicalizes | "skill", "skill text"; excludes an `AGENTS.md` file, which is out of scope here |
 
-<a id="e2"></a>
-### E2 · Standard
+### E2: Standard
 
 `kind: entity · status: authorized · basis: U1, U9`
 
@@ -46,8 +44,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | none this design changes |
 | canonicalizes | "standard", "policy", "K-id marker" |
 
-<a id="e3"></a>
-### E3 · Rule
+### E3: Rule
 
 `kind: entity · status: authorized · basis: U9, U10, U12, U13, U17, U18, U20`
 
@@ -59,8 +56,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `proposed` → `held` (named mistake, cases incomplete or failing) → `nudging` (passes its cases); `nudging` → `held` when its question, chunk or cases change; any → `dropped` by owner decision. Mechanical rules (count, pattern) go straight to `nudging` once their written standard is named |
 | canonicalizes | "rule", "check", "lint rule"; excludes the standard itself and the model's answers |
 
-<a id="e4"></a>
-### E4 · Mistake
+### E4: Mistake
 
 `kind: entity · status: authorized · basis: U9, U12`
 
@@ -72,8 +68,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `text-checkable` (skill text shows it) or `behavior-only` (only the session or action record shows it); a mistake is `partly` when text shows it only with outside context, and rules treat it as text-checkable only for the part the text shows |
 | canonicalizes | "real mistake", "real failure", "owner correction" |
 
-<a id="e5"></a>
-### E5 · Kind judgment
+### E5: Kind judgment
 
 `kind: entity · status: authorized · basis: U13, U14, U16`
 
@@ -85,8 +80,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `judged` (an answer above its bar, with how sure) or `unsure` (no answer reaches its bar) |
 | canonicalizes | "skill kind", "the filter", "general skill" (= any repository), "product skill" (= one app's own procedures), "tool manual" (= one named tool or platform) |
 
-<a id="e6"></a>
-### E6 · Chunk
+### E6: Chunk
 
 `kind: entity · status: authorized · basis: U20, U21, U22`
 
@@ -98,8 +92,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `complete`, `cut` (model saw less than collected), `unresolved` (a selection didn't resolve) |
 | canonicalizes | "piece", "evidence", "what the rule read" |
 
-<a id="e7"></a>
-### E7 · Nudge
+### E7: Nudge
 
 `kind: entity · status: authorized · basis: U1–U6`
 
@@ -111,8 +104,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | outcome `finding` or `uncertain`; severity `error` or `warn`; passes and gate exclusions are results but not nudges |
 | canonicalizes | "nudge", "finding", "rule result"; excludes the agent's decision about it |
 
-<a id="e8"></a>
-### E8 · Case
+### E8: Case
 
 `kind: entity · status: authorized · basis: U17, U19`
 
@@ -124,8 +116,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `development` or `held-back`; `labelled` or `disputed` (agents disagreed, awaiting the owner) |
 | canonicalizes | "test case", "eval case", "fixture" (only for real skill text) |
 
-<a id="e9"></a>
-### E9 · Bar
+### E9: Bar
 
 `kind: entity · status: authorized · basis: U18`
 
@@ -137,8 +128,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `starting` (a default not yet tuned) or `tuned` (set from cases, with the cases cited) |
 | canonicalizes | "threshold", "bar", "cut-off" |
 
-<a id="e10"></a>
-### E10 · Gap
+### E10: Gap
 
 `kind: entity · status: authorized · basis: U3, U14`
 
@@ -150,8 +140,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | gap kinds: `nothing read` (in scope), `cut`, `unresolved`, `incomplete or skipped`, `kind unsure` |
 | canonicalizes | "coverage gap", "unread" |
 
-<a id="e11"></a>
-### E11 · Behavior-test candidate
+### E11: Behavior-test candidate
 
 `kind: entity · status: proposed · basis: U12`
 
@@ -163,8 +152,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `listed` |
 | canonicalizes | "behavior replay", "behavioral scenario" |
 
-<a id="e12"></a>
-### E12 · Disposition
+### E12: Disposition
 
 `kind: entity · status: authorized · basis: U6`
 
@@ -176,8 +164,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `fixed`, `kept` (with reason), `routed` (to the owner of the broader concern), `open` (naming the evidence lacked) |
 | canonicalizes | "account", "what the agent did with the nudge" |
 
-<a id="e13"></a>
-### E13 · Run
+### E13: Run
 
 `kind: entity · status: authorized · basis: U3, U4`
 

@@ -4,22 +4,19 @@
 
 Most wrong nudges came from what the rule read (117 of 195 on 30 Oct), not from its question or bars. A rule about guidance as a whole judged one sentence at a time; placement never saw the table row with AgentStudio's command. This capability makes each rule say what text it needs and get exactly that.
 
-<a id="u20"></a>
-### U20 · A rule names its chunk and its edges
+### U20: A rule names its chunk and its edges
 
 `kind: requirement · capability: what-rules-read · status: authorized · was: R2`
 
 Each rule declares the evidence its judgment needs: its subject (a line, or a section's own text); which relationships it follows (the enclosing section, its siblings, the files its own text loads; one hop unless the rule says more); whether a section includes its descendants; and what an omission or a cut means for its answer. The collection gathers exactly that. What was collected and what the model actually saw after any size cap are reported apart.
 
-<a id="u21"></a>
-### U21 · Generalization and product-leak leave nothing unread
+### U21: Generalization and product-leak leave nothing unread
 
 `kind: requirement · capability: what-rules-read · also serves: skill-kinds · status: authorized · was: R4`
 
 Their chunks cover every section of a general skill and its references, from the introduction under the title down, tables included, each with the files its own text loads, plus every general skill's description. Inline product commands in tables (`practices-cleanup` line 40) and loaded product workflows (`ops-observability-stack` line 17) are both caught.
 
-<a id="u22"></a>
-### U22 · A wrong reading is fixed where the text was collected
+### U22: A wrong reading is fixed where the text was collected
 
 `kind: requirement · capability: what-rules-read · also serves: rule-tests · status: authorized · was: R15, D35`
 

@@ -16,32 +16,32 @@ Skill rules check the skills in this repository and tell the agent working on th
 The owner confirmed these five on 3 Nov ("your recommendatiosn are moslty good", review 842d1327 of `rule-decisions-2026-11-03.html`; on rule-making he added: "Partailly rules also start with high value behaviour i want to test. its about using the high value mistacts and providign nudges too").
 
 - **rule-making** — every rule starts from a real, high-value mistake and is made in one order. [rule-making.md](rule-making.md)
-  - [U9](rule-making.md#u9) a rule names the mistake it catches
-  - [U10](rule-making.md#u10) the rule list follows the owner's decisions, rule by rule
-  - [U12](rule-making.md#u12) behavior that text can't show is listed, not made into a text rule
-  - [U8](rule-making.md#u8) rule files get rules
-  - [U11](rule-making.md#u11) the engine stays generic
+  - [U9](rule-making.md#u9-a-rule-names-the-mistake-it-catches) a rule names the mistake it catches
+  - [U10](rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) the rule list follows the owner's decisions, rule by rule
+  - [U12](rule-making.md#u12-behavior-that-skill-text-cannot-show-is-listed-not-made-into-a-text-rule) behavior that text can't show is listed, not made into a text rule
+  - [U8](rule-making.md#u8-rule-files-get-rules) rule files get rules
+  - [U11](rule-making.md#u11-the-engine-stays-generic) the engine stays generic
 - **nudges** — an agent gets where, what, why, what to read next, and gaps it can trust. [nudges.md](nudges.md)
-  - [U1](nudges.md#u1) a rule result is a nudge
-  - [U2](nudges.md#u2) a rule can nudge without deciding
-  - [U3](nudges.md#u3) what wasn't read is shown apart from what was decided
-  - [U4](nudges.md#u4) a nudge never fails a run
-  - [U5](nudges.md#u5) a pass says one thing
-  - [U6](nudges.md#u6) nudges are read, not obeyed
-  - [U7](nudges.md#u7) each skill makes its part of the path clear
+  - [U1](nudges.md#u1-a-rule-result-is-a-nudge) a rule result is a nudge
+  - [U2](nudges.md#u2-a-rule-can-nudge-without-deciding) a rule can nudge without deciding
+  - [U3](nudges.md#u3-what-was-not-read-is-shown-apart-from-what-was-decided) what wasn't read is shown apart from what was decided
+  - [U4](nudges.md#u4-a-nudge-never-fails-a-run) a nudge never fails a run
+  - [U5](nudges.md#u5-a-pass-says-one-thing) a pass says one thing
+  - [U6](nudges.md#u6-nudges-are-read-not-obeyed) nudges are read, not obeyed
+  - [U7](nudges.md#u7-each-skill-makes-its-part-of-the-path-clear) each skill makes its part of the path clear
 - **skill-kinds** — a rule judges only the skills its standard is about. [skill-kinds.md](skill-kinds.md)
-  - [U13](skill-kinds.md#u13) a skill's kind is what its work is for, judged once
-  - [U14](skill-kinds.md#u14) an unsure kind is skipped and listed
-  - [U15](skill-kinds.md#u15) description standards apply to every skill
-  - [U16](skill-kinds.md#u16) product-leak judges general skills only, and knows an example from a leak
+  - [U13](skill-kinds.md#u13-the-kind-of-a-skill-is-what-its-work-is-for-judged-once) a skill's kind is what its work is for, judged once
+  - [U14](skill-kinds.md#u14-an-unsure-kind-is-skipped-and-listed) an unsure kind is skipped and listed
+  - [U15](skill-kinds.md#u15-description-standards-apply-to-every-skill) description standards apply to every skill
+  - [U16](skill-kinds.md#u16-product-leak-judges-general-skills-only-and-knows-an-example-from-a-leak) product-leak judges general skills only, and knows an example from a leak
 - **rule-tests** — a rule earns its nudges by passing real tests; its bars come from them. [rule-tests.md](rule-tests.md)
-  - [U17](rule-tests.md#u17) real cases come before any nudge
-  - [U18](rule-tests.md#u18) each rule's bars are its own
-  - [U19](rule-tests.md#u19) cases are real skill text, never made up
+  - [U17](rule-tests.md#u17-real-cases-come-before-any-nudge) real cases come before any nudge
+  - [U18](rule-tests.md#u18-each-rule-sets-its-own-bars) each rule's bars are its own
+  - [U19](rule-tests.md#u19-cases-are-real-skill-text-never-made-up) cases are real skill text, never made up
 - **what-rules-read** — a rule reads enough text to judge its standard. [what-rules-read.md](what-rules-read.md)
-  - [U20](what-rules-read.md#u20) a rule names its chunk and its edges
-  - [U21](what-rules-read.md#u21) generalization and product-leak leave nothing unread
-  - [U22](what-rules-read.md#u22) a wrong reading is fixed where the text was collected
+  - [U20](what-rules-read.md#u20-a-rule-names-its-chunk-and-its-edges) a rule names its chunk and its edges
+  - [U21](what-rules-read.md#u21-generalization-and-product-leak-leave-nothing-unread) generalization and product-leak leave nothing unread
+  - [U22](what-rules-read.md#u22-a-wrong-reading-is-fixed-where-the-text-was-collected) a wrong reading is fixed where the text was collected
 
 Rule-making is the trunk: a rule is made from a mistake (rule-making), judges certain kinds of skills (skill-kinds), reads certain text (what-rules-read), is tested (rule-tests), and then gives nudges (nudges).
 

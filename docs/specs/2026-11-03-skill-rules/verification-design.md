@@ -2,7 +2,7 @@
 
 3 Nov 2026. Author: 🦁 Lead. Status: draft, not reviewed. A plan: nothing in it has been observed. Proves the [Requirements](requirements/index.md) through the [Specification](specification/index.md)'s proof obligations (V1–V24) at the [Program Design](program-design.md#trace)'s seams.
 
-## How we'll know it works
+## How we will know it works
 
 | Capability | Proven by | What stays unverified |
 | --- | --- | --- |
@@ -16,19 +16,33 @@
 
 Each is planned once and named by the rows it serves.
 
-<a id="oa"></a>**OA · The case run.** `pnpm --dir tests/skills rules:expect` at the PR head, with the released engine that has owner assessment, Jev through the existing key wrapper, over every `*.cases.json`. Seen: per rule, its derived state and held reasons; cases by kind, set and label state; each failing case; held-back results apart from development; each step's bar status and cited cases.
+### OA: The case run
 
-<a id="ob"></a>**OB · The tree run.** `pnpm --dir tests/skills rules` at the PR head over every current skill, same engine and model. Seen: nudges with their parts; each skill's kind and how sure; gaps per rule (unread, cut, unresolved, kind unsure, no owner); gate exclusions with answers; held rules with what they lack; exit status.
+`pnpm --dir tests/skills rules:expect` at the PR head, with the released engine that has owner assessment, Jev through the existing key wrapper, over every `*.cases.json`. Seen: per rule, its derived state and held reasons; cases by kind, set and label state; each failing case; held-back results apart from development; each step's bar status and cited cases.
 
-<a id="oc"></a>**OC · The kind census.** Two agents label every current skill's kind from its description, blind to the engine's answers and to each other; the owner decides each disagreement. Compared with OB's `assessments[]`, and with a second OB run on the same commit.
+### OB: The tree run
 
-<a id="od"></a>**OD · Focused runner tests.** Vitest tests beside `lib/skill-rules/` modules for the pure logic: the case-file schema, the migration (every old expectation compared with its new case, including a description case with no selector and a section case whose finding line differs from its first line), rule-state derivation (every `HeldReason`), the fingerprint's inputs, the held filter in the agent report, the gap variants. They read real case files at the PR head and records built from them; they launch no app.
+`pnpm --dir tests/skills rules` at the PR head over every current skill, same engine and model. Seen: nudges with their parts; each skill's kind and how sure; gaps per rule (unread, cut, unresolved, kind unsure, no owner); gate exclusions with answers; held rules with what they lack; exit status.
 
-<a id="of"></a>**OF · Forced boundary runs.** The real engine and runner on Git-pinned real skills, with the decision model's responses controlled, to drive branches a live run may never reach: one owner's assessment below its bar (`unsure`), one malformed assessment response (`incomplete`), one rule answer between its bars (`uncertain`), a cancelled run, and a run over an invalid config. Seen: the actual exit status, the results and gaps the runner prints, and the retained answers. These prove the engine's and runner's handling, not the model's accuracy (OC does that).
+### OC: The kind census
 
-<a id="og"></a>**OG · The admission checks.** On a rulebook whose rule passed a complete case run: change its question, then its bars, then one case; then, separately, change only an AST rule file its kind uses, and only a kind it reads through `within` or `same_file`; delete the receipt; mark it incomplete. After each, an ordinary run with no model key. Seen: the rule listed `held` with its reason and no nudge from it.
+Two agents label every current skill's kind from its description, blind to the engine's answers and to each other; the owner decides each disagreement. Compared with OB's `assessments[]`, and with a second OB run on the same commit.
 
-<a id="oe"></a>**OE · Source reads.** Reading the changed skills, rule files, config and the engine diff against the named obligation.
+### OD: Focused runner tests
+
+Vitest tests beside `lib/skill-rules/` modules for the pure logic: the case-file schema, the migration (every old expectation compared with its new case, including a description case with no selector and a section case whose finding line differs from its first line), rule-state derivation (every `HeldReason`), the fingerprint's inputs, the held filter in the agent report, the gap variants. They read real case files at the PR head and records built from them; they launch no app.
+
+### OF: Forced boundary runs
+
+The real engine and runner on Git-pinned real skills, with the decision model's responses controlled, to drive branches a live run may never reach: one owner's assessment below its bar (`unsure`), one malformed assessment response (`incomplete`), one rule answer between its bars (`uncertain`), a cancelled run, and a run over an invalid config. Seen: the actual exit status, the results and gaps the runner prints, and the retained answers. These prove the engine's and runner's handling, not the model's accuracy (OC does that).
+
+### OG: The admission checks
+
+On a rulebook whose rule passed a complete case run: change its question, then its bars, then one case; then, separately, change only an AST rule file its kind uses, and only a kind it reads through `within` or `same_file`; delete the receipt; mark it incomplete. After each, an ordinary run with no model key. Seen: the rule listed `held` with its reason and no nudge from it.
+
+### OE: Source reads
+
+Reading the changed skills, rule files, config and the engine diff against the named obligation.
 
 ## The rows
 

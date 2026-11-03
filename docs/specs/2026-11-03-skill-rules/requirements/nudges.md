@@ -16,50 +16,43 @@ A rule is a nudge to whichever agent runs it. It doesn't decide for that agent. 
 | the skill orchestrator | carrying a skill change through proof | `skill-orchestrator` |
 | the auditor | reading skills to decide what to create, update or skip | `skill-audit` |
 
-<a id="u1"></a>
-### U1 · A rule result is a nudge
+### U1: A rule result is a nudge
 
 `kind: requirement · capability: nudges · status: authorized · was: R1`
 
 It gives the agent the location; what the rule observed, kept apart from the standard that makes it a concern (its wording and line); whether a check established it or a model's answers support it; its severity (`error` blocks, `warn` is the nudge) and outcome (a finding, or `uncertain` when the rule couldn't decide); and where else to read, in three kinds shown apart: a place the rule read (a link with a line), a place it never read (a pointer to follow, not a link), and the same rule's same nudge elsewhere (only where it really nudged).
 
-<a id="u2"></a>
-### U2 · A rule can nudge without deciding
+### U2: A rule can nudge without deciding
 
 `kind: requirement · capability: nudges · status: authorized · was: R3`
 
 A standard that one chunk can't settle can still have a rule. Its nudge says what to check and where to read, and never claims a breach.
 
-<a id="u3"></a>
-### U3 · What wasn't read is shown, apart from what was decided
+### U3: What was not read is shown, apart from what was decided
 
 `kind: requirement · capability: nudges · also serves: what-rules-read · status: authorized · was: R5, R5b`
 
 As gaps, the agent sees: per rule, the files inside its declared scope where it read nothing; each piece whose model view was cut; every unresolved selection; every incomplete part or skipped rule. Apart from the gaps, it sees what each gate decided was outside its standard, with the gate's answer. Every judged result keeps its answers, passes and gate exclusions included; the rule, the report's outcome, the model's answers and the agent's final call stay four distinct things.
 
-<a id="u4"></a>
-### U4 · A nudge never fails a run
+### U4: A nudge never fails a run
 
 `kind: requirement · capability: nudges · status: authorized · was: R5a`
 
 A `warn` fails a run only under `--max-warnings`, and this repository's runner sets none. `uncertain` keeps its own run status: not clean, not failed. A run that is invalid, cancelled or incomplete says so, whatever its nudges. Our rules give `warn` to any path a model judged; `error` is for mechanical rules. A run's exit code is not the ship decision; the review decides.
 
-<a id="u5"></a>
-### U5 · A pass says one thing
+### U5: A pass says one thing
 
 `kind: requirement · capability: nudges · status: authorized · was: R6`
 
 A pass tells the agent that one property held. No reader treats it as the skill meeting the standard as a whole.
 
-<a id="u6"></a>
-### U6 · Nudges are read, not obeyed
+### U6: Nudges are read, not obeyed
 
 `kind: requirement · capability: nudges · status: authorized · was: R7`
 
 An agent acting on a nudge reads its places, decides the broader question, and records one of: fixed; kept, with the reason; routed to the owner of the broader concern; open, naming the evidence it lacks. A change that only makes the rule's own property hold doesn't close the nudge. A commission built from a nudge passes the nudge on, not "make it pass".
 
-<a id="u7"></a>
-### U7 · Each skill makes its part of the path clear
+### U7: Each skill makes its part of the path clear
 
 `kind: requirement · capability: nudges · also serves: rule-making · status: authorized · was: R10`
 

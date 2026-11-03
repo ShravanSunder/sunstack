@@ -59,21 +59,23 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 
 | E | Owner | Home (new / modified / existing) | Shape and boundary | Persisted? |
 | --- | --- | --- | --- | --- |
-| [E1 Skill](specification/entities.md#e1) | this repository's config | `skill-rules.config.json` `owners` (new section, engine-generic): `{ "skill": { "root": "plugins/*/skills/{owner}", "members": ["SKILL.md", "references/**/*.md"], "describe": { "kind": "skill", "field": "description" } } }` | owner id = `<plugin>/<skill>` captured from the path; crosses into the engine as an owner unit | persisted (config) |
-| [E2 Standard](specification/entities.md#e2) | the standards' authors | existing: `K` markers in `domain-skill-crafting/references/*.md`, `domain-decision-models/SKILL.md` | marker id + `path:line` in every nudge (v0.6.0) | persisted |
-| [E3 Rule](specification/entities.md#e3) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `requires`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
-| [E4 Mistake](specification/entities.md#e4) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
-| [E5 Kind judgment](specification/entities.md#e5) | the engine (asks), the config (defines) | engine report `assessments[]` (new, engine); question in `skill-rules.config.json` `assessments.work_scope` (new) | `{ owner: string, assessment: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
-| [E6 Chunk](specification/entities.md#e6) | config evidence kinds | existing `evidence.kinds`; modified: `guidance` kind (new, whole guidance section) replaces `sentence` for `guidance.positive`; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
-| [E7 Nudge](specification/entities.md#e7) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
-| [E8 Case](specification/entities.md#e8) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
-| [E9 Bar](specification/entities.md#e9) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
-| [E10 Gap](specification/entities.md#e10) | the runner (unread, held), the engine (cut, unresolved, kind unsure, no owner) | existing `report.ts` `ReportGaps` (modified, no parallel schema) | `Gap` below | derived per run |
-| [E11 Behavior-test candidate](specification/entities.md#e11) | the Lead | `tests/skills/evals/behavior-candidates.json` (new; a list, nothing runs it) | `{ id, episode, records: string[], behavior: string, teaching_rule?: string }` | persisted |
-| [E12 Disposition](specification/entities.md#e12) | the agent acting on the nudge | existing reporting surfaces taught by the skills (self-check, review findings, acceptance); modified teaching | text: rule, place, disposition, what was checked | in the agent's report |
-| [E13 Run](specification/entities.md#e13) | engine (exit), runner (state) | existing `engine-runner.ts`, `report.ts` | existing exit statuses (uncertain = 5) | derived |
+| [E1 Skill](specification/entities.md#e1-skill) | this repository's config | `skill-rules.config.json` `owners` (new section, engine-generic): `{ "skill": { "root": "plugins/*/skills/{owner}", "members": ["SKILL.md", "references/**/*.md"], "describe": { "kind": "skill", "field": "description" } } }` | owner id = `<plugin>/<skill>` captured from the path; crosses into the engine as an owner unit | persisted (config) |
+| [E2 Standard](specification/entities.md#e2-standard) | the standards' authors | existing: `K` markers in `domain-skill-crafting/references/*.md`, `domain-decision-models/SKILL.md` | marker id + `path:line` in every nudge (v0.6.0) | persisted |
+| [E3 Rule](specification/entities.md#e3-rule) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `requires`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
+| [E4 Mistake](specification/entities.md#e4-mistake) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
+| [E5 Kind judgment](specification/entities.md#e5-kind-judgment) | the engine (asks), the config (defines) | engine report `assessments[]` (new, engine); question in `skill-rules.config.json` `assessments.work_scope` (new) | `{ owner: string, assessment: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
+| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`; modified: `guidance` kind (new, whole guidance section) replaces `sentence` for `guidance.positive`; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
+| [E7 Nudge](specification/entities.md#e7-nudge) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
+| [E8 Case](specification/entities.md#e8-case) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
+| [E9 Bar](specification/entities.md#e9-bar) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
+| [E10 Gap](specification/entities.md#e10-gap) | the runner (unread, held), the engine (cut, unresolved, kind unsure, no owner) | existing `report.ts` `ReportGaps` (modified, no parallel schema) | `Gap` below | derived per run |
+| [E11 Behavior-test candidate](specification/entities.md#e11-behavior-test-candidate) | the Lead | `tests/skills/evals/behavior-candidates.json` (new; a list, nothing runs it) | `{ id, episode, records: string[], behavior: string, teaching_rule?: string }` | persisted |
+| [E12 Disposition](specification/entities.md#e12-disposition) | the agent acting on the nudge | existing reporting surfaces taught by the skills (self-check, review findings, acceptance); modified teaching | text: rule, place, disposition, what was checked | in the agent's report |
+| [E13 Run](specification/entities.md#e13-run) | engine (exit), runner (state) | existing `engine-runner.ts`, `report.ts` | existing exit statuses (uncertain = 5) | derived |
 
-### The rule record and the case record (`*.cases.json`)
+### The rule record and the case record
+
+Both live in the new `*.cases.json` beside each rulebook.
 
 TypeScript with zod, as the runner's existing schemas (`report.ts`, `expectations.ts`) are:
 
@@ -134,7 +136,9 @@ const casesFile = z.object({ rules: z.record(z.string(), ruleRecord), cases: z.a
 
 **A held-back case** carries `frozen`: the commit that froze its group. That commit must come before every `bars[*].recorded_at` of its rule, and no held-back id may appear in any `bars[*].cases`. Otherwise the rule is held.
 
-### The case-run receipt (`*.case-run.json`, new, committed)
+### The case-run receipt
+
+A new committed file, `*.case-run.json`, beside each rulebook.
 
 Written only by `rules:expect` beside each rulebook, so an ordinary run (no model key needed for this check) can tell whether a rule's current definition passed its cases:
 
@@ -177,7 +181,9 @@ type HeldReason =
 
 Mechanical rules (`basis: "mechanical"`) are `nudging` once they name a `written_standard` reason and the owner kept them; case-run, floor, bar and held-back reasons apply to judged rules only.
 
-### The nudge, as the agent reads it (`report.ts`)
+### The nudge, as the agent reads it
+
+Rendered by `report.ts`.
 
 | R6 part | Comes from |
 | --- | --- |
@@ -211,7 +217,7 @@ Its full design is a separate Program Design part in `sunstack-tools`; this is t
 - **Report:** `assessments[]` (E5's shape), and per gated rule the owners excluded by answer and those skipped as unsure.
 - **Guarantees:** each owner is asked once per run; a reference file reaches its owner's answer through `members`; a file matching no owner gets no answer, and gated rules report it as a `no owner` gap; the answer is bound to the run (source revision, question, model), never cached across runs.
 
-Our config sets `assessments.work_scope` with options `any_repository`, `one_tool_or_platform`, `one_app_procedures`, and the question wording from [U13](requirements/skill-kinds.md#u13).
+Our config sets `assessments.work_scope` with options `any_repository`, `one_tool_or_platform`, `one_app_procedures`, and the question wording from [U13](requirements/skill-kinds.md#u13-the-kind-of-a-skill-is-what-its-work-is-for-judged-once).
 
 ## The rules after this change
 
@@ -254,7 +260,7 @@ sequenceDiagram
 
 *Current path:* the same up to `lint`, minus the assessment and gate; the runner prints every rule's results, held or not. *Added edges:* the assessment call, the gate, the runner's state derivation and held filter. *Unchanged and critical:* severity `warn` for judged paths, and the engine's exit statuses.
 
-## A rule's states
+## The states of a rule
 
 ```mermaid
 stateDiagram-v2

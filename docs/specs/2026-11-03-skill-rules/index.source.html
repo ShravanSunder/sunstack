@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skill rules design</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Skill rules design</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+  </nav>
+</ex-nav>
+<ex-presentation id="line-17" title="Line 17, end to end" description="One real mistake, from your answer to the nudge an agent gets and how it is proven.">
+  <ex-step to="requirements.html#req-skill-kinds--u16-product-leak-judges-general-skills-only-and-knows-an-example-from-a-leak">Your answer for a general skill that loads one product's own workflow: case 2.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds--r13-one-kind-judgment-per-skill-per-run">The skill's kind is judged once.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds--r14-a-rule-judges-only-its-declared-kinds">Product-leak only judges general skills.</ex-step>
+  <ex-step to="specification.html#spec-what-rules-read--r23-generalization-and-product-leak-read-every-section">What it reads: line 17 with the file it loads.</ex-step>
+  <ex-step to="specification.html#spec-nudges--r6-a-nudge-carries-its-parts">What the nudge carries.</ex-step>
+  <ex-step to="specification.html#spec-nudges--r11-every-nudge-gets-a-disposition">What the agent does with it.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--r18-a-judged-rule-nudges-only-after-its-floor">Why the rule is allowed to nudge at all.</ex-step>
+  <ex-step to="program-design.html#pd--the-path-from-line-17-to-the-agent">Who calls whom, from the runner to the printed nudge.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How it will be proven: the U1 and U13 rows.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-rule-making" title="rule-making, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-rule-making">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-rule-making">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-nudges" title="nudges, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-nudges">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-nudges">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-skill-kinds" title="skill-kinds, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-skill-kinds">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-rule-tests" title="rule-tests, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-rule-tests">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-what-rules-read" title="what-rules-read, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-what-rules-read">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-what-rules-read">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="worth-running" title="Is this rule worth running?" description="From the mistake a rule exists for to the proof it earned its nudges.">
+  <ex-step to="specification.html#spec-rule-making--r1-a-nudging-rule-names-its-reason">The mistake it names.</ex-step>
+  <ex-step to="specification.html#spec-rule-making--c1-what-a-rule-entry-shows-its-reader">What its entry shows.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--c5-the-case-set">Its cases.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--r20-bars-are-tuned-per-rule-from-its-development-cases">Where its bars came from.</ex-step>
+  <ex-step to="program-design.html#pd--the-derived-rule-state-runner">How its state is worked out.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How that will be proven: the U17 and U18 rows.</ex-step>
+</ex-presentation>
+<ex-document id="content">
+<h1>Skill rules design</h1>
+<p>Every rule now starts from a mistake you actually corrected, judges only the skills it is about, reads enough text to judge, and passes real cases before it nudges anyone. This page is the way in; each document has its own page.</p>
+
+<ex-callout tone="note" title="State of the design">
+Written, independently reviewed in three rounds (8 findings, then 2, then 0), and pushed to `skills/rules-as-nudges`. Nothing is built. Five things wait on you, at the bottom of this page.
+</ex-callout>
+
+<h2 id="where">Where each answer lives</h2>
+<ul>
+<li>What we are building and for whom: the five capabilities and their needs, in <a href="requirements.html">Requirements</a>.</li>
+<li>Which mistakes the rules come from: the inventory table, in the <a href="requirements.html#req-index--the-mistake-inventory">Requirements entry</a>.</li>
+<li>The nouns, and when two of them are the same one (rule, case, kind, nudge): in <a href="specification.html#spec-entities">Entities</a>.</li>
+<li>What must be observably true, per capability: in <a href="specification.html">Specification</a>.</li>
+<li>Who does what, the engine feature, and the case files: in <a href="program-design.html">Program Design</a>.</li>
+<li>How each part will be proven, and what stays unverified: in <a href="verification-design.html#vd--how-we-will-know-it-works">Verification Design</a>.</li>
+</ul>
+
+<h2 id="start">Start with line 17</h2>
+<p>One real mistake carries the whole design: <code>ops-observability-stack/SKILL.md:17</code> sent agents into AgentStudio's own debug loop, and every layer in #187 missed it. The <strong>Line 17, end to end</strong> walkthrough (press W) follows it from your answer to the nudge and its proof. The picture of the path is in <a href="program-design.html#pd--the-path-from-line-17-to-the-agent">Program Design</a>.</p>
+
+<h2 id="decide">What I need from you</h2>
+<p>Each question says what is true today, the choices, and my recommendation. A recommendation is only that; nothing is decided until you pick. Use Comments to qualify any answer. If you skip one, the design keeps it marked <strong>Proposed</strong> and nothing built depends on it yet.</p>
+
+<h3 id="d1">1. Mistakes skill text can't show</h3>
+<p>Today: the top three things you corrected (checks not run for real, drifting from the ask, the wrong role) are about what an agent did. A rule reading skill text can't see them. You also put pressure tests and behavior comparisons after evals (31 Oct).</p>
+<ex-choice id="a1" title="What happens to those mistakes in this change?">
+  <ex-option id="a1-list" title="**List them** for the later evals; text rules only check the skill teaches the behavior (recommended)">
+    <template slot="summary">
+Each episode is listed once with its sources. Nothing behavioral is built now, which keeps your 31 Oct order. Cost: those mistakes are not caught until the evals exist.
+    </template>
+  </ex-option>
+  <ex-option id="a1-build" title="**Build behavior tests now**, in this change">
+    <template slot="summary">
+Replays the real episodes against agents. Cost: the change grows a lot, and it reverses your "pressure tests later".
+    </template>
+  </ex-option>
+  <ex-option id="a1-drop" title="**Drop them** from this design">
+    <template slot="summary">
+Text rules only. Cost: your most frequent corrections leave no trace for the evals.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d2">2. What product-leak covers</h3>
+<p>Today: three rules touch products in general skills. Placement (now product-leak) judges a skill's sections; <code>description.product-loading</code> judges its description; <code>rule.generalization</code> judges whether a rule a skill teaches holds beyond one project. The review pointed out that the last one is a different mistake: the PR166 storage blacklist overfitted one stack, but it wasn't a product's own workflow.</p>
+<ex-choice id="a2" title="Which rules become part of product-leak?">
+  <ex-option id="a2-loading" title="**Merge only product-loading**; keep generalization its own rule (recommended)">
+    <template slot="summary">
+Product-leak gets two checks under one standard: the description and the sections. Generalization keeps its own standard and is redone with its filter, as you asked on 2 Nov. Cost: two standards to keep, but each catches its own mistake.
+    </template>
+  </ex-option>
+  <ex-option id="a2-both" title="**Merge both** into product-leak">
+    <template slot="summary">
+One standard with three checks. Cost: generalization's cases (PR166, SM017–SM019) get judged against a product standard they don't fit.
+    </template>
+  </ex-option>
+  <ex-option id="a2-none" title="**Keep all three separate**">
+    <template slot="summary">
+Nothing merges. Cost: the description and section checks for the same standard drift apart.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d3">3. Which examples stay quiet</h3>
+<p>Today: you marked made-up product-like examples and quoted real product mistakes as needing a nudge (rows 4 and 5). My reading is that only a product the text labels as an example ("for example, …") stays quiet.</p>
+<ex-choice id="a3" title="Is the line whether the text labels it as an example?">
+  <ex-option id="a3-labelled" title="**Yes**: only a labelled example stays quiet (recommended)">
+    <template slot="summary">
+Matches your rows 4 and 5. Cost: some honest worked examples get a nudge until their text says they are examples.
+    </template>
+  </ex-option>
+  <ex-option id="a3-any" title="**No**: any clearly illustrative text stays quiet, labelled or not">
+    <template slot="summary">
+Fewer nudges. Cost: it overturns your row 4 answer, and the model has to judge "clearly illustrative".
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d4">4. The new name for placement</h3>
+<ex-choice id="a4" title="What should the renamed rule be called?">
+  <ex-option id="a4-leak" title="`product-leak` (recommended)">
+    <template slot="summary">
+Says what goes wrong: one product's details leaking into a skill meant for any repository.
+    </template>
+  </ex-option>
+  <ex-option id="a4-scope" title="`product-scope`">
+    <template slot="summary">
+Neutral. Cost: doesn't say what's wrong.
+    </template>
+  </ex-option>
+  <ex-option id="a4-general" title="`general-skill.product-workflow`">
+    <template slot="summary">
+Precise. Cost: long, and it repeats the old placement wording.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d5">5. The runner's made-up test skills</h3>
+<p>Today: <code>tests/skills/fixtures/run-skill-rules/</code> holds made-up sample skills that the runner's own tests use with a fake model. Your rule is that only sunstack-tools keeps fixtures; this repository uses real skills pinned by Git.</p>
+<ex-choice id="a5" title="When do they get replaced with real pinned skills?">
+  <ex-option id="a5-followup" title="**In a follow-up PR** (recommended)">
+    <template slot="summary">
+Keeps this change about the rules. Cost: the made-up skills stay until then.
+    </template>
+  </ex-option>
+  <ex-option id="a5-now" title="**In this change**">
+    <template slot="summary">
+One cleanup, done. Cost: more to review in this PR.
+    </template>
+  </ex-option>
+  <ex-option id="a5-keep" title="**Keep them**: they test the runner's mechanics, not rules">
+    <template slot="summary">
+Cost: it bends your rule for this repository.
+    </template>
+  </ex-option>
+</ex-choice>
+
+</ex-document>
+</body>
+</html>
