@@ -31,8 +31,9 @@ The rules that exist, and what happens to each, are the owner's decisions of 2 a
 | `description.opener`, `description.length-warning`, `description.length-limit` | keep (written standards, checked by pattern and count) |
 | `description.loading-moment`, `description.trigger-only`, `call.completeness`, `branch.condition` | keep; test on history first |
 | `description.always-earned` | drop (owner, 3 Nov: "also remvoe it, i just want to make sure always is not flagged by rules if i ask an agent to use it") |
-| `main-path.spine`, `completion.criterion` | rework first |
+| `completion.criterion` | rework first |
 | `reference.teaching-depth`, `guidance.positive` | drop for now (owner, 3 Nov: "we can remove teachign depth for now. and guidance positive") |
+| `main-path.spine` | drop for now (owner, 3 Nov: "ah lets drop it for now") |
 | `placement.product-workflow` | rename (now product-leak, U16) and keep, nudging per U16 |
 | `description.product-loading` | held until the kind filter and its tests exist (owner and Lead) |
 | `rule.generalization` | redo the filter and the rule ("we need to redo teh filter and teh rule") |

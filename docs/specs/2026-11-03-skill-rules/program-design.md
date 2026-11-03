@@ -230,8 +230,8 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 | `product-leak.description` (was `description.product-loading`, K007) — *if A-2 accepted* | `skill` | `work_scope ∈ {any_repository}` | renamed into the product-leak standard; otherwise stays as is, held |
 | `rule.generalization` (K001 generalization) — *merged into `product-leak`'s body question if A-2 accepted* | `section` | `work_scope ∈ {any_repository}` | redone with its filter (owner) |
 | `call.completeness`, `branch.condition` | `load`, `branch` | none | cases from history |
-| `main-path.spine`, `completion.criterion` | `skill_body`, `step` | none | `rework_first`: evidence fix (R24), then cases |
-| `reference.teaching-depth`, `guidance.positive` | — | — | dropped for now (owner): entries and markers removed |
+| `completion.criterion` | `step` | none | `rework_first`: evidence fix (R24), then cases |
+| `reference.teaching-depth`, `guidance.positive`, `main-path.spine` | — | — | dropped for now (owner): entries and markers removed |
 | `completion.criterion` (repair) | `step` with its whole body | none | the literal `Completion:` AST gate (`evidence/rules/skill-steps.yml:50`, `steering.rules.json:32–47`) is removed; the question judges a done state in any words |
 | `branch.condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
@@ -338,7 +338,7 @@ No concurrency: a run is one process over one commit. No migration of stored use
 ## Order of work
 
 1. Engine: owner assessment and `requires`, released (its own design and PR in `sunstack-tools`).
-2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (step body, branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth` and `guidance.positive` removed; product-leak rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
+2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (step body, branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive` and `main-path.spine` removed; product-leak rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
 3. The teaching skills (the table above).
 
 ## Deviations and unresolved
