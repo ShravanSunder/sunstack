@@ -18,7 +18,7 @@ A judged rule is `nudging` only while: it has at least 3 real-mistake cases, 3 g
 
 `kind: obligation · capability: rule-tests · links: U17, E8, V19 · status: authorized`
 
-Each case's label cites its basis: the owner's fix or words; blind labels from agents that agreed; or the owner's decision where they disagreed. A `disputed` case counts toward no floor until the owner decides it.
+Each case's label cites its basis: the owner's fix or words; blind labels from agents that agreed; or the owner's decision where they disagreed. A `disputed` case counts toward no floor until the owner decides it, and neither does a case whose label predates this policy (kept with its original history) until it is labelled again on one of these bases.
 
 <a id="r20"></a>
 ### R20 · Bars are tuned per rule from its development cases

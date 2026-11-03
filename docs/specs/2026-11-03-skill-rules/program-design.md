@@ -118,7 +118,7 @@ const caseRecord = z.object({
   frozen: z.object({ commit: z.string().regex(/^[0-9a-f]{40}$/), date: z.string() }).optional(), // required for held_back
   fix_pair: z.string().optional(),     // shared by a fix's before and after
   label: z.object({
-    basis: z.enum(["owner_fix", "owner_words", "agents_agreed", "owner_decided"]),
+    basis: z.enum(["owner_fix", "owner_words", "agents_agreed", "owner_decided", "legacy_independent"]),
     state: z.enum(["labelled", "disputed"]),
     who: z.array(z.string()),
     note: z.string(),
@@ -128,9 +128,9 @@ const caseRecord = z.object({
 const casesFile = z.object({ rules: z.record(z.string(), ruleRecord), cases: z.array(caseRecord) });
 ```
 
-`unclassified` exists only for migrated expectations not yet adjudicated by the case mining; it counts toward no floor, and neither does `expect: unknown`. `expect`, `kind`, the selector and the finding lines keep today's meaning; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
+`unclassified` exists only for migrated expectations not yet adjudicated by the case mining; it counts toward no floor, and neither does `expect: unknown`. `legacy_independent` keeps an old label's history as it was (some were blind labels that agreed, some were settled by an independent agent after the labellers disagreed); it counts toward no floor until the case is labelled again under R19. `expect`, `kind`, the selector and the finding lines keep today's meaning; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
 
-**Migration, one format, no compatibility reader.** Each old expectation becomes one case with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: agents_agreed`, `label.state: labelled`; `case_kind: unclassified`; `set: development` for every one, since all current cases are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
+**Migration, one format, no compatibility reader.** Each old expectation becomes one case with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: legacy_independent`, `label.state: labelled`, keeping `who` (blind labellers, and any independent settler) and the original note word for word; `case_kind: unclassified`; `set: development` for every one, since all current cases are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
 
 **A held-back case** carries `frozen`: the commit that froze its group. That commit must come before every `bars[*].recorded_at` of its rule, and no held-back id may appear in any `bars[*].cases`. Otherwise the rule is held.
 
@@ -151,7 +151,7 @@ const caseRunReceipt = z.object({
 });
 ```
 
-A rule's fingerprint covers: its rulebook entry (questions, decision, bars, severity, `requires`); the config definitions of the evidence kind it reads and, when gated, the owners and assessment it reads; its case records; the engine version and model. On every ordinary run the runner recomputes it. No receipt, `complete: false`, a different fingerprint, or any failed or unsure case → `held`.
+A rule's fingerprint covers, conservatively, everything that can change what its cases collect or how they are judged: its rulebook entry (questions, decision, bars, severity, `requires`); the whole rules config file (every evidence kind, so kinds it reads through `within`, `same_file` or `target`, owners, assessments and limits are all inside); the bytes of every file in the evidence project (`evidence/sgconfig.yml` and every AST rule and utility it loads); its case records; the engine version and model. Any collection change therefore holds every judged rule until a matching case run exists; precision is traded for never missing a dependency. On every ordinary run the runner recomputes it. No receipt, `complete: false`, a different fingerprint, or any failed or unsure case → `held`.
 
 ### The derived rule state (runner)
 
