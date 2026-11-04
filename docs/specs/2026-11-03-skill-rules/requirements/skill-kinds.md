@@ -45,7 +45,7 @@ Owner, 2 Nov review of `rules-spec-2026-11-02.html`: picked "Yes, all of them, a
 
 </details>
 
-### U16: product-leak judges general skills only, and knows an example from a leak
+### U16: The general-skill rules judge general skills only, and know an example from a leak
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making, what-rules-read · status: authorized, except where marked`
 
@@ -66,15 +66,15 @@ Product-leak (the renamed placement rule) judges skills whose work is for any re
 | 11 | a general skill's description naming products as its users | `ops-observability-stack`'s description | **nudge** (owner: "move product names out if its a generic skill") |
 | 12 | a product's own skill sending agents into another product's workflow | none found | wait for a real case |
 
-*Proposed, for the owner to confirm:* the line between rows 3 and 4 is whether the text labels the product as an example. Only a labelled example stays quiet.
+The line between rows 3 and 4 is whether the text labels the product as an example: only a labelled example stays quiet (owner, 4 Nov (review 00facfd0 of the design page), decision 3).
 
 Its tests draw their quiet cases from general skills (rows 3, 6–9), as the owner asked: "lets find good negative exmapels in general skilsl".
 
 <details>
 <summary>Authority and evidence</summary>
 
-- Owner, 3 Nov: "yes placement is alkso not good name come kup with better name"; review 842d1327, q3a–q3c. The name `product-leak` is the Lead's proposal for that rename.
-- Evidence note 12 (was E12): on 1 Nov placement made 11 nudges, 2 right (rows 1, 2) and 9 wrong (4 product skills' own text; 5 examples or a domain's own tool). `rule.generalization` made 45 nudges, all wrong.
+- Owner, 3 Nov: "yes placement is alkso not good name come kup with better name"; review 842d1327, q3a–q3c. The owner chose `general-skill.product-workflow` and set the naming standard (4 Nov, decision 4: "namespace 2-3 words and rule 3-8 words"); the full name `general-skill.sends-agents-into-product-workflow` follows it and was approved ("2 names is good").
+- Evidence note 12 (was E12): on 1 Nov placement made 11 nudges, 2 right (rows 1, 2) and 9 wrong (4 product skills' own text; 5 examples or a domain's own tool). `taught-rule.holds-beyond-one-project` made 45 nudges, all wrong.
 - Inventory: SM017–SM019 (PR166's literal storage blacklist, "complelyt overfitted slop no generalzieable rules"), SM046 (PR187, "you see how that was a huge generlizaiotn faikure?").
 
 </details>

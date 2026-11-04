@@ -33,14 +33,14 @@ The owner confirmed these five on 3 Nov ("your recommendatiosn are moslty good",
   - [U13](skill-kinds.md#u13-the-kind-of-a-skill-is-what-its-work-is-for-judged-once) a skill's kind is what its work is for, judged once
   - [U14](skill-kinds.md#u14-an-unsure-kind-is-skipped-and-listed) an unsure kind is skipped and listed
   - [U15](skill-kinds.md#u15-description-standards-apply-to-every-skill) description standards apply to every skill
-  - [U16](skill-kinds.md#u16-product-leak-judges-general-skills-only-and-knows-an-example-from-a-leak) product-leak judges general skills only, and knows an example from a leak
+  - [U16](skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak) the general-skill rules judge general skills only, and knows an example from a leak
 - **rule-tests** — a rule earns its nudges by passing real tests; its bars come from them. [rule-tests.md](rule-tests.md)
   - [U17](rule-tests.md#u17-real-cases-come-before-any-nudge) real cases come before any nudge
   - [U18](rule-tests.md#u18-each-rule-sets-its-own-bars) each rule's bars are its own
   - [U19](rule-tests.md#u19-cases-are-real-skill-text-never-made-up) cases are real skill text, never made up
 - **what-rules-read** — a rule reads enough text to judge its standard. [what-rules-read.md](what-rules-read.md)
   - [U20](what-rules-read.md#u20-a-rule-names-its-chunk-and-its-edges) a rule names its chunk and its edges
-  - [U21](what-rules-read.md#u21-generalization-and-product-leak-leave-nothing-unread) generalization and product-leak leave nothing unread
+  - [U21](what-rules-read.md#u21-generalization-and-the-general-skill-rules-leave-nothing-unread) generalization and the general-skill rules leave nothing unread
   - [U22](what-rules-read.md#u22-a-wrong-reading-is-fixed-where-the-text-was-collected) a wrong reading is fixed where the text was collected
 
 Rule-making is the trunk: a rule is made from a mistake (rule-making), judges certain kinds of skills (skill-kinds), reads certain text (what-rules-read), is tested (rule-tests), and then gives nudges (nudges).
@@ -53,7 +53,7 @@ Rule-making is the trunk: a rule is made from a mistake (rule-making), judges ce
 
 - **No pressure tests, trigger trials, behavior comparisons or behavior replays in this change.** Owner, 31 Oct: "we will rpessure test later afetrr we figure out evals"; and "i didnt as for comparision or pressute testing?". U12's behavior candidates are listed for that later work, not built.
 - **No threshold overrides of any kind.** Owner, 2 Nov: "no override wierd stuff".
-- **No new rules beyond the renamed product-leak.** A new rule starts from a mistake under U9, in a later change.
+- **No new rules beyond the renamed the general-skill rules.** A new rule starts from a mistake under U9, in a later change.
 - **Not the app-specific move.** Moving AgentStudio, Agent VM and OpenClaw content to their own repositories is parked; rules only nudge about it.
 - **Not changing who decides.** Judged results never accept or block a change by themselves. Mechanical `error` rules keep blocking.
 - **Not yet: rules in `AGENTS.md` files, or skills in other repositories.** Owner, 31 Oct: "eventaully we will want the agents.md to have rules and also skilsl in repos to force linting". The engine stays generic so this isn't blocked.
@@ -72,7 +72,7 @@ Rules and their tests come from the owner's real corrections, as he asked on 3 N
 | not using the commissioned role or skill | 4 | no | U12 |
 | the owner's code standards not stated or followed | 4 | partly | U12 |
 | asking the owner to decide before explaining the rule | 3 | partly | U7 |
-| product details in general skills | 3 | yes | U16: product-leak's real cases |
+| product details in general skills | 3 | yes | U16: the general-skill rules' real cases |
 
 <details>
 <summary>Coverage limits of the inventory</summary>
@@ -83,9 +83,9 @@ Raw Claude history starts 12 Sep and Codex 23 Sep, so August has no raw owner re
 
 ## Open meaning
 
-1. **Whether product-leak absorbs `description.product-loading` and `rule.generalization`.** The owner renamed placement ("placement is alkso not good name come kup with better name"); merging the three is the Lead's proposal, settled in the Specification and shown to the owner.
+1. **Settled (owner, 4 Nov (review 00facfd0 of the design page), decision 2):** the general-skill standard has two checks, `general-skill.sends-agents-into-product-workflow` (sections) and `general-skill.description-loads-for-one-product` (descriptions); `taught-rule.holds-beyond-one-project` stays its own rule. Rule names follow the owner's standard: a namespace of 2–3 words and a rule name of 3–8 words (decision 4: "namespace 2-3 words and rule 3-8 words").
 2. **The structural rules' real cases.** Mining is in flight; a rule without enough real cases stays held (U17).
-3. **The runner's own synthetic fixtures.** `tests/skills/fixtures/run-skill-rules/` holds made-up sample skills that the runner's tests use with a fake decision model. U19 (the owner's "Only susntack-toosl needs fixtures ... not sunstack") would replace them with Git-pinned real skills. Whether that is in this change, or a follow-up, is the owner's call; this design does not touch them.
+3. **Settled (owner, 4 Nov (review 00facfd0 of the design page), decision 5):** the runner's made-up sample skills (`tests/skills/fixtures/run-skill-rules/`) are replaced with Git-pinned real skills in a follow-up PR, not this change.
 
 ## Where the old rows went
 

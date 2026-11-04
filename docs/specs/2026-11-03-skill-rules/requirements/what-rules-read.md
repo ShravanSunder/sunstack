@@ -10,7 +10,7 @@ Most wrong nudges came from what the rule read (117 of 195 on 30 Oct), not from 
 
 Each rule declares the evidence its judgment needs: its subject (a line, or a section's own text); which relationships it follows (the enclosing section, its siblings, the files its own text loads; one hop unless the rule says more); whether a section includes its descendants; and what an omission or a cut means for its answer. The collection gathers exactly that. What was collected and what the model actually saw after any size cap are reported apart.
 
-### U21: Generalization and product-leak leave nothing unread
+### U21: Generalization and the general-skill rules leave nothing unread
 
 `kind: requirement · capability: what-rules-read · also serves: skill-kinds · status: authorized · was: R4`
 
@@ -20,10 +20,9 @@ Their chunks cover every section of a general skill and its references, from the
 
 `kind: requirement · capability: what-rules-read · also serves: rule-tests · status: authorized · was: R15, D35`
 
-A rule's piece is sized to its standard, and a wrong nudge caused by what the rule read is fixed in the evidence collection, not by bending the rule's question. Two repairs are already decided:
+A rule's piece is sized to its standard, and a wrong nudge caused by what the rule read is fixed in the evidence collection, not by bending the rule's question. One repair is already decided (the others went with the rules the owner dropped):
 
-- `completion.criterion` accepts a done state stated in any words, not only a literal `Completion:` line;
-- `branch.condition` reads a line ending in ":" together with the block it introduces.
+- `skill-branch.names-an-observable-condition` reads a line ending in ":" together with the block it introduces.
 
 <details>
 <summary>Authority and evidence for what-rules-read</summary>

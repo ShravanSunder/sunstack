@@ -20,7 +20,7 @@ While a rule is `nudging`, its entry names at least one mistake (an inventory re
 
 `kind: obligation · capability: rule-making · links: U10, E3, C1, V2 · status: authorized`
 
-Each rule's state is the one [U10](../requirements/rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) gives it: kept rules nudge once R18 holds; rework-first rules are `held` until reworked and re-tested; `question.names-field` is `dropped` and gives no result; `placement.product-workflow` is renamed `product-leak` and keeps its standard. A rule the owner hasn't decided stays `held`.
+Each rule's state is the one [U10](../requirements/rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) gives it: kept rules nudge once R18 holds; rework-first rules are `held` until reworked and re-tested; `question.names-field` is `dropped` and gives no result; `general-skill.sends-agents-into-product-workflow` is renamed `general-skill.sends-agents-into-product-workflow` and keeps its standard. A rule the owner hasn't decided stays `held`.
 
 ### R3: Behavior-only mistakes are listed, and no text rule claims them
 
@@ -36,9 +36,9 @@ When a question in a rule file asks two things, or its yes and no explanations a
 
 ### R5: The engine knows nothing about skills
 
-`kind: obligation · capability: rule-making · also serves: skill-kinds, what-rules-read · links: U11, V5 · status: authorized as first written; the narrowing below is proposed, for the owner`
+`kind: obligation · capability: rule-making · also serves: skill-kinds, what-rules-read · links: U11, V5 · status: authorized; scope narrowed by owner decision 9`
 
-The engine release this design needs carries no skill-specific word, kind, or path. *Proposed narrowing, not authorized:* the engine already resolves `SKILL.md` and skill names in its evidence target loader, so the Lead proposes that this change only add nothing skill-specific, with that existing code as later work. Until the owner decides, the first sentence stands. The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
+The engine changes this design needs add no skill-specific word, kind, or path. The engine's existing skill-aware target loader (`SKILL.md` and skill names) is later work, logged (owner, 4 Nov (review 00facfd0 of the design page), decision 9: "Later work, logged"), which supersedes the earlier "the release carries nothing skill-specific". The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
 
 ### C1: What a rule entry shows its reader
 

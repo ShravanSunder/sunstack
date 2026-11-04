@@ -50,7 +50,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 
 | Slot | Meaning |
 | --- | --- |
-| identity rule | one rule name (such as `description.trigger-only`). A renamed rule keeps its identity when its standard and question stay the same (placement → product-leak); a rule whose question changes enough that its old cases no longer label it is a reworked rule that must pass its cases again |
+| identity rule | one rule name (such as `skill-description.states-triggers-not-workflow-steps`). A renamed rule keeps its identity when its standard and question stay the same (placement → the general-skill rules); a rule whose question changes enough that its old cases no longer label it is a reworked rule that must pass its cases again |
 | relationships | exists because of 1..n mistakes or exactly one written standard (E4); checks exactly one standard (E2); declares 1..3 kinds it judges (E5); declares one chunk shape (E6); has its cases (E8) and one bar per decision step (E9) |
 | invariants | a judged rule nudges no one while held; no bar is overridden from outside the rule |
 | observable states | `proposed` → `held` (named mistake, cases incomplete or failing) → `nudging` (passes its cases); `nudging` → `held` when its question, chunk or cases change; any → `dropped` by owner decision. Mechanical rules (count, pattern) go straight to `nudging` once their written standard is named |

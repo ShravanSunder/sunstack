@@ -212,7 +212,7 @@ type Gap =
 
 Its full design is a separate Program Design part in `sunstack-tools`; this is the contract this repository needs from it, in generic terms.
 
-- **Config:** `owners.<unit>` declares how checked files group into owner units (a root pattern with one capture, member patterns, and which evidence kind and field describe the owner). `assessments.<name>` declares one choice question about an owner unit's description, its options, `min_probability`, and the decision model.
+- **Config:** `owners.<unit>` declares how checked files group into owner units (a root pattern with one capture, member patterns, and which evidence kind and field describe the owner). `assessments.<name>` declares one choice question about an owner unit's description, its options and `min_probability`; the run's one decision model answers it (owner decision 8).
 - **Rule gate:** a rule entry may declare `requires: { "assessment": "<name>", "accept": ["<option>", …] }`. Before its steps, the engine reads the owner's answer. `accept` contains the answer → steps run. Answer outside `accept` → `not_applicable`, reason `assessment:<answer>`. `unsure` or `incomplete` → no result for that rule on that owner, and the report lists it.
 - **Report:** `assessments[]` (E5's shape), and per gated rule the owners excluded by answer and those skipped as unsure.
 - **Guarantees:** each owner is asked once per run; a reference file reaches its owner's answer through `members`; a file matching no owner gets no answer, and gated rules report it as a `no owner` gap; the answer is bound to the run (source revision, question, model), never cached across runs.
@@ -223,19 +223,18 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 
 | Rule (entry) | Evidence | Gate | Change |
 | --- | --- | --- | --- |
-| `description.opener`, `.length-warning`, `.length-limit` | `skill` | none | case record only (mechanical) |
-| `description.loading-moment`, `.trigger-only` | `skill` | none (R16) | cases from history |
+| `skill-description.starts-with-use-when`, `.length-warning`, `.length-limit` | `skill` | none | case record only (mechanical) |
+| `skill-description.names-the-loading-moment`, `.trigger-only` | `skill` | none (R16) | cases from history |
 | `description.always-earned` | — | — | dropped (owner): entry and marker removed; nothing flags "Always" |
-| `product-leak` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; cases from U16's rows; quiet cases from general skills |
-| `product-leak.description` (was `description.product-loading`, K007) — *if A-2 accepted* | `skill` | `work_scope ∈ {any_repository}` | renamed into the product-leak standard; otherwise stays as is, held |
-| `rule.generalization` (K001 generalization) — *merged into `product-leak`'s body question if A-2 accepted* | `section` | `work_scope ∈ {any_repository}` | redone with its filter (owner) |
-| `call.completeness`, `branch.condition` | `load`, `branch` | none | cases from history |
-| `completion.criterion` | `step` | none | `rework_first`: evidence fix (R24), then cases |
+| `general-skill.sends-agents-into-product-workflow` (was `general-skill.sends-agents-into-product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; cases from U16's rows; quiet cases from general skills |
+| `general-skill.description-loads-for-one-product` (was `description.product-loading`, K007) | `skill` | `work_scope ∈ {any_repository}` | renamed; the general-skill standard's description check (owner decision 2) |
+| `taught-rule.holds-beyond-one-project` (was `rule.generalization`, K001) | `section` | `work_scope ∈ {any_repository}` | renamed; its own rule, redone with its filter (owner decision 2) |
+| `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch` | none | cases from history |
+| `completion.criterion` | — | — | dropped for now (owner decision 7); a follow-up rethinks it |
 | `reference.teaching-depth`, `guidance.positive`, `main-path.spine` | — | — | dropped for now (owner): entries and markers removed |
-| `completion.criterion` (repair) | `step` with its whole body | none | the literal `Completion:` AST gate (`evidence/rules/skill-steps.yml:50`, `steering.rules.json:32–47`) is removed; the question judges a done state in any words |
-| `branch.condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
+| `skill-branch.names-an-observable-condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
-| `question.one-proposition`, `question.criteria-match` | `rule_question` | none | `held_by_owner` until old rule files give cases |
+| `rule-question.asks-exactly-one-thing`, `rule-question.criteria-answer-the-same-question` | `rule_question` | none | `held_by_owner` until old rule files give cases |
 
 ## The path from line 17 to the agent
 
@@ -249,12 +248,12 @@ sequenceDiagram
   R->>L: lint with skill-rules.config.json
   L->>J: work_scope? ops-observability-stack description (once)
   J-->>L: any_repository, with how sure
-  L->>L: product-leak gate: accept → run steps
+  L->>L: general-skill gate: accept → run steps
   L->>J: section piece with line 17 + agentstudio-loop.md opening
   J-->>L: routes into one product's own workflow
   L-->>R: report JSON: result warn, judged, related places; assessments[]
   R->>R: derive rule states: case files, rule files, matching case-run receipt (fingerprint)
-  R-->>A: nudge at SKILL.md:17 (product-leak is nudging); kinds; gaps; held rules
+  R-->>A: nudge at SKILL.md:17 (the general-skill rules are nudging); kinds; gaps; held rules
   A->>A: read places, decide; record disposition (R11)
 ```
 
@@ -302,7 +301,7 @@ No concurrency: a run is one process over one commit. No migration of stored use
 | `skill-creation` | the writer's self-check: run rules, read nudges, record dispositions | R6–R11 |
 | `skill-review` | the review lead's first pass: nudges as leads, dispositions, gaps | R6–R11 |
 | `skill-design` | a skill design names which rules will judge the change | R12 |
-| `domain-skill-crafting` | the product-leak standard and U16's cases; the kind words | R17 |
+| `domain-skill-crafting` | the general-skill standard and U16's cases; the kind words | R17 |
 | `skill-orchestrator` | assessing a writer's dispositions before review | R11 |
 | `skill-audit` | reading kinds and nudges read-only | R13 |
 
@@ -326,23 +325,23 @@ No concurrency: a run is one process over one commit. No migration of stored use
 | U13 | R14 (skill-kinds) | E3, E5 | engine gate | `requires` | `{assessment, accept}` | — | outside accept → not_applicable | 1 Nov product-skill nudges |
 | U14 | R15 (skill-kinds) | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
 | U15 | R16 (skill-kinds) | E1 | rulebook | no `requires` on description rules | — | — | — | hidden skills' results |
-| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement (+ descriptions, generalization if A-2) | `product-leak` entries | rule entries + cases | per rule | — | U16's rows as cases |
+| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement (+ descriptions, generalization if A-2) | `general-skill.sends-agents-into-product-workflow` entries | rule entries + cases | per rule | — | U16's rows as cases |
 | U17 | R18 (rule-tests) | E3, E8 | runner | rule state derivation + case-run receipt | `RuleState`, `HeldReason`, `caseRunReceipt` | held / nudging | missing, incomplete or changed receipt → held | case report; a change after a passing run |
 | U17 | R19 (rule-tests) | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
 | U18 | R20 (rule-tests) | E9 | rulebook author; runner checks | step bar fields + `ruleRecord.bars` | `barSource` with values | starting / tuned | starting or changed → held | values vs recorded values; no override key |
 | U19 | R21 (rule-tests) | E8 | runner | `pinned-source.ts` | `caseRecord.source` | — | unresolvable → held | case resolution |
 | U20 | R22 (what-rules-read) | E6 | config evidence kinds | evidence kind declaration | existing kinds | — | cut reported | rule files; report |
 | U21 | R23 (what-rules-read) | E6 | config `section` kind | piece building | `section` with table rows | — | — | lines 17 and 40 |
-| U22 | R24 (what-rules-read) | E6 | config evidence kinds + rulebooks | `step` body; `branch` block | modified kinds | — | — | the two rules' 30 Oct wrong nudges |
+| U22 | R24 (what-rules-read) | E6 | config evidence kinds + rulebooks | `branch` block | modified kind | — | — | its 30 Oct wrong nudges |
 
 ## Order of work
 
 1. Engine: owner assessment and `requires`, released (its own design and PR in `sunstack-tools`).
-2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (step body, branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive` and `main-path.spine` removed; product-leak rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
+2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive`, `main-path.spine` and `completion.criterion` removed; general-skill rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
 3. The teaching skills (the table above).
 
 ## Deviations and unresolved
 
-- A-2 (merge into product-leak) and A-3 (labelled example line) are proposed; the rule table shows both outcomes.
+- A-2 (merge into the general-skill rules) and A-3 (labelled example line) are proposed; the rule table shows both outcomes.
 - The engine feature's internal design is not here; it is owed as `sunstack-tools`' own Program Design part.
 - The case mining is in flight; until it lands, migrated expectations are `unclassified` and judged rules stay `held` on the floor.

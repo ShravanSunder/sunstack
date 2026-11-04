@@ -16,7 +16,7 @@ Each rule records the real failure it exists for — a commit, a pull request, o
 - Owner, 2 Nov: "none of the rkules seem kuseufl? kor how you set them kup so now i htink i n eed fkull escrpiton of each rule you feel confident in and hwy".
 - Owner, 3 Nov: "Partailly rules also start with high value behaviour i want to test. its about using the high value mistacts and providign nudges too"; "we defiently have 3 real msitakes of all thigns i care about".
 - Evidence note 16 (was E16): 3 of the 18 rules trace to real failures (#187, #166), 3 are written standards, 3 came from the owner's ask to check rule files, 9 were picked because a model could judge them. The owner approved the first six on 26 Oct; their usefulness was never measured.
-- Mistake inventory: teaching (SM005–SM015, 6 episodes) and product-leak (SM017–SM019, SM046, 3 episodes) are text-checkable with real before/after pairs (PR123; PR166 → PR171; PR187 `4eb1bd02`).
+- Mistake inventory: teaching (SM005–SM015, 6 episodes) and the general-skill rules (SM017–SM019, SM046, 3 episodes) are text-checkable with real before/after pairs (PR123; PR166 → PR171; PR187 `4eb1bd02`).
 
 </details>
 
@@ -28,19 +28,19 @@ The rules that exist, and what happens to each, are the owner's decisions of 2 a
 
 | Rule | Owner's decision |
 | --- | --- |
-| `description.opener`, `description.length-warning`, `description.length-limit` | keep (written standards, checked by pattern and count) |
-| `description.loading-moment`, `description.trigger-only`, `call.completeness`, `branch.condition` | keep; test on history first |
+| `skill-description.starts-with-use-when`, `skill-description.longer-than-225-characters`, `skill-description.longer-than-300-characters` | keep (written standards, checked by pattern and count) |
+| `skill-description.names-the-loading-moment`, `skill-description.states-triggers-not-workflow-steps`, `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | keep; test on history first |
 | `description.always-earned` | drop (owner, 3 Nov: "also remvoe it, i just want to make sure always is not flagged by rules if i ask an agent to use it") |
-| `completion.criterion` | rework first |
+| `completion.criterion` | drop for now, with a follow-up to rethink it (owner, 4 Nov (review 00facfd0 of the design page), decision 7: "listen we can do better what the fuck does this rule do ... can be follow up to focus on this") |
 | `reference.teaching-depth`, `guidance.positive` | drop for now (owner, 3 Nov: "we can remove teachign depth for now. and guidance positive") |
 | `main-path.spine` | drop for now (owner, 3 Nov: "ah lets drop it for now") |
-| `placement.product-workflow` | rename (now product-leak, U16) and keep, nudging per U16 |
-| `description.product-loading` | held until the kind filter and its tests exist (owner and Lead) |
-| `rule.generalization` | redo the filter and the rule ("we need to redo teh filter and teh rule") |
+| `general-skill.sends-agents-into-product-workflow` | rename (now the general-skill rules, U16) and keep, nudging per U16 |
+| `general-skill.description-loads-for-one-product` | keep, as the general-skill standard's description check (owner, 4 Nov (review 00facfd0 of the design page), decision 2); held until the kind filter and its tests exist |
+| `taught-rule.holds-beyond-one-project` | keep as its own rule; redo the filter and the rule ("we need to redo teh filter and teh rule"; owner, 4 Nov (review 00facfd0 of the design page), decision 2) |
 | `question.names-field` | drop ("ok iname fiels seem suelss") |
-| `question.one-proposition`, `question.criteria-match` | held until old rule files give tests (the Lead's call; they overlap and may merge) |
+| `rule-question.asks-exactly-one-thing`, `rule-question.criteria-answer-the-same-question` | held until old rule files give tests (the Lead's call; they overlap and may merge) |
 
-No rule flags a description for opening with "Always": `description.opener` accepts "Always use when" and "Always trigger when", and with `description.always-earned` dropped no other rule judges the word. A new rule that would flag it needs the owner's decision first.
+No rule flags a description for opening with "Always": `skill-description.starts-with-use-when` accepts "Always use when" and "Always trigger when", and with `description.always-earned` dropped no other rule judges the word. A new rule that would flag it needs the owner's decision first.
 
 <details>
 <summary>Authority</summary>

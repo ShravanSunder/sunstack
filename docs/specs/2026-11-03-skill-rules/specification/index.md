@@ -20,9 +20,9 @@ flowchart LR
 
 - **rule-making** ([chunk](rule-making.md)): R1 a nudging rule names its reason · R2 the rule set matches the owner's decisions · R3 behavior-only mistakes are listed · R4 rule files get nudges · R5 the engine knows nothing about skills
 - **nudges** ([chunk](nudges.md)): R6 a nudge carries its parts · R7 a nudge may point without deciding · R8 gaps apart from exclusions · R9 a nudge never fails a run · R10 a pass says one property held · R11 every nudge gets a disposition · R12 each skill teaches its part
-- **skill-kinds** ([chunk](skill-kinds.md)): R13 one kind judgment per skill · R14 a rule judges only its declared kinds · R15 an unsure kind skips and is listed · R16 description rules judge every skill · R17 product-leak's answer in each case
+- **skill-kinds** ([chunk](skill-kinds.md)): R13 one kind judgment per skill · R14 a rule judges only its declared kinds · R15 an unsure kind skips and is listed · R16 description rules judge every skill · R17 the general-skill rules' answer in each case
 - **rule-tests** ([chunk](rule-tests.md)): R18 a judged rule nudges only after its floor · R19 labels say where they came from · R20 bars tuned per rule · R21 cases are real skill text
-- **what-rules-read** ([chunk](what-rules-read.md)): R22 a rule declares its chunk and edges · R23 generalization and product-leak read every section · R24 a rule's chunk is the size of its standard
+- **what-rules-read** ([chunk](what-rules-read.md)): R22 a rule declares its chunk and edges · R23 generalization and the general-skill rules read every section · R24 a rule's chunk is the size of its standard
 
 Entities for every capability: [entities.md](entities.md), E1–E13.
 
@@ -67,4 +67,4 @@ Outside this system: the engine's internals (a generic dependency, R5), pressure
 | | U21 | E6 | | R23 | C6 | V23 |
 | | U22 | E6 | | R24 | C6 | V24 |
 
-Gaps: R3 and U12 are proposed, not authorized; R17's merge and its labelled-example line are proposed. Every other row is authorized.
+Gaps: R3 and U12 wait on the owner's answer to the test-shape questions (decision 1 was answered "build tests now"; what that means is being settled). Every other row is authorized.

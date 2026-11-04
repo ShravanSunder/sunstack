@@ -16,11 +16,11 @@ For any nudge, the agent can see the exact text the rule read and the text the m
 
 Each rule declares its subject, the relationships it follows (one hop unless it says more), whether a section includes its descendants, and what a cut or an omission means for its answer. The collection gathers exactly that, and the report shows collected and model-visible text apart.
 
-### R23: Generalization and product-leak read every section
+### R23: Generalization and the general-skill rules read every section
 
 `kind: obligation · capability: what-rules-read · also serves: skill-kinds · links: U21, E6, V23 · status: authorized`
 
-On every skill of kind **any repository**, product-leak's chunks (and generalization's, until R17's merge is decided) together cover every section of `SKILL.md` and its references, from the text under the title down, tables included, each with the openings of the files its own text loads, plus the description.
+On every skill of kind **any repository**, the general-skill rules' chunks (and generalization's, until R17's merge is decided) together cover every section of `SKILL.md` and its references, from the text under the title down, tables included, each with the openings of the files its own text loads, plus the description.
 
 ### R24: The chunk of a rule is the size of its standard
 
@@ -30,8 +30,7 @@ When a wrong nudge traces to what the rule read, the fix lands in the collection
 
 | Rule | What its chunk must let it see | Fires on | Stays quiet on |
 | --- | --- | --- | --- |
-| `completion.criterion` | the step's whole body | a step with no observable done state | a done state stated in other words than `Completion:` |
-| `branch.condition` | a branch line and, when it ends in ":", the block it introduces | an `IF` naming nothing observable | a colon-ended `IF` whose block names the observable condition and the work |
+| `skill-branch.names-an-observable-condition` | a branch line and, when it ends in ":", the block it introduces | an `IF` naming nothing observable | a colon-ended `IF` whose block names the observable condition and the work |
 
 ### C6: What the rule read
 
@@ -45,4 +44,4 @@ For any result, the agent can see the chunk's subject span, each followed span, 
 | --- | --- | --- | --- |
 | V22 | R22 | every rule declares all four; every report shows collected and seen apart | the rule files; a run's report |
 | V23 | R23 | `practices-cleanup/SKILL.md:40` (a table row) and `ops-observability-stack/SKILL.md:17` (a load) are both read; no section of a general skill is outside every chunk | the 1 Nov run's two right nudges; a per-section coverage count |
-| V24 | R24 | for both rules, its real 30 Oct wrong nudges caused by what it read are quiet after the fix, and a real case of the mistake still fires: a step with no done state; an `IF` naming nothing | the 30 Oct dispositions (`step5/dispositions.md`); D35 |
+| V24 | R24 | `skill-branch.names-an-observable-condition`'s real 30 Oct wrong nudges caused by what it read are quiet after the fix, and a real case of an `IF` naming nothing still fires | the 30 Oct dispositions (`step5/dispositions.md`); D35 |
