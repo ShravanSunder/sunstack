@@ -1,30 +1,28 @@
 # Deliverable 2 plan: rules that earn their nudges
 
-## Canonical record
-
-```text
-plan path: docs/specs/2026-11-03-skill-rules/deliverables/2-rules-earn-their-nudges/plan.md
-originating planner: plan-implementation
-supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md
-planning result: ready
-governing planning basis:
-  kind: reviewed-four-document-design
-  ai-tools docs/specs/2026-11-03-skill-rules/ (requirements, specification, program-design.md, verification-design.md) at 47b3a025; review tmp/2026-11-03-skill-rules-review/report.md … report-round-6.md (converged)
-  current applicability anchors: ai-tools 47b3a025; sunstack-tools 9116442 (base origin/main 4aa594a)
-delivery context:
-  requested terminal: pr-ready-unmerged
-  delivery grouping: single:rules-earn-their-nudges
-  PR topology: one-pr
-  repositories: ShravanSunder/sunstack (ai-tools)
-```
+Three steps in ai-tools (#188). The first sets up the case files and rule state; the other two can run in either order after it.
 
 Design: [deliverable 2](../../d2-design.html). Planned at ai-tools `skills/rules-as-nudges` `61f10679`. The owner merges. Tracking: none.
 
-## Changed from
+## The steps
 
-The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by deliverable, as the owner asked on 4 Nov ("big design 4 -> eadch delviermable is design document plus plan that refrences th othe rone"). This plan keeps that plan's slices for this deliverable unchanged; the other deliverables' slices wait on the [delivery map](../../delivery.html) for their own plans. Nothing completed is invalidated: no slice had started.
+```mermaid
+flowchart LR
+  A1["1 · case files, run records,<br/>rule state, full nudge"] --> A2["2 · renames, drops,<br/>branch evidence fix"]
+  A1 --> A5["3 · runner tests on<br/>real pinned skills"]
+```
 
-## Slices
+## At a glance
+
+| Step | What it does | How we'll know it worked | Waits on |
+| --- | --- | --- | --- |
+| 1 · Case files and rule state | moves the 245 old expectations into case files; saves a record of each case run; works out each rule's state; shows the full nudge | every old expectation is found with the same meaning; a rule changed after a passing run is held | nothing |
+| 2 · Renames, drops, branch fix | gives the 12 kept rules their new names; removes the 6 dropped rules; the branch rule reads a colon line with its block | dropped rules give no result; the branch rule passes a colon-ended IF with its block | step 1 |
+| 3 · Runner tests on real skills | the runner's own tests read real skills pinned to a commit; the made-up sample skills are removed | the tests pass on real skills, and forced failures exit with the right status | step 1 |
+
+Steps 2 and 3 touch some of the same test files, so they run one after the other. You merge #188.
+
+## Detail for the agents: files, commands and proof for each step
 
 ### A1 · Case files, receipts, rule state, nudge rendering (contract; consumers A2–A8)
 
@@ -49,6 +47,26 @@ The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by de
 - **Earns:** U4·R9 and U14·R15 forced-boundary runs (OF: controlled provider on pinned real skills; uncertain → 5, incomplete, cancelled, invalid; unsure owner skipped and listed — the owner-assessment part after A3) by `pnpm --dir tests/skills test`.
 - **Existing tests:** `run-skill-rules.test.ts`, `skill-rules-kit-selection.test.ts`, `skill-rules-mechanical-edges.test.ts`, `skill-rules-report-gaps.test.ts` → repair (real pinned skills, new names); `skill-rules-cancellation.test.ts` → keep; `skill-rules-severity-policy.test.ts` → keep (reads delivered rule files). Removing the sample fixtures is proven by a dead contract: no test reads them after the repairs (grep shows no reference).
 
-## Order
+## Changed from
 
-A1 → A2, A1 → A5 (A2 and A5 may run in either order after A1); serial A2 ↔ A5 where both touch `tests/skills/lib/skill-rules/tests/`. One batch.
+The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by deliverable, as the owner asked on 4 Nov ("big design 4 -> eadch delviermable is design document plus plan that refrences th othe rone"). This plan keeps that plan's slices for this deliverable unchanged; the other deliverables' slices wait on the [delivery map](../../delivery.html) for their own plans. Nothing completed is invalidated: no slice had started.
+
+## Canonical record
+
+```text
+plan path: docs/specs/2026-11-03-skill-rules/deliverables/2-rules-earn-their-nudges/plan.md
+originating planner: plan-implementation
+supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md
+planning result: ready
+governing planning basis:
+  kind: reviewed-four-document-design
+  ai-tools docs/specs/2026-11-03-skill-rules/ (requirements, specification, program-design.md, verification-design.md) at 47b3a025; review tmp/2026-11-03-skill-rules-review/report.md … report-round-6.md (converged)
+  current applicability anchors: ai-tools 47b3a025; sunstack-tools 9116442 (base origin/main 4aa594a)
+delivery context:
+  requested terminal: pr-ready-unmerged
+  delivery grouping: single:rules-earn-their-nudges
+  PR topology: one-pr
+  repositories: ShravanSunder/sunstack (ai-tools)
+```
+
+Design: [deliverable 2](../../d2-design.html). Planned at ai-tools `skills/rules-as-nudges` `61f10679`. The owner merges. Tracking: none.

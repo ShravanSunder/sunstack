@@ -1,30 +1,29 @@
 # Deliverable 1 plan: the engine asks each skill's kind once
 
-## Canonical record
-
-```text
-plan path: docs/specs/2026-11-03-skill-rules/deliverables/1-engine-asks-kind-once/plan.md
-originating planner: plan-implementation
-supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md
-planning result: ready
-governing planning basis:
-  kind: reviewed-four-document-design
-  sunstack-tools docs/specs/2026-11-04-owner-assessment/{requirements,specification,program-design,verification-design}.md; review tmp/design-workflows/2026-11-04-owner-assessment/review/report.md … report-round-4.md (converged); within the ai-tools set at 47b3a025 (Program Design: the engine feature)
-  current applicability anchors: ai-tools 47b3a025; sunstack-tools 9116442 (base origin/main 4aa594a)
-delivery context:
-  requested terminal: pr-ready-unmerged
-  delivery grouping: single:engine-asks-kind-once
-  PR topology: one-pr
-  repositories: ShravanSunder/sunstack-tools
-```
+Five steps in sunstack-tools, one pull request, ending in release 0.7.0. Each step leaves the engine working and tested.
 
 Design: [deliverable 1](../../d1-design.html). Planned at sunstack-tools `feat/owner-assessment` `9116442`. Merge and release: the Lead (owner grant, 30 Oct). Tracking: none.
 
-## Changed from
+## The steps
 
-The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by deliverable, as the owner asked on 4 Nov ("big design 4 -> eadch delviermable is design document plus plan that refrences th othe rone"). This plan keeps that plan's slices for this deliverable unchanged; the other deliverables' slices wait on the [delivery map](../../delivery.html) for their own plans. Nothing completed is invalidated: no slice had started.
+```mermaid
+flowchart LR
+  E1["1 · config and refusals"] --> E2["2 · skill folders as units"] --> E3["3 · ask once; gate before a rule's first step"] --> E4["4 · report and exit status"] --> E5["5 · verify journey; release 0.7.0"]
+```
 
-## Slices
+## At a glance
+
+| Step | What it does | How we'll know it worked | Waits on |
+| --- | --- | --- | --- |
+| 1 · Config and refusals | the config can name skill folders and the question; rules can carry a gate; bad config is refused | each bad declaration is refused with its field | nothing |
+| 2 · Skill folders as units | every checked file is matched to its skill folder; the skill's description is read even when only a reference file is checked | a run over one reference file still reads its skill's description | step 1 |
+| 3 · Ask once, then gate | the question is asked once per folder; each gated rule checks the answer before its first step | one question per folder; a rule outside its answers never starts; unsure is skipped | step 2 |
+| 4 · Report and exit status | answers, skips and reasons appear in the report; an unsure answer exits 5, a failed one exits 3 | the exit codes and report on a real run | step 3 |
+| 5 · Verify and release | the verification journey gains this case; changelog; release 0.7.0 | the journey passes on the release build; nothing skill-specific added | step 4 |
+
+One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 starts using it after the release.
+
+## Detail for the agents: files, commands and proof for each step
 
 ### E1 · Engine config and admission (contract; consumer E2)
 
@@ -67,6 +66,26 @@ The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by de
 - **Earns:** engine V5 (existing journeys unchanged with units declared), V7 (OE: no skill word added) by the verify-sunstack-rule journey on the release candidate and a diff read.
 - **Gate:** clippy, fmt, nextest, signing (Developer ID per the release rule); the engine PR merged; release published. The Lead accepts.
 
-## Order
+## Changed from
 
-E1 → E2 → E3 → E4 → E5; one batch. The release gate after E5 is the Lead's acceptance before deliverable 3 uses the gates.
+The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by deliverable, as the owner asked on 4 Nov ("big design 4 -> eadch delviermable is design document plus plan that refrences th othe rone"). This plan keeps that plan's slices for this deliverable unchanged; the other deliverables' slices wait on the [delivery map](../../delivery.html) for their own plans. Nothing completed is invalidated: no slice had started.
+
+## Canonical record
+
+```text
+plan path: docs/specs/2026-11-03-skill-rules/deliverables/1-engine-asks-kind-once/plan.md
+originating planner: plan-implementation
+supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md
+planning result: ready
+governing planning basis:
+  kind: reviewed-four-document-design
+  sunstack-tools docs/specs/2026-11-04-owner-assessment/{requirements,specification,program-design,verification-design}.md; review tmp/design-workflows/2026-11-04-owner-assessment/review/report.md … report-round-4.md (converged); within the ai-tools set at 47b3a025 (Program Design: the engine feature)
+  current applicability anchors: ai-tools 47b3a025; sunstack-tools 9116442 (base origin/main 4aa594a)
+delivery context:
+  requested terminal: pr-ready-unmerged
+  delivery grouping: single:engine-asks-kind-once
+  PR topology: one-pr
+  repositories: ShravanSunder/sunstack-tools
+```
+
+Design: [deliverable 1](../../d1-design.html). Planned at sunstack-tools `feat/owner-assessment` `9116442`. Merge and release: the Lead (owner grant, 30 Oct). Tracking: none.
