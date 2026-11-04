@@ -55,7 +55,7 @@ Accept a producer's recommended next owner only from this table, and a producer'
 
 A destination neither table allows blocks the run; don't invent a route.
 
-For a new file-backed document, pass `new artifact home: <project-root>/docs/specs/` to `spec-design`, `program-design` and `verification-design`, and check that each returns its own path beneath that home. Leave authoritative existing documents where they live. Decisions and their detail go to the central trail; the project gets no lifecycle ledger, replay store, digest or per-turn report.
+For a new file-backed document, pass `new artifact home: <project-root>/docs/specs/` to `spec-design`, `program-design` and `verification-design`, and check that each returns its own path beneath that home. Leave authoritative existing documents where they live. Decisions and their detail go to the work's record through `practices-show-me-your-work`; the project gets no lifecycle ledger, replay store, digest or per-turn report.
 
 ## Verify Each Return
 
@@ -88,7 +88,7 @@ At `ready`, the entry context chooses the terminal:
 
 | Entry context | Terminal |
 | --- | --- |
-| no current delivery plan (a first design cycle) | load `plan-implementation` with the four reviewed identities, the requested terminal and every repository the design touches, and return its result with the first plan's path. That one plan covers all of those repositories, never one repository's plan with a handoff to the rest. Then give the owner one page over the design and the plan. For a new feature, wait for the owner to approve or change the plan, then return `ready-for-implementation` with the four design identities and the plan path; the approval goes on the work thread, never in the plan file. For improvement work, record the page and the decision to proceed on the work thread, and return the same result unless the owner objects. |
+| no current delivery plan (a first design cycle) | load `plan-implementation` with the four reviewed identities, the requested terminal and every repository the design touches, and return its result with the first plan's path. That one plan covers all of those repositories, never one repository's plan with a handoff to the rest. Then give the owner one page over the design and the plan. For a new feature, wait for the owner to approve or change the plan, then return `ready-for-implementation` with the four design identities and the plan path; the approval is a decision entry in the work's record that quotes the owner, never in the plan file, with a notice on the work thread that links it. For improvement work, record the page and the decision to proceed as a decision entry in the work's record, post a notice on the work thread that links it, and return the same result unless the owner objects. |
 | an existing delivery plan (a design correction during delivery) | write no plan. Return the corrected, reviewed design identities and the existing plan's path to the delivery caller, which loads `plan-update`; that skill judges the completed slices and when the update reaches the owner. |
 | design only, as the user asked | return `ready-for-planning` with the four reviewed identities |
 
