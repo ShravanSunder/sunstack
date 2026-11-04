@@ -36,9 +36,9 @@ When a question in a rule file asks two things, or its yes and no explanations a
 
 ### R5: The engine knows nothing about skills
 
-`kind: obligation · capability: rule-making · also serves: skill-kinds, what-rules-read · links: U11, V5 · status: authorized`
+`kind: obligation · capability: rule-making · also serves: skill-kinds, what-rules-read · links: U11, V5 · status: authorized as first written; the narrowing below is proposed, for the owner`
 
-The engine changes this design needs add no skill-specific word, kind, or path. (The engine already resolves `SKILL.md` and skill names in its evidence target loader; that existing code is outside this change and is listed as a later finding.) The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
+The engine release this design needs carries no skill-specific word, kind, or path. *Proposed narrowing, not authorized:* the engine already resolves `SKILL.md` and skill names in its evidence target loader, so the Lead proposes that this change only add nothing skill-specific, with that existing code as later work. Until the owner decides, the first sentence stands. The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
 
 ### C1: What a rule entry shows its reader
 
