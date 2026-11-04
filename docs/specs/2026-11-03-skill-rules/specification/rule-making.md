@@ -38,7 +38,7 @@ When a question in a rule file asks two things, or its yes and no explanations a
 
 `kind: obligation · capability: rule-making · also serves: skill-kinds, what-rules-read · links: U11, V5 · status: authorized`
 
-The engine release this design needs carries no skill-specific word, kind, or path. The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
+The engine changes this design needs add no skill-specific word, kind, or path. (The engine already resolves `SKILL.md` and skill names in its evidence target loader; that existing code is outside this change and is listed as a later finding.) The kinds, the kind question, chunks and edges are declared in this repository's config and rules. If the engine can't express something this design needs, then the engine gains a generic feature and a release; the rules and runner carry no workaround.
 
 ### C1: What a rule entry shows its reader
 
