@@ -8,8 +8,8 @@ A rule about general skills, like "don't send agents into one product's own debu
 
 ```mermaid
 flowchart LR
-  config["config names the skill folders<br/>and one question:<br/>what is this skill's work for?"] --> folders["the engine finds which<br/>folder each checked file is in"]
-  folders --> ask["it asks Jev the question<br/>once per folder,<br/>reading the skill's description"]
+  config["the rules config says:<br/>a skill is a folder under plugins/*/skills/,<br/>described by its SKILL.md;<br/>ask Jev: what is this skill's work for?"] --> folders["each checked file is matched to its skill:<br/>…/ops-observability-stack/references/agentstudio-loop.md<br/>belongs to ops-observability-stack"]
+  folders --> ask["Jev is asked once per skill,<br/>reading its SKILL.md description;<br/>the answer covers every file in it"]
   ask --> gate["before a rule's first step,<br/>the rule checks the answer"]
   gate -->|"answer it accepts"| runs["the rule runs as today"]
   gate -->|"other answer"| na["'not applicable',<br/>with the answer as the reason"]
