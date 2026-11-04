@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Show me your work: skill design</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+
+<h1>Show me your work: skill design</h1>
+
+<p>This change makes show-me-your-work keep your picture of a running design or implementation current. Every agent on the work records what happened, each decision with whose authority it rests on, each assumption, each design change and each proof in Router's work trail, as it happens, tied to the part of the design or plan it concerns. You read one live page per piece of work, built from that record, with the design or plan part by part and what happened beside each part. Decisions you have to make come to you on their own pages.</p>
+
+<p>It changes four skills, one run each: <code>practices-show-me-your-work</code>, <code>role-implementer</code>, <code>implement-plan</code> and <code>orchestrator-implementation-goal</code>.</p>
+
+<ex-callout title="Still open" tone="question" icon="book-open">
+
+- **Two of my assumptions, for you to strike if wrong** (decisions table, D6 and D7): deciding happens on its own pages, which the live page links to; your main view is the design or plan with entries beside each part.
+- **The design review.** No skill file changes until `skill-review`'s design stage accepts this set.
+- **Not proven here:** agent behavior under pressure (evals are a later step, by your standing direction), the Jev importance rule, and a Sidekick writing entries in a real assignment.
+
+</ex-callout>
+
+<h2 id="walkthrough">The four parts</h2>
+<ol>
+  <li><a href="#requirements">Requirements</a>: the change, your success definition in your words, the evidence and the non-goals.</li>
+  <li><a href="#specification">Specification</a>: what the skill must do, one sentence each, the stop list, and the rules with their transfer cases.</li>
+  <li><a href="#skill-design">Skill design</a>: the four runs, the new trigger and main path, the references and script, the security decision, the decisions table you can strike, and coordination.</li>
+  <li><a href="#skill-verification">Skill verification</a>: each item's proof route, the proof plan, the trigger trial, and what stays unverified.</li>
+</ol>
+
+<h2 id="requirements">Requirements</h2>
+<ex-markdown id="part-requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+
+<h2 id="specification">Specification</h2>
+<ex-markdown id="part-specification" label="Specification" src="./specification.md"></ex-markdown>
+
+<h2 id="skill-design">Skill design</h2>
+<ex-markdown id="part-skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+
+<h2 id="skill-verification">Skill verification</h2>
+<ex-markdown id="part-skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+
+</ex-document>
+</body>
+</html>
