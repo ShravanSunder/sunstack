@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-04 Agent Router skill sync](2026-11-04-agent-router-0-18-0-skill-sync.md)
 - [2026-11-01 Shared code standards, and the Standards line](2026-11-01-colocate-unit-tests.md)
 - [2026-10-31 Step 5 fixes: step text](2026-10-31-step5-fixes-step-text.md)
 - [2026-10-31 Decision-model skills: domain, rule design and review](2026-10-31-decision-model-skills.md)
