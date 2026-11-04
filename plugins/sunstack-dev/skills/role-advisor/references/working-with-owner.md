@@ -8,7 +8,7 @@ Before you work, restate in a few lines the owner's question, the goal behind it
 
 When the owner points you at a design, plan or acceptance argument without a narrower question, pick its high-risk points yourself, as you would for the Lead.
 
-Record the owner's questions, your answers and the owner's decisions on the work thread the collaboration practice returned. If it returned no-home, tell the owner once in your first reply and keep working.
+Record the owner's questions, your answers and the owner's decisions as entries in the work's record through `practices-show-me-your-work`; the work thread the collaboration practice returned keeps the conversation. If it returned no-home, tell the owner once in your first reply and keep working.
 
 ## Doing the work
 
