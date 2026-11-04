@@ -179,4 +179,8 @@ Outline only, for the run the owner placed after this change (row `01a1a70c-ec6d
 
 ## Review record
 
-None yet. The design review is `skill-review` at its design stage.
+- **Stage:** `skill-review` design stage. Review lead `codex-local/01a1a6f7-b2ea-77e1-95f6-f4326053f95a`; stage reviewers `codex-local/01a1a6fb-eab2-7e20-b7ac-9991993ff73b` (teaching: mental-model-fit, depth-coverage, transfer) and `codex-local/01a1a6fc-0c85-7d53-9fe9-61312992a60d` (structure: trigger-routing, rule-agreement); all Sol `gpt-6.1-sol` xhigh, write-restricted, no authoring history.
+- **Rounds:** initial report at `ae208939` (Router push `01a1a70b-cffe`): `targeted-revision`, five accepted findings F1–F5. Correction 1 at `5a29838b` (push `01a1a715-6e48`): F1, F2, F4, F5 closed; F3 open; F6 new. Correction 2 at `0111a3ef` (push `01a1a719-b65b`): F3 and F6 closed. Open accepted findings 5 → 2 → 0.
+- **Checks:** all five complete and required. Page parity 4/4.
+- **Verdict:** `great`. **Implementation decision:** `accepted-to-implement`.
+- **Accepted revision:** `0111a3ef34e0b22b41f6cbde2cff4827138ee3dd`, covering the eight runs and the owner-set deferred proof (D14 trigger trial; the Jev check as a later run). Design acceptance only: no implementation, PR or release acceptance.
