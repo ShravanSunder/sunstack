@@ -46,16 +46,16 @@ The engine knows none of these names: `kind`, the folder pattern and the five an
 
 ## One more change: an ast-grep rule can be written inline
 
-An evidence kind still names an ast-grep rule kept in `evidence/rules/*.yml`, or it can write a one-off rule inline, as a one-line YAML string inside the JSON config. Today's `rule-question` rule, written inline:
+An evidence kind still names an ast-grep rule kept in `evidence/rules/*.yml`, or it can write a short one-off rule inline, as a one-line YAML string inside the JSON config. Today's `skill` kind, whose rule is one line in `skill-files.yml`, written inline:
 
 ```json
-"rule_question": {
-  "inline_rule": "{ language: Json, files: ['**/rules/*.rules.json'], rule: { kind: pair, inside: { kind: object, inside: { kind: pair, has: { field: key, regex: '^\"questions\"$' } } } } }",
-  "fields": { "body": { "from": "remainder" } }
+"skill": {
+  "inline_rule": "{ language: Markdown, files: ['**/SKILL.md'], rule: { matches: frontmatter } }",
+  "fields": { "description": { "from": "yaml", "key": "description" } }
 }
 ```
 
-Both forms match exactly the same way. Inline suits a short one-off; a rule with nesting or quoting like this one reads better in its file. The config stays JSON, so it keeps its schema check (your choice, 4 Nov). A kind gives one or the other, never both.
+Both forms match exactly the same way (checked 4 Nov with ast-grep: the same rule from its file and inline found the same 5 matches on a real rules file). Inline is for short rules like this one; a nested rule such as `rule-question` stays in its file, where it reads better. The config stays JSON, so it keeps its schema check (your choice, 4 Nov). A kind gives one or the other, never both. The whole config after both deliverables is in the big design: [the whole config](../../program-design.html#pd--the-whole-config-after-this-change).
 
 ## An example
 

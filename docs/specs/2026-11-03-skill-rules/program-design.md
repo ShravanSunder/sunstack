@@ -62,7 +62,7 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 | [E3 Rule](specification/entities.md#e3-rule) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `only_when`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
 | [E4 Mistake](specification/entities.md#e4-mistake) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
 | [E5 Kind judgment](specification/entities.md#e5-kind-judgment) | the engine (asks), the config (defines) | engine report `filter_answers[]` (new, engine); question in `skill-rules.config.json` `filters.kind.question` (new), criteria `general`, `role`, `domain`, `tool_manual`, `repo_specific` | `{ filter: "kind", folder: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
-| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`, trimmed from 12 to 5 (`skill`, `section`, `load`, `branch`, `rule_question`); modified: `load` and `branch` read their enclosing heading instead of a `step`; `branch` gains a colon block; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
+| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`, trimmed from 12 to 5 (`skill`, `section`, `load`, `branch`, `rule_question`); modified: `load` and `branch` read `headings` (every enclosing heading) instead of a `step`; `branch` gains a colon block; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
 | [E7 Nudge](specification/entities.md#e7-nudge) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
 | [E8 Case](specification/entities.md#e8-case) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
 | [E9 Bar](specification/entities.md#e9-bar) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
@@ -264,14 +264,74 @@ The criteria carry U13's five definitions ([U13](requirements/skill-kinds.md#u13
 | `general-skill.overfits-to-product-workflow` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `only_when: { kind: [general, role, domain] }` | renamed; the family's section check; cases from U16's rows; quiet cases from general skills; moves into `general-skill.rules.json` |
 | `general-skill.description-overfits-to-one-product` (was `description.product-loading`, K007) | `skill` | `only_when: { kind: [general, role, domain] }` | renamed; the general-skill standard's description check (owner decision 2); moves into `general-skill.rules.json` |
 | `general-skill.taught-rule-overfits-to-one-project` (was `rule.generalization`, K001) | `section` | `only_when: { kind: [general, role, domain] }` | renamed; the family's taught-rule check, redone with its filter (owner decision 2, merge both); moves into `general-skill.rules.json` |
-| `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch`, each with its enclosing heading (was its `step`) | none | cases from history |
+| `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch`, each with `headings` (was its `step`); questions rewritten for it | none | cases from history |
 | `completion.criterion` | — | — | dropped for now (owner decision 7); a follow-up rethinks it |
 | `reference.teaching-depth`, `guidance.positive`, `main-path.spine` | — | — | dropped for now (owner): entries and markers removed |
 | `skill-branch.names-an-observable-condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
 | `rule-question.asks-exactly-one-thing`, `rule-question.criteria-answer-the-same-question` | `rule_question` | none | `held_by_owner` until old rule files give cases |
 
-**Evidence kinds and rulebooks after this change.** The config keeps five evidence kinds: `skill` (the description only), `section`, `load`, `branch` and `rule_question`. Seven go, because no kept rule reads them: `sentence`, `standards_section`, `reference_section`, `skill_body`, `skill_target` (folded into `skill`: `load` resolves its targets `as_kind: "skill"`), and `step` with `workflow_section`. `load` and `branch` used `step` only for context, so each reads its enclosing heading (`enclosing` the `section-heading` rule) instead; this is the Lead's call, recorded on the decisions page for the owner to undo. The `steering` rulebook goes, since none of its rules remain. The three general-skill rules move into one pair, `references/general-skill.md` with `general-skill.rules.json` (owner, 4 Nov: "yes remember the genral ksills part ok?"); their standards' text merges there. AST rules no kept kind uses are deleted with their kinds.
+**Evidence kinds and rulebooks after this change.** Five evidence kinds stay, because the 12 kept rules read exactly these: `skill` (the description only), `section`, `load`, `branch` and `rule_question`. Seven go, because no kept rule reads them: `sentence`, `standards_section`, `reference_section`, `skill_body`, `skill_target` (folded into `skill`: `load` resolves its targets `as_kind: "skill"`, which carries the same description), and `step` with `workflow_section`. `load` and `branch` used `step` for context; they now read `headings`, every heading that encloses the line (`enclosing` the `section-heading` rule), e.g. `["# Practices: Cleanup", "## When to run"]`. That is not the numbered step the two questions name today, so both questions are rewritten to say what `headings` holds, not only re-pointed (Advisor review, 4 Nov). A colon-ended branch also reads `block`, the list, table or fenced code straight after it (`next` the `colon-block` rule, count 1); the question reads `block` only when the line ends in ":". The `steering` and `generalization` rulebooks go; the three general-skill rules move into one pair, `references/general-skill.md` with `general-skill.rules.json` (owner, 4 Nov: "yes remember the genral ksills part ok?"), their standards' text merged there. Matchers that only removed kinds used are deleted with them: `workflow-sections.yml`, both `evidence/utils/` files, and `step-candidate`, `completion`, `standards-section`, `reference-section`, `reference-opening` from `skill-steps.yml`.
+
+**Checked on today's engine (0.6.0), 4 Nov.** Everything above that 0.6.0 can express was built in a scratch copy and run (script and results: `tmp/2026-11-04-config-proof/`). `sunstack lint --check` admits it: exit 0, the 12 rules under their new names, 5 rulebooks, 5 evidence kinds. Over all 321 checked files, 475 branch pieces: all 26 colon-ended branches get their block (a list-only matcher found 14; the other 12 were 11 code blocks and 1 table), and 10 other branches also pick up a following block, which their question ignores. Not checked: `filters`, `only_when` and `inline_rule`, which need 0.7.0, and how well the rewritten questions read the new fields (deliverable 2's cases).
+
+### The whole config after this change
+
+One file, as a rule writer will see it. Parts marked *(0.7.0)* need deliverable 1's release; the rest is what passed `--check` on 0.6.0.
+
+```json
+{
+  "rulebook": [
+    { "markdown": "../references/descriptions-and-invocation.md", "rules": "descriptions-and-invocation.rules.json" },
+    { "markdown": "../references/general-skill.md", "rules": "general-skill.rules.json" },
+    { "markdown": "../references/calls-and-placement.md", "rules": "calls-and-placement.rules.json" },
+    { "markdown": "../references/main-path.md", "rules": "main-path.rules.json" },
+    { "markdown": "../../../../sunstack-dev/skills/domain-decision-models/SKILL.md", "rules": "domain-decision-models.rules.json" }
+  ],
+  "marker_prefix": "K",
+  "check": { "files": ["plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/**/*.md", "plugins/*/skills/*/rules/*.rules.json"] },
+  "filters": {
+    "kind": {
+      "per": "plugins/*/skills/{name}",
+      "reads": { "file": "SKILL.md", "kind": "skill", "field": "description" },
+      "question": { "type": "choice", "instructions": { "task": "What is this skill's work for?" },
+                    "criteria": { "general": "…", "role": "…", "domain": "…", "tool_manual": "…", "repo_specific": "…" } },
+      "min_probability": 0.7
+    }
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "skill": { "inline_rule": "{ language: Markdown, files: ['**/SKILL.md'], rule: { matches: frontmatter } }",
+                 "fields": { "description": { "from": "yaml", "key": "description" } } },
+      "section": { "rule": "skill-section", "max_chars": 30000, "fields": {
+        "heading": { "from": "first_line" }, "headings": { "from": "enclosing", "rule": "section-heading" },
+        "body": { "from": "remainder", "exclude": { "rule": "section-heading" } },
+        "targets": { "from": "target", "regex": "(?:load|dispatch)\\s+`([^`]+)`", "resolve": "path_or_skill", "opening_chars": 3000, "exclude": { "rule": "section-heading" } } } },
+      "load": { "rule": "load", "fields": {
+        "line": { "from": "first_line" },
+        "targets": { "from": "target", "regex": "`([^`]+)`", "resolve": "path_or_skill", "as_kind": "skill" },
+        "headings": { "from": "enclosing", "rule": "section-heading" } } },
+      "branch": { "rule": "branch", "fields": {
+        "line": { "from": "first_line" }, "headings": { "from": "enclosing", "rule": "section-heading" },
+        "block": { "from": "next", "rule": "colon-block", "count": 1 } } },
+      "rule_question": { "rule": "rule-question", "max_chars": 6000, "fields": { "body": { "from": "remainder" } } }
+    }
+  },
+  "decision_model": { "model": "jev-latest" },
+  "limits": { "evidence_max_chars": 6000, "request_max_chars": 50000, "max_model_requests": 9000, "max_concurrent_requests": 8, "max_matches": 20000, "max_input_tokens_per_request": 50000 }
+}
+```
+
+`filters` and the `skill` kind's `inline_rule` are *(0.7.0)*; on 0.6.0 the `skill` kind keeps `"rule": "skill"` from `skill-files.yml`, which deliverable 3 deletes when it switches to the inline form. Matchers left in files: `skill-section`, `section-heading`, `load`, `branch`, `colon-block` and `rule-question` (the last is nested JSON matching, easier to read in its file). One gated rule entry, `general-skill.overfits-to-product-workflow`:
+
+```json
+"K002": { "name": "general-skill.overfits-to-product-workflow", "evidence": "section",
+          "only_when": { "kind": ["general", "role", "domain"] },
+          "questions": { … }, "decision": { … }, "severity": "warn" }
+```
+
+How to read it, in order: `check.files` says which files are linted; `evidence.kinds` says what pieces each rule reads (ast-grep matches plus fields); `filters` asks Jev one question per skill folder; a rule's `only_when` reads that answer before its first step; its `questions` and `decision` judge the piece; the nudge goes to the agent.
 
 ## The path from line 17 to the agent
 
@@ -315,7 +375,7 @@ Owner: the runner derives the state on every run from the case file, the rule fi
 | --- | --- | --- | --- |
 | the decision model is unreachable or malformed for a folder | engine | answer `incomplete`; gated rules give no result on that folder's files; the run is `incomplete` | engine |
 | a folder's answer is below its bar | engine | `unsure`; gated rules skip it; `kind unsure` gap (R15) | engine |
-| a checked file lies in no folder | engine | `no folder` gap for gated rules on that file | engine |
+| a checked file lies in no folder | engine | `no folder` gap for gated rules on that file; the run is `incomplete` (exit 3) | engine |
 | a case's commit or path no longer resolves | runner (`pinned-source.ts`) | case reported broken; its rule `held` (`failing`) | runner |
 | a fix pair's two cases sit in different sets | runner | rule `held` (`split_fix_pair`) | runner |
 | the engine release lacks filters | runner (`rules --check` refuses the `filters` config section, or the report has no `filter_answers` and `filter_skips` fields; empty arrays mean the feature is present) | gated rules `held` (`needs_engine`) | runner |

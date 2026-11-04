@@ -27,7 +27,7 @@
 <h1>Decisions and status</h1>
 <p>Skill rules design, 4 Nov. Open items first, then my calls you can undo, then what's decided, what's dropped, and everything you said with its status.</p>
 
-<h2 id="open">Open: 4 items</h2>
+<h2 id="open">Open: 5 items</h2>
 <p>Nothing is blocked on these except the start of building, which waits on the last one.</p>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
@@ -36,12 +36,13 @@
 <tr><td>PR layout</td><td>one pull request per deliverable, stacked; or deliverables 2–5 together in #188</td><td>one per deliverable, stacked: each is small enough to review in one pass</td></tr>
 <tr><td>Rule keys</td><td>whether rules files key each rule by its name (general-skill.overfits-to-product-workflow) instead of K001; this changes the engine's rule-file contract</td><td>yes, in deliverable 1, since the engine is open anyway; say no and the K markers stay</td></tr>
 <tr><td>A: teaching-behavior rules</td><td>add rules that check a skill tells agents to run the rules before saying done</td><td>no for now; deliverable 5 teaches it, and the evals show whether it's needed</td></tr>
+<tr><td>How sure the kind must be</td><td>today a skill is skipped unless Jev is 70% sure of its exact kind. Example: general 36%, role 34%, domain 24% is unsure, so the general-skill rules skip, though 94% of the answer is a kind they judge. The alternative: a rule runs when its accepted kinds together reach the bar. Same one question per skill; it changes what “unsure” means, which you set on 3 Nov</td><td>keep your rule for now and count the skips once the rules run; revisit with numbers (both Advisors' reviews, 4 Nov)</td></tr>
 <tr><td>Go</td><td>start building deliverables 1 and 2</td><td>go: both designs and plans are updated to your final config</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="lead-calls">My calls you can undo: 4 items</h2>
+<h2 id="lead-calls">My calls you can undo: 6 items</h2>
 <p>Each is reversible and inside what you agreed; tell me to change any.</p>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
@@ -51,6 +52,8 @@
 <tr><td>Every checked file under a skill folder shares its answer (no members list)</td><td>no rule needs a narrower set, and per already draws the folder</td><td>add a members list to the filter</td></tr>
 <tr><td>only_when names one filter</td><td>two filters would need an and/or rule nobody has asked for</td><td>allow several, with a stated and/or</td></tr>
 <tr><td>An inline ast-grep rule goes only on a kind's own matcher</td><td>field sources already name a rule or a kind; inline there adds escaping for no case we have</td><td>allow inline in field sources too</td></tr>
+<tr><td>A gated rule on a file outside every skill folder makes the run incomplete (exit 3)</td><td>the rule couldn't be checked there, and a mistyped folder pattern must not look like a clean run (program Advisor's recommendation)</td><td>list it as a skip and leave the status alone</td></tr>
+<tr><td>A filter reads one text field (the description), never a list, and never guesses the kind from the folder name when the description is missing or broken</td><td>both Advisors found the design didn't say; a missing description now gives an explained "incomplete"</td><td>allow lists or wider input, which needs a way to bound it</td></tr>
 </tbody>
 </table>
 </div>
