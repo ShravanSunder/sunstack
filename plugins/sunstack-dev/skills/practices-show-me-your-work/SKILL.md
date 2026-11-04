@@ -17,7 +17,7 @@ IF that load returns `no-home`, or the work has no Router project, load `referen
 
 Resume the existing record and read its history first. Carry each open entry forward: open assumptions and stand-ins, owner asks and unaccepted work. Before an unchecked "done" claim in it guides your next step, continue from the part current sources support and carry the rest as open work ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). When you resume as the 🦁 Lead and an owner correction is newer than the plan or commission, mark each line it overrides and continue from the correction ([a later correction outranks the plan](../principle-build-the-shared-model-first/SKILL.md)). Ask the owner only when two owner decisions conflict or the correction's meaning is unclear.
 
-Completion: the record (project and work tag, or the entries file) is named, and its open entries are listed.
+Completion: the record (project and work tag, or the entries file) is named; you read it to its high water (or the file's last line) and give that position; and each open entry (open assumptions, stand-ins, owner asks and unaccepted work) is listed by id, or the read shows none.
 
 ## 2. Record as it happens
 
@@ -57,9 +57,13 @@ The 🦁 Lead keeps the owner's asks as owner-ask entries. Each is an actionable
 
 At resume, at each handback and before calling work done, compare each open ask with what the sources show now and name each one still open ([check that every owner line is carried](../principle-hold-the-scope/SKILL.md)). One list said three fixes had landed in a commit and, a line later, still gave "commit them" as the next step; `git log` already held the commit.
 
+Completion: each open owner ask is named by id with its state, beside what the current sources show for it; an ask those sources show done or deferred has its closing entry.
+
 ## 5. Accept work (the Lead)
 
 The 🦁 Lead accepts finished work with a Lead acceptance entry that names the commit, each check the Lead read with its result, and what stays unverified. A helper's success report, a green check or a review verdict alone is not acceptance. Later work that touches accepted work is recorded as reopening it: a new entry whose first link is the acceptance.
+
+Completion: the acceptance entry's id, and in its text the commit, each check you read with its result, and what stays unverified.
 
 ## 6. Show the owner
 
@@ -67,9 +71,13 @@ At every checkpoint, MUST load `references/live-page.md` and return the page pat
 
 The page shows only what the record holds. A choice the owner must make reaches the owner on its own decision page through `owner-decision-brief`, which the live page links to; the answer is recorded as a decision entry that quotes the owner's words and closes what it answers.
 
+Completion: the page path, the record position this checkpoint's build covers, and a checker result with no errors.
+
 ## 7. Checkpoint at every stop
 
 Before a terminal response, record the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action, rebuild the page, and put the record reference and page path in the handoff; if nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a command or path you checked, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). Post a checkpoint notice on the work thread that links the record. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
+
+Completion: the checkpoint entry's id, the page rebuilt from the record after it, and the thread notice that links both.
 
 ## Completion
 

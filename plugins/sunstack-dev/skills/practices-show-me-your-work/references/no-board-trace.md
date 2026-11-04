@@ -28,6 +28,13 @@ The 🦁 Lead moves the record:
 4. IF a pre-project Sidekick is still live, load `practices-collaboration` and return the execution root to give it.
 5. Continue in the work trail and rebuild the page from it. Each entries file stays its writer's history; don't move, delete or rewrite it.
 
+Inspect the links before you write: every link between entries names an entry id, and the move must keep each id the same.
+
+- Good: each entry re-added with `--row-id <its id>` in recorded order. Every first link still closes the entry it names, and the page built from the trail matches the page built from the files.
+- Bad: a re-add without `--row-id`. The trail mints a new id, every link to the old id points at nothing, and a closed assumption shows as open again.
+
+The move is done when every entry from the files is in the trail under its own id and the rebuilt page's closed history matches the files' page.
+
 Existing traces on threads, session-logs files and JSONL trails are read-only history: read them without inventing events or migrating them.
 
 Complete when every entry is in a file this writer owns and the page is built from it, the record is moved into the work trail, or the exact gap is returned.
