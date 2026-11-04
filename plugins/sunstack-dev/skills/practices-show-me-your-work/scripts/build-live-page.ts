@@ -8,7 +8,13 @@
 //   node build-live-page.ts --router <projectId> <workTag> <output.html> <page title>
 //   node build-live-page.ts --file <entries.jsonl> [--file <more.jsonl>] <output.html> <page title>
 import { writeFileSync } from "node:fs";
-import { readEntriesFiles, readWorkTrail, type LoadedRecord, type RecordEntry, type RecordProvenance } from "./read-record.ts";
+import {
+  readEntriesFiles,
+  readWorkTrail,
+  type LoadedRecord,
+  type RecordEntry,
+  type RecordProvenance,
+} from "./read-record.ts";
 
 export type EntryKind =
   | "action"
@@ -58,14 +64,14 @@ export type EntryPlacement =
   | { section: "closing-cell"; closedEntryId: string }
   | { section: "lead-view" };
 
-export type ClassifiedEntry = {
+export interface ClassifiedEntry {
   entry: RecordEntry;
   kind: EntryKind | null;
   closesEntryId: string | null;
   closedBy: RecordEntry[];
   nextActor: string | null;
   placement: EntryPlacement;
-};
+}
 
 const tagValue = (entry: RecordEntry, prefix: string): string | null =>
   entry.tags.find((tag) => tag.startsWith(prefix))?.slice(prefix.length) ?? null;
@@ -109,7 +115,11 @@ export function classifyEntries(entries: RecordEntry[]): ClassifiedEntry[] {
       if (closedBy.length > 0) return { section: "closed-history" };
       if (kind === null) {
         // An entry with only a closure tag renders beside the entry it closes, the first time that entry shows.
-        if (closesEntryId !== null && closesEntryId !== entry.entryId && entryIds.has(closesEntryId)) {
+        if (
+          closesEntryId !== null &&
+          closesEntryId !== entry.entryId &&
+          entryIds.has(closesEntryId)
+        ) {
           return { section: "closing-cell", closedEntryId: closesEntryId };
         }
         return { section: "lead-view" };
@@ -149,9 +159,9 @@ function formatTime(isoTime: string | null): string {
   return `${easternTime.format(new Date(isoTime))} ET`;
 }
 
-const anchorId = (entryId: string) => `entry-${entryId}`;
-const shortId = (entryId: string) => entryId.slice(0, 13);
-const partSectionId = (partId: string | null) =>
+const anchorId = (entryId: string): string => `entry-${entryId}`;
+const shortId = (entryId: string): string => entryId.slice(0, 13);
+const partSectionId = (partId: string | null): string =>
   partId === null ? "part-none" : `part-${partId.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`;
 
 function actorLabel(actor: string | null): string {
@@ -162,7 +172,10 @@ function safeUrl(url: string): string | null {
   return /^(https?|file):/i.test(url) ? url : null;
 }
 
-type RenderContext = { classifiedById: Map<string, ClassifiedEntry>; anchoredIds: Set<string> };
+interface RenderContext {
+  classifiedById: Map<string, ClassifiedEntry>;
+  anchoredIds: Set<string>;
+}
 
 // Each entry carries exactly one anchor, on the one place its placement names.
 function anchorAttribute(entryId: string, context: RenderContext): string {
@@ -173,17 +186,22 @@ function anchorAttribute(entryId: string, context: RenderContext): string {
 
 function entryReference(entryId: string, context: RenderContext): string {
   const target = context.classifiedById.get(entryId);
-  const label = target ? escapeHtml(target.entry.text.split("\n")[0] ?? "") : `entry ${shortId(entryId)}`;
+  const label = target
+    ? escapeHtml(target.entry.text.split("\n")[0] ?? "")
+    : `entry ${shortId(entryId)}`;
   return target ? `<a href="#${anchorId(entryId)}">${label}</a>` : `${label} (not in this record)`;
 }
 
 function linksMarkup(classified: ClassifiedEntry, context: RenderContext): string {
   const linkItems = classified.entry.links.map((link, linkIndex) => {
     const closes = linkIndex === 0 && classified.closesEntryId !== null;
-    if (link.kind === "entry") return `${closes ? "Closes" : "See"} ${entryReference(link.entryId, context)}`;
+    if (link.kind === "entry")
+      return `${closes ? "Closes" : "See"} ${entryReference(link.entryId, context)}`;
     if (link.kind === "url") {
       const url = safeUrl(link.url);
-      return url ? `<a href="${escapeHtml(url)}">${escapeHtml(url)}</a>` : `Link: ${escapeHtml(link.url)}`;
+      return url
+        ? `<a href="${escapeHtml(url)}">${escapeHtml(url)}</a>`
+        : `Link: ${escapeHtml(link.url)}`;
     }
     return `Link: ${escapeHtml(link.description)}`;
   });
@@ -192,7 +210,9 @@ function linksMarkup(classified: ClassifiedEntry, context: RenderContext): strin
 
 function entryTextMarkup(classified: ClassifiedEntry, context: RenderContext): string {
   const [firstLine = "", ...detailLines] = classified.entry.text.split("\n");
-  const detail = detailLines.length ? `<br><small>${detailLines.map(escapeHtml).join("<br>")}</small>` : "";
+  const detail = detailLines.length
+    ? `<br><small>${detailLines.map(escapeHtml).join("<br>")}</small>`
+    : "";
   return `${escapeHtml(firstLine)}${detail}${linksMarkup(classified, context)}`;
 }
 
@@ -205,11 +225,14 @@ function stateLabel(classified: ClassifiedEntry): string {
   const { entry, kind } = classified;
   if (classified.closedBy.length > 0) return "Closed";
   if (kind === "assumption") {
-    const seen = entry.tags.includes("state:not-marked-wrong") ? "open; you saw it and didn't mark it wrong" : "open";
+    const seen = entry.tags.includes("state:not-marked-wrong")
+      ? "open; you saw it and didn't mark it wrong"
+      : "open";
     return `Assumption, ${seen}. Next: ${actorLabel(classified.nextActor)}`;
   }
   if (kind === "owner-ask") return `Ask, ${tagValue(entry, "state:") ?? "state not recorded"}`;
-  if (kind === "decision") return entry.tags.includes("door:two-way") ? "Decided, two-way door" : "Decided";
+  if (kind === "decision")
+    return entry.tags.includes("door:two-way") ? "Decided, two-way door" : "Decided";
   if (kind === "lead-acceptance") return "Accepted by the Lead";
   return "";
 }
@@ -227,7 +250,11 @@ function entryRow(classified: ClassifiedEntry, context: RenderContext): string {
   ].join("");
 }
 
-function entryTable(classifiedEntries: ClassifiedEntry[], emptyText: string, context: RenderContext): string {
+function entryTable(
+  classifiedEntries: ClassifiedEntry[],
+  emptyText: string,
+  context: RenderContext,
+): string {
   if (classifiedEntries.length === 0) return `<p>${escapeHtml(emptyText)}</p>`;
   const bodyRows = classifiedEntries.map((classified) => entryRow(classified, context)).join("\n");
   return [
@@ -283,7 +310,7 @@ function provenanceText(provenance: RecordProvenance, entryCount: number): strin
   return `Built from ${entryCount} entries in ${provenance.fileNames.join(", ")} (${provenance.lineCount} lines), before the work had a Router project.`;
 }
 
-export type PageCounts = {
+export interface PageCounts {
   waitingForOwner: number;
   openAssumptionsWithAgents: number;
   designChanges: number;
@@ -291,14 +318,17 @@ export type PageCounts = {
   leadAcceptances: number;
   closed: number;
   leadView: number;
-};
+}
 
 export function countPage(classifiedEntries: ClassifiedEntry[]): PageCounts {
   const open = classifiedEntries.filter((classified) => classified.closedBy.length === 0);
   return {
-    waitingForOwner: open.filter((classified) => classified.placement.section === "waiting-for-owner").length,
+    waitingForOwner: open.filter(
+      (classified) => classified.placement.section === "waiting-for-owner",
+    ).length,
     openAssumptionsWithAgents: open.filter(
-      (classified) => classified.kind === "assumption" && classified.placement.section !== "waiting-for-owner",
+      (classified) =>
+        classified.kind === "assumption" && classified.placement.section !== "waiting-for-owner",
     ).length,
     designChanges: open.filter((classified) => classified.kind === "design-change").length,
     proof: open.filter((classified) => classified.kind === "proof").length,
@@ -312,14 +342,18 @@ export function countPage(classifiedEntries: ClassifiedEntry[]): PageCounts {
 export function renderPage(loaded: LoadedRecord, pageTitle: string, builtAt: string): string {
   const classifiedEntries = classifyEntries(loaded.entries);
   const context: RenderContext = {
-    classifiedById: new Map(classifiedEntries.map((classified) => [classified.entry.entryId, classified])),
+    classifiedById: new Map(
+      classifiedEntries.map((classified) => [classified.entry.entryId, classified]),
+    ),
     anchoredIds: new Set(),
   };
   const inSection = (section: EntryPlacement["section"]) =>
     classifiedEntries.filter((classified) => classified.placement.section === section);
   const partIds = [
     ...new Set(
-      inSection("part").map((classified) => (classified.placement.section === "part" ? classified.placement.partId : null)),
+      inSection("part").map((classified) =>
+        classified.placement.section === "part" ? classified.placement.partId : null,
+      ),
     ),
   ].sort((left, right) => (left === null ? 1 : right === null ? -1 : 0));
   const counts = countPage(classifiedEntries);
@@ -327,7 +361,8 @@ export function renderPage(loaded: LoadedRecord, pageTitle: string, builtAt: str
   const partSections = partIds
     .map((partId) => {
       const partEntries = inSection("part").filter(
-        (classified) => classified.placement.section === "part" && classified.placement.partId === partId,
+        (classified) =>
+          classified.placement.section === "part" && classified.placement.partId === partId,
       );
       const heading = partId === null ? "Not tied to a part" : `Part ${escapeHtml(partId)}`;
       return `<h3 id="${partSectionId(partId)}">${heading}</h3>\n${entryTable(partEntries, "", context)}`;
@@ -387,7 +422,8 @@ ${entryTable(inSection("lead-view"), "None.", context)}
 </html>
 `;
   const unrendered = loaded.entries.filter((entry) => !context.anchoredIds.has(entry.entryId));
-  if (unrendered.length > 0) throw new Error(`entries not rendered: ${unrendered.map((entry) => entry.entryId).join(", ")}`);
+  if (unrendered.length > 0)
+    throw new Error(`entries not rendered: ${unrendered.map((entry) => entry.entryId).join(", ")}`);
   return page;
 }
 

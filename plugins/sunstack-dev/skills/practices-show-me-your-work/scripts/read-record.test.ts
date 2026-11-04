@@ -1,10 +1,20 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { parseEntriesFile, readEntriesFiles, readWorkTrail, type FeedCursor } from "./read-record.ts";
+import {
+  parseEntriesFile,
+  readEntriesFiles,
+  readWorkTrail,
+  type FeedCursor,
+} from "./read-record.ts";
 
 const projectId = "01a1635f-5d9d-70e4-bfc7-6d96c1a210e7";
 
-function routerRow(rowId: string, text: string, tags: string[], extra: Record<string, unknown> = {}) {
+function routerRow(
+  rowId: string,
+  text: string,
+  tags: string[],
+  extra: Record<string, unknown> = {},
+) {
   return {
     envelope: { time: { kind: "router", value: "2026-11-04T15:00:00Z" } },
     rowId,
@@ -19,7 +29,9 @@ function routerRow(rowId: string, text: string, tags: string[], extra: Record<st
 }
 
 function pageOutput(rows: unknown[], coveredThrough: FeedCursor, highWater: FeedCursor): string {
-  return JSON.stringify({ result: { record: { value: { page: { rows, coveredThrough, highWater } } } } });
+  return JSON.stringify({
+    result: { record: { value: { page: { rows, coveredThrough, highWater } } } },
+  });
 }
 
 describe("readWorkTrail", () => {
@@ -27,7 +39,11 @@ describe("readWorkTrail", () => {
     // Arrange: three windows; the middle one is empty and the last holds a redacted row.
     const highWater = { epoch: 2, position: 300 };
     const pages = [
-      pageOutput([routerRow("01a1a000-0001", "first", ["action"])], { epoch: 2, position: 100 }, highWater),
+      pageOutput(
+        [routerRow("01a1a000-0001", "first", ["action"])],
+        { epoch: 2, position: 100 },
+        highWater,
+      ),
       pageOutput([], { epoch: 2, position: 200 }, highWater),
       pageOutput(
         [
@@ -70,10 +86,14 @@ describe("readWorkTrail", () => {
   });
 
   it("rejects a row whose id could break out of an HTML attribute", () => {
-    const page = pageOutput([routerRow('x" onclick="alert(1)', "bad id", ["action"])], { epoch: 2, position: 1 }, {
-      epoch: 2,
-      position: 1,
-    });
+    const page = pageOutput(
+      [routerRow('x" onclick="alert(1)', "bad id", ["action"])],
+      { epoch: 2, position: 1 },
+      {
+        epoch: 2,
+        position: 1,
+      },
+    );
     assert.throws(() => readWorkTrail(projectId, "design-documents", () => page), /entry id/);
   });
 });
@@ -81,7 +101,10 @@ describe("readWorkTrail", () => {
 describe("entries files", () => {
   it("names the file and line of an entry that isn't valid JSON", () => {
     const fileText = `${JSON.stringify({ rowId: "a1", recordedAt: "2026-11-04T15:00:00Z", text: "ok", tags: ["action"] })}\n{not json\n`;
-    assert.throws(() => parseEntriesFile(fileText, "entries-lead.jsonl"), /entries-lead\.jsonl:2: not one JSON entry/);
+    assert.throws(
+      () => parseEntriesFile(fileText, "entries-lead.jsonl"),
+      /entries-lead\.jsonl:2: not one JSON entry/,
+    );
   });
 
   it("merges several writers' files by recorded time", () => {
@@ -89,7 +112,14 @@ describe("entries files", () => {
       { rowId: "lead-1", recordedAt: "2026-11-04T15:00:00Z", text: "lead first", tags: ["action"] },
       { rowId: "lead-2", recordedAt: "2026-11-04T15:20:00Z", text: "lead third", tags: ["action"] },
     ];
-    const sidekick = [{ rowId: "side-1", recordedAt: "2026-11-04T15:10:00Z", text: "sidekick second", tags: ["proof"] }];
+    const sidekick = [
+      {
+        rowId: "side-1",
+        recordedAt: "2026-11-04T15:10:00Z",
+        text: "sidekick second",
+        tags: ["proof"],
+      },
+    ];
     const files: Record<string, string> = {
       "/work/entries-lead.jsonl": lead.map((entry) => JSON.stringify(entry)).join("\n"),
       "/work/entries-sidekick.jsonl": sidekick.map((entry) => JSON.stringify(entry)).join("\n"),
