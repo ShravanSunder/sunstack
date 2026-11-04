@@ -55,7 +55,7 @@ An evidence kind still names an ast-grep rule kept in `evidence/rules/*.yml`, or
 }
 ```
 
-Both forms match exactly the same way (checked 4 Nov with ast-grep: the same rule from its file and inline found the same 5 matches on a real rules file). Inline is for short rules like this one; a nested rule such as `rule-question` stays in its file, where it reads better. The config stays JSON, so it keeps its schema check (your choice, 4 Nov). A kind gives one or the other, never both. The whole config after both deliverables is in the big design: [the whole config](../../program-design.html#pd--the-whole-config-after-this-change).
+Both forms match exactly the same way. Checked 4 Nov with ast-grep on today's `rule-question` rule: from its file and inline, it found the same 5 matches in `calls-and-placement.rules.json` (receipts in `tmp/2026-11-04-config-proof/raw/`). The example above uses `frontmatter`, the engine's own built-in utility, which the ast-grep command line doesn't have, so it is proven by the engine's inline-rule test (step 1 of the plan). Inline is for short rules like this one; a nested rule such as `rule-question` stays in its file, where it reads better. The config stays JSON, so it keeps its schema check (your choice, 4 Nov). A kind gives one or the other, never both. The whole config after both deliverables is in the big design: [the whole config](../../program-design.html#pd--the-whole-config-after-this-change).
 
 ## An example
 
