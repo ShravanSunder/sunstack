@@ -58,7 +58,7 @@ const actorLabels: Record<string, string> = {
 // The selection rule and placement: where each entry renders, exactly once.
 
 export type EntryPlacement =
-  | { section: "waiting-for-owner" }
+  | { section: "waiting-for-owner"; partId: string | null }
   | { section: "part"; partId: string | null }
   | { section: "closed-history" }
   | { section: "closing-cell"; closedEntryId: string }
@@ -124,7 +124,9 @@ export function classifyEntries(entries: RecordEntry[]): ClassifiedEntry[] {
         }
         return { section: "lead-view" };
       }
-      if (kind === "assumption" && nextActor === "owner") return { section: "waiting-for-owner" };
+      if (kind === "assumption" && nextActor === "owner") {
+        return { section: "waiting-for-owner", partId: partIdOf(entry) };
+      }
       if (kind === "owner-ask") return { section: "lead-view" };
       if (kind === "decision" && !entry.tags.includes("core")) return { section: "lead-view" };
       return { section: "part", partId: partIdOf(entry) };
@@ -237,10 +239,24 @@ function stateLabel(classified: ClassifiedEntry): string {
   return "";
 }
 
-function entryRow(classified: ClassifiedEntry, context: RenderContext): string {
+function partLink(partId: string | null): string {
+  const label = partId === null ? "Not tied to a part" : escapeHtml(partId);
+  return `<a href="#${partSectionId(partId)}">${label}</a>`;
+}
+
+// The part an entry is placed under, or that a waiting entry belongs to.
+function placedPartId(classified: ClassifiedEntry): string | null {
+  const { placement } = classified;
+  return placement.section === "part" || placement.section === "waiting-for-owner"
+    ? placement.partId
+    : null;
+}
+
+function entryRow(classified: ClassifiedEntry, context: RenderContext, showPart: boolean): string {
   const { entry } = classified;
   return [
     `    <tr${anchorAttribute(entry.entryId, context)}>`,
+    showPart ? `<td>${partLink(placedPartId(classified))}</td>` : "",
     `<td>${kindLabel(classified)}</td>`,
     `<td>${entryTextMarkup(classified, context)}</td>`,
     `<td>${escapeHtml(actorLabel(tagValue(entry, "who:")))}</td>`,
@@ -254,13 +270,16 @@ function entryTable(
   classifiedEntries: ClassifiedEntry[],
   emptyText: string,
   context: RenderContext,
+  showPart = false,
 ): string {
   if (classifiedEntries.length === 0) return `<p>${escapeHtml(emptyText)}</p>`;
-  const bodyRows = classifiedEntries.map((classified) => entryRow(classified, context)).join("\n");
+  const bodyRows = classifiedEntries
+    .map((classified) => entryRow(classified, context, showPart))
+    .join("\n");
   return [
     `<div class="ex-table-scroll" data-width="canvas">`,
     `<table>`,
-    `  <thead><tr><th>Kind</th><th>Entry</th><th>Who</th><th>State</th><th>Recorded</th><th>Entry id</th></tr></thead>`,
+    `  <thead><tr>${showPart ? "<th>Part</th>" : ""}<th>Kind</th><th>Entry</th><th>Who</th><th>State</th><th>Recorded</th><th>Entry id</th></tr></thead>`,
     `  <tbody>\n${bodyRows}\n  </tbody>`,
     `</table>`,
     `</div>`,
@@ -349,23 +368,33 @@ export function renderPage(loaded: LoadedRecord, pageTitle: string, builtAt: str
   };
   const inSection = (section: EntryPlacement["section"]) =>
     classifiedEntries.filter((classified) => classified.placement.section === section);
-  const partIds = [
-    ...new Set(
-      inSection("part").map((classified) =>
-        classified.placement.section === "part" ? classified.placement.partId : null,
-      ),
-    ),
-  ].sort((left, right) => (left === null ? 1 : right === null ? -1 : 0));
+  const partPlaced = classifiedEntries.filter(
+    (classified) =>
+      classified.placement.section === "part" ||
+      classified.placement.section === "waiting-for-owner",
+  );
+  const partIds = [...new Set(partPlaced.map(placedPartId))].sort((left, right) =>
+    left === null ? 1 : right === null ? -1 : 0,
+  );
   const counts = countPage(classifiedEntries);
 
   const partSections = partIds
     .map((partId) => {
-      const partEntries = inSection("part").filter(
-        (classified) =>
-          classified.placement.section === "part" && classified.placement.partId === partId,
+      const ofThisPart = partPlaced.filter((classified) => placedPartId(classified) === partId);
+      const partEntries = ofThisPart.filter(
+        (classified) => classified.placement.section === "part",
       );
+      // An entry waiting for the owner keeps its one anchor in "Waiting for you"; its part links to it.
+      const waitingLinks = ofThisPart
+        .filter((classified) => classified.placement.section === "waiting-for-owner")
+        .map(
+          (classified) =>
+            `<li><a href="#${anchorId(classified.entry.entryId)}">Waiting for you: entry <code>${shortId(classified.entry.entryId)}</code></a></li>`,
+        );
       const heading = partId === null ? "Not tied to a part" : `Part ${escapeHtml(partId)}`;
-      return `<h3 id="${partSectionId(partId)}">${heading}</h3>\n${entryTable(partEntries, "", context)}`;
+      const waitingList = waitingLinks.length ? `\n<ul>\n${waitingLinks.join("\n")}\n</ul>` : "";
+      const table = partEntries.length ? `\n${entryTable(partEntries, "", context)}` : "";
+      return `<h3 id="${partSectionId(partId)}">${heading}</h3>${waitingList}${table}`;
     })
     .join("\n\n");
 
@@ -401,10 +430,10 @@ export function renderPage(loaded: LoadedRecord, pageTitle: string, builtAt: str
 
 <h2 id="waiting">Waiting for you</h2>
 <p>Only open assumptions whose next actor is you. Each needs your choice; its decision page, when there is one, is linked in the entry. An open assumption is never a decision, whatever its state.</p>
-${entryTable(inSection("waiting-for-owner"), "Nothing is waiting for you.", context)}
+${entryTable(inSection("waiting-for-owner"), "Nothing is waiting for you.", context, true)}
 
 <h2 id="by-part">The work, part by part</h2>
-<p>What happened, what was decided, assumed and changed, and what is proven, beside the part of the design or plan each entry concerns. Open assumptions show who they wait on.</p>
+<p>What happened, what was decided, assumed and changed, and what is proven, beside the part of the design or plan each entry concerns. Open assumptions show who they wait on; one waiting for you is listed in its part as a link to its entry under "Waiting for you".</p>
 ${partSections || "<p>No entries yet.</p>"}
 
 <h2 id="closed">Closed and kept as history</h2>

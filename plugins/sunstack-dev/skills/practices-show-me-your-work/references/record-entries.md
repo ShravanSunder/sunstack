@@ -66,7 +66,7 @@ agent-collaboration work-trail add --project-id <project id> --actor self --subj
 
 The result's decision is `accepted` and carries the new row's id; keep that id for later links. To make a retry safe, pass your own `--request-id` (a UUIDv7) and reuse it when you retry the same write, so it never lands twice.
 
-To an entries file, before the work has a Router project: append one line holding `{"rowId":"<id>","recordedAt":"<ISO-8601 time>","text":"…","tags":[…],"links":[…]}`. Make the id with `node -e 'console.log(require("node:crypto").randomUUIDv7())'`, so it can move to the work trail unchanged with `--row-id`.
+To an entries file, before the work has a Router project: append one line holding `{"rowId":"<id>","recordedAt":"<ISO-8601 time>","text":"…","tags":[…],"links":[…]}`. Make the id with `node -e 'console.log(require("node:crypto").randomUUIDv7())'`, so it can move to the work trail unchanged with `--row-id`. Make each line with a JSON serializer such as `JSON.stringify`, never by hand: the builder stops at a line it can't parse.
 
 ## Good and bad entries
 

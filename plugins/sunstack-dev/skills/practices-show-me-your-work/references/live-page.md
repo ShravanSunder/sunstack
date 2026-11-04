@@ -11,8 +11,8 @@ Return: the page path, the record position (or entries files) it shows, and the 
 The owner opens the page to see, without reading transcripts, what has happened, how the design is being carried out or taking shape, what was decided and on whose authority, what is assumed, what changed, and what is proven. In order:
 
 1. **Right now:** counts of what waits for the owner, open assumptions an agent or peer is checking, design changes, proof, Lead acceptances and closed entries.
-2. **Waiting for you:** only open assumptions whose next actor is the owner (`next:owner`). Each links its decision page, made through `owner-decision-brief`; the page shows the choice, the decision page asks it.
-3. **The work, part by part:** one section per `part:` identifier of the design or plan, each listing what happened, was decided, assumed and changed, and what is proven for that part, with every open assumption's next actor. Entries tagged `part:none` close the list.
+2. **Waiting for you:** only open assumptions whose next actor is the owner (`next:owner`), each with its part, linked to that part's section. Each links its decision page, made by the route in `SKILL.md` step 6; the page shows the choice, the decision page asks it.
+3. **The work, part by part:** one section per `part:` identifier of the design or plan, each listing what happened, was decided, assumed and changed, and what is proven for that part, with every open assumption's next actor. An entry waiting for the owner is listed in its part as a link to its one entry under "Waiting for you", so a part whose only entry waits still has its section. Entries tagged `part:none` close the list.
 4. **Closed and kept as history:** each closed entry beside the entry that closed it.
 5. **The Lead's view,** folded: decisions that don't change or fill in the design or plan, owner asks, and entries of no known kind.
 
@@ -43,7 +43,7 @@ From entries files, before a project exists (one `--file` per writer's file):
 node <this skill's folder>/scripts/build-live-page.ts --file <entries.jsonl> [--file <more.jsonl>] <page path> "<title>"
 ```
 
-The builder reads the work trail forward to its high water, renders every entry exactly once with its own anchor (`#entry-<id>`), and prints the position it covered. It stops with an error, writing no page, when an entry is malformed; that error names the entry, and the fix is a correcting entry, never an edit to the page. It needs Node 26 or later.
+The builder reads the work trail forward to its high water, renders every entry exactly once with its own anchor (`#entry-<id>`), and prints the position it covered. Two kinds of bad entry differ. An entry that parses but states a wrong fact is closed by a correcting entry, and the page shows both. An entry the builder can't parse (a line that isn't one JSON entry, a missing or bad `recordedAt`, tags that aren't a list of strings, missing text or a bad id) stops the build with an error naming its file and line, or its row, and no page is written: return that error as the exact blocker, and don't edit the record or the page to get past it. It needs Node 26 or later.
 
 ## Check it
 

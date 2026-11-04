@@ -233,6 +233,36 @@ describe("renderPage", () => {
     assert.match(page, /Waiting for you: 1</);
   });
 
+  it("keeps a waiting assumption's part: the part's section links to its one anchor", () => {
+    // Arrange: part run-9's only entry waits for the owner, and its text doesn't name the part.
+    const fileText = JSON.stringify({
+      rowId: "asm-only",
+      recordedAt: recordedAt(0),
+      text: "A new public endpoint no contract covers",
+      tags: ["assumption", "state:open", "next:owner", "who:lead", "part:run-9"],
+      links: [],
+    });
+    const loaded = readEntriesFiles(["/work/entries-lead.jsonl"], () => fileText);
+
+    // Act
+    const partPage = renderPage(loaded, "Endpoint work", "Nov 4, 11:00 ET");
+
+    // Assert
+    const partStart = partPage.indexOf('<h3 id="part-run-9">');
+    assert.notEqual(partStart, -1, "part run-9 has no section");
+    const partSection = partPage.slice(partStart, partPage.indexOf("<h2 ", partStart));
+    assert.ok(
+      partSection.includes('href="#entry-asm-only"'),
+      "part section doesn't link the waiting entry",
+    );
+    assert.ok(
+      !partSection.includes("A new public endpoint"),
+      "part section repeats the entry's text",
+    );
+    assert.equal(partPage.split('id="entry-asm-only"').length - 1, 1);
+    assert.match(rowOf(partPage, "asm-only"), /href="#part-run-9"/);
+  });
+
   it("never shows an open assumption as decided, even after the owner saw it", () => {
     const seen = rowOf(page, "asm-seen");
     assert.match(seen, /Assumption, open; you saw it and didn&#39;t mark it wrong/);

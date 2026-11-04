@@ -21,7 +21,7 @@ A stop is decided by those two answers, not by how alarming the subject sounds. 
 
 **When:** the choice adds stored data or a new owner of data, a public capability or contract, new technology, or scope, and no owner decision, governing design or existing contract covers it.
 
-**Now:** record it as an assumption with `next:owner`, stop the work that depends on it, keep the rest going, and bring the owner the choice on its own decision page through `owner-decision-brief`; link that page from the entry. A choice such an authority covers is not a one-way door: record it as a decision citing that authority and continue.
+**Now:** record it as an assumption with `next:owner`, stop the work that depends on it, keep the rest going, and bring the owner the choice on its own decision page by the route in `SKILL.md` step 6, which the entry links. A choice such an authority covers is not a one-way door: record it as a decision citing that authority and continue.
 
 **Case E01, the eval store (27–29 Oct).** An agent edited the Program Design to add persisted eval case files and a public `score_eval` operation, and kept building on it. The owner: "You faile dot brign a huge achectural unkown with me or sun or cheifs." New stored data and a public operation with no covering authority: the agent owed the owner the choice and its tradeoff before dependent design went on. The lesson is not "never add a crate"; an owner-approved store stays allowed.
 
@@ -31,7 +31,7 @@ Rationalization to catch: "it's unreleased, so the storage layout is reversible.
 
 **When:** a user-visible behavior or a removal the owner hasn't settled.
 
-**Now:** keep today's behavior, record an assumption with `next:owner`, hold only that piece, keep every other piece moving, and ask through `owner-decision-brief`.
+**Now:** keep today's behavior, record an assumption with `next:owner`, hold only that piece, keep every other piece moving, and ask by the same route in `SKILL.md` step 6.
 
 **Case E05, "Resume in background" (30 Oct).** An agent proposed removing the button, left the existing behavior in place and said "nothing else waits on it". The owner answered: "yes just open or resume then". One pending behavior choice froze nothing else.
 

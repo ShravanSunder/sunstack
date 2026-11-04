@@ -11,7 +11,7 @@ A task qualifies when it spans sessions, commissions another agent, crosses comp
 
 ## 1. Open or resume
 
-At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference and Router project, or `no-home: <gap>`. The work's record is that project's work trail, filtered by the work's tag: read it with `agent-collaboration work-trail show --project-id <id> --tag <work tag> --json`, paging forward with `--after` until the covered position reaches high water. When the record is new, its first entry is an action carrying the goal, scope, orchestrator, repository and worktree, with links to the relevant artifacts.
+At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference and Router project, or `no-home: <gap>`. The work's record is that project's work trail, filtered by the work's tag: read it forward from the start with `agent-collaboration work-trail show --project-id <id> --tag <work tag> --after '{"epoch":1,"position":0}' --limit 100 --json`, then repeat with the page's `coveredThrough` as `--after` until `coveredThrough` equals `highWater`. When the record is new, its first entry is an action carrying the goal, scope, orchestrator, repository and worktree, with links to the relevant artifacts.
 
 IF that load returns `no-home`, or the work has no Router project, load `references/no-board-trace.md` and return the file you write entries to, or the exact gap.
 
@@ -69,15 +69,15 @@ Completion: the acceptance entry's id, and in its text the commit, each check yo
 
 At every checkpoint, MUST load `references/live-page.md` and return the page path, the record position it shows, and the checker result.
 
-The page shows only what the record holds. A choice the owner must make reaches the owner on its own decision page through `owner-decision-brief`, which the live page links to; the answer is recorded as a decision entry that quotes the owner's words and closes what it answers.
+The page shows only what the record holds. IF an entry waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules; then load `presentation-html` and return the decision page built from that brief and its path. The assumption entry links that path: write the page before the entry, or close the entry with a new one that carries the link. The owner's answer is recorded as a decision entry that quotes the owner's words and closes what it answers.
 
 Completion: the page path, the record position this checkpoint's build covers, and a checker result with no errors.
 
 ## 7. Checkpoint at every stop
 
-Before a terminal response, record the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action, rebuild the page, and put the record reference and page path in the handoff; if nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a command or path you checked, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). Post a checkpoint notice on the work thread that links the record. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
+Before a terminal response, record the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action, rebuild the page, and put the record reference and page path in the handoff; if nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a command or path you checked, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). When a work thread is reachable, post a checkpoint notice on it that links the record and the page. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
 
-Completion: the checkpoint entry's id, the page rebuilt from the record after it, and the thread notice that links both.
+Completion: the checkpoint entry's id, the page rebuilt from the record after it, and the thread notice that links both; with no work thread, the entries file that holds the checkpoint, the page built from it, and the no-thread gap named in the handoff.
 
 ## Completion
 
