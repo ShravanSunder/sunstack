@@ -71,7 +71,7 @@
 <p>Every rule now starts from a mistake you actually corrected, judges only the skills it is about, reads enough text to judge, and passes real cases before it nudges anyone. This page is the way in; each document has its own page.</p>
 
 <ex-callout tone="note" title="State of the design">
-Written, independently reviewed in three rounds (8 findings, then 2, then 0), and pushed to `skills/rules-as-nudges`. Nothing is built. Five things wait on you, at the bottom of this page.
+Written, independently reviewed in three rounds (8 findings, then 2, then 0), and pushed to `skills/rules-as-nudges`. Nothing is built. Nine things wait on you, at the bottom of this page.
 </ex-callout>
 
 <h2 id="where">Where each answer lives</h2>
@@ -180,6 +180,66 @@ One cleanup, done. Cost: more to review in this PR.
   <ex-option id="a5-keep" title="**Keep them**: they test the runner's mechanics, not rules">
     <template slot="summary">
 Cost: it bends your rule for this repository.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d6">6. One disputed test case</h3>
+<p>Two agents labelled 70 real cases without seeing each other's answers; they agreed on 69. The one they split on is for <code>description.trigger-only</code> (nudge when a description lists tools or steps instead of saying when to load). The text is <code>agent-collaboration</code>'s description: "Use when operating the agent-collaboration CLI or MCP: identity and sessions, listing or searching projects, boards, topics, and threads, posting or reading messages, inbox, listen and wait, wakes and schedules, or recovering an uncertain mutation. Covers how to call the tool, not when or why to coordinate."</p>
+<ex-choice id="a6" title="Should trigger-only nudge on that description?">
+  <ex-option id="a6-quiet" title="**Quiet** (recommended)">
+    <template slot="summary">
+Each item names a situation where you'd reach for the skill, not a step. This gives trigger-only its third near miss, so it meets the floor.
+    </template>
+  </ex-option>
+  <ex-option id="a6-fire" title="**Nudge**">
+    <template slot="summary">
+It reads as a long capability list. Cost: trigger-only stays one near miss short and keeps waiting for another real case.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d7">7. <code>completion.criterion</code></h3>
+<p>Judged by its fixed standard (a step says when it's done, in any words), both labellers found that the three "real mistakes" mined for it do say when the step is done. They were only flagged for lacking a literal <code>Completion:</code> line. So the rule has no real mistake left.</p>
+<ex-choice id="a7" title="What happens to completion.criterion?">
+  <ex-option id="a7-drop" title="**Drop it for now**, like the other four (recommended)">
+    <template slot="summary">
+Nothing real behind it today. Cost: none until a real case turns up.
+    </template>
+  </ex-option>
+  <ex-option id="a7-hold" title="**Keep it held**">
+    <template slot="summary">
+It stays in the rule files and nudges no one until three real mistakes exist. Cost: a rule to maintain that does nothing.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d8">8. Which model asks the kind question</h3>
+<p>The engine feature asks each skill's kind once per run. Your accepted design lets each kind question name its own decision model. I had narrowed that to the run's one model on my own; the review caught it, and it's back to your design until you decide.</p>
+<ex-choice id="a8" title="Does each kind question get its own model?">
+  <ex-option id="a8-one" title="**One model for the run** (recommended)">
+    <template slot="summary">
+No rule needs two models today. Cost: a second model later needs a small engine change.
+    </template>
+  </ex-option>
+  <ex-option id="a8-each" title="**A model per question**, as designed">
+    <template slot="summary">
+Flexible now. Cost: the engine keeps one backend per model under one shared budget and cancellation.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h3 id="d9">9. The engine's existing skill-aware file loader</h3>
+<p>Your accepted rule is that the engine carries nothing skill-specific. The engine already has a target loader that knows <code>SKILL.md</code> and skill names (<code>target_loading.rs:46–91</code>). This change adds nothing skill-specific itself.</p>
+<ex-choice id="a9" title="What happens to that loader?">
+  <ex-option id="a9-later" title="**Later work**, logged (recommended)">
+    <template slot="summary">
+This release stays focused on the kind question. Cost: the engine keeps that one skill-aware piece until then.
+    </template>
+  </ex-option>
+  <ex-option id="a9-now" title="**In this release**: make the loader caller-declared">
+    <template slot="summary">
+The engine becomes fully generic now. Cost: a second engine change in the same release, with its own tests.
     </template>
   </ex-option>
 </ex-choice>
