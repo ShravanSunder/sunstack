@@ -35,6 +35,8 @@ And a nudge an agent gets now carries every part: where, what was noticed, the s
 | Rule state | worked out on every run; held rules are listed with what they lack |
 | Rule names | the 12 kept rules get your new names; the 6 dropped rules are removed |
 | The branch rule | reads a line ending in ":" together with its block |
+| Evidence kinds | 12 become 5 (`skill`, `section`, `load`, `branch`, `rule_question`); `load` and `branch` read their enclosing heading instead of a step |
+| Rulebooks | `steering` goes (no rules left); the three general-skill rules move into one pair, `general-skill.md` with `general-skill.rules.json` |
 | Runner tests | read real skills pinned to a commit, not made-up ones |
 | What the agent sees | the full nudge, gaps listed apart from exclusions |
 
@@ -46,10 +48,12 @@ And a nudge an agent gets now carries every part: where, what was noticed, the s
 - The dropped rules give no result.
 - A colon-ended `IF` with its block passes; an `IF` naming nothing still gets a nudge.
 - The runner's tests pass on real skills.
+- The config lists five evidence kinds, and every kept rule's cases still collect the same text.
+- The three general-skill rules sit in one rulebook beside one standard; `steering` is gone.
 
 ## Not in this deliverable
 
-The kind gates and the general-skill rules (deliverable 3); entering the mined cases and labels (deliverable 3); the review evals (deliverable 4); the teaching skills (deliverable 5).
+The kind gate on the general-skill rules and their new cases (deliverable 3, after the engine release; here they only move into one file pair); entering the mined cases and labels (deliverable 3); the review evals (deliverable 4); the teaching skills (deliverable 5).
 
 ## Where it's defined
 

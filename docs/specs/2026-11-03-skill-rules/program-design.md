@@ -7,14 +7,14 @@
 ```mermaid
 flowchart TB
   subgraph repo["this repository (ai-tools)"]
-    cfg["rules config<br/>skill-rules.config.json<br/>owners · kind question · evidence kinds"]
+    cfg["rules config<br/>skill-rules.config.json<br/>filters.kind · 5 evidence kinds"]
     rb["rulebooks<br/>*.rules.json<br/>questions · steps · bars · kind gate"]
     cs["case files (new)<br/>*.cases.json<br/>each rule's reasons, owner decision, bar sources;<br/>its real cases"]
     runner["runner<br/>tests/skills/lib/skill-rules<br/>derives rule state · agent report · case report"]
   end
   subgraph engine["sunstack-tools (generic)"]
     lint["sunstack lint<br/>evidence · decisions · report"]
-    assess["owner assessment (new)<br/>one answer per owner unit"]
+    assess["filters (new)<br/>one answer per skill folder"]
   end
   cfg --> lint
   rb --> lint
@@ -25,7 +25,7 @@ flowchart TB
   runner -->|"case report: per-rule state, floor, bars"| rw(["rule writer, taught by skill-rules<br/>rule reviewer, taught by decision-model-review<br/>owner"])
 ```
 
-**Who owns what.** The engine owns collection, model questions, decisions and the report, and knows nothing about skills (R5). This repository owns what a skill is (the owner units in config), the kind question, the rules, the cases and every rule's reason and owner decision. The runner owns one derived truth: each rule's state (`nudging` or `held`), computed from the owner's decision and the latest case results, and it is the only place an agent sees nudges.
+**Who owns what.** The engine owns collection, model questions, decisions and the report, and knows nothing about skills (R5). This repository owns what a skill is (the `filters.kind.per` folder pattern in config), the kind question, the rules, the cases and every rule's reason and owner decision. The runner owns one derived truth: each rule's state (`nudging` or `held`), computed from the owner's decision and the latest case results, and it is the only place an agent sees nudges.
 
 ## What exists today
 
@@ -36,7 +36,7 @@ flowchart TB
 | what a rule is | `*.rules.json` entries keyed by marker: `name`, `evidence`, `questions`, `decision.steps` with `min_probability` or `yes_at_or_above`/`no_at_or_below`, `severity` | gains a kind gate (engine feature); nothing else |
 | what a case is | `*.expect.json` `expectations[]`: `id`, `rule`, `source{repository, commit, path}`, lines, `expect` (`must_fire` 28, `must_pass` 191, `not_applicable` 26), `kind` (`regression_example` 173, `worth_reading` 69, `breach` 3), `basis`, `decided_by{how: independent}`, `added` | replaced by `*.cases.json` (hard cutover); every expectation migrates |
 | held-back set | none today. The 35 cases once held out (`74e18127`, blind-labelled in `429a3a88`) were migrated by the accepted D24 amendment into the expectation files as regression examples, and `rule-strata.json` was removed; each says it "is a regression example, not a fresh holdout" (e.g. `calls-and-placement.expect.json:172`) | every current case migrates as `development`; a new held-back group is frozen before any bar is tuned |
-| which skills a rule judges | none: every rule judges every file its evidence kind matches. `select` is noul-only and `as_kind` refuses selected kinds (the Advisor's 3 keyless probes on v0.6.0) | engine feature: owner assessment |
+| which skills a rule judges | none: every rule judges every file its evidence kind matches. `select` is noul-only and `as_kind` refuses selected kinds (the Advisor's 3 keyless probes on v0.6.0) | engine feature: filters |
 | nudge parts | engine v0.6.0: each finding carries location, basis, answers and path, and related places built from the standard's line and the piece's declared fields (`report_contracts.rs:73–105`, `outcome.rs:189–229`); it never joins other results. The runner's `formatLintReport` (`report.ts:347–377`) prints message, basis, anchor and read places only | the runner's formatter gains the standard's wording, the answers and path, the cut flag and the same rule's nudges elsewhere; the engine is unchanged for this |
 
 ## The choice, and what it costs
@@ -45,11 +45,11 @@ flowchart TB
 
 | Option | What it does | Gains | Costs | Verdict |
 | --- | --- | --- | --- | --- |
-| **A. Engine owner assessment** | the config declares owner units (a skill folder) and one assessment question; the engine asks it once per owner and gives each rule's gate the answer | one judgment per skill (78 calls at most, not one per rule and piece); every gate sees the same answer; unsure and missing owners are reported by the engine; no workaround | an engine feature and release first; this repository waits on it for kind-gated rules | **selected** |
+| **A. Engine filters** | the config declares one filter: `per` a skill folder, `reads` its description, one choice question; the engine asks it once per folder and gives each rule's `only_when` gate the answer | one judgment per skill (78 calls at most, not one per rule and piece); every gate sees the same answer; unsure answers and files in no folder are reported by the engine; no workaround | an engine feature and release first; this repository waits on it for kind-gated rules | **selected** |
 | B. Runner filter after the run | the runner judges kinds itself, then drops results of rules on the wrong kinds | no engine change | the engine still runs every rule on product skills (cost); gates can't see the kind; the owner's standing rule forbids bending the runner around an engine gap | rejected |
 | C. A kind question in every rule | each rule asks "what is this skill for" as its first step | no new feature | the same question asked per rule and piece (up to P calls instead of S); rules can disagree on one skill; a reference has no description to ask about | rejected |
 
-The smaller structure suffices for everything else: the case files and the runner already exist and gain fields; no new store, service or command. **Debt we accept:** until the engine release lands, rules that declare kinds stay `held` (they don't run kind-gated). The rule's writer pays that in time. **Reopens the choice:** if one assessment per skill can't be made reliable from the description (the kind cases in V13 fail), the assessment's input must widen (to the skill's opening section) before any rule relies on it.
+The smaller structure suffices for everything else: the case files and the runner already exist and gain fields; no new store, service or command. **Debt we accept:** until the engine release lands, rules that declare kinds stay `held` (they don't run kind-gated). The rule's writer pays that in time. **Reopens the choice:** if one answer per skill can't be made reliable from the description (the kind cases in V13 fail), the filter's `reads` must widen (to the skill's opening section) before any rule relies on it.
 
 A second, smaller choice: **where a rule's reason, owner decision and bar sources live.** In the case file beside the rulebook (selected), because the case file is already this repository's own record of why a rule is trusted, and the engine must not carry skill metadata (R5). Rejected: a third file per rulebook (one more thing to keep in step), and engine-side metadata fields (the engine would store meaning it never uses).
 
@@ -57,16 +57,16 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 
 | E | Owner | Home (new / modified / existing) | Shape and boundary | Persisted? |
 | --- | --- | --- | --- | --- |
-| [E1 Skill](specification/entities.md#e1-skill) | this repository's config | `skill-rules.config.json` `owners` (new section, engine-generic): `{ "skill": { "root": "plugins/*/skills/{owner}", "members": ["SKILL.md", "references/**/*.md"], "describe": { "kind": "skill", "field": "description" } } }` | owner id = `<plugin>/<skill>` captured from the path; crosses into the engine as an owner unit | persisted (config) |
+| [E1 Skill](specification/entities.md#e1-skill) | this repository's config | `skill-rules.config.json` `filters.kind` (new section, engine-generic): `{ "per": "plugins/*/skills/{name}", "reads": { "file": "SKILL.md", "kind": "skill", "field": "description" }, "question": …, "min_probability": 0.7 }`; every checked file under the folder is a member | folder = `plugins/<plugin>/skills/<skill>`, `{name}` its display name; crosses into the engine as a filter folder | persisted (config) |
 | [E2 Standard](specification/entities.md#e2-standard) | the standards' authors | existing: `K` markers in `domain-skill-crafting/references/*.md`, `domain-decision-models/SKILL.md` | marker id + `path:line` in every nudge (v0.6.0) | persisted |
-| [E3 Rule](specification/entities.md#e3-rule) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `requires`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
+| [E3 Rule](specification/entities.md#e3-rule) | rulebook author (questions, bars) and owner (decision) | existing `*.rules.json` entry (modified: optional `only_when`); new `*.cases.json` `rules[name]` record | see the rule record below | persisted |
 | [E4 Mistake](specification/entities.md#e4-mistake) | the Lead, from the inventory and git | `*.cases.json` `rules[name].reasons[]` (new) | `{ type: "inventory" \| "commit" \| "pull_request" \| "written_standard", locator: string, quote?: string }` | persisted |
-| [E5 Kind judgment](specification/entities.md#e5-kind-judgment) | the engine (asks), the config (defines) | engine report `assessments[]` (new, engine); question in `skill-rules.config.json` `assessments.work_scope` (new) | `{ owner: string, assessment: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
-| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`; modified: `step` keeps its whole body; `branch` gains a colon block; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
+| [E5 Kind judgment](specification/entities.md#e5-kind-judgment) | the engine (asks), the config (defines) | engine report `filter_answers[]` (new, engine); question in `skill-rules.config.json` `filters.kind.question` (new), criteria `general`, `role`, `domain`, `tool_manual`, `repo_specific` | `{ filter: "kind", folder: string, state: "judged" \| "unsure" \| "incomplete", answer?: string, probability?: number, model: string }` | derived per run |
+| [E6 Chunk](specification/entities.md#e6-chunk) | config evidence kinds | existing `evidence.kinds`, trimmed from 12 to 5 (`skill`, `section`, `load`, `branch`, `rule_question`); modified: `load` and `branch` read their enclosing heading instead of a `step`; `branch` gains a colon block; `section` gains table rows | v0.6.0 piece + `evidence_seen` + cut flag | derived per run |
 | [E7 Nudge](specification/entities.md#e7-nudge) | the engine (result), the runner (what the agent reads) | existing v0.6.0 finding; modified `report.ts` `formatLintReport` | the nudge rendering below | derived per run |
 | [E8 Case](specification/entities.md#e8-case) | the Lead (labels), the owner (disputes) | `*.cases.json` `cases[]` (new file, replaces `*.expect.json`) | see the case record below | persisted |
 | [E9 Bar](specification/entities.md#e9-bar) | rulebook author | values: existing step fields in `*.rules.json`; recorded values and sources: `*.cases.json` `rules[name].bars[step]` (new) | `barSource` below | persisted |
-| [E10 Gap](specification/entities.md#e10-gap) | the runner (unread, held), the engine (cut, unresolved, kind unsure, no owner) | existing `report.ts` `ReportGaps` (modified, no parallel schema) | `Gap` below | derived per run |
+| [E10 Gap](specification/entities.md#e10-gap) | the runner (unread, held), the engine (cut, unresolved, kind unsure, no folder) | existing `report.ts` `ReportGaps` (modified, no parallel schema) | `Gap` below | derived per run |
 | [E11 Behavior-test candidate](specification/entities.md#e11-behavior-test-candidate) | the Lead | `tests/skills/evals/behavior-candidates.json` (new; a list, nothing runs it) | `{ id, episode, records: string[], behavior: string, teaching_rule?: string }` | persisted |
 | [E12 Disposition](specification/entities.md#e12-disposition) | the agent acting on the nudge | existing reporting surfaces taught by the skills (self-check, review findings, acceptance); modified teaching | text: rule, place, disposition, what was checked | in the agent's report |
 | [E13 Run](specification/entities.md#e13-run) | engine (exit), runner (state) | existing `engine-runner.ts`, `report.ts` | existing exit statuses (uncertain = 5) | derived |
@@ -175,7 +175,7 @@ const caseRunReceipt = z.object({
 });
 ```
 
-A rule's fingerprint covers, conservatively, everything that can change what its cases collect or how they are judged: its rulebook entry (questions, decision, bars, severity, `requires`); the whole rules config file (every evidence kind, so kinds it reads through `within`, `same_file` or `target`, owners, assessments and limits are all inside); the bytes of every file in the evidence project (`evidence/sgconfig.yml` and every AST rule and utility it loads); its case records; the engine version and model. Any collection change therefore holds every judged rule until a matching case run exists; precision is traded for never missing a dependency. On every ordinary run the runner recomputes it. No receipt, `complete: false`, a different fingerprint, or any failed or unsure case → `held`.
+A rule's fingerprint covers, conservatively, everything that can change what its cases collect or how they are judged: its rulebook entry (questions, decision, bars, severity, `only_when`); the whole rules config file (every evidence kind, so kinds it reads through `within`, `same_file` or `target`, inline ast-grep rules, `filters` and limits are all inside); the bytes of every file in the evidence project (`evidence/sgconfig.yml` and every AST rule and utility it loads); its case records; the engine version and model. Any collection change therefore holds every judged rule until a matching case run exists; precision is traded for never missing a dependency. On every ordinary run the runner recomputes it. No receipt, `complete: false`, a different fingerprint, or any failed or unsure case → `held`.
 
 ### The derived rule state (runner)
 
@@ -196,7 +196,7 @@ type HeldReason =
   | { kind: "no_held_back" }                                  // R18
   | { kind: "failing"; set: "development" | "held_back"; cases: string[] } // R18
   | { kind: "split_fix_pair"; fix_pair: string }               // R18
-  | { kind: "needs_engine"; feature: "owner_assessment" };      // R14 before the release
+  | { kind: "needs_engine"; feature: "filters" };               // R14 before the release
 ```
 
 Mechanical rules (`basis: "mechanical"`) are `nudging` once they name a `written_standard` reason and the owner kept them; case-run, floor, bar and held-back reasons apply to judged rules only.
@@ -224,20 +224,35 @@ type Gap =
   | { kind: "cut"; rule: string; file: string; line: number }
   | { kind: "unresolved"; selection: string; file: string; line: number }
   | { kind: "incomplete"; rule: string; reason: string }
-  | { kind: "kind_unsure"; owner: string; answers: Record<string, number> }
-  | { kind: "no_owner"; rule: string; file: string };
+  | { kind: "kind_unsure"; folder: string; answers: Record<string, number> }
+  | { kind: "no_folder"; rule: string; file: string };
 ```
 
-### The engine feature: owner assessment
+### The engine feature: filters
 
-Its full design is a separate Program Design part in `sunstack-tools`; this is the contract this repository needs from it, in generic terms.
+Its full design is a separate four-document set in `sunstack-tools` (`docs/specs/2026-11-04-owner-assessment/`); this is the contract this repository needs from it, in generic terms.
 
-- **Config:** `owners.<unit>` declares how checked files group into owner units (a root pattern with one capture, member patterns, and which evidence kind and field describe the owner). `assessments.<name>` declares one choice question about an owner unit's description, its options and `min_probability`; the run's one decision model answers it (owner decision 8).
-- **Rule gate:** a rule entry may declare `requires: { "assessment": "<name>", "accept": ["<option>", …] }`. Before its steps, the engine reads the owner's answer. `accept` contains the answer → steps run. Answer outside `accept` → `not_applicable`, reason `assessment:<answer>`. `unsure` or `incomplete` → no result for that rule on that owner, and the report lists it.
-- **Report:** `assessments[]` (E5's shape), and per gated rule the owners excluded by answer and those skipped as unsure.
-- **Guarantees:** each owner is asked once per run; a reference file reaches its owner's answer through `members`; a file matching no owner gets no answer, and gated rules report it as a `no owner` gap; the answer is bound to the run (source revision, question, model), never cached across runs.
+- **Config:** `filters.<name>` declares `per` (a folder pattern of literal, `*` and one `{name}` segments, no `**`), `reads` (one file in the folder, one evidence kind, one field), one choice `question` whose criteria labels are the answers, and `min_probability`. The run's one decision model answers it (owner decision 8).
+- **Rule gate:** a rule entry may declare `only_when: { "<filter>": ["<answer>", …] }`. Before its first step, the engine reads the file's folder answer. Answer named → steps run. Answer not named → `not_applicable`, reason `filter <name>: <answer>`, basis judged. `unsure` or `incomplete` → no result for that rule on that file, and the report lists a skip.
+- **Inline ast-grep rule:** an evidence kind gives either `rule` (a named rule in `evidence/rules/*.yml`) or `inline_rule`, a one-line YAML string such as `"{ language: Markdown, rule: { kind: section } }"`; the config stays JSON (owner, 4 Nov).
+- **Report:** `filter_answers[]` (E5's shape) and `filter_skips[]`, and per gated rule the files excluded by answer.
+- **Guarantees:** each folder is asked once per run; a reference file reaches its folder's answer because every checked file under the folder is a member; a file in no folder gets no answer, and gated rules report it as a `no folder` gap; the answer is bound to the run (source revision, question, model), never cached across runs.
 
-Our config sets `assessments.work_scope` with options `any_repository`, `one_tool_or_platform`, `one_app_procedures`, and the question wording from [U13](requirements/skill-kinds.md#u13-the-kind-of-a-skill-is-what-its-work-is-for-judged-once).
+Our config:
+
+```json
+"filters": {
+  "kind": {
+    "per": "plugins/*/skills/{name}",
+    "reads": { "file": "SKILL.md", "kind": "skill", "field": "description" },
+    "question": { "type": "choice", "task": "What is this skill's work for?",
+                  "criteria": { "general": "…", "role": "…", "domain": "…", "tool_manual": "…", "repo_specific": "…" } },
+    "min_probability": 0.7
+  }
+}
+```
+
+The criteria carry U13's five definitions ([U13](requirements/skill-kinds.md#u13-the-kind-of-a-skill-is-what-its-work-is-for-judged-once)), and the three general-skill rules carry `"only_when": { "kind": ["general", "role", "domain"] }`.
 
 ## The rules after this change
 
@@ -246,15 +261,17 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 | `skill-description.starts-with-use-when`, `skill-description.longer-than-225-characters`, `skill-description.longer-than-300-characters` | `skill` | none | case record only (mechanical) |
 | `skill-description.names-the-loading-moment`, `skill-description.states-triggers-not-workflow-steps` | `skill` | none (R16) | cases from history |
 | `description.always-earned` | — | — | dropped (owner): entry and marker removed; nothing flags "Always" |
-| `general-skill.overfits-to-product-workflow` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; the family's section check; cases from U16's rows; quiet cases from general skills |
-| `general-skill.description-overfits-to-one-product` (was `description.product-loading`, K007) | `skill` | `work_scope ∈ {any_repository}` | renamed; the general-skill standard's description check (owner decision 2) |
-| `general-skill.taught-rule-overfits-to-one-project` (was `rule.generalization`, K001) | `section` | `work_scope ∈ {any_repository}` | renamed; the family's taught-rule check, redone with its filter (owner decision 2, merge both) |
-| `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch` | none | cases from history |
+| `general-skill.overfits-to-product-workflow` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `only_when: { kind: [general, role, domain] }` | renamed; the family's section check; cases from U16's rows; quiet cases from general skills; moves into `general-skill.rules.json` |
+| `general-skill.description-overfits-to-one-product` (was `description.product-loading`, K007) | `skill` | `only_when: { kind: [general, role, domain] }` | renamed; the general-skill standard's description check (owner decision 2); moves into `general-skill.rules.json` |
+| `general-skill.taught-rule-overfits-to-one-project` (was `rule.generalization`, K001) | `section` | `only_when: { kind: [general, role, domain] }` | renamed; the family's taught-rule check, redone with its filter (owner decision 2, merge both); moves into `general-skill.rules.json` |
+| `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch`, each with its enclosing heading (was its `step`) | none | cases from history |
 | `completion.criterion` | — | — | dropped for now (owner decision 7); a follow-up rethinks it |
 | `reference.teaching-depth`, `guidance.positive`, `main-path.spine` | — | — | dropped for now (owner): entries and markers removed |
 | `skill-branch.names-an-observable-condition` (repair) | `branch` plus, for a line ending in ":", the block it introduces | none | a `block` field added to the `branch` kind |
 | `question.names-field` | — | — | dropped: entry and marker removed |
 | `rule-question.asks-exactly-one-thing`, `rule-question.criteria-answer-the-same-question` | `rule_question` | none | `held_by_owner` until old rule files give cases |
+
+**Evidence kinds and rulebooks after this change.** The config keeps five evidence kinds: `skill` (the description only), `section`, `load`, `branch` and `rule_question`. Seven go, because no kept rule reads them: `sentence`, `standards_section`, `reference_section`, `skill_body`, `skill_target` (folded into `skill`: `load` resolves its targets `as_kind: "skill"`), and `step` with `workflow_section`. `load` and `branch` used `step` only for context, so each reads its enclosing heading (`enclosing` the `section-heading` rule) instead; this is the Lead's call, recorded on the decisions page for the owner to undo. The `steering` rulebook goes, since none of its rules remain. The three general-skill rules move into one pair, `references/general-skill.md` with `general-skill.rules.json` (owner, 4 Nov: "yes remember the genral ksills part ok?"); their standards' text merges there. AST rules no kept kind uses are deleted with their kinds.
 
 ## The path from line 17 to the agent
 
@@ -266,18 +283,18 @@ sequenceDiagram
   participant J as decision model
   A->>R: pnpm --dir tests/skills rules
   R->>L: lint with skill-rules.config.json
-  L->>J: work_scope? ops-observability-stack description (once)
-  J-->>L: any_repository, with how sure
-  L->>L: general-skill gate: accept → run steps
+  L->>J: kind? ops-observability-stack description (once)
+  J-->>L: general, with how sure
+  L->>L: only_when kind names general → run steps
   L->>J: section piece with line 17 + agentstudio-loop.md opening
   J-->>L: routes into one product's own workflow
-  L-->>R: report JSON: result warn, judged, related places; assessments[]
+  L-->>R: report JSON: result warn, judged, related places; filter_answers[]
   R->>R: derive rule states: case files, rule files, matching case-run receipt (fingerprint)
   R-->>A: nudge at SKILL.md:17 (the general-skill rules are nudging); kinds; gaps; held rules
   A->>A: read places, decide; record disposition (R11)
 ```
 
-*Current path:* the same up to `lint`, minus the assessment and gate; the runner prints every rule's results, held or not. *Added edges:* the assessment call, the gate, the runner's state derivation and held filter. *Unchanged and critical:* severity `warn` for judged paths, and the engine's exit statuses.
+*Current path:* the same up to `lint`, minus the filter question and gate; the runner prints every rule's results, held or not. *Added edges:* the filter question, the gate, the runner's state derivation and held filter. *Unchanged and critical:* severity `warn` for judged paths, and the engine's exit statuses.
 
 ## The states of a rule
 
@@ -296,18 +313,18 @@ Owner: the runner derives the state on every run from the case file, the rule fi
 
 | Failure | Detected by | What happens | Owner |
 | --- | --- | --- | --- |
-| the decision model is unreachable or malformed for an owner | engine | assessment `incomplete`; gated rules give no result for that owner; the run is `incomplete` | engine |
-| an owner's answer is below its bar | engine | `unsure`; gated rules skip it; `kind unsure` gap (R15) | engine |
-| a checked file belongs to no owner | engine | `no owner` gap for gated rules on that file | engine |
+| the decision model is unreachable or malformed for a folder | engine | answer `incomplete`; gated rules give no result on that folder's files; the run is `incomplete` | engine |
+| a folder's answer is below its bar | engine | `unsure`; gated rules skip it; `kind unsure` gap (R15) | engine |
+| a checked file lies in no folder | engine | `no folder` gap for gated rules on that file | engine |
 | a case's commit or path no longer resolves | runner (`pinned-source.ts`) | case reported broken; its rule `held` (`failing`) | runner |
 | a fix pair's two cases sit in different sets | runner | rule `held` (`split_fix_pair`) | runner |
-| the engine release lacks owner assessment | runner (config check fails or report lacks `assessments`) | gated rules `held` (`needs_engine`) | runner |
+| the engine release lacks filters | runner (config check fails or report lacks `filters`) | gated rules `held` (`needs_engine`) | runner |
 
 No concurrency: a run is one process over one commit. No migration of stored user data; the `*.expect.json` → `*.cases.json` cutover is a one-time, reviewed rewrite in the same pull request, every expectation kept.
 
 ## Cross-cutting
 
-- **Cost:** one assessment per skill per run (at most 78 on today's tree), against up to one per rule and piece under option C. Measured, not claimed, in Verification Design.
+- **Cost:** one filter question per skill per run (at most 78 on today's tree), against up to one per rule and piece under option C. Measured, not claimed, in Verification Design.
 - **Public repository:** case reasons may quote the owner's words and cite local paths (owner's standing rule); no credentials, account details or private notes. The OpenRouter key stays in the existing runner wrapper.
 - **Security, privacy beyond that, accessibility, performance targets:** not applicable; nothing user-facing or networked changes.
 
@@ -364,7 +381,7 @@ Unit tests beside the new modules cover the schema, the workspace commit, the ev
 | U10 | R2 (rule-making) | E3 | owner via case file | `ruleRecord.decision` | `ownerDecision` enum | held / dropped | undecided → held | case report vs U10 |
 | U12 | R3 (rule-making) | E11, E14 | the eval entry | `review-skill.eval.ts` → workspace → subject → rule-run proof → packet → Jev (Terra on undecided) | `reviewEvalCase`, `grade-packet.md`, verdict | E14 states | subject, provider or schema failure → incomplete; no rules run → failed | the two evals; the controls in Verification Design |
 | U8 | R4 (rule-making) | E3, E7 | rulebook `domain-decision-models` | lint over `*.rules.json` (v0.6.0 JSON lint) | existing `rule_question` kind | — | JSON parse failure isolated (v0.6.0) | real rule-file cases |
-| U11 | R5 (rule-making) | none: engine boundary | engine | owner assessment config + `requires` | generic config sections | — | — | engine diff and release |
+| U11 | R5 (rule-making) | none: engine boundary | engine | filters config + `only_when` | generic config sections | — | — | engine diff and release |
 | U1 | R6 (nudges) | E7, E2 | runner formatter over the engine finding | `formatLintReport` | the nudge rendering table | — | — | line-17 run plus a second real nudge and a non-nudged control |
 | U2 | R7 (nudges) | E7 | rulebook routes | route `finding` text | existing | — | — | routes' text |
 | U3 | R8 (nudges) | E10, E13 | runner + engine | `ReportGaps` | closed gap variant | — | — | silent-coverage case |
@@ -372,11 +389,11 @@ Unit tests beside the new modules cover the schema, the workspace commit, the ev
 | U5 | R10 (nudges) | none: teaching | skills | skill text | — | — | — | skills' text |
 | U6 | R11 (nudges) | E12 | agents, taught by skills | reporting surfaces | disposition text | E12 states | narrow fix not `fixed` | skills' text; #187 |
 | U7 | R12 (nudges) | none: teaching | skills | skill text | — | — | — | skills' text |
-| U13 | R13 (skill-kinds) | E1, E5 | engine (asks), config (defines) | owner assessment | `assessments[]` | judged / unsure / incomplete | incomplete → run incomplete | kind cases on every skill |
-| U13 | R14 (skill-kinds) | E3, E5 | engine gate | `requires` | `{assessment, accept}` | — | outside accept → not_applicable | 1 Nov product-skill nudges |
+| U13 | R13 (skill-kinds) | E1, E5 | engine (asks), config (defines) | filters | `filter_answers[]` | judged / unsure / incomplete | incomplete → run incomplete | kind cases on every skill |
+| U13 | R14 (skill-kinds) | E3, E5 | engine gate | `only_when` | `{ kind: [general, role, domain] }` | — | answer not named → not_applicable | 1 Nov product-skill nudges |
 | U14 | R15 (skill-kinds) | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
-| U15 | R16 (skill-kinds) | E1 | rulebook | no `requires` on description rules | — | — | — | hidden skills' results |
-| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement, descriptions-and-invocation, generalization | the three `general-skill.*` entries, each with `requires work_scope accept [any_repository]` | rule entries + cases | per rule | — | U16's rows as cases; no result on a product skill or tool manual |
+| U15 | R16 (skill-kinds) | E1 | rulebook | no `only_when` on description rules | — | — | — | hidden skills' results |
+| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement, descriptions-and-invocation, generalization | the three `general-skill.*` entries, each with `only_when: { kind: [general, role, domain] }` | rule entries + cases | per rule | — | U16's rows as cases; no result on a product skill or tool manual |
 | U17 | R18 (rule-tests) | E3, E8 | runner | rule state derivation + case-run receipt | `RuleState`, `HeldReason`, `caseRunReceipt` | held / nudging | missing, incomplete or changed receipt → held | case report; a change after a passing run |
 | U17 | R19 (rule-tests) | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
 | U18 | R20 (rule-tests) | E9 | rulebook author; runner checks | step bar fields + `ruleRecord.bars` | `barSource` with values | starting / tuned | starting or changed → held | values vs recorded values; no override key |
@@ -387,8 +404,8 @@ Unit tests beside the new modules cover the schema, the workspace commit, the ev
 
 ## Order of work
 
-1. Engine: owner assessment and `requires`, released (its own design and PR in `sunstack-tools`).
-2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive`, `main-path.spine` and `completion.criterion` removed; general-skill rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
+1. Engine: filters and `only_when`, released (its own design and PR in `sunstack-tools`).
+2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive`, `main-path.spine` and `completion.criterion` removed; general-skill rename; mined cases added; config `filters` (`per`) and `kind` once the release is pinned.
 3. The runner's tests move off made-up sample skills: `tests/skills/fixtures/run-skill-rules/` is replaced with Git-pinned real skills, read through `pinned-source.ts` like the rule cases (owner decision 5, in this change).
 4. The two evals of the review skill.
 5. The teaching skills (the table above).

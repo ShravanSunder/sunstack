@@ -21,7 +21,7 @@ Chunk shape (agreed with the design-documents Lead, 3 Nov): each row opens with 
 
 ## Through-line: skill-kinds
 
-[need](requirements/skill-kinds.md) → [obligations R13–R17](specification/skill-kinds.md) → [Program Design, with the engine feature](program-design.md#the-engine-feature-owner-assessment) → [Verification Design](verification-design.md#the-rows)
+[need](requirements/skill-kinds.md) → [obligations R13–R17](specification/skill-kinds.md) → [Program Design, with the engine feature](program-design.md#the-engine-feature-filters) → [Verification Design](verification-design.md#the-rows)
 
 ## Through-line: rule-tests
 
@@ -34,12 +34,12 @@ Chunk shape (agreed with the design-documents Lead, 3 Nov): each row opens with 
 ## Reading path: line 17, end to end
 
 1. [U16 case 2](requirements/skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak): the owner's answer for a general skill loading a product's workflow
-2. [R13](specification/skill-kinds.md#r13-one-kind-judgment-per-skill-per-run), [R14](specification/skill-kinds.md#r14-a-rule-judges-only-its-declared-kinds): `ops-observability-stack` is judged **any repository**, so the general-skill rules judge it
+2. [R13](specification/skill-kinds.md#r13-one-kind-judgment-per-skill-per-run), [R14](specification/skill-kinds.md#r14-a-rule-judges-only-its-declared-kinds): `ops-observability-stack` is judged **general**, so the general-skill rules judge it
 3. [R23](specification/what-rules-read.md#r23-generalization-and-the-general-skill-rules-read-every-section): its chunk includes line 17 with `agentstudio-loop.md`'s opening
 4. [R6](specification/nudges.md#r6-a-nudge-carries-its-parts): the nudge's parts
 5. [R11](specification/nudges.md#r11-every-nudge-gets-a-disposition): the agent's disposition decides the broader question, not "make it pass"
 6. [R18](specification/rule-tests.md#r18-a-judged-rule-nudges-only-after-its-floor): the general-skill rules nudge only because they passed their cases, PR187's before and after among them
-7. [The path from line 17 to the agent](program-design.md#the-path-from-line-17-to-the-agent): who calls whom, from the runner through the assessment and the gate to the printed nudge; [the nudge, as the agent reads it](program-design.md#the-nudge-as-the-agent-reads-it): which part comes from where
+7. [The path from line 17 to the agent](program-design.md#the-path-from-line-17-to-the-agent): who calls whom, from the runner through the filter question and the `only_when` gate to the printed nudge; [the nudge, as the agent reads it](program-design.md#the-nudge-as-the-agent-reads-it): which part comes from where
 8. [Proof](verification-design.md#the-rows): the U1 · R6 row (every part on line 17, a second nudge, a quiet control) and the U13 · R13, R14 row (the kind census)
 
 ## Reading path: is this rule worth running?

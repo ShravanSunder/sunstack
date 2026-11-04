@@ -20,7 +20,7 @@ Each rule declares its subject, the relationships it follows (one hop unless it 
 
 `kind: obligation · capability: what-rules-read · also serves: skill-kinds · links: U21, E6, V23 · status: authorized`
 
-On every skill of kind **any repository**, the general-skill rules' chunks (and generalization's, until R17's merge is decided) together cover every section of `SKILL.md` and its references, from the text under the title down, tables included, each with the openings of the files its own text loads, plus the description.
+On every skill of kind `general`, `role` or `domain`, the general-skill rules' chunks together cover every section of `SKILL.md` and its references, from the text under the title down, tables included, each with the openings of the files its own text loads, plus the description.
 
 ### R24: The chunk of a rule is the size of its standard
 

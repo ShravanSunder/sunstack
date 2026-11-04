@@ -14,13 +14,13 @@ A rule about general skills is silent on product skills and tool manuals, and th
 
 `kind: obligation · capability: skill-kinds · links: U13, E1, E5, C2, V13 · status: authorized`
 
-Each run judges each checked skill's kind once, from its description, as **any repository**, **one named tool or platform**, or **one app's own procedures**, and the report shows each skill's kind and how sure. Two runs over the same description give the same kind.
+Each run judges each checked skill's kind once, from its description, as `general`, `role`, `domain`, `tool_manual` or `repo_specific` (U13 defines each), and the report shows each skill's kind and how sure. Two runs over the same description give the same kind.
 
 ### R14: A rule judges only its declared kinds
 
 `kind: obligation · capability: skill-kinds · links: U13, E3, E5, C1, V14 · status: authorized`
 
-Each rule that needs a kind declares the kinds it judges and reads the run's one kind judgment; no rule asks the kind question itself. A rule declared for **any repository** gives no result on a skill judged **one named tool or platform** or **one app's own procedures**, and the report counts that as a gate exclusion with the kind, not a pass.
+Each rule that needs a kind declares the kinds it judges and reads the run's one kind judgment; no rule asks the kind question itself. A rule declared for `general`, `role` and `domain` gives no result on a skill judged `tool_manual` or `repo_specific`, and the report counts that as a gate exclusion with the kind, not a pass.
 
 ### R15: An unsure kind skips and is listed
 
@@ -38,9 +38,9 @@ The description rules declare no kind restriction; they judge hidden skills as w
 
 `kind: obligation · capability: skill-kinds · also serves: rule-making, what-rules-read · links: U16, E3, E5, V17 · status: authorized`
 
-Product-leak judges skills of kind **any repository** only. On those it gives the answer in [U16's table](../requirements/skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak): it nudges on cases 1, 2, 4, 5 and 11; stays quiet on cases 3, 6, 7, 8 and 9; does not judge case 10 (R14); and has no case 12 behavior until a real case exists. A product named in text labelled as an example ("for example, …") is quiet; an unlabelled made-up product-like example nudges.
+Product-leak judges skills of kind `general`, `role` or `domain` only. On those it gives the answer in [U16's table](../requirements/skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak): it nudges on cases 1, 2, 4, 5 and 11; stays quiet on cases 3, 6, 7, 8 and 9; does not judge case 10 (R14); and has no case 12 behavior until a real case exists. A product named in text labelled as an example ("for example, …") is quiet; an unlabelled made-up product-like example nudges.
 
-*Settled (owner, 4 Nov (reviews 08411599 and a42f545e), decision 2 "merge both"):* one general-skill family, one standard and one set of cases, with three checks: `general-skill.overfits-to-product-workflow` (a section sending agents into one product's own commands, files or paths), `general-skill.description-overfits-to-one-product` (a description loading the skill for one product's work), and `general-skill.taught-rule-overfits-to-one-project` (a rule the skill teaches that fits one project's stack only, as in PR166). Each check has its own question and bars. **Every rule in the family declares the kind gate `work_scope ∈ {any_repository}`, so none of them ever judges a product's own skill or a tool manual** (owner, 4 Nov: "make sure general skills are only invoked as rukles for genaearal skills").
+*Settled (owner, 4 Nov (reviews 08411599 and a42f545e), decision 2 "merge both"):* one general-skill family, one standard and one set of cases, with three checks: `general-skill.overfits-to-product-workflow` (a section sending agents into one product's own commands, files or paths), `general-skill.description-overfits-to-one-product` (a description loading the skill for one product's work), and `general-skill.taught-rule-overfits-to-one-project` (a rule the skill teaches that fits one project's stack only, as in PR166). Each check has its own question and bars. **Every rule in the family declares the kind gate `only_when: { kind: [general, role, domain] }`, so none of them ever judges a product's own skill or a tool manual** (owner, 4 Nov: "make sure general skills are only invoked as rukles for genaearal skills").
 
 ### Proof obligations
 

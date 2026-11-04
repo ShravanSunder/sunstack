@@ -25,12 +25,37 @@
 </ex-nav>
 <ex-document id="content">
 <h1>Decisions and status</h1>
-<p>Skill rules design, 4 Nov. Open items first, then what's decided, what's dropped, and everything you said with its status.</p>
+<p>Skill rules design, 4 Nov. Open items first, then my calls you can undo, then what's decided, what's dropped, and everything you said with its status.</p>
 
-<h2 id="open">Open: none</h2>
-<p>You answered the last two on 4 Nov (review a42f545e). They are now under Decided.</p>
+<h2 id="open">Open: 4 items</h2>
+<p>Nothing is blocked on these except the start of building, which waits on the last one.</p>
+<div class="ex-table-scroll" data-width="canvas">
+<table>
+<thead><tr><th>Item</th><th>What it decides</th><th>My recommendation</th></tr></thead>
+<tbody>
+<tr><td>PR layout</td><td>one pull request per deliverable, stacked; or deliverables 2–5 together in #188</td><td>one per deliverable, stacked: each is small enough to review in one pass</td></tr>
+<tr><td>Rule keys</td><td>whether rules files key each rule by its name (general-skill.overfits-to-product-workflow) instead of K001; this changes the engine's rule-file contract</td><td>yes, in deliverable 1, since the engine is open anyway; say no and the K markers stay</td></tr>
+<tr><td>A: teaching-behavior rules</td><td>add rules that check a skill tells agents to run the rules before saying done</td><td>no for now; deliverable 5 teaches it, and the evals show whether it's needed</td></tr>
+<tr><td>Go</td><td>start building deliverables 1 and 2</td><td>go: both designs and plans are updated to your final config</td></tr>
+</tbody>
+</table>
+</div>
 
-<h2 id="decided">Decided: 15 items</h2>
+<h2 id="lead-calls">My calls you can undo: 4 items</h2>
+<p>Each is reversible and inside what you agreed; tell me to change any.</p>
+<div class="ex-table-scroll" data-width="canvas">
+<table>
+<thead><tr><th>Call</th><th>Why</th><th>If you undo it</th></tr></thead>
+<tbody>
+<tr><td>load and branch read their enclosing heading instead of a step</td><td>the step kind existed only for rules we dropped; the heading gives the same context</td><td>keep step and workflow_section (two more evidence kinds)</td></tr>
+<tr><td>Every checked file under a skill folder shares its answer (no members list)</td><td>no rule needs a narrower set, and per already draws the folder</td><td>add a members list to the filter</td></tr>
+<tr><td>only_when names one filter</td><td>two filters would need an and/or rule nobody has asked for</td><td>allow several, with a stated and/or</td></tr>
+<tr><td>An inline ast-grep rule goes only on a kind's own matcher</td><td>field sources already name a rule or a kind; inline there adds escaping for no case we have</td><td>allow inline in field sources too</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="decided">Decided: 20 items</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>Item</th><th>Decision</th></tr></thead>
@@ -50,11 +75,16 @@
 <tr><td>Engine's skill-aware loader</td><td>Later work</td></tr>
 <tr><td>Case TO09</td><td>Quiet</td></tr>
 <tr><td>agent-collaboration description</td><td>Your rewrite, merged (agent-router 0.18.0)</td></tr>
+<tr><td>The config for which skills a rule judges</td><td>one filters section: per a skill folder, reads its SKILL.md description, one question to Jev, min_probability; a rule says only_when with the answers it judges</td></tr>
+<tr><td>Skill kinds</td><td>general, role, domain, tool_manual, repo_specific; the general-skill rules judge general, role and domain</td></tr>
+<tr><td>Config format and ast-grep rules</td><td>stays JSON; an evidence kind names an ast-grep rule in a file, or writes a one-off inline as a one-line YAML string</td></tr>
+<tr><td>Evidence kinds</td><td>5 left: skill, section, load, branch, rule_question</td></tr>
+<tr><td>Rulebooks</td><td>steering removed; the three general-skill rules in one rulebook beside one standard, in deliverable 2</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="dropped">Dropped: 9 items</h2>
+<h2 id="dropped">Dropped: 12 items</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>Kind</th><th>Item</th></tr></thead>
@@ -68,11 +98,14 @@
 <tr><td>Test type</td><td>Agent replays of whole tasks</td></tr>
 <tr><td>Name</td><td>placement, product-leak</td></tr>
 <tr><td>Ask to you</td><td>Router restart</td></tr>
+<tr><td>Evidence kinds</td><td>sentence, standards_section, reference_section, skill_body, skill_target (folded into skill), step, workflow_section</td></tr>
+<tr><td>Rulebook</td><td>steering (no rules left)</td></tr>
+<tr><td>Names</td><td>owners, units, assessments, work_scope, requires, accept, filter_folders, input_folders</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="said">Everything you said: 35 answers</h2>
+<h2 id="said">Everything you said: 42 answers</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>Date</th><th>Where</th><th>Question</th><th>Your answer or words</th><th>Status</th></tr></thead>
@@ -112,17 +145,24 @@
 <tr><td>4 Nov</td><td>design page</td><td>C</td><td>“the eval passes with jev and judge model if jev is undecided and we use a terra medium / luna high is the subject”</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>decisions page</td><td>Names</td><td>general-skill.overfits-to-product-workflow and two more</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>decisions page</td><td>A</td><td>Yes</td><td>Decided</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>Kinds</td><td>“general, tool_manual, domain? what ar ebetter categories?”; “role is not general its a tkyle wht is it? the rest make sense. is there sucha category as repo_specific?”</td><td>Decided: five kinds</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>Is the kind filter only for skills?</td><td>“skill kind isnt that over fittkign to skills? is this only for skill rules or the general litner?”</td><td>Decided: generic filters</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>Config shape</td><td>“filter+folters sure”; “this all seems liek slop”; “fuckign asses sthe whole configl in teh rule system”</td><td>Decided: filters + only_when</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>Jev's flexibility</td><td>“we keep jevs flexibliyt for inptu filter mehcina, , output and evencie. and also deicion tree?”</td><td>Decided: yes, all kept</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>ast-grep rules</td><td>“lastly shodu ast grep be seperate yaml or if one off inline?”; “we shokud provide both options in ast grep no?”</td><td>Decided: both</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>Config format</td><td>“rgh tshoud strying be something else like toml but valdiation is good”; “yes stay on json ok inline or yaml referenc eok?”</td><td>Decided: JSON</td></tr>
+<tr><td>4 Nov</td><td>chat</td><td>General-skill rules</td><td>“yes remember the genral ksills part ok?”</td><td>Decided: one rulebook, deliverable 2</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="asked">Your questions: 9</h2>
+<h2 id="asked">Your questions: 13</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>You asked</th><th>Answer</th></tr></thead>
 <tbody>
 <tr><td>“what does this mean?” (a taught rule that fits one project only)</td><td>A rule a general skill teaches that is really one project's habit, like PR166's “don't use ctx.storage, node:sqlite or Kysely”. The general version is yours: use the repository's technology or ask.</td></tr>
-<tr><td>“make sure general skills are only invoked as rukles for genaearal skills”</td><td>Done: every general-skill rule judges only skills whose work is for any repository; never a product skill or tool manual.</td></tr>
+<tr><td>“make sure general skills are only invoked as rukles for genaearal skills”</td><td>Done: every general-skill rule carries only_when kind general, role or domain; never a tool manual or a repo-specific skill.</td></tr>
 <tr><td>“what does 3 real mistakes mean i didnt udnantd?”</td><td>Each rule needs at least 3 real past mistakes it would have caught.</td></tr>
 <tr><td>“what is main path spine?”</td><td>A rule checking that a skill's main file shows the route from start to done. Dropped.</td></tr>
 <tr><td>“modle is decsision_model?” / “what Yo mean model?”</td><td>The AI that answers a rule's question: Jev.</td></tr>
@@ -130,6 +170,10 @@
 <tr><td>“i thought we were testing jev and jev output?”</td><td>Yes. The unit tests check Jev's answers; only the 2 evals run an agent.</td></tr>
 <tr><td>“which pyramid parts and expense did yo consider?”</td><td>Unit: one Jev call per case, many. Eval: one agent session per test, 2. Whole-task replays: dropped.</td></tr>
 <tr><td>“we have a evals sytem?”</td><td>Yes: tests/skills/evals/.</td></tr>
+<tr><td>“what is check.files?”</td><td>The list of files the linter checks, like the paths you give eslint. It exists already and this design doesn't change it.</td></tr>
+<tr><td>“what is kunits?” / “what does target mean?”</td><td>Old names for a skill folder and for the file a rule follows a link to. Gone: the config now says filters and per.</td></tr>
+<tr><td>“can json do multiline?”</td><td>No: a JSON string is one line, so an inline ast-grep rule is one line of YAML; a long rule stays in its own file.</td></tr>
+<tr><td>“is this only for skill rules or the general linter?”</td><td>The general linter: the engine knows no skill names, and the same filter could group code packages.</td></tr>
 </tbody>
 </table>
 </div>

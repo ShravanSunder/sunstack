@@ -76,9 +76,9 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | --- | --- |
 | identity rule | one skill, in one run, at one version of its description; re-running on the same description is the same question and must give the same kind within its bar |
 | relationships | belongs to exactly one skill (E1); read by every rule that declares kinds |
-| invariants | made once per skill per run; no rule re-asks it; the answer is one of **any repository**, **one named tool or platform**, **one app's own procedures** |
+| invariants | made once per skill per run; no rule re-asks it; the answer is one of `general`, `role`, `domain`, `tool_manual`, `repo_specific` (U13) |
 | observable states | `judged` (an answer above its bar, with how sure) or `unsure` (no answer reaches its bar) |
-| canonicalizes | "skill kind", "the filter", "general skill" (= any repository), "product skill" (= one app's own procedures), "tool manual" (= one named tool or platform) |
+| canonicalizes | "skill kind", "the filter", "general skill" (= `general`, `role` or `domain`, the kinds the general-skill rules judge), "product skill" and "tool manual" (= `tool_manual`), "repo-specific skill" (= `repo_specific`) |
 
 ### E6: Chunk
 

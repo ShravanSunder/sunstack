@@ -8,12 +8,12 @@ Not every rule applies to every skill. A rule that says "a general skill shouldn
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making · status: authorized · was: R12`
 
-A model reads each skill's description once and answers what the work is for: **any repository**, **one named tool or platform**, or **one app's own procedures**. Each rule declares the kinds it judges and takes that one answer as input; no rule re-asks it. The run shows each skill's judged kind and how sure the model was. A product's own skill is never judged by a rule about general skills.
+A model reads each skill's description once and answers what the work is for, as one of five kinds: **general** (a workflow, practice or principle for any repository, such as `skill-review` or `practices-cleanup`), **role** (a job an agent holds in the agent team, such as `role-lead`), **domain** (one subject's standards, such as `domain-typescript`), **tool_manual** (how to use one named tool or platform, such as the `agentstudio` skill, Peekaboo or `agent-collaboration`) or **repo_specific** (one repository's own procedures, such as a repository's `verify-<app>` skills). Each rule declares the kinds it judges and takes that one answer as input; no rule re-asks it. The run shows each skill's judged kind and how sure the model was. A product's own skill is never judged by a rule about general skills.
 
 <details>
 <summary>Authority and evidence</summary>
 
-- Owner, 2 Nov: "we have domain -* but we can no thsi frorm diescripiton too? descripton is filter"; "shoukd valdiate if this is about a product or domain and ahve that as input no?". Owner, 3 Nov (q2a): picked "what the work is for" with these three answers. Owner, 3 Nov: "the skill shodu only trigger on gneeral skilsl how will you filter".
+- Owner, 2 Nov: "we have domain -* but we can no thsi frorm diescripiton too? descripton is filter"; "shoukd valdiate if this is about a product or domain and ahve that as input no?". Owner, 3 Nov (q2a): picked "what the work is for". Owner, 4 Nov, on the answers: "general, tool_manual, domain? what ar ebetter categories?", then "role is not general its a tkyle wht is it? the rest make sense. is there sucha category as repo_specific?"; the five kinds above answer both, and replace the three answers picked on 3 Nov. Owner, 3 Nov: "the skill shodu only trigger on gneeral skilsl how will you filter".
 - Evidence note 17 (was E17): a description can mislead. `ops-observability-stack`'s description names AgentStudio, Agent VM and OpenClaw, yet the skill is this toolkit's shared stack.
 - The Advisor's filter research (`scratch-root-01a1635f/skill-rules/rule-redesign/advisor/filter-research.md`): engine v0.6.0 can't make one judgment per skill and give it to every rule's pieces through config (`select` is noul-only; `as_kind` refuses selected kinds; 3 keyless probes). This needs an engine feature (U11), designed in Program Design.
 
@@ -49,7 +49,7 @@ Owner, 2 Nov review of `rules-spec-2026-11-02.html`: picked "Yes, all of them, a
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making, what-rules-read · status: authorized, except where marked`
 
-Product-leak (the renamed placement rule) judges skills whose work is for any repository. It nudges when a general skill sends agents into one product's own commands, files or paths, because that work belongs in the product's repository. Every case the owner has seen, and his answer:
+Product-leak (the renamed placement rule) judges skills of kind general, role or domain. It nudges when a general skill sends agents into one product's own commands, files or paths, because that work belongs in the product's repository. Every case the owner has seen, and his answer:
 
 | # | Case | Real case | Answer |
 | --- | --- | --- | --- |
