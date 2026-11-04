@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan: skill rules</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Skill rules design</a>
+    <a href="decisions.html">Decisions and status</a>
+    <a href="plan.html">Plan</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Plan</h1>
+<p>How it gets built, in order. Two pull requests: one in sunstack-tools for the engine, one in ai-tools (#188) for the rules. Both start together; only the kind gates (A3) wait for the engine release.</p>
+
+<ex-callout tone="question" title="What I need from you">
+Look at the order below. Say "go" to start building, or say what to change. Nothing is built until you do.
+</ex-callout>
+
+<h2 id="order">Build order</h2>
+<ex-mermaid id="build-order" label="Build order across the two pull requests"><script type="text/plain">
+flowchart LR
+  subgraph engine["sunstack-tools PR"]
+    E1["E1 config and refusals"] --> E2["E2 skill folders as units"] --> E3["E3 ask each kind once;<br/>gate before a rule's first step"] --> E4["E4 report and exit status"] --> E5["E5 verify journey;<br/>release 0.7.0"]
+  end
+  subgraph rules["ai-tools PR #188"]
+    A1["A1 case files, records,<br/>rule state, nudge parts"] --> A2["A2 renames, drops,<br/>branch evidence fix"]
+    A1 --> A5["A5 runner tests on<br/>real pinned skills"]
+    A6["A6 the two review evals"]
+    A2 --> A3["A3 kind gates for the<br/>general-skill rules"]
+    A3 --> A4["A4 real cases, blind labels,<br/>thresholds"]
+    A2 --> A4
+    A1 --> A4
+    A4 --> A8["A8 run over every skill;<br/>line 17"]
+    A6 --> A8
+    A7["A7 teaching skills"] --> A8
+  end
+  E5 -->|"engine 0.7.0 pinned"| A3
+</script></ex-mermaid>
+
+<h2 id="you">Where you come in</h2>
+<ul>
+<li>Disputed labels: when two agents label a case differently, you decide. I bring only the disputed ones, with the real text, on one page.</li>
+<li>Merging #188 is yours. I merge and release the engine (your 30 Oct grant).</li>
+<li>A (rules that check a skill tells agents to run the rules before saying done) is still open; a yes adds one step.</li>
+</ul>
+
+<h2 id="full">The full plan</h2>
+<ex-markdown id="plan-md" label="The plan" src="./plans/2026-11-04-skill-rules.md"></ex-markdown>
+</ex-document>
+</body>
+</html>
