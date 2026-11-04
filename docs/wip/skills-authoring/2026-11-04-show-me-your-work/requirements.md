@@ -2,7 +2,7 @@
 
 ## The change
 
-- **Class:** behavior-changing. Claim: alters `practices-show-me-your-work`'s main path (where the record lives, what an entry holds, who writes it, what the owner sees), its trigger, and the allocation of its references; adds a `scripts/` page builder; changes how three callers record their work. Surfaces altered: trigger, main path, depth (references and a script), proof.
+- **Class:** behavior-changing. Claim: alters `practices-show-me-your-work`'s main path (where the record lives, what an entry holds, who writes it, what the owner sees), its trigger, and the allocation of its references; adds a `scripts/` page builder; changes how seven other skills record their work, so the record has one home. Surfaces altered: trigger, main path, depth (references and a script), proof.
 - **Kind:** update.
 - **Owner plugin:** `sunstack-dev`. Existing owner of the behavior: `plugins/sunstack-dev/skills/practices-show-me-your-work/` (`SKILL.md`, `references/markdown-view.md`, `references/no-board-trace.md`). No other skill owns it.
 - **Baseline:** sunstack-dev 2.103.0 at `cbcaec0d`. Today the trace is a board thread's posts, or a session-logs file when there is no board. It holds the Lead's owner-asks list, decisions made without asking, stand-ins and checkpoints. Helpers post on their own execution threads. The readable view is an on-request Markdown view. There is no assumption entry, no link from an entry to the part of the design it concerns, no accepted-work record, and no page the owner reads while the work runs.
@@ -54,7 +54,7 @@ User-directed intent: the success definition above is the owner's, approved thro
 
 - How design documents are written and shown (design documents, phase one, which comes next by the owner's order).
 - The decisions-and-assumptions panel and the other components (phase two).
-- The Jev rule that judges which entries are important: deferred to a later run, after real entries exist and one hosted run is labelled.
+- The Jev check that judges which entries are important: a later run, by the owner's decision ("Later run", review 98fe1e32, row `01a1a70c-ec6d`). This change ships only the design-doc part of the reach rule; `skill-design.md` outlines the later run.
 - How the owner is asked a decision: `owner-decision-brief` keeps that job; this skill links to it and records the answer.
 - Changes to the Router engine or its storage.
 - Migrating old traces: existing threads and session-logs files stay read-only history.
