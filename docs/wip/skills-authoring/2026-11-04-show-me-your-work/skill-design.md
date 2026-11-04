@@ -168,14 +168,14 @@ Outline only, for the run the owner placed after this change (row `01a1a70c-ec6d
 
 | Run | Status |
 | --- | --- |
-| 1 | proposed |
-| 2 | proposed |
-| 3 | proposed |
-| 4 | proposed |
-| 5 | proposed |
-| 6 | proposed |
-| 7 | proposed |
-| 8 | proposed |
+| 1 | implemented |
+| 2 | implemented |
+| 3 | implemented |
+| 4 | implemented |
+| 5 | implemented |
+| 6 | implemented |
+| 7 | implemented |
+| 8 | implemented |
 
 ## Review record
 
