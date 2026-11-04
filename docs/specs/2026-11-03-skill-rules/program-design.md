@@ -72,6 +72,7 @@ A second, smaller choice: **where a rule's reason, owner decision and bar source
 | [E11 Behavior-test candidate](specification/entities.md#e11-behavior-test-candidate) | the Lead | `tests/skills/evals/behavior-candidates.json` (new; a list, nothing runs it) | `{ id, episode, records: string[], behavior: string, teaching_rule?: string }` | persisted |
 | [E12 Disposition](specification/entities.md#e12-disposition) | the agent acting on the nudge | existing reporting surfaces taught by the skills (self-check, review findings, acceptance); modified teaching | text: rule, place, disposition, what was checked | in the agent's report |
 | [E13 Run](specification/entities.md#e13-run) | engine (exit), runner (state) | existing `engine-runner.ts`, `report.ts` | existing exit statuses (uncertain = 5) | derived |
+| [E14 Eval](specification/entities.md#e14-eval) | the eval entry | `tests/skills/evals/review-skill.eval.ts` (new) and `evals/review-skill/` (new) | `reviewEvalCase` in, verdict `passed \| failed \| incomplete` out (see The two evals) | cases persisted; runs derived |
 
 ### The rule record and the case record
 
@@ -116,6 +117,8 @@ const caseRecord = z.object({
   finding_lines: z.array(positiveLine).min(1).optional(), // required for must_fire, absent otherwise; a finding elsewhere is a wrong locator, reported apart
   kind: z.enum(["breach", "worth_reading", "regression_example"]), // kept as today
   case_kind: z.enum(["real_mistake", "good", "near_miss", "unclassified"]),
+  status: z.enum(["active", "retired"]),   // retired: its rule was dropped; kept for history, never run, counts toward nothing
+  retired_because: z.string().optional(),  // required when retired: the owner's drop, quoted
   set: z.enum(["development", "held_back"]),
   frozen: z.object({ commit: z.string().regex(/^[0-9a-f]{40}$/), date: z.string() }).optional(), // required for held_back
   fix_pair: z.string().optional(),     // shared by a fix's before and after
@@ -133,6 +136,25 @@ const casesFile = z.object({ rules: z.record(z.string(), ruleRecord), cases: z.a
 `unclassified` exists only for migrated expectations not yet adjudicated by the case mining; it counts toward no floor, and neither does `expect: unknown`. `legacy_independent` keeps an old label's history as it was (some were blind labels that agreed, some were settled by an independent agent after the labellers disagreed); it counts toward no floor until the case is labelled again under R19. `expect`, `kind`, the selector and the finding lines keep today's meaning; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
 
 **Migration, one format, no compatibility reader.** Each old expectation becomes one case with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: legacy_independent`, `label.state: labelled`, keeping `who` (blind labellers, and any independent settler) and the original note word for word; `case_kind: unclassified`; `set: development` for every one, since all current cases are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
+
+**Rule names in the migration.** A migrated case keeps its identity, labels, sources and expected behavior; its `rule` is translated by this map, the one place old names live. Case runs, receipts and reports use only current names.
+
+| Old name | Current name |
+| --- | --- |
+| `description.opener` | `skill-description.starts-with-use-when` |
+| `description.length-warning` | `skill-description.longer-than-225-characters` |
+| `description.length-limit` | `skill-description.longer-than-300-characters` |
+| `description.loading-moment` | `skill-description.names-the-loading-moment` |
+| `description.trigger-only` | `skill-description.states-triggers-not-workflow-steps` |
+| `placement.product-workflow` | `general-skill.overfits-to-product-workflow` |
+| `description.product-loading` | `general-skill.description-overfits-to-one-product` |
+| `rule.generalization` | `general-skill.taught-rule-overfits-to-one-project` |
+| `call.completeness` | `load-call.names-when-where-and-result` |
+| `branch.condition` | `skill-branch.names-an-observable-condition` |
+| `question.one-proposition` | `rule-question.asks-exactly-one-thing` |
+| `question.criteria-match` | `rule-question.criteria-answer-the-same-question` |
+
+A case whose rule was dropped (`question.names-field`, `description.always-earned`, `reference.teaching-depth`, `guidance.positive`, `main-path.spine`, `completion.criterion`) migrates with `status: retired` and `retired_because` quoting the owner's drop; the case run skips it, and it counts toward no floor.
 
 **A held-back case** carries `frozen`: the commit that froze its group. That commit must come before every `bars[*].recorded_at` of its rule, and no held-back id may appear in any `bars[*].cases`. Otherwise the rule is held.
 
@@ -223,8 +245,8 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 
 | Rule (entry) | Evidence | Gate | Change |
 | --- | --- | --- | --- |
-| `skill-description.starts-with-use-when`, `.length-warning`, `.length-limit` | `skill` | none | case record only (mechanical) |
-| `skill-description.names-the-loading-moment`, `.trigger-only` | `skill` | none (R16) | cases from history |
+| `skill-description.starts-with-use-when`, `skill-description.longer-than-225-characters`, `skill-description.longer-than-300-characters` | `skill` | none | case record only (mechanical) |
+| `skill-description.names-the-loading-moment`, `skill-description.states-triggers-not-workflow-steps` | `skill` | none (R16) | cases from history |
 | `description.always-earned` | — | — | dropped (owner): entry and marker removed; nothing flags "Always" |
 | `general-skill.overfits-to-product-workflow` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; the family's section check; cases from U16's rows; quiet cases from general skills |
 | `general-skill.description-overfits-to-one-product` (was `description.product-loading`, K007) | `skill` | `work_scope ∈ {any_repository}` | renamed; the general-skill standard's description check (owner decision 2) |
@@ -293,16 +315,34 @@ No concurrency: a run is one process over one commit. No migration of stored use
 
 ## The two evals
 
-| Part | Home | Shape |
-| --- | --- | --- |
-| eval case | `tests/skills/evals/review-skill/` (new), one folder per case | `case.json`: `{ id, example: { repository, commit, paths }, commission: <the real commission text>, session_input: <the real session excerpt>, expected: { nudge: { rule, file, line }, broader_question: string } }` |
-| subject run | existing `skill-pressure-evaluation/agent-execution/acpx-codex-agent-runner.ts`, configured by `runtime-configuration` | model `gpt-6-luna`, effort `high`, in a throwaway checkout at `example.commit` with the plugins installed; prompt = the commission plus the session input |
-| review | the file the subject writes under its run folder | Markdown, the review skill's own artifact |
-| Jev grade | `tests/skills/evals/review-skill/review-grade.rules.json` (new rulebook) run by `sunstack lint` over the review | one judged rule: does the review record the expected nudge and a decision that answers `broader_question`? `warn` finding = fail; pass = pass; `uncertain` = undecided |
-| Terra judge | existing `evaluators/semantic/acpx-judge-harness.ts` | runs only when Jev is undecided; model Terra, effort `medium`; returns pass or fail with a reason |
-| verdict | vitest-evals result per case | `passed \| failed \| undecided \| incomplete` (E14) |
+```mermaid
+flowchart LR
+  entry["review-skill.eval.ts<br/>finds the cases"] --> ws["throwaway worktree at the PR head<br/>+ the real example as its last commit"]
+  ws --> subject["Luna high runs the review skill<br/>(commission + session input)"]
+  subject --> review["review.md"]
+  subject --> events["recorded commands"]
+  events --> proof["did the rules really run,<br/>and give the expected nudge?"]
+  review --> packet["grade packet"]
+  proof --> packet
+  packet --> jev["Jev: review-grade rule"]
+  jev -->|"undecided"| terra["Terra medium judge"]
+  jev --> verdict["passed / failed / incomplete"]
+  terra --> verdict
+```
 
-The pass condition lives in the case (expected nudge and broader question), so the judge never invents it. The evals run on demand (`pnpm --dir tests/skills test:evals`), not in every rule run.
+| Step | Owner and home | Contract |
+| --- | --- | --- |
+| entry | `tests/skills/evals/review-skill.eval.ts` (new); script `evals:review` = `vitest run evals/review-skill.eval.ts --config vitest.config.ts` | finds `evals/review-skill/cases/*/case.json` and validates each with the zod `reviewEvalCase` schema; no cases, or a malformed one, fails the eval rather than passing with nothing run. The existing pressure entry `skill-pressure.eval.ts` is unchanged (its missing-scenario exit predates this work, README) |
+| case | `evals/review-skill/cases/<id>/case.json` (new; `187-line-17`, `166-storage-rule`) | `{ id, example: { repository, commit, paths }, commission, session_input, expected: { rule, file, line, broader_question } }`; `rule` uses a current name; `commission` and `session_input` are the real text from the session |
+| workspace | `evals/review-skill/prepare-review-workspace.ts` (new) | a throwaway Git worktree at the PR head under test, so the skills, rules, runner and pinned engine are the ones being delivered; then one commit that sets `example.paths` to their text at `example.commit`, so the change under review is `HEAD~1..HEAD`. Installed plugin caches are not read: the subject's skill discovery points at the worktree's `plugins/` (the renderer already prefers repo-local skills, `render-subject-prompt.ts:102–106`) |
+| subject | `evals/review-skill/run-review-subject.ts` (new) over `acpx-codex-agent-runner.ts` (modified: an `agentMode` option, default `read-only` so every existing caller is unchanged; this eval passes `workspace-write` with the worktree as its only writable root) | model `gpt-6-luna`, effort `high`; prompt = the commission and session input, plus where to write `review.md`; the expected answer is never in the prompt; returns the review path and the runner's retained raw events |
+| rule-run proof | `evals/review-skill/rule-run-evidence.ts` (new) | from the raw events, not the review: the rules command the subject ran (`pnpm --dir tests/skills rules` or `sunstack lint`), its exit status, and its JSON report; `{ ran, report_path, expected_nudge_present }`, where the last checks the report's findings for `expected.rule` at `expected.file:expected.line`. No run → the case fails; unreadable events or report → incomplete |
+| grade packet | `evals/review-skill/build-grade-packet.ts` (new) | `grade-packet.md` with three headed sections: Expected (rule, file, line, broader question), Rule run (command, exit, nudge present), Review (the subject's text). Both judges read this same packet |
+| Jev grade | rulebook in `evals/review-skill/grading/` (new): `review-grade.md` (the standard, marker K001: a review reports the expected nudge and decides the broader question), `review-grade.rules.json` (one judged choice rule `review-grade.decides-the-broader-question` over an evidence kind `grade_packet` whose fields are the three sections), `review-grade.config.json` (the pair, the packet as the only checked file, Jev) | run through the existing `lint/engine-runner.ts`; result: pass → pass, finding → fail, `uncertain` → Terra, invalid or incomplete → incomplete |
+| Terra judge | existing `evaluators/semantic/acpx-judge-harness.ts` | runs only on Jev `uncertain`; model Terra, effort `medium`; prompt = the same packet plus the rule's question and criteria text; output validated by zod `{ verdict: "pass" \| "fail", reason }`; malformed output → incomplete |
+| verdict | `review-skill.eval.ts` | `passed` only when `ran`, `expected_nudge_present` and the judge's pass all hold; `failed` when any is false; `incomplete` on a run, provider or schema failure (E14) |
+
+Unit tests beside the new modules cover the schema, the workspace commit, the evidence extraction (including events with no rules command), the packet, and the verdict mapping (including Jev `uncertain` reaching Terra), using recorded events and recorded judge outputs; they run no model.
 
 ## The skills that teach it
 
@@ -324,7 +364,7 @@ The pass condition lives in the case (expected nudge and broader question), so t
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | U9 | R1 (rule-making) | E3, E4 | runner | rule state derivation | `ruleRecord.reasons` in `*.cases.json` | `held: no_reason` | no reason → held | case report per rule |
 | U10 | R2 (rule-making) | E3 | owner via case file | `ruleRecord.decision` | `ownerDecision` enum | held / dropped | undecided → held | case report vs U10 |
-| U12 | R3 (rule-making) | E11, E14 | eval harness | `tests/skills/evals/review-skill/` | `case.json`, review, verdict | E14 states | subject or judge failure → incomplete | the two evals; the behavior list |
+| U12 | R3 (rule-making) | E11, E14 | the eval entry | `review-skill.eval.ts` → workspace → subject → rule-run proof → packet → Jev (Terra on undecided) | `reviewEvalCase`, `grade-packet.md`, verdict | E14 states | subject, provider or schema failure → incomplete; no rules run → failed | the two evals; the controls in Verification Design |
 | U8 | R4 (rule-making) | E3, E7 | rulebook `domain-decision-models` | lint over `*.rules.json` (v0.6.0 JSON lint) | existing `rule_question` kind | — | JSON parse failure isolated (v0.6.0) | real rule-file cases |
 | U11 | R5 (rule-making) | none: engine boundary | engine | owner assessment config + `requires` | generic config sections | — | — | engine diff and release |
 | U1 | R6 (nudges) | E7, E2 | runner formatter over the engine finding | `formatLintReport` | the nudge rendering table | — | — | line-17 run plus a second real nudge and a non-nudged control |
@@ -357,6 +397,5 @@ The pass condition lives in the case (expected nudge and broader question), so t
 
 ## Deviations and unresolved
 
-- A-2 (merge into the general-skill rules) and A-3 (labelled example line) are proposed; the rule table shows both outcomes.
 - The engine feature's internal design is not here; it is owed as `sunstack-tools`' own Program Design part.
-- The case mining is in flight; until it lands, migrated expectations are `unclassified` and judged rules stay `held` on the floor.
+- Migrated expectations are `unclassified` until the mined cases and their blind labels are entered; judged rules stay `held` on the floor until then.

@@ -79,7 +79,7 @@ Owner, 31 Oct: "we have rules that need to check json to amek srue its doen well
 
 `kind: requirement · capability: rule-making · also serves: skill-kinds, what-rules-read · status: authorized · was: R9`
 
-Nothing in `sunstack-tools` knows about skills. Kinds, chunks, nudge kinds and related locations are declared by the caller's config and rules. An engine gap is fixed in the engine and released, never worked around in the skills, runner or rules.
+This change adds nothing skill-specific to `sunstack-tools`; the engine's existing skill-aware target loader is later work (owner, 4 Nov, decision 9: "Later work, logged"). Kinds, chunks, nudge kinds and related locations are declared by the caller's config and rules. An engine gap is fixed in the engine and released, never worked around in the skills, runner or rules.
 
 <details>
 <summary>Authority</summary>

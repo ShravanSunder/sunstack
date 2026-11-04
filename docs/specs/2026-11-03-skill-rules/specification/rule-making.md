@@ -26,7 +26,7 @@ Each rule's state is the one [U10](../requirements/rule-making.md#u10-the-rule-l
 
 `kind: obligation · capability: rule-making · links: U12, E11, E14, V3 · status: authorized`
 
-Each of the two evals in [U12](../requirements/rule-making.md#u12-the-review-skill-is-proven-by-two-real-evals) passes: the agent's review records the rules' run, the expected nudge (at `ops-observability-stack/SKILL.md:17` for #187; at the storage rule for PR166), and a decision about it that answers the broader question (does this content belong in AgentStudio's own repository? is this rule one project's stack?), not only "made the rule pass". Each behavior-only mistake episode in the inventory appears once in the behavior list with its sources, and no text rule's nudge claims an agent did or didn't do a behavior.
+Each of the two evals in [U12](../requirements/rule-making.md#u12-the-review-skill-is-proven-by-two-real-evals) passes: the agent's review records the rules' run, the expected nudge (at `ops-observability-stack/SKILL.md:17` for #187; at the storage rule for PR166), and a decision about it that answers the broader question (does this content belong in AgentStudio's own repository? is this rule one project's stack?), not only "made the rule pass". The rule run is shown by the agent's own recorded commands and the run's report, never by what the review says about itself; the expected answer is never given to the agent. Each behavior-only mistake episode in the inventory appears once in the behavior list with its sources, and no text rule's nudge claims an agent did or didn't do a behavior.
 
 ### R4: Rule files get nudges
 
@@ -52,6 +52,6 @@ Opening any rule shows, without running it: its name and state; the mistake(s) o
 | --- | --- | --- | --- |
 | V1 | R1 | every `nudging` judged rule cites a mistake that exists at its locator; a judged rule with no citation is `held` and listed | the inventory, git history, GitHub PRs |
 | V2 | R2 | each rule's state equals U10's table; `question.names-field` gives no result in a run | U10 and the owner's review records |
-| V3 | R3 | on #187 and PR166, the subject's review names the expected nudge with a decision on the broader question, and the judge (Jev, else Terra medium) passes it; a review that only makes the rule's property hold fails | #187's chain; PR166 and the owner's general version ("use teh repo techonolgoy or ask") |
+| V3 | R3 | on #187 and PR166, the agent's recorded commands show the rules ran on the example and their report has the expected nudge; the review decides the broader question and the judge (Jev, else Terra medium) passes it. Controls fail: a persuasive review with no rules run; a review for the wrong rule or line; a review that only makes the rule pass | #187's chain; PR166 and the owner's general version ("use teh repo techonolgoy or ask") |
 | V4 | R4 | real rule-file questions that ask two things or mismatch their criteria get a nudge; real ones that don't, don't | real rule files, current and in history |
 | V5 | R5 | no skill-specific word in the engine change; the kind judgment is declared in this repository's config | the `sunstack-tools` diff and release |

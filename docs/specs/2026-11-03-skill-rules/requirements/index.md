@@ -51,7 +51,7 @@ Rule-making is the trunk: a rule is made from a mistake (rule-making), judges ce
 
 **Out (non-goals):**
 
-- **No pressure tests, trigger trials, behavior comparisons or behavior replays in this change.** Owner, 31 Oct: "we will rpessure test later afetrr we figure out evals"; and "i didnt as for comparision or pressute testing?". U12's behavior candidates are listed for that later work, not built.
+- **No pressure tests, trigger trials, behavior comparisons or behavior replays in this change, except the two review-skill evals in U12.** Owner, 31 Oct: "we will rpessure test later afetrr we figure out evals"; owner, 4 Nov, narrowed it to admit the two evals (U12). The other behavior-only mistakes stay listed for later.
 - **No threshold overrides of any kind.** Owner, 2 Nov: "no override wierd stuff".
 - **No new rules beyond the renamed the general-skill rules.** A new rule starts from a mistake under U9, in a later change.
 - **Not the app-specific move.** Moving AgentStudio, Agent VM and OpenClaw content to their own repositories is parked; rules only nudge about it.

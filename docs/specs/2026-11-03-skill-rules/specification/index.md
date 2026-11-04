@@ -38,7 +38,7 @@ flowchart LR
   sys -->|"C1, C5, behavior-test candidate list"| owner
 ```
 
-Outside this system: the engine's internals (a generic dependency, R5), pressure tests and behavior replays (later evals), and where product content moves to (parked).
+Outside this system: the engine's internals (a generic dependency, R5), behavior scenarios beyond the two review evals (later), and where product content moves to (parked).
 
 ## Coverage
 

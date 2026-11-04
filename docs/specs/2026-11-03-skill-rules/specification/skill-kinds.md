@@ -36,7 +36,7 @@ The description rules declare no kind restriction; they judge hidden skills as w
 
 ### R17: What the general-skill rules answer in each case
 
-`kind: obligation · capability: skill-kinds · also serves: rule-making, what-rules-read · links: U16, E3, E5, V17 · status: authorized, except the row-3/row-4 line, proposed`
+`kind: obligation · capability: skill-kinds · also serves: rule-making, what-rules-read · links: U16, E3, E5, V17 · status: authorized`
 
 Product-leak judges skills of kind **any repository** only. On those it gives the answer in [U16's table](../requirements/skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak): it nudges on cases 1, 2, 4, 5 and 11; stays quiet on cases 3, 6, 7, 8 and 9; does not judge case 10 (R14); and has no case 12 behavior until a real case exists. A product named in text labelled as an example ("for example, …") is quiet; an unlabelled made-up product-like example nudges.
 
