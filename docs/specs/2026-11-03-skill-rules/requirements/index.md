@@ -18,7 +18,7 @@ The owner confirmed these five on 3 Nov ("your recommendatiosn are moslty good",
 - **rule-making** — every rule starts from a real, high-value mistake and is made in one order. [rule-making.md](rule-making.md)
   - [U9](rule-making.md#u9-a-rule-names-the-mistake-it-catches) a rule names the mistake it catches
   - [U10](rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) the rule list follows the owner's decisions, rule by rule
-  - [U12](rule-making.md#u12-behavior-that-skill-text-cannot-show-is-listed-not-made-into-a-text-rule) behavior that text can't show is listed, not made into a text rule
+  - [U12](rule-making.md#u12-the-review-skill-is-proven-by-two-real-evals) the review skill is proven by two real evals
   - [U8](rule-making.md#u8-rule-files-get-rules) rule files get rules
   - [U11](rule-making.md#u11-the-engine-stays-generic) the engine stays generic
 - **nudges** — an agent gets where, what, why, what to read next, and gaps it can trust. [nudges.md](nudges.md)
@@ -83,9 +83,9 @@ Raw Claude history starts 12 Sep and Codex 23 Sep, so August has no raw owner re
 
 ## Open meaning
 
-1. **Settled (owner, 4 Nov (review 00facfd0 of the design page), decision 2):** the general-skill standard has two checks, `general-skill.sends-agents-into-product-workflow` (sections) and `general-skill.description-loads-for-one-product` (descriptions); `taught-rule.holds-beyond-one-project` stays its own rule. Rule names follow the owner's standard: a namespace of 2–3 words and a rule name of 3–8 words (decision 4: "namespace 2-3 words and rule 3-8 words").
+1. **Settled (owner, 4 Nov (reviews 08411599 and a42f545e)):** one general-skill family with three checks, `general-skill.overfits-to-product-workflow` (sections), `general-skill.description-overfits-to-one-product` (descriptions) and `general-skill.taught-rule-overfits-to-one-project` (taught rules); every one judges only skills whose work is for any repository. Rule names follow the owner's standard: a namespace of 2–3 words and a rule name of 3–8 words.
 2. **The structural rules' real cases.** Mining is in flight; a rule without enough real cases stays held (U17).
-3. **Settled (owner, 4 Nov (review 00facfd0 of the design page), decision 5):** the runner's made-up sample skills (`tests/skills/fixtures/run-skill-rules/`) are replaced with Git-pinned real skills in a follow-up PR, not this change.
+3. **Settled (owner, 4 Nov (reviews 08411599 and a42f545e), decision 5 "In this change"):** the runner's made-up sample skills (`tests/skills/fixtures/run-skill-rules/`) are replaced with Git-pinned real skills in this change.
 
 ## Where the old rows went
 

@@ -4,7 +4,7 @@
 
 ### P3: Problem
 
-Rules about general skills judge every skill. On 1 Nov placement gave 9 wrong nudges of 11, four on product skills' own text, and `taught-rule.holds-beyond-one-project` gave 45, all wrong. The engine can't today make one judgment per skill that every rule reads.
+Rules about general skills judge every skill. On 1 Nov placement gave 9 wrong nudges of 11, four on product skills' own text, and `general-skill.taught-rule-overfits-to-one-project` gave 45, all wrong. The engine can't today make one judgment per skill that every rule reads.
 
 ### O3: Outcome
 
@@ -40,7 +40,7 @@ The description rules declare no kind restriction; they judge hidden skills as w
 
 Product-leak judges skills of kind **any repository** only. On those it gives the answer in [U16's table](../requirements/skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak): it nudges on cases 1, 2, 4, 5 and 11; stays quiet on cases 3, 6, 7, 8 and 9; does not judge case 10 (R14); and has no case 12 behavior until a real case exists. A product named in text labelled as an example ("for example, …") is quiet; an unlabelled made-up product-like example nudges.
 
-*Settled (owner, 4 Nov (review 00facfd0 of the design page), decision 2):* `general-skill.description-loads-for-one-product` is the general-skill standard's description check, beside the section check; one standard, one set of cases, each check with its own question and bars. `taught-rule.holds-beyond-one-project` stays its own rule with its own standard.
+*Settled (owner, 4 Nov (reviews 08411599 and a42f545e), decision 2 "merge both"):* one general-skill family, one standard and one set of cases, with three checks: `general-skill.overfits-to-product-workflow` (a section sending agents into one product's own commands, files or paths), `general-skill.description-overfits-to-one-product` (a description loading the skill for one product's work), and `general-skill.taught-rule-overfits-to-one-project` (a rule the skill teaches that fits one project's stack only, as in PR166). Each check has its own question and bars. **Every rule in the family declares the kind gate `work_scope ∈ {any_repository}`, so none of them ever judges a product's own skill or a tool manual** (owner, 4 Nov: "make sure general skills are only invoked as rukles for genaearal skills").
 
 ### Proof obligations
 

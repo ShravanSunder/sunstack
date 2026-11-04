@@ -46,7 +46,7 @@ Outside this system: the engine's internals (a generic dependency, R5), pressure
 | --- | --- | --- | --- | --- | --- | --- |
 | rule-making | U9 | E3, E4 | P1 · O1 | R1 | C1 | V1 |
 | | U10 | E3 | | R2 | C1 | V2 |
-| | U12 | E4, E11 | | R3 | — | V3 |
+| | U12 | E4, E11, E14 | | R3 | — | V3 |
 | | U8 | E3, E7 | | R4 | C2 | V4 |
 | | U11 | — | | R5 | — | V5 |
 | nudges | U1 | E7, E2 | P2 · O2 | R6 | C2 | V6 |
@@ -67,4 +67,4 @@ Outside this system: the engine's internals (a generic dependency, R5), pressure
 | | U21 | E6 | | R23 | C6 | V23 |
 | | U22 | E6 | | R24 | C6 | V24 |
 
-Gaps: R3 and U12 wait on the owner's answer to the test-shape questions (decision 1 was answered "build tests now"; what that means is being settled). Every other row is authorized.
+Gaps: none open with the owner. Every row is authorized.

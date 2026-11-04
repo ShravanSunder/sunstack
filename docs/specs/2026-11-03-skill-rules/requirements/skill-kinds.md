@@ -73,8 +73,8 @@ Its tests draw their quiet cases from general skills (rows 3, 6–9), as the own
 <details>
 <summary>Authority and evidence</summary>
 
-- Owner, 3 Nov: "yes placement is alkso not good name come kup with better name"; review 842d1327, q3a–q3c. The owner chose `general-skill.product-workflow` and set the naming standard (4 Nov, decision 4: "namespace 2-3 words and rule 3-8 words"); the full name `general-skill.sends-agents-into-product-workflow` follows it and was approved ("2 names is good").
-- Evidence note 12 (was E12): on 1 Nov placement made 11 nudges, 2 right (rows 1, 2) and 9 wrong (4 product skills' own text; 5 examples or a domain's own tool). `taught-rule.holds-beyond-one-project` made 45 nudges, all wrong.
+- Owner, 3 Nov: "yes placement is alkso not good name come kup with better name"; review 842d1327, q3a–q3c. The owner chose `general-skill.product-workflow` and set the naming standard (4 Nov, decision 4: "namespace 2-3 words and rule 3-8 words"); the full name `general-skill.overfits-to-product-workflow` follows it and was approved ("2 names is good").
+- Evidence note 12 (was E12): on 1 Nov placement made 11 nudges, 2 right (rows 1, 2) and 9 wrong (4 product skills' own text; 5 examples or a domain's own tool). `general-skill.taught-rule-overfits-to-one-project` made 45 nudges, all wrong.
 - Inventory: SM017–SM019 (PR166's literal storage blacklist, "complelyt overfitted slop no generalzieable rules"), SM046 (PR187, "you see how that was a huge generlizaiotn faikure?").
 
 </details>

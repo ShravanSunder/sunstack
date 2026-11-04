@@ -20,13 +20,13 @@ While a rule is `nudging`, its entry names at least one mistake (an inventory re
 
 `kind: obligation · capability: rule-making · links: U10, E3, C1, V2 · status: authorized`
 
-Each rule's state is the one [U10](../requirements/rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) gives it: kept rules nudge once R18 holds; rework-first rules are `held` until reworked and re-tested; `question.names-field` is `dropped` and gives no result; `general-skill.sends-agents-into-product-workflow` is renamed `general-skill.sends-agents-into-product-workflow` and keeps its standard. A rule the owner hasn't decided stays `held`.
+Each rule's state is the one [U10](../requirements/rule-making.md#u10-the-rule-list-follows-what-the-owner-decided-rule-by-rule) gives it: kept rules nudge once R18 holds; rework-first rules are `held` until reworked and re-tested; `question.names-field` is `dropped` and gives no result; `general-skill.overfits-to-product-workflow` is renamed `general-skill.overfits-to-product-workflow` and keeps its standard. A rule the owner hasn't decided stays `held`.
 
-### R3: Behavior-only mistakes are listed, and no text rule claims them
+### R3: The review skill passes two evals, and behavior-only mistakes stay listed
 
-`kind: obligation · capability: rule-making · links: U12, E4, E11, V3 · status: proposed`
+`kind: obligation · capability: rule-making · links: U12, E11, E14, V3 · status: authorized`
 
-Each `behavior-only` mistake episode in the inventory appears once in the behavior-test candidate list with its records and sources. If a text rule checks that a skill teaches one of those behaviors, then its nudge says it judged the teaching, never that an agent did or didn't do the behavior.
+Each of the two evals in [U12](../requirements/rule-making.md#u12-the-review-skill-is-proven-by-two-real-evals) passes: the agent's review records the rules' run, the expected nudge (at `ops-observability-stack/SKILL.md:17` for #187; at the storage rule for PR166), and a decision about it that answers the broader question (does this content belong in AgentStudio's own repository? is this rule one project's stack?), not only "made the rule pass". Each behavior-only mistake episode in the inventory appears once in the behavior list with its sources, and no text rule's nudge claims an agent did or didn't do a behavior.
 
 ### R4: Rule files get nudges
 
@@ -52,6 +52,6 @@ Opening any rule shows, without running it: its name and state; the mistake(s) o
 | --- | --- | --- | --- |
 | V1 | R1 | every `nudging` judged rule cites a mistake that exists at its locator; a judged rule with no citation is `held` and listed | the inventory, git history, GitHub PRs |
 | V2 | R2 | each rule's state equals U10's table; `question.names-field` gives no result in a run | U10 and the owner's review records |
-| V3 | R3 | every inventory episode marked text-checkable `no` is in the list exactly once; no nudge message claims an agent behavior | the inventory |
+| V3 | R3 | on #187 and PR166, the subject's review names the expected nudge with a decision on the broader question, and the judge (Jev, else Terra medium) passes it; a review that only makes the rule's property hold fails | #187's chain; PR166 and the owner's general version ("use teh repo techonolgoy or ask") |
 | V4 | R4 | real rule-file questions that ask two things or mismatch their criteria get a nudge; real ones that don't, don't | real rule files, current and in history |
 | V5 | R5 | no skill-specific word in the engine change; the kind judgment is declared in this repository's config | the `sunstack-tools` diff and release |

@@ -22,35 +22,10 @@
 <h1>Decisions and status</h1>
 <p>Skill rules design, 4 Nov. Open items first, then what's decided, what's dropped, and everything you said with its status.</p>
 
-<h2 id="open">Open: 2 items</h2>
+<h2 id="open">Open: none</h2>
+<p>You answered the last two on 4 Nov (review a42f545e). They are now under Decided.</p>
 
-<ex-choice id="o-names" title="Open 1: names for the general-skill rules">
-  <ex-option id="o-names-overfits" title="`general-skill.overfits-to-product-workflow` and two more (recommended)">
-    <template slot="summary">
-Section check: `general-skill.overfits-to-product-workflow`. Description check: `general-skill.description-overfits-to-one-product`. Taught-rule check: `general-skill.taught-rule-overfits-to-one-project`.
-    </template>
-  </ex-option>
-  <ex-option id="o-names-yours" title="**Other names**: write them in Comments">
-    <template slot="summary">
-Namespace 2–3 words, rule 3–8 words.
-    </template>
-  </ex-option>
-</ex-choice>
-
-<ex-choice id="o-a" title="Open 2: is this what you meant on A?">
-  <ex-option id="o-a-yes" title="**Yes**">
-    <template slot="summary">
-Eval: the review agent starts the way a Lead launches it, with a real commission and real session data. Unit test: Jev reads only the real skill text, because that's all a rule sees when it runs; the real session decides the right answer.
-    </template>
-  </ex-option>
-  <ex-option id="o-a-no" title="**No**: say what's off in Comments">
-    <template slot="summary">
-For example, Jev should also read session data in unit tests.
-    </template>
-  </ex-option>
-</ex-choice>
-
-<h2 id="decided">Decided: 13 items</h2>
+<h2 id="decided">Decided: 15 items</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>Item</th><th>Decision</th></tr></thead>
@@ -63,6 +38,8 @@ For example, Jev should also read session data in unit tests.
 <tr><td>Examples</td><td>Only a labelled example stays quiet; made-up product-like examples and quoted real mistakes get a nudge</td></tr>
 <tr><td>Bars</td><td>Each rule tunes its own from its cases; no overrides</td></tr>
 <tr><td>Rule names</td><td>Namespace 2–3 words, rule 3–8 words; 12 rules renamed</td></tr>
+<tr><td>General-skill names</td><td>general-skill.overfits-to-product-workflow (sections), general-skill.description-overfits-to-one-product (descriptions), general-skill.taught-rule-overfits-to-one-project (taught rules); every one judges only general skills</td></tr>
+<tr><td>What the eval agent gets</td><td>A real Lead commission and real session data; unit tests read skill text only</td></tr>
 <tr><td>Made-up test skills</td><td>Replaced with real pinned skills in this change</td></tr>
 <tr><td>Model</td><td>One AI model (Jev) answers every question in a run</td></tr>
 <tr><td>Engine's skill-aware loader</td><td>Later work</td></tr>
@@ -90,7 +67,7 @@ For example, Jev should also read session data in unit tests.
 </table>
 </div>
 
-<h2 id="said">Everything you said: 33 answers</h2>
+<h2 id="said">Everything you said: 35 answers</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>Date</th><th>Where</th><th>Question</th><th>Your answer or words</th><th>Status</th></tr></thead>
@@ -102,7 +79,7 @@ For example, Jev should also read session data in unit tests.
 <tr><td>3 Nov</td><td>decision page</td><td>Placement row 12</td><td>wait for a real case</td><td>Decided</td></tr>
 <tr><td>3 Nov</td><td>decision page</td><td>Test floor</td><td>3 real mistakes, 3 good texts, 3 near misses, plus held-back</td><td>Decided</td></tr>
 <tr><td>3 Nov</td><td>decision page</td><td>Keep or rework each rule</td><td>per-rule picks; on always-earned: “this depends on teh skill text no?”</td><td>Replaced by the 4 Nov drops</td></tr>
-<tr><td>3 Nov</td><td>chat</td><td>Placement's name</td><td>“placement is alkso not good name come kup with better name”</td><td>Open (names)</td></tr>
+<tr><td>3 Nov</td><td>chat</td><td>Placement's name</td><td>“placement is alkso not good name come kup with better name”</td><td>Decided</td></tr>
 <tr><td>3 Nov</td><td>chat</td><td>Real mistakes</td><td>“go over all the times we created skilsl in teh last 3 months ... make a inventoryk”</td><td>Decided</td></tr>
 <tr><td>3 Nov</td><td>chat</td><td>Only general skills</td><td>“the skill shodu only trigger on gneeral skilsl how will you filter”</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>design page</td><td>Decision 1</td><td>build behavior tests now</td><td>Replaced: unit tests plus 2 evals</td></tr>
@@ -125,18 +102,22 @@ For example, Jev should also read session data in unit tests.
 <tr><td>4 Nov</td><td>design page</td><td>B</td><td>#187's line 17 and PR166</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>design page</td><td>Decision 2 again</td><td>merge both</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>design page</td><td>Decision 5 again</td><td>in this change</td><td>Decided</td></tr>
-<tr><td>4 Nov</td><td>design page</td><td>Name again</td><td>“overfits-to-product-workflow? or soemthign better”</td><td>Open (names)</td></tr>
-<tr><td>4 Nov</td><td>design page</td><td>A</td><td>“a review agent is lauched by lead, it definetly has intpus and sesison data.  lets clarify”</td><td>Open (A)</td></tr>
+<tr><td>4 Nov</td><td>design page</td><td>Name again</td><td>“overfits-to-product-workflow? or soemthign better”</td><td>Decided</td></tr>
+<tr><td>4 Nov</td><td>design page</td><td>A</td><td>“a review agent is lauched by lead, it definetly has intpus and sesison data.  lets clarify”</td><td>Decided</td></tr>
 <tr><td>4 Nov</td><td>design page</td><td>C</td><td>“the eval passes with jev and judge model if jev is undecided and we use a terra medium / luna high is the subject”</td><td>Decided</td></tr>
+<tr><td>4 Nov</td><td>decisions page</td><td>Names</td><td>general-skill.overfits-to-product-workflow and two more</td><td>Decided</td></tr>
+<tr><td>4 Nov</td><td>decisions page</td><td>A</td><td>Yes</td><td>Decided</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="asked">Your questions: 7</h2>
+<h2 id="asked">Your questions: 9</h2>
 <div class="ex-table-scroll" data-width="canvas">
 <table>
 <thead><tr><th>You asked</th><th>Answer</th></tr></thead>
 <tbody>
+<tr><td>“what does this mean?” (a taught rule that fits one project only)</td><td>A rule a general skill teaches that is really one project's habit, like PR166's “don't use ctx.storage, node:sqlite or Kysely”. The general version is yours: use the repository's technology or ask.</td></tr>
+<tr><td>“make sure general skills are only invoked as rukles for genaearal skills”</td><td>Done: every general-skill rule judges only skills whose work is for any repository; never a product skill or tool manual.</td></tr>
 <tr><td>“what does 3 real mistakes mean i didnt udnantd?”</td><td>Each rule needs at least 3 real past mistakes it would have caught.</td></tr>
 <tr><td>“what is main path spine?”</td><td>A rule checking that a skill's main file shows the route from start to done. Dropped.</td></tr>
 <tr><td>“modle is decsision_model?” / “what Yo mean model?”</td><td>The AI that answers a rule's question: Jev.</td></tr>

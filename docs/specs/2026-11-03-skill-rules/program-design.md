@@ -226,9 +226,9 @@ Our config sets `assessments.work_scope` with options `any_repository`, `one_too
 | `skill-description.starts-with-use-when`, `.length-warning`, `.length-limit` | `skill` | none | case record only (mechanical) |
 | `skill-description.names-the-loading-moment`, `.trigger-only` | `skill` | none (R16) | cases from history |
 | `description.always-earned` | — | — | dropped (owner): entry and marker removed; nothing flags "Always" |
-| `general-skill.sends-agents-into-product-workflow` (was `general-skill.sends-agents-into-product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; cases from U16's rows; quiet cases from general skills |
-| `general-skill.description-loads-for-one-product` (was `description.product-loading`, K007) | `skill` | `work_scope ∈ {any_repository}` | renamed; the general-skill standard's description check (owner decision 2) |
-| `taught-rule.holds-beyond-one-project` (was `rule.generalization`, K001) | `section` | `work_scope ∈ {any_repository}` | renamed; its own rule, redone with its filter (owner decision 2) |
+| `general-skill.overfits-to-product-workflow` (was `placement.product-workflow`, K003 in calls-and-placement) | `section` with table rows and loaded openings | `work_scope ∈ {any_repository}` | renamed; the family's section check; cases from U16's rows; quiet cases from general skills |
+| `general-skill.description-overfits-to-one-product` (was `description.product-loading`, K007) | `skill` | `work_scope ∈ {any_repository}` | renamed; the general-skill standard's description check (owner decision 2) |
+| `general-skill.taught-rule-overfits-to-one-project` (was `rule.generalization`, K001) | `section` | `work_scope ∈ {any_repository}` | renamed; the family's taught-rule check, redone with its filter (owner decision 2, merge both) |
 | `load-call.names-when-where-and-result`, `skill-branch.names-an-observable-condition` | `load`, `branch` | none | cases from history |
 | `completion.criterion` | — | — | dropped for now (owner decision 7); a follow-up rethinks it |
 | `reference.teaching-depth`, `guidance.positive`, `main-path.spine` | — | — | dropped for now (owner): entries and markers removed |
@@ -291,6 +291,19 @@ No concurrency: a run is one process over one commit. No migration of stored use
 - **Public repository:** case reasons may quote the owner's words and cite local paths (owner's standing rule); no credentials, account details or private notes. The OpenRouter key stays in the existing runner wrapper.
 - **Security, privacy beyond that, accessibility, performance targets:** not applicable; nothing user-facing or networked changes.
 
+## The two evals
+
+| Part | Home | Shape |
+| --- | --- | --- |
+| eval case | `tests/skills/evals/review-skill/` (new), one folder per case | `case.json`: `{ id, example: { repository, commit, paths }, commission: <the real commission text>, session_input: <the real session excerpt>, expected: { nudge: { rule, file, line }, broader_question: string } }` |
+| subject run | existing `skill-pressure-evaluation/agent-execution/acpx-codex-agent-runner.ts`, configured by `runtime-configuration` | model `gpt-6-luna`, effort `high`, in a throwaway checkout at `example.commit` with the plugins installed; prompt = the commission plus the session input |
+| review | the file the subject writes under its run folder | Markdown, the review skill's own artifact |
+| Jev grade | `tests/skills/evals/review-skill/review-grade.rules.json` (new rulebook) run by `sunstack lint` over the review | one judged rule: does the review record the expected nudge and a decision that answers `broader_question`? `warn` finding = fail; pass = pass; `uncertain` = undecided |
+| Terra judge | existing `evaluators/semantic/acpx-judge-harness.ts` | runs only when Jev is undecided; model Terra, effort `medium`; returns pass or fail with a reason |
+| verdict | vitest-evals result per case | `passed \| failed \| undecided \| incomplete` (E14) |
+
+The pass condition lives in the case (expected nudge and broader question), so the judge never invents it. The evals run on demand (`pnpm --dir tests/skills test:evals`), not in every rule run.
+
 ## The skills that teach it
 
 | Skill (run) | Teaches | Requirements |
@@ -311,7 +324,7 @@ No concurrency: a run is one process over one commit. No migration of stored use
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | U9 | R1 (rule-making) | E3, E4 | runner | rule state derivation | `ruleRecord.reasons` in `*.cases.json` | `held: no_reason` | no reason → held | case report per rule |
 | U10 | R2 (rule-making) | E3 | owner via case file | `ruleRecord.decision` | `ownerDecision` enum | held / dropped | undecided → held | case report vs U10 |
-| U12 | R3 (rule-making) | E4, E11 | Lead | list file | `behavior-candidates.json` | listed | — | inventory vs list |
+| U12 | R3 (rule-making) | E11, E14 | eval harness | `tests/skills/evals/review-skill/` | `case.json`, review, verdict | E14 states | subject or judge failure → incomplete | the two evals; the behavior list |
 | U8 | R4 (rule-making) | E3, E7 | rulebook `domain-decision-models` | lint over `*.rules.json` (v0.6.0 JSON lint) | existing `rule_question` kind | — | JSON parse failure isolated (v0.6.0) | real rule-file cases |
 | U11 | R5 (rule-making) | none: engine boundary | engine | owner assessment config + `requires` | generic config sections | — | — | engine diff and release |
 | U1 | R6 (nudges) | E7, E2 | runner formatter over the engine finding | `formatLintReport` | the nudge rendering table | — | — | line-17 run plus a second real nudge and a non-nudged control |
@@ -325,7 +338,7 @@ No concurrency: a run is one process over one commit. No migration of stored use
 | U13 | R14 (skill-kinds) | E3, E5 | engine gate | `requires` | `{assessment, accept}` | — | outside accept → not_applicable | 1 Nov product-skill nudges |
 | U14 | R15 (skill-kinds) | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
 | U15 | R16 (skill-kinds) | E1 | rulebook | no `requires` on description rules | — | — | — | hidden skills' results |
-| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement (+ descriptions, generalization if A-2) | `general-skill.sends-agents-into-product-workflow` entries | rule entries + cases | per rule | — | U16's rows as cases |
+| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement, descriptions-and-invocation, generalization | the three `general-skill.*` entries, each with `requires work_scope accept [any_repository]` | rule entries + cases | per rule | — | U16's rows as cases; no result on a product skill or tool manual |
 | U17 | R18 (rule-tests) | E3, E8 | runner | rule state derivation + case-run receipt | `RuleState`, `HeldReason`, `caseRunReceipt` | held / nudging | missing, incomplete or changed receipt → held | case report; a change after a passing run |
 | U17 | R19 (rule-tests) | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
 | U18 | R20 (rule-tests) | E9 | rulebook author; runner checks | step bar fields + `ruleRecord.bars` | `barSource` with values | starting / tuned | starting or changed → held | values vs recorded values; no override key |
@@ -338,7 +351,9 @@ No concurrency: a run is one process over one commit. No migration of stored use
 
 1. Engine: owner assessment and `requires`, released (its own design and PR in `sunstack-tools`).
 2. This repository: `*.cases.json` cutover with every expectation migrated; runner state derivation and held filter; evidence fixes (branch block, table rows); `names-field`, `always-earned`, `reference.teaching-depth`, `guidance.positive`, `main-path.spine` and `completion.criterion` removed; general-skill rename; mined cases added; config `owners` and `work_scope` once the release is pinned.
-3. The teaching skills (the table above).
+3. The runner's tests move off made-up sample skills: `tests/skills/fixtures/run-skill-rules/` is replaced with Git-pinned real skills, read through `pinned-source.ts` like the rule cases (owner decision 5, in this change).
+4. The two evals of the review skill.
+5. The teaching skills (the table above).
 
 ## Deviations and unresolved
 

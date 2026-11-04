@@ -152,6 +152,18 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | `listed` |
 | canonicalizes | "behavior replay", "behavioral scenario" |
 
+### E14: Eval
+
+`kind: entity · status: authorized · basis: U12`
+
+| Slot | Meaning |
+| --- | --- |
+| identity rule | one real example change plus one subject run of the review skill on it |
+| relationships | has one subject (Luna, high effort), one real commission and session input, one review it writes, one verdict |
+| invariants | the subject starts the way a Lead launches a review agent; the example is a real change at a pinned commit |
+| observable states | `passed`, `failed`, `undecided` (Jev undecided and the Terra judge not yet run), `incomplete` (the run or a judge failed) |
+| canonicalizes | "eval", "integration test" (the owner's correction: "this is a normal eval not integraiton test") |
+
 ### E12: Disposition
 
 `kind: entity · status: authorized · basis: U6`

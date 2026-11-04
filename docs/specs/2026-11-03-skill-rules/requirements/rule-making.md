@@ -34,9 +34,9 @@ The rules that exist, and what happens to each, are the owner's decisions of 2 a
 | `completion.criterion` | drop for now, with a follow-up to rethink it (owner, 4 Nov (review 00facfd0 of the design page), decision 7: "listen we can do better what the fuck does this rule do ... can be follow up to focus on this") |
 | `reference.teaching-depth`, `guidance.positive` | drop for now (owner, 3 Nov: "we can remove teachign depth for now. and guidance positive") |
 | `main-path.spine` | drop for now (owner, 3 Nov: "ah lets drop it for now") |
-| `general-skill.sends-agents-into-product-workflow` | rename (now the general-skill rules, U16) and keep, nudging per U16 |
-| `general-skill.description-loads-for-one-product` | keep, as the general-skill standard's description check (owner, 4 Nov (review 00facfd0 of the design page), decision 2); held until the kind filter and its tests exist |
-| `taught-rule.holds-beyond-one-project` | keep as its own rule; redo the filter and the rule ("we need to redo teh filter and teh rule"; owner, 4 Nov (review 00facfd0 of the design page), decision 2) |
+| `general-skill.overfits-to-product-workflow` | keep: the general-skill family's section check (was placement) |
+| `general-skill.description-overfits-to-one-product` | keep: the family's description check (was product-loading); held until the kind filter and its tests exist |
+| `general-skill.taught-rule-overfits-to-one-project` | keep: the family's taught-rule check (was generalization), redone with its filter ("we need to redo teh filter and teh rule"); merged into the family by owner, 4 Nov (reviews 08411599 and a42f545e), decision 2 "merge both" |
 | `question.names-field` | drop ("ok iname fiels seem suelss") |
 | `rule-question.asks-exactly-one-thing`, `rule-question.criteria-answer-the-same-question` | held until old rule files give tests (the Lead's call; they overlap and may merge) |
 
@@ -49,16 +49,16 @@ Review 842d1327 of `rule-decisions-2026-11-03.html`, q4 (per-rule), q3a–c (pla
 
 </details>
 
-### U12: Behavior that skill text cannot show is listed, not made into a text rule
+### U12: The review skill is proven by two real evals
 
-`kind: requirement · capability: rule-making · links: U9 · status: proposed (the Lead's reading of the inventory; for the owner to confirm)`
+`kind: requirement · capability: rule-making · also serves: nudges, rule-tests · status: authorized`
 
-Where the owner's mistake is about what an agent did (it didn't run the check for real, it drifted from the ask, it used the wrong role), a rule over skill text can at most check that the skill teaches the behavior. The episode itself is recorded as a behavior-test candidate, with its source, for the later evals work. It is not built in this change (see the Boundary's first non-goal), and a text rule never claims to have caught the behavior.
+Two evals run the review skill the way a Lead launches a review agent: a Luna agent on high effort gets a real commission and the real session data, reviews a real change, and writes its review. One change is #187's line 17 (AgentStudio's debug loop in a general skill); the other is PR166's storage rule. Jev judges each review; when Jev is undecided, a Terra judge on medium effort decides. The owner's other "what the agent did" mistakes (checks not run for real, drifting from the ask, the wrong role) stay listed with their sources for later evals; no text rule claims to catch them.
 
 <details>
-<summary>Why this is proposed, not authorized</summary>
+<summary>Authority</summary>
 
-The owner wants high-value behavior tested (3 Nov comment under U9), and also put pressure tests and behavior comparisons after evals (31 Oct). Splitting "text rule that the skill teaches it" from "behavior test that the agent does it" reconciles both; it is the Lead's call and is put to the owner. The inventory's top behavior, "run the intended checks through their real path", has 7 episodes and 0 text-checkable records.
+Owner, 4 Nov: "build behavior tests now" (decision 1), clarified as "yes real scneario real ksill real session input" and "teh review skill agent calls tehse rules -> taht is the trigger it ahs isntruciotns runnign it against the exapmle and getting review artifact can be 1-3 integriaotn ests we can sue luna models"; review 08411599: "ok this is a normal eval not integraiton test.  the eval passes with jev and judge model if jev is undecided and we use a terra medium / luna high is the subject"; B: "#187's line 17 and the PR166 storage blacklist"; A: "a review agent is lauched by lead, it definetly has intpus and sesison data" (confirmed in review a42f545e).
 
 </details>
 
