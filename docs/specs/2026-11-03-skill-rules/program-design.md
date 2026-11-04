@@ -11,7 +11,6 @@ flowchart TB
     rb["rulebooks<br/>*.rules.json<br/>questions · steps · bars · kind gate"]
     cs["case files (new)<br/>*.cases.json<br/>each rule's reasons, owner decision, bar sources;<br/>its real cases"]
     runner["runner<br/>tests/skills/lib/skill-rules<br/>derives rule state · agent report · case report"]
-    skills["the teaching skills<br/>skill-rules · skill-creation · skill-review · …"]
   end
   subgraph engine["sunstack-tools (generic)"]
     lint["sunstack lint<br/>evidence · decisions · report"]
@@ -22,9 +21,8 @@ flowchart TB
   assess --> lint
   lint -->|"engine report JSON"| runner
   cs --> runner
-  runner -->|"agent report: nudges, gaps, kinds, held rules"| agent([writer · review lead · Lead])
-  runner -->|"case report: per-rule state, floor, bars"| rw([rule's writer · owner])
-  skills -.->|"teach reading and acting"| agent
+  runner -->|"agent report: nudges, gaps, kinds, held rules"| agent(["writer, taught by skill-creation<br/>review agent, taught by skill-review<br/>Lead, taught by skill-orchestrator"])
+  runner -->|"case report: per-rule state, floor, bars"| rw(["rule writer, taught by skill-rules<br/>rule reviewer, taught by decision-model-review<br/>owner"])
 ```
 
 **Who owns what.** The engine owns collection, model questions, decisions and the report, and knows nothing about skills (R5). This repository owns what a skill is (the owner units in config), the kind question, the rules, the cases and every rule's reason and owner decision. The runner owns one derived truth: each rule's state (`nudging` or `held`), computed from the owner's decision and the latest case results, and it is the only place an agent sees nudges.
