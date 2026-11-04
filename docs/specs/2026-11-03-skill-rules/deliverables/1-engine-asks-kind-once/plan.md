@@ -40,7 +40,7 @@ One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 star
 - **Reads:** engine Specification E1–E5, R6; Program Design "Where each entity lives", "Interfaces: Admission"; current-system map Q1–Q2.
 - **Writes:** `sunstack-lint/src/configuration_loading/config_contracts.rs` (`filters`), `config_validation.rs`; `sunstack-rules/src/rulebook_planning/rulebook_entry_wire.rs` (`only_when`), `rulebook_admission.rs` (filter registry input), `rule_definitions/strict_decoding.rs` (safe fields); new `filters/filter_plan.rs`.
 - **Earns:** engine V6 (OC) by `cargo nextest run -p sunstack-rules -p sunstack-lint` plus `sunstack lint --check` on each refusal fixture.
-- **Focused proof:** each R6 refusal with its field path; wrong behavior: a `per` with `**` or two captures, an `only_when` with two filters, an unknown filter or answer, accepted silently. Oracle: engine R6.
+- **Focused proof:** the documented positive config (the `kind` filter exactly as D1's design shows it, `instructions` plus five criteria) is admitted by the native Choice decoder; each R6 refusal with its field path, including a top-level `task` and a malformed inline rule reported at its own `inline_rule` path; a `reads.field` named `folder` keeps both values in the request; wrong behavior: a `per` with `**` or two captures, an `only_when` with two filters, an unknown filter or answer, accepted silently. Oracle: engine R6.
 - **Existing tests:** keep all admission tests; add cases beside them.
 - **Stop:** an admission need that changes `AdmissionRefusal`'s shape.
 

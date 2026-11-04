@@ -25,7 +25,7 @@ One new section in the rules config, and one line on a rule:
   "kind": {
     "per": "plugins/*/skills/{name}",
     "reads": { "file": "SKILL.md", "kind": "skill", "field": "description" },
-    "question": { "type": "choice", "task": "What is this skill's work for?",
+    "question": { "type": "choice", "instructions": { "task": "What is this skill's work for?" },
                   "criteria": { "general": "…", "role": "…", "domain": "…", "tool_manual": "…", "repo_specific": "…" } },
     "min_probability": 0.7
   }
@@ -38,7 +38,7 @@ One new section in the rules config, and one line on a rule:
 
 - **`per`:** ask once for each folder that matches; every checked file inside it shares the answer.
 - **`reads`:** what Jev reads to answer: the `description` field of the `skill` piece in `SKILL.md`.
-- **`question`:** a normal Jev choice question; its criteria labels are the only answers it may give.
+- **`question`:** a normal Jev choice question, in the same shape rule questions use (`instructions` plus `criteria`); its criteria labels are the only answers it may give.
 - **`min_probability`:** below this, the answer is unsure, and gated rules skip the folder.
 - **`only_when`** on a rule: run this rule only where the answer is one of these.
 

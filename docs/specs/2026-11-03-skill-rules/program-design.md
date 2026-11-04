@@ -245,7 +245,7 @@ Our config:
   "kind": {
     "per": "plugins/*/skills/{name}",
     "reads": { "file": "SKILL.md", "kind": "skill", "field": "description" },
-    "question": { "type": "choice", "task": "What is this skill's work for?",
+    "question": { "type": "choice", "instructions": { "task": "What is this skill's work for?" },
                   "criteria": { "general": "…", "role": "…", "domain": "…", "tool_manual": "…", "repo_specific": "…" } },
     "min_probability": 0.7
   }
@@ -318,7 +318,7 @@ Owner: the runner derives the state on every run from the case file, the rule fi
 | a checked file lies in no folder | engine | `no folder` gap for gated rules on that file | engine |
 | a case's commit or path no longer resolves | runner (`pinned-source.ts`) | case reported broken; its rule `held` (`failing`) | runner |
 | a fix pair's two cases sit in different sets | runner | rule `held` (`split_fix_pair`) | runner |
-| the engine release lacks filters | runner (config check fails or report lacks `filters`) | gated rules `held` (`needs_engine`) | runner |
+| the engine release lacks filters | runner (`rules --check` refuses the `filters` config section, or the report has no `filter_answers` and `filter_skips` fields; empty arrays mean the feature is present) | gated rules `held` (`needs_engine`) | runner |
 
 No concurrency: a run is one process over one commit. No migration of stored user data; the `*.expect.json` → `*.cases.json` cutover is a one-time, reviewed rewrite in the same pull request, every expectation kept.
 
@@ -393,7 +393,7 @@ Unit tests beside the new modules cover the schema, the workspace commit, the ev
 | U13 | R14 (skill-kinds) | E3, E5 | engine gate | `only_when` | `{ kind: [general, role, domain] }` | — | answer not named → not_applicable | 1 Nov product-skill nudges |
 | U14 | R15 (skill-kinds) | E5, E10 | engine + runner | gap list | `kindUnsure` gap | unsure | skip + list | boundary skills |
 | U15 | R16 (skill-kinds) | E1 | rulebook | no `only_when` on description rules | — | — | — | hidden skills' results |
-| U16 | R17 (skill-kinds) | E3, E5 | rulebooks calls-and-placement, descriptions-and-invocation, generalization | the three `general-skill.*` entries, each with `only_when: { kind: [general, role, domain] }` | rule entries + cases | per rule | — | U16's rows as cases; no result on a product skill or tool manual |
+| U16 | R17 (skill-kinds) | E3, E5 | the merged `general-skill` rulebook pair (`references/general-skill.md`, `general-skill.rules.json`; deliverable 2) | the three `general-skill.*` entries, each with `only_when: { kind: [general, role, domain] }` | rule entries + cases | per rule | — | U16's rows as cases; no result on a product skill or tool manual |
 | U17 | R18 (rule-tests) | E3, E8 | runner | rule state derivation + case-run receipt | `RuleState`, `HeldReason`, `caseRunReceipt` | held / nudging | missing, incomplete or changed receipt → held | case report; a change after a passing run |
 | U17 | R19 (rule-tests) | E8 | Lead; owner for disputes | `caseRecord.label` | enum basis + state | labelled / disputed | disputed counts toward nothing | case report |
 | U18 | R20 (rule-tests) | E9 | rulebook author; runner checks | step bar fields + `ruleRecord.bars` | `barSource` with values | starting / tuned | starting or changed → held | values vs recorded values; no override key |
