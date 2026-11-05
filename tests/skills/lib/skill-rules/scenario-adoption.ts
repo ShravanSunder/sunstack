@@ -26,7 +26,8 @@ export interface AdoptScenarioRuleRequest {
 /** Only this explicit owner-instructed command writes adoption; running scenarios never does. */
 export function adoptScenarioRule(request: AdoptScenarioRuleRequest): Adoption {
   const report = scenarioRunReportSchema.parse(JSON.parse(readFileSync(request.report, "utf8")));
-  if (!report.complete) throw new Error("Cannot adopt: scenario report is incomplete");
+  if (!report.complete || report.scope.kind !== "full")
+    throw new Error("Cannot adopt: scenario report is incomplete or set-scoped");
   const run = report.rules[request.rule];
   if (!run) throw new Error(`Cannot adopt: rule ${request.rule} was not run`);
   const config = ruleConfigSchema.parse(JSON.parse(readFileSync(request.config, "utf8")));
@@ -147,10 +148,12 @@ export function adoptScenarioRule(request: AdoptScenarioRuleRequest): Adoption {
         throw new Error(`Cannot adopt: ${scenario.id} failed or is unsure`);
     }
     for (const set of ["development", "held_back"] as const) {
+      const setResult = run[set];
       if (
-        run[set].failed.length ||
-        run[set].unsure.length ||
-        run[set].passed !== scenarios.filter((entry) => entry.set === set).length
+        setResult.state !== "scored" ||
+        setResult.failed.length ||
+        setResult.unsure.length ||
+        setResult.passed !== scenarios.filter((entry) => entry.set === set).length
       )
         throw new Error(`Cannot adopt: ${set} results failed, unsure or incomplete`);
     }
@@ -173,7 +176,13 @@ export function adoptScenarioRule(request: AdoptScenarioRuleRequest): Adoption {
     const adoption: Adoption = {
       at: new Date().toISOString(),
       by: "owner",
-      passed: `${run.development.passed}/${run.development.passed} development, ${run.held_back.passed}/${run.held_back.passed} held-back`,
+      passed: ["development", "held_back"]
+        .map((set) => {
+          const result = set === "development" ? run.development : run.held_back;
+          if (result.state !== "scored") throw new Error("Cannot adopt: set was not run");
+          return `${result.passed}/${result.passed} ${set === "held_back" ? "held-back" : set}`;
+        })
+        .join(", "),
       fingerprint,
       report: path.resolve(request.report),
     };

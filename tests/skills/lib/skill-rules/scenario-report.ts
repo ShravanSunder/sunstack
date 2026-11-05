@@ -21,19 +21,34 @@ export const scenarioSetResultSchema = z
     unsure: z.array(z.string()),
   })
   .strict();
-const scenarioGroupSummarySchema = z
+export const unrunScenarioSetSchema = z
+  .object({ state: z.literal("not_run"), scenarios: z.number().int().nonnegative() })
+  .strict();
+export const reportedScenarioSetSchema = z.discriminatedUnion("state", [
+  scenarioSetResultSchema.extend({ state: z.literal("scored") }),
+  unrunScenarioSetSchema,
+]);
+const scoredScenarioGroupSummarySchema = z
   .object({
+    state: z.literal("scored"),
     scenarios: z.number().int().nonnegative(),
     kinds: z.record(scenarioRecordSchema.shape.scenario_kind, z.number().int().nonnegative()),
     labelled: z.number().int().nonnegative(),
     disputed: z.number().int().nonnegative(),
     retired: z.number().int().nonnegative(),
-    result: scenarioSetResultSchema.nullable(),
+    result: reportedScenarioSetSchema.nullable(),
   })
   .strict();
+const scenarioGroupSummarySchema = z.discriminatedUnion("state", [
+  scoredScenarioGroupSummarySchema,
+  unrunScenarioSetSchema,
+]);
 export const scenarioRuleSummarySchema = z
   .object({
-    state: ruleStateSchema,
+    state: z.union([
+      ruleStateSchema,
+      z.object({ state: z.literal("not_assessed"), why: z.literal("set_scoped") }).strict(),
+    ]),
     sets: z
       .object({ development: scenarioGroupSummarySchema, held_back: scenarioGroupSummarySchema })
       .strict(),
@@ -47,8 +62,8 @@ export const scenarioRuleRunSchema = z
     fingerprint: z.string().regex(/^[0-9a-f]{64}$/),
     canonical_config_sha256: digestSchema.optional(),
     scenario_ids: z.array(z.string().min(1)),
-    development: scenarioSetResultSchema,
-    held_back: scenarioSetResultSchema,
+    development: reportedScenarioSetSchema,
+    held_back: reportedScenarioSetSchema,
   })
   .strict();
 export const scenarioEngineRunSchema = z
@@ -63,12 +78,18 @@ export const scenarioEngineRunSchema = z
     checkedPaths: z.array(z.string()),
     gaps: z.array(z.string()),
     rule_piece_cuts: z.array(pieceDecisionSchema),
+    rule_uncertain: lintReportSchema.shape.uncertain,
+    unresolved_selections: lintReportSchema.shape.selections,
     usage: lintReportSchema.shape.usage.nullable(),
   })
   .strict();
 export const scenarioRunReportSchema = z
   .object({
     schema_version: z.literal(1),
+    scope: z.discriminatedUnion("kind", [
+      z.object({ kind: z.literal("full") }).strict(),
+      z.object({ kind: z.literal("set"), set: scenarioRecordSchema.shape.set }).strict(),
+    ]),
     engine_version: z.string().min(1),
     model: z.string().min(1),
     complete: z.boolean(),

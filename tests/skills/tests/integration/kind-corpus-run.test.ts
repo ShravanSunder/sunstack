@@ -59,8 +59,19 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
       entry.expect === "unknown" ? "general" : entry.expect.kind,
     ]),
   );
+  let uncertainScope: "off" | "kind_corpus" | "rule_scenarios" = "off";
+  let filterAssessments = 0;
   await withJudge(
-    {},
+    (request) => {
+      const input = z.object({ questions: z.record(z.string(), z.unknown()) }).parse(request);
+      if (input.questions.filter) filterAssessments++;
+      const inCorpus = filterAssessments > 1;
+      // Same sibling question, varied only across actual separately executed source purposes.
+      return (uncertainScope === "kind_corpus" && inCorpus) ||
+        (uncertainScope === "rule_scenarios" && !inCorpus)
+        ? { loads_for_product: 0.5 }
+        : {};
+    },
     async (endpoint, requests) => {
       saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
       // Act: leave native parsing, evidence collection, filter dispatch and full marker coverage real.
@@ -176,6 +187,64 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
         ),
       ).toBe(true);
       expect(cutReport.kind_filter?.[name]?.complete).toBe(true);
+      writeFileSync(
+        path.join(root, `tests/skills/evals/rule-scenarios/fixture/${name}.scenario.json`),
+        JSON.stringify({ ...file, scenarios: [scenario] }),
+      );
+      for (const purpose of ["kind_corpus", "rule_scenarios"] as const) {
+        uncertainScope = purpose;
+        filterAssessments = 0;
+        const uncertain = await spawnCollected(
+          process.execPath,
+          [path.join(root, "tests/skills/scripts/run-rule-scenarios.ts"), name],
+          {
+            cwd: root,
+            env: {
+              ...process.env,
+              OPENROUTER_API_KEY: "synthetic-full-kind-key",
+              SUNSTACK_CREDENTIAL_STORE: "off",
+            },
+          },
+        );
+        const filename = /^Scenario report: (.+)$/m.exec(uncertain.stdout)?.[1];
+        if (!filename) throw new Error("Missing uncertain-purpose report");
+        const observed = scenarioRunReportSchema.parse(JSON.parse(readFileSync(filename, "utf8")));
+        expect(observed.results[0]?.outcome).toBe("caught");
+        expect(
+          observed.kind_filter?.[name]?.complete,
+          JSON.stringify(
+            observed.runs.map(({ purpose, engineExit, gaps }) => ({
+              purpose,
+              engineExit,
+              gaps: gaps.slice(0, 2),
+            })),
+          ),
+        ).toBe(true);
+        if (purpose === "kind_corpus") {
+          expect(uncertain.status).toBe(0);
+          expect(observed.complete).toBe(true);
+          expect(
+            observed.runs.some(
+              (run) =>
+                run.purpose === "kind_corpus" &&
+                run.engineExit === 5 &&
+                run.rule_uncertain.length > 0 &&
+                run.gaps.length === 0,
+            ),
+          ).toBe(true);
+          expect(uncertain.stdout).toContain('"rule_uncertain"');
+        } else {
+          expect(uncertain.status).toBe(5);
+          expect(observed.complete).toBe(false);
+          expect(
+            observed.runs.some(
+              (run) =>
+                run.purpose === "rule_scenarios" &&
+                run.gaps.some((gap) => gap.startsWith("uncertain ")),
+            ),
+          ).toBe(true);
+        }
+      }
     },
     (request) => {
       const input = z

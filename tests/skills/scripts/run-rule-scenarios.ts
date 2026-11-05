@@ -4,15 +4,18 @@ import {
   loadConfiguredScenarios,
   runScenarios,
   formatScenarioResult,
+  scenarioRunErrorMessage,
 } from "../lib/skill-rules/scenario-run.ts";
 import { allocateScenarioRun } from "../lib/skill-rules/scenario-output.ts";
 import { formatScenarioSummary } from "../lib/skill-rules/scenario-summary.ts";
+import type { ScenarioRecord } from "../lib/skill-rules/scenarios.ts";
 
 const repository = fileURLToPath(new URL("../../../", import.meta.url));
 const config = path.join(
   repository,
   "plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json",
 );
+let selectedSet: ScenarioRecord["set"] | undefined;
 try {
   let check = false;
   let engine = path.join(repository, "tests/skills/node_modules/.bin/sunstack");
@@ -24,6 +27,11 @@ try {
       const value = process.argv[++index];
       if (!value || value.startsWith("--")) throw new Error("--engine requires a path");
       engine = path.resolve(process.env.INIT_CWD ?? process.cwd(), value);
+    } else if (argument === "--set") {
+      const value = process.argv[++index];
+      if (selectedSet || (value !== "development" && value !== "held_back"))
+        throw new Error("--set requires development or held_back, once");
+      selectedSet = value;
     } else if (argument && !argument.startsWith("-")) names.push(argument);
     else throw new Error(`Unknown argument: ${argument}`);
   }
@@ -35,7 +43,9 @@ try {
     if (!activeNames.has(name)) throw new Error(`No active scenarios for rule: ${name}`);
   const entries = all.filter(
     (entry) =>
-      entry.scenario.status === "active" && (!names.length || names.includes(entry.scenario.rule)),
+      entry.scenario.status === "active" &&
+      (!names.length || names.includes(entry.scenario.rule)) &&
+      (!selectedSet || entry.scenario.set === selectedSet),
   );
   if (check)
     console.log(
@@ -52,6 +62,7 @@ try {
       engine,
       output,
       entries,
+      ...(selectedSet ? { set: selectedSet } : {}),
       ...(process.env.AI_DEV_SKILLS_ROOT
         ? { collectionsRoot: process.env.AI_DEV_SKILLS_ROOT }
         : {}),
@@ -64,10 +75,15 @@ try {
     for (const [rule, section] of Object.entries(report.kind_filter ?? {})) {
       console.log(`Kind filter ${rule}: ${JSON.stringify(section)}`);
     }
+    for (const run of Object.values(report.rules))
+      for (const set of ["development", "held_back"] as const) {
+        const result = run[set];
+        if (result.state === "not_run") console.log(`${set}: ${result.scenarios} not run`);
+      }
     console.log(formatScenarioSummary(report.summary));
     process.exitCode = report.exit;
   }
 } catch (error) {
-  console.error(error instanceof Error ? error.message : String(error));
+  console.error(scenarioRunErrorMessage(error, selectedSet));
   process.exitCode = 5;
 }

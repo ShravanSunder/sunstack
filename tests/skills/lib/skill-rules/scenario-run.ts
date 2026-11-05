@@ -66,6 +66,7 @@ export interface ScenarioRunRequest {
   readonly engine: string;
   readonly output: string;
   readonly entries: readonly BoundScenario[];
+  readonly set?: ScenarioRecord["set"];
   readonly collectionsRoot?: string;
   readonly scenarioRoot?: string;
   readonly repository?: string;
@@ -74,25 +75,45 @@ export interface ScenarioRunRequest {
   readonly onResult?: (result: ScenarioResult) => void;
   readonly onRun?: (run: ScenarioEngineRun) => void;
 }
+export function scenarioRunErrorMessage(error: unknown, set?: ScenarioRecord["set"]): string {
+  return set
+    ? `Cannot complete the ${set} scenario view; the custodian must validate full inputs and execution.`
+    : error instanceof Error
+      ? error.message
+      : String(error);
+}
 export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
+  try {
+    return executeScenarios(request);
+  } catch (error) {
+    // Validation details can contain identities from the population this view must not reveal.
+    if (request.set) throw new Error(scenarioRunErrorMessage(error, request.set));
+    throw error;
+  }
+}
+function executeScenarios(request: ScenarioRunRequest): ScenarioRunReport {
   const configDirectory = path.dirname(request.config);
   const original = ruleConfigSchema.parse(JSON.parse(readFileSync(request.config, "utf8")));
   prepareScenarioOutput(
     request.repository ?? fileURLToPath(new URL("../../../../", import.meta.url)),
     request.output,
   );
-  const selectedNames = new Set(
-    request.entries
-      .filter((entry) => entry.scenario.status === "active")
-      .map((entry) => entry.scenario.rule),
+  const selectedEntries = request.entries.filter(
+    (entry) =>
+      entry.scenario.status === "active" && (!request.set || entry.scenario.set === request.set),
   );
-  const gatedRules = configuredRuleFiles(request.config).flatMap((rulesFile) =>
-    Object.values(
-      z.record(z.string(), ruleDefinitionSchema).parse(JSON.parse(readFileSync(rulesFile, "utf8"))),
-    )
-      .filter((rule) => selectedNames.has(rule.name) && rule.only_when)
-      .map((rule) => ({ rulesFile, rule })),
-  );
+  const selectedNames = new Set(selectedEntries.map((entry) => entry.scenario.rule));
+  const gatedRules = request.set
+    ? []
+    : configuredRuleFiles(request.config).flatMap((rulesFile) =>
+        Object.values(
+          z
+            .record(z.string(), ruleDefinitionSchema)
+            .parse(JSON.parse(readFileSync(rulesFile, "utf8"))),
+        )
+          .filter((rule) => selectedNames.has(rule.name) && rule.only_when)
+          .map((rule) => ({ rulesFile, rule })),
+      );
   if (
     gatedRules.some(
       ({ rule }) => !rule.only_when?.kind || Object.keys(rule.only_when).length !== 1,
@@ -116,7 +137,7 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
     groups.set(identity, group);
     return group;
   };
-  for (const entry of request.entries.filter((entry) => entry.scenario.status === "active")) {
+  for (const entry of selectedEntries) {
     sourceGroup(entry.scenario.source, "rule_scenarios").entries.push(entry);
   }
   for (const scenario of kindScenarios)
@@ -228,6 +249,8 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
         const runGaps: string[] = [];
         let usage: LintReport["usage"] | null = null;
         let rulePieceCuts: LintReport["results"] = [];
+        let ruleUncertain: LintReport["uncertain"] = [];
+        let unresolvedSelections: LintReport["selections"] = [];
         try {
           if (
             result.error ||
@@ -243,16 +266,18 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
           rulePieceCuts = parsed.results.filter((piece) => (piece.cut?.length ?? 0) > 0);
           filtersAvailable = filtersAvailable || filtersSupported(parsed);
           const gaps = reportGaps(parsed, []);
+          ruleUncertain = parsed.uncertain;
+          unresolvedSelections = [...gaps.unresolved];
           runGaps.push(
             ...gaps.notRun,
             ...(purpose === "kind_corpus" ? [] : gaps.cut).map(
               (gap) => `cut ${gap.rule} ${gap.file}:${gap.first_line}: ${gap.fields.join(", ")}`,
             ),
-            ...gaps.unresolved.map(
+            ...(purpose === "kind_corpus" ? [] : gaps.unresolved).map(
               (selection) =>
                 `selection ${selection.outcome.kind}: ${selection.kind} ${selection.where.file}:${selection.where.first_line}`,
             ),
-            ...parsed.uncertain.map(
+            ...(purpose === "kind_corpus" ? [] : parsed.uncertain).map(
               (piece) => `uncertain ${piece.rule} ${piece.where.file}:${piece.where.first_line}`,
             ),
           );
@@ -306,6 +331,8 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
           purpose,
           usage,
           rule_piece_cuts: rulePieceCuts,
+          rule_uncertain: ruleUncertain,
+          unresolved_selections: unresolvedSelections,
           report,
           engineExit: result.status,
           repository: source.repository,
@@ -325,7 +352,7 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
   const version = request.engineVersion ?? engineVersion(request.engine);
   const model = original.decision_model.model;
   const rules: ScenarioRunReport["rules"] = {};
-  let complete = results.length > 0 && runs.every((run) => run.gaps.length === 0);
+  let complete = !request.set && results.length > 0 && runs.every((run) => run.gaps.length === 0);
   const canonicalDigest = canonicalConfigDigest(request.config);
   for (const rulesFile of configuredRuleFiles(request.config)) {
     const file = readRuleScenarios(rulesFile, request.scenarioRoot ?? defaultScenarioRoot);
@@ -338,19 +365,36 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
         (entry) => entry.rule === definition.name && entry.status === "active",
       );
       const sets: Pick<ScenarioRunReport["rules"][string], "development" | "held_back"> = {
-        development: { passed: 0, failed: [], unsure: [] },
-        held_back: { passed: 0, failed: [], unsure: [] },
+        development:
+          request.set && request.set !== "development"
+            ? {
+                state: "not_run",
+                scenarios: scenarios.filter((entry) => entry.set === "development").length,
+              }
+            : { state: "scored", passed: 0, failed: [], unsure: [] },
+        held_back:
+          request.set && request.set !== "held_back"
+            ? {
+                state: "not_run",
+                scenarios: scenarios.filter((entry) => entry.set === "held_back").length,
+              }
+            : { state: "scored", passed: 0, failed: [], unsure: [] },
       };
       for (const entry of scenarios) {
+        if (request.set && entry.set !== request.set) continue;
         const matches = results.filter((result) => result.id === entry.id);
         const result = matches[0];
         const set = sets[entry.set];
+        if (set.state === "not_run") continue;
         if (matches.length !== 1 || !result || result.outcome === "unsure" || result.gaps.length)
           set.unsure.push(entry.id);
         else if (result.outcome === "caught" && result.locator.kind !== "miss") set.passed++;
         else set.failed.push(entry.id);
       }
-      if (!scenarios.length || sets.development.unsure.length || sets.held_back.unsure.length)
+      if (
+        !scenarios.length ||
+        Object.values(sets).some((set) => set.state === "not_run" || set.unsure.length > 0)
+      )
         complete = false;
       rules[definition.name] = {
         fingerprint: fingerprintRule({
@@ -363,7 +407,9 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
           model,
         }),
         canonical_config_sha256: canonicalDigest,
-        scenario_ids: scenarios.map((entry) => entry.id),
+        scenario_ids: scenarios
+          .filter((entry) => !request.set || entry.set === request.set)
+          .map((entry) => entry.id),
         ...sets,
       };
     }
@@ -405,10 +451,12 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
     ruleFiles: configuredRuleFiles(request.config),
     rules,
     filtersSupported: filtersAvailable,
+    ...(request.set ? { set: request.set } : {}),
     ...(request.scenarioRoot ? { scenarioRoot: request.scenarioRoot } : {}),
   });
   const report = scenarioRunReportSchema.parse({
     schema_version: 1,
+    scope: request.set ? { kind: "set", set: request.set } : { kind: "full" },
     engine_version: version,
     model,
     complete,
