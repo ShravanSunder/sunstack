@@ -2,6 +2,7 @@ import { accessSync, constants, mkdirSync, mkdtempSync, readdirSync, writeFileSy
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import { runLintEngine } from "../lib/skill-rules/engine-runner.ts";
 import {
   assembledKinds,
   assembledRules,
@@ -9,7 +10,13 @@ import {
   formatAssembledKind,
   formatLintReport,
   lintReportSchema,
+  admittedReport,
+  filtersSupported,
 } from "../lib/skill-rules/report.ts";
+import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
+import { loadConfiguredScenarios } from "../lib/skill-rules/scenario-run.ts";
+import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
+import { engineVersion, loadRuleStates } from "../lib/skill-rules/rule-state.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }
@@ -93,12 +100,12 @@ function runRules(): number {
   else argumentsList.push("--all", ...options.scope.paths);
   console.log(`Reports: ${options.output}`);
   // Inherit the process environment unchanged: credential resolution belongs to the engine.
-  const result = spawnSync(options.engine, argumentsList, {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
+  const result = runLintEngine({
+    engine: options.engine,
+    arguments: argumentsList,
+    directory: repositoryRoot,
   });
-  if (result.error) throw result.error;
+  if (result.error) throw new Error(result.error);
   writeFileSync(path.join(options.output, "report.json"), result.stdout);
   if (result.stderr) {
     writeFileSync(path.join(options.output, "engine.stderr.txt"), result.stderr);
@@ -123,8 +130,27 @@ function runRules(): number {
       );
     for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
-    const report = lintReportSchema.parse(output);
-    console.log(formatLintReport(report));
+    const rawReport = lintReportSchema.parse(output);
+    const states = loadRuleStates(configPath, engineVersion(options.engine), filtersSupported(rawReport), repositoryRoot);
+    const report = admittedReport(rawReport, states);
+    const denominators = loadRuleDenominators(configPath).filter((entry) => states[entry.rule]?.state === "nudging");
+    console.log(formatLintReport(report, denominators, {states, repository: repositoryRoot}));
+    const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
+    const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
+      cwd: repositoryRoot,
+    });
+    const commit = head.status === 0 && changes.status === 0 ? head.stdout.trim() : null;
+    const accounts = listCurrentAccounts({
+      report,
+      denominators,
+      commit,
+      scenarios: loadConfiguredScenarios(configPath).map((entry) => entry.scenario),
+    });
+    writeFileSync(
+      path.join(options.output, "accounts.json"),
+      JSON.stringify({ commit, accounts }, null, 2) + "\n",
+    );
+    console.log(formatCurrentAccounts(accounts));
     if (options.scope.kind === "full" && report.status.kind === "nothing_selected") {
       console.error("GAP: full-scope run selected nothing; check the paths and configured scope.");
       return 2;

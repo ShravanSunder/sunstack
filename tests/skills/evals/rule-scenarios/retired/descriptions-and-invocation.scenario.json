@@ -1,0 +1,83 @@
+{
+  "rules": {
+    "description.always-earned": {
+      "basis": "judged",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "earned": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "descriptions-k006-case-001",
+      "rule": "description.always-earned",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-audit/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"also remvoe it, i just want to make sure always is not flagged by rules if i ask an agent to use it\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k006/case-001"
+        ],
+        "note": "Migrated descriptions-k006/case-001 (development, current): original sol-settled call not_applicable on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k006-case-002",
+      "rule": "description.always-earned",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"also remvoe it, i just want to make sure always is not flagged by rules if i ask an agent to use it\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k006/case-002"
+        ],
+        "note": "Migrated descriptions-k006/case-002 (development, current): original sol-settled call not_applicable on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

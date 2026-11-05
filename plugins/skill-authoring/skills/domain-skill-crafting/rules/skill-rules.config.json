@@ -5,8 +5,8 @@
       "rules": "descriptions-and-invocation.rules.json"
     },
     {
-      "markdown": "../references/generalization.md",
-      "rules": "generalization.rules.json"
+      "markdown": "../references/general-skill.md",
+      "rules": "general-skill.rules.json"
     },
     {
       "markdown": "../references/calls-and-placement.md",
@@ -17,23 +17,40 @@
       "rules": "main-path.rules.json"
     },
     {
-      "markdown": "../references/steering.md",
-      "rules": "steering.rules.json"
+      "markdown": "../../../../sunstack-dev/skills/domain-decision-models/SKILL.md",
+      "rules": "domain-decision-models.rules.json"
     }
   ],
   "marker_prefix": "K",
   "check": {
-    "files": ["plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/**/*.md"]
+    "files": [
+      "plugins/*/skills/*/SKILL.md",
+      "plugins/*/skills/*/references/**/*.md",
+      "plugins/*/skills/*/rules/*.rules.json"
+    ]
   },
   "evidence": {
     "ast_grep": "evidence/sgconfig.yml",
     "kinds": {
-      "workflow_section": {
-        "rule": "workflow-candidate",
-        "max_chars": 12000,
+      "skill": {
+        "rule": "skill",
+        "fields": {
+          "description": {
+            "from": "yaml",
+            "key": "description"
+          }
+        }
+      },
+      "section": {
+        "rule": "skill-section",
+        "max_chars": 30000,
         "fields": {
           "heading": {
             "from": "first_line"
+          },
+          "headings": {
+            "from": "enclosing",
+            "rule": "section-heading"
           },
           "body": {
             "from": "remainder",
@@ -41,95 +58,14 @@
               "rule": "section-heading"
             }
           },
-          "outline": {
-            "from": "same_file",
-            "rule": "heading-line"
-          }
-        },
-        "select": {
-          "question": {
-            "type": "noul",
-            "instructions": {
-              "check": "body",
-              "against": "heading",
-              "context": ["outline"],
-              "task": "Classify this section by what its OWN direct body instructs. heading is this section's first line; outline is file context only. Excluded child sections never classify the parent. A workflow advances an agent through a run or a branch recipe. Actions such as classify, admit/reject, read, load, choose, execute, check, record and return can be procedural stages; embedded requirements do not turn the procedure into a rule list. Distinguish performing checks in a procedure, whose results guide later work, from enumerating conditions or quality rules that independently must hold. A numbered or Step heading can be one execution stage when its own direct body instructs in-run action; a stage heading alone does not make a catalog of options a workflow. Decide by the direct contents and their procedural relationship, not the heading or imperative wording alone."
-            },
-            "criteria": {
-              "true": "The direct body directs actions an agent performs during a run, with an intelligible progression from earlier work or admission through later work or a returned result, including a branch-specific recipe. Admission/routing and ordered verification/checking procedures count; not every action must mutate files and branches may stop early. Alternatively, a numbered or Step heading and its direct instructions constitute one action stage of that run.",
-              "false": "The list enumerates independent rules, principles, safety/quality conditions, options, references, examples or templates, rather than a procedure that advances the run. Numbering, imperative verbs or a nearby workflow alone do not establish progression. A list that restates at a glance the steps the outline shows the file teaching under their own step headings is a summary, not the workflow, and a list whose items are the parts of one reply, message or artifact the agent gives at once is that output's contents, not stages of a run."
+          "targets": {
+            "from": "target",
+            "regex": "(?:load|dispatch)\\s+`([^`]+)`",
+            "resolve": "path_or_skill",
+            "opening_chars": 3000,
+            "exclude": {
+              "rule": "section-heading"
             }
-          },
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
-          "shared": ["outline"]
-        }
-      },
-      "step": {
-        "rule": "step-candidate",
-        "within": ["workflow_section"],
-        "fields": {
-          "heading": {
-            "from": "capture",
-            "regex": "^(?:#{1,6}\\s+|[0-9]+[.)]\\s+(?:\\*\\*)?)([^\\n]+)\\n?"
-          },
-          "completion": {
-            "from": "inside",
-            "rule": "completion"
-          },
-          "body": {
-            "from": "remainder"
-          }
-        }
-      },
-      "skill": {
-        "rule": "skill",
-        "fields": {
-          "description": {
-            "from": "yaml",
-            "key": "description"
-          },
-          "steps": {
-            "from": "same_file",
-            "kind": "step"
-          }
-        }
-      },
-      "skill_target": {
-        "rule": "skill",
-        "fields": {
-          "description": {
-            "from": "yaml",
-            "key": "description"
-          }
-        }
-      },
-      "skill_body": {
-        "rule": "skill-body",
-        "max_chars": 12000,
-        "fields": {
-          "body": {
-            "from": "remainder"
-          },
-          "outline": {
-            "from": "same_file",
-            "rule": "heading-line"
-          },
-          "numbered_first_lines": {
-            "from": "same_file",
-            "rule": "numbered-first-line"
-          },
-          "completion_first_lines": {
-            "from": "same_file",
-            "rule": "completion-first-line"
-          },
-          "numbered": {
-            "from": "same_file",
-            "rule": "workflow-candidate"
-          },
-          "workflows": {
-            "from": "same_file",
-            "kind": "workflow_section"
           }
         }
       },
@@ -143,11 +79,11 @@
             "from": "target",
             "regex": "`([^`]+)`",
             "resolve": "path_or_skill",
-            "as_kind": "skill_target"
+            "as_kind": "skill"
           },
-          "step": {
+          "headings": {
             "from": "enclosing",
-            "kind": "step"
+            "rule": "section-heading"
           }
         }
       },
@@ -157,50 +93,23 @@
           "line": {
             "from": "first_line"
           },
-          "step": {
-            "from": "enclosing",
-            "kind": "step"
-          }
-        }
-      },
-      "standards_section": {
-        "rule": "standards-section",
-        "fields": {
-          "heading": {
-            "from": "first_line"
-          }
-        }
-      },
-      "sentence": {
-        "rule": "sentence-unit",
-        "within": ["step", "standards_section"],
-        "fields": {
-          "body": {
-            "from": "remainder"
-          },
           "headings": {
             "from": "enclosing",
             "rule": "section-heading"
+          },
+          "block": {
+            "from": "next",
+            "rule": "colon-block",
+            "count": 1
           }
         }
       },
-      "reference_section": {
-        "rule": "reference-section",
-        "max_chars": 8000,
+      "rule_question": {
+        "rule": "rule-question",
+        "max_chars": 6000,
         "fields": {
-          "heading": {
-            "from": "first_line"
-          },
           "body": {
             "from": "remainder"
-          },
-          "outline": {
-            "from": "same_file",
-            "rule": "heading-line"
-          },
-          "opening": {
-            "from": "same_file",
-            "rule": "reference-opening"
           }
         }
       }
@@ -211,8 +120,10 @@
   },
   "limits": {
     "evidence_max_chars": 6000,
-    "request_max_chars": 20000,
-    "max_model_requests": 5000,
-    "max_concurrent_requests": 8
+    "request_max_chars": 50000,
+    "max_model_requests": 9000,
+    "max_concurrent_requests": 8,
+    "max_matches": 20000,
+    "max_input_tokens_per_request": 50000
   }
 }

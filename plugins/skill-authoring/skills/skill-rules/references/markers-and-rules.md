@@ -1,6 +1,6 @@
 # Markers and Rules
 
-This reference owns steps 4 to 6: where each marker goes, writing the rule entry that step 3 designed, pairing the rulebook in the rules config, and repairing what the check refuses. Expected input: the deterministic and model-judged standards from step 2, each with its `path:line`, evidence kind and gate, and step 3's design for each. Return, per standard: its host and marker, its rule entry, and any change to the config's rulebook pairs or evidence kinds; for each refusal, its cause and the fix.
+This reference owns steps 4 to 6: where each marker goes, writing the rule entry that step 3 designed, pairing the rulebook in the rules config, and repairing what the check refuses. Expected input: the deterministic and model-judged standards from step 2, each with its `path:line`, evidence kind and gate, and step 3's design for each. Return, per standard: its host and marker, its rule entry with its nudge fields, and any change to the config's rulebook pairs or evidence kinds; for each refusal, its cause and the fix.
 
 Everything below matches the engine's lint documentation and its refusal messages. When the working repository's engine docs say something different, they win.
 
@@ -20,7 +20,7 @@ Mark a section only when the whole section is one standard and its visible words
 
 Before marking, read the host as if it were the only text a judge will see. Good: it states one standard, with its subject. Bad: it starts mid-thought, leans on a lead-in outside the host, or carries several standards.
 
-- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` holds dozens of standards. Mark the list item at `:26` for call completeness; the dispatch items and the citation items below it are separate candidates.
+- `domain-skill-crafting`'s `## Standards` section in `references/calls-and-placement.md` holds dozens of standards. Mark the list item at `:27` for call completeness; the dispatch items and the citation items below it are separate candidates.
 - An item such as "starts with `Use when` unless the platform requires another shape;" under the lead-in line "A good `description`:" reads as a fragment, because its subject sits in the lead-in. Return it for a rewrite that carries its subject, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`; or mark a complete host that carries exactly one standard. `domain-skill-crafting/references/descriptions-and-invocation.md:6` shows the complete form: "A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`."
 - A paragraph that carries five standards, like `skill-design/SKILL.md:79`, is no narrow host for any of them. Split it in the teaching first.
 
@@ -55,7 +55,8 @@ The rules file is one strict JSON object keyed by marker ID, paired with exactly
 - `evidence`, one kind the config defines;
 - `questions`, the questions the decision may ask, keyed by name; a purely mechanical entry has none;
 - `decision`, a `start` step and named `steps`;
-- `severity`, `warn` or `error`. A mechanical limit the standard says must hold is `error`; a judged rule stays `warn` until its rule tests show it accurate and someone with the authority decides it may block.
+- `related`, optionally: the kind's fields whose places every finding of the entry lists for the agent to read next;
+- `severity`, `warn` (the default, and the nudge) or `error`. The engine keeps the severity you author and reports each result's `basis` beside it. Our rules author `error` only where every path to the finding is mechanical, such as a limit the standard says must hold, and `warn` wherever a path reads a model's answer, a gate included, however accurate its rule tests.
 
 Step 3 decided what goes in each field; this section is how it's written.
 
@@ -87,7 +88,24 @@ An in-between answer ends `uncertain`. Where the installed engine supports it, a
 
 A route is another step's name, `pass`, `not_applicable`, `uncertain`, or a finding: `{"finding": "<message>", "at": "<field>"}`, which points the finding's line at that field.
 
-What the judge receives, and when a request is sent, is a fact of the Sunstack driver; `domain-decision-models` owns it in its driver reference. `references/rule-design.md` holds a worked entry.
+## Write the nudge
+
+A finding route and its entry carry what the agent receives. Step 3's nudge design says what goes in each:
+
+- **The message** is the finding's `finding` text: what the rule observed, in one sentence. Never restate the standard in it; the report adds the standard's line as the first related place. A direction to a place the run never reads belongs in the message, worded as something to check.
+- **`at`** names the field whose first line the finding points at by default.
+- **`locate`,** on a finding route that has `at`, points the finding at the line inside the piece the observation is about: `"locate": {"name": "<locator name>", "task": "<which line?>", "min_probability": <number in (0, 1]>}`, with no other keys. When the piece's walk sends a request, the engine adds the locator to it as a Choice over the `at` field's lines that lie inside the piece, each labelled `L<line>`. When the route is reached and the selected line's probability is at least `min_probability`, that line becomes the finding's line, with `anchor: "resolved"`. Otherwise the line stays the field's first line, with `anchor: "default"`: an all-mechanical path sends no request, and a field with no line inside the piece, or more than the config's `limits.max_locate_lines`, sends no locator. The locator's `name` differs from every question's name and every other locator's, so no step can ask it; its answer appears in the row's `answers` under that name. A reply that leaves out the locator or picks a line it wasn't offered is an invalid response: the piece is `incomplete`.
+- **`severity`** on a finding route overrides the entry's for that route. The same policy holds: `error` only on a route every path to which is mechanical.
+- **`related`,** on the entry, lists the fields whose places the agent reads next. Each must be one of the kind's fields. Every finding lists the standard first, then each related field's spans in the order the entry lists them; a target field gives each loaded file whose opening the run read, from line 1 to the opening's last line.
+
+```json
+"no": { "finding": "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository.", "at": "body",
+        "locate": { "name": "product_line", "task": "Which line of body sends the agent into one named product's own workflow: its own procedures, run commands, state files or machine paths? Not a line that uses a tool or platform through its supported interface, uses the vocabulary of the subject the skill governs, names a product only as a labelled example, or uses this toolkit's own shared infrastructure.", "min_probability": 0.6 } }
+```
+
+with `"related": ["targets"]` and `"severity": "warn"` on the entry (`K003` in `calls-and-placement.rules.json`). A locator's task carries the exemptions its questions own, so it doesn't pick a line the questions would excuse.
+
+What the judge receives, and when a request is sent, is a fact of the Sunstack driver; `domain-decision-models` owns it in its driver reference. `references/rule-design.md` holds two worked entries.
 
 ## Pair the rulebook in the config
 
@@ -96,7 +114,7 @@ A correct Markdown and rules pair proves nothing until the config the repository
 1. **The config.** Find it from the runner the repository's instructions name. Open that config, not a similarly named file.
 2. **The pair.** Add `{"markdown": "<path>", "rules": "<path>"}` to `rulebook`, both paths relative to the config file. A path relative to the repository root resolves to a different place.
 3. **The prefix.** The config's `marker_prefix` must be the letter your markers use.
-4. **The evidence.** Each entry's `evidence` is a kind in the config's `evidence.kinds`, and every field its questions, mechanical checks and `at` routes name is one of that kind's fields; an `ast_grep` step names a rule the evidence project defines. A new kind or field is a change to the config and its evidence project, proved there with the evidence print before any entry relies on it.
+4. **The evidence.** Each entry's `evidence` is a kind in the config's `evidence.kinds`, and every field its questions, mechanical checks, `at` routes and `related` list name is one of that kind's fields; an `ast_grep` step names a rule the evidence project defines. A new kind or field is a change to the config and its evidence project, proved there with the evidence print before any entry relies on it.
 5. **The cap.** Your hosts were sized against the config's `max_question_words`.
 
 Then MUST load `check-and-reports.md` and return the check's outcome with its printed rules: the count and each intended rule with its marker, source line, evidence kind and severity, to judge against these signals.
@@ -125,6 +143,18 @@ A refused check prints one line per refusal, `file:line:column:`, then for an en
 | "thresholds must satisfy 0 <= no_at_or_below < yes_at_or_above <= 1", "min_probability must be in (0, 1]", "combine weights must be positive and sum to one" | a threshold out of range or inverted, or weights that don't sum to one | set the values step 3's policy table chose |
 | "start names a missing step", "route names a missing step", "decision graph contains a cycle" | the graph's shape | name existing steps, and route every path to an end |
 
+The nudge fields and JSON kinds have refusals of their own. Each names the entry and route, or the kind and field, and exits 2; take the exact wording from the refusal itself:
+
+| refusal | cause | fix at the cause |
+| --- | --- | --- |
+| `related` names an unknown field | a related field the entry's kind doesn't define | name the kind's field the agent should read next |
+| a locator without `at` | `locate` on a route that names no field | add the `at` field the locator chooses lines from |
+| a locator name that collides | the locator's `name` equals a question's or another locator's | give it a name of its own |
+| a locator's `min_probability` out of range | a bar outside (0, 1] | set the bar step 3's policy chose |
+| a target field's `exclude` names a kind | a target field's exclusion is `{"kind": ...}`; it accepts only `{"rule": ...}` | name the evidence rule whose ranges the field's own text leaves out, such as the rule that matches child sections |
+| `yaml` on a JSON kind | a JSON kind's field reads Markdown frontmatter | read the value with a source JSON admits |
+| a field naming a rule or kind of another language | a JSON kind's `inside`, `enclosing`, `same_file`, `next`, `previous` or `exclude` naming a Markdown rule or kind, or the reverse | name a rule or kind of the field's own language; only a target's `as_kind` may name either |
+
 Each of these repairs makes a refusal disappear by losing the standard; never use them:
 
 - raising `max_question_words` so an oversized section binds: it merges several standards into one verdict and raises the cost of every question in the rulebook;
@@ -132,4 +162,4 @@ Each of these repairs makes a refusal disappear by losing the standard; never us
 - moving the marker onto a neighbouring paragraph that binds but doesn't state the standard;
 - renumbering valid IDs while fixing a duplicate.
 
-Complete when: every marked standard has a bound marker on its narrowest host and exactly one entry whose decision routes every path to an end, the check's print lists every intended rule with the right count, and each refusal was fixed at the cause its message names.
+Complete when: every marked standard has a bound marker on its narrowest host and exactly one entry whose decision routes every path to an end and whose finding routes carry the nudge step 3 designed, the check's print lists every intended rule with the right count, and each refusal was fixed at the cause its message names.

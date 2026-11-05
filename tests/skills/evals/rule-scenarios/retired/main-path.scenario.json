@@ -1,0 +1,1360 @@
+{
+  "rules": {
+    "main-path.spine": {
+      "basis": "judged",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "spine": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    },
+    "completion.criterion": {
+      "basis": "judged",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "tells_done": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        },
+        "legwork": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    },
+    "guidance.positive": {
+      "basis": "judged",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "kind": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        },
+        "positive": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "steering-k001-case-001",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22,
+        "field_line": 29
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-001"
+        ],
+        "note": "Migrated steering-k001/case-001 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-002",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 56,
+        "field_line": 56
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        56
+      ],
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-002"
+        ],
+        "note": "Migrated steering-k001/case-002 (development, current): original sol-settled call finding on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-003",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 52,
+        "field_line": 57
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-003"
+        ],
+        "note": "Migrated steering-k001/case-003 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-004",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 134,
+        "field_line": 134
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        134
+      ],
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-004"
+        ],
+        "note": "Migrated steering-k001/case-004 (development, current): original sol-settled call finding on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-005",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 46,
+        "field_line": 50
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-005"
+        ],
+        "note": "Migrated steering-k001/case-005 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-006",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 24,
+        "field_line": 34
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-006"
+        ],
+        "note": "Migrated steering-k001/case-006 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-007",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 58,
+        "field_line": 58
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        58
+      ],
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-007"
+        ],
+        "note": "Migrated steering-k001/case-007 (held-out, current): original sol-settled call finding on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-008",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 75,
+        "field_line": 81
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-008"
+        ],
+        "note": "Migrated steering-k001/case-008 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-009",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 55,
+        "field_line": 67
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-009"
+        ],
+        "note": "Migrated steering-k001/case-009 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-010",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 34,
+        "field_line": 36
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-010"
+        ],
+        "note": "Migrated steering-k001/case-010 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-011",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 39,
+        "field_line": 44
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-011"
+        ],
+        "note": "Migrated steering-k001/case-011 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-012",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 156,
+        "field_line": 164
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-012"
+        ],
+        "note": "Migrated steering-k001/case-012 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-013",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 90,
+        "field_line": 92
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-013"
+        ],
+        "note": "Migrated steering-k001/case-013 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-014",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 172,
+        "field_line": 178
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-014"
+        ],
+        "note": "Migrated steering-k001/case-014 (development, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-015",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 77,
+        "field_line": 82
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-015"
+        ],
+        "note": "Migrated steering-k001/case-015 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-016",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 180,
+        "field_line": 186
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-016"
+        ],
+        "note": "Migrated steering-k001/case-016 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-017",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 167,
+        "field_line": 171
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-017"
+        ],
+        "note": "Migrated steering-k001/case-017 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-018",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 62,
+        "field_line": 68
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-018"
+        ],
+        "note": "Migrated steering-k001/case-018 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k001-case-019",
+      "rule": "completion.criterion",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 284,
+        "field_line": 290
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 4 Nov: \"listen we can do better what the fuck does this rule do ... can be follow up to focus on this\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k001/case-019"
+        ],
+        "note": "Migrated steering-k001/case-019 (held-out, current): original sol-settled call pass on step.completion. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-001",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 7,
+        "field_line": 7
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-001"
+        ],
+        "note": "Migrated steering-k002/case-001 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-002",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 15,
+        "field_line": 15
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        15
+      ],
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-002"
+        ],
+        "note": "Migrated steering-k002/case-002 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-003",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/steering.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-003"
+        ],
+        "note": "Migrated steering-k002/case-003 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-004",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 26,
+        "field_line": 26
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-004"
+        ],
+        "note": "Migrated steering-k002/case-004 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-005",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 39,
+        "field_line": 39
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-005"
+        ],
+        "note": "Migrated steering-k002/case-005 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-006",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 220,
+        "field_line": 220
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-006"
+        ],
+        "note": "Migrated steering-k002/case-006 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-007",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 30,
+        "field_line": 30
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-007"
+        ],
+        "note": "Migrated steering-k002/case-007 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-008",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/spec-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 182,
+        "field_line": 182
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-008"
+        ],
+        "note": "Migrated steering-k002/case-008 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-009",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 45,
+        "field_line": 45
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-009"
+        ],
+        "note": "Migrated steering-k002/case-009 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-010",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 222,
+        "field_line": 222
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-010"
+        ],
+        "note": "Migrated steering-k002/case-010 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-011",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9fda3d5696dde6a3f44509740b331bda5131dff1",
+        "path": "plugins/shravan-dev-workflow/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 161,
+        "field_line": 161
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-011"
+        ],
+        "note": "Migrated steering-k002/case-011 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-012",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "9fda3d5696dde6a3f44509740b331bda5131dff1",
+        "path": "plugins/shravan-dev-workflow/skills/spec-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 120,
+        "field_line": 120
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-012"
+        ],
+        "note": "Migrated steering-k002/case-012 (held-out, history): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-013",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "https://github.com/obra/superpowers",
+        "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+        "path": "skills/writing-skills/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "piece_first_line": 257,
+        "field_line": 257
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-013"
+        ],
+        "note": "Migrated steering-k002/case-013 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-014",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "https://github.com/obra/superpowers",
+        "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+        "path": "skills/writing-skills/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "piece_first_line": 258,
+        "field_line": 258
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-014"
+        ],
+        "note": "Migrated steering-k002/case-014 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-015",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "https://github.com/obra/superpowers",
+        "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+        "path": "skills/writing-skills/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "piece_first_line": 259,
+        "field_line": 259
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-015"
+        ],
+        "note": "Migrated steering-k002/case-015 (held-out, upstream): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-016",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 15,
+        "field_line": 15
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-016"
+        ],
+        "note": "Migrated steering-k002/case-016 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-017",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/skill-audit/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 59,
+        "field_line": 59
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-017"
+        ],
+        "note": "Migrated steering-k002/case-017 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-018",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 91,
+        "field_line": 91
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-018"
+        ],
+        "note": "Migrated steering-k002/case-018 (development, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-019",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/security.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 9,
+        "field_line": 9
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        9
+      ],
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-019"
+        ],
+        "note": "Migrated steering-k002/case-019 (development, current): original sol-settled call finding on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-020",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/security.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 6,
+        "field_line": 6
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-020"
+        ],
+        "note": "Migrated steering-k002/case-020 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-021",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/plan-improve-repo/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 158,
+        "field_line": 158
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-021"
+        ],
+        "note": "Migrated steering-k002/case-021 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "steering-k002-case-022",
+      "rule": "guidance.positive",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 95,
+        "field_line": 95
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: steering-k002/case-022"
+        ],
+        "note": "Migrated steering-k002/case-022 (held-out, current): original sol-settled call pass on sentence.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "question.names-field": {
+      "basis": "mechanical",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [
+        {
+          "type": "written_standard",
+          "locator": "domain-decision-models.rules.json:K001"
+        }
+      ],
+      "bars": {}
+    }
+  },
+  "scenarios": []
+}

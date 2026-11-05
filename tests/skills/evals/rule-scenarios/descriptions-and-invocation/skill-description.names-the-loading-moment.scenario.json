@@ -1,0 +1,380 @@
+{
+  "rules": {
+    "skill-description.names-the-loading-moment": {
+      "basis": "judged",
+      "decision": "keep",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "names_moment": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "descriptions-k004-case-001",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-001"
+        ],
+        "note": "Migrated descriptions-k004/case-001 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-002",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "https://github.com/mitsuhiko/agent-stuff",
+        "commit": "13bc8f87970bec8830aab0f1c0487d35aa7c0917",
+        "path": "skills/github/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-002"
+        ],
+        "note": "Migrated descriptions-k004/case-002 (development, upstream): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-003",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-003"
+        ],
+        "note": "Migrated descriptions-k004/case-003 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-004",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-004"
+        ],
+        "note": "Migrated descriptions-k004/case-004 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-005",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-005"
+        ],
+        "note": "Migrated descriptions-k004/case-005 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-006",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-006"
+        ],
+        "note": "Migrated descriptions-k004/case-006 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-007",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "https://github.com/steipete/agent-scripts",
+        "commit": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+        "path": "skills/create-cli/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        3
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-007"
+        ],
+        "note": "Migrated descriptions-k004/case-007 (held-out, upstream): original sol-settled call finding on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-008",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-008"
+        ],
+        "note": "Migrated descriptions-k004/case-008 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-009",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/spec-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-009"
+        ],
+        "note": "Migrated descriptions-k004/case-009 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-010",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-010"
+        ],
+        "note": "Migrated descriptions-k004/case-010 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-011",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "https://github.com/steipete/agent-scripts",
+        "commit": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+        "path": "skills/remote-mac/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        3
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-011"
+        ],
+        "note": "Migrated descriptions-k004/case-011 (development, upstream): original sol-settled call finding on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k004-case-012",
+      "rule": "skill-description.names-the-loading-moment",
+      "source": {
+        "repository": "https://github.com/steipete/agent-scripts",
+        "commit": "3f9e884325f219ae459daeba1d825da6f3f7ebd8",
+        "path": "skills/openai-image-gen/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        3
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k004/case-012"
+        ],
+        "note": "Migrated descriptions-k004/case-012 (development, upstream): original sol-settled call finding on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rules as nudges: design set</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Rules as nudges</h1>
+
+    <ex-callout title="What to check on this page" tone="decision" icon="test-tube">
+
+1. **The 18 rules**, in "The 18 rules, one by one". Each row says who decided it: "you" for your 2 Nov decisions, "me" for my calls.
+2. **My five calls**, in the question "Which of my calls should I undo?" near the end. Tick any you want undone.
+3. **What's still open**, in the callout after that question: how the skill filter gets built, placement's scenarios, and the nine rules with no mistake behind them.
+
+</ex-callout>
+
+    <p>Rules read skill text and leave a <strong>nudge</strong> for the agent writing or reviewing it: what looks off, where, and what to read next. The agent decides what to do. Revision 1 (31 Oct, reviewed and accepted) settled what a nudge is. Revision 2 (2 Nov) settles the rules themselves: why each one exists, which skills it judges, how sure it must be, and how it's tested. The page goes in that order: what a rule is, how one gets made, which skills it judges, how it's tested, then each rule.</p>
+
+    <h2 id="how">What a rule is</h2>
+    <p>Each box is one step; the engine does the first four, the agent does the rest.</p>
+    <ex-mermaid id="how-a-rule-works" label="How a rule works" data-width="canvas"><script type="text/plain">
+flowchart TD
+  standard["Standard<br/>what good skill text does"] --> rule["Rule<br/>names its chunk and questions"]
+  rule --> chunk["Evidence chunk<br/>the section and<br/>the files it loads"]
+  chunk --> jev["Jev<br/>answers the questions"]
+  jev --> code["Code<br/>turns answers into an outcome"]
+  code -->|"worth a look"| nudge["Nudge: warn<br/>what, where, why, read next"]
+  code -->|"mechanical rule broken"| error["Error<br/>blocks the change"]
+  code -->|"answer in between"| uncertain["Uncertain<br/>the agent decides"]
+  code -->|"holds, or not its standard"| quiet["Pass or not applicable<br/>shown with the reason"]
+  nudge --> agent["Agent<br/>reads the places, decides"]
+  error --> agent
+  uncertain --> agent
+  agent --> account["Answer per nudge<br/>fixed, kept, routed or open"]
+  class standard,rule slot1
+  class chunk,jev,code slot2
+  class nudge,error,uncertain,quiet slot3
+  class agent,account slot4
+</script></ex-mermaid>
+    <p>Blue is what we write, amber is what the engine does, teal is what the report says, violet is what the agent does. Besides the nudges, the run lists its gaps: files a rule was meant to read and didn't, pieces whose text was cut, and questions the engine couldn't settle.</p>
+
+
+    <ex-markdown id="making-a-rule" label="How a rule gets made" src="./revision-2/making-a-rule.md"></ex-markdown>
+
+    <ex-markdown id="which-skills" label="Which skills a rule judges" src="./revision-2/which-skills.md"></ex-markdown>
+
+    <ex-markdown id="tests-and-bars" label="Tests, bars and the gate" src="./revision-2/tests-and-bars.md"></ex-markdown>
+
+    <ex-markdown id="rules-one-by-one" label="The 18 rules, one by one" src="./revision-2/rules-one-by-one.md"></ex-markdown>
+
+    <h2 id="decisions">Decisions</h2>
+    <p>Your seven decisions from 2 Nov appear above, marked "you": bars set by each rule from its tests with no overrides; the skill filter read from the description; description rules on every skill; <code>guidance.positive</code> kept, reading guidance as a whole; <code>question.names-field</code> dropped; placement never firing on an example; generalization's filter and rule redone. My five calls are below. Tick any you want undone, and comment on it to say why. Their full reasons are rows D32 to D36 in the skill design's "Decision history".</p>
+
+    <ex-choice id="undo-lead-calls" title="Which of my calls should I undo?" multiple>
+      <ex-option id="d32-making-order" title="**D32** Rules are made in one order, starting from a real mistake">
+        <template slot="summary">
+Mistake, standard, which skills, tests, what it reads, questions, bars, gate. This is what `skill-rules` would teach.
+        </template>
+      </ex-option>
+      <ex-option id="d33-tests-from-history" title="**D33** Tests come from history first">
+        <template slot="summary">
+Text before a real fix must fire; text after must stay quiet. Past wrong nudges become tests. Your fixes are the answers.
+        </template>
+      </ex-option>
+      <ex-option id="d34-the-gate" title="**D34** A rule stays silent until it passes its tests">
+        <template slot="summary">
+Held rules still run in test runs and are listed in every run. This replaces picking rules to ship one by one.
+        </template>
+      </ex-option>
+      <ex-option id="d35-what-rules-read" title="**D35** Three more rules get `guidance.positive`'s fix">
+        <template slot="summary">
+`completion.criterion`, `reference.teaching-depth` and `branch.condition` were wrong because of what they read, so what they read changes.
+        </template>
+      </ex-option>
+      <ex-option id="d36-nine-rules-held" title="**D36** The nine rules with no mistake behind them stay held until you decide each">
+        <template slot="summary">
+I delete none of them on my own.
+        </template>
+      </ex-option>
+    </ex-choice>
+
+    <ex-callout title="Still open, to talk about" tone="question" icon="chat-circle">
+
+- **How the skill filter is built.** The Advisor's research is in: it needs a new engine feature, so a rule can read the skill's answer. The answers Jev can give, and what a rule does when Jev is unsure, are open.
+- **Placement's scenarios.** Every way a skill can name a product, and what placement does in each, so it never fires on an example.
+- **The nine rules with no mistake behind them,** one at a time.
+
+</ex-callout>
+
+    <h2 id="next">What happens next</h2>
+    <ol>
+      <li>We talk through placement's scenarios and the nine rules.</li>
+      <li>The skill filter's engine feature gets its own design in <code>sunstack-tools</code>.</li>
+      <li>Old mistakes are pulled from git history for each rule we keep, starting with the 167 rewritten descriptions.</li>
+      <li>Independent reviewers check this revision.</li>
+      <li>The rules are rebuilt and tested. Each rule starts nudging only once it passes.</li>
+    </ol>
+    <p>#188 stays on hold until then; nothing ships from it.</p>
+
+    <h2 id="revision-1">Revision 1, accepted 31 Oct: what a rule gives an agent</h2>
+    <p>Unchanged. It shows the nudge in action on PR 187's line, who receives nudges, and the spike that tested the placement question.</p>
+
+    <h3 id="line-17">Line 17: what happened, and what the design does</h3>
+    <p>PR 187's AgentStudio line, <code>ops-observability-stack/SKILL.md:17</code>. Every step in "What happened in PR 187" answered a narrow question; nobody asked whether the line belonged in a generic skill.</p>
+    <ex-mermaid id="line-17-flow" label="Line 17, before and after" data-width="canvas"><script type="text/plain">
+flowchart LR
+  subgraph after["What the design does"]
+    direction TB
+    a1["Placement rule<br/>the section and the file it loads"] --> a2["Nudge at line 17<br/>'routes into AgentStudio's own loop'<br/>read: agentstudio-loop.md"]
+    a2 --> a3["Writer or reviewer<br/>reads the loaded file"]
+    a3 --> a4["Routed<br/>belongs in AgentStudio's repo"]
+  end
+  subgraph before["What happened in PR 187"]
+    direction TB
+    b1["call.completeness<br/>'doesn't say what to bring back'"] --> b2["My commission<br/>'fix call completeness'"]
+    b2 --> b3["Writer<br/>adds an AgentStudio return"]
+    b3 --> b4["Review<br/>'agrees with its sources'"]
+    b4 --> b5["You<br/>'this is not generic'"]
+  end
+  class b1,b2,b3,b4,b5 slot5
+  class a1,a2,a3,a4 slot3
+</script></ex-mermaid>
+    <p>The call-completeness rule wasn't wrong; it saw a real missing return. The failure was my commission turning its nudge into "make it pass", and no rule asking about placement. In the design both rules nudge on the same line and the agent puts them together.</p>
+
+    <h3 id="who">Who gets nudges, and what they may do</h3>
+    <ex-mermaid id="who-gets-nudges" label="Who gets nudges" data-width="canvas"><script type="text/plain">
+flowchart LR
+  run["Rule run<br/>nudges, gaps, exclusions"] --> writer["Writer: skill-creation<br/>fixes in scope, routes the rest"]
+  run --> review["Review lead: skill-review<br/>verifies at the line, never fixes"]
+  run --> orch["Orchestrator: skill-orchestrator<br/>won't accept a nudge that only went quiet"]
+  run --> audit["Auditor: skill-audit<br/>read-only signal or open item"]
+  rulefile["Rule-file run<br/>nudges on the JSON rules"] --> rulewriter["Rule writer: skill-rules<br/>fixes the rule"]
+  rulefile --> rulereview["Rule reviewer: decision-model-review<br/>reviews the rule as a nudge"]
+  class run,rulefile slot3
+  class writer,review,orch,audit,rulewriter,rulereview slot4
+</script></ex-mermaid>
+
+    <h3 id="changes">What changes where</h3>
+    <p>Two pull requests, in this order. The skills need the engine's new report fields, so the engine goes first.</p>
+    <ex-mermaid id="what-changes" label="What changes, in order"><script type="text/plain">
+flowchart LR
+  engine["1. Engine pull request<br/>sunstack-tools, released as 0.6.0"] --> skills["2. Skills pull request<br/>nine skills and the rules folder"]
+  class engine slot2
+  class skills slot1
+</script></ex-mermaid>
+    <table>
+      <thead><tr><th>Where</th><th>What changes</th></tr></thead>
+      <tbody>
+        <tr><td>Engine</td><td>A nudge carries its related places (the standard, the loaded file) and can point at a line inside a section. Answers are kept on every result. Cut text is flagged, and a section only gets its own loads. Lint reads JSON, reusing the collector the engine already has.</td></tr>
+        <tr><td><code>skill-rules</code></td><td>Designing a rule as a nudge: the judgment it helps, its chunk, its questions, what it says. Reading a run: the agent's answer per nudge, and the gaps.</td></tr>
+        <tr><td><code>domain-decision-models</code></td><td>A tree that can't decide nudges or says uncertain, never passes.</td></tr>
+        <tr><td><code>decision-model-review</code></td><td>A new check: does the nudge help the agent make the right call?</td></tr>
+        <tr><td><code>skill-creation</code>, <code>skill-review</code></td><td>Act on a nudge by reading its places and deciding the broader question first.</td></tr>
+        <tr><td><code>skill-orchestrator</code>, <code>skill-audit</code></td><td>Read the new answers; a nudge that only went quiet isn't closed; the audit records signals, read-only.</td></tr>
+        <tr><td><code>skill-design</code>, <code>domain-skill-crafting</code></td><td>The placement standard, and routing standards to worth-checking rules.</td></tr>
+        <tr><td>Rules folder</td><td>Generalization over every section with its loads; a placement rule; rules over the JSON rule files.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="plan">How the work runs</h3>
+    <p>Three gates. Work in the same box runs in parallel; nothing after a gate starts before it passes. Two pull requests, one at a time: the engine's first, then the skills'.</p>
+    <ex-mermaid id="work-plan" label="How the work runs" data-width="canvas"><script type="text/plain">
+flowchart TD
+  subgraph now["1 and 2, in parallel now"]
+    direction LR
+    review1["Design review<br/>this set, independent reviewers"]
+    enginedesign["Engine design<br/>Lead writes, reviewers check"]
+  end
+  gate1{{"Gate 1<br/>both designs accepted"}}
+  subgraph build["3 and 4, in parallel"]
+    direction LR
+    enginepr["Engine pull request<br/>Sol implementer and verifier"]
+    skilltext["Skill text, runs 1 to 9<br/>Opus writer, on the branch"]
+  end
+  gate2{{"Gate 2<br/>engine 0.6.0 released"}}
+  subgraph after["5 to 8, in order"]
+    direction TB
+    rules["Rules folder and runner<br/>pin 0.6.0"]
+    proof["Rule proof<br/>labelled cases, keyed runs"]
+    gate3{{"Gate 3<br/>checks and proof in"}}
+    review2["Implementation review<br/>skills pull request"]
+    merge["You merge"]
+  end
+  now --> gate1 --> build --> gate2 --> after
+  rules --> proof --> gate3 --> review2 --> merge
+  class review1,review2 slot4
+  class enginedesign,enginepr slot2
+  class skilltext,rules,proof slot1
+  class gate1,gate2,gate3 slot3
+</script></ex-mermaid>
+    <p>Violet is review, amber is the engine, blue is the skills and rules, teal is a gate. The skill text is written during the engine's build because it only needs the engine's field names, which the engine's design fixes; the rules and their proof need the released engine. The table with who does each step is in the skill design's "How the work runs".</p>
+
+    <h3 id="spike">The spike: the placement question on real skills</h3>
+    <p>Run on today's engine before fixing the design, with expectations written down first. Reported cost about a quarter of a cent; 28 requests reported no cost.</p>
+    <table>
+      <thead><tr><th>Case</th><th>Expected</th><th>Got</th></tr></thead>
+      <tbody>
+        <tr><td>Line 17's section</td><td>nudge</td><td>nudge, but pointed at line 7 (the section start), not line 17</td></tr>
+        <tr><td>Cleanup skill's no-ask table row for AgentStudio</td><td>nudge</td><td>nudge</td></tr>
+        <tr><td>Cleanup "Prefer the project's own clean task"</td><td>no nudge</td><td>nudge, and right: it routes into AgentStudio's and Router's own clean tasks</td></tr>
+        <tr><td>The AgentStudio and Agent VM loop files</td><td>nudge</td><td>mostly missed: their sections don't say they live in a generic plugin</td></tr>
+        <tr><td>A product named only as an example</td><td>no nudge</td><td>no nudge</td></tr>
+        <tr><td>Platform contracts (Claude Code, Codex)</td><td>no nudge</td><td>no nudge</td></tr>
+        <tr><td>This toolkit's own VictoriaMetrics queries</td><td>no nudge</td><td>two false nudges: the question lacked the "a tool used through its interface" exemption</td></tr>
+      </tbody>
+    </table>
+    <p>A follow-up test on the same pieces, with each condition written down first, settled the two guesses. The tool exemption, put on the question it belongs to, removed both false nudges. But giving each section the skill's description made the AgentStudio sections pass: the description itself names AgentStudio, so it reads as "this skill is meant to cover it". So placement judges three things: every section's own text (that's what caught the AgentStudio rows written straight into the cleanup skill), every section together with the files it loads (that caught line 17 every time), and every skill's description on its own, not as context. The engine still needs to point at a line inside a section.</p>
+
+
+    <h2 id="full-design">The four design documents</h2>
+    <p>The same design in the design set's four parts, as agents and reviewers read it. Revision 2's parts above are the specification's own files.</p>
+    <ex-tabs label="Design documents" data-width="reading">
+      <section id="tab-requirements" label="Requirements" icon="file">
+        <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+      </section>
+      <section id="tab-specification" label="Specification" icon="file">
+        <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+      </section>
+      <section id="tab-skill-design" label="Skill design" icon="file">
+        <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+      </section>
+      <section id="tab-skill-verification" label="Verification" icon="file">
+        <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+      </section>
+    </ex-tabs>
+
+    <ex-presentation id="tour" title="The rules, step by step"
+      description="What a rule is, how one gets made, which skills it judges, how it's tested, the 18 rules, then the design documents.">
+      <ex-step to="how-a-rule-works">What a rule is: it reads a piece of a skill, Jev answers, code decides, and the agent gets a nudge.</ex-step>
+      <ex-step to="making-a-rule">How a rule gets made: from a real mistake to the gate.</ex-step>
+      <ex-step to="which-skills">Which skills a rule judges: Jev reads each skill's description once.</ex-step>
+      <ex-step to="tests-and-bars">Tests, bars and the gate: a rule earns its nudges.</ex-step>
+      <ex-step to="rules-one-by-one">The 18 rules, and who decided each.</ex-step>
+      <ex-step to="undo-lead-calls">My five calls: tick any to undo.</ex-step>
+      <ex-step to="line-17-flow">Revision 1: PR 187's line, before and after.</ex-step>
+      <ex-step to="requirements">Requirements: your words, R1 to R17.</ex-step>
+      <ex-step to="specification">Specification: the contract, with revision 2's parts linked.</ex-step>
+      <ex-step to="skill-design">Skill design: the runs, the decisions in force, and the order of work.</ex-step>
+      <ex-step to="skill-verification">Skill verification: how each requirement is proven.</ex-step>
+    </ex-presentation>
+  </ex-document>
+</body>
+</html>

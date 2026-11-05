@@ -1,0 +1,1937 @@
+{
+  "rules": {
+    "general-skill.taught-rule-overfits-to-one-project": {
+      "basis": "judged",
+      "decision": "rework_first",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "kind": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        },
+        "reusable": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "generalization-k001-case-001",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 9
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-001"
+        ],
+        "note": "Migrated generalization-k001/case-001 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-002",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-002"
+        ],
+        "note": "Migrated generalization-k001/case-002 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-003",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/steering.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 9
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-003"
+        ],
+        "note": "Migrated generalization-k001/case-003 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-004",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 10
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-004"
+        ],
+        "note": "Migrated generalization-k001/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-005",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 8
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-005"
+        ],
+        "note": "Migrated generalization-k001/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-006",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/platform.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 6
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-006"
+        ],
+        "note": "Migrated generalization-k001/case-006 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-007",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22,
+        "field_line": 24
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-007"
+        ],
+        "note": "Migrated generalization-k001/case-007 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-008",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 46,
+        "field_line": 48
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-008"
+        ],
+        "note": "Migrated generalization-k001/case-008 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-009",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/generalization.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22,
+        "field_line": 24
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-009"
+        ],
+        "note": "Migrated generalization-k001/case-009 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-010",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 6,
+        "field_line": 8
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: generalization-k001/case-010"
+        ],
+        "note": "Migrated generalization-k001/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-011",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 32,
+        "field_line": 40
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: generalization-k001/case-011"
+        ],
+        "note": "Migrated generalization-k001/case-011 (development, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-case-012",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 96,
+        "field_line": 114
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/case-012"
+        ],
+        "note": "Migrated generalization-k001/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h01",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 76,
+        "field_line": 76
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        80,
+        81,
+        82,
+        83,
+        85
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h01"
+        ],
+        "note": "Migrated generalization-k001/held-out-h01 (held-out, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h02",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 123,
+        "field_line": 123
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: generalization-k001/held-out-h02"
+        ],
+        "note": "Migrated generalization-k001/held-out-h02 (held-out, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h03",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 13,
+        "field_line": 13
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h03"
+        ],
+        "note": "Migrated generalization-k001/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h04",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/references/doc-roles.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 19,
+        "field_line": 19
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h04"
+        ],
+        "note": "Migrated generalization-k001/held-out-h04 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h05",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/principle-write-for-the-reader/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 13,
+        "field_line": 13
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: generalization-k001/held-out-h05"
+        ],
+        "note": "Migrated generalization-k001/held-out-h05 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "generalization-k001-held-out-h06",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 87,
+        "field_line": 87
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        89,
+        92,
+        93,
+        94,
+        95
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: generalization-k001/held-out-h06"
+        ],
+        "note": "Migrated generalization-k001/held-out-h06 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a01-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-rust/references/sqlx-sqlite.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 9
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A01, blind labellers agreed. I: The passage gives SQLite migration practices within `domain-rust/references/sqlx-sqlite.md`; the SQLx examples are scoped to that storage domain. J: The section is explicitly about SQLx and SQLite migrations, so the library-specific details are scoped to the reference's stated subject."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a02-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/patterns.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 50
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A02, blind labellers agreed. I: The visual guidance is scoped to the combined identity and timing row, and says to retrieve the matching Demistify guide for its component API. J: The guide is for HTML and Demistify artifacts, and the section says to use the matching Demistify guide for its component API."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a03-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 316
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A03, blind labellers agreed. I: These are local scaffold-project steps for the explicitly named requests to add Playwright or Vitest setup, not a universal testing judgment. J: These are local setup steps for the explicitly requested Playwright or Vitest scaffold, not claims about a reusable testing judgment."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a04-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 343
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A04, blind labellers agreed. I: The patterns are a TypeScript file-naming convention in the scaffold-project workflow; the file extensions are the subject of the local instruction. J: The naming table states the scaffold's chosen test-environment conventions for its supported TypeScript project setup."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a05-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 12
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A05, blind labellers agreed. I: The rules govern the agent-collaboration tool itself, and repeatedly scope procedures to its CLI, MCP, or advertised schemas. J: The section instructs use of the agent-collaboration tool's own advertised call contracts; its scope is that tool workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a06-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 43
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A06, blind labellers agreed. I: The section is explicitly about agent-router and CLI identity, including the boundary between their session identifiers. J: The identity guidance explicitly distinguishes agent-router SessionRefs from the CLI's named environment variables within this tool's workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a08-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agent-router/skills/agent-collaboration/references/mcp-usage.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 27
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A08, blind labellers agreed. I: The passage states reusable coordination boundaries and explicitly scopes the tool-specific behavior to the running server's advertised operations. J: The passage documents agent-router's own advertised listener and event-observation behavior, scoped to that integration."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a09-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/monitor-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 24
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A09, blind labellers agreed. I: The REST, GraphQL, and rate-limit details are scoped to GitHub PR monitoring, while the passage teaches reusable API-budget practices for that workflow. J: The API-budget section is procedural guidance for the GitHub PR monitoring workflow, including the explicitly named REST and GraphQL endpoints."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a10-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 53
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A10, blind labellers agreed. I: The section states error-handling rules for the `domain-rust` scope and names Rust error types as examples at boundaries. J: The skill is scoped to Rust code, and the section applies Rust crate error-boundary conventions within that declared domain."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a11-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 68
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A11, blind labellers agreed. I: The section is explicitly Rust async guidance; Tokio is the scoped runtime whose ownership and blocking rules it teaches. J: The skill is scoped to Rust, and the async section expressly adopts Tokio as the runtime convention for that domain."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a12-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 25
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A12, blind labellers agreed. I: The rules teach reusable documentation maintenance judgments, with named artifact classes and phase skills defining the workflow's scope. J: The `Core Rules` section gives the docs-maintenance workflow's local ownership and phase-routing instructions."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a15-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/github-pr-state.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 57
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A15, blind labellers agreed. I: The passage gives reusable review-thread and untrusted-input safeguards within the explicitly named GitHub PR workflow. J: The section gives GitHub-specific PR thread operations inside the GitHub PR state reference, which is the stated local workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a17-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 94
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A17, blind labellers agreed. I: The passage inventories test naming and placement patterns as scaffold-project conventions across TypeScript and Python. J: The inventory states test file and directory conventions for the scaffold's supported TypeScript setup."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a18-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 36
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A18, blind labellers agreed. I: These are structural principles scoped to the Linear task-tracking workflow; the passage describes general task and dependency judgments. J: The structural principles are local rules for organizing Linear milestones and tasks, the workflow this skill covers."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a19-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 78
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A19, blind labellers agreed. I: The CLI and MCP instructions explicitly concern Linear dependency operations, the scope of `ops-linear-tracking`. J: This section prescribes Linear CLI and MCP operations for managing Linear relations, not a general API-independent judgment."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a20-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 13
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A20, blind labellers agreed. I: The typing rules are explicitly Python domain guidance, and their examples teach reusable choices within that language scope. J: The skill's declared domain is Python, and the typing rules state that domain's adopted conventions."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a21-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 70
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A21, blind labellers agreed. I: The string, time, and data-processing rules are scoped to `domain-python`; the named libraries are the domain's applicable tools. J: The Python section names f-strings, timezone-aware datetimes, and pyarrow as conventions for the skill's declared Python domain."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a22-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 76
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A22, blind labellers agreed. I: The module and test instructions are explicitly Python package conventions, including the repository's named test markers and fixtures. J: The module and test-location guidance is scoped to the Python package conventions stated by this domain skill."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a23-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-rust/references/sqlx-sqlite.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A23, blind labellers agreed. I: The passage is scoped by `sqlx-sqlite.md` and states storage-row practices for SQLx SQLite queries. J: The reference explicitly scopes the guidance to SQLx SQLite queries and checked-query metadata."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a24-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agentstudio/skills/agentstudio/references/worktrees.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 48
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A24, blind labellers agreed. I: These are local AgentStudio worktree CLI procedures, including the explicit `remove` and `prune` behavior and options. J: The passage is an AgentStudio worktree procedure and names its own removal command and effects."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a25-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-manage-agents/references/execution-forms.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 11
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A25, blind labellers agreed. I: The Sidekick procedures are scoped to agent-router-managed sessions and state the reusable session-management judgments for that role. J: The section defines Sidekick/session operations within the agent-management workflow and explicitly ties them to agent-router."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a26-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 6
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A26, blind labellers agreed. I: This is the explicitly named Implementation PR Wrap-up workflow, with GitHub checks and phase-specific local instructions. J: The file is a local GitHub PR wrap-up procedure: it begins `Use this for` PR operations and assigns roles and gates for that workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a29-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 25
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A29, blind labellers agreed. I: The `ops-observability-stack` skill explicitly scopes these commands to the shared local Victoria stack and its lifecycle. J: The skill explicitly scopes this to the shared local Victoria stack and says app repos are its producers."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a30-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-preflight/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 10
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
+          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+        ],
+        "note": "Accounts A30, independent settlement: The piece teaches reusable judgments: 'Check each need for real' and 'Close each gap before the work that depends on it'; line 43 conditions cleanup on merged worktrees or insufficient disk. I follow labeller I because the credential snippet illustrates a check, while J's claimed 'agentstudio_worktree' restriction does not occur in this piece: line 43 loads a general cleanup practice without naming AgentStudio."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a31-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 6
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A31, blind labellers agreed. I: The skill names its adopted scope: a shared local Victoria stack, with AgentStudio and Agent VM as producer-specific cases. J: The skill explicitly names its scope as the shared local observability stack and assigns the listed lifecycle to that stack."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a32-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 121
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A32, blind labellers agreed. I: The TypeScript gate guidance is scoped to the changed repository path and conditionally directs shadcn projects to their component toolchain. J: The gate says the repository's own scripts and configuration win, and applies the fallback only to TypeScript work."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a33-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 32
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
+          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+        ],
+        "note": "Accounts A33, independent settlement: 'The allow list' and 'These run without asking once the four checks hold' introduce this skill's local command permissions, rather than a taught rule claiming that one product's command generalizes to every repository. I follow labeller I under the commission's local-instruction exception; J correctly identifies the AgentStudio command at line 40, but its placement is a separate question from whether this section teaches a non-reusable judgment."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a34-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-research/references/tool-routing.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A34, blind labellers agreed. I: The routing rules name research tools as examples of source classes and explicitly say to state when a preferred tool is unavailable. J: This is a local research-tool routing guide; its named services are the adopted sources for the specific research jobs described."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a35-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 138
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A35, blind labellers agreed. I: This is a local scaffold-template inventory of Swift rules and tools, not a rule claiming Swift practices are universal. J: The Swift conventions are listed as the scaffold's supported Swift/SwiftUI configuration, not as a rule for unrelated languages."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a36-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 146
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A36, blind labellers agreed. I: This is a local scaffold-template inventory of TypeScript rules and tool commands, scoped by its `rules/ts-rules.md` entry. J: The TypeScript rules are a local scaffold inventory for TypeScript projects and their configured tools."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a37-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 155
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A37, blind labellers agreed. I: This is a local scaffold-template inventory of Python rules and tools, scoped by its `rules/python-rules.md` entry. J: The Python rules are a local scaffold inventory for Python projects and their configured tools."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a38-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 163
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A38, blind labellers agreed. I: This is a local scaffold-template inventory of monorepo rules and tools, not a universal rule about every repository. J: The monorepo rules are explicitly scoped to Python and TypeScript monorepos supported by the scaffold."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a39-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 56
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A39, blind labellers agreed. I: The shortcut response is a local Peekaboo interaction procedure; the skill scope is Peekaboo native macOS UI work. J: The skill is Peekaboo's own UI workflow, and the section's commands and safety steps are specific to that product."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a41-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agentstudio/skills/agentstudio/references/recovery.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A41, blind labellers agreed. I: These are local AgentStudio recovery instructions keyed to exact CLI outcomes and the AgentStudio runtime. J: This recovery reference is part of AgentStudio's own skill and describes exact outcomes of its own pane and app calls."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a42-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 127
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A42, blind labellers agreed. I: The test advice is scoped to Rust integration tests and uses Tokio as the async test runtime. J: The passage is in the Rust domain skill and describes its chosen Rust integration-test conventions."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a44-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 85
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A44, blind labellers agreed. I: The passage teaches reusable boundary parsing and schema ownership in the explicitly scoped TypeScript domain, with Zod as its adopted schema library. J: The Zod rules concern parsing TypeScript boundary data and name Zod as the selected schema library within the TypeScript domain."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a45-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 114
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A45, blind labellers agreed. I: These are role and runtime instructions for the specifically named `spec-program-review` workflow. J: The passage defines this review skill's local reviewer-session authority and convergence process."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a47-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 21
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A47, blind labellers agreed. I: The security review rules teach reusable scope, validation, and read-only practices; the installed plugin is only one scoped tool choice. J: The Codex plugin instruction is explicitly conditional on availability `in the current runtime`, which names the scope where it applies."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a48-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 39
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A48, blind labellers agreed. I: This passage is explicitly about delivery and viewing of pages that use the Demistify library, its local data, or its bundle API. J: The source is the Demistify guide within a presentation skill whose stated scope includes Demistify and HTML Islands artifacts."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a49-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 45
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A49, blind labellers agreed. I: The procedure explicitly scopes commands and assets to the matching Demistify guide and page binding. J: These are local authoring and linting steps for the Demistify binding, which the section explicitly says owns the CLI route."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a50-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/references/background-monitoring.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 76
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A50, blind labellers agreed. I: The rules teach reusable secret-handling judgments for background monitoring and name 1Password as a credential source, not as an example of an unrelated product workflow. J: The section is operational guidance for monitoring artifacts and explicitly scopes its secret-handling rules to those files and this workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a51-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A51, blind labellers agreed. I: The passage explicitly scopes the API and release rules to new pages using Demistify v1 or older Demistify bindings. J: The guide's declared scope includes Demistify artifacts, and this section describes their versioned library binding."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a54-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/references/background-monitoring.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 111
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A54, blind labellers agreed. I: The recovery procedure is explicitly scoped to read-only investigation monitoring and names its monitor state and event files. J: The recovery section gives local stop and evidence-preservation instructions for the background-monitoring workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a55-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 182
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A55, blind labellers agreed. I: This is a local troubleshooting recipe for the named Peekaboo bridge error, with symptom-specific commands and retry guidance. J: The troubleshooting advice is in Peekaboo's own skill and covers Peekaboo's bridge error and commands."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "acct-a56-rule-generalization",
+      "rule": "general-skill.taught-rule-overfits-to-one-project",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agentstudio/skills/agentstudio/references/panes-and-terminals.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 43
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A56, blind labellers agreed. I: The pane commands and effects are scoped to the AgentStudio CLI and its own pane handles and capabilities. J: The section is part of AgentStudio's own pane skill and names its supported pane operations and permission boundary."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

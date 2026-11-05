@@ -1,0 +1,14 @@
+{
+  "id": "rule-question",
+  "language": "Json",
+  "files": ["**/rules/*.rules.json"],
+  "rule":
+    {
+      "kind": "pair",
+      "inside":
+        {
+          "kind": "object",
+          "inside": { "kind": "pair", "has": { "field": "key", "regex": "^\"questions\"$" } },
+        },
+    },
+}

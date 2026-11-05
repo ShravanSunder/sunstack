@@ -1,6 +1,6 @@
 {
   "K001": {
-    "name": "description.opener",
+    "name": "skill-description.starts-with-use-when",
     "evidence": "skill",
     "decision": {
       "start": "opener",
@@ -22,7 +22,7 @@
     "severity": "warn"
   },
   "K002": {
-    "name": "description.length-warning",
+    "name": "skill-description.longer-than-225-characters",
     "evidence": "skill",
     "decision": {
       "start": "within_225",
@@ -44,7 +44,7 @@
     "severity": "warn"
   },
   "K003": {
-    "name": "description.length-limit",
+    "name": "skill-description.longer-than-300-characters",
     "evidence": "skill",
     "decision": {
       "start": "within_300",
@@ -66,7 +66,7 @@
     "severity": "error"
   },
   "K004": {
-    "name": "description.loading-moment",
+    "name": "skill-description.names-the-loading-moment",
     "evidence": "skill",
     "questions": {
       "names_moment": {
@@ -99,7 +99,7 @@
     "severity": "warn"
   },
   "K005": {
-    "name": "description.trigger-only",
+    "name": "skill-description.states-triggers-not-workflow-steps",
     "evidence": "skill",
     "questions": {
       "carries_extra": {
@@ -126,49 +126,6 @@
             "at": "description"
           },
           "no": "pass"
-        }
-      }
-    },
-    "severity": "warn"
-  },
-  "K006": {
-    "name": "description.always-earned",
-    "evidence": "skill",
-    "questions": {
-      "breaks_when_skipped": {
-        "type": "noul",
-        "instructions": {
-          "check": "description",
-          "against": "steps",
-          "task": "Every time the description's condition holds, would skipping this skill break the work, rather than make it plainer, slower, or wrong only in some runs?"
-        },
-        "criteria": {
-          "true": "Whenever the condition holds, work done without the skill is not a valid result: unsafe, unverified, or not acceptable however well it is otherwise done, because the skill carries a check, gate or required condition the result must meet, as a skill for writing unsafe Rust does with its invariant checks.",
-          "false": "Work done without it is still a valid result, only plainer, slower, less polished or less consistent, or it breaks in only some of the runs the condition covers, as with a release-notes skill, a commit-message skill, or a CI-config skill where most edits are safe."
-        }
-      }
-    },
-    "decision": {
-      "start": "opens_with_always",
-      "steps": {
-        "opens_with_always": {
-          "mechanical_check": {
-            "tool": "regex",
-            "field": "description",
-            "pattern": "^Always\\b"
-          },
-          "yes": "earned",
-          "no": "not_applicable"
-        },
-        "earned": {
-          "ask": "breaks_when_skipped",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
-          "yes": "pass",
-          "no": {
-            "finding": "Always opener not earned: skipping the skill doesn't break the work every time its condition holds; open with Use when or Trigger when.",
-            "at": "description"
-          }
         }
       }
     },

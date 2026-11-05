@@ -4,6 +4,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   symlinkSync,
   writeFileSync,
@@ -17,6 +18,8 @@ import { fileURLToPath } from "node:url";
 import { expect } from "vitest";
 import { z } from "zod";
 import { lintReportSchema } from "./report.ts";
+import { unpackPinnedSource } from "./pinned-source.ts";
+import type { PinnedSource } from "./pinned-source.ts";
 
 export const repositoryRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 export const kitRelative = "plugins/skill-authoring/skills/domain-skill-crafting/rules";
@@ -34,6 +37,7 @@ const pieceSchema = z.object({
     span: z.object({ byte_start: z.number(), byte_end: z.number() }).passthrough(),
   }),
   fields: z.record(z.string(), z.unknown()),
+  model_view: z.object({fields: z.record(z.string(), z.unknown()), cut: z.array(z.string())}),
 });
 const selectionSchema = z
   .object({
@@ -68,6 +72,10 @@ export function createFixture(): string {
   temporaryRoots.push(root);
   const initialized = spawnSync("git", ["init", "--quiet", root], { encoding: "utf8" });
   if (initialized.status !== 0) throw new Error(initialized.stderr);
+  const objects = spawnSync("git", ["rev-parse", "--git-path", "objects"], {cwd: repositoryRoot, encoding: "utf8"});
+  if (objects.status !== 0) throw new Error(objects.stderr);
+  mkdirSync(path.join(root, ".git/objects/info"), {recursive: true});
+  writeFileSync(path.join(root, ".git/objects/info/alternates"), `${path.resolve(repositoryRoot, objects.stdout.trim())}\n`);
   const kit = path.join(root, kitRelative);
   mkdirSync(path.join(root, "tests/skills/scripts"), { recursive: true });
   mkdirSync(path.join(root, "tests/skills/lib/skill-rules"), { recursive: true });
@@ -75,10 +83,15 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/scripts/run-skill-rules.ts"),
     path.join(root, "tests/skills/scripts/run-skill-rules.ts"),
   );
-  cpSync(
-    path.join(repositoryRoot, "tests/skills/lib/skill-rules/report.ts"),
-    path.join(root, "tests/skills/lib/skill-rules/report.ts"),
-  );
+  for (const script of ["run-rule-scenarios.ts", "adopt-rule-scenario.ts"]) cpSync(path.join(repositoryRoot, "tests/skills/scripts", script), path.join(root, "tests/skills/scripts", script));
+  const modules = "tests/skills/lib/skill-rules";
+  for (const filename of readdirSync(path.join(repositoryRoot, modules)))
+    if (
+      filename.endsWith(".ts") &&
+      !filename.endsWith(".test.ts") &&
+      filename !== "test-fixture.ts"
+    )
+      cpSync(path.join(repositoryRoot, modules, filename), path.join(root, modules, filename));
   mkdirSync(path.join(root, "tests/skills/node_modules/.bin"), { recursive: true });
   symlinkSync(
     path.join(repositoryRoot, "tests/skills/node_modules/zod"),
@@ -126,6 +139,8 @@ export function createFixture(): string {
       },
     }),
   );
+  writeFixtureFile(root, "tests/skills/evals/rule-scenarios/adopted.json", "{}\n");
+  writeFixtureFile(root, "tests/skills/evals/rule-scenarios/fixture/description_length.scenario.json", JSON.stringify({rules: {description_length: {basis: "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
   return root;
 }
 
@@ -134,43 +149,31 @@ export interface EvidenceListing extends z.infer<typeof evidenceSchema> {
   readonly requests: readonly unknown[];
 }
 
-/**
- * Prints the kit's evidence for a fixture. The kit selects workflow sections through the decision
- * model, and the engine refuses `--evidence` on a selected kind without a credential even when no
- * file has a candidate, so every listing runs against the scripted judge. Its answers default to
- * 0.95 (selected); name a candidate key (`c1`, `c2`, ...) to answer it otherwise.
- */
-export async function listEvidence(
-  root: string,
-  selectionAnswers: Readonly<Record<string, number>> = {},
-  expectedStatus = 0,
-): Promise<EvidenceListing> {
-  return withJudge(selectionAnswers, async (endpoint, requests) => {
-    saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
-    const result = await spawnCollected(
-      enginePath,
-      [
-        "lint",
-        "--config",
-        path.join(root, kitRelative, "skill-rules.config.json"),
-        "--all",
-        "--evidence",
-      ],
-      {
-        cwd: root,
-        env: {
-          ...process.env,
-          OPENROUTER_API_KEY: "synthetic-evidence-test-key",
-          SUNSTACK_CREDENTIAL_STORE: "off",
-        },
+/** The five plain evidence kinds collect without a provider or credential. */
+export async function listEvidence(root: string): Promise<EvidenceListing> {
+  const result = await spawnCollected(
+    enginePath,
+    [
+      "lint",
+      "--config",
+      path.join(root, kitRelative, "skill-rules.config.json"),
+      "--all",
+      "--evidence",
+    ],
+    {
+      cwd: root,
+      env: {
+        ...process.env,
+        OPENROUTER_API_KEY: "",
+        SUNSTACK_CREDENTIAL_STORE: "off",
       },
-    );
-    expect(result.status, result.stderr || result.stdout).toBe(expectedStatus);
-    return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests };
-  });
+    },
+  );
+  expect(result.status, result.stderr || result.stdout).toBe(0);
+  return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests: [] };
 }
 
-function spawnCollected(
+export function spawnCollected(
   command: string,
   argumentsList: readonly string[],
   options: { readonly cwd: string; readonly env: NodeJS.ProcessEnv },
@@ -220,18 +223,26 @@ export function saveRules(root: string, rules: Readonly<Record<string, unknown>>
       .join("\n\n"),
   );
   writeFixtureFile(root, `${kitRelative}/fixture.rules.json`, JSON.stringify(rules));
+  const definitions = z.record(z.string(), z.object({name: z.string(), decision: z.object({steps: z.record(z.string(), z.object({ask: z.string().optional()}).passthrough())})}).passthrough()).parse(rules);
+  const directory = path.join(root, "tests/skills/evals/rule-scenarios/fixture");
+  for (const filename of readdirSync(directory)) if (filename.endsWith(".scenario.json")) rmSync(path.join(directory, filename));
+  for (const rule of Object.values(definitions)) writeFixtureFile(root, `tests/skills/evals/rule-scenarios/fixture/${rule.name}.scenario.json`, JSON.stringify({rules: {[rule.name]: {basis: Object.values(rule.decision.steps).some((step) => step.ask) ? "judged" : "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
 }
 
-export function sampleSkill(
-  root: string,
-  name = "sample",
-  description = "Use when checking the runner.",
-): void {
-  writeFixtureFile(
-    root,
-    `plugins/example/skills/${name}/SKILL.md`,
-    `---\nname: ${name}\ndescription: ${JSON.stringify(description)}\n---\n\n# Sample\n`,
-  );
+export const pinnedSkillPath = "plugins/sunstack-dev/skills/audit-security-review/SKILL.md";
+export const runnerPinnedSource: PinnedSource = {repository: "self", commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a", path: pinnedSkillPath, context: [pinnedSkillPath]};
+
+/** Copies unchanged Git-pinned bytes; destination varies only to test file-scope selection. */
+export function installPinnedSkill(root: string, options: {readonly source?: PinnedSource; readonly destination?: string} = {}): PinnedSource {
+  const source = options.source ?? runnerPinnedSource;
+  const snapshot = unpackPinnedSource({source, self: repositoryRoot, ...(process.env.AI_DEV_SKILLS_ROOT ? {collectionsRoot: process.env.AI_DEV_SKILLS_ROOT} : {})});
+  if (snapshot.kind !== "ready") throw new Error(snapshot.reason);
+  try {
+    const destination = path.join(root, options.destination ?? source.path);
+    mkdirSync(path.dirname(destination), {recursive: true});
+    cpSync(path.join(snapshot.directory, source.path), destination);
+  } finally { snapshot.dispose(); }
+  return source;
 }
 
 export function runRunner(
@@ -239,7 +250,8 @@ export function runRunner(
   argumentsList: readonly string[] = [],
   key = "",
 ): Promise<RunnerResult> {
-  const output = path.join(root, "reports");
+  const outputArgument = argumentsList.lastIndexOf("--out");
+  const output = outputArgument < 0 ? path.join(root, "reports") : path.resolve(root, argumentsList[outputArgument + 1] ?? "reports");
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
@@ -283,11 +295,7 @@ export function runRunner(
   });
 }
 
-/**
- * Runs the runner against the scripted judge with a synthetic key. The kit selects workflow
- * sections through the decision model, so the engine needs a credential for every run, even one
- * whose rules are all mechanical and whose files hold no candidate; such a run still sends nothing.
- */
+/** Controlled replies prove runner boundaries on real skill bytes, not model accuracy. */
 export async function runRunnerJudged(
   root: string,
   argumentsList: readonly string[] = [],
@@ -325,14 +333,18 @@ export const askingRule = {
   decision: { start: "verdict", steps: { verdict: askStep } },
 };
 
+/** A scripted choice: its label alone (probability 1), or its label with the probability it gets. */
+export type ScriptedChoice = string | { readonly label: string; readonly probability: number };
+
 /**
  * A scripted decision model. A noul question answers its named probability, else 0.95; a choice
- * question answers its named label in `choices`, else its first label.
+ * question answers its named label in `choices`, else its first label, with probability 1 unless
+ * the script gives one, the rest shared evenly among the other labels.
  */
 export async function withJudge<TValue>(
-  probabilities: Readonly<Record<string, number>>,
+  probabilities: Readonly<Record<string, number>> | ((request: unknown) => Readonly<Record<string, number>>),
   action: (endpoint: string, requests: unknown[]) => Promise<TValue>,
-  choices: Readonly<Record<string, string>> = {},
+  choices: Readonly<Record<string, ScriptedChoice>> | ((request: unknown) => Readonly<Record<string, ScriptedChoice>>) = {},
 ): Promise<TValue> {
   const requests: unknown[] = [];
   const questionSchema = z.discriminatedUnion("type", [
@@ -348,22 +360,27 @@ export async function withJudge<TValue>(
       for await (const chunk of request) body += String(chunk);
       const parsed = requestSchema.parse(JSON.parse(body));
       requests.push(parsed);
+      const currentProbabilities = typeof probabilities === "function" ? probabilities(parsed) : probabilities;
+      const currentChoices = typeof choices === "function" ? choices(parsed) : choices;
       const answers = Object.fromEntries(
         Object.entries(parsed.questions).map(([name, question]) => {
           if (question.type === "noul")
-            return [name, { type: "noul", noul: probabilities[name] ?? 0.95 }];
+            return [name, { type: "noul", noul: currentProbabilities[name] ?? 0.95 }];
           const labels = Object.keys(question.criteria);
-          const choice = choices[name] ?? labels[0];
+          const scripted = currentChoices[name] ?? labels[0];
+          const choice = typeof scripted === "string" ? scripted : scripted?.label;
+          const chosen = typeof scripted === "object" ? scripted.probability : 1;
           if (!choice || !labels.includes(choice))
             throw new Error(`Choice question ${name} has no label ${String(choice)}`);
+          const others = labels.length > 1 ? (1 - chosen) / (labels.length - 1) : 0;
           return [
             name,
             {
               type: "choice",
               choice,
-              confidence: 1,
+              confidence: chosen,
               probabilities: Object.fromEntries(
-                labels.map((label) => [label, label === choice ? 1 : 0]),
+                labels.map((label) => [label, label === choice ? chosen : others]),
               ),
             },
           ];

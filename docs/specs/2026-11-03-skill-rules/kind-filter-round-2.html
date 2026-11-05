@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kind filter round 2</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="kind-filter-round-2.html">Kind filter round 2</a>
+    <a href="kind-filter-decisions.html">Kind filter round 1</a>
+    <a href="folder-structure-proposal.html">Folder structure</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Kind filter round 2: what your answers showed</h1>
+<p>Done with your answers: a 70% bar, criteria that say using <code>gh</code> or <code>git</code> inside a workflow doesn't make a skill a tool manual, Jev reading the description plus the first 1,800 characters of the skill, and all 78 skills. 78 Jev calls, $0.004 (331 calls and $0.016 across both rounds). Your labels were applied; <code>scaffold-project</code> is left out of the scoring because it has no label yet.</p>
+
+<ex-callout title="The answer, in short" tone="note" icon="test-tube">
+<p>Reading the opening as well <strong>did not help overall</strong>: 3 fewer wrong kinds, but 5 more skills unsure. At 70%, both versions make <strong>zero wrong decisions about whether the general-skill rules run</strong>. So I recommend deliverable 1 starts now with description only, at your 70% bar, with no engine change to what the filter reads. Two meanings below are yours to settle; neither blocks deliverable 1.</p>
+</ex-callout>
+
+<h2 id="results">The numbers, at your 70% bar</h2>
+<p>77 skills scored. Right kind / wrong kind / unsure:</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Jev reads</th><th>Right / wrong / unsure</th><th>Skills the gate decides</th><th>Wrong gate decisions</th></tr></thead>
+<tbody>
+<tr><td>Description only (round 1)</td><td>61 / 5 / 11</td><td>66</td><td>0</td></tr>
+<tr><td>Description + opening (round 2)</td><td>59 / 2 / 16</td><td>61</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+<p>(With <code>audit-security-review</code> counted as domain, subtract 1 right and add 1 wrong in each row.) At 85%, round 2 gives 43 / 0 / 34: no wrong kinds, but almost half unsure. The 15 held-back skills, never used for tuning, gave 14 / 0 / 1 at 70%.</p>
+<p>The opening fixed some skills: <code>implementation-pr-wrapup</code> went from unsure to general at 95%, which is your <code>gh</code> point. <code>domain-typescript</code>, <code>domain-rust</code> and <code>domain-swift</code> now settle as domain. It broke others, for example <code>ops-linear-tracking</code>, which went from a settled tool manual to unsure.</p>
+
+<h2 id="input">1. Start deliverable 1 with description only?</h2>
+<ex-choice id="input-r2" title="What should the filter read in deliverable 1?">
+  <ex-option id="desc-only" title="**Description only, start now** (recommended)">
+    <template slot="summary">
+More skills decided (66 vs 61), the general-skill decision is never wrong, and no engine change. Wrong exact kinds (5) stay inside the same group and don't change which rules run. The criteria keep improving in deliverable 3 with this data as their scenarios.
+    </template>
+  </ex-option>
+  <ex-option id="desc-opening" title="Description + opening">
+    <template slot="summary">
+Fewer wrong exact kinds (2), but 5 more skills skipped. Needs an engine change: the filter reads two fields as one object.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="domain">2. Is a skill that checks by a subject's standards "domain"?</h2>
+<p>You labelled <code>decision-model-review</code> domain. Its own text says the standards live in another skill (<code>domain-decision-models</code>) and it owns how they are checked. The domain criterion today says "doing one review in a subject is not a standards reference", so Jev answered general (73%). <code>audit-security-review</code> is the same shape. Either way, the general-skill rules still run on both.</p>
+<ex-choice id="domain-meaning" title="What should domain mean?">
+  <ex-option id="domain-wide" title="Domain = everything centred on one subject, including checking or reviewing by its standards">
+    <template slot="summary">
+`decision-model-review` and `audit-security-review` are domain. The criterion gets rewritten to say so, then tested on matched real pairs (a standards skill and a review skill in the same subject).
+    </template>
+  </ex-option>
+  <ex-option id="domain-narrow" title="Domain = the standards themselves; reviewing by them is general">
+    <template slot="summary">
+`decision-model-review` becomes general (your label changes), and the criterion stays as it is.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="repo">3. Is a practice that builds a project's own verification "repo_specific"?</h2>
+<p>You labelled <code>practices-verification-maintenance</code> repo_specific. Its text separates the project's own verification recipe from the practice that writes it, and Jev leans general (62%, so unsure). This one matters for the rules: <strong>repo_specific skills are skipped by the general-skill rules</strong>.</p>
+<ex-choice id="repo-meaning" title="Which decides the kind?">
+  <ex-option id="repo-target" title="What it produces: it builds a project's own apparatus, so repo_specific">
+    <template slot="summary">
+Your label stands. The general-skill rules skip it. The criterion gets rewritten to say "skills that create or maintain one repository's own apparatus".
+    </template>
+  </ex-option>
+  <ex-option id="repo-portable" title="How portable the practice is: it works in any repository, so general">
+    <template slot="summary">
+The label changes to general, and the general-skill rules judge it.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="scaffold">4. Does <code>scaffold-project</code> need a new kind?</h2>
+<p>Jev reads it as general at 99%: a reusable setup workflow whose references include tool commands and config templates. The general-skill rules already leave ordinary tool use and command examples alone (your table, rows 6–9), so a new kind would add nothing they need. And a new kind that's excluded from the rules would let a whole workflow escape them, product leaks included.</p>
+<ex-choice id="scaffold-kind" title="scaffold-project:">
+  <ex-option id="scaffold-general" title="**General, with tool references** (recommended)">
+    <template slot="summary">The five kinds stay. The rules judge it and leave its normal tool use alone.</template>
+  </ex-option>
+  <ex-option id="scaffold-new" title="A new kind (say what it should change)">
+    <template slot="summary">Tell me in Comments what a mixed kind should do differently for the rules; nothing in the data needs it yet.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="limits">Not proven</h2>
+<ul>
+<li>Round 2 changed the criteria and the input together, so the data can't say which one caused each change.</li>
+<li>There's still no clearly repo_specific skill in this repository. The next scenarios add sunstack-tools' <code>verify-*</code> skills.</li>
+<li>These were direct Jev calls; the real filter is proven when deliverable 1 is built.</li>
+</ul>
+<p>Full report: <code>memory-logs/…/jev-advisor/kind-experiment-round-2-2026-11-05.md</code>, with every miss, both security readings and the raw receipts.</p>
+</ex-document>
+</body>
+</html>
