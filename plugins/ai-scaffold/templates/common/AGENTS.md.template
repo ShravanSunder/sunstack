@@ -1,0 +1,39 @@
+# {{PROJECT_NAME}}
+
+{{PROJECT_DESCRIPTION}}
+
+## Standards
+
+{{#if OWNER_STANDARDS}}Whose standards: the owner's (sunstack-dev)
+
+Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches. If a skill can't be loaded, say which one and ask before choosing a standard.
+
+- Shared: `sunstack-dev:domain-code-standards`{{/if}}
+{{#if OWNER_TS}}- TypeScript: `sunstack-dev:domain-typescript`{{/if}}
+{{#if OWNER_PY}}- Python: `sunstack-dev:domain-python`{{/if}}
+{{#if OWNER_SWIFT}}- Swift: `sunstack-dev:domain-swift`{{/if}}
+{{#if REPO_STANDARDS}}Whose standards: this repository's own
+
+This repository's standards: [docs/standards.md](docs/standards.md){{/if}}
+{{#if MONOREPO}}
+
+## Structure
+
+```
+apps/           # Deployable applications
+packages/       # Shared libraries
+services/       # Backend services
+```
+
+## Package Dependencies
+
+<!-- Example: @search-server/server → @search-server/sdk -->
+{{/if}}
+
+## Key Patterns
+
+<!-- Add project-specific code patterns, idioms, or framework usage -->
+
+## Constraints
+
+<!-- Add platform constraints, architectural decisions, or rules -->

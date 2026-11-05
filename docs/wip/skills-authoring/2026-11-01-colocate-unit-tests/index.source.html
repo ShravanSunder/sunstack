@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shared code standards: design set</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Shared code standards: the #189 rework</h1>
+
+    <p>Your standards are written once, in a new hidden skill, <code>domain-code-standards</code>. <code>domain-typescript</code>, <code>domain-rust</code> and <code>domain-python</code> each load it first and keep only their own language's forms.</p>
+    <p>A repository's AGENTS.md says whose standards apply, in one <code>## Standards</code> line: yours, or the repository's own. With no line, the agent asks you through Sun. It never infers and never mixes (your option A).</p>
+    <p>The scaffold writes that section into every repository it creates. Under your standards, it links the skills; under the repository's own, it points to the repository's standards file and copies nothing of yours. A retrofit only adds a missing section, and never replaces a file or link, even with <code>--overwrite</code>. The scaffold writes no rules files at all: their Swift standards become a new hidden <code>domain-swift</code>, and their monorepo standards join the base.</p>
+    <p>This is revision 9: by your direction of 1 Nov, standards reach agents, Cursor included, only through the skills, so nothing in #189 writes, links or depends on <code>.cursor/rules</code> or <code>.mdc</code> files (D23).</p>
+    <p><strong>Still open:</strong></p>
+    <ul>
+      <li>the review lead's check of the corrections;</li>
+      <li>your strikeable defaults: D10 Swift, D11 monorepo, D12 retired template clauses, D13 <code>as const</code>, and D21 bash with TypeScript tests;</li>
+      <li>behavior under pressure, which waits for the pressure-tasks PR.</li>
+    </ul>
+    <p><strong>Terms:</strong></p>
+    <ul>
+      <li>A <em>hidden</em> skill loads only when another skill or an instruction loads it, never on its own.</li>
+      <li>A <em>retrofit</em> runs the scaffold on an existing repository.</li>
+      <li>A <em>strikeable default</em> is a decision taken with its reason, which you can strike.</li>
+    </ul>
+
+    <h2 id="walkthrough">Walkthrough</h2>
+    <ol>
+      <li><a href="#requirements">Requirements</a>: your four directions and your option A, quoted; the evidence (four wordings, 352 template clauses, 23 conflicts); what stays out.</li>
+      <li><a href="#specification">Specification</a>: the 18 standards, one sentence each, and their transfer tests.</li>
+      <li><a href="#skill-design">Skill design</a>: five runs, the new skill's proposed text, each language skill's cuts, the scaffold's changes, the security decision and the decisions table.</li>
+      <li><a href="#skill-verification">Skill verification</a>: how each standard is proven, the scaffold's test cases, and what stays unverified.</li>
+    </ol>
+
+    <h2 id="parts">The four parts</h2>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+</body>
+</html>

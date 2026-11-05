@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Read this skill in full before the TypeScript work it governs; your own full read earlier this session counts.
 
+MUST load `../domain-code-standards/SKILL.md` and return the set this repository's Standards line names, with the shared standards that apply, before the sections below. This skill's choices are the owner's and apply under the owner's set.
+
 The compiler keeps only the promises you write down. Annotate every edge a caller can see (parameters, return types, exported shapes), let inference work inside a function body, and never silence the checker with `any`, `as` or `!`. Data from outside the program has one authority, its Zod schema, and every type for that data is derived from the schema.
 
 ## Types at the edges
@@ -34,6 +36,8 @@ Check a literal against a type with `satisfies`, which keeps its inferred shape;
 ```ts
 const retryPolicy = { maxAttempts: 3, backoff: "exponential" } satisfies RetryPolicy;
 ```
+
+`as const`, alone or as `as const satisfies`, isn't a cast: it narrows a literal to its literal type, so it's allowed.
 
 Mark data that shouldn't change `readonly` (`columns: readonly string[]`). Use `const` unless the binding is reassigned, and template literals over string concatenation.
 
@@ -114,13 +118,16 @@ Zod v4 deprecates `a.merge(b)`; write `a.extend(b.shape)`.
 
 - A function with more than three parameters takes one props object: `function executeQuery<TRow>(props: ExecuteQueryProps): Promise<QueryResult<TRow>>`.
 - `interface` for object contracts, `type` for unions and aliases. Keep a type next to the code that uses it.
-- Files and folders are kebab-case.
+- A wrapper type that only returns its input is redundant: use the type it wraps.
+- Files and folders are kebab-case: `database-connection.ts`, `query-builders/`, never `db.ts`, `helpers.ts` or a `utils/` folder outside `tests/`.
 
-Before creating a file or folder, name the one responsibility it holds (`database-connection.ts`, `query-builders/`, never `db.ts`, `utils/` or `helpers.ts`); when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)).
+## Tests
+
+Under the owner's set, a unit test for `report.ts` is `report.test.ts` in the same folder. Older forms are a `tests/` or `__tests__/` folder.
 
 ## Gates
 
-The repository's own scripts, oxlint config and formatter config win over anything listed here, and the formatter owns indentation and layout. Follow the oxlint rules without exceptions: fix the code instead of adding a disable comment.
+Follow the oxlint rules without exceptions: fix the code instead of adding a disable comment.
 
 IF the repo defines no lint, format, type-check or test script for the changed path, a type error points into another workspace package, or you're adding a component in a shadcn project (`components.json` present), load `references/toolchain.md` and return the commands to run for the changed paths, including any workspace package to build first, and for a new component the shadcn command that adds it.
 

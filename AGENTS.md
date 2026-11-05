@@ -6,6 +6,16 @@ This repository contains personal Codex and Claude Code plugins.
 
 **Purpose**: AI development tools distributed through local plugin marketplaces.
 
+## Standards
+
+Whose standards: the owner's (sunstack-dev)
+
+Before work these standards govern, load `sunstack-dev:domain-code-standards`, then the skill for each language the change touches. If a skill can't be loaded, say which one and ask before choosing a standard.
+
+- Shared: `sunstack-dev:domain-code-standards`
+- TypeScript: `sunstack-dev:domain-typescript`
+- Rust: `sunstack-dev:domain-rust`
+
 ## Repository Structure
 
 ```
