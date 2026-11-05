@@ -7,18 +7,25 @@ import type { ScenarioRecord, RuleRecord } from "./scenarios.ts";
 import { fingerprintRule, readAdoptions } from "./adoption.ts";
 import type { Adoption } from "./adoption.ts";
 
-export type HeldReason =
-  | {kind: "not_adopted"; why: "missing" | "changed_since"}
-  | {kind: "untuned_bar"; step: string}
-  | {kind: "bar_changed"; step: string}
-  | {kind: "held_back_not_independent"}
-  | {kind: "no_reason"}
-  | {kind: "owner"; decision: "rework_first" | "held_by_owner" | "undecided"}
-  | {kind: "floor"; scenario_kind: "real_mistake" | "good" | "near_miss"; have: number; need: 3}
-  | {kind: "no_held_back"}
-  | {kind: "split_fix_pair"; fix_pair: string}
-  | {kind: "needs_engine"; feature: "filters"};
-export type RuleState = {state: "nudging"} | {state: "held"; lacks: HeldReason[]} | {state: "dropped"};
+export const heldReasonSchema = z.discriminatedUnion("kind", [
+  z.object({kind: z.literal("not_adopted"), why: z.enum(["missing", "changed_since"])}).strict(),
+  z.object({kind: z.literal("untuned_bar"), step: z.string()}).strict(),
+  z.object({kind: z.literal("bar_changed"), step: z.string()}).strict(),
+  z.object({kind: z.literal("held_back_not_independent")}).strict(),
+  z.object({kind: z.literal("no_reason")}).strict(),
+  z.object({kind: z.literal("owner"), decision: z.enum(["rework_first", "held_by_owner", "undecided"])}).strict(),
+  z.object({kind: z.literal("floor"), scenario_kind: z.enum(["real_mistake", "good", "near_miss"]), have: z.number().int().nonnegative(), need: z.literal(3)}).strict(),
+  z.object({kind: z.literal("no_held_back")}).strict(),
+  z.object({kind: z.literal("split_fix_pair"), fix_pair: z.string()}).strict(),
+  z.object({kind: z.literal("needs_engine"), feature: z.literal("filters")}).strict(),
+]);
+export const ruleStateSchema = z.discriminatedUnion("state", [
+  z.object({state: z.literal("nudging")}).strict(),
+  z.object({state: z.literal("held"), lacks: z.array(heldReasonSchema)}).strict(),
+  z.object({state: z.literal("dropped")}).strict(),
+]);
+export type HeldReason = z.infer<typeof heldReasonSchema>;
+export type RuleState = z.infer<typeof ruleStateSchema>;
 export interface DeriveRuleStateRequest {
   readonly record: RuleRecord; readonly scenarios: readonly ScenarioRecord[];
   readonly rule: RuleDefinition; readonly adoption: Adoption | null;

@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadConfiguredScenarios, runScenarios, formatScenarioResult } from "../lib/skill-rules/scenario-run.ts";
 import { allocateScenarioRun } from "../lib/skill-rules/scenario-output.ts";
+import { formatScenarioSummary } from "../lib/skill-rules/scenario-summary.ts";
 
 const repository = fileURLToPath(new URL("../../../", import.meta.url));
 const config = path.join(repository, "plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json");
@@ -30,6 +31,7 @@ try {
     console.log(`Scenario report: ${path.join(output, "report.json")}`);
     const report = runScenarios({config, repository, self: repository, engine, output, entries, ...(process.env.AI_DEV_SKILLS_ROOT ? {collectionsRoot: process.env.AI_DEV_SKILLS_ROOT} : {}), onResult: (result) => console.log(formatScenarioResult(result)), onRun: (run) => console.log(JSON.stringify(run))});
     console.log(JSON.stringify({complete: report.complete, rules: report.rules, exit: report.exit}));
+    console.log(formatScenarioSummary(report.summary));
     process.exitCode = report.exit;
   }
 } catch (error) {

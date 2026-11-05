@@ -1,7 +1,22 @@
 import { z } from "zod";
 import { scenarioResultSchema } from "./scenario-scoring.ts";
+import { ruleStateSchema } from "./rule-state.ts";
+import { ruleRecordSchema, scenarioRecordSchema } from "./scenarios.ts";
 
 export const scenarioSetResultSchema = z.object({passed: z.number().int().nonnegative(), failed: z.array(z.string()), unsure: z.array(z.string())}).strict();
+const scenarioGroupSummarySchema = z.object({
+  scenarios: z.number().int().nonnegative(),
+  kinds: z.record(scenarioRecordSchema.shape.scenario_kind, z.number().int().nonnegative()),
+  labelled: z.number().int().nonnegative(), disputed: z.number().int().nonnegative(),
+  retired: z.number().int().nonnegative(), result: scenarioSetResultSchema.nullable(),
+}).strict();
+export const scenarioRuleSummarySchema = z.object({
+  state: ruleStateSchema,
+  sets: z.object({development: scenarioGroupSummarySchema, held_back: scenarioGroupSummarySchema}).strict(),
+  bars: ruleRecordSchema.shape.bars,
+  reasons: ruleRecordSchema.shape.reasons,
+}).strict();
+export type ScenarioRuleSummary = z.infer<typeof scenarioRuleSummarySchema>;
 export const scenarioRuleRunSchema = z.object({
   fingerprint: z.string().regex(/^[0-9a-f]{64}$/),
   scenario_ids: z.array(z.string().min(1)),
@@ -17,6 +32,7 @@ export const scenarioRunReportSchema = z.object({
   complete: z.boolean(), exit: z.union([z.literal(0), z.literal(1), z.literal(5)]),
   results: z.array(scenarioResultSchema), runs: z.array(scenarioEngineRunSchema),
   rules: z.record(z.string(), scenarioRuleRunSchema),
+  summary: z.record(z.string(), scenarioRuleSummarySchema),
 }).strict();
 export type ScenarioRunReport = z.infer<typeof scenarioRunReportSchema>;
 export type ScenarioEngineRun = z.infer<typeof scenarioEngineRunSchema>;

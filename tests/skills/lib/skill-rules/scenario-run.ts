@@ -7,7 +7,7 @@ import type { ScenarioRecord } from "./scenarios.ts";
 import { unpackPinnedSource } from "./pinned-source.ts";
 import { runLintEngine } from "./engine-runner.ts";
 import type { EngineRequest, EngineResult } from "./engine-runner.ts";
-import { lintReportSchema, reportGaps } from "./report.ts";
+import { lintReportSchema, reportGaps, filtersSupported } from "./report.ts";
 import { fingerprintRule } from "./adoption.ts";
 import { scenarioRunReportSchema } from "./scenario-report.ts";
 import type { ScenarioRunReport, ScenarioEngineRun } from "./scenario-report.ts";
@@ -15,6 +15,7 @@ import { engineVersion, ruleDefinitionSchema } from "./rule-state.ts";
 import { scenarioExitCode, gapScenario, scoreScenario } from "./scenario-scoring.ts";
 import type { ScenarioResult } from "./scenario-scoring.ts";
 import { prepareScenarioOutput } from "./scenario-output.ts";
+import { buildScenarioSummary } from "./scenario-summary.ts";
 
 const ruleConfigSchema = z
   .object({
@@ -70,6 +71,7 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
   }
   const results: ScenarioResult[] = [];
   const runs: ScenarioEngineRun[] = [];
+  let filtersAvailable = false;
   const addResult = (result: ScenarioResult): void => {
     results.push(result);
     request.onResult?.(result);
@@ -147,6 +149,7 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
               result.error ?? `Engine exit ${result.status}, signal ${result.signal ?? "none"}`,
             );
           const parsed = lintReportSchema.parse(JSON.parse(result.stdout));
+          filtersAvailable = filtersAvailable || filtersSupported(parsed);
           const gaps = reportGaps(parsed, []);
           runGaps.push(
             ...gaps.notRun,
@@ -211,7 +214,8 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
   }
   const entryExit = scenarioExitCode(results);
   const exit = entryExit === 1 ? 1 : !complete ? 5 : entryExit;
-  const report = scenarioRunReportSchema.parse({schema_version: 1, engine_version: version, model, complete, exit, results, runs, rules});
+  const summary = buildScenarioSummary({config: request.config, repository: request.repository ?? request.self, version, ruleFiles: configuredRuleFiles(request.config), rules, filtersSupported: filtersAvailable, ...(request.scenarioRoot ? {scenarioRoot: request.scenarioRoot} : {})});
+  const report = scenarioRunReportSchema.parse({schema_version: 1, engine_version: version, model, complete, exit, results, runs, rules, summary});
   writeFileSync(path.join(request.output, "report.json"), JSON.stringify(report, null, 2) + "\n");
   return report;
 }
