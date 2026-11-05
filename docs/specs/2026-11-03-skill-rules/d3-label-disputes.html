@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 3: label disputes</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="d3-label-disputes.html">Step 3: label disputes</a>
+    <a href="d3-kind-skips-decision.html">Step 3: skipped scenarios</a>
+    <a href="d3-design.html">3 · One rule end to end: design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Step 3: five passages only you can settle</h1>
+
+<ex-callout title="What you're asked" tone="question" icon="chat-circle">
+<p>The product-workflow rule <em>nudges</em> (warns an agent, never fails a run) when a skill meant for any repository sends the agent into one product's own commands, files or debug loops, work that belongs in that product's own repository. Two agents labelled real passages so the rule has evidence. Five choices, one per passage: four where the labellers disagreed, and one where they agreed but I'd overrule them.</p>
+<ol>
+<li><strong>Demistify's authoring guide</strong> in <code>presentation-html</code>: recommended quiet.</li>
+<li><strong>Demistify's command line</strong> in <code>presentation-html</code>: recommended quiet.</li>
+<li><strong>The scaffold plugin's own script</strong> in <code>scaffold-project</code>: recommended quiet.</li>
+<li><strong>The <code>verify-&lt;app&gt;</code> placeholder</strong> in <code>practices-verification</code>: the labellers said leak; recommended quiet.</li>
+<li><strong>A sorting choice</strong> for one security-review passage that changes nothing the rule does: recommended "good text".</li>
+</ol>
+<p>Under the current adoption rule, a disputed passage blocks adopting the rule. This page is second in line after the <a href="d3-kind-skips-decision.html">skipped-scenarios page</a>.</p>
+</ex-callout>
+
+<h2 id="boundary">Where the line sits</h2>
+<ex-mermaid id="boundary-map" label="Quiet versus nudge, as you've ruled so far"><script type="text/plain">
+flowchart LR
+  q1["a tool used as it's<br/>meant to be used<br/>(quiet, your ruling)"] --- q2["this toolkit's own<br/>shared tools<br/>(quiet, your ruling)"]
+  q2 --- open["Demistify's guide and CLI,<br/>the scaffold script,<br/>a verify-&lt;app&gt; placeholder<br/>(open: this page)"]
+  open --- n1["one product's own command<br/>or its own debug loop<br/>(nudge, your ruling)"]
+</script></ex-mermaid>
+<p>Your answers so far (requirements U16): a tool used the way it's meant to be used stays quiet, for example <code>claude plugin validate .</code>; so does this toolkit's own shared infrastructure, like the observability stack. Telling the agent to run one product's own command, or to load and follow its own debug loop, nudges.</p>
+
+<h2 id="q1">1. Demistify's authoring guide</h2>
+<p><code>plugins/sunstack-dev/skills/presentation-html/references/demistify.md</code>, line 33, quoted from its start:</p>
+<pre>MUST load the guide for the page's binding (for v1,
+`https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands
+and layouts the page will use; write their syntax straight into the page.</pre>
+<p>One labeller: it routes authors into Demistify's own product references. The other: it's the authoring platform's documented interface.</p>
+<ex-choice id="q1-guide" title="Loading Demistify's guide in presentation-html:">
+  <ex-option id="q1-quiet" title="**Quiet: Demistify is this toolkit's shared page tool** (recommended)">
+    <template slot="summary">**Label:** near miss. **What the rule is meant to do there:** stay quiet. **Effect on the skill:** none. **Why:** you chose Demistify for every page, which makes it this toolkit's own shared tool, like the observability stack.</template>
+  </ex-option>
+  <ex-option id="q1-nudge" title="Nudge: it depends on one product's own references">
+    <template slot="summary">**Label:** real mistake. **What the rule is meant to do there:** nudge, once you adopt the rule and its final run confirms it. **Effect on the skill:** a reason to move Demistify-specific steps into a Demistify skill; nothing moves automatically.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="q2">2. Demistify's command line</h2>
+<p>Same file, lines 51–54, quoted in full:</p>
+<pre>2. After composition is complete, use the CLI at the page's binding:
+
+   pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz \
+     embed /path/guide.source.html /path/guide.html</pre>
+<p>(The command is one line in the file; it's wrapped here to fit.)</p>
+<p>Same split: Demistify's own command line, or the authoring platform's supported command. You can answer this one differently from the guide.</p>
+<ex-choice id="q2-cli" title="Running Demistify's CLI in presentation-html:">
+  <ex-option id="q2-quiet" title="**Quiet: the shared page tool's own command** (recommended)">
+    <template slot="summary">**Label:** near miss. **What the rule is meant to do there:** stay quiet. **Effect on the skill:** none.</template>
+  </ex-option>
+  <ex-option id="q2-nudge" title="Nudge: running one product's own command">
+    <template slot="summary">**Label:** real mistake. **What the rule is meant to do there:** nudge, once adopted and confirmed by the final run. **Effect on the skill:** a reason to keep the command in a Demistify-owned place.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="q3">3. The scaffold plugin's own script</h2>
+<p><code>plugins/ai-scaffold/skills/scaffold-project/SKILL.md</code> at commit <code>1bab79d1</code> (the version this passage was pinned to), lines 136–145, quoted in full; on main today the same text starts at line 146:</p>
+<pre>Run the appropriate scaffold scripts:
+
+```bash
+# Main orchestrator
+bash ${CLAUDE_PLUGIN_ROOT}/scripts/scaffold/scaffold-project.sh \
+  --name "project-name" \
+  --type "monorepo-both" \
+  --author "Name" \
+  --email "email@example.com"
+```</pre>
+<p>One labeller: the step runs the plugin's own procedure. The other: it's the scaffolding tool's own supported interface.</p>
+<p><strong>Whether the rule runs here at all:</strong> Jev reads <code>scaffold-project</code> as a general skill at 0.99, above the 70% bar, so today it would. Your still-open question about this skill's kind could change that. That question (<a href="kind-filter-round-2.html#scaffold">round-2 page, question 4</a>) asks whether <code>scaffold-project</code> is a general skill with tool references (my recommendation there) or needs a new kind of its own. If you give it a kind the rule skips, this answer only sorts the passage.</p>
+<ex-choice id="q3-scaffold" title="The scaffold script in scaffold-project:">
+  <ex-option id="q3-quiet" title="**Quiet: the skill runs its own bundled tool** (recommended)">
+    <template slot="summary">**Label:** near miss. **What the rule is meant to do there:** stay quiet. **Effect on the skill:** none. **Why:** the script ships in the same plugin as the skill; it's the skill's own tool used as intended.</template>
+  </ex-option>
+  <ex-option id="q3-nudge" title="Nudge: the skill depends on one plugin's own script">
+    <template slot="summary">**Label:** real mistake. **What the rule is meant to do there:** nudge, if the skill stays general and once adopted and confirmed. **Effect on the skill:** a reason to describe the scaffolding generally and keep script details in a reference.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="q4">4. The <code>verify-&lt;app&gt;</code> placeholder</h2>
+<p><code>plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md</code>, lines 19 and 21, each quoted from its start:</p>
+<pre>2. **Find the candidates.** List `.agents/skills/verify-*/SKILL.md` in that project
+3. **Resolve one canonical owner and read it.** Resolve `.claude/skills/verify-&lt;app&gt;`</pre>
+<p>Both labellers called this a leak ("routes verification into the app project's own verify skill"). I think it's a general method for finding <em>any</em> project's verification skill: <code>&lt;app&gt;</code> is a placeholder, not one named product. Your answer outranks theirs.</p>
+<ex-choice id="q4-placeholder" title="The verify-&lt;app&gt; steps in practices-verification:">
+  <ex-option id="q4-quiet" title="**Quiet: a general method with a placeholder** (recommended)">
+    <template slot="summary">**Label:** near miss, by your decision. **What the rule is meant to do there:** stay quiet. **Effect on the skill:** none.</template>
+  </ex-option>
+  <ex-option id="q4-nudge" title="Nudge: keep the labellers' answer">
+    <template slot="summary">**Label:** real mistake. **What the rule is meant to do there:** nudge, once adopted and confirmed. **Effect on the skill:** a reason to reword those steps.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="q5">5. One sorting choice</h2>
+<p>The rule's evidence comes in three piles: real mistakes, good text (nothing that looks like a leak) and near misses (looks like a leak but isn't). It needs at least 3 of each; good text has exactly 3 today. Both labellers agree this passage is not a leak; they split on the pile.</p>
+<p><code>plugins/sunstack-dev/skills/audit-security-review/SKILL.md</code>, line 67, quoted from its start:</p>
+<pre>- MUST load `references/routing.md` before preparing a prompt or deciding between scan modes</pre>
+<ex-choice id="q5-security" title="Sort the security-review passage as:">
+  <ex-option id="q5-good" title="**Good text: it loads only its own reference** (recommended)"><template slot="summary">Good text goes to 4, one above the minimum. The rule stays quiet either way.</template></ex-option>
+  <ex-option id="q5-near" title="Near miss: loading by path reads like routing"><template slot="summary">Good text stays at exactly 3. The rule stays quiet either way.</template></ex-option>
+</ex-choice>
+
+<h2 id="agreed">Agreed by the labellers, not asked</h2>
+<p>Five passages the old evidence expected to stay quiet are now agreed nudges. If you don't comment, they stand as the labellers' answer, which is not the same as your approval:</p>
+<ul>
+<li><code>practices-verification/references/project-verification-selection.md</code> line 41: "A terminal app has <code>.agents/skills/verify-tui/</code>…". You ruled that this worked <code>verify-tui</code> example nudges.</li>
+<li><code>verification-design/references/choosing-the-observation.md</code> lines 78–81: "journey verify-notes <code>drafts</code>: drives save, quit and relaunch…". You ruled that the worked <code>verify-notes</code> example nudges.</li>
+<li><code>domain-decision-models/references/worked-trees.md</code> lines 141 and 157: its worked tree quoting the line-17 AgentStudio-loop mistake. You ruled that this worked tree nudges ("nudge is requriemmed ehre").</li>
+<li><code>domain-skill-crafting/references/calls-and-placement.md</code> lines 109–118: "Breaks: … <code>ops-observability-stack/SKILL.md:17</code> … load <code>references/agentstudio-loop.md</code>", and an AgentStudio cleanup command. The labellers applied your ruling that teaching text quoting a real product mistake nudges.</li>
+<li><code>presentation-tui/references/shape-catalog.md</code> around lines 729–868: a worked app inventory with its own source paths (<code>App/Windows/</code>, <code>Core/Models/</code>). The labellers applied your ruling that a worked product-like example nudges.</li>
+</ul>
+<p>Separately, passages in skills the rule never runs on (Peekaboo, the AgentStudio skill, agent-collaboration, and practices-verification-maintenance under your label) only test that the rule stays out. They are kept apart from the three piles, so they can't inflate the rule's evidence.</p>
+
+<details>
+<summary>How independent the evidence is</summary>
+<ul>
+<li>Each labeller had its own folder with the same 46 passages under shuffled, meaningless keys, plus the standard and your rulings, and nothing else. They share one machine, so the separation was by instruction, not enforced.</li>
+<li>Six passages were set aside before any label existed, from skill folders no other passage comes from. Their labels have been seen only by the two labellers and me. The agent who tunes the rule hasn't been given them, they aren't used for tuning, and they're scored once, in the final run.</li>
+<li>All labels and packets are kept outside the repository, in the work's private evidence folder.</li>
+</ul>
+</details>
+</ex-document>
+</body>
+</html>
