@@ -18,12 +18,14 @@ const entry = scenarioRecordSchema.parse({
     path: "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
     context: ["plugins"],
   },
-  select: {piece_first_line: 6},
+  select: { piece_first_line: 6 },
   expect: "must_fire",
   finding_lines: [17, 18],
   kind: "regression_example",
-  scenario_kind: "unclassified", status: "active", set: "development",
-  label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
+  scenario_kind: "unclassified",
+  status: "active",
+  set: "development",
+  label: { basis: "owner_words", state: "labelled", who: [], note: "Reviewed" },
   added: "2026-11-01",
 });
 function piece(outcome: PieceDecision["outcome"]): PieceDecision {
@@ -46,7 +48,7 @@ function reportFinding(line: number) {
     file: entry.source.path,
     line,
     anchor: "resolved",
-    judgment: {answers: {}, path_taken: ["s"]},
+    judgment: { answers: {}, path_taken: ["s"] },
     basis: "judged",
     severity: "warn",
     message: "read",
@@ -64,6 +66,17 @@ describe("scenario outcome, locator and gaps stay separate", () => {
       outcome: "caught",
       locator: { kind: "miss", lines: [7] },
     });
+    const missedLocator = scoreScenario(entry, reportFinding(7));
+    expect(scenarioExitCode([missedLocator])).toBe(1);
+    expect(
+      scenarioExitCode([{ ...missedLocator, label: { ...entry.label, state: "disputed" } }]),
+    ).toBe(5);
+  });
+  test("a matching legacy outcome cannot make a disputed rule label a clean success", () => {
+    const matched = scoreScenario(entry, reportFinding(17));
+    expect(scenarioExitCode([{ ...matched, label: { ...entry.label, state: "disputed" } }])).toBe(
+      5,
+    );
   });
   test.each(["pass", "not_applicable"] satisfies PieceDecision["outcome"][])(
     "a must_fire observed as %s is missed",
@@ -78,14 +91,12 @@ describe("scenario outcome, locator and gaps stay separate", () => {
     const result = scoreScenario(pass, reportFinding(17));
     expect(result.outcome).toBe("false_nudge");
     expect(scenarioExitCode([result])).toBe(1);
-    expect(scenarioExitCode([{ ...result, label: {...entry.label, state: "disputed"} }])).toBe(5);
+    expect(scenarioExitCode([{ ...result, label: { ...entry.label, state: "disputed" } }])).toBe(5);
   });
   test("not applicable and pass cannot be silently interchanged", () => {
     expect(
-      scoreScenario(
-        { ...entry, expect: "must_pass" },
-        reportWithResults([piece("not_applicable")]),
-      ).outcome,
+      scoreScenario({ ...entry, expect: "must_pass" }, reportWithResults([piece("not_applicable")]))
+        .outcome,
     ).toBe("unsure");
     expect(
       scoreScenario(
@@ -104,7 +115,7 @@ describe("scenario outcome, locator and gaps stay separate", () => {
   test("once-per-file entries use the field line rather than the finding line", () => {
     const { select: _line, ...once } = entry;
     expect(
-      matchScenarioPiece({ ...once, select: {field_line: 3} }, [
+      matchScenarioPiece({ ...once, select: { field_line: 3 } }, [
         { ...piece("pass"), first_line: 1, last_line: 4 },
       ])?.first_line,
     ).toBe(1);
@@ -167,9 +178,15 @@ describe("scenario outcome, locator and gaps stay separate", () => {
     });
   });
   test("a real call result matches the call's line, not its surrounding excerpt's line", () => {
-    const call = { ...entry, rule: "call.completeness", select: {piece_first_line: 24, field_line: 24} };
+    const call = {
+      ...entry,
+      rule: "call.completeness",
+      select: { piece_first_line: 24, field_line: 24 },
+    };
     const row = { ...piece("pass"), name: call.rule, first_line: 24, last_line: 24 };
     expect(matchScenarioPiece(call, [row])).toBe(row);
-    expect(matchScenarioPiece({ ...call, select: {piece_first_line: 22} }, [row])).toBeUndefined();
+    expect(
+      matchScenarioPiece({ ...call, select: { piece_first_line: 22 } }, [row]),
+    ).toBeUndefined();
   });
 });

@@ -79,7 +79,7 @@ test("two real skill folders ask once each with description only, exclude a manu
       },
     },
   });
-  let unsure = false;
+  let probability = 1;
   await withJudge(
     {},
     async (endpoint, requests) => {
@@ -116,7 +116,20 @@ test("two real skill folders ask once each with description only, exclude a manu
           .parse(request);
         expect(Object.keys(parsed.questions)).toEqual(["filter"]);
       }
-      unsure = true;
+      // At five labels P=.70 has confidence=.625; the native gate must use P, inclusively.
+      probability = 0.7;
+      const boundary = await runRunner(
+        root,
+        ["--out", path.join(root, "boundary-output"), sources[0] ?? ""],
+        "synthetic-filter-key",
+      );
+      expect(boundary.status, boundary.stderr).toBe(0);
+      expect(lintReportSchema.parse(boundary.report).filter_answers?.[0]).toMatchObject({
+        state: "judged",
+        answer: "general",
+        probability: 0.7,
+      });
+      probability = 0.6;
       const uncertain = await runRunner(
         root,
         ["--out", path.join(root, "unsure-output"), sources[0] ?? ""],
@@ -135,6 +148,16 @@ test("two real skill folders ask once each with description only, exclude a manu
       expect(raw.filter_skips).toHaveLength(1);
       expect(uncertain.stdout).toContain("kind unsure");
       expect(uncertain.stdout).toContain('"general":0.6');
+      probability = Number.NaN;
+      const malformed = await runRunner(
+        root,
+        ["--out", path.join(root, "malformed-output"), sources[0] ?? ""],
+        "synthetic-filter-key",
+      );
+      expect(malformed.status).toBe(3);
+      expect(lintReportSchema.parse(malformed.report).filter_answers?.[0]?.state).toBe(
+        "incomplete",
+      );
       // Negative acquisition fixture, not a semantic scenario: native admission requires cap>=1000.
       // Make a deliberately long description so the REAL projection produces input_cut.
       const configFile = path.join(root, kitRelative, "skill-rules.config.json");
@@ -160,7 +183,7 @@ test("two real skill folders ask once each with description only, exclude a manu
         sources[0] ?? "",
         `---\nname: cut-control\ndescription: Use when ${"long negative acquisition fixture ".repeat(80)}\n---\n\n# Test\n\nFixture body.\n`,
       );
-      unsure = false;
+      probability = 1;
       const cut = await runRunner(
         root,
         ["--out", path.join(root, "cut-output"), sources[0] ?? ""],
@@ -186,7 +209,7 @@ test("two real skill folders ask once each with description only, exclude a manu
       return {
         filter: {
           label: folder.includes("agentstudio") ? "tool_manual" : "general",
-          probability: unsure ? 0.6 : 1,
+          probability,
         },
       };
     },

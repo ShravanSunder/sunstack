@@ -14,7 +14,12 @@ import { fingerprintRule, canonicalConfigDigest } from "./adoption.ts";
 import { scenarioRunReportSchema } from "./scenario-report.ts";
 import type { ScenarioRunReport, ScenarioEngineRun } from "./scenario-report.ts";
 import { engineVersion, ruleDefinitionSchema } from "./rule-state.ts";
-import { scenarioExitCode, gapScenario, scoreScenario } from "./scenario-scoring.ts";
+import {
+  scenarioExitCode,
+  gapScenario,
+  scoreScenario,
+  matchScenarioPiece,
+} from "./scenario-scoring.ts";
 import type { ScenarioResult } from "./scenario-scoring.ts";
 import { prepareScenarioOutput } from "./scenario-output.ts";
 import { buildScenarioSummary } from "./scenario-summary.ts";
@@ -268,18 +273,40 @@ function executeScenarios(request: ScenarioRunRequest): ScenarioRunReport {
           const gaps = reportGaps(parsed, []);
           ruleUncertain = parsed.uncertain;
           unresolvedSelections = [...gaps.unresolved];
+          const declaredPieces = group.flatMap((entry) => {
+            const piece = matchScenarioPiece(entry.scenario, parsed.results);
+            return piece ? [piece] : [];
+          });
+          const isDeclared = (rule: string, file: string, firstLine: number): boolean =>
+            declaredPieces.some(
+              (piece) =>
+                piece.name === rule && piece.file === file && piece.first_line === firstLine,
+            );
           runGaps.push(
             ...gaps.notRun,
-            ...(purpose === "kind_corpus" ? [] : gaps.cut).map(
-              (gap) => `cut ${gap.rule} ${gap.file}:${gap.first_line}: ${gap.fields.join(", ")}`,
-            ),
-            ...(purpose === "kind_corpus" ? [] : gaps.unresolved).map(
-              (selection) =>
-                `selection ${selection.outcome.kind}: ${selection.kind} ${selection.where.file}:${selection.where.first_line}`,
-            ),
-            ...(purpose === "kind_corpus" ? [] : parsed.uncertain).map(
-              (piece) => `uncertain ${piece.rule} ${piece.where.file}:${piece.where.first_line}`,
-            ),
+            ...gaps.cut
+              .filter((gap) => isDeclared(gap.rule, gap.file, gap.first_line))
+              .map(
+                (gap) => `cut ${gap.rule} ${gap.file}:${gap.first_line}: ${gap.fields.join(", ")}`,
+              ),
+            ...gaps.unresolved
+              .filter((selection) =>
+                declaredPieces.some(
+                  (piece) =>
+                    piece.file === selection.where.file &&
+                    selection.where.first_line >= piece.first_line &&
+                    selection.where.first_line <= piece.last_line,
+                ),
+              )
+              .map(
+                (selection) =>
+                  `selection ${selection.outcome.kind}: ${selection.kind} ${selection.where.file}:${selection.where.first_line}`,
+              ),
+            ...parsed.uncertain
+              .filter((piece) => isDeclared(piece.rule, piece.where.file, piece.where.first_line))
+              .map(
+                (piece) => `uncertain ${piece.rule} ${piece.where.file}:${piece.where.first_line}`,
+              ),
           );
           for (const entry of group) addResult(scoreScenario(entry.scenario, parsed));
           for (const { rule } of kindRules) {
@@ -386,7 +413,13 @@ function executeScenarios(request: ScenarioRunRequest): ScenarioRunReport {
         const result = matches[0];
         const set = sets[entry.set];
         if (set.state === "not_run") continue;
-        if (matches.length !== 1 || !result || result.outcome === "unsure" || result.gaps.length)
+        if (
+          matches.length !== 1 ||
+          !result ||
+          result.label.state === "disputed" ||
+          result.outcome === "unsure" ||
+          result.gaps.length
+        )
           set.unsure.push(entry.id);
         else if (result.outcome === "caught" && result.locator.kind !== "miss") set.passed++;
         else set.failed.push(entry.id);

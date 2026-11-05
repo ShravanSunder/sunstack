@@ -47,13 +47,13 @@ test("the main development data matches the independent handoff while retaining 
       set: old.set,
     });
   }
-  expect(file.scenarios.filter((entry) => entry.label.state === "disputed")).toHaveLength(4);
+  expect(file.scenarios.filter((entry) => entry.label.state === "disputed")).toHaveLength(5);
   const eligible = file.scenarios.filter(eligibleScenario);
   expect(
     ["real_mistake", "good", "near_miss"].map(
       (kind) => eligible.filter((entry) => entry.scenario_kind === kind).length,
     ),
-  ).toEqual([15, 3, 9]);
+  ).toEqual([14, 3, 9]);
   for (const kind of ["real_mistake", "good", "near_miss"] as const) {
     // Multiple historical IDs for one source cannot be the only support for a floor.
     expect(

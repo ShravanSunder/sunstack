@@ -43,7 +43,7 @@
       },
       "section": {
         "rule": "skill-section",
-        "max_chars": 30000,
+        "max_chars": 50000,
         "fields": {
           "heading": {
             "from": "first_line"
@@ -120,11 +120,12 @@
   },
   "limits": {
     "evidence_max_chars": 6000,
-    "request_max_chars": 50000,
+    "request_max_chars": 131072,
     "max_model_requests": 9000,
     "max_concurrent_requests": 8,
     "max_matches": 20000,
-    "max_input_tokens_per_request": 50000
+    "max_input_tokens_per_request": 131072,
+    "max_locate_lines": 1000
   },
   "filters": {
     "kind": {

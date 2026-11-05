@@ -617,25 +617,19 @@
         "piece_first_line": 15,
         "field_line": 15
       },
-      "expect": "must_fire",
-      "finding_lines": [
-        17,
-        19,
-        21,
-        25
-      ],
+      "expect": "must_pass",
       "kind": "regression_example",
       "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
         "basis": "agents_agreed",
-        "state": "labelled",
+        "state": "disputed",
         "who": [
           "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
           "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The procedure routes verification into the app project's own `verify-<app>` skill, journey, and launch command.\"); b yes/real_mistake (\"“resolve `.claude/skills/verify-<app>`” and run the selected app’s own journey scripts.\")."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The procedure routes verification into the app project's own `verify-<app>` skill, journey, and launch command.\"); b yes/real_mistake (\"“resolve `.claude/skills/verify-<app>`” and run the selected app’s own journey scripts.\"). Lead correction, 5 Nov: the generic verify-<app> recipe is owner question 4; retain the pre-B5 pass expectation while disputed. No settlement or tuning label until the owner answers."
       },
       "added": "2026-11-01"
     },

@@ -59,21 +59,55 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
       entry.expect === "unknown" ? "general" : entry.expect.kind,
     ]),
   );
-  let uncertainScope: "off" | "kind_corpus" | "rule_scenarios" = "off";
+  let uncertainScope:
+    | "off"
+    | "kind_corpus"
+    | "unscored_rule"
+    | "declared_rule"
+    | "incomplete_rule" = "off";
   let filterAssessments = 0;
   await withJudge(
     (request) => {
-      const input = z.object({ questions: z.record(z.string(), z.unknown()) }).parse(request);
+      const input = z
+        .object({ questions: z.record(z.string(), z.unknown()), state: z.unknown() })
+        .parse(request);
       if (input.questions.filter) filterAssessments++;
       const inCorpus = filterAssessments > 1;
-      // Same sibling question, varied only across actual separately executed source purposes.
-      return (uncertainScope === "kind_corpus" && inCorpus) ||
-        (uncertainScope === "rule_scenarios" && !inCorpus)
-        ? { loads_for_product: 0.5 }
-        : {};
+      const answers: Record<string, number> = {};
+      if (uncertainScope === "incomplete_rule" && !inCorpus) answers.reusable = Number.NaN;
+      if (
+        (uncertainScope === "kind_corpus" && inCorpus) ||
+        (uncertainScope === "unscored_rule" && !inCorpus)
+      )
+        answers.loads_for_product = 0.5;
+      if (!inCorpus && input.questions.routes_product) {
+        const firstLine = z
+          .object({ where: z.object({ first_line: z.number() }) })
+          .parse(input.state).where.first_line;
+        if (
+          uncertainScope === "declared_rule" ||
+          (uncertainScope === "unscored_rule" && firstLine !== scenario.select?.piece_first_line)
+        ) {
+          answers.routes_product = 0.5;
+          answers.example_or_own_infrastructure = 0.5;
+        }
+      }
+      return answers;
     },
     async (endpoint, requests) => {
       saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
+      const baselineEvidence = z
+        .object({
+          evidence: z
+            .object({
+              ast_grep: z.string(),
+              kinds: z.record(z.string(), z.record(z.string(), z.unknown())),
+            })
+            .passthrough(),
+        })
+        .parse(
+          JSON.parse(readFileSync(path.join(root, kitRelative, "skill-rules.config.json"), "utf8")),
+        ).evidence;
       // Act: leave native parsing, evidence collection, filter dispatch and full marker coverage real.
       const command = await spawnCollected(
         process.execPath,
@@ -116,15 +150,6 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
       expect(filters.length).toBeGreaterThanOrEqual(78);
       expect(report.runs.every((run) => run.gaps.length === 0)).toBe(true);
       expect(report.runs.filter((run) => run.purpose === "kind_corpus")).toHaveLength(1);
-      expect(
-        report.runs.some(
-          (run) =>
-            run.purpose === "kind_corpus" &&
-            run.rule_piece_cuts.some(
-              (piece) => piece.file.includes("presentation-html") && piece.cut?.includes("body"),
-            ),
-        ),
-      ).toBe(true);
       expect(command.stdout).toContain('"rule_piece_cuts"');
       const usage = report.runs.map((run) =>
         z
@@ -147,6 +172,15 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
         }),
       );
       // The same known real cut, now a RULE scenario, must retain the strict refusal.
+      saveConfig(root, {
+        evidence: {
+          ...baselineEvidence,
+          kinds: {
+            ...baselineEvidence.kinds,
+            section: { ...baselineEvidence.kinds.section, max_chars: 30000 },
+          },
+        },
+      });
       const cutScenario = {
         ...scenario,
         id: "fixture-real-rule-cut",
@@ -187,11 +221,26 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
         ),
       ).toBe(true);
       expect(cutReport.kind_filter?.[name]?.complete).toBe(true);
+      expect(
+        cutReport.runs.some(
+          (run) =>
+            run.purpose === "kind_corpus" &&
+            run.rule_piece_cuts.some(
+              (piece) => piece.file.includes("presentation-html") && piece.cut?.includes("body"),
+            ),
+        ),
+      ).toBe(true);
+      saveConfig(root, { evidence: baselineEvidence });
       writeFileSync(
         path.join(root, `tests/skills/evals/rule-scenarios/fixture/${name}.scenario.json`),
         JSON.stringify({ ...file, scenarios: [scenario] }),
       );
-      for (const purpose of ["kind_corpus", "rule_scenarios"] as const) {
+      for (const purpose of [
+        "kind_corpus",
+        "unscored_rule",
+        "declared_rule",
+        "incomplete_rule",
+      ] as const) {
         uncertainScope = purpose;
         filterAssessments = 0;
         const uncertain = await spawnCollected(
@@ -209,7 +258,9 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
         const filename = /^Scenario report: (.+)$/m.exec(uncertain.stdout)?.[1];
         if (!filename) throw new Error("Missing uncertain-purpose report");
         const observed = scenarioRunReportSchema.parse(JSON.parse(readFileSync(filename, "utf8")));
-        expect(observed.results[0]?.outcome).toBe("caught");
+        expect(observed.results[0]?.outcome).toBe(
+          purpose === "declared_rule" ? "unsure" : "caught",
+        );
         expect(
           observed.kind_filter?.[name]?.complete,
           JSON.stringify(
@@ -233,6 +284,43 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
             ),
           ).toBe(true);
           expect(uncertain.stdout).toContain('"rule_uncertain"');
+        } else if (purpose === "unscored_rule") {
+          expect(uncertain.status).toBe(0);
+          expect(observed.complete).toBe(true);
+          expect(
+            observed.runs.some(
+              (run) =>
+                run.purpose === "rule_scenarios" &&
+                run.gaps.length === 0 &&
+                run.rule_uncertain.some(
+                  (piece) => piece.rule === "general-skill.taught-rule-overfits-to-one-project",
+                ),
+            ),
+          ).toBe(true);
+          expect(
+            observed.runs.some(
+              (run) =>
+                run.purpose === "rule_scenarios" &&
+                run.rule_uncertain.some(
+                  (piece) =>
+                    piece.rule === name &&
+                    piece.where.first_line !== scenario.select?.piece_first_line,
+                ),
+            ),
+          ).toBe(true);
+        } else if (purpose === "incomplete_rule") {
+          expect(uncertain.status).toBe(5);
+          expect(observed.complete).toBe(false);
+          expect(
+            observed.runs.some(
+              (run) =>
+                run.purpose === "rule_scenarios" &&
+                run.engineExit === 3 &&
+                run.gaps.some(
+                  (gap) => gap.includes("Incomplete") || gap.includes("run incomplete"),
+                ),
+            ),
+          ).toBe(true);
         } else {
           expect(uncertain.status).toBe(5);
           expect(observed.complete).toBe(false);
@@ -245,11 +333,52 @@ test("the real full rulebook can assess all78 pinned kind folders through the or
           ).toBe(true);
         }
       }
+      // An undeclared entry's missing standard is still a GLOBAL coverage failure.
+      writeFileSync(
+        path.join(root, kitRelative, "fixture.md"),
+        readFileSync(path.join(root, kitRelative, "fixture.md"), "utf8").replace(
+          "<!-- K003 -->",
+          "",
+        ),
+      );
+      uncertainScope = "off";
+      const coverage = await spawnCollected(
+        process.execPath,
+        [path.join(root, "tests/skills/scripts/run-rule-scenarios.ts"), name],
+        {
+          cwd: root,
+          env: {
+            ...process.env,
+            OPENROUTER_API_KEY: "synthetic-full-kind-key",
+            SUNSTACK_CREDENTIAL_STORE: "off",
+          },
+        },
+      );
+      const coveragePath = /^Scenario report: (.+)$/m.exec(coverage.stdout)?.[1];
+      if (!coveragePath) throw new Error("Missing global coverage refusal");
+      const coverageReport = scenarioRunReportSchema.parse(
+        JSON.parse(readFileSync(coveragePath, "utf8")),
+      );
+      expect(coverage.status).toBe(5);
+      expect(coverageReport.complete).toBe(false);
+      expect(
+        coverageReport.runs.some((run) =>
+          run.gaps.some((gap) => gap.includes("K003") && gap.includes("Skipped")),
+        ),
+      ).toBe(true);
     },
     (request) => {
       const input = z
         .object({ questions: z.record(z.string(), z.unknown()), state: z.unknown() })
         .parse(request);
+      if (uncertainScope === "unscored_rule" && filterAssessments === 1 && input.questions.kind) {
+        const choice = z
+          .object({ criteria: z.record(z.string(), z.string()) })
+          .parse(input.questions.kind);
+        const label = Object.keys(choice.criteria)[0];
+        if (!label) throw new Error("Missing unscored choice labels");
+        return { kind: { label, probability: 0.5 } };
+      }
       if (!input.questions.filter) return {};
       const folder = z.object({ where: z.object({ folder: z.string() }) }).parse(input.state)
         .where.folder;

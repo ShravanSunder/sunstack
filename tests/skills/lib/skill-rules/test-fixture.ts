@@ -468,7 +468,10 @@ export async function withJudge<TValue>(
             {
               type: "choice",
               choice,
-              confidence: chosen,
+              confidence:
+                labels.length > 1
+                  ? Math.max(0, (chosen - 1 / labels.length) / (1 - 1 / labels.length))
+                  : 1,
               probabilities: Object.fromEntries(
                 labels.map((label) => [label, label === choice ? chosen : others]),
               ),
