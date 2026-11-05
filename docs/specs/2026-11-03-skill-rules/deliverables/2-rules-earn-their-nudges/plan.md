@@ -60,12 +60,12 @@ supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md
 planning result: ready
 governing planning basis:
   kind: reviewed-four-document-design
-  ai-tools docs/specs/2026-11-03-skill-rules/ (requirements, specification, program-design.md, verification-design.md) at 47b3a025; review tmp/2026-11-03-skill-rules-review/report.md … report-round-6.md (converged)
-  current applicability anchors: ai-tools 47b3a025; sunstack-tools 9116442 (base origin/main 4aa594a)
+  ai-tools docs/specs/2026-11-03-skill-rules/ (requirements, specification, program-design.md, verification-design.md) reviewed to convergence: rounds 1–6 to 47b3a025, then rounds 7–9 over the final config, five kinds, evidence trim and merge to 85ecf2c7, 0 open (tmp/2026-11-03-skill-rules-review/report-round-9.md; O1 fixed at 006e57e3)
+  current applicability anchors: ai-tools a815d170 (006e57e3 merged with origin/main); sunstack-tools dd92e2c
 delivery context:
   requested terminal: pr-ready-unmerged
   delivery grouping: single:rules-earn-their-nudges
-  PR topology: one-pr
+  PR topology: stacked (owner, 4 Nov: 'One PR per deliverable, stacked'); this deliverable is the bottom layer, PR #188 on skills/rules-as-nudges; deliverables 3–5 stack on it with gh stack
   repositories: ShravanSunder/sunstack (ai-tools)
 ```
 

@@ -86,13 +86,14 @@ The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by de
 plan path: docs/specs/2026-11-03-skill-rules/deliverables/1-engine-asks-kind-once/plan.md
 originating planner: plan-implementation
 supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md (its engine slices)
-planning result: ready, pending scoped re-review of the renamed engine design and R8
+planning result: ready for step E0 only; steps E1–E5 held (owner, 4 Nov: the kind filter must be designed with Jev and proven by experiments first; the Jev Advisor's kind decision model may change the filter to a decision graph, which goes through plan-update before E1 starts)
 governing planning basis:
   kind: four-document-design
-  sunstack-tools docs/specs/2026-11-04-owner-assessment/{requirements,specification,program-design,verification-design}.md (reviewed to convergence at 9116442 under the old names; renamed and R8 added on 4 Nov); within the ai-tools set (Program Design: the engine feature)
+  sunstack-tools docs/specs/2026-11-04-owner-assessment/{requirements,specification,program-design,verification-design}.md reviewed to convergence: rounds 1–4 to 9116442, then rounds 5–8 over the filters rename, R8 and R9 to dd92e2c, 0 open (tmp/design-workflows/2026-11-04-owner-assessment/review/report-round-8.md); within the ai-tools set (Program Design: the engine feature)
+  current applicability anchors: sunstack-tools dd92e2c; ai-tools 006e57e3
 delivery context:
   requested terminal: pr-ready-unmerged
   delivery grouping: single:engine-asks-kind-once
-  PR topology: one-pr
+  PR topology: one-pr (the engine is its own repository's PR; owner, 4 Nov: one PR per deliverable)
   repositories: ShravanSunder/sunstack-tools
 ```
