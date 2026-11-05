@@ -19,7 +19,7 @@ import {
 
 afterEach(cleanupFixtureRoots);
 
-test("the real catalogue fits the admitted native request and locator budgets, while a wrong locator fails", async () => {
+test("the real catalogue fits the evidence budgets and remains blocked without an oversized locator", async () => {
   const root = createFixture();
   const name = "general-skill.overfits-to-product-workflow";
   const gitText = (file: string): string =>
@@ -119,11 +119,22 @@ test("the real catalogue fits the admitted native request and locator budgets, w
       );
       expect(targetRequests.length).toBeGreaterThan(0);
       expect(
+        targetRequests.every((request) => !Object.hasOwn(request.questions, "product_line")),
+      ).toBe(true);
+      expect(
         targetRequests.every(
-          (request) => Object.keys(request.questions.product_line?.criteria ?? {}).length === 907,
+          (request) =>
+            !request.state["cut-fields"] && z.string().parse(request.state.body).length === 43775,
         ),
       ).toBe(true);
-      expect(targetRequests.every((request) => !request.state["cut-fields"])).toBe(true);
+      expect(
+        nativeRequests.every((request) =>
+          Object.values(request.questions).every(
+            (question) =>
+              question.type !== "choice" || Object.keys(question.criteria ?? {}).length <= 255,
+          ),
+        ),
+      ).toBe(true);
       expect(
         nativeRequests.every(
           (request) =>
@@ -142,7 +153,7 @@ test("the real catalogue fits the admitted native request and locator budgets, w
         ),
       ).toBe(true);
       expect(report.kind_filter?.[name]?.complete).toBe(true);
-      // Scripted response intentionally chooses a wrong offered line; a correct breach isn't enough.
+      // The default limit omits the 907-option locator. Its fallback line misses the unchanged gold; the case stays blocked.
       expect(report.results[0]?.outcome).toBe("caught");
       expect(report.results[0]?.locator.kind).toBe("miss");
       expect(invoked.status).toBe(1);
@@ -167,71 +178,7 @@ test("the real catalogue fits the admitted native request and locator budgets, w
       );
       expect(refused.status).toBe(5);
       expect(readFileSync(adoptionFile, "utf8")).toBe(before);
-      // The driver accounts the input budget in encoded bytes: characters still fit this probe.
-      const limits = z
-        .object({ limits: z.record(z.string(), z.number()) })
-        .parse(
-          JSON.parse(readFileSync(path.join(root, kitRelative, "skill-rules.config.json"), "utf8")),
-        ).limits;
-      const previousCount = requests.length;
-      saveConfig(root, { limits: { ...limits, max_input_tokens_per_request: 110000 } });
-      const bounded = await spawnCollected(
-        process.execPath,
-        [path.join(root, "tests/skills/scripts/run-rule-scenarios.ts"), name],
-        {
-          cwd: root,
-          env: {
-            ...process.env,
-            OPENROUTER_API_KEY: "synthetic-capacity-key",
-            SUNSTACK_CREDENTIAL_STORE: "off",
-          },
-        },
-      );
-      expect(bounded.status).toBe(1);
-      const smaller = requests
-        .slice(previousCount)
-        .map((request) =>
-          z
-            .object({
-              questions: z.record(z.string(), z.unknown()),
-              state: z.record(z.string(), z.unknown()),
-            })
-            .passthrough()
-            .parse(request),
-        )
-        .filter(
-          (request) =>
-            Object.hasOwn(request.questions, "routes_product") &&
-            z.object({ where: z.object({ file: z.string() }) }).parse(request.state).where.file ===
-              scenario.source.path,
-        );
-      expect(smaller.length).toBeGreaterThan(0);
-      expect(
-        smaller.every(
-          (request) =>
-            !Object.hasOwn(request.questions, "product_line") && !request.state["cut-fields"],
-        ),
-      ).toBe(true);
     },
-    (request) => {
-      const input = z
-        .object({
-          questions: z.record(
-            z.string(),
-            z
-              .object({ type: z.string(), criteria: z.record(z.string(), z.string()).optional() })
-              .passthrough(),
-          ),
-        })
-        .passthrough()
-        .parse(request);
-      const criteria = input.questions.product_line?.criteria;
-      const wrong =
-        criteria &&
-        Object.keys(criteria).find(
-          (label) => !scenario.finding_lines?.includes(Number(label.slice(1))),
-        );
-      return wrong ? { filter: "general", product_line: wrong } : { filter: "general" };
-    },
+    () => ({ filter: "general" }),
   );
 });

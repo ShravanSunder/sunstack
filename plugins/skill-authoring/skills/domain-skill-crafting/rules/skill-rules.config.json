@@ -124,8 +124,7 @@
     "max_model_requests": 9000,
     "max_concurrent_requests": 8,
     "max_matches": 20000,
-    "max_input_tokens_per_request": 131072,
-    "max_locate_lines": 1000
+    "max_input_tokens_per_request": 131072
   },
   "filters": {
     "kind": {
