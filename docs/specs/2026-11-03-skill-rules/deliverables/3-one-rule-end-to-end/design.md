@@ -14,7 +14,7 @@ flowchart LR
   kinds["kind scenarios:<br/>78 skills with labels"] --> run["one scenario run:<br/>the rule's 31 scenarios<br/>and the 78 kind scenarios"]
   gate --> run
   run --> report["report: rule caught / missed / unsure,<br/>kind right / wrong / unsure,<br/>gate run / exclude / skip"]
-  report --> adopt["you adopt the rule<br/>(evals:adopt refuses if any scenario failed,<br/>any was unsure, or the gate decided wrongly)"]
+  report --> adopt["you adopt the rule<br/>(evals:adopt refuses if any of the rule's scenarios<br/>failed or was unsure, a kind scenario went unasked,<br/>or the gate decided wrongly; an unsure kind is listed)"]
   adopt --> agent["an agent's lint run:<br/>nudge at ops-observability-stack line 17;<br/>AgentStudio 'not applicable: kind tool_manual'"]
 ```
 
@@ -38,7 +38,7 @@ What an agent sees after you adopt the rule (from the scenarios, not a real run 
 | Kind scenarios | new `tests/skills/evals/kind-filter/skill-kind.scenario.json`: the 78 skills from the experiment, pinned at `cbcaec0`, with their labels (independent labellers, your three rulings; `scaffold-project` and `audit-security-review` kept but unscored until you settle them) |
 | The rule's scenarios | expectations follow the gate: three scenarios that said "must pass" in folders the gate excludes (`agentstudio`, `agent-collaboration`, and `practices-verification-maintenance` after your repo_specific ruling) now expect "not applicable", the gate's own outcome; the quiet result is the same, and nothing else changes |
 | Scenario run | for a gated rule, `evals:scenarios <rule>` also runs the kind scenarios and reports both in one report |
-| Adoption | `evals:adopt` refuses a gated rule unless that report's kind section has zero wrong gate decisions; changing the filter's question, criteria or bar holds the rule again (it's in the fingerprint already) |
+| Adoption | `evals:adopt` refuses a gated rule unless that report's kind section is complete (every kind scenario answered) with zero wrong gate decisions; an unsure kind answer is listed as a skip and doesn't block; changing the filter's question, criteria or bar holds the rule again (it's in the fingerprint already) |
 
 ## The filter's criteria: decided by one more measured run
 
