@@ -82,7 +82,7 @@ function migrateFiles(): void {
           ...(step.min_probability !== undefined ? {min_probability: step.min_probability} : {}),
         },
       };
-      rules[name] = {basis: mechanical ? "mechanical" : "judged", decision: droppedRules[entry.name] ? "dropped" : name.startsWith("general-skill.") || name.startsWith("rule-question.") ? "held_by_owner" : "keep", decided: "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)", reasons: mechanical ? [{type: "written_standard", locator: `${pair.rules}:${marker}`}] : [], bars};
+      rules[name] = {basis: mechanical ? "mechanical" : "judged", decision: droppedRules[entry.name] ? "dropped" : name === "general-skill.taught-rule-overfits-to-one-project" ? "rework_first" : name === "general-skill.description-overfits-to-one-product" || name.startsWith("rule-question.") ? "held_by_owner" : "keep", decided: "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)", reasons: mechanical ? [{type: "written_standard", locator: `${pair.rules}:${marker}`}] : [], bars};
     }
     const file = casesFileSchema.parse({rules, cases: old.map(migrateEntry)});
     writeFileSync(rulesFile.replace(/\.rules\.json$/, ".cases.json"), `${JSON.stringify(file, null, 2)}\n`);

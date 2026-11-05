@@ -7,8 +7,11 @@
         "type": "choice",
         "instructions": {
           "check": "line",
-          "against": "step",
-          "task": "This line opens with When. Does it start a branch, or is it guidance?"
+          "against": "headings",
+          "task": "This line opens with When. headings contains every enclosing heading, from the title to the nearest section, empty when none. Read block with line only when line ends in a colon (:); otherwise ignore block. Does it start a branch, or is it guidance?",
+          "context": [
+            "block"
+          ]
         },
         "criteria": {
           "branch": "A branch: its condition picks out some runs, and those runs do work the others don't, such as a different action, destination or result.",
@@ -19,8 +22,11 @@
         "type": "choice",
         "instructions": {
           "check": "line",
-          "against": "step",
-          "task": "Read the branch; the step is the heading of the numbered step it sits in, empty when it sits in none. Which part does the branch leave out?"
+          "against": "headings",
+          "task": "Read the branch in line. headings contains every enclosing heading, from the title to the nearest section, empty when none. When line ends in a colon (:), read it together with block, the following list, table or fenced code block it introduces; otherwise ignore block. Which part does the branch leave out?",
+          "context": [
+            "block"
+          ]
         },
         "criteria": {
           "none": "It names a condition an agent can observe in the work (a file, a result, a state, a request, a diff) and the different work that condition causes. Observable conditions include the kind of work in hand, a piece of information the next call needs and the agent lacks, an earlier step's result that left a named question open, and a doubt already stopping a named action. A doubt counts only when something the agent can see anchors it: a fact it settles by looking, as in 'if the lockfile is stale or you can't tell', an earlier step that left its question open, or an action the doubt blocks. A judgment of value that an observable kind of work and an explicit grant both bound counts too, as 'if a long check is worth running in the background and the host allows it' does.",
@@ -62,58 +68,6 @@
               "finding": "Branch doesn't name the different work its condition causes.",
               "at": "line"
             }
-          }
-        }
-      }
-    },
-    "severity": "warn"
-  },
-  "K002": {
-    "name": "main-path.spine",
-    "evidence": "skill_body",
-    "questions": {
-      "has_spine": {
-        "type": "noul",
-        "instructions": {
-          "check": "body",
-          "context": "outline",
-          "task": "Does SKILL.md show the all-run spine, from load to completion, in one scan? First identify the job promised by the description and opening model. Then trace its entry/admission or dispatch, the work it calls for, and its returned result, handoff, sufficiency check or stop. This is a spine test, not a workflow-list test: a compact judgment/application route or conditional dispatch to references can satisfy it. In a judgment skill, framing the question, applying the lens and checking or stating the result can be the whole route. A role can admit its commission, dispatch to its supplied phase/procedure and state its handback/completion obligations. Read body plus outline, numbered_first_lines and completion_first_lines as supplementary context; those first lines do not impose a numbering requirement. A formal Done heading and one universally numbered procedure are unnecessary. If the cut hides decisive material, stay uncertain instead of inventing it."
-        },
-        "criteria": {
-          "true": "The visible body makes the job's entry-to-result route traceable in one scan, in the form its job needs: ordered steps, a compact judgment/application route, conditional reference dispatch or a mix. A branch may return its specified result or exact gap; an explicit sufficiency/handback check can be completion.",
-          "false": "The visible body gives disconnected advice, topic/rule lists or optional references without showing how an entering agent chooses/applies the work and reaches its result or completion boundary. Missing numbering alone is not a failure; a formal process must not be demanded of a compact judgment."
-        }
-      }
-    },
-    "decision": {
-      "start": "has_numbered",
-      "steps": {
-        "has_numbered": {
-          "mechanical_check": {
-            "tool": "regex",
-            "field": "numbered",
-            "pattern": "\\S"
-          },
-          "yes": "has_workflow",
-          "no": "not_applicable"
-        },
-        "has_workflow": {
-          "mechanical_check": {
-            "tool": "regex",
-            "field": "workflows",
-            "pattern": "\\S"
-          },
-          "yes": "not_applicable",
-          "no": "spine"
-        },
-        "spine": {
-          "ask": "has_spine",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
-          "yes": "pass",
-          "no": {
-            "finding": "Numbered lists hold no workflow, and the all-run spine from load to completion isn't visible.",
-            "at": "body"
           }
         }
       }

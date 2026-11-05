@@ -1,502 +1,72 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { afterEach, describe, expect, test } from "vitest";
+import { execFileSync } from "node:child_process";
+import { afterEach, expect, test } from "vitest";
 import { z } from "zod";
-import {
-  cleanupFixtureRoots,
-  createFixture,
-  kitRelative,
-  listEvidence,
-  reportSchema,
-  repositoryRoot,
-  runRunner,
-  runRunnerJudged,
-  saveConfig,
-  saveRules,
-  writeFixtureFile,
-} from "../test-fixture.ts";
+import { assembledRules, checkOutputSchema } from "../report.ts";
+import { unpackPinnedSource } from "../pinned-source.ts";
+import { cleanupFixtureRoots, enginePath, kitRelative, repositoryRoot, spawnCollected } from "../test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
+const config = path.join(repositoryRoot, kitRelative, "skill-rules.config.json");
+const expectedNames = ["skill-description.starts-with-use-when", "skill-description.longer-than-225-characters", "skill-description.longer-than-300-characters", "skill-description.names-the-loading-moment", "skill-description.states-triggers-not-workflow-steps", "general-skill.description-overfits-to-one-product", "general-skill.overfits-to-product-workflow", "general-skill.taught-rule-overfits-to-one-project", "load-call.names-when-where-and-result", "skill-branch.names-an-observable-condition", "rule-question.asks-exactly-one-thing", "rule-question.criteria-answer-the-same-question"];
 
-const requestSchema = z.object({ questions: z.record(z.string(), z.unknown()) }).passthrough();
-
-function kitEntry(topic: string, marker: string): unknown {
-  const entries = z
-    .record(z.string(), z.unknown())
-    .parse(
-      JSON.parse(readFileSync(path.join(repositoryRoot, kitRelative, `${topic}.rules.json`), "utf8")),
-    );
-  const entry = entries[marker];
-  if (!entry) throw new Error(`Missing ${topic} ${marker}`);
-  return entry;
-}
-
-function ruleRequests(requests: readonly unknown[]): unknown[] {
-  // Selection requests name their questions by candidate key (c1, c2, ...); rule requests by question.
-  return requests.filter(
-    (request) =>
-      !Object.keys(requestSchema.parse(request).questions).every((name) => /^c\d+$/.test(name)),
-  );
-}
-
-describe("skill-branch.names-an-observable-condition routes every accepted opener (kit K001, main-path)", () => {
-  test.each([
-    ["IF the input is missing, return the gap.", "branch_parts", "pass"],
-    ["If the input is missing, return the gap.", "branch_parts", "pass"],
-    ["if the input is missing, return the gap.", "branch_parts", "pass"],
-    ["When the input is missing, return the gap.", "when_kind", "not_applicable"],
-    ["when the input is missing, return the gap.", "when_kind", "not_applicable"],
-  ] satisfies [string, string, string][])(
-    "%s ends at %s",
-    async (line, step, outcome) => {
-      // Wrong behavior: an If line asked "This line opens with When", or a when line judged as an IF.
-      // when_kind answers guidance, so a line that reaches it ends not_applicable; one that skips it
-      // reaches the gap question, answered none.
-      const root = createFixture();
-      saveRules(root, { K001: kitEntry("main-path", "K001") });
-      writeFixtureFile(root, "plugins/example/skills/sample/references/branch.md", `${line}\n`);
-      const result = await runRunnerJudged(root, [], {}, { when_kind: "guidance", gap: "none" });
-      expect(result.status, result.stderr).toBe(0);
-      const report = reportSchema.parse(result.report);
-      expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
-        [1, step, outcome],
-      ]);
-    },
-  );
-
-  test("a mid-sentence if gives no branch piece and no request", async () => {
-    const root = createFixture();
-    saveRules(root, { K001: kitEntry("main-path", "K001") });
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/references/branch.md",
-      "Return the gap if the input is missing.\n",
-    );
-    const result = await runRunnerJudged(root);
-    // No branch piece anywhere: the full run picks nothing, which the runner reports as a gap.
-    expect(result.status).toBe(2);
-    const report = reportSchema.parse(result.report);
-    expect(report.status.kind).toBe("nothing_selected");
-    expect(report.results).toEqual([]);
-    expect(result.requests).toHaveLength(0);
-  });
-});
-
-describe("the runner prints selection apart from rule verdicts", () => {
-  const flow =
-    "---\ndescription: Use when checking the runner.\n---\n\n# Sample\n\n## Flow\n\n1. Inspect the input.\n2. Return the result.\n";
-  const unresolved = /uncertain selection|incomplete selection/;
-
-  function mechanicalOnly(root: string): void {
-    // One mechanical rule, so any uncertainty or gap in the run comes from selection alone.
-    saveRules(root, { K001: kitEntry("descriptions-and-invocation", "K001") });
-    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", flow);
+test("the shipped kit assembles exactly U10's twelve rules and five evidence kinds", async () => {
+  const checked = await spawnCollected(enginePath, ["lint", "--config", config, "--check"], {cwd: repositoryRoot, env: {...process.env, OPENROUTER_API_KEY: "", SUNSTACK_CREDENTIAL_STORE: "off"}});
+  expect(checked.status, checked.stderr).toBe(0);
+  expect(assembledRules(checkOutputSchema.parse(JSON.parse(checked.stdout))).map((entry) => entry.rule).sort()).toEqual([...expectedNames].sort());
+  const raw = z.object({rulebook: z.array(z.object({rules: z.string()})), evidence: z.object({kinds: z.record(z.string(), z.unknown())})}).parse(JSON.parse(readFileSync(config, "utf8")));
+  expect(Object.keys(raw.evidence.kinds).sort()).toEqual(["branch", "load", "rule_question", "section", "skill"]);
+  expect(raw.rulebook.map((entry) => entry.rules)).not.toContain("steering.rules.json");
+  const merged = readFileSync(path.resolve(path.dirname(config), "../references/general-skill.md"), "utf8");
+  expect(merged).toContain("<!-- K001 -->"); expect(merged).toContain("<!-- K002 -->"); expect(merged).toContain("<!-- K003 -->");
+  for (const [topic, marker, next] of [["descriptions-and-invocation", "K007", "K001"], ["calls-and-placement", "K003", "K002"], ["generalization", "K001", "K003"]]) {
+    const oldPath = path.posix.normalize(`${kitRelative}/../references/${topic}.md`);
+    const old = execFileSync("git", ["show", `a815d170:${oldPath}`], {cwd: repositoryRoot, encoding: "utf8"});
+    const standard = old.split("\n").find((line) => line.endsWith(`<!-- ${marker} -->`));
+    if (!standard) throw new Error(`Missing old standard ${topic}/${marker}`);
+    expect(merged).toContain(standard.replace(`<!-- ${marker} -->`, `<!-- ${next} -->`));
   }
-
-  test("a selection-only uncertain candidate makes exit 5 and is named with its heading and probability", async () => {
-    // Wrong behavior: exit 5 with every rule count at zero uncertain and nothing saying why.
-    const root = createFixture();
-    mechanicalOnly(root);
-    const result = await runRunnerJudged(root, [], { c1: 0.5 });
-    expect(result.status, result.stderr).toBe(5);
-    const report = reportSchema.parse(result.report);
-    expect(report.status.kind).toBe("uncertain");
-    expect(report.uncertain).toEqual([]);
-    expect(result.stdout).toContain('"uncertain":0,"incomplete":0}');
-    expect(result.stdout).toContain(
-      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; pieces that exist only through this selection are absent; other results in its range stand',
-    );
-    expect(result.stdout).toContain(
-      'Selection workflow_section: {"candidates":1,"asked":1,"selected":0,"not_selected":0,"uncertain":1,"incomplete":0}',
-    );
-    // Nothing was selected, but by an uncertain answer, not a negative one: the count says so.
-    expect(result.stdout).toContain(
-      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (0 not selected, 1 uncertain, 0 incomplete)",
-    );
-    // The engine's JSON is kept as it came: the candidate is in its selections.
-    expect(report.selections.map((item) => [item.first_line, item.outcome.kind])).toEqual([
-      ["## Flow", "uncertain"],
-    ]);
-  });
-
-  test("a selection the provider fails makes exit 3 and names the candidate with its reason", async () => {
-    const root = createFixture();
-    mechanicalOnly(root);
-    // Nothing listens on port 9 (discard): every selection request fails at the provider.
-    saveConfig(root, {
-      decision_model: { model: "jev-latest", endpoint: "http://127.0.0.1:9/v1/systemone" },
-    });
-    const result = await runRunner(root, [], "synthetic-runner-test-key");
-    expect(result.status, result.stderr).toBe(3);
-    expect(reportSchema.parse(result.report).status.kind).toBe("incomplete");
-    expect(result.stdout).toContain(
-      'plugins/example/skills/sample/SKILL.md:7: incomplete selection workflow_section "## Flow", provider_failure; pieces that exist only through this selection are absent; other results in its range stand',
-    );
-    expect(result.stdout).toContain(
-      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (0 not selected, 0 uncertain, 1 incomplete)",
-    );
-  });
-
-  test("an uncertain workflow keeps its plain-kind branch result, and its step, absent, is never counted as passed", async () => {
-    // Wrong behavior: a branch decided inside an unresolved workflow discarded as "never judged", or
-    // a step that doesn't exist read as a passed completion.
-    const root = createFixture();
-    saveRules(root, {
-      K001: kitEntry("main-path", "K001"),
-      K002: kitEntry("steering", "K001"),
-    });
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/SKILL.md",
-      [
-        "---",
-        "description: Use when checking coverage.",
-        "---",
-        "",
-        "# Sample",
-        "",
-        "## Flow",
-        "",
-        "1. Inspect the input.",
-        "",
-        "   IF the input is missing, return the gap to the caller.",
-        "",
-        "   Completion: the input is named.",
-        "",
-      ].join("\n"),
-    );
-    const result = await runRunnerJudged(root, [], { c1: 0.5 }, { gap: "none" });
-    expect(result.status, result.stderr).toBe(5);
-    const report = reportSchema.parse(result.report);
-    expect(report.results.map((item) => [item.name, item.first_line, item.outcome])).toEqual([
-      ["skill-branch.names-an-observable-condition", 11, "pass"],
-    ]);
-    expect(result.stdout).toContain(
-      'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; pieces that exist only through this selection are absent; other results in its range stand',
-    );
-  });
-
-  test("a selected candidate prints counts only, and a rule list answered no is information, not a failure", async () => {
-    const selectedRoot = createFixture();
-    mechanicalOnly(selectedRoot);
-    const selected = await runRunnerJudged(selectedRoot, [], { c1: 0.95 });
-    expect(selected.status, selected.stderr).toBe(0);
-    expect(selected.stdout).toContain(
-      'Selection workflow_section: {"candidates":1,"asked":1,"selected":1,"not_selected":0,"uncertain":0,"incomplete":0}',
-    );
-    expect(selected.stdout).not.toMatch(unresolved);
-    expect(selected.stdout).not.toContain("no workflow_section selected");
-
-    const ruleListRoot = createFixture();
-    mechanicalOnly(ruleListRoot);
-    const ruleList = await runRunnerJudged(ruleListRoot, [], { c1: 0.1 });
-    expect(ruleList.status, ruleList.stderr).toBe(0);
-    expect(reportSchema.parse(ruleList.report).status.kind).toBe("clean");
-    expect(ruleList.stdout).not.toMatch(unresolved);
-    expect(ruleList.stdout).toContain(
-      "plugins/example/skills/sample/SKILL.md: no workflow_section selected (1 not selected, 0 uncertain, 0 incomplete)",
-    );
-  });
+  const branch = readFileSync(path.join(path.dirname(config), "main-path.rules.json"), "utf8");
+  expect(branch).toContain("otherwise ignore block"); expect(branch).toContain("every enclosing heading");
+  expect(branch).not.toContain('"against": "step"');
 });
 
-describe("sentence evidence lies within a selected step or a Standards section", () => {
-  test("a selected step's nested item is a sentence; the step's own item, an unselected list and prose outside are not", async () => {
-    // Wrong behavior: a step's own text read as a sentence (the held convention says it isn't), or a
-    // rule list the section judgment rejected read as sentences.
-    const root = createFixture();
-    const text = [
-      "---",
-      "description: Use when checking sentences.",
-      "---",
-      "",
-      "## How this runs",
-      "",
-      "1. Inspect the input.",
-      "",
-      "   - Keep the source named.",
-      "",
-      "## Core rules",
-      "",
-      "1. Keep it short.",
-      "",
-      "   - Name the owner.",
-      "",
-      "## Notes",
-      "",
-      "Prose outside any step.",
-      "",
-    ].join("\n");
-    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/references/standards.md",
-      "## Standards\n\n- A standard.\n",
-    );
-    const listing = await listEvidence(root, { c2: 0.1 });
-    const sentences = listing.pieces
-      .filter((piece) => piece.kind === "sentence")
-      .map((piece) => [piece.where.file.split("/sample/")[1], piece.where.first_line]);
-    expect(sentences).toEqual([
-      ["SKILL.md", 9],
-      ["references/standards.md", 3],
-    ]);
-  });
-});
+const spanSchema = z.object({byte_start: z.number(), byte_end: z.number(), start_line: z.number(), end_line: z.number()}).passthrough();
+const fieldsSchema = z.object({line: z.object({value: z.string()}), headings: z.object({values: z.array(z.string())}), block: z.object({values: z.array(z.string()), spans: z.array(spanSchema)})});
+const branchPieceSchema = z.object({kind: z.literal("branch"), where: z.object({file: z.string(), first_line: z.number()}), fields: fieldsSchema, model_view: z.object({fields: z.object({line: z.string(), headings: z.array(z.string()), block: z.array(z.string())}), cut: z.array(z.string())})});
 
-describe("guidance.positive routes each kind of sentence (kit K002, steering)", () => {
-  test.each([
-    ["option", "kind", "pass"],
-    ["other", "kind", "not_applicable"],
-    ["guidance", "positive", "finding"],
-  ] satisfies [string, string, string][])(
-    "kind %s ends at %s as %s",
-    async (kind, step, outcome) => {
-      // Wrong behavior: an option paired with its condition, or a bare label, reaches the positive
-      // verdict and is judged as avoidance guidance; or an option ends not_applicable though it says
-      // what to do. The judge answers positive 0.1, so only a walk that reaches it ends in a finding.
-      const root = createFixture();
-      saveRules(root, { K001: kitEntry("steering", "K002") });
-      writeFixtureFile(
-        root,
-        "plugins/example/skills/sample/references/standards.md",
-        "## Standards\n\n- `skip`: one-off or already covered.\n",
-      );
-      const result = await runRunnerJudged(root, [], { positive: 0.1 }, { kind });
-      const report = reportSchema.parse(result.report);
-      expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
-        [3, step, outcome],
-      ]);
-    },
-  );
-});
-
-describe("step evidence: a heading step owns its numbered sub-items", () => {
-  test("items nested in a numbered heading step are not steps; items of a plain numbered list are", async () => {
-    // Wrong behavior: each sub-item of "### 1. Apply the change" read as a step of its own, owing
-    // its own Completion line, though the heading step carries the completion for all of them.
-    const root = createFixture();
-    const text = [
-      "---",
-      "description: Use when checking steps.",
-      "---",
-      "",
-      "## Workflow",
-      "",
-      "### 1. Apply the change",
-      "",
-      "1. Show the diff.",
-      "2. Apply what was accepted.",
-      "",
-      "Completion: the accepted changes are applied.",
-      "",
-      "## Ordered run",
-      "",
-      "1. Inspect the input.",
-      "2. Return the result.",
-      "",
-    ].join("\n");
-    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", text);
-    const listing = await listEvidence(root);
-    const steps = listing.pieces
-      .filter((piece) => piece.kind === "step")
-      .map((piece) => piece.where.first_line);
-    expect(steps).toEqual([7, 16, 17]);
-  });
-});
-
-describe("reference_section evidence carries the reference's outline and opening (kit K002, calls-and-placement)", () => {
-  const textsSchema = z.object({ values: z.array(z.string()) }).passthrough();
-
-  test("the opening holds the paragraphs and list items under the title, and the outline every heading", async () => {
-    // Wrong behavior: the opening picks text under a later section or inside a quote, or misses the
-    // Return line; or the outline is empty because heading lines are read only in SKILL.md. Either
-    // hides the reference-wide stop the teaching-depth question credits.
-    const root = createFixture();
-    const text = [
-      "# Guide",
-      "",
-      "This reference owns the guide's stage.",
-      "",
-      "Return: the checked result.",
-      "",
-      "- An opening list item.",
-      "",
-      "> A quoted paragraph.",
-      "",
-      "## First stage",
-      "",
-      "Inspect the input.",
-      "",
-      "## When to stop",
-      "",
-      "Stop when the input is checked.",
-      "",
-    ].join("\n");
-    writeFixtureFile(root, "plugins/example/skills/sample/references/guide.md", text);
-    const listing = await listEvidence(root);
-    const sections = listing.pieces.filter((piece) => piece.kind === "reference_section");
-    expect(sections.map((piece) => piece.where.first_line)).toEqual([11, 15]);
-    const first = sections[0];
-    if (!first) throw new Error("No reference section");
-    expect(textsSchema.parse(first.fields.opening).values).toEqual([
-      "This reference owns the guide's stage.",
-      "Return: the checked result.",
-      "- An opening list item.",
-    ]);
-    expect(textsSchema.parse(first.fields.outline).values).toEqual([
-      "# Guide",
-      "## First stage",
-      "## When to stop",
-    ]);
-  });
-
-  test("a wrapped opening paragraph or list item reaches the model as its first line only", async () => {
-    // Wrong behavior: the questions describe the opening as whole paragraphs while a wrapped
-    // paragraph's Return clause, or a list item's restriction, on its second line never reaches
-    // the model; the teaching-depth wording must say a broken-off line continues out of sight.
-    const root = createFixture();
-    const text = [
-      "# Release",
-      "",
-      "This reference owns the release stage,",
-      "and returns the signed artifact and its checksum.",
-      "",
-      "- Expected inputs: the tag",
-      "  and only the changelog entry that names it.",
-      "",
-      "## Cut the release",
-      "",
-      "Run the build.",
-      "",
-    ].join("\n");
-    writeFixtureFile(root, "plugins/example/skills/sample/references/release.md", text);
-    const listing = await listEvidence(root);
-    const section = listing.pieces.find((piece) => piece.kind === "reference_section");
-    if (!section) throw new Error("No reference section");
-    const opening = textsSchema.parse(section.fields.opening).values;
-    expect(opening).toEqual(["This reference owns the release stage,", "- Expected inputs: the tag"]);
-    expect(opening.join("\n")).not.toContain("returns the signed artifact");
-    expect(opening.join("\n")).not.toContain("only the changelog entry");
-  });
-});
-
-describe("reference.teaching-depth keeps unseen teaching unresolved (kit K002, calls-and-placement)", () => {
-  test.each([
-    ["none", "pass"],
-    ["unseen", "uncertain"],
-    ["stop", "finding"],
-  ] satisfies [string, string][])("missing %s ends at teaching as %s", async (missing, outcome) => {
-    // Wrong behavior: teaching the outline only names (a 'When to stop' heading whose text isn't
-    // shown) passes the owned stage, or is reported as missing; it must stay uncertain.
-    const root = createFixture();
-    saveRules(root, { K001: kitEntry("calls-and-placement", "K002") });
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/references/guide.md",
-      "# Guide\n\n## First stage\n\nInspect the input and decide.\n\n## When to stop\n\nStop when it is decided.\n",
-    );
-    const result = await runRunnerJudged(root, [], {}, { role: "stage", missing });
-    const report = reportSchema.parse(result.report);
-    expect(report.results.map((item) => [item.first_line, item.step, item.outcome])).toEqual([
-      [3, "teaching", outcome],
-      [7, "teaching", outcome],
-    ]);
-  });
-});
-
-describe("main-path.spine is asked only where numbered lists hold no workflow (kit K002, main-path)", () => {
-  const ruleList =
-    "---\ndescription: Use when checking spines.\n---\n\n# Sample\n\nApply the lens to the question and state the result.\n\n## Core rules\n\n1. Keep it short.\n2. Name the owner.\n";
-
-  test("a skill with no numbered list is not applicable, with no request", async () => {
-    const root = createFixture();
-    saveRules(root, { K002: kitEntry("main-path", "K002") });
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/SKILL.md",
-      "---\ndescription: Use when checking spines.\n---\n\n# Sample\n\nApply the lens and state the result.\n",
-    );
-    const result = await runRunnerJudged(root);
-    expect(result.status, result.stderr).toBe(0);
-    expect(
-      reportSchema.parse(result.report).results.map((item) => [item.step, item.outcome]),
-    ).toEqual([["has_numbered", "not_applicable"]]);
-    expect(result.requests).toHaveLength(0);
-  });
-
-  test("a skill whose numbered list is a selected workflow is not applicable, with only the selection request", async () => {
-    const root = createFixture();
-    saveRules(root, { K002: kitEntry("main-path", "K002") });
-    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", ruleList);
-    const result = await runRunnerJudged(root, [], { c1: 0.95 });
-    expect(result.status, result.stderr).toBe(0);
-    expect(
-      reportSchema.parse(result.report).results.map((item) => [item.step, item.outcome]),
-    ).toEqual([["has_workflow", "not_applicable"]]);
-    expect(ruleRequests(result.requests)).toHaveLength(0);
-  });
-
-  test.each([
-    [0.95, "pass", 0],
-    [0.1, "finding", 0],
-    [0.5, "uncertain", 5],
-  ] satisfies [number, string, number][])(
-    "numbered lists answered not a workflow ask the spine question: %s gives %s",
-    async (spine, outcome, exit) => {
-      // Wrong behavior: a finding from the missing workflow alone (the proxy), without the spine judgment.
-      const root = createFixture();
-      saveRules(root, { K002: kitEntry("main-path", "K002") });
-      writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", ruleList);
-      const result = await runRunnerJudged(root, [], { c1: 0.1, has_spine: spine });
-      expect(result.status, result.stderr).toBe(exit);
-      const report = reportSchema.parse(result.report);
-      expect(report.results.map((item) => [item.step, item.outcome])).toEqual([["spine", outcome]]);
-      expect(ruleRequests(result.requests)).toHaveLength(1);
-      if (outcome === "finding")
-        expect(report.findings[0]).toMatchObject({ rule: "main-path.spine", severity: "warn" });
-    },
-  );
-
-  test("the spine question receives every input its wording names: the description, the outline and both first-line supplements", async () => {
-    // Wrong behavior: the frozen W002 question asks the judge to start from the description and read
-    // numbered and completion first lines, while its evidence carries none of them.
-    const root = createFixture();
-    saveRules(root, { K002: kitEntry("main-path", "K002") });
-    writeFixtureFile(
-      root,
-      "plugins/example/skills/sample/SKILL.md",
-      `${ruleList}\nDone when the result is stated.\n`,
-    );
-    const result = await runRunnerJudged(root, [], { c1: 0.1 });
-    expect(result.status, result.stderr).toBe(0);
-    const [spineRequest, ...rest] = ruleRequests(result.requests);
-    expect(rest).toEqual([]);
-    const state = z
-      .object({
-        state: z
-          .object({
-            body: z.string(),
-            outline: z.array(z.string()),
-            numbered_first_lines: z.array(z.string()),
-            completion_first_lines: z.array(z.string()),
-          })
-          .passthrough(),
-      })
-      .passthrough()
-      .parse(spineRequest).state;
-    expect(state.body).toContain("description: Use when checking spines.");
-    expect(state.body).toContain("Apply the lens");
-    expect(state.outline).toEqual(["# Sample", "## Core rules"]);
-    expect(state.numbered_first_lines).toEqual(["1. Keep it short.", "2. Name the owner."]);
-    expect(state.completion_first_lines).toEqual(["Done when the result is stated."]);
-  });
-
-  test("the spine evidence keeps its gate fields: candidates and selected workflows", async () => {
-    const root = createFixture();
-    writeFixtureFile(root, "plugins/example/skills/sample/SKILL.md", ruleList);
-    const listing = await listEvidence(root, { c1: 0.1 });
-    const piece = listing.pieces.find((item) => item.kind === "skill_body");
-    expect(piece?.fields.numbered).toMatchObject({ values: ["## Core rules"] });
-    expect(piece?.fields.workflows).toMatchObject({ values: [] });
-  });
+test("every colon branch in the pinned real tree receives its exact list, table or fenced block", async () => {
+  const snapshot = unpackPinnedSource({self: repositoryRoot, source: {repository: "self", commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a", path: "plugins", context: ["plugins"]}});
+  if (snapshot.kind !== "ready") throw new Error(snapshot.reason);
+  try {
+    const original = z.object({rulebook: z.array(z.object({markdown: z.string(), rules: z.string()})), evidence: z.object({ast_grep: z.string()}).passthrough()}).passthrough().parse(JSON.parse(readFileSync(config, "utf8")));
+    const localConfig = path.join(snapshot.directory, "tree.config.json");
+    writeFileSync(localConfig, JSON.stringify({...original, rulebook: original.rulebook.map((pair) => ({markdown: path.resolve(path.dirname(config), pair.markdown), rules: path.resolve(path.dirname(config), pair.rules)})), evidence: {...original.evidence, ast_grep: path.resolve(path.dirname(config), original.evidence.ast_grep)}}));
+    const listed = await spawnCollected(enginePath, ["lint", "--config", localConfig, "--all", "--evidence", "branch", "--", "plugins"], {cwd: snapshot.directory, env: {...process.env, OPENROUTER_API_KEY: "", SUNSTACK_CREDENTIAL_STORE: "off"}});
+    expect(listed.status, listed.stderr).toBe(0);
+    const pieces = z.object({pieces: z.array(branchPieceSchema)}).parse(JSON.parse(listed.stdout)).pieces;
+    const colon = pieces.filter((piece) => piece.fields.line.value.endsWith(":"));
+    // a815d170 includes two later language-toolchain blocks beyond the scratch proof's 26.
+    expect(colon).toHaveLength(28);
+    for (const piece of colon) {
+      expect(piece.fields.block.values, `${piece.where.file}:${piece.where.first_line}`).toHaveLength(1);
+      const bytes = readFileSync(path.join(snapshot.directory, piece.where.file));
+      expect(piece.fields.block.spans).toHaveLength(1);
+      const span = piece.fields.block.spans[0]; if (!span) throw new Error("Missing block span");
+      expect(piece.fields.block.values[0]).toBe(bytes.subarray(span.byte_start, span.byte_end).toString("utf8"));
+      expect(span.start_line).toBeGreaterThan(piece.where.first_line);
+      expect(piece.model_view.fields.block).toEqual(piece.fields.block.values);
+      expect(piece.model_view.fields.headings).toEqual(piece.fields.headings.values);
+      expect(piece.model_view.cut).toEqual([]);
+    }
+    const table = colon.find((piece) => piece.where.file.endsWith("agent-collaboration/SKILL.md"));
+    expect(table?.fields.block.values[0]).toMatch(/^\| Action \| Open \| Return \|/);
+    const list = colon.find((piece) => piece.where.file.endsWith("skill-creation/SKILL.md"));
+    expect(list?.fields.block.values[0]).toMatch(/^- \*\*Behavior-changing or scoped\.\*\*/);
+    expect(list?.fields.headings.values).toEqual(["# Skill Creation", "## Workflow", "### 2. Gate sensitive surfaces before writing"]);
+    const fence = colon.find((piece) => piece.where.file.endsWith("headless-automation.md") && piece.where.first_line === 72);
+    expect(fence?.fields.block.values).toEqual(["```bash\npeekaboo mcp\n```\n"]);
+    expect(pieces.some((piece) => !piece.fields.line.value.endsWith(":") && piece.fields.block.values.length > 0)).toBe(true);
+  } finally { snapshot.dispose(); }
 });

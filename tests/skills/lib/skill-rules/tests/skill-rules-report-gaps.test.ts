@@ -129,13 +129,12 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
       kind: "section",
       files: ["**/SKILL.md", "**/references/**/*.md"],
     });
-    expect(denominators.find((item) => item.rule === "question.names-field")).toMatchObject({
+    expect(denominators.find((item) => item.rule === "rule-question.asks-exactly-one-thing")).toMatchObject({
       kind: "rule_question",
       files: ["**/rules/*.rules.json"],
     });
-    expect(denominators.find((item) => item.rule === "completion.criterion")?.within).toEqual([
-      "workflow_section",
-    ]);
+    expect(denominators.find((item) => item.rule === "completion.criterion")).toBeUndefined();
+    expect(denominators.every((item) => item.within.length === 0)).toBe(true);
   });
 });
 

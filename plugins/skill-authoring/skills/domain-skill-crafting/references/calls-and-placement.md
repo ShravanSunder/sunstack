@@ -15,11 +15,10 @@ Placement:
 - Each defined term is concrete and matches how `SKILL.md` and the references use it.
 - Each meaning has exactly one home.
 - Every reference exists because a named call site asks for it.
-- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.<!-- K002 -->
+- A reference section that owns a stage says what to inspect, what good and bad look like, and when to stop.
 - Every stage or branch a skill promises has a teaching owner: an inline section of `SKILL.md` or a teaching reference.
 - A runtime skill loads only the references its own phase needs.
 - Shared authoring lessons live in authoring skills or their references, never in runtime workflow skills.
-- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.<!-- K003 -->
 - A skill has no per-skill provenance document unless it needs a task-specific reference for progressive disclosure.
 
 Calls:

@@ -1,0 +1,96 @@
+{
+  "engine_version": "sunstack 0.6.0",
+  "model": "jev-latest",
+  "complete": false,
+  "rules": {
+    "skill-description.starts-with-use-when": {
+      "fingerprint": "c1eb7e0c54638b0dbbc790ac736cead99283f0a575f83a8a98d159a814f660ff",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    },
+    "skill-description.longer-than-225-characters": {
+      "fingerprint": "92b21a2f3545924f35f8cdfa475ed9d85819e7df904d256453b40bbe01f58532",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    },
+    "skill-description.longer-than-300-characters": {
+      "fingerprint": "cb362be23ed601aa581ae317789cd29937b0e16a0b293b7c22e701d9f469e8e0",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    },
+    "skill-description.names-the-loading-moment": {
+      "fingerprint": "7565bf1563af8781634033e67f722d55757c7ce494feb8c3fe5d7d31f1f9af0d",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": [
+          "descriptions-k004-case-001",
+          "descriptions-k004-case-002",
+          "descriptions-k004-case-003",
+          "descriptions-k004-case-004",
+          "descriptions-k004-case-005",
+          "descriptions-k004-case-006",
+          "descriptions-k004-case-007",
+          "descriptions-k004-case-008",
+          "descriptions-k004-case-009",
+          "descriptions-k004-case-010",
+          "descriptions-k004-case-011",
+          "descriptions-k004-case-012"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    },
+    "skill-description.states-triggers-not-workflow-steps": {
+      "fingerprint": "70784174f03568496193e481352f4393e902ab33f4cad17c975d22ba41d1cf37",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": [
+          "descriptions-k005-case-001",
+          "descriptions-k005-case-002",
+          "descriptions-k005-case-003",
+          "descriptions-k005-case-004",
+          "descriptions-k005-case-005",
+          "descriptions-k005-case-006",
+          "descriptions-k005-case-007",
+          "descriptions-k005-case-008",
+          "descriptions-k005-case-009",
+          "descriptions-k005-case-010"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    }
+  }
+}

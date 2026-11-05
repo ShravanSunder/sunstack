@@ -1,0 +1,28 @@
+{
+  "engine_version": "sunstack 0.6.0",
+  "model": "jev-latest",
+  "complete": false,
+  "rules": {
+    "skill-branch.names-an-observable-condition": {
+      "fingerprint": "062ceaa20d46d6ebaae7c16361cfb8c2f9ccaa5c1e79482e25cae3177352b86a",
+      "development": {
+        "passed": 15,
+        "failed": [
+          "main-path-k001-case-014",
+          "main-path-k001-case-021"
+        ],
+        "unsure": [
+          "main-path-k001-case-001",
+          "main-path-k001-case-005",
+          "main-path-k001-case-006",
+          "main-path-k001-case-007"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    }
+  }
+}

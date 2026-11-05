@@ -1,27 +1,5 @@
 {
   "K001": {
-    "name": "question.names-field",
-    "evidence": "rule_question",
-    "decision": {
-      "start": "names_check",
-      "steps": {
-        "names_check": {
-          "mechanical_check": {
-            "tool": "regex",
-            "field": "body",
-            "pattern": "\"instructions\"\\s*:\\s*\\{[^{}]*\"check\"\\s*:"
-          },
-          "yes": "pass",
-          "no": {
-            "finding": "This question names no field it evaluates: name it in instructions.check.",
-            "at": "body"
-          }
-        }
-      }
-    },
-    "severity": "warn"
-  },
-  "K002": {
     "name": "rule-question.asks-exactly-one-thing",
     "evidence": "rule_question",
     "questions": {
@@ -84,7 +62,7 @@
     },
     "severity": "warn"
   },
-  "K003": {
+  "K002": {
     "name": "rule-question.criteria-answer-the-same-question",
     "evidence": "rule_question",
     "questions": {

@@ -1,0 +1,31 @@
+{
+  "engine_version": "sunstack 0.6.0",
+  "model": "jev-latest",
+  "complete": false,
+  "rules": {
+    "load-call.names-when-where-and-result": {
+      "fingerprint": "79d734aea8fd6899c01078c0a2672f449a4e70ace13eb327ce6a09999370d1ca",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": [
+          "calls-and-placement-k001-case-001",
+          "calls-and-placement-k001-case-002",
+          "calls-and-placement-k001-case-003",
+          "calls-and-placement-k001-case-004",
+          "calls-and-placement-k001-case-005",
+          "calls-and-placement-k001-case-006",
+          "calls-and-placement-k001-case-007",
+          "calls-and-placement-k001-case-008",
+          "calls-and-placement-k001-case-009",
+          "calls-and-placement-k001-case-010"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    }
+  }
+}

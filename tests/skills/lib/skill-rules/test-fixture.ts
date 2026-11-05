@@ -180,7 +180,7 @@ export async function listEvidence(
   });
 }
 
-function spawnCollected(
+export function spawnCollected(
   command: string,
   argumentsList: readonly string[],
   options: { readonly cwd: string; readonly env: NodeJS.ProcessEnv },

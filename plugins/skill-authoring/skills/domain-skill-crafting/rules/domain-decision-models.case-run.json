@@ -1,0 +1,50 @@
+{
+  "engine_version": "sunstack 0.6.0",
+  "model": "jev-latest",
+  "complete": false,
+  "rules": {
+    "rule-question.asks-exactly-one-thing": {
+      "fingerprint": "85b5c0dca204baf77a5e7ae92d88a918f4c63bfb21d84cc110963fa1eada311e",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": [
+          "decision-models-k002-case-001",
+          "decision-models-k002-case-002",
+          "decision-models-k002-case-003",
+          "decision-models-k002-case-004",
+          "s7-l01-question-one-proposition",
+          "s7-l03-question-one-proposition",
+          "s7-l06-question-one-proposition",
+          "s7-l09-question-one-proposition"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    },
+    "rule-question.criteria-answer-the-same-question": {
+      "fingerprint": "93d041368e273c860aa868fbd82e09163d82d8eaa4ced7437544043bca8fc6ba",
+      "development": {
+        "passed": 0,
+        "failed": [],
+        "unsure": [
+          "decision-models-k003-case-001",
+          "decision-models-k003-case-002",
+          "decision-models-k003-case-003",
+          "s7-l01-question-criteria-match",
+          "s7-l03-question-criteria-match",
+          "s7-l06-question-criteria-match",
+          "s7-l09-question-criteria-match"
+        ]
+      },
+      "held_back": {
+        "passed": 0,
+        "failed": [],
+        "unsure": []
+      }
+    }
+  }
+}

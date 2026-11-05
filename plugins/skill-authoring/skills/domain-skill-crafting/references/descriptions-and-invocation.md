@@ -4,7 +4,7 @@
 
 - A description's job is to help the agent decide whether to load the skill.
 - A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`.<!-- K001 -->
-- A description uses an `Always` opener only when skipping the skill would break the work whenever its condition holds.<!-- K006 -->
+- A description uses an `Always` opener only when skipping the skill would break the work whenever its condition holds.
 - A description names the situation, symptom, user request, repository event or failure that should load the skill.<!-- K004 -->
 - A description uses the searchable words the user, codebase, docs or logs actually use.
 - A description gives a short why only when it sharpens routing.
@@ -16,7 +16,6 @@
 - A description loads on its true prompt and stays quiet on the near miss; one that loads for everything is not a trigger.
 - A changed description is tried on one prompt that should load its skill and one near miss that shouldn't, each in a fresh session, before it ships.
 - A description routes on a positive loading condition; a boundary alone is not a trigger.
-- A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow.<!-- K007 -->
 - A description never carries a rule marker or any other token.
 - A description matches the skill's invocation capabilities.
 - A skill is model-invocable when the agent must find it unprompted, or when another skill must reach it.
