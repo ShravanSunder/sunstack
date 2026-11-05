@@ -4,7 +4,23 @@
       "basis": "judged",
       "decision": "keep",
       "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
-      "reasons": [],
+      "reasons": [
+        {
+          "type": "written_standard",
+          "locator": "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md:8 (K002)",
+          "quote": "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths."
+        },
+        {
+          "type": "inventory",
+          "locator": "docs/specs/2026-11-03-skill-rules/requirements/skill-kinds.md:48 (U16 rows 1-2 and 4-5)",
+          "quote": "Owner answers: a product-specific command, loading a product workflow, worked product-like teaching examples and quotations of real product mistakes require a nudge."
+        },
+        {
+          "type": "inventory",
+          "locator": "docs/specs/2026-11-03-skill-rules/requirements/skill-kinds.md:77 (U16 Evidence note 12)",
+          "quote": "On 1 Nov placement made 11 nudges: 2 right and 9 wrong, with 4 on product skills' own text. This is why the kind gate is required."
+        }
+      ],
       "bars": {
         "routes_product": {
           "status": "starting",
@@ -12,8 +28,8 @@
             "yes_at_or_above": 0.7,
             "no_at_or_below": 0.3
           },
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
-          "scenarios": []
+          "scenarios": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
         },
         "example_or_own_infrastructure": {
           "status": "starting",
@@ -21,8 +37,8 @@
             "yes_at_or_above": 0.7,
             "no_at_or_below": 0.3
           },
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
-          "scenarios": []
+          "scenarios": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
         },
         "exemption_when_unsure": {
           "status": "starting",
@@ -30,8 +46,8 @@
             "yes_at_or_above": 0.7,
             "no_at_or_below": 0.3
           },
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
-          "scenarios": []
+          "scenarios": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
         }
       }
     }
@@ -58,18 +74,19 @@
         18
       ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-001"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-001 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Owner's answer, requirements U16 row 2. Blind labels 5 Nov: a no/near_miss (\"It names a machine path and stack lifecycle branches, but those belong to the toolkit's shared observability infrastructure.\"); b yes/real_mistake (\"“load `references/agentstudio-loop.md` and follow that loop” routes to AgentStudio’s own debug/beta workflow.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-002",
@@ -91,18 +108,19 @@
         30
       ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-002"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-002 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"It directs cleanup into AgentStudio's `clean-artifacts` command.\"); b yes/real_mistake (\"“AgentStudio's `mise -C ... run clean-artifacts`” directs the reader to a product-specific cleanup command.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-003",
@@ -124,18 +142,19 @@
         40
       ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-003"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-003 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Owner's answer, requirements U16 row 1. Blind labels 5 Nov: a yes/real_mistake (\"The row routes cleanup through AgentStudio's own `mise ... clean-artifacts` task.\"); b yes/real_mistake (\"“mise -C \"$agentstudio_worktree\" run clean-artifacts” invokes AgentStudio’s own cleanup task.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-004",
@@ -154,18 +173,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-004"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Owner's answer, requirements U16 row 9. Blind labels 5 Nov: a no/near_miss (\"It mentions `cargo clean` and a worktree path, but these are generic cleanup practice rather than a named product workflow.\"); b no/near_miss (\"“cargo clean” is an ordinary command in a generic cleanup worked example.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-005",
@@ -184,18 +204,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-005"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"The HTTP queries use the shared metrics store's supported API, which is exempt infrastructure.\"); b no/near_miss (\"“curl ... /api/v1/export” queries the toolkit’s shared Victoria metrics API through its supported interface.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-006",
@@ -215,26 +236,24 @@
       "expect": "must_fire",
       "finding_lines": [
         21,
-        26,
-        30,
-        31,
         32,
         33,
         35
       ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-006"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-006 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"It prescribes AgentStudio's debug-app launcher, local state file, and attached runtime.\"); b yes/real_mistake (\"“mise run run-debug-observability” and `tmp/debug-observability/latest-observability.env` route into AgentStudio’s app workflow.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-007",
@@ -253,18 +272,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-007"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-007 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names the shared observability stack and a state file, which are exempt shared infrastructure rather than one product's workflow.\"); b no/near_miss (\"“emit a fresh marker and state file” names generic observability artifacts, while the collector is shared infrastructure.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-008",
@@ -283,18 +303,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-008"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-008 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names platform metadata and validation concepts, but does not route into one product's application workflow.\"); b no/near_miss (\"“For Codex” and “For Claude” describe supported platform metadata conventions.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-009",
@@ -311,20 +332,27 @@
         "piece_first_line": 96,
         "field_line": 109
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        109,
+        110,
+        117,
+        118
+      ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-009"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-009 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The examples quote routes into AgentStudio's debug loop and cleanup task as product-workflow breaches.\"); b yes/real_mistake (\"“load `references/agentstudio-loop.md`” and “`mise ... run clean-artifacts`” are worked examples of product-specific workflows.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-010",
@@ -343,18 +371,19 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-010"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. D3 owner-directed gate, 5 Nov: AgentStudio is tool_manual, outside only_when.kind [general, role, domain]; this rule is not applicable to its own tool manual."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The passage routes requested AgentStudio work into its product-specific reference procedures and command surfaces.\"); b yes/real_mistake (\"“load `references/worktrees.md`” and the other listed references route through AgentStudio’s application workflow.\"). Expect not_applicable: kind gate: tool_manual."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-011",
@@ -373,18 +402,19 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-011"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-011 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. D3 owner-directed gate, 5 Nov: agent-collaboration is tool_manual, outside only_when.kind [general, role, domain]; this rule is not applicable to its own tool manual."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a no/near_miss (\"It names Router commands, APIs, and a config path; the commands use the tool's supported collaboration interface.\"); b no/near_miss (\"“conversation create|prompt|load|cancel” describes the agent-router tool through its supported interface.\"). Expect not_applicable: kind gate: tool_manual."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-case-012",
@@ -401,20 +431,43 @@
         "piece_first_line": 1,
         "field_line": 3
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        35,
+        52,
+        729,
+        736,
+        775,
+        781,
+        784,
+        790,
+        791,
+        792,
+        794,
+        836,
+        850,
+        854,
+        857,
+        860,
+        861,
+        864,
+        868,
+        873
+      ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-012"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The worked app inventory routes implementation through its own `App/Windows/` and `App/Commands/` source paths.\"); b yes/real_mistake (\"“Add a bell icon” and the later concrete `App/Windows/` and `UserDefaults` file tree are worked product-like implementation examples.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h01",
@@ -433,18 +486,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
+        "basis": "agents_agreed",
+        "state": "disputed",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h01"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h01 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Labellers split; owner to settle. Blind labels 5 Nov: a no/near_miss (\"It names reference files within the security-review skill, not another product's workflow.\"); b no/good (\"“load `references/routing.md`” routes only within a general security-review skill.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h02",
@@ -463,18 +517,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h02"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h02 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names GitHub's supported `gh` interface, which is a platform tool rather than a product's own workflow.\"); b no/near_miss (\"“Use `gh pr view --json`” names GitHub’s supported CLI interface.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h03",
@@ -493,18 +548,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
+        "basis": "agents_agreed",
+        "state": "disputed",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h03"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Labellers split; owner to settle. Blind labels 5 Nov: a yes/real_mistake (\"The step runs the plugin's own `scaffold-project.sh` procedure to create its prescribed project files.\"); b no/near_miss (\"“Run the appropriate scaffold scripts” names the scaffolding tool’s own supported interface.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h04",
@@ -532,18 +588,19 @@
         72
       ],
       "kind": "regression_example",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
+        "basis": "agents_agreed",
+        "state": "disputed",
         "who": [
-          "Independent Sol settler: calls-and-placement-k003/held-out-h04"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h04 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Labellers split; owner to settle. Blind labels 5 Nov: a yes/real_mistake (\"The instructions route authors through Demistify's own CLI and page workflow.\"); b no/near_miss (\"“use the CLI at the page’s binding” gives the Demistify tool’s supported authoring commands.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h05",
@@ -560,20 +617,27 @@
         "piece_first_line": 15,
         "field_line": 15
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        17,
+        19,
+        21,
+        25
+      ],
       "kind": "regression_example",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Independent Sol settler: calls-and-placement-k003/held-out-h05"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h05 (held-out, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The procedure routes verification into the app project's own `verify-<app>` skill, journey, and launch command.\"); b yes/real_mistake (\"“resolve `.claude/skills/verify-<app>`” and run the selected app’s own journey scripts.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "calls-and-placement-k003-held-out-h06",
@@ -592,18 +656,19 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h06"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Migrated calls-and-placement-k003/held-out-h06 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names repository toolchain conventions and shadcn, but does not route into one product's own workflow.\"); b no/near_miss (\"“load `references/toolchain.md`” is generic TypeScript guidance with a supported shadcn tool example.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a07-placement-product-workflow",
@@ -619,21 +684,24 @@
       "select": {
         "piece_first_line": 39
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        41
+      ],
       "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A07, blind labellers agreed. I: It describes one clean example where “the assignment names the TUI”; it is an illustrative case in a generic project-verification reference. J: The terminal app and `verify-tui` are an illustrative assignment scenario; the passage does not route an actual task into a product workflow."
+        "note": "Owner's answer, requirements U16 row 4. Blind labels 5 Nov: a yes/real_mistake (\"The worked example directs verification through the app's own `verify-tui` skill and build command.\"); b yes/real_mistake (\"“verify-tui” and its search journey are a worked product-like example.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a13-placement-product-workflow",
@@ -649,21 +717,28 @@
       "select": {
         "piece_first_line": 73
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        76,
+        78,
+        81,
+        83,
+        85
+      ],
       "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A13, blind labellers agreed. I: The drafts and titles appear as a worked example of restart durability; the passage teaches how to state verification evidence. J: The draft-survival scenario is an example of matching proof to a storage requirement; it does not direct work into a product's own workflow."
+        "note": "Owner's answer, requirements U16 row 4. Blind labels 5 Nov: a yes/real_mistake (\"The worked example directs the reader to the `verify-notes` app journey and its product-specific storage behavior.\"); b yes/real_mistake (\"“verify-notes `drafts`” is a worked product-like app journey with app-specific data and behavior.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a14-placement-product-workflow",
@@ -681,19 +756,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A14, blind labellers agreed. I: The fragment is a Peekaboo-specific troubleshooting recipe (`peekaboo daemon start`); the Peekaboo skill is for its own native-UI workflow. J: The source is Peekaboo's own troubleshooting guide, and the prescribed commands operate Peekaboo itself."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The solution routes bridge recovery through Peekaboo's app process and daemon commands.\"); b yes/real_mistake (\"“peekaboo daemon start” and process-specific troubleshooting direct the reader to Peekaboo’s workflow.\"). Expect not_applicable: kind gate: tool_manual (owner label)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a16-placement-product-workflow",
@@ -711,19 +786,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A16, blind labellers agreed. I: The permission steps are Peekaboo-specific (`peekaboo permissions status`); this is the tool's own troubleshooting workflow. J: This is a permission troubleshooting section in Peekaboo's own skill, so its product-specific workflow is within scope."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The commands route permission recovery through Peekaboo's own CLI and app setup.\"); b yes/real_mistake (\"“peekaboo permissions status” and the System Settings steps prescribe Peekaboo-specific troubleshooting.\"). Expect not_applicable: kind gate: tool_manual (owner label)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a27-placement-product-workflow",
@@ -741,19 +816,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A27, blind labellers agreed. I: The daemon recovery commands name Peekaboo's own process and socket (`/tmp/peekaboo.sock`); they belong to its tool-specific skill. J: The daemon recovery commands are in Peekaboo's own headless-automation reference and operate Peekaboo."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The commands route daemon recovery through Peekaboo's own application workflow.\"); b yes/real_mistake (\"“peekaboo daemon stop” and “peekaboo daemon start” direct the reader into Peekaboo’s product workflow.\"). Expect not_applicable: kind gate: tool_manual (owner label)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a28-placement-product-workflow",
@@ -771,19 +846,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A28, blind labellers agreed. I: The bridge status, socket, and log commands are Peekaboo-specific troubleshooting steps in the Peekaboo skill. J: The bridge troubleshooting steps are in Peekaboo's own headless-automation reference and use its daemon and paths."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The commands and daemon log path route into Peekaboo's own application workflow.\"); b yes/real_mistake (\"“peekaboo bridge status” and the Peekaboo socket and daemon paths/commands route into that product’s workflow.\"). Expect not_applicable: kind gate: tool_manual (owner label)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a40-placement-product-workflow",
@@ -801,19 +876,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A40, blind labellers agreed. I: The helper resolution and pane identity commands belong to the AgentStudio skill, whose stated scope is its panes and CLI. J: The source is AgentStudio's own skill and the setup branch invokes its helper and pane workflow."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The passage routes work through AgentStudio's executable and pane procedures.\"); b yes/real_mistake (\"“$AS_CLI” and the pane notice, ask, and title procedures route into AgentStudio’s own app workflow.\"). Expect not_applicable: kind gate: tool_manual."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a43-placement-product-workflow",
@@ -831,20 +906,19 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
+      "scenario_kind": "near_miss",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A43, independent settlement: 'When the repo uses shadcn' and 'A components.json at the app root marks a shadcn project' condition the component CLI on the repository's toolchain. I follow labeller J because 'pnpx shadcn@latest add button' is library/tooling guidance usable across repositories using shadcn, not one application's own procedures, state files or machine paths as labeller I treats it."
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names a shadcn CLI command, a supported tool interface that the domain may use.\"); b no/near_miss (\"“shadcn project” and “pnpx shadcn@latest add button” name a subject-specific supported tool.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a46-placement-product-workflow",
@@ -862,19 +936,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A46, blind labellers agreed. I: The verification-maintenance passage labels the ledger app as a fictional example and compares weak and adequate recipes. J: The passage is explicitly a fictional `ledger` example used to illustrate verification evidence, not an instruction to use that product workflow. D3 owner ruling, 5 Nov: practices-verification-maintenance is repo_specific, outside only_when.kind [general, role, domain]; this rule is not applicable."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Blind labels 5 Nov: a yes/real_mistake (\"The worked example directs readers to the `ledger` product's verification command and scripts.\"); b yes/real_mistake (\"“verify-notes” and its launch, data-directory, and journey commands form a worked product-like example.\"). Expect not_applicable: owner label repo_specific (open question 3)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a52-placement-product-workflow",
@@ -895,20 +969,19 @@
         40
       ],
       "kind": "breach",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A52, independent settlement: The full cleanup skill describes removing 'the large residue your task created' without restricting itself to AgentStudio, yet its allow list prescribes 'mise -C \"$agentstudio_worktree\" run clean-artifacts'. I follow labeller J because this is a general skill's branch into one application's own cleanup task; the inspected-path and stopped-process conditions cited by I constrain when it runs but do not make the containing skill product-specific."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The row routes cleanup through AgentStudio's own `clean-artifacts` command.\"); b yes/real_mistake (\"“mise -C \"$agentstudio_worktree\" run clean-artifacts” invokes AgentStudio’s own cleanup task.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a53-placement-product-workflow",
@@ -924,21 +997,25 @@
       "select": {
         "piece_first_line": 139
       },
-      "expect": "must_pass",
+      "expect": "must_fire",
+      "finding_lines": [
+        141,
+        157
+      ],
       "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "owner_words",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A53, blind labellers agreed. I: The piece teaches a reusable nudge-tree judgment and explicitly treats the AgentStudio loop as an example whose repository ownership is unresolved. J: The passage is an explanatory nudge-tree example about AgentStudio; it analyzes a sample route rather than instructing general skill users to follow it."
+        "note": "Owner's answer, requirements U16 row 5. Blind labels 5 Nov: a yes/real_mistake (\"The quoted example tells the agent to load and follow AgentStudio's own debug loop.\"); b yes/real_mistake (\"“load `references/agentstudio-loop.md` and follow that loop” quotes a real product-workflow mistake in a worked teaching example.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a57-placement-product-workflow",
@@ -956,19 +1033,19 @@
       },
       "expect": "not_applicable",
       "kind": "worth_reading",
+      "scenario_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A57, blind labellers agreed. I: The permission workflow is for Peekaboo's Screen Recording feature (`peekaboo permissions status`) in its own tool-specific skill. J: The troubleshooting section is in Peekaboo's own skill and routes only through Peekaboo permission controls."
+        "note": "Tests the kind gate, not the rule's sensitivity, so it is outside the floor (Lead, 5 Nov). Labellers split; owner to settle. Blind labels 5 Nov: a yes/real_mistake (\"The solution directs permission changes through Peekaboo's CLI and app-specific setup.\"); b no/near_miss (\"“peekaboo permissions status” uses the tool’s supported permission interface and macOS settings.\"). Expect not_applicable: kind gate: tool_manual (owner label)."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
     },
     {
       "id": "acct-a58-placement-product-workflow",
@@ -986,26 +1063,310 @@
       },
       "expect": "must_fire",
       "finding_lines": [
-        51,
         54,
         57,
         59
       ],
       "kind": "breach",
+      "scenario_kind": "real_mistake",
       "status": "active",
       "set": "development",
       "label": {
-        "basis": "legacy_independent",
+        "basis": "agents_agreed",
         "state": "labelled",
         "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol line settler 01a19710-fc6e-7b81-97d9-364618002e9b"
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
         ],
-        "note": "Accounts A58, blind I/J outcome agreed. I: The shared observability skill embeds AgentStudio-specific workflow: it sources `tmp/debug-observability/latest-observability.env` and directs native checks at the launched AgentStudio debug/beta process. J: This reference under the shared observability skill routes into an AgentStudio-specific loop using `tmp/debug-observability/latest-observability.env`, a producer marker, and PID targeting. Independent line-only settlement: The loading skill covers 'any repo that emits OTLP locally', so the product-own-skill exception does not apply. I follow labeler J: 'Read the state file from another shell' (51) and 'Then use the Victoria query recipes with the marker from the state file' (57) prescribe reading and consuming the AgentStudio state named by 'source tmp/debug-observability/latest-observability.env' (54), so labeler I's narrower selection misses operative steps. Line 59 additionally prescribes 'use PID targeting for the launched debug/beta process' and identifies the AgentStudio-specific context with 'another live AgentStudio may be running'. The earlier A58 outcome override is void and was not used."
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"It reads AgentStudio's local run-state file and targets the launched AgentStudio process for UI checks.\"); b yes/real_mistake (\"“source tmp/debug-observability/latest-observability.env” and PID targeting prescribe AgentStudio’s run and verification workflow.\")."
       },
-      "added": "2026-11-01",
-      "scenario_kind": "unclassified"
+      "added": "2026-11-01"
+    },
+    {
+      "id": "k002-mined-001",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 37
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        42,
+        45,
+        47
+      ],
+      "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The passage gives an AgentStudio beta launch command and its product-specific observability state path.\"); b yes/real_mistake (\"“mise run run-beta-observability” and the beta state-file path route into the AgentStudio beta workflow.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-002",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agent-vm-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        24,
+        33,
+        34,
+        37
+      ],
+      "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The sequence sends producer repos through their own `pnpm observability:start` procedure and state-file behavior.\"); b yes/real_mistake (\"“pnpm observability:start” and its producer state-file behavior route into named product workflows.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-003",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/resource-naming.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 44
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "scenario_kind": "near_miss",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a no/near_miss (\"It names observability state fields and product-specific labels, but does not route into a product workflow.\"); b no/near_miss (\"“agent.proof.state_file” and the named marker keys are shared observability infrastructure fields.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-004",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/role-operator/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 41
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "scenario_kind": "good",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a no/good (\"The passage states a generic completion condition without naming a product workflow.\"); b no/good (\"“Not done while a step lacks its output” is a general completion standard.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-005",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 42
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "scenario_kind": "good",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a no/good (\"The passage states a role boundary without naming a product procedure, command, or path.\"); b no/good (\"“You own the investigation and its checked answer” assigns a role boundary without routing to a product workflow.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-006",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/role-advisor/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 50
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "scenario_kind": "good",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a no/good (\"The passage states an advisory role boundary without a product, tool, command, or path.\"); b no/good (\"“You advise and unblock” states a role boundary without routing to a product workflow.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-013",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/practices-preflight/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 51
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        53,
+        54,
+        55
+      ],
+      "kind": "worth_reading",
+      "scenario_kind": "real_mistake",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a yes/real_mistake (\"The worked example routes preflight through the `sunstack-tools` hosted-proof workflow and its product-specific access requirements.\"); b yes/real_mistake (\"“about to start the sunstack-tools rule engine” makes this a worked product-like scenario in teaching text.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-014",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 31
+      },
+      "expect": "unknown",
+      "kind": "worth_reading",
+      "scenario_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "disputed",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Labellers split; owner to settle. Blind labels 5 Nov: a yes/real_mistake (\"It directs page authors to Demistify's versioned authoring guide and its product-specific references.\"); b no/near_miss (\"“load the guide for the page’s binding” uses the authoring platform’s documented interface and names reference files.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
+    },
+    {
+      "id": "k002-mined-015",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 25
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "scenario_kind": "near_miss",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+          "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+        ],
+        "note": "Blind labels 5 Nov: a no/near_miss (\"The commands and paths operate the toolkit's shared observability stack, an explicit exemption.\"); b no/near_miss (\"“observability-stack up” and the shared Victoria stack are the toolkit’s own shared infrastructure.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+      },
+      "added": "2026-11-05"
     }
   ]
 }

@@ -1,11 +1,12 @@
-import { readFileSync, readdirSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
 import { scenarioRecordSchema, scenariosFileSchema } from "./scenarios.ts";
 import { repositoryRoot, kitRelative } from "./test-fixture.ts";
-import { expectedAfterKindGate } from "../../tests/support/rule-scenario-gate-expectations.ts";
+import { readDevelopmentScenarioFiles } from "../../tests/support/read-development-scenarios.ts";
+import { productWorkflowRule } from "../../tests/support/product-workflow-development-oracle.ts";
 
 const names: Readonly<Record<string, string>> = {
   "description.opener": "skill-description.starts-with-use-when",
@@ -22,12 +23,7 @@ const names: Readonly<Record<string, string>> = {
   "question.criteria-match": "rule-question.criteria-answer-the-same-question",
 };
 const directory = path.join(repositoryRoot, "tests/skills/evals/rule-scenarios");
-const files = readdirSync(directory, { recursive: true })
-  .map(String)
-  .filter((name) => name.endsWith(".scenario.json"))
-  .map((name) =>
-    scenariosFileSchema.parse(JSON.parse(readFileSync(path.join(directory, name), "utf8"))),
-  );
+const files = readDevelopmentScenarioFiles(repositoryRoot).map((entry) => entry.file);
 const scenarios = files.flatMap((file) => file.scenarios);
 const sample = scenarios[0];
 if (!sample) throw new Error("Missing real scenarios");
@@ -60,7 +56,7 @@ describe("scenario storage contract", () => {
     );
     expect(section).toBeDefined();
   });
-  test("all 245 old scenarios retain their meaning from independent Git blobs", () => {
+  test("old245 retain identity and coordinates; the D3 oracle owns admitted K002 labels", () => {
     // The oracle is a815d170's committed input, not the migration implementation.
     const listing = spawnSync(
       "git",
@@ -95,34 +91,35 @@ describe("scenario storage contract", () => {
       for (const entry of old.expectations) {
         const actual = scenarios.filter((candidate) => candidate.id === entry.id);
         expect(actual).toHaveLength(1);
-        const expectation = expectedAfterKindGate(entry.id, {
-          expect: entry.expect,
-          note: entry.basis,
-        });
-        expect(actual[0]).toMatchObject({
+        const identity = {
           id: entry.id,
           rule: names[entry.rule] ?? entry.rule,
           source: entry.source,
-          expect: expectation.expect,
           kind: entry.kind,
           added: entry.added,
-          scenario_kind: "unclassified",
           set: "development",
-          label: {
-            note: expectation.note,
-            who: entry.decided_by.who ?? [],
-            basis: entry.decided_by.how === "owner" ? "owner_words" : "legacy_independent",
-          },
-        });
+        };
+        expect(actual[0]).toMatchObject(identity);
+        if ((names[entry.rule] ?? entry.rule) !== productWorkflowRule)
+          expect(actual[0]).toMatchObject({
+            expect: entry.expect,
+            scenario_kind: "unclassified",
+            label: {
+              note: entry.basis,
+              who: entry.decided_by.who ?? [],
+              basis: entry.decided_by.how === "owner" ? "owner_words" : "legacy_independent",
+            },
+          });
         expect(actual[0]?.select?.piece_first_line).toBe(entry.piece_first_line);
         expect(actual[0]?.select?.field_line).toBe(entry.field_line);
-        expect(actual[0]?.finding_lines).toEqual(entry.lines);
+        if ((names[entry.rule] ?? entry.rule) !== productWorkflowRule)
+          expect(actual[0]?.finding_lines).toEqual(entry.lines);
         expect(actual[0]?.status).toBe(names[entry.rule] ? "active" : "retired");
         count++;
       }
     }
     expect(count).toBe(245);
-    expect(scenarios).toHaveLength(245);
+    expect(scenarios).toHaveLength(254);
     const settled = scenarios.find((entry) => entry.id === "calls-and-placement-k001-case-001");
     expect(settled?.label).toMatchObject({
       basis: "legacy_independent",

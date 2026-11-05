@@ -4,18 +4,18 @@ import { execFileSync } from "node:child_process";
 import { expect, test } from "vitest";
 import { z } from "zod";
 import { repositoryRoot, kitRelative } from "./test-fixture.ts";
-import { expectedAfterKindGate } from "../../tests/support/rule-scenario-gate-expectations.ts";
+import { readDevelopmentScenarioFiles } from "../../tests/support/read-development-scenarios.ts";
+import { productWorkflowRule } from "../../tests/support/product-workflow-development-oracle.ts";
 
-test("A6 retains245 identities outside runtime, with only the3 owner-directed D3 gate outcomes changed", () => {
+test("A6 retains245 identities, with only the admitted D3 development changes and9 additions", () => {
   const runtime = path.join(repositoryRoot, kitRelative);
   const forbidden = readdirSync(runtime).filter(
     (name) => name.endsWith(".cases.json") || name.endsWith(".case-run.json"),
   );
   expect(forbidden).toEqual([]);
   const scenarioRoot = path.join(repositoryRoot, "tests/skills/evals/rule-scenarios");
-  const files = readdirSync(scenarioRoot, { recursive: true })
-    .map(String)
-    .filter((file) => file.endsWith(".scenario.json"));
+  const visible = readDevelopmentScenarioFiles(repositoryRoot);
+  const files = visible.map((entry) => entry.relative);
   const schema = z.object({
     rules: z.record(z.string(), z.unknown()),
     scenarios: z.array(z.record(z.string(), z.unknown())),
@@ -32,8 +32,8 @@ test("A6 retains245 identities outside runtime, with only the3 owner-directed D3
       ),
     ),
   );
-  expect(scenarios).toHaveLength(245);
-  expect(scenarios.filter(({ entry }) => entry.status === "active")).toHaveLength(180);
+  expect(scenarios).toHaveLength(254);
+  expect(scenarios.filter(({ entry }) => entry.status === "active")).toHaveLength(189);
   expect(scenarios.filter(({ entry }) => entry.status === "retired")).toHaveLength(65);
   const oldFiles = execFileSync(
     "git",
@@ -67,7 +67,15 @@ test("A6 retains245 identities outside runtime, with only the3 owner-directed D3
           return [step, { ...rest, scenarios: cases }];
         }),
       );
-      expect(records[name]).toEqual({ ...record, bars: renamed });
+      if (name === productWorkflowRule) {
+        const { reasons: _oldReasons, ...stable } = z
+          .record(z.string(), z.unknown())
+          .parse({ ...record, bars: renamed });
+        const { reasons: _newReasons, ...current } = z
+          .record(z.string(), z.unknown())
+          .parse(records[name]);
+        expect(current).toEqual(stable);
+      } else expect(records[name]).toEqual({ ...record, bars: renamed });
       if (record.decision !== "dropped") {
         const filename = `${path.basename(file, ".cases.json")}/${name}.scenario.json`;
         expect(files).toContain(filename);
@@ -82,17 +90,17 @@ test("A6 retains245 identities outside runtime, with only the3 owner-directed D3
       const actual = scenarios.filter(({ entry }) => entry.id === prior.id);
       expect(actual).toHaveLength(1);
       const { case_kind, ...unchanged } = prior;
-      const label = z.object({ note: z.string() }).passthrough().parse(prior.label);
-      const expectation = expectedAfterKindGate(String(prior.id), {
-        expect: String(prior.expect),
-        note: label.note,
-      });
-      expect(actual[0]?.entry).toEqual({
-        ...unchanged,
-        expect: expectation.expect,
-        label: { ...label, note: expectation.note },
-        scenario_kind: case_kind,
-      });
+      if (prior.rule === productWorkflowRule) {
+        const { expect: _expect, finding_lines: _lines, label: _label, ...stable } = unchanged;
+        const {
+          expect: _newExpect,
+          finding_lines: _newLines,
+          label: _newLabel,
+          scenario_kind: _classification,
+          ...current
+        } = actual[0]?.entry ?? {};
+        expect(current).toEqual(stable);
+      } else expect(actual[0]?.entry).toEqual({ ...unchanged, scenario_kind: case_kind });
       expect(actual[0]?.file.startsWith("retired/")).toBe(prior.status === "retired");
     }
   }
