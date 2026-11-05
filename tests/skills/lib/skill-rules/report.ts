@@ -41,6 +41,10 @@ const findingSchema = z
     basis: basisSchema,
     severity: z.enum(["error", "warn"]),
     message: z.string(),
+    judgment: z.object({
+      answers: z.record(z.string(), z.unknown()),
+      path_taken: z.array(z.string()),
+    }).passthrough().nullable(),
     related: z.array(relatedPlaceSchema),
   })
   .passthrough();
@@ -388,14 +392,18 @@ export function formatLintReport(
       lines.push(
         `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, outcome finding, anchor ${finding.anchor})`,
       );
-      const piece = report.results.find((result) => result.name === finding.rule && result.file === finding.file && result.first_line <= finding.line && result.last_line >= finding.line);
+      // Nested sections overlap in source range. Only a finding result can supply its cut state;
+      // the closest starting span is its own section, rather than an enclosing result.
+      const piece = report.results
+        .filter((result) => result.name === finding.rule && result.marker === finding.marker && result.file === finding.file && result.outcome === "finding" && result.first_line <= finding.line && result.last_line >= finding.line)
+        .sort((left, right) => right.first_line - left.first_line || left.last_line - right.last_line)[0];
       for (const standard of finding.related.filter((place) => place.label === "standard")) {
         let wording: string;
         try { wording = readFileSync(path.resolve(context.repository ?? process.cwd(), standard.file), "utf8").split("\n").slice(standard.first_line - 1, standard.last_line).join("\n"); }
         catch { wording = "unavailable (standard could not be read)"; }
         lines.push(`  why: ${standard.file}:${standard.first_line}: ${wording}`);
       }
-      lines.push(`  Answers: ${JSON.stringify(piece?.answers ?? finding["answers"] ?? {})}`, `  Path: ${(piece?.path ?? []).join(" → ")}`, `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`);
+      lines.push(`  Answers: ${JSON.stringify(finding.judgment?.answers ?? piece?.answers ?? {})}`, `  Path: ${(finding.judgment?.path_taken ?? piece?.path ?? []).join(" → ")}`, `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`);
       for (const place of finding.related)
         lines.push(`  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`);
       for (const other of report.findings.filter((item) => item !== finding && item.rule === finding.rule && item.message === finding.message)) lines.push(`  same rule also nudged: ${other.file}:${other.line}`);

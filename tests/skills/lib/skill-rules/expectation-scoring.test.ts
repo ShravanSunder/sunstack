@@ -46,6 +46,7 @@ function reportFinding(line: number) {
     file: entry.source.path,
     line,
     anchor: "resolved",
+    judgment: {answers: {}, path_taken: ["s"]},
     basis: "judged",
     severity: "warn",
     message: "read",

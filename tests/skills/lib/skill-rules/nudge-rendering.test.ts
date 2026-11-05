@@ -46,6 +46,12 @@ test("real engine serialization renders all nudge parts at pinned line 17 with a
       const anchorBlock = text.split(/\n(?=\S)/).find((block) => block.startsWith(`${obs}:17:`));
       expect(anchorBlock).toContain(`same rule also nudged: ${cleanup}:40`);
       expect(anchorBlock).not.toContain(`same rule also nudged: ${quiet}`);
+      const cleanupFinding = findings.find((finding) => finding.file === cleanup);
+      if (!cleanupFinding) throw new Error("Missing cleanup finding");
+      const cleanupJudgment = z.object({answers: z.record(z.string(), z.unknown()), path_taken: z.array(z.string())}).parse(cleanupFinding["judgment"]);
+      const cleanupBlock = text.split(/\n(?=\S)/).find((block) => block.startsWith(`${cleanup}:40:`));
+      expect(cleanupBlock).toContain(`Answers: ${JSON.stringify(cleanupJudgment.answers)}`);
+      expect(cleanupBlock).toContain("Path: routes_product → example_or_own_infrastructure");
       expect(text).toContain('Answers: {"example_or_own_infrastructure"');
       expect(text).toContain("Path: routes_product → example_or_own_infrastructure");
       expect(text).toContain("Cut: none");

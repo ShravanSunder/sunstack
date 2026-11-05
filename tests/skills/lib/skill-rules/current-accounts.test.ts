@@ -36,6 +36,7 @@ describe("current-skills account listing", () => {
       file: piece.file,
       line: 17,
       anchor: "resolved",
+      judgment: {answers: {}, path_taken: []},
       basis: "judged",
       severity: "warn",
       message: "Read the source",

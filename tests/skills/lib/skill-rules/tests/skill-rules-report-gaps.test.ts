@@ -149,6 +149,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
           file: skillFile,
           line: 17,
           anchor: "resolved",
+          judgment: {answers: {}, path_taken: []},
           basis: "judged",
           severity: "warn",
           message: "This routes the agent into one product's own workflow.",
