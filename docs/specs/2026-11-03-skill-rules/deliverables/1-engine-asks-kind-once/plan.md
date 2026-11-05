@@ -86,7 +86,7 @@ The one plan for all the work (`plans/2026-11-04-skill-rules.md`) is split by de
 plan path: docs/specs/2026-11-03-skill-rules/deliverables/1-engine-asks-kind-once/plan.md
 originating planner: plan-implementation
 supersedes: docs/specs/2026-11-03-skill-rules/plans/2026-11-04-skill-rules.md (its engine slices)
-planning result: ready for step E0 only; steps E1–E5 held (owner, 4 Nov: the kind filter must be designed with Jev and proven by experiments first; the Jev Advisor's kind decision model may change the filter to a decision graph, which goes through plan-update before E1 starts)
+planning result: ready for E1–E5 (E0 done, ad0acfd). Held from 4 Nov until the kind experiment; released 5 Nov: the owner chose the description as the filter's input (one text field, as R9 already designs) and the 70% bar, which lives in this repository's config, not the engine; two rounds, 331 Jev calls, showed one Choice is enough and no decision graph is needed (jev-advisor/kind-decision-model-2026-11-04.md, kind-experiment-round-2-2026-11-05.md)
 governing planning basis:
   kind: four-document-design
   sunstack-tools docs/specs/2026-11-04-owner-assessment/{requirements,specification,program-design,verification-design}.md reviewed to convergence: rounds 1–4 to 9116442, then rounds 5–8 over the filters rename, R8 and R9 to dd92e2c, 0 open (tmp/design-workflows/2026-11-04-owner-assessment/review/report-round-8.md); within the ai-tools set (Program Design: the engine feature)

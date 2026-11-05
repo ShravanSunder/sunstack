@@ -1,21 +1,23 @@
 # Delivery map
 
-The [big design](../index.html) is built in five deliverables. Each one is something you can see working. Each gets its own short design and its own plan when its turn comes; the ones not started yet are one line here.
+The [big design](../index.html) is built in steps you can each see working. Re-sequenced on 5 Nov at the owner's go ("ok dkoesnt your seqkeueicin feel off ?" … "yes"): one rule end to end first, then widen. Each step gets its own short design and plan when it starts.
 
 ```mermaid
 flowchart LR
-  D1["1 · the engine asks<br/>each skill's kind once<br/>(sunstack-tools, 0.7.0)"] --> D3
-  D2["2 · rules that earn<br/>their nudges<br/>(ai-tools)"] --> D3
-  D3["3 · general-skill rules<br/>nudge correctly"] --> D4["4 · the review skill<br/>proven by two evals"]
-  D3 --> D5["5 · skills that teach it"]
+  D1["1 · engine 0.7.0<br/>filters + only_when<br/>(sunstack-tools)"] --> D3
+  D2["2 · foundation: scenarios,<br/>adoption, 12 rules<br/>(#188)"] --> D3
+  D3["3 · ONE rule end to end:<br/>line 17 nudged,<br/>AgentStudio quiet"] --> D3b["3b · widen: the other<br/>rules and the open<br/>meanings"]
+  D3b --> D4["4 · the review skill<br/>proven by two evals"]
+  D3b --> D5["5 · skills that teach it"]
 ```
 
-| # | Deliverable | You can see | Waits on | Design | Plan |
+| # | Step | You can see | Waits on | Design | Plan |
 | --- | --- | --- | --- | --- | --- |
-| 1 | The engine asks each skill's kind once | a general-skill rule gives no result on a product skill, and says why; an unsure skill is listed | nothing | [design](../d1-design.html) | [plan](../d1-plan.html) |
-| 2 | Rules that earn their nudges | the scenario report shows every rule's state and why; renames and drops done; runner tests on real skills | nothing | [design](../d2-design.html) | [plan](../d2-plan.html) |
-| 3 | General-skill rules nudge correctly | a run over every skill nudges line 17 and stays quiet on product skills; real scenarios and blind labels entered; the five kinds' criteria written and checked against the census, with the skill kind switched to its inline rule; the branch rule's colon scenario decided (does naming a criterion defined elsewhere count as observable?) | 1 and 2 | when it starts | when it starts |
-| 4 | The review skill proven by two evals | a Luna agent reviews #187 and PR166 and passes; a fake review fails | 3 | when it starts | when it starts |
-| 5 | Skills that teach it | each teaching skill has its worked example | 3 | when it starts | when it starts |
+| 1 | Engine 0.7.0: inline ast-grep rules (done, `ad0acfd`), `filters`, `only_when`, one question per folder, report and exit codes | a gated rule gives no result on a folder whose answer it doesn't name, and says why; an unsure folder is listed | nothing (filter input: the description, one text field, owner 5 Nov) | [design](../d1-design.html) | [plan](../d1-plan.html) |
+| 2 | Foundation (#188): scenarios out of the skill, owner adoption, scenario runs outside git, 12 renamed rules, 5 evidence kinds | every judged rule is held until adopted; the scenario report shows why | its A6 check | [design](../d2-design.html) | [plan](../d2-plan.html) |
+| 3 | One rule end to end: `filters.kind` (Jev's one question, five criteria, 70%, description only) + the kind scenarios (78 labelled skills, owner rulings) + `general-skill.overfits-to-product-workflow` gated `only_when: [general, role, domain]` with its real scenarios → scenario run → owner adopts | an agent's run nudges `ops-observability-stack` line 17 and stays quiet on the AgentStudio skill | 1 released and 2 merged | when it starts | when it starts |
+| 3b | Widen: the other two general-skill rules; the branch rule's colon scenario (does naming a criterion defined elsewhere count?); the kind meanings (domain vs subject review, repo_specific vs portable practice, `scaffold-project`); the skill kind switched to its inline rule | the rest of the rules earn adoption one by one | 3 | when it starts | when it starts |
+| 4 | The review skill proven by two evals | a Luna agent reviews #187 and PR166 and passes; a fake review fails | 3b | when it starts | when it starts |
+| 5 | Skills that teach it | each teaching skill has its worked example | 3b | when it starts | when it starts |
 
-Pull requests: open with the owner (one per deliverable as a stack, recommended, or deliverables 2–5 together in #188).
+Pull requests: one per step, stacked on #188 (owner, 4 Nov); the engine is its own repository's PR.
