@@ -18,6 +18,8 @@ import { fileURLToPath } from "node:url";
 import { expect } from "vitest";
 import { z } from "zod";
 import { lintReportSchema } from "./report.ts";
+import { unpackPinnedSource } from "./pinned-source.ts";
+import type { PinnedSource } from "./pinned-source.ts";
 
 export const repositoryRoot = fileURLToPath(new URL("../../../../", import.meta.url));
 export const kitRelative = "plugins/skill-authoring/skills/domain-skill-crafting/rules";
@@ -35,6 +37,7 @@ const pieceSchema = z.object({
     span: z.object({ byte_start: z.number(), byte_end: z.number() }).passthrough(),
   }),
   fields: z.record(z.string(), z.unknown()),
+  model_view: z.object({fields: z.record(z.string(), z.unknown()), cut: z.array(z.string())}),
 });
 const selectionSchema = z
   .object({
@@ -144,40 +147,28 @@ export interface EvidenceListing extends z.infer<typeof evidenceSchema> {
   readonly requests: readonly unknown[];
 }
 
-/**
- * Prints the kit's evidence for a fixture. The kit selects workflow sections through the decision
- * model, and the engine refuses `--evidence` on a selected kind without a credential even when no
- * file has a candidate, so every listing runs against the scripted judge. Its answers default to
- * 0.95 (selected); name a candidate key (`c1`, `c2`, ...) to answer it otherwise.
- */
-export async function listEvidence(
-  root: string,
-  selectionAnswers: Readonly<Record<string, number>> = {},
-  expectedStatus = 0,
-): Promise<EvidenceListing> {
-  return withJudge(selectionAnswers, async (endpoint, requests) => {
-    saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
-    const result = await spawnCollected(
-      enginePath,
-      [
-        "lint",
-        "--config",
-        path.join(root, kitRelative, "skill-rules.config.json"),
-        "--all",
-        "--evidence",
-      ],
-      {
-        cwd: root,
-        env: {
-          ...process.env,
-          OPENROUTER_API_KEY: "synthetic-evidence-test-key",
-          SUNSTACK_CREDENTIAL_STORE: "off",
-        },
+/** The five plain evidence kinds collect without a provider or credential. */
+export async function listEvidence(root: string): Promise<EvidenceListing> {
+  const result = await spawnCollected(
+    enginePath,
+    [
+      "lint",
+      "--config",
+      path.join(root, kitRelative, "skill-rules.config.json"),
+      "--all",
+      "--evidence",
+    ],
+    {
+      cwd: root,
+      env: {
+        ...process.env,
+        OPENROUTER_API_KEY: "",
+        SUNSTACK_CREDENTIAL_STORE: "off",
       },
-    );
-    expect(result.status, result.stderr || result.stdout).toBe(expectedStatus);
-    return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests };
-  });
+    },
+  );
+  expect(result.status, result.stderr || result.stdout).toBe(0);
+  return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests: [] };
 }
 
 export function spawnCollected(
@@ -234,16 +225,20 @@ export function saveRules(root: string, rules: Readonly<Record<string, unknown>>
   writeFixtureFile(root, `${kitRelative}/fixture.cases.json`, JSON.stringify({rules: Object.fromEntries(Object.values(definitions).map((rule) => [rule.name, {basis: Object.values(rule.decision.steps).some((step) => step.ask) ? "judged" : "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}])), cases: []}));
 }
 
-export function sampleSkill(
-  root: string,
-  name = "sample",
-  description = "Use when checking the runner.",
-): void {
-  writeFixtureFile(
-    root,
-    `plugins/example/skills/${name}/SKILL.md`,
-    `---\nname: ${name}\ndescription: ${JSON.stringify(description)}\n---\n\n# Sample\n`,
-  );
+export const pinnedSkillPath = "plugins/sunstack-dev/skills/audit-security-review/SKILL.md";
+export const runnerPinnedSource: PinnedSource = {repository: "self", commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a", path: pinnedSkillPath, context: [pinnedSkillPath]};
+
+/** Copies unchanged Git-pinned bytes; destination varies only to test file-scope selection. */
+export function installPinnedSkill(root: string, options: {readonly source?: PinnedSource; readonly destination?: string} = {}): PinnedSource {
+  const source = options.source ?? runnerPinnedSource;
+  const snapshot = unpackPinnedSource({source, self: repositoryRoot, ...(process.env.AI_DEV_SKILLS_ROOT ? {collectionsRoot: process.env.AI_DEV_SKILLS_ROOT} : {})});
+  if (snapshot.kind !== "ready") throw new Error(snapshot.reason);
+  try {
+    const destination = path.join(root, options.destination ?? source.path);
+    mkdirSync(path.dirname(destination), {recursive: true});
+    cpSync(path.join(snapshot.directory, source.path), destination);
+  } finally { snapshot.dispose(); }
+  return source;
 }
 
 export function runRunner(
@@ -296,11 +291,7 @@ export function runRunner(
   });
 }
 
-/**
- * Runs the runner against the scripted judge with a synthetic key. The kit selects workflow
- * sections through the decision model, so the engine needs a credential for every run, even one
- * whose rules are all mechanical and whose files hold no candidate; such a run still sends nothing.
- */
+/** Controlled replies prove runner boundaries on real skill bytes, not model accuracy. */
 export async function runRunnerJudged(
   root: string,
   argumentsList: readonly string[] = [],
@@ -347,9 +338,9 @@ export type ScriptedChoice = string | { readonly label: string; readonly probabi
  * the script gives one, the rest shared evenly among the other labels.
  */
 export async function withJudge<TValue>(
-  probabilities: Readonly<Record<string, number>> | (() => Readonly<Record<string, number>>),
+  probabilities: Readonly<Record<string, number>> | ((request: unknown) => Readonly<Record<string, number>>),
   action: (endpoint: string, requests: unknown[]) => Promise<TValue>,
-  choices: Readonly<Record<string, ScriptedChoice>> = {},
+  choices: Readonly<Record<string, ScriptedChoice>> | ((request: unknown) => Readonly<Record<string, ScriptedChoice>>) = {},
 ): Promise<TValue> {
   const requests: unknown[] = [];
   const questionSchema = z.discriminatedUnion("type", [
@@ -365,13 +356,14 @@ export async function withJudge<TValue>(
       for await (const chunk of request) body += String(chunk);
       const parsed = requestSchema.parse(JSON.parse(body));
       requests.push(parsed);
-      const currentProbabilities = typeof probabilities === "function" ? probabilities() : probabilities;
+      const currentProbabilities = typeof probabilities === "function" ? probabilities(parsed) : probabilities;
+      const currentChoices = typeof choices === "function" ? choices(parsed) : choices;
       const answers = Object.fromEntries(
         Object.entries(parsed.questions).map(([name, question]) => {
           if (question.type === "noul")
             return [name, { type: "noul", noul: currentProbabilities[name] ?? 0.95 }];
           const labels = Object.keys(question.criteria);
-          const scripted = choices[name] ?? labels[0];
+          const scripted = currentChoices[name] ?? labels[0];
           const choice = typeof scripted === "string" ? scripted : scripted?.label;
           const chosen = typeof scripted === "object" ? scripted.probability : 1;
           if (!choice || !labels.includes(choice))

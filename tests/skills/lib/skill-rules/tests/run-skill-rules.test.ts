@@ -15,7 +15,10 @@ import {
   reportSchema,
   runRunner,
   runRunnerJudged,
-  sampleSkill,
+  installPinnedSkill,
+  pinnedSkillPath,
+  runnerPinnedSource,
+  listEvidence,
   saveConfig,
   saveRules,
   withJudge,
@@ -40,7 +43,6 @@ function expectPrintedOutcomeCounts(stdout: string, report: LintReport): void {
 describe("repository skill rule runner (G10)", () => {
   test("default scope includes each plugin and excludes retired trees, test fixtures and ignored nested worktrees", async () => {
     const root = createFixture();
-    const text = "---\ndescription: short\n---\n";
     for (const filename of [
       "plugins/one/skills/alpha/SKILL.md",
       "plugins/two/skills/beta/SKILL.md",
@@ -48,7 +50,7 @@ describe("repository skill rule runner (G10)", () => {
       "tests/fixtures/plugins/one/skills/fake/SKILL.md",
       ".claude/worktrees/nested/plugins/one/skills/fake/SKILL.md",
     ])
-      writeFixtureFile(root, filename, text);
+      installPinnedSkill(root, {destination: filename});
     writeFixtureFile(root, ".gitignore", ".claude/worktrees/\n");
     saveRules(root, {
       K001: {
@@ -80,9 +82,9 @@ describe("repository skill rule runner (G10)", () => {
 
   test("named paths narrow selection and mechanical-only work with empty evidence_seen stays clean", async () => {
     const root = createFixture();
-    sampleSkill(root);
-    sampleSkill(root, "bad", "x".repeat(301));
-    const result = await runRunnerJudged(root, ["plugins/example/skills/sample"]);
+    installPinnedSkill(root);
+    installPinnedSkill(root, {source: {...runnerPinnedSource, commit: "74e18127a8e8bea04c33b8c79259f11b96b7e2a1", path: "plugins/agent-router/skills/agent-collaboration/SKILL.md", context: ["plugins/agent-router/skills/agent-collaboration/SKILL.md"]}, destination: "plugins/other/skills/long/SKILL.md"});
+    const result = await runRunnerJudged(root, [path.dirname(pinnedSkillPath)]);
     expect(result.status, result.stderr).toBe(0);
     const report = reportSchema.parse(result.report);
     expect(report.status.kind).toBe("clean");
@@ -92,7 +94,7 @@ describe("repository skill rule runner (G10)", () => {
 
   test("a nothing-selected full run is a gap, with the unchanged engine report kept", async () => {
     const root = createFixture();
-    sampleSkill(root);
+    installPinnedSkill(root);
     const result = await runRunnerJudged(root, ["tests"]);
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("full-scope run selected nothing");
@@ -101,7 +103,7 @@ describe("repository skill rule runner (G10)", () => {
 
   test("--since with no changes is clean", async () => {
     const root = createFixture();
-    sampleSkill(root);
+    installPinnedSkill(root);
     // The judge's endpoint goes into the config before the commit: a changed config widens the
     // run to full scope, which would hide the no-change case.
     await withJudge({}, async (endpoint, requests) => {
@@ -141,7 +143,7 @@ describe("repository skill rule runner (G10)", () => {
 
   test("the engine refuses an asking run without a key before acquiring checked files", async () => {
     const root = createFixture();
-    sampleSkill(root);
+    installPinnedSkill(root);
     saveRules(root, { K001: askingRule });
     const result = await runRunner(root);
     const report = reportSchema.parse(result.report);
@@ -159,7 +161,7 @@ describe("repository skill rule runner (G10)", () => {
     "judge probability %s retains status %s and exit %s",
     async (probability, status, exit) => {
       const root = createFixture();
-      sampleSkill(root);
+      installPinnedSkill(root);
       saveRules(root, { K001: askingRule });
       await withJudge({ verdict: probability }, async (endpoint, requests) => {
         saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
@@ -212,7 +214,7 @@ describe("repository skill rule runner (G10)", () => {
 
   test("a missing explicit engine does not fall back to the installed engine", async () => {
     const root = createFixture();
-    sampleSkill(root);
+    installPinnedSkill(root);
     const result = await runRunner(root, ["--engine", "not-an-engine"]);
     expect(result.status).toBe(2);
     expect(result.stderr).toContain("ENOENT");
@@ -279,8 +281,8 @@ describe("repository skill rule runner (G10)", () => {
 
   test("an incomplete asking run prints its reason and preserves exit 3", async () => {
     const root = createFixture();
-    sampleSkill(root);
-    sampleSkill(root, "second");
+    installPinnedSkill(root);
+    installPinnedSkill(root, {destination: "plugins/other/skills/second/SKILL.md"});
     saveRules(root, { K001: askingRule });
     await withJudge({ verdict: 0.95 }, async (endpoint, requests) => {
       saveConfig(root, {
@@ -296,6 +298,50 @@ describe("repository skill rule runner (G10)", () => {
       expect(report.incomplete.length).toBeGreaterThan(0);
       for (const item of report.incomplete) expect(result.stdout).toContain(item.reason.kind);
     });
+  });
+
+  test("a malformed provider answer stays incomplete on real pinned skill text", async () => {
+    const root = createFixture();
+    installPinnedSkill(root);
+    saveRules(root, {K001: askingRule});
+    const result = await runRunnerJudged(root, [], {verdict: Number.NaN});
+    const report = reportSchema.parse(result.report);
+    expect(result.requests).toHaveLength(1);
+    expect(result.status, result.stderr).toBe(3);
+    expect(report.status.kind).toBe("incomplete");
+    expect(report.incomplete.length).toBeGreaterThan(0);
+    expect(result.stdout).toContain("Status: incomplete");
+  });
+
+  test("collected real text, the bounded model view and the actual request stay distinct", async () => {
+    const root = createFixture();
+    installPinnedSkill(root);
+    saveRules(root, {K001: {...askingRule, evidence: "section", questions: {verdict: {type: "noul", instructions: {check: "body", task: "Does this body meet the supplied standard?"}}}, decision: {start: "verdict", steps: {verdict: {...askStep, no: {finding: "Body failed.", at: "body"}}}}}});
+    const evidence = z.object({evidence: z.object({ast_grep: z.string(), kinds: z.record(z.string(), z.record(z.string(), z.unknown()))})}).parse(JSON.parse(readFileSync(path.join(root, kitRelative, "skill-rules.config.json"), "utf8"))).evidence;
+    saveConfig(root, {evidence: {...evidence, kinds: {...evidence.kinds, section: {...evidence.kinds.section, max_chars: 1000}}}, limits: {evidence_max_chars: 1000, request_max_chars: 20000, max_model_requests: 100}});
+    const pieces = (await listEvidence(root)).pieces;
+    const textField = z.object({value: z.string()});
+    const skill = pieces.find((piece) => piece.kind === "section" && piece.where.file === pinnedSkillPath && (textField.safeParse(piece.fields.body).data?.value.length ?? 0) > 1000);
+    if (!skill) throw new Error("Missing pinned skill evidence");
+    const collected = textField.parse(skill.fields.body).value;
+    const visible = z.string().parse(skill.model_view.fields.body);
+    expect(collected.length).toBeGreaterThan(1000);
+    expect(visible.length).toBeLessThan(collected.length);
+    expect(skill.model_view.cut).toContain("body");
+    const result = await runRunnerJudged(root);
+    const report = reportSchema.parse(result.report);
+    const requestStrings = (value: unknown): string[] => {
+      if (typeof value === "string") return [value];
+      if (Array.isArray(value)) return value.flatMap(requestStrings);
+      if (value && typeof value === "object") return Object.values(value).flatMap(requestStrings);
+      return [];
+    };
+    expect(result.requests.length).toBeGreaterThan(0);
+    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(visible))).toBe(true);
+    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(collected))).toBe(false);
+    expect(report.results.some((piece) => piece.cut?.includes("body"))).toBe(true);
+    // The test rule is held, so its raw evidence stays in report.json rather than becoming a nudge.
+    expect(result.stdout).toContain("Held: description_judgment:");
   });
 
   test("invalid config inspection preserves the engine refusal", async () => {
@@ -315,7 +361,7 @@ describe("repository skill rule runner (G10)", () => {
 
 test("report presentation retains cancellation, skipped rules and uncertain evidence", async () => {
   const root = createFixture();
-  sampleSkill(root);
+  installPinnedSkill(root);
   const result = await runRunner(root);
   const report = reportSchema.parse(result.report);
   // Formatter sensitivity only: cancellation delivery is not claimed by this case.
@@ -334,7 +380,7 @@ test("report presentation retains cancellation, skipped rules and uncertain evid
 describe("decision controls (G8)", () => {
   test("a mechanical gate rejects with zero requests", async () => {
     const root = createFixture();
-    sampleSkill(root);
+    installPinnedSkill(root);
     saveRules(root, {
       K001: {
         ...askingRule,
@@ -368,7 +414,7 @@ describe("decision controls (G8)", () => {
     "Jev gate %s suppresses or reaches the failing verdict (%s findings)",
     async (gate, findings) => {
       const root = createFixture();
-      sampleSkill(root);
+      installPinnedSkill(root);
       saveRules(root, {
         K001: {
           ...askingRule,

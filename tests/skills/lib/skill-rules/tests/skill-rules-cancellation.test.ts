@@ -11,7 +11,7 @@ import {
   enginePath,
   reportSchema,
   repositoryRoot,
-  sampleSkill,
+  installPinnedSkill,
   saveConfig,
   saveRules,
 } from "../test-fixture.ts";
@@ -20,7 +20,7 @@ afterEach(cleanupFixtureRoots);
 
 test("the runner preserves a real engine cancellation report and exit 4", async () => {
   const root = createFixture();
-  sampleSkill(root);
+  installPinnedSkill(root);
   saveRules(root, { K001: askingRule });
   const pidFile = path.join(root, "engine.pid");
   const launcher = path.join(root, "cancel-engine.ts");

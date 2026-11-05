@@ -17,3 +17,9 @@ The Lead ran the real case writer on all 21 active branch cases through Jev. Res
 The two subruns reported 98 model requests, 124,830 input tokens, 6,706 output tokens and $0.00524286. Requested model: `jev-latest`; the engine report does not expose the resolved model version, so a fixed-version comparison remains unverified. These exposed regression cases are not a fresh holdout or an accuracy estimate. Questions and labels were not tuned to this run; the Lead explicitly accepted its mixed receipt as D2 evidence, with semantic tuning deferred.
 
 No receiving-agent behavior, actual general-skill kind gate, full-tree judged-rule readiness or installed-cache delivery is proven here. Source/plugin validation and tests establish only their stated layers.
+
+## Final local gates
+
+At the completed D2 implementation, `pnpm --dir tests/skills test` with both external source roots configured reports 39 test files passing, 297 tests passing and one explicitly gated live-provider test skipped (exit 0). Typecheck, oxlint over all 26 changed TypeScript files, `git diff --check`, the twelve-rule assembly and all 245 case schemas pass. Claude plugin validation passes; its unrelated existing README advice is deferred.
+
+The runner's invented sample and completion skill directories are removed. Real historical descriptions exercise 225/230/308 character outcomes, the owner's actual `Always use when` description, and a rejected historical `Always load` opener. A real-engine serialization test renders pinned line 17, the actual standard's wording/line, the loaded AgentStudio loop, answers, path and cut state, joins the same rule at line 40 and excludes a quiet control for that rule. A separate real-section cut test checks collected bytes, the bounded view and the provider request apart. These use controlled answers and prove rendering/transport, not the semantic judgment.
