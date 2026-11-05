@@ -46,7 +46,7 @@ And a nudge an agent gets now carries every part: where, what was noticed, the s
 - Change a rule's question after a passing case run, and the rule is held until it passes again.
 - A threshold left at the default, or changed after it was set, holds the rule.
 - The dropped rules give no result.
-- A colon-ended `IF` with its block passes; an `IF` naming nothing still gets a nudge.
+- A colon-ended `IF` reaches Jev together with its block, and an `IF` naming nothing still gets a nudge. (Whether the colon case passes is decided in deliverable 3: it turned on whether naming a criterion defined elsewhere counts as observable.)
 - The runner's tests pass on real skills.
 - The config lists five evidence kinds, and every kept rule's cases still collect the same text.
 - The three general-skill rules sit in one rulebook beside one standard; `steering` is gone.
