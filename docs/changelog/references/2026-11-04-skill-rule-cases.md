@@ -28,7 +28,7 @@ The initial formatter matched the first containing result range. Real sections n
 
 ## Standards fingerprint correction
 
-The initial fingerprint omitted the paired standards Markdown even though the engine puts its wording in the model state. An added producer-to-ordinary-CLI mutation first reproduced an old receipt still admitting a nudge after only the standard line changed. The corrected producer and consumer resolve the pair from the canonical config and hash the entire Markdown file. The same test now retains a raw finding, reports the rule held and suppresses the nudge in both output paths. Existing receipts from before this fingerprint change are stale; they cannot admit a judged rule.
+The initial fingerprint omitted the paired standards Markdown even though the engine puts its wording in the model state. An added producer-to-ordinary-CLI mutation first reproduced an old receipt still admitting a nudge after only the standard line changed. The corrected producer and consumer resolve the pair from the canonical config and hash the entire Markdown file. The same test now retains a raw finding, reports the rule held and suppresses the nudge in both output paths. Old receipts become stale. The final keyed run rewrote all five receipts, whose twelve fingerprints match the corrected producer/consumer; they remain incomplete and cannot admit a judged rule.
 
 ## Branch question correction and scoped result
 
@@ -63,3 +63,5 @@ All rows below are `main-path-k001-case-<number>`; `finding` on a must-pass row 
 | 019 | must_fire | finding, locator hit | finding, locator hit |
 | 020 | must_pass | pass | pass |
 | 021 | must_pass | finding | finding |
+
+The final run under the corrected fingerprint repeats the same 15/2/4 totals, with case 006 again excluded instead of uncertain; every other row above is unchanged. Both positive controls still fire with matching locators. It reported 98 requests, 132,572 input tokens, 6,697 output tokens and $0.005568024, runner exit 1 and engine exits 5/5. All twelve stored fingerprints across the five rulebooks were recomputed and match. The receipts still say `complete: false`; fresh fingerprints do not turn mixed semantic outcomes into admission.

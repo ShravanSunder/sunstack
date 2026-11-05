@@ -4,7 +4,7 @@
   "complete": false,
   "rules": {
     "general-skill.description-overfits-to-one-product": {
-      "fingerprint": "62e87c1dc39dbf0776e4effdec654e39ebf76e7e01d60f1e3ca7044a8d1b0508",
+      "fingerprint": "939acf3de981fba0f5367bf87dea885a7635e2c1146aeb761b5eea327132d1f7",
       "development": {
         "passed": 0,
         "failed": [],
@@ -36,7 +36,7 @@
       }
     },
     "general-skill.overfits-to-product-workflow": {
-      "fingerprint": "ecf3c3a86a649b682d960e4134e48184561816e843945cb1504bb4f077c41b8e",
+      "fingerprint": "f4b851cca3c74e9b893b262949774f1d65ce7e0375c56baa8e3aec9c624b748d",
       "development": {
         "passed": 0,
         "failed": [],
@@ -81,7 +81,7 @@
       }
     },
     "general-skill.taught-rule-overfits-to-one-project": {
-      "fingerprint": "318a07ddea4b82d794432b021905b99ecd908136df5c492268bfdd90d1a29dc0",
+      "fingerprint": "95e29e5a09ec84ffb63780bdd0930ab7281c3c1a7f771c643453e06edbd1411f",
       "development": {
         "passed": 0,
         "failed": [],

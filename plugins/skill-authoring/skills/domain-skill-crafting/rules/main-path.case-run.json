@@ -4,7 +4,7 @@
   "complete": false,
   "rules": {
     "skill-branch.names-an-observable-condition": {
-      "fingerprint": "e3ec81dd665f4e3cf22f00d6d645004ea177691e5c742acb348d821d072e0b04",
+      "fingerprint": "778a5ffce706391874f2928c519f85e8c88af39506d4db11c509c33c29b6bb00",
       "development": {
         "passed": 15,
         "failed": [

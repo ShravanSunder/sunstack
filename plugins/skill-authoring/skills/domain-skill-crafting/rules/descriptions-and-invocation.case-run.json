@@ -4,7 +4,7 @@
   "complete": false,
   "rules": {
     "skill-description.starts-with-use-when": {
-      "fingerprint": "c1eb7e0c54638b0dbbc790ac736cead99283f0a575f83a8a98d159a814f660ff",
+      "fingerprint": "2603e90e268788a47a915491745cdc134d00bc0366239ddc54bd56518325532c",
       "development": {
         "passed": 0,
         "failed": [],
@@ -17,7 +17,7 @@
       }
     },
     "skill-description.longer-than-225-characters": {
-      "fingerprint": "92b21a2f3545924f35f8cdfa475ed9d85819e7df904d256453b40bbe01f58532",
+      "fingerprint": "38cf42aa72742837a5d67932bbcc07a9f870938edcc75c4bf4680067c5ed1a41",
       "development": {
         "passed": 0,
         "failed": [],
@@ -30,7 +30,7 @@
       }
     },
     "skill-description.longer-than-300-characters": {
-      "fingerprint": "cb362be23ed601aa581ae317789cd29937b0e16a0b293b7c22e701d9f469e8e0",
+      "fingerprint": "6fcb1e40f1a420bfa6846bf1dd525d686ca5681e0f3bd8d46e9a35a709cca514",
       "development": {
         "passed": 0,
         "failed": [],
@@ -43,7 +43,7 @@
       }
     },
     "skill-description.names-the-loading-moment": {
-      "fingerprint": "7565bf1563af8781634033e67f722d55757c7ce494feb8c3fe5d7d31f1f9af0d",
+      "fingerprint": "066ae7a1dc729c4693b5c48ce2c479b0a77c6aafff28450c22e915dcba0227bf",
       "development": {
         "passed": 0,
         "failed": [],
@@ -69,7 +69,7 @@
       }
     },
     "skill-description.states-triggers-not-workflow-steps": {
-      "fingerprint": "70784174f03568496193e481352f4393e902ab33f4cad17c975d22ba41d1cf37",
+      "fingerprint": "91c00c04db36ed7699d9cf75aa6a29c2123dab2c7dd2799ec847a9a665d6d9f6",
       "development": {
         "passed": 0,
         "failed": [],

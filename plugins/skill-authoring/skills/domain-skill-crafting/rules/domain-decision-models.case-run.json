@@ -4,7 +4,7 @@
   "complete": false,
   "rules": {
     "rule-question.asks-exactly-one-thing": {
-      "fingerprint": "85b5c0dca204baf77a5e7ae92d88a918f4c63bfb21d84cc110963fa1eada311e",
+      "fingerprint": "5a7d5a0574062795f89faf6e383e2233ecff9a79c08a842f3b0e4c0cd4e0b263",
       "development": {
         "passed": 0,
         "failed": [],
@@ -26,7 +26,7 @@
       }
     },
     "rule-question.criteria-answer-the-same-question": {
-      "fingerprint": "93d041368e273c860aa868fbd82e09163d82d8eaa4ced7437544043bca8fc6ba",
+      "fingerprint": "43e27a2bc7104c6614daee588e47f05409e1ef48016876dacf90f9a91e212baa",
       "development": {
         "passed": 0,
         "failed": [],
