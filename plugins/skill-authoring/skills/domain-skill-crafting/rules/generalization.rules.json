@@ -1,13 +1,16 @@
 {
   "K001": {
-    "name": "rule.generalization",
+    "name": "general-skill.taught-rule-overfits-to-one-project",
     "evidence": "section",
     "questions": {
       "kind": {
         "type": "choice",
         "instructions": {
           "check": "body",
-          "context": ["heading", "headings"],
+          "context": [
+            "heading",
+            "headings"
+          ],
           "task": "What does this section's own text hold? body is the section's own text, without its child sections; heading and headings are its own heading and the headings it sits under."
         },
         "criteria": {
@@ -20,7 +23,10 @@
         "type": "noul",
         "instructions": {
           "check": "body",
-          "context": ["heading", "headings"],
+          "context": [
+            "heading",
+            "headings"
+          ],
           "task": "Is every rule this section's own text teaches stated as a judgment that would still guide a materially different repository, stack or team, with any product, library, API or incident it names only as an example, or as the scope the owner adopted the rule for?"
         },
         "criteria": {

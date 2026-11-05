@@ -1,6 +1,6 @@
 {
   "K001": {
-    "name": "branch.condition",
+    "name": "skill-branch.names-an-observable-condition",
     "evidence": "branch",
     "questions": {
       "when_kind": {

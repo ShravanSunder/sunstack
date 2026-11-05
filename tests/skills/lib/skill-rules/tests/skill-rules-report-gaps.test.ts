@@ -10,14 +10,14 @@ const skillFile = "plugins/example/skills/sample/SKILL.md";
 const referenceFile = "plugins/example/skills/sample/references/guide.md";
 const rulesFile = "plugins/example/skills/sample/rules/sample.rules.json";
 const description: RuleDenominator = {
-  rule: "description.opener",
+  rule: "skill-description.starts-with-use-when",
   marker: "K001",
   kind: "skill",
   files: ["**/SKILL.md"],
   within: [],
 };
 const generalization: RuleDenominator = {
-  rule: "rule.generalization",
+  rule: "general-skill.taught-rule-overfits-to-one-project",
   marker: "K001",
   kind: "section",
   files: ["**/SKILL.md", "**/references/**/*.md"],
@@ -65,7 +65,7 @@ function lintReport(parts: Record<string, unknown>): LintReport {
 describe("unread, inside each rule's declared denominator (D3a)", () => {
   test("a description rule over a SKILL.md, a reference and a JSON file gives no unread gap for the reference or the JSON file", () => {
     const report = lintReport({
-      results: [row("description.opener", skillFile)],
+      results: [row("skill-description.starts-with-use-when", skillFile)],
       file_counts: [
         { file: skillFile, kinds: { skill: counts(1) } },
         { file: referenceFile, kinds: { skill: counts(0) } },
@@ -77,7 +77,7 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
 
   test("a generalization rule over an eligible file that produced no section piece gives an unread gap", () => {
     const report = lintReport({
-      results: [row("rule.generalization", skillFile)],
+      results: [row("general-skill.taught-rule-overfits-to-one-project", skillFile)],
       file_counts: [
         { file: skillFile, kinds: { section: counts(3) } },
         { file: referenceFile, kinds: { section: counts(0) } },
@@ -85,7 +85,7 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
       ],
     });
     expect(reportGaps(report, [generalization]).unread).toEqual([
-      { rule: "rule.generalization", marker: "K001", file: referenceFile },
+      { rule: "general-skill.taught-rule-overfits-to-one-project", marker: "K001", file: referenceFile },
     ]);
   });
 
@@ -125,7 +125,7 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
     const denominators = loadRuleDenominators(
       path.join(repositoryRoot, kitRelative, "skill-rules.config.json"),
     );
-    expect(denominators.find((item) => item.rule === "placement.product-workflow")).toMatchObject({
+    expect(denominators.find((item) => item.rule === "general-skill.overfits-to-product-workflow")).toMatchObject({
       kind: "section",
       files: ["**/SKILL.md", "**/references/**/*.md"],
     });
@@ -145,7 +145,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
       counts: { error: 0, warn: 1 },
       findings: [
         {
-          rule: "placement.product-workflow",
+          rule: "general-skill.overfits-to-product-workflow",
           marker: "K003",
           file: skillFile,
           line: 17,
@@ -159,12 +159,12 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
           ],
         },
       ],
-      results: [row("rule.generalization", skillFile)],
+      results: [row("general-skill.taught-rule-overfits-to-one-project", skillFile)],
       file_counts: [{ file: skillFile, kinds: { section: counts(1) } }],
     });
     const text = formatLintReport(report, [generalization]);
     expect(text).toContain(
-      `${skillFile}:17: warn placement.product-workflow: This routes the agent into one product's own workflow. (judged, anchor resolved)`,
+      `${skillFile}:17: warn general-skill.overfits-to-product-workflow: This routes the agent into one product's own workflow. (judged, outcome finding, anchor resolved)`,
     );
     expect(text).toContain("  read: standard rules/standards.md:22");
     expect(text).toContain("  read: targets references/loop.md:1-40");
@@ -174,7 +174,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
   test("each gap kind prints under its own name, and 'none' is said only when all four are empty", () => {
     const report = lintReport({
       status: { kind: "incomplete" },
-      results: [row("rule.generalization", skillFile, "pass", { basis: "judged", cut: ["body"] })],
+      results: [row("general-skill.taught-rule-overfits-to-one-project", skillFile, "pass", { basis: "judged", cut: ["body"] })],
       selections: [
         {
           kind: "workflow_section",
@@ -191,8 +191,8 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
     });
     const text = formatLintReport(report, [generalization]);
     expect(text).not.toContain("Gaps: none");
-    expect(text).toContain(`unread: rule.generalization judged nothing in ${referenceFile}`);
-    expect(text).toContain(`cut: rule.generalization at ${skillFile}:1-4: body cut for the model`);
+    expect(text).toContain(`unread: general-skill.taught-rule-overfits-to-one-project judged nothing in ${referenceFile}`);
+    expect(text).toContain(`cut: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4: body cut for the model`);
     expect(text).toContain(`unresolved: ${skillFile}:9: uncertain selection workflow_section`);
     expect(text).toContain("not run: run incomplete: not every rule ran");
     expect(text).toContain('not run: Skipped rule: {"rule":"omitted","reason":"off"}');
@@ -201,7 +201,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
   test("a decided exclusion prints apart from the gaps, with the gate's answer or as mechanical", () => {
     const report = lintReport({
       results: [
-        row("rule.generalization", skillFile, "not_applicable", {
+        row("general-skill.taught-rule-overfits-to-one-project", skillFile, "not_applicable", {
           step: "kind",
           path: ["kind"],
           basis: "judged",
@@ -214,7 +214,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
     const text = formatLintReport(report, [generalization]);
     expect(text).toContain("Gaps: none");
     expect(text).toContain("Exclusions: 2");
-    expect(text).toContain(`excluded: rule.generalization at ${skillFile}:1-4, kind answered local 0.82`);
+    expect(text).toContain(`excluded: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4, kind answered local 0.82`);
     expect(text).toContain(`excluded: description.always-earned at ${skillFile}:1-4, always (mechanical)`);
   });
 });

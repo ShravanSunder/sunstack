@@ -1,4 +1,4 @@
-import type { RuleExpectation } from "./expectations.ts";
+import type { CaseRecord } from "./cases.ts";
 import type { LintReport, PieceDecision } from "./report.ts";
 
 export interface ExpectationGap {
@@ -8,8 +8,8 @@ export interface ExpectationGap {
 export interface ExpectationResult {
   readonly id: string;
   readonly rule: string;
-  readonly expected: RuleExpectation["expect"];
-  readonly decidedBy: RuleExpectation["decided_by"];
+  readonly expected: CaseRecord["expect"];
+  readonly label: CaseRecord["label"];
   readonly outcome: "caught" | "missed" | "false_nudge" | "unsure";
   readonly observed: PieceDecision["outcome"] | null;
   readonly locator: {
@@ -19,12 +19,12 @@ export interface ExpectationResult {
   readonly gaps: readonly ExpectationGap[];
 }
 
-export function gapExpectation(entry: RuleExpectation, gap: ExpectationGap): ExpectationResult {
+export function gapExpectation(entry: CaseRecord, gap: ExpectationGap): ExpectationResult {
   return {
     id: entry.id,
     rule: entry.rule,
     expected: entry.expect,
-    decidedBy: entry.decided_by,
+    label: entry.label,
     outcome: "unsure",
     observed: null,
     locator: { kind: "unavailable", lines: [] },
@@ -33,23 +33,23 @@ export function gapExpectation(entry: RuleExpectation, gap: ExpectationGap): Exp
 }
 
 export function matchExpectationPiece(
-  entry: RuleExpectation,
+  entry: CaseRecord,
   results: readonly PieceDecision[],
 ): PieceDecision | undefined {
   const matches = results.filter(
     (result) =>
       result.name === entry.rule &&
       result.file === entry.source.path &&
-      (entry.piece_first_line !== undefined
-        ? result.first_line === entry.piece_first_line
-        : entry.field_line !== undefined
-          ? result.first_line <= entry.field_line && result.last_line >= entry.field_line
+      (entry.select?.piece_first_line !== undefined
+        ? result.first_line === entry.select?.piece_first_line
+        : entry.select?.field_line !== undefined
+          ? result.first_line <= entry.select?.field_line && result.last_line >= entry.select?.field_line
           : true),
   );
   return matches.length === 1 ? matches[0] : undefined;
 }
 
-export function scoreExpectation(entry: RuleExpectation, report: LintReport): ExpectationResult {
+export function scoreExpectation(entry: CaseRecord, report: LintReport): ExpectationResult {
   const piece = matchExpectationPiece(entry, report.results);
   if (!piece)
     return gapExpectation(entry, {
@@ -76,7 +76,7 @@ export function scoreExpectation(entry: RuleExpectation, report: LintReport): Ex
   if (entry.expect === "must_fire") {
     if (piece.outcome === "finding" && findings.length === 1) {
       const lines = findings.map((finding) => finding.line);
-      locator = { kind: lines.some((line) => entry.lines?.includes(line)) ? "hit" : "miss", lines };
+      locator = { kind: lines.some((line) => entry.finding_lines?.includes(line)) ? "hit" : "miss", lines };
     } else {
       locator = { kind: "unavailable", lines: [] };
       if (piece.outcome === "finding")
@@ -105,7 +105,7 @@ export function scoreExpectation(entry: RuleExpectation, report: LintReport): Ex
     id: entry.id,
     rule: entry.rule,
     expected: entry.expect,
-    decidedBy: entry.decided_by,
+    label: entry.label,
     outcome,
     observed: piece.outcome,
     locator,
@@ -117,7 +117,7 @@ export function expectationExitCode(results: readonly ExpectationResult[]): 0 | 
   if (
     results.some(
       (result) =>
-        result.decidedBy.how !== "author" &&
+        result.label.state === "labelled" &&
         (result.outcome === "missed" || result.outcome === "false_nudge"),
     )
   )

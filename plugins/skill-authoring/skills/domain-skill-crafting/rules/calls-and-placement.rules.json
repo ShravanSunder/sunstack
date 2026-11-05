@@ -1,6 +1,6 @@
 {
   "K001": {
-    "name": "call.completeness",
+    "name": "load-call.names-when-where-and-result",
     "evidence": "load",
     "questions": {
       "gap": {
@@ -128,7 +128,7 @@
     "severity": "warn"
   },
   "K003": {
-    "name": "placement.product-workflow",
+    "name": "general-skill.overfits-to-product-workflow",
     "evidence": "section",
     "questions": {
       "routes_product": {

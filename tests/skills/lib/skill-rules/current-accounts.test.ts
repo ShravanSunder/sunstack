@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { listCurrentAccounts } from "./current-accounts.ts";
-import { expectationSchema } from "./expectations.ts";
+import { caseRecordSchema } from "./cases.ts";
 import { reportWithResults } from "../../tests/support/lint-report.ts";
 import type { PieceDecision } from "./report.ts";
 
@@ -15,16 +15,16 @@ const piece: PieceDecision = {
   path: [],
   step: null,
 };
-const entry = expectationSchema.parse({
+const entry = caseRecordSchema.parse({
   id: "place",
   rule: piece.name,
-  source: { repository: "self", commit, path: piece.file, context: [] },
-  piece_first_line: 6,
+  source: { repository: "self", commit, path: piece.file, context: ["plugins"] },
+  select: {piece_first_line: 6},
   expect: "must_fire",
-  lines: [17],
+  finding_lines: [17],
   kind: "regression_example",
-  basis: "Reviewed",
-  decided_by: { how: "owner" },
+  case_kind: "unclassified", status: "active", set: "development",
+  label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
   added: "2026-11-01",
 });
 describe("current-skills account listing", () => {

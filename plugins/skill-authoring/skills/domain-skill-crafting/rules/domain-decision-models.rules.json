@@ -22,7 +22,7 @@
     "severity": "warn"
   },
   "K002": {
-    "name": "question.one-proposition",
+    "name": "rule-question.asks-exactly-one-thing",
     "evidence": "rule_question",
     "questions": {
       "one_proposition": {
@@ -85,7 +85,7 @@
     "severity": "warn"
   },
   "K003": {
-    "name": "question.criteria-match",
+    "name": "rule-question.criteria-answer-the-same-question",
     "evidence": "rule_question",
     "questions": {
       "same_proposition": {

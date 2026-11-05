@@ -1,0 +1,2048 @@
+{
+  "rules": {
+    "load-call.names-when-where-and-result": {
+      "basis": "judged",
+      "decision": "keep",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "gap": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        }
+      }
+    },
+    "reference.teaching-depth": {
+      "basis": "judged",
+      "decision": "dropped",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "role": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        },
+        "teaching": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        }
+      }
+    },
+    "general-skill.overfits-to-product-workflow": {
+      "basis": "judged",
+      "decision": "held_by_owner",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "routes_product": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        },
+        "example_or_own_infrastructure": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        },
+        "exemption_when_unsure": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "cases": [],
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "calls-and-placement-k001-case-001",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 24,
+        "field_line": 24
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-001"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-001 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-002",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 40,
+        "field_line": 40
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        40
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-002"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-002 (development, current): original sol-settled call finding on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-003",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 26,
+        "field_line": 26
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-003"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-003 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-004",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 51,
+        "field_line": 51
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-004"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-004 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-005",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 43,
+        "field_line": 43
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-005"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-005 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-006",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 36,
+        "field_line": 36
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-006"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-006 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-007",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17,
+        "field_line": 17
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        17
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-007"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-007 (held-out, current): original sol-settled call finding on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-008",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 54,
+        "field_line": 54
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-008"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-008 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-009",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 37,
+        "field_line": 37
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-009"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-009 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k001-case-010",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 125,
+        "field_line": 125
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-010"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-010 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-001",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/references/check-and-reports.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 37,
+        "field_line": 37
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-001"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-001 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-002",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/references/workflows.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 3
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        3
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-002"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-002 (development, current): original sol-settled call finding on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-003",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 60,
+        "field_line": 60
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        60
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-003"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-003 (development, current): original sol-settled call finding on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-004",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/references/check-and-reports.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 24,
+        "field_line": 24
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-004"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-004 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-005",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 77,
+        "field_line": 77
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-005"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-005 (development, current): original sol-settled call not_applicable on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-006",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22,
+        "field_line": 22
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-006"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-006 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-007",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        5
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-007"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-007 (held-out, current): original sol-settled call finding on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-008",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/practices-collaboration/references/work-home-discovery.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 13,
+        "field_line": 13
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-008"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-008 (held-out, current): original sol-settled call not_applicable on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-009",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/references/design-set.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17,
+        "field_line": 17
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-009"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-009 (held-out, current): original sol-settled call not_applicable on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-010",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 9,
+        "field_line": 9
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-010"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-010 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-011",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/agent-router/skills/agent-collaboration/references/message-board.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-011"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-011 (development, current): original sol-settled call not_applicable on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-012",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/implementation-review/references/reviewing-implementation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 28,
+        "field_line": 28
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-012"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-012 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-013",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/practices-how/references/behavior-reconstruction.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 41,
+        "field_line": 41
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-013"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-013 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-014",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/discuss-clarify-mental-models/references/provenance-decomposition.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 36,
+        "field_line": 36
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-014"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-014 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-015",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/skill-design/references/proof-runs.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 22,
+        "field_line": 22
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-015"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-015 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-016",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/agentstudio/skills/agentstudio/references/panes-and-terminals.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-016"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-016 (development, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-017",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "not_applicable",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-017"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-017 (held-out, current): original sol-settled call not_applicable on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-018",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/practices-verification/references/native-observation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17,
+        "field_line": 17
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-018"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-018 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-019",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/spec-design/references/authority-and-problem-framing.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 12,
+        "field_line": 12
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-019"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-019 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-020",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/practices-how/references/dynamic-path-evidence.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 25,
+        "field_line": 25
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-020"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-020 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-021",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/skill-authoring/skills/skill-design/references/security-gate.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-021"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-021 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k002-case-022",
+      "rule": "reference.teaching-depth",
+      "source": {
+        "repository": "self",
+        "commit": "f747b37e71100776366058ac0737925d78945497",
+        "path": "plugins/sunstack-dev/skills/implement-plan/references/execution-and-proof.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 30,
+        "field_line": 30
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "retired",
+      "retired_because": "Owner, 3 Nov: \"we can remove teachign depth for now. and guidance positive\"",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k002/case-022"
+        ],
+        "note": "Migrated calls-and-placement-k002/case-022 (held-out, current): original sol-settled call pass on reference_section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-001",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 6,
+        "field_line": 17
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        17,
+        18
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k003/case-001"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-001 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-002",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 28,
+        "field_line": 30
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        30
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-002"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-002 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-003",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 32,
+        "field_line": 40
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        40
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-003"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-003 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-004",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 68,
+        "field_line": 70
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-004"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-005",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/victoria-queries.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 41,
+        "field_line": 47
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-005"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-006",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 16,
+        "field_line": 17
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        21,
+        26,
+        30,
+        31,
+        32,
+        33,
+        35
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k003/case-006"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-006 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-007",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/producer-contract.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 7
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-007"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-007 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-008",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/platform.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 3,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-008"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-008 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-009",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 96,
+        "field_line": 109
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-009"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-009 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-010",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 28,
+        "field_line": 30
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k003/case-010"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-011",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 12,
+        "field_line": 14
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-011"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-011 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-case-012",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/presentation-tui/references/shape-catalog.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 1,
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/case-012"
+        ],
+        "note": "Migrated calls-and-placement-k003/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h01",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 65,
+        "field_line": 65
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h01"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h01 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h02",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/github-pr-state.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 5,
+        "field_line": 5
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h02"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h02 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h03",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 134,
+        "field_line": 134
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h03"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h04",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 45,
+        "field_line": 45
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        49,
+        50,
+        57,
+        58,
+        64,
+        71,
+        72
+      ],
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k003/held-out-h04"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h04 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h05",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 15,
+        "field_line": 15
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k003/held-out-h05"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h05 (held-out, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "calls-and-placement-k003-held-out-h06",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 121,
+        "field_line": 121
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h06"
+        ],
+        "note": "Migrated calls-and-placement-k003/held-out-h06 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a07-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 39
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A07, blind labellers agreed. I: It describes one clean example where “the assignment names the TUI”; it is an illustrative case in a generic project-verification reference. J: The terminal app and `verify-tui` are an illustrative assignment scenario; the passage does not route an actual task into a product workflow."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a13-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/verification-design/references/choosing-the-observation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 73
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A13, blind labellers agreed. I: The drafts and titles appear as a worked example of restart durability; the passage teaches how to state verification evidence. J: The draft-survival scenario is an example of matching proof to a storage requirement; it does not direct work into a product's own workflow."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a14-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 208
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A14, blind labellers agreed. I: The fragment is a Peekaboo-specific troubleshooting recipe (`peekaboo daemon start`); the Peekaboo skill is for its own native-UI workflow. J: The source is Peekaboo's own troubleshooting guide, and the prescribed commands operate Peekaboo itself."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a16-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 21
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A16, blind labellers agreed. I: The permission steps are Peekaboo-specific (`peekaboo permissions status`); this is the tool's own troubleshooting workflow. J: This is a permission troubleshooting section in Peekaboo's own skill, so its product-specific workflow is within scope."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a27-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/headless-automation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 187
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A27, blind labellers agreed. I: The daemon recovery commands name Peekaboo's own process and socket (`/tmp/peekaboo.sock`); they belong to its tool-specific skill. J: The daemon recovery commands are in Peekaboo's own headless-automation reference and operate Peekaboo."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a28-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/headless-automation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 209
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A28, blind labellers agreed. I: The bridge status, socket, and log commands are Peekaboo-specific troubleshooting steps in the Peekaboo skill. J: The bridge troubleshooting steps are in Peekaboo's own headless-automation reference and use its daemon and paths."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a40-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 10
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A40, blind labellers agreed. I: The helper resolution and pane identity commands belong to the AgentStudio skill, whose stated scope is its panes and CLI. J: The source is AgentStudio's own skill and the setup branch invokes its helper and pane workflow."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a43-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/references/toolchain.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 27
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
+          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+        ],
+        "note": "Accounts A43, independent settlement: 'When the repo uses shadcn' and 'A components.json at the app root marks a shadcn project' condition the component CLI on the repository's toolchain. I follow labeller J because 'pnpx shadcn@latest add button' is library/tooling guidance usable across repositories using shadcn, not one application's own procedures, state files or machine paths as labeller I treats it."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a46-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-verification-maintenance/references/project-capability-generation.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 53
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A46, blind labellers agreed. I: The verification-maintenance passage labels the ledger app as a fictional example and compares weak and adequate recipes. J: The passage is explicitly a fictional `ledger` example used to illustrate verification evidence, not an instruction to use that product workflow."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a52-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 32
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        40
+      ],
+      "kind": "breach",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
+          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
+        ],
+        "note": "Accounts A52, independent settlement: The full cleanup skill describes removing 'the large residue your task created' without restricting itself to AgentStudio, yet its allow list prescribes 'mise -C \"$agentstudio_worktree\" run clean-artifacts'. I follow labeller J because this is a general skill's branch into one application's own cleanup task; the inspected-path and stopped-process conditions cited by I constrain when it runs but do not make the containing skill product-specific."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a53-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/domain-decision-models/references/worked-trees.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 139
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A53, blind labellers agreed. I: The piece teaches a reusable nudge-tree judgment and explicitly treats the AgentStudio loop as an example whose repository ownership is unresolved. J: The passage is an explanatory nudge-tree example about AgentStudio; it analyzes a sample route rather than instructing general skill users to follow it."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a57-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 7
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
+        ],
+        "note": "Accounts A57, blind labellers agreed. I: The permission workflow is for Peekaboo's Screen Recording feature (`peekaboo permissions status`) in its own tool-specific skill. J: The troubleshooting section is in Peekaboo's own skill and routes only through Peekaboo permission controls."
+      },
+      "added": "2026-11-01"
+    },
+    {
+      "id": "acct-a58-placement-product-workflow",
+      "rule": "general-skill.overfits-to-product-workflow",
+      "source": {
+        "repository": "self",
+        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 49
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        51,
+        54,
+        57,
+        59
+      ],
+      "kind": "breach",
+      "case_kind": "unclassified",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
+          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
+          "Sol line settler 01a19710-fc6e-7b81-97d9-364618002e9b"
+        ],
+        "note": "Accounts A58, blind I/J outcome agreed. I: The shared observability skill embeds AgentStudio-specific workflow: it sources `tmp/debug-observability/latest-observability.env` and directs native checks at the launched AgentStudio debug/beta process. J: This reference under the shared observability skill routes into an AgentStudio-specific loop using `tmp/debug-observability/latest-observability.env`, a producer marker, and PID targeting. Independent line-only settlement: The loading skill covers 'any repo that emits OTLP locally', so the product-own-skill exception does not apply. I follow labeler J: 'Read the state file from another shell' (51) and 'Then use the Victoria query recipes with the marker from the state file' (57) prescribe reading and consuming the AgentStudio state named by 'source tmp/debug-observability/latest-observability.env' (54), so labeler I's narrower selection misses operative steps. Line 59 additionally prescribes 'use PID targeting for the launched debug/beta process' and identifies the AgentStudio-specific context with 'another live AgentStudio may be running'. The earlier A58 outcome override is void and was not used."
+      },
+      "added": "2026-11-01"
+    }
+  ]
+}

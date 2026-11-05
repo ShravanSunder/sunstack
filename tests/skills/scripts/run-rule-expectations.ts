@@ -6,7 +6,9 @@ import {
   formatExpectationResult,
   loadConfiguredExpectations,
   runExpectations,
+  formatCaseRunSummary,
 } from "../lib/skill-rules/expectation-run.ts";
+import { engineVersion } from "../lib/skill-rules/rule-state.ts";
 
 const repository = fileURLToPath(new URL("../../../", import.meta.url));
 const config = path.join(
@@ -36,7 +38,7 @@ try {
   const entries = loadConfiguredExpectations(config);
   if (check) {
     console.log(
-      `Validated ${entries.length} expectations across ${new Set(entries.map((entry) => entry.expectation.rule)).size} rules.`,
+      `Validated ${entries.length} cases across ${new Set(entries.map((entry) => entry.expectation.rule)).size} rules (${entries.filter((entry) => entry.expectation.status === "retired").length} retired).`,
     );
   } else {
     if (output) {
@@ -66,7 +68,8 @@ try {
         for (const gap of run.gaps) console.log(`  ${gap}`);
       },
     });
-    console.log(`Expectations: ${report.results.length}; exit ${report.exit}`);
+    console.log(`Cases: ${report.results.length}; exit ${report.exit}`);
+    console.log(formatCaseRunSummary({config, repository, version: engineVersion(engine), filtersSupported: false}));
     process.exitCode = report.exit;
   }
 } catch (error) {

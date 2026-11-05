@@ -29,12 +29,13 @@ afterEach(cleanupFixtureRoots);
 function expectPrintedOutcomeCounts(stdout: string, report: LintReport): void {
   const printed = /^Outcomes: (.+)$/m.exec(stdout)?.[1];
   if (!printed) throw new Error("Missing printed per-piece outcome counts");
+  const admitted = report.results.filter((entry) => !stdout.includes(`Held: ${entry.name}:`));
   expect(JSON.parse(printed)).toEqual({
-    pass: report.results.filter((result) => result.outcome === "pass").length,
-    not_applicable: report.results.filter((result) => result.outcome === "not_applicable").length,
-    finding: report.results.filter((result) => result.outcome === "finding").length,
-    uncertain: report.results.filter((result) => result.outcome === "uncertain").length,
-    incomplete: report.results.filter((result) => result.outcome === "incomplete").length,
+    pass: admitted.filter((result) => result.outcome === "pass").length,
+    not_applicable: admitted.filter((result) => result.outcome === "not_applicable").length,
+    finding: admitted.filter((result) => result.outcome === "finding").length,
+    uncertain: admitted.filter((result) => result.outcome === "uncertain").length,
+    incomplete: admitted.filter((result) => result.outcome === "incomplete").length,
   });
 }
 
@@ -304,21 +305,21 @@ describe("repository skill rule runner (G10)", () => {
       );
       expect([...exercised].sort()).toEqual(
         [
-          "descriptions-and-invocation.md:K001:description.opener",
-          "descriptions-and-invocation.md:K002:description.length-warning",
-          "descriptions-and-invocation.md:K003:description.length-limit",
-          "descriptions-and-invocation.md:K004:description.loading-moment",
-          "descriptions-and-invocation.md:K005:description.trigger-only",
+          "descriptions-and-invocation.md:K001:skill-description.starts-with-use-when",
+          "descriptions-and-invocation.md:K002:skill-description.longer-than-225-characters",
+          "descriptions-and-invocation.md:K003:skill-description.longer-than-300-characters",
+          "descriptions-and-invocation.md:K004:skill-description.names-the-loading-moment",
+          "descriptions-and-invocation.md:K005:skill-description.states-triggers-not-workflow-steps",
           "descriptions-and-invocation.md:K006:description.always-earned",
-          "descriptions-and-invocation.md:K007:description.product-loading",
-          "generalization.md:K001:rule.generalization",
-          "calls-and-placement.md:K001:call.completeness",
+          "descriptions-and-invocation.md:K007:general-skill.description-overfits-to-one-product",
+          "generalization.md:K001:general-skill.taught-rule-overfits-to-one-project",
+          "calls-and-placement.md:K001:load-call.names-when-where-and-result",
           "calls-and-placement.md:K002:reference.teaching-depth",
-          "calls-and-placement.md:K003:placement.product-workflow",
+          "calls-and-placement.md:K003:general-skill.overfits-to-product-workflow",
           "SKILL.md:K001:question.names-field",
-          "SKILL.md:K002:question.one-proposition",
-          "SKILL.md:K003:question.criteria-match",
-          "main-path.md:K001:branch.condition",
+          "SKILL.md:K002:rule-question.asks-exactly-one-thing",
+          "SKILL.md:K003:rule-question.criteria-answer-the-same-question",
+          "main-path.md:K001:skill-branch.names-an-observable-condition",
           "main-path.md:K002:main-path.spine",
           "steering.md:K001:completion.criterion",
           "steering.md:K002:guidance.positive",
@@ -462,7 +463,8 @@ describe("repository skill rule runner (G10)", () => {
         expect(result.stdout).toContain("Current-skills accounts:");
         if (probability === 0.1) {
           expect(report.findings).toHaveLength(1);
-          expect(result.stdout).toContain("SKILL.md:3: warn description_judgment");
+          expect(result.stdout).toContain("Held: description_judgment:");
+          expect(result.stdout).not.toContain("SKILL.md:3: warn description_judgment");
           const accounts = z
             .object({
               accounts: z.array(
@@ -470,7 +472,7 @@ describe("repository skill rule runner (G10)", () => {
               ),
             })
             .parse(JSON.parse(readFileSync(path.join(root, "reports/accounts.json"), "utf8")));
-          expect(accounts.accounts).toContainEqual(
+          expect(accounts.accounts).not.toContainEqual(
             expect.objectContaining({
               kind: "uncovered_nudge",
               rule: "description_judgment",

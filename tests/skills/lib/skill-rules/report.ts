@@ -1,6 +1,8 @@
 import path from "node:path";
+import { readFileSync } from "node:fs";
 import { z } from "zod";
 import type { RuleDenominator } from "./denominators.ts";
+import type { RuleState } from "./rule-state.ts";
 
 const basisSchema = z.enum(["mechanical", "judged"]);
 // One rule's result for one piece (sunstack 0.6.0): its walked path, the answers that walk read
@@ -145,6 +147,8 @@ export const lintReportSchema = z
     diagnostics: z.array(diagnosticSchema),
     selections: z.array(selectionSchema),
     file_counts: z.array(fileCountSchema),
+    filter_answers: z.array(z.object({filter: z.string(), folder: z.string(), state: z.enum(["judged", "unsure", "incomplete"]), answers: z.record(z.string(), z.number()).optional()}).passthrough()).optional(),
+    filter_skips: z.array(z.object({rule: z.string(), file: z.string(), reason: z.string()}).passthrough()).optional(),
   })
   .passthrough();
 export type LintReport = z.infer<typeof lintReportSchema>;
@@ -258,6 +262,8 @@ export interface ReportGaps {
   readonly cut: readonly CutGap[];
   readonly unresolved: readonly Selection[];
   readonly notRun: readonly string[];
+  readonly kindUnsure: readonly {folder: string; answers: Record<string, number>}[];
+  readonly noFolder: readonly {rule: string; file: string}[];
 }
 
 /**
@@ -320,7 +326,19 @@ export function reportGaps(
     );
   }
   for (const item of report.skipped_rules) notRun.push(`Skipped rule: ${JSON.stringify(item)}`);
-  return { unread: unreadGaps(report, denominators), cut, unresolved, notRun };
+  const kindUnsure = (report.filter_answers ?? []).filter((answer) => answer.state === "unsure").map((answer) => ({folder: answer.folder, answers: answer.answers ?? {}}));
+  const noFolder = (report.filter_skips ?? []).filter((skip) => skip.reason === "no_folder").map((skip) => ({rule: skip.rule, file: skip.file}));
+  return { unread: unreadGaps(report, denominators), cut, unresolved, notRun, kindUnsure, noFolder };
+}
+
+export function filtersSupported(report: LintReport): boolean {
+  return report.filter_answers !== undefined && report.filter_skips !== undefined;
+}
+
+/** Retain the raw engine report separately; all agent-facing consumers share this admission. */
+export function admittedReport(report: LintReport, states: Readonly<Record<string, RuleState>>): LintReport {
+  const allowed = (rule: string): boolean => states[rule]?.state === "nudging";
+  return {...report, findings: report.findings.filter((finding) => allowed(finding.rule)), results: report.results.filter((result) => allowed(result.name))};
 }
 
 function answerSummary(answer: unknown): string {
@@ -347,6 +365,7 @@ function placeLines(first: number, last: number): string {
 export function formatLintReport(
   report: LintReport,
   denominators: readonly RuleDenominator[],
+  context: {readonly states?: Readonly<Record<string, RuleState>>; readonly repository?: string} = {},
 ): string {
   const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };
   for (const result of report.results) outcomes[result.outcome]++;
@@ -358,15 +377,28 @@ export function formatLintReport(
   for (const [kind, total] of selectionTotals(report))
     lines.push(`Selection ${kind}: ${JSON.stringify(total)}`);
   lines.push(`Usage: ${JSON.stringify(report.usage)}`);
+  for (const [rule, state] of Object.entries(context.states ?? {})) {
+    if (state.state === "held") lines.push(`Held: ${rule}: ${state.lacks.map((reason) => JSON.stringify(reason)).join("; ")}`);
+    else if (state.state === "dropped") lines.push(`Dropped: ${rule}`);
+  }
   // Each finding is a nudge: its line, how it was reached, and the places the run read to go to next.
   if (report.findings.length > 0) lines.push("Nudges:");
   for (const severity of ["error", "warn"]) {
     for (const finding of report.findings.filter((item) => item.severity === severity)) {
       lines.push(
-        `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, anchor ${finding.anchor})`,
+        `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, outcome finding, anchor ${finding.anchor})`,
       );
+      const piece = report.results.find((result) => result.name === finding.rule && result.file === finding.file && result.first_line <= finding.line && result.last_line >= finding.line);
+      for (const standard of finding.related.filter((place) => place.label === "standard")) {
+        let wording: string;
+        try { wording = readFileSync(path.resolve(context.repository ?? process.cwd(), standard.file), "utf8").split("\n").slice(standard.first_line - 1, standard.last_line).join("\n"); }
+        catch { wording = "unavailable (standard could not be read)"; }
+        lines.push(`  why: ${standard.file}:${standard.first_line}: ${wording}`);
+      }
+      lines.push(`  Answers: ${JSON.stringify(piece?.answers ?? finding["answers"] ?? {})}`, `  Path: ${(piece?.path ?? []).join(" → ")}`, `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`);
       for (const place of finding.related)
         lines.push(`  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`);
+      for (const other of report.findings.filter((item) => item !== finding && item.rule === finding.rule && item.message === finding.message)) lines.push(`  same rule also nudged: ${other.file}:${other.line}`);
     }
   }
   for (const item of report.uncertain) {
@@ -377,7 +409,7 @@ export function formatLintReport(
     );
   }
   const gaps = reportGaps(report, denominators);
-  const gapCount = gaps.unread.length + gaps.cut.length + gaps.unresolved.length + gaps.notRun.length;
+  const gapCount = gaps.unread.length + gaps.cut.length + gaps.unresolved.length + gaps.notRun.length + gaps.kindUnsure.length + gaps.noFolder.length;
   lines.push(gapCount === 0 ? "Gaps: none" : `Gaps: ${gapCount}`);
   for (const gap of gaps.unread) lines.push(`unread: ${gap.rule} judged nothing in ${gap.file}`);
   for (const gap of gaps.cut)
@@ -389,6 +421,8 @@ export function formatLintReport(
     if (line) lines.push(`unresolved: ${line}`);
   }
   for (const line of gaps.notRun) lines.push(`not run: ${line}`);
+  for (const gap of gaps.kindUnsure) lines.push(`kind unsure: ${gap.folder}: ${JSON.stringify(gap.answers)}`);
+  for (const gap of gaps.noFolder) lines.push(`no folder: ${gap.rule} ${gap.file}`);
   // A file that was asked about and had nothing selected, with its separate counts. Only when every
   // candidate is not_selected did the model judge none to be that kind (as a numbered rule list
   // should be); an uncertain, incomplete or not-asked candidate is a gap, not a negative judgment.

@@ -10,10 +10,13 @@ import {
   formatAssembledKind,
   formatLintReport,
   lintReportSchema,
+  admittedReport,
+  filtersSupported,
 } from "../lib/skill-rules/report.ts";
 import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
 import { loadConfiguredExpectations } from "../lib/skill-rules/expectation-run.ts";
 import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
+import { engineVersion, loadRuleStates } from "../lib/skill-rules/rule-state.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }
@@ -127,9 +130,11 @@ function runRules(): number {
       );
     for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
-    const report = lintReportSchema.parse(output);
-    const denominators = loadRuleDenominators(configPath);
-    console.log(formatLintReport(report, denominators));
+    const rawReport = lintReportSchema.parse(output);
+    const states = loadRuleStates(configPath, engineVersion(options.engine), filtersSupported(rawReport), repositoryRoot);
+    const report = admittedReport(rawReport, states);
+    const denominators = loadRuleDenominators(configPath).filter((entry) => states[entry.rule]?.state === "nudging");
+    console.log(formatLintReport(report, denominators, {states, repository: repositoryRoot}));
     const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
     const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
       cwd: repositoryRoot,

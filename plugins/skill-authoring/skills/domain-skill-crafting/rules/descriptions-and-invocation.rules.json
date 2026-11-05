@@ -1,6 +1,6 @@
 {
   "K001": {
-    "name": "description.opener",
+    "name": "skill-description.starts-with-use-when",
     "evidence": "skill",
     "decision": {
       "start": "opener",
@@ -22,7 +22,7 @@
     "severity": "warn"
   },
   "K002": {
-    "name": "description.length-warning",
+    "name": "skill-description.longer-than-225-characters",
     "evidence": "skill",
     "decision": {
       "start": "within_225",
@@ -44,7 +44,7 @@
     "severity": "warn"
   },
   "K003": {
-    "name": "description.length-limit",
+    "name": "skill-description.longer-than-300-characters",
     "evidence": "skill",
     "decision": {
       "start": "within_300",
@@ -66,7 +66,7 @@
     "severity": "error"
   },
   "K004": {
-    "name": "description.loading-moment",
+    "name": "skill-description.names-the-loading-moment",
     "evidence": "skill",
     "questions": {
       "names_moment": {
@@ -99,7 +99,7 @@
     "severity": "warn"
   },
   "K005": {
-    "name": "description.trigger-only",
+    "name": "skill-description.states-triggers-not-workflow-steps",
     "evidence": "skill",
     "questions": {
       "carries_extra": {
@@ -175,7 +175,7 @@
     "severity": "warn"
   },
   "K007": {
-    "name": "description.product-loading",
+    "name": "general-skill.description-overfits-to-one-product",
     "evidence": "skill",
     "questions": {
       "loads_for_product": {

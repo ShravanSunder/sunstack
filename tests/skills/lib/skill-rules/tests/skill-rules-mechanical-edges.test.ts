@@ -53,7 +53,7 @@ describe("authored description rules at their mechanical edges", () => {
     expect(result.status, result.stderr).toBe(0);
     expect(report.findings).toHaveLength(1);
     expect(report.findings[0]).toMatchObject({
-      rule: "description.opener",
+      rule: "skill-description.starts-with-use-when",
       line: 3,
       severity: "warn",
     });

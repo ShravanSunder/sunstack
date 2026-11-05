@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { matchExpectationPiece } from "./expectation-scoring.ts";
-import type { RuleExpectation } from "./expectations.ts";
+import type { CaseRecord } from "./cases.ts";
 import { reportGaps } from "./report.ts";
 import type { LintReport } from "./report.ts";
 import type { RuleDenominator } from "./denominators.ts";
@@ -21,7 +21,7 @@ export interface CurrentAccountItem {
 }
 export interface CurrentAccountsRequest {
   readonly report: LintReport;
-  readonly expectations: readonly RuleExpectation[];
+  readonly expectations: readonly CaseRecord[];
   readonly commit: string | null;
   readonly denominators: readonly RuleDenominator[];
   readonly sampleSize?: number;

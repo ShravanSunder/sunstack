@@ -39,7 +39,7 @@ function ruleRequests(requests: readonly unknown[]): unknown[] {
   );
 }
 
-describe("branch.condition routes every accepted opener (kit K001, main-path)", () => {
+describe("skill-branch.names-an-observable-condition routes every accepted opener (kit K001, main-path)", () => {
   test.each([
     ["IF the input is missing, return the gap.", "branch_parts", "pass"],
     ["If the input is missing, return the gap.", "branch_parts", "pass"],
@@ -169,7 +169,7 @@ describe("the runner prints selection apart from rule verdicts", () => {
     expect(result.status, result.stderr).toBe(5);
     const report = reportSchema.parse(result.report);
     expect(report.results.map((item) => [item.name, item.first_line, item.outcome])).toEqual([
-      ["branch.condition", 11, "pass"],
+      ["skill-branch.names-an-observable-condition", 11, "pass"],
     ]);
     expect(result.stdout).toContain(
       'plugins/example/skills/sample/SKILL.md:7: uncertain selection workflow_section "## Flow", yes 0.5; pieces that exist only through this selection are absent; other results in its range stand',

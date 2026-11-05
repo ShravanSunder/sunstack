@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { expectationSchema } from "./expectations.ts";
+import { caseRecordSchema } from "./cases.ts";
 import {
   expectationExitCode,
   gapExpectation,
@@ -9,21 +9,21 @@ import {
 import { reportWithResults } from "../../tests/support/lint-report.ts";
 import type { PieceDecision } from "./report.ts";
 
-const entry = expectationSchema.parse({
+const entry = caseRecordSchema.parse({
   id: "placement",
   rule: "placement.product-workflow",
   source: {
     repository: "self",
     commit: "74e18127a8e8bea04c33b8c79259f11b96b7e2a1",
     path: "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
-    context: [],
+    context: ["plugins"],
   },
-  piece_first_line: 6,
+  select: {piece_first_line: 6},
   expect: "must_fire",
-  lines: [17, 18],
+  finding_lines: [17, 18],
   kind: "regression_example",
-  basis: "Independent historical call",
-  decided_by: { how: "owner" },
+  case_kind: "unclassified", status: "active", set: "development",
+  label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
   added: "2026-11-01",
 });
 function piece(outcome: PieceDecision["outcome"]): PieceDecision {
@@ -77,7 +77,7 @@ describe("expectation outcome, locator and gaps stay separate", () => {
     const result = scoreExpectation(pass, reportFinding(17));
     expect(result.outcome).toBe("false_nudge");
     expect(expectationExitCode([result])).toBe(1);
-    expect(expectationExitCode([{ ...result, decidedBy: { how: "author" } }])).toBe(5);
+    expect(expectationExitCode([{ ...result, label: {...entry.label, state: "disputed"} }])).toBe(5);
   });
   test("not applicable and pass cannot be silently interchanged", () => {
     expect(
@@ -101,9 +101,9 @@ describe("expectation outcome, locator and gaps stay separate", () => {
     expect(scoreExpectation(entry, reportWithResults([])).gaps[0]?.kind).toBe("unread");
   });
   test("once-per-file entries use the field line rather than the finding line", () => {
-    const { piece_first_line: _line, ...once } = entry;
+    const { select: _line, ...once } = entry;
     expect(
-      matchExpectationPiece({ ...once, field_line: 3 }, [
+      matchExpectationPiece({ ...once, select: {field_line: 3} }, [
         { ...piece("pass"), first_line: 1, last_line: 4 },
       ])?.first_line,
     ).toBe(1);
@@ -166,9 +166,9 @@ describe("expectation outcome, locator and gaps stay separate", () => {
     });
   });
   test("a real call result matches the call's line, not its surrounding excerpt's line", () => {
-    const call = { ...entry, rule: "call.completeness", piece_first_line: 24, field_line: 24 };
+    const call = { ...entry, rule: "call.completeness", select: {piece_first_line: 24, field_line: 24} };
     const row = { ...piece("pass"), name: call.rule, first_line: 24, last_line: 24 };
     expect(matchExpectationPiece(call, [row])).toBe(row);
-    expect(matchExpectationPiece({ ...call, piece_first_line: 22 }, [row])).toBeUndefined();
+    expect(matchExpectationPiece({ ...call, select: {piece_first_line: 22} }, [row])).toBeUndefined();
   });
 });

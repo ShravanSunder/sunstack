@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
 import { z } from "zod";
-import { readRuleExpectations } from "../../lib/skill-rules/expectations.ts";
+import { readRuleCases } from "../../lib/skill-rules/cases.ts";
 
 const repository = fileURLToPath(new URL("../../../../", import.meta.url));
 const rules = path.join(repository, "plugins/skill-authoring/skills/domain-skill-crafting/rules");
@@ -18,7 +18,7 @@ const legacyCaseSchema = z.object({
 test("every migrated piece line reproduces the original 74e18127 case coordinates", () => {
   const current = readdirSync(rules)
     .filter((file) => file.endsWith(".rules.json"))
-    .flatMap((file) => readRuleExpectations(path.join(rules, file)));
+    .flatMap((file) => readRuleCases(path.join(rules, file)).cases);
   const manifests = execFileSync(
     "git",
     [
@@ -59,7 +59,7 @@ test("every migrated piece line reproduces the original 74e18127 case coordinate
           ? legacy.source.fieldLine - legacy.excerpt.line
           : legacy.source.startLine - 1;
       const expectedLine = (legacy.excerpt.pieceLine ?? legacy.excerpt.line) + offset;
-      expect(entry.piece_first_line, identity).toBe(
+      expect(entry.select?.piece_first_line, identity).toBe(
         legacy.evidence.field === "description" ? undefined : expectedLine,
       );
       checked++;
