@@ -36,7 +36,7 @@ test("the nudge includes the standard, answers, path, cut and same rule elsewher
 
 test("unsure kind and no-folder gaps stay apart from gate exclusions and keep answers", () => {
   const report = reportWithResults([]);
-  const output = formatLintReport({...report, filter_answers: [{filter: "kind", folder: "plugins/example/skills/real", state: "unsure", answers: {general: 0.4, role: 0.6}}], filter_skips: [{rule: "general-skill.overfits-to-product-workflow", file: "loose.md", reason: "no_folder"}]}, []);
+  const output = formatLintReport({...report, filter_answers: [{filter: "kind", folder: "plugins/example/skills/real", state: "unsure", answer: "role", probability: 0.6, probabilities: {general: 0.4, role: 0.6}}], filter_skips: [{rule: "general-skill.overfits-to-product-workflow", file: "loose.md", why: "no_folder"}]}, []);
   expect(output).toContain('kind unsure: plugins/example/skills/real: {"general":0.4,"role":0.6}');
   expect(output).toContain("no folder: general-skill.overfits-to-product-workflow loose.md");
   expect(output).toContain("Gaps: 2"); expect(output).toContain("Exclusions: 0");

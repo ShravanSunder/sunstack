@@ -125,7 +125,14 @@
     "related": [
       "targets"
     ],
-    "severity": "warn"
+    "severity": "warn",
+    "only_when": {
+      "kind": [
+        "general",
+        "role",
+        "domain"
+      ]
+    }
   },
   "K003": {
     "name": "general-skill.taught-rule-overfits-to-one-project",

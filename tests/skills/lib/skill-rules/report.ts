@@ -101,6 +101,17 @@ const diagnosticSchema = z
     message: z.string(),
   })
   .passthrough();
+const filterAnswerBaseSchema = z.object({filter: z.string(), folder: z.string()});
+const filterChoiceSchema = filterAnswerBaseSchema.extend({
+  answer: z.string(), probability: z.number().min(0).max(1),
+  probabilities: z.record(z.string(), z.number().min(0).max(1)),
+});
+export const filterAnswerSchema = z.discriminatedUnion("state", [
+  filterChoiceSchema.extend({state: z.literal("judged")}).passthrough(),
+  filterChoiceSchema.extend({state: z.literal("unsure")}).passthrough(),
+  filterAnswerBaseSchema.extend({state: z.literal("incomplete"), reason: z.object({kind: z.string()}).passthrough()}).passthrough(),
+]);
+export type FilterAnswer = z.infer<typeof filterAnswerSchema>;
 export const lintReportSchema = z
   .object({
     status: z.object({
@@ -151,8 +162,8 @@ export const lintReportSchema = z
     diagnostics: z.array(diagnosticSchema),
     selections: z.array(selectionSchema),
     file_counts: z.array(fileCountSchema),
-    filter_answers: z.array(z.object({filter: z.string(), folder: z.string(), state: z.enum(["judged", "unsure", "incomplete"]), answers: z.record(z.string(), z.number()).optional()}).passthrough()).optional(),
-    filter_skips: z.array(z.object({rule: z.string(), file: z.string(), reason: z.string()}).passthrough()).optional(),
+    filter_answers: z.array(filterAnswerSchema).optional(),
+    filter_skips: z.array(z.object({rule: z.string(), file: z.string(), why: z.enum(["no_folder", "unsure", "incomplete"])}).passthrough()).optional(),
   })
   .passthrough();
 export type LintReport = z.infer<typeof lintReportSchema>;
@@ -330,8 +341,8 @@ export function reportGaps(
     );
   }
   for (const item of report.skipped_rules) notRun.push(`Skipped rule: ${JSON.stringify(item)}`);
-  const kindUnsure = (report.filter_answers ?? []).filter((answer) => answer.state === "unsure").map((answer) => ({folder: answer.folder, answers: answer.answers ?? {}}));
-  const noFolder = (report.filter_skips ?? []).filter((skip) => skip.reason === "no_folder").map((skip) => ({rule: skip.rule, file: skip.file}));
+  const kindUnsure = (report.filter_answers ?? []).filter((answer) => answer.state === "unsure").map((answer) => ({folder: answer.folder, answers: answer.probabilities}));
+  const noFolder = (report.filter_skips ?? []).filter((skip) => skip.why === "no_folder").map((skip) => ({rule: skip.rule, file: skip.file}));
   return { unread: unreadGaps(report, denominators), cut, unresolved, notRun, kindUnsure, noFolder };
 }
 
