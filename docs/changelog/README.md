@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-05 Rule scenarios and owner adoption](2026-11-05-scenario-adoption.md)
 - [2026-11-04 Skill rules earn their nudges](2026-11-04-skill-rule-cases.md)
 - [2026-11-04 Agent Router skill sync](2026-11-04-agent-router-0-18-0-skill-sync.md)
 - [2026-11-01 Shared code standards, and the Standards line](2026-11-01-colocate-unit-tests.md)

@@ -1,30 +1,27 @@
-import type { CaseRecord } from "./cases.ts";
+import { z } from "zod";
+import { scenarioRecordSchema } from "./scenarios.ts";
+import type { ScenarioRecord } from "./scenarios.ts";
 import type { LintReport, PieceDecision } from "./report.ts";
 
-export interface ExpectationGap {
-  readonly kind: "setup" | "cut" | "unread" | "incomplete" | "error";
-  readonly detail: string;
-}
-export interface ExpectationResult {
-  readonly id: string;
-  readonly rule: string;
-  readonly expected: CaseRecord["expect"];
-  readonly label: CaseRecord["label"];
-  readonly outcome: "caught" | "missed" | "false_nudge" | "unsure";
-  readonly observed: PieceDecision["outcome"] | null;
-  readonly locator: {
-    readonly kind: "hit" | "miss" | "not_applicable" | "unavailable";
-    readonly lines: readonly number[];
-  };
-  readonly gaps: readonly ExpectationGap[];
-}
+export const scenarioGapSchema = z.object({kind: z.enum(["setup", "cut", "unread", "incomplete", "error"]), detail: z.string()}).strict();
+export const scenarioResultSchema = z.object({
+  id: z.string().min(1), rule: z.string().min(1), expected: scenarioRecordSchema.shape.expect,
+  label: scenarioRecordSchema.shape.label, set: scenarioRecordSchema.shape.set,
+  outcome: z.enum(["caught", "missed", "false_nudge", "unsure"]),
+  observed: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]).nullable(),
+  locator: z.object({kind: z.enum(["hit", "miss", "not_applicable", "unavailable"]), lines: z.array(z.number().int().positive())}).strict(),
+  gaps: z.array(scenarioGapSchema),
+}).strict();
+export type ScenarioGap = z.infer<typeof scenarioGapSchema>;
+export type ScenarioResult = z.infer<typeof scenarioResultSchema>;
 
-export function gapExpectation(entry: CaseRecord, gap: ExpectationGap): ExpectationResult {
+export function gapScenario(entry: ScenarioRecord, gap: ScenarioGap): ScenarioResult {
   return {
     id: entry.id,
     rule: entry.rule,
     expected: entry.expect,
     label: entry.label,
+    set: entry.set,
     outcome: "unsure",
     observed: null,
     locator: { kind: "unavailable", lines: [] },
@@ -32,8 +29,8 @@ export function gapExpectation(entry: CaseRecord, gap: ExpectationGap): Expectat
   };
 }
 
-export function matchExpectationPiece(
-  entry: CaseRecord,
+export function matchScenarioPiece(
+  entry: ScenarioRecord,
   results: readonly PieceDecision[],
 ): PieceDecision | undefined {
   const matches = results.filter(
@@ -49,14 +46,14 @@ export function matchExpectationPiece(
   return matches.length === 1 ? matches[0] : undefined;
 }
 
-export function scoreExpectation(entry: CaseRecord, report: LintReport): ExpectationResult {
-  const piece = matchExpectationPiece(entry, report.results);
+export function scoreScenario(entry: ScenarioRecord, report: LintReport): ScenarioResult {
+  const piece = matchScenarioPiece(entry, report.results);
   if (!piece)
-    return gapExpectation(entry, {
+    return gapScenario(entry, {
       kind: "unread",
       detail: "Expected one exact rule/file/piece result; none or several were returned",
     });
-  const gaps: ExpectationGap[] = [];
+  const gaps: ScenarioGap[] = [];
   if ((piece.cut?.length ?? 0) > 0)
     gaps.push({ kind: "cut", detail: `Fields cut: ${piece.cut?.join(", ")}` });
   if (piece.outcome === "incomplete")
@@ -72,7 +69,7 @@ export function scoreExpectation(entry: CaseRecord, report: LintReport): Expecta
       finding.line >= piece.first_line &&
       finding.line <= piece.last_line,
   );
-  let locator: ExpectationResult["locator"] = { kind: "not_applicable", lines: [] };
+  let locator: ScenarioResult["locator"] = { kind: "not_applicable", lines: [] };
   if (entry.expect === "must_fire") {
     if (piece.outcome === "finding" && findings.length === 1) {
       const lines = findings.map((finding) => finding.line);
@@ -86,7 +83,7 @@ export function scoreExpectation(entry: CaseRecord, report: LintReport): Expecta
         });
     }
   }
-  let outcome: ExpectationResult["outcome"] = "unsure";
+  let outcome: ScenarioResult["outcome"] = "unsure";
   if (
     gaps.length === 0 &&
     piece.outcome !== "uncertain" &&
@@ -106,6 +103,7 @@ export function scoreExpectation(entry: CaseRecord, report: LintReport): Expecta
     rule: entry.rule,
     expected: entry.expect,
     label: entry.label,
+    set: entry.set,
     outcome,
     observed: piece.outcome,
     locator,
@@ -113,7 +111,7 @@ export function scoreExpectation(entry: CaseRecord, report: LintReport): Expecta
   };
 }
 
-export function expectationExitCode(results: readonly ExpectationResult[]): 0 | 1 | 5 {
+export function scenarioExitCode(results: readonly ScenarioResult[]): 0 | 1 | 5 {
   if (
     results.some(
       (result) =>

@@ -4,11 +4,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
 import { z } from "zod";
-import { readRuleCases } from "../../lib/skill-rules/cases.ts";
+import { readRuleScenarios } from "../../lib/skill-rules/scenarios.ts";
 
 const repository = fileURLToPath(new URL("../../../../", import.meta.url));
 const rules = path.join(repository, "plugins/skill-authoring/skills/domain-skill-crafting/rules");
-const legacyCaseSchema = z.object({
+const legacyScenarioSchema = z.object({
   id: z.string(),
   evidence: z.object({ field: z.string() }),
   source: z.object({ class: z.string(), startLine: z.number(), fieldLine: z.number().optional() }),
@@ -18,7 +18,7 @@ const legacyCaseSchema = z.object({
 test("every migrated piece line reproduces the original 74e18127 case coordinates", () => {
   const current = readdirSync(rules)
     .filter((file) => file.endsWith(".rules.json"))
-    .flatMap((file) => readRuleCases(path.join(rules, file)).cases);
+    .flatMap((file) => readRuleScenarios(path.join(rules, file)).scenarios);
   const manifests = execFileSync(
     "git",
     [
@@ -38,14 +38,14 @@ test("every migrated piece line reproduces the original 74e18127 case coordinate
   let checked = 0;
   for (const manifest of manifests) {
     const folder = path.basename(path.dirname(manifest));
-    const cases = z.array(legacyCaseSchema).parse(
+    const scenarios = z.array(legacyScenarioSchema).parse(
       JSON.parse(
         execFileSync("git", ["-C", repository, "show", `74e18127:${manifest}`], {
           encoding: "utf8",
         }),
       ),
     );
-    for (const legacy of cases) {
+    for (const legacy of scenarios) {
       if (
         legacy.source.class === "synthetic" ||
         (folder === "descriptions-k006" && ["case-003", "case-004"].includes(legacy.id))
@@ -53,7 +53,7 @@ test("every migrated piece line reproduces the original 74e18127 case coordinate
         continue;
       const identity = `${folder}-${legacy.id}`;
       const entry = current.find((candidate) => candidate.id === identity);
-      if (!entry) throw new Error(`Missing migrated expectation: ${identity}`);
+      if (!entry) throw new Error(`Missing migrated scenario: ${identity}`);
       const offset =
         legacy.source.fieldLine !== undefined
           ? legacy.source.fieldLine - legacy.excerpt.line

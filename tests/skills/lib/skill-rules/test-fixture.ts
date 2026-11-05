@@ -83,6 +83,7 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/scripts/run-skill-rules.ts"),
     path.join(root, "tests/skills/scripts/run-skill-rules.ts"),
   );
+  for (const script of ["run-rule-scenarios.ts", "adopt-rule-scenario.ts"]) cpSync(path.join(repositoryRoot, "tests/skills/scripts", script), path.join(root, "tests/skills/scripts", script));
   const modules = "tests/skills/lib/skill-rules";
   for (const filename of readdirSync(path.join(repositoryRoot, modules)))
     if (
@@ -138,7 +139,8 @@ export function createFixture(): string {
       },
     }),
   );
-  writeFixtureFile(root, `${kitRelative}/fixture.cases.json`, JSON.stringify({rules: {description_length: {basis: "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, cases: []}));
+  writeFixtureFile(root, "tests/skills/evals/rule-scenarios/adopted.json", "{}\n");
+  writeFixtureFile(root, "tests/skills/evals/rule-scenarios/fixture/description_length.scenario.json", JSON.stringify({rules: {description_length: {basis: "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
   return root;
 }
 
@@ -222,7 +224,9 @@ export function saveRules(root: string, rules: Readonly<Record<string, unknown>>
   );
   writeFixtureFile(root, `${kitRelative}/fixture.rules.json`, JSON.stringify(rules));
   const definitions = z.record(z.string(), z.object({name: z.string(), decision: z.object({steps: z.record(z.string(), z.object({ask: z.string().optional()}).passthrough())})}).passthrough()).parse(rules);
-  writeFixtureFile(root, `${kitRelative}/fixture.cases.json`, JSON.stringify({rules: Object.fromEntries(Object.values(definitions).map((rule) => [rule.name, {basis: Object.values(rule.decision.steps).some((step) => step.ask) ? "judged" : "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}])), cases: []}));
+  const directory = path.join(root, "tests/skills/evals/rule-scenarios/fixture");
+  for (const filename of readdirSync(directory)) if (filename.endsWith(".scenario.json")) rmSync(path.join(directory, filename));
+  for (const rule of Object.values(definitions)) writeFixtureFile(root, `tests/skills/evals/rule-scenarios/fixture/${rule.name}.scenario.json`, JSON.stringify({rules: {[rule.name]: {basis: Object.values(rule.decision.steps).some((step) => step.ask) ? "judged" : "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
 }
 
 export const pinnedSkillPath = "plugins/sunstack-dev/skills/audit-security-review/SKILL.md";

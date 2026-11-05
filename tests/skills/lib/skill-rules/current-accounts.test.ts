@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { listCurrentAccounts } from "./current-accounts.ts";
-import { caseRecordSchema } from "./cases.ts";
+import { scenarioRecordSchema } from "./scenarios.ts";
 import { reportWithResults } from "../../tests/support/lint-report.ts";
 import type { PieceDecision } from "./report.ts";
 
@@ -15,7 +15,7 @@ const piece: PieceDecision = {
   path: [],
   step: null,
 };
-const entry = caseRecordSchema.parse({
+const entry = scenarioRecordSchema.parse({
   id: "place",
   rule: piece.name,
   source: { repository: "self", commit, path: piece.file, context: ["plugins"] },
@@ -23,12 +23,12 @@ const entry = caseRecordSchema.parse({
   expect: "must_fire",
   finding_lines: [17],
   kind: "regression_example",
-  case_kind: "unclassified", status: "active", set: "development",
+  scenario_kind: "unclassified", status: "active", set: "development",
   label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
   added: "2026-11-01",
 });
 describe("current-skills account listing", () => {
-  test("historical expectations never hide a current nudge", () => {
+  test("historical scenarios never hide a current nudge", () => {
     const report = reportWithResults([piece]);
     report.findings.push({
       rule: piece.name,
@@ -43,7 +43,7 @@ describe("current-skills account listing", () => {
       related: [],
     });
     const list = (head: string | null) =>
-      listCurrentAccounts({ report, expectations: [entry], commit: head, denominators: [] }).filter(
+      listCurrentAccounts({ report, scenarios: [entry], commit: head, denominators: [] }).filter(
         (item) => item.kind === "uncovered_nudge",
       );
     expect(list(commit)).toHaveLength(0);
@@ -59,7 +59,7 @@ describe("current-skills account listing", () => {
     report["exclusions"] = { not_applicable: 1 };
     const items = listCurrentAccounts({
       report,
-      expectations: [],
+      scenarios: [],
       commit,
       denominators: [],
       sampleSize: 1,
@@ -75,7 +75,7 @@ describe("current-skills account listing", () => {
   test("a rule with no results exposes its absent samples", () => {
     const items = listCurrentAccounts({
       report: reportWithResults([]),
-      expectations: [],
+      scenarios: [],
       commit,
       denominators: [
         { rule: piece.name, marker: piece.marker, kind: "section", files: ["**/*.md"], within: [] },

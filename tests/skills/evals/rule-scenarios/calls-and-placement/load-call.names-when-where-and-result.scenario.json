@@ -1,0 +1,328 @@
+{
+  "rules": {
+    "load-call.names-when-where-and-result": {
+      "basis": "judged",
+      "decision": "keep",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "gap": {
+          "status": "starting",
+          "values": {
+            "min_probability": 0.6
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "calls-and-placement-k001-case-001",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 24,
+        "field_line": 24
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-001"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-001 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-002",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 40,
+        "field_line": 40
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        40
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-002"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-002 (development, current): original sol-settled call finding on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-003",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 26,
+        "field_line": 26
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-003"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-003 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-004",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 51,
+        "field_line": 51
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-004"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-004 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-005",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 43,
+        "field_line": 43
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-005"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-005 (development, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-006",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 36,
+        "field_line": 36
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-006"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-006 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-007",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 17,
+        "field_line": 17
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        17
+      ],
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-007"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-007 (held-out, current): original sol-settled call finding on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-008",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 54,
+        "field_line": 54
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-008"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-008 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-009",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 37,
+        "field_line": 37
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-009"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-009 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "calls-and-placement-k001-case-010",
+      "rule": "load-call.names-when-where-and-result",
+      "source": {
+        "repository": "self",
+        "commit": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "piece_first_line": 125,
+        "field_line": 125
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: calls-and-placement-k001/case-010"
+        ],
+        "note": "Migrated calls-and-placement-k001/case-010 (held-out, current): original sol-settled call pass on load.line. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. Migration locator corrected: the original excerpt piece/field line is translated into source coordinates; the surrounding excerpt start is not the judged piece start. Expected outcome and finding lines are unchanged."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

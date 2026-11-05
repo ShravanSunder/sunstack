@@ -1,15 +1,15 @@
 import { describe, expect, test } from "vitest";
-import { caseRecordSchema } from "./cases.ts";
+import { scenarioRecordSchema } from "./scenarios.ts";
 import {
-  expectationExitCode,
-  gapExpectation,
-  matchExpectationPiece,
-  scoreExpectation,
-} from "./expectation-scoring.ts";
+  scenarioExitCode,
+  gapScenario,
+  matchScenarioPiece,
+  scoreScenario,
+} from "./scenario-scoring.ts";
 import { reportWithResults } from "../../tests/support/lint-report.ts";
 import type { PieceDecision } from "./report.ts";
 
-const entry = caseRecordSchema.parse({
+const entry = scenarioRecordSchema.parse({
   id: "placement",
   rule: "placement.product-workflow",
   source: {
@@ -22,7 +22,7 @@ const entry = caseRecordSchema.parse({
   expect: "must_fire",
   finding_lines: [17, 18],
   kind: "regression_example",
-  case_kind: "unclassified", status: "active", set: "development",
+  scenario_kind: "unclassified", status: "active", set: "development",
   label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
   added: "2026-11-01",
 });
@@ -54,13 +54,13 @@ function reportFinding(line: number) {
   });
   return report;
 }
-describe("expectation outcome, locator and gaps stay separate", () => {
+describe("scenario outcome, locator and gaps stay separate", () => {
   test("finding outcome matches even when its locator misses the labelled lines", () => {
-    expect(scoreExpectation(entry, reportFinding(17))).toMatchObject({
+    expect(scoreScenario(entry, reportFinding(17))).toMatchObject({
       outcome: "caught",
       locator: { kind: "hit", lines: [17] },
     });
-    expect(scoreExpectation(entry, reportFinding(7))).toMatchObject({
+    expect(scoreScenario(entry, reportFinding(7))).toMatchObject({
       outcome: "caught",
       locator: { kind: "miss", lines: [7] },
     });
@@ -68,27 +68,27 @@ describe("expectation outcome, locator and gaps stay separate", () => {
   test.each(["pass", "not_applicable"] satisfies PieceDecision["outcome"][])(
     "a must_fire observed as %s is missed",
     (outcome) => {
-      const result = scoreExpectation(entry, reportWithResults([piece(outcome)]));
+      const result = scoreScenario(entry, reportWithResults([piece(outcome)]));
       expect(result.outcome).toBe("missed");
-      expect(expectationExitCode([result])).toBe(1);
+      expect(scenarioExitCode([result])).toBe(1);
     },
   );
   test("a nudge contradicts must_pass, while an author-only disagreement remains unsure", () => {
     const pass = { ...entry, expect: "must_pass" } satisfies typeof entry;
-    const result = scoreExpectation(pass, reportFinding(17));
+    const result = scoreScenario(pass, reportFinding(17));
     expect(result.outcome).toBe("false_nudge");
-    expect(expectationExitCode([result])).toBe(1);
-    expect(expectationExitCode([{ ...result, label: {...entry.label, state: "disputed"} }])).toBe(5);
+    expect(scenarioExitCode([result])).toBe(1);
+    expect(scenarioExitCode([{ ...result, label: {...entry.label, state: "disputed"} }])).toBe(5);
   });
   test("not applicable and pass cannot be silently interchanged", () => {
     expect(
-      scoreExpectation(
+      scoreScenario(
         { ...entry, expect: "must_pass" },
         reportWithResults([piece("not_applicable")]),
       ).outcome,
     ).toBe("unsure");
     expect(
-      scoreExpectation(
+      scoreScenario(
         { ...entry, expect: "not_applicable" },
         reportWithResults([piece("not_applicable")]),
       ).outcome,
@@ -96,40 +96,40 @@ describe("expectation outcome, locator and gaps stay separate", () => {
   });
   test("wrong files, wrong pieces and duplicate pieces stay unread", () => {
     const row = piece("pass");
-    expect(matchExpectationPiece(entry, [{ ...row, first_line: 7 }])).toBeUndefined();
-    expect(matchExpectationPiece(entry, [{ ...row, file: "elsewhere.md" }])).toBeUndefined();
-    expect(matchExpectationPiece(entry, [row, row])).toBeUndefined();
-    expect(scoreExpectation(entry, reportWithResults([])).gaps[0]?.kind).toBe("unread");
+    expect(matchScenarioPiece(entry, [{ ...row, first_line: 7 }])).toBeUndefined();
+    expect(matchScenarioPiece(entry, [{ ...row, file: "elsewhere.md" }])).toBeUndefined();
+    expect(matchScenarioPiece(entry, [row, row])).toBeUndefined();
+    expect(scoreScenario(entry, reportWithResults([])).gaps[0]?.kind).toBe("unread");
   });
   test("once-per-file entries use the field line rather than the finding line", () => {
     const { select: _line, ...once } = entry;
     expect(
-      matchExpectationPiece({ ...once, select: {field_line: 3} }, [
+      matchScenarioPiece({ ...once, select: {field_line: 3} }, [
         { ...piece("pass"), first_line: 1, last_line: 4 },
       ])?.first_line,
     ).toBe(1);
   });
   test("a cut or incomplete run cannot count as a pass", () => {
     const report = reportWithResults([{ ...piece("pass"), cut: ["body"] }]);
-    expect(scoreExpectation({ ...entry, expect: "must_pass" }, report)).toMatchObject({
+    expect(scoreScenario({ ...entry, expect: "must_pass" }, report)).toMatchObject({
       outcome: "unsure",
       gaps: [{ kind: "cut" }],
     });
     report.status.kind = "incomplete";
-    expect(expectationExitCode([scoreExpectation(entry, report)])).toBe(5);
+    expect(scenarioExitCode([scoreScenario(entry, report)])).toBe(5);
   });
   test("unknown, uncertainty and setup gaps remain unproven", () => {
     expect(
-      scoreExpectation({ ...entry, expect: "unknown" }, reportWithResults([piece("pass")])).outcome,
+      scoreScenario({ ...entry, expect: "unknown" }, reportWithResults([piece("pass")])).outcome,
     ).toBe("unsure");
-    expect(scoreExpectation(entry, reportWithResults([piece("uncertain")])).outcome).toBe("unsure");
+    expect(scoreScenario(entry, reportWithResults([piece("uncertain")])).outcome).toBe("unsure");
     expect(
-      expectationExitCode([gapExpectation(entry, { kind: "setup", detail: "commit missing" })]),
+      scenarioExitCode([gapScenario(entry, { kind: "setup", detail: "commit missing" })]),
     ).toBe(5);
-    expect(expectationExitCode([])).toBe(5);
+    expect(scenarioExitCode([])).toBe(5);
   });
   test("the expected piece's own incomplete outcome is an entry-specific gap", () => {
-    expect(scoreExpectation(entry, reportWithResults([piece("incomplete")]))).toMatchObject({
+    expect(scoreScenario(entry, reportWithResults([piece("incomplete")]))).toMatchObject({
       outcome: "unsure",
       observed: "incomplete",
       gaps: [{ kind: "incomplete" }],
@@ -137,12 +137,12 @@ describe("expectation outcome, locator and gaps stay separate", () => {
   });
   test("a contradiction takes precedence over a gap in a different entry", () => {
     expect(
-      expectationExitCode([
-        gapExpectation(entry, { kind: "error", detail: "failed" }),
-        scoreExpectation(entry, reportWithResults([piece("pass")])),
+      scenarioExitCode([
+        gapScenario(entry, { kind: "error", detail: "failed" }),
+        scoreScenario(entry, reportWithResults([piece("pass")])),
       ]),
     ).toBe(1);
-    expect(expectationExitCode([scoreExpectation(entry, reportFinding(17))])).toBe(0);
+    expect(scenarioExitCode([scoreScenario(entry, reportFinding(17))])).toBe(0);
   });
   test("uncertain selections and incomplete parts elsewhere never erase this piece's result", () => {
     const report = reportFinding(17);
@@ -159,7 +159,7 @@ describe("expectation outcome, locator and gaps stay separate", () => {
       outcome: { kind: "uncertain", yes: 0.5 },
     });
     report.skipped_rules.push({ rule: "another.rule" });
-    expect(scoreExpectation(entry, report)).toMatchObject({
+    expect(scoreScenario(entry, report)).toMatchObject({
       outcome: "caught",
       observed: "finding",
       gaps: [],
@@ -169,7 +169,7 @@ describe("expectation outcome, locator and gaps stay separate", () => {
   test("a real call result matches the call's line, not its surrounding excerpt's line", () => {
     const call = { ...entry, rule: "call.completeness", select: {piece_first_line: 24, field_line: 24} };
     const row = { ...piece("pass"), name: call.rule, first_line: 24, last_line: 24 };
-    expect(matchExpectationPiece(call, [row])).toBe(row);
-    expect(matchExpectationPiece({ ...call, select: {piece_first_line: 22} }, [row])).toBeUndefined();
+    expect(matchScenarioPiece(call, [row])).toBe(row);
+    expect(matchScenarioPiece({ ...call, select: {piece_first_line: 22} }, [row])).toBeUndefined();
   });
 });

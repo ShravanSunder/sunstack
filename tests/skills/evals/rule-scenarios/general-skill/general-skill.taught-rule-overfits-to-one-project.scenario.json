@@ -1,66 +1,5 @@
 {
   "rules": {
-    "general-skill.description-overfits-to-one-product": {
-      "basis": "judged",
-      "decision": "held_by_owner",
-      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
-      "reasons": [],
-      "bars": {
-        "loads_for_product": {
-          "status": "starting",
-          "values": {
-            "yes_at_or_above": 0.7,
-            "no_at_or_below": 0.3
-          },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
-        },
-        "example_or_own_infrastructure": {
-          "status": "starting",
-          "values": {
-            "yes_at_or_above": 0.7,
-            "no_at_or_below": 0.3
-          },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
-        }
-      }
-    },
-    "general-skill.overfits-to-product-workflow": {
-      "basis": "judged",
-      "decision": "keep",
-      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
-      "reasons": [],
-      "bars": {
-        "routes_product": {
-          "status": "starting",
-          "values": {
-            "yes_at_or_above": 0.7,
-            "no_at_or_below": 0.3
-          },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
-        },
-        "example_or_own_infrastructure": {
-          "status": "starting",
-          "values": {
-            "yes_at_or_above": 0.7,
-            "no_at_or_below": 0.3
-          },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
-        },
-        "exemption_when_unsure": {
-          "status": "starting",
-          "values": {
-            "yes_at_or_above": 0.7,
-            "no_at_or_below": 0.3
-          },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
-        }
-      }
-    },
     "general-skill.taught-rule-overfits-to-one-project": {
       "basis": "judged",
       "decision": "rework_first",
@@ -72,8 +11,8 @@
           "values": {
             "min_probability": 0.6
           },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
         },
         "reusable": {
           "status": "starting",
@@ -81,1517 +20,13 @@
             "yes_at_or_above": 0.7,
             "no_at_or_below": 0.3
           },
-          "cases": [],
-          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081"
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
         }
       }
     }
   },
-  "cases": [
-    {
-      "id": "descriptions-k007-case-001",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-001"
-        ],
-        "note": "Migrated descriptions-k007/case-001 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-002",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: descriptions-k007/case-002"
-        ],
-        "note": "Migrated descriptions-k007/case-002 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-003",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-003"
-        ],
-        "note": "Migrated descriptions-k007/case-003 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-004",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-004"
-        ],
-        "note": "Migrated descriptions-k007/case-004 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-005",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-005"
-        ],
-        "note": "Migrated descriptions-k007/case-005 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-006",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-006"
-        ],
-        "note": "Migrated descriptions-k007/case-006 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-case-007",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/case-007"
-        ],
-        "note": "Migrated descriptions-k007/case-007 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-held-out-h01",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/held-out-h01"
-        ],
-        "note": "Migrated descriptions-k007/held-out-h01 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-held-out-h02",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/held-out-h02"
-        ],
-        "note": "Migrated descriptions-k007/held-out-h02 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-held-out-h03",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/held-out-h03"
-        ],
-        "note": "Migrated descriptions-k007/held-out-h03 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-held-out-h04",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/implementation-handoff/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: descriptions-k007/held-out-h04"
-        ],
-        "note": "Migrated descriptions-k007/held-out-h04 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "descriptions-k007-held-out-h05",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: descriptions-k007/held-out-h05"
-        ],
-        "note": "Migrated descriptions-k007/held-out-h05 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l02-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "https://github.com/steipete/agent-scripts",
-        "commit": "391e08aab366674af82cc838649dedc99c8f0405",
-        "path": "skills/release-mac-app/SKILL.md",
-        "context": [
-          "skills"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
-        ],
-        "note": "S7 L02, blind labellers agreed. G: The context says the skill is for named apps \"and similar Sparkle-updated macOS apps,\" so it transfers across app repositories; its description names release areas, not one product's own workflow. H: The skill covers macOS app releases across “BlackBar, RepoBar, CodexBar, Trimmy, and similar” apps, rather than one product's workflow. Its description names release topics and tools, not a product-specific loading condition."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l04-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "agentstudio",
-        "commit": "0c9f18783b99eb76bc7adf731519b7b30a355441",
-        "path": ".agents/skills/verify-agentstudio/SKILL.md",
-        "context": [
-          ".agents/skills/verify-agentstudio"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
-        ],
-        "note": "S7 L04, blind labellers agreed. G: The description is explicitly for an \"Agent Studio debug build\" and its panes, popovers, and terminal lifecycle, so it is product-specific rather than meant for any repository. H: The description explicitly scopes the skill to an “Agent Studio debug build's pane context”; it is a product-specific skill, not one meant for any repository."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l05-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
-        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
-        ],
-        "note": "S7 L05, blind labellers agreed. G: The description is expressly about \"Agent Studio panes or its CLI\" and their context, so it is not a skill meant for any repository. H: The skill is explicitly for “Agent Studio panes or its CLI,” so it is product-specific rather than meant for any repository."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l07-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
-        ],
-        "note": "S7 L07, blind labellers agreed. G: It explicitly covers \"any repo that emits OTLP locally\" and the other names identify producers of a shared stack; this is not a loading condition for one product's own workflow. H: The skill is for a shared local stack and explicitly includes “any repo that emits OTLP locally.” The listed apps identify producers using common infrastructure, not one product's own application workflow."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l08-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "self",
-        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
-        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        3
-      ],
-      "kind": "breach",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb",
-          "Sol settler 01a19705-397b-7621-ab1c-430aab76fc9e"
-        ],
-        "note": "S7 L08, independent settlement: The skill is meant for general use across repositories: its description covers a 'technical explainer, visual engineering document, or architecture page', and its body distinguishes document authoring from 'library development', so it is not the product's own development skill. Its description nevertheless adds 'or a Demistify/HTML Islands artifact' as an independent loading condition for that product's artifact workflow. I follow labeler_h because the named artifact alternative itself triggers loading; labeler_g's reading as merely an additional artifact type does not remove that product-specific condition."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "s7-l10-description-product-loading",
-      "rule": "general-skill.description-overfits-to-one-product",
-      "source": {
-        "repository": "https://github.com/steipete/agent-scripts",
-        "commit": "391e08aab366674af82cc838649dedc99c8f0405",
-        "path": "skills/clickclack/SKILL.md",
-        "context": [
-          "skills",
-          "skills/clickclack/SKILL.md",
-          "README.md"
-        ]
-      },
-      "select": {
-        "field_line": 3
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
-          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
-        ],
-        "note": "S7 L10, blind labellers agreed. G: The context identifies \"ClickClack product/runtime ops\" and describes its repo, hosted app, Cloudflare deployment, and domains, so the skill is product-specific rather than meant for any repository. H: The description and same-file context identify ClickClack operations, deployment, and domain work. This is a product-specific skill, not one meant for any repository."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-001",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 6,
-        "field_line": 17
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        17,
-        18
-      ],
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-001"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-001 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-002",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 28,
-        "field_line": 30
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        30
-      ],
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-002"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-002 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-003",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 32,
-        "field_line": 40
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        40
-      ],
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-003"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-003 (development, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-004",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 68,
-        "field_line": 70
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-004"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-005",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/victoria-queries.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 41,
-        "field_line": 47
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-005"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-006",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 16,
-        "field_line": 17
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        21,
-        26,
-        30,
-        31,
-        32,
-        33,
-        35
-      ],
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-006"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-006 (development, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-007",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/producer-contract.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 5,
-        "field_line": 7
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-007"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-007 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-008",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/platform.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 3,
-        "field_line": 5
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-008"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-008 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-009",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 96,
-        "field_line": 109
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-009"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-009 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-010",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 28,
-        "field_line": 30
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: calls-and-placement-k003/case-010"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-011",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 12,
-        "field_line": 14
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-011"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-011 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-case-012",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
-        "path": "plugins/sunstack-dev/skills/presentation-tui/references/shape-catalog.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 1,
-        "field_line": 3
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/case-012"
-        ],
-        "note": "Migrated calls-and-placement-k003/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h01",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 65,
-        "field_line": 65
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h01"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h01 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h02",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/references/github-pr-state.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 5,
-        "field_line": 5
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h02"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h02 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h03",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 134,
-        "field_line": 134
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h03"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h04",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/presentation-html/references/demistify.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 45,
-        "field_line": 45
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        49,
-        50,
-        57,
-        58,
-        64,
-        71,
-        72
-      ],
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: calls-and-placement-k003/held-out-h04"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h04 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h05",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 15,
-        "field_line": 15
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Independent Sol settler: calls-and-placement-k003/held-out-h05"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h05 (held-out, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "calls-and-placement-k003-held-out-h06",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
-        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 121,
-        "field_line": 121
-      },
-      "expect": "must_pass",
-      "kind": "regression_example",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Two blind legacy labellers agreed: calls-and-placement-k003/held-out-h06"
-        ],
-        "note": "Migrated calls-and-placement-k003/held-out-h06 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a07-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/practices-verification/references/project-verification-selection.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 39
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A07, blind labellers agreed. I: It describes one clean example where “the assignment names the TUI”; it is an illustrative case in a generic project-verification reference. J: The terminal app and `verify-tui` are an illustrative assignment scenario; the passage does not route an actual task into a product workflow."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a13-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/verification-design/references/choosing-the-observation.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 73
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A13, blind labellers agreed. I: The drafts and titles appear as a worked example of restart durability; the passage teaches how to state verification evidence. J: The draft-survival scenario is an example of matching proof to a storage requirement; it does not direct work into a product's own workflow."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a14-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 208
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A14, blind labellers agreed. I: The fragment is a Peekaboo-specific troubleshooting recipe (`peekaboo daemon start`); the Peekaboo skill is for its own native-UI workflow. J: The source is Peekaboo's own troubleshooting guide, and the prescribed commands operate Peekaboo itself."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a16-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 21
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A16, blind labellers agreed. I: The permission steps are Peekaboo-specific (`peekaboo permissions status`); this is the tool's own troubleshooting workflow. J: This is a permission troubleshooting section in Peekaboo's own skill, so its product-specific workflow is within scope."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a27-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/headless-automation.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 187
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A27, blind labellers agreed. I: The daemon recovery commands name Peekaboo's own process and socket (`/tmp/peekaboo.sock`); they belong to its tool-specific skill. J: The daemon recovery commands are in Peekaboo's own headless-automation reference and operate Peekaboo."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a28-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/headless-automation.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 209
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A28, blind labellers agreed. I: The bridge status, socket, and log commands are Peekaboo-specific troubleshooting steps in the Peekaboo skill. J: The bridge troubleshooting steps are in Peekaboo's own headless-automation reference and use its daemon and paths."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a40-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 10
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A40, blind labellers agreed. I: The helper resolution and pane identity commands belong to the AgentStudio skill, whose stated scope is its panes and CLI. J: The source is AgentStudio's own skill and the setup branch invokes its helper and pane workflow."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a43-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/domain-typescript/references/toolchain.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 27
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
-        ],
-        "note": "Accounts A43, independent settlement: 'When the repo uses shadcn' and 'A components.json at the app root marks a shadcn project' condition the component CLI on the repository's toolchain. I follow labeller J because 'pnpx shadcn@latest add button' is library/tooling guidance usable across repositories using shadcn, not one application's own procedures, state files or machine paths as labeller I treats it."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a46-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/practices-verification-maintenance/references/project-capability-generation.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 53
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A46, blind labellers agreed. I: The verification-maintenance passage labels the ledger app as a fictional example and compares weak and adequate recipes. J: The passage is explicitly a fictional `ledger` example used to illustrate verification evidence, not an instruction to use that product workflow."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a52-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 32
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        40
-      ],
-      "kind": "breach",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol settler 01a1970e-35a0-7701-8fdb-66dd035fab34"
-        ],
-        "note": "Accounts A52, independent settlement: The full cleanup skill describes removing 'the large residue your task created' without restricting itself to AgentStudio, yet its allow list prescribes 'mise -C \"$agentstudio_worktree\" run clean-artifacts'. I follow labeller J because this is a general skill's branch into one application's own cleanup task; the inspected-path and stopped-process conditions cited by I constrain when it runs but do not make the containing skill product-specific."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a53-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/domain-decision-models/references/worked-trees.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 139
-      },
-      "expect": "must_pass",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A53, blind labellers agreed. I: The piece teaches a reusable nudge-tree judgment and explicitly treats the AgentStudio loop as an example whose repository ownership is unresolved. J: The passage is an explanatory nudge-tree example about AgentStudio; it analyzes a sample route rather than instructing general skill users to follow it."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a57-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/dev-workflow-tools/skills/peekaboo/references/troubleshooting.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 7
-      },
-      "expect": "not_applicable",
-      "kind": "worth_reading",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
-        ],
-        "note": "Accounts A57, blind labellers agreed. I: The permission workflow is for Peekaboo's Screen Recording feature (`peekaboo permissions status`) in its own tool-specific skill. J: The troubleshooting section is in Peekaboo's own skill and routes only through Peekaboo permission controls."
-      },
-      "added": "2026-11-01"
-    },
-    {
-      "id": "acct-a58-placement-product-workflow",
-      "rule": "general-skill.overfits-to-product-workflow",
-      "source": {
-        "repository": "self",
-        "commit": "fea2b57f8e4348aefdc851ff3257868aa8d4d58b",
-        "path": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
-        "context": [
-          "plugins"
-        ]
-      },
-      "select": {
-        "piece_first_line": 49
-      },
-      "expect": "must_fire",
-      "finding_lines": [
-        51,
-        54,
-        57,
-        59
-      ],
-      "kind": "breach",
-      "case_kind": "unclassified",
-      "status": "active",
-      "set": "development",
-      "label": {
-        "basis": "legacy_independent",
-        "state": "labelled",
-        "who": [
-          "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
-          "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e",
-          "Sol line settler 01a19710-fc6e-7b81-97d9-364618002e9b"
-        ],
-        "note": "Accounts A58, blind I/J outcome agreed. I: The shared observability skill embeds AgentStudio-specific workflow: it sources `tmp/debug-observability/latest-observability.env` and directs native checks at the launched AgentStudio debug/beta process. J: This reference under the shared observability skill routes into an AgentStudio-specific loop using `tmp/debug-observability/latest-observability.env`, a producer marker, and PID targeting. Independent line-only settlement: The loading skill covers 'any repo that emits OTLP locally', so the product-own-skill exception does not apply. I follow labeler J: 'Read the state file from another shell' (51) and 'Then use the Victoria query recipes with the marker from the state file' (57) prescribe reading and consuming the AgentStudio state named by 'source tmp/debug-observability/latest-observability.env' (54), so labeler I's narrower selection misses operative steps. Line 59 additionally prescribes 'use PID targeting for the launched debug/beta process' and identifies the AgentStudio-specific context with 'another live AgentStudio may be running'. The earlier A58 outcome override is void and was not used."
-      },
-      "added": "2026-11-01"
-    },
+  "scenarios": [
     {
       "id": "generalization-k001-case-001",
       "rule": "general-skill.taught-rule-overfits-to-one-project",
@@ -1609,7 +44,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1620,7 +54,8 @@
         ],
         "note": "Migrated generalization-k001/case-001 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-002",
@@ -1639,7 +74,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1650,7 +84,8 @@
         ],
         "note": "Migrated generalization-k001/case-002 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-003",
@@ -1669,7 +104,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1680,7 +114,8 @@
         ],
         "note": "Migrated generalization-k001/case-003 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-004",
@@ -1699,7 +134,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1710,7 +144,8 @@
         ],
         "note": "Migrated generalization-k001/case-004 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-005",
@@ -1729,7 +164,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1740,7 +174,8 @@
         ],
         "note": "Migrated generalization-k001/case-005 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-006",
@@ -1759,7 +194,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1770,7 +204,8 @@
         ],
         "note": "Migrated generalization-k001/case-006 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-007",
@@ -1789,7 +224,6 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1800,7 +234,8 @@
         ],
         "note": "Migrated generalization-k001/case-007 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-008",
@@ -1819,7 +254,6 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1830,7 +264,8 @@
         ],
         "note": "Migrated generalization-k001/case-008 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-009",
@@ -1849,7 +284,6 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1860,7 +294,8 @@
         ],
         "note": "Migrated generalization-k001/case-009 (development, current): original labelers-agreed call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-010",
@@ -1879,7 +314,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1890,7 +324,8 @@
         ],
         "note": "Migrated generalization-k001/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-011",
@@ -1909,7 +344,6 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1920,7 +354,8 @@
         ],
         "note": "Migrated generalization-k001/case-011 (development, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-case-012",
@@ -1939,7 +374,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1950,7 +384,8 @@
         ],
         "note": "Migrated generalization-k001/case-012 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h01",
@@ -1976,7 +411,6 @@
         85
       ],
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -1987,7 +421,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h01 (held-out, current): original labelers-agreed call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h02",
@@ -2006,7 +441,6 @@
       },
       "expect": "not_applicable",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2017,7 +451,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h02 (held-out, current): original sol-settled call not_applicable on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h03",
@@ -2036,7 +471,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2047,7 +481,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h03 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h04",
@@ -2066,7 +501,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2077,7 +511,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h04 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h05",
@@ -2096,7 +531,6 @@
       },
       "expect": "must_pass",
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2107,7 +541,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h05 (held-out, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "generalization-k001-held-out-h06",
@@ -2133,7 +568,6 @@
         95
       ],
       "kind": "regression_example",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2144,7 +578,8 @@
         ],
         "note": "Migrated generalization-k001/held-out-h06 (held-out, current): original sol-settled call finding on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a01-rule-generalization",
@@ -2162,7 +597,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2174,7 +608,8 @@
         ],
         "note": "Accounts A01, blind labellers agreed. I: The passage gives SQLite migration practices within `domain-rust/references/sqlx-sqlite.md`; the SQLx examples are scoped to that storage domain. J: The section is explicitly about SQLx and SQLite migrations, so the library-specific details are scoped to the reference's stated subject."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a02-rule-generalization",
@@ -2192,7 +627,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2204,7 +638,8 @@
         ],
         "note": "Accounts A02, blind labellers agreed. I: The visual guidance is scoped to the combined identity and timing row, and says to retrieve the matching Demistify guide for its component API. J: The guide is for HTML and Demistify artifacts, and the section says to use the matching Demistify guide for its component API."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a03-rule-generalization",
@@ -2222,7 +657,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2234,7 +668,8 @@
         ],
         "note": "Accounts A03, blind labellers agreed. I: These are local scaffold-project steps for the explicitly named requests to add Playwright or Vitest setup, not a universal testing judgment. J: These are local setup steps for the explicitly requested Playwright or Vitest scaffold, not claims about a reusable testing judgment."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a04-rule-generalization",
@@ -2252,7 +687,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2264,7 +698,8 @@
         ],
         "note": "Accounts A04, blind labellers agreed. I: The patterns are a TypeScript file-naming convention in the scaffold-project workflow; the file extensions are the subject of the local instruction. J: The naming table states the scaffold's chosen test-environment conventions for its supported TypeScript project setup."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a05-rule-generalization",
@@ -2282,7 +717,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2294,7 +728,8 @@
         ],
         "note": "Accounts A05, blind labellers agreed. I: The rules govern the agent-collaboration tool itself, and repeatedly scope procedures to its CLI, MCP, or advertised schemas. J: The section instructs use of the agent-collaboration tool's own advertised call contracts; its scope is that tool workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a06-rule-generalization",
@@ -2312,7 +747,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2324,7 +758,8 @@
         ],
         "note": "Accounts A06, blind labellers agreed. I: The section is explicitly about agent-router and CLI identity, including the boundary between their session identifiers. J: The identity guidance explicitly distinguishes agent-router SessionRefs from the CLI's named environment variables within this tool's workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a08-rule-generalization",
@@ -2342,7 +777,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2354,7 +788,8 @@
         ],
         "note": "Accounts A08, blind labellers agreed. I: The passage states reusable coordination boundaries and explicitly scopes the tool-specific behavior to the running server's advertised operations. J: The passage documents agent-router's own advertised listener and event-observation behavior, scoped to that integration."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a09-rule-generalization",
@@ -2372,7 +807,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2384,7 +818,8 @@
         ],
         "note": "Accounts A09, blind labellers agreed. I: The REST, GraphQL, and rate-limit details are scoped to GitHub PR monitoring, while the passage teaches reusable API-budget practices for that workflow. J: The API-budget section is procedural guidance for the GitHub PR monitoring workflow, including the explicitly named REST and GraphQL endpoints."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a10-rule-generalization",
@@ -2402,7 +837,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2414,7 +848,8 @@
         ],
         "note": "Accounts A10, blind labellers agreed. I: The section states error-handling rules for the `domain-rust` scope and names Rust error types as examples at boundaries. J: The skill is scoped to Rust code, and the section applies Rust crate error-boundary conventions within that declared domain."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a11-rule-generalization",
@@ -2432,7 +867,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2444,7 +878,8 @@
         ],
         "note": "Accounts A11, blind labellers agreed. I: The section is explicitly Rust async guidance; Tokio is the scoped runtime whose ownership and blocking rules it teaches. J: The skill is scoped to Rust, and the async section expressly adopts Tokio as the runtime convention for that domain."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a12-rule-generalization",
@@ -2462,7 +897,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2474,7 +908,8 @@
         ],
         "note": "Accounts A12, blind labellers agreed. I: The rules teach reusable documentation maintenance judgments, with named artifact classes and phase skills defining the workflow's scope. J: The `Core Rules` section gives the docs-maintenance workflow's local ownership and phase-routing instructions."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a15-rule-generalization",
@@ -2492,7 +927,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2504,7 +938,8 @@
         ],
         "note": "Accounts A15, blind labellers agreed. I: The passage gives reusable review-thread and untrusted-input safeguards within the explicitly named GitHub PR workflow. J: The section gives GitHub-specific PR thread operations inside the GitHub PR state reference, which is the stated local workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a17-rule-generalization",
@@ -2522,7 +957,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2534,7 +968,8 @@
         ],
         "note": "Accounts A17, blind labellers agreed. I: The passage inventories test naming and placement patterns as scaffold-project conventions across TypeScript and Python. J: The inventory states test file and directory conventions for the scaffold's supported TypeScript setup."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a18-rule-generalization",
@@ -2552,7 +987,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2564,7 +998,8 @@
         ],
         "note": "Accounts A18, blind labellers agreed. I: These are structural principles scoped to the Linear task-tracking workflow; the passage describes general task and dependency judgments. J: The structural principles are local rules for organizing Linear milestones and tasks, the workflow this skill covers."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a19-rule-generalization",
@@ -2582,7 +1017,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2594,7 +1028,8 @@
         ],
         "note": "Accounts A19, blind labellers agreed. I: The CLI and MCP instructions explicitly concern Linear dependency operations, the scope of `ops-linear-tracking`. J: This section prescribes Linear CLI and MCP operations for managing Linear relations, not a general API-independent judgment."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a20-rule-generalization",
@@ -2612,7 +1047,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2624,7 +1058,8 @@
         ],
         "note": "Accounts A20, blind labellers agreed. I: The typing rules are explicitly Python domain guidance, and their examples teach reusable choices within that language scope. J: The skill's declared domain is Python, and the typing rules state that domain's adopted conventions."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a21-rule-generalization",
@@ -2642,7 +1077,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2654,7 +1088,8 @@
         ],
         "note": "Accounts A21, blind labellers agreed. I: The string, time, and data-processing rules are scoped to `domain-python`; the named libraries are the domain's applicable tools. J: The Python section names f-strings, timezone-aware datetimes, and pyarrow as conventions for the skill's declared Python domain."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a22-rule-generalization",
@@ -2672,7 +1107,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2684,7 +1118,8 @@
         ],
         "note": "Accounts A22, blind labellers agreed. I: The module and test instructions are explicitly Python package conventions, including the repository's named test markers and fixtures. J: The module and test-location guidance is scoped to the Python package conventions stated by this domain skill."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a23-rule-generalization",
@@ -2702,7 +1137,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2714,7 +1148,8 @@
         ],
         "note": "Accounts A23, blind labellers agreed. I: The passage is scoped by `sqlx-sqlite.md` and states storage-row practices for SQLx SQLite queries. J: The reference explicitly scopes the guidance to SQLx SQLite queries and checked-query metadata."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a24-rule-generalization",
@@ -2732,7 +1167,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2744,7 +1178,8 @@
         ],
         "note": "Accounts A24, blind labellers agreed. I: These are local AgentStudio worktree CLI procedures, including the explicit `remove` and `prune` behavior and options. J: The passage is an AgentStudio worktree procedure and names its own removal command and effects."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a25-rule-generalization",
@@ -2762,7 +1197,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2774,7 +1208,8 @@
         ],
         "note": "Accounts A25, blind labellers agreed. I: The Sidekick procedures are scoped to agent-router-managed sessions and state the reusable session-management judgments for that role. J: The section defines Sidekick/session operations within the agent-management workflow and explicitly ties them to agent-router."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a26-rule-generalization",
@@ -2792,7 +1227,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2804,7 +1238,8 @@
         ],
         "note": "Accounts A26, blind labellers agreed. I: This is the explicitly named Implementation PR Wrap-up workflow, with GitHub checks and phase-specific local instructions. J: The file is a local GitHub PR wrap-up procedure: it begins `Use this for` PR operations and assigns roles and gates for that workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a29-rule-generalization",
@@ -2822,7 +1257,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2834,7 +1268,8 @@
         ],
         "note": "Accounts A29, blind labellers agreed. I: The `ops-observability-stack` skill explicitly scopes these commands to the shared local Victoria stack and its lifecycle. J: The skill explicitly scopes this to the shared local Victoria stack and says app repos are its producers."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a30-rule-generalization",
@@ -2852,7 +1287,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2865,7 +1299,8 @@
         ],
         "note": "Accounts A30, independent settlement: The piece teaches reusable judgments: 'Check each need for real' and 'Close each gap before the work that depends on it'; line 43 conditions cleanup on merged worktrees or insufficient disk. I follow labeller I because the credential snippet illustrates a check, while J's claimed 'agentstudio_worktree' restriction does not occur in this piece: line 43 loads a general cleanup practice without naming AgentStudio."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a31-rule-generalization",
@@ -2883,7 +1318,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2895,7 +1329,8 @@
         ],
         "note": "Accounts A31, blind labellers agreed. I: The skill names its adopted scope: a shared local Victoria stack, with AgentStudio and Agent VM as producer-specific cases. J: The skill explicitly names its scope as the shared local observability stack and assigns the listed lifecycle to that stack."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a32-rule-generalization",
@@ -2913,7 +1348,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2925,7 +1359,8 @@
         ],
         "note": "Accounts A32, blind labellers agreed. I: The TypeScript gate guidance is scoped to the changed repository path and conditionally directs shadcn projects to their component toolchain. J: The gate says the repository's own scripts and configuration win, and applies the fallback only to TypeScript work."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a33-rule-generalization",
@@ -2943,7 +1378,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2956,7 +1390,8 @@
         ],
         "note": "Accounts A33, independent settlement: 'The allow list' and 'These run without asking once the four checks hold' introduce this skill's local command permissions, rather than a taught rule claiming that one product's command generalizes to every repository. I follow labeller I under the commission's local-instruction exception; J correctly identifies the AgentStudio command at line 40, but its placement is a separate question from whether this section teaches a non-reusable judgment."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a34-rule-generalization",
@@ -2974,7 +1409,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -2986,7 +1420,8 @@
         ],
         "note": "Accounts A34, blind labellers agreed. I: The routing rules name research tools as examples of source classes and explicitly say to state when a preferred tool is unavailable. J: This is a local research-tool routing guide; its named services are the adopted sources for the specific research jobs described."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a35-rule-generalization",
@@ -3004,7 +1439,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3016,7 +1450,8 @@
         ],
         "note": "Accounts A35, blind labellers agreed. I: This is a local scaffold-template inventory of Swift rules and tools, not a rule claiming Swift practices are universal. J: The Swift conventions are listed as the scaffold's supported Swift/SwiftUI configuration, not as a rule for unrelated languages."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a36-rule-generalization",
@@ -3034,7 +1469,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3046,7 +1480,8 @@
         ],
         "note": "Accounts A36, blind labellers agreed. I: This is a local scaffold-template inventory of TypeScript rules and tool commands, scoped by its `rules/ts-rules.md` entry. J: The TypeScript rules are a local scaffold inventory for TypeScript projects and their configured tools."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a37-rule-generalization",
@@ -3064,7 +1499,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3076,7 +1510,8 @@
         ],
         "note": "Accounts A37, blind labellers agreed. I: This is a local scaffold-template inventory of Python rules and tools, scoped by its `rules/python-rules.md` entry. J: The Python rules are a local scaffold inventory for Python projects and their configured tools."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a38-rule-generalization",
@@ -3094,7 +1529,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3106,7 +1540,8 @@
         ],
         "note": "Accounts A38, blind labellers agreed. I: This is a local scaffold-template inventory of monorepo rules and tools, not a universal rule about every repository. J: The monorepo rules are explicitly scoped to Python and TypeScript monorepos supported by the scaffold."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a39-rule-generalization",
@@ -3124,7 +1559,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3136,7 +1570,8 @@
         ],
         "note": "Accounts A39, blind labellers agreed. I: The shortcut response is a local Peekaboo interaction procedure; the skill scope is Peekaboo native macOS UI work. J: The skill is Peekaboo's own UI workflow, and the section's commands and safety steps are specific to that product."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a41-rule-generalization",
@@ -3154,7 +1589,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3166,7 +1600,8 @@
         ],
         "note": "Accounts A41, blind labellers agreed. I: These are local AgentStudio recovery instructions keyed to exact CLI outcomes and the AgentStudio runtime. J: This recovery reference is part of AgentStudio's own skill and describes exact outcomes of its own pane and app calls."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a42-rule-generalization",
@@ -3184,7 +1619,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3196,7 +1630,8 @@
         ],
         "note": "Accounts A42, blind labellers agreed. I: The test advice is scoped to Rust integration tests and uses Tokio as the async test runtime. J: The passage is in the Rust domain skill and describes its chosen Rust integration-test conventions."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a44-rule-generalization",
@@ -3214,7 +1649,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3226,7 +1660,8 @@
         ],
         "note": "Accounts A44, blind labellers agreed. I: The passage teaches reusable boundary parsing and schema ownership in the explicitly scoped TypeScript domain, with Zod as its adopted schema library. J: The Zod rules concern parsing TypeScript boundary data and name Zod as the selected schema library within the TypeScript domain."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a45-rule-generalization",
@@ -3244,7 +1679,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3256,7 +1690,8 @@
         ],
         "note": "Accounts A45, blind labellers agreed. I: These are role and runtime instructions for the specifically named `spec-program-review` workflow. J: The passage defines this review skill's local reviewer-session authority and convergence process."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a47-rule-generalization",
@@ -3274,7 +1709,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3286,7 +1720,8 @@
         ],
         "note": "Accounts A47, blind labellers agreed. I: The security review rules teach reusable scope, validation, and read-only practices; the installed plugin is only one scoped tool choice. J: The Codex plugin instruction is explicitly conditional on availability `in the current runtime`, which names the scope where it applies."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a48-rule-generalization",
@@ -3304,7 +1739,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3316,7 +1750,8 @@
         ],
         "note": "Accounts A48, blind labellers agreed. I: This passage is explicitly about delivery and viewing of pages that use the Demistify library, its local data, or its bundle API. J: The source is the Demistify guide within a presentation skill whose stated scope includes Demistify and HTML Islands artifacts."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a49-rule-generalization",
@@ -3334,7 +1769,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3346,7 +1780,8 @@
         ],
         "note": "Accounts A49, blind labellers agreed. I: The procedure explicitly scopes commands and assets to the matching Demistify guide and page binding. J: These are local authoring and linting steps for the Demistify binding, which the section explicitly says owns the CLI route."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a50-rule-generalization",
@@ -3364,7 +1799,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3376,7 +1810,8 @@
         ],
         "note": "Accounts A50, blind labellers agreed. I: The rules teach reusable secret-handling judgments for background monitoring and name 1Password as a credential source, not as an example of an unrelated product workflow. J: The section is operational guidance for monitoring artifacts and explicitly scopes its secret-handling rules to those files and this workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a51-rule-generalization",
@@ -3394,7 +1829,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3406,7 +1840,8 @@
         ],
         "note": "Accounts A51, blind labellers agreed. I: The passage explicitly scopes the API and release rules to new pages using Demistify v1 or older Demistify bindings. J: The guide's declared scope includes Demistify artifacts, and this section describes their versioned library binding."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a54-rule-generalization",
@@ -3424,7 +1859,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3436,7 +1870,8 @@
         ],
         "note": "Accounts A54, blind labellers agreed. I: The recovery procedure is explicitly scoped to read-only investigation monitoring and names its monitor state and event files. J: The recovery section gives local stop and evidence-preservation instructions for the background-monitoring workflow."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a55-rule-generalization",
@@ -3454,7 +1889,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3466,7 +1900,8 @@
         ],
         "note": "Accounts A55, blind labellers agreed. I: This is a local troubleshooting recipe for the named Peekaboo bridge error, with symptom-specific commands and retry guidance. J: The troubleshooting advice is in Peekaboo's own skill and covers Peekaboo's bridge error and commands."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     },
     {
       "id": "acct-a56-rule-generalization",
@@ -3484,7 +1919,6 @@
       },
       "expect": "must_pass",
       "kind": "worth_reading",
-      "case_kind": "unclassified",
       "status": "active",
       "set": "development",
       "label": {
@@ -3496,7 +1930,8 @@
         ],
         "note": "Accounts A56, blind labellers agreed. I: The pane commands and effects are scoped to the AgentStudio CLI and its own pane handles and capabilities. J: The section is part of AgentStudio's own pane skill and names its supported pane operations and permission boundary."
       },
-      "added": "2026-11-01"
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
     }
   ]
 }

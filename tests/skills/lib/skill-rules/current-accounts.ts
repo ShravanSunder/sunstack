@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { matchExpectationPiece } from "./expectation-scoring.ts";
-import type { CaseRecord } from "./cases.ts";
+import { matchScenarioPiece } from "./scenario-scoring.ts";
+import type { ScenarioRecord } from "./scenarios.ts";
 import { reportGaps } from "./report.ts";
 import type { LintReport } from "./report.ts";
 import type { RuleDenominator } from "./denominators.ts";
@@ -21,7 +21,7 @@ export interface CurrentAccountItem {
 }
 export interface CurrentAccountsRequest {
   readonly report: LintReport;
-  readonly expectations: readonly CaseRecord[];
+  readonly scenarios: readonly ScenarioRecord[];
   readonly commit: string | null;
   readonly denominators: readonly RuleDenominator[];
   readonly sampleSize?: number;
@@ -34,7 +34,7 @@ export function listCurrentAccounts(request: CurrentAccountsRequest): CurrentAcc
   for (const finding of report.findings) {
     const covered =
       request.commit !== null &&
-      request.expectations.some((entry) => {
+      request.scenarios.some((entry) => {
         if (
           entry.source.repository !== "self" ||
           entry.source.commit !== request.commit ||
@@ -42,7 +42,7 @@ export function listCurrentAccounts(request: CurrentAccountsRequest): CurrentAcc
           entry.rule !== finding.rule
         )
           return false;
-        const piece = matchExpectationPiece(entry, report.results);
+        const piece = matchScenarioPiece(entry, report.results);
         return (
           piece !== undefined && finding.line >= piece.first_line && finding.line <= piece.last_line
         );

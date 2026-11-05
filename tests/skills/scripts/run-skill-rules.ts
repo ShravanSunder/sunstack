@@ -14,7 +14,7 @@ import {
   filtersSupported,
 } from "../lib/skill-rules/report.ts";
 import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
-import { loadConfiguredExpectations } from "../lib/skill-rules/expectation-run.ts";
+import { loadConfiguredScenarios } from "../lib/skill-rules/scenario-run.ts";
 import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
 import { engineVersion, loadRuleStates } from "../lib/skill-rules/rule-state.ts";
 
@@ -144,7 +144,7 @@ function runRules(): number {
       report,
       denominators,
       commit,
-      expectations: loadConfiguredExpectations(configPath).map((entry) => entry.expectation),
+      scenarios: loadConfiguredScenarios(configPath).map((entry) => entry.scenario),
     });
     writeFileSync(
       path.join(options.output, "accounts.json"),

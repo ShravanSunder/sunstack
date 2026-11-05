@@ -1,0 +1,566 @@
+{
+  "rules": {
+    "general-skill.description-overfits-to-one-product": {
+      "basis": "judged",
+      "decision": "held_by_owner",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [],
+      "bars": {
+        "loads_for_product": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        },
+        "example_or_own_infrastructure": {
+          "status": "starting",
+          "values": {
+            "yes_at_or_above": 0.7,
+            "no_at_or_below": 0.3
+          },
+          "recorded_at": "6d5bc2ba80381987db9aee97936b193f69f42081",
+          "scenarios": []
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "descriptions-k007-case-001",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-001"
+        ],
+        "note": "Migrated descriptions-k007/case-001 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-002",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k007/case-002"
+        ],
+        "note": "Migrated descriptions-k007/case-002 (development, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-003",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-003"
+        ],
+        "note": "Migrated descriptions-k007/case-003 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-004",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-004"
+        ],
+        "note": "Migrated descriptions-k007/case-004 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-005",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-005"
+        ],
+        "note": "Migrated descriptions-k007/case-005 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-006",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-006"
+        ],
+        "note": "Migrated descriptions-k007/case-006 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-case-007",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "4d909fd39048d06f9f5e9ff367981a438297122f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/case-007"
+        ],
+        "note": "Migrated descriptions-k007/case-007 (development, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-held-out-h01",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/held-out-h01"
+        ],
+        "note": "Migrated descriptions-k007/held-out-h01 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-held-out-h02",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/held-out-h02"
+        ],
+        "note": "Migrated descriptions-k007/held-out-h02 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-held-out-h03",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/held-out-h03"
+        ],
+        "note": "Migrated descriptions-k007/held-out-h03 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-held-out-h04",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/implementation-handoff/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Two blind legacy labellers agreed: descriptions-k007/held-out-h04"
+        ],
+        "note": "Migrated descriptions-k007/held-out-h04 (held-out, current): original labelers-agreed call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "descriptions-k007-held-out-h05",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "1bab79d1d74376b651628925a2b2aabffd366d52",
+        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "regression_example",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Independent Sol settler: descriptions-k007/held-out-h05"
+        ],
+        "note": "Migrated descriptions-k007/held-out-h05 (held-out, current): original sol-settled call pass on skill.description. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l02-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "https://github.com/steipete/agent-scripts",
+        "commit": "391e08aab366674af82cc838649dedc99c8f0405",
+        "path": "skills/release-mac-app/SKILL.md",
+        "context": [
+          "skills"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ],
+        "note": "S7 L02, blind labellers agreed. G: The context says the skill is for named apps \"and similar Sparkle-updated macOS apps,\" so it transfers across app repositories; its description names release areas, not one product's own workflow. H: The skill covers macOS app releases across “BlackBar, RepoBar, CodexBar, Trimmy, and similar” apps, rather than one product's workflow. Its description names release topics and tools, not a product-specific loading condition."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l04-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "agentstudio",
+        "commit": "0c9f18783b99eb76bc7adf731519b7b30a355441",
+        "path": ".agents/skills/verify-agentstudio/SKILL.md",
+        "context": [
+          ".agents/skills/verify-agentstudio"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ],
+        "note": "S7 L04, blind labellers agreed. G: The description is explicitly for an \"Agent Studio debug build\" and its panes, popovers, and terminal lifecycle, so it is product-specific rather than meant for any repository. H: The description explicitly scopes the skill to an “Agent Studio debug build's pane context”; it is a product-specific skill, not one meant for any repository."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l05-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ],
+        "note": "S7 L05, blind labellers agreed. G: The description is expressly about \"Agent Studio panes or its CLI\" and their context, so it is not a skill meant for any repository. H: The skill is explicitly for “Agent Studio panes or its CLI,” so it is product-specific rather than meant for any repository."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l07-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_pass",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ],
+        "note": "S7 L07, blind labellers agreed. G: It explicitly covers \"any repo that emits OTLP locally\" and the other names identify producers of a shared stack; this is not a loading condition for one product's own workflow. H: The skill is for a shared local stack and explicitly includes “any repo that emits OTLP locally.” The listed apps identify producers using common infrastructure, not one product's own application workflow."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l08-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "self",
+        "commit": "e5b94dc3041c96acd0f775a0a8877a4b90859971",
+        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "must_fire",
+      "finding_lines": [
+        3
+      ],
+      "kind": "breach",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb",
+          "Sol settler 01a19705-397b-7621-ab1c-430aab76fc9e"
+        ],
+        "note": "S7 L08, independent settlement: The skill is meant for general use across repositories: its description covers a 'technical explainer, visual engineering document, or architecture page', and its body distinguishes document authoring from 'library development', so it is not the product's own development skill. Its description nevertheless adds 'or a Demistify/HTML Islands artifact' as an independent loading condition for that product's artifact workflow. I follow labeler_h because the named artifact alternative itself triggers loading; labeler_g's reading as merely an additional artifact type does not remove that product-specific condition."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    },
+    {
+      "id": "s7-l10-description-product-loading",
+      "rule": "general-skill.description-overfits-to-one-product",
+      "source": {
+        "repository": "https://github.com/steipete/agent-scripts",
+        "commit": "391e08aab366674af82cc838649dedc99c8f0405",
+        "path": "skills/clickclack/SKILL.md",
+        "context": [
+          "skills",
+          "skills/clickclack/SKILL.md",
+          "README.md"
+        ]
+      },
+      "select": {
+        "field_line": 3
+      },
+      "expect": "not_applicable",
+      "kind": "worth_reading",
+      "status": "active",
+      "set": "development",
+      "label": {
+        "basis": "legacy_independent",
+        "state": "labelled",
+        "who": [
+          "Luna labeller G 01a196ed-adc2-7243-81a7-5b79aa35d17f",
+          "Luna labeller H 01a196ed-aefd-72c2-ba2f-b3b3a883e0eb"
+        ],
+        "note": "S7 L10, blind labellers agreed. G: The context identifies \"ClickClack product/runtime ops\" and describes its repo, hosted app, Cloudflare deployment, and domains, so the skill is product-specific rather than meant for any repository. H: The description and same-file context identify ClickClack operations, deployment, and domain work. This is a product-specific skill, not one meant for any repository."
+      },
+      "added": "2026-11-01",
+      "scenario_kind": "unclassified"
+    }
+  ]
+}

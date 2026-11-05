@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, expect, test } from "vitest";
 import { z } from "zod";
-import { loadConfiguredExpectations } from "./expectation-run.ts";
+import { loadConfiguredScenarios } from "./scenario-run.ts";
 import { unpackPinnedSource } from "./pinned-source.ts";
 import { cleanupFixtureRoots, enginePath, kitRelative, repositoryRoot, spawnCollected, withJudge } from "./test-fixture.ts";
 
@@ -28,29 +28,29 @@ function targetKinds(input: unknown): unknown {
   return input;
 }
 
-async function compareCases(upstream: boolean): Promise<void> {
+async function compareScenarios(upstream: boolean): Promise<void> {
   const baseline = unpackPinnedSource({self: repositoryRoot, source: {repository: "self", commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a", path: `${kitRelative}/skill-rules.config.json`, context: ["plugins/skill-authoring/skills/domain-skill-crafting", "plugins/sunstack-dev/skills/domain-decision-models"]}});
   if (baseline.kind !== "ready") throw new Error(baseline.reason);
   const definitions = new Map<string, string>();
   const config = configSchema.parse(JSON.parse(readFileSync(currentConfig, "utf8")));
   for (const pair of config.rulebook) for (const rule of Object.values(z.record(z.string(), z.object({name: z.string(), evidence: z.string()})).parse(JSON.parse(readFileSync(path.resolve(path.dirname(currentConfig), pair.rules), "utf8"))))) definitions.set(rule.name, rule.evidence);
-  const entries = loadConfiguredExpectations(currentConfig).filter((entry) => entry.expectation.status === "active" && (entry.expectation.source.repository !== "self") === upstream);
+  const entries = loadConfiguredScenarios(currentConfig).filter((entry) => entry.scenario.status === "active" && (entry.scenario.source.repository !== "self") === upstream);
   expect(entries.length).toBeGreaterThan(0);
   const groups = new Map<string, typeof entries>();
-  for (const entry of entries) { const key = `${entry.expectation.source.repository}\0${entry.expectation.source.commit}`; const group = groups.get(key) ?? []; group.push(entry); groups.set(key, group); }
+  for (const entry of entries) { const key = `${entry.scenario.source.repository}\0${entry.scenario.source.commit}`; const group = groups.get(key) ?? []; group.push(entry); groups.set(key, group); }
   let compared = 0;
   try {
     await withJudge({}, async (endpoint) => {
       for (const group of groups.values()) {
         const first = group[0]; if (!first) throw new Error("Empty source group");
-        const source = {...first.expectation.source, context: [...new Set(group.flatMap((entry) => [entry.expectation.source.path, ...entry.expectation.source.context]))]};
+        const source = {...first.scenario.source, context: [...new Set(group.flatMap((entry) => [entry.scenario.source.path, ...entry.scenario.source.context]))]};
         const snapshot = unpackPinnedSource({self: repositoryRoot, source, ...(process.env.AI_DEV_SKILLS_ROOT ? {collectionsRoot: process.env.AI_DEV_SKILLS_ROOT} : {})});
         if (snapshot.kind !== "ready") throw new Error(snapshot.reason);
         try {
-          const files = [...new Set(group.map((entry) => entry.expectation.source.path))];
+          const files = [...new Set(group.map((entry) => entry.scenario.source.path))];
           const before = await inspect(path.join(baseline.directory, kitRelative, "skill-rules.config.json"), snapshot.directory, files, endpoint, "before");
           const after = await inspect(currentConfig, snapshot.directory, files, endpoint, "after");
-          for (const {expectation: entry} of group) {
+          for (const {scenario: entry} of group) {
             const kind = definitions.get(entry.rule); if (!kind) throw new Error(`Missing definition ${entry.rule}`);
             const selected = (pieces: readonly EvidencePiece[]): EvidencePiece[] => pieces.filter((piece) => piece.kind === kind && piece.where.file === entry.source.path && (entry.select?.piece_first_line !== undefined ? piece.where.first_line === entry.select.piece_first_line : entry.select?.field_line !== undefined ? piece.where.first_line <= entry.select.field_line && piece.where.last_line >= entry.select.field_line : true));
             const old = selected(before); const next = selected(after);
@@ -65,8 +65,8 @@ async function compareCases(upstream: boolean): Promise<void> {
     });
   } finally { baseline.dispose(); }
   expect(compared).toBe(entries.length);
-  console.log(`Compared exact subject text/spans and followed text for ${compared} ${upstream ? "upstream" : "self"} cases.`);
+  console.log(`Compared exact subject text/spans and followed text for ${compared} ${upstream ? "upstream" : "self"} scenarios.`);
 }
 
-test("evidence trim preserves every kept self case's subject and followed text", () => compareCases(false));
-test.runIf(Boolean(process.env.AI_DEV_SKILLS_ROOT))("evidence trim preserves every kept upstream case's subject and followed text", () => compareCases(true));
+test("evidence trim preserves every kept self scenario's subject and followed text", () => compareScenarios(false));
+test.runIf(Boolean(process.env.AI_DEV_SKILLS_ROOT))("evidence trim preserves every kept upstream scenario's subject and followed text", () => compareScenarios(true));

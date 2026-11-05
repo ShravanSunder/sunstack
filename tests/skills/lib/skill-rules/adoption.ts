@@ -1,19 +1,30 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import type { CasesFile } from "./cases.ts";
+import type { ScenariosFile } from "./scenarios.ts";
 
-const setResultSchema = z.object({ passed: z.number().int().nonnegative(), failed: z.array(z.string()), unsure: z.array(z.string()) }).strict();
-export const caseRunReceiptSchema = z.object({
-  engine_version: z.string().min(1), model: z.string().min(1), complete: z.boolean(),
-  rules: z.record(z.string(), z.object({fingerprint: z.string().regex(/^[0-9a-f]{64}$/), development: setResultSchema, held_back: setResultSchema}).strict()),
+export const adoptionSchema = z.object({
+  at: z.iso.datetime(), by: z.literal("owner"), passed: z.string().min(1),
+  fingerprint: z.string().regex(/^[0-9a-f]{64}$/), report: z.string().min(1),
 }).strict();
-export type CaseRunReceipt = z.infer<typeof caseRunReceiptSchema>;
+export const adoptedFileSchema = z.record(z.string(), adoptionSchema);
+export type Adoption = z.infer<typeof adoptionSchema>;
+export type AdoptedFile = z.infer<typeof adoptedFileSchema>;
+
+export function readAdoptions(scenarioRoot: string): AdoptedFile {
+  return adoptedFileSchema.parse(JSON.parse(readFileSync(path.join(scenarioRoot, "adopted.json"), "utf8")));
+}
+export function writeAdoption(scenarioRoot: string, rule: string, adoption: Adoption): void {
+  const entries = readAdoptions(scenarioRoot);
+  entries[rule] = adoptionSchema.parse(adoption);
+  writeFileSync(path.join(scenarioRoot, "adopted.json"), JSON.stringify(entries, null, 2) + "\n");
+}
+
 export interface FingerprintRequest {
   readonly config: string; readonly rule: unknown; readonly name: string;
   readonly rulesFile: string;
-  readonly cases: CasesFile; readonly engineVersion: string; readonly model: string;
+  readonly scenarios: ScenariosFile; readonly engineVersion: string; readonly model: string;
 }
 
 export function fingerprintRule(request: FingerprintRequest): string {
@@ -37,16 +48,8 @@ export function fingerprintRule(request: FingerprintRequest): string {
   };
   walk(evidenceRoot);
   add("rule", JSON.stringify(request.rule));
-  add("record", JSON.stringify(request.cases.rules[request.name] ?? null));
-  add("cases", JSON.stringify(request.cases.cases.filter((entry) => entry.rule === request.name)));
+  add("record", JSON.stringify(request.scenarios.rules[request.name] ?? null));
+  add("scenarios", JSON.stringify(request.scenarios.scenarios.filter((entry) => entry.rule === request.name)));
   add("engine", request.engineVersion); add("model", request.model);
   return hash.digest("hex");
-}
-export function receiptPath(rulesFile: string): string { return rulesFile.replace(/\.rules\.json$/, ".case-run.json"); }
-export function readCaseRunReceipt(rulesFile: string): CaseRunReceipt | null {
-  const filename = receiptPath(rulesFile);
-  return existsSync(filename) ? caseRunReceiptSchema.parse(JSON.parse(readFileSync(filename, "utf8"))) : null;
-}
-export function writeCaseRunReceipt(rulesFile: string, receipt: CaseRunReceipt): void {
-  writeFileSync(receiptPath(rulesFile), `${JSON.stringify(caseRunReceiptSchema.parse(receipt), null, 2)}\n`);
 }
