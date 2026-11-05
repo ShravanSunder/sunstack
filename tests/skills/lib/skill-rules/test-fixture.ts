@@ -37,7 +37,7 @@ const pieceSchema = z.object({
     span: z.object({ byte_start: z.number(), byte_end: z.number() }).passthrough(),
   }),
   fields: z.record(z.string(), z.unknown()),
-  model_view: z.object({fields: z.record(z.string(), z.unknown()), cut: z.array(z.string())}),
+  model_view: z.object({ fields: z.record(z.string(), z.unknown()), cut: z.array(z.string()) }),
 });
 const selectionSchema = z
   .object({
@@ -72,10 +72,16 @@ export function createFixture(): string {
   temporaryRoots.push(root);
   const initialized = spawnSync("git", ["init", "--quiet", root], { encoding: "utf8" });
   if (initialized.status !== 0) throw new Error(initialized.stderr);
-  const objects = spawnSync("git", ["rev-parse", "--git-path", "objects"], {cwd: repositoryRoot, encoding: "utf8"});
+  const objects = spawnSync("git", ["rev-parse", "--git-path", "objects"], {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+  });
   if (objects.status !== 0) throw new Error(objects.stderr);
-  mkdirSync(path.join(root, ".git/objects/info"), {recursive: true});
-  writeFileSync(path.join(root, ".git/objects/info/alternates"), `${path.resolve(repositoryRoot, objects.stdout.trim())}\n`);
+  mkdirSync(path.join(root, ".git/objects/info"), { recursive: true });
+  writeFileSync(
+    path.join(root, ".git/objects/info/alternates"),
+    `${path.resolve(repositoryRoot, objects.stdout.trim())}\n`,
+  );
   const kit = path.join(root, kitRelative);
   mkdirSync(path.join(root, "tests/skills/scripts"), { recursive: true });
   mkdirSync(path.join(root, "tests/skills/lib/skill-rules"), { recursive: true });
@@ -83,7 +89,11 @@ export function createFixture(): string {
     path.join(repositoryRoot, "tests/skills/scripts/run-skill-rules.ts"),
     path.join(root, "tests/skills/scripts/run-skill-rules.ts"),
   );
-  for (const script of ["run-rule-scenarios.ts", "adopt-rule-scenario.ts"]) cpSync(path.join(repositoryRoot, "tests/skills/scripts", script), path.join(root, "tests/skills/scripts", script));
+  for (const script of ["run-rule-scenarios.ts", "adopt-rule-scenario.ts"])
+    cpSync(
+      path.join(repositoryRoot, "tests/skills/scripts", script),
+      path.join(root, "tests/skills/scripts", script),
+    );
   const modules = "tests/skills/lib/skill-rules";
   for (const filename of readdirSync(path.join(repositoryRoot, modules)))
     if (
@@ -140,7 +150,30 @@ export function createFixture(): string {
     }),
   );
   writeFixtureFile(root, "tests/skills/evals/rule-scenarios/adopted.json", "{}\n");
-  writeFixtureFile(root, "tests/skills/evals/rule-scenarios/fixture/description_length.scenario.json", JSON.stringify({rules: {description_length: {basis: "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
+  writeFixtureFile(
+    root,
+    "tests/skills/evals/kind-filter/skill-kind.scenario.json",
+    readFileSync(
+      path.join(repositoryRoot, "tests/skills/evals/kind-filter/skill-kind.scenario.json"),
+      "utf8",
+    ),
+  );
+  writeFixtureFile(
+    root,
+    "tests/skills/evals/rule-scenarios/fixture/description_length.scenario.json",
+    JSON.stringify({
+      rules: {
+        description_length: {
+          basis: "mechanical",
+          decision: "keep",
+          decided: "runner boundary fixture",
+          reasons: [{ type: "written_standard", locator: "K001" }],
+          bars: {},
+        },
+      },
+      scenarios: [],
+    }),
+  );
   return root;
 }
 
@@ -170,7 +203,11 @@ export async function listEvidence(root: string): Promise<EvidenceListing> {
     },
   );
   expect(result.status, result.stderr || result.stdout).toBe(0);
-  return { ...evidenceSchema.parse(JSON.parse(result.stdout)), status: result.status, requests: [] };
+  return {
+    ...evidenceSchema.parse(JSON.parse(result.stdout)),
+    status: result.status,
+    requests: [],
+  };
 }
 
 export function spawnCollected(
@@ -223,25 +260,70 @@ export function saveRules(root: string, rules: Readonly<Record<string, unknown>>
       .join("\n\n"),
   );
   writeFixtureFile(root, `${kitRelative}/fixture.rules.json`, JSON.stringify(rules));
-  const definitions = z.record(z.string(), z.object({name: z.string(), decision: z.object({steps: z.record(z.string(), z.object({ask: z.string().optional()}).passthrough())})}).passthrough()).parse(rules);
+  const definitions = z
+    .record(
+      z.string(),
+      z
+        .object({
+          name: z.string(),
+          decision: z.object({
+            steps: z.record(z.string(), z.object({ ask: z.string().optional() }).passthrough()),
+          }),
+        })
+        .passthrough(),
+    )
+    .parse(rules);
   const directory = path.join(root, "tests/skills/evals/rule-scenarios/fixture");
-  for (const filename of readdirSync(directory)) if (filename.endsWith(".scenario.json")) rmSync(path.join(directory, filename));
-  for (const rule of Object.values(definitions)) writeFixtureFile(root, `tests/skills/evals/rule-scenarios/fixture/${rule.name}.scenario.json`, JSON.stringify({rules: {[rule.name]: {basis: Object.values(rule.decision.steps).some((step) => step.ask) ? "judged" : "mechanical", decision: "keep", decided: "runner boundary fixture", reasons: [{type: "written_standard", locator: "K001"}], bars: {}}}, scenarios: []}));
+  for (const filename of readdirSync(directory))
+    if (filename.endsWith(".scenario.json")) rmSync(path.join(directory, filename));
+  for (const rule of Object.values(definitions))
+    writeFixtureFile(
+      root,
+      `tests/skills/evals/rule-scenarios/fixture/${rule.name}.scenario.json`,
+      JSON.stringify({
+        rules: {
+          [rule.name]: {
+            basis: Object.values(rule.decision.steps).some((step) => step.ask)
+              ? "judged"
+              : "mechanical",
+            decision: "keep",
+            decided: "runner boundary fixture",
+            reasons: [{ type: "written_standard", locator: "K001" }],
+            bars: {},
+          },
+        },
+        scenarios: [],
+      }),
+    );
 }
 
 export const pinnedSkillPath = "plugins/sunstack-dev/skills/audit-security-review/SKILL.md";
-export const runnerPinnedSource: PinnedSource = {repository: "self", commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a", path: pinnedSkillPath, context: [pinnedSkillPath]};
+export const runnerPinnedSource: PinnedSource = {
+  repository: "self",
+  commit: "a815d1704ebe54b2852db1b8778ce93a177c1c5a",
+  path: pinnedSkillPath,
+  context: [pinnedSkillPath],
+};
 
 /** Copies unchanged Git-pinned bytes; destination varies only to test file-scope selection. */
-export function installPinnedSkill(root: string, options: {readonly source?: PinnedSource; readonly destination?: string} = {}): PinnedSource {
+export function installPinnedSkill(
+  root: string,
+  options: { readonly source?: PinnedSource; readonly destination?: string } = {},
+): PinnedSource {
   const source = options.source ?? runnerPinnedSource;
-  const snapshot = unpackPinnedSource({source, self: repositoryRoot, ...(process.env.AI_DEV_SKILLS_ROOT ? {collectionsRoot: process.env.AI_DEV_SKILLS_ROOT} : {})});
+  const snapshot = unpackPinnedSource({
+    source,
+    self: repositoryRoot,
+    ...(process.env.AI_DEV_SKILLS_ROOT ? { collectionsRoot: process.env.AI_DEV_SKILLS_ROOT } : {}),
+  });
   if (snapshot.kind !== "ready") throw new Error(snapshot.reason);
   try {
     const destination = path.join(root, options.destination ?? source.path);
-    mkdirSync(path.dirname(destination), {recursive: true});
+    mkdirSync(path.dirname(destination), { recursive: true });
     cpSync(path.join(snapshot.directory, source.path), destination);
-  } finally { snapshot.dispose(); }
+  } finally {
+    snapshot.dispose();
+  }
   return source;
 }
 
@@ -251,7 +333,10 @@ export function runRunner(
   key = "",
 ): Promise<RunnerResult> {
   const outputArgument = argumentsList.lastIndexOf("--out");
-  const output = outputArgument < 0 ? path.join(root, "reports") : path.resolve(root, argumentsList[outputArgument + 1] ?? "reports");
+  const output =
+    outputArgument < 0
+      ? path.join(root, "reports")
+      : path.resolve(root, argumentsList[outputArgument + 1] ?? "reports");
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
@@ -342,9 +427,13 @@ export type ScriptedChoice = string | { readonly label: string; readonly probabi
  * the script gives one, the rest shared evenly among the other labels.
  */
 export async function withJudge<TValue>(
-  probabilities: Readonly<Record<string, number>> | ((request: unknown) => Readonly<Record<string, number>>),
+  probabilities:
+    | Readonly<Record<string, number>>
+    | ((request: unknown) => Readonly<Record<string, number>>),
   action: (endpoint: string, requests: unknown[]) => Promise<TValue>,
-  choices: Readonly<Record<string, ScriptedChoice>> | ((request: unknown) => Readonly<Record<string, ScriptedChoice>>) = {},
+  choices:
+    | Readonly<Record<string, ScriptedChoice>>
+    | ((request: unknown) => Readonly<Record<string, ScriptedChoice>>) = {},
 ): Promise<TValue> {
   const requests: unknown[] = [];
   const questionSchema = z.discriminatedUnion("type", [
@@ -360,7 +449,8 @@ export async function withJudge<TValue>(
       for await (const chunk of request) body += String(chunk);
       const parsed = requestSchema.parse(JSON.parse(body));
       requests.push(parsed);
-      const currentProbabilities = typeof probabilities === "function" ? probabilities(parsed) : probabilities;
+      const currentProbabilities =
+        typeof probabilities === "function" ? probabilities(parsed) : probabilities;
       const currentChoices = typeof choices === "function" ? choices(parsed) : choices;
       const answers = Object.fromEntries(
         Object.entries(parsed.questions).map(([name, question]) => {

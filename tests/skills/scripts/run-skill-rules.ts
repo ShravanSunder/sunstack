@@ -17,6 +17,7 @@ import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
 import { loadConfiguredScenarios } from "../lib/skill-rules/scenario-run.ts";
 import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
 import { engineVersion, loadRuleStates } from "../lib/skill-rules/rule-state.ts";
+import { canonicalConfigDigest } from "../lib/skill-rules/adoption.ts";
 
 type RunScope =
   | { readonly kind: "full"; readonly paths: readonly string[] }
@@ -131,10 +132,28 @@ function runRules(): number {
     for (const kind of assembledKinds(check)) console.log(formatAssembledKind(kind));
   } else {
     const rawReport = lintReportSchema.parse(output);
-    const states = loadRuleStates(configPath, engineVersion(options.engine), filtersSupported(rawReport), repositoryRoot);
+    writeFileSync(
+      path.join(options.output, "canonical-inputs.json"),
+      JSON.stringify(
+        {
+          canonical_config_sha256: canonicalConfigDigest(configPath),
+          engine_version: engineVersion(options.engine),
+        },
+        null,
+        2,
+      ) + "\n",
+    );
+    const states = loadRuleStates(
+      configPath,
+      engineVersion(options.engine),
+      filtersSupported(rawReport),
+      repositoryRoot,
+    );
     const report = admittedReport(rawReport, states);
-    const denominators = loadRuleDenominators(configPath).filter((entry) => states[entry.rule]?.state === "nudging");
-    console.log(formatLintReport(report, denominators, {states, repository: repositoryRoot}));
+    const denominators = loadRuleDenominators(configPath).filter(
+      (entry) => states[entry.rule]?.state === "nudging",
+    );
+    console.log(formatLintReport(report, denominators, { states, repository: repositoryRoot }));
     const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
     const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
       cwd: repositoryRoot,

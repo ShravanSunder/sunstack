@@ -19,6 +19,19 @@ export const pieceDecisionSchema = z.object({
   path: z.array(z.string()),
   answers: z.record(z.string(), z.unknown()).optional(),
   cut: z.array(z.string()).optional(),
+  reason: z
+    .discriminatedUnion("kind", [
+      z.object({ kind: z.literal("route") }).strict(),
+      z
+        .object({
+          kind: z.literal("filter"),
+          filter: z.string(),
+          answer: z.string(),
+          probability: z.number(),
+        })
+        .strict(),
+    ])
+    .optional(),
 });
 export type PieceDecision = z.infer<typeof pieceDecisionSchema>;
 
@@ -41,10 +54,13 @@ const findingSchema = z
     basis: basisSchema,
     severity: z.enum(["error", "warn"]),
     message: z.string(),
-    judgment: z.object({
-      answers: z.record(z.string(), z.unknown()),
-      path_taken: z.array(z.string()),
-    }).passthrough().nullable(),
+    judgment: z
+      .object({
+        answers: z.record(z.string(), z.unknown()),
+        path_taken: z.array(z.string()),
+      })
+      .passthrough()
+      .nullable(),
     related: z.array(relatedPlaceSchema),
   })
   .passthrough();
@@ -101,15 +117,25 @@ const diagnosticSchema = z
     message: z.string(),
   })
   .passthrough();
-const filterAnswerBaseSchema = z.object({filter: z.string(), folder: z.string()});
+const filterAnswerBaseSchema = z.object({
+  filter: z.string(),
+  folder: z.string(),
+  input_cut: z.boolean(),
+});
 const filterChoiceSchema = filterAnswerBaseSchema.extend({
-  answer: z.string(), probability: z.number().min(0).max(1),
+  answer: z.string(),
+  probability: z.number().min(0).max(1),
   probabilities: z.record(z.string(), z.number().min(0).max(1)),
 });
 export const filterAnswerSchema = z.discriminatedUnion("state", [
-  filterChoiceSchema.extend({state: z.literal("judged")}).passthrough(),
-  filterChoiceSchema.extend({state: z.literal("unsure")}).passthrough(),
-  filterAnswerBaseSchema.extend({state: z.literal("incomplete"), reason: z.object({kind: z.string()}).passthrough()}).passthrough(),
+  filterChoiceSchema.extend({ state: z.literal("judged") }).passthrough(),
+  filterChoiceSchema.extend({ state: z.literal("unsure") }).passthrough(),
+  filterAnswerBaseSchema
+    .extend({
+      state: z.literal("incomplete"),
+      reason: z.object({ kind: z.string() }).passthrough(),
+    })
+    .passthrough(),
 ]);
 export type FilterAnswer = z.infer<typeof filterAnswerSchema>;
 export const lintReportSchema = z
@@ -163,7 +189,17 @@ export const lintReportSchema = z
     selections: z.array(selectionSchema),
     file_counts: z.array(fileCountSchema),
     filter_answers: z.array(filterAnswerSchema).optional(),
-    filter_skips: z.array(z.object({rule: z.string(), file: z.string(), why: z.enum(["no_folder", "unsure", "incomplete"])}).passthrough()).optional(),
+    filter_skips: z
+      .array(
+        z
+          .object({
+            rule: z.string(),
+            file: z.string(),
+            why: z.enum(["no_folder", "unsure", "incomplete"]),
+          })
+          .passthrough(),
+      )
+      .optional(),
   })
   .passthrough();
 export type LintReport = z.infer<typeof lintReportSchema>;
@@ -277,8 +313,8 @@ export interface ReportGaps {
   readonly cut: readonly CutGap[];
   readonly unresolved: readonly Selection[];
   readonly notRun: readonly string[];
-  readonly kindUnsure: readonly {folder: string; answers: Record<string, number>}[];
-  readonly noFolder: readonly {rule: string; file: string}[];
+  readonly kindUnsure: readonly { folder: string; answers: Record<string, number> }[];
+  readonly noFolder: readonly { rule: string; file: string }[];
 }
 
 /**
@@ -341,9 +377,20 @@ export function reportGaps(
     );
   }
   for (const item of report.skipped_rules) notRun.push(`Skipped rule: ${JSON.stringify(item)}`);
-  const kindUnsure = (report.filter_answers ?? []).filter((answer) => answer.state === "unsure").map((answer) => ({folder: answer.folder, answers: answer.probabilities}));
-  const noFolder = (report.filter_skips ?? []).filter((skip) => skip.why === "no_folder").map((skip) => ({rule: skip.rule, file: skip.file}));
-  return { unread: unreadGaps(report, denominators), cut, unresolved, notRun, kindUnsure, noFolder };
+  const kindUnsure = (report.filter_answers ?? [])
+    .filter((answer) => answer.state === "unsure")
+    .map((answer) => ({ folder: answer.folder, answers: answer.probabilities }));
+  const noFolder = (report.filter_skips ?? [])
+    .filter((skip) => skip.why === "no_folder")
+    .map((skip) => ({ rule: skip.rule, file: skip.file }));
+  return {
+    unread: unreadGaps(report, denominators),
+    cut,
+    unresolved,
+    notRun,
+    kindUnsure,
+    noFolder,
+  };
 }
 
 export function filtersSupported(report: LintReport): boolean {
@@ -351,9 +398,16 @@ export function filtersSupported(report: LintReport): boolean {
 }
 
 /** Retain the raw engine report separately; all agent-facing consumers share this admission. */
-export function admittedReport(report: LintReport, states: Readonly<Record<string, RuleState>>): LintReport {
+export function admittedReport(
+  report: LintReport,
+  states: Readonly<Record<string, RuleState>>,
+): LintReport {
   const allowed = (rule: string): boolean => states[rule]?.state === "nudging";
-  return {...report, findings: report.findings.filter((finding) => allowed(finding.rule)), results: report.results.filter((result) => allowed(result.name))};
+  return {
+    ...report,
+    findings: report.findings.filter((finding) => allowed(finding.rule)),
+    results: report.results.filter((result) => allowed(result.name)),
+  };
 }
 
 function answerSummary(answer: unknown): string {
@@ -380,7 +434,10 @@ function placeLines(first: number, last: number): string {
 export function formatLintReport(
   report: LintReport,
   denominators: readonly RuleDenominator[],
-  context: {readonly states?: Readonly<Record<string, RuleState>>; readonly repository?: string} = {},
+  context: {
+    readonly states?: Readonly<Record<string, RuleState>>;
+    readonly repository?: string;
+  } = {},
 ): string {
   const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };
   for (const result of report.results) outcomes[result.outcome]++;
@@ -393,7 +450,10 @@ export function formatLintReport(
     lines.push(`Selection ${kind}: ${JSON.stringify(total)}`);
   lines.push(`Usage: ${JSON.stringify(report.usage)}`);
   for (const [rule, state] of Object.entries(context.states ?? {})) {
-    if (state.state === "held") lines.push(`Held: ${rule}: ${state.lacks.map((reason) => JSON.stringify(reason)).join("; ")}`);
+    if (state.state === "held")
+      lines.push(
+        `Held: ${rule}: ${state.lacks.map((reason) => JSON.stringify(reason)).join("; ")}`,
+      );
     else if (state.state === "dropped") lines.push(`Dropped: ${rule}`);
   }
   // Each finding is a nudge: its line, how it was reached, and the places the run read to go to next.
@@ -406,18 +466,47 @@ export function formatLintReport(
       // Nested sections overlap in source range. Only a finding result can supply its cut state;
       // the closest starting span is its own section, rather than an enclosing result.
       const piece = report.results
-        .filter((result) => result.name === finding.rule && result.marker === finding.marker && result.file === finding.file && result.outcome === "finding" && result.first_line <= finding.line && result.last_line >= finding.line)
-        .sort((left, right) => right.first_line - left.first_line || left.last_line - right.last_line)[0];
+        .filter(
+          (result) =>
+            result.name === finding.rule &&
+            result.marker === finding.marker &&
+            result.file === finding.file &&
+            result.outcome === "finding" &&
+            result.first_line <= finding.line &&
+            result.last_line >= finding.line,
+        )
+        .sort(
+          (left, right) => right.first_line - left.first_line || left.last_line - right.last_line,
+        )[0];
       for (const standard of finding.related.filter((place) => place.label === "standard")) {
         let wording: string;
-        try { wording = readFileSync(path.resolve(context.repository ?? process.cwd(), standard.file), "utf8").split("\n").slice(standard.first_line - 1, standard.last_line).join("\n"); }
-        catch { wording = "unavailable (standard could not be read)"; }
+        try {
+          wording = readFileSync(
+            path.resolve(context.repository ?? process.cwd(), standard.file),
+            "utf8",
+          )
+            .split("\n")
+            .slice(standard.first_line - 1, standard.last_line)
+            .join("\n");
+        } catch {
+          wording = "unavailable (standard could not be read)";
+        }
         lines.push(`  why: ${standard.file}:${standard.first_line}: ${wording}`);
       }
-      lines.push(`  Answers: ${JSON.stringify(finding.judgment?.answers ?? piece?.answers ?? {})}`, `  Path: ${(finding.judgment?.path_taken ?? piece?.path ?? []).join(" → ")}`, `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`);
+      lines.push(
+        `  Answers: ${JSON.stringify(finding.judgment?.answers ?? piece?.answers ?? {})}`,
+        `  Path: ${(finding.judgment?.path_taken ?? piece?.path ?? []).join(" → ")}`,
+        `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`,
+      );
       for (const place of finding.related)
-        lines.push(`  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`);
-      for (const other of report.findings.filter((item) => item !== finding && item.rule === finding.rule && item.message === finding.message)) lines.push(`  same rule also nudged: ${other.file}:${other.line}`);
+        lines.push(
+          `  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`,
+        );
+      for (const other of report.findings.filter(
+        (item) =>
+          item !== finding && item.rule === finding.rule && item.message === finding.message,
+      ))
+        lines.push(`  same rule also nudged: ${other.file}:${other.line}`);
     }
   }
   for (const item of report.uncertain) {
@@ -428,7 +517,13 @@ export function formatLintReport(
     );
   }
   const gaps = reportGaps(report, denominators);
-  const gapCount = gaps.unread.length + gaps.cut.length + gaps.unresolved.length + gaps.notRun.length + gaps.kindUnsure.length + gaps.noFolder.length;
+  const gapCount =
+    gaps.unread.length +
+    gaps.cut.length +
+    gaps.unresolved.length +
+    gaps.notRun.length +
+    gaps.kindUnsure.length +
+    gaps.noFolder.length;
   lines.push(gapCount === 0 ? "Gaps: none" : `Gaps: ${gapCount}`);
   for (const gap of gaps.unread) lines.push(`unread: ${gap.rule} judged nothing in ${gap.file}`);
   for (const gap of gaps.cut)
@@ -440,7 +535,8 @@ export function formatLintReport(
     if (line) lines.push(`unresolved: ${line}`);
   }
   for (const line of gaps.notRun) lines.push(`not run: ${line}`);
-  for (const gap of gaps.kindUnsure) lines.push(`kind unsure: ${gap.folder}: ${JSON.stringify(gap.answers)}`);
+  for (const gap of gaps.kindUnsure)
+    lines.push(`kind unsure: ${gap.folder}: ${JSON.stringify(gap.answers)}`);
   for (const gap of gaps.noFolder) lines.push(`no folder: ${gap.rule} ${gap.file}`);
   // A file that was asked about and had nothing selected, with its separate counts. Only when every
   // candidate is not_selected did the model judge none to be that kind (as a numbered rule list
@@ -458,6 +554,12 @@ export function formatLintReport(
   const excluded = report.results.filter((result) => result.outcome === "not_applicable");
   lines.push(`Exclusions: ${excluded.length}`);
   for (const result of excluded) {
+    if (result.reason?.kind === "filter") {
+      lines.push(
+        `excluded: ${result.name} at ${result.file}:${placeLines(result.first_line, result.last_line)}, not applicable: ${result.reason.filter} ${result.reason.answer} (P ${result.reason.probability})`,
+      );
+      continue;
+    }
     const answer = result.step ? result.answers?.[result.step] : undefined;
     lines.push(
       `excluded: ${result.name} at ${result.file}:${placeLines(result.first_line, result.last_line)}, ${result.step ?? "no step"}${answer === undefined ? " (mechanical)" : ` answered ${answerSummary(answer)}`}`,
