@@ -114,7 +114,7 @@ const scenarioRecord = z.object({
   expect: z.enum(["must_fire", "must_pass", "not_applicable", "unknown"]),
   finding_lines: z.array(positiveLine).min(1).optional(), // required for must_fire, absent otherwise; a finding elsewhere is a wrong locator, reported apart
   kind: z.enum(["breach", "worth_reading", "regression_example"]), // kept as today
-  case_kind: z.enum(["real_mistake", "good", "near_miss", "unclassified"]),
+  scenario_kind: z.enum(["real_mistake", "good", "near_miss", "unclassified"]),
   status: z.enum(["active", "retired"]),   // retired: its rule was dropped; kept for history, never run, counts toward nothing
   retired_because: z.string().optional(),  // required when retired: the owner's drop, quoted
   set: z.enum(["development", "held_back"]),
@@ -131,9 +131,9 @@ const scenarioRecord = z.object({
 const scenarioFile = z.object({ rules: z.record(z.string(), ruleRecord), scenarios: z.array(scenarioRecord) });
 ```
 
-`unclassified` exists only for migrated expectations not yet adjudicated by the scenario mining; it counts toward no floor, and neither does `expect: unknown`. `legacy_independent` keeps an old label's history as it was (some were blind labels that agreed, some were settled by an independent agent after the labellers disagreed); it counts toward no floor until the scenario is labelled again under R19. `expect`, `kind`, the selector and the finding lines keep today's meaning; `case_kind` is new and separate (a good text and a near miss are both `must_pass`).
+`unclassified` exists only for migrated expectations not yet adjudicated by the scenario mining; it counts toward no floor, and neither does `expect: unknown`. `legacy_independent` keeps an old label's history as it was (some were blind labels that agreed, some were settled by an independent agent after the labellers disagreed); it counts toward no floor until the scenario is labelled again under R19. `expect`, `kind`, the selector and the finding lines keep today's meaning; `scenario_kind` is new and separate (a good text and a near miss are both `must_pass`).
 
-**Migration, one format, no compatibility reader.** Each old expectation becomes one scenario with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: legacy_independent`, `label.state: labelled`, keeping `who` (blind labellers, and any independent settler) and the original note word for word; `case_kind: unclassified`; `set: development` for every one, since all current scenarios are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
+**Migration, one format, no compatibility reader.** Each old expectation becomes one scenario with the same `id`, `rule`, `source` (with its `context`), `expect` and `kind`; `piece_first_line`/`field_line` → `select`; `lines` → `finding_lines`; `basis` → `label.note`; `decided_by.who` → `label.who`; `decided_by.how: independent` → `label.basis: legacy_independent`, `label.state: labelled`, keeping `who` (blind labellers, and any independent settler) and the original note word for word; `scenario_kind: unclassified`; `set: development` for every one, since all current scenarios are exposed regression material; `added` kept. The migration is checked by comparing every old entry with its new one (Verification Design, OD).
 
 **Rule names in the migration.** A migrated scenario keeps its identity, labels, sources and expected behavior; its `rule` is translated by this map, the one place old names live. Scenario runs, receipts and reports use only current names.
 
@@ -169,7 +169,7 @@ tests/skills/evals/rule-scenarios/
 tests/skills/tmp/scenario-runs/<UTC time>/      run results (git-ignored): report.json, raw/
 ```
 
-**A scenario run** is `pnpm --dir tests/skills evals:scenarios [rule…]`: keyed (the Lead runs it through the key wrapper), it runs the named rules' scenarios through the real engine and Jev and writes `report.json` and every request and response under `tests/skills/tmp/scenario-runs/<UTC time>/`. Nothing it writes is committed. `pnpm test` stays keyless.
+**A scenario run** is `pnpm --dir tests/skills evals:scenarios [rule…]`: keyed (the Lead runs it through the key wrapper), it runs the named rules' scenarios through the real engine and Jev and writes `report.json` plus `raw/` (each engine JSON report with what Jev was shown and answered, stderr and the config used; engine 0.6.0 exposes no provider wire capture, so exact HTTP envelopes are not kept) under `tests/skills/tmp/scenario-runs/<UTC time>/`. Nothing it writes is committed. `pnpm test` stays keyless.
 
 **The adoption file** records the owner's decision, not a generated result:
 
