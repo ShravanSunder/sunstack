@@ -46,9 +46,15 @@ You chose description only at 70%. The description-only numbers you saw used the
 
 So the Jev Advisor runs description only with the round-2 criteria on the same 78 skills (round 3, commissioned 5 Nov). The shipped criteria are whichever of the two makes zero wrong gate decisions and leaves the fewest of this rule's scenarios skipped. If both leave scenarios skipped, that is a decision for you (better descriptions on those skills, or reading the opening too, which is an engine change), brought as a decision page, not a lowered bar or a per-skill override.
 
+**Result (round 3, 5 Nov):** zero wrong gate decisions, 7 of the rule's 31 scenarios skipped (9 with the round-1 wording), so your wording ships. The 7 come from three skills whose descriptions don't say what they're for (`peekaboo`, `domain-decision-models`) or whose meaning is still open with you (`practices-verification-maintenance`): [your decision](../../d3-kind-skips-decision.html).
+
+## The rule's trust evidence
+
+Adopting the rule isn't enough on its own: a judged rule also needs a named reason, at least 3 real mistakes, 3 good texts and 3 near misses labelled by two independent agents, a held-back set frozen before its bars are tuned, and bars tuned from the development set (R18–R21). Its 31 old scenarios carry one settler's labels and no kind, so none count yet. This deliverable mines real scenarios from skill text, labels them blind, freezes a held-back set and tunes the bars.
+
 ## How we'll know it works
 
-- The scenario run reports all 31 rule scenarios caught, none unsure, and the kind section has zero wrong gate decisions.
+- The scenario run reports every rule scenario caught (the 31 old ones, re-labelled, and the mined ones), none unsure, and the kind section has zero wrong gate decisions.
 - You adopt the rule with `evals:adopt`; it then nudges in a normal `pnpm --dir tests/skills rules` run at `ops-observability-stack/SKILL.md` line 17, and the AgentStudio skill shows "not applicable: kind tool_manual".
 - An unsure folder is listed with Jev's answers and the run exits 5; nothing passes silently.
 - Changing one word of the filter's criteria holds the adopted rule.

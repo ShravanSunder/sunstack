@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 3: the skipped scenarios</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="d3-kind-skips-decision.html">Step 3: skipped scenarios</a>
+    <a href="d3-design.html">3 · One rule end to end: design</a>
+    <a href="kind-filter-round-2.html">Kind filter round 2</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Step 3: three skills Jev can't place from their descriptions</h1>
+<p>5 Nov. One decision for you; nothing else in step 3 waits on it except your final adoption of the rule.</p>
+
+<ex-callout title="The answer, in short" tone="question" icon="chat-circle">
+<p>The product-workflow rule has 31 real scenarios. With your filter (description only, 70%), Jev is unsure about the folders behind <strong>7 of them</strong>, so the rule skips them, and a skipped scenario can't pass, so you couldn't adopt the rule. No input we measured gets all 31 through. <strong>Proposed:</strong> fix two skills' descriptions so they say what the skill is for, and let the third wait on your open question about repo_specific.</p>
+</ex-callout>
+
+<h2 id="data">What was measured</h2>
+<p>Round 3 ran your exact filter: description only, with your <code>gh</code> wording in the criteria, 79 Jev calls, $0.003. It makes <strong>zero wrong gate decisions</strong>, the same as every round. What differs is how many of this rule's scenarios land in a folder Jev is unsure about:</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Filter</th><th>Rule scenarios skipped</th><th>Which folders</th></tr></thead>
+<tbody>
+<tr><td>Description, old wording (round 1)</td><td>9 of 31</td><td>peekaboo, domain-typescript, implementation-pr-wrapup, practices-verification-maintenance</td></tr>
+<tr><td><strong>Description, your <code>gh</code> wording (round 3, shipping)</strong></td><td><strong>7 of 31</strong></td><td>peekaboo (0.55), domain-decision-models (0.58), practices-verification-maintenance (0.63)</td></tr>
+<tr><td>Description + opening (round 2)</td><td>3 of 31</td><td>domain-decision-models, practices-verification-maintenance, presentation-tui</td></tr>
+</tbody>
+</table>
+</div>
+<p>So I'm shipping your wording. The 7 skips come from three skills.</p>
+
+<h2 id="why">Why Jev is unsure: the descriptions</h2>
+<ul>
+<li><code>peekaboo</code>: "Use when testing, inspecting, or automating native macOS UI with Peekaboo, or its Screen Recording or Accessibility permissions…". The skill is a manual for one tool, but the description reads like a testing workflow, so Jev splits between general and tool manual. It holds 5 of the 7: scenarios that check the rule stays quiet on Peekaboo's own commands.</li>
+<li><code>domain-decision-models</code>: "Use when designing, changing or reviewing a decision model…". The skill holds the standards for decision models, but the description lists tasks, so Jev reads it as a workflow. 1 scenario.</li>
+<li><code>practices-verification-maintenance</code>: you labelled it repo_specific, and its meaning is still open with you (question 3 on the round-2 page). 1 scenario.</li>
+</ul>
+
+<h2 id="choice">What should step 3 do?</h2>
+<ex-choice id="kind-skips" title="The 7 skipped scenarios:">
+  <ex-option id="fix-descriptions" title="**Fix the two descriptions; the third waits on your question 3** (recommended)">
+    <template slot="summary">
+I write a description for `peekaboo` and `domain-decision-models` that says what each is for (for example "Use when operating the Peekaboo CLI…"), check it with one Jev run (about $0.0001) and the description rules, and show you both lines before they ship. 6 of the 7 then reach the rule. The one `practices-verification-maintenance` scenario stays out until you answer question 3. Cost: two small edits in other plugins (`dev-workflow-tools`, `sunstack-dev`) plus version bumps. Risk: writing for Jev rather than the reader; the check is that each line is true of the skill.
+    </template>
+  </ex-option>
+  <ex-option id="read-opening" title="Also read the skill's opening (engine change)">
+    <template slot="summary">
+The filter reads the description plus the first 1,800 characters: 3 skipped instead of 7. Needs sunstack 0.7.1 (the filter reads two fields) and still leaves `domain-decision-models` and `practices-verification-maintenance` unsure, so the description fixes are needed anyway.
+    </template>
+  </ex-option>
+  <ex-option id="allow-skips" title="Let adoption accept skipped scenarios, listed">
+    <template slot="summary">
+No edits. But the 5 Peekaboo scenarios would prove nothing, and every agent run would list Peekaboo as skipped. This weakens the rule's proof; I don't recommend it.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="moving">Moving meanwhile</h2>
+<p>Not a decision, so it goes ahead: the rule's trust evidence. Its 31 scenarios are old single-settler labels with no kind (real mistake, good text, near miss), so none of them count toward the rule's floor or held-back set. Real scenarios are being mined from skill text, labelled blind by two agents, a held-back set is frozen, and the bars are tuned from them. The kind scenarios, the adoption check and the gate are being built now.</p>
+
+<h2 id="limits">Not proven</h2>
+<ul>
+<li><code>domain-typescript</code> settles at exactly 0.70: one small change in Jev could tip it to unsure.</li>
+<li>Every result here is a direct Jev call shaped like the engine's request, run on 0.6.0's <code>exec</code>; the real filter on 0.7.0 is observed in step 3's scenario run.</li>
+<li>16 of the 78 skills are unsure overall; outside this rule's scenarios they're listed on every run until their descriptions improve (step 3b).</li>
+</ul>
+<p>Data: <code>memory-logs/…/jev-advisor/kind-experiment-2026-11-04/round-3-per-scenario-results.csv</code> and <code>round-3-analysis.json</code>; the Advisor's report follows.</p>
+</ex-document>
+</body>
+</html>
