@@ -1,0 +1,209 @@
+{
+ "rules": {},
+ "scenarios": [
+  {
+   "id": "k002-mined-007",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/role-lead/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 35
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "good",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/good (\"The passage states the Lead's role without naming a product workflow.\"); b no/good (\"“You author the design and the plan” states a role boundary without a product-specific workflow.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  },
+  {
+   "id": "k002-mined-008",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/domain-code-standards/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 71
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "good",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/good (\"The passage describes test form without a product-specific workflow or tool.\"); b no/good (\"“the change's own modules” and language-level test form describe a general completion condition.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  },
+  {
+   "id": "k002-mined-009",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/practices-research/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 10
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "good",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/good (\"The boundaries describe research practice without routing into a product workflow.\"); b no/good (\"“Start with current local code and docs” is a general research boundary without a product workflow.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  },
+  {
+   "id": "k002-mined-010",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 92
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "near_miss",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/near_miss (\"It names Python's standard toolchain commands, which are subject tools rather than a product's own workflow.\"); b no/near_miss (\"“uv run pytest” and the adjacent commands are generic Python tooling.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  },
+  {
+   "id": "k002-mined-011",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 15
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "near_miss",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/near_miss (\"It names Rust's standard cargo toolchain commands, which are subject tools.\"); b no/near_miss (\"“cargo fmt” and the other commands are generic Rust tooling.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  },
+  {
+   "id": "k002-mined-012",
+   "rule": "general-skill.overfits-to-product-workflow",
+   "source": {
+    "repository": "self",
+    "commit": "24fa3d925927278100aced2e7c4e26eb0be81fba",
+    "path": "plugins/sunstack-dev/skills/domain-swift/SKILL.md",
+    "context": [
+     "plugins"
+    ]
+   },
+   "select": {
+    "piece_first_line": 59
+   },
+   "expect": "must_pass",
+   "kind": "worth_reading",
+   "scenario_kind": "near_miss",
+   "status": "active",
+   "label": {
+    "basis": "agents_agreed",
+    "state": "labelled",
+    "who": [
+     "Luna labeller a, codex-local/01a1ac6c-3deb (blind)",
+     "Luna labeller b, codex-local/01a1ac6c-3f33 (blind)"
+    ],
+    "note": "Blind labels 5 Nov: a no/near_miss (\"It names Swift's standard build, test, lint, and format tools, which are subject tools.\"); b no/near_miss (\"“swift build” and the other commands are generic Swift tooling used when the repository defines none.\"). Mined by the Researcher (codex-local/01a1ac2a), real text, pin checked."
+   },
+   "added": "2026-11-05",
+   "set": "held_back",
+   "frozen": {
+    "commit": "6a7ae1342c99ceea3552a78beb996fb02b4e95b8",
+    "date": "2026-11-05"
+   }
+  }
+ ]
+}
