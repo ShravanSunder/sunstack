@@ -6,5 +6,6 @@
 - Held-back companion files have no rule record. Non-adopting `--set development` / `--set held_back` runs expose only the other set's unrun count, including on validation failure, and skip the kind corpus.
 - Development trust data retains 31 original source identities, adds 9 pinned examples and preserves 5 disputes; reasons cite K002/U16, and bars remain starting before tuning.
 - Scenario runs keep supplemental semantic gaps visible while declared pieces and global native/coverage errors remain strict. Larger evidence/request/locator budgets keep the long catalogue uncut; wrong locators fail the command. Ordinary lint is unchanged.
+- The product-workflow question distinguishes concrete worked/quoted application procedures from supported tool interfaces; semantic quality still requires the separate development and held-back gates.
 - Scenario outcomes follow the owner-directed kind gate and admitted development labels. Rule config, harness commands/schemas/scripts/tests, tests README, all plugin manifests and Claude/Cursor marketplace versions are updated together; Codex marketplace availability is unchanged.
 - [Proof and limits](references/2026-11-05-kind-gated-scenarios.md) separates native/mechanical checks from model quality and final owner adoption. Codex/Claude/Cursor installed caches were not refreshed.
