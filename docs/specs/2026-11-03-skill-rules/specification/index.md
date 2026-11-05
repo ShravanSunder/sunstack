@@ -4,7 +4,7 @@
 
 ## The contract in one line
 
-Every rule names the real mistake or written standard it exists for, judges only the kinds of skills its standard is about, reads the text that standard is about, passes real cases before it nudges anyone, and gives the agent a nudge with where, what, why, where else to read and what it couldn't see. The agent reads those places and decides.
+Every rule names the real mistake or written standard it exists for, judges only the kinds of skills its standard is about, reads the text that standard is about, passes real scenarios before it nudges anyone, and gives the agent a nudge with where, what, why, where else to read and what it couldn't see. The agent reads those places and decides.
 
 ## Capabilities and their obligations
 
@@ -20,8 +20,8 @@ flowchart LR
 
 - **rule-making** ([chunk](rule-making.md)): R1 a nudging rule names its reason · R2 the rule set matches the owner's decisions · R3 behavior-only mistakes are listed · R4 rule files get nudges · R5 the engine knows nothing about skills
 - **nudges** ([chunk](nudges.md)): R6 a nudge carries its parts · R7 a nudge may point without deciding · R8 gaps apart from exclusions · R9 a nudge never fails a run · R10 a pass says one property held · R11 every nudge gets a disposition · R12 each skill teaches its part
-- **skill-kinds** ([chunk](skill-kinds.md)): R13 one kind judgment per skill · R14 a rule judges only its declared kinds · R15 an unsure kind skips and is listed · R16 description rules judge every skill · R17 the general-skill rules' answer in each case
-- **rule-tests** ([chunk](rule-tests.md)): R18 a judged rule nudges only after its floor · R19 labels say where they came from · R20 bars tuned per rule · R21 cases are real skill text
+- **skill-kinds** ([chunk](skill-kinds.md)): R13 one kind judgment per skill · R14 a rule judges only its declared kinds · R15 an unsure kind skips and is listed · R16 description rules judge every skill · R17 the general-skill rules' answer in each scenario
+- **rule-tests** ([chunk](rule-tests.md)): R18 a judged rule nudges only after its floor · R19 labels say where they came from · R20 bars tuned per rule · R21 scenarios are real skill text
 - **what-rules-read** ([chunk](what-rules-read.md)): R22 a rule declares its chunk and edges · R23 generalization and the general-skill rules read every section · R24 a rule's chunk is the size of its standard
 
 Entities for every capability: [entities.md](entities.md), E1–E13.
@@ -32,9 +32,9 @@ Entities for every capability: [entities.md](entities.md), E1–E13.
 flowchart LR
   owner([owner]) -->|"decides rules; reads results that reach him"| sys[[skill rules]]
   writer([writer, review lead, Lead]) -->|"run rules; read nudges; record dispositions"| sys
-  rulewriter([rule's writer and reviewer]) -->|"read rule entries and case sets"| sys
+  rulewriter([rule's writer and reviewer]) -->|"read rule entries and scenario sets"| sys
   sys -->|"C2 run report · C6 what the rule read"| writer
-  sys -->|"C1 rule entry · C5 case set"| rulewriter
+  sys -->|"C1 rule entry · C5 scenario set"| rulewriter
   sys -->|"C1, C5, behavior-test candidate list"| owner
 ```
 

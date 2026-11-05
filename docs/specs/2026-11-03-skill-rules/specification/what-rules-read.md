@@ -44,4 +44,4 @@ For any result, the agent can see the chunk's subject span, each followed span, 
 | --- | --- | --- | --- |
 | V22 | R22 | every rule declares all four; every report shows collected and seen apart | the rule files; a run's report |
 | V23 | R23 | `practices-cleanup/SKILL.md:40` (a table row) and `ops-observability-stack/SKILL.md:17` (a load) are both read; no section of a general skill is outside every chunk | the 1 Nov run's two right nudges; a per-section coverage count |
-| V24 | R24 | `skill-branch.names-an-observable-condition`'s real 30 Oct wrong nudges caused by what it read are quiet after the fix, and a real case of an `IF` naming nothing still fires | the 30 Oct dispositions (`step5/dispositions.md`); D35 |
+| V24 | R24 | `skill-branch.names-an-observable-condition`'s real 30 Oct wrong nudges caused by what it read are quiet after the fix, and a real scenario of an `IF` naming nothing still fires | the 30 Oct dispositions (`step5/dispositions.md`); D35 |

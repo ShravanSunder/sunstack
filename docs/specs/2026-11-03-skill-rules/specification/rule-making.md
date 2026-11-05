@@ -44,7 +44,7 @@ The engine changes this design needs add no skill-specific word, kind, or path. 
 
 `kind: contract · capability: rule-making · links: R1, R2, R13, R18, R19, R22 · status: authorized`
 
-Opening any rule shows, without running it: its name and state; the mistake(s) or written standard it exists for, with locators; its standard's marker; the kinds it judges; the chunk and edges it reads; where its cases are and how many of each kind; and each decision step's bars with the cases that set them. A held rule also shows what it lacks.
+Opening any rule shows, without running it: its name and state; the mistake(s) or written standard it exists for, with locators; its standard's marker; the kinds it judges; the chunk and edges it reads; where its scenarios are and how many of each kind; and each decision step's bars with the scenarios that set them. A held rule also shows what it lacks.
 
 ### Proof obligations
 

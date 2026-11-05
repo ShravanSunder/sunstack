@@ -35,9 +35,9 @@ The owner confirmed these five on 3 Nov ("your recommendatiosn are moslty good",
   - [U15](skill-kinds.md#u15-description-standards-apply-to-every-skill) description standards apply to every skill
   - [U16](skill-kinds.md#u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak) the general-skill rules judge general skills only, and knows an example from a leak
 - **rule-tests** — a rule earns its nudges by passing real tests; its bars come from them. [rule-tests.md](rule-tests.md)
-  - [U17](rule-tests.md#u17-real-cases-come-before-any-nudge) real cases come before any nudge
+  - [U17](rule-tests.md#u17-real-scenarios-come-before-any-nudge) real scenarios come before any nudge
   - [U18](rule-tests.md#u18-each-rule-sets-its-own-bars) each rule's bars are its own
-  - [U19](rule-tests.md#u19-cases-are-real-skill-text-never-made-up) cases are real skill text, never made up
+  - [U19](rule-tests.md#u19-scenarios-are-real-skill-text-never-made-up) scenarios are real skill text, never made up
 - **what-rules-read** — a rule reads enough text to judge its standard. [what-rules-read.md](what-rules-read.md)
   - [U20](what-rules-read.md#u20-a-rule-names-its-chunk-and-its-edges) a rule names its chunk and its edges
   - [U21](what-rules-read.md#u21-generalization-and-the-general-skill-rules-leave-nothing-unread) generalization and the general-skill rules leave nothing unread
@@ -72,19 +72,19 @@ Rules and their tests come from the owner's real corrections, as he asked on 3 N
 | not using the commissioned role or skill | 4 | no | U12 |
 | the owner's code standards not stated or followed | 4 | partly | U12 |
 | asking the owner to decide before explaining the rule | 3 | partly | U7 |
-| product details in general skills | 3 | yes | U16: the general-skill rules' real cases |
+| product details in general skills | 3 | yes | U16: the general-skill rules' real scenarios |
 
 <details>
 <summary>Coverage limits of the inventory</summary>
 
-Raw Claude history starts 12 Sep and Codex 23 Sep, so August has no raw owner records. The structural rules (loading-moment, trigger-only, always-earned, call completeness, branch condition, spine, completion) have no owner complaint in it; their real cases come from the git history of skill fixes, mined separately (`~/dev/memory-logs/skills/authoring/2026-11-03-rule-case-mining/`). The Advisor's 12 automation scenarios and the October 37-case catalogue are replay candidates, not verified mistakes.
+Raw Claude history starts 12 Sep and Codex 23 Sep, so August has no raw owner records. The structural rules (loading-moment, trigger-only, always-earned, call completeness, branch condition, spine, completion) have no owner complaint in it; their real scenarios come from the git history of skill fixes, mined separately (`~/dev/memory-logs/skills/authoring/2026-11-03-rule-scenario-mining/`). The Advisor's 12 automation scenarios and the October 37-scenario catalogue are replay candidates, not verified mistakes.
 
 </details>
 
 ## Open meaning
 
 1. **Settled (owner, 4 Nov (reviews 08411599 and a42f545e)):** one general-skill family with three checks, `general-skill.overfits-to-product-workflow` (sections), `general-skill.description-overfits-to-one-product` (descriptions) and `general-skill.taught-rule-overfits-to-one-project` (taught rules); every one judges only skills whose work is for any repository. Rule names follow the owner's standard: a namespace of 2–3 words and a rule name of 3–8 words.
-2. **The structural rules' real cases.** Mining is in flight; a rule without enough real cases stays held (U17).
+2. **The structural rules' real scenarios.** Mining is in flight; a rule without enough real scenarios stays held (U17).
 3. **Settled (owner, 4 Nov (reviews 08411599 and a42f545e), decision 5 "In this change"):** the runner's made-up sample skills (`tests/skills/fixtures/run-skill-rules/`) are replaced with Git-pinned real skills in this change.
 
 ## Where the old rows went

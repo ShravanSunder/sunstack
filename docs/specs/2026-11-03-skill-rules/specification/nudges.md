@@ -50,7 +50,7 @@ An agent that acts on a nudge records a disposition (fixed, kept with reason, ro
 
 `kind: obligation · capability: nudges · also serves: rule-making · links: U7, V12 · status: authorized`
 
-`skill-rules`, the rule-running reference, `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit` and `decision-model-review` each teach their part with a worked example (#187's line among them) and a completion check that names what must be true. When an agent brings a rule decision to the owner, it first shows the rule's behavior on one simple and one harder real case.
+`skill-rules`, the rule-running reference, `skill-creation`, `skill-review`, `skill-orchestrator`, `skill-audit` and `decision-model-review` each teach their part with a worked example (#187's line among them) and a completion check that names what must be true. When an agent brings a rule decision to the owner, it first shows the rule's behavior on one simple and one harder real scenario.
 
 ### C2: The run report
 
@@ -68,9 +68,9 @@ Wherever an agent reports its work on skill text (a self-check, a review, a Lead
 
 | V | For | What decides pass and fail | Reference |
 | --- | --- | --- | --- |
-| V6 | R6 | on `ops-observability-stack/SKILL.md:17` at a pinned commit, the nudge shows every part, with `agentstudio-loop.md` as a read place and AgentStudio's repository as a pointer, never a link | revision 1's anchor case |
+| V6 | R6 | on `ops-observability-stack/SKILL.md:17` at a pinned commit, the nudge shows every part, with `agentstudio-loop.md` as a read place and AgentStudio's repository as a pointer, never a link | revision 1's anchor scenario |
 | V7 | R7 | a point-only rule's messages never state a breach | each such rule's routes |
-| V8 | R8 | a run where a rule reads nothing in an in-scope file lists that gap; a gate exclusion appears with its answer, not as a gap | revision 1's silent-coverage case (`ops-observability-stack`, 0 pieces read) |
+| V8 | R8 | a run where a rule reads nothing in an in-scope file lists that gap; a gate exclusion appears with its answer, not as a gap | revision 1's silent-coverage scenario (`ops-observability-stack`, 0 pieces read) |
 | V9 | R9 | warn-only run exits clean; uncertain run exits with its own status; no judged path is `error` | engine exit statuses; the rule files |
 | V10 | R10 | no teaching skill reads a pass as meeting the standard | the skills' text |
 | V11 | R11 | a fix that only makes the property hold is not recorded `fixed` without the broader answer | the skills' teaching; #187's chain as the failing example |

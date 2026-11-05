@@ -23,7 +23,7 @@ A model reads each skill's description once and answers what the work is for, as
 
 `kind: requirement · capability: skill-kinds · also serves: nudges · status: authorized`
 
-When the model isn't sure of a skill's kind, rules that need the kind skip that skill, and the run lists it among the gaps (U3) with the model's answer. The rule-tests' kind cases catch a filter that is often unsure, and each unsure answer is logged.
+When the model isn't sure of a skill's kind, rules that need the kind skip that skill, and the run lists it among the gaps (U3) with the model's answer. The rule-tests' kind scenarios catch a filter that is often unsure, and each unsure answer is logged.
 
 <details>
 <summary>Authority</summary>
@@ -49,9 +49,9 @@ Owner, 2 Nov review of `rules-spec-2026-11-02.html`: picked "Yes, all of them, a
 
 `kind: requirement · capability: skill-kinds · also serves: rule-making, what-rules-read · status: authorized, except where marked`
 
-Product-leak (the renamed placement rule) judges skills of kind general, role or domain. It nudges when a general skill sends agents into one product's own commands, files or paths, because that work belongs in the product's repository. Every case the owner has seen, and his answer:
+Product-leak (the renamed placement rule) judges skills of kind general, role or domain. It nudges when a general skill sends agents into one product's own commands, files or paths, because that work belongs in the product's repository. Every scenario the owner has seen, and his answer:
 
-| # | Case | Real case | Answer |
+| # | Scenario | Real scenario | Answer |
 | --- | --- | --- | --- |
 | 1 | a general skill tells the agent to run one product's own command | `practices-cleanup` line 40 | nudge |
 | 2 | a general skill loads a file that is one product's own workflow | `ops-observability-stack` line 17 | nudge |
@@ -64,11 +64,11 @@ Product-leak (the renamed placement rule) judges skills of kind general, role or
 | 9 | a worked example of an ordinary command | `practices-cleanup` line 70 | quiet |
 | 10 | a product's own skill talking about its own product | the AgentStudio skill; Peekaboo | not judged (U13) |
 | 11 | a general skill's description naming products as its users | `ops-observability-stack`'s description | **nudge** (owner: "move product names out if its a generic skill") |
-| 12 | a product's own skill sending agents into another product's workflow | none found | wait for a real case |
+| 12 | a product's own skill sending agents into another product's workflow | none found | wait for a real scenario |
 
 The line between rows 3 and 4 is whether the text labels the product as an example: only a labelled example stays quiet (owner, 4 Nov (review 00facfd0 of the design page), decision 3).
 
-Its tests draw their quiet cases from general skills (rows 3, 6–9), as the owner asked: "lets find good negative exmapels in general skilsl".
+Its tests draw their quiet scenarios from general skills (rows 3, 6–9), as the owner asked: "lets find good negative exmapels in general skilsl".
 
 <details>
 <summary>Authority and evidence</summary>

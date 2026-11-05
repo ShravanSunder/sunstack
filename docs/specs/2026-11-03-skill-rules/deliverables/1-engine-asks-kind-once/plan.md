@@ -20,7 +20,7 @@ flowchart LR
 | 3 · Files matched to folders | every checked file is matched to its folder; the `reads` file is read even when only a reference file is checked | a run over one reference file still reads its skill's description | step 2 |
 | 4 · Ask once, then gate | the question is asked once per folder; each gated rule checks the answer before its first step | one question per folder; a rule whose answer isn't named never starts; unsure is skipped | step 3 |
 | 5 · Report and exit status | answers, skips and reasons appear in the report; an unsure answer exits 5, a failed one exits 3 | the exit codes and report on a real run | step 4 |
-| 6 · Verify and release | the verification journey gains this case; changelog; release 0.7.0 | the journey passes on the release build; nothing skill-specific added | step 5 |
+| 6 · Verify and release | the verification journey gains this scenario; changelog; release 0.7.0 | the journey passes on the release build; nothing skill-specific added | step 5 |
 
 One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 starts using it after the release.
 
@@ -41,7 +41,7 @@ One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 star
 - **Writes:** `sunstack-lint/src/configuration_loading/config_contracts.rs` (`filters`), `config_validation.rs`; `sunstack-rules/src/rulebook_planning/rulebook_entry_wire.rs` (`only_when`), `rulebook_admission.rs` (filter registry input), `rule_definitions/strict_decoding.rs` (safe fields); new `filters/filter_plan.rs`.
 - **Earns:** engine V6 (OC) by `cargo nextest run -p sunstack-rules -p sunstack-lint` plus `sunstack lint --check` on each refusal fixture.
 - **Focused proof:** the documented positive config (the `kind` filter exactly as D1's design shows it, `instructions` plus five criteria) is admitted by the native Choice decoder; each R6 refusal with its field path, including a top-level `task` and a malformed inline rule reported at its own `inline_rule` path; a `reads.field` named `folder` keeps both values in the request; wrong behavior: a `per` with `**` or two captures, an `only_when` with two filters, an unknown filter or answer, accepted silently. Oracle: engine R6.
-- **Existing tests:** keep all admission tests; add cases beside them.
+- **Existing tests:** keep all admission tests; add scenarios beside them.
 - **Stop:** an admission need that changes `AdmissionRefusal`'s shape.
 
 ### E2 · Filter folders and context files (vertical)
@@ -58,7 +58,7 @@ One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 star
 - **Writes:** new `sunstack-rules/src/filters/filter_run.rs`; `rulebook_planning/rulebook_run.rs` (`gate_for` before the first walk; skip collector keyed by rule, file, filter); `decision_walking.rs` (`NotApplicableReason`, `basis()` exception only).
 - **Earns:** engine V1, V3, V4, V5 (OA) by `cargo nextest run -p sunstack-rules` (integration `filters.rs` with `ControlledServer`).
 - **Focused proof:** one question per folder and filter (two runs in one process ask twice); answer not named → not_applicable, basis judged, no walk (test-only walk counter); selected answer {A: 0.3, B: 0.7} at 0.7 is unsure, exactly 0.7 is judged; one skip per rule and file. Wrong behaviors: per-piece questions, cached answers, walk-then-discard, B substituted. Oracle: engine R1, R3, R4 and E3.
-- **Existing tests:** keep `decision_walking_test`; add the ungated choice→not_applicable basis case (must stay judged).
+- **Existing tests:** keep `decision_walking_test`; add the ungated choice→not_applicable basis scenario (must stay judged).
 - **Stop:** the dispatcher needs a second backend (contradicts decision 8).
 
 ### E4 · Report, status, schema and activation (vertical)
@@ -72,7 +72,7 @@ One pull request; I merge and release it (your 30 Oct grant). Deliverable 3 star
 ### E5 · Verify journey, changelog, release 0.7.0 (integration)
 
 - **Reads:** engine Verification Design OD, OE; `.agents/skills/verify-sunstack-rule/`.
-- **Writes:** `scripts/verify/sunstack-rule/rulebook/rulebook-lint.ts` (a `filters` case, one kind using `inline_rule`), CHANGELOG, version 0.7.0.
+- **Writes:** `scripts/verify/sunstack-rule/rulebook/rulebook-lint.ts` (a `filters` scenario, one kind using `inline_rule`), CHANGELOG, version 0.7.0.
 - **Earns:** engine V5 (existing journeys unchanged with filters declared), V7 (OE: no skill word added) by the verify-sunstack-rule journey on the release candidate and a diff read.
 - **Gate:** clippy, fmt, nextest, signing (Developer ID per the release rule); the engine PR merged; release published. The Lead accepts.
 

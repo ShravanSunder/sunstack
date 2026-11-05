@@ -4,7 +4,7 @@
 
 A rule is a nudge to whichever agent runs it. It doesn't decide for that agent. It says where it looked, what it noticed, which standard makes that a concern, how sure it is, where else to read, and what it couldn't see. The agent reads those places and makes the broader call.
 
-**The anchor case.** On `ops-observability-stack/SKILL.md:17`, a rule run gives the agent a nudge: the line routes into AgentStudio's own debug loop, and the file it loads (`references/agentstudio-loop.md`) is that product's loop. The standard that makes this a concern is the general-skill standard, quoted with its line. Read next: the loaded file, and any other place where the same rule gave the same nudge. Where AgentStudio's workflow should live is a pointer to investigate, not a place the rule read.
+**The anchor scenario.** On `ops-observability-stack/SKILL.md:17`, a rule run gives the agent a nudge: the line routes into AgentStudio's own debug loop, and the file it loads (`references/agentstudio-loop.md`) is that product's loop. The standard that makes this a concern is the general-skill standard, quoted with its line. Read next: the loaded file, and any other place where the same rule gave the same nudge. Where AgentStudio's workflow should live is a pointer to investigate, not a place the rule read.
 
 | Agent | When it runs the rules | Which skill teaches it |
 | --- | --- | --- |
@@ -56,7 +56,7 @@ An agent acting on a nudge reads its places, decides the broader question, and r
 
 `kind: requirement · capability: nudges · also serves: rule-making · status: authorized · was: R10`
 
-Every skill in the change teaches its own part with a worked example (#187's line among them) and a completion check an agent can follow without this design's history. When a rule question goes to the owner, the agent explains the rule's real behavior on one simple and one harder real case before asking.
+Every skill in the change teaches its own part with a worked example (#187's line among them) and a completion check an agent can follow without this design's history. When a rule question goes to the owner, the agent explains the rule's real behavior on one simple and one harder real scenario before asking.
 
 <details>
 <summary>Authority and evidence for nudges</summary>

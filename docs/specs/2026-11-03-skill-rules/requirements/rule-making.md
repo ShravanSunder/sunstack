@@ -8,7 +8,7 @@ A rule is worth running only if it catches something the owner has had to correc
 
 `kind: requirement · capability: rule-making · status: authorized · was: R11`
 
-Each rule records the real failure it exists for — a commit, a pull request, or an owner correction from the inventory — or the written standard it checks by count or pattern. The higher the owner's cost (how often, how strongly he reacted), the stronger the case for the rule. A judged rule with neither stays held (U17) until the owner decides it.
+Each rule records the real failure it exists for — a commit, a pull request, or an owner correction from the inventory — or the written standard it checks by count or pattern. The higher the owner's cost (how often, how strongly he reacted), the stronger the scenario for the rule. A judged rule with neither stays held (U17) until the owner decides it.
 
 <details>
 <summary>Authority and evidence</summary>

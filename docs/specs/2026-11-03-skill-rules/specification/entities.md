@@ -1,6 +1,6 @@
 # Entities: the nouns every obligation is about
 
-**Reader:** every reader of this set. **Question:** what is a rule, a nudge, a case, a kind, and when are two of them the same one? **Changes when:** the meaning of one of these nouns changes, which touches every capability.
+**Reader:** every reader of this set. **Question:** what is a rule, a nudge, a scenario, a kind, and when are two of them the same one? **Changes when:** the meaning of one of these nouns changes, which touches every capability.
 
 ```mermaid
 flowchart LR
@@ -10,8 +10,8 @@ flowchart LR
   E1[E1 Skill] -->|"gets one per run"| E5
   E3 -->|"reads"| E6[E6 Chunk]
   E1 -->|"is cut into"| E6
-  E3 -->|"is proven by"| E8[E8 Case]
-  E3 -->|"sets from cases"| E9[E9 Bar]
+  E3 -->|"is proven by"| E8[E8 Scenario]
+  E3 -->|"sets from scenarios"| E9[E9 Bar]
   E13[E13 Run] -->|"gives"| E7[E7 Nudge]
   E13 -->|"lists"| E10[E10 Gap]
   E7 -->|"gets"| E12[E12 Disposition]
@@ -50,10 +50,10 @@ Each table is the definition; the picture only shows how they relate. No entity 
 
 | Slot | Meaning |
 | --- | --- |
-| identity rule | one rule name (such as `skill-description.states-triggers-not-workflow-steps`). A renamed rule keeps its identity when its standard and question stay the same (placement → the general-skill rules); a rule whose question changes enough that its old cases no longer label it is a reworked rule that must pass its cases again |
-| relationships | exists because of 1..n mistakes or exactly one written standard (E4); checks exactly one standard (E2); declares 1..3 kinds it judges (E5); declares one chunk shape (E6); has its cases (E8) and one bar per decision step (E9) |
+| identity rule | one rule name (such as `skill-description.states-triggers-not-workflow-steps`). A renamed rule keeps its identity when its standard and question stay the same (placement → the general-skill rules); a rule whose question changes enough that its old scenarios no longer label it is a reworked rule that must pass its scenarios again |
+| relationships | exists because of 1..n mistakes or exactly one written standard (E4); checks exactly one standard (E2); declares 1..3 kinds it judges (E5); declares one chunk shape (E6); has its scenarios (E8) and one bar per decision step (E9) |
 | invariants | a judged rule nudges no one while held; no bar is overridden from outside the rule |
-| observable states | `proposed` → `held` (named mistake, cases incomplete or failing) → `nudging` (passes its cases); `nudging` → `held` when its question, chunk or cases change; any → `dropped` by owner decision. Mechanical rules (count, pattern) go straight to `nudging` once their written standard is named |
+| observable states | `proposed` → `held` (named mistake, scenarios incomplete or failing) → `nudging` (passes its scenarios); `nudging` → `held` when its question, chunk or scenarios change; any → `dropped` by owner decision. Mechanical rules (count, pattern) go straight to `nudging` once their written standard is named |
 | canonicalizes | "rule", "check", "lint rule"; excludes the standard itself and the model's answers |
 
 ### E4: Mistake
@@ -63,7 +63,7 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | Slot | Meaning |
 | --- | --- |
 | identity rule | one source locator: an inventory record, a commit or pull request that fixed skill text, or a written standard's marker. Several owner records about the same rejected change are one episode, and one episode is one mistake |
-| relationships | is the reason for 0..n rules; yields 0..n real-mistake cases (E8); a behavior-only mistake yields one behavior-test candidate (E11) instead of a rule |
+| relationships | is the reason for 0..n rules; yields 0..n real-mistake scenarios (E8); a behavior-only mistake yields one behavior-test candidate (E11) instead of a rule |
 | invariants | quotes the owner's exact words when it is an owner correction |
 | observable states | `text-checkable` (skill text shows it) or `behavior-only` (only the session or action record shows it); a mistake is `partly` when text shows it only with outside context, and rules treat it as text-checkable only for the part the text shows |
 | canonicalizes | "real mistake", "real failure", "owner correction" |
@@ -104,17 +104,17 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | observable states | outcome `finding` or `uncertain`; severity `error` or `warn`; passes and gate exclusions are results but not nudges |
 | canonicalizes | "nudge", "finding", "rule result"; excludes the agent's decision about it |
 
-### E8: Case
+### E8: Scenario
 
 `kind: entity · status: authorized · basis: U17, U19`
 
 | Slot | Meaning |
 | --- | --- |
-| identity rule | one rule, one real text span at one repository, path and commit. The before and after of one fix are two cases of one fix pair, kept in the same set (development or held-back) |
+| identity rule | one rule, one real text span at one repository, path and commit. The before and after of one fix are two scenarios of one fix pair, kept in the same set (development or held-back) |
 | relationships | belongs to one rule; cites its source; may cite the mistake (E4) it came from |
 | invariants | real skill text only; carries its label (`fire` or `quiet`), its kind (`real mistake`, `good`, `near miss`), and the label's basis (owner's fix or words; blind agent labels; owner's decision on a disagreement) |
 | observable states | `development` or `held-back`; `labelled` or `disputed` (agents disagreed, awaiting the owner) |
-| canonicalizes | "test case", "eval case", "fixture" (only for real skill text) |
+| canonicalizes | "case", "test case", "eval case", "fixture" (only for real skill text) |
 
 ### E9: Bar
 
@@ -123,9 +123,9 @@ Each table is the definition; the picture only shows how they relate. No entity 
 | Slot | Meaning |
 | --- | --- |
 | identity rule | one decision step of one rule; its yes-bar and no-bar (or minimum for a choice) |
-| relationships | belongs to exactly one rule's step; set from that rule's development cases |
-| invariants | recorded beside the cases that set it; nothing outside the rule overrides it |
-| observable states | `starting` (a default not yet tuned) or `tuned` (set from cases, with the cases cited) |
+| relationships | belongs to exactly one rule's step; set from that rule's development scenarios |
+| invariants | recorded beside the scenarios that set it; nothing outside the rule overrides it |
+| observable states | `starting` (a default not yet tuned) or `tuned` (set from scenarios, with the scenarios cited) |
 | canonicalizes | "threshold", "bar", "cut-off" |
 
 ### E10: Gap
