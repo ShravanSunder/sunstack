@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scenarios: folder structure proposal</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="folder-structure-proposal.html">Folder structure</a>
+    <a href="kind-filter-decisions.html">Kind filter</a>
+    <a href="index.html">Skill rules design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Where rules, scenarios and run results live</h1>
+<p>Your rules, 5 Nov: the skill folder holds only the rules and what runs at runtime; scenarios live under the tests' evals, properly organized; scenario-run results are never saved in git. This page proposes the layout and asks the two questions that layout depends on.</p>
+
+<ex-callout title="Proposed, not built" tone="question" icon="clock">
+<p>Nothing has moved yet. #188 currently has the scenarios (still called "cases") and the run results in the skill folder. Once you answer below, I move them in #188 before you merge it.</p>
+</ex-callout>
+
+<h2 id="today">Today, in #188</h2>
+<pre>plugins/skill-authoring/skills/domain-skill-crafting/rules/
+  skill-rules.config.json            rules config            (runtime)
+  general-skill.rules.json  …        5 rule files            (runtime)
+  general-skill.cases.json  …        5 files, 245 test cases (test data: wrong place)
+  general-skill.case-run.json  …     5 run results           (generated: wrong place, and in git)
+  evidence/                          ast-grep rules          (runtime)</pre>
+
+<h2 id="proposal">Proposed</h2>
+<p><strong>The skill keeps only what runs:</strong></p>
+<pre>plugins/skill-authoring/skills/domain-skill-crafting/
+  SKILL.md
+  references/                        the standards each rule checks (K-markers)
+  rules/
+    skill-rules.config.json
+    descriptions-and-invocation.rules.json
+    general-skill.rules.json
+    calls-and-placement.rules.json
+    main-path.rules.json
+    domain-decision-models.rules.json
+    evidence/                        sgconfig.yml + ast-grep rules</pre>
+
+<p><strong>Scenarios go under the evals, one file per rule, grouped by rulebook:</strong></p>
+<pre>tests/skills/evals/
+  skill-pressure.eval.ts             (exists today)
+  rule-scenarios/
+    descriptions-and-invocation/
+      skill-description.starts-with-use-when.scenario.json
+      skill-description.longer-than-225-characters.scenario.json
+      skill-description.longer-than-300-characters.scenario.json
+      skill-description.names-the-loading-moment.scenario.json
+      skill-description.states-triggers-not-workflow-steps.scenario.json
+    general-skill/
+      general-skill.description-overfits-to-one-product.scenario.json
+      general-skill.overfits-to-product-workflow.scenario.json
+      general-skill.taught-rule-overfits-to-one-project.scenario.json
+    calls-and-placement/
+      load-call.names-when-where-and-result.scenario.json
+    main-path/
+      skill-branch.names-an-observable-condition.scenario.json
+    domain-decision-models/
+      rule-question.asks-exactly-one-thing.scenario.json
+      rule-question.criteria-answer-the-same-question.scenario.json
+    retired/                         scenarios of the 6 dropped rules, kept, never run
+  kind-filter/
+    skill-kind.scenario.json         the 78 skills + blind labels from the experiment
+  review-skill/                      deliverable 4's two evals (later)</pre>
+
+<p><strong>Run results never go in git:</strong></p>
+<pre>tests/skills/tmp/scenario-runs/      already ignored by git (tmp/)
+  2026-11-05T09-12-00Z/
+    report.json                      every scenario's result, Jev's answers, cost
+    raw/                             each request and response</pre>
+
+<h2 id="why">Why this split</h2>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Thing</th><th>Where</th><th>Because</th></tr></thead>
+<tbody>
+<tr><td>Rules, config, ast-grep, standards</td><td>skill folder</td><td>they run, and they ship with the skill</td></tr>
+<tr><td>Scenarios</td><td><code>tests/skills/evals/rule-scenarios/</code></td><td>test data; your rule and AGENTS.md ("tests and evals belong under tests/")</td></tr>
+<tr><td>One file per rule</td><td>named after the rule</td><td>open the rule's name, find its scenarios; adding a rule adds one file</td></tr>
+<tr><td>Run results</td><td><code>tests/skills/tmp/</code>, ignored</td><td>generated, and they go stale on any edit; your rule: never in git</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="tracking">1. If run results aren't in git, how is a passing run tracked?</h2>
+<p>This matters because of how agents use the rules. An agent runs the lint without the Jev key, so it can't rerun scenarios. Today it learns "this rule passed its scenarios" from the saved result file. Without that file in git, something else has to say it, or every judged rule stays hidden for agents.</p>
+<ex-choice id="tracking-choice" title="How should a passing run be tracked?">
+  <ex-option id="adopt-in-rule" title="**You adopt the rule in its rule file after a passing run** (recommended)">
+    <template slot="summary">
+After a scenario run passes, the rule entry gets one line, e.g. `"adopted": "2026-11-05, 14/14 scenarios, report tmp/scenario-runs/…"`. Git holds your decision, not the generated result. Lint shows an adopted rule's nudges. Editing the rule's questions removes the adoption line (the runner checks), so it must pass again.
+    </template>
+  </ex-option>
+  <ex-option id="local-only" title="Local results only">
+    <template slot="summary">
+Lint reads the newest result in `tests/skills/tmp/scenario-runs/` on this machine. Simple, but a fresh checkout (or another agent's worktree) has none, so judged rules stay hidden there.
+    </template>
+  </ex-option>
+  <ex-option id="no-gate" title="No gate: every rule always runs">
+    <template slot="summary">
+Scenario runs only tell us how good a rule is. Nothing is saved or tracked. Cost: a rule that fails its scenarios still nudges agents (today: the branch rule's 2 false nudges in 21).
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="runs">2. How are scenarios run?</h2>
+<ex-choice id="runs-choice" title="How should scenario runs work?">
+  <ex-option id="own-command" title="**Their own command, with the key** (recommended)">
+    <template slot="summary">
+`pnpm --dir tests/skills evals:scenarios [rule]`: runs a rule's scenarios through Jev and writes the report under `tmp/`. Keyed, so I run it. `pnpm test` stays keyless and fast.
+    </template>
+  </ex-option>
+  <ex-option id="in-test" title="Inside `pnpm test`">
+    <template slot="summary">
+One command for everything, but every test run needs the key and calls Jev (about a cent a run for all 12 rules).
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="renames">Names that change everywhere</h2>
+<p>"case" becomes "scenario" in files, code, designs and pages: <code>*.cases.json</code> → <code>*.scenario.json</code>, "case run" → "scenario run", <code>cases.ts</code> → <code>scenarios.ts</code>. The run-result file <code>*.case-run.json</code> goes away; its job moves to your answer to question 1.</p>
+
+<p>Answer above, then copy your answers from Comments.</p>
+</ex-document>
+</body>
+</html>
