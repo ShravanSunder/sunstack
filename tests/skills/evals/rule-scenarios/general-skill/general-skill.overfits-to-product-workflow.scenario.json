@@ -341,7 +341,7 @@
         "piece_first_line": 28,
         "field_line": 30
       },
-      "expect": "must_pass",
+      "expect": "not_applicable",
       "kind": "regression_example",
       "status": "active",
       "set": "development",
@@ -351,7 +351,7 @@
         "who": [
           "Independent Sol settler: calls-and-placement-k003/case-010"
         ],
-        "note": "Migrated calls-and-placement-k003/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Migrated calls-and-placement-k003/case-010 (development, current): original sol-settled call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. D3 owner-directed gate, 5 Nov: AgentStudio is tool_manual, outside only_when.kind [general, role, domain]; this rule is not applicable to its own tool manual."
       },
       "added": "2026-11-01",
       "scenario_kind": "unclassified"
@@ -371,7 +371,7 @@
         "piece_first_line": 12,
         "field_line": 14
       },
-      "expect": "must_pass",
+      "expect": "not_applicable",
       "kind": "regression_example",
       "status": "active",
       "set": "development",
@@ -381,7 +381,7 @@
         "who": [
           "Two blind legacy labellers agreed: calls-and-placement-k003/case-011"
         ],
-        "note": "Migrated calls-and-placement-k003/case-011 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout."
+        "note": "Migrated calls-and-placement-k003/case-011 (development, current): original labelers-agreed call pass on section.body. Copied text verified byte-identical to the pinned file or its recorded source range. Context includes the source skill collection at the same commit; this is a regression example, not a fresh holdout. D3 owner-directed gate, 5 Nov: agent-collaboration is tool_manual, outside only_when.kind [general, role, domain]; this rule is not applicable to its own tool manual."
       },
       "added": "2026-11-01",
       "scenario_kind": "unclassified"
@@ -860,7 +860,7 @@
       "select": {
         "piece_first_line": 53
       },
-      "expect": "must_pass",
+      "expect": "not_applicable",
       "kind": "worth_reading",
       "status": "active",
       "set": "development",
@@ -871,7 +871,7 @@
           "Luna labeller I 01a19707-e11e-7f62-9c21-db376f539c9b",
           "Luna labeller J 01a19707-e170-73a3-96e9-fb0a98c4266e"
         ],
-        "note": "Accounts A46, blind labellers agreed. I: The verification-maintenance passage labels the ledger app as a fictional example and compares weak and adequate recipes. J: The passage is explicitly a fictional `ledger` example used to illustrate verification evidence, not an instruction to use that product workflow."
+        "note": "Accounts A46, blind labellers agreed. I: The verification-maintenance passage labels the ledger app as a fictional example and compares weak and adequate recipes. J: The passage is explicitly a fictional `ledger` example used to illustrate verification evidence, not an instruction to use that product workflow. D3 owner ruling, 5 Nov: practices-verification-maintenance is repo_specific, outside only_when.kind [general, role, domain]; this rule is not applicable."
       },
       "added": "2026-11-01",
       "scenario_kind": "unclassified"
