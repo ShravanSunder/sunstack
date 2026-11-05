@@ -1,8 +1,9 @@
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
+import { z } from "zod";
 import {
   loadConfiguredExpectations,
   runExpectations,
@@ -29,6 +30,12 @@ function realExpectation(): BoundExpectation {
 test("the run archives real source, invokes the adapter, records gaps and disposes the snapshot", () => {
   const root = createFixture();
   cpSync(path.dirname(config), path.join(root, kitRelative), {recursive: true});
+  const pairs = z.object({rulebook: z.array(z.object({markdown: z.string()}))}).parse(JSON.parse(readFileSync(config, "utf8"))).rulebook;
+  for (const pair of pairs) {
+    const target = path.resolve(root, kitRelative, pair.markdown);
+    mkdirSync(path.dirname(target), {recursive: true});
+    cpSync(path.resolve(path.dirname(config), pair.markdown), target);
+  }
   const entry = {...realExpectation(), rulesFile: path.join(root, kitRelative, path.basename(realExpectation().rulesFile))};
   const output = mkdtempSync(path.join(tmpdir(), "expectation-adapter-test-"));
   let directory = "";

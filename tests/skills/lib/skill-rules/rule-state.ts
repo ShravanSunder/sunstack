@@ -96,7 +96,7 @@ export function loadRuleStates(configPath: string, version: string, filtersSuppo
     const receipt = readCaseRunReceipt(rulesFile);
     for (const rule of Object.values(rules)) {
       const record = cases.rules[rule.name];
-      states[rule.name] = record ? deriveRuleState({record, cases: cases.cases, rule, receipt, fingerprint: fingerprintRule({config: configPath, rule, name: rule.name, cases, engineVersion: version, model: config.decision_model.model}), filtersSupported,
+      states[rule.name] = record ? deriveRuleState({record, cases: cases.cases, rule, receipt, fingerprint: fingerprintRule({config: configPath, rulesFile, rule, name: rule.name, cases, engineVersion: version, model: config.decision_model.model}), filtersSupported,
         isAncestor: (earlier, later) => spawnSync("git", ["merge-base", "--is-ancestor", earlier, later], {cwd: repository}).status === 0,
       }) : {state: "held", lacks: [{kind: "owner", decision: "undecided"}, {kind: "no_reason"}]};
     }

@@ -12,18 +12,22 @@ export const caseRunReceiptSchema = z.object({
 export type CaseRunReceipt = z.infer<typeof caseRunReceiptSchema>;
 export interface FingerprintRequest {
   readonly config: string; readonly rule: unknown; readonly name: string;
+  readonly rulesFile: string;
   readonly cases: CasesFile; readonly engineVersion: string; readonly model: string;
 }
 
 export function fingerprintRule(request: FingerprintRequest): string {
   const configBytes = readFileSync(request.config);
-  const config = z.object({evidence: z.object({ast_grep: z.string()})}).parse(JSON.parse(configBytes.toString("utf8")));
+  const config = z.object({rulebook: z.array(z.object({markdown: z.string(), rules: z.string()})), evidence: z.object({ast_grep: z.string()})}).parse(JSON.parse(configBytes.toString("utf8")));
   const evidenceRoot = path.dirname(path.resolve(path.dirname(request.config), config.evidence.ast_grep));
   const hash = createHash("sha256");
   const add = (name: string, bytes: string | Buffer): void => {
     hash.update(JSON.stringify([name, Buffer.byteLength(bytes)])); hash.update(bytes);
   };
   add("config", configBytes);
+  const pair = config.rulebook.find((entry) => path.resolve(path.dirname(request.config), entry.rules) === path.resolve(request.rulesFile));
+  if (!pair) throw new Error(`Rulebook is outside the canonical config: ${request.rulesFile}`);
+  add("standard", readFileSync(path.resolve(path.dirname(request.config), pair.markdown)));
   const walk = (directory: string): void => {
     for (const entry of readdirSync(directory, {withFileTypes: true}).sort((left, right) => left.name.localeCompare(right.name))) {
       const filename = path.join(directory, entry.name);

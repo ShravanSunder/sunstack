@@ -28,7 +28,11 @@ test("the shipped kit assembles exactly U10's twelve rules and five evidence kin
     expect(merged).toContain(standard.replace(`<!-- ${marker} -->`, `<!-- ${next} -->`));
   }
   const branch = readFileSync(path.join(path.dirname(config), "main-path.rules.json"), "utf8");
-  expect(branch).toContain("otherwise ignore block"); expect(branch).toContain("every enclosing heading");
+  expect(branch).toContain("Otherwise ignore block"); expect(branch).toContain("every enclosing heading");
+  const questions = z.object({K001: z.object({questions: z.record(z.string(), z.object({instructions: z.object({check: z.array(z.string())}), criteria: z.record(z.string(), z.string())}))})}).parse(JSON.parse(branch)).K001.questions;
+  expect(questions.gap?.instructions.check).toEqual(["line", "block"]);
+  expect(questions.when_kind?.instructions.check).toEqual(["line", "block"]);
+  expect(questions.gap?.criteria.work).toContain("complete branch text");
   expect(branch).not.toContain('"against": "step"');
 });
 

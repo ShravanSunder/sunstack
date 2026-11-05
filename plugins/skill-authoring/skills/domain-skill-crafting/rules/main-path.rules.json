@@ -6,12 +6,12 @@
       "when_kind": {
         "type": "choice",
         "instructions": {
-          "check": "line",
-          "against": "headings",
-          "task": "This line opens with When. headings contains every enclosing heading, from the title to the nearest section, empty when none. Read block with line only when line ends in a colon (:); otherwise ignore block. Does it start a branch, or is it guidance?",
-          "context": [
+          "check": [
+            "line",
             "block"
-          ]
+          ],
+          "against": "headings",
+          "task": "headings contains every enclosing heading, from the title to the nearest section, empty when none. The branch text is line by itself, except when line ends in a colon (:): then judge line and its introduced block together. Otherwise ignore block. For a line opening with When, does that complete branch text start a branch, or state guidance? The code does not use this answer for an IF opener."
         },
         "criteria": {
           "branch": "A branch: its condition picks out some runs, and those runs do work the others don't, such as a different action, destination or result.",
@@ -21,17 +21,17 @@
       "gap": {
         "type": "choice",
         "instructions": {
-          "check": "line",
-          "against": "headings",
-          "task": "Read the branch in line. headings contains every enclosing heading, from the title to the nearest section, empty when none. When line ends in a colon (:), read it together with block, the following list, table or fenced code block it introduces; otherwise ignore block. Which part does the branch leave out?",
-          "context": [
+          "check": [
+            "line",
             "block"
-          ]
+          ],
+          "against": "headings",
+          "task": "Judge the complete branch text: line by itself, except when line ends in a colon (:), when line and its introduced block are one branch. The list, table or fenced block can supply the condition or the work that the introductory line leaves to it. Otherwise ignore block. headings contains every enclosing heading, from the title to the nearest section, and is outline context only. Which required part does that complete branch text leave out?"
         },
         "criteria": {
-          "none": "It names a condition an agent can observe in the work (a file, a result, a state, a request, a diff) and the different work that condition causes. Observable conditions include the kind of work in hand, a piece of information the next call needs and the agent lacks, an earlier step's result that left a named question open, and a doubt already stopping a named action. A doubt counts only when something the agent can see anchors it: a fact it settles by looking, as in 'if the lockfile is stale or you can't tell', an earlier step that left its question open, or an action the doubt blocks. A judgment of value that an observable kind of work and an explicit grant both bound counts too, as 'if a long check is worth running in the background and the host allows it' does.",
-          "condition": "Its condition can't be observed: it names a topic, a need or a feeling with nothing in the work to check, such as 'if the skill needs more depth', 'if useful', 'if needed', 'when appropriate' or 'if unsure', so nothing in the work tells the agent it holds. Naming the thing doesn't make it observable: a doubt, a need or a size judgment about a quality of something named, such as whether a phrase is clear enough, whether a task is large or substantial, or whether an answer needs more explanation, is still a feeling when no fact, earlier result or blocked action settles it. A condition someone else can see, such as a disagreement already raised or a result already returned, is observable.",
-          "work": "The condition is observable, but the line doesn't name the different work it causes, or the work is the same with or without it."
+          "none": "The complete branch text names a condition an agent can observe in the work (a file, a result, a state, a request, a diff) and the different work that condition causes. Observable conditions include the kind of work in hand, a piece of information the next call needs and the agent lacks, an earlier step's result that left a named question open, and a doubt already stopping a named action. A doubt counts only when something the agent can see anchors it: a fact it settles by looking, as in 'if the lockfile is stale or you can't tell', an earlier step that left its question open, or an action the doubt blocks. A judgment of value that an observable kind of work and an explicit grant both bound counts too, as 'if a long check is worth running in the background and the host allows it' does.",
+          "condition": "The complete branch text's condition can't be observed: it names a topic, a need or a feeling with nothing in the work to check, such as 'if the skill needs more depth', 'if useful', 'if needed', 'when appropriate' or 'if unsure', so nothing in the work tells the agent it holds. Naming the thing doesn't make it observable: a doubt, a need or a size judgment about a quality of something named, such as whether a phrase is clear enough, whether a task is large or substantial, or whether an answer needs more explanation, is still a feeling when no fact, earlier result or blocked action settles it. A condition someone else can see, such as a disagreement already raised or a result already returned, is observable.",
+          "work": "The condition is observable, but the complete branch text names no different work, or that work is the same with or without the condition. For a colon-ended line, work stated in its introduced block is part of the branch; it need not be repeated in the introductory line."
         }
       }
     },

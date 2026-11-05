@@ -20,8 +20,46 @@ No receiving-agent behavior, actual general-skill kind gate, full-tree judged-ru
 
 ## Final local gates
 
-After the nested-section rendering correction, `pnpm --dir tests/skills test` with both external source roots configured reports 39 test files passing, 298 tests passing and one explicitly gated live-provider test skipped (exit 0). Typecheck, oxlint, `git diff --check`, the twelve-rule assembly and all 245 case schemas pass. Claude plugin validation passes; its unrelated existing README advice is deferred.
+After the rendering, standards-fingerprint and branch-input corrections, `pnpm --dir tests/skills test` with both external source roots configured reports 39 test files passing, 298 tests passing and one explicitly gated live-provider test skipped (exit 0). Typecheck, oxlint over all 26 changed TypeScript files, `git diff --check`, the twelve-rule assembly and all 245 case schemas pass. Claude plugin validation passes; its unrelated existing README advice is deferred.
 
 The runner's invented sample and completion skill directories are removed. Real historical descriptions exercise 225/230/308 character outcomes, the owner's actual `Always use when` description, and a rejected historical `Always load` opener. A real-engine serialization test renders pinned line 17, the actual standard's wording/line, the loaded AgentStudio loop, answers, path and cut state, joins the same rule at line 40 and excludes a quiet control for that rule. A separate real-section cut test checks collected bytes, the bounded view and the provider request apart. These use controlled answers and prove rendering/transport, not the semantic judgment.
 
 The initial formatter matched the first containing result range. Real sections nest, so line 40 could print its enclosing section's pass answers and path. A real-engine regression first failed on that mismatch, alongside a focused cut-attribution case. The corrected formatter reads `judgment.answers` and `judgment.path_taken` from the finding itself, as the 0.6.0 wire contract defines, and uses the closest matching finding result for cut state. Both regressions and the full suite pass after the fix.
+
+## Standards fingerprint correction
+
+The initial fingerprint omitted the paired standards Markdown even though the engine puts its wording in the model state. An added producer-to-ordinary-CLI mutation first reproduced an old receipt still admitting a nudge after only the standard line changed. The corrected producer and consumer resolve the pair from the canonical config and hash the entire Markdown file. The same test now retains a raw finding, reports the rule held and suppresses the nudge in both output paths. Existing receipts from before this fingerprint change are stale; they cannot admit a judged rule.
+
+## Branch question correction and scoped result
+
+The block was already present and uncut in the first keyed run. The question nevertheless declared only `line` as its checked field, and its work criterion still asked what the line named. The correction declares `[line, block]` in both questions and makes the task and criteria consistently judge their combined branch text when the line ends in a colon; otherwise the block is ignored. Predicates, bars and labels are unchanged.
+
+A second keyed run again produced 15 caught, two false nudges and four unsure, runner exit 1 and engine exits 5/5. It reported 98 requests, 132,572 input tokens, 6,693 output tokens and $0.005568024. Case 001 still lacked a semantic pass: its top probabilities changed from none 0.53 to a condition/none tie at 0.38, below the unchanged 0.6 bar. The report does not establish why the model answered that way. Its branch names “the core's security condition”; the definition of that criterion is outside this chunk. Deciding what such a reference must show is a general standard/evidence question, not a case-specific exception.
+
+The D2 scope update at `070ec74b` requires exact block delivery and both questions checking line plus block, with a real no-condition IF still firing; case 001's semantic pass and the named-criterion question move to D3. Cases 002 and 019 still fire with matching locators. No further wording guesses were made. Both samples are exposed regression observations, not a holdout or fixed-version comparison.
+
+All rows below are `main-path-k001-case-<number>`; `finding` on a must-pass row is a false nudge. No observed result below is rounded up to a pass.
+
+| Case | Expected | First run | Corrected question |
+| --- | --- | --- | --- |
+| 001 | must_pass | uncertain | uncertain |
+| 002 | must_fire | finding, locator hit | finding, locator hit |
+| 003 | not_applicable | not_applicable | not_applicable |
+| 004 | must_pass | pass | pass |
+| 005 | must_pass | uncertain | uncertain |
+| 006 | must_pass | not_applicable | uncertain |
+| 007 | must_fire | uncertain | uncertain |
+| 008 | not_applicable | not_applicable | not_applicable |
+| 009 | not_applicable | not_applicable | not_applicable |
+| 010 | must_pass | pass | pass |
+| 011 | must_pass | pass | pass |
+| 012 | must_pass | pass | pass |
+| 013 | must_pass | pass | pass |
+| 014 | must_pass | finding | finding |
+| 015 | must_pass | pass | pass |
+| 016 | must_pass | pass | pass |
+| 017 | must_pass | pass | pass |
+| 018 | must_pass | pass | pass |
+| 019 | must_fire | finding, locator hit | finding, locator hit |
+| 020 | must_pass | pass | pass |
+| 021 | must_pass | finding | finding |

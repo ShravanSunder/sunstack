@@ -208,7 +208,7 @@ export function runExpectations(request: ExpectationRunRequest): ExpectationRunR
         else set.failed.push(entry.id);
       }
       if (!cases.length || sets.development.unsure.length || sets.held_back.unsure.length || runs.some((run) => run.rulesFile === rulesFile && run.gaps.length)) receipt.complete = false;
-      receipt.rules[definition.name] = {fingerprint: fingerprintRule({config: request.config, rule: definition, name: definition.name, cases: file, engineVersion: version, model}), development: sets.development, held_back: sets.held_back};
+      receipt.rules[definition.name] = {fingerprint: fingerprintRule({config: request.config, rulesFile, rule: definition, name: definition.name, cases: file, engineVersion: version, model}), development: sets.development, held_back: sets.held_back};
     }
     writeCaseRunReceipt(rulesFile, receipt);
   }

@@ -57,8 +57,11 @@ test("case writer and ordinary CLI agree; each restored OG mutation holds both o
     const receiptBytes = readFileSync(receiptPath(rulesFile));
     const astFile = path.join(root, kitRelative, "evidence/rules/skill-files.yml");
     const astBytes = readFileSync(astFile);
+    const standardFile = path.join(root, kitRelative, "fixture.md");
+    const standardBytes = readFileSync(standardFile);
     const mutations: readonly {name: string; reason: string; change: () => void}[] = [
       {name: "question", reason: "changed_since", change: () => writeFileSync(rulesFile, ruleBytes.toString().replace("Does this description meet the standard?", "Does this description satisfy the written standard?"))},
+      {name: "standard", reason: "changed_since", change: () => writeFileSync(standardFile, standardBytes.toString().replace("A fixture standard.", "A revised fixture standard."))},
       {name: "bar", reason: "bar_changed", change: () => writeFileSync(rulesFile, ruleBytes.toString().replace('"yes_at_or_above":0.8', '"yes_at_or_above":0.9'))},
       {name: "case", reason: "changed_since", change: () => writeFileSync(filename, caseBytes.toString().replace(seed.label.note, "Updated case label note"))},
       {name: "ast", reason: "changed_since", change: () => writeFileSync(astFile, `${astBytes.toString()}\n`)},
@@ -67,7 +70,7 @@ test("case writer and ordinary CLI agree; each restored OG mutation holds both o
       {name: "incomplete", reason: "incomplete", change: () => writeFileSync(receiptPath(rulesFile), receiptBytes.toString().replace('"complete": true', '"complete": false'))},
     ];
     for (const mutation of mutations) {
-      writeFileSync(config, canonical); writeFileSync(rulesFile, ruleBytes); writeFileSync(filename, caseBytes); writeFileSync(astFile, astBytes); writeFileSync(receiptPath(rulesFile), receiptBytes);
+      writeFileSync(config, canonical); writeFileSync(rulesFile, ruleBytes); writeFileSync(filename, caseBytes); writeFileSync(astFile, astBytes); writeFileSync(standardFile, standardBytes); writeFileSync(receiptPath(rulesFile), receiptBytes);
       mutation.change();
       const result = await runRunner(root, ["--out", path.join(root, mutation.name)], "synthetic-runner-key");
       expect(result.status, result.stderr).toBe(0);
@@ -83,9 +86,9 @@ test("case writer and ordinary CLI agree; each restored OG mutation holds both o
         expect(keyless.stdout).toContain("changed_since");
       }
     }
-    writeFileSync(config, canonical); writeFileSync(rulesFile, ruleBytes); writeFileSync(filename, caseBytes); writeFileSync(astFile, astBytes);
-    const originalFingerprint = fingerprintRule({config, rule: definition, name: definition.name, cases: casesFileSchema.parse(JSON.parse(caseBytes.toString())), engineVersion: engineVersion(enginePath), model: "jev-latest"});
-    for (const changed of [{engineVersion: "sunstack 0.0.0", model: "jev-latest"}, {engineVersion: engineVersion(enginePath), model: "another-model"}]) expect(fingerprintRule({config, rule: definition, name: definition.name, cases: casesFileSchema.parse(JSON.parse(caseBytes.toString())), ...changed})).not.toBe(originalFingerprint);
+    writeFileSync(config, canonical); writeFileSync(rulesFile, ruleBytes); writeFileSync(filename, caseBytes); writeFileSync(astFile, astBytes); writeFileSync(standardFile, standardBytes);
+    const originalFingerprint = fingerprintRule({config, rulesFile, rule: definition, name: definition.name, cases: casesFileSchema.parse(JSON.parse(caseBytes.toString())), engineVersion: engineVersion(enginePath), model: "jev-latest"});
+    for (const changed of [{engineVersion: "sunstack 0.0.0", model: "jev-latest"}, {engineVersion: engineVersion(enginePath), model: "another-model"}]) expect(fingerprintRule({config, rulesFile, rule: definition, name: definition.name, cases: casesFileSchema.parse(JSON.parse(caseBytes.toString())), ...changed})).not.toBe(originalFingerprint);
     const beforeEmpty = requests.length;
     const retired = {...seed, id: "retired-never-read", rule: "dropped-rule", status: "retired", retired_because: "Owner dropped the rule", source: {...source, commit: "0".repeat(40)}};
     const file = casesFileSchema.parse(JSON.parse(caseBytes.toString()));
