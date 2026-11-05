@@ -109,6 +109,8 @@ Scenario definitions live at `tests/skills/evals/rule-scenarios/<rulebook>/<rule
 
 Run `pnpm --dir tests/skills evals:scenarios --check` without a key to validate all definitions. `pnpm --dir tests/skills evals:scenarios [rule…]` evaluates all active scenarios or the named rules through the Lead's credential wrapper. Upstream sources use the existing local collection checkout via `AI_DEV_SKILLS_ROOT`; AgentStudio uses `AGENTSTUDIO_REPOSITORY`. No fetching occurs; unresolved source paths/commits become gaps.
 
+A named-rule run keeps the complete standards/rules pair so the engine can validate every marker. Sibling entries may also be evaluated and remain visible in raw results; scenario scoring is limited to the requested rules. Genuine coverage or incomplete-run gaps still block completion and adoption.
+
 Runs write only to Git-ignored `tests/skills/tmp/scenario-runs/<UTC>/report.json` and `raw/`. Each raw run keeps the engine JSON report (evidence seen and answers), stderr, selected rules and the config used. Sunstack 0.6.0 exposes no provider wire capture, so HTTP envelopes are not retained. Outcomes, locators and coverage gaps stay separate; exit 1 is a labelled contradiction, exit 5 an unsure/incomplete run, and exit 0 requires every selected scenario to match. An empty/partial population, cut, cancellation or missing result cannot earn adoption.
 
 Stdout and the saved report also summarize every configured rule: its current adoption-derived state and held reasons, scenarios by kind/set/label state, this run's development and held-back results, and bar status with cited scenarios. Unrun rules have no run result; a passing run still does not create adoption.

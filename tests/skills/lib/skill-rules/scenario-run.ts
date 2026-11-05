@@ -113,13 +113,14 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
         const paths = [...new Set(group.map((entry) => entry.scenario.source.path))];
         const runDirectory = path.join(request.output, "raw", `run-${runs.length + 1}`);
         mkdirSync(runDirectory, {recursive: true});
-        const selectedRules = [...new Set(group.map((entry) => entry.scenario.rule))];
+        const requestedRules = [...new Set(group.map((entry) => entry.scenario.rule))];
         const definitions = z.record(z.string(), ruleDefinitionSchema).parse(JSON.parse(readFileSync(rulesFile, "utf8")));
-        const selectedRulesFile = path.join(runDirectory, "rules.json");
-        writeFileSync(selectedRulesFile, JSON.stringify(Object.fromEntries(Object.entries(definitions).filter(([, rule]) => selectedRules.includes(rule.name))), null, 2) + "\n");
+        const rulebookSnapshot = path.join(runDirectory, "rules.json");
+        // Coverage belongs to the complete standard/entry pair; selection limits scoring, not assembly.
+        writeFileSync(rulebookSnapshot, JSON.stringify(definitions, null, 2) + "\n");
         const config = {
           ...original,
-          rulebook: [{ markdown: path.resolve(configDirectory, pair.markdown), rules: selectedRulesFile }],
+          rulebook: [{ markdown: path.resolve(configDirectory, pair.markdown), rules: rulebookSnapshot }],
           check: { files: paths },
           evidence: {
             ...original.evidence,
@@ -177,7 +178,7 @@ export function runScenarios(request: ScenarioRunRequest): ScenarioRunReport {
           repository: source.repository,
           commit: source.commit,
           rulesFile,
-          rules: selectedRules,
+          rules: requestedRules,
           checkedPaths: paths,
           gaps: runGaps,
         };

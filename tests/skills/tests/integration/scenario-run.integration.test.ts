@@ -31,6 +31,7 @@ function realScenario(): BoundScenario {
 
 function expectOneScenarioProbe(report: ScenarioRunReport, entry: BoundScenario): void {
   expect(report.runs).toHaveLength(1);
+  expect(report.runs[0]?.gaps).toEqual([]);
   expect(report.results).toHaveLength(1);
   expect(report.results[0]?.observed).not.toBeNull();
   expect(report.results[0]?.id).toBe(entry.scenario.id);
