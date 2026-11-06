@@ -14,7 +14,7 @@ The owner opens the page to see, without reading transcripts, what has happened,
 2. **Waiting for you:** only open assumptions whose next actor is the owner (`next:owner`), each with its part, linked to that part's section. Each links its decision page, made by the route in `SKILL.md` step 6; the page shows the choice, the decision page asks it.
 3. **The work, part by part:** one section per `part:` identifier of the design or plan, each listing what happened, was decided, assumed and changed, and what is proven for that part, with every open assumption's next actor. An entry waiting for the owner is listed in its part as a link to its one entry under "Waiting for you", so a part whose only entry waits still has its section. Entries tagged `part:none` close the list.
 4. **Closed and kept as history:** each closed entry beside the entry that closed it.
-5. **The Lead's view,** folded: decisions that don't change or fill in the design or plan, owner asks, and entries of no known kind.
+5. **The Lead's view,** folded: agents' own calls ("Sorting the record"), owner asks, and entries of no known kind.
 
 ## Sorting the record
 
