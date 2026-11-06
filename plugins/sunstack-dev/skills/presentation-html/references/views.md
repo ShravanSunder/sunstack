@@ -8,7 +8,7 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-For a design set, apply `engineering-documents.md`'s source rules before choosing a form below. Reuse a view already in its owning chunk through that chunk's island. A native projection reaches its facts through source anchors or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a chunk to fill it.
+For an engineering design set, as `SKILL.md` step 1 names it, apply `engineering-documents.md`'s source rules before choosing a form below; a skill-change design set keeps its caller's one-page contract. Reuse a view already in its owning chunk through that chunk's island. A native projection reaches its facts through source anchors or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a chunk to fill it.
 
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
