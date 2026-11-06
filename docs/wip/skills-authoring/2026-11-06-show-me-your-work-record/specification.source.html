@@ -34,10 +34,10 @@
 <ex-stat value="1" label="waiting for you" note="workstream labels" tone="risk"></ex-stat>
 <ex-stat value="1" label="shortcut worth your look" note="#194 merged without the test suite" tone="risk"></ex-stat>
 <ex-stat value="3" label="missed items open" note="found later, not logged" tone="risk"></ex-stat>
-<ex-stat value="1" label="finished work not accepted" note="PR #194 has no acceptance" tone="question"></ex-stat>
+<ex-stat value="1" label="finished work with no acceptance recorded" note="PR #194" tone="question"></ex-stat>
 </ex-grid>
 
-<p><small>On the real page each number opens its items. Demistify's number tile can't hold a link, so the next document picks a display that can; here, the sections below come in the same order.</small></p>
+<p><small>On the real page each number opens its items. Demistify's number tile can't hold a link, but a diagram node can open a card, so the next document picks the display; here, the sections below come in the same order.</small></p>
 
 <h3 id="sketch-for-you">For you to decide · 1</h3>
 
@@ -63,9 +63,9 @@
 <ex-card title="Shortcut: PR #194 merged without running the repository's test suite" tone="risk" icon="path">
 <ul>
 <li><strong>What should have happened:</strong> the repository's skill tests pass before a skill PR is called ready.</li>
-<li><strong>What happened instead:</strong> the Lead called it ready on the PR's CI checks, which don't run those tests; two tests went red on main.</li>
-<li><strong>Why:</strong> the Lead didn't know CI skips them.</li>
-<li><strong>Approved by you?</strong> No; you merged it on "merge 194" without knowing.</li>
+<li><strong>What happened instead:</strong> the Lead's merge proof ran typecheck, the rules and static checks, not the test suite, and the repository has no CI to run it; two tests went red on main.</li>
+<li><strong>Why:</strong> not recorded at the time, which is itself a gap.</li>
+<li><strong>Approved by you?</strong> No; the skipped suite wasn't in the log when you said "merge 194".</li>
 <li><strong>Closed:</strong> fixed in #197 (main green: 316 passed, 4 skipped).</li>
 </ul>
 <p><small>Taken by the Lead · logged by the Lead, after the component Lead found it · also under "What was missed".</small></p>
@@ -93,13 +93,13 @@
 <p><small>Run by Terra · logged first-hand by Terra.</small></p>
 </ex-card>
 
-<ex-card title="52 earlier checks, mostly of page looks" tone="question" icon="test-tube">
-<p>Each was run by an evaluator, but every one was logged by the Lead.</p>
+<ex-card title="Terra's earlier checks of the page experiments" tone="question" icon="test-tube">
+<p>Terra ran them; the Lead logged them. 25 of the Lead's 49 check rows name an evaluator; the two opened, Terra's checks of pages I and J (01a1a98d-0d00, 01a1ab35-77b3), are Terra's runs written by the Lead. The Implementer logged its own 7.</p>
 <p><small>Reported second-hand by the Lead.</small></p>
 </ex-card>
 
-<ex-card title="PR #194: not accepted" tone="question" icon="clock">
-<p>It merged, and later work fixed what it broke, but no acceptance names its commit, the checks read, or what stays unverified.</p>
+<ex-card title="PR #194: no acceptance recorded" tone="question" icon="clock">
+<p>It merged on your "merge 194", and later work fixed what it broke, but no acceptance in this log names its commit, the checks read, or what stays unverified.</p>
 </ex-card>
 
 <h4 id="sketch-missed">What was missed · 3 open</h4>
@@ -112,8 +112,8 @@
 <p><small>Found by the Lead, reading the log back · affects: G10, which you settled with "merge 194".</small></p>
 </ex-card>
 
-<ex-card title="Missed: 52 checks logged by the Lead instead of the agents that ran them" tone="risk" icon="bell">
-<p><small>Found by counting who wrote each row · affects: which checks you can trust first-hand.</small></p>
+<ex-card title="Missed: Terra's checks logged by the Lead instead of by Terra" tone="risk" icon="bell">
+<p><small>Found by counting who wrote each check row and opening examples · affects: which checks you can trust first-hand.</small></p>
 </ex-card>
 
 <ex-callout title="Not audited" tone="question" icon="test-tube">
@@ -132,7 +132,7 @@ xychart-beta
   bar "Evaluator" [0, 0, 0, 1]
 </script></ex-mermaid>
 
-<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. On the real page, each bar opens that writer's rows for that day.</p>
+<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. The chart shows whose work is in the log and how much; it can't show whether a row came when the work happened, which only an audit can. On the real page, each writer's rows for a day can be opened; the next document picks how.</p>
 
 <h2 id="specification">The Specification</h2>
 

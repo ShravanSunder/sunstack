@@ -49,7 +49,7 @@ flowchart LR
   peer -. "its own record; nothing copied" .- sys
 ```
 
-Outside the system, and staying outside: the owner never reads raw rows, CSV or diffs; no row or page goes in a product repository; the Router engine and Demistify's components are used as they are.
+Outside the system, and staying outside: the owner needn't read raw rows, CSV or diffs; no row or page goes in a product repository; the Router engine and Demistify's components are used as they are.
 
 ## Words this document defines
 
@@ -128,9 +128,9 @@ Each term below is a noun the obligations are written over, defined by what make
 **E11 Audit.** A comparison of one Writer's stretch of work against what actually happened.
 - Same when: one Writer, one stretch (from one point to another).
 - Relationships: belongs to one Writer and one Work; finds zero or more Missed items.
-- Always true: names what it compared against: the agent's own transcript, and the plan's and repository's required checks.
+- Always true: names what it compared against, and what it couldn't see.
 - States: done.
-- Replaces: pstack's "audit the log against the transcript". Basis: U5; the owner's pointer to pstack's skill (6 Nov).
+- Replaces: pstack's "audit the log against the transcript". Basis: U5; the owner's pointer to pstack's skill (6 Nov). How an audit is done, and by whom, is Program Design's.
 
 **E12 Story.** The Lead's account of one subject, for the owner.
 - Same when: one subject in one Workstream. A rewrite is a new version that replaces the old.
@@ -196,7 +196,8 @@ Each obligation names the entities it's about, the requirement it serves, what p
 
 **R7 · U1 · E5.** Decisions show in two columns. The owner asked for these on 6 Nov ("we need columsn for low value dicions agent make vs once i look at i wnat to be clear"), refining his 3 Nov rule ("I don't want to see every decision that any model made ... I want the lead to see it and I want to see what's important").
 - "Yours, or worth your look" is shown in the open. It holds the owner's decisions, decisions that change or fill in the design or plan, and decisions that depart from anything already decided.
-- "Agents' own calls" holds the rest: made without asking, inside existing authority, changing nothing decided. The Lead reviews them; the owner sees the column's count and can open it. An own call is never hidden.
+- "Agents' own calls" holds the rest: made without asking, inside existing authority, changing nothing decided. The Lead reviews them; the owner sees the column's count and can open it.
+- What goes in which column follows the shipped skill's own-call rule (its four conditions, in the live-page reference's "Sorting the record"); keeping the own calls reachable is the Lead's reading of "columns", not the owner's words.
 - Fails when a decision that changes the design or plan, or departs from something decided, sits among the own calls.
 
 **R8 · U1 U5 · E5 E10.** If a Decision names no authority, or names an authority inferred from a plan, a review or a page, the page puts it under "worth your look", marked "no authority named", and it is a Missed item.
@@ -220,9 +221,9 @@ Each obligation names the entities it's about, the requirement it serves, what p
 
 **R14 · U4 · E8 E3.** The agent that runs a check logs it: the claim, what ran and on which revision, the result, and what it didn't cover. A Check written by any other Writer shows as reported second-hand, naming both the agent that ran it and the Writer.
 
-**R15 · U4 · E8 E9.** The page shows, under "What was verified", each piece of finished work with its Checks, their results, what wasn't covered, and whether the Lead accepted it. Finished work with no Acceptance shows "not accepted".
+**R15 · U4 · E8 E9.** The page shows, under "What was verified", each piece of finished work with its Checks, their results, what wasn't covered, and whether an Acceptance is in the log. Finished work with none shows "no acceptance recorded"; the page doesn't claim a sign-off didn't happen elsewhere.
 
-**R16 · U4 · E9.** The page shows work as accepted only when an Acceptance names its commit or revision, each Check the Lead read with its result, and what stays unverified. A helper's success report, a green check or a review verdict alone doesn't make work accepted.
+**R16 · U4 · E9.** The page shows work as accepted only when an Acceptance in the log names its commit or revision, each Check the Lead read with its result, and what stays unverified. A helper's success report, a green check or a review verdict alone doesn't make work accepted.
 
 ### What was missed
 
@@ -233,8 +234,8 @@ Each obligation names the entities it's about, the requirement it serves, what p
 - a required check, from the plan or the repository's rules, that didn't run;
 - a Row an agent wrote about another agent's act when the acting agent could have written it.
 
-**R18 · U5 · E11 E3.** Before the Lead accepts a helper's handback, and at each of its own checkpoints, the stretch of work since the last Audit is audited against what happened. The page shows, for each Writer, which stretches were audited and which weren't. A stretch nobody audited shows "not audited", never "nothing missed".
-- Fails when the page shows no Missed items for a stretch that has no Audit.
+**R18 · U5 · E11 E3.** The page shows, for each Writer, which stretches of its work were audited and which weren't. A stretch with no Audit, or one whose Audit couldn't see the work (for example, an unreadable transcript), shows "not audited", never "nothing missed". How and when audits happen is Program Design's.
+- Fails when the page says nothing was missed for a stretch with no Audit, or doesn't mark that stretch "not audited".
 
 ### What needs the owner (attention)
 
@@ -251,8 +252,8 @@ Each section shows current Stories, and a routine Story folds at the end of its 
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
 - Fails when the same Story, Decision, Shortcut or Check text appears in full twice.
 
-**R22 · U7 · E13 E3 E2.** The page is visual and clickable, not a list of links: every count, chart segment and diagram node opens the items it stands for. It shows, as a picture, who wrote the log and when: each Writer's Rows over the Work's time. From that picture the owner can see whether agents logged as they went, and whose work is in the log.
-- Fails when a navigation list stands in for content, or the page can't show who wrote what.
+**R22 · U7 · E13 E3 E2.** The page is visual and clickable, not a list of links: every count, chart segment and diagram node opens the items it stands for. It shows, as a picture, who wrote the log and when: each Writer's Rows over the Work's time. From that picture the owner sees whose work is in the log and how much each agent logged. Whether rows came as the work happened is not in that picture; it comes from the audits (R18), and shows "not audited" where none ran.
+- Fails when a navigation list stands in for content, the page can't show who wrote what, or the picture is presented as proof of timely logging.
 
 **R23 · U7 · E13.** The skill's show-me reference teaches an agent how to build this page with Demistify: which display shows each part of R19–R22, with a worked example built from a real log.
 - Passes when the Lead's next real page, built by following the reference and nothing else, meets R6–R22. A build by a fresh agent waits for the evals, outside this change.
@@ -279,9 +280,9 @@ Each obligation's reference is where the right answer comes from. Verification D
 | V6 | R6, R7, R8 | the log's Decisions and the own-call rule (four conditions, from the live-page reference) | a design change sitting among the own calls; a Decision missing from the page |
 | V7 | R9, R10, R11 | the stop treatments, the log's Assumptions with their times, and the owner's words | an owner-only assumption logged after dependent work; one shown as decided after silence |
 | V8 | R13 | the log's Shortcuts and the owner's decisions | an unapproved shortcut not marked for his look |
-| V9 | R15, R16 | the log's Checks and Acceptances, and the repository at the named revision | work shown as accepted with no Acceptance |
-| V10 | R17, R18 | each Writer's transcript, the plan's and repository's required checks, and the log's Audits | an unaudited stretch shown as "nothing missed"; the #194 kind of skipped test suite never appearing |
-| V11 | R19, R20, R21, R22 | the log through the page's stated position, and the owner's page O sections | a top count that doesn't open its items; one item in full twice; no picture of who wrote what |
+| V9 | R15, R16 | the log's Checks and Acceptances, and the repository at the named revision | work shown as accepted with no Acceptance in the log; work shown as never signed off when the log only lacks a record |
+| V10 | R17, R18 | the log's Audits and Missed items, and what each Audit says it compared against | an unaudited stretch shown as "nothing missed"; an audited stretch where the #194 kind of skipped test suite is in the plan's required checks but never appears |
+| V11 | R19, R20, R21, R22 | the log through the page's stated position, and the owner's page O sections | a top count that doesn't open its items; one item in full twice; no picture of who wrote what; that picture offered as proof of timely logging |
 | V12 | R23 | the Lead's next real page, built by following the reference alone | that page fails V6–V11, or needed something the reference doesn't say |
 | V13 | U6–U8 together | the owner's own reading of the page on the next real piece of work | he can't say from the page, without transcripts, what was decided, assumed, cut short, verified and missed |
 
@@ -306,6 +307,6 @@ Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4, R22), E4 (R2), E5–E13 
 ## Open
 
 - **Workstream labels** (E4): the Lead names them when work starts and when new work arises, in plain words; the owner corrects any he can't read. This replaces "pieces", which he didn't recognize.
-- **Who audits** (R18): an agent's own end-of-run audit against its transcript, as pstack does, is the floor. Program Design decides whether a reviewer on another model also audits, as pstack's cross-model review does.
+- **How audits happen** (R18): Program Design decides who audits, when, and against what. pstack's choices are the starting point: the agent audits its own log against its transcript at the end of a run, and a reviewer on another model flags what it sees. Neither is required by the owner's words; both are means to U5.
 - **The short command** (R3): Program Design decides where it lives. It must not change the Router engine or its storage, and the skill itself stays guides only.
 - **Counts that open their items** (R19, R22): Demistify v1's number tile and chart can't hold a link. A Mermaid diagram node whose id matches a page element does open it. Program Design picks the display, or asks the component Lead for a linkable tile.

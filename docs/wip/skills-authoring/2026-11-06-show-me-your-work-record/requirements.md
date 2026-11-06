@@ -9,7 +9,7 @@
 
 ## Words used here
 
-- **The log:** the project's Router work trail, filtered by the work's tag: simple rows that agents write as they work. The owner never reads it raw; the page shows it.
+- **The log:** the project's Router work trail, filtered by the work's tag: simple rows that agents write as they work. The owner needn't read it raw; the page shows it.
 - **Shortcut:** anything done the quick way or off the plan: a check skipped, a step cut, a departure from the design or plan. The record's kind for a departure today is `design-change`.
 - **Verification:** a check that ran, its result, and what it didn't cover; finished work the Lead accepted is verification he signed for (the record's kind for it is `lead-acceptance`).
 - **What was missed:** something that happened but wasn't logged, a claim with weak or no evidence, or a check that should have run and didn't.
