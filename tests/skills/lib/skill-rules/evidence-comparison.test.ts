@@ -86,7 +86,9 @@ function targetKinds(input: unknown): unknown {
   return input;
 }
 
-async function compareScenarios(upstream: boolean): Promise<void> {
+async function compareScenarios(
+  sourceGroup: "self" | "collections" | "agentstudio",
+): Promise<void> {
   const baseline = unpackPinnedSource({
     self: repositoryRoot,
     source: {
@@ -113,10 +115,16 @@ async function compareScenarios(upstream: boolean): Promise<void> {
       definitions.set(rule.name, rule.evidence);
   const entries = readDevelopmentScenarioFiles(repositoryRoot)
     .flatMap((entry) => entry.file.scenarios)
-    .filter(
-      (scenario) =>
-        scenario.status === "active" && (scenario.source.repository !== "self") === upstream,
-    )
+    .filter((scenario) => {
+      const repository = scenario.source.repository;
+      const selectedRepository =
+        sourceGroup === "self"
+          ? repository === "self"
+          : sourceGroup === "agentstudio"
+            ? repository === "agentstudio"
+            : repository !== "self" && repository !== "agentstudio";
+      return scenario.status === "active" && selectedRepository;
+    })
     .map((scenario) => ({ scenario }));
   expect(entries.length).toBeGreaterThan(0);
   const groups = new Map<string, typeof entries>();
@@ -204,13 +212,18 @@ async function compareScenarios(upstream: boolean): Promise<void> {
   }
   expect(compared).toBe(entries.length);
   console.log(
-    `Compared exact subject text/spans and followed text for ${compared} ${upstream ? "upstream" : "self"} scenarios.`,
+    `Compared exact subject text/spans and followed text for ${compared} ${sourceGroup} scenarios.`,
   );
 }
 
 test("evidence trim preserves every kept self scenario's subject and followed text", () =>
-  compareScenarios(false));
+  compareScenarios("self"));
 test.runIf(Boolean(process.env.AI_DEV_SKILLS_ROOT))(
-  "evidence trim preserves every kept upstream scenario's subject and followed text",
-  () => compareScenarios(true),
+  "evidence trim preserves every kept collection scenario (requires AI_DEV_SKILLS_ROOT)",
+  () => compareScenarios("collections"),
+);
+
+test.runIf(Boolean(process.env.AGENTSTUDIO_REPOSITORY))(
+  "evidence trim preserves every kept AgentStudio scenario (requires AGENTSTUDIO_REPOSITORY)",
+  () => compareScenarios("agentstudio"),
 );

@@ -11,4 +11,5 @@
 - The product-workflow question asks about worked/quoted application procedures and supported tool interfaces. Development experiments did not converge; decision-model redesign is pending, and the rule remains unadopted.
 - Scenario outcomes follow the owner-directed kind gate and admitted development labels. Rule config, harness commands/schemas/scripts/tests, tests README, all plugin manifests and Claude/Cursor marketplace versions are updated together; Codex marketplace availability is unchanged.
 - The six runner tests move from `tests/skills/lib/skill-rules/tests/` to `tests/skills/tests/integration/` (the leftover of #190), with the same test count.
+- Adoption refusal fixtures must parse before their semantic guard is checked. Optional collection and AgentStudio evidence tests run separately, with explicit environment setup and named skips for absent checkouts.
 - [Proof and limits](references/2026-11-05-kind-gated-scenarios.md) separates native/mechanical checks from model quality and final owner adoption. Codex/Claude/Cursor installed caches were not refreshed.

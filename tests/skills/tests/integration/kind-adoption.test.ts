@@ -348,8 +348,13 @@ test("a gated rule needs complete current kind evidence, accepts explicit unsure
                           filter: "kind",
                           folder: general.answer?.folder,
                           state: "incomplete",
+                          input_cut: false,
                           reason: { kind: "reads_absent" },
                         },
+                        gap: "Kind filter incomplete: reads_absent",
+                        kind_outcome: "incomplete",
+                        gate: "skip",
+                        gate_outcome: "incomplete",
                       }
                     : entry,
                 ),
@@ -373,11 +378,14 @@ test("a gated rule needs complete current kind evidence, accepts explicit unsure
         },
       ];
       for (const variant of variants) {
+        expect(() => scenarioRunReportSchema.parse(variant.value), variant.name).not.toThrow();
         const filename = path.join(path.dirname(reportFile), `${variant.name}.json`);
         writeFileSync(filename, JSON.stringify(variant.value));
         const refused = await invoke("adopt-rule-scenario.ts", [name, "--report", filename]);
         expect(refused.status, `${variant.name}: ${refused.stderr}`).toBe(5);
         expect(refused.stderr).toContain("kind");
+        if (variant.name === "incomplete")
+          expect(refused.stderr.trim()).toBe("Cannot adopt: kind section is incomplete");
         expect(readFileSync(adoptionFile, "utf8")).toBe(adoptionBytes);
       }
       verdict = 0.1;

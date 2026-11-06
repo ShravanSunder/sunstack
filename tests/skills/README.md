@@ -4,6 +4,17 @@ Rule usefulness is checked on real sources pinned by Git. The excerpt corpus and
 
 Unit tests are colocated beside their modules; integration and end-to-end tests live in `tests/integration/` and `tests/e2e/`, with shared support in `tests/support/`. Run all local checks with `pnpm --dir tests/skills test` and `pnpm --dir tests/skills typecheck`. The pressure entry `test:evals`, its library and sample scenarios remain; receiving-agent pressure proof is separate from rule checks.
 
+The evidence-comparison and kind-replay tests use optional local inputs. Set all three variables to exercise those checks:
+
+```bash
+AI_DEV_SKILLS_ROOT=/path/to/ai-dev-skills \
+AGENTSTUDIO_REPOSITORY=/path/to/agentstudio \
+SUNSTACK_KIND_REPLAY_ANALYSIS=/path/to/round-3-analysis.json \
+pnpm --dir tests/skills test
+```
+
+`AI_DEV_SKILLS_ROOT` supplies the upstream collection checkouts; `AGENTSTUDIO_REPOSITORY` supplies the AgentStudio Git checkout and its pinned history; `SUNSTACK_KIND_REPLAY_ANALYSIS` supplies the retained round-3 analysis. An unset input gives a named skip for that check. Collection and AgentStudio evidence are separate tests, so either configured source still runs when the other is absent. Explicitly configured paths must contain the required files/commits; invalid configured inputs fail. The tests never fetch or discover a checkout from home configuration. Live-provider proof remains separately gated.
+
 > **Status 2026-10-09:** the scenarios were removed while pressure testing is redesigned; this harness, its evaluator library, and its unit tests stay. `pressure-scenarios/` does not exist until a new scenario is added, so `test:evals` exits 1 with nothing to run. The unit tests read sample copies under `fixtures/sample-scenarios/`.
 
 This harness pressure-tests Codex skills through Codex. Most scenarios cover
