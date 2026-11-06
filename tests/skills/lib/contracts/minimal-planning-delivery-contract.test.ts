@@ -19,9 +19,7 @@ const acceptedBoundaryText =
 
 describe("goal delivery intent hard cutover", () => {
   test("uses one ready canonical plan with governing basis and delivery context", () => {
-    const contract = readPluginFile(
-      "shared-references/canonical-implementation-plan.md",
-    );
+    const contract = readPluginFile("shared-references/canonical-implementation-plan.md");
     const planner = readPluginFile("skills/plan-implementation/SKILL.md");
 
     expect(contract).toContain("planning result: ready");
@@ -50,7 +48,9 @@ describe("goal delivery intent hard cutover", () => {
     expect(contract).toContain(
       "picks one, records the choice as a decision entry citing its alternatives and reason through `practices-show-me-your-work`, states the chosen grouping in the plan with that entry's id, and returns `ready`",
     );
-    expect(planner).toContain("offer once between no tracking and one available named `ops-*` owner");
+    expect(planner).toContain(
+      "offer once between no tracking and one available named `ops-*` owner",
+    );
     expect(contract).toContain("first resolves the project root");
     expect(contract).toContain(
       "writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan",
@@ -61,9 +61,7 @@ describe("goal delivery intent hard cutover", () => {
   });
 
   test("keeps direct improvement planning plan-only and routes orchestrated delivery through one planner", () => {
-    const improvementPlanner = readPluginFile(
-      "skills/plan-improve-repo/SKILL.md",
-    );
+    const improvementPlanner = readPluginFile("skills/plan-improve-repo/SKILL.md");
     const template = readPluginFile(
       "skills/plan-improve-repo/references/improvement-plan-template.md",
     );
@@ -94,9 +92,7 @@ describe("goal delivery intent hard cutover", () => {
   test("preserves the ready plan contract across execution, handoff, and review", () => {
     const executor = readPluginFile("skills/implement-plan/SKILL.md");
     const planHandoff = readPluginFile("skills/plan-handoff/SKILL.md");
-    const implementationHandoff = readPluginFile(
-      "skills/implementation-handoff/SKILL.md",
-    );
+    const implementationHandoff = readPluginFile("skills/implementation-handoff/SKILL.md");
     const reviewer = readPluginFile("skills/implementation-review/SKILL.md");
 
     expect(executor).toContain("Proceed only when result is `ready`");
@@ -135,19 +131,13 @@ describe("goal delivery intent hard cutover", () => {
       "skills/spec-program-review/references/finding-and-reduction-schema.md",
     );
     const designOrchestrator = readPluginFile("skills/orchestrator-design/SKILL.md");
-    const implementationReview = readPluginFile(
-      "skills/implementation-review/SKILL.md",
-    );
+    const implementationReview = readPluginFile("skills/implementation-review/SKILL.md");
     const implementationReviewResults = readPluginFile(
       "skills/implementation-review/references/finding-and-reduction.md",
     );
 
-    expect(designReview).toContain(
-      "Prefer one independent review-and-correction round",
-    );
-    expect(designReview).toContain(
-      "each affected artifact corrected at most once in that round",
-    );
+    expect(designReview).toContain("Prefer one independent review-and-correction round");
+    expect(designReview).toContain("each affected artifact corrected at most once in that round");
     expect(designReview).toContain(
       "until the review is ready or not-converging (see `references/finding-and-reduction-schema.md`)",
     );
@@ -169,9 +159,7 @@ describe("goal delivery intent hard cutover", () => {
     expect(implementationReviewResults).toContain(convergenceNoProgressText);
     expect(implementationReviewResults).toContain(convergenceBaselineText);
     expect(implementationReviewResults).toContain(acceptedBoundaryText);
-    expect(implementationReviewResults).toContain(
-      "precedence `not-converging -> blocked-input",
-    );
+    expect(implementationReviewResults).toContain("precedence `not-converging -> blocked-input");
     expect(implementationReview).toContain(
       "The convergence rule and the accepted boundary live in `references/finding-and-reduction.md`",
     );
@@ -212,9 +200,7 @@ describe("goal delivery intent hard cutover", () => {
     const programDesign = readPluginFile("skills/program-design/SKILL.md");
 
     expect(planContract).toContain("project-root `.gitignore`");
-    expect(planContract).toContain(
-      "`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`",
-    );
+    expect(planContract).toContain("`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`");
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");
     expect(designOrchestrator).toContain(
       "Decisions and their detail go to the work's record through `practices-show-me-your-work`",
@@ -224,12 +210,8 @@ describe("goal delivery intent hard cutover", () => {
     expect(programDesign).toContain("artifact-home policy");
     expect(
       existsSync(
-        path.join(
-          pluginRoot,
-          "skills/orchestrator-design/references/design-run-state.md",
-        ),
+        path.join(pluginRoot, "skills/orchestrator-design/references/design-run-state.md"),
       ),
     ).toBe(false);
   });
-
 });
