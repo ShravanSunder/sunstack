@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skill rules: all decisions</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="skill-rules-all-decisions.html">All decisions</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Skill rules: every decision and how the warning works</h1>
+<p>6 Nov. One page: what's open for you, what's already decided, and how the warning is designed to work. The product-workflow rule is switched off and still being tested, so everything under "How it will work" is the design, not yet proven.</p><p>To answer: reply in chat ("agree with all" means my suggestion on all eight), or pick in the boxes and copy your answers from Comments. The boxes don't save anything on their own.</p><p>Words used: <strong>Jev</strong> is the small judging model that answers yes/no and multiple-choice questions; <strong>kind check</strong> means Jev deciding what kind of skill something is; numbers like 0.86 are how sure Jev was, from 0 to 1.</p>
+
+<ex-callout title="Open for you: 8 answers, my suggestion marked on each" tone="question" icon="chat-circle">
+<p>Six questions about specific skill text (1 to 6), one about how much the agent is shown (7), and one about when a rule may be switched on (8). Replying "agree with all" is enough. Until you answer, I work with my suggestions and re-check anything you change.</p>
+</ex-callout>
+
+<h2 id="how">How it will work once switched on (designed, still being tested)</h2>
+<ex-mermaid id="flow" label="From skill to warning"><script type="text/plain">
+flowchart TB
+  f["1. Which skills? Jev reads each skill's description:<br/>general, role or domain → this rule checks it;<br/>tool manual or one repo's own → this rule skips it"] --> e["2. Which text? The engine cuts each file into sections<br/>(a heading and its own text, plus the start<br/>of any file that text loads)"]
+  e --> q["3. Two yes/no questions per section:<br/>a. does it send the agent into one product's own steps?<br/>b. is that only this toolkit's shared stack?"]
+  q --> c["4. Warn only if a is clearly yes and b clearly no;<br/>in between → no warning, listed as unsure"]
+  c --> w["5. The agent sees a short warning:<br/>file and line range of the section, the rule's fixed reason,<br/>and the files that section loads"]
+</script></ex-mermaid>
+
+<h3 id="what-jev-reads">What Jev reads (a separate model call, not the agent's context)</h3>
+<ul>
+<li><strong>Kind check:</strong> only the skill's one-line description.</li>
+<li><strong>The rule:</strong> one section at a time, at most 50,000 characters, plus the first 3,000 characters of each file it loads. One request is at most 131,072 bytes, and a choice question has at most 255 options. If text is cut to fit, the result says so.</li>
+</ul>
+
+<h3 id="what-agent-sees">What the agent sees (its context)</h3>
+<p>For a warning, today's printout is short, about 6 to 8 lines, with no pasted skill text. Illustration only (the rule is switched off, so no real warning exists yet; the numbers are made up):</p>
+<pre>plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md:6-24 warn
+  general-skill.overfits-to-product-workflow
+  why: references/general-skill.md:8: A skill meant for any repository routes no
+       step, branch or load into one product's own application workflow …
+  Answers: {routes_product: yes 0.85, shared_only: no 0.20}
+  read: target references/agentstudio-loop.md   (a file this section loads)
+  same rule also nudged: …</pre>
+<p>Two things can still flood the agent's context today; number 7 below proposes limits for both:</p>
+<ul>
+<li>For each <em>unsure</em> section, the printout pastes the whole section as evidence, up to about 50,000 characters.</li>
+<li>Nothing limits how many warnings one run prints.</li>
+</ul>
+
+<h3 id="false">What must pass before it can be switched on</h3>
+<ul>
+<li>Thresholds (how sure Jev must be): warn only on a clear yes to question a and a clear no to question b; anything in between is listed as unsure, not warned.</li>
+<li>Must-stay-quiet tests: real text such as <code>pnpx shadcn add button</code>, a metrics query and <code>cargo clean</code>. If any of them warns, the design is rejected.</li>
+<li>All the labelled test passages must pass, then 6 more, kept from whoever tunes the rule, are run once. (This is the current rule; question 8 below would change it.)</li>
+<li>You switch the rule on. If its questions, thresholds, test passages or the kind check change later, it switches off until it passes again and you switch it on again.</li>
+</ul>
+
+<h2 id="q">Your answers</h2>
+
+<h3 id="q1">1. presentation-html: "read Demistify's guide from its website"</h3>
+<pre>MUST load the guide for the page's binding
+(https://demistify.getagentstudio.dev/v1/authoring/SKILL.md)</pre>
+<ex-choice id="choice-1" title="Warn on this?">
+  <ex-option id="c1-no" title="**Don't warn** (my suggestion)"><template slot="summary">Demistify is our own shared page tool, used for every page.</template></ex-option>
+  <ex-option id="c1-yes" title="Warn"><template slot="summary">It ties a general skill to one product.</template></ex-option>
+</ex-choice>
+
+<h3 id="q2">2. presentation-html: "build the page with Demistify's command"</h3>
+<pre>pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz embed …</pre>
+<ex-choice id="choice-2" title="Warn on this?">
+  <ex-option id="c2-no" title="**Don't warn** (my suggestion)"><template slot="summary">It's our own shared page tool's command.</template></ex-option>
+  <ex-option id="c2-yes" title="Warn"><template slot="summary">It runs one product's own command.</template></ex-option>
+</ex-choice>
+
+<h3 id="q3">3. scaffold-project: "run scaffold-project.sh"</h3>
+<pre>bash ${CLAUDE_PLUGIN_ROOT}/scripts/scaffold/scaffold-project.sh --name "project-name" …</pre>
+<ex-choice id="choice-3" title="Warn on this?">
+  <ex-option id="c3-no" title="**Don't warn** (my suggestion)"><template slot="summary">The script ships inside the same plugin; it's the skill's own tool.</template></ex-option>
+  <ex-option id="c3-yes" title="Warn"><template slot="summary">It sends the agent into one plugin's own script, its own procedure, which the rule treats like a product's own steps.</template></ex-option>
+</ex-choice>
+
+<h3 id="q4">4. practices-verification: "find the project's verify-&lt;app&gt; skill and run it"</h3>
+<pre>Resolve .claude/skills/verify-&lt;app&gt; …</pre>
+<p><code>&lt;app&gt;</code> is a blank to fill in, not a real product. Both checking agents said warn; I disagree.</p>
+<ex-choice id="choice-4" title="Warn on this?">
+  <ex-option id="c4-no" title="**Don't warn** (my suggestion)"><template slot="summary">It works for any project.</template></ex-option>
+  <ex-option id="c4-yes" title="Warn"><template slot="summary">The two checking agents' reason: it sends the agent into each app's own verification recipe (its scripts and launch steps), which belong to that app's repo.</template></ex-option>
+</ex-choice>
+
+<h3 id="q5">5. audit-security-review: "load references/routing.md"</h3>
+<p>Both checking agents said don't warn. They disagreed only on how to file it as a test example: an ordinary example (nothing suspicious) or a near miss (looks like a problem but isn't). The rule needs at least 3 of each kind. It has exactly 3 ordinary examples now, not counting this one (disputed passages aren't counted): "ordinary" makes it 4; "near miss" leaves 3, which is still enough. Agents see no warning either way.</p>
+<ex-choice id="choice-5" title="File it as:">
+  <ex-option id="c5-plain" title="**An ordinary example** (my suggestion)"><template slot="summary">It only loads the skill's own file.</template></ex-option>
+  <ex-option id="c5-near" title="A near miss"><template slot="summary">Loading a file by path could look like a problem at first glance; it isn't.</template></ex-option>
+</ex-choice>
+
+<h3 id="q6">6. What kind of skill is practices-verification-maintenance?</h3>
+<p>It helps any project build its own verification skill. Its description today: "Use when creating or maintaining a project's verification skill, its journeys and drivers." Jev isn't sure (0.63), so the rule skips it as unsure. The kind decides whether this rule checks it.</p>
+<ex-choice id="choice-6" title="practices-verification-maintenance is:">
+  <ex-option id="c6-general" title="**A general practice** (my suggestion)"><template slot="summary">It works in any repository, so this rule checks it. Its description gets one wording change so Jev places it (tested: general 0.86). Consequence, measured: its worked example (lines 53–60, a made-up "ledger" app with its own verify task, data folder and commands) should get a warning once the rule is switched on, following your earlier ruling that worked product-like examples warn (in today's test Jev flagged it, 0.99).</template></ex-option>
+  <ex-option id="c6-repo" title="One repository's own procedure"><template slot="summary">General-skill rules skip it (your earlier label). Its description would say so (tested: 0.91).</template></ex-option>
+</ex-choice>
+
+<h3 id="q7">7. How much should the agent be shown?</h3>
+<ex-choice id="choice-7" title="Printout limits:">
+  <ex-option id="c7-cap" title="**Short entries and a cap per rule** (my suggestion)"><template slot="summary">Unsure entries print only the file, line range and Jev's answers, never the section text. Per rule and per run, at most 10 warnings and at most 10 unsure entries are printed, then "and N more in report.json". The full detail stays in report.json for anyone who needs it.</template></ex-option>
+  <ex-option id="c7-today" title="Keep today's printout"><template slot="summary">Unsure sections keep pasting their full text, and there's no cap.</template></ex-option>
+</ex-choice>
+
+<h3 id="q8">8. Can a rule that only warns when it's sure be switched on?</h3>
+<p>After tonight's tests, the best design (section-level, two questions) on 32 test passages: <strong>21 right, 0 false warnings, 0 passages wrongly judged clean, 11 unsure</strong>. Line 17's section is warned every time, in 4 of 4 identical tries. On an unsure passage the rule gives no warning; the passage is listed as unsure, in the printout (shortened if you pick my suggestion on 7) and in report.json.</p>
+<p>Your current rule for switching a rule on says every test passage must be decided correctly, with none unsure. With 11 unsure, this rule would stay off. Of the 15 passages that should warn, it warns on 12 and is silent, as unsure, on 3: the 908-line catalogue, a quoted AgentStudio-loop example, and a startup sequence mixing the shared stack with one app's own launcher.</p>
+<ex-choice id="choice-8" title="Rule for switching on:">
+  <ex-option id="c8-selective" title="**Allow a rule that warns only when it's sure** (my suggestion)">
+    <template slot="summary">**Condition:** on all test passages, 0 false warnings and 0 passages wrongly judged clean; unsure ones are listed; and at least 12 of the 15 known problems warned (written down before the final check). **Next:** run once the 6 passages kept from whoever tunes the rule. All 6 should not get a warning: unsure counts as passing there, a warning fails. This checks only that it doesn't warn on new clean text; it can't show it catches new problems, because none of the 6 is a problem. If they pass, you decide whether to switch it on. **Cost:** some real problems get no warning: 3 of 15 in the tests. Agents aren't told which unsure entries matter.</template>
+  </ex-option>
+  <ex-option id="c8-strict" title="Keep the current rule: none unsure">
+    <template slot="summary">**What happens:** the rule stays off until a design decides every passage. Three design rounds tonight didn't get there, and the next step would need new ideas, not tuning. **Cost:** no warnings at all, including on line 17.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="decided">Already decided</h2>
+<ul>
+<li><strong>Step 3 merged</strong> (your "yes merge"): pull request #193, main <code>6a51c4b2</code>. The product-workflow rule is switched off, so there are no new warnings yet.</li>
+<li><strong>The warning names the section</strong> (your answer on the precision page). One correction: Jev can only answer yes/no and choices, not write sentences. So the reason in the warning is the rule's own fixed sentence, as in the example above.</li>
+<li><strong>Engine 0.7.1</strong>, under your standing engine grant: refuses more than 255 choices clearly, and says "couldn't locate" instead of guessing a line. Merged as sunstack-tools #133 (<code>bf0024cf</code>) and tagged <code>v0.7.1</code>; the release is running now.</li>
+<li><strong>#190 closed</strong>, with a note that its moves landed in #193. It can be reopened.</li>
+<li><strong>The two-rule split is dropped for now:</strong> measured, it didn't help.</li>
+</ul>
+
+<h2 id="next">Running now</h2>
+<ul>
+<li>The decision-model adviser is testing section-level warnings on all test passages, using my suggestions above as stand-ins for your answers.</li>
+<li>The 0.7.1 release: build, sign, publish to npm and Homebrew.</li>
+</ul>
+</ex-document>
+</body>
+</html>

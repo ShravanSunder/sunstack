@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product-workflow warning: how precise</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="rule-precision-decision.html">Warning precision</a>
+    <a href="d3-label-disputes.html">Step 3: label disputes</a>
+    <a href="d3-scope-decision.html">Step 3: land or wait (answered)</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Must the product-workflow warning point at one exact line?</h1>
+
+<ex-callout title="The question" tone="question" icon="chat-circle">
+<p>Step 3 merged last night with the product-workflow rule switched off, as you chose. Overnight tests show the rule can usually tell <em>that</em> a section sends agents into one product's own workflow, but not reliably <em>which line</em>.</p>
+<p><strong>Recommended: let the warning name the section (its heading and line range) with the model's own one-sentence reason, instead of one exact line.</strong> The alternative keeps the exact-line warning, and the rule stays off until line-finding is reliable.</p>
+</ex-callout>
+
+<h2 id="open">Open with you, whichever you choose</h2>
+<ul>
+<li>The five label questions on the <a href="d3-label-disputes.html">label disputes page</a>: the rule can't be switched on until they're answered.</li>
+<li>Whether <code>practices-verification-maintenance</code> is a general practice or one repository's own procedure.</li>
+<li>Whether to close <a href="https://github.com/ShravanSunder/sunstack/pull/190">pull request #190</a>, my stale draft whose test moves landed with step 3. It stays open until you say.</li>
+</ul>
+
+<h2 id="example">A real example</h2>
+<p>Line 17 of <code>ops-observability-stack/SKILL.md</code>: "IF the work is AgentStudio debug or beta, load <code>references/agentstudio-loop.md</code> and follow that loop." Scores below are how sure the model is, from 0 to 1.</p>
+<ul>
+<li><strong>Does the section (lines 6 to 24) send agents into one product's own workflow?</strong> Every design said yes, at 0.80 to 0.87, in four identical requests each.</li>
+<li><strong>Which line?</strong> Round 2's line-finder, in four identical requests, picked line 14 every time (the shared stack's <code>~/dev/ai-tools/observability/README.md</code>, 0.68 to 0.75) and never line 17 (0.02 to 0.06). The best design's own line-finder, in four identical requests tonight, placed line 17 once.</li>
+</ul>
+<p>What this shows: the section-level judgment was stable in these repeats; the line wasn't. A section-level warning hasn't been generated or checked yet, so whether its wording is right is still to be shown.</p>
+
+<ex-mermaid id="two-warnings" label="What each kind of warning would rest on"><script type="text/plain">
+flowchart TB
+  judge["section judgment, line 17's section:<br/>yes, 0.80 to 0.87, in 4 of 4 repeats"] --> section["section-level warning:<br/>heading + lines 6 to 24 + one-sentence reason<br/>(not yet generated or checked)"]
+  locate["line choice on line 17's section:<br/>round 2: line 14 in 4 of 4 repeats;<br/>best design: line 17 in 1 of 4"] --> exact["exact-line warning, in these trials:<br/>usually wrong or missing"]
+</script></ex-mermaid>
+
+<h2 id="choice">Your choice</h2>
+<ex-choice id="precision" title="What should the warning promise?">
+  <ex-option id="section" title="**The section, with the model's reason** (recommended)">
+    <template slot="summary">**Agents see:** the section's heading and line range, plus the model's own one-sentence reason (generated, not a quote). **Next:** score the 26 test passages on whether the right section is flagged and the reason is fair. If any of the 26 fails, the design is reworked and re-scored before anything else. Only once all 26 pass are the six passages kept unseen run, once. If those also pass, you decide whether to switch it on; if they fail, the rule stays off and the next attempt needs a fresh unseen set. **Costs:** agents find the exact line themselves, which is harder in long sections. One test file is 908 lines with no headings, so its warning would name the file and its whole line range; that removes the line-picking problem, but whether such a warning is useful and its reason fair is part of the scoring above, not yet shown.</template>
+  </ex-option>
+  <ex-option id="exact" title="Keep the exact-line warning">
+    <template slot="summary">**Agents see:** nothing until line-finding is reliable. **Next:** more line-finder research; no design has managed it in three tries, and the 908-line file still needs an engine change. **Costs:** the rule stays off for an unknown time.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="split">The split I proposed doesn't help</h2>
+<p>Last night I drafted splitting the rule in two: sending agents into a product's workflow, and teaching with a product's own worked examples. On the same 26 passages the split got 13 to 14 right, against 15 for keeping one rule, so it isn't a reliability fix. My wording for the worked-example half was also wrong: "unless labelled as an example" excused a worked story you'd want flagged. I'm not proposing the split for now.</p>
+
+<details>
+<summary>Overnight numbers</summary>
+<ul>
+<li>Three design rounds by the decision-model adviser, about $0.08 in total, all on the rule's test passages; the six passages kept for the final check are still unseen.</li>
+<li>Best single design, with its thresholds set so it gives no false warnings: of 26 passages, 15 right, 10 unsure, and 1 judged right but its line couldn't be placed; 0 false warnings, 0 missed. On its older, looser thresholds, one identical repeat produced a false warning, so those thresholds aren't safe.</li>
+<li>Separately, a sunstack engine fix (refuse more than 255 choices per question clearly, and report when a line couldn't be located) is built, tested and in independent review as its own pull request. It matters most for the exact-line option. Nothing is merged or released.</li>
+</ul>
+</details>
+</ex-document>
+</body>
+</html>
