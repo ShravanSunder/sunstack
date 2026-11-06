@@ -72,7 +72,7 @@ flowchart LR
 ```text
 plan path: docs/specs/2026-11-03-skill-rules/deliverables/3-one-rule-end-to-end/plan.md
 originating planner: plan-implementation
-planning result: ready once round 3 settles the criteria (B1 waits on it; B2 can start now)
+planning result: ready (round 3 settled the criteria; B1, B2, B4 and B5 data done; K002 question design moved to the Jev Advisor; scope decision pending with the owner: land with the rule held, or keep open until it earns adoption)
 governing planning basis:
   kind: reviewed-four-document-design
   ai-tools docs/specs/2026-11-03-skill-rules/ (reviewed to convergence, 0 open at 85ecf2c7/006e57e3), merged in #188 → main 24fa3d92; engine design sunstack-tools docs/specs/2026-11-04-owner-assessment/, released as 0.7.0 (00a0cad7)
@@ -86,3 +86,5 @@ delivery context:
 ## Changed from
 
 **5 Nov, after the first commission (Lead):** the Verifier showed that adopting the rule alone can't make it nudge: its record and scenarios lack the trust evidence `deriveRuleState` requires. Step 5 adds it, using the mechanism the owner already agreed (R18–R21); B3 now waits on it. Round 3 (description only with the owner's `gh` wording) made zero wrong gate decisions and skipped 7 of the rule's 31 scenarios against 9 for the round-1 wording, so the round-2 criteria ship with the description-only instruction. The 7 skipped scenarios are an owner decision ([page](../../d3-kind-skips-decision.html)); only the final adoption waits on it.
+
+**5 Nov, evening (Lead):** three development runs of K002 didn't converge (17/6/17 → 16/5/19 → 14/4/22); question design moved from the Implementer to the Jev Advisor, whose redesign recommends a two-question candidate for further development, not adoption. The 1,000-line locator cap was reverted (TypeSafe Choice allows at most 255 options); the 908-line catalogue is a named locator blocker. The step's agreed outcome (owner adopts; line 17 nudged) can't be met without open-ended design rounds, so the scope is the owner's decision ([page](../../d3-scope-decision.html)); draft PR #193 carries everything else with the rule held. Sun routed the #190 test moves (B4) into this PR and the peekaboo / domain-decision-models description rewrites.
