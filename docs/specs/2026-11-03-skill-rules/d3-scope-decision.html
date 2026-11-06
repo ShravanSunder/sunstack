@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 3: land the path, or wait for the rule</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="d3-scope-decision.html">Step 3: land or wait</a>
+    <a href="d3-label-disputes.html">Step 3: label disputes</a>
+    <a href="d3-kind-skips-decision.html">Step 3: skipped scenarios</a>
+    <a href="d3-design.html">3 · One rule end to end: design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Step 3: land the working path now, or wait until the rule earns adoption?</h1>
+
+<ex-callout title="The question" tone="question" icon="chat-circle">
+<p>Step 3 was meant to end with you adopting the product-workflow rule and an agent getting a nudge at <code>ops-observability-stack</code> line 17. Everything around the rule is built and proven. The rule itself isn't ready: its questions need more design rounds, of unknown length.</p>
+<p><strong>Recommended: land step 3's pull request now with the rule held (no nudges), and make "the rule earns adoption" its own next step.</strong> The alternative is to keep step 3 open until the rule is ready.</p>
+</ex-callout>
+
+<h2 id="picture">Where step 3 stands</h2>
+<ex-mermaid id="status" label="Step 3 parts and their state"><script type="text/plain">
+flowchart LR
+  gate["kind check and gate<br/>(built, proven on a real run:<br/>AgentStudio tool manual 0.86,<br/>observability general 0.87)"] --> evidence["rule evidence<br/>(built: 40 labelled passages,<br/>6 set aside, adoption checks)"]
+  evidence --> rule["the rule's questions<br/>(NOT ready: best design<br/>17 of 26 right, 9 unsure)"]
+  rule --> adopt["you adopt,<br/>line 17 nudges<br/>(waits on the rule)"]
+</script></ex-mermaid>
+
+<h2 id="example">A real example of what isn't ready</h2>
+<p>On line 17 itself ("IF the work is AgentStudio debug or beta, load <code>references/agentstudio-loop.md</code> and follow that loop"), the best design now correctly says "this sends the agent into one product's own workflow". But when it has to point at the line, it picks line 17 with only 0.42 confidence, and 0.37 when the identical request is repeated, below the 0.40 bar that was fitted to it. A nudge has to point at the right line, so it can't be trusted yet.</p>
+<p>Across 26 development passages, the three designs tried today all made <strong>no false nudges</strong>, which none of the earlier runs managed. The best one also missed nothing, but stayed unsure on 9. The Jev Advisor's read: the next round needs two new distinctions (who owns each command in text that mixes a product's steps with shared-toolkit steps, and when a worked example is a product's own artifact), not more of the same data.</p>
+
+<h2 id="choice">Your choice</h2>
+<ex-choice id="scope" title="How should step 3 finish?">
+  <ex-option id="land-now" title="**Land the path now, rule held; the rule's design becomes its own step** (recommended)">
+    <template slot="summary">**What lands:** the kind check and gate on sunstack 0.7.0, the 78 kind scenarios, the rule's 40 labelled development passages and 6 set-aside ones, the adoption checks that refuse an unproven or changed rule, the two rewritten descriptions, and the test-file moves from #190. **What agents see:** no new nudges; the rule is listed as held, with why. **Next step:** redesign the rule's questions, then adopt; its proof reuses everything landed here. **Cost:** step 3 ends without its headline outcome, and you see the line-17 nudge later.</template>
+  </ex-option>
+  <ex-option id="keep-open" title="Keep step 3 open until the rule earns adoption">
+    <template slot="summary">**What happens:** further design rounds with the Jev Advisor inside step 3, then the one final run on the set-aside passages, then your adoption. **Cost:** the pull request keeps growing on an unknown timeline, and the built parts wait unreviewed and unmerged. **Gain:** one pull request delivers the whole outcome.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="advisor">What the Jev Advisor found</h2>
+<p><strong>Recommendation:</strong> keep the "two separate questions" design (is there an application's own procedure? is it only the shared toolkit's?) as the next candidate to develop, and adopt none of today's designs yet. It prefers 9 listed "unsure" answers to the current questions' 3 silent misses.</p>
+<p><strong>What the 9 unsure passages share:</strong> they aren't one failure. Five are quiet passages the model can't yet tell apart from an application's own work: a plain <code>cargo clean</code> story, a Victoria metrics query, Codex/Claude platform metadata, a <code>shadcn</code> command, and a portable toolchain reference. Four are real breaches hidden by how they're written: the 908-line catalogue, a quoted line-17 example, a sequence that mixes the shared stack's start command with one app's own launcher, and a worked story about starting the sunstack rule engine.</p>
+<p><strong>More data, or another question?</strong> More of the same data won't settle it. Two narrower questions might, though that isn't proven: who owns each individual command in text that mixes a product's steps with shared-toolkit steps, and whether a worked example is a concrete product's own artifact (your rulings already say those nudge). They'd be tested first on today's passages, then on fresh real contrasts, before any final run.</p>
+<p><strong>Also for your attention:</strong> the expected-line lists for a few breaches include neighbouring lines, such as a shared start command next to the app's own launcher. Before the next round I'll settle whether a nudge must point at the offending command itself or anywhere in the labelled block, without changing any label to fit a result.</p>
+
+<h2 id="engine">The engine change, as a sketch only</h2>
+<p>The 908-line file can't be pointed at line by line, because the provider allows at most 255 choices per question. One fix is a two-stage line-finder in the engine: first choose a 40-line window, then the line inside it, with line numbers marked in the text Jev reads. Nothing is being built.</p>
+<ex-mermaid id="engine-sketch" label="Two-stage line-finder, sketch"><script type="text/plain">
+flowchart LR
+  text["the section's own text,<br/>line numbers marked"] --> ask["the rule's questions,<br/>plus: which line or which window?"]
+  ask --> direct["80 lines or fewer:<br/>pick the line"]
+  ask --> window["longer: pick a<br/>40-line window"]
+  window --> fine["one more request:<br/>pick the line inside it"]
+  direct --> report["nudge at that line,<br/>or an explicit 'couldn't locate'"]
+  fine --> report
+</script></ex-mermaid>
+<ul>
+<li><strong>What it would cost:</strong> one extra request for a long piece that needs locating; engine work on continuing a request, cancellation and the report format; a sunstack release.</li>
+<li><strong>Why not yet:</strong> in today's test the catalogue's window step chose "none" every time, so the second stage never ran. The Advisor recommends proving it on a real long positive and a long quiet file first.</li>
+<li><strong>Simpler alternatives:</strong> keep direct line-finding and report "too long to locate" plainly, or split very long reference files into real sections. Neither fixes today's pinned 908-line case.</li>
+</ul>
+<p>The Advisor's full report: <code>memory-logs/…/jev-advisor/k002-redesign-2026-11-05.md</code>.</p>
+
+<h2 id="unchanged">What doesn't change either way</h2>
+<ul>
+<li>Your two open pages still apply: the <a href="d3-label-disputes.html">label disputes</a> and the kind of <code>practices-verification-maintenance</code>. The rule can't be adopted until they're answered.</li>
+<li>The six set-aside passages stay unseen by whoever tunes the rule, and are scored once, in the final run.</li>
+<li>The 908-line file stays a named blocker until one of the fixes above is chosen and proven.</li>
+</ul>
+
+<details>
+<summary>The numbers behind this</summary>
+<ul>
+<li>Three tuning runs of the original questions: 17, then 16, then 14 right out of 40, with 17 to 22 unsure; tuning the thresholds can't fix it, because a quiet example scores higher than a real breach.</li>
+<li>Designs compared today, after fitting on development passages only (26 that can be scored): current questions 18 right, 0 false, 3 missed, 5 unsure; two separate questions 17, 0, 0, 9; one category question 14, 0, 3, 8.</li>
+<li>Total model spend for step 3 so far: about $0.14.</li>
+</ul>
+</details>
+</ex-document>
+</body>
+</html>
