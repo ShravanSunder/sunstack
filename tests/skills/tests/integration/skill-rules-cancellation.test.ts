@@ -14,7 +14,7 @@ import {
   installPinnedSkill,
   saveConfig,
   saveRules,
-} from "../test-fixture.ts";
+} from "../../lib/skill-rules/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

@@ -1,10 +1,10 @@
 import path from "node:path";
 import { describe, expect, test } from "vitest";
-import { loadRuleDenominators } from "../denominators.ts";
-import type { RuleDenominator } from "../denominators.ts";
-import { formatLintReport, lintReportSchema, reportGaps } from "../report.ts";
-import type { LintReport } from "../report.ts";
-import { kitRelative, repositoryRoot } from "../test-fixture.ts";
+import { loadRuleDenominators } from "../../lib/skill-rules/denominators.ts";
+import type { RuleDenominator } from "../../lib/skill-rules/denominators.ts";
+import { formatLintReport, lintReportSchema, reportGaps } from "../../lib/skill-rules/report.ts";
+import type { LintReport } from "../../lib/skill-rules/report.ts";
+import { kitRelative, repositoryRoot } from "../../lib/skill-rules/test-fixture.ts";
 
 const skillFile = "plugins/example/skills/sample/SKILL.md";
 const referenceFile = "plugins/example/skills/sample/references/guide.md";

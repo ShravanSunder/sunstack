@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 3: the skipped scenarios</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="d3-kind-skips-decision.html">Step 3: skipped scenarios</a>
+    <a href="d3-design.html">3 · One rule end to end: design</a>
+    <a href="kind-filter-round-2.html">Kind filter round 2</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Step 3: may I rewrite three skills' descriptions?</h1>
+
+<ex-callout title="The question" tone="question" icon="chat-circle">
+<p><strong>May I rewrite the descriptions of <code>peekaboo</code>, <code>domain-decision-models</code> and <code>practices-verification-maintenance</code> so each says plainly what the skill is for?</strong> Recommended: yes. Choosing it lets me draft all three lines; none ships until you've seen it, and the third line also needs your answer to the second question on this page.</p>
+<p>Under the current adoption rule, until all three are placed you can't adopt the product-workflow rule, so it can't nudge any agent. Everything else in step 3 keeps going meanwhile.</p>
+</ex-callout>
+
+<h2 id="picture">What goes wrong today</h2>
+<p>Before a general-skill rule runs on a skill, Jev reads that skill's description and says what kind of skill it is: a general workflow, a role, a subject's standards, a manual for one tool, or one repository's own procedure. If Jev is below 70% sure (70% itself is enough), the rule skips the whole skill. A <em>scenario</em> is a real passage of skill text with the right answer written down; under the current adoption rule, you adopt a rule only when it gets every scenario right.</p>
+<ex-mermaid id="skip-chain" label="Why a vague description blocks the rule"><script type="text/plain">
+flowchart LR
+  d["Jev can't confidently place<br/>the skill from its description"] --> u["Jev is unsure<br/>(below 70%)"]
+  u --> s["the rule skips that skill,<br/>so its scenarios there never run"]
+  s --> b["a scenario that never runs<br/>can't pass: no adoption,<br/>no nudges for agents"]
+</script></ex-mermaid>
+
+<p><strong>A real example.</strong> <code>peekaboo</code> is a manual for one tool, the Peekaboo command-line app. Its description reads: "Use when testing, inspecting, or automating native macOS UI with Peekaboo, or its Screen Recording or Accessibility permissions…". That sounds like a general testing workflow, so Jev says general at 0.55 and is unsure. Five scenarios check that the rule stays quiet on Peekaboo's own commands, which a tool manual is allowed to teach. One of them is this passage from <code>peekaboo/references/troubleshooting.md</code>: under <em>"Accessibility permission required"</em>, the fix is <code>peekaboo permissions status</code>. Expected: the rule says nothing (not applicable: a tool manual). What happens today: the skill is skipped, so the scenario never runs. A description that starts "Use when operating the Peekaboo CLI…" says what the skill is.</p>
+
+<p>The other two:</p>
+<ul>
+<li><code>domain-decision-models</code> holds the standards for decision models, but its description lists tasks ("Use when designing, changing or reviewing a decision model…"), so Jev reads a workflow at 0.58. One scenario.</li>
+<li><code>practices-verification-maintenance</code>: you labelled it "one repository's own procedure". Still open with you: <em>is a practice that builds a project's own verification setup "one repository's own procedure" (what it produces), or a general practice (it works in any repository)?</em> (<a href="kind-filter-round-2.html#repo">question 3 on the round-2 page</a>). Jev reads general at 0.63, below 70% either way, so its description needs to say which it is once you've answered. One scenario.</li>
+</ul>
+
+<h2 id="choice">Your choice</h2>
+<ex-choice id="kind-skips" title="How should step 3 handle the 7 scenarios Jev can't place?">
+  <ex-option id="fix-descriptions" title="**Rewrite the three descriptions** (recommended)">
+    <template slot="summary">
+**Work:** three description edits across two plugins (`peekaboo` in `dev-workflow-tools`; the other two in `sunstack-dev`), with their version bumps. I draft each line and show you all three before they ship; each is checked with one Jev call (about $0.0001) and the description rules. The third line waits on your answer to the second question.
+
+**Scenarios still skipped:** none, if each check places its skill at 70% or more; that is the aim, not yet measured. If a line still leaves Jev unsure, I come back to you rather than force it.
+
+**Adoption:** possible once all three are placed.
+
+**Risk:** writing for Jev instead of the reader. The guard: each line must be true of the skill, and you see it first.
+    </template>
+  </ex-option>
+  <ex-option id="read-opening" title="Have the kind check also read the skill's first paragraphs">
+    <template slot="summary">
+**Work:** an engine change (the check reads two fields instead of one), a sunstack 0.7.1 release, and a new measured run.
+
+**Scenarios still skipped:** 3 (measured), a different set from today's: `peekaboo` gets placed, `domain-decision-models` and `practices-verification-maintenance` stay unplaced, and `presentation-tui` becomes unplaced.
+
+**Adoption:** under the current rule, still blocked until those three skills are placed some other way, most likely by clearer descriptions (not measured).
+
+**Risk:** an engine release that still leaves at least two skills to place.
+    </template>
+  </ex-option>
+  <ex-option id="allow-skips" title="Let adoption ignore scenarios in skills Jev can't place">
+    <template slot="summary">
+**Work:** change the adoption rule (yours, R18) and the adoption check so a skipped scenario counts as listed rather than failed.
+
+**Scenarios still skipped:** all 7, never tested.
+
+**Adoption:** possible once the rule and the check change, and once the rule's rebuilt evidence (below) passes.
+
+**Risk:** the 5 Peekaboo checks and the other 2 prove nothing, and every agent run lists those skills as skipped. Not recommended.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="q3">Second question: what kind is practices-verification-maintenance?</h2>
+<p>This one is the question 3 still open from the round-2 page, asked here so you can answer it in one place. Your answer is needed whichever first choice you pick: it decides what this skill's one scenario expects, and, if you choose the rewrite, what its new description says.</p>
+<ex-choice id="pvm-kind" title="practices-verification-maintenance is:">
+  <ex-option id="pvm-repo" title="One repository's own procedure: it builds a project's own verification setup">
+    <template slot="summary">Your earlier label stands. The general-skill rules skip it, and its scenario expects "not applicable". Its description would say it maintains one project's own verification skill.</template>
+  </ex-option>
+  <ex-option id="pvm-general" title="A general practice: it works in any repository">
+    <template slot="summary">Your label changes to general. The general-skill rules judge it, and its scenario expects the rule to pass. Its description would say it is a reusable practice for any project's verification skill.</template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="settled">The current kind check (stays unless you choose to have it read the first paragraphs)</h2>
+<ul>
+<li><strong>The wording Jev uses</strong> is your <code>gh</code> point ("using git or gh inside a workflow doesn't make a skill a tool manual"), reading the description only, at 70%, as you chose. It placed more of this rule's scenarios than the older wording (7 skipped instead of 9) and made no wrong decisions about which skills the rule runs on.</li>
+</ul>
+
+<h2 id="underway">Also under way, whatever you choose</h2>
+<ul>
+<li><strong>The rule's evidence is being rebuilt.</strong> Its 31 existing scenarios were each judged by one agent and never sorted into real mistake, good text and near miss, so they can't count yet. New real passages are being collected from skill text, and two agents label every passage, old and new, without seeing each other's answers. Some are set aside unseen for a final check. Only then is the rule's sensitivity set.</li>
+</ul>
+
+<h2 id="data">The measurements</h2>
+<p>Scenarios of this rule that land in a skill Jev can't place, by what Jev reads:</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Jev reads</th><th>Skipped</th></tr></thead>
+<tbody>
+<tr><td>Description, older wording</td><td>9 of 31</td></tr>
+<tr><td>Description, your <code>gh</code> wording (in use)</td><td>7 of 31</td></tr>
+<tr><td>Description and first paragraphs</td><td>3 of 31</td></tr>
+</tbody>
+</table>
+</div>
+<p>With your wording, the 7 are: <code>peekaboo</code> 5 (Jev 0.55), <code>domain-decision-models</code> 1 (0.58), <code>practices-verification-maintenance</code> 1 (0.63). With the older wording: <code>peekaboo</code>, <code>domain-typescript</code>, <code>implementation-pr-wrapup</code> and <code>practices-verification-maintenance</code>. With the first paragraphs: <code>domain-decision-models</code>, <code>practices-verification-maintenance</code>, <code>presentation-tui</code>.</p>
+
+<details>
+<summary>How sure these numbers are</summary>
+<ul>
+<li>79 Jev calls, $0.003, on the same 78 skills as the earlier rounds.</li>
+<li><code>domain-typescript</code> is placed at exactly 0.70, which counts; a small change in Jev could tip it to unsure.</li>
+<li>These were direct Jev calls built the way the engine builds them. The engine's own run is observed in step 3's full scenario run.</li>
+<li>Across all 78 skills, 16 can't be placed; the ones outside this rule's scenarios are listed on every run until step 3b improves their descriptions.</li>
+<li>Data: <a href="file:///Users/shravansunder/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/skill-rules/jev-advisor/kind-experiment-2026-11-04/round-3-per-scenario-results.csv">per-scenario results (CSV, on this machine)</a>.</li>
+</ul>
+</details>
+</ex-document>
+</body>
+</html>

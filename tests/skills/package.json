@@ -13,7 +13,7 @@
     "evals:adopt": "node scripts/adopt-rule-scenario.ts"
   },
   "devDependencies": {
-    "@sunstack/cli": "0.6.0",
+    "@sunstack/cli": "0.7.0",
     "@types/node": "^25.5.0",
     "ajv": "^8.17.1",
     "tinyrainbow": "^3.1.0",

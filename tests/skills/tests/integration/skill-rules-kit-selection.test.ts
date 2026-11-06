@@ -3,9 +3,15 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { afterEach, expect, test } from "vitest";
 import { z } from "zod";
-import { assembledRules, checkOutputSchema } from "../report.ts";
-import { unpackPinnedSource } from "../pinned-source.ts";
-import { cleanupFixtureRoots, enginePath, kitRelative, repositoryRoot, spawnCollected } from "../test-fixture.ts";
+import { assembledRules, checkOutputSchema } from "../../lib/skill-rules/report.ts";
+import { unpackPinnedSource } from "../../lib/skill-rules/pinned-source.ts";
+import {
+  cleanupFixtureRoots,
+  enginePath,
+  kitRelative,
+  repositoryRoot,
+  spawnCollected,
+} from "../../lib/skill-rules/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 const config = path.join(repositoryRoot, kitRelative, "skill-rules.config.json");

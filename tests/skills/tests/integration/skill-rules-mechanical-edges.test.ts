@@ -3,8 +3,17 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
 import { z } from "zod";
-import type { PinnedSource } from "../pinned-source.ts";
-import { cleanupFixtureRoots, createFixture, installPinnedSkill, kitRelative, reportSchema, repositoryRoot, runRunner, saveRules } from "../test-fixture.ts";
+import type { PinnedSource } from "../../lib/skill-rules/pinned-source.ts";
+import {
+  cleanupFixtureRoots,
+  createFixture,
+  installPinnedSkill,
+  kitRelative,
+  reportSchema,
+  repositoryRoot,
+  runRunner,
+  saveRules,
+} from "../../lib/skill-rules/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 const current = "a815d1704ebe54b2852db1b8778ce93a177c1c5a";

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Step 3: land the path, or wait for the rule</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="d3-scope-decision.html">Step 3: land or wait</a>
+    <a href="d3-label-disputes.html">Step 3: label disputes</a>
+    <a href="d3-kind-skips-decision.html">Step 3: skipped scenarios</a>
+    <a href="d3-design.html">3 · One rule end to end: design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Step 3: ship the checks now, or wait to ship them with the warning?</h1>
+
+<ex-callout title="The question" tone="question" icon="chat-circle">
+<p>Step 3 builds the machinery that lets one skill-writing rule warn an agent (a <em>nudge</em>: a warning in its lint output that never fails a run) when a general skill sends agents into one product's own workflow, like <code>ops-observability-stack</code> line 17 sending them into AgentStudio's debug loop. The machinery works. The rule itself isn't accurate enough yet, and how long it will take is unknown.</p>
+<p><strong>Recommended: merge the machinery now with the rule switched off (agents see no new warnings), and make "the rule earns its warning" the next step.</strong> The alternative is to keep everything unmerged until the rule is ready.</p>
+</ex-callout>
+
+<h2 id="open">Still open with you, whichever you choose</h2>
+<ul>
+<li>The five label questions on the <a href="d3-label-disputes.html">label disputes page</a>.</li>
+<li>Whether <code>practices-verification-maintenance</code> is a general practice or one repository's own procedure.</li>
+<li>Closing <a href="https://github.com/ShravanSunder/sunstack/pull/190">pull request #190</a>, my stale 1 Nov draft that moved test files. Its six moves now live in this step's pull request, so it can close; that's your call, and I haven't closed it.</li>
+<li>The 908-line file still blocks switching the rule on, whichever you choose here, until one of the fixes at the bottom of this page is chosen and proven.</li>
+<li>One proposal for you to confirm or change: a warning must point at the offending command itself, not just somewhere in the surrounding block. A few of the test passages' expected lines currently include neighbouring lines; I'll keep them as they are until you confirm.</li>
+</ul>
+
+<h2 id="picture">Where step 3 stands</h2>
+<ex-mermaid id="status" label="Step 3 parts and their state"><script type="text/plain">
+flowchart TB
+  gate["which kind of skill is this?<br/>built and proven on a real run"] --> evidence["the rule's test passages<br/>built: labelled by two agents"]
+  evidence --> rule["the rule's own questions<br/>NOT ready"]
+  rule --> adopt["you switch it on;<br/>line 17 gets its warning<br/>waits on the rule"]
+</script></ex-mermaid>
+
+<h2 id="example">A real example of what isn't ready</h2>
+<p>On line 17 ("IF the work is AgentStudio debug or beta, load <code>references/agentstudio-loop.md</code> and follow that loop"), the best design now correctly judges that it sends the agent into one product's own workflow. A warning also has to point at the right line, so the rule needs at least 0.40 confidence that line 17 is the one. The first time it said 0.42, just above that bar; the identical request repeated said 0.37, just below. A warning that appears or disappears on the same text isn't trustworthy yet.</p>
+<p>Across 26 test passages, every design tried today gave <strong>no false warnings</strong>, which the earlier attempts never managed. The best one missed nothing, but stayed unsure on 9.</p>
+
+<h2 id="choice">Your choice</h2>
+<ex-choice id="scope" title="How should step 3 finish?">
+  <ex-option id="land-now" title="**Merge the machinery now, rule switched off** (recommended)">
+    <template slot="summary">**Available now:** the kind check that keeps general-skill rules off tool manuals and product skills; the checks that refuse to switch on any rule that hasn't proven itself or has changed since; two clearer skill descriptions. **Waits:** the line-17 warning, until the rule is redesigned and you switch it on; timing unknown. **Main benefit:** the finished parts get reviewed and merged; the next step changes the rule's questions and settles the 908-line file (below), reusing everything merged here. **Main cost:** step 3 ends without its headline warning.</template>
+  </ex-option>
+  <ex-option id="keep-open" title="Keep everything unmerged until the rule is ready">
+    <template slot="summary">**Available now:** nothing new on main. **Waits:** everything, including the kind check and the clearer descriptions; timing unknown. **Main benefit:** one pull request delivers the warning and everything behind it together. **Main cost:** a growing, unmerged pull request, and finished work that isn't in use.</template>
+  </ex-option>
+</ex-choice>
+
+<details>
+<summary>What's in the pull request (#193)</summary>
+<ul>
+<li>The kind check (the step that decides what kind of skill each one is, so rules meant for general skills skip tool manuals and product skills) on sunstack 0.7.0: on a real run, the AgentStudio skill came back a tool manual (0.86) and was left alone; <code>ops-observability-stack</code> came back general (0.87).</li>
+<li>78 labelled skills that test the kind check, and 40 labelled test passages for the rule, plus 6 more set aside, unseen by whoever tunes the rule, for one final check.</li>
+<li>The checks that refuse to switch a rule on without your approval, or after anything it depends on changes.</li>
+<li>New descriptions for <code>peekaboo</code> and <code>domain-decision-models</code>, and the six test-file moves from #190.</li>
+</ul>
+</details>
+
+<h2 id="advisor">What the decision-model adviser found</h2>
+<ul>
+<li><strong>Recommendation:</strong> develop further the design that asks two separate questions (does the text contain an application's own procedure? if so, is it only the shared toolkit's own commands?), and switch on none of today's designs yet.</li>
+<li><strong>Why 9 stay unsure:</strong>
+<ul>
+<li>Five are ordinary text the model can't yet tell apart from an app's own work: a plain <code>cargo clean</code> story, a metrics query, platform metadata, a <code>shadcn</code> command and a toolchain reference.</li>
+<li>Four are real problems hidden by how they're written: the 908-line catalogue, a quoted line-17 example, a sequence that mixes the shared stack's start command with one app's own launcher, and a worked story about starting the sunstack rule engine.</li>
+</ul></li>
+<li><strong>What would settle them:</strong> not more of the same data. Two narrower questions might, though that isn't proven: who owns each individual command in mixed text, and whether a worked example is a concrete product's own artifact (you've already said those should warn).</li>
+</ul>
+
+<h2 id="engine">The 908-line file, and one possible engine change (sketch only)</h2>
+<p>A warning can't point at a line in a 908-line file today: the model service allows at most 255 choices per question, and each line is one choice. One possible fix, not being built:</p>
+<ex-mermaid id="engine-sketch" label="Two-stage line-finder, sketch"><script type="text/plain">
+flowchart TB
+  ask["the rule's questions,<br/>plus: which line or which window?"] --> short["80 lines or fewer:<br/>pick the line"]
+  ask --> long["longer: pick a 40-line window,<br/>then one more request<br/>picks the line inside it"]
+  short --> out["warning at that line,<br/>or a plain 'couldn't locate'"]
+  long --> out
+</script></ex-mermaid>
+<ul>
+<li><strong>Cost:</strong> one extra request for long pieces, engine work and a sunstack release.</li>
+<li><strong>Why not yet:</strong> in today's test the catalogue's window step chose "none" every time, so the second stage never ran. The adviser wants it proven on a real long problem file and a real long clean one first.</li>
+<li><strong>Simpler alternatives:</strong> report "too long to locate" plainly, or split very long reference files into real sections. Neither fixes today's 908-line test case.</li>
+</ul>
+<p>The adviser's full report: <a href="file:///Users/shravansunder/dev/memory-logs/projects/2026/2026-10-skills-and-sessions/scratch-root-01a1635f/skill-rules/jev-advisor/k002-redesign-2026-11-05.md">k002-redesign-2026-11-05.md</a> (private notes, on this machine). Everything you need to decide is on this page.</p>
+</ex-document>
+</body>
+</html>

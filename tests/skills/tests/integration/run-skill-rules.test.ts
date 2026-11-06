@@ -3,8 +3,13 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { afterEach, describe, expect, test } from "vitest";
 import { z } from "zod";
-import { assembledKinds, assembledRules, checkOutputSchema, formatLintReport } from "../report.ts";
-import type { LintReport } from "../report.ts";
+import {
+  assembledKinds,
+  assembledRules,
+  checkOutputSchema,
+  formatLintReport,
+} from "../../lib/skill-rules/report.ts";
+import type { LintReport } from "../../lib/skill-rules/report.ts";
 import {
   assertInstalledPackageIsRequired,
   askStep,
@@ -23,7 +28,7 @@ import {
   saveRules,
   withJudge,
   writeFixtureFile,
-} from "../test-fixture.ts";
+} from "../../lib/skill-rules/test-fixture.ts";
 
 afterEach(cleanupFixtureRoots);
 

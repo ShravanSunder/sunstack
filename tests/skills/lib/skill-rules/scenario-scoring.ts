@@ -3,15 +3,27 @@ import { scenarioRecordSchema } from "./scenarios.ts";
 import type { ScenarioRecord } from "./scenarios.ts";
 import type { LintReport, PieceDecision } from "./report.ts";
 
-export const scenarioGapSchema = z.object({kind: z.enum(["setup", "cut", "unread", "incomplete", "error"]), detail: z.string()}).strict();
-export const scenarioResultSchema = z.object({
-  id: z.string().min(1), rule: z.string().min(1), expected: scenarioRecordSchema.shape.expect,
-  label: scenarioRecordSchema.shape.label, set: scenarioRecordSchema.shape.set,
-  outcome: z.enum(["caught", "missed", "false_nudge", "unsure"]),
-  observed: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]).nullable(),
-  locator: z.object({kind: z.enum(["hit", "miss", "not_applicable", "unavailable"]), lines: z.array(z.number().int().positive())}).strict(),
-  gaps: z.array(scenarioGapSchema),
-}).strict();
+export const scenarioGapSchema = z
+  .object({ kind: z.enum(["setup", "cut", "unread", "incomplete", "error"]), detail: z.string() })
+  .strict();
+export const scenarioResultSchema = z
+  .object({
+    id: z.string().min(1),
+    rule: z.string().min(1),
+    expected: scenarioRecordSchema.shape.expect,
+    label: scenarioRecordSchema.shape.label,
+    set: scenarioRecordSchema.shape.set,
+    outcome: z.enum(["caught", "missed", "false_nudge", "unsure"]),
+    observed: z.enum(["pass", "finding", "not_applicable", "uncertain", "incomplete"]).nullable(),
+    locator: z
+      .object({
+        kind: z.enum(["hit", "miss", "not_applicable", "unavailable"]),
+        lines: z.array(z.number().int().positive()),
+      })
+      .strict(),
+    gaps: z.array(scenarioGapSchema),
+  })
+  .strict();
 export type ScenarioGap = z.infer<typeof scenarioGapSchema>;
 export type ScenarioResult = z.infer<typeof scenarioResultSchema>;
 
@@ -40,7 +52,8 @@ export function matchScenarioPiece(
       (entry.select?.piece_first_line !== undefined
         ? result.first_line === entry.select?.piece_first_line
         : entry.select?.field_line !== undefined
-          ? result.first_line <= entry.select?.field_line && result.last_line >= entry.select?.field_line
+          ? result.first_line <= entry.select?.field_line &&
+            result.last_line >= entry.select?.field_line
           : true),
   );
   return matches.length === 1 ? matches[0] : undefined;
@@ -73,7 +86,10 @@ export function scoreScenario(entry: ScenarioRecord, report: LintReport): Scenar
   if (entry.expect === "must_fire") {
     if (piece.outcome === "finding" && findings.length === 1) {
       const lines = findings.map((finding) => finding.line);
-      locator = { kind: lines.some((line) => entry.finding_lines?.includes(line)) ? "hit" : "miss", lines };
+      locator = {
+        kind: lines.some((line) => entry.finding_lines?.includes(line)) ? "hit" : "miss",
+        lines,
+      };
     } else {
       locator = { kind: "unavailable", lines: [] };
       if (piece.outcome === "finding")
@@ -116,13 +132,21 @@ export function scenarioExitCode(results: readonly ScenarioResult[]): 0 | 1 | 5 
     results.some(
       (result) =>
         result.label.state === "labelled" &&
-        (result.outcome === "missed" || result.outcome === "false_nudge"),
+        (result.outcome === "missed" ||
+          result.outcome === "false_nudge" ||
+          result.locator.kind === "miss"),
     )
   )
     return 1;
   if (
     results.length === 0 ||
-    results.some((result) => result.outcome !== "caught" || result.gaps.length > 0)
+    results.some(
+      (result) =>
+        result.label.state === "disputed" ||
+        result.locator.kind === "miss" ||
+        result.outcome !== "caught" ||
+        result.gaps.length > 0,
+    )
   )
     return 5;
   return 0;

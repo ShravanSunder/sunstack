@@ -18,19 +18,19 @@
       "name": "dev-workflow-tools",
       "source": "dev-workflow-tools",
       "description": "Common development tool skills, including progressive native macOS UI automation with Peekaboo CLI",
-      "version": "0.1.3"
+      "version": "0.1.4"
     },
     {
       "name": "sunstack-dev",
       "source": "sunstack-dev",
       "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and structured TUI, rendered chat and standalone HTML presentation",
-      "version": "2.103.0"
+      "version": "2.103.1"
     },
     {
       "name": "skill-authoring",
       "source": "skill-authoring",
       "description": "Skill authoring for any repository: design skill changes, write their files, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.",
-      "version": "0.10.1"
+      "version": "0.10.2"
     },
     {
       "name": "agent-router",
