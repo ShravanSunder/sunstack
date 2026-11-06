@@ -13,11 +13,17 @@
 
 <h1>Show me your work: what I'll fix</h1>
 
-<p>The skill already says the right things. The record that agents keep under it carries much less, so a page built from it shows mostly what I did, not what the other agents did. This design fixes the record first, then the page.</p>
+<p>You want to know the decisions, the assumptions, the shortcuts and what verification was done, so you can trust the agents' decisions and see what was missed. The skill says the right things, but the log agents keep under it carries much less and was often written late, so the page shows mostly what I did. This design fixes the log first, then what you see.</p>
 
-<ex-callout title="For you to decide: is this the point?" tone="question" icon="user">
-<p>My restatement of your words: show me your work exists so you can trust work the agents do without you. Without reading transcripts, you see what was assumed, what was decided, where the work departed from the design, what was proven, and which finished work I accepted, piece by piece of the design. Anything only you can settle comes to you as soon as it comes up.</p>
-<p><strong>If that's right,</strong> I write the next document, which says what must be true for each requirement and what decides pass or fail. <strong>If it's off,</strong> tell me what, and I redo the requirements first. Nothing gets built until you've seen the design.</p>
+<ex-callout title="Confirmed by you today" tone="done" icon="user">
+<ul>
+<li>The point: "eys and i knwo what was deiceded and hwat is goign on".</li>
+<li>Two parts: the skill is the log; a reference shows it to you with Demistify. They connect through how the agents log.</li>
+<li>Every agent logs its own work as it goes, not from memory later; I put it together and own it. A peer Lead logs in its own project.</li>
+<li>The log is Router's work trail, not a CSV or JSONL file: Router stamps who wrote each row and when. You never read it raw. How agents log is my call: easy and cheap for them. The rest of the design is the display.</li>
+<li>The layout that tells you what to pay attention to and what to do stays.</li>
+</ul>
+<p><strong>Next:</strong> I write the Specification, the document that says what must be true for each requirement and what decides pass or fail. Nothing gets built until you've seen the whole design.</p>
 </ex-callout>
 
 <h2 id="today">Today, in four numbers</h2>
@@ -37,18 +43,18 @@
 
 <ex-callout title="Proposed, not yet designed" tone="note" icon="path">
 <ul>
-<li>Every commission carries the record and the pieces of the design the helper works on. The helper writes its own assumptions, decisions, departures and proof there.</li>
-<li>The Lead doesn't accept a handback that's missing them, and every acceptance is recorded at its commit.</li>
-<li>When work starts, the Lead writes the design's pieces into the record, and every entry names one.</li>
-<li>An assumption only you can settle is written as waiting for you the moment it's made.</li>
-<li>The page shows each piece with what each agent assumed, decided, broke and proved for it. It's like the Q2 flow, but the pieces come from the design instead of from my topics.</li>
+<li>One short command writes a row, so an agent logs the moment something happens: a decision, an assumption, a shortcut or a check.</li>
+<li>Every commission carries the log's address, and the helper logs its own rows there; I don't accept a handback whose rows are missing.</li>
+<li>Anything only you can settle is logged as waiting for you the moment it comes up.</li>
+<li>At the end of a run, the agent checks its rows against what it actually did and logs what it missed, and a reviewer on a different model flags weak evidence and skipped checks. Together, these feed "what was missed".</li>
+<li>The page opens on what needs your attention and what to do, then shows the decisions, assumptions, shortcuts and verification, grouped by a plain workstream label instead of "pieces".</li>
 </ul>
-<p>The next two design documents settle this: what must be true, then who does what. Two questions stay open for you after the first: what a piece is when the work has no design, and whether a peer Lead's entries from its own project belong here.</p>
+<p>The next design documents settle this: what must be true, then who does what, then how each part is checked.</p>
 </ex-callout>
 
 <h2 id="requirements">The requirements</h2>
 
-<p>Nine requirements, grouped under your own six words. Each one is a need you stated, with the record count that shows it isn't met yet.</p>
+<p>Eleven requirements in two groups, what you see and the log, each a need you stated, with what the record shows today.</p>
 
 <ex-markdown id="requirements-source" label="Requirements" src="./requirements.md"></ex-markdown>
 
