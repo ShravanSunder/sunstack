@@ -9,7 +9,7 @@ The skill no longer ships `scripts/` (owner decision: no scripts in the skill). 
 | Check | Result |
 | --- | --- |
 | `pnpm --dir tests/skills rules --check` | exit 0, 12 rules |
-| `pnpm --dir tests/skills rules plugins/sunstack-dev/skills/practices-show-me-your-work` (keyed) | not run in the implementer's session: refused before reading, no decision-model credential; the Lead runs it |
+| `pnpm --dir tests/skills rules plugins/sunstack-dev/skills/practices-show-me-your-work` (keyed) | run by the Lead on `e1e6f6db` (the skill files match `abdb1a08` except item 5's wording): status `uncertain`, exit 5; 0 errors, 2 warnings, 14 uncertain; 102 decision-model requests over 6 files. Both warnings are `general-skill.taught-rule-overfits-to-one-project`, at `SKILL.md:14` (step 1's work-trail read) and `live-page.md:35` ("Where it lives"). Neither line changed in this rework, and both name homes the owner chose (the work trail, decision `01a1a1b7`; memory-logs for pages), so both stand; the earlier revision's keyed run reported no warning on the same text. The 14 uncertain pieces are the same kinds as before (one-project examples and the load-call gap check) and pass on the Lead's reading |
 | Search for a script name in the skill folder | no match |
 | `git diff --check`; `claude plugin validate .` | exit 0 |
 | Fresh-agent behavior run | not run; whether it belongs in this change is the owner's open decision (G10) |
