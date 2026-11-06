@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Show me your work: what I'll fix</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+
+<h1>Show me your work: what I'll fix</h1>
+
+<p>The skill already says the right things. The record that agents keep under it doesn't carry them, so no page built from it can show you what the agents are doing. This design fixes the record first, then the page.</p>
+
+<ex-callout title="For you to decide: is this the point?" tone="question" icon="user">
+<p>My restatement of your words: show me your work exists so you can trust work the agents do without you. Without reading transcripts, you see what every agent assumed, decided, broke from the design and proved, piece by piece, and which finished work is locked. An assumption only you can settle comes to you as soon as it's made.</p>
+<p><strong>If that's right,</strong> I write the Specification from the nine requirements below next. <strong>If it's off,</strong> tell me what, and I redo the requirements first. Nothing gets built until you've seen the design.</p>
+</ex-callout>
+
+<h2 id="today">Today, in four numbers</h2>
+
+<p>Your own words, checked against the 245 entries in this project's record.</p>
+
+<ex-grid cols="4">
+<ex-stat value="28 of 29" label="assumptions written by me" note="the agents doing the work wrote 1"></ex-stat>
+<ex-stat value="4" label="design breaks recorded" note="in three days of work"></ex-stat>
+<ex-stat value="0" label="accepted work recorded" note="nothing is locked"></ex-stat>
+<ex-stat value="120" label="entries under one catch-all part" note="70 more have no part at all"></ex-stat>
+</ex-grid>
+
+<p>The agents mostly aren't writing it down, and the parts don't name pieces of a design. That's why every page view I built felt off: it was a better window onto a diary.</p>
+
+<h2 id="fix">How I'd fix it</h2>
+
+<ex-callout title="Proposed, not yet designed" tone="note" icon="path">
+<ul>
+<li>Every commission carries the record and the pieces of the design the helper works on. The helper writes its own assumptions, decisions, departures and proof there.</li>
+<li>The Lead doesn't accept a handback that's missing them, and every acceptance is recorded at its commit.</li>
+<li>When work starts, the Lead writes the design's pieces into the record, and every entry names one.</li>
+<li>An assumption only you can settle is written as waiting for you the moment it's made.</li>
+<li>The page shows each piece with what each agent assumed, decided, broke and proved for it. It's like the Q2 flow, but the pieces come from the design instead of from my topics.</li>
+</ul>
+<p>The Specification and Program Design settle this. Two questions stay open for you after the first: what a piece is when the work has no design, and whether a peer Lead's entries from its own project belong here.</p>
+</ex-callout>
+
+<h2 id="requirements">The requirements</h2>
+
+<p>Nine requirements, grouped under your own six words. Each one is a need you stated, with the record count that shows it isn't met yet.</p>
+
+<ex-markdown id="requirements-source" label="Requirements" src="./requirements.md"></ex-markdown>
+
+</ex-document>
+</body>
+</html>
