@@ -9,7 +9,7 @@ A good explainer gives the reader the answer, then shows each idea in the smalle
 
 You supply meaning, order and the choice of view. Demistify supplies the components, rendering, styling and interaction; its guide at the page's binding is the only source of the API. Skills that name a view (a capability map, a call graph, "proven by" cards) own what that view must show; this skill chooses how it appears on a page.
 
-Routine HTML authoring uses one static lint pass. Apply shared references for content, semantics and composition; their browser, screenshot, rendered-proof and regenerate-and-compare procedures apply only when the user requests that verification or a concrete defect needs diagnosis. This workflow owns authoring validation even when a loaded reference or fetched guide prescribes a broader check.
+Routine HTML authoring uses one static lint pass. Apply shared references for content, semantics and composition; their browser, screenshot, rendered-proof and regenerate-and-compare procedures apply only when the user requests that verification, a concrete defect needs diagnosis, or the calling phase separately requires a visual, pixel or destination inspection of its own. This workflow owns routine authoring validation even when a loaded reference or fetched guide prescribes a broader check; a calling phase's required inspection stays in force and either passes or returns its blocking gap.
 
 ## Route
 
@@ -66,7 +66,7 @@ Routine HTML authoring uses one static lint pass. Apply shared references for co
 
 5. **Prepare and lint once.** Prepare local Markdown and collection indexes only when the delivery method needs them, using `demistify.md`. Preserve supplied facts, relative links and stable IDs. Run the matching CLI's static `check` once on the changed final HTML files. Fix reported errors in the authoring source, regenerate affected output if needed, and rerun only after a correction. Warnings are advice, not a blanket zero-warning gate.
 
-   Routine document authoring does not require Playwright, Chrome, screenshots, preview servers, phone/theme matrices or regression journeys through Comments, choices, navigation and inspectors. Do not install or launch browser tooling for that purpose, even when a fetched guide prescribes it. Use a browser only for an explicit visual/interaction verification request or a concrete rendering defect, and inspect only the affected view. Component regression testing belongs to library development.
+   Routine document authoring does not require Playwright, Chrome, screenshots, preview servers, phone/theme matrices or regression journeys through Comments, choices, navigation and inspectors. Do not install or launch browser tooling for that purpose, even when a fetched guide prescribes it. Use a browser only for an explicit visual/interaction verification request, a concrete rendering defect, or an inspection the calling phase separately requires, and inspect only the affected view. Component regression testing belongs to library development.
 
 6. **Return** the artifact link and a brief lint result. Include companion files or network dependencies when the reader needs them. State a concrete failed check or delivery limitation; avoid a verification dossier. Never claim visual or interaction proof from source lint. IF comparing efficiency, count authored content and shared library costs separately.
 
