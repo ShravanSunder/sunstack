@@ -6,13 +6,14 @@ Return a verdict, the rule pass's reading, changed-file coverage, accepted/rejec
 
 ## First Rule Pass
 
-Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the files under review, and return its reading: the run's status, each finding, each `uncertain` piece and each gap. That reference owns when a rule counts as run and how each result reads; here the review lead is the agent running the check. Record the reading with the per-check statuses, then carry it into the review:
+Before any reviewer starts, MUST load `../../skill-rules/references/running-rules.md` to run the rules on the files under review, and return its reading: the run's status, the account for each nudge, each `uncertain` piece with your call, the gaps by kind, and the decided exclusions apart from them. That reference owns when a rule counts as run and how each result reads; here the review lead is the agent running the check, and a review records "raised" where a writer would record "fixed". Record the reading with the per-check statuses, then carry it into the review:
 
-- Each finding from a mechanical rule becomes a candidate finding raised by the rule pass, anchored at its file and line, with the rule's message as the finding; the review lead verifies it at that anchor like any other candidate. An accepted `error` finding blocks the ship decision until a correction fixes it.
-- Each judged finding becomes a candidate finding the review lead confirms at its line against the rule's standard, or rejects with the reason it doesn't hold; the model's answer alone never accepts it.
-- Each `uncertain` piece goes to the review lead, who decides it against the rule's standard. A piece decided as a breach becomes a candidate finding with that call as its reason; a piece decided as meeting the standard, or as outside it, is recorded with its reason.
+- The review lead reads each nudge at its line and its read-next places, and decides the broader question it raises, not only the rule's property. Each nudge ends raised (a candidate finding anchored at its line, carrying the broader question and its smallest fix), kept (with the reason the text is right), routed (to the owner of the broader concern) or open (naming the evidence it lacks). The model's answer alone never accepts a candidate. An accepted `error` finding blocks the ship decision until a correction fixes it.
+- A nudge the change answered only by making its rule's property hold stays open as a candidate. It may have gone quiet in this run, but the question it raised was never answered: read its places as if it were still raised. The writer's self-check reading, when supplied, names the nudges and their accounts.
+- Each `uncertain` piece goes to the review lead, who decides it against the rule's standard and records the same account. A piece decided as a breach becomes a candidate finding with that call as its reason; a piece decided as meeting the standard, or as outside it, is recorded with its reason.
 - Each refusal the reading traces to the change under review is also a candidate finding raised by the rule pass, anchored at its location, with its cause as the finding and its fix as the smallest fix; the review lead verifies it at that anchor like any other candidate. A refusal the reading doesn't trace to the change stays only a coverage gap, with its cause.
-- Each gap the reading names, and a `rules: not run` result, stays with the per-check statuses as a coverage gap, with its reason.
+- Each gap the reading names (unread, cut, unresolved or not run), and a `rules: not run` result, stays with the per-check statuses as a coverage gap of its kind, with its reason. The decided exclusions are recorded apart from the gaps, with any the review lead challenges.
+- Each line a nudge points at is in scope for `transfer`, existing text included.
 
 Whatever the reading shows, the reviewers then start as below; `rules: not run` ends only the rule pass.
 
@@ -28,7 +29,7 @@ The artifact is changed or existing skill files. For a scoped wording change, se
 | Behavior-proof claim | `claim-vs-evidence` |
 | Sensitive surface | `sensitive-surface` |
 
-Whatever the selection above, scoped or by surface, also select `transfer` whenever a reviewed surface states a rule. Each name resolves to `checks/<name>.md`. Deduplicate the selected set. For an evaluation of existing files, use current files as the reviewed surface and read them whole. A `create` run reviews new files. The sensitive-surface term set and its standards are owned by `../../domain-skill-crafting/references/security.md`, and the gate's inspection procedure by `../../skill-design/references/security-gate.md`.
+Whatever the selection above, scoped or by surface, also select `transfer` whenever a reviewed surface states a rule or the rule pass gave a nudge on a reviewed line, and give its reviewer the rule pass's reading. Each name resolves to `checks/<name>.md`. Deduplicate the selected set. For an evaluation of existing files, use current files as the reviewed surface and read them whole. A `create` run reviews new files. The sensitive-surface term set and its standards are owned by `../../domain-skill-crafting/references/security.md`, and the gate's inspection procedure by `../../skill-design/references/security-gate.md`.
 
 Then split the selected checks across reviewer agents by family, each agent in its own session with no authoring history, each loading `checks/review-schema.md` first and walking its checks in the order listed:
 
@@ -78,4 +79,4 @@ After accepted edits, rerun the narrowest fitting pressure and static proof that
 
 At ship, reuse the semantically current review result when its changed-file coverage and proof remain current. Refresh affected coverage only when it is stale.
 
-Complete when: the verdict carries one of the allowed labels, the rule pass's reading (`rules: ran` with its status, each finding and `uncertain` piece with the review lead's call, and its gaps, or `rules: not run: <reason>`) stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.
+Complete when: the verdict carries one of the allowed labels, the rule pass's reading (`rules: ran` with its status, each nudge's account and each `uncertain` piece with the review lead's call, its gaps by kind and its decided exclusions apart, or `rules: not run: <reason>`) stands with the per-check statuses, every changed file is accounted for as reviewed, static-only, or out-of-scope, and the ship decision is explicit.

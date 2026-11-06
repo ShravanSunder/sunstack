@@ -1,0 +1,14 @@
+{
+  "id": "skill-section",
+  "language": "Markdown",
+  "files": ["**/SKILL.md", "**/references/**/*.md"],
+  "rule":
+    {
+      "all":
+        [
+          { "kind": "section" },
+          { "regex": "\\S" },
+          { "not": { "inside": { "kind": "block_quote", "stopBy": "end" } } },
+        ],
+    },
+}

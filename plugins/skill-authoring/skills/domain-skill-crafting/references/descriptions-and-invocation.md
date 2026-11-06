@@ -4,7 +4,7 @@
 
 - A description's job is to help the agent decide whether to load the skill.
 - A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`.<!-- K001 -->
-- A description uses an `Always` opener only when skipping the skill would break the work whenever its condition holds.<!-- K006 -->
+- A description uses an `Always` opener only when skipping the skill would break the work whenever its condition holds.
 - A description names the situation, symptom, user request, repository event or failure that should load the skill.<!-- K004 -->
 - A description uses the searchable words the user, codebase, docs or logs actually use.
 - A description gives a short why only when it sharpens routing.
@@ -94,6 +94,18 @@ so the agent <succinct payoff>. Not for <adjacent boundary>.
 ```
 
 Any of the four openers can start it, `Always` only where it is earned. The payoff and the boundary clauses are optional. A short description with a clear trigger beats a complete sentence that summarizes the workflow.
+
+## A loading condition that belongs to one product
+
+The description decides when a skill loads, so a generic skill whose description loads it for one product's own work sends every repository's agent into that product's workflow one level up, before any step is read. What counts as one product's own application workflow is taught in `calls-and-placement.md`, "A product's own workflow"; this section adds only what a description changes.
+
+- **Nudges:** "Use when debugging AgentStudio's beta application." A generic skill loads for one application's private debug procedure. It opens correctly and names a concrete moment, so it passes every other description standard.
+- **Nudges:** a description that mixes a generic condition with one application's branch ("Use when releasing a package, or when cutting an AgentStudio beta"). The generic half doesn't excuse the branch.
+- **Doesn't nudge:** a platform used through its supported interface ("Use when validating a Claude plugin before release"), the subject's own vocabulary, a product named only as a labelled example, and this toolkit's own shared infrastructure.
+- **Doesn't nudge:** a product named only in a "Not for…" boundary. A boundary is not a loading condition.
+- **Adjudication:** `sunstack-dev`'s `ops-observability-stack` loads for the shared local stack "for AgentStudio, Agent VM, OpenClaw, beta apps, debug apps, or any repo that emits OTLP locally". The stack is this toolkit's own infrastructure; whether the named products are examples of its producers or their own workflows is for the reader to decide.
+
+A skill that lives in a product's own repository is outside this standard: it is meant for that repository.
 
 ## Bad shapes
 

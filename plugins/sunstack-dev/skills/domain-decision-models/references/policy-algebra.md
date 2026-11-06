@@ -4,9 +4,9 @@ This reference owns how code composes several answers into one outcome: the oper
 
 **Expected input:** the answers the tree has (each with its statistic and its in-between route), the standard's obligations, and the execution profile: a static rule graph, or caller code.
 
-**Return:** the selected composition, with its mandatory, veto and unknown routes, and where weighting applies.
+**Return:** the selected composition, with its mandatory, veto and unknown routes, any nudge route and its precedence, and where weighting applies.
 
-**Complete when:** every answer the outcome depends on has its operator, and every unknown has an intended route.
+**Complete when:** every answer the outcome depends on has its operator, every unknown has an intended route, and, for an outcome an agent reads, no route that can't settle its proposition ends in `pass`.
 
 These are ordinary code semantics, our synthesis from TypeSafe's pattern pages and cookbooks, not native engine operators. Batching questions together makes their evaluation independent; it doesn't make their events or errors independent. Multiplying model probabilities doesn't yield a calibrated AND or OR.
 
@@ -35,6 +35,33 @@ Good: [required parts present] → no: finding
       no  → weighted preference → pass / finding / uncertain by its bars
 Bad:  (.99 + .50) / 2 = .745 ≥ .7 → pass, as if two obligations held
 ```
+
+## When the evidence can't settle the proposition
+
+An outcome an agent reads has three ends besides `pass`, and each says something different:
+
+| end | when | what the agent gets |
+| --- | --- | --- |
+| a decided finding | the evidence settles that the standard is broken | a breach at its line |
+| a nudge | the answers separated, and what they show is a grounded reason to look, but settling the standard needs what the evidence doesn't hold | a finding whose message says what to check and where to read |
+| `uncertain` | an answer fell between its bars | a decision owed, with the answers and the state |
+
+Precedence, in the same tree:
+
+1. **Mandatory facts and vetoes that decide a breach route first,** as above. A decided breach is never softened into "worth checking".
+2. **A nudge route comes before `pass`.** Once the answers show the reason to look, no later route turns it into a pass: a pass on that piece would tell the agent a property held that nobody measured.
+3. **An unknown stays `uncertain`,** never a nudge and never a pass, unless an explicit review policy routes it elsewhere. A nudge needs answers that separated; an in-between answer didn't.
+
+```text
+Good: routes into a product's workflow? → yes → only a labelled example? → no → nudge "read the loaded file; decide where it belongs"
+                                                                         → yes → pass
+                                        → no → pass (what the evidence can show held)
+      either between its bars → uncertain
+Bad:  belongs in this repository? → between its bars → pass   (can't settle, reported as held)
+Bad:  routes into a product's workflow? → yes → finding "this is in the wrong repository"   (a breach the evidence can't show)
+```
+
+A decided finding and a nudge are both findings to the engine; which one a route gives is said in its message, not by a separate outcome.
 
 ## Three-way logic
 

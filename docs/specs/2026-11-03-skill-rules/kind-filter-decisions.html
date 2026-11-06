@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kind filter: the experiment and three decisions</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="kind-filter-decisions.html">Kind filter</a>
+    <a href="open-decisions.html">Five decisions</a>
+    <a href="decisions.html">Decisions and status</a>
+    <a href="index.html">Skill rules design</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>The kind filter: what the experiment found, and three decisions</h1>
+<p>You asked for the kind filter to be built with Jev properly and decided by experiments and data. The Jev Advisor ran them: all 78 skills, blind labels from two independent labellers, three designs compared, bars set on one part of the data and checked once on a held-back part. 253 Jev calls, $0.011 in total. Every request and answer is kept.</p>
+
+<ex-callout title="The answer, in short" tone="note" icon="test-tube">
+<p>One well-written question with five answers beat both trees. With its bar at 85%, it made <strong>no wrong calls</strong> on the held-back skills (14 right, 1 unsure). So the engine's filter stays one question; it doesn't need a decision graph. Three things are yours to decide below.</p>
+</ex-callout>
+
+<h2 id="data">What was tested</h2>
+<p>Three designs, each fully written before any run:</p>
+<ex-mermaid id="three-designs" label="The three designs"><script type="text/plain">
+flowchart LR
+  subgraph A["A · one question"]
+    a1["What is this skill's<br/>primary work for?<br/>5 answers"]
+  end
+  subgraph B["B · tree of 5 yes/no questions"]
+    b1["role?"] --> b2["domain?"] --> b3["repo-specific?"] --> b4["tool manual?"] --> b5["general?"]
+  end
+  subgraph C["C · two steps"]
+    c1["scope: shared, tool interface,<br/>or one repo's own procedure?"] -->|shared| c2["general, role<br/>or domain?"]
+  end
+</script></ex-mermaid>
+
+<p>Each design's bar was set on 56 development skills so that it made no wrong calls there. The bars were then frozen, and only then were the 15 held-back skills run:</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Design (frozen bar)</th><th>Development: right / wrong / unsure</th><th>Held-back: right / wrong / unsure</th></tr></thead>
+<tbody>
+<tr><td><strong>A · one question (85%)</strong></td><td>30 / 0 / 26</td><td><strong>14 / 0 / 1</strong></td></tr>
+<tr><td>C · two steps (80% each)</td><td>29 / 0 / 27</td><td>12 / 0 / 3</td></tr>
+<tr><td>B · tree of 5 yes/no (65% / 35%)</td><td>10 / 0 / 46</td><td>6 / 0 / 9</td></tr>
+</tbody>
+</table>
+</div>
+<p>Why the tree lost: an early yes/no question that is only moderately sure stops the tree, even when a later answer is clear. Example: for the <code>agentstudio</code> skill, "tool manual?" was 88% yes, but "repo-specific?" was 64%, so the tree said unsure. Both trees also wrongly called the new <code>domain-code-standards</code> skill "general", where the one question stayed unsure.</p>
+<p>The one question's five answers, as Jev was asked them: <strong>general</strong> (a reusable workflow, practice or judgment across repositories), <strong>role</strong> (a standing job in an agent team), <strong>domain</strong> (a subject's reusable standards), <strong>tool_manual</strong> (operating one named tool through its interface), <strong>repo_specific</strong> (one repository's own procedures). Each answer's full criteria are in the report.</p>
+
+<h2 id="bar">1. How strict should the bar be?</h2>
+<p>The bar is how sure Jev must be of one answer before the rules use it. Below the bar, the skill is skipped and listed, never silently passed.</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Bar</th><th>Development (56 skills)</th><th>What it costs</th></tr></thead>
+<tbody>
+<tr><td>85%</td><td>30 right, 0 wrong, 26 skipped</td><td>about half of skills skipped and listed</td></tr>
+<tr><td>70%</td><td>45 right, 3 wrong, 8 skipped</td><td>3 skills given the wrong kind</td></tr>
+</tbody>
+</table>
+</div>
+<p>The 3 wrong answers at 70% were all inside the same group: a role or domain skill called general, or the reverse. None of them changed whether the general-skill rules run. They would matter to a future rule that cares about the exact kind.</p>
+<ex-choice id="bar-choice" title="Which bar?">
+  <ex-option id="bar-85" title="**85%: no wrong calls, more skipped** (recommended)">
+    <template slot="summary">
+Safe start. Skipped skills are listed, so nothing passes silently. Revisit once Jev reads more than the description (decision 2), which should cut the skips.
+    </template>
+  </ex-option>
+  <ex-option id="bar-70" title="70%: fewer skipped, 3 wrong kinds in 56">
+    <template slot="summary">
+More skills get judged. The wrong kinds didn't change any general-skill rule's decision on this data, but would mislead a rule that needs the exact kind.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="input">2. Should Jev read more than the description?</h2>
+<p>From the description alone, Jev misses what domain skills are for. Example: <code>domain-typescript</code>, description only, gave general at 50%. With the first 1,800 characters of the skill's body added, it gave domain at 85%. On the 6 hardest skills, the one question got all 6 right with the body added, at the 70% bar. That's 6 skills, not the full set.</p>
+<p>The cost: the engine's filter reads one field today. Reading the description plus the opening needs a small, generic change: the filter reads two named fields. That's not a decision graph.</p>
+<ex-choice id="input-choice" title="What should Jev read?">
+  <ex-option id="test-opening" title="**Test description + opening on all 78 first, then decide** (recommended)">
+    <template slot="summary">
+One more run (about $0.005) with the same question and bar, frozen first. If it beats description-only, deliverable 1's filter reads both fields; if not, it stays description-only. Decided by data, before the filter is built.
+    </template>
+  </ex-option>
+  <ex-option id="description-only" title="Description only, now">
+    <template slot="summary">
+No engine change. Domain skills will often be skipped as unsure until descriptions say what the skill is for.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="labels">3. Five skills where the labellers disagreed</h2>
+<p>Two independent labellers agreed on 71 of 76. These 5 split. Your answer becomes the right answer in the permanent test set. Until then they're left out of the accuracy numbers.</p>
+
+<ex-choice id="s003" title="`scaffold-project`: Use when scaffolding or initializing a new project or repo, retrofitting one with standard configs, or adding linting, formatting, type checks, tests or agent rules.">
+  <ex-option id="s003-general" title="general"><template slot="summary">Labeller A: a reusable scaffolding workflow; the portable workflow is primary.</template></ex-option>
+  <ex-option id="s003-tool" title="tool_manual"><template slot="summary">Labeller B (ambiguous): it directs the user through a particular scaffold script and its templates.</template></ex-option>
+</ex-choice>
+
+<ex-choice id="s012" title="`audit-security-review`: Use when the user asks for a security scan, security audit, threat model, vulnerability review, security diff scan, or remediation of one security finding.">
+  <ex-option id="s012-general" title="general"><template slot="summary">Labeller A: a reusable security review practice.</template></ex-option>
+  <ex-option id="s012-tool" title="tool_manual"><template slot="summary">Labeller B (ambiguous): its central action is invoking named Codex Security workflows.</template></ex-option>
+</ex-choice>
+
+<ex-choice id="s014" title="`decision-model-review`: Use when independently reviewing a decision model before it ships: a rule's decision graph, questions a model answers for code, their evidence, thresholds or proof claims.">
+  <ex-option id="s014-domain" title="domain"><template slot="summary">Labeller A: reusable standards and judgments for a subject.</template></ex-option>
+  <ex-option id="s014-general" title="general"><template slot="summary">Labeller B: a repeatable review procedure; the subject's standards live in domain-decision-models.</template></ex-option>
+</ex-choice>
+
+<ex-choice id="s024" title="`implementation-pr-wrapup`: Use when pushing, opening, updating, monitoring or finishing a GitHub pull request after implementation: its description, checks, comments, review threads, mergeability.">
+  <ex-option id="s024-general" title="general"><template slot="summary">Labeller A: a reusable PR wrap-up workflow.</template></ex-option>
+  <ex-option id="s024-tool" title="tool_manual"><template slot="summary">Labeller B: it operates GitHub pull requests through GitHub's state and interfaces.</template></ex-option>
+</ex-choice>
+
+<ex-choice id="s042" title="`practices-verification-maintenance`: Use when creating or maintaining a project's verification skill, its journeys and drivers.">
+  <ex-option id="s042-general" title="general"><template slot="summary">Labeller A: a reusable practice for any project's verification skill.</template></ex-option>
+  <ex-option id="s042-repo" title="repo_specific"><template slot="summary">Labeller B: it governs one project's own verification apparatus.</template></ex-option>
+</ex-choice>
+
+<h2 id="gaps">What is still not proven</h2>
+<ul>
+<li><strong>No real repo_specific example.</strong> None of the 78 skills is clearly one repository's own procedure. The next test set adds sunstack-tools' <code>verify-sunstack-rule</code> and <code>verify-demistify</code>, labelled blind.</li>
+<li><strong>Jev's answers move a little between identical runs.</strong> In one repeat, an answer went from 77% to 80%. That's why the bar sits at 85%, not just above 70%.</li>
+<li><strong>The engine path isn't built yet.</strong> These were direct Jev calls. The real filter (one question per folder, gates before a rule's first step) is proven when deliverable 1 is built, with this data as its permanent test cases.</li>
+</ul>
+
+<p>Answer above, then copy your answers from Comments. The full report: <code>memory-logs/…/jev-advisor/kind-decision-model-2026-11-04.md</code>, per-skill results in <code>kind-experiment-2026-11-04/per-skill-results.csv</code>.</p>
+</ex-document>
+</body>
+</html>

@@ -1,9 +1,0 @@
-{
-  "id": "standards-heading-section",
-  "language": "Markdown",
-  "rule":
-    {
-      "kind": "section",
-      "has": { "kind": "atx_heading", "regex": "^##\\s+Standards\\s*$", "stopBy": "neighbor" },
-    },
-}

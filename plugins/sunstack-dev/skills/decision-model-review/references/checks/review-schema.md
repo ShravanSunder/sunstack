@@ -7,7 +7,7 @@ This reference owns the fields and labels `decision-model-review` fills: check s
 ## Check record
 
 ```text
-check: state-and-evidence | questions | primitives-and-statistics | policy-and-composition | proof-and-claims | patterns-and-capability
+check: state-and-evidence | questions | primitives-and-statistics | policy-and-composition | proof-and-claims | patterns-and-capability | nudge-and-receiver
 status: complete | partial | blocked
 inputs read: <the supplied inputs this check read, whole>
 missing: <none | the input a partial or blocked check lacks, and who restores it>
@@ -17,6 +17,8 @@ candidates: <each candidate finding, in the finding shape below>
 - `complete`: the check ran on every input it needs.
 - `partial`: it ran on what was supplied, and names what it couldn't read.
 - `blocked`: it couldn't run, and names why.
+
+A check the profile doesn't select, such as `nudge-and-receiver` for a `run_judgments` caller or an evidence selection, records `status: complete` with `inputs read: not selected: <the profile>` and no candidates.
 
 ## Finding
 
@@ -55,12 +57,13 @@ closed: <previous findings no longer found>
 verdict: ready | needs-revision | blocked-input | not-converging
 probes owed: <each probe request, or none>
 unavailable proof: <each claim the records can't support, or none>
+not run: <each part blocked only for want of an optional input, with that input, or none>
 ```
 
 Precedence, first match wins:
 1. `blocked-input`: nothing supplied supports any check.
 2. `not-converging`: the commissioner's supplied policy, or the routing review's rule, says so.
-3. `needs-revision`: any kept blocking finding; or, at the delivery stage, a required check that is `partial` or `blocked`.
+3. `needs-revision`: any kept blocking finding; or, at the delivery stage, a check or part that `SKILL.md` step 6 says holds back `ready`.
 4. `ready`: none of the above.
 
 ## Into a routing review

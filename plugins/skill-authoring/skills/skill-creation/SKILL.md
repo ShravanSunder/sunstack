@@ -45,16 +45,18 @@ Completion: each surface the boundary admits is written or held back by its step
 
 ### 4. Self-check
 
-MUST load `../skill-rules/references/running-rules.md`, run the rules on the files this run changed, and return its reading beside the diff: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. Act on it before the diff comparison:
+MUST load `../skill-rules/references/running-rules.md`, run the rules on the files this run changed, and return its reading beside the diff: the run's status, the account for each nudge, each `uncertain` piece with your decision, the gaps by kind, and the decided exclusions apart from them. Act on it before the diff comparison. For each nudge:
 
-- an `error` finding, or a refusal the reading traces to this change, is fixed, and the self-check runs again on the fixed files;
-- a `warn` finding is fixed, or named with the reason it stays;
-- a judged finding is confirmed at its line and fixed where this run's boundary admits the fix, named as a candidate where it doesn't, or explained where it doesn't hold;
-- an `uncertain` piece is yours to decide against its standard: fix or explain it, and report your call.
+- read its line and its read-next places, then decide the broader question it raises before touching the line. Making the rule's own property hold is the narrowest fix, and is never the account by itself;
+- record the account `running-rules.md` defines: fixed, kept, routed, or open naming the evidence that's missing, with what you checked;
+- fix what this run's boundary admits. When the broader question changes the plan, such as content that belongs in another repository or another skill, record it as routed and return it to whoever commissioned the change, instead of making the rule's property hold;
+- an `error` finding, or a refusal the reading traces to this change, is fixed, and the self-check runs again on the fixed files.
 
-Any gap, or `rules: not run`, stays as the reading states it, with its reason, and the run goes on to step 5.
+An `uncertain` piece is yours to decide against its standard: judge it, record the same account, and report your call. #187 is the failure this prevents: a call's missing return was added to clear its nudge, while the file it loaded showed the whole loop belonged in AgentStudio's repository.
 
-Completion: the reading from the self-check's last run, made after the last edit, stands beside the diff; no `error` finding or refusal traced to this change remains; and each warning, judged finding and `uncertain` piece carries its call (fixed, named or explained) for step 5.
+Gaps are the four kinds the reading names (unread, cut, unresolved, not run), each kept as the reading states it, with its reason; "no gaps" is said only when all four are empty, and the decided exclusions are listed apart, never as gaps. `rules: not run` stays with its reason, and the run goes on to step 5.
+
+Completion: the reading from the self-check's last run, made after the last edit, stands beside the diff; no `error` finding or refusal traced to this change remains; each nudge carries its account with the places read, and each `uncertain` piece its call; and every routed nudge is in the return for whoever commissioned the change.
 
 ### 5. Compare and return, by class
 

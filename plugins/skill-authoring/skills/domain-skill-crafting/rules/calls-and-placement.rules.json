@@ -1,14 +1,14 @@
 {
   "K001": {
-    "name": "call.completeness",
+    "name": "load-call.names-when-where-and-result",
     "evidence": "load",
     "questions": {
       "gap": {
         "type": "choice",
         "instructions": {
           "check": "line",
-          "against": "step",
-          "task": "Read each load or dispatch call in the line; the step is the heading of the numbered step it sits in, empty when it sits in none. Which part does a call leave out?"
+          "against": "headings",
+          "task": "Read each load or dispatch call in line. headings contains every enclosing heading, from the title to the nearest section, and is empty when there is none; it gives context, not an implied call result. Which part does a call leave out?"
         },
         "criteria": {
           "none": "Every call says when to go (an IF condition, or a MUST at its point in the step), where (a named file, path or skill), what to do there, and what to bring back (a concrete result the step goes on to use). What to do there is said when the call names an action at the destination ('apply its test', 'run its check') or when the result names the work, as 'return the standards that apply' or 'return each case with its verdict' do; a separate 'to <work>' is needed only when the result alone doesn't show it.",
@@ -42,75 +42,6 @@
             "result": {
               "finding": "A call doesn't say what to bring back.",
               "at": "line"
-            }
-          }
-        }
-      }
-    },
-    "severity": "warn"
-  },
-  "K002": {
-    "name": "reference.teaching-depth",
-    "evidence": "reference_section",
-    "questions": {
-      "role": {
-        "type": "choice",
-        "instructions": {
-          "check": ["heading", "body"],
-          "context": ["opening"],
-          "task": "What does this section of a reference do? The opening holds the first line of each paragraph and list item under the reference's title, where it says what the reference covers or owns; a line that breaks off continues in text not shown."
-        },
-        "criteria": {
-          "stage": "It owns a stage of work on its own: here the agent inspects something, judges it and decides, and this section is where that work is taught and finished. A section that has the agent run commands and then judge, with good and bad readings, which results support a claim owns a stage even when it lists the commands.",
-          "part": "It is one part of a stage the reference as a whole owns, such as the stage's inputs, one of its signals, its examples or its stop, with the rest of the stage in other sections.",
-          "lookup": "It is a lookup the agent consults rather than work it performs: a standards list, a table, a diagram, definitions, facts, or a list of shapes or templates. That includes a list of commands, queries or APIs with what each does or returns, a table mapping errors or symptoms to their fixes, a code pattern or helper to copy, a prompt or binding template, a catalogue of rules or patterns to consult, and a description of a mode or setup with the commands it uses. A section of a reference whose opening says it covers calls, commands or values while its caller decides when to use them is a lookup too. Rules that govern a decision the agent makes in this section belong to that stage and are not a lookup."
-        }
-      },
-      "missing": {
-        "type": "choice",
-        "instructions": {
-          "check": "body",
-          "context": ["heading", "outline", "opening"],
-          "task": "Of what a stage's teaching needs (what to inspect, what good and bad look like, when to stop), which does the section leave out? Credit only text you can read: the section's body and the opening. The opening holds only the first line of each paragraph and list item under the reference's title, so a line that breaks off continues in text not shown. The outline lists the reference's other headings without their text: a heading can show where teaching might be, never that it is there."
-        },
-        "criteria": {
-          "none": "The text shown says what to inspect, shows what good and bad look like, and says when the stage is done: the section's body, or an opening line that speaks to this stage's work. Good and bad can come through examples, signals, a contrast (a bad move named against the instruction, as 'quote the line; do not paraphrase it' is) or a standard the section names and judges against, such as the proof standards a reference loads; the section need not restate that standard. A stop can be the result the section returns, or a stop or return an opening line states for this stage's work.",
-          "unseen": "Part of the teaching is missing from the text shown, but it may sit in text that isn't shown: under a heading of the outline that could hold it, such as 'When to stop', 'Good and bad' or 'Examples', or past an opening line that breaks off. The evidence can't settle whether this stage's teaching is there.",
-          "inspect": "It never says what to look at or open.",
-          "good_bad": "It gives no picture of good and bad: no examples, signals, contrast or named standard to judge against, and no heading of the outline or broken-off opening line could hold one.",
-          "stop": "It never says when the work of the stage is done, no opening line states a stop or return for it, and no heading of the outline or broken-off opening line could hold one."
-        }
-      }
-    },
-    "decision": {
-      "start": "role",
-      "steps": {
-        "role": {
-          "ask": "role",
-          "min_probability": 0.6,
-          "routes": {
-            "stage": "teaching",
-            "part": "not_applicable",
-            "lookup": "not_applicable"
-          }
-        },
-        "teaching": {
-          "ask": "missing",
-          "min_probability": 0.6,
-          "routes": {
-            "none": "pass",
-            "unseen": "uncertain",
-            "inspect": {
-              "finding": "Section owns a stage but doesn't say what to inspect.",
-              "at": "heading"
-            },
-            "good_bad": {
-              "finding": "Section owns a stage but doesn't show what good and bad look like.",
-              "at": "heading"
-            },
-            "stop": {
-              "finding": "Section owns a stage but doesn't say when to stop.",
-              "at": "heading"
             }
           }
         }

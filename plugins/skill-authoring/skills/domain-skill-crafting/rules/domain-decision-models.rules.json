@@ -1,0 +1,107 @@
+{
+  "K001": {
+    "name": "rule-question.asks-exactly-one-thing",
+    "evidence": "rule_question",
+    "questions": {
+      "one_proposition": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Does this question's task ask exactly one observable proposition? body is one question of a rule entry: its type, its instructions with the task, and its criteria."
+        },
+        "criteria": {
+          "true": "The task asks one thing a reader could answer yes or no from the evidence, such as \"Does the step say what must be true when it is done?\".",
+          "false": "The task asks two or more things at once, such as \"Does the branch have a clear, observable condition and a concrete action?\", so a no can't say which part failed."
+        }
+      },
+      "no_added_requirement": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Do this question's criteria define the yes and no of its task's proposition without adding a second requirement?"
+        },
+        "criteria": {
+          "true": "The criteria say what yes and no to the task's own proposition look like, with its boundary cases and examples, and ask for nothing more: a yes in the criteria is a yes to the task.",
+          "false": "The criteria define something other than the task's proposition: they add a requirement the task doesn't ask, such as a yes that also needs a second property to hold, or they invert or replace the proposition, so a yes in the criteria isn't a yes to the task."
+        }
+      }
+    },
+    "decision": {
+      "start": "noul_only",
+      "steps": {
+        "noul_only": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "body",
+            "pattern": "\"type\"\\s*:\\s*\"noul\""
+          },
+          "yes": "one_proposition",
+          "no": "not_applicable"
+        },
+        "one_proposition": {
+          "ask": "one_proposition",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "no_added_requirement",
+          "no": {
+            "finding": "This Noul asks more than one thing: split it into one question per proposition, in the same request.",
+            "at": "body"
+          }
+        },
+        "no_added_requirement": {
+          "ask": "no_added_requirement",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "This Noul's criteria define something other than its task's own proposition, by adding a requirement or by inverting or replacing it: make them define the task's own yes and no.",
+            "at": "body"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "K002": {
+    "name": "rule-question.criteria-answer-the-same-question",
+    "evidence": "rule_question",
+    "questions": {
+      "same_proposition": {
+        "type": "noul",
+        "instructions": {
+          "check": "body",
+          "task": "Do this question's criteria define the answers to the same proposition its task asks, rather than to a different one? body is one question of a rule entry: its type, its instructions with the task, and its criteria."
+        },
+        "criteria": {
+          "true": "The criteria answer the task's own question and nothing else: a Noul's yes and no, a Choice's labels or a Score's levels each describe an answer to what the task asks. Boundary cases and examples of those answers keep the same proposition.",
+          "false": "The criteria define a different proposition from the task: they invert it, so a yes in the criteria is a no to the task; they replace it with another property; they add a requirement the task doesn't ask; or a Choice's labels answer another question."
+        }
+      }
+    },
+    "decision": {
+      "start": "has_criteria",
+      "steps": {
+        "has_criteria": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "body",
+            "pattern": "\"criteria\"\\s*:"
+          },
+          "yes": "same_proposition",
+          "no": "not_applicable"
+        },
+        "same_proposition": {
+          "ask": "same_proposition",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "pass",
+          "no": {
+            "finding": "This question's criteria define a different proposition from its task: make them define the task's own answers.",
+            "at": "body"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "skill-description.longer-than-225-characters": {
+      "basis": "mechanical",
+      "decision": "keep",
+      "decided": "U10; owner reviews 842d1327, 00facfd0, 08411599 and a42f545e (2–4 Nov 2026)",
+      "reasons": [
+        {
+          "type": "written_standard",
+          "locator": "descriptions-and-invocation.rules.json:K002"
+        }
+      ],
+      "bars": {}
+    }
+  },
+  "scenarios": []
+}

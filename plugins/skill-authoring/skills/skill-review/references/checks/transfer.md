@@ -8,6 +8,7 @@ Where to look, when the artifact is a **proposal**: each rule the specification 
 
 Where to look, when the artifact is **changed files**:
 - every rule the reviewed text tells the agent to apply: a gate, a prohibition, a default, a required tool or pattern;
+- every line a rule-pass nudge points at, from the review lead's rule-pass reading, existing text included, with the files it loads: the whole line and what it routes the agent into, never only the words the diff added to it;
 - each product, library, API, repository, path or incident named inside those rules, and the label or scope beside it;
 - the cases the design set records for the same rules, when the change has one.
 
@@ -26,6 +27,8 @@ recorded:    the author's cases for this rule, or none; agree | differ
 
 Where your verdict and a recorded one differ, the finding names the case that separates them.
 
+Worked case, #187: a nudge on `sunstack-dev`'s `ops-observability-stack/SKILL.md:17` said the call didn't say what to bring back, and the change added the return. The review ran transfer on the added words, found they agreed with their sources, and marked it complete. Run on the line itself, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop", the test fails case one: in any repository that isn't AgentStudio, a generic skill sends the agent into one product's own loop, which `agentstudio-loop.md` shows it is. The smallest fix routes the loop to AgentStudio's repository; rewording the return fixes nothing.
+
 Good signals:
 - every returned standard is kept for each rule in scope, with the line that shows it;
 - the cases the author recorded agree with a pair you built yourself.
@@ -33,12 +36,13 @@ Good signals:
 Bad signals:
 - a returned standard broken, with the rule and the case that breaks it;
 - recorded cases built from the incident itself: case one in the incident's own repository, case two the very choice that started it;
-- a rule that points the agent at one repository's package, path or command.
+- a rule that points the agent at one repository's package, path or command;
+- transfer marked complete on the words a diff added, while the nudged line they sit in still carries one product's workflow.
 
 Calibration: Report the rule, the case it fails, and the smallest fix: the judgment sentence that would replace it, or the scope and basis that would make its named thing honest. Do not judge whether a rule's wording binds or whether it earns its place; a rule that transfers and is still weak is filed with `route: steering-strength`.
 
 Overlap boundary: This check owns *a rule holds outside the repository it came from*. `steering-strength` owns whether the rule's wording binds; `no-op-pruning` owns whether it earns its place; `rule-agreement` owns two statements of one rule that disagree. `mental-model-fit` owns a lens borrowed from a source whose problem differs; a rule borrowed the same way is this check's.
 
-Stop when: every rule in scope for the artifact (each rule the specification part states for a `proposal`, each rule added or changed by the diff for `changed files`, every rule in the file for `create` and for `existing files`) has its two cases and its verdict, or the artifact states no rule.
+Stop when: every rule in scope for the artifact (each rule the specification part states for a `proposal`, each rule added or changed by the diff and each line a rule-pass nudge points at for `changed files`, every rule in the file for `create` and for `existing files`) has its two cases and its verdict, or the artifact states no rule.
 
 Output focus: Use the already-loaded Check Finding and Per-Check Result shapes from `review-schema.md`. Each finding quotes the rule with its `path:line`, gives the case it fails and the verdict, and proposes the judgment sentence or the adopted scope.

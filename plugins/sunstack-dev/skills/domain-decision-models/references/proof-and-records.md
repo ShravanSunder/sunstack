@@ -20,6 +20,7 @@ This reference owns how a decision model is shown to work: the sets and labels, 
 - Development cases refine the evidence, the questions and the policy.
 - Freeze the evidence, questions, policy and model record. Then score held-out cases end to end, once, against the current model as the baseline. Held-out cases come from other sources than the development cases; any overlap is named.
 - **A held-out miss is reported, never tuned away.** After a correction, cases already scored as held-out become regression cases. A fresh held-out claim needs cases not yet seen.
+- A lint rule over skill text takes its cases from real skills, never from copied excerpts or invented skills.
 
 ## The comparison, one variable at a time
 

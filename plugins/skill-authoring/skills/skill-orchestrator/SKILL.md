@@ -36,11 +36,11 @@ Use `skill-design` and return the design set and its design-review decision. Whe
 
 ### 3. Write
 
-Use `skill-creation` inside the accepted design set and return the diff, any deviation from the design set, and the run status moved to `implemented`. Completion: the diff is compared with the accepted design set.
+Use `skill-creation` inside the accepted design set and return the diff, any deviation from the design set, its self-check reading with the writer's account for each nudge, and the run status moved to `implemented`. Completion: the diff is compared with the accepted design set.
 
 ### 4. Prove
 
-MUST load `../skill-design/references/proof-runs.md`, carry out the proof the design set plans by its procedure, and return each run's record and check results. MUST load `../domain-skill-crafting/references/proof-claims.md`, judge the claim by its standards, and return the strongest supported claim and its evidence. MUST load `../skill-rules/references/running-rules.md`, run the rules on the change's files, and return its reading with the proof result: the run's status, each finding with your call, each `uncertain` piece with your decision, and each gap. An `error` finding, or a refusal the reading traces to the change, sends the change back to step 3 for its fix, and this step runs again on the fixed files. Judged findings and decided `uncertain` pieces go to step 5 with your calls. A rule is reported as run only when the engine's own report shows that it ran. Completion: proof ran against the current files, or the user accepted a named proof gap; and the rules' reading, from a run on the current files, stands with the proof result, with no `error` finding left and each gap named with its reason.
+MUST load `../skill-design/references/proof-runs.md`, carry out the proof the design set plans by its procedure, and return each run's record and check results. MUST load `../domain-skill-crafting/references/proof-claims.md`, judge the claim by its standards, and return the strongest supported claim and its evidence. MUST load `../skill-rules/references/running-rules.md`, run the rules on the change's files, and return its reading with the proof result: the run's status, each nudge with its account (the writer's, from step 3, or yours for a nudge the writer's reading lacks), each `uncertain` piece with its call, the gaps by kind, and the decided exclusions apart from them. An `error` finding, or a refusal the reading traces to the change, sends the change back to step 3 for its fix, and this step runs again on the fixed files. Every nudge and decided `uncertain` piece goes to step 5 with its account. Also bring the nudges the writer's first self-check gave that this run no longer shows: they went quiet, and step 5 asks why. A rule is reported as run only when the engine's own report shows that it ran. Completion: proof ran against the current files, or the user accepted a named proof gap; and the rules' reading, from a run on the current files, stands with the proof result, with no `error` finding left, each nudge with its account, and each gap named by its kind with its reason.
 
 ### 5. Assess
 
@@ -49,7 +49,7 @@ Open the diff and the decisive proof yourself before any independent review. Che
 - the success definition and the accepted design set, including its run allocation;
 - the four surfaces still aligned, and every changed reference and caller current;
 - proof that observes the claimed behavior, with every check read from its run and static results labeled as static;
-- the rules' reading from step 4: each judged finding confirmed at its line or explained, and each `uncertain` piece's call holding against its standard;
+- the rules' reading from step 4: for each nudge, whether its account (fixed, kept, routed or open, with what was checked) answered the broader question the nudge raises, not only its rule's property. A nudge that went quiet after a local edit, with no account of its places, is not closed: it goes back to step 3. In #187, the next run passed `ops-observability-stack/SKILL.md:17` once its call's return was added, and that account answered only the rule's property: the file the line loads showed AgentStudio's own loop. A routed nudge whose broader concern changes the plan, such as content that belongs in another repository, is a wider target. Each `uncertain` piece's call holds against its standard; the gaps stand by kind, with "no gaps" only when all four kinds are empty; and the decided exclusions are apart, with any you challenge;
 - ownership and names that match the design set;
 - no complexity, compatibility path, check, schema, or mechanism outside the accepted boundary;
 - when this run depends on earlier runs of the design set, those runs are at their current revisions and the combined behavior is proven, not only this run's local proof.
@@ -85,7 +85,7 @@ success and basis: <success definition; observed failure | user-directed intent>
 run status: <per run: proposed | implemented | reviewed | shipped>
 review: <stages run, checks, and complete | partial | blocked results>                   # only if review ran
 proof: <claim, evidence, and remaining gap>                                              # only if proof ran
-rules: <ran: status, findings with calls, uncertain decided, gaps | not run: reason>     # only if proof ran
+rules: <ran: status, nudges with accounts, uncertain decided, gaps by kind, exclusions | not run: reason>  # only if proof ran
 security: <allowed | disallowed | blocked | deferred>                                    # only if a sensitive surface was routed
 deviations: <accepted design set boundary or review deviation>                           # only if one occurred
 ```
@@ -101,6 +101,6 @@ The run is not done while any of these hold:
 - an accepted correction reached refreshed review without fresh proof and reassessment;
 - a behavior-changing change is reported shipped without behavior proof or a user-accepted proof gap, or without a `great` implementation review or an explicit, recorded user skip;
 - a run status is reported beyond the state the run reached;
-- the `rules:` line reports a rule as run or passing that the engine's report doesn't show, an `uncertain` piece as a pass, or an `error` finding left standing at step 5;
+- the `rules:` line reports a rule as run or passing that the engine's report doesn't show, an `uncertain` piece as a pass, a nudge as closed because it went quiet after a local edit, "no gaps" while any gap kind holds an item, or an `error` finding left standing at step 5;
 - a review round ran after `not-converging`, or outside the accepted boundary without the user's decision;
 - required platform validation failed, or was skipped without a stated reason.

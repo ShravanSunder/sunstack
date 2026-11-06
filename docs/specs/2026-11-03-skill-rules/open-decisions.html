@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Five decisions: skill rules</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="open-decisions.html">Five decisions</a>
+    <a href="decisions.html">Decisions and status</a>
+    <a href="index.html">Skill rules design</a>
+    <a href="delivery.html">Delivery map</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+<h1>Five decisions before we build</h1>
+<p>Both designs are reviewed with no open findings. Nothing is built. These five answers are all that's left; the last one starts the work. Each has my recommendation, and you can answer each one below it, then copy your answers from Comments.</p>
+
+<ex-callout title="Not decided" tone="question" icon="clock">
+<p>All five are open. My recommendation is marked on each; it is not your answer.</p>
+</ex-callout>
+
+<h2 id="kind-certainty">1. How sure must Jev be of a skill's kind?</h2>
+<p>Each skill gets one kind: general, role, domain, tool_manual or repo_specific. The three general-skill rules only judge general, role and domain skills. Today's rule (yours, 3 Nov): if Jev isn't at least 70% sure of the <strong>exact</strong> kind, the skill is skipped and listed.</p>
+<p>The catch, with a made-up example. Jev answers for one skill:</p>
+<div class="ex-table-scroll" data-width="reading">
+<table>
+<thead><tr><th>Kind</th><th>Jev's probability</th><th>Do the general-skill rules judge this kind?</th></tr></thead>
+<tbody>
+<tr><td>general</td><td>36%</td><td>yes</td></tr>
+<tr><td>role</td><td>34%</td><td>yes</td></tr>
+<tr><td>domain</td><td>24%</td><td>yes</td></tr>
+<tr><td>tool_manual</td><td>3%</td><td>no</td></tr>
+<tr><td>repo_specific</td><td>3%</td><td>no</td></tr>
+</tbody>
+</table>
+</div>
+<p>No single kind reaches 70%, so today the skill is skipped, even though 94% of Jev's answer says "a kind these rules judge".</p>
+<ex-choice id="kind-certainty-choice" title="Which rule should decide?">
+  <ex-option id="exact-kind" title="**Keep: 70% on the exact kind** (recommended)">
+    <template slot="summary">
+Your 3 Nov rule stays. Some skills like the example get skipped and listed, never silently passed.
+
+- We count how many skills it skips once the rules run, then revisit with real numbers.
+- Costs: some lost coverage on skills that sit between general and role.
+    </template>
+  </ex-option>
+  <ex-option id="accepted-group" title="Change: 70% on the kinds the rule accepts">
+    <template slot="summary">
+A rule runs when the kinds it judges add up to 70%. In the example, 94% → the general-skill rules run.
+
+- Same single question per skill; nothing extra asked.
+- Costs: "unsure" now means different things to different rules, and each rule needs its own bar. More to design and test now.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="pr-layout">2. How many pull requests?</h2>
+<p>The work is five deliverables. Deliverable 1 is the engine (its own repository, sunstack-tools); the rest are in this repository.</p>
+<ex-mermaid id="pr-layout-picture" label="The two layouts"><script type="text/plain">
+flowchart LR
+  subgraph A["Stacked: one PR per deliverable"]
+    a2["PR: 2 rules earn nudges"] --> a3["PR: 3 general-skill rules"] --> a4["PR: 4 review evals"] --> a5["PR: 5 teaching skills"]
+  end
+  subgraph B["One PR: #188"]
+    b["#188: deliverables 2, 3, 4, 5 together"]
+  end
+</script></ex-mermaid>
+<p>The engine is a separate PR either way; I merge and release it under your 30 Oct grant.</p>
+<ex-choice id="pr-layout-choice" title="Which layout?">
+  <ex-option id="stacked" title="**One PR per deliverable, stacked** (recommended)">
+    <template slot="summary">
+Four smaller PRs, each reviewable in one pass. You merge them bottom to top.
+
+- Costs: four merges instead of one, and a fix low in the stack gets carried up.
+    </template>
+  </ex-option>
+  <ex-option id="one-pr" title="Everything in #188">
+    <template slot="summary">
+One merge at the end.
+
+- Costs: one very large PR (case files, rule files, runner, evals, skill text) that's hard to review in one sitting.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="rule-keys">3. Should rule files use names instead of K001?</h2>
+<p>Today every rule has two ids. The standards file marks a line with a number, and the rules file uses that number as its key, with the real name inside:</p>
+<ex-code id="rule-keys-today" label="Today: two ids for one rule" lang="json"><script type="text/plain">references/general-skill.md:
+- A skill meant for any repository routes no step... into one product's own workflow.<!-- K002 -->
+
+general-skill.rules.json:
+"K002": { "name": "general-skill.overfits-to-product-workflow", ... }</script></ex-code>
+<p>With names, the marker and the key are the rule's name, so there's one id:</p>
+<ex-code id="rule-keys-named" label="With names: one id" lang="json"><script type="text/plain">references/general-skill.md:
+- A skill meant for any repository routes no step... into one product's own workflow.<!-- general-skill.overfits-to-product-workflow -->
+
+general-skill.rules.json:
+"general-skill.overfits-to-product-workflow": { ... }</script></ex-code>
+<ex-choice id="rule-keys-choice" title="Names or numbers?">
+  <ex-option id="names" title="**Use names** (recommended, done in deliverable 1)">
+    <template slot="summary">
+One id per rule; nobody looks up what K002 means.
+
+- Costs: an engine change to the marker format (it accepts only K-numbers today), done once, cleanly, with no aliases. Renaming a rule later also changes its marker.
+    </template>
+  </ex-option>
+  <ex-option id="numbers" title="Keep K-numbers">
+    <template slot="summary">
+No engine change. Both Advisors called this a small wart, not a reason the design would fail.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="teaching-behavior">4. Add rules that check a skill tells agents to run the rules?</h2>
+<p>This is "A" from before. Example: a skill's last step says "you're done when the change is committed", but never says to run <code>pnpm --dir tests/skills rules</code> first. A rule could nudge on that.</p>
+<ex-choice id="teaching-behavior-choice" title="Add these rules now?">
+  <ex-option id="not-now" title="**Not now** (recommended)">
+    <template slot="summary">
+Deliverable 5 teaches it in the skills themselves, and the review evals (deliverable 4) show whether agents actually skip it. Add rules only if they do.
+    </template>
+  </ex-option>
+  <ex-option id="add-now" title="Add them now">
+    <template slot="summary">
+One more slice in deliverable 3: the rule, its real cases (3 mistakes, 3 good texts, 3 near misses) and its bars.
+
+- Costs: more work before the first deliverables land, for a mistake we haven't seen agents make yet.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<h2 id="go">5. Start building?</h2>
+<p>Deliverable 1 (sunstack-tools): the engine asks each skill's kind once, with inline ast-grep rules; released as 0.7.0. Deliverable 2 (this repository): rules earn their nudges from real cases, the 12 rules renamed, 5 evidence kinds. The two run in parallel, each with its own implementer, and each comes back to me for checking and an independent review before its PR is ready for you.</p>
+<ex-choice id="go-choice" title="Go?">
+  <ex-option id="go-now" title="**Go: start deliverables 1 and 2**">
+    <template slot="summary">
+I apply your answers above to the designs first, then start both.
+    </template>
+  </ex-option>
+  <ex-option id="wait" title="Not yet">
+    <template slot="summary">
+Tell me what's still unclear, in Comments on the part that's unclear.
+    </template>
+  </ex-option>
+</ex-choice>
+
+<p>When you're done, open Comments and copy your answers to me.</p>
+</ex-document>
+</body>
+</html>

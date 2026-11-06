@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skill rules design</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Skill rules design</a>
+    <a href="decisions.html">Decisions and status</a>
+    <a href="delivery.html">Delivery map</a>
+    <a href="d1-design.html">1 · Engine: design</a>
+    <a href="d1-plan.html">1 · Engine: plan</a>
+    <a href="d2-design.html">2 · Rules earn nudges: design</a>
+    <a href="d2-plan.html">2 · Rules earn nudges: plan</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+  </nav>
+</ex-nav>
+<ex-presentation id="line-17" title="Line 17, end to end" description="One real mistake, from your answer to the nudge an agent gets and how it is proven.">
+  <ex-step to="requirements.html#req-skill-kinds--u16-the-general-skill-rules-judge-general-skills-only-and-know-an-example-from-a-leak">Your answer for a general skill that loads one product's own workflow: case 2.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds--r13-one-kind-judgment-per-skill-per-run">The skill's kind is judged once.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds--r14-a-rule-judges-only-its-declared-kinds">Product-leak only judges general skills.</ex-step>
+  <ex-step to="specification.html#spec-what-rules-read--r23-generalization-and-the-general-skill-rules-read-every-section">What it reads: line 17 with the file it loads.</ex-step>
+  <ex-step to="specification.html#spec-nudges--r6-a-nudge-carries-its-parts">What the nudge carries.</ex-step>
+  <ex-step to="specification.html#spec-nudges--r11-every-nudge-gets-a-disposition">What the agent does with it.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--r18-a-judged-rule-nudges-only-after-its-floor">Why the rule is allowed to nudge at all.</ex-step>
+  <ex-step to="program-design.html#pd--the-path-from-line-17-to-the-agent">Who calls whom, from the runner to the printed nudge.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How it will be proven: the U1 and U13 rows.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-rule-making" title="rule-making, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-rule-making">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-rule-making">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-nudges" title="nudges, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-nudges">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-nudges">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-skill-kinds" title="skill-kinds, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-skill-kinds">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-skill-kinds">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-rule-tests" title="rule-tests, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-rule-tests">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="through-what-rules-read" title="what-rules-read, end to end" description="The need, its obligations, who owns them, and how they are proven.">
+  <ex-step to="requirements.html#req-what-rules-read">The need, in your words.</ex-step>
+  <ex-step to="specification.html#spec-what-rules-read">What must be observably true.</ex-step>
+  <ex-step to="program-design.html#pd--trace">Who owns each obligation, and where it is proven: rows keyed by capability.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How each requirement will be proven: rows keyed by capability.</ex-step>
+</ex-presentation>
+<ex-presentation id="worth-running" title="Is this rule worth running?" description="From the mistake a rule exists for to the proof it earned its nudges.">
+  <ex-step to="specification.html#spec-rule-making--r1-a-nudging-rule-names-its-reason">The mistake it names.</ex-step>
+  <ex-step to="specification.html#spec-rule-making--c1-what-a-rule-entry-shows-its-reader">What its entry shows.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--c5-the-scenario-set">Its cases.</ex-step>
+  <ex-step to="specification.html#spec-rule-tests--r20-bars-are-tuned-per-rule-from-its-development-scenarios">Where its bars came from.</ex-step>
+  <ex-step to="program-design.html#pd--the-derived-rule-state-runner">How its state is worked out.</ex-step>
+  <ex-step to="verification-design.html#vd--the-rows">How that will be proven: the U17 and U18 rows.</ex-step>
+</ex-presentation>
+<ex-document id="content">
+<h1>Skill rules design</h1>
+<p>Every rule now starts from a mistake you actually corrected, judges only the skills it is about, reads enough text to judge, and passes real cases before it nudges anyone. This page is the way in; each document has its own page.</p>
+
+<ex-callout tone="question" title="Start here">
+[Delivery map](delivery.html): the five deliverables and what's being built now. [Decisions and status](decisions.html) has everything decided, everything dropped, and every answer you gave.
+</ex-callout>
+
+<h2 id="where">Where each answer lives</h2>
+<ul>
+<li>What we are building and for whom: the five capabilities and their needs, in <a href="requirements.html">Requirements</a>.</li>
+<li>Which mistakes the rules come from: the inventory table, in the <a href="requirements.html#req-index--the-mistake-inventory">Requirements entry</a>.</li>
+<li>The nouns, and when two of them are the same one (rule, case, kind, nudge): in <a href="specification.html#spec-entities">Entities</a>.</li>
+<li>What must be observably true, per capability: in <a href="specification.html">Specification</a>.</li>
+<li>Who does what, the engine feature, and the case files: in <a href="program-design.html">Program Design</a>.</li>
+<li>How each part will be proven, and what stays unverified: in <a href="verification-design.html#vd--how-we-will-know-it-works">Verification Design</a>.</li>
+</ul>
+
+<h2 id="start">Start with line 17</h2>
+<p>One real mistake carries the whole design: <code>ops-observability-stack/SKILL.md:17</code> sent agents into AgentStudio's own debug loop, and every layer in #187 missed it. The <strong>Line 17, end to end</strong> walkthrough (press W) follows it from your answer to the nudge and its proof. The picture of the path is in <a href="program-design.html#pd--the-path-from-line-17-to-the-agent">Program Design</a>.</p>
+
+</ex-document>
+</body>
+</html>
