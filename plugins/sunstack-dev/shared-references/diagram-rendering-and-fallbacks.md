@@ -21,7 +21,7 @@ IF the page is chosen, use `presentation-html` to build it and run its routine s
 
 ## Two Entries Over One Source
 
-On a page, the Markdown stays the truth and the page composes it. For a design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
+On a page, the Markdown stays the truth and the page composes it. For an engineering design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
 
 - The page includes each chunk, or each single-file document, with `<ex-markdown src="./<path>.md">` and places layout, navigation, and views around it. Each requirement's text lives once, in its Markdown. No card, island, or page table keeps a second copy, and the page writes no normative prose of its own. A reading path in `index.md` can become a page presentation over the same islands.
 - The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. In what the page composes, hiding never makes a failure case look absent: failure cases and their thresholds stay in view, a collapsed section holds only the rationale or evidence about them, and its title names the cases it explains. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
@@ -45,7 +45,7 @@ The page passes only when its proof records:
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
 - the result, or the exact blocking gap, of each inspection a caller separately requires, such as a phase's visual, pixel or destination inspection.
 
-Routine preparation of an HTML page adds no browser check and no second-copy comparison. A visual observation nobody requested for the authoring task stays `unverified` without blocking the page's preparation result. That exception never covers a caller's separately required visual, pixel or destination inspection, an explicit user verification request, or diagnosis of a concrete defect: each runs its actual inspection and passes it or returns its exact blocking gap.
+Routine preparation of an HTML page adds no browser check and no second-copy comparison. A caller separately requires a page view's inspection when its own acceptance consumes that view's visual-check result, as a design phase's required views and their self-review do. A page prepared only to deliver or refresh content does not: `presentation-html` on its own, `docs-maintain` and `plan-update`. On that preparation-only route, a page view's `result: pass` means its static check passed and its semantic fields were inspected in source, with `visual check: unverified`; it claims no visual or readability proof. On a required route, and for an explicit user verification request or the diagnosis of a concrete defect, the actual inspection runs: `unverified` there is a gap, never a pass, and the view passes it or returns its exact blocking gap.
 
 Record no hashes and keep no provenance registry.
 
@@ -127,4 +127,4 @@ fallback: none | from -> to, with trigger
 result: pass | gap
 ```
 
-Complete when the document medium is chosen, a chosen page has its page proof, an edit that touched a page's source has a freshness-on-edit result (a `stale` result is reported, never called current), and every fired view has a `pass` result with all required semantic fields preserved and readable, or the caller receives an exact gap that blocks its artifact-completion step. Under routine page preparation, a page view's unrequested visual check may stay `unverified`; every inspection a caller separately requires still passes or returns its blocking gap.
+Complete when the document medium is chosen, a chosen page has its page proof, an edit that touched a page's source has a freshness-on-edit result (a `stale` result is reported, never called current), and every fired view has a `pass` result with all required semantic fields preserved and, where inspected, readable, or the caller receives an exact gap that blocks its artifact-completion step. On the preparation-only route a page view's `pass` carries `visual check: unverified` and claims no visual or readability proof, as Page Proof defines it; where a caller's acceptance consumes the visual-check result, `unverified` is a gap.

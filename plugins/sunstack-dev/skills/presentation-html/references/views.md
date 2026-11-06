@@ -47,7 +47,7 @@ Both read the plan file and add no fact to it.
 | delivery map | `ex-flow` from PRs to their slices, each slice with its reads and the Verification Design rows it earns, each proof's layer (focused, integration or journey, and whether a journey drives the normal entry), the dependency edges and the integration gates. When the plan spans repositories, a repository level sits above the PRs, with an edge at each point where one repository waits on another. An `ex-tree` when no edges cross. | The owner sees which PR earns which proof, at which layer, and where one PR or repository waits on another. | Slices with hidden dependencies; a journey whose entry the map doesn't state. |
 | plan change view | `ex-compare` over corresponding topics, or a list: each change from the superseding plan's "Changed from" section, with what it invalidated (slices, rows, PRs). | Each change shows what it invalidated. | A text diff of the two plans; a change without its invalidations. |
 
-## Page lenses on a design set
+## Page lenses on an engineering design set
 
 | Lens | Form | Good signal | Bad signal |
 | --- | --- | --- | --- |

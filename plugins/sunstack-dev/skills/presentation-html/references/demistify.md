@@ -4,7 +4,7 @@ Use one library base for the guide, runtime, theme and CLI. Read the matching gu
 
 ## Library binding
 
-Choose the binding with the content in view, before writing the shell. IF the content is sensitive or private, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return the trusted binding and opening method it names; when the guide at that binding has no such section, return that gap before putting the content on a remote runtime.
+Choose the binding with the content in view, before writing the shell. IF the supplied content or the request may carry nonpublic material, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return its sensitivity decision with the trusted binding and opening method it names. When the guide at that binding has no such section, treat content as sensitive when it holds actual secrets or nonpublic records, or the user, its source markings or an applicable handling policy classify it private, and bind it to the trusted complete matching distribution described under Delivery and viewing; return the exact gap only when no such copy or opening method is available, and never put it on a remote runtime.
 
 A new page binds Demistify v1:
 
@@ -40,7 +40,7 @@ The guide at the page’s binding is the only source of available API. A constru
 
 ## Delivery and viewing
 
-Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`; the matching guide's runtime-trust section in `content.md` states that bundle's current check gap. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. Sensitive or private content takes the trust choice made at the binding, above.
+Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`; the matching guide's runtime-trust section in `content.md` says when that bundle counts as checked: only after the binding's checker passes it. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. Sensitive or private content takes the trust choice made at the binding, above.
 
 `presentation-html` step 5 owns the static authoring check. Opening or driving a browser is not a routine delivery requirement.
 
