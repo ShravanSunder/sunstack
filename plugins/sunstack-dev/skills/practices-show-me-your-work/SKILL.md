@@ -23,9 +23,10 @@ Completion: the record (project and work tag, or the entries file) is named; you
 
 Record what the owner, or someone picking up the work cold, would act on: what happened, each decision, each assumption, each change from the design, each proof. Leave out routine commands, step-by-step narration and status that changes no decision.
 
-- Every entry is one of seven kinds: action, decision, assumption, design change, proof, Lead acceptance, or owner ask.
+- Every entry is one of eight kinds: action, decision, assumption, design change, proof, Lead acceptance, owner ask, or story.
 - Every entry names who did, decided or assumed it (the owner, the Lead or a Sidekick) and the part of the design or plan it belongs to by that part's identifier, or says it belongs to none.
 - Every decision names its authority: the owner's words quoted with where they were said, an existing contract, or the agent's own call. Name it from its source, never inferred from a plan, a review or a page you wrote.
+- Proof, decision and assumption entries carry fixed parts, one labelled line each, in this order: proof is Claim, Check, Result, Not covered; decision is Choice, Authority; assumption is Assumed, What depends on it.
 - The agent that has the fact writes it, at the moment it has it. A Sidekick writes its own entries as it works and doesn't wait for the Lead to relay them.
 - An assumption is recorded when it is made, and the work goes on unless step 3 says otherwise.
 - An entry is never edited. A correction, resolution or replacement is a new entry whose first link is the entry it closes; no other link closes, accepts or confirms anything.
@@ -67,7 +68,7 @@ Completion: the acceptance entry's id, and in its text the commit, each check yo
 
 ## 6. Show the owner
 
-At every checkpoint, MUST load `references/live-page.md` and return the page path, the record position it shows, and the checker result.
+At every checkpoint, MUST load `references/live-page.md` and return the page path, the record position it shows, and the checker result. You build the page yourself with Demistify through `presentation-html` and check it with Demistify's checker; no script builds it.
 
 The page shows only what the record holds. IF an entry waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules; then load `presentation-html` and return the decision page built from that brief and its path. The assumption entry links that path: write the page before the entry, or close the entry with a new one that carries the link. The owner's answer is recorded as a decision entry that quotes the owner's words and closes what it answers.
 

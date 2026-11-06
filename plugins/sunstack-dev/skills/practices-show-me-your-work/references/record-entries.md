@@ -1,6 +1,6 @@
 # Record entries
 
-This reference owns the shape of one entry in the work's record: its kind, its tags, its text and links, how a later entry closes it, and the command that writes it. `scripts/build-live-page.ts` reads this shape, and its tests check it, so a change here is a change to the builder in the same commit.
+This reference owns the shape of one entry in the work's record: its kind, its tags, its text and links, how a later entry closes it, and the command that writes it. Every agent that writes the record, and every agent that reads it to build the owner's page, works from this one shape.
 
 Expected inputs: the fact you are recording, the work's record (Router project and work tag, or the entries file `no-board-trace.md` returned), and the part identifiers of the design or plan the work follows.
 
@@ -14,22 +14,53 @@ Every entry carries these tags:
 
 | Tag | Meaning |
 | --- | --- |
-| its kind | one of the seven below |
+| its kind | one of the eight below |
 | `who:owner`, `who:lead` or `who:sidekick` | who did, decided or assumed it: an owner decision the Lead records is `who:owner` |
 | `part:<id>` | the requirement, design element or plan slice it belongs to, by that part's identifier; `part:none` when it belongs to none |
 | the work's tag | the tag every entry of this piece of work carries, such as `design-documents` |
 
-## The seven kinds
+## The eight kinds
 
 | Kind tag | Records | Its text and extra tags must carry |
 | --- | --- | --- |
 | `action` | what happened | what was done and where: the commit, path or command |
-| `decision` | a choice made | the choice, then `Authority:` with its source: the owner's words quoted with where they were said, the contract or design it rests on (path and identifier), or `own call`. Add `core` when it changes or fills in the design or the plan. A reversible choice inside existing authority, decided without asking, adds `door:two-way` |
-| `assumption` | something taken as true and not yet settled | what is assumed and what depends on it; `state:open`; `next:owner`, `next:lead`, `next:sidekick` or `next:advisor` for who acts on it next, set by its stop treatment |
+| `decision` | a choice made | its fixed parts, `Choice:` then `Authority:` with its source: the owner's words quoted with where they were said, the contract or design it rests on (path and identifier), or `own call`. Add `core` when it changes or fills in the design or the plan. A reversible choice inside existing authority, decided without asking, adds `door:two-way` |
+| `assumption` | something taken as true and not yet settled | its fixed parts, `Assumed:` then `What depends on it:`; `state:open`; `next:owner`, `next:lead`, `next:sidekick` or `next:advisor` for who acts on it next, set by its stop treatment |
 | `design-change` | a change from the design or plan | what the design said, what changed, and why |
-| `proof` | a check and its result | the claim, the command or check, its result with exit code or counts, the commit or target it ran on, and what stays unverified |
+| `proof` | a check and its result | its fixed parts, `Claim:`, `Check:` (the command or check, and the commit or target it ran on), `Result:` (with exit code or counts) and `Not covered:` |
 | `lead-acceptance` | the Lead accepting finished work | the commit, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said, and `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
+| `story` | what one piece of work amounts to for the owner, written by the Lead at a checkpoint | its title on the first line, then `Section:`, `Headline:`, `Happened:`, `For you:` and `Next:`, and optionally `Show:` (a table or a diagram source); its links name the entries it covers. A rewritten story is a new `story` entry tagged `supersedes` whose first link is the story it replaces. `live-page.md` says when and how stories are written |
+
+## Fixed parts
+
+Proof, decision and assumption entries carry fixed parts: one labelled line each, in the order above, after the first line. A reader finds the claim, the authority or what depends on an assumption in the same place every time, and a missing part is visible at a glance. State and next actor stay tags. Entries written before these parts existed stay as written; the record is never edited.
+
+**Proof.** Good, `01a1b0f3-2a00` (position 2:959):
+
+```text
+Proof: the guides-only spec's review findings are closed.
+Claim: spec review 1's four findings (F1 authority, F2 story procedure, F3 own-call oracle, F4 proof cases) are fixed in the spec.
+Check: review lead codex-local/01a1a6f7 verified correction 1 (F1, F3, F4 closed) and correction 2 (F2 closed, spec sha256 480ada263b1b); …
+Result: no open finding. …
+Not covered: the skill files themselves (not written yet); any behavior run.
+```
+
+Bad, `01a1ac6a-40f2` (2:843): "Proof: Terra's eighteenth check found page N covering the record exactly … What ran: … Comprehension: 5 stories yes, 14 partly … Findings, worst first: … Not covered: small screens, …". The claim, the check and the result run together in one paragraph, so a reader can't tell what was claimed from what was found, and a finding against the claim hides in the middle.
+
+**Decision.** Good on content, `01a1a787-3817` (2:687): "Owner decision D6: a choice is answered on its own decision page (option A, as built); the live page links to it. / Authority: owner selection d6-a "A. Its own decision page (as built)" on owner-pages/decide-show-me-your-work-d6-d7-2026-11-04.html, review b2b8fe90…, 2026-11-04." It names the choice and an authority you can open. Written today, the choice gets its label:
+
+```text
+Owner decision D6: a choice is answered on its own decision page.
+Choice: option A, as built; the live page links to it.
+Authority: owner selection d6-a on owner-pages/decide-show-me-your-work-d6-d7-2026-11-04.html, review b2b8fe90, 2026-11-04.
+```
+
+Bad, `01a1a1b9-273a` (2:478): "Lead decision made without asking: keep this project's trace in memory-logs …, per the owner's standing rule, although practices-show-me-your-work says a work thread or session-logs." Its authority is a paraphrase ("the owner's standing rule") with nothing quoted or linked, and the choice departs from the skill it names.
+
+**Assumption.** Good, `01a1a761-26da` (2:641): "Runner gap: pnpm --dir tests/skills rules --since d8b8f60a is refused … / Assumed: an engine 0.4.0 or runner limit, not this change. What depends on it: nothing (the run on explicit paths covers the change)." Written today, `What depends on it:` starts its own line.
+
+Bad, `01a1a1b9-24bf` (2:472): "S4: nothing gets built before the owner's promised paste about implementing plans." It says neither what is assumed nor what depends on it, so nobody could see that nothing did; the owner marked it wrong.
 
 A stand-in is an `assumption`: the seam, the stand-in, what it assumes, what it gains, what it costs, and what closes it. It never proves the real interaction: "the adapter stand-in passes; the real provider remains unobserved" cannot become "provider complete" on resume.
 
@@ -66,7 +97,7 @@ agent-collaboration work-trail add --project-id <project id> --actor self --subj
 
 The result's decision is `accepted` and carries the new row's id; keep that id for later links. To make a retry safe, pass your own `--request-id` (a UUIDv7) and reuse it when you retry the same write, so it never lands twice.
 
-To an entries file, before the work has a Router project: append one line holding `{"rowId":"<id>","recordedAt":"<ISO-8601 time>","text":"…","tags":[…],"links":[…]}`. Make the id with `node -e 'console.log(require("node:crypto").randomUUIDv7())'`, so it can move to the work trail unchanged with `--row-id`. Make each line with a JSON serializer such as `JSON.stringify`, never by hand: the builder stops at a line it can't parse.
+To an entries file, before the work has a Router project: append one line holding `{"rowId":"<id>","recordedAt":"<ISO-8601 time>","text":"…","tags":[…],"links":[…]}`. Make the id with `node -e 'console.log(require("node:crypto").randomUUIDv7())'`, so it can move to the work trail unchanged with `--row-id`. Make each line with a JSON serializer such as `JSON.stringify`, never by hand: a line that isn't one JSON entry can't be read back, by you or by the next agent.
 
 ## Good and bad entries
 
