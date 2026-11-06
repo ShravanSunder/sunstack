@@ -4,7 +4,7 @@ Use one library base for the guide, runtime, theme and CLI. Read the matching gu
 
 ## Library binding
 
-Choose the binding with the content in view, before writing the shell. IF the supplied content or the request may carry nonpublic material, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return its sensitivity decision with the trusted binding and opening method it names. When the guide at that binding has no such section, treat content as sensitive when it holds actual secrets or nonpublic records, or the user, its source markings or an applicable handling policy classify it private, and bind it to the trusted complete matching distribution described under Delivery and viewing; return the exact gap only when no such copy or opening method is available, and never put it on a remote runtime.
+Choose the binding with the content in view, before writing the shell. IF the supplied content or the request may carry nonpublic material, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return its sensitivity decision with the trusted binding and opening method it names. When the guide at that binding has no such section, bind the nonpublic content to the trusted complete matching distribution described under Delivery and viewing; return the exact gap only when no such copy or opening method is available, and never put it on a remote runtime.
 
 A new page binds Demistify v1:
 
