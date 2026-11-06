@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Show me your work: what you'd see</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+
+<h1>Show me your work: what you'd see</h1>
+
+<p>This is the second design document, the Specification: what must be true for each of your requirements, and what decides pass or fail. It's easier to judge as the page it describes, so the top of this page is a sketch of that page, drawn from this project's real log. The look comes later; the sketch pins what you'd see and where. The requirements are on <a href="./index.html">the first page</a>.</p>
+
+<ex-callout title="For you to look at" tone="question" icon="user">
+<ul>
+<li><strong>Is this the page you want?</strong> Every item in the sketch is real; what it can't show yet is anything nobody logged.</li>
+<li><strong>Workstream labels.</strong> Rows get grouped under plain names like "Requirements", "page experiments" or "PR #194", instead of "pieces". Tell me if a name doesn't read.</li>
+<li><strong>Two calls I'll make in the next document unless you say otherwise:</strong> each agent audits its own run against its transcript when it finishes (as pstack does), and I decide whether a reviewer on another model also audits; and where the one short logging command lives.</li>
+</ul>
+<p>Nothing here waits on you; I'm continuing with the next document.</p>
+</ex-callout>
+
+<h2 id="sketch">The page, sketched from this project's log</h2>
+
+<p><small>Sketch: real items from the log of this work (Router project 01a1635f, tag design-documents, through position 2:1101), chosen to show each part of the page; not a full count.</small></p>
+
+<h3 id="sketch-needs-you">What needs you</h3>
+
+<ex-grid cols="4">
+<ex-stat value="1" label="waiting for you" note="workstream labels" tone="risk"></ex-stat>
+<ex-stat value="1" label="shortcut worth your look" note="#194 merged without the test suite" tone="risk"></ex-stat>
+<ex-stat value="3" label="missed items open" note="found later, not logged" tone="risk"></ex-stat>
+<ex-stat value="1" label="finished work not accepted" note="PR #194 has no acceptance" tone="question"></ex-stat>
+</ex-grid>
+
+<p><small>On the real page each number opens its items. Demistify's number tile can't hold a link, so the next document picks a display that can; here, the sections below come in the same order.</small></p>
+
+<h3 id="sketch-for-you">For you to decide · 1</h3>
+
+<ex-card title="Workstream labels: do these names read?" tone="question" icon="user">
+<p>Rows get grouped under plain names the Lead picks when work starts, like "Requirements", "page experiments" and "PR #194". You didn't know what "pieces" meant, so that word is gone.</p>
+<p><small>Assumed by the Lead · what depends on it: how the page groups rows · on the real page, its decision page opens from here.</small></p>
+</ex-card>
+
+<h3 id="sketch-done">What's done / what's next · 2</h3>
+
+<ex-card title="The Requirements were rewritten around your model" tone="done" icon="shield-check">
+<p>Two parts (the log, and showing you); the four things you want to see, plus what was missed; agents log their own work as they go; the log is Router's work trail. An evaluator checked the page and found four problems, all fixed.</p>
+<p><small>Logged by the Lead (the rewrite) and by Terra (its own check) · next: you read it when you like.</small></p>
+</ex-card>
+
+<ex-card title="The Specification is drafted" tone="question" icon="clock">
+<p>What must be true for each requirement, and what decides pass or fail: this page. Next: the evaluator checks it, then the third document says who does what.</p>
+<p><small>Logged by the Lead.</small></p>
+</ex-card>
+
+<h3 id="sketch-changed">What changed and why · 1 shortcut, 4 decisions</h3>
+
+<ex-card title="Shortcut: PR #194 merged without running the repository's test suite" tone="risk" icon="path">
+<ul>
+<li><strong>What should have happened:</strong> the repository's skill tests pass before a skill PR is called ready.</li>
+<li><strong>What happened instead:</strong> the Lead called it ready on the PR's CI checks, which don't run those tests; two tests went red on main.</li>
+<li><strong>Why:</strong> the Lead didn't know CI skips them.</li>
+<li><strong>Approved by you?</strong> No; you merged it on "merge 194" without knowing.</li>
+<li><strong>Closed:</strong> fixed in #197 (main green: 316 passed, 4 skipped).</li>
+</ul>
+<p><small>Taken by the Lead · logged by the Lead, after the component Lead found it · also under "What was missed".</small></p>
+</ex-card>
+
+<ex-grid cols="2">
+<ex-card title="Yours, or worth your look · 2" tone="decision" icon="user">
+<ul>
+<li>The log is Router's work trail, not CSV or JSONL. <small>You, 6 Nov · logged by the Lead</small></li>
+<li>Two parts: the skill logs; a reference shows you, with Demistify. <small>You, 6 Nov · logged by the Lead</small></li>
+</ul>
+</ex-card>
+<ex-card title="Agents' own calls · 2" tone="note" icon="gear">
+<ul>
+<li>The row helper saves a request id per row and reuses it on a retry. <small>Lead · own call</small></li>
+<li>The requirement tables keep four columns so they fit the screen. <small>Lead · own call</small></li>
+</ul>
+</ex-card>
+</ex-grid>
+
+<h3 id="sketch-verified">What was verified, and what was missed</h3>
+
+<ex-card title="Requirements page: quotes, counts and rendering" tone="done" icon="test-tube">
+<p><strong>Result:</strong> four findings, all fixed. <strong>Not covered:</strong> your own reading of it; future implementation.</p>
+<p><small>Run by Terra · logged first-hand by Terra.</small></p>
+</ex-card>
+
+<ex-card title="52 earlier checks, mostly of page looks" tone="question" icon="test-tube">
+<p>Each was run by an evaluator, but every one was logged by the Lead.</p>
+<p><small>Reported second-hand by the Lead.</small></p>
+</ex-card>
+
+<ex-card title="PR #194: not accepted" tone="question" icon="clock">
+<p>It merged, and later work fixed what it broke, but no acceptance names its commit, the checks read, or what stays unverified.</p>
+</ex-card>
+
+<h4 id="sketch-missed">What was missed · 3 open</h4>
+
+<ex-card title="Missed: the skipped test suite wasn't logged when it was skipped" tone="risk" icon="bell">
+<p><small>Found by the component Lead, after the merge · affects: the #194 shortcut above.</small></p>
+</ex-card>
+
+<ex-card title="Missed: a question for you was logged 23 minutes after it arose" tone="risk" icon="bell">
+<p><small>Found by the Lead, reading the log back · affects: G10, which you settled with "merge 194".</small></p>
+</ex-card>
+
+<ex-card title="Missed: 52 checks logged by the Lead instead of the agents that ran them" tone="risk" icon="bell">
+<p><small>Found by counting who wrote each row · affects: which checks you can trust first-hand.</small></p>
+</ex-card>
+
+<ex-callout title="Not audited" tone="question" icon="test-tube">
+<p>No agent has audited its own stretch of this work yet, so this page can't say nothing else was missed.</p>
+</ex-callout>
+
+<h3 id="sketch-who">Who wrote the log, and when</h3>
+
+<ex-mermaid id="who-wrote-chart" label="Rows written per day, by writer"><script type="text/plain">
+xychart-beta
+  title "Rows written per day, by writer"
+  x-axis ["3 Nov", "4 Nov", "5 Nov", "6 Nov"]
+  y-axis "Rows" 0 --> 70
+  bar "Lead" [53, 68, 64, 58]
+  bar "Sidekick" [0, 14, 5, 5]
+  bar "Evaluator" [0, 0, 0, 1]
+</script></ex-mermaid>
+
+<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. On the real page, each bar opens that writer's rows for that day.</p>
+
+<h2 id="specification">The Specification</h2>
+
+<p>Thirteen defined terms, twenty-three obligations and thirteen proofs, each traced to your requirements.</p>
+
+<ex-markdown id="specification-source" label="Specification" src="./specification.md"></ex-markdown>
+
+</ex-document>
+</body>
+</html>
