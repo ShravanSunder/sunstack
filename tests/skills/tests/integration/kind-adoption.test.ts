@@ -394,7 +394,7 @@ test("a gated rule needs complete current kind evidence, accepts explicit unsure
         ["--out", path.join(root, "adopted"), runnerPinnedSource.path],
         "synthetic-kind-key",
       );
-      expect(baseline.stdout).toContain(`warn ${name}: Verdict failed.`);
+      expect(baseline.stdout).toContain(`  ${name}  warn: Verdict failed.`);
       const ordinaryIdentity = z
         .object({ canonical_config_sha256: z.string() })
         .parse(JSON.parse(readFileSync(path.join(root, "adopted/canonical-inputs.json"), "utf8")));
@@ -460,8 +460,8 @@ test("a gated rule needs complete current kind evidence, accepts explicit unsure
           "synthetic-kind-key",
         );
         expect(ordinary.stdout).toContain(`Held: ${name}:`);
-        expect(ordinary.stdout).not.toContain(`warn ${name}: Verdict failed.`);
-        expect(ordinary.stdout).not.toContain(`uncovered_nudge: ${name}`);
+        expect(ordinary.stdout).not.toContain(`  ${name}  warn: Verdict failed.`);
+        expect(ordinary.stdout).not.toContain(`  ${name}  uncovered_nudge:`);
         expect(readFileSync(path.join(root, mutation.name, "accounts.json"), "utf8")).not.toContain(
           '"kind": "uncovered_nudge"',
         );

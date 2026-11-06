@@ -147,7 +147,10 @@ test("two real skill folders ask once each with description only, exclude a manu
       expect(raw.filter_answers[0]?.state).toBe("unsure");
       expect(raw.filter_skips).toHaveLength(1);
       expect(uncertain.stdout).toContain("kind unsure");
-      expect(uncertain.stdout).toContain('"general":0.6');
+      expect(uncertain.stdout).not.toContain('"general":0.6');
+      expect(readFileSync(path.join(root, "unsure-output/details.md"), "utf8")).toContain(
+        '"general": 0.6',
+      );
       probability = Number.NaN;
       const malformed = await runRunner(
         root,

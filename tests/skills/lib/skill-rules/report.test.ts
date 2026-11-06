@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { formatLintReport, pieceDecisionSchema } from "./report.ts";
 import { reportWithResults } from "../../tests/support/lint-report.ts";
+import { formatRunDetails } from "./phonebook.ts";
 import { recordedPrintoutReport } from "../../tests/support/recorded-printout.ts";
 
 test("a per-piece result cannot omit the outcome it reports", () => {
@@ -16,7 +17,7 @@ test("a per-piece result cannot omit the outcome it reports", () => {
   ).toThrow();
 });
 
-test("the nudge includes the standard, answers, path, cut and same rule elsewhere", () => {
+test("the nudge details include standard pointers, answers, path, cut and same rule elsewhere", () => {
   const report = reportWithResults([
     {
       name: "load-call.names-when-where-and-result",
@@ -47,12 +48,12 @@ test("the nudge includes the standard, answers, path, cut and same rule elsewher
   const first = report.findings[0];
   if (!first) throw new Error("Expected finding");
   report.findings.push({ ...first, file: "elsewhere.md", line: 40 });
-  const output = formatLintReport(report, []);
-  expect(output).toContain('Answers: {"check":{"yes_probability":0.1}}');
+  const output = formatRunDetails({ report });
+  expect(output).toContain('"yes_probability": 0.1');
   expect(output).toContain("Path: gate → check");
   expect(output).toContain("Cut: targets");
-  expect(output).toContain("same rule also nudged: elsewhere.md:40");
-  expect(output).toContain("outcome finding");
+  expect(output).toContain("Same rule elsewhere: [elsewhere.md:40-40]");
+  expect(output).toContain("anchor resolved");
 });
 
 test("unsure kind and no-folder gaps stay apart from gate exclusions and keep answers", () => {
@@ -77,7 +78,8 @@ test("unsure kind and no-folder gaps stay apart from gate exclusions and keep an
     },
     [],
   );
-  expect(output).toContain('kind unsure: plugins/example/skills/real: {"general":0.4,"role":0.6}');
+  expect(output).toContain("kind unsure: plugins/example/skills/real; see details.md#filter-1");
+  expect(output).not.toContain('"general":0.4');
   expect(output).toContain("no folder: general-skill.overfits-to-product-workflow loose.md");
   expect(output).toContain("Gaps: 2");
   expect(output).toContain("Exclusions: 0");
@@ -123,16 +125,14 @@ test("a nested finding keeps its own judgment and cut fields instead of its encl
     related: [],
     judgment: { answers: { inner: true }, path_taken: ["inner"] },
   });
-  const block = formatLintReport(report, [])
-    .split(/\n(?=\S)/)
-    .find((part) => part.startsWith("source.md:40:"));
-  expect(block).toContain('Answers: {"inner":true}');
+  const block = formatRunDetails({ report });
+  expect(block).toContain('"inner": true');
   expect(block).toContain("Path: inner");
   expect(block).toContain("Cut: inner-body");
   expect(block).not.toContain("outer-context");
 });
 
-test("recorded uncertainty prints its span, rule, step and answers without the evidence state", () => {
+test("recorded uncertainty indexes its span and step while answers live only in details", () => {
   const report = recordedPrintoutReport();
   const before = JSON.stringify(report);
   const item = report.uncertain[0];
@@ -140,9 +140,10 @@ test("recorded uncertainty prints its span, rule, step and answers without the e
   expect(JSON.stringify(item.state).length).toBeGreaterThan(20000);
   const output = formatLintReport(report, []);
   expect(output).toContain(
-    `${item.where.file}:${item.where.first_line}-${item.where.last_line}: uncertain ${item.rule}, step ${item.step}`,
+    `${item.where.file}:${item.where.first_line}-${item.where.last_line}  ${item.rule}  uncertain: step ${item.step}`,
   );
-  expect(output).toContain(`Answers: ${JSON.stringify(item.answers)}`);
+  expect(output).not.toContain("Answers:");
+  expect(formatRunDetails({ report })).toContain('"probabilities"');
   expect(output).not.toContain("Evidence:");
   expect(output).not.toContain(JSON.stringify(item.state));
   expect(JSON.stringify(report)).toBe(before);
@@ -165,14 +166,14 @@ test.each([10, 12])(
     const before = JSON.stringify(report);
     const output = formatLintReport(report, []);
     for (const rule of rules) {
-      expect(output.split("\n").filter((line) => line.includes(`: warn ${rule}:`))).toHaveLength(
+      expect(output.split("\n").filter((line) => line.includes(`  ${rule}  warn:`))).toHaveLength(
         10,
       );
       expect(
-        output.split("\n").filter((line) => line.includes(`: uncertain ${rule},`)),
+        output.split("\n").filter((line) => line.includes(`  ${rule}  uncertain:`)),
       ).toHaveLength(10);
       for (const kind of ["warnings", "uncertain"]) {
-        const omitted = `… and 2 more ${kind} for ${rule} in report.json`;
+        const omitted = `… and 2 more ${kind} for ${rule}; see details.md`;
         if (count === 12) expect(output).toContain(omitted);
         else expect(output).not.toContain(`more ${kind} for ${rule}`);
       }
@@ -192,9 +193,21 @@ test("all error findings remain visible even when the same rule has twelve warni
   ]).flat();
   const output = formatLintReport(report, []);
   expect(
-    output.split("\n").filter((line) => line.includes(`: error ${finding.rule}:`)),
+    output.split("\n").filter((line) => line.includes(`  ${finding.rule}  error:`)),
   ).toHaveLength(12);
   expect(
-    output.split("\n").filter((line) => line.includes(`: warn ${finding.rule}:`)),
+    output.split("\n").filter((line) => line.includes(`  ${finding.rule}  warn:`)),
   ).toHaveLength(10);
+});
+
+test("the phonebook index points to details without inline answers, standards or related text", () => {
+  const report = recordedPrintoutReport();
+  const output = formatLintReport(report, [], { reportPath: "run/report.json" });
+  expect(output).not.toContain("Answers:");
+  expect(output).not.toContain("why:");
+  expect(output).not.toContain("Path:");
+  expect(output).not.toContain("read:");
+  expect(output).not.toContain("same rule also nudged:");
+  expect(output).toContain("→ run/details.md#finding-1");
+  expect(output).toContain("→ run/details.md#uncertain-1");
 });

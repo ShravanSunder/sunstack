@@ -1,4 +1,5 @@
 import path from "node:path";
+import { formatRunDetails } from "../../lib/skill-rules/phonebook.ts";
 import { describe, expect, test } from "vitest";
 import { loadRuleDenominators } from "../../lib/skill-rules/denominators.ts";
 import type { RuleDenominator } from "../../lib/skill-rules/denominators.ts";
@@ -35,7 +36,17 @@ function counts(pieces: number, picked = pieces, limited = false) {
   return { matches: pieces, pieces, picked, limited };
 }
 function row(name: string, file: string, outcome = "pass", extra: Record<string, unknown> = {}) {
-  return { name, marker: "K001", file, first_line: 1, last_line: 4, outcome, step: "s", path: ["s"], ...extra };
+  return {
+    name,
+    marker: "K001",
+    file,
+    first_line: 1,
+    last_line: 4,
+    outcome,
+    step: "s",
+    path: ["s"],
+    ...extra,
+  };
 }
 function lintReport(parts: Record<string, unknown>): LintReport {
   return lintReportSchema.parse({
@@ -85,7 +96,11 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
       ],
     });
     expect(reportGaps(report, [generalization]).unread).toEqual([
-      { rule: "general-skill.taught-rule-overfits-to-one-project", marker: "K001", file: referenceFile },
+      {
+        rule: "general-skill.taught-rule-overfits-to-one-project",
+        marker: "K001",
+        file: referenceFile,
+      },
     ]);
   });
 
@@ -103,7 +118,9 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
   });
 
   test("a file whose pieces a change scope left unpicked is out of scope, not unread", () => {
-    const report = lintReport({ file_counts: [{ file: skillFile, kinds: { section: counts(3, 0) } }] });
+    const report = lintReport({
+      file_counts: [{ file: skillFile, kinds: { section: counts(3, 0) } }],
+    });
     expect(reportGaps(report, [generalization]).unread).toEqual([]);
   });
 
@@ -111,7 +128,9 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
     const report = lintReport({
       status: { kind: "incomplete" },
       incomplete: [{ rule: null, file: referenceFile, reason: { kind: "selection_failed" } }],
-      diagnostics: [{ file: referenceFile, line: null, column: null, code: "syntax", message: "max_matches" }],
+      diagnostics: [
+        { file: referenceFile, line: null, column: null, code: "syntax", message: "max_matches" },
+      ],
       file_counts: [{ file: referenceFile, kinds: { section: counts(0, 0, true) } }],
     });
     const gaps = reportGaps(report, [generalization]);
@@ -125,11 +144,15 @@ describe("unread, inside each rule's declared denominator (D3a)", () => {
     const denominators = loadRuleDenominators(
       path.join(repositoryRoot, kitRelative, "skill-rules.config.json"),
     );
-    expect(denominators.find((item) => item.rule === "general-skill.overfits-to-product-workflow")).toMatchObject({
+    expect(
+      denominators.find((item) => item.rule === "general-skill.overfits-to-product-workflow"),
+    ).toMatchObject({
       kind: "section",
       files: ["**/SKILL.md", "**/references/**/*.md"],
     });
-    expect(denominators.find((item) => item.rule === "rule-question.asks-exactly-one-thing")).toMatchObject({
+    expect(
+      denominators.find((item) => item.rule === "rule-question.asks-exactly-one-thing"),
+    ).toMatchObject({
       kind: "rule_question",
       files: ["**/rules/*.rules.json"],
     });
@@ -149,7 +172,7 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
           file: skillFile,
           line: 17,
           anchor: "resolved",
-          judgment: {answers: {}, path_taken: []},
+          judgment: { answers: {}, path_taken: [] },
           basis: "judged",
           severity: "warn",
           message: "This routes the agent into one product's own workflow.",
@@ -164,17 +187,22 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
     });
     const text = formatLintReport(report, [generalization]);
     expect(text).toContain(
-      `${skillFile}:17: warn general-skill.overfits-to-product-workflow: This routes the agent into one product's own workflow. (judged, outcome finding, anchor resolved)`,
+      `${skillFile}:17-17  general-skill.overfits-to-product-workflow  warn: This routes the agent into one product's own workflow.  → details.md#finding-1`,
     );
-    expect(text).toContain("  read: standard rules/standards.md:22");
-    expect(text).toContain("  read: targets references/loop.md:1-40");
+    expect(formatRunDetails({ report })).toContain("Standard: [rules/standards.md:22-22]");
+    expect(formatRunDetails({ report })).toContain("Read targets: [references/loop.md:1-40]");
     expect(text).toContain("Gaps: none");
   });
 
   test("each gap kind prints under its own name, and 'none' is said only when all four are empty", () => {
     const report = lintReport({
       status: { kind: "incomplete" },
-      results: [row("general-skill.taught-rule-overfits-to-one-project", skillFile, "pass", { basis: "judged", cut: ["body"] })],
+      results: [
+        row("general-skill.taught-rule-overfits-to-one-project", skillFile, "pass", {
+          basis: "judged",
+          cut: ["body"],
+        }),
+      ],
       selections: [
         {
           kind: "workflow_section",
@@ -191,8 +219,12 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
     });
     const text = formatLintReport(report, [generalization]);
     expect(text).not.toContain("Gaps: none");
-    expect(text).toContain(`unread: general-skill.taught-rule-overfits-to-one-project judged nothing in ${referenceFile}`);
-    expect(text).toContain(`cut: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4: body cut for the model`);
+    expect(text).toContain(
+      `unread: general-skill.taught-rule-overfits-to-one-project judged nothing in ${referenceFile}`,
+    );
+    expect(text).toContain(
+      `cut: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4: body cut for the model`,
+    );
     expect(text).toContain(`unresolved: ${skillFile}:9: uncertain selection workflow_section`);
     expect(text).toContain("not run: run incomplete: not every rule ran");
     expect(text).toContain('not run: Skipped rule: {"rule":"omitted","reason":"off"}');
@@ -207,14 +239,22 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
           basis: "judged",
           answers: { kind: { type: "choice", selected_label: "local", confidence: 0.82 } },
         }),
-        row("description.always-earned", skillFile, "not_applicable", { step: "always", path: ["always"], basis: "mechanical" }),
+        row("description.always-earned", skillFile, "not_applicable", {
+          step: "always",
+          path: ["always"],
+          basis: "mechanical",
+        }),
       ],
       file_counts: [{ file: skillFile, kinds: { section: counts(1) } }],
     });
     const text = formatLintReport(report, [generalization]);
     expect(text).toContain("Gaps: none");
     expect(text).toContain("Exclusions: 2");
-    expect(text).toContain(`excluded: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4, kind answered local 0.82`);
-    expect(text).toContain(`excluded: description.always-earned at ${skillFile}:1-4, always (mechanical)`);
+    expect(text).toContain(
+      `excluded: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4, kind answered local 0.82`,
+    );
+    expect(text).toContain(
+      `excluded: description.always-earned at ${skillFile}:1-4, always (mechanical)`,
+    );
   });
 });

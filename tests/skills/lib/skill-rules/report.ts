@@ -1,8 +1,8 @@
 import path from "node:path";
-import { readFileSync } from "node:fs";
 import { z } from "zod";
 import type { RuleDenominator } from "./denominators.ts";
 import type { RuleState } from "./rule-state.ts";
+import { detailsPath, entryAnchor, findingPointer, oneLine, pointerText } from "./phonebook.ts";
 
 const basisSchema = z.enum(["mechanical", "judged"]);
 // One rule's result for one piece (sunstack 0.6.0): its walked path, the answers that walk read
@@ -240,11 +240,10 @@ const unresolvedConsequence =
 
 function formatUnresolvedSelection(item: Selection): string | null {
   const at = `${item.where.file}:${item.where.first_line}`;
-  const heading = JSON.stringify(item.first_line);
   if (item.outcome.kind === "uncertain")
-    return `${at}: uncertain selection ${item.kind} ${heading}, yes ${item.outcome.yes}; ${unresolvedConsequence}`;
+    return `${at}: uncertain selection ${item.kind}; ${unresolvedConsequence}`;
   if (item.outcome.kind === "incomplete")
-    return `${at}: incomplete selection ${item.kind} ${heading}, ${item.outcome.reason.kind}; ${unresolvedConsequence}`;
+    return `${at}: incomplete selection ${item.kind}, ${item.outcome.reason.kind}; ${unresolvedConsequence}`;
   return null;
 }
 
@@ -460,84 +459,40 @@ export function formatLintReport(
       );
     else if (state.state === "dropped") lines.push(`Dropped: ${rule}`);
   }
-  // Each finding is a nudge: its line, how it was reached, and the places the run read to go to next.
+  const detailsFile = detailsPath(context.reportPath);
   if (report.findings.length > 0) lines.push("Nudges:");
   const warningCounts = new Map<string, number>();
   for (const severity of ["error", "warn"]) {
-    for (const finding of report.findings.filter((item) => item.severity === severity)) {
+    for (const [index, finding] of report.findings.entries()) {
+      if (finding.severity !== severity) continue;
       if (severity === "warn") {
         const count = (warningCounts.get(finding.rule) ?? 0) + 1;
         warningCounts.set(finding.rule, count);
         if (count > printoutLimitPerRule) continue;
       }
       lines.push(
-        `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, outcome finding, anchor ${finding.anchor})`,
+        `${pointerText(findingPointer(report, finding))}  ${oneLine(finding.rule)}  ${severity}: ${oneLine(finding.message)}  → ${detailsFile}#${entryAnchor("finding", index)}`,
       );
-      // Nested sections overlap in source range. Only a finding result can supply its cut state;
-      // the closest starting span is its own section, rather than an enclosing result.
-      const piece = report.results
-        .filter(
-          (result) =>
-            result.name === finding.rule &&
-            result.marker === finding.marker &&
-            result.file === finding.file &&
-            result.outcome === "finding" &&
-            result.first_line <= finding.line &&
-            result.last_line >= finding.line,
-        )
-        .sort(
-          (left, right) => right.first_line - left.first_line || left.last_line - right.last_line,
-        )[0];
-      for (const standard of finding.related.filter((place) => place.label === "standard")) {
-        let wording: string;
-        try {
-          wording = readFileSync(
-            path.resolve(context.repository ?? process.cwd(), standard.file),
-            "utf8",
-          )
-            .split("\n")
-            .slice(standard.first_line - 1, standard.last_line)
-            .join("\n");
-        } catch {
-          wording = "unavailable (standard could not be read)";
-        }
-        lines.push(`  why: ${standard.file}:${standard.first_line}: ${wording}`);
-      }
-      lines.push(
-        `  Answers: ${JSON.stringify(finding.judgment?.answers ?? piece?.answers ?? {})}`,
-        `  Path: ${(finding.judgment?.path_taken ?? piece?.path ?? []).join(" → ")}`,
-        `  Cut: ${(piece?.cut ?? []).join(", ") || "none"}`,
-      );
-      for (const place of finding.related)
-        lines.push(
-          `  read: ${place.label} ${place.file}:${placeLines(place.first_line, place.last_line)}`,
-        );
-      for (const other of report.findings.filter(
-        (item) =>
-          item !== finding && item.rule === finding.rule && item.message === finding.message,
-      ))
-        lines.push(`  same rule also nudged: ${other.file}:${other.line}`);
     }
   }
   for (const [rule, count] of warningCounts)
     if (count > printoutLimitPerRule)
       lines.push(
-        `… and ${count - printoutLimitPerRule} more warnings for ${rule} in ${context.reportPath ?? "report.json"}`,
+        `… and ${count - printoutLimitPerRule} more warnings for ${rule}; see ${detailsFile}`,
       );
   const uncertainCounts = new Map<string, number>();
-  for (const item of report.uncertain) {
+  for (const [index, item] of report.uncertain.entries()) {
     const count = (uncertainCounts.get(item.rule) ?? 0) + 1;
     uncertainCounts.set(item.rule, count);
     if (count > printoutLimitPerRule) continue;
     lines.push(
-      `${item.where.file}:${placeLines(item.where.first_line, item.where.last_line ?? item.where.first_line)}: uncertain ${item.rule}, step ${item.step}`,
-      `Answers: ${JSON.stringify(item.answers)}`,
+      `${pointerText({ ...item.where, last_line: item.where.last_line ?? item.where.first_line })}  ${oneLine(item.rule)}  uncertain: step ${oneLine(item.step)}  → ${detailsFile}#${entryAnchor("uncertain", index)}`,
     );
   }
   for (const [rule, count] of uncertainCounts)
     if (count > printoutLimitPerRule)
       lines.push(
-        `… and ${count - printoutLimitPerRule} more uncertain for ${rule} in ${context.reportPath ?? "report.json"}`,
+        `… and ${count - printoutLimitPerRule} more uncertain for ${rule}; see ${detailsFile}`,
       );
   const gaps = reportGaps(report, denominators);
   const gapCount =
@@ -558,8 +513,10 @@ export function formatLintReport(
     if (line) lines.push(`unresolved: ${line}`);
   }
   for (const line of gaps.notRun) lines.push(`not run: ${line}`);
-  for (const gap of gaps.kindUnsure)
-    lines.push(`kind unsure: ${gap.folder}: ${JSON.stringify(gap.answers)}`);
+  for (const gap of gaps.kindUnsure) {
+    const index = report.filter_answers?.findIndex((answer) => answer.folder === gap.folder) ?? -1;
+    lines.push(`kind unsure: ${gap.folder}; see ${detailsFile}#${entryAnchor("filter", index)}`);
+  }
   for (const gap of gaps.noFolder) lines.push(`no folder: ${gap.rule} ${gap.file}`);
   // A file that was asked about and had nothing selected, with its separate counts. Only when every
   // candidate is not_selected did the model judge none to be that kind (as a numbered rule list

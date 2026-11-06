@@ -55,7 +55,7 @@ describe("repository skill rule runner (G10)", () => {
       "tests/fixtures/plugins/one/skills/fake/SKILL.md",
       ".claude/worktrees/nested/plugins/one/skills/fake/SKILL.md",
     ])
-      installPinnedSkill(root, {destination: filename});
+      installPinnedSkill(root, { destination: filename });
     writeFixtureFile(root, ".gitignore", ".claude/worktrees/\n");
     saveRules(root, {
       K001: {
@@ -88,7 +88,15 @@ describe("repository skill rule runner (G10)", () => {
   test("named paths narrow selection and mechanical-only work with empty evidence_seen stays clean", async () => {
     const root = createFixture();
     installPinnedSkill(root);
-    installPinnedSkill(root, {source: {...runnerPinnedSource, commit: "74e18127a8e8bea04c33b8c79259f11b96b7e2a1", path: "plugins/agent-router/skills/agent-collaboration/SKILL.md", context: ["plugins/agent-router/skills/agent-collaboration/SKILL.md"]}, destination: "plugins/other/skills/long/SKILL.md"});
+    installPinnedSkill(root, {
+      source: {
+        ...runnerPinnedSource,
+        commit: "74e18127a8e8bea04c33b8c79259f11b96b7e2a1",
+        path: "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        context: ["plugins/agent-router/skills/agent-collaboration/SKILL.md"],
+      },
+      destination: "plugins/other/skills/long/SKILL.md",
+    });
     const result = await runRunnerJudged(root, [path.dirname(pinnedSkillPath)]);
     expect(result.status, result.stderr).toBe(0);
     const report = reportSchema.parse(result.report);
@@ -205,9 +213,12 @@ describe("repository skill rule runner (G10)", () => {
           expect(uncertain.answers).toHaveProperty("verdict");
           expect(uncertain.state).not.toEqual({});
           expect(result.stdout).toContain(
-            `${uncertain.where.file}:${uncertain.where.first_line}-${uncertain.where.last_line}: uncertain ${uncertain.rule}, step ${uncertain.step}`,
+            `${uncertain.where.file}:${uncertain.where.first_line}-${uncertain.where.last_line}  ${uncertain.rule}  uncertain: step ${uncertain.step}`,
           );
-          expect(result.stdout).toContain(`Answers: ${JSON.stringify(uncertain.answers)}`);
+          expect(result.stdout).not.toContain("Answers:");
+          expect(readFileSync(path.join(root, "reports/details.md"), "utf8")).toContain(
+            '"yes_probability": 0.5',
+          );
           expect(result.stdout).not.toContain("Evidence:");
           expect(result.stdout).not.toContain(JSON.stringify(uncertain.state));
         }
@@ -288,7 +299,7 @@ describe("repository skill rule runner (G10)", () => {
   test("an incomplete asking run prints its reason and preserves exit 3", async () => {
     const root = createFixture();
     installPinnedSkill(root);
-    installPinnedSkill(root, {destination: "plugins/other/skills/second/SKILL.md"});
+    installPinnedSkill(root, { destination: "plugins/other/skills/second/SKILL.md" });
     saveRules(root, { K001: askingRule });
     await withJudge({ verdict: 0.95 }, async (endpoint, requests) => {
       saveConfig(root, {
@@ -309,8 +320,8 @@ describe("repository skill rule runner (G10)", () => {
   test("a malformed provider answer stays incomplete on real pinned skill text", async () => {
     const root = createFixture();
     installPinnedSkill(root);
-    saveRules(root, {K001: askingRule});
-    const result = await runRunnerJudged(root, [], {verdict: Number.NaN});
+    saveRules(root, { K001: askingRule });
+    const result = await runRunnerJudged(root, [], { verdict: Number.NaN });
     const report = reportSchema.parse(result.report);
     expect(result.requests).toHaveLength(1);
     expect(result.status, result.stderr).toBe(3);
@@ -322,12 +333,47 @@ describe("repository skill rule runner (G10)", () => {
   test("collected real text, the bounded model view and the actual request stay distinct", async () => {
     const root = createFixture();
     installPinnedSkill(root);
-    saveRules(root, {K001: {...askingRule, evidence: "section", questions: {verdict: {type: "noul", instructions: {check: "body", task: "Does this body meet the supplied standard?"}}}, decision: {start: "verdict", steps: {verdict: {...askStep, no: {finding: "Body failed.", at: "body"}}}}}});
-    const evidence = z.object({evidence: z.object({ast_grep: z.string(), kinds: z.record(z.string(), z.record(z.string(), z.unknown()))})}).parse(JSON.parse(readFileSync(path.join(root, kitRelative, "skill-rules.config.json"), "utf8"))).evidence;
-    saveConfig(root, {evidence: {...evidence, kinds: {...evidence.kinds, section: {...evidence.kinds.section, max_chars: 1000}}}, limits: {evidence_max_chars: 1000, request_max_chars: 20000, max_model_requests: 100}});
+    saveRules(root, {
+      K001: {
+        ...askingRule,
+        evidence: "section",
+        questions: {
+          verdict: {
+            type: "noul",
+            instructions: { check: "body", task: "Does this body meet the supplied standard?" },
+          },
+        },
+        decision: {
+          start: "verdict",
+          steps: { verdict: { ...askStep, no: { finding: "Body failed.", at: "body" } } },
+        },
+      },
+    });
+    const evidence = z
+      .object({
+        evidence: z.object({
+          ast_grep: z.string(),
+          kinds: z.record(z.string(), z.record(z.string(), z.unknown())),
+        }),
+      })
+      .parse(
+        JSON.parse(readFileSync(path.join(root, kitRelative, "skill-rules.config.json"), "utf8")),
+      ).evidence;
+    saveConfig(root, {
+      evidence: {
+        ...evidence,
+        kinds: { ...evidence.kinds, section: { ...evidence.kinds.section, max_chars: 1000 } },
+      },
+      limits: { evidence_max_chars: 1000, request_max_chars: 20000, max_model_requests: 100 },
+    });
     const pieces = (await listEvidence(root)).pieces;
-    const textField = z.object({value: z.string()});
-    const skill = pieces.find((piece) => piece.kind === "section" && piece.where.file === pinnedSkillPath && (textField.safeParse(piece.fields.body).data?.value.length ?? 0) > 1000);
+    const textField = z.object({ value: z.string() });
+    const skill = pieces.find(
+      (piece) =>
+        piece.kind === "section" &&
+        piece.where.file === pinnedSkillPath &&
+        (textField.safeParse(piece.fields.body).data?.value.length ?? 0) > 1000,
+    );
     if (!skill) throw new Error("Missing pinned skill evidence");
     const collected = textField.parse(skill.fields.body).value;
     const visible = z.string().parse(skill.model_view.fields.body);
@@ -343,8 +389,12 @@ describe("repository skill rule runner (G10)", () => {
       return [];
     };
     expect(result.requests.length).toBeGreaterThan(0);
-    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(visible))).toBe(true);
-    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(collected))).toBe(false);
+    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(visible))).toBe(
+      true,
+    );
+    expect(result.requests.flatMap(requestStrings).some((text) => text.includes(collected))).toBe(
+      false,
+    );
     expect(report.results.some((piece) => piece.cut?.includes("body"))).toBe(true);
     // The test rule is held, so its raw evidence stays in report.json rather than becoming a nudge.
     expect(result.stdout).toContain("Held: description_judgment:");

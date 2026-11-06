@@ -3,6 +3,7 @@ import { matchScenarioPiece } from "./scenario-scoring.ts";
 import type { ScenarioRecord } from "./scenarios.ts";
 import { reportGaps, printoutLimitPerRule } from "./report.ts";
 import type { LintReport } from "./report.ts";
+import { detailsPath, entryAnchor, oneLine } from "./phonebook.ts";
 import type { RuleDenominator } from "./denominators.ts";
 
 export interface CurrentAccountItem {
@@ -164,13 +165,13 @@ export function formatCurrentAccounts(
       if (count > printoutLimitPerRule) continue;
     }
     lines.push(
-      `${index + 1}. ${item.kind}: ${item.rule ?? "run"} ${item.file ?? ""}${item.line === null ? "" : `:${item.line}`}: ${item.detail}; account pending`,
+      `${item.file ?? "run"}:${item.line ?? 1}-${item.line ?? 1}  ${oneLine(item.rule ?? "run")}  ${item.kind}: ${oneLine(item.detail)}  → ${detailsPath(context.reportPath)}#${entryAnchor("account", index)}`,
     );
   }
   for (const [rule, count] of warningCounts)
     if (count > printoutLimitPerRule)
       lines.push(
-        `… and ${count - printoutLimitPerRule} more warnings for ${rule} in ${context.reportPath ?? "report.json"}`,
+        `… and ${count - printoutLimitPerRule} more warnings for ${rule}; see ${detailsPath(context.reportPath)}`,
       );
   return lines.join("\n");
 }

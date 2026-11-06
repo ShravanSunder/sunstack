@@ -17,6 +17,11 @@ import { loadRuleDenominators } from "../lib/skill-rules/denominators.ts";
 import { loadConfiguredScenarios } from "../lib/skill-rules/scenario-run.ts";
 import { formatCurrentAccounts, listCurrentAccounts } from "../lib/skill-rules/current-accounts.ts";
 import { engineVersion, loadRuleStates } from "../lib/skill-rules/rule-state.ts";
+import {
+  formatRunDetails,
+  loadStandardPointers,
+  detailsPath,
+} from "../lib/skill-rules/phonebook.ts";
 import { canonicalConfigDigest } from "../lib/skill-rules/adoption.ts";
 
 type RunScope =
@@ -154,9 +159,6 @@ function runRules(): number {
       (entry) => states[entry.rule]?.state === "nudging",
     );
     const reportPath = path.join(options.output, "report.json");
-    console.log(
-      formatLintReport(report, denominators, { states, repository: repositoryRoot, reportPath }),
-    );
     const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
     const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
       cwd: repositoryRoot,
@@ -171,6 +173,19 @@ function runRules(): number {
     writeFileSync(
       path.join(options.output, "accounts.json"),
       JSON.stringify({ commit, accounts }, null, 2) + "\n",
+    );
+    writeFileSync(
+      detailsPath(reportPath),
+      formatRunDetails({
+        report,
+        accounts,
+        repository: repositoryRoot,
+        standards: loadStandardPointers(configPath),
+        observedResults: rawReport.results,
+      }),
+    );
+    console.log(
+      formatLintReport(report, denominators, { states, repository: repositoryRoot, reportPath }),
     );
     console.log(formatCurrentAccounts(accounts, { findings: report.findings, reportPath }));
     if (options.scope.kind === "full" && report.status.kind === "nothing_selected") {

@@ -53,12 +53,20 @@ test("duplicate warning accounts obey each rule's cap while errors and saved acc
   });
   for (const rule of [finding.rule, "other-rule"]) {
     expect(
-      output.split("\n").filter((line) => line.includes(`uncovered_nudge: ${rule} warning-`)),
+      output
+        .split("\n")
+        .filter(
+          (line) => line.startsWith("warning-") && line.includes(`  ${rule}  uncovered_nudge:`),
+        ),
     ).toHaveLength(10);
-    expect(output).toContain(`… and 2 more warnings for ${rule} in run/report.json`);
+    expect(output).toContain(`… and 2 more warnings for ${rule}; see run/details.md`);
   }
   expect(
-    output.split("\n").filter((line) => line.includes(`uncovered_nudge: ${finding.rule} error-`)),
+    output
+      .split("\n")
+      .filter(
+        (line) => line.startsWith("error-") && line.includes(`  ${finding.rule}  uncovered_nudge:`),
+      ),
   ).toHaveLength(12);
   expect(items.filter((item) => item.kind === "uncovered_nudge")).toHaveLength(36);
   expect(JSON.stringify(items)).toBe(before);

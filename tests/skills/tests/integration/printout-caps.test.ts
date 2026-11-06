@@ -95,23 +95,37 @@ test("the ordinary CLI caps both warning views and uncertainty while retaining e
     );
     expect(result.status, result.stderr).toBe(5);
     const reportFile = path.join(root, "reports/report.json");
+    const detailsFile = path.join(root, "reports/details.md");
+    const details = readFileSync(detailsFile, "utf8");
     const raw = reportSchema.parse(JSON.parse(readFileSync(reportFile, "utf8")));
     expect(raw.findings.filter((item) => item.rule === "warning-cap")).toHaveLength(12);
     expect(raw.uncertain.filter((item) => item.rule === "uncertain-cap")).toHaveLength(12);
     expect(
-      result.stdout.split("\n").filter((line) => line.includes(": warn warning-cap:")),
+      result.stdout.split("\n").filter((line) => line.includes("  warning-cap  warn:")),
     ).toHaveLength(10);
     expect(
-      result.stdout.split("\n").filter((line) => line.includes("uncovered_nudge: warning-cap")),
+      result.stdout.split("\n").filter((line) => line.includes("  warning-cap  uncovered_nudge:")),
     ).toHaveLength(10);
     expect(
-      result.stdout.split("\n").filter((line) => line.includes(": uncertain uncertain-cap,")),
+      result.stdout.split("\n").filter((line) => line.includes("  uncertain-cap  uncertain:")),
     ).toHaveLength(10);
     expect(
-      result.stdout.split(`… and 2 more warnings for warning-cap in ${reportFile}`),
+      result.stdout.split(`… and 2 more warnings for warning-cap; see ${detailsFile}`),
     ).toHaveLength(3);
-    expect(result.stdout).toContain(`… and 2 more uncertain for uncertain-cap in ${reportFile}`);
+    expect(result.stdout).toContain(`… and 2 more uncertain for uncertain-cap; see ${detailsFile}`);
     expect(result.stdout).not.toContain("Evidence:");
+    expect(result.stdout).not.toContain("Answers:");
+    expect(result.stdout).not.toContain("Path:");
+    const pointers = [...result.stdout.matchAll(/→ (.+)#([\w-]+)/g)];
+    for (const pointer of pointers) {
+      expect(pointer[1]).toBe(detailsFile);
+      expect(details).toContain(`<a id="${pointer[2]}"></a>`);
+    }
+    expect(details).toContain('<a id="finding-12"></a>');
+    expect(details).toContain('<a id="uncertain-12"></a>');
+    expect(details).toContain("fixture.md:1-1");
+    expect(details).toContain('"yes_probability": 0.5');
+    expect(details).not.toContain("A fixture standard.");
     const uncertain = raw.uncertain[0];
     if (!uncertain) throw new Error("Missing raw uncertainty");
     expect(JSON.stringify(uncertain.state)).toContain("description");
@@ -123,6 +137,7 @@ test("the ordinary CLI caps both warning views and uncertainty while retaining e
         (item) => item.kind === "uncovered_nudge" && item.rule === "warning-cap",
       ),
     ).toHaveLength(12);
+    expect(pointers).toHaveLength(20 + accounts.accounts.length - 2); // Two warning accounts are omitted; every other account has a pointer.
     expect(readFileSync(reportFile)).toEqual(readFileSync(path.join(root, "engine-original.json")));
     expect(raw.evidence_seen).not.toEqual({});
   });

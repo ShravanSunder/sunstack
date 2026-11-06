@@ -173,8 +173,8 @@ test("scenario run, explicit adoption and ordinary CLI share current fingerprint
         "synthetic-runner-key",
       );
       expect(baseline.status, baseline.stderr).toBe(0);
-      expect(baseline.stdout).toContain(`warn ${name}: Verdict failed.`);
-      expect(baseline.stdout).toContain(`uncovered_nudge: ${name}`);
+      expect(baseline.stdout).toContain(`  ${name}  warn: Verdict failed.`);
+      expect(baseline.stdout).toContain(`  ${name}  uncovered_nudge:`);
       const canonical = readFileSync(config),
         ruleBytes = readFileSync(rulesFile),
         scenarioBytes = readFileSync(filename),
@@ -276,8 +276,8 @@ test("scenario run, explicit adoption and ordinary CLI share current fingerprint
         expect(reportSchema.parse(result.report).findings).toHaveLength(1);
         expect(result.stdout).toContain(`Held: ${name}:`);
         expect(result.stdout).toContain(mutation.reason);
-        expect(result.stdout).not.toContain(`warn ${name}: Verdict failed.`);
-        expect(result.stdout).not.toContain(`uncovered_nudge: ${name}`);
+        expect(result.stdout).not.toContain(`  ${name}  warn: Verdict failed.`);
+        expect(result.stdout).not.toContain(`  ${name}  uncovered_nudge:`);
         expect(readFileSync(path.join(root, mutation.name, "accounts.json"), "utf8")).not.toContain(
           '"kind": "uncovered_nudge"',
         );
