@@ -17,7 +17,7 @@
 
 <ex-callout title="Three choices I made, and what would change them" tone="decision" icon="path">
 <ul>
-<li><strong>Logging stays a ready Router command,</strong> filled in for each helper when I hand it the job. It's two plain steps: make two ids for the row, then write. The helper adds only what kind of row, who, and the words. A retry reuses the same ids, and Router then returns the first row instead of writing a second; I tested that. No new tool. If helpers get it wrong or skip rows, I'll build a short <code>sunstack log</code> command instead.</li>
+<li><strong>Logging stays a ready Router command,</strong> filled in for each helper when I hand it the job. It's two plain steps: make two ids for the row, then write. The helper adds only what kind of row, who, and the words. A retry reuses the same ids, and Router then returns the first row instead of writing a second. I tested that once, with a resend after the first had finished, on this machine. A resend while the first is still on its way isn't tested yet. No new tool. If helpers get it wrong or skip rows, I'll build a short <code>sunstack log</code> command instead.</li>
 <li><strong>Each agent audits its own stretch</strong> before it hands work back, and I audit mine at each checkpoint. The reviews we already run are the second reader. If a review or you find something an agent's own audit missed, I'll add a second auditor.</li>
 <li><strong>The numbers at the top open their items</strong> as diagram boxes, the one thing Demistify can make clickable today. Try it below.</li>
 </ul>

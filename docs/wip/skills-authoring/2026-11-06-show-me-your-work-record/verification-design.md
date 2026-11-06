@@ -24,7 +24,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
   - No item appears in full twice.
   - The stated log position matches the trail, and the counts match the trail through that position.
   - At 420 wide, the sections, both columns and the values table stay readable: nothing clipped, wide tables scrolling only inside their own frames.
-- *Boundary case it includes:* two Writers with the same role writing on the same day; each table cell must open only its own Writer's rows.
+- *Boundary case it includes:* two Writers with the same role writing on the same day, including two whose session ids share the same short prefix; each table cell must open only its own Writer's rows, by the full session id.
 - *Lifetime:* lasting, because every page version is checked before the owner sees it. A `verify-` journey with a self-describing script would replace today's hand checks; building it belongs to `practices-verification-maintenance`.
 - *Wrong build it catches:* a count that opens nothing, or the wrong card; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; the chart offered as proof of timely logging; two same-role Writers merged into one bar or link; a page that clips at phone width.
 
@@ -83,7 +83,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** sign-offs given outside the log.
 
-### U5 · what was missed (R8 R17 R18; R8 is shared with U1 decisions)
+### U5 · missed: what was missed (R8 R17 R18; R8 is shared with U1 decisions)
 - **Proven by:** your page lists what was missed, each with who found it and how. Every agent's stretch shows as audited or "not audited".
 - **Reference:** the audit and missed rows; what each audit says it compared against; the plan's and repository's required checks.
 - **Target and journey:** O1 (temporary); O2 (lasting, `needed:`).
@@ -91,7 +91,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** what neither the writer's audit nor an existing review notices (the Program Design's reopen signal for a second auditor).
 
-### U12 · what's going on (R24)
+### U12 · going-on: what's going on (R24)
 - **Proven by:** on your page, each workstream of the design or plan that work has started on shows under its plain name, with what's done, what's next, and the checks behind it.
 - **Reference:** the governing design's or plan's parts that work has started on; the Workstream list row and the packets' workstreams; the checks and acceptances per workstream.
 - **Target and journey:** O2, lasting, `needed:`; O1 for the Workstream list row and the packets.
@@ -99,7 +99,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** work with no written design or plan, where the Workstreams come only from the packets.
 
-### U6 · what needs you (R19 R20)
+### U6 · attention: what needs you (R19 R20)
 - **Proven by:** your page opens on four counts you can click, each opening the items it counts, then the four sections in your order, with routine items folded.
 - **Reference:** the trail through the page's position; page O's sections.
 - **Target and journey:** O2, lasting, `needed:`.
@@ -107,7 +107,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** the linked-counts experiment (`01a1b2d2-0983`) showed the mechanism once; it's evidence for the design, not for this row.
 - **Unverified:** keyboard and screen-reader use of the count nodes.
 
-### U7 · a display beyond the log (R21 R22 R23)
+### U7 · attention: a display beyond the log (R21 R22 R23)
 - **Proven by:** each item appears in full once, and the writer chart shows whose work is in the log. The Lead's next page is built from the show-me reference alone.
 - **Reference:** the trail by writer stamp; the reference's text.
 - **Target and journey:** O2 (lasting, `needed:`); O4 for the reference's text.
@@ -115,7 +115,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** a fresh agent building from the reference, which is outside this change.
 
-### U8 · every agent logs as it goes (R1 R2)
+### U8 · logging: every agent logs as it goes (R1 R2)
 - **Proven by:** on the next real run, every helper logs its own work in the log its packet names, as it goes, and the Lead checks those rows when the work comes back.
 - **Reference:** each agent's history; Router's writer stamp and time; the packets and handbacks.
 - **Target and journey:** O1 (temporary); O3 and O4 for the text and schema.
@@ -123,7 +123,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** `agent-job-packet.test.ts` (O3).
 - **Unverified:** sandboxed Workers with no Router access, unless one is in the run; Cursor hosts.
 
-### U9 · the Lead interprets and owns (R4)
+### U9 · logging: the Lead interprets and owns (R4)
 - **Proven by:** every line of every story on your page is said by a row it links to.
 - **Reference:** each story's linked rows.
 - **Target and journey:** O2, lasting, `needed:`.
@@ -131,7 +131,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** whether the Lead's interpretation is the one the owner would draw; that's O6.
 
-### U10 · logging is easy and cheap (R3)
+### U10 · logging: easy and cheap (R3)
 - **Proven by:** each helper logs a row by running the two given steps, adding only what kind it is, who, and the words, and a retry reuses the row's ids and never writes twice.
 - **Reference:** each packet's `writeCommand`; the commands the helpers ran, with their request and row ids; the trail after O5.
 - **Target and journey:** O1 (temporary) for the commands as run; O5 (temporary) for the retry.
@@ -139,7 +139,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 - **Unverified:** token cost per row, which isn't measured. The Program Design's reopen signal for the `sunstack log` option rests on this row.
 
-### U11 · a peer Lead logs in its own record (R5)
+### U11 · logging: a peer Lead logs in its own record (R5)
 - **Proven by:** when a peer Lead works on part of the run from its own project, its rows stay in its own log, and your page says where that log is.
 - **Reference:** the peer's project and this trail.
 - **Target and journey:** O1 (temporary), only when a peer takes part.
