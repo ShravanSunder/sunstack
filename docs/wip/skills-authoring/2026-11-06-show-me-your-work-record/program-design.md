@@ -40,15 +40,6 @@ Three things change and two stay as they are:
 
 ## The choices, and why these
 
-**The write command (R3): a ready two-step command in each packet.** Step one mints a request id and a row id for the row; step two writes with them, filled in except the kind, `who:` and the text. A retry reruns step two with the same ids, and Router replays the first row instead of writing a second.
-
-The command, as the Lead fills it into `writeCommand`:
-
-```text
-step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("request", c.randomUUIDv7(), "row", c.randomUUIDv7())'
-step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--link '<the row it closes>'] --json "<text>"
-```
-
 **Where the short write command lives (R3).** The crux: an agent must log in one cheap step without typing ids, and a retry must not duplicate.
 
 | Option | Gains | Costs |
@@ -59,9 +50,14 @@ step 2 (and any retry): agent-collaboration work-trail add --project-id <project
 
 A is enough because Router replays a resend with the same request and row ids, so the only thing a wrapper adds is shorter text. That replay was seen for a sequential resend after the first send finished, on CLI 0.1.125 against a host at 0.1.119 (proof `01a1b2fd-19fc`). A resend while the first send is still in flight isn't proven; the Verification Design's O5 adds overlapping same-id resends, counted only where the clients' timing shows overlap, and reports "overlap not observed" otherwise. Whether Router processed both at once stays unverified; O5 shows the outcome, one row. O5 runs on whatever Router host the next run uses, which is the target. A helper writes tens of rows per commission, so A costs a few thousand tokens more than B. Reopen with B if V3 shows agents mangling the command, minting new ids on a retry, or skipping rows because the command is long.
 
-Two plain commands, not one compound line, because some hosts refuse compound shell lines (this session's worktree guard does). Reading the trail stays useful to reconcile; it isn't the guarantee.
+The command, as the Lead fills it into `writeCommand`:
 
-**Who audits (R18): each writer audits its own stretch** at its handback (a helper) or checkpoint (the Lead), against its own session history and the packet's or plan's required checks. The independent reviews this work already commissions are the second reader.
+```text
+step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("request", c.randomUUIDv7(), "row", c.randomUUIDv7())'
+step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--link '<the row it closes>'] --json "<text>"
+```
+
+Two plain commands, not one compound line, because some hosts refuse compound shell lines (this session's worktree guard does). Reading the trail stays useful to reconcile; it isn't the guarantee.
 
 **Who audits (R18).** The audit is pstack's "audit the log against the transcript at the end of a run".
 
