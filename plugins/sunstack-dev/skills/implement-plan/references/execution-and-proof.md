@@ -104,6 +104,8 @@ evidence gap
 
 Place each gap `practices-verification` returns in the same classes. A disputed expected outcome is a design break when the design owns that meaning, or a plan defect when the plan does. An unreachable target or setup, stale project verification instructions, or a driver defect outside the slice's write scope is an out-of-scope infrastructure failure, or an evidence gap when the observation needs new authority or a plan change. Product behavior that contradicts the expected outcome is the slice's own red, so fix it inside scope and prove it again. A failure with an unknown cause gets diagnosis before another fix.
 
+Write the classification as an entry in the work's record at the moment you make it, through `practices-show-me-your-work`, with the three lines as its text, in the kind `SKILL.md` step 6 names for its class; an out-of-scope infrastructure failure or evidence gap is an assumption that names its owner. The entry is written when the surprise is found, not at phase end.
+
 A plan names dependency edges and proof-bearing scope, not every library. Using a library or tool the repository already uses, the way it already uses it, continues without a stop, even when the plan doesn't name it. Before you add an import, package or tool, look for the one the repository already uses for that job, and raise a new or second one with the existing one named beside it ([the codebase's existing way wins over preference](../../principle-justify-the-complexity/SKILL.md)). A Node store the repository already keeps with Drizzle on better-sqlite3 gets Drizzle, not `node:sqlite`; a second persistence library chosen mid-build is new technology even when it looks like an implementation detail.
 
 Do not call a change reversible when it moves ownership, changes a public contract or data format, writes migration state, weakens proof, or becomes a prerequisite for other work before correction.
@@ -123,6 +125,7 @@ integration gates:
 reversible drift corrected:
 incomplete rows, open stand-ins and unverified interactions:
 blockers and exact routes:
+record entries written (ids):
 proof freshness:
 ```
 
