@@ -58,27 +58,19 @@
         "type": "noul",
         "instructions": {
           "check": "body",
-          "context": [
-            "heading",
-            "headings",
-            "targets"
-          ],
-          "task": "Does this section's own text send the agent into one named product's or application's own workflow: its own procedures, run commands, state files or machine paths? body is the section's own text, without its child sections; targets are the files that text loads, each with its opening."
+          "context": ["heading", "headings", "targets"],
+          "task": "Does body prescribe or work through a concrete workflow that belongs to one product or application, as an instruction, branch, load, or worked/quoted procedure? Judge body with heading, headings and targets. A concrete worked product procedure remains part of the text being judged; presenting it as a teaching example does not itself exempt it. Distinguish an application's own workflow from a reusable tool or platform used through its supported interface."
         },
         "criteria": {
-          "true": "The text tells the agent to go into, run or follow something that belongs to one named product or application: its own procedure, loop, command, script, state file or machine path. Loading a file whose content is that product's own workflow counts, and so does a command written inline, in prose or in a table row.",
-          "false": "The text describes work that applies in any repository; or it uses a tool, platform or service through its own supported interface, such as querying a metrics store's HTTP API or running a platform's documented CLI command; or it uses the vocabulary of the subject the skill governs; or it mentions a product without sending the agent into that product's own workflow."
+          "true": "At least one concrete step, branch, load or worked/quoted procedure uses a product or application's own build, launch, debug, release, state files or machine paths. A producer application's debug/beta procedure remains that application's workflow even when a shared toolkit hosts the instructions or the application uses shared infrastructure.",
+          "false": "The text contains only a reusable practice, a tool/platform/library used through its supported interface, the subject's own vocabulary, or the shared toolkit's own lifecycle/query operations. A tool name, ordinary CLI invocation, or incidental illustrative product name is not sufficient: the text must prescribe a product/application-specific workflow."
         }
       },
       "example_or_own_infrastructure": {
         "type": "noul",
         "instructions": {
           "check": "body",
-          "context": [
-            "heading",
-            "headings",
-            "targets"
-          ],
+          "context": ["heading", "headings", "targets"],
           "task": "Is every product this section sends the agent into named only as a labelled example, or part of this toolkit's own shared infrastructure?"
         },
         "criteria": {
@@ -122,10 +114,11 @@
         }
       }
     },
-    "related": [
-      "targets"
-    ],
-    "severity": "warn"
+    "related": ["targets"],
+    "severity": "warn",
+    "only_when": {
+      "kind": ["general", "role", "domain"]
+    }
   },
   "K003": {
     "name": "general-skill.taught-rule-overfits-to-one-project",
@@ -135,10 +128,7 @@
         "type": "choice",
         "instructions": {
           "check": "body",
-          "context": [
-            "heading",
-            "headings"
-          ],
+          "context": ["heading", "headings"],
           "task": "What does this section's own text hold? body is the section's own text, without its child sections; heading and headings are its own heading and the headings it sits under."
         },
         "criteria": {
@@ -151,10 +141,7 @@
         "type": "noul",
         "instructions": {
           "check": "body",
-          "context": [
-            "heading",
-            "headings"
-          ],
+          "context": ["heading", "headings"],
           "task": "Is every rule this section's own text teaches stated as a judgment that would still guide a materially different repository, stack or team, with any product, library, API or incident it names only as an example, or as the scope the owner adopted the rule for?"
         },
         "criteria": {

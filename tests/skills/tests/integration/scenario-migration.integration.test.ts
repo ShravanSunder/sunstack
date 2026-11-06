@@ -1,13 +1,11 @@
 import { execFileSync } from "node:child_process";
-import { readdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
 import { z } from "zod";
-import { readRuleScenarios } from "../../lib/skill-rules/scenarios.ts";
+import { readDevelopmentScenarioFiles } from "../support/read-development-scenarios.ts";
 
 const repository = fileURLToPath(new URL("../../../../", import.meta.url));
-const rules = path.join(repository, "plugins/skill-authoring/skills/domain-skill-crafting/rules");
 const legacyScenarioSchema = z.object({
   id: z.string(),
   evidence: z.object({ field: z.string() }),
@@ -16,9 +14,7 @@ const legacyScenarioSchema = z.object({
 });
 
 test("every migrated piece line reproduces the original 74e18127 case coordinates", () => {
-  const current = readdirSync(rules)
-    .filter((file) => file.endsWith(".rules.json"))
-    .flatMap((file) => readRuleScenarios(path.join(rules, file)).scenarios);
+  const current = readDevelopmentScenarioFiles(repository).flatMap((entry) => entry.file.scenarios);
   const manifests = execFileSync(
     "git",
     [

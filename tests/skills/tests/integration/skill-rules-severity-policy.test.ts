@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, test } from "vitest";
 import { z } from "zod";
-import { kitRelative, repositoryRoot } from "../test-fixture.ts";
+import { kitRelative, repositoryRoot } from "../../lib/skill-rules/test-fixture.ts";
 
 // Our rules' severity policy (R5a): `error` only where every path to a finding is mechanical; any
 // path that reads a model's answer, a gate included, reaches only `warn`. The engine keeps whatever

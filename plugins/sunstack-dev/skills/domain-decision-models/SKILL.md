@@ -1,6 +1,6 @@
 ---
 name: domain-decision-models
-description: "Use when designing, changing or reviewing a decision model: questions a model answers for code to act on, their evidence, a rule's decision graph, its thresholds, or its proof."
+description: "Use when you need the standards for decision models: designing, changing or reviewing the questions a model answers for code, their evidence, a rule's decision graph, thresholds or proof."
 disable-model-invocation: true
 ---
 

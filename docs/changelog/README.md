@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-05 Kind-gated rule scenarios](2026-11-05-kind-gated-scenarios.md)
 - [2026-11-05 Rule scenarios and owner adoption](2026-11-05-scenario-adoption.md)
 - [2026-11-04 Show me your work: the record and the live page](2026-11-04-show-me-your-work-record.md)
 - [2026-11-04 Skill rules earn their nudges](2026-11-04-skill-rule-cases.md)

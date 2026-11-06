@@ -1,0 +1,1869 @@
+{
+  "scenarios": [
+    {
+      "id": "s001",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/agent-router/skills/agent-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "tool_manual"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=tool_manual, B=tool_manual; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s002",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "tool_manual"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=tool_manual, B=tool_manual; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s003",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/ai-scaffold/skills/scaffold-project/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": "unknown",
+      "set": "development",
+      "label": {
+        "basis": "disputed",
+        "state": "disputed",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=ambiguous; carried forward from the round-1 frozen corpus. Owner has not settled the disagreement; unscored."
+      }
+    },
+    {
+      "id": "s004",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/dev-workflow-tools/skills/peekaboo/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "tool_manual"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=tool_manual, B=tool_manual; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s005",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s006",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-audit/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s007",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s008",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s009",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-orchestrator/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s010",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s011",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s012",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/audit-security-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": "unknown",
+      "set": "development",
+      "label": {
+        "basis": "disputed",
+        "state": "disputed",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=ambiguous; carried forward from the round-1 frozen corpus. Owner has not settled the disagreement; unscored."
+      }
+    },
+    {
+      "id": "s013",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s014",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/decision-model-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "owner_decided",
+        "state": "labelled",
+        "who": [
+          "Owner, 5 Nov 2026"
+        ],
+        "note": "Owner ruling: domain; independent labels A=domain, B=general."
+      }
+    },
+    {
+      "id": "s015",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/discuss-clarify-mental-models/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s016",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/discuss-pathfinding/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s017",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/docs-maintain/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s077",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-code-standards/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "supplement",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s018",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-decision-models/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s019",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-python/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s020",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s078",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-swift/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "supplement",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s021",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/domain-typescript/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "domain"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=domain, B=domain; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s022",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/implement-plan/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s023",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/implementation-handoff/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s024",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/implementation-pr-wrapup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "owner_decided",
+        "state": "labelled",
+        "who": [
+          "Owner, 5 Nov 2026"
+        ],
+        "note": "Owner ruling: general; independent labels A=general, B=tool_manual."
+      }
+    },
+    {
+      "id": "s025",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/implementation-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s026",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/ops-linear-tracking/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "tool_manual"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=tool_manual, B=tool_manual; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s027",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s028",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/orchestrator-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s029",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/orchestrator-implementation-goal/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s030",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/plan-handoff/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s031",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/plan-implementation/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s032",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/plan-improve-repo/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s033",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/plan-update/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s034",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-cleanup/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s035",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-collaboration/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s036",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-how/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s037",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-manage-agents/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s038",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-preflight/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s039",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-research/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s040",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-retrospective/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s041",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-show-me-your-work/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s042",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-verification-maintenance/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "repo_specific"
+      },
+      "set": "development",
+      "label": {
+        "basis": "owner_decided",
+        "state": "labelled",
+        "who": [
+          "Owner, 5 Nov 2026"
+        ],
+        "note": "Owner ruling: repo_specific; independent labels A=general, B=repo_specific."
+      }
+    },
+    {
+      "id": "s043",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-verification/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s044",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/practices-why/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s045",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/presentation-html/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s046",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/presentation-tui/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s047",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/presentation-webui/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s048",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-build-the-shared-model-first/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s049",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-define-the-domain-first/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s050",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-design-for-concurrency/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s051",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-design-for-failure/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s052",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-experiment-before-proposing/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s053",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-hold-the-scope/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s054",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-justify-the-complexity/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s055",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-name-the-tradeoffs/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s056",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-one-owner-per-truth/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s057",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-prove-it-works/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s058",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s059",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-refine-mental-models/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s060",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-separate-the-concerns/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s061",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-types-are-communication/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s062",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-verify-before-accepting/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s063",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-write-for-the-reader/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s064",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/principle-write-tests-that-can-fail/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s065",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/program-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s066",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-advisor/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s067",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-implementer/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s068",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-lead/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s069",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-operator/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s070",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-researcher/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s071",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-reviewer/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s072",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/role-verifier/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "role"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=role, B=role; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s073",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/spec-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s074",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/spec-handoff/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "development",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s075",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/spec-program-review/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    },
+    {
+      "id": "s076",
+      "source": {
+        "repository": "self",
+        "commit": "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
+        "path": "plugins/sunstack-dev/skills/verification-design/SKILL.md",
+        "context": [
+          "plugins"
+        ]
+      },
+      "expect": {
+        "kind": "general"
+      },
+      "set": "held_back",
+      "label": {
+        "basis": "agents_agreed",
+        "state": "labelled",
+        "who": [
+          "Independent blind labeller A",
+          "Independent blind labeller B"
+        ],
+        "note": "Independent labels A=general, B=general; carried forward from the round-1 frozen corpus. Agreement retained on the round-2 pinned source, not fresh blind validation."
+      }
+    }
+  ]
+}
