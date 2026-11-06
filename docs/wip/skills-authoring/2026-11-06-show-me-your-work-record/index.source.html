@@ -23,7 +23,7 @@
 <li>The log is Router's work trail, not a CSV or JSONL file: Router stamps who wrote each row and when. You needn't read it raw. How agents log is my call: easy and cheap for them. The rest of the design is the display.</li>
 <li>The layout that tells you what to pay attention to and what to do stays.</li>
 </ul>
-<p><strong>Next:</strong> I write the Specification, the document that says what must be true for each requirement and what decides pass or fail. Nothing gets built until you've seen the whole design.</p>
+<p><strong>Where this stands:</strong> all four design documents are written and independently reviewed, and the design is ready for planning. The other three: <a href="./specification.html">Specification</a> (what must be true, with a sketch of your page), <a href="./program-design.html">Program Design</a> (who does what, with the clickable top working) and <a href="./verification-design.html">Verification Design</a> (how each requirement will be shown). Nothing gets built until you say go.</p>
 </ex-callout>
 
 <h2 id="today">Today, in four numbers</h2>
@@ -41,7 +41,7 @@
 
 <h2 id="fix">How I'd fix it</h2>
 
-<ex-callout title="Proposed, not yet designed" tone="note" icon="path">
+<ex-callout title="How I'd fix it, as first proposed" tone="note" icon="path">
 <ul>
 <li>One short command writes a row, so an agent logs the moment something happens: a decision, an assumption, a shortcut or a check.</li>
 <li>Every commission carries the log's address, and the helper logs its own rows there; I don't accept a handback whose rows are missing.</li>
@@ -49,7 +49,7 @@
 <li>At the end of a run, the agent checks its rows against what it actually did and logs what it missed, and the independent reviews we already run flag weak evidence and skipped checks. Together, these feed "what was missed".</li>
 <li>The page opens on what needs your attention and what to do, then shows the decisions, assumptions, shortcuts and verification, grouped by a plain workstream label instead of "pieces".</li>
 </ul>
-<p>The next design documents settle this: what must be true, then who does what, then how each part is checked.</p>
+<p>The <a href="./program-design.html">Program Design</a> settles each of these; where it chose differently, it says so.</p>
 </ex-callout>
 
 <h2 id="requirements">The requirements</h2>
