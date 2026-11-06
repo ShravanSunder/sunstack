@@ -6,7 +6,6 @@ import {
   cleanupFixtureRoots,
   createFixture,
   installPinnedSkill,
-  kitRelative,
   reportSchema,
   enginePath,
   repositoryRoot,

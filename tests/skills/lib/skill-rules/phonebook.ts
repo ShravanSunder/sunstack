@@ -20,7 +20,7 @@ export function detailsPath(reportPath = "report.json"): string {
 }
 
 export function entryAnchor(
-  category: "finding" | "uncertain" | "account" | "filter",
+  category: "finding" | "uncertain" | "account" | "filter" | "selection",
   index: number,
 ): string {
   return `${category}-${index + 1}`;
@@ -76,7 +76,7 @@ export function loadStandardPointers(configPath: string): Readonly<Record<string
 }
 
 function sourceLink(pointer: SourcePointer, repository: string): string {
-  const label = pointerText(pointer).replace(/[\[\]]/g, "\\$&");
+  const label = pointerText(pointer).replace(/[[\]]/g, "\\$&");
   const file = path.resolve(repository, pointer.file);
   return `[${label}](<${file.replace(/</g, "%3C").replace(/>/g, "%3E")}:${pointer.first_line}>)`;
 }
@@ -203,6 +203,23 @@ export function formatRunDetails(request: {
       "Answers:",
       "",
       jsonBlock(answer),
+      "",
+    );
+  }
+  for (const [index, selection] of report.selections.entries()) {
+    if (selection.outcome.kind !== "uncertain" && selection.outcome.kind !== "incomplete") continue;
+    lines.push(
+      `<a id="${entryAnchor("selection", index)}"></a>`,
+      `## ${oneLine(selection.kind)} (${selection.outcome.kind} selection)`,
+      "",
+      `Where: ${sourceLink({ ...selection.where, last_line: selection.where.last_line ?? selection.where.first_line }, repository)}`,
+      `Step: selection ${oneLine(selection.kind)}`,
+      "",
+      "Answers:",
+      "",
+      jsonBlock(selection.outcome),
+      "",
+      "Pieces that exist only through this selection are absent; other results in its range stand.",
       "",
     );
   }

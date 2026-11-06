@@ -9,7 +9,7 @@ test("every phonebook target exists, omitted entries retain details, and evidenc
   const finding = report.findings[0];
   const uncertain = report.uncertain[0];
   if (!finding || !uncertain) throw new Error("Missing recorded report");
-  report.findings = Array.from({ length: 12 }, (_, index) => ({
+  report.findings = Array.from({ length: 12 }, () => ({
     ...finding,
     message: "Recorded finding\nsecond line",
   }));
@@ -67,6 +67,17 @@ test("an admitted uncertainty uses its raw path without revealing held findings"
     report,
     observedResults: [
       {
+        name: "HELD_RULE_FINDING_SENTINEL",
+        marker: "K002",
+        file: "held-finding-sentinel.md",
+        first_line: 101,
+        last_line: 111,
+        outcome: "finding",
+        step: "held-check",
+        path: ["HELD_RAW_PATH_SENTINEL"],
+        answers: { held: "HELD_RAW_ANSWER_SENTINEL" },
+      },
+      {
         name: uncertain.rule,
         marker: "K003",
         file: uncertain.where.file,
@@ -82,4 +93,59 @@ test("an admitted uncertainty uses its raw path without revealing held findings"
   expect(details).toContain(`Path: gate → ${uncertain.step}`);
   expect(details).toContain("Cut: targets");
   expect(details).not.toContain('id="finding-');
+  expect(details).not.toContain("HELD_RULE_FINDING_SENTINEL");
+  expect(details).not.toContain("held-finding-sentinel.md");
+  expect(details).not.toContain("HELD_RAW_PATH_SENTINEL");
+  expect(details).not.toContain("HELD_RAW_ANSWER_SENTINEL");
+});
+
+test("unresolved selections have anchored answers or failure reasons without copied source headings", () => {
+  const report = recordedPrintoutReport();
+  report.selections = [
+    {
+      kind: "workflow_section",
+      where: { file: "selected.md", first_line: 1 },
+      first_line: "SELECTED_HEADING_SENTINEL",
+      outcome: { kind: "selected", yes: 0.9 },
+    },
+    {
+      kind: "workflow_section",
+      where: { file: "uncertain.md", first_line: 9, last_line: 12 },
+      first_line: "UNCERTAIN_HEADING_SENTINEL",
+      outcome: { kind: "uncertain", yes: 0.5 },
+    },
+    {
+      kind: "rule_selection",
+      where: { file: "incomplete.md", first_line: 21, last_line: 24 },
+      first_line: "INCOMPLETE_HEADING_SENTINEL",
+      outcome: { kind: "incomplete", reason: { kind: "provider_failure", http_status: 422 } },
+    },
+  ];
+  const before = JSON.stringify(report);
+  const index = formatLintReport(report, [], { reportPath: "run/report.json" });
+  const details = formatRunDetails({ report, repository: "/repo" });
+  expect(index).toContain(
+    "uncertain.md:9-12  workflow_section  uncertain selection  → run/details.md#selection-2",
+  );
+  expect(index).toContain(
+    "incomplete.md:21-24  rule_selection  incomplete selection  → run/details.md#selection-3",
+  );
+  expect(details).toContain('<a id="selection-2"></a>');
+  expect(details).toContain('<a id="selection-3"></a>');
+  expect(details).toContain("Where: [uncertain.md:9-12](</repo/uncertain.md:9>)");
+  expect(details).toContain("Step: selection workflow_section");
+  expect(details).toContain('"yes": 0.5');
+  expect(details).toContain('"http_status": 422');
+  expect(details).toContain('"kind": "provider_failure"');
+  expect(index).not.toContain('"yes"');
+  expect(index).not.toContain("provider_failure");
+  for (const heading of [
+    "UNCERTAIN_HEADING_SENTINEL",
+    "INCOMPLETE_HEADING_SENTINEL",
+    "SELECTED_HEADING_SENTINEL",
+  ]) {
+    expect(index).not.toContain(heading);
+    expect(details).not.toContain(heading);
+  }
+  expect(JSON.stringify(report)).toBe(before);
 });

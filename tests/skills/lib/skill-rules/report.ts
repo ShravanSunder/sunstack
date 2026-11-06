@@ -232,21 +232,6 @@ export function selectionTotals(report: LintReport): Map<string, SelectionCounts
   return totals;
 }
 
-// An unresolved candidate is never a piece, so a piece that exists only through it (a step of a
-// workflow candidate, say) is absent. A piece of a plain kind in the same range, or one kept
-// through another container, still exists and keeps its own result.
-const unresolvedConsequence =
-  "pieces that exist only through this selection are absent; other results in its range stand";
-
-function formatUnresolvedSelection(item: Selection): string | null {
-  const at = `${item.where.file}:${item.where.first_line}`;
-  if (item.outcome.kind === "uncertain")
-    return `${at}: uncertain selection ${item.kind}; ${unresolvedConsequence}`;
-  if (item.outcome.kind === "incomplete")
-    return `${at}: incomplete selection ${item.kind}, ${item.outcome.reason.kind}; ${unresolvedConsequence}`;
-  return null;
-}
-
 const assembledRuleSchema = z
   .object({
     rule: z.string(),
@@ -508,9 +493,11 @@ export function formatLintReport(
     lines.push(
       `cut: ${gap.rule} at ${gap.file}:${placeLines(gap.first_line, gap.last_line)}: ${gap.fields.join(", ")} cut for the model`,
     );
-  for (const item of gaps.unresolved) {
-    const line = formatUnresolvedSelection(item);
-    if (line) lines.push(`unresolved: ${line}`);
+  for (const [index, selection] of report.selections.entries()) {
+    if (selection.outcome.kind !== "uncertain" && selection.outcome.kind !== "incomplete") continue;
+    lines.push(
+      `${pointerText({ ...selection.where, last_line: selection.where.last_line ?? selection.where.first_line })}  ${oneLine(selection.kind)}  ${selection.outcome.kind} selection  → ${detailsFile}#${entryAnchor("selection", index)}`,
+    );
   }
   for (const line of gaps.notRun) lines.push(`not run: ${line}`);
   for (const gap of gaps.kindUnsure) {

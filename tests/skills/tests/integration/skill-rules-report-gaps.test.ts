@@ -225,7 +225,11 @@ describe("the printout: nudges with their places, gaps by kind, exclusions apart
     expect(text).toContain(
       `cut: general-skill.taught-rule-overfits-to-one-project at ${skillFile}:1-4: body cut for the model`,
     );
-    expect(text).toContain(`unresolved: ${skillFile}:9: uncertain selection workflow_section`);
+    expect(text).toContain(
+      `${skillFile}:9-9  workflow_section  uncertain selection  → details.md#selection-1`,
+    );
+    expect(formatRunDetails({ report })).toContain('"yes": 0.5');
+    expect(formatRunDetails({ report })).toContain('<a id="selection-1"></a>');
     expect(text).toContain("not run: run incomplete: not every rule ran");
     expect(text).toContain('not run: Skipped rule: {"rule":"omitted","reason":"off"}');
   });
