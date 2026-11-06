@@ -4,11 +4,11 @@ Start from the reader’s question and the supplied options. Choose a view that 
 
 ## Compare the same topics
 
-Use the guide’s comparison when readers need to compare alternatives against corresponding topics. Give each topic the same `data-compare-row` key across alternatives; the matching key aligns the rows, and an omitted topic is shown as **Not supplied**. If topics are not corresponding, keep each alternative in its own flow instead of implying alignment.
+Use the guide’s comparison when readers need to compare alternatives against corresponding topics: each topic keeps one key across alternatives so its rows align, and an omitted topic shows as not supplied. If topics are not corresponding, keep each alternative in its own flow instead of implying alignment.
 
-Choose columns for two or three short alternatives that benefit from side-by-side reading. Use tabs when each option needs its full reading width. For a larger set, use `choose` when readers need to compare any pair; it selects two alternatives and does not change the page’s layout or column count. Content length and available width decide which form reads well, so two or three is a starting point rather than a maximum. Use `selected` only for the initial visible pair; that pair is not an owner decision.
+Choose columns for two or three short alternatives that benefit from side-by-side reading. Use tabs when each option needs its full reading width. For a larger set, let readers pick any pair to compare; that selection does not change the page’s layout or column count. Content length and available width decide which form reads well, so two or three is a starting point rather than a maximum. An initially visible pair is not an owner decision.
 
-Load the matching `comparisons.md` through `demistify.md` before writing comparison markup. That published guide owns the comparison API. Keep the picture slider for two same-size images.
+IF you write comparison markup, load the matching guide's `comparisons.md` at the page's binding and return its row-key, pair-selection and initial-pair fields; it owns the comparison API. Keep the picture slider for two same-size images.
 
 ## Collect a reader's answer
 
@@ -26,8 +26,8 @@ For a consequential design choice, draw the current model first, then show the c
 
 Use an `ex-card` for one option, so that its subject icon, cost and chosen badge stay together. Use an `ex-callout` for a summary, proposal, decision, risk, open question or unverified outcome that the reader must not miss. Choose the icon for the subject, such as `database` for a storage option or `test-tube` for verification evidence; the concise title and documented tone carry status. Use only icon and tone values listed in the matching published guide. Make a proposal’s status explicit in concise text such as **Proposed**; a tone or decorative symbol alone does not say that the owner accepted it. Do not add attributes that the guide does not document, and leave ordinary explanatory prose in normal document flow.
 
-Keep recommendation, preview and accepted choice separate. A comparison’s initial `selected` pair only controls what the reader sees. Use the card’s `pick` only when the supplied owner decision identifies that option as chosen; if the decision remains open, mark none as chosen and say **Not decided** in the summary. A recommendation is not owner acceptance.
+Keep recommendation, preview and accepted choice separate. A comparison’s initially visible pair only controls what the reader sees. Use the card’s `pick` only when the supplied owner decision identifies that option as chosen; if the decision remains open, mark none as chosen and say **Not decided** in the summary. A recommendation is not owner acceptance.
 
 Treat supplied source and runtime evidence as different states. Mark an unexecuted observation explicitly, such as **Not executed** or **Unverified**. Source excerpts and source-derived paths do not establish that the behavior ran.
 
-Completion: the reader can tell which topics correspond, what is merely proposed or recommended, whether the owner has selected an option, what response is requested and which claims remain unverified. Requested answer controls work without conflating selection with inspection or feedback; ordinary explanation remains in document flow.
+Completion: the reader can tell which topics correspond, what is merely proposed or recommended, whether the owner has selected an option, what response is requested and which claims remain unverified. Requested answer controls use the guide's native choice without conflating selection with inspection or feedback, and their interaction is observed only when verification is requested or a concrete defect is being diagnosed; ordinary explanation remains in document flow.

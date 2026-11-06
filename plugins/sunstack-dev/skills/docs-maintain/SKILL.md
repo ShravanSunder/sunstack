@@ -86,7 +86,7 @@ docs request
    - detailed docs under the appropriate docs folder
    - changelog entries when meta-instructions or workflows change
    - IF the edit rewrites human sentences in a README, architecture doc, runbook, or changelog, load `../../shared-references/humanizer.md` in file mode and return the rewritten prose plus the fences, YAML, commands, and paths left unchanged. Classifying, purging, linking, or promoting without a prose rewrite does not load it. Completion: claims, names, numbers, dates, and quotes match the source, or the missing fact is named instead of invented.
-   - IF an edited Markdown file is included by an embedded page (an HTML file whose `data-ex-markdown-source` records name it), load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result: the comparison `identical` or `stale`, and each derived view and dependent row rechecked. Completion: the page is reported current only after an `identical` comparison with every rechecked view and row agreeing; otherwise it is reported stale with what differs.
+   - IF an edited Markdown file is included by an embedded page (an HTML file whose `data-ex-markdown-source` records name it), load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result, with each derived view and dependent row rechecked. Completion: the page is reported current only when that result counts it current, with every rechecked view and row agreeing; otherwise it is reported stale with its exact gap.
 6. Validate:
    - no broken obvious links
    - no stale source-of-truth claims

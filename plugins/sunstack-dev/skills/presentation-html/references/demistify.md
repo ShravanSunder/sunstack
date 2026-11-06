@@ -4,6 +4,8 @@ Use one library base for the guide, runtime, theme and CLI. Read the matching gu
 
 ## Library binding
 
+Choose the binding with the content in view, before writing the shell. IF the supplied content contains actual secrets or credentials, real personal or customer records or security-sensitive detail, or the user, its source markings or an applicable handling policy classify it private, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return the trusted binding and opening method it names. Being internal, unreleased or local, or a request to keep the output local, doesn't meet that condition on its own, so an ordinary internal explanation keeps the documented binding. When the guide at that binding has no such section, bind the content that meets the condition to the trusted complete matching distribution described under Delivery and viewing; return the exact gap only when no such copy or opening method is available, and never put it on a remote runtime.
+
 A new page binds Demistify v1:
 
 ```html
@@ -24,7 +26,7 @@ A new page binds Demistify v1:
 
 `/v1/` is a moving experimental major path: breaking changes can land within v1 until a stable major is declared. Past majors are retained, but v1 keeps no public history of its minor releases, and the current release metadata is available in `release.json` when a version-specific diagnosis needs it. Routine authors do not audit release hashes or source commits. Keep theme and runtime on one binding; the browser fetches renderer chunks, fonts and worker assets relative to it.
 
-A page that keeps an older binding uses that release’s own guide and checker, ; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
+A page that keeps an older binding uses that release’s own guide and checker; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
 
 An unreleased source preview uses the complete matching built library, verified local component guide and matching source tools. Name it as a local preview rather than a published release. Read the candidate guide's relative references from that same source tree. A source PR, a package version or an installed workflow skill does not establish that the public runtime supports the candidate API.
 
@@ -38,7 +40,7 @@ The guide at the page’s binding is the only source of available API. A constru
 
 ## Delivery and viewing
 
-Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. A remote runtime executes in the page, so sensitive content also calls for the local copy.
+Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`; the matching guide's runtime-trust section in `content.md` says when that bundle counts as checked: only after the binding's checker passes it. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. Sensitive or private content takes the trust choice made at the binding, above.
 
 `presentation-html` step 5 owns the static authoring check. Opening or driving a browser is not a routine delivery requirement.
 
@@ -73,4 +75,4 @@ The matching guide owns the CLI operations and tool route. When it ships `demist
 
 ## Updating prepared readers
 
-After changing a known live source, rerun its embed and collection-index transforms. Keep edits in the authoring source, not generated HTML. A fresh generation from that source is sufficient for routine delivery; do not generate a second temporary collection solely for byte-comparison proof. Use a comparison only when investigating a stale-output defect or explicitly asked to prove freshness.
+After changing a known live source, IF you are investigating a stale-output defect or were explicitly asked to prove freshness, first compare an equivalent temporary generation, with its full collection index, against the existing reader and record the result, then replace the reader. Otherwise rerun its embed and collection-index transforms; a fresh generation from that source is sufficient for routine delivery, and no second temporary collection is needed for byte-comparison proof. Keep edits in the authoring source, not generated HTML.

@@ -1,10 +1,10 @@
 # Diagram Rendering and Fallbacks
 
-This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page built on its Markdown, how a page composes that Markdown, where a diagram lives, and how an embedded copy stays current after an edit. It owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
+This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page built on its Markdown, how a page composes that Markdown, where a diagram lives, and how an embedded copy stays current after an edit. It owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result; routine preparation of an HTML page is checked the way `presentation-html` validates it, under Page Proof. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
 
 Expected inputs: destination, repository rendering capabilities, user-requested format when present, the durable document or documents the views belong to when any, and one or more view requests containing the fired predicate plus required semantic fields. A generated-image request also supplies the artifact identity and Lead-authored visual brief or its source pointer. After an edit, the caller also supplies the edited Markdown files and any page, live or embedded, that includes them.
 
-Return: the document medium and, for a page, its page proof; after an edit, the freshness-on-edit result; per view: selected medium, fallback decision, semantic-preservation result, visual-check result, and exact gap when no supported medium passes.
+Return: the document medium and, for a page, its page proof; after an edit, the freshness-on-edit result, and the explicit freshness comparison when one was requested or a stale-output defect is diagnosed; per view: selected medium, fallback decision, semantic-preservation result, visual-check result, and exact gap when no supported medium passes.
 
 ## Choose the Document Medium
 
@@ -17,17 +17,17 @@ When the views belong to a durable document, choose the document's medium before
 
 Chat, terminal, and read-only runs produce no page. Their views appear in the response, through the `presentation-*` skill matching the surface when visual structure materially helps.
 
-IF the page is chosen, use `presentation-html` to build and check it, and return the page path, its screenshot, its binding and release, and its verification limits.
+IF the page is chosen, use `presentation-html` to build it and run its routine static check, and return the page path, its binding, the check result and its verification limits.
 
 ## Two Entries Over One Source
 
-On a page, the Markdown stays the truth and the page composes it. For a design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
+On a page, the Markdown stays the truth and the page composes it. For an engineering design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
 
 - The page includes each chunk, or each single-file document, with `<ex-markdown src="./<path>.md">` and places layout, navigation, and views around it. Each requirement's text lives once, in its Markdown. No card, island, or page table keeps a second copy, and the page writes no normative prose of its own. A reading path in `index.md` can become a page presentation over the same islands.
-- The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. Hiding never makes a failure case look absent: failure cases and their thresholds stay in view, a collapsed section holds only the rationale or evidence about them, and its title names the cases it explains.
+- The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. In what the page composes, hiding never makes a failure case look absent: failure cases and their thresholds stay in view, a collapsed section holds only the rationale or evidence about them, and its title names the cases it explains. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
 - A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning chunk first. The view then shows that source.
 
-For example, a job-submission page opens on the worker-loss path: two framing sentences that state no rule and link to the scheduling chunk, a link (or a Walkthrough stop) to that chunk's lifecycle diagram, then each document's island in its own tab. Lease expiry, duplicate runs, and the requeue limit stay visible in the scheduling island, as that chunk states them. Only the evidence behind them, such as the incident timeline that set the limit, sits in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
+For example, a job-submission page opens on the worker-loss path: two framing sentences that state no rule and link to the scheduling chunk, a link (or a Walkthrough stop) to that chunk's lifecycle diagram, then a link to each document's own page in the set's collection, composed as `presentation-html`'s engineering-documents reference teaches. Lease expiry, duplicate runs, and the requeue limit stay visible in the scheduling island, as that chunk states them. Only the evidence behind them, such as the incident timeline that set the limit, sits in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
 
 ### Where a Diagram Lives
 
@@ -39,10 +39,13 @@ The page never originates a governing fact. A native page view may project the o
 
 The page passes only when its proof records:
 
-- the Demistify binding and its release (`version` and `sourceCommit` from `release.json`);
+- the Demistify binding;
 - each island's source file, and whether it was live or embedded;
-- for each embedded island, whether its text matches the source file, by the regenerate-and-compare check under Freshness on Edit;
-- a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it.
+- the actual result of `presentation-html`'s routine static check on the final page;
+- a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
+- the result, or the exact blocking gap, of each inspection a caller separately requires, such as a phase's visual, pixel or destination inspection.
+
+Routine preparation of an HTML page adds no browser check and no second-copy comparison. A caller separately requires a page view's inspection when its own acceptance consumes that view's visual-check result, as a design phase's required views and their self-review do. A page prepared only to deliver or refresh content does not: `presentation-html` on its own, `docs-maintain` and `plan-update`. On that preparation-only route, a page view's `result: pass` means its static check passed and its semantic fields were inspected in source, with `visual check: unverified`; it claims no visual or readability proof. On a required route, and for an explicit user verification request or the diagnosis of a concrete defect, the actual inspection runs: `unverified` there is a gap, never a pass, and the view passes it or returns its exact blocking gap.
 
 Record no hashes and keep no provenance registry.
 
@@ -53,12 +56,20 @@ A live `src` island needs HTTP serving and picks up later edits. For double-clic
 Whoever edits a Markdown file that a page includes, live or embedded, or the `index.md` whose paths a page renders, keeps that page current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
 
 1. Change the fact once, in its owning chunk. A row in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design row whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
-2. For an embedded copy, use `presentation-html` to regenerate it from the live source page to a temporary path, compare it byte for byte with the committed copy, and return `identical` or `stale`. A fresh regeneration carries each source's current text exactly, so a byte-identical committed copy carries it too. A stale copy is replaced by the regeneration and compared again.
+2. For an embedded copy, IF the user requests a freshness comparison, or a stale-output defect is being diagnosed, compare first, before anything overwrites the committed copy: use `presentation-html` to prepare equivalent output at a temporary path (the reader and, for an indexed collection, its full index), compare it byte for byte with the committed copy, and record `identical` or `differs`; then replace the committed copy, run its routine static check and requalify it. Otherwise, use `presentation-html` to regenerate the affected reader, and the complete collection index when there is one, from the live source page and every source it includes, then run its routine static check once. A fresh regeneration carries each source's current text exactly.
 3. Recheck each derived view and dependent row that names an edited identity against the owning chunk's facts. Equal text says nothing about them.
 
-The page is current only when any embedded copy compares `identical` and every rechecked view and row agrees with its chunk. Until then, report the page stale and name what differs.
+Return freshness as one of:
 
-For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. The Verification Design's owner redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The regenerated copy replaces the committed one and then compares identical. `entities.md` and `billing-export.md` stay untouched.
+- `live`: the live-source arrangement resolves through its declared opening method, needs no embedded regeneration, and every rechecked view and row agrees with its chunk;
+- `regenerated`: the affected reader and complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and row agrees with its chunk. It claims no byte comparison and no browser observation;
+- `stale`: a required regeneration could not finish (a missing source or tool, or partial output), the check failed, or a rechecked view or row disagrees. Name the exact gap.
+
+The page is current only when freshness is `live` or `regenerated`; `stale` is never current.
+
+A requested comparison returns `identical` or `differs`. `differs` makes freshness `stale` until the replaced copy passes its check and compares again. A comparison that could not run is an exact verification gap, never `identical`.
+
+For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. The Verification Design's owner redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The reader is regenerated from the edited sources and passes its static check, so freshness is `regenerated`. `entities.md` and `billing-export.md` stay untouched.
 
 ## Choose Each View's Medium
 
@@ -84,7 +95,7 @@ Bad: decorative boxes, prose labeled as a diagram, an unreadable diagram, a tabl
 
 ## Inspect and Fall Back
 
-Inspect the rendered output rather than inferring success from a fenced block, valid-looking syntax, prompt or file path. A directly visible fenced plain-text view can be inspected as shown, and a drawn view still fails when the destination could have rendered it. A table can be inspected as shown only when its rendered cells or borders are visible at the destination. A generated image requires inspection of the actual project-local pixels plus its resolved Markdown embed and supported destination preview under `generated-document-visuals.md`. A page view is inspected in the browser `presentation-html` opened. When the destination renderer is not observable in-session, accept only an actual repository or browser preview of the rendered diagram, or a local Mermaid renderer when available; source-text inspection alone is never a visual pass for a rendered medium. When no rendered inspection is available, return `visual check: unverified (no renderer available)` with the reason. For a drawn view, record an explicit gap, or a smaller view only when that smaller view can still be rendered and inspected. Plain text is not a completion fallback for those views. A comparison or coverage table may still be inspected as shown. Never record a bare pass. Check:
+Inspect the rendered output rather than inferring success from a fenced block, valid-looking syntax, prompt or file path. A directly visible fenced plain-text view can be inspected as shown, and a drawn view still fails when the destination could have rendered it. A table can be inspected as shown only when its rendered cells or borders are visible at the destination. A generated image requires inspection of the actual project-local pixels plus its resolved Markdown embed and supported destination preview under `generated-document-visuals.md`. A page view is inspected in a browser when a caller separately requires that inspection, the user requests it, or a concrete rendering defect is being diagnosed; under routine page preparation its visual check stays `unverified`, as Page Proof states. When the destination renderer is not observable in-session, accept only an actual repository or browser preview of the rendered diagram, or a local Mermaid renderer when available; source-text inspection alone is never a visual pass for a rendered medium. When no rendered inspection is available, return `visual check: unverified (no renderer available)` with the reason. For a drawn view, record an explicit gap, or a smaller view only when that smaller view can still be rendered and inspected. Plain text is not a completion fallback for those views. A comparison or coverage table may still be inspected as shown. Never record a bare pass. Check:
 
 - every required semantic field is visible;
 - labels and edges are readable at the destination;
@@ -102,8 +113,9 @@ Each medium label names an output medium, not a skill: `presentation-tui` denote
 
 ```text
 document medium: markdown | html-page | none (chat, terminal, or read-only), with reason
-page proof: binding and release, islands live | embedded, embedded-text match, when a page
-freshness on edit: identical | stale | live, with each rechecked view and dependent row, when an edit touched a page's source
+page proof: binding, islands live | embedded, routine static check result, separately required inspection results or gaps, when a page
+freshness on edit: live | regenerated | stale, with each rechecked view and dependent row, when an edit touched a page's source
+explicit freshness comparison: identical | differs, or the exact gap, only when requested or diagnosing a stale-output defect
 view and fired predicate
 required semantic fields
 selected medium: generated-image | mermaid | markdown-table | presentation-tui | fenced-plain-text | html-view
@@ -115,4 +127,4 @@ fallback: none | from -> to, with trigger
 result: pass | gap
 ```
 
-Complete when the document medium is chosen, a chosen page has its page proof, an edit that touched a page's source has a freshness-on-edit result (a `stale` result is reported, never called current), and every fired view has a `pass` result with all required semantic fields preserved and readable, or the caller receives an exact gap that blocks its artifact-completion step.
+Complete when the document medium is chosen, a chosen page has its page proof, an edit that touched a page's source has a freshness-on-edit result (a `stale` result is reported, never called current), and every fired view has a `pass` result with all required semantic fields preserved and, where inspected, readable, or the caller receives an exact gap that blocks its artifact-completion step. On the preparation-only route a page view's `pass` carries `visual check: unverified` and claims no visual or readability proof, as Page Proof defines it; where a caller's acceptance consumes the visual-check result, `unverified` is a gap.
