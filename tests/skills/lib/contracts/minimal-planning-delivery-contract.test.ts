@@ -42,13 +42,13 @@ describe("goal delivery intent hard cutover", () => {
     expect(planner).toContain("materially different groupings exist inside one PR shape");
     expect(planner).toContain("a split is the owner's decision, for every kind of work");
     expect(planner).toContain(
-      "pick one and record the choice, the alternatives, and the reason in the plan",
+      "pick one, record the choice as a decision entry citing its alternatives and reason through `practices-show-me-your-work`, and state the chosen grouping in the plan with that entry's id",
     );
     expect(planner).toContain(
       "with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule",
     );
     expect(contract).toContain(
-      "picks one, records the choice, the alternatives, and the reason in the plan, and returns `ready`",
+      "picks one, records the choice as a decision entry citing its alternatives and reason through `practices-show-me-your-work`, states the chosen grouping in the plan with that entry's id, and returns `ready`",
     );
     expect(planner).toContain("offer once between no tracking and one available named `ops-*` owner");
     expect(contract).toContain("first resolves the project root");
@@ -216,7 +216,9 @@ describe("goal delivery intent hard cutover", () => {
       "`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`",
     );
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");
-    expect(designOrchestrator).toContain("central trail");
+    expect(designOrchestrator).toContain(
+      "Decisions and their detail go to the work's record through `practices-show-me-your-work`",
+    );
     expect(goalOrchestrator).toContain("practices-show-me-your-work");
     expect(specDesign).toContain("artifact-home policy");
     expect(programDesign).toContain("artifact-home policy");
