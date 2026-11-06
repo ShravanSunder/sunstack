@@ -40,12 +40,13 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 
 `pnpm --dir tests/skills test` and `rules` pass. *Wrong build it catches:* a role still gated on posting; a caller still pointing at `live-page.md`. *Leaves unevaluated:* whether agents follow the text, which O1 decides.
 
-**O5 · a forced unclear retry (temporary probe).** On a probe tag outside the work's tag, the Verifier uses a packet's two-step command three ways:
+**O5 · a forced unclear retry (temporary probe).** On a probe tag outside the work's tag, the Verifier uses a packet's two-step command four ways:
 1. it mints ids, writes, discards the output so the result is unclear, and follows the skill's retry rule;
 2. it repeats a write with freshly minted ids, as a wrong rule would;
-3. it writes two separate rows with the same words, each with its own minted ids.
+3. it writes two separate rows with the same words, each with its own minted ids;
+4. it sends step two twice at the same moment with the same minted ids, from two processes, so the second leaves before the first returns.
 
-*Passes when:* run 1 leaves exactly one row with that request id (`envelope.request`), and the retry returns that same row id; run 2 leaves two rows; run 3 leaves two rows. Run 2 shows why the rule must reuse ids. Run 3 shows separate events stay separate. Rows are matched by request and row id, not by their words. *Wrong build it catches:* a retry rule that mints new ids, or one that lets two separate rows share ids.
+*Passes when:* run 1 leaves exactly one row with that request id (`envelope.request`), and the retry returns that same row id; run 2 leaves two rows; run 3 leaves two rows; run 4 leaves exactly one row, and neither send reports a second row id. Run 2 shows why the rule must reuse ids. Run 3 shows separate events stay separate. Run 4 covers a resend while the first is still in flight. Rows are matched by request and row id, not by their words. It runs on the Router host the next real run uses. *Wrong build it catches:* a retry rule that mints new ids; one that lets two separate rows share ids; a Router that writes twice for a concurrent same-id resend.
 
 **O6 · the owner's own reading (manual).** After O1 and O2, the owner reads the page and says, without transcripts, what was decided, assumed, cut short, verified and missed. Those answers are compared with the trail. This is the goal boundary's acceptable evidence.
 
