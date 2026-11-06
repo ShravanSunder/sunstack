@@ -3,45 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Show me your work: what you'd see</title>
+<title>Specification</title>
 <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
 <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
 </head>
 <body>
-<ex-nav for="content"></ex-nav>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Show me your work: the redesign</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+  </nav>
+</ex-nav>
 <ex-document id="content">
 
-<h1>Show me your work: what you'd see</h1>
+<h1>Specification</h1>
 
-<p>This is the second design document, the Specification: what must be true for each of your requirements, and what decides pass or fail. It's easier to judge as the page it describes, so the top of this page is a sketch of that page, drawn from this project's real log. The look comes later; the sketch pins what you'd see and where. The requirements are on <a href="./index.html">the first page</a>.</p>
+<p>What must be observably true, and what decides pass or fail: your page as a sketch first, then the obligations and the entities they're written over.</p>
 
-<ex-callout title="For you to look at" tone="question" icon="user">
-<ul>
-<li><strong>Is this the page you want?</strong> Every item in the sketch is real; what it can't show yet is anything nobody logged.</li>
-<li><strong>Workstream labels.</strong> Rows get grouped under plain names like "Requirements", "page experiments" or "PR #194", instead of "pieces". Tell me if a name doesn't read.</li>
-<li><strong>Two calls I'll make in the next document unless you say otherwise:</strong> each agent audits its own run against its transcript when it finishes (as pstack does), and I decide whether a reviewer on another model also audits; and where the one short logging command lives.</li>
-</ul>
-<p>Nothing here waits on you; I'm continuing with the next document.</p>
-</ex-callout>
+<ex-tabs label="Specification" data-width="canvas">
+<section id="tab-sketch" label="Your page, sketched" icon="globe">
 
-<h2 id="sketch">The page, sketched from this project's log</h2>
+<h2 id="sketch">Your page, sketched from this project's log</h2>
 
-<p><small>Sketch: real items from the log of this work (Router project 01a1635f, tag design-documents, through position 2:1101), chosen to show each part of the page; not a full count.</small></p>
+<p><small>Real items from the log of this work (Router project 01a1635f, tag design-documents, through position 2:1101), chosen to show each part of the page; not a full count, and not the final look.</small></p>
 
 <h3 id="sketch-needs-you">What needs you</h3>
 
-<ex-grid cols="4">
-<ex-stat value="1" label="waiting for you" note="workstream labels" tone="risk"></ex-stat>
-<ex-stat value="1" label="shortcut worth your look" note="#194 merged without the test suite" tone="risk"></ex-stat>
-<ex-stat value="3" label="missed items open" note="found later, not logged" tone="risk"></ex-stat>
-<ex-stat value="1" label="finished work with no acceptance recorded" note="PR #194" tone="question"></ex-stat>
-</ex-grid>
+<ex-mermaid id="sketch-counts" label="What needs you" zoom="none"><script type="text/plain">
+flowchart TB
+  sketchWaiting["1<br/>waiting for you"]
+  sketchShortcut["1<br/>shortcut worth your look"]
+  sketchMissed["3<br/>missed items open"]
+  sketchNoAcceptance["1<br/>finished work with<br/>no acceptance recorded"]
+</script></ex-mermaid>
 
-<p><small>On the real page each number opens its items. Demistify's number tile can't hold a link, but a diagram node can open a card, so the next document picks the display; here, the sections below come in the same order.</small></p>
+<p><small>Each box opens its item, as the Program Design chose: a diagram node is the one thing Demistify can make clickable.</small></p>
 
 <h3 id="sketch-for-you">For you to decide · 1</h3>
 
-<ex-card title="Workstream labels: do these names read?" tone="question" icon="user">
+<ex-card id="sketchWaiting" title="Workstream labels: do these names read?" tone="question" icon="user">
 <p>Rows get grouped under plain names the Lead picks when work starts, like "Requirements", "page experiments" and "PR #194". You didn't know what "pieces" meant, so that word is gone.</p>
 <p><small>Assumed by the Lead · what depends on it: how the page groups rows · on the real page, its decision page opens from here.</small></p>
 </ex-card>
@@ -54,13 +57,13 @@
 </ex-card>
 
 <ex-card title="Specification: drafted; under review" tone="question" icon="clock">
-<p>What must be true for each requirement, and what decides pass or fail: this page.</p>
+<p>What must be true for each requirement, and what decides pass or fail.</p>
 <p><small>Done: the draft · next: the evaluator's check, then the next document · logged by the Lead.</small></p>
 </ex-card>
 
 <h3 id="sketch-changed">What changed and why · 1 shortcut, 4 decisions</h3>
 
-<ex-card title="Shortcut: PR #194 merged without running the repository's test suite" tone="risk" icon="path">
+<ex-card id="sketchShortcut" title="Shortcut: PR #194 merged without running the repository's test suite" tone="risk" icon="path">
 <ul>
 <li><strong>What should have happened:</strong> the repository's skill tests pass before a skill PR is called ready.</li>
 <li><strong>What happened instead:</strong> the Lead's merge proof ran typecheck, the rules and static checks, not the test suite, and the repository has no CI to run it; two tests went red on main.</li>
@@ -98,13 +101,13 @@
 <p><small>Reported second-hand by the Lead.</small></p>
 </ex-card>
 
-<ex-card title="PR #194: no acceptance recorded" tone="question" icon="clock">
+<ex-card id="sketchNoAcceptance" title="PR #194: no acceptance recorded" tone="question" icon="clock">
 <p>It merged on your "merge 194", and later work fixed what it broke, but no acceptance in this log names its commit, the checks read, or what stays unverified.</p>
 </ex-card>
 
 <h4 id="sketch-missed">What was missed · 3 open</h4>
 
-<ex-card title="Missed: the skipped test suite wasn't logged when it was skipped" tone="risk" icon="bell">
+<ex-card id="sketchMissed" title="Missed: the skipped test suite wasn't logged when it was skipped" tone="risk" icon="bell">
 <p><small>Found by the component Lead, after the merge · affects: the #194 shortcut above.</small></p>
 </ex-card>
 
@@ -132,13 +135,16 @@ xychart-beta
   bar "Evaluator" [0, 0, 0, 1]
 </script></ex-mermaid>
 
-<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. The chart shows whose work is in the log and how much; it can't show whether a row came when the work happened, which only an audit can. On the real page, each writer's rows for a day can be opened; the next document picks how.</p>
+<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. The chart shows whose work is in the log and how much; it can't show whether a row came when the work happened, which only an audit can. On the real page, each writer's rows for a day open from a values table beside the chart.</p>
 
-<h2 id="specification">The Specification</h2>
-
-<p>Thirteen defined terms, twenty-four obligations and fourteen proofs, each traced to your requirements.</p>
-
-<ex-markdown id="specification-source" label="Specification" src="./specification.md"></ex-markdown>
+</section>
+<section id="tab-obligations" label="Obligations" icon="shield-check">
+<ex-markdown id="spec-obligations" label="Obligations" src="./specification/obligations.md"></ex-markdown>
+</section>
+<section id="tab-entities" label="Entities" icon="database">
+<ex-markdown id="spec-entities" label="Entities" src="./specification/entities.md"></ex-markdown>
+</section>
+</ex-tabs>
 
 </ex-document>
 </body>

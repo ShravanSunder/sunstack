@@ -1,6 +1,6 @@
 # Program Design: show me your work, who does what
 
-This document says how the skills, the Router work trail and Demistify make the [Specification](specification.md) true. It uses the Specification's terms (E1–E13) and covers every obligation (R1–R24) in the trace table at the end, each row carrying its capability key. How each obligation is shown to hold on a real run is the Verification Design's.
+This document says how the skills, the Router work trail and Demistify make the [Specification](specification/index.md) true. It uses the Specification's terms (E1–E13) and covers every obligation (R1–R24) in the trace table at the end, each row carrying its capability key. How each obligation is shown to hold on a real run is the Verification Design's.
 
 ## What changes, in one picture
 
@@ -38,19 +38,16 @@ Three things change and two stay as they are:
 - **The role skills**: under this design, every helper would log its own rows whenever its packet names a log, whether or not it may post on a thread. Today `role-reviewer` and `role-verifier` load the logging skill only "IF posting is authorized". `role-researcher` loads it as a Sidekick; as a Worker, it contributes to its commissioner's trace. The gates are a likely reason no evaluator or reviewer wrote a row before 6 Nov; the counts show the absence, not its cause.
 - **Unchanged:** the Router work trail, which stores, stamps and orders the rows; and Demistify v1, which draws the page.
 
-## What the current system does
-
-| Behavior | Where it lives today | What it does now |
-| --- | --- | --- |
-| Writing a row | `record-entries.md`, "Write it" | `agent-collaboration work-trail add --project-id <id> --actor self --subject '{"kind":"project"}' --tag … --json "<text>"`. The project id has no default and the subject is required unless the writer has a Router assignment. Router stamps the writer (`envelope.actor`), the time and the order. The skill says `--request-id` makes a retry safe, but alone it doesn't replay: a resend with the same request id and a new CLI-made row id returns `conflictingRequest`. Sent with the same `--row-id` as well, a resend returns the original row (proof `01a1b2fd-19fc`). |
-| Kinds of row | `record-entries.md`, "The eight kinds" | action, decision, assumption, design-change, proof, lead-acceptance, owner-ask, story; tags `who:` and `part:` |
-| Telling a helper where to log | `practices-manage-agents/schemas/assignment-fields.ts`, `JobBase` | nothing: the packet has outcome, sources, reads, limits, stop condition and return contract, but no log |
-| Helpers logging | `role-implementer` loads the skill always; `role-reviewer` and `role-verifier` only "IF posting is authorized"; `role-researcher` as a Sidekick, and as a Worker it contributes to its commissioner's trace | 24 of 268 rows came from a helper; the first evaluator row came on 6 Nov, when commission 37 asked for it |
-| Checking a handback | `practices-manage-agents` SKILL.md: "match each claim to the commit, file or output you opened" | no check of the helper's own rows |
-| The page | `references/live-page.md` | Right now; Waiting for you; part by part; closed; the Lead's view. Built by hand with Demistify; no script in the skill (the guides-only change, #194) |
-| Finding what was missed | nowhere | nothing |
-
 ## The choices, and why these
+
+**The write command (R3): a ready two-step command in each packet.** Step one mints a request id and a row id for the row; step two writes with them, filled in except the kind, `who:` and the text. A retry reruns step two with the same ids, and Router replays the first row instead of writing a second.
+
+The command, as the Lead fills it into `writeCommand`:
+
+```text
+step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("request", c.randomUUIDv7(), "row", c.randomUUIDv7())'
+step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--link '<the row it closes>'] --json "<text>"
+```
 
 **Where the short write command lives (R3).** The crux: an agent must log in one cheap step without typing ids, and a retry must not duplicate.
 
@@ -62,14 +59,9 @@ Three things change and two stay as they are:
 
 A is enough because Router replays a resend with the same request and row ids, so the only thing a wrapper adds is shorter text. That replay was seen for a sequential resend after the first send finished, on CLI 0.1.125 against a host at 0.1.119 (proof `01a1b2fd-19fc`). A resend while the first send is still in flight isn't proven; the Verification Design's O5 adds overlapping same-id resends, counted only where the clients' timing shows overlap, and reports "overlap not observed" otherwise. Whether Router processed both at once stays unverified; O5 shows the outcome, one row. O5 runs on whatever Router host the next run uses, which is the target. A helper writes tens of rows per commission, so A costs a few thousand tokens more than B. Reopen with B if V3 shows agents mangling the command, minting new ids on a retry, or skipping rows because the command is long.
 
-The command, as the Lead fills it into `writeCommand`:
-
-```text
-step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("request", c.randomUUIDv7(), "row", c.randomUUIDv7())'
-step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--link '<the row it closes>'] --json "<text>"
-```
-
 Two plain commands, not one compound line, because some hosts refuse compound shell lines (this session's worktree guard does). Reading the trail stays useful to reconcile; it isn't the guarantee.
+
+**Who audits (R18): each writer audits its own stretch** at its handback (a helper) or checkpoint (the Lead), against its own session history and the packet's or plan's required checks. The independent reviews this work already commissions are the second reader.
 
 **Who audits (R18).** The audit is pstack's "audit the log against the transcript at the end of a run".
 
@@ -83,6 +75,18 @@ A, because the independent reviews this work already commissions (`implementatio
 **How the top counts open their items (R19).** Demistify v1's number tile can't hold a link, and xychart bars can't either. A Mermaid flowchart node whose id matches a card's id opens that card in the side panel: experiment `01a1b2d2-0983`, re-run with `flowchart TB` so the four counts sit in one row. Chosen: the top band is a `flowchart TB` of unconnected count nodes, each id matching the card that holds its items. The chart's bars can't link, so its exact values sit in a table under it, one row per writer and one cell per day. Each cell opens that writer's rows for that day in "Rows by writer", a fold at the end of the page (R22).
 
 **No saved copy of the rows.** The Requirements left it to this document whether a page build saves the rows it read. Not needed: the work trail is append-only and can be read through any position at any time, so the page's stated position is enough to rebuild and check it.
+
+## What the current system does
+
+| Behavior | Where it lives today | What it does now |
+| --- | --- | --- |
+| Writing a row | `record-entries.md`, "Write it" | `agent-collaboration work-trail add --project-id <id> --actor self --subject '{"kind":"project"}' --tag … --json "<text>"`. The project id has no default and the subject is required unless the writer has a Router assignment. Router stamps the writer (`envelope.actor`), the time and the order. The skill says `--request-id` makes a retry safe, but alone it doesn't replay: a resend with the same request id and a new CLI-made row id returns `conflictingRequest`. Sent with the same `--row-id` as well, a resend returns the original row (proof `01a1b2fd-19fc`). |
+| Kinds of row | `record-entries.md`, "The eight kinds" | action, decision, assumption, design-change, proof, lead-acceptance, owner-ask, story; tags `who:` and `part:` |
+| Telling a helper where to log | `practices-manage-agents/schemas/assignment-fields.ts`, `JobBase` | nothing: the packet has outcome, sources, reads, limits, stop condition and return contract, but no log |
+| Helpers logging | `role-implementer` loads the skill always; `role-reviewer` and `role-verifier` only "IF posting is authorized"; `role-researcher` as a Sidekick, and as a Worker it contributes to its commissioner's trace | 24 of 268 rows came from a helper; the first evaluator row came on 6 Nov, when commission 37 asked for it |
+| Checking a handback | `practices-manage-agents` SKILL.md: "match each claim to the commit, file or output you opened" | no check of the helper's own rows |
+| The page | `references/live-page.md` | Right now; Waiting for you; part by part; closed; the Lead's view. Built by hand with Demistify; no script in the skill (the guides-only change, #194) |
+| Finding what was missed | nowhere | nothing |
 
 ## Where each term lives
 
