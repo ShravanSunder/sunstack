@@ -1,8 +1,20 @@
 # Show me your work: the record and the live page — validation notes
 
-Branch `skills/design-documents-html`. Design set: `docs/wip/skills-authoring/2026-11-04-show-me-your-work/`, accepted at `0111a3ef`. Implementation `d8b8f60a..45f36cc7`, then the ship commit.
+Branch `skills/design-documents-html`. Design set: `docs/wip/skills-authoring/2026-11-04-show-me-your-work/`, accepted at `0111a3ef`. Implementation `d8b8f60a..45f36cc7`, then the ship commit. Guides-only rework (6 Nov): spec `docs/wip/skills-authoring/2026-11-06-show-me-your-work-guides-only/spec.md` (G1–G11; G4 and G10 pending the owner).
 
-## Proof
+## Guides-only rework (6 Nov)
+
+The skill no longer ships `scripts/` (owner decision: no scripts in the skill). The agent reads the record with the Router CLI, sorts it by `live-page.md`'s rules (waiting, closed, and the own-call judgment), writes and refreshes story entries at each checkpoint, and builds the page with Demistify through `presentation-html`. Proof, decision and assumption entries gain fixed labelled parts, and a `story` kind joins the seven. "What the page shows" keeps the 4 Nov parts-listed page until the owner decides G4.
+
+| Check | Result |
+| --- | --- |
+| `pnpm --dir tests/skills rules --check` | exit 0, 12 rules |
+| `pnpm --dir tests/skills rules plugins/sunstack-dev/skills/practices-show-me-your-work` (keyed) | not run in the implementer's session: refused before reading, no decision-model credential; the Lead runs it |
+| Search for a script name in the skill folder | no match |
+| `git diff --check`; `claude plugin validate .` | exit 0 |
+| Fresh-agent behavior run | not run; whether it belongs in this change is the owner's open decision (G10) |
+
+## Proof of the earlier revision (builder since removed)
 
 | Check | Result |
 | --- | --- |
