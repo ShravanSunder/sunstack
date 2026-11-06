@@ -34,8 +34,11 @@ export const pieceDecisionSchema = z.object({
     .optional(),
 });
 export type PieceDecision = z.infer<typeof pieceDecisionSchema>;
+export const printoutLimitPerRule = 10;
 
-const locationSchema = z.object({ file: z.string(), first_line: z.number() }).passthrough();
+const locationSchema = z
+  .object({ file: z.string(), first_line: z.number(), last_line: z.number().optional() })
+  .passthrough();
 // A place the run read that relates to a finding: the standard's line first, then the spans of the
 // fields the rule entry names in `related`.
 const relatedPlaceSchema = z.object({
@@ -437,6 +440,7 @@ export function formatLintReport(
   context: {
     readonly states?: Readonly<Record<string, RuleState>>;
     readonly repository?: string;
+    readonly reportPath?: string;
   } = {},
 ): string {
   const outcomes = { pass: 0, not_applicable: 0, finding: 0, uncertain: 0, incomplete: 0 };
@@ -458,8 +462,14 @@ export function formatLintReport(
   }
   // Each finding is a nudge: its line, how it was reached, and the places the run read to go to next.
   if (report.findings.length > 0) lines.push("Nudges:");
+  const warningCounts = new Map<string, number>();
   for (const severity of ["error", "warn"]) {
     for (const finding of report.findings.filter((item) => item.severity === severity)) {
+      if (severity === "warn") {
+        const count = (warningCounts.get(finding.rule) ?? 0) + 1;
+        warningCounts.set(finding.rule, count);
+        if (count > printoutLimitPerRule) continue;
+      }
       lines.push(
         `${finding.file}:${finding.line}: ${severity} ${finding.rule}: ${finding.message} (${finding.basis}, outcome finding, anchor ${finding.anchor})`,
       );
@@ -509,13 +519,26 @@ export function formatLintReport(
         lines.push(`  same rule also nudged: ${other.file}:${other.line}`);
     }
   }
+  for (const [rule, count] of warningCounts)
+    if (count > printoutLimitPerRule)
+      lines.push(
+        `… and ${count - printoutLimitPerRule} more warnings for ${rule} in ${context.reportPath ?? "report.json"}`,
+      );
+  const uncertainCounts = new Map<string, number>();
   for (const item of report.uncertain) {
+    const count = (uncertainCounts.get(item.rule) ?? 0) + 1;
+    uncertainCounts.set(item.rule, count);
+    if (count > printoutLimitPerRule) continue;
     lines.push(
-      `${item.where.file}:${item.where.first_line}: uncertain ${item.rule}, step ${item.step}`,
+      `${item.where.file}:${placeLines(item.where.first_line, item.where.last_line ?? item.where.first_line)}: uncertain ${item.rule}, step ${item.step}`,
       `Answers: ${JSON.stringify(item.answers)}`,
-      `Evidence: ${JSON.stringify(item.state)}`,
     );
   }
+  for (const [rule, count] of uncertainCounts)
+    if (count > printoutLimitPerRule)
+      lines.push(
+        `… and ${count - printoutLimitPerRule} more uncertain for ${rule} in ${context.reportPath ?? "report.json"}`,
+      );
   const gaps = reportGaps(report, denominators);
   const gapCount =
     gaps.unread.length +

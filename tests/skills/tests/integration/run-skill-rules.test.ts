@@ -205,10 +205,11 @@ describe("repository skill rule runner (G10)", () => {
           expect(uncertain.answers).toHaveProperty("verdict");
           expect(uncertain.state).not.toEqual({});
           expect(result.stdout).toContain(
-            `${uncertain.where.file}:${uncertain.where.first_line}: uncertain ${uncertain.rule}, step ${uncertain.step}`,
+            `${uncertain.where.file}:${uncertain.where.first_line}-${uncertain.where.last_line}: uncertain ${uncertain.rule}, step ${uncertain.step}`,
           );
           expect(result.stdout).toContain(`Answers: ${JSON.stringify(uncertain.answers)}`);
-          expect(result.stdout).toContain(`Evidence: ${JSON.stringify(uncertain.state)}`);
+          expect(result.stdout).not.toContain("Evidence:");
+          expect(result.stdout).not.toContain(JSON.stringify(uncertain.state));
         }
         expect(readFileSync(path.join(root, "reports/report.json"), "utf8")).not.toContain(
           "synthetic-runner-test-key",

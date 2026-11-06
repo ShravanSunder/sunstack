@@ -153,7 +153,10 @@ function runRules(): number {
     const denominators = loadRuleDenominators(configPath).filter(
       (entry) => states[entry.rule]?.state === "nudging",
     );
-    console.log(formatLintReport(report, denominators, { states, repository: repositoryRoot }));
+    const reportPath = path.join(options.output, "report.json");
+    console.log(
+      formatLintReport(report, denominators, { states, repository: repositoryRoot, reportPath }),
+    );
     const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: repositoryRoot, encoding: "utf8" });
     const changes = spawnSync("git", ["diff", "--quiet", "HEAD", "--", "plugins"], {
       cwd: repositoryRoot,
@@ -169,7 +172,7 @@ function runRules(): number {
       path.join(options.output, "accounts.json"),
       JSON.stringify({ commit, accounts }, null, 2) + "\n",
     );
-    console.log(formatCurrentAccounts(accounts));
+    console.log(formatCurrentAccounts(accounts, { findings: report.findings, reportPath }));
     if (options.scope.kind === "full" && report.status.kind === "nothing_selected") {
       console.error("GAP: full-scope run selected nothing; check the paths and configured scope.");
       return 2;

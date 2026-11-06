@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { matchScenarioPiece } from "./scenario-scoring.ts";
 import type { ScenarioRecord } from "./scenarios.ts";
-import { reportGaps } from "./report.ts";
+import { reportGaps, printoutLimitPerRule } from "./report.ts";
 import type { LintReport } from "./report.ts";
 import type { RuleDenominator } from "./denominators.ts";
 
@@ -133,12 +133,44 @@ export function listCurrentAccounts(request: CurrentAccountsRequest): CurrentAcc
   return items;
 }
 
-export function formatCurrentAccounts(items: readonly CurrentAccountItem[]): string {
-  return [
+export function formatCurrentAccounts(
+  items: readonly CurrentAccountItem[],
+  context: {
+    readonly findings?: LintReport["findings"];
+    readonly reportPath?: string;
+  } = {},
+): string {
+  // Match duplicate locations in their original finding order without adding fields to accounts.json.
+  const severities = new Map<string, Array<"warn" | "error">>();
+  for (const finding of context.findings ?? []) {
+    const key = JSON.stringify([finding.rule, finding.file, finding.line, finding.message]);
+    const entries = severities.get(key) ?? [];
+    entries.push(finding.severity);
+    severities.set(key, entries);
+  }
+  const warningCounts = new Map<string, number>();
+  const lines = [
     `Current-skills accounts: ${items.length} items require a person's written account; this list does not change the run's exit code.`,
-    ...items.map(
-      (item, index) =>
-        `${index + 1}. ${item.kind}: ${item.rule ?? "run"} ${item.file ?? ""}${item.line === null ? "" : `:${item.line}`}: ${item.detail}; account pending`,
-    ),
-  ].join("\n");
+  ];
+  for (const [index, item] of items.entries()) {
+    const key = JSON.stringify([item.rule, item.file, item.line, item.detail]);
+    if (
+      item.kind === "uncovered_nudge" &&
+      severities.get(key)?.shift() === "warn" &&
+      item.rule !== null
+    ) {
+      const count = (warningCounts.get(item.rule) ?? 0) + 1;
+      warningCounts.set(item.rule, count);
+      if (count > printoutLimitPerRule) continue;
+    }
+    lines.push(
+      `${index + 1}. ${item.kind}: ${item.rule ?? "run"} ${item.file ?? ""}${item.line === null ? "" : `:${item.line}`}: ${item.detail}; account pending`,
+    );
+  }
+  for (const [rule, count] of warningCounts)
+    if (count > printoutLimitPerRule)
+      lines.push(
+        `… and ${count - printoutLimitPerRule} more warnings for ${rule} in ${context.reportPath ?? "report.json"}`,
+      );
+  return lines.join("\n");
 }

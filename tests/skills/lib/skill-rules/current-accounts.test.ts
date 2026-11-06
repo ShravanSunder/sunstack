@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { listCurrentAccounts } from "./current-accounts.ts";
+import { listCurrentAccounts, formatCurrentAccounts } from "./current-accounts.ts";
+import { recordedPrintoutReport } from "../../tests/support/recorded-printout.ts";
 import { scenarioRecordSchema } from "./scenarios.ts";
 import { reportWithResults } from "../../tests/support/lint-report.ts";
 import type { PieceDecision } from "./report.ts";
@@ -19,13 +20,48 @@ const entry = scenarioRecordSchema.parse({
   id: "place",
   rule: piece.name,
   source: { repository: "self", commit, path: piece.file, context: ["plugins"] },
-  select: {piece_first_line: 6},
+  select: { piece_first_line: 6 },
   expect: "must_fire",
   finding_lines: [17],
   kind: "regression_example",
-  scenario_kind: "unclassified", status: "active", set: "development",
-  label: {basis: "owner_words", state: "labelled", who: [], note: "Reviewed"},
+  scenario_kind: "unclassified",
+  status: "active",
+  set: "development",
+  label: { basis: "owner_words", state: "labelled", who: [], note: "Reviewed" },
   added: "2026-11-01",
+});
+
+test("duplicate warning accounts obey each rule's cap while errors and saved accounts stay complete", () => {
+  const report = recordedPrintoutReport();
+  const finding = report.findings[0];
+  if (!finding) throw new Error("Missing recorded finding");
+  report.findings = [finding.rule, "other-rule"].flatMap((rule) =>
+    Array.from({ length: 12 }, (_, index) => ({ ...finding, rule, file: `warning-${index}.md` })),
+  );
+  report.findings.push(
+    ...Array.from({ length: 12 }, (_, index) => ({
+      ...finding,
+      file: `error-${index}.md`,
+      severity: "error" as const,
+    })),
+  );
+  const items = listCurrentAccounts({ report, scenarios: [], commit: null, denominators: [] });
+  const before = JSON.stringify(items);
+  const output = formatCurrentAccounts(items, {
+    findings: report.findings,
+    reportPath: "run/report.json",
+  });
+  for (const rule of [finding.rule, "other-rule"]) {
+    expect(
+      output.split("\n").filter((line) => line.includes(`uncovered_nudge: ${rule} warning-`)),
+    ).toHaveLength(10);
+    expect(output).toContain(`… and 2 more warnings for ${rule} in run/report.json`);
+  }
+  expect(
+    output.split("\n").filter((line) => line.includes(`uncovered_nudge: ${finding.rule} error-`)),
+  ).toHaveLength(12);
+  expect(items.filter((item) => item.kind === "uncovered_nudge")).toHaveLength(36);
+  expect(JSON.stringify(items)).toBe(before);
 });
 describe("current-skills account listing", () => {
   test("historical scenarios never hide a current nudge", () => {
@@ -36,7 +72,7 @@ describe("current-skills account listing", () => {
       file: piece.file,
       line: 17,
       anchor: "resolved",
-      judgment: {answers: {}, path_taken: []},
+      judgment: { answers: {}, path_taken: [] },
       basis: "judged",
       severity: "warn",
       message: "Read the source",

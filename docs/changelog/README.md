@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-06 Rule printout caps](2026-11-06-rule-printout-caps.md)
 - [2026-11-06 presentation-html keeps supplied meaning](2026-11-06-presentation-html-fidelity.md)
 - [2026-11-05 Kind-gated rule scenarios](2026-11-05-kind-gated-scenarios.md)
 - [2026-11-05 Rule scenarios and owner adoption](2026-11-05-scenario-adoption.md)

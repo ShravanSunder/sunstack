@@ -1,0 +1,310 @@
+{
+  "provenance": {
+    "kind": "Native 0.7.0 development-only recorded report excerpt",
+    "source_commit": "83ed6c160cb4cb7266caabf2053855ec76dfbc5b",
+    "recorded_report_sha256": "aaef93afeef1fc7d8172d6c9b520f1bc054732e086c94ef8783ec37fed46d84b",
+    "note": "One finding, its piece and one large uncertain observation; absolute temporary plugin paths normalized to repository-relative paths. No held-back data. Repetition in tests supplies boundary counts, not independent model observations."
+  },
+  "finding": {
+    "rule": "general-skill.overfits-to-product-workflow",
+    "marker": "K002",
+    "file": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+    "line": 7,
+    "field": "body",
+    "span": {
+      "source": {
+        "kind": "document",
+        "repository": "checked_repository",
+        "path": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+        "content_identity": "789dce03d8d49239b2ba7959a664759d5831111813b16462e8127f351be7d428"
+      },
+      "byte_start": 285,
+      "byte_end": 3041,
+      "start_line": 7,
+      "start_column": 1,
+      "end_line": 25,
+      "end_column": 1
+    },
+    "severity": "warn",
+    "severity_origin": {
+      "kind": "authored"
+    },
+    "message": "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository.",
+    "judgment": {
+      "answers": {
+        "example_or_own_infrastructure": {
+          "type": "noul",
+          "yes_probability": 0.3
+        },
+        "product_line": {
+          "type": "choice",
+          "selected_label": "L17",
+          "confidence": 0.41,
+          "probabilities": {
+            "L10": 0.0,
+            "L11": 0.01,
+            "L12": 0.01,
+            "L13": 0.01,
+            "L14": 0.37,
+            "L15": 0.01,
+            "L16": 0.0,
+            "L17": 0.44,
+            "L18": 0.08,
+            "L19": 0.0,
+            "L20": 0.0,
+            "L21": 0.01,
+            "L22": 0.0,
+            "L23": 0.01,
+            "L24": 0.0,
+            "L7": 0.01,
+            "L8": 0.04,
+            "L9": 0.0
+          }
+        },
+        "routes_product": {
+          "type": "noul",
+          "yes_probability": 0.89
+        }
+      },
+      "value": null,
+      "path_taken": [
+        "routes_product",
+        "example_or_own_infrastructure"
+      ]
+    },
+    "basis": "judged",
+    "related": [
+      {
+        "label": "standard",
+        "file": "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md",
+        "first_line": 8,
+        "last_line": 8
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/producer-contract.md",
+        "first_line": 1,
+        "last_line": 62
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/resource-naming.md",
+        "first_line": 1,
+        "last_line": 84
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md",
+        "first_line": 1,
+        "last_line": 59
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/resource-naming.md",
+        "first_line": 1,
+        "last_line": 84
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/agent-vm-loop.md",
+        "first_line": 1,
+        "last_line": 60
+      },
+      {
+        "label": "targets",
+        "file": "plugins/sunstack-dev/skills/ops-observability-stack/references/victoria-queries.md",
+        "first_line": 1,
+        "last_line": 87
+      }
+    ],
+    "anchor": "default"
+  },
+  "piece": {
+    "name": "general-skill.overfits-to-product-workflow",
+    "marker": "K002",
+    "file": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+    "first_line": 6,
+    "last_line": 58,
+    "outcome": "finding",
+    "step": "example_or_own_infrastructure",
+    "path": [
+      "routes_product",
+      "example_or_own_infrastructure"
+    ],
+    "basis": "judged",
+    "answers": {
+      "example_or_own_infrastructure": {
+        "type": "noul",
+        "yes_probability": 0.3
+      },
+      "product_line": {
+        "type": "choice",
+        "selected_label": "L17",
+        "confidence": 0.41,
+        "probabilities": {
+          "L10": 0.0,
+          "L11": 0.01,
+          "L12": 0.01,
+          "L13": 0.01,
+          "L14": 0.37,
+          "L15": 0.01,
+          "L16": 0.0,
+          "L17": 0.44,
+          "L18": 0.08,
+          "L19": 0.0,
+          "L20": 0.0,
+          "L21": 0.01,
+          "L22": 0.0,
+          "L23": 0.01,
+          "L24": 0.0,
+          "L7": 0.01,
+          "L8": 0.04,
+          "L9": 0.0
+        }
+      },
+      "routes_product": {
+        "type": "noul",
+        "yes_probability": 0.89
+      }
+    }
+  },
+  "uncertain": {
+    "rule": "general-skill.taught-rule-overfits-to-one-project",
+    "marker": "K003",
+    "where": {
+      "file": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+      "first_line": 28,
+      "last_line": 41,
+      "span": {
+        "source": {
+          "kind": "document",
+          "repository": "checked_repository",
+          "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+          "content_identity": "4264bcd51a43d561fd3f0a746deecaf3de7957058779a9117f49adf92859709c"
+        },
+        "byte_start": 1905,
+        "byte_end": 3948,
+        "start_line": 28,
+        "start_column": 1,
+        "end_line": 42,
+        "end_column": 1
+      }
+    },
+    "step": "kind",
+    "state": {
+      "body": "\nUse the resolved `\"$AS_CLI\"` in every command below and in the references. Examples with uppercase placeholders require real values from the task or returned state; do not execute them literally.\n\n- IF the requested work creates, opens, lists, removes or prunes Git worktrees, load `references/worktrees.md` and return the selected branch/start/content mode, folder, fetch effects and outcome or unmet prerequisite.\n- IF the requested work updates an Agent Line/title or sends, reads or withdraws pane notices/asks, load `references/pane-communication.md` and return the actual message/answer state and any usable decision.\n- IF the requested work reads the caller pane, drawers or status-engine session context, load `references/pane-context.md` and return the relevant state, returned paging cursors and remaining truncation.\n- IF the requested work discovers or executes an App command or uses raw IPC/discovery/event methods, load `references/commands-and-ipc.md` and return the selected live contract, allowed target and actual receipt boundary.\n- IF the requested work inspects or controls a terminal/pane or adds a drawer child, load `references/panes-and-terminals.md` and return the resolved own-pane target and observed runtime/input/wait result.\n- IF a worktree result fails or has a refusal, skip, partial effect or retained branch that must be resolved, load `references/worktree-recovery.md` and return its exact reason/effects and safe supported next command or owner action.\n- IF an app/IPC call is refused, queued, uncertain or otherwise cannot supply its required result, load `references/recovery.md` and return the exact outcome, any known effects and a safe next action or explicit no-CLI-repair gap.\n\nPerform the requested action only within its authority; an advice request returns a plan without execution. Inspect the actual result, including partial effects and retained IDs. A zero exit code, accepted input or displayed prompt is not proof of completed work or approval.\n\n",
+      "heading": "## Load the detail for the requested work",
+      "headings": [
+        "# Agent Studio",
+        "## Load the detail for the requested work"
+      ],
+      "standard": "- A rule a skill teaches states a reusable judgment, with any product, library, API or incident only as an example, unless the rule names the scope the owner adopted it for.",
+      "targets": [
+        {
+          "exists": true,
+          "name": "references/worktrees.md",
+          "opening": "# Worktree commands and effects\n\nThis reference owns branch, content and folder choices for local worktree operations. Start with the repository, source worktree, intended branch and whether the task permits creation/removal. Return the chosen mode, start commit, content limits, destination, fetch effect and per-entry result. Stop before a mutation whose data loss or target ownership is unsettled.\n\n## Open a branch or create one\n\n```sh\n\"$AS_CLI\" worktree new release-fix --repo \"$REPO\"\n\"$AS_CLI\" worktree new -c fix-checkout-alt --repo \"$REPO\" --from \"$SOURCE\"\n\"$AS_CLI\" worktree list --repo \"$REPO\" --no-fetch --json\n```\n\n`new BRANCH` opens an existing local or `origin/BRANCH` branch. A remote-only branch creates a local tracking branch. An existing local branch keeps its upstream; it may fast-forward when strictly behind origin, but ahead/diverged branches are kept. It refuses if the branch is already checked out elsewhere: use the returned existing worktree. It does not create an arbitrary new branch when the name is absent.\n\n`new -c BRANCH` creates a new branch and refuses an existing local or origin name. Its default start is the selected source worktree's HEAD, with no upstream. Without `--from`, the source is the main worktree: this is a physical source checkout, not an independent instruction to resolve a branch named `main`.\n\nThere is no `worktree fork` verb. Copy a chosen same-repository worktree with `new -c BRANCH --from SOURCE`. The original branch/worktree remains in place.\n\nThe destination is a sibling of the main worktree: `<main-parent>/<main-folder>.<branch-slug>`, even when the source is another worktree. Branch names are at most 200 characters; folder slugs at most 80. Different names can collide after slugging. Existing destinations are refused, never reused or overwritten. Read the returned path rather than reconstructing a path for subsequent deletion.\n\n## Select the start and files separately\n\n| Choice | Start and content |\n| --- | --- |\n| Default copy-on-write fork | Copies supported source files. Ignored content requires the repository's `worktree.include` declaration in `.agentstudio.config.json`; a build cache is not guaranteed merely because it exists. |\n| `--from SOURCE` | Chooses the same-repository worktree whose files supply the copy. With `-c`, default start is its HEAD. The destination still belongs beside the main worktree. |\n| `-c BRANCH --from-branch START` | Selects the new branch's start commit from a real local/origin branch; does not move START. Source files and start commit are different choices. At a different start, copied tracked files are reset and ordinary untracked content omitted; selected ignored includes may remain. |\n| `-c BRANCH --from SOURCE --changes-only` | Clean checkout plus supported net tracked disk changes and eligible untracked files. Excludes ignored content. Requires both `-c` and `--from`; incompatible with `--from-branch` or `--no-fork`. |\n| `--no-fork` | Plain tracked checkout at the",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/worktrees.md"
+        },
+        {
+          "exists": true,
+          "name": "references/pane-communication.md",
+          "opening": "# Pane messages and decisions\n\nThis reference owns Agent Line/title, notices and asks. Start with the attached caller identity, intended message or decision, and any retained message ID. Return the observed message/answer state, IDs still needed, and any decision that is actually usable. Complete only after distinguishing a notice, a pending ask and an answered decision.\n\n## Agent Line and title\n\n```sh\n\"$AS_CLI\" line \"Migrating staging; checking deployment logs\"\n\"$AS_CLI\" line --clear\n\"$AS_CLI\" title \"Staging migration\"\n\"$AS_CLI\" title --reset\n```\n\nThis skill targets the matching message-only Agent Studio release: `line MESSAGE` and `line --clear`. The app shows the message after separate hook status, with a fixed message icon and relative age such as \"1 min ago\". There is no timed expiry or age dimming. Write the message itself; the app supplies its age.\n\nUpdate it when the work changes and clear obsolete text. Limit line text to 200 UTF-8 bytes, not characters; 120 ordinary Japanese characters can exceed the limit. Titles allow 256 UTF-8 bytes; `--reset` removes the Agent Title layer.\n\nIn that matching release, removed work/status/step/detail/expiry options produce this exact error:\n\n```text\nAgent Line accepts a message only. Use: agentstudio line \"<message>\" or agentstudio line --clear. Status comes from harness hooks; use agentstudio ask \"<question>\" when you need the user.\n```\n\nMake the next intended call through the helper: `\"$AS_CLI\" line \"Current message\"` or `\"$AS_CLI\" line --clear`. Legacy help advertising `--done`, `--working`, `--step`, `--detail` or `--expires` is not the target contract; report a version mismatch instead of reviving those forms. Shorten text after a byte-limit refusal.\n\nClaude Code, Codex and Cursor lifecycle hooks own status. Keep their supplied `CLAUDE_CODE_SESSION_ID`, `CODEX_THREAD_ID` or `CURSOR_CONVERSATION_ID`; do not synthesize hook events or bind a session manually. `notify --kind done` is a notice, not a status transition. Use an ask for a decision or \"Needs you\".\n\n## Notices and asks\n\n```sh\n\"$AS_CLI\" notify \"The staging migration finished\" --kind done\n\"$AS_CLI\" notify \"Review the failed step\" --kind attention --open \"$LOG_FILE:42\"\n\"$AS_CLI\" ask \"Which environment should I use?\" --choice staging,production --reason question\n\"$AS_CLI\" answers\n\"$AS_CLI\" withdraw \"$MESSAGE_ID\"\n```\n\nNotice importance is `info|attention|done|failure`. `--open file:line` adds a file action. A notice changes neither hook status nor task permission.\n\nAn ask is nonblocking unless `--wait` is supplied. Choose reason `approval|question|blocked` (default `question`); comma-separated choices must be nonempty and unique. Without choices, the form is free text. Retain the returned ID and read the answer before dependent work. It stays open across turns until settled or withdrawn.\n\n`answers` reads retained change pages and advances a local bookmark. Entries can repeat when that store is unavailable; inspect IDs/state rather than treating ",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/pane-communication.md"
+        },
+        {
+          "exists": true,
+          "name": "references/pane-context.md",
+          "opening": "# Caller pane and session context\n\nThis reference owns reading the caller pane, its current drawers and hook-owned session summary. Start with supplied runtime identity and the question the context must answer. Return relevant state, exact continuation cursors and any remaining truncation. Stop when the requested view is complete or the refused/unreachable page is named as a gap.\n\n```sh\n\"$AS_CLI\" pane\n\"$AS_CLI\" pane.snapshot --json '{\"handle\":\"self\"}'\n\"$AS_CLI\" session.query --json '{\"handle\":\"self\"}'\n```\n\n`pane` reads the first composed context page for the credential pane. It can contain Agent Title/Line, session summary, messages, current drawer messages, links/pull-request state and truncation. Missing/unknown state is not an empty verified result. `session.query` reads the current status-engine session summary; it is not a command to establish tracking or change status.\n\n`pane.snapshot` reads one explicit pane and workspace context. `pane.current`, `window.current` and `workspace.current` concern current UI selection, not a stable assertion about the caller. Read-only inventory can help identify a requested target, but an own-pane method remains scoped to the credential pane even if another pane's UUID is known.\n\n## Retrieve omitted context\n\n```sh\n\"$AS_CLI\" pane.context.get --json '{\"handle\":\"self\",\"page\":{\"kind\":\"first\"}}'\n```\n\nThe result has a composed 1 MiB logical budget and transport bounds. Read `truncation` before claiming all live messages were inspected:\n\n- Each `truncation.omitted` row names `source`, counts of omitted open asks/unread notices, and `next` with `rank`/`position`.\n- For that row, request `page: {\"kind\":\"more\",\"source\":SOURCE_UUID,\"after\":RETURNED_NEXT}`. SOURCE_UUID and RETURNED_NEXT stand for the exact returned UUID and cursor object in valid JSON, not quoted placeholder text.\n- `remainingLiveSources` and `nextSourcesAfter` describe source groups beyond the represented set. Request `page: {\"kind\":\"moreSources\",\"after\":RETURNED_SOURCE_UUID}` with that returned UUID.\n- Inspect each new page's truncation and retain any still-needed continuation. Copy cursors exactly; never increment positions, make up a rank or substitute a pane ordinal for a source UUID.\n\nUse JSON/stdin for these nested page objects. A drawer group identifies its source with `sourcePaneId`; reading its messages through the composed context does not authorize controlling that child's terminal. If the live drawer set changes, a continuation can return `sourceNotInView`; reread the first page and report any continuity gap instead of claiming an uninterrupted history.\n\nGood: follow omitted rows and additional-source cursors until the requested live context has no relevant truncation. Bad: treat `pane`'s first page as all history, or use a terminal snapshot as missing message/output text.\n\n## Status is observation\n\nHarness hooks record lifecycle and refusal information; this read does not create a session binding. Keep the supplied provider identity and di",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/pane-context.md"
+        },
+        {
+          "exists": true,
+          "name": "references/commands-and-ipc.md",
+          "opening": "# App commands, discovery and IPC\n\nThis reference owns selecting an available App contract and interpreting its receipt. Start with the requested operation, supplied runtime endpoint/identity and any existing correlation ID. Return the discovered method/command, its allowed target/arguments and the actual receipt boundary. Stop when eligibility, authority or required settlement cannot be established.\n\n## Local help and live discovery\n\n```sh\n\"$AS_CLI\" --help\n\"$AS_CLI\" command.execute --help\n\"$AS_CLI\" help --live\n\"$AS_CLI\" system.capabilities --json '{}'\n\"$AS_CLI\" command.list --json '{}'\n\"$AS_CLI\" system.identify --json '{}'\n```\n\n`--help`, `help` and known `METHOD --help` read the compiled local contracts without connecting. `help --help` is not supported: use the root help. `help --live` shows live App commands; `system.capabilities` supplies compatibility/runtime identity and the available typed method catalog; `command.list` supplies available App commands and their own argument/eligibility/result contracts. Read those contracts before selecting a dynamic command ID.\n\n`system.identify` reads selected runtime/access mode/version. `system.version` reads the app version; `system.ping` checks reachability. These are app calls, and supplied-token authentication still happens: a stale inherited token can fail before the read. Do not remove credentials to manufacture a successful probe.\n\nUse local help for spelling, then live discovery where the installed runtime's support matters. An old compiled catalog and a running app can differ. Preserve exact incompatibility/refusal fields instead of inferring that a printed method is executable by this agent.\n\n## Choose the permitted surface\n\n| Method family | What an agent can use it for |\n| --- | --- |\n| `system.*`, `command.list` | Read discovery/identity, with the selected connection's authentication rules. |\n| `window.list/current`, `workspace.list/current`, `pane.list/current` | Read inventory or UI selection; selection is not caller identity. |\n| `pane.context.get`, `pane.snapshot`, `session.query` | Read the credential pane and permitted session/context view. |\n| `pane.message.send/ask/withdraw/changes`, `pane.line.set`, `pane.title.set` | Own-pane reporting; prefer friendly verbs, which handle IDs, ordering and fallbacks. |\n| `pane.writer.claimEpoch` | CLI-owned ordered-writer mechanism. Do not claim epochs manually to replay stale text. |\n| `session.event/status/refusal` | Harness reporting surfaces. Let provider hooks own these writes. |\n| `terminal.status/snapshot/send/wait`, `drawer.addPane`, `pane.close` | Own-pane operations; effects still require task authorization. |\n| `events.subscribe/unsubscribe` | Own-pane, connection-scoped observations. |\n| `command.execute` | Conditional on the selected command and target, as returned by the live catalog. |\n| `pane.focus/split`, `drawer.toggle`, `bridge.diff.*`, `bridge.fileTree.*`, `bridge.fileView.*`, `bridge.telemetry.*`, `sidebar.grouping.get`, `sid",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/commands-and-ipc.md"
+        },
+        {
+          "exists": true,
+          "name": "references/panes-and-terminals.md",
+          "opening": "# Pane and terminal operations\n\nThis reference owns permitted pane/terminal inspection, exact terminal input and adding drawer children. Start with the caller identity, intended target/effect and any returned sequence/command ID. Return observed runtime state, input receipt or bounded wait result. Stop before an unauthorized mutation or a completion claim that lacks the relevant observation.\n\n## Inspect the actual target\n\n```sh\n\"$AS_CLI\" pane.list --json '{}'\n\"$AS_CLI\" pane.current --json '{}'\n\"$AS_CLI\" pane.snapshot --json '{\"handle\":\"self\"}'\n\"$AS_CLI\" terminal.status --json '{\"handle\":\"self\"}'\n\"$AS_CLI\" terminal.snapshot --json '{\"handle\":\"self\"}'\n```\n\nUse inventory/current reads to answer selection questions; use `self` for the caller. A canonical pane UUID or workspace-local `pane:N` ordinal is a supported selector where the method allows it, but possession of a selector does not widen own-pane eligibility.\n\n`terminal.status` reports lifecycle/readiness/backend/capabilities. `terminal.snapshot` reports runtime metadata such as last sequence, timestamp, renderer health, read-only and secure-input state. It contains **no terminal output**. There is no listed terminal capture/output verb. A healthy renderer, title or cwd is not proof that a shell command succeeded.\n\nGood: report runtime readiness and the absence of output evidence. Bad: claim tests passed from `terminal.snapshot`, or invent a capture method to obtain missing text.\n\n## Send exact input only when authorized\n\n```sh\n\"$AS_CLI\" terminal.send --json '{\"handle\":\"self\",\"input\":\"pwd\\n\"}'\n```\n\nThe input is exact text; a trailing newline can execute a shell command. Choose the text for the actual requested task and inspect the target first. The CLI supplies a required correlation ID if omitted; retain the returned pane, command and correlation IDs and `disposition` (`accepted` or `queued`, with any queue position).\n\nAcceptance describes terminal input submission, not shell completion or successful file changes. If delivery is uncertain, inspect relevant state before any new intent; a fresh ID does not make a duplicate input safe. Avoid sending a command merely to discover whether a previous uncertain input ran.\n\n## Observe a bounded condition\n\n```sh\n\"$AS_CLI\" terminal.wait --json '{\"handle\":\"self\",\"condition\":\"commandFinished\",\"timeoutSeconds\":1}'\n```\n\nSupported conditions are `attachReady`, `commandFinished`, `rendererHealthy`, `titleChanged`, `cwdChanged` and `progressChanged`. `timeoutSeconds` must be finite and nonnegative; the server can clamp it and returns the effective timeout and `wasClamped`. The CLI's ordinary five-second total budget remains in force, so a requested sixty-second raw wait is not a guaranteed sixty-second observation.\n\nUse `afterSequence` from an actual prior terminal snapshot/event when you need events after that point. The condition/result can include `commandId`, `correlationId`, `exitCode`, duration or health when relevant. Match returned identity to the opera",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/panes-and-terminals.md"
+        },
+        {
+          "exists": true,
+          "name": "references/worktree-recovery.md",
+          "opening": "# Worktree refusals and partial effects\n\nThis reference owns interpreting worktree parser errors, stops and failed/partial outcomes. Start with exact stdout/stderr, exit, JSON result when available, requested mode and any known effects. Return the reason, resulting state and supported next action. Complete only when work/evidence and remaining effects are accounted for; an invariant failure or unknown cleanup stays unresolved.\n\nBegin with a non-fetching inventory or preview when it is relevant and reachable:\n\n```sh\n\"$AS_CLI\" worktree list --repo \"$REPO\" --no-fetch --json\n\"$AS_CLI\" worktree remove \"$TARGET\" --repo \"$REPO\" --dry-run --no-fetch --json\n```\n\nPrinted options describe capabilities, not permission. Preserve the actual paths, branch names, counts, OIDs, effects and lock residue before deciding. Never turn every failure into a force/remove/retry command.\n\n## Parser errors (stderr, exit 64)\n\nAngle-bracket slots below are dynamic values, not literal arguments. `--json` does not convert parser failures into JSON.\n\n| Exact message/template | Next safe action |\n| --- | --- |\n| `usage: agentstudio worktree new\\|list\\|remove\\|prune [target...]` | Read `\"$AS_CLI\" worktree --help` and choose a supported verb. Bare worktree normally shows overview help. |\n| `unknown worktree subcommand; expected new, list, remove, or prune; use new -c <branch> --from <worktree> to copy a source` | Express source-copy intent with `new -c BRANCH --from SOURCE`. There is no fork alias. |\n| `a branch name is required for worktree new` | Supply the one intended branch name. |\n| `at least one target is required for worktree remove` | Inspect inventory and supply exact authorized targets. |\n| `unexpected positional argument` | New takes one branch; prune takes no positional targets. Check the chosen verb's help. |\n| `unknown worktree option` | Use that verb's local help; do not invent aliases or equals syntax. |\n| `option is not supported for this worktree subcommand` | Choose an option supported by that verb and intent. |\n| `--from-branch requires a branch name` | Supply the existing intended start branch. |\n| `<option> requires a path` / `<option> path must not be empty` | Supply a nonempty real path for --repo, --from or --archive-to. |\n| `--from-branch branch name must not be empty` | Supply a nonempty start branch. |\n| `<option> may be specified only once` | Keep one occurrence; short/long aliases share identity. |\n| `<first> and <second> cannot be used together` | Select one intent: separate -D from keep-branch; choose one archive/discard policy; separate changes-only from no-fork/from-branch. |\n| `<option> creates a new branch, so it needs -c (--create)` | Add -c only when creation is intended; otherwise remove the creation-only option. |\n\n## Stops and their exact catalog messages\n\nCreation human output is `refused: <reason>[ <path>][ <detail>][ <alternative flags>]`, optionally followed by `; options: [<action>: <effect>; ...]` and a fetch line. Its JSON can carry ",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/worktree-recovery.md"
+        },
+        {
+          "exists": true,
+          "name": "references/recovery.md",
+          "opening": "# App and pane recovery\n\nThis reference owns refused, queued, uncertain and incomplete app/IPC outcomes. Start with exact output, target/verb, retained IDs and any known effects. Return the outcome, resulting known state and a safe supported next action or explicit no-CLI-repair gap. Stop dependent work when the required answer/state is unavailable; continue independently authorized work in chat.\n\n## Preserve the outcome before acting\n\nUse the supplied helper and identity for diagnostics:\n\n```sh\n\"$AS_CLI\" pane\n\"$AS_CLI\" session.query --json '{\"handle\":\"self\"}'\n\"$AS_CLI\" withdraw --help\n```\n\nSelect the diagnostic that answers the missing question; do not run every probe. Context inspection can itself fail. If it is required before a new write and cannot be read, keep the gap rather than skipping it. Do not print/borrow credentials, remove background markers, fabricate IDs, edit ordering stores, claim epochs manually or install provider packages as a recovery shortcut.\n\n## Friendly CLI outcomes\n\n| Exact output/reason | Safe next action |\n| --- | --- |\n| `background session: not attached to a pane` | Report in chat from this worker. Keep markers intact; raw reporting is refused too. |\n| `credentialNotRecognized` on a protected call | Ask the owner to restart THIS pane's shell. Then read `\"$AS_CLI\" pane`. Only make a fresh intended call when safe and still needed; never blindly replay the notice/ask. Context does not establish ask binding or permission. |\n| `bindingRequired` on an ask | Report missing tracking. Provider setup and agent restart belong to a separately authorized workflow; use chat for the decision meanwhile. Keep existing session claims. |\n| `No agent session is bound to this pane; install the Agent Studio hooks for your provider.` | This is the CLI's bindingRequired model reply. Report the setup gap to the owner; this skill does not authorize installing/configuring hooks. |\n| `stale(lastAccepted)`, `stale(epochSuperseded)`, `stale(writerReplaced)` | Final for that ordered line/title payload. Inspect `\"$AS_CLI\" pane` BEFORE a distinct next intent may write. Never renumber/re-epoch the old payload. |\n| `unavailable(orderingStoreUnavailable)` | Leave the store intact; ask the owner to restart the app, then send a fresh intended line. Notices/asks bypass this allocator but keep token rules; asks also need a known session. A credentialed shell with no session claim can notify. |\n| `notify queued` (possibly with `(notSent(REASON))`) | Retained locally, not sent. Inspect pane context when reachable; do not count delivery or resend it yourself. |\n| `outcomeUnknown` | Delivery/settlement is unconfirmed. Inspect relevant state when reachable and report what remains unknown. No blind resend. |\n| `notSent(REASON)` | This call was not submitted. Resolve the named transport/input cause; make a new intended call only when still needed and safe. Keep any separate queue result. |\n| `Agent Studio could not durably queue this notification: FAILURE` | Ne",
+          "opening_cut": true,
+          "path": "plugins/agentstudio/skills/agentstudio/references/recovery.md"
+        }
+      ],
+      "where": {
+        "file": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+        "first_line": 28,
+        "last_line": 41,
+        "span": {
+          "byte_end": 3948,
+          "byte_start": 1905,
+          "end_column": 1,
+          "end_line": 42,
+          "source": {
+            "content_identity": "4264bcd51a43d561fd3f0a746deecaf3de7957058779a9117f49adf92859709c",
+            "kind": "document",
+            "path": "plugins/agentstudio/skills/agentstudio/SKILL.md",
+            "repository": "checked_repository"
+          },
+          "start_column": 1,
+          "start_line": 28
+        }
+      }
+    },
+    "answers": {
+      "case_line": {
+        "type": "choice",
+        "selected_label": "L30",
+        "confidence": 0.86,
+        "probabilities": {
+          "L29": 0.01,
+          "L30": 0.87,
+          "L31": 0.0,
+          "L32": 0.05,
+          "L33": 0.01,
+          "L34": 0.01,
+          "L35": 0.01,
+          "L36": 0.0,
+          "L37": 0.01,
+          "L38": 0.01,
+          "L39": 0.0,
+          "L40": 0.02,
+          "L41": 0.0
+        }
+      },
+      "kind": {
+        "type": "choice",
+        "selected_label": "rule",
+        "confidence": 0.33,
+        "probabilities": {
+          "local": 0.44,
+          "other": 0.01,
+          "rule": 0.55
+        }
+      },
+      "reusable": {
+        "type": "noul",
+        "yes_probability": 0.38
+      }
+    }
+  }
+}
