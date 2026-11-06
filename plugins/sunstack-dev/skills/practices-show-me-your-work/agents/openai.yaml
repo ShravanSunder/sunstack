@@ -1,4 +1,4 @@
 interface:
   display_name: "Practices: Show Me Your Work"
-  short_description: "Open the work trace; record decisions and evidence; read it back."
-  default_prompt: "Use practices-show-me-your-work to open or resume the work trace and record decisions, evidence, and outcomes."
+  short_description: "Record the work in its work trail; show the owner the live page."
+  default_prompt: "Use practices-show-me-your-work to record what happened, the decisions, assumptions, design changes and proof in the work trail, and rebuild the owner's live page."

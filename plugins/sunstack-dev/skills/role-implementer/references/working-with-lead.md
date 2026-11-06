@@ -14,7 +14,7 @@ A commission that changes your form, such as running you as a native Worker, or 
 
 ## While you work
 
-Post progress, decisions, proof and checkpoints on your execution root, where `practices-collaboration` and your trace put them. Message the Lead only when it has to act or decide: a material question about the design or plan, a design break, a blocker, a disagreement with your Verifier that the sources don't settle, or work the slice doesn't name. Each message says what you assumed, what you found with the path, commit or output that shows it, what it means for the plan, and which work waits on the answer.
+Write each action, decision with its authority, assumption, design change and proof as an entry in the work's record as it happens, through `practices-show-me-your-work`; you don't wait for the Lead to relay it. Post checkpoint notices on your execution root, linking the record. Message the Lead only when it has to act or decide: a material question about the design or plan, a design break, a blocker, a disagreement with your Verifier that the sources don't settle, or work the slice doesn't name. Each message says what you assumed, what you found with the path, commit or output that shows it, what it means for the plan, and which work waits on the answer.
 
 When you find work the slice doesn't name, such as a cleanup, a guard or a refactor the change seems to want, return it to the Lead as a question with its cost and keep it out of the diff ([every line traces to the owner's ask or a constraint that forces it](../../principle-hold-the-scope/SKILL.md)). A repair the agreed outcome needs stays in scope; say where it landed.
 
@@ -29,6 +29,7 @@ Around the owning phase's result, give the Lead the anchors it needs to rebuild 
 - each claim with its verification result, the path that verification covered and where its evidence lives;
 - each Verifier observation as the Verifier reported it, with its target, or that none has arrived;
 - any outcome or limit line of the commission you couldn't carry, and why;
+- the entries this assignment wrote in the work's record, by id;
 - what stays unverified.
 
 IF your commission asks for the slop and infractions pass on skill work, load `../../../shared-references/humanizer.md` to read it as a list of tells, then walk every file you changed against it and against the self-check list your commission names from the skill-authoring system the job uses, and return each tell and check item you found, fixed or kept with a reason. The skill you write never calls the humanizer. This inventory is your own pass before handback, and the independent review still follows it.
