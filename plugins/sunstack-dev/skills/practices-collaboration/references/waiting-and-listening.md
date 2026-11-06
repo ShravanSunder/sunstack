@@ -10,7 +10,7 @@ A board post alone does not wake an assignee; send the assignment directly. An a
 | --- | --- |
 | Board activity or a reply in a separate conversation | Arm the supported listener for the exact thread once, retain its identity, report it active, and yield. Session-delivered notifications need no additional wait call. When session delivery is unavailable, use a bounded process or call wait on that listener. |
 | A future event, deadline, or follow-up | Save an authorized wake to the existing recipient, retaining the recipient, expiry, and saved wake id. A wake schedules a later turn; it is not a passive wait. |
-| An owner decision | Record the checkpoint on the work thread and yield. |
+| An owner decision | Record the checkpoint in the work's record through `practices-show-me-your-work`, post its notice on the work thread, and yield. |
 
 For a separate conversation without a board listener, use its supported reply or event notification or an authorized wake, or report the capability gap. A Claude background command counts only when the host also delivers a native completion notification; `&` alone does not wake anyone. When a supported listener exists, do not substitute periodic wakes or list polls.
 
