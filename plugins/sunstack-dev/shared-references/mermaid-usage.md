@@ -18,7 +18,7 @@ Use Mermaid only when all three hold. Availability is never a reason: "the surfa
 
 ## Check the Result
 
-Inspect the rendered output rather than inferring success from valid-looking syntax:
+Inspect the rendered output rather than inferring success from valid-looking syntax. For a Mermaid island on an HTML page, `presentation-html`'s routine static check governs routine preparation, and this rendered inspection runs when a caller separately requires it, the user requests it, or a concrete rendering defect is being diagnosed; apply the readability guidance below while composing either way. Every other destination keeps this inspection:
 
 - every required semantic field (owner, edge, state, transition, failure path) is visible;
 - labels and direction read correctly; grouping and negative space preserve the intended relationship;
@@ -30,4 +30,4 @@ Decorative-Mermaid bad signals: a diagram restating what one sentence already sa
 
 Fall back when any check fails: prefer the next simplest medium that preserves the relationship — a GFM table for comparison-shaped meaning, a fenced plain-text sketch for spatial meaning, prose for a single relationship. Name the trigger when falling back. If no medium preserves the required fields, return the exact gap instead of shipping a lossy view.
 
-Complete when the diagram passed all three earn-its-place conditions and the rendered check, or the fallback and its trigger are named.
+Complete when the diagram passed all three earn-its-place conditions and the rendered check (for an HTML page under routine preparation, `presentation-html`'s static check, with the readability guidance applied while composing), or the fallback and its trigger are named.

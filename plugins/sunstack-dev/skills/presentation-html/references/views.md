@@ -8,8 +8,6 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-The names below are the canonical tokens from `docs/diagram-vocabulary.md`.
-
 For a design set, apply `engineering-documents.md`'s source rules before choosing a form below. Reuse a view already in its owning chunk through that chunk's island. A native projection reaches its facts through source anchors or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a chunk to fill it.
 
 | View | Form on the page | Good signal | Bad signal |
@@ -62,7 +60,7 @@ Build the path from nested `ex-trace` frames. Each frame is one real call: its s
 
 Label the view as source-derived. A trace does not capture a runtime stack. When there is runtime evidence, show it as its own evidence.
 
-To compare a current path with a proposed one, put the two paths in `ex-compare` topic rows. Give observable consequences and refusal checks their own corresponding row. Follow the guide's `call-paths.md`.
+To compare a current path with a proposed one, put the two paths in `ex-compare` topic rows. Give observable consequences and refusal checks their own corresponding row. IF you write this comparison, load the matching guide's `call-paths.md` and return its markup for calls, branches and unknown execution, kept distinct.
 
 ```html
 <ex-trace title="sunstack lint: command to exit code (source-derived)" data-width="reading">
