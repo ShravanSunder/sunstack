@@ -1,6 +1,6 @@
 # Verification Design: show me your work, how each requirement will be shown to hold
 
-This is a plan. Nothing in it has been observed. For each requirement (U1–U11), it says what will be done and seen, against what, on which target, what a wrong build looks like, and what stays unverified. It links to the [Specification](specification.md)'s obligations (R1–R23) and proofs (V1–V13), and to the [Program Design](program-design.md)'s seams.
+This is a plan. Nothing in it has been observed. For each requirement (U1–U12), it says what will be done and seen, against what, on which target, what a wrong build looks like, and what stays unverified. It links to the [Specification](specification.md)'s obligations (R1–R23) and proofs (V1–V13), and to the [Program Design](program-design.md)'s seams.
 
 ## What already observes this
 
@@ -18,10 +18,15 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 - *Wrong build it catches:* the Lead writes a helper's decision; a helper's row lands after the commit that used it; a packet has no log; a handback is accepted with the helper's rows missing and no Missed row; a stretch has no Audit and no "not audited" mark.
 
 **O2 · the owner's page for that run, checked (lasting; journey `needed:`).**
-- *Entry and target:* the Lead's page for O1's work, as the owner opens it: a local file in Chrome, headless, dark and light, at 1280 and 1600 wide.
-- *What it reads:* each top-band count is clicked, and must open the card that holds its items, with the number equal to those items. The four sections must come in order, with the two decision columns, verification with acceptance status, what was missed and audit status, and the writer chart with its linked table. No item appears in full twice. The stated log position must match the trail, and the counts must match the trail through that position.
+- *Entry and target:* the Lead's page for O1's work, as the owner opens it: a local file in Chrome, headless, dark and light, at 1280 and 1600 wide and at a phone width of 420.
+- *What it reads:* each top-band count is clicked, and must open the card that holds its items, with the number equal to those items.
+  - The four sections come in order. "What's done / what's next" groups by Workstream. The two decision columns are there, and so are verification with acceptance status, what was missed with audit status, and the writer chart with its linked values table.
+  - No item appears in full twice.
+  - The stated log position matches the trail, and the counts match the trail through that position.
+  - At 420 wide, the sections, both columns and the values table stay readable: nothing clipped, wide tables scrolling only inside their own frames.
+- *Boundary case it includes:* two Writers with the same role writing on the same day; each table cell must open only its own Writer's rows.
 - *Lifetime:* lasting, because every page version is checked before the owner sees it. A `verify-` journey with a self-describing script would replace today's hand checks; building it belongs to `practices-verification-maintenance`.
-- *Wrong build it catches:* a count that opens nothing, or the wrong card; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; the chart offered as proof of timely logging.
+- *Wrong build it catches:* a count that opens nothing, or the wrong card; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; the chart offered as proof of timely logging; two same-role Writers merged into one bar or link; a page that clips at phone width.
 
 **O3 · the packet contract test (automated; reused, extended by the plan).**
 - `agent-job-packet.test.ts` parses one packet with `workLog` set to a work trail and one with `noRecord`, and rejects a packet with none.
@@ -35,7 +40,12 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 
 `pnpm --dir tests/skills test` and `rules` pass. *Wrong build it catches:* a role still gated on posting; a caller still pointing at `live-page.md`. *Leaves unevaluated:* whether agents follow the text, which O1 decides.
 
-**O5 · a forced unclear retry (temporary probe).** The Verifier writes one row with a packet's command and treats the result as unclear by discarding its output. It then follows the skill's retry rule and reads the trail. *Passes when:* exactly one row with that text exists. *Wrong build it catches:* a retry rule that writes again blind.
+**O5 · a forced unclear retry (temporary probe).** On a probe tag outside the work's tag, the Verifier uses a packet's two-step command three ways:
+1. it mints ids, writes, discards the output so the result is unclear, and follows the skill's retry rule;
+2. it repeats a write with freshly minted ids, as a wrong rule would;
+3. it writes two separate rows with the same words, each with its own minted ids.
+
+*Passes when:* run 1 leaves exactly one row with that request id (`envelope.request`), and the retry returns that same row id; run 2 leaves two rows; run 3 leaves two rows. Run 2 shows why the rule must reuse ids. Run 3 shows separate events stay separate. Rows are matched by request and row id, not by their words. *Wrong build it catches:* a retry rule that mints new ids, or one that lets two separate rows share ids.
 
 **O6 · the owner's own reading (manual).** After O1 and O2, the owner reads the page and says, without transcripts, what was decided, assumed, cut short, verified and missed. Those answers are compared with the trail. This is the goal boundary's acceptable evidence.
 
@@ -45,7 +55,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 - **Proven by:** on your page for the next real run, every decision in the log can be opened. Yours and those that change the plan sit in the first column, agents' small calls in the second, and a decision with no authority is flagged.
 - **Reference:** the trail's decision rows through the page's position; the own-call rule's four conditions (live-page reference, "Sorting the record", carried into `show-me.md`).
 - **Target and journey:** O2, lasting, `needed:`.
-- **Passes when:** each decision row has an anchor on the page; the first column holds every owner decision, every `core` decision and every departure, and nothing else does; each decision without an authority line is marked "no authority named" and has a Missed row. *Fails for* a build that puts a design change among the own calls, or drops own calls from the page.
+- **Passes when:** each decision row has an anchor on the page. A decision sits in the second column only when all four of the own-call rule's conditions hold: an agent made it; it isn't `core`; it changes or fills in neither the design nor the plan; and it departs from nothing already decided. Every other decision sits in the first column, judged by the choice and what it touches, not by its tags. A decision with no authority, or one inferred from a plan, review or page (such as "Authority: the reviewer approved this"), sits in the first column, marked "no authority named", with a Missed row. The check runs on five kinds: an ordinary own call, a design or plan fill-in, a departure, an owner or `core` decision, and a missing or inferred authority. *Fails for* a build that puts a fill-in or departure among the own calls, passes an inferred authority unmarked, or drops own calls from the page.
 - **Reuses:** none.
 - **Unverified:** whether the owner agrees with each placement; that's O6.
 
@@ -66,20 +76,28 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 - **Unverified:** shortcuts that an agent took without recognizing them as departures, unless its Audit or a review finds them.
 
 ### U4 · verification (R14 R15 R16)
-- **Proven by:** each check is logged by the agent that ran it. Your page shows, for each piece of finished work, what was checked, the result, what wasn't covered, and whether an acceptance is in the log.
+- **Proven by:** each check is logged by the agent that ran it. A check someone else logged shows who ran it, as second-hand, and counts as missed. Your page shows, for each piece of finished work, what was checked, the result, what wasn't covered, and whether an acceptance is in the log.
 - **Reference:** the proof and acceptance rows; the repository at each named revision.
 - **Target and journey:** O1 (temporary); O2 (lasting, `needed:`).
-- **Passes when:** each check in an evaluator's or helper's history has a `proof` row by that agent, or a row by another writer with `Ran by:` naming the runner and shown second-hand; finished work shows "no acceptance recorded" unless an acceptance row names its commit with the checks read. *Fails for* the Lead writing an evaluator's check without `Ran by:`, or work shown accepted with no acceptance row.
+- **Passes when:** each check in an evaluator's or helper's history has a `proof` row by that agent; any check row by another Writer carries `Ran by:` naming the runner, shows second-hand, and has a Missed row (including when the runner couldn't reach Router, which the Missed row says). Finished work shows "no acceptance recorded" unless an acceptance row names its commit with the checks read. Attribution and the logging duty are judged separately: a correct `Ran by:` doesn't satisfy the duty. *Fails for* the Lead writing an evaluator's check without `Ran by:`, a second-hand check with no Missed row, or work shown accepted with no acceptance row.
 - **Reuses:** none.
 - **Unverified:** sign-offs given outside the log.
 
-### U5 · what was missed (R8 R17 R18)
+### U5 · what was missed (R8 R17 R18; R8 is shared with U1 decisions)
 - **Proven by:** your page lists what was missed, each with who found it and how. Every agent's stretch shows as audited or "not audited".
 - **Reference:** the audit and missed rows; what each audit says it compared against; the plan's and repository's required checks.
 - **Target and journey:** O1 (temporary); O2 (lasting, `needed:`).
 - **Passes when:** each helper stretch ending in a handback has an Audit row by that helper, and each Lead checkpoint one by the Lead; each gap an audit or the handback check finds has a Missed row; the page marks every stretch without an Audit "not audited" and never says "nothing missed" for it. *Fails for* a page with an empty missed list and no audit status, or an audit row that names nothing it compared against.
 - **Reuses:** none.
 - **Unverified:** what neither the writer's audit nor an existing review notices (the Program Design's reopen signal for a second auditor).
+
+### U12 · what's going on (R24)
+- **Proven by:** on your page, each workstream of the design or plan that work has started on shows under its plain name, with what's done, what's next, and the checks behind it.
+- **Reference:** the governing design's or plan's parts that work has started on; the Workstream list row and the packets' workstreams; the checks and acceptances per workstream.
+- **Target and journey:** O2, lasting, `needed:`; O1 for the Workstream list row and the packets.
+- **Passes when:** every started part of the design or plan appears as a Workstream in "What's done / what's next", with done, next and the checks behind its "done"; no story or event in that section is tied to no Workstream; a quiet Workstream shows when it last moved. *Fails for* a section of events with no Workstreams, a started part missing, or "done" with no check behind it.
+- **Reuses:** none.
+- **Unverified:** work with no written design or plan, where the Workstreams come only from the packets.
 
 ### U6 · what needs you (R19 R20)
 - **Proven by:** your page opens on four counts you can click, each opening the items it counts, then the four sections in your order, with routine items folded.
@@ -114,10 +132,10 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 - **Unverified:** whether the Lead's interpretation is the one the owner would draw; that's O6.
 
 ### U10 · logging is easy and cheap (R3)
-- **Proven by:** each helper logs a row by adding only what kind it is, who, and the words to a command it was given, and a retry never writes twice.
-- **Reference:** each packet's `writeCommand`; the commands the helpers ran; the trail after O5.
+- **Proven by:** each helper logs a row by running the two given steps, adding only what kind it is, who, and the words, and a retry reuses the row's ids and never writes twice.
+- **Reference:** each packet's `writeCommand`; the commands the helpers ran, with their request and row ids; the trail after O5.
 - **Target and journey:** O1 (temporary) for the commands as run; O5 (temporary) for the retry.
-- **Passes when:** no helper's write names a project id, session or row id it typed itself; O5 leaves exactly one row. *Fails for* a helper that had to look up an id, or a retry that wrote twice.
+- **Passes when:** no helper's write needed a project id or session it looked up; each row's ids came from step one; every retry in the run reused its row's ids; O5 passes. *Fails for* a helper that had to look up an id, a retry with new ids, or two rows sharing one write's ids.
 - **Reuses:** none.
 - **Unverified:** token cost per row, which isn't measured. The Program Design's reopen signal for the `sunstack log` option rests on this row.
 
@@ -130,7 +148,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 - **Unverified:** a run with no peer leaves this row unobserved.
 
 ### All together (V13)
-- **Proven by:** after the next real run, you read your page and say what was decided, assumed, cut short, verified and missed, without transcripts, and it matches the log.
+- **Proven by:** after the next real run, you read your page and say what was decided, assumed, cut short, verified and missed, and how each workstream is going, without transcripts, and it matches the log.
 - **Reference:** the trail through the page's position.
 - **Target and journey:** O6, manual.
 - **Passes when:** the owner's answers match the log. *Fails for* any answer he can't give from the page, or that the log contradicts.
@@ -145,6 +163,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U11)
 | U3 | R12 R13 | shortcut rows by writer; shortcut cards | O1, O2 | the run; the page check | unrecognized departures |
 | U4 | R14 R15 R16 | proof rows' writer against `Ran by:`; verified section | O1, O2 | the run; the page check | sign-offs outside the log |
 | U5 | R8 R17 R18 | audit and missed rows per writer against the page | O1, O2 | the run; the page check | what no audit or review notices |
+| U12 | R24 | the section's Workstreams against the started parts | O2, O1 | the page check; the run | work with no written plan |
 | U6 | R19 R20 | clicking each count node; section order | O2 | the page check | keyboard and screen reader |
 | U7 | R21 R22 R23 | duplicate text; chart and table against stamps; the reference | O2, O4 | the page check; skill files | fresh-agent build |
 | U8 | R1 R2 | writer stamp and time against history; packet, handback, trail | O1, O3, O4 | the run; the packet test | Workers without Router; Cursor |

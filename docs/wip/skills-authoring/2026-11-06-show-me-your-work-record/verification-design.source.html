@@ -39,12 +39,16 @@
 <p><small>Unproven: shortcuts nobody recognized as one, unless an audit or a review finds them.</small></p>
 </ex-card>
 <ex-card title="Verification" tone="done" icon="test-tube">
-<p>The agent that ran each check logged it. Your page shows what was checked, the result, what wasn't covered, and whether an acceptance is in the log.</p>
+<p>The agent that ran each check logged it. A check someone else logged shows who ran it and counts as missed. Your page shows what was checked, the result, what wasn't covered, and whether an acceptance is in the log.</p>
 <p><small>Unproven: sign-offs given outside the log.</small></p>
 </ex-card>
 <ex-card title="What was missed" tone="risk" icon="bell">
 <p>Your page lists each missed item with who found it. Every agent's stretch shows as audited or "not audited", never as "nothing missed" when unaudited.</p>
 <p><small>Unproven: what neither an agent's own audit nor a review notices.</small></p>
+</ex-card>
+<ex-card title="What's going on" tone="question" icon="path">
+<p>Each workstream that work has started on shows under its plain name, with what's done, what's next, and the checks behind it.</p>
+<p><small>Unproven: work with no written plan, where the workstreams come only from the jobs I hand out.</small></p>
 </ex-card>
 <ex-card title="What needs you" tone="question" icon="user">
 <p>The four numbers at the top open their items when clicked, then come your four sections, with routine items folded.</p>
@@ -63,7 +67,7 @@
 <p><small>Unproven: whether my reading is yours, until you read it.</small></p>
 </ex-card>
 <ex-card title="Logging is easy and cheap" tone="done" icon="terminal">
-<p>Helpers add only the kind, who and the words to a command they're given, and a forced retry leaves one row.</p>
+<p>Helpers run two given steps, adding only the kind, who and the words. A test retry with the same ids leaves one row, and the test shows that new ids would have written two.</p>
 <p><small>Unproven: the token cost per row.</small></p>
 </ex-card>
 <ex-card title="A peer Lead logs in its own record" tone="note" icon="users">

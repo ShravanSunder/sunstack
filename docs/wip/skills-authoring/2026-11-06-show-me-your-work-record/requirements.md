@@ -61,7 +61,7 @@ The skill's live page as built on 5 Nov from 149 rows of this record (`owner-pag
 
 ## Capabilities
 
-Taken from the owner's own words above; each requirement has one home. Six are what the owner sees; one is what the agents do so he can see it.
+Taken from the owner's own words above; each requirement has one home. Seven are what the owner sees; one is what the agents do so he can see it.
 
 | Key | Owner's words | What the owner gets |
 | --- | --- | --- |
@@ -70,6 +70,7 @@ Taken from the owner's own words above; each requirement has one home. Six are w
 | `shortcuts` | "shortcuts"; "any shortcuts anything off the plan or rails" | every corner cut and anything off the plan, with what was skipped or changed and why |
 | `verification` | "what bvericiaotn is done" | what was checked, the result, what wasn't checked, and what finished work the Lead accepted |
 | `missed` | "knwo what was msied" | what was missed: things that happened but weren't logged, weak evidence, checks that didn't run |
+| `going-on` | "hwat is goign on"; "show me what's going on" | how each workstream of the design or plan is being carried out: what's done, what's next, and the checks behind it |
 | `attention` | "what to pay attention to what to do" | a page that opens on what needs his attention and what to do, in a Demistify display beyond the raw log |
 | `logging` | "log its owrk as it goes" | a true log: every agent's own rows, written as it works, so the page has something true to show |
 
@@ -86,6 +87,7 @@ flowchart LR
     S["shortcuts<br/>U3"]
     V["verification<br/>U4"]
     M["what was missed<br/>U5"]
+    W["what's going on<br/>U12"]
     T["what to pay attention to<br/>U6 U7"]
   end
   G --> D
@@ -93,11 +95,13 @@ flowchart LR
   G --> S
   G --> V
   G --> M
+  G --> W
   D --> T
   A --> T
   S --> T
   V --> T
   M --> T
+  W --> T
 ```
 
 ## Requirements
@@ -113,6 +117,7 @@ Each requirement is an outcome the owner asked for; how agents get there is the 
 | U3 · 1 | `shortcuts`: The owner sees every shortcut and anything off the plan: what was skipped, cut or changed, and why. | 4 entries tagged `design-change`; the #194 test-suite skip was logged only after it surfaced | "shortcuts"; "any shortcuts anything off the plan or rails"; "show all the design breaks" |
 | U4 · 1 | `verification`: The owner sees what verification was done: what was checked, the result, what wasn't checked, and which finished work the Lead accepted. | 52 tagged `proof`, of every kind of check; the evaluators' page checks among them were written by the Lead, for example `01a1a98d-0d00` and `01a1ab35-77b3`; 0 tagged `lead-acceptance` | "what bvericiaotn is done"; "Proof of the work, what verifications are done"; "what work we've done is locked" |
 | U5 · 1 | `missed`: The owner sees what was missed: what happened but wasn't logged, a claim with weak or no evidence, and a check that should have run but didn't. | no page finds and brings together what was missed; a story on the Q3 experiment named what wasn't verified, and only because the Lead wrote it in | "knwo what was msied or decided" |
+| U12 · 1 | `going-on`: For each workstream of the design or plan, the owner sees how it's being carried out: what's done, what's next, and the checks behind it. Workstreams carry plain names, such as "Requirements" or "PR #194". | 120 entries under one catch-all part tag and 70 with none, so the page couldn't show how any part of the design was going | "hwat is goign on" (6 Nov, confirming the point); "show me what's going on" (3 Nov); the accepted 4 Nov item 2, "how the design is carried out, part by part" |
 | U6 · 1 | `attention`: The page opens on what needs the owner's attention and what to do, in the layout he kept (For you to decide; What's done / what's next; What changed and why; What was verified). | the four-section layout of page O | "the layout we have is ncie to kwno what to pay attention to what to do" |
 | U7 · 2 | `attention`: The page is a Demistify display beyond the raw log: visual and clickable, not a list or a table of contents, and it doesn't say the same thing twice. The skill's reference teaches agents how to build it with Demistify. | pages I to Q; the owner turned down list views and a map that repeated the stories | "display beyodn that with demsytify"; "reference file shoudl explain to kuse demsytify hwo to repsernese the ifnoramtion"; "not a toc"; "its nto to regurgitate teh same information" |
 
@@ -125,7 +130,7 @@ Each requirement is an outcome the owner asked for; how agents get there is the 
 | U10 · 1 | `logging`: Logging is easy and low-token for agents: simple rows in the Router work trail; the owner never has to read raw rows, CSV or diffs. | the skill's command takes the project id, a subject, four or more tags and link JSON before any words (the MCP call also needs the writer's session, a request id and a row id); the Lead built itself a helper, other agents had none; that helper skipped the skill's `--request-id`, so one retry wrote a second row (`01a1b2b7-c46b`, corrected by `01a1b2bc-6379`) | "yes worktrail with simle rows"; "do ign it with router is good"; "i dont need to dif i cannot read a csvs"; "easy dx for agents ... low token and easy" |
 | U11 · 2 | `logging`: A peer Lead working on part of this work from its own project logs in its own record. | the component Lead's work on this project's components sits in its own project | "in its own record" |
 
-Every accepted item of the 4 Nov success definition keeps a home: (1) U6 with U1–U5; (2) U6; (3) U1; (4) U2; (5) U3; (6) U4; (7) U4.
+Every accepted item of the 4 Nov success definition keeps a home: (1) U6 with U1–U5; (2) U12; (3) U1; (4) U2; (5) U3; (6) U4; (7) U4. The owner didn't recognize the word "pieces" (`01a1b28e-743f`); that drops the word, not item 2's outcome, which U12 keeps with plain workstream names.
 
 ## Shape (owner decision)
 

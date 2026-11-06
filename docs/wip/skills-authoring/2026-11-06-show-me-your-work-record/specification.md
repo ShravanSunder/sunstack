@@ -1,6 +1,6 @@
 # Specification: show me your work, what the log holds and what the owner sees
 
-This document says what must be observably true, for each requirement in [requirements.md](requirements.md) (U1–U11), and what decides pass or fail. How the skill and its tools make it true is Program Design's; how each obligation is shown to hold on a real run is Verification Design's.
+This document says what must be observably true, for each requirement in [requirements.md](requirements.md) (U1–U12), and what decides pass or fail. How the skill and its tools make it true is Program Design's; how each obligation is shown to hold on a real run is Verification Design's.
 
 The system here is one opaque thing: the skill's guidance as agents follow it, the log they write, and the page the Lead builds. The obligations below talk only about what the owner and the agents can see from outside it: rows in the log, commissions, the page and decision pages.
 
@@ -20,17 +20,20 @@ flowchart LR
     S["shortcuts<br/>R12 R13"]
     V["verification<br/>R14 R15 R16"]
     M["what was missed<br/>R17 R18"]
+    W["what's going on<br/>R24"]
   end
   G --> D
   G --> A
   G --> S
   G --> V
   G --> M
+  G --> W
   D --> T
   A --> T
   S --> T
   V --> T
   M --> T
+  W --> T
 ```
 
 ## Who sees what, and where
@@ -76,12 +79,12 @@ Each term below is a noun the obligations are written over, defined by what make
 - States: none.
 - Replaces: "author"; excludes "who decided". Basis: U8, U9; the writer count in the Requirements.
 
-**E4 Workstream.** A plain label that groups a Work's Rows for the owner.
+**E4 Workstream.** One part of the design or plan being carried out, under a plain label.
 - Same when: the same label within one Work, ignoring case and spacing.
-- Relationships: a Work has one or more; a Row names at most one; a Story covers one.
-- Always true: a label the owner can read, such as "Requirements", "page experiments" or "PR #194".
+- Relationships: names one part of the governing design or plan, such as a requirement group, a plan slice or a PR; a Work has one or more; a Row names at most one; a Story covers one.
+- Always true: a label the owner can read, such as "Requirements", "page experiments" or "PR #194". The Lead names each one when work starts or a new part begins.
 - States: active → finished.
-- Replaces: "part" and "piece", which the owner didn't recognize. Basis: U8; the Requirements' open item on grouping.
+- Replaces: "part" and "piece", which the owner didn't recognize. Basis: U12 (the accepted 4 Nov item 2), U8; the Requirements' open item on grouping.
 
 **E5 Decision.** A choice made in the Work.
 - Same when: one Row that makes a choice. A later choice that changes it is a new Decision that replaces it.
@@ -150,7 +153,7 @@ What makes the hardest cases decidable:
 
 - **Writer versus decider.** An owner decision the Lead writes down has the owner as decider and the Lead as Writer. Both show; neither replaces the other.
 - **A Shortcut nobody logged.** When someone other than the agent that took it finds it, it is one Shortcut (taken by that agent) and one Missed item (it wasn't logged when taken), not two Shortcuts.
-- **A Check written second-hand.** A Check the Lead writes about an evaluator's run is still one Check, run by the evaluator; the page shows it as reported by the Lead.
+- **A Check written second-hand.** A Check the Lead writes about an evaluator's run is still one Check, run by the evaluator; the page shows it as reported by the Lead, and it is a Missed item, because the agent that ran it didn't log it. That holds even when the evaluator couldn't reach the log; the Missed item says why.
 
 ```mermaid
 flowchart TB
@@ -180,9 +183,9 @@ Each obligation names the entities it's about, the requirement it serves, what p
 **R2 · U8 · E1 E3 E4.** Every commission to a helper names the Work's log, the Workstream it logs under, and what it must log (decisions, assumptions, shortcuts, checks). The Lead doesn't accept a handback until the helper's own Rows for it are in the log, or each missing one is logged as a Missed item.
 - Fails when a helper's handback is accepted while its own Rows are missing and no Missed item names them.
 
-**R3 · U10 · E2 E3.** Writing one Row asks the agent for only its kind, its Workstream, its text and, when it closes or answers an earlier Row, that Row. The project, the work tag, the Writer and every id are filled in for the agent. A retried write never lands twice.
-- Passes when an agent's write names none of those ids, and a retry after an unclear result leaves exactly one Row.
-- Fails when an agent has to type or look up an id to log, or a retry leaves two Rows.
+**R3 · U10 · E2 E3.** Writing one Row asks the agent for only its kind, its Workstream, its text and, when it closes or answers an earlier Row, that Row. The project, the work tag and the Writer are filled in for the agent, and the ids a write needs come from one command it's given, minted once per Row. A retry of the same Row reuses those ids and never lands twice; a new Row gets new ones.
+- Passes when an agent's write needs no id it had to look up, and a retry after an unclear result leaves exactly one Row.
+- Fails when an agent has to look up a project id or session, a retry leaves two Rows, or two different Rows share one write's ids.
 
 **R4 · U9 · E12 E2.** The Lead writes the Stories, and every claim a Story makes is said by a Row it cites. Each claim links to its Row, and the Row's Writer shows.
 - Fails when a Story says something no cited Row says, or the page shows a claim without the Row behind it.
@@ -232,10 +235,16 @@ Each obligation names the entities it's about, the requirement it serves, what p
 - a Decision with no authority (R8);
 - a claim that work is done with no Check behind it;
 - a required check, from the plan or the repository's rules, that didn't run;
-- a Row an agent wrote about another agent's act when the acting agent could have written it.
+- a Row about an agent's act written by another Writer, with why the acting agent didn't write it (for example, it couldn't reach the log).
 
 **R18 · U5 · E11 E3.** The page shows, for each Writer, which stretches of its work were audited and which weren't. A stretch with no Audit, or one whose Audit couldn't see the work (for example, an unreadable transcript), shows "not audited", never "nothing missed". How and when audits happen is Program Design's.
 - Fails when the page says nothing was missed for a stretch with no Audit, or doesn't mark that stretch "not audited".
+
+### What's going on (going-on)
+
+**R24 · U12 · E4 E12 E8 E9.** Under "What's done / what's next", the page shows each Workstream of the Work under its plain label: what's done, what's next, and the Checks and Acceptance behind it. A Workstream with nothing new shows when it last moved; a finished one says so.
+- Passes when each part of the governing design or plan that work has started on appears as a Workstream with its done, next and evidence.
+- Fails when the section shows events or Stories tied to no Workstream, when a part the work has started on is missing, or when "done" stands without the Check behind it.
 
 ### What needs the owner (attention)
 
@@ -274,7 +283,7 @@ Each obligation's reference is where the right answer comes from. Verification D
 | --- | --- | --- | --- |
 | V1 | R1, R12, R14 | each agent's own transcript, and Router's writer stamp and time on each Row | the Lead writes a helper's decision; a Row arrives after the commit that used it |
 | V2 | R2 | the commissions sent, and the log at each handback | a handback accepted with none of the helper's Rows and no Missed item |
-| V3 | R3 | the command an agent runs to log, and the log after a forced retry | an agent passes a project id; one retry leaves two Rows |
+| V3 | R3 | the command an agent runs to log, and the log after a retry of the same Row with an unclear first result | an agent looks up a project id; a retry with new ids leaves two Rows; two Rows share one write's ids |
 | V4 | R4 | each Story's cited Rows | a Story line that no cited Row says |
 | V5 | R5 | the peer's project and this Work's log | a peer's Row copied into this Work |
 | V6 | R6, R7, R8 | the log's Decisions and the own-call rule (four conditions, from the live-page reference) | a design change sitting among the own calls; a Decision missing from the page |
@@ -284,7 +293,8 @@ Each obligation's reference is where the right answer comes from. Verification D
 | V10 | R17, R18 | the log's Audits and Missed items, and what each Audit says it compared against | an unaudited stretch shown as "nothing missed"; an audited stretch where the #194 kind of skipped test suite is in the plan's required checks but never appears |
 | V11 | R19, R20, R21, R22 | the log through the page's stated position, and the owner's page O sections | a top count that doesn't open its items; one item in full twice; no picture of who wrote what; that picture offered as proof of timely logging |
 | V12 | R23 | the Lead's next real page, built by following the reference alone | that page fails V6–V11, or needed something the reference doesn't say |
-| V13 | U6–U8 together | the owner's own reading of the page on the next real piece of work | he can't say from the page, without transcripts, what was decided, assumed, cut short, verified and missed |
+| V14 | R24 | the parts of the governing design or plan that work has started on, the packets' Workstreams, and the log's Checks and Acceptances per Workstream | a "done" section of events with no Workstream; a started part missing; "done" with no Check |
+| V13 | U6–U8 and U12 together | the owner's own reading of the page on the next real piece of work | he can't say from the page, without transcripts, what was decided, assumed, cut short, verified and missed |
 
 ## Coverage
 
@@ -295,6 +305,7 @@ Each obligation's reference is where the right answer comes from. Verification D
 | U3 shortcuts | E7 E3 E10 | R12 R13 | V1 V8 |
 | U4 verification | E8 E9 E3 | R14 R15 R16 | V1 V9 |
 | U5 missed | E10 E11 E5 | R8 R17 R18 | V10 |
+| U12 going-on | E4 E12 E8 E9 | R24 | V14 V13 |
 | U6 attention | E13 E12 | R19 R20 | V11 V13 |
 | U7 attention | E13 E2 E3 | R21 R22 R23 | V11 V12 |
 | U8 logging | E2 E3 E4 | R1 R2 | V1 V2 V13 |
@@ -302,7 +313,7 @@ Each obligation's reference is where the right answer comes from. Verification D
 | U10 logging | E2 E3 | R3 | V3 |
 | U11 logging | E1 | R5 | V5 |
 
-Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4, R22), E4 (R2), E5–E13 as listed.
+Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4, R22), E4 (R2, R24), E5–E13 as listed.
 
 ## Open
 

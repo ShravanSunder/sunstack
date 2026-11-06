@@ -17,11 +17,11 @@
 
 <ex-callout title="Three choices I made, and what would change them" tone="decision" icon="path">
 <ul>
-<li><strong>Logging stays one Router command,</strong> filled in for each helper when I hand it the job; it adds only what kind of row, who, and the words. No new tool. If helpers get it wrong, skip rows, or a retry writes twice, I'll build a short <code>sunstack log</code> command instead.</li>
+<li><strong>Logging stays a ready Router command,</strong> filled in for each helper when I hand it the job. It's two plain steps: make two ids for the row, then write. The helper adds only what kind of row, who, and the words. A retry reuses the same ids, and Router then returns the first row instead of writing a second; I tested that. No new tool. If helpers get it wrong or skip rows, I'll build a short <code>sunstack log</code> command instead.</li>
 <li><strong>Each agent audits its own stretch</strong> before it hands work back, and I audit mine at each checkpoint. The reviews we already run are the second reader. If a review or you find something an agent's own audit missed, I'll add a second auditor.</li>
 <li><strong>The numbers at the top open their items</strong> as diagram boxes, the one thing Demistify can make clickable today. Try it below.</li>
 </ul>
-<p>The other change: every helper now logs its own rows, even reviewers and evaluators who can't post on a thread. Until now they only logged when they could post, which is why none of them wrote a row before today.</p>
+<p>The other changes: under this design, every helper would log its own rows, even reviewers and evaluators who can't post on a thread; today those two roles only log when they may post. And your page would show each workstream (plain names like "Requirements" or "PR #194") with what's done, what's next, and the checks behind it.</p>
 </ex-callout>
 
 <h2 id="demo">The top of your page, working</h2>
