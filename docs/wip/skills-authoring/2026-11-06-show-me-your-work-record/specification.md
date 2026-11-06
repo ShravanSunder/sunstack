@@ -252,7 +252,7 @@ Each section shows current Stories, and a routine Story folds at the end of its 
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
 - Fails when the same Story, Decision, Shortcut or Check text appears in full twice.
 
-**R22 · U7 · E13 E3 E2.** The page is visual and clickable, not a list of links: every count, chart segment and diagram node opens the items it stands for. It shows, as a picture, who wrote the log and when: each Writer's Rows over the Work's time. From that picture the owner sees whose work is in the log and how much each agent logged. Whether rows came as the work happened is not in that picture; it comes from the audits (R18), and shows "not audited" where none ran.
+**R22 · U7 · E13 E3 E2.** The page is visual and clickable, not a list of links: every count and diagram node opens the items it stands for, and a chart's exact values sit beside it, each opening the items it counts. It shows, as a picture, who wrote the log and when: each Writer's Rows over the Work's time. From that picture the owner sees whose work is in the log and how much each agent logged. Whether rows came as the work happened is not in that picture; it comes from the audits (R18), and shows "not audited" where none ran.
 - Fails when a navigation list stands in for content, the page can't show who wrote what, or the picture is presented as proof of timely logging.
 
 **R23 · U7 · E13.** The skill's show-me reference teaches an agent how to build this page with Demistify: which display shows each part of R19–R22, with a worked example built from a real log.
@@ -309,4 +309,4 @@ Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4, R22), E4 (R2), E5–E13 
 - **Workstream labels** (E4): the Lead names them when work starts and when new work arises, in plain words; the owner corrects any he can't read. This replaces "pieces", which he didn't recognize.
 - **How audits happen** (R18): Program Design decides who audits, when, and against what. pstack's choices are the starting point: the agent audits its own log against its transcript at the end of a run, and a reviewer on another model flags what it sees. Neither is required by the owner's words; both are means to U5.
 - **The short command** (R3): Program Design decides where it lives. It must not change the Router engine or its storage, and the skill itself stays guides only.
-- **Counts that open their items** (R19, R22): Demistify v1's number tile and chart can't hold a link. A Mermaid diagram node whose id matches a page element does open it. Program Design picks the display, or asks the component Lead for a linkable tile.
+- **Counts that open their items** (R19, R22): Demistify v1's number tile and chart bars can't hold a link. A Mermaid diagram node whose id matches a page element does open it. Program Design picks the display.

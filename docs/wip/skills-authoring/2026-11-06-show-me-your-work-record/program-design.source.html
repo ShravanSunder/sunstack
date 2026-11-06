@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Show me your work: who does what</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+
+<h1>Show me your work: who does what</h1>
+
+<p>The third design document: how the skills, the Router log and Demistify make the <a href="./specification.html">Specification</a> true. Nothing here is built yet. The <a href="./index.html">Requirements</a> are the first page.</p>
+
+<ex-callout title="Three choices I made, and what would change them" tone="decision" icon="path">
+<ul>
+<li><strong>Logging stays one Router command,</strong> filled in for each helper when I hand it the job; it adds only what kind of row, who, and the words. No new tool. If helpers get it wrong, skip rows, or a retry writes twice, I'll build a short <code>sunstack log</code> command instead.</li>
+<li><strong>Each agent audits its own stretch</strong> before it hands work back, and I audit mine at each checkpoint. The reviews we already run are the second reader. If a review or you find something an agent's own audit missed, I'll add a second auditor.</li>
+<li><strong>The numbers at the top open their items</strong> as diagram boxes, the one thing Demistify can make clickable today. Try it below.</li>
+</ul>
+<p>The other change: every helper now logs its own rows, even reviewers and evaluators who can't post on a thread. Until now they only logged when they could post, which is why none of them wrote a row before today.</p>
+</ex-callout>
+
+<h2 id="demo">The top of your page, working</h2>
+
+<p>Click a box: its item opens beside it. The items are the sketch's, from this project's log.</p>
+
+<ex-mermaid id="needs-you-counts" label="What needs you" zoom="none"><script type="text/plain">
+flowchart TB
+  demoWaiting["1<br/>waiting for you"]
+  demoShortcut["1<br/>shortcut worth your look"]
+  demoMissed["3<br/>missed items open"]
+  demoNoAcceptance["1<br/>finished work with<br/>no acceptance recorded"]
+</script></ex-mermaid>
+
+<ex-grid cols="2">
+<ex-card id="demoWaiting" title="Workstream labels: do these names read?" tone="question" icon="user">
+<p>Rows get grouped under plain names like "Requirements", "page experiments" and "PR #194".</p>
+</ex-card>
+<ex-card id="demoShortcut" title="Shortcut: PR #194 merged without the test suite" tone="risk" icon="path">
+<p>The merge proof ran typecheck, the rules and static checks, not the test suite; the repository has no CI. Fixed in #197.</p>
+</ex-card>
+<ex-card id="demoMissed" title="Missed: 3 open" tone="risk" icon="bell">
+<p>The skipped suite wasn't logged when skipped; a question for you was logged 23 minutes late; Terra's checks were logged by the Lead.</p>
+</ex-card>
+<ex-card id="demoNoAcceptance" title="PR #194: no acceptance recorded" tone="question" icon="clock">
+<p>Merged on your "merge 194"; no acceptance in the log names its commit and the checks read.</p>
+</ex-card>
+</ex-grid>
+
+<h2 id="program-design">The Program Design</h2>
+
+<ex-markdown id="program-design-source" label="Program Design" src="./program-design.md"></ex-markdown>
+
+</ex-document>
+</body>
+</html>
