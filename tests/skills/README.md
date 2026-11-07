@@ -128,11 +128,12 @@ mechanical description checks. Held entries and their original marker/standard
 locations live under the rulebook's `held/` directory, outside its configured
 pairs. Entirely held pairs retain their original marked standard sentences, markers and rule JSON. T4 may update teaching elsewhere in their Markdown files.
 
-The native case files are `evals/cases/product-workflow.cases.json` and
-`evals/cases/skill-kind.cases.json`. They hold Git revisions, exact piece ranges
+The native case file is `evals/cases/skill-rules.cases.json`. It holds Git revisions, exact piece ranges
 or declared-read hashes, labels with their origins, separate development and
 `held_out` sets, and recorded bars. `evals/cases/case-provenance.json` retains
 the original labels, U16 rulings, excluded rows and the fix-history search.
+Rule and filter cases share one file because native bar assessment checks every
+configured tree and resolves each bar's development-case IDs within that file.
 The native `sunstack lint cases <file> --set development` command evaluates
 development cases. The Lead runs the frozen held-out set once and compares it with the old
 rulebook on the same pinned model version. No case result changes ordinary lint.
