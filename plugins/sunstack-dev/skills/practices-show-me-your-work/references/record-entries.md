@@ -36,7 +36,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
 | `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. The **Story** part below gives each line |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
-| `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, with each Missed row linked) |
+| `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, then the full row id of every Missed row it found) |
 
 A stand-in is an `assumption`: the seam, the stand-in, what it assumes, what it gains, what it costs, and what closes it. It never proves the real interaction: "the adapter stand-in passes; the real provider remains unobserved" can't become "provider complete" on resume.
 
@@ -137,7 +137,7 @@ Couldn't see: nothing of my own session; I can't see whether the Lead's parallel
 Found: 3 (01a1b3fe-32d8 keyed rules for run 1, 01a1b404-cb80 keyed rules for runs 2-9, 01a1b404-ca13 three unlogged choices).
 ```
 
-`Couldn't see:` names what you couldn't read, such as a transcript you have no access to.
+Written today, `Found:` gives each Missed row's id in full. `Couldn't see:` names what you couldn't read, such as a transcript you have no access to. `Found:` names every Missed row, linked or not: an Audit's links stay within 16 in total, and a rewritten Audit is tagged `supersedes` with the Audit it replaces as its first link.
 
 ## Closing a row
 

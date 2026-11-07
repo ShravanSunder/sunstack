@@ -64,7 +64,7 @@ Completion: each open owner ask is named by id with its state, beside what the c
 
 ## 5. Audit your stretch
 
-Before you hand work back, and at each checkpoint, audit your own stretch: from your last Audit (or your commission, or step 1's position) to now. Compare what your own session history shows you did with what you logged, and check the packet's or plan's required checks against your proof rows. For each thing you find unlogged (a decision, an assumption, a shortcut, a check, a required check that never ran), write a missed row. Then write one audit row naming the stretch, what you compared against, what you couldn't see and how many you found. When you can't read your history, say so in `Couldn't see:`; the owner's page then shows that stretch "not audited", never "nothing missed". The independent reviews the work already runs are the second reader: a finding of theirs the log missed becomes a missed row.
+Before you hand work back, and at each checkpoint, audit your own stretch: from your last Audit (or your commission, or step 1's position) to now. Compare what your own session history shows you did with what you logged, and check the packet's or plan's required checks against your proof rows. For each thing you find unlogged (a decision, an assumption, a shortcut, a check, a required check that never ran), write a missed row. Then write one audit row naming the stretch, what you compared against, what you couldn't see, and how many you found with each missed row's id. When you can't read your history, say so in `Couldn't see:`; the owner's page then shows that stretch "not audited", never "nothing missed". The independent reviews the work already runs are the second reader: a finding of theirs the log missed becomes a missed row.
 
 Completion: the audit row's id and each missed row's id, for this stretch.
 
@@ -86,7 +86,7 @@ Completion: the page path, the log position this checkpoint's build covers, and 
 
 Before a terminal response, log the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action; run step 5's audit; as the Lead, rebuild the page; and put the log reference (and the page path) in the handoff. If nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a command or path you checked, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). When a work thread is reachable, post a checkpoint notice on it that links the log and the page. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
 
-Completion: the checkpoint row's id and this stretch's audit row id; for the Lead, the page rebuilt from the log after them, and the thread notice that links both. With no work thread, the entries file that holds the checkpoint, the page built from it, and the no-thread gap named in the handoff.
+Completion: the checkpoint row's id and this stretch's audit row id; for the Lead, the page rebuilt from the log after them, and the thread notice that links both. With no work thread, the entries file that holds the checkpoint and the no-thread gap named in the handoff, and for the Lead the page built from that file.
 
 ## Completion
 

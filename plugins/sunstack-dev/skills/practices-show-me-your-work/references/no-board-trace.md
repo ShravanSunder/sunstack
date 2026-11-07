@@ -37,4 +37,4 @@ The move is done when every entry from the files is in the trail under its own i
 
 Existing traces on threads, session-logs files and JSONL trails are read-only history: read them without inventing events or migrating them.
 
-Complete when every entry is in a file this writer owns and the page is built from it, the record is moved into the work trail, or the exact gap is returned.
+Complete when every entry is in a file this writer owns (for the Lead, with the page built from it and checked), the record is moved into the work trail, or the exact gap is returned.
