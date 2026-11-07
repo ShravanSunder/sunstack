@@ -134,7 +134,11 @@ Step two ends one of three ways, and each needs a different move:
 
 - **Accepted:** a readable answer whose decision is `accepted`. Keep the row id.
 - **Unknown outcome:** no readable Router answer, because the command timed out, the connection dropped after sending, or its output can't be read. Run step two again with the same request id and row id. Router returns the original row if the first send landed, or writes it if it didn't, so the row exists exactly once. Never mint new ids for this retry: "it failed, so this is a new write" is the mistake, because a new pair writes a second copy of the same fact. Reading the trail afterwards only reconciles; the same ids are the guarantee.
-- **Router refuses:** a readable answer that isn't `accepted`, such as a recorded rejection like `conflictingRequest`, a writer, lease or schema gate, or an access denial. No row exists, and resending the same ids returns the same refusal. If the refusal came after an unknown first send, read the trail for the row id first: the first send may have landed. Otherwise fix what the answer names, and write the row again from step one with new ids. For an access denial, keep the row for your handback with the exact answer, as for an unreachable write below, and never switch identity or transport to get past it.
+- **Router answers but doesn't accept:** a readable answer that isn't `accepted`, such as a rejection like `conflictingRequest`, a writer, lease or schema gate, or an access denial. A refusal never proves the row is missing, so don't take the fact as missing, and write nothing new until the trail shows it is:
+  1. Look in the trail for this row id. After `conflictingRequest`, look for the row whose request is this request id, because that request already wrote one.
+  2. Found: the fact is logged, so stop. A correction is a new row that closes it.
+  3. Not found: fix what the answer names. When the words and tags stay the same (a lease or writer gate, say), resend them with the same ids once it's fixed: Router doesn't record a gate result, and checks it again. When the words or tags must change, start again at step one with new ids: a recorded rejection replays, so the same words get the same answer.
+  4. An access denial: keep the row for your handback with the exact answer, as for an unreachable write below, and never switch identity or transport to get past it.
 
 A new row, even with the same words, always starts again at step one.
 
