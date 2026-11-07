@@ -3,7 +3,9 @@
 ## The change
 
 - **Target:** `sunstack-dev` / `practices-show-me-your-work`, as merged at `02965db8` (guides only, sunstack-dev 2.104.0), with the skills that commission or record work (`practices-manage-agents`, the `role-*` skills, the phase and orchestrator skills that call it).
-- **Kind:** update, behavior-changing.
+- **Kind:** update, behavior-changing. The claim: it alters the main path of `practices-show-me-your-work` (an audit step, the two-step write, and a show-me reference in place of the live-page reference), the allocation of its references (`show-me.md` replaces `live-page.md`), a schema (`JobBase.workLog` in `practices-manage-agents`), and the steering of six role skills (when they log).
+- **Reusable behavior:** this skill helps agents reliably log their own decisions, assumptions, shortcuts and checks as they work, and helps the Lead show the owner a page he can trust, whenever a piece of work spans agents or sessions.
+- **Who reaches it, and when:** the Lead, at the start of qualifying work and at each checkpoint, through its role skill and the phase and orchestrator skills that call it; each helper, whenever its packet names a work log, through its role skill; the owner never loads it, he reads the page.
 - **Baseline:** the 4 Nov design set (`docs/wip/skills-authoring/2026-11-04-show-me-your-work/`), accepted great at `0111a3ef`, shipped in #194. Its success definition is the accepted requirements set this change keeps: during design, planning and implementation the owner opens one page and sees, without reading transcripts, (1) what has happened; (2) how the design is carried out, part by part; (3) each decision, who made it and on whose authority; (4) each assumption and which wait for him; (5) what changed from the design; (6) what is proven and what is still unverified; (7) what finished work the Lead accepted. Every agent records these as they happen.
 - **Why change it:** the skill says all of that, but the first real record kept under it carries much less, and what it carries was often written late. A page built from it shows mostly what the Lead did. The owner wants to see the decisions, assumptions, shortcuts and verification of every agent, so he can trust their decisions and see what was missed.
 
@@ -23,7 +25,7 @@
 - **Missing:** every agent logging its own work as it goes; shortcuts and acceptances logged; what was missed found and shown; a page that shows the four things and what was missed, visually.
 - **May change:** `practices-show-me-your-work` and the skills that commission or record work in `sunstack-dev`; how agents log is the Lead's call (`01a1b291-488f`).
 - **Protected:** the Router engine and its storage; Demistify's components (the component Lead's).
-- **Non-goals:** CSV files or diffs for the owner; a CSV or JSONL log for agents to write; the Jev check of which entries are important (a later run); fresh-agent behavior runs and pressure tests (later, with evals); the component Lead's work-record helper itself; design documents phase one; rewriting past entries.
+- **Non-goals:** CSV files or diffs for the owner; a CSV or JSONL log for agents to write in place of the work trail (the shipped holding file for work with no Router project yet stays; see the skill design's D13); the Jev check of which entries are important (a later run); fresh-agent behavior runs and pressure tests (later, with evals); the component Lead's work-record helper itself; design documents phase one; rewriting past entries.
 - **Acceptable evidence:** on the next real piece of work, every agent that worked on it logged its own rows as it went, and the owner can say from the page, without transcripts, what was decided, assumed, cut short and verified, and what was missed.
 
 ## Shape (owner decision)

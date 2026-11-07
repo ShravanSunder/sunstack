@@ -8,6 +8,8 @@ The agent entry for this four-document design. Each document is the only home of
 | Specification: what must be observably true | [specification/index.md](specification/index.md) (chunks: entities, obligations) | [specification.html](specification.html) |
 | Program Design: who does what | [program-design.md](program-design.md) | [program-design.html](program-design.html) |
 | Verification Design: how each requirement will be shown to hold | [verification-design.md](verification-design.md) | [verification-design.html](verification-design.html) |
+| Skill design (skill-authoring part): the runs, surfaces, calls, references, security and decisions | [skill-design.md](skill-design.md) | [skill-design.html](skill-design.html) |
+| Skill verification (skill-authoring part): each requirement's and standard's route, the proof plan and what stays unverified | [skill-verification.md](skill-verification.md) | [skill-verification.html](skill-verification.html) |
 
 ## Through-lines by capability
 

@@ -6,3 +6,4 @@ Its chunks, in reading order:
 
 1. [Entities](entities.md): the nouns every obligation is written over, and what makes two of each the same. Every capability links here.
 2. [Obligations](obligations.md): R1–R24 grouped by capability, what decides pass and fail (V1–V14), and coverage.
+3. [The standards the skill states](skill-standards.md): S1–S12, one sentence each, and each rule with its two transfer cases.
