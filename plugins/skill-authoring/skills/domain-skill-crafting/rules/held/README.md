@@ -13,8 +13,12 @@ Real case files, labels and splits are unchanged. No held-out run was made; held
 
 ## Rebuilt candidates, not activated
 
-`rebuild-kind.filter.json` and `rebuild-general-skill.json` hold the corrected kind filter and K002 candidate. The evaluated files above remain unchanged. The candidates remove scored examples, distinguish supported public interfaces from application procedures, and keep explicit applicability and incomplete-evidence routes. Their bars are provisional; no new model-quality or receiving-agent result is claimed.
+`rebuild-kind.filter.json` and `rebuild-general-skill.json` hold the corrected kind filter and K002 candidate. The evaluated files above remain unchanged. The candidates remove scored examples, distinguish supported public interfaces from application procedures, and keep explicit applicability and incomplete-evidence routes.
 
 For a candidate run, pair only its K002 record with the retained standard, declare the rebuilt filter, pin `typesafe/jev-1.14-20261014`, and give the `skill` evidence kind `max_chars: 20000` to retain the full declared opening. The default 6000-character view cuts several development openings. A remaining cut or unavailable filter field ends `unsure`; no change to the active config is implied.
 
-Independent pre-run review, development results, assessed bars, the holder's example-separation attestation, frozen held-out results and a same-version baseline comparison are still required. Keep both candidates outside the active config until the switch-on conditions are met.
+Development run 3 evaluated commit `73b5ff02` on Sunstack 0.9.0; every request resolved to `typesafe/jev-1.14-20261014`. At the starting cutoffs, kind returned 55 right, 4 wrong labels and 6 unsure across 65 cases. Replaying the same answers with both Choice cutoffs at `.85` gives 45 right, no wrong labels and 20 unsure. Both bars record all 65 development filter cases as their source. Unsure folders are skipped and listed; this is abstention, not a correct label for all 65 cases. Frozen held-out evidence is still required before activation.
+
+K002 returned 7 right, 19 unsure, 2 misses and 1 false warning across 29 cases. Its product-material readings overlap the required outcomes: warning cases read `.24` and `.20`, while a quiet case reads `.71`. It lacks a question the model reads reliably for application-private material versus supported public-tool use. The diagnosed correction failed development; K002 stays held without rewording, with its questions, reference and bars unchanged. Its held-out cases remain unused.
+
+Keep both candidates outside the active config. The kind candidate's remaining gates include frozen held-out results and a same-version baseline comparison. K002 has no passing development result; its failed correction is retained as evidence, and receiving-agent behavior remains unproven for both instruments.

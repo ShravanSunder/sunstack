@@ -60,7 +60,7 @@
     "steps": {
       "classify_primary_work": {
         "ask": "primary_work",
-        "min_probability": 0.6,
+        "min_probability": 0.85,
         "routes": {
           "reusable_guidance": "classify_reusable_guidance",
           "public_tool_interface": {
@@ -74,7 +74,7 @@
       },
       "classify_reusable_guidance": {
         "ask": "reusable_guidance_kind",
-        "min_probability": 0.6,
+        "min_probability": 0.85,
         "routes": {
           "workflow_or_practice": {
             "label": "general"
