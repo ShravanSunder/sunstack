@@ -14,7 +14,7 @@ Owner plugin: `sunstack-dev` (`plugins/sunstack-dev/`). Each run names one skill
 | 4 | `role-verifier` | as run 3 (`SKILL.md:36`) |
 | 5 | `role-researcher` | as run 3, for a Sidekick and a Worker (`SKILL.md:26`); a Worker that can't reach Router returns its rows, and the commissioner writes them with `Ran by:` and a Missed row each (S5) |
 | 6 | `role-implementer` | its always-load line (`SKILL.md:28`) and `references/working-with-lead.md:17` name the packet's `workLog` and the two-step write |
-| 7 | `role-advisor` | its always-load line (`SKILL.md:44`) names the packet's `workLog` and the two-step write |
+| 7 | `role-advisor` | its always-load line (`SKILL.md:44`) stays an always-load, including when the owner opens the Advisor directly with no packet; when a packet's `workLog` names a work trail, the line also names it and the two-step write |
 | 8 | `role-operator` | today it contributes its results to its commissioner's trace and opens none of its own (`SKILL.md:27`); when the packet's `workLog` is a work trail, it writes its own rows (each check it ran, any shortcut) into that log, still opening no Work of its own |
 
 `role-lead` is unchanged: it already loads the logging skill whenever its work commissions another agent (`role-lead/SKILL.md:24`), and its audit at each checkpoint comes from run 1's `SKILL.md`.
@@ -35,13 +35,13 @@ All eight skills keep their descriptions and invocation as they are (decision D1
 
 **Run 1, `practices-show-me-your-work/SKILL.md`.**
 - *Lens:* show me your work keeps the owner's picture current. Every agent logs its own work in the log its packet names, at the moment it happens, and the Lead turns that log into the owner's page.
-- *Route:* 1 open or resume; 2 log as it happens (own rows, with the packet's two-step command); 3 when an entry may stop the work (unchanged); 4 keep the owner's asks (unchanged); 5 audit your stretch (new: before a handback and at each checkpoint); 6 accept work (the Lead; unchanged); 7 show the owner (`show-me.md`); 8 checkpoint at every stop.
+- *Route:* 1 open or resume; 2 log as it happens (own rows, with the packet's two-step command); 3 when an entry may stop the work (unchanged); 4 keep the owner's asks (unchanged); 5 audit your stretch (new: before a handback and at each checkpoint); 6 accept work (the Lead; unchanged); 7 show the owner (the Lead only: `show-me.md`); 8 checkpoint at every stop.
 - *Branches:*
   - IF no Router project: `no-board-trace.md`, as now.
   - IF the entry is an assumption, an unasked decision or a shortcut: `stop-treatments.md`, as now; a shortcut takes the place of a design change.
   - IF an entry waits for the owner: the decision brief, as now.
   - IF the write fails to connect: list the rows in the handback with the error, as the Program Design's failure table says.
-- *Completion boundary:* not done while one of this stop's decisions, assumptions, shortcuts or checks is missing from the log; while the stretch has no Audit; or while the page wasn't rebuilt from the log at this checkpoint.
+- *Completion boundary:* for every agent, not done while one of this stop's decisions, assumptions, shortcuts or checks is missing from the log, or while the stretch has no Audit. A helper's stretch ends there, with its own rows, its Audit and its handback; it doesn't build the page or wait for one. For the Lead only, a checkpoint is also not done while the page wasn't rebuilt from the log at that checkpoint.
 
 **Run 2, `practices-manage-agents/SKILL.md`.** The commission step's existing `MUST load` of `schemas/assignment-fields.ts` returns the packet with `workLog` filled. A new handback line: read the helper's rows by writer stamp since its commission, and log a Missed row for each fact in the handback that has no row by the helper. Completion gains "its own rows matched or each missing one logged as Missed".
 
@@ -52,12 +52,13 @@ All eight skills keep their descriptions and invocation as they are (decision D1
 | Run | Call | Form |
 | --- | --- | --- |
 | 1 | step 2 | `MUST load references/record-entries.md and return the row you are about to write, filled in its shape, and the step-two command with this row's minted ids.` (changed: adds the minted ids) |
-| 1 | step 7 | `At every checkpoint, MUST load references/show-me.md and return the page path, the log position it shows, and the checker result.` (changed: `live-page.md` becomes `show-me.md`) |
+| 1 | step 7 | `IF you are the Lead, at every checkpoint, load references/show-me.md and return the page path, the log position it shows, and the checker result.` (changed: `live-page.md` becomes `show-me.md`, and the call names the Lead, who owns the page; a helper skips this step) |
 | 1 | step 1 | `IF that load returns no-home, or the work has no Router project, load references/no-board-trace.md and return the file you write entries to, or the exact gap.` (unchanged) |
 | 1 | step 3 | `IF the entry is an assumption, a decision made without asking, or a shortcut, load references/stop-treatments.md and return the treatment that applies, the real case it matches, and the action it causes now.` (changed: "design change" becomes "shortcut") |
 | 1 | step 5 (new) | inline, no reference: audit the stretch since your last Audit against your own session and the packet's or plan's required checks; return the Audit row's id and each Missed row's id |
 | 2 | commission | `MUST load schemas/assignment-fields.ts and the role's schemas/role-contracts/<role>-contract.ts and return the packet, filled from each field's description, with the role skill in requiredReads.charter.` (unchanged line; the new field rides in it) |
-| 3–5, 7, 8 | logging | `IF the packet's workLog is a work trail, load practices-show-me-your-work and return the log you write to and the position your stretch starts at.` |
+| 3–5, 8 | logging | `IF the packet's workLog is a work trail, load practices-show-me-your-work and return the log you write to and the position your stretch starts at.` |
+| 7 | logging | the existing `MUST load practices-show-me-your-work` line stays unconditional; it returns the packet's `workLog` and the log's position when a packet names one, and the resumed trace as now when the owner opened the Advisor directly |
 | 6 | logging | the existing `MUST load practices-show-me-your-work` line returns the packet's `workLog` and the log's position as well |
 
 ## References
@@ -90,10 +91,12 @@ Shared shapes:
 
 Recorded here, before any skill file is outlined or written.
 
-- **sensitive surfaces:** shell commands. The skill teaches agents to run `node -e` to mint two ids, and `agent-collaboration work-trail add` to write a row.
-- **entry points:** `record-entries.md`'s step-two command, and the packet's `writeCommand`.
-- **untrusted inputs:** the row's text, written by an agent, passed as one quoted argument. The shipped rule stands: no secrets, credential paths or account data in a row.
-- **privileged actions:** an append-only write to the Router work trail, through the local Router CLI. No deletion, no network beyond the local Router, no home-level file write by the skill.
+- **sensitive surfaces:**
+  - shell commands: the skill teaches agents to run `node -e` to mint two ids, and `agent-collaboration work-trail add` to write a row;
+  - home-level writes, both existing and unchanged in kind: the pre-project holding file in memory-logs (`no-board-trace.md`, kept by D13), and the owner's page the Lead builds in the work's memory-logs folder (`show-me.md`, as `live-page.md` did).
+- **entry points:** `record-entries.md`'s step-two command and the packet's `writeCommand`; `no-board-trace.md`'s holding file; `show-me.md`'s page location.
+- **untrusted inputs:** the row's text, written by an agent, passed as one quoted argument. The shipped rule stands: no secrets, credential paths or account data in a row, a holding file or a page.
+- **privileged actions:** an append-only write to the Router work trail, through the local Router CLI, with no deletion and no network beyond the local Router. Writes to memory-logs, which keep the shipped grant rule: before the first write, load memory-logs' `AGENTS.md` and its `use-memory-logs` skill and return the folder and writer they allow; a product repository is never the destination.
 - **third-party source:** none. **license / permission state:** not applicable. **copy-vs-adapt decision:** not applicable.
 - **decision:** allowed.
 - **required proof:** O5, the retry probe on a probe tag outside the work's tag. No executable resource ships, because the skill stays guides only, so no script tests are owed.
@@ -112,7 +115,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | D4 | The top counts are a Mermaid `flowchart TB` whose node ids match the cards that hold their items; the writer chart's values table opens each writer's rows | Demistify v1 tiles and bars can't link; nodes open cards (experiment `01a1b2d2-0983`) |
 | D5 | `shortcut` replaces `design-change` for new rows; old rows stay as written and read as Shortcuts | Specification E7; the record is never edited |
 | D6 | `stream:<label>` replaces `part:` for new rows; old `part:` reads as a workstream | Specification E4; the owner didn't recognize "pieces" |
-| D7 | Every helper logs whenever its packet names a work trail, whatever its posting authority | Specification R1, R14; the posting gates kept reviewers and evaluators from logging |
+| D7 | Every helper logs whenever its packet names a work trail, whatever its posting authority | Specification R1, R14; the posting gates on `role-reviewer` and `role-verifier` are a likely reason no reviewer or evaluator logged before 6 Nov (an observation, not a proven cause) |
 | D8 | `show-me.md` replaces `live-page.md` with no forwarding stub; every caller is updated in the same change | the repository's hard-cutover rule for runtime references (AGENTS.md) |
 | D9 | The skill stays guides only: no script ships in it | the #194 guides-only change; counting rows for the chart is a one-off command in the Lead's scratch space |
 | D10 | One PR for all eight runs, one changelog entry and one version bump (sunstack-dev 2.104.1 → 2.105.0) | the runs share one behavior change; the owner's default is one PR per deliverable |

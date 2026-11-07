@@ -26,7 +26,7 @@ U1–U12 all take the same route. Each is an outcome on real work: what agents d
 | --- | --- | --- |
 | S1 the actor writes the row before dependent work | eval (O1) | an agent's choice while working; no chunk of skill text decides whether agents follow it |
 | S2 the two-step write; a retry resends the same ids | review check that `record-entries.md` and the packet's `writeCommand` teach it; the mechanism by the O5 probe in this PR; following it on real work by eval (O1) | the text's teaching is visible in one reference, but whether it's taught right needs reading; the mechanism is observable now |
-| S3 a row is never edited | no proof needed | unchanged from the shipped skill, and Router enforces append-only |
+| S3 never edited; closed only by a `resolves` or `supersedes` row whose first link names it | review check that `record-entries.md` keeps the shipped closing rule unchanged; eval (O1) for agents closing rows that way | Router keeps rows from being edited, but it doesn't enforce how a row is closed: that rule lives in the reference's text, and following it is behavior |
 | S4 a shortcut row's four parts | review check on `record-entries.md`; eval (O1) for agents writing them | the parts are visible in the reference's kinds table; writing them is behavior |
 | S5 second-hand check: `Ran by:` and a Missed row | review check on `record-entries.md` and run 5's line; eval (O1) | as S4 |
 | S6 audit before handback and at each checkpoint | review check on run 1's new step; eval (O1) | the step's presence needs reading; doing it is behavior |

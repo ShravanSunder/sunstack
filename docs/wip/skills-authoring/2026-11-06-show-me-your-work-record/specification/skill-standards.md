@@ -8,7 +8,7 @@ What the skill must do is the obligations, R1–R24, in [obligations.md](obligat
 | --- | --- | --- |
 | S1 | An agent that decides, assumes, takes a shortcut or runs a check writes that row itself, before work that builds on it continues. | R1, R12, R14 |
 | S2 | A row is written with the packet's two-step command: mint a request id and a row id once for the row, then write with them; a retry resends the same ids, and a new row mints new ones. | R3 |
-| S3 | A row is never edited; a later row whose first link names it closes it. | E2 (unchanged from the shipped skill) |
+| S3 | A row is never edited; a later row closes it only when it carries `resolves` or `supersedes` and its first link names that row, and no other link closes, accepts or confirms anything. | E2 (unchanged from the shipped skill's closing rule) |
 | S4 | A shortcut row says what the plan, design or rule said, what was done instead, why, and the authority that allowed it, or `none`. | R12, R13 |
 | S5 | A check row written by anyone other than the agent that ran it names the runner in `Ran by:` and comes with a Missed row that says why the runner didn't write it. | R14, R17 |
 | S6 | Before handing work back, and at each checkpoint, an agent audits its own stretch against its own session and logs an Audit row, plus a Missed row for each thing it finds unlogged. | R18 |
