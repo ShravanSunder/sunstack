@@ -8,12 +8,12 @@ Return: the page path, the log position (or entries files and last line) it show
 
 ## The page the owner approved
 
-The owner reads the page to know, without reading transcripts, what needs a decision, where the work is, what changed and why, and what was checked and missed. The design is fixed; only its content changes from build to build. Keep it exactly as below.
+The design is fixed; only its content changes from build to build. Keep it exactly as below.
 
 **Four sections, in this order**, each a card whose header shows its count:
 
 1. **For you to decide.** Every assumption waiting for the owner and every choice only the owner can make, first. Each shows what's assumed, what depends on it, who assumed it, and a link to its decision page. The owner decides on the decision page; this section only shows the choice. An assumption stays here, open, until a decision row closes it: silence or a passed review never decides it.
-2. **What's done / what's next.** Each part of the work that has started, under its plain workstream label: what's done, what's next, and the checks and acceptance behind its "done". A part with nothing new shows when it last moved; a finished one says so. Where a part depends on a peer Lead's work in its own project, it says where that record is (its Router project and tag) and copies none of its rows. The owner reads this to know where each part stands.
+2. **What's done / what's next.** Each part of the work that has started, under its plain workstream label: what's done, what's next, and the checks and acceptance behind its "done". A part with nothing new shows when it last moved; a finished one says so. Where a part depends on a peer Lead's work in its own project, it says where that record is (its Router project and tag) and copies none of its rows.
 3. **What changed and why**: every shortcut, with what was planned, what was done instead, why, and its authority; then the decisions, each with what was chosen, who decided, why, its authority and who wrote it, in two columns:
    - **Yours, or worth your look**: the owner's decisions, decisions that change or fill in the design or plan, decisions that depart from anything already decided, and any decision with no authority or an inferred one, marked "no authority named".
    - **Agents' own calls**, by the rule in "Sorting the log": shown with its count; the Lead reviews them.
@@ -21,7 +21,7 @@ The owner reads the page to know, without reading transcripts, what needs a deci
 
 A routine Story (`Routine: yes`) folds under one "N smaller" row at the end of its section. Every other open assumption, one an agent or a peer is checking, shows in its Story with what's assumed, what depends on it and who acts next.
 
-**Each Story**, in this order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one table or picture; a closed More fold; and a closed fold of every row it cites, each opening to its text with its kind, its writer and its time. Stories start open; their rows start closed. The owner reads the headline and the three rows, and opens the folds only to check.
+**Each Story**, in this order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one table or picture; a closed More fold; and a closed fold of every row it cites, each opening to its text with its kind, its writer and its time. Stories start open; their rows start closed.
 
 **The Map**: one tree whose rows open their Stories, in this order:
 
@@ -29,25 +29,25 @@ A routine Story (`Routine: yes`) folds under one "N smaller" row at the end of i
 2. "Where the work is": each part of the work (each Story's `Subject:`), with each of its Stories marked by its state: done, needs a fix, or waiting on the owner;
 3. the other three sections, with their Stories.
 
-The tree names Stories; it never repeats their content. The owner opens the Map to jump to a Story or see where each part of the work stands.
+The tree names Stories; it never repeats their content.
 
-**A shortcut no authority covers** is marked in its Story's For you row, saying what to look at, and the Map names that Story under what needs the owner.
+**A shortcut no authority covers** is marked in its Story's For you row, saying what to look at.
 
 **Each item appears in full in one place**; anywhere else it is named, it's a link to that place (`#story_<key>` for a Story, `#entry-<id>` for a row).
 
 ## Today's parts, and what waits on the Demistify Lead
 
-Build only with Demistify v1's documented parts, and no script. The Demistify Lead is building the Story, the section card, the Map drawer, an in-page link icon for the tree and a marker to start a tree branch folded; when they ship, this section names them and the build uses them. Until then:
+Build only with Demistify v1's documented parts, and no script. The Demistify Lead is building the Story, the section card, the Map drawer, an in-page link icon for the tree and a marker to start a tree branch folded. Until they ship:
 
 | The owner should see | Today, with v1 | Waits on |
 | --- | --- | --- |
-| a section card with its count | `ex-card` titled "For you to decide · 1", with a tone and icon | — |
+| a section card with its count | `ex-card` titled "For you to decide · 1", with a tone and icon | nothing; v1 does it |
 | the section header staying on screen while its Stories scroll, with expand/collapse on the right | each Story folds on its own; the header scrolls away | the section card |
 | a Story with its rows and folds | a `details` (open) with the title, subject and time in its `summary`, then the headline, the three rows, one table or picture, a `details` for More and a `details` for the cited rows | the Story |
 | the Map as a panel from the right, opened by a map button next to Comments, never open with Comments, covering the page on a narrow screen and closing when a row is followed | the Map tree in a closed `details` named "Map" right after the title, opening in place | the Map drawer |
 | a Map row opening its Story, open, with any fold around it | the row links to `#story_<key>`; following it opens any closed fold around the Story, such as "N smaller", but not a Story the owner has closed | the Story |
 | tree rows that stay on the page, and branches that start folded | v1's tree draws a leave-the-page arrow on every link and opens every branch | the in-page link icon and the start-folded marker |
-| the two decision columns | `ex-grid` with two columns | — |
+| the two decision columns | `ex-grid` with two columns | nothing; v1 does it |
 
 The Map tree, as `ex-tree` Markdown, with each Story's state as the row's status:
 
@@ -91,11 +91,11 @@ A decision with no `Authority:`, or one inferred from a plan, a review or a page
 
 ## Write the Stories
 
-A Story tells the owner what one subject amounts to: a PR, a decision and its follow-through, a review, an experiment. Stories are `story` rows in the log, written by the Lead at each checkpoint before the page is built; `record-entries.md` owns their lines. A Story cites exactly the rows its `Covers:` line names, linked or not, and every line it says comes from one of them.
+A Story tells the owner what one subject amounts to: a PR, a decision and its follow-through, a review, an experiment. Stories are `story` rows in the log, written by the Lead at each checkpoint before the page is built; `record-entries.md` owns their lines.
 
 1. Take the rows logged since the last checkpoint's position, which the last page names. A first checkpoint takes them all.
 2. Give each row to the Story whose subject it belongs to, in its workstream.
-3. Check every new row against every current Story it affects, whether or not that Story cites it: a row that closes an assumption affects the Story that says the assumption is open. Write a first Story for a subject no Story covers. Write a new version, tagged `supersedes` with the old Story as its first link, when a row changes a Story's Happened, For you or Next, or closes something the Story says is open; it keeps the same `Key:`. A current Story missing a line the page needs (`Key:`, `Subject:` or `Covers:`), such as one written before those lines existed, gets a new version too, even when no new row affects it: tagged `supersedes` with the old Story as its first link and at most 16 links in total, with a `Key:` it keeps from then on, its `Subject:`, and a complete `Covers:` naming every row the old Story's lines rest on, found in the trail, including the rows its links named. Its words stay the same unless a row changes them, and the backing check then runs on it like any Story. Leave every other unaffected Story as it is.
+3. Check every new row against every current Story it affects, whether or not that Story cites it: a row that closes an assumption affects the Story that says the assumption is open. Write a first Story for a subject no Story covers. Write a new version, tagged `supersedes` with the old Story as its first link, when a row changes a Story's Happened, For you or Next, or closes something the Story says is open; it keeps the same `Key:`. A current Story missing a line the page needs (`Key:`, `Subject:` or `Covers:`), such as one written before those lines existed, gets a new version too, even when no new row affects it: tagged `supersedes` with the old Story as its first link and at most 16 links in total, with a `Key:` it keeps from then on, its `Subject:`, and a complete `Covers:` naming every row the old Story's lines rest on, found in the trail, including the rows its links named. Its words stay the same unless a row changes them. Leave every other unaffected Story as it is.
 4. Put every row the Story cites in its `Covers:` line, by full id. Link up to 16 of them on a first Story, or up to 15 after the closing link on a rewrite.
 5. Check each line against the rows `Covers:` names (the backing check, below): drop a line no cited row says.
 6. Done when every row since the last checkpoint is in a current Story's `Covers:` or listed on the page as not in a Story yet, and every Story a new row affects has a new version or says what is still unresolved.
@@ -104,10 +104,10 @@ Good: after the owner's decisions `01a1a787-3817` (D6) and `01a1a787-3b5e` (D7, 
 
 ## Checks that read `Covers:`
 
-Three checks read a Story's `Covers:` line, never its links alone. Each looks up every id there in the work's trail, through the page's position, to get the row's text and its writer from Router's stamp.
+Each of the three looks up every id in `Covers:` in the work's trail, through the page's position, to get the row's text and its writer from Router's stamp; none reads the links alone.
 
 - **Backing.** Every line of the Story is said by a row in `Covers:`. A line whose only support is a cited row the Story doesn't link still passes. An id with no row in the work through that position is an error you report, never a silent skip: fix the Story, then rebuild.
-- **The Story's folded rows** show every row `Covers:` names, each with its kind, writer and time, so each claim leads to its row.
+- **The Story's folded rows** show every row `Covers:` names, each with its kind, writer and time.
 - **Coverage.** Every row through the position is in a current Story's `Covers:` or listed on the page as not in a Story yet.
 
 ## Where it lives
@@ -131,7 +131,7 @@ The approved page: memory-logs `projects/2026/2026-10-skills-and-sessions/scratc
 - **What's done / what's next · 4:** "This page is your design", "The first version is merged", "The design documents are ready", "The new skill: agents write down their own work".
 - **What changed and why · 4 + 2 smaller:** among them "Shortcuts we took" (Shortcuts · Fri 23:13). Headline: "Two this round: design pages built without their guide (fixed), and unsigned commits." For you: "Worth a look at the six commits that skipped signing." Its table lists each shortcut with "Allowed?" and "Fixed?", and its folded rows ("The record: 6 entries") show each with its writer. Then the two columns, "Yours, or worth your look" first.
 - **What was verified · 2:** "How the new skill was checked" (its Story row is `record-entries.md`'s example), and "What was missed", whose table lists each miss with "Found by" and "Closed".
-- **The Map:** the tree above, in full: "Needs you · 1", "Where the work is" with The skill, This page and Design documents, then the other three sections.
+- **The Map:** "Needs you · 1", "Where the work is" with The skill, This page and Design documents, then the other three sections; the tree above shows part of it.
 
 ## Check it
 
@@ -146,9 +146,9 @@ Fix errors in the page's markup, or in the log when the log is what's wrong, the
 ## Good and bad
 
 - Good: the owner opens the Map, sees "Needs you · 1", follows it to "Where should the map live?", reads its headline and three rows, and the line under the title says which log position the page covers.
-- Bad: counts, or a chart of rows per writer, across the top of the page. The owner's design has neither; attention comes from For you to decide and the Map, and timeliness from the audits.
-- Bad: a Story line that reads "Runs 1–9: built". Someone who didn't watch the agents work can't tell what it means.
-- Bad: a Story that cites only the rows it links. A Story covering 55 rows can't link them all; `Covers:` names every one.
+- Bad: counts, or a chart of rows per writer, across the top of the page. The owner's design has neither.
+- Bad: a Story line that reads "Runs 1–9: built".
+- Bad: a Story that cites only the rows it links.
 - Bad: the same shortcut written out in full under "What changed and why" and again under "What was verified, and what was missed". The second place links to the first.
 - Bad: "nothing missed" for a stretch with no audit row.
 - Bad: a departure placed among the own calls because it was tagged `door:two-way`.

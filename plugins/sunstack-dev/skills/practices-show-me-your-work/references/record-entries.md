@@ -29,12 +29,12 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | --- | --- | --- |
 | `action` | what happened | none; say what was done and where: the commit, path or command |
 | `decision` | a choice made | `Choice:`, `Authority:` (the owner's words quoted with where they were said, the contract or design it rests on with its path, or `own call`). Add `core` when it changes or fills in the design or plan; add `door:two-way` for a reversible choice inside existing authority, made without asking |
-| `assumption` | something taken as true and not yet settled | `Assumed:`, `What depends on it:`; tags `state:open` and `next:owner`, `next:lead`, `next:sidekick` or `next:advisor` for who acts next, set by its stop treatment |
+| `assumption` | something taken as true and not yet settled | `Assumed:`, `What depends on it:`; tags `state:open` and `next:<role>` for who acts next (`next:owner`, `next:lead`, `next:advisor`, or the role of the agent checking it), set by its stop treatment |
 | `shortcut` | a departure from the plan, the design or a required step | `Planned:` (what the plan, design or rule said), `Did instead:`, `Why:`, `Authority:` (`none` when nothing covered it). Older rows tagged `design-change` read as shortcuts |
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. "Stories" below gives each line |
+| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. the **Story** part below gives each line |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, with each Missed row linked) |
 
@@ -44,7 +44,7 @@ The owner saw an assumption on a page and didn't mark it wrong: it stays an `ass
 
 ## Fixed parts
 
-Each fixed part is one labelled line, in the table's order. A reader finds the claim, the authority or what was done instead in the same place every time, and a missing part shows at a glance. Rows written before these parts existed stay as written; the log is never edited.
+Each fixed part is one labelled line, in the table's order. Rows written before these parts existed stay as written; the log is never edited.
 
 **Proof.** Good, `01a1b0f3-2a00` (position 2:959):
 
@@ -58,7 +58,7 @@ Not covered: the skill files themselves (not written yet); any behavior run.
 
 Bad, `01a1ac6a-40f2` (2:843): "Proof: Terra's eighteenth check found page N covering the record exactly … What ran: … Comprehension: 5 stories yes, 14 partly … Findings, worst first: … Not covered: small screens, …". The claim, the check and the result run together, so a reader can't tell what was claimed from what was found. It is also Terra's check written by the Lead: written today, it carries `Ran by: Terra (codex-local/01a1a97a)` and comes with a Missed row.
 
-**A check you didn't run.** When you write a check another agent ran, because it couldn't reach the log or didn't log it, add `Ran by:` naming that agent, and write a `missed` row that says why the runner didn't write it. The page then shows the check as reported second-hand. Good, written by the evaluator itself, `01a1b2e1-a152` (2:1137): "Proof: independent owner-page check of the Program and Verification Design pages. Claim: … Check: … real Chrome mouse clicks on all four count nodes … Result: five findings … Not covered: …". It needs no `Ran by:`, because its writer ran it.
+**A check you didn't run.** When you write a check another agent ran, because it couldn't reach the log or didn't log it, add `Ran by:` naming that agent, and write a `missed` row that says why the runner didn't write it. Good, written by the evaluator itself, `01a1b2e1-a152` (2:1137): "Proof: independent owner-page check of the Program and Verification Design pages. Claim: … Check: … real Chrome mouse clicks on all four count nodes … Result: five findings … Not covered: …". It needs no `Ran by:`, because its writer ran it.
 
 **Decision.** Good on content, `01a1a787-3817` (2:687), written today with its label:
 
@@ -88,7 +88,7 @@ Bad: a shortcut nobody logged when it was taken. PR #194's merge proof ran typec
 
 **Missed.** Good, `01a1b3e2-27fb` (2:1346): "Missed: the skill spec (c4d752af) followed skill-authoring 0.5.0's route … / Found by: review lead codex-local/01a1a6f7, asking for the skill-design and skill-verification parts (push 01a1b3da-e1e1). / Affects: the spec-stage review target; fixed at ecf2f095." It says what was missed, who found it and how, and what it touches.
 
-**Story.** The Lead writes one at a checkpoint for each subject the owner follows; `show-me.md` says when, and builds the page from them. Its lines, in this order:
+**Story.** The Lead writes one at a checkpoint for each subject the owner follows, as `show-me.md` says. Its lines, in this order:
 
 | Line | Holds |
 | --- | --- |
@@ -137,7 +137,7 @@ Couldn't see: nothing of my own session; I can't see whether the Lead's parallel
 Found: 3 (01a1b3fe-32d8 keyed rules for run 1, 01a1b404-cb80 keyed rules for runs 2-9, 01a1b404-ca13 three unlogged choices).
 ```
 
-`Couldn't see:` names what you couldn't read, such as a transcript you have no access to. Then the page shows that stretch "not audited", never "nothing missed".
+`Couldn't see:` names what you couldn't read, such as a transcript you have no access to.
 
 ## Closing a row
 
@@ -167,7 +167,7 @@ step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("req
 step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--tag <tag its kind takes> ...] [--link '<the row it closes>'] --json "<text>"
 ```
 
-Step one prints a request id and a row id. Step two writes the row with them, and its result's decision is `accepted`, carrying the row's id.
+Step one prints a request id and a row id; step two writes the row with them.
 
 Step two ends one of three ways, and each needs a different move:
 

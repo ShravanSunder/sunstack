@@ -23,13 +23,13 @@ Completion: the log (project and work tag, or the entries file) is named; you re
 
 Log what the owner, or someone picking up the work cold, would act on. Leave out routine commands, step-by-step narration and status that changes no decision.
 
-- **Your own rows, before work builds on them.** When you decide, assume, take a shortcut or run a check, you write that row yourself, before your next row, commit, message or handback that depends on it. A helper doesn't wait for the Lead to relay it, and the Lead doesn't write a helper's rows for it. Router stamps who wrote each row, and the owner sees that stamp.
-- **Kinds.** Every row is one kind: action, decision, assumption, shortcut, proof, Lead acceptance, owner ask, story, missed or audit. A change from the design or plan is a shortcut.
-- **Fixed parts.** A decision carries Choice and Authority; an assumption, Assumed and What depends on it; a shortcut, Planned, Did instead, Why and Authority (`none` when nothing covered it); a proof, Claim, Check, Result and Not covered. Every decision's authority is named from its source: the owner's words quoted with where they were said, an existing contract, or the agent's own call, never inferred from a plan, a review or a page you wrote.
-- **A check you didn't run** names its runner in `Ran by:` and comes with a missed row that says why the runner didn't write it.
-- **Workstream.** Every row carries the workstream its packet names (`stream:`), so the owner sees it beside the part of the design or plan it belongs to.
-- **The two-step write.** Step one mints a request id and a row id for the row; step two writes with them. When the outcome is unknown (no readable Router answer), rerun step two with the same ids, never new ones; when Router answers without accepting, check the trail before writing anything new, then fix what it names; an access denial goes in your handback. A new row mints new ids.
-- **Never edited.** A correction, resolution or replacement is a new row whose first link is the row it closes, tagged `resolves` or `supersedes`; no other link closes, accepts or confirms anything.
+- When you decide, assume, take a shortcut or run a check, you write that row yourself, before your next row, commit, message or handback that depends on it. A helper doesn't wait for the Lead to relay it, and the Lead doesn't write a helper's rows for it.
+- Every row is one kind: action, decision, assumption, shortcut, proof, Lead acceptance, owner ask, story, missed or audit. A change from the design or plan is a shortcut.
+- A decision carries Choice and Authority; an assumption, Assumed and What depends on it; a shortcut, Planned, Did instead, Why and Authority (`none` when nothing covered it); a proof, Claim, Check, Result and Not covered. Every decision's authority is named from its source: the owner's words quoted with where they were said, an existing contract, or the agent's own call, never inferred from a plan, a review or a page you wrote.
+- A check you didn't run names its runner in `Ran by:` and comes with a missed row that says why the runner didn't write it.
+- Every row carries the workstream its packet names (`stream:`).
+- Write each row in two steps: step one mints a request id and a row id for it; step two writes with them. When the outcome is unknown (no readable Router answer), rerun step two with the same ids, never new ones; when Router answers without accepting, check the trail before writing anything new, then fix what it names; an access denial goes in your handback. A new row mints new ids.
+- A row is never edited. A correction, resolution or replacement is a new row whose first link is the row it closes, tagged `resolves` or `supersedes`; no other link closes, accepts or confirms anything.
 - Silence, "not marked wrong", a review verdict or a selection made while the owner asks what it means never becomes the owner's decision.
 
 **Before a choice about stored data, ownership, a public contract, new technology or scope goes ahead, find the authority that covers it:** the owner's words, the governing design or an existing contract. A covered choice (an index inside a store the design binds, the repository's established technology, the log's own fallback file) is a decision citing that authority, and the work continues. A commitment no authority covers is an assumption waiting for the owner, and the work that depends on it stops. The excuse to catch: "it's unreleased, so the storage layout is reversible." Other work builds on it before anyone could back out, and reversibility is not authority.
@@ -76,7 +76,7 @@ Completion: the acceptance row's id, and in its text the commit, each check you 
 
 ## 7. Show the owner (the Lead)
 
-IF you are the Lead, at every checkpoint, load `references/show-me.md` and return the page path, the log position it shows, and the checker result. You build the page yourself with Demistify through `presentation-html` and check it with Demistify's checker; no script builds it. A helper skips this step: its stretch ends with its own rows, its Audit and its handback.
+IF you are the Lead, at every checkpoint, load `references/show-me.md` and return the page path, the log position it shows, and the checker result. You build the page yourself with Demistify through `presentation-html` and check it with Demistify's checker; no script builds it.
 
 The page shows only what the log holds. IF a row waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules; then load `presentation-html` and return the decision page built from that brief and its path. The assumption row links that path: write the page before the row, or close the row with a new one that carries the link. The owner's answer is logged as a decision row that quotes the owner's words and closes what it answers.
 
