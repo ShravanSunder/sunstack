@@ -91,8 +91,8 @@ Each obligation names the entities it's about, the requirement it serves, what p
 
 **R9 · U2 · E6.** The page shows every open Assumption with what is assumed, what depends on it, and who acts next. A closed one shows beside the Row that closed it.
 
-**R10 · U2 · E6 E5 E13.** When an agent makes an assumption only the owner can settle (by the skill's stop treatments), it logs it as waiting for the owner before work that builds on it continues. At the next page build it shows under "For you to decide" with its decision page. The owner's answer, quoted in his words, closes it.
-- Fails when such an assumption first reaches the log after dependent work went ahead, or the page shows it anywhere but "For you to decide" while it's open.
+**R10 · U2 · E6 E5 E13.** When an agent makes an assumption only the owner can settle (by the skill's stop treatments), it logs it as waiting for the owner before work that builds on it continues. At the next page build it shows under "For you to decide" as a choice the owner answers on the page: each option offered, the Lead's recommendation shown apart from his answer, and any longer brief one Details away. His answer reaches the Lead through Comments' Copy or Export, and his answer, quoted in his words, closes it.
+- Fails when such an assumption first reaches the log after dependent work went ahead, the page shows it anywhere but "For you to decide" while it's open, or its options are shown as text he can't select.
 
 **R11 · U2 · E6.** If the owner is silent, doesn't mark an assumption wrong, or a review passes, then the assumption stays open on the page; only a Decision that closes it makes it decided.
 
@@ -146,7 +146,7 @@ Each section's header shows its count, stays on screen while its Stories scroll,
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
 - Fails when the same Story, Decision, Shortcut or Check text appears in full twice.
 
-**R22 · U7 · E13 E12 E4.** The page has a Map: one tree in a panel that opens from the right like Comments, from a map button, and never stays open with Comments. The tree shows, in order:
+**R22 · U7 · E13 E12 E4.** The page has a Map: one tree in a panel that opens from the right like Comments, from a map button or the M key, and never stays open with Comments. The tree shows, in order:
 1. what needs the owner: the Stories in For you to decide, and any Story with a Shortcut marked for his look (R13);
 2. "Where the work is": each part of the work, with each Story in it marked by its state (done, needs a fix, waiting on him);
 3. the other three sections, with their Stories.

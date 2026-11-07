@@ -69,12 +69,12 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 - **Reuses:** none.
 
 ### U2 · assumptions (R9 R10 R11)
-- **Proven by:** every open assumption shows with what depends on it. One only you can settle reaches "For you to decide" with its decision page before work that depends on it goes ahead.
+- **Proven by:** every open assumption shows with what depends on it. One only you can settle reaches "For you to decide" as a choice you answer on the page before work that depends on it goes ahead.
 - **Unverified:** a run where no owner-only assumption arises leaves R10 unobserved; the row then waits for one.
 
 - **Reference:** the stop treatments; the assumption rows with their times; the owner's words that close them.
 - **Target and journey:** O1 (temporary) for timing; O2 (lasting, `needed:`) for the page.
-- **Passes when:** each `next:owner` assumption's Router time is before the maker's next dependent row, commit or message (O1); on the page it sits only under "For you to decide" while open, with its decision page linked; no assumption shows as decided unless a decision row closes it (O2). *Fails for* an owner-only assumption first logged after dependent work, or one shown as decided after silence.
+- **Passes when:** each `next:owner` assumption's Router time is before the maker's next dependent row, commit or message (O1); on the page it sits only under "For you to decide" while open, as an `ex-choice` with selectable options, the recommendation apart from the answer, and the selected answer carried by Comments' Copy or Export; no assumption shows as decided unless a decision row closes it (O2). *Fails for* an owner-only assumption first logged after dependent work, or one shown as decided after silence.
 - **Reuses:** none.
 
 ### U3 · shortcuts (R12 R13)
@@ -128,7 +128,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 
 - **Reference:** the approved page; the reference's text.
 - **Target and journey:** O2 (lasting, `needed:`); O4 for the reference's text.
-- **Passes when:** the Map opens from its button as one tree in a drawer from the right and closes when Comments opens; every tree row opens its Story with its folds, and on a phone the drawer closes first; no Story, decision, shortcut or check text appears in full twice; the Lead's next page matches the approved page without anything the reference doesn't say, as the Lead records in its build row. *Fails for* a row that opens nothing, the Map open with Comments, or a page that repeats a Story in two sections.
+- **Passes when:** the Map opens from its button or M as one tree in a drawer from the right and closes when Comments opens; every tree row opens its Story with its folds, and on a phone the drawer closes first; no Story, decision, shortcut or check text appears in full twice; the Lead's next page matches the approved page without anything the reference doesn't say, as the Lead records in its build row. *Fails for* a row that opens nothing, the Map open with Comments, or a page that repeats a Story in two sections.
 - **Reuses:** none.
 
 ### U13 · attention: plain words (R25)
