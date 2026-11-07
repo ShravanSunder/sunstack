@@ -56,7 +56,7 @@ The held-out side is the holder's. Give the holder the examples as they will be 
 
 Before any request, read the development cases on the state their requests will carry, against the questions. It costs minutes; the run it replaces costs a thousand requests, and its answers can't be reused once a meaning changes. A selection is desk-checked before its rule: on its candidates, for its required inclusions and its exclusions; the downstream rule then on the pieces the selection keeps.
 
-1. **Get each case's state.** MUST load `../../skill-rules-config/references/desk-check-state.md` and return each case's state as that recipe rebuilds it, on the case-run overlay with nothing sent, every cut named and the equivalence gap recorded; or the case's gap. On the shipped engine this is always a reconstruction, never the sent bytes; a plain checkout of the case's revision, or a saved request whose inputs have changed since, reads another instrument.
+1. **Get each case's prepared request.** MUST load `../../skill-rules-config/references/prepared-requests.md` and return each development case's prepared request id, or why it wasn't prepared, and every request waiting under `needs_answer`. The prepared request is the exact state and questions the model would receive; read it with `lint show`. On an engine without `--prepare`, stop here: the desk check is blocked, and nothing hand-built stands in for the state.
 2. **Answer each question by its criteria,** as written, for that state. Write the answer down, then walk the tree to its outcome.
 3. **Compare with the label.** Every owner-ruled development case first; then enough other development cases to cover each floor; for a selection, every required inclusion. Never a held-out case.
 4. **Diagnose each mismatch** before changing anything: is the decisive content missing from the state (fix the evidence, with the questions unchanged), or does the meaning put the case on the wrong side of the line (fix the meaning)? Never the label, and never a split into more questions that carry the same line.
@@ -68,12 +68,12 @@ state:     <the decisive content it holds; cut or unavailable fields>
 answers:   <question>: <yes | no | label> because <the words of the criteria it meets>  ...
 outcome:   <route> -> <pass | finding | label | uncertain | selected | rejected>    matches label: yes | no
 if no:     evidence gap | meaning: <the line the criteria draw vs the owner's line>
-gap:       reconstructed on <overlay revision and rulebook commit>; equivalence to the sent state not shown
+request:   <prepared report path> <request id>
 ```
 
 **Worked: the held product-workflow rule.** A quiet ruling: `presentation-html`'s Demistify reference, lines 45–73, which tells the reader to run the public Demistify CLI's documented `embed` commands. Its state holds those commands in full. The first question, "Does this section show concrete material that belongs to one product?", by its criteria: yes, it shows a product's commands and files. The second, "Is all of that material shown only as labelled examples?": no, they are instructions. Outcome: a warning, against a quiet ruling. The diagnosis is the meaning, not the evidence: the state holds everything, and the criteria draw the line at "shows commands", while the owner's is "one application's own procedure, as opposed to a public tool used as documented". The run later gave exactly that warning, at .93, and four more like it.
 
-What the desk check is, and isn't: it's the author reading the instrument's definition against the owner's line, and it catches a meaning that is wrong even when the model reads it exactly as written. It can't show what the model will answer, and it reads a reconstruction, never the bytes the engine sends, so a clean desk check earns the next request, never a claim that the rule works.
+What the desk check is, and isn't: it's the author reading the instrument's definition against the owner's line, on the exact state the model would receive, and it catches a meaning that is wrong even when the model reads it exactly as written. It can't show what the model will answer, so a clean desk check earns the next request, never a claim that the rule works.
 
 ## The runs
 
@@ -115,7 +115,7 @@ Otherwise it is held, unchanged, with what it lacks, outside the active config; 
 Complete when:
 - every judged rule and filter has a case file on real text at fixed revisions, each case with its set and label origin, every owner ruling among them, and none in a `reference`;
 - every example was compared with every development case and none matches, and the holder's held-out attestation is in or named as a gap;
-- the desk-check record has a matching row for every owner-ruled development case and every required inclusion of a selection, each with its equivalence gap, or the mismatches went back to step 4;
+- the desk-check record has a matching row for every owner-ruled development case and every required inclusion of a selection, each with its prepared request id, or the mismatches went back to step 4;
 - its development run and, frozen, its held-out run are in, every case scored or listed with why, the floors and switch-on conditions named as met or lacking;
 - the decision is on, with every condition met, or held, with what it lacks;
 - the receiving agent's call is named as owed to a pressure task, and everything still unproven is named.

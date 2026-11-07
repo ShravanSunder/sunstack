@@ -32,7 +32,7 @@ sunstack lint cases <file> --set held_out
 - For each revision, the run archives the whole repository, initializes Git inside the copy, puts today's config and rule files on top, and runs ordinary lint on the case paths, so a case sees its own folder and every file it loads as they were, judged by today's rules (`crates/sunstack-lint/src/case_runs/mod.rs`).
 - From 0.8.3 the evidence-rule directories today's ast-grep project declares are replaced whole with today's contents, so an obsolete historical rule never loads. A rule directory that covers the repository root or checked text refuses the case with a revision error, rather than deleting history or using a partial directory.
 - A selected path that is, or passes through, a historical symlink is listed `not_judged` and never followed.
-- It asks questions, so it needs the model key.
+- It asks questions, so it needs the model key. With `--prepare <path>` (sunstack 0.9.0, pending release) it builds every case's requests and sends none; `prepared-requests.md` owns that mode and what it reports.
 - It writes nothing ordinary lint reads, and changes no lint input: it is a tool for the rule's author, never a gate on a lint run.
 
 ## Outcomes

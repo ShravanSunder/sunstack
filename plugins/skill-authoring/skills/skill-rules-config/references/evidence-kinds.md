@@ -68,7 +68,7 @@ A cap keeps a request bounded. It never shows that a field holds everything the 
 - `select` has no `reference`, and its question may not read a target field. Fields in `shared` come from `same_file`; they are bounded and sent once per request, and each candidate gets its own bounded view.
 - The model receives consecutive candidates of one file and kind, one question each; requests split to fit the size, question-count and token limits, and share the run's request count and concurrency with rule requests.
 - Under a change scope, selection considers every candidate in a file with a changed hunk or a changed load target.
-- A kind with `select` sends model requests even for `--evidence`, so it needs the key.
+- A config with any `select` sends model requests even for `--evidence` of another kind, so it needs the key.
 
 Tree-shaped selection, a selection decided by several questions with a reference, isn't shipped in 0.8.3.
 
@@ -78,7 +78,7 @@ Tree-shaped selection, a selection decided by several questions with a reference
 
 ## The evidence print
 
-`sunstack lint --config <config> --all --evidence [KIND]` lists the pieces each kind picks, with every field, plus `selections` (each asked candidate with its outcome and yes probability) and `file_counts` (matches, pieces, picked and scan-limited per file and kind, and candidate, asked and outcome counts for selected kinds). It sends no rule question. A selected kind, or a kind `within` one, makes it run the selection, which sends requests: print a selection's candidates for free through `desk-check-state.md`, never by running it.
+`sunstack lint --config <config> --all --evidence [KIND]` lists the pieces each kind picks, with every field, plus `selections` (each asked candidate with its outcome and yes probability) and `file_counts` (matches, pieces, picked and scan-limited per file and kind, and candidate, asked and outcome counts for selected kinds). It sends no rule question. A `select` anywhere in the config makes it run every selection the run needs, which sends requests, whatever kind you print: before a selection's desk check and review, read its candidates through `prepared-requests.md`, never by printing.
 
 Print the kind a rule judges over the rule's whole denominator, and read four things:
 

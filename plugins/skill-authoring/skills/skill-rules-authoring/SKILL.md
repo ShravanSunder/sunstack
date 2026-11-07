@@ -61,17 +61,17 @@ Completion: each of these is stated as kept, with the line that shows it, or `no
 - each finding route says what the agent receives and where it reads next;
 - the proof plan fits the outcome.
 
-### 5. Write it, and print only what's free
+### 5. Write it, and prepare its requests
 
-MUST load `../skill-rules-config/SKILL.md` and use it to write each marker, entry, filter and selection from step 4's design, pair the rulebook, and run the check. Then print the evidence each rule and selection reads, over its whole denominator, only where printing sends nothing: a mechanical kind as it is, and a selected kind, or a kind `within` one, only as its mechanical candidates, through config's desk-check state recipe. Return the check's printed rules with their count, and each print's reading. Mark the narrowest host whose visible words, read with nothing around them, state the standard.
+MUST load `../skill-rules-config/SKILL.md` and use it to write each marker, entry, filter and selection from step 4's design, pair the rulebook, and run the check. Then prepare, without sending: the development case file with `lint cases --set development --prepare`, and an ordinary run over each rule's whole denominator with `--prepare`, for the collection. Return the check's printed rules with their count, the prepared reports' paths, each development case's request id or why it wasn't prepared, and every `needs_answer` entry. Mark the narrowest host whose visible words, read with nothing around them, state the standard.
 
-A model request is paid, whatever the command calls it: printing a selected kind runs its selection, and a lint or case run with an asking rule sends requests. None is sent in steps 5 to 7.
+A model request is paid, whatever the command calls it. Never run a print or a run whose config can dispatch any selection before that selection's desk check and review: a `select` anywhere in the config makes even an evidence print of another kind send requests. None is sent in steps 5 to 7. On an engine without `--prepare` (before 0.9.0), the desk check is blocked: say so, and send nothing in its place.
 
-Completion: the check passes with every intended rule printed and the count right; each printed standard reads as itself; each free print shows every intended piece or candidate with its fields, every cut named; and nothing was sent.
+Completion: the check passes with every intended rule printed and the count right; each printed standard reads as itself; every development case is prepared or listed with why, every request waiting on a selection is listed under `needs_answer`, and nothing was sent.
 
 ### 6. Desk-check before any request
 
-Using `references/cases-and-proof.md`'s desk check, on development cases only, read each case on the state its request will carry, rebuilt by config's desk-check state recipe, against the questions: every owner-ruled development case, and as many others as the floors need. A selection is desk-checked first, on its candidates: every piece a must-warn case needs is a required inclusion and must be selected; a piece its standard doesn't govern that it keeps costs a request, while a required inclusion it drops hides a mistake. Then compare every `reference` example with every development case, and ask the held-out holder for the held-out separation attestation. Return the desk-check record: per case, the decisive content the state holds, what each question's meaning gives it, whether that matches its label, and the equivalence gap the recipe names; per example, whether it matched any development case; and the holder's attestation, or its absence as a named gap.
+Using `references/cases-and-proof.md`'s desk check, on development cases only, read each case's prepared request, the exact state and questions the model would receive, against the questions: every owner-ruled development case, and as many others as the floors need. A selection is desk-checked first, on its candidates' prepared selection requests: every piece a must-warn case needs is a required inclusion and must be selected; a piece its standard doesn't govern that it keeps costs a request, while a required inclusion it drops hides a mistake. A rule request behind a filter gate is read with its gate condition. Then compare every `reference` example with every development case, and ask the held-out holder for the held-out separation attestation. Return the desk-check record: per case, its prepared request id, the decisive content the state holds, what each question's meaning gives it, and whether that matches its label; per example, whether it matched any development case; and the holder's attestation, or its absence as a named gap.
 
 A case whose label the meaning doesn't reproduce goes back to step 4: first look for missing decisive content in the state, then change the meaning. The label never changes, and the question is never split to dodge the case.
 
@@ -87,13 +87,13 @@ Completion: every owner-ruled development case has a row, every row matches its 
 
 ### 7. Review before any request
 
-Start a reviewer with no authoring history on `skill-rules-review`, the way the host starts a reviewer, and give it step 4's design, the entries and config, the free prints, the desk-check record and the development case file; never the held-out set. A selection is reviewed on its candidates' state before any selection request; a rule on a plain kind is reviewed on its pieces; a rule on a selected kind is reviewed again at step 8, on the pieces the selection keeps. Return its verdict and findings. Each accepted finding goes back to the step that owns it, and the review runs again on the correction. If the host can't start a separate agent, stop and say so: a rule reviewed by its author hasn't been reviewed.
+Start a reviewer with no authoring history on `skill-rules-review`, the way the host starts a reviewer, and give it step 4's design, the entries and config, the prepared reports, the desk-check record and the development case file; never the held-out set. A selection is reviewed on its candidates' state before any selection request; a rule on a plain kind is reviewed on its pieces; a rule on a selected kind is reviewed again at step 8, on the pieces the selection keeps. Return its verdict and findings. Each accepted finding goes back to the step that owns it, and the review runs again on the correction. If the host can't start a separate agent, stop and say so: a rule reviewed by its author hasn't been reviewed.
 
 Completion: the verdict is `ready` for the next request (a selection's first run, or a rule's development cases), or every accepted finding is back with its owning step.
 
 ### 8. Run the selection first, when there is one
 
-A selection's first requests are a paid development step, sent only after step 7's `ready` for it. Print the selected kind over the development cases' files, on the case-run overlay, and read each candidate's outcome against the selection's cases: every required inclusion must be selected, an uncertain or incomplete one counting as unmet; the pieces it kept that its standard doesn't govern are counted as their cost. A required inclusion that wasn't selected goes back to step 4; the rule waits. Then desk-check the downstream rule on the selected pieces, as step 6 does, and have it reviewed as step 7 does, before any rule case runs. A rule on a kind with no selection skips this step.
+A selection's first requests are a paid development step, sent only after step 7's `ready` for it. Run it over the development cases' files and read each candidate's outcome against the selection's cases: every required inclusion must be selected, an uncertain or incomplete one counting as unmet; the pieces it kept that its standard doesn't govern are counted as their cost. A required inclusion that wasn't selected goes back to step 4; the rule waits. Then prepare the downstream rule again, on the selected pieces, desk-check it as step 6 does and have it reviewed as step 7 does, before any rule case runs. If its requests still sit under `needs_answer`, the desk check is blocked on the engine, as `skill-rules-config`'s prepared-requests reference says. A rule on a kind with no selection skips this step.
 
 Completion: every required inclusion was selected and every outcome is counted, and the downstream rule's desk check and review on the selected pieces are in; or the selection is back with step 4, with what it dropped.
 
@@ -128,9 +128,9 @@ The run is not done while any of these hold:
 - a question's meaning was repaired by splitting it into more questions, or a label was changed to fit a question;
 - a chunk was judged by a tree where its shape decides, or a judged rule asks of every piece of a kind its standard mostly doesn't cover, with no gate;
 - a selection drops a required inclusion, or its coverage is claimed before its run on the development cases;
-- a model request (a selected kind's print, a selection run, a lint or case run with an asking rule) was sent before that instrument's desk check was clean and its independent review returned `ready`;
+- a model request (any print or run whose config can dispatch a selection, a selection run, a lint or case run with an asking rule) was sent before that instrument's desk check was clean and its independent review returned `ready`;
 - a rule case ran before the downstream rule was desk-checked and reviewed on the selected pieces;
-- a reconstructed desk-check state was reported as the sent state, without its equivalence gap;
+- a desk check read anything but a prepared or saved request, or went ahead on an engine without `--prepare`;
 - a route whose evidence can't settle its standard ends `pass`, or a path that reads a model's answer can reach an `error` finding;
 - a held-out case was read, desk-checked, compared or tuned on by whoever tunes the rule, or the holder's separation attestation is missing and not named as a gap;
 - a judged rule warns before its cases meet the floors, or a held rule was switched on;

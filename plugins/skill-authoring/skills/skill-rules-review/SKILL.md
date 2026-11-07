@@ -33,7 +33,7 @@ Name the target (the rule or filter, its rulebook file, the config, the revision
 - **development:** its development results are in;
 - **switch-on:** someone proposes to activate it.
 
-Then name each input supplied and each missing: the design; the entries and config; the evidence print; the desk-check record with each case's state as `decision-model-review` defines it; the development case file; the held-out holder's separation attestation; the source of the owner's rulings; at development and switch-on, the saved report with its requests; at switch-on, the held-out results. A held-out case's contents are never an input.
+Then name each input supplied and each missing: the design; the entries and config; the evidence print; the desk-check record with each case's prepared request; the development case file; the held-out holder's separation attestation; the source of the owner's rulings; at development and switch-on, the saved report with its requests; at switch-on, the held-out results. A held-out case's contents are never an input.
 
 Completion: target, requester, independence and stage are stated, and every input is named as supplied or missing, with who restores it.
 
@@ -67,7 +67,7 @@ Return `ready`, `needs-revision`, `blocked-input` or `not-converging` by the sch
 - **development:** ready to freeze and run the held-out set once;
 - **switch-on:** every switch-on condition holds, each with the run that shows it.
 
-`owner-rulings` that is `partial` or `blocked` holds back `ready` at every stage: the owner-ruled cases' states are what a reading of the question text can't stand in for. Each comes from `skill-rules-config`'s desk-check state recipe, which sends nothing, a selection's candidates included; never ask for a selection run, or any other request, to get them. A rebuilt state with its equivalence gap named completes the input, and the gap goes in the verdict's unavailable proof.
+`owner-rulings` that is `partial` or `blocked` holds back `ready` at every stage: the owner-ruled cases' prepared requests are what a reading of the question text can't stand in for. Each comes from `lint cases --set development --prepare`, which sends nothing, a selection's candidates included; never ask for a selection run, or any other request, to see a state. On an engine without `--prepare`, the check stays `partial` and the verdict says the review waits for it.
 
 Completion: the verdict, what it means at this stage, the probes owed and the unavailable proof are returned.
 
@@ -78,7 +78,7 @@ The review is not done while any of these hold:
 - a check from either skill has no status, or a `partial` or `blocked` one doesn't name its missing input;
 - `ready` returned while `owner-rulings` is `partial` or `blocked`, or without saying what it means at this stage;
 - an owner ruling counted as passing from the question's text, with its state unread;
-- a request asked for, or sent, to prepare a state the recipe rebuilds for free;
+- a request asked for, or sent, to see a state `--prepare` builds without sending;
 - a held-out case read, or a model request sent, by the reviewer;
 - a finding without its anchor or the standard it breaks;
 - an edit to the rule, its entries, its cases or its config.
