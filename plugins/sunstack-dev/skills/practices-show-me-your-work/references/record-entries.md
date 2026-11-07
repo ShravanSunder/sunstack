@@ -125,7 +125,7 @@ Show: table
 Covers: 01a1b412-aac2-7459-b952-9e41a92c1baa, 01a1b412-aac3-7c7b-bdd3-ba9d84e9adf3, …
 ```
 
-Bad: an early story such as `01a1b5b0-6f51` (2:1827), which named the rows it covered only by its four links. A reader can't tell a cited row from a linked one, and a Story covering 55 rows can't link them all.
+Bad: an early story such as `01a1b5b0-6f51` (2:1827), which named the rows it covered only by its four links. A reader can't tell a cited row from a linked one, and a Story covering 55 rows can't link them all. A current Story like this gets a new version in this shape before the page uses it, as `show-me.md`'s "Write the Stories" step 3 says; the old row is never edited.
 
 **Audit.** Good, `01a1b404-e3cd` (the Implementer's audit at its handback):
 
