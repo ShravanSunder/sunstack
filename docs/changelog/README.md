@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-06 Show me your work: every agent logs its own work, and the owner's page](2026-11-06-show-me-your-work-log-and-page.md)
 - [2026-11-06 HTML authoring audit repairs (workflow side)](2026-11-06-html-authoring-audit-repairs.md)
 - [2026-11-06 presentation-html keeps supplied meaning](2026-11-06-presentation-html-fidelity.md)
 - [2026-11-05 Kind-gated rule scenarios](2026-11-05-kind-gated-scenarios.md)

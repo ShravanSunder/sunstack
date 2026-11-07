@@ -6,7 +6,7 @@ This reference owns the record when the work has no Router project or work threa
 
 Entries keep the shape `record-entries.md` owns, one JSON entry per line, in a memory-logs file for the work: `work-trails/<repo>/<yyyy-mm-dd-work-label>/entries-<writer>.jsonl`. Before the first write, load memory-logs' `AGENTS.md` and its `use-memory-logs` skill and return the folder and writer they allow.
 
-The live page is built from these files the same way it is built from the work trail: MUST load `live-page.md` and return the page path, the files it shows and the checker result.
+The Lead builds the owner's page from these files the same way it builds it from the work trail: IF you are the Lead, load `show-me.md` and return the page path, the files it shows and the checker result.
 
 Memory-logs holds the record here because it is the owner's home for decisions and shown work; session-logs keeps conversations and raw outputs only. Product ADRs, and specs, plans and debug runbooks that the owner asked for or that owner-requested work produces, stay in their repository homes. A formal handoff packet needs the owner's explicit request, and a chat-only or no-files direction wins. Never invent an id.
 

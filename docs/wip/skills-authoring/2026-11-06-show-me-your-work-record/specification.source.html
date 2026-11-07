@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Specification</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Show me your work: the redesign</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+    <a href="skill-design.html">Skill design</a>
+    <a href="skill-verification.html">Skill verification</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+
+<h1>Specification</h1>
+
+<p>What must be observably true, and what decides pass or fail: your page as a sketch first, then the obligations and the entities they're written over.</p>
+
+<ex-tabs label="Specification" data-width="canvas">
+<section id="tab-sketch" label="Your page, sketched" icon="globe">
+
+<h2 id="sketch">Your page, sketched from this project's log</h2>
+
+<p><small>Real items from the log of this work (Router project 01a1635f, tag design-documents, through position 2:1101), chosen to show each part of the page; not a full count, and not the final look.</small></p>
+
+<h3 id="sketch-needs-you">What needs you</h3>
+
+<ex-mermaid id="sketch-counts" label="What needs you" zoom="none"><script type="text/plain">
+flowchart TB
+  sketchWaiting["1<br/>waiting for you"]
+  sketchShortcut["1<br/>shortcut worth your look"]
+  sketchMissed["3<br/>missed items open"]
+  sketchNoAcceptance["1<br/>finished work with<br/>no acceptance recorded"]
+</script></ex-mermaid>
+
+<p><small>Each box opens its item, as the Program Design chose: a diagram node is the one thing Demistify can make clickable.</small></p>
+
+<h3 id="sketch-for-you">For you to decide · 1</h3>
+
+<ex-card id="sketchWaiting" title="Workstream labels: do these names read?" tone="question" icon="user">
+<p>Rows get grouped under plain names the Lead picks when work starts, like "Requirements", "page experiments" and "PR #194". You didn't know what "pieces" meant, so that word is gone.</p>
+<p><small>Assumed by the Lead · what depends on it: how the page groups rows · on the real page, its decision page opens from here.</small></p>
+</ex-card>
+
+<h3 id="sketch-done">What's done / what's next · 2 workstreams</h3>
+
+<ex-card title="Requirements: rewritten around your model; checked" tone="done" icon="shield-check">
+<p>Two parts (the log, and showing you); the four things you want to see, plus what was missed; agents log their own work as they go; the log is Router's work trail. An evaluator checked the page and found four problems, all fixed.</p>
+<p><small>Done: the rewrite, and Terra's check with all four findings fixed · next: you read it when you like · logged by the Lead and by Terra.</small></p>
+</ex-card>
+
+<ex-card title="Specification: drafted; under review" tone="question" icon="clock">
+<p>What must be true for each requirement, and what decides pass or fail.</p>
+<p><small>Done: the draft · next: the evaluator's check, then the next document · logged by the Lead.</small></p>
+</ex-card>
+
+<h3 id="sketch-changed">What changed and why · 1 shortcut, 4 decisions</h3>
+
+<ex-card id="sketchShortcut" title="Shortcut: PR #194 merged without running the repository's test suite" tone="risk" icon="path">
+<ul>
+<li><strong>What should have happened:</strong> the repository's skill tests pass before a skill PR is called ready.</li>
+<li><strong>What happened instead:</strong> the Lead's merge proof ran typecheck, the rules and static checks, not the test suite, and the repository has no CI to run it; two tests went red on main.</li>
+<li><strong>Why:</strong> not recorded at the time, which is itself a gap.</li>
+<li><strong>Approved by you?</strong> No; the skipped suite wasn't in the log when you said "merge 194".</li>
+<li><strong>Closed:</strong> fixed in #197 (main green: 316 passed, 4 skipped).</li>
+</ul>
+<p><small>Taken by the Lead · logged by the Lead, after the component Lead found it · also under "What was missed".</small></p>
+</ex-card>
+
+<ex-grid cols="2">
+<ex-card title="Yours, or worth your look · 2" tone="decision" icon="user">
+<ul>
+<li>The log is Router's work trail, not CSV or JSONL. <small>You, 6 Nov · logged by the Lead</small></li>
+<li>Two parts: the skill logs; a reference shows you, with Demistify. <small>You, 6 Nov · logged by the Lead</small></li>
+</ul>
+</ex-card>
+<ex-card title="Agents' own calls · 2" tone="note" icon="gear">
+<ul>
+<li>The row helper saves a request id per row and reuses it on a retry. <small>Lead · own call</small></li>
+<li>The requirement tables keep four columns so they fit the screen. <small>Lead · own call</small></li>
+</ul>
+</ex-card>
+</ex-grid>
+
+<h3 id="sketch-verified">What was verified, and what was missed</h3>
+
+<ex-card title="Requirements page: quotes, counts and rendering" tone="done" icon="test-tube">
+<p><strong>Result:</strong> four findings, all fixed. <strong>Not covered:</strong> your own reading of it; future implementation.</p>
+<p><small>Run by Terra · logged first-hand by Terra.</small></p>
+</ex-card>
+
+<ex-card title="Terra's earlier checks of the page experiments" tone="question" icon="test-tube">
+<p>Terra ran them; the Lead logged them. 25 of the Lead's 49 check rows mention an evaluator, which doesn't make each one an evaluator's check; the two opened, Terra's checks of pages I and J (01a1a98d-0d00, 01a1ab35-77b3), are Terra's runs written by the Lead. The Implementer logged its own 7.</p>
+<p><small>Reported second-hand by the Lead.</small></p>
+</ex-card>
+
+<ex-card id="sketchNoAcceptance" title="PR #194: no acceptance recorded" tone="question" icon="clock">
+<p>It merged on your "merge 194", and later work fixed what it broke, but no acceptance in this log names its commit, the checks read, or what stays unverified.</p>
+</ex-card>
+
+<h4 id="sketch-missed">What was missed · 3 open</h4>
+
+<ex-card id="sketchMissed" title="Missed: the skipped test suite wasn't logged when it was skipped" tone="risk" icon="bell">
+<p><small>Found by the component Lead, after the merge · affects: the #194 shortcut above.</small></p>
+</ex-card>
+
+<ex-card title="Missed: a question for you was logged 23 minutes after it arose" tone="risk" icon="bell">
+<p><small>Found by the Lead, reading the log back · affects: G10, which you settled with "merge 194".</small></p>
+</ex-card>
+
+<ex-card title="Missed: Terra's checks logged by the Lead instead of by Terra" tone="risk" icon="bell">
+<p><small>Found by counting who wrote each check row and opening examples · affects: which checks you can trust first-hand.</small></p>
+</ex-card>
+
+<ex-callout title="Not audited" tone="question" icon="test-tube">
+<p>No agent has audited its own stretch of this work yet, so this page can't say nothing else was missed.</p>
+</ex-callout>
+
+<h3 id="sketch-who">Who wrote the log, and when</h3>
+
+<ex-mermaid id="who-wrote-chart" label="Rows written per day, by writer"><script type="text/plain">
+xychart-beta
+  title "Rows written per day, by writer"
+  x-axis ["3 Nov", "4 Nov", "5 Nov", "6 Nov"]
+  y-axis "Rows" 0 --> 70
+  bar "Lead" [53, 68, 64, 58]
+  bar "Sidekick" [0, 14, 5, 5]
+  bar "Evaluator" [0, 0, 0, 1]
+</script></ex-mermaid>
+
+<p>By Router's writer stamp, through position 2:1101 (Eastern days): the Lead wrote 53, 68, 64 and 58 rows; the Implementer Sidekick 0, 14, 5 and 5; Terra, the evaluator, 0, 0, 0 and 1. Of 268 rows, 243 are the Lead's. The chart shows whose work is in the log and how much; it can't show whether a row came when the work happened, which only an audit can. On the real page, each writer's rows for a day open from a values table beside the chart.</p>
+
+</section>
+<section id="tab-obligations" label="Obligations" icon="shield-check">
+<ex-markdown id="spec-obligations" label="Obligations" src="./specification/obligations.md"></ex-markdown>
+</section>
+<section id="tab-entities" label="Entities" icon="database">
+<ex-markdown id="spec-entities" label="Entities" src="./specification/entities.md"></ex-markdown>
+</section>
+<section id="tab-standards" label="Standards the skill states" icon="book-open">
+<ex-markdown id="spec-standards" label="The standards the skill states" src="./specification/skill-standards.md"></ex-markdown>
+</section>
+</ex-tabs>
+
+</ex-document>
+</body>
+</html>

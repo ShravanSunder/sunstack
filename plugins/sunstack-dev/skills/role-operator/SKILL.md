@@ -24,7 +24,9 @@ Report what happened: the target, the output, the exit code where there is one, 
 - Follow the exact procedure, or the collection and extraction criteria, in your packet and return per-step observations, candidate material, source pointers and exceptions.
 - IF the prescribed action uses a named tool, load that tool's manual and return its output, the comparison with the expected result, and any exception.
 
-The Researcher who commissioned a collection job owns the research practice: framing the question, checking decisive anchors and synthesizing. You contribute your results to your commissioner's trace and open no trace of your own.
+The Researcher who commissioned a collection job owns the research practice: framing the question, checking decisive anchors and synthesizing. You contribute your results to your commissioner and open no work log of your own.
+
+IF the packet's `workLog` is a work trail, load `practices-show-me-your-work` and return the log you write to and the position your stretch starts at. Write your own rows there (each check you ran, any shortcut from the prescribed procedure) with the packet's two-step write, still opening no work log of your own.
 
 ## Boundary
 
