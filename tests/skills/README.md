@@ -123,8 +123,10 @@ provider calls.
 contents. Human output gives short file:line summaries and result IDs. Open one
 result with `sunstack lint show <file> <id>`; no second model run is needed.
 
-The active rulebook has the `kind` filter, the product-workflow rule and three
-mechanical description checks. Held entries and their original marker/standard
+The active rulebook has only three mechanical description checks, with no
+filter or judged rule. The kind filter and K002 are retained unchanged under
+`rules/held/`; its README records the failed development evidence and what
+they lack. No held-out run was made; the old-rulebook quality comparison is deferred. Held entries and their original marker/standard
 locations live under the rulebook's `held/` directory, outside its configured
 pairs. Entirely held pairs retain their original marked standard sentences, markers and rule JSON. Teaching elsewhere in those Markdown files can evolve independently.
 
@@ -135,8 +137,11 @@ the original labels, U16 rulings, excluded rows and the fix-history search.
 Rule and filter cases share one file because native bar assessment checks every
 configured tree and resolves each bar's development-case IDs within that file.
 The native `sunstack lint cases <file> --set development` command evaluates
-development cases. The Lead runs the frozen held-out set once and compares it with the old
-rulebook on the same pinned model version. No case result changes ordinary lint.
+development cases for a configured candidate. The current mechanical-only config
+does not declare these held case subjects. A corrected candidate needs new
+development evidence and a freeze before the Lead runs its held-out set once
+and compares it with the old rulebook on the same pinned model version. No case
+result changes ordinary lint.
 Unlabelled or disputed cases stay listed outside the scored inputs; they never
 receive guessed expected outcomes.
 

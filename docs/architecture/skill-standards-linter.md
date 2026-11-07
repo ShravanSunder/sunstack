@@ -8,25 +8,19 @@ The reusable Rust engine, `sunstack` executable and npm distribution live in [Su
 
 An end-of-line marker such as `<!-- K002 -->` binds a Markdown standard to its
 JSON entry. The [config](../../plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json)
-pairs the general-skill and description standards with their entries. It holds
-one judged product-workflow rule and three mechanical description checks.
-The `kind` filter classifies each skill folder once; the product-workflow rule
-runs only for general, role and domain skills. Other judged entries and their
-markers are held outside these active pairs.
+pairs only the description standards with three mechanical description checks.
+No filter or judged rule is active. The kind filter and product-workflow rule
+are retained unchanged under `rules/held/` after development run 2 failed the
+switch-on conditions. The [held note](../../plugins/skill-authoring/skills/domain-skill-crafting/rules/held/README.md)
+names the evaluated source, model, counts and what each tree lacks. No held-out
+run was made; the old-rulebook quality comparison is deferred.
 
-The skill evidence kind collects the description and an opening from the body
-through the end of the first H2 section. The kind filter reads those fields and
-its authored reference, with no folder name in request state. Two independent
-three-option questions feed its tree; an answer below its bar ends unsure and
-the folder's gated pieces are skipped and listed.
-
-The product-workflow rule reads each section's body, heading and headings, plus
-the openings of files or skills it loads. Three Noul questions ask whether
-product material occurs, whether all of it is labelled as examples, and whether
-it quotes a real product mistake. Code combines the answers. Both pass routes
-require complete body and loaded openings. Known unlabelled material or a quoted
-real mistake gives a nudge to read and decide where it belongs. Reference holds
-the owner's examples, their expected answers and reasons.
+The held kind filter reads the description and the body through the end of the
+first H2 section, with its authored reference and no folder name in state. Two
+independent three-option questions feed its tree. The held product-workflow
+rule reads section text and loaded openings; its three Noul questions and
+complete-input guards are preserved for a corrected attempt. Keeping these
+artifacts is not activation: ordinary lint loads only configured pairs.
 
 ## Run and inspect
 

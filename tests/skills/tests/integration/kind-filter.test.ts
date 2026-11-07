@@ -3,6 +3,7 @@ import { afterEach, expect, test } from "vitest";
 import {
   cleanupRulebookFixtures,
   configRelative,
+  kitRelative,
   createRulebookFixture,
   installPinnedFile,
   nativeReportSchema,
@@ -15,7 +16,7 @@ import {
 
 afterEach(cleanupRulebookFixtures);
 
-test("the authored kind tree sends description and the complete first section once, without location", async () => {
+test("the held authored kind tree sends description and the complete first section once, without location", async () => {
   const root = createRulebookFixture();
   const file = "plugins/sunstack-dev/skills/role-operator/SKILL.md";
   const source = installPinnedFile(root, "24fa3d925927278100aced2e7c4e26eb0be81fba", file);
@@ -24,6 +25,23 @@ test("the authored kind tree sends description and the complete first section on
     action: async (endpoint, requests) => {
       const filename = path.join(root, configRelative);
       const config = readJson(filename);
+      // This disposable fixture restores the evaluated consumer so the held filter is used.
+      // The shipped config remains mechanical-only; preservation is checked separately.
+      const evaluated = "437632d42610bdbe8365d4938e4098cd660b4f4a";
+      installPinnedFile(root, evaluated, `${kitRelative}/general-skill.rules.json`);
+      installPinnedFile(
+        root,
+        evaluated,
+        "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md",
+      );
+      config["rulebook"] = [
+        {
+          markdown: "../references/descriptions-and-invocation.md",
+          rules: "descriptions-and-invocation.rules.json",
+        },
+        { markdown: "../references/general-skill.md", rules: "general-skill.rules.json" },
+      ];
+      config["filters"] = { kind: readJson(path.join(root, kitRelative, "held/kind.filter.json")) };
       config["decision_model"] = { model: "jev-latest", endpoint };
       writeJson(filename, config);
 
