@@ -7,5 +7,5 @@
 - Real scenarios are converted to revision-bound native rule/filter cases with explicit label origins, unassessed bars and a provenance sidecar; disputed or unlabelled rows stay unscored. Held-out cases were not run.
 - Plugin slash commands, hooks and plugin names are unchanged. Skill-authoring's three plugin manifests and Claude/Cursor marketplace versions are updated; Codex marketplace paths are unchanged.
 - Maintainer docs: AGENTS.md, the linter architecture page and tests/skills README describe the direct command.
-- Candidate validation: 220 tests pass; TypeScript/OXC/format, native `--check`/`--rules` pass. Released 0.8.2 pin and installed-package proof remain pending.
+- Validation: exact `@sunstack/cli` 0.8.2 frozen install passes supply-chain checks; installed-CLI suite 220/220, TypeScript/OXC/format, native `--check`/`--rules` and marketplace validation pass. Keyed quality remains separate.
 - Codex/Claude installed-cache refresh: not performed; source verification only.
