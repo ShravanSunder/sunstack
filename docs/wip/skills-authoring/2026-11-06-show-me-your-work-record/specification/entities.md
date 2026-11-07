@@ -105,10 +105,10 @@ Every Row is one kind: E5 Decision, E6 Assumption, E7 Shortcut, E8 Check, E9 Acc
 
 **E12 Story.** The Lead's account of one subject, for the owner.
 - Same when: one subject in one Workstream. A rewrite is a new version that replaces the old.
-- Relationships: written by the Lead; cites the Rows it covers; sits in one section of the Page.
-- Always true: every line is said by a Row it cites.
+- Relationships: written by the Lead; cites the Rows it covers, naming every one in a covered-Rows list and linking up to 16 of them, because one Row carries at most 16 links (Router; probe, 7 Nov); sits in one section of the Page; belongs to one part of the work in the Map.
+- Always true: every line is said by a Row it cites, in the owner's everyday words (R25).
 - States: current → replaced.
-- Replaces: "summary". Basis: U6, U9.
+- Replaces: "summary". Basis: U6, U9, U13.
 
 **E13 Page.** The owner's view of one Work.
 - Same when: one per Work, rebuilt at each checkpoint, never edited by hand.

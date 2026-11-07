@@ -1,6 +1,6 @@
 # Verification Design: show me your work, how each requirement will be shown to hold
 
-This is a plan. Nothing in it has been observed. For each requirement (U1–U12), it says what will be done and seen, against what, on which target, what a wrong build looks like, and what stays unverified. It links to the [Specification](specification/index.md)'s obligations (R1–R23) and proofs (V1–V13), and to the [Program Design](program-design.md)'s seams.
+This is a plan. Nothing in it has been observed. For each requirement (U1–U13), it says what will be done and seen, against what, on which target, what a wrong build looks like, and what stays unverified. It links to the [Specification](specification/index.md)'s obligations (R1–R25) and proofs (V1–V15), and to the [Program Design](program-design.md)'s seams.
 
 ## What already observes this
 
@@ -19,14 +19,15 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 
 **O2 · the owner's page for that run, checked (lasting; journey `needed:`).**
 - *Entry and target:* the Lead's page for O1's work, as the owner opens it: a local file in Chrome, headless, dark and light, at 1280 and 1600 wide and at a phone width of 420.
-- *What it reads:* each top-band count is clicked, and must open the card that holds its items, with the number equal to those items.
-  - The four sections come in order. "What's done / what's next" groups by Workstream. The two decision columns are there, and so are verification with acceptance status, what was missed with audit status, and the writer chart with its linked values table.
-  - No item appears in full twice.
-  - The stated log position matches the trail, and the counts match the trail through that position.
-  - At 420 wide, the sections, both columns and the values table stay readable: nothing clipped, wide tables scrolling only inside their own frames.
-- *Boundary case it includes:* two Writers with the same role writing on the same day, including two whose session ids share the same short prefix; each table cell must open only its own Writer's rows, by the full session id.
+- *What it reads:* the page is compared with the approved page (`p1b-approved-2026-11-07.html`, sha256 `ece32b0cdb2a6fe4…`).
+  - The four sections come in order, each header staying on screen with its expand/collapse control on the right. Each Story has its headline, Happened / For you / Next, at most one picture or table, and More and its Rows folded. The two decision columns are there, and so are verification with acceptance status and what was missed with audit status.
+  - The Map opens from its button as one tree in a drawer from the right, never open with Comments; every tree row opens its Story, with its folds, and on a phone the drawer closes first.
+  - No item appears in full twice. Every Story line is in plain words (V15).
+  - The stated log position matches the trail, and every Row through it sits in exactly one Story or in the "not in a story yet" list.
+  - At 420 wide, the sections, Stories and the Map stay readable: nothing clipped, wide tables scrolling only inside their own frames.
+- *Boundary case it includes:* a Story covering more than 16 Rows; it links 16 and names every one in its covered-Rows list, and its folded Rows show all of them.
 - *Lifetime:* lasting, because every page version is checked before the owner sees it. A `verify-` journey with a self-describing script would replace today's hand checks; building it belongs to `practices-verification-maintenance`.
-- *Wrong build it catches:* a count that opens nothing, or the wrong card; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; the chart offered as proof of timely logging; two same-role Writers merged into one bar or link; a page that clips at phone width.
+- *Wrong build it catches:* a section out of order; a Story missing a row or carrying two pictures; a Map row that opens nothing; the Map open with Comments; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; a working label in a Story; a page that clips at phone width.
 
 **O3 · the packet contract test (automated; reused, extended by the plan).**
 - `agent-job-packet.test.ts` parses one packet with `workLog` set to a work trail and one with `noRecord`, and rejects a packet with none.
@@ -76,7 +77,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 
 - **Reference:** each agent's own history; the plan's and repository's required steps; the owner's decisions.
 - **Target and journey:** O1 (temporary); O2 (lasting, `needed:`).
-- **Passes when:** each departure in an agent's history has a `shortcut` row by that agent before its next dependent action; an uncovered one is marked on the page and counted in the top band; one first logged by someone else also shows as a Missed item. *Fails for* a skipped required check, like #194's test suite, with no shortcut row by the agent that skipped it.
+- **Passes when:** each departure in an agent's history has a `shortcut` row by that agent before its next dependent action; an uncovered one is marked for your look under What changed and why; one first logged by someone else also shows as a Missed item. *Fails for* a skipped required check, like #194's test suite, with no shortcut row by the agent that skipped it.
 - **Reuses:** none.
 
 ### U4 · verification (R14 R15 R16)
@@ -107,21 +108,30 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 - **Reuses:** none.
 
 ### U6 · attention: what needs you (R19 R20)
-- **Proven by:** your page opens on four counts you can click, each opening the items it counts, then the four sections in your order, with routine items folded.
-- **Unverified:** keyboard and screen-reader use of the count nodes.
+- **Proven by:** your page is the design you approved: your four sections in order with headers that stay on screen, and each Story as a headline, three rows, one picture or table, the rest folded.
+- **Unverified:** keyboard and screen-reader use of the section controls.
 
-- **Reference:** the trail through the page's position; page O's sections.
+- **Reference:** the approved page; the trail through the page's position.
 - **Target and journey:** O2, lasting, `needed:`.
-- **Passes when:** clicking each count node opens the card whose items it counts, and the number equals those items; the sections come in the order For you to decide, What's done / what's next, What changed and why, What was verified; each routine story sits folded at the end of its section. *Fails for* a count that opens nothing or the wrong card, or a section out of order.
-- **Reuses:** the linked-counts experiment (`01a1b2d2-0983`) showed the mechanism once; it's evidence for the design, not for this row.
+- **Passes when:** the sections come in the order For you to decide, What's done / what's next, What changed and why, What was verified, and what was missed; each header stays on screen while its Stories scroll and expands or collapses them; each Story has its headline, three rows, at most one picture or table, and More and its Rows folded; each routine Story sits folded at the end of its section. *Fails for* a section out of order, a Story missing a row, or a Story with two pictures.
+- **Reuses:** none.
 
-### U7 · attention: a display beyond the log (R21 R22 R23)
-- **Proven by:** each item appears in full once, and the writer chart shows whose work is in the log. The Lead's next page is built from the show-me reference alone.
+### U7 · attention: the Map (R21 R22 R23)
+- **Proven by:** the Map opens from the right as one tree and every row takes you to its Story; each item appears in full once. The Lead's next page is built from the show-me reference alone.
 - **Unverified:** a fresh agent building from the reference, which is outside this change.
 
-- **Reference:** the trail by writer stamp; the reference's text.
+- **Reference:** the approved page; the reference's text.
 - **Target and journey:** O2 (lasting, `needed:`); O4 for the reference's text.
-- **Passes when:** no story, decision, shortcut or check text appears in full twice; the chart's bars and its values table equal each writer's rows per day through the stated position, and clicking each table cell opens that writer's rows for that day; the chart says it shows attribution and volume, not timing; the Lead's next page meets U1–U6's rows without anything the reference doesn't say, as the Lead records in its build row. *Fails for* a page that repeats a story in two sections, or a chart that disagrees with the stamps.
+- **Passes when:** the Map opens from its button as one tree in a drawer from the right and closes when Comments opens; every tree row opens its Story with its folds, and on a phone the drawer closes first; no Story, decision, shortcut or check text appears in full twice; the Lead's next page matches the approved page without anything the reference doesn't say, as the Lead records in its build row. *Fails for* a row that opens nothing, the Map open with Comments, or a page that repeats a Story in two sections.
+- **Reuses:** none.
+
+### U13 · attention: plain words (R25)
+- **Proven by:** every Story line reads in your everyday words; none needs you to have watched the agents work.
+- **Unverified:** words that are plain to you but that no checker knows; your own reading (O6) settles those.
+
+- **Reference:** the Story lines; the working labels named in R25.
+- **Target and journey:** O2, lasting, `needed:`.
+- **Passes when:** no Story line names a run number, packet, keyed rule, correction round or role title you haven't used, and each line says what the thing means for you. *Fails for* "Runs 1–9: built" or "keyed rules: 0 errors".
 - **Reuses:** none.
 
 ### U8 · logging: every agent logs as it goes (R1 R2)
@@ -177,8 +187,9 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U12)
 | U4 | R14 R15 R16 | proof rows' writer against `Ran by:`; verified section | O1, O2 | the run; the page check | sign-offs outside the log |
 | U5 | R8 R17 R18 | audit and missed rows per writer against the page | O1, O2 | the run; the page check | what no audit or review notices |
 | U12 | R24 | the section's Workstreams against the started parts | O2, O1 | the page check; the run | work with no written plan |
-| U6 | R19 R20 | clicking each count node; section order | O2 | the page check | keyboard and screen reader |
-| U7 | R21 R22 R23 | duplicate text; chart and table against stamps; the reference | O2, O4 | the page check; skill files | fresh-agent build |
+| U6 | R19 R20 | section order, headers and Story shape against the approved page | O2 | the page check | keyboard and screen reader |
+| U7 | R21 R22 R23 | the Map's rows and drawer; duplicate text; the reference | O2, O4 | the page check; skill files | fresh-agent build |
+| U13 | R25 | Story lines read for working labels | O2, O6 | the page check; your reading | words only you can judge |
 | U8 | R1 R2 | writer stamp and time against history; packet, handback, trail | O1, O3, O4 | the run; the packet test | Workers without Router; Cursor |
 | U9 | R4 | each story's links | O2 | the page check | the owner's own reading (O6) |
 | U10 | R3 | commands as run; the trail after a forced unclear result | O1, O5 | the run; a probe | token cost |

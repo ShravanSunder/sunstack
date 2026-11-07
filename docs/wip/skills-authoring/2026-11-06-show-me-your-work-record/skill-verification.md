@@ -14,7 +14,8 @@ U1–U12 all take the same route. Each is an outcome on real work: what agents d
 | U4 verification | eval | checks logged by their runners; acceptance status on the page | O1, O2 |
 | U5 missed | eval | Audit and Missed rows; "not audited" on the page | O1, O2 |
 | U12 going-on | eval | each started part of the plan shown as a workstream with done, next and checks | O2, O1 |
-| U6, U7 attention | eval | the page's top band, sections, one-copy rule and writer chart | O2 |
+| U6, U7 attention | eval | the page against the approved design: sections, Story shape, the Map, one-copy rule | O2 |
+| U13 attention | eval | Story lines read for working labels | O2, O6 |
 | U8 logging | eval | each helper's rows by writer stamp and time | O1 |
 | U9 logging | eval | each story line backed by a cited row | O2 |
 | U10 logging | eval for the commands as run; the retry mechanism by the O5 probe in this PR | commands carry no looked-up id; a retry leaves one row | O1, O5 |
@@ -31,11 +32,11 @@ U1–U12 all take the same route. Each is an outcome on real work: what agents d
 | S5 second-hand check: `Ran by:` and a Missed row | review check on `record-entries.md` and run 5's line; eval (O1) | as S4 |
 | S6 audit before handback and at each checkpoint | review check on run 1's new step; eval (O1) | the step's presence needs reading; doing it is behavior |
 | S7 the commission names the log; handback checked | mechanical (the O3 contract test: a packet without `workLog` is rejected); review check on run 2's handback line; eval (O1) | the schema field is a deterministic property of the packet; the handback check is behavior |
-| S8 the page's top, sections and workstreams | review check on `show-me.md`; eval (O2) | the reference's teaching needs reading; the page itself exists only on real work |
+| S8 the page is the approved design (page O and the Map) | review check on `show-me.md`; eval (O2) | the reference's teaching needs reading; the page itself exists only on real work |
 | S9 the own-call rule | no proof needed | unchanged from the shipped skill's rule, which `show-me.md` carries over |
 | S10 "not audited", never "nothing missed" | review check on `show-me.md`; eval (O2) | as S8 |
 | S11 one full copy of each item | review check on `show-me.md`; eval (O2) | as S8 |
-| S12 the chart claims attribution, not timing | review check on `show-me.md`; eval (O2) | as S8 |
+| S12 Stories in the owner's everyday words | review check on `show-me.md`; eval (O2) | as S8 |
 
 No standard here becomes a checked `sunstack-rule` rule in this PR. Each one either needs reading in its context (S2, S4–S6, S8, S10–S12, whose review checks run in the implementation review) or is behavior (S1). The structural facts O4 lists are checked by the implementer's commands during proof and read again in review:
 - no `live-page.md` caller remains;

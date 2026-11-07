@@ -3,7 +3,7 @@
 The Requirements entry. Its chunks, in reading order:
 
 1. [Why this changes, and its boundary](why-and-boundary.md): what changes and for whom, what the owner confirmed, and what is out of scope.
-2. [What the owner sees](show-me.md): U1–U7 and U12, the page.
+2. [What the owner sees](show-me.md): U1–U7, U12 and U13, the page.
 3. [The log](the-log.md): U8–U11, what agents do so the page has something true to show.
 4. [Evidence](evidence.md): the owner's words in full, and the counts from today's record that each need rests on.
 
@@ -23,8 +23,8 @@ Taken from the owner's own words; each requirement has one home. Seven are what 
   - [U5](show-me.md)
 - `going-on` · "hwat is goign on"; "show me what's going on" · how each workstream of the design or plan is being carried out: what's done, what's next, and the checks behind it
   - [U12](show-me.md)
-- `attention` · "what to pay attention to what to do" · a page that opens on what needs his attention and what to do, in a Demistify display beyond the raw log
-  - [U6, U7](show-me.md)
+- `attention` · "what to pay attention to what to do" · the page he approved (page O, with the Map as one tree in a panel), opening on what needs his attention, with every story in his everyday words
+  - [U6, U7, U13](show-me.md)
 - `logging` · "log its owrk as it goes" · a true log: every agent's own rows, written as it works, so the page has something true to show
   - [U8, U9, U10, U11](the-log.md)
 
@@ -42,7 +42,7 @@ flowchart LR
     V["verification<br/>U4"]
     M["what was missed<br/>U5"]
     W["what's going on<br/>U12"]
-    T["what to pay attention to<br/>U6 U7"]
+    T["what to pay attention to<br/>U6 U7 U13"]
   end
   G --> D
   G --> A

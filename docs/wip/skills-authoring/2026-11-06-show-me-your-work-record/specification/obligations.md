@@ -12,7 +12,7 @@ flowchart LR
     G["logging: every agent's own rows, as it works<br/>R1 R2 R3 R4 R5"]
   end
   subgraph page["The page"]
-    T["attention: what needs you, what to do<br/>R19 R20 R21 R22 R23"]
+    T["attention: what needs you, what to do<br/>R19 R20 R21 R22 R23 R25"]
     D["decisions<br/>R6 R7 R8"]
     A["assumptions<br/>R9 R10 R11"]
     S["shortcuts<br/>R12 R13"]
@@ -124,30 +124,41 @@ Each obligation names the entities it's about, the requirement it serves, what p
 
 ### What's going on (going-on)
 
-**R24 · U12 · E4 E12 E8 E9.** Under "What's done / what's next", the page shows each Workstream of the Work under its plain label: what's done, what's next, and the Checks and Acceptance behind it. A Workstream with nothing new shows when it last moved; a finished one says so.
-- Passes when each part of the governing design or plan that work has started on appears as a Workstream with its done, next and evidence.
-- Fails when the section shows events or Stories tied to no Workstream, when a part the work has started on is missing, or when "done" stands without the Check behind it.
+**R24 · U12 · E4 E12 E8 E9.** Each part of the work that has started appears in the Map under "Where the work is", with its state, and has a Story under "What's done / what's next" saying what's done, what's next and the Checks and Acceptance behind it. A part with nothing new shows when it last moved; a finished one says so.
+- Passes when each part of the governing design or plan that work has started on appears in the Map with its state and in a Story with its done, next and evidence.
+- Fails when a part the work has started on is missing from the Map, when the section shows events tied to no part, or when "done" stands without the Check behind it.
 
 ### What needs the owner (attention)
 
-**R19 · U6 · E13 E6 E7 E10 E9.** The page opens on what needs the owner: how many items wait for him, how many decisions and shortcuts are marked for his look, how many Missed items are open, and how much finished work isn't accepted. Each number opens its items.
+The approved page is the reference for R19–R25: `p1b-approved-2026-11-07.html` in the work's owner pages, sha256 `ece32b0cdb2a6fe4…`, which the owner approved on 7 Nov ("this is the deisgn i wnat").
 
-**R20 · U6 · E13 E12.** Below that, the page keeps the four sections the owner kept, in this order:
-1. For you to decide;
+**R19 · U6 · E13 E6 E12.** The page is page O. It opens on what needs the owner, in his four sections, in this order:
+1. For you to decide, where every Assumption waiting for him and every choice only he can make comes first;
 2. What's done / what's next;
 3. What changed and why, ending with the two decision groups;
-4. What was verified, including what was missed.
+4. What was verified, and what was missed.
 
-Each section shows current Stories, and a routine Story folds at the end of its section, as the owner asked ("yeah routine stuff is hidding within each secion?", 6 Nov).
+Each section's header shows its count, stays on screen while its Stories scroll, and has an expand/collapse control on the right. A routine Story folds under one "smaller" row at the end of its section, as the owner asked ("yeah routine stuff is hidding within each secion?", 6 Nov).
+
+**R20 · U6 · E12.** Each Story shows, in order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one picture or table; a closed More fold; and a closed fold of the Rows it covers, each opening to its text. Stories start open; their Rows start closed.
+- Fails when a Story is a wall of text, drops a row, or shows more than one picture or table.
 
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
 - Fails when the same Story, Decision, Shortcut or Check text appears in full twice.
 
-**R22 · U7 · E13 E3 E2.** The page is visual and clickable, not a list of links: every count and diagram node opens the items it stands for, and a chart's exact values sit beside it, each opening the items it counts. It shows, as a picture, who wrote the log and when: each Writer's Rows over the Work's time. From that picture the owner sees whose work is in the log and how much each agent logged. Whether rows came as the work happened is not in that picture; it comes from the audits (R18), and shows "not audited" where none ran.
-- Fails when a navigation list stands in for content, the page can't show who wrote what, or the picture is presented as proof of timely logging.
+**R22 · U7 · E13 E12 E4.** The page has a Map: one tree in a panel that opens from the right like Comments, from a map button, and never stays open with Comments. The tree shows, in order:
+1. what needs the owner;
+2. "Where the work is": each part of the work, with each Story in it marked by its state (done, needs a fix, waiting on him);
+3. the other three sections, with their Stories.
 
-**R23 · U7 · E13.** The skill's show-me reference teaches an agent how to build this page with Demistify: which display shows each part of R19–R22, with a worked example built from a real log.
-- Passes when the Lead's next real page, built by following the reference and nothing else, meets R6–R22. A build by a fresh agent waits for the evals, outside this change.
+Every row opens its Story on the page, with any fold around it. On a narrow screen the panel covers the page, and closes when a row is followed. Who wrote each Row shows beside it in the Story's folded Rows; whether Rows came as the work happened comes from the audits (R18).
+- Fails when a row doesn't open its Story, the tree repeats a Story's content instead of naming it, or the panel and Comments stay open together.
+
+**R23 · U7 · E13.** The skill's show-me reference teaches an agent how to build this page from the log's Story rows with Demistify's parts and no script, with the approved page as the worked example.
+- Passes when the Lead's next real page, built by following the reference and nothing else, matches the approved page's sections, Story shape and Map and meets R6–R22 and R25. A build by a fresh agent waits for the evals, outside this change.
+
+**R25 · U13 · E12.** Every Story line says what it means for the owner, in his everyday words and in few words. It names things the way he does, not by the agents' working labels: no run numbers, packets, keyed rules, correction rounds or role titles he hasn't used.
+- Fails when a line can only be understood by someone who watched the agents work.
 
 ## Across the whole
 
@@ -173,8 +184,9 @@ Each obligation's reference is where the right answer comes from. Verification D
 | V8 | R13 | the log's Shortcuts and the owner's decisions | an unapproved shortcut not marked for his look |
 | V9 | R15, R16 | the log's Checks and Acceptances, and the repository at the named revision | work shown as accepted with no Acceptance in the log; work shown as never signed off when the log only lacks a record |
 | V10 | R17, R18 | the log's Audits and Missed items, and what each Audit says it compared against | an unaudited stretch shown as "nothing missed"; an audited stretch where the #194 kind of skipped test suite is in the plan's required checks but never appears |
-| V11 | R19, R20, R21, R22 | the log through the page's stated position, and the owner's page O sections | a top count that doesn't open its items; one item in full twice; no picture of who wrote what; that picture offered as proof of timely logging |
-| V12 | R23 | the Lead's next real page, built by following the reference alone | that page fails V6–V11, or needed something the reference doesn't say |
+| V11 | R19, R20, R21, R22 | the log through the page's stated position, and the approved page (sha256 `ece32b0cdb2a6fe4…`) | a section out of order or missing; a Story missing a row or carrying two pictures; one item in full twice; a Map row that doesn't open its Story; the Map panel open with Comments |
+| V12 | R23 | the Lead's next real page, built by following the reference alone, compared with the approved page | that page fails V6–V11 or V15, or needed something the reference doesn't say |
+| V15 | R25 | each Story's lines, read by someone who didn't watch the agents work | a line naming a run number, packet, keyed rule, correction round or another working label the owner hasn't used |
 | V14 | R24 | the parts of the governing design or plan that work has started on, the packets' Workstreams, and the log's Checks and Acceptances per Workstream | a "done" section of events with no Workstream; a started part missing; "done" with no Check |
 | V13 | U6–U8 and U12 together | the owner's own reading of the page on the next real piece of work | he can't say from the page, without transcripts, what was decided, assumed, cut short, verified and missed |
 
@@ -188,18 +200,19 @@ Each obligation's reference is where the right answer comes from. Verification D
 | U4 verification | E8 E9 E3 | R14 R15 R16 | V1 V9 |
 | U5 missed | E10 E11 E5 | R8 R17 R18 | V10 |
 | U12 going-on | E4 E12 E8 E9 | R24 | V14 V13 |
-| U6 attention | E13 E12 | R19 R20 | V11 V13 |
-| U7 attention | E13 E2 E3 | R21 R22 R23 | V11 V12 |
+| U6 attention | E13 E12 E6 | R19 R20 | V11 V13 |
+| U7 attention | E13 E12 E4 | R21 R22 R23 | V11 V12 |
+| U13 attention | E12 | R25 | V15 |
 | U8 logging | E2 E3 E4 | R1 R2 | V1 V2 V13 |
 | U9 logging | E12 E2 | R4 | V4 |
 | U10 logging | E2 E3 | R3 | V3 |
 | U11 logging | E1 | R5 | V5 |
 
-Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4, R22), E4 (R2, R24), E5–E13 as listed.
+Every entity is used: E1 (R2, R5), E2–E3 (R1, R3, R4), E4 (R2, R22, R24), E5–E13 as listed.
 
 ## Open
 
 - **Workstream labels** (E4): the Lead names them when work starts and when new work arises, in plain words; the owner corrects any he can't read. This replaces "pieces", which he didn't recognize.
 - **How audits happen** (R18): Program Design decides who audits, when, and against what. pstack's choices are the starting point: the agent audits its own log against its transcript at the end of a run, and a reviewer on another model flags what it sees. Neither is required by the owner's words; both are means to U5.
 - **The short command** (R3): Program Design decides where it lives. It must not change the Router engine or its storage, and the skill itself stays guides only.
-- **Counts that open their items** (R19, R22): Demistify v1's number tile and chart bars can't hold a link. A Mermaid diagram node whose id matches a page element does open it. Program Design picks the display.
+- **The Map's tree** (R22): Demistify v1's tree draws a leave-the-page arrow for every link and starts every branch open. The Demistify Lead is building an in-page link icon and a way to start a branch folded, with the rest of the approved page's parts (commission, 7 Nov). Until those ship, the Map uses the tree as it is.

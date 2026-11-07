@@ -19,7 +19,7 @@ flowchart TB
   end
   subgraph used["Used as they are"]
     WT[("Router work trail<br/>rows, writer stamp, time, order")]
-    DM["Demistify v1<br/>cards, Mermaid nodes that open cards, xychart"]
+    DM["Demistify v1<br/>cards, a tree, a drawer like Comments"]
   end
   PK --> RS
   MA --> PK
@@ -68,7 +68,7 @@ Two plain commands, not one compound line, because some hosts refuse compound sh
 
 A, because the independent reviews this work already commissions (`implementation-review`, `spec-program-review`, Terra's page checks) are the second reader. A finding they make that the log missed becomes a Missed item. Reopen with B if a review or the owner finds missed items in a stretch whose own Audit found none.
 
-**How the top counts open their items (R19).** Demistify v1's number tile can't hold a link, and xychart bars can't either. A Mermaid flowchart node whose id matches a card's id opens that card in the side panel: experiment `01a1b2d2-0983`, re-run with `flowchart TB` so the four counts sit in one row. Chosen: the top band is a `flowchart TB` of unconnected count nodes, each id matching the card that holds its items. The chart's bars can't link, so its exact values sit in a table under it, one row per writer and one cell per day. Each cell opens that writer's rows for that day in "Rows by writer", a fold at the end of the page (R22).
+**How the Map reaches each Story (R22).** The owner approved page O with a Map (7 Nov, `p1b-approved-2026-11-07.html`, sha256 `ece32b0cdb2a6fe4…`): one Demistify tree in a drawer that opens from the right like Comments and never stays open with it. A tree row's link names the Story's element id; following it opens the Story and any fold around it, and on a narrow screen the drawer closes first. Demistify v1's tree draws a leave-the-page arrow on every link and opens every branch; the Demistify Lead is building an in-page link icon and a start-folded marker with the rest of the page's parts (commission, 7 Nov). Until they ship, the Map uses the tree as it is. The old top band of counts and the writer chart are gone: the owner's design has neither, and whether Rows came on time comes from the audits (R18).
 
 **No saved copy of the rows.** The Requirements left it to this document whether a page build saves the rows it read. Not needed: the work trail is append-only and can be read through any position at any time, so the page's stated position is enough to rebuild and check it.
 
@@ -150,7 +150,7 @@ export const WorkLog = z.discriminatedUnion("kind", [
 | --- | --- | --- |
 | `practices-show-me-your-work` SKILL.md | every agent logs its own work as it happens, audits its stretch, checkpoints; the Lead accepts and shows | every role, phase and orchestrator |
 | `record-entries.md` | one row's shape: kinds, tags, fixed parts, the command, closing, retrying | every writer and reader |
-| `show-me.md` (new) | the owner's page with Demistify: top band, workstreams, four sections, columns, verified and missed, writer chart | the Lead |
+| `show-me.md` (new) | the owner's page with Demistify: page O's four sections and Story shape, and the Map tree in a drawer | the Lead |
 | `stop-treatments.md` | which entries stop work and who acts next (unchanged) | every agent |
 | `assignment-fields.ts` `WorkLog` | carries the log's address and write command into every packet | the Lead, every helper |
 | `practices-manage-agents` SKILL.md | fills `workLog`; at handback, reads the helper's rows by writer stamp and logs each missing one as Missed | commissioners |
@@ -182,7 +182,7 @@ sequenceDiagram
     L->>R: missed row (Found by: the Lead at handback)
   end
   L->>R: read the trail through position N
-  L->>P: rebuild: top band, four sections, columns, verified and missed, writer chart
+  L->>P: rebuild: the four sections, their Stories, the Map tree
 ```
 
 What changes from today: the packet carries the log; the helper writes its own rows whatever its posting authority; the Audit and Missed rows are new; the Lead checks rows at handback; the page has new sections. What must stay as it is: a row is never edited, and the first link of a closing row names what it closes.
@@ -229,13 +229,14 @@ What changes from today: the packet carries the log; the helper writes its own r
 | U5 | R17 (missed): What was missed shown | E10 E11 | the Lead | `show-me.md` | `missed` rows | open → closed | — | seam: missed rows on the page |
 | U5 | R18 (missed): audit status per Writer stretch | E11 E3 | each Writer audits its stretch | `SKILL.md` audit step; `audit` rows | `Stretch:`, `Compared against:`, `Couldn't see:`, `Found:` | done | can't see: "not audited" | seam: audit rows per writer against the page |
 | U12 | R24 (going-on): each Workstream with done, next and evidence | E4 E12 E8 E9 | the Lead | `show-me.md`: "What's done / what's next" grouped by Workstream | `stream:` tags; the Workstream list `action` row; stories per Workstream; their Checks and Acceptances | active → finished | a started part with no Workstream: a Missed row at the next checkpoint | seam: the section's Workstreams against the design's or plan's started parts |
-| U6 | R19 (attention): top band; each count opens its items | E13 E6 E7 E10 E9 | the Lead | `show-me.md`: a `flowchart TB` of count nodes whose ids match cards | `ex-mermaid` node ids equal to `ex-card` ids | — | — | seam: clicking each node in a headless render |
-| U6 | R20 (attention): the four sections, routine folded | E13 E12 | the Lead | `show-me.md` | `story` `Section:` | — | — | seam: the page's section order |
+| U6 | R19 (attention): page O's four sections, sticky headers, expand/collapse | E13 E6 E12 | the Lead | `show-me.md` | section cards; `story` `Section:` | — | — | seam: the page's section order and headers in a headless render |
+| U6 | R20 (attention): the Story shape, routine folded | E12 | the Lead | `show-me.md`; `record-entries.md` (story lines) | `story` `Headline:`, `Happened:`, `For you:`, `Next:`, `Show:`, `More:`, covered-Rows list | — | a Story covering more than 16 Rows: it links 16 and names all of them in its covered-Rows list | seam: each Story against the approved page's shape |
 | U7 | R21 (attention): one full copy of each item | E13 | the Lead | `show-me.md`: one anchor per item, links elsewhere | `#entry-<id>` anchors | — | — | seam: duplicate-text check on the page |
-| U7 | R22 (attention): visual, clickable; writer chart | E13 E3 E2 | the Lead | `show-me.md`: xychart, its values table, and the "Rows by writer" fold | `xychart-beta` bars, one per Writer session; a values table whose cells link to `#writer-<endpoint>-<full session id>-<day>`; the role shown as the label, with a short session id only as text | — | two Writers share a role, or even a short id: the label adds the short id, and the full id keeps their targets apart | seam: the chart and table against writer stamps; clicking each cell |
-| U7 | R23 (attention): the reference teaches the page | E13 | the skill's author | `show-me.md` with a worked example from this log | the reference itself | — | — | seam: the Lead's next real page built from the reference alone |
+| U7 | R22 (attention): the Map | E13 E12 E4 | the Lead | `show-me.md`: one `ex-tree` in a drawer opened from the right | tree rows whose links name Story ids; the drawer's open/close against Comments | — | a row followed on a narrow screen: the drawer closes first | seam: clicking every tree row in a headless render |
+| U7 | R23 (attention): the reference teaches the page | E13 | the skill's author | `show-me.md` with the approved page as its worked example | the reference itself | — | — | seam: the Lead's next real page built from the reference alone, against the approved page |
+| U13 | R25 (attention): Stories in the owner's everyday words | E12 | the Lead | `show-me.md`: plain-words rule with worked pairs | story lines | — | — | seam: the Story lines read by someone who didn't watch the agents |
 
 ## Open
 
-- **A linkable number tile and linkable chart bars** would let the tiles replace the Mermaid nodes and the bars open their rows directly. That's a request to the component Lead, not a dependency. The legend's overlap on labels longer than about ten characters goes with it.
+- **The Demistify Lead's parts** (commission, 7 Nov): the Story, the section card, the Map drawer, and the tree's in-page icon and start-folded marker. Until they ship, `show-me.md` teaches the page with today's parts; when they ship, it switches to them. That's a dependency for the page's final look, not for the log.
 - **Option B for the command** stays on the shelf unless V3 fails.

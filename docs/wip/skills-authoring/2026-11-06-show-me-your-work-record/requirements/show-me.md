@@ -2,7 +2,7 @@
 
 Each requirement is an outcome the owner asked for; how agents get there is the Specification's and Program Design's. All rows are `authorized` by the owner's words, listed under the table; the priority is proposed by the Lead, and the owner assigns it.
 
-## The rows: U1–U7 and U12
+## The rows: U1–U7, U12 and U13
 
 | ID · priority | Need or outcome | In the record today |
 | --- | --- | --- |
@@ -12,8 +12,9 @@ Each requirement is an outcome the owner asked for; how agents get there is the 
 | U4 · 1 | `verification`: The owner sees what verification was done: what was checked, the result, what wasn't checked, and which finished work the Lead accepted. | 52 tagged `proof`, of every kind of check; the evaluators' page checks among them were written by the Lead, for example `01a1a98d-0d00` and `01a1ab35-77b3`; 0 tagged `lead-acceptance` |
 | U5 · 1 | `missed`: The owner sees what was missed: what happened but wasn't logged, a claim with weak or no evidence, and a check that should have run but didn't. | no page finds and brings together what was missed; a story on the Q3 experiment named what wasn't verified, and only because the Lead wrote it in |
 | U12 · 1 | `going-on`: For each workstream of the design or plan, the owner sees how it's being carried out: what's done, what's next, and the checks behind it. Workstreams carry plain names, such as "Requirements" or "PR #194". | 120 entries under one catch-all part tag and 70 with none; 53 carry other part tags (40 of them `part:smyw-implementation`) and 2 `part:none`, so part-by-part coverage was incomplete |
-| U6 · 1 | `attention`: The page opens on what needs the owner's attention and what to do, in the layout he kept (For you to decide; What's done / what's next; What changed and why; What was verified). | the four-section layout of page O |
-| U7 · 2 | `attention`: The page is a Demistify display beyond the raw log: visual and clickable, not a list or a table of contents, and it doesn't say the same thing twice. The skill's reference teaches agents how to build it with Demistify. | pages I to Q; the owner turned down list views and a map that repeated the stories |
+| U6 · 1 | `attention`: The page is the design the owner approved on 7 Nov: page O. It opens on what needs his attention and what to do, in his four sections: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed. Section headers stay on screen while he scrolls, with an expand/collapse control on the right. Each story has a headline, then Happened / For you / Next, then at most one picture or table, with More and the story's record folded. | page O (5–6 Nov), kept as his design; the approved page `p1b-approved-2026-11-07.html` (sha256 `ece32b0cdb2a6fe4…`) |
+| U7 · 1 | `attention`: The page has a Map: one tree, in a panel that opens from the right like Comments. It shows first what needs him, then where the work is (each part of the work with its state), then the sections and their stories. Every row opens its story on the page. The page is visual and clickable, says nothing twice, and is built from Demistify's parts with no script; the skill's reference teaches agents how. | pages I to Q and the 7 Nov map experiments; the owner chose the panel from the right, then one tree called the Map |
+| U13 · 1 | `attention`: Every story says what it means for the owner, in his everyday words and in few words, not the agents' working labels. | the 7 Nov stories said "Runs 1–9: built", "packet", "keyed rules" and "correction round" (`01a1b5db-3c43`) |
 
 Every accepted item of the 4 Nov success definition keeps a home: (1) U6 with U1–U5; (2) U12; (3) U1; (4) U2; (5) U3; (6) U4; (7) U4. The owner didn't recognize the word "pieces" (`01a1b28e-743f`); that drops the word, not item 2's outcome, which U12 keeps with plain workstream names. U8–U11 are in [the log](the-log.md).
 
@@ -23,5 +24,6 @@ Every accepted item of the 4 Nov success definition keeps a home: (1) U6 with U1
 - **U4:** "what bvericiaotn is done"; "Proof of the work, what verifications are done"; "what work we've done is locked"
 - **U5:** "knwo what was msied or decided"
 - **U12:** "hwat is goign on" (6 Nov, confirming the point); "show me what's going on" (3 Nov); the accepted 4 Nov item 2, "how the design is carried out, part by part"
-- **U6:** "the layout we have is ncie to kwno what to pay attention to what to do"
-- **U7:** "display beyodn that with demsytify"; "reference file shoudl explain to kuse demsytify hwo to repsernese the ifnoramtion"; "not a toc"; "its nto to regurgitate teh same information"
+- **U6:** "the layout we have is ncie to kwno what to pay attention to what to do"; on 7 Nov: "i aske dcyou to change the fuckign content ... not fuckign teh design."; "ok i think we good and this is the deisgn i wnat"
+- **U7:** "display beyodn that with demsytify"; "reference file shoudl explain to kuse demsytify hwo to repsernese the ifnoramtion"; "not a toc"; "its nto to regurgitate teh same information"; on 7 Nov: "yes, expeirmtns on that wehre it lives also liek sidebar. that sthe only ui chagne thats left."; "p1 is best but its too noisy"; "maykbe eveyrhting shodu be a tree?"; "its more a Map no nto otulien"
+- **U13:** "dyou follow youkr own rule fo rocntent o make thigs udner4tandable"; "ok man follow the skillw e carated preprly"
