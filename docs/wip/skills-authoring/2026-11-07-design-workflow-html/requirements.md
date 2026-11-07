@@ -26,7 +26,7 @@ Curated, not owner-typed: the 18 Oct stream S3 wording in the owner-asks backlog
 Drafted from the words above; the owner confirms or corrects it on his decision page.
 
 1. A design is HTML: each of the four documents is an HTML page whose text lives in its sections and Markdown islands, with stable IDs; no Markdown file holds the design, and no page is one Markdown document dropped in whole.
-2. A design is pages, not one page: an overall design (its four documents) and, for each deliverable, a design document and a plan that link to each other, joined as one collection with reader help (Pages, links, walkthroughs, the Map once released).
+2. A design is pages, not one page: an overall design (its four documents) and, for each deliverable, a design document and a plan that link to each other, joined as one collection with reader help (Pages, links, walkthroughs, the Map).
 3. A page is composed in sections, each design fact in the view that suits it: Requirements grouped as cards with images where UX matters, choices side by side, components and paths drawn, proof as cards and rows.
 4. Each need links forward to its specification, program design and verification, and back, the same way everywhere, and the link explains what the related part means.
 5. Agents can read and check the design: they find any section by its ID and read its text without a second copy, and checks run on the pages.
