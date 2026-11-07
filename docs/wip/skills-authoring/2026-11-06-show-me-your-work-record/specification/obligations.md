@@ -140,7 +140,7 @@ The approved page is the reference for R19–R25: `p1b-approved-2026-11-07.html`
 
 Each section's header shows its count, stays on screen while its Stories scroll, and has an expand/collapse control on the right. A routine Story folds under one "smaller" row at the end of its section, as the owner asked ("yeah routine stuff is hidding within each secion?", 6 Nov).
 
-**R20 · U6 · E12.** Each Story shows, in order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one picture or table; a closed More fold; and a closed fold of every Row it cites, each opening to its text. Stories start open; their Rows start closed.
+**R20 · U6 · E12.** Each Story shows, in order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one picture or table; a closed More fold when the Story has more to say; and a closed fold of every Row it cites, each opening to its text. Stories start open; their Rows start closed.
 - Fails when a Story is a wall of text, drops a row, or shows more than one picture or table.
 
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
