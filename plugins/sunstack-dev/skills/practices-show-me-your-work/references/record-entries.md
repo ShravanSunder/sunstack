@@ -133,7 +133,12 @@ Step one prints a request id and a row id. Step two writes the row with them, an
 Step two ends one of three ways, and each needs a different move:
 
 - **Accepted:** a readable answer whose decision is `accepted`. Keep the row id.
-- **Unknown outcome:** no readable Router answer, because the command timed out, the connection dropped after sending, or its output can't be read. Run step two again with the same request id and row id. Router returns the original row if the first send landed, or writes it if it didn't, so the row exists exactly once. Never mint new ids for this retry: "it failed, so this is a new write" is the mistake, because a new pair writes a second copy of the same fact. Reading the trail afterwards only reconciles; the same ids are the guarantee.
+- **Unknown outcome:** no readable Router answer, because the command timed out, the connection dropped after sending, or its output can't be read. Run step two again with the same request id and row id, and read its answer:
+  - `accepted` carries the row id, whether the first send landed or not.
+  - A readable answer that isn't `accepted` follows the next ending, because a first send Router rejected replays that rejection.
+  - No readable answer again leaves it unknown: read the trail for the row id, and keep the same ids for any later resend.
+
+  Never mint new ids for this retry: "it failed, so this is a new write" is the mistake, because a new pair writes a second copy of the same fact. Reading the trail only reconciles; the same ids are what keep the row from landing twice.
 - **Router answers but doesn't accept:** a readable answer that isn't `accepted`, such as a rejection like `conflictingRequest`, a writer, lease or schema gate, or an access denial. A refusal never proves the row is missing, so don't take the fact as missing, and write nothing new until the trail shows it is:
   1. Look in the trail for this row id. After `conflictingRequest`, look for the row whose request is this request id, because that request already wrote one.
   2. Found: the fact is logged, so stop. A correction is a new row that closes it.
