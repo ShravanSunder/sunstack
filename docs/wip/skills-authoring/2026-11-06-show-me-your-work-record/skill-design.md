@@ -16,6 +16,7 @@ Owner plugin: `sunstack-dev` (`plugins/sunstack-dev/`). Each run names one skill
 | 6 | `role-implementer` | its always-load line (`SKILL.md:28`) and `references/working-with-lead.md:17` name the packet's `workLog` and the two-step write |
 | 7 | `role-advisor` | its always-load line (`SKILL.md:44`) stays an always-load, including when the owner opens the Advisor directly with no packet; when a packet's `workLog` names a work trail, the line also names it and the two-step write |
 | 8 | `role-operator` | today it contributes its results to its commissioner's trace and opens none of its own (`SKILL.md:27`); when the packet's `workLog` is a work trail, it writes its own rows (each check it ran, any shortcut) into that log, still opening no Work of its own |
+| 9 | `implement-plan` | step 6 (`SKILL.md:31`) records a design break or plan defect "as a shortcut", not "as a design change" (D14) |
 
 `role-lead` is unchanged: it already loads the logging skill whenever its work commissions another agent (`role-lead/SKILL.md:24`), and its audit at each checkpoint comes from run 1's `SKILL.md`.
 
@@ -26,6 +27,7 @@ Owner plugin: `sunstack-dev` (`plugins/sunstack-dev/`). Each run names one skill
 | 1 | unchanged | step 2 (log as it happens: own rows, the packet's command), a new audit step, step 6 (show: `show-me.md`), the completion boundary | `record-entries.md` (row shape, kinds, command, retry); `show-me.md` (new) | static, O4, O5 |
 | 2 | unchanged | the commission step fills `workLog`; the handback step reads the helper's rows | `assignment-fields.ts` schema; the contract test | static, O3, O4 |
 | 3–8 | unchanged | one loading line per role (two for run 6) | none | static, O4 |
+| 9 | unchanged | one phrase in step 6 | none | static, O4 |
 
 ## Trigger
 
@@ -118,10 +120,11 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | D7 | Every helper logs whenever its packet names a work trail, whatever its posting authority | Specification R1, R14; the posting gates on `role-reviewer` and `role-verifier` are a likely reason no reviewer or evaluator logged before 6 Nov (an observation, not a proven cause) |
 | D8 | `show-me.md` replaces `live-page.md` with no forwarding stub; every caller is updated in the same change | the repository's hard-cutover rule for runtime references (AGENTS.md) |
 | D9 | The skill stays guides only: no script ships in it | the #194 guides-only change; counting rows for the chart is a one-off command in the Lead's scratch space |
-| D10 | One PR for all eight runs, one changelog entry and one version bump (sunstack-dev 2.104.1 → 2.105.0) | the runs share one behavior change; the owner's default is one PR per deliverable |
+| D10 | One PR for all the runs, one changelog entry and one version bump (sunstack-dev 2.104.1 → 2.105.0) | the runs share one behavior change; the owner's default is one PR per deliverable |
 | D11 | No description changes, so no trigger trial | every description stays accurate; changing one would owe a trial that tests a trigger nobody asked to move |
 | D12 | The engineering Requirements and Specification serve as this set's requirements and specification parts; this part and the skill verification part replace the earlier `spec.md` | skill-authoring 0.10.2's design set needs four parts; the owner's design cycle produced the first two |
 | D13 | The shipped holding file for work with no Router project yet (`no-board-trace.md`, and `record-entries.md`'s "To an entries file") stays. Its rows carry their minted row ids, so the move into the trail keeps every link. D1's non-goal is a JSONL log in place of the work trail, not this pre-project holding file | the owner left logging mechanics, memory-logs files included, to the Lead ("the lgos and memroy logs or related md fiels to log you decide is easy dx for agents", 6 Nov); the review lead found the overlap at `no-board-trace.md:7`, `:19` and `record-entries.md:100` |
+| D14 | Run 9 makes `implement-plan` record a design break or plan defect as a shortcut; run 1 aligns `stop-treatments.md`'s expected input (`:5`) the same way | D5 renames the kind for new rows, and the repository's hard-cutover rule leaves no second name in active instructions. The Implementer found `implement-plan/SKILL.md:31` (push `01a1b3fb-cafd`), the only active instruction outside runs 1–8 that names the old kind (`git grep` of active skills and shared references). The description and `openai.yaml` still read correctly, since a design change is a shortcut, and D11 keeps them |
 
 ## Coordination
 
@@ -141,6 +144,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | 6 | proposed | |
 | 7 | proposed | |
 | 8 | proposed | |
+| 9 | proposed | |
 
 ## Review record
 
