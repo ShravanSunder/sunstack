@@ -9,12 +9,12 @@ The standards in the specification govern design documents an agent writes, not 
 | Requirement or standard | Route | The property it was decided on |
 | --- | --- | --- |
 | S1, standard 1: a design's text lives on its pages | eval, on the next real design; review check that runs 1–4 teach it | what an agent writes under the skills is behavior; that the skill text says it is visible to a reader |
-| S2: pages, an overall design and per-deliverable pages (O7, O7a–O7c) | eval, on the next design with two deliverables sharing a boundary: the cut on the overall home page confirmed by the owner, the first deliverable's page derived with only run 1's procedure and stating no fact of its own, its scoped plan page, links both ways; review check on runs 1, 7 and 9 | behavior; text property |
+| S2: pages, an overall design and per-deliverable pages (O7, O7a–O7c) | eval, on the next design with two deliverables sharing a boundary: the cut on the overall home page as the Lead's call, shown with the first plan under the existing plan gate, the first deliverable's page derived with only run 1's procedure and stating no fact of its own, its scoped plan page, links both ways; review check on runs 1, 7 and 9 | behavior; text property |
 | S3, standard 3: composed in sections, a view per fact, never a whole document as one island | eval, on the produced pages; review check on runs 2–3 | behavior; text property |
 | S4: the standard forward and back links, growing by phase (O6, O6a) | eval at three states of the next design: Requirements only (every downstream link reads "not yet written", none invented), Requirements and Specification (need-to-obligation links resolve both ways), the complete set (every need forward, every row back); review check on runs 1–3, 5–7 | behavior; text property |
 | S5: agents read and check without a second copy | eval: the next design has no Markdown copy and an agent finds a named section by its ID from the home page | behavior |
 | S6, standard 4: only released parts | review check on run 2 and, when admitted, runs 10–11 | a text property; the existing binding rule in `demistify.md` holds |
-| standard 2: one home per fact | review check (run 8's lane checks it on every design review from then on) | a property of a produced page that the reviewer reads |
+| standard 2: one home per fact | review check (run 7's navigation lane checks it on every design review from then on) | a property of a produced page that the reviewer reads |
 | standard 5: the owner answers on the page | eval, on the next design that needs his confirmation | behavior |
 | the page passes the checker | mechanical, at the page's binding, every page | the checker's own result |
 | the contract test for plan paths (run 9) | mechanical: `pnpm --dir tests/skills test` | a test that asserts the plan record |

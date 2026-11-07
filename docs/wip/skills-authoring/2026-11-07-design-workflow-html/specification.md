@@ -23,7 +23,7 @@ Draft, 7 Nov 2026. What the changed skills must do, and the standards they state
 ### Pages, not one page (S2)
 
 - **O7.** A design set is one collection: a home page that opens on what needs the owner, one page per document, and a plan page.
-- **O7a.** When the work has deliverables, the overall design (its four documents) stays the home of every fact, and its home page carries the delivery cut: each deliverable with the needs it delivers and what it waits on, written by the Lead after the design review and confirmed by the owner on the page.
+- **O7a.** When the work has deliverables, the overall design (its four documents) stays the home of every fact, and its home page carries the delivery cut: each deliverable with the needs it delivers and what it waits on, written by the Lead after the design review as the Lead's own call, and shown to the owner with the first deliverable's plan under `orchestrator-design`'s existing plan gate, where he can correct it; it adds no stop of its own.
 - **O7b.** Each deliverable's design page is a view composed from the overall design: its needs and, through their links, its obligations, owners, paths and proof rows, shown by linking to or embedding those sections; it states no fact of its own, and a fact only this deliverable needs is written into the overall document that owns its kind and reviewed there.
 - **O7c.** Each deliverable's plan page is written by the planner from the four reviewed documents, scoped to that deliverable's needs, and it and the deliverable's design page link to each other; the next deliverable's page and plan are written when its turn comes.
 
