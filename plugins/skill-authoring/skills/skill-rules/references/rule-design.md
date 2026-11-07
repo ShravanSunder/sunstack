@@ -127,27 +127,27 @@ The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, 
 - **Reference.** The owner's rulings, as examples, each with its text, its answer and why: a product's own command (warn); a load of a product's own workflow file (warn); a product named as a labelled example (pass); a worked example that isn't labelled (warn); a quoted real product mistake (warn); the subject's own tool, a tool used as meant, the toolkit's shared tools and an ordinary command (pass). All three questions read them.
 - **Nodes.** Three Nouls and the line-finder in one request, each standing alone:
   1. `product_material`: "Does this section show concrete material that belongs to one product?"
-  2. `all_labelled`: "Is all of that material shown only as labelled examples?"
-  3. `quotes_product_mistake`: "Does the section quote a real product's own mistake?"
+  2. `all_labelled_examples`: "Is all of that material shown only as labelled examples?"
+  3. `quotes_real_product_mistake`: "Does the section quote a real product's own mistake?"
 - **Tree.**
 
   ```text
   product_material? → no      → [complete: body and targets fully read?] → yes: pass · no: uncertain
                     → between → uncertain
-                    → yes     → quotes_product_mistake? → yes → nudge
-                                                        → no  → all_labelled? → no: nudge · between: uncertain
-                                                                              → yes → [complete?] → yes: pass · no: uncertain
-                                                        → between → all_labelled? → no: nudge · otherwise: uncertain
+                    → yes     → quotes_real_product_mistake? → yes     → nudge
+                                                             → no      → all_labelled_examples? → no: nudge · between: uncertain
+                                                                                                → yes → [complete?] → yes: pass · no: uncertain
+                                                             → between → all_labelled_examples? → no: nudge · otherwise: uncertain
   ```
 
   A warning needs product material and one known trigger: material not all labelled, or a quoted real mistake. An unknown on one trigger doesn't hide a known yes on the other. Both passes need the text fully read.
 - **Policy.**
 
   ```text
-  | node                   | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
-  | product_material       | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | first      | none     | a false nudge costs one read of the line and a load; a miss leaves one product's material in a general skill, which #187 showed survives a review |
-  | quotes_product_mistake | P(yes)    | ≥ .7     | ≤ .3    | ask all_labelled; only its known no warns | second | warn | a false nudge on a quoted generic mistake costs a read and a "kept" |
-  | all_labelled           | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | third      | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is as above |
+  | node                        | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
+  | product_material            | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | first      | none     | a false nudge costs one read of the line and a load; a miss leaves one product's material in a general skill, which #187 showed survives a review |
+  | quotes_real_product_mistake | P(yes)    | ≥ .7     | ≤ .3    | ask all_labelled_examples; only its known no warns | second | warn | a false nudge on a quoted generic mistake costs a read and a "kept" |
+  | all_labelled_examples       | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | third      | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is as above |
   ```
 
   These are starting bars, set on the development cases and recorded in the case file's `bars` before the held-out run.
@@ -168,23 +168,23 @@ The delivered entry is `general-skill.overfits-to-product-workflow` in `domain-s
 A filter isn't marked on a standard: it decides which folders a rule judges. It is designed the same way, with a label in place of the nudge.
 
 - **The judgment.** What kind of skill does this folder hold? Rules that govern general skills read only folders labelled general, role or domain, so a product's own skill isn't judged as if it were meant for any repository.
-- **What it reads.** Each skill's description and the opening of its `SKILL.md` body. Not the folder name, which hints at the answer: a filter never sends its folder's location.
+- **What it reads.** Each skill's description and the opening of its `SKILL.md` body: from just after the frontmatter through the end of the first H2 section, so the H1 introduction, if any, and the whole first `##` section, where a skill says what it is for and how it starts. Not the folder name, which hints at the answer: a filter never sends its folder's location.
 - **Labels.** `general`, `role`, `domain`, `tool_manual`, `repo_specific`, declared on the filter. Its tree ends in one of them, or `unsure`.
 - **Reference.** The five definitions, written once so they can't overlap, with worked examples. One boundary carries most of the weight: a repository's own command-line tool or scripts count as its own procedure, not as a public tool.
 - **Nodes.** Two Choices in one request, each among labels that can't both be true:
   1. `primary_work`: reusable guidance · operating a public tool · one repository's own procedure.
-  2. `guidance_kind`: general · role · domain.
+  2. `reusable_guidance_kind`: general · role · domain.
 - **Tree.**
 
   ```text
-  primary_work? → reusable guidance        → guidance_kind? → general · role · domain → that label
-                                                            → below its bar → unsure
+  primary_work? → reusable guidance        → reusable_guidance_kind? → general · role · domain → that label
+                                                                    → below its bar → unsure
                 → operating a public tool  → tool_manual
                 → one repository's own     → repo_specific
                 → below its bar            → unsure
   ```
 
-  `guidance_kind` is asked in the same request and read only after reusable guidance. Labels come only from tree endings: "reusable guidance" is a question's option, never a filter label.
+  `reusable_guidance_kind` is asked in the same request and read only after reusable guidance. Labels come only from tree endings: "reusable guidance" is a question's option, never a filter label.
 - **Policy.** Each Choice reads its top label's probability among 3 labels, against a starting bar of .6 (a confidence of .40, not accuracy), set on development cases. An unsure folder is skipped for every gated rule and listed with its route. A wrong label costs a whole folder: a product's skill judged as general draws false nudges on every section, and a general skill labelled a tool manual is never checked at all.
 - **Proof plan.** Filter cases, each a real folder at a fixed revision expecting a label, in development and held-out sets, labelled from the owner's rulings or by blind agents. The held-out run must give no wrong label; every case is scored right, wrong label, unsure or incomplete, or listed with why.
 

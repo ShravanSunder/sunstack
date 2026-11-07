@@ -101,7 +101,7 @@ A finding route and its entry carry what the agent receives. Step 3's nudge desi
 - **`related`,** on the entry, lists the fields whose places the agent reads next. Each must be one of the kind's fields. Every finding lists the standard first, then each related field's spans in the order the entry lists them; a target field gives each loaded file whose opening the run read, from line 1 to the opening's last line.
 
 ```json
-"material_not_labelled": { "ask": "all_labelled", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "read_fully", "uncertain": "uncertain",
+"material_not_labelled": { "ask": "all_labelled_examples", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "read_fully", "uncertain": "uncertain",
   "no": { "finding": "This section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository.", "at": "body",
           "locate": { "name": "product_line", "task": "Which line of body shows material that belongs to one product: its own procedures, run commands, state files or machine paths? Not a line that names a product only as a labelled example, uses a tool as it is meant to be used, or uses this toolkit's own shared tools.", "min_probability": 0.6 } } }
 ```

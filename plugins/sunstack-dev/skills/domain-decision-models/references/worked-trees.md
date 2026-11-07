@@ -143,17 +143,17 @@ The standard: a skill meant for any repository doesn't carry one product's own m
 The piece is one section of a general skill: its body, heading and headings, plus the opening of every file or skill it loads. The rule's `reference` holds the owner's rulings as examples, each with its text, its answer and why. Three Nouls and the line-finder go in one request, and each Noul names the body, the openings and `reference.examples`:
 
 1. `product_material`: "Does this section show concrete material that belongs to one product?"
-2. `all_labelled`: "Is all of that material shown only as labelled examples?"
-3. `quotes_product_mistake`: "Does the section quote a real product's own mistake?"
+2. `all_labelled_examples`: "Is all of that material shown only as labelled examples?"
+3. `quotes_real_product_mistake`: "Does the section quote a real product's own mistake?"
 
 ```text
 Good: product_material? → no      → [complete: body and loads fully read?] → yes: pass · no: uncertain
                         → between → uncertain
-                        → yes     → quotes_product_mistake?
+                        → yes     → quotes_real_product_mistake?
                                       → yes     → nudge at the found line, warn
-                                      → no      → all_labelled? → no: nudge · between: uncertain
-                                                                → yes → [complete?] → yes: pass · no: uncertain
-                                      → between → all_labelled? → no: nudge · yes or between: uncertain
+                                      → no      → all_labelled_examples? → no: nudge · between: uncertain
+                                                                         → yes → [complete?] → yes: pass · no: uncertain
+                                      → between → all_labelled_examples? → no: nudge · yes or between: uncertain
 Bad:  routes_product? → yes → example_or_own_infrastructure? → no → nudge
       (the old two-question rule: its first question packed three facts, a procedure,
        whose it is and whether it's a public tool, and its passes ran on cut text)
@@ -178,14 +178,14 @@ What the tree keeps, and why:
 
 A filter decides one label per folder, here the kind of skill a folder holds, and rules gate on that label (`only_when`). It is judged once per folder, and every rule gated on it uses that one result.
 
-The state is the skill's description and the opening of its `SKILL.md`, plus a `reference` holding the five kind definitions and worked examples. It holds no folder name, which would hint at the answer. Two Choices go in one request:
+The state is the skill's description and the opening of its `SKILL.md` (the body from just after the frontmatter through the end of the first H2 section: the H1 introduction, if any, and the whole first `##` section), plus a `reference` holding the five kind definitions and worked examples. It holds no folder name, which would hint at the answer. Two Choices go in one request:
 
 1. `primary_work`: reusable guidance · operating a public tool · one repository's own procedure.
-2. `guidance_kind`: general · role · domain.
+2. `reusable_guidance_kind`: general · role · domain.
 
 ```text
-Good: primary_work? → reusable guidance    → guidance_kind? → general · role · domain → that label
-                                                            → below its bar → unsure
+Good: primary_work? → reusable guidance       → reusable_guidance_kind? → general · role · domain → that label
+                                                                       → below its bar → unsure
                     → operating a public tool → tool_manual
                     → one repository's own    → repo_specific
                     → below its bar           → unsure
@@ -194,7 +194,7 @@ Bad:  one Choice over all five labels, whose criteria pack every boundary betwee
       (the old filter: one question, one cut-off, no tree)
 ```
 
-Each Choice reads its top label's probability among 3 labels. A starting bar of .6 is a confidence of (.6 − 1/3) ÷ (2/3) = .40, which is not accuracy; the bar is set on development cases. The walk reads `guidance_kind` only when `primary_work` picked reusable guidance; otherwise it's asked in the same request and unused.
+Each Choice reads its top label's probability among 3 labels. A starting bar of .6 is a confidence of (.6 − 1/3) ÷ (2/3) = .40, which is not accuracy; the bar is set on development cases. The walk reads `reusable_guidance_kind` only when `primary_work` picked reusable guidance; otherwise it's asked in the same request and unused.
 
 What the tree keeps, and why:
 
