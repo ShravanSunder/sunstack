@@ -1,0 +1,69 @@
+{
+  "id": "skill-opening",
+  "language": "Markdown",
+  "files": [
+    "**/SKILL.md"
+  ],
+  "rule": {
+    "any": [
+      {
+        "inside": {
+          "kind": "section",
+          "has": {
+            "kind": "atx_heading",
+            "regex": "^# [^#]"
+          }
+        },
+        "not": {
+          "kind": "section"
+        },
+        "any": [
+          {
+            "kind": "atx_heading"
+          },
+          {
+            "kind": "paragraph"
+          },
+          {
+            "kind": "list"
+          },
+          {
+            "kind": "fenced_code_block"
+          },
+          {
+            "kind": "block_quote"
+          },
+          {
+            "kind": "thematic_break"
+          },
+          {
+            "kind": "pipe_table"
+          },
+          {
+            "kind": "html_block"
+          }
+        ]
+      },
+      {
+        "kind": "section",
+        "has": {
+          "kind": "atx_heading",
+          "regex": "^## [^#]"
+        },
+        "inside": {
+          "kind": "section",
+          "has": {
+            "kind": "atx_heading",
+            "regex": "^# [^#]"
+          }
+        },
+        "not": {
+          "follows": {
+            "kind": "section",
+            "stopBy": "end"
+          }
+        }
+      }
+    ]
+  }
+}

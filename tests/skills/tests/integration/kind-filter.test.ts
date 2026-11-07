@@ -1,217 +1,92 @@
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, expect, test } from "vitest";
-import { z } from "zod";
 import {
-  cleanupFixtureRoots,
-  createFixture,
-  installPinnedSkill,
-  kitRelative,
-  repositoryRoot,
-  runRunner,
-  saveConfig,
-  saveRules,
-  withJudge,
-  writeFixtureFile,
-} from "../../lib/skill-rules/test-fixture.ts";
-import { readKindScenarios } from "../../lib/skill-rules/kind-scenarios.ts";
-import { scoreKindScenario } from "../../lib/skill-rules/kind-scoring.ts";
-import { lintReportSchema } from "../../lib/skill-rules/report.ts";
+  cleanupRulebookFixtures,
+  configRelative,
+  createRulebookFixture,
+  installPinnedFile,
+  nativeReportSchema,
+  jsonObject,
+  readJson,
+  runNativeLint,
+  withScriptedJudge,
+  writeJson,
+} from "#test-support/sunstack-process";
 
-const configSchema = z.object({
-  filters: z.object({
-    kind: z.object({ question: z.unknown(), reads: z.unknown(), min_probability: z.number() }),
-  }),
-});
-afterEach(cleanupFixtureRoots);
+afterEach(cleanupRulebookFixtures);
 
-test("the shipped kind question is the final measured description-only round3 candidate", () => {
-  const config = configSchema.parse(
-    JSON.parse(
-      readFileSync(path.join(repositoryRoot, kitRelative, "skill-rules.config.json"), "utf8"),
-    ),
-  );
-  // Independent round3 native request: question, definitions and check/task/scope, frozen before implementation.
-  expect(
-    createHash("sha256").update(JSON.stringify(config.filters.kind.question)).digest("hex"),
-  ).toBe("a7e312a08eb55d3e53494ce7a52e026b3790624d4062a77a1aa10b5e8e379d1a");
-  expect(config.filters.kind.reads).toEqual({
-    file: "SKILL.md",
-    kind: "skill",
-    field: "description",
-  });
-  expect(config.filters.kind.min_probability).toBe(0.7);
-});
+test("the authored kind tree sends description and the complete first section once, without location", async () => {
+  const root = createRulebookFixture();
+  const file = "plugins/sunstack-dev/skills/role-operator/SKILL.md";
+  const source = installPinnedFile(root, "24fa3d925927278100aced2e7c4e26eb0be81fba", file);
+  await withScriptedJudge({
+    probabilities: { product_material: 0.1 },
+    action: async (endpoint, requests) => {
+      const filename = path.join(root, configRelative);
+      const config = readJson(filename);
+      config["decision_model"] = { model: "jev-latest", endpoint };
+      writeJson(filename, config);
 
-test("two real skill folders ask once each with description only, exclude a manual and list unsure", async () => {
-  // Arrange: real pinned files, native gate, mechanical downstream rule; only provider choices vary.
-  const root = createFixture();
-  const sources = [
-    "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
-    "plugins/agentstudio/skills/agentstudio/SKILL.md",
-  ];
-  const reference =
-    "plugins/sunstack-dev/skills/ops-observability-stack/references/agentstudio-loop.md";
-  for (const source of [...sources, reference])
-    installPinnedSkill(root, {
-      source: {
-        repository: "self",
-        commit: "cbcaec0dfb6c1475f4d0761bb4f5966b7a09e66f",
-        path: source,
-        context: [source],
-      },
-    });
-  saveRules(root, {
-    K001: {
-      name: "description-check",
-      evidence: "section",
-      only_when: { kind: ["general", "role", "domain"] },
-      decision: {
-        start: "length",
-        steps: {
-          length: {
-            mechanical_check: { tool: "max_chars", field: "body", max: 30000 },
-            yes: "pass",
-            no: "not_applicable",
-          },
-        },
-      },
-    },
-  });
-  let probability = 1;
-  await withJudge(
-    {},
-    async (endpoint, requests) => {
-      saveConfig(root, { decision_model: { model: "jev-latest", endpoint } });
-      // Act: regular CLI path and full engine serialization, with current accounts/rendering retained.
-      const result = await runRunner(root, [...sources, reference], "synthetic-filter-key");
-      expect(result.status, result.stderr).toBe(0);
-      const observed = z
-        .object({
-          filter_answers: z.array(
-            z.object({ folder: z.string(), state: z.string(), answer: z.string() }),
-          ),
-          results: z.array(z.object({ file: z.string(), outcome: z.string() })),
-        })
-        .parse(result.report);
-      // Assert: exactly two filter requests regardless of the downstream rule.
-      expect(requests).toHaveLength(2);
-      expect(result.stdout).toContain("not applicable: kind tool_manual");
-      expect(observed.filter_answers.map((answer) => answer.answer).sort()).toEqual([
-        "general",
-        "tool_manual",
-      ]);
-      expect(observed.results).toContainEqual(
-        expect.objectContaining({ file: sources[1], outcome: "not_applicable" }),
-      );
-      for (const request of requests) {
-        const parsed = z
-          .object({
-            questions: z.record(z.string(), z.unknown()),
-            state: z
-              .object({ where: z.object({ folder: z.string() }), description: z.string() })
-              .strict(),
-          })
-          .parse(request);
-        expect(Object.keys(parsed.questions)).toEqual(["filter"]);
-      }
-      // At five labels P=.70 has confidence=.625; the native gate must use P, inclusively.
-      probability = 0.7;
-      const boundary = await runRunner(
+      const output = await runNativeLint({
         root,
-        ["--out", path.join(root, "boundary-output"), sources[0] ?? ""],
-        "synthetic-filter-key",
-      );
-      expect(boundary.status, boundary.stderr).toBe(0);
-      expect(lintReportSchema.parse(boundary.report).filter_answers?.[0]).toMatchObject({
-        state: "judged",
-        answer: "general",
-        probability: 0.7,
+        arguments: ["--format", "json", file],
+        syntheticCredential: true,
       });
-      probability = 0.6;
-      const uncertain = await runRunner(
-        root,
-        ["--out", path.join(root, "unsure-output"), sources[0] ?? ""],
-        "synthetic-filter-key",
+      const report = nativeReportSchema.parse(JSON.parse(output.stdout));
+
+      const filterRequests = requests.filter((request) =>
+        Object.hasOwn(request.questions, "primary_work"),
       );
-      expect(uncertain.status, uncertain.stderr).toBe(5);
-      const raw = z
-        .object({
-          filter_answers: z.array(
-            z.object({ state: z.string(), probabilities: z.record(z.string(), z.number()) }),
-          ),
-          filter_skips: z.array(z.unknown()),
-        })
-        .parse(uncertain.report);
-      expect(raw.filter_answers[0]?.state).toBe("unsure");
-      expect(raw.filter_skips).toHaveLength(1);
-      expect(uncertain.stdout).toContain("kind unsure");
-      expect(uncertain.stdout).toContain('"general":0.6');
-      probability = Number.NaN;
-      const malformed = await runRunner(
-        root,
-        ["--out", path.join(root, "malformed-output"), sources[0] ?? ""],
-        "synthetic-filter-key",
-      );
-      expect(malformed.status).toBe(3);
-      expect(lintReportSchema.parse(malformed.report).filter_answers?.[0]?.state).toBe(
-        "incomplete",
-      );
-      // Negative acquisition fixture, not a semantic scenario: native admission requires cap>=1000.
-      // Make a deliberately long description so the REAL projection produces input_cut.
-      const configFile = path.join(root, kitRelative, "skill-rules.config.json");
-      const current = z
-        .object({
-          evidence: z.object({
-            ast_grep: z.string(),
-            kinds: z.record(z.string(), z.record(z.string(), z.unknown())),
-          }),
-        })
-        .parse(JSON.parse(readFileSync(configFile, "utf8")));
-      saveConfig(root, {
-        evidence: {
-          ...current.evidence,
-          kinds: {
-            ...current.evidence.kinds,
-            skill: { ...current.evidence.kinds.skill, max_chars: 1000 },
-          },
-        },
-      });
-      writeFixtureFile(
-        root,
-        sources[0] ?? "",
-        `---\nname: cut-control\ndescription: Use when ${"long negative acquisition fixture ".repeat(80)}\n---\n\n# Test\n\nFixture body.\n`,
-      );
-      probability = 1;
-      const cut = await runRunner(
-        root,
-        ["--out", path.join(root, "cut-output"), sources[0] ?? ""],
-        "synthetic-filter-key",
-      );
-      const cutRaw = lintReportSchema.parse(cut.report);
-      expect(cutRaw.filter_answers?.[0]?.input_cut).toBe(true);
-      const scenario = readKindScenarios().find((entry) => entry.source.path === sources[0]);
-      if (!scenario) throw new Error("Missing kind reference for the acquisition control");
       expect(
-        scoreKindScenario({
-          scenario,
-          answers: cutRaw.filter_answers ?? [],
-          accepted: ["general", "role", "domain"],
-          minProbability: 0.7,
+        filterRequests,
+        JSON.stringify({
+          status: report["status"],
+          filter_answers: report.filter_answers,
+          filter_skips: report.filter_skips,
+          diagnostics: report["diagnostics"],
+          incomplete: report["incomplete"],
+          usage: report.usage,
+          stderr: output.stderr,
         }),
-      ).toMatchObject({ gap: "Kind filter input was cut", kind_outcome: "incomplete" });
+      ).toHaveLength(1);
+      const request = filterRequests[0];
+      if (!request) throw new Error("Missing kind request");
+      expect(Object.keys(request.questions)).toEqual(["primary_work", "reusable_guidance_kind"]);
+      expect(Object.keys(request.state).sort()).toEqual([
+        "description",
+        "opening",
+        "reference",
+        "unavailable-fields",
+      ]);
+      expect(request.state["description"]).toBe(
+        source
+          .split("\n")
+          .find((line) => line.startsWith("description:"))
+          ?.slice("description:".length)
+          .trim()
+          .replace(/^"|"$/g, ""),
+      );
+      const opening = JSON.stringify(request.state["opening"]);
+      expect(opening).toContain("## Assignment");
+      expect(opening).toContain("If no commission names you as the Operator");
+      expect(opening).not.toContain("## The work");
+      expect(opening).not.toContain("## Methods");
+      expect(JSON.stringify(request.state)).not.toContain(file);
+      expect(report.filter_answers).toHaveLength(1);
+      expect(report.filter_answers[0]).toMatchObject({ filter: "kind", label: "general" });
+      const canonical = readJson(path.join(root, configRelative));
+      const filters = jsonObject.parse(jsonObject.parse(canonical["filters"])["kind"]);
+      expect(request.state["reference"]).toEqual(filters["reference"]);
+      expect(
+        report.results.every((result) =>
+          [
+            "general-skill.overfits-to-product-workflow",
+            "skill-description.starts-with-use-when",
+            "skill-description.longer-than-225-characters",
+            "skill-description.longer-than-300-characters",
+          ].includes(result.name),
+        ),
+      ).toBe(true);
     },
-    (request) => {
-      const folder = z
-        .object({ state: z.object({ where: z.object({ folder: z.string() }) }) })
-        .parse(request).state.where.folder;
-      return {
-        filter: {
-          label: folder.includes("agentstudio") ? "tool_manual" : "general",
-          probability,
-        },
-      };
-    },
-  );
+  });
 });

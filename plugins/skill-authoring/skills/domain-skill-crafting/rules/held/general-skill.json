@@ -1,0 +1,134 @@
+{
+  "held": [
+    {
+      "markdown": "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md",
+      "line": 7,
+      "marker": "<!-- K001 -->",
+      "sentence": "- A skill meant for any repository has no loading condition in its description that belongs to one product's own application workflow.",
+      "entry": {
+        "name": "general-skill.description-overfits-to-one-product",
+        "evidence": "skill",
+        "questions": {
+          "loads_for_product": {
+            "type": "noul",
+            "instructions": {
+              "check": "description",
+              "task": "Does the description give a loading condition that belongs to one named product's or application's own workflow: its own build, release, debug or run procedure, state files or machine paths?"
+            },
+            "criteria": {
+              "true": "At least one condition under which the skill loads is one named product's or application's own work, such as debugging that application's beta build or running its private release. A description that mixes a generic condition with one application's branch has such a condition.",
+              "false": "Every loading condition applies in any repository; or it uses a tool or platform through its supported interface; or it uses the vocabulary of the subject the skill governs; or it names a product only in a \"Not for\u2026\" boundary, which is not a loading condition."
+            }
+          },
+          "example_or_own_infrastructure": {
+            "type": "noul",
+            "instructions": {
+              "check": "description",
+              "task": "Is every product named in the description's loading conditions named only as a labelled example, or as part of this toolkit's own shared infrastructure?"
+            },
+            "criteria": {
+              "true": "Each product in a loading condition is presented as an example of a general case (\"for example\", \"such as\"), inside a condition that stays general, or is this toolkit's own shared infrastructure, such as its own local observability stack.",
+              "false": "At least one loading condition is one product's own work the skill loads for, not a labelled example. A general condition elsewhere in the description doesn't exempt a separate branch that loads the skill for one product's own workflow."
+            }
+          }
+        },
+        "decision": {
+          "start": "loads_for_product",
+          "steps": {
+            "loads_for_product": {
+              "ask": "loads_for_product",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "example_or_own_infrastructure",
+              "no": "pass"
+            },
+            "example_or_own_infrastructure": {
+              "ask": "example_or_own_infrastructure",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "pass",
+              "no": {
+                "finding": "The description loads this skill for one product's own workflow: read the skill, then decide whether it, or that branch, belongs in the product's own repository.",
+                "at": "description"
+              }
+            }
+          }
+        },
+        "severity": "warn"
+      }
+    },
+    {
+      "markdown": "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md",
+      "line": 9,
+      "marker": "<!-- K003 -->",
+      "sentence": "- A rule a skill teaches states a reusable judgment, with any product, library, API or incident only as an example, unless the rule names the scope the owner adopted it for.",
+      "entry": {
+        "name": "general-skill.taught-rule-overfits-to-one-project",
+        "evidence": "section",
+        "questions": {
+          "kind": {
+            "type": "choice",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings"
+              ],
+              "task": "What does this section's own text hold? body is the section's own text, without its child sections; heading and headings are its own heading and the headings it sits under."
+            },
+            "criteria": {
+              "rule": "At least one rule the skill teaches: a standard or judgment meant to hold wherever its situation recurs, beyond this one run of this one workflow. A section that mixes such a rule with local instructions holds a rule.",
+              "local": "Only local instructions for running this workflow: what to do next in this step, which file or skill to load or hand to, what to return, or the scope and owners of this skill. They hold only inside this workflow.",
+              "other": "Neither: only examples, definitions, facts, quotations, a list of labels or references, or the rationale for a rule stated elsewhere."
+            }
+          },
+          "reusable": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings"
+              ],
+              "task": "Is every rule this section's own text teaches stated as a judgment that would still guide a materially different repository, stack or team, with any product, library, API or incident it names only as an example, or as the scope the owner adopted the rule for?"
+            },
+            "criteria": {
+              "true": "Each rule transfers: on another stack or under other conventions it still tells the agent the right thing, and it rejects a bad choice it never names. A named product, file or incident appears only as an example, or the rule states the scope it was adopted for. The vocabulary of the subject the skill governs, such as a skill's description, references and call sites for a skill-writing skill, is its domain, not a product. When the subject is the clients or platforms the work ships to, as it is under a platform heading, those clients and their manifests, fields and settings are that vocabulary too, and a rule that opens with the client it holds for ('For <client>, \u2026') or rests on an owner's decision states its scope.",
+              "false": "At least one rule is one case written as the rule: it names a particular product, library, API, path, stack or incident as what to do everywhere, with no example label and no adopted scope, so it misleads a repository whose answer differs, as 'persist with SQLite and Drizzle' would for a TypeScript service built on Postgres."
+            }
+          }
+        },
+        "decision": {
+          "start": "kind",
+          "steps": {
+            "kind": {
+              "ask": "kind",
+              "min_probability": 0.6,
+              "routes": {
+                "rule": "reusable",
+                "local": "not_applicable",
+                "other": "not_applicable"
+              }
+            },
+            "reusable": {
+              "ask": "reusable",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "pass",
+              "no": {
+                "finding": "A rule here is one case written as the rule: state the judgment, or name the scope it was adopted for.",
+                "at": "body",
+                "locate": {
+                  "name": "case_line",
+                  "task": "Which line states a rule as one case written as the rule, naming a particular product, library, API, path, stack or incident as what to do everywhere? Not a line that names one only as an example, as the scope the owner adopted, or as the vocabulary of the subject the skill governs.",
+                  "min_probability": 0.5
+                }
+              }
+            }
+          }
+        },
+        "severity": "warn"
+      }
+    }
+  ]
+}
