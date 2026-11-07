@@ -108,7 +108,7 @@ Otherwise it is held, unchanged, with what it lacks, outside the active config; 
 
 **Invented text passed for proof.** A rule set's first proof used excerpt cases copied into the repository. Its held-out headline read 25 matched, 8 uncertain, 1 missed, 0 wrong; 13 of the 25 matches came from invented mini-skills and invented rule files, and on real held-out text it was 12 matched, 4 uncertain and 1 missed, of 17. The headline measured how well the rules judged text written to be judged. Read it as the coverage it was, rule by rule, and name each rule with no real positive.
 
-**A case that pointed at the wrong piece.** Migrating those excerpts to real-text cases first took each case's lines from where its excerpt started; one opened at `skill-creation/SKILL.md:22`, while the load the rule judges begins at `:24`. Dozens of cases would have matched a neighbouring piece or none. Take each case's lines from the piece the engine judges, confirmed on an evidence print.
+**A case that pointed at the wrong piece.** Migrating those excerpts to real-text cases first took each case's lines from where its excerpt started; one opened at `skill-creation/SKILL.md:22`, while the load the rule judges begins at `:24`. Dozens of cases would have matched a neighbouring piece or none. Take each case's lines from the piece the engine judges, confirmed on the collection.
 
 **A clean tree that wasn't a valid instrument.** Both held trees had one fact per question, batched requests, explicit in-between routes and guarded passes, and an independent review passed both from their source. Their development runs failed on the owner's rulings. Shape is necessary; what the rulings say on the sent state is what shows the meanings are right.
 

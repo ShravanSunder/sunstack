@@ -28,18 +28,22 @@ An agent with no authoring history on the rule runs this review, started the way
 
 ### 1. Admit the rule and the stage
 
-Name the target (the rule or filter, its rulebook file, the config, the revision), who asked, and your independence from its author. Name the stage:
+Name the target (the rule, filter or selection, its rulebook file, the config, the revision), who asked, and your independence from its author. Name the profile:
+- **a rule or filter:** a lint rule, whose findings go to an agent;
+- **a selection on its own:** a kind's `select`, reviewed before its first run. It has no nudge, and its downstream rule's requests are still under `needs_answer`; neither is asked for.
+
+Name the stage:
 - **design:** before any request: a selection before its first run, a rule before its first case run (after its selection's run, when it has one);
 - **development:** its development results are in;
 - **switch-on:** someone proposes to activate it.
 
-Then name each input supplied and each missing: the design; the entries and config; the evidence print; the desk-check record with each case's prepared request; the development case file; the held-out holder's separation attestation; the source of the owner's rulings; at development and switch-on, the saved report with its requests; at switch-on, the held-out results. A held-out case's contents are never an input.
+Then name each input supplied and each missing: the design; the entries and config; the prepared collection report (or, for a plain kind in a config with no `select`, an evidence print); the desk-check record with each case's prepared request; the development case file; the held-out holder's separation attestation; the source of the owner's rulings; at development and switch-on, the saved report with its requests; at switch-on, the held-out results. A held-out case's contents are never an input.
 
-Completion: target, requester, independence and stage are stated, and every input is named as supplied or missing, with who restores it.
+Completion: target, profile, requester, independence and stage are stated, and every input is named as supplied or missing, with who restores it.
 
 ### 2. Walk the decision-model checks
 
-MUST load `../decision-model-review/SKILL.md`, admit the rule as a lint rule at this stage, and walk its steps 1 to 5 yourself as its reviewer, returning each of its check records and candidates. Its review schema is the record for every check in this review.
+MUST load `../decision-model-review/SKILL.md`, admit the target under its profile at this stage (a rule or filter as a lint rule; a selection on its own as an engine selection, which supplies no lint-rule nudge artifacts), and walk its steps 1 to 5 yourself as its reviewer, returning each of its check records and candidates. Its review schema is the record for every check in this review.
 
 Completion: each of its checks has a record and a status.
 
@@ -50,7 +54,9 @@ MUST load each check below and return its record, in the schema step 2 loaded, u
 2. `references/checks/chunk-and-coverage.md`: whether the rule names its chunk, picks it for a reason, reads only the folders its standard governs, shows what it didn't read, and fixes a misread where the text is collected.
 3. `references/checks/lint-contract.md`: whether the rule reaches agents as a nudge through plain lint, with nothing bent around the engine.
 
-IF reading the entries, an evidence print, a report or the case file needs the engine's meaning of a field or status, load `../skill-rules-config/SKILL.md` and return the meaning from the reference its task names.
+For a selection on its own, `owner-rulings` reads the selection's required inclusions (the pieces its rule's owner-ruled must-warn cases need) in place of ruled answers, `chunk-and-coverage` reads the candidate frontier, and `lint-contract` runs only its engine item, the rest recorded not selected with the profile as the reason.
+
+IF reading the entries, a prepared report, an evidence print, a report or the case file needs the engine's meaning of a field or status, load `../skill-rules-config/SKILL.md` and return the meaning from the reference its task names.
 
 Completion: each check has a status; a `partial` or `blocked` one names its missing input.
 

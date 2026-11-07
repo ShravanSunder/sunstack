@@ -93,7 +93,7 @@ Completion: the verdict is `ready` for the next request (a selection's first run
 
 ### 8. Run the selection first, when there is one
 
-A selection's first requests are a paid development step, sent only after step 7's `ready` for it. Run it over the development cases' files and read each candidate's outcome against the selection's cases: every required inclusion must be selected, an uncertain or incomplete one counting as unmet; the pieces it kept that its standard doesn't govern are counted as their cost. A required inclusion that wasn't selected goes back to step 4; the rule waits. Then prepare the downstream rule on the selected pieces, from the selection run's saved report (`--selections-from`, as `skill-rules-config`'s prepared-requests reference says), desk-check it as step 6 does and have it reviewed as step 7 does, before any rule case runs. A piece still under `needs_answer` is listed with its reason, never prepared on a guess. A rule on a kind with no selection skips this step.
+A selection's first requests are a paid development step, sent only after step 7's `ready` for it. Run it over the development cases' files and read each candidate's outcome against the selection's cases: every required inclusion must be selected, an uncertain or incomplete one counting as unmet; the pieces it kept that its standard doesn't govern are counted as their cost. A required inclusion that wasn't selected goes back to step 4; the rule waits. Then prepare the downstream rule on the selected pieces, from the selection run's saved report (`--selections-from`, as `skill-rules-config`'s prepared-requests reference says), desk-check it as step 6 does and have it reviewed as step 7 does, before any rule case runs. A piece still under `needs_answer` is listed with its reason, never prepared on a guess. On an engine that can't record the selection's answers without also sending the downstream rule's requests (0.9.0 can't; that reference names the gap), the downstream desk check waits on the engine, and the selection's run waits with it. A rule on a kind with no selection skips this step.
 
 Completion: every required inclusion was selected and every outcome is counted, and the downstream rule's desk check and review on the selected pieces are in; or the selection is back with step 4, with what it dropped.
 
@@ -101,7 +101,7 @@ Completion: every required inclusion was selected and every outcome is counted, 
 
 Using `references/cases-and-proof.md`, with the commands from `skill-rules-config`'s case runs: run the development set; set each bar from the development results and record it with the cases that set it; freeze the questions, reference, evidence, selection and bars; then have the held-out holder run the held-out set once. Return per judged rule, filter and selection: the outcome of every case, scored or listed with why; the floors met or lacking; each bar with its development cases; the model requested and the version that answered; the baseline comparison or its gap; and the decision, on or held, with what a held rule lacks. Return per mechanical rule its edge tests.
 
-Keep three observations apart: the collection (the evidence print), the tree (the case results), and the receiving agent's call, which only a pressure task observes and which stays named as unproven until one has run.
+Keep three observations apart: the collection (the prepared report, or an evidence print where printing sends nothing), the tree (the case results), and the receiving agent's call, which only a pressure task observes and which stays named as unproven until one has run.
 
 Completion: every judged rule has its development run and, frozen, its one held-out run, or the missing run named as unproven; every case is counted or listed; every rule short of a floor or a switch-on condition is held, with what it lacks; every mechanical rule has edge tests that pass and fail where its standard does.
 
@@ -134,4 +134,4 @@ The run is not done while any of these hold:
 - a route whose evidence can't settle its standard ends `pass`, or a path that reads a model's answer can reach an `error` finding;
 - a held-out case was read, desk-checked, compared or tuned on by whoever tunes the rule, or the holder's separation attestation is missing and not named as a gap;
 - a judged rule warns before its cases meet the floors, or a held rule was switched on;
-- a passing check or evidence print is claimed as proof that a rule decides well, or a rule's case results as proof of what an agent does with its nudge.
+- a passing check or a collection is claimed as proof that a rule decides well, or a rule's case results as proof of what an agent does with its nudge.

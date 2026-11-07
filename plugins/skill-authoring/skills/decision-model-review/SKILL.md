@@ -20,7 +20,7 @@ Name the model's execution profile and the review's stage:
 - **stage:** design, implementation, or delivery.
 
 Then name the inputs that profile and stage supply.
-- **A lint rule** supplies what its stage has produced so far: the classification, the evidence print and encoded state, the question set, the tree and policy table, each finding route's nudge, the cases and run reports, and the frozen configuration. When one exists, it also supplies the receiving reading or commission built from its nudges: what an agent or a Lead made of them.
+- **A lint rule** supplies what its stage has produced so far: the classification, the collection (a prepared report, or an evidence print where printing sends nothing) and encoded state, the question set, the tree and policy table, each finding route's nudge, the cases and run reports, and the frozen configuration. When one exists, it also supplies the receiving reading or commission built from its nudges: what an agent or a Lead made of them.
 - **A `run_judgments` caller or a selection** supplies its equivalents: the exact state or its builder, the questions with their criteria, the policy code, and its tests, results and version evidence. Its own code acts on the outcome, so it has no nudge to review. It never fabricates lint-rule artifacts.
 
 Return `blocked-input` only when nothing supplied supports any check, naming what's missing and who restores it. Otherwise the review goes on. A supplied request that is visibly empty or invalid is a finding where a check supports it, not missing review input.

@@ -53,6 +53,8 @@ Each of these is listed under `needs_answer`, never built on a guessed answer. E
 
 The selection's first run is a paid development step, made only after its own desk check and review. Save its report: from 0.9.0 an ordinary `--report` keeps each selection request with its answer, the requested and resolved models, the input hash and the raw selection evidence. A case report works too.
 
+**A gap in 0.9.0: no run records a selection alone.** `--selections-from` reads only a report with a request ledger: an ordinary `--report` run or a case report. `--evidence` sends only selection requests, but it can't be saved with `--report`, and its listing has no request ledger. Ordinary and case runs also send every asking rule that reads the selected pieces, so recording the answers would send the downstream rule's requests before that rule's desk check and review. Recorded answers also apply only to identical states: answers recorded on today's files don't serve development cases at older revisions whose text differs. Until the engine can record a selection on its own, at the cases' revisions, name this gap: the downstream rule's desk check waits on the engine, and no run sends that rule's requests ahead of its review.
+
 Then prepare the downstream rule with `--prepare --selections-from <that report>`. The engine applies a recorded answer only when all of these hold:
 - the selection request's state and questions are identical to the recorded one;
 - the recorded answer is valid;

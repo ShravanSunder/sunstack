@@ -11,7 +11,7 @@ This reference owns step 4: turning a classified standard into a rule's design b
 ## The gates
 
 - **The chunk is chosen for a reason:** its shape decides which pieces the standard governs, or its shape finds candidates and choosing among them takes reading.
-- **The decisive content** is in the field or state the rule's nodes read, and an evidence print over real sources shows it there.
+- **The decisive content** is in the field or state the rule's nodes read, and the collection over real sources (a prepared report, or an evidence print where printing sends nothing) shows it there.
 - **Each question's meaning draws the owner's line,** in the owner's terms, with the step-3 cases on each side of it named.
 - **Each mechanical node** decides only what its predicate fully captures.
 - **Each node that reads a model's answer** asks one proposition, and has its policy, with inequalities and routes.
@@ -76,7 +76,7 @@ This reference owns step 4: turning a classified standard into a rule's design b
    Several rules can nudge about the same line, each about its own property. Keep each route's message about its own: the agent puts them together.
 
 7. **Plan the proof,** in three observations kept apart:
-   - **the collection:** an evidence print over the rule's full denominator, every intended piece found with its fields, every cut named;
+   - **the collection:** the collection over the rule's full denominator, from a prepared report, or an evidence print where printing sends nothing, every intended piece found with its fields, every cut named;
    - **the tree:** for a deterministic rule, edge tests at its predicate's boundary, with no model. For a judged rule or filter, step 3's case file through `sunstack lint cases`: development first, then the frozen held-out set once, meeting the floors `cases-and-proof.md` names, with the current rule as the baseline when one exists;
    - **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source; the design names it as unproven until one has run.
 
@@ -96,7 +96,7 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
   2. `requires_result`: "Does the step's stated end require the result the step itself says to produce?" This is bounded by the step's own stated work. "Glance at the test output, then move on" passes when the step asks only for a glance. Requiring an investigation the step never names imports another standard.
 - **Policy.** P(yes) ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is `uncertain`, for the agent running the check to decide. These bars are a first setting, provisional until the development cases set them. Both findings are `warn`: both paths read a model's answer. A false finding costs an author a needless rewrite, and pushes toward padding the owner rejected. A miss lets an empty criterion through. A review costs the checker's time.
 - **The nudge.** Each finding points at `body`, whose first line opens the step, and needs no locator: a step is small enough to read whole. No `related` field: the step is the finding's own place, and the standard's line is the only other thing the agent needs.
-- **Proof plan.** The evidence print over every selected step. Development and held-out cases on real steps at fixed revisions, labelled independently, including:
+- **Proof plan.** The prepared collection over every selected step: before the selection's run, its candidates; after it, the steps it chose. Development and held-out cases on real steps at fixed revisions, labelled independently, including:
   - a step whose whole job is to report an existing result;
   - a step that asks only for a glance;
   - a full return stated without any label;
