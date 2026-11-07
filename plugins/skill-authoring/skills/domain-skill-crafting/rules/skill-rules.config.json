@@ -269,13 +269,7 @@
             "label": "repo_specific",
             "why": "The work follows this repository's own curation procedure, ownership rules and storage homes, rather than operating a public memory tool."
           }
-        ],
-        "starting_policy": {
-          "status": "Starting bars from the commissioned PD; not tuned, calibrated, or an activation decision.",
-          "primary_work": "Three labels. Read p_max, the selected label's probability: p_max >= 0.6 follows its route; p_max < 0.6 ends unsure.",
-          "reusable_guidance_kind": "Three labels. Read p_max, the selected label's probability: p_max >= 0.6 follows its route; p_max < 0.6 ends unsure. This answer is read only on the reusable_guidance route.",
-          "meaning": "Both questions are assessed in one request. Their answers are not multiplied or averaged. A top probability is not measured correctness or calibration; there is no combined probability for the final label. With three labels, 0.6 corresponds to rescaled Choice confidence 0.4, which is not the routing statistic."
-        }
+        ]
       }
     }
   }

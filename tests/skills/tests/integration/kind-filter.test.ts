@@ -77,6 +77,7 @@ test("the authored kind tree sends description and the complete first section on
       const canonical = readJson(path.join(root, configRelative));
       const filters = jsonObject.parse(jsonObject.parse(canonical["filters"])["kind"]);
       expect(request.state["reference"]).toEqual(filters["reference"]);
+      expect(request.state["reference"]).not.toHaveProperty("starting_policy");
       expect(
         report.results.every((result) =>
           [
