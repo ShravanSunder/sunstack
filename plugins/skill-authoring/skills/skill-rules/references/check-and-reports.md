@@ -97,7 +97,7 @@ Three things keep the cases honest:
 
 `sunstack lint cases <file> --set development`, then, once the questions, reference and bars are frozen, `sunstack lint cases <file> --set held_out`, once. Both ask questions, so they need the key: without the grant, prepare the commands and hand them over.
 
-Each run copies the repository at each case's revision, puts today's config and rule files on top, and runs ordinary lint on the case's paths, so a case sees its own folder and every file it loads as they were. It writes nothing lint reads: a case run is the author's tool before a rule is switched on, never a gate.
+Each run copies the repository at each case's revision, puts today's config, rule files and evidence-rule directories on top, and runs ordinary lint on the case's paths, so a case sees its own folder and every file it loads as they were, judged by today's rules. Keep the evidence project's rule directories apart from the skills they check: a rule directory that covers the repository root or checked text makes the case run refuse. It writes nothing lint reads: a case run is the author's tool before a rule is switched on, never a gate.
 
 **Reading the results.** Every case gets one outcome, counted per rule and per filter, apart:
 - **scored:** `right`, `false_warning`, `missed`, `unsure` or `incomplete` for a rule; `right`, `wrong_label`, `unsure` or `incomplete` for a filter;
