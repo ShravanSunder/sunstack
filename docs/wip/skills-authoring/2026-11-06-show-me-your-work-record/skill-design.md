@@ -137,16 +137,18 @@ Defaults taken, each with its rationale; the owner may strike any row.
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 | implemented | this commit; O4 and O5 in the handback; corrections (D15) at 39a3118f; the refusal rule at 10388793; the unknown-outcome rule at d3568513 |
-| 2 | implemented | this commit; O3 test red with workLog optional, green required |
-| 3 | implemented | this commit |
-| 4 | implemented | this commit |
-| 5 | implemented | this commit |
-| 6 | implemented | this commit |
-| 7 | implemented | this commit |
-| 8 | implemented | this commit, with the version bump, changelog and README |
-| 9 | implemented | this commit |
+| 1 | reviewed | bd3c1194; O4 and O5 in the handback; corrections (D15) at 39a3118f; the refusal rule at 10388793; the unknown-outcome rule at d3568513; implementation review `great` at 4d099185 |
+| 2 | reviewed | 2b48d99f; O3 test red with workLog optional, green required; implementation review `great` at 4d099185 |
+| 3 | reviewed | d51f4fd2; implementation review `great` at 4d099185 |
+| 4 | reviewed | 3f0cc3ba; implementation review `great` at 4d099185 |
+| 5 | reviewed | 30934d92; implementation review `great` at 4d099185 |
+| 6 | reviewed | f623c8d0; implementation review `great` at 4d099185 |
+| 7 | reviewed | 23b791b9; implementation review `great` at 4d099185 |
+| 8 | reviewed | 5e820814, with the version bump, changelog and README; implementation review `great` at 4d099185 |
+| 9 | reviewed | 24767b30; implementation review `great` at 4d099185 |
 
 ## Review record
 
 Design stage: accepted at `430c7ac1` (skill-review 0.10.2 design stage, review lead codex-local/01a1a6f7). First pass at `ecf2f095`: targeted-revision, four findings (F1 blocker, F2–F4 important). The corrections at `430c7ac1` were verified, and all four closed. Verdict `great`; implementation decision `accepted-to-implement`. Acceptance binding: the original report plus its correction verification (memory-logs `skills/authoring/2026-11-03-show-me-your-work-evidence/spec-review-smyw-record-2026-11-06/`; rows `01a1b3eb-efd0-7c58`, `01a1b3f2-a8d6-7cf0`).
+
+Implementation stage: first pass at `f939e0ae`: targeted-revision, four important findings (IR1–IR4), with the Lead's L1 joined to IR1. Corrected under D15. IR4's design side took two more source checks (rows `01a1b435-7bbb`, `01a1b439-a00b`) before rows 194–195 closed it at `d9126234`. The review lead verified the corrected head `4d099185`: all closed, 4 → 0 open, no recurrence. Verdict `great`; ship decision PR-ready candidate. Reports: memory-logs `skills/authoring/2026-11-03-show-me-your-work-evidence/implementation-review-smyw-record-2026-11-07/` (`report.md`, `correction-1-verification.md`); the review lead's final audit `01a1b443-afb6-7403`. Behavior stays drafted from user intent, not yet evaluated.
