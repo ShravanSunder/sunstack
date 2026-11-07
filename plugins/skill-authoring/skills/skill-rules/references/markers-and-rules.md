@@ -106,7 +106,7 @@ A finding route and its entry carry what the agent receives. Step 3's nudge desi
           "locate": { "name": "product_line", "task": "Which line of body shows material that belongs to one product: its own procedures, run commands, state files or machine paths? Not a line that names a product only as a labelled example, uses a tool as it is meant to be used, or uses this toolkit's own shared tools.", "min_probability": 0.6 } } }
 ```
 
-with `"related": ["targets"]` and `"severity": "warn"` on the entry (`general-skill.overfits-to-product-workflow` in `general-skill.rules.json`). A locator's task carries the exemptions its questions own, so it doesn't pick a line the questions would excuse.
+with `"related": ["targets"]` and `"severity": "warn"` on the entry (`general-skill.overfits-to-product-workflow`, held in `rules/held/general-skill.json`). A locator's task carries the exemptions its questions own, so it doesn't pick a line the questions would excuse.
 
 What the judge receives, and when a request is sent, is a fact of the Sunstack driver; `domain-decision-models` owns it in its driver reference. `references/rule-design.md` holds two worked entries.
 
