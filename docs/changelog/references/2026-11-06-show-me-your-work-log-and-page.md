@@ -24,4 +24,9 @@ D16 validation, after the Lead's assessment corrections and the implementation r
 - The engine's saved view of call targets marks 25 occurrences unresolved. Thirteen name skills that live outside this skill's folder (`presentation-html` 7, `practices-collaboration` 6). The rest are extraction artifacts such as `Key:`, `no-home` and command fragments, not broken calls. Another 18 targets show only a shortened opening. Zero incomplete results doesn't make these limits of the saved view into "no gaps".
 - The run at `99d7aa57` gave 78 pass, 13 not applicable, 23 uncertain (the same 2 load-call pieces among them) and 2 warn rows: the page step's `presentation-html` load and `SKILL.md:14`, both kept. Judged results vary between runs.
 
+After merging main (#199, which moves the rules to native `sunstack lint` with CLI 0.8.3 and holds the judged rules), at `bffcf14c`:
+- `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json plugins/sunstack-dev/skills/practices-show-me-your-work` was clean: 0 errors, 0 warnings, 3 mechanical rules passing over the skill's 6 files, with 0 model requests. The judged results above came from the runner before #199.
+- `pnpm --dir tests/skills test` (223 tests) passed in 3 of 5 full runs. The other 2 failed on different integration tests that arrived with #199: once `active-rulebook` and `kind-filter`, once `scaffold-project`, whose scaffold exited 141 (SIGPIPE). Each passes when run alone. This branch changes none of those tests or the scaffold plugin; the flakes belong to main.
+- `pnpm --dir tests/skills typecheck` exit 0, and `claude plugin validate .` passed.
+
 Not covered: whether Router processed overlapping sends at once (seen only from the clients' side); agents following the guidance on real work; the owner reading the page; hosts other than this machine's Router.
