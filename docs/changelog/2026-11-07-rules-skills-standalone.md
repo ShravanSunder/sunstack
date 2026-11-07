@@ -8,5 +8,6 @@
 - sunstack-dev **2.107.0**: the two skills leave its inventory; `implementation-review` loads `decision-model-review` from skill-authoring and reports `skill unavailable` without it. README and phase-composition map updated.
 - AGENTS.md skill table, plugin READMEs, architecture docs and both plugins' manifests updated; Claude and Cursor marketplace versions moved; Codex marketplace paths unchanged.
 - Held trees, the active rulebook (three mechanical rules) and all case files are unchanged.
+- `tests/skills` pins `@sunstack/cli` **0.9.0** (released, Developer ID signed); the frozen install passes the supply-chain policy with the release-age exclusion moved to 0.9.0.
 - Validation: [references/2026-11-07-rules-skills-standalone.md](references/2026-11-07-rules-skills-standalone.md).
 - Codex/Claude installed-cache refresh: not performed; source verification only. Behavior of the new teaching is not yet evaluated.
