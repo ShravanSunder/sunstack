@@ -46,6 +46,15 @@ const sessionAddress = (sessionId: string): PacketFields => ({
   sessionId,
 });
 
+const workTrailLog: PacketFields = {
+  kind: "workTrail",
+  projectId: "01a1635f-5d9d-70e4-bfc7-6d96c1a210e7",
+  workTag: "design-documents",
+  workstream: "skill-implementation",
+  writeCommand:
+    "step 1: node -e 'const c=require(\"node:crypto\");console.log(\"request\", c.randomUUIDv7(), \"row\", c.randomUUIDv7())'; step 2: agent-collaboration work-trail add --project-id 01a1635f-5d9d-70e4-bfc7-6d96c1a210e7 --actor self --subject '{\"kind\":\"project\"}' --request-id <request> --row-id <row> --tag design-documents --tag stream:skill-implementation --tag <kind> --tag who:<who> --json \"<text>\"",
+};
+
 const commonFields = (charter: string): PacketFields => ({
   outcome: "Return the result the plan names for this slice.",
   sources: [
@@ -63,6 +72,7 @@ const commonFields = (charter: string): PacketFields => ({
   limits: { access: "inspect" },
   stopCondition: "The slice's acceptance check passes, or a design break is returned.",
   returnContract: { kind: "owned-result", owner: "implement-plan" },
+  workLog: workTrailLog,
 });
 
 const operatorPacket = (): PacketFields => ({
@@ -350,6 +360,32 @@ describe("agent job packet schema", () => {
     expect(boundedIssues).toEqual([]);
     expect(continuingIssues).toEqual([]);
     expect(continuingWorkerIssues).toEqual(["investigation"]);
+  });
+
+  test("requires every packet to name its work log, as a work trail or as no record with its gap", () => {
+    // Arrange
+    const withWorkTrail = implementerPacket();
+    const withNoRecord = {
+      ...implementerPacket(),
+      workLog: { kind: "noRecord", gap: "No Router project yet; return rows in the handback." },
+    };
+    const withoutWorkLog = withoutField(implementerPacket(), "workLog");
+    const workTrailWithoutCommand = {
+      ...implementerPacket(),
+      workLog: withoutField(workTrailLog, "writeCommand"),
+    };
+
+    // Act
+    const workTrailIssues = issuePaths(AgentJobPacket, withWorkTrail);
+    const noRecordIssues = issuePaths(AgentJobPacket, withNoRecord);
+    const missingIssues = issuePaths(AgentJobPacket, withoutWorkLog);
+    const missingCommandIssues = issuePaths(AgentJobPacket, workTrailWithoutCommand);
+
+    // Assert
+    expect(workTrailIssues).toEqual([]);
+    expect(noRecordIssues).toEqual([]);
+    expect(missingIssues).toContain("workLog");
+    expect(missingCommandIssues).toContain("workLog.writeCommand");
   });
 
   test("rejects a generic acceptance field on a packet", () => {

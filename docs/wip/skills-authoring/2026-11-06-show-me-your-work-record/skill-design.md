@@ -137,7 +137,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | Run | Status | Evidence |
 | --- | --- | --- |
 | 1 | implemented | this commit; O4 and O5 in the handback |
-| 2 | proposed | |
+| 2 | implemented | this commit; O3 test red with workLog optional, green required |
 | 3 | proposed | |
 | 4 | proposed | |
 | 5 | proposed | |

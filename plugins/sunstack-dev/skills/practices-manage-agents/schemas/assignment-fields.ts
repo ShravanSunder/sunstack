@@ -119,6 +119,26 @@ export const HelperReturnContract = z
   .discriminatedUnion("kind", [OwnedResultContract, HelperHandbackContract])
   .describe("The owning phase or method result, or the role's handback when none owns it");
 
+export const WorkLog = z
+  .discriminatedUnion("kind", [
+    z.strictObject({
+      kind: z.literal("workTrail").describe("The helper logs its own rows in this Router work trail"),
+      projectId: RequiredText.describe("The Router project that holds the work's log"),
+      workTag: RequiredText.describe("The tag every row of this work carries"),
+      workstream: RequiredText.describe(
+        "The plain label the helper's rows go under, such as 'page experiments'",
+      ),
+      writeCommand: RequiredText.describe(
+        "The two-step write: step one mints a request id and a row id per row; step two has project, subject, work tag and workstream filled in, and the helper adds the ids, kind, who and text, reusing the same ids on a retry",
+      ),
+    }),
+    z.strictObject({
+      kind: z.literal("noRecord").describe("This work has no Router log"),
+      gap: RequiredText.describe("Why, and where the helper returns its rows instead"),
+    }),
+  ])
+  .describe("Where the helper logs its own decisions, assumptions, shortcuts and checks as it works");
+
 export const JobBase = z.strictObject({
   outcome: RequiredText.describe(
     "What done looks like, checkable by the recipient; a result, never an acceptance",
@@ -134,6 +154,7 @@ export const JobBase = z.strictObject({
     "Where the job ends; what to stop for and return early; and what to decide and record within what the role and assignment delegate",
   ),
   returnContract: OwnedResultContract,
+  workLog: WorkLog,
 });
 
 export const BlockedAssignment = {
