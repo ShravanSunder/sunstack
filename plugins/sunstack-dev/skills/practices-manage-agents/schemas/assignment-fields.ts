@@ -129,7 +129,7 @@ export const WorkLog = z
         "The plain label the helper's rows go under, such as 'page experiments'",
       ),
       writeCommand: RequiredText.describe(
-        "The two-step write: step one mints a request id and a row id per row; step two has project, subject, work tag and workstream filled in, and the helper adds the ids, kind, who and text, reusing the same ids on a retry",
+        "The two-step write: step one mints a request id and a row id per row; step two has project, subject, work tag and workstream filled in, and the helper adds the ids, the kind and the tags it takes, who, the text and any row it closes, reusing the same ids on a retry",
       ),
     }),
     z.strictObject({

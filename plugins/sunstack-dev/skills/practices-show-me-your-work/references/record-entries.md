@@ -17,7 +17,7 @@ Every row carries these tags:
 | Tag | Meaning |
 | --- | --- |
 | its kind | one of the ten below |
-| `who:<role>` | who decided, did or assumed it: `owner`, `lead`, `sidekick`, `reviewer`, `evaluator`, `advisor` or `operator`. An owner decision the Lead writes is `who:owner`; the writer stamp still shows the Lead |
+| `who:<role>` | who decided, did or assumed it: `owner`, `lead`, `advisor`, `implementer`, `verifier`, `reviewer`, `researcher` or `operator`. An owner decision the Lead writes is `who:owner`; the writer stamp still shows the Lead. Older rows' `who:sidekick` reads as a helper |
 | `stream:<workstream>` | the workstream it belongs to: the plain label the Lead gave the part of the design or plan, such as `stream:page-experiments` (lower case, spaces as hyphens). Your packet's `workLog` names yours. Older rows carry `part:<id>` instead; read it as their workstream |
 | the work's tag | the tag every row of this work carries, such as `design-documents` |
 
@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Section:` (one of the page's four sections, which `show-me.md` names), `Headline:`, `Happened:`, `For you:`, `Next:`, and optionally `Show:` (a table or a diagram source); its links name the rows it covers |
+| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Section:` (one of the page's four sections: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed), `Headline:`, `Happened:`, `For you:`, `Next:`, and optionally `Show:` (a table or a diagram source); its links name the rows it covers |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, with each Missed row linked) |
 
@@ -121,11 +121,11 @@ Put a commit or a repository path in the text when the row needs it.
 
 ## Write it
 
-Your packet's `workLog.writeCommand` is the command, with the project, subject, work tag and workstream already filled in. You add only the minted ids, the kind, `who:`, the text and, when the row closes one, its link. It has two steps, run as two separate commands:
+Your packet's `workLog.writeCommand` is the command, with the project, subject, work tag and workstream already filled in. You add only the minted ids, the kind and the tags its kind takes (`core`, `door:two-way`, `state:`, `next:`, `resolves` or `supersedes`), `who:`, the text and, when it closes a row, that row as its first link. Nothing is looked up. It has two steps, run as two separate commands:
 
 ```text
 step 1 (once per row):  node -e 'const c=require("node:crypto");console.log("request", c.randomUUIDv7(), "row", c.randomUUIDv7())'
-step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--link '<the row it closes>'] --json "<text>"
+step 2 (and any retry): agent-collaboration work-trail add --project-id <project> --actor self --subject '{"kind":"project"}' --request-id <request> --row-id <row> --tag <work tag> --tag stream:<workstream> --tag <kind> --tag who:<who> [--tag <tag its kind takes> ...] [--link '<the row it closes>'] --json "<text>"
 ```
 
 Step one prints a request id and a row id. Step two writes the row with them, and its result's decision is `accepted`, carrying the row's id.

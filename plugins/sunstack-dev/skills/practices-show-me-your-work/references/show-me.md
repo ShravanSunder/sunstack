@@ -37,7 +37,7 @@ A decision with no `Authority:`, or one inferred from a plan, a review or a page
 
 ## Write the stories
 
-A story tells the owner what one subject amounts to: a PR, a decision and its follow-through, a review, an experiment. Stories are `story` rows in the log (`record-entries.md` owns their lines), written by the Lead at each checkpoint before the page is composed. `Section:` names one of the four sections above; `For you:` says what the owner must do, or "nothing". Every line of a story is said by a row it cites.
+A story tells the owner what one subject amounts to: a PR, a decision and its follow-through, a review, an experiment. Stories are `story` rows in the log (`record-entries.md` owns their lines), written by the Lead at each checkpoint before the page is composed. `Section:` names one of the four sections a story can go in: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed; `For you:` says what the owner must do, or "nothing". Every line of a story is said by a row it cites.
 
 1. Take the rows logged since the last checkpoint's position, which the last page names. A first checkpoint takes them all.
 2. Give each row to the story whose subject it belongs to, in its workstream.
@@ -79,8 +79,6 @@ flowchart TB
 - **What changed and why · 1 shortcut, 4 decisions:** card `sketchShortcut`, "PR #194 merged without running the repository's test suite": what should have happened, the suite passing before a skill PR is called ready; what happened instead, typecheck, rules and static checks only, with no CI to run the suite, and two tests went red on main; why, not recorded at the time; approved, no; closed by #197. Then two columns in an `ex-grid`: "Yours, or worth your look · 2" (the log is Router's work trail, not CSV or JSONL; two parts, the skill logs and a reference shows you) and "Agents' own calls · 2" (the row helper reuses a request id on a retry; the requirement tables keep four columns to fit the screen).
 - **What was verified, and what was missed:** "Requirements page: quotes, counts and rendering", run and logged first-hand by Terra; "Terra's earlier checks of the page experiments", reported second-hand by the Lead (25 of the Lead's 49 check rows mention an evaluator; the two opened, `01a1a98d-0d00` and `01a1ab35-77b3`, are Terra's runs written by the Lead); card `sketchNoAcceptance`, "PR #194: no acceptance recorded". Under What was missed, three cards, the first being `sketchMissed`: the skipped suite wasn't logged when it was skipped; a question for the owner was logged 23 minutes after it arose; Terra's checks were logged by the Lead instead of by Terra. Then a "Not audited" callout: no agent had audited its own stretch yet, so the page can't say nothing else was missed.
 - **Who wrote the log:** an `xychart-beta` over 3–6 Nov with bars for the Lead (53, 68, 64, 58 rows), the Implementer Sidekick (0, 14, 5, 5) and Terra (0, 0, 0, 1); of 268 rows, 243 are the Lead's. Under it, the values table whose cells open each writer's rows for that day.
-
-The design set's page holds this sketch rendered: `docs/wip/skills-authoring/2026-11-06-show-me-your-work-record/specification.html`, tab "Your page, sketched".
 
 ## Check it
 
