@@ -2,7 +2,7 @@
 
 This reference owns what an entry does to the work: whether it stops anything, and if so what, and who acts next. An entry stops the work that depends on it in one of six ways, and only these. Everything else is recorded and continued past.
 
-Expected inputs: the entry you are about to write (an assumption, a decision made without asking, or a design change), the choice behind it, and the authorities you found for it: the owner's words, the governing design, an existing contract.
+Expected inputs: the entry you are about to write (an assumption, a decision made without asking, or a shortcut), the choice behind it, and the authorities you found for it: the owner's words, the governing design, an existing contract.
 
 Return: the treatment that applies, the real case below it matches, and the action it causes now, including the entry's `next:` actor when it is an assumption.
 

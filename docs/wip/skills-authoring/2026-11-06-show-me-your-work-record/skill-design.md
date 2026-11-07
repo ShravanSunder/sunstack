@@ -136,7 +136,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 
 | Run | Status | Evidence |
 | --- | --- | --- |
-| 1 | proposed | |
+| 1 | implemented | this commit; O4 and O5 in the handback |
 | 2 | proposed | |
 | 3 | proposed | |
 | 4 | proposed | |
