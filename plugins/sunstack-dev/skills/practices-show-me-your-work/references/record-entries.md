@@ -130,7 +130,13 @@ step 2 (and any retry): agent-collaboration work-trail add --project-id <project
 
 Step one prints a request id and a row id. Step two writes the row with them, and its result's decision is `accepted`, carrying the row's id.
 
-**Retry with the same ids, always.** When step two's result is unclear (it exits non-zero, or prints no row id), run step two again with the same request id and row id. Router returns the original row if the first send landed, or writes it if it didn't, so the row exists exactly once. Never mint new ids for a retry: "it failed, so this is a new write" is the mistake, because a new pair writes a second copy of the same fact. A new row, even with the same words, starts again at step one. Reading the trail afterwards only reconciles; the same ids are the guarantee.
+Step two ends one of three ways, and each needs a different move:
+
+- **Accepted:** a readable answer whose decision is `accepted`. Keep the row id.
+- **Unknown outcome:** no readable Router answer, because the command timed out, the connection dropped after sending, or its output can't be read. Run step two again with the same request id and row id. Router returns the original row if the first send landed, or writes it if it didn't, so the row exists exactly once. Never mint new ids for this retry: "it failed, so this is a new write" is the mistake, because a new pair writes a second copy of the same fact. Reading the trail afterwards only reconciles; the same ids are the guarantee.
+- **Router refuses:** a readable answer that isn't `accepted`, such as a recorded rejection like `conflictingRequest`, a writer, lease or schema gate, or an access denial. No row exists, and resending the same ids returns the same refusal. If the refusal came after an unknown first send, read the trail for the row id first: the first send may have landed. Otherwise fix what the answer names, and write the row again from step one with new ids. For an access denial, keep the row for your handback with the exact answer, as for an unreachable write below, and never switch identity or transport to get past it.
+
+A new row, even with the same words, always starts again at step one.
 
 **When the write can't reach Router** (the command fails to connect, as a sandboxed Worker's can), keep each row's text and kind and list them in your handback with the exact error. Your commissioner writes them with `Ran by:` naming you, plus a `missed` row for each, saying you couldn't write it and why. Don't stop work for this.
 
