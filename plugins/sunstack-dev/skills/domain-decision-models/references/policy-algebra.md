@@ -53,13 +53,17 @@ Precedence, in the same tree:
 3. **An unknown stays `uncertain`,** never a nudge and never a pass, unless an explicit review policy routes it elsewhere. A nudge needs answers that separated; an in-between answer didn't.
 
 ```text
-Good: routes into a product's workflow? → yes → only a labelled example? → no → nudge "read the loaded file; decide where it belongs"
-                                                                         → yes → pass
-                                        → no → pass (what the evidence can show held)
-      either between its bars → uncertain
+Good: product material? → yes → (not all labelled as examples) OR (quotes a real product's mistake)
+                                   → known true:  nudge "read the line and the loaded file; decide where it belongs"
+                                   → known false: pass, once the text was fully read
+                                   → unknown:     uncertain
+                         → no  → pass, once the text was fully read (what the evidence can show held)
+      any answer the walk reads between its bars → uncertain
 Bad:  belongs in this repository? → between its bars → pass   (can't settle, reported as held)
-Bad:  routes into a product's workflow? → yes → finding "this is in the wrong repository"   (a breach the evidence can't show)
+Bad:  product material? → yes → finding "this is in the wrong repository"   (a breach the evidence can't show)
 ```
+
+A pass on a "no" is a claim that something is absent, so it needs the text fully read. Sunstack's `complete` check says so mechanically; on a cut or unresolved read, the route ends `uncertain`.
 
 A decided finding and a nudge are both findings to the engine; which one a route gives is said in its message, not by a separate outcome.
 

@@ -1,6 +1,6 @@
 # Rule Design
 
-This reference owns step 3: turning a classified standard into a rule's design before any marker or entry is written. The design walks five things in order: the judgment the nudge helps, the chunk, the tree, the nudge each route gives, and the proof.
+This reference owns step 3: turning a classified standard into a rule's design before any marker or entry is written, and designing a filter the same way. The design walks five things in order: the judgment the nudge helps, the chunk, the tree, the nudge each route gives, and the proof.
 
 **Expected input:** the marked standards from step 2, each with its `path:line`, outcome, evidence kind and gate. Also the repository's rules config and evidence project, and `domain-decision-models`, loaded.
 
@@ -13,13 +13,15 @@ This reference owns step 3: turning a classified standard into a rule's design b
 - **The decisive content** is in the field or state the rule's nodes read, and an evidence print over real sources shows it there.
 - **Each mechanical node** decides only what its predicate fully captures.
 - **Each node that reads a model's answer** asks one proposition that passes the standard's own bad examples, and has its policy, with inequalities and routes.
+- **Examples and definitions live in the `reference`,** written once, and each question names the fields and reference parts it reads; its wording says what its answers mean.
+- **A pass on a "no" about text** runs the `complete` check on that text first.
 - **A route whose evidence can't settle its standard** ends in a nudge or `uncertain`, never `pass`.
 - **Each finding route says what the agent receives:** what was observed, the standard, the severity, the line it points at, and where to read next.
 - **The proof plan fits the outcome,** with its three observations kept apart.
 
 ## Design the rule
 
-1. **Name the judgment, and read the standard's own cases.** Say which call the nudge helps and who makes it. For a placement rule: "does a skill meant for any repository route the agent into one product's own workflow?", made by the writer, the review lead or the Lead, who decides whether the text stays or the workflow moves. Then collect the good and bad examples the standard's home gives, its boundary cases, its exemptions and its accepted judgments. They are the negative controls every question must pass, and the first expectation entries, each pinned to the real place it comes from.
+1. **Name the judgment, and read the standard's own cases.** Say which call the nudge helps and who makes it. For a placement rule: "does a skill meant for any repository route the agent into one product's own workflow?", made by the writer, the review lead or the Lead, who decides whether the text stays or the workflow moves. Then collect the good and bad examples the standard's home gives, its boundary cases, its exemptions and its accepted judgments. They are the negative controls every question must pass, the first worked examples for the `reference`, and the first cases, each at the real revision and lines it comes from.
 2. **Design the chunk.** State five things:
    - **the subject:** what one piece is, such as a load line, a step, or a section's own text;
    - **the denominator:** which files and which pieces the rule scans. "Unread" is read against it, so a rule that judges only `SKILL.md` descriptions doesn't count every reference as a gap;
@@ -38,6 +40,8 @@ This reference owns step 3: turning a classified standard into a rule's design b
    - **A question** names its type (Noul, Choice or Score, chosen by what the answer means), its proposition, the field it evaluates, and criteria that define that same proposition with the standard's boundary cases. Each exemption the standard states sits on the question that owns it, not copied into every question.
    - **Coexisting requirements** are separate Nouls in one request, with a declared first-failure order.
    - **A worth-checking rule's questions** ask what the chunk shows, never whether the standard is broken.
+   - **The reference** holds what several questions share: worked examples, each with its text, the right answer and why; the definitions and boundaries between answers. Each question names the parts it reads, such as `"context": ["body", "reference.examples"]`. An example comes from the standard's home or the owner's rulings, never from the piece being judged.
+   - **The `complete` check** (`mechanical_check: {tool: "complete", field: "<field>"}`) goes before any pass that rests on a "no" about a field: a cut field, or a loaded file whose opening was cut or didn't resolve, means absence wasn't shown, so that route ends `uncertain`.
 
    `domain-decision-models`' worked trees show each shape, good and bad.
 5. **Draw the tree and fill the policy table.** Every route ends in a named step, `pass`, `not_applicable`, `uncertain`, or a finding at the field the standard governs. A route whose evidence can't settle its standard ends in a nudge or `uncertain`, never `pass`. Fill one row per node that reads a model's answer:
@@ -46,7 +50,7 @@ This reference owns step 3: turning a classified standard into a rule's design b
    | node | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
    ```
 
-   A Noul reads P(yes), a Choice its top label's probability (with its label count), and a Score its normalized position. State each inequality, with or without its end. `severity` is the severity of each finding the node can reach. Name the costs of a false finding, a missed violation and a review. A first setting chosen before development results is named as provisional.
+   A Noul reads P(yes), a Choice its top label's probability (with its label count), and a Score its normalized position. State each inequality, with or without its end. `severity` is the severity of each finding the node can reach. Name the costs of a false finding, a missed violation and a review. Every ask declares where its in-between answer goes; the engine refuses one that doesn't. A first setting chosen before development results is named as provisional, then set on the development cases and recorded in the case file's `bars` with the cases that set it.
 6. **Write each route's nudge.** For every route that ends in a finding, state:
    - **the message:** what the rule observed, in one sentence. The engine adds the standard's wording and line itself, so the message never restates the standard. A worth-checking route says what to check. A place the run never reads, such as another repository, goes in the message as a direction ("decide whether this belongs in the product's own repository"), never as something the rule saw.
    - **where it points:** the `at` field. A finding points at that field's first line by default. For a section-sized subject, add a locator: a Choice over the `at` field's lines inside the piece, sent with the piece's one request, whose selected line becomes the finding's line when its probability reaches the locator's bar. A locator that isn't sent, or isn't sure enough, leaves the default line, and the report says so.
@@ -56,7 +60,7 @@ This reference owns step 3: turning a classified standard into a rule's design b
    Several rules can nudge about the same line, each about its own property. Keep each route's message about its own: the agent puts them together.
 7. **Plan the proof,** in three observations kept apart:
    - **the collection:** an evidence print over the rule's full denominator, every intended piece found with its fields, every cut named;
-   - **the tree:** for a deterministic rule, edge tests at its predicate's boundary, with no model. For a judged rule, expectation entries beside its rules file. Each entry is a place in a real skill pinned by Git, expecting `must_fire` at its lines, `must_pass` or `not_applicable`, with good, bad and near-miss places and the counter-examples the standard's own exemptions name, decided by people or agents independent of the rule. The design names the real `must_fire` places it has found, or "no real positive found" with the search that was made. Its baseline is the current rule for the standard, run on the same entries, when one exists;
+   - **the tree:** for a deterministic rule, edge tests at its predicate's boundary, with no model. For a judged rule or filter, a case file run through `sunstack lint cases`: each case is real skill text at a fixed revision and lines (a folder, for a filter), expecting `warn` or `pass` (a label, for a filter), labelled from the owner's fixes or by agents labelling blind, never from the rule. A development set sets the bars; a held-out set, from other sources, runs once after the freeze. The cases meet the floors `SKILL.md` step 7 names, with the counter-examples the standard's own exemptions name among the must-pass cases. Its baseline is the current rule for the standard, run on the same cases, when one exists;
    - **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source; the design names it as unproven until one has run.
 
 ## Worked design: a step's completion criterion
@@ -73,9 +77,9 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
 - **Nodes.** Two Nouls, in one request, in this first-failure order:
   1. `names_end`: "Does the step's text say what must be true when the step is done?"
   2. `requires_result`: "Does the step's stated end require the result the step itself says to produce?" This is bounded by the step's own stated work. "Glance at the test output, then move on" passes when the step asks only for a glance. Requiring an investigation the step never names imports another standard.
-- **Policy.** P(yes) ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is `uncertain`, for the agent running the check to decide. These bars are a first setting, provisional until the expectation run. Both findings are `warn`: both paths read a model's answer. A false finding costs an author a needless rewrite, and pushes toward padding the owner rejected. A miss lets an empty criterion through. A review costs the checker's time.
+- **Policy.** P(yes) ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is `uncertain`, for the agent running the check to decide. These bars are a first setting, provisional until the development cases set them. Both findings are `warn`: both paths read a model's answer. A false finding costs an author a needless rewrite, and pushes toward padding the owner rejected. A miss lets an empty criterion through. A review costs the checker's time.
 - **The nudge.** Each finding points at `body`, whose first line opens the step, and needs no locator: a step is small enough to read whole. No `related` field: the step is the finding's own place, and the standard's line is the only other thing the agent needs.
-- **Proof plan.** The evidence print over every selected step. Expectation entries on real steps pinned by Git, decided independently, including:
+- **Proof plan.** The evidence print over every selected step. Development and held-out cases on real steps at fixed revisions, labelled independently, including:
   - a step whose whole job is to report an existing result;
   - a step that asks only for a glance;
   - a full return stated without any label;
@@ -83,7 +87,7 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
   - zero findings after a prescribed inspection;
   - a bare output list with no inspection required.
 
-  The baseline is the old label-gated rule, on the same entries. The writer's call on a finding waits for a pressure task.
+  The baseline is the old label-gated rule, on the same cases. The writer's call on a finding waits for a pressure task.
 
 ```json
 "K001": {
@@ -96,71 +100,92 @@ The standard (`domain-skill-crafting/references/steering.md`): "Each completion 
   "decision": {
     "start": "names_end",
     "steps": {
-      "names_end": { "ask": "names_end", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "requires_result", "no": { "finding": "Step doesn't say what done looks like.", "at": "body" } },
-      "requires_result": { "ask": "requires_result", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "pass", "no": { "finding": "Step's end can be reached without the result it names.", "at": "body" } }
+      "names_end": { "ask": "names_end", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "requires_result", "no": { "finding": "Step doesn't say what done looks like.", "at": "body" }, "uncertain": "uncertain" },
+      "requires_result": { "ask": "requires_result", "yes_at_or_above": 0.7, "no_at_or_below": 0.3, "yes": "pass", "no": { "finding": "Step's end can be reached without the result it names.", "at": "body" }, "uncertain": "uncertain" }
     }
   },
   "severity": "warn"
 }
 ```
 
-Both questions go in the entry's one request, and the walk reads `requires_result` only when `names_end` is yes. This is a worked design, not a delivered or measured rule; its accuracy is unproven until its expectation run on real steps is in.
+Both questions go in the entry's one request, and the walk reads `requires_result` only when `names_end` is yes. This is a worked design, not a delivered or measured rule; its accuracy is unproven until its case runs on real steps are in.
 
-## Worked design: placement, on #187's line
+## Worked design: product workflow, on #187's line
 
-This is the author's stage of the one example every skill in this change teaches. `decision-matrix.md` classified the standard as worth checking; here it becomes a design.
+This is the author's stage of the one example every skill in this change teaches. `decision-matrix.md` classified the standard as worth checking; here it becomes a design. `domain-decision-models`' worked trees draw the same tree with its departures.
 
-The standard (`domain-skill-crafting/references/calls-and-placement.md:22`): "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths." That one sentence is what the judge sees. Its section's teaching names the exemptions (a tool or platform used through its supported interface, domain vocabulary, this toolkit's own infrastructure, a product named only as a labelled example), and the questions below carry them.
+The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." In #187 no rule asked this of line 17: the one that read it judged its call's return, and passed the line once a return was added.
 
-The line it must catch: `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction before its first H2: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." In #187 no rule asked this of line 17: the one that read it judged its call's return, and passed the line once a return was added.
-
-- **The judgment.** Does this generic skill route the agent into one product's own workflow? The writer, the review lead or the Lead decides: keep the text (it's a labelled example, a tool, the toolkit's own stack), or route the workflow to the product's repository. The rule gives them the reason to look and the places to read; it can't see where the workflow should live.
+- **The judgment.** Does this general skill carry one product's own material? The writer, the review lead or the Lead decides: keep the text (a labelled example, a tool used as meant, the toolkit's own infrastructure), or move the material to the product's repository. The rule gives the reason to look and the places to read; it can't see where the material should live.
 - **The chunk.**
-  - **Subject:** each section's own text from the H1 down, its introduction and tables included, without its child sections' text. A section that loads nothing is a piece too, judged on its own text: an inline command is as much a route as a load.
-  - **Denominator:** every section of every checked `SKILL.md` and reference in a plugin meant for any repository.
-  - **Context and edges:** its heading path (the headings it sits under, its own included), and the files the section's own text loads, each with its opening. One hop: a loaded file's own loads aren't followed. A child section's loads belong to the child, so one load is never blamed on the H1, the parent and the child at once.
-  - **Fields:** `heading`, `headings`, `body` and `targets`.
-  - **Budget:** the kind's cap. A cut `body`, or a loaded file's opening cut at its limit, is marked in the state and on the result, and a pass on a cut view is a gap, not a clean read.
-  - **Not context:** the skill's description. Given as context, a description that names its products read as declaring them in scope, and product sections passed. The description has its own standard, one level up, in `descriptions-and-invocation.md`, with its own entry over the `skill` kind.
-  - **The print:** the H1 introduction of `ops-observability-stack/SKILL.md` is one piece. Its `body` holds line 17, and its `targets` hold `references/agentstudio-loop.md` with its opening, "AgentStudio Loop", beside the section's other loads.
-- **Gate.** None: every section in the denominator falls under the standard. Which plugins are meant for any repository is the config's checked files, not a question per piece.
-- **Nodes.** Two Nouls in one request, in this first-failure order. Each exemption sits on the question that owns it.
-  1. `routes_product`: "Does this section's own text send the agent into one named product's or application's own workflow: its own procedures, run commands, state files or machine paths?" Its criteria own the tool and vocabulary exemptions: yes includes loading a file whose content is that product's own workflow; no includes work that applies in any repository, a tool or platform used through its supported interface (querying a metrics store's HTTP API, running `claude plugin validate .`), and a mention that sends the agent nowhere.
-  2. `example_or_own_infrastructure`: "Is every product this section sends the agent into named only as a labelled example, or part of this toolkit's own shared infrastructure?" Its criteria own the other two exemptions, and the line between an illustration and a required step: a general instruction whose product appears only as a labelled example ("for example, AgentStudio's beta channel") is yes, and so is this toolkit's own observability stack; an instruction that itself requires one product's own commands, procedures or state files as the step is no.
+  - **Subject:** each section's own text, its introduction and tables included, without its child sections' text. A section that loads nothing is a piece too: an inline command is as much product material as a load.
+  - **Denominator:** every section of every skill the kind filter labels general, role or domain. The rule's `only_when` names those labels, so a product's own skill, labelled tool manual or repository-specific, is excluded, not judged.
+  - **Context and edges:** the heading path, and the opening of each file or skill the section's own text loads. One hop: a loaded file's own loads aren't followed.
+  - **Fields:** `heading`, `headings`, `body` and `targets`. No question names `where`, so the file's name and location stay out of the request.
+  - **Not context:** the skill's description, which has its own standard and rule.
+- **Gate.** The kind filter's label, applied before any question: the rule runs only where the label is general, role or domain.
+- **Reference.** The owner's rulings, as examples, each with its text, its answer and why: a product's own command (warn); a load of a product's own workflow file (warn); a product named as a labelled example (pass); a worked example that isn't labelled (warn); a quoted real product mistake (warn); the subject's own tool, a tool used as meant, the toolkit's shared tools and an ordinary command (pass). All three questions read them.
+- **Nodes.** Three Nouls and the line-finder in one request, each standing alone:
+  1. `product_material`: "Does this section show concrete material that belongs to one product?"
+  2. `all_labelled`: "Is all of that material shown only as labelled examples?"
+  3. `quotes_product_mistake`: "Does the section quote a real product's own mistake?"
 - **Tree.**
 
   ```text
-  routes_product? → no: pass (no product workflow on this section's own text and loads)
-                  → yes: example_or_own_infrastructure? → yes: pass
-                                                         → no: finding at body, located (warn)
-                  → between its bars: example_or_own_infrastructure? → yes: pass
-                                                                      → otherwise: uncertain
-  the exemption between its bars → uncertain, for the agent to decide
+  product_material? → no      → [complete: body and targets fully read?] → yes: pass · no: uncertain
+                    → between → uncertain
+                    → yes     → quotes_product_mistake? → yes → nudge
+                                                        → no  → all_labelled? → no: nudge · between: uncertain
+                                                                              → yes → [complete?] → yes: pass · no: uncertain
+                                                        → between → all_labelled? → no: nudge · otherwise: uncertain
   ```
 
-  The pass on `no` settles only what the chunk shows; it says nothing about the section's other properties.
+  A warning needs product material and one known trigger: material not all labelled, or a quoted real mistake. An unknown on one trigger doesn't hide a known yes on the other. Both passes need the text fully read.
 - **Policy.**
 
   ```text
-  | node                         | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
-  | routes_product               | P(yes)    | ≥ .7     | ≤ .3    | ask the exemption; only its confident yes passes | first | none | a false nudge costs one read of a loaded file; a miss leaves one product's workflow in a generic skill, which #187 showed survives a review |
-  | example_or_own_infrastructure | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | second     | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is the same as above |
+  | node                   | statistic | yes when | no when | in between | precedence | severity | costs it rests on |
+  | product_material       | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | first      | none     | a false nudge costs one read of the line and a load; a miss leaves one product's material in a general skill, which #187 showed survives a review |
+  | quotes_product_mistake | P(yes)    | ≥ .7     | ≤ .3    | ask all_labelled; only its known no warns | second | warn | a false nudge on a quoted generic mistake costs a read and a "kept" |
+  | all_labelled           | P(yes)    | ≥ .7     | ≤ .3    | uncertain  | third      | warn     | a false nudge on a labelled example costs a read and a "kept"; a miss is as above |
   ```
 
-  The bars are a first setting, provisional until the expectation run.
+  These are starting bars, set on the development cases and recorded in the case file's `bars` before the held-out run.
 - **The nudge.**
-  - **Message:** "This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository." The repository is a direction: the run never reads it.
-  - **Where:** `at: "body"`, with a locator `product_line` whose task asks which line of `body` sends the agent into one named product's own workflow, and carries the questions' exemptions so a tool, the subject's vocabulary, a labelled example or the toolkit's own infrastructure isn't picked; at `min_probability` .6, on the top line's probability over the section's lines. Line 17's section has more than one load, and generic ones on lines 14 to 16, `producer-contract.md` among them, come first, so a pattern can't pick the line: the locator does, or the finding stays at the body's first line, marked default.
-  - **Severity:** `warn`: both paths read a model's answer.
-  - **Read next:** `related: ["targets"]`. The finding lists the standard's line, then each loaded file whose opening the run read, `agentstudio-loop.md` among them. The list names every file the section loads; the locator, not the list, says which line the nudge is about.
+  - **Message:** "This section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository." The repository is a direction: the run never reads it.
+  - **Where:** `at: "body"`, with the line-finder, a locator whose task asks which line shows that material, with the same boundary as the questions, so it doesn't pick a labelled example or a tool used as meant. Line 17's section has generic loads on lines 14 to 16 before it, so a pattern can't pick the line. Below the locator's bar, the warning stays at the body's first line, marked default.
+  - **Severity:** `warn`: every path to it reads a model's answer.
+  - **Read next:** `related: ["targets"]`, so the warning lists each loaded file whose opening the run read, `agentstudio-loop.md` among them.
 - **Proof plan.**
-  - **The collection:** an evidence print over the whole denominator, showing line 17's section with `agentstudio-loop.md`'s opening in its `targets`, `practices-cleanup`'s allow-list table whole, and every cut named.
-  - **The tree:** expectation entries beside `calls-and-placement.rules.json`, each on a commit from before the fix.
-    - Line 17's section, at a commit that still holds it, expects `must_fire` at line 17, anchored by the locator.
-    - `practices-cleanup/SKILL.md`'s allow list, whose table row at line 40 runs AgentStudio's own `mise ... run clean-artifacts`, expects `must_fire` from the section's own text, with no load in it. It is a second family, so it counts apart from line 17.
-    - The counter-examples expect `must_pass`: a section that names a product only as a labelled example; this toolkit's own observability queries in `victoria-queries.md`; `domain-skill-crafting/references/platform.md`'s platform contracts.
-    - The current-skills run then accounts for every nudge the rule gives on today's skills.
-    - No current rule judges this standard, so there is no baseline: name that.
-  - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is a pressure task on the pinned source, and stays unproven until one has run.
+  - **The collection:** an evidence print over the whole denominator, showing line 17's section with `agentstudio-loop.md`'s opening in its `targets`, and every cut named.
+  - **The tree:** a case file for the rule. Must-warn cases at revisions from before real fixes: line 17's section, and `practices-cleanup/SKILL.md`'s allow-list row that ran AgentStudio's own clean task, a second family. Must-pass cases from the exemptions and the owner's rulings: a product named only as a labelled example, the toolkit's own observability queries, a platform's supported command, and every wrong warning an earlier version of the rule gave. Development first, then the frozen held-out set once, with the previous version of the rule as the baseline on the same cases.
+  - **The receiving agent's call:** whether a writer given the line-17 nudge reads the loop and routes it to AgentStudio's repository, instead of polishing the call's return as #187 did. That is a pressure task, unproven until one has run.
 
-The delivered entry is `K003` in `domain-skill-crafting/rules/calls-and-placement.rules.json`, over the `section` kind in `skill-rules.config.json`; read it there rather than from a copy. It uses the nudge fields `markers-and-rules.md` describes. Its locator bar, .6, was set from four development readings, after one wrong line drew .52 and one right line .44; the expectation run's locator column tests it.
+The delivered entry is `general-skill.overfits-to-product-workflow` in `domain-skill-crafting/rules/general-skill.rules.json`; read it there rather than from a copy. Its question names and wording may differ from this page's; the shape is the design.
+
+## Worked design: a filter, the kind of skill a folder holds
+
+A filter isn't marked on a standard: it decides which folders a rule judges. It is designed the same way, with a label in place of the nudge.
+
+- **The judgment.** What kind of skill does this folder hold? Rules that govern general skills read only folders labelled general, role or domain, so a product's own skill isn't judged as if it were meant for any repository.
+- **What it reads.** Each skill's description and the opening of its `SKILL.md` body. Not the folder name, which hints at the answer: a filter never sends its folder's location.
+- **Labels.** `general`, `role`, `domain`, `tool_manual`, `repo_specific`, declared on the filter. Its tree ends in one of them, or `unsure`.
+- **Reference.** The five definitions, written once so they can't overlap, with worked examples. One boundary carries most of the weight: a repository's own command-line tool or scripts count as its own procedure, not as a public tool.
+- **Nodes.** Two Choices in one request, each among labels that can't both be true:
+  1. `primary_work`: reusable guidance · operating a public tool · one repository's own procedure.
+  2. `guidance_kind`: general · role · domain.
+- **Tree.**
+
+  ```text
+  primary_work? → reusable guidance        → guidance_kind? → general · role · domain → that label
+                                                            → below its bar → unsure
+                → operating a public tool  → tool_manual
+                → one repository's own     → repo_specific
+                → below its bar            → unsure
+  ```
+
+  `guidance_kind` is asked in the same request and read only after reusable guidance. Labels come only from tree endings: "reusable guidance" is a question's option, never a filter label.
+- **Policy.** Each Choice reads its top label's probability among 3 labels, against a starting bar of .6 (a confidence of .40, not accuracy), set on development cases. An unsure folder is skipped for every gated rule and listed with its route. A wrong label costs a whole folder: a product's skill judged as general draws false nudges on every section, and a general skill labelled a tool manual is never checked at all.
+- **Proof plan.** Filter cases, each a real folder at a fixed revision expecting a label, in development and held-out sets, labelled from the owner's rulings or by blind agents. The held-out run must give no wrong label; every case is scored right, wrong label, unsure or incomplete, or listed with why.
+
+The delivered filter is `kind` in the config's `filters`; read it there.
