@@ -293,6 +293,7 @@ From the Reviewer's correction check (F1 and F3 still open at the recipe, F4 new
 | D20 (7 Nov, supersedes D17 and D18) | No reconstruction: the desk check reads a prepared or saved request, and is blocked without one. | The Lead's round-2 decision under the owner's rule "fix the engine and release it; never bend skills, runner or rules around an engine gap"; 0.9.0 `--prepare` is the fix. |
 | D21 (7 Nov) | Versions stay at skill-authoring 0.12.0 and sunstack-dev 2.107.0. | Neither has shipped from this branch; the corrections land in the same unreleased change. |
 | D22 (7 Nov) | Text about `--prepare` is written from the engine commission and marked pending. | The PR waits for 0.9.0; the Lead will say when it ships, and this text is then checked against the released README. |
+| D23 (7 Nov, closes D22) | `--prepare` text finalised against sunstack-tools `5e93fc8d` (`crates/sunstack/README.md`, `CHANGELOG.md` 0.9.0); pending marks dropped. Settled with the Lead: exit 6 on a clean prepare, case gaps exit 1, a prepared case is read by its 1-based position, `needs_answer` also covers a request whose view has a selection-pending field, and `--selections-from` needs the config's model to equal the recorded resolved name. | 0.9.0 accepted (sunstack-tools #140). The `tests/skills` `@sunstack/cli` pin stays 0.8.3 until the Lead bumps it after npm shows 0.9.0. |
 
 Deviations from Part 3, each inside the accepted obligations:
 - `skill-rules-review` takes `decision-model-review`'s review schema through that skill's own step 3 load instead of a second load call; one load, same schema (D6).
@@ -335,6 +336,8 @@ No new rule routes; any future rule over these skills goes through `skill-rules-
 Each runs in a fresh session that sees the descriptions beside their neighbours and nothing of this set, with the loaded skill read from the host's record.
 
 ### Structural proof
+
+Finalised against sunstack 0.9.0, 7 Nov 12:08–12:12 EST: suite 26 files, 222/222, exit 0; typecheck exit 0; plugin validate passed; pinned `sunstack 0.8.3` `--check` and `--rules` exit 0, three mechanical rules; self-check clean, 15 results, 0 requests. On the 0.9.0 debug build at sunstack-tools `5e93fc8d`, with no credential in the environment: `lint --prepare` over `skill-rules-config` exited 6 with `mode: prepare`, 0 requests, empty `needs_answer` and 0 model requests in usage; `--prepare` with `--report` was refused, exit 2.
 
 After corrections round 2, 7 Nov 08:34–08:35 EST: suite 26 files, 222/222, exit 0; typecheck exit 0; plugin validate passed; pinned `sunstack 0.8.3` `--check` and `--rules` exit 0, three mechanical rules; self-check over the five rules skills clean, 15 results, 0 requests; 120 load paths, none unresolved beyond the quoted example; no `desk-check-state`, reconstruction or equivalence-gap wording left in skill-authoring.
 

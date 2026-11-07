@@ -2,7 +2,7 @@
 
 This reference owns the case file's shape and what `sunstack lint cases` does with it. Expected input: the cases to write (each real piece or folder at a fixed revision with its expected answer, its set and its label's origin) or a case file to run. Return: the cases as written, or the run's outcome for every case with the counts per rule and per filter.
 
-Everything here is the engine's contract at 0.8.0 to 0.8.3 (`crates/sunstack/README.md`; `crates/sunstack-lint/src/case_runs/`). Which cases to choose, how they're labelled, and what a result proves are design questions this manual doesn't answer.
+Everything here is the engine's contract at 0.8.0 to 0.9.0 (`crates/sunstack/README.md`; `crates/sunstack-lint/src/case_runs/`). Which cases to choose, how they're labelled, and what a result proves are design questions this manual doesn't answer.
 
 ## The file
 
@@ -32,7 +32,7 @@ sunstack lint cases <file> --set held_out
 - For each revision, the run archives the whole repository, initializes Git inside the copy, puts today's config and rule files on top, and runs ordinary lint on the case paths, so a case sees its own folder and every file it loads as they were, judged by today's rules (`crates/sunstack-lint/src/case_runs/mod.rs`).
 - From 0.8.3 the evidence-rule directories today's ast-grep project declares are replaced whole with today's contents, so an obsolete historical rule never loads. A rule directory that covers the repository root or checked text refuses the case with a revision error, rather than deleting history or using a partial directory.
 - A selected path that is, or passes through, a historical symlink is listed `not_judged` and never followed.
-- It asks questions, so it needs the model key. With `--prepare <path>` (sunstack 0.9.0, pending release) it builds every case's requests and sends none; `prepared-requests.md` owns that mode and what it reports.
+- It asks questions, so it needs the model key. With `--prepare <path>` (0.9.0) it builds every case's requests and sends none; `prepared-requests.md` owns that mode, its exit codes and how its cases are read.
 - It writes nothing ordinary lint reads, and changes no lint input: it is a tool for the rule's author, never a gate on a lint run.
 
 ## Outcomes

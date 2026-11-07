@@ -2,7 +2,7 @@
 
 This reference owns what the engine does between a piece and a result, and what its output means: what the judge receives, how answers route, what a finding and a result row carry, the run statuses, what a saved report keeps, and how "unread" is derived. Expected input: the output in hand (a check's print, a run's short lines, a saved report, a `lint show` entry, a request's state) and the rule or filter it came from. Return: what each status and field means for that output, and what it can and can't show.
 
-Anchors are in the `sunstack-tools` repository at tag `v0.8.3`, whose `crates/sunstack/README.md` is the engine's authoring guide; a fact marked 0.8.0, 0.8.1, 0.8.2 or 0.8.3 arrived in that release. Where the installed engine's README differs, it wins.
+Anchors are in the `sunstack-tools` repository at tag `v0.8.3` unless marked 0.9.0, and its `crates/sunstack/README.md` is the engine's authoring guide; a fact marked with a version arrived in that release. Where the installed engine's README differs, it wins.
 
 ## The check's print
 
@@ -59,7 +59,7 @@ A run prints short numbered lines, one per warning, unsure result or gap, each w
 | `nothing_selected` | 0 | no piece was selected: clean for a changed-evidence run with nothing changed, a gap for a full run (usually a wrong path) |
 | `clean` | 0 | nothing above happened |
 
-The status is the first row, top to bottom, that holds. Warnings don't move it: a `clean` or `uncertain` run can carry many.
+The status is the first row, top to bottom, that holds. Warnings don't move it: a `clean` or `uncertain` run can carry many. A prepare-only run has its own exits, 6 when clean: `prepared-requests.md` has them.
 
 ### A finding, a result row and a filter answer
 
@@ -81,10 +81,10 @@ A rule's denominator is the checked files and pieces its design scans, inside th
 
 | layer | keeps | doesn't keep |
 | --- | --- | --- |
-| a saved report, `--report run.json` (0.8.0) | every request with its id, rule or filter, piece or folder, exact state, questions in the order sent, every answer, and the requested and resolved model, or why it wasn't sent; the content and hash of every config and rule file used; on each result its route and request ids; raw piece evidence for mechanical steps | a rule the filter excluded, which was never asked: it's marked, and can't be re-walked |
-| `lint show run.json <id>` (0.8.0) | one entry from a saved report: route, answers, bars, requests and pointers, from the file alone | anything the report doesn't hold; an unknown id is an error naming the valid range |
+| a saved report, `--report run.json` (0.8.0) | every request with its id, rule or filter, piece or folder, exact state, questions in the order sent, every answer, and the requested and resolved model, or why it wasn't sent; the content and hash of every config and rule file used; on each result its route and request ids; raw piece evidence for mechanical steps; from 0.9.0, each selection request with its answer, requested and resolved models, input hash and raw selection evidence | a rule the filter excluded, which was never asked: it's marked, and can't be re-walked |
+| `lint show run.json <id>` (0.8.0) | one entry from a saved report: route, answers, bars, requests and pointers, from the file alone; from 0.9.0 also a prepared request, a saved selection, or a prepared case by its 1-based position | anything the report doesn't hold; an unknown id is an error naming the valid range |
 | the JSON report's `results` | each rule and piece's outcome, last step, `path`, the answers its walk read, `basis` and `cut` | answers the walk didn't read, unless the report was saved |
-| a prepared report, `--prepare` (0.9.0, pending release) | every request a run would send, with its exact state and questions and no answers, plus `needs_answer` and gate conditions; `prepared-requests.md` owns it | any answer: nothing was sent |
+| a prepared report, `--prepare` (0.9.0) | every request a run would send, with its exact state and questions and no answers, plus `needs_answer` and gate conditions; `prepared-requests.md` owns it | any answer: nothing was sent |
 | the native `run_judgments` operation | answers and a receipt with the resolved model, returned to its caller | anything the caller doesn't store; calling it again resamples |
 
 Because every question about a piece goes in one request, a saved report can re-walk a result under a changed bar without asking again, as long as the questions and the evidence are unchanged. Changed wording or a changed evidence cut needs a fresh run.
