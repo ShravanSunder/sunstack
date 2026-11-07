@@ -78,7 +78,7 @@ Tree-shaped selection, a selection decided by several questions with a reference
 
 ## The evidence print
 
-`sunstack lint --config <config> --all --evidence [KIND]` lists the pieces each kind picks, with every field, plus `selections` (each asked candidate with its outcome and yes probability) and `file_counts` (matches, pieces, picked and scan-limited per file and kind, and candidate, asked and outcome counts for selected kinds). It sends no rule question; a selected kind makes it send selection requests.
+`sunstack lint --config <config> --all --evidence [KIND]` lists the pieces each kind picks, with every field, plus `selections` (each asked candidate with its outcome and yes probability) and `file_counts` (matches, pieces, picked and scan-limited per file and kind, and candidate, asked and outcome counts for selected kinds). It sends no rule question. A selected kind, or a kind `within` one, makes it run the selection, which sends requests: print a selection's candidates for free through `desk-check-state.md`, never by running it.
 
 Print the kind a rule judges over the rule's whole denominator, and read four things:
 

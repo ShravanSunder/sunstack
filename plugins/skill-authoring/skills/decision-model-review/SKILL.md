@@ -9,7 +9,9 @@ Review is an attempt to make the model fail. Every check names what fails it, an
 
 An agent with no authoring history on the model runs it, started the way the host starts a reviewer. A routing review that loads this skill takes the return and reduces it under its own contract; a direct commissioner reads it as returned. The reviewer never edits, never runs a model request, and never accepts.
 
-Read the model the way the model reads its evidence: on the state it receives. A question that reads well can still give a labelled case the wrong answer once it sits beside that case's actual fields and reference, and only the sent state shows that. A review that read only the source of a question can say what the question asks, never what it does to a case.
+Read the model the way the model reads its evidence: on the state it receives. A question that reads well can still give a labelled case the wrong answer once it sits beside that case's actual fields and reference, and only that state shows it. A review that read only the source of a question can say what the question asks, never what it does to a case.
+
+A case's state, wherever a check below asks for it, is one of two things: a saved request whose inputs (the case's revision, the evidence definitions and budgets, the standard, the reference and the questions) all still match the model under review; or, where the engine can't prepare a request without sending it, as on sunstack 0.8.3, the reconstruction `skill-rules-config`'s desk-check state recipe builds, with its distance from the sent state named as a gap. That gap goes in the verdict's unavailable proof; it doesn't make the check `partial`. A state built any other way, such as a checkout of the case's revision printed with that revision's own configuration, reads an older instrument and doesn't count.
 
 ## 1. Admit the profile and the stage
 
@@ -89,7 +91,7 @@ The review is not done while any of these hold:
 - a delivery-stage `ready` with a required check or part not `complete`, or a part not run for want of an optional input left out of the return;
 - a finding without its anchor or its standard, or a candidate neither kept, merged nor rejected;
 - unavailable proof reported as passed;
-- a labelled case or a negative example counted as passing from the question's text, with its sent state unread and the check not marked `partial`;
+- a labelled case or a negative example counted as passing from the question's text, with its state unread and the check not marked `partial`;
 - a design- or implementation-stage `ready` that doesn't say it means "ready for the next run";
 - a probe run by the reviewer;
 - `not-converging` returned on a direct commission without a supplied policy;

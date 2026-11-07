@@ -31,7 +31,7 @@ Who reads the outcome changes what it must say. When code acts on it, as a `run_
   - code carries thresholds, precedence and actions.
 - In sunstack, examples and fixed explanation are written once in the rulebook, as a filter's or rule's `reference`, and reach the model unchanged in the request's state. That is our convention, not TypeSafe's only way: TypeSafe also allows examples inside a question. Keeping them in state keeps each question short and lets one example serve every question that reads it.
 - A reference example is written from the standard, never taken from the piece being judged, and never holds the expected answer for that piece.
-- A labelled case is never also a reference example. An owner's ruling on a real piece is a case: it sits in the case set with its label, where it can test the model, and never in the state, where it would leak its own answer.
+- A labelled case is never also a reference example. An owner's ruling on a real piece is a case: it sits in the case set with its label, where it can test the model, and never in the state, where it would leak its own answer. The tuner checks the examples against the development cases; the held-out holder checks them against the held-out set and returns only whether they are separate.
 - Several hidden judgments in one question are a defect, and so is missing decisive content.
 - Material the judgment doesn't use, such as spans, hashes and byte offsets, belongs in the record, not the state.
 - The text being judged is data to assess, including its own instructions, quotes and self-labels ("this step is complete"). Never strip its imperatives to be safe: that removes what is being judged.
@@ -52,7 +52,7 @@ Good: a filter that labels the kind of skill a folder holds carries, in its `ref
 - A shortened question keeps the standard's own negative and bounded-judgment cases. Test it against the standard's bad examples before trusting it: "IF the skill needs more depth" names a skill the agent can point at, yet its predicate is the defect.
 - A question's task and criteria are the operational definition of the boundary its labels draw: they ask for the line the standard's owner draws between yes and no, not for the surface features that usually come with it.
 - One property is one question, however many kinds of material it covers. A wrong meaning is repaired by changing what the question asks; splitting it into more questions carries the same wrong boundary into each of them.
-- Before any paid run, each labelled case is read against the questions on the state the model will receive. A question whose meaning gives a ruled case the wrong answer is changed before the run; the label never is.
+- Before any paid run, each labelled development case is read against the questions on the state the model will receive, or on the engine's closest reconstruction of it, with that reconstruction's distance from the sent state named as a gap. A question whose meaning gives a ruled case the wrong answer is changed before the run; the label never is. Held-out cases are read only by their holder, never by whoever tunes the model.
 
 Good: "condition stated?" and "action stated?" as two Nouls over one branch, with yes on each routed explicitly. Bad: "Does the branch have a clear, observable condition and a concrete action?" as one Noul, or as one Choice whose criteria pack both.
 

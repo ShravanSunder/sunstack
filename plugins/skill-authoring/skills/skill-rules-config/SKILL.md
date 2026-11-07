@@ -29,6 +29,8 @@ A rule judges one piece at a time and ends in `pass`, a finding, `uncertain` or 
 
 ## Not shipped in 0.8.3
 
+**No-send request preparation.** No command builds a rule's, filter's or selection's request state without sending the request. A desk check before a paid run therefore reads a reconstruction, with its equivalence to the sent state named as a gap; `references/desk-check-state.md` is the one recipe for it. A no-send preparation is planned in the engine, not shipped.
+
 **Tree-shaped selection.** A kind's `select` asks exactly one Noul of each candidate, against `yes_at_or_above` and `no_at_or_below`, and carries no `reference`. Choosing pieces by a small tree with its own reference is planned and not shipped. Until it ships, a selection that needs more than one question can't be written as a kind; don't simulate it with a gate copied into every rule that reads the kind, and don't describe it as available.
 
 ## Tasks
@@ -38,6 +40,7 @@ Load the reference for the task in front of you; one piece of work often needs s
 - IF writing, repairing or pairing a marker, a rule entry or a filter, load `references/rule-entries.md` and return each marker's host, each entry or filter as written, any pair added to the config, and each refusal's cause and fix.
 - IF defining or changing an evidence kind, a field, a `select` or a `within`, or printing evidence, load `references/evidence-kinds.md` and return the kind as written and what its print shows: the intended pieces with their fields, every cut, and the file counts.
 - IF running the rules on skill files for a step that checks them (a writer's self-check, a review's rule pass, a release's prove step, an audit), load `references/running-rules.md` and return its reading.
+- IF preparing the state a case's request will carry, for a desk check or a review before any paid run, load `references/desk-check-state.md` and return each case's reconstructed state with its overlay, its cuts and the equivalence gap, or the gap that stopped it.
 - IF reading a check's print, a run's report, a saved request or `lint show` output, load `references/requests-and-reports.md` and return what each status and field means for the result in hand.
 - IF writing a case file or running `lint cases`, load `references/case-runs.md` and return the cases as written, or the run's outcome for every case with the counts per rule and per filter.
 
@@ -49,7 +52,7 @@ Completion: the check exits 0, and the printed rules are the count before the ch
 
 ## The model key
 
-- **Send model requests:** an ordinary run with any asking rule or any selected kind, even when a later mechanical branch would avoid the ask; `--evidence` over a selected kind or a kind `within` one; `lint cases`.
+- **Send model requests:** an ordinary run with any asking rule or any selected kind, even when a later mechanical branch would avoid the ask; `--evidence` over a selected kind or a kind `within` one, which runs the selection; `lint cases`.
 - **Send none:** `--check`, `--rules`, `lint show`, and `--evidence` with no selected kind.
 
 The engine finds its own key. Never supply, replace or remove a key or a model endpoint to get a run through. Without the grant to send requests, prepare the exact command with its config, hand it to whoever holds the grant, and read the report it keeps.
@@ -59,5 +62,6 @@ The engine finds its own key. Never supply, replace or remove a key or a model e
 - a rulebook change without a passing check whose printed rules have the expected count;
 - an engine fact stated from this manual without checking the installed version, or against the engine's README;
 - a command that sends model requests run without the grant, or with a stand-in key or endpoint;
-- tree-shaped selection written, simulated or described as shipped;
+- tree-shaped selection or no-send request preparation written, simulated or described as shipped;
+- a reconstructed desk-check state reported as the sent state, or a saved request reused after one of its inputs changed;
 - a refusal cleared by raising a cap, deleting a standard or its entry, or moving a marker onto text that doesn't state it.

@@ -1,6 +1,6 @@
 # Cases and Proof
 
-This reference owns a judged rule's or filter's evidence of working: gathering its cases (step 3), the desk check before any paid run (step 6), and reading its development and held-out runs into a decision, on or held (step 8). Expected input: the rule or filter and its standard; the owner's rulings and fixes that touch it; for step 6, its design, entries and evidence print; for step 8, its case-run results. Return: the cases with their sets, label origins and the floors they meet; the desk-check record; per run, every case's outcome, the floors, the bars and the decision.
+This reference owns a judged rule's, filter's or selection's evidence of working: gathering its cases (step 3), the desk check before any request (step 6), and reading its selection, development and held-out runs into a decision, on or held (steps 8 and 9). Expected input: the rule or filter and its standard; the owner's rulings and fixes that touch it; for step 6, its design, entries and evidence print; for step 8, its case-run results. Return: the cases with their sets, label origins and the floors they meet; the desk-check record; per run, every case's outcome, the floors, the bars and the decision.
 
 The case file's fields and the `lint cases` command are `skill-rules-config`'s (its case-runs reference). This reference decides what goes in them and what the results mean.
 
@@ -19,7 +19,9 @@ A label taken from the rule's own answers proves nothing.
 
 **The owner's rulings are cases, every one.** They are where the owner drew the line, so they are what the questions must reproduce. They go in the case file and nowhere else: never in a `reference`, never paraphrased into one, never in a question's criteria.
 
-**Two sets, never mixed:** a development set the rule is tuned on, and a held-out set from other sources that it never sees until it is frozen. The held-out cases are written by someone other than whoever tunes the rule, and that person never reads them: not to desk-check, not to borrow examples, not to "just see".
+**Two sets, never mixed:** a development set the rule is tuned on, and a held-out set from other sources that it never sees until it is frozen. The held-out set has a holder: an independent agent who isn't whoever tunes the rule, who writes and keeps the held-out cases, checks them against the rule's examples, and runs them once after the freeze. Whoever tunes the rule never reads them: not to desk-check, not to compare examples, not to borrow one, not to "just see". What crosses from the holder to the tuner is only an attestation or a failure, never a case's text, location or label.
+
+**A selection's cases** come from its rule's cases. Every piece a must-warn case needs is a required inclusion: the selection must keep it, in whatever form the standard governs it (an instruction, a worked example, a table row, a quotation). Pieces the standard doesn't govern, such as a heading-only section or plain rationale, are the exclusions it should drop. Dropping a required inclusion hides a mistake from the rule before the rule is asked.
 
 **Three things keep the cases honest:**
 - **Cases come first.** A change to a rule's questions, reference or bars gets its new cases before the change, never after.
@@ -41,38 +43,41 @@ A rule short of any floor stays off, with what it lacks listed.
 
 A `reference` example teaches the model what the standard means; a case tests whether it learned. Written from a case, the example hands the model that case's answer, and the case stops testing anything.
 
-Before the first run, compare every example with every case:
+Before the first run, compare every example with every development case:
 - **the text:** no example is a case's piece, a near copy of it, or a summary of it;
 - **the subject:** no example describes the folder, skill or section a case points at, however reworded;
 - **the answer:** no example carries a case's expected label or verdict.
 
-A match is rewritten from the standard (its home's examples and exemptions, or a short one made up to illustrate them); the case keeps its label. The held kind filter failed this: two of its examples were the real descriptions of `domain-decision-models` and Agent Studio's skill, labelled domain and tool manual, and both folders were scored cases. Both came back right, and those two results showed nothing.
+A match is rewritten from the standard (its home's examples and exemptions, or a short one made up to illustrate them); the case keeps its label.
+
+The held-out side is the holder's. Give the holder the examples as they will be frozen; the holder makes the same three comparisons against the held-out set and returns only one of: separate (no overlap), contaminated (how many examples overlap, without saying which cases), or a coverage failure (the held-out set can't meet its floors). An overlap is fixed by rewriting the example, never by showing the tuner the case. With no attestation, the held-out set's separation is a named gap, and a held-out result can't be called unseen. The held kind filter failed this: two of its examples were the real descriptions of `domain-decision-models` and Agent Studio's skill, labelled domain and tool manual, and both folders were scored cases. Both came back right, and those two results showed nothing.
 
 ## The desk check
 
-Before any paid run, read the cases on the state their requests will carry, against the questions. It costs minutes; the run it replaces costs a thousand requests, and its answers can't be reused once a meaning changes.
+Before any request, read the development cases on the state their requests will carry, against the questions. It costs minutes; the run it replaces costs a thousand requests, and its answers can't be reused once a meaning changes. A selection is desk-checked before its rule: on its candidates, for its required inclusions and its exclusions; the downstream rule then on the pieces the selection keeps.
 
-1. **Get each case's state.** The case's piece at its revision, with the fields today's kind collects and their cut marks, the standard, and the `reference`. Read it from a saved request (`lint show`) where an earlier run sent one, or from an evidence print on a checkout of the case's revision.
+1. **Get each case's state.** MUST load `../../skill-rules-config/references/desk-check-state.md` and return each case's state as that recipe rebuilds it, on the case-run overlay with nothing sent, every cut named and the equivalence gap recorded; or the case's gap. On the shipped engine this is always a reconstruction, never the sent bytes; a plain checkout of the case's revision, or a saved request whose inputs have changed since, reads another instrument.
 2. **Answer each question by its criteria,** as written, for that state. Write the answer down, then walk the tree to its outcome.
-3. **Compare with the label.** Every owner-ruled development case first; then enough other development cases to cover each floor. Never a held-out case.
+3. **Compare with the label.** Every owner-ruled development case first; then enough other development cases to cover each floor; for a selection, every required inclusion. Never a held-out case.
 4. **Diagnose each mismatch** before changing anything: is the decisive content missing from the state (fix the evidence, with the questions unchanged), or does the meaning put the case on the wrong side of the line (fix the meaning)? Never the label, and never a split into more questions that carry the same line.
-5. **Compare the examples with the cases,** as above.
+5. **Compare the examples with the development cases,** as above, and ask the holder for the held-out attestation.
 
 ```text
 case:      <id>  <file>:<first>-<last> @ <revision>   label <warn | pass | label>  from <origin>
 state:     <the decisive content it holds; cut or unavailable fields>
 answers:   <question>: <yes | no | label> because <the words of the criteria it meets>  ...
-outcome:   <route> -> <pass | finding | label | uncertain>    matches label: yes | no
+outcome:   <route> -> <pass | finding | label | uncertain | selected | rejected>    matches label: yes | no
 if no:     evidence gap | meaning: <the line the criteria draw vs the owner's line>
+gap:       reconstructed on <overlay revision and rulebook commit>; equivalence to the sent state not shown
 ```
 
 **Worked: the held product-workflow rule.** A quiet ruling: `presentation-html`'s Demistify reference, lines 45–73, which tells the reader to run the public Demistify CLI's documented `embed` commands. Its state holds those commands in full. The first question, "Does this section show concrete material that belongs to one product?", by its criteria: yes, it shows a product's commands and files. The second, "Is all of that material shown only as labelled examples?": no, they are instructions. Outcome: a warning, against a quiet ruling. The diagnosis is the meaning, not the evidence: the state holds everything, and the criteria draw the line at "shows commands", while the owner's is "one application's own procedure, as opposed to a public tool used as documented". The run later gave exactly that warning, at .93, and four more like it.
 
-What the desk check is, and isn't: it's the author reading the instrument's definition against the owner's line, and it catches a meaning that is wrong even when the model reads it exactly as written. It can't show what the model will answer, so a clean desk check earns a development run, never a claim that the rule works.
+What the desk check is, and isn't: it's the author reading the instrument's definition against the owner's line, and it catches a meaning that is wrong even when the model reads it exactly as written. It can't show what the model will answer, and it reads a reconstruction, never the bytes the engine sends, so a clean desk check earns the next request, never a claim that the rule works.
 
 ## The runs
 
-Run the development set, then, with the questions, reference, evidence and bars frozen, the held-out set once (`skill-rules-config` has the commands; both ask, so both need the key).
+When the rule has a selection, run it first, on the development cases' files, and read each candidate's outcome against its required inclusions and exclusions; then desk-check and review the rule on the pieces it keeps. Run the rule's development set; then, with the questions, reference, evidence, selection and bars frozen, the holder runs the held-out set once and returns its results (`skill-rules-config` has the commands; each asks, so each needs the key).
 
 **Every case gets one outcome,** counted per rule and per filter, apart:
 - **scored:** `right`, `false_warning`, `missed`, `unsure` or `incomplete` for a rule; `right`, `wrong_label`, `unsure` or `incomplete` for a filter;
@@ -109,8 +114,8 @@ Otherwise it is held, unchanged, with what it lacks, outside the active config; 
 
 Complete when:
 - every judged rule and filter has a case file on real text at fixed revisions, each case with its set and label origin, every owner ruling among them, and none in a `reference`;
-- every example was compared with every case, and none matches;
-- the desk-check record has a matching row for every owner-ruled development case, or the mismatches went back to step 4;
+- every example was compared with every development case and none matches, and the holder's held-out attestation is in or named as a gap;
+- the desk-check record has a matching row for every owner-ruled development case and every required inclusion of a selection, each with its equivalence gap, or the mismatches went back to step 4;
 - its development run and, frozen, its held-out run are in, every case scored or listed with why, the floors and switch-on conditions named as met or lacking;
 - the decision is on, with every condition met, or held, with what it lacks;
 - the receiving agent's call is named as owed to a pressure task, and everything still unproven is named.

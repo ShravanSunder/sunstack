@@ -257,6 +257,26 @@ Old to new:
 | `skill-rules/references/running-rules.md` | `skill-rules-config/references/running-rules.md` (repointed) |
 | — | new: `skill-rules-config/SKILL.md`, `references/evidence-kinds.md`, `references/case-runs.md`; `skill-rules-review/SKILL.md` and `references/checks/{owner-rulings,chunk-and-coverage,lint-contract}.md` |
 
+### Corrections round 1
+
+From the independent `skill-review` (F1–F3) and the 🦉 Jev Advisor (F1–F4), as the Lead's `corrections-1.md` sets them; each Advisor finding that repeats a Reviewer finding is fixed once.
+
+| Finding | What changed |
+| --- | --- |
+| Reviewer F3 = Advisor F2: requests before the gates | Authoring now has ten steps. Steps 5–7 send nothing: step 5 prints only free evidence (a selected kind as its mechanical candidates); a selection is desk-checked and reviewed on its candidates before its first request; step 8 runs the selection as a paid development step, then desk-checks and reviews the downstream rule on the selected pieces before any rule case; blockers match. |
+| Reviewer F2 = Advisor F4: held-out custody | The tuner's desk check and example comparison cover development cases only. A held-out holder (an independent agent) checks the held-out side and returns only an attestation, an overlap count or a coverage failure; a missing attestation is a named gap. Fixed at the domain root, its proof reference, authoring, and `decision-model-review`'s state-and-evidence item. |
+| Reviewer F1 = Advisor F1: desk-check state | New `skill-rules-config/references/desk-check-state.md` is the one recipe: on 0.8.3 the state is a reconstruction built on the case-run overlay with selected kinds made mechanical in the overlay's config copy, assembled like the engine's `piece_state`, with the equivalence gap named; a saved request counts only when all its inputs still match; no-send preparation is planned, not shipped. Authoring's `cases-and-proof.md`, `decision-model-review` (one definition in its `SKILL.md`) and `skill-rules-review`'s `owner-rulings` consume it. |
+| Advisor F3: K002 selection coverage | The selection's one property asks for procedural material in every form (instruction, worked example, table row, quotation); required inclusions are desk-checked like exclusions; a narrowed selection is an untested coverage hypothesis and the rule stays on the gated mechanical kind until a run keeps every required inclusion (control: `project-verification-selection.md:39–42`, owner-ruled warn). New `chunk-and-coverage` item. |
+| Reviewer notes | K002's selection coverage marked untested in `rule-design.md`; the "a lookup table can't route work" claim removed (`calls-and-placement.md`'s own example is a command in a table row). |
+
+Decisions added:
+
+| # | Default taken | Rationale |
+| --- | --- | --- |
+| D17 | A selection's candidates are printed for free by removing `select` in the overlay's copy of the config. | The only credential-free route to candidate state on 0.8.3; the committed config is never edited for it. |
+| D18 | A reconstruction's equivalence gap goes in the verdict's unavailable proof and doesn't make a review check `partial`. | On 0.8.3 the gap is always present; counting it as `partial` would make `ready` unreachable at every stage. |
+| D19 | Exclusions a selection keeps are a cost, not a failure; only a dropped required inclusion fails. | Requiring every exclusion rejected pushes the question narrower, which is how it drops positives. |
+
 Deviations from Part 3, each inside the accepted obligations:
 - `skill-rules-review` takes `decision-model-review`'s review schema through that skill's own step 3 load instead of a second load call; one load, same schema (D6).
 - `decision-model-review` also says what a design-stage `ready` means and gains two completion blockers for it, and its step 2 names held-out cases as never an input. This is the generic half of obligation 8 and of the source-only standard, placed by D16.
@@ -297,7 +317,11 @@ No new rule routes; any future rule over these skills goes through `skill-rules-
 
 Each runs in a fresh session that sees the descriptions beside their neighbours and nothing of this set, with the loaded skill read from the host's record.
 
-### Structural proof, 7 Nov 07:51–07:53 EST
+### Structural proof
+
+After corrections round 1, 7 Nov 08:16–08:20 EST: `pnpm --dir tests/skills test` 26 files, 222/222, exit 0; `typecheck` exit 0; `claude plugin validate .` passed; pinned `sunstack 0.8.3` `--check` and `--rules` exit 0, the same three mechanical rules; self-check `lint --report` over the five rules skills clean, 15 results, 0 requests, 0 findings; 120 load paths checked, the 7 misses all the quoted `agentstudio-loop.md` example.
+
+First implementation, 7 Nov 07:51–07:53 EST:
 
 | Check | Result |
 | --- | --- |

@@ -17,7 +17,7 @@ Who owns what: the design judgment is this skill's. The standards for any decisi
 
 ## Workflow
 
-A run that starts from a refusal, a held rule or a bad result still walks steps 1 to 4 for the standards it touches: whether a standard should carry a rule at all, and what its cases say, decide the fix. A mechanical rule skips steps 3 and 6 and is proven by edge tests at step 8.
+A run that starts from a refusal, a held rule or a bad result still walks steps 1 to 4 for the standards it touches: whether a standard should carry a rule at all, and what its cases say, decide the fix. A mechanical rule skips steps 3, 6 and 8 and is proven by edge tests at step 9. Steps 5 to 7 send no model request.
 
 ### 1. List the candidate standards
 
@@ -45,59 +45,67 @@ why it fails:    a case whose answer rides in the request can only show the mode
                  nobody whether it could label a folder it hadn't been shown.
 ```
 
-Completion: every judged rule and filter has its cases in the case file, every owner ruling among them, each with its label's origin; the floors met or lacking are named; and the held-out set was written by someone other than whoever tunes the rule, and you haven't read it.
+Completion: every judged rule, filter and selection has its cases in the case file, every owner ruling among them, each with its label's origin; the floors met or lacking are named; and the held-out set is kept by a holder who isn't whoever tunes the rule, and you haven't read it.
 
 ### 4. Design each marked rule or filter
 
 MUST load `../domain-decision-models/SKILL.md`, then MUST load `references/rule-design.md`, and return per rule or filter the design its outcome calls for: the judgment and who makes it; the chunk, mechanical or a chunk tree, with the reason; the tree, with each question's meaning drawn from step 3's cases; the `reference`, written from the standard; the nudge each finding route gives; the policy; and the proof plan. A field that doesn't apply is marked `not applicable` with its reason, never invented.
 
 Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with its reason. A rule failing any goes back to step 2:
-- the chunk is chosen for a stated reason: the shape decides which pieces the standard governs, or the shape finds candidates and choosing among them takes reading;
+- the chunk is chosen for a stated reason: the shape decides which pieces the standard governs, or the shape finds candidates and choosing among them takes reading; a selection names its required inclusions, every piece a must-warn case needs, in every form the standard governs;
 - each question's criteria state the owner's line in the owner's terms, and name which step-3 cases fall on each side of it;
 - one property is one question; no question was split to add nodes;
-- every `reference` example is written from the standard, and none is a step-3 case or a near copy of one, or carries a case's answer;
+- every `reference` example is written from the standard, and none is a step-3 development case or a near copy of one, or carries a case's answer;
 - each mechanical node decides only what its predicate fully captures;
 - a route whose evidence can't settle its standard ends in a nudge or `uncertain`, never `pass`;
 - each finding route says what the agent receives and where it reads next;
 - the proof plan fits the outcome.
 
-### 5. Write it
+### 5. Write it, and print only what's free
 
-MUST load `../skill-rules-config/SKILL.md` and use it to write each marker, entry and filter from step 4's design, pair the rulebook, run the check, and print the evidence for each rule's kind over its whole denominator. Return the check's printed rules with their count, and the print's reading for each rule. Mark the narrowest host whose visible words, read with nothing around them, state the standard.
+MUST load `../skill-rules-config/SKILL.md` and use it to write each marker, entry, filter and selection from step 4's design, pair the rulebook, and run the check. Then print the evidence each rule and selection reads, over its whole denominator, only where printing sends nothing: a mechanical kind as it is, and a selected kind, or a kind `within` one, only as its mechanical candidates, through config's desk-check state recipe. Return the check's printed rules with their count, and each print's reading. Mark the narrowest host whose visible words, read with nothing around them, state the standard.
 
-Completion: the check passes with every intended rule printed and the count right; each printed standard reads as itself; and the print shows every intended piece with its fields, every cut named.
+A model request is paid, whatever the command calls it: printing a selected kind runs its selection, and a lint or case run with an asking rule sends requests. None is sent in steps 5 to 7.
 
-### 6. Desk-check before any paid run
+Completion: the check passes with every intended rule printed and the count right; each printed standard reads as itself; each free print shows every intended piece or candidate with its fields, every cut named; and nothing was sent.
 
-Using `references/cases-and-proof.md`'s desk check, read every owner-ruled development case, and as many other development cases as the floors need, on the state its request will carry, against the questions; then compare every `reference` example with every case. Return the desk-check record: per case, the decisive content the state holds, what each question's meaning gives it, and whether that matches its label; per example, whether it matched any case.
+### 6. Desk-check before any request
+
+Using `references/cases-and-proof.md`'s desk check, on development cases only, read each case on the state its request will carry, rebuilt by config's desk-check state recipe, against the questions: every owner-ruled development case, and as many others as the floors need. A selection is desk-checked first, on its candidates: every piece a must-warn case needs is a required inclusion and must be selected; a piece its standard doesn't govern that it keeps costs a request, while a required inclusion it drops hides a mistake. Then compare every `reference` example with every development case, and ask the held-out holder for the held-out separation attestation. Return the desk-check record: per case, the decisive content the state holds, what each question's meaning gives it, whether that matches its label, and the equivalence gap the recipe names; per example, whether it matched any development case; and the holder's attestation, or its absence as a named gap.
 
 A case whose label the meaning doesn't reproduce goes back to step 4: first look for missing decisive content in the state, then change the meaning. The label never changes, and the question is never split to dodge the case.
 
 ```text
-rule:            no paid run before the desk check is clean.
+rule:            no request before the desk check is clean.
 rationalization: "The run will tell us. Reading every ruling by hand takes too long."
 why it fails:    the run tells you the same thing a thousand requests later, and its answers
                  can't be reused once the meaning changes. Every false warning and wrong
                  label the held trees gave on an owner's ruling was readable on its state first.
 ```
 
-Completion: every owner-ruled development case has a row, every row matches its label, and no example matches any case.
+Completion: every owner-ruled development case has a row, every row matches its label, every required inclusion of a selection is selected by its meaning, no example matches any development case, and the held-out attestation is in or named as a gap.
 
-### 7. Review before the first paid run
+### 7. Review before any request
 
-Start a reviewer with no authoring history on `skill-rules-review`, the way the host starts a reviewer, and give it step 4's design, the entries and config, the evidence print, the desk-check record and the development case file; never the held-out set. Return its verdict and findings. Each accepted finding goes back to the step that owns it, and the review runs again on the correction. If the host can't start a separate agent, stop and say so: a rule reviewed by its author hasn't been reviewed.
+Start a reviewer with no authoring history on `skill-rules-review`, the way the host starts a reviewer, and give it step 4's design, the entries and config, the free prints, the desk-check record and the development case file; never the held-out set. A selection is reviewed on its candidates' state before any selection request; a rule on a plain kind is reviewed on its pieces; a rule on a selected kind is reviewed again at step 8, on the pieces the selection keeps. Return its verdict and findings. Each accepted finding goes back to the step that owns it, and the review runs again on the correction. If the host can't start a separate agent, stop and say so: a rule reviewed by its author hasn't been reviewed.
 
-Completion: the verdict is `ready` for the development run, or every accepted finding is back with its owning step.
+Completion: the verdict is `ready` for the next request (a selection's first run, or a rule's development cases), or every accepted finding is back with its owning step.
 
-### 8. Prove, and decide on or held
+### 8. Run the selection first, when there is one
 
-Using `references/cases-and-proof.md`, with the commands from `skill-rules-config`'s case runs: run the development set; set each bar from the development results and record it with the cases that set it; freeze the questions, reference, evidence and bars; then run the held-out set once. Return per judged rule and filter: the outcome of every case, scored or listed with why; the floors met or lacking; each bar with its development cases; the model requested and the version that answered; the baseline comparison or its gap; and the decision, on or held, with what a held rule lacks. Return per mechanical rule its edge tests.
+A selection's first requests are a paid development step, sent only after step 7's `ready` for it. Print the selected kind over the development cases' files, on the case-run overlay, and read each candidate's outcome against the selection's cases: every required inclusion must be selected, an uncertain or incomplete one counting as unmet; the pieces it kept that its standard doesn't govern are counted as their cost. A required inclusion that wasn't selected goes back to step 4; the rule waits. Then desk-check the downstream rule on the selected pieces, as step 6 does, and have it reviewed as step 7 does, before any rule case runs. A rule on a kind with no selection skips this step.
+
+Completion: every required inclusion was selected and every outcome is counted, and the downstream rule's desk check and review on the selected pieces are in; or the selection is back with step 4, with what it dropped.
+
+### 9. Prove, and decide on or held
+
+Using `references/cases-and-proof.md`, with the commands from `skill-rules-config`'s case runs: run the development set; set each bar from the development results and record it with the cases that set it; freeze the questions, reference, evidence, selection and bars; then have the held-out holder run the held-out set once. Return per judged rule, filter and selection: the outcome of every case, scored or listed with why; the floors met or lacking; each bar with its development cases; the model requested and the version that answered; the baseline comparison or its gap; and the decision, on or held, with what a held rule lacks. Return per mechanical rule its edge tests.
 
 Keep three observations apart: the collection (the evidence print), the tree (the case results), and the receiving agent's call, which only a pressure task observes and which stays named as unproven until one has run.
 
 Completion: every judged rule has its development run and, frozen, its one held-out run, or the missing run named as unproven; every case is counted or listed; every rule short of a floor or a switch-on condition is held, with what it lacks; every mechanical rule has edge tests that pass and fail where its standard does.
 
-### 9. Return
+### 10. Return
 
 Return the decision table, the desk-check record, the review verdict, the diff, and the check, evidence and case results its proof column cites:
 
@@ -119,8 +127,11 @@ The run is not done while any of these hold:
 - an owner's ruling, or any case, sits in a `reference`, or an example carries a case's answer;
 - a question's meaning was repaired by splitting it into more questions, or a label was changed to fit a question;
 - a chunk was judged by a tree where its shape decides, or a judged rule asks of every piece of a kind its standard mostly doesn't cover, with no gate;
-- a paid run was made before the desk check was clean, or before the independent review returned `ready` for it;
+- a selection drops a required inclusion, or its coverage is claimed before its run on the development cases;
+- a model request (a selected kind's print, a selection run, a lint or case run with an asking rule) was sent before that instrument's desk check was clean and its independent review returned `ready`;
+- a rule case ran before the downstream rule was desk-checked and reviewed on the selected pieces;
+- a reconstructed desk-check state was reported as the sent state, without its equivalence gap;
 - a route whose evidence can't settle its standard ends `pass`, or a path that reads a model's answer can reach an `error` finding;
-- a held-out case was read, desk-checked or tuned on by whoever tunes the rule;
+- a held-out case was read, desk-checked, compared or tuned on by whoever tunes the rule, or the holder's separation attestation is missing and not named as a gap;
 - a judged rule warns before its cases meet the floors, or a held rule was switched on;
 - a passing check or evidence print is claimed as proof that a rule decides well, or a rule's case results as proof of what an agent does with its nudge.
