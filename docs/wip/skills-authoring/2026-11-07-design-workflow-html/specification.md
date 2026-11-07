@@ -1,6 +1,6 @@
 # Specification: the four-document design workflow as an HTML system
 
-Draft, 7 Nov 2026. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). Two obligations wait in part on the owner's answers on his decision page: O8 (how agents read and check a design) and what goes with O6's settled links; each states the default this draft takes and what changes with each answer.
+Draft, 7 Nov 2026. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). Two obligations wait in part on the owner's answers on his decision page: O8 (how agents read and check a design) and what goes with O6's settled links; each states the default this draft takes and what changes with each answer. Revised after design review (DR-H2: O7a–O7c; DR-H3: O6a; DR-H4: O8).
 
 ## What the skills must do
 
@@ -18,14 +18,18 @@ Draft, 7 Nov 2026. What the changed skills must do, and the standards they state
 ### How a need links to the rest (S4)
 
 - **O6.** Each need in Requirements carries the same forward links to its obligations in the Specification, its rows in the Program Design and its rows in the Verification Design, each link saying what is there; each of those rows links back to the need. Settled by the owner (31 Oct: "a standardize link forwrad here / and back in teh details"). *What goes with it waits on the owner (Q2):* a view of one need with its answers side by side (B), the Map showing each need's path once released (C), both, or neither. Default taken until he answers: neither, with B tried only as an experiment once Demistify can show a section from its home without copying it.
+- **O6a.** The links grow with the documents: while a downstream document isn't written yet, the need shows that document's link as not yet written, in words and with no target, never an invented one; each phase adds the links its own rows earn when it writes them (the Specification its need-to-obligation links both ways, the Program Design its obligation-to-trace-row links, the Verification Design its need-to-proof links), and the design is complete only when every need links forward and every row back, which the design review checks.
 
 ### Pages, not one page (S2)
 
-- **O7.** A design set is one collection: a home page that opens on what needs the owner, one page per document, and a plan page; when the work has deliverables, an overall design (its four documents) and, for each deliverable, a design page and a plan page that link to each other, with the overall design staying the home of every shared fact.
+- **O7.** A design set is one collection: a home page that opens on what needs the owner, one page per document, and a plan page.
+- **O7a.** When the work has deliverables, the overall design (its four documents) stays the home of every fact, and its home page carries the delivery cut: each deliverable with the needs it delivers and what it waits on, written by the Lead after the design review and confirmed by the owner on the page.
+- **O7b.** Each deliverable's design page is a view composed from the overall design: its needs and, through their links, its obligations, owners, paths and proof rows, shown by linking to or embedding those sections; it states no fact of its own, and a fact only this deliverable needs is written into the overall document that owns its kind and reviewed there.
+- **O7c.** Each deliverable's plan page is written by the planner from the four reviewed documents, scoped to that deliverable's needs, and it and the deliverable's design page link to each other; the next deliverable's page and plan are written when its turn comes.
 
 ### Agents read and check it (S5)
 
-- **O8.** An agent finds any section by its ID from the set's home page, reads its text on its page, and works from that page, with no second copy of the design. *Waits on the owner (Q1).* Default taken: agents read the HTML pages directly. If he chooses a Markdown copy or a read-out command, O8 and the checks below change with it.
+- **O8.** An agent finds any section by its ID from the set's home page, reads its text on its page, and works from that page, with no second copy of the design. *Waits on the owner (Q1).* Default taken: agents read the HTML pages directly. The other answer on his page is a read-out command that prints a page's text for agents, rebuilt from the page each time and never edited, so the pages stay the only design; if he chooses it, O8 adds that command and a run to build it. A kept Markdown copy is not among the answers: it would reverse his decision that design is HTML.
 - **O9.** Every page passes Demistify's checker at its binding; checks of the Markdown inside islands wait for sunstack's rule engine to read islands in HTML, a dependency named here and owned in sunstack-tools.
 
 ### The owner confirms on the page (S1, S4)

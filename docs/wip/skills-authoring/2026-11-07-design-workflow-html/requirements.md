@@ -30,7 +30,7 @@ Drafted from the words above; the owner confirms or corrects it on his decision 
 3. A page is composed in sections, each design fact in the view that suits it: Requirements grouped as cards with images where UX matters, choices side by side, components and paths drawn, proof as cards and rows.
 4. Each need links forward to its specification, program design and verification, and back, the same way everywhere, and the link explains what the related part means.
 5. Agents can read and check the design: they find any section by its ID and read its text without a second copy, and checks run on the pages.
-6. Phase one uses Demistify's released parts as they are; the newer parts (stories, sections, the Map) enter the skills only once released, through component experiments with the Demistify Lead.
+6. Only released Demistify parts enter the skills; the newest (stories, sections, the Map, released in 1.20.0 on 7 Nov) enter through experiments with the Demistify Lead.
 
 ## Who reaches these skills, and when
 
@@ -52,7 +52,7 @@ Drafted from the words above; the owner confirms or corrects it on his decision 
 | 7 Nov | headless renders of `docs/wip/skills-authoring/2026-11-06-show-me-your-work-record/requirements.html` and `program-design.html` | The old model at its best still renders each document as one long scroll. |
 | 7 Nov | `html-overhead.ts` on those HTML sets and on two prototypes | Markup is 24–29% of the bytes in real HTML design documents and 39–41% in component-heavy pages. |
 | 7 Nov | sunstack-tools crates; the Demistify CLI | sunstack lint doesn't read Markdown islands inside HTML; the Demistify CLI has index, embed and check, no read-out of islands. |
-| 7 Nov | Demistify `release.json` (1.19.0); `feat/demistify-show-me-page` | Stories, sections, the page Map with M and bulk fold are unreleased; on a preview build, sections count stories ("· 0" on design parts). |
+| 7 Nov | Demistify `release.json`; `feat/demistify-show-me-page`; the released guide's `references/stories.md` | Stories, sections, the page Map with M and bulk fold were unreleased during the day (hosted 1.19.0) and released that evening in 1.20.0 (PR #141, release PR #132). Sections count only stories, so a section on a design page reads "· 0" (prototype on the preview build; the released guide: "A section with no stories is valid and counts zero"). |
 
 ## Authoring basis
 
