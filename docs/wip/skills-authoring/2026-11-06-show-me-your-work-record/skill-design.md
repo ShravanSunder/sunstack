@@ -142,7 +142,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | 4 | implemented | this commit |
 | 5 | implemented | this commit |
 | 6 | implemented | this commit |
-| 7 | proposed | |
+| 7 | implemented | this commit |
 | 8 | proposed | |
 | 9 | proposed | |
 
