@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Section:` (one of the page's four sections: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed), `Headline:`, `Happened:`, `For you:`, `Next:`, and optionally `Show:` (a table or a diagram source); its links name the rows it covers |
+| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. "Stories" below gives each line |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, with each Missed row linked) |
 
@@ -88,14 +88,51 @@ Bad: a shortcut nobody logged when it was taken. PR #194's merge proof ran typec
 
 **Missed.** Good, `01a1b3e2-27fb` (2:1346): "Missed: the skill spec (c4d752af) followed skill-authoring 0.5.0's route … / Found by: review lead codex-local/01a1a6f7, asking for the skill-design and skill-verification parts (push 01a1b3da-e1e1). / Affects: the spec-stage review target; fixed at ecf2f095." It says what was missed, who found it and how, and what it touches.
 
-**Audit.** No audit row exists in this log yet, so here is the shape `SKILL.md`'s audit step fills in, as a template:
+**Story.** The Lead writes one at a checkpoint for each subject the owner follows; `show-me.md` says when, and builds the page from them. Its lines, in this order:
+
+| Line | Holds |
+| --- | --- |
+| the title | the subject's name in the owner's words, such as "How the new skill was checked" |
+| `Key:` | a short id kept across rewrites; the page gives the Story the element id `story_<key>` |
+| `Section:` | one of the page's four sections: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed |
+| `Subject:` | the part of the work it belongs to, as the Map names it, such as "The skill" |
+| `Routine: yes` | only when it is routine; it then folds at the end of its section |
+| `Headline:` | one sentence: what it means for the owner |
+| `Happened:`, `For you:`, `Next:` | one short line each; `For you:` says "Nothing." when nothing is asked |
+| `Show:` | optional: `table`, a diagram or a before-after, followed by its lines; at most one |
+| `More:` | optional paragraphs the owner can open |
+| `Covers:` | the full row id of every row the Story cites, comma-separated |
+
+**`Covers:` decides what a Story cites, not its links.** Router takes at most 16 links on one row, and a Story often covers more. So the Story cites exactly the rows `Covers:` names, linked or not, and every line must be said by one of them. A first Story links up to 16 of them. A rewrite is a new `story` row tagged `supersedes` whose first link is the Story it replaces, which it doesn't cite, so it links up to 15 cited rows after it. Which cited rows get the links changes nothing about what the Story cites.
+
+Good, `01a1b5e6-d173` (2:1960), a rewrite whose first link is the Story it replaces (`01a1b5dd-5cfe`), with 16 links and 55 rows in `Covers:`:
 
 ```text
-Audit: <whose> stretch for <what>.
-Stretch: from <position, commit or time> to <position, commit or time>.
-Compared against: <your own session history; the packet's or plan's required checks>.
-Couldn't see: <what you couldn't read, or nothing>.
-Found: <count>, each Missed row linked.
+How the new skill was checked
+Key: checked
+Section: What was verified, and what was missed
+Subject: The skill
+Headline: Four reviewers found four problems; all are fixed, and they checked the fixes.
+Happened: Each reviewer wrote down its own checks as it went; the reviewer who checked the others' work checked every problem at its line.
+For you: Nothing.
+Next: Checked again once the page part is redone.
+Show: table
+| Problem found | Fixed |
+| Two places pointed to the wrong step | Yes |
+| A refused note could be taken as a lost one | Yes, after two more checks |
+Covers: 01a1b412-aac2-7459-b952-9e41a92c1baa, 01a1b412-aac3-7c7b-bdd3-ba9d84e9adf3, …
+```
+
+Bad: an early story such as `01a1b5b0-6f51` (2:1827), which named the rows it covered only by its four links. A reader can't tell a cited row from a linked one, and a Story covering 55 rows can't link them all.
+
+**Audit.** Good, `01a1b404-e3cd` (the Implementer's audit at its handback):
+
+```text
+Audit: the Implementer's stretch for the show-me-your-work redesign, runs 1-9 and the A1-A4 follow-up.
+Stretch: from the commission (first row 01a1b3f7-6a17) to the handback at commit 30749f88.
+Compared against: my own session (every edit, command and message to the Lead) and the commission's required checks (…).
+Couldn't see: nothing of my own session; I can't see whether the Lead's parallel commit 75e7f64f changed anything I relied on beyond skill-design.md.
+Found: 3 (01a1b3fe-32d8 keyed rules for run 1, 01a1b404-cb80 keyed rules for runs 2-9, 01a1b404-ca13 three unlogged choices).
 ```
 
 `Couldn't see:` names what you couldn't read, such as a transcript you have no access to. Then the page shows that stretch "not audited", never "nothing missed".
@@ -108,7 +145,7 @@ A row is never edited. A correction, a resolution, an answer, a new state of an 
 - Its **first** link is the row it closes.
 - Its other links are authority or context. No other link closes, accepts or confirms anything: a row that only links to an assumption leaves it open.
 
-Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. A rewritten story is a new `story` row tagged `supersedes`, whose first link is the story it replaces.
+Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. A rewritten story is a new `story` row tagged `supersedes`, whose first link is the Story it replaces; its links stay within 16 in total.
 
 ## Links
 
