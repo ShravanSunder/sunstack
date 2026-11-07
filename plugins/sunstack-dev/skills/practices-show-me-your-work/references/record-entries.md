@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. the **Story** part below gives each line |
+| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. The **Story** part below gives each line |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, with each Missed row linked) |
 
