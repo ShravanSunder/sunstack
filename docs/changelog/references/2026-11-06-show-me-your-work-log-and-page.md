@@ -29,4 +29,21 @@ After merging main (#199, which moves the rules to native `sunstack lint` with C
 - `pnpm --dir tests/skills test` (223 tests) passed in 3 of 5 full runs. The other 2 failed on different integration tests that arrived with #199: once `active-rulebook` and `kind-filter`, once `scaffold-project`, whose scaffold exited 141 (SIGPIPE). Each passes when run alone. This branch changes none of those tests or the scaffold plugin; the flakes belong to main.
 - `pnpm --dir tests/skills typecheck` exit 0, and `claude plugin validate .` passed.
 
+The skill-creation pass and the whole-PR review (7 Nov):
+- The owner asked whether his skill-creation skills had been followed. For D16 they hadn't: the writer worked from memory, and the reviews loaded skill-review only.
+- The writer then ran skill-creation 0.11.0 over all the changed skill text: padding cut by the deletion test, one term per meaning, and a slop inventory.
+- A whole-PR implementation review followed, with three fresh reviewers, each loading skill-review and skill-creation. It found two problems:
+  - an audit's `Found:` named only the misses it linked, and a row takes 16 links;
+  - the no-project page step wasn't Lead-only.
+
+  Both were corrected under D17 and verified closed: verdict great at `cbfda895`.
+- At `cbfda895`:
+  - suite 223 passed; typecheck exit 0; `claude plugin validate .` passed; `git diff --check` clean;
+  - native `sunstack lint` clean on all ten changed skills: 3 mechanical rules each, no model requests.
+- Platform surfaces:
+  - Codex quick validator: not run (PyYAML is not installed);
+  - Claude plugin validation: run, passed;
+  - Codex marketplace metadata: not applicable (no availability, path, category or policy change);
+  - installed caches: not refreshed (release not in scope).
+
 Not covered: whether Router processed overlapping sends at once (seen only from the clients' side); agents following the guidance on real work; the owner reading the page; hosts other than this machine's Router.
