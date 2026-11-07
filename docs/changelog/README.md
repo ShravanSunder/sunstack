@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-07 Frozen skill-kind filter](2026-11-07-frozen-skill-kind-filter.md)
 - [2026-11-07 Rules skills: standalone, split and corrected](2026-11-07-rules-skills-standalone.md)
 - [2026-11-06 Decision trees and direct native lint](2026-11-06-decision-trees-native-rulebook.md)
 

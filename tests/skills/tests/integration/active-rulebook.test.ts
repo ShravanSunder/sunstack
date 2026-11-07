@@ -106,7 +106,7 @@ test("fully held pairs retain their rule JSON and marked sentences while teachin
   }
 });
 
-test("the development-rejected trees and K002 marker are held exactly as evaluated", () => {
+test("the active frozen kind filter preserves the rejected trees and K002 marker", () => {
   // Arrange: the authorized development run's source is the preservation oracle.
   const evaluated = "437632d42610bdbe8365d4938e4098cd660b4f4a";
   const before = (relative: string): Record<string, unknown> =>
@@ -127,8 +127,14 @@ test("the development-rejected trees and K002 marker are held exactly as evaluat
   const candidate = held.find((row) => row.marker === "<!-- K002 -->");
   const kind = readJson(path.join(repositoryRoot, kitRelative, "held/kind.filter.json"));
 
-  // Assert: holding changes selection only, never the measured questions or policy.
-  expect(config).not.toHaveProperty("filters");
+  // Assert: activation copies the frozen profile; historical rejected trees remain evidence.
+  expect(config["filters"]).toEqual({
+    kind: readJson(path.join(repositoryRoot, kitRelative, "held/rebuild-kind.filter.json")),
+  });
+  const evidence = jsonObject.parse(config["evidence"]);
+  const kinds = jsonObject.parse(evidence["kinds"]);
+  expect(jsonObject.parse(kinds["skill"])["max_chars"]).toBe(20000);
+  expect(config["decision_model"]).toEqual({ model: "typesafe/jev-1.14-20261014" });
   expect(candidate).toBeDefined();
   expect(candidate?.entry).toEqual(before(`${kitRelative}/general-skill.rules.json`)["K002"]);
   expect(kind).toEqual(jsonObject.parse(before(configRelative)["filters"])["kind"]);
@@ -141,7 +147,7 @@ test("the development-rejected trees and K002 marker are held exactly as evaluat
   expect(note).toContain("held-out");
 });
 
-test("ordinary native lint has three mechanical rules and makes no model requests", async () => {
+test("ordinary native lint leaves the ungated kind filter idle and makes no model requests", async () => {
   // Arrange: real historical checked text with the actual shipped config.
   const root = createRulebookFixture();
   const file = "plugins/sunstack-dev/skills/role-operator/SKILL.md";
@@ -151,7 +157,7 @@ test("ordinary native lint has three mechanical rules and makes no model request
   const output = await runNativeLint({ root, arguments: ["--format", "json", file] });
   const report = nativeReportSchema.parse(JSON.parse(output.stdout));
 
-  // Assert: no hidden kind gate or judged rule can create an incomplete run.
+  // Assert: the declared filter stays idle until a rule gates on it; only mechanical rules run.
   expect(output.status, output.stderr).toBe(report.counts.error ? 1 : 0);
   expect(report.usage.model_requests).toBe(0);
   expect(report.filter_answers).toEqual([]);
