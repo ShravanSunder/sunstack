@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect, test } from "vitest";
 import { z } from "zod";
-import { readDevelopmentScenarioFiles } from "../support/read-development-scenarios.ts";
+import { readDevelopmentScenarios } from "#test-support/read-development-scenarios";
 
 const repository = fileURLToPath(new URL("../../../../", import.meta.url));
 const legacyScenarioSchema = z.object({
@@ -14,7 +14,7 @@ const legacyScenarioSchema = z.object({
 });
 
 test("every migrated piece line reproduces the original 74e18127 case coordinates", () => {
-  const current = readDevelopmentScenarioFiles(repository).flatMap((entry) => entry.file.scenarios);
+  const current = readDevelopmentScenarios(repository);
   const manifests = execFileSync(
     "git",
     [

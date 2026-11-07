@@ -1,0 +1,82 @@
+{
+  "held": [
+    {
+      "markdown": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+      "line": 8,
+      "marker": "<!-- K004 -->",
+      "sentence": "- A description names the situation, symptom, user request, repository event or failure that should load the skill.",
+      "entry": {
+        "name": "skill-description.names-the-loading-moment",
+        "evidence": "skill",
+        "questions": {
+          "names_moment": {
+            "type": "noul",
+            "instructions": {
+              "check": "description",
+              "task": "Does the description name a moment that should load this skill, one an agent could recognize when it arrives: a situation, symptom, user request, repository event or failure?"
+            },
+            "criteria": {
+              "true": "It names at least one such moment in words an agent could match against a prompt or the work in front of it, such as 'writing or reviewing a database migration', 'a test that passes locally and fails in CI', or 'a slow SQL query or a missing index'. This holds whether the moment is phrased as a trigger or as the work the skill does; how the description opens is a different standard. A boundary or a short payoff beside the moment doesn't change this.",
+              "false": "It names only an abstract topic, quality or benefit that no prompt would contain, or a boundary, so nothing tells the agent the moment has come, such as 'Helps with migrations', 'Database expertise', or a 'Not for ...' clause standing alone."
+            }
+          }
+        },
+        "decision": {
+          "start": "names_moment",
+          "steps": {
+            "names_moment": {
+              "ask": "names_moment",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "pass",
+              "no": {
+                "finding": "Description names no moment that should load the skill.",
+                "at": "description"
+              }
+            }
+          }
+        },
+        "severity": "warn"
+      }
+    },
+    {
+      "markdown": "plugins/skill-authoring/skills/domain-skill-crafting/references/descriptions-and-invocation.md",
+      "line": 12,
+      "marker": "<!-- K005 -->",
+      "sentence": "- A description carries no workflow steps, tool lists, implementation detail or generic virtue.",
+      "entry": {
+        "name": "skill-description.states-triggers-not-workflow-steps",
+        "evidence": "skill",
+        "questions": {
+          "carries_extra": {
+            "type": "noul",
+            "instructions": {
+              "check": "description",
+              "task": "Beyond what decides loading, does the description carry workflow steps, a tool list, implementation detail or generic virtue?"
+            },
+            "criteria": {
+              "true": "It carries at least one: what the skill does step by step ('reads the files, checks X, reports Z'), including a list of the stages or phases it runs, even in parentheses ('(plan, build, test and deploy)'); the tools it uses ('uses grep, tests and GitHub'); how it works inside; or praise with no routing value ('helps write better code', 'thorough and reliable').",
+              "false": "Everything in it serves the load decision: the moment and its symptoms, examples of situations that count, a short why that sharpens routing, and boundaries with neighbouring skills."
+            }
+          }
+        },
+        "decision": {
+          "start": "carries_extra",
+          "steps": {
+            "carries_extra": {
+              "ask": "carries_extra",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": {
+                "finding": "Description carries workflow, tools, implementation detail or generic virtue; keep only what decides loading.",
+                "at": "description"
+              },
+              "no": "pass"
+            }
+          }
+        },
+        "severity": "warn"
+      }
+    }
+  ]
+}

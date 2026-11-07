@@ -120,7 +120,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | D7 | Every helper logs whenever its packet names a work trail, whatever its posting authority | Specification R1, R14; the posting gates on `role-reviewer` and `role-verifier` are a likely reason no reviewer or evaluator logged before 6 Nov (an observation, not a proven cause) |
 | D8 | `show-me.md` replaces `live-page.md` with no forwarding stub; every caller is updated in the same change | the repository's hard-cutover rule for runtime references (AGENTS.md) |
 | D9 | The skill stays guides only: no script ships in it | the #194 guides-only change; counting or sorting rows is a one-off command in the Lead's scratch space |
-| D10 | One PR for all the runs, one changelog entry and one version bump (sunstack-dev 2.104.1 → 2.105.0) | the runs share one behavior change; the owner's default is one PR per deliverable |
+| D10 | One PR for all the runs, one changelog entry and one version bump (sunstack-dev 2.104.1 → 2.105.0 as planned; 2.107.0 at the merge, because main took 2.105.0 and 2.106.0 for #199) | the runs share one behavior change; the owner's default is one PR per deliverable |
 | D11 | No description changes, so no trigger trial | every description stays accurate; changing one would owe a trial that tests a trigger nobody asked to move |
 | D12 | The engineering Requirements and Specification serve as this set's requirements and specification parts; this part and the skill verification part replace the earlier `spec.md` | skill-authoring 0.10.2's design set needs four parts; the owner's design cycle produced the first two |
 | D13 | The shipped holding file for work with no Router project yet (`no-board-trace.md`, and `record-entries.md`'s "To an entries file") stays. Its rows carry their minted row ids, so the move into the trail keeps every link. D1's non-goal is a JSONL log in place of the work trail, not this pre-project holding file | the owner left logging mechanics, memory-logs files included, to the Lead ("the lgos and memroy logs or related md fiels to log you decide is easy dx for agents", 6 Nov); the review lead found the overlap at `no-board-trace.md:7`, `:19` and `record-entries.md:100` |
@@ -132,7 +132,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 
 - Base: branch `skills/show-me-your-work-record`, which contains `origin/main` `87fb8b38`. Check `origin/main` again before each run, and merge it in if it moved.
 - Pending edits: none. `gh pr list` showed no open PR touching the eight target skills (6 Nov); check again before run 1.
-- Version and changelog landing: run 8's commit bumps sunstack-dev to 2.105.0 in `.claude-plugin`, `.codex-plugin` and `.cursor-plugin`. It adds a dated `docs/changelog/` entry and its README line, and updates the sunstack-dev README if its inventory names `live-page.md`.
+- Version and changelog landing: run 8's commit bumps sunstack-dev to 2.105.0 (2.107.0 after merging main, which took 2.105.0 and 2.106.0) in `.claude-plugin`, `.codex-plugin` and `.cursor-plugin`. It adds a dated `docs/changelog/` entry and its README line, and updates the sunstack-dev README if its inventory names `live-page.md`.
 
 ## Run status
 

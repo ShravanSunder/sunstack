@@ -136,35 +136,74 @@ Bad:  the same answer forced to pass at ≥ .5
 
 An uncertain answer is a successful assessment with too little separation. It differs from a failed request (incomplete) and from missing evidence (a gap).
 
-## A nudge tree: when the evidence can't settle the standard
+## A nudge tree: the product-workflow rule
 
-The standard: "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths." Its home teaches that the workflow lives in the product's repository, and that a tool used through its supported interface, domain vocabulary, the toolkit's own infrastructure and a product named only as a labelled example are not one. The piece is the introduction of `sunstack-dev`'s `ops-observability-stack/SKILL.md`: its own text, which holds line 17, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.", and the openings of the files it loads. The evidence can show the route into AgentStudio's own loop. It can't show where that loop should live: no piece holds another repository.
+The standard: a skill meant for any repository doesn't carry one product's own material: its procedures, run commands, state files or machine paths. The evidence can show that material. It can't show where it should live, because no piece holds the product's repository. So the rule nudges, and the agent decides.
+
+The piece is one section of a general skill: its body, heading and headings, plus the opening of every file or skill it loads. The rule's `reference` holds the owner's rulings as examples, each with its text, its answer and why. Three Nouls and the line-finder go in one request, and each Noul names the body, the openings and `reference.examples`:
+
+1. `product_material`: "Does this section show concrete material that belongs to one product?"
+2. `all_labelled_examples`: "Is all of that material shown only as labelled examples?"
+3. `quotes_real_product_mistake`: "Does the section quote a real product's own mistake?"
 
 ```text
-Good: one request {routes_product?, example_or_own_infrastructure?} + a locator over the body's lines in the piece
-      routes_product? → no: pass (no route into a product's workflow on this text and its loads)
-                      → yes: example_or_own_infrastructure? → yes: pass
-                                                             → no: nudge at the located line, warn:
-                                                                   "read the loaded files, then decide whether it belongs
-                                                                    in that product's own repository"
-      either between its bars → uncertain
-Bad:  belongs in this repository? → no: finding "move this to the product's repository"
-      (claims what no piece holds)
+Good: product_material? → no      → [complete: body and loads fully read?] → yes: pass · no: uncertain
+                        → between → uncertain
+                        → yes     → quotes_real_product_mistake?
+                                      → yes     → nudge at the found line, warn
+                                      → no      → all_labelled_examples? → no: nudge · between: uncertain
+                                                                         → yes → [complete?] → yes: pass · no: uncertain
+                                      → between → all_labelled_examples? → no: nudge · yes or between: uncertain
+Bad:  routes_product? → yes → example_or_own_infrastructure? → no → nudge
+      (the old two-question rule: its first question packed three facts, a procedure,
+       whose it is and whether it's a public tool, and its passes ran on cut text)
 Bad:  belongs in this repository? → between its bars → pass
       (a question the evidence can't settle, reported as held)
 ```
 
-On line 17, the model answers yes to the first question and no to the second, and the locator picks `L17` above its bar. Code ends in a `warn` finding at line 17 whose path read the model's answers, so its basis is judged. The agent reads `agentstudio-loop.md` and decides.
+Each bar is a Noul's P(yes): ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is the route drawn. Those are starting bars, set on the development cases and recorded beside them, not defaults.
 
-How this tree departs from a tree that decides its standard:
+On `ops-observability-stack/SKILL.md:17`, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.", the section shows AgentStudio's own loop through the loaded file's opening, and nothing labels it an example. The walk reads yes, then no, then no, and ends in a `warn` nudge at line 17: "this section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository".
 
-- **Its verdict question asks what the evidence shows,** a route into one product's own workflow, never the standard's own verdict, where that workflow belongs.
-- **Its finding is a nudge:** the message says what to check and where to read, the route ends at `warn`, and nothing in it says the line is wrong.
-- **Its `pass` routes settle only what the evidence shows:** no route into a product's workflow, or every one a labelled example or the toolkit's own.
-- **Each exemption sits on the question that owns it.** The routing question's criteria carry the tool and vocabulary exemptions, so `claude plugin validate .` in a Claude plugin's section answers no there; the example question's carry labelled examples and the toolkit's own stack.
-- **Its line comes from a locator, not a pattern.** The section's generic loads on lines 14 to 16, `producer-contract.md` among them, precede line 17, so "the first load line" points at the wrong one. The locator is an ordinary Choice whose options code built from the piece's own lines and the validator admits; the model only chooses, and below its bar the finding stays at the field's first line, marked default.
+What the tree keeps, and why:
 
-A tree with a question gate shows its drop the same way: the piece ends `not_applicable` with the gate's answer kept, so an agent who would decide the piece's kind otherwise can say so.
+- **Each question holds one fact.** "Is there product material?", "is it all labelled?" and "is a real product's mistake quoted?" can each be answered alone, so they can't contradict each other inside one answer.
+- **The warning is an OR of two known triggers:** material not all labelled, or a quoted real mistake. An unknown on one doesn't hide a known yes on the other, and an unknown that decides the outcome ends `uncertain`.
+- **Both passes need the text fully read.** The `complete` check runs before each pass: a "no" about a cut body, or a loaded file whose opening was cut or didn't resolve, isn't a measured absence.
+- **The examples live in the reference, not in the questions.** Each question stays one sentence with short criteria, and all three read the same rulings.
+- **Its line comes from the line-finder, not a pattern.** The section's generic loads come before line 17, so "the first load line" points at the wrong one. Below its bar, the warning stays at the body's first line, marked default.
+- **Its finding is a nudge:** the message says what to check and where to read, and nothing in it says the line is wrong.
+
+## A filter as a tree: the kind filter
+
+A filter decides one label per folder, here the kind of skill a folder holds, and rules gate on that label (`only_when`). It is judged once per folder, and every rule gated on it uses that one result.
+
+The state is the skill's description and the opening of its `SKILL.md` (the body from just after the frontmatter through the end of the first H2 section: the H1 introduction, if any, and the whole first `##` section), plus a `reference` holding the five kind definitions and worked examples. It holds no folder name, which would hint at the answer. Two Choices go in one request:
+
+1. `primary_work`: reusable guidance · operating a public tool · one repository's own procedure.
+2. `reusable_guidance_kind`: general · role · domain.
+
+```text
+Good: primary_work? → reusable guidance       → reusable_guidance_kind? → general · role · domain → that label
+                                                                       → below its bar → unsure
+                    → operating a public tool → tool_manual
+                    → one repository's own    → repo_specific
+                    → below its bar           → unsure
+      unsure → the folder is skipped, and listed with its route
+Bad:  one Choice over all five labels, whose criteria pack every boundary between them
+      (the old filter: one question, one cut-off, no tree)
+```
+
+Each Choice reads its top label's probability among 3 labels. A starting bar of .6 is a confidence of (.6 − 1/3) ÷ (2/3) = .40, which is not accuracy; the bar is set on development cases. The walk reads `reusable_guidance_kind` only when `primary_work` picked reusable guidance; otherwise it's asked in the same request and unused.
+
+What the tree keeps, and why:
+
+- **Each Choice picks between labels that can't both be true.** Packing all five kinds into one menu made each label's criteria carry every other label's boundary.
+- **The boundaries are written once, in the reference.** "A repository's own command-line tool counts as its own procedure, not as a public tool" is a definition both questions share, not a sentence repeated in each.
+- **A label comes only from a tree ending.** A question's own option, such as "reusable guidance", is never a filter label.
+- **Unsure skips and lists the folder.** The rules gated on the filter don't run there, and the skip is visible, so a wrong skip can be challenged.
+
+This is not the hierarchy below. Both menus are fixed and asked together, and code only chooses which answer to read; nothing is built from an earlier answer.
 
 ## A hierarchy is caller code
 

@@ -4,15 +4,15 @@ This reference owns one run of this plugin's rules on skill files from a step th
 
 Every caller reads a result the same way. A rule has run only when the engine's report, from a run on the files as they stand now, says so; whatever the report doesn't show as decided is a gap, never a pass. A rule's finding is a nudge to you: it says what it noticed and where to read, and you decide.
 
-## The rules and the runner
+## The rules and the command
 
-The rules are `domain-skill-crafting`'s marked standards, each a decision model the engine runs over the pieces of skill text its standard governs: mechanical checks run locally, and questions go to the decision model, which is on for every run. The engine finds its own key; a run it can't make is refused, and the refusal is that run's result.
+The rules are `domain-skill-crafting`'s marked standards, each a decision model the engine runs over the pieces of skill text its standard governs, and the filters that decide which folders each rule reads: mechanical checks run locally, and questions go to the decision model, which is on for every run. The engine finds its own key; a run it can't make is refused, and the refusal is that run's result.
 
-The repository's rule runner is the command the repository's own instructions name for running these rules: look in its agent instructions, such as `AGENTS.md`, and its contributor docs. IF the repository names no runner, or the runner fails before the engine responds, return `rules: not run` with that reason: this run ends there, and the calling step goes on with that result. A rule's state comes only from the repository's runner, so don't build an engine request of your own, install an engine, or supply, replace or remove a key or a model endpoint to get a run through.
+The command is plain `sunstack lint` with the config the repository's own instructions name: look in its agent instructions, such as `AGENTS.md`, and its contributor docs. No wrapper stands between lint and you. IF the repository names no config, or the command fails before the engine responds, return `rules: not run` with that reason: this run ends there, and the calling step goes on with that result. A rule's state comes only from that run, so don't build an engine request of your own, or supply, replace or remove a key or a model endpoint to get a run through.
 
 ## Run it
 
-Run the runner as its instructions say, on the files or skill folders the calling step names, or on the changes since a revision when the step checks a change. Keep the report path it prints. Its printed lines (each nudge with its places, then the gaps by kind) are a view of that report; when they and the report differ, the report wins.
+Run `sunstack lint --config <config>` on the files or skill folders the calling step names, or with `--since <revision>` when the step checks a change, and add `--report <file>` so every result can be read in full later. Its short numbered lines (each warning, unsure result and gap, then the filter summary) are a view of that report; when they and the report differ, the report wins. For the detail behind one line, run `sunstack lint show <file> <id>`: its route, answers, bars and the places to read, without rerunning anything.
 
 ## Read the report
 
@@ -36,7 +36,7 @@ For each finding:
 
    A nudge that went quiet after a local edit is not an account.
 
-By severity: an `error` finding comes from a rule whose every path is mechanical, and is a breach that must be repaired before the change completes; your step's part in the repair is under "Repair, by what the calling step may do". A `warn` finding is the nudge itself. It never fails a run of this repository's runner, which sets no warning limit, so the status will never raise it for you.
+By severity: an `error` finding comes from a rule whose every path is mechanical, and is a breach that must be repaired before the change completes; your step's part in the repair is under "Repair, by what the calling step may do". A `warn` finding is the nudge itself. It never fails a run unless the command sets `--max-warnings`, so the status won't raise it for you.
 
 Several rules can nudge about one line, each about its own property. Put them together: one rule's pass doesn't cancel another's nudge, and answering one rule's property doesn't answer another's.
 
@@ -48,15 +48,16 @@ Nudges that are the same case, such as one label line repeated across several fi
 | --- | --- |
 | an `uncertain` piece | yours to decide. Read the piece with the step it stopped at, its answers and its state, judge it against the standard yourself, and record the same account as for a nudge. It is never a pass. |
 | a piece that passed | one property held: that rule's, on that piece. It says nothing else about the skill, and a pass on a line another rule nudges about closes nothing. Its `answers`, when its path read any, show why. |
-| a piece counted `not_applicable` | a decided exclusion: the rule's gate judged the piece outside its standard. Its row keeps the gate's step and, when the gate read a model's answer, that answer. Read the exclusions on the files your step checks, and challenge one whose answer you'd decide otherwise. An exclusion is neither a pass nor a gap. |
+| a piece counted `not_applicable`, or a folder excluded by its filter label | a decided exclusion: the rule's gate, or the filter's label, put the piece outside its standard. Its row keeps the gate's step and, when the gate read a model's answer, that answer. Read the exclusions on the files your step checks, and challenge one whose answer you'd decide otherwise. An exclusion is neither a pass nor a gap. |
 
 ### The gaps, by kind
 
-What the run couldn't see comes in four kinds. Say "no gaps" only when all four are empty.
+What the run couldn't see comes in five kinds. Say "no gaps" only when all five are empty.
 
-- **Unread:** a rule that judged no piece in a file inside its denominator, the files and pieces its design says it scans. The runner derives it from the rule's denominator, the per-file counts and the results. A file outside a rule's denominator, such as a reference for a rule that judges only `SKILL.md` descriptions, is out of scope, not a gap.
-- **Cut:** a piece whose model view a size cap cut, though its collected fields were whole: a row's `cut` fields, or a loaded file whose opening was cut. Its result was reached on less than was collected, so read the piece yourself before leaning on its pass or its drop.
-- **Unresolved:** each selection candidate that ended `uncertain` (the runner prints its file, line, heading and yes probability) or `incomplete` (with its reason). Pieces that exist only through it, such as the steps of a workflow candidate, are absent: their rules never ran there, and an absent step is never a passed one. Pieces of a plain kind in its range, such as loads and branches, and pieces kept through another container still exist and keep their own results (a load or branch inside it carries no step context unless an enclosing step survives through another selected container). Take what was decided from the results, not from the candidate's range. Name the candidate, say whether you read it as the kind it was asked about, and leave the pieces that depend only on it unproven; your reading is not a verdict on them. A file with candidates and none selected has its own counts: when every candidate is `not_selected`, the decision model judged none of them to be that kind, which is information, not a gap; an `uncertain`, `incomplete` or not-asked candidate in the count is no negative judgment, and stays the gap its own row says.
+- **Unread:** a rule that judged no piece in a file inside its denominator, the files and pieces its design says it scans. Derive it from the rule's denominator, the report's per-file counts and its results. A file outside a rule's denominator, such as a reference for a rule that judges only `SKILL.md` descriptions, is out of scope, not a gap.
+- **Cut:** a piece whose model view a size cap cut, or a loaded file whose opening was cut or didn't resolve: a row's `cut` fields, or an unsure result saying the text wasn't fully read. Its result was reached on less than the piece holds, so read the piece yourself before leaning on it.
+- **Skipped folders:** each folder a filter ended `unsure` or incomplete for, listed with its route: no rule gated on that filter ran there. A folder excluded by its label is a decided exclusion, not a gap.
+- **Unresolved:** each selection candidate that ended `uncertain` (the report gives its file, line, heading and yes probability) or `incomplete` (with its reason). Pieces that exist only through it, such as the steps of a workflow candidate, are absent: their rules never ran there, and an absent step is never a passed one. Pieces of a plain kind in its range, such as loads and branches, and pieces kept through another container still exist and keep their own results (a load or branch inside it carries no step context unless an enclosing step survives through another selected container). Take what was decided from the results, not from the candidate's range. Name the candidate, say whether you read it as the kind it was asked about, and leave the pieces that depend only on it unproven; your reading is not a verdict on them. A file with candidates and none selected has its own counts: when every candidate is `not_selected`, the decision model judged none of them to be that kind, which is information, not a gap; an `uncertain`, `incomplete` or not-asked candidate in the count is no negative judgment, and stays the gap its own row says.
 - **Not run:** each incomplete part (an incomplete row keeps the path it walked, and any answers it read, before it stopped), each skipped rule, and a run whose status is `invalid` (a refusal for no key included), `cancelled` or `incomplete`, or a full-scope run with `nothing_selected`: the rules didn't all run, so the return says which didn't and why.
 
 IF the run is refused at a rule's definition (a line in a marked standard's host, a rules file or the config), load `markers-and-rules.md` and return each refusal's cause and fix from its repair table, then decide whether the change caused it. It did only when the diff holds the edit that produces that cause, in the refusal's own file, in the file paired with it (a host and its rules file), or in the config that pairs them. A deleted marker that leaves its untouched rules entry orphaned is change-caused, because the producing edit is the deletion in the paired Markdown; an unrelated edit beside a definition that was already invalid is not, because nothing in the diff produces that cause. A change-caused refusal is repaired as the calling step may, below; every other refusal, and a refusal for no key, stays a gap with its cause.
@@ -85,11 +86,11 @@ A finding is traced to the change when the change's diff made the text at its li
 nudge:  call.completeness at plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md:17 (warn, judged, anchor default): A call doesn't say what to bring back.; read: calls-and-placement.md (standard), references/agentstudio-loop.md (whole) -> open: the loaded file is AgentStudio's own loop; whether a generic skill routes into it is outside this rule, so returned to the commissioner before any return is added
 ```
 
-**With the placement rule,** the same line carries two nudges, each about its own property:
+**With the product-workflow rule,** the same line carries two nudges, each about its own property:
 
 ```text
-nudge:  placement.product-workflow at plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md:17 (warn, judged, anchor resolved): This routes the agent into one product's own workflow: read the loaded files, then decide whether it belongs in that product's own repository.; read: calls-and-placement.md (standard), references/agentstudio-loop.md (opening, then whole) -> routed: AgentStudio's debug and beta loop belongs in AgentStudio's repository; returned to the commissioner as a change to the plan
-nudge:  call.completeness at the same line -> routed with the placement nudge: if the line moves, its return moves with it
+nudge:  general-skill.overfits-to-product-workflow at plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md:17 (warn, judged, anchor resolved): This section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository.; read: calls-and-placement.md (standard), references/agentstudio-loop.md (opening, then whole) -> routed: AgentStudio's debug and beta loop belongs in AgentStudio's repository; returned to the commissioner as a change to the plan
+nudge:  call.completeness at the same line -> routed with the product-workflow nudge: if the line moves, its return moves with it
 ```
 
 **And the commission** should have carried line 17, the observation (the call names no return), the standard, the read-next place (`agentstudio-loop.md`), and the broader question (what this call should bring back, and whether this skill should route into AgentStudio's loop at all), instead of "call completeness".
@@ -98,16 +99,16 @@ nudge:  call.completeness at the same line -> routed with the placement nudge: i
 
 ```text
 rules:      ran | not run: <reason>
-runner:     <the command, as the repository's instructions name it> | none named
-report:     <the path the runner printed>
+command:    <the sunstack lint command, with the config the repository's instructions name> | none named
+report:     <the --report path>
 status:     <status>, exit <code>; usage <requests>, <cost>
 nudge:      <rule> at <file>:<line> (<severity>, <basis>, anchor <resolved | default>): <message>; read: <the places you opened> -> fixed: <what changed> (a review: raised: <the candidate and its fix>; an audit: flagged: <the signal>) | kept: <why the text is right> | routed: <to whom>: <the broader concern> | open: <the evidence it lacks>
 uncertain:  <rule> at <file>:<line> (stopped at <step>): <your call: pass | finding | not applicable>, <one-line reason>; read: <places> -> fixed | kept | routed | open, as for a nudge
-gap:        unread | cut | unresolved | not run: <the rule and file, the piece, the candidate, the part or the run>: <reason>; <what depends on it, left unproven>
+gap:        unread | cut | skipped folder | unresolved | not run: <the rule and file, the piece, the candidate, the part or the run>: <reason>; <what depends on it, left unproven>
 excluded:   <count> pieces decided outside their standards; challenged: <rule> at <file>:<line>, gate <step> answered <answer>: <why you'd decide otherwise> | none challenged
 ```
 
-Give one `nudge` line per finding, one `uncertain` line per piece (or per group of identical pieces, each named) and one `gap` line per gap, with the file and line from the report, so a reviewer can check your call at that anchor. `rules: ran` means the runner returned a report; the status and the gap lines say how much of it decided.
+Give one `nudge` line per finding, one `uncertain` line per piece (or per group of identical pieces, each named) and one `gap` line per gap, with the file and line from the report, so a reviewer can check your call at that anchor. `rules: ran` means lint returned a report; the status and the gap lines say how much of it decided.
 
 Good and bad readings:
 
@@ -126,4 +127,4 @@ Good and bad readings:
 - Bad: a branch finding inside that same uncertain workflow dropped from the return as "never judged": a branch is a plain piece, and its result stands.
 - Bad: a file whose one candidate was uncertain, or failed at the provider, reported as "the model found no workflow there".
 
-Complete when: the runner was found, or `rules: not run` was returned with its reason; when it ran, the report was read, every nudge has its places read and its account at its line, every `uncertain` piece has your decision and reason, every gap is named by its kind with its reason and what depends on it, the decided exclusions are counted apart with any you challenge, and "no gaps" is said only when all four kinds are empty.
+Complete when: the command and its config were found, or `rules: not run` was returned with its reason; when it ran, the report was read, every nudge has its places read and its account at its line, every `uncertain` piece has your decision and reason, every gap is named by its kind with its reason and what depends on it, the decided exclusions are counted apart with any you challenge, and "no gaps" is said only when all five kinds are empty.

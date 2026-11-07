@@ -5,11 +5,11 @@
 - A description's job is to help the agent decide whether to load the skill.
 - A description starts with `Use when`, `Trigger when`, `Always use when` or `Always trigger when`.<!-- K001 -->
 - A description uses an `Always` opener only when skipping the skill would break the work whenever its condition holds.
-- A description names the situation, symptom, user request, repository event or failure that should load the skill.<!-- K004 -->
+- A description names the situation, symptom, user request, repository event or failure that should load the skill.
 - A description uses the searchable words the user, codebase, docs or logs actually use.
 - A description gives a short why only when it sharpens routing.
 - A description names an adjacent skill's boundary only when that skill is easy to confuse with this one.
-- A description carries no workflow steps, tool lists, implementation detail or generic virtue.<!-- K005 -->
+- A description carries no workflow steps, tool lists, implementation detail or generic virtue.
 - A description aims for 100 to 200 characters.
 - A description of more than 225 characters warns.<!-- K002 -->
 - A description of more than 300 characters fails.<!-- K003 -->
