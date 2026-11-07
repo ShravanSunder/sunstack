@@ -1,0 +1,242 @@
+{
+  "held": [
+    {
+      "markdown": "plugins/skill-authoring/skills/domain-skill-crafting/references/general-skill.md",
+      "line": 8,
+      "marker": "<!-- K002 -->",
+      "sentence": "- A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.",
+      "entry": {
+        "name": "general-skill.overfits-to-product-workflow",
+        "evidence": "section",
+        "reference": {
+          "boundary": "Application procedure is a particular application's own operating, development or maintenance steps, commands, internal files or state, including a load into that procedure and material presented in a worked example or quotation. A public tool or platform used through its documented supported interface, ordinary commands, the subject's own vocabulary or tools, and this toolkit's shared infrastructure are outside that property. A product name or a command by itself does not establish application procedure.",
+          "presentation": "Application material is exempt only when explicitly presented as a labelled example of a general instruction, such as 'for example'; a general example heading or an unrelated example does not itself label every procedure as illustrative. A third-person description can teach procedure without an imperative. Quoting a real product's own concrete mistake is a separate trigger, including an actual product-specific instruction reproduced as a mistake, even when the quote is labelled as an example. A fictional worked example, hypothetical failure or incidental product name is not such a quote.",
+          "examples": [
+            {
+              "text": "Before servicing FernGlass firmware, run its private factory flashing task with the board-specific fixture and update its calibration ledger.",
+              "product_material": true,
+              "all_labelled_examples": false,
+              "quotes_real_product_mistake": false,
+              "outcome": "nudge",
+              "why": "The instruction teaches one application's own task and internal state, without an example label."
+            },
+            {
+              "text": "Use the public SkyTable catalog's documented lookup operation to obtain an object's coordinates.",
+              "product_material": false,
+              "all_labelled_examples": true,
+              "quotes_real_product_mistake": false,
+              "outcome": "quiet",
+              "why": "This fictional public tool is used through its supported interface; its documented operation is not application-internal procedure. The example-label question is irrelevant when application material is absent."
+            },
+            {
+              "text": "For example, a greenhouse controller may keep a board calibration ledger; choose the state your application actually needs.",
+              "product_material": true,
+              "all_labelled_examples": true,
+              "quotes_real_product_mistake": false,
+              "outcome": "quiet",
+              "why": "The application detail is explicitly an example, and no actual incident is quoted."
+            },
+            {
+              "text": "A labelled incident example quotes the FernGlass operator: \"Our production flashing job overwrote calibration.ledger before saving its previous contents.\"",
+              "product_material": true,
+              "all_labelled_examples": true,
+              "quotes_real_product_mistake": true,
+              "outcome": "nudge",
+              "why": "This invented teaching passage presents its quote as an actual application incident; the quote trigger is separate from the example label. It is not a report of an external event."
+            }
+          ]
+        },
+        "questions": {
+          "product_material": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings",
+                "targets",
+                "reference.boundary",
+                "reference.presentation",
+                "reference.examples"
+              ],
+              "task": "Does body or its targets teach one application's own internal procedure, commands, files or state, as opposed to using a public tool through its documented interface?"
+            },
+            "criteria": {
+              "true": "body or a target opening teaches application procedure as defined in reference.boundary, including descriptive worked examples and quotations. Its ownership and use establish this property, not merely the presence of commands, files or a product name.",
+              "false": "The visible material is only a supported public tool/platform interface, ordinary commands, subject vocabulary/tools, toolkit shared infrastructure or incidental names, as reference.boundary defines, with no application's own procedure."
+            }
+          },
+          "all_labelled_examples": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings",
+                "targets",
+                "reference.boundary",
+                "reference.presentation",
+                "reference.examples"
+              ],
+              "task": "Is every piece of product material in this section shown only as a labelled example of a general instruction, such as \u201cfor example\u201d?"
+            },
+            "criteria": {
+              "true": "Every piece of product material is explicitly presented only as an example of a general instruction. A general instruction elsewhere does not label an unrelated product instruction.",
+              "false": "At least one piece of product material is not explicitly presented only as a labelled example of a general instruction."
+            }
+          },
+          "quotes_real_product_mistake": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings",
+                "targets",
+                "reference.boundary",
+                "reference.presentation",
+                "reference.examples"
+              ],
+              "task": "Does this section quote a real product's own mistake?"
+            },
+            "criteria": {
+              "true": "It quotes a real product's own concrete mistake, as reference.presentation defines. Labelling the quote as an example does not change this fact.",
+              "false": "It does not quote a real product's own mistake. A fictional worked example or an incidental product name is not such a quote."
+            }
+          },
+          "procedural_material": {
+            "type": "noul",
+            "instructions": {
+              "check": "body",
+              "context": [
+                "heading",
+                "headings",
+                "targets",
+                "reference.boundary",
+                "reference.presentation",
+                "reference.examples"
+              ],
+              "task": "Does body or its targets contain procedural material, whether instruction, worked example, table row or quotation?"
+            },
+            "criteria": {
+              "true": "body or a target opening carries a procedure, commands, or files/state used in a procedure, in any of those forms; describing what another actor did can carry it.",
+              "false": "body and its targets carry no procedural material: only headings, labels, definitions or rationale. A procedural example or quoted procedure does not belong on this side."
+            }
+          }
+        },
+        "decision": {
+          "start": "procedural_material",
+          "steps": {
+            "product_material": {
+              "ask": "product_material",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "all_labelled_examples",
+              "no": "complete_body",
+              "uncertain": "uncertain"
+            },
+            "all_labelled_examples": {
+              "ask": "all_labelled_examples",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "quotes_real_product_mistake",
+              "no": {
+                "finding": "This section teaches one application's own procedure; read the line and any loaded file, then decide whether it belongs in that application's repository.",
+                "at": "body",
+                "locate": {
+                  "name": "product_line",
+                  "task": "Which line of body teaches one application's own procedure not explicitly labelled as an example of a general instruction, or quotes a real product's own concrete mistake? Use reference.boundary and reference.presentation. Include descriptive worked examples and table rows; exclude supported public interfaces, ordinary commands, subject tools/vocabulary and toolkit shared infrastructure. A general example heading alone does not label every procedure. A labelled quote of a real product mistake still nudges.",
+                  "min_probability": 0.6
+                }
+              },
+              "uncertain": "quote_trigger_when_labelling_unsure"
+            },
+            "quotes_real_product_mistake": {
+              "ask": "quotes_real_product_mistake",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": {
+                "finding": "This section teaches one application's own procedure; read the line and any loaded file, then decide whether it belongs in that application's repository.",
+                "at": "body",
+                "locate": {
+                  "name": "product_line",
+                  "task": "Which line of body teaches one application's own procedure not explicitly labelled as an example of a general instruction, or quotes a real product's own concrete mistake? Use reference.boundary and reference.presentation. Include descriptive worked examples and table rows; exclude supported public interfaces, ordinary commands, subject tools/vocabulary and toolkit shared infrastructure. A general example heading alone does not label every procedure. A labelled quote of a real product mistake still nudges.",
+                  "min_probability": 0.6
+                }
+              },
+              "no": "complete_body",
+              "uncertain": "uncertain"
+            },
+            "quote_trigger_when_labelling_unsure": {
+              "ask": "quotes_real_product_mistake",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": {
+                "finding": "This section teaches one application's own procedure; read the line and any loaded file, then decide whether it belongs in that application's repository.",
+                "at": "body",
+                "locate": {
+                  "name": "product_line",
+                  "task": "Which line of body teaches one application's own procedure not explicitly labelled as an example of a general instruction, or quotes a real product's own concrete mistake? Use reference.boundary and reference.presentation. Include descriptive worked examples and table rows; exclude supported public interfaces, ordinary commands, subject tools/vocabulary and toolkit shared infrastructure. A general example heading alone does not label every procedure. A labelled quote of a real product mistake still nudges.",
+                  "min_probability": 0.6
+                }
+              },
+              "no": "uncertain",
+              "uncertain": "uncertain"
+            },
+            "complete_body": {
+              "mechanical_check": {
+                "tool": "complete",
+                "field": "body"
+              },
+              "yes": "complete_targets",
+              "no": "uncertain"
+            },
+            "complete_targets": {
+              "mechanical_check": {
+                "tool": "complete",
+                "field": "targets"
+              },
+              "yes": "pass",
+              "no": "uncertain"
+            },
+            "procedural_material": {
+              "ask": "procedural_material",
+              "yes_at_or_above": 0.7,
+              "no_at_or_below": 0.3,
+              "yes": "product_material",
+              "no": "complete_body_for_exclusion",
+              "uncertain": "uncertain"
+            },
+            "complete_body_for_exclusion": {
+              "mechanical_check": {
+                "tool": "complete",
+                "field": "body"
+              },
+              "yes": "complete_targets_for_exclusion",
+              "no": "uncertain"
+            },
+            "complete_targets_for_exclusion": {
+              "mechanical_check": {
+                "tool": "complete",
+                "field": "targets"
+              },
+              "yes": "not_applicable",
+              "no": "uncertain"
+            }
+          }
+        },
+        "related": [
+          "targets"
+        ],
+        "severity": "warn",
+        "only_when": {
+          "kind": [
+            "general",
+            "role",
+            "domain"
+          ]
+        }
+      }
+    }
+  ]
+}
