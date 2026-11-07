@@ -126,7 +126,7 @@ result with `sunstack lint show <file> <id>`; no second model run is needed.
 The active rulebook has the `kind` filter, the product-workflow rule and three
 mechanical description checks. Held entries and their original marker/standard
 locations live under the rulebook's `held/` directory, outside its configured
-pairs. Entirely held pairs retain their original marked standard sentences, markers and rule JSON. T4 may update teaching elsewhere in their Markdown files.
+pairs. Entirely held pairs retain their original marked standard sentences, markers and rule JSON. Teaching elsewhere in those Markdown files can evolve independently.
 
 The native case file is `evals/cases/skill-rules.cases.json`. It holds Git revisions, exact piece ranges
 or declared-read hashes, labels with their origins, separate development and
