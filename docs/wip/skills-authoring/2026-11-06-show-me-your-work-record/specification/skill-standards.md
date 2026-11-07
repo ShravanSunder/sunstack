@@ -1,6 +1,6 @@
 # The standards the skill states
 
-What the skill must do is the obligations, R1–R24, in [obligations.md](obligations.md); each obligation's first sentence is its one-sentence statement. This chunk lists the standards the changed skills will state to agents, one self-contained sentence each, and puts each rule through its two transfer cases.
+What the skill must do is the obligations, R1–R25, in [obligations.md](obligations.md); each obligation's first sentence is its one-sentence statement. This chunk lists the standards the changed skills will state to agents, one self-contained sentence each, and puts each rule through its two transfer cases.
 
 ## Standards
 

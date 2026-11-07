@@ -4,7 +4,7 @@ The system here is one opaque thing: the skill's guidance as agents follow it, t
 
 ## Capability map
 
-Each capability from the Requirements, with the obligations (R rows) that make it true. The log feeds every view; the top of the page draws from all of them.
+Each capability from the Requirements, with the obligations (R rows) that make it true. The log feeds every view; what needs the owner, in the first section and the Map, draws from all of them.
 
 ```mermaid
 flowchart LR
@@ -69,8 +69,8 @@ Each obligation names the entities it's about, the requirement it serves, what p
 - Passes when an agent's write needs no id it had to look up, and a retry after an unclear result leaves exactly one Row.
 - Fails when an agent has to look up a project id or session, a retry leaves two Rows, or two different Rows share one write's ids.
 
-**R4 · U9 · E12 E2.** The Lead writes the Stories, and every claim a Story makes is said by a Row it cites. Each claim links to its Row, and the Row's Writer shows.
-- Fails when a Story says something no cited Row says, or the page shows a claim without the Row behind it.
+**R4 · U9 · E12 E2.** The Lead writes the Stories, and every claim a Story makes is said by a Row it cites. A Story cites exactly the Rows its covered-Rows list names (E12), whether or not the Story row also links them; each one is found in the Work's log through the page's position, with its text and its Writer. On the page, each claim leads to its Row in the Story's folded Rows, where the Row's Writer shows.
+- Fails when a Story says something no cited Row says, names a Row that isn't in the Work's log through the page's position, or the page shows a claim without the Row behind it.
 
 **R5 · U11 · E1.** A peer Lead working on part of this work from its own project logs in its own Work. This Work's page copies none of its Rows. Where this Work depends on the peer's work, the page says where the peer's record is.
 
@@ -100,7 +100,7 @@ Each obligation names the entities it's about, the requirement it serves, what p
 
 **R12 · U3 · E7 E3.** The agent that takes a shortcut logs it when it takes it: what the plan, design or rule said; what it did instead; why; and the authority, if any, that allowed it.
 
-**R13 · U3 · E7 E10.** The page shows every Shortcut under "What changed and why". One that no owner decision or existing authority covers is marked for the owner's look and counts at the top of the page. A Shortcut first logged by someone other than the agent that took it also shows as a Missed item.
+**R13 · U3 · E7 E10.** The page shows every Shortcut under "What changed and why". One that no owner decision or existing authority covers is marked for the owner's look: its Story's For you row says what to look at, and the Map names that Story under what needs the owner (R22). A Shortcut first logged by someone other than the agent that took it also shows as a Missed item.
 
 ### Verification
 
@@ -140,14 +140,14 @@ The approved page is the reference for R19–R25: `p1b-approved-2026-11-07.html`
 
 Each section's header shows its count, stays on screen while its Stories scroll, and has an expand/collapse control on the right. A routine Story folds under one "smaller" row at the end of its section, as the owner asked ("yeah routine stuff is hidding within each secion?", 6 Nov).
 
-**R20 · U6 · E12.** Each Story shows, in order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one picture or table; a closed More fold; and a closed fold of the Rows it covers, each opening to its text. Stories start open; their Rows start closed.
+**R20 · U6 · E12.** Each Story shows, in order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one picture or table; a closed More fold; and a closed fold of every Row it cites, each opening to its text. Stories start open; their Rows start closed.
 - Fails when a Story is a wall of text, drops a row, or shows more than one picture or table.
 
 **R21 · U7 · E13.** Each item appears in full in one place on the page; anywhere else it's named, it's a link to that place. No section restates another's content.
 - Fails when the same Story, Decision, Shortcut or Check text appears in full twice.
 
 **R22 · U7 · E13 E12 E4.** The page has a Map: one tree in a panel that opens from the right like Comments, from a map button, and never stays open with Comments. The tree shows, in order:
-1. what needs the owner;
+1. what needs the owner: the Stories in For you to decide, and any Story with a Shortcut marked for his look (R13);
 2. "Where the work is": each part of the work, with each Story in it marked by its state (done, needs a fix, waiting on him);
 3. the other three sections, with their Stories.
 
@@ -177,11 +177,11 @@ Each obligation's reference is where the right answer comes from. Verification D
 | V1 | R1, R12, R14 | each agent's own transcript, and Router's writer stamp and time on each Row | the Lead writes a helper's decision; a Row arrives after the commit that used it |
 | V2 | R2 | the commissions sent, and the log at each handback | a handback accepted with none of the helper's Rows and no Missed item |
 | V3 | R3 | the command an agent runs to log, and the log after a retry of the same Row with an unclear first result | an agent looks up a project id; a retry with new ids leaves two Rows; two Rows share one write's ids |
-| V4 | R4 | each Story's cited Rows | a Story line that no cited Row says |
+| V4 | R4 | each Story's covered-Rows list, each Row read from the log with its text and Writer | a Story line that no cited Row says; a cited Row missing from the log; a line dropped because its only Row is cited but not linked |
 | V5 | R5 | the peer's project and this Work's log | a peer's Row copied into this Work |
 | V6 | R6, R7, R8 | the log's Decisions and the own-call rule (four conditions, from the live-page reference) | a design change sitting among the own calls; a Decision missing from the page |
 | V7 | R9, R10, R11 | the stop treatments, the log's Assumptions with their times, and the owner's words | an owner-only assumption logged after dependent work; one shown as decided after silence |
-| V8 | R13 | the log's Shortcuts and the owner's decisions | an unapproved shortcut not marked for his look |
+| V8 | R13 | the log's Shortcuts and the owner's decisions | an unapproved shortcut not marked for his look, or missing from the Map's branch of what needs him |
 | V9 | R15, R16 | the log's Checks and Acceptances, and the repository at the named revision | work shown as accepted with no Acceptance in the log; work shown as never signed off when the log only lacks a record |
 | V10 | R17, R18 | the log's Audits and Missed items, and what each Audit says it compared against | an unaudited stretch shown as "nothing missed"; an audited stretch where the #194 kind of skipped test suite is in the plan's required checks but never appears |
 | V11 | R19, R20, R21, R22 | the log through the page's stated position, and the approved page (sha256 `ece32b0cdb2a6fe4…`) | a section out of order or missing; a Story missing a row or carrying two pictures; one item in full twice; a Map row that doesn't open its Story; the Map panel open with Comments |

@@ -23,11 +23,17 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
   - The four sections come in order, each header staying on screen with its expand/collapse control on the right. Each Story has its headline, Happened / For you / Next, at most one picture or table, and More and its Rows folded. The two decision columns are there, and so are verification with acceptance status and what was missed with audit status.
   - The Map opens from its button as one tree in a drawer from the right, never open with Comments; every tree row opens its Story, with its folds, and on a phone the drawer closes first.
   - No item appears in full twice. Every Story line is in plain words (V15).
-  - The stated log position matches the trail, and every Row through it sits in exactly one Story or in the "not in a story yet" list.
+  - The stated log position matches the trail, and every Row through it is cited by exactly one current Story, through that Story's covered-Rows list, or sits in the "not in a story yet" list.
+  - An uncovered Shortcut is marked in its Story's For you row and named in the Map under what needs you.
   - At 420 wide, the sections, Stories and the Map stay readable: nothing clipped, wide tables scrolling only inside their own frames.
-- *Boundary case it includes:* a Story covering more than 16 Rows; it links 16 and names every one in its covered-Rows list, and its folded Rows show all of them.
+- *Boundary cases it includes:*
+  - a first Story citing more than 16 Rows, which links 16 of them;
+  - a rewrite citing more than 15, whose first link is the Story it replaces and which links up to 15 cited Rows after it;
+  - a line whose only support is a cited Row the Story doesn't link.
+
+  In each, the covered-Rows list names every cited Row, the folded Rows show all of them with their Writers, and the backing check finds the line's Row. A Story whose covered-Rows list names an id with no Row in the Work through the page's position fails.
 - *Lifetime:* lasting, because every page version is checked before the owner sees it. A `verify-` journey with a self-describing script would replace today's hand checks; building it belongs to `practices-verification-maintenance`.
-- *Wrong build it catches:* a section out of order; a Story missing a row or carrying two pictures; a Map row that opens nothing; the Map open with Comments; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; a working label in a Story; a page that clips at phone width.
+- *Wrong build it catches:* a section out of order; a Story missing a row or carrying two pictures; a rewrite that drops its closing link or exceeds 16 links; a Map row that opens nothing; an uncovered Shortcut missing from what needs you; the Map open with Comments; a design change among the own calls; "nothing missed" on an unaudited stretch; an Acceptance shown with none in the log; a working label in a Story; a page that clips at phone width.
 
 **O3 · the packet contract test (automated; reused, extended by the plan).**
 - `agent-job-packet.test.ts` parses one packet with `workLog` set to a work trail and one with `noRecord`, and rejects a packet with none.
@@ -72,12 +78,12 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 - **Reuses:** none.
 
 ### U3 · shortcuts (R12 R13)
-- **Proven by:** each shortcut is logged by the agent that took it, when it took it. Your page shows it under "What changed and why", marked for your look when nothing covered it.
+- **Proven by:** each shortcut is logged by the agent that took it, when it took it. Your page shows it under "What changed and why". When nothing covered it, it's marked for your look and named in the Map under what needs you.
 - **Unverified:** shortcuts that an agent took without recognizing them as departures, unless its Audit or a review finds them.
 
 - **Reference:** each agent's own history; the plan's and repository's required steps; the owner's decisions.
 - **Target and journey:** O1 (temporary); O2 (lasting, `needed:`).
-- **Passes when:** each departure in an agent's history has a `shortcut` row by that agent before its next dependent action; an uncovered one is marked for your look under What changed and why; one first logged by someone else also shows as a Missed item. *Fails for* a skipped required check, like #194's test suite, with no shortcut row by the agent that skipped it.
+- **Passes when:** each departure in an agent's history has a `shortcut` row by that agent before its next dependent action; an uncovered one is marked for your look in its Story's For you row under What changed and why, and the Map names that Story under what needs you; one first logged by someone else also shows as a Missed item. *Fails for* a skipped required check, like #194's test suite, with no shortcut row by the agent that skipped it.
 - **Reuses:** none.
 
 ### U4 · verification (R14 R15 R16)
@@ -144,12 +150,12 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 - **Reuses:** `agent-job-packet.test.ts` (O3).
 
 ### U9 · logging: the Lead interprets and owns (R4)
-- **Proven by:** every line of every story on your page is said by a row it links to.
+- **Proven by:** every line of every story on your page is said by a row the story cites, and every row it cites is in its folded record with who wrote it.
 - **Unverified:** whether the Lead's interpretation is the one the owner would draw; that's O6.
 
-- **Reference:** each story's linked rows.
+- **Reference:** each story's covered-Rows list, each row read from the trail through the page's position with its text and Writer.
 - **Target and journey:** O2, lasting, `needed:`.
-- **Passes when:** for each story line, a linked row says it. *Fails for* a story line no linked row supports.
+- **Passes when:** for each story line, a row in the story's covered-Rows list says it, and that row shows in the story's folded rows with its Writer. The check includes a line whose only support is a cited row the story doesn't link, which passes, and a story listing an id with no row in the Work through the page's position, which fails. *Fails for* a line no cited row supports, a listed id with no row, or a build that judges support from the story's links alone and drops a line a cited row backs.
 - **Reuses:** none.
 
 ### U10 · logging: easy and cheap (R3)
@@ -183,7 +189,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 | --- | --- | --- | --- | --- | --- |
 | U1 | R6 R7 R8 | page anchors and columns against the trail's decisions | O2 | the page check | owner's agreement (O6) |
 | U2 | R9 R10 R11 | row time against the next dependent action; open assumptions on the page | O1, O2 | the run; the page check | R10 if no owner-only assumption arises |
-| U3 | R12 R13 | shortcut rows by writer; shortcut cards | O1, O2 | the run; the page check | unrecognized departures |
+| U3 | R12 R13 | shortcut rows by writer; shortcut Stories and the Map's branch of what needs you | O1, O2 | the run; the page check | unrecognized departures |
 | U4 | R14 R15 R16 | proof rows' writer against `Ran by:`; verified section | O1, O2 | the run; the page check | sign-offs outside the log |
 | U5 | R8 R17 R18 | audit and missed rows per writer against the page | O1, O2 | the run; the page check | what no audit or review notices |
 | U12 | R24 | the section's Workstreams against the started parts | O2, O1 | the page check; the run | work with no written plan |
@@ -191,7 +197,7 @@ This is a plan. Nothing in it has been observed. For each requirement (U1–U13)
 | U7 | R21 R22 R23 | the Map's rows and drawer; duplicate text; the reference | O2, O4 | the page check; skill files | fresh-agent build |
 | U13 | R25 | Story lines read for working labels | O2, O6 | the page check; your reading | words only you can judge |
 | U8 | R1 R2 | writer stamp and time against history; packet, handback, trail | O1, O3, O4 | the run; the packet test | Workers without Router; Cursor |
-| U9 | R4 | each story's links | O2 | the page check | the owner's own reading (O6) |
+| U9 | R4 | each story's covered-Rows list, resolved against the trail | O2 | the page check | the owner's own reading (O6) |
 | U10 | R3 | commands as run; the trail after a forced unclear result | O1, O5 | the run; a probe | token cost |
 | U11 | R5 | the peer's project and this trail | O1 | the run, if a peer takes part | a run with no peer |
 

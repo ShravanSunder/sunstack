@@ -20,10 +20,10 @@
   </nav>
 </ex-nav>
 
-<ex-presentation id="your-page" title="Your page, end to end" description="From what you asked to see, to what must be true of the page, to the sketch, to how it will be proven.">
+<ex-presentation id="your-page" title="Your page, end to end" description="From what you asked to see, to the page you approved, to what must be true of it, to how it will be proven.">
   <ex-step to="requirements.html#req-show-me--what-the-owner-sees">What you asked to see on the page.</ex-step>
-  <ex-step to="specification.html#sketch">The page those requirements describe, sketched from this project's log.</ex-step>
-  <ex-step to="specification.html#spec-obligations--what-needs-the-owner-attention">What must be true of its top and its sections.</ex-step>
+  <ex-step to="specification.html#approved">The page you approved, which those requirements describe.</ex-step>
+  <ex-step to="specification.html#spec-obligations--what-needs-the-owner-attention">What must be true of its sections, its stories and the Map.</ex-step>
   <ex-step to="program-design.html#program-design--the-main-path-a-helper-logs-a-decision-the-lead-puts-it-on-the-page">How a helper's row reaches it.</ex-step>
   <ex-step to="verification-design.html#proven-by">How each part will be shown to work.</ex-step>
 </ex-presentation>
@@ -63,12 +63,14 @@
   <ex-step to="program-design.html#program-design--trace">Its row in the trace.</ex-step>
   <ex-step to="verification-design.html#verification-design--u12-going-on-what-s-going-on-r24">How U12 will be checked.</ex-step>
 </ex-presentation>
-<ex-presentation id="through-attention" title="attention: need to proof" description="U6 and U7, their obligations, who realizes them, and how they'll be checked.">
-  <ex-step to="requirements.html#req-show-me--what-the-owner-sees">U6–U7: what needs you, shown visually.</ex-step>
-  <ex-step to="specification.html#spec-obligations--what-needs-the-owner-attention">R19–R23: what must be true.</ex-step>
+<ex-presentation id="through-attention" title="attention: need to proof" description="U6, U7 and U13, their obligations, who realizes them, and how they'll be checked.">
+  <ex-step to="requirements.html#req-show-me--what-the-owner-sees">U6, U7 and U13: your page, the Map, and plain words.</ex-step>
+  <ex-step to="specification.html#approved">The page you approved.</ex-step>
+  <ex-step to="specification.html#spec-obligations--what-needs-the-owner-attention">R19–R23 and R25: what must be true.</ex-step>
   <ex-step to="program-design.html#program-design--trace">Their rows in the trace.</ex-step>
   <ex-step to="verification-design.html#verification-design--u6-attention-what-needs-you-r19-r20">How U6 will be checked.</ex-step>
   <ex-step to="verification-design.html#verification-design--u7-attention-the-map-r21-r22-r23">How U7 will be checked.</ex-step>
+  <ex-step to="verification-design.html#verification-design--u13-attention-plain-words-r25">How U13 will be checked.</ex-step>
 </ex-presentation>
 <ex-presentation id="through-logging" title="logging: need to proof" description="U8–U11, their obligations, who realizes them, and how they'll be checked.">
   <ex-step to="requirements.html#req-log--the-log">U8–U11: every agent logs its own work as it goes.</ex-step>
@@ -80,7 +82,7 @@
 <ex-presentation id="skill-change-parts" title="The skill change, in four parts" description="The skill-authoring design set: requirements, specification, skill design and skill verification, in order.">
   <ex-step to="requirements.html#req-entry--requirements-show-me-your-work">Requirements: the change, who it's for, and the capabilities.</ex-step>
   <ex-step to="specification.html#spec-standards--standards">Specification: what the skill must do, and the standards it states.</ex-step>
-  <ex-step to="skill-design.html#skill-design--skill-design-show-me-your-work-the-log-and-the-page">Skill design: eight runs, one skill each.</ex-step>
+  <ex-step to="skill-design.html#skill-design--skill-design-show-me-your-work-the-log-and-the-page">Skill design: nine runs, one skill each.</ex-step>
   <ex-step to="skill-verification.html#skill-verification--skill-verification-show-me-your-work-the-log-and-the-page">Skill verification: each requirement's and standard's proof, and what stays unverified.</ex-step>
 </ex-presentation>
 
@@ -88,23 +90,23 @@
 
 <h1>Show me your work: the redesign</h1>
 
-<p>The change will make every agent log its own decisions, assumptions, shortcuts and checks in the Router log as it works, and will give me a reference for building your page from that log. It touches eight skills in sunstack-dev: <code>practices-show-me-your-work</code>, <code>practices-manage-agents</code> and six role skills. Still open: the independent review of the skill design and skill verification parts, then the writing.</p>
+<p>The change makes every agent log its own decisions, assumptions, shortcuts and checks in the Router log as it works, and teaches me to build your page from that log: the page you approved on 7 Nov. It touches nine skills in sunstack-dev: <code>practices-show-me-your-work</code>, <code>practices-manage-agents</code>, six role skills and <code>implement-plan</code>. The skills are written and reviewed in PR #198, not merged. The part that builds your page is being rewritten to your approved design first.</p>
 
 <ul>
 <li>What you asked for, for whom, and the boundary you confirmed: <a href="requirements.html">Requirements</a></li>
-<li>What must be true, with a sketch of your future page: <a href="specification.html">Specification</a></li>
+<li>What must be true, starting from the page you approved: <a href="specification.html">Specification</a></li>
 <li>Who does what: <a href="program-design.html">Program Design</a></li>
 <li>How each requirement will be shown to hold, and what stays unproven: <a href="verification-design.html">Verification Design</a></li>
-<li>The eight runs on named skills, with the security decision and defaults: <a href="skill-design.html">Skill design</a></li>
+<li>The nine runs on named skills, with the security decision and defaults: <a href="skill-design.html">Skill design</a></li>
 <li>Each requirement's and standard's proof, and what this PR proves: <a href="skill-verification.html">Skill verification</a></li>
 </ul>
 
 <h2 id="start">Start with your page</h2>
 
-<p>The page this design describes, sketched from this project's real log: <a href="specification.html#sketch">your page, sketched</a>. Or press W for a walkthrough: one goes through your page end to end, and one per capability goes from your need to its proof.</p>
+<p>The page this design describes is the one you approved on 7 Nov: <a href="specification.html#approved">your page, as approved</a>. Or press W for a walkthrough: one goes through your page end to end, and one per capability goes from your need to its proof.</p>
 
 <ex-callout title="For you" tone="question" icon="user">
-<p>You said go. I'm carrying this into the skills overnight, with no merge until you've seen the PR. Questions go to Sun.</p>
+<p>Nothing to decide now. You'll be asked to merge PR #198 once the page part is rewritten to your design and checked. Questions go to Sun while you're away.</p>
 </ex-callout>
 
 </ex-document>
