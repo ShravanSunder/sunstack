@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-06 Decision trees and direct native lint](2026-11-06-decision-trees-native-rulebook.md)
+
 - [2026-11-06 HTML authoring audit repairs (workflow side)](2026-11-06-html-authoring-audit-repairs.md)
 - [2026-11-06 presentation-html keeps supplied meaning](2026-11-06-presentation-html-fidelity.md)
 - [2026-11-05 Kind-gated rule scenarios](2026-11-05-kind-gated-scenarios.md)

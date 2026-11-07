@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@sunstack/cli':
-        specifier: 0.7.0
-        version: 0.7.0
+        specifier: 0.8.3
+        version: 0.8.3
       '@types/node':
         specifier: ^25.5.0
         version: 25.9.3
@@ -158,8 +158,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@sunstack/cli@0.7.0':
-    resolution: {integrity: sha512-jtJHnvQGH+NwutRxkjrqE8M0tg5apXsFHdwxSe9A6YX+I46JA4cr3R42bSkrnOD7kU9gDP0E+rsDgrSqHkdfMQ==}
+  '@sunstack/cli@0.8.3':
+    resolution: {integrity: sha512-5thpdnYjHuRSqr0KtbplfBq2FpTdN2mNZwB6ota9/+Bb3aj3Nkpytccx1JfMOleIvrPpggXNRtKIZMar+lP5RQ==}
     engines: {node: '>=14.14', npm: '>=6'}
     hasBin: true
 
@@ -600,7 +600,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@sunstack/cli@0.7.0':
+  '@sunstack/cli@0.8.3':
     dependencies:
       detect-libc: 2.1.2
 

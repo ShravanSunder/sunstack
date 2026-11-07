@@ -21,6 +21,7 @@ This reference owns how a decision model is shown to work: the sets and labels, 
 - Freeze the evidence, questions, policy and model record. Then score held-out cases end to end, once, against the current model as the baseline. Held-out cases come from other sources than the development cases; any overlap is named.
 - **A held-out miss is reported, never tuned away.** After a correction, cases already scored as held-out become regression cases. A fresh held-out claim needs cases not yet seen.
 - A lint rule over skill text takes its cases from real skills, never from copied excerpts or invented skills.
+- In sunstack, the sets are one case file run through `sunstack lint cases`, the same path lint uses: the development set first, then, frozen, the held-out set once. Each bar is recorded beside the development cases that set it. No separate test tool stands between the rule and its proof; `sunstack-driver.md` has the file's shape.
 
 ## The comparison, one variable at a time
 

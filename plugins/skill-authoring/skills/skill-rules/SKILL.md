@@ -12,6 +12,8 @@ A rule is a decision model for one of a skill's own standards. A marker binds th
 - **a decision:** mechanical checks and questions to the decision model, routed to `pass`, `finding`, `not_applicable` or `uncertain` for each piece;
 - **the nudge each finding gives:** its message, its severity, the line it points at and the fields whose places the agent reads next.
 
+A filter is the same kind of decision model at a coarser grain. It decides one label per folder, such as which kind of skill the folder holds, and a rule's `only_when` runs the rule only in folders with the labels it names. A filter is written as a tree of small questions that ends in one of its declared labels or `unsure`, never as one big question across all its labels. Rules and filters can both carry a `reference`: worked examples (the text, the right answer and why), definitions and boundaries, written once in the rulebook, which reach the model in the request's state. A question's wording says what its answers mean and names the reference it reads; examples aren't pasted into it.
+
 The judge sees the standard's own words beside every piece, so mark only text whose own wording is the standard. A sentence that would need rewording to be checkable isn't ready for a marker. The rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
 
 The practice of designing and proving a decision model belongs to the `sunstack-dev` skill `domain-decision-models`. This skill loads it at design and at proof, and doesn't restate it. A good rule asks only of the pieces its standard covers: most kinds hold pieces a standard doesn't govern, such as a list item that is a label, a lookup table, or a local instruction rather than a rule. So every rule's design names its applicability decision: which established fact lets its gate end a piece `not_applicable` before the verdict, or why every piece of its kind falls under the standard.
@@ -58,9 +60,13 @@ Then MUST load `references/rule-design.md`, and return per marked rule the desig
    - its gate with the established fact that lets it drop a piece, or why it needs none;
    - each mechanical node's predicate, field, routes and step 2's counterexample search;
    - each question's type, proposition, evaluated field and criteria, with the encoded state for sampled good, bad and near-miss pieces or the named evidence gap;
+   - the `reference` its questions share, and the parts each question names;
+   - the `complete` check before any pass that rests on a "no" about text the piece read, including the files it loads;
    - each threshold's statistic, inequalities and in-between route, precedence and first-failure order, and the labelled costs its policy rests on;
 4. **the nudge** each finding route gives: what was observed, the standard, the severity, the line it points at, the fields whose places become "read next", and any direction to a place the run never reads;
-5. **the proof plan,** with three observations kept apart: the collection, the tree on real skill text pinned by Git, and the receiving agent's call, which is a pressure task.
+5. **the proof plan,** with three observations kept apart: the collection, the tree on real skill text at a fixed revision (development and held-out cases run through `sunstack lint cases`), and the receiving agent's call, which is a pressure task.
+
+A filter's design walks the same five, with a label in place of the nudge: which folders it labels, what it reads from each, its tree of small questions, the label each ending gives, and its cases.
 
 Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with the reason. A rule failing any goes back to step 2:
 - the decisive content is in the field or state its nodes read, and the evidence print shows it there;
@@ -81,40 +87,46 @@ Mark the narrowest host that carries the whole standard: a list item or paragrap
 Write one entry per marker from step 3's design, in the rules file paired with that Markdown file, keyed by the marker ID:
 - a `name` that becomes the rule ID;
 - the `evidence` kind;
-- the `questions` the decision may ask;
+- the `questions` the decision may ask, each naming the fields and `reference` parts it reads;
+- the `reference`, when its questions share examples or definitions;
 - the `decision` graph, whose finding routes carry the nudge: the message, the field it points at, and for a section-sized subject a locator that points it at the observed line;
 - the `related` fields, whose places every finding lists after the standard's own line;
 - the `severity`: `warn`, the nudge, for any path that reads a model's answer, gate included; `error` only where every path to the finding is mechanical.
 
+A filter's entry sits in the config's `filters`, with its `reads`, `labels`, `questions`, `decision` and optional `reference`, and the rules it gates name it in `only_when`.
+
 Completion:
 - every marker has one entry, and every entry one marker;
 - each entry's gate, checks, questions and thresholds are the ones step 3 designed;
-- every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs;
+- every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs, and every ask declares where its in-between answer goes;
 - each finding route carries the message, severity and locator step 3 designed, and the entry's `related` names the fields its nudges send the agent to read.
 
 ### 6. Pair the rulebook in the config
 
-Open the config the repository's rule runner uses. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config. When an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 7) lists every intended rule with the expected count. A clean check that omits one is not paired.
+Open the config the repository's instructions name for `sunstack lint`. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config. When an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 7) lists every intended rule with the expected count. A clean check that omits one is not paired.
 
 ### 7. Prove each rule
 
 MUST load `references/check-and-reports.md`. Return the check's outcome and printed rules, and the proof in three observations kept apart:
 - **the collection:** the evidence print for each rule's kind over its full denominator, with the pieces you meant it to judge, their fields, and every cut named;
-- **the tree:** each mechanical rule's edge results, and for a judged one its expectation run over the entries beside its rules file and its current-skills run, each on real skill text and each reporting outcome, locator and gaps apart;
+- **the tree:** each mechanical rule's edge results, and for a judged rule or filter its case runs through `sunstack lint cases`: the development set, then, with the questions, reference and bars frozen, the held-out set once, each reporting right, false warning, missed, unsure and incomplete apart, with every case accounted for;
 - **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source: name it as unproven until one has run, and never infer it from the other two.
 
-IF a judged rule's expectation or current-skills results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule:
-- its result on every expectation entry, with outcome, locator and gaps reported apart, and each current-skills item with its account;
-- its real must-fire entries, or "no real positive found" with its claim narrowed to what the runs showed;
-- the requested model and the version that answered, or the named gap;
+A judged rule warns anyone only once its cases meet these floors: at least three real mistakes that must warn, the text before a real fix among them; at least three good texts that must pass, the text after the fix among them; at least three near misses; every wrong warning it once gave on a real skill, as a case that must pass; and a held-out set it was never tuned on. A rule short of any floor stays off, with what it lacks listed.
+
+IF a judged rule's or filter's case results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule or filter:
+- its result on every case, scored or listed with why (stale, no matching piece, more than one, filter-excluded, not judged);
+- the floors it meets, or what it lacks;
+- each bar with the development cases that set it, or "unassessed";
+- the requested model and the version that answered;
 - the comparison against the current rule as the baseline, or the gap that blocks it.
 
 Completion:
 - the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question;
 - the evidence print covers each rule's denominator and shows its intended good and bad pieces with their fields filled, and every cut is named;
 - every mechanical rule has edge tests, with no model, that pass and fail where the standard does;
-- every judged rule has its expectation run and its current-skills run on real skill text, with every entry reported and every listed item accounted for, or the missing ones named as unproven;
-- every judged rule with no real must-fire entry says so, and claims only what its runs showed;
+- every judged rule and filter has its development run and its frozen held-out run on real skill text, with every case counted or listed, or the missing ones named as unproven;
+- every judged rule that misses a floor stays off, with what it lacks;
 - the receiving agent's call is named as unproven, owed to a pressure task.
 
 Rules run locally, by the skills that use them, not in CI.
@@ -131,11 +143,11 @@ One row per candidate from step 1. Unmarked outcomes leave host through baseline
 - `judgment` names the call the nudge helps and who makes it; `chunk` names the subject, denominator and edges.
 - `questions`, `tree` and `policy` summarize step 3's design, with `not applicable` where it applies.
 - `severity` and `read next` are the nudge's: `warn` or `error` with the basis that allows it, and the `related` fields, plus any direction the message gives.
-- `proof` names the edge results for a mechanical rule, and the expectation and current-skills runs for a judged one.
+- `proof` names the edge results for a mechanical rule, and the development and held-out case results for a judged one.
 - `version` is the model version that answered, or the gap.
 - `baseline` is the comparison against the current rule, or its gap.
 
-Name what stays unproven: expectation entries test a rule's decisions at the places they name, not how many real pieces its evidence kind misses; the current-skills run is supporting evidence, not a holdout or an accuracy rate; the receiving agent's call waits for a pressure task; and no result here makes a judged rule ready to block.
+Name what stays unproven: cases test a rule's decisions at the lines they name, not how many real pieces its evidence kind misses; a lint run over today's skills is supporting evidence, not a held-out set or an accuracy rate; the receiving agent's call waits for a pressure task; and no result here makes a judged rule ready to block.
 
 Completion:
 - the table has one row for every candidate step 1 listed;
@@ -157,10 +169,14 @@ The run is not done while any of these hold:
 - a chunk was relied on without an evidence print over real sources;
 - a path that reads a model's answer can reach an `error` finding;
 - a lexical or label check decides a verdict its standard asks to be read;
+- a filter is written as one question with no tree, or examples are pasted into a question's wording instead of the `reference`;
+- a pass rests on a "no" about text that wasn't fully read;
 - a threshold has no statistic, inequality or costs;
 - a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
 - the check's print lacks an intended rule, or the count is off;
-- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without expectation entries on real skill text, every entry reported, or one version group;
-- a committed copy of skill text, or an invented skill, stands as a judged rule's proof, or an expectation was dropped or rewritten to make a run pass;
+- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases on real skill text, every case counted, or one version group;
+- a committed copy of skill text, or an invented skill, stands as a judged rule's proof; a case was dropped or relabelled to make a run pass; or a held-out case was tuned on;
+- a judged rule warns before its cases meet the floors;
+- proof ran through a separate test tool instead of `sunstack lint cases`;
 - a run that sends model requests was made without the grant;
-- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, a rule's expectation results are claimed as proof of what an agent does with its nudge, or proof is reported as passed where the record can't support it.
+- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, a rule's case results are claimed as proof of what an agent does with its nudge, or proof is reported as passed where the record can't support it.

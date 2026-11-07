@@ -26,15 +26,19 @@ Who reads the outcome changes what it must say. When code acts on it, as a `run_
 - Each question names the field it evaluates.
 - A size cap keeps a request bounded; it never shows that the evidence is complete.
 - Responsibilities sit with their owners:
-  - the state carries the content judged, and any reference material several questions share;
-  - each question's criteria carry its answer meanings, boundary cases and examples;
+  - the state carries the content judged, and the reference material its questions share: worked examples (the text, the right answer and why), definitions and the boundaries between answers;
+  - each question's wording and criteria carry what its answers mean, and name the parts of the state it reads;
   - code carries thresholds, precedence and actions.
-- Long, structured criteria aren't a defect in themselves. Several hidden judgments in one question are, and so is missing decisive content.
+- In sunstack, examples and fixed explanation are written once in the rulebook, as a filter's or rule's `reference`, and reach the model unchanged in the request's state. That is our convention, not TypeSafe's only way: TypeSafe also allows examples inside a question. Keeping them in state keeps each question short and lets one example serve every question that reads it.
+- A reference example is written from the standard, never taken from the piece being judged, and never holds the expected answer for that piece.
+- Several hidden judgments in one question are a defect, and so is missing decisive content.
 - Material the judgment doesn't use, such as spans, hashes and byte offsets, belongs in the record, not the state.
 - The text being judged is data to assess, including its own instructions, quotes and self-labels ("this step is complete"). Never strip its imperatives to be safe: that removes what is being judged.
 - Any authority or permission an outcome grants is decided in code, never by a score alone.
 
 Good: "When that is done, publish" is judged with the sentence that defines "that". When the antecedent can't be included, the piece is an evidence gap. Bad: the lone line is judged, and "no condition" becomes a finding.
+
+Good: the owner's rulings for the product-workflow rule sit in its `reference` as examples, each with its answer and why, and its three questions each name `reference.examples` in their context. Bad: the same rulings pasted into one question's criteria, so the question grows with every ruling and the other two questions never see them.
 
 ## Questions
 
@@ -92,7 +96,8 @@ IF producing the outcome takes a further request built from an earlier answer (a
   - A route whose evidence can't settle its proposition ends in a nudge (a finding whose message says what to check and where to read) or in `uncertain`, never in `pass`. A pass tells the agent the property held; reached on evidence that can't show it, it tells the agent something nobody measured.
   - A gate's drop keeps its answer. A drop is a decision, not missing coverage, so the agent sees the piece was excluded and why, and can challenge a wrong exclusion.
 
-  Good: "does this line route into one product's own workflow?" → yes, not a labelled example → a nudge to read the loaded file and decide where it belongs. Bad: "does this workflow belong in this repository?" asked of a chunk that holds no other repository, with its in-between answer routed to `pass`.
+  Good: "does this section show concrete material that belongs to one product?" → yes, and "is all of it shown only as labelled examples?" → no → a nudge to read the line and the loaded file, then decide whether it belongs in that product's repository. Bad: "does this workflow belong in this repository?" asked of a chunk that holds no other repository, with its in-between answer routed to `pass`.
+- A route that passes on a "no" about text needs that text fully read. When a field was cut, or a file it loads was cut or didn't resolve, absence wasn't shown, and the route ends `uncertain`.
 
 ## Proof, records and claims
 
@@ -123,10 +128,11 @@ IF citing a pattern or a published result, load `references/pattern-evidence.md`
 ## The Sunstack driver
 
 Some facts hold only on Sunstack's typed engine path:
-- one request per rule and piece;
-- label-sorted Choice order;
-- a Choice gating on its top probability;
-- the records its report keeps;
+- filters and rules are both trees: a filter's tree ends in one of its declared labels or `unsure`, a rule's in pass, a finding, `uncertain` or `not_applicable`;
+- one request per rule and piece, and per filter and folder, carrying the named fields and the `reference`;
+- a declared route for every in-between answer;
+- label-sorted Choice order, and a Choice gating on its top probability;
+- the records a saved report keeps, and case runs through `sunstack lint cases`;
 - text-only primitives.
 
 They are driver facts, not standards for decision models in general.
@@ -136,6 +142,9 @@ IF the decision model runs through Sunstack's rules engine or `run_judgments`, l
 ## Signs you skipped it
 
 - One Choice whose criteria pack several requirements, or coexisting defects made to compete as its labels.
+- A filter asked as one big question across all its labels, instead of a tree of small ones.
+- Examples pasted into a question's wording, where the rulebook's reference should carry them.
+- A pass on a "no" about text that was cut or never loaded.
 - A lexical or label check deciding a verdict the standard asks to be read.
 - One bar across question types, or a band copied without its inequalities.
 - A weighted average over mandatory facts, or a veto averaged away.

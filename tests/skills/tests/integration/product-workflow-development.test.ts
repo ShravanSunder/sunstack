@@ -1,78 +1,47 @@
 import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { expect, test } from "vitest";
-import { scenarioRecordSchema, scenariosFileSchema } from "../../lib/skill-rules/scenarios.ts";
-import { eligibleScenario } from "../../lib/skill-rules/rule-state.ts";
-import { repositoryRoot } from "../../lib/skill-rules/test-fixture.ts";
-import {
-  productWorkflowRule,
-  productWorkflowDevelopmentDigest,
-} from "../support/product-workflow-development-oracle.ts";
+import { z } from "zod";
+import { jsonObject, repositoryRoot } from "#test-support/sunstack-process";
 
-const relative = `tests/skills/evals/rule-scenarios/general-skill/${productWorkflowRule}.scenario.json`;
+const relative =
+  "tests/skills/evals/rule-scenarios/general-skill/general-skill.overfits-to-product-workflow.scenario.json";
+const developmentSchema = z.object({
+  id: z.string(),
+  set: z.literal("development"),
+  status: z.enum(["active", "retired"]),
+  source: z.object({ path: z.string() }),
+  scenario_kind: z.enum(["real_mistake", "good", "near_miss", "unclassified"]),
+  label: z.object({ state: z.enum(["labelled", "disputed"]) }),
+});
 
-test("the main development data matches the independent handoff while retaining every old identity/source", () => {
-  const file = scenariosFileSchema.parse(
-    JSON.parse(readFileSync(path.join(repositoryRoot, relative), "utf8")),
+test("the independent development handoff remains intact through the native conversion", () => {
+  const raw = z
+    .object({ scenarios: z.array(jsonObject) })
+    .parse(JSON.parse(readFileSync(path.join(repositoryRoot, relative), "utf8")));
+  const canonical = [...raw.scenarios].sort((left, right) =>
+    z.string().parse(left["id"]).localeCompare(z.string().parse(right["id"])),
   );
-  const original = scenariosFileSchema.parse(
-    JSON.parse(
-      execFileSync("git", ["show", `24fa3d92:${relative}`], {
-        cwd: repositoryRoot,
-        encoding: "utf8",
-      }),
-    ),
-  );
-  expect(file.scenarios).toHaveLength(40);
-  expect(file.scenarios.slice(0, 31).map((entry) => entry.id)).toEqual(
-    original.scenarios.map((entry) => entry.id),
-  );
-  expect(file.scenarios.every((entry) => entry.set === "development")).toBe(true);
-  const canonical = [...file.scenarios]
-    .sort((left, right) => left.id.localeCompare(right.id))
-    .map((entry) => scenarioRecordSchema.parse(entry));
   expect(createHash("sha256").update(JSON.stringify(canonical)).digest("hex")).toBe(
-    productWorkflowDevelopmentDigest,
+    "fed3e358c69483e90c32ceca1492924937a69e9c352d2235d63665cad5f0f3de",
   );
-  for (const old of original.scenarios) {
-    const current = file.scenarios.find((entry) => entry.id === old.id);
-    expect(current).toMatchObject({
-      id: old.id,
-      source: old.source,
-      select: old.select,
-      rule: old.rule,
-      kind: old.kind,
-      set: old.set,
-    });
-  }
-  expect(file.scenarios.filter((entry) => entry.label.state === "disputed")).toHaveLength(5);
-  const eligible = file.scenarios.filter(eligibleScenario);
+  const scenarios = z.array(developmentSchema).parse(raw.scenarios);
+  expect(scenarios).toHaveLength(40);
+  expect(scenarios.filter((entry) => entry.label.state === "disputed")).toHaveLength(5);
+  const labelled = scenarios.filter(
+    (entry) => entry.label.state === "labelled" && entry.status === "active",
+  );
   expect(
     ["real_mistake", "good", "near_miss"].map(
-      (kind) => eligible.filter((entry) => entry.scenario_kind === kind).length,
+      (kind) => labelled.filter((entry) => entry.scenario_kind === kind).length,
     ),
   ).toEqual([14, 3, 9]);
-  for (const kind of ["real_mistake", "good", "near_miss"] as const) {
-    // Multiple historical IDs for one source cannot be the only support for a floor.
+  for (const kind of ["real_mistake", "good", "near_miss"]) {
     expect(
       new Set(
-        eligible.filter((entry) => entry.scenario_kind === kind).map((entry) => entry.source.path),
+        labelled.filter((entry) => entry.scenario_kind === kind).map((entry) => entry.source.path),
       ).size,
     ).toBeGreaterThanOrEqual(3);
   }
-  expect(
-    file.scenarios.find((entry) => entry.id === "calls-and-placement-k003-case-001")?.finding_lines,
-  ).toEqual([17, 18]);
-  const record = file.rules[productWorkflowRule];
-  expect(record?.reasons.map((reason) => reason.type)).toEqual([
-    "written_standard",
-    "inventory",
-    "inventory",
-  ]);
-  expect(record?.reasons[0]?.quote).toBe(
-    "A skill meant for any repository routes no step, branch or load into one product's own application workflow: its own procedures, run commands, state files or machine paths.",
-  );
-  expect(Object.values(record?.bars ?? {}).every((bar) => bar.status === "starting")).toBe(true);
 });
