@@ -154,7 +154,7 @@ Reopening accepted work is a new row whose first link is the Lead acceptance, ta
 A link is a JSON evidence pointer:
 
 - another row: `{"kind":"record","record":{"kind":"workTrailRow","id":"<row id>"}}`
-- a page or document, such as the owner's decision page: `{"kind":"url","url":"https://…"}` or `{"kind":"url","url":"file:///…"}`
+- a page or document, such as a decision brief's own page: `{"kind":"url","url":"https://…"}` or `{"kind":"url","url":"file:///…"}`
 
 Put a commit or a repository path in the text when the row needs it.
 

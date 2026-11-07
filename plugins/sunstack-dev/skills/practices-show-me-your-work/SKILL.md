@@ -78,7 +78,7 @@ Completion: the acceptance row's id, and in its text the commit, each check you 
 
 IF you are the Lead, at every checkpoint, load `references/show-me.md` and return the page path, the log position it shows, and the checker result. You build the page yourself with Demistify through `presentation-html` and check it with Demistify's checker; no script builds it.
 
-The page shows only what the log holds. IF a row waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules; then load `presentation-html` and return the decision page built from that brief and its path. The assumption row links that path: write the page before the row, or close the row with a new one that carries the link. The owner's answer is logged as a decision row that quotes the owner's words and closes what it answers.
+The page shows only what the log holds. IF a row waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules. The brief becomes the row's `ex-choice` under For you to decide, as `show-me.md` says, with a longer brief, or a link to its own page, in the option's Details. The owner answers there, and the answer is logged as a decision row that quotes the owner's words and closes what it answers.
 
 Completion: the page path, the log position this checkpoint's build covers, and a checker result with no errors.
 
