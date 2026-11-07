@@ -81,9 +81,9 @@ A rule is proven by what it decides on real skills, not by a clean check, and no
 
 Cases live in a case file the repository keeps beside its rulebook. Each case names real text at a fixed Git revision, so the case is the source itself, never a copy:
 
-- **A rule case:** `id`, `kind: "rule"`, `rule`, `file`, `revision`, `lines: [first, last]`, `text_sha256` of those lines at that revision, and `expected: "warn"` or `"pass"`.
+- **A rule case:** `id`, `kind: "rule"`, `rule`, `file`, `revision`, `lines: [first, last]`, `text_sha256` of those lines at that revision, and `expected: "warn"` or `"pass"`. Its lines are the judged piece's exact first and last lines: a range that covers part of a piece, or spans several, matches nothing, so a nested section is its own case.
 - **A filter case:** `id`, `kind: "filter"`, `filter`, `folder`, `revision`, `reads_sha256` of the fields the filter read, and `expected_label`.
-- **On every case:** `set`, `development` or `held_out`, never both; and `label_from`, `owner-fix` (the owner's own fix shows the answer: the text before the fix must warn, after it must pass) or `blind-agents` (agents labelling without the rule's answers, with disagreements sent to the owner). A label taken from the rule's own answers proves nothing.
+- **On every case:** `set`, `development` or `held_out`, never both; and `label_from`: `owner-fix` (the owner's own fix shows the answer: the text before the fix must warn, after it must pass), `owner-ruling` (the owner decided the label explicitly, and the ruling is kept beside the cases) or `blind-agents` (agents labelling without the rule's answers, with disagreements sent to the owner). A label taken from the rule's own answers proves nothing.
 - **`bars`:** each bar the rule's tree compares, recorded as `{for, step, bound, value, set_from: [case ids]}`, beside the development cases that set it.
 
 Where cases come from: this repository's history, especially text from before and after a real fix, then the owner's other repositories and upstream skill collections. Choose them for distinct failure modes and their counter-examples, not for size. Two versions of the same skill's loop are one family.
