@@ -144,7 +144,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | 6 | implemented | this commit |
 | 7 | implemented | this commit |
 | 8 | implemented | this commit, with the version bump, changelog and README |
-| 9 | proposed | |
+| 9 | implemented | this commit |
 
 ## Review record
 
