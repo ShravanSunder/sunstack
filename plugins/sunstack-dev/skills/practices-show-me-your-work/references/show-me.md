@@ -12,14 +12,14 @@ The owner reads the page to know, without reading transcripts, what needs a deci
 
 **Four sections, in this order**, each a card whose header shows its count:
 
-1. **For you to decide.** Every assumption waiting for the owner and every choice only the owner can make, first.
-2. **What's done / what's next.**
-3. **What changed and why**, ending with the decisions in two columns:
+1. **For you to decide.** Every assumption waiting for the owner and every choice only the owner can make, first. Each shows what's assumed, what depends on it, who assumed it, and a link to its decision page. The owner decides on the decision page; this section only shows the choice. An assumption stays here, open, until a decision row closes it: silence or a passed review never decides it.
+2. **What's done / what's next.** Each part of the work that has started, under its plain workstream label: what's done, what's next, and the checks and acceptance behind its "done". A part with nothing new shows when it last moved; a finished one says so. The owner reads this to know where each part stands.
+3. **What changed and why**: every shortcut, with what was planned, what was done instead, why, and its authority; then the decisions, each with what was chosen, who decided, why, its authority and who wrote it, in two columns:
    - **Yours, or worth your look**: the owner's decisions, decisions that change or fill in the design or plan, decisions that depart from anything already decided, and any decision with no authority or an inferred one, marked "no authority named".
    - **Agents' own calls**, by the rule in "Sorting the log": shown with its count; the Lead reviews them.
-4. **What was verified, and what was missed**: each piece of finished work with its checks and whether an acceptance is in the log ("no acceptance recorded" when none, never "never signed off"); each missed item with who found it, what it affects and whether it's closed; and each writer's stretches marked audited or "not audited", never "nothing missed".
+4. **What was verified, and what was missed**: each piece of finished work with its checks, their results and what they didn't cover, and whether an acceptance is in the log. Work counts as accepted only when a Lead acceptance row names its commit; with none, it says "no acceptance recorded", never "never signed off". A check written by someone other than the agent that ran it shows "reported second-hand by …", naming the runner and the writer. Each missed item shows what was missed, who found it and how, what it affects, and whether it's closed. Each writer's stretches show audited or "not audited", never "nothing missed".
 
-A routine Story (`Routine: yes`) folds under one "N smaller" row at the end of its section.
+A routine Story (`Routine: yes`) folds under one "N smaller" row at the end of its section. Every other open assumption, one an agent or a peer is checking, shows in its Story with what's assumed, what depends on it and who acts next.
 
 **Each Story**, in this order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one table or picture; a closed More fold; and a closed fold of every row it cites, each opening to its text with its kind, its writer and its time. Stories start open; their rows start closed. The owner reads the headline and the three rows, and opens the folds only to check.
 
@@ -80,7 +80,7 @@ Every Story line says what it means for the owner, in the owner's everyday words
 Two rules are mechanical:
 
 - **Waiting.** An open assumption tagged `next:owner`, with no row closing it, waits for the owner. One an agent can check itself, or one sent for a second look, shows the agent or peer it waits on.
-- **Closed.** A row is closed when a later row tagged `resolves` or `supersedes` names it as its first link. An open assumption is never shown as decided: silence, "not marked wrong" or a passed review leaves it open.
+- **Closed.** A row is closed when a later row tagged `resolves` or `supersedes` names it as its first link; it shows beside the row that closed it. An open assumption is never shown as decided: silence, "not marked wrong" or a passed review leaves it open.
 
 One rule is a judgment. A decision is an agent's **own call**, and goes in that column, only when all four hold: an agent made it (not `who:owner`); it isn't `core`; it changes neither the design nor the plan; and it departs from nothing already decided (the plan, this skill's rules, an earlier decision). Everything else is "Yours, or worth your look". Read the choice and what it touches, then ask the four questions. A tag can't settle it, because `door:two-way` is the writer's own claim, and no word in the text settles it either.
 

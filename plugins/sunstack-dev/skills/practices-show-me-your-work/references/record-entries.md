@@ -119,6 +119,8 @@ Next: Checked again once the page part is redone.
 Show: table
 | Problem found | Fixed |
 | Two places pointed to the wrong step | Yes |
+| New parts of the work got no group on the page | Yes |
+| A count of three opened only one item | Yes |
 | A refused note could be taken as a lost one | Yes, after two more checks |
 Covers: 01a1b412-aac2-7459-b952-9e41a92c1baa, 01a1b412-aac3-7c7b-bdd3-ba9d84e9adf3, …
 ```
