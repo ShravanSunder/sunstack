@@ -7,7 +7,9 @@ description: "Use when independently reviewing a decision model before it ships:
 
 Review is an attempt to make the model fail. Every check names what fails it, and holds a bad control that must fail it; a check that can't fail isn't run. The standards it checks against belong to `domain-decision-models`. This skill owns how they are checked: what is admitted, which checks run, how candidates reduce, and what the verdict means.
 
-A 🔎 Reviewer Sidekick with no authoring history runs it, commissioned through `practices-manage-agents`. A routing review (`skill-review` or `implementation-review`) takes the return and reduces it under its own contract; a direct commissioner reads it as returned. The reviewer never edits, never runs a model request, and never accepts.
+An agent with no authoring history on the model runs it, started the way the host starts a reviewer. A routing review that loads this skill takes the return and reduces it under its own contract; a direct commissioner reads it as returned. The reviewer never edits, never runs a model request, and never accepts.
+
+Read the model the way the model reads its evidence: on the state it receives. A question that reads well can still give a labelled case the wrong answer once it sits beside that case's actual fields and reference, and only the sent state shows that. A review that read only the source of a question can say what the question asks, never what it does to a case.
 
 ## 1. Admit the profile and the stage
 
@@ -25,7 +27,7 @@ Completion: the profile, the stage, and each supplied and missing input are name
 
 ## 2. Read the whole model
 
-MUST load `domain-decision-models` and return the standards that apply to this model's profile and nodes; the checks below test against them. Read every supplied input whole.
+MUST load `../domain-decision-models/SKILL.md` and return the standards that apply to this model's profile and nodes; the checks below test against them. Read every supplied input whole. Held-out cases are never an input: a reviewer who reads them can no longer review a model that will be scored on them.
 
 Completion: every supplied input was read in full, and the applicable standards are listed.
 
@@ -37,8 +39,8 @@ Record a status for every check. A check whose evidence the profile or stage doe
 
 Walk every check below that the profile selects. Each load returns the check's status, the inputs it read, and its candidate findings with their anchors, or its `blocked` or `partial` reason.
 
-1. MUST load `references/checks/state-and-evidence.md`: whether the state holds the decisive content, names its evaluated fields, and keeps out what the judgment doesn't use.
-2. MUST load `references/checks/questions.md`: whether each question asks one proposition its criteria define, states its route direction, and passes the standard's own bad examples.
+1. MUST load `references/checks/state-and-evidence.md`: whether the state holds the decisive content, names its evaluated fields, keeps out what the judgment doesn't use, and holds no example that is a labelled case or carries a case's answer.
+2. MUST load `references/checks/questions.md`: whether each question asks one proposition its criteria define, states its route direction, and gives the standard's bad examples and every labelled case the right answer when read on the state the model receives.
 3. MUST load `references/checks/primitives-and-statistics.md`: whether each primitive fits its answer's meaning, computation stays in code, and each number keeps its meaning.
 4. MUST load `references/checks/policy-and-composition.md`: whether each node's policy is complete, and whether the composition keeps obligations and vetoes ahead of any weighting.
 5. MUST load `references/checks/proof-and-claims.md`: whether each claim rests on labels, a full denominator, a frozen set, a baseline and one version group.
@@ -69,6 +71,8 @@ Completion: every candidate is kept, merged or rejected, with its reason.
 
 Return `ready`, `needs-revision`, `blocked-input` or `not-converging`, with the probes still owed and each proof the records can't support marked unavailable. Unavailable proof never passes. A delivery-stage review never returns `ready` while a check, or a part of one, that the profile requires is `blocked` or `partial`. A part blocked only for want of an input the profile marks optional, such as a lint rule's receiving reading or commission, is reported as not run with that input named, never hidden, and doesn't hold back `ready`.
 
+A design- or implementation-stage `ready` says the model may go to its next run, and the return says so in those words. It never says the model works: the review of the trees that later failed their development run returned `ready` from source alone, with the encoded requests listed as missing, and was read as approval.
+
 ## 7. Rounds
 
 - **Routed use:** the routing review owns the rounds and its convergence rule.
@@ -85,6 +89,8 @@ The review is not done while any of these hold:
 - a delivery-stage `ready` with a required check or part not `complete`, or a part not run for want of an optional input left out of the return;
 - a finding without its anchor or its standard, or a candidate neither kept, merged nor rejected;
 - unavailable proof reported as passed;
+- a labelled case or a negative example counted as passing from the question's text, with its sent state unread and the check not marked `partial`;
+- a design- or implementation-stage `ready` that doesn't say it means "ready for the next run";
 - a probe run by the reviewer;
 - `not-converging` returned on a direct commission without a supplied policy;
 - an edit to the reviewed model or its files.

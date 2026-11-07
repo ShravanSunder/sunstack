@@ -79,8 +79,6 @@ domain-*             subject knowledge a caller loads  domain-code-standards
                                                   domain-python
                                                   domain-rust
                                                   domain-swift
-                                                  domain-decision-models
-decision-model-*     independent decision-model review  decision-model-review
 principle-*          engineering judgment          principle-hold-the-scope
                                                   principle-build-the-shared-model-first
                                                   principle-define-the-domain-first
@@ -235,7 +233,7 @@ Use `implement-plan` to validate and execute one immutable ready plan whose curr
 
 Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
 
-Use `decision-model-review` to independently review a decision model before it ships: a rule's decision graph, or questions a model answers for code, with their evidence, thresholds and proof claims. A 🔎 Reviewer Sidekick admits the model by its execution profile and review stage, and walks six checks against `domain-decision-models`, each with bad controls that must fail it. It reduces duplicates and scope itself and returns findings in its own schema, without editing. `skill-review` and `implementation-review` route decision-model changes to it.
+When a diff touches questions a model answers for code, `implementation-review` also loads `decision-model-review` from the `skill-authoring` plugin and walks its checks; without that plugin it reports the gap.
 
 Use `implementation-pr-wrapup` to finish the GitHub PR lifecycle after implementation, typically after independent review on a delivery goal: push/open/update the PR, write a why-and-shape description, monitor checks and comments, process existing review threads, prove mergeability with current GitHub state, and merge only when user authorization exists. Fresh code-review discovery routes to `implementation-review`; PR wrap-up does not substitute for it. Independent-review coverage is not a wrap-up ready gate.
 
@@ -247,7 +245,7 @@ Each `principle-*` skill is one engineering judgment, written to teach: the idea
 
 ## Domain Skills
 
-Each `domain-*` skill holds one subject's knowledge. `domain-code-standards` decides whose coding standards a repository follows, from its AGENTS.md Standards line, and holds the owner's shared ones: test layout, naming, documentation and monorepo layout. Four hold the owner's standards for a language: `domain-typescript`, `domain-python`, `domain-rust` and `domain-swift`. Each loads `domain-code-standards` first and keeps only its language's forms. `domain-decision-models` holds the practice for decision models: questions a model answers for code to act on, their evidence, policy and proof. `skill-authoring`'s `skill-rules` loads it to design and prove a checked rule, `decision-model-review` checks against it, and authors of `run_judgments` callers or engine evidence selection load it by name. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. Which set governs, the owner's or the repository's own, is the repository's Standards line, as `domain-code-standards` teaches; under either set, the repository's own commands and tool configs are what runs. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
+Each `domain-*` skill holds one subject's knowledge. `domain-code-standards` decides whose coding standards a repository follows, from its AGENTS.md Standards line, and holds the owner's shared ones: test layout, naming, documentation and monorepo layout. Four hold the owner's standards for a language: `domain-typescript`, `domain-python`, `domain-rust` and `domain-swift`. Each loads `domain-code-standards` first and keeps only its language's forms. The standards for decision models, `domain-decision-models`, live in the `skill-authoring` plugin. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. Which set governs, the owner's or the repository's own, is the repository's Standards line, as `domain-code-standards` teaches; under either set, the repository's own commands and tool configs are what runs. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
 
 ## Supporting Skills
 
@@ -269,8 +267,8 @@ normal review path
       -> bounded independent specification/program review
   implementation-review
       -> one complete independent implementation/proof review
-  decision-model-review
-      -> independent decision-model review, routed from skill-review or implementation-review
+  decision-model-review (skill-authoring plugin)
+      -> independent decision-model review, loaded by implementation-review for model-judged code
 ```
 
 ## How To Use
@@ -290,7 +288,6 @@ Use orchestrator-implementation-goal to carry this goal through planning, implem
 Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.
 Use implement-plan to execute this ready canonical plan at its immutable path, current meaning, and `pr-ready-unmerged` delivery context, then return fresh implementation proof without starting review or PR work.
 Use implementation-review to independently review this implementation and proof without editing or starting PR lifecycle work.
-Use decision-model-review to independently review this rule's questions, evidence and thresholds before it ships.
 Use practices-research to gather source-grounded evidence into a tmp ledger.
 Use plan-improve-repo to audit this repo and write immutable canonical plan-only improvement plans. When delivery is requested later, route the admitted finding through plan-implementation to establish current delivery intent instead of upgrading the prior plan.
 Use implementation-pr-wrapup to handle existing PR comments and prove merge readiness.

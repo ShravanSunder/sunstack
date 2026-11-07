@@ -77,20 +77,31 @@ test("fully held pairs retain their rule JSON and marked sentences while teachin
     .array(z.object({ markdown: z.string(), rules: z.string() }))
     .parse(config["rulebook"]);
   expect(pairs.map((pair) => pair.rules)).toEqual(["descriptions-and-invocation.rules.json"]);
-  for (const [group, standard] of [
+  // Each standard is read at its current home and compared with its home at the baseline;
+  // domain-decision-models moved from sunstack-dev into skill-authoring after the baseline.
+  for (const [group, standard, baselineStandard] of [
     [
       "calls-and-placement",
       "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
+      "plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md",
     ],
-    ["main-path", "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md"],
-    ["domain-decision-models", "plugins/sunstack-dev/skills/domain-decision-models/SKILL.md"],
-  ] satisfies [string, string][]) {
+    [
+      "main-path",
+      "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+      "plugins/skill-authoring/skills/domain-skill-crafting/references/main-path.md",
+    ],
+    [
+      "domain-decision-models",
+      "plugins/skill-authoring/skills/domain-decision-models/SKILL.md",
+      "plugins/sunstack-dev/skills/domain-decision-models/SKILL.md",
+    ],
+  ] satisfies [string, string, string][]) {
     const relative = `${kitRelative}/${group}.rules.json`;
     expect(readFileSync(path.join(repositoryRoot, relative), "utf8")).toBe(originalFile(relative));
     const markedLines = (text: string): string[] =>
       text.split("\n").filter((line) => /<!-- K\d+ -->/.test(line));
     expect(markedLines(readFileSync(path.join(repositoryRoot, standard), "utf8"))).toEqual(
-      markedLines(originalFile(standard)),
+      markedLines(originalFile(baselineStandard)),
     );
   }
 });

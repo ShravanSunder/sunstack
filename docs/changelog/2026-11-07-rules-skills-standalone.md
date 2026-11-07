@@ -1,0 +1,12 @@
+# Rules skills: standalone, split and corrected
+
+- skill-authoring **0.12.0**: `skill-rules` is retired, a hard cutover with no stub. `skill-rules-authoring` holds the judgment (which standards become rules; cases first; chunk choice; questions as the owner's line; examples written from the standard; the desk check before any paid run; proof and on-or-held). `skill-rules-review` reviews one rule or filter on the owner's rulings as the model receives them, through `decision-model-review` plus three checks. `skill-rules-config` is the shipped `sunstack lint` 0.8.3 manual and says plainly that tree-shaped selection isn't shipped.
+- `domain-decision-models` and `decision-model-review` move into skill-authoring from sunstack-dev; no skill-authoring skill loads or depends on a sunstack-dev skill.
+- `domain-decision-models` corrects two examples it taught: owner rulings are cases, never `reference` examples; a question's meaning is the owner's line, and one property stays one question. The held kind filter and product-workflow rule are re-taught as recorded failures; their corrections are labelled untested.
+- `decision-model-review` checks that examples aren't cases and reads negative and labelled cases on the sent state; a design-stage `ready` says it means "ready for the next run". It seats its reviewer the host's way.
+- Callers cut over: `skill-design` (decision matrix), `skill-creation`, `skill-audit`, `skill-orchestrator`, `skill-review` (rule entries route to `skill-rules-review`), `calls-and-placement.md`.
+- sunstack-dev **2.107.0**: the two skills leave its inventory; `implementation-review` loads `decision-model-review` from skill-authoring and reports `skill unavailable` without it. README and phase-composition map updated.
+- AGENTS.md skill table, plugin READMEs, architecture docs and both plugins' manifests updated; Claude and Cursor marketplace versions moved; Codex marketplace paths unchanged.
+- Held trees, the active rulebook (three mechanical rules) and all case files are unchanged.
+- Validation: [references/2026-11-07-rules-skills-standalone.md](references/2026-11-07-rules-skills-standalone.md).
+- Codex/Claude installed-cache refresh: not performed; source verification only. Behavior of the new teaching is not yet evaluated.

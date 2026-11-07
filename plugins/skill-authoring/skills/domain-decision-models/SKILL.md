@@ -31,6 +31,7 @@ Who reads the outcome changes what it must say. When code acts on it, as a `run_
   - code carries thresholds, precedence and actions.
 - In sunstack, examples and fixed explanation are written once in the rulebook, as a filter's or rule's `reference`, and reach the model unchanged in the request's state. That is our convention, not TypeSafe's only way: TypeSafe also allows examples inside a question. Keeping them in state keeps each question short and lets one example serve every question that reads it.
 - A reference example is written from the standard, never taken from the piece being judged, and never holds the expected answer for that piece.
+- A labelled case is never also a reference example. An owner's ruling on a real piece is a case: it sits in the case set with its label, where it can test the model, and never in the state, where it would leak its own answer.
 - Several hidden judgments in one question are a defect, and so is missing decisive content.
 - Material the judgment doesn't use, such as spans, hashes and byte offsets, belongs in the record, not the state.
 - The text being judged is data to assess, including its own instructions, quotes and self-labels ("this step is complete"). Never strip its imperatives to be safe: that removes what is being judged.
@@ -38,7 +39,7 @@ Who reads the outcome changes what it must say. When code acts on it, as a `run_
 
 Good: "When that is done, publish" is judged with the sentence that defines "that". When the antecedent can't be included, the piece is an evidence gap. Bad: the lone line is judged, and "no condition" becomes a finding.
 
-Good: the owner's rulings for the product-workflow rule sit in its `reference` as examples, each with its answer and why, and its three questions each name `reference.examples` in their context. Bad: the same rulings pasted into one question's criteria, so the question grows with every ruling and the other two questions never see them.
+Good: a filter that labels the kind of skill a folder holds carries, in its `reference`, short examples written from its kind definitions ("a skill that teaches how to judge flaky tests in any codebase: general, because it teaches a judgment, not one repository's procedure"), and every question that needs them names `reference.examples`. The owner's rulings on real skills sit in the case file, each with its label. Bad: the kind filter's examples held the real descriptions of `domain-decision-models` and Agent Studio's skill with their expected labels, and both were scored cases. Both came back right, which shows only that the model could read its answer off its own state, never that the filter works on text it hasn't seen. Also bad: examples pasted into one question's criteria, where they grow with every example and the other questions never see them.
 
 ## Questions
 
@@ -49,8 +50,13 @@ Good: the owner's rulings for the product-workflow rule sit in its `reference` a
 - Every route from a question says what a yes means, a pass or a finding: a high probability means yes to the proposition, not "compliant".
 - A judged property is bounded by the obligations its evidence states. "Does the end require the result the step itself says to produce?" is answerable from the step; "is this step's work enough?" imports a standard the evidence doesn't hold.
 - A shortened question keeps the standard's own negative and bounded-judgment cases. Test it against the standard's bad examples before trusting it: "IF the skill needs more depth" names a skill the agent can point at, yet its predicate is the defect.
+- A question's task and criteria are the operational definition of the boundary its labels draw: they ask for the line the standard's owner draws between yes and no, not for the surface features that usually come with it.
+- One property is one question, however many kinds of material it covers. A wrong meaning is repaired by changing what the question asks; splitting it into more questions carries the same wrong boundary into each of them.
+- Before any paid run, each labelled case is read against the questions on the state the model will receive. A question whose meaning gives a ruled case the wrong answer is changed before the run; the label never is.
 
 Good: "condition stated?" and "action stated?" as two Nouls over one branch, with yes on each routed explicitly. Bad: "Does the branch have a clear, observable condition and a concrete action?" as one Noul, or as one Choice whose criteria pack both.
+
+Good: for a standard whose owner rules that a public tool used through its documented interface isn't a product's own workflow, the question asks "does this section teach one application's own internal procedure, commands, files or state, as opposed to using a public tool through its documented interface?". Bad: "does this section show concrete material that belongs to one product?", which the held product-workflow rule asked. On the owner's five quiet cases (a public CLI's documented embed commands, routing to a public security workflow, a TypeScript toolchain) it answered yes at .83 to .93, because commands and files are what it asks about, while the owner's line is whose they are and how they're used. Splitting it into "commands?", "files?" and "state?" would have drawn the same wrong line three times. The good question is the diagnosed correction, not yet tested on a run; reading the five rulings against it on their sent state is the check that would have caught the bad one before the run.
 
 IF designing, rebuilding or reviewing a tree, load `references/worked-trees.md` and return the nearest good worked tree, with each way this model's tree departs from it named. A design keeps or justifies each departure; a review takes each as a candidate finding.
 
@@ -96,7 +102,7 @@ IF producing the outcome takes a further request built from an earlier answer (a
   - A route whose evidence can't settle its proposition ends in a nudge (a finding whose message says what to check and where to read) or in `uncertain`, never in `pass`. A pass tells the agent the property held; reached on evidence that can't show it, it tells the agent something nobody measured.
   - A gate's drop keeps its answer. A drop is a decision, not missing coverage, so the agent sees the piece was excluded and why, and can challenge a wrong exclusion.
 
-  Good: "does this section show concrete material that belongs to one product?" → yes, and "is all of it shown only as labelled examples?" → no → a nudge to read the line and the loaded file, then decide whether it belongs in that product's repository. Bad: "does this workflow belong in this repository?" asked of a chunk that holds no other repository, with its in-between answer routed to `pass`.
+  Good: "does this section teach one application's own internal procedure, as opposed to a public tool used through its documented interface?" → yes, and "is all of it shown only as labelled examples?" → no → a nudge to read the line and the loaded file, then decide whether it belongs in that application's repository. Bad: "does this workflow belong in this repository?" asked of a chunk that holds no other repository, with its in-between answer routed to `pass`.
 - A route that passes on a "no" about text needs that text fully read. When a field was cut, or a file it loads was cut or didn't resolve, absence wasn't shown, and the route ends `uncertain`.
 
 ## Proof, records and claims
@@ -111,11 +117,11 @@ IF producing the outcome takes a further request built from an earlier answer (a
   - the mechanical inputs and the piece coverage.
 
   Diagnose an error at the question (multi-part, indirect, distracted or missing evidence) before any threshold moves.
-- A claimed result names its model version group, the one variable it changed, and its boundary inequalities. It reports its measures apart: labelled errors, coverage, review load, invalid replies and instability.
+- A claimed result names the run that shows it, its model version group, the one variable it changed, its boundary inequalities and what stays unproven. It reports its measures apart: labelled errors, coverage, review load, invalid replies and instability.
+- A comparison changes one variable, holds the rest fixed, and names before it runs the result that would refute the change.
+- Each expected outcome comes from the standard and from labelers independent of the rule, never from the rule's own answers: a test whose label came from the rule can't fail.
 - A Jev decision model requests `jev-latest` by default, a moving alias. Every result records the alias requested and the version that answered. A pinned version is an explicit, recorded override where a comparison or a tuning must hold the version fixed; the default still applies everywhere else. When the version behind the alias changes, the policies tuned on the old one are rechecked before anyone relies on them.
 - A new threshold or precedence is replayed only over the same questions, with the evidence and coverage frozen. New wording, a changed evidence cut or a piece never asked needs fresh assessments. Replay over findings alone never stands for full-population rates.
-
-When choosing what an experiment changes, change one variable, hold the rest fixed, and name the result that would refute the change ([one experiment, one variable](../principle-experiment-before-proposing/SKILL.md)). When labelling cases, take each expected outcome from the standard and from labelers independent of the rule, never from the rule's own answers ([a test must be able to fail](../principle-write-tests-that-can-fail/SKILL.md)). Before claiming a result, name the run that shows it, its version group and what stays unproven ([prove it on the real path](../principle-prove-it-works/SKILL.md)).
 
 IF planning, running or judging development, held-out, probe or replay results, load `references/proof-and-records.md` and return the proof plan or the result's reading. That covers the sets and their label source, the comparison and its version group, the measures reported apart, the records kept, and whether replay is valid.
 
@@ -125,25 +131,20 @@ Every pattern or claim about decision models carries its evidence label: a prima
 
 IF citing a pattern or a published result, load `references/pattern-evidence.md` and return each cited pattern or result with its evidence label and the capability profile it needs. The claim carries that label.
 
-## The Sunstack driver
+## The driver
 
-Some facts hold only on Sunstack's typed engine path:
-- filters and rules are both trees: a filter's tree ends in one of its declared labels or `unsure`, a rule's in pass, a finding, `uncertain` or `not_applicable`;
-- one request per rule and piece, and per filter and folder, carrying the named fields and the `reference`;
-- a declared route for every in-between answer;
-- label-sorted Choice order, and a Choice gating on its top probability;
-- the records a saved report keeps, and case runs through `sunstack lint cases`;
-- text-only primitives.
+Some facts hold only on the engine a model runs on: how a request carries its state and reference, how many requests a piece costs, how an in-between answer is routed, the order a Choice's options reach the model, which primitives it sends, what a saved report keeps and how cases are run. They are driver facts, not standards for decision models.
 
-They are driver facts, not standards for decision models in general.
-
-IF the decision model runs through Sunstack's rules engine or `run_judgments`, load `references/sunstack-driver.md` and return each driver fact this model depends on, with its anchor. Account for each in the design and the proof plan.
+A design and its proof plan name each driver fact the model depends on, read from that engine's own documentation at the version the model runs on, and account for each, or name it as a gap. A fact a provider documents but the engine doesn't implement isn't one the model can depend on.
 
 ## Signs you skipped it
 
 - One Choice whose criteria pack several requirements, or coexisting defects made to compete as its labels.
 - A filter asked as one big question across all its labels, instead of a tree of small ones.
 - Examples pasted into a question's wording, where the rulebook's reference should carry them.
+- A reference example that is a scored case's text, or carries a case's expected answer.
+- A question that asks for the surface features of the owner's boundary (commands, files, names) instead of the boundary, or a wrong meaning "fixed" by splitting it into more questions.
+- A paid run spent before the ruled cases were read against the questions on the state the model receives.
 - A pass on a "no" about text that was cut or never loaded.
 - A lexical or label check deciding a verdict the standard asks to be read.
 - One bar across question types, or a band copied without its inequalities.

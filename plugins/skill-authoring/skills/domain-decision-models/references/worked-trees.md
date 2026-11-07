@@ -140,9 +140,9 @@ An uncertain answer is a successful assessment with too little separation. It di
 
 The standard: a skill meant for any repository doesn't carry one product's own material: its procedures, run commands, state files or machine paths. The evidence can show that material. It can't show where it should live, because no piece holds the product's repository. So the rule nudges, and the agent decides.
 
-The piece is one section of a general skill: its body, heading and headings, plus the opening of every file or skill it loads. The rule's `reference` holds the owner's rulings as examples, each with its text, its answer and why. Three Nouls and the line-finder go in one request, and each Noul names the body, the openings and `reference.examples`:
+The piece is one section of a general skill: its body, heading and headings, plus the opening of every file or skill it loads. The rule's `reference` holds examples written from the standard, each with its text, its answer and why; the owner's rulings on real sections are its cases, kept in the case file. Three Nouls and the line-finder go in one request, and each Noul names the body, the openings and `reference.examples`:
 
-1. `product_material`: "Does this section show concrete material that belongs to one product?"
+1. `product_material`: "Does this section teach one application's own internal procedure, commands, files or state, as opposed to using a public tool through its documented interface?"
 2. `all_labelled_examples`: "Is all of that material shown only as labelled examples?"
 3. `quotes_real_product_mistake`: "Does the section quote a real product's own mistake?"
 
@@ -159,6 +159,8 @@ Bad:  routes_product? → yes → example_or_own_infrastructure? → no → nudg
        whose it is and whether it's a public tool, and its passes ran on cut text)
 Bad:  belongs in this repository? → between its bars → pass
       (a question the evidence can't settle, reported as held)
+Bad:  product_material = "does this section show concrete material that belongs to one product?"
+      (the same tree, with the held rule's first question: the right shape, the wrong meaning)
 ```
 
 Each bar is a Noul's P(yes): ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is the route drawn. Those are starting bars, set on the development cases and recorded beside them, not defaults.
@@ -170,15 +172,19 @@ What the tree keeps, and why:
 - **Each question holds one fact.** "Is there product material?", "is it all labelled?" and "is a real product's mistake quoted?" can each be answered alone, so they can't contradict each other inside one answer.
 - **The warning is an OR of two known triggers:** material not all labelled, or a quoted real mistake. An unknown on one doesn't hide a known yes on the other, and an unknown that decides the outcome ends `uncertain`.
 - **Both passes need the text fully read.** The `complete` check runs before each pass: a "no" about a cut body, or a loaded file whose opening was cut or didn't resolve, isn't a measured absence.
-- **The examples live in the reference, not in the questions.** Each question stays one sentence with short criteria, and all three read the same rulings.
+- **The examples live in the reference, not in the questions,** and none of them is a case. Each question stays one sentence with short criteria, and all three read the same examples.
 - **Its line comes from the line-finder, not a pattern.** The section's generic loads come before line 17, so "the first load line" points at the wrong one. Below its bar, the warning stays at the body's first line, marked default.
 - **Its finding is a nudge:** the message says what to check and where to read, and nothing in it says the line is wrong.
+
+**What the run showed.** The held rule had this tree with the bad first question, and the owner's rulings in its `reference`. Its second development run, on 29 cases, gave 12 right, 12 unsure and 5 false warnings. All five false warnings took `product_material → all_labelled_examples → finding`, with the first answer at .83 to .93, on sections the owner ruled quiet: a public CLI's documented embed commands, routing to a public security workflow, a TypeScript toolchain, a component guide and a platform's supported fields. No field was cut and every loaded opening was present, so the evidence was there; the question asked for commands and files, which those sections do show, while the owner's line is whose they are and how they're used. A quiet ruling (`demistify.md` lines 45–73, a public CLI used as documented) and a real mistake (`project-verification-selection.md` lines 39–42, one terminal app's setup taught as the general way) got almost the same answers (.93/.07 and .93/.14), so no bar on that question could separate them: the defect was the meaning, not the threshold. The second question was right to say those tool instructions aren't labelled examples; making it call them examples would have repaired the wrong fact.
+
+The first question above is the diagnosed correction. It is untested: it holds only if the five quiet rulings pass on a fresh development run while the real private-workflow cases (AgentStudio's own clean task, line 17's loop) still warn.
 
 ## A filter as a tree: the kind filter
 
 A filter decides one label per folder, here the kind of skill a folder holds, and rules gate on that label (`only_when`). It is judged once per folder, and every rule gated on it uses that one result.
 
-The state is the skill's description and the opening of its `SKILL.md` (the body from just after the frontmatter through the end of the first H2 section: the H1 introduction, if any, and the whole first `##` section), plus a `reference` holding the five kind definitions and worked examples. It holds no folder name, which would hint at the answer. Two Choices go in one request:
+The state is the skill's description and the opening of its `SKILL.md` (the body from just after the frontmatter through the end of the first H2 section: the H1 introduction, if any, and the whole first `##` section), plus a `reference` holding the five kind definitions and worked examples written from them, none of them a folder the filter is scored on. It holds no folder name, which would hint at the answer. Two Choices go in one request:
 
 1. `primary_work`: reusable guidance · operating a public tool · one repository's own procedure.
 2. `reusable_guidance_kind`: general · role · domain.
@@ -202,6 +208,12 @@ What the tree keeps, and why:
 - **The boundaries are written once, in the reference.** "A repository's own command-line tool counts as its own procedure, not as a public tool" is a definition both questions share, not a sentence repeated in each.
 - **A label comes only from a tree ending.** A question's own option, such as "reusable guidance", is never a filter label.
 - **Unsure skips and lists the folder.** The rules gated on the filter don't run there, and the skip is visible, so a wrong skip can be challenged.
+
+**What the run showed.** The held filter had this tree, and a valid tree shape didn't make it a valid measurement. Its second development run sorted 65 folders: 53 right, 6 unsure, 6 wrong, and the wrong ones were confident (.73 to .98).
+- **Two examples were cases.** Its `reference.examples` held the real descriptions of `domain-decision-models` (labelled domain) and Agent Studio's skill (labelled tool manual), and both folders were scored. Both came back right, which shows nothing about text the filter hasn't seen.
+- **Its meanings didn't draw the owner's lines.** The owner ruled `decision-model-review` domain; the filter said general at .78, because its definitions call applying standards in a bounded task a workflow. The owner ruled `practices-verification-maintenance` repository-specific; the filter said general at .98 on two revisions, because its opening teaches a reusable practice whose product is one project's verification skill. Two principles the blind labellers called general came back domain, because "a subject's reusable standards and judgments" also describes a principle.
+
+Every one of those was visible before the run: read each ruled folder's description and opening, as the request would carry them, against the definitions, and the definitions give the wrong label. What that reading can't say alone is the cause: either the state lacks what makes the folder repository-specific, or the definition is too narrow. Check the evidence first, with the questions unchanged; then change the definition, never the owner's label.
 
 This is not the hierarchy below. Both menus are fixed and asked together, and code only chooses which answer to read; nothing is built from an earlier answer.
 

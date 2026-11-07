@@ -1,158 +1,113 @@
 ---
-name: skill-rules
-description: "Use when deciding which of a skill's standards become checked rules, designing a rule's questions and thresholds, writing its markers and entries, or reading a rule run. Not for a skill's teaching."
+name: skill-rules-authoring
+description: "Use when deciding which of a skill's standards become checked rules, or designing or correcting a rule or filter: its chunk, questions, examples and cases. Not for rulebook syntax or lint runs."
 ---
 
-# Skill Rules
+# Skill Rules: Authoring
 
-A checked rule is a nudge to whichever agent runs it: the writer checking its own text, the review lead, the Lead accepting a change, a rule's writer or its reviewer. It names the judgment it helps that agent make, collects the chunk of evidence that judgment needs, and says what it noticed, where, which standard makes it a concern, how the result was reached, and where else to read. The agent reads those places and decides. A decided breach is one kind of nudge; "worth checking, and here is where to read" is another. Each rule stays narrow, about one property: the agent puts several rules' nudges on one line together, so no rule has to raise every concern about its line.
+A judged rule is a measurement instrument for one of a skill's standards. Its chunk decides what it looks at; its questions are the operational definition of the line the standard's owner draws; its `reference` teaches the model what the standard means; and its cases, the owner's rulings among them, are the only test that the questions draw that line. So the cases come first, they are read against the questions on the text the model will receive before any run is paid for, and none of them ever leaks into the instrument as an example.
 
-A rule is a decision model for one of a skill's own standards. A marker binds the standard's wording where the skill states it. The rule entry behind the marker names three things:
-- **the evidence kind the standard governs:** the chunk each piece holds, such as a skill's description, a step, a load call, or a section's own text with the files it loads, picked from the checked files with their named fields;
-- **a decision:** mechanical checks and questions to the decision model, routed to `pass`, `finding`, `not_applicable` or `uncertain` for each piece;
-- **the nudge each finding gives:** its message, its severity, the line it points at and the fields whose places the agent reads next.
+The held kind filter and product-workflow rule show why the order matters. Both had the right shape (small questions, one fact each, policy in code) and both failed their development run. The filter's examples were two of its own scored folders, with their labels. The rule's first question asked whether a section shows commands and files, while the owner's line was whose commands and files they are and how they're used; it warned on five sections the owner had ruled quiet. Reading the owner's rulings against the questions, on the state each request would carry, showed every one of those failures before the run.
 
-A filter is the same kind of decision model at a coarser grain. It decides one label per folder, such as which kind of skill the folder holds, and a rule's `only_when` runs the rule only in folders with the labels it names. A filter is written as a tree of small questions that ends in one of its declared labels or `unsure`, never as one big question across all its labels. Rules and filters can both carry a `reference`: worked examples (the text, the right answer and why), definitions and boundaries, written once in the rulebook, which reach the model in the request's state. A question's wording says what its answers mean and names the reference it reads; examples aren't pasted into it.
+A rule's finding is a nudge to whichever agent runs it: the writer checking its own text, a review lead, the Lead accepting a change. It says what it noticed, where, which standard makes it a concern, and where else to read, and the agent decides. A decided breach is one kind of nudge; "worth checking, and here is where to read" is another. Each rule stays about one property, so several rules can nudge about one line without any of them raising every concern.
 
-The judge sees the standard's own words beside every piece, so mark only text whose own wording is the standard. A sentence that would need rewording to be checkable isn't ready for a marker. The rewrite is a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`, made before any marker goes on.
+Most of a skill never becomes a rule. Each standard lands in one of six outcomes: deterministic, model-judged, worth checking, review-only, eval or prose. Only the first three carry a marker.
 
-The practice of designing and proving a decision model belongs to the `sunstack-dev` skill `domain-decision-models`. This skill loads it at design and at proof, and doesn't restate it. A good rule asks only of the pieces its standard covers: most kinds hold pieces a standard doesn't govern, such as a list item that is a label, a lookup table, or a local instruction rather than a rule. So every rule's design names its applicability decision: which established fact lets its gate end a piece `not_applicable` before the verdict, or why every piece of its kind falls under the standard.
-
-Most of a skill should never become a rule. Each standard lands in exactly one of six outcomes:
-
-| outcome | when | marked |
-| --- | --- | --- |
-| deterministic (a mechanical check in the decision) | the property is visible in one field of one piece, and the check passes every piece that keeps the standard and fails every piece that breaks it | yes |
-| model-judged (questions in the decision) | deciding needs reading comprehension, one piece's fields hold what the judgment needs, and the marked wording alone states the standard | yes |
-| worth checking (questions in the decision; the finding says what to check) | one piece's chunk gives a grounded reason to look, but settling the standard needs what no chunk holds, such as intent or where a workflow should live; the rule's `warn` finding says what to check and where to read, and never claims a breach | yes |
-| review-only | no chunk can ground it: it needs session history, a record of who did what, or a fresh agent's run; `skill-review` owns it | no |
-| eval | it is about what an agent does under pressure; it belongs in evals or pressure scenarios | no |
-| prose | teaching, rationale or stance with no checkable claim | no |
-
-Prefer deterministic when the check fully captures the standard. **A proxy isn't the standard.** A lexical or structural check that only approximates a semantic standard fails the counterexample test: `MUST load reference.md and return.` contains both `MUST load` and `return`, yet names no result. That standard is model-judged. A proxy may still be a mechanical step inside the standard's decision, such as a gate, but never its verdict.
-
-The engine's lint documentation owns every exact shape: the config, the rule entry, the question types, the decision steps and the report. Read it, and the rules files the repository already has, before writing an entry.
-
-Every run that sends model requests needs the key and the grant to send them. That covers a rules run, and an evidence print over a selected kind or a kind that lies `within` one. Without that grant, prepare the exact command and config, hand them to whoever holds the grant, and read the report it keeps.
-
-IF a step runs this plugin's rules on a skill's files instead of writing or proving rules, as a writer's self-check, a review's first rule pass, a release's prove step or an audit does, load `references/running-rules.md` and return the run's status, the account for each nudge (fixed, kept, routed or open, with the places you read), each `uncertain` piece with your decision, the gaps by kind, and the decided exclusions apart from them. That run ends with its return; the workflow below is for writing and proving rules.
+Who owns what: the design judgment is this skill's. The standards for any decision model are `domain-decision-models`', loaded at design. How the rulebook's files are spelled, and how lint and its case runs are run and read, is `skill-rules-config`'s. Independent review of a rule is `skill-rules-review`'s.
 
 ## Workflow
 
-A run that starts from a refusal or a broken rule still walks steps 1 to 3 for the standards it touches, because whether a standard should carry a marker at all, and how its decision is built, decide the fix.
+A run that starts from a refusal, a held rule or a bad result still walks steps 1 to 4 for the standards it touches: whether a standard should carry a rule at all, and what its cases say, decide the fix. A mechanical rule skips steps 3 and 6 and is proven by edge tests at step 8.
 
 ### 1. List the candidate standards
 
-Read the skill's `SKILL.md` and every reference whose standards are in scope. List each sentence, list item, paragraph or section that states a requirement that text or agent behavior can keep or break, with its `path:line`, its exact wording and the Markdown unit it sits in. Completion: every candidate is quoted with its `path:line` and unit, and anything left off the list states no requirement; length is never the reason.
+Read the skill's `SKILL.md` and every reference whose standards are in scope. List each sentence, list item, paragraph or section that states a requirement that text or agent behavior can keep or break, with its `path:line`, its exact wording and the Markdown unit it sits in.
+
+Completion: every candidate is quoted with its `path:line` and unit, and anything left off the list states no requirement; length is never the reason.
 
 ### 2. Classify each standard
 
-MUST load `references/decision-matrix.md` and return, for each candidate, its outcome with the property that outcome depends on, and for each marked outcome its evidence kind, its gate or why it needs none, and for a proxy the standard it approximates. Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each marked outcome names an evidence kind whose pieces hold what the standard judges, or for worth checking, what grounds the reason to look; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill, such as a checklist or summary item, is the same standard: mark it once, on the host whose wording states it most completely, and record the others as covered by that rule. A candidate that reads as a standard only after a rewrite goes back unmarked, as a teaching change to the standard's home, designed with `skill-design` and written with `skill-creation`.
+MUST load `references/decision-matrix.md` and return, for each candidate, its outcome with the property it depends on, and for each marked outcome its evidence kind, its gate or why it needs none, and for a proxy the standard it approximates.
 
-### 3. Design each marked rule
+Completion: every candidate has exactly one outcome and a reason; each deterministic outcome survived a counterexample search in both directions; each marked outcome names an evidence kind whose pieces hold what the standard judges; no review-only, eval or prose standard has a marker planned. A restatement of a standard elsewhere in the same skill is the same standard, marked once on its most complete host. A candidate that reads as a standard only after a rewrite goes back unmarked, as a teaching change to the standard's home.
 
-MUST load the `sunstack-dev` skill `domain-decision-models`. When it isn't installed, return `skill unavailable: domain-decision-models` and stop: a rule designed without the practice is the failure this step exists to prevent.
+### 3. Gather the cases first
 
-Then MUST load `references/rule-design.md`, and return per marked rule the design its outcome and its nodes call for. A field that doesn't apply is marked `not applicable` with its reason, never invented. The design walks five things, in this order, because each one decides what the next can ask:
-1. **the judgment** the nudge helps, and which agent makes it;
-2. **the chunk:** its subject (what one piece is), its denominator (which files and pieces the rule scans, so "unread" means something), its context and edges (one hop, declared), the fields its nodes read and its budget (the size cap, and what a cut means for the answer), shown on real sources with an evidence print;
-3. **the tree:**
-   - its gate with the established fact that lets it drop a piece, or why it needs none;
-   - each mechanical node's predicate, field, routes and step 2's counterexample search;
-   - each question's type, proposition, evaluated field and criteria, with the encoded state for sampled good, bad and near-miss pieces or the named evidence gap;
-   - the `reference` its questions share, and the parts each question names;
-   - the `complete` check before any pass that rests on a "no" about text the piece read, including the files it loads;
-   - each threshold's statistic, inequalities and in-between route, precedence and first-failure order, and the labelled costs its policy rests on;
-4. **the nudge** each finding route gives: what was observed, the standard, the severity, the line it points at, the fields whose places become "read next", and any direction to a place the run never reads;
-5. **the proof plan,** with three observations kept apart: the collection, the tree on real skill text at a fixed revision (development and held-out cases run through `sunstack lint cases`), and the receiving agent's call, which is a pressure task.
+For each judged rule and filter, MUST load `references/cases-and-proof.md` and return its cases: each real piece or folder at a fixed revision with its expected answer and the origin of its label, split into development and held-out sets, with the floors the set meets or what it lacks.
 
-A filter's design walks the same five, with a label in place of the nudge: which folders it labels, what it reads from each, its tree of small questions, the label each ending gives, and its cases.
-
-Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with the reason. A rule failing any goes back to step 2:
-- the decisive content is in the field or state its nodes read, and the evidence print shows it there;
-- each mechanical node decides only what its predicate fully captures;
-- each node that reads a model's answer asks one proposition that passes the standard's own bad examples, and has its policy with inequalities and routes;
-- a route whose evidence can't settle its standard ends in a nudge or `uncertain`, never `pass`;
-- each finding route says what the agent receives, and where to read next;
-- the proof plan fits the outcome.
-
-### 4. Mark the standards
-
-MUST load `references/markers-and-rules.md` and return, for each marked standard, its host and marker, its rule entry with its nudge fields, and any change to the config's rulebook pairs or evidence kinds, to apply in steps 4 to 6.
-
-Mark the narrowest host that carries the whole standard: a list item or paragraph before a section, and a section only when the whole section is one standard and stays under the config's `max_question_words`. The marker is the last thing on its line in the host, touches heading text with no space, uses the config's prefix letter, and appears at most once per Markdown file; one file may carry many distinct IDs. Completion: every marker sits on an allowed host, and the host's visible words, read with nothing around them, state the standard.
-
-### 5. Write the rule entries
-
-Write one entry per marker from step 3's design, in the rules file paired with that Markdown file, keyed by the marker ID:
-- a `name` that becomes the rule ID;
-- the `evidence` kind;
-- the `questions` the decision may ask, each naming the fields and `reference` parts it reads;
-- the `reference`, when its questions share examples or definitions;
-- the `decision` graph, whose finding routes carry the nudge: the message, the field it points at, and for a section-sized subject a locator that points it at the observed line;
-- the `related` fields, whose places every finding lists after the standard's own line;
-- the `severity`: `warn`, the nudge, for any path that reads a model's answer, gate included; `error` only where every path to the finding is mechanical.
-
-A filter's entry sits in the config's `filters`, with its `reads`, `labels`, `questions`, `decision` and optional `reference`, and the rules it gates name it in `only_when`.
-
-Completion:
-- every marker has one entry, and every entry one marker;
-- each entry's gate, checks, questions and thresholds are the ones step 3 designed;
-- every route ends in a named step, `pass`, `not_applicable`, `uncertain` or a `finding` at the field the standard governs, and every ask declares where its in-between answer goes;
-- each finding route carries the message, severity and locator step 3 designed, and the entry's `related` names the fields its nudges send the agent to read.
-
-### 6. Pair the rulebook in the config
-
-Open the config the repository's instructions name for `sunstack lint`. When the Markdown file is new to it, add its pair to `rulebook`, both paths relative to the config. When an entry names an evidence kind or field the config doesn't define, the kind and its evidence rule are a change to the config and its evidence project, made and proved there. Completion: the check (step 7) lists every intended rule with the expected count. A clean check that omits one is not paired.
-
-### 7. Prove each rule
-
-MUST load `references/check-and-reports.md`. Return the check's outcome and printed rules, and the proof in three observations kept apart:
-- **the collection:** the evidence print for each rule's kind over its full denominator, with the pieces you meant it to judge, their fields, and every cut named;
-- **the tree:** each mechanical rule's edge results, and for a judged rule or filter its case runs through `sunstack lint cases`: the development set, then, with the questions, reference and bars frozen, the held-out set once, each reporting right, false warning, missed, unsure and incomplete apart, with every case accounted for;
-- **the receiving agent's call:** whether an agent given the nudge makes a justified call. That is a pressure task on the same real source: name it as unproven until one has run, and never infer it from the other two.
-
-A judged rule warns anyone only once its cases meet these floors: at least three real mistakes that must warn, the text before a real fix among them; at least three good texts that must pass, the text after the fix among them; at least three near misses; every wrong warning it once gave on a real skill, as a case that must pass; and a held-out set it was never tuned on. A rule short of any floor stays off, with what it lacks listed.
-
-IF a judged rule's or filter's case results are planned or read, apply `domain-decision-models`' proof standards and the reference its proof section calls. When it isn't installed, return `skill unavailable: domain-decision-models` and stop that proof. Return, per judged rule or filter:
-- its result on every case, scored or listed with why (stale, no matching piece, more than one, filter-excluded, not judged);
-- the floors it meets, or what it lacks;
-- each bar with the development cases that set it, or "unassessed";
-- the requested model and the version that answered;
-- the comparison against the current rule as the baseline, or the gap that blocks it.
-
-Completion:
-- the check passes on the real engine and prints every intended rule with the expected count, each standard reading as its question;
-- the evidence print covers each rule's denominator and shows its intended good and bad pieces with their fields filled, and every cut is named;
-- every mechanical rule has edge tests, with no model, that pass and fail where the standard does;
-- every judged rule and filter has its development run and its frozen held-out run on real skill text, with every case counted or listed, or the missing ones named as unproven;
-- every judged rule that misses a floor stays off, with what it lacks;
-- the receiving agent's call is named as unproven, owed to a pressure task.
-
-Rules run locally, by the skills that use them, not in CI.
-
-### 8. Return
-
-Return the decision table, the diff, and the check, evidence and rule-test results its proof column cites:
+Every ruling the owner has made on a real piece is a case, and goes in the case file with `label_from: owner-ruling`. None goes into the rule's `reference`.
 
 ```text
-| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | judgment | chunk | evidence | gate | questions | tree | policy | severity | read next | verdict | proxy for | proof | version | baseline |
+rule:            an owner's ruling is never a reference example.
+rationalization: "The rulings are the best examples we have; the model should see them."
+why it fails:    a case whose answer rides in the request can only show the model can copy it.
+                 The kind filter scored right on both of its leaked folders, and that told
+                 nobody whether it could label a folder it hadn't been shown.
 ```
 
-One row per candidate from step 1. Unmarked outcomes leave host through baseline empty.
-- `judgment` names the call the nudge helps and who makes it; `chunk` names the subject, denominator and edges.
-- `questions`, `tree` and `policy` summarize step 3's design, with `not applicable` where it applies.
-- `severity` and `read next` are the nudge's: `warn` or `error` with the basis that allows it, and the `related` fields, plus any direction the message gives.
-- `proof` names the edge results for a mechanical rule, and the development and held-out case results for a judged one.
-- `version` is the model version that answered, or the gap.
-- `baseline` is the comparison against the current rule, or its gap.
+Completion: every judged rule and filter has its cases in the case file, every owner ruling among them, each with its label's origin; the floors met or lacking are named; and the held-out set was written by someone other than whoever tunes the rule, and you haven't read it.
 
-Name what stays unproven: cases test a rule's decisions at the lines they name, not how many real pieces its evidence kind misses; a lint run over today's skills is supporting evidence, not a held-out set or an accuracy rate; the receiving agent's call waits for a pressure task; and no result here makes a judged rule ready to block.
+### 4. Design each marked rule or filter
 
-Completion:
-- the table has one row for every candidate step 1 listed;
-- each marked row's proof points at a check, evidence print or rule-test result you kept;
-- every rule still owed a result is named as unproven, with what would close it.
+MUST load `../domain-decision-models/SKILL.md`, then MUST load `references/rule-design.md`, and return per rule or filter the design its outcome calls for: the judgment and who makes it; the chunk, mechanical or a chunk tree, with the reason; the tree, with each question's meaning drawn from step 3's cases; the `reference`, written from the standard; the nudge each finding route gives; the policy; and the proof plan. A field that doesn't apply is marked `not applicable` with its reason, never invented.
+
+Completion: each of these is stated as kept, with the line that shows it, or `not applicable` with its reason. A rule failing any goes back to step 2:
+- the chunk is chosen for a stated reason: the shape decides which pieces the standard governs, or the shape finds candidates and choosing among them takes reading;
+- each question's criteria state the owner's line in the owner's terms, and name which step-3 cases fall on each side of it;
+- one property is one question; no question was split to add nodes;
+- every `reference` example is written from the standard, and none is a step-3 case or a near copy of one, or carries a case's answer;
+- each mechanical node decides only what its predicate fully captures;
+- a route whose evidence can't settle its standard ends in a nudge or `uncertain`, never `pass`;
+- each finding route says what the agent receives and where it reads next;
+- the proof plan fits the outcome.
+
+### 5. Write it
+
+MUST load `../skill-rules-config/SKILL.md` and use it to write each marker, entry and filter from step 4's design, pair the rulebook, run the check, and print the evidence for each rule's kind over its whole denominator. Return the check's printed rules with their count, and the print's reading for each rule. Mark the narrowest host whose visible words, read with nothing around them, state the standard.
+
+Completion: the check passes with every intended rule printed and the count right; each printed standard reads as itself; and the print shows every intended piece with its fields, every cut named.
+
+### 6. Desk-check before any paid run
+
+Using `references/cases-and-proof.md`'s desk check, read every owner-ruled development case, and as many other development cases as the floors need, on the state its request will carry, against the questions; then compare every `reference` example with every case. Return the desk-check record: per case, the decisive content the state holds, what each question's meaning gives it, and whether that matches its label; per example, whether it matched any case.
+
+A case whose label the meaning doesn't reproduce goes back to step 4: first look for missing decisive content in the state, then change the meaning. The label never changes, and the question is never split to dodge the case.
+
+```text
+rule:            no paid run before the desk check is clean.
+rationalization: "The run will tell us. Reading every ruling by hand takes too long."
+why it fails:    the run tells you the same thing a thousand requests later, and its answers
+                 can't be reused once the meaning changes. Every false warning and wrong
+                 label the held trees gave on an owner's ruling was readable on its state first.
+```
+
+Completion: every owner-ruled development case has a row, every row matches its label, and no example matches any case.
+
+### 7. Review before the first paid run
+
+Start a reviewer with no authoring history on `skill-rules-review`, the way the host starts a reviewer, and give it step 4's design, the entries and config, the evidence print, the desk-check record and the development case file; never the held-out set. Return its verdict and findings. Each accepted finding goes back to the step that owns it, and the review runs again on the correction. If the host can't start a separate agent, stop and say so: a rule reviewed by its author hasn't been reviewed.
+
+Completion: the verdict is `ready` for the development run, or every accepted finding is back with its owning step.
+
+### 8. Prove, and decide on or held
+
+Using `references/cases-and-proof.md`, with the commands from `skill-rules-config`'s case runs: run the development set; set each bar from the development results and record it with the cases that set it; freeze the questions, reference, evidence and bars; then run the held-out set once. Return per judged rule and filter: the outcome of every case, scored or listed with why; the floors met or lacking; each bar with its development cases; the model requested and the version that answered; the baseline comparison or its gap; and the decision, on or held, with what a held rule lacks. Return per mechanical rule its edge tests.
+
+Keep three observations apart: the collection (the evidence print), the tree (the case results), and the receiving agent's call, which only a pressure task observes and which stays named as unproven until one has run.
+
+Completion: every judged rule has its development run and, frozen, its one held-out run, or the missing run named as unproven; every case is counted or listed; every rule short of a floor or a switch-on condition is held, with what it lacks; every mechanical rule has edge tests that pass and fail where its standard does.
+
+### 9. Return
+
+Return the decision table, the desk-check record, the review verdict, the diff, and the check, evidence and case results its proof column cites:
+
+```text
+| standard (path:line, quoted) | outcome | reason | host | marker | rule ID | judgment | chunk | evidence | gate | questions | reference | cases | desk check | tree | policy | severity | read next | review | proof | version | baseline | on or held |
+```
+
+One row per candidate from step 1; unmarked outcomes leave host through the last column empty. Name what stays unproven: cases test a rule's decisions at the lines they name, not how many real pieces its kind misses; a lint run over today's skills is supporting evidence, not a held-out set or an accuracy rate; the receiving agent's call waits for a pressure task.
+
+Completion: the table has one row for every candidate step 1 listed, each marked row's proof points at a result you kept, and every rule still owed a result is named with what would close it.
 
 ## Completion Blockers
 
@@ -160,23 +115,12 @@ The run is not done while any of these hold:
 
 - a candidate has no outcome, or its reason doesn't name the property;
 - a deterministic outcome rests on a check nobody searched for counterexamples, or a proxy is recorded as the standard's verdict;
-- a review-only, eval or prose standard carries a marker;
-- a marker sits on wording that needed rewording to read as its standard;
-- a marked rule was written without step 3's design, or step 3 ran without `domain-decision-models`;
-- a judged entry asks of every piece of a kind that holds pieces its standard doesn't cover, with no gate;
-- a route whose evidence can't settle its standard ends `pass`;
-- a finding route's design names nothing for the agent to read next beyond the standard's line, without saying why that line is enough;
-- a chunk was relied on without an evidence print over real sources;
-- a path that reads a model's answer can reach an `error` finding;
-- a lexical or label check decides a verdict its standard asks to be read;
-- a filter is written as one question with no tree, or examples are pasted into a question's wording instead of the `reference`;
-- a pass rests on a "no" about text that wasn't fully read;
-- a threshold has no statistic, inequality or costs;
-- a refusal was cleared by raising the cap, deleting the standard, or moving the marker to text that doesn't state it;
-- the check's print lacks an intended rule, or the count is off;
-- a mechanical rule lacks edge tests that pass and fail where the standard does, or a judged rule is called accurate without labelled cases on real skill text, every case counted, or one version group;
-- a committed copy of skill text, or an invented skill, stands as a judged rule's proof; a case was dropped or relabelled to make a run pass; or a held-out case was tuned on;
-- a judged rule warns before its cases meet the floors;
-- proof ran through a separate test tool instead of `sunstack lint cases`;
-- a run that sends model requests was made without the grant;
-- the check wasn't run on the real engine, a passing check or evidence print is claimed as proof that a rule decides well, a rule's case results are claimed as proof of what an agent does with its nudge, or proof is reported as passed where the record can't support it.
+- a review-only, eval or prose standard carries a marker, or a marker sits on wording that needed rewording to read as its standard;
+- an owner's ruling, or any case, sits in a `reference`, or an example carries a case's answer;
+- a question's meaning was repaired by splitting it into more questions, or a label was changed to fit a question;
+- a chunk was judged by a tree where its shape decides, or a judged rule asks of every piece of a kind its standard mostly doesn't cover, with no gate;
+- a paid run was made before the desk check was clean, or before the independent review returned `ready` for it;
+- a route whose evidence can't settle its standard ends `pass`, or a path that reads a model's answer can reach an `error` finding;
+- a held-out case was read, desk-checked or tuned on by whoever tunes the rule;
+- a judged rule warns before its cases meet the floors, or a held rule was switched on;
+- a passing check or evidence print is claimed as proof that a rule decides well, or a rule's case results as proof of what an agent does with its nudge.

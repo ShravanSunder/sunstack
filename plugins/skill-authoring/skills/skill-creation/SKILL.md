@@ -45,7 +45,7 @@ Completion: each surface the boundary admits is written or held back by its step
 
 ### 4. Self-check
 
-MUST load `../skill-rules/references/running-rules.md`, run the rules on the files this run changed, and return its reading beside the diff: the run's status, the account for each nudge, each `uncertain` piece with your decision, the gaps by kind, and the decided exclusions apart from them. Act on it before the diff comparison. For each nudge:
+MUST load `../skill-rules-config/references/running-rules.md`, run the rules on the files this run changed, and return its reading beside the diff: the run's status, the account for each nudge, each `uncertain` piece with your decision, the gaps by kind, and the decided exclusions apart from them. Act on it before the diff comparison. For each nudge:
 
 - read its line and its read-next places, then decide the broader question it raises before touching the line. Making the rule's own property hold is the narrowest fix, and is never the account by itself;
 - record the account `running-rules.md` defines: fixed, kept, routed, or open naming the evidence that's missing, with what you checked;

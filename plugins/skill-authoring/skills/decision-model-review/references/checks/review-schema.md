@@ -18,6 +18,8 @@ candidates: <each candidate finding, in the finding shape below>
 - `partial`: it ran on what was supplied, and names what it couldn't read.
 - `blocked`: it couldn't run, and names why.
 
+A routing review that adds checks of its own fills the same record under each check's own name.
+
 A check the profile doesn't select, such as `nudge-and-receiver` for a `run_judgments` caller or an evidence selection, records `status: complete` with `inputs read: not selected: <the profile>` and no candidates.
 
 ## Finding

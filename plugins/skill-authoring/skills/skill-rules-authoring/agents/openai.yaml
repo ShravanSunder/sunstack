@@ -1,4 +1,4 @@
 interface:
-  display_name: "Skills: Rules"
-  short_description: "Turn a skill's standards into checked rules"
-  default_prompt: "Use $skill-rules to decide which standards in this skill become checked rules, design their questions and thresholds, mark them, write their rule entries, and prove them."
+  display_name: "Skills: Rules authoring"
+  short_description: "Decide and design a skill's checked rules"
+  default_prompt: "Use $skill-rules-authoring to decide which standards in this skill become checked rules, gather their cases, design their chunks, questions and examples, and prove them."

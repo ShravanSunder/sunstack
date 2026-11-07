@@ -40,7 +40,7 @@ Neither part judges what an agent does with a nudge. Whether a writer given the 
 
 ## The controls, on #187's line
 
-`sunstack-dev`'s `ops-observability-stack/SKILL.md:17`: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." This is the review stage of the example every skill in this change teaches.
+`sunstack-dev`'s `ops-observability-stack/SKILL.md:17`: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." It is the worked example the decision-model skills teach, here at its review stage.
 
 - **Bad control, the receiving part.** #187's commission assigned line 17's `call.completeness` nudge as "call completeness": it dropped the read-next place, `agentstudio-loop.md`, and never asked whether a generic skill should route into AgentStudio's loop. Walk it against the same valid rule artifacts as a commission that carries the nudge: line 17, the observation (the call names no return), the standard, `agentstudio-loop.md` to read, and that broader question. Only the narrowing commission fails the receiving part. The route part's result is the same for both, because the rule didn't change.
 - **Good control, the route part.** `call.completeness` itself: its finding on line 17 observed a real missing return, its message says so, and it sits at `warn` on a judged path. It passes. A narrow rule that rightly finds its property is not a defect because a bigger question stands on its line.

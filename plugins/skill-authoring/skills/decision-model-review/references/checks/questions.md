@@ -2,11 +2,11 @@
 
 This check owns whether each question asks one proposition the model can judge, with criteria that define it and routes that say what yes means. Its standards are `domain-decision-models`' Questions section.
 
-**Inputs:** each question's type, task, criteria and evaluated field; the routes from it; the standard's own good and bad examples.
+**Inputs:** each question's type, task, criteria and evaluated field; the routes from it; the standard's own good and bad examples; the labelled development cases, owner rulings first; and, for each case read, its sent state: a saved request, or the engine's field print with the reference beside it. Never held-out cases.
 
 **Return:** a check record, in the schema's shape.
 
-**Complete when:** every question was read against every item below, and the inverted-pair control was rejected locally.
+**Complete when:** every question was read against every item below, every owner-ruled development case was read on its sent state, and the inverted-pair control was rejected locally. Without the sent states, the check is `partial`, naming them as the missing input, and the two items that need them aren't passed.
 
 | item | fails when | bad control | smallest correction |
 | --- | --- | --- | --- |
@@ -14,7 +14,8 @@ This check owns whether each question asks one proposition the model can judge, 
 | criteria define the same proposition | the criteria define something other than the task, or add a requirement | task "is the post safe?", criteria "yes = contains a threat" | rewrite the criteria to define the task's own yes and no |
 | route direction stated | a route doesn't say whether yes means pass or finding, or reads high probability as "compliant" | a "carries extra" question whose yes is routed to pass | route each answer by what yes to that proposition means |
 | direct references | the task points at its evidence indirectly, through a hop the state doesn't resolve | "judge it against the rule above", with no rule in the state | name the state field directly |
-| the standard's negative cases pass | the question accepts a bad example the standard itself rejects | a condition question that accepts "IF the skill needs more depth" because it names a skill | ask whether the predicate states a checkable fact; recheck against every bad example |
+| the standard's negative cases pass | the question accepts a bad example the standard itself rejects, read on the state the model receives | a condition question that accepts "IF the skill needs more depth" because it names a skill | ask whether the predicate states a checkable fact; recheck against every bad example |
+| the meaning draws the owner's line | read on a labelled case's sent state, the question's meaning gives that case the wrong answer; or the question asks for the surface features of the boundary instead of the boundary | a product-material question ("concrete material that belongs to one product?") passed in review because the owner's public-tool rulings "fall outside the boundary", read from the question text; on the five sent states it answers yes, since the sections show commands and files | change the meaning to the owner's line; never the label, and never more questions carrying the same line |
 | bounded judgment survives | a shortened question rejects a judgment the standard accepts | a predicate question that rejects every value judgment | keep the standard's accepted bounded cases passing |
 | bounded by stated obligations | the question imports an obligation the evidence doesn't state | "is this step's work enough?" for a step that asks only for a glance | ask whether the end requires the result the step itself names |
 | a model can judge it | the question asks for something the model can't judge from the evidence | "will the agent follow this step?" | ask for a property of the supplied text |

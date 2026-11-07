@@ -17,11 +17,13 @@ This reference owns how a decision model is shown to work: the sets and labels, 
 
 - Labels come from people or agents independent of the model's author and of any run, and are collected before the run. A label taken from the model's own answers proves nothing.
 - **Each set holds all three kinds:** good, bad and near miss, each case with its source. A set that still lacks a kind after a real search names that gap, and claims nothing about the missing kind.
+- **Cases and examples stay apart.** An owner's ruling on a real piece is a case. Before the first run, compare every reference example with every case, near-identical summaries included: an example that is a case's text, or carries a case's answer, is rewritten from the standard, and the case keeps its label. A case whose answer sits in the state can't show the model works on text it hasn't seen.
+- **The desk check comes before any paid run.** Read each labelled development case on the state the model will receive (the encoded request, or the engine's field print with the reference beside it), and write down what each question's meaning gives it. Where that differs from the label, look for missing decisive content first, then change the meaning; never change the label. A case the meaning answers wrong costs a minute to find here and a run to find later.
 - Development cases refine the evidence, the questions and the policy.
 - Freeze the evidence, questions, policy and model record. Then score held-out cases end to end, once, against the current model as the baseline. Held-out cases come from other sources than the development cases; any overlap is named.
 - **A held-out miss is reported, never tuned away.** After a correction, cases already scored as held-out become regression cases. A fresh held-out claim needs cases not yet seen.
 - A lint rule over skill text takes its cases from real skills, never from copied excerpts or invented skills.
-- In sunstack, the sets are one case file run through `sunstack lint cases`, the same path lint uses: the development set first, then, frozen, the held-out set once. Each bar is recorded beside the development cases that set it. No separate test tool stands between the rule and its proof; `sunstack-driver.md` has the file's shape.
+- In sunstack, the sets are one case file run through `sunstack lint cases`, the same path lint uses: the development set first, then, frozen, the held-out set once. Each bar is recorded beside the development cases that set it. No separate test tool stands between the rule and its proof; the engine's own documentation has the file's shape. Held-out cases are never desk-checked or read by anyone tuning the rule.
 
 ## The comparison, one variable at a time
 
