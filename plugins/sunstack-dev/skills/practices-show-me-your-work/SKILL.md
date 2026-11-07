@@ -5,7 +5,7 @@ description: "Use when a design, plan or implementation starts, runs or stops: r
 
 # Practices: Show Me Your Work
 
-Show me your work keeps the owner's picture of a running piece of work current. Every agent logs its own work in the log its packet names, at the moment it happens: what it decided, assumed, cut short and checked. The log is the work's Router work trail, its single source of truth. The Lead turns that log into one page the owner reads, and the owner answers each decision on its own page.
+Show me your work keeps the owner's picture of a running piece of work current. Every agent logs its own work in the log its packet names, at the moment it happens: what it decided, assumed, cut short and checked. The log is the work's Router work trail, its single source of truth. The Lead turns that log into one page the owner reads, and the owner answers each choice on that page, under For you to decide.
 
 A task qualifies when it spans sessions, commissions another agent, crosses components, or makes a decision someone will later inspect, or when the owner asks for a trail; the log works the same way during design from start to ready, during planning and during implementation. A routine small edit gets no log; if it changes the state of a work thread already in context, post the outcome there. The log never lives in a product repository. Thread posts carry conversation and checkpoint notices that point at the log; the log holds the substance.
 
