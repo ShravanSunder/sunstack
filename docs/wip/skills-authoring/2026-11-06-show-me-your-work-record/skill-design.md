@@ -144,4 +144,4 @@ Defaults taken, each with its rationale; the owner may strike any row.
 
 ## Review record
 
-Design stage: pending (`skill-review`, design stage, review lead codex-local/01a1a6f7).
+Design stage: accepted at `430c7ac1` (skill-review 0.10.2 design stage, review lead codex-local/01a1a6f7). First pass at `ecf2f095`: targeted-revision, four findings (F1 blocker, F2–F4 important). The corrections at `430c7ac1` were verified, and all four closed. Verdict `great`; implementation decision `accepted-to-implement`. Acceptance binding: the original report plus its correction verification (memory-logs `skills/authoring/2026-11-03-show-me-your-work-evidence/spec-review-smyw-record-2026-11-06/`; rows `01a1b3eb-efd0-7c58`, `01a1b3f2-a8d6-7cf0`).
