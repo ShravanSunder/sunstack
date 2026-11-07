@@ -140,7 +140,7 @@ Defaults taken, each with its rationale; the owner may strike any row.
 | 2 | implemented | this commit; O3 test red with workLog optional, green required |
 | 3 | implemented | this commit |
 | 4 | implemented | this commit |
-| 5 | proposed | |
+| 5 | implemented | this commit |
 | 6 | proposed | |
 | 7 | proposed | |
 | 8 | proposed | |
