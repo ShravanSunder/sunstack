@@ -21,7 +21,7 @@ The design is fixed; only its content changes from build to build. Keep it exact
 
 A routine Story (`Routine: yes`) folds under one "N smaller" row at the end of its section. Every other open assumption, one an agent or a peer is checking, shows in its Story with what's assumed, what depends on it and who acts next.
 
-**Each Story**, in this order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one table or picture; a closed More fold; and a closed fold of every row it cites, each opening to its text with its kind, its writer and its time. Stories start open; their rows start closed.
+**Each Story**, in this order: its title with its subject and time; one headline; the rows Happened, For you and Next; at most one table or picture; a closed More fold when the Story has more to say; and a closed fold of every row it cites, each opening to its text with its kind, its writer and its time. Stories start open; their rows start closed.
 
 **The Map**: one tree whose rows open their Stories, in this order:
 
@@ -43,7 +43,7 @@ Build only with Demistify v1's documented parts, and no script. The Demistify Le
 | --- | --- | --- |
 | a section card with its count | `ex-card` titled "For you to decide · 1", with a tone and icon | nothing; v1 does it |
 | the section header staying on screen while its Stories scroll, with expand/collapse on the right | each Story folds on its own; the header scrolls away | the section card |
-| a Story with its rows and folds | a `details` (open) with the title, subject and time in its `summary`, then the headline, the three rows, one table or picture, a `details` for More and a `details` for the cited rows | the Story |
+| a Story with its rows and folds | a `details` (open) with the title, subject and time in its `summary`, then the headline, the three rows, one table or picture, a `details` for More when there is more, and a `details` for the cited rows | the Story |
 | the Map as a panel from the right, opened by a map button next to Comments or by M, as Comments is by C, never open with Comments, covering the page on a narrow screen and closing when a row is followed | the Map tree in a closed `details` named "Map" right after the title, opening in place | the Map drawer |
 | a Map row opening its Story, open, with any fold around it | the row links to `#story_<key>`; following it opens any closed fold around the Story, such as "N smaller", but not a Story the owner has closed | the Story |
 | tree rows that stay on the page, and branches that start folded | v1's tree draws a leave-the-page arrow on every link and opens every branch | the in-page link icon and the start-folded marker |
