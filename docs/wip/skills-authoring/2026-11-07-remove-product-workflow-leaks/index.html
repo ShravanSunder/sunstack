@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remove AgentStudio's own workflow from two generic skills</title>
+<style>
+body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.5; margin: 0 auto; padding: 1rem; max-width: 60rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.85rem; background: #f4f4f5; padding: 1rem; border-radius: 6px; }
+@media (prefers-color-scheme: dark) { body { background: #18181b; color: #e4e4e7; } pre { background: #27272a; } a { color: #93c5fd; } }
+</style>
+</head>
+<body>
+<h1>Remove AgentStudio's own workflow from two generic skills</h1>
+<p>practices-cleanup and ops-observability-stack stop carrying AgentStudio's own clean task, debug and beta loop, and product names in a generic description; each keeps the generic route (the repository's own instructions and task runner). Nothing is lost: AgentStudio's repository already owns every removed instruction. The skill-authoring lessons that cite those lines as worked mistakes are pinned to 89dc638e, where the lines still exist.</p>
+<h2>Walkthrough</h2>
+<ol>
+<li><a href="#part-1">Part 1: Requirements</a>: the change, the owner's rulings, evidence and non-goals</li>
+<li><a href="#part-2">Part 2: Specification</a>: five obligations and the clean-task rule with its transfer cases</li>
+<li><a href="#part-3">Part 3: Skill design</a>: three runs, the loss check against AgentStudio's repository, the new description, decisions</li>
+<li><a href="#part-4">Part 4: Skill verification</a>: routes, proof plan and results, trigger trial, what stays unverified</li>
+</ol>
+<section id="part-1">
+<h2>Part 1: Requirements</h2>
+<pre>## Part 1: Requirements
+
+- **Class:** behavior-changing (R1: `SKILL.md` prose and an allow-list row; R2: a branch, a reference and the description; R3: citations in eight teaching references). Runs: `update` × 3.
+- **Reusable behavior:** generic skills route agents to a product's own repository for that product's workflow, and never carry it themselves.
+- **Success, in the owner's words:** "move product names out if its a generic skill" (U16 row 11); U16 rows 1 and 2 (a general skill running one product's own command, or loading one product's own workflow file) are **nudge**; the standard is `domain-skill-crafting/references/calls-and-placement.md`, "A product's own workflow": it "lives in the product's repository".
+- **Who reaches the skills:** agents unprompted (both are model-invocable); `practices-cleanup` from slice and PR boundaries; skill-authoring readers following the worked examples.
+- **Evidence:**
+  - the three lines on main `89dc638e`: `practices-cleanup/SKILL.md:30` and `:40`, `ops-observability-stack/SKILL.md:17` with `references/agentstudio-loop.md`; and `ops-observability-stack`'s description naming AgentStudio, Agent VM and OpenClaw;
+  - the owner's U16 rulings, `docs/specs/2026-11-03-skill-rules/requirements/skill-kinds.md:52-66`;
+  - AgentStudio's repository at `origin/main` `f74d6acc` (the loss check, Part 3).
+- **Authoring basis:** observed failure (owner-ruled defects visible at their lines) and user-directed intent (the Lead's commission and decisions). Reproduction: the defects are textual and read at their anchors; no agent-behavior reproduction is in scope.
+- **Non-goals:** moving any content into AgentStudio's repository; `resource-naming.md:57-58` (`AGENTSTUDIO_OBSERVABILITY_*` keys) and `practices-cleanup/references/merged-worktree-removal.md:11` (the Agent Studio worktree helper), both left as follow-ups by the Lead; the Agent VM branch at `ops-observability-stack/SKILL.md:18`, not ruled.
+
+</pre>
+</section>
+<section id="part-2">
+<h2>Part 2: Specification</h2>
+<pre>## Part 2: Specification
+
+1. `practices-cleanup` tells the agent to find the project's own clean task in the repository's instructions and task runner, honor its refusal, and never replace it with a blanket delete of what it guards; it names no product's task.
+2. `practices-cleanup`'s allow list holds only commands that transfer to any repository.
+3. `ops-observability-stack` routes one app's own debug or beta launch to that app's repository, and carries no product's loop.
+4. `ops-observability-stack`'s description loads for the shared OTLP stack and for proving a local debug or beta app emits to it, and names no product as its user.
+5. Every skill-authoring citation of the removed lines points at `89dc638e`, where the line still reads as quoted.
+
+Rule stated (item 1), with its transfer cases: "Use the project's own clean task; honor its refusal; never swap it for a blanket delete of what it guards." Case one: a Rust workspace whose `xtask clean` refuses while a release build holds `target/release`: the rule says wait, not `rm -rf target`. Holds. Case two, a bad choice it never names: deleting a Gradle `build/` folder by hand after `./gradlew clean` failed on a lock. Rejected. Passes.
+
+</pre>
+</section>
+<section id="part-3">
+<h2>Part 3: Skill design</h2>
+<pre>## Part 3: Skill design
+
+### Runs
+
+| Run | Target | Change |
+| --- | --- | --- |
+| R1 | `sunstack-dev/practices-cleanup` | `:30` keeps the generic route, drops the AgentStudio and Router sentences, and keeps the refusal lesson in general words; `:40` row removed. |
+| R2 | `sunstack-dev/ops-observability-stack` | `:17` becomes a generic branch to the app's own repository; `references/agentstudio-loop.md` deleted; description rewritten without product names. |
+| R3 | skill-authoring citations | each `path:line` citation of the removed lines gets "(at `89dc638e`, before its fix)"; `descriptions-and-invocation.md:106` records the owner's ruling. |
+
+### Loss check: `agentstudio-loop.md` against AgentStudio `origin/main` `f74d6acc`
+
+| Instruction in the loop | Owned by |
+| --- | --- |
+| AgentStudio is a producer; no Compose, Victoria lifecycle or query cookbooks | generic Separation Rule, `ops-observability-stack/SKILL.md:8,39-47` |
+| start the stack with `observability-stack up` / `status` | generic Operating Model, `SKILL.md:29-33`; AgentStudio `.mise.toml:896-910` (`observability:up` and siblings call the ai-tools helper) |
+| `mise run run-debug-observability`; build, fail on an unhealthy collector, OTLP endpoint and protocol, backend, full trace tags, write `tmp/debug-observability/latest-observability.env` | AgentStudio `.mise.toml:794`; `scripts/run-debug-observability.sh:1023,1108-1109,1227-1237,1328-1330`; `.agents/skills/verify-agentstudio/references/debug-launch.md:28-41` |
+| don't start the stack inside the debug launcher | the launcher calls no stack `up`; `debug-launch.md:18-20` ("stack startup are separate grants") |
+| `mise run run-beta-observability`: newest local bundle, same env, `tmp/beta-observability/latest-observability.env`, strict exit on an unhealthy collector, ordinary beta fail-open | AgentStudio `.mise.toml:786`; `scripts/run-beta-observability.sh:64-74,249,376-377`; generic fail-open, `SKILL.md:35` |
+| verify a fresh run: state file, marker-scoped Victoria queries, canaries absent, no stale proof | AgentStudio `docs/architecture/observability/observability_and_traceability.md:197-203,250`; generic guardrails, `SKILL.md:23,56` |
+| native UI by PID, never by app name | AgentStudio `docs/guides/agent_resources.md:186-190` |
+
+The loop's "stay attached" and fixed `127.0.0.1:4318` are older than AgentStudio's current launcher (`--detach`; the endpoint read from the stack helper); AgentStudio's own text is the newer truth. **Nothing is lost.** `practices-cleanup`'s AgentStudio sentence is owned by AgentStudio `.mise.toml:573` and `docs/guides/agent_resources.md:180`.
+
+### Triggers
+
+`ops-observability-stack`, model-invocable, description changes from "Use when starting, checking, using, debugging, or verifying the shared local OpenTelemetry and Victoria stack for AgentStudio, Agent VM, OpenClaw, beta apps, debug apps, or any repo that emits OTLP locally." to "Use when starting, checking, using, debugging, or verifying the shared local OpenTelemetry and Victoria stack, or proving that a local debug or beta app emits OTLP to it." `practices-cleanup`'s description is unchanged.
+
+### Decisions
+
+| # | Default taken | Rationale |
+| --- | --- | --- |
+| D1 | The Router sentence in `practices-cleanup:30` goes too. | It fails the deletion test: the generic route already sends the agent to the repository's AGENTS.md. |
+| D2 | The removed `:17` branch is replaced by a generic one. | The description still promises debug and beta apps, so the spine must handle them; the app's repository owns the launcher. |
+| D3 | Citations get "(at `89dc638e`, before its fix)" in prose; quoted report lines inside fenced examples stay as quoted. | The Lead's decision; a fenced report line is a quotation of a past run. |
+| D4 | `descriptions-and-invocation.md:106`'s adjudication records the owner's ruling in place of "for the reader to decide". | The owner ruled it (U16 row 11); the old adjudication now contradicts the ruling. |
+| D5 | Versions: sunstack-dev 2.107.1, skill-authoring 0.12.1. | Patch bumps for text changes. |
+| D6 | Design review and implementation review are the Lead's to commission after the files. | The commission orders skill-design → skill-creation, then the Lead commissions `skill-review`. |
+
+### Run status
+
+| Run | Status |
+| --- | --- |
+| R1–R3 | implemented, 7 Nov 23:53 EST (the branch diff from `89dc638e`) |
+
+</pre>
+</section>
+<section id="part-4">
+<h2>Part 4: Skill verification</h2>
+<pre>## Part 4: Skill verification
+
+- **Routes:** each change is a review check (`skill-review` placement-and-calls and transfer); the citation pins are mechanical (each pinned `path:line` reads as quoted at `89dc638e`, checked with `git show`).
+- **Proof plan:** `pnpm --dir tests/skills test` and `typecheck`; `claude plugin validate .`; sunstack 0.9.0 `lint --check`; a self-check `lint --report` on the changed skills; the phase-composition map regenerated and re-embedded; `rg` showing no `agentstudio-loop`, `clean-artifacts` or `$agentstudio_worktree` left in either skill; `git show 89dc638e:&lt;path&gt;` at each pinned line.
+- **Trigger trial (changed description):** true prompt "Is the local Victoria stack up? My debug build's traces aren't showing." Near miss "Add an OpenTelemetry span around this function in our Go service." Planned, not run.
+- **Structural proof, 7 Nov 23:49–23:53 EST:** `pnpm --dir tests/skills test` 26 files, 223/223 passed, exit 0, on three consecutive runs; the first run had one failure in `active-rulebook.test.ts` ("ordinary native lint has three mechanical rules and makes no model requests"), which passed alone and on every rerun, its message not captured; that test lints a pinned `role-operator` file and reads none of the changed files. `typecheck` exit 0. `claude plugin validate .` passed. sunstack 0.9.0 `lint --check` exit 0, three mechanical rules. Self-check `lint --report` over the eight changed skill folders: clean, 24 results, 0 requests, 0 findings. `rg`: no `agentstudio-loop`, `clean-artifacts`, `$agentstudio_worktree` or AgentStudio left in either `SKILL.md`; the pinned lines read as quoted at `89dc638e` (`git show`).
+- **Unverified:** whether agents now route to the product's repository (no behavior run); the description's trial; the cause of the one intermittent test failure.
+</pre>
+</section>
+</body>
+</html>

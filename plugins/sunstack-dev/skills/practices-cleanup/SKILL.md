@@ -27,7 +27,7 @@ Don't clean after every proof. Cleaning `target/` after each proof once forced a
 
 ## Prefer the project's own clean task
 
-Look for a cleanup policy in the repository's AGENTS.md and task runner first; a project task knows its own locks and what to keep. AgentStudio's `mise -C "$agentstudio_worktree" run clean-artifacts` refuses while a build holds the slot, keeps `.build-ci` and vendor output, and also removes the local `AgentStudio.app`; honor a refusal, and never swap it for a blanket `.build-*` delete. Router's AGENTS.md sets its Cargo policy.
+Look for a cleanup policy in the repository's AGENTS.md and task runner first; a project task knows its own locks and what to keep. When it refuses, for example because a build holds a lock, honor the refusal, and never swap the task for a blanket delete of what it guards.
 
 ## The allow list
 
@@ -37,7 +37,6 @@ These run without asking once the four checks hold. Each variable is an exact ab
 |---|---|
 | `du -sh "$owned_target" "$owned_build" "$owned_task_temp"` and `df -h "$repo"` | Nothing; read-only. |
 | `cargo clean --manifest-path "$repo/Cargo.toml" --workspace --profile dev --target-dir "$owned_target" --dry-run`, then the same command without `--dry-run` | No open executable from that target, and a preview that removes only what you meant. |
-| `mise -C "$agentstudio_worktree" run clean-artifacts` | The app and debug server it built are not running or needed. |
 | `rm -f -- "$owned_log"` | Its writer closed; no credentials inside. |
 | `rm -rf -- "$owned_task_temp"` | A folder this agent created under `/private/tmp` or `$TMPDIR`, with every file in it this task's. |
 | `rm -rf -- "$owned_output"` | A generated `node_modules`, `dist`, test-results or experiment build folder that its command and lockfile recreate. |

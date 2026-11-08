@@ -165,7 +165,7 @@ Bad:  product_material = "does this section show concrete material that belongs 
 
 Each bar is a Noul's P(yes): ≥ .7 is yes, ≤ .3 is no, both ends inclusive, and between is the route drawn. Those are starting bars, set on the development cases and recorded beside them, not defaults.
 
-On `ops-observability-stack/SKILL.md:17`, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.", the section shows AgentStudio's own loop through the loaded file's opening, and nothing labels it an example. The walk reads yes, then no, then no, and ends in a `warn` nudge at line 17: "this section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository".
+On `ops-observability-stack/SKILL.md:17` (at `89dc638e`, before its fix), "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.", the section shows AgentStudio's own loop through the loaded file's opening, and nothing labels it an example. The walk reads yes, then no, then no, and ends in a `warn` nudge at line 17: "this section shows one product's own material; read the line and the loaded file, then decide whether it belongs in that product's repository".
 
 What the tree keeps, and why:
 
