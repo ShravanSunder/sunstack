@@ -177,7 +177,7 @@
             "finding": "A call does not name when it is invoked; inspect its caller contract and loaded procedure, then make that obligation explicit.",
             "at": "line"
           },
-          "uncertain": "uncertain"
+          "uncertain": "destination_after_unknown"
         },
         "destination_named": {
           "ask": "destination_named",
@@ -188,7 +188,7 @@
             "finding": "A call does not name which destination to open; inspect its caller contract and loaded procedure, then make that obligation explicit.",
             "at": "line"
           },
-          "uncertain": "uncertain"
+          "uncertain": "work_after_unknown"
         },
         "work_named": {
           "ask": "work_named",
@@ -199,13 +199,46 @@
             "finding": "A call does not name what work to perform there; inspect its caller contract and loaded procedure, then make that obligation explicit.",
             "at": "line"
           },
-          "uncertain": "uncertain"
+          "uncertain": "result_after_unknown"
         },
         "result_named": {
           "ask": "result_named",
           "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "no_at_or_below": 0.2,
           "yes": "pass",
+          "no": {
+            "finding": "A call does not name what result to bring back; inspect its caller contract and loaded procedure, then make that obligation explicit.",
+            "at": "line"
+          },
+          "uncertain": "uncertain"
+        },
+        "destination_after_unknown": {
+          "ask": "destination_named",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "work_after_unknown",
+          "no": {
+            "finding": "A call does not name which destination to open; inspect its caller contract and loaded procedure, then make that obligation explicit.",
+            "at": "line"
+          },
+          "uncertain": "work_after_unknown"
+        },
+        "work_after_unknown": {
+          "ask": "work_named",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "result_after_unknown",
+          "no": {
+            "finding": "A call does not name what work to perform there; inspect its caller contract and loaded procedure, then make that obligation explicit.",
+            "at": "line"
+          },
+          "uncertain": "result_after_unknown"
+        },
+        "result_after_unknown": {
+          "ask": "result_named",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.2,
+          "yes": "uncertain",
           "no": {
             "finding": "A call does not name what result to bring back; inspect its caller contract and loaded procedure, then make that obligation explicit.",
             "at": "line"

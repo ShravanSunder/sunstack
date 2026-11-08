@@ -384,8 +384,94 @@
       "for": "load-call.names-when-where-and-result",
       "step": "result_named",
       "bound": "no_at_or_below",
+      "value": 0.2,
+      "set_from": [
+        "calls-and-placement-k001-case-001",
+        "calls-and-placement-k001-case-002",
+        "calls-and-placement-k001-case-003",
+        "calls-and-placement-k001-case-004",
+        "calls-and-placement-k001-case-005",
+        "calls-and-placement-k001-case-006",
+        "calls-and-placement-k001-case-007",
+        "calls-and-placement-k001-case-008",
+        "calls-and-placement-k001-case-009",
+        "calls-and-placement-k001-case-010",
+        "r02-current-watch-return",
+        "r02-mixed-loop-return",
+        "r02-shared-return-state",
+        "r02-shared-return-questions",
+        "r02-shared-return-primitives",
+        "r02-result-without-return-token",
+        "r02-wrapped-call",
+        "r02-template-mention",
+        "r02-quoted-call",
+        "r02-watch-fix-before",
+        "r02-watch-fix-after"
+      ]
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "destination_after_unknown",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "destination_after_unknown",
+      "bound": "no_at_or_below",
       "value": 0.3,
       "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "work_after_unknown",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "work_after_unknown",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "result_after_unknown",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "result_after_unknown",
+      "bound": "no_at_or_below",
+      "value": 0.2,
+      "set_from": [
+        "calls-and-placement-k001-case-001",
+        "calls-and-placement-k001-case-002",
+        "calls-and-placement-k001-case-003",
+        "calls-and-placement-k001-case-004",
+        "calls-and-placement-k001-case-005",
+        "calls-and-placement-k001-case-006",
+        "calls-and-placement-k001-case-007",
+        "calls-and-placement-k001-case-008",
+        "calls-and-placement-k001-case-009",
+        "calls-and-placement-k001-case-010",
+        "r02-current-watch-return",
+        "r02-mixed-loop-return",
+        "r02-shared-return-state",
+        "r02-shared-return-questions",
+        "r02-shared-return-primitives",
+        "r02-result-without-return-token",
+        "r02-wrapped-call",
+        "r02-template-mention",
+        "r02-quoted-call",
+        "r02-watch-fix-before",
+        "r02-watch-fix-after"
+      ]
     }
   ]
 }
