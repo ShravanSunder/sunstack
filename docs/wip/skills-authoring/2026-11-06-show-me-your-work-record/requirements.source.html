@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Requirements</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Show me your work: the redesign</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+    <a href="skill-design.html">Skill design</a>
+    <a href="skill-verification.html">Skill verification</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+
+<h1>Requirements</h1>
+
+<p>Whose need and outcome are authorized: the capability map first, then each part in its tab.</p>
+
+<ex-markdown id="req-entry" label="Requirements: capabilities" src="./requirements/index.md"></ex-markdown>
+
+<ex-tabs label="Requirements chunks" data-width="canvas">
+  <section id="tab-show-me" label="What you see" icon="user">
+    <ex-markdown id="req-show-me" label="What the owner sees" src="./requirements/show-me.md"></ex-markdown>
+  </section>
+  <section id="tab-log" label="The log" icon="database">
+    <ex-markdown id="req-log" label="The log" src="./requirements/the-log.md"></ex-markdown>
+  </section>
+  <section id="tab-why" label="Why, and the boundary" icon="book-open">
+    <ex-markdown id="req-why" label="Why this changes, and its boundary" src="./requirements/why-and-boundary.md"></ex-markdown>
+    <details>
+      <summary>Evidence: your words in full, and the record counts each need rests on</summary>
+      <ex-markdown id="req-evidence" label="Evidence" src="./requirements/evidence.md"></ex-markdown>
+    </details>
+  </section>
+</ex-tabs>
+
+</ex-document>
+</body>
+</html>

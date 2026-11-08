@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification Design</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Show me your work: the redesign</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+    <a href="skill-design.html">Skill design</a>
+    <a href="skill-verification.html">Skill verification</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+
+<h1>Verification Design</h1>
+
+<p>How each requirement will be shown to hold on the next real piece of work, and what stays unproven. A plan: nothing in it has been observed.</p>
+
+<h2 id="proven-by">How each of your requirements will be shown</h2>
+
+<ex-grid cols="2">
+<ex-card title="Decisions" tone="note" icon="user">
+<p>On your page for the next run, every decision can be opened. Yours and plan changes sit in one column, agents' small calls in the other, and a decision with no authority is flagged.</p>
+<p><small>Unproven: whether you agree with each placement, until you read it.</small></p>
+</ex-card>
+<ex-card title="Assumptions" tone="note" icon="user">
+<p>Each open assumption shows with what depends on it. One only you can settle reaches you before work that depends on it goes ahead.</p>
+<p><small>Unproven: if no such question comes up in the run.</small></p>
+</ex-card>
+<ex-card title="Shortcuts" tone="note" icon="path">
+<p>The agent that took a shortcut logged it when it took it. When nothing covered it, your page marks it for your look in its story and names that story in the Map under what needs you.</p>
+<p><small>Unproven: shortcuts nobody recognized as one, unless an audit or a review finds them.</small></p>
+</ex-card>
+<ex-card title="Verification" tone="note" icon="test-tube">
+<p>The agent that ran each check logged it. A check someone else logged shows who ran it and counts as missed. Your page shows what was checked, the result, what wasn't covered, and whether an acceptance is in the log.</p>
+<p><small>Unproven: sign-offs given outside the log.</small></p>
+</ex-card>
+<ex-card title="What was missed" tone="note" icon="bell">
+<p>Your page lists each missed item with who found it. Every agent's stretch shows as audited or "not audited", never as "nothing missed" when unaudited.</p>
+<p><small>Unproven: what neither an agent's own audit nor a review notices.</small></p>
+</ex-card>
+<ex-card title="What's going on" tone="note" icon="path">
+<p>Each workstream that work has started on shows under its plain name, with what's done, what's next, and the checks behind it.</p>
+<p><small>Unproven: work with no written plan, where the workstreams come only from the jobs I hand out.</small></p>
+</ex-card>
+<ex-card title="What needs you" tone="note" icon="user">
+<p>Your page is the design you approved: your four sections in order, headers that stay on screen, and each story as a headline, three rows, one picture or table, the rest folded, with routine stories folded at the end of their section.</p>
+<p><small>Unproven: keyboard and screen-reader use.</small></p>
+</ex-card>
+<ex-card title="The Map" tone="note" icon="git-branch">
+<p>The Map opens from the right as one tree, and every row takes you to its story. Nothing appears twice in full, and I build the next page from the reference alone.</p>
+<p><small>Unproven: a fresh agent's build, which comes later.</small></p>
+</ex-card>
+<ex-card title="Plain words" tone="note" icon="book-open">
+<p>Every story line reads in your everyday words; none needs you to have watched the agents work.</p>
+<p><small>Unproven: words only you can judge, until you read the page.</small></p>
+</ex-card>
+<ex-card title="Every agent logs as it goes" tone="note" icon="users">
+<p>On the next run every helper logs its own work where its job says, as it goes, and I check its rows when the work comes back.</p>
+<p><small>Unproven: helpers that can't reach Router; Cursor.</small></p>
+</ex-card>
+<ex-card title="I interpret and own it" tone="note" icon="book-open">
+<p>Every line of every story on your page is said by a row the story cites, and every row it cites is in its folded record, with who wrote it.</p>
+<p><small>Unproven: whether my reading is yours, until you read it.</small></p>
+</ex-card>
+<ex-card title="Logging is easy and cheap" tone="note" icon="terminal">
+<p>Helpers run two given steps, adding only the kind, who and the words. A test retry with the same ids leaves one row, and the test shows that new ids would have written two.</p>
+<p><small>Unproven: the token cost per row.</small></p>
+</ex-card>
+<ex-card title="A peer Lead logs in its own record" tone="note" icon="users">
+<p>A peer's rows stay in its own log, and your page says where that is.</p>
+<p><small>Unproven: if no peer takes part in the run.</small></p>
+</ex-card>
+<ex-card title="All together" tone="note" icon="user">
+<p>After the run, you read your page and say what was decided, assumed, cut short, verified and missed, and it matches the log.</p>
+</ex-card>
+</ex-grid>
+
+<h2 id="full-document">The full Verification Design</h2>
+
+<details>
+<summary>Open the full document: shared observations, one row per requirement, and coverage</summary>
+<ex-markdown id="verification-design" label="Verification Design" src="./verification-design.md"></ex-markdown>
+</details>
+
+</ex-document>
+</body>
+</html>

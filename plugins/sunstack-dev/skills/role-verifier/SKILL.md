@@ -33,7 +33,8 @@ A row marked temporary runs as a probe, which `practices-verification` keeps in 
 
 Load each practice below by name and each reference by its path; a practice you already loaded in this session counts.
 
-- IF posting is authorized, load `practices-collaboration` and return the supplied work root or the exact no-home gap; then load `practices-show-me-your-work` and return the resumed trace where your observations are recorded. Without posting authority, return your observations to the commissioner.
+- IF the packet's `workLog` is a work trail, load `practices-show-me-your-work` and return the log you write to and the position your stretch starts at. Log your own rows there as you observe (each check you ran, each assumption and shortcut), with the packet's two-step write, whether or not you may post.
+- IF posting is authorized, load `practices-collaboration` and return the supplied work root or the exact no-home gap. Without posting authority, return your observations to the commissioner.
 - MUST load `references/working-with-lead.md` and return the commission gaps you sent back before you began, or none, and what your report to the Lead must carry for this job.
 - MUST load `references/working-with-implementer.md` and return the target you are observing as it was declared, or the setup you still wait for, and for each observation and test finding you sent your Implementer, whose action it calls for.
 - IF your `work.mode` is `verification-skill`, load `practices-verification-maintenance` and return its outcome, the files it changed inside your `skillWritePaths`, each journey's coverage, and the product regressions and disputed expectations it found. Its live pass loads `practices-verification`, and that run is the verification for this job.

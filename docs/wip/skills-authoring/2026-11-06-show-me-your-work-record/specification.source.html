@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Specification</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content">
+  <nav slot="pages" aria-label="Pages">
+    <a href="index.html">Show me your work: the redesign</a>
+    <a href="requirements.html">Requirements</a>
+    <a href="specification.html">Specification</a>
+    <a href="program-design.html">Program Design</a>
+    <a href="verification-design.html">Verification Design</a>
+    <a href="skill-design.html">Skill design</a>
+    <a href="skill-verification.html">Skill verification</a>
+  </nav>
+</ex-nav>
+<ex-document id="content">
+
+<h1>Specification</h1>
+
+<p>What must be observably true, and what decides pass or fail: the page you approved first, then the obligations and the entities they're written over.</p>
+
+<ex-tabs label="Specification" data-width="canvas">
+<section id="tab-approved" label="Your page, as approved" icon="globe">
+
+<h2 id="approved">Your page, as you approved it</h2>
+
+<p>This is the page the obligations describe. You approved it on 7 Nov ("this is the deisgn i wnat"): page O, with your four sections and their stories, and the Map as one tree in a panel that opens from the right. R19–R25 are written against it.</p>
+
+<figure>
+<img src="./assets/approved-page-map-open.png" alt="The approved page with the Map open on the right: a tree with Needs you, Where the work is (the skill, this page, design documents, each story with its state), then What's done / what's next, What changed and why, and What was verified, each with its stories. On the left, the For you to decide section with one story: a headline, Happened, For you, Next, a small table, More, and its record folded.">
+<figcaption>With the Map open: what needs you, where the work is, then the other sections and their stories; every row opens its story. The panel's header reads "Outline" in this capture. You renamed it the Map, and the real page uses that name.</figcaption>
+</figure>
+
+<figure>
+<img src="./assets/approved-page-map-closed.png" alt="The approved page with the Map closed: the For you to decide section, then What's done / what's next with four stories, each a title with its subject and time, a bold headline, the rows Happened, For you and Next, one table or diagram, and The record folded.">
+<figcaption>With the Map closed: For you to decide, then What's done / what's next. Each story is a headline, then Happened, For you and Next, at most one table or picture, More, and its record folded. Each section's header keeps its count and its expand/collapse control on the right.</figcaption>
+</figure>
+
+<p><small>The approved file is <code>p1b-approved-2026-11-07.html</code> in this work's owner pages in memory-logs, sha256 <code>ece32b0cdb2a6fe4…</code>; these captures come from it at 1400 wide. Its stories are from this project's log through 7 Nov. On a phone, the Map panel covers the page and closes when you follow a row. There's no band of counts at the top and no chart of who wrote the log: what needs you is the Map's first branch and your first section, and whether rows came as the work happened comes from the audits.</small></p>
+
+</section>
+<section id="tab-obligations" label="Obligations" icon="shield-check">
+<ex-markdown id="spec-obligations" label="Obligations" src="./specification/obligations.md"></ex-markdown>
+</section>
+<section id="tab-entities" label="Entities" icon="database">
+<ex-markdown id="spec-entities" label="Entities" src="./specification/entities.md"></ex-markdown>
+</section>
+<section id="tab-standards" label="Standards the skill states" icon="book-open">
+<ex-markdown id="spec-standards" label="The standards the skill states" src="./specification/skill-standards.md"></ex-markdown>
+</section>
+</ex-tabs>
+
+</ex-document>
+</body>
+</html>
