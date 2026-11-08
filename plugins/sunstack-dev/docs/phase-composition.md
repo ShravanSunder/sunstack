@@ -22,7 +22,6 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
-| decision-model-review | 90 | `domain-decision-models`, `review-schema`, `state-and-evidence`, `questions`, `primitives-and-statistics`, `policy-and-composition`, `proof-and-claims`, `patterns-and-capability` | `nudge-and-receiver` | none | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
 | docs-maintain | 119 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
@@ -174,19 +173,6 @@ flowchart LR
 - Cites in its references: none
 - Returns: none
 
-### decision-model-review
-
-- Lines: 90
-- Always loads:
-  - domain: `domain-decision-models`
-  - own reference: `references/checks/review-schema.md`, `references/checks/state-and-evidence.md`, `references/checks/questions.md`, `references/checks/primitives-and-statistics.md`, `references/checks/policy-and-composition.md`, `references/checks/proof-and-claims.md`, `references/checks/patterns-and-capability.md`
-- Loads when a condition holds:
-  - own reference: `references/checks/nudge-and-receiver.md`
-- Named without a load call: `practices-manage-agents`, `implementation-review`
-- Cites in `SKILL.md`: none
-- Cites in its references: none
-- Returns: none
-
 ### discuss-clarify-mental-models
 
 - Lines: 162
@@ -274,8 +260,8 @@ flowchart LR
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/coordination-and-chunking.md`, `references/lanes/lane-schema.md`, `references/lanes/spec-compliance.md`, `references/lanes/chunk-reviewer.md`, `references/lanes/dispel.md`, `references/finding-and-reduction.md`
 - Loads when a condition holds:
-  - phase: `decision-model-review`
   - own reference: `references/lanes/proof-challenge.md`, `references/lanes/focused-reviewer.md`
+  - outside this plugin: `decision-model-review`
 - Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `references/reviewing-implementation.md`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-verify-before-accepting`, `principle-refine-mental-models`, `principle-justify-the-complexity`

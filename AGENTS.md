@@ -75,7 +75,9 @@ Skill work in this repo uses the `skill-authoring` plugin (`plugins/skill-author
 | Carry one skill change from design to release | `skill-authoring:skill-orchestrator` |
 | Design one skill change and write its design set before its files change | `skill-authoring:skill-design` |
 | Write one skill's files from its accepted design, or make a mechanical edit | `skill-authoring:skill-creation` |
-| Decide which of a skill's standards become checked `sunstack-rule` rules, mark them, and prove them | `skill-authoring:skill-rules` |
+| Decide which of a skill's standards become checked `sunstack-rule` rules, design each rule or filter from its cases, and prove it | `skill-authoring:skill-rules-authoring` |
+| Review one skill rule or filter independently before its development run or switch-on | `skill-authoring:skill-rules-review` |
+| Write rulebook files, run `sunstack lint`, read its reports and case runs | `skill-authoring:skill-rules-config` |
 | Independent review of a skill change's design set or skill files, with several reviewer agents | `skill-authoring:skill-review` |
 | Which skills to create, update, merge, or skip | `skill-authoring:skill-audit` |
 

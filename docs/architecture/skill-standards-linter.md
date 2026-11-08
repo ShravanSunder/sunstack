@@ -1,6 +1,6 @@
 # Skill standards and the linter
 
-A skill teaches an agent how to work. A checked rule evaluates selected text against one standard. A pressure experiment observes what an agent does. These use different evidence and support different claims. [domain-skill-crafting](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md) owns the skill text standards; [skill-rules](../../plugins/skill-authoring/skills/skill-rules/SKILL.md) owns choosing which become checks and how to read their results.
+A skill teaches an agent how to work. A checked rule evaluates selected text against one standard. A pressure experiment observes what an agent does. These use different evidence and support different claims. [domain-skill-crafting](../../plugins/skill-authoring/skills/domain-skill-crafting/SKILL.md) owns the skill text standards; [skill-rules-authoring](../../plugins/skill-authoring/skills/skill-rules-authoring/SKILL.md) owns choosing which become checks and designing and proving each one; [skill-rules-review](../../plugins/skill-authoring/skills/skill-rules-review/SKILL.md) reviews one independently; [skill-rules-config](../../plugins/skill-authoring/skills/skill-rules-config/SKILL.md) is the manual for the shipped engine's rulebook files, commands and reports.
 
 The reusable Rust engine, `sunstack` executable and npm distribution live in [Sunstack Tools](https://github.com/ShravanSunder/sunstack-tools). This repository owns the skill standards, evidence project, rule entries and labelled real cases. An engine defect belongs in Sunstack Tools; a bad evidence selector, question or severity belongs to its consumer.
 
@@ -71,6 +71,6 @@ the development and held-out observations. Receiving-agent behavior remains a
 separate pressure task.
 
 The runtime procedure belongs to
-[running-rules.md](../../plugins/skill-authoring/skills/skill-rules/references/running-rules.md).
+[running-rules.md](../../plugins/skill-authoring/skills/skill-rules-config/references/running-rules.md).
 Release proof and installed-cache refresh status belong in the
 [changelog](../changelog/README.md).

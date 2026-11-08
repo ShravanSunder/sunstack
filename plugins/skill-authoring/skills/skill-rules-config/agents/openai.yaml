@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skills: Rules config"
+  short_description: "Write a sunstack rulebook and run lint"
+  default_prompt: "Use $skill-rules-config to write or repair this rulebook's entries and config, run sunstack lint, and read its report."

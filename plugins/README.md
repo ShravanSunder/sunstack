@@ -89,7 +89,11 @@ Skill authoring for any repository, standalone from the workflow plugin. Provide
 - **skill-design** skill -- designs one skill change and writes its design set before its files change
 - **skill-creation** skill -- writes one skill's files from its accepted design, or makes a mechanical edit
 - **domain-skill-crafting** skill -- hidden; holds every standard a skill's text must meet; loaded by the other skills
-- **skill-rules** skill -- decides which skill standards become checked rules, defines their evidence and decision models, and proves them with config checks and labelled cases
+- **skill-rules-authoring** skill -- decides which skill standards become checked rules, designs each rule or filter from its cases, desk-checks the owner's rulings before any run, and proves it on or held
+- **skill-rules-review** skill -- independent review of one skill rule or filter, on the owner's rulings as the model receives them
+- **skill-rules-config** skill -- the shipped sunstack lint manual: rulebook files, evidence kinds, lint runs, reports and case runs
+- **domain-decision-models** skill -- hidden; the standards for any decision model, loaded by the rules and review skills
+- **decision-model-review** skill -- independent review of any decision model
 - **skill-review** skill -- independent review of a skill change's design set or skill files by several reviewer agents
 - **skill-audit** skill -- audits current skills, session evidence, and upstream inspirations; sends each flagged skill to skill-review and uses its verdict and accepted findings in create/update/merge/skip decisions
 
