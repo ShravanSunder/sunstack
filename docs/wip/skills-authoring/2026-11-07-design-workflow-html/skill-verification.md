@@ -23,7 +23,7 @@ The standards in the specification govern design documents an agent writes, not 
 ## Proof plan
 
 - **Basis and posture:** user-directed intent, so the change is drafted from approved intent; until a real design is written under it, the claim is "drafted from user intent; behavior not yet evaluated".
-- **Before run 1:** the admission check: the released guide at the binding documents the browsers, the record contract and preparation, and O13b–d are settled or named as gaps.
+- **Before run 1:** the admission check: the released guide at the binding documents the browsers, the record contract, the per-kind parts table and preparation with its write boundary and validate-before-write behaviour; O13b–d are confirmed or named as gaps.
 - **Per run:** static validation (the skills test suite, `claude plugin validate .`, the native lint on the changed skills), the Lead's assessment against this design set, then `skill-review`'s implementation stage.
 - **Behavior:** the next real design cycle written under the changed skills, read against S1–S5, with preparation and the checker run on its pages; fresh-agent pressure runs are a later step, as the owner has set for skills work.
 
@@ -34,7 +34,7 @@ Not applicable: no description changes.
 ## What stays unverified
 
 - The release itself: the browsers, record contract and preparation are not yet public; their names, fields and checks may differ from the lab's, and the runs teach the released ones.
-- Whether a set with needs only prepares (O13b), whether facts with no record kind have a home beside the browser (O13c) and whether a body may hold a Markdown island (O13d), until the Demistify Lead answers.
+- That the release keeps what the Demistify Lead's draft contract accepted (O13b–d: a Requirements page with one need as the minimum, absent later pages and call stacks shown as not yet written, ordinary sections beside the browser, Markdown islands in bodies, a per-kind parts table) and preparation's write boundary (the security gate's required proof), until the admission check reads the released guide.
 - Agent authoring ease beyond the bounded probe: one fresh Luna wrote a 20-record set that passed after one guided correction (its first attempt had 8 duplicate IDs); unaided authoring and authoring under the skills are not observed.
 - Agent behavior under the changed skills, until the next real design is written with them.
 - Checks of the Markdown inside islands: sunstack's rule engine doesn't read islands in HTML yet (a dependency owned in sunstack-tools).

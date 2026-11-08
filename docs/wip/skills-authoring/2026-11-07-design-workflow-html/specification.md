@@ -1,12 +1,12 @@
 # Specification: the four-document design workflow as an HTML system
 
-Draft, 7 Nov 2026; revised that night around the owner's lab components. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). O8 waits in part on the owner's question 1 (how agents read and check a design); each states the default this draft takes. O13 names what the workflow needs from the Demistify Lead's release; three of its items are asks to that Lead, not yet in its contract.
+Draft, 7 Nov 2026; revised that night around the owner's lab components. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). O8 waits in part on the owner's question 1 (how agents read and check a design); each states the default this draft takes. O13 names what the workflow needs from the Demistify Lead's release; that Lead has taken its asks into its draft public contract, not yet shipped.
 
 ## What the skills must do
 
 ### Where the design lives (S1)
 
-- **O1.** Each of the four documents' text lives on its own page: in sections, and in the bodies of its records, each at a stable ID; Markdown islands carry a section or body where Markdown carries the text best (pending O13d).
+- **O1.** Each of the four documents' text lives on its own page: in sections, and in the bodies of its records, each at a stable ID; Markdown islands carry a section or body where Markdown carries the text best (in a body, per O13d).
 - **O2.** Each section and record carries a stable ID that pages, browsers and agents use to reach it; record IDs follow `design-documents.md`'s identities (a need is its `U`, an obligation its `R`).
 - **O3.** Each fact has one home, its section or record body on its document's page; every other mention links to it by ID instead of restating it, and the prepared collection is output, never edited.
 - **O4.** No design document is a Markdown file, and no page drops a whole document in as one block.
@@ -14,13 +14,13 @@ Draft, 7 Nov 2026; revised that night around the owner's lab components. What th
 ### How the owner reads it (S2)
 
 - **O5.** A design set uses the owner's page set: one page per document and a call-path page, each document page carrying the requirement browser and the call-path page the call-stack browser, in the released form of the layout he decided (Q072, Q073); the skills add no layout of their own.
-- **O5a.** Each phase writes the records its document owns: Requirements one need per `U` (its title, capability, body and summary); the Specification one specification per `R`, naming its needs; the Program Design one design part per part, naming the obligations it serves, and the call paths as call frames and stacks, each frame naming the need it serves; the Verification Design one check per verification row, naming the obligations it proves. A fact with no record kind (entities, a capability's purpose, the trace and binding tables, the Specification's other identifiers) is a section at a stable ID on its document's page (pending O13c).
+- **O5a.** Each phase writes the records its document owns: Requirements one need per `U` (its title, capability, body and summary); the Specification one specification per `R`, naming its needs; the Program Design one design part per part, naming the obligations it serves, and the call paths as call stacks and frames, each stack naming its need and its frames, and a frame naming a need only when it directly serves one (a supporting or shared frame names none, and no attribution is invented); the Verification Design one check per verification row, naming the obligations it proves. A fact with no record kind (entities, a capability's purpose, the trace and binding tables, the Specification's other identifiers) is a section at a stable ID on its document's page. Each body marks the parts its record kind shows (such as a specification's rule), as the released guide's per-kind parts table names them, because a part left unmarked shows no compact view. Before the first need exists, the Requirements page is ordinary HTML (the capability list and the owner's confirmation choice) with no browser and no record block; both come with the first need.
 - **O5b.** A check written at design time carries no result; the browser shows it as not run, and no result is written until an observation exists.
 
 ### How a need links to the rest (S3)
 
-- **O6.** Each record names the records it serves, once, in its own record; every reverse view (a need's obligations, design parts and checks, "also serves") is derived by preparation and the browsers and never written by hand. Settled by the owner: his 31 Oct words ("a standardize link forwrad here / and back in teh details") and his decided browser, which derives them this way.
-- **O6a.** The links grow with the documents: each phase writes only its own records' links; a need whose downstream document isn't written yet shows that document as not yet written, with no invented record; the design is complete only when every need is served in each document and every record's links resolve, which the design review checks (pending O13b).
+- **O6.** Each record names the records it serves, once, in its own record; every reverse view (a need's obligations, design parts and checks, "also serves") is derived by preparation and the browsers and never written by hand. Settled by the owner: his 31 Oct words ("a standardize link forwrad here" … "and back in teh details") and his decided browser, which derives them this way.
+- **O6a.** The links grow with the documents: each phase writes only its own records' links; a need whose downstream document isn't written yet shows that document as not yet written, with no invented record; the design is complete only when every need is served in each document and every record's links resolve, which the design review checks (per O13b).
 
 ### Pages, not one page (S4)
 
@@ -44,7 +44,7 @@ Draft, 7 Nov 2026; revised that night around the owner's lab components. What th
 
 ### What the workflow needs from the release (S2, S3, S6)
 
-- **O13.** The Demistify Lead's integration contract is the seam. The workflow needs from that release: (a) the browsers, the record contract and preparation as public, documented parts, as the contract plans; (b) a set with needs only, or needs and obligations only, prepares and shows each unwritten document as not yet written, and a complete set with no call path prepares too, because Program Design writes call paths only where a runtime path exists (today preparation refuses a set with no call stack); (c) a home for facts with no record kind beside the browser on a document page; (d) a record body that may hold a Markdown island; (e) the need and view addresses kept stable, as the contract already keeps them. Items b, c and d are asks to the Demistify Lead.
+- **O13.** The Demistify Lead's integration contract is the seam. The workflow needs from that release: (a) the browsers, the record contract and preparation as public, documented parts, as the contract plans; (b) a set with needs only, or needs and obligations only, prepares and shows each unwritten document as not yet written, and a complete set with no call path prepares too, because Program Design writes call paths only where a runtime path exists (today preparation refuses a set with no call stack); (c) a home for facts with no record kind beside the browser on a document page; (d) a record body that may hold a Markdown island; (e) the need and view addresses kept stable, as the contract already keeps them. Items b, c and d are in the Demistify Lead's draft public contract (its draft four-document design, 7 Nov), with the minimum a Requirements page and one need; not shipped. The admission check confirms each in the release; one missing there is a named gap the runs teach around.
 
 ### What stays
 
