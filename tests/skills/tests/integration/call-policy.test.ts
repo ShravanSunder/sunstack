@@ -68,7 +68,7 @@ afterEach(cleanupRulebookFixtures);
 
 for (const control of controls) {
   test(control.label, async (): Promise<void> => {
-    // Arrange: real source and the held rule; only the assessment transport is scripted locally.
+    // Arrange: real source and the frozen rule; only the assessment transport is scripted locally.
     const root = createRulebookFixture();
     const file = "plugins/sunstack-dev/skills/debug-investigation/SKILL.md";
     const revision = "9f7b2e283e95dc849f4e271a5287e3ae21959ca9";
@@ -87,7 +87,7 @@ for (const control of controls) {
         config["rulebook"] = [
           {
             markdown: "../references/calls-and-placement.md",
-            rules: "held/call-completeness.rules.json",
+            rules: "call-completeness.rules.json",
           },
         ];
         config["decision_model"] = { model: "typesafe/scripted", endpoint };

@@ -123,25 +123,27 @@ provider calls.
 contents. Human output gives short file:line summaries and result IDs. Open one
 result with `sunstack lint show <file> <id>`; no second model run is needed.
 
-The active rulebook has only three mechanical description checks, with no
-filter or judged rule. The kind filter and K002 are retained unchanged under
-`rules/held/`; its README records the failed development evidence and what
-they lack. No held-out run was made; the old-rulebook quality comparison is deferred. Held entries and their original marker/standard
-locations live under the rulebook's `held/` directory, outside its configured
-pairs. Entirely held pairs retain their original marked standard sentences, markers and rule JSON. Teaching elsewhere in those Markdown files can evolve independently.
+The active rulebook has three mechanical description checks and the asking R02
+`load-call.names-when-where-and-result`, using full caller evidence and the evaluated
+`typesafe/jev-1.14-20261014` model. R02 moved byte-for-byte from its frozen held entry
+after the Lead accepted its held-out counts: 3 warnings right, 4 quiet right,
+4 quiet unsure, zero false warnings or misses. Ordinary lint needs an authorized
+credential; `--all --prepare <file>` builds its requests without dispatch.
 
-The native case file is `evals/cases/skill-rules.cases.json`. It holds Git revisions, exact piece ranges
-or declared-read hashes, labels with their origins, separate development and
-`held_out` sets, and recorded bars. `evals/cases/case-provenance.json` retains
-the original labels, U16 rulings, excluded rows and the fix-history search.
-Rule and filter cases share one file because native bar assessment checks every
-configured tree and resolves each bar's development-case IDs within that file.
-The native `sunstack lint cases <file> --set development` command evaluates
-development cases for a configured candidate. The current mechanical-only config
-does not declare these held case subjects. A corrected candidate needs new
-development evidence and a freeze before the Lead runs its held-out set once
-and compares it with the old rulebook on the same pinned model version. No case
-result changes ordinary lint.
+The kind filter and K002 remain unchanged under `rules/held/`, outside active
+pairs. Its README retains their development history and limitations. Original
+unconfigured entries keep their marked standards and JSON, even where a new
+active entry now checks the same standard. Teaching elsewhere can evolve independently.
+
+R02's development-only file is `evals/cases/call-completeness.cases.json`; its
+provenance records the original blind labels and both calibration run receipts.
+Its 21 cases are reused by two development runs, not 42 independent examples.
+The separate held-out source and labels remain outside the author's inputs.
+The legacy `evals/cases/skill-rules.cases.json` and `case-provenance.json` retain
+other held subjects and their splits; they are not R02 development inputs.
+The native `sunstack lint cases <file> --set development` command scores declared
+subjects through the configured rulebook; `--prepare <file>` sends nothing.
+No case result automatically changes ordinary lint selection.
 Unlabelled or disputed cases stay listed outside the scored inputs; they never
 receive guessed expected outcomes.
 

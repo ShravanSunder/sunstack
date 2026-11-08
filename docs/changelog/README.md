@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-08 Activate call completeness](2026-11-08-call-completeness-activation.md)
 - [2026-11-08 Call evidence and held R02 candidate](2026-11-08-call-completeness-candidate.md)
 - [2026-11-07 Rules skills: standalone, split and corrected](2026-11-07-rules-skills-standalone.md)
 - [2026-11-06 Show me your work: every agent logs its own work, and the owner's page](2026-11-06-show-me-your-work-log-and-page.md)

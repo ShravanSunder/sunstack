@@ -18,6 +18,14 @@ Skills for authoring skills in any repository: design and write them, turn their
 
 The plugin stands alone: no skill in it loads or names a skill from another plugin. Its checked rules run through the `sunstack` engine, a separate command-line tool. Install it beside any other plugin and invoke both when you want them together; another plugin's code review may load `decision-model-review` from here.
 
+## Checked rules
+
+The active rulebook has three mechanical description checks and R02 `load-call.names-when-where-and-result`. R02 checks whether each operative load or dispatch call names when to go, its destination, its work and what to bring back. It uses the complete matched paragraph and explicit enclosing caller contract, with separate questions and uncertain routes. The [frozen rule](skills/domain-skill-crafting/rules/call-completeness.rules.json) checks the [call standard](skills/domain-skill-crafting/references/calls-and-placement.md).
+
+R02 passed the Lead's held-out switch-on check: of 11 cases, all 3 warnings fired, 4 quiet cases were right and 4 quiet cases stayed unsure, with no false warnings or misses. Its `.6` element yes-cutoffs and `.2` result no-cutoff stay fixed on `typesafe/jev-1.14-20261014`. K002 and the kind filter remain held. A warning asks the receiver to inspect the caller and read-next places; it does not prove a repair or authorize the narrowest wording change. Receiving-agent observation remains separate proof.
+
+Use `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json` from the repository root. Ordinary lint now needs the authorized model credential route; `--check`, `--rules` and `--all --prepare <file>` send no model requests. The latter builds the exact requests for inspection.
+
 ## Proof
 
 The plugin ships no eval runner and no stored scenarios. `domain-skill-crafting`'s `references/proof-claims.md` sets which claim a piece of behavior evidence supports, how a fresh run must be read to count, and names the gap when there is none.

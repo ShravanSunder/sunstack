@@ -26,7 +26,7 @@ test("the held authored kind tree sends description and the complete first secti
       const filename = path.join(root, configRelative);
       const config = readJson(filename);
       // This disposable fixture restores the evaluated consumer so the held filter is used.
-      // The shipped config remains mechanical-only; preservation is checked separately.
+      // The shipped config excludes this filter and K002; preservation is checked separately.
       const evaluated = "437632d42610bdbe8365d4938e4098cd660b4f4a";
       installPinnedFile(root, evaluated, `${kitRelative}/general-skill.rules.json`);
       installPinnedFile(

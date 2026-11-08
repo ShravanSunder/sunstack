@@ -3,6 +3,10 @@
     {
       "markdown": "../references/descriptions-and-invocation.md",
       "rules": "descriptions-and-invocation.rules.json"
+    },
+    {
+      "markdown": "../references/calls-and-placement.md",
+      "rules": "call-completeness.rules.json"
     }
   ],
   "marker_prefix": "K",
@@ -112,7 +116,7 @@
     }
   },
   "decision_model": {
-    "model": "jev-latest"
+    "model": "typesafe/jev-1.14-20261014"
   },
   "limits": {
     "evidence_max_chars": 6000,
