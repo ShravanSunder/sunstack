@@ -1,44 +1,50 @@
 # Specification: the four-document design workflow as an HTML system
 
-Draft, 7 Nov 2026. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). Two obligations wait in part on the owner's answers on his decision page: O8 (how agents read and check a design) and what goes with O6's settled links; each states the default this draft takes and what changes with each answer. Revised after design review (DR-H2: O7a–O7c; DR-H3: O6a; DR-H4: O8).
+Draft, 7 Nov 2026; revised that night around the owner's lab components. What the changed skills must do, and the standards they state. Each obligation carries the success-definition item it serves (S1–S6, in [requirements.md](requirements.md)). O8 waits in part on the owner's question 1 (how agents read and check a design); each states the default this draft takes. O13 names what the workflow needs from the Demistify Lead's release; three of its items are asks to that Lead, not yet in its contract.
 
 ## What the skills must do
 
 ### Where the design lives (S1)
 
-- **O1.** Each of the four documents is written as an HTML page, and its normative text lives on that page, in sections and in Markdown islands inside them.
-- **O2.** Each section carries a stable ID that other pages, walkthroughs and agents use to reach it.
-- **O3.** Each fact has one home, its section on its document's page; every other mention links to that section by ID instead of restating it.
-- **O4.** No design document is a Markdown file, and no page drops a whole document in as one island.
+- **O1.** Each of the four documents' text lives on its own page: in sections, and in the bodies of its records, each at a stable ID; Markdown islands carry a section or body where Markdown carries the text best (pending O13d).
+- **O2.** Each section and record carries a stable ID that pages, browsers and agents use to reach it; record IDs follow `design-documents.md`'s identities (a need is its `U`, an obligation its `R`).
+- **O3.** Each fact has one home, its section or record body on its document's page; every other mention links to it by ID instead of restating it, and the prepared collection is output, never edited.
+- **O4.** No design document is a Markdown file, and no page drops a whole document in as one block.
 
-### How a page is composed (S3)
+### How the owner reads it (S2)
 
-- **O5.** A page is composed in sections, one per reader question or design fact group, and each section shows its fact in the view its owning phase requires: the phases' view tables keep owning what each view must show, and `presentation-html` keeps owning the form.
+- **O5.** A design set uses the owner's page set: one page per document and a call-path page, each document page carrying the requirement browser and the call-path page the call-stack browser, in the released form of the layout he decided (Q072, Q073); the skills add no layout of their own.
+- **O5a.** Each phase writes the records its document owns: Requirements one need per `U` (its title, capability, body and summary); the Specification one specification per `R`, naming its needs; the Program Design one design part per part, naming the obligations it serves, and the call paths as call frames and stacks, each frame naming the need it serves; the Verification Design one check per verification row, naming the obligations it proves. A fact with no record kind (entities, a capability's purpose, the trace and binding tables, the Specification's other identifiers) is a section at a stable ID on its document's page (pending O13c).
+- **O5b.** A check written at design time carries no result; the browser shows it as not run, and no result is written until an observation exists.
 
-### How a need links to the rest (S4)
+### How a need links to the rest (S3)
 
-- **O6.** Each need in Requirements carries the same forward links to its obligations in the Specification, its rows in the Program Design and its rows in the Verification Design, each link saying what is there; each of those rows links back to the need. Settled by the owner (31 Oct: "a standardize link forwrad here / and back in teh details"). *What goes with it waits on the owner (Q2):* a view of one need with its answers side by side (B), the Map, released in Demistify 1.20.0, showing each need's path (C), both, or neither. Default taken until he answers: neither, with B tried only as an experiment once Demistify can show a section from its home without copying it.
-- **O6a.** The links grow with the documents: while a downstream document isn't written yet, the need shows that document's link as not yet written, in words and with no target, never an invented one; each phase adds the links its own rows earn when it writes them (the Specification its need-to-obligation links both ways, the Program Design its obligation-to-trace-row links, the Verification Design its need-to-proof links), and the design is complete only when every need links forward and every row back, which the design review checks.
+- **O6.** Each record names the records it serves, once, in its own record; every reverse view (a need's obligations, design parts and checks, "also serves") is derived by preparation and the browsers and never written by hand. Settled by the owner: his 31 Oct words ("a standardize link forwrad here / and back in teh details") and his decided browser, which derives them this way.
+- **O6a.** The links grow with the documents: each phase writes only its own records' links; a need whose downstream document isn't written yet shows that document as not yet written, with no invented record; the design is complete only when every need is served in each document and every record's links resolve, which the design review checks (pending O13b).
 
-### Pages, not one page (S2)
+### Pages, not one page (S4)
 
-- **O7.** A design set is one collection: a home page that opens on what needs the owner, one page per document, and a plan page.
-- **O7a.** When the work has deliverables, the overall design (its four documents) stays the home of every fact, and its home page carries the delivery cut: each deliverable with the needs it delivers and what it waits on, written by the Lead after the design review as the Lead's own call, and shown to the owner with the first deliverable's plan under `orchestrator-design`'s existing plan gate, where he can correct it; it adds no stop of its own.
-- **O7b.** Each deliverable's design page is a view composed from the overall design: its needs and, through their links, its obligations, owners, paths and proof rows, reached by links that each say what is there; it states no fact of its own, and a fact only this deliverable needs is written into the overall document that owns its kind and reviewed there. Showing another page's section inside this one would need a Demistify part that doesn't exist (the same part option B needs); until one ships, the page links.
-- **O7c.** Each deliverable's plan page is written by the planner from the four reviewed documents, scoped to that deliverable's needs, and it and the deliverable's design page link to each other; the next deliverable's page and plan are written when its turn comes.
+- **O7.** A design set is one collection in one folder: a home page that opens on what needs the owner, its document pages, its call-path page and its plan pages.
+- **O7a.** When the work has deliverables, the overall design stays the home of every fact, and its home page carries the delivery cut: each deliverable with the needs it delivers and what it waits on, written by the Lead after the design review as the Lead's own call, and shown to the owner with the first deliverable's plan under `orchestrator-design`'s existing plan gate, where he can correct it; it adds no stop of its own.
+- **O7b.** Each deliverable's page links to its needs in the browser, each at the need and document view that answers it (the browser's need and view addresses, which the release preserves), each link saying what is there; it states no fact of its own, and a fact only this deliverable needs is written into the overall document that owns its kind and reviewed there.
+- **O7c.** Each deliverable's plan page is written by the planner from the four reviewed documents, scoped to that deliverable's needs, and it and the deliverable's page link to each other; the next deliverable's page and plan are written when its turn comes.
 
 ### Agents read and check it (S5)
 
-- **O8.** An agent finds any section by its ID from the set's home page, reads its text on its page, and works from that page, with no second copy of the design. *Waits on the owner (Q1).* Default taken: agents read the HTML pages directly. The other answer on his page is a read-out command that prints a page's text for agents, rebuilt from the page each time and never edited, so the pages stay the only design; if he chooses it, O8 adds that command and a run to build it. A kept Markdown copy is not among the answers: it would reverse his decision that design is HTML.
-- **O9.** Every page passes Demistify's checker at its binding; checks of the Markdown inside islands wait for sunstack's rule engine to read islands in HTML, a dependency named here and owned in sunstack-tools.
+- **O8.** An agent reads a page's records for what exists and what each serves, and the body at each ID for its text, finding pages from the set's home page; there is no second copy of the design. *Waits on the owner (Q1).* Default taken: agents read the pages directly. The other answer is a read-out command that prints a need with everything linked to it, rebuilt from the pages each time and never edited; if he chooses it, O8 adds that command, which the Demistify Lead would own.
+- **O9.** Every set passes the released preparation (owner page, IDs, bodies, link kinds) and Demistify's checker at its binding; checks of the Markdown inside islands wait for sunstack's rule engine to read islands in HTML, a dependency owned in sunstack-tools.
 
-### The owner confirms on the page (S1, S4)
+### The owner confirms on the page (S1, S2)
 
-- **O10.** Where the owner must confirm or decide while a design is written (the capability list, the goal boundary, an open design choice), the page asks it as a choice he answers on the page, and his answer comes back through Comments' Copy, as the merged show-me skill already does for decisions (D18).
+- **O10.** Where the owner must confirm or decide while a design is written (the capability list, the goal boundary, an open design choice), the page asks it as a choice he answers on the page, and his answer comes back through Comments' Copy, as the merged show-me skill already does for decisions.
 
 ### Parts that aren't released (S6)
 
-- **O11.** The skills teach only the Demistify parts the released guide at the page's binding documents; a part that exists only on a branch or a preview build stays out of the skills and out of shipped pages until it is released, and enters through experiments with the Demistify Lead.
+- **O11.** The skills teach only what the released guide at the page's binding documents: the browsers, the record contract and preparation enter the skills from that guide when the Demistify Lead releases them; until then the skills name the release as a dependency and teach none of the demo app's private names.
+
+### What the workflow needs from the release (S2, S3, S6)
+
+- **O13.** The Demistify Lead's integration contract is the seam. The workflow needs from that release: (a) the browsers, the record contract and preparation as public, documented parts, as the contract plans; (b) a set with needs only, or needs and obligations only, prepares and shows each unwritten document as not yet written, and a complete set with no call path prepares too, because Program Design writes call paths only where a runtime path exists (today preparation refuses a set with no call stack); (c) a home for facts with no record kind beside the browser on a document page; (d) a record body that may hold a Markdown island; (e) the need and view addresses kept stable, as the contract already keeps them. Items b, c and d are asks to the Demistify Lead.
 
 ### What stays
 
@@ -46,29 +52,33 @@ Draft, 7 Nov 2026. What the changed skills must do, and the standards they state
 
 ## Standards the skills state
 
-Each is one self-contained sentence, with its two transfer cases and verdict (`domain-skill-crafting`'s generalization topic). HTML and Demistify are named as the owner's adopted scope: his decisions of 28 Oct – 6 Nov for design documents, and Demistify as the page library this repository already uses.
+Each is one self-contained sentence, with its two transfer cases and verdict (`domain-skill-crafting`'s generalization topic). HTML, Demistify and the owner's browsers are named as the owner's adopted scope: his decisions of 28 Oct – 7 Nov for design documents.
 
 1. **A design's text lives on its pages, by the owner's decision for design documents.**
-   - Holds: a Rust service's design in another repository, written by the same workflow: its Program Design is an HTML page whose sections hold the component tree and call paths; the rule tells the agent to write it there, which is right.
+   - Holds: a Rust service's design in another repository, written by the same workflow: its Program Design page holds the component tree as a section and each part's text in its record body; the rule tells the agent to write it there, which is right.
    - Rejects an unnamed bad choice: an agent keeps the Specification's obligations in a YAML file the page renders. The rule names no YAML, and still rejects it, because the obligations' text no longer lives on the page.
    - Verdict: passes, with its scope (design documents, the owner's decision).
 2. **Each fact has one home, and every other mention links to it.**
-   - Holds: a design whose threshold appears in the Specification and in a Verification row; the Verification row links to the obligation's section instead of restating the number, which is right.
+   - Holds: a design whose threshold appears in an obligation's body and in a check; the check's body links to the obligation instead of restating the number, which is right.
    - Rejects an unnamed bad choice: a plan page that pastes the obligation's sentence into its slice description. The rule never names plans, and still rejects it.
    - Verdict: passes.
 3. **A page shows each design fact in the view that suits it, never a whole document as one block.**
-   - Holds: a small one-concern design with six obligations; its Specification page is one section per obligation group with its entity map, which is right; nothing forces extra structure on a small set.
+   - Holds: a small one-concern design with six obligations; each obligation is a record the browser shows by need, and the entity map is one section, which is right; nothing forces extra structure on a small set.
    - Rejects an unnamed bad choice: a design pasted into a single tab of a tabbed page. The rule never names tabs, and still rejects it (the owner's "not a giant tabs", 28 Oct).
    - Verdict: passes.
 4. **Teach only the parts the released guide documents.**
    - Holds: a design page in a repository bound to an older Demistify release; the rule says to use that release's guide, which is right.
-   - Rejects an unnamed bad choice: an agent copies markup from a screenshot of a colleague's local page. The rule never names screenshots, and still rejects it.
+   - Rejects an unnamed bad choice: an agent copies a component's markup from the lab's demo pages before its release. The rule never names the lab, and still rejects it.
    - Verdict: passes.
 5. **The owner answers on the page.**
    - Holds: a design in another product repository where the owner must confirm three capabilities; the page asks it as a choice, which is right.
    - Rejects an unnamed bad choice: an agent asks for the confirmation in a chat message and treats silence as yes. The rule never names chat, and still rejects it.
    - Verdict: passes.
+6. **Each link is written once, in the record that serves, and every other direction is derived.**
+   - Holds: a payments design whose obligation R4 serves two needs, U2 and U5; R4's record names both, and each need's view shows R4 with "also serves", which is right; nothing is written on U2 or U5.
+   - Rejects an unnamed bad choice: an agent adds a "related obligations" list to U2's body to help readers. The rule never names body lists, and still rejects it, because that link is now written twice and drifts when R4 changes.
+   - Verdict: passes.
 
 ## What this draft leaves for the skill design
 
-Which skill, reference and section each obligation changes, the runs in sequence, and how each is checked belong to [skill-design.md](skill-design.md) and [skill-verification.md](skill-verification.md), written after the owner's answers.
+Which skill, reference and section each obligation changes, the runs in sequence, and how each is checked belong to [skill-design.md](skill-design.md) and [skill-verification.md](skill-verification.md).
