@@ -43,7 +43,7 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.85rem; backgr
 
 1. `practices-cleanup` tells the agent to find the project's own clean task in the repository's instructions and task runner, honor its refusal, and never replace it with a blanket delete of what it guards; it names no product's task.
 2. `practices-cleanup`'s allow list holds only commands that transfer to any repository.
-3. `ops-observability-stack` routes one app's own debug or beta launch to that app's repository, and carries no product's loop.
+3. `ops-observability-stack` routes one app's own debug or beta launch to that app's repository, and carries no AgentStudio loop. Its Agent VM branch (`SKILL.md:18`) and `references/agent-vm-loop.md` stay as they are: not ruled, and deferred (see the non-goals).
 4. `ops-observability-stack`'s description loads for the shared OTLP stack and for proving a local debug or beta app emits to it, and names no product as its user.
 5. Every skill-authoring citation of the removed lines points at `89dc638e`, where the line still reads as quoted.
 
