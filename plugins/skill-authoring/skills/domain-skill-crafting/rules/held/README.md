@@ -10,3 +10,12 @@ Only the three mechanical description checks are active. The `kind` filter and `
 The entries, kind fragment, marker identities, questions, reference and bars are retained exactly as evaluated: K002 is in `general-skill.json`, and the filter is in `kind.filter.json`. Neither is declared by the active config. Older held entries keep their original source locations and markers.
 
 Real case files, labels and splits are unchanged. No held-out run was made; held-out evidence remains unseen for a corrected attempt. The old-rulebook quality comparison is deferred. Reproducing the rejected candidate means checking out the source commit above, not adding these trees back to ordinary lint. A future corrected attempt needs its own development evidence and activation decision.
+
+
+## R02 pre-run candidate
+
+`call-completeness.rules.json` rebuilds call completeness as separate operative-call, moment, destination, work and result questions, with explicit uncertain routes. It is not paired by the active config. The original one-Choice entry in `../calls-and-placement.rules.json` remains unchanged.
+
+The mechanical load kind now retains the complete matched paragraph and enclosing caller instructions. This preserves wrapped calls and explicit shared returns; two real-source integration regressions passed after failing on the old collection. Active description-rule outputs are unchanged. The 50,000-character load view leaves 23 current pieces uncertain at completeness guards, with 408 requests prepared and no provider call.
+
+The separate development case file has 21 real source cases, including the ten legacy cases, quiet shared-return/quoted/metadata cases and an actual before/after watcher fix. Its 21 request subjects prepare without gaps; the case command's exit 1 retains unrelated historical description-length findings. Independent review, development outcomes, bar assessment, held-out proof and receiving-agent observation are still required. A clean desk check is not model-quality proof.

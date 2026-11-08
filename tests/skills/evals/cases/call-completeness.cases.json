@@ -1,0 +1,391 @@
+{
+  "cases": [
+    {
+      "id": "calls-and-placement-k001-case-001",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "lines": [
+        24,
+        24
+      ],
+      "text_sha256": "e753111f8a31b6f826f95c6563865081182173a1239009ec54a1fa8ed9f08ab6",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-002",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "lines": [
+        40,
+        40
+      ],
+      "text_sha256": "d79d0acd46a00970cf302b10624bbab6015fa2ac839092aca909ba7cfde97af0",
+      "expected": "warn"
+    },
+    {
+      "id": "calls-and-placement-k001-case-003",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-creation/SKILL.md",
+      "lines": [
+        26,
+        26
+      ],
+      "text_sha256": "3314811067e5578339807c1782bd67228b4e7e2c7963120f6a556d301fc8756e",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-004",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "lines": [
+        51,
+        51
+      ],
+      "text_sha256": "16c0c60c04e7d5887029bcd2ce07296ce74bcdc53e6238dd83770e06412ae6be",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-005",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-design/SKILL.md",
+      "lines": [
+        43,
+        43
+      ],
+      "text_sha256": "8184203882a7d77cff6ac7a2f126514fcccb4b090f99c895b2fd212f61f8f586",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-006",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "lines": [
+        36,
+        36
+      ],
+      "text_sha256": "9ce379fba0646f9374758f18c0f244a0bcf5e38b092ea56c8aa42b659aa490fe",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-007",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "lines": [
+        17,
+        17
+      ],
+      "text_sha256": "fb721fabd70efd23032288cc8cd2b37bb7afc723f5cd6d99a0fa5ebcd8951a7a",
+      "expected": "warn"
+    },
+    {
+      "id": "calls-and-placement-k001-case-008",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/skill-rules/SKILL.md",
+      "lines": [
+        54,
+        54
+      ],
+      "text_sha256": "20109faf3989333b1a5024b655395934bff55b17d1e68d0697109a7e63d46b33",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-009",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/principle-read-ground-truth-first/SKILL.md",
+      "lines": [
+        37,
+        37
+      ],
+      "text_sha256": "2453a3c69a7c9ed35084f6eb7f33984f8b923dadab7a28c14924acb339e97a63",
+      "expected": "pass"
+    },
+    {
+      "id": "calls-and-placement-k001-case-010",
+      "revision": "9f7b2e283e95dc849f4e271a5287e3ae21959ca9",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/domain-rust/SKILL.md",
+      "lines": [
+        125,
+        125
+      ],
+      "text_sha256": "b1f2dee5c7af081e118b684f5a8b9073933c4c0acb3067c4c14504cee279607f",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-current-watch-return",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "lines": [
+        46,
+        46
+      ],
+      "text_sha256": "3c35b2bf8f6c9195139db5f2f4f0dd69e944580a9396141e476e9ee3aa9464ea",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-mixed-loop-return",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/ops-observability-stack/SKILL.md",
+      "lines": [
+        18,
+        18
+      ],
+      "text_sha256": "2ada3c245c5def0f6b43ef08c48646d4a8877e70f487c3fac8a4b3d19bb119f4",
+      "expected": "warn"
+    },
+    {
+      "id": "r02-shared-return-state",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/decision-model-review/SKILL.md",
+      "lines": [
+        44,
+        44
+      ],
+      "text_sha256": "f493458906e3df5352bfdbaeea935dfe8b5c50896a9600965a479b03fe97d809",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-shared-return-questions",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/decision-model-review/SKILL.md",
+      "lines": [
+        45,
+        45
+      ],
+      "text_sha256": "f2234f41e3dc1ea93df995851273600552b09e707daa42f3b7669dca2837354c",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-shared-return-primitives",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/decision-model-review/SKILL.md",
+      "lines": [
+        46,
+        46
+      ],
+      "text_sha256": "b4a1697909601508e3ba808dd47c9d7a78d281ba10afe1db9cd97a37988ad587",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-result-without-return-token",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/presentation-html/references/engineering-documents.md",
+      "lines": [
+        13,
+        13
+      ],
+      "text_sha256": "734385ce75e432528e4f142aac4dc00bdf69ad433230d8cf3474e91c5949243e",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-wrapped-call",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/plan-implementation/SKILL.md",
+      "lines": [
+        25,
+        26
+      ],
+      "text_sha256": "eff145b9306213d73d43170efa6d66de3601fe7a4479eef9b37912e5f3708b58",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-template-mention",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/ai-scaffold/skills/scaffold-project/references/template-inventory.md",
+      "lines": [
+        9,
+        9
+      ],
+      "text_sha256": "c252d0882baab55de94ce8c684e0211633e2adda7a225bea8108a6e48cdc7f9b",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-quoted-call",
+      "revision": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/skill-authoring/skills/decision-model-review/references/checks/nudge-and-receiver.md",
+      "lines": [
+        43,
+        43
+      ],
+      "text_sha256": "3fa2042825eb6f463fe18bd9a05043f4b5ea73d6fa5245f9d099c403a199afcf",
+      "expected": "pass"
+    },
+    {
+      "id": "r02-watch-fix-before",
+      "revision": "690dc5a71290efee35ecddad7d2615236b35e99e",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "lines": [
+        23,
+        23
+      ],
+      "text_sha256": "ace43fc6f32e569728da4b6b0f3b053ffda462a65a08409a7d750f5e2ec4ff7b",
+      "expected": "warn"
+    },
+    {
+      "id": "r02-watch-fix-after",
+      "revision": "edc9904314b8e5fe9bde748e8c800dfbca746735",
+      "set": "development",
+      "label_from": "blind-agents",
+      "kind": "rule",
+      "rule": "load-call.names-when-where-and-result",
+      "file": "plugins/sunstack-dev/skills/debug-investigation/SKILL.md",
+      "lines": [
+        23,
+        23
+      ],
+      "text_sha256": "841f1396ce6657fc9a9305e6fd5218d3216b5c936116af3575124cc0b7a516ba",
+      "expected": "pass"
+    }
+  ],
+  "bars": [
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "operative_call",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "operative_call",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "moment_named",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "moment_named",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "destination_named",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "destination_named",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "work_named",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "work_named",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "result_named",
+      "bound": "yes_at_or_above",
+      "value": 0.7,
+      "set_from": []
+    },
+    {
+      "for": "load-call.names-when-where-and-result",
+      "step": "result_named",
+      "bound": "no_at_or_below",
+      "value": 0.3,
+      "set_from": []
+    }
+  ]
+}

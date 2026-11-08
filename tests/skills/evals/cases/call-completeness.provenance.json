@@ -1,0 +1,287 @@
+{
+  "base": "89dc638e3fe6a865cb7c4a00af9c3c4440549259",
+  "labels": [
+    {
+      "id": "calls-and-placement-k001-case-001",
+      "blind_pool_id": "r02-source-001",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-002",
+      "blind_pool_id": "r02-source-002",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "warn",
+      "operative": true,
+      "category": "real_mistake",
+      "missing": [
+        "result"
+      ],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-003",
+      "blind_pool_id": "r02-source-003",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-004",
+      "blind_pool_id": "r02-source-004",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-005",
+      "blind_pool_id": "r02-source-005",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-006",
+      "blind_pool_id": "r02-source-006",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-007",
+      "blind_pool_id": "r02-source-007",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "warn",
+      "operative": true,
+      "category": "real_mistake",
+      "missing": [
+        "result"
+      ],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-008",
+      "blind_pool_id": "r02-source-008",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-009",
+      "blind_pool_id": "r02-source-009",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "calls-and-placement-k001-case-010",
+      "blind_pool_id": "r02-source-010",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-current-watch-return",
+      "blind_pool_id": "r02-source-011",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "note": "Independent labels agree; source 011 second labeler corrected an old/current revision mix after reopening the exact Git object. Source 017 is categorized as a collection near miss by the author because the old first_line field loses its call; both independent outcome labels are pass."
+    },
+    {
+      "id": "r02-mixed-loop-return",
+      "blind_pool_id": "r02-source-012",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "warn",
+      "operative": true,
+      "category": "real_mistake",
+      "missing": [
+        "result"
+      ],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-shared-return-state",
+      "blind_pool_id": "r02-source-013",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-shared-return-questions",
+      "blind_pool_id": "r02-source-014",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-shared-return-primitives",
+      "blind_pool_id": "r02-source-015",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-result-without-return-token",
+      "blind_pool_id": "r02-source-016",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-wrapped-call",
+      "blind_pool_id": "r02-source-017",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent labels agree; source 011 second labeler corrected an old/current revision mix after reopening the exact Git object. Source 017 is categorized as a collection near miss by the author because the old first_line field loses its call; both independent outcome labels are pass."
+    },
+    {
+      "id": "r02-template-mention",
+      "blind_pool_id": "r02-source-018",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": false,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-quoted-call",
+      "blind_pool_id": "r02-source-019",
+      "labelers": [
+        "/root/r02_blind_pool",
+        "/root/r02_blind_pool_second"
+      ],
+      "expected": "pass",
+      "operative": false,
+      "category": "near_miss",
+      "missing": [],
+      "note": "Independent source judgments; no rule/model answers supplied."
+    },
+    {
+      "id": "r02-watch-fix-before",
+      "labelers": [
+        "/root/r02_blind_pool"
+      ],
+      "expected": "warn",
+      "operative": true,
+      "category": "real_mistake",
+      "missing": [
+        "result"
+      ],
+      "family": "debug-watch-plan",
+      "fix_commit": "edc9904314b8e5fe9bde748e8c800dfbca746735",
+      "note": "Actual committed fix; blind-agents origin, not claimed owner-fix authorship. Adds a return to the intro watcher call; repeated watcher family is not a new independent incident."
+    },
+    {
+      "id": "r02-watch-fix-after",
+      "labelers": [
+        "/root/r02_blind_pool"
+      ],
+      "expected": "pass",
+      "operative": true,
+      "category": "good",
+      "missing": [],
+      "family": "debug-watch-plan",
+      "fix_commit": "edc9904314b8e5fe9bde748e8c800dfbca746735",
+      "note": "Actual committed fix; blind-agents origin, not claimed owner-fix authorship. Adds a return to the intro watcher call; repeated watcher family is not a new independent incident."
+    }
+  ],
+  "integrity": "History collector exposed prior labels; excluded from label authority. Both admitted pool labelers attest no memory/prior-label/model/rule reads. Supplemental fix pair has one blind labeler; prior source material and exact fix hunk inspected by parent."
+}
