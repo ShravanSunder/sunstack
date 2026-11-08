@@ -30,7 +30,8 @@ When the target includes tests or a finding rests on a test's assertion, name fo
 Load each practice below by name and each reference by its path; a practice you already loaded in this session counts.
 
 - MUST load `references/working-with-lead.md` and return the message you owe your commissioner at this point: a commission gap, a report, a correction check or a stop.
-- IF posting is authorized, load `practices-collaboration` and return the supplied root or the exact no-home gap; then load `practices-show-me-your-work` and return the trace where your findings are recorded. Without posting authority, return the findings to the commissioner.
+- IF the packet's `workLog` is a work trail, load `practices-show-me-your-work` and return the log you write to and the position your stretch starts at. Log your own rows there as you review (each decision, assumption, shortcut and check), with the packet's two-step write, whether or not you may post.
+- IF posting is authorized, load `practices-collaboration` and return the supplied root or the exact no-home gap. Without posting authority, return the findings to the commissioner.
 - The commission supplies the review procedure and target; that procedure owns check selection and the final report.
 - IF your review procedure has you start its stage reviewers, load `practices-manage-agents` and return a commission for each one: a Reviewer with no authoring history, for the checks the procedure assigns it.
 - IF a finding depends on contract or source evidence you don't have, load `practices-research` and return that evidence, checked, before you dispose of the finding.

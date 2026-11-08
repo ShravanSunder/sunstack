@@ -25,7 +25,7 @@ Watch for the difference between a coding defect and a model that no longer fits
 
 Load each practice below by name; a practice you already loaded in this session counts.
 
-- MUST load `practices-collaboration` and return your assigned execution root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the work's record and the part identifiers of your assignment.
+- MUST load `practices-collaboration` and return your assigned execution root or the exact no-home gap; then MUST load `practices-show-me-your-work` and return the packet's `workLog` (its log and your workstream) and the log's position where your stretch starts; you log your own rows there with its two-step write.
 - MUST load `references/working-with-lead.md` and return the commission gaps you sent back before editing, or none, and what your handback to the Lead must carry for this job, with the language-standards inventory when the commission is code work.
 - MUST load `references/working-with-verifier.md` and return the setup and target you sent your Verifier, and for each observation it returns, whose action it calls for.
 - IF you must prove a changed behavior and the phase or procedure your commission names doesn't load `practices-verification` for it, load `practices-verification` and return, for each claim, its route and target before you edit, and after the change its result (supported, unsupported or unknown), where the evidence lives and what stays unverified.

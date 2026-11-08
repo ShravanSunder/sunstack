@@ -1,0 +1,49 @@
+# Show me your work: every agent logs its own work, and the owner's page — validation notes
+
+Branch `skills/show-me-your-work-record`. Design set: `docs/wip/skills-authoring/2026-11-06-show-me-your-work-record/`, accepted to implement at `430c7ac1` (D14, run 9, added at `75e7f64f` and confirmed by the review lead). Runs 1–9, one commit each.
+
+| Check | Result |
+| --- | --- |
+| `pnpm --dir tests/skills test` | 317 passed, 4 skipped, exit 0 |
+| Packet contract test (O3): a packet without `workLog` is rejected | fails with `workLog` made optional ("expected [] to include 'workLog'"), passes with it required |
+| `pnpm --dir tests/skills typecheck` | exit 0 |
+| `pnpm --dir tests/skills rules --check` | exit 0 |
+| `pnpm --dir tests/skills rules <the nine changed skills>` (keyed, run by the Lead at `30749f88`) | status uncertain, exit 5: 0 errors, 6 warn nudges, 27 passes, 0 findings among adopted rules; the uncertain pieces come only from rules still held for their case floors. Two nudges sit on lines this change didn't touch (`practices-manage-agents`' description, `execution-forms.md:15`). Four sit on changed lines and are kept: the page step routes to `presentation-html`, which owns the Demistify binding, and the work-trail commands and the packet's `workLog` are the log's chosen home and scope. The implementer's own session couldn't run it (no decision-model credential, exit 2) |
+| Skill text (O4) | `record-entries.md` names `shortcut`, `missed`, `audit`, `stream:` and `Ran by:`; `show-me.md` has its worked example; no file in `plugins/` names `live-page.md`; no role gates logging on posting authority |
+| Retry probe (O5), on a separate probe tag, Router CLI 0.1.125 | a write retried with the same ids left one row and returned the same row id; a "retry" with fresh ids left two; two separate rows with the same words left two; 20 of 20 same-id pairs from two processes overlapped from the clients' side (second send 1–10 ms after the first, first answer 185–497 ms) and each left one row, both senders getting the same row id, with no errors |
+| `claude plugin validate .` | passed |
+
+Implementation review (skill-review implementation stage): targeted-revision with four findings, corrected under D15: a refused write is taught apart from an unknown outcome (a refusal is checked against the trail first; unchanged words keep their ids); a new part of the design or plan gets its workstream row, and a started part without one is a missed item at the checkpoint; the stop treatments point at step 7, "Show the owner"; the worked example's "3 missed" count opens one card that holds all three. `orchestrator-implementation-goal`'s routing reference now points its page rebuild at step 7. An unknown outcome's same-id retry is read rather than assumed to write the row, because a lost rejection replays. After the corrections, the Lead reran the suite (317 passed, 4 skipped, exit 0) and `claude plugin validate .` (passed). The keyed rules on the two corrected skills reported 0 errors and the same 3 nudges as before, with no nudge on the changed routing line.
+
+The owner's approved page (D16, 7 Nov): `show-me.md` was rewritten from a band of counts, cards and a per-writer chart to the page the owner approved (four sections, the Story shape, the Map tree, plain words), and `record-entries.md`'s story lines gained `Key:`, `Subject:`, `Routine:`, `More:` and `Covers:`. A Story cites the rows its `Covers:` line names, because one row takes at most 16 links. Parts that need a script (the Map drawer, sticky headers, expand/collapse, opening a folded Story from the Map) wait on the shared component library's parts; until then the page uses its existing parts.
+
+D16 validation, after the Lead's assessment corrections and the implementation review's two findings: an old Story missing `Key:`, `Subject:` or `Covers:` gets a superseding version before the page uses it, and a Map row's fold-opening is stated as the runtime does it. At the corrected head `216c4bc3`, the Lead reran the suite (317 passed, 4 skipped, exit 0), `claude plugin validate .` (passed) and `git diff --check` (clean). The keyed rules on `practices-show-me-your-work` ran 114 model requests, none incomplete or skipped: status uncertain, exit 5.
+- Of 116 results: 80 pass (3 mechanical, 77 judged), 14 not applicable, 19 uncertain, and 3 warn finding rows. No error, and no adopted rule reported a breach.
+- The 3 warns are kept nudges on lines this change didn't touch: `SKILL.md:14`, `no-board-trace.md:6`, and `record-entries.md`'s "Write it" paragraph. They're kept for the reasons above.
+- Of the 19 uncertain pieces, 17 come from the two overfit rules still held for their case floors. The other 2 come from `load-call.names-when-where-and-result`, at `SKILL.md:16` and `no-board-trace.md:28`. Both are kept: each names its condition, what to load and what it returns.
+- The engine's saved view of call targets marks 25 occurrences unresolved. Thirteen name skills that live outside this skill's folder (`presentation-html` 7, `practices-collaboration` 6). The rest are extraction artifacts such as `Key:`, `no-home` and command fragments, not broken calls. Another 18 targets show only a shortened opening. Zero incomplete results doesn't make these limits of the saved view into "no gaps".
+- The run at `99d7aa57` gave 78 pass, 13 not applicable, 23 uncertain (the same 2 load-call pieces among them) and 2 warn rows: the page step's `presentation-html` load and `SKILL.md:14`, both kept. Judged results vary between runs.
+
+After merging main (#199, which moves the rules to native `sunstack lint` with CLI 0.8.3 and holds the judged rules), at `bffcf14c`:
+- `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json plugins/sunstack-dev/skills/practices-show-me-your-work` was clean: 0 errors, 0 warnings, 3 mechanical rules passing over the skill's 6 files, with 0 model requests. The judged results above came from the runner before #199.
+- `pnpm --dir tests/skills test` (223 tests) passed in 3 of 5 full runs. The other 2 failed on different integration tests that arrived with #199: once `active-rulebook` and `kind-filter`, once `scaffold-project`, whose scaffold exited 141 (SIGPIPE). Each passes when run alone. This branch changes none of those tests or the scaffold plugin; the flakes belong to main.
+- `pnpm --dir tests/skills typecheck` exit 0, and `claude plugin validate .` passed.
+
+The skill-creation pass and the whole-PR review (7 Nov):
+- The owner asked whether his skill-creation skills had been followed. For D16 they hadn't: the writer worked from memory, and the reviews loaded skill-review only.
+- The writer then ran skill-creation 0.11.0 over all the changed skill text: padding cut by the deletion test, one term per meaning, and a slop inventory.
+- A whole-PR implementation review followed, with three fresh reviewers, each loading skill-review and skill-creation. It found two problems:
+  - an audit's `Found:` named only the misses it linked, and a row takes 16 links;
+  - the no-project page step wasn't Lead-only.
+
+  Both were corrected under D17 and verified closed: verdict great at `cbfda895`.
+- At `cbfda895`:
+  - suite 223 passed; typecheck exit 0; `claude plugin validate .` passed; `git diff --check` clean;
+  - native `sunstack lint` clean on all ten changed skills: 3 mechanical rules each, no model requests.
+- Platform surfaces:
+  - Codex quick validator: not run (PyYAML is not installed);
+  - Claude plugin validation: run, passed;
+  - Codex marketplace metadata: not applicable (no availability, path, category or policy change);
+  - installed caches: not refreshed (release not in scope).
+
+Not covered: whether Router processed overlapping sends at once (seen only from the clients' side); agents following the guidance on real work; the owner reading the page; hosts other than this machine's Router.

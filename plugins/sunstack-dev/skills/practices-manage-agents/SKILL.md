@@ -169,7 +169,7 @@ MUST load `references/execution-forms.md` and return the route, lifecycle and hi
 
 Whoever assigns the job writes its prompt.
 
-1. MUST load `schemas/assignment-fields.ts` and the role's `schemas/role-contracts/<role>-contract.ts` and return the packet, filled from each field's description, with the role skill in `requiredReads.charter`.
+1. MUST load `schemas/assignment-fields.ts` and the role's `schemas/role-contracts/<role>-contract.ts` and return the packet, filled from each field's description, with the role skill in `requiredReads.charter`. Fill `workLog` with the work's log, the helper's workstream and the two-step `writeCommand` with the project, subject, work tag and workstream filled in; with no Router log, name the gap and where its rows go instead.
 2. MUST load `practices-preflight` for the assignment's context and return `ready` or the gap list. A preflight that already covered the same context counts. Carry the checked list in `sources`, and hold back any work an open gap blocks.
 3. When two jobs would write the same file, branch or service state, write the isolation or the ordering into each packet's `limits`.
 4. Send this prompt, then the packet: "You are the <emoji> <Role> <Form>. Load `role-<name>` and read it in full, then the reads listed below; a `principle-<name>` read is the file `principle-<name>/SKILL.md` beside your role skill's folder. If you can't load `role-<name>`, return that gap before starting work."
@@ -178,7 +178,7 @@ When an agent drifts, send it a correction; don't restart it.
 
 ### Check the result
 
-Before using a handback, match each claim to the commit, file or output you opened; return anything unmatched as a gap. Only the Lead accepts delivery.
+Before using a handback, match each claim to the commit, file or output you opened; return anything unmatched as a gap. Then read the helper's own rows in the work trail, by Router's writer stamp, since its commission: each decision, assumption, shortcut and check the handback reports needs a row the helper wrote. For each one missing, log a missed row yourself (`Found by:` you, at handback), and write any row the helper couldn't reach Router to write with `Ran by:` naming it, plus its missed row. Only the Lead accepts delivery.
 
 ## Examples
 
@@ -186,4 +186,4 @@ MUST load `references/delegation-examples.md` and return the six steps (directio
 
 ## Completion
 
-Done when the helper's role, form and model rows are chosen with any reason their rows require, its packet carried the preflight result and went to a real address, and its handback was matched to evidence.
+Done when the helper's role, form and model rows are chosen with any reason their rows require, its packet carried the preflight result and went to a real address, and its handback was matched to evidence, with the helper's own rows matched or each missing one logged as missed.
