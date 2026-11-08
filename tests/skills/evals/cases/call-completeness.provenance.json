@@ -283,5 +283,103 @@
       "note": "Actual committed fix; blind-agents origin, not claimed owner-fix authorship. Adds a return to the intro watcher call; repeated watcher family is not a new independent incident."
     }
   ],
-  "integrity": "History collector exposed prior labels; excluded from label authority. Both admitted pool labelers attest no memory/prior-label/model/rule reads. Supplemental fix pair has one blind labeler; prior source material and exact fix hunk inspected by parent."
+  "integrity": "History collector exposed prior labels; excluded from label authority. Both admitted pool labelers attest no memory/prior-label/model/rule reads. Supplemental fix pair has one blind labeler; prior source material and exact fix hunk inspected by parent.",
+  "bar_calibration": {
+    "authority": "Lead directive 01a1b9c9-9fcf-7403-9dcb-07266a27232c",
+    "development_runs": [
+      {
+        "run": 1,
+        "source_head": "8940215f4387bdd3405235ed0cb79af2b98208f3",
+        "report_sha256": "ceb795d9da8f72360aceec09da4be4b4690c6cc42fbf0220d891679dd00416df",
+        "readings_sha256": "0517b91eb33f902b37c431c9e524649cd3901d77781e0204ffce07ed61e7c773",
+        "counts": {
+          "false_warning": 0,
+          "incomplete": 2,
+          "missed": 0,
+          "right": 16,
+          "unsure": 3
+        },
+        "models": [
+          [
+            "typesafe/jev-1.14-20261014",
+            "typesafe/jev-1.14-20261014"
+          ],
+          [
+            "typesafe/jev-1.14-20261014",
+            null
+          ]
+        ],
+        "set_from": [
+          "calls-and-placement-k001-case-001",
+          "calls-and-placement-k001-case-002",
+          "calls-and-placement-k001-case-003",
+          "calls-and-placement-k001-case-004",
+          "calls-and-placement-k001-case-005",
+          "calls-and-placement-k001-case-006",
+          "calls-and-placement-k001-case-007",
+          "calls-and-placement-k001-case-008",
+          "calls-and-placement-k001-case-009",
+          "calls-and-placement-k001-case-010",
+          "r02-current-watch-return",
+          "r02-mixed-loop-return",
+          "r02-shared-return-state",
+          "r02-shared-return-questions",
+          "r02-shared-return-primitives",
+          "r02-result-without-return-token",
+          "r02-wrapped-call",
+          "r02-template-mention",
+          "r02-quoted-call",
+          "r02-watch-fix-before",
+          "r02-watch-fix-after"
+        ]
+      },
+      {
+        "run": 2,
+        "source_head": "ccd269cd18c2f9aa15739892faece4d979c32d89",
+        "report_sha256": "f7505dd2335ddbeeb753f1816caf6e42589279c3a2f5e4c5f4d27031d04f3315",
+        "readings_sha256": "8bd8fc1fc8649153da066a4004ff9aa14fbd488ca0c9353c9ecbe0d04acc713d",
+        "counts": {
+          "false_warning": 0,
+          "incomplete": 0,
+          "missed": 0,
+          "right": 19,
+          "unsure": 2
+        },
+        "models": [
+          [
+            "typesafe/jev-1.14-20261014",
+            "typesafe/jev-1.14-20261014"
+          ]
+        ],
+        "set_from": [
+          "calls-and-placement-k001-case-001",
+          "calls-and-placement-k001-case-002",
+          "calls-and-placement-k001-case-003",
+          "calls-and-placement-k001-case-004",
+          "calls-and-placement-k001-case-005",
+          "calls-and-placement-k001-case-006",
+          "calls-and-placement-k001-case-007",
+          "calls-and-placement-k001-case-008",
+          "calls-and-placement-k001-case-009",
+          "calls-and-placement-k001-case-010",
+          "r02-current-watch-return",
+          "r02-mixed-loop-return",
+          "r02-shared-return-state",
+          "r02-shared-return-questions",
+          "r02-shared-return-primitives",
+          "r02-result-without-return-token",
+          "r02-wrapped-call",
+          "r02-template-mention",
+          "r02-quoted-call",
+          "r02-watch-fix-before",
+          "r02-watch-fix-after"
+        ]
+      }
+    ],
+    "case_count_note": "Both runs reuse the same 21 development ids; this is not 42 independent cases. Both records support each of the seven element yes-cutoffs set_from lists.",
+    "element_yes_at_or_above": 0.6,
+    "result_no_at_or_below": 0.2,
+    "unchanged": "Labels, case coordinates/hashes, operative-call cutoffs, other no-cutoffs, questions, reference, evidence and findings.",
+    "limits": "Wrapped near miss remains uncertain; quoted/metadata cases use the operative gate. No held-out inputs used."
+  }
 }

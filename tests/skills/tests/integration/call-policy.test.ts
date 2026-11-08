@@ -27,6 +27,17 @@ const present = {
 };
 const controls: readonly PolicyControl[] = [
   {
+    label: "development quiet readings at .66 pass on all four elements",
+    probabilities: {
+      operative_call: 0.99,
+      moment_named: 0.66,
+      destination_named: 0.66,
+      work_named: 0.66,
+      result_named: 0.66,
+    },
+    expected: "pass",
+  },
+  {
     label: "a known missing result survives an unknown work answer",
     probabilities: { ...present, work_named: 0.58, result_named: 0.09 },
     expected: "finding",

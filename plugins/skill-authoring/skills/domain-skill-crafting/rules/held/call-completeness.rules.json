@@ -170,7 +170,7 @@
         },
         "moment_named": {
           "ask": "moment_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "destination_named",
           "no": {
@@ -181,7 +181,7 @@
         },
         "destination_named": {
           "ask": "destination_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "work_named",
           "no": {
@@ -192,7 +192,7 @@
         },
         "work_named": {
           "ask": "work_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "result_named",
           "no": {
@@ -203,7 +203,7 @@
         },
         "result_named": {
           "ask": "result_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.2,
           "yes": "pass",
           "no": {
@@ -214,7 +214,7 @@
         },
         "destination_after_unknown": {
           "ask": "destination_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "work_after_unknown",
           "no": {
@@ -225,7 +225,7 @@
         },
         "work_after_unknown": {
           "ask": "work_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "result_after_unknown",
           "no": {
@@ -236,7 +236,7 @@
         },
         "result_after_unknown": {
           "ask": "result_named",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.2,
           "yes": "uncertain",
           "no": {
