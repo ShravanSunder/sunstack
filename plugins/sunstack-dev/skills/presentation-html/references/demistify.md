@@ -46,28 +46,28 @@ Delivery depends on what the page loads. Library assets from the CDN need no app
 
 ## Prepare the reader
 
-The matching guide owns the CLI operations and tool route. When it ships `demistify-cli.tgz`, run it with Node 26+ through `pnpm dlx` or `npx --yes`; it includes its dependencies and needs no browser or checkout. Use the same base as the page. For an older binding without that tarball, use its documented source CLI if already available; do not clone a repository or install browser tooling just to lint a document. Readers run no command.
+The matching guide owns the CLI operations, the tool route and the CLI archive's URL. When it documents a CLI archive, run that archive at the exact URL the guide documents (for a hosted binding, the guide's prepared-browsers reference names it), with Node 26+ through `pnpm dlx` or `npx --yes`; it includes its dependencies and needs no browser or checkout. In the commands below, `<cli-archive-url>` stands for that exact URL: copy it from the guide each time, and add no other URL, flag or pinned hash. Use the same base as the page. For an older binding without that tarball, use its documented source CLI if already available; do not clone a repository or install browser tooling just to lint a document. Readers run no command.
 
 1. Inspect the page's source history and dependencies before treating missing `src` as inline authorship. A generated embedded copy or known-source refresh uses its retained live source page and original Markdown, even though the output has consumed `src`. Missing required originals are a gap; the generated copy cannot prove freshness. Other pages with local Markdown references retain those files and a live source page such as `guide.source.html`. An independently authored inline page with neither local Markdown references nor a known-source refresh remains the reader and skips embedding.
    For generation or a local edit, keep model context on retained source wrappers and affected Markdown; let the tools read the complete explicit collection. Keep each walkthrough definition on its owning source page. Return concise file/count/issue results instead of generated readers or index payloads.
 2. After composition is complete, use the CLI at the page's binding:
 
    ```sh
-   pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz embed /path/guide.source.html /path/guide.html
+   pnpm dlx <cli-archive-url> embed /path/guide.source.html /path/guide.html
    ```
 
    Keep output beside input or preserve its relative page/image layout. Deliver `guide.html`; retain `guide.source.html` and its Markdown for updates. The transform embeds exact Markdown, including literal script terminators. It does not inline arbitrary JSON, pictures, the library or fonts. Prepare other local data only through a route documented by the matching guide, or name the unresolved dependency.
 3. For shared collection search or Walkthrough discovery, embed each live-source page first, then index every explicit delivered page, including peers without local walkthroughs:
 
    ```sh
-   pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz index /path/guide.html /path/details.html
+   pnpm dlx <cli-archive-url> index /path/guide.html /path/details.html
    ```
 
    Keep stable island IDs, relative paths and the input list. An authored inline peer participates without an extra embed. Keep the matching guide's native navigation and the same Pages links on each peer. After a local source edit, regenerate affected readers and refresh the complete collection index. The matching guide owns navigation syntax, indexing order and freshness.
 4. Lint the changed final HTML files once after all transforms:
 
    ```sh
-   pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz check /path/guide.html /path/details.html
+   pnpm dlx <cli-archive-url> check /path/guide.html /path/details.html
    ```
 
    For a single reader, list only that file. Fix errors; treat warnings as advice. A passing check proves recognized markup/data constraints, not readability, source truth, links or interaction. Apply permitted repairs to the live HTML/Markdown source, never directly to generated output (including with `check --fix`); prepare and index again as applicable, then recheck every final file. If a repair exceeds the delivery-only grant or needs a product change, return the exact failed check/gap instead. Main step 5 owns the single lint pass; no browser observation is required for routine authoring.

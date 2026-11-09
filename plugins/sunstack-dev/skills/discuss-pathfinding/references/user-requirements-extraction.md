@@ -40,7 +40,7 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
-Write the confirmed list onto the Requirements page, the set's `requirements.html` that `design-documents.md` lays out: a capability list section at a stable ID, one entry per capability with its key, the owner's name and its purpose. Each need you write then names its home capability by key, and the requirement browser groups the needs under it, so the list has one home and `spec-design` reads the same page:
+Write the confirmed list onto the Requirements page, the set's `requirements.html` that `design-documents.md` lays out: a capability list section at a stable ID, one entry per capability with its key, the owner's name and its purpose. Each need you write then names its home capability by key, and the requirement browser filters the needs by it, so the list has one home and `spec-design` reads the same page:
 
 ```text
 capability list section   import (Import): card charges and receipt photos arrive in a claim without retyping

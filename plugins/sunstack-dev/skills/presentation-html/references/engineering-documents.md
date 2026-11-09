@@ -24,7 +24,7 @@ No released address reaches one need's view inside the browser, so a link to a n
 
 - **Records.** One record per row the document owns, its ID the row's identity (`U1`, `R9`), naming only what it serves, as `design-documents.md`'s Records and Sections table says. The summary is the compact line the browser lists; the body carries the whole of the row: definitions, conditions, alternatives, error cases, exact interfaces and thresholds. Mark only the parts the guide's table allows for the kind, and only around content that is truly that part: a part with nothing true to put in it is omitted, never filled.
 - **Sections.** A fact with no record kind (the capability list with each purpose, the entities, the binding and trace tables, a shared observation route) is ordinary HTML at a stable ID beside the browser. A section links to the records it concerns by page and ID and restates none of them.
-- **Views.** A view lives in the section or record body that owns its facts, in the form `views.md` gives it: the entity map in the entities section, a design part's sketch in its body, a need's pictures in its body where the user's experience matters. The browser already shows each need with its specification, program design and verification, grouped by capability, so no page composes a second view of a need.
+- **Views.** A view lives in the section or record body that owns its facts, in the form `views.md` gives it: the entity map in the entities section, a design part's sketch in its body, a need's pictures in its body where the user's experience matters. The browser already shows each need with its specification, program design and verification, and filters the needs by capability, so no page composes a second view of a need.
 - **Islands.** A section or body uses an inline Markdown island where Markdown carries its text best, in the inline form the guide's content reference documents. An island holds one section's or body's text, never a whole document.
 - **Checks.** A Verification Design check carries no result. Write no `observation` record at design time; the browser shows the check as not run until an observed result exists.
 
@@ -40,7 +40,7 @@ Each document page shows its sections in the order the owner asks about them, to
 
 | The owner asks | View | Lives in |
 | --- | --- | --- |
-| What are we building, and for whom? | the capability list, then the needs grouped by capability in the browser | the Requirements page |
+| What are we building, and for whom? | the capability list, then the needs in the browser, filtered by capability | the Requirements page |
 | What will a person see and do? | journey map, with pictures or a Gallery Journey when supplied | a Specification section |
 | What must always hold, and what can go wrong? | context diagram, with the failure cases named in the section title | a Specification section |
 | What are the things the system keeps track of? | entity map | the Specification's entities section |

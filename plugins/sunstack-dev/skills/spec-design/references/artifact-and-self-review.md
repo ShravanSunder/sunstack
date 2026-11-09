@@ -29,7 +29,7 @@ resolved alternatives when they change meaning
 open decisions, assumptions, and evidence gaps
 ```
 
-These are not mandatory headings. When the capability map fires, the requirement browser groups the normative requirements by capability through the needs each `R` names; each `R` is one record on the Specification page, never copied under a second capability. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
+These are not mandatory headings. When the capability map fires, the requirement browser reaches each obligation through the needs its `R` names and filters those needs by capability; each `R` is one record on the Specification page, never copied under a second capability. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
 
 An `R` names every `U` it traces to. When those needs sit in different capabilities, the browser shows the `R` under each with "also serves"; nothing is written twice. An obligation with no direct `U` row, such as a platform constraint, names the needs whose behavior it constrains. A cross-cutting obligation, such as one audit rule over every capability, names the need that asked for it and each need it also governs. `E`, `R`, `C`, and `V` identifiers never encode a capability, so regrouping renumbers nothing.
 
