@@ -3,6 +3,10 @@
     {
       "markdown": "../references/descriptions-and-invocation.md",
       "rules": "descriptions-and-invocation.rules.json"
+    },
+    {
+      "markdown": "../references/calls-and-placement.md",
+      "rules": "call-completeness.rules.json"
     }
   ],
   "marker_prefix": "K",
@@ -62,7 +66,8 @@
         "rule": "load",
         "fields": {
           "line": {
-            "from": "first_line"
+            "from": "capture",
+            "regex": "(?s)(.+)"
           },
           "targets": {
             "from": "target",
@@ -73,8 +78,14 @@
           "headings": {
             "from": "enclosing",
             "rule": "section-heading"
+          },
+          "caller_context": {
+            "from": "enclosing",
+            "rule": "section-heading",
+            "text": "full"
           }
-        }
+        },
+        "max_chars": 50000
       },
       "branch": {
         "rule": "branch",
@@ -105,7 +116,7 @@
     }
   },
   "decision_model": {
-    "model": "jev-latest"
+    "model": "typesafe/jev-1.14-20261014"
   },
   "limits": {
     "evidence_max_chars": 6000,
