@@ -105,7 +105,7 @@ Each document page holds two kinds of unit. A **record** is one row the document
 | Specification | one `specification` per `R` | the needs it serves | the obligation, its threshold, target constraints and reference | entities (`E`) and the other identifiers (`P`, `O`, `C`, `V`) |
 | Program Design | one `program-design` part per design part | the obligations it serves | its responsibility, interface and diagram | the entity binding table; the trace table |
 | Program Design, call paths on `execution.html` | a `stack` per call path and a `frame` per call | a stack its need and its frames; a frame the need it directly serves whenever one is declared, whether or not it is supporting or reused across stacks, and none otherwise | the record itself: name, source, responsibility and statement | none |
-| Verification Design | one `scenario` per verification row | the obligations it proves | the "proven by" line, passing condition, reference, target, and what stays unverified | a shared observation route, described once |
+| Verification Design | one `scenario` per verification row | the obligations it proves | the "proven by" line, passing condition, reference, target, and what stays unverified | a shared observation route (how a target is observed, never a result), described once |
 
 Record IDs are the identities: a need's ID is its `U`, an obligation's its `R`. Section IDs are stable too, because pages, browsers and agents reach them by ID. No attribution is invented: a frame with no declared need names none, and a record names only what its source supports.
 
@@ -113,7 +113,7 @@ Each body marks the parts its kind shows in the browser's compact views, such as
 
 A record's summary is its compact line in lists; its body carries the whole of it: definitions, conditions, alternatives, error cases, exact interfaces and thresholds, in tables where they compare. The browser decides how much a reader sees at once, and the body never drops detail to match it.
 
-A check written at design time carries no result: the browser shows it as not run, and no result record is written until an observation exists.
+A check written at design time carries no result: the browser shows it as not run, and no `observation` record (the released kind for an observed Pass, Fail or Partial result) is written until a result exists.
 
 Before the first need exists, the Requirements page is ordinary HTML holding the capability list and the owner's confirmation choice, with no browser and no record block; both come with the first need, and preparation starts then.
 
