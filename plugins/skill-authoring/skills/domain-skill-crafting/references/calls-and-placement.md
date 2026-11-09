@@ -105,8 +105,8 @@ Read each step, branch and load with these questions, in order:
 
 Only a yes to the first, with no yes after it, breaks the standard.
 
-- **Breaks:** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
-- **Breaks:** `sunstack-dev`'s `practices-cleanup/SKILL.md:40`, a row of its allow list that runs `mise -C "$agentstudio_worktree" run clean-artifacts`, AgentStudio's own clean task. No load is involved: the command itself is the product's workflow.
+- **Breaks:** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17` (at `89dc638e`, before its fix), in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
+- **Breaks:** `sunstack-dev`'s `practices-cleanup/SKILL.md:40` (at `89dc638e`, before its fix), a row of its allow list that runs `mise -C "$agentstudio_worktree" run clean-artifacts`, AgentStudio's own clean task. No load is involved: the command itself is the product's workflow.
 - **Keeps:** `ops-observability-stack`'s `references/victoria-queries.md`, which queries this toolkit's own Victoria stack through its HTTP API.
 - **Keeps:** `domain-skill-crafting`'s `references/platform.md`, whose plugin checks run each client's documented CLI.
 

@@ -76,7 +76,7 @@ A finding is traced to the change when the change's diff made the text at its li
 
 ## Worked: #187's line, at the act stage
 
-`sunstack-dev`'s `ops-observability-stack/SKILL.md:17`: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop."
+`sunstack-dev`'s `ops-observability-stack/SKILL.md:17` (at `89dc638e`, before its fix): "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop."
 
 **What happened.** A full run's `call.completeness` flagged the line: "A call doesn't say what to bring back." The fix commission assigned it as call completeness. The writer added the loop's return. The independent review found the return agreed with its sources and marked transfer complete. The next run passed the line on `call.completeness` and `branch.condition`. Then the owner pointed out that the loop belongs to AgentStudio, and the change was withdrawn. Every layer answered the narrow question it was handed, and nobody opened the loaded file to ask the bigger one.
 
