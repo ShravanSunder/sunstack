@@ -15,10 +15,11 @@ An implementation plan is a proof route through current authority and repository
    - the four current, distinct design documents (Requirements, Specification, Program Design, Verification Design) with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule, in its `four-document-design` mode; or
    - for an orchestrated improvement goal or owner-requested delivery of a direct improvement result, the unchanged `plan-improve-repo` return containing an admitted finding pointer, `current-four-document-design-ready | implementation-mechanics-only` classification, required evidence pointers, and current applicability anchors.
 2. Reject missing, combined, conflicting, stale, `design-required`, or malformed authority with `revision-requested | blocked`, exact evidence, and semantic owner. A design with a missing or stale Verification Design is `revision-requested` carrying `verification-design-gap` with the requirements that lack a current row; planning never writes the proof strategy itself. Do not upgrade an improvement basis.
-3. Establish `requested terminal: plan-only | pr-ready-unmerged` before substantive planning. Use explicit user or orchestrator intent. If a direct request is ambiguous, ask once at entry.
-4. At the same entry boundary, preserve an existing tracking selection or offer once between no tracking and one available named `ops-*` owner. Return a named selection separately for the caller to invoke; no tracking continues immediately.
+3. IF the caller supplies one deliverable's needs from a design set's delivery cut, scope the plan to those needs: plan only the slices that deliver them and the work they wait on, and name the deliverable in the plan.
+4. Establish `requested terminal: plan-only | pr-ready-unmerged` before substantive planning. Use explicit user or orchestrator intent. If a direct request is ambiguous, ask once at entry.
+5. At the same entry boundary, preserve an existing tracking selection or offer once between no tracking and one available named `ops-*` owner. Return a named selection separately for the caller to invoke; no tracking continues immediately.
 
-Completion: the governing basis, requested terminal, tracking disposition, and permission to plan or exact non-ready result are explicit.
+Completion: the governing basis, any deliverable scope, requested terminal, tracking disposition, and permission to plan or exact non-ready result are explicit.
 
 ## Plan the Change
 
@@ -29,7 +30,7 @@ Completion: the governing basis, requested terminal, tracking disposition, and p
    A plan whose slices touch more than one repository carries an orchestration section: each repository and its PRs in order, where one side waits on the other, the proofs that pass only end to end, and who owns each gate. It stays one plan, not per-repository plans joined by a handoff message.
 4. Ensure every slice names its external dependencies and the boundary where a stand-in is allowed if one is missing; every contract-only or prefactoring slice names its downstream vertical consumer; every Verification Design row is scheduled in a slice and every other obligation has fitting proof; and no step invents Why, What, structural How, proof strategy, or external authority.
 5. MUST load `../../shared-references/canonical-implementation-plan.md` and return its Canonical Result record, applying its complete governing-basis, result, delivery-context, home, and validation contract.
-6. Write one plan at the home the canonical reference's Plan Home names for its governing basis, and return its exact path.
+6. Write one plan at the home the canonical reference's Plan Home names for its governing basis, and return its exact path. A plan from a design set is a page: compose it with `presentation-html` and link it with the set's home page and, when scoped, its deliverable page, both ways.
 7. Return exactly `ready | revision-requested | blocked`. `ready` includes the complete canonical record and any separate tracking side-route selection; non-ready results create no new plan or preserve an existing ready record unchanged.
 
 ## Route the Result
