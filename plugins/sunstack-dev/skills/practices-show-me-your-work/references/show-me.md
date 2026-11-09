@@ -136,10 +136,10 @@ The approved page: memory-logs `projects/2026/2026-10-skills-and-sessions/scratc
 
 ## Check it
 
-Run the Demistify v1 static check `presentation-html` names for pages on that binding:
+Run the Demistify v1 static check `presentation-html` names for pages on that binding, with the CLI archive at the exact URL the matching guide documents, as `presentation-html`'s `references/demistify.md` says; `<cli-archive-url>` stands for that URL:
 
 ```sh
-pnpm dlx https://demistify.getagentstudio.dev/v1/demistify-cli.tgz check <page path>
+pnpm dlx <cli-archive-url> check <page path>
 ```
 
 Fix errors in the page's markup, or in the log when the log is what's wrong, then rebuild the page; warnings are advice. The check proves the markup, not that the page reads well or matches the log. Also follow each Map row and check it reaches its Story.
