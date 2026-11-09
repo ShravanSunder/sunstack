@@ -1,8 +1,8 @@
 # Diagram Rendering and Fallbacks
 
-This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page built on its Markdown, how a page composes that Markdown, where a diagram lives, and how an embedded copy stays current after an edit. It owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result; routine preparation of an HTML page is checked the way `presentation-html` validates it, under Page Proof. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
+This shared runtime reference is the only rule for choosing a medium. It decides whether a durable document is Markdown alone or an HTML page, where a page's text lives, where a diagram lives, and how a page stays current after an edit: a design set's preparation and an embedded copy's regeneration. It owns each view's medium, rendering fallback, semantic-preservation inspection, and visual-check result; routine preparation of an HTML page is checked the way `presentation-html` validates it, under Page Proof. The consuming skill selects the views: their predicates, required semantic fields, and UI moments.
 
-Expected inputs: destination, repository rendering capabilities, user-requested format when present, the durable document or documents the views belong to when any, and one or more view requests containing the fired predicate plus required semantic fields. A generated-image request also supplies the artifact identity and Lead-authored visual brief or its source pointer. After an edit, the caller also supplies the edited Markdown files and any page, live or embedded, that includes them.
+Expected inputs: destination, repository rendering capabilities, user-requested format when present, the durable document or documents the views belong to when any, and one or more view requests containing the fired predicate plus required semantic fields. A generated-image request also supplies the artifact identity and Lead-authored visual brief or its source pointer. After an edit, the caller also supplies the edited pages and, for a page that includes an external Markdown file, that file and every page, live or embedded, that includes it.
 
 Return: the document medium and, for a page, its page proof; after an edit, the freshness-on-edit result, and the explicit freshness comparison when one was requested or a stale-output defect is diagnosed; per view: selected medium, fallback decision, semantic-preservation result, visual-check result, and exact gap when no supported medium passes.
 
@@ -19,28 +19,31 @@ Chat, terminal, and read-only runs produce no page. Their views appear in the re
 
 IF the page is chosen, use `presentation-html` to build it and run its routine static check, and return the page path, its binding, the check result and its verification limits.
 
-## Two Entries Over One Source
+## The Page Is the Source
 
-On a page, the Markdown stays the truth and the page composes it. For an engineering design set, the page is the human entry and `index.md` is the agent entry, both leading into the same files; `design-documents.md` lays out the set and its chunks.
+A page holds its own text. For an engineering design set, each document's page is its source: its text lives in sections and record bodies at stable IDs, as `design-documents.md` lays out, and no external Markdown file holds a design fact.
 
-- The page includes each chunk, or each single-file document, with `<ex-markdown src="./<path>.md">` and places layout, navigation, and views around it. Each requirement's text lives once, in its Markdown. No card, island, or page table keeps a second copy, and the page writes no normative prose of its own. A reading path in `index.md` can become a page presentation over the same islands.
-- The Markdown carries the complete detail, and the page shows less at once. It opens with the explanation and one slice and keeps the rest one action away, in a tab, a section, or a link to the island. In what the page composes, hiding never makes a failure case look absent: failure cases and their thresholds stay in view, a collapsed section holds only the rationale or evidence about them, and its title names the cases it explains. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
-- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning chunk first. The view then shows that source.
+- Markdown islands carry a section's or a record body's text where Markdown carries it best, such as a dense table or a list of cases. An island sits inline, in the section or body it serves, in the inline form the guide at the page's binding documents; it never holds a whole document. Each fact's text lives once, in its section or body. No card, island or page table keeps a second copy.
+- The record body carries the complete detail, and the browser shows less at once: the summary in lists, the marked parts in the compact views, the whole body one action away. In what the page composes, hiding never makes a failure case look absent: failure cases and their thresholds stay in view, a collapsed section holds only the rationale or evidence about them, and its title names the cases it explains. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
+- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning section or record body first. The view then shows that source.
 
-For example, a job-submission page opens on the worker-loss path: two framing sentences that state no rule and link to the scheduling chunk, a link (or a Walkthrough stop) to that chunk's lifecycle diagram, then a link to each document's own page in the set's collection, composed as `presentation-html`'s engineering-documents reference teaches. Lease expiry, duplicate runs, and the requeue limit stay visible in the scheduling island, as that chunk states them. Only the evidence behind them, such as the incident timeline that set the limit, sits in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
+IF a page includes an external Markdown file with an island's `src` (a file another tool generates, or a page that is not a design document), keep that file as the source of what the island shows and keep the page current under Freshness on Edit below; a design document page includes no external file.
+
+For example, a job-submission Specification page keeps the requeue limit in R7's body, as a sentence and a small inline table of attempts. The Program Design page's lease design part links to R7 and never restates the number. Lease expiry, duplicate runs and the requeue limit stay visible in R7's body; only the incident timeline that set the limit sits in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
 
 ### Where a Diagram Lives
 
-The chunk that owns a design fact owns its diagram. When Mermaid is the chosen medium, the chunk holds the diagram source, so the agent reading the Markdown and the human reading its island see the same picture. When another medium fits (this reference still chooses it), the chunk holds the accepted asset or its source link plus the exact facts the diagram shows.
+The section or record body that owns a design fact owns its diagram. When Mermaid is the chosen medium, that section or body holds the diagram source, so the agent reading the page and the human reading the view see the same picture. When another medium fits (this reference still chooses it), the section or body holds the accepted asset or its source link plus the exact facts the diagram shows.
 
-The page never originates a governing fact. A native page view may project the owning chunk's meaning in a layout Markdown cannot give, and it is checked against that chunk's facts. A derived view reaches its facts through source anchors or islands, never through table positions or row counts: a page script that expects ten requirement rows breaks, or goes silently stale, when an eleventh arrives. A projection richer than anchors and islands needs a separately designed renderer contract, and page script never improvises one.
+A view never originates a governing fact. A native page view may project the owning section's or record's meaning in a layout prose cannot give, and it is checked against that owner's facts. The released browsers derive a design set's cross-document views from its records; any other derived view reaches its facts through stable IDs or islands, never through table positions or row counts: a page script that expects ten requirement rows breaks, or goes silently stale, when an eleventh arrives. A projection richer than IDs, islands and the released browsers needs a separately designed renderer contract, and page script never improvises one.
 
 ## Page Proof
 
 The page passes only when its proof records:
 
 - the Demistify binding;
-- each island's source file, and whether it was live or embedded;
+- for a design set, the actual result of preparation on the set's folder, run after the last edit and before the check;
+- each island's source: inline, or its included file and whether it was live or embedded;
 - the actual result of `presentation-html`'s routine static check on the final page;
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
 - the result, or the exact blocking gap, of each inspection a caller separately requires, such as a phase's visual, pixel or destination inspection.
@@ -51,25 +54,24 @@ Record no hashes and keep no provenance registry.
 
 ## Freshness on Edit
 
-A live `src` island needs HTTP serving and picks up later edits. For double-click viewing, Demistify's `embed` command writes an embedded copy. That copy is regenerated output, so its text is never edited by hand, and it goes stale without warning when a source it includes changes.
+Whoever edits a page keeps it, and every page derived from it, current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
 
-Whoever edits a Markdown file that a page includes, live or embedded, or the `index.md` whose paths a page renders, keeps that page current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
-
-1. Change the fact once, in its owning chunk. A row in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design row whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
-2. For an embedded copy, IF the user requests a freshness comparison, or a stale-output defect is being diagnosed, compare first, before anything overwrites the committed copy: use `presentation-html` to prepare equivalent output at a temporary path (the reader and, for an indexed collection, its full index), compare it byte for byte with the committed copy, and record `identical` or `differs`; then replace the committed copy, run its routine static check and requalify it. Otherwise, use `presentation-html` to regenerate the affected reader, and the complete collection index when there is one, from the live source page and every source it includes, then run its routine static check once. A fresh regeneration carries each source's current text exactly.
-3. Recheck each derived view and dependent row that names an edited identity against the owning chunk's facts. Equal text says nothing about them.
+1. Change the fact once, in its owning section or record body. A record in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design check whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
+2. For a design set, after any change to a record, a body, a section heading or ID, a page path or a Walkthrough, run the guide's preparation on the set's own folder and nothing outside it, then the collection index when the set has one, then the routine static check once, all with the CLI at the page's binding by the route the guide documents, which `presentation-html`'s `demistify.md` teaches. Preparation validates the whole set before it writes any page and refuses the set on a broken ID, reference, body, part or record kind; it is not an atomic filesystem transaction if a write itself fails, so a failed write leaves the set to prepare again. The collection it writes into each page is output: edit the record blocks and bodies, never the prepared carrier.
+3. IF a page includes an external Markdown file, a live `src` island needs HTTP serving and picks up later edits, and Demistify's `embed` command writes an embedded copy for double-click viewing. That copy is regenerated output, so its text is never edited by hand, and it goes stale without warning when a source it includes changes. IF the user requests a freshness comparison, or a stale-output defect is being diagnosed, compare first, before anything overwrites the committed copy: use `presentation-html` to prepare equivalent output at a temporary path (the reader and, for an indexed collection, its full index), compare it byte for byte with the committed copy, and record `identical` or `differs`; then replace the committed copy, run its routine static check and requalify it. Otherwise, use `presentation-html` to regenerate the affected reader, and the complete collection index when there is one, from the live source page and every source it includes, then run its routine static check once. A fresh regeneration carries each source's current text exactly.
+4. Recheck each derived view and dependent record that names an edited identity against the owning section's or body's facts. Equal text says nothing about them.
 
 Return freshness as one of:
 
-- `live`: the live-source arrangement resolves through its declared opening method, needs no embedded regeneration, and every rechecked view and row agrees with its chunk;
-- `regenerated`: the affected reader and complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and row agrees with its chunk. It claims no byte comparison and no browser observation;
-- `stale`: a required regeneration could not finish (a missing source or tool, or partial output), the check failed, or a rechecked view or row disagrees. Name the exact gap.
+- `live`: the live-source arrangement resolves through its declared opening method, needs no regeneration or preparation, and every rechecked view and record agrees with its owner;
+- `regenerated`: preparation, the reader and the complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and record agrees with its owner. It claims no byte comparison and no browser observation;
+- `stale`: a required preparation or regeneration could not finish (a refused set, a missing source or tool, or partial output), the check failed, or a rechecked view or record disagrees. Name the exact gap.
 
 The page is current only when freshness is `live` or `regenerated`; `stale` is never current.
 
 A requested comparison returns `identical` or `differs`. `differs` makes freshness `stale` until the replaced copy passes its check and compares again. A comparison that could not run is an exact verification gap, never `identical`.
 
-For example, the requeue limit moves from three attempts to five. The sentence in `scheduling.md` changes once. The Verification Design's owner redoes the proof row whose passing condition counted three attempts. The page view that labels the limit is rechecked against `scheduling.md`. The reader is regenerated from the edited sources and passes its static check, so freshness is `regenerated`. `entities.md` and `billing-export.md` stay untouched.
+For example, the requeue limit moves from three attempts to five. The sentence in R7's body on the Specification page changes once. The Verification Design's owner redoes the check whose passing condition counted three attempts. The lease design part, which links to R7, needs no edit. Preparation runs on the set's folder and passes, the static check passes, and the rechecked views agree with R7, so freshness is `regenerated`. The entities section and the billing records stay untouched.
 
 ## Choose Each View's Medium
 
@@ -113,8 +115,8 @@ Each medium label names an output medium, not a skill: `presentation-tui` denote
 
 ```text
 document medium: markdown | html-page | none (chat, terminal, or read-only), with reason
-page proof: binding, islands live | embedded, routine static check result, separately required inspection results or gaps, when a page
-freshness on edit: live | regenerated | stale, with each rechecked view and dependent row, when an edit touched a page's source
+page proof: binding, preparation result for a design set, islands inline | live | embedded, routine static check result, separately required inspection results or gaps, when a page
+freshness on edit: live | regenerated | stale, with each rechecked view and dependent record, when an edit touched a page or its source
 explicit freshness comparison: identical | differs, or the exact gap, only when requested or diagnosing a stale-output defect
 view and fired predicate
 required semantic fields
