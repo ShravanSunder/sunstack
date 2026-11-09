@@ -19,7 +19,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 
 | Skill | Lines | Always loads | Loads when a condition holds | Cites in `SKILL.md` | Returns |
 | --- | --- | --- | --- | --- | --- |
-| orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
+| orchestrator-design | 101 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `presentation-html`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
@@ -132,13 +132,13 @@ flowchart LR
 
 ### orchestrator-design
 
-- Lines: 99
+- Lines: 101
 - Always loads:
   - practice: `practices-show-me-your-work`, `practices-preflight`
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/phase-return-tokens.md`
 - Loads when a condition holds:
   - orchestrator: `orchestrator-implementation-goal`
-  - practice: `practices-manage-agents`
+  - practice: `practices-manage-agents`, `presentation-html`
   - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: none
 - Cites in `SKILL.md`: none

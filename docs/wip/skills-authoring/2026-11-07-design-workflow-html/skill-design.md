@@ -177,7 +177,8 @@ Defaults taken, each with its reason; strike any row. A superseded row stays, ma
 
 | Run | Status |
 | --- | --- |
-| 1–9 | proposed; admitted when the release lands |
+| 1 | implemented (its run-1 commit on this branch). Deviations: (a) D12-r2's wording: the released guide (Demistify 1.21.0) documents no need or view address, so a deliverable page links each need on its owning document page with the need's ID in the link text, and `design-documents.md` says deep links wait for a documented address (the Lead's decision 1 in the implementer commission); (b) a one-concern set has one capability named for its concern, because every released `need` record names a capability; (c) O7's "one collection in one folder" reads as the home page and document pages as the prepared collection, with plan pages in the existing `plans/` folder beside them, since preparation reads sibling pages only (CLI experiment, trail row 01a1bdfa-ca85); (d) only need records carry the capability key, and other records reach it through the needs they name, replacing the per-document key table; (e) the generated `plugins/sunstack-dev/docs/phase-composition.md` and its embedded page were regenerated because `orchestrator-design` gained a load, which the phase-composition contract test requires. |
+| 2–9 | admitted (Demistify 1.21.0 published; the Lead's admission precheck 1 passed); not started |
 
 ## Review record
 
