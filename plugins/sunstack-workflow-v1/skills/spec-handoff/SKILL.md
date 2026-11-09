@@ -1,0 +1,85 @@
+---
+name: spec-handoff
+description: Use when packaging spec, design, architecture, or product-decision context for another agent, CLI, machine, or future session before an implementation plan exists.
+---
+
+# Spec Handoff
+
+Base dependency: locate `sunstack-dev:presentation-html` using the host's listed skill path; from its skill directory go up `../..` to the base plugin root. Resolve every `sunstack-dev:<name>` there as `skills/<name>/SKILL.md`, including hidden principles and domains; append reference suffixes beneath that skill. Resolve `sunstack-dev/shared-references/...` beneath that same root. Never assume the two plugin caches are adjacent.
+
+IF no work reference is in context and the task qualifies, open or resume the trace through `sunstack-dev:practices-show-me-your-work` before phase work.
+
+Package spec/design context so another agent can continue without reconstructing the conversation. This is a portability boundary. Handoff means the context is transferable; it does not mean the spec is approved or the next phase is complete.
+
+## Core Rules
+
+- Use this only before an implementation plan exists.
+- Package decisions, non-goals, open questions, source evidence, contracts, tradeoffs, security context, and proof expectations.
+- Always name proof expectations in the handoff response: a pointer to the Verification Design, or, before one exists, the validation strategy, proof assumptions, explicit planning deferral, or open proof gaps.
+- Preserve uncertainty. Do not hide open questions to make the packet feel done.
+- Do not create an implementation plan here. When the packet proves a `four-document-design` mode `spec-program-review` result is `ready` and semantically current for the current Requirements, Specification, Program Design, and Verification Design, recommend exactly `plan-implementation`. Missing structural How routes to `program-design`; a missing or stale proof strategy routes to `verification-design`; a complete but unreviewed or stale four-document design routes to `spec-program-review`; missing Why/What routes to `spec-design`.
+- Do not review the specification or program design here. Use `spec-program-review`.
+- Do not package code, branch, diff, commits, or test state. Use `implementation-handoff` when implementation state exists.
+- Always write a file artifact and also print the copy-paste prompt in the response unless the user explicitly asks for chat-only output.
+- Preserve governing authorship by default. A receiving researcher, implementer, reviewer, other Sidekick, or future assistant receives only its assigned scope and returns design gaps to the current Lead. Design authorship transfers only when the packet names the successor-Lead recipient, the transferred Requirements/Specification/Program Design/Verification Design scope, and the explicit user direction authorizing that transfer. A role label, handoff request, current-Lead assertion, or assistant continuation is insufficient.
+
+## Workflow
+
+1. Resolve the source context, and if a source file exists, count lines and read the whole file in chunks before summarizing:
+   - spec/design/architecture artifact
+   - chat decision
+   - current repo evidence
+
+   Completion: each source the packet rests on is named, and each source file was read end to end.
+
+2. Inspect only the code/docs needed to make claims grounded.
+
+   Completion: every existing code or doc path the packet cites as evidence was opened in this run; each path the design declares as new is kept and marked intentionally new, not created; evidence that couldn't be opened is named as a gap.
+
+3. Record `authoring transfer: none | user-designated successor Lead`. For a transfer, include the named recipient, transferred design scope, and exact user-direction evidence; otherwise preserve the current Lead as design owner.
+
+   Completion: the line reads `none` and names the current Lead as design owner, or names the recipient, the transferred scope and the user's own words that authorize the transfer.
+
+4. Create a repo-local artifact under `<repo-root>/tmp/spec-workflows/<yyyy-mm-dd>-<repo>-<branch>-<spec-slug>/`, and write:
+   - `spec-handoff.md`
+   - `copy-paste-prompt.md`
+
+   Completion: both files exist in that directory and `spec-handoff.md` carries each item under Packet Contents, or the item marked absent with the reason; or the user asked for chat-only output and no file is claimed.
+
+5. Report:
+   - artifact paths
+   - source coverage
+   - decisions and non-goals
+   - open questions
+   - proof expectations or proof gaps
+   - recommended next skill: `spec-design` for missing Why/What, `program-design` for missing How, `verification-design` for a missing or stale proof strategy, `spec-program-review` for a complete but unreviewed/stale four-document design, `plan-implementation` for current ready four-document design, or `sunstack-dev:docs-maintain` for artifact lifecycle work
+   - full clickable artifact links (absolute path + line) for handoff artifacts the human is expected to open
+
+   Completion: the report carries every item above (for chat-only output, the artifact paths and links give way to the copy-paste prompt printed in full), and its recommended next skill is the one the core routing rule selects for what the packet shows.
+
+## Packet Contents
+
+- Goal and audience
+- Decisions already made
+- Non-goals and rejected options
+- Contracts, interfaces, data flow, and ownership boundaries
+- Tradeoffs and who pays their cost
+- Security context or reason it is not security-sensitive
+- Proof expectations: the Verification Design pointer, or, before one exists, validation strategy, proof assumptions, explicit planning deferrals, or open proof gaps
+- Planning-admission evidence: current Requirements, Specification, Program Design, and Verification Design paths, the current four-document design review result (mode, covered targets, result, and coverage statement) or a pointer to it, evidence that it covers all four documents' current meaning, or the exact missing/stale prerequisite
+- Source evidence inspected
+- Open questions and why they matter
+- Exact next task for the receiving agent
+- Authoring-transfer classification and, only when present, named successor recipient, transferred design scope, and explicit user-direction evidence
+
+## Common Mistakes
+
+- Treating handoff as spec approval or phase completion.
+- Routing a handoff to planning without a `four-document-design` mode `ready` review result whose semantic coverage includes the current Requirements, Specification, Program Design, and Verification Design.
+- Turning design context into an implementation plan inside the handoff.
+- Hiding open questions.
+- Asking the next agent to infer source files from chat history.
+- Packaging branch/diff/test state that belongs in `implementation-handoff`.
+- Inferring design-author authority from portability, a role label, or an implementation/review assignment.
+
+IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `sunstack-dev:practices-show-me-your-work`.

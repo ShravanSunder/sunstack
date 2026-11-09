@@ -52,11 +52,11 @@ describe("phase composition map", () => {
   test("lists the delivery orchestrator's phases in its route table's order", () => {
     const committedMap = readFileSync(path.join(repoRoot, phaseCompositionMapPath), "utf8");
     const deliveryOrchestrator = readFileSync(
-      path.join(repoRoot, "plugins/sunstack-dev/skills/orchestrator-implementation-goal/SKILL.md"),
+      path.join(repoRoot, "plugins/sunstack-workflow-v1/skills/orchestrator-implementation-goal/SKILL.md"),
       "utf8",
     );
     const tokenMapLine = deliveryOrchestrator.split("\n").find((line) => line.includes("map a returned token to its next owner"));
-    const routeTableOrder = [...new Set([...(tokenMapLine ?? "").matchAll(/->\s*`([^`]+)`/g)].map((match) => match[1]))];
+    const routeTableOrder = [...new Set([...(tokenMapLine ?? "").matchAll(/->\s*`([^`]+)`/g)].map((match) => match[1]?.replace(/^sunstack-(?:dev|workflow-v1):/, "")))];
     const mappedRouteOrder = /### orchestrator-implementation-goal routes\n\n- Route order, from its `SKILL\.md` route table: (.+)\n/
       .exec(committedMap)?.[1]
       ?.split(", ")
@@ -118,6 +118,17 @@ describe("phase composition map", () => {
         condition: "conditional",
       },
     ]);
+  });
+
+  test("classifies qualified base practice calls as practices", () => {
+    const loads = extractLoadCalls("MUST load `sunstack-dev:practices-preflight` and return readiness.", "sample-phase", sampleActiveSkills);
+    expect(loads).toEqual([{ target: "sunstack-dev:practices-preflight", kind: "practice", condition: "always" }]);
+  });
+
+  test("retains the implementer's base-practice edges in the combined map", () => {
+    const map = buildPhaseCompositionMap(repoRoot);
+    expect(map).toMatch(/\["\d+\. implement-plan"\].*-->.*\(\["sunstack-dev:practices-preflight"\]\)/);
+    expect(map).toMatch(/\["\d+\. implement-plan"\].*-->.*\(\["sunstack-dev:practices-verification"\]\)/);
   });
 
   test("counts a returned token and skips tokens that are only mapped or received", () => {

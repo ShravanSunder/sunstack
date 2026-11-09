@@ -33,11 +33,11 @@ docs request
 - A design set's pages are its source, read by agents and humans alike, so this separation never splits them: upkeep edits the section or record body that owns a fact, on its document's page, and never forks a copy of its text into the home page, a deliverable page or a second doc. A design set written before pages stays readable in Markdown where it is; upkeep doesn't migrate it.
 - Keep `AGENTS.md` short. Move runbook detail to docs and link it.
 - Do not let old plans/specs/debug notes displace current source-of-truth docs by inertia.
-- Do not replace phase skills for active artifact work: `spec-design`, `program-design`, `spec-program-review`, `spec-handoff`, `plan-handoff`, `implementation-handoff`, `implementation-review` for implementation review, `implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
+- Do not replace phase skills for active artifact work: `sunstack-workflow-v1:spec-design`, `sunstack-workflow-v1:program-design`, `sunstack-workflow-v1:spec-program-review`, `sunstack-workflow-v1:spec-handoff`, `sunstack-workflow-v1:plan-handoff`, `sunstack-workflow-v1:implementation-handoff`, `sunstack-workflow-v1:implementation-review` for implementation review, `sunstack-workflow-v1:implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
 - Before purging or rewriting docs, propose the change and say what will be preserved.
 - When code and docs disagree, identify the driver and, IF it is not obvious, load `../../shared-references/owner-decision-brief.md` and return a brief of both versions.
-- The parent owns final doc edits; bounded inventory goes to a 🔧 Operator and stale-doc research to a 📚 Researcher Worker, through `practices-manage-agents`.
-- Use `practices-manage-agents` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
+- The parent owns final doc edits; bounded inventory goes to a 🔧 Operator and stale-doc research to a 📚 Researcher Worker, through `sunstack-workflow-v1:practices-manage-agents`.
+- Use `sunstack-workflow-v1:practices-manage-agents` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
 - Use progressive disclosure: load only the workflow reference that matches the docs job.
 
 ## Workflow

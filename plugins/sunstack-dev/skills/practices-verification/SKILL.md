@@ -11,7 +11,7 @@ You work under your current assignment and its actual permissions. Loading this 
 
 Project specifics live in the project's own verification skill under `.agents/skills/verify-<app>/`. Creating or maintaining that skill is the work of `practices-verification-maintenance`. When your current task is an observation, including the live pass that practice runs on a skill it just wrote or updated, continue the observation here. Hand off to `practices-verification-maintenance` only when your own task is creating or maintaining the project skill and the request authorizes that work. During an observation, report a missing or stale skill as a setup gap and name that practice as the route.
 
-Make the observations yourself. IF your grant allows helpers and an exact collection is worth delegating, load `practices-manage-agents` and return the bounded commission; open the evidence each helper brings back and judge yourself whether it supports the claim.
+Make the observations yourself. IF your grant allows helpers and an exact collection is worth delegating, load `sunstack-workflow-v1:practices-manage-agents` and return the bounded commission; open the evidence each helper brings back and judge yourself whether it supports the claim.
 
 ## Workflow
 

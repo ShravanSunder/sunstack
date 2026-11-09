@@ -1,6 +1,6 @@
 # Phase composition
 
-What each orchestrator and phase in `sunstack-dev` is built from: the phases an orchestrator routes, and for each skill the practices, references and other skills it loads, the principles it cites and the tokens it returns. The map is generated from the skill files, so each skill's own text stays the only authority for what it does.
+What each orchestrator and phase across `sunstack-dev` and frozen `sunstack-workflow-v1` is built from: the phases an orchestrator routes, and for each skill the practices, references and other skills it loads, the principles it cites and the tokens it returns. The map is generated from the skill files, so each skill's own text stays the only authority for what it does.
 
 Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills phase-composition`, then embed it into `phase-composition.html` from its live source `phase-composition.source.html` with Demistify's `embed`. The contract test `tests/skills/lib/contracts/phase-composition-map-contract.test.ts` fails when this file, or the page's embedded copy of it, no longer matches the skill files.
 
@@ -19,25 +19,25 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 
 | Skill | Lines | Always loads | Loads when a condition holds | Cites in `SKILL.md` | Returns |
 | --- | --- | --- | --- | --- | --- |
-| orchestrator-design | 101 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `presentation-html`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
-| orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
+| orchestrator-design | 103 | `design-documents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `sunstack-dev:presentation-html`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
+| orchestrator-implementation-goal | 53 | `practices-manage-agents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
 | docs-maintain | 121 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
-| implement-plan | 44 | `canonical-implementation-plan`, `execution-and-proof`, `practices-preflight`, `practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `practices-cleanup` | none | none |
-| implementation-handoff | 94 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
-| implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
-| implementation-review | 83 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `decision-model-review`, `proof-challenge`, `focused-reviewer` | none | none |
-| plan-handoff | 78 | `canonical-implementation-plan` | `handoff-template` | none | none |
-| plan-implementation | 46 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
-| plan-improve-repo | 200 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
-| plan-update | 35 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `presentation-html`, `diagram-rendering-and-fallbacks` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
-| program-design | 369 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
-| spec-design | 332 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
-| spec-handoff | 83 | none | none | none | none |
-| spec-program-review | 252 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
-| verification-design | 157 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
+| implement-plan | 46 | `canonical-implementation-plan`, `execution-and-proof`, `sunstack-dev:practices-preflight`, `sunstack-dev:practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `sunstack-dev:practices-cleanup` | none | none |
+| implementation-handoff | 96 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
+| implementation-pr-wrapup | 114 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
+| implementation-review | 85 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `decision-model-review`, `proof-challenge`, `focused-reviewer` | none | none |
+| plan-handoff | 80 | `canonical-implementation-plan` | `handoff-template` | none | none |
+| plan-implementation | 48 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
+| plan-improve-repo | 202 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
+| plan-update | 37 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `sunstack-dev:presentation-html`, `diagram-rendering-and-fallbacks` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
+| program-design | 371 | `design-documents`, `sunstack-dev:practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `sunstack-dev:domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
+| spec-design | 334 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
+| spec-handoff | 85 | none | none | none | none |
+| spec-program-review | 254 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
+| verification-design | 159 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
 
 ## Orchestrators
 
@@ -75,10 +75,10 @@ The practices its phases load: solid arrows load always, dashed arrows when a co
 
 ```mermaid
 flowchart LR
-  program_design["2. program-design"] --> practices_how(["practices-how"])
+  program_design["2. program-design"] --> practices_how(["sunstack-dev:practices-how"])
   verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
   plan_implementation["6. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
-  plan_update["plan-update"] -.-> presentation_html(["presentation-html"])
+  plan_update["plan-update"] -.-> presentation_html(["sunstack-dev:presentation-html"])
 ```
 
 ### orchestrator-implementation-goal routes
@@ -119,11 +119,11 @@ The practices its phases load: solid arrows load always, dashed arrows when a co
 flowchart LR
   verification_design["3. verification-design"] -.-> practices_manage_agents(["practices-manage-agents"])
   plan_implementation["4. plan-implementation"] -.-> practices_manage_agents(["practices-manage-agents"])
-  plan_update["5. plan-update"] -.-> presentation_html(["presentation-html"])
-  implement_plan["6. implement-plan"] --> practices_preflight(["practices-preflight"])
+  plan_update["5. plan-update"] -.-> presentation_html(["sunstack-dev:presentation-html"])
+  implement_plan["6. implement-plan"] --> practices_preflight(["sunstack-dev:practices-preflight"])
   implement_plan["6. implement-plan"] -.-> practices_manage_agents(["practices-manage-agents"])
-  implement_plan["6. implement-plan"] --> practices_verification(["practices-verification"])
-  implement_plan["6. implement-plan"] -.-> practices_cleanup(["practices-cleanup"])
+  implement_plan["6. implement-plan"] --> practices_verification(["sunstack-dev:practices-verification"])
+  implement_plan["6. implement-plan"] -.-> practices_cleanup(["sunstack-dev:practices-cleanup"])
   implementation_pr_wrapup["implementation-pr-wrapup"] --> practices_manage_agents(["practices-manage-agents"])
   plan_improve_repo["plan-improve-repo"] --> practices_manage_agents(["practices-manage-agents"])
 ```
@@ -132,13 +132,13 @@ flowchart LR
 
 ### orchestrator-design
 
-- Lines: 101
+- Lines: 103
 - Always loads:
-  - practice: `practices-show-me-your-work`, `practices-preflight`
+  - practice: `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/phase-return-tokens.md`
 - Loads when a condition holds:
   - orchestrator: `orchestrator-implementation-goal`
-  - practice: `practices-manage-agents`, `presentation-html`
+  - practice: `practices-manage-agents`, `sunstack-dev:presentation-html`
   - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: none
 - Cites in `SKILL.md`: none
@@ -147,15 +147,15 @@ flowchart LR
 
 ### orchestrator-implementation-goal
 
-- Lines: 51
+- Lines: 53
 - Always loads:
-  - practice: `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`
+  - practice: `practices-manage-agents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`
   - shared reference: `../../shared-references/phase-return-tokens.md`
   - own reference: `references/goal-contract-and-routing.md`
 - Loads when a condition holds:
   - phase: `implementation-pr-wrapup`, `plan-implementation`
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-collaboration`
+- Named without a load call: none
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
@@ -168,7 +168,7 @@ flowchart LR
 - Loads when a condition holds:
   - practice: `practices-cleanup`
   - own reference: `references/background-monitoring.md`
-- Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `docs-maintain`
+- Named without a load call: `practices-show-me-your-work`, `docs-maintain`
 - Cites in `SKILL.md`: `principle-refine-mental-models`, `principle-read-ground-truth-first`
 - Cites in its references: none
 - Returns: none
@@ -180,7 +180,7 @@ flowchart LR
   - shared reference: `../../shared-references/diagram-rendering-and-fallbacks.md`
 - Loads when a condition holds:
   - own reference: `references/model-shapes.md`, `references/provenance-decomposition.md`
-- Named without a load call: `practices-show-me-your-work`, `discuss-pathfinding`, `practices-research`, `presentation-tui`, `spec-design`, `program-design`, `verification-design`, `plan-implementation`, `implement-plan`, `implementation-review`
+- Named without a load call: `practices-show-me-your-work`, `discuss-pathfinding`, `practices-research`, `presentation-tui`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
@@ -193,7 +193,7 @@ flowchart LR
 - Loads when a condition holds:
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/user-requirements-extraction.md`
-- Named without a load call: `practices-show-me-your-work`, `program-design`, `verification-design`, `practices-research`, `spec-design`, `discuss-clarify-mental-models`, `presentation-tui`, `presentation-webui`, `docs-maintain`, `practices-manage-agents`
+- Named without a load call: `practices-show-me-your-work`, `practices-research`, `discuss-clarify-mental-models`, `presentation-tui`, `presentation-webui`, `docs-maintain`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
@@ -207,183 +207,183 @@ flowchart LR
   - shared reference: `../../shared-references/owner-decision-brief.md`, `../../shared-references/humanizer.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/workflows.md`, `references/changelog-runbooks.md`
   - outside this plugin: `../../docs/source-inspiration-catalog.md`
-- Named without a load call: `practices-show-me-your-work`, `spec-design`, `program-design`, `spec-program-review`, `spec-handoff`, `plan-handoff`, `implementation-handoff`, `implementation-review`, `implementation-pr-wrapup`, `debug-investigation`, `practices-manage-agents`
+- Named without a load call: `practices-show-me-your-work`, `debug-investigation`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
 
 ### implement-plan
 
-- Lines: 44
+- Lines: 46
 - Always loads:
-  - practice: `practices-preflight`, `practices-verification`
+  - practice: `sunstack-dev:practices-preflight`, `sunstack-dev:practices-verification`
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/execution-and-proof.md`
 - Loads when a condition holds:
-  - practice: `practices-manage-agents`, `practices-cleanup`
+  - practice: `practices-manage-agents`, `sunstack-dev:practices-cleanup`
   - shared reference: `../../shared-references/implementer-verifier-pairing.md`
-- Named without a load call: `practices-show-me-your-work`, `plan-update`, `implementation-review`, `implementation-pr-wrapup`
+- Named without a load call: `plan-update`, `implementation-review`, `implementation-pr-wrapup`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-prove-it-works`, `principle-refine-mental-models`, `principle-justify-the-complexity`
 - Returns: none
 
 ### implementation-handoff
 
-- Lines: 94
+- Lines: 96
 - Always loads:
   - own reference: `references/handoff-template.md`, `references/copy-paste-prompts.md`
 - Loads when a condition holds:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
-- Named without a load call: `practices-show-me-your-work`, `plan-handoff`, `implementation-review`, `implement-plan`
+- Named without a load call: `plan-handoff`, `implementation-review`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
 
 ### implementation-pr-wrapup
 
-- Lines: 112
+- Lines: 114
 - Always loads:
   - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/code-review-feedback-handling.md`
   - own reference: `references/local-branch-state.md`, `references/public-artifact-safety.md`, `references/github-pr-state.md`, `references/monitor-loop.md`, `references/merge-gates.md`
 - Loads when a condition holds:
   - own reference: `references/merge-cleanup.md`, `references/pr-outline-views.md`
-- Named without a load call: `practices-show-me-your-work`, `implementation-review`, `references/pr-description.md`
+- Named without a load call: `implementation-review`, `references/pr-description.md`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-verify-before-accepting`
 - Returns: none
 
 ### implementation-review
 
-- Lines: 83
+- Lines: 85
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/coordination-and-chunking.md`, `references/lanes/lane-schema.md`, `references/lanes/spec-compliance.md`, `references/lanes/chunk-reviewer.md`, `references/lanes/dispel.md`, `references/finding-and-reduction.md`
 - Loads when a condition holds:
   - own reference: `references/lanes/proof-challenge.md`, `references/lanes/focused-reviewer.md`
   - outside this plugin: `decision-model-review`
-- Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `references/reviewing-implementation.md`, `implement-plan`
+- Named without a load call: `practices-manage-agents`, `references/reviewing-implementation.md`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-verify-before-accepting`, `principle-refine-mental-models`, `principle-justify-the-complexity`
 - Returns: none
 
 ### plan-handoff
 
-- Lines: 78
+- Lines: 80
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
 - Loads when a condition holds:
   - own reference: `references/handoff-template.md`
-- Named without a load call: `practices-show-me-your-work`, `spec-handoff`, `plan-implementation`, `implementation-handoff`
+- Named without a load call: `spec-handoff`, `plan-implementation`, `implementation-handoff`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
 
 ### plan-implementation
 
-- Lines: 46
+- Lines: 48
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/slice-and-proof-design.md`
 - Loads when a condition holds:
   - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-show-me-your-work`, `plan-update`, `spec-program-review`, `plan-improve-repo`, `presentation-html`, `implement-plan`
+- Named without a load call: `plan-update`, `spec-program-review`, `plan-improve-repo`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-write-tests-that-can-fail`
 - Returns: `verification-design-gap`
 
 ### plan-improve-repo
 
-- Lines: 200
+- Lines: 202
 - Always loads:
   - practice: `practices-manage-agents`
 - Loads when a condition holds:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/audit-lanes.md`, `references/improvement-plan-template.md`, `references/reconcile-backlog.md`, `references/validation-checklist.md`
-- Named without a load call: `practices-show-me-your-work`, `plan-implementation`, `spec-design`, `program-design`, `verification-design`, `spec-program-review`, `implementation-review`, `plan-handoff`
+- Named without a load call: `plan-implementation`, `spec-design`, `program-design`, `verification-design`, `spec-program-review`, `implementation-review`, `plan-handoff`
 - Cites in `SKILL.md`: `principle-verify-before-accepting`, `principle-write-tests-that-can-fail`
 - Cites in its references: none
 - Returns: `verification-design-gap`
 
 ### plan-update
 
-- Lines: 35
+- Lines: 37
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - another skill's file: `../plan-implementation/references/slice-and-proof-design.md`
 - Loads when a condition holds:
-  - practice: `presentation-html`
+  - practice: `sunstack-dev:presentation-html`
   - shared reference: `../../shared-references/owner-decision-brief.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
-- Named without a load call: `practices-show-me-your-work`, `implement-plan`, `verification-design`
+- Named without a load call: `implement-plan`, `verification-design`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap`
 
 ### program-design
 
-- Lines: 369
+- Lines: 371
 - Always loads:
-  - practice: `practices-how`
+  - practice: `sunstack-dev:practices-how`
   - shared reference: `../../shared-references/design-documents.md`
   - own reference: `references/current-system-model.md`, `references/alternatives-and-crux.md`, `references/components-ownership-interfaces.md`, `references/state-calls-and-flows.md`, `references/failure-concurrency-recovery.md`, `references/cross-cutting-realization.md`, `references/proof-architecture-and-traceability.md`, `references/artifact-and-self-review.md`
 - Loads when a condition holds:
-  - domain: `../domain-<lang>/SKILL.md`
   - shared reference: `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/lanes/lane-schema.md`
-- Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `spec-design`, `spec-program-review`, `../../shared-references/owner-decision-brief.md`, `docs-maintain`, `practices-research`, `presentation-html`, `verification-design`
+  - outside this plugin: `sunstack-dev:domain-<lang>`
+- Named without a load call: `practices-manage-agents`, `spec-design`, `spec-program-review`, `../../shared-references/owner-decision-brief.md`, `verification-design`
 - Cites in `SKILL.md`: `principle-justify-the-complexity`
 - Cites in its references: `principle-separate-the-concerns`
 - Returns: `specification-gap`
 
 ### spec-design
 
-- Lines: 332
+- Lines: 334
 - Always loads:
   - shared reference: `../../shared-references/diagram-rendering-and-fallbacks.md`, `../../shared-references/design-documents.md`
   - own reference: `references/authority-and-problem-framing.md`, `references/domain-entities.md`, `references/requirements-and-traceability.md`, `references/observable-contracts.md`, `references/artifact-and-self-review.md`
 - Loads when a condition holds:
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-show-me-your-work`, `discuss-pathfinding`, `program-design`, `verification-design`, `spec-program-review`, `practices-research`, `docs-maintain`, `discuss-clarify-mental-models`, `presentation-html`, `practices-manage-agents`
+- Named without a load call: `program-design`, `verification-design`, `spec-program-review`, `practices-manage-agents`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-define-the-domain-first`
 - Returns: none
 
 ### spec-handoff
 
-- Lines: 83
+- Lines: 85
 - Always loads:
   - none
 - Loads when a condition holds:
   - none
-- Named without a load call: `practices-show-me-your-work`, `spec-program-review`, `plan-implementation`, `program-design`, `verification-design`, `spec-design`, `implementation-handoff`, `docs-maintain`
+- Named without a load call: `spec-program-review`, `plan-implementation`, `program-design`, `verification-design`, `spec-design`, `implementation-handoff`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
 
 ### spec-program-review
 
-- Lines: 252
+- Lines: 254
 - Always loads:
   - shared reference: `../../shared-references/design-documents.md`
   - own reference: `references/finding-and-reduction-schema.md`, `references/coordination-and-chunking.md`, `references/lanes/lane-schema.md`, `references/lanes/mode-complete-reviewer.md`, `references/reviewing-common-method.md`, `references/lanes/dispel.md`
 - Loads when a condition holds:
   - own reference: `references/classifying-review-requirement.md`, `references/lanes/chunk-reviewer.md`, `references/lanes/proof-challenge.md`
-- Named without a load call: `practices-show-me-your-work`, `practices-manage-agents`, `spec-design`, `program-design`, `verification-design`, `discuss-pathfinding`
+- Named without a load call: `practices-manage-agents`, `spec-design`, `program-design`, `verification-design`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-verify-before-accepting`, `principle-refine-mental-models`, `principle-justify-the-complexity`, `principle-design-for-failure`, `principle-design-for-concurrency`, `principle-write-tests-that-can-fail`
 - Returns: none
 
 ### verification-design
 
-- Lines: 157
+- Lines: 159
 - Always loads:
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/choosing-the-observation.md`
 - Loads when a condition holds:
   - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-show-me-your-work`, `practices-verification`, `practices-verification-maintenance`, `plan-update`, `presentation-html`
+- Named without a load call: `plan-update`
 - Cites in `SKILL.md`: `principle-read-ground-truth-first`, `principle-prove-it-works`, `principle-verify-before-accepting`, `principle-write-tests-that-can-fail`, `principle-write-for-the-reader`
 - Cites in its references: `principle-write-tests-that-can-fail`
 - Returns: none

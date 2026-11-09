@@ -16,7 +16,7 @@ Good briefs look like the ones owners accept quickly: one picture of today, one 
 
 The recipient depends on who raised the decision. When the owner asked you the question directly in this conversation, the brief answers the owner here, whoever opened the session and even when the Lead commissioned you as a helper. Answering grants no wider scope, implementation or merge authority. A decision you raise yourself from your own work, a phase stop such as `decision-needed` included, goes to the Chief of Staff role, never directly to the owner. Take the Chief of Staff from the commission, the work thread, or the session's standing instructions. When none of them names one, return the brief to your commissioner with the exact recipient gap. When that commissioner is the owner, keep the brief unsent: hold it in the work's artifact or trace for the Chief of Staff, and reply with only the recipient gap and where the brief is held, never its options or recommendation. The gap is not leave to brief the owner.
 
-A PR-shape decision goes to the owner: at plan review for a first plan, and through `plan-update`'s owner stop during delivery. When the owner is away, it goes to the Chief of Staff.
+A PR-shape decision goes to the owner: at plan review for a first plan, and through `sunstack-workflow-v1:plan-update`'s owner stop during delivery. When the owner is away, it goes to the Chief of Staff.
 
 A question tool may ask only the brief's recipient for the final pick, and only after the brief is on that recipient's screen. Ask once. Later updates point back to the open brief in one line instead of asking again.
 

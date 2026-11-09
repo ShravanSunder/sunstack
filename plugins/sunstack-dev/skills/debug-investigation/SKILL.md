@@ -14,7 +14,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
 - No fixes before root-cause investigation.
 - Use hypothesis-driven debugging. Each theory names its supporting evidence, missing evidence, and smallest proof step.
 - Use subagents only for bounded investigation slices. The Lead owns synthesis, evidence checking, and the final diagnosis.
-- Use `practices-manage-agents` to pick, launch, and hand off to each helper; keep root-cause method and deterministic watcher guidance here.
+- Use `sunstack-workflow-v1:practices-manage-agents` to pick, launch, and hand off to each helper; keep root-cause method and deterministic watcher guidance here.
 - Keep investigation read-only until the user explicitly asks to fix or a validated fix phase begins.
 - When three or more fix attempts for this symptom have already failed, stop patching. Write down the one premise every failed fix assumed, list every observed failure beside it, and decide whether that premise, or the design and architecture behind it, still holds before anyone tries another patch ([question the premise the failed fixes share](../principle-refine-mental-models/SKILL.md)).
 - For real debugging work with a clear symptom, target, and reproduction surface, write a repo-local debug artifact by default. Stay in chat only when the user explicitly asks for chat-only/no-files output or the debugging scope is still unclear.
@@ -83,7 +83,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
 
 ## Subagent Use
 
-When the bug is broad, ambiguous, or multi-layered, fan out read-only 📚 Researcher Workers through `practices-manage-agents`, each with the same bug packet and a bounded assignment.
+When the bug is broad, ambiguous, or multi-layered, fan out read-only 📚 Researcher Workers through `sunstack-workflow-v1:practices-manage-agents`, each with the same bug packet and a bounded assignment.
 
 Suggested lanes:
 

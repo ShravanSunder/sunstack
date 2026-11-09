@@ -22,8 +22,14 @@
     {
       "name": "sunstack-dev",
       "source": "./plugins/sunstack-dev",
-      "description": "Development workflow skills for long-horizon delivery routing, canonical planning, plan execution, independent implementation review, bounded design orchestration, research, handoffs, PR lifecycle, debugging, operations, agent management, and surface-matched presentation (TUI, rendered chat and standalone HTML)",
-      "version": "2.108.1"
+      "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation.",
+      "version": "3.0.0"
+    },
+    {
+      "name": "sunstack-workflow-v1",
+      "source": "./plugins/sunstack-workflow-v1",
+      "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction.",
+      "version": "1.0.0"
     },
     {
       "name": "skill-authoring",

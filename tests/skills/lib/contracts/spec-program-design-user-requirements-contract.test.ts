@@ -4,8 +4,10 @@ import { describe, expect, test } from "vitest";
 
 const repoRoot = path.resolve(import.meta.dirname, "../../../..");
 const pluginRoot = path.join(repoRoot, "plugins/sunstack-dev");
-const readPluginFile = (relativePath: string): string =>
-  readFileSync(path.join(pluginRoot, relativePath), "utf8");
+const readPluginFile = (relativePath: string): string => {
+  const workflowPath = path.join(repoRoot, "plugins/sunstack-workflow-v1", relativePath);
+  return readFileSync(existsSync(workflowPath) ? workflowPath : path.join(pluginRoot, relativePath), "utf8");
+};
 
 describe("user requirements and design-view contracts", () => {
   test("keeps Re-anchor local to the four scope-drift junctions", () => {
@@ -562,7 +564,7 @@ describe("user requirements and design-view contracts", () => {
         "skills/plan-improve-repo/references/improvement-plan-template.md",
       ),
       readPluginFile("shared-references/design-documents.md"),
-      readPluginFile("README.md"),
+      // Plugin READMEs are inventories after the split; normative review stays in these runtime consumers.
       readPluginFile("skills/discuss-clarify-mental-models/SKILL.md"),
       readPluginFile("skills/practices-research/SKILL.md"),
     ];

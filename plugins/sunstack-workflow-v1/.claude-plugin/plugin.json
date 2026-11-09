@@ -1,0 +1,15 @@
+{
+  "name": "sunstack-workflow-v1",
+  "version": "1.0.0",
+  "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction.",
+  "author": {
+    "name": "Shravan Sunder"
+  },
+  "keywords": [
+    "frozen",
+    "legacy",
+    "workflow",
+    "v1",
+    "orchestration"
+  ]
+}

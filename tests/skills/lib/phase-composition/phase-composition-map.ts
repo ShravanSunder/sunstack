@@ -41,7 +41,7 @@ export interface SkillSource {
 
 export const phaseCompositionMapPath = "plugins/sunstack-dev/docs/phase-composition.md";
 const pluginRelativeRoot = "plugins/sunstack-dev";
-const skillsRelativeRoot = `${pluginRelativeRoot}/skills`;
+const skillPluginRoots = [pluginRelativeRoot, "plugins/sunstack-workflow-v1"] as const;
 const returnTokensRelativePath = "plugins/sunstack-dev/shared-references/phase-return-tokens.md";
 
 export const classifySkillKind = (skillName: string): SkillKind => {
@@ -144,7 +144,8 @@ const classifyLoadTarget = (
   activeSkillNames: ReadonlySet<string>,
 ): LoadTargetKind => {
   if (!looksLikePath(target)) {
-    return activeSkillNames.has(target) ? classifySkillKind(target) : "outside this plugin";
+    const skillName = target.replace(/^sunstack-(?:dev|workflow-v1):/, "");
+    return activeSkillNames.has(skillName) ? classifySkillKind(skillName) : "outside this plugin";
   }
   const resolved = path.posix.normalize(path.posix.join("skills", skillName, target));
   if (resolved.startsWith("shared-references/")) return "shared reference";
@@ -207,7 +208,7 @@ const extractNamedPhases = (
   skillName: string,
   activeSkillNames: ReadonlySet<string>,
 ): string[] =>
-  uniqueInOrder(backtickedSpans(skillMarkdown).filter((span) => isOtherPhase(span, skillName, activeSkillNames)));
+  uniqueInOrder(backtickedSpans(skillMarkdown).map((span) => span.replace(/^sunstack-(?:dev|workflow-v1):/, "")).filter((span) => isOtherPhase(span, skillName, activeSkillNames)));
 
 const backtickedIn = (text: string): string[] => [...text.matchAll(/`([^`]+)`/g)].map((match) => match[1] ?? "");
 
@@ -246,7 +247,7 @@ const extractRoutedPhases = (
   skillName: string,
   activeSkillNames: ReadonlySet<string>,
 ): string[] =>
-  uniqueInOrder(extractRouteOwners(skillMarkdown).filter((owner) => isOtherPhase(owner, skillName, activeSkillNames)));
+  uniqueInOrder(extractRouteOwners(skillMarkdown).map((owner) => owner.replace(/^sunstack-(?:dev|workflow-v1):/, "")).filter((owner) => isOtherPhase(owner, skillName, activeSkillNames)));
 
 // A pointer names an active skill, or a path that resolves from the skill's folder to a file in the plugin.
 const isPointerSpan = (
@@ -260,7 +261,10 @@ const isPointerSpan = (
 
 const extractPrinciples = (markdown: string): string[] =>
   uniqueInOrder(
-    [...markdown.matchAll(/\]\([^)\s]*?(principle-[a-z0-9-]+)\/SKILL\.md\)/g)].map((match) => match[1] ?? ""),
+    [
+      ...[...markdown.matchAll(/\]\([^)\s]*?(principle-[a-z0-9-]+)\/SKILL\.md\)/g)].map((match) => match[1] ?? ""),
+      ...[...markdown.matchAll(/`sunstack-dev:(principle-[a-z0-9-]+)(?:\/[^`]*)?`/g)].map((match) => match[1] ?? ""),
+    ],
   );
 
 const mentionsReturn = /\breturn(s|ed|ing)?\b/i;
@@ -336,23 +340,23 @@ const listMarkdownFiles = (directory: string): string[] => listFiles(directory).
 
 // Plugin-relative POSIX paths of every file in the plugin, so a pointer can be checked against a real file.
 export const readPluginFiles = (repoRoot: string): Set<string> => {
-  const pluginRoot = path.join(repoRoot, pluginRelativeRoot);
-  return new Set(listFiles(pluginRoot).map((file) => path.relative(pluginRoot, file).split(path.sep).join("/")));
+  return new Set(skillPluginRoots.flatMap((relativeRoot) => {
+    const pluginRoot = path.join(repoRoot, relativeRoot);
+    return listFiles(pluginRoot).map((file) => path.relative(pluginRoot, file).split(path.sep).join("/"));
+  }));
 };
 
 export const readSkillSources = (repoRoot: string): SkillSource[] => {
-  const skillsRoot = path.join(repoRoot, skillsRelativeRoot);
-  return readdirSync(skillsRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && existsSync(path.join(skillsRoot, entry.name, "SKILL.md")))
-    .map((entry) => entry.name)
-    .sort()
-    .map((name) => ({
-      name,
-      skillMarkdown: readFileSync(path.join(skillsRoot, name, "SKILL.md"), "utf8"),
-      referenceMarkdown: listMarkdownFiles(path.join(skillsRoot, name, "references")).map((file) =>
-        readFileSync(file, "utf8"),
-      ),
-    }));
+  return skillPluginRoots.flatMap((relativeRoot) => {
+    const skillsRoot = path.join(repoRoot, relativeRoot, "skills");
+    return readdirSync(skillsRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && existsSync(path.join(skillsRoot, entry.name, "SKILL.md")))
+      .map((entry) => ({
+        name: entry.name,
+        skillMarkdown: readFileSync(path.join(skillsRoot, entry.name, "SKILL.md"), "utf8"),
+        referenceMarkdown: listMarkdownFiles(path.join(skillsRoot, entry.name, "references")).map((file) => readFileSync(file, "utf8")),
+      }));
+  }).sort((left, right) => left.name.localeCompare(right.name));
 };
 
 const code = (value: string): string => `\`${value}\``;
@@ -433,7 +437,7 @@ const renderPracticeFlowchart = (
     for (const call of phase.loads) {
       if (call.kind !== "practice") continue;
       const arrow = call.condition === "always" ? "-->" : "-.->";
-      lines.push(`  ${mermaidNodeId(phaseName)}["${label}"] ${arrow} ${mermaidNodeId(call.target)}(["${call.target}"])`);
+      lines.push(`  ${mermaidNodeId(phaseName)}["${label}"] ${arrow} ${mermaidNodeId(call.target.replace(/^sunstack-(?:dev|workflow-v1):/, ""))}(["${call.target}"])`);
     }
   }
   return lines.length === 0 ? [] : ["```mermaid", "flowchart LR", ...lines, "```"];
@@ -465,7 +469,7 @@ export const renderPhaseCompositionMap = (compositions: readonly SkillCompositio
   const lines = [
     "# Phase composition",
     "",
-    "What each orchestrator and phase in `sunstack-dev` is built from: the phases an orchestrator routes, and for each skill the practices, references and other skills it loads, the principles it cites and the tokens it returns. The map is generated from the skill files, so each skill's own text stays the only authority for what it does.",
+    "What each orchestrator and phase across `sunstack-dev` and frozen `sunstack-workflow-v1` is built from: the phases an orchestrator routes, and for each skill the practices, references and other skills it loads, the principles it cites and the tokens it returns. The map is generated from the skill files, so each skill's own text stays the only authority for what it does.",
     "",
     "Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills phase-composition`, then embed it into `phase-composition.html` from its live source `phase-composition.source.html` with Demistify's `embed`. The contract test `tests/skills/lib/contracts/phase-composition-map-contract.test.ts` fails when this file, or the page's embedded copy of it, no longer matches the skill files.",
     "",

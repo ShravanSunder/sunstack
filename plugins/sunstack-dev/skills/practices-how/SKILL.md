@@ -11,7 +11,7 @@ Read in proportion to the question. A question about one function needs that fun
 
 Explain current behavior as the source shows it. Why it was built this way, what should replace it and what to change are separate questions. Answer the current-behavior part and hand the rest back to the caller as a named open question. The work is read-only. Running a test, a request or a capture to watch the path needs the caller's grant; without one, explain from source and say which runtime claim stays unobserved.
 
-Do the walk yourself. IF the subsystem splits into independent slices worth reading in parallel and your grant allows helpers, load `practices-manage-agents` and return the bounded commissions; open each anchor a helper reports before your explanation relies on it.
+Do the walk yourself. IF the subsystem splits into independent slices worth reading in parallel and your grant allows helpers, load `sunstack-workflow-v1:practices-manage-agents` and return the bounded commissions; open each anchor a helper reports before your explanation relies on it.
 
 ## Workflow
 

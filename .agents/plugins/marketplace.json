@@ -41,7 +41,22 @@
         "authentication": "ON_USE"
       },
       "category": "Coding",
-      "version": "2.108.1"
+      "version": "3.0.0",
+      "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation."
+    },
+    {
+      "name": "sunstack-workflow-v1",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sunstack-workflow-v1"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Coding",
+      "version": "1.0.0",
+      "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction."
     },
     {
       "name": "skill-authoring",

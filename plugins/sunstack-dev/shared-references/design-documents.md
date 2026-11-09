@@ -103,7 +103,7 @@ Each document page holds two kinds of unit. A **record** is one row the document
 | --- | --- | --- | --- | --- |
 | Requirements | one `need` per `U` | its home capability | the need in the owner's words and its outcome, with pictures where the user's experience matters | the capability list with purposes; an open owner confirmation |
 | Specification | one `specification` per `R` | the needs it serves | the obligation, its threshold, target constraints and reference | entities (`E`) and the other identifiers (`P`, `O`, `C`, `V`) |
-| Program Design | one `program-design` part per design part | the obligations it serves | its responsibility, interface and diagram | the entity binding table; the trace table |
+| Program Design | one `sunstack-workflow-v1:program-design` part per design part | the obligations it serves | its responsibility, interface and diagram | the entity binding table; the trace table |
 | Program Design, call paths on `execution.html` | a `stack` per call path and a `frame` per call | a stack its need and its frames; a frame the need it directly serves whenever one is declared, whether or not it is supporting or reused across stacks, and none otherwise | the record itself: name, source, responsibility and statement | none |
 | Verification Design | one `scenario` per verification row | the obligations it proves | the "proven by" line, passing condition, reference, target, and what stays unverified | a shared observation route (how a target is observed, never a result), described once |
 
@@ -139,7 +139,7 @@ When you write a section or a record body, open it with its human part, using th
 
 Work delivered in more than one deliverable keeps one overall design: its four documents stay the home of every fact, and each deliverable adds a page and a plan that link into it.
 
-- **The delivery cut.** After the overall design's review is `ready`, the Lead writes on the overall home page each deliverable with the needs (`U` IDs) it delivers and what it waits on. The cut is the Lead's call, like a plan's other grouping, and adds no stop of its own; it reaches the owner with the first deliverable's plan, under `orchestrator-design`'s existing plan gate, where the owner can correct it.
+- **The delivery cut.** After the overall design's review is `ready`, the Lead writes on the overall home page each deliverable with the needs (`U` IDs) it delivers and what it waits on. The cut is the Lead's call, like a plan's other grouping, and adds no stop of its own; it reaches the owner with the first deliverable's plan, under `sunstack-workflow-v1:orchestrator-design`'s existing plan gate, where the owner can correct it.
 - **The deliverable page.** A sibling page in the set that links each of its needs on the owning document page, the need's ID in the link text, such as "U3 on the Requirements page". It states no fact of its own. A fact only this deliverable needs, such as an order constraint between two of its needs, is written into the overall document that owns that kind of fact, reviewed there, and reached by link. Deep links into one need's view wait for an address the released guide documents.
 - **The deliverable plan.** Written by the planner from the four reviewed documents, scoped to the deliverable's needs; the plan page and the deliverable page link to each other. The next deliverable's page and plan are written when its turn comes.
 
