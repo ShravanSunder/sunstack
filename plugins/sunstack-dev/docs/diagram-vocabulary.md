@@ -1,6 +1,6 @@
 # Design View Vocabulary
 
-This maintainer index records current view names, artifact altitude, semantic owner, and runtime rendering consumers. It is not runtime authority. View-selection and required-field rules live in the owning `SKILL.md`; the document medium (Markdown alone or an HTML page built on it), each view's medium, fallback, semantic-preservation, and visual-check procedure live in `shared-references/diagram-rendering-and-fallbacks.md`; conditional Image Gen production, durable embedding and pixel/preview inspection live in `shared-references/generated-document-visuals.md`.
+This maintainer index records current view names, artifact altitude, semantic owner, and runtime rendering consumers. It is not runtime authority. View-selection and required-field rules live in the owning `SKILL.md`; the document medium (Markdown alone, or an HTML page that holds its own text, as every design document is), each view's medium, fallback, semantic-preservation, and visual-check procedure live in `shared-references/diagram-rendering-and-fallbacks.md`; conditional Image Gen production, durable embedding and pixel/preview inspection live in `shared-references/generated-document-visuals.md`.
 
 ## Why/What Views
 
@@ -43,6 +43,8 @@ This maintainer index records current view names, artifact altitude, semantic ow
 | --- | --- | --- | --- |
 | delivery map | delivery plan | the plan's slices, reads, rows, proof layers, edges and gates (`skills/plan-implementation/references/slice-and-proof-design.md`), its PR topology and repositories (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
 | plan change view | delivery plan | a superseding plan's "Changed from" section (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
+
+On a design set's pages, the released requirement browser stands in for the capability map's need list, the requirement coverage table, the requirement/design/proof trace, the "proven by" cards and the coverage rows, and the call-stack browser for the call graph over the call-path page; `skills/presentation-html/references/views.md` owns that rule. The tokens above stay the owning skills' vocabulary for what each view must show.
 
 ## Altitude Boundary
 

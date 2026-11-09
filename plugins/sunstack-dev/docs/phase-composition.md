@@ -19,25 +19,25 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 
 | Skill | Lines | Always loads | Loads when a condition holds | Cites in `SKILL.md` | Returns |
 | --- | --- | --- | --- | --- | --- |
-| orchestrator-design | 99 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
+| orchestrator-design | 101 | `design-documents`, `practices-show-me-your-work`, `practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `presentation-html`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 51 | `practices-manage-agents`, `practices-show-me-your-work`, `practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
-| docs-maintain | 119 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
+| docs-maintain | 121 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
 | implement-plan | 44 | `canonical-implementation-plan`, `execution-and-proof`, `practices-preflight`, `practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `practices-cleanup` | none | none |
 | implementation-handoff | 94 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
 | implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
 | implementation-review | 83 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `decision-model-review`, `proof-challenge`, `focused-reviewer` | none | none |
 | plan-handoff | 78 | `canonical-implementation-plan` | `handoff-template` | none | none |
-| plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
+| plan-implementation | 46 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 200 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
 | plan-update | 35 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `presentation-html`, `diagram-rendering-and-fallbacks` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
-| program-design | 362 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
-| spec-design | 326 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
+| program-design | 369 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
+| spec-design | 332 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
 | spec-handoff | 83 | none | none | none | none |
 | spec-program-review | 252 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
-| verification-design | 150 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
+| verification-design | 157 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
 
 ## Orchestrators
 
@@ -132,13 +132,13 @@ flowchart LR
 
 ### orchestrator-design
 
-- Lines: 99
+- Lines: 101
 - Always loads:
   - practice: `practices-show-me-your-work`, `practices-preflight`
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/phase-return-tokens.md`
 - Loads when a condition holds:
   - orchestrator: `orchestrator-implementation-goal`
-  - practice: `practices-manage-agents`
+  - practice: `practices-manage-agents`, `presentation-html`
   - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: none
 - Cites in `SKILL.md`: none
@@ -200,7 +200,7 @@ flowchart LR
 
 ### docs-maintain
 
-- Lines: 119
+- Lines: 121
 - Always loads:
   - own reference: `references/doc-roles.md`, `references/staleness-and-purge.md`
 - Loads when a condition holds:
@@ -281,14 +281,14 @@ flowchart LR
 
 ### plan-implementation
 
-- Lines: 45
+- Lines: 46
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/slice-and-proof-design.md`
 - Loads when a condition holds:
   - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/owner-decision-brief.md`
-- Named without a load call: `practices-show-me-your-work`, `plan-update`, `spec-program-review`, `plan-improve-repo`, `implement-plan`
+- Named without a load call: `practices-show-me-your-work`, `plan-update`, `spec-program-review`, `plan-improve-repo`, `presentation-html`, `implement-plan`
 - Cites in `SKILL.md`: none
 - Cites in its references: `principle-write-tests-that-can-fail`
 - Returns: `verification-design-gap`
@@ -322,7 +322,7 @@ flowchart LR
 
 ### program-design
 
-- Lines: 362
+- Lines: 369
 - Always loads:
   - practice: `practices-how`
   - shared reference: `../../shared-references/design-documents.md`
@@ -338,7 +338,7 @@ flowchart LR
 
 ### spec-design
 
-- Lines: 326
+- Lines: 332
 - Always loads:
   - shared reference: `../../shared-references/diagram-rendering-and-fallbacks.md`, `../../shared-references/design-documents.md`
   - own reference: `references/authority-and-problem-framing.md`, `references/domain-entities.md`, `references/requirements-and-traceability.md`, `references/observable-contracts.md`, `references/artifact-and-self-review.md`
@@ -376,7 +376,7 @@ flowchart LR
 
 ### verification-design
 
-- Lines: 150
+- Lines: 157
 - Always loads:
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/choosing-the-observation.md`
