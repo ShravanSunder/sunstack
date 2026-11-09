@@ -33,7 +33,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | plan-implementation | 45 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 200 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
 | plan-update | 35 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `presentation-html`, `diagram-rendering-and-fallbacks` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
-| program-design | 362 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
+| program-design | 369 | `design-documents`, `practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
 | spec-design | 332 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
 | spec-handoff | 83 | none | none | none | none |
 | spec-program-review | 252 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
@@ -322,7 +322,7 @@ flowchart LR
 
 ### program-design
 
-- Lines: 362
+- Lines: 369
 - Always loads:
   - practice: `practices-how`
   - shared reference: `../../shared-references/design-documents.md`
