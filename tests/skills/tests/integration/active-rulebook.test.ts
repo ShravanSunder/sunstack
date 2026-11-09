@@ -71,12 +71,15 @@ test("held entries retain the exact original marker, standard location and JSON"
   }
 });
 
-test("fully held pairs retain their rule JSON and marked sentences while teaching may change", () => {
+test("unconfigured original entries retain their JSON and marked standards while teaching may change", () => {
   const config = readJson(path.join(repositoryRoot, configRelative));
   const pairs = z
     .array(z.object({ markdown: z.string(), rules: z.string() }))
     .parse(config["rulebook"]);
-  expect(pairs.map((pair) => pair.rules)).toEqual(["descriptions-and-invocation.rules.json"]);
+  expect(pairs.map((pair) => pair.rules)).toEqual([
+    "descriptions-and-invocation.rules.json",
+    "call-completeness.rules.json",
+  ]);
   // Each standard is read at its current home and compared with its home at the baseline;
   // domain-decision-models moved from sunstack-dev into skill-authoring after the baseline.
   for (const [group, standard, baselineStandard] of [
@@ -141,26 +144,61 @@ test("the development-rejected trees and K002 marker are held exactly as evaluat
   expect(note).toContain("held-out");
 });
 
-test("ordinary native lint has three mechanical rules and makes no model requests", async () => {
+test("active R02 retains the frozen rule bytes and full caller evidence", () => {
+  // Arrange: the held-out evaluation used this exact committed rule and collection.
+  const frozen = "9702eb1e00b8ab775af11cef9a247553aae3fb6a";
+  const atFreeze = (relative: string): string =>
+    execFileSync("git", ["show", `${frozen}:${relative}`], {
+      cwd: repositoryRoot,
+      encoding: "utf8",
+    });
+  const config = readJson(path.join(repositoryRoot, configRelative));
+  const evaluatedConfig = jsonObject.parse(JSON.parse(atFreeze(configRelative)));
+
+  // Act: inspect the activated bytes and collection, without reading held-out cases.
+  const entry = readFileSync(
+    path.join(repositoryRoot, kitRelative, "call-completeness.rules.json"),
+    "utf8",
+  );
+
+  // Assert: activation changes selection and location, never the evaluated rule.
+  expect(entry).toBe(atFreeze(`${kitRelative}/held/call-completeness.rules.json`));
+  expect(
+    existsSync(path.join(repositoryRoot, kitRelative, "held/call-completeness.rules.json")),
+  ).toBe(false);
+  expect(config["evidence"]).toEqual(evaluatedConfig["evidence"]);
+  expect(config["limits"]).toEqual(evaluatedConfig["limits"]);
+  expect(config["decision_model"]).toEqual({ model: "typesafe/jev-1.14-20261014" });
+});
+
+test("active native lint prepares three mechanical rules and R02 without model dispatch", async () => {
   // Arrange: real historical checked text with the actual shipped config.
   const root = createRulebookFixture();
   const file = "plugins/sunstack-dev/skills/role-operator/SKILL.md";
   installPinnedFile(root, "24fa3d925927278100aced2e7c4e26eb0be81fba", file);
+  const prepared = path.join(root, "prepared.json");
 
-  // Act: run without a provider credential or a synthetic model answer.
-  const output = await runNativeLint({ root, arguments: ["--format", "json", file] });
-  const report = nativeReportSchema.parse(JSON.parse(output.stdout));
+  // Act: build the real requests without a provider credential or synthetic answers.
+  const output = await runNativeLint({ root, arguments: ["--prepare", prepared, file] });
+  const report = nativeReportSchema.parse(readJson(prepared));
 
-  // Assert: no hidden kind gate or judged rule can create an incomplete run.
-  expect(output.status, output.stderr).toBe(report.counts.error ? 1 : 0);
+  // Assert: R02 is live, and no hidden kind gate or other asking rule is selected.
+  expect(output.status, output.stderr).toBe(report.counts.error ? 1 : 6);
   expect(report.usage.model_requests).toBe(0);
+  expect(report.requests.length).toBeGreaterThan(0);
+  expect(report.requests.every((request) => request["state"] === "prepared")).toBe(true);
   expect(report.filter_answers).toEqual([]);
   expect(report.filter_skips).toEqual([]);
-  expect(new Set(report.results.map((result) => result.name))).toEqual(
+  const preparedRules = report.requests.map(
+    (request) =>
+      z.object({ kind: z.literal("rule"), rule: z.string() }).parse(request["owner"]).rule,
+  );
+  expect(new Set([...report.results.map((result) => result.name), ...preparedRules])).toEqual(
     new Set([
       "skill-description.starts-with-use-when",
       "skill-description.longer-than-225-characters",
       "skill-description.longer-than-300-characters",
+      "load-call.names-when-where-and-result",
     ]),
   );
 });

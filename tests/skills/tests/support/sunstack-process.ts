@@ -47,7 +47,7 @@ export function createRulebookFixture(): string {
   const kit = path.join(root, kitRelative);
   mkdirSync(path.dirname(kit), { recursive: true });
   cpSync(path.join(repositoryRoot, kitRelative), kit, { recursive: true });
-  for (const name of ["general-skill", "descriptions-and-invocation"]) {
+  for (const name of ["general-skill", "descriptions-and-invocation", "calls-and-placement"]) {
     const relative = `plugins/skill-authoring/skills/domain-skill-crafting/references/${name}.md`;
     const destination = path.join(root, relative);
     mkdirSync(path.dirname(destination), { recursive: true });

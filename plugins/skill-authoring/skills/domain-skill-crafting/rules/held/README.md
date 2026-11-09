@@ -1,6 +1,6 @@
 # Held judged rules
 
-Only the three mechanical description checks are active. The `kind` filter and `general-skill.overfits-to-product-workflow` (K002) are held after authorized development run 2 at commit `437632d42610bdbe8365d4938e4098cd660b4f4a`, using Sunstack 0.8.3 and resolved model `typesafe/jev-1.14-20261014`. The Lead retains the saved development report (SHA-256 `6d14751fb156258727ed055c0322bb7c52a7bce15461bb17e9e22c86d8f06e8d`).
+The three mechanical description checks and R02 call completeness are active. The `kind` filter and `general-skill.overfits-to-product-workflow` (K002) are held after authorized development run 2 at commit `437632d42610bdbe8365d4938e4098cd660b4f4a`, using Sunstack 0.8.3 and resolved model `typesafe/jev-1.14-20261014`. The Lead retains the saved development report (SHA-256 `6d14751fb156258727ed055c0322bb7c52a7bce15461bb17e9e22c86d8f06e8d`).
 
 ## What they lack
 
@@ -10,3 +10,8 @@ Only the three mechanical description checks are active. The `kind` filter and `
 The entries, kind fragment, marker identities, questions, reference and bars are retained exactly as evaluated: K002 is in `general-skill.json`, and the filter is in `kind.filter.json`. Neither is declared by the active config. Older held entries keep their original source locations and markers.
 
 Real case files, labels and splits are unchanged. No held-out run was made; held-out evidence remains unseen for a corrected attempt. The old-rulebook quality comparison is deferred. Reproducing the rejected candidate means checking out the source commit above, not adding these trees back to ordinary lint. A future corrected attempt needs its own development evidence and activation decision.
+
+
+## R02 activated
+
+R02 moved byte-for-byte to `../call-completeness.rules.json` after the Lead accepted its held-out result at `9702eb1e00b8ab775af11cef9a247553aae3fb6a`. The active config pairs it with `calls-and-placement.md`, using the frozen full-caller evidence and evaluated model version. See the plugin README and the activation changelog for its scope and proof limits. The original one-Choice entry in `../calls-and-placement.rules.json` remains unchanged and unconfigured.

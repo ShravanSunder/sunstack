@@ -8,12 +8,19 @@ The reusable Rust engine, `sunstack` executable and npm distribution live in [Su
 
 An end-of-line marker such as `<!-- K002 -->` binds a Markdown standard to its
 JSON entry. The [config](../../plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json)
-pairs only the description standards with three mechanical description checks.
-No filter or judged rule is active. The kind filter and product-workflow rule
-are retained unchanged under `rules/held/` after development run 2 failed the
-switch-on conditions. The [held note](../../plugins/skill-authoring/skills/domain-skill-crafting/rules/held/README.md)
-names the evaluated source, model, counts and what each tree lacks. No held-out
-run was made; the old-rulebook quality comparison is deferred.
+pairs the description standards with three mechanical checks and the call
+standard with R02 `load-call.names-when-where-and-result`. R02 reads the full
+matched paragraph and explicit enclosing caller contract, using separate
+operative-call, moment, destination, work and result questions with uncertain
+routes. Its frozen entry moved byte-for-byte into the active rules directory
+after the Lead accepted its held-out result; the model remains pinned to
+`typesafe/jev-1.14-20261014`.
+
+The kind filter and product-workflow rule remain unchanged under `rules/held/`
+after their development run 2 failed the switch-on conditions. The
+[held note](../../plugins/skill-authoring/skills/domain-skill-crafting/rules/held/README.md)
+names their evaluated source, model, counts and limitations. They are outside
+active selection; R02's activation does not adopt either rejected candidate.
 
 The held kind filter reads the description and the body through the end of the
 first H2 section, with its authored reference and no folder name in state. Two
@@ -37,6 +44,8 @@ The native command owns results and status. No repository wrapper changes which
 results an agent sees. A model run uses the authorized credential route.
 `--check` and `--rules` need no key and prove rulebook admission rather than
 judgment quality. Add `--all` for configured files or `--since REV` for changes.
+On 0.9.0, `--all --prepare <file>` builds exact requests without a key or dispatch;
+prepared requests and completeness abstentions are not semantic passes.
 
 Human output is a short file:line line for each warning, unsure result or gap,
 with an ID for detail. The saved report retains requests as sent, all answers,
