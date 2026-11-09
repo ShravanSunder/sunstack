@@ -4,10 +4,10 @@ A design project has four authoritative documents. Each settles one question and
 
 | Document | Question it settles | Owns | Carries |
 | --- | --- | --- | --- |
-| Requirements | Whose need and outcome are authorized? | authorized needs, outcomes, priorities, and limits | stable `U` rows |
-| Specification | What observable behavior, including failure, must hold, and against what reference? | entity meaning, observable obligations, and each obligation's thresholds, target constraints, and authoritative reference | `E`, `P`, `O`, `R`, `C`, and `V` identifiers |
-| Program Design | Which owners, contracts and seams realize that behavior? | entity binding, components, interfaces, state, flows, failure, and observation seams | the entity binding table and one trace-table row per `R` |
-| Verification Design | How will the requirements be shown to hold: against what reference, on which target, through which journey, and with which limits? | the proof strategy: evidence route, target, journey, passing condition, reused tests, and what stays unverified | one row per requirement, linked to its `R` and `V` |
+| Requirements | Whose need and outcome are authorized? | authorized needs, outcomes, priorities, and limits | one need record per `U` |
+| Specification | What observable behavior, including failure, must hold, and against what reference? | entity meaning, observable obligations, and each obligation's thresholds, target constraints, and authoritative reference | one specification record per `R`, and `E`, `P`, `O`, `C` and `V` in sections |
+| Program Design | Which owners, contracts and seams realize that behavior? | entity binding, components, interfaces, state, flows, failure, and observation seams | one record per design part, the entity binding table, one trace-table row per `R`, and its call paths |
+| Verification Design | How will the requirements be shown to hold: against what reference, on which target, through which journey, and with which limits? | the proof strategy: evidence route, target, journey, passing condition, reused tests, and what stays unverified | one check record per requirement, naming the obligations it proves |
 
 The Lead authors all four, in that order. Verification Design comes after Program Design because it chooses among the seams Program Design exposes. It plans proof and never records an observation: a planned target property is not an observed one.
 
@@ -28,33 +28,26 @@ Obligations are sentences about entities. The Specification defines each entity 
 
 A capability is one part of what the system does for its users, which the owner can confirm or correct as a unit. It has a short lowercase key, the owner's name for it, and a one-line purpose that says what users get, such as `scheduling: a queued job runs, and runs once, even when a worker dies`. It is never named by a component, internal owner, or store. Program Design may realize one capability with several components, or several capabilities with one.
 
-The Requirements entry is the list's home, confirmed by the owner before any row is written. Write it as a nested Markdown list: one item per capability, carrying its key, the owner's name and its one-line purpose, with its home `U` rows nested under it. That tree is the capability map's Markdown form, and its only home. Other documents refer to a capability by its key; a view that shows its name and purpose again re-renders that list and never redefines it. Each document carries the key over its own rows:
+The Requirements page is the list's home, confirmed by the owner before any need is written. The list is a section of that page at a stable ID: one entry per capability, carrying its key, the owner's name and its one-line purpose. Each need record then names its one home capability by that key, and the requirement browser's capability selector narrows its need list to one capability or shows all needs. Other pages refer to a capability by its key and link to its entry; nothing restates its name or purpose.
 
-| Document | Carries the key on | How |
-| --- | --- | --- |
-| Requirements | each `U` row | one home key per row |
-| Specification | each `R` obligation | obligations grouped under their home capability, as sections or as chunks that pass the split test below |
-| Program Design | each trace-table row | rows grouped under their `R`'s home capability, or with that key in the `R` cell; still one row per `R`, with the same columns |
-| Verification Design | each row | rows grouped under their `U`'s home capability, or with that key in the requirement field; a shared observation is still described once and may serve rows from several capabilities |
+Only needs carry the key. A specification record names the needs it serves, a design part or a check names the obligations it serves, and each reaches its capabilities through them, so nothing downstream writes a capability again. An obligation that serves needs of two capabilities names both needs, and the browser shows it with each of them, with "also serves"; it is never copied. Entities (`E`) belong to the whole set, and every capability links to them.
 
-Each `U` and `R` row has exactly one home capability. A row that also serves another capability names it under "also serves" and is never copied there, so a shared `R` still has one trace row. Entities (`E`) belong to the whole set, and every capability links to them.
+Identifiers never encode a capability. Moving a need to another capability changes its capability key and nothing else; no identifier is renumbered. A capability is a name, so it adds no identifier kind.
 
-Identifiers never encode a capability. Moving a row to another capability changes its capability key and nothing else; no identifier is renumbered. A capability is a name, so it adds no identifier kind. It groups rows, and it becomes its own chunk only when it passes the split test.
-
-A set that is one concern has no capability level, and its documents carry no key.
+A set that is one concern has one capability, named for that concern, because every need record names one.
 
 ## Keep The Identities Separate
 
-For substantial file-backed work, each document has its own separately identifiable home:
+For substantial file-backed work, each document has its own page in the set's folder, and that page is its identity:
 
 ```text
-Requirements: one resolvable source or artifact pointer
-Specification: one different resolvable artifact pointer
-Program Design: one different resolvable artifact pointer
-Verification Design: one different resolvable artifact pointer
+Requirements: requirements.html
+Specification: specification.html
+Program Design: program-design.html, with its call paths on execution.html
+Verification Design: verification.html
 ```
 
-Reuse one already-admitted Requirements identity. Do not copy its contents into a new Requirements artifact merely to satisfy the shape. The Requirements and Specification author owns source qualification, admission, and normalization when settled authoritative meaning has no qualifying Requirements home.
+The released guide at the page's binding fixes these file names, because preparation finds each record kind on its own page. Reuse one already-admitted Requirements identity. Do not copy its contents into a new Requirements page merely to satisfy the shape. The Requirements and Specification author owns source qualification, admission, and normalization when settled authoritative meaning has no qualifying Requirements home.
 
 For chat-only work, documents may remain in chat, but each is a separately labeled record with its own content and role. Quick work changes the medium, not the semantic boundary.
 
@@ -63,10 +56,10 @@ The accepted requirements set is returned coverage state. It is not another docu
 Valid:
 
 ```text
-Requirements -> docs/requirements/job-submission.md
-Specification -> docs/specs/job-submission.md
-Program Design -> docs/design/job-submission.md
-Verification Design -> docs/design/job-submission-verification.md
+Requirements -> docs/specs/2026-10-18-job-submission/requirements.html
+Specification -> docs/specs/2026-10-18-job-submission/specification.html
+Program Design -> docs/specs/2026-10-18-job-submission/program-design.html
+Verification Design -> docs/specs/2026-10-18-job-submission/verification.html
 ```
 
 ```text
@@ -77,152 +70,103 @@ Specification -> separately labeled in-chat Specification record
 Invalid:
 
 ```text
-Requirements/spec -> one combined document
-Program Design -> separate document
+Requirements/spec -> one page whose records mix needs and obligations
+Program Design -> separate page
 ```
 
 ```text
-Requirements -> one document containing the observable contract
-Program Design -> separate document
+Requirements -> one page containing the observable contract
+Program Design -> separate page
 ```
 
 ```text
-Program Design -> docs/design/job-submission.md, whose trace table's proof column stands in for Verification Design
+Program Design -> program-design.html, whose trace table's proof column stands in for Verification Design
 ```
 
 The second form is invalid because a Requirements title does not make a separate Specification identity exist. The third is invalid because a proof seam says where behavior can be observed, not how each requirement will be shown to hold.
 
-## Design Set Layout
+Design sets written before pages stay readable where they are, in Markdown; nothing is migrated, and every new set is pages.
 
-A design set is one design's four documents, the entries that lead into them, and a `plans/` folder for its implementation plans, whose contents `canonical-implementation-plan.md`'s Plan Home governs. Layout never changes identity: each document settles the same question and owns the same truths whatever files hold it. A document is one Markdown file, or an ordered index over its chunks.
+## The Page Is the Design
 
-When the Requirements name two or more capabilities, Requirements and Specification are chunked by capability by default, and the split test below confirms each chunk. Program Design and Verification Design stay one file each unless that test splits them. A one-concern set keeps one file per document.
+*The page is the design, and each link is written once.* Each document's text lives on its own page, in sections and in the bodies of its records, each at a stable ID; no Markdown file holds the design, and no page drops a whole document in as one block. Each record names only what it serves, and preparation and the browsers derive every other direction.
 
-Some chunks serve every capability. Entities live in the Specification's `entities.md`, which every capability links to. An observation that several Verification Design rows share lives in its `observations.md` when that document is chunked. The capability list lives in the Requirements entry. A cross-cutting obligation stays in the chunk of the need that asked for it and names the rest under "also serves".
+A design set is one folder. Its home page (`index.html`) and its document pages are siblings, which preparation reads as one collection; its implementation plans are pages in a `plans/` folder beside them, which `canonical-implementation-plan.md`'s Plan Home governs, linked from the home page and linking back. Layout never changes identity: each document settles the same question and owns the same truths whatever its page holds.
 
-### Split a Document by Question and Reason to Change
+`diagram-rendering-and-fallbacks.md` owns the medium: how a page is bound, where Markdown islands carry text, and when preparation and the checker run. `presentation-html` owns how a page is composed from the released guide. This section owns what goes where.
 
-A chunk is one Markdown file that answers one cohesive design question for a named reader. It belongs to one document and keeps a stable path and stable heading anchors, because indexes and other documents link to them. The text of each identity (`U`, `E`, `R`, `C`, `V` and the rest) lives in exactly one chunk, and every other mention links to it.
+### Records and Sections
 
-Split only when each candidate chunk passes both halves of this test:
+Each document page holds two kinds of unit. A **record** is one row the document owns, in the page's one record block, with its body in an HTML container on the same page; the requirement browser shows it by need. A **section** is ordinary HTML at a stable ID beside the browser, for a fact with no record kind. Each phase writes the records and sections its document owns:
 
-- a named reader can answer a real question from the chunk and its explicit links;
-- the chunk can change for its own reason without editing its siblings.
+| Document | Its records, by released kind | Each names | Its body holds | Sections beside the browser |
+| --- | --- | --- | --- | --- |
+| Requirements | one `need` per `U` | its home capability | the need in the owner's words and its outcome, with pictures where the user's experience matters | the capability list with purposes; an open owner confirmation |
+| Specification | one `specification` per `R` | the needs it serves | the obligation, its threshold, target constraints and reference | entities (`E`) and the other identifiers (`P`, `O`, `C`, `V`) |
+| Program Design | one `program-design` part per design part | the obligations it serves | its responsibility, interface and diagram | the entity binding table; the trace table |
+| Program Design, call paths on `execution.html` | a `stack` per call path and a `frame` per call | a stack its need and its frames; a frame the need it directly serves whenever one is declared, whether or not it is supporting or reused across stacks, and none otherwise | the record itself: name, source, responsibility and statement | none |
+| Verification Design | one `scenario` per verification row | the obligations it proves | the "proven by" line, passing condition, reference, target, and what stays unverified | a shared observation route (how a target is observed, never a result), described once |
 
-Name the reader question and the reason to change for every split. Length is never the reason, and neither is one file per requirement, since one requirement is rarely the whole of anyone's question. If every candidate needs all the others to make sense, the split has not earned its cost, and the document stays whole however long it is.
+Record IDs are the identities: a need's ID is its `U`, an obligation's its `R`. Section IDs are stable too, because pages, browsers and agents reach them by ID. No attribution is invented: a frame with no declared need names none, and a record names only what its source supports.
 
-A chunked document's entry is the `index.md` in its folder: the chunks in reading order, each with the question it answers. That entry is the document's identity pointer under Keep The Identities Separate. It holds no identity text, and its chunks are parts of the one document, never new identities.
+Each body marks the parts its kind shows in the browser's compact views, such as a specification's rule, as the guide's per-kind parts table names them; a part left unmarked shows no compact view, and a part with nothing true to put in it is omitted rather than filled. The guide's prepared-browsers reference at the page's binding owns every record's fields and the parts table; read them there, and never copy them into a design.
 
-### Give Agents an Index
+A record's summary is its compact line in lists; its body carries the whole of it: definitions, conditions, alternatives, error cases, exact interfaces and thresholds, in tables where they compare. The browser decides how much a reader sees at once, and the body never drops detail to match it.
 
-A set with any chunked document or a page has an `index.md` at its root, the agent entry. It names the four document entries and the reading paths that cross them. A reading path is an ordered list of links for one task through the documents it touches, such as recovering from a lost worker: the need, then the obligations, then the owner and call path, then the proof journey. A path links to chunks and headings and never merges their text into a fifth document. When the set has capabilities, the reading paths include one through-line per capability, in the same order: its need, its obligations, their owner and call path, and their proof. Task paths sit beside the through-lines. Call these orders reading paths or through-lines, never journeys: a journey is a user's path in a journey map, or the route a Verification Design row drives. Only a set with neither chunks nor a page, one file per document, lets those files do the index's job; there, the capability groups inside each document carry the through-line.
+A check written at design time carries no result: the browser shows it as not run, and no `observation` record (the released kind for an observed Pass, Fail or Partial result) is written until a result exists.
 
-An idea that the obligations of two or more capabilities name, or that the owner names, such as authorization or identity, gets a concept section in `index.md`. It links to the idea's meaning in its owning chunk, to its picture, and to where each document handles it. Its picture is a link to the view its owning skill already requires, such as the trust-boundary view for authorization, and a missing picture is a gap the writing phase returns. The phase that writes the idea's owning entry updates the section.
+Before the first need exists, the Requirements page is ordinary HTML holding the capability list and the owner's confirmation choice, with no browser and no record block; both come with the first need, and preparation starts then.
 
-The index is navigation only. An obligation, threshold, or decision written in it has no home there and moves to the chunk that owns it.
+### Each Link Is Written Once
 
-Every phase that writes or revises a document in an indexed set updates that document's entry and its steps on each reading path in the same change. A capability's through-line therefore grows one step per phase, and in a fresh set it ends at the Specification until Program Design exists. IF the set's page includes an edited file, live or embedded, or renders paths from an edited `index.md`, load `diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for that page.
+A record names the records it serves, once, in its own record. Every reverse view (a need's obligations, its design parts and checks, what else an obligation serves) is derived by preparation and the browsers, and never written by hand. A "related obligations" list added to a need's body is a second copy of R4's own link, and it drifts the day R4 changes.
 
-### Humans Read the Page
+The links grow with the documents. Each phase writes only its own records' links and never edits an earlier page to add a back link. A need whose downstream document isn't written yet shows that document as not yet written, with no record invented to fill it. In a fresh set the Requirements page stands alone, and each later page joins the collection when its phase writes it. The design is complete only when every need is served in each document and every record's links resolve, which the design review checks.
 
-When `diagram-rendering-and-fallbacks.md` chooses a page for the set, the page is the human entry. It composes the same Markdown files and adds layout, navigation, and views, never normative prose. That reference owns how the page composes its sources and stays current with them.
+### One Home for Each Fact
 
-### Keep the Markdown Complete
+Each fact has one home: its section or record body on its document's page. Every other mention links to it by page and ID instead of restating it; a check that relies on an obligation's threshold links to the obligation and never repeats the number. The collection preparation writes into each page is output, never edited; correct the record block and the bodies, then prepare again.
 
-The Markdown carries the complete design: definitions, conditions, alternatives, error cases, exact interfaces, and proof obligations, in tables where they compare. Dense means more of that detail sits directly in the chunk an agent opens. It does not mean compressed jargon, private abbreviations, or one huge table whose rows hide how they relate. The page decides how much a human sees at once, and the Markdown never drops detail to match it.
+### Agents Read the Pages
+
+An agent starts at the set's home page, which links every document page and plan. It reads each page's record block for what exists and what each record serves, and the body at each ID for its text. There is no second copy of the design, no `index.md` and no read-out file. The home page is navigation and what needs the owner: it links a page or a section, and an obligation, threshold or decision written there has no home and moves to the page that owns it. An idea that several capabilities' obligations name, or that the owner names, such as authorization, gets a line on the home page linking to its owning section and its picture.
 
 ### Put the Human Part First
 
-When you write a chunk, open it with its human part, using the views whose predicates fire for it, in the layered shape that `principle-write-for-the-reader`'s `references/layered-detail.md` teaches; agent detail such as rationale, evidence, exact shapes and examples follows in `<details>` blocks ([answer first, and fold only the depth this reader may skip](../skills/principle-write-for-the-reader/SKILL.md)). Binding, trace and call-path tables stay visible. Visible means shown inside the chunk, not collapsed; one action away means a tab or a section on the page. A failure obligation stays visible with its threshold, and only the rationale or evidence about it may be collapsed, under a summary that names the case it explains.
+When you write a section or a record body, open it with its human part, using the views whose predicates fire for it, in the layered shape that `principle-write-for-the-reader`'s `references/layered-detail.md` teaches; agent detail such as rationale, evidence, exact shapes and examples follows in `<details>` blocks ([answer first, and fold only the depth this reader may skip](../skills/principle-write-for-the-reader/SKILL.md)). Binding, trace and call-path content stays visible. A failure obligation stays visible with its threshold, and only the rationale or evidence about it may be collapsed, under a summary that names the case it explains.
+
+### Deliverables
+
+Work delivered in more than one deliverable keeps one overall design: its four documents stay the home of every fact, and each deliverable adds a page and a plan that link into it.
+
+- **The delivery cut.** After the overall design's review is `ready`, the Lead writes on the overall home page each deliverable with the needs (`U` IDs) it delivers and what it waits on. The cut is the Lead's call, like a plan's other grouping, and adds no stop of its own; it reaches the owner with the first deliverable's plan, under `orchestrator-design`'s existing plan gate, where the owner can correct it.
+- **The deliverable page.** A sibling page in the set that links each of its needs on the owning document page, the need's ID in the link text, such as "U3 on the Requirements page". It states no fact of its own. A fact only this deliverable needs, such as an order constraint between two of its needs, is written into the overall document that owns that kind of fact, reviewed there, and reached by link. Deep links into one need's view wait for an address the released guide documents.
+- **The deliverable plan.** Written by the planner from the four reviewed documents, scoped to the deliverable's needs; the plan page and the deliverable page link to each other. The next deliverable's page and plan are written when its turn comes.
 
 ### Worked Set
 
-A job-submission service has three capabilities, which the owner confirmed as `submission`, `scheduling`, and `billing-export`. Its Requirements name a different owner and release schedule for each, and all three share one set of entities:
+A job-submission service has three capabilities, which the owner confirmed as `submission`, `scheduling`, and `billing-export`, delivered in two deliverables:
 
 ```text
 docs/specs/2026-10-18-job-submission/
-  index.md                agent entry: document entries, three through-lines and two task paths
-  index.html              human entry: a page over the same files
-  requirements/
-    index.md              Requirements entry: the capability list as a nested tree
-    submission.md
-    scheduling.md
-    billing-export.md
-  specification/
-    index.md              Specification entry: chunks in reading order
-    entities.md           E1 Job, E2 Submission, E3 Tenant
-    submission.md
-    scheduling.md
-    billing-export.md
-  program-design.md
-  verification-design.md
+  index.html              home: what needs the owner, the pages, the delivery cut
+  requirements.html       capability list section; need records U1-U6
+  specification.html      entities section (E1 Job, E2 Submission, E3 Tenant); specification records R1-R9
+  program-design.html     binding and trace table sections; design-part records
+  execution.html          call stacks and frames
+  verification.html       shared observation routes section; scenario records
+  deliverable-1.html      submit and run jobs: links U1-U4
   plans/
-    2026-10-20-job-submission.md
+    2026-10-20-submit-and-run-jobs.html
 ```
 
-Each Specification chunk passes the test on its own terms, and each Requirements chunk passes for the same capability's reader and reason:
+R9 says a job that ran twice after a worker loss is billed once. It is one specification record naming U2 (scheduling) and U5 (billing-export). U2's Specification view shows R9 with "also serves U5", and nothing is written on U2 or U5. The entity Job is a section on the Specification page; R1 and R9 link to it and never restate when two submissions are the same job.
 
-| Chunk | Reader and the question it answers | Its own reason to change |
-| --- | --- | --- |
-| `entities.md` | every reader: what is a job, and when are two submissions the same job? | entity meaning, which changes rarely and touches every capability, so it lives once and the others link to it |
-| `submission.md` | client integrators: what do I see when I submit, resubmit, or exceed my quota? | the public API's versioned releases |
-| `scheduling.md` | operators: when does a queued job run, and what happens when a worker dies? | scheduling and capacity policy, owned by the platform team |
-| `billing-export.md` | finance: which finished jobs are billed, and when does an export include them? | billing policy, released by finance on its own schedule |
+Worker-loss recovery runs long: leases, heartbeats, the requeue limit, and fencing a duplicate run. It is one design part whose body holds all four, because requeue makes no sense without leases and a change to the lease timeout edits all of them; its call path is one stack on `execution.html` naming U2. Verification Design has one scenario per row; the rows that need a killed worker share one observation route, described once in its section and linked from each.
 
-Each capability earned its own chunk here because each has its own reader and release schedule. Where the test fails, say because one team owns and releases all three together, the same three are sections of one file.
+Deliverable 1, "submit and run jobs", delivers U1-U4; deliverable 2, "bill finished jobs", delivers U5-U6 and waits on deliverable 1. `deliverable-1.html` links "U2 on the Requirements page" and its three siblings, restating none of their obligations. Its one order constraint, "worker leases ship before resubmission", is written into the lease design part's body and reviewed there. Deliverable 2's page and plan wait until deliverable 1 lands.
 
-Three things stay whole. Worker-loss recovery in `scheduling.md` runs long: leases, heartbeats, the requeue limit, and fencing a duplicate run. Splitting it by heading fails the test, because requeue makes no sense without leases, fencing makes no sense without requeue, and a change to the lease timeout edits all of them. It stays one section of one chunk whatever its length. Program Design stays one file because its components share one job store and one lease protocol, so a store change edits every section. Verification Design stays one file because its shared observations serve rows from every capability.
-
-One obligation crosses capabilities. R9 says a job that ran twice after a worker loss is billed once. It lives in `billing-export.md` because finance looks for billing rules there, and it also serves `scheduling`. It has one trace row, grouped under `billing-export`, and the scheduling chunk links to it.
-
-The root `index.md`:
-
-```markdown
-# Job submission design
-
-- Requirements: [requirements/index.md](requirements/index.md)
-- Specification: [specification/index.md](specification/index.md)
-- Program Design: [program-design.md](program-design.md)
-- Verification Design: [verification-design.md](verification-design.md)
-
-## Through-line: submission
-
-1. [Requirements: submission](requirements/submission.md)
-2. [Specification: submission](specification/submission.md)
-3. [Program Design: submission rows](program-design.md#trace-submission)
-4. [Verification Design: submission](verification-design.md#submission)
-
-## Through-line: scheduling
-
-1. [Requirements: scheduling](requirements/scheduling.md)
-2. [Specification: scheduling](specification/scheduling.md)
-3. [Program Design: scheduling rows](program-design.md#trace-scheduling)
-4. [Verification Design: scheduling](verification-design.md#scheduling)
-
-## Through-line: billing-export
-
-1. [Requirements: billing-export](requirements/billing-export.md)
-2. [Specification: billing export](specification/billing-export.md)
-3. [Program Design: billing-export rows](program-design.md#trace-billing-export)
-4. [Verification Design: billing-export](verification-design.md#billing-export)
-
-## Reading path: a worker dies mid-job
-
-1. [Requirements: U3](requirements/scheduling.md#u3)
-2. [Specification: worker loss](specification/scheduling.md#worker-loss)
-3. [Program Design: lease and requeue](program-design.md#lease-and-requeue)
-4. [Verification Design: worker loss](verification-design.md#worker-loss)
-
-## Reading path: a client resubmits a job
-
-1. [Requirements: U1](requirements/submission.md#u1)
-2. [Specification: job identity](specification/entities.md#job-identity)
-3. [Specification: resubmission](specification/submission.md#resubmission)
-4. [Program Design: submission API](program-design.md#submission-api)
-5. [Verification Design: resubmission](verification-design.md#resubmission)
-```
-
-Each through-line's Program Design step opens that capability's group of trace rows, whose owner and interface cells lead on to the call paths. An agent changing billing policy follows the billing-export through-line from finance's need to its proof. An agent fixing a worker-loss bug opens four sections and nothing else. The second task path crosses two Specification chunks because resubmission depends on job identity, which `entities.md` owns.
+An agent changing billing policy opens the home page, then the Requirements page, and reads U5 in the browser: its obligations, design parts and checks, with R9 among them. An agent fixing a worker-loss bug opens U2's view and the lease design part, and nothing else.
 
 ## Requirements And Normative Requirements Are Different
 
@@ -236,4 +180,4 @@ Pathfinding returns clarified meaning to the recorded return owner. It does not 
 
 ## Downstream Handoffs
 
-Program Design consumes distinct Requirements and Specification identities plus their current phase state, including the Specification's `E` entity identifiers. Verification Design consumes those plus the current Program Design identity and its trace table's seams. Design review and design-bearing planning consume all four current identities; the Verifier's commission carries the Verification Design. A handoff carries pointers or separately labeled chat records and the entity identifiers, not copied companion artifacts.
+Program Design consumes distinct Requirements and Specification identities plus their current phase state, including the Specification's `E` entity identifiers. Verification Design consumes those plus the current Program Design identity and its trace table's seams. Design review and design-bearing planning consume all four current identities; the Verifier's commission carries the Verification Design. A handoff carries page paths with the record and section IDs it relies on, or separately labeled chat records, and the entity identifiers, not copied companion artifacts.

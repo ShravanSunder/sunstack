@@ -36,7 +36,7 @@ Several rows may share one observation. Describe a shared observation once, and 
 
 ### 1. Take in the design being proven
 
-MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the set layout, chunk shape and `index.md` duty this run follows. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
+MUST load `../../shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the check records and sections the Verification page owns, with what each record names. When the caller supplies a `new artifact home`, create a new Verification Design as its page in the set's folder beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
 
 A row is stale when, since its review, any of these changed:
 
@@ -92,9 +92,16 @@ Two readers need views over the rows:
 
 MUST load `../../shared-references/diagram-rendering-and-fallbacks.md` with both views, their predicates and their fields, and return the document medium and any page proof, and each view's selected medium, semantic-preservation result, visual-check result and exact gap.
 
-In a file-backed set, update the document's `index.md` entry and its through-line steps as the set layout says. When the rendering reference chooses a page, as it does by default for a set the owner reviews, use `presentation-html` to refresh it once the Markdown is written.
+In a file-backed set, write the Verification Design as its page, using `presentation-html` to compose it from the released guide, and never as a Markdown file:
 
-Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set its `index.md` entry and through-line steps are current.
+- **Checks.** One check record per row, naming the obligations (`R`) it proves. Its body holds the "proven by" line, the passing condition, the reference, the target with its journey or reused test, and what stays unverified, and marks the parts the guide's per-kind parts table names for its kind, such as the procedure, only where that content exists.
+- **Shared observations.** A planned observation that several rows share is a section at a stable ID, described once, which each check links to and says which of its obligations it decides.
+- **No results.** A check written here carries no result. Write no `observation` record, the released kind for an observed Pass, Fail or Partial result: the browser shows each check as not run until a result exists.
+- **Upstream pages stay as they are.** Write no record on another document's page, and add no back link there.
+
+After the last edit, prepare the set and run the static check, as the rendering reference's Freshness on Edit says, and return both results.
+
+Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set each check record names only the obligations it proves, no result is written, and preparation and the static check pass.
 
 ### 6. Re-read it as the Verifier would
 

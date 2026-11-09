@@ -1,6 +1,7 @@
 # Changelog
 
 - [2026-11-08 Two calls say what they bring back](2026-11-08-r02-call-returns.md)
+- [2026-11-08 Design documents are pages on the released document browsers](2026-11-08-design-documents-as-pages.md)
 - [2026-11-08 Activate call completeness](2026-11-08-call-completeness-activation.md)
 - [2026-11-08 Call evidence and held R02 candidate](2026-11-08-call-completeness-candidate.md)
 - [2026-11-07 Generic skills drop AgentStudio's own workflow](2026-11-07-remove-product-workflow-leaks.md)

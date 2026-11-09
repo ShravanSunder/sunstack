@@ -8,7 +8,7 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-For an engineering design set, as `SKILL.md` step 1 names it, apply `engineering-documents.md`'s source rules before choosing a form below; a skill-change design set keeps its caller's one-page contract. Reuse a view already in its owning chunk through that chunk's island. A native projection reaches its facts through source anchors or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a chunk to fill it.
+For an engineering design set, as `SKILL.md` step 1 names it, apply `engineering-documents.md` before choosing a form below; a skill-change design set keeps its caller's one-page contract. On a design set's pages the released browsers already are the requirement coverage table, the requirement/design/proof trace, the "proven by" cards and the coverage rows: the requirement browser shows each need with its specification, program design and verification, and the call-stack browser is the call graph over the call-path page's stacks. Compose none of those again. The capability map is split by what the browser shows: the Requirements page's capability list section carries each capability's key, owner-worded name and purpose, and the browser's capability selector narrows the needs to each capability. No released view lists each capability's obligations for the whole set; the browser shows them need by need, so for the Specification's map return that exact composition gap rather than writing the derived list on a page; each other view below takes its form inside the section or record body that owns its facts. A native projection reaches its facts through stable IDs or islands; it keeps no second copy of normative prose and preserves every caller-required field. If the requested form cannot expose those fields through the supported composition, return the exact view/composition gap. Do not improvise a renderer or duplicate part of a section or record body to fill it.
 
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ For an engineering design set, as `SKILL.md` step 1 names it, apply `engineering
 
 ## Plan views
 
-Both read the plan file and add no fact to it.
+Both read the plan and add no fact to it.
 
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
@@ -51,8 +51,8 @@ Both read the plan file and add no fact to it.
 
 | Lens | Form | Good signal | Bad signal |
 | --- | --- | --- | --- |
-| walkthrough (the feature end to end, a through-line or task path in `index.md`, a PR's slice reads, or a point where one repository waits on another) | a Walkthrough over the islands, in the path's order, as `engineering-documents.md` teaches | It answers a question that crosses documents, or that needs a new order through one file; each stop is an existing island or heading; narration states no rule. | One file's headings in their own order, which is its outline; a path the set does not define. |
-| concept section (an idea that two or more capabilities' obligations name) | a section of links: meaning, picture (or a gap returned to the caller), then links by document, as `engineering-documents.md` teaches | A reader learns what the idea is, not only where it appears. | A column or tag of ticks. |
+| walkthrough (a question that crosses the set's pages, a PR's slice reads, or a point where one repository waits on another) | a Walkthrough over existing pages and sections, in the path's order, as `engineering-documents.md` teaches | It answers a question that crosses documents, or that needs a new order through one page; each stop is an existing page or section; narration states no rule. | One page's headings in their own order, which is its outline; a stop the set does not have. |
+| shared idea (an idea that two or more capabilities' obligations name, or the owner names) | a line on the home page linking the idea's owning section and its picture (or a gap returned to the caller), as `engineering-documents.md` teaches | A reader reaches what the idea is, not only where it appears. | A column or tag of ticks; the idea's meaning restated on the home page. |
 
 ## The source-derived call path
 
