@@ -1,6 +1,6 @@
 # Compose engineering design pages
 
-Use this recipe to write a page of an engineering design set: a document page, its home page, a deliverable page or a plan page. The page is the design: each fact's text lives once, in a section or a record body on its document's page, and the released browsers show it by need. This recipe decides what each page holds and how it reads; it does not change what the design phases mean.
+Use this recipe to write a page of an engineering design set: a document page, its home page, a deliverable page or a plan page. The page is the design: each fact's text lives once, in a section or a record body on its document's page, and the released browsers show it by need. This recipe decides what each page holds and how it reads.
 
 MUST load `../../../shared-references/design-documents.md` and return the four document questions and their owners, the page path of each document in the set's folder, and the records and sections this page's document owns, with what each record names. Keep each document's distinct meaning and current state. Do not combine Requirements with Specification, and do not present a planned Verification Design as an observed result.
 
@@ -18,13 +18,11 @@ A set is one folder, as `design-documents.md` lays it out. Each page carries the
 | a deliverable page | its needs, each linked on its owning document page with the need's ID in the link text, such as "U3 on the Requirements page", and a link to its plan page | no fact of its own; a fact only it needs goes into the owning overall document |
 | a plan page (in `plans/`) | the plan `canonical-implementation-plan.md` defines, with its delivery map and plan change view from `views.md`, and links to its deliverable page and the home page | the plan, never a design fact |
 
-No released address reaches one need's view inside the browser, so a link to a need names the page and the need's ID; a deep link waits for an address the guide documents.
-
 ## Write a document page
 
 - **Records.** One record per row the document owns, its ID the row's identity (`U1`, `R9`), naming only what it serves, as `design-documents.md`'s Records and Sections table says. The summary is the compact line the browser lists; the body carries the whole of the row: definitions, conditions, alternatives, error cases, exact interfaces and thresholds. Mark only the parts the guide's table allows for the kind, and only around content that is truly that part: a part with nothing true to put in it is omitted, never filled.
 - **Sections.** A fact with no record kind (the capability list with each purpose, the entities, the binding and trace tables, a shared observation route) is ordinary HTML at a stable ID beside the browser. A section links to the records it concerns by page and ID and restates none of them.
-- **Views.** A view lives in the section or record body that owns its facts, in the form `views.md` gives it: the entity map in the entities section, a design part's sketch in its body, a need's pictures in its body where the user's experience matters. The browser already shows each need with its specification, program design and verification, and filters the needs by capability, so no page composes a second view of a need.
+- **Views.** A view lives in the section or record body that owns its facts, in the form `views.md` gives it: the entity map in the entities section, a design part's sketch in its body, a need's pictures in its body where the user's experience matters.
 - **Islands.** A section or body uses an inline Markdown island where Markdown carries its text best, in the inline form the guide's content reference documents. An island holds one section's or body's text, never a whole document.
 - **Checks.** A Verification Design check carries no result. Write no `observation` record at design time; the browser shows the check as not run until an observed result exists.
 
