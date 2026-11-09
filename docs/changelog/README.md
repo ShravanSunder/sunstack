@@ -2,6 +2,7 @@
 
 - [2026-11-08 Activate call completeness](2026-11-08-call-completeness-activation.md)
 - [2026-11-08 Call evidence and held R02 candidate](2026-11-08-call-completeness-candidate.md)
+- [2026-11-07 Generic skills drop AgentStudio's own workflow](2026-11-07-remove-product-workflow-leaks.md)
 - [2026-11-07 Rules skills: standalone, split and corrected](2026-11-07-rules-skills-standalone.md)
 - [2026-11-06 Show me your work: every agent logs its own work, and the owner's page](2026-11-06-show-me-your-work-log-and-page.md)
 - [2026-11-06 Decision trees and direct native lint](2026-11-06-decision-trees-native-rulebook.md)
