@@ -62,7 +62,7 @@ need U1 when present
                       -> proof obligation V1
 ```
 
-When the capability map fires, start this chain at one capability's home `U` rows. An `R` they reach may live in another capability that names this one under "also serves"; follow that link instead of copying the `R`.
+When the capability map fires, start this chain at the needs that name one capability. An `R` they reach may also name needs of another capability; it is one record on both lines, never copied, and nothing on it names a capability.
 
 Diagrams may explain relationships but may not be the only home of normative meaning.
 
@@ -72,19 +72,21 @@ Consume each selected view's reader question plus the predicates, cardinality, a
 
 Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
 
-- Capability maps let the owner confirm the parts at a glance, before any row. Both maps re-render the confirmed list the Requirements record opens with, so the list keeps one home. A linked row appears once, under its home, and names the other capability, as in this Specification map:
+- Capability maps let the owner confirm the parts at a glance, before any row. The Requirements page's capability list section is the one home of each capability's key, name and purpose, and the requirement browser narrows the needs to each capability. An obligation reaches its capabilities through the needs it names, so one that serves two capabilities is read under both and written once, as in this reading of the Specification:
 
   ```text
-  import    card charges and receipt photos arrive in a claim without retyping    R1 R2 R5   R5 also serves approval
-  approval  a manager approves or returns a claim, with a reason, in one place    R3 R4 R6
-  payout    an approved claim reaches the employee's account on the next pay run  R7 R8
+  import    R1 R2 R5        R5 names U6 (import) and U8 (approval)
+  approval  R3 R4 R5 R6
+  payout    R7 R8
   ```
+
+  The browser shows this reading need by need. No released view shows it for the whole set at once, and writing it out on a page would be a second copy of derived links, so return that exact composition gap, as `presentation-html`'s `views.md` names it, instead of hand-writing the map.
 
   An entry named `ingest service`, or arrows between capabilities as if they called each other, has crossed into structure and routes to `program-design`.
 - Journey maps cite the stable U rows they re-render; the source record remains normative. Good steps express the user's job and source-established observable pain, or mark that pain and its evidence unknown. A screen tour, component name, or cross-class chain is not a journey.
 - Context diagrams keep the system opaque and place external consumers, stakeholders, surfaces, contracts, and relevant non-consumers around the boundary. Internal components, owners, stores, or enforcement points are structural How and route to `program-design`.
 - Entity maps show each `E` entity with its identity rule, relationships with cardinality, and observable states; the entity table stays normative. A map that shows a package, schema, type, or store has crossed into `program-design`.
-- Requirement coverage tables expose missing U/E/P/O/R/C/V links rather than filling gaps with guessed meaning. When the table is grouped by capability, also read each group whole: a capability whose home `U` rows reach no `R`, and an `R` with no home capability, are gaps here. A capability whose home rows are all unauthorized reaches no `R` by rule; record that authority gap rather than inventing an obligation.
+- Requirement coverage tables expose missing U/E/P/O/R/C/V links rather than filling gaps with guessed meaning. When the table is grouped by capability, also read each group whole: a capability whose needs no `R` names, and an `R` that names no need, are gaps here. A capability whose needs are all unauthorized reaches no `R` by rule; record that authority gap rather than inventing an obligation.
 - Coverage stops at `V`. Do not open Program Design or Verification Design documents to extend it. In a fresh set they do not exist yet, and their absence is the next phases' work, not a gap. Walking each capability through trace rows and Verification Design rows is four-document review's job.
 
 Prune a view that adds no decision clarity. View application is complete when every fired predicate has the required number of passed views, each required semantic field is visible, and adding another view would only duplicate an existing relationship.

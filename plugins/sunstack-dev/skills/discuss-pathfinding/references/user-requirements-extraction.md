@@ -76,7 +76,7 @@ Each need row carries:
 
 ```text
 stable identifier: U1, U2, ...
-capability: one home key, plus any "also serves" keys (omitted in a one-concern set)
+capability: one home key (in a one-concern set, the one capability named for that concern)
 affected user or stakeholder class
 need or outcome in that class's terms
 evidence anchor and evidence type
@@ -86,14 +86,14 @@ priority assigner
 hypothesis state when unresolved
 ```
 
-Each row has exactly one home capability. When a need also matters to another capability, name that one under "also serves" and keep the single row; a copy under the second capability gives one need two homes that drift apart.
+Each row has exactly one home capability, and the need record names only that one. When a need also matters to another capability, keep the single row under its home; a copy under the second capability gives one need two homes that drift apart, and no "also serves" key goes on the need.
 
 ```text
 U6  employee: a card charge I already claimed is flagged before I submit it again
-    capability: import   also serves: approval
+    capability: import
 ```
 
-The manager gains too, since nobody approves the same charge twice, but the need is met where charges arrive, so `import` is its home and `approval` links to it.
+The manager gains too, since nobody approves the same charge twice, but the need is met where charges arrive, so `import` is its home. The link to approval comes later, and once: the obligation that serves both U6 and an approval need names them both, and the browser shows that obligation with each.
 
 The identifier never encodes the capability: `U6`, never `IMP-2` or `U-import-2`. Moving a row to another capability changes only its capability field.
 

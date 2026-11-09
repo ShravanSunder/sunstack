@@ -42,7 +42,7 @@ A view never originates a governing fact. A native page view may project the own
 The page passes only when its proof records:
 
 - the Demistify binding;
-- for a design set, the actual result of preparation on the set's folder, run after the last edit and before the check;
+- for a design set whose Requirements page has its first need, the actual result of preparation on the set's folder, run after the last edit and before the check; before the first need, `preparation: not applicable (no need yet)`;
 - each island's source: inline, or its included file and whether it was live or embedded;
 - the actual result of `presentation-html`'s routine static check on the final page;
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
@@ -57,14 +57,14 @@ Record no hashes and keep no provenance registry.
 Whoever edits a page keeps it, and every page derived from it, current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
 
 1. Change the fact once, in its owning section or record body. A record in another document that depends on the fact changes through that document's owner, never by pasting the new text into it: a Verification Design check whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
-2. For a design set, after any change to a record, a body, a section heading or ID, a page path or a Walkthrough, run the guide's preparation on the set's own folder and nothing outside it, then the collection index when the set has one, then the routine static check once, all with the CLI at the page's binding by the route the guide documents, which `presentation-html`'s `demistify.md` teaches. Preparation validates the whole set before it writes any page and refuses the set on a broken ID, reference, body, part or record kind; it is not an atomic filesystem transaction if a write itself fails, so a failed write leaves the set to prepare again. The collection it writes into each page is output: edit the record blocks and bodies, never the prepared carrier.
+2. For a design set whose Requirements page has its first need, after any change to a record, a body, a section heading or ID, a page path or a Walkthrough, run the guide's preparation on the set's own folder and nothing outside it, then the collection index when the set has one, then the routine static check once, all with the CLI at the page's binding by the route the guide documents, which `presentation-html`'s `demistify.md` teaches. Preparation validates the whole set before it writes any page and refuses the set on a broken ID, reference, body, part or record kind; it is not an atomic filesystem transaction if a write itself fails, so a failed write leaves the set to prepare again. The collection it writes into each page is output: edit the record blocks and bodies, never the prepared carrier. Before the first need, a design set's Requirements page has no record block for preparation to read, so the routine static check alone applies.
 3. IF a page includes an external Markdown file, a live `src` island needs HTTP serving and picks up later edits, and Demistify's `embed` command writes an embedded copy for double-click viewing. That copy is regenerated output, so its text is never edited by hand, and it goes stale without warning when a source it includes changes. IF the user requests a freshness comparison, or a stale-output defect is being diagnosed, compare first, before anything overwrites the committed copy: use `presentation-html` to prepare equivalent output at a temporary path (the reader and, for an indexed collection, its full index), compare it byte for byte with the committed copy, and record `identical` or `differs`; then replace the committed copy, run its routine static check and requalify it. Otherwise, use `presentation-html` to regenerate the affected reader, and the complete collection index when there is one, from the live source page and every source it includes, then run its routine static check once. A fresh regeneration carries each source's current text exactly.
 4. Recheck each derived view and dependent record that names an edited identity against the owning section's or body's facts. Equal text says nothing about them.
 
 Return freshness as one of:
 
 - `live`: the live-source arrangement resolves through its declared opening method, needs no regeneration or preparation, and every rechecked view and record agrees with its owner;
-- `regenerated`: preparation, the reader and the complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and record agrees with its owner. It claims no byte comparison and no browser observation;
+- `regenerated`: every required preparation (none before a design set's first need), the reader and the complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and record agrees with its owner. It claims no byte comparison and no browser observation;
 - `stale`: a required preparation or regeneration could not finish (a refused set, a missing source or tool, or partial output), the check failed, or a rechecked view or record disagrees. Name the exact gap.
 
 The page is current only when freshness is `live` or `regenerated`; `stale` is never current.
@@ -115,7 +115,7 @@ Each medium label names an output medium, not a skill: `presentation-tui` denote
 
 ```text
 document medium: markdown | html-page | none (chat, terminal, or read-only), with reason
-page proof: binding, preparation result for a design set, islands inline | live | embedded, routine static check result, separately required inspection results or gaps, when a page
+page proof: binding, preparation result for a design set (not applicable before its first need), islands inline | live | embedded, routine static check result, separately required inspection results or gaps, when a page
 freshness on edit: live | regenerated | stale, with each rechecked view and dependent record, when an edit touched a page or its source
 explicit freshness comparison: identical | differs, or the exact gap, only when requested or diagnosing a stale-output defect
 view and fired predicate

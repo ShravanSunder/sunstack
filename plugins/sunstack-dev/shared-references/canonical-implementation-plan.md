@@ -64,7 +64,7 @@ A superseding plan sits beside the plan it replaces, in the same form. A `plans/
 
 Direct plan-only work may use an established repository plan home. Otherwise use `docs/specs/<spec>/plans/` for durable direct planning or `<repo-root>/tmp/plan-workflows/` for temporary/advisory work.
 
-Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row.
+Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row the plan admits: every row, unless the plan is scoped to one deliverable's needs, when it admits those needs' rows and those of the work they wait on and lists the rows it leaves for later deliverables.
 
 ## Preserve and Admit
 
