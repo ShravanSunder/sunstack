@@ -1,5 +1,7 @@
 # AI Tools
 
+The maintained engineering base is `sunstack-dev` (42 skills). The existing roles and phases are preserved in the independently versioned, frozen [`sunstack-workflow-v1`](plugins/sunstack-workflow-v1/README.md) (23 skills).
+
 Local Codex and Claude Code plugins for AI-assisted development workflows.
 
 ## Core Plugins
@@ -25,7 +27,8 @@ codex plugin add <name>@sunstack
 
 | Plugin | Description |
 |--------|-------------|
-| [`sunstack-dev`](plugins/sunstack-dev/) | Codex-first spec, program design, pathfinding, plan, implementation, PR wrap-up, review, handoff, debugging, TUI presentation, and ops workflows |
+| [`sunstack-dev`](plugins/sunstack-dev/) | 42 maintained engineering practices, principles, domains, discussion, presentation, debugging, docs and operations |
+| [`sunstack-workflow-v1`](plugins/sunstack-workflow-v1/) | 23 frozen legacy roles, orchestrators, design/planning/delivery phases and handoffs; requires sunstack-dev |
 | [`dev-workflow-tools`](plugins/dev-workflow-tools/) | Common development tool skills, including native macOS UI testing with Peekaboo CLI |
 | [`scaffold-project`](plugins/ai-scaffold/) | AI Scaffold project scaffolding with standard dev configs (biome, ruff, vitest, pytest, cursor rules, claude hooks) |
 | [`agent-router`](plugins/agent-router/) | Agent collaboration, shared message boards, wake-ups, and schedules; install as `agent-router@sunstack` (Cursor Personal marketplace too) |
@@ -73,7 +76,8 @@ for the full workflow map, phase diagrams, and skill boundaries.
 ```
 ai-tools/
 ├── plugins/                     # Codex and Claude Code plugins
-│   ├── sunstack-dev/             # Spec, plan, implementation, review, handoff workflows
+│   ├── sunstack-dev/             # Maintained engineering base
+│   ├── sunstack-workflow-v1/     # Frozen legacy roles and workflow phases
 │   ├── dev-workflow-tools/      # Common tool skills, including Peekaboo UI testing
 │   └── ai-scaffold/             # Project scaffolding
 ├── observability/               # Shared local OTel/Victoria stack

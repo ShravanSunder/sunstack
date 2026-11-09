@@ -2,7 +2,7 @@
 
 Start with [how the skill system fits together](skill-system.md). It explains the layers, role boundaries, design documents and delivery paths. Follow [skill standards and the linter](skill-standards-linter.md) for the path from a written standard to an executable check. Historical source detail is optional: [admired-skill references](references/admired-skills.md).
 
-These documents explain the current source. The linked `SKILL.md` files, shared references, manifests and engine contracts own the runtime instructions. A source description establishes neither installed-client behavior nor the effectiveness of a model following a skill.
+These documents explain the maintained sunstack-dev base and the frozen sunstack-workflow-v1 source. The linked `SKILL.md` files, shared references, manifests and engine contracts own the runtime instructions. A source description establishes neither installed-client behavior nor the effectiveness of a model following a skill.
 
 | Reader question | Start here |
 | --- | --- |

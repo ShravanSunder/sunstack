@@ -1,6 +1,6 @@
 # Question Craft
 
-This reference owns question craft for interactive pathfinding sessions. A blocking authoritative Why/What decision during specification convergence belongs to `spec-design` step 4, not this reference. Its bounded decision rule does not apply here: pathfinding groups related questions according to what the user can answer from one current context and refuses non-interactive contexts outright.
+This reference owns question craft for interactive pathfinding sessions. A blocking authoritative Why/What decision during specification convergence belongs to `sunstack-workflow-v1:spec-design` step 4, not this reference. Its bounded decision rule does not apply here: pathfinding groups related questions according to what the user can answer from one current context and refuses non-interactive contexts outright.
 
 ```text
 this reference owns: the question forms, material-ambiguity procedure, probes, and counters for one session
@@ -49,7 +49,7 @@ If an urgent security migration cannot preserve both availability and speed, whi
 
 `<show diagram/>` is authoring notation. Replace it with a useful diagram when it materially helps, or omit it; never show the marker to the user. When the owner meaning is already confirmed, do not ask again: use the same short explanation and optional-diagram placement, then state the confirmed result and handoff concisely.
 
-Bad: “Should the runner own scheduling?” That asks the user to perform structural synthesis. Return settled obligations to `program-design`; pathfinding asks only for missing owner meaning such as acceptable cost, risk, downtime, compatibility, or policy.
+Bad: “Should the runner own scheduling?” That asks the user to perform structural synthesis. Return settled obligations to `sunstack-workflow-v1:program-design`; pathfinding asks only for missing owner meaning such as acceptable cost, risk, downtime, compatibility, or policy.
 
 ## Probes
 

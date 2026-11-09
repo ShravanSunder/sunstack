@@ -5,8 +5,10 @@ import { describe, expect, test } from "vitest";
 const repoRoot = path.resolve(import.meta.dirname, "../../../..");
 const pluginRoot = path.join(repoRoot, "plugins/sunstack-dev");
 
-const readPluginFile = (relativePath: string): string =>
-  readFileSync(path.join(pluginRoot, relativePath), "utf8");
+const readPluginFile = (relativePath: string): string => {
+  const workflowPath = path.join(repoRoot, "plugins/sunstack-workflow-v1", relativePath);
+  return readFileSync(existsSync(workflowPath) ? workflowPath : path.join(pluginRoot, relativePath), "utf8");
+};
 
 const convergenceRecurrenceText =
   "A finding the Reviewer Sidekick verified closed in an earlier review is accepted again. A finding whose correction never closed is still open, which is not a recurrence.";
@@ -60,13 +62,13 @@ describe("goal delivery intent hard cutover", () => {
     expect(planner).toContain("materially different groupings exist inside one PR shape");
     expect(planner).toContain("a split is the owner's decision, for every kind of work");
     expect(planner).toContain(
-      "pick one, record the choice as a decision entry citing its alternatives and reason through `practices-show-me-your-work`, and state the chosen grouping in the plan with that entry's id",
+      "pick one, record the choice as a decision entry citing its alternatives and reason through `sunstack-dev:practices-show-me-your-work`, and state the chosen grouping in the plan with that entry's id",
     );
     expect(planner).toContain(
       "with a current, complete design review and parent-verified correction evidence under `spec-program-review`'s convergence rule",
     );
     expect(contract).toContain(
-      "picks one, records the choice as a decision entry citing its alternatives and reason through `practices-show-me-your-work`, states the chosen grouping in the plan with that entry's id, and returns `ready`",
+      "picks one, records the choice as a decision entry citing its alternatives and reason through `sunstack-dev:practices-show-me-your-work`, states the chosen grouping in the plan with that entry's id, and returns `ready`",
     );
     expect(planner).toContain(
       "offer once between no tracking and one available named `ops-*` owner",
@@ -223,7 +225,7 @@ describe("goal delivery intent hard cutover", () => {
     expect(planContract).toContain("`<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md`");
     expect(designOrchestrator).toContain("<project-root>/docs/specs/");
     expect(designOrchestrator).toContain(
-      "Decisions and their detail go to the work's record through `practices-show-me-your-work`",
+      "Decisions and their detail go to the work's record through `sunstack-dev:practices-show-me-your-work`",
     );
     expect(goalOrchestrator).toContain("practices-show-me-your-work");
     expect(specDesign).toContain("artifact-home policy");

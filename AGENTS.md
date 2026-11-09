@@ -26,7 +26,8 @@ ai-tools/
 ├── plugins/                          # Plugin sources
 │   ├── ai-scaffold/                  # Project scaffolding (biome, ruff, vitest, pytest)
 │   ├── dev-workflow-tools/           # Common tool skills, including Peekaboo UI testing
-│   ├── sunstack-dev/                 # Engineering roles, phases, practices, domains and principles
+│   ├── sunstack-dev/                 # Maintained engineering practices, domains and principles
+│   ├── sunstack-workflow-v1/         # Frozen legacy roles, phases and orchestration
 │   └── skill-authoring/              # Skill creation, rules, review, and audit
 ├── observability/                    # Shared local OpenTelemetry and Victoria stack
 ├── agent-scripts/                    # Host agent scripts (not plugin skills)
@@ -46,11 +47,17 @@ Claude Code can load the same skill tree when a plugin also has `.claude-plugin/
 
 Read [docs/architecture/README.md](docs/architecture/README.md) for the current system model, [skill-system.md](docs/architecture/skill-system.md) for layers, roles and the four-document workflow, and [skill-standards-linter.md](docs/architecture/skill-standards-linter.md) for executable standards and their proof limits. Runtime instructions stay in their owning skills and shared references.
 
-Keep the current inventories in [sunstack-dev/README.md](plugins/sunstack-dev/README.md) and [skill-authoring/README.md](plugins/skill-authoring/README.md). Historical proposals do not override shipped source.
+Keep the current inventories in [sunstack-dev/README.md](plugins/sunstack-dev/README.md) [sunstack-workflow-v1/README.md](plugins/sunstack-workflow-v1/README.md), and [skill-authoring/README.md](plugins/skill-authoring/README.md). Historical proposals do not override shipped source.
+
+## Frozen workflow archive
+
+`plugins/sunstack-workflow-v1/` is frozen. Read its [nested AGENTS.md](plugins/sunstack-workflow-v1/AGENTS.md) before any archive change. Do not routinely edit, improve, refactor, regenerate, bump or synchronize anything there; an archive change requires explicit owner instruction naming that scope. Improvements belong in maintained base or a future workflow.
+
+The archive's base-file anchor is the advertised `sunstack-dev:presentation-html` skill and the base plugin's `skills/` and `shared-references/` layout. Preserve this compatibility while v1 depends on it; a rename is a v1 compatibility change. Its six copied references remain frozen when base originals change. This owner-approved split permits cross-plugin principle/domain reads through that base-root lookup; do not recreate local copies to satisfy older same-plugin citation guidance.
 
 ## Agent Delegation
 
-For helpers, sessions and their models, use `practices-manage-agents`; for Router sessions, boards and messages, use `agent-collaboration`.
+For helpers, sessions and their models, use `sunstack-workflow-v1:practices-manage-agents`; for Router sessions, boards and messages, use `agent-collaboration`.
 
 ## Skill work
 
@@ -90,9 +97,9 @@ When doing skill work in this repo:
 5. `domain-skill-crafting`'s `references/proof-claims.md` owns what a behavior-proof claim may say; `skill-design`'s `references/proof-runs.md` owns how a run is carried out.
 6. For user-visible plugin behavior changes, update `docs/changelog/`, bump plugin version metadata, and record refresh / reinstall status.
    - **Checked rules.** From the repository root, run `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json [paths]` directly (`--all` for every configured skill file). Add `--report <file>` to keep detail, then use `sunstack lint show <file> <id>` for one result. `--check` validates the rulebook without reading checked files or needing a key; `--rules` lists its active rules. The engine reports warnings, unsure results, gaps and skipped folders itself; no repository gate changes those results. Model requests need the authorized credential route.
-7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-dev:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
+7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-workflow-v1:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
-For execution ownership, load `practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
+For execution ownership, load `sunstack-workflow-v1:practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
 
 Other sources:
 
@@ -135,7 +142,7 @@ Orchestrators route whole jobs; phases own individual steps. Roles own assigned 
 
 Principles are the bottom layer: one judgment each, hidden from model invocation and read in full at their citing decision. Domains sit just above them, are hidden from model invocation and are loaded when the subject applies. The [architecture](docs/architecture/skill-system.md#layers-and-calls) explains call forms, role/form/model separation and the dependency rules. Session-level instructions remain outside this graph.
 
-The current design cycle has four distinct documents: Requirements, Specification, Program Design and Verification Design. `shared-references/design-documents.md` owns their meanings, capabilities, chunk boundaries and reading paths. The old five-document drafts are historical. The current trace-storage and reconciliation owner is `practices-show-me-your-work`.
+The frozen v1 design cycle has four distinct documents: Requirements, Specification, Program Design and Verification Design. `plugins/sunstack-workflow-v1/shared-references/design-documents.md` owns their v1 meanings, capabilities, chunk boundaries and reading paths. The old five-document drafts are historical. The current trace-storage and reconciliation owner is `practices-show-me-your-work`.
 
 Retired skill source is preserved under `plugins/sunstack-dev/retired-skills/` and is not runtime-discoverable. The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` trees remain there as provenance and never become runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of the retired goal controller, planning swarm, execution controller, or review swarm. The current runtime surface is exactly the active skills enumerated above.
 

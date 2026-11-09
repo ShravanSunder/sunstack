@@ -40,7 +40,7 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
-Write the confirmed list onto the Requirements page, the set's `requirements.html` that `design-documents.md` lays out: a capability list section at a stable ID, one entry per capability with its key, the owner's name and its purpose. Each need you write then names its home capability by key, and the requirement browser filters the needs by it, so the list has one home and `spec-design` reads the same page:
+Write the confirmed list onto the Requirements page, the set's `requirements.html` that `design-documents.md` lays out: a capability list section at a stable ID, one entry per capability with its key, the owner's name and its purpose. Each need you write then names its home capability by key, and the requirement browser filters the needs by it, so the list has one home and `sunstack-workflow-v1:spec-design` reads the same page:
 
 ```text
 capability list section   import (Import): card charges and receipt photos arrive in a claim without retyping
@@ -112,7 +112,7 @@ If the user declines extraction, return:
 - the rows or evidence established so far;
 - the remaining owner and evidence gaps.
 
-Do not select a specification readiness label; `spec-design` owns that decision after it classifies the complete source inventory.
+Do not select a specification readiness label; `sunstack-workflow-v1:spec-design` owns that decision after it classifies the complete source inventory.
 
 Stop this stage when every row has an evidenced authority state and any missing authority is an exact owner decision rather than an inferred answer.
 
@@ -126,7 +126,7 @@ Capture sequence only when a direct-user job's steps, transitions, or pain relat
 - the desired observable difference;
 - the cited U rows.
 
-Pathfinding may use a non-normative conversational sequence map to clarify an ambiguity; `spec-design` alone decides whether the durable specification needs a journey view and owns its normative rendering.
+Pathfinding may use a non-normative conversational sequence map to clarify an ambiguity; `sunstack-workflow-v1:spec-design` alone decides whether the durable specification needs a journey view and owns its normative rendering.
 
 Teach the relationship through examples:
 
@@ -158,7 +158,7 @@ Apply these rules while building the boundary:
 - Name observable current behavior or capabilities the owner expects to reuse; do not design internal architecture here.
 - Name the outcome gap, not every feature a complete platform might have.
 - Ask which repositories, packages, forks, or modules may change when the owner already has a limit or leaving it open could materially expand the work.
-- Record allowed and protected packages as an implementation boundary, not as product behavior or permission to invent internal structure. Otherwise preserve the higher-level system or capability boundary for `program-design` to realize.
+- Record allowed and protected packages as an implementation boundary, not as product behavior or permission to invent internal structure. Otherwise preserve the higher-level system or capability boundary for `sunstack-workflow-v1:program-design` to realize.
 - Treat an agent-proposed boundary as provisional until the owner confirms it.
 - Describe the expected change shape and which additions require renewed approval. “Production-ready and complete” is too vague to reject expansion.
 

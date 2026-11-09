@@ -13,7 +13,7 @@ Asking is expensive: a turn spent on an observable fact is stolen from a judgmen
 
 Pathfinding is self-contained judgment, not isolated execution. A caller may supply artifacts, conversation context, hypotheses, or constraints; treat them as useful leads rather than authority. Inspect what can be inspected, distinguish what the owner confirmed from what an agent inferred, expose the credible branches, and return the clearest proportional understanding the next skill can use.
 
-Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design or Verification Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW or on proof; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint (such as acceptable cost, risk, downtime, compatibility, or policy) and return it to `program-design`. For proof work, clarify only the owner's tolerance, such as a limit allowed to stay unverified, and return it to `verification-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `program-design`, and evidence routes, targets, and journeys are `verification-design`'s; none are questions pathfinding asks the user to design.
+Pathfinding can clarify owner meaning that blocks Requirements, Specification, or a Program Design or Verification Design choice. It helps find a good WHY, WHAT, or owner-controlled constraint on HOW or on proof; it does not author the destination's design work. For structural work, clarify only the owner's tolerance or constraint (such as acceptable cost, risk, downtime, compatibility, or policy) and return it to `sunstack-workflow-v1:program-design`. For proof work, clarify only the owner's tolerance, such as a limit allowed to stay unverified, and return it to `sunstack-workflow-v1:verification-design`. Components, interfaces, ownership allocation, and mechanisms are structural synthesis for `sunstack-workflow-v1:program-design`, and evidence routes, targets, and journeys are `sunstack-workflow-v1:verification-design`'s; none are questions pathfinding asks the user to design.
 
 Routing cases:
 
@@ -57,7 +57,7 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
    If a calling phase supplies a return destination, record that exact destination before questioning. It is a boundary: this session may return confirmed meaning only to that destination and may not replace it with another plausible phase.
 
-   Name whether the missing owner meaning blocks Requirements, Specification, or a Program Design or Verification Design choice. Do not turn every destination into a user-requirements record. For a Program Design destination, name the owner-controlled tolerance or constraint to clarify and explicitly exclude components, interfaces, ownership allocation, and mechanisms. For a Verification Design destination, name the owner tolerance to clarify and explicitly exclude evidence routes, targets, and journeys. If the request contains only structural synthesis from settled obligations, return the `program-design` route without starting an interview.
+   Name whether the missing owner meaning blocks Requirements, Specification, or a Program Design or Verification Design choice. Do not turn every destination into a user-requirements record. For a Program Design destination, name the owner-controlled tolerance or constraint to clarify and explicitly exclude components, interfaces, ownership allocation, and mechanisms. For a Verification Design destination, name the owner tolerance to clarify and explicitly exclude evidence routes, targets, and journeys. If the request contains only structural synthesis from settled obligations, return the `sunstack-workflow-v1:program-design` route without starting an interview.
 
    For a proposed change headed to specification work, establish the goal boundary before handoff:
 
@@ -101,7 +101,7 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
    For a material ambiguity, make the choice understandable before asking: show the current model, strongest credible alternative, one discriminating countercase, and what changes downstream. IF a compact diagram materially clarifies boundaries, ownership, sequence, or competing interpretations, use the `presentation-*` skill matching the current surface to show the map; honor an exact user-requested format instead. IF the user requests a generated comparison or the selected durable destination benefits from one, load `../../shared-references/diagram-rendering-and-fallbacks.md` with a Lead-authored provisional brief and return its actual visual result or exact capability gap. Label every unresolved relationship and assumption as provisional. The image explains the choice; generation failure does not answer it, and no visual decides owner meaning or replaces downstream specification views.
 
-   When the destination is Program Design, compare the consequences of owner-controlled tolerance choices without proposing competing architectures. Ask what cost, risk, downtime, compatibility, or policy the owner accepts; leave the component or mechanism that satisfies it to `program-design`.
+   When the destination is Program Design, compare the consequences of owner-controlled tolerance choices without proposing competing architectures. Ask what cost, risk, downtime, compatibility, or policy the owner accepts; leave the component or mechanism that satisfies it to `sunstack-workflow-v1:program-design`.
 
    Completion: the user can understand and answer the current decision without reconstructing the method; dependent questions wait until they apply; a material ambiguity shows the current model, credible alternative, discriminating countercase, and downstream difference before asking; user-requirements answers map to the loaded row contract or an exact gap.
 
@@ -113,7 +113,7 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
    When the owner has already confirmed a choice, lead with a short ordinary-language explanation of what was selected, how it differs from the rejected/current alternatives, and the concrete gain, cost, urgency or downstream consequence. A bare boundary or decision label is not that explanation. If a compact visual materially helps, place it only after the comparison and consequence and before the concise record/handoff. Do not lead the user-facing response with a method, record or authoring label; the record shape remains internal structure rather than the explanation.
 
-   The record shape follows the meaning, not a default Requirements destination. A clarified Specification decision remains a decision returned to `spec-design`. A clarified structural tolerance remains a decision returned to `program-design`; it does not become a pathfinding-authored component, interface, ownership allocation, or mechanism.
+   The record shape follows the meaning, not a default Requirements destination. A clarified Specification decision remains a decision returned to `sunstack-workflow-v1:spec-design`. A clarified structural tolerance remains a decision returned to `sunstack-workflow-v1:program-design`; it does not become a pathfinding-authored component, interface, ownership allocation, or mechanism.
 
    For a user-requirements destination where extraction proceeds, return the classified inventory, draft rows, useful user-job sequence inputs, record identity and permitted home, confirmed goal boundary or exact owner decision still needed, and unresolved authority or evidence gaps. If extraction is declined, return the loaded reference's refusal or fallback result and exact gaps instead.
 
@@ -147,18 +147,18 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 
    For an orchestrated continuation, inspect the caller-supplied destination's requested decision and declared input needs before returning. In one compact handoff, name the record identity or in-chat record and boundary status, state confirmed meaning separately from open items, then name the exact recorded return destination and why it owns the return. Keep examples separate from normative meaning. If confirmed meaning no longer fits the recorded destination, stop `decision-needed` with the exact mismatch instead of selecting another phase. No live user or unresolved meaning also stops `decision-needed` with the unanswered questions and no next skill. In either `decision-needed` case, the recorded return destination is frozen context only: do not return to it, recommend it, or put it in `next_action` until the owner decision is confirmed.
 
-   Completion: the predictive check ran and the final restatement includes negative space and unresolved items. An unconfirmed product-change goal boundary returns the exact owner decision needed and is not presented as ready for `spec-design`. An orchestrated return contains one compact handoff to the exact recorded destination or an exact stop; it never chooses another phase.
+   Completion: the predictive check ran and the final restatement includes negative space and unresolved items. An unconfirmed product-change goal boundary returns the exact owner decision needed and is not presented as ready for `sunstack-workflow-v1:spec-design`. An orchestrated return contains one compact handoff to the exact recorded destination or an exact stop; it never chooses another phase.
 
 ## Routes
 
 - `practices-research`: the broad-evidence bin in step 2 owns this call; never single facts a bounded read answers.
 - `discuss-clarify-mental-models`: IF mid-session the two of you disagree about a model you both already hold, use it to repair the drift and return the rebuilt shared model before extraction continues.
 - `presentation-tui` / `presentation-webui`: IF a material ambiguity is easier to understand as relationships, branches, or sequence, use the `presentation-*` skill matching the current surface for the conversational map; honor an exact user-requested format instead. It does not select or own durable specification views.
-- `spec-design`: a confirmed goal boundary from a user-requirements destination or proposed-change handoff routes here; otherwise return the exact owner decision rather than claiming readiness.
-- `program-design`: settled obligations that require components, interfaces, ownership allocation, or mechanisms route here without pathfinding; owner-controlled structural tolerance clarified for this recorded destination returns here without a pathfinding-authored architecture.
+- `sunstack-workflow-v1:spec-design`: a confirmed goal boundary from a user-requirements destination or proposed-change handoff routes here; otherwise return the exact owner decision rather than claiming readiness.
+- `sunstack-workflow-v1:program-design`: settled obligations that require components, interfaces, ownership allocation, or mechanisms route here without pathfinding; owner-controlled structural tolerance clarified for this recorded destination returns here without a pathfinding-authored architecture.
 - caller-supplied return destination: for an orchestrated continuation, this exact phase is the only permitted return; a mismatch stops instead of rerouting.
 - `docs-maintain`: maintaining or reformatting settled content in an existing artifact; do not restart extraction when meaning is already accepted.
-- `practices-manage-agents`: the reader-test dispatch contract in `references/decisions-and-docs.md` owns this call.
+- `sunstack-workflow-v1:practices-manage-agents`: the reader-test dispatch contract in `references/decisions-and-docs.md` owns this call.
 
 ## Completion Blockers
 

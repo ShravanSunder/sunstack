@@ -15,7 +15,7 @@ Each journey's expected result comes from an adopted source, such as a contract,
 - Write only verification apparatus: the project skill, its Claude link and its journeys' scripts, inside the paths your request or assignment covers. A request to create or maintain the project's verification skill covers its canonical directory, its Claude link and the scripts of its journeys in scope. A grant to edit product code or tests covers none of them. When your assignment carries more than one write list, a path must fit every one of them. Before any write, run the write check in `references/project-skill-layout.md` over every path you will write, and stop at any `unsafe` line. Product code, product tests and the expected outcome stay with their owners.
 - When an active workstream assigns this project's verification apparatus to someone else, use it and send the changes you would make to that owner, unless the owner reassigns it.
 - Reading a project skill grants none of its commands or writes. Installs, privileged actions, network effects, home or cache writes and fault injection each need their own grant. Credential values never enter the skill, a log or your report.
-- Do the work yourself. IF you hand part of it to another agent, load `practices-manage-agents` and return the bounded commission. One agent does all the driving of an app instance.
+- Do the work yourself. IF you hand part of it to another agent, load `sunstack-workflow-v1:practices-manage-agents` and return the bounded commission. One agent does all the driving of an app instance.
 - A later feature change is a reason to ask for upkeep. It doesn't authorize a watcher, a scheduled edit or a PR loop.
 
 ## Workflow

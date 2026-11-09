@@ -1,312 +1,66 @@
-# Shravan Dev Workflow
-
-Shravan's development workflow skills for moving from shared understanding to spec, plan, implementation, review, handoff, debugging, docs, and operations work.
-
-Each workflow phase in this plugin should have a clear owner, artifact boundary, and next handoff. Day-to-day work should use the narrower phase skills here.
-
-## Mental Model
-
-```text
-shared understanding
-  -> orchestrator-implementation-goal: implementation planning, execution/proof, review, and delivery
-       -> orchestrator-design: coordinate and verify the design cycle
-       -> spec-design: separate Requirements and Specification
-       -> program-design: structural How
-       -> verification-design: how each requirement will be proven
-       -> spec-program-review: proportional independent four-document design review
-       -> plan-implementation: the first plan, which the owner reviews with the design
-       -> stop at the reviewed design and its first plan, or an explicit gap
-  -> plan-implementation: one canonical plan + proof mapping, when a goal starts without one
-  -> plan-update: a superseding plan when a ready plan's meaning changes during delivery
-  -> implement-plan: approved immutable plan + implementation proof
-  -> implementation-review: ordered checks in one independent 🔎 Reviewer Sidekick session + rails reduction
-       -> stop before corrections and PR work
-```
-
-`handoff` means portability. It does not mean the phase is approved, complete, or ready for the next phase. A handoff packet makes context transferable so a future agent, another CLI, or another machine can continue without guessing.
-
-Design-bearing planning is admitted only from a `four-document-design` mode `spec-program-review` result that is `ready` and semantically current for the Requirements, Specification, Program Design, and Verification Design. A handoff preserves that evidence; it does not create it. The only direct planning bypass is work positively classified as implementation-mechanics-only with no new design-bearing decision.
-
-## Namespace Map
-
-```text
-Namespace            Concern                      Skills
--------------------  ---------------------------  ----------------------------
-discuss-*            shared understanding          discuss-clarify-mental-models
-                                                  discuss-pathfinding
-practices-*          always-on practices           practices-collaboration
-                                                  practices-show-me-your-work
-                                                  practices-manage-agents
-                                                  practices-research
-                                                  practices-how
-                                                  practices-why
-                                                  practices-verification
-                                                  practices-verification-maintenance
-                                                  practices-preflight
-                                                  practices-cleanup
-                                                  practices-retrospective
-role-*               assigned responsibility       role-lead
-                                                  role-advisor
-                                                  role-implementer
-                                                  role-verifier
-                                                  role-reviewer
-                                                  role-researcher
-                                                  role-operator
-orchestrator-*       bounded workflow routing      orchestrator-implementation-goal
-                                                  orchestrator-design
-spec-*               design/spec boundary          spec-design
-                                                  program-design
-                                                  verification-design
-                                                  spec-program-review
-                                                  spec-handoff
-plan-*               planning and portability     plan-implementation
-                                                  plan-update
-                                                  plan-handoff
-                                                  plan-improve-repo
-implement-*          approved-plan execution      implement-plan
-implementation-*     implementation judgment and lifecycle  implementation-review
-                                                  implementation-pr-wrapup
-                                                  implementation-handoff
-ops-*                external operational systems  ops-linear-tracking
-audit-*              audits and scans              audit-security-review
-debug-*              root-cause investigation      debug-investigation
-docs-*               durable documentation         docs-maintain
-presentation-*       surface-matched presentation  presentation-tui
-                                                  presentation-webui
-                                                  presentation-html
-domain-*             subject knowledge a caller loads  domain-code-standards
-                                                  domain-typescript
-                                                  domain-python
-                                                  domain-rust
-                                                  domain-swift
-principle-*          engineering judgment          principle-hold-the-scope
-                                                  principle-build-the-shared-model-first
-                                                  principle-define-the-domain-first
-                                                  principle-read-ground-truth-first
-                                                  principle-experiment-before-proposing
-                                                  principle-name-the-tradeoffs
-                                                  principle-one-owner-per-truth
-                                                  principle-types-are-communication
-                                                  principle-separate-the-concerns
-                                                  principle-justify-the-complexity
-                                                  principle-design-for-failure
-                                                  principle-design-for-concurrency
-                                                  principle-write-tests-that-can-fail
-                                                  principle-prove-it-works
-                                                  principle-verify-before-accepting
-                                                  principle-write-for-the-reader
-                                                  principle-refine-mental-models
-```
-
-## Workflow Flow
-
-```mermaid
-flowchart LR
-    pathfinding["discuss-pathfinding<br/>extract tacit or unmade understanding"]
-    mentalModels["discuss-clarify-mental-models<br/>mental model reconvergence"]
-    deliveryGoal["orchestrator-implementation-goal<br/>plan, implement, prove, review, deliver"]
-    designCycle["orchestrator-design<br/>reviewed design coordination"]
-
-    specDesign["spec-design<br/>separate Requirements and Specification"]
-    programDesign["program-design<br/>structural How"]
-    verificationDesign["verification-design<br/>how each requirement is proven"]
-    specReview["spec-program-review<br/>independent review"]
-    specHandoff["spec-handoff<br/>portable spec context"]
-
-    planImplementation["plan-implementation<br/>reviewed design to canonical plan"]
-    planUpdate["plan-update<br/>superseding plan during delivery"]
-    planHandoff["plan-handoff<br/>portable plan context"]
-
-    implementPlan["implement-plan<br/>ready delivery-plan execution"]
-    implementationReview["implementation-review<br/>independent implementation and proof review"]
-    implWrap["implementation-pr-wrapup<br/>finish PR lifecycle"]
-    implHandoff["implementation-handoff<br/>portable code state"]
-
-    pathfinding --> specDesign
-    mentalModels --> specDesign
-    deliveryGoal -.->|"first unproven gate"| designCycle
-    deliveryGoal -.-> planImplementation
-    deliveryGoal -.->|"plan meaning changes"| planUpdate
-    designCycle -.->|"first plan"| planImplementation
-    deliveryGoal -.-> implementPlan
-    deliveryGoal -.-> implementationReview
-    deliveryGoal -.-> implWrap
-    designCycle -.->|"first phase"| specDesign
-    designCycle -.->|"follows phase-selected routes"| programDesign
-    designCycle -.->|"after structural How"| verificationDesign
-    designCycle -.->|"one four-document design review"| specReview
-    designCycle -.->|"only for unmade owner meaning"| pathfinding
-
-    specDesign --> programDesign
-    programDesign --> verificationDesign
-    verificationDesign --> specReview
-    verificationDesign -.->|"seam cannot decide a requirement"| programDesign
-    specDesign --> specHandoff
-    programDesign --> specHandoff
-    verificationDesign --> specHandoff
-    specReview --> specHandoff
-    specReview --> specDesign
-    specReview --> programDesign
-    specReview --> verificationDesign
-    planImplementation -.->|"verification-design-gap"| verificationDesign
-    specReview --> planImplementation
-    planImplementation --> planHandoff
-    planImplementation -.->|"ready delivery context"| implementPlan
-    planUpdate -.->|"verification-design-gap"| verificationDesign
-    planUpdate -.->|"superseding plan"| implementPlan
-    planHandoff -.->|"when exact approval is preserved"| implementPlan
-    implementPlan --> implementationReview
-    implementationReview -.->|"accepted implementation correction"| implementPlan
-    implementationReview --> implWrap
-    implementPlan --> implHandoff
-    implementationReview --> implHandoff
-    implWrap --> implHandoff
-```
-
-## Core Phase Skills
-
-### Shared understanding
-
-Use `discuss-clarify-mental-models` when the shared picture is unstable before artifact work: terms, boundaries, assumptions, source-of-truth questions, or tradeoffs need to be made inspectable. It stays read-only, checks bounded evidence, maps branches, names the countercase, and routes only after the model is confirmed or explicitly open.
-
-`discuss-pathfinding`: Extract unwritten understanding from the user (user and stakeholder requirements, tacit process knowledge, domain terms, design decisions) via batched grilling with attached reads, live challenge, and records as they crystallize. User-requirements extraction separates evidence from row-level authority, preserves direct users and non-operating stakeholders, forces priority ownership, and captures user-job sequence inputs for later specification views.
-
-Codex display titles use the `Category: Action` form (for example, `Discuss: Pathfinding` and `Spec: Design`). Skill IDs remain kebab-case for invocation. Cursor can load these plugin directories through its explicit `agent --plugin-dir <path>` path; this repository does not provide a separate Cursor marketplace.
-
-Use `practices-research` when the next step is to gather evidence: local code/docs, sibling repos, DeepWiki-style repository research, current web/docs, Reader sources, memory, or session logs. It frames bounded research questions, walks source classes in order, labels claim quality, and writes tmp research ledgers for substantial runs. Substantial runs record source-class coverage, primary anchors and null results in a research ledger. It returns its checked answer and limits to the commissioner, with a phase return token only when the evidence shows a gap another owner must fill.
-
-Use `practices-how` to explain how existing code or a subsystem works before changing it. It traces a real entry through owners, state changes and effects back to the result or error, checks which implementation is wired in, keeps what source shows apart from what a runtime capture confirms and what is inferred, and stops when the reader can walk the named case with an anchor at each step. Program Design calls it for the current-system model.
-
-Use `practices-why` to recover why code or a design took its current shape. It walks back past the last touch to the commit that introduced the behavior, loads `practices-research` for the evidence walk, keeps a proposal apart from an adopted decision, and writes the answer as anchored facts, supported interpretations and named unknowns. It explains, and the next owner decides what to keep or change.
-
-Use `practices-verification` to check that a declared behavior works on its intended target. It finds the project's own verification skill under `.agents/skills/verify-<app>/`, picks an observation route, checks that the target and evidence still apply, drives the real interaction within the caller's grant, and reports only what was observed, keeping gaps unknown instead of passing them. UI checks use computer use or the Chrome plugin, with Peekaboo second, never Playwright.
-
-Use `practices-verification-maintenance` to create or keep current a project's verification skill at `.agents/skills/verify-<app>/`, with a relative `.claude/skills/verify-<app>` link. It reads the app's paths with `practices-how`, writes or corrects the journeys, proves them once on the real target with `practices-verification`, and reports conflicts instead of overwriting. It is adapted from Lauren Tan's Pstack `create-verification-skill` and `maintain-verification-skill`.
-
-Skills are layered: orchestrators, then phases, then practices (with `ops-*`, `audit-*` and `presentation-*`), then tool manuals, then domain skills (`domain-*`), with principles at the bottom. Role skills (`role-*`) sit above practices; phases and orchestrators reach a role only through `practices-manage-agents`, which names roles only as data values in its role table and `requiredReads.charter`. Skills in one layer may name each other freely; none names a higher layer. Work sent upward returns a token from `shared-references/phase-return-tokens.md`, which the orchestrator (or the Lead, for a direct phase) maps to the next owner without widening the requested task. Every phase opens or resumes the trace through `practices-show-me-your-work` at entry and checkpoints at completion.
-
-Use `practices-manage-agents` when delegation is the work: choosing a helper's role (Advisor, Implementer, Verifier, Reviewer, Researcher or Operator), its Worker or Sidekick form and its model, then commissioning, steering, monitoring and assessing it, including fan-outs. Before any commission goes out, it runs `practices-preflight` for that assignment's context, or reuses a check that already covered it, and the packet carries the checked list. The Lead remains the default conversation and author of governing design and implementation plans. After a ready plan, the persistent Implementer Sidekick executes its assignment and associated proof directly by default; the owner may start direct contact with that assigned Sidekick without transferring authority or execution ownership, and helpers never start owner contact themselves. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority. Seats by role belong to `practices-collaboration`. Role skills are read only by the role: how it works, its methods and principles, its boundary and completion. Management selects exactly one role skill and owns what the caller needs: each role's form, commissioner, setup and payload, classification, the model catalog, typed commissioning with one prompt template, continuation and assessment through native and agent-router routes; persistent sessions are ledgered before follow-ups; and child output remains candidate evidence until verified.
-
-Role skills are model-invocable. A helper role applies only when a commission names it; without one, the agent stays the owner's Lead and routes the work.
-
-Use `orchestrator-design` when the user asks to run or resume the full design cycle as one bounded workflow. The Lead loads `spec-design`, `program-design`, and `verification-design` and authors all governing artifacts, views, visual briefs, diagrams, and settled sections; helpers may gather evidence or execute a fixed rendering procedure, and an explicitly requested Advisor may advise. The workflow verifies meaningful visual coverage independently for each substantial design document, preserves separate Requirements and Specification identities, follows compact handoffs through optional owner pathfinding and one four-document design review. Each document is written as its page in the set's folder, with records naming what they serve and the released browsers deriving the rest. A first cycle then writes the first plan through `plan-implementation` and gives the owner one page over the design and the plan; work delivered in more than one deliverable gets a delivery cut on the home page, a first deliverable page and that deliverable's scoped plan; a design correction during delivery returns the corrected design to `plan-update` instead, and design-only work stops at the reviewed design. Review rounds continue while they converge; when they stop converging, or a correction would change design meaning, the owner gets a brief. When prior review evidence is unavailable, the current review sets the baseline.
-
-Use `orchestrator-implementation-goal` to carry implementation goals through Lead-authored planning, planned-PR implementation and proof, Lead assessment, independent review, accepted corrections, and the requested delivery boundary. Design stays with its own workflow when missing or contradicted. The default terminal is PR-ready and unmerged; merge requires explicit authority. Both orchestrators use `practices-show-me-your-work` for meaningful decision and evidence history, while checking current sources rather than replaying stored status. Direct one-phase requests bypass orchestration.
-
-Use `practices-collaboration` at the start of a qualifying task to find the repository's board project and work thread, and whenever agents coordinate: seats, messages versus posts, waiting on another agent, and resolution. With no board project, helpers return `no-home` to their parent, the Lead names the gap once under Waiting on owner, and work continues.
-
-Use `practices-show-me-your-work` when a design, plan or implementation starts, runs or stops, to log what happened, each decision with its authority, each assumption, shortcut and check, or when the user asks to see the work. The work's log is its Router project's work trail, filtered by the work's tag. Every agent, helpers included, logs its own rows as it works, with the two-step write its packet's `workLog` carries (mint a request id and a row id, then write; a retry resends the same ids), whatever its posting authority; a later row closes an earlier one only through its first link, and nothing is edited. Rows carry fixed labelled parts, a `stream:` workstream, and the kinds `shortcut`, `missed` and `audit` among others. Before handing back and at each checkpoint, each agent audits its own stretch and logs what it missed; the commissioner checks the helper's own rows at handback. Before the work has a project, `references/no-board-trace.md` keeps entries files in memory-logs and later moves them into the trail. The log never lives in a product repository; threads carry conversation and checkpoint notices that point at it. Only the six treatments in `references/stop-treatments.md` stop work; everything else is logged and continued past. A choice only the owner can make is asked on the page under For you to decide, as an `ex-choice` built from its `owner-decision-brief`, and the owner answers there. At every checkpoint the Lead builds the owner's page from the log with Demistify (`references/show-me.md`), the design the owner approved: For you to decide; What's done / what's next; What changed and why, with the decisions in two columns; and What was verified, with what was missed and which stretches were audited; each Story a headline with Happened, For you and Next, in plain words, its cited rows (named on its `Covers:` line) folded; and a Map tree whose rows open the Stories. The skill ships no scripts. A qualifying task spans sessions, commissions another agent, crosses components, or makes a decision someone will later inspect; routine small edits get no log.
-
-Use `practices-preflight` before starting an orchestration, implementing a plan or commissioning another agent. It lists what every required gate needs, proof gates included: inputs, access, credentials by name, services, tools, the agents the plan assigns, and disk. It checks each need by running something, reads a credential into memory without printing it, and resolves each gap, asks the owner once, or records a stand-in that never satisfies a required gate. A credential that a required gate needs is a start prerequisite. It returns `ready` or the gap list, and the checked list travels in the commission. It loads `practices-cleanup` for this work's merged worktrees, and when free disk is below what the work needs.
-
-Use `practices-cleanup` when a slice, milestone, PR or investigation ends, when your own merged worktree is still on disk, or when disk runs low. It removes only what the task itself created (build output, large logs, task temp folders and merged worktrees) once four checks hold: the exact path is the task's own, it is rebuildable or finished with, nothing uses it, and its evidence is kept. Its allow list runs without asking and prefers the project's own clean task; shared caches, age-based sweeps, repository-wide prunes and anything else outside the list go to the owner first. `references/merged-worktree-removal.md` holds the merged-worktree procedure, which `implementation-pr-wrapup` and `practices-preflight` reach through this practice.
-
-Use `practices-retrospective` for a blameless retrospective: a look back over a finished or bounded session or delivery at what helped, what hindered and what to preserve, or at why a correction keeps recurring across sessions. It reads the session records, using summaries only to find them, explains each consequential outcome by its conditions (information, triggers, guidance, checks, environment, owner corrections), and opens the existing owner or check before proposing anything. It returns the smallest justified disposition as data: preserve a technique with its conditions, correct execution, a skill finding for `skill-audit`, a repository or check finding for the caller, an observation or assigned driver work for `practices-verification`, project-skill upkeep for `practices-verification-maintenance`, an investigation question, or no change. A finding authorizes reporting it; each change goes through its own workflow, and the account keeps proposed, implemented and proven apart.
-
-### Spec boundary
-
-Use `spec-design` to preserve two separate upstream concepts before program design or planning. Requirements owns WHY, for whom, and within what authorized boundary. Specification owns WHAT must be observably true and traces its normative obligations to Requirements. Each newly authored or substantively revised substantial document receives its own meaningful visual treatment at the correct altitude. A changed screen is shown grounded in the current app. `shared-references/diagram-rendering-and-fallbacks.md` chooses every medium; a design document is always its HTML page. Normative meaning remains in prose and tables, in sections and record bodies. For substantial file-backed work, the skill reuses or creates a separately identifiable Requirements page, with the capability list and one need record per `U`, and creates a different Specification page, with one record per `R` naming its needs; it never substitutes one combined `Requirements/spec` artifact. It keeps unresolved owner meaning visible and leaves internal component structure downstream.
-
-Use `program-design` to define structural How against the settled specification: current-system constraints, alternatives and crux, component trees, singular ownership, interfaces, state, source-anchored call paths and flows, failure/recovery, concurrency/consistency, trust boundaries, compatibility/cutover, and proof seams. A generated explanatory overview may aid the reader only after Lead-authored semantic composition and inspection; exact structural views and prose remain authoritative. It builds the current-system model with `practices-how`, turns it into implementable entrypoint-to-effect views and produces an executable mental model, not a task list.
-
-Use `verification-design` after Program Design to plan how each requirement will be proven. The Lead writes one row per requirement, linked to its Specification obligations. Each row names its reference, its target and `verify-<app>` journey (or the journey still needed), a passing condition a wrong build fails, any real-path test it reuses, and what stays unverified. It plans proof and observes nothing; the Verifier challenges the rows before the build and observes them at delivery. A seam that can't decide a requirement goes back to `program-design`.
-
-Use `spec-program-review` to classify and independently review a Specification, Program Design, or the four-document design set (Requirements, Specification, Program Design, Verification Design). A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole artifact set, reconstructs the smallest model satisfying the confirmed goal, and walks mode-complete, sequential seam passes when large, proof-challenge for executable claims, dispel, and focused checks for named residual risks. Prescribed proof commands go to a 🔧 Operator under an exact grant. The Reviewer Sidekick returns a coverage-bound verdict without editing or accepting the design; semantically unaffected corrections may retain verified coverage. Why/What findings route to `spec-design`; structural How findings route to `program-design`; proof-strategy findings route to `verification-design`.
-
-The old `orchestrator-goal`, `plan-creation-swarm`, `plan-review-swarm`, `implementation-execute-plan`, and `implementation-review-swarm` source trees are preserved under [`retired-skills/`](retired-skills/) for provenance and are not runtime entrypoints. The active `orchestrator-implementation-goal`, `plan-implementation`, `implement-plan`, and `implementation-review` are new minimal implementations, not aliases or revivals of those retired trees; they do not restore swarms, controller briefs, worker protocols, transition ledgers, or a separate plan-review layer.
-
-Use `spec-handoff` to package spec/design context for a future session. It preserves decisions, non-goals, contracts, tradeoffs, evidence, security context, open questions, current artifact paths, the current four-document design review result (mode, covered targets, result, and coverage statement) or a pointer to it, and semantic review freshness without creating an implementation plan. It routes missing How to `program-design`, a missing or stale proof strategy to `verification-design`, complete but unreviewed or semantically stale four-document designs to `spec-program-review`, and current ready four-document designs to `plan-implementation`.
-
-### Plan boundary
-
-Use `plan-implementation` when the Lead translates one semantically current ready four-document design into the first repo-grounded canonical plan: a page in the design set's `plans/` folder, scoped to one deliverable's needs when the delivery cut names deliverables. Each slice earns the Verification Design rows assigned to it; the plan schedules when and with which commands, and never re-chooses the proof. Helpers may gather bounded repository/proof evidence, but the Lead authors every slice, dependency, proof row, and PR boundary. One deliverable is one PR; a split is proposed to the owner at plan review, and a plan across repositories carries its orchestration section. It stops before tickets, implementation, review, Git, or PR work.
-
-Use `plan-update` when a ready plan's meaning must change during delivery: a design correction, a plan-defect finding, a slice that splits or merges, a changed dependency or proof target, or a PR that re-splits. The Lead lists what the change invalidates, sends affected Verification Design rows to `verification-design` first, stops with an owner brief when an adopted obligation would narrow or the PR shape would change, and writes a superseding plan beside the old one with what changed and what it invalidates. A choice inside one slice stays with `implement-plan`.
-
-Use `plan-improve-repo` to audit a repo for high-leverage improvements without editing source. Delegated audit work returns evidence and candidates; the Lead admits findings and authors any canonical plan. It retains direct authority over admitted repository-improvement findings, including source-proven implementation-mechanics-only work, without taking reviewed-design planning away from `plan-implementation`.
-
-Use `plan-handoff` to package an existing implementation plan for another agent, CLI, machine, or future session. It preserves the exact canonical plan record, governing planning basis, delivery context, and current Lead's authorship. Only a named successor-Lead recipient, transferred planning scope, and explicit user direction transfer plan authorship. If no plan exists yet, use `spec-handoff` for portability or `plan-implementation` to create one from current ready design; never present design context as an existing plan.
-
-### Implementation boundary
-
-Use `implement-plan` to validate and execute one immutable ready plan whose current delivery context authorizes implementation. Admission requires a current governing basis and the `pr-ready-unmerged` terminal. In an orchestrated workstream the assigned persistent Implementer Sidekick executes and proves the plan; direct phase work follows its resolved execution owner. It advances through proof-bearing slices, preserves proof gates, and routes a design break or plan defect to its owner. Storage the design doesn't name, and technology new to the repository, stop before any code. It stops before independent review and PR work.
-
-Use `implementation-review` for independent product implementation and proof review after execution. It admits exact governing authority, ready plan, source, diff, and proof identities. A 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the whole map and walks spec-compliance, sequential overlapping chunk passes, proof challenge, dispel, and predicate-selected focused checks. It verifies candidates against the rails and routes corrections by semantic cause without editing.
-
-When a diff touches questions a model answers for code, `implementation-review` also loads `decision-model-review` from the `skill-authoring` plugin and walks its checks; without that plugin it reports the gap.
-
-Use `implementation-pr-wrapup` to finish the GitHub PR lifecycle after implementation, typically after independent review on a delivery goal: push/open/update the PR, write a why-and-shape description, monitor checks and comments, process existing review threads, prove mergeability with current GitHub state, and merge only when user authorization exists. Fresh code-review discovery routes to `implementation-review`; PR wrap-up does not substitute for it. Independent-review coverage is not a wrap-up ready gate.
-
-Use `implementation-handoff` when real implementation state exists: branch, diff, changed files, commits, validation output, failed commands, blockers, or risk. It is for continuation, audit, or manual review of work already in motion.
-
-## Principles
-
-Each `principle-*` skill is one engineering judgment, written to teach: the idea behind it, how to think it through including the hard call, one anchor example, when it doesn't apply, and the signs you skipped it, with more scenarios in its `references/example_scenarios.md`. Call one by name on the work in front of you, for example `principle-design-for-failure` on a design with retries. The model never loads one on its own; a skill cites one with a relative link at the decision it informs, and each principle opens with its read rule. A principle names only sibling principles. The family map is [`docs/principles-index.md`](docs/principles-index.md).
-
-## Domain Skills
-
-Each `domain-*` skill holds one subject's knowledge. `domain-code-standards` decides whose coding standards a repository follows, from its AGENTS.md Standards line, and holds the owner's shared ones: test layout, naming, documentation and monorepo layout. Four hold the owner's standards for a language: `domain-typescript`, `domain-python`, `domain-rust` and `domain-swift`. Each loads `domain-code-standards` first and keeps only its language's forms. The standards for decision models, `domain-decision-models`, live in the `skill-authoring` plugin. Like a principle, a domain skill is hidden from model invocation and names only the principles it cites, at the decisions they inform. A caller loads one when its work touches that language: `program-design` and `spec-program-review` load one when the design targets one of those languages, the Implementer walks its changed files against it before handback, and `implementation-review` admits a rule from a loaded domain skill as an anchor for code findings. Which set governs, the owner's or the repository's own, is the repository's Standards line, as `domain-code-standards` teaches; under either set, the repository's own commands and tool configs are what runs. Call one by name on the work in front of you, for example `domain-rust` on a change to a Tokio service.
-
-## Supporting Skills
-
-- `debug-investigation`: diagnosis-first debugging before fixes. Use it for failing tests, flaky behavior, crashes, regressions, build failures, or unexpected behavior. For long-running infra or batch monitoring, it loads a background-monitoring reference for redacted JSONL/state watchers that are cheap, cancellable, and visible through the agent harness when available.
-- `docs-maintain`: durable documentation maintenance after source-of-truth drift is identified. It keeps README human-facing, `AGENTS.md` compact, and workflow history in changelog/runbook docs.
-- `audit-security-review`: routes explicit authorized security scans to the official Codex Security plugin workflows.
-- `ops-linear-tracking`: manages Linear projects, milestones, issues, and dependencies while keeping docs as the design source of truth.
-- `presentation-tui`: hybrid TUI + markdown presentation for monospace terminal/CLI surfaces: a box-drawing skeleton with markdown atoms (inline code, fences, GFM tables by default for comparisons). Shares markdown baseline, diagram semantics, and Mermaid judgment with `presentation-webui` via `shared-references/`.
-- `presentation-html`: standalone HTML engineering explainers using the public Demistify library, canonical component documentation and separate checker/browser proof; it composes a design set's pages from the released requirement and call-stack browsers (home, document, call-path, deliverable and plan pages), in the owner's-question order, with walkthroughs and the plan's delivery map and change view.
-- `presentation-webui`: markdown-first presentation for rendered proportional-font chat surfaces, with headings/lists/GFM tables as the skeleton, smallest-view media selection (pseudocode, call trees, file trees, diffs, Mermaid, fenced box layouts), and the same shared baseline and diagram judgment.
-
-## External Counsel
-
-Review workflows do not use broad multi-model counsel by default. The persistent 🔎 Reviewer Sidekick, its ordered checks, and its model, runtime, history isolation, and authority are resolved through `practices-manage-agents`.
-
-```text
-normal review path
-  spec-program-review
-      -> bounded independent specification/program review
-  implementation-review
-      -> one complete independent implementation/proof review
-  decision-model-review (skill-authoring plugin)
-      -> independent decision-model review, loaded by implementation-review for model-judged code
-```
-
-## How To Use
-
-Examples:
-
-```text
-Use discuss-clarify-mental-models to reconverge before writing a spec or plan.
-Use principle-design-for-failure on this design and name the decision it changed.
-Use discuss-pathfinding to grill me on tacit requirements or unmade decisions.
-Use spec-design to preserve separate Requirements and Specification identities: authorized Why and observable What.
-Use program-design to turn this specification into structural How.
-Use verification-design to plan how each requirement of this design will be proven.
-Use spec-program-review to independently review these Requirements, Specification, Program Design, and Verification Design documents.
-Use spec-handoff to package this design for another agent without creating a plan.
-Use orchestrator-implementation-goal to carry this goal through planning, implementation, proof, review, and PR readiness.
-Use plan-implementation to create one repo-grounded proof-bearing plan from this reviewed design set.
-Use implement-plan to execute this ready canonical plan at its immutable path, current meaning, and `pr-ready-unmerged` delivery context, then return fresh implementation proof without starting review or PR work.
-Use implementation-review to independently review this implementation and proof without editing or starting PR lifecycle work.
-Use practices-research to gather source-grounded evidence into a tmp ledger.
-Use plan-improve-repo to audit this repo and write immutable canonical plan-only improvement plans. When delivery is requested later, route the admitted finding through plan-implementation to establish current delivery intent instead of upgrading the prior plan.
-Use implementation-pr-wrapup to handle existing PR comments and prove merge readiness.
-Use implementation-handoff to package this branch for another agent to continue.
-Use docs-maintain to reconcile this README and AGENTS.md with current plugin state.
-```
-
-## Source And Maintainer Resources
-
-- Skill-system architecture: [`../../docs/architecture/README.md`](../../docs/architecture/README.md)
-- Skill source: [`skills/`](skills/)
-- Shared runtime references: [`shared-references/`](shared-references/)
-- Design-view vocabulary and ownership index: [`docs/diagram-vocabulary.md`](docs/diagram-vocabulary.md)
-- Phase composition map, generated from the skill files: [`docs/phase-composition.md`](docs/phase-composition.md), drawn on [`docs/phase-composition.html`](docs/phase-composition.html)
-- Source inspiration catalog: [`docs/source-inspiration-catalog.md`](docs/source-inspiration-catalog.md)
-- Release smoke and behavioral checks: [`../../docs/changelog/references/shravan-dev-workflow-smoke.md`](../../docs/changelog/references/shravan-dev-workflow-smoke.md)
-- Release notes: [`../../docs/changelog/`](../../docs/changelog/)
-- Maintainer guidance: [`../../AGENTS.md`](../../AGENTS.md)
-
-### Standalone HTML explainers
-
-Use `sunstack-dev:presentation-html` for an HTML artifact that loads the public Demistify library. [The skill](skills/presentation-html/SKILL.md) owns authoring and verification; its reference points to the version-matched component guide. `presentation-webui` remains the rendered-chat surface and `presentation-tui` the terminal surface.
+# Sunstack Engineering Base
+
+Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
+
+`sunstack-dev` 3.0.0 contains 42 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+
+## Boundary
+
+The base owns engineering practices, principles, language standards, discussion, presentation, debugging, documentation, audits and operations. It does not own the archived role or phase files. This is a packaging split, not a new topology.
+
+Some retained helper-delegation branches still call `sunstack-workflow-v1:practices-manage-agents`; those branches require the archive to be installed too. The retained design-documents and phase-return-tokens references preserve the owner-approved migration scope. Removing those dependencies is separate future work.
+
+## v1 compatibility anchor
+
+Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentation-html` skill and taking its plugin root. Keep that advertised entry and the `skills/<name>/` and `shared-references/` layouts available while v1 depends on them. Renaming or removing them is a v1 compatibility change requiring explicit owner direction. Hidden principles and domains are read beneath that root, without assuming they appear in the host catalog.
+
+## Namespace map
+
+- [`audit-security-review`](skills/audit-security-review/SKILL.md)
+- [`debug-investigation`](skills/debug-investigation/SKILL.md)
+- [`discuss-clarify-mental-models`](skills/discuss-clarify-mental-models/SKILL.md)
+- [`discuss-pathfinding`](skills/discuss-pathfinding/SKILL.md)
+- [`docs-maintain`](skills/docs-maintain/SKILL.md)
+- [`domain-code-standards`](skills/domain-code-standards/SKILL.md)
+- [`domain-python`](skills/domain-python/SKILL.md)
+- [`domain-rust`](skills/domain-rust/SKILL.md)
+- [`domain-swift`](skills/domain-swift/SKILL.md)
+- [`domain-typescript`](skills/domain-typescript/SKILL.md)
+- [`ops-linear-tracking`](skills/ops-linear-tracking/SKILL.md)
+- [`ops-observability-stack`](skills/ops-observability-stack/SKILL.md)
+- [`practices-cleanup`](skills/practices-cleanup/SKILL.md)
+- [`practices-collaboration`](skills/practices-collaboration/SKILL.md)
+- [`practices-how`](skills/practices-how/SKILL.md)
+- [`practices-preflight`](skills/practices-preflight/SKILL.md)
+- [`practices-research`](skills/practices-research/SKILL.md)
+- [`practices-retrospective`](skills/practices-retrospective/SKILL.md)
+- [`practices-show-me-your-work`](skills/practices-show-me-your-work/SKILL.md)
+- [`practices-verification`](skills/practices-verification/SKILL.md)
+- [`practices-verification-maintenance`](skills/practices-verification-maintenance/SKILL.md)
+- [`practices-why`](skills/practices-why/SKILL.md)
+- [`presentation-html`](skills/presentation-html/SKILL.md)
+- [`presentation-tui`](skills/presentation-tui/SKILL.md)
+- [`presentation-webui`](skills/presentation-webui/SKILL.md)
+- [`principle-build-the-shared-model-first`](skills/principle-build-the-shared-model-first/SKILL.md)
+- [`principle-define-the-domain-first`](skills/principle-define-the-domain-first/SKILL.md)
+- [`principle-design-for-concurrency`](skills/principle-design-for-concurrency/SKILL.md)
+- [`principle-design-for-failure`](skills/principle-design-for-failure/SKILL.md)
+- [`principle-experiment-before-proposing`](skills/principle-experiment-before-proposing/SKILL.md)
+- [`principle-hold-the-scope`](skills/principle-hold-the-scope/SKILL.md)
+- [`principle-justify-the-complexity`](skills/principle-justify-the-complexity/SKILL.md)
+- [`principle-name-the-tradeoffs`](skills/principle-name-the-tradeoffs/SKILL.md)
+- [`principle-one-owner-per-truth`](skills/principle-one-owner-per-truth/SKILL.md)
+- [`principle-prove-it-works`](skills/principle-prove-it-works/SKILL.md)
+- [`principle-read-ground-truth-first`](skills/principle-read-ground-truth-first/SKILL.md)
+- [`principle-refine-mental-models`](skills/principle-refine-mental-models/SKILL.md)
+- [`principle-separate-the-concerns`](skills/principle-separate-the-concerns/SKILL.md)
+- [`principle-types-are-communication`](skills/principle-types-are-communication/SKILL.md)
+- [`principle-verify-before-accepting`](skills/principle-verify-before-accepting/SKILL.md)
+- [`principle-write-for-the-reader`](skills/principle-write-for-the-reader/SKILL.md)
+- [`principle-write-tests-that-can-fail`](skills/principle-write-tests-that-can-fail/SKILL.md)
+
+## Shared references
+
+Four presentation references belong only to base. Six references remain here and have frozen v1 copies: diagram-rendering-and-fallbacks, humanizer, owner-decision-brief, design-documents, canonical-implementation-plan and phase-return-tokens. Editing a base original does not synchronize the archive.
+
+The [combined phase composition map](docs/phase-composition.md) is a maintained source view of both packages, not a runtime instruction.
