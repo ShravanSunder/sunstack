@@ -24,7 +24,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
-| docs-maintain | 119 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
+| docs-maintain | 121 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
 | implement-plan | 44 | `canonical-implementation-plan`, `execution-and-proof`, `practices-preflight`, `practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `practices-cleanup` | none | none |
 | implementation-handoff | 94 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
 | implementation-pr-wrapup | 112 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
@@ -200,7 +200,7 @@ flowchart LR
 
 ### docs-maintain
 
-- Lines: 119
+- Lines: 121
 - Always loads:
   - own reference: `references/doc-roles.md`, `references/staleness-and-purge.md`
 - Loads when a condition holds:
