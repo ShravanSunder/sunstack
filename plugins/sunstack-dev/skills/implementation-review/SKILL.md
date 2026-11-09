@@ -36,7 +36,7 @@ Run `spec-compliance` first. If it finds a misread requirement or scope underdel
 
 Spec-compliance, chunk passes, and dispel always run. Record a reason for each optional check, including why it was not selected. Small changes use one pass spanning the whole diff.
 
-IF the diff adds or edits questions a model answers for code, the state built for them, or their policy, also load `decision-model-review`, walk its checks on that decision model yourself as the Reviewer it names, and return its check statuses and findings; reduce those findings on the rails with the rest.
+IF the diff adds or edits questions a model answers for code, the state built for them, or their policy, also load `decision-model-review` (from the `skill-authoring` plugin), walk its checks on that decision model yourself as its reviewer, and return its check statuses and findings; reduce those findings on the rails with the rest. When it isn't installed, return `skill unavailable: decision-model-review` as a coverage gap; the decision-model part never passes silently.
 
 Completion: each pass lists its complete file set and seams, and every optional check has a selection decision.
 

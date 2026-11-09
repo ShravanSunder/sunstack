@@ -8,11 +8,15 @@ Skills for authoring skills in any repository: design and write them, turn their
 | `skill-design` | design one skill change and write its design set before its files change |
 | `skill-creation` | write one skill's files from its accepted design, or make a mechanical edit |
 | `domain-skill-crafting` | hidden; holds every standard a skill's text must meet; loaded by the other skills |
-| `skill-rules` | decide which skill standards become checked rules, design their evidence, questions and policy, write their markers and entries, and prove them with config checks and labelled cases |
+| `skill-rules-authoring` | decide which skill standards become checked rules; design each rule or filter's chunk, questions, examples and cases; desk-check the owner's rulings before any run; prove it and decide on or held |
+| `skill-rules-review` | review one skill rule or filter independently, on the owner's rulings as the model receives them, before its development run or switch-on |
+| `skill-rules-config` | the shipped `sunstack lint` manual: markers, entries, filters, evidence kinds, config pairs, running lint and reading its reports and case runs |
+| `domain-decision-models` | hidden; the standards for any decision model: questions, state, statistics, policy and proof |
+| `decision-model-review` | review any decision model independently: a rule's graph, or questions a model answers for code |
 | `skill-review` | review a skill change's design set or skill files with several independent reviewer agents |
 | `skill-audit` | decide from evidence which skills to create, update, merge, or skip |
 
-The plugin stands alone, with one named dependency. `skill-rules`' rule design and proof use `sunstack-dev`'s `domain-decision-models`, and `skill-review`'s decision-model routing uses `sunstack-dev`'s `decision-model-review`. Without `sunstack-dev` installed, those steps report `skill unavailable` instead of going on. Nothing else names a skill from another plugin; install it beside any other plugin and invoke both when you want them together.
+The plugin stands alone: no skill in it loads or names a skill from another plugin. Its checked rules run through the `sunstack` engine, a separate command-line tool. Install it beside any other plugin and invoke both when you want them together; another plugin's code review may load `decision-model-review` from here.
 
 ## Proof
 

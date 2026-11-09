@@ -1,6 +1,6 @@
 ---
 name: ops-observability-stack
-description: Use when starting, checking, using, debugging, or verifying the shared local OpenTelemetry and Victoria stack for AgentStudio, Agent VM, OpenClaw, beta apps, debug apps, or any repo that emits OTLP locally.
+description: Use when starting, checking, using, debugging, or verifying the shared local OpenTelemetry and Victoria stack, or proving that a local debug or beta app emits OTLP to it.
 ---
 
 # Ops Observability Stack
@@ -14,7 +14,7 @@ Choose the smallest loop first:
 - IF the work is stack lifecycle only, load `~/dev/ai-tools/observability/README.md`, follow its lifecycle commands, and return the result each command reported, or the gap that stopped it.
 - IF the work touches producer requirements, load `references/producer-contract.md` and return the requirements that apply.
 - IF the work touches resource labels, marker/state-file keys, or service names, load `references/resource-naming.md` and return the names and keys that apply.
-- IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop.
+- IF the work launches one app's own debug or beta build, use that app repository's launcher and instructions (its AGENTS.md and task runner), and return the fresh marker and state file it wrote for the query loop below.
 - IF the work is Agent VM, OpenClaw, or `shravan-claw-beta`, load `references/resource-naming.md` and return the names and keys that apply, then load `references/agent-vm-loop.md` and follow the loop for its ownership mode.
 - IF the work needs Victoria proof or debugging queries, load `references/victoria-queries.md` and return the queries for the fresh marker.
 

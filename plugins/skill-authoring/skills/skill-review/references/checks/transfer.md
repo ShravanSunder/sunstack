@@ -27,7 +27,7 @@ recorded:    the author's cases for this rule, or none; agree | differ
 
 Where your verdict and a recorded one differ, the finding names the case that separates them.
 
-Worked case, #187: a nudge on `sunstack-dev`'s `ops-observability-stack/SKILL.md:17` said the call didn't say what to bring back, and the change added the return. The review ran transfer on the added words, found they agreed with their sources, and marked it complete. Run on the line itself, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop", the test fails case one: in any repository that isn't AgentStudio, a generic skill sends the agent into one product's own loop, which `agentstudio-loop.md` shows it is. The smallest fix routes the loop to AgentStudio's repository; rewording the return fixes nothing.
+Worked case, #187: a nudge on `sunstack-dev`'s `ops-observability-stack/SKILL.md:17` (at `89dc638e`, before its fix) said the call didn't say what to bring back, and the change added the return. The review ran transfer on the added words, found they agreed with their sources, and marked it complete. Run on the line itself, "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop", the test fails case one: in any repository that isn't AgentStudio, a generic skill sends the agent into one product's own loop, which `agentstudio-loop.md` shows it is. The smallest fix routes the loop to AgentStudio's repository; rewording the return fixes nothing.
 
 Good signals:
 - every returned standard is kept for each rule in scope, with the line that shows it;

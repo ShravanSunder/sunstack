@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skills: Rules review"
+  short_description: "Independent review of a skill rule or filter"
+  default_prompt: "Use $skill-rules-review on this rule or filter and return each check's status, its findings and what the verdict means at this stage."

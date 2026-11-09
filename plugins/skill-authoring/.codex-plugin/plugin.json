@@ -1,6 +1,6 @@
 {
   "name": "skill-authoring",
-  "version": "0.11.0",
+  "version": "0.12.1",
   "description": "Skill authoring for any repository: design skill changes, write their files, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.",
   "author": {
     "name": "Shravan Sunder"
@@ -12,7 +12,11 @@
     "skill-design",
     "skill-creation",
     "domain-skill-crafting",
-    "skill-rules",
+    "skill-rules-authoring",
+    "skill-rules-review",
+    "skill-rules-config",
+    "domain-decision-models",
+    "decision-model-review",
     "skill-review",
     "skill-audit",
     "codex",
@@ -33,7 +37,7 @@
       "Use skill-orchestrator to carry this skill change from design to release.",
       "Use skill-design to design one skill change before its files change.",
       "Use skill-creation to write one skill's files from its accepted design.",
-      "Use skill-rules to turn this skill's standards into checked rules.",
+      "Use skill-rules-authoring to turn this skill's standards into checked rules.",
       "Use skill-review to independently review this skill.",
       "Use skill-audit to audit these skills against session evidence."
     ]

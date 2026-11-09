@@ -103,7 +103,7 @@ The description decides when a skill loads, so a generic skill whose description
 - **Nudges:** a description that mixes a generic condition with one application's branch ("Use when releasing a package, or when cutting an AgentStudio beta"). The generic half doesn't excuse the branch.
 - **Doesn't nudge:** a platform used through its supported interface ("Use when validating a Claude plugin before release"), the subject's own vocabulary, a product named only as a labelled example, and this toolkit's own shared infrastructure.
 - **Doesn't nudge:** a product named only in a "Not for…" boundary. A boundary is not a loading condition.
-- **Adjudication:** `sunstack-dev`'s `ops-observability-stack` loads for the shared local stack "for AgentStudio, Agent VM, OpenClaw, beta apps, debug apps, or any repo that emits OTLP locally". The stack is this toolkit's own infrastructure; whether the named products are examples of its producers or their own workflows is for the reader to decide.
+- **Nudges, by the owner's ruling:** `sunstack-dev`'s `ops-observability-stack` loaded (at `89dc638e`, before its fix) for the shared local stack "for AgentStudio, Agent VM, OpenClaw, beta apps, debug apps, or any repo that emits OTLP locally". The stack is this toolkit's own infrastructure, but the owner ruled the product names a nudge: "move product names out if its a generic skill". Its description now loads for the stack and for a local debug or beta app's emission, naming no product.
 
 A skill that lives in a product's own repository is outside this standard: it is meant for that repository.
 

@@ -105,8 +105,8 @@ Read each step, branch and load with these questions, in order:
 
 Only a yes to the first, with no yes after it, breaks the standard.
 
-- **Breaks:** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17`, in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
-- **Breaks:** `sunstack-dev`'s `practices-cleanup/SKILL.md:40`, a row of its allow list that runs `mise -C "$agentstudio_worktree" run clean-artifacts`, AgentStudio's own clean task. No load is involved: the command itself is the product's workflow.
+- **Breaks:** `sunstack-dev`'s `ops-observability-stack/SKILL.md:17` (at `89dc638e`, before its fix), in the skill's introduction: "IF the work is AgentStudio debug or beta, load `references/agentstudio-loop.md` and follow that loop." The loaded file is AgentStudio's own debug and beta loop.
+- **Breaks:** `sunstack-dev`'s `practices-cleanup/SKILL.md:40` (at `89dc638e`, before its fix), a row of its allow list that runs `mise -C "$agentstudio_worktree" run clean-artifacts`, AgentStudio's own clean task. No load is involved: the command itself is the product's workflow.
 - **Keeps:** `ops-observability-stack`'s `references/victoria-queries.md`, which queries this toolkit's own Victoria stack through its HTTP API.
 - **Keeps:** `domain-skill-crafting`'s `references/platform.md`, whose plugin checks run each client's documented CLI.
 
@@ -116,7 +116,7 @@ The transfer test, both ways:
 - **Case one, where it should hold:** a generic debugging skill in a toolkit for Python data pipelines, with a branch that loads one company's own Airflow runbook. The standard says that runbook belongs in the company's repository, and the branch names the company only as an example. It holds.
 - **Case two, a bad choice it never names:** a generic release skill whose step reads one machine's `~/Library/Application Support/<product>/state.json` before tagging. The standard names no release tooling and no state file of that product, and it still rejects the step, as a product's state file and machine path. It holds. Its countercase, a release step that runs `gh release create` through GitHub's own CLI, is kept under the tool clause.
 
-A rule that checks this standard can show the route into a product's workflow, but not where that workflow should live, so its finding is a nudge to read the loaded file and decide. Its judge sees the standard's one sentence; the exemptions above sit on the rule's questions, each on the question that owns it. `skill-rules` designs it.
+A rule that checks this standard can show the route into a product's workflow, but not where that workflow should live, so its finding is a nudge to read the loaded file and decide. Its judge sees the standard's one sentence; the exemptions above sit on the rule's questions, each on the question that owns it. `skill-rules-authoring` designs it.
 
 ## Call forms
 
