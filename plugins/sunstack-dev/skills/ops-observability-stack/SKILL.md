@@ -15,7 +15,7 @@ Choose the smallest loop first:
 - IF the work touches producer requirements, load `references/producer-contract.md` and return the requirements that apply.
 - IF the work touches resource labels, marker/state-file keys, or service names, load `references/resource-naming.md` and return the names and keys that apply.
 - IF the work launches one app's own debug or beta build, use that app repository's launcher and instructions (its AGENTS.md and task runner), and return the fresh marker and state file it wrote for the query loop below.
-- IF the work is Agent VM, OpenClaw, or `shravan-claw-beta`, load `references/resource-naming.md` and return the names and keys that apply, then load `references/agent-vm-loop.md` and follow the loop for its ownership mode.
+- IF the work is Agent VM, OpenClaw, or `shravan-claw-beta`, load `references/resource-naming.md` and return the names and keys that apply, then load `references/agent-vm-loop.md`, follow the loop for its ownership mode, and return the observed result of that loop or the exact gap that stopped it.
 - IF the work needs Victoria proof or debugging queries, load `references/victoria-queries.md` and return the queries for the fresh marker.
 
 When expected telemetry is missing or a stack check fails, before restarting the stack or editing a producer, find the first point on the path you observed failing (reachability from this shell, collector health, the endpoint and resource attributes the running process read, the state-file marker), each labeled seen or inferred ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
