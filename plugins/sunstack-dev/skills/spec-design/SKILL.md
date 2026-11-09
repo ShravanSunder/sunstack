@@ -318,7 +318,7 @@ Do not return `locally-ready` while any of these hold:
 - a returned gap omits an authorized observable outcome, or `decision-needed` is based only on whether implementation or incident mechanisms should be retained or made normative;
 - a material non-goal is omitted, or an applicable cross-cutting quality lacks an observable obligation or constraint or a reasoned not-applicable result;
 - internal architecture or implementation tasks are presented as requirements without an externally authoritative constraint;
-- an applicable Required Why/What View lacks the required cardinality, semantic fields, passed rendering result, or separate normative home;
+- an applicable Required Why/What View lacks the required cardinality, semantic fields, passed rendering result, or separate normative home, other than the Specification's whole-set capability map carrying its named composition gap, as `references/artifact-and-self-review.md` allows;
 - an accepted requirement changes a UI surface and Requirements has neither a passed UI view of that moment grounded in the current app nor an explicit `no current UI` gap, without an explicit owner-authorized deferral;
 - a material obligation's proof obligation lacks its reference without an exact gap, or names an evidence class, journey, or command;
 - delegated evidence was copied as governing prose or a helper originated, organized, rewrote, or chose the expression of Requirements, Specification, a settled section, or a required view;

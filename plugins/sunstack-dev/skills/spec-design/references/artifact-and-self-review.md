@@ -70,7 +70,7 @@ Diagrams may explain relationships but may not be the only home of normative mea
 
 Consume each selected view's reader question plus the predicates, cardinality, and must-expose fields from the `SKILL.md` Required Why/What Views table without restating them. Before returning, compare the actual shown view with that selected table row: verify the required number of views and every must-expose field in the displayed result itself. Preserve separate class journeys; when the source establishes no pain or evidence, show that exact gap rather than inventing one, and when current behavior already supplies the desired outcome, show that preservation explicitly. A coverage view exposes missing U/E/P/O/R/C/V links as gaps instead of dropping those fields.
 
-Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
+Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks, except the Specification's whole-set capability-map gap the capability-map bullet below names. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
 
 - Capability maps let the owner confirm the parts at a glance, before any row. The Requirements page's capability list section is the one home of each capability's key, name and purpose, and the requirement browser narrows the needs to each capability. An obligation reaches its capabilities through the needs it names, so one that serves two capabilities is read under both and written once, as in this reading of the Specification:
 
@@ -80,7 +80,7 @@ Consume the shared rendering result for the actual shown view and reject any mis
   payout    R7 R8
   ```
 
-  The browser shows this reading need by need. No released view shows it for the whole set at once, and writing it out on a page would be a second copy of derived links, so return that exact composition gap, as `presentation-html`'s `views.md` names it, instead of hand-writing the map.
+  The browser shows this reading need by need. No released view shows it for the whole set at once, and writing it out on a page would be a second copy of derived links, so return that exact composition gap, as `presentation-html`'s `views.md` names it, instead of hand-writing the map. This one gap doesn't block: until a released view shows the whole-set map, name it in the phase's return in the rendering reference's exact-gap form, put no note of it on the page, and keep going. Every other shared-renderer gap, the Requirements map's included, still blocks.
 
   An entry named `ingest service`, or arrows between capabilities as if they called each other, has crossed into structure and routes to `program-design`.
 - Journey maps cite the stable U rows they re-render; the source record remains normative. Good steps express the user's job and source-established observable pain, or mark that pain and its evidence unknown. A screen tour, component name, or cross-class chain is not a journey.
@@ -89,7 +89,7 @@ Consume the shared rendering result for the actual shown view and reject any mis
 - Requirement coverage tables expose missing U/E/P/O/R/C/V links rather than filling gaps with guessed meaning. When the table is grouped by capability, also read each group whole: a capability whose needs no `R` names, and an `R` that names no need, are gaps here. A capability whose needs are all unauthorized reaches no `R` by rule; record that authority gap rather than inventing an obligation.
 - Coverage stops at `V`. Do not open Program Design or Verification Design documents to extend it. In a fresh set they do not exist yet, and their absence is the next phases' work, not a gap. Walking each capability through trace rows and Verification Design rows is four-document review's job.
 
-Prune a view that adds no decision clarity. View application is complete when every fired predicate has the required number of passed views, each required semantic field is visible, and adding another view would only duplicate an existing relationship.
+Prune a view that adds no decision clarity. View application is complete when every fired predicate has the required number of passed views (the Specification's capability map may carry its named gap instead, as its bullet above says), each required semantic field is visible, and adding another view would only duplicate an existing relationship.
 
 ## Human Deletion Test
 
