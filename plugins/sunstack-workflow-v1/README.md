@@ -6,7 +6,7 @@ Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v1@sun
 
 **Frozen: agents must not routinely edit this plugin.** Read [AGENTS.md](AGENTS.md) before any change. Improvements belong in maintained base or a separately commissioned future workflow. Archive maintenance needs explicit owner instruction.
 
-The restored design is authoritative Markdown, with an optional HTML human view through the maintained renderer's v1 legacy-source route. Role and agent-management behavior is unchanged. This is a narrow archive exception; the plugin remains frozen.
+The restored design is authoritative Markdown, with an HTML human view when the rendering policy requires it, through the maintained renderer's v1 legacy-source route. Role and agent-management behavior is unchanged. This is a narrow archive exception; the plugin remains frozen.
 
 ## Dependency and reference lookup
 

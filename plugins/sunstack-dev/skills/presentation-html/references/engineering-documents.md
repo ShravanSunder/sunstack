@@ -2,6 +2,8 @@
 
 Use this recipe to write a page of an engineering design set: a document page, its home page, a deliverable page or a plan page. The page is the design: each fact's text lives once, in a section or a record body on its document's page, and the released browsers show it by need. This recipe decides what each page holds and how it reads.
 
+IF the caller is presenting a `sunstack-workflow-v1` Markdown-source design, including a newly authored v1 set, load `../SKILL.md` and return its legacy-source route's authoritative Markdown identities, HTML reading view and delivery/check result. Stop this recipe there: the remaining HTML-source record/browser composition rules do not apply. This also handles direct calls from the archived rendering reference; source mode does not depend on when the documents were written.
+
 MUST load `../../../shared-references/design-documents.md` and return the four document questions and their owners, the page path of each document in the set's folder, and the records and sections this page's document owns, with what each record names. Keep each document's distinct meaning and current state. Do not combine Requirements with Specification, and do not present a planned Verification Design as an observed result.
 
 IF the page holds a record block, a marked part or a browser, load the guide's prepared-browsers reference at the page's binding (`references/design-documents.md` beside the guide, the row step 3's guide routes a prepared browser to) and return the owner pages, the record-to-body and part mapping, the public reader markup, and the preparation and check commands it documents. That reference owns every record's fields, the per-kind parts table and the reader markup; write them as it shows and never restate them in the design.
@@ -60,7 +62,7 @@ Before you add a Walkthrough, name the question it answers and check that the an
 
 - **A document not yet written.** Leave its page out, with no link to it; the browser shows it as not yet written, and no record or page is invented to fill it.
 - **Extra documents** beyond the four, such as an alternatives study. Give each its own sibling page with no record block, linked from the home page, and do not fold it into one of the four.
-- **A design set written before pages.** It stays readable where it is, in Markdown; this recipe does not migrate it. A page over it is an ordinary page that includes its files, under the rendering reference's external-include branch.
+- **A legacy Markdown-source design set.** It stays readable where it is, in Markdown; v1 uses the legacy-source route above even for newly authored sets. A page over it is an ordinary page that includes its files, under the rendering reference's external-include branch.
 
 Load the matching component references through `demistify.md`. The public guide owns all markup and visual tokens.
 

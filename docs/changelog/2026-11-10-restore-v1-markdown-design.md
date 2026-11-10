@@ -4,7 +4,7 @@
 - Restores the corresponding Markdown design/rendering/plan references and necessary design-orchestrator/planner artifact expectations.
 - Unselected archived role, management and execution source is unchanged; the archive remains frozen under its explicit-owner boundary.
 - `sunstack-dev` **3.0.1** lets `presentation-html` render newly authored v1 Markdown-source designs without imposing the newer document-viewer contract.
-- Ordinary HTML-source design behavior is unchanged; v2 composition work is separate.
+- The selected source mode also reaches view/pattern/direct-recipe calls; ordinary HTML-source behavior is unchanged and v2 is separate.
 - Updates affected plugin manifests, marketplace versions and the archive README.
 - Validation: 180 unit tests, TypeScript, marketplace validation and generated-map HTML check pass; 55 restored files match the historical source after calibrated path repairs.
 - A fresh Luna run produced four Markdown sources and an exact embedded HTML reader; behavior is characterized for that example only.
