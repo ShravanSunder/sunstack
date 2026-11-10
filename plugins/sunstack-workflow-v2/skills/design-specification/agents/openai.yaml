@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design: Specification"
+  short_description: "Define Requirements and observable Specification"
+  default_prompt: "Use $design-specification to define or revise durable Requirements—authorized Why, for whom, and boundaries—or a separate Specification's observable What, without inventing Program Design's internal How."

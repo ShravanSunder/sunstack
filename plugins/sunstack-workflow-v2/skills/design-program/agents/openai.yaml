@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design: Program"
+  short_description: "Design structural How"
+  default_prompt: "Use $design-program to turn settled observable obligations into structural How: components, ownership, interfaces, state, call and data flows, recovery, concurrency, trust boundaries, proof seams, and required structural views."
