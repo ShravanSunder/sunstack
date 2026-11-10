@@ -10,7 +10,7 @@ The restored design is authoritative Markdown, with an HTML human view when the 
 
 ## Dependency and reference lookup
 
-Install `sunstack-dev` 3.0.1 or newer alongside this plugin; upgrade both together so the renderer honors v1 Markdown-source designs. Locate its advertised `sunstack-dev:presentation-html` skill using the path the host reports. From that skill directory go up `../..` to the base plugin root, then read `skills/<name>/SKILL.md`, a skill's `references/<file>`, or `shared-references/<file>.md` beneath it. This includes hidden principles and domains. Never assume independently versioned plugin caches are adjacent.
+Install `sunstack-dev` 3.1.1 or newer alongside this plugin; upgrade both together so the renderer honors v1 Markdown-source designs. Locate its advertised `sunstack-dev:presentation-html` skill using the path the host reports. From that skill directory go up `../..` to the base plugin root, then read `skills/<name>/SKILL.md`, a skill's `references/<file>`, or `shared-references/<file>.md` beneath it. This includes hidden principles and domains. Never assume independently versioned plugin caches are adjacent.
 
 Calls within v1 keep local paths. Calls into base use qualified skill names or explicit base-root reference paths. The six copied shared references are frozen snapshots; changes to base originals do not update them.
 
