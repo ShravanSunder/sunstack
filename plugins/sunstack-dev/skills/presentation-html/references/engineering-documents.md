@@ -2,7 +2,7 @@
 
 An engineering page explains its subject in ordinary document flow. Requirements, Specification, Program Design and Verification Design retain their separate meanings; each owns its complete text and views. HTML is the source for new free-form design sets. The author chooses the order that makes the design understandable, using the documented Demistify components where a view helps.
 
-IF the caller is presenting a `sunstack-workflow-v1` Markdown-source design, including a newly authored v1 set, load `../SKILL.md` and return its legacy-source route's authoritative Markdown identities, HTML reading view and delivery/check result. Stop this recipe there; the remaining new HTML-source composition contract does not change v1's source authority.
+IF the caller is presenting a `sunstack-workflow-v1` Markdown-source design, including a newly authored v1 set, load `../SKILL.md` and return its legacy-source route's authoritative Markdown identities, HTML reading view and delivery/check result. Stop this recipe there: the remaining HTML-source record/browser composition rules do not apply. This also handles direct calls from the archived rendering reference; source mode does not depend on when the documents were written.
 
 MUST load `../../../shared-references/design-documents.md` and return the four document identities, the semantic owner of this page's facts, and its actual reading and trace links. A v1 Markdown-source human view takes the legacy route in the main skill instead; it does not become a new HTML-source design.
 

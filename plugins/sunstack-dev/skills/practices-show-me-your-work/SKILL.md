@@ -1,17 +1,17 @@
 ---
 name: practices-show-me-your-work
-description: "Use when a design, plan or implementation starts, runs or stops: recording what happened, a decision, assumption, design change or proof, or asked to show your work. Not for routine small edits."
+description: "Use when tracking work in logs or handling a request to show a work log, including decisions, assumptions, checks, owner asks and checkpoints. Not for routine small edits."
 ---
 
 # Practices: Show Me Your Work
 
-Show me your work keeps the owner's picture of a running piece of work current. Every agent logs its own work in the log its packet names, at the moment it happens: what it decided, assumed, cut short and checked. The log is the work's Router work trail, its single source of truth. The Lead turns that log into one page the owner reads, and the owner answers each choice on that page, under For you to decide.
+Show me your work keeps the owner's picture of a running piece of work current. Every agent logs its own work in the log its packet names, at the moment it happens: what it decided, assumed, cut short and checked. The log is the work's Router work trail, its single source of truth. This skill records and reads work; it never creates or refreshes HTML. Ordinary logging does not create or refresh Story summaries. An existing page, a checkpoint or a stop does not authorize rendering.
 
 A task qualifies when it spans sessions, commissions another agent, crosses components, or makes a decision someone will later inspect, or when the owner asks for a trail; the log works the same way during design from start to ready, during planning and during implementation. A routine small edit gets no log; if it changes the state of a work thread already in context, post the outcome there. The log never lives in a product repository. Thread posts carry conversation and checkpoint notices that point at the log; the log holds the substance.
 
 ## 1. Open or resume
 
-At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference and Router project, or `no-home: <gap>`. The work's log is that project's work trail, filtered by the work's tag; a helper's packet names it in `workLog`. Read it forward from the start with `agent-collaboration work-trail show --project-id <id> --tag <work tag> --after '{"epoch":1,"position":0}' --limit 100 --json`, then repeat with the page's `coveredThrough` as `--after` until `coveredThrough` equals `highWater`. When the log is new, its first row is an action carrying the goal, scope, orchestrator, repository and worktree, and listing each workstream with the part of the design or plan it carries out. Whenever another part of the design or plan begins, a new action row names it with its workstream.
+At the start of a qualifying task, before other work, MUST load `practices-collaboration` and return the exact work thread reference and Router project, or `no-home: <gap>`. The work's log is that project's work trail, filtered by the work's tag; a helper's packet names it in `workLog`. Read it forward from the start with `agent-collaboration work-trail show --project-id <id> --tag <work tag> --after '{"epoch":1,"position":0}' --limit 100 --json`, then repeat with the response's `coveredThrough` as `--after` until `coveredThrough` equals `highWater`. When the log is new, its first row is an action carrying the goal, scope, orchestrator, repository and worktree, and listing each workstream with the part of the design or plan it carries out. Whenever another part of the design or plan begins, a new action row names it with its workstream.
 
 IF that load returns `no-home`, or the work has no Router project, load `references/no-board-trace.md` and return the file you write entries to, or the exact gap.
 
@@ -64,7 +64,7 @@ Completion: each open owner ask is named by id with its state, beside what the c
 
 ## 5. Audit your stretch
 
-Before you hand work back, and at each checkpoint, audit your own stretch: from your last Audit (or your commission, or step 1's position) to now. Compare what your own session history shows you did with what you logged, and check the packet's or plan's required checks against your proof rows. For each thing you find unlogged (a decision, an assumption, a shortcut, a check, a required check that never ran), write a missed row. Then write one audit row naming the stretch, what you compared against, what you couldn't see, and how many you found with each missed row's id. When you can't read your history, say so in `Couldn't see:`; the owner's page then shows that stretch "not audited", never "nothing missed". The independent reviews the work already runs are the second reader: a finding of theirs the log missed becomes a missed row.
+Before you hand work back, and at each checkpoint, audit your own stretch: from your last Audit (or your commission, or step 1's position) to now. Compare what your own session history shows you did with what you logged, and check the packet's or plan's required checks against your proof rows. For each thing you find unlogged (a decision, an assumption, a shortcut, a check, a required check that never ran), write a missed row. Then write one audit row naming the stretch, what you compared against, what you couldn't see, and how many you found with each missed row's id. When you can't read your history, say so in `Couldn't see:`; keep that visibility gap explicit rather than claiming "nothing missed". The independent reviews the work already runs are the second reader: a finding of theirs the log missed becomes a missed row.
 
 Completion: the audit row's id and each missed row's id, for this stretch.
 
@@ -74,20 +74,16 @@ The 🦁 Lead accepts finished work with a Lead acceptance row that names the co
 
 Completion: the acceptance row's id, and in its text the commit, each check you read with its result, and what stays unverified.
 
-## 7. Show the owner (the Lead)
+## 7. Checkpoint at every stop
 
-IF you are the Lead, at every checkpoint, load `references/show-me.md` and return the page path, the log position it shows, and the checker result. You build the page yourself with Demistify through `presentation-html` and check it with Demistify's checker; no script builds it.
+Before a terminal response, log the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action; run step 5's audit; and put the log reference in the handoff. If nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a checked command or path, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). When a work thread is reachable, post a checkpoint notice linking the log. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
 
-The page shows only what the log holds. IF a row waits for the owner's choice (`next:owner`), load `../../shared-references/owner-decision-brief.md` and return the brief and its recipient under that reference's rules. The brief becomes the row's `ex-choice` under For you to decide, as `show-me.md` says, with a longer brief, or a link to its own page, in the option's Details. The owner answers there, and the answer is logged as a decision row that quotes the owner's words and closes what it answers.
+Completion: the checkpoint row's id and this stretch's audit row id, and the thread notice linking the log when reachable. With no work thread, return the entries file and the no-thread gap. A page is never a checkpoint or completion requirement.
 
-Completion: the page path, the log position this checkpoint's build covers, and a checker result with no errors.
+## Explicit page requests
 
-## 8. Checkpoint at every stop
-
-Before a terminal response, log the outcome, remaining work or blockers, open stand-ins, the owner-asks comparison and the next action; run step 5's audit; as the Lead, rebuild the page; and put the log reference (and the page path) in the handoff. If nothing changed, point to the last checkpoint. When someone will read it cold, name things as their sources do, give the next step as a command or path you checked, and put assumptions, risks and unverified interactions first ([write for the reader](../principle-write-for-the-reader/SKILL.md)). When a work thread is reachable, post a checkpoint notice on it that links the log and the page. A contributor checkpoints only its own assignment; the root's orchestrator resolves the work under `practices-collaboration`.
-
-Completion: the checkpoint row's id and this stretch's audit row id; for the Lead, the page rebuilt from the log after them, and the thread notice that links both. With no work thread, the entries file that holds the checkpoint and the no-thread gap named in the handoff, and for the Lead the page built from that file.
+IF the owner explicitly requests a work-log HTML page or its refresh, load `presentation-work-log` and return that requested snapshot and its cutoff. A generic request to show progress or inspect the log stays in the current conversation. An indirect skill load, an unanswered decision or the existence of a page never takes the rendering branch.
 
 ## Completion
 
-For every agent, not done while one of this stop's decisions, assumptions, shortcuts or checks is missing from the log; a decision lacks its authority; an open assumption is shown as decided; an open stand-in isn't named as unverified; or the stretch has no audit row. A helper's stretch ends there, with its own rows, its Audit and its handback; it doesn't build the page or wait for one. For the Lead, a checkpoint is also not done while an owner ask is uncompared or the page wasn't rebuilt from the log at this checkpoint. With no reachable log, report current state and the exact gap as a blocker and keep doing independent work.
+Done when this stop's decisions, assumptions, shortcuts and checks are recorded or an unreachable-write gap is returned; each decision names its authority; open assumptions remain open; stand-ins and unverified work are named; owner asks have been compared; and the stretch has its audit. Do not create, refresh or require HTML to satisfy this skill.

@@ -9,7 +9,7 @@ Base dependency: locate `sunstack-dev:presentation-html` using the host's listed
 
 One design cycle produces four documents in order: Requirements and Specification (`spec-design`), Program Design (`program-design`), then Verification Design (`verification-design`). One independent review then judges them together, and a first cycle ends with the first implementation plan, which the owner reviews beside the design. The orchestrator is the Lead. It writes every document in this session by loading each phase, assigns only the review out, routes each correction to the owner of the defect, and ends at an honest design terminal: reviewed and design-ready, or stopped at the exact decision or blocker. Phases own their judgment, the review owns its findings, and the orchestrator owns the route and the final claim.
 
-MUST load `../../shared-references/design-documents.md` and return the four document identities as page paths in the set's folder, the records and sections each document owns, and the boundaries each handoff is checked against.
+MUST load `../../shared-references/design-documents.md` and return the four document identities and the boundaries each handoff is checked against.
 
 MUST load `sunstack-dev:practices-show-me-your-work` at the start and return the work reference, or the unshared checkpoint path, and whether this run owns the whole work or contributes to it. If tracking can't start, report the gap and keep designing; tracking never gates review unless the user made it a gate.
 
@@ -57,11 +57,11 @@ Accept a producer's recommended next owner only from this table, and a producer'
 
 A destination neither table allows blocks the run; don't invent a route.
 
-For a new file-backed document, pass `new artifact home: <project-root>/docs/specs/` to `spec-design`, `program-design` and `verification-design`, and check that each returns its own page in the set's one folder beneath that home. Leave authoritative existing documents where they live. Decisions and their detail go to the work's record through `sunstack-dev:practices-show-me-your-work`; the project gets no lifecycle ledger, replay store, digest or per-turn report.
+For a new file-backed document, pass `new artifact home: <project-root>/docs/specs/` to `spec-design`, `program-design` and `verification-design`, and check that each returns its own path beneath that home. Leave authoritative existing documents where they live. Decisions and their detail go to the work's record through `sunstack-dev:practices-show-me-your-work`; the project gets no lifecycle ledger, replay store, digest or per-turn report.
 
 ## Verify Each Return
 
-Before routing on, check what the phase returned: the document's page path with its record and section IDs, the set's preparation result, its result and next owner, the evidence behind it, and the finding or decision that justifies the route. Require an exact source identity, such as a reviewed commit, only where correctness depends on it.
+Before routing on, check what the phase returned: the document's identity and path, its result and next owner, the evidence behind it, and the finding or decision that justifies the route. Require an exact source identity, such as a reviewed commit, only where correctness depends on it.
 
 For each newly written or substantively revised document, check its own rendering result from the shared rendering owner: the document medium, and for every fired view a `pass` or an exact gap. A missing result, or a view marked complete without one, goes back to that phase. The medium is the shared owner's choice; don't re-judge it here.
 
@@ -85,8 +85,6 @@ A round runs the affected owners in document order, `spec-design`, `program-desi
 ## Design Terminal
 
 `ready` requires four distinct current documents, an independent `four-document-design` review, the retained Reviewer Sidekick's verification of every corrected anchor, and the Lead's acceptance. It means design-ready, not implemented. Short of `ready`, return the exact decision or blocker and its owner.
-
-Work delivered in more than one deliverable gets its delivery cut first: write it on the overall home page, as your own call, as `design-documents.md`'s Deliverables section says. IF the cut names more than one deliverable and the terminal below writes the first plan, load `sunstack-dev:presentation-html` to compose the first deliverable's page, and return its path with each need it links. The terminal's first plan is then that deliverable's plan: pass `plan-implementation` the deliverable's needs as its scope, and return its plan page, linked both ways with the deliverable page. The cut reaches the owner with that plan under the same gate, and the next deliverable's page and plan wait for its turn.
 
 At `ready`, the entry context chooses the terminal:
 

@@ -1,6 +1,6 @@
 # Record entries
 
-This reference owns the shape of one row in the work's log: its kind, its tags, its fixed parts, the two-step command that writes it, how a later row closes it, and how a write is retried. Every agent that writes the log, and the Lead who reads it to build the owner's page, works from this one shape. (Older text calls a row an "entry"; they are the same thing.)
+This reference owns the shape of one row in the work's log: its kind, its tags, its fixed parts, the two-step command that writes it, how a later row closes it, and how a write is retried. Every writer uses this shape; requested page composition reads the same recorded facts. (Older text calls a row an "entry"; they are the same thing.)
 
 Expected inputs: the fact you are logging; your packet's `workLog` (its project, work tag, workstream and `writeCommand`), or the entries file `no-board-trace.md` returned.
 
@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | what one subject amounts to for the owner, written by the Lead | the title on the first line, then `Key:`, `Section:`, `Subject:`, `Routine: yes` when routine, `Headline:`, `Happened:`, `For you:`, `Next:`, an optional `Show:`, any `More:` paragraphs, and `Covers:` with every row it cites, by full id. The **Story** part below gives each line |
+| `story` | a summary written only for an explicitly requested page | the existing shape in [presentation-work-log](../../presentation-work-log/references/story-records.md); ordinary logging does not create or refresh these rows |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, then the full row id of every Missed row it found) |
 
@@ -87,45 +87,6 @@ Authority: none. The owner caught it; fixed at 3ed51483.
 Bad: a shortcut nobody logged when it was taken. PR #194's merge proof ran typecheck, the rules and static checks but not the repository's test suite, and nothing said so until two tests went red on main (proof `01a1b226-4508`, 2:1016). Logged when taken, it is one `shortcut` row with `Planned:` the suite passing before merge and `Authority: none`; found later by someone else, it is one shortcut plus one `missed` row, never two shortcuts.
 
 **Missed.** Good, `01a1b3e2-27fb` (2:1346): "Missed: the skill spec (c4d752af) followed skill-authoring 0.5.0's route … / Found by: review lead codex-local/01a1a6f7, asking for the skill-design and skill-verification parts (push 01a1b3da-e1e1). / Affects: the spec-stage review target; fixed at ecf2f095." It says what was missed, who found it and how, and what it touches.
-
-**Story.** The Lead writes one at a checkpoint for each subject the owner follows, as `show-me.md` says. Its lines, in this order:
-
-| Line | Holds |
-| --- | --- |
-| the title | the subject's name in the owner's words, such as "How the new skill was checked" |
-| `Key:` | a short id kept across rewrites; the page gives the Story the element id `story_<key>` |
-| `Section:` | one of the page's four sections: For you to decide; What's done / what's next; What changed and why; What was verified, and what was missed |
-| `Subject:` | the part of the work it belongs to, as the Map names it, such as "The skill" |
-| `Routine: yes` | only when it is routine; it then folds at the end of its section |
-| `Headline:` | one sentence: what it means for the owner |
-| `Happened:`, `For you:`, `Next:` | one short line each; `For you:` says "Nothing." when nothing is asked |
-| `Show:` | optional: `table`, a diagram or a before-after, followed by its lines; at most one |
-| `More:` | optional paragraphs the owner can open |
-| `Covers:` | the full row id of every row the Story cites, comma-separated |
-
-**`Covers:` decides what a Story cites, not its links.** Router takes at most 16 links on one row, and a Story often covers more. So the Story cites exactly the rows `Covers:` names, linked or not, and every line must be said by one of them. A first Story links up to 16 of them. A rewrite is a new `story` row tagged `supersedes` whose first link is the Story it replaces, which it doesn't cite, so it links up to 15 cited rows after it. Which cited rows get the links changes nothing about what the Story cites.
-
-Good, `01a1b5e6-d173` (2:1960), a rewrite whose first link is the Story it replaces (`01a1b5dd-5cfe`), with 16 links and 55 rows in `Covers:`:
-
-```text
-How the new skill was checked
-Key: checked
-Section: What was verified, and what was missed
-Subject: The skill
-Headline: Four reviewers found four problems; all are fixed, and they checked the fixes.
-Happened: Each reviewer wrote down its own checks as it went; the reviewer who checked the others' work checked every problem at its line.
-For you: Nothing.
-Next: Checked again once the page part is redone.
-Show: table
-| Problem found | Fixed |
-| Two places pointed to the wrong step | Yes |
-| New parts of the work got no group on the page | Yes |
-| A count of three opened only one item | Yes |
-| A refused note could be taken as a lost one | Yes, after two more checks |
-Covers: 01a1b412-aac2-7459-b952-9e41a92c1baa, 01a1b412-aac3-7c7b-bdd3-ba9d84e9adf3, …
-```
-
-Bad: an early story such as `01a1b5b0-6f51` (2:1827), which named the rows it covered only by its four links. A reader can't tell a cited row from a linked one, and a Story covering 55 rows can't link them all. A current Story like this gets a new version in this shape before the page uses it, as `show-me.md`'s "Write the Stories" step 3 says; the old row is never edited.
 
 **Audit.** Good, `01a1b404-e3cd` (the Implementer's audit at its handback):
 

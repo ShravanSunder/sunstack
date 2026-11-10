@@ -1,0 +1,6 @@
+interface:
+  display_name: "Presentation: Work Log"
+  short_description: "Explain a work log as HTML only when requested"
+  default_prompt: "Use $presentation-work-log to build or refresh the work-log page I am explicitly requesting, using the log and presentation-html."
+policy:
+  allow_implicit_invocation: false

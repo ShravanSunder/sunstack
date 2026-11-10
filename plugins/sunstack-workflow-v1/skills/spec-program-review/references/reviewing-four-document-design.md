@@ -69,42 +69,44 @@ Stop when every row has been walked and every defective cell has a finding.
 
 Skip this walk when the Requirements carry no capability list; the per-row walks above cover a one-concern set.
 
-What to open: the capability list section and the need records on the Requirements page, the specification records, the design-part records and the trace-table section on the Program Design page, and the check records on the Verification page. Read each record's own forward links; every reverse direction, including "also serves", is derived by preparation and the browser and is never written.
+What to open: the capability list and its home `U` rows in the Requirements, the capability map and capability groups in the Specification, the capability groups of the Program Design trace rows and of the Verification Design rows, and each capability's through-line in the root index when the set has one.
 
-How to judge: walk every capability; do not sample. Follow each capability forward through the records that name it:
+How to judge: walk every capability; do not sample. Follow each key through the documents:
 
 ```text
-capability key and purpose (Requirements list section)
-  -> the need records naming that capability (Requirements)
-  -> the specification records naming those needs (Specification)
-  -> the design-part records naming those R, plus each R's one trace row (Program Design)
-  -> the check records naming those R (Verification Design)
+capability key and purpose (Requirements)
+  -> its home U rows (Requirements)
+  -> each R those rows reach, under that R's own home key (Specification)
+  -> that R's one trace row, keyed to the same R home (Program Design)
+  -> the Verification Design row for each home U row, keyed to this capability
+  -> its through-line, when the set has an index
 ```
 
-Only a need carries a capability. An `R` belongs to every capability whose needs it names, so an obligation that serves needs in two capabilities is on both lines, with one record and one trace row; neither line expects a key or an "also serves" line written on it. The line stops at the first document where a forward link is missing or resolves to no record, or where a record writes what is derived. Report one finding for the capability, attributed to the document where its line stops and listing every record it strands, and route it as the walks above do:
+Keep two homes apart. Every `U` on this line is homed here, but an `R` it reaches has one home of its own, which may be another capability. An `R` homed elsewhere belongs to this line when it names this capability under "also serves": follow it to its single trace row, keyed to its own home, then return to this capability for its `U` rows' Verification Design rows. A row's key is the home key written in its own `R` cell or requirement field when it has one, and otherwise its group heading. Check that key against the `R`'s home in the Specification, or the `U`'s home in the Requirements; a row whose key names a different home is keyed to the wrong home. When a document declares its groups to be home groups, such as "each trace group lists the obligations whose home is that capability", each heading in it is a home claim too, and a row whose heading and cell disagree carries two home claims, which is a stop. A correctly keyed row may sit in another capability's group; the through-lines and the `U` rows' links must still reach it where it is. The line stops at the first document where a link is missing, a row is keyed to the wrong home or carries two disagreeing home claims, or a group carries a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
 
-- a listed capability that no need names, or a need that no `R` names, stops at the Specification side of the line: `spec-design`;
-- a reached `R` that no design part names, or that has no trace row, stops at Program Design: `program-design`;
-- a need none of whose `R` is named by a check stops at Verification Design: `verification-design`;
-- a link to a record that doesn't exist, or a written back link or a capability key on a record other than a need, goes to the phase that owns that page.
+- a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or reach an `R` that has no home, has two homes, or is homed elsewhere without naming this capability under "also serves", stops at the Specification: both route to `spec-design`;
+- a reached `R` with no trace row, or whose trace row is keyed to another home or carries two home claims that disagree, stops at Program Design: `program-design`;
+- a home `U` row with no Verification Design row, or whose row is keyed to another capability or carries two home claims that disagree, stops at Verification Design: `verification-design`;
+- a through-line or a `U` row's link that skips a step or misses the row where it sits goes to the phase that owns that document's step.
 
 In a broken copy of the job-submission set:
 
 ```text
-billing-export  U5 U6 -> R7 R8 R9 -> design parts and trace rows for R7 R8 R9 -> no check names R7, R8 or R9
+billing-export  U5 U6 -> R7 R8 R9 -> trace rows R7 R8 R9 -> no Verification Design row names U5 or U6
                 stops at Verification Design; route verification-design
 
-scheduling      U3 -> no specification record names U3
+scheduling      U3 -> no R traces to U3
                 stops at the Specification; route spec-design
-                U2 -> R9 (names U2 and U5) -> the lease design part and R9's one trace row -> the check naming R9
+                U4 -> R9, homed in billing-export, also serves scheduling
+                   -> R9's one trace row, under billing-export -> U4's row, under scheduling
                 this link holds
 ```
 
-The per-row walk already flags U5 and U6 as unproven; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier, at U3. Program Design and Verification Design may still hold scheduling's design parts and checks, but nothing there realizes or proves U3 without an `R` naming it. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier, at U3. Program Design and Verification Design may still have sections headed scheduling, but nothing there realizes or proves U3 without an `R` behind it. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
 
-U2's link holds although R9 also serves billing-export: R9 names U2 and U5, so it sits on both lines with one record, one trace row and one check. It would stop at the Specification if R9 named only U5, at Program Design if no design part named R9, and at Verification Design if no check named R9. If U2's body carried a "related obligations" list naming R9, that written back link is the finding, routed to `spec-design`, even though the line otherwise holds.
+U4's link is complete although R9 lives in billing-export: R9 names scheduling under "also serves", has one trace row keyed to its own home, and U4's row is keyed to scheduling. It would stop at the Specification if R9 did not name scheduling, at Program Design if R9's trace row named scheduling as its home, and at Verification Design if U4's row were keyed to billing-export. If R9's row sat in the scheduling group but kept billing-export in its own `R` cell, it would still be validly keyed, and the billing-export through-line and U4's link must reach it there. Only a Program Design that declares its trace groups to be home groups would make that row a stop, because its heading and cell would then be two home claims that disagree.
 
-A line that ends at a recorded gap, such as needs that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
+A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
 
 Stop when every capability has been walked to its proof or to a routed finding at the document where its line stops.
 
