@@ -239,7 +239,7 @@ MUST load `references/artifact-and-self-review.md` with the Required Views decis
 
 For substantial or uncertain work, stage source notes, current/target comparisons, credible alternatives, and prototype component/call/state/failure views in private working state, the repository's ignored scratch convention, or `tmp/design-workflows/<date>-<slug>/`. Quick work keeps the comparison in working state. Scratch is optional evidence, never a normative home or required reading. The trace table is never scratch: it lives in the artifact.
 
-Author top-down. Begin with the rendered fired views. Use concise prose as the overview only when no picture-type view fired. The overview lets a human explain how the specified behavior works, then reveal entity homes, components, interfaces, call paths, state, flows, failure/recovery, concurrency, cutover, trust, and proof. Link through the immediate specification scenario or observable contract rather than jumping from raw customer needs directly to components.
+Author top-down. Begin with a short answer-first overview through `sunstack-dev:presentation-html`, followed by the rendered fired views. The overview lets a human explain how the specified behavior works, then reveal entity homes, components, interfaces, call paths, state, flows, failure/recovery, concurrency, cutover, trust, and proof. Link through the immediate specification scenario or observable contract rather than jumping from raw customer needs directly to components.
 
 The Lead expresses every selected requirement realization, entity binding, component, ownership rule, interface, state/failure policy, view, and claim. Unmapped needs return as gaps rather than becoming delegated design work.
 
