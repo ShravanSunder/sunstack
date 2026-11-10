@@ -7,7 +7,7 @@ description: "Use when delegating to or coordinating sidekicks or subagents (wor
 
 Base dependency: locate `sunstack-dev:presentation-html` using the host's listed skill path; from its skill directory go up `../..` to the base plugin root. Resolve every `sunstack-dev:<name>` there as `skills/<name>/SKILL.md`, including hidden principles and domains; append reference suffixes beneath that skill. Resolve `sunstack-dev/shared-references/...` beneath that same root. Never assume the two plugin caches are adjacent.
 
-Collaborate with other agents through a fixed structure: each job is classified, each agent has a role and a model, each work-direction call contains only role and file pointers, and each result is checked against its evidence.
+Formal role commissions choose a role and model and send only role/files. Native coding helpers stay inside their parent Implementer's approved workstream context. Both routes bound the work and check its result against evidence.
 
 The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, inspects, and accepts results; implementation changes belong to the Implementer. The owner decides tradeoffs, merges, and can override any pick. Other agents take jobs from the Lead, or from a Sidekick whose role skill and commission let it start helpers, and return evidence, findings, or changes; governing design and workstream sequencing stay with the Lead, while the Implementer chooses execution steps within its workstream.
 
@@ -58,7 +58,7 @@ What the agent must hold in its head to get the job right. Size and module count
 
 ### How they fit
 
-Horizon caps the role, direction decides whether an Operator can take the job, and direction and span pick the catalog row.
+For formal role commissions, horizon caps the role, direction decides whether an Operator can take the job, and direction and span pick the catalog row. Native coding helpers use the parent workstream's permitted model/access context rather than acquiring a role or catalog row.
 
 ## Roles
 
@@ -78,7 +78,7 @@ An Operator makes no judgment calls: it never decides what to run, what a result
 
 Delegate only independent work that costs less to hand off than to do. Work that splits into independent units (an audit, a migration, a review across files) fans out: one helper per unit, one table at the end.
 
-Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`, and label a native helper by its role, such as `🔧 Operator Subagent · retry logs`.
+Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`, and label a formal Operator subagent by its role, such as `🔧 Operator Subagent · retry logs`. Label a native coding helper by its bounded task, not an Implementer/Checker appointment.
 
 ## Model catalog
 
@@ -88,7 +88,7 @@ Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier S
 | Daily driver | execution or synthesis that needs judgment |
 | Frontier | demanding judgment, design, or review |
 
-A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A job that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
+A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A formal role commission that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
 
 Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
 
@@ -136,13 +136,15 @@ The owner chooses the Lead's model. Nothing here escalates it.
 
 ## Work with an agent
 
-Classify the job (the Examples show how), pick its role and model rows, then launch, hand off, wait, and check the result's evidence against its claim. The Lead gives the overall verdict.
+Choose the route before launch: a formal role commission follows classification, role/catalog selection and the formal handoff below; a parent-owned native coding helper follows the existing native-helper procedure in `references/execution-forms.md`. The parent bounds its task/source context, uses its permitted model/access and supported host route, then inspects and integrates the result and evidence or owns the remaining gaps. Native helpers require no role seat, role/files call or standalone resolved packet. The Lead gives the overall workstream verdict.
 
 ### Launch
 
-MUST load `references/execution-forms.md` and return the route, lifecycle and history boundary for the chosen form.
+MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary: selected form/catalog row for a formal commission, or bounded task/source context and permitted parent model/access for a native coding helper. Follow its existing native-helper procedure for that route.
 
 ### Hand off
+
+For formal role commissions, perform these steps. Native coding helpers use the already loaded native-helper procedure instead; its parent-owned bounded task and source context do not enter the role/files or recipient-packet path.
 
 The commissioner selects the role and reachable governing files. The recipient loads its own preamble and resolves its assignment; no newly fabricated full-packet file is required.
 
@@ -159,11 +161,15 @@ Before using a handback, open the decisive diff and evidence, match them to its 
 
 ## Examples
 
-MUST load `references/delegation-examples.md` and return the six steps (direction, span, horizon, cut, role and form, catalog row) written for this job.
+MUST load `references/delegation-examples.md` and return the applicable walkthrough: the six steps (direction, span, horizon, cut, role and form, catalog row) for a formal role commission, or its parent-execution example's bounded helper task/source context, permitted parent model/access, supported host route and inspected integrated result/evidence or owned gaps. Do not invent a formal coding-helper role or catalog row to fill the formal example slots.
 
 ## Completion
 
-Done when the helper's role, form and model rows are chosen with any reason their rows require, its role/files call points to current governing and preflight sources at a real address, the recipient resolved its concrete context or returned exact gaps, and its handback was matched to evidence, with unresolved proof, prerequisites and HOLDs carried to their owners.
+A formal role commission is complete when its role, form and model rows carry required reasons, its role/files call points to current governing and preflight sources at a real address, its recipient resolved the concrete context or returned exact gaps, and its handback was matched to evidence.
+
+A native coding-helper assignment is complete when its bounded task/source context, permitted parent model/access and supported host route are established, and its parent inspected and integrated the result with evidence or recorded owned gaps. No standalone role/catalog appointment, role/files call, resolved role packet, trace or Verifier pair is required.
+
+Both routes carry unresolved proof, prerequisites and HOLDs to their responsible owners; a child result alone never closes parent workstream proof.
 
 ## Source integration limit
 
