@@ -2,7 +2,7 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.0.0 contains 42 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.1.0 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
@@ -39,6 +39,7 @@ Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentat
 - [`practices-verification-maintenance`](skills/practices-verification-maintenance/SKILL.md)
 - [`practices-why`](skills/practices-why/SKILL.md)
 - [`presentation-html`](skills/presentation-html/SKILL.md)
+- [`presentation-work-log`](skills/presentation-work-log/SKILL.md)
 - [`presentation-tui`](skills/presentation-tui/SKILL.md)
 - [`presentation-webui`](skills/presentation-webui/SKILL.md)
 - [`principle-build-the-shared-model-first`](skills/principle-build-the-shared-model-first/SKILL.md)
@@ -58,6 +59,10 @@ Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentat
 - [`principle-verify-before-accepting`](skills/principle-verify-before-accepting/SKILL.md)
 - [`principle-write-for-the-reader`](skills/principle-write-for-the-reader/SKILL.md)
 - [`principle-write-tests-that-can-fail`](skills/principle-write-tests-that-can-fail/SKILL.md)
+
+## Tracking and requested pages
+
+`practices-show-me-your-work` tracks and resumes the log without creating HTML. Only an explicit owner request invokes `presentation-work-log` to create or refresh a page; subsequent checkpoints do not refresh it. The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`.
 
 ## Shared references
 
