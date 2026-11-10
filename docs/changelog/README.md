@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-10 Free-form HTML design authoring and semantic navigation](2026-11-10-v2-html-navigation.md)
+
 - [2026-11-10 Restore the v1 Markdown design baseline](2026-11-10-restore-v1-markdown-design.md)
 
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)
