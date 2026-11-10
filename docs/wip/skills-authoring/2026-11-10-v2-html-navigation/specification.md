@@ -11,7 +11,7 @@
 9. Keep governing conditions, invariants, failure obligations, risks, proposals and unknowns visible while putting optional supporting detail behind descriptive disclosures.
 10. Explain choices and open discussions with worked examples that distinguish a recommendation, a local reader selection and an actual owner decision.
 11. Reconcile changed meaning and approval status across owning passages, summaries, diagrams, navigation metadata and planned proof without silently deciding an unresolved contradiction.
-12. Read the matching bound guide for syntax and delivery, preserve v1 Markdown compatibility, and report unreleased shared-navigation support or HTTP-fetch requirements without substituting invented standalone behavior.
+12. Read the matching bound guide for syntax and delivery, preserve v1 Markdown compatibility, and report unavailable matching shared-navigation support or HTTP-fetch requirements without substituting invented standalone behavior.
 13. Check markup, actual destinations and collection search freshness, then inspect complete content through concrete reader questions, using an independent reader when commissioned or required by the governing review, while keeping source/content evidence separate from rendered appearance and product behavior.
 
 Transfer cases: a Rust delivery service can group needs around responsiveness, recovery and operator visibility while its implementation follows ownership; a Swift document editor can group needs around editing, saving and recovery while its journeys show user-visible transitions. A shared rule has one home even when several groups link to it. Neither case requires matching headings across all four documents or one decorative component per record.

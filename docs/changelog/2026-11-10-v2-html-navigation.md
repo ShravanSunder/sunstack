@@ -7,5 +7,5 @@
 - Three base manifests, three marketplace versions and both source README sections are updated. No hook or registration change.
 - Validation and observed cold/guided limits: [account](references/2026-11-10-v2-html-navigation-validation.md). Final integration checks are recorded there.
 - Model-based lint remains not-run on its unavailable existing credential route; request preparation is not judged execution.
-- Matching shared-navigation publication and separate generic presentation PR213 integration remain pending. Source-preview checks do not establish released support or visual behavior.
+- Published Demistify 1.22.0 consumer indexing/checking and two rejection cases pass; matching browser evidence is reused at published-bytes/local-host scope. PR213 integration remains pending; visual preference is unverified.
 - Codex/Claude caches were not refreshed by this change; no activation, release or v2 merge is claimed.
