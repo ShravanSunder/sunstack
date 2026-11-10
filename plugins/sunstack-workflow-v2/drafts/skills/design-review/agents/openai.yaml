@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design: Review"
+  short_description: "Classify or review Why, What, structural How, and the proof plan"
+  default_prompt: "Use design-review to classify whether a specification-only or program-only change semantically requires independent review, or to independently review a Specification, Program Design, or the four-document design set (Requirements, Specification, Program Design, Verification Design) for correctness, scope fidelity, reader understanding, current/proposed call paths, and planning readiness without editing or accepting them. Route standalone security audits or threat models to audit-security-review."
