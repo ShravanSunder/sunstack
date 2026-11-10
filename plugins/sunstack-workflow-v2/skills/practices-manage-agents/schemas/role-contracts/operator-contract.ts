@@ -38,8 +38,8 @@ export const OperatorPacket = JobBase.extend({
     .literal("operator")
     .describe("The Operator: observations from a prescribed procedure or guided collection"),
   executionForm: z
-    .enum(["worker", "sidekick"])
-    .describe("Worker by default; Sidekick when the job needs a separate session"),
+    .enum(["subagent", "sidekick"])
+    .describe("Subagent by default; Sidekick when the job needs a separate session"),
   requiredReads: RequiredReads.extend({
     charter: z.literal("role-operator").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),

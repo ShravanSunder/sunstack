@@ -1,3 +1,4 @@
+// Recipient-resolved context; live work-direction content is delegated-agent-call.ts.
 // The complete packet union, for validating an unknown or mixed-role packet.
 // Constructing or reading one role's packet needs only ./assignment-fields.ts and that role's contract:
 // ./role-contracts/{lead,implementer,operator,checker}-contract.ts.
@@ -11,6 +12,6 @@ import { OperatorPacket } from "./role-contracts/operator-contract.ts";
 export const AgentJobPacket = z
   .discriminatedUnion("role", [LeadPacket, CheckerPacket, ImplementerPacket, OperatorPacket])
   .readonly()
-  .describe("One commission: role and form, the assignment, its full reads and its grant");
+  .describe("Recipient-resolved assignment context: role and form, full reads and sourced grant");
 
 export type AgentJobPacket = z.infer<typeof AgentJobPacket>;

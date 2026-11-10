@@ -55,7 +55,7 @@ const implementer = (): Fields => ({
 const operator = (): Fields => ({
   ...common("role-operator"),
   role: "operator",
-  executionForm: "worker",
+  executionForm: "subagent",
   returnContract: { kind: "helper-handback" },
   procedure: {
     kind: "prescribed-steps",
@@ -149,6 +149,40 @@ describe("v2 packet union and local charters", () => {
       "limits.writePaths",
       "limits.allowedCommands",
     ]);
+  });
+
+  test.each(["worker", "subagent"])("Implementer rejects native %s role seats", (executionForm) => {
+    // Arrange
+    const packet = implementer();
+    // Act / Assert
+    expect(paths(ImplementerPacket, packet)).toEqual([]);
+    expect(paths(ImplementerPacket, { ...packet, executionForm })).toEqual(["executionForm"]);
+    expect(paths(AgentJobPacket, { ...packet, executionForm })).toEqual(["executionForm"]);
+  });
+
+  test.each(["worker", "subagent"])(
+    "both Checker duties reject native %s role seats",
+    (executionForm) => {
+      // Arrange
+      const packets = [review(), verification()];
+      // Act / Assert
+      for (const packet of packets) {
+        expect(paths(CheckerPacket, packet)).toEqual([]);
+        expect(paths(CheckerPacket, { ...packet, executionForm })).toEqual(["executionForm"]);
+        expect(paths(AgentJobPacket, { ...packet, executionForm })).toEqual(["executionForm"]);
+      }
+    },
+  );
+
+  test("Operator accepts subagent and Sidekick and rejects superseded worker spelling", () => {
+    // Arrange
+    const packet = operator();
+    // Act / Assert
+    for (const schema of [OperatorPacket, AgentJobPacket]) {
+      expect(paths(schema, packet)).toEqual([]);
+      expect(paths(schema, { ...packet, executionForm: "sidekick" })).toEqual([]);
+      expect(paths(schema, { ...packet, executionForm: "worker" })).toEqual(["executionForm"]);
+    }
   });
 
   test("Operator accepts guided collection without creating an interpretation role", () => {

@@ -4,6 +4,16 @@ Your commissioner is the 🦁 Lead, or a review lead that started you because it
 
 Return the message you owe at this point and who receives it: a commission gap, a report, a correction check or a stop.
 
+## Delivery-review admission
+
+Before full delivery review, check that the referenced inputs include the Lead-authored acceptance artifact in the existing work record with all five conditions completed and inspected evidence; original owner decisions and complete scoped requirements/specification/design/verification material and workstream plan; current target/diff; original Verifier report and deciding proof; unresolved-items state and review scope. Full means complete for this scope and reachable, not a paraphrase or another giant packet.
+
+Missing Lead acceptance, an unchecked checklist condition, stale/absent governing material, missing required proof or an unresolved required HOLD returns **review-not-started**, naming each input Lead must supply. Do not fill its acceptance, collect missing basic proof or start full review to rescue the handoff. A completed-looking summary does not resolve a HOLD. An explicitly scoped proposal/design or partial source review keeps its separate artifact/proof limits.
+
+MUST load `../../role-lead/references/accepting-work.md` and return whether the supplied acceptance artifact completes its five conditions with inspected evidence. Check that artifact; do not author the Lead's assessment. Once admitted, derive criteria from the original decisions/specifications and independently inspect candidate, assessment and public claims. The Lead's judgment is under review and can be false; it never replaces the originals. No authoring history, source access and anchored judgment establish independence, not a promise you never saw the assessment.
+
+**Missing handoff:** green helper summaries arrive without Lead acceptance or with an unchecked reconnect HOLD. Return review-not-started with those missing inputs. **Complete handoff:** current complete sources, original proof/report and all five inspected Lead conditions permit full review; an incorrect acceptance claim can still become a finding.
+
 ## Answer the commission
 
 Your procedure decides your position, so read it before the target. When it has you walk every check and reduce your own candidates, you return its full report. When it prescribes stage reviewers, a stage reviewer returns candidates with their anchors to the review lead, who reduces them and returns the report to the Lead.
@@ -28,7 +38,7 @@ When a finding needs evidence the packet does not carry, ask your commissioner f
 
 ## Read what comes back
 
-Corrections return to you with your review history. When a correction comes back, reopen every corrected anchor at the new revision and read the whole edit before you close a finding (verify before accepting (`sunstack-dev:principle-verify-before-accepting`)).
+Lead dispositions findings and routes repairs to Implementer/Verifier, rechecking affected acceptance/proof before corrections return to you with your review history. You recheck those corrected anchors; a clean review is the last quality gate, with no second wholesale acceptance ceremony. When a correction comes back, reopen every corrected anchor at the new revision and read the whole edit before you close a finding (verify before accepting (`sunstack-dev:principle-verify-before-accepting`)).
 
 A correction can close the original finding and open a different defect. Record the original as closed and the new defect as a new finding, then compare the open count under your procedure's convergence rule. When two callers or two reviewers raise the same defect, merge them and count it once.
 

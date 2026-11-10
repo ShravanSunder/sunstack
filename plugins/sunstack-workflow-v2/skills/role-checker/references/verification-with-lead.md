@@ -2,7 +2,7 @@
 
 This reference owns your side of the relationship with the Lead who commissioned you: reading the commission, what you send while you work, your report, and what you do with the Lead's answers. Packet fields, forms and models are defined in `practices-manage-agents`.
 
-Expected inputs: your commission from the Lead's own message, with its packet, after the Assignment check in your role skill.
+Expected inputs: your commission from the Lead's own message, with its referenced governing files and recipient-resolved context, after the Assignment check in your role skill.
 
 Return: the commission gaps you sent back before you began, or none, and what your report must carry for this job.
 
@@ -20,7 +20,7 @@ When the commission is a held-out evaluation of skill or agent behavior, it fixe
 
 Message the Lead only when it has to act: a commission gap, a pinned target that changed, a disagreement with your Implementer that the sources don't settle, a held-out case the writers can see, or work that needs a write or command outside your grant. Each message names what you expected, what you found with the path, commit or output that shows it, and which observations wait on the answer.
 
-Leave out of your messages to the Lead each internal step, what you and your Implementer settle directly, and product fixes, which go to the Implementer.
+Keep ordinary repairs/reproductions direct with Implementer. Put routine workstream status on the existing board/tasks for Lead's single 55-minute pass; material blockers/HOLDs needing Lead action are immediate. The full batch report still goes directly to Lead, not through Implementer.
 
 A run that broke before the subject did the work, such as output cut off by a size limit or a permission stop, is a harness failure. Label it so, rerun it inside your grant, and count it as neither a pass nor a fail.
 
@@ -37,11 +37,19 @@ Around the result of the method your commission named, give the Lead:
 - each check you narrowed, with its reason and both results;
 - each observation and finding you sent your Implementer with what it did about it, and each disagreement waiting on the Lead.
 
+Use these sections in the existing tasks/checklist surface or concise Markdown, without a new tracker/schema:
+
+- Scoped outcomes: target, supported/unsupported/unknown result and deciding evidence, including missing proof and HOLDs.
+- Needs Implementer: product/test repairs, owner and recheck status.
+- Needs Lead ("Needs you" means the recipient Lead): unresolved design/authority decisions and blockers. Lead handles its engineering questions and brings only owner choices to the owner.
+
+Each open task names owner, observed failure/missing fact, next action and what closes it. Preserve the original report so Lead can inspect it rather than receiving a paraphrase. A blocked report must retain its unsupported/unknown results; it is not all green.
+
 Mark each claim supported, unsupported or unknown at the target. A claim that rests only on a passing suite stays unknown until you observe it there. Your report is evidence for the Lead's decision. Your Implementer's agreement and your own are facts in it, and neither is acceptance.
 
 ## When the Lead answers
 
-Corrections come back to you in the same session. Before acting on one, reread your role skill, the commission, your trace and the sources they name, since a correction can change your kind of work or your target. A re-pinned packet is a new target. Confirm it, then observe what the change touched, and reuse an earlier observation only where the applicability check in `sunstack-dev:practices-verification` still holds. A Lead decision on a disputed expected outcome becomes your oracle. Change your checks only to match it, and rerun the ones it affects at the current target.
+Corrections come back as role/files in the same session. Before acting on one, reopen the current governing correction files through recipient startup, and read any file to be edited in full with the relevant contract. Reuse applicable unchanged role/practice reads instead of ceremonial preamble or whole-trace rereads. A re-pinned packet is a new target. Confirm it, then observe what the change touched, and reuse an earlier observation only where the applicability check in `sunstack-dev:practices-verification` still holds. A Lead decision on a disputed expected outcome becomes your oracle. Change your checks only to match it, and rerun the ones it affects at the current target.
 
 ## Examples
 
@@ -49,15 +57,15 @@ The commits, files and cases below are illustrative.
 
 ### Failed: the worktree that changed during the runs
 
-The packet pins commit `e7f8` and says to stop if `git status` shows anything besides one untracked folder. Halfway through the subject runs, two changelog drafts appear in the worktree. The Checker on verification duty decides they sit outside the skill under test, keeps going, and reports every case as observed at `e7f8`. The subjects read skill files from the worktree as they found it, and the status check the packet relied on had already failed, so the later cases match no single state. The packet's stop condition applied. The Checker on verification duty owed the Lead a stop, the new files, the case where they appeared, and a wait for a re-pinned packet.
+The packet pins commit `e7f8` and says to stop if `git status` shows anything besides one untracked folder. Halfway through the subject runs, two changelog drafts appear in the worktree. The Verifier decides they sit outside the skill under test, keeps going, and reports every case as observed at `e7f8`. The subjects read skill files from the worktree as they found it, and the status check the packet relied on had already failed, so the later cases match no single state. The packet's stop condition applied. The Verifier owed the Lead a stop, the new files, the case where they appeared, and a wait for a re-pinned packet.
 
 ### Failed: a harness failure scored as a fail
 
-Two subject runs end early because their output hit a size limit. The Checker on verification duty scores both as fails, and the Lead reads a regression in the skill. The subjects never did the work. Labeled as harness failures and rerun, they would have given the Lead two real results.
+Two subject runs end early because their output hit a size limit. The Verifier scores both as fails, and the Lead reads a regression in the skill. The subjects never did the work. Labeled as harness failures and rerun, they would have given the Lead two real results.
 
 ### Clean: held-out cases the writers had seen
 
-The commission fixes four held-out cases, their checks and the deciding rule, and names the proof guidance for the runs. Before the first run, the Checker on verification duty reads the plan the writers worked from and finds each case's question listed in its Proof section. It sends the Lead that line and a substitute for each case on a target neither writer has seen, each keeping the kind of target and the failure it must catch. With the Lead's answer, it runs the substitutes as the deciding cases and the exposed originals as labeled secondary cases, and its report says which is which.
+The commission fixes four held-out cases, their checks and the deciding rule, and names the proof guidance for the runs. Before the first run, the Verifier reads the plan the writers worked from and finds each case's question listed in its Proof section. It sends the Lead that line and a substitute for each case on a target neither writer has seen, each keeping the kind of target and the failure it must catch. With the Lead's answer, it runs the substitutes as the deciding cases and the exposed originals as labeled secondary cases, and its report says which is which.
 
 ## When to stop
 

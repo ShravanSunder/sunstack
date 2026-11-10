@@ -1,4 +1,4 @@
 interface:
   display_name: "Practices: Manage Agents"
-  short_description: "Choose a helper's role, form and model; commission and assess it."
-  default_prompt: "Use practices-manage-agents to choose a helper's role, execution form and model, commission it with a typed packet, and assess its handback through native or agent-router routes."
+  short_description: "Coordinate Sidekicks and native helper Subagents within their grants."
+  default_prompt: "Use practices-manage-agents to choose a helper's role, execution form and model, send only role/files so the recipient resolves its own typed context, and assess its handback through native or agent-router routes."

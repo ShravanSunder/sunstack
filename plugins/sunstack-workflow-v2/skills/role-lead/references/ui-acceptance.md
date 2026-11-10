@@ -1,6 +1,6 @@
 # UI Acceptance
 
-This reference owns accepting a result that includes a UI or visual claim, whoever collected its proof: you, an Implementer or a Checker on verification duty.
+This reference owns accepting a result that includes a UI or visual claim, whoever collected its proof: you, an Implementer or a Verifier.
 
 Expected inputs: the claim with the surfaces, states and widths it covers, and the proof handed back with its frames.
 
@@ -24,13 +24,13 @@ The surfaces and widths below are illustrative.
 
 The Lead launches the build, sees the pane open and the line update, and captures the toolbar at one width. It never opens the Messages popover. Working PASS, quality UNKNOWN for the popover and for every other width. Reporting "pane UI ready" turned the missing cells into a pass.
 
-### Failed: the Checker on verification duty's card-only matrix
+### Failed: the Verifier's card-only matrix
 
-A paired Checker on verification duty judges the card at five widths and reports one FAIL at the narrowest and quality UNKNOWN elsewhere, with the popover outside its commission. The Lead accepts "with limits", and a later summary calls the pane ready. Quality was never established, so the pane was never ready.
+A paired Verifier judges the card at five widths and reports one FAIL at the narrowest and quality UNKNOWN elsewhere, with the popover outside its commission. The Lead accepts "with limits", and a later summary calls the pane ready. Quality was never established, so the pane was never ready.
 
 ### Clean: a complete scoped result
 
-The commission named the toolbar and the Messages popover, closed and open, at the three supported widths. The Checker on verification duty returns a frame for each cell and a quality PASS for each. The Lead opens every returned frame, both surfaces in both states at all three widths, judges each one, agrees, and accepts. Judging captured frames needs no new observation, so the Lead asks for no other run.
+The commission named the toolbar and the Messages popover, closed and open, at the three supported widths. The Verifier returns a frame for each cell and a quality PASS for each. The Lead opens every returned frame, both surfaces in both states at all three widths, judges each one, agrees, and accepts. Judging captured frames needs no new observation, so the Lead asks for no other run.
 
 ## When to stop
 

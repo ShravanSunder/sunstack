@@ -2,7 +2,7 @@
 
 Owns Claude Code native Task / Agent launch and workspace-access encoding. Return the host Task / Agent encoding and workspace-access encoding.
 
-This reference applies after `references/execution-forms.md` selects the Worker form on this host. Sidekick-form roles use their separate session route.
+This reference applies after `references/execution-forms.md` selects the Subagent form on this host. Sidekick-form roles use their separate session route.
 
 ## Launch
 
@@ -12,7 +12,9 @@ Task / Agent may omit plan-mode or readonly flags. Do not hop to `claude -p --pe
 
 ## Models
 
-No catalog row runs as a native Worker on Claude: the Operator Worker rows are OpenAI Luna. Run those helpers as Sidekicks through agent-router, as `references/execution-forms.md` says. A Claude model in Worker form needs the owner's named override.
+The rows below select formal Operator subagents. Native coding helpers are bounded children of the assigned Implementer Sidekick, using its approved model/access context through the host interface. They are not separately commissioned Implementer/Verifier/Reviewer seats and create no new catalog row. Luna remains Operator-only.
+
+No formal Operator catalog row runs as a native Subagent on Claude: the Operator Subagent rows are OpenAI Luna. Run those helpers as Sidekicks through agent-router, as `references/execution-forms.md` says. A standalone role/model off that catalog needs the owner's named override; this does not appoint coding helpers as roles.
 
 Resolve the exact id with the exact-id rule in `SKILL.md` under Model catalog.
 
@@ -22,3 +24,7 @@ Access grants: the `limits` field in `../schemas/assignment-fields.ts`.
 
 - Readers: packet access `inspect`. Parent verifies the repo worktree is unchanged after the receipt.
 - Writers: packet access `write-and-execute` with its `writePaths`. Path-scoped enforcement: `dontAsk` with `Edit(<paths>/**)` allow rules. Prefer that when enforcement matters; otherwise the scope stays declared. Parent verifies the receipt's diff stayed inside the declared scope.
+
+## Work-direction content
+
+Formal delegated role work, continuations and corrections contain only role/files, encoded in the native tool’s documented message/prompt argument type. Model, effort, identity, history and access settings remain separate metadata. The recipient reads its role and current governing files; do not prefix a custom preamble or append the procedure. Reports and direct pair exchanges retain their existing contracts.

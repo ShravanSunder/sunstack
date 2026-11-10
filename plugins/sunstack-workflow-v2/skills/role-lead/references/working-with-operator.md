@@ -4,7 +4,9 @@ This is your side of commissioning an Operator and interpreting what it reports.
 
 ## Commission
 
-Give it an exact procedure, or collection criteria, with the observations to return: the target, each step's output, the exit code where there is one, and the stop condition. If you can't write the procedure without a judgment call between two steps, the job belongs to another role.
+Select existing governing assignment/plan/procedure files that establish the inputs below, then send only role/files for this role. The recipient reads its own preamble and resolves the rich context; these input obligations do not require an inline packet or a newly recreated packet file. Continuations and corrections use the same two-field content with current governing correction sources.
+
+Reference the exact procedure or collection criteria and required observations in its governing files: the target, each step's output, the exit code where there is one, and the stop condition. If you can't write the procedure without a judgment call between two steps, the job belongs to another role.
 
 Leave out every question that needs interpretation, such as whether the PR is ready or whether the feature works. Ask for what it saw and decide the meaning yourself.
 
