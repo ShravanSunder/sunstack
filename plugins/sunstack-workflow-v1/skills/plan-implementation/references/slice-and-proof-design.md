@@ -1,6 +1,6 @@
 # Divide the Work and Attach Proof
 
-Use this reference to turn the obligations admitted at the planning start check into a proportional sequence of slices, each with proof that can observe its obligation. Return the slice graph, each slice's reads, the obligation/proof map with the slice and command that earn each admitted Verification Design row and each focused proof's oracle source, the project proof-layer source or `project silent`, the property-versus-example choice where one rule covers the cases, a keep/repair/remove disposition for each overlapping existing test, necessary dependency edges, integration gates, false-green risks, and any split or replan stop.
+Use this reference to turn the obligations admitted at the planning start check into a proportional sequence of slices, each with proof that can observe its obligation. Return the slice graph, each slice's reads, the obligation/proof map with the slice and command that earn each Verification Design row and each focused proof's oracle source, the project proof-layer source or `project silent`, the property-versus-example choice where one rule covers the cases, a keep/repair/remove disposition for each overlapping existing test, necessary dependency edges, integration gates, false-green risks, and any split or replan stop.
 
 ## Start From Obligations
 
@@ -11,7 +11,7 @@ obligation identity | governing artifact | current owner/path | change needed |
 Verification Design row or observable proof | risk or unknown
 ```
 
-Every admitted normative requirement, specified behavior, program-design boundary, migration/cutover obligation, and required proof seam appears exactly once. An unscoped plan admits the whole design. A plan scoped to one deliverable's needs admits those needs' obligations and Verification Design rows and those of the work they wait on; a shared dependency or cross-cutting obligation they rely on is admitted with its required proof, and an obligation that serves only later deliverables stays with them, listed in the plan as left for later, never dropped. A row that cannot name its owner, change, or observation is a design gap. Return it to its design owner with the missing field. An `R` obligation takes its observation from its requirement's Verification Design row, and an `R` that no row decides or names as unverified is a `verification-design-gap`. A structural or cutover obligation, and every obligation of a mechanics-only improvement, gets the observable proof the plan chooses.
+Every normative requirement, specified behavior, program-design boundary, migration/cutover obligation, and required proof seam appears exactly once. A row that cannot name its owner, change, or observation is a design gap. Return it to its design owner with the missing field. An `R` obligation takes its observation from its requirement's Verification Design row, and an `R` that no row decides or names as unverified is a `verification-design-gap`. A structural or cutover obligation, and every obligation of a mechanics-only improvement, gets the observable proof the plan chooses.
 
 ## Choose Small Changes That Can Be Proven
 
@@ -42,7 +42,7 @@ Place an integration gate at the earliest slice where separately changed compone
 
 ## Match Proof to Each Change
 
-The Verification Design already chose how each requirement is shown to hold. Each row gives its "proven by" line, target, journey or reused test, and passing condition. Put each admitted row in the slice where its passing condition can first be met. Then schedule when it runs and with which command. Do not re-choose its observation, boundary, target, or passing condition. A row's `needed:` journey gets a build step before the slice that observes through it. A slice that can't earn its row as written goes back with `verification-design-gap`, the row and the evidence. That happens when no command reaches the target, or when the slice's change would let a wrong build pass the condition.
+The Verification Design already chose how each requirement is shown to hold. Each row gives its "proven by" line, target, journey or reused test, and passing condition. Put each row in the slice where its passing condition can first be met. Then schedule when it runs and with which command. Do not re-choose its observation, boundary, target, or passing condition. A row's `needed:` journey gets a build step before the slice that observes through it. A slice that can't earn its row as written goes back with `verification-design-gap`, the row and the evidence. That happens when no command reaches the target, or when the slice's change would let a wrong build pass the condition.
 
 Place a batch boundary only where the plan schedules a required independent observation before dependent work starts: put it after the slice that observation covers, and start the dependent slice after the observation reports. There the Implementer declares the paired Verifier's target under the target rule in `implementer-verifier-pairing.md`, which its role loads. Local proof and integration gates the executor runs keep their timing and declare no Verifier target. With no required independent observation inside an assignment, the whole assignment is one batch. One PR can hold several batches.
 
@@ -84,4 +84,4 @@ Split or replan when:
 
 Return the exact gap and its owner. Add no speculative task to cover it.
 
-Complete when every ledger obligation sits in exactly one slice, every slice lists its reads, every admitted Verification Design row is scheduled in the slice that earns it, a scoped plan names each row it leaves for a later deliverable, every slice's focused proof names its wrong behavior, layer, and oracle source, every existing test that covers a slice's write surfaces has a disposition and every `remove` its proof, and each split or replan condition you hit is returned as a gap with its owner.
+Complete when every ledger obligation sits in exactly one slice, every slice lists its reads, every Verification Design row is scheduled in the slice that earns it, every slice's focused proof names its wrong behavior, layer, and oracle source, every existing test that covers a slice's write surfaces has a disposition and every `remove` its proof, and each split or replan condition you hit is returned as a gap with its owner.

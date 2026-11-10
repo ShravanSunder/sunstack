@@ -41,7 +41,7 @@
         "authentication": "ON_USE"
       },
       "category": "Coding",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation."
     },
     {
@@ -55,7 +55,7 @@
         "authentication": "ON_USE"
       },
       "category": "Coding",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction."
     },
     {

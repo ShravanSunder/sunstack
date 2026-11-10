@@ -8,7 +8,7 @@ Return: the arrangement (what opens the page, where each form sits, which width 
 
 ## Open with the answer, then one slice
 
-The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Everything else is one action away. Good: two sentences, then the capability tree with each capability linking to its section. On an engineering design-set page, as `SKILL.md` step 1 names it, `engineering-documents.md`'s pages govern instead: the home page opens on what needs the owner and links to the documents, and a document page opens on its browser. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
+The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Everything else is one action away. Good: two sentences, then the capability tree with each capability linking to its section. On an HTML-source engineering design-set page, as `SKILL.md` step 1 names it, `engineering-documents.md`'s pages govern instead: the home page opens on what needs the owner and links to the documents, and a document page opens on its browser. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
 
 ## Reading text beside Canvas views
 
@@ -22,7 +22,7 @@ Use layers when several optional views may be visible together, such as independ
 
 ## Pages and Walkthroughs
 
-Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For an engineering design set, `engineering-documents.md` decides which cross-document questions get a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates a threshold a record owns.
+Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For an HTML-source engineering design set, `engineering-documents.md` decides which cross-document questions get a Walkthrough. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates a threshold a record owns.
 
 ## Related captures: items, variations and filters
 

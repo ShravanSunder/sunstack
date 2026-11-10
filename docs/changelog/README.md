@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-10 Restore the v1 Markdown design baseline](2026-11-10-restore-v1-markdown-design.md)
+
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)
 
 - [2026-11-09 Workflow v2 starting draft](2026-11-09-workflow-v2-draft.md)

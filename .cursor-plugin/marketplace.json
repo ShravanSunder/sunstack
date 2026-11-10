@@ -24,13 +24,13 @@
       "name": "sunstack-dev",
       "source": "sunstack-dev",
       "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation.",
-      "version": "3.1.0"
+      "version": "3.1.1"
     },
     {
       "name": "sunstack-workflow-v1",
       "source": "sunstack-workflow-v1",
       "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction.",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "skill-authoring",
