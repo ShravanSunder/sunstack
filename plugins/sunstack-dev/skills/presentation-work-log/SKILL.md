@@ -29,11 +29,24 @@ Use four ordinary `h2` headings in this order:
 
 Within those headings, write a connected explanation in the owner's words. Use meaningful `h3` headings and the normal heading-based contents navigation. Explain the concrete problem and its consequences before the procedural detail. The stored summary fields supply evidence and meaning, not a repeated HTML row template.
 
+Before composing each substantial topic, identify what the owner needs to understand or judge and the relationship the log actually supports. Give `presentation-html` that view requirement, rather than selecting a component for decoration:
+
+| Work-log topic | What the view must make understandable |
+| --- | --- |
+| An open owner choice | The alternatives, their gains and costs, and what waits on the choice, compared on the same terms before its answer control; a settled decision shows its outcome and supported rationale without asking again |
+| Progress across connected parts | Dependencies, the blocker and the next meaningful boundary; independent status facts can stay as a short list |
+| A consequential change | Before and after behavior, flow or ownership, including the reason and affected consumer; distinguish proposed behavior from observed behavior |
+| Verification | Each claim beside the actual target, result and remaining gap; show the order when the sequence of checks explains the conclusion |
+
+Choose one primary view for the relationship that matters in a topic, with a short explanation beside it. For a complex relationship, show the overview and then the relevant slice instead of one crowded drawing. If the evidence does not establish a connection or before-state, mark it unknown rather than inventing it. A simple fact needs no diagram.
+
 Keep each summary's stable `story_<key>` destination and each cited row's `entry-<id>` destination; link to an item instead of repeating its body elsewhere on the page.
 
 Make relationships visible with supported diagrams when they explain the flow, ownership, state or failure more clearly than paragraphs; use comparisons, traces, code and evidence disclosures when they help the reader inspect the work. Keep the governing failure rules and unknowns visible, and put optional depth one action away. Do not require Story/section cards, Happened / For you / Next rows, section counters, or a separate Map. Do not replace those wrappers with a different repeated card layout.
 
 MUST load `presentation-html` and return the requested page composed with its view chooser, matching component guide, contents navigation, delivery method and static checker result. Keep explanatory views next to their subject; a view replaces the prose that merely reconstructs the same relationship. A passing checker establishes markup, not understanding or runtime behavior.
+
+Before returning the page, check that the owner can see the important change, dependency, tradeoff and proof gap without reconstructing those relationships from paragraphs. Repair the missing or overloaded view; adding component counts or decorative cards does not satisfy this check.
 
 ## 4. Return the requested snapshot
 
