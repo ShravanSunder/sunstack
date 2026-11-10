@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-10 HTML views follow the reader's task](2026-11-10-presentation-html-view-selection.md)
+
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)
 
 - [2026-11-09 Workflow v2 starting draft](2026-11-09-workflow-v2-draft.md)
