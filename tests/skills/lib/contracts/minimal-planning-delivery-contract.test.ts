@@ -20,24 +20,17 @@ const acceptedBoundaryText =
   "A correction is inside the accepted boundary when it changes no design meaning, scope, contract, or owner decision. Only those corrections get further review rounds automatically.";
 
 describe("goal delivery intent hard cutover", () => {
-  test("writes a design-set plan as a page, optionally scoped to one deliverable", () => {
+  test("keeps v1 design-set plans as authoritative Markdown", () => {
     const contract = readPluginFile("shared-references/canonical-implementation-plan.md");
     const planner = readPluginFile("skills/plan-implementation/SKILL.md");
 
-    expect(contract).toContain(
-      "plan path: <sole document identity: the plan's page for a plan that lives with a design set, its Markdown file otherwise>",
-    );
-    expect(contract).toContain("`docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.html`");
-    expect(contract).not.toContain("`docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.md`");
-    expect(contract).toContain("A superseding plan sits beside the plan it replaces, in the same form.");
-
-    expect(planner).toContain(
-      "IF the caller supplies one deliverable's needs from a design set's delivery cut, scope the plan to those needs",
-    );
-    expect(planner).toContain(
-      "link it with the set's home page and, when scoped, its deliverable page, both ways",
-    );
+    expect(contract).toContain("plan path: <sole Markdown document identity>");
+    expect(contract).toContain("`docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.md`");
+    expect(contract).not.toContain("`docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.html`");
+    expect(contract).toContain("A superseding plan sits beside the plan it replaces.");
     expect(planner).toContain("Write one plan at the home the canonical reference's Plan Home names");
+    expect(planner).not.toContain("IF the caller supplies one deliverable's needs from a design set's delivery cut");
+    expect(planner).not.toContain("link it with the set's home page and, when scoped, its deliverable page, both ways");
   });
 
   test("uses one ready canonical plan with governing basis and delivery context", () => {
