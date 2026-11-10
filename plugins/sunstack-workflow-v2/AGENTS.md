@@ -6,4 +6,5 @@ Preserve v1 unchanged. Make v2 decisions explicit before rewriting the behavior 
 Do not expose `drafts/` through plugin metadata or marketplace registration as though the design were complete.
 
 Current owner decisions: the roles are Lead, Checker (explicit Verifier/Reviewer duties), Implementer and Operator; the Lead does not make implementation changes, the Implementer owns code and repairs; Luna is Operator-only; management keeps level/horizon, direction and span as its three classifications. Lead code inspection and acceptance do not transfer to the Implementer.
+V1 is the management baseline. Preserve its model/effort catalog, selection conditions and unselected behavior; change only what the owner selects. The earlier broad condensation is superseded. Model policy lives in `drafts/skills/practices-manage-agents/SKILL.md`; companion v1 schemas/references remain visibly inherited until their selected role adaptation is designed.
 Do not wake Claude agents for this work; the owner explicitly said his Claude tokens are exhausted. Other details remain unsettled and must not be manufactured from the copied v1 text.

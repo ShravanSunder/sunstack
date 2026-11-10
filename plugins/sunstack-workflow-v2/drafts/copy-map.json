@@ -28,5 +28,11 @@
     "phase-return-tokens.md",
     "review-proof-command-execution.md"
   ],
-  "edits": "Folder and frontmatter names, display/default-prompt names and relative paths between the four copied skills only; legacy body/routing rules retained for explicit rewrite."
+  "edits": "Folder and frontmatter names, display/default-prompt names and relative paths between the four copied skills only; legacy body/routing rules retained for explicit rewrite.",
+  "managementSource": {
+    "source": "plugins/sunstack-workflow-v1/skills/practices-manage-agents",
+    "draft": "plugins/sunstack-workflow-v2/drafts/skills/practices-manage-agents",
+    "policy": "v1 preserved by default; selective role/model/implementation-boundary edits in SKILL.md only; all 16 companion files unchanged",
+    "sourceCommit": "133a3ace8b91611b65bf22f849d39ddf7cd6f3ac"
+  }
 }

@@ -13,7 +13,7 @@ The role names, Luna restriction and Lead/Implementer implementation boundary ar
 ## Models
 
 Luna is Operator-only. It is not Lead, Checker or Implementer in v2.
-For the other roles, the starting reference remains Sol or Opus for judgment, with the Lead's model chosen by the owner; availability, exact effort and a small selection table remain to be settled. Do not wake Opus while the owner's Claude-token restriction is in force.
+The concrete model, effort, tier, authorization and direction/span rules remain in the [retained v1 model catalog](skills/practices-manage-agents/SKILL.md#model-catalog), adapted only for the four-role selection and Luna restriction. This includes Grok and owner-authorized Astra for Checker review; do not reduce the map to “Sol or Opus.” The Lead keeps the owner's chosen model. Do not wake Opus while the owner's Claude-token restriction is in force.
 Separate context and access to original intent matter for checking; another model lineage does not by itself make the question independent.
 
-Proposed session arrangement: retain a Verifier through delivery and use a separate fresh Reviewer at meaningful boundaries, retaining it through corrections. The two responsibilities are explicit, but that session/lifecycle choice remains proposed. No mandatory paired-session startup or extra review of the Reviewer is selected. An explicit responsibility does not require a model to run continuously.
+V1 paired Implementer/verification commissioning and review independence remain until explicitly changed. Checker has both Verifier and Reviewer duties; whether they use separate sessions beyond the preserved author-independence rule remains open. The roles' new charters and legacy packet mapping are not implemented; the old schema identifiers are retained source, not additional v2 roles.
