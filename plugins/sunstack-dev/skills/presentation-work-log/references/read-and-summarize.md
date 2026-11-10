@@ -32,6 +32,7 @@ These illustrative source notes teach composition, not facts or commands to copy
 
 - An implementer reports that `pytest tests/test_retries.py` exited `1`: the fixture reached three attempts at `assert attempts == 2`.
 - A decision report says, "Keep the existing two-attempt contract; correct the fixture configuration." Its authority is the existing contract, not a new owner choice.
+- The implementer then reports changing the fixture configuration from three attempts to the contract's two attempts.
 - A later implementer report says the same command passed five fixture cases, exit `0`, and explicitly leaves the real service untested.
 
 One episode can explain those notes in three meaningful steps:
