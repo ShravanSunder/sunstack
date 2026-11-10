@@ -1,67 +1,69 @@
-# Compose engineering design pages
+# Compose engineering design documents
 
-Use this recipe to write a page of an engineering design set: a document page, its home page, a deliverable page or a plan page. The page is the design: each fact's text lives once, in a section or a record body on its document's page, and the released browsers show it by need. This recipe decides what each page holds and how it reads.
+An engineering page explains its subject in ordinary document flow. Requirements, Specification, Program Design and Verification Design retain their separate meanings; each owns its complete text and views. HTML is the source for new free-form design sets. The author chooses the order that makes the design understandable, using the documented Demistify components where a view helps.
 
-MUST load `../../../shared-references/design-documents.md` and return the four document questions and their owners, the page path of each document in the set's folder, and the records and sections this page's document owns, with what each record names. Keep each document's distinct meaning and current state. Do not combine Requirements with Specification, and do not present a planned Verification Design as an observed result.
+IF the caller is presenting a `sunstack-workflow-v1` Markdown-source design, including a newly authored v1 set, load `../SKILL.md` and return its legacy-source route's authoritative Markdown identities, HTML reading view and delivery/check result. Stop this recipe there; the remaining new HTML-source composition contract does not change v1's source authority.
 
-IF the page holds a record block, a marked part or a browser, load the guide's prepared-browsers reference at the page's binding (`references/design-documents.md` beside the guide, the row step 3's guide routes a prepared browser to) and return the owner pages, the record-to-body and part mapping, the public reader markup, and the preparation and check commands it documents. That reference owns every record's fields, the per-kind parts table and the reader markup; write them as it shows and never restate them in the design.
+MUST load `../../../shared-references/design-documents.md` and return the four document identities, the semantic owner of this page's facts, and its actual reading and trace links. A v1 Markdown-source human view takes the legacy route in the main skill instead; it does not become a new HTML-source design.
 
-## The set's pages
+MUST load `engineering-document-examples.md` and return the examples relevant to this page's reader questions, the forms selected, and the placement of explanation, governing conditions and optional depth. Examples teach composition; the matching Demistify guide remains the authority for markup and component data.
 
-A set is one folder, as `design-documents.md` lays it out. Each page carries the guide's native Pages links to the pages that exist, and no link to a page not yet written.
+IF authoring a new v2 HTML design collection using shared navigation, load the matching bound Demistify guide's `references/navigation.md` and `references/tours.md` before authoring, and return the collection descriptor and page identities, actual target identities used by the page, and the actual check and delivery result. The guide owns the JSON schema and URI rules; do not copy its field definitions into this recipe or another skill. If a selected component requires its own prepared data, retain the conditional call-stack preparation below.
 
-| Page | Holds | States |
+## Write the explanation first
+
+Open the page with a short answer-first account of who needs what outcome; follow it with the actual explanation, relevant picture and stable links. Treat “what question does this answer?” as a drafting check, not a printed label in place of the answer. Open each substantial section with its answer in the reader's words. Put its diagram or comparison beside that explanation. Keep the conditions, invariants, failure obligations, risks and unknowns a reader must act on visible. Optional evidence and derivations may fold under a label that predicts their contents.
+
+A need or rule can be a paragraph, a headed section or a table row at a stable ID. Preserve its identity and authorizing links without forcing every need into the same visual container. Requirements groups follow the user's capabilities when that helps; Program Design may instead follow component ownership or lifecycle, and Verification may follow observable outcomes. The four documents need not have matching headings.
+
+When Requirements covers several capabilities, name each group in normal reading order and state in a sentence what need it serves. Put each need once in its home group. A small table works when readers compare the same attributes; a headed need section works when its rationale, limit or failure context needs room. Keep each group's stable destination and links to actual need text so a reader arriving from navigation retains the surrounding purpose. For one concern, explain it directly without adding a decorative group hierarchy. The story-count or work-slot pattern of another component does not set a requirements count.
+
+The shared Map expresses relationships among these homes. Target a group at its visible group context and a need at its own `U` text. A related rule, design passage or proof destination may appear as a child or ordinary link when it helps the reader follow that need; the need entry still lands on its own text. Keep stable IDs as addresses and compact trace labels, not as a prescribed reading order or a mechanical `U → R → V` substitute for the human explanation. Do not force the same four downstream stages under every need.
+
+Shared source, authority or priority facts can be stated once for the needs they actually cover, with per-need links or an explicit local override where they differ. Preserve each phase's required fields, but do not repeat identical source and assignment boilerplate in every need body. A Why sentence explains a consequence, pain or tradeoff; a heading paraphrase adds no Why. If the source does not establish the reason, say what evidence is missing instead of inventing it.
+
+For newly authored free-form designs, use ordinary HTML and the useful general components. Do not use `ex-requirements`, its stage/related-document projections, or a page-written replacement application to arrange the four documents. Those viewers do not decide how to explain a design. Carried legacy markup follows the main skill's preservation rule; this recipe does not silently migrate an existing collection or alter a selected component's public contract.
+
+## Select a view for the question
+
+| Reader asks | Useful form | Keep with it |
 | --- | --- | --- |
-| home (`index.html`) | what needs the owner first (an open confirmation or decision), then a link to each document page, the delivery cut when the work has deliverables, a link to each deliverable and plan page, and a line for each idea several capabilities share, linking its owning section and its picture | no design fact; no record block |
-| a document page (`requirements.html`, `specification.html`, `program-design.html`, `verification.html`) | its title and at most one framing line that states no rule, the requirement browser, its one record block with each record's body in a same-page container, and the sections for its facts with no record kind | its document's records and sections, nothing else |
-| the call-path page (`execution.html`) | its framing line, the call-stack browser and its record block of stacks and frames | Program Design's call paths |
-| a deliverable page | its needs, each linked on its owning document page with the need's ID in the link text, such as "U3 on the Requirements page", and a link to its plan page | no fact of its own; a fact only it needs goes into the owning overall document |
-| a plan page (in `plans/`) | the plan `canonical-implementation-plan.md` defines, with its delivery map and plan change view from `views.md`, and links to its deliverable page and the home page | the plan, never a design fact |
+| What do I need and why? | prose, a capability Tree or a supplied journey picture | affected user, outcome, limits and source |
+| What are the things and what must hold? | entity map, rule prose or a comparison table | identity, cardinality, invariants, negative cases |
+| Who owns what? | component tree, Board or ownership diagram | responsibilities and boundaries |
+| What changes state, and what cannot happen? | state diagram or state table | triggers, guards and illegal transitions |
+| What happens along this user or system journey? | sequence, state or flow diagram | why the journey matters, important transitions, outcomes and failure/recovery behavior |
+| What calls what? | source-derived sequence/call view, or the retained call-stack component | inputs, boundary shapes, effects and error returns |
+| How will we know? | plain proof explanation, a meaningful card or coverage table | reference, target, observation, pass condition and limit |
+| What must I decide? | explained alternatives, `ex-compare` when topics correspond, then `ex-choice` | recommendation, tradeoffs, payer and consequence of waiting |
+| What is still open? | an explicit open-question section with ordinary prose and Comments | exact unknown, decision/evidence owner and affected work |
 
-## Write a document page
+The owning design phase decides which views are required and what they mean. This recipe chooses their presentation; the guide supplies the actual API. One view answers one question, and one component groups one thing the reader names. A decorative card around every paragraph adds no explanation.
 
-- **Records.** One record per row the document owns, its ID the row's identity (`U1`, `R9`), naming only what it serves, as `design-documents.md`'s Records and Sections table says. The summary is the compact line the browser lists; the body carries the whole of the row: definitions, conditions, alternatives, error cases, exact interfaces and thresholds. Mark only the parts the guide's table allows for the kind, and only around content that is truly that part: a part with nothing true to put in it is omitted, never filled.
-- **Sections.** A fact with no record kind (the capability list with each purpose, the entities, the binding and trace tables, a shared observation route) is ordinary HTML at a stable ID beside the browser. A section links to the records it concerns by page and ID and restates none of them.
-- **Views.** A view lives in the section or record body that owns its facts, in the form `views.md` gives it: the entity map in the entities section, a design part's sketch in its body, a need's pictures in its body where the user's experience matters.
-- **Islands.** A section or body uses an inline Markdown island where Markdown carries its text best, in the inline form the guide's content reference documents. An island holds one section's or body's text, never a whole document.
-- **Checks.** A Verification Design check carries no result. Write no `observation` record at design time; the browser shows the check as not run until an observed result exists.
+## Choices, discussion and decisions
 
-Before the first need exists, the Requirements page is ordinary HTML: the capability list section and the owner's confirmation choice, with no browser and no record block. It passes the static check alone; preparation starts with the first need.
+Explain the problem before offering options: what we know, what is uncertain, the credible alternatives and what each costs. Use a native choice only when the reader needs to answer a bounded question; a discussion asking for qualifications uses ordinary prose and Comments. Keep choices near the affected explanation, or on a linked decision page when the comparison deserves room. Link the question from the set's home so the owner can find it.
 
-## Ask the owner on the page
+The recommended option is a recommendation, never a preselected answer or a claimed owner decision. An unanswered question stays open. Comments and selected answers are local reader state until explicitly handed back; do not claim that selecting an option notified an agent or confirmed the design. After an actual owner answer, reconcile the owning document and keep the unresolved remainder explicit. Do not invent a response store or duplicate an entire decision history in the design.
 
-Where the owner must confirm or decide while a design is written (the capability list, the goal boundary, an open design choice), the page asks it as a native choice the owner answers on the page, in the form `options-and-decisions.md` gives, and the answer reaches the Lead through Comments' Copy, as `practices-show-me-your-work`'s owner page already does for decisions. Put the Lead's recommendation in that option's summary, never as a preselected answer. On the Requirements page the confirmation sits beside the capability list; elsewhere it sits on the home page, under what needs the owner, linking the section it concerns.
+## Pages, links and reading paths
 
-## Read in the owner's order
+The set's home page links the four documents that exist and names any current owner decision. It can point to a shared concept's owning explanation and picture. A document page holds its design facts; a navigation page links those homes. Never manufacture a page or result for a phase not yet written.
 
-Each document page shows its sections in the order the owner asks about them, top to bottom, keeping only the views whose predicates fired in the owning document:
+Use ordinary links and stable section IDs alongside the page outline. For a new v2 HTML collection, use one shared `navigation.json` for Pages, the semantic Map and complete Walkthroughs. Load the matching `navigation.md` and `tours.md` first; follow their exact contract instead of recreating schema details here. Every peer uses the shared descriptor. Its page paths resolve beside that JSON file, and its page and target references lead only to authored pages and real content IDs. A Map group targets its visible explanatory context; a need entry targets the need itself. Use the bound guide's contract to place a related rule, design passage or proof target beneath a need when relevant, while keeping the need's own target on its actual `U` text. The worked fragment in `engineering-document-examples.md` shows this choice without redefining the schema or imposing the same child tree on every need. Keep shared rules at one normative HTML home and link to it from each relevant destination. Do not combine shared `src` navigation with competing page-local Pages, Map or Walkthrough declarations.
 
-| The owner asks | View | Lives in |
-| --- | --- | --- |
-| What are we building, and for whom? | the capability list, then the needs in the browser, filtered by capability | the Requirements page |
-| What will a person see and do? | journey map, with pictures or a Gallery Journey when supplied | a Specification section |
-| What must always hold, and what can go wrong? | context diagram, with the failure cases named in the section title | a Specification section |
-| What are the things the system keeps track of? | entity map | the Specification's entities section |
-| Who does what, and where are the boundaries? | component tree, trust-boundary view | Program Design sections or design-part bodies |
-| How does each thing move through its states, and what is never allowed? | state machine or table, with its guards and illegal paths | the owning design part's body |
-| What happens when a request comes in? | the call-stack browser over the source-derived stacks | the call-path page |
-| How will we know it works, and what stays unverified? | each check's body in the browser's Verification view | the Verification page |
-| How will it be built, in what order, in which PRs? | delivery map | the plan page |
-| What changed since I last looked? | plan change view | the plan page |
-| What do you need from me? | the decision brief, with today's model drawn before the options | the home page, or the work thread |
+The HTML remains the source of design facts and stable IDs. The JSON is only navigation metadata and does not require a legacy need/rule/check corpus. An ordinary Tree can explain hierarchy inside content but cannot replace the shared semantic Map. A Walkthrough is a question-led reading route across existing explanations; a user or system journey is a behavioral model and still needs its own purpose and transitions explained beside the diagram. No route or page is invented to fill a gap in a partially authored set.
 
-In what the page composes, failure cases and their thresholds stay in view; a disclosure holds only the rationale or evidence about them, and its title names what it holds and the cases it explains ("Evidence for the 250 ms budget", never "More"). Never stack whole documents in one scroll.
+Shared JSON navigation is an unreleased source-preview contract until the matching binding and CLI are published. Candidate previews use the matching local guide and assets; if that matching preview is unavailable, name the exact gap and do not author from an invented API. The shared source fetch requires HTTP; do not substitute direct-file, standalone, or offline behavior. Preserve the v1 Markdown-source route in the main skill. When a material status changes, reconcile the owning passage, any dependent summary or diagram, the route metadata and the planned proof without turning navigation into approval state.
 
-## Walkthroughs
+A Walkthrough earns its place for a named question whose answer crosses documents or needs an order the page does not give. Its stops reach the actual explanation, diagram, choice or proof section. Frame what to inspect in narration; keep governing facts in the destination. A path through one page's headings in their existing order is its outline. Preserve ordinary navigation alongside every guided path. For a new collection, author the complete route only in the shared descriptor so every page can offer the same path; a source-only preview does not prove released runtime support.
 
-Before you add a Walkthrough, name the question it answers and check that the answer crosses documents or needs an order the pages don't give ([a walkthrough earns its place where the page order doesn't answer the question](../../principle-write-for-the-reader/SKILL.md)). Its stops are pages and sections at stable IDs; a need is reached on its owning page. A plan gets one per PR, whose stops are the reads the plan lists for that PR's slices, in plan order, and, for a plan across repositories, one per point where one repository waits on another. A stop carries at most one line of narration that frames it and states no rule. Good: "Routing, end to end" stopping at the Requirements page, the routing section of the Specification, the call-path page and the Verification page. Bad: narration that restates a threshold a record owns.
+## Call stacks and component preparation
 
-## When the set is incomplete
+Keep the call-stack component where it explains an actual source-derived path. IF a page selects that component, load the matching guide's `references/design-documents.md` and return the actual owner pages, need/stack/frame data, prepared collection, supported reader markup and preparation/check results it requires. Its current need metadata is data for the selected component; it does not require a requirements viewer or specification/check records for the rest of the design. Do not fabricate frames or a need attribution merely to fill a field.
 
-- **A document not yet written.** Leave its page out, with no link to it; the browser shows it as not yet written, and no record or page is invented to fill it.
-- **Extra documents** beyond the four, such as an alternatives study. Give each its own sibling page with no record block, linked from the home page, and do not fold it into one of the four.
-- **A design set written before pages.** It stays readable where it is, in Markdown; this recipe does not migrate it. A page over it is an ordinary page that includes its files, under the rendering reference's external-include branch.
+Honor the selected binding's limits, including how many readers it supports and how addresses work; retaining the component is not permission to invent independent embed attributes. Without a supplied source path, explain the proposed sequence or state model with the corresponding ordinary view and label it proposed.
 
-Load the matching component references through `demistify.md`. The public guide owns all markup and visual tokens.
+A free-form page without component records needs no design-record preparation. When a selected component requires data, prepare that data through the documented route; do not impose its schema on unrelated paragraphs or documents. Read authored sections and required component inputs; let preparation tools process the full collection without repeatedly loading generated carriers into model context. After editing, check actual links/IDs and run the matching static checker; re-index a shared collection when its headings, paths or Walkthroughs change. Return the real descriptor, page and target identities with the result, and say whether the check and delivery used source preview or published support. The HTML owns domain facts, actual design decisions and tradeoffs, and visible proposals or open questions. Return the author's self-check, lint receipt, reviewer/readiness state, and Chief/agent routing in workflow state or the work account rather than durable design prose. Update any run-status statement from the actual result after preparation; do not carry a stale “not run” note forward. A static pass establishes markup, not human comprehension or observed product behavior.
 
-Completion: each page holds only what its row above names; every record names only what it serves, with its body complete and only true parts marked; every fact with no record kind is a section at a stable ID; each view sits in its owning section or body, in the owner's order; each owner confirmation is a choice on the page; no page restates a record, links a page not yet written or writes a result; and, after the last edit, the static check passes, and so does the set's preparation once its first need exists.
+Completion: each document has a distinct meaning and complete HTML source; the opening explains its subject; each view answers a reader question beside its owning text; governing conditions and unknowns are visible; choices and observations have honest status; stable links resolve to actual content; component-specific preparation runs only where required; and the final static check passes. No separate Markdown design corpus or specialized design viewer is required.

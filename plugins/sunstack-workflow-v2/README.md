@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-This PR supplies the selected design skills as the starting point for v2. Management is a separate PR stacked above this copy; another agent owns the design-content changes.
+This source contains the selected v2 design skills, preserving the original engineering guidance while teaching useful HTML composition. Management remains a separate workstream.
 
 ## Skill sources
 
@@ -11,7 +11,7 @@ This PR supplies the selected design skills as the starting point for v2. Manage
 | verification-design | [design-verification](skills/design-verification/SKILL.md) |
 | spec-program-review | [design-review](skills/design-review/SKILL.md) |
 
-Copied from frozen v1 on main `133a3ace8b91611b65bf22f849d39ddf7cd6f3ac`. This layer changes names, source paths and dependency destinations; it does not select a new design-document layout.
+The engineering baseline is the four design phases from before PR #205, at `b37419ca08dcde11bb8c72b810a4e91afec345f9`, with the v2 route names and installed-plugin dependency repairs retained. V2 changes their artifact presentation to complete free-form HTML through `sunstack-dev:presentation-html`; v1 separately keeps the historical Markdown contract.
 
 ## Dependency ownership
 
@@ -21,4 +21,4 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 
 ## Scope
 
-The management/role changes belong to the next PR in the stack. Copied design source still uses the existing stage meanings pending its separately assigned redesign. This source-copy PR does not register, install or activate v2, claim runtime readiness, or change the maintained base or frozen v1.
+The management/role changes belong to the next PR in the stack. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject; the specialized requirements/stage/related-document viewers are excluded from new v2 authoring. Worked examples live with the maintained presentation recipe, whose public guide owns syntax. This source change does not register, install or activate v2, change role/management behavior or modify the v1 archive.

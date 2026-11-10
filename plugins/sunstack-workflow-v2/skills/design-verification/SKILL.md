@@ -38,7 +38,7 @@ Several rows may share one observation. Describe a shared observation once, and 
 
 ### 1. Take in the design being proven
 
-MUST load `sunstack-dev/shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the check records and sections the Verification page owns, with what each record names. When the caller supplies a `new artifact home`, create a new Verification Design as its page in the set's folder beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
+MUST load `sunstack-dev/shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the HTML-source layout, stable section targets and entry/navigation duty this run follows. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
 
 A row is stale when, since its review, any of these changed:
 
@@ -89,21 +89,14 @@ Two readers need views over the rows:
 
 | View | Owner's question | Use when | Must expose |
 | --- | --- | --- | --- |
-| "proven by" cards, for the owner | How will we know it works, and what stays unverified? | every Verification Design | per requirement: the requirement in the owner's words, its "proven by" line, and what stays unverified |
+| "proven by" explanation, for the owner | How will we know it works, and what stays unverified? | every Verification Design | per requirement: the requirement in the owner's words, its "proven by" line, and what stays unverified |
 | coverage rows, for review, the plan and the Verifier | none: agent detail, one action away on the owner's page | every Verification Design | per requirement: `U`, its `R` obligations, seam, observation, target with its journey or reused test, passing condition and unverified; each shared observation visible across the rows it serves |
 
 MUST load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` with both views, their predicates and their fields, and return the document medium and any page proof, and each view's selected medium, semantic-preservation result, visual-check result and exact gap.
 
-In a file-backed set, write the Verification Design as its page, using `sunstack-dev:presentation-html` to compose it from the released guide, and never as a Markdown file:
+In a file-backed set, use `sunstack-dev:presentation-html` to author the complete Verification Design as HTML. Explain each requirement's planned proof in prose, a meaningful card or a table as the reader question warrants; keep reference, target, observation, passing condition and unverified limits inspectable. Describe a shared observation once and link the rows it serves. Use the recipe's proof and open-question examples; no verification stage viewer, mandatory scenario/observation records or separate Markdown source. An actual component's preparation is conditional on selecting it. Update `index.html` and actual requirement/design links. For a new v2 HTML set, follow the shared navigation preflight in the composition recipe and return actual descriptor/page/target identities and check/delivery result; the guide owns its schema. Then run the matching static check.
 
-- **Checks.** One check record per row, naming the obligations (`R`) it proves. Its body holds the "proven by" line, the passing condition, the reference, the target with its journey or reused test, and what stays unverified, and marks the parts the guide's per-kind parts table names for its kind, such as the procedure, only where that content exists.
-- **Shared observations.** A planned observation that several rows share is a section at a stable ID, described once, which each check links to and says which of its obligations it decides.
-- **No results.** A check written here carries no result. Write no `observation` record, the released kind for an observed Pass, Fail or Partial result: the browser shows each check as not run until a result exists.
-- **Upstream pages stay as they are.** Write no record on another document's page, and add no back link there.
-
-After the last edit, prepare the set and run the static check, as the rendering reference's Freshness on Edit says, and return both results.
-
-Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set each check record names only the obligations it proves, no result is written, and preparation and the static check pass.
+Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set its HTML source, stable section links and `index.html` entry are current.
 
 ### 6. Re-read it as the Verifier would
 

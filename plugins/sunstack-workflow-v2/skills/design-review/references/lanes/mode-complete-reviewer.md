@@ -24,7 +24,7 @@ four-document-design -> ../reviewing-four-document-design.md
 
 After both references are loaded, read the complete target set before substantive findings. Reconstruct the artifact model without preserving author section order. Apply the common method and every material dimension in the selected mode as one combined inspection, including its compact human-reader reconstruction and section/view-level deletion pass. Then attack the highest-risk crux and run the divergent-implementer and pretend-planner probes.
 
-For four-document-design mode, independently repeat load-bearing specification, program-design, and verification-design checks. Prior local review or author self-check is evidence to inspect, never a substitute.
+For four-document-design mode, independently repeat load-bearing specification, design-program, and design-verification checks. Prior local review or author self-check is evidence to inspect, never a substitute.
 
 Good: every mode dimension is `required`, `satisfied by the existing system`, `not applicable`, or `unresolved`; the recommendation follows the evidence; and a human can restate, challenge, and navigate the model without workflow narration.
 

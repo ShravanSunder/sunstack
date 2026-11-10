@@ -35,6 +35,6 @@ Calibration: report only authority defects that alter outcomes, requirements, co
 
 Overlap boundary: `contract` owns the completeness of an observable contract; this check owns why that contract is required. Report How concerns only as routed gaps.
 
-Return: check result with the authority trace, exact unsupported/conflicting claims, candidate findings, and `spec-design | caller` route.
+Return: check result with the authority trace, exact unsupported/conflicting claims, candidate findings, and `design-specification | caller` route.
 
 Stop when: every selected claim has an authority classification and downstream consequence, or missing authority evidence blocks a truthful judgment.
