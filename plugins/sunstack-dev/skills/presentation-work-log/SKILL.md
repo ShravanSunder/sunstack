@@ -6,48 +6,57 @@ disable-model-invocation: true
 
 # Presentation: Work Log
 
-A work-log page is a requested explanation of recorded work through a stated cutoff. The log owns the facts; the page helps the owner understand the problem, what changed, why it matters, and what remains uncertain. `practices-show-me-your-work` owns ongoing tracking; `presentation-html` owns HTML composition and component selection.
+Explain what the recorded work means: the problem, consequential changes, how understanding developed, what the evidence supports and what remains. The log is evidence, not the page's outline. Group related records into meaningful episodes and give the reader an account they can follow, with evidence where a conclusion needs checking. `practices-show-me-your-work` owns ongoing tracking; `presentation-html` and its matching Demistify guide own supported visual composition and markup.
 
 ## 1. Check the request
 
-Create or update a page only when the owner explicitly requests a work-log HTML page, asks to refresh one, or explicitly invokes this skill. Loading this file from another skill, starting work, reaching a checkpoint, stopping, having an existing page, or finding an owner decision does not authorize a page. A request covers the requested build only; it does not enable automatic refreshes. Without that request, return the log reference or progress in the current conversation and finish without creating or updating HTML.
+Create or update a page only when the owner explicitly requests a work-log HTML page, asks to refresh one, or explicitly invokes this skill. Loading this file from another skill, starting work, reaching a checkpoint, stopping, having an existing page, or finding an owner decision does not authorize a page. One request covers one requested build, not automatic refreshes. Without that request, return the log reference or progress in the current conversation and finish without HTML.
 
-## 2. Read and account for the evidence
+A page request authorizes reading the source and writing the requested reader and its permitted companions; it does not authorize adding, correcting or refreshing the source project's log records. Report source gaps and conflicts instead of rewriting the history to make a page complete.
 
-Take the work's Router project and tag, or its permitted entries files, and the requested page scope. MUST load `references/read-and-summarize.md` and return the cutoff, current summaries, their backing and coverage checks, outstanding owner decisions, and the permitted page destination. Missing or unreadable evidence is a named gap; do not rebuild from memory.
+## 2. Read and understand the record
 
-IF an owner decision remains open in the requested page, load `../../shared-references/owner-decision-brief.md` and return the choice, tradeoffs, recommendation and dependent work to explain beside its answer control. A recommendation or unanswered control never becomes an owner decision.
+Take the work's project/tag or permitted source files and requested scope. MUST load `references/read-and-summarize.md` and return the source cutoff, provenance and closure interpretation, consequential episodes, claim backing, material gaps, internal coverage account and permitted reader/source-companion destinations. Missing evidence is a gap; do not reconstruct it from memory. Existing summaries are leads to check against the original and later records, not a prerequisite or a format the page must reproduce.
 
-## 3. Explain the work
+## 3. Organize the explanation
 
-Use four ordinary `h2` headings in this order:
+Open with the work's purpose and most consequential recorded outcome or unresolved boundary. State the snapshot date/cutoff briefly. Use ordinary `h2` headings in this order, with meaningful `h3` topics inside them and normal heading-based contents:
 
-1. **For you to decide:** open owner choices, their reasons and consequences, with no invented decision when none is recorded.
-2. **What's done / what's next:** each started part, what its result means, the checks and acceptance behind its status, and the next work or blocker.
-3. **What changed and why:** consequential changes, shortcuts and decisions, their reasons and authority; distinguish owner/design calls from agents' own calls.
-4. **What was verified, and what was missed:** checks, results, target/version, exclusions, acceptance, second-hand reports and unresolved misses.
+1. **For you to decide:** actual open owner choices, their consequences and what depends on them; settled decisions are explained without asking again.
+2. **What's done / what's next:** meaningful parts and their dependencies, supported results, blockers and next boundaries.
+3. **What changed and why:** the episodes that changed behavior, ownership, the plan or the team's understanding, with their reasons and authority.
+4. **What was verified, and what was missed:** claims beside their actual targets, reported results, limits, acceptance and unresolved evidence or misses.
 
-Within those headings, write a connected explanation in the owner's words. Use meaningful `h3` headings and the normal heading-based contents navigation. Explain the concrete problem and its consequences before the procedural detail. The stored summary fields supply evidence and meaning, not a repeated HTML row template.
+Use those questions to organize subjects, not one paragraph or component for every stored row. Several records can explain one step; one consequential record may affect several subjects. Show each explanation once and link to it elsewhere. Omit routine repetition from the reading path while preserving its source and checking whether it changes a conclusion.
 
-Before composing each substantial topic, identify what the owner needs to understand or judge and the relationship the log actually supports. Give `presentation-html` that view requirement, rather than selecting a component for decoration:
+IF an open owner choice needs a decision brief, load `../../shared-references/owner-decision-brief.md` and return the current picture, alternatives, tradeoffs, recommendation and dependent work to explain beside its answer control. No response control or recommendation is an owner decision.
 
-| Work-log topic | What the view must make understandable |
-| --- | --- |
-| An open owner choice | The alternatives, their gains and costs, and what waits on the choice, compared on the same terms before its answer control; a settled decision shows its outcome and supported rationale without asking again |
-| Progress across connected parts | Dependencies, the blocker and the next meaningful boundary; independent status facts can stay as a short list |
-| A consequential change | Before and after behavior, flow or ownership, including the reason and affected consumer; distinguish proposed behavior from observed behavior |
-| Verification | Each claim beside the actual target, result and remaining gap; show the order when the sequence of checks explains the conclusion |
+## 4. Show meaningful steps and their evidence
 
-Choose one primary view for the relationship that matters in a topic, with a short explanation beside it. For a complex relationship, show the overview and then the relevant slice instead of one crowded drawing. If the evidence does not establish a connection or before-state, mark it unknown rather than inventing it. A simple fact needs no diagram.
+For an ordered account of how work or understanding changed, request an explanatory **Trace** from `presentation-html`: steps are meaningful actions, findings or decisions, not raw log rows. Each step explains what changed, why it matters to the account, and the supported outcome or remaining question. Distinguish recorded observation, inference, proposal, failure and not-run work. Use the matching guide's Trace composition for the actual markup and attachments.
 
-Keep each summary's stable `story_<key>` destination and each cited row's `entry-<id>` destination; link to an item instead of repeating its body elsewhere on the page.
+Attach the relevant evidence to the step it supports: a concise quoted observation, comparison, exact code/command/diff or result, and a clearly named disclosure or source link for depth. A record's machine timestamp, full identifier or raw JSON envelope is optional source metadata, not its headline. Keep consequential failure conditions, uncertainty and the current blocker visible; open the step needed to understand a stop rather than hiding its meaning behind a generic title.
 
-Make relationships visible with supported diagrams when they explain the flow, ownership, state or failure more clearly than paragraphs; use comparisons, traces, code and evidence disclosures when they help the reader inspect the work. Keep the governing failure rules and unknowns visible, and put optional depth one action away. Do not require Story/section cards, Happened / For you / Next rows, section counters, or a separate Map. Do not replace those wrappers with a different repeated card layout.
+A link to an entire source record alone is not the evidence attachment. Include the shortest decisive supplied excerpt beside the material claim, with its attribution and scope; keep the complete record as optional depth. If the source contains no supporting excerpt or linked artifact, say what is unavailable rather than manufacturing one.
 
-MUST load `presentation-html` and return the requested page composed with its view chooser, matching component guide, contents navigation, delivery method and static checker result. Keep explanatory views next to their subject; a view replaces the prose that merely reconstructs the same relationship. A passing checker establishes markup, not understanding or runtime behavior.
+A sequence of steps cannot represent every relationship. Use supported flow/sequence/state/ownership views where branches, participants, dependencies or lifecycle matter, and comparisons where alternatives share attributes. Give the renderer the source-supported participants, relations and question to explain. Mark absent relationships unknown; do not invent arrows or code to fill a component. A simple fact can remain prose.
 
-Before returning the page, check that the owner can see the important change, dependency, tradeoff and proof gap without reconstructing those relationships from paragraphs. Repair the missing or overloaded view; adding component counts or decorative cards does not satisfy this check.
+## 5. Present technical material as technical material
 
-## 4. Return the requested snapshot
+Classify material by its meaning, not by the fact that the log stored it as a string. Show source, commands, configuration, JSON or diffs that the reader must inspect or copy in the matching guide's code/diff view, or its fenced-block form for a short excerpt. Use a language label when known and inline code for identifiers in prose. Preserve quoted content and distinguish a verbatim excerpt from an explicitly labelled conceptual illustration. Displaying a command is not permission to execute it.
 
-Return the file link, the log cutoff or entries-file positions it shows, and the checker result. State any gap that affects opening or trusting the page. Reading a copied check does not make it first-hand; a page does not accept work, settle an assumption, authorize publication or change the log's history. Continue tracking without refreshing this page until the owner asks again.
+When an important change concerns an interface, command, configuration or code behavior and the supplied record contains relevant technical material, show that supporting excerpt beside its explanation. Preserve selected source fences as rendered code and identifiers as inline code; do not leave them as literal Markdown inside a raw-text dump. This selects useful evidence, not a quota of code blocks; do not invent code when only a narrative report is available.
+
+Do not substitute a code block containing the entire event envelope for an explained finding with relevant technical evidence. Preserve the complete original log as a source companion; bring the particular material that supports the account into its appropriate Trace step or view.
+
+## 6. Build and inspect the requested reader
+
+MUST load `presentation-html` and return the page composed from these view requirements using its matching guide, navigation, source carriers, concrete delivery method and static checker. The guide owns Trace/code syntax and selected component references; read and apply them before authoring the construct.
+
+The primary page is the explanation. Provide one clearly labelled route to the complete source companion and state its cutoff and unavailable linked artifacts. Do not satisfy coverage by displaying every unsummarized row as a long disclosure list, even if the individual rows are folded. Keep selected evidence addressable with original source IDs; a link must reach the evidence it claims to expose, rather than an unrelated headline or unsupported fragment in a raw file.
+
+Before returning, read the page as its owner: can they follow the main change and its reason, see the blocker and proof limits, and inspect the relevant evidence without reading the archive? Check that displayed technical excerpts are actually in the requested technical view, the Trace steps explain the episode, and source links work. A passing markup check alone does not establish those properties. Perform browser inspection only under the HTML skill's authorized conditions.
+
+## 7. Return one snapshot
+
+Return the reader link, source cutoff and checker result, with gaps affecting opening or trusting it. A page does not accept work, resolve assumptions, authorize publication or change original history. Continue tracking without refreshing the page until the owner asks again.
