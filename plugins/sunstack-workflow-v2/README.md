@@ -1,39 +1,24 @@
-# Sunstack Workflow v2 — working draft
+# Sunstack Workflow v2
 
-The owner commissioned this fresh workflow on 2026-11-09. It is not registered in a marketplace or exposed as an active plugin yet.
+This PR supplies the selected design skills as the starting point for v2. Management is a separate PR stacked above this copy; another agent owns the design-content changes.
 
-## Starting material
+## Skill sources
 
-Copied from the frozen v1 archive on merged main `133a3ace8b91611b65bf22f849d39ddf7cd6f3ac`, equivalent to the reviewed migration snapshot `8fc411e5`:
-
-| V1 source | V2 draft name |
+| V1 source | V2 source |
 | --- | --- |
-| spec-design | design-specification |
-| program-design | design-program |
-| verification-design | design-verification |
-| spec-program-review | design-review |
+| spec-design | [design-specification](skills/design-specification/SKILL.md) |
+| program-design | [design-program](skills/design-program/SKILL.md) |
+| verification-design | [design-verification](skills/design-verification/SKILL.md) |
+| spec-program-review | [design-review](skills/design-review/SKILL.md) |
 
-The four complete source trees and their required shared-reference closure are under `drafts/`. `drafts/copy-map.json` records the exact source and permitted rename transformations.
-The copied skill names, display/default-prompt names and relative paths between the four copied skills are updated. The inherited prose, phase routing, role rules and document-layout rules are starting material to rewrite, not adopted v2 behavior.
-Six shared references came across to keep the copied local source dependencies together; their legacy workflow content is likewise not adopted policy.
+Copied from frozen v1 on main `133a3ace8b91611b65bf22f849d39ddf7cd6f3ac`. This layer changes names, source paths and dependency destinations; it does not select a new design-document layout.
 
-## Decisions from the owner's latest message
+## Dependency ownership
 
-Four roles: Lead; Checker with explicit Verifier and Reviewer duties; Implementer writes code; Operator.
-**Luna may be used only as Operator.** Preserve v1's concrete model/effort catalog, selection conditions and remaining machinery unless the owner selects a change.
-Keep three classifications from manage-agents: work level with horizon, direction, and span.
-Management source: [drafts/skills/practices-manage-agents/SKILL.md](drafts/skills/practices-manage-agents/SKILL.md), including its [model catalog](drafts/skills/practices-manage-agents/SKILL.md#model-catalog). The source is copied from v1 with selective edits; all sixteen companion reference/schema/metadata files are retained unchanged. [drafts/manage-agents.md](drafts/manage-agents.md) records the edit boundary; [drafts/roles.md](drafts/roles.md) describes responsibilities.
+`sunstack-dev` remains the engineering base. Its shared references, principles, domains and practices are referenced in place; no base-owned files are copied here.
+Locate the host-advertised `sunstack-dev:presentation-html` skill, then go up `../..` to its plugin root; resolve `sunstack-dev/shared-references/<file>` under that root and `sunstack-dev:<skill>` as `skills/<skill>/SKILL.md`. Independently versioned plugin caches need not be adjacent.
+Skill-specific references stay under their owning v2 skill. The review-only proof-command procedure belongs under `design-review/references/`; it has no base copy.
 
-The owner subsequently settled the implementation boundary: the Lead does not make implementation changes; the Implementer owns code and repairs. The Lead still reads code, inspects evidence and owns integration judgment. A Checker's two duties do not yet define its session lifecycle, Router authority or enforcement.
+## Scope
 
-## What Opus handed over
-
-Its proposal was a hands-on Lead by default, an independent Checker doing observation and review, and bounded helpers only where work separates cleanly. It recommended no mandatory Implementer–Verifier pairing, no separate reviewer hierarchy, no seven-role catalog, short handoffs and evidence before acceptance.
-It kept a Chief of Staff for awareness, status and routing only, outside the project execution roles; it did not settle all topology details with the owner.
-The present four-role direction and Lead/Implementer boundary supersede the older hands-on-implementation proposal. The owner's later clarification also supersedes the initial broad simplification proposal: preserve v1 by default and apply only selected changes. No Claude agent was woken for this work.
-
-## Boundary
-
-Everything under `drafts/` is editable design material, not frozen and not runtime policy. There is deliberately no active `skills/` root, plugin manifest, marketplace entry, installed-cache change or activation instruction in this initial copy.
-Do not invoke the copied v1 instructions as the new workflow. The design skills still need their capability-based reading form, role references, routing and proof boundaries rewritten against the accepted v2 design.
-The v1 archive and maintained base are unchanged by this starting copy.
+The management/role changes belong to the next PR in the stack. Copied design source still uses the existing stage meanings pending its separately assigned redesign. This source-copy PR does not register, install or activate v2, claim runtime readiness, or change the maintained base or frozen v1.
