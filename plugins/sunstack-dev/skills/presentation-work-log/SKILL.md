@@ -20,7 +20,7 @@ Take the work's project/tag or permitted source files and requested scope. MUST 
 
 ## 3. Organize the explanation
 
-Open with the work's purpose and most consequential recorded outcome or unresolved boundary. State the snapshot date/cutoff briefly. Use ordinary `h2` headings in this order, with meaningful `h3` topics inside them and normal heading-based contents:
+Open with the work's purpose and most consequential recorded outcome or unresolved boundary, carrying the report's target and limitations into that claim. A later caveat does not qualify an unconditional success claim in the opening. State the snapshot date/cutoff briefly. Use ordinary `h2` headings in this order, with meaningful `h3` topics inside them and normal heading-based contents:
 
 1. **For you to decide:** actual open owner choices, their consequences and what depends on them; settled decisions are explained without asking again.
 2. **What's done / what's next:** meaningful parts and their dependencies, supported results, blockers and next boundaries.
@@ -33,7 +33,7 @@ IF an open owner choice needs a decision brief, load `../../shared-references/ow
 
 ## 4. Show meaningful steps and their evidence
 
-For an ordered account of how work or understanding changed, request an explanatory **Trace** from `presentation-html`: steps are meaningful actions, findings or decisions, not raw log rows. Each step explains what changed, why it matters to the account, and the supported outcome or remaining question. Distinguish recorded observation, inference, proposal, failure and not-run work. Use the matching guide's Trace composition for the actual markup and attachments.
+For an ordered account of how work or understanding changed, request an explanatory **Trace** from `presentation-html`: steps are meaningful actions, findings or decisions, not raw log rows. Before composing a step, select its material claim, the supplied excerpt that supports it and that evidence's scope; then explain what changed, why it matters and the supported outcome or remaining question. Distinguish recorded observation, inference, proposal, failure and not-run work. Use the matching guide's Trace composition for the actual markup and attachments.
 
 Attach the relevant evidence to the step it supports: a concise quoted observation, comparison, exact code/command/diff or result, and a clearly named disclosure or source link for depth. A record's machine timestamp, full identifier or raw JSON envelope is optional source metadata, not its headline. Keep consequential failure conditions, uncertainty and the current blocker visible; open the step needed to understand a stop rather than hiding its meaning behind a generic title.
 
