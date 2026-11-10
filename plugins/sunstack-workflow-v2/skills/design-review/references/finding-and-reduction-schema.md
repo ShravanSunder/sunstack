@@ -13,7 +13,7 @@ claim or rule
 failure and downstream ambiguity: contradiction or failure path, observable consequence, and what the next author/planner would otherwise have to guess
 smallest semantic correction target
 affected concept: Requirements | Specification | Program Design | Verification Design | named combination
-semantic correction route: spec-design | program-design | verification-design | caller | owners in document order, such as spec-design -> program-design
+semantic correction route: spec-design | program-design | verification-design | caller | owners in document order, such as spec-design -> design-program
 validation note
 semantic coverage to rerun
 contested evidence

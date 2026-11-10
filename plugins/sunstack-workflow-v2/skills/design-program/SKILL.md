@@ -1,6 +1,6 @@
 ---
 name: design-program
-description: "Use when defining or revising structural How: entities' owners, homes and schemas; components, interfaces, state, flows, failure, trust boundaries, proof seams. Not for what entities mean or other Why/What (spec-design)."
+description: "Use when defining or revising structural How: entities' owners, homes and schemas; components, interfaces, state, flows, failure, trust boundaries, proof seams. Not for what entities mean or other Why/What (design-specification)."
 ---
 
 # Program Design
@@ -73,8 +73,8 @@ Produce terminal labels by observable condition:
 After producing the terminal result, return exactly one phase-guided route:
 
 ```text
-locally-ready      -> recommend verification-design
-specification-gap  -> recommend spec-design
+locally-ready      -> recommend design-verification
+specification-gap  -> recommend design-specification
 decision-needed    -> stop with the brief from owner-decision-brief.md,
                       routed as that reference says
 evidence-blocked | deferred -> stop with the exact reason

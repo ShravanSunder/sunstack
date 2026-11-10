@@ -114,8 +114,8 @@ What to open: the Specification's entity table, each obligation, each Program De
 
 How to judge: a design noun that cites an `E` and keeps that entity's identity, relationships, and states is consistent. A code name in a shape or home cell is a binding, not a term. A design-only concept that names the `E` or `R` it serves is legitimate, but naming a served id is not enough by itself: its own identity, lifecycle or states, relationships, or invariants signal a possible missing Specification entity.
 
-- A synonym for an existing `E` used in design prose (a new word where the Specification already has a term) is a finding with `Route: program-design`, or `Route: verification-design` when it appears in a Verification Design row: rename to the Specification's term.
-- A design noun with no `E` that names nothing it serves, or behaves like an entity, is a finding with `Route: spec-design`: the Specification decides whether it is a new entity or already covered. Review does not define it.
+- A synonym for an existing `E` used in design prose (a new word where the Specification already has a term) is a finding with `Route: design-program`, or `Route: design-verification` when it appears in a Verification Design row: rename to the Specification's term.
+- A design noun with no `E` that names nothing it serves, or behaves like an entity, is a finding with `Route: design-specification`: the Specification decides whether it is a new entity or already covered. Review does not define it.
 
 Stop when every design noun resolves to an `E`, a design-only concept with its served `E` or `R`, or a routed finding.
 

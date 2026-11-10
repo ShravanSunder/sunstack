@@ -102,7 +102,7 @@ Produce terminal labels by observable condition:
 After producing the terminal result, return exactly one phase-guided route:
 
 ```text
-locally-ready -> recommend program-design
+locally-ready -> recommend design-program
 decision-needed | evidence-blocked | deferred -> stop with the exact reason
 ```
 

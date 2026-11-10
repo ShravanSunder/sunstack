@@ -132,7 +132,7 @@ evidence-blocked
 Then return one route:
 
 ```text
-locally-ready       -> recommend spec-program-review in four-document-design mode
+locally-ready       -> recommend design-review in four-document-design mode
 specification-gap   -> return the token and its payload
 program-design-gap  -> return the token and its payload
 decision-needed     -> stop with the brief

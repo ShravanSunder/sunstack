@@ -27,7 +27,7 @@ program-only
 
 four-document-design
   Requirements -> Specification observable contract -> scenario/contract
-    -> program-design call-path delta and other How -> proof seam
+    -> design-program call-path delta and other How -> proof seam
     -> Verification Design "proven by" and planned observation
 ```
 
