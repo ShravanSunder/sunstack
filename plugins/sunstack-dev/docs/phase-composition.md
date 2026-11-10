@@ -19,7 +19,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 
 | Skill | Lines | Always loads | Loads when a condition holds | Cites in `SKILL.md` | Returns |
 | --- | --- | --- | --- | --- | --- |
-| orchestrator-design | 103 | `design-documents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `sunstack-dev:presentation-html`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
+| orchestrator-design | 101 | `design-documents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 53 | `practices-manage-agents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
@@ -30,14 +30,14 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | implementation-pr-wrapup | 114 | `local-branch-state`, `public-artifact-safety`, `github-pr-state`, `monitor-loop`, `practices-manage-agents`, `code-review-feedback-handling`, `merge-gates` | `merge-cleanup`, `pr-outline-views` | none | none |
 | implementation-review | 85 | `canonical-implementation-plan`, `coordination-and-chunking`, `lane-schema`, `spec-compliance`, `chunk-reviewer`, `dispel`, `finding-and-reduction` | `decision-model-review`, `proof-challenge`, `focused-reviewer` | none | none |
 | plan-handoff | 80 | `canonical-implementation-plan` | `handoff-template` | none | none |
-| plan-implementation | 48 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
+| plan-implementation | 47 | `slice-and-proof-design`, `canonical-implementation-plan` | `practices-manage-agents`, `owner-decision-brief` | none | `verification-design-gap` |
 | plan-improve-repo | 202 | `practices-manage-agents` | `canonical-implementation-plan`, `audit-lanes`, `improvement-plan-template`, `reconcile-backlog`, `validation-checklist` | `verify-before-accepting`, `write-tests-that-can-fail` | `verification-design-gap` |
 | plan-update | 37 | `slice-and-proof-design`, `canonical-implementation-plan` | `owner-decision-brief`, `sunstack-dev:presentation-html`, `diagram-rendering-and-fallbacks` | none | `requirements-gap`, `specification-gap`, `program-design-gap`, `verification-design-gap` |
-| program-design | 371 | `design-documents`, `sunstack-dev:practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `sunstack-dev:domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
-| spec-design | 334 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
+| program-design | 364 | `design-documents`, `sunstack-dev:practices-how`, `current-system-model`, `alternatives-and-crux`, `components-ownership-interfaces`, `state-calls-and-flows`, `failure-concurrency-recovery`, `cross-cutting-realization`, `proof-architecture-and-traceability`, `artifact-and-self-review` | `sunstack-dev:domain-<lang>`, `diagram-rendering-and-fallbacks`, `lane-schema` | `justify-the-complexity` | `specification-gap` |
+| spec-design | 328 | `diagram-rendering-and-fallbacks`, `design-documents`, `authority-and-problem-framing`, `domain-entities`, `requirements-and-traceability`, `observable-contracts`, `artifact-and-self-review` | `owner-decision-brief` | none | none |
 | spec-handoff | 85 | none | none | none | none |
 | spec-program-review | 254 | `finding-and-reduction-schema`, `design-documents`, `coordination-and-chunking`, `lane-schema`, `mode-complete-reviewer`, `reviewing-common-method`, `dispel` | `classifying-review-requirement`, `chunk-reviewer`, `proof-challenge` | none | none |
-| verification-design | 159 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
+| verification-design | 152 | `design-documents`, `choosing-the-observation`, `diagram-rendering-and-fallbacks` | `practices-manage-agents`, `owner-decision-brief` | `read-ground-truth-first`, `prove-it-works`, `verify-before-accepting`, `write-tests-that-can-fail`, `write-for-the-reader` | none |
 
 ## Orchestrators
 
@@ -132,13 +132,13 @@ flowchart LR
 
 ### orchestrator-design
 
-- Lines: 103
+- Lines: 101
 - Always loads:
   - practice: `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/phase-return-tokens.md`
 - Loads when a condition holds:
   - orchestrator: `orchestrator-implementation-goal`
-  - practice: `practices-manage-agents`, `sunstack-dev:presentation-html`
+  - practice: `practices-manage-agents`
   - shared reference: `../../shared-references/owner-decision-brief.md`
 - Named without a load call: none
 - Cites in `SKILL.md`: none
@@ -281,7 +281,7 @@ flowchart LR
 
 ### plan-implementation
 
-- Lines: 48
+- Lines: 47
 - Always loads:
   - shared reference: `../../shared-references/canonical-implementation-plan.md`
   - own reference: `references/slice-and-proof-design.md`
@@ -322,7 +322,7 @@ flowchart LR
 
 ### program-design
 
-- Lines: 371
+- Lines: 364
 - Always loads:
   - practice: `sunstack-dev:practices-how`
   - shared reference: `../../shared-references/design-documents.md`
@@ -338,7 +338,7 @@ flowchart LR
 
 ### spec-design
 
-- Lines: 334
+- Lines: 328
 - Always loads:
   - shared reference: `../../shared-references/diagram-rendering-and-fallbacks.md`, `../../shared-references/design-documents.md`
   - own reference: `references/authority-and-problem-framing.md`, `references/domain-entities.md`, `references/requirements-and-traceability.md`, `references/observable-contracts.md`, `references/artifact-and-self-review.md`
@@ -376,7 +376,7 @@ flowchart LR
 
 ### verification-design
 
-- Lines: 159
+- Lines: 152
 - Always loads:
   - shared reference: `../../shared-references/design-documents.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/choosing-the-observation.md`

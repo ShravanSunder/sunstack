@@ -13,7 +13,7 @@ The `originating planner` values name the three planners: `plan-implementation`,
 A ready plan returns:
 
 ```text
-plan path: <sole document identity: the plan's page for a plan that lives with a design set, its Markdown file otherwise>
+plan path: <sole Markdown document identity>
 originating planner: plan-implementation | plan-improve-repo | plan-update
 supersedes: none | <plan path>
 planning result: ready
@@ -58,13 +58,13 @@ Optional tracking remains outside this record. At planning entry, preserve an ex
 
 ## Plan Home
 
-A plan whose governing basis is a reviewed four-document design lives with that design set, tracked, as a page in its `plans/` folder: `docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.html`, composed with `sunstack-dev:presentation-html`, linked from the set's home page and, when it is scoped to one deliverable, from that deliverable's page, and linking back to both. For every other `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. For those plans it never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
+A plan whose governing basis is a reviewed four-document design lives with that design set, tracked, in its `plans/` folder: `docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.md`. For every other `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. For those plans it never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
 
-A superseding plan sits beside the plan it replaces, in the same form. A `plans/` folder holds plan files only: progress, tracking, status, ledger and scratch files live in the trace or in `tmp/`.
+A superseding plan sits beside the plan it replaces. A `plans/` folder holds plan files only: progress, tracking, status, ledger and scratch files live in the trace or in `tmp/`.
 
 Direct plan-only work may use an established repository plan home. Otherwise use `docs/specs/<spec>/plans/` for durable direct planning or `<repo-root>/tmp/plan-workflows/` for temporary/advisory work.
 
-Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row the plan admits: every row, unless the plan is scoped to one deliverable's needs, when it admits those needs' rows and those of the work they wait on and lists the rows it leaves for later deliverables.
+Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row.
 
 ## Preserve and Admit
 
