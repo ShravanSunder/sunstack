@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-09 Workflow v2 management source](2026-11-09-workflow-v2-management.md)
 - [2026-11-09 Workflow v2 starting draft](2026-11-09-workflow-v2-draft.md)
 - [2026-11-09 Separate the maintained base from frozen workflow v1](2026-11-09-workflow-v1-split.md)
 - [2026-11-09 Agent Router transcript research scope](2026-11-09-agent-router-transcript-research.md)

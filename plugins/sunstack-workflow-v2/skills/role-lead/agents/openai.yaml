@@ -1,0 +1,6 @@
+interface:
+  display_name: "Role: Lead"
+  short_description: "Own governing design, plans and acceptance"
+  default_prompt: "Use $role-lead to build the governing picture with the owner and accept only supported results."
+policy:
+  allow_implicit_invocation: true
