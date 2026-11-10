@@ -14,6 +14,8 @@ Validation:
 
 Independent implementation review returned **great, source-only acceptance**: ten checks complete, both bounded extraction findings closed. The corrections remove old Map/fold consequences from stored summary fields and use requested-snapshot cutoffs rather than ordinary logging checkpoints. Final unit/contracts rerun passed 180/180; current static/preparation checks pass with the limits above.
 
-Pressure tests and new example generation were explicitly deferred by the owner; no agent-behavior or reader-comprehension improvement is claimed. Installed clients have not been refreshed. Full model-backed rules, Codex anatomy validation and installed-client delivery remain unverified. No merge or release is claimed.
+Pressure tests and new example generation were explicitly deferred by the owner; no agent-behavior or reader-comprehension improvement is claimed. Installed clients have not been refreshed. Codex anatomy validation and installed-client delivery remain unverified. No merge or release is claimed.
 
 PR follow-up: an existing credential route was identified. Automatic approval review blocked the authenticated external rule evaluation because the proposed skill/reference payload was classified private; no authenticated model check ran. No credential values or retrieval metadata are part of this changeset.
+
+Authenticated rule-check follow-up: after confirming that every prepared input and rulebook file exactly matched the pushed public commit, the ordinary CLI run was approved and completed cleanly: 18 rule results, 12 model requests, zero findings, uncertain pieces or incomplete results, exit 0. This closes the earlier model-rule gap. No credential values or retrieval metadata were published, and the checked skill/reference files are unchanged.
