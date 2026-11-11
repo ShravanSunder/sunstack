@@ -17,6 +17,7 @@ Authoring basis for each run: user-directed intent; strongest claim is drafted f
 ## Required checks
 
 1. Compare final changed skills/references against every S1–S10 obligation; inspect scope/grants and acceptance/refusal preservation directly.
+   Walk the final management Codex default prompt through two cases: a formal Implementer commission retains role/files and recipient-resolved startup; an Implementer-owned native coding task receives bounded task/source context without a role packet and returns for parent inspection/integration. These are source walkthroughs, not fresh behavior trials.
 2. Run `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json` on changed skill files, retaining its report and exact gaps without replacing credentials or endpoints.
 3. Run existing focused v2 packet and delegated-call tests, the full local non-eval suite and typecheck using the tests/skills package commands; no new implementation-mirroring text tests.
 4. Run repository formatting/lint checks appropriate to changed prose, `git diff --check`, link/shape validation where available, and the design HTML's static check after its last regeneration.

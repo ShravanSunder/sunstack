@@ -19,12 +19,12 @@ Each row is one skill-creation run, in order; documentation cutovers land with t
 
 | Run | Named skill | Surface allocation | Status |
 |---|---|---|---|
-| R1 | practices-manage-agents | Main path: task guidance, catalog, concise formal/native routes; depth: examples, execution forms and three provider manuals; proof: existing source/parser checks and independent review | proposed |
+| R1 | practices-manage-agents | Main path: task guidance, catalog, concise formal/native routes; depth: examples, execution forms and three provider manuals; Codex default prompt: distinguish formal role/files commissions from parent-owned native tasks; proof: existing source/parser checks, prompt walkthroughs and independent review | proposed |
 | R2 | role-implementer | Main path: supplied-design execution and one helper permission/load; remove repeated helper paragraph and import-only fence; retain all unique engineering practices and grants | proposed |
 | R3 | role-checker | Main path: clarify paired native verification helpers; depth: verification-duty permits separable observations/apparatus with parent evidence responsibility; review duty unchanged | proposed |
 | R4 | role-operator | Main path: Exact Steps/Luna high and cheap prescribed support; remove import-only fence; preserve exceptions and actual startup | proposed |
 
-Triggers/frontmatter and schema fields remain unchanged for all runs. Management's lens is one accountable parent per result: choose assignment/model, use the correct formal/native launch route, inspect evidence, then return; formal commissions keep strict role/files and recipient-resolved authority. Native tasks stay parent-owned, not role packets. Descriptions therefore keep their current invocation and need no new trigger trial.
+Triggers/frontmatter, invocation policy and schema fields remain unchanged for all runs. Management's lens is one accountable parent per result: choose assignment/model, use the correct formal/native launch route, inspect evidence, then return; formal commissions keep strict role/files and recipient-resolved authority. Native tasks stay parent-owned, not role packets. Its active `agents/openai.yaml` default prompt must select between those routes rather than direct every helper through typed role startup. Descriptions therefore keep their current invocation and need no new trigger trial.
 
 ## References and calls
 
@@ -40,4 +40,4 @@ Allowed: update model/effort/history prose in existing native-provider manuals t
 
 ## Review record
 
-Revision r1: pending design review. The retained independent Codex review lead receives this complete four-part set and its exact embedded page; no source skill files change before accepted-to-implement. Review findings may repair wording within these settled boundaries; changed owner choices return to owner. No Claude session is awakened.
+Revision r1: independent public-source design review returned targeted-revision/revise-first, with all five selected checks complete and one accepted C1: the active management Codex default prompt was missing from R1's formal/native cutover allocation. Revision r1-c1 adds that consumer and its two source walkthroughs; same review lead verifies this bounded correction before accepted-to-implement. Review findings may repair wording within these settled boundaries; changed owner choices return to owner. No Claude session is awakened.
