@@ -1,0 +1,17 @@
+# Focused proof
+
+R1/R2/R5: fresh local multi-turn tracking and helper-handoff characterization, with hidden checks and actual file/tool records; a real new priority/failed required check must survive. R3: source review plus retained-context/delta case; real Router concurrency remains unverified. R4/R7: explicit page request must leave source bytes unchanged, and unchanged status must create no page. R6: independent source review of predicates and returns, with an unrelated reversible choice countercase. These are agent behaviors (eval/review routes), not literal-string rules; no new rulebook or permanent implementation-mirroring tests.
+
+Compare against retained draft6b0 tracking control on the same ordinary prompts; use fresh Terra medium subjects, full local dependencies, one path per bounded output where needed, and actual loaded-copy/tool records. Preserve failures and consumption gaps. A working complete checker package is a precondition for a page run. No generic token-saving percentage or subscription claim.
+
+Static: caller/name/link/version consistency, no unrelated inventory changes, diff/format/package validation; actual configured rules invocation with raw status/gap account. Description strings and invocation capabilities are unchanged; implicit trigger trial not newly owed. Independent skill-review design stage precedes writing; implementation stage follows parent assessment. Required proof and privacy/source-history boundaries remain.
+
+Keep private raw receipts outside public artifacts. User asked for an open PR, so delivery is reviewed/validated PR, unmerged and without installation refresh.
+
+## Observed results and limits
+
+Fresh Terra medium subjects used exact local copies of both changed skills. On the matching three-turn tracking case, candidate rows were 9 -> 9 -> 10 -> 10: one real priority decision, no extra audit or unchanged-status entry. Both earlier controls also added nothing for unchanged status; initial control entries included a real local observation, so not every extra row is waste. A separate synthetic late correction outside the prior stream labels changed the page to the newer priority. Rendering left all 11 source rows byte-identical and copied them exactly to its source companion; its static checker returned 0 errors / 0 warnings. The synthetic correction is trial data, not a real project decision.
+
+A second offline handoff retained passed, failed and not-run required results with runner/receipt attribution, one shared access-gap action and the original open assumption. No per-result Missed rows, silence replacement or empty audit was added. These named observations characterize local behavior; they do not prove distributed Router concurrency, real actor stamping, browser comprehension, general token savings or the whole historical incident. A combined presentation-depth read was truncated; full recovery/consumption remains unproven.
+
+Validation observed: unit suite 19 files / 180 tests passed (exit 0); Claude plugin validation and git diff --check passed (exit 0); all six full stop-treatment sections unchanged; active name/links and six version fields consistent. Codex marketplace inspection succeeded but reports the existing installed version; no installation refresh occurred. Configured sunstack lint was refused with credential_missing (exit 2, zero acquired files / model requests): rules NOT RUN, with no pass or judged findings claimed. Raw source, host-action receipts and assessment remain private.

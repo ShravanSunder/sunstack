@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-11 Record meaningful work without procedural duplication](2026-11-11-material-work-records.md)
+
 - [2026-11-10 Restore the v1 Markdown design baseline](2026-11-10-restore-v1-markdown-design.md)
 
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)
