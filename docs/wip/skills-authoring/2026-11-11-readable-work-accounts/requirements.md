@@ -9,3 +9,7 @@ Basis: user-directed intent. Prior observed outputs are supporting evidence, not
 Entry remains an explicit work-log HTML request; ordinary tracking/checkpoints still produce no page or Story refresh. Generic HTML invocation remains unchanged. Prior explicit-only, read-only source, complete-companion, attribution, technical-carrier, scoped-claim and neutral-view-selection decisions stay in force.
 
 Non-goals: new components, navigation schemas, renderer/product changes, custom CSS/scripts, fixed word/component counts, diagnosis of every previous agent failure, live-source mutation, source-history migration, installed-cache refresh, or v1/v2 workflow redesign. No universal claim about human cognition or reliable agent compliance. A simple fact or empty status is not expanded into a ceremonial diagram. Source/CLI review alone never means presentation acceptance.
+
+## Existing read-only boundary: logger-reference correction
+
+The owner’s supplied Central session demonstrates that installed3.1.1 explicitly required stored Story writes and rereads while rendering. The proposed page skill already forbids modifying the source trail; its logger-reference dependency still describes Story creation for a requested page. Correct that stale dependency in one scoped run on practices-show-me-your-work. This restores the accepted rendering boundary; it does not choose a broader threshold for logging everyday decisions, checks or checkpoints.

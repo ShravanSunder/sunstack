@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | a summary written only for an explicitly requested page | the existing shape in [presentation-show-worklog](../../presentation-show-worklog/references/story-records.md); ordinary logging does not create or refresh these rows |
+| `story` | a historical page-summary row to interpret | the recorded shape in [presentation-show-worklog](../../presentation-show-worklog/references/story-records.md); creating or refreshing a page does not create or refresh these source rows |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, then the full row id of every Missed row it found) |
 
@@ -108,7 +108,7 @@ A row is never edited. A correction, a resolution, an answer, a new state of an 
 - Its **first** link is the row it closes.
 - Its other links are authority or context. No other link closes, accepts or confirms anything: a row that only links to an assumption leaves it open.
 
-Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. A rewritten story is a new `story` row tagged `supersedes`, whose first link is the Story it replaces; its links stay within 16 in total.
+Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. Historical Story replacements are `story` rows tagged `supersedes`, with the replaced Story as their first link and at most 16 links in total. Interpret that recorded relation without writing a replacement while rendering a page.
 
 ## Links
 
