@@ -12,10 +12,10 @@ Task may omit a sandbox or `workspace_readonly` flag. Do not hop to Cursor CLI t
 
 ## Models
 
-The rows below select formal Operator subagents. Native coding helpers are bounded children of the assigned Implementer Sidekick, using its approved model/access context through the host interface. They are not separately commissioned Implementer/Verifier/Reviewer seats and create no new catalog row. Luna remains Operator-only.
+Formal Operator subagents use the Operator catalog. Implementer and Verifier native tasks select from their relevant `SKILL.md` catalog by the bounded task's own span, within the parent grant and actual host capability. They are not separate role seats or packets. Luna remains Operator-only.
 
-| Role | Model | Route |
-| --- | --- | --- |
+| Role                 | Model                                      | Route                                                                                                      |
+| -------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | 🔧 Operator Subagent | the model of the catalog row in `SKILL.md` | native Task when Task can select that model; otherwise agent-router as a Sidekick, or report the exact gap |
 
 A model off the catalog, such as xAI Grok in place of the Luna Operator row, needs the owner's explicit, named override; this manual is not one.

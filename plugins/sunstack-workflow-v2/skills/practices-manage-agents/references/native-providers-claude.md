@@ -12,7 +12,7 @@ Task / Agent may omit plan-mode or readonly flags. Do not hop to `claude -p --pe
 
 ## Models
 
-The rows below select formal Operator subagents. Native coding helpers are bounded children of the assigned Implementer Sidekick, using its approved model/access context through the host interface. They are not separately commissioned Implementer/Verifier/Reviewer seats and create no new catalog row. Luna remains Operator-only.
+Formal Operator subagents use the Operator catalog. Implementer and Verifier native tasks select from their relevant `SKILL.md` catalog by the bounded task's own span, within the parent grant and actual host capability. They are not separate role seats or packets. Luna remains Operator-only.
 
 No formal Operator catalog row runs as a native Subagent on Claude: the Operator Subagent rows are OpenAI Luna. Run those helpers as Sidekicks through agent-router, as `references/execution-forms.md` says. A standalone role/model off that catalog needs the owner's named override; this does not appoint coding helpers as roles.
 

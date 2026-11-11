@@ -27,3 +27,14 @@ Authoring basis for each run: user-directed intent; strongest claim is drafted f
 ## Trigger trials and unverified scope
 
 All four descriptions are unchanged, so no new two-prompt trigger trial is selected; installed invocation remains unverified, as before. No new rulebook or semantic regex is introduced. Fresh role compliance, native spawn/model selection, browser/computer behavior, cross-lineage independence, installation/activation, rendered quality and token/cost effects are not established by this source update. Credential refusal is not a rules pass. No new test is added merely to mirror wording.
+
+## Source implementation results
+
+- Existing suite: `pnpm --dir tests/skills run test`, 310 tests in 30 files passed, exit 0; the 74 focused v2 packet/call cases are included. Typecheck: `pnpm --dir tests/skills run typecheck`, exit 0. These ran while the design amendment was being reviewed; executable/schema inputs remain byte-identical after the prose/YAML changes, so the same compatibility evidence applies without rerunning them.
+- Installed formatter: final changed skill prose/default prompt and new changelog, 12 files checked, exit 0. `git diff --check` passes. Unchanged schema/role/files tests do not evaluate the catalog or actual agent behavior.
+- Actual repository Sunstack lint attempted on the four changed skill trees through the existing package binary: invalid/credential_missing, exit 2, zero checked files/model requests/findings/uncertainties/exclusions. Rules are not run; no credentials/endpoints were replaced or injected. All rule coverage remains a named not-run gap, not a pass.
+- Codex quick validator: not run because its Python environment lacks PyYAML; no dependency was installed. Frontmatter descriptions/invocation are unchanged; the changed default prompt has both formal and native routes inspected in source.
+- Formal prompt walkthrough: role/files enters recipient-resolved startup and grant checks. Native prompt walkthrough: bounded task/source context uses the relevant catalog/host route and returns to parent inspection/integration, without a formal role packet. These are source inspections, not behavior trials.
+- Management body after formatting: 2,480 → 1,722 whitespace words; examples: 2,220 → 1,004. Table/code formatting changes whitespace word counts, so these use the final files. These are authored word counts, not model tokens or cost measurements. All unique proof, grant, independent verification and Lead acceptance obligations remain in their owning procedures.
+
+Independent implementation review and final PR readback are pending. Raw local receipts are process artifacts under `tmp/v2-role-responsibilities/lean-runtime-*`; they are not shipped source or claimed behavior proof.

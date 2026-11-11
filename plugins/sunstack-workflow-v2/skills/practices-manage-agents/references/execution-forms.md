@@ -16,12 +16,12 @@ To create a session without starting its work, use agent-router's conversation c
 
 Keep one current row per Sidekick before any prompt that relies on its history: name, address, worktree, model and effort, status, last prompt, and what is expected back. Label each id with its transport (agent-router SessionRef or provider-native id); they are not interchangeable.
 
-| When | Do |
-|---|---|
-| reconnect requested, or the local record is missing | find the session for the same worktree and resume it |
-| auth or permission failure | fix it or report blocked; never widen permissions unasked |
-| model rejected or substituted | use the advertised equivalent or report degraded |
-| provider session limit | reuse or resume; stop creating new ones |
+| When                                                | Do                                                        |
+| --------------------------------------------------- | --------------------------------------------------------- |
+| reconnect requested, or the local record is missing | find the session for the same worktree and resume it      |
+| auth or permission failure                          | fix it or report blocked; never widen permissions unasked |
+| model rejected or substituted                       | use the advertised equivalent or report degraded          |
+| provider session limit                              | reuse or resume; stop creating new ones                   |
 
 ## Choose the route
 
@@ -40,9 +40,13 @@ For a delegated role work-direction follow-up or correction, update or select it
 
 When a helper granted `write-and-execute` or any external effect (a push, post or publish) ends or goes silent without a handback, before you resume, replace or re-dispatch its job, list what it may already have changed (worktree, branch, PR, posts) with the source you checked for each, and decide whether the next run adopts that change, cleans it up or waits (design for failure (`sunstack-dev:principle-design-for-failure`)).
 
-## Native coding helpers
+## Native helpers
 
-The Implementer Sidekick chooses decomposition and parallelism inside its assigned workstream, without per-child Lead approval or an arbitrary child count. Actual host limits, approved models and grants still apply. Each helper gets a bounded task, source context, disjoint writes or explicit ordering, permitted commands and an ending check. Helpers do not acquire design/acceptance authority, a separate trace or their own Verifier pair. The parent reads and integrates their changes, checks their evidence and proves the combined result. The existing Verifier Sidekick observes the parent workstream's integrated target. Keep Implementer and both Checker contracts Sidekick-only; only Operator may use a native subagent role packet. No new model row follows from using helpers; Luna remains Operator-only.
+Implementer and Verifier may use bounded native tasks inside their workstream and grant without per-child Lead approval. Select a model/effort from the relevant catalog for each task's actual span, then use a supported native route. A different model may require fresh history; preserve the provider manual's history restrictions. If the host cannot supply the chosen model/access, return that gap to the parent rather than invent another primary role session.
+
+Give each child relevant sources, allowed effects, isolation/ordering and an ending check. Independent pieces may run concurrently within host limits; keep tightly coupled work with the parent. Parent inspects changes/evidence and integrates or assesses the combined result. Implementer owns product changes/tests; Verifier owns only assigned observations/apparatus, with independent authorship and unchanged expected outcomes. The workstream Verifier still reports on the integrated target.
+
+Native tasks require no standalone role packet, trace or pair. Formal Implementer and both Checker duties remain Sidekick-only; only Operator has a native subagent role packet. Luna stays Operator-only.
 
 ## Routine Lead check-ins
 

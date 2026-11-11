@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-11 Workflow v2 task guidance and model selection](2026-11-11-workflow-v2-task-guidance.md)
 - [2026-11-10 Workflow v2 role/files commissioning](2026-11-10-role-file-commission.md)
 - [2026-11-10 Restore the v1 Markdown design baseline](2026-11-10-restore-v1-markdown-design.md)
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)

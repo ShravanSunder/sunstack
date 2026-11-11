@@ -7,170 +7,138 @@ description: "Use when delegating to or coordinating sidekicks or subagents (wor
 
 Base dependency: locate `sunstack-dev:presentation-html` using the host's listed skill path; from its skill directory go up `../..` to the base plugin root. Resolve every `sunstack-dev:<name>` there as `skills/<name>/SKILL.md`, including hidden principles and domains; append reference suffixes beneath that skill. Resolve `sunstack-dev/shared-references/...` beneath that same root. Never assume the two plugin caches are adjacent.
 
-Formal role commissions choose a role and model and send only role/files. Native coding helpers stay inside their parent Implementer's approved workstream context. Both routes bound the work and check its result against evidence.
+One accountable parent owns each result. Lead supplies design docs and a plan of workstreams, contracts, dependencies, sequencing and completion conditions. Implementer chooses implementation steps and integrates the changes; Verifier owns critical verification. Both may use bounded native subagents and must inspect their results. Lead accepts only after required proof, before outside review.
 
-The 🦁 Lead is the agent the owner talks to. It designs, plans, cuts the work, inspects, and accepts results; implementation changes belong to the Implementer. The owner decides tradeoffs, merges, and can override any pick. Other agents take jobs from the Lead, or from a Sidekick whose role skill and commission let it start helpers, and return evidence, findings, or changes; governing design and workstream sequencing stay with the Lead, while the Implementer chooses execution steps within its workstream.
+Choose the assignment and model, launch through the formal or native route, then inspect the evidence. Role defines responsibility; form defines conversation lifecycle; neither widens a grant.
 
-## Classify
+## Bound the assignment
 
-### Work levels
+### Work levels and horizon
 
-Work nests like a project plan. At every level the agent works in a loop: do one piece, check it against that level's check, then do the next piece or hand back. An agent can drive only as far as there is a check to verify against; if the Lead cannot name the check for a level, the job is cut smaller.
+Horizon is the highest level closed before handback. Name its ending check; when no check can be named, cut the job smaller.
 
-| Level | Made of | Checked against |
-|---|---|---|
-| Project | milestones | the owner's definition of done |
-| Milestone, such as one PR | tasks | the plan's proof, then review |
-| Task, such as one slice | subtasks | its acceptance check |
-| Subtask, one step or one written procedure with no judgment between its steps | edits or commands | its expected result |
+| Level                     | Made of                      | Ending check               |
+| ------------------------- | ---------------------------- | -------------------------- |
+| Project                   | milestones                   | owner's definition of done |
+| Milestone, such as one PR | tasks                        | plan's proof, then review  |
+| Task                      | subtasks                     | assigned acceptance check  |
+| Subtask                   | edits or prescribed commands | expected result            |
 
-### Horizon
+### Task guidance
 
-The highest work level the agent closes before handing back. Name the check that ends each job.
+| Value            | What the agent does                                                                                                                                |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Exact Steps      | Follow the supplied procedure or collection criteria and allowed branches; return observations and exceptions.                                     |
+| Designed Outcome | Implement the governing design docs within agreed contracts, constraints and grant; choose detailed implementation steps, tests and decomposition. |
 
-| Answer | The agent closes | Before handing back at |
-|---|---|---|
-| Subtask | one step, or one written procedure | its expected result |
-| Task | one result made of subtasks | its acceptance check |
-| Milestone | one deliverable made of tasks | the plan's proof |
-
-### Direction
-
-How much of the job the brief decides.
-
-| Answer | The brief | Test | Then |
-|---|---|---|---|
-| Exact | is a procedure; nothing is left to judge | could a script run it? | only an Exact job can go to a 🔧 Operator |
-| Complete | names the approach; the agent decides only details nothing else depends on | can you name the approach in one sentence? | ready to hand off |
-| Partial | gives only the outcome, so the agent would choose the approach | does the job hide a design choice? | the Lead writes any design choice into the plan, since a design choice never goes to another agent; what stays Partial after that takes a Partial row in the catalog |
-
-Missing intent or a missing plan is missing input, not Partial.
+Missing requirements or a design contradiction return to Lead with evidence. Designed Outcome grants implementation judgment, not permission to change agreed behavior, ownership or contracts. Implementation assignments use Designed Outcome; Operator always uses Exact Steps. Verification and review have no task-guidance selector.
 
 ### Span
 
-What the agent must hold in its head to get the job right. Size and module count don't change it.
+| Span         | What must be understood together                            |
+| ------------ | ----------------------------------------------------------- |
+| Local        | one owner's code and the contracts it uses                  |
+| Cross-domain | multiple owners and their shared contract inside one system |
+| Cross-system | a contract or interaction consumed across systems           |
 
-| Answer | The agent must hold | Test | Then |
-|---|---|---|---|
-| Local | one owner's code and the contracts it uses | is reading that owner and its contracts enough? | ready to hand off |
-| Cross-domain | two or more owners in one system whose shared contract must stay in step | would the change break another owner's code in this system? | write the shared contract into the plan |
-| Cross-system | a contract another system consumes: an API, a wire format, stored data another system reads | does another system read what changes? | split at the system boundary if you can; once the contract is written into the plan, each side built against it is Local |
+Classify the actual assignment. A Cross-system parent may give a helper a Local piece, but still owns cross-system integration and proof. Read catalog spans literally, not as maximum-scope ceilings. Size, file count and a written contract alone do not make integrated work Local.
 
-### How they fit
+## Roles and forms
 
-For formal role commissions, horizon caps the role, direction decides whether an Operator can take the job, and direction and span pick the catalog row. Native coding helpers use the parent workstream's permitted model/access context rather than acquiring a role or catalog row.
+| Role                     | Responsibility                                                                                                                | Form                           | Role skill         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
+| 🦁 Lead                  | design, workstream plan, integration judgment and acceptance                                                                  | owner's main conversation      | `role-lead`        |
+| 🐒 Implementer           | one planned workstream's changes, product tests, repairs and combined proof                                                   | Sidekick                       | `role-implementer` |
+| 🔬 Verifier / 🔎 Checker | verification: paired proof challenge, apparatus and target observation; review: independent declared artifact and corrections | Sidekick                       | `role-checker`     |
+| 🔧 Operator              | Exact Steps: prescribed execution, watch, transform or collection                                                             | Subagent; Sidekick when needed | `role-operator`    |
 
-## Roles
+A **Sidekick** is a persistent separately managed session. A **Subagent** is a native child managed by its parent. Worker is only a search/provider synonym. Implementer and both Checker duties remain Sidekick-only; their native tasks do not appoint extra role seats or require standalone role packets, traces or Verifier pairs.
 
-| Role | Takes | Returns | Form | Commissioned by | Role skill |
-|---|---|---|---|---|---|
-| 🦁 Lead | the Project | governing design and plan, integration, acceptance | the owner's main conversation | never commissioned | `role-lead` |
-| 🐒 Implementer | one planned workstream, a Milestone or Task: changes, product tests, proof and corrections | the change and its proof | Sidekick | the Lead, one per workstream | `role-implementer` |
-| 🔬 Verifier / 🔎 Checker | verification: the paired Implementer’s workstream, proof challenge, verification tooling and target observation; review: an independent declared artifact and its corrections | verification observations and gaps, or independent review findings | Sidekick; review has no author history | the Lead; a review lead may commission stage Checkers for review | `role-checker` |
-| 🔧 Operator | an Exact Subtask: a written procedure, a watch, a mechanical transform or a guided collection | what it observed | Subagent; Sidekick when the job needs its own session | the Lead, or a Sidekick allowed to start helpers | `role-operator` |
+Lead commissions the owning pair. Create both sessions before starting work, make their addresses available in the governing sources, then send each its role/files call. They exchange setup, reproductions, repairs and rechecks directly. Review stays outside that loop and uses a session with no target-authoring history. A review lead may commission stage Checkers under its review procedure.
 
-A **Sidekick** is a separately managed persistent session. A **Subagent** is a native child managed by its parent. Worker is a search synonym or provider-owned API term, not another v2 form. Implementer and both Checker duties always run as Sidekicks; coding subagents are helpers inside the Implementer's workstream, not alternate role seats.
+An Operator reports observations; its actual commissioner interprets them and owns any repair. Supplied collection criteria may label candidates with uncertainty, but deciding owner intent or product correctness is not collection. Delegate prescribed support when the inexpensive execution is worth the handoff. Proof associated with an agent's own changes remains that agent's responsibility.
 
-An Operator makes no judgment calls: it never decides what to run, what a result means, or how to fix it. It runs the suite and reports failures, watches CI until it finishes, pushes and publishes a verified file, applies a codemod, or collects logs; it does not fix a failing test or decide whether a failure matters. Judgment it meets goes back to whoever assigned it. Tests and proof for an agent's own change stay with that agent; an Operator takes only a procedure assigned on its own, such as a suite run or a CI watch.
-
-- **Implementer and Checker verification:** create both sessions without starting work, make each pair's address available in its governing assignment sources, then send each its role/files call. A collection subtask inside a workstream gets no pair.
-- **Checker review:** never fork or resume the author's conversation; the referenced files supply the governing sources.
-
-Delegate only independent work that costs less to hand off than to do. Work that splits into independent units (an audit, a migration, a review across files) fans out: one helper per unit, one table at the end.
-
-Title a session `<emoji> <Role> Sidekick · <purpose>`, such as `🔬 Verifier Sidekick · packet schema`, and label a formal Operator subagent by its role, such as `🔧 Operator Subagent · retry logs`. Label a native coding helper by its bounded task, not an Implementer/Checker appointment.
+Title formal sessions `<emoji> <Role> Sidekick · <purpose>` and Operator native tasks `🔧 Operator Subagent · <purpose>`. Name other native children for their bounded task, without appointing them Implementer/Checker roles.
 
 ## Model catalog
 
-| Tier | Definition |
-|---|---|
-| Workhorse | procedures, repeatable work, guided execution |
-| Daily driver | execution or synthesis that needs judgment |
-| Frontier | demanding judgment, design, or review |
+Use these owner-selected model/effort rows for both owning Sidekicks and bounded native tasks. Select by the task's responsibility and actual span, within the parent grant and host capability. An already assigned Sidekick retains its model/effort. If no row or supported route fits, return the gap instead of silently substituting or creating another primary session. The owner may name an override; Lead's model remains owner-chosen.
 
-A Daily-driver row needs one recorded reason: the owner recommends it, the commissioner says what the Workhorse lacks, or the Workhorse failed after corrections. Rows marked `User must authorize` are used only when the owner names them. Thinking Effort lists the allowed range for the row. A formal role commission that matches no row is not ready: cut it until it matches one, or bring it to the owner, who can name a model. An executor the owner assigned keeps its model and effort.
+Workhorse means prescribed or bounded execution; Daily driver means execution requiring judgment; Frontier is demanding judgment and grants no additional model eligibility. The owner's selections below supply the reason for using these rows.
 
-Exact id: the host's row in `~/.config/agent-context/model-map.md`; otherwise the host's current-generation id for the catalog row, never an older generation or a `-fast` variant; otherwise report the gap.
+Resolve the exact id through the host's row in `~/.config/agent-context/model-map.md`, otherwise its advertised current-generation id; never pick an older generation or a `-fast` variant. Report an unavailable id or effort.
 
 ### 🔧 Operator
 
-| Tier | Model | Thinking Effort | Direction | Span |
-|---|---|---|---|---|
-| Workhorse | OpenAI Luna | medium | Exact | any |
-| Workhorse | OpenAI Luna | high | Complete, guided collection under supplied criteria | Local |
+Always **Exact Steps**. No span selector.
 
-### 🐒 Implementer Sidekick
+| Model       | Thinking effort |
+| ----------- | --------------- |
+| OpenAI Luna | high            |
 
-| Tier | Model | Thinking Effort | Direction | Span |
-|---|---|---|---|---|
-| Daily driver | OpenAI Sol | medium | Complete | Cross-domain |
-| Daily driver | Claude Opus | medium | Complete | Cross-domain |
-| Daily driver | OpenAI Sol | high to xhigh | Partial | Cross-domain, Cross-system |
-| Daily driver | Claude Opus | high to xhigh | Partial | Cross-domain, Cross-system |
+### 🐒 Implementation
 
-### 🔬 Verifier Sidekick: verification
+Every row takes a **Designed Outcome**. A child uses its own task's span, not the whole parent's deliverable.
 
-| Tier | Model | Thinking Effort |
-|---|---|---|
-| Daily driver | OpenAI Sol | high to xhigh |
-| Daily driver | Claude Opus | high to xhigh |
+| Model        | Thinking effort | Span                       |
+| ------------ | --------------- | -------------------------- |
+| OpenAI Terra | high            | Local                      |
+| OpenAI Sol   | medium          | Cross-domain               |
+| OpenAI Sol   | high            | Cross-domain, Cross-system |
+| Claude Opus  | medium          | Cross-domain               |
+| Claude Opus  | high            | Cross-domain, Cross-system |
 
-Choose a different lineage from the paired Implementer when one is available. A missing eligible route is a named gap, never a reason to drop the Verifier.
+### 🔬 Verification
 
-### 🔎 Checker Sidekick: review
+Route by system span, without task-guidance classification.
 
-Checkers review each Project and Milestone, never a single Task or Subtask. Design and proposal reviews happen where their owning phase says and use the same reviewers. Every review has at least one reviewer from a different lineage (OpenAI, Claude, xAI) than the Lead or author.
+| Model        | Thinking effort | System span         |
+| ------------ | --------------- | ------------------- |
+| OpenAI Terra | high            | Local, Cross-domain |
+| OpenAI Sol   | medium          | Cross-domain        |
+| OpenAI Sol   | high            | Cross-system        |
 
-| Tier | Model | Thinking Effort | Use |
-|---|---|---|---|
-| Daily driver | xAI Grok | high | |
-| Daily driver | OpenAI Sol | xhigh | |
-| Daily driver | Claude Opus | xhigh | |
-| Frontier | OpenAI Astra | high to xhigh | User must authorize |
+Prefer a different lineage from Implementer when an eligible route is available; name its absence without dropping verification. The owner currently selects no Opus verification row.
 
-Beyond the rows above, another Checker joins only when the owner asks for one and names its model.
+**Browser and computer control:** Terra and Sol are preferred for this work when the listed scope, effort and actual tools fit; Terra high is particularly useful for UI/browser verification. This routing preference grants no browser, desktop or write access.
 
-### 🦁 Lead
+### 🔎 Independent review
 
-The owner chooses the Lead's model. Nothing here escalates it.
+Review Project/Milestone artifacts and affected corrections, not every private implementation task. Design/proposal review follows its owning procedure. Every review needs at least one different-lineage reviewer from Lead/author; report unavailable coverage instead of claiming it.
 
-## Work with an agent
+| Model       | Thinking effort |
+| ----------- | --------------- |
+| OpenAI Sol  | high            |
+| Claude Opus | high            |
 
-Choose the route before launch: a formal role commission follows classification, role/catalog selection and the formal handoff below; a parent-owned native coding helper follows the existing native-helper procedure in `references/execution-forms.md`. The parent bounds its task/source context, uses its permitted model/access and supported host route, then inspects and integrates the result and evidence or owns the remaining gaps. Native helpers require no role seat, role/files call or standalone resolved packet. The Lead gives the overall workstream verdict.
+## Launch and hand off
 
-### Launch
+MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. Use its host-specific instructions; an unavailable model, tool or isolation is a capability gap, not authority to widen access.
 
-MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary: selected form/catalog row for a formal commission, or bounded task/source context and permitted parent model/access for a native coding helper. Follow its existing native-helper procedure for that route.
+### Formal role commissions
 
-### Hand off
+1. MUST load `schemas/delegated-agent-call.ts` and return a valid `DelegatedAgentCall`: only `role` (implementer, checker or operator) and nonempty `files`. Send this shape for initial work, continuations and corrections. Keep model, effort, identity, access and correlation in launch/tool metadata; append no preamble, task paraphrase or expected answer.
+2. MUST load `sunstack-dev:practices-preflight` and return launch readiness or exact gaps before starting dependent work; an unchanged current preflight counts. Existing governing sources establish scope, actual grants, pair addresses, Checker duty, stop condition and ending checks. Record isolation or ordering when jobs share writes or service state; no new serialized full-packet file is required.
+3. Send role/files to the actual address. Each recipient reads its role and current files, then resolves/validates context through `references/recipient-startup.md` and its existing schema. Missing or conflicting authority is returned, not inferred. Correct the current governing files and continue the same session; do not replay completed effects merely because a call repeats.
 
-For formal role commissions, perform these steps. Native coding helpers use the already loaded native-helper procedure instead; its parent-owned bounded task and source context do not enter the role/files or recipient-packet path.
+Reports and direct pair exchanges retain their contracts; they are not replacement work-direction calls. Schemas validate shape, not permissions or Router interception.
 
-The commissioner selects the role and reachable governing files. The recipient loads its own preamble and resolves its assignment; no newly fabricated full-packet file is required.
+### Parent-owned native tasks
 
-1. MUST load `schemas/delegated-agent-call.ts` and return a valid `DelegatedAgentCall`: exactly `role` (implementer, checker or operator) and `files` (nonempty file pointers). Send only that object as work-direction content, for initial work, continuations and corrections. No appended preamble, inline packet, expected answer or task paraphrase. Use the transport's documented encoding; model, effort, identity, access configuration and correlation remain separate launch/tool metadata.
-2. MUST load `sunstack-dev:practices-preflight` for launch access/capability checks and return `ready` or launch gaps. A current preflight for the same context counts. Preserve its evidence in the governing sources; role-specific startup reads and resolved-context validation belong to the recipient. Hold work blocked by a launch gap.
-3. The Lead establishes workstreams, dependencies, sequencing, scope and completion conditions; the Implementer decides execution steps. Ensure existing governing files establish task scope, permissions, pair addresses, Checker duty and ending checks. When two jobs could write the same file, branch or service state, place their isolation or ordering in the governing plan/assignment source. Do not infer missing authority or reconstruct the old full packet merely to satisfy this call format.
-4. Send the two-field content to the selected real address. Each recipient loads `role-<role>` in full and its role entry loads `references/recipient-startup.md` under this skill; the recipient resolves and validates the rich context with the existing role schema. Lead's own entry/continuation is not a delegated Lead appointment.
+Implementer and Verifier may decompose independent work without per-child Lead approval or an arbitrary child count. Use a child when its task can be checked independently and the handoff is worthwhile; keep tightly coupled edits with the parent. Give relevant sources, task guidance where applicable, allowed paths/commands, isolation or ordering and an ending check. Choose the model/effort from the relevant catalog and supported host controls; do not paste the catalog or manufacture a formal role packet for the child.
 
-Native coding helpers receive a bounded task/source context through the host interface under their parent Implementer, not a separate role/files commission or standalone role packet. For delegated role drift or correction, update or select the governing correction/review file and send the same role/files shape to the same agent; do not restart it or append inline directions. Helper reports and direct pair setup/observations retain their existing result and exchange contracts. A local schema is a source contract, not Router interception or permission enforcement.
+The parent's grant bounds every child. Implementer owns product changes/tests and combined integration proof; Verifier owns permitted observations/apparatus, never product repairs, an altered oracle or independent proof of its own implementation. Keep held-out cases from implementation authors. Parallel checks need isolated fixtures/evidence when they mutate the same state. Host limits still apply; Luna remains Operator-only.
 
-### Check the result
+## Check the result
 
-Before using a handback, open the decisive diff and evidence, match them to its scope and target, and return unsupported claims as gaps. The parent Implementer inspects native helper changes and owns integration and proof; child completion alone is not a proven workstream. Use the existing work record without adding another helper-by-helper row audit here; unchanged base logging/audit duties still apply. Only the Lead accepts the implementation, after required proof, through `role-lead`'s acceptance procedure and before independent delivery review.
+Open decisive changes and evidence, match them to the assigned scope and actual target, and return unsupported claims as gaps. Each parent inspects its children's results and proves or assesses the combined outcome; a child completion never closes the workstream. Use the existing work record and base logging duties, without a second helper census. Lead authors its own acceptance after required proof and before independent delivery review; a Reviewer never fills missing Lead acceptance.
 
-## Examples
-
-MUST load `references/delegation-examples.md` and return the applicable walkthrough: the six steps (direction, span, horizon, cut, role and form, catalog row) for a formal role commission, or its parent-execution example's bounded helper task/source context, permitted parent model/access, supported host route and inspected integrated result/evidence or owned gaps. Do not invent a formal coding-helper role or catalog row to fill the formal example slots.
+IF uncertainty remains about a task cut, model fit or responsibility boundary, load `references/delegation-examples.md` and return the matching case and what it changes for this assignment.
 
 ## Completion
 
-A formal role commission is complete when its role, form and model rows carry required reasons, its role/files call points to current governing and preflight sources at a real address, its recipient resolved the concrete context or returned exact gaps, and its handback was matched to evidence.
-
-A native coding-helper assignment is complete when its bounded task/source context, permitted parent model/access and supported host route are established, and its parent inspected and integrated the result with evidence or recorded owned gaps. No standalone role/catalog appointment, role/files call, resolved role packet, trace or Verifier pair is required.
-
-Both routes carry unresolved proof, prerequisites and HOLDs to their responsible owners; a child result alone never closes parent workstream proof.
+A formal commission has an eligible role/form/model, current governing/preflight sources at the actual address, recipient-resolved context or exact gaps, and an evidence-checked handback. A native task has a bounded assignment, eligible model/effort, supported history/access route and a parent-inspected integrated result or owned gap. No standalone native role packet, trace or Verifier pair is required. Carry unresolved proof, prerequisites and HOLDs to their responsible owners.
 
 ## Source integration limit
 
-Base preflight and verification practices still contain v1 delegation callbacks. Referencing those practices does not close v2 runtime integration. Installation and runtime activation wait for a separately scoped base compatibility change.
+Base preflight and verification still route delegation to v1. This source update does not establish runtime integration; installation and activation remain blocked pending the separately scoped base compatibility change.

@@ -7,7 +7,7 @@ description: "Use when commissioned as Checker to challenge proof, verify delive
 
 Base dependency: locate `sunstack-dev:presentation-html` using the host's listed skill path; from its skill directory go up `../..` to the base plugin root. Resolve every `sunstack-dev:<name>` there as `skills/<name>/SKILL.md`, including hidden principles and domains; append reference suffixes beneath that skill. Resolve `sunstack-dev/shared-references/...` beneath that same root. Never assume the two plugin caches are adjacent.
 
-One Sidekick role has two duties, displayed as 🔬 Verifier for verification and 🔎 Checker for independent review. Both always run as Sidekicks; native coding helpers belong to the Implementer, not alternative Checker seats. Verification challenges proof and observes the adopted outcome through its verification apparatus. Review independently judges a declared artifact and its corrections. The actual commission selects the duty; neither grants product changes or acceptance.
+One Sidekick role has two duties: 🔬 Verifier critically observes the adopted outcome through its verification apparatus; 🔎 Checker independently reviews a declared artifact and corrections. Both remain Sidekicks. Verifier may use bounded native tasks under its duty; those are not additional Checker seats. The actual commission selects the duty; neither grants product changes or acceptance.
 
 ## Assignment
 

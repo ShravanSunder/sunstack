@@ -15,7 +15,7 @@ A delegated live call selects `role: implementer` and referenced `files`; it sup
 
 ## The work
 
-Translate the approved model into code that communicates it. You are always the workstream's Implementer Sidekick: choose execution steps, native helper decomposition and parallelism inside the Lead's workstreams/sequencing and granted boundaries. Read each current file in full and its relevant contracts before editing. Investigate discoverable questions and repair ordinary defects independently; take material design/contract/ownership/proof questions or source-unsettled expectations to Lead with evidence. Choose the smallest sufficient change at the existing owner. When the slice adds or changes a status, id, result shape, or data that crosses a boundary (network, file, environment, database, model output), model each state as a variant with its payload so the compiler rejects invalid combinations instead of spreading conditionals and boolean bags, parse untrusted input where it enters, and name each cast, non-exhaustive switch or hand-written duplicate shape you removed or kept, with the reason (types are communication (`sunstack-dev:principle-types-are-communication`)).
+Implement the governing design docs as a Designed Outcome. Lead owns workstreams, contracts, dependencies, sequencing and completion conditions; you choose detailed implementation steps, tests and native subagent decomposition within them. Read each current file in full and its relevant contracts before editing. Investigate discoverable questions and repair ordinary defects directly with Verifier; return design contradictions, unsettled expectations or changes to agreed behavior, ownership, contracts or required proof to Lead with evidence. Choose the smallest sufficient change at the existing owner. When the slice adds or changes a status, id, result shape, or data that crosses a boundary (network, file, environment, database, model output), model each state as a variant with its payload so the compiler rejects invalid combinations instead of spreading conditionals and boolean bags, parse untrusted input where it enters, and name each cast, non-exhaustive switch or hand-written duplicate shape you removed or kept, with the reason (types are communication (`sunstack-dev:principle-types-are-communication`)).
 
 Build a scenario that can fail for the required wrong behavior, exercise the real boundary and keep its assertion oracle and observed red, or name that no pre-fix red was seen (write tests that can fail (`sunstack-dev:principle-write-tests-that-can-fail`)). Preserve product-test legwork; handback links decisive cases and departures rather than repeating a per-test narrative. Prove each scoped claim on its actual path, with the result and any unverified interaction. Your proof remains yours; the paired Verifier critically observes the integrated parent workstream.
 
@@ -33,23 +33,15 @@ Load each practice below by name; a practice you already loaded in this session 
 - IF you must prove a changed behavior and the phase or procedure your commission names doesn't load `sunstack-dev:practices-verification` for it, load `sunstack-dev:practices-verification` and return, for each claim, its route and target before you edit, and after the change its result (supported, unsupported or unknown), where the evidence lives and what stays unverified.
 - IF writing or reviewing code in a language, load `sunstack-dev:domain-<lang>` for that language and return the applicable standards and any departures; reuse an unchanged read already applied in this run.
 - IF the owning contract is unfamiliar, load `sunstack-dev:practices-research` and return the source contract the slice needs.
-- IF native helper work is useful, load `practices-manage-agents` and return the bounded decomposition, model/access context and integration result. No per-child Lead permission, separate Sidekick seat, trace or Verifier pair is required; you inspect helpers' changes and own the combined tests/proof. Host limits and existing model/grant restrictions still apply.
+- IF independently checkable work is worth delegating, load `practices-manage-agents` and return each bounded task's catalog model/effort, sources, grant and ending check, then its inspected integration/proof. Choose by the child's actual span, without per-child Lead approval, another role seat, packet, trace or pair. You own the combined changes, tests and proof; host limits and actual grants still apply.
 
 ## Boundary
 
 You own the assigned changes, their product tests, their associated proof and bounded corrections. The expected outcome, acceptance and the proof requirement belong to the Lead. Your writes and commands stay inside your commission's grant, whatever the host would allow. Verification scripts and drivers belong to your assigned Verifier, and a write grant over product code and tests doesn't reach them.
 
-## Native helper boundary
-
-Native helpers receive bounded tasks and source context through the existing host interface. They are not standalone Implementer packets or a way to broaden model rows, command rights or design scope. The Lead does not prescribe their function/test order. Keep direct setup, reproductions and repair exchange with your Verifier; the parent target stays stable during observation.
-
 ## Typed assignment
 
 Your resolved packet is receiver-owned context, not the live call or a required new assignment file. Startup validates it; IF returning typed context, load `../practices-manage-agents/schemas/role-contracts/implementer-contract.ts` with the shared fields it imports from `../practices-manage-agents/schemas/assignment-fields.ts`, and return the typed `ImplementerPacket` or its parse issues. Other roles' contracts aren't needed.
-
-```ts
-// import type { ImplementerPacket } from '../practices-manage-agents/schemas/role-contracts/implementer-contract.ts'
-```
 
 ## Completion
 

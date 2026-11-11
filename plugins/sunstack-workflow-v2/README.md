@@ -27,7 +27,7 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 - [role-operator](skills/role-operator/SKILL.md): prescribed work and guided collection.
 - [role-checker](skills/role-checker/SKILL.md): explicit verification or independent review duty.
 
-The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; Checker review requires no author history and read-only access. Operator alone has a helper handback; other roles return their owned result. The original applicable model/effort rows remain, except Luna implementation rows are removed. Complete · Local implementation has no catalog row; return the gap rather than selecting a new model.
+The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; review requires no author history and read-only access. Operator alone has a helper handback; other roles return their owned result. Management owns the selected model map: Terra high restores Local implementation; verification uses Terra/Sol, review uses Sol/Opus high, and Operator is always Luna high.
 
 ## Scope
 
@@ -45,7 +45,9 @@ The strict call schema checks source-level content shape; it does not intercept 
 
 ## Responsibility and completion
 
-The Lead defines workstreams, sequencing, scope and completion conditions. The Implementer Sidekick chooses execution steps and native helper concurrency, integrates and proves their combined result, and works directly with the 🔬 Verifier Sidekick. Sidekick and Subagent are the two helper forms; Worker is only a search/provider synonym. Implementer and both Checker duties stay Sidekick-only; Operator accepts `subagent` or `sidekick`. Native coding helpers remain under the parent workstream's approved model/access context, without standalone role packets, traces or Verifier pairs. The model catalog is unchanged and Luna remains Operator-only.
+Lead supplies design docs and a workstream plan: contracts, dependencies, sequencing and completion conditions. Implementer receives a **Designed Outcome**, choosing detailed implementation steps, tests and subagent decomposition, integrating proof and working directly with its 🔬 Verifier. **Exact Steps** follows a supplied procedure; Operator always uses that route on Luna high.
+
+Implementer and Verifier may use native subagents for separable tasks within their actual grants, choosing models from the shared catalog by each task's own span. Parent inspects changes/evidence and owns the combined result. Terra and Sol are preferred for fitting browser/computer-control work, particularly Terra high for UI/browser verification, without implying tool access. Formal Implementer and both Checker duties remain Sidekicks; native tasks add no role packet, trace or Verifier pair. Worker is only a search/provider synonym.
 
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 

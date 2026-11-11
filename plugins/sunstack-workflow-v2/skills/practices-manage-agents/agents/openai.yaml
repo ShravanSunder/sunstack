@@ -1,4 +1,4 @@
 interface:
   display_name: "Practices: Manage Agents"
   short_description: "Coordinate Sidekicks and native helper Subagents within their grants."
-  default_prompt: "Use practices-manage-agents to choose a helper's role, execution form and model, send only role/files so the recipient resolves its own typed context, and assess its handback through native or agent-router routes."
+  default_prompt: "Use practices-manage-agents to choose the assignment, model and route: formal role commissions send only role/files for recipient-resolved context; parent-owned native tasks receive bounded task/source context without a role packet. Inspect results and integrate their evidence."
