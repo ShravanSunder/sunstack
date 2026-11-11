@@ -20,6 +20,8 @@ Take the work's project/tag or permitted source files and requested scope. MUST 
 
 ## 3. Organize the explanation
 
+MUST load `presentation-html` before outlining the page and return the section composition, explanation and diagram jobs, Map associations and Walkthrough decision, using its page patterns and matching guide. Supply the concerns or work subjects that connect sections and their real destinations, and any ordered question or journey that needs several existing chunks. This is the composition workflow used again at final build.
+
 Open with the work's purpose and most consequential recorded outcome or unresolved boundary, carrying the report's target and limitations into that claim. A later caveat does not qualify an unconditional success claim in the opening. State the snapshot date/cutoff briefly. Use ordinary `h2` headings in this order, with meaningful `h3` topics inside them and normal heading-based contents:
 
 1. **For you to decide:** actual open owner choices, their consequences and what depends on them; settled decisions are explained without asking again.
@@ -29,11 +31,15 @@ Open with the work's purpose and most consequential recorded outcome or unresolv
 
 Use those questions to organize subjects, not one paragraph or component for every stored row. Several records can explain one step; one consequential record may affect several subjects. Show each explanation once and link to it elsewhere. Omit routine repetition from the reading path while preserving its source and checking whether it changes a conclusion.
 
+Within them, give each substantive section one coherent question about the work. Name what the reader needs to understand, then gather the related actions, decisions, mistakes, corrections and outcomes into that section. Explain who did what and why; a status or test total alone does not explain the work. Keep enough context to understand technical terms and the consequence of the change without opening the archive.
+
 IF an open owner choice needs a decision brief, load `../../shared-references/owner-decision-brief.md` and return the current picture, alternatives, tradeoffs, recommendation and dependent work to explain beside its answer control. No response control or recommendation is an owner decision.
 
-## 4. Show meaningful steps and their evidence
+## 4. Compose each part with explanation, diagrams and evidence
 
-For an ordered account of how work or understanding changed, request an explanatory **Trace** from `presentation-html`: steps are meaningful actions, findings or decisions, not raw log rows. Before composing a step, select its material claim, the supplied excerpt that supports it and that evidence's scope; then explain what changed, why it matters and the supported outcome or remaining question. Distinguish recorded observation, inference, proposal, failure and not-run work. Use the matching guide's Trace composition for the actual markup and attachments.
+For each substantive section, give `presentation-html` its reader question, explanatory content and source-supported relationships to draw. Compose the explanation and diagram together: the text explains the context, agents' actions and reasons; the diagram makes the relevant ownership, change, dependency, sequence or failure understandable beside it. Keep the actual outcome and its remaining limit with that account. A one-line empty status or simple fact is not a substantive explanatory section and needs no fabricated relationship.
+
+For an ordered account of how work or understanding changed, request an explanatory **Trace**: steps are meaningful actions, findings or decisions, not raw log rows. Before composing a step, select its material claim, the supplied excerpt that supports it and that evidence's scope. Distinguish recorded observation, inference, proposal, failure and not-run work. Use the matching guide's Trace composition for the actual markup and attachments; its expandable steps do not replace the section's explanation and relevant diagram with a folded report.
 
 Attach the relevant evidence to the step it supports: a concise quoted observation, comparison, exact code/command/diff or result, and a clearly named disclosure or source link for depth. A record's machine timestamp, full identifier or raw JSON envelope is optional source metadata, not its headline. Keep consequential failure conditions, uncertainty and the current blocker visible; open the step needed to understand a stop rather than hiding its meaning behind a generic title.
 
@@ -51,11 +57,11 @@ Do not substitute a code block containing the entire event envelope for an expla
 
 ## 6. Build and inspect the requested reader
 
-MUST load `presentation-html` and return the page composed from these view requirements using its matching guide, navigation, source carriers, concrete delivery method and static checker. The guide owns Trace/code syntax and selected component references; read and apply them before authoring the construct.
+Build with the `presentation-html` workflow loaded at step 3 and return the page composed from its section questions, explanations, diagrams and evidence, with the chosen navigation, source carriers, concrete delivery method and static checker. Its page patterns own composition, and the matching guide owns markup; apply the selected references before authoring the constructs.
 
 The primary page is the explanation. Provide one clearly labelled route to the complete source companion and state its cutoff and unavailable linked artifacts. Do not satisfy coverage by displaying every unsummarized row as a long disclosure list, even if the individual rows are folded. Keep selected evidence addressable with original source IDs; a link must reach the evidence it claims to expose, rather than an unrelated headline or unsupported fragment in a raw file.
 
-Before returning, read the page as its owner: can they follow the main change and its reason, see the blocker and proof limits, and inspect the relevant evidence without reading the archive? Check that displayed technical excerpts are actually in the requested technical view, the Trace steps explain the episode, and source links work. A passing markup check alone does not establish those properties. Perform browser inspection only under the HTML skill's authorized conditions.
+Before returning, read the page as its owner: can they understand each part's question, what the agents did and why, follow its diagram with the explanation beside it, see the blocker and proof limits, and inspect the relevant evidence without reading the archive? Check that Map's associations reach the related content rather than repeat the outline, any Walkthrough follows its actual question, displayed technical excerpts are in their technical view, and evidence links work. A passing markup check alone does not establish those properties. Perform browser inspection only under the HTML skill's authorized conditions.
 
 ## 7. Return one snapshot
 

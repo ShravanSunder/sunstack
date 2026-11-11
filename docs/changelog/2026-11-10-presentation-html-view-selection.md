@@ -1,10 +1,11 @@
-# Explain work with evidence and fitting views
+# Compose readable work accounts with explanations and diagrams
 
-- `sunstack-dev` **3.1.2** updates `presentation-html` and `presentation-work-log`; invocation stays unchanged.
-- Removes the prose-first chooser; select views for the reader’s task and source-supported relationships.
-- Work-log pages explain meaningful episodes with Trace evidence and a worked composition example, keeping complete originals in a companion instead of a per-row disclosure wall.
-- Display supplied commands, source, data and diffs in the matching technical view; check identifiers throughout the explanation.
-- Requested rendering reads source history without adding or refreshing log/Story records; ordinary tracking still creates no HTML.
-- Keeps component APIs with the matching Demistify guide; the local bridge owns binding, trust and delivery only.
-- Updates plugin/marketplace metadata and base inventory; shared references and workflow v1/v2 remain unchanged.
-- [Experiments and validation limits](references/2026-11-10-presentation-html-view-selection.md). Installed caches not refreshed; draft PR only.
+- `sunstack-dev` **3.1.2** updates `presentation-work-log`, `presentation-html` and its composition/binding references; invocation stays unchanged.
+- Work accounts group actual actions, decisions, corrections and results into coherent sections with adjacent explanations and relevant diagrams.
+- Generic page patterns teach useful Map associations and question-led Walkthroughs; the heading outline and ordinary reading remain independent.
+- Composition guidance loads before outlining and form selection; optional backing detail does not hide the main explanation.
+- The earlier prose-first chooser is removed; actual technical excerpts use the matching code view, with complete source captures available separately.
+- Requested rendering reads original history without adding log records or forcing Story refreshes; ordinary tracking still creates no HTML.
+- Component APIs and schemas remain with the matching Demistify guide; shared references and workflow v1/v2 remain unchanged.
+- Plugin/marketplace metadata and base inventory carry 3.1.2. [Validation and limits](references/2026-11-10-presentation-html-view-selection.md).
+- New local examples use retained 1.22 assets; source/claim review accepted; final visual and interaction proof remain pending. No cache refresh or merge.

@@ -1,0 +1,11 @@
+# Readable work accounts
+
+Class: behavior-changing updates, one named skill per run. Run1 updates presentation-work-log; Run2 updates presentation-html. These skills help an agent compose a substantial account that lets a human understand consequential work, its reasons and results, using explanations, diagrams and inspectable evidence together.
+
+Owner success definition, 11November2026: “each section to have explanations and diagrams,” “easy to read,” “know what going on,” components working well, “map to be used well,” Walkthroughs when required, “really know what agents did,” and work broken into digestible chunks. Owner supplied an existing workflow-v2 work account as a B− reference; its grade is an example, not adoption of every layout or source claim. The owner wants local fresh-Terra experiments and parent inspection, without judging each intermediate failure.
+
+Basis: user-directed intent. Prior observed outputs are supporting evidence, not a claimed causal reproduction: large prose-backed Trace accounts passed source checks, but the owner rejected their reading quality. The current generic chooser has no prose preference, yet the work-log instructions emphasize source reconciliation/Trace attachments over how to compose a meaningful section. The B− reference’s roles and acceptance sections combine explanation with an ownership view/flow and criteria; its source contains no authored Map/Walkthrough. These are content-source observations, not a visual pass or a known explanation of the owner’s grade.
+
+Entry remains an explicit work-log HTML request; ordinary tracking/checkpoints still produce no page or Story refresh. Generic HTML invocation remains unchanged. Prior explicit-only, read-only source, complete-companion, attribution, technical-carrier, scoped-claim and neutral-view-selection decisions stay in force.
+
+Non-goals: new components, navigation schemas, renderer/product changes, custom CSS/scripts, fixed word/component counts, diagnosis of every previous agent failure, live-source mutation, source-history migration, installed-cache refresh, or v1/v2 workflow redesign. No universal claim about human cognition or reliable agent compliance. A simple fact or empty status is not expanded into a ceremonial diagram. Source/CLI review alone never means presentation acceptance.
