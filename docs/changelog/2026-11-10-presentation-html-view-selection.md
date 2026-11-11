@@ -8,4 +8,5 @@
 - Requested rendering reads original history without adding log records or forcing Story refreshes; ordinary tracking still creates no HTML.
 - Component APIs and schemas remain with the matching Demistify guide; shared references and workflow v1/v2 remain unchanged.
 - Plugin/marketplace metadata and base inventory carry 3.1.2. [Validation and limits](references/2026-11-10-presentation-html-view-selection.md).
+- Actual current-source rules ran: zero findings, one uncertain return kept after manual inspection; automatic call-collection gaps remain.
 - New local examples use retained 1.22 assets; source/claim review accepted; final visual and interaction proof remain pending. No cache refresh or merge.
