@@ -18,9 +18,9 @@ Use the whole assignment's real span to choose the owning Sidekicks. For a Cross
 
 - A Local component inside the settled interface can go to Terra high as a Designed Outcome. Give its relevant design section, write paths and ending check; inspect its changes and tests before integration.
 - A separable Cross-domain change can use its corresponding implementation row. Disjoint writes may run concurrently; coupled interfaces remain with the parent or run in order.
-- Prescribed log extraction or a CI watch can go to a Luna high Operator as Exact Steps. Its observations support, but do not replace, the parent's proof.
+- Prescribed log extraction or a CI watch can go to a Luna high Operator as Exact Steps. Even as a native Subagent, it uses formal role/files and current recipient startup. Its observations support the parent's proof.
 
-These are native tasks, not extra Implementer Sidekicks or role packets. A completed helper does not prove the settings screen uses the real search API; Implementer integrates it and the workstream Verifier observes that interaction.
+The implementation jobs are native tasks, not extra Implementer Sidekicks or role packets. A completed helper does not prove the settings screen uses the real search API; Implementer integrates it and the workstream Verifier observes that interaction.
 
 ## A design break versus an implementation decision
 
@@ -56,7 +56,7 @@ The recipient reads its role, opens current files and resolves/validates context
 
 For a correction, select the current correction source and send role/files to the same session. Direct pair reports/reproductions keep their existing exchange contracts. A repeated call does not replay completed effects.
 
-A parent-owned native task instead receives a bounded task/source context through the host interface with model/effort metadata. It does not enter formal role startup or acquire a role packet, separate trace or Verifier pair. The parent opens its changes/evidence and owns the combined result.
+A parent-owned native implementation or verification task instead receives bounded task/source context through the host interface with model/effort metadata. It skips formal role startup and adds no role packet, trace or Verifier pair. The parent inspects its changes/evidence and owns the combined result. A native Operator follows the formal route above.
 
 ## Acceptance before outside review
 
