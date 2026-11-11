@@ -15,3 +15,9 @@ Decisions: preserve required checks and same-ID retries; preserve explicit closu
 Design review accepted-to-implement after T1 clarification: inspect the full new scoped interval before relevance filtering/currentness claims; keep fixed historical cutoffs. Independent teaching/structure families complete, no open findings. Run1 implemented locally inside that accepted boundary; proof and implementation review follow.
 
 Run2 implemented locally: canonical name/callers and read-only snapshot reuse; existing presentation remains. Runtime edits follow the accepted two-run boundary; proof and independent implementation review are still owed.
+
+### Bounded R1/R2 teaching clarification
+
+One run: practices-show-me-your-work only. Add one main-path writing paragraph: changed fact first, necessary reason/consequence/evidence, ordinary sentences, linked detailed receipts, preserved required fields/failures/unknowns. The already-loaded record-entries reference owns a compact six-event log/omit inventory and one concise illustrative proof record paired with procedure narration to omit. Its existing kind/field table remains the serialization shape, not a demand to create every kind. Clarify its opening to one material fact or related proof group, matching already-accepted R2. No new call, schema, rulebook, capability, authority, checkpoint, renderer or platform edit. Changelog notes entry-selection/concise-writing teaching within the same proposed version. Review this supplement before editing runtime text.
+
+Teaching supplement independently accepted-to-implement before runtime editing; the logger main paragraph, existing reference inventory/example and changelog clarification are now implemented. No other runtime owner changed.

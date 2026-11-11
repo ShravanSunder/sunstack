@@ -8,9 +8,34 @@ Return: the row filled in its shape, and the step-two command with this row's mi
 
 ## One row
 
-A row is one fact, written by the agent that has it, at the moment it has it, before work that builds on it continues. Its first line says the fact so it can be read alone. The lines after it are its fixed parts. It carries no secrets, credential paths or account data.
+A row carries one material fact or a related proof group, written by the agent that has it, at the moment it has it, before work that builds on it continues. Its first line says the fact so it can be read alone. The lines after it are its fixed parts. It carries no secrets, credential paths or account data.
 
 Router stamps who wrote the row and when; nothing in the text replaces that stamp. The owner sees the writer beside every row, so a row you write about someone else's act shows as yours.
+
+## Choose the event before its format
+
+The kind table below describes formats, not a list of entries to produce. Select a material event first:
+
+| Useful event | Log | Omit |
+| --- | --- | --- |
+| Owner direction | A new correction, constraint or priority and its source | The same reminder with no change |
+| Consequential decision | A choice someone must preserve, with reason and authority | Routine editing mechanics |
+| Dependent assumption | An unsettled premise or stand-in, what relies on it and what closes it | A passing hunch that changes no work or claim |
+| Problem or departure | A blocker, failed/not-run required gate, or departure from the agreed work | An unsuccessful lookup that adds no finding |
+| Proof | Evidence supporting a claim at its declared target, including results and limits | Repeated observations that add no evidence |
+| Outcome or handoff | A meaningful result, acceptance, reopening, or changed next action/owner | Step narration or unchanged status |
+
+Keep required proof even when a result repeats; the main path's materiality test still governs. Detailed receipts hold commands and output; the entry explains what they establish.
+
+For example, omit procedure narration such as “Opened the files, ran the suite, read its output, then checked the package.” Record the result and its limits instead. This is illustrative wording; fill target and receipt placeholders from actual observations:
+
+```text
+Proof: local validation is complete.
+Claim: the required unit suite and package validation passed.
+Check: unit suite and package validator at <revision>; receipts <links>.
+Result: 180 tests passed; package validator exit 0.
+Not covered: agent behavior or installed activation.
+```
 
 Every row carries these tags:
 

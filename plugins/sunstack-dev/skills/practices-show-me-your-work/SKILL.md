@@ -34,6 +34,8 @@ Log what the owner, or someone picking up the work cold, would act on. Materiali
 
 Run every required check. A failed or not-run required gate, a result at a changed target, or evidence needed for acceptance is material even when its result repeats. Related checks supporting one claim may share one proof record with their actual targets, results, receipts and limits; keep failures distinct. Omit routine commands and repeated observations that add no evidence. For example, a new priority or a failed required check changes the record; rereading an unchanged file does not.
 
+Lead with the changed fact. Add only the context, reason, consequence and evidence needed to understand or act on it. Use ordinary sentences and link detailed receipts instead of copying their output. Preserve the required fields, authority, failures and proof limits.
+
 - When a decision, assumption, shortcut or check meets that materiality test, write its row before work or a handback depends on it. A helper doesn't wait for the Lead to relay it, and the Lead doesn't write a helper's rows for it.
 - Every row is one kind: action, decision, assumption, shortcut, proof, Lead acceptance, owner ask, story, missed or audit. A change from the design or plan is a shortcut.
 - A decision carries Choice and Authority; an assumption, Assumed and What depends on it; a shortcut, Planned, Did instead, Why and Authority (`none` when nothing covered it); a proof, Claim, Check, Result and Not covered. Every decision's authority is named from its source: the owner's words quoted with where they were said, an existing contract, or the agent's own call, never inferred from a plan, a review or a page you wrote.
