@@ -82,7 +82,7 @@ Completion: the checkpoint row's id and this stretch's audit row id, and the thr
 
 ## Explicit page requests
 
-IF the owner explicitly requests a work-log HTML page or its refresh, load `presentation-work-log` and return that requested snapshot and its cutoff. A generic request to show progress or inspect the log stays in the current conversation. An indirect skill load, an unanswered decision or the existence of a page never takes the rendering branch.
+IF the owner explicitly requests a work-log HTML page or its refresh, load `presentation-show-worklog` and return that requested snapshot and its cutoff. A generic request to show progress or inspect the log stays in the current conversation. An indirect skill load, an unanswered decision or the existence of a page never takes the rendering branch.
 
 ## Completion
 

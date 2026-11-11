@@ -1,6 +1,7 @@
 # Compose readable work accounts with explanations and diagrams
 
-- `sunstack-dev` **3.1.2** updates `presentation-work-log`, `presentation-html` and its composition/binding references; invocation stays unchanged.
+- `sunstack-dev` **3.1.2** updates `presentation-show-worklog`, `presentation-html` and its composition/binding references; invocation visibility and authorization stay unchanged.
+- Renames `presentation-work-log` to `presentation-show-worklog`, with active callers and Codex prompt updated; explicit-request behavior stays the same.
 - Work accounts group actual actions, decisions, corrections and results into coherent sections with adjacent explanations and relevant diagrams.
 - Generic page patterns teach useful Map associations and question-led Walkthroughs; the heading outline and ordinary reading remain independent.
 - Composition guidance loads before outlining and form selection; optional backing detail does not hide the main explanation.

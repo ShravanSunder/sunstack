@@ -1,10 +1,10 @@
 ---
-name: presentation-work-log
+name: presentation-show-worklog
 description: "Use when the owner explicitly requests a work-log HTML page or asks to refresh one. Not for routine logging, checkpoints or progress replies."
 disable-model-invocation: true
 ---
 
-# Presentation: Work Log
+# Presentation: Show Worklog
 
 Explain what the recorded work means: the problem, consequential changes, how understanding developed, what the evidence supports and what remains. The log is evidence, not the page's outline. Group related records into meaningful episodes and give the reader an account they can follow, with evidence where a conclusion needs checking. `practices-show-me-your-work` owns ongoing tracking; `presentation-html` and its matching Demistify guide own supported visual composition and markup.
 

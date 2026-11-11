@@ -34,7 +34,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
-| `story` | a summary written only for an explicitly requested page | the existing shape in [presentation-work-log](../../presentation-work-log/references/story-records.md); ordinary logging does not create or refresh these rows |
+| `story` | a summary written only for an explicitly requested page | the existing shape in [presentation-show-worklog](../../presentation-show-worklog/references/story-records.md); ordinary logging does not create or refresh these rows |
 | `missed` | something the log should have held and didn't, or a claim it can't back | `Missed:`, `Found by:`, `Affects:`; its first link is the row it concerns, when there is one |
 | `audit` | your comparison of your own stretch of work with what happened | `Stretch:` (from and to: positions, commits or times), `Compared against:`, `Couldn't see:`, `Found:` (a count, then the full row id of every Missed row it found) |
 
