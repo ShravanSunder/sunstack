@@ -345,7 +345,10 @@ Do not return `locally-ready` while any of these hold:
 - the confirmed goal boundary or accepted requirements set is missing, unrecoverable, conflicting, or rebuilt from mutually narrowed current files;
 - target structure was selected without current-system evidence or a named greenfield basis;
 - a material structural choice lacks credible alternatives, explicit tradeoffs, accepted debt and payer, or falsifiers/revisit signals;
-- a Specification entity lacks a binding row, a binding cell is blank rather than `gap: <why>`, a boundary crossing has only a prose shape, or a result or decision contract is an open string or prose variant list;
+- a Specification entity lacks a binding row;
+- a binding cell is blank rather than `gap: <why>`;
+- a boundary crossing has only a prose shape;
+- a result or decision contract is an open string or prose variant list;
 - the trace table is missing from the artifact, lacks its own row for a Specification obligation, has a blank cell, or disagrees with the returned coverage disposition;
 - a material component lacks one owner, reason to change, consumer, or behavioral interface;
 - a material runtime-behavior group lacks a source-grounded current and proposed entrypoint-to-effect path, or proposed-only with explicit no predecessor, including added/removed/changed owner/call/state/effect/result-error edges and any preservation-critical or contested unchanged edge;

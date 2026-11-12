@@ -98,7 +98,7 @@ In a file-backed set, use `sunstack-dev:presentation-html` to author the complet
 
 For each substantive proof explanation, lead with what will be done, what will be seen, and which outcome decides the obligation, and pair that answer with a supported relational diagram of the observation path. Explain how the source/target reaches the deciding observation and interpret the relationship beside the diagram. A table may support exact fields but does not replace the substantive path view. One section or diagram may explain a shared observation for several obligations; each requirement keeps its own complete row and link to that observation, with reference, target/journey, passing condition and unverified limit. A planned view or observation is not a result, and a tiny fact does not need its own diagram section.
 
-Completion: the document has one row per requirement, both views have a passing rendering result or an exact gap, and in a file-backed set its HTML source, stable section links and `index.html` entry are current.
+Completion: the document has one row per requirement, both views have passing rendering results, and in a file-backed set its HTML source, stable section links and `index.html` entry are current. Return an exact required-rendering gap as `evidence-blocked`.
 
 ### 6. Re-read it as the Verifier would
 
@@ -122,7 +122,7 @@ evidence-blocked
 - `specification-gap`: an obligation lacks the observable outcome, reference, threshold or target constraint its row needs. Return each obligation, what it lacks and the evidence. Carry any Program Design gaps in the same payload, because a changed obligation can change its seam.
 - `program-design-gap`: no seam lets an observation see an obligation's outcome. Return each obligation, the seam its trace row names, what the observation would need to see and the evidence.
 - `decision-needed`: a limit would leave a required observation undone or weaken it, or the planned target needs access, a device or an account only the owner can grant. IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief.
-- `evidence-blocked`: a load-bearing document, journey or test can't be read. Return the source and the access it needs.
+- `evidence-blocked`: a load-bearing document, journey or test can't be read, or required rendering evidence can't be obtained. Return the exact source or rendering gap and the access or capability it needs.
 
 Then return one route:
 
@@ -131,14 +131,15 @@ locally-ready       -> recommend design-review in four-document-design mode
 specification-gap   -> return the token and its payload
 program-design-gap  -> return the token and its payload
 decision-needed     -> stop with the brief
-evidence-blocked    -> stop with the exact source and access
+evidence-blocked    -> stop with the exact source or rendering gap and the access or capability it needs
 ```
 
 A review handoff carries pointers to the four documents, this return and the review question; it copies no document.
 
 ## Not ready while
 
-- a requirement has no row, or a row leaves its obligations implicit;
+- a requirement has no row;
+- a row does not name every obligation (`R`) its requirement (`U`) links;
 - an obligation is decided by no observation and isn't listed as unverified;
 - a row's reference is the app's current behavior, a model's judgment, or missing;
 - a passing condition names no wrong build that fails it, or an acknowledgement alone would pass it;
@@ -148,7 +149,7 @@ A review handoff carries pointers to the four documents, this return and the rev
 - a pure rule or structural claim is given an app launch, or an outcome the user meets in the app is given only a unit test;
 - a row says or implies that something was observed;
 - a limit leaves a required observation undone or weaker without the owner's decision;
-- a view lacks a passing rendering result or an exact gap;
+- a required view lacks a passing rendering result, including when its exact gap is recorded;
 - a seam or Specification gap was worked around inside a row instead of returned.
 
 IF a trace is open, at phase completion record the outcome, evidence, and next owner or return token as a checkpoint through `sunstack-dev:practices-show-me-your-work`.
