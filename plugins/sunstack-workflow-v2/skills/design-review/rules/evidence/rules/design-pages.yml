@@ -22,38 +22,45 @@ rule:
   kind: element
   has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid="E[0-9]+"'}
 ---
-# A coverage row: a table row inside the element with id="coverage", or inside
-# an element that follows a heading with id="coverage" with no heading between.
-id: coverage-row
+# The visible text of a coverage row: text nodes inside a table row that is inside
+# the element with id="coverage", or inside an element that follows a heading with
+# id="coverage" with no heading between. Comments and attribute values are not text.
+id: coverage-row-text
 language: Html
 rule:
-  kind: element
-  has: {kind: start_tag, regex: '^<tr\b'}
-  any:
-    - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid="coverage"'}}
-    - inside:
-        stopBy: end
-        kind: element
-        follows:
-          stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
+  kind: text
+  inside:
+    stopBy: end
+    kind: element
+    has: {kind: start_tag, regex: '^<tr\b'}
+    any:
+      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid="coverage"'}}
+      - inside:
+          stopBy: end
           kind: element
-          has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid="coverage"'}
+          follows:
+            stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
+            kind: element
+            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid="coverage"'}
 ---
-# An entity-binding row, placed the same way under id="bindings".
-id: binding-row
+# The visible text of an entity-binding row, placed the same way under id="bindings".
+id: binding-row-text
 language: Html
 rule:
-  kind: element
-  has: {kind: start_tag, regex: '^<tr\b'}
-  any:
-    - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid="bindings"'}}
-    - inside:
-        stopBy: end
-        kind: element
-        follows:
-          stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
+  kind: text
+  inside:
+    stopBy: end
+    kind: element
+    has: {kind: start_tag, regex: '^<tr\b'}
+    any:
+      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid="bindings"'}}
+      - inside:
+          stopBy: end
           kind: element
-          has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid="bindings"'}
+          follows:
+            stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
+            kind: element
+            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid="bindings"'}
 ---
 # A trace link: an element whose own start tag links to a passage, a #fragment
 # on a page of the set (index, requirements, specification, program-design or

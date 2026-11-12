@@ -30,21 +30,21 @@
         "rule": "need-element",
         "fields": {
           "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(U[0-9]+)\"" },
-          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row" }
+          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
         }
       },
       "obligation": {
         "rule": "obligation-element",
         "fields": {
           "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(R[0-9]+)\"" },
-          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row" }
+          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
         }
       },
       "entity": {
         "rule": "entity-element",
         "fields": {
           "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(E[0-9]+)\"" },
-          "bindings": { "from": "document", "path": "program-design.html", "rule": "binding-row" }
+          "bindings": { "from": "document", "path": "program-design.html", "rule": "binding-row-text" }
         }
       },
       "trace_link": {

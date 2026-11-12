@@ -299,17 +299,19 @@ test.each([
   },
 );
 
-test("known limit: an id inside an HTML comment within a coverage row counts as coverage", async () => {
-  const verification = replaceExactlyOnce(
-    withoutR6,
-    "U1; R1,R5,R7,R9",
-    "U1; R1,R5,R7,R9<!-- R6 -->",
-  );
+test.each([
+  ["an HTML comment", "U1; R1,R5,R7,R9<!-- R6 -->"],
+  ["an attribute value", '<span data-note="R6">U1; R1,R5,R7,R9</span>'],
+] satisfies [string, string][])(
+  "an obligation named only in %s inside a coverage row still warns once",
+  async (_place, rowCell) => {
+    const verification = replaceExactlyOnce(withoutR6, "U1; R1,R5,R7,R9", rowCell);
 
-  const report = await lintDesignSet({ ...adapted, verification });
+    const report = await lintDesignSet({ ...adapted, verification });
 
-  expect(report.findings).toEqual([]);
-});
+    expectOneFinding(report, { rule: rule.obligationRow, page: "specification", line: r6Line });
+  },
+);
 
 test("a missing verification page leaves coverage undecided, never passed", async () => {
   const { verification: _absent, ...withoutVerification } = adapted;
