@@ -1,14 +1,38 @@
 # Page patterns
 
-This reference covers arranging a page with multiple pages, a guided path, three or more component kinds, a compact-cell/meter comparison, a capture-variation comparison or a response/feedback composition. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
+This reference covers composing a substantial multi-section explanation and arranging multiple pages, a guided path, three or more component kinds, a compact-cell/meter comparison, a capture-variation comparison or a response/feedback composition. It shows good and bad arrangements; the guide at the page's binding owns the exact markup.
 
-Expected inputs: the reader's question, forms chosen in step 2, and any requested answers, feedback handoff, compact-cell/meter comparison or related-capture comparison.
+Expected inputs: the reader's question, the questions and relationships of substantive sections, any supplied or already selected forms, and any requested answers, feedback handoff, compact-cell/meter comparison or related-capture comparison. An early composition read does not require forms to have been selected yet.
 
-Return: the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the applicable pattern and example it follows.
+Before form selection, return the section questions, explanation and diagram jobs, Map organization and Walkthrough decision when applicable. During composition, once forms are selected, use this same reference to return the arrangement (what opens the page, where each form sits, which width it uses, and what sits one action away), plus the pattern and example it follows. Do not invent a chosen form or its dimensions to complete the early return.
 
 ## Open with the answer, then one slice
 
-The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Everything else is one action away. Good: two sentences, then the capability tree with each capability linking to its section. Keep the source mode selected in `SKILL.md` step 1. On a new HTML-source engineering page, `engineering-documents.md` applies answer-first prose and useful views within each document's natural organization; a v1 human view keeps its Markdown sources authoritative. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
+The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Continue the main explanation through its substantive sections in normal document flow; optional backing detail sits one action away. Good: two sentences, then the capability tree linking to sections that explain their parts. Keep the source mode selected in `SKILL.md` step 1. On a new HTML-source engineering page, `engineering-documents.md` applies answer-first prose and useful views within each document's natural organization; a v1 human view keeps its Markdown sources authoritative. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
+
+## Compose sections a reader can follow
+
+For a substantial work account or technical explanation, build each section around one meaningful question. Introduce the situation and the terms needed to understand it, compose the relevant diagram beside the explanation, and explain what the relationship means for the reader. A work account also makes the actual actions, decisions, corrections and results understandable. A paragraph-filled card is still a paragraph; a phase diagram alone does not explain a changed ownership boundary.
+
+Give the forms complementary jobs. Text explains context and reasons; a diagram exposes the source-supported relationship; a comparison aligns corresponding facts; code shows exact technical material; a Trace opens the evidence behind ordered findings. Keep their meaning together without repeating the same explanation in every form. A short label needs enough adjacent explanation to be understood, not a whole paragraph packed into a node. Split a section when it starts answering an independent question, and link the shared content instead of copying it.
+
+For example, an illustrative maintenance account might ask: why did a restart lose pending work, what changed the ownership of that work, and what did the rehearsal establish? The first section explains the observed loss beside the interrupted sequence; the second explains the recorded correction beside the changed owner and handoff; the third explains the rehearsal beside its exercised path and remaining boundary. These are example questions, not mandatory phases. An ordinary single fact or an empty status answer needs neither a manufactured diagram nor a new section to hold it.
+
+## Map connects related content; the outline follows headings
+
+For a substantial account with related chunks, organize Map around the reader's concerns or the work's subjects and connect each to its relevant explanatory locations. Give destinations useful names and descriptions: the reader should know what they will find. One concern may reach several sections and one section may serve several concerns. Keep those associations source-supported; Map points to facts in the document rather than storing another copy of them.
+
+In the maintenance example, “Keep pending work through restart” can reach the failure sequence, corrected owner and rehearsal result. The left outline still follows where those sections sit in the page. Copying that outline into Map gives the reader no additional way to understand the relationships. A small page with no useful cross-cutting association can keep ordinary heading navigation.
+
+IF the page needs Map, load the matching guide's `navigation.md` and return its supported Map composition, labels and descriptions, stable destinations and opening method. Follow the selected binding's declaration and source rules; do not invent a navigation schema or substitute a spatial diagram for the reader's Map panel.
+
+## Walkthroughs answer an ordered question
+
+Add a Walkthrough when understanding a question or journey requires visiting several existing chunks in a particular order. Name the question, choose the targets that explain its progression, and use narration to direct attention to each target. The content stays at those targets and remains readable without starting the route. A route through every heading is not evidence that a guided explanation was needed.
+
+For the maintenance example, “Does a passing rehearsal mean the rollout is accepted?” could visit the intended outcome, the old failure, the changed handoff, the actual rehearsal and its unproved boundary. That order follows the question, not the page's table of contents. A reader looking up one independent result needs a link, not a guided route.
+
+IF a Walkthrough is needed, load the matching guide's `navigation.md` and `tours.md` and return its supported launcher and path declarations, purposeful narration and resolving target identities. Keep ordinary Pages, headings and Map available beside that optional route; the guide owns the implemented controls and delivery constraints.
 
 ## Reading text beside Canvas views
 

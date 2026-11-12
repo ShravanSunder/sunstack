@@ -1,80 +1,29 @@
-# Demistify delivery and component documentation
+# Bind the matching Demistify guide and reader
 
-Use one library base for the guide, runtime, theme and CLI. Read the matching guide once, then prepare the reader for its intended opening method. The main workflow owns the single lint pass and any explicitly requested verification.
+This reference bootstraps the page's library binding and concrete delivery contract. Inputs: supplied content/privacy constraints, any existing binding, source carriers and intended opening method. Return: trusted library base, matching guide, required source/asset companions, preparation operations and the matching checker. Demistify's guide owns current component syntax and CLI procedures; this reference does not copy them.
 
-## Library binding
+## Choose one matching binding
 
-Choose the binding with the content in view, before writing the shell. IF the supplied content contains actual secrets or credentials, real personal or customer records or security-sensitive detail, or the user, its source markings or an applicable handling policy classify it private, load the runtime-trust section of the matching guide's `content.md` (for v1, `https://demistify.getagentstudio.dev/v1/authoring/references/content.md`) and return the trusted binding and opening method it names. Being internal, unreleased or local, or a request to keep the output local, doesn't meet that condition on its own, so an ordinary internal explanation keeps the documented binding. When the guide at that binding has no such section, bind the content that meets the condition to the trusted complete matching distribution described under Delivery and viewing; return the exact gap only when no such copy or opening method is available, and never put it on a remote runtime.
+Keep an existing page's binding unless the requested change deliberately migrates it. A new ordinary page uses `https://demistify.getagentstudio.dev/v1/`; its guide is `authoring/SKILL.md` under that base. Runtime, theme, component references and checker must match the same binding. Use the guide's shell and source-carrier syntax rather than reconstructing them from another release.
 
-A new page binds Demistify v1:
+A supplied source preview uses its complete matching local build, local guide/references and source checker; call it a local preview, not a published release. A source PR or package version does not establish what the hosted runtime supports. Routine authoring needs no release-hash audit.
 
-```html
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Engineering explanation</title>
-<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
-<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
-</head>
-<body><ex-document>
-<!-- Compose the explanation here. -->
-</ex-document></body>
-</html>
-```
+IF supplied content contains actual credentials/secrets, real personal/customer records or security-sensitive detail, or the owner/source policy classifies it private, use the matching guide's runtime-trust procedure and return the trusted complete local binding and opening method. Internal, unreleased or local content alone does not establish that classification. If no trusted complete copy is available where one is required, return that gap rather than executing a hosted library over the content. Copying only theme and runtime files is not a complete distribution.
 
-`/v1/` is a moving experimental major path: breaking changes can land within v1 until a stable major is declared. Past majors are retained, but v1 keeps no public history of its minor releases, and the current release metadata is available in `release.json` when a version-specific diagnosis needs it. Routine authors do not audit release hashes or source commits. Keep theme and runtime on one binding; the browser fetches renderer chunks, fonts and worker assets relative to it.
+## Load and use the guide
 
-A page that keeps an older binding uses that release’s own guide and checker; never attach current v1 metadata to it or migrate it only to get a release record. A hosted release keeps its guide at `authoring/SKILL.md` beside `runtime.js`; never apply the v1 API to an older runtime.
+MUST load the full `authoring/SKILL.md` at the selected binding and return the documented shell, source carriers, selected views and their required component-reference reads, preparation route and checker. For a local preview, use the supplied matching local guide. A full prior read of the same guide in this run counts; a saved copy or filename listing without inspecting its contents does not.
 
-An unreleased source preview uses the complete matching built library, verified local component guide and matching source tools. Name it as a local preview rather than a published release. Read the candidate guide's relative references from that same source tree. A source PR, a package version or an installed workflow skill does not establish that the public runtime supports the candidate API.
+Follow the guide's own conditional references for the content you actually display, including Trace, code/diff, diagrams, navigation and layout. Read those contents before writing their constructs; a component name in a catalogue is not its API. If a required guide cannot be read, return the missing source rather than inventing attributes or silently reusing a different version.
 
-## Component guide
+## Make opening and updates concrete
 
-MUST load the guide for the page’s binding (for v1, `https://demistify.getagentstudio.dev/v1/authoring/SKILL.md`) and return the islands and layouts the page will use; write their syntax straight into the page. The guide’s relative references resolve beside it, under `/v1/authoring/` for v1. Follow the guide's own MUST/IF calls, including its content/source-carrier reference and the conditional references for the components and navigation this page uses; return the constructs and delivery decisions taken from each.
+Name the original authoring sources and the actual reader files. An inline page needs no Markdown embedding. Relative source/data fetches require HTTP serving or the guide's documented preparation; direct-file delivery must not depend on blocked sibling fetches. Offline/private delivery needs the complete matching local library, not merely embedded prose.
 
-For a new v2 HTML design collection using shared navigation, the engineering recipe conditionally loads the matching bound `navigation.md` and `tours.md` before authoring. All peer pages use one descriptor; return the real descriptor/page/target identities and check/delivery result. The matching guide owns schema and URI syntax, and shared `src` fetching needs HTTP. Until the matching binding and CLI are published, report source preview only. Keep HTML as the design source; this descriptor is navigation metadata, not the legacy need/rule/check preparation format.
+For a generated or embedded reader, retain its original source wrapper and referenced originals; update those and regenerate through the matching guide's procedure. A missing `src` in generated output is not proof of inline authorship. Never repair generated reader text in place while its owning source remains stale.
 
-The main guide owns the available elements, attributes, tones, icons and widths. Recipes in `presentation-html` choose how to explain the content; they do not add API. For a topic comparison, use `comparisons.md` as the canonical comparison guide; `pictures.md` describes the image slider and gallery.
+Use the guide's documented operations and exact checker/CLI route for the selected delivery method, not an archive filename or flag guessed from the base URL. Prepare only what the page needs: source embedding for external sources, collection indexing for cross-page search, then the single final static check after the last transform. Preserve IDs, links and required companions; readers should not need to run authoring commands.
 
-The guide at the page’s binding is the only source of available API. A construct you know only from a proposal, a design discussion or another version, including a different presentation model, stays unavailable until that guide documents it. If the guide cannot be fetched, use a verified matching local copy or report the missing reference; never reconstruct its interface.
+For a requested freshness comparison or a diagnosed stale-output defect, compare equivalent temporary prepared output before replacing the existing reader. Otherwise regenerate once from retained originals, with the same collection transforms where needed. Report unavailable originals or failed preparation as gaps rather than claiming freshness.
 
-## Delivery and viewing
-
-Delivery depends on what the page loads. Library assets from the CDN need no app server, package install or build, but they do need the network. Sibling Markdown or JSON fetched by the page needs HTTP serving or embedding, because browsers block `file://` pages from fetching sibling files. Offline viewing needs the library itself local: either a trusted complete copy of the matching distribution beside the page, with both bindings pointed at it and served over HTTP, or a single-file standalone bundle, which exists only as the source API `bundleStandaloneHtml`; the matching guide's runtime-trust section in `content.md` says when that bundle counts as checked: only after the binding's checker passes it. Copy the whole distribution, including hashed chunks, worker, fonts and icons; `runtime.js` and `theme.css` alone break lazy dependencies. Sensitive or private content takes the trust choice made at the binding, above.
-
-`presentation-html` step 5 owns the static authoring check. Opening or driving a browser is not a routine delivery requirement.
-
-## Prepare the reader
-
-The matching guide owns the CLI operations, the tool route and the CLI archive's URL. When it documents a CLI archive, run that archive at the exact URL the guide documents (for a hosted binding, the main guide's lint step prints it), with Node 26+ through `pnpm dlx` or `npx --yes`; it includes its dependencies and needs no browser or checkout. In the commands below, `<cli-archive-url>` stands for that exact URL: copy it from the guide each time, and add no other URL, flag or pinned hash. Use the same base as the page. For an older binding without that tarball, use its documented source CLI if already available; do not clone a repository or install browser tooling just to lint a document. Readers run no command.
-
-1. Inspect the page's source history and dependencies before treating missing `src` as inline authorship. A generated embedded copy or known-source refresh uses its retained live source page and original Markdown, even though the output has consumed `src`. Missing required originals are a gap; the generated copy cannot prove freshness. Other pages with local Markdown references retain those files and a live source page such as `guide.source.html`. An independently authored inline page with neither local Markdown references nor a known-source refresh remains the reader and skips embedding. In page-local navigation mode, keep each Walkthrough definition on its owning source page. In shared-`src` mode, keep Pages, Map and Walkthrough definitions together in the shared descriptor referenced by every peer; do not add competing page-local declarations.
-   For generation or a local edit, keep model context on authored HTML sections, actual component records and any retained source wrappers or affected Markdown; let tools read the complete explicit collection. Generated data carriers and collection-index payloads are output, not another design source to dump repeatedly. Return concise file/count/issue results instead of generated readers or index payloads.
-2. After composition is complete, use the CLI at the page's binding:
-
-   ```sh
-   pnpm dlx <cli-archive-url> embed /path/guide.source.html /path/guide.html
-   ```
-
-   Keep output beside input or preserve its relative page/image layout. Deliver `guide.html`; retain `guide.source.html` and its Markdown for updates. The transform embeds exact Markdown, including literal script terminators. It does not inline arbitrary JSON, pictures, the library or fonts. Prepare other local data only through a route documented by the matching guide, or name the unresolved dependency.
-3. For shared collection search or Walkthrough discovery, embed each live-source page first, then index every explicit delivered page, including peers without local walkthroughs:
-
-   ```sh
-   pnpm dlx <cli-archive-url> index /path/guide.html /path/details.html
-   ```
-
-   Keep stable island IDs, relative paths and the input list. An authored inline peer participates without an extra embed. In page-local mode, repeat the guide's Pages links on each peer. In shared-`src` mode, every peer loads the same JSON descriptor instead of declaring its own Pages or Walkthroughs. After a local source edit, regenerate affected readers and refresh the complete collection index. The matching guide owns navigation syntax, indexing order and freshness.
-4. Lint the changed final HTML files once after all transforms:
-
-   ```sh
-   pnpm dlx <cli-archive-url> check /path/guide.html /path/details.html
-   ```
-
-   For a single reader, list only that file. Fix errors; treat warnings as advice. A passing check proves recognized markup/data constraints, not readability, source truth, links or interaction. Apply permitted repairs to the live HTML/Markdown source, never directly to generated output (including with `check --fix`); prepare and index again as applicable, then recheck every final file. If a repair exceeds the delivery-only grant or needs a product change, return the exact failed check/gap instead. Main step 5 owns the single lint pass; no browser observation is required for routine authoring.
-5. Return the reader files, the retained authoring-source paths and the actual companions that must travel with them: linked pages, relative pictures and any unresolved local data. Embedded Markdown need not travel for rendering. State whether the shared library or data still needs the network. Fully offline delivery needs a complete matching distribution or a documented standalone route; it is a distinct target, not a consequence of embedding prose.
-
-## Updating prepared readers
-
-After changing a known live source, IF you are investigating a stale-output defect or were explicitly asked to prove freshness, first compare an equivalent temporary generation, with its full collection index, against the existing reader and record the result, then replace the reader. Otherwise rerun its embed and collection-index transforms; a fresh generation from that source is sufficient for routine delivery, and no second temporary collection is needed for byte-comparison proof. Keep edits in the authoring source, not generated HTML.
+Return the opening method and all files/assets that must travel together, with the matching checker result. Static checking does not establish rendered behavior or comprehension; presentation-html's calling conditions govern any separately requested browser inspection. Do not install browser tooling or create infrastructure for routine authoring.
