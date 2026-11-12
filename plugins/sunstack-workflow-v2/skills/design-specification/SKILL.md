@@ -253,7 +253,7 @@ Author top-down: begin with the smallest Why/What map a human needs to confirm t
 
 In a file-backed set, use `sunstack-dev:presentation-html` to author Requirements and Specification as distinct complete HTML documents, with ordinary prose, sections, diagrams and tables suited to their reader questions. The Requirements page owns each need, its authority and any confirmed capability grouping; the Specification owns entity meaning and observable obligations. Give needs, rules and shared concepts stable section targets and useful direct trace links.
 
-Trace links to needs, rules and shared concepts resolve to their authoritative passages.
+Trace links to needs, rules and shared concepts resolve to their authoritative passages.<!-- D004 -->
 
 Write `index.html` when this run starts the set and link the documents that exist. Keep unanswered owner questions visible, with comparisons/choices only when an answer is needed and Comments for discussion. Use the composition recipe's worked examples; no specialized requirements/stage viewer, mandatory need/rule records or separate Markdown design files. For a new v2 HTML set, follow that recipe's shared navigation preflight and return the real descriptor, page and target identities plus actual check/delivery result; the matching guide owns the JSON schema. Apply only a selected component's actual data/preparation contract, including call stacks when relevant, then run the matching static check.
 
@@ -264,6 +264,8 @@ Completion: the Requirements and Specification homes are separately identifiable
 ### 10. Run the author self-check
 
 Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the whole artifact. Check authority conflicts, accepted-requirements coverage, traceability, vague obligations, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, process residue, obscure headings, duplicated companion narration, and reader-facing elements that fail the human deletion test. For each generated visual also consume the actual project asset, relative embed, pixel inspection and destination-preview result from the shared rendering owner, then return the author self-check with exact gaps.
+
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `specification-only` config, and fix or answer each trace-link warning before returning.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 

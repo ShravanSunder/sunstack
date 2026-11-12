@@ -233,6 +233,8 @@ A newly authored or substantively revised substantial Program Design renders eac
 
 In a file-backed set, use `sunstack-dev:presentation-html` to author the complete Program Design as HTML, organized by the ownership, lifecycle, contract or call-path questions that explain it. Put each diagram beside a complete interpretation of its purpose, important transitions, outcomes and failures; keep bindings and the one-row-per-obligation trace table inspectable, with stable links to actual upstream rules and downstream proof. Use normal components rather than a program-design stage projection or design-part record format. A real source-derived call path may use the retained call-stack component, with the matching bound guide's actual need/stack/frame preparation and supported limits; a proposed path can use a labelled sequence/call graph. Keep open design choices separate from settled structure and apply the recipe's decision/discussion examples. Update `index.html` and reading links; no separate Markdown design source. For a new v2 HTML set, follow the shared navigation preflight in the composition recipe and return the actual descriptor/page/target identities and check/delivery result; do not duplicate the guide's schema. Run only applicable component preparation and the matching static check.
 
+Put the entity binding table in, or directly under the heading of, an element with `id="bindings"`, and the trace table the same way under `id="trace"`. Design review's rules count an entity's binding only in a row found under `bindings`, so its mention in the trace table doesn't count.
+
 Compose each substantive How explanation around one structural question and its source-supported relationship, with a supported relational diagram beside its context and interpretation. The diagram makes the owners, edges, states/effects, outcomes or failures visible; the prose explains how to read that relationship. Every other fired view still appears with its required fields. One explanation and diagram may connect several related `E` or `R` identities when their structural relationship is shared; preserve every required identity, binding and independent trace-table row rather than using the view as a substitute for those records. Keep exact boundary shapes and supporting derivations inspectable in the same owning design, with governing guards and failure obligations visible.
 
 Keep distinct reader questions in separate views when combining them would hide an owner, call edge, state transition, failure path, or proof seam. A request for one diagram or valid Mermaid syntax does not override the fired view predicates or semantic fields: reject the overloaded request and render the separate inspectable views now rather than also producing the lossy all-in-one view.
@@ -252,6 +254,8 @@ Completion: each design element serves an obligation, constraint, failure policy
 ### 16. Run the author integration self-check and record the structure decision
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the trace table and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. Consume each generated visual's accepted project asset, relative embed, semantic/readability inspection and destination-preview result, then return the integration self-check with exact gaps.
+
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `program-only` config, and fix or answer each binding and trace-link warning before returning. A clean run shows only that the rows and links exist.
 
 Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show the views, pictures a reader can follow first, then the tables:
 
@@ -345,7 +349,7 @@ Do not return `locally-ready` while any of these hold:
 - the confirmed goal boundary or accepted requirements set is missing, unrecoverable, conflicting, or rebuilt from mutually narrowed current files;
 - target structure was selected without current-system evidence or a named greenfield basis;
 - a material structural choice lacks credible alternatives, explicit tradeoffs, accepted debt and payer, or falsifiers/revisit signals;
-- a Specification entity lacks a binding row;
+- a Specification entity lacks a binding row;<!-- D003 -->
 - a binding cell is blank rather than `gap: <why>`;
 - a boundary crossing has only a prose shape;
 - a result or decision contract is an open string or prose variant list;

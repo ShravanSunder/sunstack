@@ -1,0 +1,40 @@
+{
+  "D001": {
+    "name": "verification-design.requirement-has-coverage-row",
+    "evidence": "need",
+    "decision": {
+      "start": "has_row",
+      "steps": {
+        "has_row": {
+          "mechanical_check": { "tool": "contains_field", "field": "coverage", "needle": "identifier" },
+          "yes": "pass",
+          "no": {
+            "finding": "No row under id=\"coverage\" in verification.html names this requirement; a row that names it is still only a candidate for a good observation.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "related": ["coverage"],
+    "severity": "warn"
+  },
+  "D002": {
+    "name": "verification-design.obligation-named-in-coverage-row",
+    "evidence": "obligation",
+    "decision": {
+      "start": "named",
+      "steps": {
+        "named": {
+          "mechanical_check": { "tool": "contains_field", "field": "coverage", "needle": "identifier" },
+          "yes": "pass",
+          "no": {
+            "finding": "No row under id=\"coverage\" in verification.html names this obligation.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "related": ["coverage"],
+    "severity": "warn"
+  }
+}
