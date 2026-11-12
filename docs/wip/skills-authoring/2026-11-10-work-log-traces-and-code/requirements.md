@@ -1,0 +1,9 @@
+# Explanatory work-log pages
+
+Owner-directed behavior update after the rejected local examples. Owner explicitly requests autonomous local skill-file experiments with fresh Terra rounds, personal source/rendered inspection, final samples that work, and adherence to skill-design/skill-creation/review/rules. The owner must not be the intermediate evaluator. Two named runs: update presentation-work-log, then update presentation-html and its Demistify bridge. Keep PR213 as the review vehicle for the resulting coherent presentation fix; no merge/cache authority.
+
+Success: an explicitly requested page explains consequential work through a small number of meaningful episodes and relationships, uses Trace steps with attached relevant evidence for ordered accounts, renders actual source/commands/config/structured data as readable code views, and preserves a complete inspectable source companion without turning every raw row into a primary page item. Keep four ordinary headings, freeform meaning, source truth and unknowns, explicit-request-only authorization and ongoing logging unchanged.
+
+Observed artifacts: all prior first attempts are preserved. One emitted804 raw disclosures and serialized entire records into pre/code; another emitted raw pre text. Neither extracted source evidence into Demistify code views. The page requirement that every uncovered row be listed made this a completion path. Actual tool records show main-skill reads but incomplete consumption of some required reference contents. A valid markup check accepted these poor explanations.
+
+Scope: improve general teaching and validate fresh outputs locally; no project-specific diagram/step recipe, component quota, upstream log edits, raw private evidence in public PR, frozen workflow edits or new app/rendering infrastructure. Explicitly requested samples are authorized HTML; no status/design page is created automatically.
