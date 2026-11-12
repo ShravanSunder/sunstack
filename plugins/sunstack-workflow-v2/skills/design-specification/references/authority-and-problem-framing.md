@@ -125,7 +125,7 @@ current owner-confirmed requirements record plus confirmed goal boundary
       -> otherwise authority conflict and decision-needed
 ```
 
-Mutually narrowed current requirements, specification, or program-design files never establish the baseline by themselves. Consume the accepted-requirements fields owned by `spec-design/SKILL.md`; do not duplicate them here or create a ledger. Compare stable identities, coverage, and authoritative meaning. Every removed or superseded item needs explicit owner authority.
+Mutually narrowed current requirements, specification, or design-program files never establish the baseline by themselves. Consume the accepted-requirements fields owned by `spec-design/SKILL.md`; do not duplicate them here or create a ledger. Compare stable identities, coverage, and authoritative meaning. Every removed or superseded item needs explicit owner authority.
 
 Good: a simplification removes five mechanisms while every accepted user, variant, default, scenario, contract, and proof obligation remains covered.
 

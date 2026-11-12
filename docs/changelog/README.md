@@ -4,6 +4,7 @@
 - [2026-11-11 Record meaningful work without procedural duplication](2026-11-11-material-work-records.md)
 - [2026-11-11 Workflow v2 task guidance and model selection](2026-11-11-workflow-v2-task-guidance.md)
 - [2026-11-10 Workflow v2 role/files commissioning](2026-11-10-role-file-commission.md)
+- [2026-11-10 Free-form HTML design authoring and semantic navigation](2026-11-10-v2-html-navigation.md)
 - [2026-11-10 Restore the v1 Markdown design baseline](2026-11-10-restore-v1-markdown-design.md)
 - [Separate tracking from requested work-log pages](2026-11-10-work-log-presentation-split.md)
 - [2026-11-09 Workflow v2 management source](2026-11-09-workflow-v2-management.md)

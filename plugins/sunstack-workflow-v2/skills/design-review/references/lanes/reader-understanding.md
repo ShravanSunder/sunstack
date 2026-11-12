@@ -39,6 +39,8 @@ For Verification Design review, a human must be able to read each requirement's 
 
 Check that each artifact starts with the smallest useful model and reveals detail afterward. Flag missing links, bottom-up detail before the model, copied prose presented as traceability, or a final artifact that requires scratch or review notes to recover accepted meaning. Preserve one compact breadcrumb or artifact map. Scratch may remain optional evidence.
 
+Within the already selected reader scope, start at each substantive section's actual anchor and stated question/answer. Reconstruct how its context, adjacent supported relational diagram and interpretation fit together, then follow links to exact fields or derivations. Check that the diagram exposes a relationship the prose alone would not, while the text explains its outcome and keeps governing guards, failures and unknowns visible. A card or paragraph alone does not satisfy the diagram job. A single explanation and diagram may cover several related identities; check each through its existing authority and trace rows instead of requiring a section or picture per identity. A small fact can remain a sentence or row. Source or static validity alone does not establish that the rendered relationship can be read.
+
 ## Apply the Human Deletion Test
 
 Within the authorized unresolved risk or explicit deep-reader scope, test every applicable heading, paragraph, list, table, and diagram:

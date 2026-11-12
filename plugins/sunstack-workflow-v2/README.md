@@ -1,8 +1,8 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.1.0**. Requires `sunstack-dev`. Frozen v1 remains the default runtime workflow until base callbacks change.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.2.0**. Requires `sunstack-dev` 3.2.0 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
 
-The bottom layer supplies selected design skill copies. This upper layer adds management and four role charters, adapted from frozen v1; another agent owns design-content changes.
+This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
 ## Skill sources
 
@@ -13,7 +13,7 @@ The bottom layer supplies selected design skill copies. This upper layer adds ma
 | verification-design | [design-verification](skills/design-verification/SKILL.md) |
 | spec-program-review | [design-review](skills/design-review/SKILL.md) |
 
-Copied from frozen v1 on main `133a3ace8b91611b65bf22f849d39ddf7cd6f3ac`. This layer changes names, source paths and dependency destinations; it does not select a new design-document layout.
+The engineering baseline is the four design phases from before PR #205, at `b37419ca08dcde11bb8c72b810a4e91afec345f9`, with the v2 route names and installed-plugin dependency repairs retained. V2 changes their artifact presentation to complete free-form HTML through `sunstack-dev:presentation-html`; v1 separately keeps the historical Markdown contract.
 
 ## Dependency ownership
 
@@ -33,7 +33,7 @@ The packet union accepts only lead, implementer, operator and checker. Checker v
 
 ## Scope
 
-Copied design source still uses the existing stage meanings pending its separately assigned redesign. Marketplace registration publishes the plugin for install; it does not switch the default runtime workflow or change frozen v1.
+The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject; the specialized requirements/stage/related-document viewers are excluded from new v2 authoring. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this design update changes no role/management behavior or v1 archive and refreshes no installed caches. Installing v2 does not switch the default runtime workflow.
 
 ## Runtime activation blocker
 
@@ -54,3 +54,4 @@ Implementer and Verifier may use native subagents for separable tasks within the
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 
 The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer tasks and rechecks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine board-driven check-ins use one 55-minute Lead trigger, ending on completion/pause; material blockers are immediate. This source change configures no live trigger and establishes no cache savings or actual agent compliance. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
+
