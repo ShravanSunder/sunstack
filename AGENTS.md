@@ -28,6 +28,7 @@ ai-tools/
 │   ├── dev-workflow-tools/           # Common tool skills, including Peekaboo UI testing
 │   ├── sunstack-dev/                 # Maintained engineering practices, domains and principles
 │   ├── sunstack-workflow-v1/         # Frozen legacy roles, phases and orchestration
+│   ├── sunstack-workflow-v2/         # Editable four-role design and management workflow
 │   └── skill-authoring/              # Skill creation, rules, review, and audit
 ├── observability/                    # Shared local OpenTelemetry and Victoria stack
 ├── agent-scripts/                    # Host agent scripts (not plugin skills)
@@ -47,7 +48,7 @@ Claude Code can load the same skill tree when a plugin also has `.claude-plugin/
 
 Read [docs/architecture/README.md](docs/architecture/README.md) for the current system model, [skill-system.md](docs/architecture/skill-system.md) for layers, roles and the four-document workflow, and [skill-standards-linter.md](docs/architecture/skill-standards-linter.md) for executable standards and their proof limits. Runtime instructions stay in their owning skills and shared references.
 
-Keep the current inventories in [sunstack-dev/README.md](plugins/sunstack-dev/README.md) [sunstack-workflow-v1/README.md](plugins/sunstack-workflow-v1/README.md), and [skill-authoring/README.md](plugins/skill-authoring/README.md). Historical proposals do not override shipped source.
+Keep the current inventories in [sunstack-dev/README.md](plugins/sunstack-dev/README.md), [sunstack-workflow-v1/README.md](plugins/sunstack-workflow-v1/README.md), [sunstack-workflow-v2/README.md](plugins/sunstack-workflow-v2/README.md), and [skill-authoring/README.md](plugins/skill-authoring/README.md). Historical proposals do not override shipped source.
 
 ## Frozen workflow archive
 

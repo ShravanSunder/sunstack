@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, test } from "vitest";
 
 const repoRoot = path.resolve(import.meta.dirname, "../../../..");
-const runtimePluginNames = ["sunstack-dev", "sunstack-workflow-v1"] as const;
+const runtimePluginNames = ["sunstack-dev", "sunstack-workflow-v1", "sunstack-workflow-v2"] as const;
 const activeSkillRoots = runtimePluginNames.map((name) => path.join(repoRoot, "plugins", name, "skills"));
 const discoverRuntimeEntrypoints = (repositoryRoot: string): readonly string[] =>
   runtimePluginNames.flatMap((name) => {

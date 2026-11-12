@@ -1,5 +1,7 @@
 # Sunstack Workflow v2
 
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.2.0**. Requires `sunstack-dev` 3.2.0 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
+
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
 ## Skill sources
@@ -31,17 +33,17 @@ The packet union accepts only lead, implementer, operator and checker. Checker v
 
 ## Scope
 
-The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject; the specialized requirements/stage/related-document viewers are excluded from new v2 authoring. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. This source change does not register, install or activate v2, change role/management behavior or modify the v1 archive.
+The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject; the specialized requirements/stage/related-document viewers are excluded from new v2 authoring. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this design update changes no role/management behavior or v1 archive and refreshes no installed caches. Installing v2 does not switch the default runtime workflow.
 
 ## Runtime activation blocker
 
-Base preflight and verification practices still route delegation to v1. This source/schema layer does not close those callbacks. Installation and runtime activation remain blocked pending a separately scoped base compatibility change. Trigger trials and live agent behavior have not been evaluated; no manifests, marketplaces or installed caches change here.
+Base preflight and verification practices still route delegation to v1. Installing this plugin does not close those callbacks. Trigger trials and live agent behavior have not been evaluated.
 
 ## Role and files commissioning
 
 Delegated initial work, continuations and corrections contain only `role` (implementer, checker or operator) and nonempty `files`. Launch metadata remains separate. Recipients load their role, read current referenced governing files, resolve sourced assignment context and validate it with the retained rich role schemas. Existing documents need not be rewritten as full packet files. A missing grant, pair, duty or ending check returns an exact gap. Reports and direct pair exchanges keep their existing contracts.
 
-The strict call schema checks source-level content shape; it does not intercept Router messages, enforce permissions or prove safe live file interpretation. Runtime activation remains blocked by the existing base callbacks; agent behavior and token savings have not been evaluated.
+The strict call schema checks source-level content shape; it does not intercept Router messages, enforce permissions or prove safe live file interpretation. Base callbacks still select v1; agent behavior and token savings have not been evaluated.
 
 ## Responsibility and completion
 
