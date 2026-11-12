@@ -11,7 +11,7 @@ A task qualifies when it spans sessions, commissions another agent, crosses comp
 
 ## 1. Open or resume
 
-IF this qualifying task has no established work home in context, MUST load `practices-collaboration` and return the exact work thread and Router project, or `no-home: <gap>`. Otherwise reuse that established home. The log is that project's work trail filtered by the work's tag; a helper's packet names it in `workLog`.
+IF this qualifying task has no established work home in context, load `practices-collaboration` and return the exact work thread and Router project, or `no-home: <gap>`. Otherwise reuse that established home. The log is that project's work trail filtered by the work's tag; a helper's packet names it in `workLog`.
 
 Choose the reading path from the context actually retained:
 
