@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-11 Design review runs the first design rules](2026-11-11-v2-design-rules.md)
 - [2026-11-11 Workflow v2 design-skill corrections](2026-11-11-v2-design-skill-corrections.md)
 - [2026-11-11 Explain work-log episodes with decisive evidence](2026-11-11-readable-work-accounts.md)
 - [2026-11-11 Publish sunstack-workflow-v2 0.1.0](2026-11-11-workflow-v2-marketplace.md)
