@@ -1,6 +1,6 @@
 # Read the record for a requested page
 
-This reference owns source reading, freshness, backing and coverage for one explicitly requested page. Inputs: project/tag or permitted entries files, requested scope, any inspected capture/cutoff/open state and historical summaries. Return: the source snapshot and provenance, current questions and outcomes, checked backing, material gaps and permitted reader destination. The source is read-only during rendering.
+This reference owns source reading, freshness, backing and coverage for one explicitly requested page. Inputs: project/tag or permitted entries files, requested scope, any inspected capture/cutoff/open state and historical summaries. Return: the source snapshot and provenance, current questions and outcomes, selected evidence and its scope, checked backing, material gaps and permitted reader destination. The source is read-only during rendering.
 
 ## Establish the snapshot
 
@@ -29,6 +29,25 @@ Group related records into meaningful subjects: what changed, why, the decision 
 For each material displayed claim, inspect the original backing and newer relevant corrections or closure rows. Check the whole supplied interval for material facts that change the conclusion. Grouped internal coverage is sufficient; no new stored Story, coverage ledger or record for every read is required. Report partial scope and unavailable evidence honestly.
 
 Keep the complete declared source snapshot available through an existing stable source or a permitted companion, including its provenance and links. An archive preserves detail; it does not substitute for explaining the work. The page does not add source events about its own capture, summary preparation, checker, audit or completion.
+
+## Select evidence for an explanatory episode
+
+These illustrative source notes teach composition, not facts or commands to copy into another project's page:
+
+- An implementer reports that `pytest tests/test_retries.py` exited `1`: the fixture reached three attempts at `assert attempts == 2`.
+- A decision report says, "Keep the existing two-attempt contract; correct the fixture configuration." Its authority is the existing contract, not a new owner choice.
+- The implementer then reports changing the fixture configuration from three attempts to the contract's two attempts.
+- A later implementer report says the same command passed five fixture cases, exit `0`, and explicitly leaves the real service untested.
+
+One episode can explain those notes in three meaningful steps:
+
+1. **The fixture exposed an extra attempt.** Explain the expected two versus observed three, and attach the reported assertion as a Python excerpt. The failed result belongs beside it, attributed to the implementer; the record link opens the complete report.
+2. **The correction kept the existing contract.** Explain why this is a configuration correction rather than a changed retry policy, and attach the decision's quoted sentence with its authority. This step needs no invented diff.
+3. **The local fixture passed; the real service remains untested.** Display the exact supplied command in a shell view and put its reported five-pass result and local-fixture scope beside it. Link the later report for depth without claiming a fresh run or broader acceptance.
+
+An opening such as "The implementer reported the retry fixture passing after its configuration correction; the real service remains untested" keeps the outcome and its limit together. "Retries are fixed" followed by a later disclaimer would overstate these notes. A step titled "Correction complete" with only a link would omit the evidence the reader needs to judge it. Retrieve actual Trace and code markup from the matching guide; these steps select meaning and support, not an API or a stored record shape.
+
+For a narrative-only source, attach its decisive observation as text instead: if an owner records "Defer publication until the rehearsal is reviewed," explain the hold and quote that direction with its attribution. No code or command is supplied, so none is manufactured. A source without a supporting observation remains a named evidence gap.
 
 ## Destination and completion
 

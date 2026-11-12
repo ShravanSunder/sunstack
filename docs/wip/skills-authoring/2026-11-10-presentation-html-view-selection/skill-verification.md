@@ -1,0 +1,7 @@
+# Proof plan
+
+User-directed design, characterized by an observed baseline. Do not claim that one sentence caused the first outcome, or that two new outputs prove reliability. Parent inspects actual tool records for source reads, current HTML and meaningful source-backed visual relationships; markup/component counts alone are not quality proof. Record differences and gaps, leave first attempts unchanged.
+
+Two fresh Terra medium examples, B/candidate and C/direct-guide, use the same complete frozen804-row Router project trail, cutoff and source envelopes as the prior first pass. Neither author sees old pages, the evaluation checks, the other draft or a D2-specific diagram recipe. Parent privately checks whether important structure is visible, source claims and limits remain sound, rich views answer a real question, simple facts remain simple, and the delivered page/evidence can be used. Browser-inspect the requested examples only. No inherited author corrections count as new runs.
+
+Static/source checks: full diff and transfer cases against R1–R6, matching skill-rules CLI, existing unit/contracts, Claude packaging, version/reference integrity and public-safety scan. Trigger unchanged, so a fresh implicit-trigger trial is not needed for this scoped chooser fix. Installed-client behavior and generalization beyond examples remain unverified. No additional model behavior pressure battery is implied by these two requested examples.
