@@ -90,14 +90,16 @@ function lineOf(text: string, search: string): number {
   return text.slice(0, offset).split("\n").length;
 }
 
-async function lintDesignSet(
-  pages: Partial<DesignPages>,
-  expectedExit = 0,
-): Promise<DesignReport> {
+async function lintDesignSet(pages: Partial<DesignPages>, expectedExit = 0): Promise<DesignReport> {
   const root = mkdtempSync(path.join(tmpdir(), "2026-11-design-rules-"));
   roots.push(root);
   execFileSync("git", ["init", "--quiet", root]);
-  for (const skill of ["design-review", "design-verification", "design-program", "design-specification"]) {
+  for (const skill of [
+    "design-review",
+    "design-verification",
+    "design-program",
+    "design-specification",
+  ]) {
     const relative = `${designSkillsRelative}/${skill}`;
     mkdirSync(path.join(root, relative), { recursive: true });
     cpSync(path.join(repositoryRoot, relative, "SKILL.md"), path.join(root, relative, "SKILL.md"));
@@ -147,11 +149,7 @@ function expectOneFinding(
 }
 
 const adapted = readAdaptedDesignSet();
-const withoutR6 = replaceExactlyOnce(
-  adapted.verification,
-  "U1; R1,R5,R6,R7,R9",
-  "U1; R1,R5,R7,R9",
-);
+const withoutR6 = replaceExactlyOnce(adapted.verification, "U1; R1,R5,R6,R7,R9", "U1; R1,R5,R7,R9");
 const r6Line = lineOf(adapted.specification, 'id="R6"');
 
 test("the real set under the v2 names and ids is quiet, with every piece decided", async () => {
@@ -259,10 +257,27 @@ test("R1 named only as R10 is not coverage for R1", async () => {
 });
 
 test.each([
-  ["prose after the table", (page: string): string => page.replace("</ex-document>", "<p>R6</p></ex-document>")],
-  ["an HTML comment after the table", (page: string): string => page.replace("</table>", "</table><!-- R6 -->")],
-  ["a code sample after the table", (page: string): string => page.replace("</table>", "</table><p><code>&lt;td&gt;R6&lt;/td&gt;</code></p>")],
-  ["a table under the next heading", (page: string): string => page.replace("</table>", '</table><h2 id="references">References</h2><table><tr><td>R6</td></tr></table>')],
+  [
+    "prose after the table",
+    (page: string): string => page.replace("</ex-document>", "<p>R6</p></ex-document>"),
+  ],
+  [
+    "an HTML comment after the table",
+    (page: string): string => page.replace("</table>", "</table><!-- R6 -->"),
+  ],
+  [
+    "a code sample after the table",
+    (page: string): string =>
+      page.replace("</table>", "</table><p><code>&lt;td&gt;R6&lt;/td&gt;</code></p>"),
+  ],
+  [
+    "a table under the next heading",
+    (page: string): string =>
+      page.replace(
+        "</table>",
+        '</table><h2 id="references">References</h2><table><tr><td>R6</td></tr></table>',
+      ),
+  ],
 ] satisfies [string, (page: string) => string][])(
   "an obligation named only in %s still warns once",
   async (_place, placeOutsideRows) => {
@@ -273,7 +288,11 @@ test.each([
 );
 
 test("known limit: an id inside an HTML comment within a coverage row counts as coverage", async () => {
-  const verification = replaceExactlyOnce(withoutR6, "U1; R1,R5,R7,R9", "U1; R1,R5,R7,R9<!-- R6 -->");
+  const verification = replaceExactlyOnce(
+    withoutR6,
+    "U1; R1,R5,R7,R9",
+    "U1; R1,R5,R7,R9<!-- R6 -->",
+  );
 
   const report = await lintDesignSet({ ...adapted, verification });
 
