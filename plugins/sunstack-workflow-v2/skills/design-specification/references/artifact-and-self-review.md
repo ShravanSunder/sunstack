@@ -121,6 +121,7 @@ Re-read the complete artifact and record:
 - duplicated normative homes;
 - missing, duplicated, non-resolvable, identical, or collapsed Requirements and Specification identities;
 - missing, semantically incomplete, unreadable, or decorative Required Why/What Views;
+- a substantive section that lacks a supported relational diagram, whose prose does not give its context and interpretation, or whose grouping hides a required identity or trace; a tiny fact split into an artificial diagram section;
 - missing or broken generated-image assets/embeds, image/text disagreement, unreadable labels, inaccurate alt/captions, or an uninspected destination placement;
 - journey maps that fail to cite their U rows or context diagrams that cross into internal How;
 - a capability named by a component, a row with no home capability or two homes, a row copied under a second capability instead of linked, or an identifier that encodes its capability;

@@ -8,4 +8,5 @@
 - Validation and observed cold/guided limits: [account](references/2026-11-10-v2-html-navigation-validation.md). Final integration checks are recorded there.
 - Model-based lint remains not-run on its unavailable existing credential route; request preparation is not judged execution.
 - Published Demistify 1.22.0 consumer indexing/checking and two rejection cases pass; matching browser evidence is reused at published-bytes/local-host scope. PR213 integration remains pending; visual preference is unverified.
-- Codex/Claude caches were not refreshed by this change; no activation, release or v2 merge is claimed.
+- Codex/Claude caches are not refreshed automatically; v2 remains unregistered and source-only.
+- Refined section teaching pairs reader-sized explanation, relational diagrams and interpretation, keeps precise detail inspectable, and separates model-construction order from final overview-first reading order.

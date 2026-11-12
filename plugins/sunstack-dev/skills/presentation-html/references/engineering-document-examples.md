@@ -2,6 +2,8 @@
 
 These small examples show how to place content, not a fixed template for every document. Read the matching component reference from the page's bound Demistify guide before using its syntax. The examples use a generic queued-job service and do not prescribe that architecture to another project.
 
+Each contract-specific passage below is illustrative. Use its condition and outcome only when the supplied owner-approved contract supports them; keep a different supplied policy intact and adapt or omit the example rather than treating the queued-job case as authority.
+
 ## Answer before naming the question
 
 When the supplied design establishes these outcomes, an opening can say:
@@ -18,7 +20,7 @@ The group belongs in Requirements' ordinary reading flow. Keep each need's stabl
 <section id="recovery-needs">
   <h2>Recover work after interruption</h2>
   <p>This group explains how a user regains control when a connection or worker stops unexpectedly.</p>
-  <p>For this illustration, both needs share the same source and priority: an owner-reviewed recovery report assigns them high priority. If one need has a different source or assignment, link that evidence and state its override beside that need.</p>
+  <p>For this illustration, both needs share the same confirmed source, priority and assigner. State that common basis once; if one need differs, link its actual authority and state the local override beside that need.</p>
   <div class="ex-table-scroll"><table>
     <thead><tr><th>Need</th><th>User outcome</th><th>Boundary</th></tr></thead>
     <tbody>
@@ -27,6 +29,18 @@ The group belongs in Requirements' ordinary reading flow. Keep each need's stabl
     </tbody>
   </table></div>
   <p><a href="specification.html#R7">The shared retention and status rules</a> define how these outcomes are enforced.</p>
+  <p>This journey asks whether a person can still find the same work and understand its status after losing the connection.</p>
+  <ex-mermaid id="recover-work" label="Find submitted work after reconnecting"><script type="text/plain">
+sequenceDiagram
+  actor Person
+  participant Service
+  Person->>Service: Submit a job
+  Service-->>Person: Return its job reference
+  Note over Person,Service: Connection ends before status is observed
+  Person->>Service: Reconnect and request that job
+  Service-->>Person: Return the same job and current status
+  </script></ex-mermaid>
+  <p>The picture shows the user-visible relationship, not a transport or storage design. The accompanying need table keeps the exact outcome and boundary; the linked Specification owns the rules that guarantee them.</p>
 </section>
 ```
 
@@ -34,9 +48,9 @@ If either need requires a separate rationale or failure account, use a headed se
 
 Shared evidence or priority belongs once where it applies to both needs; each need keeps its own stable ID and links to that common basis. Keep the real source, priority and assigner fields required by the phase. Repeating the same “priority unassigned; assigner: owner” note in every row adds no information. If an outcome's consequence is not established by the supplied evidence, mark the rationale as unknown instead of inventing a pain point.
 
-## A requirement and its rule stay readable
+## Keep identities and links inside a complete explanation
 
-A need explains what the user gets; its observable rule belongs in Specification. The link preserves their relationship without copying the rule into the need.
+This abbreviated fragment illustrates stable identity and trace-link placement only; it is not a finished substantive section. A substantive need/rule explanation also needs its question-sized context, a supported relational diagram, and prose interpreting the relationship as described in the recipe. A paragraph remains useful for a small fact or as part of that larger section.
 
 ```html
 <!-- requirements.html -->
@@ -59,7 +73,7 @@ A need explains what the user gets; its observable rule belongs in Specification
 </section>
 ```
 
-An author can add another paragraph, a table of edge cases or a diagram within that section as needed. It is ordinary content, not a browser record body.
+The `U3` and `R3` anchors preserve traceability inside their authoritative pages; the surrounding substantive section supplies the explanation and diagram. A small fact may remain paragraph or table content without becoming its own section.
 
 ## Map from the group to the need, then to related content
 
@@ -109,7 +123,7 @@ A state diagram answers which transitions are legal; a Tree answers which parts 
 ```html
 <section id="cancellation">
   <h2>One store arbitrates claim and cancellation</h2>
-  <p>This journey answers whether a user can stop work before execution begins. The worker's claim and the user's cancellation race for one conditional state change in JobStore; only the operation that sees queued state can commit.</p>
+  <p>This journey answers whether a user can stop work before execution begins. Here, a worker's <em>claim</em> is its conditional attempt to move the job from queued to running. Under this example's stated contract, the claim and the user's cancellation race for one state change in JobStore; only the operation that sees queued state can commit.</p>
   <ex-mermaid id="job-state" label="Claim and cancellation compete"><script type="text/plain">
 stateDiagram-v2
   queued --> running: claim wins
@@ -119,6 +133,16 @@ stateDiagram-v2
   </script></ex-mermaid>
   <p>If cancellation wins, the job becomes cancelled and has no transition to running. If claim wins, the job is running and cancellation reports that it started too late. From there execution can complete or fail; the diagram shows both outcomes without assuming a retry policy. Both state changes belong to JobStore.</p>
   <p>This picture does not specify what happens if JobStore cannot commit either write. Before treating the journey as complete, explain that failure result and recovery behavior from the owning design; do not infer it from the arrows.</p>
+  <details>
+    <summary>Exact transition conditions and visible results</summary>
+    <div class="ex-table-scroll"><table>
+      <thead><tr><th>Observed state</th><th>Operation that commits</th><th>Required result</th></tr></thead>
+      <tbody>
+        <tr><td>Queued; cancellation commits first</td><td>JobStore records cancellation</td><td>The worker does not start the job.</td></tr>
+        <tr><td>Queued; claim commits first</td><td>JobStore records running state</td><td>Cancellation reports that work already started.</td></tr>
+      </tbody>
+    </table></div>
+  </details>
 </section>
 <ex-tree title="Job service responsibilities"><script type="text/markdown">
 - Local job service
@@ -185,6 +209,16 @@ The page keeps design choices and their tradeoffs because they shape the system.
 ```html
 <section id="prove-cancellation">
   <h2>Planned: a cancelled queued job never reaches its handler</h2>
+  <p>Plan: cancel the job while it is queued, let the real worker drain the queue, then inspect stored status and handler entry together. This is unrun; the obligation is supported only if the job remains cancelled and the handler was never invoked.</p>
+  <ex-mermaid id="cancellation-observation-path" label="Planned queued-cancellation observation"><script type="text/plain">
+flowchart LR
+  cancel["Cancel queued job"] --> drain["Let real worker drain the queue"]
+  drain --> status["Read stored job status"]
+  drain --> handler["Inspect handler entry"]
+  status --> decide{"Still cancelled and handler never invoked?"}
+  handler --> decide
+  </script></ex-mermaid>
+  <p>The two observations decide the stated condition together: stored status cannot show by itself whether the handler still ran. External effects outside this handler remain outside this planned observation.</p>
   <div class="ex-table-scroll"><table>
     <thead><tr><th>Requirement</th><th>Observation</th><th>Passing condition</th><th>Limit</th></tr></thead>
     <tbody><tr>

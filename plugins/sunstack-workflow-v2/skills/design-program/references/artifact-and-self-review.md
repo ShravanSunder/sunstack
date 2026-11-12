@@ -87,6 +87,7 @@ Remove an “Architecture documentation impact” section when it only lists pos
 Re-read the whole artifact:
 
 - integrated overview matches detailed models;
+- each substantive structural explanation answers its ownership, lifecycle, boundary or failure question through adjacent context, a supported relational diagram and interpretation; every separately fired view remains present, and one explanation may group related identities without collapsing required views, bindings or per-`R` trace rows;
 - every Specification entity has a binding row with owner, home, schema/type home, disposition, and convention, or a `gap: <why>`;
 - every boundary crossing has a shape in the found convention or a field list with nullability and discriminant;
 - each term means the same thing in the Specification and the design: design prose uses the `E` term, a code name appears only in shape and home cells, and a design noun with no `E` names the `E` or `R` it serves;
