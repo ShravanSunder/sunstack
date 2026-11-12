@@ -16,7 +16,7 @@ Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentat
 
 ## Design source modes
 
-V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) use four distinct free-form HTML documents, visible capability groups, explained diagrams and shared JSON navigation through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. Call-stack data preparation remains conditional on selecting that component. V2 remains unregistered source; this change does not activate a workflow or select a management topology.
+V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) use four distinct free-form HTML documents, visible capability groups, explained diagrams and shared JSON navigation through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. Call-stack data preparation remains conditional on selecting that component. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
 
 ## Namespace map
 
