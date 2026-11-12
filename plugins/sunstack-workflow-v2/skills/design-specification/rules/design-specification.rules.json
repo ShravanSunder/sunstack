@@ -1,0 +1,20 @@
+{
+  "D004": {
+    "name": "design-documents.trace-link-resolves",
+    "evidence": "trace_link",
+    "decision": {
+      "start": "resolves",
+      "steps": {
+        "resolves": {
+          "mechanical_check": { "tool": "anchor_exists", "field": "links" },
+          "yes": "pass",
+          "no": {
+            "finding": "This trace link's page, or the element its #fragment names, doesn't exist in the set.",
+            "at": "links"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

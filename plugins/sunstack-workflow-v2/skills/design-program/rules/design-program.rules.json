@@ -1,0 +1,21 @@
+{
+  "D003": {
+    "name": "program-design.entity-has-binding-row",
+    "evidence": "entity",
+    "decision": {
+      "start": "has_row",
+      "steps": {
+        "has_row": {
+          "mechanical_check": { "tool": "contains_field", "field": "bindings", "needle": "identifier" },
+          "yes": "pass",
+          "no": {
+            "finding": "No row under id=\"bindings\" in program-design.html names this entity.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "related": ["bindings"],
+    "severity": "warn"
+  }
+}

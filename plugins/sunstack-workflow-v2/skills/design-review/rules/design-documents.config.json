@@ -1,0 +1,61 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../../design-verification/SKILL.md",
+      "rules": "../../design-verification/rules/design-verification.rules.json"
+    },
+    {
+      "markdown": "../../design-program/SKILL.md",
+      "rules": "../../design-program/rules/design-program.rules.json"
+    },
+    {
+      "markdown": "../../design-specification/SKILL.md",
+      "rules": "../../design-specification/rules/design-specification.rules.json"
+    }
+  ],
+  "marker_prefix": "D",
+  "check": {
+    "files": [
+      "**/index.html",
+      "**/requirements.html",
+      "**/specification.html",
+      "**/program-design.html",
+      "**/verification.html"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "need": {
+        "rule": "need-element",
+        "fields": {
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(U[0-9]+)\"" },
+          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row" }
+        }
+      },
+      "obligation": {
+        "rule": "obligation-element",
+        "fields": {
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(R[0-9]+)\"" },
+          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row" }
+        }
+      },
+      "entity": {
+        "rule": "entity-element",
+        "fields": {
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(E[0-9]+)\"" },
+          "bindings": { "from": "document", "path": "program-design.html", "rule": "binding-row" }
+        }
+      },
+      "trace_link": {
+        "rule": "trace-link",
+        "fields": {
+          "links": { "from": "target", "regex": "^<[^>]*\\shref=\"((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html(?:#[^\"]*)?|#[^\"]+))\"", "resolve": "path" }
+        }
+      }
+    }
+  },
+  "decision_model": {
+    "model": "jev-latest"
+  }
+}
