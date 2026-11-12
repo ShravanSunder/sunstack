@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-11 Record meaningful work without procedural duplication](2026-11-11-material-work-records.md)
 - [2026-11-11 Workflow v2 task guidance and model selection](2026-11-11-workflow-v2-task-guidance.md)
 - [2026-11-10 Workflow v2 role/files commissioning](2026-11-10-role-file-commission.md)
 - [2026-11-10 Free-form HTML design authoring and semantic navigation](2026-11-10-v2-html-navigation.md)

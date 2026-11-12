@@ -2,7 +2,7 @@
 
 This reference owns the existing Story row shape used by requested page composition. Input: the subject, its current Story and the cited log rows. Return: a complete summary with stable key and Covers, or the exact missing source. The fields are stored evidence, not an HTML layout.
 
-**Story.** The Lead writes or refreshes one only while fulfilling an explicit owner request for a work-log page, for each subject the owner follows. Its lines, in this order:
+**Story.** Existing rows use the following historical shape. Read their backing and later corrections when using them; a page request does not require creating or refreshing these source records. The fields are:
 
 | Line | Holds |
 | --- | --- |
@@ -39,6 +39,6 @@ Show: table
 Covers: 01a1b412-aac2-7459-b952-9e41a92c1baa, 01a1b412-aac3-7c7b-bdd3-ba9d84e9adf3, …
 ```
 
-Bad: an early story such as `01a1b5b0-6f51` (2:1827), which named the rows it covered only by its four links. A reader can't tell a cited row from a linked one, and a Story covering 55 rows can't link them all. A current Story like this gets a new version in this shape before the page uses it, as `read-and-summarize.md`'s "Write the Stories" step 3 says; the old row is never edited.
+An older summary that names cited rows only through its links has incomplete backing. Do not present it as comprehensively backed or force a legacy rewrite; inspect the original evidence, qualify the summary and report what cannot be established. Original rows remain unchanged.
 
-Complete when every summary field is backed by its Covers rows and an update preserves the existing identity and append-only history.
+Complete when the historical fields, cited backing and limitations have been interpreted, and relevant later events are checked before any summary claim is reused. This reference does not authorize new records or source-history changes.

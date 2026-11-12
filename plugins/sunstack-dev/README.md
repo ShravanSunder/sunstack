@@ -43,7 +43,7 @@ V1 retains authoritative Markdown, including newly authored v1 records and optio
 - [`practices-verification-maintenance`](skills/practices-verification-maintenance/SKILL.md)
 - [`practices-why`](skills/practices-why/SKILL.md)
 - [`presentation-html`](skills/presentation-html/SKILL.md)
-- [`presentation-work-log`](skills/presentation-work-log/SKILL.md)
+- [`presentation-show-worklog`](skills/presentation-show-worklog/SKILL.md)
 - [`presentation-tui`](skills/presentation-tui/SKILL.md)
 - [`presentation-webui`](skills/presentation-webui/SKILL.md)
 - [`principle-build-the-shared-model-first`](skills/principle-build-the-shared-model-first/SKILL.md)
@@ -66,7 +66,7 @@ V1 retains authoritative Markdown, including newly authored v1 records and optio
 
 ## Tracking and requested pages
 
-`practices-show-me-your-work` tracks and resumes the log without creating HTML. Only an explicit owner request invokes `presentation-work-log` to create or refresh a page; subsequent checkpoints do not refresh it. The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`.
+`practices-show-me-your-work` tracks and resumes the log without creating HTML. Only an explicit owner request invokes `presentation-show-worklog` to create or refresh a page; subsequent checkpoints do not refresh it. The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`.
 
 ## Shared references
 
