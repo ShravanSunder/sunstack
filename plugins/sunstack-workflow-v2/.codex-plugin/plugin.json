@@ -1,0 +1,38 @@
+{
+  "name": "sunstack-workflow-v2",
+  "version": "0.1.0",
+  "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1.",
+  "author": {
+    "name": "Shravan Sunder"
+  },
+  "keywords": [
+    "workflow",
+    "v2",
+    "roles",
+    "design",
+    "management"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Sunstack Workflow v2",
+    "shortDescription": "Editable four-role design and management workflow",
+    "longDescription": "Editable v2 workflow: design-specification, design-program, design-verification, design-review, practices-manage-agents, and Lead, Implementer, Operator and Checker roles. Requires sunstack-dev. Frozen v1 remains the default runtime workflow until base callbacks change.",
+    "developerName": "Shravan Sunder",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Use practices-manage-agents to choose a helper's role, form and model, then commission, monitor, or assess its work.",
+      "Use role-lead to own design, workstreams, sequencing and inspected acceptance.",
+      "Use role-implementer to make assigned changes, product tests and associated proof.",
+      "Use role-operator to execute prescribed work and guided collection.",
+      "Use role-checker for explicit verification or independent review duty.",
+      "Use design-specification to preserve authorized Why and observable What.",
+      "Use design-program to define structural How against this specification.",
+      "Use design-verification to say how each requirement will be proven.",
+      "Use design-review to independently review this specification, program design, verification design, or four-document set."
+    ]
+  }
+}

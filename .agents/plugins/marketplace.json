@@ -59,6 +59,20 @@
       "description": "Frozen legacy v1 workflow: roles, orchestration, design, planning, implementation, review and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction."
     },
     {
+      "name": "sunstack-workflow-v2",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sunstack-workflow-v2"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Coding",
+      "version": "0.1.0",
+      "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1."
+    },
+    {
       "name": "skill-authoring",
       "source": {
         "source": "local",

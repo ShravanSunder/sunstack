@@ -20,8 +20,8 @@ AI tools distributed through the local marketplaces in this repository.
 Client install IDs:
 
 ```text
-Codex       scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   sunstack-workflow-v1@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
-Claude Code scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   sunstack-workflow-v1@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
+Codex       scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   sunstack-workflow-v1@sunstack   sunstack-workflow-v2@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
+Claude Code scaffold-project@sunstack   dev-workflow-tools@sunstack   sunstack-dev@sunstack   sunstack-workflow-v1@sunstack   sunstack-workflow-v2@sunstack   skill-authoring@sunstack   agent-router@sunstack   agentstudio@sunstack
 Cursor      local plugins via `.cursor-plugin/` manifests, including agent-router and agentstudio
 ```
 
@@ -63,6 +63,10 @@ The maintained engineering base: 42 skills for principles, language standards, r
 ### [sunstack-workflow-v1](sunstack-workflow-v1/)
 
 Frozen legacy workflow, independently versioned at 1.0.0: 23 roles, orchestrators, design/planning/delivery skills and handoffs. Requires sunstack-dev. Do not edit without explicit owner instruction; its nested AGENTS.md owns the freeze boundary.
+
+### [sunstack-workflow-v2](sunstack-workflow-v2/)
+
+Editable v2 workflow at 0.1.0: four design skills, `practices-manage-agents`, and Lead, Implementer, Operator and Checker. Requires sunstack-dev. Install as `sunstack-workflow-v2@sunstack`. Frozen v1 remains the default runtime workflow until base callbacks change.
 
 ### [skill-authoring](skill-authoring/)
 

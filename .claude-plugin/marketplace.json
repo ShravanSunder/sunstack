@@ -32,6 +32,12 @@
       "version": "1.1.0"
     },
     {
+      "name": "sunstack-workflow-v2",
+      "source": "./plugins/sunstack-workflow-v2",
+      "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1.",
+      "version": "0.1.0"
+    },
+    {
       "name": "skill-authoring",
       "source": "./plugins/skill-authoring",
       "description": "Skill authoring for any repository: design skill changes, write their files, turn their standards into checked rules, review them with independent agents, and audit which skills to create, update, merge, or skip.",

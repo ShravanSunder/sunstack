@@ -1,6 +1,6 @@
 # AI Tools
 
-The maintained engineering base is `sunstack-dev` (42 skills). The existing roles and phases are preserved in the independently versioned, frozen [`sunstack-workflow-v1`](plugins/sunstack-workflow-v1/README.md) (23 skills).
+The maintained engineering base is `sunstack-dev`. Frozen roles and phases live in [`sunstack-workflow-v1`](plugins/sunstack-workflow-v1/README.md). Editable four-role design and management lives in [`sunstack-workflow-v2`](plugins/sunstack-workflow-v2/README.md).
 
 Local Codex and Claude Code plugins for AI-assisted development workflows.
 
@@ -29,6 +29,7 @@ codex plugin add <name>@sunstack
 |--------|-------------|
 | [`sunstack-dev`](plugins/sunstack-dev/) | 42 maintained engineering practices, principles, domains, discussion, presentation, debugging, docs and operations |
 | [`sunstack-workflow-v1`](plugins/sunstack-workflow-v1/) | 23 frozen legacy roles, orchestrators, design/planning/delivery phases and handoffs; requires sunstack-dev |
+| [`sunstack-workflow-v2`](plugins/sunstack-workflow-v2/) | Editable v2: four design skills, four roles and agent management; requires sunstack-dev; does not replace frozen v1 |
 | [`dev-workflow-tools`](plugins/dev-workflow-tools/) | Common development tool skills, including native macOS UI testing with Peekaboo CLI |
 | [`scaffold-project`](plugins/ai-scaffold/) | AI Scaffold project scaffolding with standard dev configs (biome, ruff, vitest, pytest, cursor rules, claude hooks) |
 | [`agent-router`](plugins/agent-router/) | Agent collaboration, shared message boards, wake-ups, and schedules; install as `agent-router@sunstack` (Cursor Personal marketplace too) |
