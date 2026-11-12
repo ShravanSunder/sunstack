@@ -6,7 +6,9 @@ Expected inputs: interface/state/flow models, externally required failure behavi
 
 Return in workflow order: first the failure/recovery and partial-success map; after the caller models material interleavings, return retry/idempotency decisions, the concurrency/consistency model, operator visibility, and gaps.
 
-For each fallible boundary, distinguish a definite failure from an outcome that could not be confirmed, and name the system that can establish whether the effect happened (decide each ending before choosing retry behavior (`sunstack-dev:principle-design-for-failure`)). Model:
+For each fallible boundary whose effect is visible outside it, distinguish a definite failure from an outcome that could not be confirmed, and name the system that can establish whether the effect happened (decide each ending before choosing retry behavior (`sunstack-dev:principle-design-for-failure`)).
+
+For each fallible boundary, model:
 
 ```text
 detection and classification

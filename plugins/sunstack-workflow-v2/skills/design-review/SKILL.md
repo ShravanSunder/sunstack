@@ -85,7 +85,7 @@ prior review coverage and semantic-change record when coverage is being reused
 bounded design-review status: no prior review | prior rounds with their findings | earlier results unavailable
 ```
 
-When prior results are unavailable, inspect the current target and governing sources, record the reason, and treat this review as the baseline; the convergence rule in `references/finding-and-reduction-schema.md`, loaded at step 8, counts from it. Reject stale, wrong-source, or unverified inputs. Route any material design break or newly exposed owner decision to its owner.
+When prior results are unavailable, inspect the current target and governing sources, record the reason, and treat this review as the baseline; the convergence rule in `references/finding-and-reduction-schema.md`, loaded at step 6, counts from it. Reject stale, wrong-source, or unverified inputs. Route any material design break or newly exposed owner decision to its owner.
 
 MUST load `sunstack-dev/shared-references/design-documents.md` and return the identity status of each document the selected mode needs. `specification-only` inspects separately identifiable Requirements and Specification sources. `program-only` adds a separately identifiable Program Design. `four-document-design` inspects all four, the Verification Design included. Reuse resolvable file pointers for file-backed records. Copy separately labeled in-chat records verbatim into the tmp review packet, because a fresh reviewer cannot follow a pointer into a conversation, and never into a durable combined review artifact.
 
