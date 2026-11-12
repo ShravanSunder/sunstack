@@ -1,0 +1,6 @@
+interface:
+  display_name: "Role: Checker"
+  short_description: "Verify adopted outcomes or independently review declared artifacts"
+  default_prompt: "Use $role-checker for the commissioned verification or review duty, preserving its grant and independence."
+policy:
+  allow_implicit_invocation: true

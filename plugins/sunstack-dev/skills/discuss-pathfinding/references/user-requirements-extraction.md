@@ -6,6 +6,8 @@ Expected inputs: clarified destination and depth, participant and source identit
 
 Return: requirement questions, classified user/stakeholder inventory, the owner-confirmed capability list or the one-concern result, draft row-level requirements record, useful user-job sequence inputs, verified record identity and permitted home, confirmed goal boundary or the exact owner decision needed, refusal/fallback result, and exact authority/evidence gaps.
 
+Preserve the caller's source mode and admitted Requirements identity. A new `sunstack-workflow-v1` record keeps the archive's Markdown-source contract, including when it needs an optional HTML reading view; do not turn its source into HTML. A new v2 HTML record follows the composition below. An existing authoritative record stays in its admitted medium and home unless migration is commissioned. The format changes neither the row meanings nor who can authorize them.
+
 ## Classify Users and Stakeholders
 
 Inspect these classes independently:
@@ -40,7 +42,7 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
-Write the confirmed list onto the Requirements page, the set's `requirements.html` that `design-documents.md` lays out: a capability list section at a stable ID, one entry per capability with its key, the owner's name and its purpose. Each need you write then names its home capability by key, and the requirement browser filters the needs by it, so the list has one home and `sunstack-workflow-v1:spec-design` reads the same page:
+Write the confirmed capability list once in the owning Requirements record, with stable identities, the owner's names and each purpose. Group each need under its home capability when several parts matter, using visible group headings in normal reading order and a short statement of why the needs belong together; a small table can hold comparable needs, while an expanded need section can carry more explanation. For a v2 HTML page, an ordinary Tree may explain hierarchy but does not replace the collection's semantic Map. Use the `presentation-html` shared-navigation recipe and matching guide so the Map reaches the group context and each need's actual text. A v1 Markdown record keeps ordinary headings, rows and links in its authoritative source; any HTML view follows the legacy-source route. The phase that asked for the record reads that same source. No requirement-browser or need-record schema is imposed:
 
 ```text
 capability list section   import (Import): card charges and receipt photos arrive in a claim without retyping
@@ -50,11 +52,11 @@ need U1, capability import    employee: a card charge is in my claim without my 
 need U6, capability import    employee: a card charge I already claimed is flagged before I submit it again
 ```
 
-U6 also matters to approval, and no line says so on U6: the obligation that serves both needs names them, and the browser shows it under each.
+U6 also matters to approval: keep one need in its home group and make that relationship inspectable through links. The shared obligation later has one home and links to both authorizing needs.
 
-Ask for the confirmation on that page, as a choice the owner answers there, and take the answer from Comments' Copy; the page has no browser until its first need exists. In a chat-only run, show the same list in the response and take the owner's answer there.
+Ask for confirmation near the list. In an HTML reading view, use a native choice when an actual answer is needed and ordinary prose plus Comments for an open discussion, following the composition examples through `presentation-html`. A local selected answer is not an agent notification or confirmed authority: receive the owner's explicit reply or Comments handoff before recording confirmation. For Markdown-source or chat work, show the same list in the response and receive the explicit answer there; do not create an HTML source merely to collect it.
 
-When the whole request is one concern, such as "add a CSV download of the claims list", say so in your read and write the rows directly, with no capability list to confirm: every need names the one capability named for that concern, because each released need record names one. A list with one entry adds a level and tells the reader nothing. Add an *area* above the capabilities only when there are more than about seven of them, and never go deeper than area, capability, row.
+When the whole request is one concern, such as "add a CSV download of the claims list", say so in your read and write the rows directly, with no artificial capability list or serialized capability key; state the single concern in the framing. A list with one entry adds a level and tells the reader nothing. Add an *area* above the capabilities only when there are more than about seven of them, and never go deeper than area, capability, row.
 
 Stop this stage when the owner has confirmed or corrected the list. A one-concern read needs no turn of its own: it travels in the goal boundary, which the owner confirms as a whole.
 
@@ -86,14 +88,14 @@ priority assigner
 hypothesis state when unresolved
 ```
 
-Each row has exactly one home capability, and the need record names only that one. When a need also matters to another capability, keep the single row under its home; a copy under the second capability gives one need two homes that drift apart, and no "also serves" key goes on the need.
+In a multi-part set each need has one home capability. When it also matters elsewhere, link its one owning row or section rather than copying the need into another group. A navigation link does not create another authoritative fact.
 
 ```text
 U6  employee: a card charge I already claimed is flagged before I submit it again
     capability: import
 ```
 
-The manager gains too, since nobody approves the same charge twice, but the need is met where charges arrive, so `import` is its home. The link to approval comes later, and once: the obligation that serves both U6 and an approval need names them both, and the browser shows that obligation with each.
+The manager gains too, since nobody approves the same charge twice, but the need is met where charges arrive, so `import` is its home. The shared obligation later links U6 and the approval need to its one owning explanation; navigation can point to that home from either group.
 
 The identifier never encodes the capability: `U6`, never `IMP-2` or `U-import-2`. Moving a row to another capability changes only its capability field.
 
@@ -112,7 +114,7 @@ If the user declines extraction, return:
 - the rows or evidence established so far;
 - the remaining owner and evidence gaps.
 
-Do not select a specification readiness label; `sunstack-workflow-v1:spec-design` owns that decision after it classifies the complete source inventory.
+Do not select a specification readiness label; the caller's Specification phase owns that decision after it classifies the complete source inventory.
 
 Stop this stage when every row has an evidenced authority state and any missing authority is an exact owner decision rather than an inferred answer.
 
@@ -126,7 +128,7 @@ Capture sequence only when a direct-user job's steps, transitions, or pain relat
 - the desired observable difference;
 - the cited U rows.
 
-Pathfinding may use a non-normative conversational sequence map to clarify an ambiguity; `sunstack-workflow-v1:spec-design` alone decides whether the durable specification needs a journey view and owns its normative rendering.
+Pathfinding may use a non-normative conversational sequence map to clarify an ambiguity; the caller's Specification phase decides whether the durable specification needs a journey view and owns its normative rendering.
 
 Teach the relationship through examples:
 
@@ -158,7 +160,7 @@ Apply these rules while building the boundary:
 - Name observable current behavior or capabilities the owner expects to reuse; do not design internal architecture here.
 - Name the outcome gap, not every feature a complete platform might have.
 - Ask which repositories, packages, forks, or modules may change when the owner already has a limit or leaving it open could materially expand the work.
-- Record allowed and protected packages as an implementation boundary, not as product behavior or permission to invent internal structure. Otherwise preserve the higher-level system or capability boundary for `sunstack-workflow-v1:program-design` to realize.
+- Record allowed and protected packages as an implementation boundary, not as product behavior or permission to invent internal structure. Otherwise preserve the higher-level system or capability boundary for the caller's Program Design phase to realize.
 - Treat an agent-proposed boundary as provisional until the owner confirms it.
 - Describe the expected change shape and which additions require renewed approval. “Production-ready and complete” is too vague to reject expansion.
 
@@ -171,11 +173,11 @@ Keep missing observable behavior, permitted and protected systems, non-goals, ac
 ## Scale the Record
 
 - quick: return the record in chat unless a durable handoff is requested and files are allowed;
-- standard, deep, or substantial handoff: write the record as the set's Requirements page, `docs/specs/<yyyy-mm-dd-slug>/requirements.html`, when files are allowed, using `presentation-html` to compose it; otherwise return the complete record in chat;
+- standard, deep, or substantial handoff: when files are allowed, use the caller's permitted Requirements home and source mode; new v1 records stay Markdown, while a new v2 HTML record defaults to `docs/specs/<yyyy-mm-dd-slug>/requirements.html` through `presentation-html`; otherwise return the complete record in chat;
 - record classes and rows as they crystallize rather than reconstructing them at the end.
 
-A durable record uses its page path as its inspectable identity. An in-chat record returns its complete text and uses a session or message anchor only when the host exposes one.
+A durable record uses its source path as its inspectable identity. An in-chat record returns its complete text and uses a session or message anchor only when the host exposes one.
 
-The record opens with the confirmed capability list section, so a reader confirms the parts before the rows. Each row is one need record whose body carries the need in the owner's words, its outcome, its authority state and its evidence anchor. Assign U identifiers once within that record: reordering, correcting, or moving a row to another capability preserves the identifier; splitting creates new identifiers and marks the old row superseded. Carry out-of-scope classes, unresolved questions, and the subject-matter goal boundary in the record, while keeping confirmation state in the returned result. `decisions-and-docs.md` owns the general record-home discipline and reader test.
+The record opens with the confirmed capability list section, so a reader confirms the parts before the rows. Each need has one identifiable source section or row carrying the owner's words, outcome, authority state and evidence anchor; HTML or Markdown follows the selected source mode. Assign U identifiers once within that record: reordering, correcting, or moving a row to another capability preserves the identifier; splitting creates new identifiers and marks the old row superseded. Carry out-of-scope classes, unresolved questions, and the subject-matter goal boundary in the record, while keeping confirmation state in the returned result. `decisions-and-docs.md` owns the general record-home discipline and reader test.
 
-Complete when every in-scope class has row-level needs or an exact unknown, a multi-part set has an owner-confirmed capability list section before its rows and every row names exactly one home capability (a one-concern set has no list, and its rows name its one capability), evidence and authority are separate, priorities name an assigner or gap, useful sequence inputs are captured without forcing a view, the record has a stable identity at a permitted destination, the goal boundary includes acceptable complexity and acceptable outcome-level evidence, and the result carries owner confirmation of that same boundary or the exact decision still needed.
+Complete when every in-scope class has row-level needs or an exact unknown, a multi-part set has an owner-confirmed capability list section before its rows and each need has one home when capabilities exist (a one-concern set needs no extra grouping level), evidence and authority are separate, priorities name an assigner or gap, useful sequence inputs are captured without forcing a view, the record has a stable identity at a permitted destination, the goal boundary includes acceptable complexity and acceptable outcome-level evidence, and the result carries owner confirmation of that same boundary or the exact decision still needed.

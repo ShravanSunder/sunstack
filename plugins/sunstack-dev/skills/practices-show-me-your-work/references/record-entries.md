@@ -8,9 +8,34 @@ Return: the row filled in its shape, and the step-two command with this row's mi
 
 ## One row
 
-A row is one fact, written by the agent that has it, at the moment it has it, before work that builds on it continues. Its first line says the fact so it can be read alone. The lines after it are its fixed parts. It carries no secrets, credential paths or account data.
+A row carries one material fact or a related proof group, written by the agent that has it, at the moment it has it, before work that builds on it continues. Its first line says the fact so it can be read alone. The lines after it are its fixed parts. It carries no secrets, credential paths or account data.
 
 Router stamps who wrote the row and when; nothing in the text replaces that stamp. The owner sees the writer beside every row, so a row you write about someone else's act shows as yours.
+
+## Choose the event before its format
+
+The kind table below describes formats, not a list of entries to produce. Select a material event first:
+
+| Useful event | Log | Omit |
+| --- | --- | --- |
+| Owner direction | A new correction, constraint or priority and its source | The same reminder with no change |
+| Consequential decision | A choice someone must preserve, with reason and authority | Routine editing mechanics |
+| Dependent assumption | An unsettled premise or stand-in, what relies on it and what closes it | A passing hunch that changes no work or claim |
+| Problem or departure | A blocker, failed/not-run required gate, or departure from the agreed work | An unsuccessful lookup that adds no finding |
+| Proof | Evidence supporting a claim at its declared target, including results and limits | Repeated observations that add no evidence |
+| Outcome or handoff | A meaningful result, acceptance, reopening, or changed next action/owner | Step narration or unchanged status |
+
+Keep required proof even when a result repeats; the main path's materiality test still governs. Detailed receipts hold commands and output; the entry explains what they establish.
+
+For example, omit procedure narration such as “Opened the files, ran the suite, read its output, then checked the package.” Record the result and its limits instead. This is illustrative wording; fill target and receipt placeholders from actual observations:
+
+```text
+Proof: local validation is complete.
+Claim: the required unit suite and package validation passed.
+Check: unit suite and package validator at <revision>; receipts <links>.
+Result: 180 tests passed; package validator exit 0.
+Not covered: agent behavior or installed activation.
+```
 
 Every row carries these tags:
 
@@ -31,7 +56,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 | `decision` | a choice made | `Choice:`, `Authority:` (the owner's words quoted with where they were said, the contract or design it rests on with its path, or `own call`). Add `core` when it changes or fills in the design or plan; add `door:two-way` for a reversible choice inside existing authority, made without asking |
 | `assumption` | something taken as true and not yet settled | `Assumed:`, `What depends on it:`; tags `state:open` and `next:<role>` for who acts next (`next:owner`, `next:lead`, `next:advisor`, or the role of the agent checking it), set by its stop treatment |
 | `shortcut` | a departure from the plan, the design or a required step | `Planned:` (what the plan, design or rule said), `Did instead:`, `Why:`, `Authority:` (`none` when nothing covered it). Older rows tagged `design-change` read as shortcuts |
-| `proof` | one check that ran | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
+| `proof` | a material verification result supporting one claim; related checks may share it | `Claim:`, `Check:` (what ran, on which commit or revision), `Result:` (exit code or counts), `Not covered:`. Add `Ran by:` when you didn't run it yourself |
 | `lead-acceptance` | the Lead accepting finished work | the commit or revision, each check the Lead read with its result, and what stays unverified |
 | `owner-ask` | one ask, question, constraint or correction of the owner's | the owner's words with where they were said; `state:open`, `state:done` with its evidence, or `state:deferred` with its reason and follow-up owner |
 | `story` | a historical page-summary row to interpret | the recorded shape in [presentation-show-worklog](../../presentation-show-worklog/references/story-records.md); creating or refreshing a page does not create or refresh these source rows |
@@ -40,7 +65,7 @@ Some kinds add `core`, `door:two-way`, `state:` or `next:`, as the table says.
 
 A stand-in is an `assumption`: the seam, the stand-in, what it assumes, what it gains, what it costs, and what closes it. It never proves the real interaction: "the adapter stand-in passes; the real provider remains unobserved" can't become "provider complete" on resume.
 
-The owner saw an assumption on a page and didn't mark it wrong: it stays an `assumption`, and a new row with `state:not-marked-wrong` closes the old one. It is still open, and never a decision.
+Silence leaves the original assumption open without another row. Historical `state:not-marked-wrong` entries remain open assumptions, not owner decisions; an actual answer or material new evidence is needed to change their state.
 
 ## Fixed parts
 
@@ -56,9 +81,9 @@ Result: no open finding. …
 Not covered: the skill files themselves (not written yet); any behavior run.
 ```
 
-Bad, `01a1ac6a-40f2` (2:843): "Proof: Terra's eighteenth check found page N covering the record exactly … What ran: … Comprehension: 5 stories yes, 14 partly … Findings, worst first: … Not covered: small screens, …". The claim, the check and the result run together, so a reader can't tell what was claimed from what was found. It is also Terra's check written by the Lead: written today, it carries `Ran by: Terra (codex-local/01a1a97a)` and comes with a Missed row.
+Bad, `01a1ac6a-40f2` (2:843): "Proof: Terra's eighteenth check found page N covering the record exactly … What ran: … Comprehension: 5 stories yes, 14 partly … Findings, worst first: … Not covered: small screens, …". The claim, the check and the result run together, so a reader can't tell what was claimed from what was found. It is also Terra's check written by the Lead: written today, it carries `Ran by: Terra (codex-local/01a1a97a)` and cites the shared write gap or a genuine material omission, as applicable.
 
-**A check you didn't run.** When you write a check another agent ran, because it couldn't reach the log or didn't log it, add `Ran by:` naming that agent, and write a `missed` row that says why the runner didn't write it. Good, written by the evaluator itself, `01a1b2e1-a152` (2:1137): "Proof: independent owner-page check of the Program and Verification Design pages. Claim: … Check: … real Chrome mouse clicks on all four count nodes … Result: five findings … Not covered: …". It needs no `Ran by:`, because its writer ran it.
+**A check you didn't run.** Preserve `Ran by:` and the actual receipt when relaying another agent's material check. For a known shared access gap, write one action describing the affected stretch and reference it from the relayed records. Use Missed for a genuinely omitted material obligation or unsupported claim, not merely because the assigned writer lacked a channel. Good, written by the evaluator itself, `01a1b2e1-a152` (2:1137): "Proof: independent owner-page check of the Program and Verification Design pages. Claim: … Check: … real Chrome mouse clicks on all four count nodes … Result: five findings … Not covered: …". It needs no `Ran by:`, because its writer ran it.
 
 **Decision.** Good on content, `01a1a787-3817` (2:687), written today with its label:
 
@@ -108,7 +133,7 @@ A row is never edited. A correction, a resolution, an answer, a new state of an 
 - Its **first** link is the row it closes.
 - Its other links are authority or context. No other link closes, accepts or confirms anything: a row that only links to an assumption leaves it open.
 
-Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. Historical Story replacements are `story` rows tagged `supersedes`, with the replaced Story as their first link and at most 16 links in total. Interpret that recorded relation without writing a replacement while rendering a page.
+Reopening accepted work is a new row whose first link is the Lead acceptance, tagged `supersedes`. Historical Story replacements are `story` rows tagged `supersedes`, with the replaced Story as their first link and at most 16 links. Interpret this relation without creating a replacement while rendering.
 
 ## Links
 
@@ -147,7 +172,7 @@ Step two ends one of three ways, and each needs a different move:
 
 A new row, even with the same words, always starts again at step one.
 
-**When the write can't reach Router** (the command fails to connect, as a sandboxed Worker's can), keep each row's text and kind and list them in your handback with the exact error. Your commissioner writes them with `Ran by:` naming you, plus a `missed` row for each, saying you couldn't write it and why. Don't stop work for this.
+**When the write can't reach Router** (the command fails to connect, as a sandboxed Worker's can), keep each row's text and kind and list them in your handback with the exact error. Your commissioner preserves `Ran by:` and each receipt, recording one action for the shared access gap in the affected stretch. A distinct omitted material obligation still gets Missed; the same known transport limitation is not a new omission for each fact. Don't stop work for this.
 
 **Before the work has a Router project**, write to the entries file `no-board-trace.md` names: append one line holding `{"rowId":"<row id>","recordedAt":"<ISO-8601 time>","text":"…","tags":[…],"links":[…]}`, with the row id from step one, so it moves to the work trail unchanged with `--row-id` and every link still holds. Make each line with a JSON serializer such as `JSON.stringify`, never by hand: a line that isn't one JSON entry can't be read back, by you or by the next agent.
 

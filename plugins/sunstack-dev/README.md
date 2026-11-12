@@ -2,7 +2,7 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.1.2 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.2.1 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
@@ -13,6 +13,10 @@ Some retained helper-delegation branches still call `sunstack-workflow-v1:practi
 ## v1 compatibility anchor
 
 Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentation-html` skill and taking its plugin root. Keep that advertised entry and the `skills/<name>/` and `shared-references/` layouts available while v1 depends on them. Renaming or removing them is a v1 compatibility change requiring explicit owner direction. Hidden principles and domains are read beneath that root, without assuming they appear in the host catalog.
+
+## Design source modes
+
+V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) use four distinct free-form HTML documents, visible capability groups, explained diagrams and shared JSON navigation through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. Call-stack data preparation remains conditional on selecting that component. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
 
 ## Namespace map
 

@@ -30,7 +30,7 @@ docs request
    - `README.md` is the human-facing advertisement and quick orientation.
    - architecture docs, runbooks, and changelogs carry durable working context.
    - specs, plans, debug notes, research packets, and handoffs are stage artifacts until this skill classifies them as durable, archived, or disposable.
-- A design set's pages are its source, read by agents and humans alike, so this separation never splits them: upkeep edits the section or record body that owns a fact, on its document's page, and never forks a copy of its text into the home page, a deliverable page or a second doc. A design set written before pages stays readable in Markdown where it is; upkeep doesn't migrate it.
+- A free-form HTML design set's pages own its complete text: upkeep edits the owning section and preserves real links and views, without copying facts into navigation or another document. For a v2 shared-navigation collection, also keep the one descriptor's actual page and target identities aligned with existing pages/IDs; it holds navigation metadata only. A v1 Markdown-source set keeps its Markdown authoritative and its human HTML view derived, including newly authored v1 sets. Follow the selected source mode; upkeep does not silently migrate either representation.
 - Keep `AGENTS.md` short. Move runbook detail to docs and link it.
 - Do not let old plans/specs/debug notes displace current source-of-truth docs by inertia.
 - Do not replace phase skills for active artifact work: `sunstack-workflow-v1:spec-design`, `sunstack-workflow-v1:program-design`, `sunstack-workflow-v1:spec-program-review`, `sunstack-workflow-v1:spec-handoff`, `sunstack-workflow-v1:plan-handoff`, `sunstack-workflow-v1:implementation-handoff`, `sunstack-workflow-v1:implementation-review` for implementation review, `sunstack-workflow-v1:implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
@@ -86,17 +86,17 @@ docs request
    - detailed docs under the appropriate docs folder
    - changelog entries when meta-instructions or workflows change
    - IF the edit rewrites human sentences in a README, architecture doc, runbook, or changelog, load `../../shared-references/humanizer.md` in file mode and return the rewritten prose plus the fences, YAML, commands, and paths left unchanged. Classifying, purging, linking, or promoting without a prose rewrite does not load it. Completion: claims, names, numbers, dates, and quotes match the source, or the missing fact is named instead of invented.
-   - IF the edit changes a page of a design set (a record, a body, a section, a heading or ID, a page path or a Walkthrough), load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result for the set: preparation on the set's own folder, the collection index when the set has one, and the static check, with each dependent record rechecked. Completion: the set is reported current only when that result counts it current; a refused preparation is reported stale with the record, body or link it names.
+   - IF the edit changes a design page's section, ID, path, Walkthrough, shared navigation descriptor or selected component data, load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result: rechecked links/views and descriptor targets, the explicit collection index when needed, component preparation only where the selected component requires it, and the matching static check. Completion: report the set current only when that result counts it current; missing sources, invalid component data or failed checks remain exact gaps.
    - IF an edited Markdown file is included by an embedded page (an HTML file whose `data-ex-markdown-source` records name it), load `../../shared-references/diagram-rendering-and-fallbacks.md` and return its freshness-on-edit result, with each derived view and dependent row rechecked. Completion: the page is reported current only when that result counts it current, with every rechecked view and row agreeing; otherwise it is reported stale with its exact gap.
 6. Validate:
    - no broken obvious links
    - no stale source-of-truth claims
    - no embedded page left stale against a Markdown file this change edited
-   - no design set left unprepared after this change edited one of its pages
+   - no selected component data left stale after its source changed
    - no duplicated long detail in `AGENTS.md` and README
    - no unrelated docs churn
 
-   Completion: each check above names what it opened or compared on the changed docs (the links followed, the claims set against their sources, the pages set against their Markdown or their preparation result) and what it found, or that it found nothing.
+   Completion: each check above names what it opened or compared on the changed docs (the links followed, the claims set against their sources, the pages set against their authoritative sources, actual component data and check results) and what it found, or that it found nothing.
 
 ## Progressive Disclosure
 

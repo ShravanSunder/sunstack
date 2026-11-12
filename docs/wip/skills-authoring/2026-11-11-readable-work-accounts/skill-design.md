@@ -52,3 +52,15 @@ Class: scoped behavior change in one owned home, references/record-entries.md. E
 Scoped Story-reference correction independently accepted-to-implement before editing. Only the table row and historical-replacement sentence changed; fields/kinds/links and generic logging/write procedures remain. Run implemented locally; targeted static checks and independent diff readback follow.
 
 Scoped correction independent implementation readback: accepted with no findings. The two historical-interpretation edits preserve field/kind/schema/closure meanings and generic write procedure; broader logging selection is unchanged. No new generation, installed or visual acceptance.
+
+## Current-main reconciliation
+
+The current delivery base is `dad35781` (sunstack-dev 3.2.0). The owner now asks to review, fix and merge PR213 together, says "no separation", and explicitly calls this a shortcut. This delivery uses a direct single-agent source review; the separate-agent review is waived, not represented as completed independent review. Existing design acceptance still governs R1–R8; the reconciliation adds no new composition or invocation obligation.
+
+One writing run remains: `presentation-show-worklog`, the canonical name of Run1. Its body and `references/read-and-summarize.md` carry the retained explanation, evidence-selection and technical-excerpt teaching. Preserve main's capture reuse, incremental refresh, read-only source policy, four headings, invocation metadata and source destinations. The worked example remains illustrative and creates no permission to run its commands. No new executable, network, credential, cache or home-write behavior is admitted.
+
+Run2's generic chooser, composition patterns, Map and Walkthrough teaching are already in main. Keep main's HTML files, binding reference, logging instructions and historical Story interpretation unchanged, including PR214's free-form engineering pages and PR215's materiality rules. Update only release metadata and the changelog for the remaining work-log behavior; do not restore the stale 3.1.2 version.
+
+Success is a reconciled source change that teaches coherent explanatory sections and decisive attributed evidence while retaining those current-main boundaries. Static validation proves structure only. Historical corrected examples retain their original limitations; this reconciliation claims neither fresh generation/readability proof nor a reliable improvement. Installed caches remain untouched. Record the current rules result and any unavailable tool honestly.
+
+Current reconciliation writing run: implemented. The runtime delta against `dad35781` is confined to the canonical work-log body and its evidence reference. The self-check retains a rules-not-run credential gap and unavailable Codex quick-validator gap; source review does not claim fresh generation or visual proof. Separate-agent implementation review is skipped by the owner's direct-review shortcut.

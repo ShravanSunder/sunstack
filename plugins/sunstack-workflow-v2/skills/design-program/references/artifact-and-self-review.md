@@ -30,6 +30,8 @@ Diagrams do not replace behavioral interface or failure prose. Paths may anchor 
 
 For a substantial design, lead with the smallest integrated overview composed from already-fired views, then reveal detail in the order a reader needs it: diagram, then table, then code shape. Make every selected call or flow view representative of the actual boundary crossing. The view must preserve the semantic fields selected by the caller; format never excuses a missing owner, edge status, state/effect, result/error path, or evidence anchor.
 
+For a new v2 HTML design set, use the shared navigation owner in `presentation-html` for the descriptor and actual page/target identities; do not duplicate the guide schema or keep a competing page-local route list. A behavioral journey diagram remains in its owning HTML section with its purpose, important transitions, outcomes and failures explained in context.
+
 Good: the smallest set of views lets a reader simulate composition, execution, and the riskiest failure, and find where each entity lives.
 
 Bad: prose labeled as a diagram, decorative boxes with no semantic owners, every possible view emitted mechanically, syntax chosen before the relationship is understood, or a passed result claimed with missing semantic fields.
@@ -85,6 +87,7 @@ Remove an “Architecture documentation impact” section when it only lists pos
 Re-read the whole artifact:
 
 - integrated overview matches detailed models;
+- each substantive structural explanation answers its ownership, lifecycle, boundary or failure question through adjacent context, a supported relational diagram and interpretation; every separately fired view remains present, and one explanation may group related identities without collapsing required views, bindings or per-`R` trace rows;
 - every Specification entity has a binding row with owner, home, schema/type home, disposition, and convention, or a `gap: <why>`;
 - every boundary crossing has a shape in the found convention or a field list with nullability and discriminant;
 - each term means the same thing in the Specification and the design: design prose uses the `E` term, a code name appears only in shape and home cells, and a design noun with no `E` names the `E` or `R` it serves;
@@ -106,7 +109,7 @@ Re-read the whole artifact:
 - Requirements and Specification remain separately identifiable, and the Program Design preserves rather than rewrites their authorized boundary and observable contract;
 - two capable implementers would build the same structural behavior and the same contract shapes.
 
-Run the self-check against the current program design and governing specification. Keep source/review coverage, readiness, acceptance, planning, PR, and release state in the returned result rather than durable program-design prose. A source pointer may remain when later readers need it for authoritative lookup. The self-check is not independent review.
+Run the self-check against the current program design and governing specification. Keep source/review coverage, readiness, acceptance, planning, PR, and release state in the returned result rather than durable design-program prose. A source pointer may remain when later readers need it for authoritative lookup. The self-check is not independent review.
 
 Complete when:
 

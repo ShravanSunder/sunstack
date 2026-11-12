@@ -4,7 +4,7 @@ This reference owns what an entry does to the work: whether it stops anything, a
 
 Expected inputs: the entry you are about to write (an assumption, a decision made without asking, or a shortcut), the choice behind it, and the authorities you found for it: the owner's words, the governing design, an existing contract.
 
-Return: the treatment that applies, the real case below it matches, and the action it causes now, including the entry's `next:` actor when it is an assumption.
+Return: the treatment and current action, including the entry's `next:` actor when it is an assumption. The historical cases are teaching examples, not a required correspondence to explain on each run.
 
 ## Tell them apart
 
@@ -71,7 +71,7 @@ Rationalization to catch: "it's unreleased, so the storage layout is reversible.
 
 ## When to stop
 
-Done when the entry names one treatment, the case it matches (or that none matches closely, and why the treatment still holds), and the action it causes now: what stops, what continues, and the `next:` actor written on the entry. A choice you can't place in any of the six is treatment 6.
+Done when the entry names one treatment and the action it causes now: what stops, what continues, and the `next:` actor written on the entry. A choice you can't place in any of the six is treatment 6.
 
 ## Bring an owner choice
 
