@@ -136,7 +136,7 @@ IF the design cites executable proof claims, load `references/lanes/proof-challe
 
 MUST load `references/lanes/dispel.md` after mode-complete and chunk checks and return a classification for every candidate and a rail or `absent` mapping for delivered design elements, even when the candidate set is empty.
 
-Select a focused check only for a concrete unresolved risk with a falsifiable question. IF a focused check is selected, load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. IF a focused check is selected, load the selected reference below and return its check result for that risk. Run one check per named risk after the earlier checks, and stop when no named risk remains:
+MUST load `references/finding-and-reduction-schema.md` and return verified dispositions for the earlier check results before selecting any focused check. Select a focused check only for a concrete risk that remains unresolved after that reduction, with a falsifiable question. IF a focused check is selected, load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. IF a focused check is selected, load the selected reference below and return its check result for that risk. Run one check per named risk after the earlier checks, and stop when no named risk remains:
 
 ```text
 material reader-comprehension risk, or an explicit deep-reader request from the
@@ -174,7 +174,7 @@ Completion: each check supplies current coverage for its selected target, and pr
 
 ## 8. Verify and Reduce Findings
 
-MUST load `references/finding-and-reduction-schema.md` and return its dispositions, merged duplicates/conflicts, coverage gaps, goal-relevance record, deletion-first decision, scope effect, and final coverage-bound result. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
+Using the already-loaded `references/finding-and-reduction-schema.md`, reduce the complete candidate set, including any focused-check findings, and return its dispositions, merged duplicates/conflicts, coverage gaps, goal-relevance record, deletion-first decision, scope effect, and final coverage-bound result. In that reference, `parent` means the 🔎 Reviewer Sidekick, never the author or orchestrator.
 
 Re-anchor before accepting a finding: identify the confirmed requirement or goal-boundary field it serves, whether the existing foundation already satisfies it or can supply the correction, the concrete failure if unresolved, the smallest correction, whether the confirmed obligations still hold without the questioned mechanism, whether the proposed mechanism is the smallest change that serves the quoted clause or one of several, and whether the correction stays inside the confirmed goal boundary. Then return the existing `accepted | rejected | contested | unverified` disposition; do not create a second checkpoint status. When evidence is missing, follow that reference's evidence-lookup branch before accepting. Question whether a proposed mechanism is needed before accepting findings that merely complete its missing contracts.
 

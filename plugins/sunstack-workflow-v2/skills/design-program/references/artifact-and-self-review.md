@@ -13,16 +13,7 @@ Return in workflow order:
 
 Consume each selected view's reader question plus the selected predicates and required semantic fields from the `SKILL.md` Required Views table without restating them. Consume the shared rendering result for every firing and reject missing fields, failed visual checks, unresolved fallbacks, or a view that does not answer its stated reader question. For generated images, also reject a missing project-local asset, broken relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, Lead-unaccepted candidate, or any disagreement with the exact structural views.
 
-For call graph or sequence views, consume the current-to-proposed delta from `state-calls-and-flows.md` rather than copying a raw stack trace. Keep these fields visible:
-
-- current and proposed paths, or an explicit no-predecessor case;
-- owner crossings;
-- synchronous, asynchronous, and event edges, each boundary-crossing edge with its shape;
-- state reads and writes or side effects;
-- result and error propagation;
-- evidence anchors;
-- added, removed, and changed markers;
-- preservation-critical or contested unchanged edges.
+For call graph or sequence views, consume the current-to-proposed delta from `state-calls-and-flows.md` rather than copying a raw stack trace. Compare the displayed fields with the `call graph/sequence` row in `SKILL.md`'s Required Views table, and check that each boundary-crossing edge carries its shape as `state-calls-and-flows.md` requires.
 
 Every entity -> home map row comes from the binding table. Verify the trace table against the design: one row per Specification obligation (`R`), each `U` cell naming every Requirements row the obligation traces to or `none: <why>`, no blank cell, `gap: <why>` only where design is missing, each cell agreeing with the section it summarizes, and the returned coverage disposition matching the rows.
 
