@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workflow v2 responsibilities and acceptance plan</title>
+<link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+<script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+<ex-nav for="content"></ex-nav>
+<ex-document id="content">
+<h1>Three Sidekicks, direct collaboration, accountable Lead acceptance</h1>
+<p><strong>Your correction:</strong> the 🐒 Implementer, 🔬 Verifier and 🔎 Reviewer are always separate Sidekicks. Subagents are helpers the Implementer may use. They do not replace those roles.</p>
+<p><strong>Selected:</strong> the Reviewer stays outside the implementation loop. Proof passes and the Lead completes acceptance before review. The Lead uses routine board/check-ins every 55 minutes with Implementer and Verifier. This is the design for PR #209, not a claim of implemented behavior.</p>
+<h2 id="delivery-flow">Who does the work, and who accepts it?</h2>
+<ex-mermaid id="delivery" label="Work, verification and accountable acceptance"><script type="text/plain">
+flowchart TB
+  P["🦁 Lead plans<br/>Workstreams · dependencies · sequencing"]
+  subgraph Pair["Direct working pair"]
+    I["🐒 Implementer SIDEKICK<br/>Execute · integrate · test · repair"]
+    V["🔬 Verifier SIDEKICK<br/>Critically check tests and real behavior"]
+    I <-->|"Direct setup · findings · fixes · rechecks"| V
+  end
+  A["🦁 Lead completes acceptance<br/>Meets the design · proven to work"]
+  C["🔎 Reviewer SIDEKICK<br/>Independent last quality check"]
+  G{"Lead acceptance artifact<br/>and complete specs / target / proof?"}
+  R["Quality checks complete<br/>Owner retains merge / release authority"]
+  F["🦁 Lead owns findings<br/>Assign repairs · reopen affected acceptance"]
+  P -->|"Workstream and boundaries"| I
+  P -->|"Required outcomes and proof"| V
+  I -->|"Integrated work and own proof"| A
+  V -->|"Full verification report and tasks"| A
+  A -->|"Proven and accepted"| G
+  G -->|"Complete"| C
+  G -->|"Missing: review not started"| A
+  A -->|"Missing / failing proof"| I
+  C -->|"Clean"| R
+  C -->|"Findings"| F
+  F -->|"Repairs needed"| I
+</script></ex-mermaid>
+<p>The Lead must satisfy all five conditions below before delivery review. Known missing work returns to the pair. A clean independent review does not start another acceptance ceremony.</p>
+<div class="ex-table-scroll"><table><thead><tr><th>Acceptance condition</th><th>What the Lead establishes</th></tr></thead><tbody>
+<tr><td>Your intent</td><td>Every scoped outcome and governing decision is satisfied.</td></tr>
+<tr><td>The design</td><td>Actual changes respect the planned ownership and contracts.</td></tr>
+<tr><td>Working behavior</td><td>Deciding evidence proves the required behavior on its target.</td></tr>
+<tr><td>Integration</td><td>Workstreams and dependencies work together.</td></tr>
+<tr><td>Resolved prerequisites</td><td>No required proof gap or HOLD remains unresolved without an explicit authorized scope decision.</td></tr>
+</tbody></table></div>
+<p>The Lead records its own judgment in the existing work record. The Checker tests that judgment against original requirements. This is a proposed skill procedure, not software enforcement.</p>
+<h2 id="review-admission">The Reviewer refuses an incomplete handoff</h2>
+<ul>
+<li><strong>Lead's acceptance artifact:</strong> completed checklist, its own judgment and the evidence it inspected.</li>
+<li><strong>Complete governing material:</strong> original owner decisions, current specs/design, workstream plan and verification requirements for the assigned scope.</li>
+<li><strong>Actual candidate and proof:</strong> target/diff, original Verifier report, deciding runs and explicit unresolved-items state.</li>
+</ul>
+<p>Missing acceptance, required proof or governing detail means <strong>review not started</strong>. The Reviewer returns the missing-input list to Lead. It does not complete Lead acceptance or basic verification on Lead's behalf.</p>
+<h2 id="lead-cadence">One routine check-in every 55 minutes</h2>
+<ex-mermaid id="check-in" label="Board-driven 55-minute Lead check-in with urgent exceptions"><script type="text/plain">
+flowchart TB
+  T["Every 55 minutes<br/>Same Lead session"] --> B["Read queued board status<br/>Tasks · evidence · questions"]
+  B --> P["Check Implementer and Verifier<br/>Progress against workstream plan"]
+  P --> A["Act on engineering questions<br/>Record decisions and blockers"]
+  A -->|"While work remains active"| T
+  H["Material HOLD / blocker<br/>Mental-model break"] -->|"Needs action now"| A
+</script></ex-mermaid>
+<p>Routine board updates accumulate for the check-in; the pair keeps working directly. Use one periodic trigger, not frequent status polls or duplicate push-wakes. Material blockers and HOLDs still reach Lead promptly. Stop the cadence when work completes or pauses.</p>
+<p>The 55-minute cadence is selected. Keeping cache warm is its intent, not a measured guarantee. No live wake is configured by this page.</p>
+<h2 id="parallel-work">Parallel work belongs to the Implementer</h2>
+<ex-mermaid id="subagents" label="Parent-owned parallel implementation with workstream verification"><script type="text/plain">
+flowchart TB
+  I["🐒 Implementer SIDEKICK<br/>Own the workstream and integrated result"]
+  S1["Helper subagent A<br/>Bounded task"]
+  S2["Helper subagent B<br/>Bounded task"]
+  V["🔬 Verifier SIDEKICK<br/>Critically verify integrated workstream"]
+  I <-->|"Scope and result"| S1
+  I <-->|"Scope and result"| S2
+  I <-->|"Setup and proof"| V
+</script></ex-mermaid>
+<p>The Implementer chooses helpers and execution steps without asking the Lead about each one. It reads their changes, integrates and proves the result. Ordinary fixes stay with Implementer and Verifier; mental-model breaks and questions they cannot settle go to Lead.</p>
+<p><strong>Sidekick:</strong> separate persistent session. <strong>Subagent:</strong> native helper under the Implementer. Worker remains only a search synonym. The primary Implementer, Verifier and Reviewer never become subagents.</p>
+<h2 id="verification-report">The Verifier gives the Lead a full, actionable report</h2>
+<p>It challenges whether tests would detect the relevant failure, checks real boundaries and independently observes the required behavior. It sends defects straight to Implementer, rechecks fixes and keeps unsupported outcomes visible. A full report can be blocked; it does not mean everything passed.</p>
+<p><strong>Illustrative report structure:</strong> these are example tasks, not actual verification results.</p>
+<div class="ex-table-scroll"><table><thead><tr><th>Section</th><th>What it contains</th><th>Who acts</th></tr></thead><tbody>
+<tr><td>Verification results</td><td>Each scoped outcome: supported, unsupported or unknown; observed target and evidence.</td><td>Verifier reports; Lead inspects.</td></tr>
+<tr><td>Needs Implementer</td><td>☐ Duplicate delivery after reconnect: reproduce, add the regression case and repair. Close after the declared target passes the recheck.</td><td>Implementer repairs; Verifier rechecks.</td></tr>
+<tr><td>Needs you — Lead</td><td>☐ Approved sources disagree on expected behavior. Inspect the conflicting passages and resolve the governing decision.</td><td>Lead decides or brings the owner tradeoff to Shravan.</td></tr>
+<tr><td>Blocked / unverified</td><td>☐ A required journey could not be observed. Name missing access/setup, affected outcomes and what closes the gap.</td><td>Named task owner; Lead handles the blocker it must resolve.</td></tr>
+<tr><td>Resolved and reverified</td><td>Completed repair tasks with their new observation and evidence; retain the original failure.</td><td>Verifier confirms the result; Lead uses it for acceptance.</td></tr>
+</tbody></table></div>
+<p>Use existing tasks and checklists, not another tracker or packet. Material HOLDs reach Lead when found; routine pair exchanges do not become Lead check-ins. “Needs you” here means Lead, not an automatic request for Shravan.</p>
+<h2 id="question-routing">When should an agent bring a question back?</h2>
+<ex-mermaid id="questions" label="Resolve inside responsibility; escalate changes to the agreement"><script type="text/plain">
+flowchart TB
+  Q["A question or unexpected result"] --> R["Read the relevant source<br/>Investigate within the existing grant"]
+  R --> D{"Can this be resolved within<br/>the assignment and agreed outcome?"}
+  D -->|"Yes"| S["Resolve locally or with the peer<br/>Keep the evidence; continue"]
+  D -->|"No / authority missing"| K["Bring evidence to the commissioner"]
+  K --> G{"Can the commissioner resolve it<br/>inside its own responsibility?"}
+  G -->|"Yes"| S
+  G -->|"No: governing decision"| L["🦁 Lead resolves design and integration<br/>Continues independent work"]
+  L -->|"Owner-controlled tradeoff"| O["Owner decides<br/>Changed promises · one-way decisions · proof waivers"]
+</script></ex-mermaid>
+<p>Operators follow their prescribed procedure and return exceptions to their commissioner. The working pair cannot change expected behavior by agreement.</p>
+<h2 id="boundary-examples">What that boundary looks like</h2>
+<div class="ex-table-scroll">
+<table><thead><tr><th>Agent</th><th>Resolve here</th><th>Bring back</th></tr></thead><tbody>
+<tr><td>🐒 Implementer Sidekick</td><td>Choose helpers/functions/edit order; investigate and fix ordinary defects.</td><td>A mental-model break, changed contract or question the sources do not settle.</td></tr>
+<tr><td>🔬 Verifier Sidekick</td><td>Send product defects to Implementer; repair its own granted driver; recheck results.</td><td>Conflicting expected outcomes, insufficient proof, a material HOLD or a decision requiring Lead.</td></tr>
+<tr><td>🔎 Checker</td><td>Investigate a suspected defect from its source.</td><td>The artifact contradicts an owner decision.</td></tr>
+<tr><td>🔧 Operator</td><td>Use a retry explicitly allowed by the procedure.</td><td>Authentication fails with no authorized recovery.</td></tr>
+<tr><td>🦁 Lead</td><td>Inspect integration and assign an in-scope repair.</td><td>Repair requires changing an authorized outcome.</td></tr>
+</tbody></table>
+</div>
+<h2 id="skill-changes">What changes in the skills?</h2>
+<ex-mermaid id="skill-ownership" label="Five skill homes; the base remains the engineering foundation"><script type="text/plain">
+flowchart TB
+  M["manage-agents<br/>Assignments · models · boundaries"]
+  L["🦁 role-lead<br/>Plan · inspect · accept"]
+  I["🐒 role-implementer<br/>Execute · test · repair"]
+  C["role-checker<br/>🔬 Verification / 🔎 independent review"]
+  O["🔧 role-operator<br/>Prescribed execution on Luna"]
+  B["sunstack-dev<br/>Relevant practices · principles · domains"]
+  M --> L
+  M --> I
+  M --> C
+  M --> O
+  L -.-> B
+  I -.-> B
+  C -.-> B
+  O -.-> B
+</script></ex-mermaid>
+<p>Keep the four role skills, existing model map and classifications. The Implementer, Verifier and Reviewer remain Sidekicks. I have withdrawn the earlier alternate-Implementer-form and new model-row proposals. Put positive working procedures, boundaries and contrasting examples in the role skills and their existing references.</p>
+<p>R7 records the selected outside Reviewer, 55-minute routine cadence and mandatory review inputs. The older alternate-form/model-row proposal is withdrawn. Current source implementation and design review are still pending; skill lint remains not run because its credential is missing.</p>
+<h2 id="full-plan">Full plan and review material</h2>
+<p>The complete source parts are unchanged below. Open only the part you need.</p>
+<details>
+<summary>Owner decisions, evidence and protected scope</summary>
+<h2 id="requirements">Your direction and the preserved foundation</h2>
+<ex-markdown id="part-requirements" label="Direction and boundaries" src="./requirements.md"></ex-markdown>
+</details>
+<details>
+<summary>Detailed responsibility rules and transfer examples</summary>
+<h2 id="specification">Who resolves which questions</h2>
+<ex-markdown id="part-specification" label="Responsibilities and examples" src="./specification.md"></ex-markdown>
+</details>
+<details>
+<summary>Authoring order, references and proposed defaults</summary>
+<h2 id="skill-design">Five skill runs and their owning references</h2>
+<ex-markdown id="part-skill-design" label="Authoring sequence" src="./skill-design.md"></ex-markdown>
+</details>
+<details>
+<summary>Full review, actual lint and what remains unverified</summary>
+<h2 id="skill-verification">Independent review, rules and proof limits</h2>
+<ex-markdown id="part-skill-verification" label="Verification and review plan" src="./skill-verification.md"></ex-markdown>
+</details>
+</ex-document>
+<ex-presentation id="read-plan" title="Responsibility plan" description="Work and acceptance, question boundaries, examples and skill ownership.">
+<ex-step to="delivery">Follow the working pair through the Lead's inspection and independent review.</ex-step>
+<ex-step to="review-admission">See what the Reviewer requires before it starts.</ex-step>
+<ex-step to="check-in">See the Lead's routine 55-minute board/check-in cycle.</ex-step>
+<ex-step to="subagents">See how the Implementer owns parallel coding and the integrated result.</ex-step>
+<ex-step to="verification-report">Read how the Verifier critically checks work and gives the Lead owned actions.</ex-step>
+<ex-step to="questions">See which questions stay local and which return to the Lead.</ex-step>
+<ex-step to="boundary-examples">Test the boundary on concrete examples.</ex-step>
+<ex-step to="skill-ownership">See which skill owns each part.</ex-step>
+</ex-presentation>
+</body>
+</html>
