@@ -8,5 +8,6 @@
 - Existing entity-binding, shape and result blockers are separate items. No fixed table IDs, new row contract or rule markers are added.
 - Held: non-U proof rows, correction-verification actor ambiguity, additional Specification review work and the substantial-document threshold.
 - Validation: Claude marketplace check and TypeScript check pass; full suite 310/310 after an initial 308/310 run with two non-reproduced empty-output failures. Final checks are recorded in the PR.
+- The skills contract tests read the v1 design-skill paths; no test that checks these v2 fixes was found, and no regression run was done.
 - Independent source rechecks do not establish agent behavior, pressure-proof improvement or installed uptake; ordinary model-based lint is not run.
 - No commands, hooks or README sections change. Codex/Claude caches are not refreshed; the owner retains merge authority.
