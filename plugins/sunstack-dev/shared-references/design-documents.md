@@ -74,7 +74,7 @@ After a real owner answer, reconcile the section that owns the resulting meaning
 
 ## Call-stack component data is conditional
 
-Call paths remain Program Design meaning. Use an ordinary source-derived graph/sequence or the retained call-stack component where it helps explain the path. IF that component is selected, load the matching Demistify guide through `presentation-html` and return its actual source/data owners, need/stack/frame mapping, supported reader and preparation/check result. Its current collection contract can require metadata in `requirements.html` and `execution.html`; that data does not require a requirements viewer, a specification/scenario record for every rule, or a new embedding API. A frame names a need only when the source declares that relationship.
+Call paths remain Program Design meaning. Use an ordinary source-derived graph/sequence or the retained call-stack component where it helps explain the path. IF that component is selected, load the matching Demistify guide through `presentation-html` and return its actual source/data owners, need/stack/frame mapping, supported reader and preparation/check result. Its collection contract can require metadata in `requirements.html` and `execution.html`; apply that data contract only to the selected component. A frame names a need only when the source declares that relationship.
 
 A free-form set without selected prepared-component data does not run design-record preparation. An actual component's required data and supported limits remain authoritative. Never fabricate frames, attributes, bindings or prepared results. A proposed greenfield call path can use a labelled sequence view without pretending it is observed runtime execution.
 
