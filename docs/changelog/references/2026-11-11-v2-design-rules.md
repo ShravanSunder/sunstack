@@ -13,13 +13,15 @@ Engine: released `@sunstack/cli` 0.11.0 (signed Developer ID build), pinned in `
 
 ## Edge tests (`tests/skills/tests/integration/design-rules-mechanical-edges.test.ts`)
 
-Fixture: the public 2026-11-07 design set from sunstack-tools `e454cc8`, copied byte for byte. Each case first applies the v2 page name and the `bindings`/`trace`/`coverage` ids. 15 tests:
+Fixture: the public 2026-11-07 design set from sunstack-tools `e454cc8`, copied byte for byte. Each case first applies the v2 page name and the `bindings`/`trace`/`coverage` ids. 20 tests:
 
 - The adapted set is quiet, and every piece passes (4 U, 10 R, 5 E). Ids on a wrapping element count the same as ids on a heading. A valid cross-page fragment passes.
 - One warning, with its rule, file and line: an `R` removed from every coverage row; a `U` label dropped from its row; an `E` binding row removed while the trace table still names it; a broken `#fragment`; `R1` present only as `R10`.
 - Still one warning when the `R` survives only in prose, an HTML comment, a code sample, or a table under the next heading, or inside a coverage row only in an HTML comment or an attribute value. The coverage and binding fields read the rows' visible text nodes, not their raw markup.
+- Attribute quoting: single-quoted and unquoted `coverage`/`bindings` ids still select their rows; a single-quoted `R` id is still checked and warns when its coverage is gone; a broken single-quoted fragment link warns.
+- Known limit, tested as such: an id split by inline markup in its row (`R<span>6</span>`) isn't read as the id, so it warns. `design-review` tells the reviewer to open the row before accepting that warning.
 - A missing `verification.html` leaves both coverage rules incomplete (exit 3), never passed.
-- Red check: loosening the row selectors to every `<tr>` fails the trace-only and next-heading controls.
+- Red checks: loosening the row selectors to every `<tr>` fails the trace-only and next-heading controls; the previous double-quote-only patterns fail all four quoting tests.
 
 ## Real runs, as `design-review` step 5 writes the command (`pnpm dlx @sunstack/cli@0.11.0 lint ... --root <project> --report ...`)
 
@@ -27,11 +29,12 @@ Fixture: the public 2026-11-07 design set from sunstack-tools `e454cc8`, copied 
 - The 2026-11-07 design set (pre-v2 names): incomplete, exit 3. D001/D002 are incomplete for all 14 pieces (no `verification.html`). D003 warns on E1–E5: the binding table exists but carries no `id="bindings"`, so all five are real against the new obligation. D004 has no fragment links to check.
 - A named path outside `--root`: refused, exit 2.
 - The paired Verifier's own probe, `R15` left only in `<tr data-note="R15">`, passed at the first head (raw-row matching). After the repair it warns once (D002 at the Specification's `R15`).
+- The #217 review lead's probes, run with the final config: a single-quoted broken link warns once; `id='coverage'` is quiet; a single-quoted `R6` without coverage warns once; `R<span>6</span>` warns once (the named limit). Before the repair the first and third were silent and the second gave 14 false warnings. A coverage heading wrapped alone in a `<div>`, with the table after that `<div>`, still gives 14 warnings: the table is not directly under the heading.
 
 ## Gates
 
 - `claude plugin validate .`: passed (no `sunstack-workflow-v2` warnings).
-- `tsc --noEmit` and `vitest run lib tests` in `tests/skills`: exit 0, 31 files, 325 tests passed.
+- `tsc --noEmit` and `vitest run lib tests` in `tests/skills`: exit 0, 31 files, 330 tests passed.
 - Within 24 hours of 0.11.0's release, `pnpm --dir tests/skills test` / `typecheck` stop at pnpm 11.8's pre-run lockfile check (`ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`). That check ignores `minimumReleaseAgeExclude`. The suite binaries above were run directly; the wrapper passes once the release is 24 hours old.
 
 ## Not shown

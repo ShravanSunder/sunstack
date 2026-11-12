@@ -313,6 +313,72 @@ test.each([
   },
 );
 
+test.each([
+  ["single-quoted", "'coverage'", "'bindings'"],
+  ["unquoted", "coverage", "bindings"],
+] satisfies [string, string, string][])(
+  "%s coverage and bindings ids still select their rows",
+  async (_style, coverageId, bindingsId) => {
+    const report = await lintDesignSet({
+      ...adapted,
+      verification: replaceExactlyOnce(
+        adapted.verification,
+        '<h2 id="coverage">',
+        `<h2 id=${coverageId}>`,
+      ),
+      "program-design": replaceExactlyOnce(
+        adapted["program-design"],
+        '<h2 id="bindings">',
+        `<h2 id=${bindingsId}>`,
+      ),
+    });
+
+    expect(report.findings).toEqual([]);
+    expect(outcomeCounts(report)).toMatchObject({
+      [`${rule.requirementRow} pass`]: 4,
+      [`${rule.obligationRow} pass`]: 10,
+      [`${rule.entityRow} pass`]: 5,
+    });
+  },
+);
+
+test("a single-quoted obligation id is still checked, and warns once when its coverage is gone", async () => {
+  const specification = replaceExactlyOnce(adapted.specification, '<tr id="R6">', "<tr id='R6'>");
+
+  const report = await lintDesignSet({ ...adapted, specification, verification: withoutR6 });
+
+  expectOneFinding(report, { rule: rule.obligationRow, page: "specification", line: r6Line });
+});
+
+test("a single-quoted trace link to a missing fragment warns once at the link", async () => {
+  const brokenLink = "<a href='specification.html#R99'>";
+  const programDesign = replaceExactlyOnce(
+    adapted["program-design"],
+    '<a href="specification.html">',
+    brokenLink,
+  );
+
+  const report = await lintDesignSet({ ...adapted, "program-design": programDesign });
+
+  expectOneFinding(report, {
+    rule: rule.traceLink,
+    page: "program-design",
+    line: lineOf(programDesign, brokenLink),
+  });
+});
+
+test("known limit: an id split by inline markup in its row is not read as the id, so it warns", async () => {
+  const verification = replaceExactlyOnce(
+    adapted.verification,
+    "U1; R1,R5,R6,R7,R9",
+    "U1; R1,R5,R<span>6</span>,R7,R9",
+  );
+
+  const report = await lintDesignSet({ ...adapted, verification });
+
+  expectOneFinding(report, { rule: rule.obligationRow, page: "specification", line: r6Line });
+});
+
 test("a missing verification page leaves coverage undecided, never passed", async () => {
   const { verification: _absent, ...withoutVerification } = adapted;
 

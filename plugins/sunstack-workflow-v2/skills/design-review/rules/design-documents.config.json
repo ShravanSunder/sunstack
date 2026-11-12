@@ -29,28 +29,28 @@
       "need": {
         "rule": "need-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(U[0-9]+)\"" },
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(U[0-9]+)[\"'\\s/>]" },
           "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
         }
       },
       "obligation": {
         "rule": "obligation-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(R[0-9]+)\"" },
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(R[0-9]+)[\"'\\s/>]" },
           "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
         }
       },
       "entity": {
         "rule": "entity-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=\"(E[0-9]+)\"" },
+          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(E[0-9]+)[\"'\\s/>]" },
           "bindings": { "from": "document", "path": "program-design.html", "rule": "binding-row-text" }
         }
       },
       "trace_link": {
         "rule": "trace-link",
         "fields": {
-          "links": { "from": "target", "regex": "^<[^>]*\\shref=\"((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html)?#[^\"]+)\"", "resolve": "path" }
+          "links": { "from": "target", "regex": "^<[^>]*\\shref=[\"']?((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html)?#[^\"'\\s>]+)", "resolve": "path" }
         }
       }
     }
