@@ -106,7 +106,7 @@ Completion: the document has one row per requirement, both views have passing re
 
 Re-read the whole document as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing row. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
 
-In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning. A clean run shows only that the rows and links exist, and an `incomplete` or `nothing_selected` run is a gap.
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `four-document-design` config, and fix or answer each warning before returning. A clean run shows only that the rows and links exist, and an `incomplete` run is a gap.
 
 Completion: every item in Not ready while is cleared, or its row is returned as a gap or a decision.
 

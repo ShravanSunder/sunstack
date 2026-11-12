@@ -14,7 +14,12 @@ const fixtureDirectory = path.join(
   "tests/skills/fixtures/design-rules/2026-11-07-design-documents",
 );
 const designSkillsRelative = "plugins/sunstack-workflow-v2/skills";
-const configRelative = `${designSkillsRelative}/design-review/rules/design-documents.config.json`;
+const reviewModeConfigs = {
+  "specification-only": "design-documents.specification-only.config.json",
+  "program-only": "design-documents.program-only.config.json",
+  "four-document-design": "design-documents.config.json",
+} as const;
+type ReviewMode = keyof typeof reviewModeConfigs;
 const setRelative = "docs/specs/2026-11-07-design-documents";
 
 const rule = {
@@ -30,6 +35,7 @@ const designReportSchema = z
     counts: z.object({ warn: z.number(), error: z.number() }),
     usage: z.object({ model_requests: z.number() }).passthrough(),
     results: z.array(z.object({ name: z.string(), outcome: z.string() }).passthrough()),
+    file_counts: z.array(z.object({ file: z.string() }).passthrough()),
     findings: z.array(
       z
         .object({ rule: z.string(), file: z.string(), line: z.number(), severity: z.string() })
@@ -90,7 +96,15 @@ function lineOf(text: string, search: string): number {
   return text.slice(0, offset).split("\n").length;
 }
 
-async function lintDesignSet(pages: Partial<DesignPages>, expectedExit = 0): Promise<DesignReport> {
+interface LintDesignSetOptions {
+  readonly expectedExit?: number;
+  readonly mode?: ReviewMode;
+}
+
+async function lintDesignSet(
+  pages: Readonly<Record<string, string>>,
+  options: LintDesignSetOptions = {},
+): Promise<DesignReport> {
   const root = mkdtempSync(path.join(tmpdir(), "2026-11-design-rules-"));
   roots.push(root);
   execFileSync("git", ["init", "--quiet", root]);
@@ -115,12 +129,12 @@ async function lintDesignSet(pages: Partial<DesignPages>, expectedExit = 0): Pro
 
   const output = await runNativeLint({
     root,
-    config: configRelative,
+    config: `${designSkillsRelative}/design-review/rules/${reviewModeConfigs[options.mode ?? "four-document-design"]}`,
     arguments: ["--format", "json", setRelative],
   });
 
   const report = designReportSchema.parse(JSON.parse(output.stdout));
-  expect(output.status, output.stderr).toBe(expectedExit);
+  expect(output.status, output.stderr).toBe(options.expectedExit ?? 0);
   expect(report.usage.model_requests).toBe(0);
   return report;
 }
@@ -136,7 +150,7 @@ function outcomeCounts(report: DesignReport): Record<string, number> {
 
 function expectOneFinding(
   report: DesignReport,
-  expected: { readonly rule: string; readonly page: PageName; readonly line: number },
+  expected: { readonly rule: string; readonly page: string; readonly line: number },
 ): void {
   expect(report.findings).toEqual([
     expect.objectContaining({
@@ -314,22 +328,23 @@ test.each([
 );
 
 test.each([
-  ["single-quoted", "'coverage'", "'bindings'"],
-  ["unquoted", "coverage", "bindings"],
+  ["single-quoted", "id='coverage'", "id='bindings'"],
+  ["unquoted", "id=coverage", "id=bindings"],
+  ["spaced", 'id = "coverage"', 'id = "bindings"'],
 ] satisfies [string, string, string][])(
   "%s coverage and bindings ids still select their rows",
-  async (_style, coverageId, bindingsId) => {
+  async (_style, coverageAttribute, bindingsAttribute) => {
     const report = await lintDesignSet({
       ...adapted,
       verification: replaceExactlyOnce(
         adapted.verification,
         '<h2 id="coverage">',
-        `<h2 id=${coverageId}>`,
+        `<h2 ${coverageAttribute}>`,
       ),
       "program-design": replaceExactlyOnce(
         adapted["program-design"],
         '<h2 id="bindings">',
-        `<h2 id=${bindingsId}>`,
+        `<h2 ${bindingsAttribute}>`,
       ),
     });
 
@@ -379,10 +394,197 @@ test("known limit: an id split by inline markup in its row is not read as the id
   expectOneFinding(report, { rule: rule.obligationRow, page: "specification", line: r6Line });
 });
 
+const bindingRowE3 = /<tr><td>E3<\/td>.*?<\/tr>\n?/su;
+
+test.each([
+  {
+    subject: "requirement U3",
+    pages: {
+      ...adapted,
+      requirements: replaceExactlyOnce(adapted.requirements, 'id="U3"', 'id = "U3"'),
+      verification: replaceExactlyOnce(adapted.verification, "U3; R3,R4,R9", "R3,R4,R9"),
+    },
+    expected: {
+      rule: rule.requirementRow,
+      page: "requirements",
+      line: lineOf(adapted.requirements, 'id="U3"'),
+    },
+    subjects: { name: rule.requirementRow, count: 4 },
+  },
+  {
+    subject: "obligation R6",
+    pages: {
+      ...adapted,
+      specification: replaceExactlyOnce(adapted.specification, 'id="R6"', 'id = "R6"'),
+      verification: withoutR6,
+    },
+    expected: { rule: rule.obligationRow, page: "specification", line: r6Line },
+    subjects: { name: rule.obligationRow, count: 10 },
+  },
+  {
+    subject: "entity E3",
+    pages: {
+      ...adapted,
+      specification: replaceExactlyOnce(adapted.specification, 'id="E3"', 'id = "E3"'),
+      "program-design": adapted["program-design"].replace(bindingRowE3, ""),
+    },
+    expected: {
+      rule: rule.entityRow,
+      page: "specification",
+      line: lineOf(adapted.specification, 'id="E3"'),
+    },
+    subjects: { name: rule.entityRow, count: 5 },
+  },
+])(
+  "a spaced id on $subject is still checked, and warns once when its row is gone",
+  async ({ pages, expected, subjects }) => {
+    const report = await lintDesignSet(pages);
+
+    expectOneFinding(report, expected);
+    expect(report.results.filter((result) => result.name === subjects.name)).toHaveLength(
+      subjects.count,
+    );
+  },
+);
+
+test.each([
+  ["link to a missing fragment", '<a href = "specification.html#R99">', "finding"],
+  ["link to an existing fragment", '<a href = "specification.html#R6">', "pass"],
+] satisfies [string, string, string][])(
+  "a spaced trace %s is checked",
+  async (_case, link, outcome) => {
+    const programDesign = replaceExactlyOnce(
+      adapted["program-design"],
+      '<a href="specification.html">',
+      link,
+    );
+
+    const report = await lintDesignSet({ ...adapted, "program-design": programDesign });
+
+    expect(report.results.filter((result) => result.name === rule.traceLink)).toEqual([
+      expect.objectContaining({ outcome }),
+    ]);
+    expect(report.findings).toHaveLength(outcome === "finding" ? 1 : 0);
+  },
+);
+
+const r6Row = /<tr id="R6">.*?<\/tr>\n?/su;
+const r6RowText = r6Row.exec(adapted.specification)?.[0] ?? "";
+const partPage = `<!doctype html><html lang="en"><body><h1>Reader contracts</h1>\n<table><tbody>\n${r6RowText}</tbody></table>\n</body></html>\n`;
+const specificationWithPart = replaceExactlyOnce(
+  adapted.specification.replace(r6Row, ""),
+  "<h2>Entities</h2>",
+  '<p><a href="reader-contracts.html">Reader contracts</a></p><h2>Entities</h2>',
+);
+
+test("an obligation homed in a linked part is checked, and warns once when its coverage is gone", async () => {
+  expect(r6RowText).toContain('id="R6"');
+
+  const quiet = await lintDesignSet({
+    ...adapted,
+    specification: specificationWithPart,
+    "reader-contracts": partPage,
+  });
+  const missing = await lintDesignSet({
+    ...adapted,
+    specification: specificationWithPart,
+    "reader-contracts": partPage,
+    verification: withoutR6,
+  });
+
+  expect(quiet.findings).toEqual([]);
+  expect(quiet.results.filter((result) => result.name === rule.obligationRow)).toHaveLength(10);
+  expectOneFinding(missing, {
+    rule: rule.obligationRow,
+    page: "reader-contracts",
+    line: lineOf(partPage, 'id="R6"'),
+  });
+});
+
+test.each([
+  ["reader-contracts.html#R6", "pass"],
+  ["reader-contracts.html#R99", "finding"],
+] satisfies [string, string][])(
+  "a trace link into a linked part, %s, is checked",
+  async (target, outcome) => {
+    const programDesign = replaceExactlyOnce(
+      adapted["program-design"],
+      '<a href="specification.html">',
+      `<a href="${target}">`,
+    );
+
+    const report = await lintDesignSet({
+      ...adapted,
+      specification: specificationWithPart,
+      "reader-contracts": partPage,
+      "program-design": programDesign,
+    });
+
+    expect(report.results.filter((result) => result.name === rule.traceLink)).toEqual([
+      expect.objectContaining({ outcome }),
+    ]);
+  },
+);
+
+const specificationWithFragmentLink = replaceExactlyOnce(
+  adapted.specification,
+  '<a href="requirements.html">',
+  '<a href="requirements.html#U1">',
+);
+
+test.each([
+  {
+    mode: "specification-only",
+    pages: {
+      index: adapted.index,
+      requirements: adapted.requirements,
+      specification: specificationWithFragmentLink,
+    },
+    decided: { [`${rule.traceLink} pass`]: 1 },
+  },
+  {
+    mode: "program-only",
+    pages: {
+      index: adapted.index,
+      requirements: adapted.requirements,
+      specification: specificationWithFragmentLink,
+      "program-design": adapted["program-design"],
+    },
+    decided: { [`${rule.entityRow} pass`]: 5, [`${rule.traceLink} pass`]: 1 },
+  },
+] satisfies { mode: ReviewMode; pages: Record<string, string>; decided: Record<string, number> }[])(
+  "$mode review checks only the documents its mode admits, and is complete before later documents exist",
+  async ({ mode, pages, decided }) => {
+    const report = await lintDesignSet(pages, { mode });
+
+    expect(report.status.kind).toBe("clean");
+    expect(report.findings).toEqual([]);
+    expect(outcomeCounts(report)).toEqual(decided);
+  },
+);
+
+test("a specification-only review of pages with no fragment links reads every page and has nothing to check", async () => {
+  const pages = {
+    index: adapted.index,
+    requirements: adapted.requirements,
+    specification: adapted.specification,
+  };
+
+  const report = await lintDesignSet(pages, { mode: "specification-only" });
+
+  expect(report.status.kind).toBe("nothing_selected");
+  expect(report.results).toEqual([]);
+  expect(report.file_counts.map((count) => count.file).sort()).toEqual(
+    Object.keys(pages)
+      .map((name) => `${setRelative}/${name}.html`)
+      .sort(),
+  );
+});
+
 test("a missing verification page leaves coverage undecided, never passed", async () => {
   const { verification: _absent, ...withoutVerification } = adapted;
 
-  const report = await lintDesignSet(withoutVerification, 3);
+  const report = await lintDesignSet(withoutVerification, { expectedExit: 3 });
 
   expect(report.status.kind).toBe("incomplete");
 

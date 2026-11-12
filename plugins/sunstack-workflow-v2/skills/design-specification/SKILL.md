@@ -265,7 +265,7 @@ Completion: the Requirements and Specification homes are separately identifiable
 
 Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the whole artifact. Check authority conflicts, accepted-requirements coverage, traceability, vague obligations, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, process residue, obscure headings, duplicated companion narration, and reader-facing elements that fail the human deletion test. For each generated visual also consume the actual project asset, relative embed, pixel inspection and destination-preview result from the shared rendering owner, then return the author self-check with exact gaps.
 
-In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5, and fix or answer each trace-link warning before returning. The coverage and binding rules stay incomplete until Program Design and the Verification Design exist, as expected at this stage.
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `specification-only` config, and fix or answer each trace-link warning before returning.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 

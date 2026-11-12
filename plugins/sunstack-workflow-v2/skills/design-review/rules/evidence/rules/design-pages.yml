@@ -1,27 +1,26 @@
-# Pieces and rows of a v2 HTML design set. Attribute values may be double-quoted,
-# single-quoted or unquoted, as HTML allows. Each element is matched on its own
-# start tag (a direct child of the element), never with `stopBy: end`, so an
-# ancestor of an id-bearing element is not itself a match.
+# Pieces and rows of a v2 HTML design set. An attribute may have whitespace around
+# its `=`, and its value may be double-quoted, single-quoted or unquoted, as HTML
+# allows. Each element is matched on its own start tag (a direct child of the
+# element), never with `stopBy: end`, so an ancestor of an id-bearing element is not
+# itself a match. Requirements, obligations and entities are found on every page of
+# the set, so one homed in a linked part is checked too.
 id: need-element
 language: Html
-files: ["**/requirements.html"]
 rule:
   kind: element
-  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid=["'']?U[0-9]+["''\s/>]'}
+  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?U[0-9]+["''\s/>]'}
 ---
 id: obligation-element
 language: Html
-files: ["**/specification.html"]
 rule:
   kind: element
-  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid=["'']?R[0-9]+["''\s/>]'}
+  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?R[0-9]+["''\s/>]'}
 ---
 id: entity-element
 language: Html
-files: ["**/specification.html"]
 rule:
   kind: element
-  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid=["'']?E[0-9]+["''\s/>]'}
+  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?E[0-9]+["''\s/>]'}
 ---
 # The visible text of a coverage row: text nodes inside a table row that is inside
 # the element with id="coverage", or inside an element that follows a heading with
@@ -35,14 +34,14 @@ rule:
     kind: element
     has: {kind: start_tag, regex: '^<tr\b'}
     any:
-      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid=["'']?coverage["''\s/>]'}}
+      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?coverage["''\s/>]'}}
       - inside:
           stopBy: end
           kind: element
           follows:
             stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
             kind: element
-            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid=["'']?coverage["''\s/>]'}
+            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid\s*=\s*["'']?coverage["''\s/>]'}
 ---
 # The visible text of an entity-binding row, placed the same way under id="bindings".
 id: binding-row-text
@@ -54,23 +53,22 @@ rule:
     kind: element
     has: {kind: start_tag, regex: '^<tr\b'}
     any:
-      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid=["'']?bindings["''\s/>]'}}
+      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?bindings["''\s/>]'}}
       - inside:
           stopBy: end
           kind: element
           follows:
             stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
             kind: element
-            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid=["'']?bindings["''\s/>]'}
+            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid\s*=\s*["'']?bindings["''\s/>]'}
 ---
-# A trace link: an element whose own start tag links to a passage, a #fragment
-# on a page of the set (index, requirements, specification, program-design or
-# verification .html) or on its own page. Page-only links, assets, external URLs
-# and other files are outside the standard.
+# A trace link: an element whose own start tag links to a passage, a #fragment on
+# an HTML page in the set's folder or on its own page. Page-only links, assets,
+# external URLs and pages in other folders are outside the standard.
 id: trace-link
 language: Html
 rule:
   kind: element
   has:
     kind: start_tag
-    regex: '^<[A-Za-z][^>]*\shref=["'']?(?:(?:\./)?(?:index|requirements|specification|program-design|verification)\.html)?#[^"''\s>]+'
+    regex: '^<[A-Za-z][^>]*\shref\s*=\s*["'']?(?:(?:\./)?[^"''\s>/:#]+\.html)?#[^"''\s>]+'

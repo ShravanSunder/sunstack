@@ -255,7 +255,7 @@ Completion: each design element serves an obligation, constraint, failure policy
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the trace table and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. Consume each generated visual's accepted project asset, relative embed, semantic/readability inspection and destination-preview result, then return the integration self-check with exact gaps.
 
-In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning from the binding and trace-link rules before returning. The coverage rules stay incomplete until the Verification Design exists, as expected at this stage. A clean run shows only that the rows and links exist.
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `program-only` config, and fix or answer each binding and trace-link warning before returning. A clean run shows only that the rows and links exist.
 
 Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show the views, pictures a reader can follow first, then the tables:
 

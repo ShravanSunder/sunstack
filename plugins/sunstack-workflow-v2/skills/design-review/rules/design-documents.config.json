@@ -16,11 +16,7 @@
   "marker_prefix": "D",
   "check": {
     "files": [
-      "**/index.html",
-      "**/requirements.html",
-      "**/specification.html",
-      "**/program-design.html",
-      "**/verification.html"
+      "**/*.html"
     ]
   },
   "evidence": {
@@ -29,28 +25,53 @@
       "need": {
         "rule": "need-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(U[0-9]+)[\"'\\s/>]" },
-          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
+          "identifier": {
+            "from": "capture",
+            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(U[0-9]+)[\"'\\s/>]"
+          },
+          "coverage": {
+            "from": "document",
+            "path": "verification.html",
+            "rule": "coverage-row-text"
+          }
         }
       },
       "obligation": {
         "rule": "obligation-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(R[0-9]+)[\"'\\s/>]" },
-          "coverage": { "from": "document", "path": "verification.html", "rule": "coverage-row-text" }
+          "identifier": {
+            "from": "capture",
+            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(R[0-9]+)[\"'\\s/>]"
+          },
+          "coverage": {
+            "from": "document",
+            "path": "verification.html",
+            "rule": "coverage-row-text"
+          }
         }
       },
       "entity": {
         "rule": "entity-element",
         "fields": {
-          "identifier": { "from": "capture", "regex": "^<[^>]*\\sid=[\"']?(E[0-9]+)[\"'\\s/>]" },
-          "bindings": { "from": "document", "path": "program-design.html", "rule": "binding-row-text" }
+          "identifier": {
+            "from": "capture",
+            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(E[0-9]+)[\"'\\s/>]"
+          },
+          "bindings": {
+            "from": "document",
+            "path": "program-design.html",
+            "rule": "binding-row-text"
+          }
         }
       },
       "trace_link": {
         "rule": "trace-link",
         "fields": {
-          "links": { "from": "target", "regex": "^<[^>]*\\shref=[\"']?((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html)?#[^\"'\\s>]+)", "resolve": "path" }
+          "links": {
+            "from": "target",
+            "regex": "^<[^>]*\\shref\\s*=\\s*[\"']?((?:(?:\\./)?[^\"'\\s>/:#]+\\.html)?#[^\"'\\s>]+)",
+            "resolve": "path"
+          }
         }
       }
     }

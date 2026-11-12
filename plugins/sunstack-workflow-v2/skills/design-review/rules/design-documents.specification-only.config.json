@@ -1,0 +1,32 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../../design-specification/SKILL.md",
+      "rules": "../../design-specification/rules/design-specification.rules.json"
+    }
+  ],
+  "marker_prefix": "D",
+  "check": {
+    "files": [
+      "**/*.html"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "trace_link": {
+        "rule": "trace-link",
+        "fields": {
+          "links": {
+            "from": "target",
+            "regex": "^<[^>]*\\shref\\s*=\\s*[\"']?((?:(?:\\./)?[^\"'\\s>/:#]+\\.html)?#[^\"'\\s>]+)",
+            "resolve": "path"
+          }
+        }
+      }
+    }
+  },
+  "decision_model": {
+    "model": "jev-latest"
+  }
+}
