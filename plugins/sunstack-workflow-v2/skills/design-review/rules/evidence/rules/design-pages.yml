@@ -55,14 +55,14 @@ rule:
           kind: element
           has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid="bindings"'}
 ---
-# A trace link: an element whose own start tag links to a page of the set
-# (index, requirements, specification, program-design or verification .html,
-# optionally with a #fragment) or to a #fragment on its own page. Assets,
-# external URLs and other files are outside the standard.
+# A trace link: an element whose own start tag links to a passage, a #fragment
+# on a page of the set (index, requirements, specification, program-design or
+# verification .html) or on its own page. Page-only links, assets, external URLs
+# and other files are outside the standard.
 id: trace-link
 language: Html
 rule:
   kind: element
   has:
     kind: start_tag
-    regex: '^<[A-Za-z][^>]*\shref="(?:(?:\./)?(?:index|requirements|specification|program-design|verification)\.html(?:#[^"]*)?|#[^"]+)"'
+    regex: '^<[A-Za-z][^>]*\shref="(?:(?:\./)?(?:index|requirements|specification|program-design|verification)\.html)?#[^"]+"'

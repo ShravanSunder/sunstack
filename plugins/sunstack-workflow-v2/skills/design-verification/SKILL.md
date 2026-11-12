@@ -96,6 +96,8 @@ MUST load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` wi
 
 In a file-backed set, use `sunstack-dev:presentation-html` to author the complete Verification Design as HTML. Explain each requirement's planned proof in prose, a meaningful card or a table as the reader question warrants; keep reference, target, observation, passing condition and unverified limits inspectable. Describe a shared observation once and link the rows it serves. Use the recipe's proof and open-question examples; no verification stage viewer, mandatory scenario/observation records or separate Markdown source. An actual component's preparation is conditional on selecting it. Update `index.html` and actual requirement/design links. For a new v2 HTML set, follow the shared navigation preflight in the composition recipe and return actual descriptor/page/target identities and check/delivery result; the guide owns its schema. Then run the matching static check.
 
+Put the coverage rows in, or directly under the heading of, an element with `id="coverage"`. Design review's rules count a requirement or obligation as covered only when a row found there names it.
+
 For each substantive proof explanation, lead with what will be done, what will be seen, and which outcome decides the obligation, and pair that answer with a supported relational diagram of the observation path. Explain how the source/target reaches the deciding observation and interpret the relationship beside the diagram. A table may support exact fields but does not replace the substantive path view. One section or diagram may explain a shared observation for several obligations; each requirement keeps its own complete row and link to that observation, with reference, target/journey, passing condition and unverified limit. A planned view or observation is not a result, and a tiny fact does not need its own diagram section.
 
 Completion: the document has one row per requirement, both views have passing rendering results, and in a file-backed set its HTML source, stable section links and `index.html` entry are current. Return an exact required-rendering gap as `evidence-blocked`.
@@ -103,6 +105,8 @@ Completion: the document has one row per requirement, both views have passing re
 ### 6. Re-read it as the Verifier would
 
 Re-read the whole document as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing row. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
+
+In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning. A clean run shows only that the rows and links exist, and an `incomplete` or `nothing_selected` run is a gap.
 
 Completion: every item in Not ready while is cleared, or its row is returned as a gap or a decision.
 
@@ -138,8 +142,8 @@ A review handoff carries pointers to the four documents, this return and the rev
 
 ## Not ready while
 
-- a requirement has no row;
-- a row does not name every obligation (`R`) its requirement (`U`) links;
+- a requirement has no row;<!-- D001 -->
+- a row does not name every obligation (`R`) its requirement (`U`) links;<!-- D002 -->
 - an obligation is decided by no observation and isn't listed as unverified;
 - a row's reference is the app's current behavior, a model's judgment, or missing;
 - a passing condition names no wrong build that fails it, or an acknowledgement alone would pass it;

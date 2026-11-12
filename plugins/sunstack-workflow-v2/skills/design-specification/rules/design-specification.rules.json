@@ -9,7 +9,7 @@
           "mechanical_check": { "tool": "anchor_exists", "field": "links" },
           "yes": "pass",
           "no": {
-            "finding": "This trace link's page, or the element its #fragment names, doesn't exist in the set.",
+            "finding": "This trace link's page, or the element its #fragment names, doesn't exist.",
             "at": "links"
           }
         }

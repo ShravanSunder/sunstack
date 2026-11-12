@@ -162,7 +162,19 @@ test("the real set under the v2 names and ids is quiet, with every piece decided
     [`${rule.entityRow} pass`]: 5,
   });
   expect(report.results.every((result) => result.outcome === "pass")).toBe(true);
-  expect(report.results.some((result) => result.name === rule.traceLink)).toBe(true);
+});
+
+test("a trace link to an existing passage on another page passes", async () => {
+  const programDesign = replaceExactlyOnce(
+    adapted["program-design"],
+    '<a href="specification.html">',
+    '<a href="specification.html#R6">',
+  );
+
+  const report = await lintDesignSet({ ...adapted, "program-design": programDesign });
+
+  expect(report.findings).toEqual([]);
+  expect(outcomeCounts(report)).toMatchObject({ [`${rule.traceLink} pass`]: 1 });
 });
 
 test("ids on a wrapping element count the same as ids on the heading above the table", async () => {

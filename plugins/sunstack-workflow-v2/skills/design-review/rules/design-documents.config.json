@@ -50,7 +50,7 @@
       "trace_link": {
         "rule": "trace-link",
         "fields": {
-          "links": { "from": "target", "regex": "^<[^>]*\\shref=\"((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html(?:#[^\"]*)?|#[^\"]+))\"", "resolve": "path" }
+          "links": { "from": "target", "regex": "^<[^>]*\\shref=\"((?:(?:\\./)?(?:index|requirements|specification|program-design|verification)\\.html)?#[^\"]+)\"", "resolve": "path" }
         }
       }
     }
