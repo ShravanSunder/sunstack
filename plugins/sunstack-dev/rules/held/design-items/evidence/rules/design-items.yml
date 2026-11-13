@@ -274,8 +274,7 @@
           },
           {
             "has": {
-              "kind": "text",
-              "regex": "&",
+              "kind": "entity",
               "stopBy": "end"
             }
           }
