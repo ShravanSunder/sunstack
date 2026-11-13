@@ -55,13 +55,13 @@
             "from": "inside",
             "rule": "design-item-quote-encoded"
           },
-          "metadata_encoded": {
+          "authority_unproved": {
             "from": "inside",
-            "rule": "design-item-metadata-encoded"
+            "rule": "design-item-authority-unproved"
           },
-          "metadata_ambiguous": {
+          "source_unproved": {
             "from": "inside",
-            "rule": "design-item-metadata-ambiguous"
+            "rule": "design-item-source-unproved"
           }
         }
       }

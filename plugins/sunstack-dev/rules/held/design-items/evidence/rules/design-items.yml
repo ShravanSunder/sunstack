@@ -286,42 +286,6 @@
 }
 ---
 {
-  "id": "design-item-metadata-encoded",
-  "language": "Html",
-  "rule": {
-    "kind": "start_tag",
-    "all": [
-      {
-        "has": {
-          "kind": "tag_name",
-          "regex": "(?i)^aside$"
-        }
-      },
-      {
-        "has": {
-          "kind": "attribute",
-          "all": [
-            {
-              "has": {
-                "kind": "attribute_name",
-                "regex": "(?i)^(?:data-authority|data-source)$"
-              }
-            },
-            {
-              "has": {
-                "kind": "attribute_value",
-                "regex": "&",
-                "stopBy": "end"
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
-}
----
-{
   "id": "design-item-element",
   "language": "Html",
   "rule": {
@@ -354,7 +318,7 @@
 }
 ---
 {
-  "id": "design-item-metadata-ambiguous",
+  "id": "design-item-authority-unproved",
   "language": "Html",
   "rule": {
     "kind": "start_tag",
@@ -369,21 +333,18 @@
         "has": {
           "any": [
             {
+              "kind": "attribute",
               "all": [
                 {
-                  "kind": "attribute",
                   "has": {
                     "kind": "attribute_name",
                     "regex": "(?i)^data-authority$"
                   }
                 },
                 {
-                  "follows": {
-                    "kind": "attribute",
-                    "has": {
-                      "kind": "attribute_name",
-                      "regex": "(?i)^data-authority$"
-                    },
+                  "has": {
+                    "kind": "attribute_value",
+                    "regex": "&",
                     "stopBy": "end"
                   }
                 }
@@ -393,18 +354,95 @@
               "all": [
                 {
                   "kind": "attribute",
+                  "all": [
+                    {
+                      "has": {
+                        "kind": "attribute_name",
+                        "regex": "(?i)^data-authority$"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "follows": {
+                    "kind": "attribute",
+                    "all": [
+                      {
+                        "has": {
+                          "kind": "attribute_name",
+                          "regex": "(?i)^data-authority$"
+                        }
+                      }
+                    ],
+                    "stopBy": "end"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+---
+{
+  "id": "design-item-source-unproved",
+  "language": "Html",
+  "rule": {
+    "kind": "start_tag",
+    "all": [
+      {
+        "has": {
+          "kind": "tag_name",
+          "regex": "(?i)^aside$"
+        }
+      },
+      {
+        "has": {
+          "any": [
+            {
+              "kind": "attribute",
+              "all": [
+                {
                   "has": {
                     "kind": "attribute_name",
                     "regex": "(?i)^data-source$"
                   }
                 },
                 {
+                  "has": {
+                    "kind": "attribute_value",
+                    "regex": "&",
+                    "stopBy": "end"
+                  }
+                }
+              ]
+            },
+            {
+              "all": [
+                {
+                  "kind": "attribute",
+                  "all": [
+                    {
+                      "has": {
+                        "kind": "attribute_name",
+                        "regex": "(?i)^data-source$"
+                      }
+                    }
+                  ]
+                },
+                {
                   "follows": {
                     "kind": "attribute",
-                    "has": {
-                      "kind": "attribute_name",
-                      "regex": "(?i)^data-source$"
-                    },
+                    "all": [
+                      {
+                        "has": {
+                          "kind": "attribute_name",
+                          "regex": "(?i)^data-source$"
+                        }
+                      }
+                    ],
                     "stopBy": "end"
                   }
                 }
