@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-13 Design Maps connect reader concerns](2026-11-13-concern-based-design-map.md)
+- [2026-11-13 Check-ins advance authorized work](2026-11-13-lead-checkin-progress.md)
 - [2026-11-12 Remove obsolete design-viewer instructions](2026-11-12-retire-design-viewer-instructions.md)
 - [2026-11-11 Explain work-log episodes with decisive evidence](2026-11-11-readable-work-accounts.md)
 - [2026-11-11 Publish sunstack-workflow-v2 0.1.0](2026-11-11-workflow-v2-marketplace.md)

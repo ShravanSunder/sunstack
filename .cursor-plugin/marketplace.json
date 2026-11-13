@@ -24,7 +24,7 @@
       "name": "sunstack-dev",
       "source": "sunstack-dev",
       "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation.",
-      "version": "3.2.2"
+      "version": "3.2.3"
     },
     {
       "name": "sunstack-workflow-v1",
@@ -36,7 +36,7 @@
       "name": "sunstack-workflow-v2",
       "source": "sunstack-workflow-v2",
       "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1.",
-      "version": "0.2.1"
+      "version": "0.2.2"
     },
     {
       "name": "skill-authoring",
