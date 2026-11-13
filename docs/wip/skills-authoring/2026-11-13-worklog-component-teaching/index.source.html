@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Teach agents to explain the work</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="worklog-design"></ex-nav>
+  <ex-document id="worklog-design">
+    <h1>Teach agents to explain the work</h1>
+    <p>The work account should make the agent's decisions, assumptions and actual progress clear without another prompt. This proposal sharpens the work-log skill's source coverage and adds one worked composition example to the HTML skill, using existing Demistify components.</p>
+    <p>The source changes are implemented. Named fresh-author examples show selected application, while full required-read compliance and rendered readability remain unestablished. Three implementation-review corrections are written with source-counterexample checks, and this instruction change has not shipped.</p>
+    <p><a href="#requirements">Why this change</a> · <a href="#specification">What it must do</a> · <a href="#skill-design">Where the teaching belongs</a> · <a href="#skill-verification">How to check it</a></p>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="review-worklog-teaching" title="Review the teaching change" description="The reader need, proposed behavior, teaching owners and evidence plan.">
+    <ex-step to="requirements">Start with what the owner needs to learn from the account.</ex-step>
+    <ex-step to="specification">See the obligations and the different cases each judgment must handle.</ex-step>
+    <ex-step to="skill-design">Inspect the two existing skills that own the correction.</ex-step>
+    <ex-step to="skill-verification">Check what a fresh author must demonstrate before a behavior claim.</ex-step>
+  </ex-presentation>
+</body>
+</html>
