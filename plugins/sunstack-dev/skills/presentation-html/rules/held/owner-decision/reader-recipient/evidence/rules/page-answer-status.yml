@@ -1,0 +1,26 @@
+# Candidate context only: this collector does not decide whether a page asks.
+id: page-answer-status-candidate
+language: Html
+rule:
+  all:
+    - any:
+        - kind: element
+          has:
+            kind: start_tag
+            regex: '(?i)^<(?:p|li|h[1-6]|ex-callout)(?:\s|>)'
+        - kind: raw_text
+          inside:
+            kind: script_element
+            has:
+              kind: start_tag
+              regex: '(?i)^<script\s+type=["'']text/markdown["'']\s*>'
+          not:
+            regex: '(?m)^[ \t]*(?:`{3,}|~{3,})'
+    - regex: '(?is)(?:\b(?:wait(?:s|ing)?|pending)\b.{0,120}\b(?:you|owner)\b|\b(?:you|owner)\b.{0,120}\b(?:wait(?:s|ing)?|pending)\b|\b(?:nothing|no\s+(?:question|decision|choice|answer)s?)\b.{0,80}\b(?:for\s+you|from\s+you|for\s+(?:the\s+)?owner|from\s+(?:the\s+)?owner)\b)'
+    - not:
+        inside:
+          stopBy: end
+          kind: element
+          has:
+            kind: start_tag
+            regex: '(?i)^<(?:template|ex-choice|ex-compare|ex-mermaid)(?:\s|>)'
