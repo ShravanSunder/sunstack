@@ -21,3 +21,5 @@ The current driver sends whole enclosing sections, including text after the cont
 Native element presence is narrower than guide/API conformance, matching every question to its control, or interactive behavior. The brief rule checks the stated decision, current picture, option pictures, gains, costs, cost bearers and recommendation; it does not certify the rest of the full brief contract or the author's authority.
 
 Before activation, independent labels, development and held-out results must meet the rule-authoring floors. Provisional probability bars do not establish accuracy. No installed plugin refresh or release is part of this development run.
+
+The first development campaign at `84d23329` returned 8 matching outcomes and 7 unsure cases; an unchanged-input repeat returned 9 and 6. Both exited 1. The original missing-control incident warned in both, but the briefing rule largely abstained. Total observed cost was $0.023261028 for 184 requests. See [development-observation.json](development-observation.json) for the public aggregate and proof limits; complete source-bearing reports remain in the private authoring record. The rules remain held.

@@ -1,0 +1,114 @@
+{
+  "kind": "held-rule-development-observation",
+  "candidate_commit": "84d2332923901019b4a024e5ad0884c03652e816",
+  "corpus_revision": "d09c3fd1560b0074ea28528473b01b3f3e708de3",
+  "cli_version": "0.16.0",
+  "requested_model": "typesafe/jev-1.14-20261014",
+  "resolved_models": [
+    "typesafe/jev-1.14-20261014"
+  ],
+  "rule_sha256": "99ce7d8f382e9522743eff67246b199e36e2530cc8dfc13011fd13d3952cb1a4",
+  "config_sha256": "56f50642ff943ea6b1c537c1180aa9788bc0f6141d2fc61229d0c0a828152f84",
+  "case_sha256": "84513cb1d0c7cab28ef84a225b91c853e153121ccbe5e7699ac58d7d55d3e690",
+  "decision": "held",
+  "rounds": [
+    {
+      "round": 1,
+      "process_exit": 1,
+      "inner_status": "uncertain",
+      "scored": {
+        "right": 8,
+        "unsure": 7
+      },
+      "by_rule": {
+        "owner-decision.brief-before-choice": {
+          "false_warning": 0,
+          "incomplete": 0,
+          "missed": 0,
+          "right": 0,
+          "unsure": 6
+        },
+        "owner-decision.native-choice": {
+          "false_warning": 0,
+          "incomplete": 0,
+          "missed": 0,
+          "right": 8,
+          "unsure": 1
+        }
+      },
+      "subjects": 116,
+      "findings": 4,
+      "uncertain": 26,
+      "incomplete": 0,
+      "usage": {
+        "checked_files_acquired": 7,
+        "model_requests": 92,
+        "input_tokens": 276917,
+        "output_tokens": 4662,
+        "cost_usd": 0.011630514000000002,
+        "cost_reported_requests": 92,
+        "cost_missing_requests": 0
+      },
+      "report_sha256": "768bce28051d7b6612f8031a6ae063a441cee3aa715a529eae09ff5e605901d2",
+      "stderr_bytes": 0
+    },
+    {
+      "round": 2,
+      "process_exit": 1,
+      "inner_status": "uncertain",
+      "scored": {
+        "right": 9,
+        "unsure": 6
+      },
+      "by_rule": {
+        "owner-decision.brief-before-choice": {
+          "false_warning": 0,
+          "incomplete": 0,
+          "missed": 0,
+          "right": 1,
+          "unsure": 5
+        },
+        "owner-decision.native-choice": {
+          "false_warning": 0,
+          "incomplete": 0,
+          "missed": 0,
+          "right": 8,
+          "unsure": 1
+        }
+      },
+      "subjects": 116,
+      "findings": 4,
+      "uncertain": 27,
+      "incomplete": 0,
+      "usage": {
+        "checked_files_acquired": 7,
+        "model_requests": 92,
+        "input_tokens": 276917,
+        "output_tokens": 4662,
+        "cost_usd": 0.011630514000000002,
+        "cost_reported_requests": 92,
+        "cost_missing_requests": 0
+      },
+      "report_sha256": "8860cb54a9a32359de6b24f6dd2b002b3d09ffb2db66c1959eb0f21b261e6016",
+      "stderr_bytes": 0
+    }
+  ],
+  "total_model_requests": 184,
+  "total_cost_usd": 0.023261028,
+  "stability": {
+    "same_saved_request_state_and_questions": 92,
+    "changed_assessment_vectors": 50,
+    "scored_outcome_changes": 1,
+    "all_subject_outcome_changes": 3,
+    "additional_same_outcome_ending_step_changes": 1
+  },
+  "limits": [
+    "Fifteen scored cases overlap in source families; two further locations have unresolved oracles and remain unscored.",
+    "No tuning between campaigns; no baseline rule or held-out comparison.",
+    "Bars remain provisional and unassessed; uncertain cases have not met their expected obligations.",
+    "Complete private native reports retain source state and receipts; this public aggregate is not a replacement for them.",
+    "Saved typed request objects match; exact provider HTTP bytes are not retained.",
+    "Whole enclosing text is supplied; before-control ordering is judged, not mechanically cut.",
+    "No receiving-agent, non-Mermaid, browser, trigger, installed activation or publication proof."
+  ]
+}
