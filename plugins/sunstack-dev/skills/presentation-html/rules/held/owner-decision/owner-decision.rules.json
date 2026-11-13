@@ -12,16 +12,33 @@
             "full",
             "reference.boundary"
           ],
-          "task": "Does own ask the reader to answer a currently open question or settle a proposed choice?"
+          "task": "Does own still require a new answer from the reader?"
         },
         "criteria": {
-          "true": "The section requests an answer, including an implicit request that promotes a proposal to the owner for decision. A marked decision counts only when the surrounding text brings it to the reader for an answer.",
-          "false": "It only reports a settled decision, explains a comparison, lists the author's assumptions or unknowns without bringing them for an answer, or asks only for comments. Explicit recorded acceptance later in full settles older open wording for that same choice."
+          "true": "The section's own words require a new answer now, including an implicit request that brings a currently unsettled proposal to the reader. A reference to answering an earlier control still requests an answer; the control's presence does not mean the owner has answered.",
+          "false": "The section itself only explains, reports a source-recorded settled decision, records the author's assumptions without requesting an answer, or asks only for comments. An explicit source-recorded answer settling the same choice means no new answer is required even if older pick/open wording remains."
+        }
+      },
+      "has_matching_control": {
+        "type": "noul",
+        "instructions": {
+          "check": "same_file_controls",
+          "context": [
+            "own",
+            "parent",
+            "full",
+            "reference.boundary"
+          ],
+          "task": "Do same_file_controls serve every new answer that own requests?"
+        },
+        "criteria": {
+          "true": "The native controls match each requested question and its answer semantics, including an explicit reference to answering above or earlier on this page. A matching control need not share this heading.",
+          "false": "At least one currently requested answer has no corresponding native control in the list. A control for a different question, or a comparison without an answer control, does not serve it."
         }
       }
     },
     "reference": {
-      "boundary": "Judge the section's own text, read with its parent opening. A proposal is not acceptance, but an explicitly labelled proposal alone is not a request for a reader answer. Do not infer a new request from a historical quotation. Feedback alone can use Comments. full supplies the enclosing section including its children, so recorded answers there can settle an older request in own."
+      "boundary": "Only own can introduce the answer request being assessed. parent and full can supply its antecedent or status; a different request in the parent is not a request in every explanatory child. A proposal alone is not a request. Source-recorded acceptance of the same choice settles older open/pick wording; an initial selection, a local saved response and a recommendation do not. same_file_controls lists the actual native controls on this page in source order, including controls under other headings. A request can legitimately refer to a matching control above; unrelated controls do not serve it."
     },
     "decision": {
       "start": "native_choice",
@@ -54,10 +71,7 @@
           "ask": "requests_answer",
           "yes_at_or_above": 0.8,
           "no_at_or_below": 0.2,
-          "yes": {
-            "finding": "This section asks for an answer without a native choice in its section; inspect the request and the matching guide's answer component.",
-            "at": "own"
-          },
+          "yes": "any_same_file_control",
           "no": "not_applicable",
           "uncertain": "uncertain"
         },
@@ -66,12 +80,47 @@
             "tool": "complete",
             "field": "full"
           },
+          "yes": "controls_complete",
+          "no": "uncertain"
+        },
+        "controls_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "same_file_controls"
+          },
           "yes": "requests_answer",
           "no": "uncertain"
+        },
+        "any_same_file_control": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "same_file_controls",
+            "pattern": "(?s).+"
+          },
+          "yes": "matching_control",
+          "no": {
+            "finding": "This section requests a new answer, but the page has no native choice control; inspect the request and the matching guide's answer component.",
+            "at": "own"
+          }
+        },
+        "matching_control": {
+          "ask": "has_matching_control",
+          "yes_at_or_above": 0.8,
+          "no_at_or_below": 0.2,
+          "yes": "pass",
+          "no": {
+            "finding": "This section requests a new answer that no same-page native choice serves; inspect the request and the listed controls.",
+            "at": "own"
+          },
+          "uncertain": "uncertain"
         }
       }
     },
-    "severity": "warn"
+    "severity": "warn",
+    "related": [
+      "same_file_controls",
+      "parent"
+    ]
   },
   "O002": {
     "name": "owner-decision.brief-before-choice",

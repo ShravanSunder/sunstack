@@ -66,6 +66,11 @@
           "full": {
             "from": "section",
             "text": "full"
+          },
+          "same_file_controls": {
+            "from": "same_file",
+            "kind": "choice",
+            "text": "full"
           }
         }
       },
