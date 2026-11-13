@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Design pages state the author's assumptions and decisions</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Design pages state the author's assumptions and decisions</h1>
+
+    <h2 id="answer">The answer</h2>
+    <p>Revision 3. Every assumption and decision on a design page becomes a marked item, an HTML <code>aside</code> carrying its kind, an id (<code>A3</code>, <code>D4</code>) and its authority: the owner's own words, agent wording the owner accepted, an existing contract, the author's own call, or <code>unknown</code>. The author writes the item in the same edit as the sentence it governs, so a missing authority shows while drafting, not at the end. Option text the owner picked is accepted agent wording, never the owner's words, and any wider reading of it is the author's own assumption.</p>
+    <p>Every check is a nudge, never a gate. The author's self-check, and then the reviewer, ask of each sentence that settles meaning whether its source supports all of it, give each item every applicable label from a shared set of ten, or ok alone, each saying what was seen and where else to read, and look quotes up by authority when an owner-message export is supplied. The author ranks its own-call items; the few high-value ones go to the owner as decisions, and the entry page lists every item in rank order. Existing <code>decision-needed</code> rules stay as they are; no blocker is added.</p>
+    <p>Four runs, one skill each: <code>design-specification</code> (which also writes the new section of the shared <code>design-documents.md</code>), <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>. No description, rule, engine or Demistify change. Open: re-review of this revision. The owner decided no Demistify element (D-21, D-22). All owner quotes are exact spans of the refreshed export. Behavior is not yet evaluated.</p>
+
+    <h2 id="walkthrough">Walkthrough</h2>
+    <ol>
+      <li><a href="#requirements">Requirements</a>: the owner's ask, the two real failures, and what success means.</li>
+      <li><a href="#specification">Specification</a>: what the skills must do, the standards they will state, the marking shape and its transfer cases.</li>
+      <li><a href="#skill-design">Skill design</a>: the four runs, the edits each makes, the decisions taken and their revisions.</li>
+      <li><a href="#skill-verification">Skill verification</a>: how each standard will be checked, the review retests, the deferred evals and what stays unverified.</li>
+    </ol>
+
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+</body>
+</html>

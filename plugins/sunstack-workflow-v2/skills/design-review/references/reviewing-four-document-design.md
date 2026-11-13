@@ -24,6 +24,7 @@ Inspect:
 - each capability's line runs from its need to its proof (see Capability Through-Lines below);
 - each term means the same thing across all four documents (see Term Consistency below);
 - all coverage is semantically current for the current artifacts, with any post-review non-semantic changes recorded by the parent;
+- the entry page's design-item list equals the items on the four pages, in a defensible rank order;
 - a planner can choose tasks/order/commands without inventing meaning, How, or the proof route.
 
 For a new v2 HTML set, inspect its actual content as well as navigation metadata: each Requirements group has a visible purpose in the page, Map destinations retain group context and point to actual need text, and Walkthroughs answer a real reader question. Check that material decision and approval status agrees between its owning passage and any summaries, diagrams, navigation labels and planned proof. Ask what need/outcome, invariant, failure/recovery path, undecided point and deciding observation the pages explain; unsupported or conflicting answers remain findings. Static target validity and content comprehension do not establish pixels or runtime behavior.

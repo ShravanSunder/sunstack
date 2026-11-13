@@ -48,6 +48,14 @@ contradiction of authoritative non-goal/constraint
 
 Open code sources before claiming they compel behavior. Verify user choices through durable evidence rather than author paraphrase.
 
+Then audit the design items, in this order:
+
+1. **Sentence support, before the author's self-check.** Read every sentence on the pages in scope that settles meaning, and ask one pointed question: does its source support all of what it claims? This question catches what the author did not mark. Real catches of its kind: a quote labelled as settling a decision it only partly states; "two messages" that were two excerpts of one record; a quote joined with an ellipsis and with straightened apostrophes, so not an exact span. Each unsupported sentence is a candidate finding naming its decision owner.
+2. **Items.** Build your own design-item list from the pages; give each item every applicable label from `design-documents.md`'s nudge labels, or `ok` alone. IF an owner-message export is supplied, look each quoted span up by its authority (`owner-words`: the owner's own text in the cited row; `owner-accepted`: the agent's wording and the owner's acceptance in the cited selection record itself or a later acceptance event); otherwise label it `quote not checked`. Then compare your list and ranking with the author's.
+3. **Agreement between pages of the set is not authority.** The excuse it blocks: "every page says it, so it's settled." Agreement inside the set is the author agreeing with itself; trace each load-bearing claim to a source outside the set.
+
+Findings from this audit keep the review's existing severities; it adds no verdict.
+
 ## Attack the Crux
 
 Use applicable probes:
