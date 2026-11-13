@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-13 HTML authors run the picture-before-choice nudge](2026-11-13-picture-before-choice-nudge.md)
 - [2026-11-13 Design pages state the author's assumptions and decisions](2026-11-13-design-assumptions-and-decisions.md)
 - [2026-11-13 AgentStudio PR links and HTML drawer guidance](2026-11-13-agentstudio-pr-drawer.md)
 - [2026-11-12 Remove obsolete design-viewer instructions](2026-11-12-retire-design-viewer-instructions.md)
