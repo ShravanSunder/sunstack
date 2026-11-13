@@ -6,7 +6,7 @@ Expected inputs: clarified destination and depth, participant and source identit
 
 Return: requirement questions, classified user/stakeholder inventory, the owner-confirmed capability list or the one-concern result, draft row-level requirements record, useful user-job sequence inputs, verified record identity and permitted home, confirmed goal boundary or the exact owner decision needed, refusal/fallback result, and exact authority/evidence gaps.
 
-Preserve the caller's source mode and admitted Requirements identity. A new `sunstack-workflow-v1` record keeps the archive's Markdown-source contract, including when it needs an optional HTML reading view; do not turn its source into HTML. A new v2 HTML record follows the composition below. An existing authoritative record stays in its admitted medium and home unless migration is commissioned. The format changes neither the row meanings nor who can authorize them.
+Preserve the caller's source mode and admitted Requirements identity. A new `sunstack-workflow-v1` record keeps the archive's Markdown-source contract, including when it needs an optional HTML reading view; do not turn its source into HTML. A new HTML record follows the composition below. An existing authoritative record stays in its admitted medium and home unless migration is commissioned. The format changes neither the row meanings nor who can authorize them.
 
 ## Classify Users and Stakeholders
 
@@ -42,7 +42,7 @@ tempting  ingest service, approval workflow engine, payments API
 
 The owner can say whether "import" is the part they mean, and correct its purpose. They cannot confirm "ingest service" as a need; it is one guess at a realization, which Program Design might split into a parser and a matching job.
 
-Write the confirmed capability list once in the owning Requirements record, with stable identities, the owner's names and each purpose. Group each need under its home capability when several parts matter, using visible group headings in normal reading order and a short statement of why the needs belong together; a small table can hold comparable needs, while an expanded need section can carry more explanation. For a v2 HTML page, an ordinary Tree may explain hierarchy but does not replace the collection's semantic Map. Use the `presentation-html` shared-navigation recipe and matching guide so the Map reaches the group context and each need's actual text. A v1 Markdown record keeps ordinary headings, rows and links in its authoritative source; any HTML view follows the legacy-source route. The phase that asked for the record reads that same source. No requirement-browser or need-record schema is imposed:
+Write the confirmed capability list once in the owning Requirements record, with stable identities, the owner's names and each purpose. Group each need under its home capability when several parts matter, using visible group headings in normal reading order and a short statement of why the needs belong together; a small table can hold comparable needs, while an expanded need section can carry more explanation. For an HTML page, an ordinary Tree may explain hierarchy but does not replace the collection's semantic Map. Use the `presentation-html` shared-navigation recipe and matching guide so the Map reaches the group context and each need's actual text. A v1 Markdown record keeps ordinary headings, rows and links in its authoritative source; any HTML view follows the legacy-source route. The phase that asked for the record reads that same source. No requirement-browser or need-record schema is imposed:
 
 ```text
 capability list section   import (Import): card charges and receipt photos arrive in a claim without retyping
@@ -173,7 +173,7 @@ Keep missing observable behavior, permitted and protected systems, non-goals, ac
 ## Scale the Record
 
 - quick: return the record in chat unless a durable handoff is requested and files are allowed;
-- standard, deep, or substantial handoff: when files are allowed, use the caller's permitted Requirements home and source mode; new v1 records stay Markdown, while a new v2 HTML record defaults to `docs/specs/<yyyy-mm-dd-slug>/requirements.html` through `presentation-html`; otherwise return the complete record in chat;
+- standard, deep, or substantial handoff: when files are allowed, use the caller's permitted Requirements home and source mode; new v1 records stay Markdown, while a new HTML record defaults to `docs/specs/<yyyy-mm-dd-slug>/requirements.html` through `presentation-html`; otherwise return the complete record in chat;
 - record classes and rows as they crystallize rather than reconstructing them at the end.
 
 A durable record uses its source path as its inspectable identity. An in-chat record returns its complete text and uses a session or message anchor only when the host exposes one.

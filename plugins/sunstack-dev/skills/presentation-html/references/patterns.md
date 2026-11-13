@@ -46,7 +46,7 @@ Use layers when several optional views may be visible together, such as independ
 
 ## Pages and Walkthroughs
 
-Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a new v2 HTML design collection, `engineering-documents.md` uses one shared navigation descriptor for Pages, Map and complete Walkthroughs; consult the matching navigation and tours guides for syntax and keep all routes aimed at real HTML content. A Walkthrough is a reading route, not a behavioral journey diagram. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates a threshold the owning section states.
+Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a new HTML design collection, `engineering-documents.md` uses one shared navigation descriptor for Pages, Map and complete Walkthroughs; consult the matching navigation and tours guides for syntax and keep all routes aimed at real HTML content. A Walkthrough is a reading route, not a behavioral journey diagram. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates a threshold the owning section states.
 
 ## Related captures: items, variations and filters
 
