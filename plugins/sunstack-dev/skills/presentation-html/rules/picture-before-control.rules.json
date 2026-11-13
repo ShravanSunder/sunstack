@@ -38,7 +38,7 @@
           },
           "yes": "pass",
           "no": {
-            "finding": "No configured picture element precedes this control in its proven heading section; inspect whether this question needs one.",
+            "finding": "Worth checking: no configured picture precedes this choice in its heading section. This decision may not need a picture, and a useful picture may sit under another heading. Read sunstack-dev/shared-references/owner-decision-brief.md and presentation-html/references/options-and-decisions.md before changing it.",
             "at": "control"
           }
         },

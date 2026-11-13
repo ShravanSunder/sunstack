@@ -1,7 +1,7 @@
 {
   "rulebook": [
     {
-      "markdown": "../../../../../../shared-references/owner-decision-brief.md",
+      "markdown": "../../../shared-references/owner-decision-brief.md",
       "rules": "picture-before-control.rules.json"
     }
   ],

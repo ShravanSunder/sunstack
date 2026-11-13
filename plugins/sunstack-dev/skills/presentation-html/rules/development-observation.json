@@ -1,5 +1,5 @@
 {
-  "status": "held",
+  "status": "active-warn",
   "candidate": "7ec3c2ef8c50792a1b538abfeaa9ae021b07e04a",
   "engine_version": "0.16.0",
   "proof": "one ordinary native mechanical lint run after independent pre-run review",
@@ -32,6 +32,22 @@
     "Structural source presence only; does not prove relevant or rendered diagrams, complete briefs, semantic compliance or acceptance.",
     "One real Markdown island remains unsupported due to a literal less-than character; no absence inferred.",
     "General wrapper support and other picture representations lack new real runtime cases.",
-    "Not activated; no default rulebook loads this configuration."
-  ]
+    "Skill invocation instruction, plugin version/changelog and installed refresh are a separately assigned release change."
+  ],
+  "held_back_observation": {
+    "source": "Lead class-level handback; private pages and per-case labels remain with the holder",
+    "native_controls": 31,
+    "project_families": 4,
+    "unanimous_readers": 3,
+    "expected_no_picture": 27,
+    "expected_picture": 4,
+    "outcomes": {
+      "finding": 26,
+      "pass": 4,
+      "unsupported_uncertain": 1
+    },
+    "decided_wrong": 0,
+    "provider_requests": 0,
+    "activation_authority": "Lead authorized warn-level activation after independent held-back proof"
+  }
 }
