@@ -10,7 +10,7 @@
     "agentstudio": {
       "status": "current",
       "repository": "https://github.com/getagentstudio/agentstudio",
-      "commit": "b982f19c7f3be3c19a46fc1deaa321034783eeb2",
+      "commit": "3c897dcc63b0277830bd5af6ea72c3e00f07a555",
       "sourcePath": "Sources/AgentStudio/Resources/AgentPackage/skills/agentstudio",
       "destinationPath": "plugins/agentstudio/skills/agentstudio"
     }

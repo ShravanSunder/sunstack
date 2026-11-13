@@ -6,6 +6,8 @@ This reference owns selecting an available App contract and interpreting its rec
 
 ```sh
 "$AS_CLI" --help
+"$AS_CLI" help --help
+"$AS_CLI" package --help
 "$AS_CLI" command.execute --help
 "$AS_CLI" help --live
 "$AS_CLI" system.capabilities --json '{}'
@@ -13,7 +15,7 @@ This reference owns selecting an available App contract and interpreting its rec
 "$AS_CLI" system.identify --json '{}'
 ```
 
-`--help`, `help` and known `METHOD --help` read the compiled local contracts without connecting. `help --help` is not supported: use the root help. `help --live` shows live App commands; `system.capabilities` supplies compatibility/runtime identity and the available typed method catalog; `command.list` supplies available App commands and their own argument/eligibility/result contracts. Read those contracts before selecting a dynamic command ID.
+`--help`, `help` and known `METHOD --help` read the compiled local contracts without connecting. `help --help` displays root help, and `package --help` describes the local provider hook verbs. `help --live` shows live App commands; `system.capabilities` supplies compatibility/runtime identity and the available typed method catalog; `command.list` supplies available App commands and their own argument/eligibility/result contracts. Read those contracts before selecting a dynamic command ID.
 
 `system.identify` reads selected runtime/access mode/version. `system.version` reads the app version; `system.ping` checks reachability. These are app calls, and supplied-token authentication still happens: a stale inherited token can fail before the read. Do not remove credentials to manufacture a successful probe.
 
@@ -30,6 +32,8 @@ Use local help for spelling, then live discovery where the installed runtime's s
 | `pane.writer.claimEpoch` | CLI-owned ordered-writer mechanism. Do not claim epochs manually to replay stale text. |
 | `session.event/status/refusal` | Harness reporting surfaces. Let provider hooks own these writes. |
 | `terminal.status/snapshot/send/wait`, `drawer.addPane`, `pane.close` | Own-pane operations; effects still require task authorization. |
+| `pane.pullRequest.add/remove/list` | Any main pane; associate an existing GitHub PR, withdraw the authenticated author's contribution or read the list. Use the PR reference for friendly verbs and outcomes. |
+| `drawer.browse` | Any main pane, named by `--target`; it opens a page and posts one notice there, and nothing else. Effects still require task authorization. |
 | `events.subscribe/unsubscribe` | Own-pane, connection-scoped observations. |
 | `command.execute` | Conditional on the selected command and target, as returned by the live catalog. |
 | `pane.focus/split`, `drawer.toggle`, `bridge.diff.*`, `bridge.fileTree.*`, `bridge.fileView.*`, `bridge.telemetry.*`, `sidebar.grouping.get`, `sidebar.surface.get`, `ui.arrangements.open`, `ui.commandBar.open` | Compiled help lists them as agent `not yet allowed`. Return the limit; do not route through another command to bypass it. |
