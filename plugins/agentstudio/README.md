@@ -1,31 +1,48 @@
 # Agent Studio plugin
 
-Provides the `agentstudio` skill for Agent Studio CLI work: local Git worktrees, pane messages and context, terminal operations, and discovered App commands. A compact main path loads seven references for the requested work and its recovery. Supports Claude Code, Codex and Cursor through the app's bundled CLI.
-
-This draft targets the Agent Studio release with the message-only Agent Line CLI and relative age display. Its matching app revision and upstream source pin are pending.
+`agentstudio@sunstack` provides the AgentStudio CLI skill for Claude Code, Codex and Cursor. It covers worktrees, pane messages/context, existing PR links and showing web pages or local HTML in a drawer browser.
 
 ## Install
 
-From a configured sunstack marketplace:
+Codex:
 
 ```sh
+codex plugin marketplace add ShravanSunder/sunstack
 codex plugin add agentstudio@sunstack
 ```
 
-For Claude Code:
+Claude Code:
 
-```text
-/plugin install agentstudio --marketplace ShravanSunder/sunstack
+```sh
+claude plugin install agentstudio --marketplace ShravanSunder/sunstack
 ```
 
-In Cursor, add the sunstack repository as a Personal marketplace and select `agentstudio`.
+For an existing install, refresh the marketplace and plugin explicitly. The Codex sequence uninstalls this marketplace plugin and its cache, then installs it from the refreshed snapshot; it does not claim repeated `plugin add` updates an existing install:
 
-This plugin contains skill instructions. Agent Studio supplies the CLI and pane environment; its provider package supplies lifecycle hooks. Installing the plugin does not install or configure those hooks. Missing tracking or hook trust belongs to separately authorized provider setup. Report store/access refusals to their owner; plugin installation does not repair them.
+```sh
+# Codex
+codex plugin marketplace upgrade sunstack
+codex plugin remove agentstudio@sunstack
+codex plugin add agentstudio@sunstack
+
+# Claude Code
+claude plugin marketplace update sunstack
+claude plugin update agentstudio@sunstack
+```
+
+In Cursor, add `ShravanSunder/sunstack` as a Personal marketplace and install or update `agentstudio`. Start a new agent session after updating so it can load the new instructions.
+
+## Commands and app compatibility
+
+AgentStudio supplies the executable and pane credentials; this plugin supplies instructions. The skill resolves the bundled helper, checks its compiled help and the selected app's live capabilities, then selects the requested operation. Installing the skill cannot add commands to an older application.
+
+- `drawer browse PAGE --target PANE_ID` opens an HTTP/HTTPS page or an existing local HTML file in the intended main pane's drawer browser and posts a pane notice with an Open action; it preserves focus and does not expand the drawer. The v0.0.127 CLI path was exercised, with display confirmed by the owner.
+- `pr add|remove PR --target PANE_ID` and `pr list --target PANE_ID` associate existing GitHub PRs with a pane and preserve authenticated attribution. They require an app/helper that exposes the matching PR methods; they are absent from the inspected v0.0.127 helper and present in the v0.0.128 release source. This plugin release does not establish publication of that app version.
+
+Use `--target-env` only when the inherited pane is the intended one; daemon/server sessions use the task's explicit main-pane UUID. A browser open receipt does not prove rendering, and a PR association does not create or merge a GitHub PR.
 
 ## Source and delivery
 
-The canonical skill belongs to [Agent Studio](https://github.com/getagentstudio/agentstudio/tree/main/Sources/AgentStudio/Resources/AgentPackage/skills/agentstudio). This plugin carries a committed copy. The updated text is pending adoption in that repository; [`plugin-sources.json`](../../plugin-sources.json) records a null commit and the audited baseline, not a completed upstream pin.
+The canonical skill lives in [AgentStudio's bundled package](https://github.com/getagentstudio/agentstudio/tree/main/Sources/AgentStudio/Resources/AgentPackage/skills/agentstudio). Sunstack carries a committed copy; `plugin-sources.json` records its exact upstream source revision. The runtime tree (`SKILL.md` and `references/**`) is compared byte for byte before publication. The app installer copies the full directory recursively; no reference-sync script is needed. This plugin version pins the published [instruction commit](https://github.com/getagentstudio/agentstudio/commit/3c897dcc63b0277830bd5af6ea72c3e00f07a555) on a documentation branch; inclusion in a future application bundle is separate.
 
-Land the same runtime tree (`SKILL.md` and `references/**`) upstream with the matching CLI and recursive app installer, compare that complete tree byte for byte, then replace the pending provenance with the full upstream commit. Release the app and skill together. `agents/openai.yaml` is plugin presentation metadata. The plugin packages the whole skill directory; the app's existing file-only installers require a separate app-side correction before joint release.
-
-The app package serves all users; sunstack is the owner's plugin channel. Both channels must carry the same pinned runtime tree. Installing both can expose two copies, potentially with different revisions during an update. Claude was observed displaying loose and plugin-qualified copies; automatic choice and precedence remain unverified. This plugin does not remove an existing skill. Local installation and cache refresh remain separate operations.
+The app's provider package also installs lifecycle hooks, while this plugin does not install or configure hooks. The skill explains the supported status/install/snippet workflow; actual provider-home changes require the user's go-ahead. An app-installed loose skill and a marketplace skill can coexist at different revisions; automatic precedence is unverified. This release does not remove either copy or change provider configuration.
