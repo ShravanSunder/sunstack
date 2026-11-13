@@ -26,7 +26,8 @@ failure and partial-success expectations
 cross-cutting obligations and constraints
 proof obligations
 resolved alternatives when they change meaning
-open decisions, assumptions, and evidence gaps
+design items in the sections they govern, listed on the entry page
+open decisions and evidence gaps
 ```
 
 These are not mandatory headings. When the capability map fires, group the normative requirements by capability: each `R` sits once, in its home capability's section or an HTML part whose reader question and independent reason to change justify a split. Entities stay one set-level section that every capability links to. Within a capability, and in a one-concern set, organize by journey, protocol, domain, or decision when that better preserves the specification spine.
@@ -117,7 +118,6 @@ Re-read the complete artifact and record:
 - missing negative, failure, partial-success, cancellation, or compatibility behavior;
 - hidden internal How;
 - contradictory goals and non-goals;
-- unresolved questions disguised as assumptions;
 - duplicated normative homes;
 - missing, duplicated, non-resolvable, identical, or collapsed Requirements and Specification identities;
 - missing, semantically incomplete, unreadable, or decorative Required Why/What Views;
@@ -129,6 +129,16 @@ Re-read the complete artifact and record:
 - changes from the confirmed goal boundary hidden as specification completeness;
 - process state, obscure headings, repeated companion narration, or reader-facing elements that fail the human deletion test;
 - whether a human can enter from the user requirements, understand the smallest Why/What model, follow U→E→P→O→R→C→V into detail, and continue to program design without review notes or scratch.
+
+Then run the design-item pass, in this order:
+
+1. **Sentence support, first.** Read every sentence on the Requirements and Specification pages that settles meaning: needs, entity definitions, invariants, obligations, defaults and thresholds. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
+2. **Items.** List every design item; return, for each, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone.
+3. **Quote lookup.** IF an owner-message export is supplied, look each quoted span up by its authority: for `owner-words`, find the span in the cited row and confirm it is the owner's own text, not option wording or a pasted reply; for `owner-accepted`, find the agent's wording where cited and the owner's acceptance in the cited selection record itself or a later acceptance event, and keep it as agent wording. An export's pasted-text flag is a hint, not a verdict. Otherwise return `quote not checked` with each quoted item's source.
+4. **Rank and promote** the `author` and `unknown` items; bring the high-ranked ones that need the owner as decisions.
+5. **Entry page:** it lists exactly the items on the pages, in rank order.
+
+Every result of this pass is a nudge: it says what you saw and where to read, and it adds no readiness condition.
 
 For a simplification request, report accepted-requirements coverage separately from prose or mechanism deletion. Reuse the existing coverage view and return one compact row per stable identity with `covered | owner-authorized supersession | gap` plus its anchor.
 

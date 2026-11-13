@@ -88,7 +88,7 @@ Before recommending a skill, inspect that destination's declared inputs and retu
 
 Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Program Design beneath that home and return its exact path. Preserve an authoritative pre-existing Program Design elsewhere; do not relocate or reject it because of the policy. The artifact-home policy applies only to a new output in the current call and is not persisted as workflow state.
 
-MUST load `sunstack-dev/shared-references/design-documents.md` and return the Requirements and Specification identity check, the fixed observable-contract boundary, and the HTML-source layout, stable section targets and entry/navigation duty this run follows. Require one Requirements identity and one different Specification identity using the valid representation for the work's medium. A combined `Requirements/spec` artifact, a Requirements-titled artifact that also serves as the observable contract, or either missing identity returns `specification-gap` to `design-specification` before structural work begins. Do not infer separation from headings inside one artifact and do not create or copy either upstream artifact.
+MUST load `sunstack-dev/shared-references/design-documents.md` and return the Requirements and Specification identity check, the fixed observable-contract boundary, the HTML-source layout, stable section targets and entry/navigation duty this run follows, and the design-item shape, nudge labels and ranking this run uses. Require one Requirements identity and one different Specification identity using the valid representation for the work's medium. A combined `Requirements/spec` artifact, a Requirements-titled artifact that also serves as the observable contract, or either missing identity returns `specification-gap` to `design-specification` before structural work begins. Do not infer separation from headings inside one artifact and do not create or copy either upstream artifact.
 
 Read the entire Requirements source, governing Specification, and confirmed goal boundary accepted by `design-specification`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity table (`E`), observable contracts and obligations (`R`), constraints, failure expectations, proof constraints (each proof obligation's threshold, target constraints, and reference), non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `design-specification` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
 
@@ -138,6 +138,8 @@ New durable identity or history, persistence, certification or governance, a con
 Re-anchor before selecting target composition: compare the selected direction with the confirmed goal, accepted requirements and non-goals, permitted and protected systems, owner-set package limits, existing foundation, smallest workable change, and acceptable complexity. Delete a mechanism when no confirmed obligation needs it. If pursuing it would widen the confirmed goal boundary or budget, return the exact mismatch and owner expansion decision instead of completing the mechanism. Keep this comparison in returned workflow state, not durable design-program prose.
 
 Explain the selection in ordinary language: what changes, what stays the same, why the smaller structure is enough, what it costs, who bears that cost, and what evidence would justify a larger design. A request to use architecture vocabulary does not replace any of those concrete answers; labels such as “minimal structural delta” or “clean boundary” may summarize the explanation but may not carry it.
+
+Write the selected direction, each accepted debt and each scope rejection as a `decision` design item in the same edit as its passage: `author` authority when the choice is inside this phase's structural authority, or the owner's authority where it came from the owner.
 
 Completion: the selected direction names what improves, where cost moves, accepted debt/payer, complexity spent, and evidence that would reopen the choice; the Re-anchor comparison is aligned, has deleted unsupported machinery, or has returned the exact expansion decision; and the actual choice and tradeoff are explained in ordinary language.
 
@@ -221,6 +223,8 @@ Completion: each applicable obligation has structural How or a reasoned not-appl
 
 MUST load `references/proof-architecture-and-traceability.md` to return the trace table, proof seams, real/fake boundary decisions, enforcement classes, and one illegality decision per material invalid state: unrepresentable, or rejected at the trusted entry. That reference is the trace table's only builder. The table has one row per Specification obligation (`R`) with the columns `U · R · E · owner · interface · shape and home · state · failure · proof`, goes into the artifact (or the response, in a chat-only run), and marks missing design `gap: <why>`. Identifier tags in prose are not a trace.
 
+Write each proof seam and each stand-in as an `assumption` design item in the same edit, naming what it stands in for and what would close it.
+
 Do not choose exact test files, commands, or execution order. Completion of this load: the artifact names no test path and no red/green step for that illegality decision.
 
 Completion: every Specification obligation has one trace row with no blank cell; every material requirement has an observable seam or a `gap: <why>` proof cell; and every load-bearing rule has an enforcement class or explicit proof gap.
@@ -260,10 +264,12 @@ component view, drawn
 one representative entry-to-effect path, drawn
 binding table
 trace table
-deviations and unresolved decisions: none | list
+design items: list, in rank order
 ```
 
 New components and contracts, complexity spent, and accepted-requirements coverage are read from those tables. Saying the tables exist is not showing them; a read-only or chat-only run puts them in the response. When requested machinery falls outside the confirmed goal boundary, reject it and continue with the authorized design; that rejected pressure does not create a new owner decision.
+
+The integration self-check's return also carries its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
 
 Then continue to step 17 in the same run. Do not ask anyone to confirm the structure: stop only when a `decision-needed` condition holds, and then with its brief.
 
@@ -279,7 +285,8 @@ When required, invoke `design-review` separately in `program-only` mode with fre
 - governing sources, authority states, and coverage;
 - confirmed goal boundary and accepted requirements set;
 - constraints, non-goals, risk predicates, and claimed proof evidence or gaps;
-- the readiness question and any prior coverage plus semantic-change record.
+- the readiness question and any prior coverage plus semantic-change record;
+- `owner-message export: path | none`.
 
 Consume each accepted finding's ordered correction route: Why/What returns to `design-specification`; structural How returns here; `both` returns to `design-specification` first and resumes here only after the observable contract is settled; caller-owned decisions return to the caller and this design does not resume until they are resolved. Follow `design-review`'s bounded review-and-correction-round policy for its convergence rule, parent verification, and any later review.
 
