@@ -30,7 +30,7 @@ Diagrams do not replace behavioral interface or failure prose. Paths may anchor 
 
 For a substantial design, lead with the smallest integrated overview composed from already-fired views, then reveal detail in the order a reader needs it: diagram, then table, then code shape. Make every selected call or flow view representative of the actual boundary crossing. The view must preserve the semantic fields selected by the caller; format never excuses a missing owner, edge status, state/effect, result/error path, or evidence anchor.
 
-For a new v2 HTML design set, use the shared navigation owner in `presentation-html` for the descriptor and actual page/target identities; do not duplicate the guide schema or keep a competing page-local route list. A behavioral journey diagram remains in its owning HTML section with its purpose, important transitions, outcomes and failures explained in context.
+For a new HTML design set, use the shared navigation owner in `presentation-html` for the descriptor and actual page/target identities; do not duplicate the guide schema or keep a competing page-local route list. A behavioral journey diagram remains in its owning HTML section with its purpose, important transitions, outcomes and failures explained in context.
 
 Good: the smallest set of views lets a reader simulate composition, execution, and the riskiest failure, and find where each entity lives.
 

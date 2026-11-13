@@ -22,7 +22,7 @@ Read from the entry artifact or labeled record as a fresh program designer or pl
 - verify deeper files correspond to real capability, ownership, protocol, domain, or consumer/change boundaries;
 - trace requirements to realization and proof without path guessing.
 
-For a new v2 HTML set using shared navigation, inspect the one descriptor through the matching guide's contract and verify its Pages and Walkthrough targets point to existing pages and stable HTML content. Map groups should reach their visible explanatory context and need entries their actual text; an ordinary Tree inside a page does not replace the shared Map. Check the pages themselves for visible group purpose and one home per fact, not only a well-shaped navigation tree.
+For a new HTML set using shared navigation, inspect the one descriptor through the matching guide's contract and verify its Pages and Walkthrough targets point to existing pages and stable HTML content. Map groups should reach their visible explanatory context and need entries their actual text; an ordinary Tree inside a page does not replace the shared Map. Check the pages themselves for visible group purpose and one home per fact, not only a well-shaped navigation tree.
 
 Good: one readable entry, explicit routes to deeper contracts, optional evidence, and no duplicated authority.
 
