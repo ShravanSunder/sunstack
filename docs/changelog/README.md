@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-13 Work-log pages explain agents' decisions and assumptions](2026-11-13-worklog-component-teaching.md)
 - [2026-11-13 Design Maps connect reader concerns](2026-11-13-concern-based-design-map.md)
 - [2026-11-13 Check-ins advance authorized work](2026-11-13-lead-checkin-progress.md)
 - [2026-11-13 Design pages state the author's assumptions and decisions](2026-11-13-design-assumptions-and-decisions.md)
