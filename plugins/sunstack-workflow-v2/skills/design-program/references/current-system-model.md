@@ -26,7 +26,7 @@ Carry each anchor and its observed or inferred label into these outputs. Keep ea
 
 ## Contradictions and Gaps
 
-Compare the model with current docs and with what the Specification assumes about the current system. Record each contradiction with both anchors. Current code is evidence of what exists; the Specification governs what must be true.
+Compare the model with current docs and with what the Specification assumes about the current system. Record each contradiction with both anchors. Current code is evidence of what exists; the Specification governs what must be true. A current-system fact taken from docs or memory without opening the code is an `assumption` design item.
 
 An inferred or unresolved edge that a target choice would rest on is an evidence gap. List it with what would settle it.
 

@@ -38,7 +38,7 @@ Several rows may share one observation. Describe a shared observation once, and 
 
 ### 1. Take in the design being proven
 
-MUST load `sunstack-dev/shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, and the HTML-source layout, stable section targets and entry/navigation duty this run follows. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
+MUST load `sunstack-dev/shared-references/design-documents.md` and return the current Requirements, Specification and Program Design identities, the Verification Design's own identity beside the Program Design, the HTML-source layout, stable section targets and entry/navigation duty this run follows, and the design-item shape, nudge labels and ranking this run uses. When the caller supplies a `new artifact home`, create a new Verification Design beneath it and return its exact path. Read all three upstream documents whole. For each requirement, take its obligations and each obligation's proof obligation (`V`: the expected behavior, threshold, target constraints and reference) from the Specification, and each obligation's proof seam from the Program Design's trace table. When revising a stale design, re-open what changed (an obligation, a seam or a journey) and redo only the rows it touches; for a `verification-design-gap`, start from the requirements its payload names, or from the affected rows a `plan-update` lists. For an accepted review finding or a Verifier challenge, correct only the rows it names and re-check those rows against Not ready while; nothing broader reruns, and a finding whose cause is upstream returns as its token.
 
 A row is stale when, since its review, any of these changed:
 
@@ -65,7 +65,7 @@ MUST load `references/choosing-the-observation.md` and return, for each obligati
 
 When you place each observation, put it where the user or calling program meets the outcome, through the real entry on the planned target (a passing test proves only what it observes (`sunstack-dev:principle-prove-it-works`)). Scale the proof to the claim: a pure rule is proven by a focused test and launches no app, and a structural claim, such as a schema or a skill's text, gets structural evidence that names the behavior it leaves unevaluated.
 
-An existing journey or real-path test that already drives this entry and would fail for the wrong behavior is the proof; name it, and add no manual journey just so the check looks independent. Before you count it, check from its source that it keeps the row's interaction real rather than mocked, and name the target, configuration and client it depends on (evidence supports only the claim, version and target it observed (`sunstack-dev:principle-verify-before-accepting`)). Reuse is planned here; the Verifier checks at delivery whether it still applies.
+An existing journey or real-path test that already drives this entry and would fail for the wrong behavior is the proof; name it, and add no manual journey just so the check looks independent. Before you count it, check from its source that it keeps the row's interaction real rather than mocked, and name the target, configuration and client it depends on (evidence supports only the claim, version and target it observed (`sunstack-dev:principle-verify-before-accepting`)). Reuse is planned here; the Verifier checks at delivery whether it still applies. Write each reused piece of evidence you trust without re-observing it, and each stand-in target, as an `assumption` design item in the same edit as its row.
 
 When no Program Design seam lets any observation see an obligation's outcome, record a `program-design-gap` with the obligation and what the observation would need to see. When the Specification gives the obligation no observable outcome, reference or threshold, record a `specification-gap`. Never weaken the obligation to fit the current harness.
 
@@ -75,7 +75,7 @@ Completion: every obligation is decided by a named observation at its boundary, 
 
 Write the passing condition as an observation: what is seen, where, against which part of the reference, on the planned target. After writing it, name one wrong build and check that the condition fails for it, and one materially different allowed build and check that it passes (a check counts only if the wrong behavior could make it fail (`sunstack-dev:principle-write-tests-that-can-fail`)). If a build that only acknowledges, by returning 201 or showing a toast, would also pass, the condition watches a proxy; move it to the outcome.
 
-List what the row leaves unverified. A named limit is honest, but it waives nothing: a limit that leaves a required observation undone, or weakens it, is the owner's decision.
+List what the row leaves unverified. A named limit is honest, but it waives nothing: a limit that leaves a required observation undone, or weakens it, is the owner's decision. Write each limit you accept as a `decision` design item in the same edit; its authority shows whether that owner decision exists.
 
 Write every row as a plan. Its target properties describe the build that will exist, not one anyone saw, and no row says or implies that a run happened.
 
@@ -103,6 +103,14 @@ Completion: the document has one row per requirement, both views have a passing 
 ### 6. Re-read it as the Verifier would
 
 Re-read the whole document as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing row. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
+
+Then run the design-item pass:
+
+1. **Sentence support, first.** Read every sentence that settles a target, a reused piece of evidence or a limit. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
+2. **Items.** Return, for each design item, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone. IF an owner-message export is supplied, look each quoted span up by its authority (`owner-words`: the owner's own text in the cited row; `owner-accepted`: the agent's wording and the owner's acceptance in the cited selection record itself or a later acceptance event); otherwise return `quote not checked` with each quoted item's source.
+3. **Rank and promote** the `author` and `unknown` items, bring the high-ranked ones that need the owner as decisions, and keep the entry page's item list exact and in rank order.
+
+Every result of this pass is a nudge; it adds nothing to Not ready while.
 
 Completion: every item in Not ready while is cleared, or its row is returned as a gap or a decision.
 
