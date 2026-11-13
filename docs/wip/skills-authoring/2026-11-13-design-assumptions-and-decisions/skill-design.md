@@ -6,12 +6,10 @@ Revision 3. Revision 3 carries the shared label cardinality ("every applicable l
 
 Owner plugins: `sunstack-workflow-v2` for every run; run 1 also edits `sunstack-dev/shared-references/design-documents.md` as its supporting shared-reference change, which keeps its ownership there. Run 1 lands first because runs 2 to 4 apply the shape it installs; runs 2 and 3 are independent; run 4 lands last.
 
-| Run | Target skill | Supporting change | Surface allocation | Status |
-| --- | --- | --- | --- | --- |
-| 1 | `sunstack-workflow-v2:design-specification` | `sunstack-dev/shared-references/design-documents.md`: new section owning the terms, S1 to S8, the shape, the nudge labels and the ranking | main path (steps 1, 4, 9, 10, 11); depth (`authority-and-problem-framing.md`, `artifact-and-self-review.md`) | implemented (13 Nov) |
-| 2 | `sunstack-workflow-v2:design-program` | none | main path (steps 1, 4, 14, 16, 17); depth (`artifact-and-self-review.md`, `current-system-model.md`) | implemented (13 Nov) |
-| 3 | `sunstack-workflow-v2:design-verification` | none | main path (steps 1, 3, 4, 6) | implemented (13 Nov) |
-| 4 | `sunstack-workflow-v2:design-review` | none | main path (step 2 inputs); depth (`reviewing-common-method.md`, `lanes/specification-authority.md`, `reviewing-four-document-design.md`) | implemented (13 Nov) |
+- **Run 1: `sunstack-workflow-v2:design-specification`.** Supporting change: `sunstack-dev/shared-references/design-documents.md`: new section owning the terms, S1 to S8, the shape, the nudge labels and the ranking. Surface allocation: main path (steps 1, 4, 9, 10, 11); depth (`authority-and-problem-framing.md`, `artifact-and-self-review.md`). Status: implemented (13 Nov).
+- **Run 2: `sunstack-workflow-v2:design-program`.** Supporting change: none. Surface allocation: main path (steps 1, 4, 14, 16, 17); depth (`artifact-and-self-review.md`, `current-system-model.md`). Status: implemented (13 Nov).
+- **Run 3: `sunstack-workflow-v2:design-verification`.** Supporting change: none. Surface allocation: main path (steps 1, 3, 4, 6). Status: implemented (13 Nov).
+- **Run 4: `sunstack-workflow-v2:design-review`.** Supporting change: none. Surface allocation: main path (step 2 inputs); depth (`reviewing-common-method.md`, `lanes/specification-authority.md`, `reviewing-four-document-design.md`). Status: implemented (13 Nov).
 
 No run changes a trigger, a completion blocker or a terminal condition.
 

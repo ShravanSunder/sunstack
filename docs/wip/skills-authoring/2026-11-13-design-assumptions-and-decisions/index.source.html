@@ -12,23 +12,58 @@
   <ex-document id="content">
     <h1>Design pages state the author's assumptions and decisions</h1>
 
-    <h2 id="answer">The answer</h2>
-    <p>Revision 3. Every assumption and decision on a design page becomes a marked item, an HTML <code>aside</code> carrying its kind, an id (<code>A3</code>, <code>D4</code>) and its authority: the owner's own words, agent wording the owner accepted, an existing contract, the author's own call, or <code>unknown</code>. The author writes the item in the same edit as the sentence it governs, so a missing authority shows while drafting, not at the end. Option text the owner picked is accepted agent wording, never the owner's words, and any wider reading of it is the author's own assumption.</p>
-    <p>Every check is a nudge, never a gate. The author's self-check, and then the reviewer, ask of each sentence that settles meaning whether its source supports all of it, give each item every applicable label from a shared set of ten, or ok alone, each saying what was seen and where else to read, and look quotes up by authority when an owner-message export is supplied. The author ranks its own-call items; the few high-value ones go to the owner as decisions, and the entry page lists every item in rank order. Existing <code>decision-needed</code> rules stay as they are; no blocker is added.</p>
-    <p>Four runs, one skill each: <code>design-specification</code> (which also writes the new section of the shared <code>design-documents.md</code>), <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>. No description, rule, engine or Demistify change. Open: re-review of this revision. The owner decided no Demistify element (D-21, D-22). All owner quotes are exact spans of the refreshed export. Behavior is not yet evaluated.</p>
+    <p id="answer">When an agent writes a design, it now marks each assumption and decision as it writes it, saying who it came from: you, an option you picked, a contract, or the agent itself. A reviewer then asks of every sentence whether its source really supports it. Only the few high-value calls come to you; the rest stay marked where you can read them.</p>
+    <p id="status"><strong>Where it stands:</strong> the design passed its independent review. The skill files are written and committed on the branch, not yet reviewed or merged. Whether the agent really notices its assumptions while writing is the design's hypothesis; it has not been tested yet.</p>
 
-    <h2 id="walkthrough">Walkthrough</h2>
-    <ol>
-      <li><a href="#requirements">Requirements</a>: the owner's ask, the two real failures, and what success means.</li>
-      <li><a href="#specification">Specification</a>: what the skills must do, the standards they will state, the marking shape and its transfer cases.</li>
-      <li><a href="#skill-design">Skill design</a>: the four runs, the edits each makes, the decisions taken and their revisions.</li>
-      <li><a href="#skill-verification">Skill verification</a>: how each standard will be checked, the review retests, the deferred evals and what stays unverified.</li>
-    </ol>
+    <h2 id="who-does-what">Who does what</h2>
+    <ex-mermaid id="flow" label="From writing a sentence to the owner's decision"><script type="text/plain">
+flowchart TB
+  W["Author marks<br/>who said it"] --> S["Author checks<br/>each sentence"]
+  S --> R["Reviewer checks,<br/>trusts nothing"]
+  R --> K["Own calls<br/>ranked"]
+  K -->|few| O["You decide"]
+  K -->|rest| M["Stay marked"]
+</script></ex-mermaid>
+    <p>Each check is a nudge: it says what it saw and where to look, and the author or reviewer decides. Nothing new blocks a design from being finished.</p>
 
-    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
-    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
-    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
-    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+    <h2 id="example">A real example</h2>
+    <p>On 13 November you picked option b in a question an agent had written: "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The agent later wrote, in its own account: "I read your choice of option b as "the model picks the boundaries"." The Lead reports that this reading then went into a Requirements draft as your decision.</p>
+    <p><strong>Before:</strong> one sentence, credited to you, saying the model picks the boundaries.</p>
+    <p><strong>After:</strong> two marked items.</p>
+    <aside class="design-item" id="D4" data-design-item="decision" data-authority="owner-accepted" data-source="owner-messages-claude-affa24ce.jsonl#2026-11-13T01:35:13.655Z">
+      <p><strong>D4, decision, you accepted the agent's wording.</strong> Every document rule gets its evidence the same way. The owner selected the option worded:</p>
+      <blockquote>Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way.</blockquote>
+    </aside>
+    <aside class="design-item" id="A7" data-design-item="assumption" data-authority="author" data-reads="D4">
+      <p><strong>A7, assumption, the author's own call.</strong> I read "a Jev selection" as Jev choosing where units start and end. Ranked high: it settles your meaning, so it comes to you as a question.</p>
+    </aside>
+
+    <h2 id="what-changes">What changes, for whom</h2>
+    <ul>
+      <li><strong>The author</strong> marks each assumption and decision in the same edit as the sentence, and writes "unknown" rather than leaving it out.</li>
+      <li><strong>The reviewer</strong> asks of every sentence whether its source supports all of it, before reading the author's own check, and treats pages agreeing with each other as no evidence.</li>
+      <li><strong>You</strong> get the few high-value calls as decisions, and one ranked list of everything else on the design's front page.</li>
+    </ul>
+
+    <h2 id="details">Details</h2>
+    <p>Each item is a plain HTML <code>aside</code> with an id (<code>A1</code>, <code>D1</code>), its kind and its authority: <code>owner-words</code>, <code>owner-accepted</code>, <code>contract</code>, <code>author</code> or <code>unknown</code>. A shared table of ten nudge labels says what a check saw. Ranking asks whose meaning an item settles, how hard it is to undo, and how much rests on it. The shape lives in the shared design reference of <code>sunstack-dev</code> 3.3.0; the four skills that apply it are <code>design-specification</code>, <code>design-program</code>, <code>design-verification</code> and <code>design-review</code> in <code>sunstack-workflow-v2</code> 0.3.0. No new Demistify element: you decided that on 13 November.</p>
+    <p>The full design set, in reading order:</p>
+    <details>
+      <summary>Requirements: your ask, the two real failures, and what success means</summary>
+      <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    </details>
+    <details>
+      <summary>Specification: what the skills must do, the standards, the marking shape and its test cases</summary>
+      <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    </details>
+    <details>
+      <summary>Skill design: the four runs, the edits each makes, the decisions and their revisions</summary>
+      <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    </details>
+    <details>
+      <summary>Skill verification: how each standard will be checked, the review retests and what stays unverified</summary>
+      <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+    </details>
   </ex-document>
 </body>
 </html>
