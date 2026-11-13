@@ -92,7 +92,7 @@ const pictureReportSchema = nativeReportSchema.extend({
 });
 
 test.skipIf(externalInputs.corpus === undefined && externalInputs.observations === undefined)(
-  "PRIVATE FROZEN CORPUS: 52 outcomes and 37 reviewed observations (SKIPPED unless both SUNSTACK_PICTURE_DEVELOPMENT_* inputs are supplied)",
+  "PRIVATE FROZEN CORPUS: 52 outcomes and 37 reviewed observations (SKIPPED when neither SUNSTACK_PICTURE_DEVELOPMENT_* input is supplied; fails on a partial or missing input)",
   () => {
     // Arrange: preserve private real pages externally, pinning both independent oracles.
     if (externalInputs.corpus === undefined || externalInputs.observations === undefined) {

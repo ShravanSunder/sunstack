@@ -1,6 +1,6 @@
 # Design set (scaled): presentation-html runs the picture-before-choice nudge
 
-Run: `update` of `sunstack-dev:presentation-html`. Class: behavior-changing — adds one `IF` sentence to the main path (`SKILL.md` step 5). No trigger, description, reference, schema, completion condition or security surface changes. Basis: user-directed intent.
+Run: `update` of `sunstack-dev:presentation-html`. Class: behavior-changing — adds one `IF` sentence to the main path (`SKILL.md` step 5). No trigger, description, schema or completion condition changes; step 6's return gains the nudge's brief result. Execution surface: see below. Basis: user-directed intent.
 
 ## Requirements
 
@@ -21,6 +21,10 @@ Run: `update` of `sunstack-dev:presentation-html`. Class: behavior-changing — 
 Placement: `SKILL.md` step 5, after the static `check` sentence. The command needs finished HTML; step 5 is where the author already lints the final file. `references/options-and-decisions.md` is loaded during composition (step 4), before the page is final, and carries held-rule markers (O001, O002); an instruction there would arrive before there is a page to run it on.
 
 Steering: one conditional sentence; the "not as a failure" framing answers the owner's nudge-not-gate words. No restated standard (the picture standard stays in the owner-decision brief and the rule).
+
+## Execution surface
+
+The instruction has the author fetch and run a pinned package (`pnpm dlx @sunstack/cli@0.16.0`, the command `rules/README.md` owns), so it does touch a package/subprocess execution surface. It adds no new kind of surface: this branch already prescribes that pinned invocation in `rules/README.md` (activated in e52ca793), and the unmerged `skills/v2-design-rules` branch's design-review prescribes the same pattern (`@sunstack/cli@0.11.0`); main does not yet carry it. The change adds one more pinned invocation, run by the author, on the author's own page. Provenance of the allowed decision: the owner's standing approval of `@sunstack/cli` installs and runs exists only in an agent-written memory note dated 2026-10-27, which is secondary; the Lead's note recording this was written at review request, after the instruction was written. No gate record preceded the write.
 
 ## Verification
 

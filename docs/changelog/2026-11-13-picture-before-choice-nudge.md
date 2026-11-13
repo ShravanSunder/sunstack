@@ -12,4 +12,6 @@ Proven: the mechanical rule's development and unseen-page results recorded in `r
 
 Not proven: whether authors actually run the command and act well on its findings; receiver behaviour is untested. The other owner-decision rules remain held.
 
+Validation: `pnpm --dir tests/skills test` passed 312/312 when an independent review supplied the external development inputs, and 311 passed with 1 skipped (the private regression) without them; `claude plugin validate .` passed. Both exited 0.
+
 Client manifests and the Codex, Claude and Cursor marketplace mirrors are updated. Installed caches have not been refreshed.

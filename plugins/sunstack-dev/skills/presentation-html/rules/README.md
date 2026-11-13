@@ -9,7 +9,7 @@ pnpm dlx @sunstack/cli@0.16.0 lint --config plugins/sunstack-dev/skills/presenta
 pnpm dlx @sunstack/cli@0.16.0 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/folder
 ```
 
-From another project, use that installed skill's absolute `rules/presentation-html.config.json` path after `--config`, and add `--root "$PWD"`. Named page/folder paths resolve from your current directory. `--report <file>` saves every path and raw source witness. Exit 1 means nudges; exit 5 means an uncertain boundary is present. No page is automatically changed.
+From another project, use that installed skill's absolute `rules/presentation-html.config.json` path after `--config`, and add `--root "$PWD"`. Named page/folder paths resolve from your current directory. `--report <file>` saves every path and raw source witness. Read the findings, not the exit code: warnings (the nudges) can come with exit 0; exit 1 means an error finding or an explicit warning-limit failure; exit 5 means an uncertain boundary is present and can also carry warnings. No page is automatically changed.
 
 The predicates and evidence are those reviewed at `7ec3c2ef`; activation changes their location and nudge text only. The public-safe development and held-back aggregates are in `development-observation.json`. O001, O002, C and design-item E remain held in their own explicit configurations.
 
