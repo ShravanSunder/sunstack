@@ -1,0 +1,48 @@
+## Skill design
+
+## Runs and owners
+
+| Run | Named skill | Allocated surfaces | State |
+| --- | --- | --- | --- |
+| 1 | demistify-explainer, sunstack-tools product guide | SKILL.md component chooser; references/design-documents.md and directly affected current component examples; references/tours.md:49 changes the two stale Footprints names to Compass, matching the already merged launcher in navigation.ts:199 and command-search.ts:22; no launcher code changes | implemented |
+| 2 | presentation-html, sunstack-dev | references/engineering-documents.md:5/31/69/75, references/views.md:11 and references/engineering-document-examples.md:241/249/254; remove obsolete browser wording and keep their positive HTML composition and source-mode route | implemented |
+| 3 | verify-demistify, sunstack-tools project skill | SKILL.md current reader journey row; references/document-browsers.md; journeys.md only if it carries a retired reader expectation | implemented |
+| 4 | design-specification, sunstack-workflow-v2 | SKILL.md HTML-authoring paragraph currently at line 254: remove only the specialized viewer exclusion; keep document meanings and conditional component preparation | implemented |
+| 5 | design-program, sunstack-workflow-v2 | SKILL.md HTML-authoring paragraph at line 234: remove its stage-projection/design-part-format contrast; preserve actual source-path and prepared-call contract | implemented |
+| 6 | design-verification, sunstack-workflow-v2 | SKILL.md HTML-authoring paragraph at line 97: remove its verification-stage-viewer contrast; preserve complete planned-proof fields and conditional preparation | implemented |
+
+One skill is written per run. Associated non-skill edits: remove the retired-viewer clause at sunstack-dev/shared-references/design-documents.md:77 and sunstack-workflow-v2/README.md:36; reconcile the stale browser-as-composition paragraphs in docs/architecture/skill-system.md:78–82 and sunstack-dev/docs/diagram-vocabulary.md:47 to the already settled HTML/shared-navigation/conditional-call-stack model. Preserve frozen v1 Markdown authority and the conditional call-stack contract. These two maintainer docs were found by the Lead’s broader current-document inventory before R2 closure; they are part of S1’s same active-consumer cutover. These are active consumers found by R1 rule-agreement, not a new rendering mechanism. Product source removal is governed by the companion plan at sunstack-tools/docs/wip/demystify/2026-11-12-retire-requirements.md; it is not a skill run. The Lead owns skill wording. Product implementation and paired verification have disjoint writes.
+
+## Unchanged trigger, lens and route
+
+All descriptions, invocation settings and frontmatter remain unchanged. The product guide still teaches authors to own explanation and HTML layout, select supported views, load their details and check the final files. Presentation still selects forms by the relationship a reader needs to understand. Verification still observes a declared built target through its real consumer and reports exact coverage.
+
+Run 1 narrows the existing prepared-reader chooser to a supplied call stack and loads the same owned detail reference with its remaining purpose: owner pages, need/frame/stack mappings, actual reader markup and preparation/check result. The retained reference states the actual input contract and worked call-stack composition. Ordinary sections and source anchors own explanation; shared navigation locates it. No duplicate recipe or new schema is introduced.
+
+Run 2 changes exactly these passages: engineering-documents.md:5 drops “record/browser” from its source-mode explanation while preserving the branch and return; :31 keeps the positive ordinary-HTML sentence and removes the viewer prohibition/rationale plus the redundant browser-specific legacy commentary; :69 keeps the actual conditional call-stack load and removes its requirements-viewer contrast; views.md:11 keeps authored coverage/proof and removes its viewer contrast. The main skill still owns carried-content preservation: a delivery-only request retains its supplied binding, and an unavailable matching check is reported honestly. This retirement adds no automatic migration policy. At engineering-documents.md:75 remove the obsolete specialized-viewer completion tail while keeping the positive complete-source criterion. In engineering-document-examples.md:241 remove the requirement-viewer contrast, :249 give the retained reader a stable unique id, and :254 replace the stale query-address/unimplemented-anchor claim with the matching guide’s prepared page/bodyRef destination. Keep its actual prepared inputs, source-derived-only distinction and selected-binding limits. These are corrections of the retained example, not a new embedding API. Other authoring judgments and examples are unchanged.
+
+Run 3 selects the actual surviving call-stack checks and their declared fixture/target, exposes keyboard and real need-destination observations, and removes current expectations for the retired UI. Its current oracle is this set’s Specification obligations 3–5 and the companion product plan’s “Deciding link and keyboard observations”. The 2026-11-07 design-documents set remains historical for retired browser/stage/related expectations; do not reuse its old query-address or four-view obligations as current expectations.
+
+Run 4 preserves design-specification’s four-document meaning and HTML authoring route while deleting only the specialized requirements/stage viewer exclusion. The existing mandatory source, identity and component-data conditions remain. Runs 5 and 6 make the same scoped deletion in their one named HTML-authoring paragraph. Program Design keeps source-derived paths, binding/trace obligations and proposed-path distinction; Verification keeps complete planned observations, outcomes and limits. The shared-reference and README edits follow the same deletion without changing their other owners. Architecture paragraphs 78–82 are reconciled together: ordinary HTML owns the facts and stable links, shared JSON owns navigation metadata, component records/preparation are conditional on a selected component, and frozen v1 Markdown remains authoritative. Historical run results are evidence rather than the current procedure.
+
+## Applicable standards and sensitive surfaces
+
+The main-path topic governs each retained route and completion. Calls-and-placement governs the chooser's conditional detail load and single ownership of API and recipe. Steering governs positive selection and deletion of the obsolete warning. Generalization governs the adopted product scope and the two transfer cases. Proof-claims separates structural checks from fresh-author behavior. Platform governs the sunstack-dev patch/changelog and client validation. No trigger or invocation edit is planned.
+
+Sensitive-surface decision: none added or changed. Trusted guide/runtime bindings, source carriers, network policy, execution authority, credentials and runtime HTML escaping retain their contracts. Source changes do not authorize installation or publication.
+
+## Decisions and coordination
+
+| Decision | Default and reason |
+| --- | --- |
+| D1 | Delete the obsolete public component and its exclusive implementation; a warning leaves the selectable surface intact. Owner-directed. |
+| D2 | Keep the existing prepared record schema, validation and actual need source identities; removing host inheritance must not remove its facts. The guide’s worked call-linked need uses visible owner HTML at its bodyRef. This is an authoring/real-destination requirement already in the product plan, not a new parser rule forbidding templates; the verifier observes visible destinations. Owner-directed retention. |
+| D3 | Remove current guide recipes and current demo use together; historical documents and negative tests keep their provenance. This avoids rewriting evidence. |
+| D4 | Keep ordinary HTML, diagrams and shared navigation as the positive composition; no new application or duplicate catalogue is needed. Existing accepted behavior. |
+| D5 | Stage the matching product release before the positive skill cleanup is published; otherwise the bound live guide could continue advertising the old component. Release execution remains gated by owner authority. |
+
+Product base b8bd05bd6a0462cac4f6a215ac55d6b25f01c5bc, branch fix/demistify-retire-requirements. Skill base cde8d5cf5b9141a08264cc5d57e3e3a58f0f2aac, branch fix/presentation-html-retired-browser. Unrelated working trees and installed caches remain untouched. The product gets an experimental minor Changeset without changing package version in its source PR. The sunstack-dev and workflow-v2 guidance each get the next free patch version and a focused changelog; marketplace availability and invocation policy are unchanged. Recheck concurrent version edits before assigning the exact patch.
+
+## Review record
+
+Revision R3 was accepted-to-implement by independent review lead 01a1d02e (push 01a1d05e-502d-7d10-a462-5b5a2939d830). The original review reports and correction checks close S1/S2 in R3 and S4 in R2: open counts 3 → 2 → 0, with no recurrence. S3/S5 and the additional process/gate candidates were rejected with their recorded reasons. All six allocated source runs are implemented. Fitting source checks, the named product-reference author observation and diff assessment are recorded. Independent implementation review closed GREAT / SOURCE-ONLY after I2, I5 and O4 corrections, with no open source finding. Skill-rule execution and official Codex quick validation remain named not-run gaps, not passed or waived. Publication, installed activation and owner acceptance remain separate.

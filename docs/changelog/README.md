@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-12 Remove obsolete design-viewer instructions](2026-11-12-retire-design-viewer-instructions.md)
 - [2026-11-11 Explain work-log episodes with decisive evidence](2026-11-11-readable-work-accounts.md)
 - [2026-11-11 Publish sunstack-workflow-v2 0.1.0](2026-11-11-workflow-v2-marketplace.md)
 - [2026-11-11 Record meaningful work without procedural duplication](2026-11-11-material-work-records.md)

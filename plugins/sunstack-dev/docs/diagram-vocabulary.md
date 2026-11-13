@@ -44,7 +44,7 @@ This maintainer index records current view names, artifact altitude, semantic ow
 | delivery map | delivery plan | the plan's slices, reads, rows, proof layers, edges and gates (`skills/plan-implementation/references/slice-and-proof-design.md`), its PR topology and repositories (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
 | plan change view | delivery plan | a superseding plan's "Changed from" section (`shared-references/canonical-implementation-plan.md`) | `skills/presentation-html/references/engineering-documents.md` (the plan page) |
 
-On a design set's pages, the released requirement browser stands in for the capability map's need list, the requirement coverage table, the requirement/design/proof trace, the "proven by" cards and the coverage rows, and the call-stack browser for the call graph over the call-path page; `skills/presentation-html/references/views.md` owns that rule. The tokens above stay the owning skills' vocabulary for what each view must show.
+On a design set's pages, ordinary explanations, diagrams and tables expose the required capability, coverage and proof relationships. `skills/presentation-html/references/views.md` owns the form selected for each view. A source-derived path can use the call-stack component with its matching guide and prepared inputs. The tokens above stay the owning skills' vocabulary for what each view must show.
 
 ## Altitude Boundary
 

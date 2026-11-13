@@ -1,0 +1,7 @@
+# Retirement instruction validation
+
+The owner directed full removal of the obsolete browser and its instructions, preservation of call stacks, and deferral of Story experiments. The accepted six-run design is [the retirement set](../../wip/skills-authoring/2026-11-12-demistify-retirement/index.html). Independent design review closed the active-consumer and example/oracle findings at revision R3 before skill files changed.
+
+The matching product guide's five complete literal HTML examples prepare eight records and pass the matching source CLI: five files, zero errors and warnings. This is source validity, not comprehension or runtime proof. Product call-stack interaction has separate target-bound automated evidence.
+
+A named fresh author retrieved the matching product guide and applied its prepared-call data in a two-page source example; actual prepare/index/check completed with two files and zero checker errors or warnings. This candidate-only observation makes no improvement or comprehension claim. Claude marketplace validation and candidate source/version checks pass. The direct skill-rule command is not run because the executable is unavailable; the Codex quick validator is not run because PyYAML is absent. Those are named coverage gaps, not passes. Independent implementation review closed great at the corrected source, with a source-only ship decision and those coverage gaps retained. Publication and installed activation are not established by these source changes; no cache refresh has run.
