@@ -144,12 +144,12 @@
       "decision_stated": {
         "type": "noul",
         "instructions": {
-          "check": "context",
+          "check": "preceding",
           "context": [
             "control",
             "reference.preceding_boundary"
           ],
-          "task": "Before this control in its governing section, does the text explain the decision, problem or relied-on assumption the reader is answering?"
+          "task": "Does preceding explain the decision, problem or relied-on assumption that this control asks the reader to answer?"
         },
         "criteria": {
           "true": "The preceding section text or heading identifies the concrete issue, choice or premise, so the reader knows what the options concern.",
@@ -219,8 +219,8 @@
     },
     "reference": {
       "status_boundary": "control identifies the selected native choice by its id/title. context currently contains all enclosing heading sections and can repeat text. Locate the nearest governing section for this control. An explicit source-recorded owner decision for this same choice, including a heading before it or a later statement, settles older open wording; local selection and recommendation do not. A review of a relied-on assumption or its proof limits can request a consequential answer without choosing a new architecture.",
-      "preceding_boundary": "For decision_stated only, judge text before this identified control in its governing section. The current released collection supplies complete enclosing sections, not a mechanically sliced prefix: identify its id/title and exclude its option summaries and all later content for this property. Do not borrow another issue from an ancestor or another control. If the supplied context does not establish this boundary, use an intermediate assessment.",
-      "section_boundary": "For gains, costs, bearers and recommendation, judge the same governing section including this control's own option titles/explanations and any later content in that section. Do not borrow a different choice's explanation from an ancestor or another section. Gains/costs can be plainly implied by explained effects; do not invent them. Author position with reasons need not use the word recommended; initial selection or a local response is insufficient. Ambiguous interpretation remains an intermediate assessment, not a confident no. Per-option drawings are not required; parsed local picture presence is a separate mechanical condition. No question field isolates attention within a shared request."
+      "preceding_boundary": "preceding is the asking-text projection of the exact stored raw source prefix of the nearest configured containing section: section beginning through this identified control's start, excluding the control and all later bytes. Judge this question only from preceding, using control for identity, not its option content. Available empty is distinct from unavailable/cut; do not replace missing evidence with context from elsewhere. Other fields remain visible in the shared request, but do not supply this preceding property.",
+      "section_boundary": "For gains, costs, bearers and recommendation, judge the same governing section represented by preceding, including this control's option titles/explanations and any later content in that section. context currently contains all enclosing sections, so locate that section and do not borrow another choice from an ancestor. Gains/costs can be unambiguously explained by effects; do not invent them. Current author position with reasons need not say recommended; initial selection/local response is insufficient. Ambiguous interpretation stays intermediate. Per-option drawings are not required; parsed local picture presence is a separate mechanical condition. Fields in this shared request do not isolate attention."
     },
     "decision": {
       "start": "control_complete",
@@ -230,7 +230,7 @@
             "tool": "complete",
             "field": "control"
           },
-          "yes": "context_complete",
+          "yes": "preceding_complete",
           "no": "uncertain"
         },
         "context_complete": {
@@ -416,11 +416,20 @@
           "yes_at_or_above": 0.8,
           "no_at_or_below": 0.2,
           "uncertain": "uncertain"
+        },
+        "preceding_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "preceding"
+          },
+          "yes": "context_complete",
+          "no": "uncertain"
         }
       }
     },
     "related": [
-      "context"
+      "context",
+      "preceding"
     ],
     "severity": "warn"
   }

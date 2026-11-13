@@ -103,6 +103,10 @@
           "earlier_picture_match": {
             "from": "inside",
             "rule": "choice-with-earlier-section-picture"
+          },
+          "preceding": {
+            "from": "section_prefix",
+            "kind": "outline"
           }
         }
       }
