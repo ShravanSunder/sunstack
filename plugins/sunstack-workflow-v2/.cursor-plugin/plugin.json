@@ -1,6 +1,6 @@
 {
   "name": "sunstack-workflow-v2",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1.",
   "author": {
     "name": "Shravan Sunder"

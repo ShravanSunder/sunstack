@@ -1,6 +1,6 @@
 # HTML authors run the picture-before-choice nudge
 
-Date: 2026-11-13. Version: sunstack-dev 3.3.3 (one above the 3.3.2 already on main).
+Date: 2026-11-13. Version: sunstack-dev 3.3.3.
 
 `presentation-html` step 5 (Prepare and lint once) gains one instruction: when a page asks the reader to answer a question with a native choice, the author also runs the picture-before-choice nudge from `rules/README.md` on the final page. Each finding is worth checking, not a failure: the decision may not need a picture, a useful picture may sit under another heading, and the author decides. An `uncertain` result means the page's layout could not be read.
 

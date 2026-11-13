@@ -35,7 +35,7 @@
       "name": "sunstack-workflow-v2",
       "source": "./plugins/sunstack-workflow-v2",
       "description": "Editable v2 workflow: four design skills, four roles, and agent management. Requires sunstack-dev. Does not replace frozen v1.",
-      "version": "0.3.0"
+      "version": "0.3.1"
     },
     {
       "name": "skill-authoring",

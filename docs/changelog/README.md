@@ -1,6 +1,9 @@
 # Changelog
 
 - [2026-11-13 HTML authors run the picture-before-choice nudge](2026-11-13-picture-before-choice-nudge.md)
+- [2026-11-13 Work-log pages explain agents' decisions and assumptions](2026-11-13-worklog-component-teaching.md)
+- [2026-11-13 Design Maps connect reader concerns](2026-11-13-concern-based-design-map.md)
+- [2026-11-13 Check-ins advance authorized work](2026-11-13-lead-checkin-progress.md)
 - [2026-11-13 Design pages state the author's assumptions and decisions](2026-11-13-design-assumptions-and-decisions.md)
 - [2026-11-13 AgentStudio PR links and HTML drawer guidance](2026-11-13-agentstudio-pr-drawer.md)
 - [2026-11-12 Remove obsolete design-viewer instructions](2026-11-12-retire-design-viewer-instructions.md)
