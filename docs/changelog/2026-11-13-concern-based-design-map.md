@@ -5,4 +5,4 @@
 - Preserves one-page concerns, optional nesting, stable IDs, singular fact ownership and the existing renderer/schema; no uniform stages or page quota.
 - HTML guidance and review conditions use the document format, without a workflow-generation qualifier. Actual plugin and renderer syntax identifiers are unchanged.
 - Versions remain coordinated across Codex, Claude and Cursor manifests/marketplaces, advancing from main's 3.3.0/0.3.0 while preserving its assumptions-and-decisions guidance.
-- [Validation and review](references/2026-11-13-workflow-progress-and-map-validation.md) record the source-only evidence and limits. Rule checking is unavailable because `sunstack` is absent; fresh-agent behavior and installed activation are unverified. No installed cache refresh or plugin release.
+- [Validation and review](references/2026-11-13-workflow-progress-and-map-validation.md) record the source-only evidence and limits. Model-backed rule coverage remains unrun because its credential is unavailable; fresh-agent behavior and installed activation are unverified. No installed cache refresh or plugin release.
