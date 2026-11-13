@@ -8,7 +8,7 @@ rule:
     - follows:
         matches: direct-heading-boundary
         stopBy:
-          matches: heading-bearing-wrapper
+          matches: unsupported-boundary-sibling
 utils:
   answer-control:
     kind: element
@@ -39,12 +39,51 @@ utils:
     has:
       matches: outline-heading
       stopBy: end
+  canonical-mermaid-island:
+    kind: element
+    regex: >-
+      (?is)\A<ex-markdown\b[^<>]*>\s*<script\s+type=["']text/markdown["']>(?:[ \t]*\r?\n)*[ ]{0,3}```mermaid[ \t]*\r?\n[^`]*\r?\n[ ]{0,3}```[ \t]*(?:\r?\n[ \t]*)*</script>\s*</ex-markdown>\z
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  plain-markdown-island:
+    kind: element
+    regex: >-
+      (?is)\A<ex-markdown\b[^<>]*>\s*<script\s+type=["']text/markdown["']>[^<]*</script>\s*</ex-markdown>\z
+    not:
+      has:
+        kind: script_element
+        has:
+          kind: raw_text
+          regex: >-
+            (?m)^[ \t]*(?:`{3,}|~{3,}|(?:=+|-+)[ \t]*$)|[#>]|!\[
+  opaque-markdown-island:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<ex-markdown(?:\s|>)'
+    not:
+      any:
+        - matches: canonical-mermaid-island
+        - matches: plain-markdown-island
+  unsupported-boundary-sibling:
+    any:
+      - matches: heading-bearing-wrapper
+      - matches: opaque-markdown-island
+      - kind: element
+        has:
+          matches: opaque-markdown-island
+          stopBy: end
   direct-heading-boundary:
     all:
       - matches: outline-heading
       - not:
-          matches: heading-bearing-wrapper
-  picture-element:
+          matches: unsupported-boundary-sibling
+  native-picture-element:
     kind: element
     has:
       any:
@@ -58,6 +97,10 @@ utils:
         has:
           kind: start_tag
           regex: '(?i)^<template(?:\s|>)'
+  picture-element:
+    any:
+      - matches: native-picture-element
+      - matches: canonical-mermaid-island
   picture-bearing-sibling:
     any:
       - matches: picture-element
@@ -76,13 +119,13 @@ rule:
     - follows:
         matches: direct-heading-boundary
         stopBy:
-          matches: heading-bearing-wrapper
+          matches: unsupported-boundary-sibling
     - follows:
         matches: picture-bearing-sibling
         stopBy:
           any:
             - matches: outline-heading
-            - matches: heading-bearing-wrapper
+            - matches: unsupported-boundary-sibling
 utils:
   answer-control:
     kind: element
@@ -113,12 +156,51 @@ utils:
     has:
       matches: outline-heading
       stopBy: end
+  canonical-mermaid-island:
+    kind: element
+    regex: >-
+      (?is)\A<ex-markdown\b[^<>]*>\s*<script\s+type=["']text/markdown["']>(?:[ \t]*\r?\n)*[ ]{0,3}```mermaid[ \t]*\r?\n[^`]*\r?\n[ ]{0,3}```[ \t]*(?:\r?\n[ \t]*)*</script>\s*</ex-markdown>\z
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  plain-markdown-island:
+    kind: element
+    regex: >-
+      (?is)\A<ex-markdown\b[^<>]*>\s*<script\s+type=["']text/markdown["']>[^<]*</script>\s*</ex-markdown>\z
+    not:
+      has:
+        kind: script_element
+        has:
+          kind: raw_text
+          regex: >-
+            (?m)^[ \t]*(?:`{3,}|~{3,}|(?:=+|-+)[ \t]*$)|[#>]|!\[
+  opaque-markdown-island:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<ex-markdown(?:\s|>)'
+    not:
+      any:
+        - matches: canonical-mermaid-island
+        - matches: plain-markdown-island
+  unsupported-boundary-sibling:
+    any:
+      - matches: heading-bearing-wrapper
+      - matches: opaque-markdown-island
+      - kind: element
+        has:
+          matches: opaque-markdown-island
+          stopBy: end
   direct-heading-boundary:
     all:
       - matches: outline-heading
       - not:
-          matches: heading-bearing-wrapper
-  picture-element:
+          matches: unsupported-boundary-sibling
+  native-picture-element:
     kind: element
     has:
       any:
@@ -132,6 +214,10 @@ utils:
         has:
           kind: start_tag
           regex: '(?i)^<template(?:\s|>)'
+  picture-element:
+    any:
+      - matches: native-picture-element
+      - matches: canonical-mermaid-island
   picture-bearing-sibling:
     any:
       - matches: picture-element
