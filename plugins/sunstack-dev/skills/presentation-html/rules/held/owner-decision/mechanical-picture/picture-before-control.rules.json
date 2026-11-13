@@ -1,0 +1,68 @@
+{
+  "M001": {
+    "name": "owner-decision.picture-before-control",
+    "evidence": "choice",
+    "decision": {
+      "start": "control_complete",
+      "steps": {
+        "control_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "control"
+          },
+          "yes": "heading_complete",
+          "no": "uncertain"
+        },
+        "heading_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "heading_path"
+          },
+          "yes": "boundary_match_complete",
+          "no": "uncertain"
+        },
+        "direct_heading_boundary": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "direct_heading_match",
+            "pattern": "(?s).+"
+          },
+          "yes": "earlier_picture",
+          "no": "uncertain"
+        },
+        "earlier_picture": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "earlier_picture_match",
+            "pattern": "(?s).+"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "No configured picture element precedes this control in its proven heading section; inspect whether this question needs one.",
+            "at": "control"
+          }
+        },
+        "boundary_match_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "direct_heading_match"
+          },
+          "yes": "picture_match_complete",
+          "no": "uncertain"
+        },
+        "picture_match_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "earlier_picture_match"
+          },
+          "yes": "direct_heading_boundary",
+          "no": "uncertain"
+        }
+      }
+    },
+    "related": [
+      "heading_path"
+    ],
+    "severity": "warn"
+  }
+}

@@ -1,0 +1,141 @@
+# A choice is supported only when its closest outline boundary is a direct
+# sibling heading. An intervening wrapper with a heading is explicitly unknown.
+id: choice-with-direct-heading-boundary
+language: Html
+rule:
+  all:
+    - matches: answer-control
+    - follows:
+        matches: direct-heading-boundary
+        stopBy:
+          matches: heading-bearing-wrapper
+utils:
+  answer-control:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<ex-choice(?:\s|>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  outline-heading:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<h[1-6](?:\s|>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<(?:template|ex-choice|ex-compare|ex-mermaid)(?:\s|>)'
+  heading-bearing-wrapper:
+    kind: element
+    has:
+      matches: outline-heading
+      stopBy: end
+  direct-heading-boundary:
+    all:
+      - matches: outline-heading
+      - not:
+          matches: heading-bearing-wrapper
+  picture-element:
+    kind: element
+    has:
+      any:
+        - kind: start_tag
+        - kind: self_closing_tag
+      regex: '(?i)^<(?:figure|img|svg|ex-mermaid|ex-flow|ex-board|ex-trace)(?:\s|/?>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  picture-bearing-sibling:
+    any:
+      - matches: picture-element
+      - kind: element
+        has:
+          matches: picture-element
+          stopBy: end
+---
+# Both the boundary and the preceding picture use parsed nodes. A wrapper that
+# carries another outline heading cannot borrow an earlier picture across it.
+id: choice-with-earlier-section-picture
+language: Html
+rule:
+  all:
+    - matches: answer-control
+    - follows:
+        matches: direct-heading-boundary
+        stopBy:
+          matches: heading-bearing-wrapper
+    - follows:
+        matches: picture-bearing-sibling
+        stopBy:
+          any:
+            - matches: outline-heading
+            - matches: heading-bearing-wrapper
+utils:
+  answer-control:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<ex-choice(?:\s|>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  outline-heading:
+    kind: element
+    has:
+      kind: start_tag
+      regex: '(?i)^<h[1-6](?:\s|>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<(?:template|ex-choice|ex-compare|ex-mermaid)(?:\s|>)'
+  heading-bearing-wrapper:
+    kind: element
+    has:
+      matches: outline-heading
+      stopBy: end
+  direct-heading-boundary:
+    all:
+      - matches: outline-heading
+      - not:
+          matches: heading-bearing-wrapper
+  picture-element:
+    kind: element
+    has:
+      any:
+        - kind: start_tag
+        - kind: self_closing_tag
+      regex: '(?i)^<(?:figure|img|svg|ex-mermaid|ex-flow|ex-board|ex-trace)(?:\s|/?>)'
+    not:
+      inside:
+        stopBy: end
+        kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<template(?:\s|>)'
+  picture-bearing-sibling:
+    any:
+      - matches: picture-element
+      - kind: element
+        has:
+          matches: picture-element
+          stopBy: end
