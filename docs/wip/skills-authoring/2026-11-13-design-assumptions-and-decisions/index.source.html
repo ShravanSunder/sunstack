@@ -12,36 +12,41 @@
   <ex-document id="content">
     <h1>Design pages state the author's assumptions and decisions</h1>
 
-    <p id="answer">When an agent writes a design, it now marks each assumption and decision as it writes it, saying who it came from: you, an option you picked, a contract, or the agent itself. A reviewer then asks of every sentence whether its source really supports it. Only the few high-value calls come to you; the rest stay marked where you can read them.</p>
+    <p id="answer">The updated design skills instruct the author of a design to mark each assumption and decision as it writes it, saying who it came from: you, an option you picked, a contract, or the agent itself. A reviewer then asks of every sentence that settles meaning whether its source really supports it. Only the few high-value calls come to you; the rest stay marked where you can read them.</p>
     <p id="status"><strong>Where it stands:</strong> the design passed its independent review. The skill files are written and committed on the branch, not yet reviewed or merged. Whether the agent really notices its assumptions while writing is the design's hypothesis; it has not been tested yet.</p>
 
     <h2 id="who-does-what">Who does what</h2>
     <ex-mermaid id="flow" label="From writing a sentence to the owner's decision"><script type="text/plain">
 flowchart TB
-  W["Author marks<br/>who said it"] --> S["Author checks<br/>each sentence"]
-  S --> R["Reviewer checks,<br/>trusts nothing"]
-  R --> K["Own calls<br/>ranked"]
-  K -->|few| O["You decide"]
-  K -->|rest| M["Stay marked"]
+  W["Author marks<br/>who said it"] --> S["Author checks each<br/>sentence that settles meaning"]
+  S --> K["Author ranks<br/>its own calls"]
+  K --> R["Reviewer checks,<br/>trusts nothing"]
+  R -->|few, high value| O["You decide"]
+  R -->|the rest| M["Stay marked"]
 </script></ex-mermaid>
     <p>Each check is a nudge: it says what it saw and where to look, and the author or reviewer decides. Nothing new blocks a design from being finished.</p>
 
     <h2 id="example">A real example</h2>
     <p>On 13 November you picked option b in a question an agent had written: "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The agent later wrote, in its own account: "I read your choice of option b as "the model picks the boundaries"." The Lead reports that this reading then went into a Requirements draft as your decision.</p>
+    <p>In that option, J1 names one of the rules being designed (the option does not define it further), and a Jev selection means Jev, the model the sunstack rules use for judgment questions, picks among candidate pieces of text.</p>
     <p><strong>Before:</strong> one sentence, credited to you, saying the model picks the boundaries.</p>
     <p><strong>After:</strong> two marked items.</p>
+    <ex-card title="D4 · decision · you accepted the agent's wording" tone="decision">
     <aside class="design-item" id="D4" data-design-item="decision" data-authority="owner-accepted" data-source="owner-messages-claude-affa24ce.jsonl#2026-11-13T01:35:13.655Z">
-      <p><strong>D4, decision, you accepted the agent's wording.</strong> Every document rule gets its evidence the same way. The owner selected the option worded:</p>
+      <p>Every document rule gets its evidence the same way. The owner selected the option worded:</p>
       <blockquote>Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way.</blockquote>
     </aside>
+    </ex-card>
+    <ex-card title="A7 · assumption · the author's own call" tone="question">
     <aside class="design-item" id="A7" data-design-item="assumption" data-authority="author" data-reads="D4">
-      <p><strong>A7, assumption, the author's own call.</strong> I read "a Jev selection" as Jev choosing where units start and end. Ranked high: it settles your meaning, so it comes to you as a question.</p>
+      <p>I read "a Jev selection" as Jev choosing where units start and end. Ranked high: it settles your meaning, so it comes to you as a question.</p>
     </aside>
+    </ex-card>
 
     <h2 id="what-changes">What changes, for whom</h2>
     <ul>
       <li><strong>The author</strong> marks each assumption and decision in the same edit as the sentence, and writes "unknown" rather than leaving it out.</li>
-      <li><strong>The reviewer</strong> asks of every sentence whether its source supports all of it, before reading the author's own check, and treats pages agreeing with each other as no evidence.</li>
+      <li><strong>The reviewer</strong> asks of every sentence that settles meaning whether its source supports all of it, before reading the author's own check, and treats pages agreeing with each other as no evidence.</li>
       <li><strong>You</strong> get the few high-value calls as decisions, and one ranked list of everything else on the design's front page.</li>
     </ul>
 
