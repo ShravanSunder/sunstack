@@ -1,0 +1,77 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../../../shared-references/design-documents.md",
+      "rules": "design-items.rules.json"
+    }
+  ],
+  "marker_prefix": "I",
+  "check": {
+    "files": [
+      "**/*.html"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "design_item": {
+        "rule": "design-item-start",
+        "max_chars": 50000,
+        "fields": {
+          "item": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
+          "context": {
+            "from": "enclosing",
+            "rule": "design-item-element",
+            "text": "full"
+          },
+          "authority_known": {
+            "from": "inside",
+            "rule": "design-item-authority-known"
+          },
+          "authority_unknown": {
+            "from": "inside",
+            "rule": "design-item-authority-unknown"
+          },
+          "source_required": {
+            "from": "inside",
+            "rule": "design-item-source-required"
+          },
+          "source_present": {
+            "from": "inside",
+            "rule": "design-item-source-present"
+          },
+          "quote_required": {
+            "from": "inside",
+            "rule": "design-item-quote-required"
+          },
+          "quote_present": {
+            "from": "inside",
+            "rule": "design-item-quote-present"
+          },
+          "quote_encoded": {
+            "from": "inside",
+            "rule": "design-item-quote-encoded"
+          },
+          "metadata_encoded": {
+            "from": "inside",
+            "rule": "design-item-metadata-encoded"
+          },
+          "metadata_ambiguous": {
+            "from": "inside",
+            "rule": "design-item-metadata-ambiguous"
+          }
+        }
+      }
+    }
+  },
+  "limits": {
+    "evidence_max_chars": 50000,
+    "max_matches": 20000
+  },
+  "decision_model": {
+    "model": "typesafe/jev-1.14-20261014"
+  }
+}

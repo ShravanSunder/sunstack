@@ -81,7 +81,7 @@ Terms:
 - **Design item:** one marked statement that records an assumption or a decision the page relies on, with its authority.
 - **Assumption:** something the page treats as true that nobody checked or authorized for this design, and that some section depends on. A seam, stand-in or unverified environment fact the design relies on is an assumption.
 - **Decision:** a choice where a capable reader of the same sources could have chosen differently and still claimed to follow them.
-- **Authority:** where the item's warrant comes from, named from its source: `owner-words` (the owner's own words, quoted, with where they were said); `owner-accepted` (wording an agent wrote that the owner selected, said yes to or approved, quoted, with where it was written and accepted); `contract` (an existing contract or demonstrated constraint, with its location); `author` (the author's own call); `unknown` (not yet known; allowed while drafting, always visible).
+- **Authority:** where the item's warrant comes from, named from its source: `owner-words` (the owner's own words, quoted, with where they were said); `owner-accepted` (wording an agent wrote that the owner selected, said yes to or approved, quoted, with where it was written and accepted); `contract` (an existing contract or demonstrated constraint, with its location); `author` (the author's own call); `unknown` (not yet known; allowed while drafting, always visible).<!-- I001 -->
 - **Nudge:** a check result that names what it saw, where, and where else to read. It leaves the judgment to the author or reviewer and is never a pass/fail verdict.
 
 The standards:

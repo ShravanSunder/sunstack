@@ -1,0 +1,224 @@
+{
+  "I001": {
+    "name": "design-item.authority-evidence",
+    "evidence": "design_item",
+    "decision": {
+      "start": "complete_metadata_ambiguous",
+      "steps": {
+        "complete_metadata_encoded": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "metadata_encoded"
+          },
+          "yes": "metadata_encoded",
+          "no": "uncertain"
+        },
+        "complete_quote_encoded": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "quote_encoded"
+          },
+          "yes": "complete_metadata_encoded",
+          "no": "uncertain"
+        },
+        "complete_quote_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "quote_present"
+          },
+          "yes": "complete_quote_encoded",
+          "no": "uncertain"
+        },
+        "complete_quote_required": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "quote_required"
+          },
+          "yes": "complete_quote_present",
+          "no": "uncertain"
+        },
+        "complete_source_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "source_present"
+          },
+          "yes": "complete_quote_required",
+          "no": "uncertain"
+        },
+        "complete_source_required": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "source_required"
+          },
+          "yes": "complete_source_present",
+          "no": "uncertain"
+        },
+        "complete_authority_unknown": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "authority_unknown"
+          },
+          "yes": "complete_source_required",
+          "no": "uncertain"
+        },
+        "complete_authority_known": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "authority_known"
+          },
+          "yes": "complete_authority_unknown",
+          "no": "uncertain"
+        },
+        "complete_item": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "item"
+          },
+          "yes": "complete_authority_known",
+          "no": "uncertain"
+        },
+        "metadata_encoded": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "metadata_encoded",
+            "pattern": "(?s).+"
+          },
+          "yes": "uncertain",
+          "no": "metadata_ambiguous"
+        },
+        "known_authority": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "authority_known",
+            "pattern": "(?s).+"
+          },
+          "yes": "source_required",
+          "no": "unknown_authority"
+        },
+        "unknown_authority": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "authority_unknown",
+            "pattern": "(?s).+"
+          },
+          "yes": {
+            "finding": "authority unknown: the item says unknown; inspect the sources that can settle it.",
+            "at": "item"
+          },
+          "no": {
+            "finding": "authority unknown: data-authority is absent or outside the five allowed values; inspect this opening tag and its sources.",
+            "at": "item"
+          }
+        },
+        "source_required": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "source_required",
+            "pattern": "(?s).+"
+          },
+          "yes": "source_present",
+          "no": "pass"
+        },
+        "source_present": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "source_present",
+            "pattern": "(?s).+"
+          },
+          "yes": "quote_required_with_source",
+          "no": "quote_required_without_source"
+        },
+        "quote_required_with_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_required",
+            "pattern": "(?s).+"
+          },
+          "yes": "quote_encoded_with_source",
+          "no": "pass"
+        },
+        "quote_required_without_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_required",
+            "pattern": "(?s).+"
+          },
+          "yes": "quote_encoded_without_source",
+          "no": {
+            "finding": "no source: contract authority has no nonempty data-source; locate the governing contract.",
+            "at": "item"
+          }
+        },
+        "quote_encoded_with_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_encoded",
+            "pattern": "(?s).+"
+          },
+          "yes": "uncertain",
+          "no": "quote_present_with_source"
+        },
+        "quote_encoded_without_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_encoded",
+            "pattern": "(?s).+"
+          },
+          "yes": {
+            "finding": "no source; quote not checked: the blockquote contains entity encoding outside this structural text check; inspect its decoded text and source.",
+            "at": "item"
+          },
+          "no": "quote_present_without_source"
+        },
+        "quote_present_with_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_present",
+            "pattern": "(?s).+"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "no quote: owner authority needs a nonempty direct blockquote child; read the cited source for its exact words.",
+            "at": "item"
+          }
+        },
+        "quote_present_without_source": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "quote_present",
+            "pattern": "(?s).+"
+          },
+          "yes": {
+            "finding": "no source: owner authority has a quote but no nonempty data-source; locate where the words were written or accepted.",
+            "at": "item"
+          },
+          "no": {
+            "finding": "no source; no quote: owner authority lacks both a nonempty data-source and a nonempty direct blockquote child; locate the source and exact words.",
+            "at": "item"
+          }
+        },
+        "complete_metadata_ambiguous": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "metadata_ambiguous"
+          },
+          "yes": "complete_item",
+          "no": "uncertain"
+        },
+        "metadata_ambiguous": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "metadata_ambiguous",
+            "pattern": "(?s).+"
+          },
+          "yes": "uncertain",
+          "no": "known_authority"
+        }
+      }
+    },
+    "related": [
+      "context"
+    ],
+    "severity": "warn"
+  }
+}
