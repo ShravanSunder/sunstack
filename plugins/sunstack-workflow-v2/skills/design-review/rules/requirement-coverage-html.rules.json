@@ -270,7 +270,7 @@
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "Do the passages in realization_rows name an owner and an interface or flow that carry out the behavior obligation states?"
+          "task": "Do the Program Design passages for this obligation (realization_rows, and for Markdown the passages that name its requirements, the blocks and items that name it, and the blocks that define the mechanisms its rows name) name an owner and an interface or flow that carry out the behavior obligation states?"
         },
         "criteria": {
           "true": "A passage gives the component that owns this obligation's behavior and the interface or flow through which it is supplied, without weakening or contradicting what the obligation states.",

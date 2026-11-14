@@ -27,7 +27,7 @@ Not read: chunked sets (one folder per document), definitions inside Markdown is
 C001–C003 ask the decision model (`jev-latest`), so a run needs the authorized model credential route; never supply a stand-in key. From this repository root, name the design set's folder:
 
 ```sh
-pnpm dlx @sunstack/cli@0.22.0 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
+pnpm dlx @sunstack/cli@0.22.2 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
 ```
 
 The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's request carries the whole obligation list for its linked-complete question, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 49.9k characters.

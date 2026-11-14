@@ -20,7 +20,7 @@ const config = path.join(
   repositoryRoot,
   "plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json",
 );
-const engine = "@sunstack/cli@0.22.0";
+const engine = "@sunstack/cli@0.22.2";
 
 const preparedReportSchema = z
   .object({

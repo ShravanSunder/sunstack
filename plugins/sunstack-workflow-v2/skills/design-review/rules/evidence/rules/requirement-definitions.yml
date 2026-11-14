@@ -178,6 +178,36 @@ rule:
     - kind: pipe_table_row
     - regex: '\bR[0-9]+[a-z]?\b'
 ---
+# A Markdown paragraph that can lead a realization block (not inside a list item).
+id: markdown-block-lead
+language: Markdown
+rule:
+  all:
+    - kind: paragraph
+    - not:
+        inside:
+          kind: list_item
+          stopBy: end
+---
+# A Markdown list item that can lead a run of sibling items.
+id: markdown-item-lead
+language: Markdown
+rule:
+  kind: list_item
+---
+# Where an attached Markdown block ends: the next bold-lead paragraph
+# (**D11 — …**) or bold-lead list item. Headings end a block on their own.
+id: markdown-block-boundary
+language: Markdown
+rule:
+  any:
+    - all:
+        - kind: paragraph
+        - regex: '^\*\*'
+    - all:
+        - kind: list_item
+        - regex: '^[-*+]\s+\*\*'
+---
 # Prose on an HTML Verification page: paragraphs, list items and definitions,
 # where shared observations and checks sections live (not table rows).
 id: html-verification-prose

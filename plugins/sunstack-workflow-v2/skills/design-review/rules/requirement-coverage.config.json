@@ -248,6 +248,59 @@
             ],
             "rule": "markdown-passage",
             "containing": "identifier"
+          },
+          "requirement_ids": {
+            "from": "captures",
+            "regex": "\\bU[0-9]+\\b"
+          },
+          "realization_by_requirement": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-row-passage",
+            "containing": "requirement_ids"
+          },
+          "realization_blocks": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-block-lead",
+            "containing": "identifier",
+            "attach": {
+              "until": "markdown-block-boundary",
+              "max_siblings": 12
+            }
+          },
+          "realization_items": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-item-lead",
+            "containing": "identifier",
+            "attach": {
+              "until": "markdown-block-boundary",
+              "max_siblings": 12
+            }
+          },
+          "realization_names": {
+            "from": "captures",
+            "of": "realization_rows",
+            "regex": "`([A-Z][A-Za-z0-9]+)`"
+          },
+          "realization_by_name": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-block-lead",
+            "containing": "realization_names",
+            "attach": {
+              "until": "markdown-block-boundary",
+              "max_siblings": 12
+            }
           }
         }
       },

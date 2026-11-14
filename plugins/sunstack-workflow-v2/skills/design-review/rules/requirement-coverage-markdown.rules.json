@@ -267,11 +267,15 @@
           "context": [
             "identifier",
             "obligation_body",
+            "realization_by_requirement",
+            "realization_blocks",
+            "realization_items",
+            "realization_by_name",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "Do the passages in realization_rows name an owner and an interface or flow that carry out the behavior obligation states?"
+          "task": "Do the Program Design passages for this obligation (realization_rows, and for Markdown the passages that name its requirements, the blocks and items that name it, and the blocks that define the mechanisms its rows name) name an owner and an interface or flow that carry out the behavior obligation states?"
         },
         "criteria": {
           "true": "A passage gives the component that owns this obligation's behavior and the interface or flow through which it is supplied, without weakening or contradicting what the obligation states.",
@@ -310,6 +314,38 @@
           "mechanical_check": {
             "tool": "complete",
             "field": "realization_rows"
+          },
+          "yes": "by_requirement_read",
+          "no": "uncertain"
+        },
+        "by_requirement_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_by_requirement"
+          },
+          "yes": "blocks_read",
+          "no": "uncertain"
+        },
+        "blocks_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_blocks"
+          },
+          "yes": "items_read",
+          "no": "uncertain"
+        },
+        "items_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_items"
+          },
+          "yes": "by_name_read",
+          "no": "uncertain"
+        },
+        "by_name_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_by_name"
           },
           "yes": "realizes",
           "no": "uncertain"
