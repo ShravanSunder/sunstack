@@ -12,7 +12,7 @@ import {
 
 // presentation-html's nudges pin their own released CLI, independently of the
 // shared skill-rule engine in package.json.
-export const presentationHtmlEngine = "@sunstack/cli@0.21.0";
+export const presentationHtmlEngine = "@sunstack/cli@0.21.1";
 export const presentationHtmlConfig = path.join(
   repositoryRoot,
   "plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json",
