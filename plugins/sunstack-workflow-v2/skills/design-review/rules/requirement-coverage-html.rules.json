@@ -385,6 +385,25 @@
       ]
     },
     "questions": {
+      "linked_complete": {
+        "type": "noul",
+        "instructions": {
+          "check": "linked_obligations",
+          "against": "all_obligations",
+          "context": [
+            "identifier",
+            "requirement",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "Does linked_obligations include every obligation in all_obligations whose behavior serves requirement?"
+        },
+        "criteria": {
+          "true": "Every obligation in all_obligations that delivers an outcome or limit of the requirement is also in linked_obligations (it cites the requirement's id).",
+          "false": "Some obligation in all_obligations delivers an outcome or limit of the requirement but is not in linked_obligations, because it doesn't cite the requirement's id."
+        }
+      },
       "accounted": {
         "type": "noul",
         "instructions": {
@@ -538,8 +557,27 @@
             "field": "linked_obligations",
             "pattern": "(?s).*"
           },
-          "yes": "is_accounted",
+          "yes": "all_read",
           "no": "uncertain"
+        },
+        "all_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "all_obligations"
+          },
+          "yes": "links_complete",
+          "no": "uncertain"
+        },
+        "links_complete": {
+          "ask": "linked_complete",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "is_accounted",
+          "no": {
+            "finding": "Worth checking: an obligation that serves this requirement may not cite its id, so Verification Design can't be followed to it by id. Find which Specification obligations serve this requirement, and decide whether they should cite it and be accounted for in its Verification rows. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
         },
         "is_accounted": {
           "ask": "accounted",
@@ -600,7 +638,8 @@
     },
     "related": [
       "verification",
-      "specification"
+      "specification",
+      "trace_rows"
     ],
     "severity": "warn"
   },

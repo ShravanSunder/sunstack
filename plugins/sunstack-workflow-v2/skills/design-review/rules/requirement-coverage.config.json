@@ -288,6 +288,7 @@
   "limits": {
     "evidence_max_chars": 60000,
     "request_max_chars": 131072,
+    "max_input_tokens_per_request": 64000,
     "max_model_requests": 400,
     "max_matches": 20000
   }
