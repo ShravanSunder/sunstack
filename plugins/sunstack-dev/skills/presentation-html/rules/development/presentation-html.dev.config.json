@@ -117,20 +117,20 @@
           },
           "preceding_text": {
             "from": "section_prefix",
-            "kind": "outline"
+            "kind": "governing_section"
           },
           "preceding_html_pictures": {
             "from": "inside",
             "kind": "html_picture",
             "scope": {
-              "section_prefix": "outline"
+              "section_prefix": "governing_section"
             }
           },
           "preceding_island_pictures": {
             "from": "inside",
             "kind": "island_picture",
             "scope": {
-              "section_prefix": "outline"
+              "section_prefix": "governing_section"
             }
           },
           "island_heading_before": {
@@ -315,6 +315,19 @@
             "count": 1
           }
         }
+      },
+      "governing_section": {
+        "html_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ],
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "fields": {}
       }
     }
   },

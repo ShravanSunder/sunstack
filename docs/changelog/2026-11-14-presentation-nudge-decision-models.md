@@ -8,6 +8,8 @@ The long-table nudge (M004/M005) no longer tells the author to "split it or show
 
 Proven: the development config checks with five asking rules; every owner-labelled development case (POC 4's 30 choice rulings and the rev.3/rev.4 Part 4 fix, 42 cases) prepares on sunstack 0.21.1 without sending, and reads to its label on the desk check. The active nudges' tests pass with the new message.
 
+The nudges pin `@sunstack/cli@0.22.1`; M001 reads pictures from its governing h1/h2 section (`levels`), counting only those in the decision's own part.
+
 Not proven: any model answer. Development and held-out runs, independent labels for the other candidates, and a pre-run review come first; the active rules stay the baseline.
 
 Validation: `pnpm --dir tests/skills test` with the private picture inputs 33 files / 323 passed, exit 0 (one earlier full run hit the known shared-CLI flake in 4 unrelated skill-authoring tests); `tsc --noEmit`, oxfmt and oxlint clean; `claude plugin validate .` passed; both configs `--check` exit 0. Installed caches have not been refreshed.

@@ -36,7 +36,8 @@
           "decision": "no: agent and model choice is procedure",
           "current_model": "not asked"
         }
-      ]
+      ],
+      "decision_part": "preceding_text runs from the governing h1 or h2 heading to the choice, in page order, so it can hold several decisions under their own headings. A decision's own part is its own heading and any subsections that belong to the same decision, such as 'today' and 'the options' under one decision's heading. A picture under another decision's heading belongs to that decision, even when it happens to draw this subject."
     },
     "questions": {
       "owner_design_decision": {
@@ -65,13 +66,14 @@
             "preceding_island_pictures",
             "preceding_text",
             "reference.current_model",
+            "reference.decision_part",
             "reference.examples"
           ],
-          "task": "Does a picture in preceding_html_pictures or preceding_island_pictures draw the current model for what control decides: what exists today for that subject, its parts, who owns what, and the path that matters?"
+          "task": "Does a picture in this decision's own part of preceding_text, from preceding_html_pictures or preceding_island_pictures, draw the current model for what control decides: what exists today for that subject, its parts, who owns what, and the path that matters?"
         },
         "criteria": {
-          "true": "At least one of those pictures draws what exists today for the subject control decides, or the mechanism the assumption in control is about.",
-          "false": "No picture draws what exists today for that subject: each shows another subject, only the options, only a proposed future, or decoration."
+          "true": "At least one picture within this decision's own part of preceding_text, as reference.decision_part defines it, draws what exists today for the subject control decides, or the mechanism the assumption in control is about.",
+          "false": "No picture in this decision's own part draws what exists today for that subject: each there shows another subject, only the options, only a proposed future, or decoration, or the only drawing of the subject sits under another decision's heading."
         }
       }
     },
@@ -153,7 +155,7 @@
           },
           "yes": "model_drawn",
           "no": {
-            "finding": "No picture comes before this choice in its own heading section; check whether the current model is drawn under another heading or still needs drawing, then decide.",
+            "finding": "No picture comes before this choice in its decision's part of the page; check whether the current model is drawn under another heading or still needs drawing, then decide.",
             "at": "control"
           }
         },

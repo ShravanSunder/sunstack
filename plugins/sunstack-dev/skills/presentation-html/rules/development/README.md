@@ -6,7 +6,7 @@ Nothing here is switched on. Each bar is a provisional 0.7 / 0.3 placeholder, to
 
 ## M001 picture before choice
 
-- **State:** the choice (`control`), its heading path, the section text before it (`preceding_text`) and the content of every HTML and island picture before it in its own heading section. A decision whose drawing sits under a sibling subsection of the same decision needs the governing (h1/h2) section as scope; that waits for an engine release that can select sections by heading level.
+- **State:** the choice (`control`), its heading path, the text before it from its governing h1/h2 section (`preceding_text`, in page order), and the content of every HTML and island picture in that prefix (sunstack 0.22.1 `levels: [1, 2]`). The relevance question counts only pictures in this decision's own part of that prefix, so a drawing under a sibling subsection of the same decision counts and one under another decision's heading doesn't. The heading-boundary checks still use the nearest section.
 - **Questions (one request):** `owner_design_decision`, whether the choice settles a design decision for the owner or confirms or rejects an assumption the design or its proof rests on; `current_model_drawn`, whether a preceding picture draws what exists today for that subject.
 - **Tree:** heading-boundary and completeness checks end `uncertain` as before; not a design decision → `not_applicable`; no picture before it → nudge; a picture that doesn't draw the current model → nudge; drawn and fully read → pass; any in-between answer → `uncertain`.
 
@@ -24,7 +24,7 @@ Nothing here is switched on. Each bar is a provisional 0.7 / 0.3 placeholder, to
 
 ## M005 long-detail table (islands)
 
-Same questions as M004. Held: an island table can't yet read the HTML disclosure or heading around it (sunstack 0.21.1 refuses cross-language `enclosing`); it waits for the engine release that adds it.
+Same questions as M004. Held: an island table can't yet read the HTML disclosure or heading around it (sunstack 0.21.1 refused cross-language `enclosing`; 0.22.0 adds it, and M005 is rebuilt on it next).
 
 ## Proof
 
