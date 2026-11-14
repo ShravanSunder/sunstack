@@ -271,6 +271,20 @@
           "closed_disclosure": {
             "from": "enclosing",
             "rule": "html-closed-disclosure"
+          },
+          "section_before": {
+            "from": "section_prefix",
+            "kind": "governing_section"
+          },
+          "section_blocks": {
+            "from": "inside",
+            "kind": "html_section_block",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
           }
         }
       },

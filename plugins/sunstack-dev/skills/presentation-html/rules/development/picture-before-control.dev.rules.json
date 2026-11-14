@@ -4,7 +4,7 @@
     "evidence": "choice",
     "reference": {
       "decision_scope": "A design decision for the owner settles or changes something about the design: a domain or storage boundary (what is stored, where, who owns it, what it means), architecture, a contract between parts, product behavior, the shape of the design (how it decomposes and which abstractions carry weight), a correction that would change any of these, or a proposal to split one deliverable into several PRs or change an agreed PR shape. Procedure is not a design decision: sequencing, grouping or order inside an agreed PR shape, agent or model choice, review rounds and where work lives. Neither is a reader's rating, preference or feedback that changes no design.",
-      "current_model": "The current model is a drawing of what exists today for the subject the decision is about: its parts, who owns what, and the path that matters. A drawing of only the options, only the proposed future, a different subject, or decoration is not the current model. Prose describing today's system is not a drawing.",
+      "current_model": "The current model is a drawing of what exists today for the subject the decision is about: its parts, who owns what, and the path that matters. When the page marks one option as what exists today (as built, current, keep as is), a drawing of that option draws the current model. A drawing of only the options when none is marked as today, only the proposed future, a different subject, or decoration is not the current model. Prose describing today's system is not a drawing.",
       "examples": [
         {
           "text": "Choice: 'Where should uploaded invoices be stored: keep them in the app database, or move them to object storage?' Before it: a flowchart of today's path from the upload form through the API into the invoices table.",
@@ -15,6 +15,11 @@
           "text": "Choice: 'Approve the new cache layer?' Before it: only a diagram of the proposed cache in front of the database.",
           "decision": "yes, architecture",
           "current_model": "no: it draws only the proposed future, not what exists today"
+        },
+        {
+          "text": "Choice: 'Which retry policy should the mail sender use? A. Retry three times, then drop (current). B. Retry with backoff for a day. C. Queue for manual resend.' Before it: one flowchart per option, the first labelled as today's behavior.",
+          "decision": "yes, product behavior",
+          "current_model": "yes: the drawing of option A, which the page marks as current, draws what exists today"
         },
         {
           "text": "Choice: 'Which date format should the export use?' Before it: a diagram of the deploy pipeline.",
@@ -72,8 +77,8 @@
           "task": "Does a picture in this decision's own part of preceding_text, from preceding_html_pictures or preceding_island_pictures, draw the current model for what control decides: what exists today for that subject, its parts, who owns what, and the path that matters?"
         },
         "criteria": {
-          "true": "At least one picture within this decision's own part of preceding_text, as reference.decision_part defines it, draws what exists today for the subject control decides, or the mechanism the assumption in control is about.",
-          "false": "No picture in this decision's own part draws what exists today for that subject: each there shows another subject, only the options, only a proposed future, or decoration, or the only drawing of the subject sits under another decision's heading."
+          "true": "At least one picture within this decision's own part of preceding_text, as reference.decision_part defines it, draws what exists today for the subject control decides, or the mechanism the assumption in control is about, including a drawing of an option the page marks as what exists today.",
+          "false": "No picture in this decision's own part draws what exists today for that subject: each there shows another subject, only options none of which the page marks as what exists today, only a proposed future, or decoration, or the only drawing of the subject sits under another decision's heading."
         }
       }
     },

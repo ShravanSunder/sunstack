@@ -7,24 +7,24 @@ Nothing here is switched on. One bar comes from development labels on both sides
 ## M001 picture before choice
 
 - **State:** the choice (`control`), its heading path, the text before it from its governing h1/h2 section (`preceding_text`, in page order), and the content of every HTML and island picture in that prefix (sunstack 0.22.1 `levels: [1, 2]`). The relevance question counts only pictures in this decision's own part of that prefix, so a drawing under a sibling subsection of the same decision counts and one under another decision's heading doesn't. The heading-boundary checks still use the nearest section.
-- **Questions (one request):** `owner_design_decision`, whether the choice settles a design decision for the owner or confirms or rejects an assumption the design or its proof rests on; `current_model_drawn`, whether a preceding picture draws what exists today for that subject.
+- **Questions (one request):** `owner_design_decision`, whether the choice settles a design decision for the owner or confirms or rejects an assumption the design or its proof rests on; `current_model_drawn`, whether a preceding picture draws what exists today for that subject; a drawing of an option the page marks as what exists today (as built, current) counts.
 - **Tree:** heading-boundary and completeness checks end `uncertain` as before; not a design decision → `not_applicable`; no picture before it → nudge; a picture that doesn't draw the current model → nudge; drawn and fully read → pass; any in-between answer → `uncertain`.
 
 ## M002, M003 section view
 
 - **State:** the section's own content as raw blocks in source order (`blocks`, so a table or diagram keeps its markup and place), the Markdown blocks of any island in the section (`island_blocks`; an island wholly inside the section appears both raw in `blocks` and here, so the model keeps both the HTML/island order and the island's Markdown structure), its heading, and its island views. A section ends at the next heading of any level. Prose lists feed only the word count; view lists only the presence check.
-- **Questions:** `needs_view`, whether the section explains how parts relate in a way the reader has to follow, rather than points that each stand alone (scope items, open questions, status, constraints, quotations), simple facts or an opening summary; `views_carry`, whether each relationship the section explains in detail has a view next to its passage (one only named in passing needs none).
+- **Questions:** `needs_view`, whether the section explains how parts relate in a way the reader has to follow. A list is judged by what its points say: a run of assumptions, obligations or conditions whose points say how parts depend on or constrain each other counts, while points each about one thing (scope items, open questions, status, independent constraints, quotations), a single link stated once, simple facts or an opening summary don't. `views_carry`, whether each relationship the section explains in detail has a view next to its passage (one only named in passing needs none); a table shows what its rows and columns set side by side, not a path written out inside one cell.
 - **Tree:** no content block at all in the section's own content → `not_applicable`; no relationship → pass; a relationship and no view → nudge with the word count; views that don't carry it → nudge; carried and fully read → pass.
 
 ## M004 long-detail table (HTML)
 
-- **State:** the table, its lead-in paragraph, its heading path, and the closed `<details>` it sits in, if any.
+- **State:** the table, its lead-in paragraph, its heading path, the closed `<details>` it sits in, if any, the page from its governing h1/h2 heading up to the table (`section_before`), and the table's own section as raw blocks in order, including what follows it (`section_blocks`).
 - **Questions:** `optional_detail` (depth a reader can skip and still follow the page: history, evidence, receipts, provenance, trace indexes; not the comparisons, contracts or failure cases the reader must check), `long_detail` (long enough to hold up the point) and `failure_cases` (states failure cases or thresholds).
 - **Tree:** in a closed disclosure → nudge only if it hides failure cases or thresholds; in the main path → nudge only when it is both optional and long, with the row count; otherwise pass.
 
 ## M005 long-detail table (islands)
 
-Same questions, reference and tree as M004. Its state adds the HTML around the island table through cross-language `enclosing` (sunstack 0.22.0+): the closed `<details>` it sits in, if any, and its HTML heading path beside its own Markdown heading path.
+Same questions and tree as M004, without M004's section fields and the sentence of its reference that reads them. Its state adds the HTML around the island table through cross-language `enclosing` (sunstack 0.22.0+): the closed `<details>` it sits in, if any, and its HTML heading path beside its own Markdown heading path.
 
 ## Proof
 
