@@ -405,11 +405,11 @@
             "lead_in",
             "reference.detail"
           ],
-          "task": "Is table long enough that reading it in the main path holds up the section's point, the way a wall of text would?"
+          "task": "Is table long enough that reading or scanning it in the main path holds up the section's point, the way a wall of text would?"
         },
         "criteria": {
-          "true": "Its rows carry sentence-length text in some columns, so reading it takes as long as several paragraphs and holds up the point the way a wall of text would.",
-          "false": "The table is short, or quick to scan because every cell is an id, a name, a number or a short phrase, even across a dozen or more rows."
+          "true": "Taking the table in means wading through a lot relative to its point: many entries, dense cells, or both, whatever the cells hold.",
+          "false": "The table is short or compact enough to take in quickly relative to its point, such as a small matrix of ids or short entries."
         }
       },
       "failure_cases": {
@@ -420,11 +420,11 @@
             "lead_in",
             "reference.detail"
           ],
-          "task": "Does table set out failure cases or their thresholds as its content: when something fails or is refused, and what happens then, rather than rationale, gains or costs that mention a failure in passing?"
+          "task": "Does table set out failure cases or their thresholds as its content, rather than rationale or an option's gains and costs that mention a failure in passing?"
         },
         "criteria": {
-          "true": "Rows or cells of the table state when something fails or is refused, or the limits at which it does, and what happens then.",
-          "false": "The table names no failure case or threshold, or mentions one only in passing within rationale, an option's gains and costs, or a description."
+          "true": "Rows or cells of the table state cases where something fails or is refused, or the limits at which it does.",
+          "false": "The table names no failure case or threshold, or mentions one only in passing within rationale or an option's gains and costs."
         }
       }
     },
@@ -547,11 +547,11 @@
             "lead_in",
             "reference.detail"
           ],
-          "task": "Is table long enough that reading it in the main path holds up the section's point, the way a wall of text would?"
+          "task": "Is table long enough that reading or scanning it in the main path holds up the section's point, the way a wall of text would?"
         },
         "criteria": {
-          "true": "Its rows carry sentence-length text in some columns, so reading it takes as long as several paragraphs and holds up the point the way a wall of text would.",
-          "false": "The table is short, or quick to scan because every cell is an id, a name, a number or a short phrase, even across a dozen or more rows."
+          "true": "Taking the table in means wading through a lot relative to its point: many entries, dense cells, or both, whatever the cells hold.",
+          "false": "The table is short or compact enough to take in quickly relative to its point, such as a small matrix of ids or short entries."
         }
       },
       "failure_cases": {
@@ -562,11 +562,11 @@
             "lead_in",
             "reference.detail"
           ],
-          "task": "Does table set out failure cases or their thresholds as its content: when something fails or is refused, and what happens then, rather than rationale, gains or costs that mention a failure in passing?"
+          "task": "Does table set out failure cases or their thresholds as its content, rather than rationale or an option's gains and costs that mention a failure in passing?"
         },
         "criteria": {
-          "true": "Rows or cells of the table state when something fails or is refused, or the limits at which it does, and what happens then.",
-          "false": "The table names no failure case or threshold, or mentions one only in passing within rationale, an option's gains and costs, or a description."
+          "true": "Rows or cells of the table state cases where something fails or is refused, or the limits at which it does.",
+          "false": "The table names no failure case or threshold, or mentions one only in passing within rationale or an option's gains and costs."
         }
       }
     },
