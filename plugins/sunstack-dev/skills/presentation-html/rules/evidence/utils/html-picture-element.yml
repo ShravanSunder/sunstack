@@ -1,0 +1,18 @@
+# A picture in HTML: any diagram or image element outside <template> content.
+# Shared by the picture-before-choice nudge and the section-picture nudge.
+id: html-picture-element
+language: Html
+rule:
+  kind: element
+  has:
+    any:
+      - kind: start_tag
+      - kind: self_closing_tag
+    regex: '(?i)^<(?:figure|img|picture|svg|canvas|ex-mermaid|ex-diagram|ex-flow|ex-board|ex-trace|ex-tree|ex-call-stack)(?:\s|/?>)'
+  not:
+    inside:
+      stopBy: end
+      kind: element
+      has:
+        kind: start_tag
+        regex: '(?i)^<template(?:\s|>)'

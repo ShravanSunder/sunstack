@@ -1,0 +1,83 @@
+# Prose, pictures and tables measured per heading section (walls-of-text nudge).
+# Prose is the reader's running text: paragraphs, lists, choices and plain
+# callouts, asides and quotes. A block nested in a list, table, code, picture or
+# choice is measured once, through its outer block. A callout, aside or quote that
+# holds a list, table, code or picture is measured through those inner blocks.
+id: html-prose
+language: Html
+rule:
+  all:
+    - kind: element
+      regex: '^<(?:p|ul|ol|ex-choice|ex-callout|aside|blockquote)(?:\s|>)'
+    - not:
+        inside:
+          stopBy: end
+          any:
+            - matches: prose-interrupting-block
+            - all:
+                - matches: plain-text-container
+                - not:
+                    has:
+                      stopBy: end
+                      matches: prose-interrupting-block
+    - not:
+        all:
+          - matches: plain-text-container
+          - has:
+              stopBy: end
+              matches: prose-interrupting-block
+utils:
+  prose-interrupting-block:
+    kind: element
+    regex: '^<(?:ul|ol|table|pre|ex-mermaid|ex-diagram|svg|figure|ex-choice)(?:\s|>)'
+  plain-text-container:
+    kind: element
+    regex: '^<(?:ex-callout|aside|blockquote)(?:\s|>)'
+---
+# Markdown prose inside configured islands: top-level paragraphs and lists.
+id: markdown-prose
+language: Markdown
+rule:
+  all:
+    - any:
+        - kind: paragraph
+        - kind: list
+    - not:
+        inside:
+          stopBy: end
+          any:
+            - kind: list
+            - kind: pipe_table
+            - kind: fenced_code_block
+---
+# The shared HTML picture definition, as its own kind.
+id: html-picture
+language: Html
+rule:
+  matches: html-picture-element
+---
+id: html-table
+language: Html
+rule:
+  kind: element
+  regex: '(?i)^<table(?:\s|>)'
+---
+# Every row counts, header rows included.
+id: html-table-row
+language: Html
+rule:
+  kind: element
+  regex: '(?i)^<tr(?:\s|>)'
+---
+id: markdown-table
+language: Markdown
+rule:
+  kind: pipe_table
+---
+# Header and body rows count; the delimiter row does not.
+id: markdown-table-row
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_header
+    - kind: pipe_table_row
