@@ -1,0 +1,152 @@
+{
+  "C001": {
+    "name": "requirement-coverage.html.specification",
+    "evidence": "html_requirement",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "specification"
+          },
+          "yes": "id_mentioned",
+          "no": "not_applicable"
+        },
+        "id_mentioned": {
+          "mechanical_check": {
+            "tool": "contains_field",
+            "field": "specification",
+            "needle": "identifier"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this requirement's id never appears on the Specification page beside it. The page may address the need without naming the id, or the need may have no Specification home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "C002": {
+    "name": "requirement-coverage.html.program-design",
+    "evidence": "html_requirement",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "program_design"
+          },
+          "yes": "id_mentioned",
+          "no": "not_applicable"
+        },
+        "id_mentioned": {
+          "mechanical_check": {
+            "tool": "contains_field",
+            "field": "program_design",
+            "needle": "identifier"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this requirement's id never appears on the Program Design page beside it. The page may address the need without naming the id, or the need may have no Program Design home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "C003": {
+    "name": "requirement-coverage.html.verification",
+    "evidence": "html_requirement",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "verification"
+          },
+          "yes": "id_mentioned",
+          "no": "not_applicable"
+        },
+        "id_mentioned": {
+          "mechanical_check": {
+            "tool": "contains_field",
+            "field": "verification",
+            "needle": "identifier"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this requirement's id never appears on the Verification Design page beside it. The page may address the need without naming the id, or the need may have no Verification Design home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
+            "at": "identifier"
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "C004": {
+    "name": "requirement-coverage.html.specification-page",
+    "evidence": "html_requirements_page",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "specification"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this design set has no Specification page beside its Requirements page (looked for specification.html). If it isn't written yet, name it once as not yet written; its requirement checks were skipped. Read sunstack-dev's shared-references/design-documents.md for the page names."
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "C005": {
+    "name": "requirement-coverage.html.program-design-page",
+    "evidence": "html_requirements_page",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "program_design"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this design set has no Program Design page beside its Requirements page (looked for program-design.html). If it isn't written yet, name it once as not yet written; its requirement checks were skipped. Read sunstack-dev's shared-references/design-documents.md for the page names."
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "C006": {
+    "name": "requirement-coverage.html.verification-page",
+    "evidence": "html_requirements_page",
+    "decision": {
+      "start": "page_present",
+      "steps": {
+        "page_present": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "verification"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: this design set has no Verification Design page beside its Requirements page (looked for verification.html, verification-design.html). If it isn't written yet, name it once as not yet written; its requirement checks were skipped. Read sunstack-dev's shared-references/design-documents.md for the page names."
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}
