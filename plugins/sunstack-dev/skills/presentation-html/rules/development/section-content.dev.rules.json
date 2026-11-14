@@ -36,7 +36,7 @@
           "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
         }
       ],
-      "next_to": "Next to means the view sits directly before or after the passage it supports, with no point between them that the view doesn't draw. A run of points that one view draws together, such as definitions whose relationships one entity diagram shows, counts as one passage, and the view sits next to it when it comes right before or after that run."
+      "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
     },
     "questions": {
       "needs_view": {
@@ -70,8 +70,8 @@
           "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
         },
         "criteria": {
-          "true": "Each such relationship is shown by a view placed next to the passage that explains it, as reference.next_to defines.",
-          "false": "At least one such relationship has no view that shows it, or the view that shows it sits away from its passage, with a point the view doesn't draw between them."
+          "true": "Each such relationship is shown by a view a reader finds where they read about it, as reference.next_to defines.",
+          "false": "At least one such relationship has no view that shows it, or its view sits away from its passage as reference.next_to defines: past unrelated points or other views, or far enough that a reader has to hunt for it."
         }
       }
     },
@@ -201,7 +201,7 @@
           "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
         }
       ],
-      "next_to": "Next to means the view sits directly before or after the passage it supports, with no point between them that the view doesn't draw. A run of points that one view draws together, such as definitions whose relationships one entity diagram shows, counts as one passage, and the view sits next to it when it comes right before or after that run."
+      "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
     },
     "questions": {
       "needs_view": {
@@ -235,8 +235,8 @@
           "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
         },
         "criteria": {
-          "true": "Each such relationship is shown by a view placed next to the passage that explains it, as reference.next_to defines.",
-          "false": "At least one such relationship has no view that shows it, or the view that shows it sits away from its passage, with a point the view doesn't draw between them."
+          "true": "Each such relationship is shown by a view a reader finds where they read about it, as reference.next_to defines.",
+          "false": "At least one such relationship has no view that shows it, or its view sits away from its passage as reference.next_to defines: past unrelated points or other views, or far enough that a reader has to hunt for it."
         }
       }
     },
