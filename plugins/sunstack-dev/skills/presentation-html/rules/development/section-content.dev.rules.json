@@ -3,7 +3,7 @@
     "name": "presentation-html.section-view.model",
     "evidence": "html_section",
     "reference": {
-      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it.",
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An answer-first summary that names a point the page explains, with its view, under a later heading leads with the answer and needs no view of its own.",
       "examples": [
         {
           "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
@@ -29,44 +29,49 @@
           "text": "Prose: compares three storage options on cost, latency and durability. Views: a table with one row per option and those three columns.",
           "needs_view": "yes: the same questions for several items",
           "views_carry": "yes: the table carries the comparison"
+        },
+        {
+          "text": "Prose: a first paragraph explains how a request passes through the gateway, the auth service and the orders service; three paragraphs follow about the release checklist and who signs it off; then a sequence diagram of the request path ends the section.",
+          "needs_view": "yes: a path through several parts",
+          "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
         }
-      ]
+      ],
+      "next_to": "Next to means the view sits directly before or after the passage it supports, with no point between them that the view doesn't draw. A run of points that one view draws together, such as definitions whose relationships one entity diagram shows, counts as one passage, and the view sits next to it when it comes right before or after that run."
     },
     "questions": {
       "needs_view": {
         "type": "noul",
         "instructions": {
-          "check": "html_prose",
+          "check": "content",
           "context": [
-            "markdown_prose",
             "heading",
             "reference.view_jobs",
             "reference.examples"
           ],
-          "task": "Does the section's prose, in html_prose and markdown_prose, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+          "task": "Does the section's text, read in order in content, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
         },
         "criteria": {
-          "true": "The prose explains at least one relationship of a kind reference.view_jobs names, such as a path, a flow, states and transitions, ownership, or the same questions answered for several items.",
-          "false": "The prose states only simple facts or an interpretation; nothing in it is a relationship of a kind reference.view_jobs names."
+          "true": "The text explains at least one relationship of a kind reference.view_jobs names, whether in paragraphs, lists or table cells: a path, a flow, states and transitions, ownership, the same questions answered for several items, and so on.",
+          "false": "The text states only simple facts, an interpretation or an answer-first summary of a point drawn later; nothing in it is a relationship of a kind reference.view_jobs names."
         }
       },
       "views_carry": {
         "type": "noul",
         "instructions": {
-          "check": "html_views",
-          "against": "html_prose",
+          "check": "content",
+          "against": "html_views",
           "context": [
             "island_views",
-            "markdown_prose",
             "heading",
             "reference.view_jobs",
+            "reference.next_to",
             "reference.examples"
           ],
-          "task": "Do the section's views, in html_views and island_views, show every relationship of a kind reference.view_jobs names that the section's prose explains?"
+          "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
         },
         "criteria": {
-          "true": "Each such relationship the prose explains is shown by a view in this section.",
-          "false": "At least one such relationship the prose explains is shown by no view in this section: the views show other things, or show only part of it."
+          "true": "Each such relationship is shown by a view placed next to the passage that explains it, as reference.next_to defines.",
+          "false": "At least one such relationship has no view that shows it, or the view that shows it sits away from its passage, with a point the view doesn't draw between them."
         }
       }
     },
@@ -134,7 +139,7 @@
           "no_at_or_below": 0.3,
           "yes": "views_complete",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words; this section's views don't show a relationship its prose explains; check which point lacks a view next to it, then decide.",
+            "finding": "{{word_count:html_prose,markdown_prose}} words; a relationship this section's prose explains has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
             "at": "heading"
           },
           "uncertain": "uncertain"
@@ -163,7 +168,7 @@
     "name": "presentation-html.island-section-view.model",
     "evidence": "markdown_section",
     "reference": {
-      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it.",
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An answer-first summary that names a point the page explains, with its view, under a later heading leads with the answer and needs no view of its own.",
       "examples": [
         {
           "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
@@ -189,44 +194,49 @@
           "text": "Prose: compares three storage options on cost, latency and durability. Views: a table with one row per option and those three columns.",
           "needs_view": "yes: the same questions for several items",
           "views_carry": "yes: the table carries the comparison"
+        },
+        {
+          "text": "Prose: a first paragraph explains how a request passes through the gateway, the auth service and the orders service; three paragraphs follow about the release checklist and who signs it off; then a sequence diagram of the request path ends the section.",
+          "needs_view": "yes: a path through several parts",
+          "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
         }
-      ]
+      ],
+      "next_to": "Next to means the view sits directly before or after the passage it supports, with no point between them that the view doesn't draw. A run of points that one view draws together, such as definitions whose relationships one entity diagram shows, counts as one passage, and the view sits next to it when it comes right before or after that run."
     },
     "questions": {
       "needs_view": {
         "type": "noul",
         "instructions": {
-          "check": "html_prose",
+          "check": "content",
           "context": [
-            "markdown_prose",
             "heading",
             "reference.view_jobs",
             "reference.examples"
           ],
-          "task": "Does the section's prose, in html_prose and markdown_prose, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+          "task": "Does the section's text, read in order in content, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
         },
         "criteria": {
-          "true": "The prose explains at least one relationship of a kind reference.view_jobs names, such as a path, a flow, states and transitions, ownership, or the same questions answered for several items.",
-          "false": "The prose states only simple facts or an interpretation; nothing in it is a relationship of a kind reference.view_jobs names."
+          "true": "The text explains at least one relationship of a kind reference.view_jobs names, whether in paragraphs, lists or table cells: a path, a flow, states and transitions, ownership, the same questions answered for several items, and so on.",
+          "false": "The text states only simple facts, an interpretation or an answer-first summary of a point drawn later; nothing in it is a relationship of a kind reference.view_jobs names."
         }
       },
       "views_carry": {
         "type": "noul",
         "instructions": {
-          "check": "html_views",
-          "against": "html_prose",
+          "check": "content",
+          "against": "html_views",
           "context": [
             "island_views",
-            "markdown_prose",
             "heading",
             "reference.view_jobs",
+            "reference.next_to",
             "reference.examples"
           ],
-          "task": "Do the section's views, in html_views and island_views, show every relationship of a kind reference.view_jobs names that the section's prose explains?"
+          "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
         },
         "criteria": {
-          "true": "Each such relationship the prose explains is shown by a view in this section.",
-          "false": "At least one such relationship the prose explains is shown by no view in this section: the views show other things, or show only part of it."
+          "true": "Each such relationship is shown by a view placed next to the passage that explains it, as reference.next_to defines.",
+          "false": "At least one such relationship has no view that shows it, or the view that shows it sits away from its passage, with a point the view doesn't draw between them."
         }
       }
     },
@@ -294,7 +304,7 @@
           "no_at_or_below": 0.3,
           "yes": "views_complete",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words; this section's views don't show a relationship its prose explains; check which point lacks a view next to it, then decide.",
+            "finding": "{{word_count:html_prose,markdown_prose}} words; a relationship this section's prose explains has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
             "at": "heading"
           },
           "uncertain": "uncertain"
@@ -323,7 +333,7 @@
     "name": "presentation-html.long-detail-table.model",
     "evidence": "html_table",
     "reference": {
-      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what most readers skip under the current point: rationale, evidence, receipts, inventories or reference data. Content the point rests on stays in view: the exact corresponding facts the reader compares, and failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
+      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what a reader can skip and still follow the page's open questions and conclusions: history and earlier decisions, rationale, evidence, receipts, provenance such as exact quotes behind a summary, inventories, reference data, and trace or index tables that map items the page states in their own sections. That holds even when the table is the whole of its section. Content the reader needs in view stays: the exact corresponding facts a comparison or choice on the page rests on, a contract or core mapping the page is about, and failure cases with their thresholds that the page states nowhere else. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
       "examples": [
         {
           "text": "After 'Each payment error code and the delay before the next attempt:' a table of eight error codes with their delays, which the next paragraph's choice relies on.",
@@ -364,11 +374,11 @@
             "reference.examples",
             "closed_disclosure"
           ],
-          "task": "Is table optional depth that most readers skip under the current point, rather than content the point rests on?"
+          "task": "Is table optional depth that a reader can skip and still follow the page's open questions and conclusions, rather than content the reader needs in view?"
         },
         "criteria": {
-          "true": "The table holds supporting depth: rationale, evidence, receipts, inventories or reference data the section's point doesn't need read.",
-          "false": "The table holds what the point rests on: the exact corresponding facts the reader compares, or failure cases and their thresholds."
+          "true": "The table holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index of items stated in their own sections, even when it is the whole of its section.",
+          "false": "The table holds what the reader must compare or check to follow the page: the exact corresponding facts a comparison or choice rests on, a contract or core mapping the page is about, or failure cases and thresholds stated nowhere else."
         }
       },
       "long_detail": {
@@ -464,7 +474,7 @@
     "name": "presentation-html.long-detail-island-table.model",
     "evidence": "markdown_table",
     "reference": {
-      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what most readers skip under the current point: rationale, evidence, receipts, inventories or reference data. Content the point rests on stays in view: the exact corresponding facts the reader compares, and failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
+      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what a reader can skip and still follow the page's open questions and conclusions: history and earlier decisions, rationale, evidence, receipts, provenance such as exact quotes behind a summary, inventories, reference data, and trace or index tables that map items the page states in their own sections. That holds even when the table is the whole of its section. Content the reader needs in view stays: the exact corresponding facts a comparison or choice on the page rests on, a contract or core mapping the page is about, and failure cases with their thresholds that the page states nowhere else. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
       "examples": [
         {
           "text": "After 'Each payment error code and the delay before the next attempt:' a table of eight error codes with their delays, which the next paragraph's choice relies on.",
@@ -504,11 +514,11 @@
             "reference.detail",
             "reference.examples"
           ],
-          "task": "Is table optional depth that most readers skip under the current point, rather than content the point rests on?"
+          "task": "Is table optional depth that a reader can skip and still follow the page's open questions and conclusions, rather than content the reader needs in view?"
         },
         "criteria": {
-          "true": "The table holds supporting depth: rationale, evidence, receipts, inventories or reference data the section's point doesn't need read.",
-          "false": "The table holds what the point rests on: the exact corresponding facts the reader compares, or failure cases and their thresholds."
+          "true": "The table holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index of items stated in their own sections, even when it is the whole of its section.",
+          "false": "The table holds what the reader must compare or check to follow the page: the exact corresponding facts a comparison or choice rests on, a contract or core mapping the page is about, or failure cases and thresholds stated nowhere else."
         }
       },
       "long_detail": {

@@ -6,20 +6,20 @@ Nothing here is switched on. Each bar is a provisional 0.7 / 0.3 placeholder, to
 
 ## M001 picture before choice
 
-- **State:** the choice (`control`), its heading path, the section text before it (`preceding_text`) and the content of every HTML and island picture before it in its own heading section.
+- **State:** the choice (`control`), its heading path, the section text before it (`preceding_text`) and the content of every HTML and island picture before it in its own heading section. A decision whose drawing sits under a sibling subsection of the same decision needs the governing (h1/h2) section as scope; that waits for an engine release that can select sections by heading level.
 - **Questions (one request):** `owner_design_decision`, whether the choice settles a design decision for the owner or confirms or rejects an assumption the design or its proof rests on; `current_model_drawn`, whether a preceding picture draws what exists today for that subject.
 - **Tree:** heading-boundary and completeness checks end `uncertain` as before; not a design decision → `not_applicable`; no picture before it → nudge; a picture that doesn't draw the current model → nudge; drawn and fully read → pass; any in-between answer → `uncertain`.
 
 ## M002, M003 section view
 
-- **State:** the section's own prose (HTML, and Markdown in islands, counted once), its heading and its own views: pictures, tables, comparisons and stat rows, in HTML and in islands. A section ends at the next heading of any level.
-- **Questions:** `needs_view`, whether the prose explains a relationship the skill's view chooser gives a structured view, rather than only simple facts or an interpretation; `views_carry`, whether the section's views show every such relationship.
+- **State:** the section's own content in source order (`content`, so a view sits where it is on the page), its heading, and its own views: pictures, tables, comparisons, stat rows, cards and code views, in HTML and in islands. A section ends at the next heading of any level. Prose lists feed only the word count in the message.
+- **Questions:** `needs_view`, whether the section's text explains a relationship the skill's view chooser gives a structured view, rather than only simple facts, an interpretation or an answer-first summary; `views_carry`, whether every such relationship has a view that shows it and sits next to the passage it supports.
 - **Tree:** no prose → `not_applicable`; no relationship → pass; a relationship and no view → nudge with the word count; views that don't carry it → nudge; carried and fully read → pass.
 
 ## M004 long-detail table (HTML)
 
 - **State:** the table, its lead-in paragraph, its heading path, and the closed `<details>` it sits in, if any.
-- **Questions:** `optional_detail` (supporting depth rather than what the point rests on), `long_detail` (long enough to hold up the point) and `failure_cases` (states failure cases or thresholds).
+- **Questions:** `optional_detail` (depth a reader can skip and still follow the page: history, evidence, receipts, provenance, trace indexes; not the comparisons, contracts or failure cases the reader must check), `long_detail` (long enough to hold up the point) and `failure_cases` (states failure cases or thresholds).
 - **Tree:** in a closed disclosure → nudge only if it hides failure cases or thresholds; in the main path → nudge only when it is both optional and long, with the row count; otherwise pass.
 
 ## M005 long-detail table (islands)

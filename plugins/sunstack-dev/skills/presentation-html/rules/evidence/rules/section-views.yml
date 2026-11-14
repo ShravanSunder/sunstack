@@ -1,7 +1,8 @@
 # Structured views and placement, for the development decision-model versions
 # of the section and table nudges. A view is a picture (the shared definition) or
-# another structured view the skill's chooser names: a table, a comparison or a
-# stat row. Inside Markdown islands, a picture or a pipe table.
+# another structured view the skill's chooser names: a table, a comparison, a
+# stat row, a card or a code view. Inside Markdown islands, a picture, a pipe table or a
+# fenced code block.
 id: html-view
 language: Html
 rule:
@@ -11,14 +12,14 @@ rule:
         - kind: element
           has:
             kind: start_tag
-            regex: '(?i)^<(?:table|ex-compare|ex-stat)(?:\s|>)'
+            regex: '(?i)^<(?:table|ex-compare|ex-stat|ex-card|pre)(?:\s|>)'
         - not:
             inside:
               stopBy: end
               kind: element
               has:
                 kind: start_tag
-                regex: '(?i)^<(?:template|table|ex-compare)(?:\s|>)'
+                regex: '(?i)^<(?:template|table|ex-compare|ex-card)(?:\s|>)'
 ---
 id: island-view
 language: Markdown
@@ -26,6 +27,7 @@ rule:
   any:
     - matches: island-picture-block
     - kind: pipe_table
+    - kind: fenced_code_block
 utils:
   island-picture-block:
     any:
