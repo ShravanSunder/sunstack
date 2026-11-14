@@ -18,7 +18,7 @@
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -180,7 +180,7 @@
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -342,7 +342,7 @@
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -429,15 +429,16 @@
           "context": [
             "identifier",
             "requirement",
+            "shared_observations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "Is every obligation in all_obligations whose behavior serves requirement accounted for by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation those rows name, or by listing it as unverified?"
+          "task": "Is every obligation in all_obligations whose behavior serves requirement accounted for by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation or checks section in shared_observations that those rows name or refer to, or by listing it as unverified?"
         },
         "criteria": {
-          "true": "Each obligation whose behavior delivers an outcome or limit of the requirement, whether or not it cites the requirement's id, is accounted for by these rows in one of those ways.",
-          "false": "Some obligation whose behavior delivers an outcome or limit of the requirement is accounted for in none of those ways by these rows. An observation that sits only under another requirement's row, and that these rows don't name, does not count."
+          "true": "Each obligation whose behavior delivers an outcome or limit of the requirement, whether or not it cites the requirement's id, is accounted for whole by these rows in one of those ways: every behavior it states has an observation the rows give or point to, or is listed as unverified.",
+          "false": "Some obligation whose behavior delivers an outcome or limit of the requirement is not accounted for whole by these rows: none of those ways covers it, or some behavior it states has no observation the rows give or point to. An observation that sits only under another requirement's row, and that these rows neither name nor point to, does not count."
         }
       },
       "keeps_threshold": {
@@ -449,6 +450,7 @@
             "identifier",
             "requirement",
             "all_obligations",
+            "shared_observations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
@@ -469,6 +471,7 @@
             "identifier",
             "requirement",
             "all_obligations",
+            "shared_observations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
@@ -489,6 +492,7 @@
             "identifier",
             "requirement",
             "all_obligations",
+            "shared_observations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
@@ -509,6 +513,7 @@
             "identifier",
             "requirement",
             "all_obligations",
+            "shared_observations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
@@ -568,6 +573,14 @@
           "mechanical_check": {
             "tool": "complete",
             "field": "trace_rows"
+          },
+          "yes": "shared_read",
+          "no": "uncertain"
+        },
+        "shared_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "shared_observations"
           },
           "yes": "is_accounted",
           "no": "uncertain"

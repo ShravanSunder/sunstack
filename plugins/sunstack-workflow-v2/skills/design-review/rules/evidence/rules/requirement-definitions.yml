@@ -143,6 +143,48 @@ rule:
               kind: list_item
               stopBy: end
 ---
+# A row-level passage in a Markdown page: a table row, a list item, or a paragraph
+# not inside a list item. Unlike markdown-passage it never takes a whole section,
+# so a trace or seam read stays at the row that names the id.
+id: markdown-row-passage
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_row
+    - kind: list_item
+    - all:
+        - kind: paragraph
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+---
+# Prose on an HTML Verification page: paragraphs, list items and definitions,
+# where shared observations and checks sections live (not table rows).
+id: html-verification-prose
+language: Html
+rule:
+  kind: element
+  regex: '^<(li|p|dd|dt)\b'
+---
+# Prose in a Markdown Verification page: list items, and paragraphs not inside a
+# list item (shared observations such as "- **S1. …**" or "Shared observation J1 is …").
+id: markdown-verification-prose
+language: Markdown
+rule:
+  any:
+    - kind: list_item
+    - all:
+        - kind: paragraph
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+        - not:
+            inside:
+              kind: pipe_table
+              stopBy: end
+---
 # A whole HTML Requirements page, for the page-presence rules.
 id: html-requirements-page
 language: Html

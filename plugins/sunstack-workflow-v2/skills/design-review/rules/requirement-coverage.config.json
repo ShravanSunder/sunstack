@@ -83,6 +83,14 @@
             ],
             "rule": "html-passage",
             "containing": "identifier"
+          },
+          "shared_observations": {
+            "from": "document",
+            "path": [
+              "verification.html",
+              "verification-design.html"
+            ],
+            "rule": "html-verification-prose"
           }
         }
       },
@@ -200,8 +208,16 @@
             "path": [
               "program-design.md"
             ],
-            "rule": "markdown-passage",
+            "rule": "markdown-row-passage",
             "containing": "identifier"
+          },
+          "shared_observations": {
+            "from": "document",
+            "path": [
+              "verification.md",
+              "verification-design.md"
+            ],
+            "rule": "markdown-verification-prose"
           }
         }
       },
