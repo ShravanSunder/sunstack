@@ -10,7 +10,7 @@ This is a nudge, not a gate: no completion condition, blocker or pass requiremen
 
 Proven: the mechanical rule's development and unseen-page results recorded in `rules/development-observation.json` and its integration test. The rule checks only that a diagram, figure, image or Mermaid block comes before the control in its section; it does not judge relevance, rendering or a complete decision brief.
 
-Not proven: whether authors actually run the command and act well on its findings; receiver behaviour is untested. The other owner-decision rules remain held.
+Not proven: whether authors actually run the command and act well on its findings; receiver behaviour is untested.
 
 Validation: `pnpm --dir tests/skills test` passed 312/312 when an independent review supplied the external development inputs, and 311 passed with 1 skipped (the private regression) without them; `claude plugin validate .` passed. Both exited 0.
 

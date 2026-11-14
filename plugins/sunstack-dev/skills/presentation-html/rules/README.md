@@ -15,6 +15,6 @@ pnpm dlx @sunstack/cli@0.19.0 lint --config plugins/sunstack-dev/skills/presenta
 
 From another project, use that installed skill's absolute `rules/presentation-html.config.json` path after `--config`, and add `--root "$PWD"`. Named page/folder paths resolve from your current directory. `--report <file>` saves every path and raw source witness. Read the findings, not the exit code: warnings (the nudges) can come with exit 0; exit 1 means an error finding or an explicit warning-limit failure; exit 5 means an uncertain boundary is present and can also carry warnings. No page is automatically changed.
 
-The HTML boundary predicates are those reviewed at `7ec3c2ef`. On 13 Nov 2026, at the owner's direction, the picture list was widened to any type of diagram or image, and Markdown islands moved from a raw-text check to parsed Markdown pieces read through CLI 0.19.0's section-scoped `inside` fields. The public-safe development and held-back aggregates are in `development-observation.json`. O001, O002, C and design-item E remain held in their own explicit configurations.
+The HTML boundary predicates are those reviewed at `7ec3c2ef`. On 13 Nov 2026, at the owner's direction, the picture list was widened to any type of diagram or image, and Markdown islands moved from a raw-text check to parsed Markdown pieces read through CLI 0.19.0's section-scoped `inside` fields. The public-safe development and held-back aggregates are in `development-observation.json`.
 
 B alone pins CLI 0.19.0; the shared skill-rule test engine remains on 0.9.0.
