@@ -1,0 +1,81 @@
+{
+  "rulebook": [
+    {
+      "markdown": "requirement-coverage.md",
+      "rules": "requirement-coverage-html.rules.json"
+    },
+    {
+      "markdown": "requirement-coverage.md",
+      "rules": "requirement-coverage-markdown.rules.json"
+    }
+  ],
+  "marker_prefix": "C",
+  "check": {
+    "files": [
+      "**/requirements.html",
+      "**/requirements.md"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "kinds": {
+      "html_requirement": {
+        "rule": "html-requirement-definition",
+        "fields": {
+          "identifier": {
+            "from": "capture",
+            "regex": "\\sid=[\"'](U[0-9]+)[\"']"
+          },
+          "specification": {
+            "from": "document",
+            "path": "specification.html",
+            "rule": "html-whole-page"
+          },
+          "program_design": {
+            "from": "document",
+            "path": "program-design.html",
+            "rule": "html-whole-page"
+          },
+          "verification": {
+            "from": "document",
+            "path": "verification.html",
+            "rule": "html-whole-page"
+          }
+        }
+      },
+      "markdown_requirement": {
+        "rule": "markdown-requirement-definition",
+        "fields": {
+          "identifier": {
+            "from": "capture",
+            "regex": "^(?:\\|\\s*\\**|#{2,6}\\s+\\**)(U[0-9]+)"
+          },
+          "specification": {
+            "from": "document",
+            "path": "specification.md",
+            "rule": "markdown-whole-page"
+          },
+          "program_design": {
+            "from": "document",
+            "path": "program-design.md",
+            "rule": "markdown-whole-page"
+          },
+          "verification": {
+            "from": "document",
+            "path": "verification.md",
+            "rule": "markdown-whole-page"
+          }
+        }
+      }
+    }
+  },
+  "decision_model": {
+    "model": "typesafe/jev-1.14-20261014"
+  },
+  "limits": {
+    "evidence_max_chars": 1000000,
+    "request_max_chars": 131072,
+    "max_model_requests": 1,
+    "max_matches": 20000
+  }
+}

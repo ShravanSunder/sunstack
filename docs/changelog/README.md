@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-13 Design reviews run the requirement coverage nudge](2026-11-13-requirement-coverage-nudge.md)
 - [2026-11-13 Picture-before-choice nudge counts any diagram or image](2026-11-13-picture-nudge-any-diagram.md)
 - [2026-11-13 HTML authors run the picture-before-choice nudge](2026-11-13-picture-before-choice-nudge.md)
 - [2026-11-13 Work-log pages explain agents' decisions and assumptions](2026-11-13-worklog-component-teaching.md)

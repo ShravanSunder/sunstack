@@ -1,0 +1,28 @@
+# A requirement definition on an HTML Requirements page: any element whose own
+# id attribute is a requirement id, such as <tr id="U1"> or <section id="U3">.
+id: html-requirement-definition
+language: Html
+rule:
+  kind: element
+  regex: '^<[a-zA-Z][a-zA-Z0-9-]*(?:\s+[^>]*?)?\sid=["'']U[0-9]+["'']'
+---
+# A whole HTML page, read for requirement id mentions.
+id: html-whole-page
+language: Html
+rule: {kind: document}
+---
+# A requirement definition in a Markdown Requirements source: a table row whose
+# first cell is the id (| U1 | ...) or a level 2-6 heading that starts with it.
+id: markdown-requirement-definition
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_row
+      regex: '^\|\s*\**U[0-9]+\**\s*\|'
+    - kind: atx_heading
+      regex: '^#{2,6}\s+\**U[0-9]+\b'
+---
+# A whole Markdown source, read for requirement id mentions.
+id: markdown-whole-page
+language: Markdown
+rule: {kind: document}
