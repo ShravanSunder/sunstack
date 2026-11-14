@@ -159,6 +159,25 @@ rule:
               kind: list_item
               stopBy: end
 ---
+# A Program Design trace row in HTML: a table row that names an obligation id.
+# C003 reads every such row, so each serving obligation's seam is in state
+# whether or not the row also names the requirement.
+id: html-trace-row
+language: Html
+rule:
+  all:
+    - kind: element
+      regex: '^<tr\b'
+    - regex: '\bR[0-9]+[a-z]?\b'
+---
+# A Program Design trace row in Markdown: a table row that names an obligation id.
+id: markdown-trace-row
+language: Markdown
+rule:
+  all:
+    - kind: pipe_table_row
+    - regex: '\bR[0-9]+[a-z]?\b'
+---
 # Prose on an HTML Verification page: paragraphs, list items and definitions,
 # where shared observations and checks sections live (not table rows).
 id: html-verification-prose

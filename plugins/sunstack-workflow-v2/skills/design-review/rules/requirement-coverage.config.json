@@ -81,8 +81,7 @@
             "path": [
               "program-design.html"
             ],
-            "rule": "html-passage",
-            "containing": "identifier"
+            "rule": "html-trace-row"
           },
           "shared_observations": {
             "from": "document",
@@ -208,8 +207,7 @@
             "path": [
               "program-design.md"
             ],
-            "rule": "markdown-row-passage",
-            "containing": "identifier"
+            "rule": "markdown-trace-row"
           },
           "shared_observations": {
             "from": "document",
