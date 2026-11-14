@@ -48,22 +48,8 @@ utils:
       - matches: outline-heading
       - not:
           matches: unsupported-boundary-sibling
-  native-picture-element:
-    kind: element
-    has:
-      any:
-        - kind: start_tag
-        - kind: self_closing_tag
-      regex: '(?i)^<(?:figure|img|picture|svg|canvas|ex-mermaid|ex-diagram|ex-flow|ex-board|ex-trace|ex-tree|ex-call-stack)(?:\s|/?>)'
-    not:
-      inside:
-        stopBy: end
-        kind: element
-        has:
-          kind: start_tag
-          regex: '(?i)^<template(?:\s|>)'
   picture-element:
-    matches: native-picture-element
+    matches: html-picture-element
   picture-bearing-sibling:
     any:
       - matches: picture-element
@@ -126,22 +112,8 @@ utils:
       - matches: outline-heading
       - not:
           matches: unsupported-boundary-sibling
-  native-picture-element:
-    kind: element
-    has:
-      any:
-        - kind: start_tag
-        - kind: self_closing_tag
-      regex: '(?i)^<(?:figure|img|picture|svg|canvas|ex-mermaid|ex-diagram|ex-flow|ex-board|ex-trace|ex-tree|ex-call-stack)(?:\s|/?>)'
-    not:
-      inside:
-        stopBy: end
-        kind: element
-        has:
-          kind: start_tag
-          regex: '(?i)^<template(?:\s|>)'
   picture-element:
-    matches: native-picture-element
+    matches: html-picture-element
   picture-bearing-sibling:
     any:
       - matches: picture-element

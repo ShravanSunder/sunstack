@@ -1,0 +1,128 @@
+{
+  "M002": {
+    "name": "presentation-html.section-picture",
+    "evidence": "html_section",
+    "decision": {
+      "start": "substantial",
+      "steps": {
+        "substantial": {
+          "mechanical_check": {
+            "tool": "word_count",
+            "field": [
+              "html_prose",
+              "markdown_prose"
+            ],
+            "bound": {
+              "at_least": 100
+            }
+          },
+          "yes": "picture",
+          "no": "pass"
+        },
+        "picture": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": [
+              "html_pictures",
+              "island_pictures"
+            ],
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words, no picture. Worth checking: one visual per point, next to the text it supports. A diagram or image may explain this section, or the section may not need one; you decide."
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "M003": {
+    "name": "presentation-html.island-section-picture",
+    "evidence": "markdown_section",
+    "decision": {
+      "start": "substantial",
+      "steps": {
+        "substantial": {
+          "mechanical_check": {
+            "tool": "word_count",
+            "field": [
+              "html_prose",
+              "markdown_prose"
+            ],
+            "bound": {
+              "at_least": 100
+            }
+          },
+          "yes": "picture",
+          "no": "pass"
+        },
+        "picture": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": [
+              "html_pictures",
+              "island_pictures"
+            ],
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words, no picture. Worth checking: one visual per point, next to the text it supports. A diagram or image may explain this section, or the section may not need one; you decide."
+          }
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "M004": {
+    "name": "presentation-html.long-table",
+    "evidence": "html_table",
+    "decision": {
+      "start": "long",
+      "steps": {
+        "long": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": "rows",
+            "bound": {
+              "greater_than": 20
+            }
+          },
+          "yes": {
+            "finding": "{{piece_count:rows}}-row table; split it or show it as a picture. Worth checking: long detail sits one action away so nothing becomes a text wall; you decide."
+          },
+          "no": "pass"
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "M005": {
+    "name": "presentation-html.long-island-table",
+    "evidence": "markdown_table",
+    "decision": {
+      "start": "long",
+      "steps": {
+        "long": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": "rows",
+            "bound": {
+              "greater_than": 20
+            }
+          },
+          "yes": {
+            "finding": "{{piece_count:rows}}-row table; split it or show it as a picture. Worth checking: long detail sits one action away so nothing becomes a text wall; you decide."
+          },
+          "no": "pass"
+        }
+      }
+    },
+    "severity": "warn"
+  }
+}

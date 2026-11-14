@@ -1,25 +1,24 @@
-import { execFileSync, spawnSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, expect, test } from "vitest";
 import { z } from "zod";
 import {
+  lineStartingWith,
+  lintGeneratedPage,
+  presentationHtmlReportSchema,
+  runPresentationHtmlLint,
+} from "#test-support/presentation-html-lint";
+import {
   cleanupRulebookFixtures,
   createRulebookFixture,
-  nativeReportSchema,
   readJson,
-  repositoryRoot,
   type NativeOutput,
 } from "#test-support/sunstack-process";
 
 afterEach(cleanupRulebookFixtures);
 
-const config = path.join(
-  repositoryRoot,
-  "plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json",
-);
-const engine = "@sunstack/cli@0.19.0";
 const frozenRevision = "a714d73191f57e777d612aa2bdf5a3768e4cda60";
 const observationDigest = "d43732f5346bce930fb4f843dc22449c9c946c48a3f4717a2a33329762a7af06";
 // The frozen book recorded the old rule's abstention on this island-only section
@@ -38,18 +37,7 @@ const externalInputs = z
     observations: process.env.SUNSTACK_PICTURE_DEVELOPMENT_OBSERVATIONS,
   });
 
-function runPictureLint(arguments_: readonly string[]): NativeOutput {
-  const output = spawnSync("pnpm", ["dlx", engine, "lint", "--config", config, ...arguments_], {
-    cwd: repositoryRoot,
-    encoding: "utf8",
-    maxBuffer: 32 * 1024 * 1024,
-    env: { ...process.env, OPENROUTER_API_KEY: "", SUNSTACK_CREDENTIAL_STORE: "off" },
-  });
-  if (output.error) throw output.error;
-  return { status: output.status, stdout: output.stdout, stderr: output.stderr };
-}
-
-test("active picture rule validates with its own released CLI pin and no model", () => {
+test("active presentation-html rules validate with their own released CLI pin and no model", () => {
   // Arrange: use the active config, independently of the shared 0.9.0 engine.
   const ruleList = z.array(
     z.object({
@@ -60,19 +48,21 @@ test("active picture rule validates with its own released CLI pin and no model",
   );
 
   // Act: validate the real project and inspect what the agent will run.
-  const checked = runPictureLint(["--check"]);
-  const listed = runPictureLint(["--rules"]);
+  const checked = runPresentationHtmlLint(["--check"]);
+  const listed = runPresentationHtmlLint(["--rules"]);
 
-  // Assert: no asking rule, held companion or extra rule is activated.
+  // Assert: exactly the picture, section and table nudges, all mechanical warnings.
   expect(checked.status, checked.stderr).toBe(0);
   expect(listed.status, listed.stderr).toBe(0);
-  expect(ruleList.parse(JSON.parse(listed.stdout))).toEqual([
-    {
-      rule: "owner-decision.picture-before-control",
-      severity: "warn",
-      kind: { kind: "mechanical" },
-    },
-  ]);
+  expect(ruleList.parse(JSON.parse(listed.stdout))).toEqual(
+    [
+      "owner-decision.picture-before-control",
+      "presentation-html.section-picture",
+      "presentation-html.island-section-picture",
+      "presentation-html.long-table",
+      "presentation-html.long-island-table",
+    ].map((rule) => ({ rule, severity: "warn", kind: { kind: "mechanical" } })),
+  );
 });
 
 interface PictureCase {
@@ -240,28 +230,16 @@ function runPictureCasePage(cases: readonly PictureCase[]): {
   readonly output: NativeOutput;
   readonly outcomes: Map<string, string | undefined>;
 } {
-  const root = createRulebookFixture();
-  const page = [
-    "<!doctype html>",
-    '<html lang="en"><head><meta charset="utf-8"><title>Picture cases</title></head><body>',
-    "<h1>Picture cases</h1>",
-    ...cases.map((pictureCase) => pictureCase.section),
-    "</body></html>",
-    "",
-  ].join("\n");
-  const pagePath = path.join(root, "picture-cases.html");
-  writeFileSync(pagePath, page);
-  const lines = page.split("\n");
-  const reportPath = path.join(root, "picture-cases-report.json");
-  const output = runPictureLint(["--root", root, "--report", reportPath, pagePath]);
-  const report = pictureReportSchema.parse(readJson(reportPath));
+  const { output, report, lines } = lintGeneratedPage(
+    cases.map((pictureCase) => pictureCase.section),
+  );
+  const choiceResults = report.results.filter((result) => result.marker === "M001");
   expect(report.usage.model_requests).toBe(0);
-  expect(report.results).toHaveLength(cases.length);
+  expect(choiceResults).toHaveLength(cases.length);
   const outcomes = new Map<string, string | undefined>();
   for (const pictureCase of cases) {
-    const choiceLine =
-      lines.findIndex((line) => line.startsWith(`<ex-choice id="${pictureCase.choiceId}"`)) + 1;
-    const result = report.results.find((candidate) => candidate.first_line === choiceLine);
+    const choiceLine = lineStartingWith(lines, `<ex-choice id="${pictureCase.choiceId}"`);
+    const result = choiceResults.find((candidate) => candidate.first_line === choiceLine);
     outcomes.set(pictureCase.choiceId, result?.outcome);
   }
   return { output, outcomes };
@@ -317,17 +295,6 @@ const observationSchema = z.object({
     }),
   ),
 });
-const pictureReportSchema = nativeReportSchema.extend({
-  findings: z.array(nativeReportSchema.shape.findings.element.extend({ message: z.string() })),
-  results: z.array(
-    nativeReportSchema.shape.results.element.extend({
-      file: z.string(),
-      first_line: z.number().int().positive(),
-      last_line: z.number().int().positive(),
-    }),
-  ),
-});
-
 test.skipIf(externalInputs.corpus === undefined && externalInputs.observations === undefined)(
   "PRIVATE FROZEN CORPUS: 52 outcomes and 37 reviewed observations (SKIPPED when neither SUNSTACK_PICTURE_DEVELOPMENT_* input is supplied; fails on a partial or missing input)",
   () => {
@@ -355,22 +322,26 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
     const reportPath = path.join(createRulebookFixture(), "picture-report.json");
 
     // Act: run the active rule over the full frozen pages through the native CLI.
-    const output = runPictureLint([
+    const output = runPresentationHtmlLint([
       "--root",
       externalInputs.corpus,
       "--all",
       "--report",
       reportPath,
     ]);
-    const report = pictureReportSchema.parse(readJson(reportPath));
+    const report = presentationHtmlReportSchema.parse(readJson(reportPath));
+    const choiceResults = report.results.filter((result) => result.marker === "M001");
+    const choiceFindings = report.findings.filter(
+      (finding) => finding.rule === "owner-decision.picture-before-control",
+    );
 
     // Assert: literal reviewed geometry, including abstention, is the independent oracle.
     expect(output.status, output.stderr).toBe(0);
     expect(report.usage.model_requests).toBe(0);
     expect(report.requests).toEqual([]);
-    expect(report.results).toHaveLength(52);
+    expect(choiceResults).toHaveLength(52);
     expect(
-      report.results.reduce<Record<string, number>>((counts, result) => {
+      choiceResults.reduce<Record<string, number>>((counts, result) => {
         counts[result.outcome] = (counts[result.outcome] ?? 0) + 1;
         return counts;
       }, {}),
@@ -380,7 +351,7 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
       expect.arrayContaining(Object.keys(ownerRulingOverrides)),
     );
     for (const observation of observations.cases) {
-      const results = report.results.filter(
+      const results = choiceResults.filter(
         (result) =>
           result.file === observation.file &&
           result.first_line === observation.lines[0] &&
@@ -391,7 +362,8 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
         ownerRulingOverrides[observation.id] ?? observation.expected,
       );
     }
-    for (const finding of report.findings) {
+    expect(choiceFindings).toHaveLength(35);
+    for (const finding of choiceFindings) {
       expect(finding.severity).toBe("warn");
       expect(finding.message).toContain("Worth checking");
       expect(finding.message).toContain("may not need a picture");

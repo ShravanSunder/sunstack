@@ -3,6 +3,10 @@
     {
       "markdown": "../../../shared-references/owner-decision-brief.md",
       "rules": "picture-before-control.rules.json"
+    },
+    {
+      "markdown": "../SKILL.md",
+      "rules": "section-content.rules.json"
     }
   ],
   "marker_prefix": "M",
@@ -21,8 +25,25 @@
       ],
       "text_attributes": {
         "ex-choice": [
-          "id",
           "title"
+        ],
+        "ex-callout": [
+          "title"
+        ],
+        "ex-card": [
+          "title"
+        ],
+        "ex-markdown": [
+          "label"
+        ],
+        "ex-mermaid": [
+          "label"
+        ],
+        "ex-option": [
+          "title"
+        ],
+        "ex-stat": [
+          "label"
         ]
       },
       "embedded_markdown": [
@@ -88,6 +109,149 @@
       "island_heading": {
         "rule": "island-heading",
         "fields": {}
+      },
+      "markdown_outline": {
+        "markdown_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "fields": {}
+      },
+      "html_prose": {
+        "rule": "html-prose",
+        "fields": {}
+      },
+      "markdown_prose": {
+        "rule": "markdown-prose",
+        "fields": {}
+      },
+      "html_picture": {
+        "rule": "html-picture",
+        "fields": {}
+      },
+      "html_section": {
+        "html_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "max_chars": 200000,
+        "fields": {
+          "html_prose": {
+            "from": "inside",
+            "kind": "html_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "markdown_prose": {
+            "from": "inside",
+            "kind": "markdown_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "html_pictures": {
+            "from": "inside",
+            "kind": "html_picture",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "island_pictures": {
+            "from": "inside",
+            "kind": "island_picture",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          }
+        }
+      },
+      "markdown_section": {
+        "markdown_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "max_chars": 200000,
+        "fields": {
+          "html_prose": {
+            "from": "inside",
+            "kind": "html_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "markdown_prose": {
+            "from": "inside",
+            "kind": "markdown_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "html_pictures": {
+            "from": "inside",
+            "kind": "html_picture",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "island_pictures": {
+            "from": "inside",
+            "kind": "island_picture",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          }
+        }
+      },
+      "html_table": {
+        "rule": "html-table",
+        "max_chars": 200000,
+        "fields": {
+          "rows": {
+            "from": "inside",
+            "rule": "html-table-row"
+          }
+        }
+      },
+      "markdown_table": {
+        "rule": "markdown-table",
+        "max_chars": 200000,
+        "fields": {
+          "rows": {
+            "from": "inside",
+            "rule": "markdown-table-row"
+          }
+        }
       }
     }
   },
@@ -95,7 +259,7 @@
     "model": "typesafe/jev-1.14-20261014"
   },
   "limits": {
-    "evidence_max_chars": 50000,
+    "evidence_max_chars": 1000000,
     "request_max_chars": 131072,
     "max_model_requests": 100,
     "max_concurrent_requests": 3,
