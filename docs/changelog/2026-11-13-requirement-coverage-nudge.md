@@ -2,7 +2,7 @@
 
 Date: 2026-11-13. Version: sunstack-workflow-v2 0.3.2.
 
-`design-review` gains `rules/`: twelve mechanical warn rules (six per format, HTML and Markdown). They collect each requirement id defined on a set's Requirements page and warn, on the definition, once per id for each of the Specification, Program Design and Verification Design pages that never names it; an absent page gets one warning for the set and its per-requirement checks are skipped. `verification-design` is read when `verification` is absent. They pin CLI 0.20.0 and send no model request.
+`design-review` gains `rules/`: twelve mechanical warn rules (six per format, HTML and Markdown). They collect each requirement id defined on a set's Requirements page and warn, on the definition, once per id for each of the Specification, Program Design and Verification Design pages that never names it; an absent page gets one warning for the set and its per-requirement checks are skipped. `verification-design` is read when `verification` is absent. They pin CLI 0.20.1 and send no model request.
 
 `design-review` step 5 (the reviewer) and `design-verification` step 6's nudge pass (the Lead, before review) each gain one line: run the nudge on a file-backed set and read each warning as worth checking, not a failure; an absent page gets one warning, named once as not yet written.
 

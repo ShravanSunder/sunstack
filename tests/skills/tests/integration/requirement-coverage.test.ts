@@ -18,7 +18,7 @@ const config = path.join(
   repositoryRoot,
   "plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json",
 );
-const engine = "@sunstack/cli@0.20.0";
+const engine = "@sunstack/cli@0.20.1";
 const documentRules = ["specification", "program-design", "verification"] as const;
 type DocumentRule = (typeof documentRules)[number];
 

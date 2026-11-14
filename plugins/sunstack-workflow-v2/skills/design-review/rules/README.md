@@ -29,7 +29,7 @@ A page names an id when the id occurs anywhere in its source as a whole token: `
 From this repository root, name the design set's folder (no model key needed):
 
 ```sh
-pnpm dlx @sunstack/cli@0.20.0 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-13-example
+pnpm dlx @sunstack/cli@0.20.1 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-13-example
 ```
 
 From another project, use that installed skill's absolute `rules/requirement-coverage.config.json` path after `--config`, and add `--root "$PWD"`. Named paths resolve from your current directory. `--report <file>` keeps every result with its line. Read the findings, not the exit code: warnings come with exit 0; exit 3 means a present page couldn't be read. No page is changed.
@@ -38,4 +38,4 @@ From another project, use that installed skill's absolute `rules/requirement-cov
 
 The integration test `tests/skills/tests/integration/requirement-coverage.test.ts` runs the pinned CLI on small HTML and Markdown sets: every page names every id, one page misses an id, look-alike ids (`U20`, `XU2`, `data-id`) don't count, a `verification-design` page in both formats, and an absent page. On 14 Nov 2026 the rules were rerun on the three frozen design sets from the requirement-coverage experiment whose definitions this markup reads (document browsers in HTML; OAuth routing and TUI components in Markdown), under their real file names: all 86 requirement/page pairs matched that experiment's exact-id reference, 74 covered and 12 missing, and OAuth's absent Verification Design gave one warning with its 13 requirement checks skipped. Its fourth set keeps its Requirements as Markdown in a JSON string and was not read.
 
-This pins CLI 0.20.0, which reads candidate page names and routes an absent page; the shared skill-rule test engine remains on 0.9.0.
+This pins CLI 0.20.1, which reads candidate page names and routes an absent page; the shared skill-rule test engine remains on 0.9.0.
