@@ -12,6 +12,8 @@ Seven rules per format (HTML and Markdown) follow the chain [reviewing-four-docu
 
 Ids are link data in every request, but the model judges meaning: an obligation that serves a requirement without citing its id counts (C001, C007), and a coverage-table row that only lists ids does not. C003 and C007 count only the requirement's own Verification rows; an observation listed under another requirement doesn't account for it. An absent page gets one warning; its requirement checks end `not_applicable`.
 
+**Not checked:** an obligation that serves a requirement without citing its id is checked only for whether its own Verification rows account for it (C007). Whether its observation keeps its V's threshold, reference and target, and sits at the declared seam, is not checked by any rule: C003 checks those only for cited obligations.
+
 ## What it reads
 
 A design set is one folder holding `requirements`, `specification`, `program-design` and `verification` (or `verification-design`), all `.html` or all `.md`.
