@@ -30,6 +30,8 @@ C001–C003 ask the decision model (`jev-latest`), so a run needs the authorized
 pnpm dlx @sunstack/cli@0.22.0 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
 ```
 
+The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's request carries the whole obligation list for its linked-complete question, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 49.9k characters.
+
 To see what each request would carry without sending anything, add `--prepare <file>` and read one request with `lint show <file> <id>`. From another project, use the installed skill's absolute config path and add `--root "$PWD"`. Warnings come with exit 0; `uncertain` results (exit 5) mean the model's answer fell between the bars and are worth reading too.
 
 ## Proof
