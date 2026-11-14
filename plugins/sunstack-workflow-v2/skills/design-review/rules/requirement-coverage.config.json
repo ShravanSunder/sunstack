@@ -13,7 +13,9 @@
   "check": {
     "files": [
       "**/requirements.html",
-      "**/requirements.md"
+      "**/requirements.md",
+      "**/specification.html",
+      "**/specification.md"
     ]
   },
   "evidence": {
@@ -26,19 +28,22 @@
             "from": "capture",
             "regex": "\\sid=[\"'](U[0-9]+)[\"']"
           },
+          "requirement": {
+            "from": "remainder"
+          },
           "specification": {
             "from": "document",
             "path": [
               "specification.html"
             ],
-            "rule": "html-whole-page"
+            "rule": "html-page-presence"
           },
           "program_design": {
             "from": "document",
             "path": [
               "program-design.html"
             ],
-            "rule": "html-whole-page"
+            "rule": "html-page-presence"
           },
           "verification": {
             "from": "document",
@@ -46,7 +51,100 @@
               "verification.html",
               "verification-design.html"
             ],
-            "rule": "html-whole-page"
+            "rule": "html-page-presence"
+          },
+          "all_obligations": {
+            "from": "document",
+            "path": [
+              "specification.html"
+            ],
+            "rule": "html-obligation-definition"
+          },
+          "linked_obligations": {
+            "from": "document",
+            "path": [
+              "specification.html"
+            ],
+            "rule": "html-obligation-definition",
+            "containing": "identifier"
+          },
+          "proof_obligations": {
+            "from": "document",
+            "path": [
+              "specification.html"
+            ],
+            "rule": "html-proof-obligation"
+          },
+          "verification_rows": {
+            "from": "document",
+            "path": [
+              "verification.html",
+              "verification-design.html"
+            ],
+            "rule": "html-passage",
+            "containing": "identifier"
+          },
+          "trace_rows": {
+            "from": "document",
+            "path": [
+              "program-design.html"
+            ],
+            "rule": "html-passage",
+            "containing": "identifier"
+          }
+        }
+      },
+      "html_obligation": {
+        "rule": "html-obligation-definition",
+        "fields": {
+          "identifier": {
+            "from": "capture",
+            "regex": "\\sid=[\"'](R[0-9]+[a-z]?)[\"']"
+          },
+          "obligation": {
+            "from": "remainder"
+          },
+          "program_design": {
+            "from": "document",
+            "path": [
+              "program-design.html"
+            ],
+            "rule": "html-page-presence"
+          },
+          "realization_rows": {
+            "from": "document",
+            "path": [
+              "program-design.html"
+            ],
+            "rule": "html-passage",
+            "containing": "identifier"
+          }
+        }
+      },
+      "html_requirements_page": {
+        "rule": "html-requirements-page",
+        "fields": {
+          "specification": {
+            "from": "document",
+            "path": [
+              "specification.html"
+            ],
+            "rule": "html-page-presence"
+          },
+          "program_design": {
+            "from": "document",
+            "path": [
+              "program-design.html"
+            ],
+            "rule": "html-page-presence"
+          },
+          "verification": {
+            "from": "document",
+            "path": [
+              "verification.html",
+              "verification-design.html"
+            ],
+            "rule": "html-page-presence"
           }
         }
       },
@@ -57,19 +155,22 @@
             "from": "capture",
             "regex": "^(?:\\|\\s*\\**|#{2,6}\\s+\\**)(U[0-9]+)"
           },
+          "requirement": {
+            "from": "remainder"
+          },
           "specification": {
             "from": "document",
             "path": [
               "specification.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
           },
           "program_design": {
             "from": "document",
             "path": [
               "program-design.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
           },
           "verification": {
             "from": "document",
@@ -77,53 +178,97 @@
               "verification.md",
               "verification-design.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
+          },
+          "all_obligations": {
+            "from": "document",
+            "path": [
+              "specification.md"
+            ],
+            "rule": "markdown-obligation-unit"
+          },
+          "linked_obligations": {
+            "from": "document",
+            "path": [
+              "specification.md"
+            ],
+            "rule": "markdown-obligation-unit",
+            "containing": "identifier"
+          },
+          "proof_obligations": {
+            "from": "document",
+            "path": [
+              "specification.md"
+            ],
+            "rule": "markdown-proof-obligation"
+          },
+          "verification_rows": {
+            "from": "document",
+            "path": [
+              "verification.md",
+              "verification-design.md"
+            ],
+            "rule": "markdown-passage",
+            "containing": "identifier"
+          },
+          "trace_rows": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-passage",
+            "containing": "identifier"
           }
         }
       },
-      "html_requirements_page": {
-        "rule": "html-whole-page",
+      "markdown_obligation": {
+        "rule": "markdown-obligation-definition",
         "fields": {
-          "specification": {
-            "from": "document",
-            "path": [
-              "specification.html"
-            ],
-            "rule": "html-whole-page"
+          "identifier": {
+            "from": "capture",
+            "regex": "^(?:\\|\\s*|[-*+]\\s+|#{2,6}\\s+)?\\**(R[0-9]+[a-z]?)"
+          },
+          "obligation": {
+            "from": "remainder"
+          },
+          "obligation_body": {
+            "from": "next",
+            "rule": "markdown-list",
+            "count": 1
           },
           "program_design": {
             "from": "document",
             "path": [
-              "program-design.html"
+              "program-design.md"
             ],
-            "rule": "html-whole-page"
+            "rule": "markdown-page-presence"
           },
-          "verification": {
+          "realization_rows": {
             "from": "document",
             "path": [
-              "verification.html",
-              "verification-design.html"
+              "program-design.md"
             ],
-            "rule": "html-whole-page"
+            "rule": "markdown-passage",
+            "containing": "identifier"
           }
         }
       },
       "markdown_requirements_page": {
-        "rule": "markdown-whole-page",
+        "rule": "markdown-requirements-page",
         "fields": {
           "specification": {
             "from": "document",
             "path": [
               "specification.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
           },
           "program_design": {
             "from": "document",
             "path": [
               "program-design.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
           },
           "verification": {
             "from": "document",
@@ -131,19 +276,19 @@
               "verification.md",
               "verification-design.md"
             ],
-            "rule": "markdown-whole-page"
+            "rule": "markdown-page-presence"
           }
         }
       }
     }
   },
   "decision_model": {
-    "model": "typesafe/jev-1.14-20261014"
+    "model": "jev-latest"
   },
   "limits": {
-    "evidence_max_chars": 1000000,
+    "evidence_max_chars": 60000,
     "request_max_chars": 131072,
-    "max_model_requests": 1,
+    "max_model_requests": 400,
     "max_matches": 20000
   }
 }

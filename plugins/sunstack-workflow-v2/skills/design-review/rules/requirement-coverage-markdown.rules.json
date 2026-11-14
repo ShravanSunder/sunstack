@@ -2,6 +2,108 @@
   "C001": {
     "name": "requirement-coverage.markdown.specification",
     "evidence": "markdown_requirement",
+    "reference": {
+      "definitions": {
+        "requirement": "A U on the Requirements page: whose need it is, the outcome they want, and its limits.",
+        "obligation": "An R on the Specification page: observable behavior that must hold, linked to the requirements it serves.",
+        "proof_obligation": "A V on the Specification page: how an obligation will be shown to hold. It names a reference, a threshold (the condition that passes) and target constraints (where and on what it is observed).",
+        "realization": "A Program Design passage for an obligation: the owner (a component), the interface or flow through which the behavior is supplied, and its state, failure behavior and proof seam.",
+        "proof_seam": "The boundary Program Design names where an obligation's behavior can be observed.",
+        "observation": "A Verification Design row: the reference, the target and journey, and the passing condition it checks.",
+        "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
+      },
+      "link_boundaries": [
+        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "An id range such as R1–R3 includes R1, R2 and R3.",
+        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "Planned proof is not an observed result; these questions ask what the design states."
+      ],
+      "examples": [
+        {
+          "shows": "covered by obligation behavior",
+          "requirement": "U2 My drafts are never lost.",
+          "obligations": [
+            "R4 A saved draft survives an app restart.",
+            "R5 A draft being typed is saved within two seconds of the last keystroke."
+          ],
+          "answer": "obligations_cover_need: true",
+          "why": "Restart survival and timely saving together deliver 'never lost'."
+        },
+        {
+          "shows": "an outcome with no obligation",
+          "requirement": "U7 Totals match the invoice and show in the account's currency.",
+          "obligations": [
+            "R15 Line totals round half-up to the cent."
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "Matching is delivered; no obligation states behavior for the currency outcome."
+        },
+        {
+          "shows": "a mention is not an obligation",
+          "requirement": "U9 A shared link opens the same view for every reader.",
+          "obligations": [
+            "Coverage: U9 → V3"
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | DraftStore | save(draft) writes the local database before acknowledging | draft row | saved, dirty | write failure keeps the draft dirty and retries | restart test at DraftStore |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "An owner and an interface that carry out survival across restart."
+        },
+        {
+          "shows": "not a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | see interfaces | | | | | |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "A cross-reference is not a populated realization."
+        },
+        {
+          "shows": "an observation that keeps its V",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4, R5): kill and relaunch the desktop build; passes when the draft text equals the saved text. R5 stays unverified: no keystroke-timing harness yet.",
+          "answer": "accounted: true; keeps_threshold: true; keeps_target: true",
+          "why": "R4 is observed with V4's threshold and target; R5 has an explicit unverified disposition."
+        },
+        {
+          "shows": "an observation that weakens its threshold",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4): relaunch; passes when a draft is shown.",
+          "answer": "keeps_threshold: false",
+          "why": "'A draft is shown' is weaker than 'the text equals the saved text'."
+        }
+      ]
+    },
+    "questions": {
+      "obligations_cover_need": {
+        "type": "noul",
+        "instructions": {
+          "check": "requirement",
+          "against": "all_obligations",
+          "context": [
+            "identifier",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "Do the obligations in all_obligations together state observable behavior for every outcome and limit that requirement asks for?"
+        },
+        "criteria": {
+          "true": "Every outcome and limit the requirement states for the system is delivered by the behavior of at least one obligation in all_obligations, whether or not that obligation cites the requirement's id. Conditions on how the work is done need no obligation (reference.link_boundaries).",
+          "false": "Some outcome or limit the requirement states is delivered by no obligation's behavior. An id that appears only in a back-link, index or coverage row delivers nothing."
+        }
+      }
+    },
     "decision": {
       "start": "page_present",
       "steps": {
@@ -10,20 +112,35 @@
             "tool": "complete",
             "field": "specification"
           },
-          "yes": "id_mentioned",
+          "yes": "requirement_read",
           "no": "not_applicable"
         },
-        "id_mentioned": {
+        "requirement_read": {
           "mechanical_check": {
-            "tool": "contains_field",
-            "field": "specification",
-            "needle": "identifier"
+            "tool": "complete",
+            "field": "requirement"
           },
+          "yes": "obligations_read",
+          "no": "uncertain"
+        },
+        "obligations_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "all_obligations"
+          },
+          "yes": "covers",
+          "no": "uncertain"
+        },
+        "covers": {
+          "ask": "obligations_cover_need",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
           "yes": "pass",
           "no": {
-            "finding": "Worth checking: this requirement's id never appears on the Specification page beside it. The page may address the need without naming the id, or the need may have no Specification home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
-            "at": "identifier"
-          }
+            "finding": "Worth checking: the Specification's obligations may not state behavior for everything this requirement asks. Read the requirement beside the Specification's obligations, and decide whether an obligation is missing or the requirement's wording is. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
         }
       }
     },
@@ -34,7 +151,110 @@
   },
   "C002": {
     "name": "requirement-coverage.markdown.program-design",
-    "evidence": "markdown_requirement",
+    "evidence": "markdown_obligation",
+    "reference": {
+      "definitions": {
+        "requirement": "A U on the Requirements page: whose need it is, the outcome they want, and its limits.",
+        "obligation": "An R on the Specification page: observable behavior that must hold, linked to the requirements it serves.",
+        "proof_obligation": "A V on the Specification page: how an obligation will be shown to hold. It names a reference, a threshold (the condition that passes) and target constraints (where and on what it is observed).",
+        "realization": "A Program Design passage for an obligation: the owner (a component), the interface or flow through which the behavior is supplied, and its state, failure behavior and proof seam.",
+        "proof_seam": "The boundary Program Design names where an obligation's behavior can be observed.",
+        "observation": "A Verification Design row: the reference, the target and journey, and the passing condition it checks.",
+        "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
+      },
+      "link_boundaries": [
+        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "An id range such as R1–R3 includes R1, R2 and R3.",
+        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "Planned proof is not an observed result; these questions ask what the design states."
+      ],
+      "examples": [
+        {
+          "shows": "covered by obligation behavior",
+          "requirement": "U2 My drafts are never lost.",
+          "obligations": [
+            "R4 A saved draft survives an app restart.",
+            "R5 A draft being typed is saved within two seconds of the last keystroke."
+          ],
+          "answer": "obligations_cover_need: true",
+          "why": "Restart survival and timely saving together deliver 'never lost'."
+        },
+        {
+          "shows": "an outcome with no obligation",
+          "requirement": "U7 Totals match the invoice and show in the account's currency.",
+          "obligations": [
+            "R15 Line totals round half-up to the cent."
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "Matching is delivered; no obligation states behavior for the currency outcome."
+        },
+        {
+          "shows": "a mention is not an obligation",
+          "requirement": "U9 A shared link opens the same view for every reader.",
+          "obligations": [
+            "Coverage: U9 → V3"
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | DraftStore | save(draft) writes the local database before acknowledging | draft row | saved, dirty | write failure keeps the draft dirty and retries | restart test at DraftStore |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "An owner and an interface that carry out survival across restart."
+        },
+        {
+          "shows": "not a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | see interfaces | | | | | |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "A cross-reference is not a populated realization."
+        },
+        {
+          "shows": "an observation that keeps its V",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4, R5): kill and relaunch the desktop build; passes when the draft text equals the saved text. R5 stays unverified: no keystroke-timing harness yet.",
+          "answer": "accounted: true; keeps_threshold: true; keeps_target: true",
+          "why": "R4 is observed with V4's threshold and target; R5 has an explicit unverified disposition."
+        },
+        {
+          "shows": "an observation that weakens its threshold",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4): relaunch; passes when a draft is shown.",
+          "answer": "keeps_threshold: false",
+          "why": "'A draft is shown' is weaker than 'the text equals the saved text'."
+        }
+      ]
+    },
+    "questions": {
+      "row_realizes": {
+        "type": "noul",
+        "instructions": {
+          "check": "realization_rows",
+          "against": "obligation",
+          "context": [
+            "identifier",
+            "obligation_body",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "Do the passages in realization_rows name an owner and an interface or flow that carry out the behavior obligation states?"
+        },
+        "criteria": {
+          "true": "A passage gives the component that owns this obligation's behavior and the interface or flow through which it is supplied, without weakening or contradicting what the obligation states.",
+          "false": "No passage carries out this behavior: realization_rows is empty, its cells are blank, 'see …' or 'gap: …', the named mechanism supplies something else, or a passage weakens or contradicts the obligation."
+        }
+      }
+    },
     "decision": {
       "start": "page_present",
       "steps": {
@@ -43,20 +263,43 @@
             "tool": "complete",
             "field": "program_design"
           },
-          "yes": "id_mentioned",
+          "yes": "obligation_read",
           "no": "not_applicable"
         },
-        "id_mentioned": {
+        "obligation_read": {
           "mechanical_check": {
-            "tool": "contains_field",
-            "field": "program_design",
-            "needle": "identifier"
+            "tool": "complete",
+            "field": "obligation"
           },
+          "yes": "body_read",
+          "no": "uncertain"
+        },
+        "body_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "obligation_body"
+          },
+          "yes": "rows_read",
+          "no": "uncertain"
+        },
+        "rows_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_rows"
+          },
+          "yes": "realizes",
+          "no": "uncertain"
+        },
+        "realizes": {
+          "ask": "row_realizes",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
           "yes": "pass",
           "no": {
-            "finding": "Worth checking: this requirement's id never appears on the Program Design page beside it. The page may address the need without naming the id, or the need may have no Program Design home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
-            "at": "identifier"
-          }
+            "finding": "Worth checking: no Program Design passage that names this obligation was read as realizing it. Read the obligation beside Program Design's passages for it, and decide whether a realization is missing, written without the obligation's id, or weaker than the obligation. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "obligation"
+          },
+          "uncertain": "uncertain"
         }
       }
     },
@@ -68,6 +311,185 @@
   "C003": {
     "name": "requirement-coverage.markdown.verification",
     "evidence": "markdown_requirement",
+    "reference": {
+      "definitions": {
+        "requirement": "A U on the Requirements page: whose need it is, the outcome they want, and its limits.",
+        "obligation": "An R on the Specification page: observable behavior that must hold, linked to the requirements it serves.",
+        "proof_obligation": "A V on the Specification page: how an obligation will be shown to hold. It names a reference, a threshold (the condition that passes) and target constraints (where and on what it is observed).",
+        "realization": "A Program Design passage for an obligation: the owner (a component), the interface or flow through which the behavior is supplied, and its state, failure behavior and proof seam.",
+        "proof_seam": "The boundary Program Design names where an obligation's behavior can be observed.",
+        "observation": "A Verification Design row: the reference, the target and journey, and the passing condition it checks.",
+        "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
+      },
+      "link_boundaries": [
+        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "An id range such as R1–R3 includes R1, R2 and R3.",
+        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "Planned proof is not an observed result; these questions ask what the design states."
+      ],
+      "examples": [
+        {
+          "shows": "covered by obligation behavior",
+          "requirement": "U2 My drafts are never lost.",
+          "obligations": [
+            "R4 A saved draft survives an app restart.",
+            "R5 A draft being typed is saved within two seconds of the last keystroke."
+          ],
+          "answer": "obligations_cover_need: true",
+          "why": "Restart survival and timely saving together deliver 'never lost'."
+        },
+        {
+          "shows": "an outcome with no obligation",
+          "requirement": "U7 Totals match the invoice and show in the account's currency.",
+          "obligations": [
+            "R15 Line totals round half-up to the cent."
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "Matching is delivered; no obligation states behavior for the currency outcome."
+        },
+        {
+          "shows": "a mention is not an obligation",
+          "requirement": "U9 A shared link opens the same view for every reader.",
+          "obligations": [
+            "Coverage: U9 → V3"
+          ],
+          "answer": "obligations_cover_need: false",
+          "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | DraftStore | save(draft) writes the local database before acknowledging | draft row | saved, dirty | write failure keeps the draft dirty and retries | restart test at DraftStore |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "An owner and an interface that carry out survival across restart."
+        },
+        {
+          "shows": "not a realization",
+          "obligation": "R4 A saved draft survives an app restart.",
+          "passages": [
+            "| R4 | see interfaces | | | | | |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "A cross-reference is not a populated realization."
+        },
+        {
+          "shows": "an observation that keeps its V",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4, R5): kill and relaunch the desktop build; passes when the draft text equals the saved text. R5 stays unverified: no keystroke-timing harness yet.",
+          "answer": "accounted: true; keeps_threshold: true; keeps_target: true",
+          "why": "R4 is observed with V4's threshold and target; R5 has an explicit unverified disposition."
+        },
+        {
+          "shows": "an observation that weakens its threshold",
+          "proof_obligation": "V4 After a kill and relaunch on the desktop build, the draft text equals the saved text.",
+          "observation": "U2 (R4): relaunch; passes when a draft is shown.",
+          "answer": "keeps_threshold: false",
+          "why": "'A draft is shown' is weaker than 'the text equals the saved text'."
+        }
+      ]
+    },
+    "questions": {
+      "accounted": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "linked_obligations",
+          "context": [
+            "identifier",
+            "requirement",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "Does verification_rows account for every obligation in linked_obligations, by its id or a range that includes it, with an observation or an explicit unverified disposition?"
+        },
+        "criteria": {
+          "true": "Each obligation in linked_obligations is decided by an observation in this requirement's rows, or listed there as unverified.",
+          "false": "Some obligation in linked_obligations has neither an observation nor an explicit unverified disposition in this requirement's rows; an observation listed under another requirement does not count."
+        }
+      },
+      "keeps_threshold": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "proof_obligations",
+          "context": [
+            "identifier",
+            "linked_obligations",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation's passing condition use the threshold of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+        },
+        "criteria": {
+          "true": "Each such observation passes on the V's current threshold, or a stricter one. If no obligation is decided by an observation, answer true.",
+          "false": "Some observation passes on a weaker, different or earlier threshold than its V states."
+        }
+      },
+      "keeps_reference": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "proof_obligations",
+          "context": [
+            "identifier",
+            "linked_obligations",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation use the reference of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+        },
+        "criteria": {
+          "true": "Each such observation uses the V's named reference. If no obligation is decided by an observation, answer true.",
+          "false": "Some observation uses another reference than its V names, or none."
+        }
+      },
+      "keeps_target": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "proof_obligations",
+          "context": [
+            "identifier",
+            "linked_obligations",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation keep the target constraints of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+        },
+        "criteria": {
+          "true": "Each such observation runs on the target its V constrains. If no obligation is decided by an observation, answer true.",
+          "false": "Some observation runs on another or looser target than its V states."
+        }
+      },
+      "uses_seam": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "trace_rows",
+          "context": [
+            "identifier",
+            "linked_obligations",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation sit at the proof seam trace_rows names for it?"
+        },
+        "criteria": {
+          "true": "Each such observation is made at the seam Program Design names for its obligation. If no obligation is decided by an observation, answer true.",
+          "false": "Some observation sits at another seam than the one Program Design names for its obligation."
+        }
+      }
+    },
     "decision": {
       "start": "page_present",
       "steps": {
@@ -76,25 +498,118 @@
             "tool": "complete",
             "field": "verification"
           },
-          "yes": "id_mentioned",
+          "yes": "requirement_read",
           "no": "not_applicable"
         },
-        "id_mentioned": {
+        "requirement_read": {
           "mechanical_check": {
-            "tool": "contains_field",
-            "field": "verification",
-            "needle": "identifier"
+            "tool": "complete",
+            "field": "requirement"
           },
+          "yes": "rows_read",
+          "no": "uncertain"
+        },
+        "rows_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "verification_rows"
+          },
+          "yes": "obligations_read",
+          "no": "uncertain"
+        },
+        "obligations_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "linked_obligations"
+          },
+          "yes": "proofs_read",
+          "no": "uncertain"
+        },
+        "proofs_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "proof_obligations"
+          },
+          "yes": "trace_read",
+          "no": "uncertain"
+        },
+        "trace_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "trace_rows"
+          },
+          "yes": "has_linked",
+          "no": "uncertain"
+        },
+        "has_linked": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "linked_obligations",
+            "pattern": "(?s).*"
+          },
+          "yes": "is_accounted",
+          "no": "uncertain"
+        },
+        "is_accounted": {
+          "ask": "accounted",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "threshold_kept",
+          "no": {
+            "finding": "Worth checking: this requirement's Verification rows may not account for every obligation it links. Walk each linked obligation in Verification Design; an observation listed under another requirement does not count here. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
+        },
+        "threshold_kept": {
+          "ask": "keeps_threshold",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "reference_kept",
+          "no": {
+            "finding": "Worth checking: an observation for this requirement may not use its V's current threshold. Compare each observation's passing condition with its V in the Specification. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
+        },
+        "reference_kept": {
+          "ask": "keeps_reference",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "target_kept",
+          "no": {
+            "finding": "Worth checking: an observation for this requirement may not use the reference its V names. Compare each observation's reference with its V in the Specification. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
+        },
+        "target_kept": {
+          "ask": "keeps_target",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "seam_used",
+          "no": {
+            "finding": "Worth checking: an observation for this requirement may not keep its V's target constraints. Compare each observation's target with its V in the Specification. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
+        },
+        "seam_used": {
+          "ask": "uses_seam",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
           "yes": "pass",
           "no": {
-            "finding": "Worth checking: this requirement's id never appears on the Verification Design page beside it. The page may address the need without naming the id, or the need may have no Verification Design home yet. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation, before changing either page.",
-            "at": "identifier"
-          }
+            "finding": "Worth checking: an observation for this requirement may not sit at the proof seam Program Design names for its obligation. Compare each observation with that obligation's trace row. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
         }
       }
     },
     "related": [
-      "verification"
+      "verification",
+      "specification"
     ],
     "severity": "warn"
   },
@@ -151,7 +666,7 @@
           },
           "yes": "pass",
           "no": {
-            "finding": "Worth checking: this design set has no Verification Design page beside its Requirements page (looked for verification.md, verification-design.md). If it isn't written yet, name it once as not yet written; its requirement checks were skipped. Read sunstack-dev's shared-references/design-documents.md for the page names."
+            "finding": "Worth checking: this design set has no Verification Design page beside its Requirements page (looked for verification.md or verification-design.md). If it isn't written yet, name it once as not yet written; its requirement checks were skipped. Read sunstack-dev's shared-references/design-documents.md for the page names."
           }
         }
       }
