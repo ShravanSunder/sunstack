@@ -208,6 +208,14 @@ rule:
         - kind: list_item
         - regex: '^[-*+]\s+\*\*'
 ---
+# A Mermaid diagram in a Markdown page (a component or flow drawing whose nodes
+# can name the modules that realize an obligation).
+id: markdown-diagram
+language: Markdown
+rule:
+  kind: fenced_code_block
+  regex: '^```mermaid'
+---
 # Prose on an HTML Verification page: paragraphs, list items and definitions,
 # where shared observations and checks sections live (not table rows).
 id: html-verification-prose

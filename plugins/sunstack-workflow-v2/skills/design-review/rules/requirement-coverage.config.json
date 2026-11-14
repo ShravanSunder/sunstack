@@ -301,6 +301,31 @@
               "until": "markdown-block-boundary",
               "max_siblings": 12
             }
+          },
+          "realization_name_items": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-item-lead",
+            "containing": "realization_names",
+            "attach": {
+              "until": "markdown-block-boundary",
+              "max_siblings": 12
+            }
+          },
+          "realization_modules": {
+            "from": "captures",
+            "of": "realization_rows",
+            "regex": "\\b([a-z][a-z0-9]*(?:_[a-z0-9]+)+)\\b"
+          },
+          "realization_diagrams": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-diagram",
+            "containing": "realization_modules"
           }
         }
       },

@@ -16,10 +16,13 @@
         "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
         "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
-        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work is done, tracked or proven (which branch it starts from, an inventory or checklist the work keeps, how it is reviewed or delivered, what proof may or may not close it) need no Specification obligation; Verification Design owns proof. Its outcomes and limits for the system do need one.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
         "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "A realization carries out every behavior the obligation states, in its own text and in its list body. Carrying out some of them is a partial realization, not a realization.",
+        "A realization that allows an exception, delay or bound the obligation does not allow (\"usually\", \"may lag by one request\", \"best effort\") weakens it.",
+        "A prohibition (MUST NOT) is realized by the owner or boundary that keeps the forbidden act out, stated as such: for example, a component that never opens a store, or an interface that has no path to it.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
       "examples": [
@@ -72,6 +75,24 @@
           "why": "An owner and an interface that carry out survival across restart."
         },
         {
+          "shows": "a prohibition realized by an absence",
+          "obligation": "R12 The export job MUST NOT write to the source database.",
+          "passages": [
+            "| R12 | ExportReader | read-only connection pool; no write statements are prepared | — | — | a write attempt fails at the pool | read-only role test |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "The owner and its read-only interface keep the forbidden write out, and say so."
+        },
+        {
+          "shows": "a realization weakened by an exception",
+          "obligation": "R13 A cancelled upload MUST stop within one second.",
+          "passages": [
+            "| R13 | UploadWorker | cancel() sets a flag checked between chunks; a large chunk may finish first | … |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "The passage allows an exception (a chunk may finish first) that the obligation's one-second bound doesn't allow."
+        },
+        {
           "shows": "not a realization",
           "obligation": "R4 A saved draft survives an app restart.",
           "passages": [
@@ -111,7 +132,7 @@
           "task": "Do the obligations in all_obligations together state observable behavior for every outcome and limit that requirement asks for?"
         },
         "criteria": {
-          "true": "Every outcome and limit the requirement states for the system is delivered by the behavior of at least one obligation in all_obligations, whether or not that obligation cites the requirement's id. Conditions on how the work is done need no obligation (reference.link_boundaries).",
+          "true": "Every outcome and limit the requirement states for the system is delivered by the behavior of at least one obligation in all_obligations, whether or not that obligation cites the requirement's id. Conditions on how the work is done, tracked or proven need no obligation (reference.link_boundaries).",
           "false": "Some outcome or limit the requirement states is delivered by no obligation's behavior. An id that appears only in a back-link, index or coverage row delivers nothing."
         }
       }
@@ -178,10 +199,13 @@
         "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
         "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
-        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work is done, tracked or proven (which branch it starts from, an inventory or checklist the work keeps, how it is reviewed or delivered, what proof may or may not close it) need no Specification obligation; Verification Design owns proof. Its outcomes and limits for the system do need one.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
         "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "A realization carries out every behavior the obligation states, in its own text and in its list body. Carrying out some of them is a partial realization, not a realization.",
+        "A realization that allows an exception, delay or bound the obligation does not allow (\"usually\", \"may lag by one request\", \"best effort\") weakens it.",
+        "A prohibition (MUST NOT) is realized by the owner or boundary that keeps the forbidden act out, stated as such: for example, a component that never opens a store, or an interface that has no path to it.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
       "examples": [
@@ -234,6 +258,24 @@
           "why": "An owner and an interface that carry out survival across restart."
         },
         {
+          "shows": "a prohibition realized by an absence",
+          "obligation": "R12 The export job MUST NOT write to the source database.",
+          "passages": [
+            "| R12 | ExportReader | read-only connection pool; no write statements are prepared | — | — | a write attempt fails at the pool | read-only role test |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "The owner and its read-only interface keep the forbidden write out, and say so."
+        },
+        {
+          "shows": "a realization weakened by an exception",
+          "obligation": "R13 A cancelled upload MUST stop within one second.",
+          "passages": [
+            "| R13 | UploadWorker | cancel() sets a flag checked between chunks; a large chunk may finish first | … |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "The passage allows an exception (a chunk may finish first) that the obligation's one-second bound doesn't allow."
+        },
+        {
           "shows": "not a realization",
           "obligation": "R4 A saved draft survives an app restart.",
           "passages": [
@@ -271,6 +313,8 @@
             "realization_blocks",
             "realization_items",
             "realization_by_name",
+            "realization_name_items",
+            "realization_diagrams",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
@@ -278,8 +322,8 @@
           "task": "Do the Program Design passages for this obligation (realization_rows, and for Markdown the passages that name its requirements, the blocks and items that name it, and the blocks that define the mechanisms its rows name) name an owner and an interface or flow that carry out the behavior obligation states?"
         },
         "criteria": {
-          "true": "A passage gives the component that owns this obligation's behavior and the interface or flow through which it is supplied, without weakening or contradicting what the obligation states.",
-          "false": "No passage carries out this behavior: realization_rows is empty, its cells are blank, 'see …' or 'gap: …', the named mechanism supplies something else, or a passage weakens or contradicts the obligation."
+          "true": "The passages give the component that owns this obligation's behavior and the interface or flow through which it is supplied, for every behavior the obligation and its list body state, without an exception, delay or bound the obligation doesn't allow. A prohibition counts as realized when an owner or boundary is stated to keep the forbidden act out.",
+          "false": "Some behavior the obligation or its list body states is carried out by no passage (including when the passages are empty, blank, 'see …' or 'gap: …', or name a mechanism that supplies something else), or a passage allows an exception, delay or bound the obligation doesn't allow, or contradicts it."
         }
       }
     },
@@ -347,6 +391,22 @@
             "tool": "complete",
             "field": "realization_by_name"
           },
+          "yes": "name_items_read",
+          "no": "uncertain"
+        },
+        "name_items_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_name_items"
+          },
+          "yes": "diagrams_read",
+          "no": "uncertain"
+        },
+        "diagrams_read": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "realization_diagrams"
+          },
           "yes": "realizes",
           "no": "uncertain"
         },
@@ -385,10 +445,13 @@
         "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
         "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
-        "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
+        "The Specification states observable behavior of the system. A requirement's conditions on how the work is done, tracked or proven (which branch it starts from, an inventory or checklist the work keeps, how it is reviewed or delivered, what proof may or may not close it) need no Specification obligation; Verification Design owns proof. Its outcomes and limits for the system do need one.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
         "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation or checks section the row names or refers to (by its id, such as S1, O3 or J1, or by what it covers, such as \"complete quality/test gates\" pointing to the page's checks section), or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row neither names nor points to, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
+        "A realization carries out every behavior the obligation states, in its own text and in its list body. Carrying out some of them is a partial realization, not a realization.",
+        "A realization that allows an exception, delay or bound the obligation does not allow (\"usually\", \"may lag by one request\", \"best effort\") weakens it.",
+        "A prohibition (MUST NOT) is realized by the owner or boundary that keeps the forbidden act out, stated as such: for example, a component that never opens a store, or an interface that has no path to it.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
       "examples": [
@@ -441,6 +504,24 @@
           "why": "An owner and an interface that carry out survival across restart."
         },
         {
+          "shows": "a prohibition realized by an absence",
+          "obligation": "R12 The export job MUST NOT write to the source database.",
+          "passages": [
+            "| R12 | ExportReader | read-only connection pool; no write statements are prepared | — | — | a write attempt fails at the pool | read-only role test |"
+          ],
+          "answer": "row_realizes: true",
+          "why": "The owner and its read-only interface keep the forbidden write out, and say so."
+        },
+        {
+          "shows": "a realization weakened by an exception",
+          "obligation": "R13 A cancelled upload MUST stop within one second.",
+          "passages": [
+            "| R13 | UploadWorker | cancel() sets a flag checked between chunks; a large chunk may finish first | … |"
+          ],
+          "answer": "row_realizes: false",
+          "why": "The passage allows an exception (a chunk may finish first) that the obligation's one-second bound doesn't allow."
+        },
+        {
           "shows": "not a realization",
           "obligation": "R4 A saved draft survives an app restart.",
           "passages": [
@@ -466,7 +547,7 @@
       ]
     },
     "questions": {
-      "all_accounted": {
+      "cited_accounted": {
         "type": "noul",
         "instructions": {
           "check": "verification_rows",
@@ -479,11 +560,31 @@
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "Is every obligation in all_obligations whose behavior serves requirement accounted for by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation or checks section in shared_observations that those rows name or refer to, or by listing it as unverified?"
+          "task": "Is every obligation in all_obligations that cites the requirement's id accounted for whole by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation or checks section in shared_observations that those rows name or refer to, or by listing it as unverified?"
         },
         "criteria": {
-          "true": "Each obligation whose behavior delivers an outcome or limit of the requirement, whether or not it cites the requirement's id, is accounted for whole by these rows in one of those ways: every behavior it states has an observation the rows give or point to, or is listed as unverified.",
-          "false": "Some obligation whose behavior delivers an outcome or limit of the requirement is not accounted for whole by these rows: none of those ways covers it, or some behavior it states has no observation the rows give or point to. An observation that sits only under another requirement's row, and that these rows neither name nor point to, does not count."
+          "true": "Each obligation that cites the requirement has every behavior it states covered by an observation these rows give or point to, or is listed as unverified.",
+          "false": "Some obligation that cites the requirement has a behavior with no observation these rows give or point to and is not listed as unverified. An observation only under another requirement's row, that these rows neither name nor point to, does not count."
+        }
+      },
+      "uncited_serving_accounted": {
+        "type": "noul",
+        "instructions": {
+          "check": "verification_rows",
+          "against": "all_obligations",
+          "context": [
+            "identifier",
+            "requirement",
+            "shared_observations",
+            "reference.definitions",
+            "reference.link_boundaries",
+            "reference.examples"
+          ],
+          "task": "Is every obligation in all_obligations that does not cite the requirement's id, but whose own behavior supplies part of the requirement's stated need, accounted for whole by verification_rows in the same ways? If there is no such obligation, the answer is yes."
+        },
+        "criteria": {
+          "true": "No uncited obligation supplies part of the requirement's need, or each one that does is accounted for whole by these rows, directly, through a pointed-to observation, or as unverified. Dependencies, adjacent concerns and delivery gates do not supply the need (reference.link_boundaries).",
+          "false": "Some obligation that does not cite the requirement supplies part of its need, and some behavior it states has no observation these rows give or point to, and it is not listed as unverified."
         }
       },
       "keeps_threshold": {
@@ -631,12 +732,23 @@
           "no": "uncertain"
         },
         "is_accounted": {
-          "ask": "all_accounted",
+          "ask": "cited_accounted",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "uncited_accounted",
+          "no": {
+            "finding": "Worth checking: an obligation that cites this requirement may not be accounted for whole by its own Verification rows. Check that the rows name each one, describe its observation, point to a shared observation, or list it as unverified; an observation only under another requirement's row does not count. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "at": "requirement"
+          },
+          "uncertain": "uncertain"
+        },
+        "uncited_accounted": {
+          "ask": "uncited_serving_accounted",
           "yes_at_or_above": 0.7,
           "no_at_or_below": 0.3,
           "yes": "threshold_kept",
           "no": {
-            "finding": "Worth checking: this requirement's own Verification rows may not account for every obligation that serves it, cited or not. Find the obligations that serve it, and check that its rows name each one, describe its observation, point to a shared observation, or list it as unverified; an observation only under another requirement's row does not count. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "finding": "Worth checking: an obligation that serves this requirement without citing it may not be accounted for by its Verification rows. Decide whether it serves the requirement, and if so whether it should cite it and be observed here. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
             "at": "requirement"
           },
           "uncertain": "uncertain"
