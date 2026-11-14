@@ -31,9 +31,9 @@
       "examples": [
         {
           "shows": "a preservation obligation delivers a no-removal limit",
-          "requirement": "U3 Nothing I use in the current settings screen goes away.",
+          "requirement": "U3 Reports I run today still work after the upgrade.",
           "obligations": [
-            "R6 The existing settings sections keep their current controls and behavior."
+            "R6 The existing report builders keep their current inputs and outputs."
           ],
           "answer": "obligations_cover_need: true",
           "why": "The preservation obligation is the observable behavior that delivers the limit; it need not list each control."
@@ -88,21 +88,21 @@
         },
         {
           "shows": "a preservation obligation realized by its existing owner",
-          "obligation": "R20 The existing filters keep their current behavior.",
+          "obligation": "R20 Existing invoice exports keep their current formats and columns.",
           "passages": [
-            "| R20 | FilterBar (existing) | unchanged filter props | — | — | — | existing filter tests |"
+            "| R20 | InvoiceExporter (existing) | unchanged export interface | existing export tests |"
           ],
           "answer": "row_realizes: true",
-          "why": "The existing owner and its unchanged interface keep the behavior; the filters need not be restated one by one."
+          "why": "The existing owner and its unchanged interface keep the behavior; each format need not be restated."
         },
         {
           "shows": "a rule realized only by implication",
-          "obligation": "R21 A paused job MUST resume on the same worker.",
+          "obligation": "R21 An order over the customer's credit limit MUST be held for review.",
           "passages": [
-            "The scheduler receives the paused job's worker id and dispatches the job."
+            "Checkout passes the customer's credit limit to OrderService with the order."
           ],
           "answer": "row_realizes: false",
-          "why": "The worker id is handed over, but no passage states that the job resumes on that worker."
+          "why": "The limit is handed over, but no passage states that an order over it is held."
         },
         {
           "shows": "a prohibition realized by an absence",
@@ -244,9 +244,9 @@
       "examples": [
         {
           "shows": "a preservation obligation delivers a no-removal limit",
-          "requirement": "U3 Nothing I use in the current settings screen goes away.",
+          "requirement": "U3 Reports I run today still work after the upgrade.",
           "obligations": [
-            "R6 The existing settings sections keep their current controls and behavior."
+            "R6 The existing report builders keep their current inputs and outputs."
           ],
           "answer": "obligations_cover_need: true",
           "why": "The preservation obligation is the observable behavior that delivers the limit; it need not list each control."
@@ -301,21 +301,21 @@
         },
         {
           "shows": "a preservation obligation realized by its existing owner",
-          "obligation": "R20 The existing filters keep their current behavior.",
+          "obligation": "R20 Existing invoice exports keep their current formats and columns.",
           "passages": [
-            "| R20 | FilterBar (existing) | unchanged filter props | — | — | — | existing filter tests |"
+            "| R20 | InvoiceExporter (existing) | unchanged export interface | existing export tests |"
           ],
           "answer": "row_realizes: true",
-          "why": "The existing owner and its unchanged interface keep the behavior; the filters need not be restated one by one."
+          "why": "The existing owner and its unchanged interface keep the behavior; each format need not be restated."
         },
         {
           "shows": "a rule realized only by implication",
-          "obligation": "R21 A paused job MUST resume on the same worker.",
+          "obligation": "R21 An order over the customer's credit limit MUST be held for review.",
           "passages": [
-            "The scheduler receives the paused job's worker id and dispatches the job."
+            "Checkout passes the customer's credit limit to OrderService with the order."
           ],
           "answer": "row_realizes: false",
-          "why": "The worker id is handed over, but no passage states that the job resumes on that worker."
+          "why": "The limit is handed over, but no passage states that an order over it is held."
         },
         {
           "shows": "a prohibition realized by an absence",
@@ -529,9 +529,9 @@
       "examples": [
         {
           "shows": "a preservation obligation delivers a no-removal limit",
-          "requirement": "U3 Nothing I use in the current settings screen goes away.",
+          "requirement": "U3 Reports I run today still work after the upgrade.",
           "obligations": [
-            "R6 The existing settings sections keep their current controls and behavior."
+            "R6 The existing report builders keep their current inputs and outputs."
           ],
           "answer": "obligations_cover_need: true",
           "why": "The preservation obligation is the observable behavior that delivers the limit; it need not list each control."
@@ -586,21 +586,21 @@
         },
         {
           "shows": "a preservation obligation realized by its existing owner",
-          "obligation": "R20 The existing filters keep their current behavior.",
+          "obligation": "R20 Existing invoice exports keep their current formats and columns.",
           "passages": [
-            "| R20 | FilterBar (existing) | unchanged filter props | — | — | — | existing filter tests |"
+            "| R20 | InvoiceExporter (existing) | unchanged export interface | existing export tests |"
           ],
           "answer": "row_realizes: true",
-          "why": "The existing owner and its unchanged interface keep the behavior; the filters need not be restated one by one."
+          "why": "The existing owner and its unchanged interface keep the behavior; each format need not be restated."
         },
         {
           "shows": "a rule realized only by implication",
-          "obligation": "R21 A paused job MUST resume on the same worker.",
+          "obligation": "R21 An order over the customer's credit limit MUST be held for review.",
           "passages": [
-            "The scheduler receives the paused job's worker id and dispatches the job."
+            "Checkout passes the customer's credit limit to OrderService with the order."
           ],
           "answer": "row_realizes: false",
-          "why": "The worker id is handed over, but no passage states that the job resumes on that worker."
+          "why": "The limit is handed over, but no passage states that an order over it is held."
         },
         {
           "shows": "a prohibition realized by an absence",
@@ -906,9 +906,9 @@
       "examples": [
         {
           "shows": "a preservation obligation delivers a no-removal limit",
-          "requirement": "U3 Nothing I use in the current settings screen goes away.",
+          "requirement": "U3 Reports I run today still work after the upgrade.",
           "obligations": [
-            "R6 The existing settings sections keep their current controls and behavior."
+            "R6 The existing report builders keep their current inputs and outputs."
           ],
           "answer": "obligations_cover_need: true",
           "why": "The preservation obligation is the observable behavior that delivers the limit; it need not list each control."
@@ -963,21 +963,21 @@
         },
         {
           "shows": "a preservation obligation realized by its existing owner",
-          "obligation": "R20 The existing filters keep their current behavior.",
+          "obligation": "R20 Existing invoice exports keep their current formats and columns.",
           "passages": [
-            "| R20 | FilterBar (existing) | unchanged filter props | — | — | — | existing filter tests |"
+            "| R20 | InvoiceExporter (existing) | unchanged export interface | existing export tests |"
           ],
           "answer": "row_realizes: true",
-          "why": "The existing owner and its unchanged interface keep the behavior; the filters need not be restated one by one."
+          "why": "The existing owner and its unchanged interface keep the behavior; each format need not be restated."
         },
         {
           "shows": "a rule realized only by implication",
-          "obligation": "R21 A paused job MUST resume on the same worker.",
+          "obligation": "R21 An order over the customer's credit limit MUST be held for review.",
           "passages": [
-            "The scheduler receives the paused job's worker id and dispatches the job."
+            "Checkout passes the customer's credit limit to OrderService with the order."
           ],
           "answer": "row_realizes: false",
-          "why": "The worker id is handed over, but no passage states that the job resumes on that worker."
+          "why": "The limit is handed over, but no passage states that an order over it is held."
         },
         {
           "shows": "a prohibition realized by an absence",
