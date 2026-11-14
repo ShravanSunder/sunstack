@@ -132,7 +132,7 @@
         },
         "design_decision": {
           "ask": "owner_design_decision",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "html_pictures_present",
           "no": "not_applicable",
@@ -161,7 +161,7 @@
         },
         "model_drawn": {
           "ask": "current_model_drawn",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "html_pictures_complete",
           "no": {

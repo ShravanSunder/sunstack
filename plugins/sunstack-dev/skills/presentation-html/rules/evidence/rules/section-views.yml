@@ -107,3 +107,47 @@ utils:
   plain-text-container:
     kind: element
     regex: '^<(?:ex-callout|aside|blockquote)(?:\s|>)'
+---
+# A section's own content as raw blocks in source order, so tables and diagrams
+# keep their markup and position. Outermost content blocks only; page containers
+# (div, section, ex-document, ex-nav, ex-comments) are not blocks.
+id: html-section-block
+language: Html
+rule:
+  all:
+    - matches: content-block
+    - not:
+        inside:
+          stopBy: end
+          matches: content-block
+utils:
+  content-block:
+    any:
+      - kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<(?:p|ul|ol|table|pre|blockquote|aside|figure|img|svg|canvas|picture|details|ex-(?:mermaid|flow|board|trace|tree|call-stack|diagram|markdown|callout|card|grid|stat|compare|choice|explorer|chart|code|diff|gallery|tabs))(?:\s|>)'
+      - kind: element
+        has:
+          kind: self_closing_tag
+          regex: '(?i)^<(?:img|svg)(?:\s|/)'
+---
+# The same for a Markdown section inside an island: top-level Markdown blocks.
+id: island-section-block
+language: Markdown
+rule:
+  all:
+    - any:
+        - kind: paragraph
+        - kind: list
+        - kind: fenced_code_block
+        - kind: indented_code_block
+        - kind: pipe_table
+        - kind: html_block
+        - kind: block_quote
+    - not:
+        inside:
+          stopBy: end
+          any:
+            - kind: list
+            - kind: block_quote

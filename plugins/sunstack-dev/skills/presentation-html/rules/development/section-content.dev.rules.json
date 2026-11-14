@@ -3,7 +3,7 @@
     "name": "presentation-html.section-view.model",
     "evidence": "html_section",
     "reference": {
-      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An opening summary that previews what the page goes on to explain leads with the answer and needs no view of its own; the sections that explain those points are judged on their own.",
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same facts compared across several items, when the section sets them out for the reader to compare (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An opening summary that previews what the page goes on to explain leads with the answer and needs no view of its own; the sections that explain those points are judged on their own. A list or run of points that each stand alone, such as scope items, open questions, status, constraints or quotations, is not a relationship, even when it is long.",
       "examples": [
         {
           "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
@@ -34,6 +34,21 @@
           "text": "Prose: a first paragraph explains how a request passes through the gateway, the auth service and the orders service; three paragraphs follow about the release checklist and who signs it off; then a sequence diagram of the request path ends the section.",
           "needs_view": "yes: a path through several parts",
           "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
+        },
+        {
+          "text": "Heading 'Open questions'. Prose: four bullets, each naming one undecided item and who decides it.",
+          "needs_view": "no: points that each stand alone, not a relationship",
+          "views_carry": "not asked"
+        },
+        {
+          "text": "Prose: explains how a payment moves from authorised to captured or refunded, and in passing names the team that owns the payment service. Views: a state diagram of the payment's states, right after that explanation.",
+          "needs_view": "yes: states and transitions",
+          "views_carry": "yes: the payment's states, explained in detail, have their view next to the explanation; the owning team is only named in passing and needs none"
+        },
+        {
+          "text": "A table of four release decisions; one cell explains, step by step, how a failed deploy rolls back through three services. No view shows that rollback.",
+          "needs_view": "yes: a path explained in detail inside one cell",
+          "views_carry": "no: the rollback is explained in detail and no view shows it, even though the table carries the decisions"
         }
       ],
       "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
@@ -42,36 +57,37 @@
       "needs_view": {
         "type": "noul",
         "instructions": {
-          "check": "content",
+          "check": "blocks",
           "context": [
+            "island_blocks",
             "heading",
             "reference.view_jobs",
             "reference.examples"
           ],
-          "task": "Does the section's text, read in order in content, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+          "task": "Does this section itself explain how parts relate in a way the reader has to follow, a relationship of a kind reference.view_jobs names, rather than points that each stand alone, simple facts, an interpretation or an opening summary? Read the section's own content in blocks and island_blocks."
         },
         "criteria": {
-          "true": "This section itself explains at least one relationship of a kind reference.view_jobs names, whether in paragraphs, lists or table cells: a path, a flow, states and transitions, ownership, the same questions answered for several items, and so on.",
-          "false": "The text states only simple facts, an interpretation, or an opening summary that previews what the page goes on to explain; nothing in it is a relationship of a kind reference.view_jobs names that this section itself explains."
+          "true": "The section explains how parts relate in a way the reader has to follow, in paragraphs, lists or table cells: a path or flow, branches, messages between participants, states and transitions, ownership and boundaries, identity and cardinality, or the same facts compared across items.",
+          "false": "The section's text is points that each stand alone (scope items, open questions, status, constraints, quotations), simple facts, an interpretation, or an opening summary that previews what the page goes on to explain."
         }
       },
       "views_carry": {
         "type": "noul",
         "instructions": {
-          "check": "content",
-          "against": "html_views",
+          "check": "blocks",
           "context": [
+            "island_blocks",
             "island_views",
             "heading",
             "reference.view_jobs",
             "reference.next_to",
             "reference.examples"
           ],
-          "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
+          "task": "Reading blocks in order (the section's own content as raw blocks, its views among them; island_blocks holds Markdown from an island that runs past this section; island_views adds any island view), does every relationship this section explains in detail have a view that shows it, next to the passage that explains it?"
         },
         "criteria": {
-          "true": "Each such relationship is shown by a view a reader finds where they read about it, as reference.next_to defines.",
-          "false": "At least one such relationship has no view that shows it, or its view sits away from its passage as reference.next_to defines: past unrelated points or other views, or far enough that a reader has to hunt for it."
+          "true": "Each relationship the section explains in detail, step by step or part by part, has a view that shows it where a reader reads about it, as reference.next_to defines; a relationship only named in passing needs no view of its own.",
+          "false": "A relationship the section explains in detail, whether in paragraphs, list items, table cells or option text, has no view that shows it, or its view sits away from its passage as reference.next_to defines."
         }
       }
     },
@@ -91,7 +107,7 @@
             "tool": "complete",
             "field": "markdown_prose"
           },
-          "yes": "content_complete",
+          "yes": "blocks_complete",
           "no": "uncertain"
         },
         "has_prose": {
@@ -160,10 +176,18 @@
           "yes": "pass",
           "no": "uncertain"
         },
-        "content_complete": {
+        "blocks_complete": {
           "mechanical_check": {
             "tool": "complete",
-            "field": "content"
+            "field": "blocks"
+          },
+          "yes": "island_blocks_complete",
+          "no": "uncertain"
+        },
+        "island_blocks_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "island_blocks"
           },
           "yes": "has_prose",
           "no": "uncertain"
@@ -176,7 +200,7 @@
     "name": "presentation-html.island-section-view.model",
     "evidence": "markdown_section",
     "reference": {
-      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An opening summary that previews what the page goes on to explain leads with the answer and needs no view of its own; the sections that explain those points are judged on their own.",
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same facts compared across several items, when the section sets them out for the reader to compare (a table); alternatives on corresponding topics (a comparison); exact source, schema, configuration or commands the reader must inspect (a code view); a few headline numbers, each with its meaning and a comparison (stats); one named component, option or finding with its depth (a card). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it. An opening summary that previews what the page goes on to explain leads with the answer and needs no view of its own; the sections that explain those points are judged on their own. A list or run of points that each stand alone, such as scope items, open questions, status, constraints or quotations, is not a relationship, even when it is long.",
       "examples": [
         {
           "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
@@ -207,6 +231,21 @@
           "text": "Prose: a first paragraph explains how a request passes through the gateway, the auth service and the orders service; three paragraphs follow about the release checklist and who signs it off; then a sequence diagram of the request path ends the section.",
           "needs_view": "yes: a path through several parts",
           "views_carry": "no: the diagram shows the path, but it sits after unrelated points, not next to the paragraph it supports"
+        },
+        {
+          "text": "Heading 'Open questions'. Prose: four bullets, each naming one undecided item and who decides it.",
+          "needs_view": "no: points that each stand alone, not a relationship",
+          "views_carry": "not asked"
+        },
+        {
+          "text": "Prose: explains how a payment moves from authorised to captured or refunded, and in passing names the team that owns the payment service. Views: a state diagram of the payment's states, right after that explanation.",
+          "needs_view": "yes: states and transitions",
+          "views_carry": "yes: the payment's states, explained in detail, have their view next to the explanation; the owning team is only named in passing and needs none"
+        },
+        {
+          "text": "A table of four release decisions; one cell explains, step by step, how a failed deploy rolls back through three services. No view shows that rollback.",
+          "needs_view": "yes: a path explained in detail inside one cell",
+          "views_carry": "no: the rollback is explained in detail and no view shows it, even though the table carries the decisions"
         }
       ],
       "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
@@ -215,24 +254,23 @@
       "needs_view": {
         "type": "noul",
         "instructions": {
-          "check": "content",
+          "check": "blocks",
           "context": [
             "heading",
             "reference.view_jobs",
             "reference.examples"
           ],
-          "task": "Does the section's text, read in order in content, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+          "task": "Does this section itself explain how parts relate in a way the reader has to follow, a relationship of a kind reference.view_jobs names, rather than points that each stand alone, simple facts, an interpretation or an opening summary? Read the section's own content in blocks."
         },
         "criteria": {
-          "true": "This section itself explains at least one relationship of a kind reference.view_jobs names, whether in paragraphs, lists or table cells: a path, a flow, states and transitions, ownership, the same questions answered for several items, and so on.",
-          "false": "The text states only simple facts, an interpretation, or an opening summary that previews what the page goes on to explain; nothing in it is a relationship of a kind reference.view_jobs names that this section itself explains."
+          "true": "The section explains how parts relate in a way the reader has to follow, in paragraphs, lists or table cells: a path or flow, branches, messages between participants, states and transitions, ownership and boundaries, identity and cardinality, or the same facts compared across items.",
+          "false": "The section's text is points that each stand alone (scope items, open questions, status, constraints, quotations), simple facts, an interpretation, or an opening summary that previews what the page goes on to explain."
         }
       },
       "views_carry": {
         "type": "noul",
         "instructions": {
-          "check": "content",
-          "against": "html_views",
+          "check": "blocks",
           "context": [
             "island_views",
             "heading",
@@ -240,11 +278,11 @@
             "reference.next_to",
             "reference.examples"
           ],
-          "task": "Reading content in order, does every relationship of a kind reference.view_jobs names that the section's prose explains have a view, from html_views or island_views, that shows it and sits next to the passage explaining it?"
+          "task": "Reading blocks in order (the section's own content as raw blocks, its views among them; island_views adds any island view), does every relationship this section explains in detail have a view that shows it, next to the passage that explains it?"
         },
         "criteria": {
-          "true": "Each such relationship is shown by a view a reader finds where they read about it, as reference.next_to defines.",
-          "false": "At least one such relationship has no view that shows it, or its view sits away from its passage as reference.next_to defines: past unrelated points or other views, or far enough that a reader has to hunt for it."
+          "true": "Each relationship the section explains in detail, step by step or part by part, has a view that shows it where a reader reads about it, as reference.next_to defines; a relationship only named in passing needs no view of its own.",
+          "false": "A relationship the section explains in detail, whether in paragraphs, list items, table cells or option text, has no view that shows it, or its view sits away from its passage as reference.next_to defines."
         }
       }
     },
@@ -264,7 +302,7 @@
             "tool": "complete",
             "field": "markdown_prose"
           },
-          "yes": "content_complete",
+          "yes": "blocks_complete",
           "no": "uncertain"
         },
         "has_prose": {
@@ -333,10 +371,10 @@
           "yes": "pass",
           "no": "uncertain"
         },
-        "content_complete": {
+        "blocks_complete": {
           "mechanical_check": {
             "tool": "complete",
-            "field": "content"
+            "field": "blocks"
           },
           "yes": "has_prose",
           "no": "uncertain"
@@ -393,8 +431,8 @@
           "task": "Is table optional depth that a reader can skip and still follow the page's open questions and conclusions, rather than content the reader needs in view?"
         },
         "criteria": {
-          "true": "The table, as it reads with its heading and lead-in, holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index that maps items to owners, interfaces or proofs, even when it is the whole of its section.",
-          "false": "The table, as it reads with its heading and lead-in, holds what the reader must compare or check: the exact corresponding facts a comparison or choice rests on, a contract or core mapping, or failure cases and their thresholds as its subject."
+          "true": "The table, as it reads with its heading and lead-in, holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index that maps items to owners, interfaces or proofs, even when one of its columns lists failures, which a trace cross-references rather than sets out.",
+          "false": "The table, as it reads with its heading and lead-in, holds what the reader must compare or check: the exact corresponding facts a comparison or choice rests on, a contract or core mapping, or failure cases and their thresholds as the table's own subject."
         }
       },
       "long_detail": {
@@ -408,8 +446,8 @@
           "task": "Is table long enough that reading or scanning it in the main path holds up the section's point, the way a wall of text would?"
         },
         "criteria": {
-          "true": "Taking the table in means wading through a lot relative to its point: many entries, dense cells, or both, whatever the cells hold.",
-          "false": "The table is short or compact enough to take in quickly relative to its point, such as a small matrix of ids or short entries."
+          "true": "Taking the table in costs real reading relative to its point, so a reader who skips it saves real time: enough entries, dense cells, or both, whatever the cells hold.",
+          "false": "The table is short or compact: a few rows, or a small matrix of ids or short entries a reader takes in at a glance."
         }
       },
       "failure_cases": {
@@ -535,8 +573,8 @@
           "task": "Is table optional depth that a reader can skip and still follow the page's open questions and conclusions, rather than content the reader needs in view?"
         },
         "criteria": {
-          "true": "The table, as it reads with its heading and lead-in, holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index that maps items to owners, interfaces or proofs, even when it is the whole of its section.",
-          "false": "The table, as it reads with its heading and lead-in, holds what the reader must compare or check: the exact corresponding facts a comparison or choice rests on, a contract or core mapping, or failure cases and their thresholds as its subject."
+          "true": "The table, as it reads with its heading and lead-in, holds background or supporting depth as reference.detail defines it: history, rationale, evidence, receipts, provenance, inventories, reference data, or a trace or index that maps items to owners, interfaces or proofs, even when one of its columns lists failures, which a trace cross-references rather than sets out.",
+          "false": "The table, as it reads with its heading and lead-in, holds what the reader must compare or check: the exact corresponding facts a comparison or choice rests on, a contract or core mapping, or failure cases and their thresholds as the table's own subject."
         }
       },
       "long_detail": {
@@ -550,8 +588,8 @@
           "task": "Is table long enough that reading or scanning it in the main path holds up the section's point, the way a wall of text would?"
         },
         "criteria": {
-          "true": "Taking the table in means wading through a lot relative to its point: many entries, dense cells, or both, whatever the cells hold.",
-          "false": "The table is short or compact enough to take in quickly relative to its point, such as a small matrix of ids or short entries."
+          "true": "Taking the table in costs real reading relative to its point, so a reader who skips it saves real time: enough entries, dense cells, or both, whatever the cells hold.",
+          "false": "The table is short or compact: a few rows, or a small matrix of ids or short entries a reader takes in at a glance."
         }
       },
       "failure_cases": {
@@ -592,8 +630,8 @@
         },
         "hidden_failure_cases": {
           "ask": "failure_cases",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "yes_at_or_above": 0.8,
+          "no_at_or_below": 0.7,
           "yes": {
             "finding": "This table sits in a closed disclosure and states failure cases or their thresholds; check whether they belong in view, then decide.",
             "at": "table"

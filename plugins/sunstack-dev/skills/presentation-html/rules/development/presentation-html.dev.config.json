@@ -199,9 +199,25 @@
               ]
             }
           },
-          "content": {
-            "from": "section",
-            "text": "own"
+          "blocks": {
+            "from": "inside",
+            "kind": "html_section_block",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "island_blocks": {
+            "from": "inside",
+            "kind": "island_section_block",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
           }
         }
       },
@@ -258,9 +274,15 @@
               ]
             }
           },
-          "content": {
-            "from": "section",
-            "text": "own"
+          "blocks": {
+            "from": "inside",
+            "kind": "island_section_block",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
           }
         }
       },
@@ -337,6 +359,14 @@
             2
           ]
         },
+        "fields": {}
+      },
+      "html_section_block": {
+        "rule": "html-section-block",
+        "fields": {}
+      },
+      "island_section_block": {
+        "rule": "island-section-block",
         "fields": {}
       }
     }
