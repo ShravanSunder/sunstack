@@ -19,9 +19,15 @@ const config = path.join(
   repositoryRoot,
   "plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json",
 );
-const engine = "@sunstack/cli@0.18.0";
+const engine = "@sunstack/cli@0.19.0";
 const frozenRevision = "a714d73191f57e777d612aa2bdf5a3768e4cda60";
 const observationDigest = "d43732f5346bce930fb4f843dc22449c9c946c48a3f4717a2a33329762a7af06";
+// The frozen book recorded the old rule's abstention on this island-only section
+// (its Markdown held a "<" the raw-text check could not read). Parsed islands now
+// decide it, and the owner ruled the choice rejected, so a nudge is the oracle.
+const ownerRulingOverrides: Readonly<Record<string, "finding">> = {
+  "b-agent-vm-assumptions-09-nov-63461154-pick-b2g": "finding",
+};
 const externalInputs = z
   .object({
     corpus: z.string().min(1).optional(),
@@ -72,7 +78,11 @@ test("active picture rule validates with its own released CLI pin and no model",
 interface PictureCase {
   readonly choiceId: string;
   readonly section: string;
-  readonly expected: "pass" | "finding";
+  readonly expected: "pass" | "finding" | "uncertain";
+}
+
+function markdownIsland(islandId: string, markdown: string): string {
+  return `<ex-markdown id="${islandId}"><script type="text/markdown">\n${markdown}\n</script></ex-markdown>`;
 }
 
 function decisionSection(choiceId: string, heading: string, body: string): string {
@@ -163,16 +173,79 @@ const pictureCases: readonly PictureCase[] = [
       "<p>The runner image has Chrome.</p>",
     )}\n<img src="runner.png" alt="Runner image contents">`,
   },
+  {
+    choiceId: "island-mermaid",
+    expected: "pass",
+    section: decisionSection(
+      "island-mermaid",
+      "Mermaid fence inside prose in an island",
+      markdownIsland(
+        "island-mermaid-text",
+        "Requests arrive when `N - 65 s < T`.\n\n```mermaid\nflowchart LR\n  cli --> central\n```\n\nCentral answers once.",
+      ),
+    ),
+  },
+  {
+    choiceId: "island-plantuml",
+    expected: "pass",
+    section: decisionSection(
+      "island-plantuml",
+      "PlantUML fence in an island",
+      markdownIsland(
+        "island-plantuml-text",
+        "~~~plantuml\n@startuml\nBrowser -> Issuer: code\n@enduml\n~~~",
+      ),
+    ),
+  },
+  {
+    choiceId: "island-image",
+    expected: "pass",
+    section: decisionSection(
+      "island-image",
+      "Markdown image in an island",
+      markdownIsland(
+        "island-image-text",
+        "The wrong-code state:\n\n![Sign-in form with a red code field](wrong-code.png)",
+      ),
+    ),
+  },
+  {
+    choiceId: "island-fence-inside-code",
+    expected: "finding",
+    section: decisionSection(
+      "island-fence-inside-code",
+      "A diagram fence quoted inside a code block",
+      markdownIsland(
+        "island-fence-inside-code-text",
+        "How to write one:\n\n````md\n```mermaid\nflowchart LR\n  a --> b\n```\n````",
+      ),
+    ),
+  },
+  {
+    choiceId: "island-earlier-heading-only",
+    expected: "finding",
+    section: [
+      '<h2 id="island-context">Context with an island diagram</h2>',
+      markdownIsland("island-context-text", "```mermaid\nflowchart LR\n  a --> b\n```"),
+      decisionSection(
+        "island-earlier-heading-only",
+        "A decision whose island diagram sits under the previous heading",
+        "<p>The issuer label changes.</p>",
+      ),
+    ].join("\n"),
+  },
 ];
 
-test("each configured picture type before a choice in its own section passes; earlier-heading or later pictures still nudge", () => {
-  // Arrange: one Demistify-shaped page, one heading section per picture case.
+function runPictureCasePage(cases: readonly PictureCase[]): {
+  readonly output: NativeOutput;
+  readonly outcomes: Map<string, string | undefined>;
+} {
   const root = createRulebookFixture();
   const page = [
     "<!doctype html>",
     '<html lang="en"><head><meta charset="utf-8"><title>Picture cases</title></head><body>',
     "<h1>Picture cases</h1>",
-    ...pictureCases.map((pictureCase) => pictureCase.section),
+    ...cases.map((pictureCase) => pictureCase.section),
     "</body></html>",
     "",
   ].join("\n");
@@ -180,21 +253,57 @@ test("each configured picture type before a choice in its own section passes; ea
   writeFileSync(pagePath, page);
   const lines = page.split("\n");
   const reportPath = path.join(root, "picture-cases-report.json");
-
-  // Act: run the active rule over the page through the pinned CLI.
   const output = runPictureLint(["--root", root, "--report", reportPath, pagePath]);
   const report = pictureReportSchema.parse(readJson(reportPath));
-
-  // Assert: every choice has exactly the expected mechanical outcome.
-  expect(output.status, output.stderr).toBe(0);
   expect(report.usage.model_requests).toBe(0);
-  expect(report.results).toHaveLength(pictureCases.length);
-  for (const pictureCase of pictureCases) {
+  expect(report.results).toHaveLength(cases.length);
+  const outcomes = new Map<string, string | undefined>();
+  for (const pictureCase of cases) {
     const choiceLine =
       lines.findIndex((line) => line.startsWith(`<ex-choice id="${pictureCase.choiceId}"`)) + 1;
     const result = report.results.find((candidate) => candidate.first_line === choiceLine);
-    expect(result?.outcome, pictureCase.choiceId).toBe(pictureCase.expected);
+    outcomes.set(pictureCase.choiceId, result?.outcome);
   }
+  return { output, outcomes };
+}
+
+test("each configured picture type before a choice in its own section passes; earlier-heading, later or quoted pictures still nudge", () => {
+  // Arrange: one Demistify-shaped page, one heading section per picture case.
+  const cases = pictureCases;
+
+  // Act: run the active rule over the page through the pinned CLI.
+  const { output, outcomes } = runPictureCasePage(cases);
+
+  // Assert: every choice has exactly the expected mechanical outcome.
+  expect(output.status, output.stderr).toBe(0);
+  for (const pictureCase of cases) {
+    expect(outcomes.get(pictureCase.choiceId), pictureCase.choiceId).toBe(pictureCase.expected);
+  }
+});
+
+test("a Markdown heading inside an island between the section heading and the choice is uncertain", () => {
+  // Arrange: the island's own heading may start the choice's real section.
+  const cases: readonly PictureCase[] = [
+    {
+      choiceId: "island-heading",
+      expected: "uncertain",
+      section: decisionSection(
+        "island-heading",
+        "A section whose island opens a sub-section",
+        markdownIsland(
+          "island-heading-text",
+          "```mermaid\nflowchart LR\n  a --> b\n```\n\n## Rollout\n\nNo picture here.",
+        ),
+      ),
+    },
+  ];
+
+  // Act: run the active rule over the page through the pinned CLI.
+  const { output, outcomes } = runPictureCasePage(cases);
+
+  // Assert: the rule abstains rather than crediting the diagram above the island heading.
+  expect(output.status, output.stderr).toBe(5);
+  expect(outcomes.get("island-heading")).toBe("uncertain");
 });
 
 const observationSchema = z.object({
@@ -256,7 +365,7 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
     const report = pictureReportSchema.parse(readJson(reportPath));
 
     // Assert: literal reviewed geometry, including abstention, is the independent oracle.
-    expect(output.status, output.stderr).toBe(5);
+    expect(output.status, output.stderr).toBe(0);
     expect(report.usage.model_requests).toBe(0);
     expect(report.requests).toEqual([]);
     expect(report.results).toHaveLength(52);
@@ -265,8 +374,11 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
         counts[result.outcome] = (counts[result.outcome] ?? 0) + 1;
         return counts;
       }, {}),
-    ).toEqual({ pass: 17, finding: 34, uncertain: 1 });
+    ).toEqual({ pass: 17, finding: 35 });
     expect(observations.cases).toHaveLength(37);
+    expect(observations.cases.map((observation) => observation.id)).toEqual(
+      expect.arrayContaining(Object.keys(ownerRulingOverrides)),
+    );
     for (const observation of observations.cases) {
       const results = report.results.filter(
         (result) =>
@@ -275,7 +387,9 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
           result.last_line === observation.lines[1],
       );
       expect(results, observation.id).toHaveLength(1);
-      expect(results[0]?.outcome, observation.id).toBe(observation.expected);
+      expect(results[0]?.outcome, observation.id).toBe(
+        ownerRulingOverrides[observation.id] ?? observation.expected,
+      );
     }
     for (const finding of report.findings) {
       expect(finding.severity).toBe("warn");

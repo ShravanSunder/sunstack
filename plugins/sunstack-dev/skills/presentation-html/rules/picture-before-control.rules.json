@@ -27,7 +27,7 @@
             "field": "direct_heading_match",
             "pattern": "(?s).+"
           },
-          "yes": "earlier_picture",
+          "yes": "island_heading_boundary",
           "no": "uncertain"
         },
         "earlier_picture": {
@@ -37,10 +37,7 @@
             "pattern": "(?s).+"
           },
           "yes": "pass",
-          "no": {
-            "finding": "Worth checking: no configured picture precedes this choice in its heading section. This decision may not need a picture, and a useful picture may sit under another heading. Read sunstack-dev/shared-references/owner-decision-brief.md and presentation-html/references/options-and-decisions.md before changing it.",
-            "at": "control"
-          }
+          "no": "island_picture"
         },
         "boundary_match_complete": {
           "mechanical_check": {
@@ -55,8 +52,45 @@
             "tool": "complete",
             "field": "earlier_picture_match"
           },
+          "yes": "island_picture_complete",
+          "no": "uncertain"
+        },
+        "island_picture_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "island_picture_before"
+          },
+          "yes": "island_heading_complete",
+          "no": "uncertain"
+        },
+        "island_heading_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "island_heading_before"
+          },
           "yes": "direct_heading_boundary",
           "no": "uncertain"
+        },
+        "island_heading_boundary": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "island_heading_before",
+            "pattern": "(?s).*"
+          },
+          "yes": "uncertain",
+          "no": "earlier_picture"
+        },
+        "island_picture": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "island_picture_before",
+            "pattern": "(?s).*"
+          },
+          "yes": "pass",
+          "no": {
+            "finding": "Worth checking: no configured picture precedes this choice in its heading section. This decision may not need a picture, and a useful picture may sit under another heading. Read sunstack-dev/shared-references/owner-decision-brief.md and presentation-html/references/options-and-decisions.md before changing it.",
+            "at": "control"
+          }
         }
       }
     },

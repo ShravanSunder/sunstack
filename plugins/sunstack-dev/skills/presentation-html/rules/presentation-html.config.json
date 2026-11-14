@@ -24,7 +24,15 @@
           "id",
           "title"
         ]
-      }
+      },
+      "embedded_markdown": [
+        {
+          "tag": "script",
+          "attributes": {
+            "type": "text/markdown"
+          }
+        }
+      ]
     },
     "kinds": {
       "outline": {
@@ -56,8 +64,30 @@
           "earlier_picture_match": {
             "from": "inside",
             "rule": "choice-with-earlier-section-picture"
+          },
+          "island_picture_before": {
+            "from": "inside",
+            "kind": "island_picture",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          },
+          "island_heading_before": {
+            "from": "inside",
+            "kind": "island_heading",
+            "scope": {
+              "section_prefix": "outline"
+            }
           }
         }
+      },
+      "island_picture": {
+        "rule": "island-picture",
+        "fields": {}
+      },
+      "island_heading": {
+        "rule": "island-heading",
+        "fields": {}
       }
     }
   },
