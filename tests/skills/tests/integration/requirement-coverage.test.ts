@@ -13,7 +13,7 @@ import {
 
 afterEach(cleanupRulebookFixtures);
 
-// C001–C003 ask the decision model, so an ordinary run needs a credential. These
+// C001–C003 and C007 ask the decision model, so an ordinary run needs a credential. These
 // tests prove what each request would carry, built with `--prepare`, which sends
 // nothing; the decisions themselves are measured on the labelled case files.
 const config = path.join(
@@ -91,7 +91,7 @@ function readLine(root: string, file: string, line: number) {
 
 const asText = (value: unknown) => JSON.stringify(value);
 
-test("C001–C003 ask the decision model and C004–C006 stay mechanical, on the released CLI", () => {
+test("C001–C003 and C007 ask the decision model and C004–C006 stay mechanical, on the released CLI", () => {
   // Arrange: the active config, independently of the shared 0.9.0 engine.
   const ruleList = z.array(
     z.object({ rule: z.string(), severity: z.string(), kind: z.object({ kind: z.string() }) }),
@@ -101,7 +101,8 @@ test("C001–C003 ask the decision model and C004–C006 stay mechanical, on the
   const checked = runCoverageLint(["--check"]);
   const listed = runCoverageLint(["--rules"]);
 
-  // Assert: per format, three judged rules and three page-presence rules, all warnings.
+  // Assert: per format, three judged rules, three page-presence rules and the uncited
+  // verification rule, all warnings.
   expect(checked.status, checked.stderr).toBe(0);
   expect(listed.status, listed.stderr).toBe(0);
   const judged = ["specification", "program-design", "verification"];
@@ -117,6 +118,7 @@ test("C001–C003 ask the decision model and C004–C006 stay mechanical, on the
         severity: "warn",
         kind: { kind: "mechanical" },
       })),
+      { rule: `requirement-coverage.${format}.verification-uncited`, severity: "warn", kind: { kind: "asking" } },
     ]),
   );
 });
@@ -281,6 +283,10 @@ test("an absent page warns once for the set and its requirement checks send noth
   expect(report.requests.filter((request) => request.owner.rule.endsWith("markdown.verification"))).toEqual(
     [],
   );
+  const uncitedResults = report.results.filter((result) =>
+    result.name.endsWith("markdown.verification-uncited"),
+  );
+  expect(uncitedResults.map((result) => result.outcome)).toEqual(["not_applicable", "not_applicable"]);
   expect(
     report.requests.filter((request) => request.owner.rule.endsWith("markdown.specification")),
   ).toHaveLength(2);

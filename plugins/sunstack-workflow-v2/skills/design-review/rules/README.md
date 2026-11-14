@@ -1,15 +1,16 @@
 # Requirement coverage nudges
 
-Six rules per format (HTML and Markdown) follow the chain [reviewing-four-document-design.md](../references/reviewing-four-document-design.md#requirement-to-observation) walks from a requirement to its observation. The standards are in [requirement-coverage.md](requirement-coverage.md). Every result is worth checking, not a verdict on the design.
+Seven rules per format (HTML and Markdown) follow the chain [reviewing-four-document-design.md](../references/reviewing-four-document-design.md#requirement-to-observation) walks from a requirement to its observation. The standards are in [requirement-coverage.md](requirement-coverage.md). Every result is worth checking, not a verdict on the design.
 
 | Rule | Piece | What a model reads | Asks |
 | --- | --- | --- | --- |
 | C001 Specification | each requirement | its text and every Specification obligation | do the obligations state behavior for every outcome and limit it asks of the system? |
 | C002 Program Design | each obligation | its text (and list body) and the Program Design passages that name it | does a passage name an owner and an interface or flow that carry it out? |
-| C003 Verification Design | each requirement | the obligations that name it, the V items, and its own Verification and trace rows | is every linked obligation accounted for; do observations keep their V's threshold, reference and target at the declared seam? (in that order) |
+| C003 Verification Design (cited chain) | each requirement | the obligations, the V items, and its own Verification and trace rows | is every obligation that cites it accounted for; do those observations keep their V's threshold, reference and target at the declared seam? (in that order). Its pass covers only obligations that cite the requirement |
+| C007 Verification Design (uncited) | each requirement | the obligations, its own Verification rows and the page's shared observations | is every obligation that serves it without citing it accounted for? Warns on a clear no and is otherwise `uncertain`; it never passes, because whether an uncited obligation serves a requirement is a line independent labellers drew differently |
 | C004–C006 | each Requirements page | whether each sibling page exists | mechanical: one warning per absent page |
 
-Ids are link data in every request, but the model judges meaning: an obligation that serves a requirement without citing its id counts, and a coverage-table row that only lists ids does not. C003 counts only the requirement's own Verification rows; an observation listed under another requirement doesn't account for it. An absent page gets one warning; its requirement checks end `not_applicable`.
+Ids are link data in every request, but the model judges meaning: an obligation that serves a requirement without citing its id counts (C001, C007), and a coverage-table row that only lists ids does not. C003 and C007 count only the requirement's own Verification rows; an observation listed under another requirement doesn't account for it. An absent page gets one warning; its requirement checks end `not_applicable`.
 
 ## What it reads
 
@@ -24,13 +25,13 @@ Not read: chunked sets (one folder per document), definitions inside Markdown is
 
 ## Run it
 
-C001–C003 ask the decision model (`jev-latest`), so a run needs the authorized model credential route; never supply a stand-in key. From this repository root, name the design set's folder:
+C001–C003 and C007 ask the decision model (`jev-latest`), so a run needs the authorized model credential route; never supply a stand-in key. From this repository root, name the design set's folder:
 
 ```sh
 pnpm dlx @sunstack/cli@0.22.2 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
 ```
 
-The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's request carries the whole obligation list for its linked-complete question, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 49.9k characters.
+The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's and C007's requests carry the whole obligation list, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 49.9k characters.
 
 To see what each request would carry without sending anything, add `--prepare <file>` and read one request with `lint show <file> <id>`. From another project, use the installed skill's absolute config path and add `--root "$PWD"`. Warnings come with exit 0; `uncertain` results (exit 5) mean the model's answer fell between the bars and are worth reading too.
 
