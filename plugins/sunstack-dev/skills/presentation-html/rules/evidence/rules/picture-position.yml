@@ -89,7 +89,7 @@ utils:
       any:
         - kind: start_tag
         - kind: self_closing_tag
-      regex: '(?i)^<(?:figure|img|svg|ex-mermaid|ex-flow|ex-board|ex-trace)(?:\s|/?>)'
+      regex: '(?i)^<(?:figure|img|picture|svg|canvas|ex-mermaid|ex-diagram|ex-flow|ex-board|ex-trace|ex-tree|ex-call-stack)(?:\s|/?>)'
     not:
       inside:
         stopBy: end
@@ -206,7 +206,7 @@ utils:
       any:
         - kind: start_tag
         - kind: self_closing_tag
-      regex: '(?i)^<(?:figure|img|svg|ex-mermaid|ex-flow|ex-board|ex-trace)(?:\s|/?>)'
+      regex: '(?i)^<(?:figure|img|picture|svg|canvas|ex-mermaid|ex-diagram|ex-flow|ex-board|ex-trace|ex-tree|ex-call-stack)(?:\s|/?>)'
     not:
       inside:
         stopBy: end

@@ -1,6 +1,6 @@
 import { execFileSync, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { afterEach, expect, test } from "vitest";
 import { z } from "zod";
@@ -19,7 +19,7 @@ const config = path.join(
   repositoryRoot,
   "plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json",
 );
-const engine = "@sunstack/cli@0.16.0";
+const engine = "@sunstack/cli@0.18.0";
 const frozenRevision = "a714d73191f57e777d612aa2bdf5a3768e4cda60";
 const observationDigest = "d43732f5346bce930fb4f843dc22449c9c946c48a3f4717a2a33329762a7af06";
 const externalInputs = z
@@ -67,6 +67,134 @@ test("active picture rule validates with its own released CLI pin and no model",
       kind: { kind: "mechanical" },
     },
   ]);
+});
+
+interface PictureCase {
+  readonly choiceId: string;
+  readonly section: string;
+  readonly expected: "pass" | "finding";
+}
+
+function decisionSection(choiceId: string, heading: string, body: string): string {
+  return [
+    `<h2 id="${choiceId}-heading">${heading}</h2>`,
+    body,
+    `<ex-choice id="${choiceId}" title="${heading}: agree?">`,
+    `<ex-option id="${choiceId}-agree" title="Agree"><template slot="summary">Keep it.</template></ex-option>`,
+    `<ex-option id="${choiceId}-disagree" title="Disagree"><template slot="summary">Change it.</template></ex-option>`,
+    "</ex-choice>",
+  ].join("\n");
+}
+
+const pictureCases: readonly PictureCase[] = [
+  {
+    choiceId: "img",
+    expected: "pass",
+    section: decisionSection(
+      "img",
+      "Screenshot of the wrong-code state",
+      '<p>The code field turns red.</p>\n<img src="wrong-code.png" alt="Sign-in form with a red code field">',
+    ),
+  },
+  {
+    choiceId: "svg",
+    expected: "pass",
+    section: decisionSection(
+      "svg",
+      "Inline drawing of the approval path",
+      '<svg viewBox="0 0 40 10" role="img" aria-label="Browser to central"><path d="M0 5h40"/></svg>',
+    ),
+  },
+  {
+    choiceId: "figure",
+    expected: "pass",
+    section: decisionSection(
+      "figure",
+      "Captioned layout sketch",
+      "<figure><pre>browser ──▶ issuer ──▶ central</pre><figcaption>Who signs the token</figcaption></figure>",
+    ),
+  },
+  {
+    choiceId: "picture",
+    expected: "pass",
+    section: decisionSection(
+      "picture",
+      "Responsive screenshot",
+      '<picture><source srcset="device-dark.png" media="(prefers-color-scheme: dark)"><img src="device.png" alt="Device approval page"></picture>',
+    ),
+  },
+  {
+    choiceId: "canvas",
+    expected: "pass",
+    section: decisionSection(
+      "canvas",
+      "Rendered timing chart",
+      '<canvas id="timing-chart" width="320" height="120" aria-label="Refresh timing"></canvas>',
+    ),
+  },
+  {
+    choiceId: "tree",
+    expected: "pass",
+    section: decisionSection(
+      "tree",
+      "Who owns each check",
+      '<ex-tree title="Check owners"><script type="text/markdown">\n- Implementer\n  - unit tests\n- Verifier\n  - browser run\n</script></ex-tree>',
+    ),
+  },
+  {
+    choiceId: "earlier-heading-only",
+    expected: "finding",
+    section: [
+      '<h2 id="context">Context with a picture</h2>',
+      '<img src="flow.png" alt="Sign-in flow">',
+      decisionSection(
+        "earlier-heading-only",
+        "A decision whose picture sits under the previous heading",
+        "<p>The repeated approval returns the stored one.</p>",
+      ),
+    ].join("\n"),
+  },
+  {
+    choiceId: "picture-after-choice",
+    expected: "finding",
+    section: `${decisionSection(
+      "picture-after-choice",
+      "A decision whose picture comes after it",
+      "<p>The runner image has Chrome.</p>",
+    )}\n<img src="runner.png" alt="Runner image contents">`,
+  },
+];
+
+test("each configured picture type before a choice in its own section passes; earlier-heading or later pictures still nudge", () => {
+  // Arrange: one Demistify-shaped page, one heading section per picture case.
+  const root = createRulebookFixture();
+  const page = [
+    "<!doctype html>",
+    '<html lang="en"><head><meta charset="utf-8"><title>Picture cases</title></head><body>',
+    "<h1>Picture cases</h1>",
+    ...pictureCases.map((pictureCase) => pictureCase.section),
+    "</body></html>",
+    "",
+  ].join("\n");
+  const pagePath = path.join(root, "picture-cases.html");
+  writeFileSync(pagePath, page);
+  const lines = page.split("\n");
+  const reportPath = path.join(root, "picture-cases-report.json");
+
+  // Act: run the active rule over the page through the pinned CLI.
+  const output = runPictureLint(["--root", root, "--report", reportPath, pagePath]);
+  const report = pictureReportSchema.parse(readJson(reportPath));
+
+  // Assert: every choice has exactly the expected mechanical outcome.
+  expect(output.status, output.stderr).toBe(0);
+  expect(report.usage.model_requests).toBe(0);
+  expect(report.results).toHaveLength(pictureCases.length);
+  for (const pictureCase of pictureCases) {
+    const choiceLine =
+      lines.findIndex((line) => line.startsWith(`<ex-choice id="${pictureCase.choiceId}"`)) + 1;
+    const result = report.results.find((candidate) => candidate.first_line === choiceLine);
+    expect(result?.outcome, pictureCase.choiceId).toBe(pictureCase.expected);
+  }
 });
 
 const observationSchema = z.object({
