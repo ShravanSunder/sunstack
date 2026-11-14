@@ -128,6 +128,7 @@ MUST load `references/lanes/lane-schema.md` and record `complete | partial | blo
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return its check result. MUST load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. MUST load the selected mode reference and return its whole-mode judgment. Reconstruct and judge the whole mode from complete artifacts.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` to walk the chunk passes sequentially and return each pass's seam coverage. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
+3. IF the set has a file-backed Requirements page, load `rules/README.md`, run its requirement coverage nudge on the set's folder and return its brief result; read each warning as worth checking, not a failure: the page may address the need without naming its id, and you decide whether it is a finding; an absent page gets one warning: if it is not written yet, name it once as not yet written.
 
 Completion: the mode-complete check and every selected chunk pass have statuses, each pass lists its seam sections, and every required dimension has current coverage.
 

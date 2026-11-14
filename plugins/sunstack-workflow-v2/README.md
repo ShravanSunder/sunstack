@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.3.1**. Requires `sunstack-dev` 3.3.1 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.3.2**. Requires `sunstack-dev` 3.3.1 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
