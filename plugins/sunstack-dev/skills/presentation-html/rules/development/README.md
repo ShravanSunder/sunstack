@@ -2,7 +2,7 @@
 
 The active nudges in `../presentation-html.config.json` measure structure only: a picture's presence, word counts, row counts. Their standards ask for reading: whether the current model is drawn, whether a point's relationship has a view next to it, whether long detail sits one action away. This folder holds Jev decision-model versions of the same marked standards (M001 to M005), in their own config so they warn nobody until their cases meet the rule-authoring floors and they beat the active rules, which stay the baseline.
 
-Nothing here is switched on. Three bars come from the development run's labelled answers (14 Nov, replayed on unchanged questions): M001 `owner_design_decision` yes ≥ 0.6; M001 `current_model_drawn` yes ≥ 0.6, no ≤ 0.3; M005 `failure_cases` yes ≥ 0.8, no ≤ 0.7. Their deciding cases are recorded in the case file's `bars`. Every other bar is a provisional 0.7 / 0.3 placeholder.
+Nothing here is switched on. One bar comes from development labels on both sides: M005 `failure_cases` yes ≥ 0.8, no ≤ 0.7, with its deciding cases in the case file's `bars`. M001's `owner_design_decision` yes ≥ 0.6 and `current_model_drawn` 0.6 / 0.3 are provisional candidates: every labelled development case that reaches either question is on its yes side, so neither no side is measured yet; they need independently labelled non-design choices and picture-present cases whose picture is wrong. Every other bar is a provisional 0.7 / 0.3 placeholder.
 
 ## M001 picture before choice
 
@@ -12,9 +12,9 @@ Nothing here is switched on. Three bars come from the development run's labelled
 
 ## M002, M003 section view
 
-- **State:** the section's own content as raw blocks in source order (`blocks`, so a table or diagram keeps its markup and place), Markdown from an island that runs past the section (`island_blocks`), its heading, and its island views. A section ends at the next heading of any level. Prose lists feed only the word count; view lists only the presence check.
+- **State:** the section's own content as raw blocks in source order (`blocks`, so a table or diagram keeps its markup and place), the Markdown blocks of any island in the section (`island_blocks`; an island wholly inside the section appears both raw in `blocks` and here, so the model keeps both the HTML/island order and the island's Markdown structure), its heading, and its island views. A section ends at the next heading of any level. Prose lists feed only the word count; view lists only the presence check.
 - **Questions:** `needs_view`, whether the section explains how parts relate in a way the reader has to follow, rather than points that each stand alone (scope items, open questions, status, constraints, quotations), simple facts or an opening summary; `views_carry`, whether each relationship the section explains in detail has a view next to its passage (one only named in passing needs none).
-- **Tree:** no prose → `not_applicable`; no relationship → pass; a relationship and no view → nudge with the word count; views that don't carry it → nudge; carried and fully read → pass.
+- **Tree:** no content block at all in the section's own content → `not_applicable`; no relationship → pass; a relationship and no view → nudge with the word count; views that don't carry it → nudge; carried and fully read → pass.
 
 ## M004 long-detail table (HTML)
 

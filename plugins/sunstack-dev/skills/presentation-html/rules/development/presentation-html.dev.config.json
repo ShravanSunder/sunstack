@@ -159,26 +159,6 @@
             "from": "section",
             "text": "heading"
           },
-          "html_prose": {
-            "from": "inside",
-            "kind": "html_prose",
-            "scope": {
-              "section_own": [
-                "outline",
-                "markdown_outline"
-              ]
-            }
-          },
-          "markdown_prose": {
-            "from": "inside",
-            "kind": "markdown_prose",
-            "scope": {
-              "section_own": [
-                "outline",
-                "markdown_outline"
-              ]
-            }
-          },
           "html_views": {
             "from": "inside",
             "kind": "html_view",
@@ -233,26 +213,6 @@
           "heading": {
             "from": "section",
             "text": "heading"
-          },
-          "html_prose": {
-            "from": "inside",
-            "kind": "html_prose",
-            "scope": {
-              "section_own": [
-                "outline",
-                "markdown_outline"
-              ]
-            }
-          },
-          "markdown_prose": {
-            "from": "inside",
-            "kind": "markdown_prose",
-            "scope": {
-              "section_own": [
-                "outline",
-                "markdown_outline"
-              ]
-            }
           },
           "html_views": {
             "from": "inside",

@@ -92,33 +92,17 @@
       }
     },
     "decision": {
-      "start": "html_prose_complete",
+      "start": "blocks_complete",
       "steps": {
-        "html_prose_complete": {
-          "mechanical_check": {
-            "tool": "complete",
-            "field": "html_prose"
-          },
-          "yes": "markdown_prose_complete",
-          "no": "uncertain"
-        },
-        "markdown_prose_complete": {
-          "mechanical_check": {
-            "tool": "complete",
-            "field": "markdown_prose"
-          },
-          "yes": "blocks_complete",
-          "no": "uncertain"
-        },
         "has_prose": {
           "mechanical_check": {
-            "tool": "word_count",
+            "tool": "piece_count",
             "field": [
-              "html_prose",
-              "markdown_prose"
+              "blocks",
+              "island_blocks"
             ],
             "bound": {
-              "at_least": 1
+              "greater_than": 0
             }
           },
           "yes": "needs_view",
@@ -145,7 +129,7 @@
           },
           "yes": "views_carry",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words that explain a relationship, and no view in this section's own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
             "at": "heading"
           }
         },
@@ -155,7 +139,7 @@
           "no_at_or_below": 0.3,
           "yes": "views_complete",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words; a relationship this section's prose explains has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
+            "finding": "A relationship this section explains in detail has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
             "at": "heading"
           },
           "uncertain": "uncertain"
@@ -287,33 +271,16 @@
       }
     },
     "decision": {
-      "start": "html_prose_complete",
+      "start": "blocks_complete",
       "steps": {
-        "html_prose_complete": {
-          "mechanical_check": {
-            "tool": "complete",
-            "field": "html_prose"
-          },
-          "yes": "markdown_prose_complete",
-          "no": "uncertain"
-        },
-        "markdown_prose_complete": {
-          "mechanical_check": {
-            "tool": "complete",
-            "field": "markdown_prose"
-          },
-          "yes": "blocks_complete",
-          "no": "uncertain"
-        },
         "has_prose": {
           "mechanical_check": {
-            "tool": "word_count",
+            "tool": "piece_count",
             "field": [
-              "html_prose",
-              "markdown_prose"
+              "blocks"
             ],
             "bound": {
-              "at_least": 1
+              "greater_than": 0
             }
           },
           "yes": "needs_view",
@@ -340,7 +307,7 @@
           },
           "yes": "views_carry",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words that explain a relationship, and no view in this section's own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
             "at": "heading"
           }
         },
@@ -350,7 +317,7 @@
           "no_at_or_below": 0.3,
           "yes": "views_complete",
           "no": {
-            "finding": "{{word_count:html_prose,markdown_prose}} words; a relationship this section's prose explains has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
+            "finding": "A relationship this section explains in detail has no view next to it; check which point lacks a view beside it, or whose view sits elsewhere, then decide.",
             "at": "heading"
           },
           "uncertain": "uncertain"
