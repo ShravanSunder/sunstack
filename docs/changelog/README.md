@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-14 presentation-html nudges as decision models (development)](2026-11-14-presentation-nudge-decision-models.md)
 - [2026-11-14 Walls-of-text and long-table nudges](2026-11-14-walls-of-text-nudges.md)
 - [2026-11-13 Design reviews run the requirement coverage nudge](2026-11-13-requirement-coverage-nudge.md)
 - [2026-11-13 Picture-before-choice nudge counts any diagram or image](2026-11-13-picture-nudge-any-diagram.md)

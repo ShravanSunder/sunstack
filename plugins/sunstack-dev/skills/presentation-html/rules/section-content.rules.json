@@ -94,7 +94,7 @@
             }
           },
           "yes": {
-            "finding": "{{piece_count:rows}}-row table; split it or show it as a picture. Worth checking: long detail sits one action away so nothing becomes a text wall; you decide."
+            "finding": "{{piece_count:rows}}-row table. Worth checking: is this optional detail that belongs one action away (a disclosure, tab or linked page), or content the reader needs in view? Keep a table carried from a source in its form; you decide."
           },
           "no": "pass"
         }
@@ -117,7 +117,7 @@
             }
           },
           "yes": {
-            "finding": "{{piece_count:rows}}-row table; split it or show it as a picture. Worth checking: long detail sits one action away so nothing becomes a text wall; you decide."
+            "finding": "{{piece_count:rows}}-row table. Worth checking: is this optional detail that belongs one action away (a disclosure, tab or linked page), or content the reader needs in view? Keep a table carried from a source in its form; you decide."
           },
           "no": "pass"
         }

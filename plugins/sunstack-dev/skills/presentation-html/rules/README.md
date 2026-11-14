@@ -6,7 +6,7 @@ Three mechanical, warn-only checks run from one config. Each finding is worth ch
 | --- | --- | --- |
 | Picture before choice (M001) | [owner-decision-brief.md](../../../shared-references/owner-decision-brief.md), "The current model, drawn" | a native choice has no picture before it in its own heading section |
 | Section picture (M002 HTML headings, M003 Markdown headings) | `SKILL.md`, "One visual per point, next to the text it supports" | a heading section has at least 100 prose words and no picture: "N words, no picture." |
-| Long table (M004 HTML, M005 Markdown) | `SKILL.md`, "Long detail sits one action away … so nothing becomes a text wall" | a table has more than 20 rows: "N-row table; split it or show it as a picture." |
+| Long table (M004 HTML, M005 Markdown) | `SKILL.md`, "Long detail sits one action away … so nothing becomes a text wall" | a table has more than 20 rows: "N-row table. Worth checking: is this optional detail that belongs one action away, or content the reader needs in view?" |
 
 ## What counts
 
@@ -25,8 +25,8 @@ Presence is not relevance: a nudge does not judge whether a picture explains its
 From this repository root, check one real page or a folder (no model key needed):
 
 ```sh
-pnpm dlx @sunstack/cli@0.21.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/page.html
-pnpm dlx @sunstack/cli@0.21.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/folder
+pnpm dlx @sunstack/cli@0.22.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/page.html
+pnpm dlx @sunstack/cli@0.22.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/folder
 ```
 
 From another project, use that installed skill's absolute `rules/presentation-html.config.json` path after `--config`, and add `--root "$PWD"`. Named page/folder paths resolve from your current directory. `--report <file>` saves every path and raw source witness. Read the findings, not the exit code: warnings (the nudges) can come with exit 0; exit 1 means an error finding or an explicit warning-limit failure; exit 5 means an uncertain boundary is present and can also carry warnings.
@@ -37,4 +37,4 @@ The picture-before-choice boundary predicates are those reviewed at `7ec3c2ef`. 
 
 The section and table nudges were added on 14 Nov 2026. On the 11 owner-rated development pages, the section nudge reproduces the fixed development measure section for section (53 warnings), flagging more than half the substantial sections on 8 of 9 complained pages and 0 of 2 accepted ones; the table limit flags 2 of 9 and 0 of 2. They use CLI 0.21.0's `section_own` scope and its `word_count` and `piece_count` checks.
 
-These nudges pin CLI 0.21.1; the shared skill-rule test engine remains on 0.9.0.
+These nudges pin CLI 0.22.1; the shared skill-rule test engine remains on 0.9.0.

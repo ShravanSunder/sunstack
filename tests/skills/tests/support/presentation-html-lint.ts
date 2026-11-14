@@ -12,10 +12,15 @@ import {
 
 // presentation-html's nudges pin their own released CLI, independently of the
 // shared skill-rule engine in package.json.
-export const presentationHtmlEngine = "@sunstack/cli@0.21.1";
+export const presentationHtmlEngine = "@sunstack/cli@0.22.1";
 export const presentationHtmlConfig = path.join(
   repositoryRoot,
   "plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json",
+);
+
+export const presentationHtmlDevelopmentConfig = path.join(
+  repositoryRoot,
+  "plugins/sunstack-dev/skills/presentation-html/rules/development/presentation-html.dev.config.json",
 );
 
 export const presentationHtmlReportSchema = nativeReportSchema.extend({
@@ -31,10 +36,13 @@ export const presentationHtmlReportSchema = nativeReportSchema.extend({
 });
 export type PresentationHtmlReport = z.infer<typeof presentationHtmlReportSchema>;
 
-export function runPresentationHtmlLint(arguments_: readonly string[]): NativeOutput {
+export function runPresentationHtmlLint(
+  arguments_: readonly string[],
+  config: string = presentationHtmlConfig,
+): NativeOutput {
   const output = spawnSync(
     "pnpm",
-    ["dlx", presentationHtmlEngine, "lint", "--config", presentationHtmlConfig, ...arguments_],
+    ["dlx", presentationHtmlEngine, "lint", "--config", config, ...arguments_],
     {
       cwd: repositoryRoot,
       encoding: "utf8",

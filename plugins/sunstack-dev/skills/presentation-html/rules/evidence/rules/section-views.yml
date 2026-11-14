@@ -1,0 +1,153 @@
+# Structured views and placement, for the development decision-model versions
+# of the section and table nudges. A view is a picture (the shared definition) or
+# another structured view the skill's chooser names: a table, a comparison, a
+# stat row, a card or a code view. Inside Markdown islands, a picture, a pipe table or a
+# fenced code block.
+id: html-view
+language: Html
+rule:
+  any:
+    - matches: html-picture-element
+    - all:
+        - kind: element
+          has:
+            kind: start_tag
+            regex: '(?i)^<(?:table|ex-compare|ex-stat|ex-card|pre)(?:\s|>)'
+        - not:
+            inside:
+              stopBy: end
+              kind: element
+              has:
+                kind: start_tag
+                regex: '(?i)^<(?:template|table|ex-compare|ex-card)(?:\s|>)'
+---
+id: island-view
+language: Markdown
+rule:
+  any:
+    - matches: island-picture-block
+    - kind: pipe_table
+    - kind: fenced_code_block
+utils:
+  island-picture-block:
+    any:
+      - kind: fenced_code_block
+        has:
+          kind: info_string
+          has:
+            kind: language
+            regex: '^(?i:mermaid|plantuml|d2|dot|graphviz)$'
+      - kind: inline
+        regex: '!\[[^\]]*\](?:\([^)]*\)|\[[^\]]*\])|(?i)<(?:img|svg|picture|canvas)\b'
+      - kind: html_block
+        regex: '(?i)<(?:img|svg|picture|figure|canvas)\b'
+---
+# A native disclosure that starts closed: its content is one action away.
+id: html-closed-disclosure
+language: Html
+rule:
+  kind: element
+  has:
+    kind: start_tag
+    regex: '(?i)^<details(?:\s|>)'
+    not:
+      regex: '(?i)\sopen(?:[\s=>/])'
+---
+# The paragraph that introduces a table: an HTML paragraph sibling just before it.
+id: html-lead-in
+language: Html
+rule:
+  kind: element
+  has:
+    kind: start_tag
+    regex: '(?i)^<p(?:\s|>)'
+---
+id: markdown-lead-in
+language: Markdown
+rule:
+  kind: paragraph
+---
+# HTML prose whose words are not also in an embedded Markdown island: the island's
+# own paragraphs and lists are measured once, as Markdown prose.
+id: html-prose-outside-islands
+language: Html
+rule:
+  all:
+    - matches: html-prose-block
+    - not:
+        has:
+          stopBy: end
+          kind: script_element
+          regex: '(?i)^<script\s[^>]*type=["'']text/markdown["'']'
+utils:
+  html-prose-block:
+    all:
+      - kind: element
+        regex: '^<(?:p|ul|ol|ex-choice|ex-callout|aside|blockquote)(?:\s|>)'
+      - not:
+          inside:
+            stopBy: end
+            any:
+              - matches: prose-interrupting-block
+              - all:
+                  - matches: plain-text-container
+                  - not:
+                      has:
+                        stopBy: end
+                        matches: prose-interrupting-block
+      - not:
+          all:
+            - matches: plain-text-container
+            - has:
+                stopBy: end
+                matches: prose-interrupting-block
+  prose-interrupting-block:
+    kind: element
+    regex: '^<(?:ul|ol|table|pre|ex-mermaid|ex-diagram|svg|figure|ex-choice)(?:\s|>)'
+  plain-text-container:
+    kind: element
+    regex: '^<(?:ex-callout|aside|blockquote)(?:\s|>)'
+---
+# A section's own content as raw blocks in source order, so tables and diagrams
+# keep their markup and position. Outermost content blocks only; page containers
+# (div, section, ex-document, ex-nav, ex-comments) are not blocks.
+id: html-section-block
+language: Html
+rule:
+  all:
+    - matches: content-block
+    - not:
+        inside:
+          stopBy: end
+          matches: content-block
+utils:
+  content-block:
+    any:
+      - kind: element
+        has:
+          kind: start_tag
+          regex: '(?i)^<(?:p|ul|ol|table|pre|blockquote|aside|figure|img|svg|canvas|picture|details|ex-(?:mermaid|flow|board|trace|tree|call-stack|diagram|markdown|callout|card|grid|stat|compare|choice|explorer|chart|code|diff|gallery|tabs))(?:\s|>)'
+      - kind: element
+        has:
+          kind: self_closing_tag
+          regex: '(?i)^<(?:img|svg)(?:\s|/)'
+---
+# The same for a Markdown section inside an island: top-level Markdown blocks.
+id: island-section-block
+language: Markdown
+rule:
+  all:
+    - any:
+        - kind: paragraph
+        - kind: list
+        - kind: fenced_code_block
+        - kind: indented_code_block
+        - kind: pipe_table
+        - kind: html_block
+        - kind: block_quote
+    - not:
+        inside:
+          stopBy: end
+          any:
+            - kind: list
+            - kind: block_quote
