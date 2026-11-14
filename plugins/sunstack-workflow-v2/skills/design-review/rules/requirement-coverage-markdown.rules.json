@@ -13,11 +13,12 @@
         "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
       },
       "link_boundaries": [
-        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -49,6 +50,17 @@
           ],
           "answer": "obligations_cover_need: false",
           "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "serves versus adjacent or dependency",
+          "requirement": "U3 Readers can see a document's past revisions.",
+          "obligations": [
+            "R6 The history panel lists each saved revision with its time. (U3)",
+            "R8 Revisions are stored compressed on disk. (U2)",
+            "R9 Every release build is signed before publishing. (U7)"
+          ],
+          "answer": "R6 serves U3; R8 and R9 do not",
+          "why": "R6's own behavior supplies seeing past revisions. R8 is storage the history depends on, and R9 is a delivery gate; neither supplies any part of seeing revisions."
         },
         {
           "shows": "a realization",
@@ -163,11 +175,12 @@
         "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
       },
       "link_boundaries": [
-        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -199,6 +212,17 @@
           ],
           "answer": "obligations_cover_need: false",
           "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "serves versus adjacent or dependency",
+          "requirement": "U3 Readers can see a document's past revisions.",
+          "obligations": [
+            "R6 The history panel lists each saved revision with its time. (U3)",
+            "R8 Revisions are stored compressed on disk. (U2)",
+            "R9 Every release build is signed before publishing. (U7)"
+          ],
+          "answer": "R6 serves U3; R8 and R9 do not",
+          "why": "R6's own behavior supplies seeing past revisions. R8 is storage the history depends on, and R9 is a delivery gate; neither supplies any part of seeing revisions."
         },
         {
           "shows": "a realization",
@@ -322,11 +346,12 @@
         "unverified_disposition": "A Verification Design statement that an obligation, or a named limit of it, is not observed, said explicitly."
       },
       "link_boundaries": [
-        "An obligation serves a requirement when the behavior it states delivers an outcome or limit the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation serves a requirement when its own behavior supplies part of the requirement's stated need: one of the outcomes or limits the requirement asks for. Citing the requirement's id is the usual way to show the link; the behavior decides it.",
+        "An obligation does not serve a requirement merely because the requirement depends on it (the storage or runtime a feature runs on), because it is an adjacent concern on the same screen or feature (consistency, sizing, alignment, another workflow), or because it is a delivery or quality gate the whole change passes. Those obligations serve their own requirements.",
         "A back-link, navigation entry, index entry or coverage-table row that only lists ids is not an obligation and realizes nothing.",
         "The Specification states observable behavior of the system. A requirement's conditions on how the work itself is done (which branch it starts from, how it is reviewed or delivered) need no Specification obligation; its outcomes and limits for the system do.",
         "An id range such as R1–R3 includes R1, R2 and R3.",
-        "A Verification row accounts for an obligation only within this requirement's own row or rows. An observation listed under another requirement does not account for it here.",
+        "A requirement's obligations are accounted for by its own Verification row or rows: by naming the obligation (id or range), by describing its observation in prose, by pointing to a shared observation the row names, or by listing it as unverified. An observation that sits only under another requirement's row, and that this requirement's row does not name, does not account for it here.",
         "A cell that is blank or says 'see interfaces' or 'see above' is not a realization. 'gap: <why>' honestly marks a missing realization.",
         "Planned proof is not an observed result; these questions ask what the design states."
       ],
@@ -358,6 +383,17 @@
           ],
           "answer": "obligations_cover_need: false",
           "why": "A coverage row lists ids; it states no behavior."
+        },
+        {
+          "shows": "serves versus adjacent or dependency",
+          "requirement": "U3 Readers can see a document's past revisions.",
+          "obligations": [
+            "R6 The history panel lists each saved revision with its time. (U3)",
+            "R8 Revisions are stored compressed on disk. (U2)",
+            "R9 Every release build is signed before publishing. (U7)"
+          ],
+          "answer": "R6 serves U3; R8 and R9 do not",
+          "why": "R6's own behavior supplies seeing past revisions. R8 is storage the history depends on, and R9 is a delivery gate; neither supplies any part of seeing revisions."
         },
         {
           "shows": "a realization",
@@ -394,10 +430,10 @@
       ]
     },
     "questions": {
-      "linked_complete": {
+      "all_accounted": {
         "type": "noul",
         "instructions": {
-          "check": "linked_obligations",
+          "check": "verification_rows",
           "against": "all_obligations",
           "context": [
             "identifier",
@@ -406,30 +442,11 @@
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "Does linked_obligations include every obligation in all_obligations whose behavior serves requirement?"
+          "task": "Is every obligation in all_obligations whose behavior serves requirement accounted for by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation those rows name, or by listing it as unverified?"
         },
         "criteria": {
-          "true": "Every obligation in all_obligations that delivers an outcome or limit of the requirement is also in linked_obligations (it cites the requirement's id).",
-          "false": "Some obligation in all_obligations delivers an outcome or limit of the requirement but is not in linked_obligations, because it doesn't cite the requirement's id."
-        }
-      },
-      "accounted": {
-        "type": "noul",
-        "instructions": {
-          "check": "verification_rows",
-          "against": "linked_obligations",
-          "context": [
-            "identifier",
-            "requirement",
-            "reference.definitions",
-            "reference.link_boundaries",
-            "reference.examples"
-          ],
-          "task": "Does verification_rows account for every obligation in linked_obligations, by its id or a range that includes it, with an observation or an explicit unverified disposition?"
-        },
-        "criteria": {
-          "true": "Each obligation in linked_obligations is decided by an observation in this requirement's rows, or listed there as unverified.",
-          "false": "Some obligation in linked_obligations has neither an observation nor an explicit unverified disposition in this requirement's rows; an observation listed under another requirement does not count."
+          "true": "Each obligation whose behavior delivers an outcome or limit of the requirement, whether or not it cites the requirement's id, is accounted for by these rows in one of those ways.",
+          "false": "Some obligation whose behavior delivers an outcome or limit of the requirement is accounted for in none of those ways by these rows. An observation that sits only under another requirement's row, and that these rows don't name, does not count."
         }
       },
       "keeps_threshold": {
@@ -439,12 +456,13 @@
           "against": "proof_obligations",
           "context": [
             "identifier",
-            "linked_obligations",
+            "requirement",
+            "all_obligations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation's passing condition use the threshold of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+          "task": "For every obligation in all_obligations whose behavior serves requirement and that verification_rows decides by an observation, does that observation's passing condition use the threshold of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
           "true": "Each such observation passes on the V's current threshold, or a stricter one. If no obligation is decided by an observation, answer true.",
@@ -458,12 +476,13 @@
           "against": "proof_obligations",
           "context": [
             "identifier",
-            "linked_obligations",
+            "requirement",
+            "all_obligations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation use the reference of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+          "task": "For every obligation in all_obligations whose behavior serves requirement and that verification_rows decides by an observation, does that observation use the reference of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
           "true": "Each such observation uses the V's named reference. If no obligation is decided by an observation, answer true.",
@@ -477,12 +496,13 @@
           "against": "proof_obligations",
           "context": [
             "identifier",
-            "linked_obligations",
+            "requirement",
+            "all_obligations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation keep the target constraints of its V, as proof_obligations states it or as the obligation's own passing condition in linked_obligations states it?"
+          "task": "For every obligation in all_obligations whose behavior serves requirement and that verification_rows decides by an observation, does that observation keep the target constraints of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
           "true": "Each such observation runs on the target its V constrains. If no obligation is decided by an observation, answer true.",
@@ -496,12 +516,13 @@
           "against": "trace_rows",
           "context": [
             "identifier",
-            "linked_obligations",
+            "requirement",
+            "all_obligations",
             "reference.definitions",
             "reference.link_boundaries",
             "reference.examples"
           ],
-          "task": "For every obligation in linked_obligations that verification_rows decides by an observation, does that observation sit at the proof seam trace_rows names for it?"
+          "task": "For every obligation in all_obligations whose behavior serves requirement and that verification_rows decides by an observation, does that observation sit at the proof seam trace_rows names for it?"
         },
         "criteria": {
           "true": "Each such observation is made at the seam Program Design names for its obligation. If no obligation is decided by an observation, answer true.",
@@ -539,7 +560,7 @@
         "obligations_read": {
           "mechanical_check": {
             "tool": "complete",
-            "field": "linked_obligations"
+            "field": "all_obligations"
           },
           "yes": "proofs_read",
           "no": "uncertain"
@@ -557,44 +578,16 @@
             "tool": "complete",
             "field": "trace_rows"
           },
-          "yes": "has_linked",
-          "no": "uncertain"
-        },
-        "has_linked": {
-          "mechanical_check": {
-            "tool": "regex",
-            "field": "linked_obligations",
-            "pattern": "(?s).*"
-          },
-          "yes": "all_read",
-          "no": "uncertain"
-        },
-        "all_read": {
-          "mechanical_check": {
-            "tool": "complete",
-            "field": "all_obligations"
-          },
-          "yes": "links_complete",
-          "no": "uncertain"
-        },
-        "links_complete": {
-          "ask": "linked_complete",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
           "yes": "is_accounted",
-          "no": {
-            "finding": "Worth checking: an obligation that serves this requirement may not cite its id, so Verification Design can't be followed to it by id. Find which Specification obligations serve this requirement, and decide whether they should cite it and be accounted for in its Verification rows. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
-            "at": "requirement"
-          },
-          "uncertain": "uncertain"
+          "no": "uncertain"
         },
         "is_accounted": {
-          "ask": "accounted",
+          "ask": "all_accounted",
           "yes_at_or_above": 0.7,
           "no_at_or_below": 0.3,
           "yes": "threshold_kept",
           "no": {
-            "finding": "Worth checking: this requirement's Verification rows may not account for every obligation it links. Walk each linked obligation in Verification Design; an observation listed under another requirement does not count here. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
+            "finding": "Worth checking: this requirement's own Verification rows may not account for every obligation that serves it, cited or not. Find the obligations that serve it, and check that its rows name each one, describe its observation, point to a shared observation, or list it as unverified; an observation only under another requirement's row does not count. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
             "at": "requirement"
           },
           "uncertain": "uncertain"

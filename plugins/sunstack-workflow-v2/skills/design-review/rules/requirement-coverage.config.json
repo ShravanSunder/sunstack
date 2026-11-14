@@ -60,14 +60,6 @@
             ],
             "rule": "html-obligation-definition"
           },
-          "linked_obligations": {
-            "from": "document",
-            "path": [
-              "specification.html"
-            ],
-            "rule": "html-obligation-definition",
-            "containing": "identifier"
-          },
           "proof_obligations": {
             "from": "document",
             "path": [
@@ -186,14 +178,6 @@
               "specification.md"
             ],
             "rule": "markdown-obligation-unit"
-          },
-          "linked_obligations": {
-            "from": "document",
-            "path": [
-              "specification.md"
-            ],
-            "rule": "markdown-obligation-unit",
-            "containing": "identifier"
           },
           "proof_obligations": {
             "from": "document",
