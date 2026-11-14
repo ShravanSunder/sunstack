@@ -28,17 +28,24 @@
           },
           "specification": {
             "from": "document",
-            "path": "specification.html",
+            "path": [
+              "specification.html"
+            ],
             "rule": "html-whole-page"
           },
           "program_design": {
             "from": "document",
-            "path": "program-design.html",
+            "path": [
+              "program-design.html"
+            ],
             "rule": "html-whole-page"
           },
           "verification": {
             "from": "document",
-            "path": "verification.html",
+            "path": [
+              "verification.html",
+              "verification-design.html"
+            ],
             "rule": "html-whole-page"
           }
         }
@@ -52,17 +59,78 @@
           },
           "specification": {
             "from": "document",
-            "path": "specification.md",
+            "path": [
+              "specification.md"
+            ],
             "rule": "markdown-whole-page"
           },
           "program_design": {
             "from": "document",
-            "path": "program-design.md",
+            "path": [
+              "program-design.md"
+            ],
             "rule": "markdown-whole-page"
           },
           "verification": {
             "from": "document",
-            "path": "verification.md",
+            "path": [
+              "verification.md",
+              "verification-design.md"
+            ],
+            "rule": "markdown-whole-page"
+          }
+        }
+      },
+      "html_requirements_page": {
+        "rule": "html-whole-page",
+        "fields": {
+          "specification": {
+            "from": "document",
+            "path": [
+              "specification.html"
+            ],
+            "rule": "html-whole-page"
+          },
+          "program_design": {
+            "from": "document",
+            "path": [
+              "program-design.html"
+            ],
+            "rule": "html-whole-page"
+          },
+          "verification": {
+            "from": "document",
+            "path": [
+              "verification.html",
+              "verification-design.html"
+            ],
+            "rule": "html-whole-page"
+          }
+        }
+      },
+      "markdown_requirements_page": {
+        "rule": "markdown-whole-page",
+        "fields": {
+          "specification": {
+            "from": "document",
+            "path": [
+              "specification.md"
+            ],
+            "rule": "markdown-whole-page"
+          },
+          "program_design": {
+            "from": "document",
+            "path": [
+              "program-design.md"
+            ],
+            "rule": "markdown-whole-page"
+          },
+          "verification": {
+            "from": "document",
+            "path": [
+              "verification.md",
+              "verification-design.md"
+            ],
             "rule": "markdown-whole-page"
           }
         }

@@ -18,7 +18,7 @@ const config = path.join(
   repositoryRoot,
   "plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json",
 );
-const engine = "@sunstack/cli@0.19.0";
+const engine = "@sunstack/cli@0.20.0";
 const documentRules = ["specification", "program-design", "verification"] as const;
 type DocumentRule = (typeof documentRules)[number];
 
@@ -60,15 +60,20 @@ function runCoverage(root: string, setFolder: string) {
   const output = runCoverageLint(["--root", root, "--report", reportPath, setFolder]);
   const report = coverageReportSchema.parse(readJson(reportPath));
   const outcomes = new Map<string, string>();
+  const pageOutcomes = new Map<string, string>();
   for (const result of report.results) {
+    const documentRule = result.name.split(".").at(-1) ?? "";
+    if (documentRule.endsWith("-page")) {
+      pageOutcomes.set(documentRule.replace(/-page$/, ""), result.outcome);
+      continue;
+    }
     const line = readFileSync(path.join(root, result.file), "utf8").split("\n")[
       result.first_line - 1
     ];
     const identifier = line?.match(/U[0-9]+/)?.[0];
-    const documentRule = result.name.split(".").at(-1);
     outcomes.set(`${identifier}:${documentRule}`, result.outcome);
   }
-  return { output, report, outcomes };
+  return { output, report, outcomes, pageOutcomes };
 }
 
 function expectOutcomes(
@@ -99,6 +104,8 @@ const htmlRequirements = [
   "",
 ].join("\n");
 
+const allPagesPresent = { specification: "pass", "program-design": "pass", verification: "pass" };
+
 test("active requirement coverage rules validate with their released CLI pin and no model", () => {
   // Arrange: the active config, independently of the shared 0.9.0 engine.
   const ruleList = z.array(
@@ -109,16 +116,19 @@ test("active requirement coverage rules validate with their released CLI pin and
   const checked = runCoverageLint(["--check"]);
   const listed = runCoverageLint(["--rules"]);
 
-  // Assert: three mechanical warn rules per format, nothing asking.
+  // Assert: per format, three per-requirement and three per-set page rules,
+  // all mechanical warnings, nothing asking.
   expect(checked.status, checked.stderr).toBe(0);
   expect(listed.status, listed.stderr).toBe(0);
   expect(ruleList.parse(JSON.parse(listed.stdout))).toEqual(
     ["html", "markdown"].flatMap((format) =>
-      documentRules.map((documentRule) => ({
-        rule: `requirement-coverage.${format}.${documentRule}`,
-        severity: "warn",
-        kind: { kind: "mechanical" },
-      })),
+      [...documentRules, ...documentRules.map((documentRule) => `${documentRule}-page`)].map(
+        (rule) => ({
+          rule: `requirement-coverage.${format}.${rule}`,
+          severity: "warn",
+          kind: { kind: "mechanical" },
+        }),
+      ),
     ),
   );
 });
@@ -138,11 +148,12 @@ test("an HTML set warns once per requirement id per page that never names it, on
   });
 
   // Act: run the active rules over the set's folder through the pinned CLI.
-  const { output, report, outcomes } = runCoverage(root, setFolder);
+  const { output, report, outcomes, pageOutcomes } = runCoverage(root, setFolder);
 
   // Assert: exactly the two gaps warn, each on its requirement's definition line.
   expect(output.status, output.stderr).toBe(0);
   expect(report.usage.model_requests).toBe(0);
+  expect(Object.fromEntries(pageOutcomes)).toEqual(allPagesPresent);
   expectOutcomes(outcomes, {
     U1: { specification: "pass", "program-design": "pass", verification: "pass" },
     U2: { specification: "pass", "program-design": "finding", verification: "pass" },
@@ -168,7 +179,7 @@ test("an HTML set warns once per requirement id per page that never names it, on
   }
 });
 
-test("a Markdown set reads table-row and heading definitions the same way", () => {
+test("a Markdown set reads table-row and heading definitions and a verification-design.md page", () => {
   // Arrange: U1 is a table row, U2 a heading; U2 is missing from Verification.
   const root = createRulebookFixture();
   const setFolder = writeDesignSet(root, "docs/specs/2026-11-13-routing", {
@@ -186,21 +197,23 @@ test("a Markdown set reads table-row and heading definitions the same way", () =
     ].join("\n"),
     "specification.md": "# Specification\n\nR1 serves U1. R2 serves U2.\n",
     "program-design.md": "# Program Design\n\n| R | U |\n| --- | --- |\n| R1 | U1 |\n| R2 | U2 |\n",
-    "verification.md": "# Verification Design\n\nU1 is observed by the routing journey. U12 is not.\n",
+    "verification-design.md":
+      "# Verification Design\n\nU1 is observed by the routing journey. U12 is not.\n",
   });
 
   // Act: run the active rules over the set's folder through the pinned CLI.
-  const { output, outcomes } = runCoverage(root, setFolder);
+  const { output, outcomes, pageOutcomes } = runCoverage(root, setFolder);
 
-  // Assert: only U2's Verification gap warns.
+  // Assert: the alternate Verification name is read, and only U2's gap there warns.
   expect(output.status, output.stderr).toBe(0);
+  expect(Object.fromEntries(pageOutcomes)).toEqual(allPagesPresent);
   expectOutcomes(outcomes, {
     U1: { specification: "pass", "program-design": "pass", verification: "pass" },
     U2: { specification: "pass", "program-design": "pass", verification: "finding" },
   });
 });
 
-test("an absent page leaves its rule incomplete for every requirement and warns nowhere", () => {
+test("an absent page warns once for the set and skips its per-requirement checks", () => {
   // Arrange: a set written through Program Design; Verification Design is not yet written.
   const root = createRulebookFixture();
   const setFolder = writeDesignSet(root, "docs/specs/2026-11-13-partial", {
@@ -210,15 +223,48 @@ test("an absent page leaves its rule incomplete for every requirement and warns 
   });
 
   // Act: run the active rules over the set's folder through the pinned CLI.
-  const { output, report, outcomes } = runCoverage(root, setFolder);
+  const { output, report, outcomes, pageOutcomes } = runCoverage(root, setFolder);
 
   // Assert: the present pages are still checked; the absent page is one
-  // condition, unavailable evidence on its own rule, never a coverage warning.
-  expect(output.status, output.stderr).toBe(3);
-  expect(report.findings).toEqual([]);
+  // warning on the Requirements page, and no requirement is incomplete.
+  expect(output.status, output.stderr).toBe(0);
+  expect(Object.fromEntries(pageOutcomes)).toEqual({
+    specification: "pass",
+    "program-design": "pass",
+    verification: "finding",
+  });
   expectOutcomes(outcomes, {
-    U1: { specification: "pass", "program-design": "pass", verification: "incomplete" },
-    U2: { specification: "pass", "program-design": "pass", verification: "incomplete" },
-    U3: { specification: "pass", "program-design": "pass", verification: "incomplete" },
+    U1: { specification: "pass", "program-design": "pass", verification: "not_applicable" },
+    U2: { specification: "pass", "program-design": "pass", verification: "not_applicable" },
+    U3: { specification: "pass", "program-design": "pass", verification: "not_applicable" },
+  });
+  expect(report.findings).toHaveLength(1);
+  expect(report.findings[0]).toMatchObject({
+    rule: "requirement-coverage.html.verification-page",
+    severity: "warn",
+  });
+  expect(report.findings[0]?.message).toContain("verification.html, verification-design.html");
+});
+
+test("an HTML set whose Verification Design is verification-design.html is read like verification.html", () => {
+  // Arrange: the older page name, with U3 missing from it.
+  const root = createRulebookFixture();
+  const setFolder = writeDesignSet(root, "docs/specs/2026-11-13-older-name", {
+    "requirements.html": htmlRequirements,
+    "specification.html": "<html><body><p>R1 serves U1, U2 and U3.</p></body></html>\n",
+    "program-design.html": "<html><body><p>R1: U1 U2 U3.</p></body></html>\n",
+    "verification-design.html": "<html><body><p>U1 and U2 are observed.</p></body></html>\n",
+  });
+
+  // Act: run the active rules over the set's folder through the pinned CLI.
+  const { output, outcomes, pageOutcomes } = runCoverage(root, setFolder);
+
+  // Assert: no absent-page warning, and U3's gap on that page warns.
+  expect(output.status, output.stderr).toBe(0);
+  expect(Object.fromEntries(pageOutcomes)).toEqual(allPagesPresent);
+  expectOutcomes(outcomes, {
+    U1: { specification: "pass", "program-design": "pass", verification: "pass" },
+    U2: { specification: "pass", "program-design": "pass", verification: "pass" },
+    U3: { specification: "pass", "program-design": "pass", verification: "finding" },
   });
 });
