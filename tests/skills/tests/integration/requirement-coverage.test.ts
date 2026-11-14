@@ -23,7 +23,12 @@ const documentRules = ["specification", "program-design", "verification"] as con
 type DocumentRule = (typeof documentRules)[number];
 
 const coverageReportSchema = nativeReportSchema.extend({
-  findings: z.array(nativeReportSchema.shape.findings.element.extend({ message: z.string() })),
+  findings: z.array(
+    nativeReportSchema.shape.findings.element.extend({
+      message: z.string(),
+      related: z.array(z.object({ file: z.string() }).passthrough()),
+    }),
+  ),
   results: z.array(
     nativeReportSchema.shape.results.element.extend({
       file: z.string(),
@@ -172,10 +177,18 @@ test("an HTML set warns once per requirement id per page that never names it, on
       line: expect.stringContaining('id="U2"'),
     },
   ]);
+  const siblingPage: Readonly<Record<string, string>> = {
+    "requirement-coverage.html.specification": "specification.html",
+    "requirement-coverage.html.program-design": "program-design.html",
+  };
   for (const finding of report.findings) {
     expect(finding.severity).toBe("warn");
     expect(finding.message).toContain("Worth checking");
     expect(finding.message).toContain("reviewing-four-document-design.md");
+    // The page to read next is listed with the finding.
+    expect(finding.related.map((place) => path.basename(place.file))).toContain(
+      siblingPage[finding.rule],
+    );
   }
 });
 

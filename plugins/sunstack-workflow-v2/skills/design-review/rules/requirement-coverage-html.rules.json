@@ -27,6 +27,9 @@
         }
       }
     },
+    "related": [
+      "specification"
+    ],
     "severity": "warn"
   },
   "C002": {
@@ -57,6 +60,9 @@
         }
       }
     },
+    "related": [
+      "program_design"
+    ],
     "severity": "warn"
   },
   "C003": {
@@ -87,6 +93,9 @@
         }
       }
     },
+    "related": [
+      "verification"
+    ],
     "severity": "warn"
   },
   "C004": {
