@@ -13,4 +13,4 @@ Proven: on the 11 owner-rated development pages, all 203 sections match the engi
 
 Not proven: whether a picture explains its text, or whether a long table reads well; the limits come from 11 clustered pages.
 
-Validation (against the signed 0.21.0 candidate, before npm publication): `pnpm --dir tests/skills test` with the private picture inputs 32 files / 317 passed, exit 0 (an earlier full run hit the known shared-CLI flake in 5 unrelated tests, which passed alone); `tsc --noEmit`, oxfmt and oxlint clean; `claude plugin validate .` passed. Installed caches have not been refreshed.
+Validation (published `@sunstack/cli@0.21.0` via `pnpm dlx`): `pnpm --dir tests/skills test` 32 files / 317 passed with the private picture inputs and 316 passed / 1 skipped without them, both exit 0; `tsc --noEmit`, oxfmt and oxlint clean; `claude plugin validate .` passed. Installed caches have not been refreshed.
