@@ -1,0 +1,104 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../../../shared-references/owner-decision-brief.md",
+      "rules": "picture-before-control.rules.json"
+    }
+  ],
+  "marker_prefix": "M",
+  "check": {
+    "files": [
+      "**/*.html"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "evidence/sgconfig.yml",
+    "html": {
+      "skip_tags": [
+        "ex-mermaid",
+        "ex-choice",
+        "ex-compare"
+      ],
+      "text_attributes": {
+        "ex-choice": [
+          "id",
+          "title"
+        ]
+      },
+      "embedded_markdown": [
+        {
+          "tag": "script",
+          "attributes": {
+            "type": "text/markdown"
+          }
+        }
+      ]
+    },
+    "kinds": {
+      "outline": {
+        "html_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "fields": {}
+      },
+      "choice": {
+        "rule": "native-choice",
+        "max_chars": 50000,
+        "fields": {
+          "control": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
+          "heading_path": {
+            "from": "enclosing",
+            "kind": "outline",
+            "text": "heading"
+          },
+          "direct_heading_match": {
+            "from": "inside",
+            "rule": "choice-with-direct-heading-boundary"
+          },
+          "earlier_picture_match": {
+            "from": "inside",
+            "rule": "choice-with-earlier-section-picture"
+          },
+          "island_picture_before": {
+            "from": "inside",
+            "kind": "island_picture",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          },
+          "island_heading_before": {
+            "from": "inside",
+            "kind": "island_heading",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          }
+        }
+      },
+      "island_picture": {
+        "rule": "island-picture",
+        "fields": {}
+      },
+      "island_heading": {
+        "rule": "island-heading",
+        "fields": {}
+      }
+    }
+  },
+  "decision_model": {
+    "model": "typesafe/jev-1.14-20261014"
+  },
+  "limits": {
+    "evidence_max_chars": 50000,
+    "request_max_chars": 131072,
+    "max_model_requests": 100,
+    "max_concurrent_requests": 3,
+    "max_matches": 20000
+  }
+}

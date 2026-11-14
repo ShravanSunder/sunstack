@@ -1,0 +1,28 @@
+# Markdown blocks inside configured HTML islands (evidence.html.embedded_markdown).
+# A picture is a diagram fence or an image. A diagram fence is a parsed fenced
+# code block whose info-string language names a diagram format; a fence nested
+# inside another code block is not a block here. The embedded grammar parses
+# blocks only: a paragraph's inline content is one node with no image child, so
+# an image is read from that parsed paragraph's or HTML block's text.
+id: island-picture
+language: Markdown
+rule:
+  any:
+    - kind: fenced_code_block
+      has:
+        kind: info_string
+        has:
+          kind: language
+          regex: '^(?i:mermaid|plantuml|d2|dot|graphviz)$'
+    - kind: inline
+      regex: '!\[[^\]]*\](?:\([^)]*\)|\[[^\]]*\])|(?i)<(?:img|svg|picture|canvas)\b'
+    - kind: html_block
+      regex: '(?i)<(?:img|svg|picture|figure|canvas)\b'
+---
+# A Markdown heading inside an island starts a section the HTML outline cannot see.
+id: island-heading
+language: Markdown
+rule:
+  any:
+    - kind: atx_heading
+    - kind: setext_heading

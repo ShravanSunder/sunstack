@@ -6,7 +6,7 @@ Return one brief per decision, in this order:
 
 1. **The decision in one sentence**, in the owner's words where possible.
 2. **Why it is genuinely open**: the evidence and standing owner instructions you checked, and why none of them settles it.
-3. **The current model, drawn.** Load `presentation-tui` or `presentation-webui` for the host and draw what exists today: the parts, who owns what, and the path that matters.
+3. **The current model, drawn.** Load `presentation-tui` or `presentation-webui` for the host and draw what exists today: the parts, who owns what, and the path that matters.<!-- M001 -->
 4. **Two or three concrete options, each drawn as a change to that picture**, with what it gains, what it costs, and who bears the cost.
 5. **Where the agents stand**: for each agent that weighed in (Lead, Advisor, reviewers), its position, where it agrees and disagrees with the others, and why.
 6. **Your recommendation and why.**
