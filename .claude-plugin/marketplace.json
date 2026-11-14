@@ -23,7 +23,7 @@
       "name": "sunstack-dev",
       "source": "./plugins/sunstack-dev",
       "description": "Shared engineering practices, principles, language standards, research, debugging, docs, operations and presentation.",
-      "version": "3.3.5"
+      "version": "3.3.6"
     },
     {
       "name": "sunstack-workflow-v1",

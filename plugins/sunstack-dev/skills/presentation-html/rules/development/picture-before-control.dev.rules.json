@@ -1,0 +1,194 @@
+{
+  "M001": {
+    "name": "owner-decision.picture-before-control.model",
+    "evidence": "choice",
+    "reference": {
+      "decision_scope": "A design decision for the owner settles or changes something about the design: a domain or storage boundary (what is stored, where, who owns it, what it means), architecture, a contract between parts, product behavior, the shape of the design (how it decomposes and which abstractions carry weight), a correction that would change any of these, or a proposal to split one deliverable into several PRs or change an agreed PR shape. Procedure is not a design decision: sequencing, grouping or order inside an agreed PR shape, agent or model choice, review rounds and where work lives. Neither is a reader's rating, preference or feedback that changes no design.",
+      "current_model": "The current model is a drawing of what exists today for the subject the decision is about: its parts, who owns what, and the path that matters. A drawing of only the options, only the proposed future, a different subject, or decoration is not the current model. Prose describing today's system is not a drawing.",
+      "examples": [
+        {
+          "text": "Choice: 'Where should uploaded invoices be stored: keep them in the app database, or move them to object storage?' Before it: a flowchart of today's path from the upload form through the API into the invoices table.",
+          "decision": "yes, a storage boundary",
+          "current_model": "yes: it draws today's parts and path for the subject the choice changes"
+        },
+        {
+          "text": "Choice: 'Approve the new cache layer?' Before it: only a diagram of the proposed cache in front of the database.",
+          "decision": "yes, architecture",
+          "current_model": "no: it draws only the proposed future, not what exists today"
+        },
+        {
+          "text": "Choice: 'Which date format should the export use?' Before it: a diagram of the deploy pipeline.",
+          "decision": "yes, product behavior",
+          "current_model": "no: the picture is about another subject"
+        },
+        {
+          "text": "Choice: 'Agree that the job queue retries a failed job at most three times?' Before it: a state diagram of today's queue with its retry transitions.",
+          "decision": "yes, an assumption the design rests on, which a rejection would correct",
+          "current_model": "yes: it draws today's mechanism the assumption is about"
+        },
+        {
+          "text": "Choice: 'Was this page useful?'",
+          "decision": "no: a rating that changes no design",
+          "current_model": "not asked"
+        },
+        {
+          "text": "Choice: 'Should the reviewer agent run on the large model or the small one?'",
+          "decision": "no: agent and model choice is procedure",
+          "current_model": "not asked"
+        }
+      ]
+    },
+    "questions": {
+      "owner_design_decision": {
+        "type": "noul",
+        "instructions": {
+          "check": "control",
+          "context": [
+            "heading_path",
+            "preceding_text",
+            "reference.decision_scope",
+            "reference.examples"
+          ],
+          "task": "Does control ask the reader to settle a design decision for the owner, or to accept or reject an assumption that the design or its proof rests on?"
+        },
+        "criteria": {
+          "true": "Answering control settles or changes something reference.decision_scope counts as design, or confirms or rejects an assumption the design or its proof rests on, so a rejection would correct the design or plan.",
+          "false": "Answering control settles only procedure, or records a rating, preference or feedback, so no answer changes the design or an assumption it rests on."
+        }
+      },
+      "current_model_drawn": {
+        "type": "noul",
+        "instructions": {
+          "check": "preceding_html_pictures",
+          "against": "control",
+          "context": [
+            "preceding_island_pictures",
+            "preceding_text",
+            "reference.current_model",
+            "reference.examples"
+          ],
+          "task": "Does a picture in preceding_html_pictures or preceding_island_pictures draw the current model for what control decides: what exists today for that subject, its parts, who owns what, and the path that matters?"
+        },
+        "criteria": {
+          "true": "At least one of those pictures draws what exists today for the subject control decides, or the mechanism the assumption in control is about.",
+          "false": "No picture draws what exists today for that subject: each shows another subject, only the options, only a proposed future, or decoration."
+        }
+      }
+    },
+    "decision": {
+      "start": "control_complete",
+      "steps": {
+        "control_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "control"
+          },
+          "yes": "heading_complete",
+          "no": "uncertain"
+        },
+        "heading_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "heading_path"
+          },
+          "yes": "boundary_complete",
+          "no": "uncertain"
+        },
+        "boundary_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "direct_heading_match"
+          },
+          "yes": "context_complete",
+          "no": "uncertain"
+        },
+        "context_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "preceding_text"
+          },
+          "yes": "direct_heading_boundary",
+          "no": "uncertain"
+        },
+        "direct_heading_boundary": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "direct_heading_match",
+            "pattern": "(?s).+"
+          },
+          "yes": "island_heading_boundary",
+          "no": "uncertain"
+        },
+        "island_heading_boundary": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "island_heading_before",
+            "pattern": "(?s).*"
+          },
+          "yes": "uncertain",
+          "no": "design_decision"
+        },
+        "design_decision": {
+          "ask": "owner_design_decision",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "html_pictures_present",
+          "no": "not_applicable",
+          "uncertain": "uncertain"
+        },
+        "html_pictures_present": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "preceding_html_pictures",
+            "pattern": "(?s).*"
+          },
+          "yes": "model_drawn",
+          "no": "island_pictures_present"
+        },
+        "island_pictures_present": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "preceding_island_pictures",
+            "pattern": "(?s).*"
+          },
+          "yes": "model_drawn",
+          "no": {
+            "finding": "No picture comes before this choice in its own heading section; check whether the current model is drawn under another heading or still needs drawing, then decide.",
+            "at": "control"
+          }
+        },
+        "model_drawn": {
+          "ask": "current_model_drawn",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "html_pictures_complete",
+          "no": {
+            "finding": "The pictures before this choice don't draw the current model of what it decides; check whether one shows what exists today for this subject, then decide.",
+            "at": "control"
+          },
+          "uncertain": "uncertain"
+        },
+        "html_pictures_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "preceding_html_pictures"
+          },
+          "yes": "island_pictures_complete",
+          "no": "uncertain"
+        },
+        "island_pictures_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "preceding_island_pictures"
+          },
+          "yes": "pass",
+          "no": "uncertain"
+        }
+      }
+    },
+    "related": [
+      "heading_path"
+    ],
+    "severity": "warn"
+  }
+}

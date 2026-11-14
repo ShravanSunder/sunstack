@@ -6,7 +6,7 @@ Three mechanical, warn-only checks run from one config. Each finding is worth ch
 | --- | --- | --- |
 | Picture before choice (M001) | [owner-decision-brief.md](../../../shared-references/owner-decision-brief.md), "The current model, drawn" | a native choice has no picture before it in its own heading section |
 | Section picture (M002 HTML headings, M003 Markdown headings) | `SKILL.md`, "One visual per point, next to the text it supports" | a heading section has at least 100 prose words and no picture: "N words, no picture." |
-| Long table (M004 HTML, M005 Markdown) | `SKILL.md`, "Long detail sits one action away … so nothing becomes a text wall" | a table has more than 20 rows: "N-row table; split it or show it as a picture." |
+| Long table (M004 HTML, M005 Markdown) | `SKILL.md`, "Long detail sits one action away … so nothing becomes a text wall" | a table has more than 20 rows: "N-row table. Worth checking: is this optional detail that belongs one action away, or content the reader needs in view?" |
 
 ## What counts
 

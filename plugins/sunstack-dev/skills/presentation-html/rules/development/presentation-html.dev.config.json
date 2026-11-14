@@ -1,0 +1,323 @@
+{
+  "rulebook": [
+    {
+      "markdown": "../../../../shared-references/owner-decision-brief.md",
+      "rules": "picture-before-control.dev.rules.json"
+    },
+    {
+      "markdown": "../../SKILL.md",
+      "rules": "section-content.dev.rules.json"
+    }
+  ],
+  "marker_prefix": "M",
+  "check": {
+    "files": [
+      "**/*.html"
+    ]
+  },
+  "evidence": {
+    "ast_grep": "../evidence/sgconfig.yml",
+    "html": {
+      "skip_tags": [
+        "ex-mermaid",
+        "ex-choice",
+        "ex-compare"
+      ],
+      "text_attributes": {
+        "ex-choice": [
+          "title"
+        ],
+        "ex-callout": [
+          "title"
+        ],
+        "ex-card": [
+          "title"
+        ],
+        "ex-markdown": [
+          "label"
+        ],
+        "ex-mermaid": [
+          "label"
+        ],
+        "ex-option": [
+          "title"
+        ],
+        "ex-stat": [
+          "label"
+        ]
+      },
+      "embedded_markdown": [
+        {
+          "tag": "script",
+          "attributes": {
+            "type": "text/markdown"
+          }
+        }
+      ]
+    },
+    "kinds": {
+      "outline": {
+        "html_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "fields": {}
+      },
+      "markdown_outline": {
+        "markdown_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "fields": {}
+      },
+      "html_picture": {
+        "rule": "html-picture",
+        "fields": {}
+      },
+      "island_picture": {
+        "rule": "island-picture",
+        "fields": {}
+      },
+      "island_heading": {
+        "rule": "island-heading",
+        "fields": {}
+      },
+      "html_prose": {
+        "rule": "html-prose-outside-islands",
+        "fields": {}
+      },
+      "markdown_prose": {
+        "rule": "markdown-prose",
+        "fields": {}
+      },
+      "html_view": {
+        "rule": "html-view",
+        "fields": {}
+      },
+      "island_view": {
+        "rule": "island-view",
+        "fields": {}
+      },
+      "choice": {
+        "rule": "native-choice",
+        "max_chars": 50000,
+        "fields": {
+          "control": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
+          "heading_path": {
+            "from": "enclosing",
+            "kind": "outline",
+            "text": "heading"
+          },
+          "preceding_text": {
+            "from": "section_prefix",
+            "kind": "outline"
+          },
+          "preceding_html_pictures": {
+            "from": "inside",
+            "kind": "html_picture",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          },
+          "preceding_island_pictures": {
+            "from": "inside",
+            "kind": "island_picture",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          },
+          "island_heading_before": {
+            "from": "inside",
+            "kind": "island_heading",
+            "scope": {
+              "section_prefix": "outline"
+            }
+          },
+          "direct_heading_match": {
+            "from": "inside",
+            "rule": "choice-with-direct-heading-boundary"
+          }
+        }
+      },
+      "html_section": {
+        "html_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "max_chars": 200000,
+        "fields": {
+          "heading": {
+            "from": "section",
+            "text": "heading"
+          },
+          "html_prose": {
+            "from": "inside",
+            "kind": "html_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "markdown_prose": {
+            "from": "inside",
+            "kind": "markdown_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "html_views": {
+            "from": "inside",
+            "kind": "html_view",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "island_views": {
+            "from": "inside",
+            "kind": "island_view",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          }
+        }
+      },
+      "markdown_section": {
+        "markdown_units": {
+          "mode": "unit",
+          "units": [
+            "section"
+          ]
+        },
+        "max_chars": 200000,
+        "fields": {
+          "heading": {
+            "from": "section",
+            "text": "heading"
+          },
+          "html_prose": {
+            "from": "inside",
+            "kind": "html_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "markdown_prose": {
+            "from": "inside",
+            "kind": "markdown_prose",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "html_views": {
+            "from": "inside",
+            "kind": "html_view",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          },
+          "island_views": {
+            "from": "inside",
+            "kind": "island_view",
+            "scope": {
+              "section_own": [
+                "outline",
+                "markdown_outline"
+              ]
+            }
+          }
+        }
+      },
+      "html_table": {
+        "rule": "html-table",
+        "max_chars": 200000,
+        "fields": {
+          "table": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
+          "rows": {
+            "from": "inside",
+            "rule": "html-table-row"
+          },
+          "heading_path": {
+            "from": "enclosing",
+            "kind": "outline",
+            "text": "heading"
+          },
+          "lead_in": {
+            "from": "previous",
+            "rule": "html-lead-in",
+            "count": 1
+          },
+          "closed_disclosure": {
+            "from": "enclosing",
+            "rule": "html-closed-disclosure"
+          }
+        }
+      },
+      "markdown_table": {
+        "rule": "markdown-table",
+        "max_chars": 200000,
+        "fields": {
+          "table": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
+          "rows": {
+            "from": "inside",
+            "rule": "markdown-table-row"
+          },
+          "heading_path": {
+            "from": "enclosing",
+            "kind": "markdown_outline",
+            "text": "heading"
+          },
+          "lead_in": {
+            "from": "previous",
+            "rule": "markdown-lead-in",
+            "count": 1
+          }
+        }
+      }
+    }
+  },
+  "decision_model": {
+    "model": "jev-latest"
+  },
+  "limits": {
+    "evidence_max_chars": 1000000,
+    "request_max_chars": 131072,
+    "max_model_requests": 1000,
+    "max_concurrent_requests": 3,
+    "max_matches": 20000
+  }
+}

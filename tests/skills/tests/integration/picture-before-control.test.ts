@@ -7,6 +7,7 @@ import { z } from "zod";
 import {
   lineStartingWith,
   lintGeneratedPage,
+  presentationHtmlDevelopmentConfig,
   presentationHtmlReportSchema,
   runPresentationHtmlLint,
 } from "#test-support/presentation-html-lint";
@@ -62,6 +63,39 @@ test("active presentation-html rules validate with their own released CLI pin an
       "presentation-html.long-table",
       "presentation-html.long-island-table",
     ].map((rule) => ({ rule, severity: "warn", kind: { kind: "mechanical" } })),
+  );
+});
+
+test("held decision-model versions validate in their own config, as five asking rules on the same markers", () => {
+  // Arrange: the development config pairs the same marked standards with Jev entries.
+  const ruleList = z.array(
+    z.object({
+      rule: z.string(),
+      marker: z.string(),
+      severity: z.string(),
+      kind: z.object({ kind: z.string() }),
+    }),
+  );
+
+  // Act: validate it and list its rules without reading any page or sending a request.
+  const checked = runPresentationHtmlLint(["--check"], presentationHtmlDevelopmentConfig);
+  const listed = runPresentationHtmlLint(["--rules"], presentationHtmlDevelopmentConfig);
+
+  // Assert: every development entry asks the model, warns only, and keeps its marker.
+  expect(checked.status, checked.stderr).toBe(0);
+  expect(listed.status, listed.stderr).toBe(0);
+  expect(
+    ruleList.parse(JSON.parse(listed.stdout)).map(({ marker, severity, kind }) => ({
+      marker,
+      severity,
+      kind: kind.kind,
+    })),
+  ).toEqual(
+    ["M001", "M002", "M003", "M004", "M005"].map((marker) => ({
+      marker,
+      severity: "warn",
+      kind: "asking",
+    })),
   );
 });
 

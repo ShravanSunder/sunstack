@@ -150,12 +150,12 @@ test("a table with more than 20 rows nudges with its row count, in HTML and in i
     {
       rule: "presentation-html.long-table",
       line: lineStartingWith(lines, '<table id="long-table">'),
-      message: expect.stringMatching(/^21-row table; split it or show it as a picture\./),
+      message: expect.stringMatching(/^21-row table\. Worth checking: is this optional detail/),
     },
     {
       rule: "presentation-html.long-island-table",
       line: islandTableLines[0],
-      message: expect.stringMatching(/^21-row table; split it or show it as a picture\./),
+      message: expect.stringMatching(/^21-row table\. Worth checking: is this optional detail/),
     },
   ]);
   expect(

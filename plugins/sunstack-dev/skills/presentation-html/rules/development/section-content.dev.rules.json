@@ -1,0 +1,583 @@
+{
+  "M002": {
+    "name": "presentation-html.section-view.model",
+    "evidence": "html_section",
+    "reference": {
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it.",
+      "examples": [
+        {
+          "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
+          "needs_view": "yes: a path through several parts",
+          "views_carry": "no: nothing shows that path"
+        },
+        {
+          "text": "Prose: the same request path. Views: a sequence diagram of gateway, auth service, orders service and billing worker.",
+          "needs_view": "yes",
+          "views_carry": "yes: the diagram shows the path the prose explains"
+        },
+        {
+          "text": "Prose: 'The release was cut on Tuesday. It includes the faster search and two bug fixes; nothing in it changes stored data.' Views: none.",
+          "needs_view": "no: simple facts and an interpretation",
+          "views_carry": "not asked"
+        },
+        {
+          "text": "Prose: explains how an order moves from created to paid, shipped or cancelled, and which events cause each move. Views: a table of the team's on-call rota.",
+          "needs_view": "yes: states and transitions",
+          "views_carry": "no: the table shows another subject"
+        },
+        {
+          "text": "Prose: compares three storage options on cost, latency and durability. Views: a table with one row per option and those three columns.",
+          "needs_view": "yes: the same questions for several items",
+          "views_carry": "yes: the table carries the comparison"
+        }
+      ]
+    },
+    "questions": {
+      "needs_view": {
+        "type": "noul",
+        "instructions": {
+          "check": "html_prose",
+          "context": [
+            "markdown_prose",
+            "heading",
+            "reference.view_jobs",
+            "reference.examples"
+          ],
+          "task": "Does the section's prose, in html_prose and markdown_prose, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+        },
+        "criteria": {
+          "true": "The prose explains at least one relationship of a kind reference.view_jobs names, such as a path, a flow, states and transitions, ownership, or the same questions answered for several items.",
+          "false": "The prose states only simple facts or an interpretation; nothing in it is a relationship of a kind reference.view_jobs names."
+        }
+      },
+      "views_carry": {
+        "type": "noul",
+        "instructions": {
+          "check": "html_views",
+          "against": "html_prose",
+          "context": [
+            "island_views",
+            "markdown_prose",
+            "heading",
+            "reference.view_jobs",
+            "reference.examples"
+          ],
+          "task": "Do the section's views, in html_views and island_views, show every relationship of a kind reference.view_jobs names that the section's prose explains?"
+        },
+        "criteria": {
+          "true": "Each such relationship the prose explains is shown by a view in this section.",
+          "false": "At least one such relationship the prose explains is shown by no view in this section: the views show other things, or show only part of it."
+        }
+      }
+    },
+    "decision": {
+      "start": "html_prose_complete",
+      "steps": {
+        "html_prose_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "html_prose"
+          },
+          "yes": "markdown_prose_complete",
+          "no": "uncertain"
+        },
+        "markdown_prose_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "markdown_prose"
+          },
+          "yes": "has_prose",
+          "no": "uncertain"
+        },
+        "has_prose": {
+          "mechanical_check": {
+            "tool": "word_count",
+            "field": [
+              "html_prose",
+              "markdown_prose"
+            ],
+            "bound": {
+              "at_least": 1
+            }
+          },
+          "yes": "needs_view",
+          "no": "not_applicable"
+        },
+        "needs_view": {
+          "ask": "needs_view",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "has_views",
+          "no": "pass",
+          "uncertain": "uncertain"
+        },
+        "has_views": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": [
+              "html_views",
+              "island_views"
+            ],
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "views_carry",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words that explain a relationship, and no view in this section's own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "at": "heading"
+          }
+        },
+        "views_carry": {
+          "ask": "views_carry",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "views_complete",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words; this section's views don't show a relationship its prose explains; check which point lacks a view next to it, then decide.",
+            "at": "heading"
+          },
+          "uncertain": "uncertain"
+        },
+        "views_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "html_views"
+          },
+          "yes": "island_views_complete",
+          "no": "uncertain"
+        },
+        "island_views_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "island_views"
+          },
+          "yes": "pass",
+          "no": "uncertain"
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "M003": {
+    "name": "presentation-html.island-section-view.model",
+    "evidence": "markdown_section",
+    "reference": {
+      "view_jobs": "A relationship needs a structured view when the reader must follow how parts relate, not only what each is. The kinds, each with the view that carries it: hierarchy or belonging (a tree); a call path from an entry to its effect (a call path); ordered steps with evidence (a trace); ordered work with branches (a flowchart or flow); participants exchanging messages over time (a sequence diagram); states and transitions (a state diagram); boundaries, ownership and dependencies (a board with arrows); records, identity and cardinality (an entity diagram); numeric change across ordered categories (a chart); the same questions answered for several items (a table); alternatives on corresponding topics (a comparison). A simple fact or an interpretation needs no separate view: prose under a purposeful heading carries it.",
+      "examples": [
+        {
+          "text": "Prose: 'A request enters the gateway, which checks the token with the auth service, then forwards it to the orders service, which writes to its own database and emits an event the billing worker consumes.' Views: none.",
+          "needs_view": "yes: a path through several parts",
+          "views_carry": "no: nothing shows that path"
+        },
+        {
+          "text": "Prose: the same request path. Views: a sequence diagram of gateway, auth service, orders service and billing worker.",
+          "needs_view": "yes",
+          "views_carry": "yes: the diagram shows the path the prose explains"
+        },
+        {
+          "text": "Prose: 'The release was cut on Tuesday. It includes the faster search and two bug fixes; nothing in it changes stored data.' Views: none.",
+          "needs_view": "no: simple facts and an interpretation",
+          "views_carry": "not asked"
+        },
+        {
+          "text": "Prose: explains how an order moves from created to paid, shipped or cancelled, and which events cause each move. Views: a table of the team's on-call rota.",
+          "needs_view": "yes: states and transitions",
+          "views_carry": "no: the table shows another subject"
+        },
+        {
+          "text": "Prose: compares three storage options on cost, latency and durability. Views: a table with one row per option and those three columns.",
+          "needs_view": "yes: the same questions for several items",
+          "views_carry": "yes: the table carries the comparison"
+        }
+      ]
+    },
+    "questions": {
+      "needs_view": {
+        "type": "noul",
+        "instructions": {
+          "check": "html_prose",
+          "context": [
+            "markdown_prose",
+            "heading",
+            "reference.view_jobs",
+            "reference.examples"
+          ],
+          "task": "Does the section's prose, in html_prose and markdown_prose, explain a relationship that reference.view_jobs says needs a structured view, rather than only simple facts or an interpretation?"
+        },
+        "criteria": {
+          "true": "The prose explains at least one relationship of a kind reference.view_jobs names, such as a path, a flow, states and transitions, ownership, or the same questions answered for several items.",
+          "false": "The prose states only simple facts or an interpretation; nothing in it is a relationship of a kind reference.view_jobs names."
+        }
+      },
+      "views_carry": {
+        "type": "noul",
+        "instructions": {
+          "check": "html_views",
+          "against": "html_prose",
+          "context": [
+            "island_views",
+            "markdown_prose",
+            "heading",
+            "reference.view_jobs",
+            "reference.examples"
+          ],
+          "task": "Do the section's views, in html_views and island_views, show every relationship of a kind reference.view_jobs names that the section's prose explains?"
+        },
+        "criteria": {
+          "true": "Each such relationship the prose explains is shown by a view in this section.",
+          "false": "At least one such relationship the prose explains is shown by no view in this section: the views show other things, or show only part of it."
+        }
+      }
+    },
+    "decision": {
+      "start": "html_prose_complete",
+      "steps": {
+        "html_prose_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "html_prose"
+          },
+          "yes": "markdown_prose_complete",
+          "no": "uncertain"
+        },
+        "markdown_prose_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "markdown_prose"
+          },
+          "yes": "has_prose",
+          "no": "uncertain"
+        },
+        "has_prose": {
+          "mechanical_check": {
+            "tool": "word_count",
+            "field": [
+              "html_prose",
+              "markdown_prose"
+            ],
+            "bound": {
+              "at_least": 1
+            }
+          },
+          "yes": "needs_view",
+          "no": "not_applicable"
+        },
+        "needs_view": {
+          "ask": "needs_view",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "has_views",
+          "no": "pass",
+          "uncertain": "uncertain"
+        },
+        "has_views": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": [
+              "html_views",
+              "island_views"
+            ],
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "views_carry",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words that explain a relationship, and no view in this section's own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "at": "heading"
+          }
+        },
+        "views_carry": {
+          "ask": "views_carry",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "views_complete",
+          "no": {
+            "finding": "{{word_count:html_prose,markdown_prose}} words; this section's views don't show a relationship its prose explains; check which point lacks a view next to it, then decide.",
+            "at": "heading"
+          },
+          "uncertain": "uncertain"
+        },
+        "views_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "html_views"
+          },
+          "yes": "island_views_complete",
+          "no": "uncertain"
+        },
+        "island_views_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "island_views"
+          },
+          "yes": "pass",
+          "no": "uncertain"
+        }
+      }
+    },
+    "severity": "warn"
+  },
+  "M004": {
+    "name": "presentation-html.long-detail-table.model",
+    "evidence": "html_table",
+    "reference": {
+      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what most readers skip under the current point: rationale, evidence, receipts, inventories or reference data. Content the point rests on stays in view: the exact corresponding facts the reader compares, and failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
+      "examples": [
+        {
+          "text": "After 'Each payment error code and the delay before the next attempt:' a table of eight error codes with their delays, which the next paragraph's choice relies on.",
+          "optional": "no: the facts the choice rests on",
+          "long": "no",
+          "failure_cases": "yes: failure cases and their thresholds"
+        },
+        {
+          "text": "After 'Raw timings from the benchmark run:' a 60-row table of individual request timings; the section's point is the median, stated above it.",
+          "optional": "yes: evidence most readers skip",
+          "long": "yes"
+        },
+        {
+          "text": "Inside a closed disclosure titled 'Benchmark receipts': the same 60-row timing table.",
+          "optional": "yes",
+          "failure_cases": "no"
+        },
+        {
+          "text": "Inside a closed disclosure titled 'Details': a table of the image formats an upload refuses and the largest file accepted for each.",
+          "failure_cases": "yes: failure cases and thresholds hidden behind an action"
+        },
+        {
+          "text": "A four-row table comparing two storage options on cost, latency, durability and ownership, right before the owner's choice.",
+          "optional": "no: the comparison the choice rests on",
+          "long": "no"
+        }
+      ]
+    },
+    "questions": {
+      "optional_detail": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "heading_path",
+            "reference.detail",
+            "reference.examples",
+            "closed_disclosure"
+          ],
+          "task": "Is table optional depth that most readers skip under the current point, rather than content the point rests on?"
+        },
+        "criteria": {
+          "true": "The table holds supporting depth: rationale, evidence, receipts, inventories or reference data the section's point doesn't need read.",
+          "false": "The table holds what the point rests on: the exact corresponding facts the reader compares, or failure cases and their thresholds."
+        }
+      },
+      "long_detail": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "reference.detail"
+          ],
+          "task": "Is table long enough that reading it in the main path holds up the section's point, the way a wall of text would?"
+        },
+        "criteria": {
+          "true": "Reading the table takes many rows or dense cells, enough to hold up the point.",
+          "false": "The table is short or quick to scan."
+        }
+      },
+      "failure_cases": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "reference.detail"
+          ],
+          "task": "Does table state failure cases or their thresholds?"
+        },
+        "criteria": {
+          "true": "The table names cases where something fails or is refused, or the limits at which it does.",
+          "false": "The table names no failure case and no threshold."
+        }
+      }
+    },
+    "decision": {
+      "start": "table_complete",
+      "steps": {
+        "table_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "table"
+          },
+          "yes": "placement",
+          "no": "uncertain"
+        },
+        "placement": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "closed_disclosure",
+            "pattern": "(?s).*"
+          },
+          "yes": "hidden_failure_cases",
+          "no": "optional_detail"
+        },
+        "hidden_failure_cases": {
+          "ask": "failure_cases",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": {
+            "finding": "This table sits in a closed disclosure and states failure cases or their thresholds; check whether they belong in view, then decide.",
+            "at": "table"
+          },
+          "no": "pass",
+          "uncertain": "uncertain"
+        },
+        "optional_detail": {
+          "ask": "optional_detail",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "long_detail",
+          "no": "pass",
+          "uncertain": "uncertain"
+        },
+        "long_detail": {
+          "ask": "long_detail",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": {
+            "finding": "{{piece_count:rows}}-row table in the main reading path that reads as long optional detail; check whether it belongs one action away or should stay in view, and keep its form if it was carried from a source, then decide.",
+            "at": "table"
+          },
+          "no": "pass",
+          "uncertain": "uncertain"
+        }
+      }
+    },
+    "related": [
+      "lead_in",
+      "heading_path"
+    ],
+    "severity": "warn"
+  },
+  "M005": {
+    "name": "presentation-html.long-detail-island-table.model",
+    "evidence": "markdown_table",
+    "reference": {
+      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what most readers skip under the current point: rationale, evidence, receipts, inventories or reference data. Content the point rests on stays in view: the exact corresponding facts the reader compares, and failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page.",
+      "examples": [
+        {
+          "text": "After 'Each payment error code and the delay before the next attempt:' a table of eight error codes with their delays, which the next paragraph's choice relies on.",
+          "optional": "no: the facts the choice rests on",
+          "long": "no",
+          "failure_cases": "yes: failure cases and their thresholds"
+        },
+        {
+          "text": "After 'Raw timings from the benchmark run:' a 60-row table of individual request timings; the section's point is the median, stated above it.",
+          "optional": "yes: evidence most readers skip",
+          "long": "yes"
+        },
+        {
+          "text": "Inside a closed disclosure titled 'Benchmark receipts': the same 60-row timing table.",
+          "optional": "yes",
+          "failure_cases": "no"
+        },
+        {
+          "text": "Inside a closed disclosure titled 'Details': a table of the image formats an upload refuses and the largest file accepted for each.",
+          "failure_cases": "yes: failure cases and thresholds hidden behind an action"
+        },
+        {
+          "text": "A four-row table comparing two storage options on cost, latency, durability and ownership, right before the owner's choice.",
+          "optional": "no: the comparison the choice rests on",
+          "long": "no"
+        }
+      ]
+    },
+    "questions": {
+      "optional_detail": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "heading_path",
+            "reference.detail",
+            "reference.examples"
+          ],
+          "task": "Is table optional depth that most readers skip under the current point, rather than content the point rests on?"
+        },
+        "criteria": {
+          "true": "The table holds supporting depth: rationale, evidence, receipts, inventories or reference data the section's point doesn't need read.",
+          "false": "The table holds what the point rests on: the exact corresponding facts the reader compares, or failure cases and their thresholds."
+        }
+      },
+      "long_detail": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "reference.detail"
+          ],
+          "task": "Is table long enough that reading it in the main path holds up the section's point, the way a wall of text would?"
+        },
+        "criteria": {
+          "true": "Reading the table takes many rows or dense cells, enough to hold up the point.",
+          "false": "The table is short or quick to scan."
+        }
+      },
+      "failure_cases": {
+        "type": "noul",
+        "instructions": {
+          "check": "table",
+          "context": [
+            "lead_in",
+            "reference.detail"
+          ],
+          "task": "Does table state failure cases or their thresholds?"
+        },
+        "criteria": {
+          "true": "The table names cases where something fails or is refused, or the limits at which it does.",
+          "false": "The table names no failure case and no threshold."
+        }
+      }
+    },
+    "decision": {
+      "start": "table_complete",
+      "steps": {
+        "table_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "table"
+          },
+          "yes": "optional_detail",
+          "no": "uncertain"
+        },
+        "optional_detail": {
+          "ask": "optional_detail",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": "long_detail",
+          "no": "pass",
+          "uncertain": "uncertain"
+        },
+        "long_detail": {
+          "ask": "long_detail",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": {
+            "finding": "{{piece_count:rows}}-row table in the main reading path that reads as long optional detail; check whether it belongs one action away or should stay in view, and keep its form if it was carried from a source, then decide.",
+            "at": "table"
+          },
+          "no": "pass",
+          "uncertain": "uncertain"
+        }
+      }
+    },
+    "related": [
+      "lead_in",
+      "heading_path"
+    ],
+    "severity": "warn"
+  }
+}
