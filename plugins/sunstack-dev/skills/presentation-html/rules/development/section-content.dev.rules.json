@@ -527,8 +527,10 @@
           "context": [
             "lead_in",
             "heading_path",
+            "html_heading_path",
             "reference.detail",
-            "reference.examples"
+            "reference.examples",
+            "closed_disclosure"
           ],
           "task": "Is table optional depth that a reader can skip and still follow the page's open questions and conclusions, rather than content the reader needs in view?"
         },
@@ -576,8 +578,28 @@
             "tool": "complete",
             "field": "table"
           },
-          "yes": "optional_detail",
+          "yes": "placement",
           "no": "uncertain"
+        },
+        "placement": {
+          "mechanical_check": {
+            "tool": "regex",
+            "field": "closed_disclosure",
+            "pattern": "(?s).*"
+          },
+          "yes": "hidden_failure_cases",
+          "no": "optional_detail"
+        },
+        "hidden_failure_cases": {
+          "ask": "failure_cases",
+          "yes_at_or_above": 0.7,
+          "no_at_or_below": 0.3,
+          "yes": {
+            "finding": "This table sits in a closed disclosure and states failure cases or their thresholds; check whether they belong in view, then decide.",
+            "at": "table"
+          },
+          "no": "pass",
+          "uncertain": "uncertain"
         },
         "optional_detail": {
           "ask": "optional_detail",
@@ -602,7 +624,8 @@
     },
     "related": [
       "lead_in",
-      "heading_path"
+      "heading_path",
+      "html_heading_path"
     ],
     "severity": "warn"
   }

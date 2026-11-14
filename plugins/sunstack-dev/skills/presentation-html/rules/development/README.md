@@ -24,7 +24,7 @@ Nothing here is switched on. Each bar is a provisional 0.7 / 0.3 placeholder, to
 
 ## M005 long-detail table (islands)
 
-Same questions as M004. Held: an island table can't yet read the HTML disclosure or heading around it (sunstack 0.21.1 refused cross-language `enclosing`; 0.22.0 adds it, and M005 is rebuilt on it next).
+Same questions, reference and tree as M004. Its state adds the HTML around the island table through cross-language `enclosing` (sunstack 0.22.0+): the closed `<details>` it sits in, if any, and its HTML heading path beside its own Markdown heading path.
 
 ## Proof
 

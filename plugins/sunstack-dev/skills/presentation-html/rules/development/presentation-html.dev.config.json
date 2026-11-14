@@ -313,6 +313,16 @@
             "from": "previous",
             "rule": "markdown-lead-in",
             "count": 1
+          },
+          "html_heading_path": {
+            "from": "enclosing",
+            "kind": "outline",
+            "text": "heading"
+          },
+          "closed_disclosure": {
+            "from": "enclosing",
+            "rule": "html-closed-disclosure",
+            "text": "first_line"
           }
         }
       },
