@@ -20,7 +20,7 @@ Nothing here is switched on. One bar comes from development labels on both sides
 
 - **State:** the table, its lead-in paragraph, its heading path, the closed `<details>` it sits in, if any, the page from its governing h1/h2 heading up to the table (`section_before`), and the table's own section as raw blocks in order, including what follows it (`section_blocks`).
 - **Questions:** `optional_detail` (depth a reader can skip and still follow the page: history, evidence, receipts, provenance, trace indexes; not the comparisons, contracts or failure cases the reader must check), `long_detail` (long enough to hold up the point) and `failure_cases` (states failure cases or thresholds).
-- **Tree:** in a closed disclosure → nudge only if it hides failure cases or thresholds; in the main path → nudge only when it is both optional and long, with the row count; otherwise pass.
+- **Tree:** in a closed disclosure → nudge only if it hides failure cases or thresholds; in the main path, a cut or unavailable `section_before` or `section_blocks` → `uncertain`, then nudge only when it is both optional and long, with the row count; otherwise pass.
 
 ## M005 long-detail table (islands)
 

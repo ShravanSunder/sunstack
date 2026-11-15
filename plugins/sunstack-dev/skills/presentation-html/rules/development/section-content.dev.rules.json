@@ -51,9 +51,9 @@
           "views_carry": "yes: the payment's states, explained in detail, have their view next to the explanation; the owning team is only named in passing and needs none"
         },
         {
-          "text": "A table of four release decisions; one cell explains, step by step, how a failed deploy rolls back through three services. No view shows that rollback.",
+          "text": "A table of five roles in a hiring team and what each owns; the recruiter's cell explains, step by step, how an offer is approved: the recruiter drafts it, the hiring manager sets the salary, finance checks it against the band, and the director signs. No view shows that approval path.",
           "needs_view": "yes: a path explained in detail inside one cell",
-          "views_carry": "no: the rollback is explained in detail and no view shows it, even though the table carries the decisions"
+          "views_carry": "no: the approval path is explained in detail and no view shows it, even though the table carries the roles"
         }
       ],
       "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
@@ -237,9 +237,9 @@
           "views_carry": "yes: the payment's states, explained in detail, have their view next to the explanation; the owning team is only named in passing and needs none"
         },
         {
-          "text": "A table of four release decisions; one cell explains, step by step, how a failed deploy rolls back through three services. No view shows that rollback.",
+          "text": "A table of five roles in a hiring team and what each owns; the recruiter's cell explains, step by step, how an offer is approved: the recruiter drafts it, the hiring manager sets the salary, finance checks it against the band, and the director signs. No view shows that approval path.",
           "needs_view": "yes: a path explained in detail inside one cell",
-          "views_carry": "no: the rollback is explained in detail and no view shows it, even though the table carries the decisions"
+          "views_carry": "no: the approval path is explained in detail and no view shows it, even though the table carries the roles"
         }
       ],
       "next_to": "Next to means a reader finds the view where they read about its point: right before or after the passage that explains it, or after a short run of paragraphs on that same point. A run of points that one view draws together counts as one passage. A view is away from its text when it sits past unrelated points or other views, or so far from its passage, such as at the end of a long section, that the reader has to hunt for it."
@@ -463,7 +463,23 @@
             "pattern": "(?s).*"
           },
           "yes": "hidden_failure_cases",
-          "no": "optional_detail"
+          "no": "section_before_complete"
+        },
+        "section_before_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "section_before"
+          },
+          "yes": "section_blocks_complete",
+          "no": "uncertain"
+        },
+        "section_blocks_complete": {
+          "mechanical_check": {
+            "tool": "complete",
+            "field": "section_blocks"
+          },
+          "yes": "optional_detail",
+          "no": "uncertain"
         },
         "hidden_failure_cases": {
           "ask": "failure_cases",
