@@ -116,7 +116,7 @@
         "needs_view": {
           "ask": "needs_view",
           "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "no_at_or_below": 0.5,
           "yes": {
             "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
             "at": "heading"
@@ -140,7 +140,7 @@
         },
         "views_carry": {
           "ask": "views_carry",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.5,
           "no_at_or_below": 0.3,
           "yes": "views_complete",
           "no": {
@@ -636,7 +636,7 @@
         },
         "optional_detail": {
           "ask": "optional_detail",
-          "yes_at_or_above": 0.7,
+          "yes_at_or_above": 0.6,
           "no_at_or_below": 0.3,
           "yes": "long_detail",
           "no": "pass",
@@ -644,8 +644,8 @@
         },
         "long_detail": {
           "ask": "long_detail",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "yes_at_or_above": 0.65,
+          "no_at_or_below": 0.45,
           "yes": {
             "finding": "{{piece_count:rows}}-row table in the main reading path that reads as long optional detail; check whether it belongs one action away or should stay in view, and keep its form if it was carried from a source, then decide.",
             "at": "table"

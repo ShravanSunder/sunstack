@@ -2,7 +2,7 @@
 
 The active nudges in `../presentation-html.config.json` measure structure only: a picture's presence, word counts, row counts. Their standards ask for reading: whether the current model is drawn, whether a point's relationship has a view next to it, whether long detail sits one action away. This folder holds Jev decision-model versions of the same marked standards (M001 to M005), in their own config so they warn nobody until their cases meet the rule-authoring floors and they beat the active rules, which stay the baseline.
 
-Nothing here is switched on. One bar comes from development labels on both sides: M005 `failure_cases` yes ≥ 0.8, no ≤ 0.7, with its deciding cases in the case file's `bars`. M001's `owner_design_decision` yes ≥ 0.6 and `current_model_drawn` 0.6 / 0.3 are provisional candidates: every labelled development case that reaches either question is on its yes side, so neither no side is measured yet; they need independently labelled non-design choices and picture-present cases whose picture is wrong. Every other bar is a provisional 0.7 / 0.3 placeholder.
+Nothing here is switched on. Freeze candidates, set on development answers with labelled cases on both sides (the case file's `bars` names them): M002 `needs_view` yes ≥ 0.7, no ≤ 0.5 and `views_carry` 0.5 / 0.3; M005 `optional_detail` 0.6 / 0.3, `long_detail` 0.65 / 0.45 and `failure_cases` 0.8 / 0.7. M005's optional and long bars moved after an independent adjudication relabelled two tables. M001 (`owner_design_decision` 0.6 / 0.3 and `current_model_drawn` 0.6 / 0.3), M003 and M004 keep provisional bars: their Jev versions don't yet beat the active mechanical rules on development cases left out of the bar choice.
 
 ## M001 picture before choice
 
