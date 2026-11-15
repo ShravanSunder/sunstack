@@ -110,14 +110,17 @@
               "greater_than": 0
             }
           },
-          "yes": "needs_view",
+          "yes": "has_views",
           "no": "not_applicable"
         },
         "needs_view": {
           "ask": "needs_view",
           "yes_at_or_above": 0.7,
           "no_at_or_below": 0.3,
-          "yes": "has_views",
+          "yes": {
+            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "at": "heading"
+          },
           "no": "pass",
           "uncertain": "uncertain"
         },
@@ -133,10 +136,7 @@
             }
           },
           "yes": "views_carry",
-          "no": {
-            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
-            "at": "heading"
-          }
+          "no": "needs_view"
         },
         "views_carry": {
           "ask": "views_carry",
@@ -293,14 +293,17 @@
               "greater_than": 0
             }
           },
-          "yes": "needs_view",
+          "yes": "has_views",
           "no": "not_applicable"
         },
         "needs_view": {
           "ask": "needs_view",
           "yes_at_or_above": 0.7,
           "no_at_or_below": 0.3,
-          "yes": "has_views",
+          "yes": {
+            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
+            "at": "heading"
+          },
           "no": "pass",
           "uncertain": "uncertain"
         },
@@ -316,10 +319,7 @@
             }
           },
           "yes": "views_carry",
-          "no": {
-            "finding": "This section explains a relationship and no view sits in its own content; check whether a diagram or table next to this text would carry it, then decide.",
-            "at": "heading"
-          }
+          "no": "needs_view"
         },
         "views_carry": {
           "ask": "views_carry",
