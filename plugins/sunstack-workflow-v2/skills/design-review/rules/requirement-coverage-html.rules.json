@@ -590,8 +590,8 @@
           "task": "Is every obligation in all_obligations that cites the requirement's id accounted for whole by verification_rows, the requirement's own Verification rows: by naming it (id or range), by describing its observation in prose, by pointing to a shared observation or checks section in shared_observations that those rows name or refer to, or by listing it as unverified?"
         },
         "criteria": {
-          "true": "Each obligation that cites the requirement has every behavior it states covered by an observation these rows give or point to, or is listed as unverified.",
-          "false": "Some obligation that cites the requirement has a behavior with no observation these rows give or point to and is not listed as unverified. An observation only under another requirement's row, that these rows neither name nor point to, does not count."
+          "true": "Each obligation that cites the requirement has every behavior it states covered by an observation these rows give or point to, or is listed as unverified. This question asks only whether each behavior has an observation. Whether that observation keeps its V's threshold, reference or target, or sits at its seam, is asked by the later questions: an observation weaker than its V, or made at another seam, still accounts for the behavior here.",
+          "false": "Some obligation that cites the requirement has a behavior with no observation these rows give or point to and is not listed as unverified. An observation only under another requirement's row, that these rows neither name nor point to, does not count. An observation that exists but is weaker than its V, or sits at another seam, is not a no here."
         }
       },
       "keeps_threshold": {
@@ -632,7 +632,7 @@
           "task": "For every obligation in all_obligations that cites the requirement's id and that verification_rows decides by an observation, does that observation use the reference of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
-          "true": "Each such observation uses the V's named reference. If no obligation is decided by an observation, answer true.",
+          "true": "Each such observation uses the V's named reference. A V that names no separate reference gives nothing to keep, so it counts as kept. If no obligation is decided by an observation, answer true.",
           "false": "Some observation uses another reference than its V names, or none."
         }
       },
@@ -653,7 +653,7 @@
           "task": "For every obligation in all_obligations that cites the requirement's id and that verification_rows decides by an observation, does that observation keep the target constraints of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
-          "true": "Each such observation runs on the target its V constrains. If no obligation is decided by an observation, answer true.",
+          "true": "Each such observation runs on the target its V constrains. A V that states no target constraint gives nothing to keep, so it counts as kept. If no obligation is decided by an observation, answer true.",
           "false": "Some observation runs on another or looser target than its V states."
         }
       },
