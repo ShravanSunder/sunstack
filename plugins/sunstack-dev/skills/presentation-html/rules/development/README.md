@@ -6,7 +6,7 @@ The nudges in `../presentation-html.config.json` began as mechanical checks that
 
 **After round 19 (stop rule fixed before the run):**
 - **M001 and M003 are parked**; their active rules stay mechanical. Neither beat mechanical on unique development cases left out of the bar choice, with an uncertain at 1.0: M001 12.0 vs 9, M003 11.0 vs 8. Reason on record: their questions sit near the model's resolution on this evidence. For M001, the model's reading of which drawing shows today moves the outcome. For M003, obligation sections overlap scope and constraint sections, and views-carry readings of tables sit in between. They stay here until new evidence or a new idea.
-- **M004 is a freeze candidate** at `optional_detail` 0.65 / 0.3 and `long_detail` 0.55 / 0.3: 5.0 vs 6 out of fold. The win comes from uncertain answers where the mechanical rule misses; it warns correctly on none of the four unique development warns.
+- **M004 is parked too**; its active rule stays mechanical and its bars stay provisional 0.7 / 0.3. Its main path beat mechanical out of fold (5.0 vs 6 at candidate bars 0.65 / 0.3 and 0.55 / 0.3; on full development data 18 right, 2 uncertain, 1 miss, with one confident correct warn). But its closed-disclosure step (`hidden_failure_cases`) has no development evidence: none of its 22 development cases sits in a closed disclosure, and the corpus holds one unlabelled real closed HTML table. So the whole rule can't be assessed. The way back is real labelled closed-disclosure HTML tables, not rewording.
 
 ## M001 picture before choice
 
@@ -31,7 +31,7 @@ The nudges in `../presentation-html.config.json` began as mechanical checks that
 
 ## M005 long-detail table (islands)
 
-Same questions and tree as M004, without M004's section fields and the sentence of its reference that reads them. Its state adds the HTML around the island table through cross-language `enclosing` (sunstack 0.22.0+): the closed `<details>` it sits in, if any, and its HTML heading path beside its own Markdown heading path.
+Same tree as M004, without M004's section fields and their guards. M004's round 13–19 reference and question changes are not in M005, which is active as frozen. Its state adds the HTML around the island table through cross-language `enclosing` (sunstack 0.22.0+): the closed `<details>` it sits in, if any, and its HTML heading path beside its own Markdown heading path.
 
 ## Proof
 
