@@ -30,11 +30,11 @@ Presence is not relevance for M001, M003 and M004: they don't judge whether a pi
 
 ## Run
 
-M002 and M005 ask a model, so a normal run needs the OpenRouter credential (`OPENROUTER_API_KEY`, or `sunstack credentials save`); without it the whole run is refused, the mechanical nudges included, until the engine runs mechanical rules on their own. The config requests `jev-latest` and allows up to 1,000 requests per run; a saved report records the resolved version. The bars were tuned and held-out-tested on `typesafe/jev-1.14-20261014`, so recheck them before relying on a different resolved version. From this repository root:
+M002 and M005 ask a model, so they need the OpenRouter credential (`OPENROUTER_API_KEY`, or `sunstack credentials save`). Without it (CLI 0.23.0 and later), the mechanical nudges still run and report, M002 and M005 pieces are marked unavailable, and the run exits 3. The config requests `jev-latest` and allows up to 1,000 requests per run; a saved report records the resolved version. The bars were tuned and held-out-tested on `typesafe/jev-1.14-20261014`, so recheck them before relying on a different resolved version. From this repository root:
 
 ```sh
-pnpm dlx @sunstack/cli@0.22.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/page.html
-pnpm dlx @sunstack/cli@0.22.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/folder
+pnpm dlx @sunstack/cli@0.23.0 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/page.html
+pnpm dlx @sunstack/cli@0.23.0 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/folder
 ```
 
 To see what the decision models would be asked without a credential or any request, add `--prepare <file>`: the mechanical nudges still report their findings, and each M002/M005 piece is saved as one unsent request (exit 6).
@@ -49,4 +49,4 @@ The section and table nudges were added on 14 Nov 2026 as mechanical checks; M00
 
 On 15 Nov 2026, M002 and M005 were switched to the Jev decision models built in `development/`, with the questions, evidence, references and bars frozen there. Costs count a false warning 1, a miss 2 and an uncertain 0.5. On development cases left out of the bar choice, M002 cost 8.0 against the mechanical rule's 16 on its 52 unique cases (7.5 against 17 when three duplicate pairs count twice), and M005 4.5 against 14 (32 cases). Those cases also set the bars; the held-out run is the independent evidence. On one held-out run, M002 cost 3.5 against 7.0 (13 items; 3 false warnings against 7) and M005 0 against 1 (3 items, all passes, so its misses are untested there). M001, M003 and M004 keep their mechanical rules; their decision models stay in development.
 
-These nudges pin CLI 0.22.1; the shared skill-rule test engine remains on 0.9.0.
+These nudges pin CLI 0.23.0; the shared skill-rule test engine remains on 0.9.0.

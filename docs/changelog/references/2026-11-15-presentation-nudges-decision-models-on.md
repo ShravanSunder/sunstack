@@ -19,7 +19,7 @@ Decoded definitions (questions, bars, routes, uncertain handling) are equal for 
 - The nudge tests now prepare pages instead of sending:
   - M002/M005 require exactly one unsent request per piece, with the exact list of pieces per page, the requested `jev-latest`, and the views each section's state carries. Changing M002's prose count to views only (so prose-only sections are not admitted) fails two of the three tests.
   - M001/M003/M004 keep their mechanical outcomes and messages.
-  - The uncertain-choice test asserts the uncertain outcome under prepare's exit 6. An ordinary run needs a credential now, so its exit 5 isn't exercised.
+  - The uncertain-choice test asserts the uncertain outcome under prepare's exit 6. Its ordinary-run exit 5 isn't exercised: on CLI 0.23.0 a keyless run of that page exits 3, because its M002 piece is unavailable, so exit 5 needs a credentialed run.
 - `tsc --noEmit` exit 0. `oxfmt --check` and `oxlint` are clean on the three changed test files.
 - `claude plugin validate .` passed. Its one warning is pre-existing and concerns another plugin's README.
 - `lint --check` exits 0 on both configs.
