@@ -704,7 +704,7 @@
           "task": "For every obligation in all_obligations that cites the requirement's id and that verification_rows decides by an observation, does that observation use the reference of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
-          "true": "Each such observation uses the V's named reference. A V that names no separate reference gives nothing to keep, so it counts as kept. If no obligation is decided by an observation, answer true.",
+          "true": "Each such observation uses the V's named reference. If no obligation is decided by an observation, answer true.",
           "false": "Some observation uses another reference than its V names, or none."
         }
       },
@@ -725,7 +725,7 @@
           "task": "For every obligation in all_obligations that cites the requirement's id and that verification_rows decides by an observation, does that observation keep the target constraints of its V, as proof_obligations states it or as the obligation's own passing condition in all_obligations states it?"
         },
         "criteria": {
-          "true": "Each such observation runs on the target its V constrains. A V that states no target constraint gives nothing to keep, so it counts as kept. If no obligation is decided by an observation, answer true.",
+          "true": "Each such observation runs on the target its V constrains. If no obligation is decided by an observation, answer true.",
           "false": "Some observation runs on another or looser target than its V states."
         }
       },
