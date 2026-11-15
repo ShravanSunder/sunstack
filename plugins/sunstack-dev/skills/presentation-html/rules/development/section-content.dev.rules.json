@@ -232,6 +232,11 @@
           "views_carry": "no: nothing shows how those parts connect"
         },
         {
+          "text": "Heading 'Rules'. Prose: four bullets: an invoice is sent only after its order ships; a refund reverses the invoice and reopens the order; a failed payment holds the order until the card is updated; a held order is cancelled after 14 days. Views: none.",
+          "needs_view": "yes: the points set out how orders, invoices, refunds and payments change each other's state",
+          "views_carry": "no: nothing shows those states and moves"
+        },
+        {
           "text": "Prose: explains how a payment moves from authorised to captured or refunded, and in passing names the team that owns the payment service. Views: a state diagram of the payment's states, right after that explanation.",
           "needs_view": "yes: states and transitions",
           "views_carry": "yes: the payment's states, explained in detail, have their view next to the explanation; the owning team is only named in passing and needs none"
@@ -258,7 +263,7 @@
         },
         "criteria": {
           "true": "The section explains how parts relate in a way the reader has to follow, in paragraphs, lists or table cells: a path or flow, branches, messages between participants, states and transitions, ownership and boundaries, dependencies, identity and cardinality, or the same facts compared across items. A run of assumptions, obligations or conditions counts when its points say how parts act on each other (what a change reaches, what a part checks or relies on, who writes what and how it is shown), as reference.view_jobs describes, even when each point is one sentence or has a choice after it.",
-          "false": "The section's points are each about one thing and say nothing about how parts relate (scope items, open questions, status, independent constraints, quotations), or it states simple facts, one pairing stated once on its own, an interpretation, or an opening summary that previews what the page goes on to explain."
+          "false": "The section's points are each about one thing and say nothing about how parts relate (scope items, open questions, status, independent constraints, quotations), even when those points name the parts or people involved, or it states simple facts, one pairing stated once on its own, an interpretation, or an opening summary that previews what the page goes on to explain."
         }
       },
       "views_carry": {
@@ -272,10 +277,10 @@
             "reference.next_to",
             "reference.examples"
           ],
-          "task": "Reading blocks in order (the section's own content as raw blocks, its views among them; island_views adds any island view), does every relationship this section explains in detail have a view that shows it, next to the passage that explains it?"
+          "task": "Reading blocks in order (the section's own Markdown blocks, its views among them; island_views lists them again), does every relationship this section explains in detail have a view that shows it, next to the passage that explains it?"
         },
         "criteria": {
-          "true": "Each relationship the section explains in detail, step by step or part by part, has a view that shows it where a reader reads about it, as reference.next_to defines; a relationship only named in passing needs no view of its own. A table shows only what its rows and columns set side by side, not a path or mechanism written out inside one of its cells.",
+          "true": "Each relationship the section explains in detail, step by step or part by part, has a view that shows it where a reader reads about it, as reference.next_to defines; a relationship only named in passing needs no view of its own. A table shows only what its rows and columns set side by side, not a path or mechanism written out inside one of its cells. Text that explains no relationship, such as points that are each about one thing, simple facts, status, an interpretation or an opening, needs no view, so a section whose views show its relationships, or whose other text is only that, is carried.",
           "false": "A relationship the section explains in detail, whether in paragraphs, list items, table cells or option text, has no view that shows it, or its view sits away from its passage as reference.next_to defines. A path or mechanism written out inside a table cell is not shown by that table."
         }
       }
@@ -364,7 +369,7 @@
     "name": "presentation-html.long-detail-table.model",
     "evidence": "html_table",
     "reference": {
-      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what a reader can skip and still follow the page's open questions and conclusions: history and earlier decisions, rationale, evidence, receipts, provenance such as exact quotes behind a summary, inventories, reference data, and trace or index tables that map items to their owners, interfaces or proofs, even when one column names failures. That holds even when the table is the whole of its section. Content the reader needs in view stays: the exact corresponding facts a comparison or choice on the page rests on, a contract or core mapping the page is about, and a table whose subject is failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page. Judge a table by the job it does where it sits. A table whose rows are what its section is there to give the reader stays in view. History, evidence, receipts, provenance or a trace that backs up points the page states, summarizes or settles elsewhere is supporting depth: a reader can skip its rows and still follow those points, even when later parts of the page build on them.",
+      "detail": "Long detail sits one action away (a tab, a disclosure, a linked page) so nothing becomes a text wall. Optional depth is what a reader can skip and still follow the page's open questions and conclusions: history and earlier decisions, rationale, evidence, receipts, provenance such as exact quotes behind a summary, inventories, reference data, and trace or index tables that map items to their owners, interfaces or proofs, even when one column names failures. That holds even when the table is the whole of its section. Content the reader needs in view stays: the exact corresponding facts a comparison or choice on the page rests on, a contract or core mapping the page is about, and a table whose subject is failure cases with their thresholds. A disclosure holds only the rationale or evidence about failure cases, never the cases themselves. Content carried from a source keeps its form and initial state; that can't be seen on the page. History, evidence, receipts, provenance or a trace that backs up points the page states, summarizes or settles elsewhere is supporting depth: a reader can skip its rows and still follow those points, even when later parts of the page build on them.",
       "examples": [
         {
           "text": "After 'Each payment error code and the delay before the next attempt:' a table of eight error codes with their delays, which the next paragraph's choice relies on.",
