@@ -254,6 +254,76 @@ test("a Markdown set reads paragraph, list and table definitions, a heading-name
   ).toBe(false);
 });
 
+test("proof tables, range rows and an id repeated inside its own section define no obligation, before or after the definition", () => {
+  // Arrange: a proof table before the definitions (with a single-id row and a range row), list-item
+  // definitions, a section whose heading starts with R3 and repeats it as an item, a definitions table
+  // under a heading that only mentions proof, a numbered proof section after the definitions, and a
+  // table whose header names an evidence column.
+  const root = createRulebookFixture();
+  const setFolder = writeDesignSet(root, "docs/specs/2026-11-15-proof-tables", {
+    "requirements.md": "# Requirements\n\n| ID | Need |\n| --- | --- |\n| U1 | Requests stay on their account. |\n",
+    "specification.md": [
+      "# Specification",
+      "",
+      "## Proof obligations",
+      "",
+      "| Requirement | Notes |",
+      "| --- | --- |",
+      "| R1 | Replay a pinned session. |",
+      "| R2–R3 (failures) | Fault-injection suite. |",
+      "",
+      "## Obligations",
+      "",
+      "- **R1.** A session stays on its account. (U1)",
+      "- **R2.** A refused request returns its reason. (U1)",
+      "",
+      "### R3. Retry once (U1)",
+      "",
+      "- **R3.** A failed attempt is retried once on another account.",
+      "",
+      "## Obligations and proof coverage",
+      "",
+      "| R | Obligation | Proof |",
+      "| --- | --- | --- |",
+      "| R4 | Totals round half-up. (U1) | V4 |",
+      "",
+      "## 6. Proof obligations",
+      "",
+      "| Obligation | Notes |",
+      "| --- | --- |",
+      "| R4 | Totals fixtures. |",
+      "",
+      "## Checks",
+      "",
+      "| Req | Evidence class |",
+      "| --- | --- |",
+      "| R2 | Refusal replay. |",
+      "",
+    ].join("\n"),
+    "program-design.md": "# Program Design\n\n| U1 | R1–R4 | AccountRouter |\n",
+  });
+
+  // Act: prepare every request, sending none.
+  const { output, report } = prepareCoverage(root, setFolder);
+
+  // Assert: one Program Design request per obligation, each on its own definition; no proof row,
+  // range row or repeated id is an obligation, and none reaches the requirement's obligation list.
+  expect([1, 6], output.stderr).toContain(output.status);
+  const realizations = report.requests.filter((request) => request.owner.rule === "requirement-coverage.markdown.program-design");
+  const firstLines = realizations.map((request) => readLine(root, request.owner.piece.file, request.owner.piece.first_line));
+  expect(firstLines.sort()).toEqual([
+    "### R3. Retry once (U1)",
+    "- **R1.** A session stays on its account. (U1)",
+    "- **R2.** A refused request returns its reason. (U1)",
+    "| R4 | Totals round half-up. (U1) | V4 |",
+  ].sort());
+  const coverU1 = stateFor(report, root, "requirement-coverage.markdown.specification", "| U1 |");
+  for (const proofText of ["Replay a pinned session", "Fault-injection suite", "Totals fixtures", "Refusal replay"]) {
+    expect(asText(coverU1.all_obligations)).not.toContain(proofText);
+  }
+  expect(asText(coverU1.all_obligations).match(/retried once on another account/g)).toHaveLength(1);
+});
+
 test("an absent page warns once for the set and its requirement checks send nothing", () => {
   // Arrange: a set written through Program Design; Verification Design is not yet written.
   const root = createRulebookFixture();

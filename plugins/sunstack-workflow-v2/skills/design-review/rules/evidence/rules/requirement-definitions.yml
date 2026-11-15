@@ -42,12 +42,50 @@ language: Markdown
 files: ["**/specification.md"]
 rule:
   any:
-    - kind: pipe_table_row
-      regex: '^\|\s*\**R[0-9]+[a-z]?\b'
-    - kind: list_item
-      regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
-    - kind: section
-      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+    - all:
+        - kind: pipe_table_row
+          regex: '^\|\s*\**R[0-9]+[a-z]?\b'
+        # A range row (| R19–R20 … |) covers several obligations and defines none.
+        - not:
+            regex: '^\|\s*\**R[0-9]+[a-z]?\s*[–-]'
+        # A proof table lists how obligations are proven, not the obligations: a table
+        # whose second header cell starts with Evidence or Proof, or a table under a
+        # heading that starts with Proof (## Proof obligations, ## 6. Proof).
+        - not:
+            inside:
+              kind: pipe_table
+              has:
+                kind: pipe_table_header
+                regex: '^\|[^|]*\|\s*\**(Evidence|Proof)\b'
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                kind: atx_heading
+                regex: '^#{2,6}\s+([0-9]+\.\s*)?Proof\b'
+    - all:
+        - kind: list_item
+          regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^[-*+]\s+\**R[0-9]+[a-z]?\s*[–-]'
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: section
+          regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
     - all:
         - kind: paragraph
           regex: '^\**R[0-9]+[a-z]?(\.|\*\*|:|\s\(|\s—)'
@@ -55,6 +93,18 @@ rule:
             inside:
               kind: list_item
               stopBy: end
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
 ---
 # Every obligation unit in a Markdown Specification, as read in a list: each
 # definition above, plus the list that follows a bold-id paragraph definition.
@@ -62,12 +112,50 @@ id: markdown-obligation-unit
 language: Markdown
 rule:
   any:
-    - kind: pipe_table_row
-      regex: '^\|\s*\**R[0-9]+[a-z]?\b'
-    - kind: list_item
-      regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
-    - kind: section
-      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+    - all:
+        - kind: pipe_table_row
+          regex: '^\|\s*\**R[0-9]+[a-z]?\b'
+        # A range row (| R19–R20 … |) covers several obligations and defines none.
+        - not:
+            regex: '^\|\s*\**R[0-9]+[a-z]?\s*[–-]'
+        # A proof table lists how obligations are proven, not the obligations: a table
+        # whose second header cell starts with Evidence or Proof, or a table under a
+        # heading that starts with Proof (## Proof obligations, ## 6. Proof).
+        - not:
+            inside:
+              kind: pipe_table
+              has:
+                kind: pipe_table_header
+                regex: '^\|[^|]*\|\s*\**(Evidence|Proof)\b'
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                kind: atx_heading
+                regex: '^#{2,6}\s+([0-9]+\.\s*)?Proof\b'
+    - all:
+        - kind: list_item
+          regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^[-*+]\s+\**R[0-9]+[a-z]?\s*[–-]'
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: section
+          regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
     - all:
         - kind: paragraph
           regex: '^\**R[0-9]+[a-z]?(\.|\*\*|:|\s\(|\s—)'
@@ -75,6 +163,18 @@ rule:
             inside:
               kind: list_item
               stopBy: end
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
     - all:
         - kind: list
         - follows:

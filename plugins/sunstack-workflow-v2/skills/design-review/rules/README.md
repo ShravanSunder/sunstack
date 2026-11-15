@@ -19,7 +19,12 @@ Ids are link data in every request, but the model judges meaning: an obligation 
 A design set is one folder holding `requirements`, `specification`, `program-design` and `verification` (or `verification-design`), all `.html` or all `.md`.
 
 - **Requirement definitions:** an HTML element whose own `id` is `U<n>`; a Markdown table row whose first cell is the id, or a section whose heading starts with it.
-- **Obligation definitions:** an HTML element whose own `id` is `R<n>`; in Markdown, a table row whose first cell starts with the id (`| R1 |`, `| R1 · title |`), a list item (`- **R1.** …`), a section heading, or a paragraph that opens with the id (`**R17 — title** (U16).`, `R15 (U15): …`) whose list body follows it.
+- **Obligation definitions:** an HTML element whose own `id` is `R<n>`; in Markdown, a table row whose first cell starts with the id (`| R1 |`, `| R1 · title |`), a list item (`- **R1.** …`), a section heading, or a paragraph that opens with the id (`**R17 — title** (U16).`, `R15 (U15): …`) whose list body follows it. Three things that start with an id are not definitions:
+  - a range row or item (`| R19–R20 … |`);
+  - a row of a proof table, meaning a table whose second header cell starts with Evidence or Proof, or a table under a heading that starts with Proof (`## Proof obligations`, `## 6. Proof`);
+  - an item or paragraph repeating the id inside a section whose heading starts with it (`### R1. title`), where the section is the definition.
+
+  An obligation stated once and elaborated later under a heading that starts with the same id still gives two pieces; telling which one is the definition needs a one-piece-per-id rule the engine doesn't have.
 - **V items:** the same shapes with `V<n>`, plus a paragraph that opens with one (`V1 decides R1 …`). A V stated inside the obligation's own passing condition is read there.
 - **Passages:** table rows, list items, paragraphs, and Markdown sections whose heading names an obligation id.
 
