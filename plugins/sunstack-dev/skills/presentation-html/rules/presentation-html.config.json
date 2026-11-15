@@ -140,9 +140,13 @@
         },
         "max_chars": 200000,
         "fields": {
-          "html_prose": {
+          "heading": {
+            "from": "section",
+            "text": "heading"
+          },
+          "html_views": {
             "from": "inside",
-            "kind": "html_prose",
+            "kind": "html_view",
             "scope": {
               "section_own": [
                 "outline",
@@ -150,9 +154,9 @@
               ]
             }
           },
-          "markdown_prose": {
+          "island_views": {
             "from": "inside",
-            "kind": "markdown_prose",
+            "kind": "island_view",
             "scope": {
               "section_own": [
                 "outline",
@@ -160,9 +164,9 @@
               ]
             }
           },
-          "html_pictures": {
+          "blocks": {
             "from": "inside",
-            "kind": "html_picture",
+            "kind": "html_section_block",
             "scope": {
               "section_own": [
                 "outline",
@@ -170,9 +174,9 @@
               ]
             }
           },
-          "island_pictures": {
+          "island_blocks": {
             "from": "inside",
-            "kind": "island_picture",
+            "kind": "island_section_block",
             "scope": {
               "section_own": [
                 "outline",
@@ -247,21 +251,61 @@
         "rule": "markdown-table",
         "max_chars": 200000,
         "fields": {
+          "table": {
+            "from": "capture",
+            "regex": "(?s)(.+)"
+          },
           "rows": {
             "from": "inside",
             "rule": "markdown-table-row"
+          },
+          "heading_path": {
+            "from": "enclosing",
+            "kind": "markdown_outline",
+            "text": "heading"
+          },
+          "lead_in": {
+            "from": "previous",
+            "rule": "markdown-lead-in",
+            "count": 1
+          },
+          "html_heading_path": {
+            "from": "enclosing",
+            "kind": "outline",
+            "text": "heading"
+          },
+          "closed_disclosure": {
+            "from": "enclosing",
+            "rule": "html-closed-disclosure",
+            "text": "first_line"
           }
         }
+      },
+      "html_view": {
+        "rule": "html-view",
+        "fields": {}
+      },
+      "island_view": {
+        "rule": "island-view",
+        "fields": {}
+      },
+      "html_section_block": {
+        "rule": "html-section-block",
+        "fields": {}
+      },
+      "island_section_block": {
+        "rule": "island-section-block",
+        "fields": {}
       }
     }
   },
   "decision_model": {
-    "model": "typesafe/jev-1.14-20261014"
+    "model": "jev-latest"
   },
   "limits": {
     "evidence_max_chars": 1000000,
     "request_max_chars": 131072,
-    "max_model_requests": 100,
+    "max_model_requests": 1000,
     "max_concurrent_requests": 3,
     "max_matches": 20000
   }
