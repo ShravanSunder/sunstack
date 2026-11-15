@@ -7,6 +7,7 @@ import { z } from "zod";
 import {
   lineStartingWith,
   lintGeneratedPage,
+  preparedExitStatus,
   presentationHtmlDevelopmentConfig,
   presentationHtmlReportSchema,
   runPresentationHtmlLint,
@@ -52,17 +53,17 @@ test("active presentation-html rules validate with their own released CLI pin an
   const checked = runPresentationHtmlLint(["--check"]);
   const listed = runPresentationHtmlLint(["--rules"]);
 
-  // Assert: exactly the picture, section and table nudges, all mechanical warnings.
+  // Assert: the picture, section and table nudges, all warnings; M002 and M005 ask Jev.
   expect(checked.status, checked.stderr).toBe(0);
   expect(listed.status, listed.stderr).toBe(0);
   expect(ruleList.parse(JSON.parse(listed.stdout))).toEqual(
     [
-      "owner-decision.picture-before-control",
-      "presentation-html.section-picture",
-      "presentation-html.island-section-picture",
-      "presentation-html.long-table",
-      "presentation-html.long-island-table",
-    ].map((rule) => ({ rule, severity: "warn", kind: { kind: "mechanical" } })),
+      { rule: "owner-decision.picture-before-control", kind: "mechanical" },
+      { rule: "presentation-html.section-view.model", kind: "asking" },
+      { rule: "presentation-html.island-section-picture", kind: "mechanical" },
+      { rule: "presentation-html.long-table", kind: "mechanical" },
+      { rule: "presentation-html.long-detail-island-table.model", kind: "asking" },
+    ].map(({ rule, kind }) => ({ rule, severity: "warn", kind: { kind } })),
   );
 });
 
@@ -287,7 +288,7 @@ test("each configured picture type before a choice in its own section passes; ea
   const { output, outcomes } = runPictureCasePage(cases);
 
   // Assert: every choice has exactly the expected mechanical outcome.
-  expect(output.status, output.stderr).toBe(0);
+  expect(output.status, output.stderr).toBe(preparedExitStatus);
   for (const pictureCase of cases) {
     expect(outcomes.get(pictureCase.choiceId), pictureCase.choiceId).toBe(pictureCase.expected);
   }
@@ -314,7 +315,7 @@ test("a Markdown heading inside an island between the section heading and the ch
   const { output, outcomes } = runPictureCasePage(cases);
 
   // Assert: the rule abstains rather than crediting the diagram above the island heading.
-  expect(output.status, output.stderr).toBe(5);
+  expect(output.status, output.stderr).toBe(preparedExitStatus);
   expect(outcomes.get("island-heading")).toBe("uncertain");
 });
 
@@ -360,7 +361,7 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
       "--root",
       externalInputs.corpus,
       "--all",
-      "--report",
+      "--prepare",
       reportPath,
     ]);
     const report = presentationHtmlReportSchema.parse(readJson(reportPath));
@@ -370,9 +371,13 @@ test.skipIf(externalInputs.corpus === undefined && externalInputs.observations =
     );
 
     // Assert: literal reviewed geometry, including abstention, is the independent oracle.
-    expect(output.status, output.stderr).toBe(0);
+    expect(output.status, output.stderr).toBe(preparedExitStatus);
     expect(report.usage.model_requests).toBe(0);
-    expect(report.requests).toEqual([]);
+    expect(
+      report.requests.filter((request) =>
+        JSON.stringify(request).includes('"rule":"owner-decision.picture-before-control"'),
+      ),
+    ).toEqual([]);
     expect(choiceResults).toHaveLength(52);
     expect(
       choiceResults.reduce<Record<string, number>>((counts, result) => {
