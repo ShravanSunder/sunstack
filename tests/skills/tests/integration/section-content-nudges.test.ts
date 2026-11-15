@@ -53,7 +53,9 @@ function stateList(request: PreparedRequest, field: string): string[] {
 function requestAt(requests: readonly PreparedRequest[], line: number): PreparedRequest {
   const matching = requests.filter((request) => request.owner.piece.first_line === line);
   expect(matching, `requests starting at line ${line}`).toHaveLength(1);
-  return matching[0] as PreparedRequest;
+  const [only] = matching;
+  if (only === undefined) throw new Error(`no request starts at line ${line}`);
+  return only;
 }
 
 function firstLines(requests: readonly PreparedRequest[]): number[] {
