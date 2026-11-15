@@ -33,10 +33,21 @@ C001–C003 and C007 ask the decision model (`jev-latest`), so a run needs the a
 pnpm dlx @sunstack/cli@0.22.2 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
 ```
 
-The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's and C007's requests carry the whole obligation list, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 49.9k characters.
+The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's and C007's requests carry the whole obligation list, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 54.4k characters.
 
 To see what each request would carry without sending anything, add `--prepare <file>` and read one request with `lint show <file> <id>`. From another project, use the installed skill's absolute config path and add `--root "$PWD"`. Warnings come with exit 0; `uncertain` results (exit 5) mean the model's answer fell between the bars and are worth reading too.
 
 ## Proof
 
-`tests/skills/tests/integration/requirement-coverage.test.ts` proves the collection without a model: the rule list, and on small HTML and Markdown sets that each prepared request carries its requirement's own passages (and not a look-alike id's), every definition shape above, and one warning for an absent page. Whether the questions decide well is measured on independently labelled cases from real design sets, prepared and desk-checked before any run; the bars stay provisional (0.7 / 0.3) until the development run sets them.
+`tests/skills/tests/integration/requirement-coverage.test.ts` proves the collection without a model: the rule list, and on small HTML and Markdown sets that each prepared request carries its requirement's own passages (and not a look-alike id's), every definition shape above, and one warning for an absent page. Whether the questions decide well is measured on independently labelled cases from real design sets and built controls, prepared and desk-checked before any run, then reviewed before any answer is requested.
+
+**Bars (P(yes), inclusive).** C001, C002 and C007 are frozen from the round-8 development answers (instrument `70b18679`, sunstack 0.22.2, `typesafe/jev-1.14-20261014`, 14 Nov 2026; costs false warning 1, miss 2, uncertain 0.5). Where two bars cost the same, the one with no false warning was taken.
+
+| Rule | yes ≥ | no ≤ | Development result | Set by | Named misses |
+| --- | --- | --- | --- | --- | --- |
+| C001 | .35 | .15 | 13 cases: 11 right, 0 false warnings, 0 misses, 2 uncertain | highest warn below the no-bar .12; lowest pass above the yes-bar .38 | cov-27 (pass, .18) and cov2-05 (warn, .19) are inverted by .01, so both stay uncertain |
+| C002 | .45 | .15 | 26 cases: 21 right, 0 false warnings, 1 miss, 4 uncertain | highest warn below the no-bar .14; the warn at .42 sits just under the yes-bar; lowest pass above it .47 | R2 (adjudicated warn) answers .71, a confident miss |
+| C007 | unused | .35 | 8 cases: 2 warnings, 6 abstentions, 0 false warnings | warns at .29 and .31; lowest abstention .41 | none |
+| C003 | .70 | .30 | provisional, **not frozen** | — | its accounting question absorbs threshold and seam failures, so warns land on the wrong question; it is being redesigned |
+
+C001 and C002 also go to one held-out run, which the label holder scores. **C007 has no held-out labels, so it ships on development evidence only**, and both of its warn cases are built controls. These are selected development cases, not an accuracy rate; how an agent acts on a nudge is unobserved.

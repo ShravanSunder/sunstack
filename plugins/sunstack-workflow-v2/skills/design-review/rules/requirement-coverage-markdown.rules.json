@@ -196,8 +196,8 @@
         },
         "covers": {
           "ask": "obligations_cover_need",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "yes_at_or_above": 0.35,
+          "no_at_or_below": 0.15,
           "yes": "pass",
           "no": {
             "finding": "Worth checking: the Specification's obligations may not state behavior for everything this requirement asks. Read the requirement beside the Specification's obligations, and decide whether an obligation is missing or the requirement's wording is. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
@@ -481,8 +481,8 @@
         },
         "realizes": {
           "ask": "row_realizes",
-          "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "yes_at_or_above": 0.45,
+          "no_at_or_below": 0.15,
           "yes": "pass",
           "no": {
             "finding": "Worth checking: no Program Design passage that names this obligation was read as realizing it. Read the obligation beside Program Design's passages for it, and decide whether a realization is missing, written without the obligation's id, or weaker than the obligation. Read design-review's references/reviewing-four-document-design.md, Requirement to Observation.",
@@ -1090,7 +1090,7 @@
         "uncited_accounted": {
           "ask": "uncited_serving_accounted",
           "yes_at_or_above": 0.7,
-          "no_at_or_below": 0.3,
+          "no_at_or_below": 0.35,
           "yes": "uncertain",
           "uncertain": "uncertain",
           "no": {
