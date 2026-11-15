@@ -4,7 +4,9 @@ The nudges in `../presentation-html.config.json` began as mechanical checks that
 
 **Active since 15 Nov 2026: M002 and M005.** Their entries here and in `../section-content.rules.json` are identical, with the same evidence kinds, so a prepared request from either config is byte-for-byte the same. Their bars were set on development answers with labelled cases on both sides (the private case file's `bars` names them): M002 `needs_view` yes ≥ 0.7, no ≤ 0.5 and `views_carry` 0.5 / 0.3; M005 `optional_detail` 0.6 / 0.3 and `long_detail` 0.65 / 0.45, which moved after an independent adjudication relabelled two tables, and `failure_cases` 0.8 / 0.7, a fixed band kept from an earlier round. Both beat their mechanical rules on development cases left out of the bar choice and on one held-out run.
 
-**Development-only: M001, M003 and M004.** Their active rules stay mechanical. M001 keeps candidate bars (`owner_design_decision` 0.6 / 0.3, `current_model_drawn` 0.6 / 0.3), and M003 and M004 keep provisional 0.7 / 0.3. None of them yet beats its mechanical rule on development cases left out of the bar choice.
+**After round 19 (stop rule fixed before the run):**
+- **M001 and M003 are parked**; their active rules stay mechanical. Neither beat mechanical on unique development cases left out of the bar choice, with an uncertain at 1.0: M001 12.0 vs 9, M003 11.0 vs 8. Reason on record: their questions sit near the model's resolution on this evidence. For M001, the model's reading of which drawing shows today moves the outcome. For M003, obligation sections overlap scope and constraint sections, and views-carry readings of tables sit in between. They stay here until new evidence or a new idea.
+- **M004 is a freeze candidate** at `optional_detail` 0.65 / 0.3 and `long_detail` 0.55 / 0.3: 5.0 vs 6 out of fold. The win comes from uncertain answers where the mechanical rule misses; it warns correctly on none of the four unique development warns.
 
 ## M001 picture before choice
 
