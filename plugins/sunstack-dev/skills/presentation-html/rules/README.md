@@ -30,7 +30,7 @@ Presence is not relevance for M001, M003 and M004: they don't judge whether a pi
 
 ## Run
 
-M002 and M005 ask a model, so a normal run needs the OpenRouter credential (`OPENROUTER_API_KEY`, or `sunstack credentials save`); without it the run is refused. The config pins `typesafe/jev-1.14-20261014` and allows up to 1,000 requests per run. From this repository root:
+M002 and M005 ask a model, so a normal run needs the OpenRouter credential (`OPENROUTER_API_KEY`, or `sunstack credentials save`); without it the whole run is refused, the mechanical nudges included, until the engine runs mechanical rules on their own. The config requests `jev-latest` and allows up to 1,000 requests per run; a saved report records the resolved version. The bars were tuned and held-out-tested on `typesafe/jev-1.14-20261014`, so recheck them before relying on a different resolved version. From this repository root:
 
 ```sh
 pnpm dlx @sunstack/cli@0.22.1 lint --config plugins/sunstack-dev/skills/presentation-html/rules/presentation-html.config.json ./path/to/page.html

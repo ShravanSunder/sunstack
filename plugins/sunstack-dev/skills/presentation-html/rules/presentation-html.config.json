@@ -300,7 +300,7 @@
     }
   },
   "decision_model": {
-    "model": "typesafe/jev-1.14-20261014"
+    "model": "jev-latest"
   },
   "limits": {
     "evidence_max_chars": 1000000,

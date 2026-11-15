@@ -13,7 +13,7 @@ afterEach(cleanupRulebookFixtures);
 // M002 and M005 are active Jev decision models; M003 and M004 stay mechanical.
 const sectionViewRule = "presentation-html.section-view.model";
 const islandTableRule = "presentation-html.long-detail-island-table.model";
-const pinnedModel = "typesafe/jev-1.14-20261014";
+const requestedModel = "jev-latest";
 
 const tenWords = "The issuer signs each token before central accepts the request.";
 function proseWords(sentences: number): string {
@@ -56,7 +56,7 @@ function requestAtLine(
   return requests.find((request) => request.owner.piece.first_line === line);
 }
 
-test("each heading section with content becomes one unsent needs_view/views_carry request on the pinned model, carrying its own views", () => {
+test("each heading section with content becomes one unsent needs_view/views_carry request on the default model, carrying its own views", () => {
   // Arrange: one h2 section per case; a picture sits in HTML or in an island.
   const bodySections = [
     `<h2 id="prose-without-picture">prose-without-picture</h2>\n<p>${hundredWords}</p>`,
@@ -73,7 +73,7 @@ test("each heading section with content becomes one unsent needs_view/views_carr
   expect(report.usage.model_requests).toBe(0);
   const requests = preparedRequestsFor(report, sectionViewRule);
   for (const request of requests) {
-    expect(request.requested_model).toBe(pinnedModel);
+    expect(request.requested_model).toBe(requestedModel);
     expect(Object.keys(request.request.questions).sort()).toEqual(["needs_view", "views_carry"]);
   }
   const without = requestAtLine(
@@ -171,7 +171,7 @@ test("an HTML table with more than 20 rows nudges mechanically; each island tabl
       .sort((left, right) => left - right),
   ).toEqual(islandTableLines);
   for (const request of islandRequests) {
-    expect(request.requested_model).toBe(pinnedModel);
+    expect(request.requested_model).toBe(requestedModel);
     expect(Object.keys(request.request.questions).sort()).toEqual([
       "failure_cases",
       "long_detail",

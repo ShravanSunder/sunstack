@@ -11,7 +11,7 @@ Every M002/M005 development request was prepared through the active config on th
 | Development cases (7 revisions) | 646 (M002 550, M005 96) | 646 | 646 | 0 |
 | Placement, swap and probe controls | 282 (M002 243, M005 39) | 282 | 282 | 0 |
 
-Decoded definitions (questions, bars, routes, uncertain handling) are equal for both rules. `requested_model` differs: the frozen config asked for `jev-latest`, which resolved to `typesafe/jev-1.14-20261014` on every development and held-out answer, and the active config pins that version. The field is outside the request object and the input hash. The active request cap is 1,000, as in the development config; it was 100 when every active rule was mechanical.
+Decoded definitions (questions, bars, routes, uncertain handling) are equal for both rules, and so is `requested_model`: both configs ask for `jev-latest`. Every development and held-out answer resolved to `typesafe/jev-1.14-20261014`, the version the bars were tuned and tested on. The active request cap is 1,000, as in the development config; it was 100 when every active rule was mechanical.
 
 ## Gates
 
@@ -24,7 +24,7 @@ Decoded definitions (questions, bars, routes, uncertain handling) are equal for 
 - `claude plugin validate .` passed. Its one warning is pre-existing and concerns another plugin's README.
 - `lint --check` exits 0 on both configs.
 - Native prepare-only lint of the 20 skill-authored design pages under `docs/specs/2026-11-03-skill-rules/`:
-  - 62 M002 requests on the pinned model, none sent; M001 and M004 report mechanically.
+  - 62 M002 requests requesting `jev-latest`, none sent; M001 and M004 report mechanically.
   - 3 M002 pieces end incomplete (`invalid_request`). Each is a page's top section whose Markdown island runs past it, so the request exceeds the per-request input budget. The frozen development config has the same limit.
 
 ## Proof limits
