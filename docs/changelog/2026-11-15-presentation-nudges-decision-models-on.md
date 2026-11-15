@@ -2,7 +2,7 @@
 
 Date: 2026-11-15. Version: sunstack-dev 3.3.7.
 
-- **M002 (HTML heading sections)** now asks Jev whether a section explains how parts relate and, when it has views, whether they show each relationship next to its passage. It replaces the 100-word / no-picture count.
+- **M002 (HTML heading sections)** now asks Jev two questions in one request: whether a section explains how parts relate, and whether its views show each relationship next to its passage. It decides on the second when the section has a view and on the first when it has none. It replaces the 100-word / no-picture count.
 - **M005 (Markdown island tables)** now asks whether a main-path table is long optional detail, or whether a table in a closed disclosure states failure cases. It replaces the 20-row count.
 - **Both** are the frozen development versions: same questions, evidence, references and bars. Their prepared requests are byte-identical to the frozen instrument's.
 - **M001, M003 and M004** stay mechanical and unchanged. Their decision models stay in `rules/development/`.

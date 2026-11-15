@@ -44,16 +44,22 @@ function pipeTable(bodyRows: number): string {
   return ["| ID | Proposed |", "|---|---|", ...rows].join("\n");
 }
 
-function stateList(request: PreparedRequest | undefined, field: string): string[] {
-  const value = request?.request.state[field];
+function stateList(request: PreparedRequest, field: string): string[] {
+  const value = request.request.state[field];
   return Array.isArray(value) ? value.map(String) : [];
 }
 
-function requestAtLine(
-  requests: readonly PreparedRequest[],
-  line: number,
-): PreparedRequest | undefined {
-  return requests.find((request) => request.owner.piece.first_line === line);
+/** The one request whose piece starts at `line`; fails unless exactly one exists. */
+function requestAt(requests: readonly PreparedRequest[], line: number): PreparedRequest {
+  const matching = requests.filter((request) => request.owner.piece.first_line === line);
+  expect(matching, `requests starting at line ${line}`).toHaveLength(1);
+  return matching[0] as PreparedRequest;
+}
+
+function firstLines(requests: readonly PreparedRequest[]): number[] {
+  return requests
+    .map((request) => request.owner.piece.first_line)
+    .sort((left, right) => left - right);
 }
 
 test("each heading section with content becomes one unsent needs_view/views_carry request on the default model, carrying its own views", () => {
@@ -65,7 +71,7 @@ test("each heading section with content becomes one unsent needs_view/views_carr
     `<h2 id="empty-section">empty-section</h2>`,
   ];
 
-  // Act: prepare the generated page through the pinned CLI; nothing is sent.
+  // Act: prepare the generated page through the CLI pin; nothing is sent.
   const { output, report, lines } = lintGeneratedPage(bodySections);
 
   // Assert: one request per section with content, the views each one carries, none sent.
@@ -76,21 +82,19 @@ test("each heading section with content becomes one unsent needs_view/views_carr
     expect(request.requested_model).toBe(requestedModel);
     expect(Object.keys(request.request.questions).sort()).toEqual(["needs_view", "views_carry"]);
   }
-  const without = requestAtLine(
-    requests,
-    lineStartingWith(lines, '<h2 id="prose-without-picture">'),
-  );
-  const withSvg = requestAtLine(requests, lineStartingWith(lines, '<h2 id="prose-with-svg">'));
-  const withIsland = requestAtLine(
-    requests,
-    lineStartingWith(lines, '<h2 id="prose-with-island-diagram">'),
-  );
+  const withoutLine = lineStartingWith(lines, '<h2 id="prose-without-picture">');
+  const withSvgLine = lineStartingWith(lines, '<h2 id="prose-with-svg">');
+  const withIslandLine = lineStartingWith(lines, '<h2 id="prose-with-island-diagram">');
+  expect(firstLines(requests)).toEqual([withoutLine, withSvgLine, withIslandLine]);
+  const without = requestAt(requests, withoutLine);
+  const withSvg = requestAt(requests, withSvgLine);
+  const withIsland = requestAt(requests, withIslandLine);
   expect(stateList(without, "blocks").some((block) => block.startsWith("<svg"))).toBe(false);
   expect(stateList(without, "island_views")).toEqual([]);
   expect(stateList(withSvg, "blocks").some((block) => block.startsWith("<svg"))).toBe(true);
   expect(stateList(withIsland, "island_views")).toHaveLength(1);
   const emptyLine = lineStartingWith(lines, '<h2 id="empty-section">');
-  expect(requestAtLine(requests, emptyLine)).toBeUndefined();
+  expect(requests.filter((request) => request.owner.piece.first_line === emptyLine)).toEqual([]);
   expect(
     report.results.find((result) => result.marker === "M002" && result.first_line === emptyLine)
       ?.outcome,
@@ -110,15 +114,19 @@ test("a parent section cannot borrow its child's picture, and a Markdown heading
     )}`,
   ];
 
-  // Act: prepare the generated page through the pinned CLI.
+  // Act: prepare the generated page through the CLI pin.
   const { output, report, lines } = lintGeneratedPage(bodySections);
 
   // Assert: each M002 request holds only its own section's views; M003 still nudges mechanically.
   expect(output.status, output.stderr).toBe(preparedExitStatus);
   const requests = preparedRequestsFor(report, sectionViewRule);
-  const parent = requestAtLine(requests, lineStartingWith(lines, '<h2 id="parent">'));
-  const child = requestAtLine(requests, lineStartingWith(lines, '<h3 id="child">'));
-  const islandHost = requestAtLine(requests, lineStartingWith(lines, '<h2 id="island-host">'));
+  const parentLine = lineStartingWith(lines, '<h2 id="parent">');
+  const childLine = lineStartingWith(lines, '<h3 id="child">');
+  const islandHostLine = lineStartingWith(lines, '<h2 id="island-host">');
+  expect(firstLines(requests)).toEqual([parentLine, childLine, islandHostLine]);
+  const parent = requestAt(requests, parentLine);
+  const child = requestAt(requests, childLine);
+  const islandHost = requestAt(requests, islandHostLine);
   expect(stateList(parent, "blocks").some((block) => block.includes("<img"))).toBe(false);
   expect(stateList(child, "blocks").some((block) => block.includes("<img"))).toBe(true);
   expect(stateList(islandHost, "island_views")).toHaveLength(1);
@@ -143,7 +151,7 @@ test("an HTML table with more than 20 rows nudges mechanically; each island tabl
     markdownIsland("limit-island-table", pipeTable(19)),
   ];
 
-  // Act: prepare the generated page through the pinned CLI.
+  // Act: prepare the generated page through the CLI pin.
   const { output, report, lines } = lintGeneratedPage(bodySections);
 
   // Assert: M004 keeps its row-count nudge; M005 asks its three questions per island table.
@@ -164,12 +172,12 @@ test("an HTML table with more than 20 rows nudges mechanically; each island tabl
     .map((line, index) => ({ line, number: index + 1 }))
     .filter(({ line }) => line === "| ID | Proposed |")
     .map(({ number }) => number);
+  expect(islandTableLines).toHaveLength(2);
   const islandRequests = preparedRequestsFor(report, islandTableRule);
-  expect(
-    islandRequests
-      .map((request) => request.owner.piece.first_line)
-      .sort((left, right) => left - right),
-  ).toEqual(islandTableLines);
+  expect(firstLines(islandRequests)).toEqual(islandTableLines);
+  for (const line of islandTableLines) requestAt(islandRequests, line);
+  const tablesLine = lineStartingWith(lines, '<h2 id="tables">');
+  expect(firstLines(preparedRequestsFor(report, sectionViewRule))).toEqual([tablesLine]);
   for (const request of islandRequests) {
     expect(request.requested_model).toBe(requestedModel);
     expect(Object.keys(request.request.questions).sort()).toEqual([

@@ -17,7 +17,7 @@ Decoded definitions (questions, bars, routes, uncertain handling) are equal for 
 
 - `pnpm --dir tests/skills test`: 33 files, 322 passed, 1 skipped (a private-corpus test). Exit 0. The private-corpus test, run separately with its frozen inputs, also passes (52 choice outcomes, 37 reviewed observations), now through `--prepare`.
 - The nudge tests now prepare pages instead of sending:
-  - M002/M005 assert one unsent request per piece, the pinned model, and the views each section's state carries.
+  - M002/M005 require exactly one unsent request per piece, with the exact list of pieces per page, the requested `jev-latest`, and the views each section's state carries. Changing M002's prose count to views only (so prose-only sections are not admitted) fails two of the three tests.
   - M001/M003/M004 keep their mechanical outcomes and messages.
   - The uncertain-choice test asserts the uncertain outcome under prepare's exit 6. An ordinary run needs a credential now, so its exit 5 isn't exercised.
 - `tsc --noEmit` exit 0. `oxfmt --check` and `oxlint` are clean on the three changed test files.
