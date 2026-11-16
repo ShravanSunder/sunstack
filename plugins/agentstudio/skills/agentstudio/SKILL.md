@@ -5,7 +5,7 @@ description: Use when working with Agent Studio panes or its CLI, including work
 
 # Agent Studio
 
-Choose scope before action. Local `worktree` commands operate on Git and files without an app connection. App commands and pane operations use the selected runtime and supplied pane identity. A method appearing in help tells you it exists; its eligibility and the user's task decide whether you may use it.
+Choose scope before action. Local `worktree` and `package` commands operate on files without an app connection. App commands and pane operations use the selected runtime and supplied pane identity. A method appearing in help tells you it exists; its eligibility and the user's task decide whether you may use it.
 
 ## Find the helper and target
 
@@ -21,19 +21,45 @@ Use the supplied helper when present. Bare `agentstudio` can launch the GUI. Loc
 
 For pane work, `self` identifies the caller's pane. `pane.current` identifies the focused pane and can change when the person moves focus. Preserve the supplied environment and provider session identity; never borrow credentials, fabricate session IDs or retarget through focus.
 
-A Claude background session (`CLAUDE_CODE_SESSION_KIND=bg` or nonempty `CLAUDE_JOB_DIR`) can inherit pane variables without being attached. Keep those markers intact and report progress in chat. `notify`, `ask`, `line`, `title` and their raw reporting methods refuse with `background session: not attached to a pane`. Reads, answers and withdrawal retain their normal authentication/scope rules.
+A Claude background session (`CLAUDE_CODE_SESSION_KIND=bg` or nonempty `CLAUDE_JOB_DIR`) can inherit pane variables without being attached. Keep those markers intact and report progress in chat. `notify`, `ask`, `approval`, `line`, `title` and their raw reporting methods refuse with `background session: not attached to a pane`. Reads, answers and withdrawal retain their normal authentication/scope rules.
 
 Continue only when the intended local repository or app target and requested effect are identified. Discovery does not expand task authority. In particular, terminal input, closing a pane and worktree removal need authorization for their actual effects.
 
+## Set up hooks
+
+When the request concerns provider hooks or missing hook tracking, use this workflow and return the provider, selected home, status problems and supported next action. Choose `claude`, `codex` or `cursor` for `PROVIDER`. Preserve an explicitly selected custom home: use `--config-dir PATH` for Claude, `--codex-home PATH` for Codex or `--provider-home PATH` for Cursor on every package verb. Resolve an ambiguous provider or home before a write.
+
+Read configuration first with `"$AS_CLI" package status PROVIDER --json`. Explain every reported problem and its recovery in plain words, including simultaneous problems and informational notes:
+
+| Verdict | Explain to the user |
+| --- | --- |
+| `current` | The inspected integration matches the known configuration; no repair is needed. |
+| `unavailable` | A required provider home or file could not be inspected. Report the path and reason. |
+| `notInstalled` | The Agent Studio hook integration is not installed in this home. |
+| `outdated` | A copied script, version stamp or legacy entry needs refreshing. |
+| `entriesMissing` | Required entries or the Codex hooks feature setting are missing or differ. |
+| `notTrusted` | Codex needs native hook review or enabling; have the user review it in `/hooks`. |
+| `trustUnknown` | This Codex version or review state could not be verified. State the limit; do not guess trust. |
+
+Run `"$AS_CLI" package install PROVIDER` or `"$AS_CLI" package uninstall PROVIDER` only with the user's go-ahead for that provider and home. An explicit instruction to install or uninstall is already that go-ahead; do not ask again. Explain the proposed change before carrying it out. Uninstall leaves other hooks, owner files and the agentstudio skill in place.
+
+For chezmoi or another dotfiles workflow, offer `"$AS_CLI" package snippet PROVIDER`. It prints the desired configuration without writing files. Use the package verbs for Agent Studio's entries; never hand-edit provider files or write Codex trust state.
+
+After a requested install or uninstall, read status again and report the resulting verdict, every remaining problem and any native Codex review still needed. Configuration status does not establish that a running provider has loaded or sent hooks. For syntax, use `"$AS_CLI" package --help`.
+
 ## Load the detail for the requested work
+
+The eight pane verbs are `notify`, `ask`, `approval`, `withdraw`, `answers`, `line`, `title` and `pane`. `approval` always waits for an Approve or Deny decision with an optional reason; it uses the same timeout and terminal outcomes as `ask --wait`.
 
 Use the resolved `"$AS_CLI"` in every command below and in the references. Examples with uppercase placeholders require real values from the task or returned state; do not execute them literally.
 
+- IF the requested work adds, removes or lists pane PR links or shows a drawer-browser page, load `references/commands-and-ipc.md` first and return the selected helper/runtime identities and required methods present in both compiled help and live capabilities, or the compatibility/unreachable gap that holds the action. Local help alone does not establish running-app support.
+- IF the requested work adds, removes or lists pane PR links, load `references/pull-requests.md` and return the target, association/source state and any refusal or unknown detail.
 - IF the requested work creates, opens, lists, removes or prunes Git worktrees, load `references/worktrees.md` and return the selected branch/start/content mode, folder, fetch effects and outcome or unmet prerequisite.
 - IF the requested work updates an Agent Line/title or sends, reads or withdraws pane notices/asks, load `references/pane-communication.md` and return the actual message/answer state and any usable decision.
 - IF the requested work reads the caller pane, drawers or status-engine session context, load `references/pane-context.md` and return the relevant state, returned paging cursors and remaining truncation.
 - IF the requested work discovers or executes an App command or uses raw IPC/discovery/event methods, load `references/commands-and-ipc.md` and return the selected live contract, allowed target and actual receipt boundary.
-- IF the requested work inspects or controls a terminal/pane or adds a drawer child, load `references/panes-and-terminals.md` and return the resolved own-pane target and observed runtime/input/wait result.
+- IF the requested work inspects or controls a terminal/pane, adds a drawer child or shows a page in a main pane's drawer browser, load `references/panes-and-terminals.md` and return the resolved target pane and observed runtime/input/wait result or browser-tab and notice outcome.
 - IF a worktree result fails or has a refusal, skip, partial effect or retained branch that must be resolved, load `references/worktree-recovery.md` and return its exact reason/effects and safe supported next command or owner action.
 - IF an app/IPC call is refused, queued, uncertain or otherwise cannot supply its required result, load `references/recovery.md` and return the exact outcome, any known effects and a safe next action or explicit no-CLI-repair gap.
 
@@ -45,4 +71,4 @@ The Agent Line is a message; hooks own status, and an ask owns a pending decisio
 
 Preserve work and evidence when a destructive action is refused. Do not turn a printed force/discard option into permission. After uncertain delivery, inspect relevant state before any new intent; never blindly replay. Ordered stale line/title payloads are final and cannot be retried with a new number or epoch.
 
-Complete when the supported, authorized action's actual outcome is known, relevant IDs/state are retained, and any missing result has an exact unresolved condition and safe next action. Use chat when reporting is unavailable and continue work already authorized. This skill does not authorize provider setup, plugin installation, permission changes or new CLI capabilities.
+Complete when the supported, authorized action's actual outcome is known, relevant IDs/state are retained, and any missing result has an exact unresolved condition and safe next action. Use chat when reporting is unavailable and continue work already authorized. This skill does not itself grant permission to write provider files, install plugins, change permissions or add CLI capabilities.

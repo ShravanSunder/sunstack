@@ -40,7 +40,7 @@ The selected paragraph states a clear result.
 
 The heading comes last on purpose: its section runs to the next heading of the same or higher level, so a section marked above the other two standards would swallow them into its standard.
 
-- The shape is exact: `<!-- `, one uppercase letter and three digits, then ` -->`, with nothing after it on the line except whitespace.
+- The shape is exact: `<!-- `, one uppercase letter and three digits, then ` -->`. A line may end with a run of markers, with spaces or tabs allowed between them and nothing after the last except whitespace; each marker in the run binds the same text a single marker would.
 - The letter is the config's `marker_prefix`. A marker with another letter is invisible to it.
 - On a heading the marker touches the text: `## Clear result<!-- K003 -->`, never with a space before it.
 - Each ID appears at most once per Markdown file, and one file carries as many distinct IDs as it has marked standards. The same ID in a different Markdown file is a different marker, because markers are qualified by their source, but entry names must stay unique across the whole rulebook.

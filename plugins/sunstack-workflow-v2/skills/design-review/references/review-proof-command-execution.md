@@ -1,6 +1,6 @@
 # Review Proof Command Execution
 
-This reference owns execution of the commands a `design-review` proof claim names. The 🔧 Operator assigned by the review runs them under the recorded execution grant, with these rules in its commission.
+This reference owns execution of the commands a `design-review` proof claim names. The 🔎 Reviewer Sidekick runs them under the recorded execution grant, or the 🔧 Operator its review assigns runs them with the grant and these rules in its commission.
 
 - Run only the commands the grant lists, exactly as listed. Anything else is a gap to report, not to run.
 - The reviewed code is untrusted. Read what a command runs (its script, hooks and config) before running it. Never run a command to find out what it does or whether it is safe.

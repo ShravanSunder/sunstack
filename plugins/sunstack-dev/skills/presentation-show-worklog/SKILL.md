@@ -16,7 +16,7 @@ A page request authorizes reading its source and writing the reader and permitte
 
 ## 2. Read and account for the evidence
 
-Take the work's Router project/tag or permitted entries files and requested page scope, including any already inspected capture, cutoff and open state. MUST load `references/read-and-summarize.md` and return the reused or reconstructed snapshot, selected evidence and its scope, backing and coverage limits, outstanding owner decisions and permitted page destination. Missing or unreadable evidence is a named gap; do not rebuild from memory.
+Take the work's Router project/tag or permitted entries files and requested page scope, including any already inspected capture, cutoff and open state. MUST load `references/read-and-summarize.md` and return the reused or reconstructed snapshot, selected evidence and its scope, the material decisions and relied-on assumptions with their current state, backing and coverage limits, outstanding owner decisions and permitted page destination. Missing or unreadable evidence is a named gap; do not rebuild from memory.
 
 IF an owner decision remains open in the requested page, load `../../shared-references/owner-decision-brief.md` and return the choice, tradeoffs, recommendation and dependent work to explain beside its answer control. A recommendation or unanswered control never becomes an owner decision.
 
@@ -28,8 +28,10 @@ Open with the work's purpose and consequential recorded outcome or unresolved bo
 
 1. **For you to decide:** open owner choices, their reasons and consequences, with no invented decision when none is recorded.
 2. **What's done / what's next:** each started part, what its result means, the checks and acceptance behind its status, and the next work or blocker.
-3. **What changed and why:** consequential changes, shortcuts and decisions, their reasons and authority; distinguish owner/design calls from agents' own calls.
+3. **What changed and why:** consequential changes, shortcuts and decisions, their reasons, costs and authority; name who made each choice separately from the authority that covered it.
 4. **What was verified, and what was missed:** checks, results, target/version, exclusions, acceptance, second-hand reports and unresolved misses.
+
+Explain the material decisions agents made and the assumptions the work relies on in the main account: the actual choice or belief, who made it, its reason and material cost or consequence, its authority or evidence gap, and the work that depends on it. Name missing rationale or cost evidence rather than inventing it. Keep later corrections and settlements current; incomplete source coverage is a named gap. An agent's core design choice belongs here as much as a routine one. Explain each item once under the heading whose question it answers and link to it from the others; it needs no separate register.
 
 Within those headings, give each substantive `h3` section one coherent reader question. Explain the concrete problem, the agents' actions and reasons, and the supported outcome beside a diagram of its relevant source-supported relationships. Compose the explanation and diagram together so the text supplies context and interpretation while the diagram exposes the relationship. Keep normal heading-based contents navigation and explain shared content once, linking to it elsewhere.
 
@@ -50,7 +52,7 @@ For an ordered account, use explanatory Trace steps for meaningful actions, find
 
 Keep governing failure rules and unknowns visible, with optional backing detail one action away. Do not require Story/section cards, Happened / For you / Next rows, section counters or another repeated card layout. Where concerns connect several sections, give Map their real explanatory destinations; the outline still follows headings. A Walkthrough follows an actual ordered reader question rather than touring every heading. The loaded HTML workflow owns their composition and the matching guide owns syntax.
 
-Build with the loaded `presentation-html` workflow and return the requested reader with its chosen views, matching guide, contents navigation, delivery method and static checker result. Before returning, check that the owner can understand each section's question, what the agents did and why, and its diagram together; see the blocker and proof limits; and inspect the decisive evidence without reading the archive. Check that Map destinations add associations beyond the outline, any Walkthrough follows its question, and evidence links reach their stated content. Repair the missing or overloaded view. A passing checker establishes markup, not understanding or runtime behavior.
+Build with the loaded `presentation-html` workflow and return the requested reader with its chosen views, matching guide, contents navigation, delivery method and static checker result. Before returning, check that the owner can understand each section's question, what the agents did and why, and its diagram together; see each material decision with its actor, reason, cost and authority, and each relied-on assumption with its dependent work and what would settle it, or the named source gap; see the blocker and proof limits; and inspect the decisive evidence without reading the archive. Check that Map destinations add associations beyond the outline, any Walkthrough follows its question, and evidence links reach their stated content. Repair the missing or overloaded view. A passing checker establishes markup, not understanding or runtime behavior.
 
 ## 4. Return the requested snapshot
 

@@ -1,4 +1,4 @@
-# Validation: design review runs the first design rules (sunstack-workflow-v2 0.2.2)
+# Validation: design review runs the first design rules (sunstack-workflow-v2 0.3.4)
 
 Engine: released `@sunstack/cli` 0.11.0 (signed Developer ID build), pinned in `tests/skills`. No model requests in any run below.
 
