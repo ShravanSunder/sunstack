@@ -18,11 +18,12 @@ For each load-bearing claim, trace:
 source -> authority status -> claim -> consumer/requirement -> observable consequence
 ```
 
-Apply the four-source drill:
+Apply the five-source drill:
 
 - code-compelled: open the code and prove it constrains the design;
 - user-chosen: locate the durable choice and its rejected alternative or boundary;
 - recommendation: label it as a proposal rather than authority;
+- accepted agent wording: find the agent's wording and the owner's acceptance of it; a span quoted as the owner's words is not supported when the cited row's span is option wording or a pasted reply, and any reading beyond the accepted words is the author's;
 - contradiction: name the authoritative constraint or non-goal it violates.
 
 Test whether a different competent reader could choose another product meaning and still claim compliance. If so, report the exact unsupported or conflicting claim and the decision owner needed.

@@ -238,7 +238,7 @@ A named proof card can help summarize one outcome; it does not replace the refer
 
 ## A call stack belongs to its actual path
 
-When real source supports frames, use the published call-stack component beside the explanation of that path. For example, the cancellation section can link to the source-derived `cancel → conditional state write → result` path. Read the selected binding's call-stack guide and supply its complete prepared need/stack/frame data before authoring the reader. Keep the requirement text in its visible owning section and use it as the data's source; no requirement viewer is needed.
+When real source supports frames, use the published call-stack component beside the explanation of that path. For example, the cancellation section can link to the source-derived `cancel → conditional state write → result` path. Read the selected binding's call-stack guide and supply its complete prepared need/stack/frame data before authoring the reader. Keep the requirement text in its visible owning section and use it as the data's source.
 
 After the real owner pages and data have been prepared through that guide, the reader can sit next to its explanation:
 
@@ -246,11 +246,11 @@ After the real owner pages and data have been prepared through that guide, the r
 <section id="cancellation-calls">
   <h2>Where cancellation reaches the state owner</h2>
   <p>The supplied source-derived path shows the entry, conditional write and returned outcome.</p>
-  <ex-call-stack label="Cancellation call path"></ex-call-stack>
+  <ex-call-stack id="cancellation-call-stack" label="Cancellation call path"></ex-call-stack>
   <p><a href="requirements.html#U3">Why cancellation matters</a></p>
 </section>
 ```
 
-This is a reader-placement fragment, not a complete data fixture. The current guide requires a need and prepared stack/frame records, and a record block on each existing canonical owner page, even when that page's unused record list is empty. Keep ordinary sections visible and use actual need/concern names. Built-in requirement links retain the component's documented query-address behavior; ordinary nearby section links provide precise navigation without requiring the removed viewer. Do not promise an unimplemented automatic anchor mapping.
+This is a reader-placement fragment, not a complete data fixture. The current guide requires a need and prepared stack/frame records, and a record block on each existing canonical owner page, even when that page's unused record list is empty. Keep ordinary sections visible and use actual need/concern names. Built-in need links reach the prepared need's owner page at its `bodyRef` destination. Keep that body visible with its original ID; ordinary nearby section links can reach the same owning explanation.
 
 This example intentionally supplies no invented frames, new binding attribute or self-contained call-stack data format. Multiple paths use the guide's supported picker or page arrangement. A proposed greenfield sequence uses a labelled sequence diagram until there is source to substantiate a call-stack record.

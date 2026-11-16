@@ -1,0 +1,76 @@
+# Skill verification: how each requirement and standard will be shown
+
+Revision 3. Routes come from `skill-rules-authoring/references/decision-matrix.md`, asked in its order. Every rule route stays **pending** until `skill-rules-authoring` makes the rule; the Lead owns that work, its severities and the engine. Following the owner's direction ("Only some things are errors, like warnings versus errors", 12:10:18Z), this set proposes every rule as a **warning**; none is proposed as an error.
+
+## Routes
+
+| Item | Outcome | Property it was decided on |
+| --- | --- | --- |
+| S1 / W1 mark every assumption and decision in the same edit | eval + worth checking (section evidence, every design page) | Writing the item with its statement is agent behavior: eval. A chunk shows a sentence that settles meaning (a number, a default, "always", a paraphrase beside a quote) with no item beside it: a reason to look, never a verdict. Kept-text case: a sentence that restates an `R` obligation already backed by its `U` quote. |
+| S2 item carries id, kind, authority as attributes | deterministic (mechanical warning) | Presence and value-set of three attributes on one element. Counterexamples tried: none keeps the standard and fails; `data-authority="owner"` breaks it and is outside the closed set. **Engine gap today:** element-attribute selection over HTML. No gate. |
+| W2 quote, source and "Depends on it" present by authority | deterministic (mechanical warning), gated on `data-authority` / `data-design-item` | Child presence on one element; gate is a field value. Proxy note: an empty `blockquote` passes presence; also require non-empty text. |
+| S3 authority from its source; `unknown` when not known | deterministic for `unknown` (list them) + worth checking for the rest | Listing `unknown` items is a field value. Whether a named source carries the authority needs the source: nudge "open `data-source` and confirm it says this". Kept-text case: a `contract` item citing a protocol spec in the repository. |
+| S4 accepted agent wording is never the owner's words | review check now; deterministic once a corpus input exists | With the export as an input, an `owner-words` span found only inside a `# Selected answers` option line is a literal match. **Engine dependency:** a generic supplied-corpus input. |
+| S5 readings beyond the words are separate author assumptions | eval + review check | Telling a reading from a restatement needs intent; the case-2 rows are the eval fixture. |
+| S6 seams and stand-ins are assumptions | worth checking (section evidence, Program and Verification pages) | A chunk with a mock, fake, stub, stand-in or seam and no item beside it is a reason to look. Kept-text case: a seam already marked `A<n>` and linked. |
+| S7 / W6, W7 rank, then promote the few | eval + review check | Ranking is judgment over dependents, cost to undo and owned meaning; whether the author promoted the right few is behavior, and the reviewer compares rankings. |
+| S8 / W14 entry page lists every item in rank order | deterministic (mechanical warning) for set equality; review check for order | Id set equality across pages and `index.html` is mechanical (**engine gap:** set-level evidence). Whether the order is defensible needs judgment. |
+| S9 / W13 page agreement is not authority | eval (reviewer under pressure) | Behavior. |
+| S10 / W10 authority-aware quote support | review check now; worth checking with corpus input | Needs the export row and reading which span is whose. |
+| W8 author sentence-support pass over Requirements and Specification (and Program, Verification) | eval | Behavior; the result is workflow state, not page text. |
+| W9 every applicable nudge per item, or `ok` alone | eval | Workflow state. |
+| W11 reviewer sentence-support pass before reading the self-check | eval + review-only for the order | Order of reading is a session fact, in no text; `design-review`'s coverage rows record it. |
+| W12 reviewer builds its own list | review-only | As W11. |
+| The lens, the terms, the ranking questions | prose | Framing and definitions. |
+
+## Proof plan
+
+- **Posture for every run:** drafted from user intent; behavior not yet evaluated (D-01).
+- **Static proof at implementation, each run:** the file edits match this set; `pnpm --dir tests/skills test` passes; `claude plugin validate .` passes after version bumps; `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json` over the changed files reports no new failures. Static proof is structural only.
+- **Planned evals, deferred.** The deferral, the Luna-or-Jev test models and the real-fixtures-only rule are reported through agent-written memory records (D-18), not inspected owner words. Each run is read by hand; checks are written before it and kept outside its directory.
+  1. *Author, accepted wording and awareness while writing.* Fresh session, the changed `design-specification`; request: write Requirements for the evidence-collection work from a fixture of the real affa24ce row `2026-11-13T01:35:13.655Z` (line 301) and the export. That one row holds two spans with different authors: the agent-written option, from "- b. All document rules (recommended):" to "so no rule skips it again.", and, after it, the owner's own "or text dockuments". Checks: the option appears as `owner-accepted` with an exact span; "the model chooses unit boundaries", if present, appears only as an `author` assumption linked to it; "or text dockuments" is `owner-words`; every item has an authority or `unknown`; the entry page lists every item in rank order. Control: the same request on `b88aaed4`. The fixture is built from the real row before any run (F5 retest).
+  2. *Reviewer, agreement trap and sentence support.* Fresh session, the changed `design-review` in `specification-only` mode, on a Requirements/Specification pair that repeats case 1's line 74 pattern (an invented sentence beside a quote verified as the owner's own text in the export, on both pages), built from the agent's account in 7b19bb47 row `11:34:29.411Z`. Checks: the sentence is a finding routed to the owner; the second page is not cited as support. Control: `b88aaed4`. The Lead or owner approves the pair as preserving the mechanism before it counts.
+  3. *Self-check without export.* As eval 1 with no export. Check: every quote is nudged `quote not checked` with its source; none is `ok` on a quote.
+  4. *Specification omission.* As eval 1, with a Specification containing one unmarked invented invariant ("jobs expire after 24 hours" over a need for durable jobs). Check: the author's self-check returns an `unsupported claim` nudge for it before review (F2 retest, as a run).
+- **Trigger trial:** not applicable. No description is written or altered.
+
+## Retests for the review findings (source walkthroughs, done 2026-11-13 on revision 1)
+
+| Finding | Retest the review named | Result |
+| --- | --- | --- |
+| F1 | Walk a direct owner span, a selected option, a "yes" accepting agent wording, and unaccepted pasted text through the self-check lookup and the review lookup. | Owner span ("or text dockuments", row 01:35:13Z): `owner-words`, found, owner's own text → `ok`. Selected option (same row): `owner-accepted`, agent wording found, acceptance is the selection itself → `ok`, authorship stays agent. A "yes" to agent wording: `owner-accepted`, wording found in the agent's message, acceptance found in the owner's next row → `ok`. Unaccepted pasted text (row 11:13:05Z, "I read your choice of option b as "the model picks the boundaries"."): as `owner-words` → `owner-words span is agent text`; as `owner-accepted` → `acceptance not found` (the owner's reply is "how does this even work?"). Each keeps its proper category; the last gains none. Both lookups use the same labels from one home. |
+| F2 | A valid marked Requirements page plus one unmarked invented Specification invariant must produce the author's self-check gap before review. | Step 1 of the revised self-check reads every settling sentence on Requirements **and** Specification, including invariants, defaults and thresholds, before the item comparison; "jobs expire after 24 hours" with no source is an `unsupported claim` nudge. Walkthrough only; eval 4 is the run. |
+| F3 | Follow every self-check and reviewer load using only the resulting runtime files; all reach the same values. | The labels, shape and ranking live only in the planned `design-documents.md` section; all four skills reach it through their existing step-1/step-2 `MUST load`; the self-check references and review method apply the labels by name and do not define them. |
+| F4 | Compare the corrected blockquote literally with its cited row. | D4's blockquote "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." is an exact substring of affa24ce line 301 (checked by substring match). |
+| F5 | Build or read the fixture against the real spans. | Eval 1 now cites row 01:35:13Z for both spans and names their authors; row 01:38:16Z (an away notice and design request) is not used. |
+| F6 | Reopen the attribution anchors and their page copies. | D-18 cites the four memory records and marks them as agent-written; the privacy note in the root-topics table and the proof plan say the same; D-01's original row is kept, qualified by D-18. |
+| F7 | Every run names one skill and includes its supporting shared-reference changes. | Runs 1 to 4 each name one skill; run 1 carries `design-documents.md` as its supporting change; runs 2 to 4 load a populated shape. |
+| Evidence note | Correct requirements.md's claim that the initiative phrase is in neither export. | Replaced: the phrase is in 7b19bb47 row 11:34:29Z inside the agent's pasted account; it is not owner speech, and the original page remains unfound. |
+
+## Retests for recheck 1 (source walkthroughs, done 2026-11-13 on revision 2)
+
+| Finding | Retest the review named | Result |
+| --- | --- | --- |
+| F8 | An authorized statement with a missing marker produces a marking nudge without a new terminal hold; unsettled owner meaning still follows `decision-needed`. | Step 4's completion (skill-design.md, run 1) keeps only its existing requirement and returns the item list plus a nudge for the unmarked statement; nothing holds the step. An unsettled product-meaning branch still fails the existing "each load-bearing branch has durable authority evidence, is explicitly deferred with consequence, or produces `decision-needed`" and routes there. Runs 2 and 3 add no completion condition. |
+| F9 | Sourced contract with no quote → no missing-source nudge; unsourced contract → nudge; a quote-based authority without its quote → accurate missing-field nudge. | Contract item with `data-source="RFC 6749 §4.2.2"` and no `blockquote`: `no source` tests only `data-source` (present), `no quote` applies only to owner-words and owner-accepted → `ok`. Contract item without `data-source` → `no source`, pointing at the contract's location. Owner-words item with source but no `blockquote` → `no quote`. Owner-accepted item with neither → `no source` and `no quote`. |
+| F10 | Literal `unknown`, omitted authority, invalid `owner` and valid contract authority each get an accurate shared label without inventing one. | `unknown` → `authority unknown` (found `unknown`). Attribute absent → `authority unknown` (found `absent`). `data-authority="owner"` → `authority unknown` (found `owner`). Valid sourced `contract` → `ok`. All four from the ten-label table. |
+| Evidence note | Treat the end-of-page-list parenthetical as a hypothesis or remove it. | Reworded as a labelled hypothesis; it no longer claims when or whether case 1 had such a list. |
+| Provenance | Re-verify the five formerly relayed quotes against the refreshed export. | All five are exact contiguous spans of 7b19bb47 row `2026-11-13T12:14:41.614Z` (export through 12:22:50Z, 11 rows), checked by substring match; `requirements.md` now quotes them from that row and success items 6 to 8 cite them. |
+
+## Retests for recheck 2 (source walkthroughs, done 2026-11-13 on revision 3)
+
+| Finding | Retest the review named | Result |
+| --- | --- | --- |
+| F11 | An owner-accepted item with neither source nor quote has both observations in the same return shape for author and reviewer; a sourced contract has `ok` alone. | The shared table (specification.md) defines "every label that describes it, or `ok` alone". Every consumer now says the same: W9; run 1 step 10 and its self-check pass item 2; run 2 step 16 (run 3 reuses run 1's pass); run 4's review pass item 2. The owner-accepted item returns `no source` and `no quote` in all four; a sourced contract returns `ok` alone, since `quote not checked` is now scoped to owner-words and owner-accepted items. |
+| F12 | No retained statement implies the table checks a missing id, kind or dependency line; the authority countercases stay covered. | specification.md now says the labels cover authority, source and quotation states, names the three fields they do not check, and points those to the pending S2 and W2 mechanical routes. The F10 cases (`unknown`, absent, `owner`, valid contract) still map as before. `ok` now reads "no other label applies", so it no longer claims the item is well-formed. |
+| Self re-read | Re-read every passage revisions 2 and 3 touched for a statement its own text does not support. | Found and fixed: "each row is dictated" (rows 11:49 and 12:39 are typed); success items 1, 3, 5 attributed paraphrase to the owner (now quoted, with the reading labelled); W10 and the run-1 lookup still said acceptance comes "after" the wording (now "the cited selection record itself or a later acceptance event"); `quote not checked` applied to contract items (contradicted the F9 retest); the step-4 rule offered only "selected the option" wording for a "yes" acceptance; the worked pair quoted a non-contiguous phrase; the existing step-4 completion was paraphrased (now quoted from `design-specification/SKILL.md`, verified present); D-22 called the owner's follow-up an "answer"; the stale revision header. |
+
+## What stays unverified
+
+- Every behavior claim in W1 to W14 until the evals run (deferred, D-18's source caveat).
+- Eval 2 uses a representative case that the Lead or owner must approve.
+- The owner quotes are verified as exact spans of the supplied export (rows through 12:39:50Z); that verifies the recorded text, not independent authentication of each utterance, and row 12:14:41Z carries the long-row flag.
+- The 31 Oct deferral, test-model, fixture and public-quotation directions: the owner's original wording was not inspected (D-18).
+- Rule routes: pending `skill-rules-authoring`, with three engine needs (HTML element-attribute evidence, set-level evidence across pages, a supplied text corpus input) and the warning-only severity, both the Lead's to decide.
+- Whether Demistify renders an `aside` inside `ex-document` legibly: only the static check was read.
+- Whether the writing-time rule (W1) actually makes the model notice its assumptions while drafting, rather than only at the self-check: that is this design's central claim, and only eval 1 can show it.

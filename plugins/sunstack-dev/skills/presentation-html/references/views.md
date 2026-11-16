@@ -8,7 +8,7 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-Keep the source mode selected by `SKILL.md` step 1. For new HTML-source engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown. Reuse a view in its owning section; a navigation or derived view reaches facts through stable IDs, links or islands and preserves every caller-required field. Coverage and proof are ordinary authored explanations or tables, not automatically supplied by a requirements viewer. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying normative text.
+Keep the source mode selected by `SKILL.md` step 1. For new HTML-source engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown. Reuse a view in its owning section; a navigation or derived view reaches facts through stable IDs, links or islands and preserves every caller-required field. Coverage and proof are ordinary authored explanations or tables. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying normative text.
 
 The `capability map` below is the caller's explanatory view, distinct from the collection's shared navigation Map. Preserve its requested capability fields and home rows; navigation controls alone do not establish that a required explanatory view exists.
 

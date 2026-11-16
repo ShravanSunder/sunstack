@@ -1,6 +1,6 @@
-# 2026-11-11: Workflow v2 design-skill corrections
+# 2026-11-16: Workflow v2 design-skill corrections
 
-- `sunstack-workflow-v2` 0.2.1; all six plugin/marketplace version entries agree.
+- `sunstack-workflow-v2` 0.3.3; all six plugin/marketplace version entries agree.
 - `design-specification` points to its current Requirements contract and gives trace links their own instruction.
 - `design-program` teaches writer inspection, unknown outcomes and invariant checks; view verification follows its field owners and preserves crossing-edge shapes.
 - `design-verification` keeps required rendering gaps non-ready and separates existing row/obligation blockers.

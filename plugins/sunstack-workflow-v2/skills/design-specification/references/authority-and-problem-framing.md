@@ -151,6 +151,12 @@ durable decision source or current confirmation identity
 
 A paraphrase by the author is not evidence that a user chose it. Vague assent, delegation, silence, or topic change does not settle the branch.
 
+Wording an agent wrote and the owner selected, said yes to or approved is the owner's acceptance of agent wording, not the owner's words; record it as an `owner-accepted` design item and keep any reading beyond it as the author's own assumption (`design-documents.md` owns the shape).
+
+Bad: "The owner decided the model chooses unit boundaries (owner, 13 Nov)." The owner selected an option an agent wrote ("Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way."); "the model chooses unit boundaries" is one reading of it.
+
+Good: the selected option as an `owner-accepted` decision quoting its exact words, and "Jev chooses where units start and end" as a separate `author` assumption that reads it and names what depends on it.
+
 Complete when:
 
 - every important source is classified;
