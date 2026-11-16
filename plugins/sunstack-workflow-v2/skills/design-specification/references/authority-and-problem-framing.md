@@ -58,7 +58,7 @@ Separate symptom, cause, and requested mechanism. The specification may state an
 
 ## Admit Or Materialize Requirements
 
-Use the minimum accepted user-requirements source contract owned by `spec-design/SKILL.md`; do not require an equivalent source to reproduce the pathfinding document shape. Inspect row-level evidence and producer-owned authority independently, then classify the source itself in the governing-source inventory using Classify Sources above.
+Use the minimum accepted user-requirements source contract owned by [Workflow step 1, Establish authority, audience, and artifact boundary](../SKILL.md#1-establish-authority-audience-and-artifact-boundary); do not require an equivalent source to reproduce the pathfinding document shape. Inspect row-level evidence and producer-owned authority independently, then classify the source itself in the governing-source inventory using Classify Sources above.
 
 Only rows whose producer-owned authority state is `authorized` are normative-eligible. Observational evidence can prove a current pain without authorizing desired product meaning. Advisory and unresolved rows remain visible inputs or gaps.
 
@@ -125,7 +125,7 @@ current owner-confirmed requirements record plus confirmed goal boundary
       -> otherwise authority conflict and decision-needed
 ```
 
-Mutually narrowed current requirements, specification, or design-program files never establish the baseline by themselves. Consume the accepted-requirements fields owned by `spec-design/SKILL.md`; do not duplicate them here or create a ledger. Compare stable identities, coverage, and authoritative meaning. Every removed or superseded item needs explicit owner authority.
+Mutually narrowed current requirements, specification, or design-program files never establish the baseline by themselves. Consume the accepted-requirements fields owned by [Workflow step 2, Model the problem and its domain before proposing obligations](../SKILL.md#2-model-the-problem-and-its-domain-before-proposing-obligations); do not duplicate them here or create a ledger. Compare stable identities, coverage, and authoritative meaning. Every removed or superseded item needs explicit owner authority.
 
 Good: a simplification removes five mechanisms while every accepted user, variant, default, scenario, contract, and proof obligation remains covered.
 

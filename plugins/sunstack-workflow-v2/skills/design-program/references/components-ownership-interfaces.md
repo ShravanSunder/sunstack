@@ -124,6 +124,12 @@ Use a component tree when hierarchy/composition matters and a topology view when
 
 For every truth, invariant, lifecycle, and side effect, name exactly one authoritative owner. Define allowed/forbidden edges and the detection or enforcement class.
 
+Before finalizing ownership, inventory every path that changes the truth, including cleanup, deletion and undo, and check that each reaches that owner (count every writer, including paths that discard state (`sunstack-dev:principle-one-owner-per-truth`)). Remove each proposed owner mentally: if another component still decides the same truth, resolve that second writer in the model.
+
+Good: one order owner changes its status; the UI and background worker request transitions through it. Bad: the UI and worker both overwrite the status while the diagram labels only one as its owner.
+
+Stop when every mutation reaches its named owner and each allowed or forbidden edge has a detection or enforcement class.
+
 ## Behavioral Interfaces
 
 Each load-bearing interface states:

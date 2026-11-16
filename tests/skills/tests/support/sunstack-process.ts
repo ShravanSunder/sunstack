@@ -81,11 +81,13 @@ export async function runNativeLint(options: {
   readonly root: string;
   readonly arguments: readonly string[];
   readonly syntheticCredential?: boolean;
+  readonly config?: string;
 }): Promise<NativeOutput> {
   const executable =
     process.env.SUNSTACK_TEST_ENGINE ??
     path.join(repositoryRoot, "tests/skills/node_modules/.bin/sunstack");
-  const child = spawn(executable, ["lint", "--config", configRelative, ...options.arguments], {
+  const config = options.config ?? configRelative;
+  const child = spawn(executable, ["lint", "--config", config, ...options.arguments], {
     cwd: options.root,
     env: {
       ...process.env,

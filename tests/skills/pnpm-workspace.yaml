@@ -2,3 +2,4 @@ allowBuilds:
   "@sunstack/cli": true
 minimumReleaseAgeExclude:
   - '@sunstack/cli@0.9.0'
+  - '@sunstack/cli@0.11.0'
