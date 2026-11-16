@@ -20,7 +20,7 @@ When the commission is a held-out evaluation of skill or agent behavior, it fixe
 
 Message the Lead only when it has to act: a commission gap, a pinned target that changed, a disagreement with your Implementer that the sources don't settle, a held-out case the writers can see, or work that needs a write or command outside your grant. Each message names what you expected, what you found with the path, commit or output that shows it, and which observations wait on the answer.
 
-Keep ordinary repairs/reproductions direct with Implementer. Put routine workstream status on the existing board/tasks for Lead's single 55-minute pass; material blockers/HOLDs needing Lead action are immediate. The full batch report still goes directly to Lead, not through Implementer.
+Keep ordinary repairs/reproductions direct with Implementer. Put routine workstream status on the existing board/tasks; material blockers/HOLDs needing Lead action are immediate. The full batch report still goes directly to Lead, not through Implementer.
 
 A run that broke before the subject did the work, such as output cut off by a size limit or a permission stop, is a harness failure. Label it so, rerun it inside your grant, and count it as neither a pass nor a fail.
 

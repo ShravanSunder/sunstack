@@ -9,20 +9,11 @@ Base dependency: locate `sunstack-dev:presentation-html` using the host's listed
 
 One accountable parent owns each result. Lead supplies design docs and a plan of workstreams, contracts, dependencies, sequencing and completion conditions. Implementer chooses implementation steps and integrates the changes; Verifier owns critical verification. Both may use bounded native subagents and must inspect their results. Lead accepts only after required proof, before outside review.
 
-Choose the assignment and model, launch through the formal or native route, then inspect the evidence. Role defines responsibility; form defines conversation lifecycle; neither widens a grant.
+This practice owns v2's roles, its model catalog and its role commissions. `sunstack-dev:practices-delegation` owns the mechanics every delegation shares: bounding the job, briefing, launching, continuing, waiting and checking the result. Role defines responsibility; form defines conversation lifecycle; neither widens a grant.
 
 ## Bound the assignment
 
-### Work levels and horizon
-
-Horizon is the highest level closed before handback. Name its ending check; when no check can be named, cut the job smaller.
-
-| Level                     | Made of                      | Ending check               |
-| ------------------------- | ---------------------------- | -------------------------- |
-| Project                   | milestones                   | owner's definition of done |
-| Milestone, such as one PR | tasks                        | plan's proof, then review  |
-| Task                      | subtasks                     | assigned acceptance check  |
-| Subtask                   | edits or prescribed commands | expected result            |
+Bound each job with the work levels and ending checks in `sunstack-dev:practices-delegation`.
 
 ### Task guidance
 
@@ -66,7 +57,7 @@ Use these owner-selected model/effort rows for both owning Sidekicks and bounded
 
 Workhorse means prescribed or bounded execution; Daily driver means execution requiring judgment; Frontier is demanding judgment and grants no additional model eligibility. The owner's selections below supply the reason for using these rows.
 
-Resolve the exact id through the host's row in `~/.config/agent-context/model-map.md`, otherwise its advertised current-generation id; never pick an older generation or a `-fast` variant. Report an unavailable id or effort.
+Resolve the exact id with the exact-id rule in `sunstack-dev:practices-delegation`.
 
 ### 🔧 Operator
 
@@ -113,7 +104,7 @@ Review Project/Milestone artifacts and affected corrections, not every private i
 
 ## Launch and hand off
 
-MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. Use its host-specific instructions; an unavailable model, tool or isolation is a capability gap, not authority to widen access.
+MUST load `sunstack-dev:practices-delegation` and return, through its execution-forms reference, the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. An unavailable model, tool or isolation is a capability gap, not authority to widen access.
 
 ### Formal role commissions
 
@@ -128,6 +119,8 @@ Reports and direct pair exchanges retain their contracts; they are not replaceme
 Implementer and Verifier may decompose independent work without per-child Lead approval or an arbitrary child count. Use a child when its task can be checked independently and the handoff is worthwhile; keep tightly coupled edits with the parent. Give relevant sources, task guidance where applicable, allowed paths/commands, isolation or ordering and an ending check. Choose the model/effort from the relevant catalog and supported host controls; do not paste the catalog or manufacture a formal role packet for the child.
 
 The parent's grant bounds every child. Implementer owns product changes/tests and combined integration proof; Verifier owns permitted observations/apparatus, never product repairs, an altered oracle or independent proof of its own implementation. Keep held-out cases from implementation authors. Parallel checks need isolated fixtures/evidence when they mutate the same state. Host limits still apply; Luna remains Operator-only.
+
+Native tasks require no standalone role packet, trace or pair; the workstream Verifier still reports on the integrated target. Only the Operator runs as a formal role in native form. Its native message carries only the serialized role/files object, and an Operator running prescribed review proof starts with no parent history, so the reviewer's history stays out.
 
 ## Check the result
 

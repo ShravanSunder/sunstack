@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.3.5**. Requires `sunstack-dev` 3.3.6, whose delegation and design routes call v2.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.4.0**. Requires `sunstack-dev` 3.4.0, whose `practices-delegation` this plugin's agent management builds on.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -23,7 +23,7 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 
 ## Management sources
 
-- [practices-manage-agents](skills/practices-manage-agents/SKILL.md): classification, catalog, commissions and evidence.
+- [practices-manage-agents](skills/practices-manage-agents/SKILL.md): v2's roles, model catalog and role commissions. Launching, continuing, waiting and checking come from `sunstack-dev:practices-delegation`.
 - [role-lead](skills/role-lead/SKILL.md): design/workstreams/sequencing, inspected acceptance and outside review; no implementation changes.
 - [role-implementer](skills/role-implementer/SKILL.md): assigned changes, product tests and associated proof.
 - [role-operator](skills/role-operator/SKILL.md): prescribed work and guided collection.
@@ -49,5 +49,5 @@ Implementer and Verifier may use native subagents for separable tasks within the
 
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 
-The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer tasks and rechecks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine board-driven check-ins use one 55-minute Lead trigger, ending on completion/pause; material blockers are immediate. This source change configures no live trigger and establishes no cache savings or actual agent compliance. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
+The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer tasks and rechecks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine status stays on the board; material blockers are immediate. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
 

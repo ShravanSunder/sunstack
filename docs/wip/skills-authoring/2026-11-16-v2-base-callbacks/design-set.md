@@ -1,41 +1,34 @@
-# Design set: base callbacks call workflow v2
+# Design set: the base names no workflow skill, and delegation splits
 
 ## Requirements
 
-- U1. With `sunstack-workflow-v1` uninstalled, no `sunstack-dev` skill or shared reference names a v1 skill that has a v2 replacement. Owner decision, 2026-11-16: "rename the five, port four, fold two into the roles, drop three" (confirmed in conversation after the roles inventory, `../2026-11-16-v2-roles-refresh/inventory.html`).
-- U2. v2 runtime skills and docs stop telling agents that base callbacks select v1. Owner comment on the inventory, 2026-11-16: release status in runtime skills is "awful".
-- U3. Delegation from base skills uses v2 roles only; v2 has no 📚 Researcher or 🛠️ Worker.
+- U1. `sunstack-dev` names no workflow skill. Owner, 2026-11-16: "I don't think sunstack should reference v2 or workflows, the DAG is wrong." The rule already stands in the repo `AGENTS.md`: skills below the phase layer "do not call upward into phases, orchestrators or roles", and they return a token instead.
+- U2. No skill knows about the owner's host configuration (`my_agents.md`, devfiles, machine paths). Owner, 2026-11-16: "my agents is outside the DAG and skills."
+- U3. Delegation splits (owner choice B on `tmp/2026-11-16-roles-inventory/dependencies.html`): a base practice owns how to bound, brief, launch, continue, wait for and check any helper; v2 keeps its roles, model catalog and role commissions.
+- U4. v2 drops the 55-minute check-in (owner decision on the roles inventory, 2026-11-16) and its release-status text.
 
 ## Specification
 
-- R1. Every `sunstack-workflow-v1:<name>` in `plugins/sunstack-dev/` (excluding `retired-skills/`) and in the repository `AGENTS.md` is renamed when v2 has the replacement:
-
-  | v1 name | v2 name |
-  | --- | --- |
-  | `practices-manage-agents` | `practices-manage-agents` |
-  | `spec-design` | `design-specification` |
-  | `program-design` | `design-program` |
-  | `verification-design` | `design-verification` |
-  | `spec-program-review` | `design-review` |
-  | `role-implementer` | `role-implementer` |
-
-- R2. Calls with no v2 replacement yet keep their v1 name until their port lands: `plan-implementation`, `implement-plan`, `implementation-review`, `implementation-pr-wrapup`, `plan-update`. The `sunstack-dev` README names this.
-- R3. The three handoff skills (`spec-handoff`, `plan-handoff`, `implementation-handoff`) are dropped from `docs-maintain`'s list of phase owners.
-- R4. Delegations that sent work to a 📚 Researcher Worker send prescribed collection to a 🔧 Operator, and the caller keeps the interpretation: `debug-investigation` line 86 and `docs-maintain` line 39.
-- R5. The v2 "Source integration limit" section, the README "Runtime activation blocker" section, and the v2 `AGENTS.md` callback sentence are removed. The README names the `sunstack-dev` version whose routes call v2.
+- R1. New `sunstack-dev:practices-delegation` owns: taking role, form and model from the host's agent-management practice when there is one; the exact-model-id rule; job levels and ending checks; the brief; launch and continue lifecycle (`references/execution-forms.md`); host provider guides for Codex, Claude and Cursor; checking results. It names no workflow role or skill.
+- R2. v2 `practices-manage-agents` keeps roles, the model catalog, role/files commissions, recipient startup, Implementer–Verifier pairing, schemas and examples, and loads `sunstack-dev:practices-delegation` for the mechanics. The v2-only native-task rules (Operator as the only native formal role; review-proof history) stay in v2.
+- R3. The 10 base delegation calls load `practices-delegation`, and two of them say "helpers" instead of naming a v2 role.
+- R4. The 24 base routing calls return tokens (`specification-gap`, `program-design-gap`, `verification-design-gap`, `ready-for-planning`, `ready-for-implementation`, `ready-for-review`, `plan-defect`) or name a document instead of a skill.
+- R5. Base shared files stop naming their workflow consumers (`humanizer.md`), and route plan corrections as `plan-defect`. `phase-return-tokens.md` says "the host's skill index", not "the devfiles skill index".
+- R6. v2's manage-agents exact-id rule no longer names `~/.config/agent-context/model-map.md`; it defers to the base rule, which says "the host's model map, when the session instructions name one".
+- R7. v2 drops the 55-minute cadence from `role-lead`, three references, its README and its `AGENTS.md`; the "Source integration limit" and "Runtime activation blocker" text goes.
 
 ## Skill design
 
-Change class: behavior-changing. The renames alter call sites in `SKILL.md` prose and references across eleven `sunstack-dev` files, and R4 changes which role two skills delegate to. No trigger description, schema, label set or security surface changes. The frozen v1 archive is untouched.
+Change class: behavior-changing. It adds a skill, moves four references between plugins, changes call sites and branch conditions in eleven base files, and removes a v2 cadence. No trigger description of an existing skill changes. The frozen v1 archive is untouched.
 
-Surface allocation: the files listed in R1–R5, plus version metadata (`sunstack-dev` 3.3.6, `sunstack-workflow-v2` 0.3.5 across the six plugin manifests and three marketplace entries) and one dated changelog entry.
+Held, not changed here: the plan format's `originating planner` values (v1 skill names stored as data) and `owner-decision-brief.md`'s Chief of Staff routing, which contradicts the owner's current `my_agents.md`. Both need owner decisions. Base skills that name v2 role words (Lead, seats in `practices-collaboration`) are a later layering pass.
 
 ## Verification
 
-- A repository search finds no renamed v1 name outside the frozen archive and retired skills; the only remaining `sunstack-workflow-v1:` calls are the R2 names.
+- A repository search finds zero `sunstack-workflow-v[12]:` names and zero `devfiles skill index` mentions in `sunstack-dev`'s runtime files.
 - `claude plugin validate .` passes, and the skills test suite and typecheck pass.
-- Unverified: installed-agent behavior. No live run checks that an installed `sunstack-dev` now loads v2 skills at these call sites.
+- Unverified: installed-agent behavior, such as whether an installed agent loads `practices-delegation`, then finds v2's `practices-manage-agents` as the host practice.
 
 ## Review record
 
-The owner skipped independent design review: "do it for both repos, then let me review" (2026-11-16). The owner reviews the diff and the PR directly.
+The owner skipped independent design review and reviews the PR directly (2026-11-16). Independent implementation review through `skill-review` has not run.

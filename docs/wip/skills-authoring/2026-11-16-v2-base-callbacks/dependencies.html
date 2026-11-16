@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Which way should the plugins depend?</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Which way should the plugins depend?</h1>
+
+    <ex-callout title="The short answer" tone="tldr" icon="git-branch">
+      <p>The workflow plugin may depend on <code>sunstack-dev</code>, but <code>sunstack-dev</code> must never name a workflow skill. Today it does so 43 times. PR #229 made this worse: it swapped the dead v1 names for v2 names, so the base now depends on v2 while v2 depends on the base, and the dependency arrow runs both ways.</p>
+      <p>The fix uses two mechanisms the repo already has. When base work hands off to a design or delivery step, it returns a <strong>token</strong>, and the Lead turns that token into the next skill through your skill index. When base work delegates to a helper, it uses <strong>whatever agent-management practice the host provides</strong>, the same way <code>skill-review</code> already does. After that, the base works with any workflow installed, or with none.</p>
+    </ex-callout>
+
+    <h2 id="rule">The rule, and where it comes from</h2>
+    <p>This repo's <code>AGENTS.md</code> says: "Practices, operations, audits, presentation and tool manuals do not call upward into phases, orchestrators or roles… Upward work returns the token and payload from <code>shared-references/phase-return-tokens.md</code>; the caller selects the next owner." That token file says the same in one line: a skill "returns one token with its payload instead of naming the next skill. The caller resolves the token." In your setup, the Lead resolves tokens through the devfiles skill index, which already maps each token to its v2 skill.</p>
+
+    <h2 id="picture">The dependency picture</h2>
+    <ex-tabs label="Dependency pictures" data-width="canvas">
+      <section id="picture-now" label="Today, with PR #229" icon="git-branch">
+        <ex-mermaid id="deps-now" label="Dependencies today"><script type="text/plain">
+flowchart LR
+  v2["sunstack-workflow-v2<br/>roles, design phases, manage-agents"]
+  dev["sunstack-dev<br/>practices, principles, discuss, presentation"]
+  v1["sunstack-workflow-v1<br/>uninstalled"]
+  sa["skill-authoring"]
+  v2 -->|"loads principles and shared refs"| dev
+  dev -->|"34 calls by name after #229"| v2
+  dev -->|"9 calls still by name"| v1
+  sa -->|"finds the host's practice at runtime"| host["host agent-management practice"]
+  class v2 slot1
+  class dev slot2
+  class v1 slot5
+  class sa slot3
+  class host slot4
+</script></ex-mermaid>
+        <p>The base and the workflow depend on each other. The nine calls into v1 already lead nowhere. If you later replace v2 with a v3, every one of the 34 v2 names breaks again, which is exactly what happened when v1 was removed.</p>
+      </section>
+      <section id="picture-proposed" label="Proposed" icon="path">
+        <ex-mermaid id="deps-proposed" label="Proposed dependencies"><script type="text/plain">
+flowchart LR
+  v2["sunstack-workflow-v2<br/>roles, design phases, manage-agents"]
+  dev["sunstack-dev<br/>returns tokens, delegates through the host"]
+  idx["your skill index<br/>my_agents.md token table"]
+  host["host agent-management practice<br/>today: v2 practices-manage-agents"]
+  sa["skill-authoring"]
+  v2 -->|"loads principles and shared refs"| dev
+  dev -.->|"returns a token"| idx
+  idx -->|"names the next skill"| v2
+  dev -.->|"delegates through it, if present"| host
+  sa -.->|"same pattern"| host
+  class v2 slot1
+  class dev slot2
+  class idx slot6
+  class host slot4
+  class sa slot3
+</script></ex-mermaid>
+        <p>The base names no workflow skill. A dashed arrow is a runtime lookup, not a dependency on a named plugin. The only place that names v2 skills is your skill index, and in this repo the <code>AGENTS.md</code>. Both are configuration, not skills.</p>
+      </section>
+    </ex-tabs>
+
+    <h2 id="inventory">The 43 upward calls, by kind</h2>
+    <p>Counted on the #229 branch across <code>sunstack-dev</code>'s skills and shared references, excluding <code>retired-skills/</code>.</p>
+    <div class="ex-table-scroll" data-width="canvas">
+      <table>
+        <thead><tr><th>Kind</th><th>Calls</th><th>Where</th><th>What the call is doing</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Routing to the next step</strong></td><td>24</td><td><code>discuss-pathfinding</code> (11), <code>discuss-clarify-mental-models</code> (6), <code>docs-maintain</code> (5), <code>discuss-pathfinding/references/question-craft.md</code> (2)</td><td>"Return this decision to <code>design-specification</code>", or "planning goes to <code>plan-implementation</code>"</td><td>Return the token instead: <code>specification-gap</code>, <code>program-design-gap</code>, <code>verification-design-gap</code>, <code>ready-for-planning</code>, <code>ready-for-review</code>. Where a sentence only explains the document, name the document ("the Specification"), not the skill.</td></tr>
+          <tr><td><strong>2. Delegating to a helper</strong></td><td>10</td><td><code>practices-how</code>, <code>practices-preflight</code>, <code>practices-research</code>, <code>practices-verification</code>, <code>practices-verification-maintenance</code>, <code>debug-investigation</code> (2), <code>docs-maintain</code> (2), <code>discuss-pathfinding</code> (1)</td><td>"IF you hand part of this to another agent, load <code>practices-manage-agents</code>…"</td><td>One base shared reference, <code>shared-references/delegating-through-host-practice.md</code>: if the host provides an agent-management practice, follow it for the role, form, model and launch; otherwise use the host's own subagent tool within your grant, or do the work yourself. Each call site loads that reference and keeps its own return.</td></tr>
+          <tr><td><strong>3. Shared files naming their consumers or next steps</strong></td><td>9</td><td><code>humanizer.md</code> (4), <code>canonical-implementation-plan.md</code> (3), <code>diagram-rendering-and-fallbacks.md</code> (1), <code>owner-decision-brief.md</code> (1)</td><td>"<code>role-implementer</code> loads this from…", "send the change to <code>plan-update</code>"</td><td>A shared file says what it owns, not who loads it, because consumers declare their own loads. Where it sends work onward, it returns <code>plan-defect</code> or the matching token.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details>
+      <summary>Smaller mentions that are probably fine, to check during the change</summary>
+      <ul>
+        <li><code>presentation-html/references/engineering-document-examples.md</code> and <code>presentation-tui/references/shape-catalog.md</code> each mention a design-phase name once, probably as a label in an example. Fine if it's a label, rewrite if it's a call.</li>
+        <li><code>design-documents.md</code> and <code>phase-return-tokens.md</code> say <code>program-design</code> and <code>verification-design</code> as parts of token names and document names, not as skill calls. Fine.</li>
+        <li>The repo's <code>AGENTS.md</code> and your <code>my_agents.md</code> name v2 skills. That's correct: they are the host configuration that resolves tokens.</li>
+      </ul>
+    </details>
+
+    <h2 id="examples">What each fix looks like</h2>
+    <ex-compare label="Before and after, one example per kind" data-width="canvas" view="tabs">
+      <section id="kind-route" label="1. Routing" icon="path">
+        <section data-compare-row="before"><p><strong>Before</strong> (<code>discuss-pathfinding</code> line 157)</p><p>"<code>sunstack-workflow-v2:design-specification</code>: a confirmed goal boundary from a user-requirements destination or proposed-change handoff routes here."</p></section>
+        <section data-compare-row="after"><p><strong>After</strong></p><p>"A confirmed goal boundary for a user-requirements destination returns <code>specification-gap</code> with the boundary and its evidence."</p></section>
+        <section data-compare-row="why"><p><strong>Why</strong></p><p>The skill states what it produced. Your skill index already maps <code>specification-gap</code> to <code>design-specification</code>.</p></section>
+      </section>
+      <section id="kind-delegate" label="2. Delegating" icon="users">
+        <section data-compare-row="before"><p><strong>Before</strong> (<code>practices-verification</code> line 14)</p><p>"IF your grant allows helpers and an exact collection is worth delegating, load <code>sunstack-workflow-v2:practices-manage-agents</code> and return the bounded commission…"</p></section>
+        <section data-compare-row="after"><p><strong>After</strong></p><p>"IF your grant allows helpers and an exact collection is worth delegating, load <code>../../shared-references/delegating-through-host-practice.md</code> and return the bounded commission…"</p></section>
+        <section data-compare-row="why"><p><strong>Why</strong></p><p>The reference finds your v2 <code>practices-manage-agents</code> at runtime, the same way <code>skill-review</code> finds a Reviewer role. On a machine without v2, the base still works.</p></section>
+      </section>
+      <section id="kind-consumers" label="3. Shared files" icon="file">
+        <section data-compare-row="before"><p><strong>Before</strong> (<code>humanizer.md</code> line 9)</p><p>"<code>sunstack-workflow-v2:role-implementer</code> loads this from <code>references/working-with-lead.md</code> when its commission asks for the slop pass…"</p></section>
+        <section data-compare-row="after"><p><strong>After</strong></p><p>"A skill-writing pass reads these patterns as a list of tells…" The v2 role keeps its own line saying when it loads this file.</p></section>
+        <section data-compare-row="why"><p><strong>Why</strong></p><p>A list of consumers kept inside the shared file goes stale whenever a consumer is renamed or removed, as it just did.</p></section>
+      </section>
+    </ex-compare>
+
+    <h2 id="decision">One choice: where delegation lives</h2>
+    <p>Kinds 1 and 3 have one obvious fix each. Kind 2 has a real choice, because <code>practices-manage-agents</code> is named like a base practice but lives in the workflow plugin, since it carries v2's role list and model catalog.</p>
+    <ex-compare label="Where delegation lives" data-width="canvas">
+      <section id="opt-host" label="A. Find the host's practice" icon="shield-check">
+        <section data-compare-row="what"><p><strong>What</strong></p><p>One base reference says: use the host's agent-management practice if there is one. <code>practices-manage-agents</code> stays in v2.</p></section>
+        <section data-compare-row="gain"><p><strong>Gain</strong></p><p>Smallest change. The same pattern <code>skill-review</code> already proves out. v2 keeps owning roles and models.</p></section>
+        <section data-compare-row="cost"><p><strong>Cost</strong></p><p>One more hop. An agent might miss the practice, but your skill index's "Delegate…" row points every session at it.</p></section>
+      </section>
+      <section id="opt-split" label="B. Split delegation" icon="stack">
+        <section data-compare-row="what"><p><strong>What</strong></p><p>A base <code>practices-delegation</code> owns how to brief, launch and check any helper. v2 keeps only its roles and model catalog.</p></section>
+        <section data-compare-row="gain"><p><strong>Gain</strong></p><p>The cleanest layering, and the brief and handoff work from the roles inventory would land in the base, where every skill can use it.</p></section>
+        <section data-compare-row="cost"><p><strong>Cost</strong></p><p>A real skill split through skill-authoring, which overlaps with the role rewrite that is coming anyway.</p></section>
+      </section>
+      <section id="opt-move" label="C. Move it into the base" icon="package">
+        <section data-compare-row="what"><p><strong>What</strong></p><p>All of <code>practices-manage-agents</code> moves into <code>sunstack-dev</code>.</p></section>
+        <section data-compare-row="gain"><p><strong>Gain</strong></p><p>No lookup needed.</p></section>
+        <section data-compare-row="cost"><p><strong>Cost</strong></p><p>The base would then own v2's roles and models. The same problem appears again, one level down.</p></section>
+      </section>
+    </ex-compare>
+    <ex-callout title="Recommended: A now, B with the role rewrite" tone="decision" icon="git-branch">
+      <p><strong>Proposed, not decided.</strong> Rework PR #229 with option A, so the base stops naming any workflow skill today. Then, during the role rewrite, decide whether the handoff brief and launch rules belong in a base delegation practice (option B). If you defer this choice, nothing breaks: A is still needed either way.</p>
+    </ex-callout>
+
+    <h2 id="pr229">What happens to PR #229</h2>
+    <ol>
+      <li><strong>Keep:</strong> the version bumps, the removal of v2's release-status text, the dropped handoff names in <code>docs-maintain</code>, the Operator wording in place of "Researcher Worker", and the v2 names in the repo's <code>AGENTS.md</code>. That file is host configuration, so naming v2 there is correct.</li>
+      <li><strong>Revert:</strong> every <code>sunstack-workflow-v2:</code> name that #229 put into <code>sunstack-dev</code>.</li>
+      <li><strong>Replace:</strong> the 24 routing calls with tokens, the 10 delegation calls with the host-practice reference, and the 9 shared-file names with ownership statements or tokens.</li>
+      <li><strong>Check:</strong> a repository search finds zero <code>sunstack-workflow-v[12]:</code> names in <code>sunstack-dev</code>'s runtime files. Plugin validation and the tests pass.</li>
+      <li><strong>Update</strong> the design set and the changelog: "the base names no workflow skill".</li>
+    </ol>
+
+    <h2 id="open">Open questions to keep in view</h2>
+    <ul>
+      <li><strong>Workflow content stored in the base.</strong> <code>design-documents.md</code> (what the four documents mean) and <code>canonical-implementation-plan.md</code> (the plan's shape) are workflow content, yet they live in <code>sunstack-dev</code> because <code>presentation-html</code> and <code>discuss-pathfinding</code> read them. That's the opposite question, and not part of this fix. Revisit when the planning skills are ported.</li>
+      <li><strong>The token file names your devfiles.</strong> <code>phase-return-tokens.md</code> says the Lead "maps the token through the devfiles skill index". A public plugin should say "the host's skill index". It's a one-line fix inside the same PR.</li>
+    </ul>
+  </ex-document>
+</body>
+</html>
