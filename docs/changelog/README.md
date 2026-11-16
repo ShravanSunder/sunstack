@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-16 Base skills call workflow v2](2026-11-16-base-callbacks-call-v2.md)
 - [2026-11-16 Design review runs the first design rules](2026-11-16-v2-design-rules.md)
 - [2026-11-16 Workflow v2 design-skill corrections](2026-11-16-v2-design-skill-corrections.md)
 - [2026-11-14 Walls-of-text and long-table nudges](2026-11-14-walls-of-text-nudges.md)

@@ -121,9 +121,9 @@ Bright line: the ten definition labels and every label this skill coined (the fi
 ## Route Targets
 
 - `practices-research`: evidence gathering, prior art, current docs, memory/session mining, or source ledgers.
-- `sunstack-workflow-v1:spec-design`: durable authoritative Why/What contract.
-- `sunstack-workflow-v1:program-design`: durable structural How once observable obligations are settled.
-- `sunstack-workflow-v1:verification-design`: how each requirement will be proven, once structural How is settled.
+- `sunstack-workflow-v2:design-specification`: durable authoritative Why/What contract.
+- `sunstack-workflow-v2:design-program`: durable structural How once observable obligations are settled.
+- `sunstack-workflow-v2:design-verification`: how each requirement will be proven, once structural How is settled.
 - Planning from current ready four-document design: `sunstack-workflow-v1:plan-implementation`; execution of an exact ready canonical plan whose delivery context is `pr-ready-unmerged`: `sunstack-workflow-v1:implement-plan`; independent implementation review: `sunstack-workflow-v1:implementation-review`. Do not invoke a retired workflow.
 - open in this skill: blocked work, broken model, conflicting artifacts, repeated loop, or missing authority when no shipped owner exists yet.
 

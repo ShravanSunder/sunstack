@@ -2,13 +2,13 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.3.5 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.3.6 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
 The base owns engineering practices, principles, language standards, discussion, presentation, debugging, documentation, audits and operations. It does not own the archived role or phase files. This is a packaging split, not a new topology.
 
-Some retained helper-delegation branches still call `sunstack-workflow-v1:practices-manage-agents`; those branches require the archive to be installed too. The retained design-documents and phase-return-tokens references preserve the owner-approved migration scope. Removing those dependencies is separate future work.
+Helper-delegation branches call `sunstack-workflow-v2:practices-manage-agents`, and design routes name the v2 `design-*` skills, so those branches need `sunstack-workflow-v2` installed. Calls to planning, implementation review, PR wrap-up and plan update still name `sunstack-workflow-v1` until those skills are ported to v2. The retained design-documents and phase-return-tokens references preserve the owner-approved migration scope. Removing those dependencies is separate future work.
 
 ## v1 compatibility anchor
 

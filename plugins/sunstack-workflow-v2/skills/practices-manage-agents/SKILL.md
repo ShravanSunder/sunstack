@@ -138,7 +138,3 @@ IF uncertainty remains about a task cut, model fit or responsibility boundary, l
 ## Completion
 
 A formal commission has an eligible role/form/model, current governing/preflight sources at the actual address, recipient-resolved context or exact gaps, and an evidence-checked handback. A native task has a bounded assignment, eligible model/effort, supported history/access route and a parent-inspected integrated result or owned gap. No standalone native role packet, trace or Verifier pair is required. Carry unresolved proof, prerequisites and HOLDs to their responsible owners.
-
-## Source integration limit
-
-Base preflight and verification still route delegation to v1. This source update does not establish runtime integration; installation and activation remain blocked pending the separately scoped base compatibility change.
