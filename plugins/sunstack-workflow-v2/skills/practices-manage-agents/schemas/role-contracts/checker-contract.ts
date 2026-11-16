@@ -6,6 +6,7 @@ import {
   JobBase,
   RepositoryPaths,
   RequiredReads,
+  ReviewInvestigationAccess,
   RequiredText,
   SessionAddress,
   roleCharterDescription,
@@ -136,7 +137,7 @@ const CheckerVerificationPacket = JobBase.extend({
 });
 
 const CheckerReviewPacket = JobBase.extend({
-  duty: z.literal("review").describe("Independent read-only review of a declared artifact"),
+  duty: z.literal("review").describe("Independent review preserving a declared candidate"),
   role: z
     .literal("checker")
     .describe("The Checker on review duty: independent findings on a declared artifact"),
@@ -147,8 +148,14 @@ const CheckerReviewPacket = JobBase.extend({
     charter: z.literal("role-checker").describe(roleCharterDescription),
   }).describe(roleRequiredReadsDescription),
   limits: z
-    .discriminatedUnion("access", [InspectAccess, InspectAndExecuteAccess])
-    .describe("A Checker on review duty never holds a write grant"),
+    .discriminatedUnion("access", [
+      InspectAccess,
+      InspectAndExecuteAccess,
+      ReviewInvestigationAccess,
+    ])
+    .describe(
+      "Limited source/listed-check review or independent investigation preserving candidates and using reviewer-owned scratch",
+    ),
   reviewTarget: RequiredText.describe("The declared artifact under review, with its revision"),
   procedure: RequiredText.describe("The review procedure that owns check selection and the report"),
   authorHistory: z

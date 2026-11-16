@@ -6,7 +6,7 @@ This stack's bottom layer owns the four selected design-skill copies, names and 
 Preserve unselected v1 behavior; do not restore removed roles through examples, schemas or helper imports. Do not wake Claude agents while the owner's token restriction remains in force.
 Marketplace publication is authorized; switching the default runtime workflow and design-layout changes are not.
 
-Management has exactly four roles: Lead, Implementer, Operator and Checker. Checker commissions select verification or review duty explicitly; review is independent and read-only. Management owns the owner-selected model map, Exact Steps/Designed Outcome meanings and literal task-span eligibility; Terra high covers Local implementation and Luna high is Operator-only.
+Management has exactly four roles: Lead, Implementer, Operator and Checker. Checker commissions select verification or review duty explicitly; review independently investigates while preserving protected candidates, with writes confined to granted scratch, reports or isolated probes. Management owns the owner-selected model map, Exact Steps/Designed Outcome meanings and literal task-span eligibility; Terra high covers Local implementation and Luna high is Operator-only.
 
 Base preflight/verification delegation callbacks still select v1. Installing this plugin does not close that compatibility work; v2 source checks do not establish runtime integration.
 

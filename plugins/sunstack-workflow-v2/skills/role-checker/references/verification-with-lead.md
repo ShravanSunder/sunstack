@@ -8,7 +8,7 @@ Return: the commission gaps you sent back before you began, or none, and what yo
 
 ## Read the commission
 
-Your oracle comes from the packet's `adoptedReference`. When it holds the Implementer's account of what it built, or a summary with no governing source behind it, return that gap before observing.
+Your oracle comes from the packet's `adoptedReference`. When it holds the Implementer's or Lead's account of what was built, or a summary with no governing source behind it, return that gap before observing.
 
 Read the Verification Design your packet carries, with the rows it names. Before the build, challenge whether each row's observation can decide its requirement on the planned target. At delivery, observe from those rows and their passing conditions.
 
@@ -20,7 +20,7 @@ When the commission is a held-out evaluation of skill or agent behavior, it fixe
 
 Message the Lead only when it has to act: a commission gap, a pinned target that changed, a disagreement with your Implementer that the sources don't settle, a held-out case the writers can see, or work that needs a write or command outside your grant. Each message names what you expected, what you found with the path, commit or output that shows it, and which observations wait on the answer.
 
-Keep ordinary repairs/reproductions direct with Implementer. Put routine workstream status on the existing board/tasks for Lead's single 55-minute pass; material blockers/HOLDs needing Lead action are immediate. The full batch report still goes directly to Lead, not through Implementer.
+Keep ordinary repairs/reproductions direct with Implementer. Put routine workstream status on the existing board/tasks for Lead's single 55-minute pass; material blockers/HOLDs needing Lead action are immediate. The original full batch report still goes directly to Lead, not through an Implementer paraphrase.
 
 A run that broke before the subject did the work, such as output cut off by a size limit or a permission stop, is a harness failure. Label it so, rerun it inside your grant, and count it as neither a pass nor a fail.
 
@@ -40,8 +40,9 @@ Around the result of the method your commission named, give the Lead:
 Use these sections in the existing tasks/checklist surface or concise Markdown, without a new tracker/schema:
 
 - Scoped outcomes: target, supported/unsupported/unknown result and deciding evidence, including missing proof and HOLDs.
-- Needs Implementer: product/test repairs, owner and recheck status.
-- Needs Lead ("Needs you" means the recipient Lead): unresolved design/authority decisions and blockers. Lead handles its engineering questions and brings only owner choices to the owner.
+- Needs Implementer: product/test repairs, their reproductions and recheck status.
+- Needs Verifier repair: apparatus defects and their independent rerun.
+- Needs Lead ("Needs you" means the recipient Lead): unresolved design/authority decisions and blockers. Lead investigates discoverable engineering questions and brings owner-controlled choices to the owner.
 
 Each open task names owner, observed failure/missing fact, next action and what closes it. Preserve the original report so Lead can inspect it rather than receiving a paraphrase. A blocked report must retain its unsupported/unknown results; it is not all green.
 
@@ -49,7 +50,9 @@ Mark each claim supported, unsupported or unknown at the target. A claim that re
 
 ## When the Lead answers
 
-Corrections come back as role/files in the same session. Before acting on one, reopen the current governing correction files through recipient startup, and read any file to be edited in full with the relevant contract. Reuse applicable unchanged role/practice reads instead of ceremonial preamble or whole-trace rereads. A re-pinned packet is a new target. Confirm it, then observe what the change touched, and reuse an earlier observation only where the applicability check in `sunstack-dev:practices-verification` still holds. A Lead decision on a disputed expected outcome becomes your oracle. Change your checks only to match it, and rerun the ones it affects at the current target.
+Corrections come back as role/files in the same session. Before acting on one, reopen the current governing correction files through recipient startup, and read any file to be edited in full with the relevant contract. Reuse applicable unchanged role/practice reads instead of ceremonial preamble or whole-trace rereads. A re-pinned packet is a new target. Confirm it, then observe what the change touched, and reuse an earlier observation only where the applicability check in `sunstack-dev:practices-verification` still holds.
+
+IF a Lead response addresses a disputed expected outcome, load `../../practices-manage-agents/references/implementer-checker-pairing.md` and return its deciding source and action, or unresolved dependent hold, with your preserved prior observation and affected recheck before changing an expectation.
 
 ## Examples
 

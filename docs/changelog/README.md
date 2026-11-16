@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-16 Independent checking retains four roles](2026-11-16-independent-checking-four-roles.md)
 - [2026-11-14 Walls-of-text and long-table nudges](2026-11-14-walls-of-text-nudges.md)
 - [2026-11-13 Design reviews run the requirement coverage nudge](2026-11-13-requirement-coverage-nudge.md)
 - [2026-11-13 Picture-before-choice nudge counts any diagram or image](2026-11-13-picture-nudge-any-diagram.md)

@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.3.2**. Requires `sunstack-dev` 3.3.1 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.4.0**. Requires `sunstack-dev` 3.3.1 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -29,15 +29,15 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 - [role-operator](skills/role-operator/SKILL.md): prescribed work and guided collection.
 - [role-checker](skills/role-checker/SKILL.md): explicit verification or independent review duty.
 
-The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; review requires no author history and read-only access. Operator alone has a helper handback; other roles return their owned result. Management owns the selected model map: Terra high restores Local implementation; verification uses Terra/Sol, review uses Sol/Opus high, and Operator is always Luna high.
+The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; review requires no author history and scope-fitting access: source-only inspection, explicitly listed checks, or independent investigation in isolated scratch. Operator alone has a helper handback; other roles return their owned result. Management owns the selected model map: Terra high restores Local implementation; verification uses Terra/Sol, review uses Sol/Opus high, and Operator is always Luna high.
 
 ## Scope
 
-The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this design update changes no role/management behavior or v1 archive and refreshes no installed caches. Installing v2 does not switch the default runtime workflow.
+The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this update retains the four roles, their model map and the Implementer–Verifier pair while strengthening independent checking. It changes no v1 archive and refreshes no installed caches. Installing v2 does not switch the default runtime workflow.
 
 ## Runtime activation blocker
 
-Base preflight and verification practices still route delegation to v1. Installing this plugin does not close those callbacks. Trigger trials and live agent behavior have not been evaluated.
+Base preflight and verification practices still route delegation to v1. Installing this plugin does not close those callbacks. Source-preview observations have only their named scope; they do not establish installed activation or general reliability.
 
 ## Role and files commissioning
 
@@ -53,5 +53,13 @@ Implementer and Verifier may use native subagents for separable tasks within the
 
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 
-The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer tasks and rechecks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine board-driven check-ins use one 55-minute Lead trigger, ending on completion/pause; material blockers are immediate. This source change configures no live trigger and establishes no cache savings or actual agent compliance. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
+The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer product/test tasks and rechecks, Needs Verifier apparatus tasks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine board-driven check-ins use one 55-minute Lead trigger, ending on completion/pause; material blockers are immediate. This source change configures no live trigger and establishes no cache savings or actual agent compliance. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
 
+
+## Independent evidence and outcome authority
+
+Reviewer reconstructs approved obligations from original sources, reads code and tests directly, chooses isolated probes and retains unresolved source-backed disputes. Full delivery review requires the Lead’s inspected acceptance plus original scoped proof and the original Verifier report; checked boxes and a runnable command cannot substitute for those inputs.
+
+The review-only `review-investigation` grant names protected candidates and revisions plus reviewer scratch. It permits independent discovery and probes within actual capabilities, without changing the candidate, its oracle, credentials or global state. The narrower `inspect` and `inspect-and-execute` grants retain their narrower judgments. Schema validation supplies no OS isolation.
+
+Both members of the Implementer–Verifier pair resolve disputed expected behavior against original approved sources. A Lead interpretation needs deciding authority and cannot silently waive an approved outcome. Implementer owns product and test repairs, Verifier owns apparatus and original observations, and Lead owns sourced dispositions and acceptance.
