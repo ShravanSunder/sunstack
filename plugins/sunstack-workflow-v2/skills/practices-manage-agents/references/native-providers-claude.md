@@ -28,3 +28,7 @@ Access grants: the `limits` field in `../schemas/assignment-fields.ts`.
 ## Work-direction content
 
 Formal delegated role work, continuations and corrections contain only role/files, encoded in the native tool’s documented message/prompt argument type. Model, effort, identity, history and access settings remain separate metadata. The recipient reads its role and current governing files; do not prefix a custom preamble or append the procedure. Reports and direct pair exchanges retain their existing contracts.
+
+## Independent investigation boundary
+
+Formal review remains a separate Sidekick. Its semantic investigation grant uses the supported workspace-write launch route, with protected targets and reviewer-owned scratch; it does not add a native sandbox/path flag. Actual capability and denied effects must be observed and reported, not inferred from this text. Scope-only inspect or listed-check access cannot supply a full investigative verdict. Preserve candidate source/build/install state; use isolated copies for mutating probes, and leave verification's own grants unchanged.

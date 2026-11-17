@@ -36,7 +36,7 @@ Corrections come back as role/files in the same session. Before acting on one, r
 
 When the Lead routes a review finding to you, open its anchor before changing anything, then fix it or return the evidence that it doesn't hold (a finding is a claim until you open what it cites (`sunstack-dev:principle-verify-before-accepting`)).
 
-A Lead decision on a disputed expected outcome becomes the governing source. Tell your Verifier, and change tests or code only to match it.
+IF a Lead response addresses a disputed expected outcome, load `../../practices-manage-agents/references/implementer-checker-pairing.md` and return its deciding original source or owner-authorized change, resulting action and unresolved dependent hold before changing tests or code. Send that sourced disposition directly to your Verifier.
 
 ## Examples
 

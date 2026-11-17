@@ -6,19 +6,23 @@ Consumers, and only these:
 
 - `role-implementer` loads this from `../../role-implementer/references/working-with-checker-verification.md`.
 - `role-checker` on verification duty loads this from `../../role-checker/references/verification-with-implementer.md`.
-- `role-lead` loads this from `../../role-lead/references/working-with-checker-verification.md` when it pins a target or reads an observation against one, for the target rule.
+- `role-lead` loads this from `../../role-lead/references/working-with-checker-verification.md` for target handling or a disputed expected outcome.
+- `role-implementer` conditionally loads this from `../../role-implementer/references/working-with-lead.md` when a Lead response addresses a disputed expected outcome.
+- `role-checker` on verification duty conditionally loads this from `../../role-checker/references/verification-with-lead.md` for that same disputed-response decision.
 
 Expected inputs: the governing sources your commission names, and your pair's address from your packet.
 
-Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead. A caller that declares, pins or reads a target also returns the batch boundary that applies and the target's identity.
+Return: the governing sources the pair takes the expected outcome from, and any disagreement already waiting for the Lead. A caller handling a disputed answer returns its deciding original source or owner-authorized change, resulting expectation/action and unresolved dependent hold. A caller that declares, pins or reads a target also returns the batch boundary that applies and the target's identity.
 
 ## The expected outcome comes from the sources
 
-The governing sources are the ones the commissions name, such as the adopted reference, the plan, the specification or the contract. Two of you agreeing never sets the expected outcome, and neither does what the code does today. When a source passage settles a question, cite it and act on it. When a test or an observation rejects behavior the source allows, change the check to accept that behavior and name the passage that allows it. Narrow a check only with a recorded reason, and report its result from before and after the change.
+The expected outcome comes from original approved requirements/design, applicable owner decisions and existing contracts. Independently open those sources; a commission, plan or adopted-reference summary cannot replace them or establish its own completeness. Two of you agreeing never sets the expected outcome, and neither does what the code does today. When a deciding original passage settles a question, cite it and act on it. When a test or observation rejects behavior that passage allows, change the check to accept the allowed behavior and retain the deciding source. Narrow a check only with a recorded reason and both before/after results.
 
 ## Disagreements go to the Lead
 
-A disagreement the sources don't settle goes to the Lead. It may be about the expected outcome, about whether an observation applies to the target, or about who owns a fix. Whoever raises it sends the claim, both readings, the passage each rests on, the observation that raised it and the work that waits on the answer, then tells the other side it went. Both sides stop the work that depends on the answer and continue the rest. The Lead's decision becomes the governing source for both of you.
+A disagreement the sources do not settle goes to the Lead. It may concern the expected outcome, applicability to the target or ownership of a fix. Send the claim, both readings, each original passage, the deciding observation and dependent work, then tell the other side it went. Hold only dependent work and continue the rest.
+
+The Lead resolves engineering interpretation within existing authority by citing the deciding sources; a Lead response alone does not replace an approved outcome. A changed authorized outcome, scope/proof waiver or unsettled owner meaning goes through Lead to the owner with both readings preserved. Before changing a test, expected value or product behavior, identify the original source or explicit owner decision that authorizes the change, tell the pair the sourced disposition and retain the prior result. Without that authority or a settled reading, keep unsupported/unknown results and the dependent hold visible rather than making the current output the oracle.
 
 ## Share setup, facts and reproductions directly
 
@@ -48,8 +52,8 @@ The Implementer's ordering test fails because its assertion demands one global o
 
 ### Clean: a source passage settles one part, the Lead the rest
 
-The pair reads the adopted reference. It requires order within each pane and says nothing about order across panes. The Implementer changes the assertion to per-pane order, cites the passage, and keeps the earlier failing result in its report. The Verifier sends the Lead the cross-pane question with both readings, the passage and the observation that raised it. Both keep working on slices that don't depend on the answer.
+The pair opens the original contract. It requires order within each pane and says nothing about order across panes. The Implementer changes the assertion to per-pane order, cites the passage and keeps the earlier failing result. The Verifier sends Lead the cross-pane question with both readings, passage and observation. Lead investigates the existing authority or takes an unsettled owner choice to the owner; both sides continue slices that do not depend on the answer.
 
 ## When to stop
 
-Stop work that depends on a disagreement until the Lead decides. Stop arguing a point once a source passage or the Lead's decision settles it. The pair's work on a target ends when the observation on it is reported, and corrections continue with the same pair.
+Hold work that depends on an unresolved disagreement until deciding sources or an authorized owner decision settle it. Recheck a Lead answer against that authority before changing the oracle. The pair's work on a target ends when its observation is reported, and corrections continue with the same pair.

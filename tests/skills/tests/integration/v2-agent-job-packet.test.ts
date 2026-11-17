@@ -309,7 +309,7 @@ for (const { name, schema } of checkerSchemas) {
       expect(paths(schema, without(packet, field))).toEqual([field]);
     });
 
-    test("rejects missing or unknown duty and review author history or writes", () => {
+    test("rejects missing or unknown duty, review author history and product writes", () => {
       // Arrange
       const packet = review();
       // Act / Assert
@@ -395,4 +395,88 @@ describe("v2 Operator-only helper handback", () => {
       expect(paths(RoleHandback, foreign)).toEqual(["role"]);
     },
   );
+});
+
+const reviewInvestigation = {
+  access: "review-investigation",
+  protectedTargets: [{ location: "/candidate/source", revision: "declared-commit" }],
+  scratchPaths: ["/tmp/reviewer-evidence"],
+};
+
+describe("Reviewer investigation stays distinct from verification authority", () => {
+  test.each(checkerSchemas)(
+    "$name accepts all three deliberate review access shapes",
+    ({ schema }) => {
+      // Arrange
+      const limitsCases = [
+        { access: "inspect" },
+        { access: "inspect-and-execute", allowedCommands: ["pnpm test"] },
+        reviewInvestigation,
+      ];
+      // Act / Assert
+      for (const limits of limitsCases) {
+        expect(schema.safeParse({ ...review(), limits }).success).toBe(true);
+      }
+    },
+  );
+
+  test.each([
+    { name: "missing protected targets", limits: without(reviewInvestigation, "protectedTargets") },
+    { name: "empty protected targets", limits: { ...reviewInvestigation, protectedTargets: [] } },
+    { name: "missing scratch", limits: without(reviewInvestigation, "scratchPaths") },
+    { name: "empty scratch", limits: { ...reviewInvestigation, scratchPaths: [] } },
+    {
+      name: "missing revision",
+      limits: { ...reviewInvestigation, protectedTargets: [{ location: "/candidate" }] },
+    },
+    {
+      name: "empty location",
+      limits: { ...reviewInvestigation, protectedTargets: [{ location: "", revision: "head" }] },
+    },
+    {
+      name: "unknown target key",
+      limits: {
+        ...reviewInvestigation,
+        protectedTargets: [{ location: "/candidate", revision: "head", mutable: true }],
+      },
+    },
+    {
+      name: "command allowlist",
+      limits: { ...reviewInvestigation, allowedCommands: ["pnpm test"] },
+    },
+  ])("rejects $name on the real review validators", ({ limits }) => {
+    // Arrange
+    const input = { ...review(), limits };
+    // Act / Assert
+    for (const { schema } of checkerSchemas) {
+      expect(schema.safeParse(input).success).toBe(false);
+    }
+  });
+
+  test("does not extend Lead, Implementer, Operator or verification access", () => {
+    // Arrange
+    const packets = [lead(), implementer(), operator(), verification()];
+    // Act / Assert
+    for (const packet of packets) {
+      expect(AgentJobPacket.safeParse(packet).success).toBe(true);
+      expect(AgentJobPacket.safeParse({ ...packet, limits: reviewInvestigation }).success).toBe(
+        false,
+      );
+    }
+    expect(
+      CheckerPacket.safeParse({ ...verification(), limits: reviewInvestigation }).success,
+    ).toBe(false);
+  });
+});
+
+test("retains paired Implementer contact rather than a collapsed Lead substitute", () => {
+  // Arrange
+  const valid = verification();
+  const collapsed = { ...without(valid, "pairedImplementer"), implementationLead: address };
+  // Act / Assert
+  for (const { schema } of checkerSchemas) {
+    expect(schema.safeParse(valid).success).toBe(true);
+    expect(schema.safeParse(collapsed).success).toBe(false);
+    expect(schema.safeParse({ ...valid, implementationLead: address }).success).toBe(false);
+  }
 });

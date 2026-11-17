@@ -123,6 +123,12 @@ MUST load `references/execution-forms.md` and return the supported route, lifecy
 
 Reports and direct pair exchanges retain their contracts; they are not replacement work-direction calls. Schemas validate shape, not permissions or Router interception.
 
+### Review investigation access
+
+Full delivery or full independent investigation uses `review-investigation` with protected target locations/revisions and reviewer-owned scratch paths. The Reviewer chooses relevant source reads and probes within actual task/host authority; initial role/files pointers are not an exhaustive evidence list. Source-only `inspect` and listed-check `inspect-and-execute` remain limited to judgments those grants can establish. Reject a limited grant for a requested full verdict at recipient startup; an essential unlisted check stays uncovered.
+
+Launch full investigation through supported `workspace-write` host access, never by passing the semantic review-investigation tag as a Router option. Keep model/effort/history and launch access in supported tool metadata. Declared protected/scratch paths are task constraints, not OS path enforcement. The Reviewer confirms real capability and preserves source/build/install candidates while builds, experiments and reports use isolated scratch. A denial remains a coverage gap; no production/global/credential authority follows. Verification access is unchanged by this review-only variant.
+
 ### Parent-owned native tasks
 
 Implementer and Verifier may decompose independent work without per-child Lead approval or an arbitrary child count. Use a child when its task can be checked independently and the handoff is worthwhile; keep tightly coupled edits with the parent. Give relevant sources, task guidance where applicable, allowed paths/commands, isolation or ordering and an ending check. Choose the model/effort from the relevant catalog and supported host controls; do not paste the catalog or manufacture a formal role packet for the child.
