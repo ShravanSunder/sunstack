@@ -2,13 +2,13 @@
 
 Shared rewrite procedure for human sentences. Pin: blader/humanizer `9862685f575c65a8247f90369951df1b3416e3d6`, skill version 3.0.0, MIT. When that pin moves, re-read `SKILL.md` and update this file. Do not replace this file with the upstream skill.
 
-Consumers, and only these:
+It has three uses, and each caller names its own load:
 
-- `docs-maintain` loads this in file mode when it rewrites human sentences in a README, architecture doc, runbook, or changelog.
-- `sunstack-workflow-v1:implementation-pr-wrapup` loads this in embedded mode for Why and Special things to note. The description worker owns that load. The parent does not rewrite those parts.
-- `sunstack-workflow-v1:role-implementer` loads this from `references/working-with-lead.md` when its commission asks for the slop and infractions pass on skill work. It reads the patterns as a list of tells, uses neither mode below, and returns in its handback each tell it found in the files it changed, fixed or kept with a reason. The skill it writes never calls this file.
+- File mode: `docs-maintain` rewrites human sentences in a README, architecture doc, runbook, or changelog.
+- Embedded mode: a PR description step rewrites its Why and Special things to note. The agent that writes the description owns that load, and its parent does not rewrite those parts.
+- List of tells: a skill-writing pass reads the patterns as tells, uses neither mode below, and returns each tell it found in the files it changed, fixed or kept with a reason. The skill being written never calls this file.
 
-Leave YAML descriptions, schemas, label sets, call-site grammar, code, commands, paths, links, Change outline fences, and work-trail JSONL unchanged. Do not load this from `presentation-tui`, `presentation-webui`, `sunstack-workflow-v1:spec-design`, `sunstack-workflow-v1:program-design`, review packets, or a trigger description.
+Leave YAML descriptions, schemas, label sets, call-site grammar, code, commands, paths, links, Change outline fences, and work-trail JSONL unchanged. Do not load this from `presentation-tui`, `presentation-webui`, a design phase, review packets, or a trigger description.
 
 Rewrite so the text reads like one writer for one reader. Keep what it says. Do not make anything up.
 

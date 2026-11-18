@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-16 The base names no workflow skill; delegation splits](2026-11-16-base-names-no-workflow.md)
 - [2026-11-16 Design review runs the first design rules](2026-11-16-v2-design-rules.md)
 - [2026-11-16 Workflow v2 design-skill corrections](2026-11-16-v2-design-skill-corrections.md)
 - [2026-11-16 Independent checking retains four roles](2026-11-16-independent-checking-four-roles.md)

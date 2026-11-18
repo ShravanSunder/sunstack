@@ -35,9 +35,9 @@ Load each practice below by name; a practice you already loaded in this session 
 
 ## Active work
 
-Use the existing board/task/checklist status with a single 55-minute check-in for Implementer and Verifier; inspect progress, dependencies and questions without relaying routine peer exchanges. MUST load `../practices-manage-agents/references/execution-forms.md` for cadence lifecycle and return the single supported trigger policy or exact gap when configuring active work. End it on completion/pause; material blockers and HOLDs are immediate, not held for the cadence. No cache benefit follows from the interval.
+Follow helpers through the existing board, task or checklist status, without relaying routine exchanges between the Implementer and the Verifier. Blockers and mental-model breaks reach you immediately.
 
-At each check-in, revisit the owner's open asks and advance the next authorized task within your role that can proceed. A refused step or missing dependency holds only work that needs it; keep independent work moving. If nothing can proceed within your role and authority, report the specific dependency and who can resolve it.
+Whenever a helper reports or a dependency clears, revisit the owner's open asks and advance the next authorized task within your role that can proceed. A refused step or missing dependency holds only work that needs it; keep independent work moving. If nothing can proceed within your role and authority, report the specific dependency and who can resolve it.
 
 ## Boundary
 

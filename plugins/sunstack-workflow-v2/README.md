@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.4.0**. Requires `sunstack-dev` 3.3.1 for these design instructions. Frozen v1 remains the default runtime workflow until base callbacks change.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.5.0**. Agent management uses `practices-delegation` from `sunstack-dev` 3.4.0.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -23,7 +23,7 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 
 ## Management sources
 
-- [practices-manage-agents](skills/practices-manage-agents/SKILL.md): classification, catalog, commissions and evidence.
+- [practices-manage-agents](skills/practices-manage-agents/SKILL.md): v2's roles, model catalog and role commissions. Launching, continuing, waiting and checking come from `sunstack-dev:practices-delegation`.
 - [role-lead](skills/role-lead/SKILL.md): design/workstreams/sequencing, inspected acceptance and outside review; no implementation changes.
 - [role-implementer](skills/role-implementer/SKILL.md): assigned changes, product tests and associated proof.
 - [role-operator](skills/role-operator/SKILL.md): prescribed work and guided collection.
@@ -33,17 +33,13 @@ The packet union accepts only lead, implementer, operator and checker. Checker v
 
 ## Scope
 
-The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this update retains the four roles, their model map and the Implementer–Verifier pair while strengthening independent checking. It changes no v1 archive and refreshes no installed caches. Installing v2 does not switch the default runtime workflow.
-
-## Runtime activation blocker
-
-Base preflight and verification practices still route delegation to v1. Installing this plugin does not close those callbacks. Source-preview observations have only their named scope; they do not establish installed activation or general reliability.
+The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. The published Demistify 1.22.0 guide documents shared navigation. Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
 
 ## Role and files commissioning
 
 Delegated initial work, continuations and corrections contain only `role` (implementer, checker or operator) and nonempty `files`. Launch metadata remains separate. Recipients load their role, read current referenced governing files, resolve sourced assignment context and validate it with the retained rich role schemas. Existing documents need not be rewritten as full packet files. A missing grant, pair, duty or ending check returns an exact gap. Reports and direct pair exchanges keep their existing contracts.
 
-The strict call schema checks source-level content shape; it does not intercept Router messages, enforce permissions or prove safe live file interpretation. Base callbacks still select v1; agent behavior and token savings have not been evaluated.
+The strict call schema checks source-level content shape; it does not intercept Router messages, enforce permissions or prove safe live file interpretation. Agent behavior and token savings have not been evaluated.
 
 ## Responsibility and completion
 
@@ -53,8 +49,7 @@ Implementer and Verifier may use native subagents for separable tasks within the
 
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 
-The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer product/test tasks and rechecks, Needs Verifier apparatus tasks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine board-driven check-ins use one 55-minute Lead trigger, ending on completion/pause; material blockers are immediate. This source change configures no live trigger and establishes no cache savings or actual agent compliance. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
-
+The Verifier sends the original actionable report directly to Lead. It includes scoped outcomes and evidence, product and test tasks for Implementer with affected rechecks, apparatus tasks for Verifier, decisions and blockers for Lead, and any required unverified paths or HOLDs. Put routine status on the existing board and surface material blockers immediately. Follow the base logging and audit procedures.
 
 ## Independent evidence and outcome authority
 
