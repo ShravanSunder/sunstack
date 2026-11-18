@@ -16,6 +16,7 @@
 - R5. Base shared files stop naming their workflow consumers (`humanizer.md`), and route plan corrections as `plan-defect`. `phase-return-tokens.md` says "the host's skill index", not "the devfiles skill index".
 - R6. v2's manage-agents exact-id rule no longer names `~/.config/agent-context/model-map.md`; it defers to the base rule, which says "the host's model map, when the session instructions name one".
 - R7. v2 drops the 55-minute cadence from `role-lead`, three references, its README and its `AGENTS.md`; the "Source integration limit" and "Runtime activation blocker" text goes.
+- R8. The integration with #230 preserves v2's review investigation grant, protected candidates, isolated scratch, and original proof requirements. Its role-specific launch procedure stays in v2's `practices-manage-agents`. The four generic provider and execution references live only in the base. The Verifier sends the original report directly to Lead and follows the pairing rule for disputed outcomes.
 
 ## Skill design
 
@@ -32,3 +33,5 @@ Held, not changed here: the plan format's `originating planner` values (v1 skill
 ## Review record
 
 The owner skipped independent design review and reviews the PR directly (2026-11-16). Independent implementation review through `skill-review` has not run.
+
+The owner approved the #230 conflict resolution in chat on 2026-11-18. The reconciliation preserves Option B and #230's review and verification contracts.

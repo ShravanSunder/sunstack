@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.4.0**. Requires `sunstack-dev` 3.4.0, whose `practices-delegation` this plugin's agent management builds on.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.5.0**. Agent management uses `practices-delegation` from `sunstack-dev` 3.4.0.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -29,11 +29,11 @@ Skill-specific references stay under their owning v2 skill. The review-only proo
 - [role-operator](skills/role-operator/SKILL.md): prescribed work and guided collection.
 - [role-checker](skills/role-checker/SKILL.md): explicit verification or independent review duty.
 
-The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; review requires no author history and read-only access. Operator alone has a helper handback; other roles return their owned result. Management owns the selected model map: Terra high restores Local implementation; verification uses Terra/Sol, review uses Sol/Opus high, and Operator is always Luna high.
+The packet union accepts only lead, implementer, operator and checker. Checker verification preserves four work modes and paired proof; review requires no author history and scope-fitting access: source-only inspection, explicitly listed checks, or independent investigation in isolated scratch. Operator alone has a helper handback; other roles return their owned result. Management owns the selected model map: Terra high restores Local implementation; verification uses Terra/Sol, review uses Sol/Opus high, and Operator is always Luna high.
 
 ## Scope
 
-The separately merged management/role behavior is retained. The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe; the matching bound guide owns syntax and component preparation. Shared navigation is documented in the published Demistify 1.22.0 guide; each selected binding still needs its matching guide and checker, and a source preview remains explicitly distinct from publication. The existing marketplace registration is retained; this design update changes no role/management behavior or v1 archive and refreshes no installed caches.
+The four document meanings remain distinct. Their HTML can use prose, diagrams, tables, Trees, choices, comparisons, open discussion and call stacks where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor, while HTML owns the design facts. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. The published Demistify 1.22.0 guide documents shared navigation. Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
 
 ## Role and files commissioning
 
@@ -49,5 +49,12 @@ Implementer and Verifier may use native subagents for separable tasks within the
 
 After required proof, the Lead authors a five-condition acceptance artifact in the existing work record: intent, ownership/contracts, deciding target evidence, integrated workstreams and resolved prerequisites/HOLDs. The outside 🔎 Checker admits delivery review only with that completed artifact and complete scoped original specifications/plan/proof and verification report. Missing Lead work returns review-not-started. Findings reopen affected acceptance/proof; a clean review is the last quality check and starts no second wholesale acceptance ceremony.
 
-The Verifier's original actionable report goes directly to Lead with scoped outcomes/evidence, Needs Implementer tasks and rechecks, Needs Lead decisions/blockers and required unverified paths/HOLDs. Routine status stays on the board; material blockers are immediate. Relevant base logging/audits remain, with no automatic HTML/Story rendering or duplicate local packet/trace census.
+The Verifier sends the original actionable report directly to Lead. It includes scoped outcomes and evidence, product and test tasks for Implementer with affected rechecks, apparatus tasks for Verifier, decisions and blockers for Lead, and any required unverified paths or HOLDs. Put routine status on the existing board and surface material blockers immediately. Follow the base logging and audit procedures.
 
+## Independent evidence and outcome authority
+
+Reviewer reconstructs approved obligations from original sources, reads code and tests directly, chooses isolated probes and retains unresolved source-backed disputes. Full delivery review requires the Lead’s inspected acceptance plus original scoped proof and the original Verifier report; checked boxes and a runnable command cannot substitute for those inputs.
+
+The review-only `review-investigation` grant names protected candidates and revisions plus reviewer scratch. It permits independent discovery and probes within actual capabilities, without changing the candidate, its oracle, credentials or global state. The narrower `inspect` and `inspect-and-execute` grants retain their narrower judgments. Schema validation supplies no OS isolation.
+
+Both members of the Implementer–Verifier pair resolve disputed expected behavior against original approved sources. A Lead interpretation needs deciding authority and cannot silently waive an approved outcome. Implementer owns product and test repairs, Verifier owns apparatus and original observations, and Lead owns sourced dispositions and acceptance.

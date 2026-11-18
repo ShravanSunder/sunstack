@@ -6,7 +6,7 @@ This stack's bottom layer owns the four selected design-skill copies, names and 
 Preserve unselected v1 behavior; do not restore removed roles through examples, schemas or helper imports. Do not wake Claude agents while the owner's token restriction remains in force.
 Marketplace publication is authorized; design-layout changes are not.
 
-Management has exactly four roles: Lead, Implementer, Operator and Checker. Checker commissions select verification or review duty explicitly; review is independent and read-only. Management owns the owner-selected model map, Exact Steps/Designed Outcome meanings and literal task-span eligibility; Terra high covers Local implementation and Luna high is Operator-only.
+Management has exactly four roles: Lead, Implementer, Operator and Checker. Checker commissions select verification or review duty explicitly; review independently investigates while preserving protected candidates, with writes confined to granted scratch, reports or isolated probes. Management owns the owner-selected model map, Exact Steps/Designed Outcome meanings and literal task-span eligibility; Terra high covers Local implementation and Luna high is Operator-only.
 
 Delegated work-direction calls, including continuations/corrections, contain only role/files. Each recipient reads its own role and current referenced governing sources, resolves/validates rich context and returns exact missing-input gaps. Do not require a newly fabricated full-packet file or introduce a loader/generator. Reports and direct pair exchanges keep their existing contracts; model/effort and transport metadata remain separate.
 

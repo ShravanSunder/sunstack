@@ -78,6 +78,31 @@ export const InspectAndExecuteAccess = z
     "Reads plus the listed commands; the commissioner checks every reported command was listed",
   );
 
+export const ReviewInvestigationAccess = z
+  .strictObject({
+    access: z
+      .literal("review-investigation")
+      .describe("Reviewer-selected investigation preserving the candidate"),
+    protectedTargets: z
+      .array(
+        z.strictObject({
+          location: RequiredText.describe(
+            "The source, build or installed candidate that remains unchanged",
+          ),
+          revision: RequiredText.describe("The declared identity of that protected target"),
+        }),
+      )
+      .min(1)
+      .readonly()
+      .describe("Every protected candidate; parsing does not enforce immutability"),
+    scratchPaths: RepositoryPaths.describe(
+      "Reviewer-owned reports, probes, fixtures, build outputs and isolated copies; never protected candidate writes",
+    ),
+  })
+  .describe(
+    "Independent review investigation within actual host/task authority, without a per-probe command allowlist",
+  );
+
 export const WriteAndExecuteAccess = z
   .strictObject({
     access: z.literal("write-and-execute").describe("Named writes plus granted commands"),
