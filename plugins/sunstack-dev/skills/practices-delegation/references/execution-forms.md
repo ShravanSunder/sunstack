@@ -20,7 +20,7 @@ Keep one current row per Sidekick before any prompt that relies on its history: 
 | --- | --- |
 | reconnect requested, or the local record is missing | find the session for the same worktree and resume it |
 | auth or permission failure | fix it or report blocked; never widen permissions unasked |
-| model rejected or substituted | use the advertised equivalent or report degraded |
+| selected model or effort rejected or substituted | verify the effective model ID and effort, then report any mismatch as a capability gap |
 | provider session limit | reuse or resume; stop creating new ones |
 
 ## Choose the route
@@ -31,7 +31,7 @@ The exact model id follows the exact-id rule in `SKILL.md`.
 - IF Codex spawns a Subagent, load `references/native-providers-codex.md` and return the spawn encoding.
 - IF Claude spawns a Subagent, load `references/native-providers-claude.md` and return the spawn encoding.
 - IF Cursor spawns a Subagent, load `references/native-providers-cursor.md` and return the spawn encoding.
-- IF the host can't run the required model natively (an OpenAI model from a Claude host, for example), run that helper as a Sidekick through agent-router within the commissioner's grant, and return its address. It keeps the bounded job and its ending check.
+- If the selected native form cannot run the required model or meet the assignment's access or history boundary, return that gap to the caller. Use another form only when the assignment's owner or the host's agent-management practice selects it under the same grant.
 - IF agent-router can't meet the model, effort, access or title, report that gap to the commissioner. An access denial needs the grant, not a route switch.
 
 ## Continue

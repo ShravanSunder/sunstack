@@ -12,7 +12,7 @@ Task may omit a sandbox or `workspace_readonly` flag. Do not hop to Cursor CLI t
 
 ## Models
 
-Use the model the delegating skill chose: from the host's agent-management practice when there is one, otherwise the host default. Use native Task when Task can select that model; otherwise run the helper as a Sidekick through agent-router, or report the exact gap. A model the chosen catalog doesn't list needs the owner's explicit, named override; this manual is not one.
+Use the selected model, or the host default when no agent-management practice applies. If Task cannot run that model, return the capability gap under the form-selection rule in `execution-forms.md`. A model outside the catalog needs the owner's explicit, named override.
 
 Resolve the exact id with the exact-id rule in `../SKILL.md`. Treat `agent --list-models` short names as CLI labels, not native Task ids, unless the host requires them.
 

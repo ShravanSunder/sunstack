@@ -158,7 +158,6 @@ Speed may reduce breadth, never honesty about what remains unknown. When the bud
 - `program-design-gap`: return it for settled obligations that require components, interfaces, ownership allocation, or mechanisms, without pathfinding; owner-controlled structural tolerance clarified for this recorded destination returns the same way, without a pathfinding-authored architecture.
 - caller-supplied return destination: for an orchestrated continuation, this exact phase is the only permitted return; a mismatch stops instead of rerouting.
 - `docs-maintain`: maintaining or reformatting settled content in an existing artifact; do not restart extraction when meaning is already accepted.
-- `practices-delegation`: the reader-test dispatch contract in `references/decisions-and-docs.md` owns this call.
 
 ## Completion Blockers
 

@@ -32,6 +32,8 @@ Held, not changed here: the plan format's `originating planner` values (v1 skill
 
 ## Review record
 
-The owner skipped independent design review and reviews the PR directly (2026-11-16). Independent implementation review through `skill-review` has not run.
+On 2026-11-16 the owner skipped independent design review and opted to review the PR directly. The original handoff preceded independent implementation review.
 
 The owner approved the #230 conflict resolution in chat on 2026-11-18. The reconciliation preserves Option B and #230's review and verification contracts.
+
+The 2026-11-18 independent source review found ambiguities in form selection, re-entry, research independence and token routing. The corrections keep selection with the host, preserve the separate native task and Operator paths, and derive routing from the existing correction payload. The plan's stored fields are unchanged.

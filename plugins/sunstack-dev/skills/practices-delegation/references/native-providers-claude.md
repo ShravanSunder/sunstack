@@ -12,7 +12,7 @@ Task / Agent may omit plan-mode or readonly flags. Do not hop to `claude -p --pe
 
 ## Models
 
-Use the model the delegating skill chose: from the host's agent-management practice when there is one, otherwise the host default. A model the host can't run natively, such as an OpenAI model, runs as a Sidekick through agent-router, as `execution-forms.md` says. Resolve the exact id with the exact-id rule in `../SKILL.md`.
+Use the selected model, or the host default when no agent-management practice applies. Resolve the exact id under `../SKILL.md`. If Task / Agent cannot run that model, return the capability gap under the form-selection rule in `execution-forms.md`.
 
 ## Workspace Access
 

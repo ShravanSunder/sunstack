@@ -16,7 +16,7 @@
   "interface": {
     "displayName": "Sunstack Workflow v2",
     "shortDescription": "Editable four-role design and management workflow",
-    "longDescription": "Editable v2 workflow: design-specification, design-program, design-verification, design-review, practices-manage-agents, and Lead, Implementer, Operator and Checker roles. Requires sunstack-dev. Frozen v1 remains the default runtime workflow until base callbacks change.",
+    "longDescription": "Editable v2 workflow: design-specification, design-program, design-verification, design-review, practices-manage-agents, and Lead, Implementer, Operator and Checker roles. Requires sunstack-dev. The host selects the active workflow through its skill index.",
     "developerName": "Shravan Sunder",
     "category": "Developer Tools",
     "capabilities": [

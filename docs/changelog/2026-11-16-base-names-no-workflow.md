@@ -7,6 +7,7 @@
 - Skills no longer name the owner's host configuration: "the host's skill index" and "the host's model map" replace devfiles and machine paths.
 - v2 drops the 55-minute Lead check-in and its release-status text.
 - v2 retains #230's independent-review grant, isolated scratch, original Verifier reporting and source-backed resolution of disputed outcomes.
+- Delegation reuses the host's selection, reports unavailable native capabilities, and preserves independent research counterchecks. Token routing prioritizes design gaps before plan repair.
 - Held: the plan format's `originating planner` values and the Chief of Staff routing in `owner-decision-brief.md`.
 - Design record: `docs/wip/skills-authoring/2026-11-16-v2-base-callbacks/design-set.md`. The owner skipped independent design review.
 - Validation results are in the PR. Installed-agent behavior is unverified. Codex and Claude caches are not refreshed.

@@ -1,6 +1,6 @@
 ---
 name: practices-delegation
-description: "Use when handing part of your work to another agent (a native subagent or a separate session): bounding the job, briefing it, launching, continuing or waiting on it, or checking what it returns. Not for deciding which workflow role or model takes a job."
+description: "Use when preparing a bounded agent handoff, launching a helper, correcting its assignment, or checking its result."
 ---
 
 # Practices: Delegation
@@ -9,7 +9,7 @@ One accountable parent owns each result. Delegating hands a helper a bounded pie
 
 ## Take the role, form and model from the host
 
-IF the host's workflow provides an agent-management practice (one that names roles, who may commission them, a model catalog and launch rules), load it and return the role, form and model it gives for this job. It owns those choices; this practice owns the mechanics below. Without one, use a native subagent of the host on its default model, and say that no catalog applied.
+Use the role, form and model already selected for this assignment. IF the selection is still needed and the host provides an agent-management practice, load it and return its selection or capability gap. It owns the selection. Without a host practice, use a native subagent on the host's default model if it meets the assignment's access and history needs, and report that no catalog applied. Report a capability gap if the host cannot meet those needs.
 
 Resolve an exact model id through the host's model map when the session instructions name one; otherwise use the id the host advertises for the current generation. Never pick an older generation or a `-fast` variant without the owner's say. Report an unavailable model or effort instead of substituting one.
 
@@ -40,7 +40,7 @@ A brief points into its sources instead of retelling them. A helper that finds a
 
 ## Launch, continue and wait
 
-MUST load `references/execution-forms.md` and return the route, the lifecycle and the history boundary for this helper, with the identities you will keep. It owns the two forms (a native subagent, or a separate session through agent-router) and the provider guide for each host. Before work that depends on several helpers, load `practices-preflight` and return launch readiness or the exact gaps.
+MUST load `references/execution-forms.md` and return the route, lifecycle and history boundary for this helper, with the identities you will keep. It owns the two forms (a native subagent, or a separate session through agent-router) and the provider guide for each host. If preflight called this practice to check a route, return the checked route or gap to preflight. IF about to launch dependent work with several helpers and their readiness is unchecked, load `practices-preflight` and return readiness or the exact gaps.
 
 ## Check the result
 

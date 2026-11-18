@@ -45,6 +45,8 @@ Classify the actual assignment. A Cross-system parent may give a helper a Local 
 
 A **Sidekick** is a persistent separately managed session. A **Subagent** is a native child managed by its parent. Worker is only a search/provider synonym. Implementer and both Checker duties remain Sidekick-only; their native tasks do not appoint extra role seats or require standalone role packets, traces or Verifier pairs.
 
+If the host cannot run the selected formal Operator model natively, choose the Operator's Sidekick form through agent-router when the route fits the existing grant.
+
 Lead commissions the owning pair. Create both sessions before starting work, make their addresses available in the governing sources, then send each its role/files call. They exchange setup, reproductions, repairs and rechecks directly. Review stays outside that loop and uses a session with no target-authoring history. A review lead may commission stage Checkers under its review procedure.
 
 An Operator reports observations; its actual commissioner interprets them and owns any repair. Supplied collection criteria may label candidates with uncertainty, but deciding owner intent or product correctness is not collection. Delegate prescribed support when the inexpensive execution is worth the handoff. Proof associated with an agent's own changes remains that agent's responsibility.
@@ -104,6 +106,8 @@ Review Project/Milestone artifacts and affected corrections, not every private i
 
 ## Launch and hand off
 
+If the caller requested only role, form and model selection, return those choices or the capability gap here.
+
 MUST load `sunstack-dev:practices-delegation` and return, through its execution-forms reference, the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. An unavailable model, tool or isolation is a capability gap, not authority to widen access.
 
 ### Formal role commissions
@@ -123,6 +127,8 @@ Launch full investigation through supported `workspace-write` host access, never
 ### Parent-owned native tasks
 
 Implementer and Verifier may decompose independent work without per-child Lead approval or an arbitrary child count. Use a child when its task can be checked independently and the handoff is worthwhile; keep tightly coupled edits with the parent. Give relevant sources, task guidance where applicable, allowed paths/commands, isolation or ordering and an ending check. Choose the model/effort from the relevant catalog and supported host controls; do not paste the catalog or manufacture a formal role packet for the child.
+
+If a parent-owned native task cannot run with the selected model or access, return the capability gap to the parent.
 
 The parent's grant bounds every child. Implementer owns product changes/tests and combined integration proof; Verifier owns permitted observations/apparatus, never product repairs, an altered oracle or independent proof of its own implementation. Keep held-out cases from implementation authors. Parallel checks need isolated fixtures/evidence when they mutate the same state. Host limits still apply; Luna remains Operator-only.
 
