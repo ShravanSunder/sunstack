@@ -1,6 +1,6 @@
 # Research Countercheck
 
-Give one independent checker the load-bearing claims, their primary anchors, exact questions, freshness requirement, and source coverage. Choose a route with history separate from the researcher's conclusions, and send only the claim and evidence brief. If the available route cannot preserve that boundary, record the countercheck gap. The checker returns per-claim evidence for the researcher's synthesis.
+Give one independent checker a brief with the load-bearing claims, their primary anchors, exact questions, freshness requirement, and source coverage. Choose a route with history separate from the researcher's conclusions. Send the brief using the call shape selected by the delegation practice. If the available route cannot preserve that boundary, record the countercheck gap. The checker returns per-claim evidence for the researcher's synthesis.
 
 For each claim:
 

@@ -1,6 +1,6 @@
 ---
 name: practices-delegation
-description: "Use when preparing a bounded agent handoff, launching a helper, correcting its assignment, or checking its result."
+description: "Use when preparing a bounded agent handoff, launching or continuing that assignment, or collecting and checking the helper's result."
 ---
 
 # Practices: Delegation
