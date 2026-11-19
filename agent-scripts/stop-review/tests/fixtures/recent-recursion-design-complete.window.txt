@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Also make sure recursion cannot happen in the stop-review design.
+
+[last] I added controls for evaluator re-entry and repeated Stop callbacks, and added verification cases for both. All five design pages passed lint. Runtime verification belongs to implementation.
+
+Earlier turns follow for context.
+USER TURN 1
+Draft the stop-review design.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] The draft exists. This turn adds the recursion requirement and the checks that will prove it.

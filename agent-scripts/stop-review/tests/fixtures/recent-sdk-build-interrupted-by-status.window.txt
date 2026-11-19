@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+What is the status?
+
+[last] The design is written and reviewed. The prototype proves a typed configuration can reach Rust. Full implementation remains outstanding. The next engineering step is refreshing the design and writing the plan.
+
+Earlier turns follow for context.
+USER TURN 1
+Develop the SDK and take it through the implementation work.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I finished the design review and validated the pages. I have not completed implementation.

@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+In the review of the navigation design, explain more clearly what the registry is.
+
+[last] The registry is the JSON lookup for stable IDs, page destinations and relationships. The HTML owns the full explanation. I added a worked requirement-to-verification example to the option you reviewed.
+
+Earlier turns follow for context.
+USER TURN 1
+Explain this design in the HTML review.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I inspected the registry and navigation example in the reviewed option.

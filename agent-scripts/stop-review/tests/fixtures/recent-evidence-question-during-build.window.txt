@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+The model wanted to stop repeatedly. Does its reason belong in evidence or judgment?
+
+[last] Both. Keep the reason and repeat count as evidence. Judge whether the reason fits the request. A supported reason should allow the first stop and a repeat guard should prevent a loop.
+
+Earlier turns follow for context.
+USER TURN 1
+Add the examples, then build and test the stop-review replacement. Collect recent cases with Luna and include the latest model response in the evidence.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I checked the hook log and started Luna’s case collection. The implementation and case collection are still in progress.
