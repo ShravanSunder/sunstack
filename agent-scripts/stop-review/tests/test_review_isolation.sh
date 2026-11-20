@@ -47,6 +47,7 @@ WORKDIR="$(mktemp -d /tmp/stop-review-isolation.XXXXXX)"
 HOOK_STATE="${WORKDIR}/hook-state"
 RUN_ID="$(basename "${WORKDIR}")"
 export CODEX_STOP_REVIEW_STATE_ROOT="${HOOK_STATE}"
+export CODEX_STOP_REVIEW_BACKEND=luna
 trap 'rm -rf "${WORKDIR}"' EXIT
 
 REVIEWER_HOME="${WORKDIR}/codex-reviewer"
@@ -201,33 +202,63 @@ assert_file_contains "${HOOK_OUT}" "Stop-review classifier:"
 assert_file_not_contains "${FAKE_PROMPT_RECORD}" "Nested stop: true"
 assert_eq "$(jq -r '.block_count' "${HOOK_STATE}/${RUN_ID}-s3/t3.json")" "1" "first continue count"
 
-NESTED_STATUS='No new decision is needed from you. The next step is implement-plan. Finished file delivery is not yet done; input staging is still blocked.'
-nested_continue=1
-while [[ "${nested_continue}" -lt 5 ]]; do
-  printf '%s\n' '{"session_id":"'"${RUN_ID}"'-s3","turn_id":"t3","stop_hook_active":true,"last_assistant_message":"'"${NESTED_STATUS}"'","cwd":"'"${WORKDIR}"'","transcript_path":"'"${TRANSCRIPT}"'"}' \
-    | CODEX_STOP_REVIEW_RUNNER="${FAKE_RUNNER}" \
-      bash "${HOOK}" >"${HOOK_OUT}"
-  assert_file_contains "${HOOK_OUT}" '"decision": "block"'
-  assert_file_contains "${FAKE_PROMPT_RECORD}" "Nested stop: true"
-  assert_file_contains "${FAKE_PROMPT_RECORD}" "Previous continues this turn: ${nested_continue}"
-  assert_file_contains "${FAKE_PROMPT_RECORD}" "Max continues this turn: 6"
-  nested_continue=$((nested_continue + 1))
-  assert_eq "$(jq -r '.block_count' "${HOOK_STATE}/${RUN_ID}-s3/t3.json")" "${nested_continue}" "nested continue count ${nested_continue}"
+# Remove the first dispatch receipt. A second receipt means classification ran again.
+rm -f "${FAKE_PROMPT_RECORD}"
+for active in true false; do
+  jq -n --arg session "${RUN_ID}-s3" --arg transcript "${TRANSCRIPT}" \
+    --arg cwd "${WORKDIR}" --argjson active "${active}" \
+    '{session_id:$session,turn_id:"t3",stop_hook_active:$active,last_assistant_message:"A new reply and tool evidence.",cwd:$cwd,transcript_path:$transcript}' \
+    | CODEX_STOP_REVIEW_RUNNER="${FAKE_RUNNER}" bash "${HOOK}" >"${HOOK_OUT}"
+  assert_file_not_contains "${HOOK_OUT}" '"decision": "block"'
+  if [[ -e "${FAKE_PROMPT_RECORD}" ]]; then
+    FAIL=$((FAIL + 1))
+    printf 'FAIL: repeat Stop dispatched classification (active=%s)\n' "${active}" >&2
+  else
+    PASS=$((PASS + 1))
+  fi
 done
+assert_eq "$(jq -r '.block_count' "${HOOK_STATE}/${RUN_ID}-s3/t3.json")" "1" "at most one continuation"
 
-printf '%s\n' '{"session_id":"'"${RUN_ID}"'-s3","turn_id":"t3","stop_hook_active":true,"last_assistant_message":"'"${NESTED_STATUS}"'","cwd":"'"${WORKDIR}"'","transcript_path":"'"${TRANSCRIPT}"'"}' \
-  | CODEX_STOP_REVIEW_RUNNER="${FAKE_RUNNER}" \
-    bash "${HOOK}" >"${HOOK_OUT}"
-assert_file_contains "${HOOK_OUT}" "safety cap"
-assert_file_not_contains "${HOOK_OUT}" '"decision": "block"'
-assert_eq "$(jq -r '.last_classification' "${HOOK_STATE}/${RUN_ID}-s3/t3.json")" "luna_continue_work" "cap classification"
-assert_eq "$(jq -r '.block_count' "${HOOK_STATE}/${RUN_ID}-s3/t3.json")" "6" "capped continue count"
-
-printf '%s\n' '{"session_id":"'"${RUN_ID}"'-s4","turn_id":"t4","stop_hook_active":true,"last_assistant_message":"The requested work is complete.","cwd":"'"${WORKDIR}"'","transcript_path":"'"${TRANSCRIPT}"'"}' \
-  | CODEX_STOP_REVIEW_RUNNER="${FAKE_STOP_OK_RUNNER}" \
-    bash "${HOOK}" >"${HOOK_OUT}"
+# A different turn can still classify and allow on the first attempt.
+jq -n --arg session "${RUN_ID}-s3" --arg transcript "${TRANSCRIPT}" --arg cwd "${WORKDIR}" \
+  '{session_id:$session,turn_id:"t4",stop_hook_active:false,last_assistant_message:"The requested work is complete.",cwd:$cwd,transcript_path:$transcript}' \
+  | CODEX_STOP_REVIEW_RUNNER="${FAKE_STOP_OK_RUNNER}" bash "${HOOK}" >"${HOOK_OUT}"
 assert_file_contains "${HOOK_OUT}" "{}"
-assert_eq "$(jq -r '.last_classification' "${HOOK_STATE}/${RUN_ID}-s4/t4.json")" "luna_stop_ok" "nested stop_ok classification"
+assert_eq "$(jq -r '.last_classification' "${HOOK_STATE}/${RUN_ID}-s3/t4.json")" "luna_stop_ok" "fresh turn classified"
+
+# Hold one real callback at its backend while a second callback overlaps it.
+OVERLAP_INPUT="${WORKDIR}/overlap.json"
+OVERLAP_READY="${WORKDIR}/overlap-ready"
+OVERLAP_RELEASE="${WORKDIR}/overlap-release"
+OVERLAP_RUNNER="${WORKDIR}/overlap-runner.sh"
+mkfifo "${OVERLAP_RELEASE}"
+cat >"${OVERLAP_RUNNER}" <<EOF
+#!/usr/bin/env bash
+printf 'dispatch\n' >>"${OVERLAP_READY}"
+IFS= read -r -t 10 _ <"${OVERLAP_RELEASE}"
+exec "${FAKE_RUNNER}" "\$@"
+EOF
+chmod +x "${OVERLAP_RUNNER}"
+jq -n --arg session "${RUN_ID}-s3" --arg transcript "${TRANSCRIPT}" --arg cwd "${WORKDIR}" \
+  '{session_id:$session,turn_id:"overlap",stop_hook_active:false,last_assistant_message:"Work remains.",cwd:$cwd,transcript_path:$transcript}' >"${OVERLAP_INPUT}"
+CODEX_STOP_REVIEW_RUNNER="${OVERLAP_RUNNER}" bash "${HOOK}" <"${OVERLAP_INPUT}" >"${WORKDIR}/first-overlap.json" &
+first_pid=$!
+for ((attempt=0; attempt<100; attempt++)); do
+  [[ ! -e "${OVERLAP_READY}" ]] || break
+  sleep 0.02
+done
+if [[ ! -e "${OVERLAP_READY}" ]]; then
+  printf "FAIL: first callback did not reach the backend\n" >&2
+  kill "${first_pid}" 2>/dev/null || true
+  exit 1
+fi
+assert_file_contains "${OVERLAP_READY}" "dispatch"
+CODEX_STOP_REVIEW_RUNNER="${FAKE_RUNNER}" bash "${HOOK}" <"${OVERLAP_INPUT}" >"${HOOK_OUT}"
+printf 'release\n' >"${OVERLAP_RELEASE}"
+wait "${first_pid}"
+assert_file_contains "${HOOK_OUT}" "{}"
+assert_file_not_contains "${HOOK_OUT}" '"decision": "block"'
+assert_file_contains "${WORKDIR}/first-overlap.json" '"decision": "block"'
 
 if [[ "${FAIL}" -ne 0 ]]; then
   printf 'isolation tests: %s passed, %s failed\n' "${PASS}" "${FAIL}" >&2

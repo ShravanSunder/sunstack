@@ -22,15 +22,12 @@ STOP_REVIEW_MODEL="${CODEX_STOP_REVIEW_MODEL:-${STOP_REVIEW_MODEL_DEFAULT}}"
 STOP_REVIEW_REASONING_EFFORT="${CODEX_STOP_REVIEW_REASONING_EFFORT:-${STOP_REVIEW_REASONING_EFFORT_DEFAULT}}"
 STOP_REVIEW_REASONING_SUMMARY="${CODEX_STOP_REVIEW_REASONING_SUMMARY:-${STOP_REVIEW_REASONING_SUMMARY_DEFAULT}}"
 STOP_REVIEW_SERVICE_TIER="${CODEX_STOP_REVIEW_SERVICE_TIER:-${STOP_REVIEW_SERVICE_TIER_DEFAULT}}"
-MAX_CONTINUES="${CODEX_STOP_REVIEW_MAX_CONTINUES:-${STOP_REVIEW_MAX_CONTINUES_DEFAULT}}"
+MAX_CONTINUES=1
 case "${STOP_REVIEW_SERVICE_TIER}" in
   default | off | "")
     STOP_REVIEW_SERVICE_TIER=""
     ;;
 esac
-if ! [[ "${MAX_CONTINUES}" =~ ^[1-9][0-9]*$ ]]; then
-  MAX_CONTINUES="${STOP_REVIEW_MAX_CONTINUES_DEFAULT}"
-fi
 
 extract_json_field() {
   local jq_expression="$1"
@@ -180,33 +177,35 @@ stop_hook_active="$(extract_json_field '.stop_hook_active' || true)"
 last_assistant_message="$(extract_json_field '.last_assistant_message' || true)"
 transcript_path="$(extract_json_field '.transcript_path' || true)"
 
-if [[ -z "${session_id}" ]]; then
-  session_id="unknown-session"
+# The reviewer must never invoke its own classifier. The host sets
+# stop_hook_active on a follow-up after a Stop hook requested continuation.
+if [[ "${CODEX_REVIEWER:-}" == "1" || "${stop_hook_active}" == "true" ]]; then
+  log_message "classification=stop_review_bypass outcome=allow"
+  emit_allow
 fi
 
-if [[ -z "${turn_id}" ]]; then
-  turn_id="unknown-turn"
-fi
-
-if [[ -z "${stop_hook_active}" ]]; then
-  stop_hook_active="false"
+# A stable identity is required to claim exactly one assessment per turn.
+if ! [[ "${session_id}" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ && "${turn_id}" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ ]]; then
+  log_message "classification=missing_stop_identity outcome=allow"
+  emit_allow
 fi
 
 STATE_FILE="${STATE_ROOT}/${session_id}/${turn_id}.json"
 message_hash="$(hash_message "${last_assistant_message}")"
 load_state
 
-if [[ "${CODEX_REVIEWER:-}" == "1" ]]; then
-  save_state "${BLOCK_COUNT}" "codex_reviewer_env" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=codex_reviewer_env block_count=${BLOCK_COUNT} outcome=allow"
+# Respect a block recorded by the previous runtime during a local upgrade.
+if [[ "${BLOCK_COUNT}" -ge "${MAX_CONTINUES}" ]]; then
+  log_message "turn_id=${turn_id} session_id=${session_id} classification=repeat_stop outcome=allow"
   emit_allow
 fi
 
-if [[ "${BLOCK_COUNT}" -ge "${MAX_CONTINUES}" ]]; then
-  warning_message="Stop review hook hit the per-turn safety cap; allowing stop to avoid a continuation loop."
-  save_state "${BLOCK_COUNT}" "safety_cap" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} stop_hook_active=${stop_hook_active} classification=safety_cap block_count=${BLOCK_COUNT} outcome=allow_safety_cap previous_classification=${PREVIOUS_CLASSIFICATION} previous_hash=${PREVIOUS_MESSAGE_HASH}"
-  emit_allow "${warning_message}"
+# The claim survives classifier failure and lasts for this turn. Noclobber
+# acquires it atomically so two callbacks cannot both call the classifier.
+if ! mkdir -p "${STATE_ROOT}/${session_id}" 2>/dev/null ||
+   ! (set -C; : >"${STATE_FILE}.claimed") 2>/dev/null; then
+  log_message "turn_id=${turn_id} session_id=${session_id} classification=stop_claim_unavailable outcome=allow"
+  emit_allow
 fi
 
 if ! command -v python3 >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
@@ -348,12 +347,6 @@ fi
 
 next_block_count=$((BLOCK_COUNT + 1))
 save_state "${next_block_count}" "luna_continue_work" "${message_hash}"
-
-if [[ "${next_block_count}" -ge "${MAX_CONTINUES}" ]]; then
-  warning_message="Stop review hook hit the per-turn safety cap after continue_work; allowing stop to avoid a continuation loop."
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=luna_continue_work block_count=${next_block_count} outcome=allow_safety_cap previous_classification=${PREVIOUS_CLASSIFICATION} previous_hash=${PREVIOUS_MESSAGE_HASH} cot=${COT}"
-  emit_allow "${warning_message}"
-fi
 
 log_message "turn_id=${turn_id} session_id=${session_id} classification=luna_continue_work decision=${DECISION} classifier_backend=${CLASSIFIER_BACKEND} model=${STOP_REVIEW_MODEL} reasoning_effort=${STOP_REVIEW_REASONING_EFFORT} block_count=${next_block_count} outcome=block previous_classification=${PREVIOUS_CLASSIFICATION} previous_hash=${PREVIOUS_MESSAGE_HASH} cot=${COT}"
 emit_block \

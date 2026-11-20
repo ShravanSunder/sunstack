@@ -116,33 +116,36 @@ NOUL_QUESTIONS: dict[NoulName, Noul] = {
     ).to_noul(),
     "explicit_wait": NoulQuestionProps(
         question=(
-            "Is `last_assistant` waiting on inspect/agree, a computer-control or tool permission "
-            "the user has not given, or a saved/verified/active authorized timed wake or listener?"
+            "Does the reason for stopping in `last_assistant` establish that progress on "
+            "the active request is waiting on a prerequisite this assistant cannot satisfy now?"
         ),
         true=(
-            "Wait for you to inspect; no further changes until we agree; computer-control/tool "
-            "denied; may I inspect to finish proof; last_assistant reports a wake/listener "
-            "saved/verified/active. Keep-going and why-stop do not clear a denial. "
-            "A tool call in last_turn_tool_calls is not enough unless last_assistant reports it saved."
+            "The reply reaches a decision the user must make before the work can continue, "
+            "reports a missing permission, or reports that a saved authorized wake or listener "
+            "gates the next check. The blocker applies to this request, and there is no "
+            "independent authorized step that can advance it now. A specific read-only "
+            "clarification that reaches its required user confirmation counts."
         ),
         false=(
-            "I'll set a wake later; leftover defer question; sitrep / on the rails / may I defer X "
-            "while proof or review remains; leftover A vs B after why-stop; confirmation before "
-            "already-ordered implement."
+            "A question the assistant could resolve itself, an optional preference, a promised "
+            "but unsaved wake, a wake mentioned only in tool traffic, or a request to reconfirm "
+            "work already authorized. A reply that names actionable remaining work is not waiting "
+            "on a prerequisite merely because it also asks a question."
         ),
-        state_fields=("latest_user", "last_assistant", "last_turn_tool_calls"),
+        state_fields=("latest_user", "last_assistant", "conversation_window", "last_turn_tool_calls"),
     ).to_noul(),
     "keep_going": NoulQuestionProps(
-        question="Did `latest_user` tell the assistant not to stop, or ask why it stopped / whether it had a question?",
+        question="Does `latest_user` direct this assistant to resume work it stopped or is about to stop?",
         true=(
-            "why did you stop; why are you stopping; you should not stop; don't stop until done; "
-            "did you have a question."
+            "The user directly tells this assistant to continue the active task or challenges "
+            "this assistant for stopping before the authorized task was done."
         ),
         false=(
-            "why are you going off the rails / what's the problem / focus on the PR; "
-            "a new primary inspect or discuss request; an invited pick; a permission wait."
+            "The user is describing or quoting an agent stopping, defining how a stop-review "
+            "classifier should behave, asking a status or design question, or requesting a new "
+            "deliverable that the assistant can complete in its current reply."
         ),
-        state_fields=("latest_user",),
+        state_fields=("latest_user", "conversation_window"),
     ).to_noul(),
     "already_ordered": NoulQuestionProps(
         question=(
@@ -161,17 +164,20 @@ NOUL_QUESTIONS: dict[NoulName, Noul] = {
     ).to_noul(),
     "unfinished_job": NoulQuestionProps(
         question=(
-            "Does `last_assistant` still show unfinished review, implement, prove, unbuilt UI, "
-            "parked lists, or only a recorded decision the user already gave?"
+            "Does the active user request still have a specific authorized obligation "
+            "that this assistant can advance after `last_assistant`?"
         ),
         true=(
-            "Remaining review/docs/proof; unbuilt UI; parked pending-prompt lists; "
-            "how-question answered with a recommendation; yes C is recorded while review remains; "
-            "inventory done but no production fix yet."
+            "Earlier user instructions authorize concrete work that this reply has not delivered. "
+            "A sidebar, status answer, plan, or affirmation may be complete while the original "
+            "deliverable still has actionable work. A design alone is incomplete when the user "
+            "requested implementation."
         ),
         false=(
-            "Current job is done in last_assistant; last_assistant delivered the invited pick or "
-            "explicit wait; a saved/verified wake now gates the next check."
+            "The final reply delivered the requested result at the requested scope. Work in a "
+            "later phase, optional improvements, or another agent's work is outside this "
+            "assistant's remaining obligation. A completed design is complete when only design "
+            "was requested. A real owner decision or permission can block further progress."
         ),
         state_fields=("latest_user", "last_assistant", "conversation_window"),
     ).to_noul(),
@@ -209,11 +215,19 @@ NOUL_QUESTIONS: dict[NoulName, Noul] = {
     ).to_noul(),
     "user_wants_explanation": NoulQuestionProps(
         question=(
-            "Did `latest_user` ask to understand a named option or diagram, and is `last_assistant` explaining "
-            "rather than presenting a determining pick?"
+            "Does an identifiable part of the user's requested explanation remain "
+            "unanswered across `conversation_window` through `last_assistant`?"
         ),
-        true="I understand C, I don't understand A; more diagrams; explanation without which-do-you-want.",
-        false="Invited pick with named choices; keep-going; job done; leftover quiz after yes.",
+        true=(
+            "The user asked to understand something specific, and none of the replies "
+            "through the latest one explained that part."
+        ),
+        false=(
+            "The user has already received the requested explanation, even if the last "
+            "reply summarizes earlier work or identifies a user decision. Optional "
+            "elaboration is not an unanswered part of the request."
+        ),
+        state_fields=("latest_user", "last_assistant", "conversation_window"),
     ).to_noul(),
     "open_how_recommendation": NoulQuestionProps(
         question=(

@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Independently review the proposed change and hand the verdict back to the lead.
+
+[last] Review complete. I delivered the findings and a changes-requested verdict. The lead owns the disposition and whether to proceed.
+
+Earlier turns follow for context.
+USER TURN 1
+Stay within the independent review assignment.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I inspected the patch and prepared the review findings.

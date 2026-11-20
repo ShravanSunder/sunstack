@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Use the clarification skill to agree what session evidence should contain before changing the design.
+
+[last] The current design bundles the agreed approach and the assistant’s working plan. I showed the difference with an example. Should the evidence include only the agreed approach, or also the assistant’s working plan as context?
+
+Earlier turns follow for context.
+USER TURN 1
+Add good and bad evidence examples and preserve how we agreed to do the work.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I started to outline the examples. The clarification phase is read-only and asks us to settle the disputed meaning first.
