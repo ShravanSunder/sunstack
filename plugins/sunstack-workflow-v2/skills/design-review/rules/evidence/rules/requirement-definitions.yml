@@ -1,28 +1,371 @@
+# Definitions and passages read by the requirement coverage rules.
+# A definition is a unit that carries its own id; a passage is a unit read when
+# it mentions an id (the kinds filter passages with `containing`).
+
 # A requirement definition on an HTML Requirements page: any element whose own
 # id attribute is a requirement id, such as <tr id="U1"> or <section id="U3">.
 id: html-requirement-definition
 language: Html
+files: ["**/requirements.html"]
 rule:
   kind: element
   regex: '^<[a-zA-Z][a-zA-Z0-9-]*(?:\s+[^>]*?)?\sid=["'']U[0-9]+["'']'
 ---
-# A whole HTML page, read for requirement id mentions.
-id: html-whole-page
-language: Html
-rule: {kind: document}
----
 # A requirement definition in a Markdown Requirements source: a table row whose
-# first cell is the id (| U1 | ...) or a level 2-6 heading that starts with it.
+# first cell is the id, or a level 2-6 section whose heading starts with it.
 id: markdown-requirement-definition
 language: Markdown
+files: ["**/requirements.md"]
 rule:
   any:
     - kind: pipe_table_row
       regex: '^\|\s*\**U[0-9]+\**\s*\|'
-    - kind: atx_heading
+    - kind: section
       regex: '^#{2,6}\s+\**U[0-9]+\b'
 ---
-# A whole Markdown source, read for requirement id mentions.
-id: markdown-whole-page
+# An obligation definition on an HTML Specification page: an element whose own
+# id is an obligation id (R1, R3a).
+id: html-obligation-definition
+language: Html
+files: ["**/specification.html"]
+rule:
+  kind: element
+  regex: '^<[a-zA-Z][a-zA-Z0-9-]*(?:\s+[^>]*?)?\sid=["'']R[0-9]+[a-z]?["'']'
+---
+# An obligation definition in a Markdown Specification: a table row whose first
+# cell starts with the id (| R1 | or | R1 · title |), a list item that starts
+# with it (- **R1.** ...), a level 2-6 section whose heading starts with it, or a
+# paragraph that opens with the bold id (**R17 — title** (U16).), whose body is
+# the list after it (collected by the obligation kind's `next` field).
+id: markdown-obligation-definition
 language: Markdown
+files: ["**/specification.md"]
+rule:
+  any:
+    - all:
+        - kind: pipe_table_row
+          regex: '^\|\s*\**R[0-9]+[a-z]?\b'
+        # A range row (| R19–R20 … |) covers several obligations and defines none.
+        - not:
+            regex: '^\|\s*\**R[0-9]+[a-z]?\s*[–-]'
+        # A proof table lists how obligations are proven, not the obligations: a table
+        # whose second header cell starts with Evidence or Proof, or a table under a
+        # heading that starts with Proof (## Proof obligations, ## 6. Proof).
+        - not:
+            inside:
+              kind: pipe_table
+              has:
+                kind: pipe_table_header
+                regex: '^\|[^|]*\|\s*\**(Evidence|Proof)\b'
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                kind: atx_heading
+                regex: '^#{2,6}\s+([0-9]+\.\s*)?Proof\b'
+    - all:
+        - kind: list_item
+          regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^[-*+]\s+\**R[0-9]+[a-z]?\s*[–-]'
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: section
+          regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: paragraph
+          regex: '^\**R[0-9]+[a-z]?(\.|\*\*|:|\s\(|\s—)'
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+---
+# Every obligation unit in a Markdown Specification, as read in a list: each
+# definition above, plus the list that follows a bold-id paragraph definition.
+id: markdown-obligation-unit
+language: Markdown
+rule:
+  any:
+    - all:
+        - kind: pipe_table_row
+          regex: '^\|\s*\**R[0-9]+[a-z]?\b'
+        # A range row (| R19–R20 … |) covers several obligations and defines none.
+        - not:
+            regex: '^\|\s*\**R[0-9]+[a-z]?\s*[–-]'
+        # A proof table lists how obligations are proven, not the obligations: a table
+        # whose second header cell starts with Evidence or Proof, or a table under a
+        # heading that starts with Proof (## Proof obligations, ## 6. Proof).
+        - not:
+            inside:
+              kind: pipe_table
+              has:
+                kind: pipe_table_header
+                regex: '^\|[^|]*\|\s*\**(Evidence|Proof)\b'
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                kind: atx_heading
+                regex: '^#{2,6}\s+([0-9]+\.\s*)?Proof\b'
+    - all:
+        - kind: list_item
+          regex: '^[-*+]\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^[-*+]\s+\**R[0-9]+[a-z]?\s*[–-]'
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: section
+          regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+        - not:
+            regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: paragraph
+          regex: '^\**R[0-9]+[a-z]?(\.|\*\*|:|\s\(|\s—)'
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+        # Inside a section whose heading starts with one id (### R1. title), the section
+        # is the definition; an item or paragraph repeating the id inside it is not another.
+        - not:
+            inside:
+              kind: section
+              stopBy: end
+              has:
+                all:
+                  - kind: atx_heading
+                  - regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\b'
+                  - not:
+                      regex: '^#{2,6}\s+\**R[0-9]+[a-z]?\s*[–-]'
+    - all:
+        - kind: list
+        - follows:
+            kind: paragraph
+            regex: '^\**R[0-9]+[a-z]?(\.|\*\*|:|\s\(|\s—)'
+---
+# A Markdown list, read as the body that follows a bold-id paragraph definition.
+id: markdown-list
+language: Markdown
+rule:
+  kind: list
+---
+# A proof obligation (V) on an HTML Specification page.
+id: html-proof-obligation
+language: Html
+rule:
+  kind: element
+  regex: '^<[a-zA-Z][a-zA-Z0-9-]*(?:\s+[^>]*?)?\sid=["'']V[0-9]+[a-z]?["'']'
+---
+# A proof obligation (V) in a Markdown Specification: a row, list item or section
+# that starts with the id, or a paragraph that does (V1 decides R1 ...).
+id: markdown-proof-obligation
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_row
+      regex: '^\|\s*\**V[0-9]+[a-z]?\b'
+    - kind: list_item
+      regex: '^[-*+]\s+\**V[0-9]+[a-z]?\b'
+    - kind: section
+      regex: '^#{2,6}\s+\**V[0-9]+[a-z]?\b'
+    - all:
+        - kind: paragraph
+          regex: '^\**V[0-9]+[a-z]?\b'
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+---
+# A passage on an HTML page: a table row, list item, paragraph or definition.
+id: html-passage
+language: Html
+rule:
+  kind: element
+  regex: '^<(tr|li|p|dd|dt)\b'
+---
+# A passage in a Markdown page: a table row, a list item, a paragraph that is
+# not inside a list item (the list item already carries it), or a section whose
+# own heading names an obligation id, such as
+# "## Account actions from quota Details (R17)", whose body may not repeat it.
+id: markdown-passage
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_row
+    - kind: list_item
+    - all:
+        - kind: section
+        - has:
+            kind: atx_heading
+            regex: '\bR[0-9]+[a-z]?\b'
+    - all:
+        - kind: paragraph
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+---
+# A row-level passage in a Markdown page: a table row, a list item, or a paragraph
+# not inside a list item. Unlike markdown-passage it never takes a whole section,
+# so a trace or seam read stays at the row that names the id.
+id: markdown-row-passage
+language: Markdown
+rule:
+  any:
+    - kind: pipe_table_row
+    - kind: list_item
+    - all:
+        - kind: paragraph
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+---
+# A Program Design trace row in HTML: a table row that names an obligation id.
+# C003 reads every such row, so each serving obligation's seam is in state
+# whether or not the row also names the requirement.
+id: html-trace-row
+language: Html
+rule:
+  all:
+    - kind: element
+      regex: '^<tr\b'
+    - regex: '\bR[0-9]+[a-z]?\b'
+---
+# A Program Design trace row in Markdown: a table row that names an obligation id.
+id: markdown-trace-row
+language: Markdown
+rule:
+  all:
+    - kind: pipe_table_row
+    - regex: '\bR[0-9]+[a-z]?\b'
+---
+# A Markdown paragraph that can lead a realization block (not inside a list item).
+id: markdown-block-lead
+language: Markdown
+rule:
+  all:
+    - kind: paragraph
+    - not:
+        inside:
+          kind: list_item
+          stopBy: end
+---
+# A Markdown list item that can lead a run of sibling items.
+id: markdown-item-lead
+language: Markdown
+rule:
+  kind: list_item
+---
+# Where an attached Markdown block ends: the next bold-lead paragraph
+# (**D11 — …**) or bold-lead list item. Headings end a block on their own.
+id: markdown-block-boundary
+language: Markdown
+rule:
+  any:
+    - all:
+        - kind: paragraph
+        - regex: '^\*\*'
+    - all:
+        - kind: list_item
+        - regex: '^[-*+]\s+\*\*'
+---
+# A Mermaid diagram in a Markdown page (a component or flow drawing whose nodes
+# can name the modules that realize an obligation).
+id: markdown-diagram
+language: Markdown
+rule:
+  kind: fenced_code_block
+  regex: '^```mermaid'
+---
+# Prose on an HTML Verification page: paragraphs, list items and definitions,
+# where shared observations and checks sections live (not table rows).
+id: html-verification-prose
+language: Html
+rule:
+  kind: element
+  regex: '^<(li|p|dd|dt)\b'
+---
+# Prose in a Markdown Verification page: list items, and paragraphs not inside a
+# list item (shared observations such as "- **S1. …**" or "Shared observation J1 is …").
+id: markdown-verification-prose
+language: Markdown
+rule:
+  any:
+    - kind: list_item
+    - all:
+        - kind: paragraph
+        - not:
+            inside:
+              kind: list_item
+              stopBy: end
+        - not:
+            inside:
+              kind: pipe_table
+              stopBy: end
+---
+# A whole HTML Requirements page, for the page-presence rules.
+id: html-requirements-page
+language: Html
+files: ["**/requirements.html"]
 rule: {kind: document}
+---
+# A whole Markdown Requirements page, for the page-presence rules.
+id: markdown-requirements-page
+language: Markdown
+files: ["**/requirements.md"]
+rule: {kind: document}
+---
+# An HTML page's title, read for page presence. A page that exists yields an
+# available list (empty if it has no title); an absent page yields none. The
+# title is small, so the field is never cut the way a whole page is.
+id: html-page-presence
+language: Html
+rule:
+  kind: element
+  regex: '^<title\b'
+---
+# A Markdown page's level-1 heading, read for page presence in the same way.
+id: markdown-page-presence
+language: Markdown
+rule:
+  kind: atx_heading
+  regex: '^#\s'

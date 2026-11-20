@@ -1,41 +1,58 @@
-# Requirement coverage nudge
+# Requirement coverage nudges
 
-These twelve mechanical rules (six per format) collect every requirement id defined on a design set's Requirements page and warn once per id for each of the Specification, Program Design and Verification Design pages that never names it, on the requirement's definition. A page that is absent gets one warning for the set, on the Requirements page, and its per-requirement checks are skipped. Each warning is worth checking, not a failure: an id that appears does not prove the need is addressed, and an id that is missing does not prove it isn't. Read [reviewing-four-document-design.md](../references/reviewing-four-document-design.md#requirement-to-observation) before changing a page. The standards each rule approximates are in [requirement-coverage.md](requirement-coverage.md).
+Seven rules per format (HTML and Markdown) follow the chain [reviewing-four-document-design.md](../references/reviewing-four-document-design.md#requirement-to-observation) walks from a requirement to its observation. The standards are in [requirement-coverage.md](requirement-coverage.md). Every result is worth checking, not a verdict on the design.
+
+| Rule | Piece | What a model reads | Asks |
+| --- | --- | --- | --- |
+| C001 Specification | each requirement | its text and every Specification obligation | do the obligations state behavior for every outcome and limit it asks of the system? |
+| C002 Program Design | each obligation | its text (and list body) and the Program Design passages that name it | does a passage name an owner and an interface or flow that carry it out? |
+| C003 Verification Design (cited chain) | each requirement | the obligations, the V items, and its own Verification and trace rows | is every obligation that cites it accounted for; do those observations keep their V's threshold, reference and target at the declared seam? (in that order). Its pass covers only obligations that cite the requirement |
+| C007 Verification Design (uncited) | each requirement | the obligations, its own Verification rows and the page's shared observations | is every obligation that serves it without citing it accounted for? Warns on a clear no and is otherwise `uncertain`; it never passes, because whether an uncited obligation serves a requirement is a line independent labellers drew differently |
+| C004–C006 | each Requirements page | whether each sibling page exists | mechanical: one warning per absent page |
+
+Ids are link data in every request, but the model judges meaning: an obligation that serves a requirement without citing its id counts (C001, C007), and a coverage-table row that only lists ids does not. C003 and C007 count only the requirement's own Verification rows; an observation listed under another requirement doesn't account for it. An absent page gets one warning; its requirement checks end `not_applicable`.
+
+**Not checked:** an obligation that serves a requirement without citing its id is checked only for whether its own Verification rows account for it (C007). Whether its observation keeps its V's threshold, reference and target, and sits at the declared seam, is not checked by any rule: C003 checks those only for cited obligations.
 
 ## What it reads
 
-A design set is one folder holding the four pages, all HTML or all Markdown. The names come from `sunstack-dev/shared-references/design-documents.md`, plus `verification-design` as the Verification Design name that real sets use; the first name that exists is read:
+A design set is one folder holding `requirements`, `specification`, `program-design` and `verification` (or `verification-design`), all `.html` or all `.md`.
 
-```text
-requirements.html     specification.html     program-design.html     verification.html | verification-design.html
-requirements.md       specification.md       program-design.md       verification.md   | verification-design.md
-```
+- **Requirement definitions:** an HTML element whose own `id` is `U<n>`; a Markdown table row whose first cell is the id, or a section whose heading starts with it.
+- **Obligation definitions:** an HTML element whose own `id` is `R<n>`; in Markdown, a table row whose first cell starts with the id (`| R1 |`, `| R1 · title |`), a list item (`- **R1.** …`), a section heading, or a paragraph that opens with the id (`**R17 — title** (U16).`, `R15 (U15): …`) whose list body follows it. Three things that start with an id are not definitions:
+  - a range row or item (`| R19–R20 … |`);
+  - a row of a proof table, meaning a table whose second header cell starts with Evidence or Proof, or a table under a heading that starts with Proof (`## Proof obligations`, `## 6. Proof`);
+  - an item or paragraph repeating the id inside a section whose heading starts with it (`### R1. title`), where the section is the definition.
 
-A requirement definition is:
+  An obligation stated once and elaborated later under a heading that starts with the same id still gives two pieces; telling which one is the definition needs a one-piece-per-id rule the engine doesn't have.
+- **V items:** the same shapes with `V<n>`, plus a paragraph that opens with one (`V1 decides R1 …`). A V stated inside the obligation's own passing condition is read there.
+- **Passages:** table rows, list items, paragraphs, and Markdown sections whose heading names an obligation id.
 
-- on an HTML page, any element whose own `id` attribute is a requirement id, such as `<tr id="U1">`, `<section id="U3">` or `<aside class="design-item" id="U4">`; `data-id`, `href="#U1"` and text that only mentions an id are not definitions;
-- in a Markdown source, a table row whose first cell is the id (`| U1 | ... |`, bold allowed) or a level 2 to 6 heading that starts with it (`## U2 — ...`).
-
-A page names an id when the id occurs anywhere in its source as a whole token: `U1` counts in `(U1)`, `U1, U2` and `requirements.html#U1`, but not in `U10` or `XU1`.
-
-## What it doesn't read
-
-- **An absent page is not a coverage gap.** Its one warning says the page isn't beside the Requirements page; if it isn't written yet, name it once as not yet written. Its per-requirement checks end `not_applicable`. A page that exists but can't be read stays `incomplete` and is not replaced by another name.
-- **Other file names.** Only the names above are read; any other name reads as an absent page.
-- **Other layouts and markup.** A chunked set (one folder per document), definitions inside a Markdown island of an HTML page, or Markdown carried in a JSON string select no definitions, so nothing is checked and nothing warns. Zero results on a Requirements page means its definitions weren't read, not that coverage is complete.
+Not read: chunked sets (one folder per document), definitions inside Markdown islands or JSON strings, and several requirement definitions on one source line (a minified page) when used as cases. Program Design that names requirements but never obligation ids gives C002 no passages to read until the engine can list the ids an obligation cites.
 
 ## Run it
 
-From this repository root, name the design set's folder (no model key needed):
+C001–C003 and C007 ask the decision model (`jev-latest`), so a run needs the authorized model credential route; never supply a stand-in key. From this repository root, name the design set's folder:
 
 ```sh
-pnpm dlx @sunstack/cli@0.20.1 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-13-example
+pnpm dlx @sunstack/cli@0.22.2 lint --config plugins/sunstack-workflow-v2/skills/design-review/rules/requirement-coverage.config.json ./docs/specs/2026-11-14-example
 ```
 
-From another project, use that installed skill's absolute `rules/requirement-coverage.config.json` path after `--config`, and add `--root "$PWD"`. Named paths resolve from your current directory. `--report <file>` keeps every result with its line. Read the findings, not the exit code: warnings come with exit 0; exit 3 means a present page couldn't be read. No page is changed.
+The config sets `limits.max_input_tokens_per_request` to 64000 (Lead-approved, 14 Nov 2026). The engine estimates about one token per character, and C003's and C007's requests carry the whole obligation list, so the default 32000 refused requests from about 32.9k characters. The largest prepared request on the development cases is 54.4k characters.
+
+To see what each request would carry without sending anything, add `--prepare <file>` and read one request with `lint show <file> <id>`. From another project, use the installed skill's absolute config path and add `--root "$PWD"`. Warnings come with exit 0; `uncertain` results (exit 5) mean the model's answer fell between the bars and are worth reading too.
 
 ## Proof
 
-The integration test `tests/skills/tests/integration/requirement-coverage.test.ts` runs the pinned CLI on small HTML and Markdown sets: every page names every id, one page misses an id, look-alike ids (`U20`, `XU2`, `data-id`) don't count, a `verification-design` page in both formats, and an absent page. On 14 Nov 2026 the rules were rerun on the three frozen design sets from the requirement-coverage experiment whose definitions this markup reads (document browsers in HTML; OAuth routing and TUI components in Markdown), under their real file names: all 86 requirement/page pairs matched that experiment's exact-id reference, 74 covered and 12 missing, and OAuth's absent Verification Design gave one warning with its 13 requirement checks skipped. Its fourth set keeps its Requirements as Markdown in a JSON string and was not read.
+`tests/skills/tests/integration/requirement-coverage.test.ts` proves the collection without a model: the rule list, and on small HTML and Markdown sets that each prepared request carries its requirement's own passages (and not a look-alike id's), every definition shape above, and one warning for an absent page. Whether the questions decide well is measured on independently labelled cases from real design sets and built controls, prepared and desk-checked before any run, then reviewed before any answer is requested.
 
-This pins CLI 0.20.1, which reads candidate page names and routes an absent page; the shared skill-rule test engine remains on 0.9.0.
+**Bars (P(yes), inclusive).** C001, C002 and C007 are frozen from the round-8 development answers (instrument `70b18679`, sunstack 0.22.2, `typesafe/jev-1.14-20261014`, 14 Nov 2026; costs false warning 1, miss 2, uncertain 0.5). Where two bars cost the same, the one with no false warning was taken.
+
+| Rule | yes ≥ | no ≤ | Development result | Set by | Named misses |
+| --- | --- | --- | --- | --- | --- |
+| C001 | .35 | .15 | 13 cases: 11 right, 0 false warnings, 0 misses, 2 uncertain | highest warn below the no-bar .12; lowest pass above the yes-bar .38 | cov-27 (pass, .18) and cov2-05 (warn, .19) are inverted by .01, so both stay uncertain |
+| C002 | .45 | .15 | 26 cases: 21 right, 0 false warnings, 1 miss, 4 uncertain | highest warn below the no-bar .14; the warn at .42 sits just under the yes-bar; lowest pass above it .47 | R2 (adjudicated warn) answers .71, a confident miss |
+| C007 | unused | .35 | 8 cases: 2 warnings, 6 abstentions, 0 false warnings | warns at .29 and .31; lowest abstention .41 | none |
+| C003 | .70 | .30 | provisional, **not frozen** | — | its accounting question absorbs threshold and seam failures, so warns land on the wrong question; it is being redesigned |
+
+C001 and C002 also go to one held-out run, which the label holder scores. **C007 has no held-out labels, so it ships on development evidence only**, and both of its warn cases are built controls. These are selected development cases, not an accuracy rate; how an agent acts on a nudge is unobserved.
