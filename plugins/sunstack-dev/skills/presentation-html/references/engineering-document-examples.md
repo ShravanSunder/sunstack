@@ -1,5 +1,7 @@
 # Worked engineering-page compositions
 
+For a queued-job cancellation design, show the person submitting and cancelling a job in a short sequence diagram. Use a table for what happens when cancellation or claiming wins. Draw the worker and storage boundary in Program Design, and link the verification table to the deciding observations and their source. If the reader must decide how cancellation should behave, use Choice with Details. For a settled answer, explain the rule and link to the decision. Give each passage a stable ID so a project view or walkthrough can lead the reader back to it.
+
 These small examples show how to place content, not a fixed template for every document. Read the matching component reference from the page's bound Demistify guide before using its syntax. The examples use a generic queued-job service and do not prescribe that architecture to another project.
 
 Each contract-specific passage below is illustrative. Use its condition and outcome only when the supplied owner-approved contract supports them; keep a different supplied policy intact and adapt or omit the example rather than treating the queued-job case as authority.

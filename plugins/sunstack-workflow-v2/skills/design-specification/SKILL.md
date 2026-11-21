@@ -259,6 +259,8 @@ Author top-down: begin with the smallest Why/What map a human needs to confirm t
 
 In a file-backed set, use `sunstack-dev:presentation-html` to author Requirements and Specification as distinct complete HTML documents, with ordinary prose, sections, diagrams and tables suited to their reader questions. The Requirements page owns each need, its authority and any confirmed capability grouping; the Specification owns entity meaning and observable obligations. Give needs, rules and shared concepts stable section targets and useful direct trace links.
 
+IF the set uses typed design records, give each authorized need and observable rule a stable ID. Link the typed record to its reviewed HTML passage and record the governing needs, decisions and assumptions. Use the shared Map for reader concerns and the existing presentation route for forms.
+
 Trace links to needs, rules and shared concepts resolve to their authoritative passages.<!-- D004 -->
 
 Write `index.html` when this run starts the set and link the documents that exist, with the design-item list in rank order. Keep unanswered owner questions visible, with comparisons/choices only when an answer is needed and Comments for discussion. Use the composition recipe's worked examples. For a new HTML set, follow that recipe's shared navigation preflight and return the real descriptor, page and target identities plus actual check/delivery result; the matching guide owns the JSON schema. Apply only a selected component's actual data/preparation contract, including call stacks when relevant, then run the matching static check.
