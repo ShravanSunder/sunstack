@@ -18,7 +18,7 @@ Follow the guide's own conditional references for the content you actually displ
 
 ## Make opening and updates concrete
 
-Name the original authoring sources and the actual reader files. An inline page needs no Markdown embedding. Relative source/data fetches require HTTP serving or the guide's documented preparation; direct-file delivery must not depend on blocked sibling fetches. Offline/private delivery needs the complete matching local library, not merely embedded prose.
+Name the original authoring sources and the actual reader files. An inline page needs no Markdown embedding. For interactive review of a page with relative Markdown or JSON, use loopback HTTP and return the working address. Use the binding's preview command when available. For a double-click handoff, follow the binding's preparation and check that the reader has no required sibling fetches. Offline/private delivery needs the complete matching local library, not merely embedded prose.
 
 For a generated or embedded reader, retain its original source wrapper and referenced originals; update those and regenerate through the matching guide's procedure. A missing `src` in generated output is not proof of inline authorship. Never repair generated reader text in place while its owning source remains stale.
 
