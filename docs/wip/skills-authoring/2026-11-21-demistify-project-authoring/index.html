@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teach agents to use Demistify project views</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Teach agents to use Demistify project views</h1>
+    <p>An agent follows the type-checked record to the reviewed passage. A reader follows the same links from the project overview. The proposal teaches each step where the agent already works.</p>
+    <ex-flow cols="2" data-width="reading" aria-label="From the design phase to the reader">
+      <ex-card id="phase" title="Design phase" tone="note"><p>Define the record and link its stable ID to the reviewed page.</p></ex-card>
+      <ex-card id="presentation" title="Presentation" tone="note"><p>Choose the view that answers the reader's question and load the matching Demistify guide.</p></ex-card>
+      <ex-card id="authoring" title="Demistify authoring" tone="note"><p>Check the registered project and refresh the generated views when publishing the reader.</p></ex-card>
+      <ex-card id="reader" title="Project reader" tone="note"><p>Find the open decision or blocked deliverable and follow it to the explanation.</p></ex-card>
+      <ex-arrow from="phase" to="presentation"></ex-arrow>
+      <ex-arrow from="presentation" to="authoring"></ex-arrow>
+      <ex-arrow from="authoring" to="reader"></ex-arrow>
+    </ex-flow>
+    <p>Review the <a href="#requirements">requirements</a>, <a href="#specification">specification</a>, <a href="#skill-design">skill changes</a> and <a href="#verification">verification cases</a>.</p>
+    <ex-markdown id="requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+</body>
+</html>
