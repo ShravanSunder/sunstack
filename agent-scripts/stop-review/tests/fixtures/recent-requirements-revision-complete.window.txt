@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Make the real requirement explicit. Codex should not stop after incidental questions while authorized work remains. The continuation should ask whether the user request has been satisfied.
+
+[last] I updated the requirement, specified deterministic evidence gathering and one Jev assessment batch, and added the question-led continuation prompt. The verification design covers incidental questions and real approval gates. All five design pages passed lint.
+
+Earlier turns follow for context.
+USER TURN 1
+Explain how the evidence and decision tree tie back to the requirements.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I used the active-request requirement to revise the specification and its verification cases.

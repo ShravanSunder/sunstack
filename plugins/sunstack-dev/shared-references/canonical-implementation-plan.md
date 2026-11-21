@@ -68,12 +68,12 @@ Every plan includes its result, governing basis, delivery context, planned-at br
 
 ## Preserve and Admit
 
-Producers verify every field before returning. Carriers preserve the record unchanged and never repair a mismatch. A missing path, later meaning change, stale governing basis, incomplete delivery context, or missing required field is a blocking discrepancy. A correction to an existing ready plan goes to `sunstack-workflow-v1:plan-update`, whatever the plan's origin. A genuine gap in Requirements, Specification, Program Design or Verification Design goes to its semantic owner first, then to `sunstack-workflow-v1:plan-update`.
+Producers verify every field before returning. Carriers preserve the record unchanged and never repair a mismatch. A missing path, later meaning change, stale governing basis, incomplete delivery context, or missing required field is a blocking discrepancy. A correction to an existing ready plan returns `plan-defect`, whatever the plan's origin. A genuine gap in Requirements, Specification, Program Design or Verification Design returns its gap token from `phase-return-tokens.md` first, then `plan-defect`.
 
 An executor returns exactly one:
 
 - `admit`: result is `ready`; terminal is `pr-ready-unmerged`; the plan resolves; opened plan, governing basis, and delivery context agree; authority and repository source remain current; and no real design, proof, authority, or environment blocker is open.
-- `route`: result is `revision-requested`; return its exact correction without execution depth, to `sunstack-workflow-v1:plan-update` when an existing ready plan stands, or to the semantic or planning owner its payload names.
+- `route`: result is `revision-requested`. Return the exact correction without execution depth. When it identifies a design gap, return the corresponding gap token first. For a correction to an existing ready plan, return `plan-defect` once any design gap is resolved. For other corrections, return the correction and its owning planning action to the caller.
 - `blocked`: result is `blocked`, terminal is `plan-only`, plan identity is absent, or any record/basis/context/current-source check fails; return the exact discrepancy and owner.
 
 Validation, handoff, tickets, tracker state, or plan completion never upgrade the requested terminal or repair the canonical record.

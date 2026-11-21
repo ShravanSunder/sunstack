@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Explore replacing stop review with the Sunstack SDK and discuss how the rollout should work.
+
+[last] The SDK provides the pieces to build it. We have a behavior decision to make first. Should the cutover preserve the current stop policy or change it at the same time? I recommend preserving it first so we can compare results.
+
+Earlier turns follow for context.
+USER TURN 1
+Look into the current integration and how a switch would work.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I traced the current classifier and the proposed SDK path.

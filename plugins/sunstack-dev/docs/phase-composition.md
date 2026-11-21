@@ -23,7 +23,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | orchestrator-implementation-goal | 53 | `practices-manage-agents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
 | debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
-| discuss-pathfinding | 189 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | none |
+| discuss-pathfinding | 188 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | `program-design-gap`, `verification-design-gap`, `specification-gap` |
 | docs-maintain | 121 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
 | implement-plan | 46 | `canonical-implementation-plan`, `execution-and-proof`, `sunstack-dev:practices-preflight`, `sunstack-dev:practices-verification` | `practices-manage-agents`, `implementer-verifier-pairing`, `sunstack-dev:practices-cleanup` | none | none |
 | implementation-handoff | 96 | `handoff-template`, `copy-paste-prompts` | `canonical-implementation-plan` | none | none |
@@ -168,7 +168,7 @@ flowchart LR
 - Loads when a condition holds:
   - practice: `practices-cleanup`
   - own reference: `references/background-monitoring.md`
-- Named without a load call: `practices-show-me-your-work`, `docs-maintain`
+- Named without a load call: `practices-show-me-your-work`, `practices-delegation`, `docs-maintain`
 - Cites in `SKILL.md`: `principle-refine-mental-models`, `principle-read-ground-truth-first`
 - Cites in its references: none
 - Returns: none
@@ -187,7 +187,7 @@ flowchart LR
 
 ### discuss-pathfinding
 
-- Lines: 189
+- Lines: 188
 - Always loads:
   - own reference: `references/question-craft.md`, `references/decisions-and-docs.md`
 - Loads when a condition holds:
@@ -196,7 +196,7 @@ flowchart LR
 - Named without a load call: `practices-show-me-your-work`, `practices-research`, `discuss-clarify-mental-models`, `presentation-tui`, `presentation-webui`, `docs-maintain`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
-- Returns: none
+- Returns: `program-design-gap`, `verification-design-gap`, `specification-gap`
 
 ### docs-maintain
 
@@ -207,7 +207,7 @@ flowchart LR
   - shared reference: `../../shared-references/owner-decision-brief.md`, `../../shared-references/humanizer.md`, `../../shared-references/diagram-rendering-and-fallbacks.md`
   - own reference: `references/workflows.md`, `references/changelog-runbooks.md`
   - outside this plugin: `../../docs/source-inspiration-catalog.md`
-- Named without a load call: `practices-show-me-your-work`, `debug-investigation`
+- Named without a load call: `practices-show-me-your-work`, `debug-investigation`, `../../shared-references/phase-return-tokens.md`, `practices-delegation`
 - Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none

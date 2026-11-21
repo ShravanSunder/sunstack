@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practices: Delegation"
+  short_description: "Bound, brief, launch and check work handed to another agent"
+  default_prompt: "Use practices-delegation to hand a bounded piece of this work to a helper: take the role and model from the host's agent-management practice if there is one, brief it, launch it on a supported route, and check what it returns before relying on it."

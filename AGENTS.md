@@ -58,7 +58,7 @@ The archive's base-file anchor is the advertised `sunstack-dev:presentation-html
 
 ## Agent Delegation
 
-For helpers, sessions and their models, use `sunstack-workflow-v1:practices-manage-agents`; for Router sessions, boards and messages, use `agent-collaboration`.
+For helpers, sessions and their models, use `sunstack-workflow-v2:practices-manage-agents`; for Router sessions, boards and messages, use `agent-collaboration`.
 
 ## Skill work
 
@@ -100,7 +100,7 @@ When doing skill work in this repo:
    - **Checked rules.** From the repository root, run `sunstack lint --config plugins/skill-authoring/skills/domain-skill-crafting/rules/skill-rules.config.json [paths]` directly (`--all` for every configured skill file). Add `--report <file>` to keep detail, then use `sunstack lint show <file> <id>` for one result. `--check` validates the rulebook without reading checked files or needing a key; `--rules` lists its active rules. The engine reports warnings, unsure results, gaps and skipped folders itself; no repository gate changes those results. Model requests need the authorized credential route.
 7. After implementation, run fitting proof and assess the current diff and evidence against the accepted need, spec, ownership, complexity, and integration before independent review. Use `sunstack-workflow-v1:implementation-pr-wrapup` for push / PR / checks / review-thread / merge-readiness proof. Refresh installed Codex/Claude caches only as an explicit post-push or release proof step; it is a home-level mutation and not a substitute for PR readiness.
 
-For execution ownership, load `sunstack-workflow-v1:practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
+For execution ownership, load `sunstack-workflow-v2:practices-manage-agents` and follow it decisively. The Lead remains the default user conversation, and always authors governing Requirements, Specification, Program Design, diagrams, and implementation plans. After a ready Lead-authored plan, the assigned persistent Implementer Sidekick executes the bounded implementation and associated proof directly by default; direct contact with it is available only when the user chooses it. Material design/plan or integration questions return to the Lead with evidence, while the Lead does not relay every internal progress turn. Implementation-associated proof stays with its executor. PR wrap-up may stay with the assigned Implementer Sidekick or run as a prescribed Operator procedure; the Lead retains acceptance and the user retains merge authority.
 
 Other sources:
 

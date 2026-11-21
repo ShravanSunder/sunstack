@@ -1,6 +1,6 @@
 # 2026-11-20: Design review does not set host Plan mode
 
-- `sunstack-workflow-v2` 0.4.1; all six plugin/marketplace version entries agree.
+- `sunstack-workflow-v2` 0.5.1; all six plugin/marketplace version entries agree.
 - `design-review` step 4 no longer says to commission the 🔎 Reviewer Sidekick "with read-only workspace access." That phrase was being read as Claude Plan mode (`--mode plan` / `--permission-mode plan`) and caused an Approve Plan popup.
 - The line now tells the caller to commission the Reviewer Sidekick through `practices-manage-agents` and tell it not to write code or design files. Host conversation mode is left alone.
 - Frozen v1 `spec-program-review` still has the old phrase; it was not edited.
