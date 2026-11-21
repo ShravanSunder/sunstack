@@ -8,7 +8,9 @@ MUST load `../../../shared-references/design-documents.md` and return the four d
 
 MUST load `engineering-document-examples.md` and return the examples relevant to this page's reader questions, the forms selected, and the placement of explanation, governing conditions and optional depth. Examples teach composition; the matching Demistify guide remains the authority for markup and component data.
 
-IF authoring a new HTML design collection using shared navigation, load the matching bound Demistify guide's `references/navigation.md` and `references/tours.md` before authoring, and return the collection descriptor and page identities, actual target identities used by the page, and the actual check and delivery result. The guide owns the JSON schema and URI rules; do not copy its field definitions into this recipe or another skill. If a selected component requires its own prepared data, retain the conditional call-stack preparation below.
+Write the explanation, diagrams and page composition directly in HTML. Use the matching CLI to check the page, generate reader data from adopted typed records, or embed authored material. Keep agent-facing TypeScript and generated JSON beside the reader as the selected binding requires.
+
+IF the collection uses shared navigation, read the matching navigation guide at the binding step. Load its Walkthrough guidance when authoring a guided path. Return the collection descriptor, page identities, linked targets and check result. The binding's guide owns the schema and preparation. Use the conditional call-stack preparation below when that view is selected.
 
 ## Write the explanation first
 

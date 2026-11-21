@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A design you can review · Cancelling a queued job</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>A design you can review</h1>
+    <p>In this example, a person can cancel a queued job until a worker claims it. Follow that one promise from the user’s request through the design and its planned proof. The view changes at each step because the reader is asking a different question.</p>
+    <p><a href="#user-journey">Follow the worked example</a> or <a href="#skill-changes">review the proposed skill changes</a>.</p>
+
+    <section id="user-journey">
+      <h2>What does the person experience?</h2>
+      <p>After submitting a job, the person gets a job ID. If the job is still queued, cancelling it ends the job before the worker starts. If the worker already claimed it, the person sees that it is running.</p>
+      <ex-mermaid id="cancel-journey" label="Cancel a submitted job" data-width="reading">
+        <script type="text/plain">
+sequenceDiagram
+  actor Person
+  participant Service
+  Person->>Service: Submit a job
+  Service-->>Person: Return the job ID
+  Person->>Service: Cancel that job
+  alt Job is queued
+    Service-->>Person: Cancelled
+  else Worker already claimed it
+    Service-->>Person: Already running
+  end
+        </script>
+      </ex-mermaid>
+      <p>The sequence belongs in Requirements. It shows what the person sees and what changes when they act earlier or later.</p>
+    </section>
+
+    <section id="job-contract">
+      <h2>Which outcome wins?</h2>
+      <p>A queued job can leave the queue through one of two transitions. Once cancellation wins, the worker has no path from Cancelled to Running.</p>
+      <ex-mermaid id="claim-and-cancel" label="Mutually exclusive job transitions" data-width="reading">
+        <script type="text/plain">
+stateDiagram-v2
+  [*] --> Queued
+  Queued --> Cancelled: cancel wins
+  Queued --> Running: worker claims
+  Running --> Finished: worker completes
+        </script>
+      </ex-mermaid>
+      <ex-compare label="Choose how a cancellation request behaves" data-width="reading">
+        <section id="queued-only" label="Cancel queued jobs">
+          <section data-compare-row="visible"><p><strong>What the person can do</strong></p><p>Stop a queued job. If it is running, see its current state.</p></section>
+          <section data-compare-row="cost"><p><strong>What the service must handle</strong></p><p>Resolve the race between cancelling and claiming.</p></section>
+        </section>
+        <section id="also-running" label="Also stop running jobs">
+          <section data-compare-row="visible"><p><strong>What the person can do</strong></p><p>Request a stop after the worker starts. Effects already produced can remain.</p></section>
+          <section data-compare-row="cost"><p><strong>What the service must handle</strong></p><p>Signal the worker and explain what stopping means when a job has already written results.</p></section>
+        </section>
+      </ex-compare>
+      <p>The Specification uses the state diagram for the queued-only rule. The comparison shows the product tradeoff a reader can inspect. Use Choice with Details when the reader is being asked to make that decision.</p>
+    </section>
+
+    <section id="ownership">
+      <h2>Who decides whether the worker can start?</h2>
+      <p>The job store owns the transition out of Queued. The API requests cancellation and the worker requests a claim. Both use the same conditional update, and the worker starts only when the store confirms its claim.</p>
+      <ex-mermaid id="store-boundary" label="One stored job state decides both requests" data-width="reading">
+        <script type="text/plain">
+flowchart LR
+  api[Cancellation API] -->|cancel if queued| store[Job state store]
+  worker[Worker] -->|claim if queued| store
+  store -->|claim succeeded| run[Start job]
+        </script>
+      </ex-mermaid>
+      <p>The Program Design uses this view to show where the two paths meet. Give the reviewed passage a stable ID such as <code>ownership</code>. The realization record can point there and name the rule it implements.</p>
+    </section>
+
+    <section id="proof-plan">
+      <h2>What would prove the race is handled?</h2>
+      <p>The Verification Design names the order each case must force and what would settle it. These observations are planned.</p>
+      <div class="ex-table-scroll" data-width="reading">
+        <table>
+          <thead><tr><th scope="col">Case</th><th scope="col">What to force</th><th scope="col">Passing observation</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Cancel first</th><td>Commit cancellation before the worker claims the job.</td><td>The job is Cancelled and the worker never starts.</td></tr>
+            <tr><th scope="row">Claim first</th><td>Commit the worker’s claim before requesting cancellation.</td><td>The API reports Already running and the claim survives.</td></tr>
+            <tr><th scope="row">Retry cancellation</th><td>Send the same cancellation again after success.</td><td>The job stays Cancelled and the response reports that outcome.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The later verification receipt links back to the relevant check, with the actual build and scope revision.</p>
+    </section>
+
+    <section id="reader-path">
+      <h2>How do you get back to the explanation?</h2>
+      <p>Agents maintain the record IDs, dependency links and delivery state in TypeScript. The checked data lets the reader jump from project progress to the original HTML. Pages opens a document, Map groups concerns, and a Walkthrough guides a reader through selected passages.</p>
+      <ex-flow cols="2" data-width="reading" aria-label="From checked records to the reviewed passage">
+        <ex-card id="typed-input" title="Typed records" tone="note"><p>The cancellation rule points to <a href="#job-contract">its reviewed outcomes</a> and names the check that proves it.</p></ex-card>
+        <ex-card id="checked-reader-data" title="Project check" tone="note"><p>Validate destinations and dependencies. Refresh the reader data when preparing a new view.</p></ex-card>
+        <ex-card id="progress-link" title="Project reader" tone="note"><p>Open the item that is blocked or waiting for a decision.</p></ex-card>
+        <ex-card id="html-destination" title="Reviewed HTML" tone="note"><p>Read <a href="#ownership">who owns the transition</a> and inspect <a href="#proof-plan">how it will be checked</a>.</p></ex-card>
+        <ex-arrow from="typed-input" to="checked-reader-data"></ex-arrow>
+        <ex-arrow from="checked-reader-data" to="progress-link"></ex-arrow>
+        <ex-arrow from="progress-link" to="html-destination"></ex-arrow>
+      </ex-flow>
+    </section>
+
+    <section id="skill-changes">
+      <h2>What changes in the skills?</h2>
+      <p>See the <a href="https://github.com/ShravanSunder/sunstack/pull/233/files">actual skill edits</a>. The four sections below record what the changes should teach and how to test them.</p>
+      <ex-markdown id="requirements" src="./requirements.md"></ex-markdown>
+      <ex-markdown id="specification" src="./specification.md"></ex-markdown>
+      <ex-markdown id="skill-design" src="./skill-design.md"></ex-markdown>
+      <ex-markdown id="verification" src="./skill-verification.md"></ex-markdown>
+    </section>
+  </ex-document>
+</body>
+</html>
