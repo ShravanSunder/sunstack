@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-21 Stop review sends session evidence to Sunstack](2026-11-21-stop-review-sunstack-cli.md)
 - [2026-11-20 Design review does not set host Plan mode](2026-11-20-design-review-no-plan-mode.md)
 - [2026-11-16 The base names no workflow skill; delegation splits](2026-11-16-base-names-no-workflow.md)
 - [2026-11-16 Design review runs the first design rules](2026-11-16-v2-design-rules.md)

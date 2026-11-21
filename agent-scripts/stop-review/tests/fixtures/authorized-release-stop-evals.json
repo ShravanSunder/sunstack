@@ -1,0 +1,140 @@
+[
+  {
+    "id": "deploy-already-authorized",
+    "expected": "continue_work",
+    "session": {
+      "latest_user": "Make sure it works and people can use it.",
+      "final_reply": "The new workflow works locally and production still serves the previous version. The agent quickstart and local example are ready. Local checks passed. Waiting on you for explicit merge approval for the prerequisite PR, the delivery PR, and the generated release PR after their review and CI gates.",
+      "records": [
+        {
+          "role": "user",
+          "source": "transcript",
+          "clipped": false,
+          "text": "Deploy and give me an explanation to help other agents."
+        },
+        {
+          "role": "user",
+          "source": "transcript",
+          "clipped": false,
+          "text": "Make sure it works and people can use it."
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "collaboration.list_agents",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "request_user_input_async",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "clock.sleep",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "assistant",
+          "source": "transcript",
+          "clipped": false,
+          "text": "The new workflow works locally and production still serves the previous version. The agent quickstart and local example are ready. Local checks passed. Waiting on you for explicit merge approval for the prerequisite PR, the delivery PR, and the generated release PR after their review and CI gates."
+        }
+      ],
+      "coverage": {
+        "bounded_transcript": true,
+        "selection_omissions": [
+          {
+            "reason": "window",
+            "count": 45
+          },
+          {
+            "reason": "projection",
+            "count": 6
+          }
+        ]
+      }
+    },
+    "provenance": "redacted_session"
+  },
+  {
+    "id": "deploy-explicitly-awaits-approval",
+    "expected": "wait_required",
+    "session": {
+      "latest_user": "Make sure it works and people can use it.",
+      "final_reply": "The new workflow works locally and production still serves the previous version. The agent quickstart and local example are ready. Local checks passed. Waiting on you for explicit merge approval for the prerequisite PR, the delivery PR, and the generated release PR after their review and CI gates.",
+      "records": [
+        {
+          "role": "user",
+          "source": "transcript",
+          "clipped": false,
+          "text": "Prepare the release and explain how agents can use it. After local verification, stop and wait for my explicit approval before merging or deploying."
+        },
+        {
+          "role": "user",
+          "source": "transcript",
+          "clipped": false,
+          "text": "Make sure it works and people can use it."
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "collaboration.list_agents",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "request_user_input_async",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "tool",
+          "receipt": {
+            "tool": "clock.sleep",
+            "outcome": "result_present_status_unknown",
+            "capture": "full_observed",
+            "exit_code": null
+          }
+        },
+        {
+          "role": "assistant",
+          "source": "transcript",
+          "clipped": false,
+          "text": "The new workflow works locally and production still serves the previous version. The agent quickstart and local example are ready. Local checks passed. Waiting on you for explicit merge approval for the prerequisite PR, the delivery PR, and the generated release PR after their review and CI gates."
+        }
+      ],
+      "coverage": {
+        "bounded_transcript": true,
+        "selection_omissions": [
+          {
+            "reason": "window",
+            "count": 45
+          },
+          {
+            "reason": "projection",
+            "count": 6
+          }
+        ]
+      }
+    },
+    "provenance": "synthetic_counterpart"
+  }
+]

@@ -1,0 +1,101 @@
+{
+  "capture": {
+    "protocol_version": 1,
+    "operation": "prepare_evidence",
+    "input": {
+      "repositories": [],
+      "sources": {
+        "session": { "kind": "conversation", "format": "codex_rollout_jsonl", "transcript_path": "" }
+      },
+      "payload_schemas": [],
+      "cursors": [],
+      "native_queries": [],
+      "package_bindings": [],
+      "discovery": { "kind": "none" },
+      "declarations": [
+        {
+          "id": "session",
+          "input": "session",
+          "requirement": "required",
+          "select": {
+            "kind": "conversation",
+            "turns": { "kind": "last", "count": 5 },
+            "user_messages": "included",
+            "assistant_messages": "final_only",
+            "tool_use": { "kind": "included", "tools": { "kind": "all" }, "results": "included" },
+            "hook_injected": "excluded"
+          }
+        }
+      ],
+      "limits": {
+        "max_files": 4,
+        "max_file_bytes": 8388608,
+        "max_total_bytes": 8388608,
+        "max_matches": 100,
+        "max_transcript_bytes": 8388608,
+        "include_ignored": false
+      }
+    }
+  },
+  "judgment": {
+    "protocol_version": 1,
+    "operation": "run_judgments",
+    "input": {
+      "backend": {
+        "kind": "jev_openrouter",
+        "endpoint": "https://openrouter.ai/api/v1/systemone",
+        "model": "jev-latest"
+      },
+      "attempts": {
+        "attempt_timeout_ms": 22000,
+        "retry_count": 0,
+        "initial_backoff_ms": 100,
+        "max_backoff_ms": 100,
+        "max_response_bytes": 65536
+      },
+      "request_budget": {
+        "max_input_tokens": 64000,
+        "max_request_bytes": 150000,
+        "max_questions": 3,
+        "max_requests": 1,
+        "safety_margin_tokens": 32,
+        "accounting_policy": "allow_estimated"
+      },
+      "request": {
+        "state": {
+          "reference": {
+            "unfinished": "The user asked to fix a failing test. The assistant identifies the test in response to a follow-up and has yet to fix it.",
+            "finished": "The requested explanation was delivered. Implementation was outside the scope.",
+            "wait": "The user asked for a preview and reserved permission to apply it. The assistant delivered the preview and is waiting."
+          }
+        },
+        "questions": {
+          "wait_required": {
+            "type": "noul",
+            "instructions": "Did the user explicitly reserve the remaining action for their approval or direct the assistant to stop here? Use the user messages in session.latest_user and session.records as the source of that instruction. Apply it to the stage reached in session.final_reply and the receipts. Check earlier user messages when the latest message is a follow-up.",
+            "criteria": {
+              "true": "The user actually directed a pause or reserved a decision, the instruction still applies at this point, and all work the user allowed before that point has been done.",
+              "false": "The user asked for the remaining work, or the record shows no user instruction requiring a pause at this point. An assistant's own request for approval and ordinary prerequisites are not user instructions."
+            }
+          },
+          "finished": {
+            "type": "noul",
+            "instructions": "Did the assistant deliver the active user request? Read session.latest_user and session.records to recover the active task and the user's agreed constraints. Check session.final_reply and the receipts for what was actually delivered.",
+            "criteria": {
+              "true": "The requested result was delivered within the current scope. Delivering a requested explanation or completed scoped review can be the whole request.",
+              "false": "A specific obligation remains. Answering a follow-up, saying what should happen, or linking to incomplete work does not finish the active request."
+            }
+          },
+          "authorized_next_step": {
+            "type": "noul",
+            "instructions": "Is there at least one concrete feasible step the assistant can take now to advance the active request under authority the user already gave? Read the user messages in session.latest_user and session.records for that authority and session.final_reply and the receipts for what remains. Judge the next useful step, including checking or advancing ordinary prerequisites, before judging whether the final action can run. An assistant's request for permission is a claim to check against the user's instructions and independently required gates. Where the governing request is absent or an authority boundary is clipped, do not infer authority.",
+            "criteria": {
+              "true": "A specific remaining action is within scope and feasible now. A user-authorized release can advance through its required review, CI and publishing steps. Checking the current PR gates or preparing the next PR counts while the actual merge awaits its gates.",
+              "false": "Every feasible action is already done, optional, assigned elsewhere or outside the user-authorized scope. The remaining useful action is genuinely blocked by a prerequisite that cannot be advanced, or requires a user decision or permission that was actually reserved."
+            }
+          }
+        }
+      }
+    }
+  }
+}

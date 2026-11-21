@@ -1,354 +1,117 @@
 #!/usr/bin/env bash
-
 set -uo pipefail
 
-# - Builds a bounded window of the last 5 user turns (assistant streams bundled).
-# - Classifies with JEV Nouls. On JEV failure, asks gpt-6-luna via review-runner.sh.
-# - Tracks per-turn block attempts so we can avoid infinite continuation loops.
-# - Fails open on timeout, crash, or unreadable classifier output.
-
-HOOK_INPUT_JSON="$(cat || true)"
 HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=./config.sh
-source "${HOOK_DIR}/config.sh"
-WINDOW_SCRIPT="${HOOK_DIR}/extract_stop_review_window.py"
-REVIEW_RUNNER="${CODEX_STOP_REVIEW_RUNNER:-${HOOK_DIR}/review-runner.sh}"
-JEV_CLASSIFIER="${HOOK_DIR}/jev_classifier.py"
-CLASSIFIER_PROMPT_FILE="${HOOK_DIR}/classifier-prompt.md"
-OUTPUT_SCHEMA_FILE="${HOOK_DIR}/output-schema.json"
-LUNA_TIMEOUT_SECONDS="${CODEX_STOP_REVIEW_LUNA_TIMEOUT:-${STOP_REVIEW_LUNA_TIMEOUT_DEFAULT}}"
-STOP_REVIEW_BACKEND="${CODEX_STOP_REVIEW_BACKEND:-${STOP_REVIEW_BACKEND_DEFAULT}}"
-STOP_REVIEW_MODEL="${CODEX_STOP_REVIEW_MODEL:-${STOP_REVIEW_MODEL_DEFAULT}}"
-STOP_REVIEW_REASONING_EFFORT="${CODEX_STOP_REVIEW_REASONING_EFFORT:-${STOP_REVIEW_REASONING_EFFORT_DEFAULT}}"
-STOP_REVIEW_REASONING_SUMMARY="${CODEX_STOP_REVIEW_REASONING_SUMMARY:-${STOP_REVIEW_REASONING_SUMMARY_DEFAULT}}"
-STOP_REVIEW_SERVICE_TIER="${CODEX_STOP_REVIEW_SERVICE_TIER:-${STOP_REVIEW_SERVICE_TIER_DEFAULT}}"
-MAX_CONTINUES=1
-case "${STOP_REVIEW_SERVICE_TIER}" in
-  default | off | "")
-    STOP_REVIEW_SERVICE_TIER=""
-    ;;
-esac
+SUNSTACK="${CODEX_STOP_REVIEW_SUNSTACK:-${HOOK_DIR}/sunstack}"
+STATE_ROOT="${CODEX_STOP_REVIEW_STATE_ROOT:-/tmp/codex-stop-review}"
+LOG_ROOT="${CODEX_STOP_REVIEW_LOG_ROOT:-/tmp}"
+HOOK_INPUT="$(cat)"
+TRANSCRIPT_LIMIT=8388608
 
-extract_json_field() {
-  local jq_expression="$1"
-
-  if [[ -z "${HOOK_INPUT_JSON}" ]] || ! command -v jq >/dev/null 2>&1; then
-    return 1
-  fi
-
-  printf '%s' "${HOOK_INPUT_JSON}" | jq -r "${jq_expression} // empty" 2>/dev/null
-}
-
-resolve_project_root() {
-  local payload_cwd
-
-  payload_cwd="$(extract_json_field '.cwd' || true)"
-  if [[ -n "${payload_cwd}" && -d "${payload_cwd}" ]]; then
-    printf '%s\n' "${payload_cwd}"
-    return 0
-  fi
-
-  printf '%s\n' "${PWD}"
-}
-
-emit_allow() {
-  local system_message="${1:-}"
-
-  if [[ -n "${system_message}" ]] && command -v jq >/dev/null 2>&1; then
-    jq -n --arg message "${system_message}" '{"systemMessage": $message}'
-    exit 0
-  fi
-
+allow() {
   printf '%s\n' '{}'
   exit 0
 }
 
-wrap_continue_reason() {
-  local luna_reason="$1"
-
-  printf '%s\n%s' \
-    "Stop-review classifier:" \
-    "${luna_reason}"
-}
-
-emit_block() {
-  local reason="$1"
-  local system_message="${2:-}"
-
-  if command -v jq >/dev/null 2>&1; then
-    if [[ -n "${system_message}" ]]; then
-      jq -n --arg reason "${reason}" --arg message "${system_message}" \
-        '{"decision":"block","reason":$reason,"systemMessage":$message}'
-    else
-      jq -n --arg reason "${reason}" '{"decision":"block","reason":$reason}'
-    fi
-    exit 0
-  fi
-
-  printf '%s' "${reason}" >&2
-  exit 2
-}
-
-log_message() {
-  local message="$1"
-  printf '%s %s\n' "$(date '+%Y-%m-%dT%H:%M:%S%z')" "${message}" >>"${PROJECT_LOG}"
-}
-
-hash_message() {
-  local message="$1"
-
-  if command -v shasum >/dev/null 2>&1; then
-    printf '%s' "${message}" | shasum -a 256 | awk '{print $1}'
-    return 0
-  fi
-
-  printf '%s' "${message}" | cksum | awk '{print $1}'
-}
-
-load_state() {
-  BLOCK_COUNT=0
-  PREVIOUS_CLASSIFICATION=""
-  PREVIOUS_MESSAGE_HASH=""
-
-  if [[ ! -f "${STATE_FILE}" ]] || ! command -v jq >/dev/null 2>&1; then
-    return 0
-  fi
-
-  BLOCK_COUNT="$(jq -r '.block_count // 0' "${STATE_FILE}" 2>/dev/null || echo "0")"
-  PREVIOUS_CLASSIFICATION="$(jq -r '.last_classification // ""' "${STATE_FILE}" 2>/dev/null || echo "")"
-  PREVIOUS_MESSAGE_HASH="$(jq -r '.last_message_hash // ""' "${STATE_FILE}" 2>/dev/null || echo "")"
-}
-
-save_state() {
-  local block_count="$1"
-  local classification="$2"
-  local message_hash="$3"
-
-  mkdir -p "$(dirname "${STATE_FILE}")"
-
-  if command -v jq >/dev/null 2>&1; then
-    jq -n \
-      --argjson block_count "${block_count}" \
-      --arg classification "${classification}" \
-      --arg message_hash "${message_hash}" \
-      '{
-        block_count: $block_count,
-        last_classification: $classification,
-        last_message_hash: $message_hash
-      }' >"${STATE_FILE}"
-    return 0
-  fi
-
-  cat >"${STATE_FILE}" <<EOF
-{"block_count":${block_count},"last_classification":"${classification}","last_message_hash":"${message_hash}"}
-EOF
-}
-
-extract_decision_json() {
-  local raw_text="$1"
-
-  if [[ -z "${raw_text}" ]] || ! command -v jq >/dev/null 2>&1; then
-    return 1
-  fi
-
-  if printf '%s' "${raw_text}" | jq -e 'type == "object" and (.decision | type == "string")' >/dev/null 2>&1; then
-    printf '%s' "${raw_text}"
-    return 0
-  fi
-
-  local fenced
-  fenced="$(printf '%s' "${raw_text}" | sed -n '/```/,/```/p' | sed '1d;$d')"
-  if [[ -n "${fenced}" ]] && printf '%s' "${fenced}" | jq -e 'type == "object" and (.decision | type == "string")' >/dev/null 2>&1; then
-    printf '%s' "${fenced}"
-    return 0
-  fi
-
-  return 1
-}
-
-PROJECT_ROOT="$(resolve_project_root)"
-PROJECT_NAME="$(basename "${PROJECT_ROOT}")"
-PROJECT_LOG="/tmp/${PROJECT_NAME}-codex-stop-review.log"
-STATE_ROOT="${CODEX_STOP_REVIEW_STATE_ROOT:-/tmp/codex-stop-review}"
-
-session_id="$(extract_json_field '.session_id' || true)"
-turn_id="$(extract_json_field '.turn_id' || true)"
-stop_hook_active="$(extract_json_field '.stop_hook_active' || true)"
-last_assistant_message="$(extract_json_field '.last_assistant_message' || true)"
-transcript_path="$(extract_json_field '.transcript_path' || true)"
-
-# The reviewer must never invoke its own classifier. The host sets
-# stop_hook_active on a follow-up after a Stop hook requested continuation.
-if [[ "${CODEX_REVIEWER:-}" == "1" || "${stop_hook_active}" == "true" ]]; then
-  log_message "classification=stop_review_bypass outcome=allow"
-  emit_allow
+command -v jq >/dev/null || allow
+if ! jq -e 'type == "object"' <<<"$HOOK_INPUT" >/dev/null 2>&1; then
+  allow
 fi
 
-# A stable identity is required to claim exactly one assessment per turn.
-if ! [[ "${session_id}" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ && "${turn_id}" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ ]]; then
-  log_message "classification=missing_stop_identity outcome=allow"
-  emit_allow
+read_field() {
+  jq -r "$1 // empty" <<<"$HOOK_INPUT"
+}
+
+session_id="$(read_field '.session_id')"
+turn_id="$(read_field '.turn_id')"
+cwd="$(read_field '.cwd')"
+transcript="$(read_field '.transcript_path')"
+active="$(read_field '.stop_hook_active')"
+project_name="$(basename "${cwd:-$PWD}")"
+project_log="${LOG_ROOT}/${project_name}-codex-stop-review.log"
+
+log() {
+  printf '%s turn_id=%s session_id=%s %s\n' "$(date '+%Y-%m-%dT%H:%M:%S%z')" \
+    "$turn_id" "$session_id" "$1" >>"$project_log"
+}
+
+if ! [[ "$session_id" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ && "$turn_id" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]*$ ]]; then
+  allow
+fi
+if [[ "${CODEX_REVIEWER:-}" == "1" || "$active" == "true" ]]; then
+  log 'classification=stop_review_bypass outcome=allow'
+  allow
 fi
 
-STATE_FILE="${STATE_ROOT}/${session_id}/${turn_id}.json"
-message_hash="$(hash_message "${last_assistant_message}")"
-load_state
-
-# Respect a block recorded by the previous runtime during a local upgrade.
-if [[ "${BLOCK_COUNT}" -ge "${MAX_CONTINUES}" ]]; then
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=repeat_stop outcome=allow"
-  emit_allow
+state_file="${STATE_ROOT}/${session_id}/${turn_id}.json"
+if [[ -f "$state_file" ]] && jq -e '.block_count >= 1' "$state_file" >/dev/null 2>&1; then
+  log 'classification=repeat_stop outcome=allow'
+  allow
 fi
-
-# The claim survives classifier failure and lasts for this turn. Noclobber
-# acquires it atomically so two callbacks cannot both call the classifier.
 if ! mkdir -p "${STATE_ROOT}/${session_id}" 2>/dev/null ||
-   ! (set -C; : >"${STATE_FILE}.claimed") 2>/dev/null; then
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=stop_claim_unavailable outcome=allow"
-  emit_allow
+   ! (set -C; : >"$state_file.claimed") 2>/dev/null; then
+  log 'classification=stop_claim_unavailable outcome=allow'
+  allow
+fi
+if [[ ! -r "$transcript" || ! -x "$SUNSTACK" ]]; then
+  log 'classification=local_input_unavailable outcome=allow'
+  allow
 fi
 
-if ! command -v python3 >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
-  save_state "${BLOCK_COUNT}" "missing_tools" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=missing_tools block_count=${BLOCK_COUNT} outcome=allow"
-  emit_allow
-fi
-
-if [[ ! -f "${WINDOW_SCRIPT}" || ! -f "${REVIEW_RUNNER}" || ! -f "${JEV_CLASSIFIER}" || ! -f "${CLASSIFIER_PROMPT_FILE}" || ! -f "${OUTPUT_SCHEMA_FILE}" ]]; then
-  save_state "${BLOCK_COUNT}" "missing_assets" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=missing_assets block_count=${BLOCK_COUNT} outcome=allow"
-  emit_allow
-fi
-
-WINDOW_TEXT="$(
-  CODEX_STOP_REVIEW_LAST_ASSISTANT="${last_assistant_message}" \
-    python3 "${WINDOW_SCRIPT}" \
-      --transcript "${transcript_path}" \
-      2>/dev/null || true
-)"
-
-if [[ -z "${WINDOW_TEXT}" ]]; then
-  save_state "${BLOCK_COUNT}" "empty_window" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=empty_window block_count=${BLOCK_COUNT} outcome=allow"
-  emit_allow
-fi
-
-WORK_DIR="$(mktemp -d /tmp/codex-stop-review-luna.XXXXXX)"
-PROMPT_FILE="${WORK_DIR}/prompt.txt"
-OUT_FILE="${WORK_DIR}/luna-last.txt"
-WINDOW_FILE="${WORK_DIR}/window.txt"
-printf '%s\n' "${WINDOW_TEXT}" >"${WINDOW_FILE}"
-
-run_luna_classifier() {
-  local luna_role="$1"
-
-  {
-    cat "${CLASSIFIER_PROMPT_FILE}"
-    if [[ "${stop_hook_active}" == "true" ]]; then
-      printf '\n\nNested stop: true\n'
-      printf 'Previous continues this turn: %s\n' "${BLOCK_COUNT}"
-      printf 'Max continues this turn: %s\n' "${MAX_CONTINUES}"
-    fi
-    printf '\n\nConversation window:\n\n'
-    printf '%s\n' "${WINDOW_TEXT}"
-  } >"${PROMPT_FILE}"
-  log_message "turn_id=${turn_id} session_id=${session_id} luna_start role=${luna_role} transport=isolated-exec home=${CODEX_STOP_REVIEW_HOME:-${STOP_REVIEW_HOME_DEFAULT}} model=${STOP_REVIEW_MODEL} reasoning_effort=${STOP_REVIEW_REASONING_EFFORT} reasoning_summary=${STOP_REVIEW_REASONING_SUMMARY} service_tier=${STOP_REVIEW_SERVICE_TIER:-default} timeout_s=${LUNA_TIMEOUT_SECONDS} stop_hook_active=${stop_hook_active} previous_continues=${BLOCK_COUNT} max_continues=${MAX_CONTINUES}"
-  bash "${REVIEW_RUNNER}" \
-    --prompt-file "${PROMPT_FILE}" \
-    --output "${OUT_FILE}" \
-    --cd "${PROJECT_ROOT}" \
-    >/dev/null 2>>"${PROJECT_LOG}"
+umask 077
+work_dir="$(mktemp -d /tmp/stop-review-sunstack.XXXXXXXX)" || allow
+cleanup() {
+  rm -f "$work_dir/rollout.jsonl" "$work_dir/capture.json" "$work_dir/request.json" "$work_dir/verdict.json"
+  rmdir "$work_dir"
 }
+trap cleanup EXIT
 
-set +e
-CLASSIFIER_BACKEND="luna"
-if [[ "${STOP_REVIEW_BACKEND}" == "jev" ]]; then
-  log_message "turn_id=${turn_id} session_id=${session_id} jev_start transport=openrouter-systemone model=${CODEX_STOP_REVIEW_JEV_MODEL:-${STOP_REVIEW_JEV_MODEL_DEFAULT}} stop_hook_active=${stop_hook_active} previous_continues=${BLOCK_COUNT} max_continues=${MAX_CONTINUES}"
-  JEV_ARGS=(
-    --window-file "${WINDOW_FILE}"
-    --output "${OUT_FILE}"
-    --previous-continues "${BLOCK_COUNT}"
-    --max-continues "${MAX_CONTINUES}"
-  )
-  if [[ "${stop_hook_active}" == "true" ]]; then
-    JEV_ARGS+=(--nested)
-  fi
-  if [[ -n "${CODEX_STOP_REVIEW_PYTHON:-}" ]]; then
-    "${CODEX_STOP_REVIEW_PYTHON}" "${JEV_CLASSIFIER}" "${JEV_ARGS[@]}" >/dev/null 2>>"${PROJECT_LOG}"
-    JEV_EXIT=$?
-  elif command -v uv >/dev/null 2>&1; then
-    uv run --no-project --script "${JEV_CLASSIFIER}" "${JEV_ARGS[@]}" >/dev/null 2>>"${PROJECT_LOG}"
-    JEV_EXIT=$?
-  else
-    printf '%s\n' "jev: uv not on PATH" >>"${PROJECT_LOG}"
-    JEV_EXIT=1
-  fi
-  JEV_OUTPUT=""
-  if [[ -f "${OUT_FILE}" ]]; then
-    JEV_OUTPUT="$(cat "${OUT_FILE}" || true)"
-  fi
-  if [[ "${JEV_EXIT}" -eq 0 ]] && [[ -n "$(extract_decision_json "${JEV_OUTPUT}" || true)" ]]; then
-    CLASSIFIER_BACKEND="jev"
-    LUNA_EXIT=0
-  else
-    log_message "turn_id=${turn_id} session_id=${session_id} jev_fallback exit=${JEV_EXIT} outcome=luna_backup"
-    run_luna_classifier "backup"
-    LUNA_EXIT=$?
-    CLASSIFIER_BACKEND="luna"
-  fi
-else
-  run_luna_classifier "primary"
-  LUNA_EXIT=$?
+# Freeze a bounded suffix. Drop its first record only when the suffix starts mid-file.
+transcript_size="$(wc -c <"$transcript" | tr -d '[:space:]')"
+truncated=false
+if (( transcript_size > TRANSCRIPT_LIMIT )); then
+  truncated=true
 fi
-set +e
-
-if [[ "${LUNA_EXIT}" -ne 0 ]]; then
-  save_state "${BLOCK_COUNT}" "luna_error" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=luna_error exit=${LUNA_EXIT} block_count=${BLOCK_COUNT} outcome=allow"
-  rm -rf "${WORK_DIR}"
-  emit_allow
+if ! tail -c "$TRANSCRIPT_LIMIT" "$transcript" |
+  awk -v truncated="$truncated" 'NR > 1 || truncated == "false"' |
+  jq -Rrc -f "${HOOK_DIR}/stop-review-rollout.jq" >"$work_dir/rollout.jsonl"; then
+  log 'classification=transcript_read_failed outcome=allow'
+  allow
 fi
 
-RAW_OUTPUT=""
-if [[ -f "${OUT_FILE}" ]]; then
-  RAW_OUTPUT="$(cat "${OUT_FILE}" || true)"
-fi
-rm -rf "${WORK_DIR}"
-
-DECISION_JSON="$(extract_decision_json "${RAW_OUTPUT}" || true)"
-if [[ -z "${DECISION_JSON}" ]]; then
-  save_state "${BLOCK_COUNT}" "unreadable_output" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=unreadable_output block_count=${BLOCK_COUNT} outcome=allow"
-  emit_allow
+if ! jq -cn --arg transcript "$work_dir/rollout.jsonl" \
+  --slurpfile options "${HOOK_DIR}/stop-review-sunstack.json" \
+  --arg reply "$(read_field '.last_assistant_message')" \
+  '$options[0].capture | .input.sources.session.transcript_path = $transcript |
+    if $reply == "" then . else .input.sources.session.final_assistant_text = $reply end' |
+  "$SUNSTACK" exec >"$work_dir/capture.json" 2>/dev/null; then
+  log 'classification=sunstack_capture_failed outcome=allow'
+  allow
 fi
 
-DECISION="$(printf '%s' "${DECISION_JSON}" | jq -r '.decision' | tr '[:upper:]' '[:lower:]')"
-REASON="$(printf '%s' "${DECISION_JSON}" | jq -r '.reason // empty')"
-COT="$(printf '%s' "${DECISION_JSON}" | jq -r '.cot // empty')"
-
-case "${DECISION}" in
-  continue_work | block)
-    CONTINUE_WORK="true"
-    ;;
-  *)
-    CONTINUE_WORK="false"
-    ;;
-esac
-
-if [[ "${CONTINUE_WORK}" != "true" ]]; then
-  save_state "${BLOCK_COUNT}" "luna_stop_ok" "${message_hash}"
-  log_message "turn_id=${turn_id} session_id=${session_id} classification=luna_stop_ok decision=${DECISION} classifier_backend=${CLASSIFIER_BACKEND} model=${STOP_REVIEW_MODEL} reasoning_effort=${STOP_REVIEW_REASONING_EFFORT} block_count=${BLOCK_COUNT} outcome=allow cot=${COT}"
-  emit_allow
+if ! jq -ce --argjson truncated "$truncated" \
+  --slurpfile options "${HOOK_DIR}/stop-review-sunstack.json" \
+  -f "${HOOK_DIR}/stop-review-request.jq" "$work_dir/capture.json" >"$work_dir/request.json"; then
+  log 'classification=missing_session_evidence outcome=allow'
+  allow
 fi
 
-if [[ -z "${REASON}" ]]; then
-  REASON="Continue the outstanding job in its current mode. If that job is design/discussion, keep designing; do not start implementation."
+log 'assessment_start backend=sunstack cli_operation=run_judgments'
+if ! "$SUNSTACK" exec <"$work_dir/request.json" >"$work_dir/verdict.json" 2>/dev/null; then
+  failure="$(jq -r '.result.outcome.kind // "exec_failed"' "$work_dir/verdict.json" 2>/dev/null)"
+  log "classification=sunstack_assessment_failed failure=${failure:-exec_failed} outcome=allow"
+  allow
 fi
 
-next_block_count=$((BLOCK_COUNT + 1))
-save_state "${next_block_count}" "luna_continue_work" "${message_hash}"
-
-log_message "turn_id=${turn_id} session_id=${session_id} classification=luna_continue_work decision=${DECISION} classifier_backend=${CLASSIFIER_BACKEND} model=${STOP_REVIEW_MODEL} reasoning_effort=${STOP_REVIEW_REASONING_EFFORT} block_count=${next_block_count} outcome=block previous_classification=${PREVIOUS_CLASSIFICATION} previous_hash=${PREVIOUS_MESSAGE_HASH} cot=${COT}"
-emit_block \
-  "$(wrap_continue_reason "${REASON}")" \
-  "Stop-review classifier continued the conversation because the job is still unfinished."
+model="$(jq -r '.result.outcome.receipt.resolved_model // "unknown"' "$work_dir/verdict.json")"
+decision="$(jq -r -f "${HOOK_DIR}/stop-review-decision.jq" "$work_dir/verdict.json")"
+scores="$(jq -c '(.result.outcome.answers // {}) | map_values(.yes_probability | numbers)' "$work_dir/verdict.json")"
+if [[ "$decision" != "continue_work" ]]; then
+  log "classification=${decision:-unknown} model=${model} outcome=allow scores=${scores}"
+  allow
+fi
+log "classification=continue_work model=${model} outcome=block scores=${scores}"
+jq -n '{
+  decision: "block",
+  reason: "Stop-review: The active user request still has an authorized step left. Use the actual request and tool results to identify and finish that step before stopping."
+}'
