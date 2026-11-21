@@ -116,7 +116,7 @@ Completion: exactly one mode and its complete required artifact set are selected
 
 ## 4. Resolve Reviewer Runtime and Authority
 
-The caller completes classification and admission. For an admitted substantive review, MUST use `practices-manage-agents` to commission or resume one persistent 🔎 Reviewer Sidekick with read-only workspace access. Resume that exact Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
+The caller completes classification and admission. For an admitted substantive review, MUST use `practices-manage-agents` to commission or resume one persistent 🔎 Reviewer Sidekick, and tell it not to write code or design files. Resume that exact Reviewer Sidekick through corrections. Candidate findings never become final disposition without its verification.
 
 A later semantic change outside an accepted correction invalidates affected check coverage. Further rounds follow the convergence rule in `references/finding-and-reduction-schema.md`.
 
