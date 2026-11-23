@@ -586,7 +586,10 @@ describe("user requirements and design-view contracts", () => {
 
   test("indexes every view owner and rendering consumer", () => {
     const vocabulary = readPluginFile("docs/diagram-vocabulary.md");
-    const pageForms = readPluginFile("skills/presentation-html/references/views.md");
+    const pageForms = [
+      readPluginFile("skills/presentation-html/references/views.md"),
+      readPluginFile("skills/presentation-html/references/v1-markdown-source.md"),
+    ].join("\n");
 
     for (const viewToken of [
       "capability map",
