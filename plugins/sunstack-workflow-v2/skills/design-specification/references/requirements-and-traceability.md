@@ -1,26 +1,24 @@
 # Requirements and Traceability
 
-This reference owns construction and repair of normative requirements plus coverage from problem and outcome to the proof-obligation slot.
+This reference owns construction and repair of rule records and the links that make them traceable.
 
-Expected inputs: authority/problem model, the stage-2 entity table and undefined-noun gaps, goals/non-goals, resolved decisions, candidate constraints, and current requirement text.
+Expected inputs: authority/problem model, the stage-2 entity definitions and undefined-noun gaps, goals/non-goals, `core` slices, resolved decisions, candidate constraints, and current rule text.
 
-Return: requirement inventory and coverage map, including exact gaps or conflicts.
+Return: the rule records, any need no rule serves, any entity no rule uses, and exact gaps or conflicts.
 
-## Requirement Shape
+## Rule Shape
 
-Each material requirement carries:
+A rule record (`defineRule`; the guide's `typed-design.md` owns the field names) carries:
 
 ```text
-stable identifier
-normative statement, written over defined entities (E identifiers)
-basis / authority source
-consumer or affected boundary
-observable success condition
-negative or failure expectation
-proof-obligation identifier or uncovered slot
-dependencies or conflicts
-authorized user-requirement identifiers when present
+stable R identifier
+one sentence, written over defined entities, naming the consumer or boundary
+the need it serves (a U identifier)
+the decisions that govern it and the assumptions it relies on, when any
+cases: the success condition, negative or failure expectation, threshold, target constraints and reference, as given and expected pairs
 ```
+
+A rule's sentence stays one sentence. Detail that would lengthen it goes into its cases.
 
 Use a conditional form that makes context and response unambiguous. EARS-style forms are construction tools, not mandatory output syntax:
 
@@ -33,7 +31,7 @@ unwanted behavior If <fault>, then the <system> <response>.
 complex           While <state>, when <trigger>, the <system> <response>.
 ```
 
-Write faults as `If/then`; a failure is not a normal event. Split compound obligations when clauses can pass or fail independently.
+Write faults as `If/then`; a failure is not a normal event. Split compound rules when clauses can pass or fail independently.
 
 ## Repair Weak Requirements
 
@@ -69,33 +67,20 @@ Replace `support`, `handle`, `robust`, `easy`, `secure`, `fast`, and similar adj
 
 ## Traceability
 
-When normative-eligible user-requirements rows exist, construct the chain from their stable U identifiers. Otherwise begin at the problem:
-
-```text
-user or stakeholder need U1
-  -> entities E1..En the obligations name
-      -> problem P1
-          -> outcome O1
-              -> requirement R1
-                  -> observable contract C1
-                      -> proof-obligation slot V1
-```
-
-The U identifier resolves to the source row; do not restate or fork the producer's need. Preserve stakeholder U roots even when no direct-user journey exists. Each requirement cites the `E` identifiers it is written over; `domain-entities.md` owns the definitions.
+A rule names the need it serves; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist. The U identifier resolves to the need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
 
 Flag:
 
-- a requirement that names a noun with no `E` entity, or an entity no requirement uses;
-- an outcome with no requirement;
-- a requirement with no outcome or authority basis;
+- a rule that relies on a contested noun with no `E` entity, or an entity no rule uses;
+- a `core` need with no rule;
+- a rule with no need or authority basis;
 - a contract or constraint with no consumer;
-- a requirement whose negative case is undefined;
-- a missing proof-obligation slot for the claimed behavior;
-- duplicate requirements with different wording or authority.
-- a user-facing requirement with no cited U row when normative-eligible rows exist;
-- a normative requirement derived from an `observational`, `advisory`, or `unresolved` row;
-- a declined-extraction requirement that cites neither an alternate authoritative source nor the exact decision/evidence gap.
+- a rule whose negative case is undefined;
+- a rule whose pass and fail depend on a threshold or reference its cases do not carry;
+- duplicate rules with different wording or authority;
+- a user-facing rule that serves a need whose authority state is not `authorized`, or that rests on an `observational`, `advisory`, or `unresolved` source;
+- a declined-extraction rule that cites neither an alternate authoritative source nor the exact decision/evidence gap.
 
-Apply the stranger test: a capable reader with no session history must state the same pass/fail behavior and proof obligation.
+Apply the stranger test: a capable reader with no session history must state the same pass/fail behavior from the rule and its cases.
 
-Complete when: every material requirement is authoritative, singular, observable, written over defined entities, traceable in both directions through U when present, and separated from implementation tasks.
+Complete when: every material rule is authoritative, one sentence, observable, written over defined entities, names its need, and is separated from implementation tasks.

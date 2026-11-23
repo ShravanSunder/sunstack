@@ -1,20 +1,20 @@
 # Domain Entities
 
-This reference owns deriving the Specification's domain entities, the nouns every obligation is written over, from settled sources. Each entity gets an identity rule, relationships, invariants, and observable states.
+This reference owns deriving the Specification's domain entities from settled sources: the nouns the rules are written over that two readers could read differently. Each entity gets an identity rule, relationships, invariants, and observable states, defined on the page.
 
 Expected inputs: the authority/problem model, the admitted Requirements rows and their U identifiers or the settling decision records, pathfinding records when present, and existing code or documentation vocabulary as observational evidence of terms already in use.
 
-Return: the entity table, undefined-noun gaps, and any term routed to `sunstack-dev:discuss-pathfinding` with the exact same-instance question the sources cannot settle.
+Return: the entity definitions, undefined-noun gaps, and any term routed to `sunstack-dev:discuss-pathfinding` with the exact same-instance question the sources cannot settle.
 
 ## Choose the Nouns and Sources
 
-Start from every noun the problem and desired outcomes name, and every noun that appears in more than one U row or outcome.
+Start from the nouns the problem and desired outcomes name, and the nouns that appear in more than one need or outcome. Define a noun when two capable readers could take it to mean different things; a noun every reader reads the same way stays a plain word.
 
 Take meaning from the authorized U rows, the decision records that settle meaning, and pathfinding records. Code, contracts, and prior specifications show which terms are already in use. When an authoritative contract, decision, or Specification already gives a term the same meaning, reuse the term and its meaning without renaming or reopening it. Code alone shows current behavior and does not settle desired meaning.
 
 When you fill an entity's slots, derive each one from what the owner's statements already decide, and word the identity rule so it decides the hardest same-instance case those statements raise (define the domain first (`sunstack-dev:principle-define-the-domain-first`)).
 
-## Entity Table
+## Entity Definition
 
 ```text
 E<n>  canonical term
@@ -28,7 +28,7 @@ E<n>  canonical term
 
 Fill every slot from the sources or mark it as an exact gap; a blank slot is neither.
 
-Give every entity a stable `E` identifier. It travels with the identity chain (`U -> E -> P -> O -> R -> C -> V`), appears in the coverage table and the accepted requirements set, and is the anchor a downstream binding or a review finding cites. Deleting an entity later is a coverage loss, not pruning.
+Give every entity a stable `E` identifier. It appears in the accepted requirements set and is the anchor a downstream binding or a review finding cites. Deleting an entity later is a coverage loss, not pruning.
 
 ## Settled or Unmade
 
@@ -54,10 +54,10 @@ Bad:
 
 - a one-line description with no identity rule ("the pending wait for a ticket");
 - a type, table, schema, package, or event payload field standing in for a definition;
-- a glossary of every noun in the source, including ones no obligation uses;
+- a glossary of every noun in the source, including ones every reader reads the same way or no rule uses;
 - states copied from a workflow engine instead of from owner statements;
 - a term renamed or redefined when a governing source already fixes its meaning.
 
 ## Complete When
 
-At this pass, every noun the problem and desired outcomes name is a defined entity with an `E` identifier and every slot filled or marked as an exact gap; every identity rule decides the hardest case the source raises; no definition names an implementation home; and each unsettled term has been routed with its exact same-instance question. Whether every entity is used by an obligation is checked when obligations exist, by `requirements-and-traceability.md` and the author self-check.
+At this pass, every noun two readers could read differently is a defined entity with an `E` identifier and every slot filled or marked as an exact gap; every identity rule decides the hardest case the source raises; no definition names an implementation home; and each unsettled term has been routed with its exact same-instance question. Whether every entity is used by a rule is checked when rules exist, by `requirements-and-traceability.md` and the author self-check.
