@@ -260,7 +260,7 @@ Author top-down: begin with the smallest Why/What map a human needs to confirm t
 
 In a file-backed set, write the need and rule records, then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's why and what sections: who is affected and why, the capability grouping, the entities readers could read differently, and the context a rule needs to be read correctly. The page shows each record by id and never restates it.
 
-Every record id and link the page names resolves.<!-- D004 -->
+Every link the page names resolves.<!-- D004 -->
 
 The design-item list is generated from the records. Keep unanswered owner questions as open decision records; `presentation-html` chooses how they and every other piece are shown, and its `engineering-documents.md` owns how a section's answer and its view sit together. The why part's views introduce no internal components or enforcement, and no view becomes the only home of a rule. Run the design check and the matching static check through `presentation-html`.
 
@@ -270,7 +270,7 @@ Completion: each need and rule has one record and no copy on the page; every nor
 
 Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the records and the page. Check authority conflicts, accepted-requirements coverage, rules that name no need, vague or multi-sentence rules, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, record text copied onto the page, process residue, obscure headings, and reader-facing elements that fail the human deletion test. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the author self-check with exact gaps, its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
 
-The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning.
+The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 

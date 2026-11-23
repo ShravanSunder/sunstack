@@ -93,7 +93,7 @@ Completion: every `core` rule has a check, every drawn observation path has a pa
 
 Re-read every check as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing check. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
 
-The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning.
+The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
 
 Then run the design-item pass:
 
