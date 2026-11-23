@@ -13,7 +13,7 @@ A rule record (`defineRule`; the guide's `typed-design.md` owns the field names)
 ```text
 stable R identifier
 one sentence, written over defined entities, naming the consumer or boundary
-the need it serves (a U identifier)
+the needs it serves (one or more U identifiers)
 the decisions that govern it and the assumptions it relies on, when any
 cases: the success condition, negative or failure expectation, threshold, target constraints and reference, as given and expected pairs
 ```
@@ -67,7 +67,7 @@ Replace `support`, `handle`, `robust`, `easy`, `secure`, `fast`, and similar adj
 
 ## Traceability
 
-A rule names the need it serves; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist. The U identifier resolves to the need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
+A rule names the needs it serves, one or several; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist. Each U identifier resolves to a need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
 
 Flag:
 
@@ -83,4 +83,4 @@ Flag:
 
 Apply the stranger test: a capable reader with no session history must state the same pass/fail behavior from the rule and its cases.
 
-Complete when: every material rule is authoritative, one sentence, observable, written over defined entities, names its need, and is separated from implementation tasks.
+Complete when: every material rule is authoritative, one sentence, observable, written over defined entities, names its needs, and is separated from implementation tasks.

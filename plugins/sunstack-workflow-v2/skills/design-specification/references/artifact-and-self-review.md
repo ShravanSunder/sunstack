@@ -54,7 +54,7 @@ Lead with the smallest Why/What model that lets a human confirm the problem and 
 
 Consume each selected view's reader question plus the predicates, cardinality, and must-expose fields from the `SKILL.md` Required Why/What Views table without restating them. Before returning, compare the actual shown view with that selected table row: verify the required number of views and every must-expose field in the displayed result itself. Preserve separate class journeys; when the source establishes no pain or evidence, show that exact gap rather than inventing one, and when current behavior already supplies the desired outcome, show that preservation explicitly.
 
-Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. For generated images, also reject a missing project-local asset, non-resolving relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, or a candidate the Lead has not accepted.
+Consume the shared rendering result for the actual shown view and reject any missing semantic field, failed visual check, unresolved fallback, or content that does not answer its stated reader question. A shared-renderer gap blocks. A generated image passes or fails under `sunstack-dev/shared-references/generated-document-visuals.md`.
 
 - The capability map lets the owner confirm the parts at a glance. It is built from the records over the confirmed capability list, so the list keeps one home. A linked rule appears once, under its home, and names the other capability:
 
@@ -100,7 +100,7 @@ Re-read the records and the page and record:
 - duplicated normative homes, including record text copied onto the page;
 - missing, semantically incomplete, unreadable, or decorative Required Why/What Views;
 - a substantive section that lacks a supported relational diagram, or whose prose does not give its context and interpretation; a tiny fact split into an artificial diagram section;
-- missing or broken generated-image assets/embeds, image/text disagreement, unreadable labels, inaccurate alt/captions, or an uninspected destination placement;
+- a generated image that fails `sunstack-dev/shared-references/generated-document-visuals.md`;
 - journey maps that fail to cite their need records or context diagrams that cross into internal How;
 - a capability named by a component, a need with no home capability or two homes, a rule copied under a second capability instead of linked, or an identifier that encodes its capability;
 - accepted requirements lost or superseded without owner authority;
@@ -117,9 +117,7 @@ Then run the design-item pass, in this order:
 
 Every result of this pass is a nudge: it says what you saw and where to read, and it adds no readiness condition.
 
-For a simplification request, report accepted-requirements coverage separately from prose or mechanism deletion. Return one compact row per stable identity with `covered | owner-authorized supersession | gap` plus its anchor.
-
-Identities may share a row only when every member identity is enumerated and all share the same disposition and anchor. A bare "coverage intact" assertion is not a report. A shorter artifact that loses users, variants, defaults, scenarios, contracts, or proof obligations is scope loss, not pruning.
+For a simplification request, return accepted-requirements coverage separately from prose or mechanism deletion, as record ids in the returned state, never in the design. A bare "coverage intact" assertion is not a report. A shorter artifact that loses users, variants, defaults, scenarios, contracts, or proof obligations is scope loss, not pruning.
 
 Run the result against the current artifact state. Record exact failures, not “needs more detail.”
 

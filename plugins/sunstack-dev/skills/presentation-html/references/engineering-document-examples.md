@@ -20,7 +20,9 @@ The group belongs in the page's why part. The need records hold each need's text
 <section id="recovery-needs">
   <h2>Recover work after interruption</h2>
   <p>This group explains how a user regains control when a connection or worker stops unexpectedly.</p>
-  <!-- Need records U7 and U8, and rule R7 beside them, placed by id as the guide's typed-design.md shows. -->
+  <p data-design-record="U7"></p>
+  <p data-design-record="U8"></p>
+  <p data-design-record="R7"></p>
   <p>This journey asks whether a person can still find the same work and understand its status after losing the connection.</p>
   <ex-mermaid id="recover-work" label="Find submitted work after reconnecting"><script type="text/plain">
 sequenceDiagram
@@ -85,7 +87,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
 
 ```html
 <section id="running-cancellation">
-  <h2>What should cancellation mean after execution starts?</h2>
+  <h2>Cancelling a running job</h2>
   <p>This is open. It determines the completion contract and the proof we need.</p>
   <ex-compare label="Running-job cancellation">
     <section label="Finish without publishing">
@@ -97,7 +99,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
       <section data-compare-row="cost"><p>The design must handle partial effects and failed interruption.</p></section>
     </section>
   </ex-compare>
-  <ex-choice id="cancel-policy" title="Which running-job cancellation outcome do you want?">
+  <ex-choice data-design-record="D5">
     <ex-option id="suppress-result" title="Finish without publishing (recommended)">
       <template slot="summary">Keeps execution simple; publication must honor cancellation.</template>
     </ex-option>
@@ -109,7 +111,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
 </section>
 ```
 
-The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. The question is an open owner decision record, and the `ex-choice` is bound to it; the author still writes the options and their details. When the answer arrives, the decision record carries it and the rules it governs are reconciled, rather than treating the control's current value as durable authority.
+The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. The question is the open owner decision record D5; the `ex-choice` is bound to it by id and shows its text, while the author writes the options and their details. When the answer arrives, the decision record carries it and the rules it governs are reconciled, rather than treating the control's current value as durable authority.
 
 ## Keep an open discussion open
 
@@ -134,8 +136,8 @@ The page keeps design choices and their tradeoffs because they shape the system.
 
 ```html
 <section id="prove-cancellation">
-  <h2>Planned: a cancelled queued job never reaches its handler</h2>
-  <!-- Planned check V3, which covers R3, placed by id as the guide's typed-design.md shows. -->
+  <h2>How cancellation will be proven</h2>
+  <h3 data-design-record="V3"></h3>
   <p>This check is planned and unrun. It needs two observations from one run of the real worker.</p>
   <ex-mermaid id="cancellation-observation-path" label="Planned queued-cancellation observation"><script type="text/plain">
 flowchart LR
@@ -156,19 +158,4 @@ V3's record holds its "proven by" sentence, cases, how it is observed and what s
 
 ## A call stack belongs to its actual path
 
-When real source supports frames, use the published call-stack component beside the explanation of that path. For example, the cancellation section can link to the source-derived `cancel → conditional state write → result` path. Read the selected binding's call-stack guide and supply its complete prepared need/stack/frame data before authoring the reader. Use the need record as the data's source.
-
-After the real owner pages and data have been prepared through that guide, the reader can sit next to its explanation:
-
-```html
-<section id="cancellation-calls">
-  <h2>Where cancellation reaches the state owner</h2>
-  <p>The supplied source-derived path shows the entry, conditional write and returned outcome.</p>
-  <ex-call-stack id="cancellation-call-stack" label="Cancellation call path"></ex-call-stack>
-  <p><a href="#U3">Why cancellation matters</a></p>
-</section>
-```
-
-This is a reader-placement fragment, not a complete data fixture. The current guide requires a need and prepared stack/frame records, and a record block on each existing canonical owner page, even when that page's unused record list is empty. Keep ordinary sections visible and use actual need/concern names. Built-in need links reach the prepared need's owner page at its `bodyRef` destination. Keep that body visible with its original ID; ordinary nearby section links can reach the same owning explanation.
-
-This example intentionally supplies no invented frames, new binding attribute or self-contained call-stack data format. Multiple paths use the guide's supported picker or page arrangement. A proposed greenfield sequence uses a labelled sequence diagram until there is source to substantiate a call-stack record.
+`engineering-documents.md` owns when the call-stack component fits and what data it needs; this file adds no example of it.

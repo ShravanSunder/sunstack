@@ -11,7 +11,7 @@ Return: the realization records, seam sufficiency, dependency proof classes, enf
 Every rule is realized along this chain:
 
 ```text
-rule R and the need it serves
+rule R and the needs it serves
   -> entity E it is written over
   -> semantic owner (component)
   -> interface/contract that realizes it

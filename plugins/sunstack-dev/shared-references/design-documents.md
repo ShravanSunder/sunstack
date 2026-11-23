@@ -26,7 +26,7 @@ One milestone has typed records and one page. The records are written with the m
 
 - A record is the only home of its text. The page shows a record by its id (`data-design-record`) and never restates it. A record need not appear on the page; a page that names an unknown record id fails the check.
 - A rule is one sentence. Its threshold, target constraints, reference and worked examples go in its cases.
-- A rule names the need it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and that gap holds the deliverable from acceptance.
+- A rule names the needs it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and that gap holds the deliverable from acceptance.
 - A deliverable is `core` or `later`. A `later` deliverable is an id and a title, listed and not checked; only `core` work gets need, rule, realization and check records.
 - The page runs why, what, how, proof. A long page splits by capability, never by kind of meaning.
 
@@ -143,9 +143,9 @@ Rank each `author` and `unknown` item on three questions, highest first:
 
 A product-meaning default with one dependent ranks above an internal default with many. Bring each high-ranked item that needs the owner as a decision through `owner-decision-brief.md`, one at a time; leave the rest recorded.
 
-## Call-stack component data is conditional
+## Call paths
 
-Call paths remain Program Design meaning. Use an ordinary source-derived graph/sequence or the retained call-stack component where it helps explain the path. IF that component is selected, load the matching Demistify guide through `presentation-html` and return its actual source/data owners, need/stack/frame mapping, supported reader and preparation/check result. Apply that data contract only to the selected component. A frame names a need only when the source declares that relationship. Never fabricate frames, attributes, bindings or prepared results. A proposed greenfield call path can use a labelled sequence view without pretending it is observed runtime execution.
+Call paths remain Program Design meaning. `presentation-html`'s `engineering-documents.md` owns when the call-stack component fits and the data it needs; never fabricate frames, bindings or prepared results.
 
 ## Plans and deliverables
 

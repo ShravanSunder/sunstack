@@ -19,7 +19,7 @@ Requirements (need records)
                     v
 Specification (rule records)
   WHAT must be observably true, and against what reference?
-  Normative observable rules, each naming the need it serves.
+  Normative observable rules, each naming the needs it serves.
                     |
                     v
 Program Design
@@ -56,7 +56,7 @@ Source authority establishes which meaning is legitimate; it supports the contra
 This skill admits or materializes durable Requirements from already-settled authoritative meaning and authors the separate Specification:
 
 - Requirements: affected people, authorized needs, desired outcomes, priorities, limits, and non-goals, as need records;
-- Specification: normative observable rules, each naming the need it serves, as rule records;
+- Specification: normative observable rules, each naming the needs it serves, as rule records;
 - problem, consumers, and current observable behavior;
 - domain entities: for each noun two readers could read differently, a canonical term with a stable `E` identifier, identity rule, relationships, invariants, and observable states, defined on the page;
 - source authority and important user decisions;
@@ -184,11 +184,11 @@ Reuse the existing identities and links for:
 
 Do not create a separate ledger or duplicate document. Every removed or superseded item needs explicit owner authority.
 
-Produce inspectable per-item coverage that names each accepted identity and its record or owner-authorized supersession. A count or an assertion that coverage is intact is not coverage evidence.
+Accepted-requirements coverage is returned state, derived from record ids: each accepted identity's record id, or its owner-authorized supersession, or the gap. It is never written into the design. A count or an assertion that coverage is intact is not coverage evidence.
 
 Re-anchor before deriving or revising normative requirements: compare the proposed meaning with the confirmed goal, accepted requirements, permitted and protected systems, owner-set package limits, non-goals, and existing foundation from the confirmed goal boundary. Return `aligned` or the exact mismatch. On mismatch, stop normative authoring and return the existing owner decision, or use `sunstack-dev:discuss-clarify-mental-models` when the shared model itself drifted. Keep the comparison in returned workflow state, not durable specification prose.
 
-Completion: the current/desired gap is inspectable, each causal claim is evidenced or labeled as a hypothesis, every noun two readers could read differently is a defined entity with an `E` identifier and every slot filled or marked as an exact gap, accepted-requirements coverage is inspectable when applicable, and the Re-anchor comparison is aligned or has returned the exact mismatch and owner route.
+Completion: the current/desired gap is inspectable, each causal claim is evidenced or labeled as a hypothesis, every noun two readers could read differently is a defined entity with an `E` identifier and every slot filled or marked as an exact gap, accepted-requirements coverage is returned by record id when applicable, and the Re-anchor comparison is aligned or has returned the exact mismatch and owner route.
 
 ### 3. Define outcomes, non-goals, and semantic slices
 
@@ -214,13 +214,13 @@ Completion: each load-bearing branch has durable authority evidence, is explicit
 
 ### 5. Derive normative requirements
 
-MUST load `references/requirements-and-traceability.md` with the stage-2 entity definitions and undefined-noun gaps to write each rule as one sentence over defined entities, naming the need it serves, repair vague or task-shaped statements, and return the rule records plus any need no rule serves and any entity no rule uses.
+MUST load `references/requirements-and-traceability.md` with the stage-2 entity definitions and undefined-noun gaps to write each rule as one sentence over defined entities, naming the needs it serves, repair vague or task-shaped statements, and return the rule records plus any need no rule serves and any entity no rule uses.
 
 For substantial or uncertain work, stage source notes, alternative wording, prototype views, and temporary comparisons in private working state, the repository's ignored scratch convention, or `tmp/design-workflows/<date>-<slug>/`. Quick work keeps the comparison in working state. Scratch never owns normative meaning or becomes required reading.
 
 For each rule, contract, failure obligation, constraint, and proof obligation, name the confirmed need it serves and what becomes observably false or unverifiable if removed. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. Delete an element that changes neither the confirmed outcome nor a necessary truth boundary; a template slot does not authorize adjacent work.
 
-Completion: every `core` goal is covered, every rule has a basis, names its need and has an observable pass/fail consequence, every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
+Completion: every `core` goal is covered, every rule has a basis, names its needs and has an observable pass/fail consequence, every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
 
 ### 6. Specify observable contracts and negative space
 
@@ -248,7 +248,7 @@ Completion: every material rule has cases that a wrong implementation would fail
 
 Apply the Required Why/What Views predicates. For each selected view, state the reader question it answers: which parts the system has and which needs or rules belong to each, whose job and pain must be understood, who interacts with the opaque system and across which observable surfaces, or which nouns the rules are about and what makes two instances the same. IF one or more predicates fire, or the substantial per-document visual obligation applies even when no precise-view predicate fires, load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` before the local artifact reference. Supply the selected precise views plus the per-document explanatory-visual obligation when applicable, and return the document medium and any page proof, plus each view's selected medium, fallback decision, semantic-preservation result, visual-check result, and exact capability or preview gap.
 
-The page's why and what parts each need a meaningful visual beside the explanation it supports when substantially authored or revised; reuse a current correct embedded visual when it still explains current meaning. Each accepted need that changes a screen, page, or other UI surface is a user-visible moment: the why part shows that moment as a UI view grounded in the current app, or records `no current UI`. A people/job/pain picture does not cover a changed screen. Non-UI clauses stay sentences. The what part may show the same screens only to pin what the user observes; the product stays one opaque system, with no internal components, stores, or enforcement. No decorative filler satisfies the requirement. The shared rendering owner chooses every medium. A typo-only edit does not regenerate images.
+The page's why and what parts each need a meaningful visual beside the explanation they support when substantially authored or revised. Each accepted need that changes a screen, page, or other UI surface gets a UI view grounded in the current app, or records `no current UI`; a people/job/pain picture does not cover a changed screen. The what part may show the same screens only to pin what the user observes; the product stays one opaque system. The shared rendering owner chooses every medium, and `generated-document-visuals.md` owns what a generated image must pass.
 
 Rejecting a requested all-in-one or internally focused diagram does not complete the selected views and does not require owner approval of their presentation. Render the clearest valid replacements that preserve the required meaning. In a read-only or chat-only run, show those views in the response; describing the diagrams without producing and checking them leaves the view work incomplete.
 
@@ -262,17 +262,15 @@ In a file-backed set, write the need and rule records, then use `sunstack-dev:pr
 
 Every record id and link the page names resolves.<!-- D004 -->
 
-The design-item list is generated from the records. Keep unanswered owner questions as open decision records, with comparisons or choices only when an answer is needed and Comments for discussion. Run the design check and the matching static check through `presentation-html`.
-
-Compose each substantive Why/What section around its answer and the relationship a reader needs to understand, pairing the explanation with a supported relational diagram appropriate to that question. The why part explains affected people, their jobs, supported pain/outcome, authority and user-facing journeys when their existing predicate fires; its diagrams do not introduce internal components or enforcement. The what part explains the defined entities and the conditions and failure outcomes the rules depend on. A card or paragraph alone does not replace the diagram's relationship job, and the diagram never becomes the only home of a rule. A small fact need not be promoted into a separate diagram section.
+The design-item list is generated from the records. Keep unanswered owner questions as open decision records; `presentation-html` chooses how they and every other piece are shown, and its `engineering-documents.md` owns how a section's answer and its view sit together. The why part's views introduce no internal components or enforcement, and no view becomes the only home of a rule. Run the design check and the matching static check through `presentation-html`.
 
 Completion: each need and rule has one record and no copy on the page; every normative claim has one home; a stranger can navigate from need through problem, rule, observable behavior, and proof; every accepted identity has a record or owner-authorized supersession; and the design check reports no `core` rule without a need.
 
 ### 10. Run the author self-check
 
-Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the records and the page. Check authority conflicts, accepted-requirements coverage, rules that name no need, vague or multi-sentence rules, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, record text copied onto the page, process residue, obscure headings, and reader-facing elements that fail the human deletion test. For each generated visual also consume the actual project asset, relative embed, pixel inspection and destination-preview result from the shared rendering owner, then return the author self-check with exact gaps, its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
+Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the records and the page. Check authority conflicts, accepted-requirements coverage, rules that name no need, vague or multi-sentence rules, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, record text copied onto the page, process residue, obscure headings, and reader-facing elements that fail the human deletion test. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the author self-check with exact gaps, its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
 
-In a file-backed set, then run the design rules over the set's pages with the command in `../design-review/SKILL.md` step 5 and the `specification-only` config, and fix or answer each trace-link warning before returning.
+The design check reports missing need and check links; the review rules return with the `design-review` run.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 
@@ -322,7 +320,7 @@ Do not return `locally-ready` while any of these hold:
 - a rule relies on a noun two readers could read differently that the page does not define; an entity lacks an identity rule that decides the hardest case the source raises, or leaves a relationship, invariant, or observable-state slot neither filled nor marked as an exact gap; or an entity is defined in implementation terms such as a type, schema, table, package, or payload field;
 - a user-facing rule serves a need whose authority state is not `authorized`, or a normative-eligible need has no stable U identifier;
 - the goal boundary lacks explicit confirmation or correction by the authorized owner, acceptable outcome-level evidence, or the specification expands its goal, affected classes, missing outcomes, permitted/protected systems, owner-set package limits, non-goals, or acceptable complexity without a new owner decision;
-- the accepted requirements set cannot be recovered from the current owner-confirmed source or last inspectable owner-accepted baseline, conflicts with those sources, lacks inspectable per-item coverage, or loses an item without owner-authorized supersession;
+- the accepted requirements set cannot be recovered from the current owner-confirmed source or last inspectable owner-accepted baseline, conflicts with those sources, lacks returned coverage by record id, or loses an item without owner-authorized supersession;
 - the design check reports a `core` rule with no need;
 - unresolved product meaning is disguised as an assumption;
 - a returned gap omits an authorized observable outcome, or `decision-needed` is based only on whether implementation or incident mechanisms should be retained or made normative;

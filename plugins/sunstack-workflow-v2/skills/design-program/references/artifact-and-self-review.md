@@ -11,7 +11,7 @@ Return in workflow order:
 
 ## Apply Required Views
 
-Consume each selected view's reader question plus the selected predicates and required semantic fields from the `SKILL.md` Required Views table without restating them. Consume the shared rendering result for every firing and reject missing fields, failed visual checks, unresolved fallbacks, or a view that does not answer its stated reader question. For generated images, also reject a missing project-local asset, broken relative embed, inaccurate alt/caption, absent pixel inspection, unverified required destination preview, Lead-unaccepted candidate, or any disagreement with the exact structural views.
+Consume each selected view's reader question plus the selected predicates and required semantic fields from the `SKILL.md` Required Views table without restating them. Consume the shared rendering result for every firing and reject missing fields, failed visual checks, unresolved fallbacks, or a view that does not answer its stated reader question. A generated image passes or fails under `sunstack-dev/shared-references/generated-document-visuals.md`, and never disagrees with the exact structural views.
 
 For call graph or sequence views, consume the current-to-proposed delta from `state-calls-and-flows.md` rather than copying a raw stack trace. Compare the displayed fields with the `call graph/sequence` row in `SKILL.md`'s Required Views table, and check that each boundary-crossing edge carries its shape as `state-calls-and-flows.md` requires.
 
@@ -29,7 +29,7 @@ Bad: prose labeled as a diagram, decorative boxes with no semantic owners, every
 
 ## Simplify
 
-Recheck the components, interfaces, states, and mechanisms chosen at target-composition selection against the finished artifact. Remove one that no longer serves an obligation, constraint, failure policy, or proof need, or that owns a truth another component already owns, and record the removal in the coverage report below.
+Recheck the components, interfaces, states, and mechanisms chosen at target-composition selection against the finished artifact. Remove one that no longer serves an obligation, constraint, failure policy, or proof need, or that owns a truth another component already owns, and record the removal in the returned coverage below.
 
 For every heading, paragraph, list, table, and view, ask:
 
@@ -56,7 +56,7 @@ Preserve:
 - failure, recovery, trust, cutover, and proof decisions;
 - accepted debt with payer and revisit signal.
 
-After deletion or simplification, report one compact row per stable identity with `covered | owner-authorized supersession | gap` plus its anchor: a record, a binding row or a section. Identities may share a row only when every member identity is enumerated and all share the same disposition and anchor. A bare "coverage intact" assertion is not a report. Deleting an entity is a coverage loss.
+After deletion or simplification, return accepted-requirements coverage as record ids in the returned state, never in the design: each accepted identity's record id, owner-authorized supersession or gap. A bare "coverage intact" assertion is not a report. Deleting an entity is a coverage loss.
 
 Choose the expression that fits the relationship:
 
@@ -69,7 +69,7 @@ Choose the expression that fits the relationship:
 - a comparison table for alternatives;
 - a concrete example when an interface remains abstract.
 
-Make headings say what the human will learn, such as “How Each Requirement Works and How We Verify It,” rather than compressed workflow jargon.
+Make headings say what the human will learn, such as “How a Job Moves From Queued to Done,” rather than compressed workflow jargon.
 
 Remove an “Architecture documentation impact” section when it only lists post-implementation documentation or PR cleanup; route that work to planning or `sunstack-dev:docs-maintain`. Remove a “Design completion boundary” section when it only repeats acceptance, review, or planning gates. Preserve any actual system obligation, and keep in the returned self-check the readiness result that says whether planning can proceed without inventing owners, interfaces, state, failure behavior, or proof seams.
 
@@ -93,9 +93,9 @@ Re-read the whole artifact:
 - every design element has a legitimate basis: run the design-item pass below;
 - the artifact records the selected structure with its credible alternatives, tradeoffs, and falsifiers;
 - every reader-facing element passes the human deletion test;
-- every generated visual has a current accepted asset/embed, accurate labels and edges, readable placement, and agreement with the authoritative prose and exact views;
+- every generated visual passes `sunstack-dev/shared-references/generated-document-visuals.md` and agrees with the prose and exact views;
 - progressive disclosure leads from rule through owner, call/state/failure behavior, and proof without scratch or process notes;
-- the shown views include the binding table, one representative entry-to-effect path, and `deviations and unresolved decisions: none | list`;
+- what is shown includes who does what, one representative entry-to-effect path, the entity bindings, and the generated design-item list;
 - no planner-owned file, sequence, or command detail leaked in;
 - no missing Why/What or entity meaning was invented;
 - the Program Design preserves rather than rewrites the needs' authorized boundary and the rules' observable contract;
@@ -116,6 +116,6 @@ Complete when:
 
 - the artifact composes as one proportional structural realization;
 - every fired view has a passed rendering result with preserved semantics;
-- the binding table, realization records, current/proposed call deltas, and accepted-requirements coverage are visible;
+- the binding table, realization records and current/proposed call deltas are visible, and accepted-requirements coverage is in the returned state;
 - unnecessary structure is pruned;
 - every known gap is exact.
