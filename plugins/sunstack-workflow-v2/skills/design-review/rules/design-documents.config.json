@@ -1,6 +1,10 @@
 {
   "rulebook": [
     {
+      "markdown": "../../design-program/SKILL.md",
+      "rules": "../../design-program/rules/design-program.rules.json"
+    },
+    {
       "markdown": "../../design-specification/SKILL.md",
       "rules": "../../design-specification/rules/design-specification.rules.json"
     }
@@ -14,6 +18,19 @@
   "evidence": {
     "ast_grep": "evidence/sgconfig.yml",
     "kinds": {
+      "entity": {
+        "rule": "entity-element",
+        "fields": {
+          "identifier": {
+            "from": "capture",
+            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(E[0-9]+)[\"'\\s/>]"
+          },
+          "bindings": {
+            "from": "same_file",
+            "rule": "binding-row-text"
+          }
+        }
+      },
       "trace_link": {
         "rule": "trace-link",
         "fields": {

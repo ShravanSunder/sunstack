@@ -1,3 +1,33 @@
+# An entity definition on the milestone page: an element whose own start tag has an
+# id of E and digits. Each element is matched on its own start tag, never with
+# `stopBy: end`, so an ancestor of an id-bearing element is not itself a match.
+id: entity-element
+language: Html
+rule:
+  kind: element
+  has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?E[0-9]+["''\s/>]'}
+---
+# The visible text of an entity-binding row: text nodes inside a table row that is
+# inside the element with id="bindings", or inside an element that follows a heading
+# with id="bindings" with no heading between. Comments and attribute values are not text.
+id: binding-row-text
+language: Html
+rule:
+  kind: text
+  inside:
+    stopBy: end
+    kind: element
+    has: {kind: start_tag, regex: '^<tr\b'}
+    any:
+      - inside: {stopBy: end, kind: element, has: {kind: start_tag, regex: '^<[A-Za-z][^>]*\sid\s*=\s*["'']?bindings["''\s/>]'}}
+      - inside:
+          stopBy: end
+          kind: element
+          follows:
+            stopBy: {kind: element, has: {kind: start_tag, regex: '^<h[1-6]\b'}}
+            kind: element
+            has: {kind: start_tag, regex: '^<h[1-6][^>]*\sid\s*=\s*["'']?bindings["''\s/>]'}
+---
 # A trace link on a design page: an element whose own start tag links to a passage,
 # a #fragment on an HTML page in the folder or on its own page. An attribute may have
 # whitespace around its `=`, and its value may be double-quoted, single-quoted or

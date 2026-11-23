@@ -228,7 +228,7 @@ A newly authored or substantively revised substantial Program Design renders eac
 
 In a file-backed set, write the realization and decision records, then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's how part, organized by the ownership, lifecycle, contract or call-path questions that explain it, and take back the component for each. The page shows each record by id and never restates it. A call path is labelled source-derived or proposed. Keep open design choices separate from settled structure. Run the design check and the matching static check through `presentation-html`.
 
-Keep the entity binding table on the page as explanation.
+Put the entity binding table on the page that holds the entity definitions, in, or directly under the heading of, an element with `id="bindings"`; the design rule reads binding rows only there, on the same page.
 
 `presentation-html`'s `engineering-documents.md` owns how each How explanation and its view sit together. Every fired view still appears with its required fields; a view never substitutes for a binding row or a record, and governing guards, boundary shapes and failure obligations stay visible.
 
@@ -250,7 +250,7 @@ Completion: each design element serves a rule, constraint, failure policy, or pr
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the realization records and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the integration self-check with exact gaps.
 
-The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
+The design check reports missing need and check links. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
 
 Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show, in this order, who does what and where the boundaries are, one representative path from entry to effect, the entity bindings, and the generated design-item list, each in the component `presentation-html` returns for it.
 
@@ -337,7 +337,7 @@ Do not return `locally-ready` while any of these hold:
 - the confirmed goal boundary or accepted requirements set is missing, unrecoverable, conflicting, or rebuilt from mutually narrowed current files;
 - target structure was selected without current-system evidence or a named greenfield basis;
 - a material structural choice lacks credible alternatives, explicit tradeoffs, accepted debt and payer, or falsifiers/revisit signals;
-- a Specification entity lacks a binding row;
+- a Specification entity lacks a binding row;<!-- D003 -->
 - a binding cell is blank rather than `gap: <why>`;
 - a boundary crossing has only a prose shape;
 - a result or decision contract is an open string or prose variant list;

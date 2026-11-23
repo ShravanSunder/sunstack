@@ -7,8 +7,9 @@ import { z } from "zod";
 import { repositoryRoot, runNativeLint } from "#test-support/sunstack-process";
 
 // The real 2026-11-07 design set from sunstack-tools at e454cc8
-// (docs/specs/2026-11-07-design-documents), copied byte for byte. Only the trace-link
-// rule survives the lean design records cutover, so these cases exercise its links.
+// (docs/specs/2026-11-07-design-documents), copied byte for byte. The trace-link cases
+// read its pages as they are; the binding cases join its entity definitions and its
+// binding table into one milestone page, the shape the lean design records skills write.
 const fixtureDirectory = path.join(
   repositoryRoot,
   "tests/skills/fixtures/design-rules/2026-11-07-design-documents",
@@ -18,6 +19,7 @@ const designRulesConfig = "design-documents.config.json";
 const setRelative = "docs/specs/2026-11-07-design-documents";
 
 const rule = {
+  entityRow: "program-design.entity-has-binding-row",
   traceLink: "design-documents.trace-link-resolves",
 } as const;
 
@@ -85,7 +87,7 @@ async function lintDesignSet(
   const root = mkdtempSync(path.join(tmpdir(), "2026-11-design-rules-"));
   roots.push(root);
   execFileSync("git", ["init", "--quiet", root]);
-  for (const skill of ["design-review", "design-specification"]) {
+  for (const skill of ["design-review", "design-program", "design-specification"]) {
     const relative = `${designSkillsRelative}/${skill}`;
     mkdirSync(path.join(root, relative), { recursive: true });
     cpSync(path.join(repositoryRoot, relative, "SKILL.md"), path.join(root, relative, "SKILL.md"));
@@ -111,20 +113,21 @@ async function lintDesignSet(
   return report;
 }
 
-function outcomeCounts(report: DesignReport): Record<string, number> {
+function outcomeCounts(report: DesignReport, ruleName?: string): Record<string, number> {
   const counts: Record<string, number> = {};
-  for (const result of report.results) {
+  for (const result of report.results.filter((each) => !ruleName || each.name === ruleName)) {
     const key = `${result.name} ${result.outcome}`;
     counts[key] = (counts[key] ?? 0) + 1;
   }
   return counts;
 }
 
+/** Exactly one finding from the expected rule; other rules' findings are other cases' concern. */
 function expectOneFinding(
   report: DesignReport,
   expected: { readonly rule: string; readonly page: string; readonly line: number },
 ): void {
-  expect(report.findings).toEqual([
+  expect(report.findings.filter((finding) => finding.rule === expected.rule)).toEqual([
     expect.objectContaining({
       rule: expected.rule,
       file: `${setRelative}/${expected.page}.html`,
@@ -136,6 +139,25 @@ function expectOneFinding(
 
 const adapted = readAdaptedDesignSet();
 
+/** One milestone page: the real entity definitions with the real binding table under id="bindings". */
+function readMilestonePage(): string {
+  const programDesign = readFixturePage("program-design.html");
+  const bindingSection = programDesign.slice(
+    programDesign.indexOf("<h2>Entity bindings</h2>"),
+    programDesign.indexOf("<h2>Public composition</h2>"),
+  );
+  expect(bindingSection).toContain("</table>");
+  return replaceExactlyOnce(
+    readFixturePage("specification.html"),
+    "</ex-document>",
+    `${replaceExactlyOnce(bindingSection, "<h2>Entity bindings</h2>", '<h2 id="bindings">Entity bindings</h2>')}</ex-document>`,
+  );
+}
+
+const milestone = readMilestonePage();
+const bindingRowE3 = /<tr><td>E3<\/td>.*?<\/tr>\n?/su;
+const e3Line = lineOf(milestone, 'id="E3"');
+
 test("a trace link to an existing passage on another page passes", async () => {
   const programDesign = replaceExactlyOnce(
     adapted["program-design"],
@@ -145,8 +167,8 @@ test("a trace link to an existing passage on another page passes", async () => {
 
   const report = await lintDesignSet({ ...adapted, "program-design": programDesign });
 
-  expect(report.findings).toEqual([]);
-  expect(outcomeCounts(report)).toEqual({ [`${rule.traceLink} pass`]: 1 });
+  expect(report.findings.filter((finding) => finding.rule === rule.traceLink)).toEqual([]);
+  expect(outcomeCounts(report, rule.traceLink)).toEqual({ [`${rule.traceLink} pass`]: 1 });
 });
 
 test("a trace link to a missing fragment warns once at the link", async () => {
@@ -200,15 +222,16 @@ test.each([
     expect(report.results.filter((result) => result.name === rule.traceLink)).toEqual([
       expect.objectContaining({ outcome }),
     ]);
-    expect(report.findings).toHaveLength(outcome === "finding" ? 1 : 0);
+    expect(report.findings.filter((finding) => finding.rule === rule.traceLink)).toHaveLength(
+      outcome === "finding" ? 1 : 0,
+    );
   },
 );
 
-test("pages with no fragment links are all read and have nothing to check", async () => {
+test("pages with no fragment links are all read and give the link rule nothing to check", async () => {
   const report = await lintDesignSet(adapted);
 
-  expect(report.status.kind).toBe("nothing_selected");
-  expect(report.results).toEqual([]);
+  expect(report.results.filter((result) => result.name === rule.traceLink)).toEqual([]);
   expect(report.file_counts.map((count) => count.file).sort()).toEqual(
     Object.keys(adapted)
       .map((name) => `${setRelative}/${name}.html`)
@@ -234,4 +257,71 @@ test("known engine gap: a link to a record placement warns, because only an HTML
     page: "index",
     line: lineOf(placementPage, '<a href="#R1">'),
   });
+});
+
+test("a milestone page whose binding table names every entity is quiet", async () => {
+  const report = await lintDesignSet({ index: milestone });
+
+  expect(report.findings).toEqual([]);
+  expect(outcomeCounts(report)).toEqual({ [`${rule.entityRow} pass`]: 5 });
+});
+
+test("an entity whose binding row is gone warns once at the entity", async () => {
+  const page = milestone.replace(bindingRowE3, "");
+  expect(page).not.toBe(milestone);
+
+  const report = await lintDesignSet({ index: page });
+
+  expectOneFinding(report, { rule: rule.entityRow, page: "index", line: e3Line });
+});
+
+test("an id on the wrapping table counts the same as an id on the heading above it", async () => {
+  const page = replaceExactlyOnce(
+    milestone,
+    '<h2 id="bindings">Entity bindings</h2><table>',
+    '<h2>Entity bindings</h2><table id="bindings">',
+  );
+
+  const report = await lintDesignSet({ index: page });
+
+  expect(report.findings).toEqual([]);
+  expect(outcomeCounts(report)).toEqual({ [`${rule.entityRow} pass`]: 5 });
+});
+
+test.each([
+  ["single-quoted", "id='bindings'"],
+  ["unquoted", "id=bindings"],
+  ["spaced", 'id = "bindings"'],
+] satisfies [string, string][])("a %s bindings id still selects its rows", async (_style, attribute) => {
+  const page = replaceExactlyOnce(milestone, '<h2 id="bindings">', `<h2 ${attribute}>`);
+
+  const report = await lintDesignSet({ index: page });
+
+  expect(report.findings).toEqual([]);
+  expect(outcomeCounts(report)).toEqual({ [`${rule.entityRow} pass`]: 5 });
+});
+
+test("a spaced id on an entity is still checked, and warns once when its row is gone", async () => {
+  const page = replaceExactlyOnce(milestone, 'id="E3"', 'id = "E3"').replace(bindingRowE3, "");
+
+  const report = await lintDesignSet({ index: page });
+
+  expectOneFinding(report, { rule: rule.entityRow, page: "index", line: e3Line });
+  expect(report.results.filter((result) => result.name === rule.entityRow)).toHaveLength(5);
+});
+
+test("a binding table on another page does not count, so every entity warns", async () => {
+  const report = await lintDesignSet({
+    specification: readFixturePage("specification.html"),
+    "program-design": replaceExactlyOnce(
+      readFixturePage("program-design.html"),
+      "<h2>Entity bindings</h2>",
+      '<h2 id="bindings">Entity bindings</h2>',
+    ),
+  });
+
+  expect(report.findings.filter((finding) => finding.rule === rule.entityRow)).toHaveLength(5);
+  expect(
+    report.findings.every((finding) => finding.file === `${setRelative}/specification.html`),
+  ).toBe(true);
 });
