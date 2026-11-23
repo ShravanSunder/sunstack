@@ -7,5 +7,5 @@
 - The prepared call-stack component is no longer taught: "What calls what?" offers the source-derived call path (nested trace) or a sequence diagram. An existing page using `ex-call-stack` keeps it. `shared-references/design-documents.md` points call paths at `views.md`.
 - `engineering-documents.md` adds one page-length standard: a section holds what its records and picture cannot say.
 - A typed design page's required `presentation-html` load falls from 9,303 to 7,650 words with every condition holding, and to 6,225 once the examples are not needed.
-- Validation: `pnpm --dir tests/skills test`; skill-rules lint on the changed skill files; `claude plugin validate .`.
+- Validation: `pnpm --dir tests/skills test` (343 passed, 1 skipped); skill-rules lint on the changed skill files (0 errors, 0 warnings); `claude plugin validate .` (passes).
 - Codex and Claude caches are not refreshed.
