@@ -250,7 +250,7 @@ Completion: each design element serves a rule, constraint, failure policy, or pr
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the realization records and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the integration self-check with exact gaps.
 
-The design check reports missing need and check links; the review rules return with the `design-review` run.
+The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning.
 
 Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show, in this order, who does what and where the boundaries are, one representative path from entry to effect, the entity bindings, and the generated design-item list, each in the component `presentation-html` returns for it.
 
@@ -337,7 +337,7 @@ Do not return `locally-ready` while any of these hold:
 - the confirmed goal boundary or accepted requirements set is missing, unrecoverable, conflicting, or rebuilt from mutually narrowed current files;
 - target structure was selected without current-system evidence or a named greenfield basis;
 - a material structural choice lacks credible alternatives, explicit tradeoffs, accepted debt and payer, or falsifiers/revisit signals;
-- a Specification entity lacks a binding row;<!-- D003 -->
+- a Specification entity lacks a binding row;
 - a binding cell is blank rather than `gap: <why>`;
 - a boundary crossing has only a prose shape;
 - a result or decision contract is an open string or prose variant list;

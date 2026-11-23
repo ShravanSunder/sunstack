@@ -11,20 +11,20 @@ Return: the chunk plan (each chunk's seam, its listed sections, mapped dimension
 A design chunk is a bounded review responsibility over one artifact seam, carried with the seam's complete text on both sides: every section that names the seam's obligation, realizing element, owners, edges, and proof seam, plus all governing sources whole. The 🔎 Reviewer Sidekick reopens each complete artifact involved in the pass and records the seam sections judged. A heading list or a paraphrase is never a seam. The seams are the ones the modes already judge:
 
 ```text
-four-document-design    Requirements -> Specification traceability
-                        Specification -> Program Design realization
+four-document-design    needs -> the rules that name them
+                        rules -> their realizations
                         each material call-path group with its owners, edges,
                           state or effect, and proof seam
-                        each requirement's obligations -> seams -> planned observation
-specification-only      one chunk per material public contract or obligation cluster
+                        each core rule -> its seam -> its planned check
+specification-only      one chunk per material public contract or rule cluster
 program-only            one chunk per component cluster or call-path group
 ```
 
-Never split these across chunks without a seam carrying their full text: one requirement's trace to its obligation, its realization, and its planned observation; one call-path delta with its owners, edges, and proof seam; one contract with its consumers and failure behavior.
+Never split these across chunks without a seam carrying their full text: one rule with its needs, its realization, and its planned check; one call-path delta with its owners, edges, and proof seam; one contract with its consumers and failure behavior.
 
 ## Overlap Seams
 
-A seam is the complete text both adjacent chunks receive: the obligation and the design element realizing it, the contract and the component owning it, the call path and the proof seam observing it. A shared requirement label is not a seam. If a chunk pass needs unseen artifact text to judge its seam, the plan is wrong. Reopen complete governing sources for every pass.
+A seam is the complete text both adjacent chunks receive: the rule and the realization naming it, the contract and the component owning it, the call path and the proof seam observing it. A shared record id is not a seam. If a chunk pass needs unseen artifact text to judge its seam, the plan is wrong. Reopen complete governing sources for every pass.
 
 When the plan is wrong, fix the plan and do not push the review through. Signs of a wrong plan: a chunk pass cannot judge without text outside its assignment; a candidate finding's evidence sits outside the reporting chunk; adjacent passes reach opposite conclusions about one seam neither fully holds.
 

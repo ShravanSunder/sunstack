@@ -270,7 +270,7 @@ Completion: each need and rule has one record and no copy on the page; every nor
 
 Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the records and the page. Check authority conflicts, accepted-requirements coverage, rules that name no need, vague or multi-sentence rules, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, record text copied onto the page, process residue, obscure headings, and reader-facing elements that fail the human deletion test. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the author self-check with exact gaps, its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
 
-The design check reports missing need and check links; the review rules return with the `design-review` run.
+The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 

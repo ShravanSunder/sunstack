@@ -23,7 +23,7 @@ Requirements: WHY, for whom, and within what boundary?
   -> reader understanding and planning readiness
 ```
 
-Requirements, Specification, Program Design, and Verification Design are separate authoritative documents. Review reconstructs each one independently before judging their agreement; agreement inside a combined `Requirements/spec` document cannot substitute for a separately identifiable Requirements source and Specification.
+Requirements, Specification, Program Design, and Verification Design are four kinds of meaning, held as need, rule, realization and planned-check records for one milestone, with decisions and assumptions, and explained on its one page (`design-documents.md`). Review reconstructs each kind independently before judging their agreement, and reads the records, not copies of them.
 
 A persistent 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the complete target set and governing sources, then walks the ordered checks in its own session. The Reviewer Sidekick verifies candidates against accepted requirements, Specification obligations, and the confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The orchestrator disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
 
@@ -41,11 +41,7 @@ classify-review-requirement
 
 review
   mode: specification-only | program-only | four-document-design
-  four-document-design targets:
-    Requirements identity
-    Specification identity
-    Program Design identity
-    Verification Design identity
+  targets: one milestone's typed records, its page, and the Demistify check's report
   result: ready | needs-revision | blocked | decision-needed | not-converging
   coverage: current meaning coverage for every target; uncertain semantic effect is stale
   checks: mode-complete always; sequential chunk passes along artifact seams when
@@ -74,7 +70,8 @@ Completion: classification returns immediately with zero reviewer dispatches.
 For operation `review`, require:
 
 ```text
-mode and complete target identities: file paths or separately labeled in-chat records
+mode, the milestone's record files and page, or separately labeled in-chat records
+the Demistify check's report for the milestone
 governing sources, authority states, and coverage basis
 confirmed goal boundary and accepted requirements set, or the exact authority gap
 constraints and non-goals
@@ -88,13 +85,13 @@ owner-message export: path | none
 
 When prior results are unavailable, inspect the current target and governing sources, record the reason, and treat this review as the baseline; the convergence rule in `references/finding-and-reduction-schema.md`, loaded at step 6, counts from it. Reject stale, wrong-source, or unverified inputs. Route any material design break or newly exposed owner decision to its owner.
 
-MUST load `sunstack-dev/shared-references/design-documents.md` and return the identity status of each document the selected mode needs, and the design-item shape, nudge labels and ranking the review applies. `specification-only` inspects separately identifiable Requirements and Specification sources. `program-only` adds a separately identifiable Program Design. `four-document-design` inspects all four, the Verification Design included. Reuse resolvable file pointers for file-backed records. Copy separately labeled in-chat records verbatim into the tmp review packet, because a fresh reviewer cannot follow a pointer into a conversation, and never into a durable combined review artifact.
+MUST load `sunstack-dev/shared-references/design-documents.md` and return the records and page sections the selected mode reads, and the design-item contents, nudge labels and ranking the review applies. `specification-only` reads the need and rule records and the page's why and what parts. `program-only` adds the realization and decision records and the how part. `four-document-design` adds the planned checks and the proof part. Reuse resolvable file pointers for file-backed records. Copy separately labeled in-chat records verbatim into the tmp review packet, because a fresh reviewer cannot follow a pointer into a conversation, and never into a durable combined review artifact.
 
 Use the owner-confirmed requirements record and confirmed goal boundary when available. Otherwise use the last inspectable owner-accepted governing source. If neither exists, or they conflict, return the authority gap. Mutually narrowed current files never establish the accepted requirements set by themselves.
 
-A combined `Requirements/spec`, a Requirements-titled artifact that also stands in for the Specification, or an absent separate Requirements or Specification identity is a concrete blocker-level design finding, not permission for review to infer the missing identity. Record `needs-revision`, route the smallest correction to `design-specification`, and do not repair or create either artifact during review. Continue only with bounded findings that the available sources can support; never return `ready`.
+A `core` slice with no need or rule records is a blocker-level design finding, not permission for review to infer them. Record `needs-revision`, route the smallest correction to `design-specification`, and do not write records during review. Continue only with bounded findings that the available sources can support; never return `ready`.
 
-`program-only` also requires the governing Specification. `four-document-design` requires the current Requirements, Specification, Program Design, and Verification Design. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label.
+`program-only` also requires the governing rules. `four-document-design` requires the current needs, rules, realizations and planned checks. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label.
 
 Completion: the complete target set, governing sources, accepted requirements, boundaries, open authority decisions, and any prior-coverage semantic-change record are unambiguous; any missing-history baseline is recorded with its reason.
 
@@ -110,7 +107,7 @@ program-only         -> references/reviewing-program-design.md
 four-document-design -> references/reviewing-four-document-design.md
 ```
 
-Specification review judges the governing Requirements authority and the Specification's observable What. Program review judges structural How and realization of the governing Specification, including each entity's binding, the shape at each boundary, and closed result and decision variants. Four-document design review independently repeats both, judges the Verification Design, walks each requirement from its obligations through their seams to its planned observation, walks the trace table row by row, checks that each term means the same thing in all four documents, and judges integration and planning readiness. A revision to the Verification Design alone is reviewed in `four-document-design`; there is no standalone Verification Design mode. A design noun with no entity routes `Route: design-specification` when it names no `E` or `R` it serves, or carries its own identity, lifecycle, or relationships; a synonym for an existing entity routes `Route: design-program`.
+Specification review judges the governing Requirements authority and the Specification's observable What. Program review judges structural How and realization of the governing Specification, including each entity's binding, the shape at each boundary, and closed result and decision variants. Four-document design review independently repeats both, judges the planned checks, walks every `core` rule from its needs through its realization to its planned check, starting from what the Demistify check reports, checks that each term means the same thing in every record and section, and judges integration and planning readiness. A revision to the Verification Design alone is reviewed in `four-document-design`; there is no standalone Verification Design mode. A design noun with no entity routes `Route: design-specification` when it names no `E` or `R` it serves, or carries its own identity, lifecycle, or relationships; a synonym for an existing entity routes `Route: design-program`.
 
 Completion: exactly one mode and its complete required artifact set are selected.
 
@@ -128,9 +125,7 @@ MUST load `references/lanes/lane-schema.md` and record `complete | partial | blo
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return its check result. MUST load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. MUST load the selected mode reference and return its whole-mode judgment. Reconstruct and judge the whole mode from complete artifacts.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` to walk the chunk passes sequentially and return each pass's seam coverage. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
-3. IF the set has a file-backed Requirements page, load `rules/README.md`, run its requirement coverage nudge on the set's folder and return its brief result; read each warning as worth checking, not a failure: the page may address the need without naming its id, and you decide whether it is a finding; an absent page gets one warning: if it is not written yet, name it once as not yet written.
-
-In a file-backed HTML set, the 🔎 Reviewer Sidekick also runs the design rules for the selected mode over the set's pages, keeping the report outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/<mode config> --root <the project's root> --report <scratch>/design-lint.json <the set's folder>`. The mode config is `design-documents.specification-only.config.json` for `specification-only`, `design-documents.program-only.config.json` for `program-only` and `design-documents.config.json` for `four-document-design`, so each run checks only the documents its mode admits. Together they check that each trace link's `#fragment` resolves, each entity is named in a row under Program Design's `id="bindings"`, and each requirement and obligation in a row under the Verification Design's `id="coverage"`; requirements, obligations, entities and links are found on every page in the set's folder, linked parts included. They read an id only when it is written as one run of text, so an id split by inline markup, such as `R<span>6</span>`, warns as missing; open the row before accepting that warning. They read binding rows only from `program-design.html` and coverage rows only from `verification.html`, so a binding or coverage table moved into a linked part warns for every id it holds. Each warning is a candidate finding, anchored on its rule's standard as a domain-skill rule and verified at its anchor in step 8. A pass says only that the row or link exists; the binding, observation or link itself is still judged by the review. A run that is refused or `incomplete`, or can't start, is a coverage gap for those rules and cannot support `ready`. A `nothing_selected` run whose `file_counts` list the set's pages found nothing those rules check, such as a Specification with no `#fragment` links; one whose `file_counts` list none of them is a gap.
+In a file-backed milestone, the 🔎 Reviewer Sidekick also runs, read-only, the Demistify check (`demistify project check`) and the design link rule, keeping reports outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/design-documents.config.json --root <the project's root> --report <scratch>/design-lint.json <the milestone folder>`. The Demistify check reports a `core` rule with no need or no planned check; each is a candidate finding. The link rule checks that each link's `#fragment` resolves to an HTML `id`. It cannot yet see a `data-design-record` placement as an anchor, though Demistify generates one there, so a warning on a link to a valid placement is a known engine gap: dismiss it at verification and never ask the author to add an `id`. Each other warning is a candidate finding, anchored on its rule's standard and verified at its anchor in step 8. A pass says only that the link resolves. A run that is refused or `incomplete`, or can't start, is a coverage gap for that rule and cannot support `ready`; a `nothing_selected` run whose `file_counts` list the page found no fragment links.
 
 Completion: the mode-complete check and every selected chunk pass have statuses, each pass lists its seam sections, and every required dimension has current coverage.
 
@@ -225,7 +220,6 @@ Completion: the result names the first required revision, coverage gaps, any own
 Do not return `ready` while any of these hold:
 
 - the current target identity or semantic scope is missing or ambiguous;
-- Requirements and Specification are not separately identifiable in any review mode, or a combined `Requirements/spec` is being used as both;
 - the complete target or governing-source set was not read;
 - the confirmed goal boundary or accepted requirements are missing or conflicting without an explicit returned authority gap;
 - no complete semantically current mode-complete check exists;
@@ -234,14 +228,14 @@ Do not return `ready` while any of these hold:
 - a finding lacks its anchor (an accepted requirement identity, confirmed goal-boundary field, or domain-skill rule), its plain-language meaning, the observable outcome that fails, source-backed evidence, deletion test, scope effect, semantic correction route, or disposition;
 - specification, program, or four-document-design mode boundaries are conflated;
 - `program-only` or `four-document-design` omits an applicable current/proposed call path, explicit no-predecessor case, added/removed/changed edge status, or a preservation-critical or contested unchanged edge;
-- `program-only` or `four-document-design` accepts a Specification entity with no binding, a boundary shape written only as prose, or an open-string result or decision contract; or `four-document-design` passes traceability without walking every trace-table row and every requirement to its planned observation, or leaves a design noun unresolved against the entity table;
-- `four-document-design` proceeds without a separately identifiable Verification Design, or accepts a requirement with no Verification Design row;
+- `program-only` or `four-document-design` accepts a Specification entity with no binding, a boundary shape written only as prose, or an open-string result or decision contract; or `four-document-design` passes traceability without walking every `core` rule to its planned check, or leaves a design noun unresolved against the entity definitions;
+- `four-document-design` accepts a `core` rule the Demistify check reports with no need or no planned check;
 - a material proof claim is accepted without evidence that can observe it at the required layer, or an applicable diagram is accepted without checking that it answers its reader question and agrees with the written meaning;
 - a UI image is accepted that invents a control or skips a changed screen;
 - required file-backed visuals or relative embeds are missing or broken, generated labels/edges/boundaries disagree with governing meaning, or unavailable image/preview access was treated as complete visual coverage;
 - four-document-design mode trusts author or local checks without independent reinspection;
 - the Reviewer Sidekick did not read the complete target set and governing sources before planning checks, or an optional check lacks a selection reason;
-- a chunk plan split one requirement's trace to its obligation, realization, and planned observation, or one call-path delta with its owners and proof seam, across chunks with no overlap seam; or a chunk pass was treated as mode-complete coverage;
+- a chunk plan split one rule from its needs, realization, and planned check, or one call-path delta with its owners and proof seam, across chunks with no overlap seam; or a chunk pass was treated as mode-complete coverage;
 - any reviewer judged an artifact it did not read completely, or the common method's coverage rows leave a target section neither covered nor excluded with a reason;
 - the dispel check is missing, or a design element dispel mapped `absent` lacks either a `decision-needed` return or an accepted removal routed to `design-program`, since "well drawn" is not a disposition;
 - a reviewer candidate that adds unrequested scope was returned as `decision-needed` or accepted instead of rejected as scope expansion;

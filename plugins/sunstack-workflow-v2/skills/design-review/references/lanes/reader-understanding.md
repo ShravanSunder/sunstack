@@ -35,11 +35,11 @@ For specification review, a human must be able to restate who is affected, what 
 
 For program review, a human must be able to compare a representative current and proposed entrypoint-to-effect path, or follow proposed-only and see the explicit no-predecessor case, through owner, interface, callers/callees, edge status, state or effect, result/error, failure/recovery, tradeoff, and proof seam, then point to the exact structural assumption they would correct.
 
-For Verification Design review, a human must be able to read each requirement's "proven by" line and say what will be done, what will be seen, and what stays unverified, then point to the exact row they would correct.
+For Verification Design review, a human must be able to read each planned check's "proven by" line and say what will be done, what will be seen, and what stays unverified, then point to the exact check they would correct.
 
 Check that each artifact starts with the smallest useful model and reveals detail afterward. Flag missing links, bottom-up detail before the model, copied prose presented as traceability, or a final artifact that requires scratch or review notes to recover accepted meaning. Preserve one compact breadcrumb or artifact map. Scratch may remain optional evidence.
 
-Within the already selected reader scope, start at each substantive section's actual anchor and stated question/answer. Reconstruct how its context, adjacent supported relational diagram and interpretation fit together, then follow links to exact fields or derivations. Check that the diagram exposes a relationship the prose alone would not, while the text explains its outcome and keeps governing guards, failures and unknowns visible. A card or paragraph alone does not satisfy the diagram job. A single explanation and diagram may cover several related identities; check each through its existing authority and trace rows instead of requiring a section or picture per identity. A small fact can remain a sentence or row. Source or static validity alone does not establish that the rendered relationship can be read.
+Within the already selected reader scope, start at each substantive section's actual anchor and stated question/answer. Each record placed there is explained by the prose beside it, which says why it matters, and never restated. Each view answers a question the section asks and exposes a relationship the prose alone would not, while the text keeps governing guards, failures and unknowns visible. A single explanation and view may cover several related records; check each through its own record instead of requiring a section or picture per record. A small fact can remain a sentence. Source or static validity alone does not establish that the rendered relationship can be read.
 
 ## Apply the Human Deletion Test
 
@@ -53,7 +53,7 @@ underdetermined?
 
 Flag an element when no consequence exists: repeated purpose or boundary prose; duplicate sibling-role recitals; authoring, review, readiness, planning, PR, release, or documentation-cleanup narration that is not a system obligation; summaries that only repeat the preceding model; decorative diagrams; receipt fields embedded in durable prose; or claims duplicated from another authoritative home.
 
-Flag jargon or an obscure heading only when it prevents a human from locating or restating the decision, relationship, rationale, boundary, example, or correction point. Preserve useful content and propose the smallest clear title or wording. “Requirement realization and proof seams” may become “How Each Requirement Works and How We Verify It.”
+Flag jargon or an obscure heading only when it prevents a human from locating or restating the decision, relationship, rationale, boundary, example, or correction point. Preserve useful content and propose the smallest clear title or wording. “Realization and proof seams” may become “How a Job Moves From Queued to Done.”
 
 Preserve governing-source pointers that affect decisions, scope and negative space, singular ownership, constraints, alternatives and tradeoffs, behavioral interfaces, state and flow, failure/recovery, concurrency, migration, trust decisions, proof seams, and one useful navigation home. Dense or long is not automatically low signal.
 

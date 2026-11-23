@@ -1,25 +1,25 @@
 # Reviewing a Verification Design
 
-This reference owns judgment of the Verification Design inside `four-document-design` mode: whether its plan, once carried out, would tell a correct build from a wrong one for every requirement. It runs after the Specification and Program Design judgments, because each row is judged against them.
+This reference owns judgment of the planned checks inside `four-document-design` mode: whether each, once carried out, would tell a correct build from a wrong one for every `core` rule. It runs after the Specification and Program Design judgments, because each check is judged against them.
 
-What to open: the Verification Design whole, with its "proven by" and coverage views; each requirement's obligations (`R`) and proof obligations (`V`) in the Specification; each obligation's trace row in the Program Design; and the source of every journey and reused test a row names.
+What to open: every planned check record and the page's proof part; each rule a check names, with its cases; the realization and seam for each rule; the Demistify check's report; and the source of every journey and reused test a check names.
 
-A row is a plan. Judge whether it would decide its requirement, not whether it already has. Its planned observations and reused tests are judged from their sources and are not executable proof claims for `proof-challenge`: the build they will observe does not exist yet.
+A check is a plan. Judge whether it would decide its rules, not whether it already has. Its planned observations and reused tests are judged from their sources and are not executable proof claims for `proof-challenge`: the build they will observe does not exist yet.
 
-## Rows
+## Checks
 
-Walk every requirement in the Requirements document and find its row; do not sample.
+Walk every `core` rule and find the check that names it; do not sample. The Demistify check reports a `core` rule with no check.
 
-- **Every requirement has a row, and the row names every obligation it covers.** A requirement with no row, or a row that says "covered" without naming its obligations, is a finding: a rule no observation decides can hide under a covered requirement.
-- **The reference comes from the Specification.** The row's reference is the `V`'s worked example, threshold, protocol version, or known-good output, quoted or pointed to. A reference that is the app's current behavior, a model's judgment of the output, or anything the Specification does not contain is a finding against the row. When the `V` itself has no reference or threshold, the finding is against the Specification.
-- **A shared observation is described once**, and each row that uses it says which of its obligations it decides.
+- **Every `core` rule has a check, and each check names every rule it decides.** A check that says "covered" without naming its rules is a finding: a rule no observation decides can hide under a covered need.
+- **The reference comes from the rule's cases.** The check's reference is the rule's worked example, threshold, protocol version, or known-good output. A reference that is the app's current behavior, a model's judgment of the output, or anything the rule's cases do not contain is a finding against the check. When the rule itself has no reference or threshold, the finding is against the Specification.
+- **One observation that decides several rules is one check** naming them all.
 
 ## Observations
 
-For each obligation, reconstruct the chain and try to break it:
+For each rule, reconstruct the chain and try to break it:
 
 ```text
-obligation -> wrong build it must catch -> boundary where that wrong behavior stays real
+rule -> wrong build it must catch -> boundary where that wrong behavior stays real
            -> evidence class -> target and journey or reused test -> passing condition
 ```
 
@@ -27,21 +27,21 @@ obligation -> wrong build it must catch -> boundary where that wrong behavior st
 - **The observation sits where the wrong behavior is real:** where the user or calling program meets the outcome, on the planned target, at a seam the Program Design exposes.
 - **The proof is proportional.** A pure rule gets a focused test and no app launch. A structural claim gets structural evidence that names the behavior it leaves unevaluated. An outcome the user meets in the app needs more than a unit test, and visual, operational, or security behavior needs the live or manual observation that can see it.
 - **The passing condition fails for a wrong build.** Name one wrong build yourself and check that the condition fails for it, then one allowed build that differs materially and check that it passes (a check counts only if the wrong behavior could make it fail (`sunstack-dev:principle-write-tests-that-can-fail`)). If a build that only acknowledges, with a 201, a toast, or a row count, would pass, the condition watches a proxy. So does one that stale, cached, or generated evidence could satisfy with the behavior absent.
-- **A reused test keeps the interaction real.** Open the test. It must drive the row's entry and keep real the boundary the row is about, on the target and configuration the row names (evidence supports only the claim, version, and target it observed (`sunstack-dev:principle-verify-before-accepting`)). A test that mocks that boundary, or runs somewhere else, does not decide the row.
-- **A named journey does what the row says.** Open the `verify-<app>` journey and check that it drives this entry and reads this outcome. A journey still to build is written `needed:` with its entry and what it must read, and appears in the design's list of needed journeys.
+- **A reused test keeps the interaction real.** Open the test. It must drive the check's entry and keep real the boundary the check is about, on the target and configuration the check names (evidence supports only the claim, version, and target it observed (`sunstack-dev:principle-verify-before-accepting`)). A test that mocks that boundary, or runs somewhere else, does not decide the check.
+- **A named journey does what the check says.** Open the `verify-<app>` journey and check that it drives this entry and reads this outcome. A journey still to build is written `needed:` with its entry and what it must read, and appears in the design's list of needed journeys.
 
 ## Honesty
 
-- **Nothing planned is described as observed.** A row says what will be seen on the build that will exist. "Passes", "verified", a recorded result, or a target property written as already seen is a finding.
+- **Nothing planned is described as observed.** A check says what will be seen on the build that will exist. "Passes", "verified", a recorded result, or a target property written as already seen is a finding.
 - **What stays unverified is listed.** A limit that leaves a required observation undone or weaker carries the owner's decision; without one it returns `decision-needed`.
-- **Gaps were returned, not worked around.** Where no seam lets an observation see the outcome, the design returned a `program-design-gap`; where the Specification gives no observable outcome, reference, or threshold, a `specification-gap`. A row that weakens its obligation to fit today's harness, observes a proxy because the seam is missing, or invents its own reference is a finding routed to the owner of the gap.
+- **Gaps were returned, not worked around.** Where no seam lets an observation see the outcome, the design returned a `program-design-gap`; where the Specification gives no observable outcome, reference, or threshold, a `specification-gap`. A check that weakens its rule to fit today's harness, observes a proxy because the seam is missing, or invents its own reference is a finding routed to the owner of the gap.
 
 ## Route and Stop
 
-Route a defective row to `design-verification` with the smallest correction; a missing or unobservable `V` to `design-specification`; a seam that cannot carry any observation to `design-program`. An upstream correction continues to `design-verification` for the rows it changes.
+Route a defective check to `design-verification` with the smallest correction; a rule with no observable case to `design-specification`; a seam that cannot carry any observation to `design-program`. An upstream correction continues to `design-verification` for the checks it changes.
 
 Good: each "proven by" line says in the owner's words what will be done and seen; each passing condition names a wrong build that fails it; every reused test and journey was read from its source; the unverified list is honest.
 
-Bad: "covered by e2e tests"; a reference that is today's behavior; an exit code as the passing condition; a reused test that mocks the boundary its row is about; a row that reads as if it already ran; a missing seam papered over inside a row.
+Bad: "covered by e2e tests"; a reference that is today's behavior; an exit code as the passing condition; a reused test that mocks the boundary its check is about; a check that reads as if it already ran; a missing seam papered over inside a check.
 
-Complete when: every requirement has been matched to its row, and every obligation's observation has been judged or carries a routed finding.
+Complete when: every `core` rule has been matched to its check, and every rule's observation has been judged or carries a routed finding.

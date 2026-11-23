@@ -93,7 +93,7 @@ Completion: every `core` rule has a check, every drawn observation path has a pa
 
 Re-read every check as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing check. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
 
-The design check reports missing need and check links; the review rules return with the `design-review` run.
+The design check reports missing need and check links. In a file-backed set, then run the design link rule over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each link warning before returning.
 
 Then run the design-item pass:
 
@@ -137,8 +137,8 @@ A review handoff carries the page and record ids, this return and the review que
 
 ## Not ready while
 
-- a `core` rule has no planned check, as the design check reports;<!-- D001 -->
-- a check does not name every rule (`R`) its observation decides;<!-- D002 -->
+- a `core` rule has no planned check, as the design check reports;
+- a check does not name every rule (`R`) its observation decides;
 - a rule is decided by no observation and isn't listed as unverified;
 - a check's reference is the app's current behavior, a model's judgment, or missing;
 - a passing condition names no wrong build that fails it, or an acknowledgement alone would pass it;
