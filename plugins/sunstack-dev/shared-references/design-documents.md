@@ -79,7 +79,7 @@ The standards:
 
 - Every assumption and decision the design relies on is a design item, written in the same edit as the statement it governs.
 - A design item is a typed record carrying its stable identifier and its kind, and a decision also its authority, so a tool can find it without reading prose; the records that depend on it name it.
-- An assumption carries no authority label. It stays open until a resolution confirms or refutes it, and the resolution names who confirmed or refuted it and where.
+- An assumption carries no authority label. It stays open until a resolution confirms or refutes it; the resolution links where that happened, with the excerpt.
 - A decision's authority is named from its source, never inferred from a plan, a review, another page or a page the author wrote; when it cannot be shown, the claim is an open owner question or an assumption.
 - Words an agent wrote and the owner accepted are the owner's acceptance of agent wording, never the owner's words, however the acceptance happened.
 - A reading that goes beyond the quoted or accepted words is the author's own assumption, recorded separately and naming the item whose words it reads.
@@ -109,7 +109,7 @@ The matching guide owns the `defineDecision` and `defineAssumption` fields. What
 | `A<n>` for an assumption, `D<n>` for a decision; unique across the design, never renumbered | always |
 | its kind: assumption or decision | always |
 | its authority: `owner-decided`, `owner-open` or `lead-decided`, and for a decided one its source kind: `owner-words` or `owner-accepted`, `contract` or `author` | a decision |
-| its status: `open`, `confirmed` or `refuted`, and, once confirmed or refuted, a resolution naming who confirmed or refuted it and where; optional sources | an assumption |
+| its status: `open`, `confirmed` or `refuted`, and, once confirmed or refuted, a resolution linking where it was confirmed or refuted, with the excerpt; optional sources | an assumption |
 | where the words were said, or the wording written and accepted, or the contract lives: export file and row time, session and time, review id, path and anchor | a decision with `owner-words`, `owner-accepted` or `contract` |
 | the quoted span, exact and contiguous, characters untouched (curly apostrophes stay curly); an omission goes outside the quote | a decision with `owner-words` or `owner-accepted` |
 | the id of the item whose words this reading interprets, in its sources | an assumption that reads quoted or accepted words |
@@ -132,7 +132,7 @@ A self-check or review gives each item every label that describes it, or `ok` al
 | `author's call on owned meaning` | a `lead-decided` decision from `author` settles meaning another kind or the owner owns | the phase's existing `decision-needed` route |
 | `unsupported claim` | a sentence settles meaning and its source does not support all of it | the source it cites, or the nearest one that could |
 
-Every label is a nudge; `author's call on owned meaning` points at an existing route and adds no block. The labels cover a decision's authority, source and quotation states, and an assumption's sources and resolution. The design check covers a missing id or kind.
+Every label is a nudge; `author's call on owned meaning` points at an existing route and adds no block. The labels cover a decision's authority, source and quotation states, and an assumption's sources. The design check covers a missing id or kind, and a confirmed or refuted assumption without its resolution.
 
 ### Rank, then promote
 
