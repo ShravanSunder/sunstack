@@ -28,7 +28,7 @@ E<n>  canonical term
 
 Fill every slot from the sources or mark it as an exact gap; a blank slot is neither.
 
-Give every entity a stable `E` identifier. It appears in the accepted requirements set and is the anchor a downstream binding or a review finding cites. Deleting an entity later is a coverage loss, not pruning.
+Give every entity a stable `E` identifier, and give the page element that defines it `id="E<n>"`; an entity is not a record, so this hand-written id is correct. It appears in the accepted requirements set and is the anchor a downstream binding or a review finding cites. Deleting an entity later is a coverage loss, not pruning.
 
 ## Settled or Unmade
 
