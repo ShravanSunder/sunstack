@@ -80,7 +80,7 @@ Completion: every check has a passing condition with the wrong build that fails 
 
 ### 5. Write the checks and the proof part
 
-The planned-check records are the Verification Design's one home, each in the subject file that already holds its rules (`design-documents.md`). When you write each "proven by" line, say in the owner's words what will be done and what will be seen, with no test-layer jargon (write so a reader without your context can say it back (`sunstack-dev:principle-write-for-the-reader`)). Name the rules and seams instead of restating them. The owner's view of need, rules and checks, and the coverage review reads, are built from the records; nobody writes them by hand.
+The planned-check records are the Verification Design's one home, each in the file that already holds its rules (`design-documents.md`). When you write each "proven by" line, say in the owner's words what will be done and what will be seen, with no test-layer jargon (write so a reader without your context can say it back (`sunstack-dev:principle-write-for-the-reader`)). Name the rules and seams instead of restating them. The owner's view of need, rules and checks, and the coverage review reads, are built from the records; nobody writes them by hand.
 
 In a file-backed set, use `sunstack-dev:presentation-html`, passing the reader's question and the check ids, to write the page's proof part: only what a check record cannot say, such as an observation path whose route is not obvious, explained beside its diagram. The page shows each check by id and never restates it. IF an observation path is drawn, load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` with that view and return its selected medium, semantic-preservation result, visual-check result and exact gap. Run the design check and the matching static check through `presentation-html`. A planned view or observation is not a result.
 
@@ -114,7 +114,7 @@ decision-needed
 evidence-blocked
 ```
 
-- `locally-ready`: no item in Not ready while holds. Return the milestone page and its planned-check record ids, each rule's deciding check or named limit, the journeys still needed with their lifetimes, the tests reused, the design check and rendering results, and the statement that nothing has been observed or reviewed. Lead with the "proven by" lines.
+- `locally-ready`: no item in Not ready while holds. Return the milestone page, handed over as `design-documents.md` says, and its planned-check record ids, each rule's deciding check or named limit, the journeys still needed with their lifetimes, the tests reused, the design check and rendering results, and the statement that nothing has been observed or reviewed. Lead with the "proven by" lines.
 - `specification-gap`: a rule lacks the observable outcome, reference, threshold or target constraint its check needs. Return each rule, what it lacks and the evidence. Carry any Program Design gaps in the same payload, because a changed rule can change its seam.
 - `program-design-gap`: no seam lets an observation see a rule's outcome. Return each rule, the seam its realization names, what the observation would need to see and the evidence.
 - `decision-needed`: a limit would leave a required observation undone or weaken it, or the planned target needs access, a device or an account only the owner can grant. IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief.

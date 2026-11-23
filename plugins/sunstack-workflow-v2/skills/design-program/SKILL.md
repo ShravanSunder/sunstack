@@ -226,7 +226,7 @@ Apply the Required Views predicates. For each selected view, state the reader qu
 
 A newly authored or substantively revised substantial Program Design renders each fired structural view through the shared rendering owner, which chooses every medium. A screen the user will see also gets a UI view grounded in the current app, beside its structural views, not instead of them. `sunstack-dev/shared-references/generated-document-visuals.md` owns what a generated image must pass; an image never becomes the authoritative design.
 
-In a file-backed set, write the realization records in the subject file that already holds their rules (`design-documents.md`) and the decision records, then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's how part, organized by the ownership, lifecycle, contract or call-path questions that explain it, and take back the component for each. The page shows each record by id and never restates it. A call path is labelled source-derived or proposed. Keep open design choices separate from settled structure. Run the design check and the matching static check through `presentation-html`.
+In a file-backed set, write the realization records in the file that already holds their rules (`design-documents.md`) and the decision records, then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's how part, organized by the ownership, lifecycle, contract or call-path questions that explain it, and take back the component for each. The page shows each record by id and never restates it. A call path is labelled source-derived or proposed. Keep open design choices separate from settled structure. Run the design check and the matching static check through `presentation-html`.
 
 Put the entity binding table on the page that holds the entity definitions, in, or directly under the heading of, an element with `id="bindings"`; the design rule reads binding rows only there, on the same page.
 
@@ -281,7 +281,7 @@ Completion: the permitted independent review coverage and parent-verified correc
 
 ### 18. Return the local result
 
-Return the milestone page and its realization and decision record ids; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the design check result; self-check; independent review; debt/gaps; and non-acceptance.
+Return the milestone page, handed over as `design-documents.md` says, and its realization and decision record ids; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the design check result; self-check; independent review; debt/gaps; and non-acceptance.
 
 IF returning a substantial program design in chat, use the `presentation-*` skill matching the current surface to render the selected component, call, state, or failure views before the compact result summary; honor an exact user-requested format instead. The records and the page remain the source of truth.
 

@@ -282,7 +282,7 @@ Completion: the permitted independent review coverage and parent-verified correc
 
 ### 12. Return the local result
 
-Return the milestone page and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; `core` and `later` slices; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
+Return the milestone page, handed over as `design-documents.md` says, and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; `core` and `later` slices; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
 
 IF returning a substantial specification in chat and problem, consumer, authority, journey, or requirement-to-proof relationships are non-obvious, use the `presentation-*` skill matching the current surface to render only those Why/What relationships; honor an exact user-requested format instead. Keep normative meaning in the records and route internal component, call, state, or failure-mechanism views to `design-program`.
 
