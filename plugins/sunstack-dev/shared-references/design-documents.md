@@ -19,6 +19,8 @@ The Specification defines the nouns its obligations use, on the page, for each n
 
 One milestone has typed records and one page. The records are written with the milestone SDK's helpers (`defineNeed`, `defineRule`, `defineRealization`, `defineCheck`, `defineDecision`, `defineAssumption`, `defineDeliverable`, gathered by `defineDesign`), which `demistify design types` generates; the guide's `typed-design.md` at the page's binding owns their fields, files and commands.
 
+When a milestone's records cover more than one subject (a capability, a component, a protocol), each subject's records live in their own `records/<subject>.ts`, which `design.ts` imports; a single-subject milestone keeps them in `design.ts`. An agent working on one subject then opens one file. Name the subject by the capability or part the owner already uses, never an invented grouping. Decisions, assumptions and deliverables keep their own files.
+
 | Home | Owns | Never holds |
 | --- | --- | --- |
 | Typed record | the text of a need, rule, realization, planned check, decision or assumption, and its links | explanation or diagrams |
@@ -29,6 +31,8 @@ One milestone has typed records and one page. The records are written with the m
 - A rule names the needs it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and a need a `core` deliverable lists that none of its rules serves; each gap holds that deliverable from acceptance. It also prints design notes, which hold nothing, for a need no rule serves and for a rule no realization names, and `brief` prints a deliverable's rules, realizations and checks.
 - A deliverable is `core` or `later`. A `later` deliverable is an id and a title, listed and not checked; only `core` work gets need, rule, realization and check records.
 - The page runs why, what, how, proof. A long page splits by capability, never by kind of meaning.
+
+The page fills its record placements from files the design check writes with `--write`; git ignores them. Before handing a page to a reader, run the check with `--write` and give the page's link, and say in the hand-over that a fresh checkout needs that command before the page shows its records.
 
 Reuse an admitted authoritative Requirements identity rather than copying it. Pre-existing sources remain where they are unless migration is commissioned. Chat-only work keeps the four kinds as separately labelled parts of the response. The frozen v1 workflow retains its own Markdown-source contract and local shared references; its HTML human view does not replace that source.
 

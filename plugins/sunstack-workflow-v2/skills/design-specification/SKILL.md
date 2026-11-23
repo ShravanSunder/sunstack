@@ -256,7 +256,7 @@ Apply any caller-supplied artifact-home policy first. Otherwise follow the repos
 
 Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal rules, observable contracts, failures, constraints, and proof.
 
-In a file-backed set, write the need and rule records, then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's why and what sections: who is affected and why, the capability grouping, the entities readers could read differently, and the context a rule needs to be read correctly. The page shows each record by id and never restates it.
+In a file-backed set, write the need and rule records, each subject's in its own file when the milestone has several (`design-documents.md`), then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's why and what sections: who is affected and why, the capability grouping, the entities readers could read differently, and the context a rule needs to be read correctly. The page shows each record by id and never restates it.
 
 Every link the page names resolves.<!-- D004 -->
 
