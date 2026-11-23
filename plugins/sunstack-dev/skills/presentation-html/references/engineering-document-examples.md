@@ -14,21 +14,15 @@ Follow the opening with the actual journey picture and the passages that establi
 
 ## Give a group a reader-facing purpose
 
-The group belongs in Requirements' ordinary reading flow. Keep each need's stable identity and authorizing link while using a small table only for the comparable facts.
+The group belongs in the page's why part. The need records hold each need's text; the section gives the group its purpose and the picture that explains it.
 
 ```html
 <section id="recovery-needs">
   <h2>Recover work after interruption</h2>
   <p>This group explains how a user regains control when a connection or worker stops unexpectedly.</p>
-  <p>For this illustration, both needs share the same confirmed source, priority and assigner. State that common basis once; if one need differs, link its actual authority and state the local override beside that need.</p>
-  <div class="ex-table-scroll"><table>
-    <thead><tr><th>Need</th><th>User outcome</th><th>Boundary</th></tr></thead>
-    <tbody>
-      <tr id="U7"><th scope="row">Resume after disconnect</th><td>I can retrieve a job I submitted before losing connection.</td><td>The server retains the job identity.</td></tr>
-      <tr id="U8"><th scope="row">Know when work failed</th><td>I can see that execution stopped and what action is available.</td><td>A failure is not reported as completion.</td></tr>
-    </tbody>
-  </table></div>
-  <p><a href="specification.html#R7">The shared retention and status rules</a> define how these outcomes are enforced.</p>
+  <p data-design-record="U7"></p>
+  <p data-design-record="U8"></p>
+  <p data-design-record="R7"></p>
   <p>This journey asks whether a person can still find the same work and understand its status after losing the connection.</p>
   <ex-mermaid id="recover-work" label="Find submitted work after reconnecting"><script type="text/plain">
 sequenceDiagram
@@ -40,81 +34,15 @@ sequenceDiagram
   Person->>Service: Reconnect and request that job
   Service-->>Person: Return the same job and current status
   </script></ex-mermaid>
-  <p>The picture shows the user-visible relationship, not a transport or storage design. The accompanying need table keeps the exact outcome and boundary; the linked Specification owns the rules that guarantee them.</p>
+  <p>The picture shows the user-visible relationship, not a transport or storage design. U7 and U8 hold the exact outcomes; R7 holds the retention rule that guarantees them.</p>
 </section>
 ```
 
-If either need requires a separate rationale or failure account, use a headed section for it and keep the group purpose visible. One concern needs no extra group level. Do not split or number needs to imitate a story's work slots.
-
-Shared evidence or priority belongs once where it applies to both needs; each need keeps its own stable ID and links to that common basis. Keep the real source, priority and assigner fields required by the phase. Repeating the same “priority unassigned; assigner: owner” note in every row adds no information. If an outcome's consequence is not established by the supplied evidence, mark the rationale as unknown instead of inventing a pain point.
-
-## Keep identities and links inside a complete explanation
-
-This abbreviated fragment illustrates stable identity and trace-link placement only; it is not a finished substantive section. A substantive need/rule explanation also needs its question-sized context, a supported relational diagram, and prose interpreting the relationship as described in the recipe. A paragraph remains useful for a small fact or as part of that larger section.
-
-```html
-<!-- requirements.html -->
-<section id="control-work">
-  <h2>Control work before execution</h2>
-  <p>This group explains when a user can start or stop queued work.</p>
-  <section id="U3">
-    <h3>Stop work that has not started</h3>
-    <p>I can cancel a queued job so the worker will never start it.</p>
-    <p>Why: if a cancelled job still starts, it can produce effects the user was trying to prevent.</p>
-    <p><a href="specification.html#R3">The cancellation rule</a></p>
-  </section>
-</section>
-<!-- specification.html -->
-<section id="R3">
-  <h2>Successful cancellation prevents execution</h2>
-  <p>When cancellation succeeds while a job is queued, that job must never start.</p>
-  <p>If claiming wins first, cancellation reports that the job is already running.</p>
-  <p>Authorized by: <a href="requirements.html#U3">stop queued work</a>.</p>
-</section>
-```
-
-The `U3` and `R3` anchors preserve traceability inside their authoritative pages; the surrounding substantive section supplies the explanation and diagram. A small fact may remain paragraph or table content without becoming its own section.
+If either need requires a separate rationale or failure account, give it a headed section and keep the group purpose visible. One concern needs no extra group level. If an outcome's consequence is not established by the supplied evidence, mark the rationale as unknown instead of inventing a pain point.
 
 ## Map from the group to the need, then to related content
 
-This illustrative fragment applies the matching guide's existing Map structure. The group and need targets preserve their own visible Requirements homes; related children lead onward only where that content exists.
-
-```json
-{
-  "map": [
-    {
-      "title": "Control work",
-      "description": "Submit jobs and stop them before execution starts.",
-      "icon": "shield-check",
-      "target": { "page": "requirements", "fragment": "control-work" },
-      "children": [
-        {
-          "title": "Stop queued work",
-          "description": "U3 · Prevent a queued job from starting after cancellation succeeds.",
-          "icon": "user",
-          "target": { "page": "requirements", "fragment": "U3" },
-          "children": [
-            {
-              "title": "Cancellation guarantee",
-              "description": "R3 · The rule that decides successful cancellation.",
-              "icon": "database",
-              "target": { "page": "specification", "fragment": "R3" }
-            },
-            {
-              "title": "Where cancellation wins",
-              "description": "The state change and its owner.",
-              "icon": "path",
-              "target": { "page": "program-design", "fragment": "cancellation" }
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-
-This fragment assumes Requirements, Specification and Program Design are already present in the shared Pages registry and contain these IDs. If a page or passage is absent, omit that destination until it exists. A shared rule can be a related child or ordinary link; do not copy its normative text into the need, and do not add a fixed Requirements → rule → design → proof branch when some destinations do not apply. This is an example of target selection, not a second schema definition; the bound guide remains authoritative for fields and accepted values.
+A Map concern "Control work" points at the group's section, then at need U3, the rule R3 that decides successful cancellation, and the section explaining where cancellation wins. Each target is a record id or section ID that exists; omit a destination until it does, and do not add a fixed need → rule → design → proof branch when some destinations do not apply. The bound guide owns the fields and target syntax.
 
 ## Put state and ownership beside their explanation
 
@@ -159,7 +87,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
 
 ```html
 <section id="running-cancellation">
-  <h2>What should cancellation mean after execution starts?</h2>
+  <h2>Cancelling a running job</h2>
   <p>This is open. It determines the completion contract and the proof we need.</p>
   <ex-compare label="Running-job cancellation">
     <section label="Finish without publishing">
@@ -171,7 +99,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
       <section data-compare-row="cost"><p>The design must handle partial effects and failed interruption.</p></section>
     </section>
   </ex-compare>
-  <ex-choice id="cancel-policy" title="Which running-job cancellation outcome do you want?">
+  <ex-choice data-design-record="D5">
     <ex-option id="suppress-result" title="Finish without publishing (recommended)">
       <template slot="summary">Keeps execution simple; publication must honor cancellation.</template>
     </ex-option>
@@ -183,7 +111,7 @@ Explain the actual choice and its effect first. A comparison aligns the same top
 </section>
 ```
 
-The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. When the answer arrives, update the Specification or other actual owner of the settled meaning, rather than treating the control's current value as durable authority.
+The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. The question is the open owner decision record D5; the `ex-choice` is bound to it by id and shows its text, while the author writes the options and their details. When the answer arrives, the decision record carries it and the rules it governs are reconciled, rather than treating the control's current value as durable authority.
 
 ## Keep an open discussion open
 
@@ -200,16 +128,17 @@ An unresolved question may need evidence or a conversation before it has credibl
 </section>
 ```
 
-For an already settled decision, explain the outcome and its actual authority/date where that matters, with a picture of the resulting design. Prior alternatives can sit in a labelled history disclosure. Do not present a new unanswered choice for an accepted answer or call an agent's proposal decided. A short decision register links to the owning passages; it does not become another normative home.
+For an already settled decision, explain the outcome and its actual authority/date where that matters, with a picture of the resulting design. Prior alternatives can sit in a labelled history disclosure. Do not present a new unanswered choice for an accepted answer or call an agent's proposal decided. The list of decisions is generated from the records; it does not become another home.
 
-The page keeps design choices and their tradeoffs because they shape the system. The author's self-check and static-check receipt, reviewer findings, readiness status, and Chief/agent routing belong in the returned workflow state or work account. When a later preparation or check runs, record its actual result there; do not leave an obsolete “not run” sentence in the design page.
+The page keeps design choices and their tradeoffs because they shape the system. The author's self-check and static-check receipt, reviewer findings, readiness status, and Chief/agent routing belong in the returned workflow state or work account. Record a check's actual result there; do not leave an obsolete “not run” sentence on the page.
 
-## A proof table says what will decide the requirement
+## A planned check and the path that decides it
 
 ```html
 <section id="prove-cancellation">
-  <h2>Planned: a cancelled queued job never reaches its handler</h2>
-  <p>Plan: cancel the job while it is queued, let the real worker drain the queue, then inspect stored status and handler entry together. This is unrun; the obligation is supported only if the job remains cancelled and the handler was never invoked.</p>
+  <h2>How cancellation will be proven</h2>
+  <p data-design-record="V3"></p>
+  <p>This check is planned and unrun. It needs two observations from one run of the real worker.</p>
   <ex-mermaid id="cancellation-observation-path" label="Planned queued-cancellation observation"><script type="text/plain">
 flowchart LR
   cancel["Cancel queued job"] --> drain["Let real worker drain the queue"]
@@ -218,39 +147,15 @@ flowchart LR
   status --> decide{"Still cancelled and handler never invoked?"}
   handler --> decide
   </script></ex-mermaid>
-  <p>The two observations decide the stated condition together: stored status cannot show by itself whether the handler still ran. External effects outside this handler remain outside this planned observation.</p>
-  <div class="ex-table-scroll"><table>
-    <thead><tr><th>Requirement</th><th>Observation</th><th>Passing condition</th><th>Limit</th></tr></thead>
-    <tbody><tr>
-      <td><a href="specification.html#R3">Cancellation</a></td>
-      <td>Cancel a queued job, then let the real worker drain the queue.</td>
-      <td>The job remains cancelled and its handler is never invoked.</td>
-      <td>This plan has not been run; external handler effects are a separate question.</td>
-    </tr></tbody>
-  </table></div>
+  <p>The two observations decide V3 together: stored status cannot show by itself whether the handler still ran.</p>
   <details><summary>Why a successful cancel response alone is insufficient</summary>
     <p>A broken worker could still execute the job. Observe the handler entry as well as stored status.</p>
   </details>
 </section>
 ```
 
-A named proof card can help summarize one outcome; it does not replace the reference, target, negative case and exact passing condition the Verification phase owns. Avoid one decorative card per sentence or an array of unexplained Not run chips.
+V3's record holds its "proven by" sentence, cases, how it is observed and what stays unverified; the section adds only the path and why both observations are needed. Avoid one decorative card per sentence or an array of unexplained Not run chips.
 
 ## A call stack belongs to its actual path
 
-When real source supports frames, use the published call-stack component beside the explanation of that path. For example, the cancellation section can link to the source-derived `cancel → conditional state write → result` path. Read the selected binding's call-stack guide and supply its complete prepared need/stack/frame data before authoring the reader. Keep the requirement text in its visible owning section and use it as the data's source.
-
-After the real owner pages and data have been prepared through that guide, the reader can sit next to its explanation:
-
-```html
-<section id="cancellation-calls">
-  <h2>Where cancellation reaches the state owner</h2>
-  <p>The supplied source-derived path shows the entry, conditional write and returned outcome.</p>
-  <ex-call-stack id="cancellation-call-stack" label="Cancellation call path"></ex-call-stack>
-  <p><a href="requirements.html#U3">Why cancellation matters</a></p>
-</section>
-```
-
-This is a reader-placement fragment, not a complete data fixture. The current guide requires a need and prepared stack/frame records, and a record block on each existing canonical owner page, even when that page's unused record list is empty. Keep ordinary sections visible and use actual need/concern names. Built-in need links reach the prepared need's owner page at its `bodyRef` destination. Keep that body visible with its original ID; ordinary nearby section links can reach the same owning explanation.
-
-This example intentionally supplies no invented frames, new binding attribute or self-contained call-stack data format. Multiple paths use the guide's supported picker or page arrangement. A proposed greenfield sequence uses a labelled sequence diagram until there is source to substantiate a call-stack record.
+`engineering-documents.md` owns when the call-stack component fits and what data it needs; this file adds no example of it.

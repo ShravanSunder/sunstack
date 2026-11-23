@@ -20,15 +20,15 @@ Read from the entry artifact or labeled record as a fresh program designer or pl
 - resolve every relative document-image link to a project-local asset and report cache-only, external-expiring, missing or broken targets;
 - identify one authoritative home for each repeated claim;
 - verify deeper files correspond to real capability, ownership, protocol, domain, or consumer/change boundaries;
-- trace requirements to realization and proof without path guessing.
+- follow each `core` rule's links to its needs, realization and planned check without path guessing.
 
-For a new HTML set using shared navigation, inspect the one descriptor through the matching guide's contract and verify its Pages and Walkthrough targets point to existing pages and stable HTML content. Map groups should reach their visible explanatory context and need entries their actual text; an ordinary Tree inside a page does not replace the shared Map. Check the pages themselves for visible group purpose and one home per fact, not only a well-shaped navigation tree.
+For a milestone page, verify that each Map node and Walkthrough stop reaches the record or section it names, and that each record has one home: its record, placed on the page by id, never restated. Check the page itself for visible group purpose, not only a well-shaped navigation tree.
 
 Good: one readable entry, explicit routes to deeper contracts, optional evidence, and no duplicated authority.
 
 Bad: an entry index that lists files without their reading order or the question each answers; review notes required for meaning; appendices split only by heading; tiny-file sprawl; duplicated normative prose; stale or circular links.
 
-Calibration: more files are not automatically clearer. Recommend the smallest merge, split, link, or authority move that restores a readable spine. Free-form HTML can group needs by capability while other documents follow their own explanatory order. A linked part earns its split through a cohesive reader question and independent reason to change. One file per requirement, or parts that all need each other to make sense, is sprawl.
+Calibration: more files are not automatically clearer. Recommend the smallest merge, split, link, or authority move that restores a readable spine. A page can group needs by capability while its how and proof parts follow their own explanatory order. A long page splits by capability, never by kind of meaning; one file per requirement, or parts that all need each other to make sense, is sprawl.
 
 Overlap boundary: this check owns entry paths, link targets, placement, and authoritative homes. `reader-understanding` owns disclosure order, human reconstruction, attention cost, process leakage, and redundant content. Other checks own semantic quality after the claim is found.
 

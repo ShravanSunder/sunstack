@@ -69,7 +69,7 @@ one qualifying authoritative Requirements source exists
   -> admit and reuse that identity
 
 settled authoritative meaning exists but has no qualifying Requirements home
-  -> materialize one normalized Requirements artifact from that meaning
+  -> write need records from that meaning
 
 owner meaning is unwritten or undecided
   -> use discuss-pathfinding and consume its returned record
@@ -79,11 +79,11 @@ Qualification requires the minimum source contract, an inspectable location when
 
 Normalization organizes already-settled authoritative meaning into the minimum contract. It may preserve explicit gaps, but it may not ask, answer, infer, or confirm missing owner meaning. Route such meaning through `sunstack-dev:discuss-pathfinding`, then consume the returned clarification in the Requirements or Specification home that owns it.
 
-For substantial file-backed work, the admitted or materialized Requirements identity must be present, resolvable, and different from the Specification artifact. Never create a duplicate Requirements artifact when a qualifying identity already exists.
+Never write duplicate need records when a qualifying Requirements identity already exists.
 
 Good: a mixed record retains observational and hypothesis rows while requirements cite only authorized U rows.
 
-Bad: assigning one aggregate authority label to a mixed record, silently promoting evidence to authority, discarding stakeholder rows because no journey applies, duplicating an admitted Requirements source, or using one `Requirements/spec` artifact for both identities.
+Bad: assigning one aggregate authority label to a mixed record, silently promoting evidence to authority, discarding stakeholder rows because no journey applies, or duplicating an admitted Requirements source.
 
 ## Confirm the Goal Boundary
 
@@ -155,7 +155,7 @@ Wording an agent wrote and the owner selected, said yes to or approved is the ow
 
 Bad: "The owner decided the model chooses unit boundaries (owner, 13 Nov)." The owner selected an option an agent wrote ("Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way."); "the model chooses unit boundaries" is one reading of it.
 
-Good: the selected option as an `owner-accepted` decision quoting its exact words, and "Jev chooses where units start and end" as a separate `author` assumption that reads it and names what depends on it.
+Good: the selected option as an `owner-accepted` decision quoting its exact words, and "Jev chooses where units start and end" as a separate open assumption that names it in its sources, with the records that depend on it naming the assumption.
 
 Complete when:
 
@@ -163,8 +163,7 @@ Complete when:
 - every product decision has inspectable authority or an exact gap;
 - user and stakeholder classes remain distinct;
 - normative-eligible rows are identifiable by stable U identifier;
-- one qualifying Requirements identity is admitted or materialized without duplication or invented owner meaning;
-- substantial file-backed work has a planned Specification identity different from the Requirements identity;
+- one qualifying Requirements identity is admitted or written as need records without duplication or invented owner meaning;
 - the goal boundary is established by `sunstack-dev:discuss-pathfinding` or an equivalent authoritative governing source and explicitly confirmed or corrected by the authorized owner;
 - the accepted requirements set is recoverable and compared;
 - the current/desired problem is observable without assuming the solution.

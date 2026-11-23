@@ -6,16 +6,22 @@
       "start": "has_row",
       "steps": {
         "has_row": {
-          "mechanical_check": { "tool": "contains_field", "field": "bindings", "needle": "identifier" },
+          "mechanical_check": {
+            "tool": "contains_field",
+            "field": "bindings",
+            "needle": "identifier"
+          },
           "yes": "pass",
           "no": {
-            "finding": "No row under id=\"bindings\" in program-design.html names this entity.",
+            "finding": "No row under id=\"bindings\" on this entity's page names it.",
             "at": "identifier"
           }
         }
       }
     },
-    "related": ["bindings"],
+    "related": [
+      "bindings"
+    ],
     "severity": "warn"
   }
 }

@@ -8,7 +8,7 @@ Before form selection, return the section questions, explanation and diagram job
 
 ## Open with the answer, then one slice
 
-The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Continue the main explanation through its substantive sections in normal document flow; optional backing detail sits one action away. Good: two sentences, then the capability tree linking to sections that explain their parts. Keep the source mode selected in `SKILL.md` step 1. On a new HTML-source engineering page, `engineering-documents.md` applies answer-first prose and useful views within each document's natural organization; a v1 human view keeps its Markdown sources authoritative. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
+The first screen answers the reader's question in two or three sentences, then shows one view of the slice that matters most, such as the failure path or the changed boundary. Continue the main explanation through its substantive sections in normal document flow; optional backing detail sits one action away. Good: two sentences, then the capability tree linking to sections that explain their parts. Keep the source mode selected in `SKILL.md` step 1. On an engineering design page, `engineering-documents.md` applies answer-first prose and useful views around the records; a v1 human view keeps its Markdown sources authoritative. A skill-change design set's page keeps its caller's answer, parts and walkthrough. Bad: a stat row, three cards and a diagram before the reader knows what the page is for.
 
 ## Compose sections a reader can follow
 
@@ -36,19 +36,11 @@ Leave a form out when the facts cannot fill it. With an unknown number of stages
 
 When a table cell holds a live component, such as a status badge or progress part, write a native HTML table, as the guide's small-parts recipe does. When the page displays literal markup or commands for inspection, use the guide's code carrier rather than live elements. The markup for each selected form comes from the matching guide through the existing binding route in [demistify.md](demistify.md); this example chooses forms and defines no syntax.
 
-## Map connects related content; the outline follows headings
+## Map and Walkthrough
 
-For a substantial account with related chunks, organize Map around the reader's concerns or the work's subjects and connect each to its relevant explanatory locations. Give destinations useful names and descriptions: the reader should know what they will find. One concern may reach several sections and one section may serve several concerns. Keep those associations source-supported; Map points to facts in the document rather than storing another copy of them.
-
-In the maintenance example, “Keep pending work through restart” can reach the failure sequence, corrected owner and rehearsal result. The left outline still follows where those sections sit in the page. Copying that outline into Map gives the reader no additional way to understand the relationships. A small page with no useful cross-cutting association can keep ordinary heading navigation.
+`SKILL.md` step 2 owns when a Map or a Walkthrough earns its place. For example, in the maintenance account a Map concern "Keep pending work through restart" reaches the failure sequence, the corrected owner and the rehearsal result, and a Walkthrough answers "Does a passing rehearsal mean the rollout is accepted?" by visiting the intended outcome, the old failure, the changed handoff, the rehearsal and its unproved boundary. Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher.
 
 IF the page needs Map, load the matching guide's `navigation.md` and return its supported Map composition, labels and descriptions, stable destinations and opening method. Follow the selected binding's declaration and source rules; do not invent a navigation schema or substitute a spatial diagram for the reader's Map panel.
-
-## Walkthroughs answer an ordered question
-
-Add a Walkthrough when understanding a question or journey requires visiting several existing chunks in a particular order. Name the question, choose the targets that explain its progression, and use narration to direct attention to each target. The content stays at those targets and remains readable without starting the route. A route through every heading is not evidence that a guided explanation was needed.
-
-For the maintenance example, “Does a passing rehearsal mean the rollout is accepted?” could visit the intended outcome, the old failure, the changed handoff, the actual rehearsal and its unproved boundary. That order follows the question, not the page's table of contents. A reader looking up one independent result needs a link, not a guided route.
 
 IF a Walkthrough is needed, load the matching guide's `navigation.md` and `tours.md` and return its supported launcher and path declarations, purposeful narration and resolving target identities. Keep ordinary Pages, headings and Map available beside that optional route; the guide owns the implemented controls and delivery constraints.
 
@@ -61,10 +53,6 @@ Keep prose, headings and short callouts at Reading width, and give a table, diag
 Use a disclosure for depth under the current point that most readers skip. Its summary names what is inside. In content you compose, failure cases and their thresholds stay in view; a disclosure holds only the rationale or evidence about them, and its summary names the cases it explains. A disclosure carried from a source keeps its initial state, as `SKILL.md` step 4 teaches. Use tabs for peer views of one thing when the reader picks one, such as current and proposed, or the sequence view and the state view. Good: "Evidence for the retry and cancellation limits (3 failure cases)" as a disclosure. Bad: tabs named "Details", "More" and "Other".
 
 Use layers when several optional views may be visible together, such as independently showing proposed ownership and failure paths on the same map. Tabs choose one peer view; a local disclosure opens detail under one point. Keep those reader choices distinct and retrieve their actual controls from the matching guide.
-
-## Pages and Walkthroughs
-
-Pages are separate documents with ordinary links; the guide's `ex-nav` gives the Pages menu and the Walkthrough launcher. A Walkthrough is an optional path through existing targets and may cross pages; ordinary navigation stays available without it. For a new HTML design collection, `engineering-documents.md` uses one shared navigation descriptor for Pages, Map and complete Walkthroughs; consult the matching navigation and tours guides for syntax and keep all routes aimed at real HTML content. A Walkthrough is a reading route, not a behavioral journey diagram. Good: "Routing, end to end" stopping at the need, the contract, the call path and the proof journey. Bad: a Walkthrough whose narration restates a threshold the owning section states.
 
 ## Related captures: items, variations and filters
 
