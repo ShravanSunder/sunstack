@@ -25,7 +25,7 @@ One check decides one or more `core` rules, and every `core` rule has a check. A
 | --- | --- | --- |
 | rules (`checks`) | every rule (`R`) the check decides | a rule left implicit, so a rule no observation decides hides under a covered need |
 | statement | the "proven by" sentence the owner can read: what will be done, and what will be seen | "covered by e2e tests" |
-| cases | the reference from the rule's cases (its worked example, threshold, protocol version or checked known-good output), what is seen where, matched against it, and the wrong build that fails | "works"; an exit code, a success toast or any other acknowledgement; what the app does today, or a model's opinion of the output |
+| cases | three or more given/expect pairs: the reference from the rule's cases (its worked example, threshold, protocol version or checked known-good output) and what is seen where, plus at least one wrong build and what it must show | "works"; an exit code, a success toast or any other acknowledgement; what the app does today, or a model's opinion of the output |
 | journey | the `verify-<app>` journey or the reused real-path test that observes it, or `needed:` with the entry it must drive and what it must read, marked `lasting` or `temporary` | a journey you didn't read; "the app"; a test that mocks the interaction the check claims |
 | unverified | what stays open: platforms not tried, stand-ins still in place, access nobody has granted, journeys still to build | blank |
 

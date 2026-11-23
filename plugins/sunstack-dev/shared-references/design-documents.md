@@ -150,7 +150,7 @@ Call paths remain Program Design meaning. `presentation-html`'s `engineering-doc
 
 ## Plans and deliverables
 
-Several deliverables share one design; each deliverable names the rules, realizations and checks in its scope. A deliverable creates no new design fact. The actual caller owns delivery sequencing; this reference adds no orchestration stage. `canonical-implementation-plan.md` owns the plan's shape and home. V1's historical planner keeps its archive-owned contract.
+Several deliverables share one design; each deliverable names the needs, rules, realizations and checks in its scope. A deliverable creates no new design fact. The actual caller owns delivery sequencing; this reference adds no orchestration stage. `canonical-implementation-plan.md` owns the plan's shape and home. V1's historical planner keeps its archive-owned contract.
 
 ## Handoffs and completion
 

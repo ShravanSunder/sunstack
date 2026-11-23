@@ -77,8 +77,9 @@ rules       R4 a saved draft survives an app restart; R5 a reopened draft keeps 
             (both serve U2 "my drafts are never lost")
 statement   Save a draft in the installed app, quit it, reopen it, and see the same title and body.
 cases       given R4's worked example (title "Q3 plan", a 2,000-character body ending in an emoji),
-            after relaunch the editor shows exactly that title and body; a build that keeps drafts
-            only in memory, or cuts the body at 1,024 characters, fails
+              expect the same title and body after relaunch
+            given a build that keeps drafts only in memory, expect the draft gone after relaunch: fails
+            given a build that cuts the body at 1,024 characters, expect a shortened body: fails
 journey     verify-notes `drafts`: drives save, quit and relaunch; reads the editor's title and body.
             Not `drafts-store.test.ts`: it swaps the disk for an in-memory store, so it never crosses a restart
 unverified  Windows, which this cycle doesn't ship
@@ -88,7 +89,7 @@ The weak version of the same check:
 
 ```text
 statement   e2e coverage of drafts
-cases       the save request returns 201 and the draft count goes up
+cases       given a save, expect the request to return 201 and the draft count to go up
 journey     drafts-store.test.ts
 ```
 
@@ -100,9 +101,10 @@ A build that never writes to disk passes it. The status and the count are acknow
 rules       R11 text sent to pane B appears in pane B's input and nowhere else
             (serves U5 "text I send reaches the pane I chose")
 statement   Send text to pane B from the CLI and see it in pane B, not in the focused pane A.
-cases       given R11's example, "echo hi" sent to pane B while pane A has focus, pane B shows
-            "echo hi" and pane A shows nothing new; a router that writes to the focused pane,
-            or replies ok before any pane write, fails
+cases       given R11's example, "echo hi" sent to pane B while pane A has focus,
+              expect pane B to show "echo hi" and pane A nothing new
+            given a router that writes to the focused pane, expect "echo hi" in pane A: fails
+            given a router that replies ok before any pane write, expect pane B unchanged: fails
 journey     reused `pane-routing.e2e.ts`: drives the real CLI, router and panes and asserts both panes' contents
 unverified  remote panes over SSH
 ```
@@ -114,8 +116,9 @@ The check adds no manual journey, because the reused test already keeps the rout
 ```text
 rules       R15 line totals round half-up to the cent (serves U7 "totals match the invoice")
 statement   A focused test checks R15's rounding table against the pricing rule.
-cases       every entry in R15's table matches (0.125 -> 0.13, 0.124 -> 0.12); a rule that rounds
-            half to even (0.125 -> 0.12) fails
+cases       given 0.125, expect 0.13
+            given 0.124, expect 0.12
+            given a rule that rounds half to even, expect 0.125 -> 0.12: fails
 journey     none: the plan adds the focused test; no entry point, screen or configuration changes the rule
 unverified  none: the totals screen only shows the rule's output, and U8's check observes that screen
 ```
