@@ -6,21 +6,21 @@ This reference owns the one active implementation-plan contract shared by plan p
 
 Before producing or validating a completed plan, inspect governing authority, current branch/HEAD, repository instructions, owners, paths, interfaces, tests, commands, proof obligations, security boundaries, and any existing completed plan.
 
-The `originating planner` values name the three planners: `plan-implementation`, the design planner; `plan-improve-repo`, the improvement planner; and `plan-update`, which writes a superseding plan when a ready plan's meaning changes during delivery. The field is provenance and records who wrote this plan; Preserve and Admit says where a correction goes. The design planner admits the current reviewed four-document design (Requirements, Specification, Program Design, Verification Design) and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
+The `originating planner` values name the three planners: `plan-implementation`, the design planner; `plan-improve-repo`, the improvement planner; and `plan-update`, which writes a superseding plan when a ready plan's meaning changes during delivery. The field is provenance and records who wrote this plan; Preserve and Admit says where a correction goes. The design planner admits one current reviewed milestone (its page, its record ids and its current review result) and, for an orchestrated repository-improvement goal or owner-requested delivery of a direct improvement result, the complete current admitted-finding return from the improvement planner. Direct use of the improvement planner separately admits its current design-ready or implementation-mechanics-only basis and defaults to `plan-only`.
 
 ## Canonical Result
 
 A ready plan returns:
 
 ```text
-plan path: <sole document identity: the plan's page for a plan that lives with a design set, its Markdown file otherwise>
+plan path: <sole document identity: the plan's page for a plan that lives with a milestone, its Markdown file otherwise>
 originating planner: plan-implementation | plan-improve-repo | plan-update
 supersedes: none | <plan path>
 planning result: ready
 governing planning basis:
   kind: reviewed-four-document-design
-  Requirements, Specification, Program Design, Verification Design paths
-  current four-document review/remediation result identities
+  milestone page path and its record ids
+  current review/remediation result identity
   current applicability anchors
 or:
   kind: admitted-repository-improvement
@@ -58,13 +58,13 @@ Optional tracking remains outside this record. At planning entry, preserve an ex
 
 ## Plan Home
 
-A plan whose governing basis is a reviewed four-document design lives with that design set, tracked, as a page in its `plans/` folder: `docs/specs/<set>/plans/<yyyy-mm-dd>-<slug>.html`, composed with `presentation-html`, linked from the set's home page and, when it is scoped to one deliverable, from that deliverable's page, and linking back to both. For every other `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. For those plans it never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
+A plan whose governing basis is a reviewed milestone lives with that milestone, tracked, as a page in its `plans/` folder: `<milestone>/plans/<yyyy-mm-dd>-<slug>.html`, composed with `presentation-html`, linked from the milestone page and linking back to it. For every other `pr-ready-unmerged` plan, including orchestrated goals and direct continued-delivery planning, the planner first resolves the project root, then verifies that the resolved project's ignore policy covers `tmp/*` equivalently, adds `tmp/*` to that project-root `.gitignore` only when coverage is absent, and finally writes exactly one `<project-root>/tmp/plan-workflows/<yyyy-mm-dd>-<slug>.md` plan. For those plans it never uses `.git/info/exclude`, a checked-in plan home, or a user-global fallback.
 
 A superseding plan sits beside the plan it replaces, in the same form. A `plans/` folder holds plan files only: progress, tracking, status, ledger and scratch files live in the trace or in `tmp/`.
 
 Direct plan-only work may use an established repository plan home. Otherwise use `docs/specs/<spec>/plans/` for durable direct planning or `<repo-root>/tmp/plan-workflows/` for temporary/advisory work.
 
-Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each Verification Design row the plan admits: every row, unless the plan is scoped to one deliverable's needs, when it admits those needs' rows and those of the work they wait on and lists the rows it leaves for later deliverables.
+Every plan includes its result, governing basis, delivery context, planned-at branch/HEAD, goal, scope/non-goals, current evidence, write surfaces, proof-bearing slices, necessary dependency edges, obligation-to-proof mapping, integration gates, risks, and stop/replan conditions. In a design-bearing plan, the mapping names the slice and command that earn each planned check the plan admits: every check of its `core` deliverables, unless the plan is scoped to one deliverable, when it admits that deliverable's checks and those of the work it waits on and lists the checks it leaves for later deliverables.
 
 ## Preserve and Admit
 
@@ -80,4 +80,4 @@ Validation, handoff, tickets, tracker state, or plan completion never upgrade th
 
 Good signals: one immutable plan path, current governing authority, complete delivery context, proof attached to obligations, only meaningful edges, explicit design-gap routes, and no redundant approval stop.
 
-Bad signals: tickets as another plan, `Status: approved`, approval evidence, mutable progress, validation changing the result, document hashes, placeholder grouping/topology, inferred implementation authority, a plan that re-chooses a Verification Design row's observation or passing condition, or a carrier silently repairing the plan.
+Bad signals: tickets as another plan, `Status: approved`, approval evidence, mutable progress, validation changing the result, document hashes, placeholder grouping/topology, inferred implementation authority, a plan that re-chooses a planned check's observation or passing condition, or a carrier silently repairing the plan.

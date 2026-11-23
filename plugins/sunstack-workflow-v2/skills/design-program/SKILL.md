@@ -130,7 +130,7 @@ Re-anchor before selecting target composition: compare the selected direction wi
 
 Explain the selection in ordinary language: what changes, what stays the same, why the smaller structure is enough, what it costs, who bears that cost, and what evidence would justify a larger design. A request to use architecture vocabulary does not replace any of those concrete answers; labels such as “minimal structural delta” or “clean boundary” may summarize the explanation but may not carry it.
 
-Write the selected direction, each accepted debt and each scope rejection as a Lead decision record in the same edit as its passage: `author` authority when the choice is inside this phase's structural authority, or the owner's authority where it came from the owner.
+Write the selected direction, each accepted debt and each scope rejection as a decision record in the same edit as its passage: `lead-decided` from `author` when the choice is inside this phase's structural authority, or `owner-decided` where it came from the owner.
 
 Completion: the selected direction names what improves, where cost moves, accepted debt/payer, complexity spent, and evidence that would reopen the choice; the Re-anchor comparison is aligned, has deleted unsupported machinery, or has returned the exact expansion decision; and the actual choice and tradeoff are explained in ordinary language.
 
