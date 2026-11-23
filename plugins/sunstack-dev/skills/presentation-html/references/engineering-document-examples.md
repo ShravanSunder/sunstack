@@ -137,7 +137,7 @@ The page keeps design choices and their tradeoffs because they shape the system.
 ```html
 <section id="prove-cancellation">
   <h2>How cancellation will be proven</h2>
-  <h3 data-design-record="V3"></h3>
+  <p data-design-record="V3"></p>
   <p>This check is planned and unrun. It needs two observations from one run of the real worker.</p>
   <ex-mermaid id="cancellation-observation-path" label="Planned queued-cancellation observation"><script type="text/plain">
 flowchart LR

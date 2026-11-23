@@ -32,7 +32,7 @@ When a milestone's records cover more than one subject (a capability, a componen
 - A deliverable is `core` or `later`. A `later` deliverable is an id and a title, listed and not checked; only `core` work gets need, rule, realization and check records.
 - The page runs why, what, how, proof. A long page splits by capability, never by kind of meaning.
 
-The page fills its record placements from files the design check writes with `--write`; git ignores them. Before handing a page to a reader, run the check with `--write` and give the page's link, and say in the hand-over that the reader runs that command after a fresh checkout and after pulling record changes, or the page shows missing or old record text.
+The page fills its record placements from files the design check writes with `--write`; git ignores them. Before handing a page to a reader, run the check with `--write` and give the page's link and its opening method: a static server, or from disk, where records show but shared navigation and delivery tables do not. Say in the hand-over that the reader runs that command after a fresh checkout and after pulling record changes; otherwise the page shows missing record text, or old text with no warning.
 
 Reuse an admitted authoritative Requirements identity rather than copying it. Pre-existing sources remain where they are unless migration is commissioned. Chat-only work keeps the four kinds as separately labelled parts of the response. The frozen v1 workflow retains its own Markdown-source contract and local shared references; its HTML human view does not replace that source.
 
