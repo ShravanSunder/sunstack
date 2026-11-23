@@ -99,7 +99,7 @@ Then run the design-item pass:
 
 1. **Sentence support, first.** Read every sentence that settles a target, a reused piece of evidence or a limit. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
 2. **Items.** Return, for each design item, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone. IF an owner-message export is supplied, look each quoted span up by its authority (`owner-words`: the owner's own text in the cited row; `owner-accepted`: the agent's wording and the owner's acceptance in the cited selection record itself or a later acceptance event); otherwise return `quote not checked` with each quoted item's source.
-3. **Rank and promote** the `author` and `unknown` items, and bring the high-ranked ones that need the owner as decisions.
+3. **Rank and promote** the `author` and `unknown` decisions and open assumptions, and bring the high-ranked ones that need the owner as decisions.
 
 Every result of this pass is a nudge; it adds nothing to Not ready while.
 

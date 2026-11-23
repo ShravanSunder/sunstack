@@ -173,7 +173,7 @@ Keep missing observable behavior, permitted and protected systems, non-goals, ac
 ## Scale the Record
 
 - quick: return the record in chat unless a durable handoff is requested and files are allowed;
-- standard, deep, or substantial handoff: when files are allowed, use the caller's permitted Requirements home and source mode; new v1 records stay Markdown, while a new HTML record becomes need records on the milestone page, as `design-documents.md` lays out, through `presentation-html`; otherwise return the complete record in chat;
+- standard, deep, or substantial handoff: when files are allowed, use the caller's permitted Requirements home and source mode; new v1 records stay Markdown, while a new HTML record becomes need records written with the Demistify SDK, as `design-documents.md` lays out, and `presentation-html` writes only the milestone page; otherwise return the complete record in chat;
 - record classes and rows as they crystallize rather than reconstructing them at the end.
 
 A durable record uses its source path as its inspectable identity. An in-chat record returns its complete text and uses a session or message anchor only when the host exposes one.

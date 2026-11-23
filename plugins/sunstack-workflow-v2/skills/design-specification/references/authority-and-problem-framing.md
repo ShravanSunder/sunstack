@@ -155,7 +155,7 @@ Wording an agent wrote and the owner selected, said yes to or approved is the ow
 
 Bad: "The owner decided the model chooses unit boundaries (owner, 13 Nov)." The owner selected an option an agent wrote ("Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way."); "the model chooses unit boundaries" is one reading of it.
 
-Good: the selected option as an `owner-accepted` decision quoting its exact words, and "Jev chooses where units start and end" as a separate `author` assumption that reads it and names what depends on it.
+Good: the selected option as an `owner-accepted` decision quoting its exact words, and "Jev chooses where units start and end" as a separate open assumption that names it in its sources, with the records that depend on it naming the assumption.
 
 Complete when:
 

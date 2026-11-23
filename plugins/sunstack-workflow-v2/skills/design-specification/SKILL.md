@@ -204,7 +204,7 @@ Search legitimate sources before asking. Ask only when product meaning, public b
 
 Ask one load-bearing decision at a time: load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief, including foreclosed choices. Delegation, vague assent, silence, or a topic change is not decision authority.
 
-When you write a sentence that settles a choice or rests on something you have not checked, write its design item in the same edit, authority first, and write `unknown` when you cannot name it yet. Words you wrote that the owner selected or said yes to are the owner's acceptance of your wording: quote them as "the owner selected the option worded …" or "the owner accepted the wording …", and mark any reading you take beyond them as your own assumption. Three excuses skip this; each fails:
+When you write a sentence that settles a choice or rests on something you have not checked, write its design item in the same edit: a decision with its authority first, or `unknown` when you cannot name it yet; an assumption as open. Words you wrote that the owner selected or said yes to are the owner's acceptance of your wording: quote them as "the owner selected the option worded …" or "the owner accepted the wording …", and mark any reading you take beyond them as your own assumption. Three excuses skip this; each fails:
 
 - "I'll list the assumptions at the end": a list written after the page invites the miss this section exists for, an invented sentence that already reads as settled.
 - "The owner picked it, so those are the owner's words": the owner chose the words; you wrote them.

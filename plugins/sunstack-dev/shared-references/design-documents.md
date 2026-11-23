@@ -24,7 +24,7 @@ One milestone has typed records and one page. The records are written with the m
 | Typed record | the text of a need, rule, realization, planned check, decision or assumption, and its links | explanation or diagrams |
 | Page | explanation and diagrams, and where each record is shown | a copy of a record's text |
 
-- A record is the only home of its text. The page shows a record by its id (`data-design-record`) and never restates it. A record need not appear on the page; a page that names an unknown record id fails the check.
+- A record is the only home of its text. The page shows a record by its id (`data-design-record`) and never restates it; the placement is the record's anchor, so it carries no hand-written `id` or `title`. A record need not appear on the page; a page that names an unknown record id fails the check.
 - A rule is one sentence. Its threshold, target constraints, reference and worked examples go in its cases.
 - A rule names the needs it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and that gap holds the deliverable from acceptance.
 - A deliverable is `core` or `later`. A `later` deliverable is an id and a title, listed and not checked; only `core` work gets need, rule, realization and check records.
@@ -69,20 +69,21 @@ An agent's words are not the owner's words, and the moment to say whose they are
 
 Terms:
 
-- **Design item:** one decision or assumption record the design relies on, with its authority.
+- **Design item:** one decision or assumption record the design relies on. A decision carries its authority; an assumption carries its status.
 - **Assumption:** something the design treats as true that nobody checked or authorized for this design, and that some record or section depends on. A stand-in or unverified environment fact the design relies on is an assumption; a seam chosen where a capable reader could choose differently is a decision.
 - **Decision:** a choice where a capable reader of the same sources could have chosen differently and still claimed to follow them.
-- **Authority:** where the item's warrant comes from, named from its source: `owner-words` (the owner's own words, quoted, with where they were said); `owner-accepted` (wording an agent wrote that the owner selected, said yes to or approved, quoted, with where it was written and accepted); `contract` (an existing contract or demonstrated constraint, with its location); `author` (the author's own call); `unknown` (not yet known; allowed while drafting, always visible).
+- **Authority:** where a decision's warrant comes from, named from its source: `owner-words` (the owner's own words, quoted, with where they were said); `owner-accepted` (wording an agent wrote that the owner selected, said yes to or approved, quoted, with where it was written and accepted); `contract` (an existing contract or demonstrated constraint, with its location); `author` (the author's own call); `unknown` (not yet known; allowed while drafting, always visible).
 - **Nudge:** a check result that names what it saw, where, and where else to read. It leaves the judgment to the author or reviewer and is never a pass/fail verdict.
 
 The standards:
 
 - Every assumption and decision the design relies on is a design item, written in the same edit as the statement it governs.
-- A design item is a typed record carrying its stable identifier, its kind and its authority, so a tool can find it without reading prose; the records that depend on it name it.
-- An item's authority is named from its source, never inferred from a plan, a review, another page or a page the author wrote; when the author does not know it yet, the authority says `unknown`.
+- A design item is a typed record carrying its stable identifier and its kind, and a decision also its authority, so a tool can find it without reading prose; the records that depend on it name it.
+- An assumption carries no authority label. It stays open until a resolution confirms or refutes it, and the resolution names who confirmed or refuted it and where.
+- A decision's authority is named from its source, never inferred from a plan, a review, another page or a page the author wrote; when the author does not know it yet, the authority says `unknown`.
 - Words an agent wrote and the owner accepted are the owner's acceptance of agent wording, never the owner's words, however the acceptance happened.
 - A reading that goes beyond the quoted or accepted words is the author's own assumption, recorded separately and naming the item whose words it reads.
-- The author ranks its `author` and `unknown` items, brings the high-ranked ones that need the owner as decisions, and leaves the rest recorded.
+- The author ranks its `author` and `unknown` decisions and open assumptions, brings the high-ranked ones that need the owner as decisions, and leaves the rest recorded.
 - The list of design items is generated from the records; nobody writes it by hand.
 
 ### Write the item with the statement
@@ -97,22 +98,23 @@ Assumptions hide in ordinary sentences. Stop and write an item when a sentence c
 - a "settled", "decided" or "confirmed" label;
 - a seam or stand-in ("payment is proven against a mocked provider").
 
-Write the item in the same edit, authority first. When you cannot name the authority, write `unknown`; do not leave the item out. Bad: a quote attributed to the owner ("i meant initiative is orthogonal") followed in the same paragraph by the author's sentence that an initiative has a goal and a done-when, with no item. Good: the quote as its own decision citing where the owner said it, and the goal-and-done-when sentence as its own assumption with `unknown` authority, ranked first because it settles owner meaning.
+Write the item in the same edit: a decision with its authority first, or `unknown` when you cannot name it yet; an assumption as open. Do not leave the item out. Bad: a quote attributed to the owner ("i meant initiative is orthogonal") followed in the same paragraph by the author's sentence that an initiative has a goal and a done-when, with no item. Good: the quote as its own decision citing where the owner said it, and the goal-and-done-when sentence as its own open assumption, ranked first because it settles owner meaning.
 
 ### What an item carries
 
-The matching guide owns the `defineDecision` and `defineAssumption` fields (TODO(demistify-api): where an assumption records its authority; the guide's assumption has a status, not an authority). Whatever the syntax, an item carries:
+The matching guide owns the `defineDecision` and `defineAssumption` fields. Whatever the syntax, an item carries:
 
 | Carries | Required when |
 | --- | --- |
 | `A<n>` for an assumption, `D<n>` for a decision; unique across the design, never renumbered | always |
 | its kind: assumption, or decision (Lead-decided, owner-decided or open owner question) | always |
-| its authority: `owner-words`, `owner-accepted`, `contract`, `author` or `unknown` | always |
-| where the words were said, or the wording written and accepted, or the contract lives: export file and row time, session and time, review id, path and anchor | `owner-words`, `owner-accepted`, `contract` |
-| the quoted span, exact and contiguous, characters untouched (curly apostrophes stay curly); an omission goes outside the quote | `owner-words`, `owner-accepted` |
-| the id of the item whose words this reading interprets | an author's reading of quoted or accepted words |
+| its authority: `owner-words`, `owner-accepted`, `contract`, `author` or `unknown` | a decision |
+| its status: `open`, `confirmed` or `refuted`, and, once confirmed or refuted, a resolution naming who confirmed or refuted it and where; optional sources | an assumption |
+| where the words were said, or the wording written and accepted, or the contract lives: export file and row time, session and time, review id, path and anchor | a decision with `owner-words`, `owner-accepted` or `contract` |
+| the quoted span, exact and contiguous, characters untouched (curly apostrophes stay curly); an omission goes outside the quote | a decision with `owner-words` or `owner-accepted` |
+| the id of the item whose words this reading interprets, in its sources | an assumption that reads quoted or accepted words |
 
-For example, D4 records that every document rule gets its evidence the same way: `owner-accepted`, citing `owner-messages-claude-affa24ce.jsonl#2026-11-13T01:35:13.655Z`, quoting the option the owner selected, "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The same message continues in the owner's own words, which would be a separate `owner-words` item. A7 is the author's reading of D4, "a Jev selection" as Jev choosing where units start and end, so it is an assumption with `author` authority that names D4; R12 and R13 name A7 as an assumption they rely on.
+For example, D4 records that every document rule gets its evidence the same way: `owner-accepted`, citing `owner-messages-claude-affa24ce.jsonl#2026-11-13T01:35:13.655Z`, quoting the option the owner selected, "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The same message continues in the owner's own words, which would be a separate `owner-words` item. A7 is the author's reading of D4, "a Jev selection" as Jev choosing where units start and end, so it is an open assumption whose sources name D4; R12 and R13 name A7 as an assumption they rely on.
 
 ### Nudge labels
 
@@ -131,11 +133,11 @@ A self-check or review gives each item every label that describes it, or `ok` al
 | `author's call on owned meaning` | an `author` decision settles meaning another kind or the owner owns | the phase's existing `decision-needed` route |
 | `unsupported claim` | a sentence settles meaning and its source does not support all of it | the source it cites, or the nearest one that could |
 
-Every label is a nudge; `author's call on owned meaning` points at an existing route and adds no block. The labels cover an item's authority, source and quotation states. The design check covers a missing id or kind.
+Every label is a nudge; `author's call on owned meaning` points at an existing route and adds no block. The labels cover a decision's authority, source and quotation states, and an assumption's sources and resolution. The design check covers a missing id or kind.
 
 ### Rank, then promote
 
-Rank each `author` and `unknown` item on three questions, highest first:
+Rank each `author` or `unknown` decision and each open assumption on three questions, highest first:
 
 1. **Whose meaning does it settle?** Meaning the owner or an upstream kind owns ranks above meaning this phase owns.
 2. **How hard is it to undo?** Stored data, a public contract or ownership ranks above an internal default.
