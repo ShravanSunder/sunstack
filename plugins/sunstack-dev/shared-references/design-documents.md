@@ -114,7 +114,7 @@ The matching guide owns the `defineDecision` and `defineAssumption` fields. What
 | the quoted span, exact and contiguous, characters untouched (curly apostrophes stay curly); an omission goes outside the quote | a decision with `owner-words` or `owner-accepted` |
 | the id of the item whose words this reading interprets, in its sources | an assumption that reads quoted or accepted words |
 
-For example, D4 records that every document rule gets its evidence the same way: `owner-decided` from `owner-accepted` wording, citing `owner-messages-claude-affa24ce.jsonl#2026-11-13T01:35:13.655Z`, quoting the option the owner selected, "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The same message continues in the owner's own words, which would be a separate `owner-words` item. A7 is the author's reading of D4, "a Jev selection" as Jev choosing where units start and end, so it is an open assumption whose sources name D4; R12 and R13 name A7 as an assumption they rely on.
+For example, D4 records that every document rule gets its evidence the same way: `owner-decided` from `owner-accepted` wording, citing the owner-message export's row at `2026-11-13T01:35:13.655Z`, quoting the option the owner selected, "Every rule, J1 and the core-skill rules alike, gets candidates, then a Jev selection, then units the same way." The same message continues in the owner's own words, which would be a separate `owner-words` item. A7 is the author's reading of D4, "a Jev selection" as Jev choosing where units start and end, so it is an open assumption whose sources name D4; R12 and R13 name A7 as an assumption they rely on.
 
 ### Nudge labels
 
