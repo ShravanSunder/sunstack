@@ -4,7 +4,7 @@ This reference owns choosing, for each obligation, the evidence that can tell a 
 
 Expected inputs: each `core` rule with its cases, references and target constraints; each rule's seam from the realization records and the page's how part; and the journeys and real-path tests step 2 read.
 
-Return: for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, needed with its entry and observation, or none), each journey's lifetime, and any `specification-gap` or `program-design-gap`.
+Return: for each obligation, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, needed with its entry and observation, or none), each needed journey's lifetime, and any `specification-gap` or `program-design-gap`.
 
 ## Evidence classes
 
@@ -57,14 +57,14 @@ In one router project, a debug loader composed the board session, and every obse
 
 ## Lifetime: lasting or temporary
 
-Each check that names a journey marks it lasting or temporary.
+A `needed:` journey says whether it is lasting or temporary. An existing journey is already lasting, and `verify-<app>` describes its build, platform, configuration and client; the check names it and does not restate them.
 
-- **Lasting:** the outcome will be checked again, such as a user-facing behavior that can regress, a release check, or something other projects touch. The journey runs from a self-describing script in the project's own scripts location, and `verify-<app>` says which script proves it and when and why to run it. An existing journey is lasting. A lasting `needed:` journey is built before any observation that depends on it.
+- **Lasting:** the outcome will be checked again, such as a user-facing behavior that can regress, a release check, or something other projects touch. The journey runs from a self-describing script in the project's own scripts location, and `verify-<app>` says which script proves it and when and why to run it. A lasting `needed:` journey is built before any observation that depends on it.
 - **Temporary:** a one-time check. The Verifier runs it as a probe in the task's scratch beside its evidence, and deletes the probe once the evidence is kept.
 
-A check that a one-time backfill set each old note's created date is temporary: once the release has run the backfill, nothing runs it again. The drafts check below is lasting.
+A needed journey checking that a one-time backfill set each old note's created date is temporary: once the release has run the backfill, nothing runs it again.
 
-A check with no journey, decided by a focused test, structural evidence or a reused real-path test, carries no lifetime and adds no script or probe.
+A check decided by a focused test, structural evidence or a reused real-path test carries no lifetime and adds no script or probe.
 
 ## Worked checks
 
@@ -73,58 +73,51 @@ The names, paths and requirements below are illustrative.
 ### Durability across a restart
 
 ```text
-rules         R4 a saved draft survives an app restart; R5 a reopened draft keeps its title
-              (both serve U2 "my drafts are never lost")
-proven by     Save a draft in the installed app, quit it, reopen it, and see the same title and body.
-reference     R4's worked example: title "Q3 plan", a 2,000-character body ending in an emoji
-target        the installed release build on macOS, default profile, empty data directory
-journey       verify-notes `drafts`: drives save, quit and relaunch; reads the editor's title and body
-lifetime      lasting: any later storage change can lose drafts
-passes when   after relaunch the editor shows exactly that title and body; a build that keeps drafts
-              only in memory, or cuts the body at 1,024 characters, fails
-reuses        none: `drafts-store.test.ts` swaps the disk for an in-memory store, so it never crosses a restart
-unverified    Windows, which this cycle doesn't ship
+rules       R4 a saved draft survives an app restart; R5 a reopened draft keeps its title
+            (both serve U2 "my drafts are never lost")
+statement   Save a draft in the installed app, quit it, reopen it, and see the same title and body.
+cases       given R4's worked example (title "Q3 plan", a 2,000-character body ending in an emoji),
+            after relaunch the editor shows exactly that title and body; a build that keeps drafts
+            only in memory, or cuts the body at 1,024 characters, fails
+journey     verify-notes `drafts`: drives save, quit and relaunch; reads the editor's title and body.
+            Not `drafts-store.test.ts`: it swaps the disk for an in-memory store, so it never crosses a restart
+unverified  Windows, which this cycle doesn't ship
 ```
 
 The weak version of the same check:
 
 ```text
-proven by     e2e coverage of drafts
-passes when   the save request returns 201 and the draft count goes up
-reuses        drafts-store.test.ts
+statement   e2e coverage of drafts
+cases       the save request returns 201 and the draft count goes up
+journey     drafts-store.test.ts
 ```
 
-A build that never writes to disk passes all three. The status and the count are acknowledgements, and the reused test replaces the very boundary R4 is about.
+A build that never writes to disk passes it. The status and the count are acknowledgements, and the reused test replaces the very boundary R4 is about.
 
 ### Routing, with honest reuse
 
 ```text
-rules         R11 text sent to pane B appears in pane B's input and nowhere else
-              (serves U5 "text I send reaches the pane I chose")
-proven by     Send text to pane B from the CLI and see it in pane B, not in the focused pane A.
-reference     R11's example: "echo hi" sent to pane B while pane A has focus
-target        the installed app at the release candidate, default configuration, the shipped CLI
-journey       none added: the reused test drives the same entry
-passes when   pane B shows "echo hi" and pane A shows nothing new; a router that writes to the
-              focused pane, or replies ok before any pane write, fails
-reuses        `pane-routing.e2e.ts`: drives the real CLI, router and panes and asserts both panes'
-              contents; applies while it runs against the installed build and default configuration
-unverified    remote panes over SSH
+rules       R11 text sent to pane B appears in pane B's input and nowhere else
+            (serves U5 "text I send reaches the pane I chose")
+statement   Send text to pane B from the CLI and see it in pane B, not in the focused pane A.
+cases       given R11's example, "echo hi" sent to pane B while pane A has focus, pane B shows
+            "echo hi" and pane A shows nothing new; a router that writes to the focused pane,
+            or replies ok before any pane write, fails
+journey     reused `pane-routing.e2e.ts`: drives the real CLI, router and panes and asserts both panes' contents
+unverified  remote panes over SSH
 ```
 
-The check adds no manual journey, because the reused test already keeps the router real and fails for wrong routing. The router's `ok` reply is not the outcome. If the test had asserted only that reply, it would decide nothing here and the check would need the `pane-send` journey.
+The check adds no manual journey, because the reused test already keeps the router real and fails for wrong routing. The router's `ok` reply is not the outcome. If the test had asserted only that reply, it would decide nothing here and the check would need a `needed:` `pane-send` journey.
 
 ### A pure rule
 
 ```text
-rules         R15 line totals round half-up to the cent (serves U7 "totals match the invoice")
-proven by     A focused test checks R15's rounding table against the pricing rule.
-reference     R15's table: 0.125 -> 0.13, 0.124 -> 0.12
-target        the pricing module at the delivered commit
-journey       none: no entry point, screen or configuration changes the rule
-passes when   every entry in R15's table matches; a rule that rounds half to even (0.125 -> 0.12) fails
-reuses        none; the plan adds the focused test
-unverified    none: the totals screen only shows the rule's output, and U8's check observes that screen
+rules       R15 line totals round half-up to the cent (serves U7 "totals match the invoice")
+statement   A focused test checks R15's rounding table against the pricing rule.
+cases       every entry in R15's table matches (0.125 -> 0.13, 0.124 -> 0.12); a rule that rounds
+            half to even (0.125 -> 0.12) fails
+journey     none: the plan adds the focused test; no entry point, screen or configuration changes the rule
+unverified  none: the totals screen only shows the rule's output, and U8's check observes that screen
 ```
 
 ### One check, several rules
@@ -137,4 +130,4 @@ R8 (pressing Enter submits once) and R9 (results come from the real index) serve
 - **No reference to judge against.** R21 says search "feels fast", with no threshold or workload, so no passing condition can fail a slow build. Record a `specification-gap` for the missing threshold and workload.
 - **A harness that can't reach the boundary.** When the existing journey can't restart the app, "survives a restart" doesn't become "save returns 201". Keep the obligation, and write the journey as `needed:`.
 
-Complete when every obligation has a class whose observation sits where its wrong behavior is real, a target, and an existing, needed or no journey, with a lifetime for each journey; every end-to-end check names its ordinary entry; every pure rule and structural claim has proportional proof; and every check that can't be written carries its gap.
+Complete when every obligation has a class whose observation sits where its wrong behavior is real, an existing, needed or no journey, with a lifetime for each needed journey; every end-to-end check names its ordinary entry; every pure rule and structural claim has proportional proof; and every check that can't be written carries its gap.

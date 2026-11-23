@@ -67,7 +67,7 @@ Replace `support`, `handle`, `robust`, `easy`, `secure`, `fast`, and similar adj
 
 ## Traceability
 
-A rule names the needs it serves, one or several; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist. Each U identifier resolves to a need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
+A rule names the needs it serves, one or several; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist; it notes a need no rule serves. Each U identifier resolves to a need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
 
 Flag:
 

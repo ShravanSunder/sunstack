@@ -26,7 +26,7 @@ One milestone has typed records and one page. The records are written with the m
 
 - A record is the only home of its text. The page shows a record by its id (`data-design-record`) and never restates it; the placement is the record's anchor, so it carries no hand-written `id` or `title`. A record need not appear on the page; a page that names an unknown record id fails the check.
 - A rule is one sentence. Its threshold, target constraints, reference and worked examples go in its cases.
-- A rule names the needs it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and that gap holds the deliverable from acceptance.
+- A rule names the needs it serves; a realization and a planned check name the rules they address; a rule, realization or check names the decisions that govern it and the assumptions it relies on. Those links are the trace. The design check reports a scoped rule with no need or no planned check, and a need a `core` deliverable lists that none of its rules serves; each gap holds that deliverable from acceptance. It also prints design notes, which hold nothing, for a need no rule serves and for a rule no realization names, and `brief` prints a deliverable's rules, realizations and checks.
 - A deliverable is `core` or `later`. A `later` deliverable is an id and a title, listed and not checked; only `core` work gets need, rule, realization and check records.
 - The page runs why, what, how, proof. A long page splits by capability, never by kind of meaning.
 

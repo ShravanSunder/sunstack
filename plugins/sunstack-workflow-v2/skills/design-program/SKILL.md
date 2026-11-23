@@ -218,7 +218,7 @@ Write a proof seam or real/fake boundary as a Lead decision record only when the
 
 Do not choose exact test files, commands, or execution order. Completion of this load: the design names no test path and no red/green step for that illegality decision.
 
-Completion: every `core` rule that needs new structure is named by a realization; every material rule has an observable seam or a recorded gap; and every load-bearing rule has an enforcement class or explicit proof gap.
+Completion: each rule the design check's note lists with no realization has been judged to need no new structure, or now has one; a seam, real/fake boundary or enforcement choice that is not obvious is recorded as a decision; and a rule with no way to observe it is a recorded gap.
 
 ### 15. Trace, simplify, and author the artifact
 
@@ -250,7 +250,7 @@ Completion: each design element serves a rule, constraint, failure policy, or pr
 
 Using the Integration Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the complete artifact for entity bindings and boundary shapes, term agreement with the Specification, component composition, singular ownership, dependency direction, interfaces, call-path deltas, state/flow/failure consistency, concurrency, cross-cutting realization, proof seams, the realization records and accepted-requirements coverage, process residue, obscure headings, plan leakage, and unresolved specification meaning. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the integration self-check with exact gaps.
 
-The design check reports missing need and check links. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
+The design check reports missing need and check links, and prints design notes for a need no rule serves and a rule no realization names. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
 
 Record the structure decision in the artifact: the selected structure, the credible alternatives, their tradeoffs, and the falsifiers that would reopen the choice. Then show, in this order, who does what and where the boundaries are, one representative path from entry to effect, the entity bindings, and the generated design-item list, each in the component `presentation-html` returns for it.
 

@@ -19,20 +19,17 @@ The Lead writes every check. IF a bounded evidence question, such as which journ
 
 ## The planned check
 
-One check decides one or more `core` rules, and every `core` rule has a check. A check is a `defineCheck` record naming the rules it decides in `checks`; the guide's `typed-design.md` owns its fields. Its "proven by" line is the record's `statement`, its reference and passing condition are its `cases`, the target through reuses go in its short `journey` observation reference, and what stays open is its `unverified` limit:
+One check decides one or more `core` rules, and every `core` rule has a check. A check is a `defineCheck` record; the guide's `typed-design.md` owns its field syntax. The table follows the record:
 
 | Field | Says | Not this |
 | --- | --- | --- |
-| rules | every rule (`R`) the check decides | a rule left implicit, so a rule no observation decides hides under a covered need |
-| proven by | one sentence the owner can read: what will be done, and what will be seen | "covered by e2e tests" |
-| reference | what correct is judged against, from the rule's cases: its worked example, threshold, protocol version or checked known-good output | what the app does today, or a model's opinion of the output |
-| target and journey | the app or package with its planned build, platform, configuration and client; the `verify-<app>` journey that will observe it, or `needed:` with the entry it must drive and what it must read | a journey you didn't read; "the app" |
-| lifetime | for a check that names a journey: `lasting` when its outcome will be checked again, or `temporary` for a one-time check | a lifetime on a check that a focused test, structural evidence or a reused real-path test decides |
-| passes when | what is seen, where, matched against the reference, and the wrong build that fails it | "works"; an exit code, a success toast or any other acknowledgement |
-| reuses | the real-path test that already decides the check, with the target and configuration it depends on, or `none` | a test that mocks the interaction the check claims |
+| rules (`checks`) | every rule (`R`) the check decides | a rule left implicit, so a rule no observation decides hides under a covered need |
+| statement | the "proven by" sentence the owner can read: what will be done, and what will be seen | "covered by e2e tests" |
+| cases | the reference from the rule's cases (its worked example, threshold, protocol version or checked known-good output), what is seen where, matched against it, and the wrong build that fails | "works"; an exit code, a success toast or any other acknowledgement; what the app does today, or a model's opinion of the output |
+| journey | the `verify-<app>` journey or the reused real-path test that observes it, or `needed:` with the entry it must drive and what it must read, marked `lasting` or `temporary` | a journey you didn't read; "the app"; a test that mocks the interaction the check claims |
 | unverified | what stays open: platforms not tried, stand-ins still in place, access nobody has granted, journeys still to build | blank |
 
-When one observation decides several rules, write one check that names them all.
+A check does not restate a journey's build, platform, configuration or client; the journey's own description in `verify-<app>` holds them. When one observation decides several rules, write one check that names them all.
 
 ## Workflow
 
@@ -51,7 +48,7 @@ A check is stale when, since its review, any of these changed:
 
 A stale check is updated and re-reviewed.
 
-Completion: every `core` rule is listed with its cases, references and seams, or with the exact piece that is missing.
+Completion: you have each `core` rule's cases, reference and seam in hand, or the exact piece that is missing.
 
 ### 2. Read what already observes the app
 
@@ -61,7 +58,7 @@ Completion: each rule's entry has its journeys and real-path tests with what eac
 
 ### 3. Choose each observation
 
-MUST load `references/choosing-the-observation.md` and return, for each rule, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, or needed with its entry and observation), each journey's lifetime, and any gap.
+MUST load `references/choosing-the-observation.md` and return, for each rule, the evidence class, the boundary where its wrong behavior stays real, the target, the journey or test that will observe it (existing, or needed with its entry and observation), each needed journey's lifetime, and any gap.
 
 When you place each observation, put it where the user or calling program meets the outcome, through the real entry on the planned target (a passing test proves only what it observes (`sunstack-dev:principle-prove-it-works`)). Scale the proof to the claim: a pure rule is proven by a focused test and launches no app, and a structural claim, such as a schema or a skill's text, gets structural evidence that names the behavior it leaves unevaluated.
 
@@ -73,11 +70,11 @@ Completion: every `core` rule is decided by a named observation at its boundary,
 
 ### 4. Write each passing condition and its limits
 
-Write the passing condition as an observation: what is seen, where, against which part of the reference, on the planned target. After writing it, name one wrong build and check that the condition fails for it, and one materially different allowed build and check that it passes (a check counts only if the wrong behavior could make it fail (`sunstack-dev:principle-write-tests-that-can-fail`)). If a build that only acknowledges, by returning 201 or showing a toast, would also pass, the condition watches a proxy; move it to the outcome.
+Write the passing condition in the check's cases as an observation: what is seen, where, against which part of the reference. After writing it, name one wrong build and check that the condition fails for it, and one materially different allowed build and check that it passes (a check counts only if the wrong behavior could make it fail (`sunstack-dev:principle-write-tests-that-can-fail`)). If a build that only acknowledges, by returning 201 or showing a toast, would also pass, the condition watches a proxy; move it to the outcome.
 
 List what the check leaves unverified. A named limit is honest, but it waives nothing: a limit that leaves a required observation undone, or weakens it, is the owner's decision. Write each limit you accept as a decision record in the same edit; its authority shows whether that owner decision exists.
 
-Write every check as a plan. Its target properties describe the build that will exist, not one anyone saw, and no check says or implies that a run happened.
+Write every check as a plan: it describes what will be seen on the build that will exist, and no check says or implies that a run happened.
 
 Completion: every check has a passing condition with the wrong build that fails it and its unverified list, and every limit that weakens required proof is marked for the owner.
 
@@ -87,13 +84,13 @@ The planned-check records are the Verification Design's one home. When you write
 
 In a file-backed set, use `sunstack-dev:presentation-html`, passing the reader's question and the check ids, to write the page's proof part: only what a check record cannot say, such as an observation path whose route is not obvious, explained beside its diagram. The page shows each check by id and never restates it. IF an observation path is drawn, load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` with that view and return its selected medium, semantic-preservation result, visual-check result and exact gap. Run the design check and the matching static check through `presentation-html`. A planned view or observation is not a result.
 
-Completion: every `core` rule has a check, every drawn observation path has a passing rendering result, and in a file-backed set the design check and static check pass. Return an exact required-rendering gap as `evidence-blocked`.
+Completion: the design check reports no `core` rule without a check, every drawn observation path has a passing rendering result, and in a file-backed set the design check and static check pass. Return an exact required-rendering gap as `evidence-blocked`.
 
 ### 6. Re-read it as the Verifier would
 
 Re-read every check as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing check. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
 
-The design check reports missing need and check links. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
+The design check reports missing need and check links, and prints design notes for a need no rule serves and a rule no realization names. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
 
 Then run the design-item pass:
 
@@ -143,7 +140,7 @@ A review handoff carries the page and record ids, this return and the review que
 - a check's reference is the app's current behavior, a model's judgment, or missing;
 - a passing condition names no wrong build that fails it, or an acknowledgement alone would pass it;
 - a journey is named as existing without its source read, or a needed journey is missing from the return;
-- a check that names a journey has no lifetime, or a check with no journey carries one;
+- a `needed:` journey has no `lasting` or `temporary`, or an existing journey or reused test carries one;
 - a reused test mocks the interaction its check claims;
 - a pure rule or structural claim is given an app launch, or an outcome the user meets in the app is given only a unit test;
 - a check says or implies that something was observed;

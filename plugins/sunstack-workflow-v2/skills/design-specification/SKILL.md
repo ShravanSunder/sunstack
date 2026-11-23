@@ -218,9 +218,9 @@ MUST load `references/requirements-and-traceability.md` with the stage-2 entity 
 
 For substantial or uncertain work, stage source notes, alternative wording, prototype views, and temporary comparisons in private working state, the repository's ignored scratch convention, or `tmp/design-workflows/<date>-<slug>/`. Quick work keeps the comparison in working state. Scratch never owns normative meaning or becomes required reading.
 
-For each rule, contract, failure obligation, constraint, and proof obligation, name the confirmed need it serves and what becomes observably false or unverifiable if removed. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. Delete an element that changes neither the confirmed outcome nor a necessary truth boundary; a template slot does not authorize adjacent work.
+Prune as you go: if removing a rule, contract, failure obligation or constraint changes nothing observable and crosses no necessary truth boundary, delete it; nothing is written down for this test. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. A template slot does not authorize adjacent work.
 
-Completion: every `core` goal is covered, every rule has a basis, names its needs and has an observable pass/fail consequence, every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
+Completion: every `core` goal is covered, every rule has a basis and an observable pass/fail consequence (its need links are the design check's to report), every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
 
 ### 6. Specify observable contracts and negative space
 
@@ -230,11 +230,9 @@ Completion: each consumer can predict normal, boundary, failure, partial-success
 
 ### 7. State cross-cutting obligations without designing their realization
 
-For security, privacy, reliability, performance, accessibility, observability, data lifecycle, compliance, and platform compatibility, state the externally required guarantee or mark it not applicable with a reason.
+For each of security, privacy, reliability, performance, accessibility, observability, data lifecycle, compliance, and platform compatibility that applies, write the externally required guarantee as a rule; record no not-applicable judgment. One question is always answered: when sensitive behavior is in scope, name the assets, actors, prohibited outcomes, and security non-goals. Leave trust-boundary realization and enforcement calls to `design-program`.
 
-Name assets, actors, prohibited outcomes, and security non-goals when sensitive behavior is in scope. Leave trust-boundary realization and enforcement calls to `design-program`.
-
-Completion: applicable qualities are observable obligations or constraints, not adjectives or hidden implementation choices.
+Completion: each applicable quality is a rule or constraint, not an adjective or a hidden implementation choice, and sensitive behavior in scope names its assets, actors and prohibited outcomes.
 
 ### 8. Name what decides pass and fail
 
@@ -270,7 +268,7 @@ Completion: each need and rule has one record and no copy on the page; every nor
 
 Using the Author Self-Check procedure in the already-loaded `references/artifact-and-self-review.md`, re-read the records and the page. Check authority conflicts, accepted-requirements coverage, rules that name no need, vague or multi-sentence rules, missing contract/failure behavior, hidden How, contradictory goals/non-goals, proof gaps, assumptions disguised as decisions, record text copied onto the page, process residue, obscure headings, and reader-facing elements that fail the human deletion test. For each generated visual, consume its result under `sunstack-dev/shared-references/generated-document-visuals.md`, then return the author self-check with exact gaps, its sentence-support nudges, every applicable label for each design item or `ok` alone, the ranking, and any decisions promoted to the owner.
 
-The design check reports missing need and check links. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`; a binding-row warning before Program Design exists is expected, so leave it too.
+The design check reports missing need and check links, and prints design notes for a need no rule serves and a rule no realization names. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`; a binding-row warning before Program Design exists is expected, so leave it too.
 
 Completion: the current artifact has a self-check result with exact passes and gaps. Self-check is never independent review.
 
@@ -324,7 +322,7 @@ Do not return `locally-ready` while any of these hold:
 - the design check reports a `core` rule with no need;
 - unresolved product meaning is disguised as an assumption;
 - a returned gap omits an authorized observable outcome, or `decision-needed` is based only on whether implementation or incident mechanisms should be retained or made normative;
-- a material non-goal is omitted, or an applicable cross-cutting quality lacks an observable obligation or constraint or a reasoned not-applicable result;
+- a material non-goal is omitted, an applicable cross-cutting quality lacks a rule or constraint, or sensitive behavior in scope names no assets, actors or prohibited outcomes;
 - internal architecture or implementation tasks are presented as requirements without an externally authoritative constraint;
 - an applicable Required Why/What View lacks the required cardinality, semantic fields, passed rendering result, or separate normative home;
 - an accepted need changes a UI surface and the why part has neither a passed UI view of that moment grounded in the current app nor an explicit `no current UI` gap, without an explicit owner-authorized deferral;
