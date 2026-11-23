@@ -155,7 +155,3 @@ flowchart LR
 ```
 
 V3's record holds its "proven by" sentence, cases, how it is observed and what stays unverified; the section adds only the path and why both observations are needed. Avoid one decorative card per sentence or an array of unexplained Not run chips.
-
-## A call stack belongs to its actual path
-
-`engineering-documents.md` owns when the call-stack component fits and what data it needs; this file adds no example of it.

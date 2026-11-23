@@ -150,7 +150,7 @@ A product-meaning default with one dependent ranks above an internal default wit
 
 ## Call paths
 
-Call paths remain Program Design meaning. `presentation-html`'s `engineering-documents.md` owns when the call-stack component fits and the data it needs; never fabricate frames, bindings or prepared results.
+Call paths remain Program Design meaning. `presentation-html`'s `views.md` owns the source-derived call path that shows them; never fabricate frames or bindings.
 
 ## Plans and deliverables
 

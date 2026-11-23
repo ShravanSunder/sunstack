@@ -8,7 +8,7 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-Keep the source mode selected by `SKILL.md` step 1. For engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown. Reuse a view in its owning section; a navigation or derived view reaches facts through record ids, section IDs, links or islands and preserves every caller-required field. Coverage is built from the records' links, never written by hand. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying a record's text.
+Keep the source mode selected by `SKILL.md` step 1. For engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown; the views a v1 design names are in `v1-markdown-source.md`. Reuse a view in its owning section; a navigation or derived view reaches facts through record ids, section IDs, links or islands and preserves every caller-required field. Coverage is built from the records' links, never written by hand. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying a record's text.
 
 The `capability map` below is the caller's explanatory view, distinct from the collection's shared navigation Map. Preserve its requested capability fields and home rows; navigation controls alone do not establish that a required explanatory view exists.
 
@@ -26,18 +26,6 @@ The `capability map` below is the caller's explanatory view, distinct from the c
 | failure/recovery flow | `ex-flow` or a Mermaid `flowchart`, with detection, retry and the recovery owner on the edges; or `ex-trace` when each step carries evidence. | The recovery owner is named at each failure. | A happy path with failure as a footnote. |
 | trust-boundary view | `ex-board` regions for boundaries, with `ex-arrow` arrows for entry points. | Every entry point crosses a drawn boundary. | A network map with no enforcement point. |
 | "proven by" lines | Each planned check record shown by id under the rules it covers, in a Tree of need, rules and checks built from the records. | What stays unverified is visible with every check. | A check that reads as already proven; a hand-written copy of its statement. |
-
-## Views a v1 Markdown-source design names
-
-A `sunstack-workflow-v1` design keeps its Markdown sources authoritative and names these hand-written views; an engineering design builds its coverage from the records instead and never draws them.
-
-| View | Form on the page | Good signal | Bad signal |
-| --- | --- | --- | --- |
-| requirement coverage table | Native table with link cells; group by capability when the source's capability map fires, otherwise keep it ungrouped. | Gaps written as words. | One ungrouped table when the capability map exists. |
-| entity -> home map | Native table. | Each home is marked new, modified or existing. | An entity without a home row. |
-| requirement/design/proof trace | Native table, one row per R; group by the source's capability keys when present. | Every R has a row, and gaps are written as words. | Rows merged across obligations. |
-| "proven by" cards | One `ex-card` per requirement. | What stays unverified is on every card. | A card that reads as already proven. |
-| coverage rows | Native table; group by the source's capability keys when present. Link a shared observation from each row it serves. | A shared observation appears once and is linked. | The same observation copied into several rows. |
 
 ## Workflow records
 
