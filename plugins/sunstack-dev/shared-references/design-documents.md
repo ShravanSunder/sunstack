@@ -19,7 +19,7 @@ The Specification defines the nouns its obligations use, on the page, for each n
 
 One milestone has typed records and one page. The records are written with the milestone SDK's helpers (`defineNeed`, `defineRule`, `defineRealization`, `defineCheck`, `defineDecision`, `defineAssumption`, `defineDeliverable`, gathered by `defineDesign`), which `demistify design types` generates; the guide's `typed-design.md` at the page's binding owns their fields, files and commands.
 
-When a milestone's records cover more than one subject (a capability, a component, a protocol), each subject's records live in their own `records/<subject>.ts`, which `design.ts` imports; a single-subject milestone keeps them in `design.ts`. An agent working on one subject then opens one file. Name the subject by the capability or part the owner already uses, never an invented grouping. Decisions, assumptions and deliverables keep their own files.
+When a milestone's records cover more than one subject (a capability, a component, a protocol), each subject's records live in their own `records/<subject>.ts`, which `design.ts` imports; a single-subject milestone keeps them in `design.ts`. An agent working on one subject then opens one file. Name the subject by the capability or part the owner already uses, never an invented grouping. A realization or planned check that spans subjects lives in the file of the first rule it names. Decisions, assumptions and deliverables keep their own files.
 
 | Home | Owns | Never holds |
 | --- | --- | --- |
