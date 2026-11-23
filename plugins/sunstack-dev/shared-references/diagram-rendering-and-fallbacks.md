@@ -44,7 +44,7 @@ A view never originates a governing fact. A native page view may project the own
 The page passes only when its proof records:
 
 - the Demistify binding;
-- for an engineering design, the actual result of the guide's read-only design check (`demistify project check`) after the last edit; for a selected component that requires prepared data, the actual result of its documented preparation; otherwise `preparation: not applicable (no records or prepared component data)`. Generated SDK and reader data are built locally and never committed;
+- for an engineering design, the actual result of the guide's read-only design check (`demistify project check` for a project, `demistify design check` for a standalone milestone) after the last edit; for a selected component that requires prepared data, the actual result of its documented preparation; otherwise `preparation: not applicable (no records or prepared component data)`. Generated SDK and reader data are built locally and never committed;
 - each island's source: inline, or its included file and whether it was live or embedded;
 - the actual result of `presentation-html`'s routine static check on the final page;
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
