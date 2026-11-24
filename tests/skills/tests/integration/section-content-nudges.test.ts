@@ -162,3 +162,82 @@ test("a table with more than 20 rows nudges with its row count, in HTML and in i
     report.results.filter((result) => result.marker === "M004" || result.marker === "M005"),
   ).toHaveLength(4);
 });
+
+interface CalloutCase {
+  readonly calloutId: string;
+  readonly markup: string;
+  readonly expectedWordCount?: number;
+}
+
+const tenWordItems = (count: number): string =>
+  Array.from({ length: count }, () => `<li>${tenWords}</li>`).join("");
+
+const calloutCases: readonly CalloutCase[] = [
+  {
+    calloutId: "long-plain-callout",
+    markup: `<ex-callout id="long-plain-callout" tone="note"><p>${proseWords(15)} Next.</p></ex-callout>`,
+    expectedWordCount: 151,
+  },
+  {
+    calloutId: "limit-plain-callout",
+    markup: `<ex-callout id="limit-plain-callout" tone="note"><p>${proseWords(15)}</p></ex-callout>`,
+  },
+  {
+    calloutId: "callout-with-list",
+    markup: `<ex-callout id="callout-with-list" tone="note"><p>${ninetyWords}</p><ul>${tenWordItems(7)}</ul></ex-callout>`,
+    expectedWordCount: 160,
+  },
+  {
+    calloutId: "callout-with-table",
+    markup: `<ex-callout id="callout-with-table" tone="note"><p>${proseWords(14)}</p>${htmlTable("callout-table", 6)}</ex-callout>`,
+  },
+  {
+    calloutId: "bare-text-callout",
+    markup: `<ex-callout id="bare-text-callout" tone="note">${proseWords(15)} Next.</ex-callout>`,
+    expectedWordCount: 151,
+  },
+  {
+    // The title counts as prose: CLI 0.21.1 reads a text attribute as its words plus one.
+    calloutId: "titled-callout",
+    markup: `<ex-callout id="titled-callout" title="Where it stands" tone="note"><p>${proseWords(15)}</p></ex-callout>`,
+    expectedWordCount: 154,
+  },
+];
+
+test("a callout with more than 150 prose words nudges with its word count; table text is not prose", () => {
+  // Arrange: one section per callout, each with a picture so the section nudge stays quiet.
+  const bodySections = calloutCases.map(
+    (calloutCase) =>
+      `<h2 id="${calloutCase.calloutId}-section">${calloutCase.calloutId}</h2>\n<img src="flow.png" alt="Flow">\n${calloutCase.markup}`,
+  );
+
+  // Act: lint the generated page through the pinned CLI.
+  const { output, report, lines } = lintGeneratedPage(bodySections);
+
+  // Assert: each callout's own result, its count, and that no model request was sent.
+  expect(output.status, output.stderr).toBe(0);
+  expect(report.usage.model_requests).toBe(0);
+  for (const calloutCase of calloutCases) {
+    const calloutLine = lineStartingWith(lines, `<ex-callout id="${calloutCase.calloutId}"`);
+    const result = report.results.find(
+      (candidate) => candidate.marker === "M006" && candidate.first_line === calloutLine,
+    );
+    const finding = report.findings.find(
+      (candidate) =>
+        candidate.rule === "presentation-html.long-callout" && candidate.line === calloutLine,
+    );
+    if (calloutCase.expectedWordCount === undefined) {
+      expect(result?.outcome, calloutCase.calloutId).toBe("pass");
+      expect(finding, calloutCase.calloutId).toBeUndefined();
+    } else {
+      expect(result?.outcome, calloutCase.calloutId).toBe("finding");
+      expect(finding?.severity).toBe("warn");
+      expect(finding?.message, calloutCase.calloutId).toMatch(
+        new RegExp(`^${calloutCase.expectedWordCount}-word callout\\. Worth checking: a callout holds one answer\\.`),
+      );
+    }
+  }
+  expect(report.results.filter((result) => result.marker === "M006")).toHaveLength(
+    calloutCases.length,
+  );
+});

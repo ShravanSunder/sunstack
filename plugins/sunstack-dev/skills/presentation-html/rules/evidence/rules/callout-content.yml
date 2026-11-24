@@ -1,0 +1,8 @@
+# A callout measured as one block (long-callout nudge). The callout's prose is
+# the html-prose pieces inside it: the callout itself when it is plain text, or
+# its inner paragraphs and lists when it holds a list, table, code or picture.
+id: html-callout
+language: Html
+rule:
+  kind: element
+  regex: '^<ex-callout(?:\s|>)'
