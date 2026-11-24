@@ -260,6 +260,10 @@
           "html_prose": {
             "from": "inside",
             "kind": "html_prose"
+          },
+          "islands": {
+            "from": "inside",
+            "rule": "callout-markdown-island"
           }
         }
       }

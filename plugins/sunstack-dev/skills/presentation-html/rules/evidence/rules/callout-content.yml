@@ -6,3 +6,13 @@ language: Html
 rule:
   kind: element
   regex: '^<ex-callout(?:\s|>)'
+---
+# A Markdown island inside a callout: its text is not read as the callout's
+# prose, so a callout that holds one is left to the author (uncertain).
+id: callout-markdown-island
+language: Html
+rule:
+  kind: element
+  any:
+    - regex: '^<ex-markdown(?:\s|>)'
+    - regex: '^<script\b[^>]*\btype="text/markdown"'

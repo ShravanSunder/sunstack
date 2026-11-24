@@ -19,9 +19,11 @@ Section picture: a section is a heading's own content, up to the next HTML or is
 
 Long table: every row counts, header rows included; a Markdown delimiter row does not. 20 rows is the conservative limit from the same pages.
 
-Long callout: a callout's prose is counted as the section nudge counts it, through the blocks inside the callout, so a table, code or picture inside it is not prose. Its title counts too (CLI 0.21.1 reads it as its words plus one). Callouts are HTML elements, so Markdown island text inside a callout is not counted. 150 words is a starting limit, from a scan of the owner's pages: callout median 54 words, 90th percentile 164. At that limit about one callout in nine fires, and most of those are one answer with its reason that the author keeps; a status block that gathers pieces of work belongs in a table (`references/work-account-forms.md`).
+Long callout: a callout's prose is counted as the section nudge counts it. A plain callout is counted whole; a callout that holds an HTML list, table, code or picture is counted through its paragraphs and lists only, so text beside them in a `div` or `details`, or loose in the callout, is not counted, and table text is not prose. Its title counts too: CLI 0.21.1 reads a text attribute as `title:` plus its words, so a title adds its words plus one. A callout that holds a Markdown island (`ex-markdown` or a `text/markdown` script) is `uncertain`, not counted: the engine can't read island prose as part of an HTML element, so the author decides. A callout written inside a Markdown island is not collected.
 
-Presence is not relevance: a nudge does not judge whether a picture explains its text or a table reads well.
+150 words is a starting limit, not set from rated cases: it comes from a scan of 788 callouts on the owner's pages (median 54 words, 90th percentile 164). The one page the owner ruled on bounds it only loosely, anywhere from 137 to 171 words. At 150 about one callout in nine fires; judged by title, many of those are one answer with its reason, which the author may keep. A status block that gathers pieces of work belongs in a table (`references/work-account-forms.md`).
+
+Presence is not relevance: a nudge does not judge whether a picture explains its text or a table reads well, and a long-callout pass means only 150 words or fewer: a short callout that lists twelve file paths in one sentence passes.
 
 ## Run
 
@@ -40,6 +42,6 @@ The picture-before-choice boundary predicates are those reviewed at `7ec3c2ef`. 
 
 The section and table nudges were added on 14 Nov 2026. On the 11 owner-rated development pages, the section nudge reproduces the fixed development measure section for section (53 warnings), flagging more than half the substantial sections on 8 of 9 complained pages and 0 of 2 accepted ones; the table limit flags 2 of 9 and 0 of 2. They use CLI 0.21.0's `section_own` scope and its `word_count` and `piece_count` checks.
 
-The long-callout nudge was added on 24 November 2026, from the owner's direction to help authors see when a status block needs a table. It fired on every revision of the page that prompted it once its status callout passed 150 words, and stayed quiet on the 63-word original and the 22-word replacement. Its limit is a starting value, not tuned on rated pages.
+The long-callout nudge was added on 24 November 2026, from the owner's direction to help authors see when a status block needs a table. On seven revisions of the page that prompted it (CLI 0.21.1, no model requests), its status callout passed at 63, 137 and 22 words (the original, a cut, and the owner-accepted replacement) and fired at 172, 180, 419 and 554. A 172-word callout recording one decision fired on all seven; it is a keep case. The revisions are private to the owner's project and are not reproducible from this repository; the counts above are the record.
 
 These nudges pin CLI 0.21.1; the shared skill-rule test engine remains on 0.9.0.

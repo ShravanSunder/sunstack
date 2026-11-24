@@ -241,3 +241,31 @@ test("a callout with more than 150 prose words nudges with its word count; table
     calloutCases.length,
   );
 });
+
+test("a callout that holds a Markdown island is left uncertain, because its island text is not read as the callout's prose", () => {
+  // Arrange: a short answer above an island table, and a callout whose island comes from a file.
+  const bodySections = [
+    `<h2 id="island-table-section">Island table</h2>\n<img src="flow.png" alt="Flow">\n<ex-callout id="island-table-callout" tone="note"><p>Five of nine services have moved.</p>${markdownIsland("callout-island-table", pipeTable(20))}</ex-callout>`,
+    `<h2 id="island-source-section">Island source</h2>\n<img src="flow.png" alt="Flow">\n<ex-callout id="island-source-callout" tone="note"><p>One answer.</p><ex-markdown id="callout-island-source" src="./status.md"></ex-markdown></ex-callout>`,
+  ];
+
+  // Act: lint the generated page through the pinned CLI.
+  const { output, report, lines } = lintGeneratedPage(bodySections);
+
+  // Assert: both callouts stop at the island step as uncertain, with no long-callout finding.
+  expect(output.status, output.stderr).toBe(5);
+  expect(report.usage.model_requests).toBe(0);
+  for (const calloutId of ["island-table-callout", "island-source-callout"]) {
+    const calloutLine = lineStartingWith(lines, `<ex-callout id="${calloutId}"`);
+    const result = report.results.find(
+      (candidate) => candidate.marker === "M006" && candidate.first_line === calloutLine,
+    );
+    expect(result?.outcome, calloutId).toBe("uncertain");
+    expect(
+      report.findings.some(
+        (finding) => finding.rule === "presentation-html.long-callout" && finding.line === calloutLine,
+      ),
+      calloutId,
+    ).toBe(false);
+  }
+});

@@ -129,8 +129,19 @@
     "name": "presentation-html.long-callout",
     "evidence": "html_callout",
     "decision": {
-      "start": "long",
+      "start": "island",
       "steps": {
+        "island": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": "islands",
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "uncertain",
+          "no": "long"
+        },
         "long": {
           "mechanical_check": {
             "tool": "word_count",
