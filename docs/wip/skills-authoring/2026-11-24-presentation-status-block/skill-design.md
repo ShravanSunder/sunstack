@@ -129,7 +129,7 @@ None in scope. Recorded before outlining R2: the nudge is a JSON rule entry run 
 
 | Run | State |
 | --- | --- |
-| R1 | proposed (design accepted) |
+| R1 | implemented: E1 to E7 written exactly; `SKILL.md` 2835 words, `work-account-forms.md` 805; self-check `uncertain` with 0 findings (one pre-existing load line kept); skill tests 343 passed |
 | R2 | proposed (design input accepted; the rule still needs `skill-rules-review`) |
 
 ## Review record
