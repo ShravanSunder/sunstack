@@ -12,7 +12,10 @@ rule:
 id: callout-markdown-island
 language: Html
 rule:
-  kind: element
   any:
-    - regex: '^<ex-markdown(?:\s|>)'
-    - regex: '^<script\b[^>]*\btype="text/markdown"'
+    - all:
+        - kind: element
+        - regex: '^<ex-markdown(?:\s|>)'
+    - all:
+        - kind: script_element
+        - regex: '^<script\b[^>]*\btype="text/markdown"'
