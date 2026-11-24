@@ -106,7 +106,7 @@ The design-item pass, in this order:
 1. **Sentence support, first.** Read every realization record and every sentence that settles a component, owner, store, seam, default or binding, including those the binding table shows. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
 2. **Items.** List every design item; return, for each, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone.
 3. **Quote lookup.** IF an owner-message export is supplied, look each quoted span up by its authority: for `owner-words`, confirm the span is the owner's own text in the cited row; for `owner-accepted`, find the agent's wording and the owner's acceptance in the cited selection record itself or a later acceptance event. Otherwise return `quote not checked` with each quoted item's source.
-4. **Rank and promote** the `lead-decided` decisions and open assumptions; bring the high-ranked ones that need the owner as decisions through the existing `decision-needed` conditions.
+4. **Rank and promote** the agents' decisions and open assumptions; bring the high-ranked ones that need the owner as decisions through the existing `decision-needed` conditions.
 
 Every result of this pass is a nudge and adds no readiness condition.
 

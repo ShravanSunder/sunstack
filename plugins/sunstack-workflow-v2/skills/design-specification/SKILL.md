@@ -204,7 +204,7 @@ Search legitimate sources before asking. Ask only when product meaning, public b
 
 Ask one load-bearing decision at a time: load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief, including foreclosed choices. Delegation, vague assent, silence, or a topic change is not decision authority.
 
-When you write a sentence that settles a choice or rests on something you have not checked, write its design item in the same edit: a decision with its authority first, or, when you cannot show it, an open owner question or an assumption; an assumption as open. Words you wrote that the owner selected or said yes to are the owner's acceptance of your wording: quote them as "the owner selected the option worded …" or "the owner accepted the wording …", and mark any reading you take beyond them as your own assumption. Three excuses skip this; each fails:
+When you write a sentence that settles a choice or rests on something you have not checked, write its design item in the same edit: a decision with its authority first, or, when you cannot show it, what `design-documents.md` says to write instead; an assumption as open. Words you wrote that the owner selected or said yes to are the owner's acceptance of your wording: quote them as "the owner selected the option worded …" or "the owner accepted the wording …", and mark any reading you take beyond them as your own assumption. Three excuses skip this; each fails:
 
 - "I'll list the assumptions at the end": a list written after the page invites the miss this section exists for, an invented sentence that already reads as settled.
 - "The owner picked it, so those are the owner's words": the owner chose the words; you wrote them.
@@ -260,7 +260,7 @@ In a file-backed set, write the need and rule records, each subject's in its own
 
 Every link the page names resolves.<!-- D004 -->
 
-The design-item list is generated from the records. Keep unanswered owner questions as open decision records; `presentation-html` chooses how they and every other piece are shown, and its `engineering-documents.md` owns how a section's answer and its view sit together. The why part's views introduce no internal components or enforcement, and no view becomes the only home of a rule. Run the design check and the matching static check through `presentation-html`.
+The design-item list is generated from the records. Keep unanswered owner questions as `design-documents.md` says: prose until credible options exist, then an open choice record; `presentation-html` chooses how they and every other piece are shown, and its `engineering-documents.md` owns how a section's answer and its view sit together. The why part's views introduce no internal components or enforcement, and no view becomes the only home of a rule. Run the design check and the matching static check through `presentation-html`.
 
 Completion: each need and rule has one record and no copy on the page; every normative claim has one home; a stranger can navigate from need through problem, rule, observable behavior, and proof; every accepted identity has a record or owner-authorized supersession; and the design check reports no `core` rule without a need.
 

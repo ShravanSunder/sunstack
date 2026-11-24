@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Design records: teach the skills the approved format</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="design-record-items"></ex-nav>
+  <ex-document id="design-record-items">
+    <h1>Design records: teach the skills the approved format</h1>
+    <p>This proposal brings one shared reference and five skills in line with the Demistify record format the owner approved on 24 November 2026. Decisions become choices (when alternatives were weighed) or rulings (when none were), and an agent's decision names the agent, its role and a weight. A need, rule, realization or planned check stays beside the prose that explains it; every decision and assumption sits in a section item, and prose links to it. The skills stop naming old authority states and point at one home, <code>design-documents.md</code>.</p>
+    <p>Revision 2, after design review 1 (16 findings corrected). Open: two owner decisions, what counts as <code>design</code> weight (O1) and who records an agent's decision (O2); no behaviour has been evaluated. The skill pull request merges only after the Demistify release that ships the format.</p>
+    <p><a href="#requirements">Why this change</a> · <a href="#specification">What it must do</a> · <a href="#skill-design">The exact edits</a> · <a href="#skill-verification">How each part is shown</a></p>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="review-design-records" title="Review the design-record change" description="The owner's approval, the standards, the exact edits and how each is shown.">
+    <ex-step to="requirements">The owner's words, every line that teaches the old format, and the new format read from the code.</ex-step>
+    <ex-step to="specification">Thirteen obligations and nine standards; seven tested on other settings and on a bad choice they never name.</ex-step>
+    <ex-step to="skill-design">Six runs, edits E1 to E31 with their new text, and six decisions the owner may strike.</ex-step>
+    <ex-step to="skill-verification">Which parts a review or an eval shows, and what stays unverified.</ex-step>
+  </ex-presentation>
+</body>
+</html>

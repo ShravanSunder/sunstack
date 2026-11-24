@@ -72,7 +72,7 @@ Completion: every `core` rule is decided by a named observation at its boundary,
 
 Write the passing condition in the check's cases as an observation: what is seen, where, against which part of the reference. After writing it, name one wrong build and check that the condition fails for it, and one materially different allowed build and check that it passes (a check counts only if the wrong behavior could make it fail (`sunstack-dev:principle-write-tests-that-can-fail`)). If a build that only acknowledges, by returning 201 or showing a toast, would also pass, the condition watches a proxy; move it to the outcome.
 
-List what the check leaves unverified. A named limit is honest, but it waives nothing: a limit that leaves a required observation undone, or weakens it, is the owner's decision. Write each limit you accept as a decision record in the same edit; its authority shows whether that owner decision exists.
+List what the check leaves unverified. A named limit is honest, but it waives nothing: a limit that leaves a required observation undone, or weakens it, is the owner's decision. Write each such limit as a decision record in the same edit, never as an agent's decision: the owner's ruling when the owner has accepted the limit, otherwise an open choice for the owner between accepting the limit and keeping the observation.
 
 Write every check as a plan: it describes what will be seen on the build that will exist, and no check says or implies that a run happened.
 
@@ -90,13 +90,13 @@ Completion: the design check reports no `core` rule without a check, every drawn
 
 Re-read every check as the Verifier who must challenge it before the build, against every item in Not ready while. Fix each failing check. What can't be fixed here leaves the design as one of the gap or decision results below. This self-check never replaces the integrated review.
 
-The design check reports missing need and check links, and prints design notes for a need no rule serves and a rule no realization names. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page is the engine gap step 5 names, so leave it and never add an `id`.
+The design check reports missing need and check links, and prints design notes for a need no rule serves and a rule no realization names. In a file-backed set, then run the design rules over the page with the command in `../design-review/SKILL.md` step 5, and fix or answer each warning before returning; a warning on a link to a record placed on that page, by id or in a section item, is the engine gap step 5 names, so leave it and never add an `id`.
 
 Then run the design-item pass:
 
 1. **Sentence support, first.** Read every sentence that settles a target, a reused piece of evidence or a limit. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
 2. **Items.** Return, for each design item, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone. IF an owner-message export is supplied, look each quoted span up by its authority (`owner-words`: the owner's own text in the cited row; `owner-accepted`: the agent's wording and the owner's acceptance in the cited selection record itself or a later acceptance event); otherwise return `quote not checked` with each quoted item's source.
-3. **Rank and promote** the `lead-decided` decisions and open assumptions, and bring the high-ranked ones that need the owner as decisions.
+3. **Rank and promote** the agents' decisions and open assumptions, and bring the high-ranked ones that need the owner as decisions.
 
 Every result of this pass is a nudge; it adds nothing to Not ready while.
 

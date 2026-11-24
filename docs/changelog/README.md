@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-24 Design skills teach the choice, ruling and assumption records](2026-11-24-design-record-items.md)
 - [2026-11-23 presentation-html loads less for a design page; call-stack component retired](2026-11-23-presentation-html-cuts.md)
 - [2026-11-23 Design records hold the text; pages explain](2026-11-23-lean-design-records.md)
 - [2026-11-20 Design review does not set host Plan mode](2026-11-20-design-review-no-plan-mode.md)
