@@ -1,10 +1,6 @@
 {
   "rulebook": [
     {
-      "markdown": "../../design-verification/SKILL.md",
-      "rules": "../../design-verification/rules/design-verification.rules.json"
-    },
-    {
       "markdown": "../../design-program/SKILL.md",
       "rules": "../../design-program/rules/design-program.rules.json"
     },
@@ -22,34 +18,6 @@
   "evidence": {
     "ast_grep": "evidence/sgconfig.yml",
     "kinds": {
-      "need": {
-        "rule": "need-element",
-        "fields": {
-          "identifier": {
-            "from": "capture",
-            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(U[0-9]+)[\"'\\s/>]"
-          },
-          "coverage": {
-            "from": "document",
-            "path": "verification.html",
-            "rule": "coverage-row-text"
-          }
-        }
-      },
-      "obligation": {
-        "rule": "obligation-element",
-        "fields": {
-          "identifier": {
-            "from": "capture",
-            "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(R[0-9]+)[\"'\\s/>]"
-          },
-          "coverage": {
-            "from": "document",
-            "path": "verification.html",
-            "rule": "coverage-row-text"
-          }
-        }
-      },
       "entity": {
         "rule": "entity-element",
         "fields": {
@@ -58,8 +26,7 @@
             "regex": "^<[^>]*\\sid\\s*=\\s*[\"']?(E[0-9]+)[\"'\\s/>]"
           },
           "bindings": {
-            "from": "document",
-            "path": "program-design.html",
+            "from": "same_file",
             "rule": "binding-row-text"
           }
         }

@@ -1,5 +1,9 @@
 # Changelog
 
+- [2026-11-23 presentation-html loads less for a design page; call-stack component retired](2026-11-23-presentation-html-cuts.md)
+- [2026-11-23 Design records hold the text; pages explain](2026-11-23-lean-design-records.md)
+- [2026-11-20 Design review does not set host Plan mode](2026-11-20-design-review-no-plan-mode.md)
+- [2026-11-16 The base names no workflow skill; delegation splits](2026-11-16-base-names-no-workflow.md)
 - [2026-11-20 Stop reviewer can load JEV credentials through SunVault](2026-11-20-stop-review-sunvault.md)
 - [2026-11-20 Stop reviewer uses the current Router port](2026-11-20-stop-review-router-port.md)
 - [2026-11-16 Design review runs the first design rules](2026-11-16-v2-design-rules.md)

@@ -19,19 +19,19 @@ Chat, terminal, and read-only runs produce no page. Their views appear in the re
 
 IF the page is chosen, use `presentation-html` to build it and run its routine static check, and return the page path, its binding, the check result and its verification limits.
 
-## The Page Is the Source
+## Where Text Lives
 
-A page holds its own text. For an engineering design set, each document's page is its source: its complete text lives in ordinary sections at stable IDs, as `design-documents.md` lays out, and no external Markdown file holds a design fact.
+A page holds its own text, except on an engineering design: there the typed record is the only source of each need's, rule's, realization's, planned check's, decision's and assumption's text, and the page is the source of explanation and diagrams, as `design-documents.md` lays out. The page shows a record by its id and keeps no copy of it, in the placement the guide at the page's binding documents. No external Markdown file holds a design fact.
 
-- Inline Markdown islands carry a section's text where Markdown carries it best, such as a dense table or a list of cases. An island sits inline, in the section it serves, in the inline form the guide at the page's binding documents; it never holds a whole document. Each fact's text lives once, in its owning section. No card, island or page table keeps a second copy.
-- The owning section carries the complete detail. Order the answer, useful view and governing facts before optional rationale or evidence; a fold may not hide a condition, failure obligation, risk or threshold the reader needs. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
-- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its owning section or record body first. The view then shows that source.
+- Inline Markdown islands carry a section's explanation where Markdown carries it best. An island sits inline, in the section it serves, in the inline form the guide at the page's binding documents; it never holds a whole document. No card, island or page table keeps a second copy of a record or a section.
+- Order the answer, useful view and governing facts before optional rationale or evidence; a fold may not hide a condition, failure obligation, risk or threshold the reader needs. A disclosure carried from a source keeps its initial state, as `presentation-html` step 4 teaches.
+- A governing fact found while drawing a view (a threshold, owner, reference, edge, or expected outcome) goes into its record or owning section first. The view then shows that source.
 
 IF a page includes an external Markdown file with an island's `src` (a file another tool generates, or a page that is not a design document), keep that file as the source of what the island shows and keep the page current under Freshness on Edit below; a design document page includes no external file.
 
-For an HTML design collection in shared-`src` navigation mode, the matching Demistify guide owns the navigation descriptor syntax. Its JSON names existing pages and stable HTML destinations; it is navigation metadata, not another design source. `presentation-html` owns selecting and checking the descriptor, including actual target identities and whether the route used a source preview or published support. The shared navigation contract is source-preview only until its matching binding and CLI are published; shared JSON fetching requires HTTP.
+An engineering design declares its Map and Walkthroughs with its records, not in a navigation file. For another HTML collection in shared-`src` navigation mode, the matching Demistify guide owns the navigation descriptor syntax. Its JSON names existing pages and stable HTML destinations; it is navigation metadata, not another design source. `presentation-html` owns selecting and checking the descriptor, including actual target identities and whether the route used a source preview or published support. The shared navigation contract is source-preview only until its matching binding and CLI are published; shared JSON fetching requires HTTP.
 
-For example, a job-submission Specification page keeps the requeue limit in R7's body, as a sentence and a small inline table of attempts. The Program Design page's lease design part links to R7 and never restates the number. Lease expiry, duplicate runs and the requeue limit stay visible in R7's body; only the incident timeline that set the limit sits in a collapsed section whose title names those three cases. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the obligation changes.
+For example, a job-submission design keeps the requeue limit in R7's record: one sentence, with the attempts in its cases. The page's lease section shows R7 by id and explains why the limit exists; it never restates the number. Only the incident timeline that set the limit sits in a collapsed section whose title names lease expiry, duplicate runs and the requeue limit. A card that restated the lease timeout in its own words would be a second copy, and wrong the day the rule changes.
 
 ### Where a Diagram Lives
 
@@ -44,13 +44,13 @@ A view never originates a governing fact. A native page view may project the own
 The page passes only when its proof records:
 
 - the Demistify binding;
-- for selected components that require prepared data, the actual result of their documented preparation after the last edit and before the check; otherwise `preparation: not applicable (no prepared component data)`;
+- for an engineering design, the actual result of the guide's read-only design check (`demistify project check` for a project, `demistify design check` for a standalone milestone) after the last edit; for a selected component that requires prepared data, the actual result of its documented preparation; otherwise `preparation: not applicable (no records or prepared component data)`. Generated SDK and reader data are built locally and never committed;
 - each island's source: inline, or its included file and whether it was live or embedded;
 - the actual result of `presentation-html`'s routine static check on the final page;
 - a separate check of what each view means, under Preserve Semantics below. Matching island text proves nothing about a view drawn beside it;
 - the result, or the exact blocking gap, of each inspection a caller separately requires, such as a phase's visual, pixel or destination inspection.
 
-Routine preparation of an HTML page adds no browser check and no second-copy comparison. A caller separately requires a page view's inspection when its own acceptance consumes that view's visual-check result, as a design phase's required views and their self-review do. A page prepared only to deliver or refresh content does not: `presentation-html` on its own, `docs-maintain` and `sunstack-workflow-v1:plan-update`. On that preparation-only route, a page view's `result: pass` means its static check passed and its semantic fields were inspected in source, with `visual check: unverified`; it claims no visual or readability proof. On a required route, and for an explicit user verification request or the diagnosis of a concrete defect, the actual inspection runs: `unverified` there is a gap, never a pass, and the view passes it or returns its exact blocking gap.
+Routine preparation of an HTML page adds no browser check and no second-copy comparison. A caller separately requires a page view's inspection when its own acceptance consumes that view's visual-check result, as a design phase's required views and their self-review do. A page prepared only to deliver or refresh content does not: `presentation-html` on its own, `docs-maintain` and a plan update. On that preparation-only route, a page view's `result: pass` means its static check passed and its semantic fields were inspected in source, with `visual check: unverified`; it claims no visual or readability proof. On a required route, and for an explicit user verification request or the diagnosis of a concrete defect, the actual inspection runs: `unverified` there is a gap, never a pass, and the view passes it or returns its exact blocking gap.
 
 Record no hashes and keep no provenance registry.
 
@@ -59,21 +59,21 @@ Record no hashes and keep no provenance registry.
 Whoever edits a page keeps it, and every page derived from it, current in the same change: the phase skill authoring the edit, or `docs-maintain` during later upkeep.
 
 1. Change the fact once, in its owning section. Dependent design text in another document changes through that document's owner, never by pasting the new text into it: a Verification Design check whose passing condition uses a changed threshold is redone by the Verification Design's owner, on the route the caller selects.
-2. After changing an HTML-source design, recheck its edited IDs, relative links, shared descriptor's page/target identities and dependent views. IF a selected component requires prepared data, use the matching guide's preparation on its actual collection and return the observed result; change the authored data and bodies, never generated carriers. Without such data no design-record preparation runs. Re-index the explicit page collection when its headings, paths or Walkthroughs change, then run the routine static check through `presentation-html`. Do not add page-local declarations that compete with shared-`src` mode.
+2. After changing a design, recheck its edited IDs, relative links, navigation targets and dependent views, and run the design check on the milestone; change the record or the section, never generated data. IF a selected component requires prepared data, use the matching guide's preparation on its actual collection and return the observed result. Re-index the explicit page collection when its headings, paths or Walkthroughs change, then run the routine static check through `presentation-html`. Do not add page-local declarations that compete with shared-`src` mode.
 3. IF a page includes an external Markdown file, a live `src` island needs HTTP serving and picks up later edits, and Demistify's `embed` command writes an embedded copy for double-click viewing. That copy is regenerated output, so its text is never edited by hand, and it goes stale without warning when a source it includes changes. IF the user requests a freshness comparison, or a stale-output defect is being diagnosed, compare first, before anything overwrites the committed copy: use `presentation-html` to prepare equivalent output at a temporary path (the reader and, for an indexed collection, its full index), compare it byte for byte with the committed copy, and record `identical` or `differs`; then replace the committed copy, run its routine static check and requalify it. Otherwise, use `presentation-html` to regenerate the affected reader, and the complete collection index when there is one, from the live source page and every source it includes, then run its routine static check once. A fresh regeneration carries each source's current text exactly.
 4. Recheck each derived view and dependent record that names an edited identity against the owning section's or body's facts. Equal text says nothing about them.
 
 Return freshness as one of:
 
 - `live`: the live-source arrangement resolves through its declared opening method, needs no regeneration or preparation, and every rechecked view and record agrees with its owner;
-- `regenerated`: every component-required preparation (none without prepared component data), the reader and the complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and record agrees with its owner. It claims no byte comparison and no browser observation;
+- `regenerated`: the design check and every component-required preparation passed, the reader and the complete collection index were rebuilt from every required source, the routine static check passed, and every rechecked view and record agrees with its owner. It claims no byte comparison and no browser observation;
 - `stale`: a required preparation or regeneration could not finish (a refused set, a missing source or tool, or partial output), the check failed, or a rechecked view or record disagrees. Name the exact gap.
 
 The page is current only when freshness is `live` or `regenerated`; `stale` is never current.
 
 A requested comparison returns `identical` or `differs`. `differs` makes freshness `stale` until the replaced copy passes its check and compares again. A comparison that could not run is an exact verification gap, never `identical`.
 
-For example, the requeue limit moves from three attempts to five. The sentence in R7's body on the Specification page changes once. The Verification Design's owner redoes the check whose passing condition counted three attempts. The lease design part, which links to R7, needs no edit. Preparation runs on the set's folder and passes, the static check passes, and the rechecked views agree with R7, so freshness is `regenerated`. The entities section and the billing records stay untouched.
+For example, the requeue limit moves from three attempts to five. R7's case changes once, in its record. The Verification Design's owner redoes the planned check whose cases counted three attempts. The lease section, which shows R7 by id, needs no edit. The design check passes on the milestone, the static check passes, and the rechecked views agree with R7, so freshness is `regenerated`. The entities section and the billing records stay untouched.
 
 ## Choose Each View's Medium
 
@@ -117,7 +117,7 @@ Each medium label names an output medium, not a skill: `presentation-tui` denote
 
 ```text
 document medium: markdown | html-page | none (chat, terminal, or read-only), with reason
-page proof: binding, preparation result for a design set (not applicable before its first need), islands inline | live | embedded, routine static check result, separately required inspection results or gaps, when a page
+page proof: binding, design check result for a design (not applicable before its first record), islands inline | live | embedded, routine static check result, separately required inspection results or gaps, when a page
 freshness on edit: live | regenerated | stale, with each rechecked view and dependent record, when an edit touched a page or its source
 explicit freshness comparison: identical | differs, or the exact gap, only when requested or diagnosing a stale-output defect
 view and fired predicate

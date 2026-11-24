@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Use the clarification skill to agree what session evidence should contain before changing the design.
+
+[last] I recommend retaining the agreed approach and the assistant’s working plan with their sources marked. The open choice is still whether to include that working plan. It cannot authorize more work.
+
+Earlier turns follow for context.
+USER TURN 1
+Add good and bad evidence examples and preserve how we agreed to do the work.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I compared the draft with the requested evidence and asked which plan context should guide the design. A generic Stop callback asked me to continue. The user has not answered the choice.

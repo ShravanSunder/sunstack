@@ -20,7 +20,7 @@ When you find work the slice doesn't name, such as a cleanup, a guard or a refac
 
 Leave out of your messages to the Lead each internal step, anything your Verifier and you can settle directly, requests to relay something to your Verifier, and claims without the anchor that shows them. Your Verifier's agreement that the work is done is a fact you may report, and it never stands for the Lead's acceptance.
 
-Routine status belongs on the existing board/task/checklist surface for Lead's 55-minute pass. Material blockers, HOLDs and mental-model breaks needing action go immediately. Continue direct pair repairs without turning each exchange into a Lead task.
+Routine status belongs on the existing board/task/checklist surface, where the Lead reads it. Material blockers, HOLDs and mental-model breaks needing action go immediately. Continue direct pair repairs without turning each exchange into a Lead task.
 
 ## Hand back
 

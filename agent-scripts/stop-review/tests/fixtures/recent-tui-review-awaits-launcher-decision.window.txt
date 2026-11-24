@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Explain whether we should own the TUI or use a stock executable, and how plugins use the generated types.
+
+[last] The TUI and plugin design findings have been corrected and independently checked. The diagrams and verification plan are updated. Implementation awaits the first TUI choice and approval to begin.
+
+Earlier turns follow for context.
+USER TURN 1
+Show the other MCPs, which crates own them, and where the future TUI plugins fit.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I recommended owning the launcher, Gateway, and plugin SDK while reusing a compatible stock TUI. The diagrams now show the TUI connecting to the Gateway and which crate owns the MCP surfaces. Rust defines the shared payloads and generates TypeScript declarations and runtime schemas. Plugins call through the SDK. I then completed the scoped design review.

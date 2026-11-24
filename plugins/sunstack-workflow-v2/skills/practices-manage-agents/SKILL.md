@@ -9,20 +9,11 @@ Base dependency: locate `sunstack-dev:presentation-html` using the host's listed
 
 One accountable parent owns each result. Lead supplies design docs and a plan of workstreams, contracts, dependencies, sequencing and completion conditions. Implementer chooses implementation steps and integrates the changes; Verifier owns critical verification. Both may use bounded native subagents and must inspect their results. Lead accepts only after required proof, before outside review.
 
-Choose the assignment and model, launch through the formal or native route, then inspect the evidence. Role defines responsibility; form defines conversation lifecycle; neither widens a grant.
+This practice owns v2's roles, its model catalog and its role commissions. `sunstack-dev:practices-delegation` owns the mechanics every delegation shares: bounding the job, briefing, launching, continuing, waiting and checking the result. Role defines responsibility; form defines conversation lifecycle; neither widens a grant.
 
 ## Bound the assignment
 
-### Work levels and horizon
-
-Horizon is the highest level closed before handback. Name its ending check; when no check can be named, cut the job smaller.
-
-| Level                     | Made of                      | Ending check               |
-| ------------------------- | ---------------------------- | -------------------------- |
-| Project                   | milestones                   | owner's definition of done |
-| Milestone, such as one PR | tasks                        | plan's proof, then review  |
-| Task                      | subtasks                     | assigned acceptance check  |
-| Subtask                   | edits or prescribed commands | expected result            |
+Bound each job with the work levels and ending checks in `sunstack-dev:practices-delegation`.
 
 ### Task guidance
 
@@ -54,6 +45,8 @@ Classify the actual assignment. A Cross-system parent may give a helper a Local 
 
 A **Sidekick** is a persistent separately managed session. A **Subagent** is a native child managed by its parent. Worker is only a search/provider synonym. Implementer and both Checker duties remain Sidekick-only; their native tasks do not appoint extra role seats or require standalone role packets, traces or Verifier pairs.
 
+If the host cannot run the selected formal Operator model natively, choose the Operator's Sidekick form through agent-router when the route fits the existing grant.
+
 Lead commissions the owning pair. Create both sessions before starting work, make their addresses available in the governing sources, then send each its role/files call. They exchange setup, reproductions, repairs and rechecks directly. Review stays outside that loop and uses a session with no target-authoring history. A review lead may commission stage Checkers under its review procedure.
 
 An Operator reports observations; its actual commissioner interprets them and owns any repair. Supplied collection criteria may label candidates with uncertainty, but deciding owner intent or product correctness is not collection. Delegate prescribed support when the inexpensive execution is worth the handoff. Proof associated with an agent's own changes remains that agent's responsibility.
@@ -66,7 +59,7 @@ Use these owner-selected model/effort rows for both owning Sidekicks and bounded
 
 Workhorse means prescribed or bounded execution; Daily driver means execution requiring judgment; Frontier is demanding judgment and grants no additional model eligibility. The owner's selections below supply the reason for using these rows.
 
-Resolve the exact id through the host's row in `~/.config/agent-context/model-map.md`, otherwise its advertised current-generation id; never pick an older generation or a `-fast` variant. Report an unavailable id or effort.
+Resolve the exact id with the exact-id rule in `sunstack-dev:practices-delegation`.
 
 ### 🔧 Operator
 
@@ -113,7 +106,9 @@ Review Project/Milestone artifacts and affected corrections, not every private i
 
 ## Launch and hand off
 
-MUST load `references/execution-forms.md` and return the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. Use its host-specific instructions; an unavailable model, tool or isolation is a capability gap, not authority to widen access.
+If the caller requested only role, form and model selection, return those choices or the capability gap here.
+
+MUST load `sunstack-dev:practices-delegation` and return, through its execution-forms reference, the supported route, lifecycle and history boundary, with the formal role/model or native task/model/grant. An unavailable model, tool or isolation is a capability gap, not authority to widen access.
 
 ### Formal role commissions
 
@@ -133,7 +128,11 @@ Launch full investigation through supported `workspace-write` host access, never
 
 Implementer and Verifier may decompose independent work without per-child Lead approval or an arbitrary child count. Use a child when its task can be checked independently and the handoff is worthwhile; keep tightly coupled edits with the parent. Give relevant sources, task guidance where applicable, allowed paths/commands, isolation or ordering and an ending check. Choose the model/effort from the relevant catalog and supported host controls; do not paste the catalog or manufacture a formal role packet for the child.
 
+If a parent-owned native task cannot run with the selected model or access, return the capability gap to the parent.
+
 The parent's grant bounds every child. Implementer owns product changes/tests and combined integration proof; Verifier owns permitted observations/apparatus, never product repairs, an altered oracle or independent proof of its own implementation. Keep held-out cases from implementation authors. Parallel checks need isolated fixtures/evidence when they mutate the same state. Host limits still apply; Luna remains Operator-only.
+
+Native tasks require no standalone role packet, trace or pair; the workstream Verifier still reports on the integrated target. Only the Operator runs as a formal role in native form. Its native message carries only the serialized role/files object, and an Operator running prescribed review proof starts with no parent history, so the reviewer's history stays out.
 
 ## Check the result
 
@@ -144,7 +143,3 @@ IF uncertainty remains about a task cut, model fit or responsibility boundary, l
 ## Completion
 
 A formal commission has an eligible role/form/model, current governing/preflight sources at the actual address, recipient-resolved context or exact gaps, and an evidence-checked handback. A native task has a bounded assignment, eligible model/effort, supported history/access route and a parent-inspected integrated result or owned gap. No standalone native role packet, trace or Verifier pair is required. Carry unresolved proof, prerequisites and HOLDs to their responsible owners.
-
-## Source integration limit
-
-Base preflight and verification still route delegation to v1. This source update does not establish runtime integration; installation and activation remain blocked pending the separately scoped base compatibility change.

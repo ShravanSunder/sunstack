@@ -2,13 +2,13 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.3.5 contains 43 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.6.0 contains 44 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
 The base owns engineering practices, principles, language standards, discussion, presentation, debugging, documentation, audits and operations. It does not own the archived role or phase files. This is a packaging split, not a new topology.
 
-Some retained helper-delegation branches still call `sunstack-workflow-v1:practices-manage-agents`; those branches require the archive to be installed too. The retained design-documents and phase-return-tokens references preserve the owner-approved migration scope. Removing those dependencies is separate future work.
+The base names no workflow skill. A base skill that hands work to a design, planning or review step returns a token from `shared-references/phase-return-tokens.md`, and the caller maps it through the host's skill index. A base skill that delegates loads `practices-delegation`, which takes roles and models from the host's agent-management practice when there is one. A workflow plugin may depend on the base; the base never depends on a workflow. The retained design-documents and phase-return-tokens references preserve the owner-approved migration scope. Removing those dependencies is separate future work.
 
 ## v1 compatibility anchor
 
@@ -16,7 +16,7 @@ Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentat
 
 ## Design source modes
 
-V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) use four distinct free-form HTML documents, visible capability groups, explained diagrams and shared JSON navigation through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. Call-stack data preparation remains conditional on selecting that component. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
+V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) hold each need, rule, realization, planned check, decision and assumption as a typed record and explain them on one milestone page, with visible capability groups, explained diagrams and shared navigation, through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
 
 ## Namespace map
 
@@ -34,6 +34,7 @@ V1 retains authoritative Markdown, including newly authored v1 records and optio
 - [`ops-observability-stack`](skills/ops-observability-stack/SKILL.md)
 - [`practices-cleanup`](skills/practices-cleanup/SKILL.md)
 - [`practices-collaboration`](skills/practices-collaboration/SKILL.md)
+- [`practices-delegation`](skills/practices-delegation/SKILL.md)
 - [`practices-how`](skills/practices-how/SKILL.md)
 - [`practices-preflight`](skills/practices-preflight/SKILL.md)
 - [`practices-research`](skills/practices-research/SKILL.md)

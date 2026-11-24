@@ -33,11 +33,11 @@ docs request
 - A free-form HTML design set's pages own its complete text: upkeep edits the owning section and preserves real links and views, without copying facts into navigation or another document. For a shared-navigation collection, also keep the one descriptor's actual page and target identities aligned with existing pages/IDs; it holds navigation metadata only. A v1 Markdown-source set keeps its Markdown authoritative and its human HTML view derived, including newly authored v1 sets. Follow the selected source mode; upkeep does not silently migrate either representation.
 - Keep `AGENTS.md` short. Move runbook detail to docs and link it.
 - Do not let old plans/specs/debug notes displace current source-of-truth docs by inertia.
-- Do not replace phase skills for active artifact work: `sunstack-workflow-v1:spec-design`, `sunstack-workflow-v1:program-design`, `sunstack-workflow-v1:spec-program-review`, `sunstack-workflow-v1:spec-handoff`, `sunstack-workflow-v1:plan-handoff`, `sunstack-workflow-v1:implementation-handoff`, `sunstack-workflow-v1:implementation-review` for implementation review, `sunstack-workflow-v1:implementation-pr-wrapup`, and `debug-investigation` own their lanes. Retired skill trees are provenance, not runtime routes; active planning, execution, and implementation review use their current named owners.
+- Design, design review, implementation review, PR wrap-up and `debug-investigation` own their active work. Use `../../shared-references/phase-return-tokens.md` to return a token when its condition and payload fit. For other requests, return the action and affected artifact to the caller so it can route them through the host's skill index.
 - Before purging or rewriting docs, propose the change and say what will be preserved.
 - When code and docs disagree, identify the driver and, IF it is not obvious, load `../../shared-references/owner-decision-brief.md` and return a brief of both versions.
-- The parent owns final doc edits; bounded inventory goes to a 🔧 Operator and stale-doc research to a 📚 Researcher Worker, through `sunstack-workflow-v1:practices-manage-agents`.
-- Use `sunstack-workflow-v1:practices-manage-agents` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
+- The parent owns final doc edits; bounded inventory and stale-doc collection go to helpers under prescribed criteria, through `practices-delegation`, and the parent judges what is stale.
+- Use `practices-delegation` only for model-agent call/session mechanics; keep doc roles, staleness, and source-of-truth classification here.
 - Use progressive disclosure: load only the workflow reference that matches the docs job.
 
 ## Workflow

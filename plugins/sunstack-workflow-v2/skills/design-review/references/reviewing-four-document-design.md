@@ -1,127 +1,86 @@
 # Reviewing the Four-Document Design
 
-This reference owns `four-document-design` mode judgment.
+This reference owns `four-document-design` mode judgment: the whole milestone, its typed records and its page.
 
 Four-document design review independently repeats load-bearing local checks; it does not trust author self-checks or prior local review as the only evidence.
 
-Before four-document-design-specific integration checks, MUST load `sunstack-dev/shared-references/design-documents.md` and return the Requirements, Specification, Program Design, and Verification Design identity status. Then MUST load `reviewing-specification.md` and return its complete specification-mode judgment for the current Requirements and Specification. Then MUST load `reviewing-program-design.md` and return its complete program-mode judgment for the current Program Design and governing Specification. Then MUST load `reviewing-verification-design.md` and return its complete judgment of the current Verification Design against the Specification and Program Design. Four-document design judgment consumes all four separately reconstructed identities and the three local results; it may not replace them with a combined `Requirements/spec`, author summary, or prior-review summary.
+Before integration checks, MUST load `sunstack-dev/shared-references/design-documents.md` and return the milestone's need, rule, realization, planned-check, decision and assumption records and the page sections that explain them. Then MUST load `reviewing-specification.md` and return its complete specification-mode judgment of the needs and rules. Then MUST load `reviewing-program-design.md` and return its complete program-mode judgment of the realizations and the page's how part. Then MUST load `reviewing-verification-design.md` and return its complete judgment of the planned checks against the rules and realizations. Four-document design judgment consumes the three local results; it may not replace them with an author summary or a prior-review summary.
 
-If Requirements and Specification are missing or collapsed into one identity, record a blocker-level finding and return `needs-revision`. Route the smallest correction to `design-specification` before any downstream repair. A missing Verification Design, or a Program Design proof column standing in for one, is a blocker-level finding routed to `design-verification`. Do not split, create, or edit artifacts during review. Downstream findings may still be reported when the available sources support them, but they do not remove the first required correction, and the review cannot be `ready`.
+A `core` slice with no need or rule records is a blocker-level finding routed to `design-specification`; a `core` rule with no planned check, which the Demistify check reports, is one routed to `design-verification`. Do not create or edit records during review. Downstream findings may still be reported when the available sources support them, but the review cannot be `ready`.
 
 Inspect:
 
-- every material specification obligation has one design realization;
-- every material design element traces to an obligation, constraint, failure policy, or proof need;
-- boundary altitude agrees across the four documents;
+- every material rule that needs new structure has a realization naming it;
+- every realization, binding and design element traces to a rule, constraint, failure policy, or proof need;
+- boundary altitude agrees across the four kinds of meaning;
 - design does not narrow, broaden, or contradict observable behavior;
-- each requirement walks cleanly from its obligations to their seams and planned observation (see Requirement to Observation below);
+- each `core` rule walks cleanly to its planned check (see Rule to Planned Check below);
 - non-goals and compatibility survive realization;
 - security/reliability and other applicable qualities map to owner, mechanism, failure/degradation, and proof;
-- retained requirements match the owner-confirmed or last inspectable owner-accepted baseline, including any named variants, defaults, constraints, and proof obligations;
-- the four documents remain separately identifiable, with normative Specification obligations tracing to the governing Requirements source;
+- retained needs and rules match the owner-confirmed or last inspectable owner-accepted baseline, including any named variants, defaults, constraints, and cases;
 - every applicable material runtime-behavior group has a visible current/proposed call-path delta or explicit no-predecessor case, with added, removed, and changed edges plus preservation-critical or contested unchanged edges;
-- the trace table walks cleanly row by row (see Trace Table Rows below);
-- each capability's line runs from its need to its proof (see Capability Through-Lines below);
-- each term means the same thing across all four documents (see Term Consistency below);
-- all coverage is semantically current for the current artifacts, with any post-review non-semantic changes recorded by the parent;
-- the entry page's design-item list equals the items on the four pages, in a defensible rank order;
+- each capability's line runs from its needs to their checks (see Capability Through-Lines below);
+- each term means the same thing in every record and section (see Term Consistency below);
+- all coverage is semantically current for the current records and page, with any post-review non-semantic changes recorded by the parent;
 - a planner can choose tasks/order/commands without inventing meaning, How, or the proof route.
 
-For a new HTML set, inspect its actual content as well as navigation metadata. Each Requirements group has a visible purpose in the page. Map group targets reach their visible context, need entries their actual need text, and other destinations their owning passage. Walkthroughs answer a real reader question. Check that Map organizes related explanations by reader concern independently of document boundaries. Follow each inspected concern to the relevant existing explanations, including design or proof when its answer continues there; flag a need-to-rule chain that leaves those connections in separate document buckets. Do not require every concern to have the same stages or reach every document. Check that material decision and approval status agrees between its owning passage and any summaries, diagrams, navigation labels and planned proof. Ask what need/outcome, invariant, failure/recovery path, undecided point and deciding observation the pages explain; unsupported or conflicting answers remain findings. Static target validity and content comprehension do not establish pixels or runtime behavior.
+Read the page as its reader would. Each capability group has a visible purpose. Each record the page places is explained by the prose beside it and never restated there. Each view answers a question the page asks. A Map node or Walkthrough stop reaches the record or section it names, and a Walkthrough answers a real ordered question. Check that material decision status agrees between its record and any explanation, diagram or navigation label. Ask what need, invariant, failure/recovery path, undecided point and deciding check the page explains; unsupported or conflicting answers remain findings. When this review requires the rendered view and it is unavailable, keep the existing partial-coverage result rather than substituting source syntax.
 
-When the existing review scope includes a substantive section's rendered view, reconstruct its declared question and answer from the actual target: the prose should establish context and interpret consequences, while an adjacent supported relational diagram exposes the relevant relationship. A card, paragraph, or exact-facts table may support that section but does not replace its diagram. Follow linked details to confirm every required semantic field, and check that important conditions, failure paths, risks and unknowns remain visible in the owning passage. Related identities may share this explanation and diagram; verify each required identity and trace row independently without imposing a section, diagram or screen quota. A small fact need not be made into a diagram section. If the actual rendered target is unavailable where this review requires it, preserve the existing partial-coverage result rather than substituting source syntax.
+## Rule to Planned Check
 
-## Requirement to Observation
+What to open: each `core` need and the rules that name it, with each rule's cases; the realization records that name each rule and the page's how part; the planned checks that name each rule; and the Demistify check's report.
 
-What to open: each Requirements row (`U`), the Specification obligations (`R`) it links with each one's proof obligation (`V`), the Program Design trace row for each `R`, and the Verification Design row for the `U` with any shared observation it names.
-
-How to judge: walk every requirement; do not sample. For each `U`, follow each `R` across the documents:
+How to judge: walk every `core` rule; do not sample. Start from what the Demistify check reports, then follow each rule:
 
 ```text
-U -> R and its V (expected behavior, threshold, target constraints, reference)
-  -> trace row's proof seam -> Verification Design observation and passing condition
+need -> rule and its cases (expected behavior, threshold, target constraints, reference)
+  -> its realization's proof seam -> the planned check that names it, with its cases
 ```
 
-The chain holds when each link uses the same ids and the current text of the link before it:
+The chain holds when:
 
-- the Verification Design row names every `R` the `U` links, and each `R` is decided by an observation or listed as unverified;
-- the observation uses the `V` as it stands now: its reference, threshold, and target constraints, not an earlier or paraphrased copy;
-- the observation sits at a seam the trace row's proof cell names for that `R`, or the Verification Design returned a `program-design-gap` for it.
+- the Demistify check reports no `core` rule without a need or without a planned check, and each rule is decided by a check or listed as unverified in one;
+- the check uses the rule's cases as they stand now: their reference, threshold and target constraints, not an earlier or paraphrased copy;
+- the check observes at a seam the realization exposes for that rule, or the Verification Design returned a `program-design-gap` for it.
 
-Route a broken link to its owner: a row that drifted from its `V` or seam to `design-verification`; a missing or unobservable `V` to `design-specification`; a seam that cannot carry any observation to `design-program`. An upstream correction continues to `design-verification` for the rows it changes.
+Route a broken link to its owner: a check that drifted from its rule's cases or seam to `design-verification`; a rule with no observable case to `design-specification`; a seam that cannot carry any observation to `design-program`. An upstream correction continues to `design-verification` for the checks it changes.
 
-Stop when every requirement has been walked from each obligation to its observation or a routed finding.
-
-## Trace Table Rows
-
-What to open: the Program Design's trace table (`U · R · E · owner · interface · shape and home · state · failure · proof`), the Requirements rows, the Specification's obligations and entity table, and the design sections each cell summarizes.
-
-How to judge: walk every row and every cell; do not sample. For each cell, say what it holds.
-
-- A blank cell is a finding. So is a cross-reference such as "see interfaces" or "see above": it is not a populated cell.
-- `gap: <why>` is an honest marking of missing design. Report it only when the gap leaves an accepted obligation unrealized that the design should have settled; never treat the marking itself as a defect.
-- `none: <why>` is valid in the `U` and `E` cells and for values that do not apply, such as a stateless guard's state.
-- The table has one row per Specification obligation (`R`); two obligations that share a contract still each have their own row. Each row's `R` cell names an obligation in the Specification, its `U` cell names every Requirements row that obligation traces to or reads `none: <why>`, and its `E` cell cites Specification entity ids; `U` and `E` may each list several ids.
-- Each cell agrees with the section it summarizes: the owner is the component the design names, the interface is the contract it defines, the shape and home match the binding table.
-- A cross-cutting row's owner and interface cells cite the mechanism owner.
-- Every accepted obligation has a row, and the returned coverage disposition matches the rows.
-
-Route a defective cell to `design-program` with the smallest correction: fill the cell or mark it `gap: <why>`. Route a row whose `U`, `R`, or `E` cell points at something the Requirements or Specification do not contain to `design-specification`.
-
-Stop when every row has been walked and every defective cell has a finding.
+Stop when every `core` rule has been walked to its check or a routed finding.
 
 ## Capability Through-Lines
 
-Skip this walk when the Requirements carry no capability list; the per-row walks above cover a one-concern set.
+Skip this walk when the needs carry no capability list; the per-rule walk above covers a one-concern set.
 
-What to open: the capability list and its home `U` rows in the Requirements, the capability map and capability groups in the Specification, the capability groups of the Program Design trace rows and of the Verification Design rows, and each capability's through-line in the root index when the set has one.
+What to open: the capability list and each capability's home needs, the page's capability groups, and the rules, realizations and checks those needs reach.
 
-How to judge: walk every capability; do not sample. Follow each key through the documents:
-
-```text
-capability key and purpose (Requirements)
-  -> its home U rows (Requirements)
-  -> each R those rows reach, under that R's own home key (Specification)
-  -> that R's one trace row, keyed to the same R home (Program Design)
-  -> the Verification Design row for each home U row, keyed to this capability
-  -> its through-line, when the set has an index
-```
-
-Keep two homes apart. Every `U` on this line is homed here, but an `R` it reaches has one home of its own, which may be another capability. An `R` homed elsewhere belongs to this line when it names this capability under "also serves": follow it to its single trace row, keyed to its own home, then return to this capability for its `U` rows' Verification Design rows. A row's key is the home key written in its own `R` cell or requirement field when it has one, and otherwise its group heading. Check that key against the `R`'s home in the Specification, or the `U`'s home in the Requirements; a row whose key names a different home is keyed to the wrong home. When a document declares its groups to be home groups, such as "each trace group lists the obligations whose home is that capability", each heading in it is a home claim too, and a row whose heading and cell disagree carries two home claims, which is a stop. A correctly keyed row may sit in another capability's group; the through-lines and the `U` rows' links must still reach it where it is. The line stops at the first document where a link is missing, a row is keyed to the wrong home or carries two disagreeing home claims, or a group carries a component name instead of the key. Report one finding for the capability, attributed to the document where its line stops and listing every row it strands, and route it as the walks above do:
-
-- a listed capability with no home `U` row stops at the Requirements, and one whose home rows reach no `R`, or reach an `R` that has no home, has two homes, or is homed elsewhere without naming this capability under "also serves", stops at the Specification: both route to `design-specification`;
-- a reached `R` with no trace row, or whose trace row is keyed to another home or carries two home claims that disagree, stops at Program Design: `design-program`;
-- a home `U` row with no Verification Design row, or whose row is keyed to another capability or carries two home claims that disagree, stops at Verification Design: `design-verification`;
-- a through-line or a `U` row's link that skips a step or misses the row where it sits goes to the phase that owns that document's step.
-
-In a broken copy of the job-submission set:
+How to judge: walk every capability; do not sample.
 
 ```text
-billing-export  U5 U6 -> R7 R8 R9 -> trace rows R7 R8 R9 -> no Verification Design row names U5 or U6
-                stops at Verification Design; route design-verification
-
-scheduling      U3 -> no R traces to U3
-                stops at the Specification; route design-specification
-                U4 -> R9, homed in billing-export, also serves scheduling
-                   -> R9's one trace row, under billing-export -> U4's row, under scheduling
-                this link holds
+capability key and purpose
+  -> its home needs
+  -> each rule that names one of them, under that rule's own home
+  -> the realizations and planned checks that name each rule
 ```
 
-The per-row walk already flags U5 and U6 as rowless; the capability finding names the larger gap, that finance's whole part of the system has no planned proof. Scheduling's line stops earlier, at U3. Program Design and Verification Design may still have sections headed scheduling, but nothing there realizes or proves U3 without an `R` behind it. File no separate findings against them for the same missing link; the Specification correction continues downstream under the rule above.
+A rule can serve needs in several capabilities and has one home; one homed elsewhere belongs to this line when it names this capability under "also serves". The line stops at the first link that is missing, a rule shown under a capability that is not its home, or a group named by a component instead of the key. Report one finding for the capability, naming every record it strands, and route it as the walk above does:
 
-U4's link is complete although R9 lives in billing-export: R9 names scheduling under "also serves", has one trace row keyed to its own home, and U4's row is keyed to scheduling. It would stop at the Specification if R9 did not name scheduling, at Program Design if R9's trace row named scheduling as its home, and at Verification Design if U4's row were keyed to billing-export. If R9's row sat in the scheduling group but kept billing-export in its own `R` cell, it would still be validly keyed, and the billing-export through-line and U4's link must reach it there. Only a Program Design that declares its trace groups to be home groups would make that row a stop, because its heading and cell would then be two home claims that disagree.
+- a listed capability with no home need, or whose home needs reach no rule: `design-specification`;
+- a reached rule that needs new structure and has no realization: `design-program`;
+- a reached rule with no planned check: `design-verification`.
 
-A line that ends at a recorded gap, such as home rows that are all unauthorized, is honest; report it only when it leaves an accepted requirement unrealized. This walk adds to the per-row walks and replaces none of them. When a per-row finding and a capability finding name the same missing link, they share one root cause, and reduction merges them into the capability finding.
+For example, in a job-submission milestone, `billing-export` reaches R7, R8 and R9, but the Demistify check reports R7 and R8 with no planned check: the line stops at Verification Design, and the finding names finance's whole part of the system as unproven. `scheduling` stops earlier, at U3, which no rule names; nothing downstream can realize or prove U3 without a rule, so file no separate findings against the later kinds for the same missing link.
 
-Stop when every capability has been walked to its proof or to a routed finding at the document where its line stops.
+A line that ends at a recorded gap, such as home needs that are all unauthorized, is honest; report it only when it leaves an accepted need unrealized. When a per-rule finding and a capability finding name the same missing link, reduction merges them into the capability finding.
+
+Stop when every capability has been walked to its checks or to a routed finding where its line stops.
 
 ## Term Consistency
 
-What to open: the Specification's entity table, each obligation, each Program Design heading, binding-table row, and contract name, and each Verification Design row.
+What to open: the page's entity definitions, each rule, each realization, the binding table and contract names, and each planned check.
 
-How to judge: a design noun that cites an `E` and keeps that entity's identity, relationships, and states is consistent. A code name in a shape or home cell is a binding, not a term. A design-only concept that names the `E` or `R` it serves is legitimate, but naming a served id is not enough by itself: its own identity, lifecycle or states, relationships, or invariants signal a possible missing Specification entity.
+How to judge: a design noun that cites an `E` and keeps that entity's identity, relationships, and states is consistent. A code name in a shape or home cell is a binding, not a term. A design-only concept that names the `E` or `R` it serves is legitimate, but naming a served id is not enough by itself: its own identity, lifecycle or states, relationships, or invariants signal a possible missing entity.
 
-- A synonym for an existing `E` used in design prose (a new word where the Specification already has a term) is a finding with `Route: design-program`, or `Route: design-verification` when it appears in a Verification Design row: rename to the Specification's term.
+- A synonym for an existing `E` in a realization or the how part (a new word where the Specification already has a term) is a finding with `Route: design-program`, or `Route: design-verification` when it appears in a planned check: rename to the entity's term.
 - A design noun with no `E` that names nothing it serves, or behaves like an entity, is a finding with `Route: design-specification`: the Specification decides whether it is a new entity or already covered. Review does not define it.
 
 Stop when every design noun resolves to an `E`, a design-only concept with its served `E` or `R`, or a routed finding.
@@ -135,11 +94,11 @@ Use the pretend planner:
 ```text
 may decide: tasks, exact files, order, DAG, exact commands, red/green steps,
             evidence capture, checkpoints, rollout
-must consume: requirements/contracts, entity bindings and boundary shapes,
+must consume: needs, rules and their cases, entity bindings and boundary shapes,
               components/owners/interfaces,
               state/flows/failure/concurrency/cutover/trust/proof seams,
-              each requirement's planned observation, target, journey,
+              each rule's planned check, target, journey,
               reused tests, passing condition, and what stays unverified
 ```
 
-Complete when: all four identities were separately reconstructed, cross-artifact traceability is bidirectional, every requirement was walked to its observation and every trace-table row was walked, every capability's line was walked to its proof or its stop, every design noun resolved under Term Consistency, accepted requirements remain covered, applicable call-path deltas are visible, contradictions are resolved or blocked, and planning has no semantic design decisions left.
+Complete when: the three local judgments were made, every `core` rule was walked to its check, every capability's line was walked to its checks or its stop, every design noun resolved under Term Consistency, accepted needs and rules remain covered, applicable call-path deltas are visible, contradictions are resolved or blocked, and planning has no semantic design decisions left.

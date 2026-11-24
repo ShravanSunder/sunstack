@@ -25,17 +25,17 @@ Inspect:
 - trust/security/reliability/operability and other applicable qualities;
 - migration/cutover authority;
 - proof seams and enforcement classes;
-- requirement-to-design traceability;
+- each realization names the rules it realizes, and each `core` rule that needs new structure is named by one;
 - plan leakage and hidden requirement invention.
 
 IF the design targets TypeScript, Python or Rust, load `sunstack-dev:domain-<lang>` for each such language and return each place the design's types, interfaces, module boundaries or concurrency depart from that standard as a candidate finding naming the rule it breaks.
 
-Check the binding table against the Specification's entity table one entity at a time. Prose that mentions an entity is not a binding, and an entity missing from the table is a finding even when the components around it are sound.
+Check the binding table against the page's entity definitions one entity at a time. Prose that mentions an entity is not a binding, and an entity missing from the table is a finding even when the components around it are sound.
 
-Good: a reader can simulate normal/failure behavior, find where each entity lives and what crosses each boundary, and trace every obligation to one owner and proof seam.
+Good: a reader can simulate normal/failure behavior, find where each entity lives and what crosses each boundary, and follow every rule to the realization and proof seam that carry it.
 
 Bad: architecture nouns without composition or visible call relationships, current paths as target tasks, hidden removed edges, signatures without contracts, a Specification entity with no binding row, a payload described without fields or schema home, a package named as the semantic owner, a result or reason as an open string, variant lists in prose, generic retries/locks, or planner-owned missing How.
 
 Route How corrections, including missing bindings, prose shapes, and open contracts, to `design-program`; missing/contradictory Why/What, including an entity the design needs that the Specification never defined, to `design-specification`; caller-state issues to the caller.
 
-Complete when: internal coherence and specification satisfaction each have an evidence-backed result; every entity binding and boundary shape was checked against the Specification's entity table; result and decision contracts are closed variants with bounded reasons; and every applicable material runtime-behavior group has a visible current/proposed call-path delta or explicit no-predecessor case with added/removed/changed edges and any preservation-critical or contested unchanged edge.
+Complete when: internal coherence and specification satisfaction each have an evidence-backed result; every entity binding and boundary shape was checked against the entity definitions; result and decision contracts are closed variants with bounded reasons; and every applicable material runtime-behavior group has a visible current/proposed call-path delta or explicit no-predecessor case with added/removed/changed edges and any preservation-critical or contested unchanged edge.

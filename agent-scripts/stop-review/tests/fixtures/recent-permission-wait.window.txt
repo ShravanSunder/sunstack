@@ -1,0 +1,13 @@
+Read first:
+
+LATEST USER TURN
+Check which unrun model methods could be evaluated with our internal query and candidate text.
+
+[last] I identified the methods and the inputs they would need. Running them would send the internal query and candidate text to the provider. Can I send those inputs? I have not made those calls.
+
+Earlier turns follow for context.
+USER TURN 1
+Identify the methods for the comparison and what each run would require.
+
+ASSISTANT TURN 1 (1 message)
+[earlier] I inspected the planned request and identified the external submission.

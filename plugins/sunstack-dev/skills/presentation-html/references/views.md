@@ -8,18 +8,16 @@ Return, for each view: its form, and the good and bad signals to guide compositi
 
 ## Design views
 
-Keep the source mode selected by `SKILL.md` step 1. For new HTML-source engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown. Reuse a view in its owning section; a navigation or derived view reaches facts through stable IDs, links or islands and preserves every caller-required field. Coverage and proof are ordinary authored explanations or tables. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying normative text.
+Keep the source mode selected by `SKILL.md` step 1. For engineering designs, apply `engineering-documents.md` before choosing a form below. A v1 Markdown-source human view uses the generic forms with its authoritative Markdown; the views a v1 design names are in `v1-markdown-source.md`. Reuse a view in its owning section; a navigation or derived view reaches facts through record ids, section IDs, links or islands and preserves every caller-required field. Coverage is built from the records' links, never written by hand. If a supported form cannot expose required meaning, return the exact composition gap rather than improvising a renderer or copying a record's text.
 
 The `capability map` below is the caller's explanatory view, distinct from the collection's shared navigation Map. Preserve its requested capability fields and home rows; navigation controls alone do not establish that a required explanatory view exists.
 
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
-| capability map | `ex-tree`. Each capability shows the fields its view request names, with its home rows as children: U rows in Requirements, R obligations in Specification. Each row links to its heading. Add an area level only above about seven capabilities. Put "also serves" in the row label as a link, never as a second child. Use tones only when the source states a status. | The owner confirms or corrects each capability and its rows in one scan. | One flat table of every row; status the source does not state. |
+| capability map | `ex-tree`. Each capability shows the fields its view request names, with its home need records as children and each need's rules under it, by record id. Add an area level only above about seven capabilities. Put "also serves" in the label as a link, never as a second child. Use tones only when the source states a status. | The owner confirms or corrects each capability and its needs in one scan. | One flat list of every record; status the source does not state. |
 | journey map — specification | One `ex-trace` per user class. Each step is in the user's words, with pain and evidence in its body. Add a supplied picture per step when one exists, or a Gallery Journey over supplied pictures. | Pain and evidence sit on the step they explain. | Classes chained into one path; invented pain. |
 | context diagram | Mermaid `flowchart` or an `ex-board`, with the system as one opaque node and labeled edges to each consumer and surface. | One opaque system node, every consumer on a labeled edge. | Internals drawn inside the system. |
 | entity map | Mermaid `erDiagram`. | Cardinality readable on every edge. | Packages, schemas or stores. |
-| requirement coverage table | Native table with link cells; group by capability when the source's capability map fires, otherwise keep it ungrouped. | Gaps written as words. | One ungrouped table when the capability map exists. |
-| entity -> home map | Native table. | Each home is marked new, modified or existing. | An entity without a home row. |
 | component tree | `ex-tree`, with each label carrying its responsibility. | Ownership readable without opening anything. | Folders presented as components. |
 | call graph/sequence | A **source-derived call path** (see the section below). Fan-in, async or event edges, or several participants exchanging messages: Mermaid `sequenceDiagram` or a flow, with the path for detail when it helps. | The reader follows the entry to its effect and sees where it can stop. | A branch drawn as a frame; a claimed runtime capture. |
 | proof call graph | The same call-path form, with the seam and the real/fake boundary as frame tags. | The fake boundary is visible. | A fake shown as the production path. |
@@ -27,9 +25,7 @@ The `capability map` below is the caller's explanatory view, distinct from the c
 | data/event flow | `ex-flow` or a Mermaid `flowchart`, with the shape named on each boundary edge. | Each boundary edge names what crosses it. | Colliding edge labels; an edge with no shape. |
 | failure/recovery flow | `ex-flow` or a Mermaid `flowchart`, with detection, retry and the recovery owner on the edges; or `ex-trace` when each step carries evidence. | The recovery owner is named at each failure. | A happy path with failure as a footnote. |
 | trust-boundary view | `ex-board` regions for boundaries, with `ex-arrow` arrows for entry points. | Every entry point crosses a drawn boundary. | A network map with no enforcement point. |
-| requirement/design/proof trace | Native table, one row per R; group by the source's capability keys when present. | Every R has a row, and gaps are written as words. | Rows merged across obligations. |
-| "proven by" cards | One `ex-card` per requirement. | What stays unverified is on every card. | A card that reads as already proven. |
-| coverage rows | Native table; group by the source's capability keys when present. Link a shared observation from each row it serves. | A shared observation appears once and is linked. | The same observation copied into several rows. |
+| "proven by" lines | Each planned check record shown by id under the rules it covers, in a Tree of need, rules and checks built from the records. | What stays unverified is visible with every check. | A check that reads as already proven; a hand-written copy of its statement. |
 
 ## Workflow records
 
@@ -46,15 +42,15 @@ Both read the plan and add no fact to it.
 
 | View | Form on the page | Good signal | Bad signal |
 | --- | --- | --- | --- |
-| delivery map | `ex-flow` from PRs to their slices, each slice with its reads and the Verification Design rows it earns, each proof's layer (focused, integration or journey, and whether a journey drives the normal entry), the dependency edges and the integration gates. When the plan spans repositories, a repository level sits above the PRs, with an edge at each point where one repository waits on another. An `ex-tree` when no edges cross. | The owner sees which PR earns which proof, at which layer, and where one PR or repository waits on another. | Slices with hidden dependencies; a journey whose entry the map doesn't state. |
-| plan change view | `ex-compare` over corresponding topics, or a list: each change from the superseding plan's "Changed from" section, with what it invalidated (slices, rows, PRs). | Each change shows what it invalidated. | A text diff of the two plans; a change without its invalidations. |
+| delivery map | `ex-flow` from PRs to their slices, each slice with its reads and the planned checks it earns, each proof's layer (focused, integration or journey, and whether a journey drives the normal entry), the dependency edges and the integration gates. When the plan spans repositories, a repository level sits above the PRs, with an edge at each point where one repository waits on another. An `ex-tree` when no edges cross. | The owner sees which PR earns which proof, at which layer, and where one PR or repository waits on another. | Slices with hidden dependencies; a journey whose entry the map doesn't state. |
+| plan change view | `ex-compare` over corresponding topics, or a list: each change from the superseding plan's "Changed from" section, with what it invalidated (slices, checks, PRs). | Each change shows what it invalidated. | A text diff of the two plans; a change without its invalidations. |
 
-## Page lenses on an engineering design set
+## Page lenses on an engineering design
 
 | Lens | Form | Good signal | Bad signal |
 | --- | --- | --- | --- |
-| walkthrough (a question that crosses the set's pages, a PR's slice reads, or a point where one repository waits on another) | a Walkthrough over existing pages and sections, in the path's order, as `engineering-documents.md` teaches | It answers a question that crosses documents, or that needs a new order through one page; each stop is an existing page or section; narration states no rule. | One page's headings in their own order, which is its outline; a stop the set does not have. |
-| shared idea (an idea that two or more capabilities' obligations name, or the owner names) | a line on the home page linking the idea's owning section and its picture (or a gap returned to the caller), as `engineering-documents.md` teaches | A reader reaches what the idea is, not only where it appears. | A column or tag of ticks; the idea's meaning restated on the home page. |
+| walkthrough (one ordered question across several places, a PR's slice reads, or a point where one repository waits on another) | a Walkthrough over existing records and sections, in the path's order, as `SKILL.md` step 2 teaches | It answers one ordered question the outline does not; each stop is an existing record or section; narration states no rule. | One page's headings in their own order, which is its outline; a stop the set does not have. |
+| shared idea (an idea that two or more capabilities' rules name, or the owner names) | a line in the page's opening linking the idea's owning section and its picture (or a gap returned to the caller) | A reader reaches what the idea is, not only where it appears. | A column or tag of ticks; the idea's meaning restated on the home page. |
 
 ## The source-derived call path
 
