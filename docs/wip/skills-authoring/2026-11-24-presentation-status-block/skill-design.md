@@ -18,7 +18,7 @@ The right answer is already in the skill: `references/work-account-forms.md` sho
 | Run | Target | Writes it | Surfaces |
 | --- | --- | --- | --- |
 | R1: the teaching | `presentation-html` `SKILL.md` and `references/work-account-forms.md` | `skill-creation`, from this accepted set | Main path (E1, E2, E3, E4); depth (E5, E6, E7). Trigger unchanged. |
-| R2: the callout nudge | `presentation-html` `rules/` and `references/demistify.md` | `skill-rules-authoring`, then `skill-rules-review`, then `skill-rules-config` | Proof: one warn-only rule and its cases; `rules/README.md` (its new row, and its opening count "Three" becomes "Four"); `references/demistify.md` step 4's keep judgments gain "a long callout may be one answer with its reason". It cites E4's sentence, so it lands after R1. |
+| R2: the callout nudge | `presentation-html` `rules/` and `references/demistify.md` | `skill-rules-authoring`, then `skill-rules-review`, then `skill-rules-config` for the rule; `skill-creation` for the `references/demistify.md` clause | Proof: one warn-only rule and its cases; `rules/README.md` (its new row, and its opening count "Three" becomes "Four"); `references/demistify.md` step 4's keep judgments gain "a long callout may be one answer with its reason". It cites E4's sentence, so it lands after R1. |
 
 Both runs ship in one pull request.
 
@@ -129,14 +129,14 @@ None in scope. Recorded before outlining R2: the nudge is a JSON rule entry run 
 
 | Run | State |
 | --- | --- |
-| R1 | proposed |
-| R2 | proposed |
+| R1 | proposed (design accepted) |
+| R2 | proposed (design input accepted; the rule still needs `skill-rules-review`) |
 
 ## Review record
 
 | Revision | Review | Result |
 | --- | --- | --- |
 | 1 (commit 10aa81aa) | `skill-review` design stage; an independent review lead and four reviewer agents (two teaching, two structure; Claude Opus, high effort); checks mental-model-fit, depth-coverage, transfer, trigger-routing, rule-agreement, and placement-and-calls added by the lead. | `targeted-revision`, `revise-first`: 3 important findings (A1 decisions on design pages, A2 the existing compact-status owner, A3 the unexamined routing), 11 minor (A4 to A14). All inside the accepted boundary. |
-| 2 | Corrections for A1 to A14, returned to the same review lead to verify the corrected anchors. | Pending. |
+| 2 (commit 499970e4) | Corrections for A1 to A14, verified by the same review lead at each corrected anchor; no new round. | `great`, `accepted-to-implement`. All fourteen closed; convergence 14 to 0. Two process notes taken as exact remediation: R2's row names the writer of the `demistify.md` clause, and the R2 keep-rate sentence no longer says "two thirds". |
 
 Recorded review gaps: no reviewer of a different lineage from the author, and reviewers ran as native subagents rather than through the host's Sidekick route, both because the Lead's commission required Claude Opus reviewers.

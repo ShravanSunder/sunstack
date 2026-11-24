@@ -25,7 +25,7 @@ Revision 2, 24 November 2026 (corrections from the design review of revision 1).
 
 - Judgment it helps, and who makes it: the page author decides whether a callout is one answer or several items gathered together.
 - What a useful nudge says, all in its message: the callout's word count; that a callout holds one answer; to cut it to the answer and give the items a table or their own view when it gathers several, with `references/work-account-forms.md` named for a status block; and that one answer with its reason and cost may stay. It never says the callout is wrong.
-- Cases where the right answer is to keep the text: one decision with its reason and cost in a single paragraph; a plain-words explanation of one point. Both may cross the limit; the author keeps them. At the starting limit about two thirds of firings in the scan are of this kind, so `skill-rules-authoring` weighs the limit against that rate.
+- Cases where the right answer is to keep the text: one decision with its reason and cost in a single paragraph; a plain-words explanation of one point. Both may cross the limit; the author keeps them. At the starting limit most firings in the scan are callouts the author may keep (about 79 of 92 have titles that are not status-style), so `skill-rules-authoring` weighs the limit against that rate.
 - Pending: the rule's final limit, marker and case files are made by `skill-rules-authoring`, reviewed by `skill-rules-review` and written by `skill-rules-config`. Its cases come from real pages only: the incident hub's revisions at 22, 63, 137, 167, 174, 417 and 549 words; the scan's status walls; and the keep cases above.
 
 ## Proof plan, per run
