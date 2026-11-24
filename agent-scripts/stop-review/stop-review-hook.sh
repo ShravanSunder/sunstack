@@ -261,6 +261,36 @@ run_luna_classifier() {
     >/dev/null 2>>"${PROJECT_LOG}"
 }
 
+run_jev_classifier() {
+  local sunvault_env="${HOOK_DIR}/jev-sunvault.env"
+  local sunvault_bin sunvault_credential
+  local classifier_command=()
+
+  if [[ -n "${CODEX_STOP_REVIEW_PYTHON:-}" ]]; then
+    classifier_command=("${CODEX_STOP_REVIEW_PYTHON}")
+  elif command -v uv >/dev/null 2>&1; then
+    classifier_command=(uv run --no-project --script)
+  else
+    printf '%s\n' "jev: uv not on PATH" >&2
+    return 1
+  fi
+
+  if [[ -z "${OPENROUTER_API_KEY:-}" && -f "${sunvault_env}" ]]; then
+    sunvault_credential="$(sed -n 's/^STOP_REVIEW_SUNVAULT_CREDENTIAL=//p' "${sunvault_env}")"
+    sunvault_bin="$(command -v sunvault || true)"
+    sunvault_bin="${sunvault_bin:-${HOME}/.cargo/bin/sunvault}"
+    if ! [[ -x "${sunvault_bin}" && "${sunvault_credential}" =~ ^[A-Za-z0-9_-]{1,64}$ ]]; then
+      printf '%s\n' "jev: SunVault binary or credential selector unavailable" >&2
+      return 1
+    fi
+    "${sunvault_bin}" --credential "${sunvault_credential}" op run --env-file="${sunvault_env}" -- \
+      "${classifier_command[@]}" "${JEV_CLASSIFIER}" "$@"
+    return $?
+  fi
+
+  "${classifier_command[@]}" "${JEV_CLASSIFIER}" "$@"
+}
+
 set +e
 CLASSIFIER_BACKEND="luna"
 if [[ "${STOP_REVIEW_BACKEND}" == "jev" ]]; then
@@ -274,16 +304,8 @@ if [[ "${STOP_REVIEW_BACKEND}" == "jev" ]]; then
   if [[ "${stop_hook_active}" == "true" ]]; then
     JEV_ARGS+=(--nested)
   fi
-  if [[ -n "${CODEX_STOP_REVIEW_PYTHON:-}" ]]; then
-    "${CODEX_STOP_REVIEW_PYTHON}" "${JEV_CLASSIFIER}" "${JEV_ARGS[@]}" >/dev/null 2>>"${PROJECT_LOG}"
-    JEV_EXIT=$?
-  elif command -v uv >/dev/null 2>&1; then
-    uv run --no-project --script "${JEV_CLASSIFIER}" "${JEV_ARGS[@]}" >/dev/null 2>>"${PROJECT_LOG}"
-    JEV_EXIT=$?
-  else
-    printf '%s\n' "jev: uv not on PATH" >>"${PROJECT_LOG}"
-    JEV_EXIT=1
-  fi
+  run_jev_classifier "${JEV_ARGS[@]}" >/dev/null 2>>"${PROJECT_LOG}"
+  JEV_EXIT=$?
   JEV_OUTPUT=""
   if [[ -f "${OUT_FILE}" ]]; then
     JEV_OUTPUT="$(cat "${OUT_FILE}" || true)"

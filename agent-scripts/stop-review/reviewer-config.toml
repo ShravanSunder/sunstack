@@ -1,5 +1,5 @@
 # Isolated Stop-reviewer Codex home. Not a named --profile.
-# Same production router as `codex --profile codex-router` (127.0.0.1:8787).
+# Same production router as `codex --profile codex-router` (127.0.0.1:19741).
 # Copied to $CODEX_STOP_REVIEW_HOME/config.toml on first bootstrap.
 
 model = "gpt-6-luna"
@@ -12,7 +12,7 @@ sandbox_mode = "read-only"
 
 [model_providers.codex-router]
 name = "codex-router"
-base_url = "http://127.0.0.1:8787/v1"
+base_url = "http://127.0.0.1:19741/v1"
 wire_api = "responses"
 requires_openai_auth = false
 supports_websockets = true

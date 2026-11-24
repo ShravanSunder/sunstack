@@ -1,5 +1,7 @@
 # Changelog
 
+- [2026-11-20 Stop reviewer can load JEV credentials through SunVault](2026-11-20-stop-review-sunvault.md)
+- [2026-11-20 Stop reviewer uses the current Router port](2026-11-20-stop-review-router-port.md)
 - [2026-11-16 Design review runs the first design rules](2026-11-16-v2-design-rules.md)
 - [2026-11-16 Workflow v2 design-skill corrections](2026-11-16-v2-design-skill-corrections.md)
 - [2026-11-16 Independent checking retains four roles](2026-11-16-independent-checking-four-roles.md)
