@@ -342,7 +342,11 @@ test.skipIf(calloutCorpus.repository === undefined && calloutCorpus.page === und
         (finding) => finding.rule === "presentation-html.long-callout" && finding.file.endsWith(file),
       );
       const statusFinding = findings.find((finding) => finding.line === 15);
+      const statusResult = report.results.find(
+        (result) => result.marker === "M006" && result.file.endsWith(file) && result.first_line === 15,
+      );
       if (expectedWordCount === undefined) {
+        expect(statusResult?.outcome, revision).toBe("pass");
         expect(statusFinding, revision).toBeUndefined();
       } else {
         expect(statusFinding?.message, revision).toMatch(
