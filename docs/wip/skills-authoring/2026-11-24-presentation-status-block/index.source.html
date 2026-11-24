@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Status blocks: an answer and a table, not a longer callout</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="status-block-design"></ex-nav>
+  <ex-document id="status-block-design">
+    <h1>Status blocks: an answer and a table, not a longer callout</h1>
+    <p>This proposal changes one skill, <code>presentation-html</code>. When a page carries a status block (several pieces of work, decisions or findings, each at its own stage), the author keeps the callout to the answer and shows the pieces as a table with a row each, and chooses the view again when an update adds items. The teaching that shows that table already exists in the skill's work-account reference; the change makes it reachable from any page, adds two sentences at the decisions that go wrong, and adds one warn-only nudge for a callout that grows past one answer.</p>
+    <p>Design only; no skill file has changed. Open: the nudge's final word limit, which the rules work sets from real cases, and every behavior claim, since no fresh-author run has happened. <code>SKILL.md</code> grows from 2,735 to 2,822 words.</p>
+    <p><a href="#requirements">Why this change</a> · <a href="#specification">What it must do</a> · <a href="#skill-design">The exact edits</a> · <a href="#skill-verification">How each part is shown</a></p>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="review-status-block" title="Review the status-block change" description="The owner's need, the four standards, the exact edits and how each is shown.">
+    <ex-step to="requirements">The need in the owner's words, and the page history and scan that show the pattern recurs.</ex-step>
+    <ex-step to="specification">Five obligations and four standards, each tested on a different setting and a bad choice it never names.</ex-step>
+    <ex-step to="skill-design">Where each commission hypothesis stands against the text, and every proposed sentence with its word count.</ex-step>
+    <ex-step to="skill-verification">Which parts an eval, a nudge or a review shows, and what stays unverified.</ex-step>
+  </ex-presentation>
+</body>
+</html>
