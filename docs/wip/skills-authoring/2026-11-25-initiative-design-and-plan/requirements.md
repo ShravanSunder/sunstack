@@ -1,10 +1,12 @@
 # Requirements
 
-Revision 2, 25 November 2026: adds the Mac Lead's input (a to f) and the
-independent skills review's fifteen findings as signals, and the requirements
-they bring. Written by a helper to the Demistify 🦁 Lead (commission
+Revision 3, 25 November 2026: corrections from design reviews A and B of
+revision 1 (the release state of initiative support, the base PR 239 now at
+2168d5b9, the open questions). Revision 2 added the Mac Lead's input (a to f)
+and the independent skills review's fifteen findings as signals. Written by a
+helper to the Demistify 🦁 Lead (commission
 `commission-design-skills-initiative-plan.md` in sunstack-tools
-`docs/wip/2026-11-22-demistify-lean-design-records/`). Not yet design-reviewed.
+`docs/wip/2026-11-22-demistify-lean-design-records/`).
 Multi-run set: five skill updates and one new skill, all in
 `sunstack-workflow-v2`.
 
@@ -99,10 +101,10 @@ Lead, 25 November):
   this).
 - Entities have no typed record: flag only; the owner wants the tool small.
 
-Still open, carried as owner questions in `skill-design.md`: what "near"
-means for depth (Q1), where initiatives live (Q6), the plan contract and its
-dependency line (Q7), the two checkers (Q5), and what row work gets when no
-deliverable covers it (Q8).
+Still open, carried as owner questions in `skill-design.md`: how much of a
+step the plan fixes and how much the Implementer chooses (Q9), what row work
+gets when no deliverable covers it (Q8), what "near" means for depth (Q1),
+and where initiatives live (Q6).
 
 ## Success definition
 
@@ -137,11 +139,13 @@ Success, in the owner's terms: a Lead using the v2 skills on an initiative
 | Signal | Date | Source |
 | --- | --- | --- |
 | Owner direction and settled model (quoted above) | 2026-11-25 | the commission, relayed from the owner's session with the Mac Lead |
-| Demistify initiatives, numbered projects, deliverables, `brief`, `initiative status`, `ex-initiative-overview` shipped | 2026-11-25 | sunstack-tools `origin/main` 73d43548 (PR 226): `packages/demistify/skill/references/typed-design.md`, `typed-design-initiative.md`, `bin/demistify.ts:72-176` |
+| Demistify initiatives, numbered projects, deliverables, `brief`, `initiative status`, `ex-initiative-overview`: merged to sunstack-tools `origin/main` at 73d43548 (PR 226), not yet released; the hosted `v1` binding has no `typed-design-initiative.md` (HTTP 404, design review B). The release carrying them is Demistify 1.34.0 (sunstack-tools PR 228, then the version PR), pending on 25 November. | 2026-11-25 | `packages/demistify/skill/references/typed-design.md`, `typed-design-initiative.md`, `bin/demistify.ts:72-176`; the Demistify Lead |
+| The Demistify Lead will change the library so "ready now" orders by project number and leaves out `core` deliverables with no steps, and a `core` deliverable with no steps says so in its state | 2026-11-25 | the Demistify Lead, answering design review findings A3 and B2; not yet released |
+| PR 239 now fixes `canonical-implementation-plan.md:67` (the plan names the deliverables it waits on; their `dependsOn` records are the edges' only home) and reduces `design-documents.md:165` to one levels sentence; the v2 README floor is Demistify 1.34.0 | 2026-11-25 | ai-tools `origin/skills/initiative-vocabulary` at 2168d5b9 and d093a481 |
 | The design check reports a missing need or check only for rules a `core` deliverable scopes | read 2026-11-25 | `packages/demistify/src/node/design-authoring/delivery-model.ts` coverage gaps per deliverable; test `delivery-model.test.ts:257` "reports a scoped rule without a need" |
 | A completed task that the deliverable no longer lists fails the check | read 2026-11-25 | `delivery-model.ts:306-308` ("unknown implementation task … in completedTasks") |
 | No v2 skill writes deliverable scope, steps, progress, acceptance on the deliverable, or a plan | read 2026-11-25 | the five v2 skills at 53f2de4a; `role-lead/references/accepting-work.md:15` keeps acceptance in "the existing Lead acceptance record" |
-| `design-specification` defaults to `docs/specs/`; the base reference says `docs/initiatives/<initiative>/projects/<project>/` | read 2026-11-25 | `design-specification/SKILL.md:255`; `design-documents.md:165` |
+| `design-specification` defaults to `docs/specs/`; at 53f2de4a the base reference said `docs/initiatives/<initiative>/projects/<project>/`, and at 2168d5b9 it names no path; the guide's level table still shows `docs/initiatives/`; the CLI accepts any root, finding the nearest `initiative.ts` or `design.ts` upward (`design-location.ts:6-24`), and only `.gitignore` placement keys on a parent folder named `projects` (`generated-ignore.ts:31-33`) | read 2026-11-25 | `design-specification/SKILL.md:255`; `design-documents.md:165`; `typed-design-initiative.md:7-9`; design review B, finding B14 |
 | The owner's design-mode write list names `docs/specs/`, `docs/wip/`, `tmp/` only | read 2026-11-25 | `~/.claude/CLAUDE.md`, Design Mode |
 | v1 plan contract: immutable plan; a meaning change makes a new plan path | read 2026-11-25 | `sunstack-dev/shared-references/canonical-implementation-plan.md:3,39` |
 | M-a. `presentation-show-worklog` and `presentation-html` route an owner decision to a hand-written `ex-choice`; in a tree with typed records it must be a choice record in an `ex-section-item`. Three of his pages were wrong for that reason. | 2026-11-25 | Mac Lead, 25 Nov. Anchors read: `presentation-html/references/options-and-decisions.md:15` ("Add a native choice when the task asks the reader to answer a question", not scoped to untyped pages); `presentation-show-worklog/SKILL.md:21,42`. Both sunstack-dev: dependency. |
@@ -180,7 +184,8 @@ from his session records first, which the 🦁 Lead may commission.
   dependency on them is named in `skill-design.md`.
 - No change to `practices-manage-agents`, `role-implementer`, `role-checker`
   or `role-operator`; the brief and the plan reach the Implementer as files
-  under the existing role/files commission.
+  under the existing role/files commission. Owner question Q9 option (c)
+  would widen this non-goal for `role-implementer`.
 - No re-cut or migration teaching (`initiative migrate`): deferred.
 - No description change to the five existing skills.
 - No tracker (Linear) behavior; "milestone" and "project" in `ops-*` keep
@@ -191,6 +196,8 @@ from his session records first, which the 🦁 Lead may commission.
 - The owner's quotes, and the owner preferences the Mac Lead relays (M-e,
   M-f), are second-hand; a reviewer with the owner-message export can check
   them.
-- Five owner questions (Q1, Q5, Q6, Q7, Q8 in `skill-design.md`); edits that
-  depend on one are marked with its number. Q2, Q3 and Q4 are closed in
-  revision 2, with the reason recorded there.
+- Four owner questions (Q1, Q6, Q8, Q9 in `skill-design.md`); edits that
+  depend on one are marked with its number. Q2, Q3 and Q4 closed in revision
+  2, Q5 and Q7 in revision 3, each with its reason recorded there.
+- Demistify 1.34.0 hosted, and the later library change the Demistify Lead
+  named (A3, B2); the implementation runs wait for both.

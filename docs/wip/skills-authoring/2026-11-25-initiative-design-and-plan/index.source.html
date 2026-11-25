@@ -11,7 +11,7 @@
   <ex-nav for="initiative-design-and-plan"></ex-nav>
   <ex-document id="initiative-design-and-plan">
     <h1>Initiatives, deliverables and one plan each: the v2 skill change</h1>
-    <p>This proposal teaches five <code>sunstack-workflow-v2</code> skills (<code>design-specification</code>, <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>, <code>role-lead</code>) the model the owner settled on 25 November: an initiative orders numbered projects, each project is one four-part design, and each project is cut into deliverables that select its records and add none. Each design phase loads the Demistify guide before it writes a record and adds its own records to the deliverables' scope, so the design check's coverage gate stops passing on an empty report (the independent review's blocker). It also creates a v2 <code>plan-implementation</code> skill that writes one plan per deliverable: the deliverable record holds the step names and what it waits on, and the plan explains each step by id without a list of its own. The Lead orders work from <code>initiative status</code>, names the deliverable before any commission, raises owner decisions as choice records, and records each build's results and acceptance on the deliverable.</p>
+    <p>This proposal teaches five <code>sunstack-workflow-v2</code> skills (<code>design-specification</code>, <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>, <code>role-lead</code>) the model the owner settled on 25 November: an initiative orders numbered projects, each project is one four-part design, and each project is cut into deliverables that select its records and add none. Each design phase loads the Demistify guide before it writes a record and adds its own records to the deliverables' scope, so the design check's coverage gate stops passing on an empty report (the independent review's blocker). It also creates a v2 <code>plan-implementation</code> skill that writes one plan per deliverable: the deliverable record holds the step names and what it waits on, and the plan explains each step by id without a list of its own. The Lead creates the initiative from the owner's numbers and words, takes ready work from <code>initiative status</code> in number order, names the deliverable before any commission, raises owner decisions as choice records, and records each build's results and acceptance keyed to the deliverable. The skills need Demistify 1.34.0 hosted before they ship.</p>
     <ex-mermaid id="model" label="Which v2 skill writes what, from initiative to recorded proof"><script type="text/plain">
 flowchart TD
   initiative["Initiative<br/>project numbers, shared decisions<br/>role-lead, with the owner"]
@@ -30,7 +30,7 @@ flowchart TD
   build --> proof
   proof --> deliverable
 </script></ex-mermaid>
-    <p>Revision 2 takes in the Mac Lead's input and the independent skills review. Still open: five owner questions, each with options and a recommendation in the skill design: what work gets when no deliverable covers it (Q8), what "near" means for depth by number (Q1), where initiatives live (Q6), which plan contract applies and whether its dependency line is fixed in sunstack-dev (Q7), and the two checkers (Q5). Nothing has been design-reviewed or evaluated, and no skill file has changed.</p>
+    <p>Revision 3 corrects every finding of design reviews A and B on revision 1; the mapping of each finding sits at the end of the skill design. Still open: four owner questions, each with options and a recommendation: how much of a step the plan fixes and how much the Implementer chooses (Q9), what work gets when no deliverable covers it (Q8), what "near" means for depth by number (Q1), and where initiatives live (Q6). Revision 3 has not been re-reviewed, nothing has been evaluated, and no skill file has changed.</p>
     <p><a href="#requirements">Why this change</a> · <a href="#specification">What the skills must do</a> · <a href="#skill-design">Owner questions, runs and edits</a> · <a href="#skill-verification">How each part is shown</a></p>
     <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
     <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
@@ -38,9 +38,9 @@ flowchart TD
     <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
   </ex-document>
   <ex-presentation id="review-initiative-design-and-plan" title="Review the initiative and plan change" description="The owner's model, what the skills must do, the open questions and edits, and how each part is shown.">
-    <ex-step to="requirements">The owner's settled model, the Mac Lead's input, the independent review's fifteen findings, and what stays out of scope.</ex-step>
-    <ex-step to="specification">Twenty-six obligations and nine standards, each standard tested on another setting and on a bad choice it never names.</ex-step>
-    <ex-step to="skill-design">Five open owner questions with options, defaults K1 to K12, the component allocation from the guide, six runs and edits E1 to E34.</ex-step>
+    <ex-step to="requirements">The owner's settled model, the Mac Lead's input, the independent review's fifteen findings, the release state of Demistify, and what stays out of scope.</ex-step>
+    <ex-step to="specification">Thirty obligations and ten standards, each standard tested on another setting and on a bad choice it never names.</ex-step>
+    <ex-step to="skill-design">Four open owner questions with options, defaults K1 to K15, the component allocation from the guide, six runs, edits E1 to E40, and how each review finding was handled.</ex-step>
     <ex-step to="skill-verification">Which parts a review, an eval or a trigger trial shows, and what stays unverified.</ex-step>
   </ex-presentation>
 </body>
