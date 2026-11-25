@@ -18,7 +18,7 @@ Follow the guide's own conditional references for the content you actually displ
 
 IF the page presents source, executable commands, configuration, structured data or a diff for inspection or copying, load the guide's `references/code.md` and return the supported code/diff or short-excerpt carrier, language label when known, and exact source to display. Inline identifiers use inline code. Displaying historical commands does not authorize execution. Technical content stays technical even when its source record stored it as a string.
 
-IF the page shows typed design records, load the guide's `references/typed-design.md` and return how a page places a record by id, a rule's cases, the Tree of a need's rules and checks, Map and Walkthrough targets by record id, a choice from an open decision record and the deliverables view, with the check, brief and open commands.
+IF the page shows typed design records, load the guide's `references/typed-design.md` and return how a page places a record by id, a rule's cases, the Tree of a need's rules and checks, Map and Walkthrough targets by record id, the section items a decision or assumption sits in, a choice record open or decided and the deliverables view, with the check, brief and open commands.
 
 When the guide documents default Comments, every ordinary page keeps its Comments control and semantic targets automatically, without a manual feedback tag, document metadata or paragraph labels. Keep answer controls task-driven. Follow the guide for independent identity or revision overrides; an older binding keeps its own feedback contract.
 

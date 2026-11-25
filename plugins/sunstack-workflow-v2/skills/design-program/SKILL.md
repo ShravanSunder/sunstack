@@ -130,7 +130,7 @@ Re-anchor before selecting target composition: compare the selected direction wi
 
 Explain the selection in ordinary language: what changes, what stays the same, why the smaller structure is enough, what it costs, who bears that cost, and what evidence would justify a larger design. A request to use architecture vocabulary does not replace any of those concrete answers; labels such as “minimal structural delta” or “clean boundary” may summarize the explanation but may not carry it.
 
-Write the selected direction, each accepted debt and each scope rejection as a decision record in the same edit as its passage: `lead-decided` from `author` when the choice is inside this phase's structural authority, or `owner-decided` where it came from the owner.
+Write the selected direction as a choice record whose options are the credible alternatives you weighed, or as a ruling when only one direction was credible, and each accepted debt and each scope rejection as a decision record, in the same edit as its passage: an agent's decision from `author`, with its weight, when the call is inside this phase's structural authority, or the owner's decision where it came from the owner.
 
 Completion: the selected direction names what improves, where cost moves, accepted debt/payer, complexity spent, and evidence that would reopen the choice; the Re-anchor comparison is aligned, has deleted unsupported machinery, or has returned the exact expansion decision; and the actual choice and tradeoff are explained in ordinary language.
 
@@ -214,7 +214,7 @@ Completion: each applicable obligation has structural How, and anything that cro
 
 MUST load `references/proof-architecture-and-traceability.md` to return the realization records, proof seams, real/fake boundary decisions, enforcement classes, and one illegality decision per material invalid state: unrepresentable, or rejected at the trusted entry. Each realization record says in one sentence how its owner realizes the rules it names. The trace is the records' links; the design check computes it.
 
-Write a proof seam or real/fake boundary as a Lead decision record only when the answer is not the obvious one, and each stand-in as an assumption record in the same edit, naming what it stands in for and what would close it.
+Write a proof seam or real/fake boundary as a decision record only when the answer is not the obvious one, and each stand-in as an assumption record in the same edit, naming what it stands in for and what would close it.
 
 Do not choose exact test files, commands, or execution order. Completion of this load: the design names no test path and no red/green step for that illegality decision.
 
@@ -226,7 +226,7 @@ Apply the Required Views predicates. For each selected view, state the reader qu
 
 A newly authored or substantively revised substantial Program Design renders each fired structural view through the shared rendering owner, which chooses every medium. A screen the user will see also gets a UI view grounded in the current app, beside its structural views, not instead of them. `sunstack-dev/shared-references/generated-document-visuals.md` owns what a generated image must pass; an image never becomes the authoritative design.
 
-In a file-backed set, write the decision records, and the realization records in the file that already holds their rules (`design-documents.md`), then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's how part, organized by the ownership, lifecycle, contract or call-path questions that explain it, and take back the component for each. The page shows each record by id and never restates it. A call path is labelled source-derived or proposed. Keep open design choices separate from settled structure. Run the design check and the matching static check through `presentation-html`.
+In a file-backed set, write the decision records, and the realization records in the file that already holds their rules (`design-documents.md`), then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's how part, organized by the ownership, lifecycle, contract or call-path questions that explain it, and take back the component for each. The page places each record as `design-documents.md` says and never restates it. A call path is labelled source-derived or proposed. Keep open design choices separate from settled structure. Run the design check and the matching static check through `presentation-html`.
 
 Put the entity binding table on the page that holds the entity definitions, in, or directly under the heading of, an element with `id="bindings"`; the design rule reads binding rows only there, on the same page.
 

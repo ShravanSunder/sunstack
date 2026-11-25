@@ -41,7 +41,7 @@ remote but owned
 true external
 ```
 
-State what must be real, what may be replaced through the designed seam, and what observation proves the behavior. A mockable signature without a production-realistic observation path is not proof architecture. Write the seam or the real/fake boundary as a Lead decision record only when a capable reader could choose differently; the obvious seam needs no record.
+State what must be real, what may be replaced through the designed seam, and what observation proves the behavior. A mockable signature without a production-realistic observation path is not proof architecture. Write the seam or the real/fake boundary as a decision record only when a capable reader could choose differently; the obvious seam needs no record.
 
 Use a proof call graph when the test or operational harness follows materially different owners or boundaries than production. Show the driver/fixture, real versus replaced boundaries, observation point, and evidence returned.
 

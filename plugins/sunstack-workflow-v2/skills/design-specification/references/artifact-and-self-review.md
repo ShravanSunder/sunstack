@@ -113,7 +113,7 @@ Then run the design-item pass, in this order:
 1. **Sentence support, first.** Read every need and rule record and every page sentence that settles meaning: entity definitions, invariants, defaults and thresholds. Ask of each: does its source support all of what it claims? Return an `unsupported claim` nudge for each one that it does not, with where to read.
 2. **Items.** List every design item; return, for each, every applicable label from `design-documents.md`'s nudge labels, or `ok` alone.
 3. **Quote lookup.** IF an owner-message export is supplied, look each quoted span up by its authority: for `owner-words`, find the span in the cited row and confirm it is the owner's own text, not option wording or a pasted reply; for `owner-accepted`, find the agent's wording where cited and the owner's acceptance in the cited selection record itself or a later acceptance event, and keep it as agent wording. An export's pasted-text flag is a hint, not a verdict. Otherwise return `quote not checked` with each quoted item's source.
-4. **Rank and promote** the `lead-decided` decisions and open assumptions; bring the high-ranked ones that need the owner as decisions.
+4. **Rank and promote** the agents' decisions and open assumptions; bring the high-ranked ones that need the owner as decisions.
 
 Every result of this pass is a nudge: it says what you saw and where to read, and it adds no readiness condition.
 

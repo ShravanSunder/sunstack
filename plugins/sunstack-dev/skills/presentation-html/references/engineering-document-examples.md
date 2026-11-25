@@ -86,9 +86,14 @@ Keep exact guards and failure behavior in the owning text. Optional evidence can
 Explain the actual choice and its effect first. A comparison aligns the same topics; a native choice asks the owner to select. Neither makes the recommendation an accepted policy.
 
 ```html
+<!-- Once per page, as the guide's "Sections and Map" shows; add holds="assumed" when the page has assumptions. -->
+<ex-section id="for-you" title="For you to decide" icon="user" holds="needs-owner"></ex-section>
+<ex-section id="decided" title="You decided" icon="user" holds="settled"></ex-section>
+<ex-section id="agent-decisions" title="Decided without you" icon="robot" holds="decided-by-agent"></ex-section>
+
 <section id="running-cancellation">
   <h2>Cancelling a running job</h2>
-  <p>This is open. It determines the completion contract and the proof we need.</p>
+  <p>It determines the completion contract and the proof we need (<a href="#D5">D5</a>).</p>
   <ex-compare label="Running-job cancellation">
     <section label="Finish without publishing">
       <section data-compare-row="behavior"><p>Execution may finish, but its result stays unpublished.</p></section>
@@ -99,19 +104,35 @@ Explain the actual choice and its effect first. A comparison aligns the same top
       <section data-compare-row="cost"><p>The design must handle partial effects and failed interruption.</p></section>
     </section>
   </ex-compare>
-  <ex-choice data-design-record="D5">
-    <ex-option id="suppress-result" title="Finish without publishing (recommended)">
+  <p>Use Comments to qualify your answer, then explicitly hand the answer back to the agent.</p>
+</section>
+
+<ex-section-item record="D5">
+  <ex-choice>
+    <ex-option data-option="suppress-result">
       <template slot="summary">Keeps execution simple; publication must honor cancellation.</template>
     </ex-option>
-    <ex-option id="interrupt-work" title="Attempt to stop execution">
+    <ex-option data-option="interrupt-work">
       <template slot="summary">May stop work sooner; partial effects need explicit handling.</template>
     </ex-option>
   </ex-choice>
-  <p>Use Comments to qualify your answer, then explicitly hand the answer back to the agent.</p>
-</section>
+</ex-section-item>
 ```
 
-The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. The question is the open owner decision record D5; the `ex-choice` is bound to it by id and shows its text, while the author writes the options and their details. When the answer arrives, the decision record carries it and the rules it governs are reconciled, rather than treating the control's current value as durable authority.
+```ts
+defineChoice({
+  id: 'D5',
+  question: 'When a running job is cancelled, what happens to its work?',
+  options: [
+    { id: 'suppress-result', title: 'Finish without publishing' },
+    { id: 'interrupt-work', title: 'Attempt to stop execution' },
+  ],
+  recommended: { option: 'suppress-result', by: { alias: 'jobs-lead', role: 'lead' } },
+  authority: { state: 'owner-open' },
+});
+```
+
+The options are illustrative: another project's policy comes from its owner. Nothing is selected in this source. D5 is an open choice record: it supplies the question, the option titles and the recommendation, and the library places it under "For you to decide"; the author writes the explanation and each option's summary. When the owner answers, the record carries the chosen option and the accepted wording (an option the owner selects is wording the owner accepted), the item moves to "You decided", and every option stays, rather than treating the control's current value as durable authority.
 
 ## Keep an open discussion open
 
@@ -128,7 +149,7 @@ An unresolved question may need evidence or a conversation before it has credibl
 </section>
 ```
 
-For an already settled decision, explain the outcome and its actual authority/date where that matters, with a picture of the resulting design. Prior alternatives can sit in a labelled history disclosure. Do not present a new unanswered choice for an accepted answer or call an agent's proposal decided. The list of decisions is generated from the records; it does not become another home.
+For an already settled decision, explain what the outcome changes, with a picture of the resulting design; the record shows its authority and date. The decided choice shows its outcome and keeps its options, which the reader opens under Details. Do not present a new unanswered choice for an accepted answer or call an agent's proposal decided. The list of decisions is generated from the records; it does not become another home.
 
 The page keeps design choices and their tradeoffs because they shape the system. The author's self-check and static-check receipt, reviewer findings, readiness status, and Chief/agent routing belong in the returned workflow state or work account. Record a check's actual result there; do not leave an obsolete “not run” sentence on the page.
 
