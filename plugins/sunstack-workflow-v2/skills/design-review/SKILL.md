@@ -11,7 +11,7 @@ IF no work reference is in context and the task qualifies, open or resume the tr
 
 Review is independent reconstruction of the smallest system that satisfies the confirmed goal. It is not proofreading, design by committee, or a search for mechanisms to complete.
 
-Requirements (why, for whom), Specification (what must be observably true), Program Design (how) and Verification Design (how it will be shown to hold) are four kinds of meaning, held as need, rule, realization and planned-check records for one milestone, with decisions and assumptions, and explained on its one page (`design-documents.md`). Review reconstructs each kind independently before judging their agreement, then the structure, seams, reader understanding and planning readiness, and reads the records, not copies of them.
+Requirements (why, for whom), Specification (what must be observably true), Program Design (how) and Verification Design (how it will be shown to hold) are four kinds of meaning, held as need, rule, realization and planned-check records for one project, with decisions and assumptions, and explained on its one page (`design-documents.md`). Review reconstructs each kind independently before judging their agreement, then the structure, seams, reader understanding and planning readiness, and reads the records, not copies of them.
 
 A persistent 🔎 Reviewer Sidekick, commissioned through `practices-manage-agents`, reads the complete target set and governing sources, then walks the ordered checks in its own session. The Reviewer Sidekick verifies candidates against accepted requirements, Specification obligations, and the confirmed goal boundary, tests deletion before addition, and owns the coverage-bound assessment. The orchestrator disposes and routes that assessment. This skill never edits artifacts, mutates their lifecycle, plans, or accepts a design.
 
@@ -29,7 +29,7 @@ classify-review-requirement
 
 review
   mode: specification-only | program-only | four-document-design
-  targets: one milestone's typed records, its page, and the Demistify check's report
+  targets: one project's typed records, its page, and the Demistify check's report
   result: ready | needs-revision | blocked | decision-needed | not-converging
   coverage: current meaning coverage for every target; uncertain semantic effect is stale
   checks: mode-complete always; sequential chunk passes along artifact seams when
@@ -58,8 +58,8 @@ Completion: classification returns immediately with zero reviewer dispatches.
 For operation `review`, require:
 
 ```text
-mode, the milestone's record files and page, or separately labeled in-chat records
-the Demistify check's report for the milestone
+mode, the project's record files and page, or separately labeled in-chat records
+the Demistify check's report for the project
 governing sources, authority states, and coverage basis
 confirmed goal boundary and accepted requirements set, or the exact authority gap
 constraints and non-goals
@@ -113,7 +113,7 @@ MUST load `references/lanes/lane-schema.md` and record `complete | partial | blo
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return its check result. MUST load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. MUST load the selected mode reference and return its whole-mode judgment. Reconstruct and judge the whole mode from complete artifacts.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` to walk the chunk passes sequentially and return each pass's seam coverage. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
-In a file-backed milestone, the 🔎 Reviewer Sidekick also runs, read-only, the Demistify check (`demistify project check` for a project, `demistify design check` for a standalone milestone) and the design rules, keeping reports outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/design-documents.config.json --root <the project's root> --report <scratch>/design-lint.json <the milestone folder>`.
+In a file-backed project, the 🔎 Reviewer Sidekick also runs, read-only, the Demistify check (`demistify initiative check` for an initiative, `demistify design check` for a standalone project) and the design rules, keeping reports outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/design-documents.config.json --root <the project's root> --report <scratch>/design-lint.json <the project folder>`.
 
 From the Demistify check report the reviewer takes, as candidate findings, its blocking gaps: a `core` rule with no need, a `core` rule with no planned check, and a need a `core` deliverable lists that none of its rules serves. It also takes the report's design notes, which hold nothing: for a need no rule serves, the reviewer judges whether that need is really out of scope; for a rule no realization names, whether that rule truly needs no new structure. Everything else stays the reviewer's own judgment: whether a check would decide its rules, whether a realization realizes them, and whether the page explains them.
 

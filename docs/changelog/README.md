@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-25 Design skills name initiatives, numbered projects and deliverables](2026-11-25-design-initiative-vocabulary.md)
 - [2026-11-24 Design skills teach the choice, ruling and assumption records](2026-11-24-design-record-items.md)
 - [2026-11-24 presentation-html shows a status block as an answer and a table](2026-11-24-presentation-status-blocks.md)
 - [2026-11-23 presentation-html loads less for a design page; call-stack component retired](2026-11-23-presentation-html-cuts.md)
