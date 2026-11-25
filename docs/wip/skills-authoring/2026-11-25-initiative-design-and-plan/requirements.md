@@ -1,8 +1,9 @@
 # Requirements
 
-Revision 3, 25 November 2026: corrections from design reviews A and B of
-revision 1 (the release state of initiative support, the base PR 239 now at
-2168d5b9, the open questions). Revision 2 added the Mac Lead's input (a to f)
+Revision 4, 25 November 2026: round-2 corrections (the release state, PR 229,
+the base PR 239 now at 11f4826a, `design-documents.md:32` as a named
+dependency). Revision 3 corrected design reviews A and B of revision 1.
+Revision 2 added the Mac Lead's input (a to f)
 and the independent skills review's fifteen findings as signals. Written by a
 helper to the Demistify 🦁 Lead (commission
 `commission-design-skills-initiative-plan.md` in sunstack-tools
@@ -122,8 +123,9 @@ Success, in the owner's terms: a Lead using the v2 skills on an initiative
    a chat summary;
 6. uses the Demistify components the guide documents for each of these, and
    invents none, loading the guide before it writes a record;
-7. names, before any commission, the deliverable the work belongs to (Mac
-   Lead, 25 Nov).
+7. names, before any build commission, the deliverable the work belongs to
+   (Mac Lead, 25 Nov; scoped to build commissions in revision 4, since design,
+   review and evidence commissions run before the cut).
 
 ## Who reaches the skills, and when
 
@@ -139,9 +141,9 @@ Success, in the owner's terms: a Lead using the v2 skills on an initiative
 | Signal | Date | Source |
 | --- | --- | --- |
 | Owner direction and settled model (quoted above) | 2026-11-25 | the commission, relayed from the owner's session with the Mac Lead |
-| Demistify initiatives, numbered projects, deliverables, `brief`, `initiative status`, `ex-initiative-overview`: merged to sunstack-tools `origin/main` at 73d43548 (PR 226), not yet released; the hosted `v1` binding has no `typed-design-initiative.md` (HTTP 404, design review B). The release carrying them is Demistify 1.34.0 (sunstack-tools PR 228, then the version PR), pending on 25 November. | 2026-11-25 | `packages/demistify/skill/references/typed-design.md`, `typed-design-initiative.md`, `bin/demistify.ts:72-176`; the Demistify Lead |
-| The Demistify Lead will change the library so "ready now" orders by project number and leaves out `core` deliverables with no steps, and a `core` deliverable with no steps says so in its state | 2026-11-25 | the Demistify Lead, answering design review findings A3 and B2; not yet released |
-| PR 239 now fixes `canonical-implementation-plan.md:67` (the plan names the deliverables it waits on; their `dependsOn` records are the edges' only home) and reduces `design-documents.md:165` to one levels sentence; the v2 README floor is Demistify 1.34.0 | 2026-11-25 | ai-tools `origin/skills/initiative-vocabulary` at 2168d5b9 and d093a481 |
+| Demistify initiatives, numbered projects, deliverables, `brief`, `initiative status`, `ex-initiative-overview`: merged to sunstack-tools `origin/main` at 73d43548 (PR 226), not yet released; the hosted `v1` binding still has no `typed-design-initiative.md` (HTTP 404, re-read for revision 4). Demistify 1.34.0 carries them and is publishing (sunstack-tools main at cc4c33db after PR 228, package still 1.33.0). PR 228 also removed `initiative migrate` and the guide's re-cut section from the release (moved to `packages/demistify/scripts/initiative-migration/`). | 2026-11-25 | `packages/demistify/skill/references/typed-design.md`, `typed-design-initiative.md`, `bin/demistify.ts:75`; the Demistify Lead; design review B round 2, N3 |
+| Demistify 1.34.1+ (sunstack-tools PR 229): "ready now" ordered by project number; `core` deliverables with no implementation steps left out of it and listed in `work.needsPlan`, printed by `initiative status` as "Needs a plan"; a deliverable's own state stays `planned` | 2026-11-25 | the Demistify Lead (A3, B2); PR 229 "ready-now by project number and a needs-a-plan list", open when read |
+| PR 239 now fixes `canonical-implementation-plan.md:67` (the plan names the deliverables it waits on; their `dependsOn` records are the edges' only home; a one-deliverable plan admits only its own checks and names waited-on checks as prerequisites earned there) and reduces `design-documents.md:165` to one levels sentence; the v2 README floor is Demistify 1.34.0 | 2026-11-25 | ai-tools `origin/skills/initiative-vocabulary` at 2168d5b9, 11f4826a and d093a481 |
 | The design check reports a missing need or check only for rules a `core` deliverable scopes | read 2026-11-25 | `packages/demistify/src/node/design-authoring/delivery-model.ts` coverage gaps per deliverable; test `delivery-model.test.ts:257` "reports a scoped rule without a need" |
 | A completed task that the deliverable no longer lists fails the check | read 2026-11-25 | `delivery-model.ts:306-308` ("unknown implementation task … in completedTasks") |
 | No v2 skill writes deliverable scope, steps, progress, acceptance on the deliverable, or a plan | read 2026-11-25 | the five v2 skills at 53f2de4a; `role-lead/references/accepting-work.md:15` keeps acceptance in "the existing Lead acceptance record" |
@@ -180,13 +182,17 @@ from his session records first, which the 🦁 Lead may commission.
 
 - No change to `sunstack-dev` (`design-documents.md`,
   `canonical-implementation-plan.md`, `presentation-html`), to the Demistify
-  library or guide, to v1, or to the owner's global instructions. Each
-  dependency on them is named in `skill-design.md`.
+  library or guide, to v1, or to the owner's global instructions, with one
+  named exception: the one-line change to `design-documents.md:32` that run 1
+  depends on (a project held by its number may hold need records), which
+  lands in sunstack-dev before run 1. Each other dependency is named in
+  `skill-design.md`.
 - No change to `practices-manage-agents`, `role-implementer`, `role-checker`
   or `role-operator`; the brief and the plan reach the Implementer as files
   under the existing role/files commission. Owner question Q9 option (c)
   would widen this non-goal for `role-implementer`.
-- No re-cut or migration teaching (`initiative migrate`): deferred.
+- No re-cut teaching: the released CLI has no re-cut command, and a re-cut is
+  the owner's.
 - No description change to the five existing skills.
 - No tracker (Linear) behavior; "milestone" and "project" in `ops-*` keep
   their own meaning.
@@ -199,5 +205,8 @@ from his session records first, which the 🦁 Lead may commission.
 - Four owner questions (Q1, Q6, Q8, Q9 in `skill-design.md`); edits that
   depend on one are marked with its number. Q2, Q3 and Q4 closed in revision
   2, Q5 and Q7 in revision 3, each with its reason recorded there.
-- Demistify 1.34.0 hosted, and the later library change the Demistify Lead
-  named (A3, B2); the implementation runs wait for both.
+- The run gate, as `skill-design.md` Coordination states it: every run waits
+  for the owner's answers, PR 239 merged and Demistify 1.34.0 hosted; run 1
+  also waits for the `design-documents.md:32` change; runs 5 and 6 ship once
+  Demistify 1.34.1+ is hosted, or earlier with their [Demistify 1.34.1+] text
+  marked and the gap listed.

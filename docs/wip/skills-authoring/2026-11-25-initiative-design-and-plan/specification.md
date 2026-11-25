@@ -1,7 +1,9 @@
 # Specification
 
-Revision 3, 25 November 2026: corrections from design reviews A and B
-(findings named in brackets). Revision 2 added obligations from the Mac Lead's
+Revision 4, 25 November 2026: round-2 corrections from design reviews A and B
+(S9 and S10 scoped to builds, the plan-and-review step for a new deliverable,
+the CLI address, one release marker). Revision 3 corrected round 1 (findings
+named in brackets). Revision 2 added obligations from the Mac Lead's
 input and the independent skills review. What the changed and new skills must
 do, and the standards they state. Field names, markup and command syntax
 belong to the Demistify guide at the page's binding (`typed-design.md`,
@@ -9,8 +11,10 @@ belong to the Demistify guide at the page's binding (`typed-design.md`,
 and record belongs to `sunstack-dev/shared-references/design-documents.md`.
 These sentences name kinds, homes and moments only. **[Qn]** marks a sentence
 that waits for owner question Qn in `skill-design.md`, written at its
-recommended option. **[next Demistify]** marks behavior the Demistify Lead is
-adding to the library after 1.34.0.
+recommended option. **[Demistify 1.34.1+]** marks behavior from sunstack-tools
+PR 229, to ship in Demistify 1.34.1 or later: "ready now" ordered by project
+number, with `core` deliverables that have no implementation steps left out of
+it and listed as "Needs a plan" by `initiative status`.
 
 Terms used below: a `core` deliverable is one the design check gates; a
 `core` rule is a rule that a `core` deliverable scopes (B5).
@@ -42,8 +46,9 @@ Success 1: one design per project, at its depth, shared decisions once.
    any mode and returns the blocked input with the reason.
 7. Each design phase, the plan skill and `role-lead` load the guide (its
    `typed-design.md`, and `typed-design-initiative.md` in an initiative) at
-   the page's binding, and take the CLI address from it, before they write a
-   record or run a Demistify command. [B3]
+   the page's binding, and take the CLI address from that binding's entry
+   guide (`authoring/SKILL.md`), before they write a record or run a Demistify
+   command. [B3, B-N2]
 
 Success 2: deliverables select records and add none.
 
@@ -95,11 +100,13 @@ Success 4: order by dependencies and the owner's numbers.
     and the plan returns `blocked`, naming it, for the owner to settle the cut
     or the number. [A8]
 19. `role-lead` and `plan-implementation` take what is ready from the
-    initiative's status, in its order, and do not start work in a
+    initiative's status, in its order, and start no deliverable's build in a
     higher-numbered project while a lower-numbered project has open `core`
-    work, unless a dependency or the owner says otherwise. **[next
-    Demistify]** orders "ready now" by project number and leaves out `core`
-    deliverables with no steps. [A3, B2]
+    work, unless a dependency or the owner says otherwise; designing a later
+    project at the depth its number gives it is not held by this.
+    **[Demistify 1.34.1+]** the status orders "ready now" by project number
+    and lists `core` deliverables with no steps under "Needs a plan".
+    [A3, B2, A-N2]
 20. `role-lead` never renumbers projects or moves deliverables between them
     without the owner's decision.
 21. `design-review` takes the check report's order warnings as candidate
@@ -122,9 +129,12 @@ Success 5: results and acceptance live on the deliverable.
     project's acceptance in the initiative file; for a standalone project, as
     the first sentence of the page's proof part. It is drawn from the planned
     checks and adds none. [A12]
-25. `role-lead` names, before any commission inside an initiative or typed
-    project, the deliverable id the work belongs to, and adds the deliverable
-    first when none covers the work. **[Q8]**
+25. `role-lead` names, before any build commission (an Implementer or
+    Verifier, or a build fix) inside an initiative or typed project, the
+    deliverable id the work belongs to; when none covers the work it adds the
+    deliverable first, then its plan, and a design review of the cut when the
+    deliverable adds rules, before the commission. Design, review and evidence
+    commissions name the project. **[Q8]** [A-N1, A-N3]
 
 Success 6: the guide's components, none invented.
 
@@ -182,13 +192,14 @@ gap.
 S8. **[Q1]** A project gets its full design when its number is near; until
 then it holds its needs and their open questions.
 
-S9. Work inside an initiative or typed project is commissioned under a named
-deliverable; work no deliverable covers gets its deliverable before its
-commission. **[Q8]**
+S9. Build work inside an initiative or typed project is commissioned under a
+named deliverable; build work no deliverable covers gets its deliverable, and
+that deliverable its plan, before the commission. Design, review and evidence
+commissions name the project. **[Q8]** [A-N3]
 
-S10. Work starts in number order: a higher-numbered project's work waits
-while a lower-numbered project has open `core` work, unless a dependency or
-the owner says otherwise. [A3]
+S10. Builds start in number order: no deliverable in a higher-numbered project
+starts its build while a lower-numbered project has open `core` work, unless a
+dependency or the owner says otherwise. Design depth follows S8. [A3, A-N2]
 
 ## Transfer tests
 
@@ -206,8 +217,8 @@ reviewer A's cases where they differed.
 | S6 | A Rust CLI deliverable: the Lead records the Verifier's outcomes for build 42. Holds. | The Lead records outcomes from a chat summary without opening the evidence. Rejected: not inspected. | passes |
 | S7 | A browser journey kept as planned. Holds. | The plan runs the check only against a stand-in target. Rejected: it re-chooses the target. | passes |
 | S8 **[Q1]** | Projects 1 and 2: project 2 holds needs and open questions until project 1's deliverables have plans. Holds. | An agent writes project 2's realizations early. Rejected: depth comes from the number. | passes; needs the `design-documents.md:32` line in "Dependencies outside scope" |
-| S9 **[Q8]** | A Python service initiative: a bug fix found during build is commissioned under `api/DEL-04`, whose scope holds the rule it breaks. Holds. | A Lead sends a helper a "quick cleanup" by chat, inside an initiative, with no deliverable. Rejected until a row exists. Work outside any initiative or typed project is outside its scope. | passes, scope stated |
-| S10 | A Go initiative: project 2's deliverable is planned while project 1 still has an open deliverable; the Lead finishes project 1's first. Holds. | A Lead starts project 2's work "because the builder is free". The rule names no idle builders; it rejects the start without a dependency or the owner. | passes |
+| S9 **[Q8]** | A Python service initiative: a bug fix found during build is commissioned under `api/DEL-04`, whose scope holds the rule it breaks. Holds. Re-run on a design-stage commission: the Lead commissions a 🔎 Reviewer for a typed project's Requirements before any deliverable exists; the commission names the project, and S9 does not apply. Holds. | A Lead sends a builder a "quick cleanup" by chat, inside an initiative, with no deliverable. Rejected until a row and its plan exist. Work outside any initiative or typed project is outside its scope. | passes, scope stated |
+| S10 | A Go initiative: project 2's deliverable is planned while project 1 still has an open deliverable; the Lead builds project 1's first, while project 2's design proceeds under Q1(b). Holds. | A Lead starts project 2's build "because the builder is free". The rule names no idle builders; it rejects the start without a dependency or the owner. | passes |
 
 The single rule for where a fact lives (the record holds the one sentence and
 its links; the page holds explanation and picture), which the Mac Lead asked

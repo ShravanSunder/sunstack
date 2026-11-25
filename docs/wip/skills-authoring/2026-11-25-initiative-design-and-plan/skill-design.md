@@ -1,14 +1,18 @@
 # Skill design
 
-Revision 3, 25 November 2026: corrections from design reviews A and B of
-revision 1 (finding ids A1 to A13, B1 to B18 in brackets; the mapping is in
-the review record at the end). Revision 2 took in the Mac Lead's input (M-a
-to M-f) and the independent skills review (R1 to R15). Edit numbers E1 to E34
-keep their revision 2 meaning; E35 to E40 are new. Four owner questions are
-open (Q9, Q8, Q1, Q6); each edit that depends on one is marked **[Qn]** and
-written at that question's recommended option. **[next Demistify]** marks
-text written against library behavior the Demistify Lead is adding after
-1.34.0.
+Revision 4, 25 November 2026: closes the open items of design reviews A
+and B round 2 on revision 3 (ids A-N1 to A-N5, B-N1 to B-N4, and A6, B5 in
+brackets; the mapping is in the review record at the end). Revision 3
+corrected round 1 (A1 to A13, B1 to B18); revision 2 took in the Mac Lead's
+input (M-a to M-f) and the independent skills review (R1 to R15). Edit numbers
+E1 to E40 keep their meaning; no edit is added. Four owner questions are open
+(Q9, Q8, Q1, Q6); each edit that depends on one is marked **[Qn]** and written
+at that question's recommended option. **[Demistify 1.34.1+]** marks text
+written against the one library change after 1.34.0: "ready now" ordered by
+project number, with `core` deliverables that have no implementation steps
+left out of it and listed instead as "Needs a plan" (`work.needsPlan`, printed
+by `initiative status`), sunstack-tools PR 229, to ship in Demistify 1.34.1 or
+later.
 
 ## Owner questions
 
@@ -54,8 +58,12 @@ rules is held by the check; a `later` one is listed and not checked.
 
 - **(a) A `core` deliverable in the project the work serves,** scoping the
   existing rules the work touches; when no rule fits, the missing rule goes to
-  `design-specification` first. Gains: every commission is counted and gated.
-  Costs: small fixes wait for a rule when none exists.
+  `design-specification` first. Gains: every build commission is counted and
+  gated. Costs: small fixes wait for a rule when none exists; and the new
+  deliverable needs its plan (`plan-implementation`) before any build
+  commission, plus a design review of the cut when it adds rules. A new
+  deliverable that scopes only records the current review already covers is
+  planned under that review [A-N1].
 - **(b) A `later` deliverable as a placeholder row,** promoted to `core` when
   scoped. Gains: cheap, immediate. Costs: active work shows as "later" and is
   not checked.
@@ -82,7 +90,10 @@ and check records", and a held project's needs are need records with no
 - **(b) Near means every lower-numbered project's `core` deliverables have
   plans.** Gains: the earlier designs have stopped moving, and the next design
   runs while they build. Costs: a late finding in an earlier build can still
-  move the next design.
+  move the next design; the gate is observable only from Demistify 1.34.1+
+  (a lower-numbered project with nothing under "Needs a plan"); on 1.34.0 the
+  Lead reads it by hand, from a plan page linked from each deliverable
+  [A-N4].
 - **(c) The Lead proposes "near" per project and the owner confirms.** Gains:
   judgment per case. Costs: one owner decision per project, and no field for
   it in `initiative.ts` (the project entry is strict: `design`, `number`,
@@ -120,7 +131,7 @@ write list.
 | Q3 where a fact lives (rev. 2) | requirement, no v2 edit | `design-documents.md:29` states the Mac Lead's one rule; the competing rule is v1's own copy (M-b). |
 | Q4 entities with no typed record (rev. 2) | flag only, no edit | The owner's preference for a small tool, relayed (M-f; A7). |
 | Q5 two checkers (rev. 3) | default K15 | No v2 edit depends on it [A13]; option (b) would grow the tool against M-f. |
-| Q7 plan contract (rev. 3) | default K13 | PR 239 at 2168d5b9 fixed `canonical-implementation-plan.md:67`: deliverable `dependsOn` records are the edges' only home and the plan names what it waits on. The canonical contract now agrees with S2. Its `:9` admits "one current reviewed project", which a plan for one deliverable of that project satisfies, and `:67` already allows a plan "scoped to one deliverable" [A5, B6]. |
+| Q7 plan contract (rev. 3) | default K13 | PR 239 fixed `canonical-implementation-plan.md:67`: at 2168d5b9, deliverable `dependsOn` records are the edges' only home and the plan names what it waits on; at 11f4826a, a plan scoped to one deliverable "admits that deliverable's checks only, names the checks of the deliverables it waits on as prerequisites earned there". The canonical contract now agrees with S2 and obligation 14. Its `:9` admits "one current reviewed project", which a plan for one deliverable of that project satisfies [A5, B6, B-N1]. |
 
 ## Decisions taken (the owner may strike any row)
 
@@ -131,14 +142,14 @@ write list.
 | K3 | One v2 skill writes the first plan and every re-plan | v2 has no `plan-update`; the owner tied a re-plan to the deliverable edit, which one skill can keep together. |
 | K4 | Component tags stay in the guide and `presentation-html`; v2 skills name a view by the question it answers | `presentation-html` owns component choice (`SKILL.md:10`); naming tags in v2 would make a second home. The allocation table below is the review's reference. |
 | K5 | The Lead records progress, outcomes and acceptance; helpers return them | `design-documents.md:79`: "A helper does not write design records." |
-| K6 | `initiative migrate` is not taught; a re-cut goes to the owner | Moving deliverables changes the owner's order (S4); the command writes across projects. Security: deferred. |
+| K6 (rev. 4) | No re-cut is taught; a re-cut goes to the owner | Moving deliverables changes the owner's order (S4). The released CLI has no `initiative migrate`: sunstack-tools PR 228 moved the migration to `packages/demistify/scripts/initiative-migration/`, run from a source checkout, and the guide's re-cut section no longer ships [B-N3]. |
 | K7 | The plan skill's slice-and-proof depth is ported from v1's `references/slice-and-proof-design.md` into the v2 skill's own reference | v2 never loads v1 (`sunstack-workflow-v2/AGENTS.md`); the v1 text is the best existing source. |
 | K8 | One `sunstack-workflow-v2` minor version (0.7.1 to 0.8.0) for the set | A new skill is user-visible. |
 | K9 (rev. 2; replaces open Q2) | Each phase writes its own records' ids into the `core` deliverables' scope: needs and rules (`design-specification`, which also writes the deliverables), realizations (`design-program`), checks (`design-verification`); steps come with planning | R1 (blocker): the design check gates only scoped rules (`delivery-model.ts:186-224`) and `design init` seeds no deliverable (`init-design.ts:34`). |
 | K10 (rev. 2) | The deliverable record is the only home of its step names and its dependencies; the plan page explains each step under its id and names what it waits on | R4 and the Demistify Lead's direction: "The plan skill must take its steps from the deliverable's implementation tasks and its order from dependsOn, not copy them." |
-| K11 (rev. 2; widened rev. 3) | Each design phase, the plan skill and `role-lead` load the guide (and `typed-design-initiative.md` in an initiative) at the page's binding, returning the fields they write and the CLI address, before writing a record or running a Demistify command | R2 and B3. The binding is selected by `presentation-html`'s `references/demistify.md`. The single home for the call is `design-documents.md:20` (sunstack-dev); the v2 call sites carry it until that reference does. |
+| K11 (rev. 2; widened rev. 3, 4) | Each design phase, the plan skill and `role-lead` load the guide's `typed-design.md` (and `typed-design-initiative.md` in an initiative) at the page's binding, returning the fields they write, and take the CLI address from that binding's entry guide `authoring/SKILL.md`, before writing a record or running a Demistify command | R2, B3 and B-N2 (`typed-design.md:15` points to the entry guide for the exact `pnpm dlx` URL). The binding is selected by `presentation-html`'s `references/demistify.md`. The single home for the call is `design-documents.md:20` (sunstack-dev); the v2 call sites carry it until that reference does. |
 | K12 (rev. 2) | `design-specification` writes a deliverable's first dependencies at the cut; the plan corrects them in the record | K10 needs the dependencies to exist before planning; the cut is where the sequence inside a project is first known. |
-| K13 (rev. 3; replaces open Q7) | `plan-implementation` loads `canonical-implementation-plan.md` as fixed in PR 239; a re-plan writes a superseding plan page and changes the deliverable's step list in the same commit | One contract home; the line that copied dependencies is gone (2168d5b9). A5 is the reading of "the same edit". |
+| K13 (rev. 3; replaces open Q7) | `plan-implementation` loads `canonical-implementation-plan.md` as fixed in PR 239; a re-plan writes a superseding plan page and changes the deliverable's step list in the same commit | One contract home; the line that copied dependencies is gone (2168d5b9), and a one-deliverable plan admits only its own checks (11f4826a). A5 is the reading of "the same edit". |
 | K14 (rev. 3) | A project's deliverable sequence is the order of its delivery file's list; a hard prerequisite is also a `dependsOn` | A2. The owner said "within a project, deliverables follow their sequence"; the list order is the one place the guide keeps an order without a dependency. Reading recorded as A8. |
 | K15 (rev. 3; replaces open Q5) | Keep both checkers, split by what each reads: the Demistify check owns records, links between records and deliverable states; the design rules own page-only properties (binding rows under `id="bindings"`, fragment links); the link rule learns record placements in a `skill-rules-authoring` follow-up | A13: no v2 edit depends on it. |
 
@@ -149,12 +160,12 @@ write list.
 | A1 | The owner quotes in `requirements.md`, and the owner preferences the Mac Lead relays (M-e, M-f), are as the owner said them. | The owner-message export rows for 25 November. |
 | A2 | "Until near" means until every lower-numbered project's `core` deliverables have plans. | The owner's answer to Q1. |
 | A3 | A project's `achieves` in `initiative.ts` is the owner-worded summary its need records must agree with, and its `acceptance` is the "what you check" line. | Half read: the schema documents `acceptance` as "What the owner checks to accept the project" (design review B). `achieves` needs the owner or the Mac Lead's record. |
-| A4 | A realization, check or rule may name a record in another project by qualified id (`sessions/R3`). | Partly read: the initiative check keeps a qualified id (`schema.ts:152`), and a re-cut leaves a moved deliverable naming a record qualified (`typed-design-initiative.md:125`); whether a project's generated SDK types accept one in `realizes`, `checks` or `serves` is not established. Try it with `design types` and `initiative check`. |
+| A4 | A realization, check or rule may name a record in another project by qualified id (`sessions/R3`). | Partly read: the initiative check keeps a qualified id (`schema.ts:152`); whether a project's generated SDK types accept one in `realizes`, `checks` or `serves` is not established. Try it with `design types` and `initiative check`. |
 | A5 | "Re-planning changes both in the same edit" is met by a superseding plan page and the changed step list in one commit. | The owner. |
 | A6 | "Take its steps from the deliverable's implementation tasks" means the record is the home of the step names, and the plan skill may still add or rename a step there in the same edit as the page. | The Demistify Lead. |
 | A7 | "Flag only" for entities means no record kind and no new check; entities stay defined on the page. | The Mac Lead or the owner. |
 | A8 (rev. 3) | "Within a project, deliverables follow their sequence" means the order of the delivery file's list, with hard prerequisites also in `dependsOn`. | The owner, or the Mac Lead's record of the settlement. |
-| A9 (rev. 3) | The next Demistify release orders "ready now" by project number and leaves out `core` deliverables with no steps, and names the no-steps state. | The Demistify Lead's release notes. |
+| A9 (rev. 4) | Demistify 1.34.1+ (sunstack-tools PR 229) orders "ready now" by project number and leaves out `core` deliverables with no implementation steps, listing them instead as "Needs a plan" (`work.needsPlan`, printed by `initiative status`); a deliverable's own state stays `planned` [A-N5, B-N4]. | The release that carries PR 229. |
 
 ## Targets and runs
 
@@ -197,7 +208,9 @@ license / permission state: not applicable
 copy-vs-adapt decision: not applicable
 decision: allowed for `design init`, `design types`, `design check [--write]`,
   `initiative check [--write]`, `initiative status [--json]`, `brief`, each run through the
-  CLI at the page's binding as its guide prints it; deferred for `initiative migrate` (K6)
+  CLI whose address the binding's entry guide prints; the released CLI has no other initiative
+  command (the migration moved to a source-checkout script, sunstack-tools PR 228), and none is
+  taught [B-N3]
 required proof: review check that every command the changed text teaches is in the allowed list
 public-safe constraints: no machine paths, session ids or home-cache paths in skill text;
   agent session ids stay in the initiative's identity file (typed-design-initiative.md:76)
@@ -206,7 +219,7 @@ review route: the design review's ordinary checks; no dedicated security review 
 
 ## Component allocation
 
-From the guide at sunstack-tools 73d43548 (released as Demistify 1.34.0). The
+From the guide at sunstack-tools cc4c33db (publishing as Demistify 1.34.0) [B-N3]. The
 v2 skills name the view on the left (K4); `presentation-html` and the guide
 turn it into the component on the right.
 
@@ -254,8 +267,9 @@ E2. Step 1, after the `design-documents.md` load (line 118), the guide load
 
 > MUST load the guide's `references/typed-design.md` at the binding
 > `presentation-html`'s `references/demistify.md` selects, and return the
-> helpers, fields and files this run writes and the CLI address the guide
-> prints. IF the project belongs to an initiative, also load
+> helpers, fields and files this run writes, and the CLI address from that
+> binding's entry guide `authoring/SKILL.md`. IF the project belongs to an
+> initiative, also load
 > `references/typed-design-initiative.md` and return the initiative root, the
 > project numbers, the qualified-reference form and the alias source.
 
@@ -314,11 +328,15 @@ adds the check".
 E35. Cutover of "slice" in run 1's files [B5]: line 67 "`core` and `later`
 slices" becomes "`core` and `later` deliverables"; the step 3 heading (line
 193) becomes "Define outcomes, non-goals, and deliverables" and its completion
-(line 199) says "every deliverable" for "every slice"; line 285 "`core` and
-`later` slices" becomes "deliverables"; line 314 "a `core` slice has no
-records" becomes "a `core` deliverable scopes no records";
+(line 199) says "every deliverable" for "every slice"; line 197's first
+sentence, "split those semantic slices before polishing requirements",
+becomes "split them into deliverables before polishing requirements"; line
+285 "`core` and `later` slices" becomes "deliverables"; line 314 "a `core`
+slice has no records" becomes "a `core` deliverable scopes no records";
 `references/requirements-and-traceability.md:5` "`core` slices" becomes
-"`core` deliverables". After E35 no "slice" remains in this skill.
+"`core` deliverables"; `references/artifact-and-self-review.md:5` "`core` and
+`later` slices" becomes "`core` and `later` deliverables". After E35 no
+"slice" remains in this skill.
 
 E36. Terminal labels, `deferred` (line 101) [B11]: "an authorized caller
 explicitly postpones scoped work" becomes "an authorized caller explicitly
@@ -392,7 +410,8 @@ review target in any mode; return blocked input naming its depth."
 E21. Step 5, before line 116's command: "IF the guide at the page's binding is
 not loaded this session, load its `references/typed-design.md` at the binding
 `presentation-html`'s `references/demistify.md` selects (K11), and return the
-CLI address and, in an initiative, the initiative root." After
+CLI address from that binding's entry guide `authoring/SKILL.md` and, in an
+initiative, the initiative root." After
 line 118 (K9, R1, R6):
 
 > From the same report, take an order warning (a deliverable depending on one
@@ -456,8 +475,8 @@ Lens (first paragraph):
    deliverable's scope fields and the plan home it points to.
    MUST load the guide's typed-design.md (and typed-design-initiative.md in an
    initiative) at the binding presentation-html's references/demistify.md
-   selects, and return the deliverable module's fields and the CLI address
-   (K11).
+   selects, and return the deliverable module's fields, and the CLI address
+   from that binding's entry guide authoring/SKILL.md (K11).
    Input: one deliverable id (qualified in an initiative), its project's current
    `ready` four-document review with parent-verified corrections, and the
    requested terminal (plan-only | pr-ready-unmerged; ask once when ambiguous).
@@ -527,10 +546,11 @@ Lens (first paragraph):
    reference says.
    Run the initiative check on the initiative root (or the design check on a
    standalone project) read-only, then with --write.
-   Completion [next Demistify]: the deliverable's steps in the check equal the
-   ids the plan page explains; the check no longer reports the deliverable as
-   having no steps; the brief lists no coverage gap; the page's static check
-   passes.
+   Completion: the deliverable's steps in the check equal the ids the plan
+   page explains; the check's reason no longer asks to define the scoped
+   implementation tasks, and [Demistify 1.34.1+] `initiative status` no longer
+   lists the deliverable under "Needs a plan"; the brief lists no coverage gap;
+   the page's static check passes.
 
 Return: ready | revision-requested | blocked | the gap tokens in step 1 and 2,
 with the canonical record for ready.
@@ -595,16 +615,20 @@ E28. Methods (after line 27), three branches, after the guide load (B3):
 
 - IF the work belongs to an initiative or a typed project and the guide at the
   page's binding is not loaded this session, load its
-  `references/typed-design.md` and `references/typed-design-initiative.md` at
-  the binding `presentation-html`'s `references/demistify.md` selects (K11),
-  and return the CLI address and the initiative root.
+  `references/typed-design.md` at the binding `presentation-html`'s
+  `references/demistify.md` selects (K11), and in an initiative also its
+  `references/typed-design-initiative.md`; return the CLI address from that
+  binding's entry guide `authoring/SKILL.md` and, in an initiative, the
+  initiative root [B-N2].
 - IF the work belongs to an initiative, run `initiative status` and return what
   is ready now, what blocks the most open work and what is built but not
-  accepted. Take ready work in the status's order, and start no work in a
-  higher-numbered project while a lower-numbered project has open `core` work,
-  unless a dependency or the owner says otherwise (S10). A `core` deliverable
-  with no steps needs `plan-implementation` before any build **[next
-  Demistify]**. Cite the status when you report to the owner.
+  accepted. Take ready work in the status's order, and start no deliverable's
+  build in a higher-numbered project while a lower-numbered project has open
+  `core` work, unless a dependency or the owner says otherwise (S10);
+  designing a later project at the depth its number gives it is not held by
+  this [A-N2]. A `core` deliverable with no steps needs `plan-implementation`
+  before any build; [Demistify 1.34.1+] the status lists it under "Needs a
+  plan". Cite the status when you report to the owner.
 - IF a project needs its design, use `design-specification` and the phases
   after it, at the depth its number gives it **[Q1]**, and return each phase's
   result.
@@ -613,10 +637,13 @@ E28. Methods (after line 27), three branches, after the guide load (B3):
 
 E29. Methods, before the commissioning branches (M-d), a bright line:
 
-> Before any commission inside an initiative or typed project, name the
-> deliverable the work belongs to. IF no deliverable covers it, add the row
-> first **[Q8]**: a `core` deliverable scoping the existing rules the work
-> touches, or the missing rule through `design-specification` first.
+> Before any build commission (an Implementer or Verifier, or a build fix)
+> inside an initiative or typed project, name the deliverable the work belongs
+> to. IF no deliverable covers it, add the row first **[Q8]**: a `core`
+> deliverable scoping the existing rules the work touches, or the missing rule
+> through `design-specification` first; then its plan, and a design review of
+> the cut when it adds rules, before the commission [A-N1]. Design, review and
+> evidence commissions name the project instead [A-N3].
 > Rationalization blocked: "it's a small fix, the row can come later."
 
 E30. Methods, the Implementer branch (line 29) [B15]: the commission's files
@@ -668,7 +695,8 @@ names".
 
 | Owner | What this set depends on, or what was found there | Effect if unchanged |
 | --- | --- | --- |
-| `sunstack-dev/shared-references/design-documents.md` | meaning of initiative, project, deliverable (163-167, one levels sentence at 2168d5b9); fact home (29); `:20` is the single home for the guide load (R2); `:171` hand-lists ids instead of the brief (R5); `:32` "only `core` work gets need … records" conflicts with depth by number [A6] | K11's v2 loads carry R2 meanwhile; R5 stays for non-Lead handoffs; `:32` needs "a project held by its number may hold need records" before run 1's E4 lands |
+| `sunstack-dev/shared-references/design-documents.md` | meaning of initiative, project, deliverable (163-167, one levels sentence at 2168d5b9); fact home (29); `:20` is the single home for the guide load (R2); `:171` hand-lists ids instead of the brief (R5) | K11's v2 loads carry R2 meanwhile; R5 stays for non-Lead handoffs |
+| `sunstack-dev/shared-references/design-documents.md:32`, a named dependency lifted from the non-goals [A6] | "only `core` work gets need, rule, realization and check records" conflicts with depth by number; the one-line change: "only `core` work gets rule, realization and check records; a project held by its number may hold need records" | gates run 1 (Coordination); E4 cannot land without it |
 | `sunstack-dev/shared-references/canonical-implementation-plan.md` | the plan record and home (K13); `:67` fixed in PR 239; `:61` "project" for repository root (R12) | none after PR 239 for `:67`; R12 stays |
 | `presentation-html` | component choice (K4); `references/options-and-decisions.md:15` adds a native choice for any owner answer, not scoped to untyped pages (M-a); no route or chooser row for an initiative overview page (R8) | a page author can still hand-write a choice in a typed tree; E31 covers only the Lead's own decisions |
 | `presentation-show-worklog` | routes owner decisions to a hand-written choice (M-a, `SKILL.md:21,42`) | as above |
@@ -677,24 +705,28 @@ names".
 | v1 `shared-references/design-documents.md:132` and the hosts | "The Markdown carries the complete design" loads beside sunstack-dev's rule when v1 is installed (M-b) | two rules load until v1 is disabled where v2 runs, an owner and host call |
 | Cross-plugin principle citations | v2 cites `sunstack-dev` principles through the base dependency, against "a cited principle ships in the same plugin" [B18] | a convention for the plugin owner; this set follows existing practice |
 | owner's global instructions | design-mode write list (Q6 a); "the Lead writes it under `docs/specs/<spec>/plans/`" | Q6 (a) needs `docs/initiatives/`; the plan-home sentence goes stale (plans live in the project's `plans/`) |
-| Demistify | 1.34.0 hosted (initiative commands, `typed-design-initiative.md`, `ex-initiative-overview`) [B1]; the next release's "ready now" order and no-steps state (A9) [A3, B2]; qualified ids in record links (A4); placement-aware link rule (K15) | the taught initiative commands fail on the current hosted binding; E24 step 5's completion and E28's no-steps note need the next release |
+| Demistify | 1.34.0, publishing and not yet hosted (initiative commands, `typed-design-initiative.md`, `ex-initiative-overview`) [B1, B-N3]; Demistify 1.34.1+ (PR 229: "ready now" by number, "Needs a plan") (A9) [A3, B2]; qualified ids in record links (A4); placement-aware link rule (K15) | the taught initiative commands fail until 1.34.0 is hosted; the [Demistify 1.34.1+] text in E24 step 5 and E28 reads a list that 1.34.0 does not print |
 
 ## Coordination
 
-- Base: `skills/initiative-vocabulary`, PR 239, open, now at 2168d5b9 (plan
-  contract fixed, levels sentence, README floor 1.34.0 at d093a481). This set
+- Base: `skills/initiative-vocabulary`, PR 239, open, now at 11f4826a (plan
+  contract: dependencies from their records at 2168d5b9, a one-deliverable
+  plan admits only its own checks at 11f4826a; levels sentence; README floor
+  1.34.0 at d093a481). This set
   was branched from 53f2de4a and sits on
   `skills/initiative-design-and-plan-design`; it holds only this folder, so it
   needs no rebase before review. The independent review blocked PR 239's ship
   on its findings 4, 7 and 9; 2168d5b9 answers 4 and the base-reference half
   of 7.
-- Implementation runs start when all of these hold: the owner has answered
+- Run gate. Every run starts when all of these hold: the owner has answered
   Q1, Q6, Q8 and Q9; PR 239 is merged (or the runs branch from it); Demistify
-  1.34.0 is hosted at the binding the skills use [B1]. Runs 5 and 6 also wait
-  for the Demistify release that orders "ready now" by number and names the
-  no-steps state (A9), or they ship with that text marked and the gap listed.
-- The eval runs against the hosted 1.34.0 binding, or a named source-preview
-  build if run earlier.
+  1.34.0, publishing now, is hosted at the binding the skills use [B1]. Run 1
+  also waits for the `design-documents.md:32` change in sunstack-dev [A6].
+  Runs 5 and 6 carry the [Demistify 1.34.1+] text: they ship once 1.34.1+ is
+  hosted, or ship earlier with that text marked and the gap listed in their
+  changelog entry [A-N5].
+- The eval runs against the hosted binding at 1.34.1 or later, or a named
+  source-preview build if run earlier.
 - Pending edits on the same files: PR 239 (vocabulary) touches all five
   updated skills; no other open edits found.
 - Version and changelog land once, with run 5 (E26).
@@ -711,7 +743,9 @@ names".
 | --- | --- | --- |
 | 1 (ee1f62d2) | design review A (requirements, specification, generalization) | targeted-revision, revise-first; 13 candidates |
 | 1 (ee1f62d2) | design review B (trigger, calls, rule agreement, security, proof) | targeted-revision, revise-first; 18 candidates |
-| 3 | corrections below; not yet re-reviewed | proposed |
+| 3 (08823999) | design review A, round 2 | targeted-revision, converging; 6 open (A6, A-N1 to A-N5) |
+| 3 (08823999) | design review B, round 2 | targeted-revision, converging; 4 open (B5, B-N1 to B-N3), B-N4 an observation |
+| 4 | round-2 corrections below; reviewer B: the remaining items can be checked at their anchors | proposed |
 
 Mapping of each finding at revision 3 (closed: taken in as proposed or already
 closed by revision 2 or PR 239; changed: corrected differently from the
@@ -733,7 +767,7 @@ smallest fix, with the reason; owner question: needs the owner):
 | A12 obligation 18 vs E13 condition | closed | obligation 24, E17 |
 | A13 Q2 to Q5 not owner choices; Q6(b) discoverable | closed: Q2 to Q4 in rev. 2, Q5 as K15, Q6(b) settled from code | Closed table, Q6 |
 | B1 initiative support unreleased | closed | requirements evidence, Coordination, dependencies, eval binding |
-| B2 `planned` and "ready now" | changed: written against the library change the Demistify Lead is making (A9), marked [next Demistify] | E24 step 5, E28 |
+| B2 `planned` and "ready now" | changed: written against the library change the Demistify Lead is making (A9), marked [Demistify 1.34.1+] since revision 4 | E24 step 5, E28 |
 | B3 CLI reached by no load | closed | K11, E2, E21, E24 step 1, E28 |
 | B4 plan files and tests vs Implementer | owner question | Q9, E13, E24, E25, E40 |
 | B5 "slice" cutover | closed | E35, E37, E38, E25, terms in the specification |
@@ -750,3 +784,19 @@ smallest fix, with the reason; owner question: needs the owner):
 | B16 product-workflow keep cites adoption | closed | `skill-verification.md` |
 | B17 steering claims named failures | closed | root topics, steering row |
 | B18 cross-plugin citation | closed as an observation for the plugin owner | dependencies table |
+
+Round 2 on revision 3, at revision 4:
+
+| Item | State | Where |
+| --- | --- | --- |
+| A-N2 S10 forbids design work Q1(b) allows | closed: scoped to builds | S10, obligation 19, E28 |
+| A-N3 S9 requires a deliverable before design-stage commissions | closed: scoped to build commissions; design, review and evidence commissions name the project | S9, obligation 25, E29 |
+| A-N1 a new `core` deliverable's plan and review | closed | Q8(a) costs, obligation 25, E29 |
+| A6 `design-documents.md:32` | closed: a named sunstack-dev dependency in the run gate, lifted from the non-goals | Coordination, dependencies table, requirements non-goals |
+| A-N4 Q1(b)'s gate not observable on 1.34.0 | closed | Q1(b) costs |
+| A-N5 two run gates | closed: one gate, one marker wording | Coordination, requirements "What stays open", marker in the header of each part |
+| B5 two "slice" homes left | closed | E35 (line 197's first sentence, `artifact-and-self-review.md:5`) |
+| B-N1 prerequisite checks vs canonical `:67` | closed by PR 239 at 11f4826a | Q7 row, K13, Coordination |
+| B-N2 CLI address lives in the entry guide | closed | K11, E2, E21, E24 step 1, E28 (initiative root scoped to an initiative) |
+| B-N3 guide baseline; migrate gone from the release | closed | K6, sensitive surfaces, component allocation baseline, A4 citation dropped, "publishing" |
+| B-N4 no-steps comes as a list, not a state | closed | A9, the [Demistify 1.34.1+] marker, E24 step 5, E28, requirements evidence |
