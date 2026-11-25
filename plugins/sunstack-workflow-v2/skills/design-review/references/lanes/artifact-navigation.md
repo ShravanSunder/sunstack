@@ -22,7 +22,7 @@ Read from the entry artifact or labeled record as a fresh program designer or pl
 - verify deeper files correspond to real capability, ownership, protocol, domain, or consumer/change boundaries;
 - follow each `core` rule's links to its needs, realization and planned check without path guessing.
 
-For a milestone page, verify that each Map node and Walkthrough stop reaches the record or section it names, and that each record has one home: its record, placed on the page by id, never restated. Check the page itself for visible group purpose, not only a well-shaped navigation tree.
+For a project page, verify that each Map node and Walkthrough stop reaches the record or section it names, and that each record has one home: its record, placed on the page by id, never restated. Check the page itself for visible group purpose, not only a well-shaped navigation tree.
 
 Good: one readable entry, explicit routes to deeper contracts, optional evidence, and no duplicated authority.
 

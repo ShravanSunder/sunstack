@@ -1,10 +1,10 @@
 # Reviewing the Four-Document Design
 
-This reference owns `four-document-design` mode judgment: the whole milestone, its typed records and its page.
+This reference owns `four-document-design` mode judgment: the whole project, its typed records and its page.
 
 Four-document design review independently repeats load-bearing local checks; it does not trust author self-checks or prior local review as the only evidence.
 
-Before integration checks, MUST load `sunstack-dev/shared-references/design-documents.md` and return the milestone's need, rule, realization, planned-check, decision and assumption records and the page sections that explain them. Then MUST load `reviewing-specification.md` and return its complete specification-mode judgment of the needs and rules. Then MUST load `reviewing-program-design.md` and return its complete program-mode judgment of the realizations and the page's how part. Then MUST load `reviewing-verification-design.md` and return its complete judgment of the planned checks against the rules and realizations. Four-document design judgment consumes the three local results; it may not replace them with an author summary or a prior-review summary.
+Before integration checks, MUST load `sunstack-dev/shared-references/design-documents.md` and return the project's need, rule, realization, planned-check, decision and assumption records and the page sections that explain them. Then MUST load `reviewing-specification.md` and return its complete specification-mode judgment of the needs and rules. Then MUST load `reviewing-program-design.md` and return its complete program-mode judgment of the realizations and the page's how part. Then MUST load `reviewing-verification-design.md` and return its complete judgment of the planned checks against the rules and realizations. Four-document design judgment consumes the three local results; it may not replace them with an author summary or a prior-review summary.
 
 A `core` slice with no need or rule records is a blocker-level finding routed to `design-specification`; a `core` rule with no planned check, which the Demistify check reports, is one routed to `design-verification`. Do not create or edit records during review. Downstream findings may still be reported when the available sources support them, but the review cannot be `ready`.
 
@@ -68,7 +68,7 @@ A rule can serve needs in several capabilities and has one home; one homed elsew
 - a reached rule that needs new structure and has no realization: `design-program`;
 - a reached rule with no planned check: `design-verification`.
 
-For example, in a job-submission milestone, `billing-export` reaches R7, R8 and R9, but the Demistify check reports R7 and R8 with no planned check: the line stops at Verification Design, and the finding names finance's whole part of the system as unproven. `scheduling` stops earlier, at U3, which no rule names; nothing downstream can realize or prove U3 without a rule, so file no separate findings against the later kinds for the same missing link.
+For example, in a job-submission project, `billing-export` reaches R7, R8 and R9, but the Demistify check reports R7 and R8 with no planned check: the line stops at Verification Design, and the finding names finance's whole part of the system as unproven. `scheduling` stops earlier, at U3, which no rule names; nothing downstream can realize or prove U3 without a rule, so file no separate findings against the later kinds for the same missing link.
 
 A line that ends at a recorded gap, such as home needs that are all unauthorized, is honest; report it only when it leaves an accepted need unrealized. When a per-rule finding and a capability finding name the same missing link, reduction merges them into the capability finding.
 

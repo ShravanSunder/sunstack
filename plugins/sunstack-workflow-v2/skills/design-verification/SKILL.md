@@ -9,7 +9,7 @@ Base dependency: locate `sunstack-dev:presentation-html` using the host's listed
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `sunstack-dev:practices-show-me-your-work` before phase work.
 
-A Verification Design is the Lead's plan for showing that one design's rules hold, written after Program Design as planned-check records on the same milestone page. The Specification already fixes what must be true and the reference it is judged against, in each rule's cases, and the Program Design exposes the seams where behavior can be seen. Each planned check decides which observation will tell a correct build from a wrong one, at the boundary where the wrong behavior is real, on which target, and what that leaves unverified. It is a plan. Nothing in it has been observed.
+A Verification Design is the Lead's plan for showing that one design's rules hold, written after Program Design as planned-check records on the same project page. The Specification already fixes what must be true and the reference it is judged against, in each rule's cases, and the Program Design exposes the seams where behavior can be seen. Each planned check decides which observation will tell a correct build from a wrong one, at the boundary where the wrong behavior is real, on which target, and what that leaves unverified. It is a plan. Nothing in it has been observed.
 
 Four readers depend on it. The owner reads each check's "proven by" line. Review follows each rule through its seam to a check. The plan gives each slice the checks in its deliverable. The Verifier challenges the checks before the build and observes them after, so every check must be concrete enough to challenge.
 
@@ -114,7 +114,7 @@ decision-needed
 evidence-blocked
 ```
 
-- `locally-ready`: no item in Not ready while holds. Return the milestone page, handed over as `design-documents.md` says, and its planned-check record ids, each rule's deciding check or named limit, the journeys still needed with their lifetimes, the tests reused, the design check and rendering results, and the statement that nothing has been observed or reviewed. Lead with the "proven by" lines.
+- `locally-ready`: no item in Not ready while holds. Return the project page, handed over as `design-documents.md` says, and its planned-check record ids, each rule's deciding check or named limit, the journeys still needed with their lifetimes, the tests reused, the design check and rendering results, and the statement that nothing has been observed or reviewed. Lead with the "proven by" lines.
 - `specification-gap`: a rule lacks the observable outcome, reference, threshold or target constraint its check needs. Return each rule, what it lacks and the evidence. Carry any Program Design gaps in the same payload, because a changed rule can change its seam.
 - `program-design-gap`: no seam lets an observation see a rule's outcome. Return each rule, the seam its realization names, what the observation would need to see and the evidence.
 - `decision-needed`: a limit would leave a required observation undone or weaken it, or the planned target needs access, a device or an account only the owner can grant. IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief.

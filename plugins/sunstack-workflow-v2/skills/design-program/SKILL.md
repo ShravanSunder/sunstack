@@ -58,7 +58,7 @@ decision-needed
 deferred
 ```
 
-A `locally-ready` result includes the milestone page with its realization and decision record ids; the confirmed goal boundary and accepted requirements set from `design-specification`; current-system, constraint, platform, and external source identities with current applicability; structural model and call-path deltas; the design check result; author self-check; required independent local-review coverage; debt/gaps; and explicit non-acceptance. These are returned workflow state, not page sections. The binding table itself is page content.
+A `locally-ready` result includes the project page with its realization and decision record ids; the confirmed goal boundary and accepted requirements set from `design-specification`; current-system, constraint, platform, and external source identities with current applicability; structural model and call-path deltas; the design check result; author self-check; required independent local-review coverage; debt/gaps; and explicit non-acceptance. These are returned workflow state, not page sections. The binding table itself is page content.
 
 A bounded scope decision, design excerpt, or chat explanation without that complete return cannot be `locally-ready`, even when its selected structure is sound.
 
@@ -80,7 +80,7 @@ decision-needed    -> stop with the brief from owner-decision-brief.md,
 evidence-blocked | deferred -> stop with the exact reason
 ```
 
-Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A Verification Design handoff includes the milestone page, the rule and realization record ids, confirmed goal boundary and accepted requirements set, the proof seams and their gaps, and constraints/non-goals. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct design-program invocation carries no cycle budget.
+Before recommending a skill, inspect that destination's declared inputs and return a compact pointer-based handoff containing relevant artifact and governing-source pointers, the phase result and current boundary status, the exact gap or decision, and why that destination owns the next work. A Verification Design handoff includes the project page, the rule and realization record ids, confirmed goal boundary and accepted requirements set, the proof seams and their gaps, and constraints/non-goals. Exclude copied artifacts, unrelated implementation history, and orchestration counters. A direct design-program invocation carries no cycle budget.
 
 ## Workflow
 
@@ -264,11 +264,11 @@ Completion: the current artifact has exact passes and gaps and records the selec
 
 ### 17. Obtain fresh local review when required
 
-Call `design-review` using `classify-review-requirement` with: requested future mode `program-only`; the milestone page and its need, rule, realization and decision record ids; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
+Call `design-review` using `classify-review-requirement` with: requested future mode `program-only`; the project page and its need, rule, realization and decision record ids; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
 
 When required, invoke `design-review` separately in `program-only` mode with fresh context and read-only authority, carrying:
 
-- the milestone page and its need, rule, realization and decision record ids;
+- the project page and its need, rule, realization and decision record ids;
 - governing sources, authority states, and coverage;
 - confirmed goal boundary and accepted requirements set;
 - constraints, non-goals, risk predicates, and claimed proof evidence or gaps;
@@ -281,7 +281,7 @@ Completion: the permitted independent review coverage and parent-verified correc
 
 ### 18. Return the local result
 
-Return the milestone page, handed over as `design-documents.md` says, and its realization and decision record ids; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the design check result; self-check; independent review; debt/gaps; and non-acceptance.
+Return the project page, handed over as `design-documents.md` says, and its realization and decision record ids; confirmed goal boundary and accepted requirements set; current-system, constraint, platform, and external source identities with current applicability; structural and call-path-delta maps; the design check result; self-check; independent review; debt/gaps; and non-acceptance.
 
 IF returning a substantial program design in chat, use the `presentation-*` skill matching the current surface to render the selected component, call, state, or failure views before the compact result summary; honor an exact user-requested format instead. The records and the page remain the source of truth.
 

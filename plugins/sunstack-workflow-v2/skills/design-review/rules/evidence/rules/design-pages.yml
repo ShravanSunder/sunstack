@@ -1,4 +1,4 @@
-# An entity definition on the milestone page: an element whose own start tag has an
+# An entity definition on the project page: an element whose own start tag has an
 # id of E and digits. Each element is matched on its own start tag, never with
 # `stopBy: end`, so an ancestor of an id-bearing element is not itself a match.
 id: entity-element

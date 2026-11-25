@@ -2,7 +2,7 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.8.0 contains 44 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.8.1 contains 44 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
@@ -16,7 +16,7 @@ Frozen v1 resolves base files by locating the advertised `sunstack-dev:presentat
 
 ## Design source modes
 
-V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) hold each need, rule, realization, planned check, decision and assumption as a typed record and explain them on one milestone page, with visible capability groups, explained diagrams and shared navigation, through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
+V1 retains authoritative Markdown, including newly authored v1 records and optional HTML reading views. The [v2 design sources](../sunstack-workflow-v2/README.md) hold each need, rule, realization, planned check, decision and assumption as a typed record and explain them on one project page, with visible capability groups, explained diagrams and shared navigation, through [presentation-html](skills/presentation-html/SKILL.md). Its matching Demistify guide owns the API; source-preview support is distinct from published integration. V2 is available through its existing marketplace registration; installing it does not switch the default workflow or select a management topology.
 
 ## Namespace map
 

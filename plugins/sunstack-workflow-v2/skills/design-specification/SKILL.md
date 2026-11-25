@@ -9,7 +9,7 @@ Base dependency: locate `sunstack-dev:presentation-html` using the host's listed
 
 IF no work reference is in context and the task qualifies, open or resume the trace through `sunstack-dev:practices-show-me-your-work` before phase work.
 
-Requirements, Specification, Program Design, and Verification Design are separate kinds of meaning, each with its own record kind on one milestone page (`design-documents.md`):
+Requirements, Specification, Program Design, and Verification Design are separate kinds of meaning, each with its own record kind on one project page (`design-documents.md`):
 
 ```text
 Requirements (need records)
@@ -89,7 +89,7 @@ evidence-blocked
 deferred
 ```
 
-A `locally-ready` result includes the milestone page and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; the confirmed goal boundary; the accepted requirements set; load-bearing decisions; the `core` and `later` slices; author self-check; required independent local-review coverage; remaining gaps; and an explicit statement that design acceptance is not claimed. These are returned workflow state, not narrative sections in the specification.
+A `locally-ready` result includes the project page and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; the confirmed goal boundary; the accepted requirements set; load-bearing decisions; the `core` and `later` slices; author self-check; required independent local-review coverage; remaining gaps; and an explicit statement that design acceptance is not claimed. These are returned workflow state, not narrative sections in the specification.
 
 For an explicitly Requirements-only request, finish the need records and the page's why part and return `deferred` for Specification. Before that early return, state the Requirements reader question at Requirements altitude (affected people, their job, current pain and desired outcome), and apply the `capability map` row of the Required Why/What Views table to the needs. When that row fires, the map is the first view request, carrying that row's need fields. Then MUST load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` with those requests to return the document medium and any page proof, the selected medium, semantic-preservation result, actual visual check and exact generated-image/capability gap for that page, and compare the shown map with its table row before returning. This call does not run Specification-only entity or context predicates, writes no rule record, opens no downstream work, and must not invent a Specification, interface or internal component. Record the caller's authority to stop there, the consequence that Specification and Program Design are not ready, the exact visual or capability gap when one remains, and the condition for re-entering Specification work. Do not write rules or recommend `design-program`.
 
@@ -107,13 +107,13 @@ locally-ready -> recommend design-program
 decision-needed | evidence-blocked | deferred -> stop with the exact reason
 ```
 
-When unmade owner meaning blocks Requirements or Specification, use `sunstack-dev:discuss-pathfinding` and resume this phase with its clarified return. Pathfinding is not a separate next phase after `locally-ready`. Before recommending `design-program`, inspect its declared inputs and return a compact pointer-based handoff containing the milestone page and its need and rule record ids, confirmed goal boundary and accepted-requirements status, phase result, exact remaining gaps, and why structural How is next. Do not copy full artifacts, unrelated history, or orchestration counters. A direct design-specification invocation carries no cycle budget.
+When unmade owner meaning blocks Requirements or Specification, use `sunstack-dev:discuss-pathfinding` and resume this phase with its clarified return. Pathfinding is not a separate next phase after `locally-ready`. Before recommending `design-program`, inspect its declared inputs and return a compact pointer-based handoff containing the project page and its need and rule record ids, confirmed goal boundary and accepted-requirements status, phase result, exact remaining gaps, and why structural How is next. Do not copy full artifacts, unrelated history, or orchestration counters. A direct design-specification invocation carries no cycle budget.
 
 ## Workflow
 
 ### 1. Establish authority, audience, and artifact boundary
 
-Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create a new milestone's records and page beneath that home and return their exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
+Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create a new project's records and page beneath that home and return their exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
 
 MUST load `sunstack-dev/shared-references/design-documents.md` and return the need and rule records this run writes, the page sections that explain them, the ids downstream phases consume, and the design-item contents, nudge labels and ranking this run uses.
 
@@ -256,7 +256,7 @@ Apply any caller-supplied artifact-home policy first. Otherwise follow the repos
 
 Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal rules, observable contracts, failures, constraints, and proof.
 
-In a file-backed set, write the need and rule records, each subject's in its own file when the milestone has several (`design-documents.md`), then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's why and what sections: who is affected and why, the capability grouping, the entities readers could read differently, and the context a rule needs to be read correctly. The page shows each record by id and never restates it.
+In a file-backed set, write the need and rule records, each subject's in its own file when the project has several (`design-documents.md`), then use `sunstack-dev:presentation-html`, passing the reader's question and the record ids, to write the page's why and what sections: who is affected and why, the capability grouping, the entities readers could read differently, and the context a rule needs to be read correctly. The page shows each record by id and never restates it.
 
 Every link the page names resolves.<!-- D004 -->
 
@@ -274,15 +274,15 @@ Completion: the current artifact has a self-check result with exact passes and g
 
 ### 11. Obtain fresh local review when required
 
-Call `design-review` using its `classify-review-requirement` operation with: requested future mode `specification-only`; the milestone page and its need and rule record ids; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
+Call `design-review` using its `classify-review-requirement` operation with: requested future mode `specification-only`; the project page and its need and rule record ids; scope and claimed semantic effect; governing-source coverage; matched material-risk predicates; and `caller requirement: required | none` (default `none`). Consume the `review-required | non-substantial` result, decision branch, basis, source coverage, caller requirement, and preserved identities.
 
-When `review-required`, invoke `design-review` separately in `specification-only` mode with fresh context and read-only authority, carrying the milestone page and its need and rule record ids, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, proof claims or gaps, and `owner-message export: path | none`. Route accepted Why/What findings back here and follow `design-review`'s bounded review-and-correction-round policy for its convergence rule, parent verification, and any later review.
+When `review-required`, invoke `design-review` separately in `specification-only` mode with fresh context and read-only authority, carrying the project page and its need and rule record ids, governing sources, confirmed goal boundary, accepted requirements set, constraints, non-goals, proof claims or gaps, and `owner-message export: path | none`. Route accepted Why/What findings back here and follow `design-review`'s bounded review-and-correction-round policy for its convergence rule, parent verification, and any later review.
 
 Completion: the permitted independent review coverage and parent-verified corrections are ready under `design-review`'s policy, or the exact `non-substantial` basis or block is recorded.
 
 ### 12. Return the local result
 
-Return the milestone page, handed over as `design-documents.md` says, and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; `core` and `later` slices; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
+Return the project page, handed over as `design-documents.md` says, and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; `core` and `later` slices; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
 
 IF returning a substantial specification in chat and problem, consumer, authority, journey, or requirement-to-proof relationships are non-obvious, use the `presentation-*` skill matching the current surface to render only those Why/What relationships; honor an exact user-requested format instead. Keep normative meaning in the records and route internal component, call, state, or failure-mechanism views to `design-program`.
 
