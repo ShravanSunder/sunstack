@@ -162,7 +162,7 @@ Call paths remain Program Design meaning. `presentation-html`'s `views.md` owns 
 
 ## Plans and deliverables
 
-A typed design plan has three levels: an initiative is the whole plan, in `initiative.ts`; it holds projects, each one design folder (`docs/initiatives/<initiative>/projects/<project>/`) with its own records and page; each project holds deliverables. Each project has a number, the owner's order: every project numbered 1 runs side by side, projects numbered 2 come after them, then 3. Dependencies run only between deliverables: a deliverable may depend on deliverables in its own or any other project, projects have no dependencies, and the initiative check warns when a deliverable depends on one in a higher-numbered project. The guide's `typed-design-initiative.md` owns the syntax, files and commands.
+A typed design plan has three levels: an initiative, the whole plan in `initiative.ts`, holds numbered projects; each project is one design with its own records and page, and holds deliverables. The guide's `typed-design-initiative.md` owns the order rule, dependencies, files and commands.
 
 Several deliverables share one design; each deliverable names the needs, rules, realizations and checks in its scope. A deliverable creates no new design fact. The actual caller owns delivery sequencing; this reference adds no orchestration stage. `canonical-implementation-plan.md` owns the plan's shape and home. V1's historical planner keeps its archive-owned contract.
 
