@@ -75,7 +75,7 @@ assert_file_not_contains "${PRINT_OUT}" "--profile"
 assert_file_not_contains "${PRINT_OUT}" "--ignore-user-config"
 assert_file_contains "${PRINT_OUT}" "--sandbox"
 assert_file_contains "${PRINT_OUT}" "read-only"
-assert_file_contains "${REVIEWER_HOME}/config.toml" 'base_url = "http://127.0.0.1:8787/v1"'
+assert_file_contains "${REVIEWER_HOME}/config.toml" 'base_url = "http://127.0.0.1:19741/v1"'
 assert_file_contains "${REVIEWER_HOME}/config.toml" "hooks = false"
 assert_file_contains "${REVIEWER_HOME}/config.toml" "plugin_hooks = false"
 assert_file_contains "${REVIEWER_HOME}/hooks.json" '{"hooks":{}}'

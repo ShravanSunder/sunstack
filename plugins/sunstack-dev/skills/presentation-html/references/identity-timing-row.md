@@ -1,6 +1,6 @@
 # Combined identity and timing row
 
-This reference owns a compact status, progress or phase comparison across records. Expected inputs: the records' supplied identity, status, check counts and timing values. Return: the table's columns, which values get a compact visual and which stay text, and the shared phase names, order and scale.
+This reference owns a compact status, progress or phase comparison across records. Expected inputs: the records' supplied identity, status, check counts and timing values. Return: the table's columns, which values get a compact visual and which stay text, and the shared phase names, order and scale. For a status block, `work-account-forms.md` owns the rows and columns; this reference returns only which values get a compact visual.
 
 Keep status, count and timing distinct: status is authored meaning, a fraction reports completed work, and timing values describe total duration or phase share. Exact supplied values stay visible. A complete count reports completion; the authored status communicates outcome.
 
