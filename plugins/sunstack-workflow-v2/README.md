@@ -33,7 +33,7 @@ The packet union accepts only lead, implementer, operator and checker. Checker v
 
 ## Scope
 
-The four document meanings remain distinct, each as its own typed record kind (need, rule, realization, planned check) on one project page. Records hold the text; the page explains them and can use prose, diagrams, tables, Trees, choices, comparisons and open discussion where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. Typed records need Demistify 1.32.0 or later. Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
+The four document meanings remain distinct, each as its own typed record kind (need, rule, realization, planned check) on one project page. Records hold the text; the page explains them and can use prose, diagrams, tables, Trees, choices, comparisons and open discussion where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. Typed records need Demistify 1.34.0 or later. Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
 
 ## Role and files commissioning
 
