@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Initiatives, deliverables and one plan each: the v2 skill change</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="initiative-design-and-plan"></ex-nav>
+  <ex-document id="initiative-design-and-plan">
+    <h1>Initiatives, deliverables and one plan each: the v2 skill change</h1>
+    <p>This proposal teaches five <code>sunstack-workflow-v2</code> skills (<code>design-specification</code>, <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>, <code>role-lead</code>) the model the owner settled on 25 November: an initiative orders numbered projects, each project is one four-part design, and each project is cut into deliverables that select its records and add none. It also creates a v2 <code>plan-implementation</code> skill that writes one plan per deliverable, naming each step in the deliverable and explaining the same steps in the plan, and changing both together when it re-plans. The Lead orders work from <code>initiative status</code> and records each build's results and acceptance on the deliverable.</p>
+    <ex-mermaid id="model" label="Which v2 skill writes what, from initiative to recorded proof"><script type="text/plain">
+flowchart TD
+  initiative["Initiative<br/>project numbers, shared decisions<br/>role-lead, with the owner"]
+  project["Project: one design<br/>needs, rules: design-specification<br/>realizations: design-program<br/>checks: design-verification"]
+  review["Four-document review<br/>design-review"]
+  deliverable["Deliverable<br/>scope over the project's records<br/>steps and dependencies: plan-implementation"]
+  plan["Plan page<br/>explains the same steps<br/>plan-implementation"]
+  build["Build and checks<br/>Implementer and Verifier"]
+  proof["Results and acceptance<br/>recorded on the deliverable by role-lead"]
+  initiative --> project
+  project --> review
+  project --> deliverable
+  review --> plan
+  deliverable --> plan
+  plan --> build
+  build --> proof
+  proof --> deliverable
+</script></ex-mermaid>
+    <p>Still open: seven owner questions. The four that change the edits are who writes a deliverable's scope (Q2), whether depth follows the project number (Q1), where a project lives (Q6) and which plan contract applies (Q7); each has options and a recommendation in the skill design. Nothing has been reviewed or evaluated, and no skill file has changed.</p>
+    <p><a href="#requirements">Why this change</a> · <a href="#specification">What the skills must do</a> · <a href="#skill-design">Owner questions, runs and edits</a> · <a href="#skill-verification">How each part is shown</a></p>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="review-initiative-design-and-plan" title="Review the initiative and plan change" description="The owner's model, what the skills must do, the open questions and edits, and how each part is shown.">
+    <ex-step to="requirements">The owner's settled model, the evidence read from Demistify and the current skills, and what stays out of scope.</ex-step>
+    <ex-step to="specification">Nineteen obligations and eight standards, each standard tested on another setting and on a bad choice it never names.</ex-step>
+    <ex-step to="skill-design">Seven owner questions with options, the component allocation from the guide, six runs and edits E1 to E28.</ex-step>
+    <ex-step to="skill-verification">Which parts a review, an eval or a trigger trial shows, and what stays unverified.</ex-step>
+  </ex-presentation>
+</body>
+</html>
