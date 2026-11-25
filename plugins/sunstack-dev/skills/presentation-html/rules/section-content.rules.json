@@ -124,5 +124,39 @@
       }
     },
     "severity": "warn"
+  },
+  "M006": {
+    "name": "presentation-html.long-callout",
+    "evidence": "html_callout",
+    "decision": {
+      "start": "island",
+      "steps": {
+        "island": {
+          "mechanical_check": {
+            "tool": "piece_count",
+            "field": "islands",
+            "bound": {
+              "greater_than": 0
+            }
+          },
+          "yes": "uncertain",
+          "no": "long"
+        },
+        "long": {
+          "mechanical_check": {
+            "tool": "word_count",
+            "field": "html_prose",
+            "bound": {
+              "greater_than": 150
+            }
+          },
+          "yes": {
+            "finding": "{{word_count:html_prose}}-word callout. Worth checking: a callout holds one answer. If it gathers several items, such as pieces of work, decisions or findings, cut it to the answer and give the items a table or their own view (references/work-account-forms.md for a status block); one answer with its reason and cost may stay."
+          },
+          "no": "pass"
+        }
+      }
+    },
+    "severity": "warn"
   }
 }

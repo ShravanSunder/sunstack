@@ -1,6 +1,18 @@
+import { execFileSync } from "node:child_process";
+import { writeFileSync } from "node:fs";
+import path from "node:path";
 import { afterEach, expect, test } from "vitest";
-import { lineStartingWith, lintGeneratedPage } from "#test-support/presentation-html-lint";
-import { cleanupRulebookFixtures } from "#test-support/sunstack-process";
+import {
+  lineStartingWith,
+  lintGeneratedPage,
+  presentationHtmlReportSchema,
+  runPresentationHtmlLint,
+} from "#test-support/presentation-html-lint";
+import {
+  cleanupRulebookFixtures,
+  createRulebookFixture,
+  readJson,
+} from "#test-support/sunstack-process";
 
 afterEach(cleanupRulebookFixtures);
 
@@ -162,3 +174,189 @@ test("a table with more than 20 rows nudges with its row count, in HTML and in i
     report.results.filter((result) => result.marker === "M004" || result.marker === "M005"),
   ).toHaveLength(4);
 });
+
+interface CalloutCase {
+  readonly calloutId: string;
+  readonly markup: string;
+  readonly expectedWordCount?: number;
+}
+
+const tenWordItems = (count: number): string =>
+  Array.from({ length: count }, () => `<li>${tenWords}</li>`).join("");
+
+const calloutCases: readonly CalloutCase[] = [
+  {
+    calloutId: "long-plain-callout",
+    markup: `<ex-callout id="long-plain-callout" tone="note"><p>${proseWords(15)} Next.</p></ex-callout>`,
+    expectedWordCount: 151,
+  },
+  {
+    calloutId: "limit-plain-callout",
+    markup: `<ex-callout id="limit-plain-callout" tone="note"><p>${proseWords(15)}</p></ex-callout>`,
+  },
+  {
+    calloutId: "callout-with-list",
+    markup: `<ex-callout id="callout-with-list" tone="note"><p>${ninetyWords}</p><ul>${tenWordItems(7)}</ul></ex-callout>`,
+    expectedWordCount: 160,
+  },
+  {
+    calloutId: "callout-with-table",
+    markup: `<ex-callout id="callout-with-table" tone="note"><p>${proseWords(14)}</p>${htmlTable("callout-table", 6)}</ex-callout>`,
+  },
+  {
+    calloutId: "bare-text-callout",
+    markup: `<ex-callout id="bare-text-callout" tone="note">${proseWords(15)} Next.</ex-callout>`,
+    expectedWordCount: 151,
+  },
+  {
+    // The title counts as prose: CLI 0.21.1 reads a text attribute as its words plus one.
+    calloutId: "titled-callout",
+    markup: `<ex-callout id="titled-callout" title="Where it stands" tone="note"><p>${proseWords(15)}</p></ex-callout>`,
+    expectedWordCount: 154,
+  },
+];
+
+test("a callout with more than 150 prose words nudges with its word count; table text is not prose", () => {
+  // Arrange: one section per callout, each with a picture so the section nudge stays quiet.
+  const bodySections = calloutCases.map(
+    (calloutCase) =>
+      `<h2 id="${calloutCase.calloutId}-section">${calloutCase.calloutId}</h2>\n<img src="flow.png" alt="Flow">\n${calloutCase.markup}`,
+  );
+
+  // Act: lint the generated page through the pinned CLI.
+  const { output, report, lines } = lintGeneratedPage(bodySections);
+
+  // Assert: each callout's own result, its count, and that no model request was sent.
+  expect(output.status, output.stderr).toBe(0);
+  expect(report.usage.model_requests).toBe(0);
+  for (const calloutCase of calloutCases) {
+    const calloutLine = lineStartingWith(lines, `<ex-callout id="${calloutCase.calloutId}"`);
+    const result = report.results.find(
+      (candidate) => candidate.marker === "M006" && candidate.first_line === calloutLine,
+    );
+    const finding = report.findings.find(
+      (candidate) =>
+        candidate.rule === "presentation-html.long-callout" && candidate.line === calloutLine,
+    );
+    if (calloutCase.expectedWordCount === undefined) {
+      expect(result?.outcome, calloutCase.calloutId).toBe("pass");
+      expect(finding, calloutCase.calloutId).toBeUndefined();
+    } else {
+      expect(result?.outcome, calloutCase.calloutId).toBe("finding");
+      expect(finding?.severity).toBe("warn");
+      expect(finding?.message, calloutCase.calloutId).toMatch(
+        new RegExp(`^${calloutCase.expectedWordCount}-word callout\\. Worth checking: a callout holds one answer\\.`),
+      );
+    }
+  }
+  expect(report.results.filter((result) => result.marker === "M006")).toHaveLength(
+    calloutCases.length,
+  );
+});
+
+test("a callout that holds a Markdown island is left uncertain, because its island text is not read as the callout's prose", () => {
+  // Arrange: a short answer above an island table, a callout whose island comes from a file,
+  // and a Markdown script placed directly in a callout.
+  const bodySections = [
+    `<h2 id="island-table-section">Island table</h2>\n<img src="flow.png" alt="Flow">\n<ex-callout id="island-table-callout" tone="note"><p>Five of nine services have moved.</p>${markdownIsland("callout-island-table", pipeTable(20))}</ex-callout>`,
+    `<h2 id="island-source-section">Island source</h2>\n<img src="flow.png" alt="Flow">\n<ex-callout id="island-source-callout" tone="note"><p>One answer.</p><ex-markdown id="callout-island-source" src="./status.md"></ex-markdown></ex-callout>`,
+    `<h2 id="bare-script-section">Bare script</h2>\n<img src="flow.png" alt="Flow">\n<ex-callout id="bare-script-callout" tone="note"><script type="text/markdown">\n${proseWords(30)}\n</script></ex-callout>`,
+  ];
+
+  // Act: lint the generated page through the pinned CLI.
+  const { output, report, lines } = lintGeneratedPage(bodySections);
+
+  // Assert: each callout stops at the island step as uncertain, with no long-callout finding.
+  expect(output.status, output.stderr).toBe(5);
+  expect(report.usage.model_requests).toBe(0);
+  for (const calloutId of [
+    "island-table-callout",
+    "island-source-callout",
+    "bare-script-callout",
+  ]) {
+    const calloutLine = lineStartingWith(lines, `<ex-callout id="${calloutId}"`);
+    const result = report.results.find(
+      (candidate) => candidate.marker === "M006" && candidate.first_line === calloutLine,
+    );
+    expect(result?.outcome, calloutId).toBe("uncertain");
+    expect(
+      report.findings.some(
+        (finding) => finding.rule === "presentation-html.long-callout" && finding.line === calloutLine,
+      ),
+      calloutId,
+    ).toBe(false);
+  }
+});
+
+// The page that prompted the long-callout nudge lives in a private project repository. Its
+// revisions are read from that repository's history, so no private page is committed here.
+const calloutCorpus = {
+  repository: process.env.SUNSTACK_CALLOUT_DEVELOPMENT_REPOSITORY,
+  page: process.env.SUNSTACK_CALLOUT_DEVELOPMENT_PAGE,
+};
+
+// Expected outcome of the page's status callout per revision. Label origin: the owner ruled the
+// 554-word wall (it should be a table) and accepted the 22-word replacement; the implementer
+// labelled the other revisions from their word counts against the 150-word starting limit.
+const statusCalloutRevisions: readonly { revision: string; expectedWordCount?: number }[] = [
+  { revision: "47f28d49a" },
+  { revision: "3ca6f11dc", expectedWordCount: 172 },
+  { revision: "a640c8cf0" },
+  { revision: "008204020", expectedWordCount: 180 },
+  { revision: "2206de00e", expectedWordCount: 419 },
+  { revision: "24bd54e31", expectedWordCount: 554 },
+  { revision: "97728805a" },
+];
+
+test.skipIf(calloutCorpus.repository === undefined && calloutCorpus.page === undefined)(
+  "PRIVATE FROZEN CORPUS: the long-callout nudge on seven real revisions of its prompting page (SKIPPED when neither SUNSTACK_CALLOUT_DEVELOPMENT_* input is supplied; fails on a partial input)",
+  () => {
+    // Arrange: extract each pinned revision of the private page into a fixture folder.
+    if (calloutCorpus.repository === undefined || calloutCorpus.page === undefined) {
+      throw new Error(
+        "Supply both SUNSTACK_CALLOUT_DEVELOPMENT_REPOSITORY and SUNSTACK_CALLOUT_DEVELOPMENT_PAGE",
+      );
+    }
+    const root = createRulebookFixture();
+    for (const { revision } of statusCalloutRevisions) {
+      const page = execFileSync("git", ["show", `${revision}:${calloutCorpus.page}`], {
+        cwd: calloutCorpus.repository,
+        encoding: "utf8",
+        maxBuffer: 16 * 1024 * 1024,
+      });
+      writeFileSync(path.join(root, `page-${revision}.html`), page);
+    }
+    const reportPath = path.join(root, "callout-report.json");
+
+    // Act: lint every revision through the pinned CLI.
+    const output = runPresentationHtmlLint(["--root", root, "--report", reportPath, root]);
+    const report = presentationHtmlReportSchema.parse(readJson(reportPath));
+
+    // Assert: the status callout's outcome and count per revision, and the one-decision keep case
+    // (a separate 172-word callout) firing on every revision.
+    expect(output.status, output.stderr).toBe(0);
+    expect(report.usage.model_requests).toBe(0);
+    for (const { revision, expectedWordCount } of statusCalloutRevisions) {
+      const file = `page-${revision}.html`;
+      const findings = report.findings.filter(
+        (finding) => finding.rule === "presentation-html.long-callout" && finding.file.endsWith(file),
+      );
+      const statusFinding = findings.find((finding) => finding.line === 15);
+      const statusResult = report.results.find(
+        (result) => result.marker === "M006" && result.file.endsWith(file) && result.first_line === 15,
+      );
+      if (expectedWordCount === undefined) {
+        expect(statusResult?.outcome, revision).toBe("pass");
+        expect(statusFinding, revision).toBeUndefined();
+      } else {
+        expect(statusFinding?.message, revision).toMatch(
+          new RegExp(`^${expectedWordCount}-word callout\\.`),
+        );
+      }
+      const keepCases = findings.filter(
+        (finding) => finding.line !== 15 && finding.message.startsWith("172-word callout."),
+      );
+      expect(keepCases, revision).toHaveLength(1);
+    }
+  },
+);

@@ -51,12 +51,13 @@ test("active presentation-html rules validate with their own released CLI pin an
   const checked = runPresentationHtmlLint(["--check"]);
   const listed = runPresentationHtmlLint(["--rules"]);
 
-  // Assert: exactly the picture, section and table nudges, all mechanical warnings.
+  // Assert: exactly the picture, callout, section and table nudges, all mechanical warnings.
   expect(checked.status, checked.stderr).toBe(0);
   expect(listed.status, listed.stderr).toBe(0);
   expect(ruleList.parse(JSON.parse(listed.stdout))).toEqual(
     [
       "owner-decision.picture-before-control",
+      "presentation-html.long-callout",
       "presentation-html.section-picture",
       "presentation-html.island-section-picture",
       "presentation-html.long-table",

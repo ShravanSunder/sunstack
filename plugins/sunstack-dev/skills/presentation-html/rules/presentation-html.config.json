@@ -252,6 +252,20 @@
             "rule": "markdown-table-row"
           }
         }
+      },
+      "html_callout": {
+        "rule": "html-callout",
+        "max_chars": 200000,
+        "fields": {
+          "html_prose": {
+            "from": "inside",
+            "kind": "html_prose"
+          },
+          "islands": {
+            "from": "inside",
+            "rule": "callout-markdown-island"
+          }
+        }
       }
     }
   },
