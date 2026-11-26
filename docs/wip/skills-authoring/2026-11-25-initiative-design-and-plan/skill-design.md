@@ -736,7 +736,9 @@ names".
 | Run | State |
 | --- | --- |
 | 1 to 3 | implemented (34f4e2e0, ac6cdcdb, 38aae5f2; Lead correction to E1 and E10 at integration) |
-| 4 to 6 | accepted-to-implement (25 Nov); in progress |
+| 4 | implemented (0466aa60) |
+| 5 | implemented (73443e68; step 1 returns `revision-requested` to `design-review` when the review is missing or stale, approved by the Lead) |
+| 6 | implemented (1ce010a3; Lead integration corrections at 1e50cb39) |
 
 ## Review record
 
