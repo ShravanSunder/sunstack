@@ -121,7 +121,7 @@ MUST load the guide's `references/typed-design.md` at the binding `sunstack-dev:
 
 IF the project belongs to an initiative, read the initiative's file and return the project's number, what it achieves, what the owner checks, and the shared decisions and assumptions it relies on. Rely on a shared record by its qualified id and never write a project copy of it.
 
-IF a lower-numbered project's `core` deliverables do not all have plans yet, write this project's need records and the page's why part with its open questions, and return `deferred` for the Specification, citing the owner's project numbers in the initiative file as the authority and "every lower-numbered project's `core` deliverables have plans" as the re-entry condition. This is the Requirements-only return above; its deliverables stay `later`.
+IF this project has no rule records yet and a lower-numbered project's `core` deliverables do not all have plans, this run is needs-only: carry that scope through the authority call below and step 2, then write this project's need records and the page's why part with its open questions, and return `deferred` for the Specification, citing the owner's project numbers in the initiative file as the authority and "every lower-numbered project's `core` deliverables have plans" as the re-entry condition. This is the Requirements-only return above; its deliverables stay `later`.
 
 MUST load `references/authority-and-problem-framing.md` and return its first result for stage 1: artifact boundary, consumers, decision authority, governing-source identities/classes and current applicability, confirmed goal boundary, and accepted-requirements recovery. Retain the loaded reference and working state for stage 2 and the terminal return. Surface an exact owner decision immediately when it blocks authoring.
 
@@ -204,7 +204,7 @@ State the outcomes the change must create and the nearest plausible expansions i
 
 When independently governed capabilities, protocols, domains, or consumer journeys are mixed, split them into deliverables before polishing requirements. Cut the project into deliverables and write them, one module each, as the guide shows, listed in the project's delivery file in the sequence they are to be built. A `core` deliverable is a scope over existing design records that can be built, checked and accepted on its own: list its needs and rules as you write them, give it its anchor on the page, and name the deliverables it cannot start or prove without. A `later` deliverable is an id and a title. A deliverable selects records and adds none; it is never a design. A `core` rule is a rule that a `core` deliverable scopes. Realizations, checks and steps are added by the phases that own them.
 
-Completion: each goal has an observable success condition, each material non-goal blocks a likely scope guess, every deliverable has one reason to change, every deliverable is `core` or `later`, and every rule the project needs now sits in at least one `core` deliverable's scope, so the design check can report its missing links.
+Completion: each goal has an observable success condition, each material non-goal blocks a likely scope guess, every deliverable has one reason to change, and every deliverable is `core` or `later`.
 
 ### 4. Resolve decisions at the correct altitude
 
@@ -228,7 +228,7 @@ For substantial or uncertain work, stage source notes, alternative wording, prot
 
 Prune as you go: if removing a rule, contract, failure obligation or constraint changes nothing observable and crosses no necessary truth boundary, delete it; nothing is written down for this test. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. A template slot does not authorize adjacent work.
 
-Completion: every `core` goal is covered, every rule has a basis and an observable pass/fail consequence (its need links are the design check's to report), every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
+Completion: every `core` goal is covered, every rule has a basis and an observable pass/fail consequence (its need links are the design check's to report), every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), two capable implementers would not need to invent different product behavior, and every rule the project needs now sits in at least one `core` deliverable's scope, so the design check can report its missing links.
 
 ### 6. Specify observable contracts and negative space
 
