@@ -22,6 +22,8 @@ MUST load `accepting-work.md` and return the completed Lead-authored acceptance 
 
 Read the diff before the summary. Check every changed path against the write scope; a file outside it needs its own disposition even when the change helps. Then hold the diff against the plan slice, as the main skill's case shows.
 
+After reading the diff, record the completed steps and the build candidate in the deliverable record when the work belongs to one, and record each helper decision you adopt as a design record naming the helper, as `design-documents.md` says.
+
 For skill writing, spot-check the inventory. Open two or three changed sentences, check them against the tells yourself, and put any miss with its anchor in the governing correction file before the next role/files call.
 
 Put each correction and its anchor in the governing correction/review file, then send only implementer/files to the same Implementer. A new Implementer has to rebuild the context and can bring back the gap you just closed.
