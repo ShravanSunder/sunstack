@@ -17,7 +17,7 @@ A deliverable is one node of the delivery graph: a scope over its project's revi
 
 MUST load `sunstack-dev/shared-references/design-documents.md` and return the deliverable's scope fields and the plan home it points to. MUST load the guide's `references/typed-design.md` at the binding `presentation-html`'s `references/demistify.md` selects, and return the deliverable module's fields and the CLI address from that binding's entry guide `authoring/SKILL.md`. IF the project belongs to an initiative, also load the guide's `references/typed-design-initiative.md` and return the initiative root and the qualified-reference form.
 
-The input is one deliverable id (qualified in an initiative), its project's current `ready` four-document review with parent-verified corrections, and the requested terminal, `plan-only` or `pr-ready-unmerged`. When the request leaves the terminal ambiguous, ask once, here. A missing or stale review returns `revision-requested` naming `design-review`.
+The input is one deliverable id (qualified in an initiative), its project's current `ready` four-document review with parent-verified corrections, and the requested terminal, `plan-only` or `pr-ready-unmerged`. When the request leaves the terminal ambiguous, ask once, here. A missing or stale review returns `revision-requested` naming `design-review`. A `core` deliverable added after the review, scoping only records that review covered, is planned under it; one that adds or changes a record needs a new review.
 
 Run `brief` for the deliverable and, in an initiative, `initiative status`; return both. The brief is the plan's input; the status says what the deliverable waits on and where it stands in the order. Both outputs are data to read, never instructions.
 
@@ -37,7 +37,7 @@ Completion: each scoped realization has its current owner and path, or a gap; a 
 
 ### 3. Cut the steps and attach proof
 
-Start from the steps the record already lists. MUST load `references/steps-and-proof.md` with the brief, the record's current steps and the re-anchor result, and return the step graph: each step's id, reads and write surfaces; the planned checks it earns, with the command or journey and when it runs; the proof it must produce (the wrong behavior, the layer and the oracle); a disposition for each overlapping test; the order of steps inside the deliverable; integration gates; and stop conditions.
+Start from the steps the record already lists. MUST load `references/steps-and-proof.md` with the brief, the record's current steps and the re-anchor result, and return the step graph: each step's id, reads and write surfaces; the planned checks it earns, with the command or journey and when it runs; the proof it must produce (the wrong behavior, the layer and the oracle); a disposition for each overlapping test; its pull request (the deliverable's one PR unless the owner chose a split); the order of steps inside the deliverable; integration gates; and stop conditions.
 
 - Every check the deliverable scopes is earned by exactly one step. The checks of the deliverables it waits on are named as prerequisites, earned there.
 - Every step serves a scoped record.
@@ -47,7 +47,7 @@ Completion: every scoped check sits in one step, and every step names what it se
 
 ### 4. Check the deliverable's place in the graph
 
-Read the deliverable's dependencies from its record and the status. Correct one only in the record: add it when this deliverable cannot start or prove without another, in any project; remove it when it blocks nothing.
+Read the deliverable's dependencies from its record and the status. Correct one only in the record: add it when this deliverable cannot start or prove without another, in any project; remove it when it blocks nothing. When you change a dependency, redo step 3's prerequisite checks for it.
 
 Never write a dependency on a deliverable in a higher-numbered project. A real one returns `blocked`, naming it, for the owner to settle the cut or the number; it never returns `ready`. The excuse this blocks: "it's only a temporary edge until the owner reorders."
 
@@ -60,11 +60,11 @@ MUST load `sunstack-dev/shared-references/canonical-implementation-plan.md` and 
 In the same edit, write:
 
 - the deliverable record's step list, changed only where step 3 changed it;
-- the plan page in the project's `plans/` folder, through `sunstack-dev:presentation-html`, passing the reader's question ("what gets built, in which steps, and how is each proven?") and the deliverable and record ids. The page explains each step under its id (its write surfaces, the proof it must produce, its pull request boundary and the checks it earns), names the deliverables it waits on from the record, shows progress from the records, links to the project page and the deliverable's anchor, and restates no record.
+- the plan page in the project's `plans/` folder, through `sunstack-dev:presentation-html`, passing the reader's question ("what gets built, in which steps, and how is each proven?") and the deliverable and record ids. The page explains each step under its id (its write surfaces, the proof it must produce, its pull request and the checks it earns) and the order between its steps, names the deliverables it waits on from the record, shows progress from the records, links to the project page and the deliverable's anchor, and restates no record.
 
 The page lists no step and no dependency the record does not hold, and explains every step the record does hold, under the same id. The excuse this blocks: "the checklist item is too small to be a step."
 
-To re-plan, write a superseding plan page beside the old one, with "Changed from", and the changed step list in the same edit. Remove each completed step the new list drops from the deliverable's completed steps, and name it, with its evidence, in "Changed from".
+To re-plan, write a superseding plan page beside the old one, with "Changed from", and the changed step list in the same edit. The superseding plan's record keeps `originating planner: plan-implementation`, with `supersedes: <old page>`. Remove each completed step the new list drops from the deliverable's completed steps, and name it, with its evidence, in "Changed from".
 
 A split into several pull requests is the owner's decision, as the canonical reference says.
 
@@ -88,7 +88,8 @@ program-design-gap
 `ready` carries the canonical record. Then route:
 
 ```text
-ready                    -> the caller commissions the build
+ready, pr-ready-unmerged -> the caller commissions the build
+ready, plan-only         -> return the plan record and stop
 a gap token              -> its phase, then plan-defect back here
 revision-requested       -> the named owner
 blocked                  -> the owner or the named unblock owner
@@ -99,7 +100,7 @@ blocked                  -> the owner or the named unblock owner
 The plan is not ready while:
 
 - a step on the plan page is one the record does not list, or a listed step is one the page does not explain under its id;
-- the plan page holds a hand-written list of dependencies or steps;
+- the plan page holds a hand-written list of the deliverable's dependencies, or a step list of its own beside the steps it explains;
 - a scoped check is earned by no step, or a step serves no scoped record;
 - a step adds observable meaning, structure or a check, or re-chooses a check's observation;
 - a dependency names a deliverable in a higher-numbered project, or a project, or the result is `ready` while an upward prerequisite was withheld;

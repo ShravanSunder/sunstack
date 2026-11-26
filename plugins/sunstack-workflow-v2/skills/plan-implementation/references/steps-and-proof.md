@@ -60,6 +60,7 @@ the proof it must produce: wrong behavior, layer, oracle source
 integration or runtime proof when the boundary requires it
 manual observation when the user-visible or operational surface requires it
 quality commands
+pull request: the deliverable's one PR unless the owner chose a split
 stop/replan condition
 ```
 
@@ -70,6 +71,8 @@ Each step names the proof it must produce, and the Implementer chooses the tests
 When the repository defines proof-layer names, those names win; record the source. When it is silent, write `project silent` and use the ordinary unit, integration, smoke, and end-to-end names. When one rule covers the cases, plan a property or a table of that rule. A single example is enough only when the claim is that one case.
 
 When existing tests overlap the step, return `keep`, `repair`, or `remove` for each. A `remove` row carries one of three proofs: a replacement that fails on the same wrong behavior, redundancy shown by a kept test that already fails on it, or a dead contract shown by the governing change that retires it. A new test that looks similar proves none of the three. A snapshot or fixture with no live contract is a dead-contract candidate and still needs that proof before removal.
+
+The property-or-example choice and each disposition are the step's proof obligations; the Implementer writes the tests that meet them.
 
 ## Catch Proof That Can Pass for the Wrong Reason
 

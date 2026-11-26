@@ -2,7 +2,7 @@
 
 Install from the Sunstack marketplace: `/plugin install sunstack-dev@sunstack`.
 
-`sunstack-dev` 3.8.1 contains 44 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
+`sunstack-dev` 3.8.2 contains 44 maintained engineering skills. The 23 legacy roles and workflow phases live in [sunstack-workflow-v1](../sunstack-workflow-v1/README.md), an independently versioned frozen archive.
 
 ## Boundary
 
