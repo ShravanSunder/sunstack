@@ -624,7 +624,7 @@ E28. Methods (after line 27), three branches, after the guide load (B3):
   is ready now, what blocks the most open work and what is built but not
   accepted. Take ready work in the status's order, and start no deliverable's
   build in a higher-numbered project while a lower-numbered project has open
-  `core` work, unless the owner says otherwise (S10);
+  `core` work, unless the owner says otherwise, for example by accepting a lower-numbered deliverable's dependency on it (S10);
   designing a later project at the depth its number gives it is not held by
   this [A-N2]. A `core` deliverable with no steps needs `plan-implementation`
   before any build; [Demistify 1.34.1+] the status lists it under "Needs a
@@ -778,7 +778,7 @@ Run gate met: the owner answered (a246c80a), PR 239 is merged (9059988b), Demist
 Implementation review of sunstack#240 (26 Nov, independent review lead with Codex Sol and Claude Opus reviewers): targeted-revision, 24 accepted findings. Notes on the design text, each a restoration inside the boundary:
 - **T2:** E29's row is "a `core` deliverable in the project the work serves" (Q8's words), and it scopes the touched rules with their planned checks.
 - **T1:** E4's depth branch applies once, to a project with no rule records yet (Q1's "once").
-- **T3:** S10, obligation 19 and E28 say "unless the owner says otherwise". With no upward dependency allowed (S3), "a dependency" had no legitimate instance; the Lead ruled this inside the boundary because the owner's order is by number.
+- **T3:** S10, obligation 19 and E28 say "unless the owner says otherwise, for example by accepting a lower-numbered deliverable's dependency on it". With no upward dependency allowed (S3), "a dependency" had no legitimate instance; the Lead ruled this inside the boundary because the owner's order is by number.
 
 Mapping of each finding at revision 3 (closed: taken in as proposed or already
 closed by revision 2 or PR 239; changed: corrected differently from the
