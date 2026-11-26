@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>For you to decide: the v2 initiative and plan change</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content" src="./navigation.generated.json"></ex-nav>
+  <ex-document id="content">
+    <h1>The v2 initiative and plan change</h1>
+    <p>This change teaches five <code>sunstack-workflow-v2</code> skills your model of 25 November: an initiative orders numbered projects, each project is one four-part design, and each project is cut into deliverables that select its records. A new <code>plan-implementation</code> skill writes one plan per deliverable. Two independent design reviews have run twice; four questions are yours. Pick an option on each, add a comment where you want to say more, then copy the review to me.</p>
+    <ex-mermaid id="model" label="Which v2 skill writes what, from initiative to recorded proof"><script type="text/plain">
+flowchart TD
+  initiative["Initiative<br/>project numbers, shared decisions<br/>role-lead, with you"]
+  project["Project: one design<br/>needs, rules, realizations, checks"]
+  review["Four-document review<br/>design-review"]
+  deliverable["Deliverable record<br/>scope, steps, what it waits on"]
+  plan["Plan page<br/>plan-implementation"]
+  build["Build and checks"]
+  initiative --> project
+  project --> review
+  project --> deliverable
+  review --> plan
+  deliverable --> plan
+  plan --> build
+  build --> deliverable
+</script></ex-mermaid>
+
+    <ex-section id="open" title="For you to decide" holds="needs-owner"></ex-section>
+    <ex-section-item record="Q9"><ex-choice>
+      <template data-record-body><p>Your model says the plan explains each step "(files, tests, pull request, proof)". v2's role contract leaves detailed steps and tests to the Implementer. The full question is in the <a href="skill-design.html">skill design</a>.</p></template>
+      <ex-option data-option="surfaces-and-proof"><template slot="summary">Per step, the plan names the files and modules it writes, the proof it must produce and its pull request; the Implementer chooses the detailed changes and test code inside. Gain: your "files, tests" held at the level of surfaces and required proof, and v2's Designed Outcome holds. Cost: "tests" becomes "the proof each step must produce", a reading you may reject.</template></ex-option>
+      <ex-option data-option="checks-only"><template slot="summary">The plan names steps, the checks each earns and the pull request only; files and tests are the Implementer's. Gain: the role contract is untouched. Cost: drops "files, tests" from your model.</template></ex-option>
+      <ex-option data-option="files-and-tests"><template slot="summary">The plan fixes files and tests per step, and the Implementer carries them out. Gain: your words, literally. Cost: turns a Designed Outcome into near exact steps, against v2's stated model.</template></ex-option>
+    </ex-choice></ex-section-item>
+    <ex-section-item record="Q8"><ex-choice>
+      <template data-record-body><p>The Mac Lead asks that the Lead name the deliverable before any commission, adding the row first when there is none.</p></template>
+      <ex-option data-option="core-in-typed-work"><template slot="summary">A core deliverable in the project the work serves, and rows only inside an initiative or typed project; other work is exempt. Gain: every build commission inside typed work is counted and gated. Cost: a small fix waits for its rule and plan when none exists.</template></ex-option>
+      <ex-option data-option="core-everywhere"><template slot="summary">A core deliverable for every piece of work, typed or not. Gain: nothing escapes the count. Cost: the same wait on every small fix, everywhere.</template></ex-option>
+      <ex-option data-option="later-placeholder"><template slot="summary">A later deliverable as a placeholder row, promoted to core when scoped. Gain: cheap and immediate. Cost: active work shows as "later" and is not checked.</template></ex-option>
+    </ex-choice></ex-section-item>
+    <ex-section-item record="Q1"><ex-choice>
+      <template data-record-body><p>You asked for depth by number: all four documents for number 1, and Requirements with open questions only for later numbers "until near". Work still starts in number order whatever you pick.</p></template>
+      <ex-option data-option="earlier-accepted"><template slot="summary">Near means every lower-numbered project is accepted. Gain: rules are written on settled ground. Cost: designers idle while builds finish.</template></ex-option>
+      <ex-option data-option="earlier-planned"><template slot="summary">Near means every lower-numbered project's core deliverables have plans. Gain: the next design runs while the earlier ones build. Cost: a late finding in an earlier build can still move the next design.</template></ex-option>
+      <ex-option data-option="per-project"><template slot="summary">The Lead proposes "near" per project and you confirm. Gain: judgment per case. Cost: one decision from you per project, and no field for it yet.</template></ex-option>
+    </ex-choice></ex-section-item>
+    <ex-section-item record="Q6"><ex-choice>
+      <template data-record-body><p>A project in an initiative lives in that initiative's <code>projects/</code> folder either way. Your global instructions allow design-mode writes only in <code>docs/specs/</code>, <code>docs/wip/</code> and <code>tmp/</code>.</p></template>
+      <ex-option data-option="docs-initiatives"><template slot="summary"><code>docs/initiatives/&lt;initiative&gt;/</code>, and you add <code>docs/initiatives/</code> to the design-mode write list. Gain: matches every guide example. Cost: a change to your global instructions.</template></ex-option>
+      <ex-option data-option="docs-specs"><template slot="summary"><code>docs/specs/&lt;initiative&gt;/</code>. Gain: no change to your instructions. Cost: departs from the guide's examples, so agents see two layouts.</template></ex-option>
+    </ex-choice></ex-section-item>
+
+    <ex-section id="agent" title="Decided without you" holds="decided-by-agent"></ex-section>
+    <ex-section-item record="Q2"><p>Was open question Q2 in revision 2; closed as default K9 in the <a href="skill-design.html">skill design</a>.</p></ex-section-item>
+    <ex-section-item record="Q3"><p>Was open question Q3 in revision 2.</p></ex-section-item>
+    <ex-section-item record="Q4"><p>Was open question Q4 in revision 2.</p></ex-section-item>
+    <ex-section-item record="Q5"><p>Was open question Q5 in revision 3; closed as default K15.</p></ex-section-item>
+    <ex-section-item record="Q7"><p>Was open question Q7 in revision 3; closed as default K13.</p></ex-section-item>
+
+    <ex-section id="settled" title="Settled" holds="settled"></ex-section>
+
+    <h2 id="documents">The four documents</h2>
+    <p><a href="requirements.html">Requirements</a>: your model, the Mac Lead's input, the reviews' findings and what stays out of scope. <a href="specification.html">Specification</a>: thirty obligations and ten standards. <a href="skill-design.html">Skill design</a>: the questions in full, defaults, six runs and edits E1 to E40. <a href="skill-verification.html">Skill verification</a>: how each part is shown, and what stays unverified.</p>
+  </ex-document>
+</body>
+</html>
