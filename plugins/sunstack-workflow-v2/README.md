@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.8.0**. Agent management uses `practices-delegation` from `sunstack-dev` 3.8.1.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.8.0**. Requires `sunstack-dev` 3.8.2 or later; agent management uses its `practices-delegation`.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -44,7 +44,7 @@ The strict call schema checks source-level content shape; it does not intercept 
 
 ## Responsibility and completion
 
-Lead supplies design docs and a workstream plan: contracts, dependencies, sequencing and completion conditions. Implementer receives a **Designed Outcome**, choosing detailed implementation steps, tests and subagent decomposition, integrating proof and working directly with its 🔬 Verifier. **Exact Steps** follows a supplied procedure; Operator always uses that route on Luna high.
+Lead supplies design docs and a workstream plan: contracts, dependencies, sequencing and completion conditions. Implementer receives a **Designed Outcome**, choosing the detailed changes, tests and helper decomposition inside each step the plan names, integrating proof and working directly with its 🔬 Verifier. **Exact Steps** follows a supplied procedure; Operator always uses that route on Luna high.
 
 Implementer and Verifier may use native subagents for separable tasks within their actual grants, choosing models from the shared catalog by each task's own span. Parent inspects changes/evidence and owns the combined result. Terra and Sol are preferred for fitting browser/computer-control work, particularly Terra high for UI/browser verification, without implying tool access. Formal Implementer and both Checker duties remain Sidekicks; native tasks add no role packet, trace or Verifier pair. Worker is only a search/provider synonym.
 
