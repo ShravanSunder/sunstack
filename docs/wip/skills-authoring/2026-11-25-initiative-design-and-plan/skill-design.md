@@ -739,6 +739,7 @@ names".
 | 4 | implemented (0466aa60) |
 | 5 | implemented (73443e68; step 1 returns `revision-requested` to `design-review` when the review is missing or stale, approved by the Lead) |
 | 6 | implemented (1ce010a3; Lead integration corrections at 1e50cb39) |
+| 1 to 6 | shipped: sunstack#240 squash-merged as 9985ee4c after an independent implementation review (24 findings corrected; recheck at 75031494: great) and the run-5 trigger trial; workflow-v2 0.8.0 and sunstack-dev 3.8.2 in the Claude and Codex caches. The eval stays owner-gated. |
 
 ## Review record
 
