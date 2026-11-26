@@ -735,7 +735,8 @@ names".
 
 | Run | State |
 | --- | --- |
-| 1 to 6 | accepted-to-implement (25 Nov); in progress |
+| 1 to 3 | implemented (34f4e2e0, ac6cdcdb, 38aae5f2; Lead correction to E1 and E10 at integration) |
+| 4 to 6 | accepted-to-implement (25 Nov); in progress |
 
 ## Review record
 
