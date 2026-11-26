@@ -20,7 +20,7 @@ When the job is writing skills, the owner's direction applies: "especially if th
 
 MUST load `accepting-work.md` and return the completed Lead-authored acceptance artifact against its five conditions, or affected gaps routed back to the pair, before independent delivery review. The Implementer report and original Verifier report are evidence you inspect, not your acceptance authors.
 
-Read the diff before the summary. Check every changed path against the write scope; a file outside it needs its own disposition even when the change helps. Then hold the diff against the plan slice, as the main skill's case shows.
+Read the diff before the summary. Check every changed path against the write scope; a file outside it needs its own disposition even when the change helps. Then hold the diff against the plan step, as the main skill's case shows.
 
 After reading the diff, record the completed steps and the build candidate in the deliverable record when the work belongs to one, and record each helper decision you adopt as a design record naming the helper, as `design-documents.md` says.
 
