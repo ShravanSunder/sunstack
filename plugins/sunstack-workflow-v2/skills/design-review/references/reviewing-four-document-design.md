@@ -89,11 +89,11 @@ Stop when every design noun resolves to an `E`, a design-only concept with its s
 
 If local results are missing, a `four-document-design` result of `ready` requires independently repeating and recording the missing local checks. Missing prerequisites may still yield bounded findings, never false readiness.
 
-Run the guide's `brief` for each `core` deliverable and read it as the planner's whole input. Use the pretend planner:
+In a file-backed project, run the guide's `brief` for each `core` deliverable and read it as the planner's whole input. Use the pretend planner:
 
 ```text
 may decide: each deliverable's steps and the order of steps inside it,
-            tasks, exact files, order, DAG, exact commands, red/green steps,
+            tasks, exact files, exact commands, red/green steps,
             evidence capture, checkpoints, rollout
 must consume: each deliverable's scope and dependencies,
               needs, rules and their cases, entity bindings and boundary shapes,
