@@ -111,12 +111,12 @@ A later semantic change outside an accepted correction invalidates affected chec
 
 The 🔎 Reviewer Sidekick reads the complete target set and governing sources first, every artifact whole. MUST load `references/coordination-and-chunking.md` and return a sequential chunk-pass plan with complete seam text and overlap, or one mode-complete pass when the whole target fits.
 
+IF the guide at the page's binding is not loaded this session, load its `references/typed-design.md` at the binding `presentation-html`'s `references/demistify.md` selects, and return the CLI address from that binding's entry guide `authoring/SKILL.md` and, in an initiative, the initiative root.
+
 MUST load `references/lanes/lane-schema.md` and record `complete | partial | blocked` for every check. Return the per-check status block before the verdict. Record an unselected optional check as `complete` with `not selected: <reason>`. A missing, partial, or blocked check cannot support `ready`.
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return its check result. MUST load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. MUST load the selected mode reference and return its whole-mode judgment. Reconstruct and judge the whole mode from complete artifacts.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` to walk the chunk passes sequentially and return each pass's seam coverage. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
-
-IF the guide at the page's binding is not loaded this session, load its `references/typed-design.md` at the binding `presentation-html`'s `references/demistify.md` selects, and return the CLI address from that binding's entry guide `authoring/SKILL.md` and, in an initiative, the initiative root.
 
 In a file-backed project, the 🔎 Reviewer Sidekick also runs, read-only, the Demistify check (`demistify initiative check` for an initiative, `demistify design check` for a standalone project) and the design rules, keeping reports outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/design-documents.config.json --root <the project's root> --report <scratch>/design-lint.json <the project folder>`.
 

@@ -7,6 +7,6 @@
 - `design-specification` creates a project inside its initiative's `projects/` folder (`docs/initiatives/<initiative>/`) or a standalone one in `docs/specs/<project>/`. It reads the initiative first, holds a project to its need records until every lower-numbered project's `core` deliverables have plans, and cuts the project into deliverables in build order. The design phases add their own record ids to each `core` deliverable's scope.
 - `design-review` refuses a project held to its needs, raises a rule no `core` deliverable scopes, and has its pretend planner read each deliverable's brief.
 - `role-lead` creates initiatives from the owner's numbers and words, builds in number order from `initiative status`, names a deliverable before any build commission, and records steps, outcomes and acceptance on the deliverable.
-- `sunstack-dev`'s `design-documents.md` lets a project held by its number keep need records (landed separately, before this change).
+- `sunstack-dev` 3.8.2: `design-documents.md` lets a project held by its number keep need records.
 - "`core` slice" becomes "`core` deliverable" throughout the design skills.
 - Behavior has not been evaluated; the trigger trial and the eval are still to run. Codex and Claude caches are not refreshed.

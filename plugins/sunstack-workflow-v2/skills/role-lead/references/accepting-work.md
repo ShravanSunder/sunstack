@@ -1,6 +1,6 @@
 # Accepting the implementation before delivery review
 
-Expected inputs: original owner decisions, complete scoped requirements/specification/design/verification material, the workstream plan, actual integrated diff/target, original Verifier report and deciding proof, and unresolved prerequisites/HOLDs. Return the Lead-authored acceptance artifact in the existing work record, or affected work sent back with its evidence gap. Independent delivery review remains pending after this acceptance.
+Expected inputs: original owner decisions, complete scoped requirements/specification/design/verification material, the workstream plan, actual integrated diff/target, original Verifier report and deciding proof, and unresolved prerequisites/HOLDs. Return the Lead-authored acceptance artifact, written as a file and, when the work belongs to a deliverable, recorded on that deliverable as the guide places it; or affected work sent back with its evidence gap. Independent delivery review remains pending after this acceptance.
 
 ## Establish the five conditions
 
