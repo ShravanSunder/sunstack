@@ -2,7 +2,7 @@
 
 This reference owns artifact structure choice, normative-home integrity, navigation, view verification, pruning, and the author self-check.
 
-Expected inputs: authority/problem model, outcomes/non-goals, `core` and `later` slices, need and rule records, contract inventory, cross-cutting obligations, and repo documentation conventions.
+Expected inputs: authority/problem model, outcomes/non-goals, `core` and `later` deliverables, need and rule records, contract inventory, cross-cutting obligations, and repo documentation conventions.
 
 Return in workflow order: first the artifact structure decision, artifact identity, traceability/navigation result, view-verification result, and pruned elements; after the caller runs the complete author self-check stage, return the author self-check with exact gaps.
 

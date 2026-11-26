@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.7.1**. Agent management uses `practices-delegation` from `sunstack-dev` 3.8.1.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.8.0**. Requires `sunstack-dev` 3.8.2 or later; agent management uses its `practices-delegation`.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -12,6 +12,7 @@ This source contains the v2 design skills and separately maintained management a
 | program-design | [design-program](skills/design-program/SKILL.md) |
 | verification-design | [design-verification](skills/design-verification/SKILL.md) |
 | spec-program-review | [design-review](skills/design-review/SKILL.md) |
+| plan-implementation | [plan-implementation](skills/plan-implementation/SKILL.md) |
 
 The engineering baseline is the four design phases from before PR #205, at `b37419ca08dcde11bb8c72b810a4e91afec345f9`, with the v2 route names and installed-plugin dependency repairs retained. V2 changes their artifact presentation to complete free-form HTML through `sunstack-dev:presentation-html`; v1 separately keeps the historical Markdown contract.
 
@@ -33,7 +34,7 @@ The packet union accepts only lead, implementer, operator and checker. Checker v
 
 ## Scope
 
-The four document meanings remain distinct, each as its own typed record kind (need, rule, realization, planned check) on one project page. Records hold the text; the page explains them and can use prose, diagrams, tables, Trees, choices, comparisons and open discussion where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. Typed records need Demistify 1.34.0 or later. Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
+The four document meanings remain distinct, each as its own typed record kind (need, rule, realization, planned check) on one project page. Records hold the text; the page explains them and can use prose, diagrams, tables, Trees, choices, comparisons and open discussion where they explain the subject. New collections share Pages, semantic Map and complete question-led Walkthroughs through one navigation descriptor. Worked examples live with the maintained presentation recipe. The matching bound guide owns syntax and component preparation. Typed records need Demistify 1.34.1 or later (its "Needs a plan" list feeds planning). Each selected binding needs its matching guide and checker, and source preview and publication have separate checks. The host chooses the active workflow through its skill index.
 
 ## Role and files commissioning
 
@@ -43,7 +44,7 @@ The strict call schema checks source-level content shape; it does not intercept 
 
 ## Responsibility and completion
 
-Lead supplies design docs and a workstream plan: contracts, dependencies, sequencing and completion conditions. Implementer receives a **Designed Outcome**, choosing detailed implementation steps, tests and subagent decomposition, integrating proof and working directly with its 🔬 Verifier. **Exact Steps** follows a supplied procedure; Operator always uses that route on Luna high.
+Lead supplies design docs and a workstream plan: contracts, dependencies, sequencing and completion conditions. Implementer receives a **Designed Outcome**, choosing the detailed changes, tests and helper decomposition inside each step the plan names, integrating proof and working directly with its 🔬 Verifier. **Exact Steps** follows a supplied procedure; Operator always uses that route on Luna high.
 
 Implementer and Verifier may use native subagents for separable tasks within their actual grants, choosing models from the shared catalog by each task's own span. Parent inspects changes/evidence and owns the combined result. Terra and Sol are preferred for fitting browser/computer-control work, particularly Terra high for UI/browser verification, without implying tool access. Formal Implementer and both Checker duties remain Sidekicks; native tasks add no role packet, trace or Verifier pair. Worker is only a search/provider synonym.
 

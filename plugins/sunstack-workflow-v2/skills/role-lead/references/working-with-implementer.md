@@ -6,7 +6,7 @@ This is your side of commissioning, correcting and closing out an Implementer. `
 
 Select existing governing assignment/plan/procedure files that establish the inputs below, then send only role/files for this role. The recipient reads its own preamble and resolves the rich context; these input obligations do not require an inline packet or a newly recreated packet file. Continuations and corrections use the same two-field content with current governing correction sources.
 
-The Implementer is always a Sidekick, paired with the workstream's Verifier Sidekick. Native coding subagents are its helpers, not alternative Implementer seats. Establish the workstream, dependencies, sequencing, scope, write grant and completion/stop conditions in governing sources, plus the pair's real address. Leave execution steps and helper count/decomposition to the Implementer within the approved model/access context; no per-child Lead approval, trace or Verifier pair is required.
+The Implementer is always a Sidekick, paired with the workstream's Verifier Sidekick. Native coding subagents are its helpers, not alternative Implementer seats. Establish the workstream, dependencies, sequencing, scope, write grant and completion/stop conditions in governing sources, plus the pair's real address. Leave the detailed changes, tests and native helper count/decomposition inside each step the plan names to the Implementer, within the approved model/access context; no per-child Lead approval, trace or Verifier pair is required.
 
 The Implementer investigates and repairs ordinary defects within that boundary. A changed governing contract, expected outcome, ownership, proof obligation or unavailable authority comes back with evidence; a missing cosmetic packet detail does not stop unrelated authorized work.
 
@@ -20,7 +20,9 @@ When the job is writing skills, the owner's direction applies: "especially if th
 
 MUST load `accepting-work.md` and return the completed Lead-authored acceptance artifact against its five conditions, or affected gaps routed back to the pair, before independent delivery review. The Implementer report and original Verifier report are evidence you inspect, not your acceptance authors.
 
-Read the diff before the summary. Check every changed path against the write scope; a file outside it needs its own disposition even when the change helps. Then hold the diff against the plan slice, as the main skill's case shows.
+Read the diff before the summary. Check every changed path against the write scope; a file outside it needs its own disposition even when the change helps. Then hold the diff against the plan step, as the main skill's case shows.
+
+After reading the diff, record the completed steps and the build candidate in the deliverable record when the work belongs to one, and record each helper decision you adopt as a design record naming the helper, as `design-documents.md` says.
 
 For skill writing, spot-check the inventory. Open two or three changed sentences, check them against the tells yourself, and put any miss with its anchor in the governing correction file before the next role/files call.
 

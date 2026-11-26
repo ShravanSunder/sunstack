@@ -6,7 +6,7 @@ Four-document design review independently repeats load-bearing local checks; it 
 
 Before integration checks, MUST load `sunstack-dev/shared-references/design-documents.md` and return the project's need, rule, realization, planned-check, decision and assumption records and the page sections that explain them. Then MUST load `reviewing-specification.md` and return its complete specification-mode judgment of the needs and rules. Then MUST load `reviewing-program-design.md` and return its complete program-mode judgment of the realizations and the page's how part. Then MUST load `reviewing-verification-design.md` and return its complete judgment of the planned checks against the rules and realizations. Four-document design judgment consumes the three local results; it may not replace them with an author summary or a prior-review summary.
 
-A `core` slice with no need or rule records is a blocker-level finding routed to `design-specification`; a `core` rule with no planned check, which the Demistify check reports, is one routed to `design-verification`. Do not create or edit records during review. Downstream findings may still be reported when the available sources support them, but the review cannot be `ready`.
+A `core` deliverable whose scope holds no need or rule records is a blocker-level finding routed to `design-specification`; a `core` rule with no planned check, which the Demistify check reports, is one routed to `design-verification`. Do not create or edit records during review. Downstream findings may still be reported when the available sources support them, but the review cannot be `ready`.
 
 Inspect:
 
@@ -89,12 +89,14 @@ Stop when every design noun resolves to an `E`, a design-only concept with its s
 
 If local results are missing, a `four-document-design` result of `ready` requires independently repeating and recording the missing local checks. Missing prerequisites may still yield bounded findings, never false readiness.
 
-Use the pretend planner:
+In a file-backed project, run the guide's `brief` for each `core` deliverable and read it as the planner's whole input. Use the pretend planner:
 
 ```text
-may decide: tasks, exact files, order, DAG, exact commands, red/green steps,
+may decide: each deliverable's steps and the order of steps inside it,
+            tasks, exact files, exact commands, red/green steps,
             evidence capture, checkpoints, rollout
-must consume: needs, rules and their cases, entity bindings and boundary shapes,
+must consume: each deliverable's scope and dependencies,
+              needs, rules and their cases, entity bindings and boundary shapes,
               components/owners/interfaces,
               state/flows/failure/concurrency/cutover/trust/proof seams,
               each rule's planned check, target, journey,

@@ -2,7 +2,7 @@
 
 This reference owns construction and repair of rule records and the links that make them traceable.
 
-Expected inputs: authority/problem model, the stage-2 entity definitions and undefined-noun gaps, goals/non-goals, `core` slices, resolved decisions, candidate constraints, and current rule text.
+Expected inputs: authority/problem model, the stage-2 entity definitions and undefined-noun gaps, goals/non-goals, `core` deliverables, resolved decisions, candidate constraints, and current rule text.
 
 Return: the rule records, any need no rule serves, any entity no rule uses, and exact gaps or conflicts.
 
@@ -67,7 +67,7 @@ Replace `support`, `handle`, `robust`, `easy`, `secure`, `fast`, and similar adj
 
 ## Traceability
 
-A rule names the needs it serves, one or several; that link is the trace. The design check reports a `core` rule with no need, and a rule with no planned check once checks exist; it notes a need no rule serves. Each U identifier resolves to a need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
+A rule names the needs it serves, one or several; that link is the trace. The design check reports a `core` rule with no need and, for a rule a `core` deliverable scopes, no planned check, a gap that stays until Verification Design adds the check. It notes a need no rule serves. Each U identifier resolves to a need record; do not restate or fork it. Preserve stakeholder needs even when no direct-user journey exists.
 
 Flag:
 

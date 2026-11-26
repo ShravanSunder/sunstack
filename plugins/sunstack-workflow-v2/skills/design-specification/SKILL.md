@@ -64,7 +64,7 @@ This skill admits or materializes durable Requirements from already-settled auth
 - public or externally observable UI, API, CLI, data, configuration, and operational contracts;
 - externally required failure, compatibility, security, reliability, performance, accessibility, privacy, and operability obligations;
 - proof obligations: the threshold, target constraints, and authoritative reference that decide each material rule, written as its cases;
-- `core` and `later` slices;
+- `core` and `later` deliverables;
 - the records, the page's why and what sections, and the author self-check.
 
 It does not elicit or confirm genuinely unwritten owner meaning and does not choose components, internal owners, dependency direction, state storage, call graphs, recovery mechanisms, the evidence class, target, or journey that will prove an obligation, task order, files, or exact validation commands, and it does not bind an entity to a package, schema, type, table, or wire shape. Route unwritten owner meaning to `sunstack-dev:discuss-pathfinding`, structural How and entity binding to `design-program`, the proof strategy to `design-verification`, and review-only work to `design-review`.
@@ -89,7 +89,7 @@ evidence-blocked
 deferred
 ```
 
-A `locally-ready` result includes the project page and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; the confirmed goal boundary; the accepted requirements set; load-bearing decisions; the `core` and `later` slices; author self-check; required independent local-review coverage; remaining gaps; and an explicit statement that design acceptance is not claimed. These are returned workflow state, not narrative sections in the specification.
+A `locally-ready` result includes the project page and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; the confirmed goal boundary; the accepted requirements set; load-bearing decisions; the deliverables with their scope and dependencies; author self-check; required independent local-review coverage; remaining gaps; and an explicit statement that design acceptance is not claimed. These are returned workflow state, not narrative sections in the specification.
 
 For an explicitly Requirements-only request, finish the need records and the page's why part and return `deferred` for Specification. Before that early return, state the Requirements reader question at Requirements altitude (affected people, their job, current pain and desired outcome), and apply the `capability map` row of the Required Why/What Views table to the needs. When that row fires, the map is the first view request, carrying that row's need fields. Then MUST load `sunstack-dev/shared-references/diagram-rendering-and-fallbacks.md` with those requests to return the document medium and any page proof, the selected medium, semantic-preservation result, actual visual check and exact generated-image/capability gap for that page, and compare the shown map with its table row before returning. This call does not run Specification-only entity or context predicates, writes no rule record, opens no downstream work, and must not invent a Specification, interface or internal component. Record the caller's authority to stop there, the consequence that Specification and Program Design are not ready, the exact visual or capability gap when one remains, and the condition for re-entering Specification work. Do not write rules or recommend `design-program`.
 
@@ -98,7 +98,7 @@ Produce terminal labels by observable condition:
 - `locally-ready`: every completion blocker is cleared and the complete return above exists.
 - `decision-needed`: legitimate sources cannot settle load-bearing product meaning, public behavior, compatibility, policy, or cost/risk tolerance; return the decision owner and evidence, and IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief.
 - `evidence-blocked`: required governing or observational evidence is missing, inaccessible, stale, or contradictory enough that a truthful obligation cannot be derived; return the exact evidence and access/state change needed.
-- `deferred`: an authorized caller explicitly postpones scoped work after its consequence is recorded; return completed coverage, deferred scope, authority for deferral, consequence, and re-entry condition.
+- `deferred`: an authorized caller explicitly postpones scoped work, or the owner's project numbers hold this project to its needs (step 1), after its consequence is recorded; return completed coverage, deferred scope, authority for deferral, consequence, and re-entry condition.
 
 After producing the terminal result, return exactly one phase-guided route:
 
@@ -107,15 +107,21 @@ locally-ready -> recommend design-program
 decision-needed | evidence-blocked | deferred -> stop with the exact reason
 ```
 
-When unmade owner meaning blocks Requirements or Specification, use `sunstack-dev:discuss-pathfinding` and resume this phase with its clarified return. Pathfinding is not a separate next phase after `locally-ready`. Before recommending `design-program`, inspect its declared inputs and return a compact pointer-based handoff containing the project page and its need and rule record ids, confirmed goal boundary and accepted-requirements status, phase result, exact remaining gaps, and why structural How is next. Do not copy full artifacts, unrelated history, or orchestration counters. A direct design-specification invocation carries no cycle budget.
+When unmade owner meaning blocks Requirements or Specification, use `sunstack-dev:discuss-pathfinding` and resume this phase with its clarified return. Pathfinding is not a separate next phase after `locally-ready`. Before recommending `design-program`, inspect its declared inputs and return a compact pointer-based handoff containing the project page and its need and rule record ids, the deliverable ids, confirmed goal boundary and accepted-requirements status, phase result, exact remaining gaps, and why structural How is next. Do not copy full artifacts, unrelated history, or orchestration counters. A direct design-specification invocation carries no cycle budget.
 
 ## Workflow
 
 ### 1. Establish authority, audience, and artifact boundary
 
-Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create a new project's records and page beneath that home and return their exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
+Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<repository-root>/docs/specs/`, create a new project's records and page beneath that home and return their exact paths. Preserve authoritative pre-existing artifacts elsewhere; do not relocate or reject them because of the policy. The artifact-home policy applies only to new outputs in the current call and is not persisted as workflow state.
 
 MUST load `sunstack-dev/shared-references/design-documents.md` and return the need and rule records this run writes, the page sections that explain them, the ids downstream phases consume, and the design-item contents, nudge labels and ranking this run uses.
+
+MUST load the guide's `references/typed-design.md` at the binding `sunstack-dev:presentation-html`'s `references/demistify.md` selects, and return the helpers, fields and files this run writes, and the CLI address from that binding's entry guide `authoring/SKILL.md`. IF the project belongs to an initiative, also load `references/typed-design-initiative.md` and return the initiative root, the project numbers, the qualified-reference form and the alias source.
+
+IF the project belongs to an initiative, read the initiative's file and return the project's number, what it achieves, what the owner checks, and the shared decisions and assumptions it relies on. Rely on a shared record by its qualified id and never write a project copy of it.
+
+IF this project has no rule records yet and a lower-numbered project's `core` deliverables do not all have plans, this run is needs-only: carry that scope through the authority call below and step 2, then write this project's need records and the page's why part with its open questions, and return `deferred` for the Specification, citing the owner's project numbers in the initiative file as the authority and "every lower-numbered project's `core` deliverables have plans" as the re-entry condition. This is the Requirements-only return above; its deliverables stay `later`.
 
 MUST load `references/authority-and-problem-framing.md` and return its first result for stage 1: artifact boundary, consumers, decision authority, governing-source identities/classes and current applicability, confirmed goal boundary, and accepted-requirements recovery. Retain the loaded reference and working state for stage 2 and the terminal return. Surface an exact owner decision immediately when it blocks authoring.
 
@@ -188,15 +194,17 @@ Accepted-requirements coverage is returned state, derived from record ids: each 
 
 Re-anchor before deriving or revising normative requirements: compare the proposed meaning with the confirmed goal, accepted requirements, permitted and protected systems, owner-set package limits, non-goals, and existing foundation from the confirmed goal boundary. Return `aligned` or the exact mismatch. On mismatch, stop normative authoring and return the existing owner decision, or use `sunstack-dev:discuss-clarify-mental-models` when the shared model itself drifted. Keep the comparison in returned workflow state, not durable specification prose.
 
+IF the project belongs to an initiative, also compare the need records with what the project achieves in the initiative's file (step 1); a mismatch is owner meaning and returns `decision-needed`.
+
 Completion: the current/desired gap is inspectable, each causal claim is evidenced or labeled as a hypothesis, every noun two readers could read differently is a defined entity with an `E` identifier and every slot filled or marked as an exact gap, accepted-requirements coverage is returned by record id when applicable, and the Re-anchor comparison is aligned or has returned the exact mismatch and owner route.
 
-### 3. Define outcomes, non-goals, and semantic slices
+### 3. Define outcomes, non-goals, and deliverables
 
 State the outcomes the change must create and the nearest plausible expansions it will not create. Separate outcomes from requested mechanisms.
 
-When independently governed capabilities, protocols, domains, or consumer journeys are mixed, split those semantic slices before polishing requirements. Mark each slice `core` or `later`. Only `core` slices get need and rule records; a `later` slice is a `later` deliverable, an id and a title.
+When independently governed capabilities, protocols, domains, or consumer journeys are mixed, split them into deliverables before polishing requirements. Cut the project into deliverables and write them, one module each, as the guide shows, listed in the project's delivery file in the sequence they are to be built. A `core` deliverable is a scope over existing design records that can be built, checked and accepted on its own: list its needs and rules as you write them, give it its anchor on the page, and name the deliverables it cannot start or prove without. A `later` deliverable is an id and a title. A deliverable selects records and adds none; it is never a design. A `core` rule is a rule that a `core` deliverable scopes. Realizations, checks and steps are added by the phases that own them.
 
-Completion: each goal has an observable success condition, each material non-goal blocks a likely scope guess, every slice has one reason to change, and every slice is `core` or `later`.
+Completion: each goal has an observable success condition, each material non-goal blocks a likely scope guess, every deliverable has one reason to change, and every deliverable is `core` or `later`.
 
 ### 4. Resolve decisions at the correct altitude
 
@@ -220,7 +228,7 @@ For substantial or uncertain work, stage source notes, alternative wording, prot
 
 Prune as you go: if removing a rule, contract, failure obligation or constraint changes nothing observable and crosses no necessary truth boundary, delete it; nothing is written down for this test. Owner-set repository or package limits may constrain implementation without becoming normative product behavior. A template slot does not authorize adjacent work.
 
-Completion: every `core` goal is covered, every rule has a basis and an observable pass/fail consequence (its need links are the design check's to report), every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), and two capable implementers would not need to invent different product behavior.
+Completion: every `core` goal is covered, every rule has a basis and an observable pass/fail consequence (its need links are the design check's to report), every rule names only defined entities where readers could differ (an obligation over an undefined contested noun routes back to stage 2, and an entity no rule uses is pruned or its gap recorded), two capable implementers would not need to invent different product behavior, and every rule the project needs now sits in at least one `core` deliverable's scope, so the design check can report its missing links.
 
 ### 6. Specify observable contracts and negative space
 
@@ -252,7 +260,7 @@ Rejecting a requested all-in-one or internally focused diagram does not complete
 
 MUST load `references/artifact-and-self-review.md` with the Required Why/What Views decisions and rendering results to choose the artifact structure, preserve the specification spine, apply view discrimination and pruning, and return the structure decision, traceability/navigation result, view-verification result, pruned elements, artifact identity, and exact view gaps.
 
-Apply any caller-supplied artifact-home policy first. Otherwise follow the repository's documented spec location, or use `docs/specs/` for substantial file-backed work. Keep research ledgers and review reports out of the design.
+Apply any caller-supplied artifact-home policy first. Otherwise follow the repository's documented location; failing that, a project in an initiative is created inside that initiative's `projects/` folder, wherever the repository keeps the initiative, and a standalone project in `docs/specs/<project>/`; create a new project with the guide's `design init`. Keep research ledgers and review reports out of the design.
 
 Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal rules, observable contracts, failures, constraints, and proof.
 
@@ -282,7 +290,7 @@ Completion: the permitted independent review coverage and parent-verified correc
 
 ### 12. Return the local result
 
-Return the project page, handed over as `design-documents.md` says, and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; `core` and `later` slices; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
+Return the project page, handed over as `design-documents.md` says, and its need and rule record ids; governing-source identities, authority, current applicability, and coverage; confirmed goal boundary; accepted requirements set; decision inventory; deliverables; self-check; independent local-review coverage; gaps; and non-acceptance boundary.
 
 IF returning a substantial specification in chat and problem, consumer, authority, journey, or requirement-to-proof relationships are non-obvious, use the `presentation-*` skill matching the current surface to render only those Why/What relationships; honor an exact user-requested format instead. Keep normative meaning in the records and route internal component, call, state, or failure-mechanism views to `design-program`.
 
@@ -311,7 +319,7 @@ The packet names the exact evidence question, sources, maximum authority, non-go
 
 Do not return `locally-ready` while any of these hold:
 
-- substantial file-backed work lacks need and rule records and a resolvable page, or a `core` slice has no records;
+- substantial file-backed work lacks need and rule records and a resolvable page, or a `core` deliverable scopes no records;
 - a need's or rule's text is copied onto the page, or a rule is longer than one sentence instead of carrying its detail in cases;
 - settled authoritative Requirements are duplicated instead of reused, or need records written from distributed sources invent or confirm missing owner meaning instead of routing it through `sunstack-dev:discuss-pathfinding`;
 - a normative claim lacks authority or an explicit decision gap;
@@ -320,6 +328,8 @@ Do not return `locally-ready` while any of these hold:
 - the goal boundary lacks explicit confirmation or correction by the authorized owner, acceptable outcome-level evidence, or the specification expands its goal, affected classes, missing outcomes, permitted/protected systems, owner-set package limits, non-goals, or acceptable complexity without a new owner decision;
 - the accepted requirements set cannot be recovered from the current owner-confirmed source or last inspectable owner-accepted baseline, conflicts with those sources, lacks returned coverage by record id, or loses an item without owner-authorized supersession;
 - the design check reports a `core` rule with no need;
+- a shared initiative decision or assumption is copied into the project instead of named by its qualified id;
+- a rule the project needs now sits in no `core` deliverable's scope;
 - unresolved product meaning is disguised as an assumption;
 - a returned gap omits an authorized observable outcome, or `decision-needed` is based only on whether implementation or incident mechanisms should be retained or made normative;
 - a material non-goal is omitted, an applicable cross-cutting quality lacks a rule or constraint, or sensitive behavior in scope names no assets, actors or prohibited outcomes;
