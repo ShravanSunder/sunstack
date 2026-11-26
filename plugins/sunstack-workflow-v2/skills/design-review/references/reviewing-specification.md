@@ -26,7 +26,7 @@ Inspect:
 - each record placed on the page is explained beside it and never restated;
 - each entity two readers could read differently is defined.
 
-A `core` slice with no need or rule records is a blocker-level finding. Return `needs-revision` with the smallest correction routed to `design-specification`. Do not write or edit records during review. Other findings are bounded by the sources that actually exist, and the result cannot be `ready`.
+A `core` deliverable whose scope holds no need or rule records is a blocker-level finding. Return `needs-revision` with the smallest correction routed to `design-specification`. Do not write or edit records during review. Other findings are bounded by the sources that actually exist, and the result cannot be `ready`.
 
 Good: every rule names the needs it serves, every rule has observable behavior and cases a wrong build would fail, and Program Design can proceed without inventing meaning.
 

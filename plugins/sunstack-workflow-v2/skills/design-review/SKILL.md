@@ -29,7 +29,8 @@ classify-review-requirement
 
 review
   mode: specification-only | program-only | four-document-design
-  targets: one project's typed records, its page, and the Demistify check's report
+  targets: one project's typed records, its page, its deliverables, and the Demistify
+    check's report (`initiative check` on the initiative root for a project in an initiative)
   result: ready | needs-revision | blocked | decision-needed | not-converging
   coverage: current meaning coverage for every target; uncertain semantic effect is stale
   checks: mode-complete always; sequential chunk passes along artifact seams when
@@ -60,6 +61,7 @@ For operation `review`, require:
 ```text
 mode, the project's record files and page, or separately labeled in-chat records
 the Demistify check's report for the project
+the project's number and the shared initiative records it relies on, for a project in an initiative
 governing sources, authority states, and coverage basis
 confirmed goal boundary and accepted requirements set, or the exact authority gap
 constraints and non-goals
@@ -77,9 +79,9 @@ MUST load `sunstack-dev/shared-references/design-documents.md` and return the re
 
 Use the owner-confirmed requirements record and confirmed goal boundary when available. Otherwise use the last inspectable owner-accepted governing source. If neither exists, or they conflict, return the authority gap. Mutually narrowed current files never establish the accepted requirements set by themselves.
 
-A `core` slice with no need or rule records is a blocker-level design finding, not permission for review to infer them. Record `needs-revision`, route the smallest correction to `design-specification`, and do not write records during review. Continue only with bounded findings that the available sources can support; never return `ready`.
+A `core` deliverable whose scope holds no need or rule records is a blocker-level design finding, not permission for review to infer them. Record `needs-revision`, route the smallest correction to `design-specification`, and do not write records during review. Continue only with bounded findings that the available sources can support; never return `ready`.
 
-`program-only` also requires the governing rules. `four-document-design` requires the current needs, rules, realizations and planned checks. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label.
+`program-only` also requires the governing rules. `four-document-design` requires the current needs, rules, realizations and planned checks. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label. A project held to its needs by its number is no review target in any mode; return blocked input naming its depth.
 
 Completion: the complete target set, governing sources, accepted requirements, boundaries, open authority decisions, and any prior-coverage semantic-change record are unambiguous; any missing-history baseline is recorded with its reason.
 
@@ -113,9 +115,14 @@ MUST load `references/lanes/lane-schema.md` and record `complete | partial | blo
 
 1. MUST load `references/lanes/mode-complete-reviewer.md` and return its check result. MUST load `references/reviewing-common-method.md` and return coverage, reconstructed claims/model slice, authority/traceability evidence, crux evidence, candidate findings, gaps, and stop boundary. MUST load the selected mode reference and return its whole-mode judgment. Reconstruct and judge the whole mode from complete artifacts.
 2. IF the plan composes chunks, load `references/lanes/chunk-reviewer.md` to walk the chunk passes sequentially and return each pass's seam coverage. Reopen each complete artifact and the overlap seam in each pass. A chunk pass supplies seam coverage and never replaces mode-complete coverage.
+
+IF the guide at the page's binding is not loaded this session, load its `references/typed-design.md` at the binding `presentation-html`'s `references/demistify.md` selects, and return the CLI address from that binding's entry guide `authoring/SKILL.md` and, in an initiative, the initiative root.
+
 In a file-backed project, the 🔎 Reviewer Sidekick also runs, read-only, the Demistify check (`demistify initiative check` for an initiative, `demistify design check` for a standalone project) and the design rules, keeping reports outside the workspace: `pnpm dlx @sunstack/cli@0.11.0 lint --config <this plugin's root>/skills/design-review/rules/design-documents.config.json --root <the project's root> --report <scratch>/design-lint.json <the project folder>`.
 
 From the Demistify check report the reviewer takes, as candidate findings, its blocking gaps: a `core` rule with no need, a `core` rule with no planned check, and a need a `core` deliverable lists that none of its rules serves. It also takes the report's design notes, which hold nothing: for a need no rule serves, the reviewer judges whether that need is really out of scope; for a rule no realization names, whether that rule truly needs no new structure. Everything else stays the reviewer's own judgment: whether a check would decide its rules, whether a realization realizes them, and whether the page explains them.
+
+From the same report, take an order warning (a deliverable depending on one in a higher-numbered project) as a candidate finding routed to the caller, for the number, or to `design-specification`, for the cut; read "Waiting on owner" as open owner questions the review must not treat as settled; and take each long-statement note as a nudge on that record's wording. A rule that no `core` deliverable scopes escapes the report's coverage gaps; take it as a candidate finding routed to `design-specification`.
 
 The design rules check that each entity defined on the page has a row under `id="bindings"` on that same page, and that each link's `#fragment` resolves to an HTML `id`. The link rule cannot yet see a record placement (`data-design-record`, or `ex-section-item record`) as an anchor, though Demistify generates one there. For each link warning, open the linked page: when it holds `data-design-record="<the fragment>"` or `ex-section-item record="<the fragment>"`, the warning is this known engine gap, so dismiss it and never ask the author to add an `id`; otherwise the record is not placed there and the link is broken. Each other warning is a candidate finding, anchored on its rule's standard and verified at its anchor in step 8. In `specification-only`, a binding-row warning is expected because Program Design has not bound the entities yet; set it aside. A pass says only that the row or link exists; the binding or link itself is still judged by the review. A run that is refused or `incomplete`, or can't start, is a coverage gap for those rules and cannot support `ready`.
 
@@ -197,7 +204,7 @@ Return every field in the `Coverage-Bound Result` owned by `references/finding-a
 
 After parent reduction, return either a stop or exactly one recommended next skill using the route and compact-handoff procedure in the loaded reference. Reviewer candidates never select this route. When validated findings span documents, recommend the most upstream owner first and carry the complete accepted set; each owner's result decides whether the next one follows. Recommend `sunstack-dev:discuss-pathfinding` only when complete review evidence establishes that the current model fails and replacement owner meaning is still unmade, and include the review-selected return owner. A current authoritative correction routes directly to its semantic owner; missing evidence stops.
 
-Completion: the result names the first required revision, coverage gaps, any owner decision, what a downstream program designer or planner would still have to invent, and one parent-selected compact continuation handoff or an exact stop reason.
+Completion: the result names the first required revision, coverage gaps, any owner decision, what a downstream program designer or planner would still have to invent for each `core` deliverable, and one parent-selected compact continuation handoff or an exact stop reason.
 
 ## Completion Blockers
 
