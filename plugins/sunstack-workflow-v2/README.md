@@ -1,6 +1,6 @@
 # Sunstack Workflow v2
 
-Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.7.1**. Agent management uses `practices-delegation` from `sunstack-dev` 3.8.1.
+Install from the Sunstack marketplace: `/plugin install sunstack-workflow-v2@sunstack` or `codex plugin add sunstack-workflow-v2@sunstack`. Version **0.8.0**. Agent management uses `practices-delegation` from `sunstack-dev` 3.8.1.
 
 This source contains the v2 design skills and separately maintained management and role charters. The design skills preserve the original engineering guidance while teaching useful HTML composition.
 
@@ -12,6 +12,7 @@ This source contains the v2 design skills and separately maintained management a
 | program-design | [design-program](skills/design-program/SKILL.md) |
 | verification-design | [design-verification](skills/design-verification/SKILL.md) |
 | spec-program-review | [design-review](skills/design-review/SKILL.md) |
+| plan-implementation | [plan-implementation](skills/plan-implementation/SKILL.md) |
 
 The engineering baseline is the four design phases from before PR #205, at `b37419ca08dcde11bb8c72b810a4e91afec345f9`, with the v2 route names and installed-plugin dependency repairs retained. V2 changes their artifact presentation to complete free-form HTML through `sunstack-dev:presentation-html`; v1 separately keeps the historical Markdown contract.
 
