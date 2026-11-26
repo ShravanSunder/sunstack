@@ -81,7 +81,7 @@ Use the owner-confirmed requirements record and confirmed goal boundary when ava
 
 A `core` deliverable whose scope holds no need or rule records is a blocker-level design finding, not permission for review to infer them. Record `needs-revision`, route the smallest correction to `design-specification`, and do not write records during review. Continue only with bounded findings that the available sources can support; never return `ready`.
 
-`program-only` also requires the governing rules. `four-document-design` requires the current needs, rules, realizations and planned checks. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label. A project held to its needs by its number is no review target in any mode; return blocked input naming its depth.
+`program-only` also requires the governing rules. `four-document-design` requires the current needs, rules, realizations and planned checks. A missing confirmed goal boundary may produce `decision-needed`; review does not infer acceptance from silence or a status label. A project with only need records, held by its number, is no review target in any mode; return blocked input naming its depth.
 
 Completion: the complete target set, governing sources, accepted requirements, boundaries, open authority decisions, and any prior-coverage semantic-change record are unambiguous; any missing-history baseline is recorded with its reason.
 
