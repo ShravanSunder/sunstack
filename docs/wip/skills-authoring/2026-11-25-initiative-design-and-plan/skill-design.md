@@ -735,7 +735,7 @@ names".
 
 | Run | State |
 | --- | --- |
-| 1 to 6 | proposed |
+| 1 to 6 | accepted-to-implement (25 Nov); in progress |
 
 ## Review record
 
@@ -746,6 +746,31 @@ names".
 | 3 (08823999) | design review A, round 2 | targeted-revision, converging; 6 open (A6, A-N1 to A-N5) |
 | 3 (08823999) | design review B, round 2 | targeted-revision, converging; 4 open (B5, B-N1 to B-N3), B-N4 an observation |
 | 4 | round-2 corrections below; reviewer B: the remaining items can be checked at their anchors | proposed |
+| 4 (a246c80a) | review lead (Demistify Lead) closure, 25 Nov | accepted-to-implement |
+
+Review lead closure at revision 4 (25 Nov 2026, after the owner answered Q9,
+Q8, Q1 and Q6 with the recommended options). Both round-2 reviews returned
+targeted-revision, converging, and named their remaining items as corrections
+inside the accepted boundary, to verify at their anchors (A: first required
+revision S9/S10 scoping; B: "the minor findings can be verified at their
+anchors without another full round"). Each was opened at its anchor in this
+revision and holds:
+
+- **A-N1:** Q8(a)'s costs, obligation 25 and E29 require the new deliverable's plan, and a design review of the cut when it adds rules, before a build commission.
+- **A-N2:** S10, obligation 19 and E28 are scoped to builds ("no deliverable in a higher-numbered project starts its build…"; designing a later project at its depth is not held).
+- **A-N3:** S9, obligation 25 and E29 are scoped to build commissions; design, review and evidence commissions name the project.
+- **A6:** named in Coordination and the dependencies table. The `design-documents.md:32` line landed on the implementation branch at fdb88a4a.
+- **A-N4:** Q1(b)'s costs state it is observable only from Demistify 1.34.1+.
+- **A-N5:** one run gate in Coordination, and one marker wording in each part's header.
+- **B5:** E35 covers `artifact-and-self-review.md:5` and ends "no slice remains".
+- **B-N1:** `canonical-implementation-plan.md:67` on main (9059988b) reads "admits that deliverable's checks only, names the checks of the deliverables it waits on as prerequisites earned there", which agrees with E24 step 3.
+- **B-N2:** K11 and E28 take the CLI address from the binding's entry guide.
+- **B-N3:** K6 teaches no re-cut and names no migrate command.
+- **B-N4:** obligation 19 and E28 carry the [Demistify 1.34.1+] marker; 1.38.1 is hosted.
+
+Observation, no change: K6's reason cites `packages/demistify/scripts/initiative-migration/`, which was deleted from main on 25 Nov (sunstack-tools PR 243) and is now reached at release commit da3363b6. The decision, no re-cut taught, is unchanged.
+
+Run gate met: the owner answered (a246c80a), PR 239 is merged (9059988b), Demistify 1.38.1 is hosted, and the `design-documents.md:32` change is at fdb88a4a. Implementation decision: accepted-to-implement.
 
 Mapping of each finding at revision 3 (closed: taken in as proposed or already
 closed by revision 2 or PR 239; changed: corrected differently from the
