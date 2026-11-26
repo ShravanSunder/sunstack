@@ -260,7 +260,7 @@ Rejecting a requested all-in-one or internally focused diagram does not complete
 
 MUST load `references/artifact-and-self-review.md` with the Required Why/What Views decisions and rendering results to choose the artifact structure, preserve the specification spine, apply view discrimination and pruning, and return the structure decision, traceability/navigation result, view-verification result, pruned elements, artifact identity, and exact view gaps.
 
-Apply any caller-supplied artifact-home policy first. Otherwise, a project in an initiative is created inside that initiative's `projects/` folder, wherever the repository keeps the initiative, and a standalone project in `docs/specs/<project>/`; create a new project with the guide's `design init`. Keep research ledgers and review reports out of the design.
+Apply any caller-supplied artifact-home policy first. Otherwise follow the repository's documented location; failing that, a project in an initiative is created inside that initiative's `projects/` folder, wherever the repository keeps the initiative, and a standalone project in `docs/specs/<project>/`; create a new project with the guide's `design init`. Keep research ledgers and review reports out of the design.
 
 Author top-down: begin with the smallest Why/What map a human needs to confirm the problem and intended outcome, then reveal rules, observable contracts, failures, constraints, and proof.
 
