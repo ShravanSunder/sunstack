@@ -28,7 +28,17 @@ export default [
       }
     },
     "authority": {
-      "state": "owner-open"
+      "state": "owner-decided",
+      "sourceKind": "owner-words",
+      "decidedOn": "2026-11-25",
+      "chosen": "surfaces-and-proof",
+      "decision": "The plan names each step’s files, proof and pull request; the Implementer chooses the code and tests inside the step.",
+      "source": {
+        "href": "index.html#Q9",
+        "excerpt": "i agree wit5h him",
+        "verbatim": true,
+        "shown": "I agree with him (the Mac Lead’s reasoning for each question, pasted in the same message)."
+      }
     }
   },
   {
@@ -58,7 +68,17 @@ export default [
       }
     },
     "authority": {
-      "state": "owner-open"
+      "state": "owner-decided",
+      "sourceKind": "owner-words",
+      "decidedOn": "2026-11-25",
+      "chosen": "core-in-typed-work",
+      "decision": "Uncovered work gets a core deliverable in the project it serves, and rows are required only inside an initiative or typed project.",
+      "source": {
+        "href": "index.html#Q8",
+        "excerpt": "i agree wit5h him",
+        "verbatim": true,
+        "shown": "I agree with him (the Mac Lead’s reasoning for each question, pasted in the same message)."
+      }
     }
   },
   {
@@ -88,7 +108,17 @@ export default [
       }
     },
     "authority": {
-      "state": "owner-open"
+      "state": "owner-decided",
+      "sourceKind": "owner-words",
+      "decidedOn": "2026-11-25",
+      "chosen": "earlier-planned",
+      "decision": "A project gets its full design once every lower-numbered project’s core deliverables have plans.",
+      "source": {
+        "href": "index.html#Q1",
+        "excerpt": "i agree wit5h him",
+        "verbatim": true,
+        "shown": "I agree with him (the Mac Lead’s reasoning for each question, pasted in the same message)."
+      }
     }
   },
   {
@@ -114,7 +144,17 @@ export default [
       }
     },
     "authority": {
-      "state": "owner-open"
+      "state": "owner-decided",
+      "sourceKind": "owner-words",
+      "decidedOn": "2026-11-25",
+      "chosen": "docs-initiatives",
+      "decision": "Initiatives live in docs/initiatives/<initiative>/, and docs/initiatives/ joins the design-mode write list.",
+      "source": {
+        "href": "index.html#Q6",
+        "excerpt": "i agree wit5h him",
+        "verbatim": true,
+        "shown": "I agree with him (the Mac Lead’s reasoning for each question, pasted in the same message)."
+      }
     }
   },
   {
