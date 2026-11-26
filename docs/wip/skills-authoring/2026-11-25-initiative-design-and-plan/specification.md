@@ -198,8 +198,8 @@ that deliverable its plan, before the commission. Design, review and evidence
 commissions name the project. **[Q8]** [A-N3]
 
 S10. Builds start in number order: no deliverable in a higher-numbered project
-starts its build while a lower-numbered project has open `core` work, unless a
-dependency or the owner says otherwise. Design depth follows S8. [A3, A-N2]
+starts its build while a lower-numbered project has open `core` work, unless the
+owner says otherwise. Design depth follows S8. [A3, A-N2]
 
 ## Transfer tests
 
@@ -218,7 +218,7 @@ reviewer A's cases where they differed.
 | S7 | A browser journey kept as planned. Holds. | The plan runs the check only against a stand-in target. Rejected: it re-chooses the target. | passes |
 | S8 **[Q1]** | Projects 1 and 2: project 2 holds needs and open questions until project 1's deliverables have plans. Holds. | An agent writes project 2's realizations early. Rejected: depth comes from the number. | passes; needs the `design-documents.md:32` line in "Dependencies outside scope" |
 | S9 **[Q8]** | A Python service initiative: a bug fix found during build is commissioned under `api/DEL-04`, whose scope holds the rule it breaks. Holds. Re-run on a design-stage commission: the Lead commissions a 🔎 Reviewer for a typed project's Requirements before any deliverable exists; the commission names the project, and S9 does not apply. Holds. | A Lead sends a builder a "quick cleanup" by chat, inside an initiative, with no deliverable. Rejected until a row and its plan exist. Work outside any initiative or typed project is outside its scope. | passes, scope stated |
-| S10 | A Go initiative: project 2's deliverable is planned while project 1 still has an open deliverable; the Lead builds project 1's first, while project 2's design proceeds under Q1(b). Holds. | A Lead starts project 2's build "because the builder is free". The rule names no idle builders; it rejects the start without a dependency or the owner. | passes |
+| S10 | A Go initiative: project 2's deliverable is planned while project 1 still has an open deliverable; the Lead builds project 1's first, while project 2's design proceeds under Q1(b). Holds. | A Lead starts project 2's build "because the builder is free". The rule names no idle builders; it rejects the start without the owner. | passes |
 
 The single rule for where a fact lives (the record holds the one sentence and
 its links; the page holds explanation and picture), which the Mac Lead asked
