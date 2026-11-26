@@ -102,7 +102,7 @@ Success 4: order by dependencies and the owner's numbers.
 19. `role-lead` and `plan-implementation` take what is ready from the
     initiative's status, in its order, and start no deliverable's build in a
     higher-numbered project while a lower-numbered project has open `core`
-    work, unless a dependency or the owner says otherwise; designing a later
+    work, unless the owner says otherwise; designing a later
     project at the depth its number gives it is not held by this.
     **[Demistify 1.34.1+]** the status orders "ready now" by project number
     and lists `core` deliverables with no steps under "Needs a plan".

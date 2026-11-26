@@ -122,8 +122,20 @@ Runs 1 to 4 and 6: not applicable, no description changes.
 ## What stays unverified
 
 - Behavior: no eval has run; the Mac Lead's failures are not reproduced.
-- Q1, Q6, Q8, Q9 until the owner answers; marked edits carry the
-  recommendations. K9 to K15 are defaults the owner may strike.
+- Q1, Q6, Q8 and Q9 are answered (25 Nov, the recommended options). K9 to K15
+  are defaults the owner may strike.
+- The model-judged guide-load route (line 25) reached only some loads, per the
+  implementation review of sunstack#240 (finding 21):
+  - It reached E15 and E24.
+  - It reached E2 and E11 only as cut `uncertain` pieces, decided by hand.
+  - It never reached E21 or E28: the load matcher needs a backtick right after
+    "load", so "load its `…`" is not picked.
+  - The routes to "the existing general-skill.md rule" and "the existing judged
+    rules on steps" have no active rulebook in `skill-rules.config.json`, so
+    they did not run.
+  - The calls themselves are complete (the review lead read each). The matcher
+    follow-up goes to `skill-rules-authoring`; the wording is not changed to
+    satisfy it.
 - Demistify 1.34.0 on the hosted binding (publishing), and Demistify 1.34.1+
   with PR 229's "ready now" order and "Needs a plan" list (A9).
 - A4: whether qualified record ids type-check in a project's generated SDK.
