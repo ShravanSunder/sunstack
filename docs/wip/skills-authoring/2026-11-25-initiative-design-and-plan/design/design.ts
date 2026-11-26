@@ -4,7 +4,7 @@ export default defineDesign({
   "pages": [
     {
       "id": "home",
-      "title": "For you to decide",
+      "title": "Overview",
       "href": "index.html",
       "icon": "file"
     },

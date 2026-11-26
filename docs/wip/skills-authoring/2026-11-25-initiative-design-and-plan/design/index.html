@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>For you to decide: the v2 initiative and plan change</title>
+  <title>The v2 initiative and plan change</title>
   <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
   <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
 </head>
@@ -11,60 +11,258 @@
   <ex-nav for="content" src="./navigation.generated.json"></ex-nav>
   <ex-document id="content">
     <h1>The v2 initiative and plan change</h1>
-    <p>This change teaches five <code>sunstack-workflow-v2</code> skills your model of 25 November: an initiative orders numbered projects, each project is one four-part design, and each project is cut into deliverables that select its records. A new <code>plan-implementation</code> skill writes one plan per deliverable. Two independent design reviews have run twice; four questions are yours. Pick an option on each, add a comment where you want to say more, then copy the review to me.</p>
-    <ex-mermaid id="model" label="Which v2 skill writes what, from initiative to recorded proof"><script type="text/plain">
-flowchart TD
-  initiative["Initiative<br/>project numbers, shared decisions<br/>role-lead, with you"]
-  project["Project: one design<br/>needs, rules, realizations, checks"]
-  review["Four-document review<br/>design-review"]
-  deliverable["Deliverable record<br/>scope, steps, what it waits on"]
-  plan["Plan page<br/>plan-implementation"]
-  build["Build and checks"]
-  initiative --> project
-  project --> review
-  project --> deliverable
-  review --> plan
-  deliverable --> plan
-  plan --> build
-  build --> deliverable
+
+    <p><strong>In one sentence:</strong> agents now carry an initiative from your numbered projects, through one design per project, into deliverables that each get exactly one plan, one build and recorded proof, and they read progress from the records rather than from chat.</p>
+
+    <p>Six <code>sunstack-workflow-v2</code> skills changed to do this. Five were updated (<code>design-specification</code>, <code>design-program</code>, <code>design-verification</code>, <code>design-review</code>, <code>role-lead</code>), and <code>plan-implementation</code> is new. It shipped as version 0.8.0 on 26 Nov, after your four answers. They're installed in Claude and Codex.</p>
+
+    <ex-callout title="What's still unproven" tone="risk" icon="test-tube">
+      <p>An independent review (24 findings down to 0) and one trigger trial back this change. No behaviour eval has run, and it waits for your go-ahead. Agent sessions started before 26 Nov still use the old skills until they restart.</p>
+    </ex-callout>
+
+    <h2 id="model">The model in one picture</h2>
+    <p>There are three levels, and each has one job. The <strong>initiative</strong> holds your project numbers and the decisions several projects share, and it has no design of its own. A <strong>project</strong> is exactly one design in four parts. A <strong>deliverable</strong> never adds design: it picks which of its project's rules and checks it builds, and it is what one plan is written for. Proof comes back to the deliverable, so the status reads from there.</p>
+
+    <ex-mermaid id="levels" label="Levels, and which skill writes each part" data-width="canvas"><script type="text/plain">
+flowchart LR
+  subgraph ini["Initiative"]
+    numbers["Your project numbers<br/>and words for each"]
+    shared["Shared decisions<br/>written once"]
+  end
+  subgraph proj["Project: one design"]
+    needs["Needs and rules<br/>design-specification"]
+    how["Realizations<br/>design-program"]
+    checks["Planned checks<br/>design-verification"]
+    rev["Four-part review<br/>design-review"]
+  end
+  subgraph del["Deliverable: a scope"]
+    scope["Picks rules and checks<br/>adds none"]
+    plan["One plan<br/>plan-implementation"]
+    proof["Build, check results,<br/>acceptance: role-lead"]
+  end
+  numbers --> needs
+  shared -.->|relied on by id| needs
+  needs --> how --> checks --> rev
+  needs -->|cuts into| scope
+  how -->|adds ids to| scope
+  checks -->|adds ids to| scope
+  rev -->|ready| plan
+  scope --> plan --> proof
+  proof -->|initiative status| numbers
+  class numbers,shared slot1
+  class needs,how,checks,rev slot2
+  class scope,plan,proof slot3
 </script></ex-mermaid>
 
-    <ex-section id="open" title="For you to decide" holds="needs-owner"></ex-section>
+    <p>Before this change, the design skills wrote one set under <code>docs/specs/</code> and knew nothing about initiatives or projects. No v2 skill wrote a plan: the Program Design handed "task slices" to an unnamed planner. The Mac Lead wrote a separate design for each deliverable, and a week of their work had no deliverable row.</p>
+
+    <h2 id="sequence">What happens, start to finish</h2>
+    <p>This is one pass through an initiative, as the skills now run it. Every arrow into Demistify writes or reads typed records. Nothing is a hand-written status.</p>
+
+    <ex-mermaid id="flow" label="One initiative, from your numbers to accepted work" data-width="canvas"><script type="text/plain">
+sequenceDiagram
+  participant O as You
+  participant L as Lead
+  participant D as Design phases
+  participant R as Design review
+  participant P as plan-implementation
+  participant I as Implementer
+  participant X as Demistify records
+  O->>L: Number the projects, say what each achieves
+  L->>X: initiative.ts, then initiative check
+  L->>D: Design project 1 in full
+  D->>X: Needs, rules, deliverables, realizations, checks
+  L->>R: Review the four parts
+  R-->>L: ready
+  L->>P: Plan deliverable DEL-01
+  P->>X: Read brief and initiative status
+  P->>X: Step list and plan page, in one edit
+  P-->>L: ready
+  L->>I: Commission with id, brief, plan page
+  I-->>L: Handback with evidence
+  L->>X: Completed steps, check results, acceptance
+  L->>O: Report, citing initiative status
+</script></ex-mermaid>
+
+    <p>Two things hold this order. While project 1 is being designed, a higher-numbered project gets only its needs and open questions (your <a href="#Q1">Q1 answer</a>). And no build starts in project 2 while project 1 still has open <code>core</code> work, unless you say otherwise.</p>
+
+    <h2 id="who-writes">Who writes what</h2>
+    <p>Each kind of fact has one writer. A helper never writes design records; it returns evidence, and the Lead records it.</p>
+    <div class="ex-table-scroll" data-width="canvas">
+      <table>
+        <thead><tr><th>Skill</th><th>Writes</th><th>Adds to the deliverable</th><th>Returns</th></tr></thead>
+        <tbody>
+          <tr><td><code>role-lead</code></td><td>The initiative file with your numbers and words, the shared decisions, and the overview page</td><td>Completed steps, check results and acceptance, from handbacks it has opened</td><td>Your owner decisions, as open choice records</td></tr>
+          <tr><td><code>design-specification</code></td><td>Needs, rules and the project's deliverables, in build order</td><td>Its needs and rules, plus the first dependencies</td><td><code>deferred</code> for a project held to its needs</td></tr>
+          <tr><td><code>design-program</code></td><td>Realizations: owners, interfaces, state, flows</td><td>Each realization, on the deliverables that build it</td><td>A gap token for a missing seam</td></tr>
+          <tr><td><code>design-verification</code></td><td>Planned checks, and the project's "what you check" line</td><td>Each check, on the deliverables that build it</td><td>A gap token</td></tr>
+          <tr><td><code>design-review</code></td><td>Findings only</td><td>Nothing; it reports a rule no deliverable scopes</td><td><code>ready</code>, or findings routed to their phase</td></tr>
+          <tr><td><code>plan-implementation</code> <ex-badge tone="added">new</ex-badge></td><td>The plan page: each step's files, proof and pull request</td><td>The step list, changed only together with the plan</td><td><code>ready</code>, <code>blocked</code> or a gap token</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="build-gate">Before any build starts</h2>
+    <p>The Mac Lead asked for this check, and it's the one most likely to stop an agent: work that changes the product needs a deliverable before anyone builds it. The skill names the excuse it blocks: "it's a small fix, the row can come later". Design, review and evidence work name the project instead, because those happen before deliverables exist.</p>
+
+    <ex-mermaid id="gate" label="What the Lead checks before a build commission" data-width="canvas"><script type="text/plain">
+flowchart TD
+  work["Build work arrives<br/>implement, verify or fix"] --> typed{"Inside an initiative<br/>or typed project?"}
+  typed -->|no| free["No row needed"]
+  typed -->|yes| covered{"A deliverable<br/>covers it?"}
+  covered -->|yes| name["Name that deliverable"]
+  covered -->|no| add["Add a core deliverable<br/>in the project it serves"]
+  add --> rules{"Does it need<br/>a new rule?"}
+  rules -->|yes| spec["design-specification first,<br/>then review the cut"]
+  rules -->|no| planit["plan-implementation"]
+  spec --> planit
+  planit --> name
+  name --> order{"Lower-numbered project<br/>still has open core work?"}
+  order -->|yes| hold["Hold, unless you say otherwise"]
+  order -->|no| go["Commission the build"]
+  class go slot6
+  class hold slot2
+</script></ex-mermaid>
+
+    <h2 id="answers">Your four answers</h2>
+    <p>You answered on 25 Nov ("I agree with him", after pasting the Mac Lead's reasoning), and each answer was the recommended option. Each record below shows what you chose, and the diagram inside shows what that changes in practice.</p>
+
+    <ex-section id="settled" title="You decided" holds="settled"></ex-section>
+
     <ex-section-item record="Q9"><ex-choice>
-      <template data-record-body><p>Your model says the plan explains each step "(files, tests, pull request, proof)". v2's role contract leaves detailed steps and tests to the Implementer. The full question is in the <a href="skill-design.html">skill design</a>.</p></template>
-      <ex-option data-option="surfaces-and-proof"><template slot="summary">Per step, the plan names the files and modules it writes, the proof it must produce and its pull request; the Implementer chooses the detailed changes and test code inside. Gain: your "files, tests" held at the level of surfaces and required proof, and v2's Designed Outcome holds. Cost: "tests" becomes "the proof each step must produce", a reading you may reject.</template></ex-option>
-      <ex-option data-option="checks-only"><template slot="summary">The plan names steps, the checks each earns and the pull request only; files and tests are the Implementer's. Gain: the role contract is untouched. Cost: drops "files, tests" from your model.</template></ex-option>
-      <ex-option data-option="files-and-tests"><template slot="summary">The plan fixes files and tests per step, and the Implementer carries them out. Gain: your words, literally. Cost: turns a Designed Outcome into near exact steps, against v2's stated model.</template></ex-option>
+      <template data-record-body>
+        <p>The plan fixes the governing units, and the Implementer keeps the craft inside each one. Your model said the plan explains each step's "files, tests, pull request, proof". The plan now names the files and modules a step writes, and the proof it must produce: the checks it earns and the wrong behaviour its tests must catch. The test code itself stays the Implementer's.</p>
+        <ex-mermaid id="q9-split" label="Who decides what inside one step"><script type="text/plain">
+flowchart LR
+  subgraph planfixes["The plan fixes, per step"]
+    files["Files and modules"]
+    proofreq["Proof it must produce"]
+    pr["Its pull request"]
+  end
+  subgraph implchooses["The Implementer chooses"]
+    code["Detailed changes"]
+    tests["Test code, helpers"]
+    sub["Sub-steps"]
+  end
+  planfixes --> implchooses
+  class files,proofreq,pr slot1
+  class code,tests,sub slot3
+</script></ex-mermaid>
+      </template>
+      <ex-option data-option="surfaces-and-proof"><template slot="summary">Per step: files and modules, required proof, pull request. The Implementer chooses the code and tests inside. *Gain:* your "files, tests" kept at the level of surfaces and proof. *Cost:* "tests" reads as the proof each step must produce.</template></ex-option>
+      <ex-option data-option="checks-only"><template slot="summary">Steps, their checks and pull requests only. *Cost:* drops "files, tests" from your model.</template></ex-option>
+      <ex-option data-option="files-and-tests"><template slot="summary">The plan fixes files and tests per step. *Cost:* turns the Implementer's Designed Outcome into near-exact steps.</template></ex-option>
     </ex-choice></ex-section-item>
+
     <ex-section-item record="Q8"><ex-choice>
-      <template data-record-body><p>The Mac Lead asks that the Lead name the deliverable before any commission, adding the row first when there is none.</p></template>
-      <ex-option data-option="core-in-typed-work"><template slot="summary">A core deliverable in the project the work serves, and rows only inside an initiative or typed project; other work is exempt. Gain: every build commission inside typed work is counted and gated. Cost: a small fix waits for its rule and plan when none exists.</template></ex-option>
-      <ex-option data-option="core-everywhere"><template slot="summary">A core deliverable for every piece of work, typed or not. Gain: nothing escapes the count. Cost: the same wait on every small fix, everywhere.</template></ex-option>
-      <ex-option data-option="later-placeholder"><template slot="summary">A later deliverable as a placeholder row, promoted to core when scoped. Gain: cheap and immediate. Cost: active work shows as "later" and is not checked.</template></ex-option>
+      <template data-record-body>
+        <p>This is the check drawn under <a href="#build-gate">Before any build starts</a>. Uncovered build work gets a real <code>core</code> deliverable, and the design check covers it, so nothing slips through as a placeholder. Work outside any initiative or typed project isn't affected.</p>
+      </template>
+      <ex-option data-option="core-in-typed-work"><template slot="summary">A core deliverable in the project the work serves, and rows required only inside typed work. *Cost:* a small fix waits for its rule and plan when none exists.</template></ex-option>
+      <ex-option data-option="core-everywhere"><template slot="summary">A core deliverable for every piece of work, typed or not. *Cost:* the same wait everywhere.</template></ex-option>
+      <ex-option data-option="later-placeholder"><template slot="summary">A placeholder `later` row, promoted when scoped. *Cost:* active work shows as later and isn't checked.</template></ex-option>
     </ex-choice></ex-section-item>
+
     <ex-section-item record="Q1"><ex-choice>
-      <template data-record-body><p>You asked for depth by number: all four documents for number 1, and Requirements with open questions only for later numbers "until near". Work still starts in number order whatever you pick.</p></template>
-      <ex-option data-option="earlier-accepted"><template slot="summary">Near means every lower-numbered project is accepted. Gain: rules are written on settled ground. Cost: designers idle while builds finish.</template></ex-option>
-      <ex-option data-option="earlier-planned"><template slot="summary">Near means every lower-numbered project's core deliverables have plans. Gain: the next design runs while the earlier ones build. Cost: a late finding in an earlier build can still move the next design.</template></ex-option>
-      <ex-option data-option="per-project"><template slot="summary">The Lead proposes "near" per project and you confirm. Gain: judgment per case. Cost: one decision from you per project, and no field for it yet.</template></ex-option>
+      <template data-record-body>
+        <p>Design runs one number ahead of builds. Once every <code>core</code> deliverable of the lower-numbered projects has a plan, the next project gets its full four-part design while the earlier ones build. Until then, <code>design-specification</code> writes only its needs and open questions and returns <code>deferred</code>, citing your numbers.</p>
+        <ex-mermaid id="q1-depth" label="Design depth by project number"><script type="text/plain">
+flowchart LR
+  p1["Project 1<br/>full four-part design"] -->|every core deliverable planned| p2["Project 2<br/>full design starts"]
+  p2 -.->|until project 2 is planned| p3["Project 3<br/>needs and open questions only"]
+  class p1,p2 slot6
+  class p3 slot2
+</script></ex-mermaid>
+      </template>
+      <ex-option data-option="earlier-accepted"><template slot="summary">Near means every lower-numbered project is accepted. *Cost:* designers idle while builds finish.</template></ex-option>
+      <ex-option data-option="earlier-planned"><template slot="summary">Near means every lower-numbered project's core deliverables have plans. *Gain:* the next design runs while earlier ones build. *Cost:* a late finding in an earlier build can still move it.</template></ex-option>
+      <ex-option data-option="per-project"><template slot="summary">The Lead proposes "near" per project and you confirm. *Cost:* one decision from you per project.</template></ex-option>
     </ex-choice></ex-section-item>
+
     <ex-section-item record="Q6"><ex-choice>
-      <template data-record-body><p>A project in an initiative lives in that initiative's <code>projects/</code> folder either way. Your global instructions allow design-mode writes only in <code>docs/specs/</code>, <code>docs/wip/</code> and <code>tmp/</code>.</p></template>
-      <ex-option data-option="docs-initiatives"><template slot="summary"><code>docs/initiatives/&lt;initiative&gt;/</code>, and you add <code>docs/initiatives/</code> to the design-mode write list. Gain: matches every guide example. Cost: a change to your global instructions.</template></ex-option>
-      <ex-option data-option="docs-specs"><template slot="summary"><code>docs/specs/&lt;initiative&gt;/</code>. Gain: no change to your instructions. Cost: departs from the guide's examples, so agents see two layouts.</template></ex-option>
+      <template data-record-body>
+        <p>Initiatives live under <code>docs/initiatives/</code>, and each project is a folder inside its initiative. A standalone project still lives in <code>docs/specs/</code>. Your global instructions now list <code>docs/initiatives/</code> as a design-mode folder; that edit isn't committed yet.</p>
+        <ex-file-tree label="Where an initiative's files live"><script type="text/plain">
+docs/
+  initiatives/
+    2026-11-central-and-mac/
+      initiative.ts
+      index.html
+      projects/
+        2026-11-sessions/
+          design.ts
+          index.html
+          plans/
+  specs/
+    2026-11-standalone-project/
+</script></ex-file-tree>
+      </template>
+      <ex-option data-option="docs-initiatives"><template slot="summary">`docs/initiatives/<initiative>/`, added to your design-mode write list. *Gain:* matches every guide example. *Cost:* one line in your global instructions.</template></ex-option>
+      <ex-option data-option="docs-specs"><template slot="summary">`docs/specs/<initiative>/`. *Cost:* agents see two layouts.</template></ex-option>
     </ex-choice></ex-section-item>
+
+    <h2 id="agent-calls">What the Lead decided without you</h2>
+    <p>These five questions were closed during the design reviews without coming to you. Each record says what was decided. The line under it says why it matters, so you can change any of them.</p>
 
     <ex-section id="agent" title="Decided without you" holds="decided-by-agent"></ex-section>
-    <ex-section-item record="Q2"><p>Was open question Q2 in revision 2; closed as default K9 in the <a href="skill-design.html">skill design</a>.</p></ex-section-item>
-    <ex-section-item record="Q3"><p>Was open question Q3 in revision 2.</p></ex-section-item>
-    <ex-section-item record="Q4"><p>Was open question Q4 in revision 2.</p></ex-section-item>
-    <ex-section-item record="Q5"><p>Was open question Q5 in revision 3; closed as default K15.</p></ex-section-item>
-    <ex-section-item record="Q7"><p>Was open question Q7 in revision 3; closed as default K13.</p></ex-section-item>
+    <ex-section-item record="Q2"><p>The independent skills review found that the design check passed on an empty report, because no skill ever put rules into a deliverable. Having each phase write its own ids into the scope closes that gap.</p></ex-section-item>
+    <ex-section-item record="Q3"><p>The Mac Lead saw two rules about where a fact lives. The competing one came from v1's own copy of the reference, so no v2 text needed to change.</p></ex-section-item>
+    <ex-section-item record="Q4"><p>This follows your preference, relayed by the Mac Lead, for a small tool. Entities stay defined on the page.</p></ex-section-item>
+    <ex-section-item record="Q5"><p>No v2 edit depends on this. Merging the two checkers would grow the tool.</p></ex-section-item>
+    <ex-section-item record="Q7"><p>The plan contract was fixed in an earlier PR, so a re-plan always changes the record and the page together.</p></ex-section-item>
 
-    <ex-section id="settled" title="Settled" holds="settled"></ex-section>
+    <h2 id="rules">The rules the skills now hold</h2>
+    <p>These are the ten standards, in plain words, each with the mistake it stops. The specification's transfer tests try each one on a second, different setting.</p>
+    <div class="ex-table-scroll" data-width="canvas">
+      <table>
+        <thead><tr><th></th><th>Rule</th><th>The mistake it stops</th></tr></thead>
+        <tbody>
+          <tr><td>S1</td><td>A deliverable selects existing records and adds none.</td><td>A plan page quietly adding "must also work offline" as an acceptance bullet</td></tr>
+          <tr><td>S2</td><td>Steps live in the deliverable record; the plan explains each under the same id.</td><td>The record says <code>t2-schema</code> while the plan explains "Migrate users table"</td></tr>
+          <tr><td>S3</td><td>Dependencies run only between deliverables, never upward to a higher number.</td><td>Hiding a real prerequisite in project 3 and returning <code>ready</code></td></tr>
+          <tr><td>S4</td><td>Only you change project numbers or move deliverables.</td><td>Moving a deliverable into project 1 to start it early</td></tr>
+          <tr><td>S5</td><td>A shared decision is written once, in the initiative.</td><td>Project 2 linking to project 1's copy of an auth ruling</td></tr>
+          <tr><td>S6</td><td>The Lead records progress and acceptance from evidence it opened.</td><td>Recording outcomes from a chat summary</td></tr>
+          <tr><td>S7</td><td>A plan never changes a check's target or passing condition.</td><td>Running a check only against a stand-in</td></tr>
+          <tr><td>S8</td><td>A project gets its full design when its number is near.</td><td>Writing project 2's realizations early</td></tr>
+          <tr><td>S9</td><td>Build work in typed work runs under a named deliverable.</td><td>A "quick cleanup" sent to a builder by chat</td></tr>
+          <tr><td>S10</td><td>Builds start in number order, unless you say otherwise.</td><td>Starting project 2's build "because the builder is free"</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h2 id="documents">The four documents</h2>
-    <p><a href="requirements.html">Requirements</a>: your model, the Mac Lead's input, the reviews' findings and what stays out of scope. <a href="specification.html">Specification</a>: thirty obligations and ten standards. <a href="skill-design.html">Skill design</a>: the questions in full, defaults, six runs and edits E1 to E40. <a href="skill-verification.html">Skill verification</a>: how each part is shown, and what stays unverified.</p>
+    <h2 id="shipped">How it shipped, and how it was checked</h2>
+    <ex-trace title="From design to installed skills" data-width="reading">
+      <details icon="file" tone="done" tag="Reviewed">
+        <summary>Design set: two independent review rounds, then accepted</summary>
+        <p>Revision 4 was accepted to implement. The review lead's closure is recorded in the skill design's review record.</p>
+      </details>
+      <details icon="robot" tone="done" tag="Written">
+        <summary>Three Opus implementers wrote the six skills, one run each</summary>
+        <p>The Lead read each diff against its run's edits and restored one clause an implementer had dropped. Lint: 0 errors.</p>
+      </details>
+      <details icon="users" tone="done" tag="Reviewed">
+        <summary>Independent implementation review: 24 findings, corrected, rechecked to 0</summary>
+        <p>One Codex reviewer and two Opus reviewers took part, led by a session that hadn't edited the change.</p>
+      </details>
+      <details icon="test-tube" tone="done" tag="Observed">
+        <summary>Trigger trial: <code>plan-implementation</code> loads only for planning</summary>
+        <p>"Write the implementation plan for DEL-03" loaded it. In 4 runs, it never loaded on a near miss. Tried on Claude only.</p>
+      </details>
+      <details icon="rocket" tone="done" tag="Shipped">
+        <summary>Merged as <code>9985ee4c</code>; installed in Claude and Codex</summary>
+        <p><code>sunstack-workflow-v2</code> 0.8.0 and <code>sunstack-dev</code> 3.8.2.</p>
+      </details>
+    </ex-trace>
+
+    <h2 id="documents">The full documents</h2>
+    <p>The four parts hold every detail this page summarizes. Open them only for depth.</p>
+    <ul>
+      <li><a href="requirements.html">Requirements</a>: your model, the Mac Lead's input, the review findings it rests on, and what's out of scope.</li>
+      <li><a href="specification.html">Specification</a>: the 30 obligations and the ten rules above, with their transfer tests.</li>
+      <li><a href="skill-design.html">Skill design</a>: the questions in full, the Lead's defaults K1 to K15, and the six runs with edits E1 to E40.</li>
+      <li><a href="skill-verification.html">Skill verification</a>: how each part is proven, and what stays unverified.</li>
+    </ul>
   </ex-document>
 </body>
 </html>
