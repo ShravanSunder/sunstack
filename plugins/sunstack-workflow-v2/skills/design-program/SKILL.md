@@ -86,11 +86,13 @@ Before recommending a skill, inspect that destination's declared inputs and retu
 
 ### 1. Validate authoritative Why/What
 
-Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<project-root>/docs/specs/`, create any new file-backed Program Design beneath that home and return its exact path. Preserve an authoritative pre-existing Program Design elsewhere; do not relocate or reject it because of the policy. The artifact-home policy applies only to a new output in the current call and is not persisted as workflow state.
+Accept an optional call-scoped `new artifact home` policy. When the caller supplies `<repository-root>/docs/specs/`, create any new file-backed Program Design beneath that home and return its exact path. Otherwise, a project in an initiative is created inside that initiative's `projects/` folder, wherever the repository keeps the initiative, and a standalone project in `docs/specs/<project>/`; create a new project with the guide's `design init`. Preserve an authoritative pre-existing Program Design elsewhere; do not relocate or reject it because of the policy. The artifact-home policy applies only to a new output in the current call and is not persisted as workflow state.
 
-MUST load `sunstack-dev/shared-references/design-documents.md` and return the need and rule records this design consumes, the realization and decision records it writes, the page's how sections, and the design-item contents, nudge labels and ranking this run uses. Missing need or rule records for a `core` slice return `specification-gap` to `design-specification` before structural work begins; do not write or copy them here.
+MUST load `sunstack-dev/shared-references/design-documents.md` and return the need and rule records this design consumes, the realization and decision records it writes, the page's how sections, and the design-item contents, nudge labels and ranking this run uses. Missing need or rule records for a `core` deliverable return `specification-gap` to `design-specification` before structural work begins; do not write or copy them here.
 
-Read every need and rule record, the page's why and what sections, and the confirmed goal boundary accepted by `design-specification`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity definitions (`E`), observable contracts and rules (`R`), constraints, failure expectations, each rule's cases (threshold, target constraints, and reference), the `core` and `later` slices, non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `design-specification` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
+MUST load the guide's `references/typed-design.md` at the binding `sunstack-dev:presentation-html`'s `references/demistify.md` selects, and return the helpers, fields and files this run writes, and the CLI address from that binding's entry guide `authoring/SKILL.md`. IF the project belongs to an initiative, also load `references/typed-design-initiative.md` and return the initiative root, the project numbers, the qualified-reference form and the alias source.
+
+Read every need and rule record, the page's why and what sections, and the confirmed goal boundary accepted by `design-specification`. Extract authorized needs (`U`), outcomes, priorities, boundaries, the entity definitions (`E`), observable contracts and rules (`R`), constraints, failure expectations, each rule's cases (threshold, target constraints, and reference), the deliverables, non-goals, open decisions, owner-set package or system limits, and the accepted requirements set. Treat the Specification's observable contract as fixed input. If the Specification does not carry or point to the confirmed goal boundary and accepted requirements set, return the exact `design-specification` gap before selecting target structure; Program Design does not reconstruct or rewrite upstream authority.
 
 Classify gaps as `missing meaning | conflicting meaning | feasibility question | design choice | planning detail`. Missing or conflicting meaning returns `specification-gap`; do not patch it locally.
 
@@ -110,7 +112,7 @@ IF an external platform, protocol, library, sandbox, runtime, or empirical claim
 
 Completion: each load-bearing current behavior has an anchored entry-to-effect path with its return and error edges, or a source-backed greenfield basis; degree of constraint is source-backed; and `changes / remains authoritative` is explicit.
 
-Two questions are always answered: anything that stores or sends says what happens when it fails, and anything that crosses a trust boundary says who is trusted with what. Write every other dimension (components, interfaces, state, calls/flows, concurrency/consistency, compatibility/cutover, and proof) only where it applies, for `core` slices; record no not-applicable judgment. The forced list is the owner's to extend. Never invent a store, protocol, retry policy, migration, governance surface, or other subsystem merely to fill a dimension.
+Two questions are always answered: anything that stores or sends says what happens when it fails, and anything that crosses a trust boundary says who is trusted with what. Write every other dimension (components, interfaces, state, calls/flows, concurrency/consistency, compatibility/cutover, and proof) only where it applies, for `core` rules; record no not-applicable judgment. The forced list is the owner's to extend. Never invent a store, protocol, retry policy, migration, governance surface, or other subsystem merely to fill a dimension.
 
 ### 3. State the crux and forces
 
@@ -212,7 +214,7 @@ Completion: each applicable obligation has structural How, and anything that cro
 
 ### 14. Define proof architecture, structural enforcement, and the realization records
 
-MUST load `references/proof-architecture-and-traceability.md` to return the realization records, proof seams, real/fake boundary decisions, enforcement classes, and one illegality decision per material invalid state: unrepresentable, or rejected at the trusted entry. Each realization record says in one sentence how its owner realizes the rules it names. The trace is the records' links; the design check computes it.
+MUST load `references/proof-architecture-and-traceability.md` to return the realization records, proof seams, real/fake boundary decisions, enforcement classes, and one illegality decision per material invalid state: unrepresentable, or rejected at the trusted entry. Each realization record says in one sentence how its owner realizes the rules it names. Add each realization id to the scope of the `core` deliverables that build it. A realization that addresses another project's rule names that rule by qualified id. A structural decision that several projects share is an initiative decision, written once there. The trace is the records' links; the design check computes it.
 
 Write a proof seam or real/fake boundary as a decision record only when the answer is not the obvious one, and each stand-in as an assumption record in the same edit, naming what it stands in for and what would close it.
 
@@ -326,13 +328,13 @@ Parallel-safe only after the lane prerequisites exist and its result is not an i
 
 ## Planning Boundary
 
-Program design settles entity bindings and contract shapes, owners, boundaries, interfaces, state, flows, recovery/concurrency, cutover, trust, and proof seams. Package detail stops at the binding table. Planning chooses task slices, exact files, write scopes, DAG/order, exact tests/commands, red/green sequence, evidence capture, checkpoints, deployment, and rollback procedure.
+Program design settles entity bindings and contract shapes, owners, boundaries, interfaces, state, flows, recovery/concurrency, cutover, trust, and proof seams. Package detail stops at the binding table. Planning writes each deliverable's steps in its record, the plan that explains them, the write surfaces and proof each step must produce, the order of steps inside the deliverable, exact commands, checkpoints, deployment and rollback; dependencies between deliverables live in the deliverable records.
 
 ## Completion Blockers
 
 Do not return `locally-ready` while any of these hold:
 
-- a `core` slice lacks its need or rule records;
+- a `core` deliverable lacks its need or rule records;
 - authoritative Why/What is missing, stale, conflicting, or silently rewritten;
 - the confirmed goal boundary or accepted requirements set is missing, unrecoverable, conflicting, or rebuilt from mutually narrowed current files;
 - target structure was selected without current-system evidence or a named greenfield basis;
