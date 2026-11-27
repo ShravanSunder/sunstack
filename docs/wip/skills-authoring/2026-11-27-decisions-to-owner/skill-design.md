@@ -31,7 +31,7 @@ Stage exact paths (the worktree inherits two untracked folders). Refresh Codex a
 
 | Run | Status |
 |---|---|
-| 1–3 | implemented |
+| 1–3 | implemented; implementation review 1 fixes applied (I1–I4) |
 
 ## Review record
 

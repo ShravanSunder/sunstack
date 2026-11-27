@@ -35,10 +35,13 @@ describe("maintained owner-decision routing", () => {
       "Up the chain, a phase stop such as `decision-needed` included, means the full brief to whoever commissioned your assignment. The Lead briefs the owner.",
     );
     expect(brief).toContain(
-      "A helper returns the brief to the agent that commissioned it; a helper the owner assigned directly returns it to the work's Lead, or briefs the owner when no Lead is named in the commission or on the work's thread, or delivery to the named Lead failed, and says which.",
+      "A helper returns the brief to the agent that commissioned it; a helper the owner assigned directly returns it to the work's Lead, or briefs the owner when the commission and the work's thread, once read, name no Lead, or delivery to the named Lead has definitively failed (its receipt says `rejected` or `notSubmitted` and the next action it names can't deliver it), and says which.",
     );
     expect(brief).toContain(
-      "A message to the Lead that is queued, delivered without a reply yet, or uncertain is still pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
+      "A Lead lookup that was denied or didn't finish is not an absent Lead: follow the access or discovery path.",
+    );
+    expect(brief).toContain(
+      "A message to the Lead that is held, queued, delivered without a reply yet, or uncertain is still pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
     );
     expect(brief).toContain(
       "An agent commissioner carries the brief toward the owner with its options and recommendation intact, or settles it only when the choice is within its own authority.",
@@ -79,6 +82,18 @@ describe("maintained owner-decision routing", () => {
     expect(treatmentRouteCount).toBe(2);
     expect(stopTreatments).not.toContain(
       "bring the owner the choice in the current conversation",
+    );
+    expect(stopTreatments).not.toContain("with `next:owner`,");
+    expect(
+      stopTreatments.split(
+        "`next:` set to whoever receives the brief (`next:lead` when it goes to the Lead, `next:owner` when you brief the owner)",
+      ).length - 1,
+    ).toBe(2);
+    expect(stopTreatments).toContain(
+      "A choice such an authority already settles, because it names this action and not only the area of work, is not an open one-way door",
+    );
+    expect(stopTreatments).toContain(
+      "Authority over the area alone, such as approval to run a migration, doesn't settle a one-way option inside it",
     );
     expect(stopTreatments).toContain(
       "return the options, consequences, recommendation and dependent work, delivered to the recipient that reference names.",
