@@ -16,7 +16,7 @@ Six rounds by one independent review lead (open findings 6 → 2 → 1 → 1 →
 
 ## Implementation review
 
-Round 1 (`targeted-revision`, four findings) fixed: I1, the owner fallback needs the commission and thread, once read, to name no Lead, or a definitive failed delivery (`rejected`/`notSubmitted` with no delivering next action); a denied or unfinished lookup follows the access or discovery path; `held` joins the pending list. I2, both treatments set `next:` to whoever receives the brief. I3, treatment 1's exemption covers only a choice authority already settles by naming the action, not authority over the area. I4, these lint counts. The contract test pins I1–I3; suite 349 passed / 2 skipped, exit 0.
+Round 1 (`targeted-revision`, four findings) fixed: I1, the owner fallback needs the commission and thread, once read, to name no Lead, or a definitive failed delivery (`rejected`/`notSubmitted` with no delivering next action); a denied or unfinished lookup follows the access or discovery path; `held` joins the pending list. I2 (closed at recheck 2), both treatments set `next:` to whoever owes the next action on the brief: the agent's own role while delivery is still its to make or reconcile, `next:lead` once delivered, `next:owner` once the owner has it. I3, treatment 1's exemption covers only a choice authority already settles by naming the action, not authority over the area. I4, these lint counts. The contract test pins I1–I3; suite 349 passed / 2 skipped, exit 0.
 
 ## Manifests
 

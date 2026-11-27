@@ -86,7 +86,7 @@ describe("maintained owner-decision routing", () => {
     expect(stopTreatments).not.toContain("with `next:owner`,");
     expect(
       stopTreatments.split(
-        "`next:` set to whoever receives the brief (`next:lead` when it goes to the Lead, `next:owner` when you brief the owner)",
+        "`next:` set to whoever owes the next action on the brief (your own role, such as `next:implementer`, while its delivery is still yours to make or reconcile; `next:lead` once it is delivered to the Lead; `next:owner` once the owner has it)",
       ).length - 1,
     ).toBe(2);
     expect(stopTreatments).toContain(
