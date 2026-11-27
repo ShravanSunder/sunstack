@@ -63,7 +63,7 @@
 
 > bring the choice to the recipient the brief procedure below names
 
-Implementation review I2 and I3 (treatments 1 and 2): `next:` names whoever owes the next action on the brief (the agent itself while delivery is still its to make or reconcile, `next:lead` once delivered to the Lead, `next:owner` once the owner has it) instead of always `next:owner`; treatment 1's "When" says "settles it", and its exemption covers only a choice authority already settles by naming the action, not authority over the area of work.
+Implementation review I2 and I3 (treatments 1 and 2): `next:` names who acts next on the brief (the agent until it's delivered, then its recipient) instead of always `next:owner`; owner-requested tightening, same meaning; treatment 1's "When" says "settles it", and its exemption covers only a choice authority already settles by naming the action, not authority over the area of work.
 
 `stop-treatments.md:78`:
 

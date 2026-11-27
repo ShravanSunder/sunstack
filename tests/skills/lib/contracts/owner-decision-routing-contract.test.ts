@@ -84,16 +84,15 @@ describe("maintained owner-decision routing", () => {
       "bring the owner the choice in the current conversation",
     );
     expect(stopTreatments).not.toContain("with `next:owner`,");
-    expect(
-      stopTreatments.split(
-        "`next:` set to whoever owes the next action on the brief (your own role, such as `next:implementer`, while its delivery is still yours to make or reconcile; `next:lead` once it is delivered to the Lead; `next:owner` once the owner has it)",
-      ).length - 1,
-    ).toBe(2);
     expect(stopTreatments).toContain(
-      "A choice such an authority already settles, because it names this action and not only the area of work, is not an open one-way door",
+      "with `next:` naming who acts next on the brief (you until it's delivered, then its recipient).",
+    );
+    expect(stopTreatments).toContain("record an assumption with `next:` as in treatment 1,");
+    expect(stopTreatments).toContain(
+      "If an authority already names this action, it isn't open: record a decision citing it and continue.",
     );
     expect(stopTreatments).toContain(
-      "Authority over the area alone, such as approval to run a migration, doesn't settle a one-way option inside it",
+      "Approval for an area, such as running a migration, doesn't settle a one-way choice inside it",
     );
     expect(stopTreatments).toContain(
       "return the options, consequences, recommendation and dependent work, delivered to the recipient that reference names.",
