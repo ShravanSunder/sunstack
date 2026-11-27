@@ -18,7 +18,7 @@ Before a choice a coding standard governs, such as where a test goes, what to na
 | --- | --- |
 | the owner's (sunstack-dev) | the owner's standards below, then the language skill's |
 | this repository's own | the repository's written standards (the files its section links) and its consistent existing practice; ask the owner about a choice neither settles |
-| nothing: no line, or no section | ask the owner, through the owner's Chief of Staff, before the first such choice |
+| nothing: no line, or no section | ask the owner before the first such choice |
 
 Don't infer the set from who owns the repository or from how its code looks. "It's the owner's repository" and "the code already does it this way" are the guesses the line replaces.
 
@@ -28,6 +28,8 @@ Under either set:
 - A statement of how a language or tool behaves still holds. A choice between valid options follows the selected set.
 - Run and obey the repository's own commands and tool configs. A language skill's commands are the fallback where the repository defines none.
 - When a skill the Standards section links can't be loaded, say which one and ask before choosing a standard; don't rebuild it from memory.
+
+IF a standards choice needs the owner (no Standards line, a choice neither the repository's standards nor its practice settles, a clause that conflicts with the set, or a linked standards skill that can't be loaded), load `../../shared-references/owner-decision-brief.md` and return the brief for the recipient that reference names; hold every choice that depends on the answer until the owner decides.
 
 Return the set that governs, quoting the line you read, or the question you asked and whom you asked.
 
@@ -70,4 +72,4 @@ Explain why, briefly. Don't restate what the code already says. Skip a doc comme
 
 ## Done when
 
-The governing set is named from the line, or the owner has been asked. Under the owner's set, the change's own modules, in a language whose skill names a beside-the-module test form, have no unit tests left in an older form.
+The governing set is named from the line, or the brief for the owner's standards decision has reached its recipient and the choices that depend on it are held. Under the owner's set, the change's own modules, in a language whose skill names a beside-the-module test form, have no unit tests left in an older form.
