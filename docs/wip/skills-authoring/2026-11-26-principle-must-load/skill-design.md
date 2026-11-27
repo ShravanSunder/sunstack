@@ -128,7 +128,7 @@ None. The change edits Markdown instructions and one test-library regex: nothing
 
 | Run | Status |
 |---|---|
-| 1–32 | implemented (2026-11-26, uncommitted diff on `skills/principle-must-load`); receipts in `docs/changelog/references/2026-11-26-principle-loads.md` |
+| 1–32 | reviewed (implementation review round 3 `great` at `320d6c2f`, report `~/.codex-router/scratch/01a1635f-5d9d-70e4-bfc7-6d97cf0ee4ff/2026-11-principle-must-load-review/impl-round-3/review.md`); not yet shipped: PR open, merge is the owner's |
 
 ## Write-time deviations
 
