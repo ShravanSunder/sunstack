@@ -32,16 +32,16 @@ describe("maintained owner-decision routing", () => {
       "Inside your authority, a two-way door is yours: make it, record it and its reason in the trace, and keep going. A one-way door goes up the chain.",
     );
     expect(brief).toContain(
-      "Up the chain means the full brief, a `decision-needed` stop included, to whoever commissioned you. The Lead briefs the owner.",
+      "Send the full brief up the chain, including for `decision-needed`. The Lead briefs the owner. An agent-commissioned helper briefs its commissioner. An owner-assigned helper checks the commission and the work's thread, then briefs the work's Lead.",
     );
     expect(brief).toContain(
-      "A helper briefs its commissioner; a helper the owner assigned briefs the work's Lead, or briefs the owner, saying why, when the commission and the work's thread name no Lead or delivery to the Lead definitively failed (`rejected` or `notSubmitted`, and no next action delivers it).",
+      "That helper briefs the owner and gives the reason only when neither source names a Lead, or when the Lead's delivery receipt says `rejected` or `notSubmitted` and no next action it names can deliver the brief.",
     );
     expect(brief).toContain(
       "A denied or unfinished lookup isn't an absent Lead: follow the access or discovery path.",
     );
     expect(brief).toContain(
-      "A held, queued, unanswered or uncertain message is pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
+      "A held, queued, delivered-without-a-reply or uncertain message is pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
     );
     expect(brief).toContain(
       "A commissioner passes the brief on with its options and recommendation intact, or settles it only within its own authority; only the owner decides an owner decision.",
@@ -92,13 +92,16 @@ describe("maintained owner-decision routing", () => {
       "Approval for an area, such as running a migration, doesn't settle a one-way choice inside it",
     );
     expect(stopTreatments).toContain(
-      "return the options, consequences, recommendation and dependent work, delivered to the recipient that reference names.",
+      "load `../../../shared-references/owner-decision-brief.md` and deliver the full brief to the recipient it names.",
     );
     expect(designProgram).toContain(
-      "IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief for the recipient that reference names.",
+      "Return the decision owner and falsifiers. IF returning `decision-needed`, load `sunstack-dev/shared-references/owner-decision-brief.md` and return the brief for the recipient that reference names.",
     );
     expect(codeStandards).toContain(
-      "IF a standards choice needs the owner (no Standards line, a choice neither the repository's standards nor its practice settles, a clause that conflicts with the set, or a linked standards skill that can't be loaded), load `../../shared-references/owner-decision-brief.md` and return the brief for the recipient that reference names",
+      "IF the Standards section or its governing line is missing, neither the repository's standards nor its practice settles a choice, a clause conflicts with the selected set, or a linked standards skill cannot load, load `../../shared-references/owner-decision-brief.md` and deliver the brief to its named recipient.",
+    );
+    expect(codeStandards).toContain(
+      "Return the governing set and quote the line that selects it, or report the brief's recipient and delivery state.",
     );
     expect(codeStandards).toContain(
       "The governing set is named from the line, or the brief for the owner's standards decision has reached its recipient and the choices that depend on it are held.",

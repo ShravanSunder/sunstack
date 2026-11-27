@@ -17,21 +17,19 @@ Before a choice a coding standard governs, such as where a test goes, what to na
 | The line says | Apply |
 | --- | --- |
 | the owner's (sunstack-dev) | the owner's standards below, then the language skill's |
-| this repository's own | the repository's written standards (the files its section links) and its consistent existing practice; ask the owner about a choice neither settles |
-| nothing: no line, or no section | ask the owner before the first such choice |
+| this repository's own | the repository's written standards (the files its section links) and its consistent existing practice |
 
 Don't infer the set from who owns the repository or from how its code looks. "It's the owner's repository" and "the code already does it this way" are the guesses the line replaces.
 
 Under either set:
 
-- A repository's standards file adds compatible constraints, or exceptions it states, to its set. A clause that conflicts with the set goes to the owner; don't pick between them.
+- A repository's standards file adds compatible constraints, or exceptions it states, to its set.
 - A statement of how a language or tool behaves still holds. A choice between valid options follows the selected set.
 - Run and obey the repository's own commands and tool configs. A language skill's commands are the fallback where the repository defines none.
-- When a skill the Standards section links can't be loaded, say which one and ask before choosing a standard; don't rebuild it from memory.
 
-IF a standards choice needs the owner (no Standards line, a choice neither the repository's standards nor its practice settles, a clause that conflicts with the set, or a linked standards skill that can't be loaded), load `../../shared-references/owner-decision-brief.md` and return the brief for the recipient that reference names; hold every choice that depends on the answer until the owner decides.
+IF the Standards section or its governing line is missing, neither the repository's standards nor its practice settles a choice, a clause conflicts with the selected set, or a linked standards skill cannot load, load `../../shared-references/owner-decision-brief.md` and deliver the brief to its named recipient. Name any linked skill that could not load in the brief, rather than rebuilding it from memory. Hold every dependent choice until the owner decides.
 
-Return the set that governs, quoting the line you read, or the question you asked and whom you asked.
+Return the governing set and quote the line that selects it, or report the brief's recipient and delivery state.
 
 ## The owner's standards
 

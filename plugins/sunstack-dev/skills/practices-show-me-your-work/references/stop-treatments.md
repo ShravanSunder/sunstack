@@ -75,4 +75,4 @@ Done when the entry names one treatment and the action it causes now: what stops
 
 ## Bring an owner choice
 
-IF treatment 1 or 2 needs an owner choice, load `../../../shared-references/owner-decision-brief.md` and return the options, consequences, recommendation and dependent work, delivered to the recipient that reference names. The brief does not require an HTML page; only an explicit owner page request permits rendering.
+IF treatment 1 or 2 needs an owner choice, load `../../../shared-references/owner-decision-brief.md` and deliver the full brief to the recipient it names. Render HTML only on an explicit owner request for a page.
