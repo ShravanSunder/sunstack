@@ -379,6 +379,7 @@ const loadKindOrder: readonly LoadTargetKind[] = [
   "practice",
   "role",
   "domain",
+  "principle",
   "shared reference",
   "own reference",
   "another skill's file",

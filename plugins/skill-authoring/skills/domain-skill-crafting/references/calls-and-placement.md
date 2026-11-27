@@ -24,7 +24,7 @@ Placement:
 Calls:
 
 - Each load or dispatch call says when to go, where, what to do there, and what to bring back.<!-- K001 -->
-- Every call site uses exactly one form: a load, a dispatch or a citation.
+- Every call site uses exactly one form: a load or a dispatch; a principle's call is a principle load, and a citation is only a principle's pointer to a sibling principle.
 - A reference call opens with exactly one literal load form, `MUST load` or `IF <observable condition>, load`.
 - A dispatch is only for a prescribed procedure: a command, a watch or a mechanical transform with an observed result; review checks, research and every other judgment are loaded and performed by the current agent.
 - A dispatch names its exact steps, its allowed commands or transformation, its execution boundary and the observation to return.
@@ -34,17 +34,17 @@ Calls:
 - An opened reference owns its decision or detail, its expected inputs, its local procedure and examples, its result, and a checkable stop when it asks for work.
 - A reference holds one coherent kind of detail, with its local rules, examples, caveats and templates kept together.
 
-Citations of principles:
+Loads of principles:
 
-- A principle is only cited, never loaded; a reference or procedure is loaded or dispatched, never cited.
-- A citation is one sentence naming an observable moment and the action to take there, followed by a relative link to the principle.
-- A citation's action says what to produce or check, in words other than the link text; "apply X", "(see X)", or an action that restates the link text is incomplete.
-- A principle is cited only where its judgment changes how this action is done.
-- A principle is cited once per decision; when a skill used at that step already cites it for that decision, the citation isn't repeated.
-- A citation's path resolves from the file that holds it.
-- A citation never replaces a load call for the skill's own procedure.
-- A cited principle ships in the same plugin as the file that cites it.
-- The citing skill writes no loader line for a principle, because the principle's first body line is its own read rule.
+- A principle is loaded at the moment its judgment changes how an action is done; a parenthetical link to a principle at the end of a sentence is not a call.
+- A principle load where every run of the step reaches the moment reads `MUST load <principle> and return <result>`; where only some runs do, it reads `IF <observable moment>, MUST load <principle> and return <result>`, and a moment written as "before X" or "when X" is conditional whenever some runs of the step never reach X.
+- A principle load's result names what applying the principle produced or checked at this step, in words other than the principle's name, and keeps every obligation the step already set; "return the principle", "apply it" or a result that restates the name is incomplete.
+- A principle is loaded only where its judgment changes how this action is done.
+- A principle is loaded once per decision; when a skill used at that step already loads it for that decision, the load isn't repeated.
+- A principle load's target resolves from the file that holds it: a backticked relative path inside the same plugin, or a backticked `<base-plugin>:principle-<name>` resolved through the calling plugin's documented base-root lookup.
+- A principle load never replaces a load call for the skill's own procedure.
+- A principle that points at a sibling principle cites it: one sentence naming the moment and the action, followed by a relative link.
+- A principle's first body line is its own read rule, so a full read earlier in the session satisfies a later load of the same principle.
 
 Shared shapes:
 
@@ -69,7 +69,7 @@ Placement starts from who reads the material and when; that answer picks the hom
 | `IF ..., load` reference | this agent | when the condition holds |
 | `MUST dispatch` procedure | a helper agent | on reaching the call |
 | `IF ..., dispatch` procedure | a helper agent | when the condition holds |
-| cited principle | this agent | at the moment its citing sentence names |
+| principle load | this agent | at the moment its load names |
 
 Two different reasons move material out of `SKILL.md`. A branch is material only some runs need: moving it keeps every other run from reading it, so it is an attention decision. A module is material every run needs that forms one coherent thing changing for its own reason: moving it keeps the main path scannable and lets the piece be maintained on its own, so it is a maintenance decision.
 
@@ -87,7 +87,7 @@ shared model-readable output                             -> references/<name>-ou
 machine-validated structure                              -> schemas/<name>.schema.json
                                                             or references/<name>-tool-schema.md
 deterministic executable mechanic                        -> scripts/
-judgment a principle teaches                             -> cite the principle at the decision
+judgment a principle teaches                             -> load the principle at the decision
 term meaning only                                        -> glossary.md
 no behavior change                                       -> prune
 ```
@@ -136,17 +136,25 @@ Prescribed procedure
 ```
 
 ```text
-Principle
-  <moment>, <action in plain words> ([<the principle's judgment in plain words>](<relative path to the principle's SKILL.md>)).
+Principle load
+  MUST load `<principle>` and return `<what applying it produced at this step>`.
+  IF `<observable moment>`, MUST load `<principle>` and return `<what applying it produced>`.
 
-  strong  Before relying on a handback, match each claim to the commit, target and output you opened, or name it as a gap ([verify before accepting](../verify-before-accepting/SKILL.md)).
-  weak    Before relying on a handback, verify it before you accept it ([verify before accepting](../verify-before-accepting/SKILL.md)).
+  strong  IF you are about to rely on a handback, MUST load `../principle-verify-before-accepting/SKILL.md` and return each claim matched to the commit, target and output you opened, or named as a gap.
+  weak    IF you are about to rely on a handback, MUST load `../principle-verify-before-accepting/SKILL.md` and return that you verified it.
   load    MUST load `references/handback-checks.md` and return each claim matched to its commit, target and output.
 ```
 
-The weak citation's action repeats its link text, so it states no action. The load line shows the form for depth that is the skill's own procedure. The sentence carries the moment and the action, and the link carries the depth; steps and narrative prose use the same form. A citation from `references/` adds one `../` to its path.
+The weak load's result names no product of the judgment, so the step can be finished without the read. The last line shows the form for depth that is the skill's own procedure. The principle is named in backticks right after `load`, as a reference is; a load from `references/` adds one `../` to its path.
 
-IF a citation's moment is a condition rather than a point in a step, load `main-path.md` and return its test for a branch condition, which that condition must also pass.
+```text
+Sibling citation (inside a principle only)
+  <moment>, <action in plain words> ([<the sibling's judgment in plain words>](../principle-<name>/SKILL.md)).
+```
+
+A citation stays a pointer: a principle that loaded its siblings would pull a chain of full reads into every read of itself.
+
+IF a principle load's moment is a condition rather than a point in a step, load `main-path.md` and return its test for a branch condition, which that condition must also pass.
 
 The near miss for dispatch: a known check skipped under pressure is still a check. It is loaded and performed as a step, never turned into a dispatch on the grounds that a helper would be "independent".
 

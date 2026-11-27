@@ -26,7 +26,7 @@ When a build is ready to observe, declare it as the pairing file describes and s
 
 ## Act on what comes back
 
-Before you change code for an observation, open the evidence it rests on and check that it ran on the target you declared (a reported failure is a claim until you open its evidence (`sunstack-dev:principle-verify-before-accepting`)). Then act by kind:
+IF you are about to change code for an observation, MUST load `sunstack-dev:principle-verify-before-accepting` and return the evidence it rests on, opened, and whether it ran on the target you declared. Then act by kind:
 
 - A missing product regression case is yours. Write it, see it fail for its reason, then fix the code.
 - A test that can't fail for its wrong behavior is yours. Fix it at the layer where that behavior stays real.

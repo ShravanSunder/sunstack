@@ -10,7 +10,7 @@ Check boundary: read-only. A tmp scratchpad may hold working notes. Classificati
 
 ## Challenge the Candidates
 
-For each candidate, decide whether the rails require the proposed correction. When you run the deletion test on a proposed mechanism, name the quoted rail it serves, what would break against that rail without it, and whether a simpler or existing path already serves that clause (keep a piece only when an outcome needs it now (`sunstack-dev:principle-justify-the-complexity`)).
+For each candidate, decide whether the rails require the proposed correction. IF you run the deletion test on a proposed mechanism, MUST load `sunstack-dev:principle-justify-the-complexity` and return the quoted rail it serves, what would break against that rail without it, and whether a simpler or existing path already serves that clause.
 
 ```text
 rails anchor the candidate serves: <accepted requirement identity | Specification obligation | goal-boundary field | none found>

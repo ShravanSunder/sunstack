@@ -30,7 +30,7 @@ Check every condition below against the work in front of you, and load each topi
 
 - IF writing or judging a description, or choosing whether a skill is model-invocable, load `references/descriptions-and-invocation.md` and return the standards that apply.
 - IF writing or judging a `SKILL.md` body (its mental model, its route, a branch or its completion boundary), load `references/main-path.md` and return the standards that apply.
-- IF deciding where material lives (the body, a reference, a script, a schema or the glossary), or writing or judging a load, a dispatch, a citation of a principle, or a shared output or tool shape, load `references/calls-and-placement.md` and return the standards that apply.
+- IF deciding where material lives (the body, a reference, a script, a schema or the glossary), or writing or judging a load, a dispatch, a principle load or a principle's citation of a sibling, or a shared output or tool shape, load `references/calls-and-placement.md` and return the standards that apply.
 - IF choosing or judging wording meant to change what the agent does (a leading word, a completion criterion, a rule's strength, a prohibition, or a repair for a failure a run showed), load `references/steering.md` and return the standards that apply, with the repair that matches each observed failure.
 - IF the skill states a rule, or a change starts from one product, library, repository or incident, load `references/generalization.md` and return each rule with its two transfer cases and its verdict.
 - IF stating, planning or judging what evidence shows about a skill's behavior, load `references/proof-claims.md` and return the strongest claim the evidence supports, with any gap to the claim being made.

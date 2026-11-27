@@ -29,7 +29,7 @@ An orchestrator calls phases. A phase may use other skills at its own layer and 
 
 Roles sit above practices. A role skill can call practices, operations, presentation, tool manuals, domains and principles, plus the phase its no-commission route names. Phases and orchestrators commission agents through `practices-manage-agents`; the packet's charter identifies the role skill. Management's role table is data, not an upward workflow call. Skills in one layer may refer to one another; cycles within a layer are permitted.
 
-Principles are the bottom layer. They are hidden from model invocation, teach one judgment, and cite only sibling principles. A citing sentence supplies the moment and concrete action; the relative link supplies the depth. The agent reads the principle in full before applying it. Merely listing a principle's name does not apply it. Domains sit just above principles, are also hidden from model invocation, and are reached by an ordinary load call. Only principles use the citation form. Session-level instructions sit outside this graph and can supply additional authority or constraints.
+Principles are the bottom layer. They are hidden from model invocation, teach one judgment, and cite only sibling principles. A skill loads a principle at the moment it governs, `MUST load <principle> and return <result>`, opened with `IF <moment>` when only some runs reach that moment; the result names what applying it produced, so the step can't be finished without the read. The agent reads the principle in full before applying it, and a full read earlier in the session counts. Merely listing a principle's name does not apply it. Domains sit just above principles, are also hidden from model invocation, and are reached by an ordinary load call. Only principles use the citation form, and only to point at a sibling. Session-level instructions sit outside this graph and can supply additional authority or constraints.
 
 ### A skill's four surfaces
 
@@ -40,7 +40,7 @@ The [skill-crafting model](../../plugins/skill-authoring/skills/domain-skill-cra
 3. `references/`: detail reached by an explicit call. A branch is conditional; an always-required module can still have its own maintenance boundary.
 4. Proof: evidence that the other surfaces change the behavior they promise.
 
-`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle citation supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-crafting's calls and placement topic](../../plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md#call-forms).
+`MUST load <reference> and return <result>` names work for the current agent. A conditional load adds an observable predicate. A dispatch names a prescribed helper procedure and its observed result; it does not delegate an unnamed judgment. A principle load supplies judgment at the action it qualifies. These forms, their exact wording and their exceptions belong to [skill-crafting's calls and placement topic](../../plugins/skill-authoring/skills/domain-skill-crafting/references/calls-and-placement.md#call-forms).
 
 ## Roles and execution forms
 

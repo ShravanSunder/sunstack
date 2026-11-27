@@ -22,7 +22,7 @@ structural check: schema, type, lint, manifest or document
 
 ## Find the boundary, then the class
 
-Start from the wrong build, not from a test layer. Name the wrong behavior the obligation must rule out, then find the smallest part of the system that has to run for that wrong behavior to show (keep real the smallest thing responsible for the wrong behavior (`sunstack-dev:principle-write-tests-that-can-fail`)). That boundary picks the class.
+Start from the wrong build, not from a test layer. MUST load `sunstack-dev:principle-write-tests-that-can-fail` and return the wrong behavior the obligation must rule out, and the smallest part of the system that has to run for that wrong behavior to show. That boundary picks the class.
 
 | Obligation | Wrong build it must catch | Where the wrong behavior stays real | Class |
 | --- | --- | --- | --- |

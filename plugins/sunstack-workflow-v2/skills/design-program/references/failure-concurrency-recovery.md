@@ -6,7 +6,7 @@ Expected inputs: interface/state/flow models, externally required failure behavi
 
 Return in workflow order: first the failure/recovery and partial-success map; after the caller models material interleavings, return retry/idempotency decisions, the concurrency/consistency model, operator visibility, and gaps.
 
-For each fallible boundary whose effect is visible outside it, distinguish a definite failure from an outcome that could not be confirmed, and name the system that can establish whether the effect happened (decide each ending before choosing retry behavior (`sunstack-dev:principle-design-for-failure`)).
+IF a fallible boundary's effect is visible outside it, MUST load `sunstack-dev:principle-design-for-failure` before choosing retry behavior, and return, for each such boundary, a definite failure distinguished from an outcome that could not be confirmed, and the system that can establish whether the effect happened.
 
 For each fallible boundary, model:
 
@@ -23,7 +23,7 @@ degraded behavior and operator signal
 crash/restart behavior when applicable
 ```
 
-For overlapping actors, name the invariant before finding the order of events that breaks it (test the interleaving against the invariant (`sunstack-dev:principle-design-for-concurrency`)). Model:
+IF actors overlap, MUST load `sunstack-dev:principle-design-for-concurrency` and return the invariant, named before you find the order of events that breaks it. Model:
 
 ```text
 ordering assumptions

@@ -29,7 +29,7 @@ Completion: the brief and status are in hand, or one exact non-ready result.
 
 ### 2. Re-anchor on the code
 
-Read the project page sections the scoped records sit in, then the current branch and HEAD, and the owners, interfaces, tests and commands the scope touches. Before you claim how any of it works, open its source (a name says what something is for; its source says what it does (`sunstack-dev:principle-read-ground-truth-first`)).
+Read the project page sections the scoped records sit in, then the current branch and HEAD, and the owners, interfaces, tests and commands the scope touches. IF you are about to claim how any of it works, MUST load `sunstack-dev:principle-read-ground-truth-first` and return its source, opened.
 
 IF one bounded repository or proof question is worth a helper, load `practices-manage-agents` and return an evidence-only commission; open its anchors yourself before you rely on them.
 

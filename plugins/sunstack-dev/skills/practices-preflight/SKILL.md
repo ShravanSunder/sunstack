@@ -11,7 +11,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
 
 1. List the needs. From the plan, spec or commission at hand, name every gate the work must pass, such as slice acceptance, milestone proof, hosted tests, review and merge. For each gate, list its inputs, access, credentials by name, services, tools, the agents the plan assigns with model and effort, and the disk its builds take. Completion: every required gate has its needs listed, or `none` against it.
 
-2. Check each need for real. Before counting a need as met, have a check you ran that says so; "the key is set" is a claim, a plan line or your memory of an earlier session only says where to look, and a read that failed from a sandbox or without a grant is an access gap, not proof the thing is missing ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
+2. Check each need for real. MUST load `../principle-read-ground-truth-first/SKILL.md` and return, for each need you count as met, a check you ran that says so; "the key is set" is a claim, a plan line or your memory of an earlier session only says where to look, and a read that failed from a sandbox or without a grant is an access gap, not proof the thing is missing.
 
    | Need | Check |
    |---|---|
@@ -30,7 +30,7 @@ A gap you know about and call "later" comes back as a block in the middle of the
    unset value
    ```
 
-   When you check a service, exercise the operation the gate depends on under a deadline and count a timeout or an unclear answer as a gap, because a service that answers a ping can still fail the call your gate makes ([design for failure](../principle-design-for-failure/SKILL.md)). IF the plan or commission assigns agents, load `practices-delegation` and return, for each, its checked route or the route gap. For a Sidekick, the route is its address, with the model and effort read back from a session found or created without starting work. A native Worker has no address until its spawn carries the job, so its route is the host's spawn encoding for its model and effort, with that model selectable by the host's spawn tool. The lookup stops before the commission and never sends the job.
+   IF you check a service, MUST load `../principle-design-for-failure/SKILL.md` and return the operation the gate depends on, exercised under a deadline, with a timeout or an unclear answer counted as a gap, because a service that answers a ping can still fail the call your gate makes. IF the plan or commission assigns agents, load `practices-delegation` and return, for each, its checked route or the route gap. For a Sidekick, the route is its address, with the model and effort read back from a session found or created without starting work. A native Worker has no address until its spawn carries the job, so its route is the host's spawn encoding for its model and effort, with that model selectable by the host's spawn tool. The lookup stops before the commission and never sends the job.
 
    Completion: each need has the check you ran and its result: met, or a gap.
 

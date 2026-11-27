@@ -26,9 +26,9 @@ In a limited listed-check review, an essential unlisted probe remains an uncover
 
 ## Findings
 
-The artifact may be a design, a spec, code or a skill. Rebuild the smallest model that satisfies the approved outcome, then inspect whether the artifact expresses it. Before you report a finding, or accept a candidate another reviewer returned, open its governing anchor yourself and name what that anchor shows and the failure it causes (verify before accepting (`sunstack-dev:principle-verify-before-accepting`)). Checkers agreeing is not verification, and "I would write it differently" is not a defect.
+The artifact may be a design, a spec, code or a skill. Rebuild the smallest model that satisfies the approved outcome, then inspect whether the artifact expresses it. IF you are about to report a finding, or accept a candidate another reviewer returned, MUST load `sunstack-dev:principle-verify-before-accepting` and return its governing anchor, opened yourself, with what that anchor shows and the failure it causes. Checkers agreeing is not verification, and "I would write it differently" is not a defect.
 
-When the target includes tests or a finding rests on a test's assertion, name for each test the wrong behavior it should catch, and follow the assertion path it really takes to say whether it can catch that behavior (write tests that can fail (`sunstack-dev:principle-write-tests-that-can-fail`)).
+IF the target includes tests or a finding rests on a test's assertion, MUST load `sunstack-dev:principle-write-tests-that-can-fail` and return, for each test, the wrong behavior it should catch and whether the assertion path it really takes can catch it.
 
 **Code case:** a function may return any valid ordering, but the test accepts one exact order, so the suite is brittle against valid behavior. Separately, a mock manufactures the expected response and the test only repeats it, so the defect can stay green. These are different failures and need different fixes. **Clean case:** the assertions exercise the behavioral contract, cover a meaningful wrong outcome and allow legitimate variation. Keep them even if their structure is not your favorite.
 

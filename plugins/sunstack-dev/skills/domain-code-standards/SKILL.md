@@ -46,7 +46,7 @@ These hold when the repository's line names the owner's standards.
 
 ### Files and modules
 
-Before creating a file or module, name the one responsibility it holds; when no single responsibility fits, split the content first ([give each part one job](../principle-separate-the-concerns/SKILL.md)). Split a catch-all such as `utils`, `helpers` or `db` by responsibility. The one shared test-helpers folder under `tests/` is the exception: it keeps the name the repository uses (`support/`, `utils/` or `lib/`), and the files in it still name their responsibility. The language skill gives the case style and its examples.
+IF you are about to create a file or module, MUST load `../principle-separate-the-concerns/SKILL.md` and return the one responsibility it holds, or, when no single responsibility fits, the content split first. Split a catch-all such as `utils`, `helpers` or `db` by responsibility. The one shared test-helpers folder under `tests/` is the exception: it keeps the name the repository uses (`support/`, `utils/` or `lib/`), and the files in it still name their responsibility. The language skill gives the case style and its examples.
 
 ### Monorepos
 

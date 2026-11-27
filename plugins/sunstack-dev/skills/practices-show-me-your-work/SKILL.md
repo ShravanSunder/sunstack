@@ -24,7 +24,7 @@ When the log is new, its first action names the goal, scope, orchestrator, repos
 
 IF there is no Router project or work thread, load `references/no-board-trace.md` and return the permitted entries file or exact gap.
 
-Carry open work forward. Before relying on an unchecked “done”, inspect the decisive current evidence and retain the rest as unverified ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). A later owner correction outranks an older plan; carry the correction into the affected rows and work ([build the shared model first](../principle-build-the-shared-model-first/SKILL.md)).
+Carry open work forward. IF you are about to rely on an unchecked “done”, MUST load `../principle-verify-before-accepting/SKILL.md` and return the decisive current evidence, inspected, with the rest retained as unverified. A later owner correction outranks an older plan: IF one differs from the plan, MUST load `../principle-build-the-shared-model-first/SKILL.md` and return the correction carried into the affected rows and work.
 
 Completion: name the reused or reconstructed source, the cutoff actually inspected and the remaining open work. Reuse those results on an unchanged reply rather than producing another record of reading them.
 
@@ -71,7 +71,7 @@ The 🦁 Lead keeps the owner's asks as owner-ask rows. Each is an actionable as
 - An explored option is not an instruction, and a question is done once answered.
 - Helpers report their scoped status and don't write owner-ask rows.
 
-At resume, at each handback and before calling work done, compare each open ask with what the sources show now and name each one still open ([check that every owner line is carried](../principle-hold-the-scope/SKILL.md)). One list said three fixes had landed in a commit and, a line later, still gave "commit them" as the next step; `git log` already held the commit.
+IF you are resuming, at a handback, or about to call work done, MUST load `../principle-hold-the-scope/SKILL.md` and return each open ask compared with what the sources show now, and each one still open named. One list said three fixes had landed in a commit and, a line later, still gave "commit them" as the next step; `git log` already held the commit.
 
 Completion: each open owner ask is named by id with its state, beside what the current sources show for it; an ask those sources show done or deferred has its closing row.
 
@@ -93,7 +93,7 @@ Completion: the acceptance row's id, and in its text the commit, each check you 
 
 Before a terminal response, compare open asks and the material record with the current outcome, remaining work, blockers, stand-ins and next action; apply step 5. If existing rows already carry that state, checkpoint by pointing to them. Write a concise checkpoint only for material state not already recorded; an unchanged reply creates neither a new checkpoint nor a new audit.
 
-When someone will read it cold, put assumptions, risks and unverified interactions first and name the next checked command or path ([write for the reader](../principle-write-for-the-reader/SKILL.md)). A reachable work thread carries a checkpoint notice linking a new material checkpoint, not another copy of its contents. Contributors checkpoint only their assignments; the orchestrator resolves the work under `practices-collaboration`.
+IF someone will read it cold, MUST load `../principle-write-for-the-reader/SKILL.md` and return it with assumptions, risks and unverified interactions first and the next checked command or path named. A reachable work thread carries a checkpoint notice linking a new material checkpoint, not another copy of its contents. Contributors checkpoint only their assignments; the orchestrator resolves the work under `practices-collaboration`.
 
 Completion: return the existing or new checkpoint/log reference and material open work. A page is never a checkpoint or completion requirement.
 

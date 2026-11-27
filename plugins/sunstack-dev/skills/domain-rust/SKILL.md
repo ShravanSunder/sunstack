@@ -36,7 +36,7 @@ impl RoutingReason {
 }
 ```
 
-When a new kind of identity or validated string appears, give it its own newtype whose constructor returns `Result` and rejects the empty string, and keep kinds apart (`AccountId`, `ReservationId`) even when both serialize as UUID strings ([build valid shapes instead of checking loose ones](../principle-types-are-communication/SKILL.md)).
+IF a new kind of identity or validated string appears, MUST load `../principle-types-are-communication/SKILL.md` and return its own newtype whose constructor returns `Result` and rejects the empty string, with kinds kept apart (`AccountId`, `ReservationId`) even when both serialize as UUID strings.
 
 ```rust
 impl AccountId {
@@ -50,15 +50,15 @@ impl AccountId {
 }
 ```
 
-Where bytes arrive from the wire, a file or a row, deserialize into the wire shape with Serde, build the domain value through its constructor, and fail closed with a field-tagged error such as `CorruptAccount { field }` ([deserializing proves the shape, not the meaning](../principle-types-are-communication/SKILL.md)). An unknown stored `status` never defaults to enabled, and a sentinel `Unknown` or `Default` never persists as a terminal state.
+IF bytes arrive from the wire, a file or a row, MUST load `../principle-types-are-communication/SKILL.md` and return the wire shape deserialized with Serde, the domain value built through its constructor, failing closed with a field-tagged error such as `CorruptAccount { field }`. An unknown stored `status` never defaults to enabled, and a sentinel `Unknown` or `Default` never persists as a terminal state.
 
 ## Errors
 
 Domain errors use `thiserror`; `anyhow` appears only where the repo already uses it at a named edge.
 
-Where an error leaves the crate, convert `sqlx::Error`, `std::io::Error` or a transport error into this crate's `thiserror` enum at that boundary ([translate at the boundary, in both directions](../principle-separate-the-concerns/SKILL.md)).
+IF an error leaves the crate, MUST load `../principle-separate-the-concerns/SKILL.md` and return `sqlx::Error`, `std::io::Error` or a transport error converted into this crate's `thiserror` enum at that boundary.
 
-When an effectful RPC's reply doesn't parse after the mutation was sent, return an `OutcomeUnknown` variant carrying what reconciliation needs, never `Ok` ([an unknown ending is never a guessed success](../principle-design-for-failure/SKILL.md)).
+IF an effectful RPC's reply doesn't parse after the mutation was sent, MUST load `../principle-design-for-failure/SKILL.md` and return an `OutcomeUnknown` variant carrying what reconciliation needs, never `Ok`.
 
 ## Time
 
@@ -93,19 +93,19 @@ let bundle = tokio::task::spawn_blocking(move || secret_store.read_secret(&key))
 - The hot path forwards first; affinity, audit and database side effects run in the background, and migrations and maintenance stay off the request path. Every hot-path wait is bounded with `select!`, a timeout and cancellation.
 - An accept loop interleaves `accept`, `join_next` and shutdown in one `tokio::select!`, so it never accepts N connections and only then awaits them. `join_next()` returns `None` whenever the set is empty, which in an accept loop means no connection is open right now; guard that branch and keep accepting.
 
-When work leaves the hot path through `tokio::spawn`, register it with a `TaskTracker` or the crate's equivalent, give it a cancellation path, and drain it at shutdown ([every background task has an owner](../principle-design-for-concurrency/SKILL.md)).
+IF work leaves the hot path through `tokio::spawn`, MUST load `../principle-design-for-concurrency/SKILL.md` and return it registered with a `TaskTracker` or the crate's equivalent, with a cancellation path, drained at shutdown.
 
-Before putting a `Mutex` around state that crosses an `.await`, check whether one owning task can hold that state instead; when a lock stays, choose its scope from the invariant it protects, hold a per-key `tokio::sync::Mutex` lease with a synchronous key lookup when the resources are independently keyed, and never hold a `std::sync::Mutex` guard across the `.await` ([remove the sharing before you serialize it](../principle-design-for-concurrency/SKILL.md)).
+IF you are about to put a `Mutex` around state that crosses an `.await`, MUST load `../principle-design-for-concurrency/SKILL.md` and return whether one owning task can hold that state instead; when a lock stays, its scope chosen from the invariant it protects, a per-key `tokio::sync::Mutex` lease with a synchronous key lookup when the resources are independently keyed, and no `std::sync::Mutex` guard held across the `.await`.
 
 ## Names
 
 Modules that carry a responsibility get two or three words (`native_channel_relay.rs`, `stored_thread_catalog.rs`), never `util.rs`, `types.rs`, `sync.rs` or `db.rs`. `main.rs`, `lib.rs`, `mod.rs` and a crate-root `error.rs` stay conventional, and `error.rs` holds only the crate's errors.
 
-When naming a function, name the effect it has: `attach_and_observe` is not a read, and an `open` that migrates needs a name that says so ([a name is a promise about the effect](../principle-define-the-domain-first/SKILL.md)).
+IF you are naming a function, MUST load `../principle-define-the-domain-first/SKILL.md` and return a name for the effect it has: `attach_and_observe` is not a read, and an `open` that migrates needs a name that says so.
 
 ## Crates and dependencies
 
-Dependencies point one way. Cargo rejects a cycle between crates through normal and build dependencies, and allows one between modules, so a boundary that must hold is a crate boundary. Keep the layers the repository already has. Before adding a crate, name the boundary that needs the compiler to hold it, and prefer a few large crates to many small ones, since each extra crate adds public surface, duplicated generic code and churn ([add complexity only when an outcome needs it now](../principle-justify-the-complexity/SKILL.md)).
+Dependencies point one way. Cargo rejects a cycle between crates through normal and build dependencies, and allows one between modules, so a boundary that must hold is a crate boundary. Keep the layers the repository already has. IF you are about to add a crate, MUST load `../principle-justify-the-complexity/SKILL.md` and return the boundary that needs the compiler to hold it, preferring a few large crates to many small ones, since each extra crate adds public surface, duplicated generic code and churn.
 
 One allowed shape, for an application whose execution and rules have grown apart (illustrative, not required):
 
@@ -118,7 +118,7 @@ host        startup: builds and injects        depends on all three
 
 - When a lower crate needs something from a higher one, move the item down, split the type, or have the lower crate declare a small trait that the higher crate implements. Never add the upward dependency, and never move the caller up to dodge it.
 - Inside a crate, module cycles compile and grow quietly. When the repo has a module-cycle check, keep it passing by breaking the new cycle; refresh its baseline only to record a cycle that shrank or a rename.
-- When wiring a component, give its constructor the named handles it uses, built at the composition point for their lifetime ([wire each dependency where its lifetime starts, and hand each part only what it uses](../principle-separate-the-concerns/SKILL.md)). In Rust a service locator usually looks like a `Services` or `Context` struct passed down for callers to pick from, a global registry, or an `Arc<dyn Any>` map; replace it with the handles.
+- IF you are wiring a component, MUST load `../principle-separate-the-concerns/SKILL.md` and return its constructor given the named handles it uses, built at the composition point for their lifetime. In Rust a service locator usually looks like a `Services` or `Context` struct passed down for callers to pick from, a global registry, or an `Arc<dyn Any>` map; replace it with the handles.
 - Keep a test helper that only its own crate uses in a `#[cfg(test)]` module or under `tests/`. When other crates' tests need it, export it behind a `test-support` feature that no default feature and no production dependency enables, and check that the shipping package's production dependency view (`cargo tree -p <package> -e normal,build,features` with its release target and features) does not show the feature. Cargo merges features across a build, so a dev-dependency alone does not keep it out, and the tree is a diagnostic, not proof of what the release build compiled.
 - When an item moves to another crate, update every caller in the same change; leave no `pub use` at the old path.
 
@@ -154,7 +154,7 @@ Under the owner's set:
 - Cargo builds `tests/<name>.rs` and `tests/<name>/main.rs` as test targets, so `tests/integration/main.rs` declares its files and the shared helpers as modules.
 - Older forms are an in-file `mod tests { … }` block, `foo/tests.rs`, `_tests.rs` or a file under `tests/`.
 
-When a test proves async behavior, hold a step open with a blocking test double and bound the wait with `tokio::time::timeout`, never `sleep`; for the hot path, that double shows forwarding still completes while a side effect blocks ([a race test has to make the bad interleaving happen](../principle-write-tests-that-can-fail/SKILL.md)).
+IF a test proves async behavior, MUST load `../principle-write-tests-that-can-fail/SKILL.md` and return a step held open with a blocking test double and the wait bounded with `tokio::time::timeout`, never `sleep`; for the hot path, that double shows forwarding still completes while a side effect blocks.
 
 ## Signs you skipped it
 

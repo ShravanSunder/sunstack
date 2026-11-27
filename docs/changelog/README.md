@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-26 Skills load principles at their moment](2026-11-26-principle-loads.md)
 - [2026-11-25 Workflow v2 designs by deliverable and plans each one](2026-11-25-v2-initiative-design-and-plan.md)
 - [2026-11-25 Design skills name initiatives, numbered projects and deliverables](2026-11-25-design-initiative-vocabulary.md)
 - [2026-11-24 Design skills teach the choice, ruling and assumption records](2026-11-24-design-record-items.md)

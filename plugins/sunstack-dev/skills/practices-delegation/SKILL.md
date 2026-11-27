@@ -44,9 +44,9 @@ MUST load `references/execution-forms.md` and return the route, lifecycle and hi
 
 ## Check the result
 
-Open the decisive changes and evidence yourself, match them to the job and the target it ran against, and return any unsupported claim as a gap ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). A helper finishing never closes your work: you integrate its result and prove or assess the combined outcome. Proof that goes with your own changes stays yours.
+MUST load `../principle-verify-before-accepting/SKILL.md` and return the decisive changes and evidence, opened yourself and matched to the job and the target it ran against, with any unsupported claim as a gap. A helper finishing never closes your work: you integrate its result and prove or assess the combined outcome. Proof that goes with your own changes stays yours.
 
-When a helper that could write or publish ends or goes silent without handing back, list what it may already have changed, with the source you checked for each, before you resume, replace or re-run its job ([design for failure](../principle-design-for-failure/SKILL.md)).
+When a helper that could write or publish ends or goes silent without handing back, list what it may already have changed, with the source you checked for each, before you resume, replace or re-run its job.
 
 ## Completion
 

@@ -87,7 +87,7 @@ To set all dependencies at creation time, use MCP. When creating a new issue, pa
 
 To read dependencies, use MCP. `get_issue` with `includeRelations: true` returns the full relation graph.
 
-When the plan's dependencies and Linear's `blockedBy` relations disagree, compare, for each disputed dependency, the plan line that states it (or "inferred from order" when the plan only sequences the work) with the relation Linear lists, before changing either; an inferred dependency never overwrites a listed relation ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
+IF the plan's dependencies and Linear's `blockedBy` relations disagree, MUST load `../principle-read-ground-truth-first/SKILL.md` and return, for each disputed dependency, the plan line that states it (or "inferred from order" when the plan only sequences the work) compared with the relation Linear lists, before changing either; an inferred dependency never overwrites a listed relation.
 
 ## Common Workflows
 
@@ -106,19 +106,19 @@ When the plan's dependencies and Linear's `blockedBy` relations disagree, compar
 4. Create milestones, then issues referencing doc sections
 5. Set `blockedBy`/`blocks` relations based on the dependency graph
 
-When you derive milestones or tickets from a design or plan, trace every scope line, acceptance criterion and Deferred item of each ticket to the doc or plan section it comes from; raise an untraced line, or a deferral of something the doc requires, with the user or the agent that assigned this work instead of writing it ([hold the scope](../principle-hold-the-scope/SKILL.md)).
+IF you derive milestones or tickets from a design or plan, MUST load `../principle-hold-the-scope/SKILL.md` and return every scope line, acceptance criterion and Deferred item of each ticket traced to the doc or plan section it comes from, with an untraced line, or a deferral of something the doc requires, raised with the user or the agent that assigned this work instead of written.
 
-When a create or relation call errored or timed out after sending, or a breakdown resumes in a project that already has milestones or issues, match each intended milestone, issue and relation to the Linear item it already exists as (adopt it) or mark it absent (create it), before any further create call ([design for failure](../principle-design-for-failure/SKILL.md)).
+IF a create or relation call errored or timed out after sending, or a breakdown resumes in a project that already has milestones or issues, MUST load `../principle-design-for-failure/SKILL.md` and return each intended milestone, issue and relation matched to the Linear item it already exists as (adopt it) or marked absent (create it), before any further create call.
 
 ### Find what's unblocked
 
 1. `list_issues` with project filter and `state: "Ready"` (repeat for `"Backlog"` if needed)
 2. For each result, `get_issue` with `includeRelations: true`
-3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: if the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough; observe that delivery where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or report its readiness as unverified and say where you looked ([read ground truth first](../principle-read-ground-truth-first/SKILL.md)).
+3. Issues with empty `blockedBy` or only Done blockers are ready, with one exception: IF the plan says the consuming work needs the blocker's artifact delivered (for example, an API deployed to staging), a Done blocker isn't enough: MUST load `../principle-read-ground-truth-first/SKILL.md` and return that delivery observed where it runs (the deployed version, the live endpoint, the published package) before calling the issue ready, or its readiness reported as unverified with where you looked.
 
 ### Update ticket after implementation
 
-Tick only checklist items you saw completed. When the shipped code does something its linked doc section doesn't say, or leaves out something it says, name what the doc assumed and what the code showed, and decide drift or break: drift leaves the doc standing and the gap open as an implementation obligation that no ticket edit closes; a break means the doc's assumption failed, so name the doc section that must change ([refine mental models](../principle-refine-mental-models/SKILL.md)). Get a break corrected in the doc by its owner, through the user or the agent that assigned this work, before changing the ticket.
+Tick only checklist items you saw completed. IF the shipped code does something its linked doc section doesn't say, or leaves out something it says, MUST load `../principle-refine-mental-models/SKILL.md` and return what the doc assumed and what the code showed, and drift or break: drift leaves the doc standing and the gap open as an implementation obligation that no ticket edit closes; a break means the doc's assumption failed, so name the doc section that must change. Get a break corrected in the doc by its owner, through the user or the agent that assigned this work, before changing the ticket.
 
 Done when each touched ticket links its doc section, its checklist matches what shipped, its blockers match the plan, and any doc conflict is reported rather than edited around.
 

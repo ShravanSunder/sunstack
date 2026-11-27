@@ -19,7 +19,7 @@
 - A description never carries a rule marker or any other token.
 - A description matches the skill's invocation capabilities.
 - A skill is model-invocable when the agent must find it unprompted, or when another skill must reach it.
-- A principle, which other skills only cite, and a domain skill, which they load, stay hidden from model invocation.
+- A principle and a domain skill, which other skills load, stay hidden from model invocation.
 - When user-invocable skills outgrow what a person can remember, a router skill indexes them.
 
 ## Facts
