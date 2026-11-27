@@ -26,11 +26,18 @@ describe("maintained owner-decision routing", () => {
 
     // Assert
     expect(brief).toContain(
-      "For a decision you raise yourself, check authority first. A choice on a line the owner owns, or outside your assignment's authority, goes up the chain even if it can be undone.",
+      "For a decision you raise yourself, first ask whether it is yours to make. A choice on a line the owner owns, or outside your assignment's authority, goes up the chain even if it can be undone.",
     );
     expect(brief).toContain(
-      "Inside your authority, a two-way door is yours: make it, record it and its reason in the trace, and keep going. A one-way door goes up the chain.",
+      "A two-way door can be walked back: if the choice proves wrong, you undo it cheaply and nothing else breaks",
     );
+    expect(brief).toContain(
+      "Walk through it: make the choice, record it and its reason in the trace, and keep going.",
+    );
+    expect(brief).toContain(
+      "A one-way door can't be walked back: once you go through, data, other work or people depend on it",
+    );
+    expect(brief).toContain("Stop at it and send it up the chain.");
     expect(brief).toContain(
       "Send the full brief up the chain, including for `decision-needed`. The Lead briefs the owner. An agent-commissioned helper briefs its commissioner. An owner-assigned helper checks the commission and the work's thread, then briefs the work's Lead.",
     );
