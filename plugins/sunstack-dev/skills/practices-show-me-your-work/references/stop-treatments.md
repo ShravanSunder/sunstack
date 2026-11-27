@@ -19,9 +19,9 @@ A stop is decided by those two answers, not by how alarming the subject sounds. 
 
 ### 1. One-way door: stop the dependent work and bring the choice
 
-**When:** the choice adds stored data or a new owner of data, a public capability or contract, new technology, or scope, and no owner decision, governing design or existing contract covers it.
+**When:** the choice adds stored data or a new owner of data, a public capability or contract, new technology, or scope, and no owner decision, governing design or existing contract settles it.
 
-**Now:** record it as an assumption with `next:owner`, stop the work that depends on it, keep the rest going, and bring the owner the choice in the current conversation using the brief procedure below. A choice such an authority covers is not a one-way door: record it as a decision citing that authority and continue.
+**Now:** record it as an assumption, with `next:` naming who acts next on the brief (you until it's delivered, then its recipient). Stop the work that depends on it, keep the rest going, and bring the choice to the recipient the brief procedure below names. If an authority already names this action, it isn't open: record a decision citing it and continue. Approval for an area, such as running a migration, doesn't settle a one-way choice inside it, such as deleting the only old copy.
 
 **Case E01, the eval store (27–29 Oct).** An agent edited the Program Design to add persisted eval case files and a public `score_eval` operation, and kept building on it. The owner: "You faile dot brign a huge achectural unkown with me or sun or cheifs." New stored data and a public operation with no covering authority: the agent owed the owner the choice and its tradeoff before dependent design went on. The lesson is not "never add a crate"; an owner-approved store stays allowed.
 
@@ -31,7 +31,7 @@ Rationalization to catch: "it's unreleased, so the storage layout is reversible.
 
 **When:** a user-visible behavior or a removal the owner hasn't settled.
 
-**Now:** keep today's behavior, record an assumption with `next:owner`, hold only that piece, keep every other piece moving, and bring the owner the choice in the current conversation using the brief procedure below.
+**Now:** keep today's behavior, record an assumption with `next:` as in treatment 1, hold only that piece, keep every other piece moving, and bring the choice to the recipient the brief procedure below names.
 
 **Case E05, "Resume in background" (30 Oct).** An agent proposed removing the button, left the existing behavior in place and said "nothing else waits on it". The owner answered: "yes just open or resume then". One pending behavior choice froze nothing else.
 
@@ -75,4 +75,4 @@ Done when the entry names one treatment and the action it causes now: what stops
 
 ## Bring an owner choice
 
-IF treatment 1 or 2 needs an owner choice, load `../../../shared-references/owner-decision-brief.md` and return the options, consequences, recommendation and dependent work in the current conversation. The brief does not require an HTML page; only an explicit owner page request permits rendering.
+IF treatment 1 or 2 needs an owner choice, load `../../../shared-references/owner-decision-brief.md` and deliver the full brief to the recipient it names. Render HTML only on an explicit owner request for a page.
