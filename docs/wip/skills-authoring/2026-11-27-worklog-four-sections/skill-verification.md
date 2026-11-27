@@ -9,16 +9,18 @@ Questions asked in order: requirement or stance; about what an agent does, or a 
 | O1–O7 (frame, item face, free text) | eval | what an author produces while working from the skill; only a fresh run shows it | fresh-author runs, checks C1–C3, C8 |
 | O8 (decisions and assumptions) | eval | the same; judging that each material decision appears with actor, reason, cost and authority needs the source beside the page | C8b, read by hand against the topic list |
 | O9, S7 (no typed routing for styling) | eval | a property of the produced page, set by the author's choice | C2 (scripted) |
-| O10–O12, S3 (open choices, consequence badges) | eval | whether a badge is earned depends on the source; only a run on a known source shows the choice | C3 (scripted link check plus a hand-read badge list) |
+| O10–O12, S3 (open choices, consequence badges, no comparison or answer control) | eval | whether a badge is earned depends on the source; only a run on a known source shows the choice | C3 (scripted link check plus a hand-read badge list) |
 | O13, O14, S3 (Flow, before/after cards) | eval | the same | C4, C5 |
-| O15–O19, S6 (verification table, verdict tones, no authored CSS) | eval | the same | C6 (scripted) |
+| O15–O19, S6 (verification table, status labels including Observed, per-row target, result and limit, no authored CSS) | eval | the same | C6 (scripted, with a hand-read per-row list) |
 | O20, O21 (Trace link, widths) | eval | the same | C6, C2 |
-| O22 (reuse or produce) | eval | whether the author recognizes a stable full account | C7 on I1 (no companion expected), C8c on I2 (companion expected) |
-| O23–O26, S4, S5 (the companion) | eval | the same | C8c, C8d on I2 |
+| O22, O30 (reuse or write; report intake) | eval | whether the author recognizes a stable full account | C7 on I1 (no companion expected), C8c on I2 (companion expected) |
+| O23–O26, S5 (the companion) | eval | the same | C8c, C8d on I2 |
+| S4 (one destination) | eval | the same | C7 |
+| O31 (sections and binding before writing) | eval | the order an author works in; only the host record shows it | C11 |
 | O27 (links resolve) | eval | the same | C7 (scripted) |
 | O28 (the skill copies no markup) | model-judged on the changed skill text; routed to a review check with a scripted proxy, not a standing rule (D7) | Whether a passage copies markup or only names a construct takes reading. A scan for element tags (`<ex-`, `<div`, `<table`) and fenced HTML in the changed files is a proxy: it misses markup in inline code, and naming the marker is required. This is one change's requirement, not a recurring standard, so it gets no rulebook entry. | the design and implementation review's check; proxy scan at step 4 |
 | O29 (return) | eval | what the author returns | run record |
-| P1 (run 2's pointer holds) | eval | whether the recipe wins over the reference's forms when both are loaded | C3–C6 pass with run 2's sentence present |
+| P1 (run 2's precedence rule) | eval | whether the page contract wins over `presentation-html`'s references for the forms it decides, while their guidance still shapes what it leaves open | C3 (no comparison or answer control despite `options-and-decisions.md`), C6 (three fixed columns despite `identity-timing-row.md`) |
 | S1 (four sections) | eval | the same | C1 |
 | S2 (frame, not form) | eval | an author's choice under the recipe's pull | C8a, C8b |
 | The changed skill text against `domain-skill-crafting`'s standards | the existing rules, run on the changed files (skill-creation's self-check, then orchestrator step 4) | call completeness, placement and main-path rules already exist | the rules run |
@@ -60,9 +62,11 @@ Written before the runs, and kept outside every folder an author works in.
 - **C2. Items and routing.**
   - Every `ex-section-item` targets one of the four ids with `section=`, and its first element is an `h4`.
   - No `holds` or `record=` appears anywhere on the view.
-  - Flows and the verification wrapper carry `data-width="canvas"`, and any Trace on the view is Reading width.
+  - Flows and the verification wrapper carry `data-width="canvas"`.
+  - A Trace on the view is Reading width when its steps hold short text only, and Canvas width when they hold code or other rich evidence.
 - **C3. Open choices.**
   - Every open choice in the source is an item whose `h4` holds a link that resolves to a decision page or a full-account anchor.
+  - The view holds no `ex-choice`, no `ex-compare` and no option comparison or answer control.
   - A consequence badge appears only where the source states what waits. For I1, the expected badges, from a list written before the runs: the staging sign-in choice gets `risk`, the success-answer choice gets `note`, and the design-branch hook choice gets no badge, with its consequence in prose. For I2, the checker writes the expected list from the slice before the runs.
 - **C4. Before/after cards.**
   - Every before/after pair maps to a source passage that gives both states, listed by hand.
@@ -71,23 +75,27 @@ Written before the runs, and kept outside every folder an author works in.
 - **C5. Flows.** Every arrow maps to a dependency or change the source states. Independent work, such as I1's merged PRs, is its own item, not a Flow branch.
 - **C6. Verification.**
   - Exactly one `ex-table-scroll` with `data-width="canvas"` and `data-layout="verification"`. Its headers are Status, Claim, and Result and limit.
-  - Each status cell has one `ex-badge`, and its tone matches its label: Passed is `done`, Failed is `risk`, Blocked, Held or Acceptance held is `question`, and Not run has no tone.
+  - Each status cell has one `ex-badge`, and its tone matches its label: Passed `done`; Failed `risk`; Blocked, Held or Acceptance held `question`; Not run and Observed with no tone.
+  - Not run appears only for a named check that did not execute. A recorded finding with no verdict is Observed, never Passed or Not run.
   - Each claim is `th scope="row"`.
-  - Each result cell has a Source link that resolves.
+  - Per row, against a list written before the runs: the row's target, its result with exact counts or exact findings, and its material limit are each recognizable in the cell.
+  - Each result cell has a source link that resolves. A link to the row's Trace in the full account counts as that link.
+  - Where a sequence explains the conclusion, the row links to that Trace's exact anchor. On I1, the lifecycle acceptance row links to the report's lifecycle Trace anchor, not to the report as a whole.
   - No `style` attribute, `<style>`, `width` or `col` sizing touches the table.
   - Exact counts from the source appear in the result text; for I1, "ten of ten" and "2,269".
 - **C7. Links.**
-  - Every `href` with a fragment resolves to an existing `id` in the view, the full account or a named decision page.
-  - On I1, the full account is the original report, and no companion file exists.
+  - Every backing-evidence link resolves into the full account, a decision page or a receipt.
+  - A separately labelled related link may resolve to another item or row on the view.
+  - On I1 (report intake): the full account is the original report, and backing-evidence links reach its existing anchors. No companion file exists. The view states report-level provenance and claims no Router coverage.
   - On I2, a companion file exists beside the view, inside the permitted folder.
 - **C8. Free text survives.**
   - **a.** At least one item with no badge, Flow or cards is plain prose: on I1, the design-branch hook choice.
   - **b.** Every topic on a source topic list, written before the runs, appears as an item, or as an explanation inside an item, under the section whose question it answers. A topic missing from the view is a failure even when the full account holds it. This is read by hand.
-  - **c.** On I2: the companion has exactly 72 `entry-<row-id>` anchors, one per row id in the slice. Each anchored row's text, normalized for whitespace only, equals the source text. Rows are in recorded order within each group. Each of the 17 rows with links shows them, and a link to a row in the slice reaches that row's anchor. The slice's 10 `resolves`/`supersedes` rows have no links, so their closures show only in their text.
+  - **c.** On I2: the companion carries every row in the declared snapshot: exactly 72 `entry-<row-id>` anchors, one per row id in the slice. Each anchored row's text, normalized for whitespace only, equals the source text. Rows are in recorded order within each group. Each of the 17 rows with links shows them, and a link to a row in the slice reaches that row's anchor. The slice's 10 `resolves`/`supersedes` rows have no links, so their closures show only in their text.
   - **d.** On I2: the companion contains no element or script that came from row text. The row with literal angle brackets shows them as text.
 - **C9. Static check.** The released CLI's `check` reports zero errors on every page written.
 - **C10. Phone width.** Each view at 390 CSS px, in light and dark: the page body never scrolls sideways, and the verification table scrolls inside its own frame. Screenshots are kept. A narrow desktop viewport is not physical iPhone or Safari proof.
-- **C11. Run record.** The host's session record shows which `SKILL.md` copy loaded, and that `section-views.md` was read (on I2, also `full-account.md`). It also shows the run's actions, read from the host record, never from the agent's reply.
+- **C11. Run record.** The host's session record shows four things: which `SKILL.md` copy loaded; that `section-views.md` was read (on I2, also `full-account.md`); that `presentation-html` was loaded before either page was written; and that on I2 the companion was written before the view. It also shows the run's actions, read from the host record, never from the agent's reply.
 
 ### Repetitions and reading
 
@@ -111,4 +119,5 @@ One run per author per input to start. Every run is read by hand.
 - The companion branch on trails other than one project's single day (I2 is 72 rows from one trail tag).
 - Behavior with guide releases after 1.41.1. The skill cites anchors at the page's binding, so a renamed anchor would surface only in a later run.
 - Lineages and effort levels other than Terra (high) and Opus (high).
+- An unnamed request such as "build me the work-log page" reaches this skill only through `practices-show-me-your-work`'s explicit-page-request branch. Every planned run names the skill, so no run proves that route.
 - Component rendering itself: Section tint, rail and column sizing belong to Demistify's own verification. The Sol Lead measured the columns at 94, 247 and 648 px on desktop; that is their report, not this proof's observation.
