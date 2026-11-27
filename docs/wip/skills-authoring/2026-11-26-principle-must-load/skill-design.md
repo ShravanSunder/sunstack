@@ -138,6 +138,8 @@ None. The change edits Markdown instructions and one test-library regex: nothing
 
 - Implementation review round 1 (I1–I5): rows 56, 57, 58, 69, 70, 87 and 90 became conditional, with the moments in `call-sites.md`; row 57's load moved to the start of step 3, before either reference picks an expected result; row 81 reads the basis before the fit decision; the reviewer's "several `IF` predicates to one destination" signal is scoped to references.
 
+- Implementation review round 2 (I1): row 57's condition also covers drift the maintenance comparison finds, and the load comes as soon as a result change is known, before the result is selected.
+
 ## Review record
 
 | Round | Target | Verdict | Decision | Report |
