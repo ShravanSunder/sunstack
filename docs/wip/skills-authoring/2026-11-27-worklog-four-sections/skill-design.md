@@ -19,7 +19,7 @@ Each obligation and each standard has one home.
 | O8 (decisions and assumptions) | — | step 3, the paragraph kept from today with its home stated | — | review check; C8b hand read |
 | O10–O21 (section views) | — | step 3 calls the reference and keeps its return | `section-views.md` | C3–C7 |
 | O22 (reuse or write) | — | step 2 settles where detail lives; step 3 branch | — | C7, C11 |
-| O23–O26 (the companion) | — | step 3 `IF` load | `full-account.md` | C8c, C8d on I2 |
+| O23–O26 (the companion) | — | step 3 `IF` load | `full-account.md` | C8c, C8d on I2b |
 | O27 (links resolve) | — | step 3 check | — | C7 |
 | O28 (cite, don't copy) | — | every citation of the guide | both new references | review check, plus a scripted proxy |
 | O29 (return) | — | step 4 | — | run record |
@@ -335,7 +335,7 @@ third-party source: none copied; the guide is cited, not copied.
 license / permission state: not applicable (no copied source).
 copy-vs-adapt decision: not applicable.
 decision: allowed, for both surfaces.
-required proof: on input I2, the companion contains no live element or script from row text (scripted check C8d), and its path is inside the permitted folder.
+required proof: on input I2b, whose two synthetic rows carry markup, the companion contains no live element or script from row text (scripted check C8d), and its path is inside the permitted folder.
 public-safe constraints: committed skill text and this design set carry no local paths, session ids or personal details.
 review route: the design review's sensitive-surface check; no dedicated security scan requested.
 ```
@@ -367,6 +367,7 @@ The owner or the 🦁 Lead may strike any row. A superseded row stays, marked in
 | D19 (27 Nov, supersedes D9) | The status labels are Passed (`done`), Failed (`risk`), Blocked / Held / Acceptance held (`question`), Not run (neutral, for a named check that did not execute) and Observed (neutral, for a recorded finding with no pass, fail or acceptance verdict). An Observed row's result cell names the finding, its source and its precise limit. | The Sol Lead's view decision, trail row `01a21cd6-9a9c-7299-a73d-dc90e09f4faf`, carried by design review round 1, correction 5. |
 | D20 (27 Nov) | Route order: step 2 reads and settles destinations and writes nothing. Step 3 assigns sections, loads `presentation-html` (binding and trust), writes the companion when one is planned, then writes the view. | Design review round 1, correction 1 (first required revision): the companion's grouping needs the sections, and both pages need the binding before they're written. |
 | D21 (27 Nov) | Run 1 writes the `sunstack-dev/README.md:70` line, instead of the 🦁 Lead updating it at ship. | The 🦁 Lead's instruction for skill-creation, 27 Nov: "run 1 (presentation-show-worklog, including the README.md:70 line)". |
+| D22 (27 Nov, refines D16) | The second proof input is I2b, `rows-2026-11-26-with-markup.jsonl`: the 72 rows of I2 unchanged, plus two `synthetic-proof-row` rows whose text holds `<script>`, an `<ex-callout>` element, `<b>`, an ampersand and quotes. 74 rows; sha256 `7e1f39d3…3b95c4`. C8c expects 74 anchors. C8d checks that the synthetic rows' markup shows as text and introduces no element. | The 🦁 Lead's decision, 27 Nov: the Verifier found I2 has no `<` at all (its only angle brackets are `->` arrows), so C8d could not exercise escaping. The 🦁 Lead asked for this as D21, but D21 was already taken by the README row, so it is recorded as D22. |
 
 ## Coordination
 
