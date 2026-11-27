@@ -55,7 +55,7 @@ Weigh the dispel check's classifications and over-delivery map as candidate evid
 
 ## Ordinary Finding or Broken Premise
 
-Before you accept and route a candidate, decide whether its correction fits inside the current governing basis. MUST load `sunstack-dev:principle-refine-mental-models` and return the assumption the basis relies on, what the current source shows, and whether that assumption still holds.
+Before you accept and route a candidate, MUST load `sunstack-dev:principle-refine-mental-models` and return the assumption the basis relies on, what the current source shows, and whether that assumption still holds; then decide from that whether its correction fits inside the current governing basis.
 
 A defect the basis already forbids, with a fix the basis can name, routes to its semantic owner as usual. A candidate is a mental-model break when its correction cannot be expressed inside the basis because an assumption the basis itself relies on is false, such as an interface, ordering, ownership, or guarantee the current system does not provide. A break returns `decision-needed` or `blocked` to the owner instead of consuming a correction round.
 

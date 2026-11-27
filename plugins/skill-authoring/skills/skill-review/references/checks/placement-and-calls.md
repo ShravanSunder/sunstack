@@ -31,7 +31,7 @@ Good signals:
 Bad signals:
 - a returned standard broken, at the site that breaks it;
 - "see X for details", "load X when useful", or "should load" in place of a call form;
-- several `IF` predicates routing to the same destination, which means topics rather than branches;
+- several `IF` predicates routing to the same reference, which means topics rather than branches (principle loads are judged by decision instead: two loads of one principle at distinct decisions are sound, and a full read earlier in the session serves both);
 - a call to a path that does not exist.
 
 Calibration: Report placement and call-completeness defects with the exact site. Do not judge whether the rule itself is well worded; that is `steering-strength`. Do not count lines; length alone is not a finding here.

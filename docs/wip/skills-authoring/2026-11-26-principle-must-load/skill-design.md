@@ -136,6 +136,8 @@ None. The change edits Markdown instructions and one test-library regex: nothing
 - Rows 2 and 28: the full lines opened with a lowercase or mid-bullet condition; the loads open with a literal `IF` so the class matches the row.
 - Phase map: principle loads appear in the existing loads-by-kind lines (new kind `principle`) rather than a separate "Loads principles" line, so nothing is listed twice; "Cites" stays for v1's citations.
 
+- Implementation review round 1 (I1–I5): rows 56, 57, 58, 69, 70, 87 and 90 became conditional, with the moments in `call-sites.md`; row 57's load moved to the start of step 3, before either reference picks an expected result; row 81 reads the basis before the fit decision; the reviewer's "several `IF` predicates to one destination" signal is scoped to references.
+
 ## Review record
 
 | Round | Target | Verdict | Decision | Report |
