@@ -47,7 +47,7 @@ Each obligation is one sentence, numbered so the design and the verification can
 
 ## What `presentation-html` must do (run 2)
 
-- **P1.** When the calling skill supplies a work-log page recipe (its sections, item face and the view each kind of topic takes), `work-account-forms.md` keeps that recipe and offers its own forms only for choices the recipe leaves open.
+- **P1.** A calling skill's page contract decides the forms for its page. `work-account-forms.md` and `patterns.md` apply only where no caller supplies one. Neither names a skill.
 
 ## Standards the skill states
 
@@ -81,6 +81,6 @@ Each rule that teaches judgment, written as the judgment and tested both ways (`
 | S4 and S5, one destination, nothing lost | A research log's trail has 40 rows about literature screening. The companion carries all 40 under their topic, and the view links to three of them. | An author "tidies" the companion by merging three rows into one summary paragraph. The rule names no merging, and still rejects it: a backing row's text is no longer unabridged under its own anchor. | Passes both. |
 | S6, verdict words | A security review log records "pen test deferred to Q3". The row is Not run, neutral, with the deferral as its limit. | An author colours a check green because "the reviewer seemed happy", although the source records no pass. The rule rejects it, because the label must name the recorded result. | Passes both. |
 | S7, styling never routes | A log whose decisions are typed records keeps `record=` routing on its design pages. The rule allows that, because routing serves typed decisions there. | An author adds `holds="needs-owner"` to the For you to decide section to borrow its look. The rule rejects it. | Passes both. |
-| P1, a caller's recipe holds | A future incident-report skill supplies its own recipe for an incident page. `work-account-forms.md` defers to it for those choices. | An author follows the reference's "Trace for what supports the conclusion" form where the recipe calls for one verification table. The pointer rejects it, because the recipe made that choice. | Passes both. |
+| P1, a caller's page contract holds | A future incident-report skill supplies its own page contract for an incident page. `work-account-forms.md` and `patterns.md` defer to it, and they still apply in full to a work account no skill shapes. | An author follows the reference's "Trace for what supports the conclusion" form where the recipe calls for one verification table. The pointer rejects it, because the recipe made that choice. | Passes both. |
 
 S1 is the owner's adopted scope (work-log pages, by the owner's approval of the 26 Nov view). It is labelled as such and needs no transfer case.

@@ -5,7 +5,7 @@
 | Run | Target | Kind | Surfaces |
 | --- | --- | --- | --- |
 | 1 | `sunstack-dev / presentation-show-worklog` | update | main path (`SKILL.md` lens and steps 2–4), depth (new `references/section-views.md`, new `references/full-account.md`), proof |
-| 2 | `sunstack-dev / presentation-html` | update (pointer) | depth: one sentence in `references/work-account-forms.md`. Proof shares run 1's runs |
+| 2 | `sunstack-dev / presentation-html` | update (pointer) | depth: one caller-generic sentence in `references/work-account-forms.md` and the same clause in `references/patterns.md` (D14). Proof shares run 1's runs |
 
 Run 2 lands with run 1, in the same change, because until run 1 exists no caller supplies a recipe. Neither run changes the trigger.
 
@@ -21,7 +21,7 @@ Run 2 lands with run 1, in the same change, because until run 1 exists no caller
 | O27 (links resolve) | — | step 3 check | — | C7 |
 | O28 (cite, don't copy) | — | every call to the guide | both references | review check, plus a scripted proxy |
 | O29 (return) | — | step 4 | — | run record |
-| P1 (run 2) | — | — | `presentation-html/references/work-account-forms.md` | C3–C6 hold even though the reference offers other forms |
+| P1 (run 2) | — | — | `presentation-html/references/work-account-forms.md` and `references/patterns.md` | C3–C6 hold although both references are loaded |
 
 ## Trigger
 
@@ -177,13 +177,19 @@ Each guide construct is named in the text with its reference at the page's bindi
 
 Unchanged (D6). `read-and-summarize.md:31` already states the obligation the companion meets, and `:58` owns the permitted destination the companion shares.
 
-### Run 2: `presentation-html/references/work-account-forms.md`
+### Run 2: `presentation-html/references/work-account-forms.md` and `references/patterns.md`
 
-One sentence, added to the end of its opening paragraph (line 3). Proposed text:
+Run 2 makes two edits, per the 🦁 Lead's ruling (D14).
 
-> When the calling skill supplies a work-log page recipe (its sections, item face and the view each kind of topic takes), keep that recipe, and use the forms below only for choices it leaves open.
+**`work-account-forms.md`:** one sentence, added to the end of its opening paragraph (line 3). Proposed text:
 
-It names no skill, because `presentation-html` never names a skill above it. Today, `presentation-html` step 2 loads both `patterns.md` and this reference for every work-log page (`SKILL.md:18`). This reference is the one whose forms compete with the recipe: a native table per stage, a keyed comparison, and a Trace for what supports the conclusion (`work-account-forms.md:7-13`). `patterns.md` asks only for one question per section, which the recipe already meets, so it gets no edit (D5).
+> A calling skill's page contract decides the forms for its page; this reference applies where no caller supplies one.
+
+**`patterns.md`:** the same clause, added at line 11 beside the existing precedent "A skill-change design set's page keeps its caller's answer, parts and walkthrough." Proposed text:
+
+> Any other page whose calling skill supplies a page contract keeps that contract's forms; this reference applies where no caller supplies one.
+
+Neither edit names a skill, because `presentation-html` never names a skill above it. Today, `presentation-html` step 2 loads both references for every work-log page (`SKILL.md:18`). `work-account-forms.md:7-13` offers forms that compete with a recipe: a native table per stage, a keyed comparison, and a Trace for what supports the conclusion. The `patterns.md` clause puts the deferral beside its existing precedent, so both references state it.
 
 ### Shared shapes
 
@@ -272,6 +278,9 @@ The owner or the 🦁 Lead may strike any row.
 | D11 | The companion renders row text as escaped text with line breaks kept, not through a Markdown island. | Row text is untrusted. Rendering it as markup would let a row inject elements. Cost: Markdown emphasis in rows shows as literal characters. Alternative: the guide's Markdown island, if its sanitizing is confirmed. |
 | D12 | The companion carries the whole declared snapshot, with rows that back no view topic in a final group. | `read-and-summarize.md:31` requires the complete declared snapshot to stay available. The owner's "nothing lost" direction asks the same. |
 | D13 | The ownership tension with `presentation-html/SKILL.md:10` ("this skill chooses how it appears") is resolved by this skill owning the work-log recipe, as `skill-design` owns its design-set page (`presentation-html/SKILL.md:16`). `SKILL.md:10` is not edited. | The handoff places the recipe here. The run-2 pointer makes the deferral explicit at the moment of choosing forms. **Open: Q2 to the 🦁 Lead**, in case they want `SKILL.md:16`'s precedent generalized instead. |
+| D14 (27 Nov, supersedes D5) | Run 2 puts one caller-generic sentence in `work-account-forms.md` and the same clause in `patterns.md:11`, beside the skill-design precedent; neither names a skill. This supersedes the handoff's "patterns.md only". | The 🦁 Lead's ruling on Q1, 27 Nov: "a caller skill's page contract decides the forms for its page; this reference applies where no caller supplies one". Closes Q1. |
+| D15 (27 Nov, supersedes D13's open status) | `presentation-show-worklog` owns the work-log view recipe and cites the guide anchors. `presentation-html` keeps the binding, composition within the recipe, and the check. `presentation-html/SKILL.md:10` is not edited. | The 🦁 Lead's ruling on Q2, 27 Nov: "Follow the handoff … Close it, don't leave it open." Closes Q2. |
+| D16 (27 Nov) | The proof uses the second frozen input I2, `rows-2026-11-26.jsonl`, with a Terra and an Opus author on each input. | The 🦁 Lead's ruling on Q3, 27 Nov: the slice was exported and frozen by the 🦁 Lead, and no full account exists for it, so the companion branch must run. Closes Q3. |
 
 ## Coordination
 

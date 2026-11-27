@@ -12,16 +12,16 @@
   <ex-document id="content">
     <h1>Work-log view skill change</h1>
     <p><code>presentation-show-worklog</code> will build the owner's approved work-log view. A dated page has four question sections in a fixed order, one <code>h4</code> item per topic, and a view for each topic only when its evidence earns one: a consequence badge, a Flow, or before and after cards. Verification is one table with the shared <code>data-layout="verification"</code> marker. Every detail link reaches a full account: either the existing stable one at the same cutoff, or a companion that carries every source row unabridged. A topic with no evidence for a view is still explained, in plain prose, under its section.</p>
-    <p>Two runs, both proposed. Run 1 rewrites the skill's step 3, drops the decision-brief branch from step 2, and adds two references: <code>section-views.md</code> and <code>full-account.md</code>. Run 2 adds one sentence to <code>presentation-html</code>'s <code>work-account-forms.md</code>, so that reference's forms don't compete with the recipe. Neither run changes a trigger.</p>
-    <ex-callout title="Open for the Lead" tone="question">
-      <p><strong>Q1:</strong> should the pointer go in <code>work-account-forms.md</code> (D5) rather than <code>patterns.md</code>, as the handoff says? <strong>Q2:</strong> should this skill own the recipe while <code>presentation-html/SKILL.md:10</code> stays unedited (D13)? <strong>Q3:</strong> which trail slice should be input I2? Without I2, the companion branch stays unverified.</p>
+    <p>Two runs, both proposed. Run 1 rewrites the skill's step 3, drops the decision-brief branch from step 2, and adds two references: <code>section-views.md</code> and <code>full-account.md</code>. Run 2 adds one caller-generic sentence to <code>presentation-html</code>'s <code>work-account-forms.md</code>, and the same clause to <code>patterns.md</code>: a calling skill's page contract decides the forms for its page. Neither run changes a trigger.</p>
+    <ex-callout title="No design questions open; review not yet run" tone="note">
+      <p>The Lead's 27 Nov rulings closed all three questions. D14: the pointer goes in both references. D15: this skill owns the work-log view recipe. D16: the second proof input, <code>rows-2026-11-26.jsonl</code>, exercises the companion. The design review has not run yet.</p>
     </ex-callout>
     <p>Terms: the <strong>view</strong> is the compact work-log page; the <strong>full account</strong> is the page its detail links reach; the <strong>companion</strong> is a full account this skill produces when no stable one exists; an item's <strong>face</strong> is its title, optional badge row, outcome sentence and detail links.</p>
     <h2 id="walkthrough">Walkthrough</h2>
     <ol>
       <li><a href="#requirements">Requirements</a>: the owner's words, the evidence by date, who reaches the skill, and what stays out.</li>
       <li><a href="#specification">Specification</a>: obligations O1–O29 and P1, standards S1–S7, and each rule's transfer test.</li>
-      <li><a href="#skill-design">Skill design</a>: the two runs, the proposed lens and calls, both references, sensitive surfaces and decisions D1–D13.</li>
+      <li><a href="#skill-design">Skill design</a>: the two runs, the proposed lens and calls, both references, sensitive surfaces and decisions D1–D16.</li>
       <li><a href="#skill-verification">Skill verification</a>: each item's route, the inputs I1 and I2, the authors, checks C1–C11, and what stays unverified.</li>
     </ol>
     <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
