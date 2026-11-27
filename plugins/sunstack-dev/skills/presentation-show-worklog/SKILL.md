@@ -83,7 +83,7 @@ Explain the material decisions agents made and the assumptions the work relies o
 - its authority, or the evidence gap where none is recorded;
 - the work that depends on it.
 
-Link one that waits on the owner from For you to decide as well. Name missing rationale or cost evidence rather than inventing it. Keep later corrections and settlements current; incomplete source coverage is a named gap. An agent's core design choice belongs here as much as a routine one.
+Link one that waits on the owner from For you to decide as well. Name missing rationale or cost evidence rather than inventing it. Keep later corrections and settlements current; incomplete source coverage is a named gap. An agent's core design choice belongs here as much as a routine one. Name each material correction and each relied-on assumption individually; a category such as "other corrections" explains none of them.
 
 Work in this order:
 
