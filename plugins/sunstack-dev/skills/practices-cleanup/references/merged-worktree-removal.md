@@ -12,7 +12,7 @@ Use the owner's tools: the Agent Studio worktree helper, with `git worktree remo
 
 ## 1. Confirm the merge and that the work is done
 
-Before acting on a merge, read the PR's state from GitHub after the merge and match its merged head to this worktree's current HEAD ([verify before accepting](../../principle-verify-before-accepting/SKILL.md)). The caller's evidence counts when it was read that way; a receipt from before the merge or a matching branch name describes a different moment or commit, so read it again. A different HEAD is a hold until you account for every commit between the two.
+Before acting on a merge, MUST load `../../principle-verify-before-accepting/SKILL.md` and return the PR's state read from GitHub after the merge, with its merged head matched to this worktree's current HEAD. The caller's evidence counts when it was read that way; a receipt from before the merge or a matching branch name describes a different moment or commit, so read it again. A different HEAD is a hold until you account for every commit between the two.
 
 Then confirm the assignment is finished and nothing uses the tree: no build, test, server or debugger started from it, no open pane on it, and no other session's commission names it.
 
@@ -37,7 +37,7 @@ Check each effect on its own: the directory is gone, Git no longer lists the wor
 
 ## 4. When the helper fails
 
-A refusal names a blocker, such as a dirty tree, unclassified `tmp/` evidence or a Git lock. Resolve that blocker and rerun the helper. When the helper errors partway through, the state is unknown: before running anything else, look at what it left (whether the directory is there, whether Git still lists it, how much of `tmp/` reached the archive) and decide from that whether to rerun or finish by hand ([design for failure](../../principle-design-for-failure/SKILL.md)).
+A refusal names a blocker, such as a dirty tree, unclassified `tmp/` evidence or a Git lock. Resolve that blocker and rerun the helper. IF the helper errors partway through, the state is unknown: before running anything else, MUST load `../../principle-design-for-failure/SKILL.md` and return what it left (whether the directory is there, whether Git still lists it, how much of `tmp/` reached the archive) and, from that, whether to rerun or finish by hand.
 
 On 2026-10-06 the helper's archive to the main checkout failed with `archiveFailed (partialCopy)` on a stale named pipe in `tmp/`. Under this procedure the agent compares what the archive holds with `tmp/`, removes the stale pipe, which holds no evidence and which the removal would delete anyway, and reruns the helper. Newer helper source skips such entries and reports them, but an installed helper may predate that. Switching to a forced `git worktree remove` would have discarded whatever `tmp/` evidence the archive had not copied.
 

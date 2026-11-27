@@ -41,11 +41,11 @@ const retryPolicy = { maxAttempts: 3, backoff: "exponential" } satisfies RetryPo
 
 Mark data that shouldn't change `readonly` (`columns: readonly string[]`). Use `const` unless the binding is reassigned, and template literals over string concatenation.
 
-When the checker rejects a value you believe is right, narrow it by its tag, write a type guard, or parse it, and keep `any`, `as` and `!` out of the fix ([an escape trades a compile error for a runtime crash](../principle-types-are-communication/SKILL.md)).
+IF the checker rejects a value you believe is right, MUST load `../principle-types-are-communication/SKILL.md` and return it narrowed by its tag, a type guard, or a parse, with `any`, `as` and `!` kept out of the fix.
 
 ## States and outcomes as unions
 
-When a value can be in one of several states, write one object type per state with a literal `kind` tag, `switch` on `kind`, and end the switch with `assertNever` ([model the states as a sum and make every consumer handle each one](../principle-types-are-communication/SKILL.md)).
+IF a value can be in one of several states, MUST load `../principle-types-are-communication/SKILL.md` and return one object type per state with a literal `kind` tag, a `switch` on `kind`, and the switch ended with `assertNever`.
 
 ```ts
 // before: which combinations are real lives in people's heads
@@ -84,13 +84,13 @@ function assertNever(value: never): never {
 
 Adding a fifth state now breaks the build at every `switch` that hasn't decided what it means.
 
-When a function that calls another system can end more than one way, return a union with one variant per ending, including one for a reply you couldn't confirm, instead of throwing or returning `null` ([an unknown ending is its own outcome, never a guessed success](../principle-design-for-failure/SKILL.md)).
+IF a function that calls another system can end more than one way, MUST load `../principle-design-for-failure/SKILL.md` and return a union with one variant per ending, including one for a reply you couldn't confirm, instead of throwing or returning `null`.
 
 ## Zod at the boundary
 
-Where JSON, `process.env`, a file or a message enters, parse it with its Zod schema on that line and pass the parsed type inward; never `as` raw data into a domain type ([parse untrusted data once, where it enters](../principle-types-are-communication/SKILL.md)).
+IF JSON, `process.env`, a file or a message enters, MUST load `../principle-types-are-communication/SKILL.md` and return it parsed with its Zod schema on that line, with the parsed type passed inward; never `as` raw data into a domain type.
 
-When a Zod schema already defines a shape, take its type from `z.infer` and each related shape from `.pick()`, `.omit()`, `.partial()` or `.extend()` on that schema ([one shape has one authority, and copies drift](../principle-one-owner-per-truth/SKILL.md)).
+IF a Zod schema already defines a shape, MUST load `../principle-one-owner-per-truth/SKILL.md` and return its type taken from `z.infer` and each related shape from `.pick()`, `.omit()`, `.partial()` or `.extend()` on that schema.
 
 ```ts
 // before: a hand-written type beside the schema, and a cast on raw input

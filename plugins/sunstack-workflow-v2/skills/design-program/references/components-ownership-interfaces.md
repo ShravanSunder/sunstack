@@ -124,7 +124,7 @@ Use a component tree when hierarchy/composition matters and a topology view when
 
 For every truth, invariant, lifecycle, and side effect, name exactly one authoritative owner. Define allowed/forbidden edges and the detection or enforcement class.
 
-Before finalizing ownership, inventory every path that changes the truth, including cleanup, deletion and undo, and check that each reaches that owner (count every writer, including paths that discard state (`sunstack-dev:principle-one-owner-per-truth`)). Remove each proposed owner mentally: if another component still decides the same truth, resolve that second writer in the model.
+Before finalizing ownership, MUST load `sunstack-dev:principle-one-owner-per-truth` and return every path that changes the truth, including cleanup, deletion and undo, each counted as a writer (including paths that discard state) and checked to reach that owner. Remove each proposed owner mentally: if another component still decides the same truth, resolve that second writer in the model.
 
 Good: one order owner changes its status; the UI and background worker request transitions through it. Bad: the UI and worker both overwrite the status while the diagram labels only one as its owner.
 
@@ -155,7 +155,7 @@ type SettlementDecision =
   | { readonly kind: "reject"; readonly reason: "amount-mismatch" | "already-settled" | "invoice-voided" };
 ```
 
-Before finalizing a load-bearing interface, write one representative caller interaction from the consumer's side and use it to decide whether the boundary needs a seam or stays a direct call (give each part one job and inject only at real seams (`sunstack-dev:principle-separate-the-concerns`)).
+IF you are about to finalize a load-bearing interface, MUST load `sunstack-dev:principle-separate-the-concerns` and return one representative caller interaction written from the consumer's side, and from it whether the boundary needs a seam or stays a direct call.
 
 Good: interface hides owner policy and makes caller assumptions explicit; every variant a caller must branch on is a named member of the union.
 

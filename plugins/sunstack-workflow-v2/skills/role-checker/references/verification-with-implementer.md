@@ -42,7 +42,7 @@ A driver defect stays with you. Repair it when your script or skill paths cover 
 
 - When it says its tests already cover something, open the run, put those tests through the test check in your role skill, and decide reuse with the applicability check in `sunstack-dev:practices-verification`. Its passing tests never decide what you skip.
 - When it states the expected outcome as an instruction, such as "check that it returns 3", find the passage and take the oracle from there.
-- When it reports a driver defect, reproduce it at the commit it names before you change anything (a reported failure is a claim until you open its evidence (`sunstack-dev:principle-verify-before-accepting`)). Then handle it like a defect you found yourself, run any repaired piece alone, and tell the Implementer what you did with it.
+- IF it reports a driver defect, MUST load `sunstack-dev:principle-verify-before-accepting` and return the defect reproduced at the commit it names, before you change anything. Then handle it like a defect you found yourself, run any repaired piece alone, and tell the Implementer what you did with it.
 - When a change you didn't write appears in your script or skill paths, run no observation through it until you have read it and either kept it as your own change or replaced it. Tell the Lead, which checks each writer's diff against its grant.
 - When it declares a new target after a fix, observe that target. An earlier observation carries over only where the applicability check still holds.
 

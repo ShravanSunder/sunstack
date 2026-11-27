@@ -60,7 +60,7 @@ If Codex Security is not installed or not available, produce a copy-paste prompt
    - preserve report paths
    - summarize report status, not all findings
    - route fixes through `$codex-security:fix-finding` or a bounded implementation plan
-   - Before fixing a finding or stating a report's coverage as current, check the finding or coverage against current source, or say why it no longer holds ([verify before accepting](../principle-verify-before-accepting/SKILL.md)). A severe old report is not a current finding.
+   - IF you are about to fix a finding or state a report's coverage as current, MUST load `../principle-verify-before-accepting/SKILL.md` and return the finding or coverage checked against current source, or why it no longer holds. A severe old report is not a current finding.
 
 ## Progressive Disclosure
 

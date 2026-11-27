@@ -19,7 +19,7 @@
 
 Inside a body, the surfaces' order runs at a finer grain: the lens answers to what the trigger promised, the route to the lens, the call sites to the route, and the wording to the failure it targets. Read the body in that order.
 
-The elements a body can carry: the mental model or stance; the all-run spine; completion checks on its steps; the steering and invariants every run needs; reference calls; dispatch for a prescribed procedure; citations of principles; and the overall completion boundary. Headings and format are the skill's own choice.
+The elements a body can carry: the mental model or stance; the all-run spine; completion checks on its steps; the steering and invariants every run needs; reference calls; dispatch for a prescribed procedure; principle loads; and the overall completion boundary. Headings and format are the skill's own choice.
 
 Inspection questions:
 

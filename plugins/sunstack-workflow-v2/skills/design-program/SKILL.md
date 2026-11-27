@@ -156,7 +156,7 @@ Using the already-loaded `references/components-ownership-interfaces.md`, apply 
 
 Derive the integrated overview from the binding table before detailing mechanisms. For UI/refactor work, include the render/component tree and distinguish state owners, pure views, integration/effect boundaries, and derived state.
 
-For every new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, name the specification obligation it serves, what breaks or moves into its callers if it is removed, why the existing foundation cannot supply it, and why it stays within the agreed acceptable complexity (keep complexity only when an outcome needs it now (`sunstack-dev:principle-justify-the-complexity`)). Delete it when no confirmed obligation breaks and its callers would not inherit a lifecycle, policy, or failure rule it owns. Do not complete missing contracts for a mechanism you deleted.
+IF the design adds a new component, state store, identity, interface, contract, dependency, migration, operating surface, or proof mechanism, MUST load `sunstack-dev:principle-justify-the-complexity` and return, for each one, the specification obligation it serves, what breaks or moves into its callers if it is removed, why the existing foundation cannot supply it, and why it stays within the agreed acceptable complexity. Delete it when no confirmed obligation breaks and its callers would not inherit a lifecycle, policy, or failure rule it owns. Do not complete missing contracts for a mechanism you deleted.
 
 Completion: each component has one job, reason to change, consumers, owned behavior, and justified interface.
 

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Principle loads: the change at a glance</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Principle loads: the change at a glance</h1>
+
+    <p>A <strong>principle</strong> is a short guide that teaches one engineering judgment, such as "verify before accepting". Skills point to principles at the steps where that judgment matters; each such place is a <strong>call site</strong>. Today a call site is a link in brackets at the end of a sentence.</p>
+    <ex-callout title="The change" tone="tldr">
+      <p>After this change, each call site says <strong>MUST load</strong> the principle at that moment and <strong>return</strong> what applying it produced. The intent is that the step can't be finished without reading the principle; whether agents actually do that is not yet tested. Runs that never reach the moment load nothing.</p>
+    </ex-callout>
+    <p>Why: the audit's session-log search flagged a possible principle read after its skill loaded in only 3 of 148 candidate cases on Claude and 632 of 2,883 on Codex; those are search hits, not confirmed reads. It misses some reads and can't tell whether the moment came up, so it's a weak signal, not proof that agents skip the links.</p>
+
+    <h2 id="waiting">Waiting on you: how wide?</h2>
+    <p>You asked for the v2 roles and base practices: 19 skills, 73 call sites (18 the audit looked at, plus <code>plan-implementation</code>, which was added to v2 after it). Once the skill-writing standard changes, 11 other <code>sunstack-dev</code> skills (domain-rust, domain-typescript, domain-python, domain-code-standards, the three presentation skills, debug-investigation, the two ops skills, audit-security-review) would break it, with 38 call sites between them.</p>
+    <ex-callout title="Recommended: include all 30 skills (decision D3)" tone="decision">
+      <p>Recommended, not chosen. Including them keeps one rule across the plugin, so no later review flags those 11 skills. It costs 11 more small runs in the same PR. <strong>If you'd rather not:</strong> say "drop D3", and the change stops at those 19 skills; the other 11 keep the old form until a later change.</p>
+    </ex-callout>
+
+    <h2 id="rule">The rule, in one picture</h2>
+    <p>Each principle call keeps the moment it has today. The only question per call is whether every run of that step reaches the moment, or only some runs do.</p>
+    <ex-mermaid><script type="text/plain">
+flowchart LR
+  step["A skill step runs"] --> moment{"Does this run reach<br/>the principle's moment?"}
+  moment -->|"no"| skip["Load nothing"]
+  moment -->|"yes"| load["MUST load the principle<br/>(a full read earlier<br/>this session counts)"]
+  load --> ret["Return what applying it<br/>produced at this step"]
+  class step slot1
+  class load slot2
+  class ret slot3
+</script></ex-mermaid>
+
+    <h2 id="examples">Before and after, on real lines</h2>
+    <p>Three lines from today's skills, one for each way a call gets rewritten. The principle is named the exact way the skill will name it: a relative path in base skills, a <code>sunstack-dev:</code> name in v2.</p>
+    <ex-compare label="Principle calls" view="tabs" data-width="canvas">
+      <section id="today" label="Today" icon="code">
+        <section data-compare-row="research"><p><strong>The moment is a condition, stated first</strong> (<code>practices-research</code>)</p><p>Before accepting a load-bearing conclusion (one the work depends on), name the anchor (the source you checked) you opened for it and what that anchor doesn't cover <em>([verify before accepting](…))</em>.</p></section>
+        <section data-compare-row="delegation"><p><strong>Moment is a condition</strong> (<code>practices-how</code>)</p><p>When a term is overloaded, or the code and the docs use different words for what may be one thing, state what it refers to and what makes two of them the same before you explain with it <em>([define the domain first](…))</em>.</p></section>
+        <section data-compare-row="implementer"><p><strong>The step itself is the moment</strong> (<code>role-implementer</code>)</p><p>Build a scenario that can fail for the required wrong behavior, exercise the real boundary and keep its assertion oracle and observed red, or name that no pre-fix red was seen <em>(write tests that can fail (…))</em>.</p><p>In plain words: write a test that would fail if the bug were there, exercise the real part of the system the test is meant to check, keep what it asserts, and show it failing before the fix (or say you couldn't).</p></section>
+      </section>
+      <section id="after" label="After" icon="git-branch">
+        <section data-compare-row="research"><p><strong>The moment is a condition, stated first</strong></p><p><strong>IF</strong> you are about to accept a load-bearing conclusion, <strong>MUST load</strong> <code>../principle-verify-before-accepting/SKILL.md</code> <strong>and return</strong> the anchor you opened for it and what that anchor doesn't cover.</p></section>
+        <section data-compare-row="delegation"><p><strong>Moment is a condition</strong></p><p><strong>IF</strong> a term is overloaded, or the code and the docs use different words for what may be one thing, <strong>MUST load</strong> <code>../principle-define-the-domain-first/SKILL.md</code> <strong>and return</strong> what it refers to and what makes two of them the same, before you explain with it.</p></section>
+        <section data-compare-row="implementer"><p><strong>The step itself is the moment</strong></p><p><strong>MUST load</strong> <code>sunstack-dev:principle-write-tests-that-can-fail</code> before building the scenario <strong>and return</strong> a scenario that can fail for the required wrong behavior, exercised at the real boundary, with its oracle kept, and either its observed red or a note that none was seen.</p></section>
+      </section>
+    </ex-compare>
+
+    <h2 id="what">What gets changed</h2>
+    <p>A <strong>run</strong> is one skill's update. Runs 1 and 32 come first: the standard every skill is written against, and the review check that judges it. Then each citing skill gets one small run, in any order.</p>
+    <ex-mermaid><script type="text/plain">
+flowchart LR
+  std["Run 1: the standard<br/>domain-skill-crafting"] --> both(("both written"))
+  rev["Run 32: the review check<br/>that judges it"] --> both
+  both --> v2["Runs 2–9<br/>8 v2 roles and phases<br/>37 call sites"]
+  both --> base["Runs 10–20<br/>11 base practices<br/>36 call sites"]
+  both --> other["Runs 21–31<br/>11 other sunstack-dev skills<br/>38 call sites (D3)"]
+  class std slot1
+  class rev slot1
+  class v2 slot2
+  class base slot2
+  class other slot4
+</script></ex-mermaid>
+    <p>Run 1 replaces the rule "a principle is only cited, never loaded" with the load form above, and updates the glossary and the maintainer docs to match. Run 32 updates the skill-review check, so reviews judge principle calls by the new rule. Everything lands in one PR, with all three plugins' versions bumped and a changelog entry.</p>
+
+    <h2 id="unchanged">What stays the same</h2>
+    <ul>
+      <li>Which principle is called where: no call is moved, added or swapped.</li>
+      <li>The principles themselves. When one principle points at a sibling, that stays a plain link, so one read doesn't pull in a chain of others.</li>
+      <li>Your <code>CLAUDE.md</code> "before X, read principle Y" lines. That's a separate decision.</li>
+      <li>Frozen v1.</li>
+    </ul>
+
+    <h2 id="proof">How we'll check it (planned)</h2>
+    <p>These are the checks this PR will run once the skills are edited. None has run yet, and none of them shows how agents behave.</p>
+    <div class="ex-table-scroll">
+      <table>
+        <thead><tr><th>Planned check</th><th>Will show</th><th>Won't show</th></tr></thead>
+        <tbody>
+          <tr><td>Leftover search</td><td>No bracketed principle link is left in the 30 skills, including on a line where one of two links was converted</td><td>Whether the new wording is good</td></tr>
+          <tr><td>Row-by-row match against the call-site list</td><td>Each of the 111 listed call sites became a load, with <code>IF</code> exactly where the list says, and none was dropped</td><td>Whether each class was judged right</td></tr>
+          <tr><td>Lint rule plus a manual read</td><td>Each load says what it returns; loads the rule can't see get a manual check against their row</td><td>That the return is useful in practice</td></tr>
+          <tr><td>Link check and skills test suite</td><td>Every principle target resolves, and the generated skill map still lists the principles each base skill loads (v2 is covered by the row-by-row match)</td><td>Anything about behavior</td></tr>
+          <tr><td>Independent review of the edits</td><td>Every "every run" call really is reached on every run (all of them read, plus a sample of the conditional ones), and no return lost an obligation</td><td>What agents do with it</td></tr>
+          <tr><td>Later, outside this PR: old vs new runs on 3–4 real tasks</td><td>Whether, on those few sample tasks, agents read the principle at its moment</td><td>Not part of this PR</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="defaults">Other defaults I took</h2>
+    <p>You can strike any of these.</p>
+    <div class="ex-table-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Default</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>D1</td><td><code>IF</code> when only some runs reach the moment; plain <code>MUST load</code> otherwise</td><td>Many of the 44 call sites in main skill files are moments only some runs reach; a plain MUST load at all of them would load several principles on every run (5 in <code>practices-verification</code>)</td></tr>
+          <tr><td>D2</td><td>Principle-to-principle links stay links</td><td>Avoids chained full reads</td></tr>
+          <tr><td>D4</td><td>Drop the rule that a principle must ship in the same plugin as its caller</td><td>v2 already reads <code>sunstack-dev</code> principles by an approved lookup; the rule contradicts shipped code</td></tr>
+          <tr><td>D5</td><td>Drop today's paraphrase text from each link</td><td>The return names what the step needs; the principle teaches the rest</td></tr>
+          <tr><td>D6</td><td>One PR</td><td>One deliverable, one shared standard</td></tr>
+          <tr><td>D7</td><td>Leave <code>CLAUDE.md</code> alone</td><td>Separate decision; devfiles edits go through a subagent</td></tr>
+          <tr><td>D8</td><td>Write the principle's path in backticks right after <code>load</code>, the same way skills load their own reference files</td><td>The lint rule and the test suite only see a load written that way</td></tr>
+          <tr><td>D9</td><td>Also update the skill-review check that judges principle calls (run 32)</td><td>Otherwise reviews keep judging by the old rule</td></tr>
+          <tr><td>D10</td><td>In <code>practices-delegation</code>, load the principle once for "a helper went silent", in the reference that does the recovery, and drop the duplicate link in the main file</td><td>Both spots govern the same decision; the reference has the wider condition and runs first, and loading twice is the duplication the new rule forbids</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details>
+      <summary>The full design set, for review</summary>
+      <p>The four parts (requirements, specification, skill design, skill verification) and the full call-site list are in <a href="index.html">index.html</a>. The independent design review accepted the design in round 4.</p>
+    </details>
+  </ex-document>
+</body>
+</html>

@@ -44,7 +44,7 @@ For each candidate:
 2. before accepting, cite the accepted requirement identity, restate its meaning in plain language, and name the observable outcome that fails if the concern is unresolved;
 3. reproduce the contradiction or failure path;
 4. when direct source reading cannot answer one factual question, perform one bounded source lookup in this session using the exact requirement identity, one factual question, and named sources; record anchors and uncertainty;
-5. check that the opened anchor in the current target says what the candidate claims, that any proof it relies on observed this exact claim, and what that evidence leaves unsettled (accept a finding only on evidence that observes it (`sunstack-dev:principle-verify-before-accepting`)); then accept, reject, mark contested, or mark unverified;
+5. MUST load `sunstack-dev:principle-verify-before-accepting` and return whether the opened anchor in the current target says what the candidate claims, whether any proof it relies on observed this exact claim, and what that evidence leaves unsettled; then accept, reject, mark contested, or mark unverified;
 6. record one-line evidence rationale;
 7. merge duplicates by root cause;
 8. preserve conflicting evidence.
@@ -55,7 +55,7 @@ Weigh the dispel check's classifications and over-delivery map as candidate evid
 
 ## Ordinary Finding or Broken Premise
 
-Before you accept and route a candidate, decide whether its correction fits inside the current governing basis. Name the assumption the basis relies on, what the current source shows, and whether that assumption still holds (fix the understanding first, then the design (`sunstack-dev:principle-refine-mental-models`)).
+Before you accept and route a candidate, decide whether its correction fits inside the current governing basis. MUST load `sunstack-dev:principle-refine-mental-models` and return the assumption the basis relies on, what the current source shows, and whether that assumption still holds.
 
 A defect the basis already forbids, with a fix the basis can name, routes to its semantic owner as usual. A candidate is a mental-model break when its correction cannot be expressed inside the basis because an assumption the basis itself relies on is false, such as an interface, ordering, ownership, or guarantee the current system does not provide. A break returns `decision-needed` or `blocked` to the owner instead of consuming a correction round.
 

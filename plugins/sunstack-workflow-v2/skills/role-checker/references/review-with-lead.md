@@ -38,7 +38,7 @@ Gather discoverable evidence yourself within the investigation grant. If the nee
 
 ## Read what comes back
 
-Lead dispositions findings and routes product/test repairs to Implementer and apparatus repairs to Verifier, rechecking affected acceptance/proof before corrections return to you with your review history. You recheck those corrected anchors; a clean review is the last quality gate, with no second wholesale acceptance ceremony. When a correction comes back, reopen every corrected anchor at the new revision and read the whole edit before you close a finding (verify before accepting (`sunstack-dev:principle-verify-before-accepting`)).
+Lead dispositions findings and routes product/test repairs to Implementer and apparatus repairs to Verifier, rechecking affected acceptance/proof before corrections return to you with your review history. You recheck those corrected anchors; a clean review is the last quality gate, with no second wholesale acceptance ceremony. IF a correction comes back, MUST load `sunstack-dev:principle-verify-before-accepting` and return every corrected anchor reopened at the new revision, with the whole edit read, before you close a finding.
 
 A correction can close the original finding and open a different defect. Record the original as closed and the new defect as a new finding, then compare the open count under your procedure's convergence rule. When two callers or two reviewers raise the same defect, merge them and count it once.
 

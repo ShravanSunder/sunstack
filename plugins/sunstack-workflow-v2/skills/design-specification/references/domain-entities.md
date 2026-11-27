@@ -12,7 +12,7 @@ Start from the nouns the problem and desired outcomes name, and the nouns that a
 
 Take meaning from the authorized U rows, the decision records that settle meaning, and pathfinding records. Code, contracts, and prior specifications show which terms are already in use. When an authoritative contract, decision, or Specification already gives a term the same meaning, reuse the term and its meaning without renaming or reopening it. Code alone shows current behavior and does not settle desired meaning.
 
-When you fill an entity's slots, derive each one from what the owner's statements already decide, and word the identity rule so it decides the hardest same-instance case those statements raise (define the domain first (`sunstack-dev:principle-define-the-domain-first`)).
+MUST load `sunstack-dev:principle-define-the-domain-first` before you fill an entity's slots, and return each slot derived from what the owner's statements already decide, with the identity rule worded so it decides the hardest same-instance case those statements raise.
 
 ## Entity Definition
 

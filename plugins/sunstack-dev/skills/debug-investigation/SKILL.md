@@ -16,7 +16,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
 - Use subagents only for bounded investigation slices. The Lead owns synthesis, evidence checking, and the final diagnosis.
 - Use `practices-delegation` to pick, launch, and hand off to each helper; keep root-cause method and deterministic watcher guidance here.
 - Keep investigation read-only until the user explicitly asks to fix or a validated fix phase begins.
-- When three or more fix attempts for this symptom have already failed, stop patching. Write down the one premise every failed fix assumed, list every observed failure beside it, and decide whether that premise, or the design and architecture behind it, still holds before anyone tries another patch ([question the premise the failed fixes share](../principle-refine-mental-models/SKILL.md)).
+- IF three or more fix attempts for this symptom have already failed, stop patching and MUST load `../principle-refine-mental-models/SKILL.md` and return the one premise every failed fix assumed, every observed failure listed beside it, and whether that premise, or the design and architecture behind it, still holds, before anyone tries another patch.
 - For real debugging work with a clear symptom, target, and reproduction surface, write a repo-local debug artifact by default. Stay in chat only when the user explicitly asks for chat-only/no-files output or the debugging scope is still unclear.
 - When the symptom, target, or reproduction surface is unclear, build the missing bug packet in chat from the available evidence before creating any file. Ask one material question only when the missing field cannot be resolved from the provided context or read-only inspection. Once the scope is clear, write the artifact unless chat-only/no-files output was requested.
 - Debug artifacts are disposable investigation outputs. Later cleanup, preservation, or promotion of these documents belongs to `docs-maintain`. IF the investigation closes with large logs or run residue it created still on disk, load `practices-cleanup` once the debug artifact keeps their proving excerpts, and return the removed and held paths for the final report.
@@ -55,7 +55,7 @@ Investigate before fixing. Systematic debugging builds evidence, ranks hypothese
    Completion: the failure is reproduced by a stated command, path, input or sequence, or bounded with its classification and the smallest failing surface known.
 
 5. Trace the code path:
-   - read the failing boundary and its callers in current code, with the logs, stack traces, and runtime state of the real run, and name the line or event where expected and actual behavior first diverge; mark each link in that path as seen or inferred, and record a read or run that the sandbox, credentials, or network blocked as a gap in access ([read ground truth first](../principle-read-ground-truth-first/SKILL.md))
+   - MUST load `../principle-read-ground-truth-first/SKILL.md` and return the failing boundary and its callers read in current code, with the logs, stack traces, and runtime state of the real run; the line or event where expected and actual behavior first diverge; each link in that path marked as seen or inferred; and a read or run that the sandbox, credentials, or network blocked recorded as a gap in access
    - separate source cause from downstream symptom
 
    Completion: the line or event where expected and actual behavior first diverge is named, each link in the path is marked seen or inferred, and each blocked read or run is recorded as an access gap.

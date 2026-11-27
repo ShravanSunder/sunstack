@@ -21,7 +21,7 @@ Regenerate it in the same change as any skill edit: run `pnpm --dir tests/skills
 | --- | --- | --- | --- | --- | --- |
 | orchestrator-design | 101 | `design-documents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `phase-return-tokens` | `practices-manage-agents`, `owner-decision-brief`, `orchestrator-implementation-goal` | none | `ready-for-implementation`, `ready-for-planning` |
 | orchestrator-implementation-goal | 53 | `practices-manage-agents`, `sunstack-dev:practices-show-me-your-work`, `sunstack-dev:practices-preflight`, `goal-contract-and-routing`, `phase-return-tokens` | `implementation-pr-wrapup`, `plan-implementation`, `owner-decision-brief` | none | none |
-| debug-investigation | 126 | none | `practices-cleanup`, `background-monitoring` | `refine-mental-models`, `read-ground-truth-first` | none |
+| debug-investigation | 126 | `principle-read-ground-truth-first` | `principle-refine-mental-models`, `practices-cleanup`, `background-monitoring` | none | none |
 | discuss-clarify-mental-models | 162 | `diagram-rendering-and-fallbacks` | `model-shapes`, `provenance-decomposition` | none | none |
 | discuss-pathfinding | 188 | `question-craft`, `decisions-and-docs` | `design-documents`, `user-requirements-extraction`, `diagram-rendering-and-fallbacks` | none | `program-design-gap`, `verification-design-gap`, `specification-gap` |
 | docs-maintain | 121 | `doc-roles`, `staleness-and-purge` | `owner-decision-brief`, `humanizer`, `diagram-rendering-and-fallbacks`, `workflows`, `changelog-runbooks`, `source-inspiration-catalog` | none | none |
@@ -164,12 +164,13 @@ flowchart LR
 
 - Lines: 126
 - Always loads:
-  - none
+  - principle: `../principle-read-ground-truth-first/SKILL.md`
 - Loads when a condition holds:
   - practice: `practices-cleanup`
+  - principle: `../principle-refine-mental-models/SKILL.md`
   - own reference: `references/background-monitoring.md`
 - Named without a load call: `practices-show-me-your-work`, `practices-delegation`, `docs-maintain`
-- Cites in `SKILL.md`: `principle-refine-mental-models`, `principle-read-ground-truth-first`
+- Cites in `SKILL.md`: none
 - Cites in its references: none
 - Returns: none
 

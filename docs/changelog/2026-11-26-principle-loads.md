@@ -1,0 +1,8 @@
+# 2026-11-26: Skills load principles at their moment
+
+- `skill-authoring` 0.13.0, `sunstack-dev` 3.9.0, `sunstack-workflow-v2` 0.9.0; all three plugin manifests and the three marketplaces agree.
+- `domain-skill-crafting` replaces "a principle is only cited, never loaded" with principle loads: `MUST load <principle> and return <result>` where every run of the step reaches the moment, `IF <moment>, MUST load … and return …` where only some runs do. The result names what applying the principle produced and keeps every obligation the step set. A principle is named in backticks right after `load`, like a reference. A principle still cites its siblings with a plain link. The glossary, invocation and main-path topics match.
+- `skill-review`'s `placement-and-calls` check judges principle loads: a bare `MUST load` only where every run reaches the moment, one load per decision across a caller and its callee, and a parenthetical principle link outside a principle is a finding.
+- 110 principle loads replace the parenthetical citations in 30 skills: the v2 roles, phases and `plan-implementation`, the 11 base practices, and the domain, presentation, ops, debug and security skills. One duplicate link in `practices-delegation/SKILL.md` is retired; its reference loads the principle for the same recovery decision. Frozen v1 is unchanged.
+- The generated phase-composition map lists principle loads by kind; `docs/architecture/skill-system.md` and the principles index describe loads.
+- Basis: owner decision after the principles-use audit. Behavior has not been evaluated; static receipts and the skills suite ran (see `references/2026-11-26-principle-loads.md`). Codex and Claude caches are not refreshed.

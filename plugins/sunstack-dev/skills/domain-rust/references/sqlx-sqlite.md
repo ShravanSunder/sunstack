@@ -16,7 +16,7 @@ Schema and migration tests assert the data cleanup and the rejection of invalid 
 
 ## Queries
 
-When a query returns rows, read them with `query!` or `query_as!` into a private row struct and build the public domain type from that row, never deriving `FromRow` on the domain type or reading columns by position ([keep the storage row private and let one owner decide what stored data means](../../principle-one-owner-per-truth/SKILL.md)).
+IF a query returns rows, MUST load `../../principle-one-owner-per-truth/SKILL.md` and return them read with `query!` or `query_as!` into a private row struct, with the public domain type built from that row, never deriving `FromRow` on the domain type or reading columns by position.
 
 ```rust
 let row = sqlx::query_as!(

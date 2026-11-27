@@ -19,13 +19,13 @@ Python's annotations promise nothing until something enforces them, so each valu
 - Use the 3.12 generic syntax with descriptive names, `def find_record_by_key[TRecord](records: list[TRecord], *, key: str) -> TRecord | None`, and `X | None` rather than `t.Optional[X]`. No `from __future__ import annotations`.
 - Imports live at the top of the module. A function-level import appears only when the owner asked for one or the file already works that way. "A local import breaks the cycle" is not a reason: fix the dependency between the two modules.
 
-When basedpyright flags a value from an untyped library, parse it into a model if it carries domain data; otherwise annotate the variable with the type you expect and silence only that rule, `# pyright: ignore[reportUnknownVariableType]`, never a bare `# type: ignore` ([prove it to the checker, or mark the escape as a known hazard](../principle-types-are-communication/SKILL.md)).
+IF basedpyright flags a value from an untyped library, MUST load `../principle-types-are-communication/SKILL.md` and return the value parsed into a model if it carries domain data; otherwise the variable annotated with the type you expect and only that rule silenced, `# pyright: ignore[reportUnknownVariableType]`, never a bare `# type: ignore`.
 
 ## Model or dataclass
 
 The mistake runs both ways: a `BaseModel` wrapped around values it can't validate, or a `dataclass` receiving JSON nobody checked.
 
-When a value is parsed from outside the process, sent, pickled or persisted, or must keep an invariant across its fields, make it a `BaseModel` configured through `model_config = ConfigDict(...)` and build it once where it enters ([parse untrusted data once, where it enters](../principle-types-are-communication/SKILL.md)). Everything else, including a props class for a function with more than three parameters, is a `dataclass`. `TypedDict` and `NamedTuple` appear only when a library demands them.
+IF a value is parsed from outside the process, sent, pickled or persisted, or must keep an invariant across its fields, MUST load `../principle-types-are-communication/SKILL.md` and return it as a `BaseModel` configured through `model_config = ConfigDict(...)`, built once where it enters. Everything else, including a props class for a function with more than three parameters, is a `dataclass`. `TypedDict` and `NamedTuple` appear only when a library demands them.
 
 ```python
 # before
@@ -67,7 +67,7 @@ def reconcile_batch(props: ReconcileBatchProps) -> ReconcileResult: ...
 
 `arbitrary_types_allowed=True` is the tell for the first mistake: the model has stopped validating the fields it exists for. Configure models through `model_config`; `class Config` is the deprecated Pydantic v1 form.
 
-When a result or record has several states, give each state its own model with a `t.Literal` `kind`, join them with `Field(discriminator="kind")`, and `match` on `kind` instead of an `isinstance` ladder or `.get("error")` ([model the states as a sum and narrow by the tag](../principle-types-are-communication/SKILL.md)).
+IF a result or record has several states, MUST load `../principle-types-are-communication/SKILL.md` and return each state as its own model with a `t.Literal` `kind`, joined with `Field(discriminator="kind")`, and a `match` on `kind` instead of an `isinstance` ladder or `.get("error")`.
 
 ## Strings, time and data
 
@@ -87,7 +87,7 @@ Under the owner's set:
 - Mark tests that call real model APIs `integration_llm` and tests that need an external database `integration_db`; unmarked tests are unit tests.
 - Mock with pytest-mock's `mocker` fixture, never `unittest.mock`.
 
-When a test reaches for `mocker.patch`, patch only a dependency outside the behavior under test, such as a remote API or the clock, and make the stand-in return the real failure replies as well as the happy one ([a mock is an assumption about the real contract](../principle-write-tests-that-can-fail/SKILL.md)).
+IF a test reaches for `mocker.patch`, MUST load `../principle-write-tests-that-can-fail/SKILL.md` and return the patch limited to a dependency outside the behavior under test, such as a remote API or the clock, with the stand-in returning the real failure replies as well as the happy one.
 
 ## Gates
 

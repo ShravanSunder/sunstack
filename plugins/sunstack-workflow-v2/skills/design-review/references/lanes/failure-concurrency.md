@@ -24,9 +24,9 @@ Select the highest-risk operation and simulate:
 
 For each, identify authority, state transition, invariant, containment, recovery, idempotency/ordering rule, caller-visible outcome, and proof seam. A finding must name a concrete interleaving or failure path.
 
-When the operation's effect is visible outside it and a call can time out, be retried, or partly succeed, trace each ending the design gives it. Record a timeout after the request was sent as an unknown outcome, distinct from a definite failure, and compare it with the handling the design adopts for that ending. Require a pending state, or reconciliation against the system that knows whether the effect happened, only when the governing contract asks for it or a repeated or missed effect would break an accepted obligation (decide every ending, and who knows the truth, before retries (`sunstack-dev:principle-design-for-failure`)).
+IF the operation's effect is visible outside it and a call can time out, be retried, or partly succeed, MUST load `sunstack-dev:principle-design-for-failure` and return each ending the design gives it, traced: a timeout after the request was sent recorded as an unknown outcome, distinct from a definite failure, and compared with the handling the design adopts for that ending; and a pending state, or reconciliation against the system that knows whether the effect happened, required only when the governing contract asks for it or a repeated or missed effect would break an accepted obligation.
 
-When two or more actors can touch the same state, name the invariant the design states and find the order of events that breaks it. Report a different completion order only when it breaks that invariant (name the invariant, then find the interleaving that breaks it (`sunstack-dev:principle-design-for-concurrency`)).
+IF two or more actors can touch the same state, MUST load `sunstack-dev:principle-design-for-concurrency` and return the invariant the design states and the order of events that breaks it, reporting a different completion order only when it breaks that invariant.
 
 Good: the design says who detects failure, what state can remain, how retry/recovery behaves, and what proves the invariant.
 

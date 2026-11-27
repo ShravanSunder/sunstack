@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Principle loads</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Principle loads</h1>
+    <p>Skills will load a principle at the moment it governs, with <code>MUST load … and return …</code>, instead of linking it in parentheses. Where only some runs reach that moment, the load starts with <code>IF &lt;moment&gt;</code>, so other runs load nothing.</p>
+    <p>Run 1 rewrites the skill-writing standard in <code>domain-skill-crafting</code>, which today forbids loading a principle, and run 32 updates the review check that judges it. Runs 2 to 31 apply it to 111 call sites in 30 skills, each listed in the call-site inventory. The design review accepted it in round 4, and you kept runs 21 to 31 (decision D3, recorded as D11).</p>
+    <ex-mermaid><script type="text/plain">
+flowchart LR
+  step["Skill step runs"] --> moment{"Does this run reach<br/>the principle's moment?"}
+  moment -->|"no"| skip["Load nothing"]
+  moment -->|"yes"| load["MUST load the principle<br/>(a full read earlier this session counts)"]
+  load --> ret["Return what applying it produced<br/>(the step can't finish without it)"]
+  class step slot1
+  class load slot2
+  class ret slot3
+</script></ex-mermaid>
+    <ol>
+      <li><a href="#requirements">Requirements</a>: the audit evidence, your decision, and what stays out.</li>
+      <li><a href="#specification">Specification</a>: the new standards, their transfer tests, and three before/after rewrites.</li>
+      <li><a href="#skill-design">Skill design</a>: the 32 runs, the new call forms, and the decisions you can strike.</li>
+      <li><a href="#skill-verification">Skill verification</a>: what each check proves, and what stays unverified.</li>
+      <li><a href="#call-sites">Call-site inventory</a>: all 111 call sites, each with its moment and what it returns.</li>
+    </ol>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+    <ex-markdown id="call-sites" label="Call-site inventory" src="./call-sites.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="principle-loads-walkthrough" title="From the audit to the proof" description="Read the four parts in order.">
+    <ex-step to="requirements">Start with why: few principle reads show up after a citing skill loads, and you chose to load them.</ex-step>
+    <ex-step to="specification">See the standards that replace the citation rule, and how each kind of call site is rewritten.</ex-step>
+    <ex-step to="skill-design">Check the 32 runs and the decisions table; strike any row you disagree with.</ex-step>
+    <ex-step to="skill-verification">See which checks this PR runs, and what waits for the later behavior comparison.</ex-step>
+    <ex-step to="call-sites">Scan the inventory: every call site, its moment and its return.</ex-step>
+  </ex-presentation>
+</body>
+</html>
