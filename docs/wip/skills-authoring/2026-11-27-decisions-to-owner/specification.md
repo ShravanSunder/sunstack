@@ -11,7 +11,7 @@
 
 ## Standards stated
 
-- S1. A one-way door an agent raises itself goes, as the full brief, to its commissioner: the Lead briefs the owner; a helper returns it to the agent that commissioned it; a helper the owner assigned directly returns it to the work's Lead, or briefs the owner when the work has no Lead or delivery to its Lead failed, and says which; a queued, delivered-but-unanswered or uncertain message stays pending.
+- S1. A one-way door an agent raises itself goes, as the full brief, to its commissioner: the Lead briefs the owner; a helper returns it to the agent that commissioned it; a helper the owner assigned directly returns it to the work's Lead, and briefs the owner, giving the reason, only when neither the commission nor the work's thread names a Lead, or the Lead's delivery receipt says `rejected` or `notSubmitted` with no next action that can deliver it; a denied or unfinished lookup follows the access or discovery path, and a held, queued, delivered-without-a-reply or uncertain message stays pending.
 - S2. A commissioner that is not the owner passes an owner decision on with its options and recommendation intact, or settles it only within its own authority; the owner decides owner decisions.
 - S3. When the owner asked the question directly, the brief answers the owner in that conversation (unchanged).
 - S4. While the owner is away, an owner decision stays pending and work that doesn't depend on it continues.
@@ -21,7 +21,7 @@
 
 **S1.**
 - Case one: a solo developer's toolkit with one Lead session and helper subagents; a helper hits an open schema choice and returns the full brief to the Lead, which briefs the developer. Holds. An Advisor the developer opened to inspect one issue finds a separate storage question it raised itself: it returns the brief to the Lead; only if the developer asks it about that question does it answer the developer directly (S3). Holds.
-- Case one, no Lead: an Advisor the developer opened finds a one-way storage question; the work's thread has no Lead. It briefs the developer with the full options and recommendation. Holds. Its thread names a Lead, and delivery to it is rejected: it briefs the developer and says delivery to the Lead failed. Holds. Its message to the Lead is queued, or delivered with no reply yet, or its outcome is uncertain: the brief stays pending in the work's record, the helper reconciles the delivery through the existing waiting path and continues independent work. Holds.
+- Case one, no Lead: an Advisor the developer opened finds a one-way storage question; neither its commission nor the work's thread names a Lead. It briefs the developer with the full options and recommendation. Holds. Its thread names a Lead, and the delivery receipt says `rejected` with no next action that can deliver it: it briefs the developer and says delivery to the Lead failed. Holds. Its Lead lookup was denied: that is not an absent Lead, so it follows the access path. Holds. Its message to the Lead is held or queued, or delivered with no reply yet, or its outcome is uncertain: the brief stays pending in the work's record, the helper reconciles the delivery through the existing waiting path and continues independent work. Holds.
 - Case two: a helper that posts its brief straight to a team channel, skipping its commissioner; or an owner-assigned helper that briefs the owner directly while the work's Lead is reachable, or treats a Lead's silence as unreachability. Rejected. Holds.
 - Verdict: passes.
 
