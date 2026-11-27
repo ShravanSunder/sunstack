@@ -48,7 +48,7 @@ The section holds one item with one table, in the Canvas `ex-table-scroll` wrapp
 
 | Label | Tone | Use it for |
 | --- | --- | --- |
-| Passed | `done` | a check that ran and passed |
+| Passed | `done` | a check that ran and met its claim, even when the source calls it an observation |
 | Failed | `risk` | a check that ran and failed |
 | Blocked, Held or Acceptance held | `question` | a check or acceptance stopped or held, as the source words it |
 | Not run | none | a named check that did not execute |
@@ -61,6 +61,8 @@ The label keeps the recorded state, and a reported pass is not an acceptance.
 - **Assigned, no result.** A check that was assigned but has no recorded result is Not run only when the source says it hasn't run. Otherwise it is Observed, with the limit "no result recorded".
 - **Assumptions are not rows.** An assumption with no proof is not a verification row; it belongs under What changed and why.
 - **Supporting observations.** An observation that only supports a Not run check's result stays as context in that check's row.
+- **Skipped checks.** A required check that was skipped or missed gets a Not run row, even when What changed and why also explains the skip.
+- **Corrected results.** When a later row corrects a check's result, show the corrected result and link the correction, or its sequence's Trace. The superseded result never appears as current.
 
 **Rows.** The table carries one row per claim in step 2's claim inventory. Rows may be grouped only when each claim's target, result and limit stays recognizable. Exact counts and exact findings are never dropped.
 
@@ -74,7 +76,9 @@ The label keeps the recorded state, and a reported pass is not an acceptance.
 
 The source link goes to the full account or a receipt.
 
-The result says no more than the check covered. A structural comparison doesn't establish meaning, and a later step isn't "blocked" unless the source says so.
+The result says no more than the check covered. A structural comparison doesn't establish meaning, and a later step isn't "blocked" unless the source says so. When the source row's own conclusion claims more than its check covered, report the coverage and name what it didn't establish.
+
+Cells summarize; the full account quotes. Write each cell's target, result and limit in short words, with exact counts, and never paste the source row.
 
 - **Observed rows.** An Observed row names the finding, its source and its precise limit. Illustrative: "source inspection found the cache is rebuilt on load and held in memory; runtime performance unmeasured".
 - **Traces.** When an ordered sequence of checks or reviews explains the conclusion, link the row to the exact anchor of that Trace in the full account. That link counts as the row's source link.
