@@ -7,21 +7,21 @@ This reference owns the view each section's items take on a work-log page, and t
   - the claim inventory from step 2;
   - the full account's destinations;
   - the guide references at the page's binding.
-- **Return:** for each item, its section, its face and its view, with the source fact that earns it.
+- **Return:** for each item, its section, its face and its view, with the source fact that earns it; for each verification row, its planned links; and each ordered sequence that needs a Trace in the full account.
 - **The guide owns the markup.** This reference names each construct with its guide reference and copies none.
 
 A badge or diagram appears only when the source establishes what it shows: a status, what waits, a dependency, or both states. Without that, the item is prose under its title, which is a complete answer, not a fallback.
 
 ## For you to decide
 
-Each owner choice open at the cutoff is one item.
+This section holds two kinds of item: each owner choice open at the cutoff, and each assumption or commitment whose dependent work is held for the owner's authority, linked to its entry under What changed and why. Each is one item. It does not hold an item the source defers with no question put to the owner (below).
 
 - **Title.** The `h4` title is the question, as a link: to the choice's decision page, or, when none exists, to its exact entry in the full account.
-- **Open at the cutoff.** A choice or ask is open only if no row before the cutoff closes, answers or withdraws it. A row that records the ask closed, answered or handed off closes it, even when no later row confirms the outcome. Explain a closed or settled one under What changed and why, if it is material.
+- **Open at the cutoff.** A choice or ask is open only if no row before the cutoff closes, answers or withdraws it. A row that records the ask closed, answered or withdrawn closes it, even when no later row confirms the outcome. A handoff closes it only when the record shows the handoff itself fulfils the ask. Explain a closed or settled one under What changed and why, if it is material.
 - **Deferred is not a choice.** An item that the source defers, withdraws as a question, or leaves to be decided later, with no question now put to the owner, is not an open choice. Mention it where its work stands.
 - **Order.** Choices that block work come first.
 - **No comparison here.** The view compares no alternatives and carries no answer control. The decision page compares the alternatives and collects the answer.
-- **Consequence badge.** Add one only when the source establishes what waits: `risk` when work waits on the answer, `note` when work can proceed meanwhile. When the source states a consequence that is neither, such as how far a proposal would reach, write it as prose.
+- **Consequence badge.** Add one whenever the source states that work waits (`risk`) or can proceed meanwhile (`note`), and only then. When the source states a consequence that is neither, such as how far a proposal would reach, write it as prose.
 - **Recommendations.** A recommendation is named as its recommender's, such as "The Lead recommends …". A recommendation never becomes the owner's decision.
 
 ## What's done / what's next
@@ -63,7 +63,7 @@ The label keeps the recorded state, and a reported pass is not an acceptance.
 - **Assumptions are not rows.** An assumption with no proof is not a verification row; it belongs under What changed and why.
 - **Supporting observations.** An observation that only supports a Not run check's result stays as context in that check's row.
 - **Skipped checks.** A required check that was skipped or missed gets a Not run row, even when What changed and why also explains the skip.
-- **Corrected results.** When a later row corrects a check's result, the row shows the corrected result with its own exact counts and links the correction's Trace or row itself. The superseded result never appears as current; its detail may stay in the full account.
+- **Corrected results.** When a later row corrects a check's result, the row shows the corrected result with its own exact counts and links the Trace of the correction's sequence; a correction that one row explains links that row. The superseded result never appears as current; its detail may stay in the full account.
 
 **Rows.** The table carries one row per claim in step 2's claim inventory. Rows may be grouped only when each claim's target, result and limit stays recognizable. Exact counts and exact findings are never dropped.
 

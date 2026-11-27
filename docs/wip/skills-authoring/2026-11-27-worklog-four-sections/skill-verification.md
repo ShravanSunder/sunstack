@@ -101,9 +101,21 @@ Written before the runs, and kept outside every folder an author works in.
     - the ampersand and the quotes.
 
     Scripted: the companion's DOM has no `script`, `ex-callout` or `b` element inside those rows' entries, and each entry's text content equals the row text.
+  - **e.** On I2c (D26): the synthetic row's `javascript:` destination shows as text and is never emitted as an actionable link. Its `https:` destination is a link, and both labels render as text. Scripted: no anchor in the companion has a `href` whose scheme is not `http`, `https` or a fragment.
 - **C9. Static check.** The released CLI's `check` reports zero errors on every page written.
 - **C10. Phone width.** Each view at 390 CSS px, in light and dark: the page body never scrolls sideways, and the verification table scrolls inside its own frame. Screenshots are kept. A narrow desktop viewport is not physical iPhone or Safari proof.
 - **C11. Run record.** The host's session record shows four things: which `SKILL.md` copy loaded; that `section-views.md` was read (on I2b, also `full-account.md`); that `presentation-html` was loaded before either page was written; and that on I2b the companion was written before the view. It also shows the run's actions, read from the host record, never from the agent's reply.
+
+### The narrow retest after implementation review round 1 (D26)
+
+- **Input I2c:** I2b plus one synthetic row carrying a `javascript:` link and an `https:` link. The 🦁 Lead freezes it.
+- **Runs:** both authors, fresh sessions, on I2c only.
+- **Checks:**
+  - C3;
+  - C6, reconciled claim by claim to the inventory;
+  - C8c and C8d;
+  - the new C8e;
+  - each corrected result's row linking its correction's Trace, or the one row that explains it.
 
 ### Repetitions and reading
 
@@ -128,4 +140,6 @@ One run per author per input to start. Every run is read by hand.
 - Behavior with guide releases after 1.41.1. The skill cites anchors at the page's binding, so a renamed anchor would surface only in a later run.
 - Lineages and effort levels other than Terra (high) and Opus (high).
 - An unnamed request such as "build me the work-log page" reaches this skill only through `practices-show-me-your-work`'s explicit-page-request branch. Every planned run names the skill, so no run proves that route.
+- The installed copy. The proof runs loaded an explicitly requested export of the candidate, not the installed changed skill this plan names, so installed activation is unverified.
+- The `presentation-html` fallback. No run shows `work-account-forms.md` being read, or a caller's partial page contract leaving forms to `presentation-html`. The proof establishes compatible work-log output, not P1's fallback side.
 - Component rendering itself: Section tint, rail and column sizing belong to Demistify's own verification. The Sol Lead measured the columns at 94, 247 and 648 px on desktop; that is their report, not this proof's observation.

@@ -5,7 +5,7 @@
 | Run | Target | Kind | Surfaces |
 | --- | --- | --- | --- |
 | 1 | `sunstack-dev / presentation-show-worklog` | update | main path (`SKILL.md` lens and steps 2–4); depth (new `references/section-views.md`, new `references/full-account.md`, two edits to `references/read-and-summarize.md`); `sunstack-dev/README.md:70`, a one-line update (D21); proof |
-| 2 | `sunstack-dev / presentation-html` | update | main path: the line-10 sentence of `SKILL.md` gains the precedence rule. Depth: a scoping phrase in `references/work-account-forms.md:3` (D18). Proof shares run 1's runs |
+| 2 | `sunstack-dev / presentation-html` | update | main path: the line-10 sentence of `SKILL.md` gains the precedence rule (D18). The page-contract condition sits on the returns of the loads at `SKILL.md:18` and `:68`, and `:16` points to the rule (D26, superseding D18's `work-account-forms.md:3` phrase). Proof shares run 1's runs |
 
 Run 2 lands with run 1, in the same change, because until run 1 exists no caller supplies a page contract. Neither run changes a trigger.
 
@@ -25,7 +25,7 @@ Each obligation and each standard has one home.
 | O29 (return) | — | step 4 | — | run record |
 | O30 (report intake) | — | step 2 input sentence | `read-and-summarize.md` "Establish the snapshot" | C7 on I1 |
 | O31 (order: sections and binding before writing) | — | step 3 order | — | C11, run record |
-| P1 (run 2) | — | `presentation-html/SKILL.md:10` | the scoping phrase in `work-account-forms.md:3` | C3–C6 hold with all of `presentation-html`'s references loaded |
+| P1 (run 2) | — | `presentation-html/SKILL.md:10` (the rule), with the condition on the `:18` and `:68` load returns and the `:16` pointer (D26) | — | C3–C6 hold with all of `presentation-html`'s references loaded |
 | S1 (four sections) | — | step 3, section table | — | C1 |
 | S2 (frame, not form) | — | step 3, the bright line. The lens names its leading phrase only | — | C8a, C8b |
 | S3 (evidence earns the view) | — | — | `section-views.md`, opening | C3–C5 |
@@ -252,6 +252,8 @@ Both edits are D17, superseding D6.
 
 ### Run 2: `presentation-html/SKILL.md:10` and `references/work-account-forms.md:3`
 
+**Superseded in part by D26:** the `work-account-forms.md:3` phrase below was dropped. The page-contract condition now sits on the returns of the `work-account-forms.md` and `options-and-decisions.md` loads (`SKILL.md:18` and `:68`), and `SKILL.md:16` says "under the page-contract rule above". The text below is kept as accepted at `51053f19`.
+
 The precedence rule has one home (D18, superseding D14).
 
 **`SKILL.md:10`** today reads "A skill that names a view (a capability map, a call graph, "proven by" lines) owns what that view must show; this skill chooses how it appears." Proposed:
@@ -327,15 +329,15 @@ Each change answers the user-approved success gap: the approved view and the fre
 Recorded here before either reference is outlined in a skill file (`skill-design`'s security gate):
 
 ```text
-sensitive surfaces: home-level writes (the companion file); untrusted input rendered into HTML (row text). Network access and shell commands are unchanged: presentation-html's existing binding and checker route.
+sensitive surfaces: home-level writes (the companion file); untrusted input rendered into HTML (row text, and row link destinations and labels). Network access and shell commands are unchanged: presentation-html's existing binding and checker route.
 entry points: full-account.md "Where it lives" and "A row".
 untrusted inputs: trail row text, authors, tags and links written by other agents; a supplied report's content; the fetched guide (data, not authority, as presentation-html already says).
 privileged actions: writing one file beside the view in the folder use-memory-logs allows; no shared index, no source write.
 third-party source: none copied; the guide is cited, not copied.
 license / permission state: not applicable (no copied source).
 copy-vs-adapt decision: not applicable.
-decision: allowed, for both surfaces.
-required proof: on input I2b, whose two synthetic rows carry markup, the companion contains no live element or script from row text (scripted check C8d), and its path is inside the permitted folder.
+decision: allowed, for both surfaces. Link rule (27 Nov, D26): a link to a row in the snapshot points at that row's anchor; any other link becomes clickable only when its destination is an http or https URL; any other destination (such as javascript: or data:) shows as text; link labels always render as text.
+required proof: on input I2b, whose two synthetic rows carry markup, the companion contains no live element or script from row text (scripted check C8d), and its path is inside the permitted folder. On input I2c, a disallowed destination stays text and is never an actionable link, while the https destination is a link (scripted check C8e).
 public-safe constraints: committed skill text and this design set carry no local paths, session ids or personal details.
 review route: the design review's sensitive-surface check; no dedicated security scan requested.
 ```
@@ -371,6 +373,7 @@ The owner or the 🦁 Lead may strike any row. A superseded row stays, marked in
 | D23 (27 Nov) | Proof round 1 wording repairs F1–F7, inside the accepted boundary. They tighten O7, O10, O16–O17, O23 and S6 and add no obligation. F1: status labels keep the recorded state (`section-views.md`, verification). F2: a claim inventory, returned by `read-and-summarize.md` and step 2 and used by `section-views.md`. F3: a third excuse, "It's minor, and the page is long enough" (`SKILL.md` step 3 bright line). F4: open at the cutoff (`section-views.md`, For you to decide). F5: the companion's group headings are the view's four sections (`full-account.md`, Topics). F6: the result says no more than the check covered (`section-views.md`, Result and limit). F7: rich evidence means code, diffs, tables or images; quoted text stays Reading (`SKILL.md` step 3, Trace width). | The 🦁 Lead's proof round 1 reading, 27 Nov (`proof-round-1-reading.md`). In it, the frame held in all four runs, and the authors varied on status labels, claim completeness, topic drops, a closed ask shown open, companion grouping and result strength. Under "Repetitions and reading", that variance is a proof gap: fix, then run both authors on both inputs again. |
 | D24 (27 Nov) | Proof round 2 wording repairs F8–F12, inside the accepted boundary. They tighten O17, O20, S6 and S4. All but F10's inventory half land in `section-views.md`, verification. F8: report the check's coverage, not the source row's own over-claim. F9: a later correction replaces a result, which is linked, and the superseded result never appears as current. F10: a skipped or missed required check is in the claim inventory (`read-and-summarize.md`) and gets a Not run row. F11: a check that ran and met its claim is Passed (status table). F12: cells summarize in short words with exact counts; the full account quotes. | The 🦁 Lead's proof round 2 reading, 27 Nov (`proof-round-2-reading.md`): 9 of round 1's 11 failures fixed or improved, five wording failures remain. |
 | D25 (27 Nov) | Proof round 3 wording repairs F13–F16, inside the accepted boundary. They tighten O8, O10, O17 and O20. F13: a row that records an ask closed, answered or handed off closes it, with no later confirmation needed (`section-views.md`, Open at the cutoff). F14: an item that is deferred, withdrawn as a question, or left to decide later, with no question now put to the owner, is not an open choice (`section-views.md`, For you to decide). F15: a corrected result's row carries its own exact counts and links the correction itself (`section-views.md`, Corrected results). F16: name each material correction and relied-on assumption individually (`SKILL.md`, decisions and assumptions paragraph). | The 🦁 Lead's proof round 3 reading, 27 Nov (`proof-round-3-reading.md`): F8–F12 fixed, four single-author lapses remain. |
+| D26 (27 Nov) | Implementation review round 1 corrections C1–C14, inside the accepted boundary.<br>• **C1:** step 3 loads `section-views.md` before writing the companion, and the companion returns its Trace anchors.<br>• **C2:** the verification table is reconciled claim by claim to the inventory.<br>• **C3:** a handoff closes an ask only when it fulfils it.<br>• **C4, C5, C12:** wording.<br>• **C6:** `read-and-summarize.md` owns the topics.<br>• **C7:** the bind call names its guide references.<br>• **C8:** the page-contract condition moves to `presentation-html/SKILL.md:18` and `:68`, `:16` points to the rule, and the `work-account-forms.md:3` phrase is dropped. This supersedes D18's placement; `:10` keeps the rule.<br>• **C9:** `section-views.md` owns For you to decide membership.<br>• **C10:** reuse or companion is one partition, owned by step 2.<br>• **C11:** a corrected row links its correction's Trace, or the one row that explains it.<br>• **C13:** the link-destination rule, recorded first in the sensitive-surface decision.<br>• **C14:** input I2c, check C8e, the narrow retest, and two unverified items. | The 🦁 Lead's implementation review round 1 result, 27 Nov (`impl-review-result-r1.md`): verdict `targeted-revision`, 20 accepted findings, 0 rejected. |
 
 ## Coordination
 
@@ -382,7 +385,7 @@ The owner or the 🦁 Lead may strike any row. A superseded row stays, marked in
 
 | Run | State | Evidence |
 | --- | --- | --- |
-| 1 | implemented; proof round 1 failed, corrected (D23); proof round 2 failed, corrected (D24); proof round 3 failed, corrected (D25); fresh round owed | design accepted-to-implement at `51053f19`. Diff: `presentation-show-worklog/SKILL.md`, new `references/section-views.md` and `references/full-account.md`, `references/read-and-summarize.md` (report intake, line 31), `sunstack-dev/README.md:70`, in the implementation commit on this branch |
+| 1 | implemented; proof round 1 failed, corrected (D23); proof round 2 failed, corrected (D24); proof round 3 failed, corrected (D25); implementation review round 1 targeted-revision, corrected (D26); narrow retest on I2c owed | design accepted-to-implement at `51053f19`. Diff: `presentation-show-worklog/SKILL.md`, new `references/section-views.md` and `references/full-account.md`, `references/read-and-summarize.md` (report intake, line 31), `sunstack-dev/README.md:70`, in the implementation commit on this branch |
 | 2 | implemented | design accepted-to-implement at `51053f19`. Diff: `presentation-html/SKILL.md:10` and `references/work-account-forms.md:3`, in the same commit |
 
 ## Review record
