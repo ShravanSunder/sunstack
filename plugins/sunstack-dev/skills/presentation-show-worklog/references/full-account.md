@@ -26,10 +26,10 @@ Name the work, the source and the cutoff, and the coverage gaps the reading foun
 
 ## Topics
 
-- **One group per view topic**, in the view's section order. Keep existing stable topic, decision and `story_<key>` destinations.
-- **Recorded order.** Within each group, the rows keep their recorded order.
-- **A row behind several topics** is anchored once, in its first group, and linked from the others.
-- **Rows behind no view topic** go in a final group, in recorded order, so that every row in the declared snapshot is carried.
+- **Group headings are the view's four section names,** in the view's order. Each section's group holds its topics' rows, topic by topic. Never group by domain, stream or kind instead. Keep existing stable topic, decision and `story_<key>` destinations.
+- **Recorded order.** Within each topic, the rows keep their recorded order.
+- **A row behind several topics** is anchored once, under its first topic, and linked from the others.
+- **Rows behind no view topic** go in a final group after the four sections, in recorded order, so that every row in the declared snapshot is carried.
 
 ## A row
 

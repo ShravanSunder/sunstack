@@ -29,6 +29,7 @@ MUST load `references/read-and-summarize.md` and return:
 
 - the reused or reconstructed snapshot and its topics;
 - the selected evidence and its scope;
+- the claim inventory: every recorded check or proof claim, each with its target, exact result and limit;
 - the material decisions and relied-on assumptions, with their current state;
 - the backing and coverage limits;
 - the outstanding owner decisions;
@@ -67,12 +68,13 @@ Each topic is one section item under the section whose question it answers. Its 
 
 Detail lives once, in the full account, and the item links to it rather than repeating it. A separately labelled related link may point to another item or row on the view. After the face, an item may carry explanatory paragraphs, a Trace or a native disclosure.
 
-The structure frames the explanation and never replaces it. A topic with no evidence for a badge, a Flow or cards is plain prose under its title. A topic that fits no view is still explained under the section whose question it answers. Two excuses fail here:
+The structure frames the explanation and never replaces it. A topic with no evidence for a badge, a Flow or cards is plain prose under its title. A topic that fits no view is still explained under the section whose question it answers. A minor topic gets a short item, or a sentence inside its section's item; it is never left to the full account alone. Three excuses fail here:
 
 - "It doesn't fit a template, so the full account covers it" drops the topic from the view.
+- "It's minor, and the page is long enough" drops the topic too.
 - "The face looks bare without a badge" invents a fact.
 
-Neither holds.
+None holds.
 
 Explain the material decisions agents made and the assumptions the work relies on under What changed and why. Each one shows:
 
@@ -111,7 +113,7 @@ For an ordered account, use explanatory Trace steps for meaningful actions, find
 - **Attach the evidence.** Put that excerpt beside the claim, with its attribution and limit. A link to the entire record is optional depth, not the evidence attachment itself.
 - **Show technical material.** Display selected commands, source, configuration, JSON or diffs in the matching guide's code/diff view, and use inline code for identifiers. Displaying commands does not authorize executing them.
 - **Invent nothing.** Do not invent evidence or code that a narrative-only observation doesn't supply.
-- **Width.** A short text Trace uses Reading width; a Trace with code or other rich evidence uses Canvas (`traces.md`).
+- **Width.** A Trace whose steps hold text, including quoted excerpts, uses Reading width. A Trace with rich evidence (code, diffs, tables or images) uses Canvas (`traces.md`).
 
 A Trace lives after an item's face or in the full account.
 

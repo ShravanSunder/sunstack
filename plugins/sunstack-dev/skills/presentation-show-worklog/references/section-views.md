@@ -4,6 +4,7 @@ This reference owns the view each section's items take on a work-log page, and t
 
 - **Expected inputs:**
   - the topics, each with its source facts and its section;
+  - the claim inventory from step 2;
   - the full account's destinations;
   - the guide references at the page's binding.
 - **Return:** for each item, its section, its face and its view, with the source fact that earns it.
@@ -16,6 +17,7 @@ A badge or diagram appears only when the source establishes what it shows: a sta
 Each owner choice open at the cutoff is one item.
 
 - **Title.** The `h4` title is the question, as a link: to the choice's decision page, or, when none exists, to its exact entry in the full account.
+- **Open at the cutoff.** A choice or ask is open only if no row before the cutoff closes, answers or withdraws it. One that a later row settled is not open: explain it under What changed and why, if it is material.
 - **Order.** Choices that block work come first.
 - **No comparison here.** The view compares no alternatives and carries no answer control. The decision page compares the alternatives and collects the answer.
 - **Consequence badge.** Add one only when the source establishes what waits: `risk` when work waits on the answer, `note` when work can proceed meanwhile. When the source states a consequence that is neither, such as how far a proposal would reach, write it as prose.
@@ -52,7 +54,15 @@ The section holds one item with one table, in the Canvas `ex-table-scroll` wrapp
 | Not run | none | a named check that did not execute |
 | Observed | none | a recorded finding with no pass, fail or acceptance verdict |
 
-The label names the recorded result, and a reported pass is not an acceptance. A finding without a verdict is Observed, never Passed or Not run. An observation that only supports a Not run check's result stays as context in that check's row.
+The label keeps the recorded state, and a reported pass is not an acceptance.
+
+- **No verdict recorded.** A finding without a verdict is Observed, never Passed or Not run.
+- **Not run.** Use it for a check the source names and says did not execute. A check that never started is Not run, not Failed.
+- **Assigned, no result.** A check that was assigned but has no recorded result is Not run only when the source says it hasn't run. Otherwise it is Observed, with the limit "no result recorded".
+- **Assumptions are not rows.** An assumption with no proof is not a verification row; it belongs under What changed and why.
+- **Supporting observations.** An observation that only supports a Not run check's result stays as context in that check's row.
+
+**Rows.** The table carries one row per claim in step 2's claim inventory. Rows may be grouped only when each claim's target, result and limit stays recognizable. Exact counts and exact findings are never dropped.
 
 **Claim.** Each claim is a row header.
 
@@ -63,6 +73,8 @@ The label names the recorded result, and a reported pass is not an acceptance. A
 3. the limit: what the result does not establish, followed by its source link.
 
 The source link goes to the full account or a receipt.
+
+The result says no more than the check covered. A structural comparison doesn't establish meaning, and a later step isn't "blocked" unless the source says so.
 
 - **Observed rows.** An Observed row names the finding, its source and its precise limit. Illustrative: "source inspection found the cache is rebuilt on load and held in memory; runtime performance unmeasured".
 - **Traces.** When an ordered sequence of checks or reviews explains the conclusion, link the row to the exact anchor of that Trace in the full account. That link counts as the row's source link.
@@ -99,5 +111,5 @@ Complete when:
 
 - every item has its view, or is prose under its title;
 - every badge, Flow and card pair names the source fact that earns it;
-- the verification table has one row per claim, each with its status label, target, result, limit and source link;
+- the verification table has one row per claim in the inventory, each with its status label, target, result, limit and source link;
 - no alternatives or answer control sit on the view.
