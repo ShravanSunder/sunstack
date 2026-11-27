@@ -4,7 +4,7 @@
 
 | Run | Target | Kind | Surfaces |
 | --- | --- | --- | --- |
-| 1 | `sunstack-dev / presentation-show-worklog` | update | main path (`SKILL.md` lens and steps 2–4); depth (new `references/section-views.md`, new `references/full-account.md`, two edits to `references/read-and-summarize.md`); `sunstack-dev/README.md:70`, a one-line update at ship; proof |
+| 1 | `sunstack-dev / presentation-show-worklog` | update | main path (`SKILL.md` lens and steps 2–4); depth (new `references/section-views.md`, new `references/full-account.md`, two edits to `references/read-and-summarize.md`); `sunstack-dev/README.md:70`, a one-line update (D21); proof |
 | 2 | `sunstack-dev / presentation-html` | update | main path: the line-10 sentence of `SKILL.md` gains the precedence rule. Depth: a scoping phrase in `references/work-account-forms.md:3` (D18). Proof shares run 1's runs |
 
 Run 2 lands with run 1, in the same change, because until run 1 exists no caller supplies a page contract. Neither run changes a trigger.
@@ -33,7 +33,7 @@ Each obligation and each standard has one home.
 | S5 (nothing lost) | — | — | `full-account.md`, opening | C8c |
 | S6 (verdict words) | — | — | `section-views.md` §4 | C6 |
 | S7 (styling never routes) | — | step 3, beside the section table | — | C2 |
-| `sunstack-dev/README.md:70` | — | — | the README line "The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`" becomes "The requested page uses four question sections, a view for each topic only when its evidence earns one, and a full account, through `presentation-html`." Updated at ship. | static read at ship |
+| `sunstack-dev/README.md:70` | — | — | the README line "The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`" becomes "The requested page uses four question sections, a view for each topic only when its evidence earns one, and a full account, through `presentation-html`." Written in run 1 (D21). | static read |
 
 `practices-show-me-your-work/SKILL.md:102` expects "the requested snapshot and its cutoff". That is a subset of O29's return, so it needs no change.
 
@@ -366,25 +366,27 @@ The owner or the 🦁 Lead may strike any row. A superseded row stays, marked in
 | D18 (27 Nov, supersedes D14) | The precedence rule has one home: `presentation-html/SKILL.md:10`. A calling skill's page contract decides the forms it names; `presentation-html` chooses the rest and composes within the contract. `work-account-forms.md:3` gains the scoping phrase "unless a calling skill's page contract decides them". The `patterns.md` clause is dropped. | Design review round 1, correction 3 (the 🦁 Lead's ruling). The rule then precedes every reference load, including `options-and-decisions.md` and `identity-timing-row.md`. It is stated per form the contract decides, so partial contracts keep the references' guidance for the forms they leave open. |
 | D19 (27 Nov, supersedes D9) | The status labels are Passed (`done`), Failed (`risk`), Blocked / Held / Acceptance held (`question`), Not run (neutral, for a named check that did not execute) and Observed (neutral, for a recorded finding with no pass, fail or acceptance verdict). An Observed row's result cell names the finding, its source and its precise limit. | The Sol Lead's view decision, trail row `01a21cd6-9a9c-7299-a73d-dc90e09f4faf`, carried by design review round 1, correction 5. |
 | D20 (27 Nov) | Route order: step 2 reads and settles destinations and writes nothing. Step 3 assigns sections, loads `presentation-html` (binding and trust), writes the companion when one is planned, then writes the view. | Design review round 1, correction 1 (first required revision): the companion's grouping needs the sections, and both pages need the binding before they're written. |
+| D21 (27 Nov) | Run 1 writes the `sunstack-dev/README.md:70` line, instead of the 🦁 Lead updating it at ship. | The 🦁 Lead's instruction for skill-creation, 27 Nov: "run 1 (presentation-show-worklog, including the README.md:70 line)". |
 
 ## Coordination
 
 - **Base:** `ai-tools` branch `skills-worklog-four-sections`, created from origin/main `09f07b80`.
 - **Pending edits:** none on the target files. The last change to them, `skills/worklog-component-teaching`, merged as #223 and is in main.
-- **Version and changelog:** at ship, the 🦁 Lead moves `sunstack-dev` from `3.9.0` per `platform.md` (all manifests and the marketplace together), writes the dated changelog entry, and updates `README.md:70`. This design moves no version.
+- **Version and changelog:** at ship, the 🦁 Lead moves `sunstack-dev` from `3.9.0` per `platform.md` (all manifests and the marketplace together), and writes the dated changelog entry. `README.md:70` is written in run 1 (D21). This design moves no version.
 
 ## Run status
 
 | Run | State | Evidence |
 | --- | --- | --- |
-| 1 | proposed | this design set |
-| 2 | proposed | this design set |
+| 1 | implemented | design accepted-to-implement at `51053f19`. Diff: `presentation-show-worklog/SKILL.md`, new `references/section-views.md` and `references/full-account.md`, `references/read-and-summarize.md` (report intake, line 31), `sunstack-dev/README.md:70`, in the implementation commit on this branch |
+| 2 | implemented | design accepted-to-implement at `51053f19`. Diff: `presentation-html/SKILL.md:10` and `references/work-account-forms.md:3`, in the same commit |
 
 ## Review record
 
 - **Round 1** (27 Nov, at revision `87764bf9`):
   - review lead: the Demistify 🦁 Lead;
-  - reviewers: teaching, OpenAI gpt-6.2-sol high; structure, Claude Opus high;
+  - reviewers, with no authoring history: teaching, OpenAI gpt-6.2-sol high; structure, Claude Opus high;
   - verdict: `targeted-revision`; implementation decision: `revise-first`;
-  - all 13 corrections applied in the revision after `87764bf9`. The review lead verifies each corrected anchor.
-- **Acceptance:** none yet.
+  - findings: 23 accepted, 0 rejected, reduced to 13 corrections, all inside the accepted boundary.
+- **Closure** (27 Nov): the review lead verified each corrected anchor at revision `51053f19`; no semantic change outside the accepted boundary.
+- **Implementation decision:** `accepted-to-implement`, for both runs, at revision `51053f19`.

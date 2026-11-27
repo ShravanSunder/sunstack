@@ -1,10 +1,12 @@
 # Read the record for a requested page
 
-This reference owns source reading, freshness, backing and coverage for one explicitly requested page. Inputs: project/tag or permitted entries files, requested scope, any inspected capture/cutoff/open state and historical summaries. Return: the source snapshot and provenance, current questions and outcomes, the material decisions and relied-on assumptions in their current state, selected evidence and its scope, checked backing, material gaps and permitted reader destination. The source is read-only during rendering.
+This reference owns source reading, freshness, backing and coverage for one explicitly requested page. Inputs: project/tag, permitted entries files, or an explicitly supplied dated report or full account; requested scope, any inspected capture/cutoff/open state and historical summaries. Return: the source snapshot and provenance, current questions and outcomes, the material decisions and relied-on assumptions in their current state, selected evidence and its scope, checked backing, material gaps and permitted reader destination. The source is read-only during rendering.
 
 ## Establish the snapshot
 
 Reuse a complete inspected capture when its source identity, project/tag/epoch and requested scope match and its underlying records remain available. For an explicitly fixed historical snapshot, keep its requested cutoff. To call a retained account current, first read every new row in this scope after the retained cutoff through the newly declared cutoff, then judge what changes; a correction can matter outside the subjects previously summarized.
+
+An explicitly supplied dated report or full account is a source: take its scope and cutoff, inspect the content the page relies on, reuse its stable anchors as destinations, and state its provenance at report level. It establishes what it reports, not complete Router coverage.
 
 When capture, provenance, relevant history or open state is missing, reconstruct the requested scope. Read Router with `agent-collaboration work-trail show --project-id <id> --tag <work tag> --after '{"epoch":1,"position":0}' --limit 100 --json`, continuing from each `coveredThrough` to the declared cutoff. For entries files, retain the file and inspected last-line position; reuse that prefix and read new lines when refreshing. A changed source or wider unread scope requires reconstruction. Keep inspected records, not only a summary asserting they were read.
 
@@ -28,7 +30,7 @@ Group related records into meaningful subjects: what changed, why, the decision 
 
 For each material displayed claim, inspect the original backing and newer relevant corrections or closure rows. Check the whole supplied interval for material facts that change the conclusion, including decisions agents made and assumptions the work relies on that no summary mentions. When the inspected source cannot establish which material decisions or assumptions exist, say so as a coverage gap rather than presenting an empty list as complete. Grouped internal coverage is sufficient; no new stored Story, coverage ledger or record for every read is required. Report partial scope and unavailable evidence honestly.
 
-Keep the complete declared source snapshot available through an existing stable source or a permitted companion, including its provenance and links. An archive preserves detail; it does not substitute for explaining the work. The page does not add source events about its own capture, summary preparation, checker, audit or completion.
+Keep the complete declared source snapshot available through an existing stable full account at the same cutoff or a permitted companion, including its provenance and links. An archive preserves detail; it does not substitute for explaining the work. The page does not add source events about its own capture, summary preparation, checker, audit or completion.
 
 ## Select evidence for an explanatory episode
 

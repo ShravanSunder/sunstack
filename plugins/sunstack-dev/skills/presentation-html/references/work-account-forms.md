@@ -1,6 +1,6 @@
 # Give each form one job in a work account
 
-This reference owns form selection for a work account, a work-log page, or a status block on any page. Expected inputs: the account's reader questions, its supplied facts and any handover requirement the source states. Return: for each reader question, the selected form, its job and what stays in view.
+This reference owns form selection for a work account, a work-log page, or a status block on any page, unless a calling skill's page contract decides them. Expected inputs: the account's reader questions, its supplied facts and any handover requirement the source states. Return: for each reader question, the selected form, its job and what stays in view.
 
 An illustrative account asks: can this staged import be handed over? Its supplied facts are three of four stages verified locally, no release, a retry delay the author chose without measuring it, a real provider nobody has observed, and a proposed deletion a later note withdrew. This illustrative source also states its handover requirement: a rehearsal against the real provider before handover. Open with the answer that requirement gives: not yet, because the required provider rehearsal has not run. Then state the separate limits: three stages passed local checks, and nothing is released. A source that stated a different requirement would get the answer that requirement gives. Then give each reader question the form that does its job:
 

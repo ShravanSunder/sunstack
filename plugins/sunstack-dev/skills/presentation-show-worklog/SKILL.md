@@ -6,54 +6,139 @@ disable-model-invocation: true
 
 # Presentation: Show Worklog
 
-A work-log page is a requested explanation of recorded work through a stated cutoff. The log owns the facts; the page groups them into meaningful episodes that explain the problem, what the agents did and why, what changed, and what remains uncertain. The log is evidence, not the page's outline. `practices-show-me-your-work` owns ongoing tracking; `presentation-html` owns HTML composition and component selection.
+A work-log page is a dated view of recorded work through a stated cutoff, with two reader destinations. The view answers four questions; the full account holds every record in the declared snapshot. When a usable full account at the same cutoff already exists, the view links into it, and a companion is written only when none exists. The four question sections are a frame, not a form: each topic is explained once, under the question it answers, with the view its evidence earns, and in plain prose when no view fits. The log owns the facts; it is evidence, not the page's outline. `practices-show-me-your-work` owns ongoing tracking. `presentation-html` owns the binding, the composition inside this skill's page contract, and the check.
 
 ## 1. Check the request
 
-Create or update a page only when the owner explicitly requests a work-log HTML page, asks to refresh one, or explicitly invokes this skill. Loading this file from another skill, starting work, reaching a checkpoint, stopping, having an existing page, or finding an owner decision does not authorize a page. A request covers the requested build only; it does not enable automatic refreshes. Without that request, return the log reference or progress in the current conversation and finish without creating or updating HTML.
+Create or update a page only when the owner explicitly requests a work-log HTML page, asks to refresh one, or explicitly invokes this skill. None of these authorizes a page:
 
-A page request authorizes reading its source and writing the reader and permitted companions. It does not authorize summaries, missed rows, preparation proof or checkpoint writes back into that source. Report source gaps in the account rather than repairing the history to complete a page.
+- loading this file from another skill;
+- starting work, reaching a checkpoint or stopping;
+- an existing page;
+- finding an owner decision.
+
+A request covers the requested build only; it does not enable automatic refreshes. Without that request, return the log reference or progress in the current conversation and finish without creating or updating HTML.
+
+A page request authorizes reading its source and writing the view and permitted companions. It does not authorize writing summaries, missed rows, preparation proof or checkpoints back into that source. Report source gaps in the account rather than repairing the history to complete a page.
 
 ## 2. Read and account for the evidence
 
-Take the work's Router project/tag or permitted entries files and requested page scope, including any already inspected capture, cutoff and open state. MUST load `references/read-and-summarize.md` and return the reused or reconstructed snapshot, selected evidence and its scope, the material decisions and relied-on assumptions with their current state, backing and coverage limits, outstanding owner decisions and permitted page destination. Missing or unreadable evidence is a named gap; do not rebuild from memory.
+Take the source and the requested page scope, including any already inspected capture, cutoff and open state. The source is the work's Router project and tag, permitted entries files, or an explicitly supplied dated report or full account.
 
-IF an owner decision remains open in the requested page, load `../../shared-references/owner-decision-brief.md` and return the choice, tradeoffs, recommendation and dependent work to explain beside its answer control. A recommendation or unanswered control never becomes an owner decision.
+MUST load `references/read-and-summarize.md` and return:
 
-## 3. Explain the work
+- the reused or reconstructed snapshot and its topics;
+- the selected evidence and its scope;
+- the material decisions and relied-on assumptions, with their current state;
+- the backing and coverage limits;
+- the outstanding owner decisions;
+- the permitted page destination.
 
-MUST load `presentation-html` before outlining the page and return the section questions, explanation and diagram jobs, Map associations and Walkthrough decision using its composition patterns and matching guide. Supply the source-supported concerns that connect sections and any ordered question that needs several existing targets; that workflow is reused for the final build.
+Missing or unreadable evidence is a named gap; do not rebuild from memory.
 
-Open with the work's purpose and consequential recorded outcome or unresolved boundary, keeping the outcome's target and limits in that opening claim. State the snapshot cutoff briefly. Use four ordinary `h2` headings in this order:
+Then settle where detail lives:
 
-1. **For you to decide:** open owner choices, their reasons and consequences, with no invented decision when none is recorded.
-2. **What's done / what's next:** each started part, what its result means, the checks and acceptance behind its status, and the next work or blocker.
-3. **What changed and why:** consequential changes, shortcuts and decisions, their reasons, costs and authority; name who made each choice separately from the authority that covered it.
-4. **What was verified, and what was missed:** checks, results, target/version, exclusions, acceptance, second-hand reports and unresolved misses.
+- When a stable full account at the snapshot's cutoff carries the backing evidence, reuse it. Return its path and existing anchors.
+- When the inspected source is a trail or entries file alone, or the existing account's cutoff differs, return the companion's planned path and the `entry-<row-id>` anchor of every row in the snapshot.
 
-Explain the material decisions agents made and the assumptions the work relies on in the main account: the actual choice or belief, who made it, its reason and material cost or consequence, its authority or evidence gap, and the work that depends on it. Name missing rationale or cost evidence rather than inventing it. Keep later corrections and settlements current; incomplete source coverage is a named gap. An agent's core design choice belongs here as much as a routine one. Explain each item once under the heading whose question it answers and link to it from the others; it needs no separate register.
+This step writes nothing.
 
-Within those headings, give each substantive `h3` section one coherent reader question. Explain the concrete problem, the agents' actions and reasons, and the supported outcome beside a diagram of its relevant source-supported relationships. Compose the explanation and diagram together so the text supplies context and interpretation while the diagram exposes the relationship. Keep normal heading-based contents navigation and explain shared content once, linking to it elsewhere.
+Completion: the snapshot, its topics, and the full account's path and destinations, existing or planned, are returned.
 
-Before composing each substantial topic, identify what the owner needs to understand or judge and the relationship the log actually supports. Give `presentation-html` that view requirement, rather than selecting a component for decoration:
+## 3. Build the pages
 
-| Work-log topic | What the view must make understandable |
-| --- | --- |
-| An open owner choice | The alternatives, their gains and costs, and what waits on the choice, compared on the same terms before its answer control; a settled decision shows its outcome and supported rationale without asking again |
-| Progress across connected parts | Dependencies, the blocker and the next meaningful boundary; independent status facts can stay as a short list |
-| A consequential change | Before and after behavior, flow or ownership, including the reason and affected consumer; distinguish proposed behavior from observed behavior |
-| Verification | Each claim beside the actual target, result and remaining gap; show the order when the sequence of checks explains the conclusion |
+The view has four sections, in this order, each with its tone and icon override (`stories.md#sections` at the page's binding). They are the owner's adopted house style for work-log pages.
 
-Choose one primary view for the relationship that matters in a topic, with a short explanation beside it. For a complex relationship, show the overview and then the relevant slice instead of one crowded drawing. If the evidence does not establish a connection or before-state, mark it unknown rather than inventing it. A simple fact needs no diagram.
+| Section | The question it answers | Tone | Icon override |
+| --- | --- | --- | --- |
+| For you to decide | open owner choices and what waits on each, with no invented decision when none is recorded | `question` | `user` |
+| What's done / what's next | each started part, what its result means, the checks and acceptance behind its status, and the next work or blocker | `note` | none |
+| What changed and why | consequential changes, corrections, shortcuts, decisions and relied-on assumptions, with their reasons, costs, who made each call and the authority behind it | `decision` | none |
+| What was verified, and what was missed | checks, results, target and version, exclusions, acceptance, observations without a verdict, second-hand reports and unresolved misses | `note` | `test-tube` |
 
-When reusing a historical Story, keep its stable `story_<key>` destination; keep each cited row's `entry-<id>` destination; link to an item instead of repeating its body elsewhere on the page.
+Typed-decision routing (`holds`, `record=`) is for typed decisions, never for styling these sections or their items.
 
-For an ordered account, use explanatory Trace steps for meaningful actions, findings or decisions, rather than raw log rows. Select each step's material claim, shortest decisive supplied excerpt and evidence scope before composing it. Put that excerpt beside the claim with its attribution and limit; a link to the entire record provides optional depth, not the evidence attachment itself. Display selected commands, source, configuration, JSON or diffs in the matching guide's code/diff view, and use inline code for identifiers. Displaying commands does not authorize executing them. Do not invent unavailable evidence or code for a narrative-only observation.
+Each topic is one section item under the section whose question it answers. Its face, in order:
 
-Keep governing failure rules and unknowns visible, with optional backing detail one action away. Do not require Story/section cards, Happened / For you / Next rows, section counters or another repeated card layout. Where concerns connect several sections, give Map their real explanatory destinations; the outline still follows headings. A Walkthrough follows an actual ordered reader question rather than touring every heading. The loaded HTML workflow owns their composition and the matching guide owns syntax.
+1. an `h4` title;
+2. a badge row (`small-parts.md#short-status-labels`), only for a status or consequence chip the source supports;
+3. one or two sentences of outcome and next work;
+4. its backing-evidence links into the full account, a decision page or a receipt.
 
-Build with the loaded `presentation-html` workflow and return the requested reader with its chosen views, matching guide, contents navigation, delivery method and static checker result. Before returning, check that the owner can understand each section's question, what the agents did and why, and its diagram together; see each material decision with its actor, reason, cost and authority, and each relied-on assumption with its dependent work and what would settle it, or the named source gap; see the blocker and proof limits; and inspect the decisive evidence without reading the archive. Check that Map destinations add associations beyond the outline, any Walkthrough follows its question, and evidence links reach their stated content. Repair the missing or overloaded view. A passing checker establishes markup, not understanding or runtime behavior.
+Detail lives once, in the full account, and the item links to it rather than repeating it. A separately labelled related link may point to another item or row on the view. After the face, an item may carry explanatory paragraphs, a Trace or a native disclosure.
+
+The structure frames the explanation and never replaces it. A topic with no evidence for a badge, a Flow or cards is plain prose under its title. A topic that fits no view is still explained under the section whose question it answers. Two excuses fail here:
+
+- "It doesn't fit a template, so the full account covers it" drops the topic from the view.
+- "The face looks bare without a badge" invents a fact.
+
+Neither holds.
+
+Explain the material decisions agents made and the assumptions the work relies on under What changed and why. Each one shows:
+
+- the actual choice or belief, and who made it;
+- its reason, and its material cost or consequence;
+- its authority, or the evidence gap where none is recorded;
+- the work that depends on it.
+
+Link one that waits on the owner from For you to decide as well. Name missing rationale or cost evidence rather than inventing it. Keep later corrections and settlements current; incomplete source coverage is a named gap. An agent's core design choice belongs here as much as a routine one.
+
+Work in this order:
+
+1. **Assign sections.** Assign each topic from step 2 to its section, using the table above.
+2. **Bind.** MUST load `presentation-html` once each topic has its section, before writing either page. Return:
+   - the binding, with its trust choice;
+   - the guide references the view and any companion need;
+   - its composition and check route.
+
+   The section table, the item face and the section views in this step are the page contract `presentation-html` keeps.
+3. **Write the companion, if planned.** IF step 2 planned a companion, load `references/full-account.md`, write the companion, and return:
+   - its path and its topic groups;
+   - the `entry-<row-id>` anchor of every row it carries;
+   - its provenance and cutoff lines;
+   - each row it could not carry, with the reason.
+4. **Choose each item's view.** MUST load `references/section-views.md` and return, for each item:
+   - its section;
+   - its face: the title and its link, each badge with the source fact behind it, the outcome sentence, and its backing-evidence and related links;
+   - its view: plain prose, a Flow, before and after cards, or verification rows, with the source fact that earns it.
+5. **Write the view.** Open with the work, the date and the cutoff, then the recorded outcome that changes how the reader uses the page, with that outcome's target and limits in the same claim. The four sections and their items follow.
+
+When reusing a historical Story, keep its stable `story_<key>` destination and each cited row's `entry-<id>` destination, and link to an item instead of repeating its body elsewhere.
+
+For an ordered account, use explanatory Trace steps for meaningful actions, findings or decisions, not raw log rows.
+
+- **Select first.** Before composing each step, select its material claim, the shortest decisive supplied excerpt, and the evidence scope.
+- **Attach the evidence.** Put that excerpt beside the claim, with its attribution and limit. A link to the entire record is optional depth, not the evidence attachment itself.
+- **Show technical material.** Display selected commands, source, configuration, JSON or diffs in the matching guide's code/diff view, and use inline code for identifiers. Displaying commands does not authorize executing them.
+- **Invent nothing.** Do not invent evidence or code that a narrative-only observation doesn't supply.
+- **Width.** A short text Trace uses Reading width; a Trace with code or other rich evidence uses Canvas (`traces.md`).
+
+A Trace lives after an item's face or in the full account.
+
+Build with the loaded `presentation-html` workflow. Return the view, and any companion, with its chosen views, binding, delivery method and static checker result.
+
+Before returning, check each of these:
+
+- each topic from step 2 is named with the item that explains it and its section;
+- every badge, Flow and before-and-after pair is named with the source fact behind it;
+- the verification table carries its layout marker and three columns, with no authored CSS;
+- every backing-evidence link resolves;
+- when the companion was written, its anchor count equals the snapshot's row count;
+- each material decision shows its actor, reason, cost and authority;
+- each relied-on assumption shows its dependent work and what would settle it, or the named source gap;
+- the owner can inspect the decisive evidence without reading the archive.
+
+Repair the missing or overloaded view. A passing checker establishes markup, not understanding or runtime behavior.
+
+Completion: each topic has its item and section, every view names the source fact that earns it, every backing-evidence link resolves, and the static check passed for each page written, or its failure is named.
 
 ## 4. Return the requested snapshot
 
-Return the file link, the log cutoff or entries-file positions it shows, and the checker result. State any gap that affects opening or trusting the page. Reading a copied check does not make it first-hand; a page does not accept work, settle an assumption, authorize publication or change the log's history. Continue tracking without refreshing this page until the owner asks again.
+Return:
+
+- the view's link;
+- the full account's link, or the existing account it reused;
+- the log cutoff or entries-file positions the page shows;
+- the checker result for each page written.
+
+State any gap that affects opening or trusting a page. Reading a copied check does not make it first-hand. A page does not accept work, settle an assumption, authorize publication or change the log's history. Continue tracking without refreshing this page until the owner asks again.

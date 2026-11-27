@@ -67,7 +67,7 @@ V1 retains authoritative Markdown, including newly authored v1 records and optio
 
 ## Tracking and requested pages
 
-`practices-show-me-your-work` tracks and resumes the log without creating HTML. Only an explicit owner request invokes `presentation-show-worklog` to create or refresh a page; subsequent checkpoints do not refresh it. The requested page uses four headings, free-form explanation and useful diagrams through `presentation-html`.
+`practices-show-me-your-work` tracks and resumes the log without creating HTML. Only an explicit owner request invokes `presentation-show-worklog` to create or refresh a page; subsequent checkpoints do not refresh it. The requested page uses four question sections, a view for each topic only when its evidence earns one, and a full account, through `presentation-html`.
 
 ## Shared references
 
