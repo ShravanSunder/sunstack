@@ -26,28 +26,25 @@ describe("maintained owner-decision routing", () => {
 
     // Assert
     expect(brief).toContain(
-      "For a decision you raise yourself from your own work, check authority first: a choice on a line the owner owns, or outside the authority your assignment gives you, goes up the chain however reversible it is.",
+      "For a decision you raise yourself, check authority first. A choice on a line the owner owns, or outside your assignment's authority, goes up the chain even if it can be undone.",
     );
     expect(brief).toContain(
-      "A two-way door is yours: make it, record the decision and its reason in the trace, and keep going. A one-way door goes up the chain.",
+      "Inside your authority, a two-way door is yours: make it, record it and its reason in the trace, and keep going. A one-way door goes up the chain.",
     );
     expect(brief).toContain(
-      "Up the chain, a phase stop such as `decision-needed` included, means the full brief to whoever commissioned your assignment. The Lead briefs the owner.",
+      "Up the chain means the full brief, a `decision-needed` stop included, to whoever commissioned you. The Lead briefs the owner.",
     );
     expect(brief).toContain(
-      "A helper returns the brief to the agent that commissioned it; a helper the owner assigned directly returns it to the work's Lead, or briefs the owner when the commission and the work's thread, once read, name no Lead, or delivery to the named Lead has definitively failed (its receipt says `rejected` or `notSubmitted` and the next action it names can't deliver it), and says which.",
+      "A helper briefs its commissioner; a helper the owner assigned briefs the work's Lead, or briefs the owner, saying why, when the commission and the work's thread name no Lead or delivery to the Lead definitively failed (`rejected` or `notSubmitted`, and no next action delivers it).",
     );
     expect(brief).toContain(
-      "A Lead lookup that was denied or didn't finish is not an absent Lead: follow the access or discovery path.",
+      "A denied or unfinished lookup isn't an absent Lead: follow the access or discovery path.",
     );
     expect(brief).toContain(
-      "A message to the Lead that is held, queued, delivered without a reply yet, or uncertain is still pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
+      "A held, queued, unanswered or uncertain message is pending: keep the brief in the work's record, reconcile the delivery, hold the work that depends on it and continue the rest.",
     );
     expect(brief).toContain(
-      "An agent commissioner carries the brief toward the owner with its options and recommendation intact, or settles it only when the choice is within its own authority.",
-    );
-    expect(brief).toContain(
-      "The owner decides an owner decision; an agent that passes it on never decides it.",
+      "A commissioner passes the brief on with its options and recommendation intact, or settles it only within its own authority; only the owner decides an owner decision.",
     );
     expect(brief).toContain(
       "A question tool may ask only the owner for the final pick of an owner decision, and only after the full brief is on the owner's screen.",
@@ -63,7 +60,7 @@ describe("maintained owner-decision routing", () => {
 
     // Assert
     expect(brief).toContain(
-      "When the owner asked you the question directly in this conversation, the brief answers the owner here, whoever opened the session and even when the Lead commissioned you as a helper.",
+      "When the owner asked you directly, answer the owner here, even as a helper; answering grants no wider scope, implementation or merge authority.",
     );
   });
 
