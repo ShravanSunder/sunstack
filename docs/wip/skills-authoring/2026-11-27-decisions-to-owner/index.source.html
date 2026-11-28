@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Decisions go to the owner</title>
+  <link rel="stylesheet" href="https://demistify.getagentstudio.dev/v1/theme.css">
+  <script type="module" src="https://demistify.getagentstudio.dev/v1/runtime.js"></script>
+</head>
+<body>
+  <ex-nav for="content"></ex-nav>
+  <ex-document id="content">
+    <h1>Decisions go to the owner</h1>
+    <p>A decision an agent raises itself is checked for authority first: anything on a line the owner owns, or outside the agent's authority, goes up the chain. Inside that authority, a two-way door is the agent's call: it decides, writes it in the trace and keeps going. A one-way door goes up the chain as the full brief: a helper to whoever assigned it, the Lead to the owner, and with no Lead, or when delivery to the Lead fails, straight to the owner; a Lead that hasn't answered yet is still pending. The Chief of Staff route, and the rule that held a brief's options back from the owner, are removed from the shared brief and the two skills that repeated them.</p>
+    <p>Four files in three named runs, plus a contract test for the maintained route. The owner ruled on the door split on 27 Nov; accepted to implement after six review rounds.</p>
+    <ol>
+      <li><a href="#requirements">Requirements</a>: the conflict and the owner's decision.</li>
+      <li><a href="#specification">Specification</a>: the new routing rule and the exact new text.</li>
+      <li><a href="#skill-design">Skill design</a>: the three runs.</li>
+      <li><a href="#skill-verification">Skill verification</a>: the checks.</li>
+    </ol>
+    <ex-markdown id="requirements" label="Requirements" src="./requirements.md"></ex-markdown>
+    <ex-markdown id="specification" label="Specification" src="./specification.md"></ex-markdown>
+    <ex-markdown id="skill-design" label="Skill design" src="./skill-design.md"></ex-markdown>
+    <ex-markdown id="skill-verification" label="Skill verification" src="./skill-verification.md"></ex-markdown>
+  </ex-document>
+  <ex-presentation id="decisions-walkthrough" title="From the conflict to the checks" description="Read the four parts in order.">
+    <ex-step to="requirements">Why: the brief sent decisions to a Chief of Staff; the owner wants one-way doors brought up the chain to them, and two-way doors decided and written down.</ex-step>
+    <ex-step to="specification">The rule and the replacement sentences.</ex-step>
+    <ex-step to="skill-design">Which files change.</ex-step>
+    <ex-step to="skill-verification">How the change is checked.</ex-step>
+  </ex-presentation>
+</body>
+</html>
