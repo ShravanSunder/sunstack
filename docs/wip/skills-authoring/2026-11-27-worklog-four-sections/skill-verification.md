@@ -1,0 +1,146 @@
+# Skill verification: how the change will be shown to work
+
+## Routes, from `skill-rules-authoring`'s decision matrix
+
+Questions asked in order: requirement or stance; about what an agent does, or a property of a text; does a chunk hold the judgment; one field; comprehension; gate.
+
+| Item | Outcome | Property it was decided on | Route |
+| --- | --- | --- | --- |
+| O1–O7 (frame, item face, free text) | eval | what an author produces while working from the skill; only a fresh run shows it | fresh-author runs, checks C1–C3, C8 |
+| O8 (decisions and assumptions) | eval | the same; judging that each material decision appears with actor, reason, cost and authority needs the source beside the page | C8b, read by hand against the topic list |
+| O9, S7 (no typed routing for styling) | eval | a property of the produced page, set by the author's choice | C2 (scripted) |
+| O10–O12, S3 (open choices, consequence badges, no comparison or answer control) | eval | whether a badge is earned depends on the source; only a run on a known source shows the choice | C3 (scripted link check plus a hand-read badge list) |
+| O13, O14, S3 (Flow, before/after cards) | eval | the same | C4, C5 |
+| O15–O19, S6 (verification table, status labels including Observed, per-row target, result and limit, no authored CSS) | eval | the same | C6 (scripted, with a hand-read per-row list) |
+| O20, O21 (Trace link, widths) | eval | the same | C6, C2 |
+| O22, O30 (reuse or write; report intake) | eval | whether the author recognizes a stable full account | C7 on I1 (no companion expected), C8c on I2b (companion expected) |
+| O23–O26, S5 (the companion) | eval | the same | C8c, C8d on I2b |
+| S4 (one destination) | eval | the same | C7 |
+| O31 (sections and binding before writing) | eval | the order an author works in; only the host record shows it | C11 |
+| O27 (links resolve) | eval | the same | C7 (scripted) |
+| O28 (the skill copies no markup) | model-judged on the changed skill text; routed to a review check with a scripted proxy, not a standing rule (D7) | Whether a passage copies markup or only names a construct takes reading. A scan for element tags (`<ex-`, `<div`, `<table`) and fenced HTML in the changed files is a proxy: it misses markup in inline code, and naming the marker is required. This is one change's requirement, not a recurring standard, so it gets no rulebook entry. | the design and implementation review's check; proxy scan at step 4 |
+| O29 (return) | eval | what the author returns | run record |
+| P1 (run 2's precedence rule) | eval | whether the page contract wins over `presentation-html`'s references for the forms it decides, while their guidance still shapes what it leaves open | C3 (no comparison or answer control despite `options-and-decisions.md`), C6 (three fixed columns despite `identity-timing-row.md`) |
+| S1 (four sections) | eval | the same | C1 |
+| S2 (frame, not form) | eval | an author's choice under the recipe's pull | C8a, C8b |
+| The changed skill text against `domain-skill-crafting`'s standards | the existing rules, run on the changed files (skill-creation's self-check, then orchestrator step 4) | call completeness, placement and main-path rules already exist | the rules run |
+| The lens and the leading phrase ("a frame, not a form") | prose | stance; no text keeps or breaks it | no proof needed |
+
+No worth-checking rule is planned, so none needs a judgment, a nudge and a keep case.
+
+## Proof plan
+
+**Posture:** drafted from user intent; behavior not yet evaluated. The planned evidence reaches the rung "observed in named examples": two fresh authors on each of two inputs, four runs in all. It makes no difference or improvement claim, because no control run is planned. A run of the current skill (origin/main `09f07b80`) on I1 would support "a difference shown for that case"; the 🦁 Lead may add it.
+
+**Skill type:** pattern, applied as a technique. The proof shows the pattern used where the evidence supports it, and withheld on the counterexamples the inputs already hold:
+
+- a choice with no stated consequence;
+- independent merged work;
+- a topic with no view.
+
+### Inputs (frozen before any run)
+
+- **I1, a stable full account.** The original 26 Nov report, `worklog-2026-11-26.html` in `snapshot-verification-columns/`, sha256 `b0f0dbfe…4c73c`. The expected view is `worklog-2026-11-26-shared-sections.html`, sha256 `0f4e69da…239a9c`. This is a report, not a Router cursor: the historical cursor's completeness is not verified, and that distinction stays in the claim. A correct author links into the report's own anchors and produces no companion.
+- **I2b, a trail slice with no full account** (D16, D22). `rows-2026-11-26-with-markup.jsonl`: 74 work-trail rows as JSON lines, sha256 `7e1f39d3df13328bf5829d775a2930e1a6bd3638ff2fd579ac9053391a3b95c4`. The 🦁 Lead froze it.
+  - It holds the 72 rows of `rows-2026-11-26.jsonl`, unchanged and in the same order: project trail tag `lean-records-demistify`, Eastern day 26 Nov, positions epoch 2 3873–4016.
+  - It adds two rows tagged `synthetic-proof-row`. Their text holds a `<script>` element, an `<ex-callout>` element with attributes, `<b>` tags, an ampersand and double quotes.
+  - It spans several streams: data-model, demistify-and-presentation-html, router-direction, worklog-skill and others.
+  - It holds 24 decisions, 15 proofs, 14 actions, 3 owner asks (one open), 1 shortcut, 1 Missed row, and 10 rows tagged `resolves` or `supersedes` (exported without their links).
+  - No full account exists for it, so a correct author must produce the companion. It exercises O22–O26 and S5, and its synthetic rows exercise O26's escaping.
+
+  The wider 222-row file beside it is not a proof input.
+
+### Authors
+
+Four runs in all: on each input, two fresh sessions with no authoring history: OpenAI Terra (high) and Claude Opus (high), per the owner's 27 Nov direction. Each sees only the installed changed skill and the released guide at `https://demistify.getagentstudio.dev/v1/` (1.41.1).
+
+The request is realistic. It names the page and the source and gives a permitted output folder, and it never mentions checks, tests or this design. For example, for I1: "Build me the work-log page for the 26 November Central and Mac work, through 08:15 Eastern, with presentation-show-worklog. The work log is <path>; put the page in <folder>." For I2b: "Build me the work-log page for the lean-records-demistify work on 26 November with presentation-show-worklog. The trail rows are exported in <path>; put the page in <folder>." The skill is hidden from model invocation, so the request names it; this is not a trigger run.
+
+### Checks
+
+Written before the runs, and kept outside every folder an author works in.
+
+- **C1. Sections.** Exactly four `ex-section` declarations, in order. Their titles carry the four questions; their tones are `question`, `note`, `decision`, `note`; their icons are `user`, none, none, `test-tube`.
+- **C2. Items and routing.**
+  - Every `ex-section-item` targets one of the four ids with `section=`, and its first element is an `h4`.
+  - No `holds` or `record=` appears anywhere on the view.
+  - Flows and the verification wrapper carry `data-width="canvas"`.
+  - A Trace on the view is Reading width when its steps hold short text only, and Canvas width when they hold code or other rich evidence.
+- **C3. Open choices.**
+  - Every open choice in the source is an item whose `h4` holds a link that resolves to a decision page or a full-account anchor.
+  - The view holds no `ex-choice`, no `ex-compare` and no option comparison or answer control.
+  - A consequence badge appears only where the source states what waits. For I1, the expected badges, from a list written before the runs: the staging sign-in choice gets `risk`, the success-answer choice gets `note`, and the design-branch hook choice gets no badge, with its consequence in prose. For I2b, the checker writes the expected list from the slice before the runs.
+- **C4. Before/after cards.**
+  - Every before/after pair maps to a source passage that gives both states, listed by hand.
+  - The before card is `note`, and the after card is `planned`, `done` or `decision`.
+  - A change with only one state is prose.
+- **C5. Flows.** Every arrow maps to a dependency or change the source states. Independent work, such as I1's merged PRs, is its own item, not a Flow branch.
+- **C6. Verification.**
+  - Exactly one `ex-table-scroll` with `data-width="canvas"` and `data-layout="verification"`. Its headers are Status, Claim, and Result and limit.
+  - Each status cell has one `ex-badge`, and its tone matches its label: Passed `done`; Failed `risk`; Blocked, Held or Acceptance held `question`; Not run and Observed with no tone.
+  - Not run appears only for a named check that did not execute. A recorded finding with no verdict is Observed, never Passed or Not run.
+  - Each claim is `th scope="row"`.
+  - Per row, against a list written before the runs: the row's target, its result with exact counts or exact findings, and its material limit are each recognizable in the cell.
+  - Each result cell has a source link that resolves. A link to the row's Trace in the full account counts as that link.
+  - Where a sequence explains the conclusion, the row links to that Trace's exact anchor. On I1, the lifecycle acceptance row links to the report's lifecycle Trace anchor, not to the report as a whole.
+  - No `style` attribute, `<style>`, `width` or `col` sizing touches the table.
+  - Exact counts from the source appear in the result text; for I1, "ten of ten" and "2,269".
+- **C7. Links.**
+  - Every backing-evidence link resolves into the full account, a decision page or a receipt.
+  - A separately labelled related link may resolve to another item or row on the view.
+  - On I1 (report intake): the full account is the original report, and backing-evidence links reach its existing anchors. No companion file exists. The view states report-level provenance and claims no Router coverage.
+  - On I2b, a companion file exists beside the view, inside the permitted folder.
+- **C8. Free text survives.**
+  - **a.** At least one item with no badge, Flow or cards is plain prose: on I1, the design-branch hook choice.
+  - **b.** Every topic on a source topic list, written before the runs, appears as an item, or as an explanation inside an item, under the section whose question it answers. A topic missing from the view is a failure even when the full account holds it. This is read by hand.
+  - **c.** On I2b: the companion carries every row in the declared snapshot: exactly 74 `entry-<row-id>` anchors, one per row id in the slice. Each anchored row's text, normalized for whitespace only, equals the source text. Rows are in recorded order within each group. Each of the 17 rows with links shows them, and a link to a row in the slice reaches that row's anchor. The slice's 10 `resolves`/`supersedes` rows have no links, so their closures show only in their text.
+  - **d.** On I2b: the two `synthetic-proof-row` rows show their markup as literal text, and introduce no element:
+    - `<script>alert('worklog')</script>`;
+    - the `<ex-callout tone="risk" title="Ship now">` element;
+    - `<b>bold</b>`;
+    - the ampersand and the quotes.
+
+    Scripted: the companion's DOM has no `script`, `ex-callout` or `b` element inside those rows' entries, and each entry's text content equals the row text.
+  - **e.** On I2c (D26): the synthetic row's `javascript:` destination shows as text and is never emitted as an actionable link. Its `https:` destination is a link, and both labels render as text. Scripted: no anchor in the companion has a `href` whose scheme is not `http`, `https` or a fragment.
+- **C9. Static check.** The released CLI's `check` reports zero errors on every page written.
+- **C10. Phone width.** Each view at 390 CSS px, in light and dark: the page body never scrolls sideways, and the verification table scrolls inside its own frame. Screenshots are kept. A narrow desktop viewport is not physical iPhone or Safari proof.
+- **C11. Run record.** The host's session record shows four things: which `SKILL.md` copy loaded; that `section-views.md` was read (on I2b, also `full-account.md`); that `presentation-html` was loaded before either page was written; and that on I2b the companion was written before the view. It also shows the run's actions, read from the host record, never from the agent's reply.
+
+### The narrow retest after implementation review round 1 (D26)
+
+- **Input I2c:** I2b plus one synthetic row carrying a `javascript:` link and an `https:` link. The 🦁 Lead freezes it.
+- **Runs:** both authors, fresh sessions, on I2c only.
+- **Checks:**
+  - C3;
+  - C6, reconciled claim by claim to the inventory;
+  - C8c and C8d;
+  - the new C8e;
+  - each corrected result's row linking its correction's Trace, or the one row that explains it.
+- **Result (27 Nov, D27):** both authors passed C3, C8c (75 anchors), C8d, C8e and the released 1.41.1 check. C6 failed for both: Terra's corrected title row linked only its last row and its account had no Trace; Opus's corrected row reached its Trace, but its rename row claimed no change in meaning beyond its structural check and it dropped row 40's 8/39, 39/39 and 321/321. Terra also wrote the view before the companion (C11). Shipped with this variance named; the claim stays "observed in named examples".
+
+### Repetitions and reading
+
+One run per author per input to start. Every run is read by hand.
+
+- A run that broke before doing the work (a permission stop, an unavailable tool) is rerun, not counted.
+- A disagreement between the two authors is variance, and variance is a proof gap: the wording isn't binding at the claimed strength until a fix and a fresh run of both agree.
+- Rationalizations seen in a run are recorded in the root's form. The three to watch:
+  - a badge added to fill an empty face;
+  - an awkward topic left to the full account only;
+  - a Flow drawn for a dependency the source never states.
+
+## Trigger trial
+
+`not applicable` for both runs. `presentation-show-worklog` is hidden from model invocation, and neither run writes or alters a description.
+
+## What stays unverified
+
+- Physical iPhone or Safari rendering (C10 uses a 390 CSS px viewport).
+- The historical Router cursor behind I1. The source is a report.
+- The companion branch on trails other than one project's single day (I2b is 72 recorded rows from one trail tag, plus two synthetic rows).
+- Behavior with guide releases after 1.41.1. The skill cites anchors at the page's binding, so a renamed anchor would surface only in a later run.
+- Lineages and effort levels other than Terra (high) and Opus (high).
+- An unnamed request such as "build me the work-log page" reaches this skill only through `practices-show-me-your-work`'s explicit-page-request branch. Every planned run names the skill, so no run proves that route.
+- The installed copy. The proof runs loaded an explicitly requested export of the candidate, not the installed changed skill this plan names, so installed activation is unverified.
+- The `presentation-html` fallback. No run shows `work-account-forms.md` being read, or a caller's partial page contract leaving forms to `presentation-html`. The proof establishes compatible work-log output, not P1's fallback side.
+- Component rendering itself: Section tint, rail and column sizing belong to Demistify's own verification. The Sol Lead measured the columns at 94, 247 and 648 px on desktop; that is their report, not this proof's observation.

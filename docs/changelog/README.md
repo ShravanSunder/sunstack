@@ -1,5 +1,6 @@
 # Changelog
 
+- [2026-11-27 Work-log pages use four question sections and a full account](2026-11-27-worklog-four-sections.md)
 - [2026-11-27 Decisions go up the chain to the owner; no Chief of Staff](2026-11-27-decisions-to-owner.md)
 - [2026-11-26 Skills load principles at their moment](2026-11-26-principle-loads.md)
 - [2026-11-25 Workflow v2 designs by deliverable and plans each one](2026-11-25-v2-initiative-design-and-plan.md)
