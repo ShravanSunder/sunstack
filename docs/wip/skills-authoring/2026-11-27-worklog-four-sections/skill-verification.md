@@ -116,6 +116,7 @@ Written before the runs, and kept outside every folder an author works in.
   - C8c and C8d;
   - the new C8e;
   - each corrected result's row linking its correction's Trace, or the one row that explains it.
+- **Result (27 Nov, D27):** both authors passed C3, C8c (75 anchors), C8d, C8e and the released 1.41.1 check. C6 failed for both: Terra's corrected title row linked only its last row and its account had no Trace; Opus's corrected row reached its Trace, but its rename row claimed no change in meaning beyond its structural check and it dropped row 40's 8/39, 39/39 and 321/321. Terra also wrote the view before the companion (C11). Shipped with this variance named; the claim stays "observed in named examples".
 
 ### Repetitions and reading
 
